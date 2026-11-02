@@ -1,31 +1,30 @@
-name: Automatizar Métricas
+name: Automatizar Estadísticas
 
 on:
   schedule:
     - cron: '0 0 * * *'
   workflow_dispatch:
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    
-    steps:
-      - name: Clonar Repositorio
-        uses: actions/checkout@v4
+permissions:
+  contents: write
 
-      - name: Configurar Entorno Python
-        uses: actions/setup-python@v5
+jobs:
+  actualizar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
         with:
           python-version: '3.10'
 
-      - name: Ejecutar Script de Actualización
+      - name: Run update script
         run: python update_stats.py
 
-      - name: Guardar y Publicar Cambios Automáticamente
-        uses: stefanzweifel/git-auto-commit-action@v5
+      - name: Commit and push changes
+        uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: "🤖 Actualización automática de estadísticas diarias [skip ci]"
-          branch: main
+          commit_message: "🤖 Actualización automática de estadísticas diarias"
           file_pattern: data.json
