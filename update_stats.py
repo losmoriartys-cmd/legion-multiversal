@@ -68,7 +68,6 @@ def main():
             if user_res and user_res.get("data"):
                 user_id = user_res["data"][0]["id"]
                 
-                # Consultamos los videos (streams pasados guardados) de la API oficial
                 videos_res = consultar_twitch(f"videos?user_id={user_id}&type=archive&first=10", token)
                 if videos_res and videos_res.get("data"):
                     for video in videos_res["data"]:
@@ -89,7 +88,6 @@ def main():
                             "followers": 0
                         })
 
-        # Si la API no retorna registros, guardamos datos vacíos reales (ceros), sin inventar nada.
         if not stream_log:
             stream_log.append({
                 "start_time": "-",
@@ -107,7 +105,7 @@ def main():
                 "hours_watched": total_vistas,
                 "followers": 0,
                 "peak_viewers": peak_maximo,
-                "hours_streamed": total_streams * 2, # Duración basada estrictamente en los videos devueltos
+                "hours_streamed": total_streams * 2,
                 "streams": total_streams
             },
             "stream_log": stream_log
