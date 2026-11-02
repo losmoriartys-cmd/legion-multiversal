@@ -655,7 +655,7 @@
             <p style="margin-bottom: 20px; color: #a0aec0;">Haz clic en cualquier carta de héroe en primera plana para abrir su expediente con las Páginas #1, #2 y #3.</p>
             
             <div class="roster-grid" id="roster-container">
-                <!-- Se inyectarán dinámicamente las tarjetas de los héroes -->
+                <!-- Se inyectarán las tarjetas de los héroes -->
             </div>
         </section>
 
@@ -666,7 +666,7 @@
             <div class="comic-grid-list">
                 <div class="comic-item-card">
                     <h3>⚡ ALCANCE TOTAL</h3>
-                    <p><strong>8.5K+ Seguidores:</strong> Sumatoria combinada de los 8 creadores del escuadrón.</p>
+                    <p><strong>8.5K+ Seguidores:</strong> Sumatoria combinada de los creadores del escuadrón.</p>
                 </div>
                 <div class="comic-item-card">
                     <h3>📈 AUDIENCIA GLOBAL</h3>
@@ -680,29 +680,6 @@
                     <h3>🌍 GEOGRAFÍA TÁCTICA</h3>
                     <p><strong>3 Países:</strong> Puente internacional activo entre Argentina 🇦🇷, Bolivia 🇧🇴 y México 🇲🇽.</p>
                 </div>
-            </div>
-
-            <h3 style="font-family: 'Bangers', cursive; font-size: 1.8rem; color: var(--yellow-accent); margin-top: 30px; margin-bottom: 10px;">TABLA COMPARATIVA DE RENDIMIENTO (S.H.I.E.L.D.)</h3>
-            <table class="comic-table">
-                <thead>
-                    <tr><th>Agente / Héroe</th><th>País y Rol</th><th>Seguidores / Crecimiento</th><th>Media Viewers</th><th>Juego Principal</th><th>Estado</th></tr>
-                </thead>
-                <tbody>
-                    <tr><td><strong>LosMoriartys</strong></td><td>🇦🇷 Argentina<br>Estratega / Fundador</td><td>1,500+ (+8%)</td><td>25 Avg</td><td>Estrategia / Shooter</td><td>🟢 En Guardia</td></tr>
-                    <tr><td><strong>TheR0D3R1K</strong></td><td>🇦🇷 Argentina<br>El Fuerte / Co-Fundador</td><td>2,100+ (+10%)</td><td>30 Avg</td><td>Acción / Coop</td><td>🟢 En Guardia</td></tr>
-                    <tr><td><strong>LadyMoriarty01</strong></td><td>🇦🇷 Argentina<br>Hechicera Táctica</td><td>1,200+ (+7%)</td><td>20 Avg</td><td>Terror / Variedad</td><td>🟢 En Guardia</td></tr>
-                    <tr><td><strong>Capyunaplay</strong></td><td>🇧🇴 Bolivia<br>Agente de Asalto</td><td>980+ (+6%)</td><td>18 Avg</td><td>Shooters / Survival</td><td>🟢 En Guardia</td></tr>
-                    <tr><td><strong>ArdiPii</strong></td><td>🇲🇽 México<br>Artillería Rápida</td><td>1,350+ (+9%)</td><td>22 Avg</td><td>Battle Royale</td><td>🟢 En Guardia</td></tr>
-                    <tr><td><strong>Akumazoldyck</strong></td><td>🇲🇽 México<br>Asesino de Sombras</td><td>1,800+ (+11%)</td><td>28 Avg</td><td>Competitivo / Shooters</td><td>🟢 En Guardia</td></tr>
-                    <tr><td><strong>elgabii090</strong></td><td>🇦🇷 Argentina<br>Ingeniero de Campo</td><td>850+ (+5%)</td><td>15 Avg</td><td>Sandbox / Coop</td><td>🟢 En Guardia</td></tr>
-                    <tr><td><strong>habitos_atomicos</strong></td><td>🇲🇽 México<br>Cronista Táctico</td><td>1,100+ (+8%)</td><td>19 Avg</td><td>Indie / Simuladores</td><td>🟢 En Guardia</td></tr>
-                </tbody>
-            </table>
-
-            <div class="comic-item-card mt-20">
-                <h3>MAPA DE SINERGIA Y HORARIOS (TURNO NOCHE LATAM)</h3>
-                <p><strong>• Reunión Masiva Clave:</strong> Sábados a las 21:00 hs (ARG) para eventos multicanal y customs cooperativas del escuadrón.</p>
-                <p><strong>• Turnos Rotativos Nocturnos:</strong> Lunes a Viernes asegurando cobertura continua de entretenimiento transfronterizo en la franja nocturna.</p>
             </div>
         </section>
 
@@ -824,17 +801,79 @@
     </div>
 
     <script>
-        let heroesData = [];
+        // DATOS DE RESPALDO (Fallback por si el fetch falla o se abre localmente sin servidor)
+        const fallbackHeroes = [
+            { 
+                name: "MORIARTY", 
+                img: "moriartys.jpg", 
+                twitch: "https://twitch.tv/losmoriartys",
+                bio: "Bienvenido al videoclub 📼 Somos Demi y Ari - Los Moriartys. Pareja gamer y orgullosos nerds.", 
+                sullyStats: { avgViewers: "22", hoursWatched: "820", followersGained: "52", peakViewers: "101", hoursStreamed: "36", streamsCount: "21", ranks: "Peak Viewer Rank: 80,680th" },
+                streamsLog: [{ time: "Sun 1st Nov 2026", length: "2 hours", watch: "18", avg: 9, peak: 19, followers: 1 }]
+            },
+            { 
+                name: "ROD3R1K", img: "rod3r1k.jpg", twitch: "https://twitch.tv/ther0d3rik",
+                bio: "Bienvenidos al canal, me llamo Roderik o mejor conocido como ElKrakenaso.", 
+                sullyStats: { avgViewers: "30", hoursWatched: "950", followersGained: "85", peakViewers: "110", hoursStreamed: "42", streamsCount: "24", ranks: "Rank: 65,200th" },
+                streamsLog: [{ time: "Sat 31st Oct 2026", length: "3 hrs", watch: "96", avg: 32, peak: 58, followers: 2 }]
+            },
+            { 
+                name: "LADYMORIARTY", img: "ladymoriarty.jpg", twitch: "https://twitch.tv/ladymoriarty01",
+                bio: "Canal secundario de Los Moriartys. Gameplay chill e IRL 💜", 
+                sullyStats: { avgViewers: "20", hoursWatched: "480", followersGained: "40", peakViewers: "45", hoursStreamed: "28", streamsCount: "16", ranks: "Rank: 112,000th" },
+                streamsLog: [{ time: "Sun 1st Nov 2026", length: "2 hrs", watch: "44", avg: 22, peak: 35, followers: 1 }]
+            },
+            { 
+                name: "CAPY", img: "capy.jpg", twitch: "https://twitch.tv/capyunaplay",
+                bio: "Lista de juegos cooperativos: SMITE, LoL, Fall Guys, Among Us, DBD.", 
+                sullyStats: { avgViewers: "18", hoursWatched: "510", followersGained: "35", peakViewers: "38", hoursStreamed: "32", streamsCount: "18", ranks: "Rank: 130,000th" },
+                streamsLog: [{ time: "Sat 31st Oct 2026", length: "2.5 hrs", watch: "45", avg: 18, peak: 32, followers: 1 }]
+            },
+            { 
+                name: "ARDIPII", img: "ardipii.jpg", twitch: "https://twitch.tv/ardipii",
+                bio: "Welcome a mi humilde perfil, gasten sus puntos en alertas.", 
+                sullyStats: { avgViewers: "22", hoursWatched: "620", followersGained: "48", peakViewers: "55", hoursStreamed: "30", streamsCount: "17", ranks: "Rank: 95,000th" },
+                streamsLog: [{ time: "Fri 30th Oct 2026", length: "2 hrs", watch: "48", avg: 24, peak: 42, followers: 2 }]
+            },
+            { 
+                name: "AKUMA", img: "akuma.jpg", twitch: "https://twitch.tv/akumazoldyck",
+                bio: "Directo todos los dias a las 7 de la tarde hora mexico.", 
+                sullyStats: { avgViewers: "28", hoursWatched: "890", followersGained: "65", peakViewers: "72", hoursStreamed: "40", streamsCount: "25", ranks: "Rank: 72,000th" },
+                streamsLog: [{ time: "Sat 31st Oct 2026", length: "2.5 hrs", watch: "72", avg: 29, peak: 55, followers: 3 }]
+            },
+            { 
+                name: "ELGABII", img: "elgabii.jpg", twitch: "https://twitch.tv/elgabii090",
+                bio: "Buenaaaas gente :D soy argentino 🇦🇷 Jugador de fortnite, dbd y rocket league.", 
+                sullyStats: { avgViewers: "15", hoursWatched: "380", followersGained: "22", peakViewers: "30", hoursStreamed: "25", streamsCount: "14", ranks: "Rank: 145,000th" },
+                streamsLog: [{ time: "Thu 29th Oct 2026", length: "2 hrs", watch: "30", avg: 15, peak: 26, followers: 1 }]
+            },
+            { 
+                name: "HABITOS", img: "habitos.jpg", twitch: "https://twitch.tv/habitos_atomicos",
+                bio: "habitos_atomicos hace streams diariamente.", 
+                sullyStats: { avgViewers: "19", hoursWatched: "530", followersGained: "38", peakViewers: "42", hoursStreamed: "31", streamsCount: "18", ranks: "Rank: 118,000th" },
+                streamsLog: [{ time: "Wed 28th Oct 2026", length: "2 hrs", watch: "38", avg: 19, peak: 35, followers: 1 }]
+            }
+        ];
 
-        // Carga automática de los datos desde el data.json generado por GitHub Actions
+        let heroesData = fallbackHeroes;
+
+        // Carga inteligente que prioriza el data.json pero usa el respaldo si no encuentra datos
         async function loadHeroesData() {
             try {
                 const response = await fetch('data.json');
+                if (!response.ok) throw new Error("No se pudo cargar el JSON");
                 const data = await response.json();
-                heroesData = Object.values(data);
-                renderRoster();
+                
+                // Si el JSON viene como objeto, lo pasa a array; si ya es array, lo usa directo
+                const parsedData = Array.isArray(data) ? data : Object.values(data);
+                
+                if (parsedData && parsedData.length > 0) {
+                    heroesData = parsedData;
+                }
             } catch (error) {
-                console.error("Error al cargar el data.json dinámico:", error);
+                console.log("Usando datos de respaldo locales por restricción de entorno o ausencia de JSON.");
+            } finally {
+                renderRoster();
             }
         }
 
@@ -848,10 +887,10 @@
                 card.onclick = () => openHeroModal(index);
                 card.innerHTML = `
                     <div class="hero-card-img-wrapper">
-                        <img src="${hero.img}" alt="${hero.name}" onerror="this.src='https://via.placeholder.com/300x300/1a202c/ffde00?text=${hero.name}'">
+                        <img src="${hero.img || ''}" alt="${hero.name || 'Héroe'}" onerror="this.src='https://via.placeholder.com/300x300/1a202c/ffde00?text=${hero.name || 'Hero'}">
                     </div>
                     <div class="hero-card-info">
-                        <h3>${hero.name}</h3>
+                        <h3>${hero.name || 'SIN NOMBRE'}</h3>
                         <div class="hero-click-hint">⚡ VER EXPEDIENTE (A - B - C)</div>
                     </div>
                 `;
@@ -861,8 +900,10 @@
 
         function openHeroModal(index) {
             const hero = heroesData[index];
-            document.getElementById('modal-hero-title').innerText = `EXPEDIENTE: ${hero.name}`;
-            document.getElementById('modal-bio-text').innerText = hero.bio;
+            if (!hero) return;
+            
+            document.getElementById('modal-hero-title').innerText = `EXPEDIENTE: ${hero.name || 'HÉROE'}`;
+            document.getElementById('modal-bio-text').innerText = hero.bio || "Sin biografía disponible.";
             
             const s = hero.sullyStats || {};
             const sullyGrid = document.getElementById('modal-sully-grid');
@@ -882,17 +923,17 @@
             logs.forEach(row => {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
-                    <td><strong>${row.time}</strong></td>
-                    <td>${row.length}</td>
-                    <td>${row.watch} hrs</td>
-                    <td><span style="color: var(--yellow-accent); font-weight: bold;">${row.avg}</span></td>
-                    <td>${row.peak}</td>
-                    <td>${row.followers}</td>
+                    <td><strong>${row.time || 'N/A'}</strong></td>
+                    <td>${row.length || 'N/A'}</td>
+                    <td>${row.watch || 0} hrs</td>
+                    <td><span style="color: var(--yellow-accent); font-weight: bold;">${row.avg || 0}</span></td>
+                    <td>${row.peak || 0}</td>
+                    <td>${row.followers || 0}</td>
                 `;
                 tableBody.appendChild(tr);
             });
 
-            document.getElementById('modal-twitch-btn').href = hero.twitch;
+            document.getElementById('modal-twitch-btn').href = hero.twitch || "#";
             document.getElementById('hero-modal').classList.add('active');
             switchModalTab(0);
         }
