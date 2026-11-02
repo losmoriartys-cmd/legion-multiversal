@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LOS S3X-MEN | Dossier de Superhéroes (Turno Noche LATAM)</title>
+    <title>LOS S3X-MEN | Dossier de Superhéroes </title>
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -611,8 +611,8 @@
             <button class="nav-btn" onclick="switchChapter(2)">CAP 2: ROSTER</button>
             <button class="nav-btn" onclick="switchChapter(3)">CAP 3: DATABASE</button>
             <button class="nav-btn" onclick="switchChapter(4)">CAP 4: MISIONES</button>
-            <button class="nav-btn" onclick="switchChapter(5)">CAP 5: INTEL GLOBAL</button>
-            <button class="nav-btn" onclick="switchChapter(6)">CAP 6: ARSENAL</button>
+            <button class="nav-btn" onclick="switchChapter(5)">CAP 5: TOP 20 CATEGORIA</button>
+            <button class="nav-btn" onclick="switchChapter(6)">CAP 6: TOP 20 JUEGOS</button>
             <button class="nav-btn" onclick="switchChapter(7)">CAP 7: RECLUTA</button>
             <button class="nav-btn" onclick="switchChapter(8)">CAP 8: STAFF</button>
         </nav>
@@ -651,8 +651,8 @@
         <!-- CAPÍTULO 2: ROSTER DE HÉROES EN 1RA PLANA -->
         <section id="chapter-2" class="chapter-panel">
             <div class="chapter-tag">CAPÍTULO 02</div>
-            <h2 class="comic-title">ROSTER DE HÉROES (LOS 8 INTEGRANTES)</h2>
-            <p style="margin-bottom: 20px; color: #a0aec0;">Haz clic en cualquier carta de héroe en primera plana para abrir su expediente con las Páginas A, B y C.</p>
+            <h2 class="comic-title">ROSTER DE HÉROES</h2>
+            <p style="margin-bottom: 20px; color: #a0aec0;">Haz clic en cualquier carta de héroe en primera plana para abrir su expediente con las Páginas #1, #2 y #3.</p>
             
             <div class="roster-grid" id="roster-container">
                 <!-- Se inyectarán dinámicamente las tarjetas de los héroes -->
@@ -725,7 +725,7 @@
         <!-- CAPÍTULO 5: INTEL GLOBAL -->
         <section id="chapter-5" class="chapter-panel">
             <div class="chapter-tag">CAPÍTULO 05</div>
-            <h2 class="comic-title">INTEL GLOBAL (TENDENCIAS EN TWITCH)</h2>
+            <h2 class="comic-title">TOP CATEGORIAS (TENDENCIAS EN TWITCH)</h2>
             <div class="comic-grid-list">
                 <div class="comic-item-card"><h3>1. JUST CHATTING</h3><p>Interacción directa y comunidad.</p></div>
                 <div class="comic-item-card"><h3>2. FORTNITE</h3><p>Shooter líder y customs de grupo.</p></div>
@@ -826,7 +826,7 @@
     <script>
         const heroesData = [
             { 
-                name: "MORIARTYS", 
+                name: "MORIARTY", 
                 img: "moriartys.jpg", 
                 twitch: "https://twitch.tv/losmoriartys",
                 bio: "Bienvenido al videoclub 📼 Somos Demi y Ari - Los Moriartys. Pareja gamer y orgullosos nerds. Acá no hay pro-players, hay partidas que salen mal y terminan mejor. Sims de tienda, coop caótico, pelis y cómics. LUN/MIE 20HS | VIE 21HS ARG", 
@@ -858,56 +858,58 @@
             { 
                 name: "ROD3R1K", 
                 img: "rod3r1k.jpg", 
-                twitch: "https://twitch.tv",
-                bio: "Bienvenidos al canal, me llamo Roderik o mejor conocido como 'ElKrakenaso'...", 
+                twitch: "https://twitch.tv/ther0d3rik",
+                bio: "Bienvenidos al canal, me llamo Roderik o mejor conocido como ElKrakenaso encontraras momentos divertidos y epicos, acompañame en las partidas, diviertete", 
                 sullyStats: { avgViewers: "30", avgTrend: "+15.2%", hoursWatched: "950", hwTrend: "+22.1%", followersGained: "85", fgTrend: "+12.0%", peakViewers: "110", pvTrend: "+45.0%", hoursStreamed: "42", hsTrend: "+10.0%", streamsCount: "24", scTrend: "+15.0%", ranks: "Rank: 65,200th" },
                 streamsLog: [{ time: "Sat 31st Oct 2026, 22:00", length: "3 hrs", watch: "96", avg: 32, peak: 58, followers: 2 }]
             },
             { 
                 name: "LADYMORIARTY", 
                 img: "ladymoriarty.jpg", 
-                twitch: "https://twitch.tv/losmoriartys",
-                bio: "Canal secundario de Los Moriartys...", 
+                twitch: "https://twitch.tv/ladymoriarty01",
+                bio: "Canal secundario de Los Moriartys. Acá encontraran gameplay chill, IRL y lo que se me cante en el momento....Lo importante es divertirnos y pasarla bien 💜", 
                 sullyStats: { avgViewers: "20", avgTrend: "+8.4%", hoursWatched: "480", hwTrend: "+18.0%", followersGained: "40", fgTrend: "+5.0%", peakViewers: "45", pvTrend: "+20.0%", hoursStreamed: "28", hsTrend: "+5.0%", streamsCount: "16", scTrend: "+10.0%", ranks: "Rank: 112,000th" },
                 streamsLog: [{ time: "Sun 1st Nov 2026, 20:00", length: "2 hrs", watch: "44", avg: 22, peak: 35, followers: 1 }]
             },
             { 
                 name: "CAPY", 
                 img: "capy.jpg", 
-                twitch: "https://twitch.tv",
-                bio: "Juegos cooperativos...", 
+                twitch: "https://twitch.tv/capyunaplay",
+                bio: "Lista de juegos que voy a jugar en modo cooperativo SMITE League of Legends Fall Guys Among Us Goose Goose Duck Farlight 84 y DBD", 
                 sullyStats: { avgViewers: "18", avgTrend: "+5.0%", hoursWatched: "510", hwTrend: "+12.0%", followersGained: "35", fgTrend: "+2.0%", peakViewers: "38", pvTrend: "+15.0%", hoursStreamed: "32", hsTrend: "+8.0%", streamsCount: "18", scTrend: "+5.0%", ranks: "Rank: 130,000th" },
                 streamsLog: [{ time: "Sat 31st Oct 2026, 21:00", length: "2.5 hrs", watch: "45", avg: 18, peak: 32, followers: 1 }]
             },
             { 
                 name: "ARDIPII", 
                 img: "ardipii.jpg", 
-                twitch: "https://twitch.tv",
-                bio: "Welcome a mi humilde perfil...", 
+                twitch: "https://twitch.tv/ardipii",
+                bio: "Welcome a mi humilde perfil, gasten sus puntos en alertas, saluden a todos, traigan unas palomitas y Lo único que podemos decidir es qué hacer con el tiempo que se nos ha dado".
+
+", 
                 sullyStats: { avgViewers: "22", avgTrend: "+11.0%", hoursWatched: "620", hwTrend: "+25.0%", followersGained: "48", fgTrend: "+8.0%", peakViewers: "55", pvTrend: "+30.0%", hoursStreamed: "30", hsTrend: "+6.0%", streamsCount: "17", scTrend: "+8.0%", ranks: "Rank: 95,000th" },
                 streamsLog: [{ time: "Fri 30th Oct 2026, 22:00", length: "2 hrs", watch: "48", avg: 24, peak: 42, followers: 2 }]
             },
             { 
                 name: "AKUMA", 
                 img: "akuma.jpg", 
-                twitch: "https://twitch.tv",
-                bio: "Directo todos los dias...", 
+                twitch: "https://twitch.tv/akumazoldyck",
+                bio: "directo todos los dias a las 7 de la tarde hora mexicoTalk show, friends and games", 
                 sullyStats: { avgViewers: "28", avgTrend: "+14.0%", hoursWatched: "890", hwTrend: "+31.0%", followersGained: "65", fgTrend: "+15.0%", peakViewers: "72", pvTrend: "+40.0%", hoursStreamed: "40", hsTrend: "+12.0%", streamsCount: "25", scTrend: "+20.0%", ranks: "Rank: 72,000th" },
                 streamsLog: [{ time: "Sat 31st Oct 2026, 19:00", length: "2.5 hrs", watch: "72", avg: 29, peak: 55, followers: 3 }]
             },
             { 
                 name: "ELGABII", 
                 img: "elgabii.jpg", 
-                twitch: "https://twitch.tv",
-                bio: "Rol: Habilidoso...", 
+                twitch: "https://twitch.tv/elgabii090",
+                bio: "Buenaaaas gente :D soy argentino 🇦🇷 ....Vengo a poner humor en cada directo :v ..jugador de fortnite ,dbd , rocket league y clash royales ", 
                 sullyStats: { avgViewers: "15", avgTrend: "+4.0%", hoursWatched: "380", hwTrend: "+9.0%", followersGained: "22", fgTrend: "+1.0%", peakViewers: "30", pvTrend: "+10.0%", hoursStreamed: "25", hsTrend: "+4.0%", streamsCount: "14", scTrend: "+3.0%", ranks: "Rank: 145,000th" },
                 streamsLog: [{ time: "Thu 29th Oct 2026, 22:00", length: "2 hrs", watch: "30", avg: 15, peak: 26, followers: 1 }]
             },
             { 
                 name: "HABITOS", 
                 img: "habitos.jpg", 
-                twitch: "https://twitch.tv",
-                bio: "habitos_atomicos hace streams...", 
+                twitch: "https://twitch.tv/habitos_atomicos",
+                bio: "habitos_atomicos hace streams diariamente", 
                 sullyStats: { avgViewers: "19", avgTrend: "+7.0%", hoursWatched: "530", hwTrend: "+14.0%", followersGained: "38", fgTrend: "+4.0%", peakViewers: "42", pvTrend: "+18.0%", hoursStreamed: "31", hsTrend: "+7.0%", streamsCount: "18", scTrend: "+6.0%", ranks: "Rank: 118,000th" },
                 streamsLog: [{ time: "Wed 28th Oct 2026, 21:00", length: "2 hrs", watch: "38", avg: 19, peak: 35, followers: 1 }]
             }
