@@ -1,56 +1,330 @@
 {
-    "ultima_actualizacion": "2026-11-02 16:30",
-    "alcance_acumulado": "8.5K+",
-    "media_viewers_global": 70,
-    "horas_producidas_mes": 250,
+    "ultima_actualizacion": "2026-11-02 17:32",
     "integrantes": [
         {
-            "nombre": "Los Moriartys",
-            "alcance": "8.5K+",
-            "media_viewers": 70,
-            "horas_mes": 250
+            "nombre": "losmoriartys",
+            "stream_log": [
+                {
+                    "start_time": "2026-11-01T02:00:53Z",
+                    "length": "2h7m30s",
+                    "watch_time": "N/A",
+                    "avg_viewers": 0,
+                    "peak_viewers": 114,
+                    "followers": 0
+                },
+                {
+                    "start_time": "2026-10-30T23:55:12Z",
+                    "length": "1h45m40s",
+                    "watch_time": "N/A",
+                    "avg_viewers": 0,
+                    "peak_viewers": 125,
+                    "followers": 0
+                },
+                {
+                    "start_time": "2026-10-28T22:58:52Z",
+                    "length": "2h3m0s",
+                    "watch_time": "N/A",
+                    "avg_viewers": 0,
+                    "peak_viewers": 150,
+                    "followers": 0
+                },
+                {
+                    "start_time": "2026-10-26T21:54:37Z",
+                    "length": "2h10m30s",
+                    "watch_time": "N/A",
+                    "avg_viewers": 0,
+                    "peak_viewers": 215,
+                    "followers": 0
+                },
+                {
+                    "start_time": "2026-10-24T23:54:10Z",
+                    "length": "1h22m10s",
+                    "watch_time": "N/A",
+                    "avg_viewers": 0,
+                    "peak_viewers": 85,
+                    "followers": 0
+                }
+            ]
         },
         {
-            "nombre": "Integrante 2",
-            "alcance": "5.2K+",
-            "media_viewers": 45,
-            "horas_mes": 180
+            "nombre": "ladymoriarty01",
+            "stream_log": [
+                {
+                    "start_time": "2026-10-28T22:03:11Z",
+                    "length": "59m59s",
+                    "watch_time": "N/A",
+                    "avg_viewers": 0,
+                    "peak_viewers": 102,
+                    "followers": 0
+                },
+                {
+                    "start_time": "2026-10-20T22:59:05Z",
+                    "length": "1h51m24s",
+                    "watch_time": "N/A",
+                    "avg_viewers": 0,
+                    "peak_viewers": 40,
+                    "followers": 0
+                },
+                {
+                    "start_time": "2026-10-11T23:58:47Z",
+                    "length": "1h9m41s",
+                    "watch_time": "N/A",
+                    "avg_viewers": 0,
+                    "peak_viewers": 32,
+                    "followers": 0
+                },
+                {
+                    "start_time": "2026-10-06T21:04:19Z",
+                    "length": "2h1m8s",
+                    "watch_time": "N/A",
+                    "avg_viewers": 0,
+                    "peak_viewers": 92,
+                    "followers": 0
+                },
+                {
+                    "start_time": "2026-09-30T22:57:39Z",
+                    "length": "2h7m0s",
+                    "watch_time": "N/A",
+                    "avg_viewers": 0,
+                    "peak_viewers": 83,
+                    "followers": 0
+                }
+            ]
         },
         {
-            "nombre": "Integrante 3",
-            "alcance": "3.8K+",
-            "media_viewers": 30,
-            "horas_mes": 120
+            "nombre": "TheR0D3R1K",
+            "stream_log": [
+                {
+                    "start_time": "2026-10-31T23:56:51Z",
+                    "length": "7h49m33s",
+                    "watch_time": "N/A",
+                    "avg_viewers": 0,
+                    "peak_viewers": 493,
+                    "followers": 0
+                },
+                {
+                    "start_time": "2026-10-29T22:55:30Z",
+                    "length": "3h36m7s",
+                    "watch_time": "N/A",
+                    "avg_viewers": 0,
+                    "peak_viewers": 297,
+                    "followers": 0
+                },
+                {
+                    "start_time": "2026-10-28T22:54:54Z",
+                    "length": "4h11m32s",
+                    "watch_time": "N/A",
+                    "avg_viewers": 0,
+                    "peak_viewers": 293,
+                    "followers": 0
+                },
+                {
+                    "start_time": "2026-10-27T22:54:19Z",
+                    "length": "3h32m12s",
+                    "watch_time": "N/A",
+                    "avg_viewers": 0,
+                    "peak_viewers": 248,
+                    "followers": 0
+                },
+                {
+                    "start_time": "2026-10-26T22:54:46Z",
+                    "length": "4h8m58s",
+                    "watch_time": "N/A",
+                    "avg_viewers": 0,
+                    "peak_viewers": 348,
+                    "followers": 0
+                }
+            ]
         },
         {
-            "nombre": "Integrante 4",
-            "alcance": "6.1K+",
-            "media_viewers": 55,
-            "horas_mes": 210
+            "nombre": "elgabii090",
+            "stream_log": [
+                {
+                    "start_time": "2026-10-30T21:56:01Z",
+                    "length": "1h11m21s",
+                    "watch_time": "N/A",
+                    "avg_viewers": 0,
+                    "peak_viewers": 63,
+                    "followers": 0
+                },
+                {
+                    "start_time": "2026-10-28T21:58:57Z",
+                    "length": "1h4m22s",
+                    "watch_time": "N/A",
+                    "avg_viewers": 0,
+                    "peak_viewers": 51,
+                    "followers": 0
+                },
+                {
+                    "start_time": "2026-10-21T21:52:32Z",
+                    "length": "1h14m38s",
+                    "watch_time": "N/A",
+                    "avg_viewers": 0,
+                    "peak_viewers": 109,
+                    "followers": 0
+                }
+            ]
         },
         {
-            "nombre": "Integrante 5",
-            "alcance": "4.0K+",
-            "media_viewers": 35,
-            "horas_mes": 150
+            "nombre": "capyunaplay",
+            "stream_log": [
+                {
+                    "start_time": "2026-10-30T22:56:43Z",
+                    "length": "58m38s",
+                    "watch_time": "N/A",
+                    "avg_viewers": 0,
+                    "peak_viewers": 61,
+                    "followers": 0
+                },
+                {
+                    "start_time": "2026-10-28T22:55:47Z",
+                    "length": "1h3m40s",
+                    "watch_time": "N/A",
+                    "avg_viewers": 0,
+                    "peak_viewers": 38,
+                    "followers": 0
+                },
+                {
+                    "start_time": "2026-10-27T22:59:56Z",
+                    "length": "59m20s",
+                    "watch_time": "N/A",
+                    "avg_viewers": 0,
+                    "peak_viewers": 48,
+                    "followers": 0
+                },
+                {
+                    "start_time": "2026-10-21T22:57:15Z",
+                    "length": "56m40s",
+                    "watch_time": "N/A",
+                    "avg_viewers": 0,
+                    "peak_viewers": 71,
+                    "followers": 0
+                },
+                {
+                    "start_time": "2026-10-20T21:55:52Z",
+                    "length": "1h55m15s",
+                    "watch_time": "N/A",
+                    "avg_viewers": 0,
+                    "peak_viewers": 116,
+                    "followers": 0
+                }
+            ]
         },
         {
-            "nombre": "Integrante 6",
-            "alcance": "7.3K+",
-            "media_viewers": 65,
-            "horas_mes": 230
+            "nombre": "habitos_atomicos",
+            "stream_log": [
+                {
+                    "start_time": "2026-11-01T15:02:54Z",
+                    "length": "8h2m45s",
+                    "watch_time": "N/A",
+                    "avg_viewers": 0,
+                    "peak_viewers": 117,
+                    "followers": 0
+                },
+                {
+                    "start_time": "2026-11-01T13:35:04Z",
+                    "length": "1h27m9s",
+                    "watch_time": "N/A",
+                    "avg_viewers": 0,
+                    "peak_viewers": 42,
+                    "followers": 0
+                },
+                {
+                    "start_time": "2026-11-01T02:01:09Z",
+                    "length": "7h1m12s",
+                    "watch_time": "N/A",
+                    "avg_viewers": 0,
+                    "peak_viewers": 113,
+                    "followers": 0
+                },
+                {
+                    "start_time": "2026-10-31T03:03:26Z",
+                    "length": "1h21m29s",
+                    "watch_time": "N/A",
+                    "avg_viewers": 0,
+                    "peak_viewers": 13,
+                    "followers": 0
+                },
+                {
+                    "start_time": "2026-10-30T18:32:12Z",
+                    "length": "8h5m0s",
+                    "watch_time": "N/A",
+                    "avg_viewers": 0,
+                    "peak_viewers": 133,
+                    "followers": 0
+                }
+            ]
         },
         {
-            "nombre": "Integrante 7",
-            "alcance": "4.5K+",
-            "media_viewers": 40,
-            "horas_mes": 160
+            "nombre": "Ardipii",
+            "stream_log": [
+                {
+                    "start_time": "Mon 02 Nov 2026, 17:32",
+                    "length": "2 hrs",
+                    "watch_time": "30 hrs",
+                    "avg_viewers": 20,
+                    "peak_viewers": 35,
+                    "followers": 1
+                }
+            ]
         },
         {
-            "nombre": "Integrante 8",
-            "alcance": "5.9K+",
-            "media_viewers": 50,
-            "horas_mes": 190
+            "nombre": "akumazoldyck",
+            "stream_log": [
+                {
+                    "start_time": "2026-11-01T02:45:41Z",
+                    "length": "5h15m19s",
+                    "watch_time": "N/A",
+                    "avg_viewers": 0,
+                    "peak_viewers": 100,
+                    "followers": 0
+                },
+                {
+                    "start_time": "2026-10-31T00:54:55Z",
+                    "length": "1h59m7s",
+                    "watch_time": "N/A",
+                    "avg_viewers": 0,
+                    "peak_viewers": 76,
+                    "followers": 0
+                },
+                {
+                    "start_time": "2026-10-30T00:46:27Z",
+                    "length": "1h54m55s",
+                    "watch_time": "N/A",
+                    "avg_viewers": 0,
+                    "peak_viewers": 50,
+                    "followers": 0
+                },
+                {
+                    "start_time": "2026-10-29T00:54:20Z",
+                    "length": "2h8m59s",
+                    "watch_time": "N/A",
+                    "avg_viewers": 0,
+                    "peak_viewers": 44,
+                    "followers": 0
+                },
+                {
+                    "start_time": "2026-10-28T00:54:24Z",
+                    "length": "1h31m32s",
+                    "watch_time": "N/A",
+                    "avg_viewers": 0,
+                    "peak_viewers": 55,
+                    "followers": 0
+                }
+            ]
+        },
+        {
+            "nombre": "daved0608",
+            "stream_log": [
+                {
+                    "start_time": "2026-11-01T05:39:36Z",
+                    "length": "3h18m50s",
+                    "watch_time": "N/A",
+                    "avg_viewers": 0,
+                    "peak_viewers": 12,
+                    "followers": 0
+                }
+            ]
         }
     ]
 }
