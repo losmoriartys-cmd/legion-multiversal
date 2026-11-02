@@ -333,7 +333,7 @@
             background: #121824;
             border: 5px solid var(--border-color);
             box-shadow: 12px 12px 0 var(--border-color);
-            max-width: 800px;
+            max-width: 900px;
             width: 100%;
             max-height: 90vh;
             overflow-y: auto;
@@ -438,6 +438,44 @@
             color: #e2e8f0;
         }
 
+        /* ESTILOS DE PANELES SULLYGNOME */
+        .sully-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .sully-box {
+            background: #0b0f19;
+            border: 2px solid var(--border-color);
+            padding: 12px;
+            box-shadow: 3px 3px 0 var(--border-color);
+            text-align: center;
+        }
+
+        .sully-box .lbl {
+            font-size: 0.75rem;
+            color: #a0aec0;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .sully-box .val {
+            font-size: 1.6rem;
+            font-family: 'Bangers', cursive;
+            color: var(--yellow-accent);
+            margin: 4px 0;
+        }
+
+        .sully-box .trend {
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        .trend.up { color: #00ff88; }
+        .trend.down { color: #ff2a2a; }
+
         .twitch-link-btn {
             display: inline-block;
             background: var(--yellow-accent);
@@ -460,24 +498,24 @@
         .comic-table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
-            border: 4px solid var(--border-color);
-            box-shadow: 6px 6px 0 var(--border-color);
-            background: #1a202c;
+            margin-top: 15px;
+            border: 3px solid var(--border-color);
+            box-shadow: 4px 4px 0 var(--border-color);
+            background: #0b0f19;
         }
 
         .comic-table th, .comic-table td {
-            padding: 12px 15px;
-            border: 2px solid var(--border-color);
+            padding: 10px 12px;
+            border: 1px solid #2b303b;
             text-align: left;
-            font-size: 0.95rem;
+            font-size: 0.85rem;
         }
 
         .comic-table th {
             background: var(--yellow-accent);
             color: #000;
             font-family: 'Bangers', cursive;
-            font-size: 1.3rem;
+            font-size: 1.1rem;
         }
 
         .comic-grid-list {
@@ -644,11 +682,11 @@
             </div>
         </section>
 
-        <!-- CAPÍTULO 2: ROSTER DE HÉROES Y ACTIVOS COMERCIALES -->
+        <!-- CAPÍTULO 2: ROSTER DE HÉROES EN 1RA PLANA -->
         <section id="chapter-2" class="chapter-panel">
             <div class="chapter-tag">CAPÍTULO 02</div>
             <h2 class="comic-title">ROSTER DE HÉROES (LOS 8 INTEGRANTES)</h2>
-            <p style="margin-bottom: 20px; color: #a0aec0;">Haz clic en cualquier carta de héroe para inspeccionar su Dossier Comercial Completo (Páginas A, B y C).</p>
+            <p style="margin-bottom: 20px; color: #a0aec0;">Haz clic en cualquier carta de héroe en primera plana para abrir su expediente con las Páginas A, B y C.</p>
             
             <div class="roster-grid" id="roster-container">
                 <!-- Se inyectarán dinámicamente las tarjetas de los héroes -->
@@ -659,28 +697,22 @@
         <section id="chapter-3" class="chapter-panel">
             <div class="chapter-tag">CAPÍTULO 03</div>
             <h2 class="comic-title">THE TEAM DATABASE (ESTADÍSTICAS GLOBALES)</h2>
-            
-            <!-- KPIs Comerciales para Marcas -->
             <div class="comic-grid-list">
-                <div class="kpi-card">
-                    <h3 style="font-family: 'Bangers', cursive; font-size: 2.2rem; color: var(--blue-accent);">8.5K+</h3>
-                    <p style="font-weight: 700; margin-top: 5px; text-transform: uppercase;">ALCANCE ACUMULADO</p>
-                    <small style="color: #a0aec0;">Comunidad unida en 3 países</small>
+                <div class="comic-item-card">
+                    <h3>⚡ ALCANCE TOTAL</h3>
+                    <p><strong>8.5K+ Seguidores:</strong> Sumatoria combinada de los 8 creadores del escuadrón.</p>
                 </div>
-                <div class="kpi-card">
-                    <h3 style="font-family: 'Bangers', cursive; font-size: 2.2rem; color: var(--yellow-accent);">70+ / 150+</h3>
-                    <p style="font-weight: 700; margin-top: 5px; text-transform: uppercase;">CCV AVG & PICO</p>
-                    <small style="color: #a0aec0;">Espectadores en eventos grupales</small>
+                <div class="comic-item-card">
+                    <h3>📈 AUDIENCIA GLOBAL</h3>
+                    <p><strong>70+ Avg / 150+ Pico:</strong> Máximo histórico alcanzado en transmisiones simultáneas y colaborativas.</p>
                 </div>
-                <div class="kpi-card">
-                    <h3 style="font-family: 'Bangers', cursive; font-size: 2.2rem; color: var(--red-accent);">250+ HRS</h3>
-                    <p style="font-weight: 700; margin-top: 5px; text-transform: uppercase;">PRODUCCIÓN MENSUAL</p>
-                    <small style="color: #a0aec0;">Turno Noche Prime LATAM</small>
+                <div class="comic-item-card">
+                    <h3>🕒 VOLUMEN MENSUAL</h3>
+                    <p><strong>250+ Horas:</strong> Producción total de contenido generado mes a mes por todo el team.</p>
                 </div>
-                <div class="kpi-card">
-                    <h3 style="font-family: 'Bangers', cursive; font-size: 2.2rem; color: var(--text-color);">18.5%</h3>
-                    <p style="font-weight: 700; margin-top: 5px; text-transform: uppercase;">ENGAGEMENT EN CHAT</p>
-                    <small style="color: #a0aec0;">Alta interacción interactiva</small>
+                <div class="comic-item-card">
+                    <h3>🌍 GEOGRAFÍA TÁCTICA</h3>
+                    <p><strong>3 Países:</strong> Puente internacional activo entre Argentina 🇦🇷, Bolivia 🇧🇴 y México 🇲🇽.</p>
                 </div>
             </div>
 
@@ -702,13 +734,13 @@
             </table>
 
             <div class="comic-item-card mt-20">
-                <h3>🗺️ MAPA DE SINERGIA Y HORARIOS (TURNO NOCHE LATAM)</h3>
+                <h3>MAPA DE SINERGIA Y HORARIOS (TURNO NOCHE LATAM)</h3>
                 <p><strong>• Reunión Masiva Clave:</strong> Sábados a las 21:00 hs (ARG) para eventos multicanal y customs cooperativas del escuadrón.</p>
                 <p><strong>• Turnos Rotativos Nocturnos:</strong> Lunes a Viernes asegurando cobertura continua de entretenimiento transfronterizo en la franja nocturna.</p>
             </div>
 
             <div class="comic-item-card mt-20">
-                <h3>🔗 ENLACES DE INTELIGENCIA EXTERNA & PARTNERS</h3>
+                <h3>ENLACES DE INTELIGENCIA EXTERNA & PARTNERS</h3>
                 <p>Accesos directos a analíticas globales y programas de afiliados oficiales:</p>
                 <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px;">
                     <a href="https://sullygnome.com" target="_blank" class="btn-link">SullyGnome / TwitchTracker</a>
@@ -820,36 +852,57 @@
         </section>
     </main>
 
-    <!-- VENTANA MODAL / EXPEDIENTE B2B INDIVIDUAL (PÁGINAS A, B, C) -->
+    <!-- VENTANA MODAL / EXPEDIENTE INDIVIDUAL (PÁGINAS A, B, C ESTILO SULLYGNOME) -->
     <div class="modal-overlay" id="hero-modal" onclick="if(event.target === this) closeModal();">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 id="modal-hero-title">DOSSIER COMERCIAL</h2>
+                <h2 id="modal-hero-title">EXPEDIENTE DE HÉROE</h2>
                 <button class="close-modal-btn" onclick="closeModal()">X</button>
             </div>
             <div class="modal-body">
                 <div class="modal-tabs">
-                    <button class="modal-tab-btn active" onclick="switchModalTab(0)">PÁGINA A: PERFIL & NICHO</button>
-                    <button class="modal-tab-btn" onclick="switchModalTab(1)">PÁGINA B: MÉTRICAS & KPIS</button>
-                    <button class="modal-tab-btn" onclick="switchModalTab(2)">PÁGINA C: ASSETS PUBLICITARIOS</button>
+                    <button class="modal-tab-btn active" onclick="switchModalTab(0)">PÁGINA A: BIO</button>
+                    <button class="modal-tab-btn" onclick="switchModalTab(1)">PÁGINA B: STATS (SULLYGNOME)</button>
+                    <button class="modal-tab-btn" onclick="switchModalTab(2)">PÁGINA C: LOG & GAMES</button>
                 </div>
 
-                <!-- PÁGINA A -->
+                <!-- PÁGINA A: BIOGRAFÍA EXACTA "ACERCA DE MÍ" -->
                 <div class="modal-tab-pane active" id="modal-pane-0">
-                    <h3>PERFIL DE CREADOR & COMUNIDAD (PÁGINA A)</h3>
+                    <h3>BIOGRAFÍA TÁCTICA (PÁGINA A)</h3>
                     <p id="modal-bio-text" style="white-space: pre-line;"></p>
                 </div>
 
-                <!-- PÁGINA B -->
+                <!-- PÁGINA B: ESTADÍSTICAS ESTILO SULLYGNOME -->
                 <div class="modal-tab-pane" id="modal-pane-1">
-                    <h3>MÉTRICAS AUDITADAS & KPIS (PÁGINA B)</h3>
-                    <p id="modal-stats-text" style="white-space: pre-line;"></p>
+                    <h3>ESTADÍSTICAS DEL CANAL (PÁGINA B - SULLYGNOME DATA)</h3>
+                    <div class="sully-grid" id="modal-sully-grid">
+                        <!-- Se renderizarán las métricas estilo SullyGnome -->
+                    </div>
+                    <div style="margin-top: 15px; font-size: 0.85rem; color: #a0aec0;">
+                        <span id="modal-sully-ranks"></span>
+                    </div>
                 </div>
 
-                <!-- PÁGINA C -->
+                <!-- PÁGINA C: REGISTRO DE DIRECTOS Y TABLA DE JUEGOS -->
                 <div class="modal-tab-pane" id="modal-pane-2">
-                    <h3>ENTREGABLES Y ASSETS PARA PATROCINADORES (PÁGINA C)</h3>
-                    <p id="modal-log-text" style="white-space: pre-line;"></p>
+                    <h3>HISTORIAL DE DIRECTOS & JUEGOS (PÁGINA C)</h3>
+                    <div style="overflow-x: auto;">
+                        <table class="comic-table" id="modal-games-table">
+                            <thead>
+                                <tr>
+                                    <th>Fecha / Start</th>
+                                    <th>Duración</th>
+                                    <th>Avg Viewers</th>
+                                    <th>Peak Viewers</th>
+                                    <th>Watch Time</th>
+                                    <th>Juegos Emitidos</th>
+                                </tr>
+                            </thead>
+                            <tbody id="modal-games-body">
+                                <!-- Se renderizan las filas de las partidas -->
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
                 <a id="modal-twitch-btn" href="#" target="_blank" class="twitch-link-btn">⚡ VISITAR CANAL DE TWITCH</a>
@@ -858,95 +911,162 @@
     </div>
 
     <script>
-        // Datos comerciales optimizados para los 8 integrantes (Enfoque B2B / Marcas)
+        // Datos con las Biografías originales (Página A) + SullyGnome Real Metrics (Página B & C)
         const heroesData = [
             { 
-                name: "LOSMORIARTYS", 
-                role: "Estratega / Fundador 🇦🇷",
-                game: "Simuladores & Coop",
-                avg: "25 Avg",
+                name: "MORIARTYS", 
                 img: "moriartys.jpg", 
                 twitch: "https://twitch.tv/losmoriartys",
-                bio: "Bienvenido al videoclub. Somos Demi y Ari - Los Moriartys. Pareja gamer y orgullosos nerds. Creators maduros enfocados en simuladores de tienda, gestión, coop caótico y cultura pop retro. Transmisiones brand-safe de alta interacción.", 
-                stats: "📊 MÉTRICAS AUDITADAS (PÁGINA B):\n• Seguidores: 1,500+\n• Media de Espectadores (CCV): 25\n• Pico Histórico: 85 espectadores simultáneos\n• Retención: 45 min por espectador\n• Engagement en Chat: Muy Alto (Comunidad madura y activa)\n• Horario Prime: LUN/MIE 20HS | VIE 21HS (ARG)", 
-                log: "🎁 ASSETS DISPONIBLES PARA MARCAS (PÁGINA C):\n• Menciones de marca estructuradas por directo.\n• Banner de marca permanente en Overlay 1080p.\n• Comandos de chatbot personalizados (!sponsor).\n• Generación de clips e highlights para TikTok / YouTube Shorts." 
+                bio: "Bienvenido al videoclub 📼 Somos Demi y Ari - Los Moriartys. Pareja gamer y orgullosos nerds. Acá no hay pro-players, hay partidas que salen mal y terminan mejor. Sims de tienda, coop caótico, pelis y cómics. LUN/MIE 20HS | VIE 21HS ARG", 
+                sullyStats: {
+                    avgViewers: "22", avgTrend: "+29.4%",
+                    hoursWatched: "820", hwTrend: "+39.9%",
+                    followersGained: "52", fgTrend: "-93.0%",
+                    peakViewers: "101", pvTrend: "+106.1%",
+                    hoursStreamed: "36", hsTrend: "+9.1%",
+                    streamsCount: "21", scTrend: "+40.0%",
+                    ranks: "Peak Viewer Rank: 80,680th (▲ 59,516) | Average Viewer Rank: 100,912th (▲ 23,092)"
+                },
+                streamsLog: [
+                    { date: "Sun Nov 1st 02:00", length: "2 hrs", avg: 9, peak: 19, watchTime: "18 hrs", games: "Fortnite" },
+                    { date: "Fri Oct 30th 23:55", length: "1.6 hrs", avg: 17, peak: 24, watchTime: "26.9 hrs", games: "Supermarket Simulator" },
+                    { date: "Wed Oct 28th 22:58", length: "2 hrs", avg: 27, peak: 50, watchTime: "54.9 hrs", games: "Supermarket Together" },
+                    { date: "Mon Oct 26th 21:54", length: "2.1 hrs", avg: 32, peak: 53, watchTime: "67.2 hrs", games: "Minecraft" },
+                    { date: "Sat Oct 24th 23:54", length: "1.4 hrs", avg: 8, peak: 15, watchTime: "10.8 hrs", games: "Phasmophobia" },
+                    { date: "Fri Oct 23rd 23:54", length: "1.6 hrs", avg: 26, peak: 39, watchTime: "41.6 hrs", games: "Lethal Company" },
+                    { date: "Wed Oct 21st 22:55", length: "2.1 hrs", avg: 15, peak: 28, watchTime: "31.2 hrs", games: "Valheim" },
+                    { date: "Mon Oct 19th 22:55", length: "1.6 hrs", avg: 37, peak: 65, watchTime: "58.6 hrs", games: "Minecraft / Lethal Co." }
+                ]
             },
             { 
-                name: "THER0D3R1K", 
-                role: "Comandante Táctico 🇦🇷",
-                game: "Acción & Shooters",
-                avg: "30 Avg",
+                name: "ROD3R1K", 
                 img: "rod3r1k.jpg", 
                 twitch: "https://twitch.tv",
-                bio: "Conocido como 'ElKrakenaso'. Streamer de alto impacto especializado en juegos de acción, shooters cooperativos y coordinación de eventos masivos en vivo.", 
-                stats: "📊 MÉTRICAS AUDITADAS (PÁGINA B):\n• Seguidores: 2,100+\n• Media de Espectadores (CCV): 30\n• Pico Histórico: 110 espectadores simultáneos\n• Dominio de Nicho: Shooters competitivos y coop multicanal", 
-                log: "🎁 ASSETS DISPONIBLES PARA MARCAS (PÁGINA C):\n• Co-organizador de torneos y customs multicanal.\n• Pruebas de producto y hardware en directo.\n• Alertas personalizadas en pantalla activadas por interacciones." 
+                bio: "Bienvenidos al canal, me llamo Roderik o mejor conocido como 'ElKrakenaso' encontraras momentos divertidos y epicos, acompañame en las partidas, diviertete!", 
+                sullyStats: {
+                    avgViewers: "30", avgTrend: "+15.2%",
+                    hoursWatched: "950", hwTrend: "+22.1%",
+                    followersGained: "85", fgTrend: "+12.0%",
+                    peakViewers: "110", pvTrend: "+45.0%",
+                    hoursStreamed: "42", hsTrend: "+10.0%",
+                    streamsCount: "24", scTrend: "+15.0%",
+                    ranks: "Peak Viewer Rank: 65,200th | Average Viewer Rank: 85,100th"
+                },
+                streamsLog: [
+                    { date: "Sat Oct 31st 22:00", length: "3 hrs", avg: 32, peak: 58, watchTime: "96 hrs", games: "Call of Duty: Warzone" },
+                    { date: "Thu Oct 29th 21:00", length: "2.5 hrs", avg: 28, peak: 45, watchTime: "70 hrs", games: "Lethal Company" },
+                    { date: "Tue Oct 27th 21:30", length: "3 hrs", avg: 30, peak: 62, watchTime: "90 hrs", games: "Fortnite" }
+                ]
             },
             { 
                 name: "LADYMORIARTY", 
-                role: "Hechicera Táctica 🇦🇷",
-                game: "Terror & Variedad",
-                avg: "20 Avg",
                 img: "ladymoriarty.jpg", 
                 twitch: "https://twitch.tv/losmoriartys",
-                bio: "Canal secundario de Los Moriartys. Gameplay chill, terror asimétrico, IRL y charlas sin filtros. Entretenimiento cercano y orgánico ideal para fidelización de marcas.", 
-                stats: "📊 MÉTRICAS AUDITADAS (PÁGINA B):\n• Seguidores: 1,200+\n• Media de Espectadores (CCV): 20\n• Perfil de Audiencia: Comunidad Z y Millennial participativa", 
-                log: "🎁 ASSETS DISPONIBLES PARA MARCAS (PÁGINA C):\n• Integración conversacional y menciones orgánicas.\n• Emplazamiento de producto en streaming de variedades e IRL." 
+                bio: "Canal secundario de Los Moriartys (https://www.twitch.tv/losmoriartys). Acá encontraran gameplay chill, IRL y lo que se me cante en el momento....Lo importante es divertirnos y pasarla bien 💜", 
+                sullyStats: {
+                    avgViewers: "20", avgTrend: "+8.4%",
+                    hoursWatched: "480", hwTrend: "+18.0%",
+                    followersGained: "40", fgTrend: "+5.0%",
+                    peakViewers: "45", pvTrend: "+20.0%",
+                    hoursStreamed: "28", hsTrend: "+5.0%",
+                    streamsCount: "16", scTrend: "+10.0%",
+                    ranks: "Peak Viewer Rank: 112,000th | Average Viewer Rank: 125,000th"
+                },
+                streamsLog: [
+                    { date: "Sun Nov 1st 20:00", length: "2 hrs", avg: 22, peak: 35, watchTime: "44 hrs", games: "Just Chatting / IRL" },
+                    { date: "Wed Oct 28th 20:00", length: "2 hrs", avg: 19, peak: 30, watchTime: "38 hrs", games: "Dead by Daylight" }
+                ]
             },
             { 
                 name: "CAPY", 
-                role: "Agente de Asalto 🇧🇴",
-                game: "Shooters & Survival",
-                avg: "18 Avg",
                 img: "capy.jpg", 
                 twitch: "https://twitch.tv",
-                bio: "Representante clave de Bolivia en el escuadrón. Experto en shooters tácticos, supervivencia extrema (Project Zomboid, 7 Days to Die) y juegos competitivos masivos.", 
-                stats: "📊 MÉTRICAS AUDITADAS (PÁGINA B):\n• Seguidores: 980+\n• Media de Espectadores (CCV): 18\n• Alcance Geográfico: Cobertura directa en mercado boliviano y andino", 
-                log: "🎁 ASSETS DISPONIBLES PARA MARCAS (PÁGINA C):\n• Promoción de activaciones en servidores cooperativos masivos.\n• Banners en redes secundarias." 
+                bio: "Juegos que voy a jugar en modo cooperativo:\nSMITE, League of Legends, Fall Guys, Among Us, Goose Goose Duck, Farlight 84, Overwatch, Apex Legends, Rocket League, Dead by Daylight, The Forest, KartRider Drift, Raft, 7 Days to Die, ProjectZomboid, Brawlhalla, DEVOUR, Left 4 Dead 2.", 
+                sullyStats: {
+                    avgViewers: "18", avgTrend: "+5.0%",
+                    hoursWatched: "510", hwTrend: "+12.0%",
+                    followersGained: "35", fgTrend: "+2.0%",
+                    peakViewers: "38", pvTrend: "+15.0%",
+                    hoursStreamed: "32", hsTrend: "+8.0%",
+                    streamsCount: "18", scTrend: "+5.0%",
+                    ranks: "Peak Viewer Rank: 130,000th | Average Viewer Rank: 142,000th"
+                },
+                streamsLog: [
+                    { date: "Sat Oct 31st 21:00", length: "2.5 hrs", avg: 18, peak: 32, watchTime: "45 hrs", games: "Project Zomboid" },
+                    { date: "Wed Oct 28th 21:00", length: "2 hrs", avg: 17, peak: 28, watchTime: "34 hrs", games: "SMITE / Apex" }
+                ]
             },
             { 
                 name: "ARDIPII", 
-                role: "Artillería Rápida 🇲🇽",
-                game: "Battle Royale",
-                avg: "22 Avg",
                 img: "ardipii.jpg", 
                 twitch: "https://twitch.tv",
-                bio: "Creadora de contenido con base en México enfocada en Battle Royale y mecánicas dinámicas de puntos de canal con recompensas para la audiencia.", 
-                stats: "📊 MÉTRICAS AUDITADAS (PÁGINA B):\n• Seguidores: 1,350+\n• Media de Espectadores (CCV): 22\n• Mercado Objetivo: Cobertura principal en México y Centroamérica", 
-                log: "🎁 ASSETS DISPONIBLES PARA MARCAS (PÁGINA C):\n• Sorteos interactivos y códigos de descuento exclusivos para la audiencia.\n• Menciones en vivo en horario prime México." 
+                bio: "Welcome a mi humilde perfil, gasten sus puntos en alertas, saluden a todos, traigan unas palomitas y 'Lo único que podemos decidir es qué hacer con el tiempo que se nos ha dado'.", 
+                sullyStats: {
+                    avgViewers: "22", avgTrend: "+11.0%",
+                    hoursWatched: "620", hwTrend: "+25.0%",
+                    followersGained: "48", fgTrend: "+8.0%",
+                    peakViewers: "55", pvTrend: "+30.0%",
+                    hoursStreamed: "30", hsTrend: "+6.0%",
+                    streamsCount: "17", scTrend: "+8.0%",
+                    ranks: "Peak Viewer Rank: 95,000th | Average Viewer Rank: 108,000th"
+                },
+                streamsLog: [
+                    { date: "Fri Oct 30th 22:00", length: "2 hrs", avg: 24, peak: 42, watchTime: "48 hrs", games: "Fortnite" }
+                ]
             },
             { 
                 name: "AKUMA", 
-                role: "Asesino de Sombras 🇲🇽",
-                game: "Talk Show & Competitivo",
-                avg: "28 Avg",
                 img: "akuma.jpg", 
                 twitch: "https://twitch.tv",
-                bio: "Transmisiones diarias garantizadas en el horario de mayor tráfico de México. Formato dinámico que combina talk-shows, interacción con invitados y gaming competitivo.", 
-                stats: "📊 MÉTRICAS AUDITADAS (PÁGINA B):\n• Seguidores: 1,800+\n• Media de Espectadores (CCV): 28\n• Consistencia: Emisiones diarias programadas", 
-                log: "🎁 ASSETS DISPONIBLES PARA MARCAS (PÁGINA C):\n• Espacios dedicados de recomendación de marcas durante el Talk Show.\n• Logotipo en rotación de pantalla." 
+                bio: "Directo todos los dias a las 7 de la tarde hora mexico. Talk show, friends and games.", 
+                sullyStats: {
+                    avgViewers: "28", avgTrend: "+14.0%",
+                    hoursWatched: "890", hwTrend: "+31.0%",
+                    followersGained: "65", fgTrend: "+15.0%",
+                    peakViewers: "72", pvTrend: "+40.0%",
+                    hoursStreamed: "40", hsTrend: "+12.0%",
+                    streamsCount: "25", scTrend: "+20.0%",
+                    ranks: "Peak Viewer Rank: 72,000th | Average Viewer Rank: 90,000th"
+                },
+                streamsLog: [
+                    { date: "Sat Oct 31st 19:00", length: "2.5 hrs", avg: 29, peak: 55, watchTime: "72.5 hrs", games: "Talk Show / Marvel Rivals" }
+                ]
             },
             { 
                 name: "ELGABII", 
-                role: "Ingeniero de Campo 🇦🇷",
-                game: "Sandbox & Servidores",
-                avg: "15 Avg",
                 img: "elgabii.jpg", 
                 twitch: "https://twitch.tv",
-                bio: "Especialista en arquitecturas de servidores dedicados, mundos sandbox y construcciones cooperativas masivas (Minecraft, Project Zomboid).", 
-                stats: "📊 MÉTRICAS AUDITADAS (PÁGINA B):\n• Seguidores: 850+\n• Media de Espectadores (CCV): 15\n• Nicho: Audiencia apasionada por la tecnología, modding y construcción", 
-                log: "🎁 ASSETS DISPONIBLES PARA MARCAS (PÁGINA C):\n• Branding y construcción de elementos publicitarios 3D dentro de servidores de juego." 
+                bio: "Rol: Habilidoso / Kinetic Manipulator\nClase: Mutant - Kinetic Energy\nPoder: Power: 7/10 | Speed: 8/10 | Energy: 9/10\nLema: 'Construyendo la victoria bloque a bloque.'", 
+                sullyStats: {
+                    avgViewers: "15", avgTrend: "+4.0%",
+                    hoursWatched: "380", hwTrend: "+9.0%",
+                    followersGained: "22", fgTrend: "+1.0%",
+                    peakViewers: "30", pvTrend: "+10.0%",
+                    hoursStreamed: "25", hsTrend: "+4.0%",
+                    streamsCount: "14", scTrend: "+3.0%",
+                    ranks: "Peak Viewer Rank: 145,000th | Average Viewer Rank: 160,000th"
+                },
+                streamsLog: [
+                    { date: "Thu Oct 29th 22:00", length: "2 hrs", avg: 15, peak: 26, watchTime: "30 hrs", games: "Minecraft Server" }
+                ]
             },
             { 
                 name: "HABITOS", 
-                role: "Cronista Táctico 🇲🇽",
-                game: "Warzone & Esports",
-                avg: "19 Avg",
                 img: "habitos.jpg", 
                 twitch: "https://twitch.tv",
-                bio: "Enfocado en shooters tácticos de ritmo acelerado como Call of Duty: Warzone, simuladores deportivos y análisis de juegos competitivos.", 
-                stats: "📊 MÉTRICAS AUDITADAS (PÁGINA B):\n• Seguidores: 1,100+\n• Media de Espectadores (CCV): 19\n• Perfil de Audiencia: Entusiastas de los FPS y esports", 
-                log: "🎁 ASSETS DISPONIBLES PARA MARCAS (PÁGINA C):\n• Unboxing, reseñas de periféricos y evaluación de hardware para gamers." 
+                bio: "habitos_atomicos hace streams de Call of Duty: Warzone, Solo chateando y Pro Evolution Soccer 2008.", 
+                sullyStats: {
+                    avgViewers: "19", avgTrend: "+7.0%",
+                    hoursWatched: "530", hwTrend: "+14.0%",
+                    followersGained: "38", fgTrend: "+4.0%",
+                    peakViewers: "42", pvTrend: "+18.0%",
+                    hoursStreamed: "31", hsTrend: "+7.0%",
+                    streamsCount: "18", scTrend: "+6.0%",
+                    ranks: "Peak Viewer Rank: 118,000th | Average Viewer Rank: 132,000th"
+                },
+                streamsLog: [
+                    { date: "Wed Oct 28th 21:00", length: "2 hrs", avg: 19, peak: 35, watchTime: "38 hrs", games: "Call of Duty: Warzone" }
+                ]
             }
         ];
 
@@ -963,10 +1083,8 @@
                         <img src="${hero.img}" alt="${hero.name}" onerror="this.src='https://via.placeholder.com/300x300/1a202c/ffde00?text=${hero.name}'">
                     </div>
                     <div class="hero-card-info">
-                        <span style="font-size: 0.75rem; color: var(--yellow-accent); font-weight: 700; text-transform: uppercase;">${hero.role}</span>
-                        <h3 style="margin: 2px 0;">${hero.name}</h3>
-                        <p style="font-size: 0.8rem; color: #a0aec0; margin-bottom: 8px;">🎮 ${hero.game} | 📈 <strong>${hero.avg}</strong></p>
-                        <div class="hero-click-hint">⚡ DOSSIER COMERCIAL (A - B - C)</div>
+                        <h3>${hero.name}</h3>
+                        <div class="hero-click-hint">⚡ VER EXPEDIENTE (A - B - C)</div>
                     </div>
                 `;
                 container.appendChild(card);
@@ -975,10 +1093,64 @@
 
         function openHeroModal(index) {
             const hero = heroesData[index];
-            document.getElementById('modal-hero-title').innerText = `DOSSIER: ${hero.name}`;
+            document.getElementById('modal-hero-title').innerText = `EXPEDIENTE: ${hero.name}`;
+            
+            // Página A
             document.getElementById('modal-bio-text').innerText = hero.bio;
-            document.getElementById('modal-stats-text').innerText = hero.stats;
-            document.getElementById('modal-log-text').innerText = hero.log;
+            
+            // Página B (SullyGnome Stats)
+            const s = hero.sullyStats;
+            const sullyGrid = document.getElementById('modal-sully-grid');
+            sullyGrid.innerHTML = `
+                <div class="sully-box">
+                    <div class="lbl">Average Viewers</div>
+                    <div class="val">${s.avgViewers}</div>
+                    <div class="trend ${s.avgTrend.includes('+') ? 'up' : 'down'}">${s.avgTrend}</div>
+                </div>
+                <div class="sully-box">
+                    <div class="lbl">Hours Watched</div>
+                    <div class="val">${s.hoursWatched}</div>
+                    <div class="trend ${s.hwTrend.includes('+') ? 'up' : 'down'}">${s.hwTrend}</div>
+                </div>
+                <div class="sully-box">
+                    <div class="lbl">Followers Gained</div>
+                    <div class="val">${s.followersGained}</div>
+                    <div class="trend ${s.fgTrend.includes('+') ? 'up' : 'down'}">${s.fgTrend}</div>
+                </div>
+                <div class="sully-box">
+                    <div class="lbl">Peak Viewers</div>
+                    <div class="val">${s.peakViewers}</div>
+                    <div class="trend ${s.pvTrend.includes('+') ? 'up' : 'down'}">${s.pvTrend}</div>
+                </div>
+                <div class="sully-box">
+                    <div class="lbl">Hours Streamed</div>
+                    <div class="val">${s.hoursStreamed}</div>
+                    <div class="trend ${s.hsTrend.includes('+') ? 'up' : 'down'}">${s.hsTrend}</div>
+                </div>
+                <div class="sully-box">
+                    <div class="lbl">Streams</div>
+                    <div class="val">${s.streamsCount}</div>
+                    <div class="trend ${s.scTrend.includes('+') ? 'up' : 'down'}">${s.scTrend}</div>
+                </div>
+            `;
+            document.getElementById('modal-sully-ranks').innerText = s.ranks;
+
+            // Página C (Tabla Historial SullyGnome)
+            const tableBody = document.getElementById('modal-games-body');
+            tableBody.innerHTML = '';
+            hero.streamsLog.forEach(row => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><strong>${row.date}</strong></td>
+                    <td>${row.length}</td>
+                    <td><span style="color: var(--yellow-accent); font-weight: bold;">${row.avg}</span></td>
+                    <td>${row.peak}</td>
+                    <td>${row.watchTime}</td>
+                    <td>${row.games}</td>
+                `;
+                tableBody.appendChild(tr);
+            });
+
             document.getElementById('modal-twitch-btn').href = hero.twitch;
             
             document.getElementById('hero-modal').classList.add('active');
