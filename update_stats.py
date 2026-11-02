@@ -12,7 +12,7 @@ canales_twitch = [
     "losmoriartys",
     "ladymoriarty01",
     "TheR0D3R1K",
-    "elgabii090",
+    "elgabii",
     "capyunaplay",
     "habitos_atomicos",
     "Ardipii",
@@ -57,37 +57,54 @@ def main():
         "integrantes": []
     }
 
+    if not token:
+        print("No se pudo autenticar con la API de Twitch.")
+        return
+
+    # Consultamos los datos de los usuarios en bloque (Twitch permite hasta 100 con 'login=')
+    query_params = "&".join([f"login={c}" for c in canales_twitch])
+    users_res = consultar_twitch(f"users?{query_params}", token)
+    
+    usuarios_dict = {}
+    if users_res and users_res.get("data"):
+        for user in users_res["data"]:
+            usuarios_dict[user["login"].lower()] = user
+
     for username in canales_twitch:
+        user_info = usuarios_dict.get(username.lower())
         stream_log = []
-        total_vistas = 0
-        peak_maximo = 0
-        total_streams = 0
         
-        if token:
-            user_res = consultar_twitch(f"users?login={username}", token)
-            if user_res and user_res.get("data"):
-                user_id = user_res["data"][0]["id"]
-                
-                videos_res = consultar_twitch(f"videos?user_id={user_id}&type=archive&first=10", token)
+        if user_info:
+            user_id = user_info["id"]
+            
+            # Verificamos si el canal está en directo ahora mismo
+            live_res = consultar_twitch(f"streams?user_id={user_id}", token)
+            if live_res and live_res.get("data"):
+                live_data = live_res["data"][0]
+                stream_log.append({
+                    "start_time": live_data.get("started_at"),
+                    "length": "En directo",
+                    "watch_time": f"{live_data.get('viewer_count', 0)} viewers",
+                    "avg_viewers": live_data.get("viewer_count", 0),
+                    "peak_viewers": live_data.get("viewer_count", 0),
+                    "followers": 0
+                })
+            else:
+                # Si no está en directo, consultamos los videos archivados
+                videos_res = consultar_twitch(f"videos?user_id={user_id}&type=archive&first=5", token)
                 if videos_res and videos_res.get("data"):
                     for video in videos_res["data"]:
-                        total_streams += 1
-                        duracion = video.get("duration", "0h")
                         vistas = video.get("view_count", 0)
-                        
-                        total_vistas += vistas
-                        if vistas > peak_maximo:
-                            peak_maximo = vistas
-
                         stream_log.append({
                             "start_time": video.get("created_at"),
-                            "length": duracion,
+                            "length": video.get("duration", "0h"),
                             "watch_time": f"{vistas} hrs",
                             "avg_viewers": vistas,
                             "peak_viewers": vistas,
                             "followers": 0
                         })
 
+        # Si no hay registros ni directos ni videos públicos, dejamos la estructura limpia en ceros
         if not stream_log:
             stream_log.append({
                 "start_time": "-",
@@ -98,15 +115,18 @@ def main():
                 "followers": 0
             })
 
+        # Tomamos métricas del primer registro si existe
+        peak_val = stream_log[0]["peak_viewers"] if stream_log else 0
+
         datos_actualizados["integrantes"].append({
             "nombre": username,
             "stats": {
-                "avg_viewers": peak_maximo,
-                "hours_watched": total_vistas,
+                "avg_viewers": peak_val,
+                "hours_watched": peak_val,
                 "followers": 0,
-                "peak_viewers": peak_maximo,
-                "hours_streamed": total_streams * 2,
-                "streams": total_streams
+                "peak_viewers": peak_val,
+                "hours_streamed": len(stream_log),
+                "streams": len(stream_log) if stream_log[0]["length"] != "0h" else 0
             },
             "stream_log": stream_log
         })
@@ -114,7 +134,7 @@ def main():
     with open(data_file, "w", encoding="utf-8") as f:
         json.dump(datos_actualizados, f, ensure_ascii=False, indent=4)
 
-    print("Sincronización exacta completada.")
+    print("Sincronización masiva de canales completada.")
 
 if __name__ == "__main__":
     main()
