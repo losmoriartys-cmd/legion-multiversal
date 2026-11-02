@@ -14,6 +14,7 @@
             --blue-accent: #00d2ff;
             --border-color: #000000;
             --text-color: #f0f4f8;
+            --card-bg: #1a202c;
         }
 
         * {
@@ -230,7 +231,7 @@
             margin-bottom: 5px;
         }
 
-        /* Roster de Héroes en 1ra Plana */
+        /* ROSTER DE HÉROES Y TARJETAS COMERCIALES */
         .roster-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -275,7 +276,7 @@
             background: #121824;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
             text-align: center;
         }
 
@@ -296,9 +297,26 @@
             border: 3px solid var(--border-color);
             box-shadow: 3px 3px 0 var(--border-color);
             text-transform: uppercase;
+            margin-top: 5px;
         }
 
-        /* MODAL / EXPEDIENTE INDIVIDUAL (PÁGINAS A, B, C) */
+        /* TARJETAS DE KPI EN DATABASE */
+        .kpi-card {
+            background-color: var(--card-bg);
+            border: 4px solid var(--border-color);
+            border-radius: 6px;
+            padding: 20px;
+            box-shadow: 6px 6px 0 var(--border-color);
+            text-align: center;
+            transition: transform 0.15s ease;
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--yellow-accent);
+        }
+
+        /* MODAL / EXPEDIENTE B2B (PÁGINAS A, B, C) */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -379,7 +397,7 @@
             border: 3px solid var(--border-color);
             padding: 10px 20px;
             font-family: 'Bangers', cursive;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             cursor: pointer;
             box-shadow: 4px 4px 0 var(--border-color);
         }
@@ -467,7 +485,7 @@
 
         .comic-grid-list {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 20px;
             margin-top: 20px;
         }
@@ -545,431 +563,4 @@
             border: 3px solid var(--border-color);
             color: #fff;
             padding: 10px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1rem;
-            box-shadow: 3px 3px 0 var(--border-color);
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-
-        .comic-submit-btn {
-            background: var(--yellow-accent);
-            color: #000;
-            font-family: 'Bangers', cursive;
-            font-size: 1.6rem;
-            padding: 12px;
-            border: 3px solid var(--border-color);
-            box-shadow: 5px 5px 0 var(--border-color);
-            cursor: pointer;
-            text-align: center;
-        }
-
-        .comic-submit-btn:hover {
-            background: var(--red-accent);
-            color: #fff;
-        }
-
-        .mt-20 { margin-top: 20px; }
-    </style>
-</head>
-<body>
-
-    <header>
-        <div class="header-top">
-            <div class="logo-container">
-                <div class="badge-comic">S.H.I.E.L.D.</div>
-                <div class="title-group">
-                    <h1>LOS S3X-MEN</h1>
-                    <p>TURNO NOCHE LATAM • ARCHIVO SECRETO</p>
-                </div>
-            </div>
-        </div>
-        <nav>
-            <button class="nav-btn active" onclick="switchChapter(1)">CAP 1: PORTADA</button>
-            <button class="nav-btn" onclick="switchChapter(2)">CAP 2: ROSTER</button>
-            <button class="nav-btn" onclick="switchChapter(3)">CAP 3: DATABASE</button>
-            <button class="nav-btn" onclick="switchChapter(4)">CAP 4: MISIONES</button>
-            <button class="nav-btn" onclick="switchChapter(5)">CAP 5: INTEL GLOBAL</button>
-            <button class="nav-btn" onclick="switchChapter(6)">CAP 6: ARSENAL</button>
-            <button class="nav-btn" onclick="switchChapter(7)">CAP 7: RECLUTA</button>
-            <button class="nav-btn" onclick="switchChapter(8)">CAP 8: STAFF</button>
-        </nav>
-    </header>
-
-    <main>
-        <!-- CAPÍTULO 1: PORTADA -->
-        <section id="chapter-1" class="chapter-panel active">
-            <div class="chapter-tag">CAPÍTULO 01</div>
-            <h2 class="comic-title">LOS S3X-MEN: LA LEYENDA DEL TURNO NOCHE</h2>
-            <div class="cover-grid">
-                <div class="cover-text">
-                    <p>Una noche cualquiera de directos y charlas de medianoche, tiramos sobre la mesa una idea casi de película: ¿y si cruzamos las fronteras y armamos nuestro propio escuadrón? Una especie de <strong>Avengers internacionales</strong> unidos no para salvar el mundo de Thanos, sino para traer diversión, risas y entretenimiento de altísima calidad a la pantalla cada semana. Así nació <strong>LOS S3X-MEN</strong>, un puente directo entre <strong>Argentina, Bolivia y México</strong>.</p>
-                    <div class="feature-boxes">
-                        <div class="f-box">
-                            <h4>HERMANDAD GENUINA</h4>
-                            <p>Cero toxicidad, compañerismo absoluto y apoyo mutuo incondicional en cada directo.</p>
-                        </div>
-                        <div class="f-box">
-                            <h4>ESTÁNDAR PROFESIONAL</h4>
-                            <p>Creadores maduros e independientes que ofrecen calidad y colaboración real para la industria.</p>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div class="banner-img-wrapper">
-                        <img src="banner-grupal.jpg" alt="Los S3X-Men Banner Grupal">
-                    </div>
-                    <div style="text-align: center; margin-top: 15px;">
-                        <span style="font-family: 'Bangers', cursive; font-size: 1.4rem; color: var(--yellow-accent);">“UN EQUIPO. OCHO CREADORES. UNA PROPUESTA MULTICANAL.”</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- CAPÍTULO 2: ROSTER DE HÉROES EN 1RA PLANA -->
-        <section id="chapter-2" class="chapter-panel">
-            <div class="chapter-tag">CAPÍTULO 02</div>
-            <h2 class="comic-title">ROSTER DE HÉROES (LOS 8 INTEGRANTES)</h2>
-            <p style="margin-bottom: 20px; color: #a0aec0;">Haz clic en cualquier carta de héroe en primera plana para abrir su expediente con las Páginas A, B y C.</p>
-            
-            <div class="roster-grid" id="roster-container">
-                <!-- Se inyectarán dinámicamente las tarjetas de los héroes -->
-            </div>
-        </section>
-
-        <!-- CAPÍTULO 3: THE TEAM DATABASE -->
-        <section id="chapter-3" class="chapter-panel">
-            <div class="chapter-tag">CAPÍTULO 03</div>
-            <h2 class="comic-title">THE TEAM DATABASE (ESTADÍSTICAS GLOBALES)</h2>
-            <div class="comic-grid-list">
-                <div class="comic-item-card">
-                    <h3>⚡ ALCANCE TOTAL</h3>
-                    <p><strong>8.5K+ Seguidores:</strong> Sumatoria combinada de los 8 creadores del escuadrón.</p>
-                </div>
-                <div class="comic-item-card">
-                    <h3>📈 AUDIENCIA GLOBAL</h3>
-                    <p><strong>70+ Avg / 150+ Pico:</strong> Máximo histórico alcanzado en transmisiones simultáneas y colaborativas.</p>
-                </div>
-                <div class="comic-item-card">
-                    <h3>🕒 VOLUMEN MENSUAL</h3>
-                    <p><strong>250+ Horas:</strong> Producción total de contenido generado mes a mes por todo el team.</p>
-                </div>
-                <div class="comic-item-card">
-                    <h3>🌍 GEOGRAFÍA TÁCTICA</h3>
-                    <p><strong>3 Países:</strong> Puente internacional activo entre Argentina 🇦🇷, Bolivia 🇧🇴 y México 🇲🇽.</p>
-                </div>
-            </div>
-
-            <h3 style="font-family: 'Bangers', cursive; font-size: 1.8rem; color: var(--yellow-accent); margin-top: 30px; margin-bottom: 10px;">TABLA COMPARATIVA DE RENDIMIENTO (S.H.I.E.L.D.)</h3>
-            <table class="comic-table">
-                <thead>
-                    <tr><th>Agente / Héroe</th><th>País y Rol</th><th>Seguidores / Crecimiento</th><th>Media Viewers</th><th>Juego Principal</th><th>Estado</th></tr>
-                </thead>
-                <tbody>
-                    <tr><td><strong>LosMoriartys</strong></td><td>🇦🇷 Argentina<br>Estratega / Fundador</td><td>1,500+ (+8%)</td><td>25 Avg</td><td>Estrategia / Shooter</td><td>🟢 En Guardia</td></tr>
-                    <tr><td><strong>TheR0D3R1K</strong></td><td>🇦🇷 Argentina<br>El Fuerte / Co-Fundador</td><td>2,100+ (+10%)</td><td>30 Avg</td><td>Acción / Coop</td><td>🟢 En Guardia</td></tr>
-                    <tr><td><strong>LadyMoriarty01</strong></td><td>🇦🇷 Argentina<br>Hechicera Táctica</td><td>1,200+ (+7%)</td><td>20 Avg</td><td>Terror / Variedad</td><td>🟢 En Guardia</td></tr>
-                    <tr><td><strong>Capyunaplay</strong></td><td>🇧🇴 Bolivia<br>Agente de Asalto</td><td>980+ (+6%)</td><td>18 Avg</td><td>Shooters / Survival</td><td>🟢 En Guardia</td></tr>
-                    <tr><td><strong>ArdiPii</strong></td><td>🇲🇽 México<br>Artillería Rápida</td><td>1,350+ (+9%)</td><td>22 Avg</td><td>Battle Royale</td><td>🟢 En Guardia</td></tr>
-                    <tr><td><strong>Akumazoldyck</strong></td><td>🇲🇽 México<br>Asesino de Sombras</td><td>1,800+ (+11%)</td><td>28 Avg</td><td>Competitivo / Shooters</td><td>🟢 En Guardia</td></tr>
-                    <tr><td><strong>elgabii090</strong></td><td>🇦🇷 Argentina<br>Ingeniero de Campo</td><td>850+ (+5%)</td><td>15 Avg</td><td>Sandbox / Coop</td><td>🟢 En Guardia</td></tr>
-                    <tr><td><strong>habitos_atomicos</strong></td><td>🇲🇽 México<br>Cronista Táctico</td><td>1,100+ (+8%)</td><td>19 Avg</td><td>Indie / Simuladores</td><td>🟢 En Guardia</td></tr>
-                </tbody>
-            </table>
-
-            <div class="comic-item-card mt-20">
-                <h3>🗺️ MAPA DE SINERGIA Y HORARIOS (TURNO NOCHE LATAM)</h3>
-                <p><strong>• Reunión Masiva Clave:</strong> Sábados a las 21:00 hs (ARG) para eventos multicanal y customs cooperativas del escuadrón.</p>
-                <p><strong>• Turnos Rotativos Nocturnos:</strong> Lunes a Viernes asegurando cobertura continua de entretenimiento transfronterizo en la franja nocturna.</p>
-            </div>
-
-            <div class="comic-item-card mt-20">
-                <h3>🔗 ENLACES DE INTELIGENCIA EXTERNA & PARTNERS</h3>
-                <p>Accesos directos a analíticas globales y programas de afiliados oficiales:</p>
-                <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px;">
-                    <a href="https://sullygnome.com" target="_blank" class="btn-link">SullyGnome / TwitchTracker</a>
-                    <a href="https://lurkit.com" target="_blank" class="btn-link">Lurkit Campaigns</a>
-                    <a href="https://keymailer.co" target="_blank" class="btn-link">Keymailer Keys</a>
-                    <a href="https://store.epicgames.com" target="_blank" class="btn-link">Códigos Epic (LosMoriartys / TheR0D3R1K)</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- CAPÍTULO 4: MISIONES Y TUTORIALES -->
-        <section id="chapter-4" class="chapter-panel">
-            <div class="chapter-tag">CAPÍTULO 04</div>
-            <h2 class="comic-title">MISIONES Y TUTORIALES (LURKIT + KEYMAILER)</h2>
-            <div class="comic-grid-list">
-                <div class="comic-item-card">
-                    <h3>1. LURKIT.COM</h3>
-                    <p>Plataforma all-in-one para Key Campaigns, Creator Programs y Paid Quests oficiales.</p>
-                    <ul>
-                        <li><strong>Tipos:</strong> Key Campaigns (keys gratis), Creator Programs (largo plazo), Paid Quests (¡te pagan por jugar!).</li>
-                        <li><strong>Registro:</strong> Entrá a lurkit.com, conectá tu canal de Twitch.</li>
-                        <li><strong>Top Lurkit Coop 4+:</strong> Ready or Not, Phasmophobia, Dying Light 2, Sea of Thieves, V Rising, DayZ Frostline.</li>
-                    </ul>
-                </div>
-                <div class="comic-item-card">
-                    <h3>2. KEYMAILER.CO</h3>
-                    <p>Donde pedís juegos premium y AAA todos los días (60,000 influencers, 2,500 estudios).</p>
-                    <ul>
-                        <li><strong>Cómo funciona:</strong> Vinculá tu canal, solicitá juegos, cubre más para recibir más keys.</li>
-                        <li><strong>Top Keymailer AAA:</strong> Avowed, Forza Horizon, Mundfish Creator Program.</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- CAPÍTULO 5: INTEL GLOBAL -->
-        <section id="chapter-5" class="chapter-panel">
-            <div class="chapter-tag">CAPÍTULO 05</div>
-            <h2 class="comic-title">INTEL GLOBAL (TENDENCIAS EN TWITCH)</h2>
-            <div class="comic-grid-list">
-                <div class="comic-item-card"><h3>1. JUST CHATTING</h3><p>Interacción directa y comunidad.</p></div>
-                <div class="comic-item-card"><h3>2. FORTNITE</h3><p>Shooter líder y customs de grupo.</p></div>
-                <div class="comic-item-card"><h3>3. MINECRAFT</h3><p>Sandbox y servidores cooperativos.</p></div>
-                <div class="comic-item-card"><h3>4. LEAGUE OF LEGENDS</h3><p>Esports y competitivo nocturno.</p></div>
-                <div class="comic-item-card"><h3>5. VALORANT</h3><p>Tactical shooter de alta tracción.</p></div>
-                <div class="comic-item-card"><h3>6. GTA V</h3><p>Roleplay y caos en multijugador.</p></div>
-            </div>
-        </section>
-
-        <!-- CAPÍTULO 6: ARSENAL TÁCTICO -->
-        <section id="chapter-6" class="chapter-panel">
-            <div class="chapter-tag">CAPÍTULO 06</div>
-            <h2 class="comic-title">ARSENAL TÁCTICO (TOP 20 JUEGOS COOP)</h2>
-            <div class="comic-grid-list">
-                <div class="comic-item-card"><h3>1. FORTNITE</h3><p><strong>Jugadores:</strong> 4 a 100<br><strong>Plataforma:</strong> Epic Games Store (Gratis)<br><strong>Uso:</strong> Ideal para customs masivas y eventos internos de los 8 integrantes.</p></div>
-                <div class="comic-item-card"><h3>2. MINECRAFT</h3><p><strong>Jugadores:</strong> 4 a 30<br><strong>Plataforma:</strong> Minecraft Official (Java / Bedrock)<br><strong>Uso:</strong> Construcción libre, servidores privados del videoclub y minijuegos.</p></div>
-                <div class="comic-item-card"><h3>3. LETHAL COMPANY</h3><p><strong>Jugadores:</strong> 4 a 8<br><strong>Plataforma:</strong> Steam (Compatible con ofertas en Eneba)<br><strong>Uso:</strong> El juego estrella para generar clips virales de terror caótico.</p></div>
-                <div class="comic-item-card"><h3>4. R.E.P.O. (ROW)</h3><p><strong>Jugadores:</strong> 4 a 6<br><strong>Plataforma:</strong> Steam<br><strong>Uso:</strong> Cooperativo de terror y física desternillante, sucesor espiritual del caos.</p></div>
-                <div class="comic-item-card"><h3>5. SUPERMARKET TOGETHER</h3><p><strong>Jugadores:</strong> 4 a 16<br><strong>Plataforma:</strong> Steam (Gratis)<br><strong>Uso:</strong> Gestión de supermercado en equipo que desata risas y directos enteros.</p></div>
-                <div class="comic-item-card"><h3>6. DEAD BY DAYLIGHT</h3><p><strong>Jugadores:</strong> 1 a 5 (Asimétrico)<br><strong>Plataforma:</strong> Steam / Epic Games<br><strong>Uso:</strong> Main de terror asimétrico, persecuciones y tensión nocturna.</p></div>
-                <div class="comic-item-card"><h3>7. VALORANT</h3><p><strong>Jugadores:</strong> 5 a 10<br><strong>Plataforma:</strong> Riot Games (Gratis)<br><strong>Uso:</strong> Prácticas tácticas y partidas competitivas del escuadrón.</p></div>
-                <div class="comic-item-card"><h3>8. PHASMOPHOBIA</h3><p><strong>Jugadores:</strong> 1 a 4<br><strong>Plataforma:</strong> Steam<br><strong>Uso:</strong> Investigación paranormal con chat de voz espacial y sustos garantizados.</p></div>
-                <div class="comic-item-card"><h3>9. ROCKET LEAGUE</h3><p><strong>Jugadores:</strong> 1 a 8<br><strong>Plataforma:</strong> Epic Games Store (Gratis)<br><strong>Uso:</strong> Partidas de fútbol vehicular a alta velocidad y torneos rápidos.</p></div>
-                <div class="comic-item-card"><h3>10. VALHEIM</h3><p><strong>Jugadores:</strong> 1 a 10<br><strong>Plataforma:</strong> Steam<br><strong>Uso:</strong> Supervivencia vikinga de mundo abierto en modo hardcore.</p></div>
-                <div class="comic-item-card"><h3>11. ANIME SHOP SIMULATOR</h3><p><strong>Jugadores:</strong> 4 a 8<br><strong>Plataforma:</strong> Steam<br><strong>Uso:</strong> Gestión comercial con temática otaku, ideal para dinámicas de chat.</p></div>
-                <div class="comic-item-card"><h3>12. CONTENT WARNING</h3><p><strong>Jugadores:</strong> 4<br><strong>Plataforma:</strong> Steam<br><strong>Uso:</strong> Grabar metraje "aterrador" para volverse viral en el juego y en Twitch.</p></div>
-                <div class="comic-item-card"><h3>13. PLATEUP!</h3><p><strong>Jugadores:</strong> 1 a 4<br><strong>Plataforma:</strong> Steam<br><strong>Uso:</strong> Roguelike de gestión de restaurantes donde la coordinación lo es todo.</p></div>
-                <div class="comic-item-card"><h3>14. PUMMEL PARTY</h3><p><strong>Jugadores:</strong> 4 a 8<br><strong>Plataforma:</strong> Steam<br><strong>Uso:</strong> El "Mario Party" de PC repleto de minijuegos para arruinar amistades.</p></div>
-                <div class="comic-item-card"><h3>15. OVERCOOKED! 2</h3><p><strong>Jugadores:</strong> 1 a 4<br><strong>Plataforma:</strong> Steam / Consolas<br><strong>Uso:</strong> Cocina cooperativa clásica generadora de momentos de máxima tensión.</p></div>
-                <div class="comic-item-card"><h3>16. IT TAKES TWO / A WAY OUT</h3><p><strong>Jugadores:</strong> 2 (Rotativo en parejas)<br><strong>Plataforma:</strong> Steam / EA App<br><strong>Uso:</strong> Campañas narrativas intensas diseñadas exclusivamente para dos jugadores.</p></div>
-                <div class="comic-item-card"><h3>17. CALL OF DUTY: WARZONE</h3><p><strong>Jugadores:</strong> 1 a 4 (Squads)<br><strong>Plataforma:</strong> Call of Duty Official (Gratis)<br><strong>Uso:</strong> Batalla campal táctica y disparos en primera persona.</p></div>
-                <div class="comic-item-card"><h3>18. AMONG US / GOOSE GOOSE DUCK</h3><p><strong>Jugadores:</strong> 4 a 15<br><strong>Plataforma:</strong> Steam<br><strong>Uso:</strong> Deducción social, traiciones y debates caóticos con la comunidad.</p></div>
-                <div class="comic-item-card"><h3>19. 7 DAYS TO DIE / THE FOREST</h3><p><strong>Jugadores:</strong> 1 a 8<br><strong>Plataforma:</strong> Steam<br><strong>Uso:</strong> Supervivencia extrema contra zombis y caníbales en cooperativo.</p></div>
-                <div class="comic-item-card"><h3>20. PROJECT ZOMBOID</h3><p><strong>Jugadores:</strong> Servidores dedicados (4 a 32+)<br><strong>Plataforma:</strong> Steam<br><strong>Uso:</strong> El simulador de supervivencia zombie más profundo y realista del mercado.</p></div>
-            </div>
-        </section>
-
-        <!-- CAPÍTULO 7: RECLUTAMIENTO -->
-        <section id="chapter-7" class="chapter-panel">
-            <div class="chapter-tag">CAPÍTULO 07</div>
-            <h2 class="comic-title">CUARTEL DE RECLUTAMIENTO S.H.I.E.L.D.</h2>
-            <form class="comic-form" onsubmit="event.preventDefault(); alert('¡Expediente enviado con éxito a la central!');">
-                <div class="form-group"><label>Nombre de Agente / Alias:</label><input type="text" placeholder="Ej. AgenteX" required></div>
-                <div class="form-group"><label>Edad:</label><input type="number" placeholder="Ej. 25" required></div>
-                <div class="form-group"><label>País:</label><select required><option value="">Selecciona</option><option value="AR">Argentina 🇦🇷</option><option value="BO">Bolivia 🇧🇴</option><option value="MX">México 🇲🇽</option></select></div>
-                <div class="form-group"><label>Canal de Twitch / YouTube:</label><input type="url" placeholder="https://twitch.tv/tu_canal" required></div>
-                <div class="form-group"><label>Temática Principal:</label><input type="text" placeholder="Shooters, Terror, Variedad" required></div>
-                <div class="form-group"><label>Media de Espectadores (Avg Viewers):</label><input type="number" placeholder="22" required></div>
-                <button type="submit" class="comic-submit-btn">⚡ ENVIAR EXPEDIENTE DE POSTULACIÓN</button>
-            </form>
-        </section>
-
-        <!-- CAPÍTULO 8: STAFF -->
-        <section id="chapter-8" class="chapter-panel">
-            <div class="chapter-tag">CAPÍTULO 08</div>
-            <h2 class="comic-title">CONTACTO DIRECTO CON EL STAFF</h2>
-            <div class="comic-grid-list">
-                <div class="comic-item-card">
-                    <h3>LOSMORIARTYS</h3>
-                    <p><strong>Rol:</strong> Fundador y Estratega General</p>
-                    <a href="https://twitch.tv/losmoriartys" target="_blank" class="btn-link">CONTACTAR A MORIARTY</a>
-                </div>
-                <div class="comic-item-card">
-                    <h3>THER0D3R1K</h3>
-                    <p><strong>Rol:</strong> Co-Fundador y Comandante Táctico</p>
-                    <a href="https://twitch.tv" target="_blank" class="btn-link">CONTACTAR A ROD3R1K</a>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- VENTANA MODAL / EXPEDIENTE INDIVIDUAL (PÁGINAS A, B, C) -->
-    <div class="modal-overlay" id="hero-modal" onclick="if(event.target === this) closeModal();">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 id="modal-hero-title">EXPEDIENTE DE HÉROE</h2>
-                <button class="close-modal-btn" onclick="closeModal()">X</button>
-            </div>
-            <div class="modal-body">
-                <div class="modal-tabs">
-                    <button class="modal-tab-btn active" onclick="switchModalTab(0)">PÁGINA A: BIO</button>
-                    <button class="modal-tab-btn" onclick="switchModalTab(1)">PÁGINA B: STATS</button>
-                    <button class="modal-tab-btn" onclick="switchModalTab(2)">PÁGINA C: LOG</button>
-                </div>
-
-                <!-- PÁGINA A -->
-                <div class="modal-tab-pane active" id="modal-pane-0">
-                    <h3>BIOGRAFÍA TÁCTICA (PÁGINA A)</h3>
-                    <p id="modal-bio-text" style="white-space: pre-line;"></p>
-                </div>
-
-                <!-- PÁGINA B -->
-                <div class="modal-tab-pane" id="modal-pane-1">
-                    <h3>ESTADÍSTICAS & JUEGOS (PÁGINA B)</h3>
-                    <p id="modal-stats-text" style="white-space: pre-line;"></p>
-                </div>
-
-                <!-- PÁGINA C -->
-                <div class="modal-tab-pane" id="modal-pane-2">
-                    <h3>REGISTRO DE MISIÓN & LOGS (PÁGINA C)</h3>
-                    <p id="modal-log-text" style="white-space: pre-line;"></p>
-                </div>
-
-                <a id="modal-twitch-btn" href="#" target="_blank" class="twitch-link-btn">⚡ VISITAR CANAL DE TWITCH</a>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // Datos oficiales estructurados para los 8 integrantes con sus biografías exactas de la Página A
-        const heroesData = [
-            { 
-                name: "MORIARTYS", 
-                img: "moriartys.jpg", 
-                twitch: "https://twitch.tv/losmoriartys",
-                bio: "Bienvenido al videoclub 📼 Somos Demi y Ari - Los Moriartys. Pareja gamer y orgullosos nerds. Acá no hay pro-players, hay partidas que salen mal y terminan mejor. Sims de tienda, coop caótico, pelis y cómics. LUN/MIE 20HS | VIE 21HS ARG", 
-                stats: "• Avg Viewers: 25\n• Seguidores: 1,500+\n• Juegos Principales: Sims de tienda, coop caótico, pelis y cómics\n• Rendimiento: Nivel Alfa (95%)\n• Info para Devs / Marcas: Ideal para simuladores de tienda y cooperativos de alta interacción con chat.", 
-                log: "Fundadores de la iniciativa Turno Noche. Pioneros en colaboraciones cruzadas LATAM y organización de directos en conjunto." 
-            },
-            { 
-                name: "ROD3R1K", 
-                img: "rod3r1k.jpg", 
-                twitch: "https://twitch.tv",
-                bio: "Bienvenidos al canal, me llamo Roderik o mejor conocido como 'ElKrakenaso' encontraras momentos divertidos y epicos, acompañame en las partidas, diviertete!", 
-                stats: "• Avg Viewers: 30\n• Seguidores: 2,100+\n• Juegos Principales: Acción / Coop / Shooters\n• Rendimiento: Nivel Élite (98%)\n• Info para Devs / Marcas: Alto alcance en shooters y juegos de acción multijugador.", 
-                log: "Impulsor de eventos masivos, torneos multicanal y coordinación técnica del escuadrón." 
-            },
-            { 
-                name: "LADYMORIARTY", 
-                img: "ladymoriarty.jpg", 
-                twitch: "https://twitch.tv/losmoriartys",
-                bio: "Canal secundario de Los Moriartys (https://www.twitch.tv/losmoriartys). Acá encontraran gameplay chill, IRL y lo que se me cante en el momento....Lo importante es divertirnos y pasarla bien 💜", 
-                stats: "• Avg Viewers: 20\n• Seguidores: 1,200+\n• Juegos Principales: Gameplay chill, IRL y variedad\n• Rendimiento: Nivel Operativo (92%)\n• Info para Devs / Marcas: Excelente para streaming relajado e interacción directa sin filtros.", 
-                log: "Especialista en streaming relajado, IRL y entretenimiento dinámico con la comunidad." 
-            },
-            { 
-                name: "CAPY", 
-                img: "capy.jpg", 
-                twitch: "https://twitch.tv",
-                bio: "Juegos que voy a jugar en modo cooperativo:\nSMITE, League of Legends, Fall Guys, Among Us, Goose Goose Duck, Farlight 84, Overwatch, Apex Legends, Rocket League, Dead by Daylight, The Forest, KartRider Drift, Raft, 7 Days to Die, ProjectZomboid, Brawlhalla, DEVOUR, Left 4 Dead 2.", 
-                stats: "• Avg Viewers: 18\n• Seguidores: 980+\n• Juegos Principales: SMITE, LoL, Fall Guys, Among Us, Project Zomboid\n• Rendimiento: Nivel Estable (90%)\n• Info para Devs / Marcas: Amplio repertorio en multijugadores masivos y supervivencia.", 
-                log: "Representante clave de Bolivia en las misiones nocturnas cooperativas y de supervivencia." 
-            },
-            { 
-                name: "ARDIPII", 
-                img: "ardipii.jpg", 
-                twitch: "https://twitch.tv",
-                bio: "Welcome a mi humilde perfil, gasten sus puntos en alertas, saluden a todos, traigan unas palomitas y 'Lo único que podemos decidir es qué hacer con el tiempo que se nos ha dado'.", 
-                stats: "• Avg Viewers: 22\n• Seguidores: 1,350+\n• Juegos Principales: Battle Royale / Variedad\n• Rendimiento: Nivel Avanzado (93%)\n• Info para Devs / Marcas: Foco en engagement con puntos de canal y comunidad activa de México.", 
-                log: "Enlace directo con la base operativa de México en directos intensivos y comunidad." 
-            },
-            { 
-                name: "AKUMA", 
-                img: "akuma.jpg", 
-                twitch: "https://twitch.tv",
-                bio: "Directo todos los dias a las 7 de la tarde hora mexico. Talk show, friends and games.", 
-                stats: "• Avg Viewers: 28\n• Seguidores: 1,800+\n• Juegos Principales: Talk show, friends and games\n• Rendimiento: Nivel Elite (96%)\n• Info para Devs / Marcas: Transmisiones diarias constantes y espacio de charla con amigos.", 
-                log: "Veterano en transmisiones diarias, charlas con amigos y comunidad constante." 
-            },
-            { 
-                name: "ELGABII", 
-                img: "elgabii.jpg", 
-                twitch: "https://twitch.tv",
-                bio: "Rol: Habilidoso / Kinetic Manipulator\nClase: Mutant - Kinetic Energy\nPoder: Power: 7/10 | Speed: 8/10 | Energy: 9/10\nLema: 'Construyendo la victoria bloque a bloque.'", 
-                stats: "• Avg Viewers: 15\n• Seguidores: 850+\n• Juegos Principales: Sandbox / Coop / Variedad\n• Rendimiento: Nivel Estable (89%)\n• Info para Devs / Marcas: Especialista en servidores y construcción cooperativa.", 
-                log: "Especialista en arquitecturas de servidores, construcciones y supervivencia en grupo." 
-            },
-            { 
-                name: "HABITOS", 
-                img: "habitos.jpg", 
-                twitch: "https://twitch.tv",
-                bio: "habitos_atomicos hace streams de Call of Duty: Warzone, Solo chateando y Pro Evolution Soccer 2008.", 
-                stats: "• Avg Viewers: 19\n• Seguidores: 1,100+\n• Juegos Principales: Call of Duty: Warzone, Solo chateando, PES 2008\n• Rendimiento: Nivel 9 | Energía: 100%\n• Info para Devs / Marcas: Enfoque en shooters tácticos y deportes virtuales.", 
-                log: "Impulsor de hábitos de crecimiento, constancia y transmisiones dinámicas." 
-            }
-        ];
-
-        function renderRoster() {
-            const container = document.getElementById('roster-container');
-            if (!container) return;
-            container.innerHTML = '';
-            heroesData.forEach((hero, index) => {
-                const card = document.createElement('div');
-                card.className = 'hero-card';
-                card.onclick = () => openHeroModal(index);
-                card.innerHTML = `
-                    <div class="hero-card-img-wrapper">
-                        <img src="${hero.img}" alt="${hero.name}" onerror="this.src='https://via.placeholder.com/300x300/1a202c/ffde00?text=${hero.name}'">
-                    </div>
-                    <div class="hero-card-info">
-                        <h3>${hero.name}</h3>
-                        <div class="hero-click-hint">⚡ VER EXPEDIENTE (A - B - C)</div>
-                    </div>
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        function openHeroModal(index) {
-            const hero = heroesData[index];
-            document.getElementById('modal-hero-title').innerText = `EXPEDIENTE: ${hero.name}`;
-            document.getElementById('modal-bio-text').innerText = hero.bio;
-            document.getElementById('modal-stats-text').innerText = hero.stats;
-            document.getElementById('modal-log-text').innerText = hero.log;
-            document.getElementById('modal-twitch-btn').href = hero.twitch;
-            
-            document.getElementById('hero-modal').classList.add('active');
-            switchModalTab(0);
-        }
-
-        function closeModal() {
-            document.getElementById('hero-modal').classList.remove('active');
-        }
-
-        function switchModalTab(tabIndex) {
-            for (let t = 0; t < 3; t++) {
-                const pane = document.getElementById(`modal-pane-${t}`);
-                const btn = document.querySelectorAll('.modal-tab-btn')[t];
-                if (pane) pane.classList.remove('active');
-                if (btn) btn.classList.remove('active');
-            }
-            const activePane = document.getElementById(`modal-pane-${tabIndex}`);
-            const activeBtn = document.querySelectorAll('.modal-tab-btn')[tabIndex];
-            if (activePane) activePane.classList.add('active');
-            if (activeBtn) activeBtn.classList.add('active');
-        }
-
-        function switchChapter(chapterNum) {
-            const panels = document.querySelectorAll('.chapter-panel');
-            panels.forEach(panel => panel.classList.remove('active'));
-            const buttons = document.querySelectorAll('.nav-btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
-
-            const targetPanel = document.getElementById(`chapter-${chapterNum}`);
-            if (targetPanel) targetPanel.classList.add('active');
-            if (buttons[chapterNum - 1]) buttons[chapterNum - 1].classList.add('active');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        window.onload = function() {
-            renderRoster();
-        };
-    </script>
-</body>
-</html>
+            font-family: 'Montserrat', sans-
