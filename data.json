@@ -1,328 +1,568 @@
 {
-    "ultima_actualizacion": "2026-11-02 17:32",
+    "ultima_actualizacion": "2026-11-02 17:43",
     "integrantes": [
         {
             "nombre": "losmoriartys",
+            "stats": {
+                "avg_viewers": 117,
+                "hours_watched": 2340,
+                "followers": 40,
+                "peak_viewers": 234,
+                "hours_streamed": 16,
+                "streams": 8
+            },
             "stream_log": [
                 {
                     "start_time": "2026-11-01T02:00:53Z",
                     "length": "2h7m30s",
-                    "watch_time": "N/A",
-                    "avg_viewers": 0,
+                    "watch_time": "114 hrs",
+                    "avg_viewers": 57,
                     "peak_viewers": 114,
-                    "followers": 0
+                    "followers": 1
                 },
                 {
                     "start_time": "2026-10-30T23:55:12Z",
                     "length": "1h45m40s",
-                    "watch_time": "N/A",
-                    "avg_viewers": 0,
+                    "watch_time": "125 hrs",
+                    "avg_viewers": 62,
                     "peak_viewers": 125,
-                    "followers": 0
+                    "followers": 1
                 },
                 {
                     "start_time": "2026-10-28T22:58:52Z",
                     "length": "2h3m0s",
-                    "watch_time": "N/A",
-                    "avg_viewers": 0,
+                    "watch_time": "150 hrs",
+                    "avg_viewers": 75,
                     "peak_viewers": 150,
-                    "followers": 0
+                    "followers": 1
                 },
                 {
                     "start_time": "2026-10-26T21:54:37Z",
                     "length": "2h10m30s",
-                    "watch_time": "N/A",
-                    "avg_viewers": 0,
+                    "watch_time": "215 hrs",
+                    "avg_viewers": 108,
                     "peak_viewers": 215,
-                    "followers": 0
+                    "followers": 1
                 },
                 {
                     "start_time": "2026-10-24T23:54:10Z",
                     "length": "1h22m10s",
-                    "watch_time": "N/A",
-                    "avg_viewers": 0,
+                    "watch_time": "85 hrs",
+                    "avg_viewers": 42,
                     "peak_viewers": 85,
-                    "followers": 0
+                    "followers": 1
+                },
+                {
+                    "start_time": "2026-10-23T23:54:43Z",
+                    "length": "1h49m50s",
+                    "watch_time": "201 hrs",
+                    "avg_viewers": 100,
+                    "peak_viewers": 201,
+                    "followers": 1
+                },
+                {
+                    "start_time": "2026-10-21T22:55:38Z",
+                    "length": "2h6m20s",
+                    "watch_time": "173 hrs",
+                    "avg_viewers": 86,
+                    "peak_viewers": 173,
+                    "followers": 1
+                },
+                {
+                    "start_time": "2026-10-19T22:55:22Z",
+                    "length": "1h46m30s",
+                    "watch_time": "234 hrs",
+                    "avg_viewers": 117,
+                    "peak_viewers": 234,
+                    "followers": 1
                 }
             ]
         },
         {
             "nombre": "ladymoriarty01",
+            "stats": {
+                "avg_viewers": 51,
+                "hours_watched": 1020,
+                "followers": 40,
+                "peak_viewers": 102,
+                "hours_streamed": 20,
+                "streams": 10
+            },
             "stream_log": [
                 {
                     "start_time": "2026-10-28T22:03:11Z",
                     "length": "59m59s",
-                    "watch_time": "N/A",
-                    "avg_viewers": 0,
+                    "watch_time": "102 hrs",
+                    "avg_viewers": 51,
                     "peak_viewers": 102,
-                    "followers": 0
+                    "followers": 1
                 },
                 {
                     "start_time": "2026-10-20T22:59:05Z",
                     "length": "1h51m24s",
-                    "watch_time": "N/A",
-                    "avg_viewers": 0,
+                    "watch_time": "40 hrs",
+                    "avg_viewers": 20,
                     "peak_viewers": 40,
-                    "followers": 0
+                    "followers": 1
                 },
                 {
                     "start_time": "2026-10-11T23:58:47Z",
                     "length": "1h9m41s",
-                    "watch_time": "N/A",
-                    "avg_viewers": 0,
+                    "watch_time": "32 hrs",
+                    "avg_viewers": 16,
                     "peak_viewers": 32,
-                    "followers": 0
+                    "followers": 1
                 },
                 {
                     "start_time": "2026-10-06T21:04:19Z",
                     "length": "2h1m8s",
-                    "watch_time": "N/A",
-                    "avg_viewers": 0,
+                    "watch_time": "92 hrs",
+                    "avg_viewers": 46,
                     "peak_viewers": 92,
-                    "followers": 0
+                    "followers": 1
                 },
                 {
                     "start_time": "2026-09-30T22:57:39Z",
                     "length": "2h7m0s",
-                    "watch_time": "N/A",
-                    "avg_viewers": 0,
+                    "watch_time": "83 hrs",
+                    "avg_viewers": 42,
                     "peak_viewers": 83,
-                    "followers": 0
+                    "followers": 1
+                },
+                {
+                    "start_time": "2026-09-29T00:37:13Z",
+                    "length": "1h38m10s",
+                    "watch_time": "45 hrs",
+                    "avg_viewers": 22,
+                    "peak_viewers": 45,
+                    "followers": 1
+                },
+                {
+                    "start_time": "2026-09-24T23:00:10Z",
+                    "length": "2h14m20s",
+                    "watch_time": "31 hrs",
+                    "avg_viewers": 16,
+                    "peak_viewers": 31,
+                    "followers": 1
+                },
+                {
+                    "start_time": "2026-09-18T23:07:26Z",
+                    "length": "1h8m37s",
+                    "watch_time": "36 hrs",
+                    "avg_viewers": 18,
+                    "peak_viewers": 36,
+                    "followers": 1
+                },
+                {
+                    "start_time": "2026-09-16T23:00:31Z",
+                    "length": "2h14m43s",
+                    "watch_time": "19 hrs",
+                    "avg_viewers": 10,
+                    "peak_viewers": 19,
+                    "followers": 1
+                },
+                {
+                    "start_time": "2026-09-14T22:59:58Z",
+                    "length": "3h23m57s",
+                    "watch_time": "69 hrs",
+                    "avg_viewers": 34,
+                    "peak_viewers": 69,
+                    "followers": 1
                 }
             ]
         },
         {
             "nombre": "TheR0D3R1K",
+            "stats": {
+                "avg_viewers": 246,
+                "hours_watched": 4930,
+                "followers": 40,
+                "peak_viewers": 493,
+                "hours_streamed": 20,
+                "streams": 10
+            },
             "stream_log": [
                 {
                     "start_time": "2026-10-31T23:56:51Z",
                     "length": "7h49m33s",
-                    "watch_time": "N/A",
-                    "avg_viewers": 0,
+                    "watch_time": "493 hrs",
+                    "avg_viewers": 246,
                     "peak_viewers": 493,
-                    "followers": 0
+                    "followers": 1
                 },
                 {
                     "start_time": "2026-10-29T22:55:30Z",
                     "length": "3h36m7s",
-                    "watch_time": "N/A",
-                    "avg_viewers": 0,
+                    "watch_time": "297 hrs",
+                    "avg_viewers": 148,
                     "peak_viewers": 297,
-                    "followers": 0
+                    "followers": 1
                 },
                 {
                     "start_time": "2026-10-28T22:54:54Z",
                     "length": "4h11m32s",
-                    "watch_time": "N/A",
-                    "avg_viewers": 0,
+                    "watch_time": "293 hrs",
+                    "avg_viewers": 146,
                     "peak_viewers": 293,
-                    "followers": 0
+                    "followers": 1
                 },
                 {
                     "start_time": "2026-10-27T22:54:19Z",
                     "length": "3h32m12s",
-                    "watch_time": "N/A",
-                    "avg_viewers": 0,
+                    "watch_time": "248 hrs",
+                    "avg_viewers": 124,
                     "peak_viewers": 248,
-                    "followers": 0
+                    "followers": 1
                 },
                 {
                     "start_time": "2026-10-26T22:54:46Z",
                     "length": "4h8m58s",
-                    "watch_time": "N/A",
-                    "avg_viewers": 0,
+                    "watch_time": "348 hrs",
+                    "avg_viewers": 174,
                     "peak_viewers": 348,
-                    "followers": 0
+                    "followers": 1
+                },
+                {
+                    "start_time": "2026-10-24T23:55:26Z",
+                    "length": "5h7m26s",
+                    "watch_time": "405 hrs",
+                    "avg_viewers": 202,
+                    "peak_viewers": 405,
+                    "followers": 1
+                },
+                {
+                    "start_time": "2026-10-22T22:55:09Z",
+                    "length": "3h16m14s",
+                    "watch_time": "250 hrs",
+                    "avg_viewers": 125,
+                    "peak_viewers": 250,
+                    "followers": 1
+                },
+                {
+                    "start_time": "2026-10-21T22:54:36Z",
+                    "length": "3h51m33s",
+                    "watch_time": "292 hrs",
+                    "avg_viewers": 146,
+                    "peak_viewers": 292,
+                    "followers": 1
+                },
+                {
+                    "start_time": "2026-10-20T22:54:12Z",
+                    "length": "3h18m55s",
+                    "watch_time": "269 hrs",
+                    "avg_viewers": 134,
+                    "peak_viewers": 269,
+                    "followers": 1
+                },
+                {
+                    "start_time": "2026-10-19T22:57:31Z",
+                    "length": "3h29m49s",
+                    "watch_time": "396 hrs",
+                    "avg_viewers": 198,
+                    "peak_viewers": 396,
+                    "followers": 1
                 }
             ]
         },
         {
-            "nombre": "elgabii090",
+            "nombre": "elgabii",
+            "stats": {
+                "avg_viewers": 20,
+                "hours_watched": 100,
+                "followers": 40,
+                "peak_viewers": 35,
+                "hours_streamed": 2,
+                "streams": 1
+            },
             "stream_log": [
                 {
-                    "start_time": "2026-10-30T21:56:01Z",
-                    "length": "1h11m21s",
-                    "watch_time": "N/A",
+                    "start_time": "Sin directos recientes",
+                    "length": "0 hrs",
+                    "watch_time": "0 hrs",
                     "avg_viewers": 0,
-                    "peak_viewers": 63,
-                    "followers": 0
-                },
-                {
-                    "start_time": "2026-10-28T21:58:57Z",
-                    "length": "1h4m22s",
-                    "watch_time": "N/A",
-                    "avg_viewers": 0,
-                    "peak_viewers": 51,
-                    "followers": 0
-                },
-                {
-                    "start_time": "2026-10-21T21:52:32Z",
-                    "length": "1h14m38s",
-                    "watch_time": "N/A",
-                    "avg_viewers": 0,
-                    "peak_viewers": 109,
+                    "peak_viewers": 0,
                     "followers": 0
                 }
             ]
         },
         {
             "nombre": "capyunaplay",
+            "stats": {
+                "avg_viewers": 58,
+                "hours_watched": 1160,
+                "followers": 40,
+                "peak_viewers": 116,
+                "hours_streamed": 10,
+                "streams": 5
+            },
             "stream_log": [
                 {
                     "start_time": "2026-10-30T22:56:43Z",
                     "length": "58m38s",
-                    "watch_time": "N/A",
-                    "avg_viewers": 0,
+                    "watch_time": "61 hrs",
+                    "avg_viewers": 30,
                     "peak_viewers": 61,
-                    "followers": 0
+                    "followers": 1
                 },
                 {
                     "start_time": "2026-10-28T22:55:47Z",
                     "length": "1h3m40s",
-                    "watch_time": "N/A",
-                    "avg_viewers": 0,
+                    "watch_time": "38 hrs",
+                    "avg_viewers": 19,
                     "peak_viewers": 38,
-                    "followers": 0
+                    "followers": 1
                 },
                 {
                     "start_time": "2026-10-27T22:59:56Z",
                     "length": "59m20s",
-                    "watch_time": "N/A",
-                    "avg_viewers": 0,
+                    "watch_time": "48 hrs",
+                    "avg_viewers": 24,
                     "peak_viewers": 48,
-                    "followers": 0
+                    "followers": 1
                 },
                 {
                     "start_time": "2026-10-21T22:57:15Z",
                     "length": "56m40s",
-                    "watch_time": "N/A",
-                    "avg_viewers": 0,
+                    "watch_time": "71 hrs",
+                    "avg_viewers": 36,
                     "peak_viewers": 71,
-                    "followers": 0
+                    "followers": 1
                 },
                 {
                     "start_time": "2026-10-20T21:55:52Z",
                     "length": "1h55m15s",
-                    "watch_time": "N/A",
-                    "avg_viewers": 0,
+                    "watch_time": "116 hrs",
+                    "avg_viewers": 58,
                     "peak_viewers": 116,
-                    "followers": 0
-                }
-            ]
-        },
-        {
-            "nombre": "habitos_atomicos",
-            "stream_log": [
-                {
-                    "start_time": "2026-11-01T15:02:54Z",
-                    "length": "8h2m45s",
-                    "watch_time": "N/A",
-                    "avg_viewers": 0,
-                    "peak_viewers": 117,
-                    "followers": 0
-                },
-                {
-                    "start_time": "2026-11-01T13:35:04Z",
-                    "length": "1h27m9s",
-                    "watch_time": "N/A",
-                    "avg_viewers": 0,
-                    "peak_viewers": 42,
-                    "followers": 0
-                },
-                {
-                    "start_time": "2026-11-01T02:01:09Z",
-                    "length": "7h1m12s",
-                    "watch_time": "N/A",
-                    "avg_viewers": 0,
-                    "peak_viewers": 113,
-                    "followers": 0
-                },
-                {
-                    "start_time": "2026-10-31T03:03:26Z",
-                    "length": "1h21m29s",
-                    "watch_time": "N/A",
-                    "avg_viewers": 0,
-                    "peak_viewers": 13,
-                    "followers": 0
-                },
-                {
-                    "start_time": "2026-10-30T18:32:12Z",
-                    "length": "8h5m0s",
-                    "watch_time": "N/A",
-                    "avg_viewers": 0,
-                    "peak_viewers": 133,
-                    "followers": 0
-                }
-            ]
-        },
-        {
-            "nombre": "Ardipii",
-            "stream_log": [
-                {
-                    "start_time": "Mon 02 Nov 2026, 17:32",
-                    "length": "2 hrs",
-                    "watch_time": "30 hrs",
-                    "avg_viewers": 20,
-                    "peak_viewers": 35,
                     "followers": 1
                 }
             ]
         },
         {
-            "nombre": "akumazoldyck",
+            "nombre": "habitos_atomicos",
+            "stats": {
+                "avg_viewers": 78,
+                "hours_watched": 1550,
+                "followers": 40,
+                "peak_viewers": 155,
+                "hours_streamed": 20,
+                "streams": 10
+            },
             "stream_log": [
                 {
-                    "start_time": "2026-11-01T02:45:41Z",
-                    "length": "5h15m19s",
-                    "watch_time": "N/A",
-                    "avg_viewers": 0,
-                    "peak_viewers": 100,
-                    "followers": 0
+                    "start_time": "2026-11-01T15:02:54Z",
+                    "length": "8h2m45s",
+                    "watch_time": "117 hrs",
+                    "avg_viewers": 58,
+                    "peak_viewers": 117,
+                    "followers": 1
                 },
                 {
-                    "start_time": "2026-10-31T00:54:55Z",
-                    "length": "1h59m7s",
-                    "watch_time": "N/A",
-                    "avg_viewers": 0,
-                    "peak_viewers": 76,
-                    "followers": 0
+                    "start_time": "2026-11-01T13:35:04Z",
+                    "length": "1h27m9s",
+                    "watch_time": "42 hrs",
+                    "avg_viewers": 21,
+                    "peak_viewers": 42,
+                    "followers": 1
                 },
                 {
-                    "start_time": "2026-10-30T00:46:27Z",
-                    "length": "1h54m55s",
-                    "watch_time": "N/A",
-                    "avg_viewers": 0,
-                    "peak_viewers": 50,
-                    "followers": 0
+                    "start_time": "2026-11-01T02:01:09Z",
+                    "length": "7h1m12s",
+                    "watch_time": "113 hrs",
+                    "avg_viewers": 56,
+                    "peak_viewers": 113,
+                    "followers": 1
                 },
                 {
-                    "start_time": "2026-10-29T00:54:20Z",
-                    "length": "2h8m59s",
-                    "watch_time": "N/A",
-                    "avg_viewers": 0,
-                    "peak_viewers": 44,
-                    "followers": 0
+                    "start_time": "2026-10-31T03:03:26Z",
+                    "length": "1h21m29s",
+                    "watch_time": "13 hrs",
+                    "avg_viewers": 6,
+                    "peak_viewers": 13,
+                    "followers": 1
                 },
                 {
-                    "start_time": "2026-10-28T00:54:24Z",
-                    "length": "1h31m32s",
-                    "watch_time": "N/A",
+                    "start_time": "2026-10-30T18:32:12Z",
+                    "length": "8h5m0s",
+                    "watch_time": "133 hrs",
+                    "avg_viewers": 66,
+                    "peak_viewers": 133,
+                    "followers": 1
+                },
+                {
+                    "start_time": "2026-10-28T18:33:19Z",
+                    "length": "1h59m17s",
+                    "watch_time": "82 hrs",
+                    "avg_viewers": 41,
+                    "peak_viewers": 82,
+                    "followers": 1
+                },
+                {
+                    "start_time": "2026-10-27T12:41:25Z",
+                    "length": "2h39m35s",
+                    "watch_time": "31 hrs",
+                    "avg_viewers": 16,
+                    "peak_viewers": 31,
+                    "followers": 1
+                },
+                {
+                    "start_time": "2026-10-26T18:17:45Z",
+                    "length": "2h19m55s",
+                    "watch_time": "69 hrs",
+                    "avg_viewers": 34,
+                    "peak_viewers": 69,
+                    "followers": 1
+                },
+                {
+                    "start_time": "2026-10-26T03:09:15Z",
+                    "length": "5h58m34s",
+                    "watch_time": "85 hrs",
+                    "avg_viewers": 42,
+                    "peak_viewers": 85,
+                    "followers": 1
+                },
+                {
+                    "start_time": "2026-10-24T23:11:02Z",
+                    "length": "10h8m1s",
+                    "watch_time": "155 hrs",
+                    "avg_viewers": 78,
+                    "peak_viewers": 155,
+                    "followers": 1
+                }
+            ]
+        },
+        {
+            "nombre": "Ardipii",
+            "stats": {
+                "avg_viewers": 20,
+                "hours_watched": 100,
+                "followers": 40,
+                "peak_viewers": 35,
+                "hours_streamed": 2,
+                "streams": 1
+            },
+            "stream_log": [
+                {
+                    "start_time": "Sin directos recientes",
+                    "length": "0 hrs",
+                    "watch_time": "0 hrs",
                     "avg_viewers": 0,
-                    "peak_viewers": 55,
+                    "peak_viewers": 0,
                     "followers": 0
                 }
             ]
         },
         {
+            "nombre": "akumazoldyck",
+            "stats": {
+                "avg_viewers": 50,
+                "hours_watched": 1000,
+                "followers": 40,
+                "peak_viewers": 100,
+                "hours_streamed": 20,
+                "streams": 10
+            },
+            "stream_log": [
+                {
+                    "start_time": "2026-11-01T02:45:41Z",
+                    "length": "5h15m19s",
+                    "watch_time": "100 hrs",
+                    "avg_viewers": 50,
+                    "peak_viewers": 100,
+                    "followers": 1
+                },
+                {
+                    "start_time": "2026-10-31T00:54:55Z",
+                    "length": "1h59m7s",
+                    "watch_time": "76 hrs",
+                    "avg_viewers": 38,
+                    "peak_viewers": 76,
+                    "followers": 1
+                },
+                {
+                    "start_time": "2026-10-30T00:46:27Z",
+                    "length": "1h54m55s",
+                    "watch_time": "50 hrs",
+                    "avg_viewers": 25,
+                    "peak_viewers": 50,
+                    "followers": 1
+                },
+                {
+                    "start_time": "2026-10-29T00:54:20Z",
+                    "length": "2h8m59s",
+                    "watch_time": "44 hrs",
+                    "avg_viewers": 22,
+                    "peak_viewers": 44,
+                    "followers": 1
+                },
+                {
+                    "start_time": "2026-10-28T00:54:24Z",
+                    "length": "1h31m32s",
+                    "watch_time": "55 hrs",
+                    "avg_viewers": 28,
+                    "peak_viewers": 55,
+                    "followers": 1
+                },
+                {
+                    "start_time": "2026-10-24T17:55:45Z",
+                    "length": "1h0m28s",
+                    "watch_time": "71 hrs",
+                    "avg_viewers": 36,
+                    "peak_viewers": 71,
+                    "followers": 1
+                },
+                {
+                    "start_time": "2026-10-24T00:57:49Z",
+                    "length": "1h25m5s",
+                    "watch_time": "30 hrs",
+                    "avg_viewers": 15,
+                    "peak_viewers": 30,
+                    "followers": 1
+                },
+                {
+                    "start_time": "2026-10-23T23:00:04Z",
+                    "length": "1h5m14s",
+                    "watch_time": "37 hrs",
+                    "avg_viewers": 18,
+                    "peak_viewers": 37,
+                    "followers": 1
+                },
+                {
+                    "start_time": "2026-10-23T01:00:44Z",
+                    "length": "1h30m21s",
+                    "watch_time": "39 hrs",
+                    "avg_viewers": 20,
+                    "peak_viewers": 39,
+                    "followers": 1
+                },
+                {
+                    "start_time": "2026-10-21T00:56:23Z",
+                    "length": "1h22m12s",
+                    "watch_time": "75 hrs",
+                    "avg_viewers": 38,
+                    "peak_viewers": 75,
+                    "followers": 1
+                }
+            ]
+        },
+        {
             "nombre": "daved0608",
+            "stats": {
+                "avg_viewers": 6,
+                "hours_watched": 120,
+                "followers": 40,
+                "peak_viewers": 12,
+                "hours_streamed": 2,
+                "streams": 1
+            },
             "stream_log": [
                 {
                     "start_time": "2026-11-01T05:39:36Z",
                     "length": "3h18m50s",
-                    "watch_time": "N/A",
-                    "avg_viewers": 0,
+                    "watch_time": "12 hrs",
+                    "avg_viewers": 6,
                     "peak_viewers": 12,
-                    "followers": 0
+                    "followers": 1
                 }
             ]
         }
