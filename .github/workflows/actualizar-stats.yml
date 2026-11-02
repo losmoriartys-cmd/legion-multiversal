@@ -28,5 +28,5 @@ jobs:
       - name: Commit and push changes
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: "🤖 Actualización automática de estadísticas diarias"
+          commit_message: "🤖 Actualización automática de estadísticas de Twitch"
           file_pattern: data.json
