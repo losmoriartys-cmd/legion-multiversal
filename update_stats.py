@@ -3,8 +3,7 @@ import json
 import urllib.request
 import urllib.parse
 
-# 1. Credenciales y canales
-CLIENT_ID = "gp762nuuoqcoxypju8c569th9wz7q5" # Client ID público estándar de Twitch Helix para apps
+CLIENT_ID = "gp762nuuoqcoxypju8c569th9wz7q5"
 CLIENT_SECRET = os.environ.get("TWITCH_CLIENT_SECRET")
 
 CHANNELS = [
@@ -33,7 +32,7 @@ def get_twitch_token():
             res_data = json.loads(response.read().decode())
             return res_data.get("access_token")
     except Exception as e:
-        print(f"Error obteniendo token de Twitch: {e}")
+        print(f"Error obteniendo token: {e}")
         return None
 
 def fetch_twitch_data(token, usernames):
@@ -54,12 +53,11 @@ def fetch_twitch_data(token, usernames):
 def main():
     token = get_twitch_token()
     if not token:
-        print("No se pudo autenticar con Twitch.")
+        print("Fallo de autenticación con la API.")
         return
 
     users_data = fetch_twitch_data(token, CHANNELS)
     
-    # Estructura final para el data.json que consume la web
     output_data = {}
     for user in users_data:
         login = user.get("login").lower()
@@ -75,18 +73,18 @@ def main():
                 "peakViewers": "80",
                 "hoursStreamed": "30",
                 "streamsCount": "15",
-                "ranks": "Actualizado automáticamente por Twitch API"
+                "ranks": "Sincronizado automáticamente por API de Twitch"
             },
             "streamsLog": [
-                { "time": "Actualizado hoy", "length": "N/A", "watch": "0", "avg": 0, "peak": 0, "followers": 0 }
+                { "time": "Último registro automático", "length": "N/A", "watch": "0", "avg": 0, "peak": 0, "followers": 0 }
             ]
         }
 
-    # Guardar data.json
+    # Guardar el archivo JSON que consumirá la página web
     with open("data.json", "w", encoding="utf-8") as f:
         json.dump(output_data, f, ensure_ascii=False, indent=4)
     
-    print("¡Archivo data.json actualizado correctamente con datos de Twitch!")
+    print("¡data.json generado y actualizado con éxito para los 9 creadores!")
 
 if __name__ == "__main__":
     main()
