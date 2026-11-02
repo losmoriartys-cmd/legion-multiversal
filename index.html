@@ -239,6 +239,18 @@
         }
 
 
+
+        .institute-banner{display:flex;align-items:center;gap:20px;padding:22px;margin:12px 0 18px;background:linear-gradient(110deg,#172438,#101722);border:3px solid #000;box-shadow:6px 6px 0 #000}
+        .institute-stamp{flex:0 0 94px;height:94px;display:grid;place-items:center;text-align:center;border:3px double #ffde00;color:#ffde00;font-family:'Bangers',cursive;font-size:1.3rem;transform:rotate(-5deg)}
+        .institute-banner h3{font-family:'Bangers',cursive;font-size:1.8rem;color:#ffde00;letter-spacing:1px;margin-bottom:6px}
+        .institute-banner p{color:#d5deea;line-height:1.6}
+        .institute-counts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:18px 0 24px}
+        .institute-counts div{background:#1a202c;border:2px solid #000;box-shadow:4px 4px 0 #000;padding:12px;text-align:center;display:flex;flex-direction:column;gap:2px}
+        .institute-counts strong{color:#ffde00;font-family:'Bangers',cursive;font-size:2rem}
+        .institute-counts span{color:#aab7c8;font-size:.75rem;font-weight:900;letter-spacing:1px}
+        .hero-power-text{white-space:pre-line;color:#e2e8f0;line-height:1.7}
+        @media(max-width:560px){.institute-banner{align-items:flex-start;padding:14px;gap:14px}.institute-stamp{flex-basis:70px;height:70px;font-size:1rem}.institute-counts{gap:7px}.institute-counts div{padding:9px 4px}.institute-counts span{font-size:.62rem}}
+
         .roster-intro { color:#cbd5e0; line-height:1.7; margin:0 0 18px; }
         .roster-legend { display:flex; flex-wrap:wrap; gap:10px; margin:0 0 26px; }
         .rank-director,.rank-teacher,.rank-student,.hero-rank { display:inline-block; padding:6px 12px; border:2px solid #05070b; font-family:'Bangers',cursive; letter-spacing:1px; box-shadow:3px 3px 0 #000; }
@@ -618,10 +630,10 @@
     <header>
         <div class="header-top">
             <div class="logo-container">
-                <div class="badge-comic">S.H.I.E.L.D.</div>
+                <div class="badge-comic">INSTITUTO</div>
                 <div class="title-group">
                     <h1>LOS S3X-MEN</h1>
-                    <p>TURNO NOCHE LATAM • ARCHIVO SECRETO COMERCIAL</p>
+                    <p>INSTITUTO DE TALENTOS EXTRAORDINARIOS • TURNO NOCHE LATAM</p>
                 </div>
             </div>
         </div>
@@ -670,8 +682,10 @@
         <!-- CAPÍTULO 2: ROSTER DE HÉROES EN 1RA PLANA -->
         <section id="chapter-2" class="chapter-panel">
             <div class="chapter-tag">CAPÍTULO 02</div>
-            <h2 class="comic-title">INSTITUTO XAVIER — ROSTER OFICIAL</h2>
-            <p class="roster-intro">Una escuela para talentos extraordinarios. La dirección guía el instituto, el cuerpo docente prepara a la próxima generación y los estudiantes descubren su potencial. Seleccioná una ficha para abrir su expediente.</p>
+            <h2 class="comic-title">INSTITUTO S3X-MEN — ROSTER OFICIAL</h2>
+            <div class="institute-banner"><div class="institute-stamp">ARCHIVO<br>ACADÉMICO</div><div><h3>UN LUGAR PARA CADA TALENTO EXTRAORDINARIO</h3><p>La Dirección coordina el instituto, el cuerpo docente comparte experiencia y los estudiantes desarrollan su potencial. Cada integrante tiene un expediente propio y un lugar dentro de la comunidad.</p></div></div>
+            <div class="institute-counts"><div><strong>02</strong><span>DIRECTORES</span></div><div><strong>06</strong><span>PROFESORES</span></div><div><strong>01</strong><span>ESTUDIANTE</span></div></div>
+            <p class="roster-intro">Seleccioná una ficha para consultar su biografía, poderes, estadísticas y registro de misiones.</p>
             <div class="roster-legend"><span class="rank-director">DIRECCIÓN</span><span class="rank-teacher">CUERPO DOCENTE</span><span class="rank-student">ESTUDIANTES</span></div>
             <div id="roster-container">
                 <!-- Se inyectarán dinámicamente las tarjetas de los héroes -->
@@ -804,28 +818,22 @@
             </div>
             <div class="modal-body">
                 <div class="modal-tabs">
-                    <button class="modal-tab-btn active" onclick="switchModalTab(0)">PÁGINA A: BIO</button>
-                    <button class="modal-tab-btn" onclick="switchModalTab(1)">PÁGINA B: STATS</button>
-                    <button class="modal-tab-btn" onclick="switchModalTab(2)">PÁGINA C: LOG</button>
+                    <button class="modal-tab-btn active" onclick="switchModalTab(0)">A: BIOGRAFÍA</button>
+                    <button class="modal-tab-btn" onclick="switchModalTab(1)">B: PODERES</button>
+                    <button class="modal-tab-btn" onclick="switchModalTab(2)">C: ESTADÍSTICAS</button>
+                    <button class="modal-tab-btn" onclick="switchModalTab(3)">D: MISIONES</button>
                 </div>
 
                 <!-- PÁGINA A -->
                 <div class="modal-tab-pane active" id="modal-pane-0">
-                    <h3>BIOGRAFÍA TÁCTICA (PÁGINA A)</h3>
+                    <h3>EXPEDIENTE PERSONAL — BIOGRAFÍA</h3>
                     <p id="modal-bio-text" style="white-space: pre-line;"></p>
                 </div>
 
                 <!-- PÁGINA B -->
-                <div class="modal-tab-pane" id="modal-pane-1">
-                    <h3>ESTADÍSTICAS & JUEGOS (PÁGINA B)</h3>
-                    <p id="modal-stats-text" style="white-space: pre-line;"></p>
-                </div>
-
-                <!-- PÁGINA C -->
-                <div class="modal-tab-pane" id="modal-pane-2">
-                    <h3>REGISTRO DE MISIÓN & LOGS (PÁGINA C)</h3>
-                    <p id="modal-log-text" style="white-space: pre-line;"></p>
-                </div>
+                <div class="modal-tab-pane" id="modal-pane-1"><h3>HABILIDADES Y PODERES</h3><p id="modal-powers-text" class="hero-power-text"></p></div>
+                <div class="modal-tab-pane" id="modal-pane-2"><h3>ESTADÍSTICAS DE TWITCH Y JUEGOS</h3><p id="modal-stats-text" style="white-space:pre-line"></p></div>
+                <div class="modal-tab-pane" id="modal-pane-3"><h3>REGISTRO DE MISIONES Y LOGROS</h3><p id="modal-log-text" style="white-space:pre-line"></p></div>
 
                 <a id="modal-twitch-btn" href="#" target="_blank" class="twitch-link-btn">⚡ VISITAR CANAL DE TWITCH</a>
             </div>
@@ -833,14 +841,15 @@
     </div>
 
     <script>
-        // Datos oficiales estructurados para los 8 integrantes con sus biografías exactas de la Página A
+        // Fuente de verdad del roster: editar role para cambiar jerarquía; completar powers y log con datos confirmados.
         const heroesData = [
             { 
                 name: "MORIARTYS",
                 role: "director", 
                 img: "moriartys.jpg", 
                 twitch: "https://twitch.tv/losmoriartys",
-                bio: "Bienvenido al videoclub 📼 Somos Demi y Ari - Los Moriartys. Pareja gamer y orgullosos nerds. Acá no hay pro-players, hay partidas que salen mal y terminan mejor. Sims de tienda, coop caótico, pelis y cómics. LUN/MIE 20HS | VIE 21HS ARG", 
+                bio: "Bienvenido al videoclub 📼 Somos Demi y Ari - Los Moriartys. Pareja gamer y orgullosos nerds. Acá no hay pro-players, hay partidas que salen mal y terminan mejor. Sims de tienda, coop caótico, pelis y cómics. LUN/MIE 20HS | VIE 21HS ARG",
+                powers: "Perfil de habilidades en construcción. Se completará con la descripción de personaje aprobada por el integrante.",
                 stats: "Métricas en proceso de integración. Los datos se publicarán cuando estén conectados a una fuente verificable y acompañados de su período de medición.", 
                 log: "Fundadores de la iniciativa Turno Noche. Pioneros en colaboraciones cruzadas LATAM y organización de directos en conjunto." 
             },
@@ -849,7 +858,8 @@
                 role: "director", 
                 img: "rod3r1k.jpg", 
                 twitch: "https://twitch.tv",
-                bio: "Bienvenidos al canal, me llamo Roderik o mejor conocido como 'ElKrakenaso' encontraras momentos divertidos y epicos, acompañame en las partidas, diviertete!", 
+                bio: "Bienvenidos al canal, me llamo Roderik o mejor conocido como 'ElKrakenaso' encontraras momentos divertidos y epicos, acompañame en las partidas, diviertete!",
+                powers: "Perfil de habilidades en construcción. Pendiente de confirmar con el integrante.",
                 stats: "Métricas en proceso de integración. Los datos se publicarán cuando estén conectados a una fuente verificable y acompañados de su período de medición.", 
                 log: "Impulsor de eventos masivos, torneos multicanal y coordinación técnica del escuadrón." 
             },
@@ -858,7 +868,8 @@
                 role: "teacher", 
                 img: "ladymoriarty.jpg", 
                 twitch: "https://twitch.tv/losmoriartys",
-                bio: "Canal secundario de Los Moriartys (https://www.twitch.tv/losmoriartys). Acá encontraran gameplay chill, IRL y lo que se me cante en el momento....Lo importante es divertirnos y pasarla bien 💜", 
+                bio: "Canal secundario de Los Moriartys (https://www.twitch.tv/losmoriartys). Acá encontraran gameplay chill, IRL y lo que se me cante en el momento....Lo importante es divertirnos y pasarla bien 💜",
+                powers: "Especialidad: entretenimiento chill, IRL y conexión con la comunidad.",
                 stats: "Métricas en proceso de integración. Los datos se publicarán cuando estén conectados a una fuente verificable y acompañados de su período de medición.", 
                 log: "Especialista en streaming relajado, IRL y entretenimiento dinámico con la comunidad." 
             },
@@ -894,7 +905,8 @@
                 role: "teacher", 
                 img: "elgabii.jpg", 
                 twitch: "https://twitch.tv",
-                bio: "Rol: Habilidoso / Kinetic Manipulator\nClase: Mutant - Kinetic Energy\nPoder: Power: 7/10 | Speed: 8/10 | Energy: 9/10\nLema: 'Construyendo la victoria bloque a bloque.'", 
+                bio: "Rol: Habilidoso / Kinetic Manipulator\nClase: Mutant - Kinetic Energy\nLema: 'Construyendo la victoria bloque a bloque.'",
+                powers: "Manipulación de energía cinética. Atributos ficticios del personaje: Fuerza 7/10 · Velocidad 8/10 · Energía 9/10. No son métricas de Twitch.",
                 stats: "Métricas en proceso de integración. Los datos se publicarán cuando estén conectados a una fuente verificable y acompañados de su período de medición.", 
                 log: "Especialista en arquitecturas de servidores, construcciones y supervivencia en grupo." 
             },
@@ -903,7 +915,8 @@
                 role: "student",
                 img: "",
                 twitch: "https://twitch.tv/daved0608",
-                bio: "Estudiante del Instituto Xavier. Su expediente está abierto y listo para completarse cuando se incorpore su retrato, biografía y presentación de poderes.",
+                bio: "Estudiante del Instituto S3X-MEN. Su expediente está abierto y listo para completarse cuando se incorpore su retrato y presentación personal.",
+                powers: "Poderes y especialidad todavía sin definir. Se completarán cuando Dave aporte o apruebe su concepto de personaje.",
                 stats: "Canal incorporado al sistema de estadísticas. Las métricas se mostrarán cuando la automatización publique datos verificables.",
                 log: "Ingreso al roster como estudiante. Perfil visual y ficha de personaje pendientes de completar."
             },
@@ -956,6 +969,7 @@
             const hero = heroesData[index];
             document.getElementById('modal-hero-title').innerText = `EXPEDIENTE: ${hero.name}`;
             document.getElementById('modal-bio-text').innerText = hero.bio;
+            document.getElementById('modal-powers-text').innerText = hero.powers || 'Habilidades y poderes pendientes de definir con el integrante.';
             document.getElementById('modal-stats-text').innerText = hero.stats;
             document.getElementById('modal-log-text').innerText = hero.log;
             document.getElementById('modal-twitch-btn').href = hero.twitch;
@@ -969,7 +983,7 @@
         }
 
         function switchModalTab(tabIndex) {
-            for (let t = 0; t < 3; t++) {
+            for (let t = 0; t < 4; t++) {
                 const pane = document.getElementById(`modal-pane-${t}`);
                 const btn = document.querySelectorAll('.modal-tab-btn')[t];
                 if (pane) pane.classList.remove('active');
