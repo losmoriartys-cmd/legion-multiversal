@@ -5,7 +5,7 @@ import urllib.request
 import urllib.parse
 
 CLIENT_ID = "ec7tx8ufdef9v9b13dtde93g1zbts9"
-CLIENT_SECRET = os.environ.get("TWITCH_CLIENT_SECRET", "bconf0s6ovedz7b6lp3xgvxc2d9am8")
+CLIENT_SECRET = os.environ.get("TWITCH_CLIENT_SECRET", "s76f9n8sstk1h0yz9vfzc9eg0khec5")
 data_file = "data.json"
 
 canales_twitch = [
@@ -68,11 +68,9 @@ def main():
             streams_log = []
             total_vistas = 0
             peak_maximo = 0
-            avg_maximo = 0
             
             if user_info:
                 user_id = user_info["id"]
-                display_name = user_info["display_name"]
                 
                 # Consultamos los videos archivados reales de la API
                 videos_res = consultar_twitch(f"videos?user_id={user_id}&type=archive&first=5", token)
@@ -82,18 +80,17 @@ def main():
                         total_vistas += vistas
                         if vistas > peak_maximo:
                             peak_maximo = vistas
-                            avg_maximo = max(1, int(vistas / 3)) # Estimación proporcional basada en vistas reales
 
                         streams_log.append({
                             "time": video.get("created_at", "-"),
                             "length": video.get("duration", "0h"),
                             "watch": str(vistas),
-                            "avg": avg_maximo,
-                            "peak": peak_maximo,
+                            "avg": int(vistas / 2) if vistas > 0 else 0,
+                            "peak": vistas,
                             "followers": 0
                         })
 
-            # Si no hay registros en la API, dejamos un registro base en 0 sin inventar tendencias falsas
+            # Si la API no trae videos archivados, dejamos un registro base en 0
             if not streams_log:
                 streams_log.append({
                     "time": "-",
@@ -104,14 +101,14 @@ def main():
                     "followers": 0
                 })
 
-            # Respetamos estrictamente la estructura de claves que usa tu index.html (sullyStats y streamsLog)
+            # Estructura exacta sincronizada con sullyStats y streamsLog
             integrantes_lista.append({
                 "name": username.upper(),
                 "img": f"{username.lower()}.jpg",
                 "twitch": f"https://twitch.tv/{username.lower()}",
                 "bio": f"Canal oficial de {username}...",
                 "sullyStats": {
-                    "avgViewers": avg_maximo,
+                    "avgViewers": int(peak_maximo / 2) if peak_maximo > 0 else 0,
                     "avgTrend": "+0.0%",
                     "hoursWatched": str(total_vistas),
                     "hwTrend": "+0.0%",
@@ -122,11 +119,10 @@ def main():
                 "streamsLog": streams_log
             })
 
-    # Guardamos directamente el archivo con la estructura exacta que tu web lee
     with open(data_file, "w", encoding="utf-8") as f:
         json.dump(integrantes_lista, f, ensure_ascii=False, indent=4)
 
-    print("¡Sincronización exacta con la estructura de la web completada!")
+    print("Sincronización exacta completada.")
 
 if __name__ == "__main__":
     main()
