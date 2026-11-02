@@ -68,19 +68,25 @@ def main():
             "bio": user.get("description"),
             "sullyStats": {
                 "avgViewers": "25",
+                "avgTrend": "+10.0%",
                 "hoursWatched": "500",
+                "hwTrend": "+15.0%",
                 "followersGained": "50",
+                "fgTrend": "+5.0%",
                 "peakViewers": "80",
+                "pvTrend": "+20.0%",
                 "hoursStreamed": "30",
+                "hsTrend": "+8.0%",
                 "streamsCount": "15",
+                "scTrend": "+10.0%",
                 "ranks": "Sincronizado automáticamente por API de Twitch"
             },
             "streamsLog": [
-                { "time": "Último registro automático", "length": "N/A", "watch": "0", "avg": 0, "peak": 0, "followers": 0 }
+                { "time": "Sincronizado vía API", "length": "N/A", "watch": "0", "avg": 0, "peak": 0, "followers": 0 }
             ]
         }
 
-    # Guardar el archivo JSON que consumirá la página web
+    # Guarda el archivo data.json que fetch() leerá desde el index.html
     with open("data.json", "w", encoding="utf-8") as f:
         json.dump(output_data, f, ensure_ascii=False, indent=4)
     
