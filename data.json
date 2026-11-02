@@ -1,6 +1,69 @@
 {
     "ultima_actualizacion": "2026-11-02",
-    "alcance_acumulado": "8.5K+",
-    "media_viewers_global": 70,
-    "horas_producidas_mes": 250
+    "equipo": [
+        {
+            "id": "moriartys",
+            "nombre": "LosMoriartys",
+            "pais": "Argentina",
+            "rol": "Estratega / Fundador",
+            "seguidores": "1,500+",
+            "avg_viewers": 22
+        },
+        {
+            "id": "rod3r1k",
+            "nombre": "TheR0D3R1K",
+            "pais": "Argentina",
+            "rol": "El Fuerte / Co-Fundador",
+            "seguidores": "2,100+",
+            "avg_viewers": 30
+        },
+        {
+            "id": "ladymoriarty01",
+            "nombre": "LadyMoriarty01",
+            "pais": "Argentina",
+            "rol": "Hechicera Táctica",
+            "seguidores": "1,200+",
+            "avg_viewers": 20
+        },
+        {
+            "id": "capyunaplay",
+            "nombre": "Capyunaplay",
+            "pais": "Bolivia",
+            "rol": "Agente de Asalto",
+            "seguidores": "980+",
+            "avg_viewers": 18
+        },
+        {
+            "id": "ardipii",
+            "nombre": "ArdiPii",
+            "pais": "México",
+            "rol": "Artillería Rápida",
+            "seguidores": "1,350+",
+            "avg_viewers": 22
+        },
+        {
+            "id": "akumazoldyck",
+            "nombre": "Akumazoldyck",
+            "pais": "México",
+            "rol": "Asesino de Sombras",
+            "seguidores": "1,800+",
+            "avg_viewers": 28
+        },
+        {
+            "id": "elgabii090",
+            "nombre": "elgabii090",
+            "pais": "Argentina",
+            "rol": "Ingeniero de Campo",
+            "seguidores": "850+",
+            "avg_viewers": 15
+        },
+        {
+            "id": "habitos_atomicos",
+            "nombre": "habitos_atomicos",
+            "pais": "México",
+            "rol": "Cronista Táctico",
+            "seguidores": "1,100+",
+            "avg_viewers": 19
+        }
+    ]
 }
