@@ -238,6 +238,29 @@
             margin-top: 20px;
         }
 
+
+        .roster-intro { color:#cbd5e0; line-height:1.7; margin:0 0 18px; }
+        .roster-legend { display:flex; flex-wrap:wrap; gap:10px; margin:0 0 26px; }
+        .rank-director,.rank-teacher,.rank-student,.hero-rank { display:inline-block; padding:6px 12px; border:2px solid #05070b; font-family:'Bangers',cursive; letter-spacing:1px; box-shadow:3px 3px 0 #000; }
+        .rank-director { background:#ffde00; color:#080808; }
+        .rank-teacher { background:#00d2ff; color:#06121a; }
+        .rank-student { background:#a78bfa; color:#10091f; }
+        .roster-section { margin:28px 0 36px; }
+        .roster-section-title { font-family:'Bangers',cursive; font-size:2rem; letter-spacing:1px; margin:0 0 7px; }
+        .roster-section-desc { color:#9aa8bb; margin:0 0 16px; line-height:1.5; }
+        .roster-section.directors .roster-section-title { color:#ffde00; }
+        .roster-section.teachers .roster-section-title { color:#00d2ff; }
+        .roster-section.students .roster-section-title { color:#c4b5fd; }
+        .roster-section .roster-grid { margin-top:14px; }
+        .hero-placeholder { height:100%; min-height:280px; display:flex; align-items:center; justify-content:center; background:repeating-linear-gradient(135deg,#171e2c,#171e2c 12px,#202a3b 12px,#202a3b 24px); color:#c4b5fd; font-family:"Bangers",cursive; font-size:1.6rem; letter-spacing:2px; text-align:center; }
+        .hero-rank { font-size:1rem; margin-top:2px; }
+        .hero-card.director { border-color:#b99b00; }
+        .hero-card.teacher { border-color:#007f9b; }
+        .hero-card.student { border-color:#7655c9; }
+        .hero-card.director:hover { border-color:#ffde00; }
+        .hero-card.teacher:hover { border-color:#00d2ff; }
+        .hero-card.student:hover { border-color:#c4b5fd; }
+
         .hero-card {
             background: #1a202c;
             border: 4px solid var(--border-color);
@@ -638,7 +661,7 @@
                         <img src="banner-grupal.jpg" alt="Los S3X-Men Banner Grupal">
                     </div>
                     <div style="text-align: center; margin-top: 15px;">
-                        <span style="font-family: 'Bangers', cursive; font-size: 1.4rem; color: var(--yellow-accent);">“UN EQUIPO. OCHO CREADORES. UNA PROPUESTA MULTICANAL.”</span>
+                        <span style="font-family: 'Bangers', cursive; font-size: 1.4rem; color: var(--yellow-accent);">“UN INSTITUTO. NUEVE TALENTOS. UNA MISIÓN MULTICANAL.”</span>
                     </div>
                 </div>
             </div>
@@ -647,10 +670,10 @@
         <!-- CAPÍTULO 2: ROSTER DE HÉROES EN 1RA PLANA -->
         <section id="chapter-2" class="chapter-panel">
             <div class="chapter-tag">CAPÍTULO 02</div>
-            <h2 class="comic-title">ROSTER DE HÉROES (LOS 8 INTEGRANTES)</h2>
-            <p style="margin-bottom: 20px; color: #a0aec0;">Haz clic en cualquier carta de héroe en primera plana para abrir su expediente con las Páginas A, B y C.</p>
-            
-            <div class="roster-grid" id="roster-container">
+            <h2 class="comic-title">INSTITUTO XAVIER — ROSTER OFICIAL</h2>
+            <p class="roster-intro">Una escuela para talentos extraordinarios. La dirección guía el instituto, el cuerpo docente prepara a la próxima generación y los estudiantes descubren su potencial. Seleccioná una ficha para abrir su expediente.</p>
+            <div class="roster-legend"><span class="rank-director">DIRECCIÓN</span><span class="rank-teacher">CUERPO DOCENTE</span><span class="rank-student">ESTUDIANTES</span></div>
+            <div id="roster-container">
                 <!-- Se inyectarán dinámicamente las tarjetas de los héroes -->
             </div>
         </section>
@@ -813,7 +836,8 @@
         // Datos oficiales estructurados para los 8 integrantes con sus biografías exactas de la Página A
         const heroesData = [
             { 
-                name: "MORIARTYS", 
+                name: "MORIARTYS",
+                role: "director", 
                 img: "moriartys.jpg", 
                 twitch: "https://twitch.tv/losmoriartys",
                 bio: "Bienvenido al videoclub 📼 Somos Demi y Ari - Los Moriartys. Pareja gamer y orgullosos nerds. Acá no hay pro-players, hay partidas que salen mal y terminan mejor. Sims de tienda, coop caótico, pelis y cómics. LUN/MIE 20HS | VIE 21HS ARG", 
@@ -821,7 +845,8 @@
                 log: "Fundadores de la iniciativa Turno Noche. Pioneros en colaboraciones cruzadas LATAM y organización de directos en conjunto." 
             },
             { 
-                name: "ROD3R1K", 
+                name: "ROD3R1K",
+                role: "director", 
                 img: "rod3r1k.jpg", 
                 twitch: "https://twitch.tv",
                 bio: "Bienvenidos al canal, me llamo Roderik o mejor conocido como 'ElKrakenaso' encontraras momentos divertidos y epicos, acompañame en las partidas, diviertete!", 
@@ -829,7 +854,8 @@
                 log: "Impulsor de eventos masivos, torneos multicanal y coordinación técnica del escuadrón." 
             },
             { 
-                name: "LADYMORIARTY", 
+                name: "LADYMORIARTY",
+                role: "teacher", 
                 img: "ladymoriarty.jpg", 
                 twitch: "https://twitch.tv/losmoriartys",
                 bio: "Canal secundario de Los Moriartys (https://www.twitch.tv/losmoriartys). Acá encontraran gameplay chill, IRL y lo que se me cante en el momento....Lo importante es divertirnos y pasarla bien 💜", 
@@ -837,7 +863,8 @@
                 log: "Especialista en streaming relajado, IRL y entretenimiento dinámico con la comunidad." 
             },
             { 
-                name: "CAPY", 
+                name: "CAPY",
+                role: "teacher", 
                 img: "capy.jpg", 
                 twitch: "https://twitch.tv",
                 bio: "Juegos que voy a jugar en modo cooperativo:\nSMITE, League of Legends, Fall Guys, Among Us, Goose Goose Duck, Farlight 84, Overwatch, Apex Legends, Rocket League, Dead by Daylight, The Forest, KartRider Drift, Raft, 7 Days to Die, ProjectZomboid, Brawlhalla, DEVOUR, Left 4 Dead 2.", 
@@ -845,7 +872,8 @@
                 log: "Representante clave de Bolivia en las misiones nocturnas cooperativas y de supervivencia." 
             },
             { 
-                name: "ARDIPII", 
+                name: "ARDIPII",
+                role: "teacher", 
                 img: "ardipii.jpg", 
                 twitch: "https://twitch.tv",
                 bio: "Welcome a mi humilde perfil, gasten sus puntos en alertas, saluden a todos, traigan unas palomitas y 'Lo único que podemos decidir es qué hacer con el tiempo que se nos ha dado'.", 
@@ -853,7 +881,8 @@
                 log: "Enlace directo con la base operativa de México en directos intensivos y comunidad." 
             },
             { 
-                name: "AKUMA", 
+                name: "AKUMA",
+                role: "teacher", 
                 img: "akuma.jpg", 
                 twitch: "https://twitch.tv",
                 bio: "Directo todos los dias a las 7 de la tarde hora mexico. Talk show, friends and games.", 
@@ -861,7 +890,8 @@
                 log: "Veterano en transmisiones diarias, charlas con amigos y comunidad constante." 
             },
             { 
-                name: "ELGABII", 
+                name: "ELGABII",
+                role: "teacher", 
                 img: "elgabii.jpg", 
                 twitch: "https://twitch.tv",
                 bio: "Rol: Habilidoso / Kinetic Manipulator\nClase: Mutant - Kinetic Energy\nPoder: Power: 7/10 | Speed: 8/10 | Energy: 9/10\nLema: 'Construyendo la victoria bloque a bloque.'", 
@@ -869,7 +899,17 @@
                 log: "Especialista en arquitecturas de servidores, construcciones y supervivencia en grupo." 
             },
             { 
-                name: "HABITOS", 
+                name: "DAVE",
+                role: "student",
+                img: "",
+                twitch: "https://twitch.tv/daved0608",
+                bio: "Estudiante del Instituto Xavier. Su expediente está abierto y listo para completarse cuando se incorpore su retrato, biografía y presentación de poderes.",
+                stats: "Canal incorporado al sistema de estadísticas. Las métricas se mostrarán cuando la automatización publique datos verificables.",
+                log: "Ingreso al roster como estudiante. Perfil visual y ficha de personaje pendientes de completar."
+            },
+            { 
+                name: "HABITOS",
+                role: "teacher", 
                 img: "habitos.jpg", 
                 twitch: "https://twitch.tv",
                 bio: "habitos_atomicos hace streams de Call of Duty: Warzone, Solo chateando y Pro Evolution Soccer 2008.", 
@@ -882,20 +922,33 @@
             const container = document.getElementById('roster-container');
             if (!container) return;
             container.innerHTML = '';
-            heroesData.forEach((hero, index) => {
-                const card = document.createElement('div');
-                card.className = 'hero-card';
-                card.onclick = () => openHeroModal(index);
-                card.innerHTML = `
-                    <div class="hero-card-img-wrapper">
-                        <img src="${hero.img}" alt="${hero.name}" onerror="this.src='https://via.placeholder.com/300x300/1a202c/ffde00?text=${hero.name}'">
-                    </div>
-                    <div class="hero-card-info">
-                        <h3>${hero.name}</h3>
-                        <div class="hero-click-hint">⚡ VER EXPEDIENTE (A - B - C)</div>
-                    </div>
-                `;
-                container.appendChild(card);
+            const groups = [
+                { key: 'director', title: 'DIRECCIÓN DEL INSTITUTO', desc: 'Fundadores y responsables de la visión, coordinación y rumbo del equipo.', label: 'DIRECTOR', cls: 'directors' },
+                { key: 'teacher', title: 'CUERPO DOCENTE', desc: 'Profesores y especialistas que aportan experiencia, conocimiento y liderazgo en las misiones.', label: 'PROFESOR', cls: 'teachers' },
+                { key: 'student', title: 'ESTUDIANTES', desc: 'Nuevos talentos en formación. Cada expediente podrá ampliarse a medida que se incorpore su material.', label: 'ESTUDIANTE', cls: 'students' }
+            ];
+            groups.forEach(group => {
+                const members = heroesData.map((hero, index) => ({ hero, index })).filter(item => item.hero.role === group.key);
+                if (!members.length) return;
+                const section = document.createElement('section');
+                section.className = 'roster-section ' + group.cls;
+                section.innerHTML = '<h3 class="roster-section-title">' + group.title + '</h3><p class="roster-section-desc">' + group.desc + '</p>';
+                const grid = document.createElement('div');
+                grid.className = 'roster-grid';
+                members.forEach(({hero,index}) => {
+                    const card = document.createElement('div');
+                    card.className = 'hero-card ' + group.key;
+                    card.onclick = () => openHeroModal(index);
+                    const imageMarkup = hero.img
+                        ? '<img src="' + hero.img + '" alt="' + hero.name + '" onerror="this.style.display=\'none\'">'
+                        : '<div class="hero-placeholder"><span>EXPEDIENTE<br>EN FORMACIÓN</span></div>';
+                    card.innerHTML = '<div class="hero-card-img-wrapper">' + imageMarkup + '</div>' +
+                        '<div class="hero-card-info"><span class="hero-rank">' + group.label + '</span><h3>' + hero.name + '</h3>' +
+                        '<div class="hero-click-hint">⚡ VER EXPEDIENTE (A - B - C)</div></div>';
+                    grid.appendChild(card);
+                });
+                section.appendChild(grid);
+                container.appendChild(section);
             });
         }
 
