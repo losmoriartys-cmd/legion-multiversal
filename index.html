@@ -28,6 +28,17 @@
             background-size: 20px 20px;
         }
 
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: radial-gradient(#ffffff 15%, transparent 16%);
+            background-size: 12px 12px;
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 999;
+        }
+
         header {
             background: var(--panel-bg);
             border-bottom: 5px solid var(--border-color);
@@ -62,6 +73,7 @@
             background: #1a202c; color: #fff; border: 3px solid var(--border-color);
             padding: 6px 10px; font-family: 'Bangers', cursive; font-size: 1rem;
             cursor: pointer; box-shadow: 3px 3px 0 var(--border-color); text-decoration: none;
+            transition: all 0.1s ease;
         }
         .nav-btn:hover { background: var(--yellow-accent); color: #000; transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var(--border-color); }
         .nav-btn.active { background: var(--red-accent); color: #fff; transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--border-color); }
@@ -71,9 +83,14 @@
         .chapter-panel {
             display: none; background: var(--panel-bg);
             border: 5px solid var(--border-color); box-shadow: 10px 10px 0 var(--border-color);
-            padding: 35px; position: relative;
+            padding: 35px; position: relative; animation: fadeIn 0.3s ease-in-out;
         }
         .chapter-panel.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
         .chapter-tag {
             position: absolute; top: -20px; left: 30px;
@@ -88,6 +105,21 @@
             color: var(--yellow-accent); text-shadow: 3px 3px 0 var(--border-color);
             margin-bottom: 20px; letter-spacing: 1px;
         }
+
+        .cover-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: center; }
+        @media (max-width: 900px) { .cover-grid { grid-template-columns: 1fr; } }
+
+        .cover-text p {
+            font-size: 1.05rem; line-height: 1.6; margin-bottom: 20px;
+            background: rgba(0,0,0,0.4); padding: 15px; border: 3px solid var(--border-color);
+        }
+
+        .banner-img-wrapper { border: 4px solid var(--border-color); box-shadow: 6px 6px 0 var(--border-color); overflow: hidden; background: #000; }
+        .banner-img-wrapper img { width: 100%; height: auto; display: block; }
+
+        .feature-boxes { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+        .f-box { background: #1a202c; border: 3px solid var(--border-color); padding: 15px; box-shadow: 4px 4px 0 var(--border-color); }
+        .f-box h4 { font-family: 'Bangers', cursive; font-size: 1.4rem; color: var(--blue-accent); margin-bottom: 5px; }
 
         .roster-grid {
             display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -175,6 +207,22 @@
         .comic-table { width: 100%; border-collapse: collapse; margin-top: 15px; border: 3px solid var(--border-color); box-shadow: 4px 4px 0 var(--border-color); background: #0b0f19; }
         .comic-table th, .comic-table td { padding: 10px 12px; border: 1px solid #2b303b; text-align: left; font-size: 0.85rem; }
         .comic-table th { background: var(--yellow-accent); color: #000; font-family: 'Bangers', cursive; font-size: 1.1rem; }
+
+        .comic-grid-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin-top: 20px; }
+        .comic-item-card { background: #1a202c; border: 3px solid var(--border-color); padding: 20px; box-shadow: 5px 5px 0 var(--border-color); }
+        .comic-item-card h3 { font-family: 'Bangers', cursive; font-size: 1.6rem; color: var(--yellow-accent); margin-bottom: 10px; border-bottom: 2px dashed var(--border-color); padding-bottom: 5px; }
+        .comic-item-card p { font-size: 0.9rem; color: #cbd5e0; line-height: 1.5; margin-bottom: 8px; }
+
+        .btn-link { display: inline-block; background: var(--blue-accent); color: #000; padding: 6px 12px; font-weight: 700; font-size: 0.85rem; border: 2px solid var(--border-color); box-shadow: 3px 3px 0 var(--border-color); text-decoration: none; margin-top: 10px; }
+        .btn-link:hover { background: var(--yellow-accent); }
+
+        .comic-form { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; background: #1a202c; border: 4px solid var(--border-color); padding: 30px; box-shadow: 6px 6px 0 var(--border-color); }
+        .form-group { display: flex; flex-direction: column; gap: 5px; }
+        .form-group label { font-family: 'Bangers', cursive; font-size: 1.2rem; color: var(--yellow-accent); }
+        .form-group input { background: #0b0f19; border: 3px solid var(--border-color); color: #fff; padding: 10px; font-family: 'Montserrat', sans-serif; font-size: 1rem; box-shadow: 3px 3px 0 var(--border-color); }
+        .comic-submit-btn { background: var(--yellow-accent); color: #000; font-family: 'Bangers', cursive; font-size: 1.6rem; padding: 12px; border: 3px solid var(--border-color); box-shadow: 5px 5px 0 var(--border-color); cursor: pointer; text-align: center; }
+        .comic-submit-btn:hover { background: var(--red-accent); color: #fff; }
+        .mt-20 { margin-top: 20px; }
     </style>
 </head>
 <body>
@@ -193,30 +241,133 @@
             <button class="nav-btn active" onclick="switchChapter(1)">CAP 1: PORTADA</button>
             <button class="nav-btn" onclick="switchChapter(2)">CAP 2: ROSTER</button>
             <button class="nav-btn" onclick="switchChapter(3)">CAP 3: DATABASE</button>
+            <button class="nav-btn" onclick="switchChapter(4)">CAP 4: MISIONES</button>
+            <button class="nav-btn" onclick="switchChapter(5)">CAP 5: TOP CATEGORIA</button>
+            <button class="nav-btn" onclick="switchChapter(6)">CAP 6: ARSENAL JUEGOS</button>
+            <button class="nav-btn" onclick="switchChapter(7)">CAP 7: RECLUTA</button>
+            <button class="nav-btn" onclick="switchChapter(8)">CAP 8: STAFF</button>
         </nav>
     </header>
 
     <main>
-        <!-- CAPÍTULO 1 -->
+        <!-- CAPÍTULO 1: PORTADA -->
         <section id="chapter-1" class="chapter-panel active">
             <div class="chapter-tag">CAPÍTULO 01</div>
             <h2 class="comic-title">LOS S3X-MEN: LA LEYENDA DEL TURNO NOCHE</h2>
-            <p>Escuadrón internacional de creadores de contenido (Argentina, Bolivia y México).</p>
+            <div class="cover-grid">
+                <div class="cover-text">
+                    <p>Una noche cualquiera de directos y charlas de medianoche, tiramos sobre la mesa una idea casi de película: ¿y si cruzamos las fronteras y armamos nuestro propio escuadrón? Una especie de <strong>Avengers internacionales</strong> unidos no para salvar el mundo de Thanos, sino para traer diversión, risas y entretenimiento de altísima calidad a la pantalla cada semana. Así nació <strong>LOS S3X-MEN</strong>, un puente directo entre <strong>Argentina, Bolivia y México</strong>.</p>
+                    <div class="feature-boxes">
+                        <div class="f-box">
+                            <h4>HERMANDAD GENUINA</h4>
+                            <p>Cero toxicidad, compañerismo absoluto y apoyo mutuo incondicional en cada directo.</p>
+                        </div>
+                        <div class="f-box">
+                            <h4>ESTÁNDAR PROFESIONAL</h4>
+                            <p>Creadores maduros e independientes que ofrecen calidad y colaboración real para la industria.</p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="banner-img-wrapper">
+                        <img src="banner-grupal.jpg" alt="Los S3X-Men Banner Grupal" onerror="this.src='https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1000&auto=format&fit=crop'">
+                    </div>
+                    <div style="text-align: center; margin-top: 15px;">
+                        <span style="font-family: 'Bangers', cursive; font-size: 1.4rem; color: var(--yellow-accent);">“UN EQUIPO. OCHO CREADORES. UNA PROPUESTA MULTICANAL.”</span>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- CAPÍTULO 2: ROSTER -->
         <section id="chapter-2" class="chapter-panel">
             <div class="chapter-tag">CAPÍTULO 02</div>
             <h2 class="comic-title">ROSTER DE HÉROES</h2>
-            <p style="margin-bottom: 20px; color: #a0aec0;">Haz clic en cualquier carta de héroe para ver su expediente completo.</p>
+            <p style="margin-bottom: 20px; color: #a0aec0;">Haz clic en cualquier carta de héroe en primera plana para abrir su expediente con las Páginas #1, #2 y #3.</p>
             <div class="roster-grid" id="roster-container"></div>
         </section>
 
-        <!-- CAPÍTULO 3 -->
+        <!-- CAPÍTULO 3: DATABASE -->
         <section id="chapter-3" class="chapter-panel">
             <div class="chapter-tag">CAPÍTULO 03</div>
-            <h2 class="comic-title">DATABASE GLOBAL</h2>
-            <p>Estadísticas del escuadrón.</p>
+            <h2 class="comic-title">THE TEAM DATABASE (ESTADÍSTICAS GLOBALES)</h2>
+            <div class="comic-grid-list">
+                <div class="comic-item-card"><h3>⚡ ALCANCE TOTAL</h3><p><strong>8.5K+ Seguidores:</strong> Sumatoria combinada de los creadores del escuadrón.</p></div>
+                <div class="comic-item-card"><h3>📈 AUDIENCIA GLOBAL</h3><p><strong>70+ Avg / 150+ Pico:</strong> Máximo histórico alcanzado en transmisiones simultáneas.</p></div>
+                <div class="comic-item-card"><h3>🕒 VOLUMEN MENSUAL</h3><p><strong>250+ Horas:</strong> Producción total de contenido generado mes a mes.</p></div>
+                <div class="comic-item-card"><h3>🌍 GEOGRAFÍA TÁCTICA</h3><p><strong>3 Países:</strong> Puente internacional activo entre Argentina 🇦🇷, Bolivia 🇧🇴 y México 🇲🇽.</p></div>
+            </div>
+            <h3 style="font-family: 'Bangers', cursive; font-size: 1.8rem; color: var(--yellow-accent); margin-top: 30px; margin-bottom: 10px;">TABLA COMPARATIVA DE RENDIMIENTO</h3>
+            <table class="comic-table">
+                <thead><tr><th>Agente / Héroe</th><th>País y Rol</th><th>Seguidores</th><th>Media Viewers</th><th>Juego Principal</th><th>Estado</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>LosMoriartys</strong></td><td>🇦🇷 Argentina<br>Estratega / Fundador</td><td>1,500+</td><td>25 Avg</td><td>Estrategia / Shooter</td><td>🟢 En Guardia</td></tr>
+                    <tr><td><strong>TheR0D3R1K</strong></td><td>🇦🇷 Argentina<br>El Fuerte / Co-Fundador</td><td>2,100+</td><td>30 Avg</td><td>Acción / Coop</td><td>🟢 En Guardia</td></tr>
+                    <tr><td><strong>LadyMoriarty01</strong></td><td>🇦🇷 Argentina<br>Hechicera Táctica</td><td>1,200+</td><td>20 Avg</td><td>Terror / Variedad</td><td>🟢 En Guardia</td></tr>
+                    <tr><td><strong>Capyunaplay</strong></td><td>🇧🇴 Bolivia<br>Agente de Asalto</td><td>980+</td><td>18 Avg</td><td>Shooters / Survival</td><td>🟢 En Guardia</td></tr>
+                    <tr><td><strong>ArdiPii</strong></td><td>🇲🇽 México<br>Artillería Rápida</td><td>1,350+</td><td>22 Avg</td><td>Battle Royale</td><td>🟢 En Guardia</td></tr>
+                    <tr><td><strong>Akumazoldyck</strong></td><td>🇲🇽 México<br>Asesino de Sombras</td><td>1,800+</td><td>28 Avg</td><td>Competitivo / Shooters</td><td>🟢 En Guardia</td></tr>
+                    <tr><td><strong>Elgabii090</strong></td><td>🇦🇷 Argentina<br>Ingeniero de Campo</td><td>850+</td><td>15 Avg</td><td>Sandbox / Coop</td><td>🟢 En Guardia</td></tr>
+                    <tr><td><strong>Habitos_atomicos</strong></td><td>🇲🇽 México<br>Cronista Táctico</td><td>1,100+</td><td>19 Avg</td><td>Indie / Simuladores</td><td>🟢 En Guardia</td></tr>
+                    <tr><td><strong>Daved0608</strong></td><td>🇦🇷 Argentina<br>Agente Táctico</td><td>900+</td><td>17 Avg</td><td>Variedad</td><td>🟢 En Guardia</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- CAPÍTULO 4: MISIONES -->
+        <section id="chapter-4" class="chapter-panel">
+            <div class="chapter-tag">CAPÍTULO 04</div>
+            <h2 class="comic-title">MISIONES Y TUTORIALES (LURKIT + KEYMAILER)</h2>
+            <div class="comic-grid-list">
+                <div class="comic-item-card"><h3>1. LURKIT.COM</h3><p>Plataforma all-in-one para Key Campaigns, Creator Programs y Paid Quests oficiales.</p></div>
+                <div class="comic-item-card"><h3>2. KEYMAILER.CO</h3><p>Donde pedís juegos premium y AAA todos los días (60,000 influencers, 2,500 estudios).</p></div>
+            </div>
+        </section>
+
+        <!-- CAPÍTULO 5: TOP CATEGORIAS -->
+        <section id="chapter-5" class="chapter-panel">
+            <div class="chapter-tag">CAPÍTULO 05</div>
+            <h2 class="comic-title">TOP CATEGORIAS (TENDENCIAS EN TWITCH)</h2>
+            <div class="comic-grid-list">
+                <div class="comic-item-card"><h3>1. JUST CHATTING</h3><p>Interacción directa y comunidad.</p></div>
+                <div class="comic-item-card"><h3>2. FORTNITE</h3><p>Shooter líder y customs de grupo.</p></div>
+                <div class="comic-item-card"><h3>3. MINECRAFT</h3><p>Sandbox y servidores cooperativos.</p></div>
+            </div>
+        </section>
+
+        <!-- CAPÍTULO 6: ARSENAL JUEGOS -->
+        <section id="chapter-6" class="chapter-panel">
+            <div class="chapter-tag">CAPÍTULO 06</div>
+            <h2 class="comic-title">ARSENAL TÁCTICO (TOP 20 JUEGOS COOP)</h2>
+            <div class="comic-grid-list">
+                <div class="comic-item-card"><h3>1. FORTNITE</h3><p><strong>Plataforma:</strong> Epic Games Store</p></div>
+                <div class="comic-item-card"><h3>2. MINECRAFT</h3><p><strong>Plataforma:</strong> Java / Bedrock</p></div>
+                <div class="comic-item-card"><h3>3. LETHAL COMPANY</h3><p><strong>Plataforma:</strong> Steam</p></div>
+            </div>
+        </section>
+
+        <!-- CAPÍTULO 7: RECLUTAMIENTO -->
+        <section id="chapter-7" class="chapter-panel">
+            <div class="chapter-tag">CAPÍTULO 07</div>
+            <h2 class="comic-title">CUARTEL DE RECLUTAMIENTO S.H.I.E.L.D.</h2>
+            <form class="comic-form" onsubmit="event.preventDefault(); alert('¡Expediente enviado con éxito a la central!');">
+                <div class="form-group"><label>Nombre de Agente / Alias:</label><input type="text" placeholder="Ej. AgenteX" required></div>
+                <div class="form-group"><label>Canal de Twitch:</label><input type="url" placeholder="https://twitch.tv/tu_canal" required></div>
+                <button type="submit" class="comic-submit-btn">⚡ ENVIAR EXPEDIENTE</button>
+            </form>
+        </section>
+
+        <!-- CAPÍTULO 8: STAFF -->
+        <section id="chapter-8" class="chapter-panel">
+            <div class="chapter-tag">CAPÍTULO 08</div>
+            <h2 class="comic-title">CONTACTO DIRECTO CON EL STAFF</h2>
+            <div class="comic-grid-list">
+                <div class="comic-item-card">
+                    <h3>LOSMORIARTYS</h3>
+                    <p>Fundador y Estratega General</p>
+                    <a href="https://twitch.tv/losmoriartys" target="_blank" class="btn-link">CONTACTAR</a>
+                </div>
+            </div>
         </section>
     </main>
 
@@ -255,17 +406,16 @@
     </div>
 
     <script>
-        // LISTA OFICIAL DE LOS 9 INTEGRANTES CON SUS DATOS BASE PARA QUE NUNCA SE ROMPA
         const heroesData = [
-            { name: "LosMoriartys", img: "moriartys.jpg", twitch: "https://twitch.tv/losmoriartys", bio: "Canal principal de Los Moriartys - Pareja gamer y nerds.", sullyStats: { avgViewers: "25", hoursWatched: "500", followersGained: "50", peakViewers: "80", hoursStreamed: "30", streamsCount: "15", ranks: "Activo" }, streamsLog: [{ time: "Reciente", length: "2h", watch: "30", avg: 25, peak: 50, followers: 2 }] },
-            { name: "LadyMoriarty01", img: "ladymoriarty.jpg", twitch: "https://twitch.tv/ladymoriarty01", bio: "Canal secundario de Los Moriartys.", sullyStats: { avgViewers: "20", hoursWatched: "400", followersGained: "30", peakViewers: "60", hoursStreamed: "25", streamsCount: "12", ranks: "Activo" }, streamsLog: [{ time: "Reciente", length: "1.5h", watch: "20", avg: 20, peak: 40, followers: 1 }] },
-            { name: "TheR0D3R1K", img: "rod3r1k.jpg", twitch: "https://twitch.tv/ther0d3rik", bio: "El Fuerte / Co-Fundador del escuadrón.", sullyStats: { avgViewers: "30", hoursWatched: "600", followersGained: "60", peakViewers: "90", hoursStreamed: "35", streamsCount: "18", ranks: "Activo" }, streamsLog: [{ time: "Reciente", length: "3h", watch: "45", avg: 30, peak: 60, followers: 3 }] },
-            { name: "Elgabii", img: "elgabii.jpg", twitch: "https://twitch.tv/elgabii090", bio: "Ingeniero de campo y humorista.", sullyStats: { avgViewers: "15", hoursWatched: "300", followersGained: "20", peakViewers: "50", hoursStreamed: "20", streamsCount: "10", ranks: "Activo" }, streamsLog: [{ time: "Reciente", length: "2h", watch: "20", avg: 15, peak: 30, followers: 1 }] },
-            { name: "Capyunaplay", img: "capy.jpg", twitch: "https://twitch.tv/capyunaplay", bio: "Agente de asalto desde Bolivia.", sullyStats: { avgViewers: "18", hoursWatched: "350", followersGained: "25", peakViewers: "55", hoursStreamed: "22", streamsCount: "11", ranks: "Activo" }, streamsLog: [{ time: "Reciente", length: "2h", watch: "25", avg: 18, peak: 35, followers: 1 }] },
-            { name: "Habitos_atomicos", img: "habitos.jpg", twitch: "https://twitch.tv/habitos_atomicos", bio: "Cronista táctico y simuladores.", sullyStats: { avgViewers: "19", hoursWatched: "380", followersGained: "28", peakViewers: "58", hoursStreamed: "24", streamsCount: "12", ranks: "Activo" }, streamsLog: [{ time: "Reciente", length: "2h", watch: "22", avg: 19, peak: 38, followers: 1 }] },
-            { name: "Ardipii", img: "ardipii.jpg", twitch: "https://twitch.tv/ardipii", bio: "Artillería rápida desde México.", sullyStats: { avgViewers: "22", hoursWatched: "450", followersGained: "35", peakViewers: "65", hoursStreamed: "28", streamsCount: "14", ranks: "Activo" }, streamsLog: [{ time: "Reciente", length: "2h", watch: "28", avg: 22, peak: 45, followers: 2 }] },
-            { name: "Akumazoldyck", img: "akuma.jpg", twitch: "https://twitch.tv/akumazoldyck", bio: "Asesino de sombras y competitivo.", sullyStats: { avgViewers: "28", hoursWatched: "550", followersGained: "50", peakViewers: "75", hoursStreamed: "32", streamsCount: "16", ranks: "Activo" }, streamsLog: [{ time: "Reciente", length: "2.5h", watch: "35", avg: 28, peak: 50, followers: 2 }] },
-            { name: "Daved0608", img: "daved.jpg", twitch: "https://twitch.tv/daved0608", bio: "Agente táctico del escuadrón.", sullyStats: { avgViewers: "20", hoursWatched: "400", followersGained: "30", peakViewers: "60", hoursStreamed: "25", streamsCount: "12", ranks: "Activo" }, streamsLog: [{ time: "Reciente", length: "2h", watch: "25", avg: 20, peak: 40, followers: 1 }] }
+            { name: "LosMoriartys", img: "moriartys.jpg", twitch: "https://twitch.tv/losmoriartys", bio: "Bienvenido al videoclub 📼 Somos Demi y Ari - Los Moriartys. Pareja gamer y orgullosos nerds. LUN/MIE 20HS | VIE 21HS ARG", sullyStats: { avgViewers: "22", hoursWatched: "820", followersGained: "52", peakViewers: "101", hoursStreamed: "36", streamsCount: "21", ranks: "Peak Viewer Rank: 80,680th" }, streamsLog: [{ time: "Sun 1st Nov 2026, 02:00", length: "2 hours", watch: "18", avg: 9, peak: 19, followers: 1 }] },
+            { name: "TheR0D3R1K", img: "rod3r1k.jpg", twitch: "https://twitch.tv/ther0d3rik", bio: "Bienvenidos al canal, me llamo Roderik o mejor conocido como ElKrakenaso.", sullyStats: { avgViewers: "30", hoursWatched: "950", followersGained: "85", peakViewers: "110", hoursStreamed: "42", streamsCount: "24", ranks: "Rank: 65,200th" }, streamsLog: [{ time: "Sat 31st Oct 2026, 22:00", length: "3 hrs", watch: "96", avg: 32, peak: 58, followers: 2 }] },
+            { name: "LadyMoriarty01", img: "ladymoriarty.jpg", twitch: "https://twitch.tv/ladymoriarty01", bio: "Canal secundario de Los Moriartys. Gameplay chill e IRL 💜", sullyStats: { avgViewers: "20", hoursWatched: "480", followersGained: "40", peakViewers: "45", hoursStreamed: "28", streamsCount: "16", ranks: "Rank: 112,000th" }, streamsLog: [{ time: "Sun 1st Nov 2026, 20:00", length: "2 hrs", watch: "44", avg: 22, peak: 35, followers: 1 }] },
+            { name: "Capyunaplay", img: "capy.jpg", twitch: "https://twitch.tv/capyunaplay", bio: "Lista de juegos cooperativos: SMITE, LoL, Fall Guys, Among Us, DBD.", sullyStats: { avgViewers: "18", hoursWatched: "510", followersGained: "35", peakViewers: "38", hoursStreamed: "32", streamsCount: "18", ranks: "Rank: 130,000th" }, streamsLog: [{ time: "Sat 31st Oct 2026, 21:00", length: "2.5 hrs", watch: "45", avg: 18, peak: 32, followers: 1 }] },
+            { name: "Ardipii", img: "ardipii.jpg", twitch: "https://twitch.tv/ardipii", bio: "Welcome a mi humilde perfil, gasten sus puntos en alertas.", sullyStats: { avgViewers: "22", hoursWatched: "620", followersGained: "48", peakViewers: "55", hoursStreamed: "30", streamsCount: "17", ranks: "Rank: 95,000th" }, streamsLog: [{ time: "Fri 30th Oct 2026, 22:00", length: "2 hrs", watch: "48", avg: 24, peak: 42, followers: 2 }] },
+            { name: "Akumazoldyck", img: "akuma.jpg", twitch: "https://twitch.tv/akumazoldyck", bio: "Directo todos los dias a las 7 de la tarde hora mexico.", sullyStats: { avgViewers: "28", hoursWatched: "890", followersGained: "65", peakViewers: "72", hoursStreamed: "40", streamsCount: "25", ranks: "Rank: 72,000th" }, streamsLog: [{ time: "Sat 31st Oct 2026, 19:00", length: "2.5 hrs", watch: "72", avg: 29, peak: 55, followers: 3 }] },
+            { name: "Elgabii090", img: "elgabii.jpg", twitch: "https://twitch.tv/elgabii090", bio: "Buenaaaas gente :D soy argentino 🇦🇷 Jugador de fortnite, dbd y rocket league.", sullyStats: { avgViewers: "15", hoursWatched: "380", followersGained: "22", peakViewers: "30", hoursStreamed: "25", streamsCount: "14", ranks: "Rank: 145,000th" }, streamsLog: [{ time: "Thu 29th Oct 2026, 22:00", length: "2 hrs", watch: "30", avg: 15, peak: 26, followers: 1 }] },
+            { name: "Habitos_atomicos", img: "habitos.jpg", twitch: "https://twitch.tv/habitos_atomicos", bio: "habitos_atomicos hace streams diariamente.", sullyStats: { avgViewers: "19", hoursWatched: "530", followersGained: "38", peakViewers: "42", hoursStreamed: "31", streamsCount: "18", ranks: "Rank: 118,000th" }, streamsLog: [{ time: "Wed 28th Oct 2026, 21:00", length: "2 hrs", watch: "38", avg: 19, peak: 35, followers: 1 }] },
+            { name: "Daved0608", img: "daved.jpg", twitch: "https://twitch.tv/daved0608", bio: "Agente táctico del escuadrón Los S3X-Men.", sullyStats: { avgViewers: "20", hoursWatched: "400", followersGained: "30", peakViewers: "60", hoursStreamed: "25", streamsCount: "12", ranks: "Rank: 125,000th" }, streamsLog: [{ time: "Tue 27th Oct 2026, 21:00", length: "2 hrs", watch: "40", avg: 20, peak: 40, followers: 1 }] }
         ];
 
         function renderRoster() {
