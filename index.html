@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LOS S3X-MEN | Dossier de Superhéroes</title>
+    <title>LEGIÓN MULTIVERSAL | Diferentes mundos. Una misma Legión.</title>
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -685,17 +685,47 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
 .chapter-panel { background-image:linear-gradient(145deg,rgba(15,17,31,.97),rgba(20,15,34,.97)); }
 @media(max-width:600px){.hero-card-img-wrapper{height:270px}.premium-panel{padding:14px}}
 
-</style>
+
+        /* Capítulo 01 · Legión Multiversal */
+        .origin-lead{max-width:920px;margin:0 auto 28px;text-align:center;color:#dce7f5;font-size:1.12rem;line-height:1.8}
+        .origin-cover{display:grid;grid-template-columns:1.08fr .92fr;gap:24px;align-items:center;padding:24px;background:linear-gradient(130deg,#151d31,#0b111d);border:3px solid #000;box-shadow:7px 7px 0 #000}
+        .origin-cover-copy p{color:#dce4f0;line-height:1.75;margin:12px 0}
+        .origin-kicker,.origin-section-heading>span,.origin-mission>span{font-family:'Bangers',cursive;letter-spacing:2px;color:#00d2ff;font-size:1.05rem}
+        .origin-cover-copy h3,.origin-section-heading h3,.origin-mission h3{font-family:'Bangers',cursive;color:#ffde00;font-size:2rem;letter-spacing:1px;margin:7px 0 12px}
+        .origin-archive-art{margin:0;border:4px solid #000;box-shadow:5px 5px 0 #000;background:#000}
+        .origin-archive-art img{display:block;width:100%;height:auto;max-height:440px;object-fit:contain}
+        .origin-archive-art figcaption{text-align:center;padding:10px;color:#ffde00;font-family:'Bangers',cursive;letter-spacing:1px}
+        .origin-story,.origin-roster-panel{margin-top:34px}
+        .origin-section-heading{text-align:center;max-width:850px;margin:0 auto 22px}
+        .origin-section-heading p{color:#bdc9d9;line-height:1.65}
+        .origin-timeline{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+        .origin-step{position:relative;padding:20px;background:#171f2e;border:3px solid #000;box-shadow:4px 4px 0 #000;min-height:175px}
+        .origin-step-no{font-family:'Bangers',cursive;color:#00d2ff;font-size:1.6rem}
+        .origin-step h4{font-family:'Bangers',cursive;color:#ffde00;font-size:1.35rem;margin:7px 0}
+        .origin-step p{color:#cbd5e0;line-height:1.6;font-size:.9rem}
+        .origin-heroes{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:14px}
+        .origin-heroes figure{margin:0;background:#101722;border:3px solid #000;box-shadow:4px 4px 0 #000;overflow:hidden}
+        .origin-heroes img{display:block;width:100%;height:190px;object-fit:cover;object-position:center top}
+        .origin-heroes figcaption{text-align:center;padding:9px 5px;color:#ffde00;font-family:'Bangers',cursive;letter-spacing:.7px;font-size:1.05rem}
+        .origin-roster-note{text-align:center;color:#9eacc0;margin-top:16px;font-size:.9rem}
+        .origin-mission{margin-top:34px;padding:28px;text-align:center;background:linear-gradient(125deg,#201638,#10243a);border:3px solid #000;box-shadow:7px 7px 0 #000}
+        .origin-mission h3{max-width:900px;margin:8px auto 14px}
+        .origin-mission p{max-width:900px;margin:10px auto;color:#dce4f0;line-height:1.75}
+        .origin-motto{display:block;margin-top:18px;color:#ffde00;font-family:'Bangers',cursive;font-size:1.6rem;letter-spacing:2px}
+        @media(max-width:850px){.origin-cover{grid-template-columns:1fr}.origin-timeline{grid-template-columns:repeat(2,minmax(0,1fr))}}
+        @media(max-width:560px){.origin-timeline{grid-template-columns:1fr}.origin-cover{padding:15px}.origin-mission{padding:20px}.origin-heroes{grid-template-columns:repeat(2,minmax(0,1fr))}.origin-heroes img{height:170px}}
+
+    </style>
 </head>
 <body>
 
     <header>
         <div class="header-top">
             <div class="logo-container">
-                <div class="badge-comic">INSTITUTO</div>
+                <div class="badge-comic">LEGIÓN</div>
                 <div class="title-group">
-                    <h1>LOS S3X-MEN</h1>
-                    <p>INSTITUTO DE TALENTOS EXTRAORDINARIOS • TURNO NOCHE LATAM</p>
+                    <h1>LEGIÓN MULTIVERSAL</h1>
+                    <p>DIFERENTES MUNDOS. UNA MISMA LEGIÓN.</p>
                 </div>
             </div>
         </div>
@@ -712,58 +742,79 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
     </header>
 
     <main>
-        <!-- CAPÍTULO 1: PORTADA -->
+        <!-- CAPÍTULO 1: ORIGEN DE LA LEGIÓN -->
         <section id="chapter-1" class="chapter-panel active">
-            <div class="chapter-tag">CAPÍTULO 01</div>
-            <h2 class="comic-title">LOS S3X-MEN: LA LEYENDA DEL TURNO NOCHE</h2>
-            <div class="cover-grid">
-                <div class="cover-text">
-                    <p>Una noche cualquiera de directos y charlas de medianoche, tiramos sobre la mesa una idea casi de película: ¿y si cruzamos las fronteras y armamos nuestro propio escuadrón? Una especie de <strong>Avengers internacionales</strong> unidos no para salvar el mundo de Thanos, sino para traer diversión, risas y entretenimiento de altísima calidad a la pantalla cada semana. Así nació <strong>LOS S3X-MEN</strong>, un puente directo entre <strong>Argentina, Bolivia y México</strong>.</p>
-                    <div class="feature-boxes">
-                        <div class="f-box">
-                            <h4>HERMANDAD GENUINA</h4>
-                            <p>Cero toxicidad, compañerismo absoluto y apoyo mutuo incondicional en cada directo.</p>
-                        </div>
-                        <div class="f-box">
-                            <h4>ESTÁNDAR PROFESIONAL</h4>
-                            <p>Creadores maduros e independientes que ofrecen calidad y colaboración real para la industria.</p>
-                        </div>
-                    </div>
+            <div class="chapter-tag">CAPÍTULO 01 · EL ORIGEN</div>
+            <h2 class="comic-title">DE UNA PARTIDA NACIÓ UNA LEGIÓN</h2>
+            <p class="origin-lead">No nacimos como una gran organización. Nacimos jugando, compartiendo directos y descubriendo que, cuando las personas correctas se encuentran, pueden construir algo mucho más grande que una colaboración.</p>
+
+            <div class="origin-cover">
+                <div class="origin-cover-copy">
+                    <span class="origin-kicker">ARCHIVO HISTÓRICO · PRIMERA ETAPA</span>
+                    <h3>Antes de la Legión, fuimos S3X-MEN.</h3>
+                    <p>Todo comenzó con <strong>Demian y ROD3R1K</strong>, compartiendo partidas de <strong>Marvel Rivals</strong> y una idea que todavía no tenía nombre: reunir a creadores con personalidades distintas para hacer algo juntos. <strong>Akuma</strong> se sumó a aquellas primeras misiones y el equipo empezó a tomar forma.</p>
+                    <p>Después llegó <strong>Fortnite</strong>. Lo que parecía una serie de encuentros entre amigos empezó a convertirse en una comunidad: se incorporaron <strong>ElGabii y Capy</strong>, y cada nueva persona amplió el universo que estábamos construyendo.</p>
+                    <p>En ese momento entendimos que no queríamos limitarnos a jugar juntos. Queríamos conectar comunidades, potenciar proyectos y abrir un espacio donde cada integrante pudiera crecer sin dejar de ser quien es.</p>
                 </div>
-                <div>
-                    <div class="banner-img-wrapper">
-                        <img src="banner-grupal.jpg" alt="Los S3X-Men Banner Grupal" onerror="this.src='https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1000&auto=format&fit=crop'">
-                    </div>
-                    <div style="text-align: center; margin-top: 15px;">
-                        <span style="font-family: 'Bangers', cursive; font-size: 1.4rem; color: var(--yellow-accent);">“UN EQUIPO. DIEZ TALENTOS. UNA PROPUESTA MULTICANAL.”</span>
-                    </div>
+                <figure class="origin-archive-art">
+                    <img src="assets/banner-grupal.jpg" alt="Imagen grupal de la etapa original S3X-MEN">
+                    <figcaption>La primera formación. El comienzo de nuestra historia.</figcaption>
+                </figure>
+            </div>
+
+            <div class="origin-story">
+                <div class="origin-section-heading">
+                    <span>LA EVOLUCIÓN</span>
+                    <h3>Las personas cambiaron el tamaño del universo</h3>
+                    <p>Cada incorporación abrió una puerta nueva. No reemplazamos lo que éramos: lo hicimos crecer.</p>
+                </div>
+                <div class="origin-timeline">
+                    <article class="origin-step"><span class="origin-step-no">01</span><h4>La primera chispa</h4><p>Demian y ROD3R1K cruzan caminos en Marvel Rivals. Akuma se suma y nace el primer núcleo de esta aventura.</p></article>
+                    <article class="origin-step"><span class="origin-step-no">02</span><h4>El equipo se expande</h4><p>Fortnite se convierte en otro punto de encuentro. Con ElGabii y Capy, la colaboración empieza a tomar forma de comunidad.</p></article>
+                    <article class="origin-step"><span class="origin-step-no">03</span><h4>Una visión más grande</h4><p>La idea deja de ser solamente compartir partidas: queremos unir creadores, impulsar sus proyectos y generar oportunidades entre comunidades.</p></article>
+                    <article class="origin-step"><span class="origin-step-no">04</span><h4>Nuevas voces, nuevos mundos</h4><p>Se incorporan colaboradores como Pato — Oratoris y Hábitos Atómicos. La tecnología, la comunicación, la filosofía y el desarrollo personal también encuentran su lugar.</p></article>
+                    <article class="origin-step"><span class="origin-step-no">05</span><h4>Una nueva integrante</h4><p>Lady Moriarty se convierte en la primera mujer en sumarse a esta historia y aporta una nueva energía al equipo, además de compartir el universo de Los Moriartys.</p></article>
+                    <article class="origin-step"><span class="origin-step-no">06</span><h4>El siguiente capítulo</h4><p>Llega Dave como estudiante, con su propio espacio y un camino por descubrir. La Legión sigue abierta a nuevas personas, talentos y universos.</p></article>
                 </div>
             </div>
-<div class="premium-panel" style="margin-top:28px">
-<div class="premium-kicker">Archivo de origen · Iniciativa de Dirección</div>
-<h3>La señal: talentos que todavía no se habían encontrado</h3>
-<p>Todo comenzó con una pregunta sencilla: ¿qué pasaría si creadores de distintos países dejaran de trabajar como islas y empezaran a construir algo en conjunto? Había comunidades, estilos y talentos valiosos creciendo por separado. Lo que faltaba era un punto de encuentro capaz de convertir esa diversidad en una fuerza compartida.</p>
-<h3>La iniciativa: reunir al equipo indicado</h3>
-<p>Dirección tomó la decisión de convocar personas por lo que son y por lo que pueden aportar: personalidad, creatividad, constancia, experiencia y ganas de compartir. No buscamos copias de un mismo perfil ni una competencia interna por números. Cada integrante trae una voz, una comunidad y una manera distinta de contar historias.</p>
-<h3>La misión: cruzar fronteras</h3>
-<p>Argentina, Bolivia, México y los países que se sumen forman parte de una misma conversación. Queremos crear contenido en español, jugar juntos, colaborar con estudios y marcas, aprender de cada experiencia y abrir oportunidades para creadores que quizá no llegarían solos a determinadas puertas.</p>
-<div class="premium-grid">
-<div class="premium-card"><h3>Compañerismo</h3><p>Respeto, apoyo genuino y espacio para que cada integrante crezca con identidad propia.</p></div>
-<div class="premium-card"><h3>Compromiso</h3><p>Responsabilidad con la comunidad, las colaboraciones y los acuerdos que asumimos.</p></div>
-<div class="premium-card"><h3>Creatividad</h3><p>Ideas, formatos y experiencias que conviertan cada directo en algo memorable.</p></div>
-<div class="premium-card"><h3>Unidad latinoamericana</h3><p>Las fronteras no limitan el talento ni la posibilidad de construir juntos.</p></div>
-</div>
-<p><strong>“No reclutamos números. Reclutamos personas con una identidad, una comunidad y algo que aportar. Ningún talento debería quedarse aislado por una frontera.”</strong></p>
-</div>
-<div class="institute-pillars">
-    <div class="pillars-heading"><span>IDENTIDAD DEL INSTITUTO</span><h3>TRES DIMENSIONES. UNA MISMA COMUNIDAD.</h3><p>El talento no tiene una sola forma. Conectamos entretenimiento, conocimiento y crecimiento personal para construir una comunidad donde cada persona pueda aportar desde su especialidad.</p></div>
-    <div class="pillars-grid">
-        <article class="pillar-card pillar-gaming"><span class="pillar-number">01</span><h4>GAMING Y ENTRETENIMIENTO</h4><p>Videojuegos, streaming, eventos, experiencias cooperativas y creación de contenido para compartir momentos memorables.</p></article>
-        <article class="pillar-card pillar-tech"><span class="pillar-number">02</span><h4>CONOCIMIENTO Y TECNOLOGÍA</h4><p>Programación, herramientas digitales, innovación, aprendizaje y experiencias que ayudan a ampliar nuestras capacidades.</p></article>
-        <article class="pillar-card pillar-growth"><span class="pillar-number">03</span><h4>DESARROLLO PERSONAL</h4><p>Filosofía, motivación, hábitos, reflexión y conversaciones que también nos hacen crecer fuera de la pantalla.</p></article>
-    </div>
-    <p class="pillars-note"><strong>Una identidad abierta:</strong> cada integrante puede conectar con más de una dimensión. No son compartimentos cerrados, sino distintas formas de sumar al equipo.</p>
-</div>
+
+            <div class="origin-roster-panel">
+                <div class="origin-section-heading">
+                    <span>LOS PROTAGONISTAS</span>
+                    <h3>Un universo. Muchas identidades.</h3>
+                    <p>Estos son los héroes y las heroínas que ya forman parte de nuestro porfolio. Cada uno conserva su diseño, su historia y su personalidad.</p>
+                </div>
+                <div class="origin-heroes">
+                    <figure><img src="assets/moriartys.jpg" alt="Los Moriartys"><figcaption>Los Moriartys</figcaption></figure>
+                    <figure><img src="assets/rod3r1k.jpg" alt="ROD3R1K"><figcaption>ROD3R1K</figcaption></figure>
+                    <figure><img src="assets/akuma.jpg" alt="Akuma"><figcaption>Akuma</figcaption></figure>
+                    <figure><img src="assets/elgabii.jpg" alt="ElGabii"><figcaption>ElGabii</figcaption></figure>
+                    <figure><img src="assets/capy.jpg" alt="Capy"><figcaption>Capy</figcaption></figure>
+                    <figure><img src="assets/ladymoriarty.jpg" alt="Lady Moriarty"><figcaption>Lady Moriarty</figcaption></figure>
+                    <figure><img src="assets/ardipii.jpg" alt="ArDipii"><figcaption>ArDipii</figcaption></figure>
+                    <figure><img src="assets/habitos.jpg" alt="Hábitos Atómicos"><figcaption>Hábitos Atómicos</figcaption></figure>
+                    <figure><img src="PatoTeksplika.jpg" alt="Pato — Oratoris"><figcaption>Pato — Oratoris</figcaption></figure>
+                </div>
+                <p class="origin-roster-note">El porfolio sigue creciendo. Las próximas incorporaciones tendrán su propio lugar cuando llegue el momento.</p>
+            </div>
+
+            <div class="origin-mission">
+                <span>HOY COMIENZA OTRA ETAPA</span>
+                <h3>S3X-MEN fue nuestro origen. Legión Multiversal es lo que estamos construyendo.</h3>
+                <p>Somos una comunidad internacional de creadores que conecta <strong>gaming y entretenimiento, conocimiento y tecnología, y desarrollo personal</strong>. Queremos cruzar fronteras, culturas y disciplinas; compartir audiencias, aprender unos de otros y crear oportunidades que individualmente serían más difíciles de alcanzar.</p>
+                <p>No buscamos que todos hagan lo mismo. Buscamos que cada persona aporte algo propio.</p>
+                <strong class="origin-motto">DIFERENTES MUNDOS. UNA MISMA LEGIÓN.</strong>
+            </div>
+
+            <div class="institute-pillars">
+                <div class="pillars-heading"><span>EL UNIVERSO DE LA LEGIÓN</span><h3>TRES DIMENSIONES. UNA MISMA COMUNIDAD.</h3><p>El talento no tiene una sola forma. Conectamos entretenimiento, conocimiento y crecimiento personal para construir una comunidad donde cada persona pueda aportar desde su especialidad.</p></div>
+                <div class="pillars-grid">
+                    <article class="pillar-card pillar-gaming"><span class="pillar-number">01</span><h4>GAMING Y ENTRETENIMIENTO</h4><p>Videojuegos, streaming, eventos, experiencias cooperativas y creación de contenido para compartir momentos memorables.</p></article>
+                    <article class="pillar-card pillar-tech"><span class="pillar-number">02</span><h4>CONOCIMIENTO Y TECNOLOGÍA</h4><p>Programación, herramientas digitales, innovación, aprendizaje y experiencias que ayudan a ampliar nuestras capacidades.</p></article>
+                    <article class="pillar-card pillar-growth"><span class="pillar-number">03</span><h4>DESARROLLO PERSONAL</h4><p>Filosofía, motivación, hábitos, reflexión y conversaciones que también nos hacen crecer fuera de la pantalla.</p></article>
+                </div>
+                <p class="pillars-note"><strong>Una identidad abierta:</strong> cada integrante puede conectar con más de una dimensión. No son compartimentos cerrados, sino distintas formas de sumar al equipo.</p>
+            </div>
         </section>
 
         <!-- CAPÍTULO 2: ROSTER -->
