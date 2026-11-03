@@ -1,14 +1,8 @@
 #!/usr/bin/env python3
-"""Sincroniza métricas verificables de Twitch Helix en data.json.
-
-Get Videos proporciona reproducciones de VOD y duración, NO horas vistas,
-espectadores promedio ni pico de espectadores. Esos campos quedan null.
+"""Sincroniza métricas públicas verificables de los canales Twitch del Instituto.
+Get Videos no ofrece horas vistas, promedio/pico históricos ni seguidores.
 """
-import json
-import os
-import re
-import sys
-import time
+import json, os, re, sys, time
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from urllib.error import HTTPError, URLError
@@ -19,25 +13,15 @@ CLIENT_ID = os.environ.get("TWITCH_CLIENT_ID", "ec7tx8ufdef9v9b13dtde93g1zbts9")
 CLIENT_SECRET = os.environ.get("TWITCH_CLIENT_SECRET")
 DATA_FILE = Path(__file__).with_name("data.json")
 PERIOD_DAYS = int(os.environ.get("STATS_PERIOD_DAYS", "30"))
-PAGE_SIZE = 100
-MAX_PAGES_PER_CHANNEL = 20
-API_BASE = "https://api.twitch.tv/helix"
+API = "https://api.twitch.tv/helix"
 TOKEN_URL = "https://id.twitch.tv/oauth2/token"
-CANALES_TWITCH = [
-    "losmoriartys", "ladymoriarty01", "TheR0D3R1K", "elgabii090",
-    "capyunaplay", "habitos_atomicos", "Ardipii", "akumazoldyck", "daved0608",
+CHANNELS = [
+    "losmoriartys", "ladymoriarty01", "TheR0D3R1K", "capyunaplay",
+    "habitos_atomicos", "Ardipii", "akumazoldyck", "elgabii090", "daved0608"
 ]
+MAX_PAGES = 20
 
-
-class TwitchAPIError(RuntimeError):
-    pass
-
-
-def parse_duration_seconds(value):
-    parts = re.findall(r"(\d+)([hms])", value or "")
-    factors = {"h": 3600, "m": 60, "s": 1}
-    return sum(int(amount) * factors[unit] for amount, unit in parts)
-
+class TwitchAPIError(RuntimeError): pass
 
 def request_json(url, headers=None, data=None, method=None):
     req = Request(url, headers=headers or {}, data=data, method=method)
@@ -46,163 +30,130 @@ def request_json(url, headers=None, data=None, method=None):
             return json.loads(response.read().decode("utf-8"))
     except HTTPError as exc:
         detail = exc.read().decode("utf-8", errors="replace")
-        raise TwitchAPIError(f"HTTP {exc.code} en Twitch: {detail[:400]}") from exc
+        raise TwitchAPIError(f"HTTP {exc.code}: {detail[:300]}") from exc
     except (URLError, TimeoutError) as exc:
-        raise TwitchAPIError(f"Conexión con Twitch fallida: {exc}") from exc
+        raise TwitchAPIError(f"Conexión Twitch: {exc}") from exc
 
-
-def obtener_token_twitch():
+def token():
     if not CLIENT_ID or not CLIENT_SECRET:
-        raise TwitchAPIError(
-            "Faltan TWITCH_CLIENT_ID o TWITCH_CLIENT_SECRET. "
-            "Configurá TWITCH_CLIENT_SECRET en GitHub Actions Secrets."
-        )
-    body = urlencode({
-        "client_id": CLIENT_ID,
-        "client_secret": CLIENT_SECRET,
-        "grant_type": "client_credentials",
-    }).encode("utf-8")
-    result = request_json(
-        TOKEN_URL,
-        {"Content-Type": "application/x-www-form-urlencoded"},
-        body,
-        "POST",
-    )
-    if not result.get("access_token"):
-        raise TwitchAPIError("Twitch no devolvió un access_token.")
+        raise TwitchAPIError("Falta TWITCH_CLIENT_SECRET en GitHub Actions Secrets.")
+    body = urlencode({"client_id": CLIENT_ID, "client_secret": CLIENT_SECRET,
+                      "grant_type": "client_credentials"}).encode()
+    result = request_json(TOKEN_URL, {"Content-Type":"application/x-www-form-urlencoded"}, body, "POST")
+    if not result.get("access_token"): raise TwitchAPIError("Twitch no devolvió access_token.")
     return result["access_token"]
 
+def helix(endpoint, access, params):
+    return request_json(f"{API}/{endpoint}?{urlencode(params)}",
+        {"Client-ID":CLIENT_ID, "Authorization":f"Bearer {access}"})
 
-def helix(endpoint, token, params):
-    url = f"{API_BASE}/{endpoint}?{urlencode(params)}"
-    return request_json(url, {
-        "Client-ID": CLIENT_ID,
-        "Authorization": f"Bearer {token}",
-    })
+def duration_seconds(value):
+    return sum(int(n)*{"h":3600,"m":60,"s":1}[u] for n,u in re.findall(r"(\d+)([hms])", value or ""))
 
+def fetch_vods(uid, access, cutoff):
+    rows, cursor = [], None
+    for _ in range(MAX_PAGES):
+        params={"user_id":uid,"type":"archive","first":100}
+        if cursor: params["after"]=cursor
+        page=helix("videos",access,params)
+        data=page.get("data",[])
+        if not data: break
+        stop=False
+        for v in data:
+            created=datetime.fromisoformat(v["created_at"].replace("Z","+00:00"))
+            if created < cutoff: stop=True; break
+            rows.append({"id":v.get("id"),"title":v.get("title"),"url":v.get("url"),
+                "created_at":v.get("created_at"),"duration":v.get("duration"),
+                "duration_seconds":duration_seconds(v.get("duration")),
+                "video_views":int(v.get("view_count") or 0),"game_id":v.get("game_id") or None})
+        if stop: break
+        cursor=(page.get("pagination") or {}).get("cursor")
+        if not cursor: break
+        time.sleep(.12)
+    return rows
 
-def obtener_vods(user_id, token, cutoff):
-    items, cursor = [], None
-    for _ in range(MAX_PAGES_PER_CHANNEL):
-        params = {"user_id": user_id, "type": "archive", "first": PAGE_SIZE}
-        if cursor:
-            params["after"] = cursor
-        response = helix("videos", token, params)
-        page = response.get("data", [])
-        if not page:
-            break
-        older_than_period = False
-        for video in page:
-            created = datetime.fromisoformat(video["created_at"].replace("Z", "+00:00"))
-            if created < cutoff:
-                older_than_period = True
-                break
-            seconds = parse_duration_seconds(video.get("duration"))
-            items.append({
-                "id": video.get("id"),
-                "title": video.get("title"),
-                "url": video.get("url"),
-                "start_time": video.get("created_at"),
-                "length": video.get("duration"),
-                "duration_seconds": seconds,
-                "video_views": int(video.get("view_count", 0)),
-                "source": "Twitch Helix Get Videos",
-            })
-        if older_than_period:
-            break
-        cursor = (response.get("pagination") or {}).get("cursor")
-        if not cursor:
-            break
-        time.sleep(0.15)
-    return items
+def game_names(ids, access):
+    ids=sorted({str(x) for x in ids if x})
+    result={}
+    for i in range(0,len(ids),100):
+        batch=ids[i:i+100]
+        if not batch: continue
+        params=[("id",x) for x in batch]
+        url=API+"/games?"+ "&".join(f"id={x}" for x in batch)
+        data=request_json(url,{"Client-ID":CLIENT_ID,"Authorization":f"Bearer {access}"})
+        for g in data.get("data",[]): result[g["id"]]=g.get("name","Categoría desconocida")
+    return result
 
+def live_status(uid, login, access):
+    rows=helix("streams",access,{"user_id":uid,"first":1}).get("data",[])
+    if not rows:
+        return {"is_live":False,"title":None,"game_id":None,"game_name":None,
+                "viewer_count":None,"started_at":None,"url":f"https://twitch.tv/{login}"}
+    x=rows[0]
+    return {"is_live":True,"title":x.get("title"),"game_id":x.get("game_id"),
+        "game_name":None,"viewer_count":x.get("viewer_count"),"started_at":x.get("started_at"),
+        "url":f"https://twitch.tv/{login}"}
 
-def obtener_canal(login, token, cutoff):
-    response = helix("users", token, {"login": login})
-    users = response.get("data", [])
+def channel(login, access, cutoff):
+    users=helix("users",access,{"login":login}).get("data",[])
     if not users:
-        return {
-            "nombre": login, "status": "not_found",
-            "error": "Canal no encontrado.",
-            "stats": {
-                "followers": None, "avg_viewers": None, "peak_viewers": None,
-                "hours_watched": None, "video_views": None,
-                "hours_streamed": None, "streams": 0,
-            },
-            "stream_log": [],
-        }
-    user = users[0]
-    vods = obtener_vods(user["id"], token, cutoff)
-    seconds = sum(v["duration_seconds"] for v in vods)
-    views = sum(v["video_views"] for v in vods)
-    return {
-        "nombre": user.get("display_name", login),
-        "login": user.get("login", login),
-        "user_id": user.get("id"),
-        "profile_image_url": user.get("profile_image_url"),
-        "status": "ok",
-        "stats": {
-            "followers": None,
-            "avg_viewers": None,
-            "peak_viewers": None,
-            "hours_watched": None,
-            "video_views": views,
-            "hours_streamed": round(seconds / 3600, 2),
-            "streams": len(vods),
-        },
-        "stream_log": vods,
-    }
+        return {"login":login,"status":"not_found","error":"Canal no encontrado en Twitch.",
+            "stats":empty_stats(),"live":{"is_live":False},"games":[],"vods":[]}
+    u=users[0]; vods=fetch_vods(u["id"],access,cutoff); live=live_status(u["id"],login,access)
+    names=game_names([v["game_id"] for v in vods]+[live.get("game_id")],access)
+    by_game={}
+    for v in vods:
+        v["game_name"]=names.get(v["game_id"],"Categoría no informada")
+        key=v["game_name"]; g=by_game.setdefault(key,{"game":key,"streams":0,"duration_seconds":0,"video_views":0})
+        g["streams"]+=1; g["duration_seconds"]+=v["duration_seconds"]; g["video_views"]+=v["video_views"]
+    for v in vods: v.pop("game_id",None)
+    games=sorted([dict(g,hours_streamed=round(g["duration_seconds"]/3600,2)) for g in by_game.values()],
+                 key=lambda x:x["hours_streamed"],reverse=True)
+    live["game_name"]=names.get(live.get("game_id")) if live.get("game_id") else None
+    live.pop("game_id",None)
+    secs=sum(v["duration_seconds"] for v in vods)
+    return {"login":u.get("login",login),"display_name":u.get("display_name",login),
+        "user_id":u["id"],"profile_image_url":u.get("profile_image_url"),"channel_url":f"https://twitch.tv/{login}",
+        "status":"ok","live":live,"games":games,"vods":vods,
+        "stats":{"followers":None,"avg_viewers":None,"peak_viewers":None,"hours_watched":None,
+            "video_views":sum(v["video_views"] for v in vods),"hours_streamed":round(secs/3600,2),
+            "streams":len(vods)}}
 
+def empty_stats():
+    return {"followers":None,"avg_viewers":None,"peak_viewers":None,"hours_watched":None,
+            "video_views":None,"hours_streamed":None,"streams":None}
 
 def main():
-    if not 1 <= PERIOD_DAYS <= 365:
-        raise TwitchAPIError("STATS_PERIOD_DAYS debe estar entre 1 y 365.")
-    now = datetime.now(timezone.utc)
-    cutoff = now - timedelta(days=PERIOD_DAYS)
-    token = obtener_token_twitch()
-    integrantes = []
-    for login in CANALES_TWITCH:
+    if not 1 <= PERIOD_DAYS <= 365: raise TwitchAPIError("Período inválido (1-365 días).")
+    now=datetime.now(timezone.utc); cutoff=now-timedelta(days=PERIOD_DAYS); access=token()
+    members=[]
+    for login in CHANNELS:
         try:
-            integrantes.append(obtener_canal(login, token, cutoff))
-            print(f"OK: {login}")
+            item=channel(login,access,cutoff); members.append(item)
+            print(f"{item['status']}: {login} · {len(item.get('vods',[]))} VODs")
         except TwitchAPIError as exc:
-            print(f"ERROR {login}: {exc}", file=sys.stderr)
-            integrantes.append({
-                "nombre": login, "status": "error", "error": str(exc),
-                "stats": {
-                    "followers": None, "avg_viewers": None, "peak_viewers": None,
-                    "hours_watched": None, "video_views": None,
-                    "hours_streamed": None, "streams": None,
-                },
-                "stream_log": [],
-            })
-    successes = sum(x["status"] == "ok" for x in integrantes)
-    if successes == 0:
-        raise TwitchAPIError("Ningún canal se sincronizó; se conserva el data.json anterior.")
-    result = {
-        "schema_version": 2,
-        "ultima_actualizacion": now.isoformat(),
-        "periodo_dias": PERIOD_DAYS,
-        "fuente": "Twitch Helix API",
-        "notas": {
-            "video_views": "Reproducciones de VOD publicados en el período; no son horas vistas.",
-            "hours_streamed": "Suma de duración de VOD archivados; puede excluir directos sin VOD.",
-            "followers": "Requiere token de usuario con moderator:read:followers autorizado por el canal.",
-            "avg_viewers": "No lo proporciona Get Videos; requiere muestreo durante directos o fuente analítica autorizada.",
-            "peak_viewers": "No lo proporciona Get Videos; requiere muestreo durante directos o fuente analítica autorizada.",
-            "hours_watched": "No lo proporciona Get Videos; no se infiere desde view_count.",
-        },
-        "integrantes": integrantes,
-    }
-    temp = DATA_FILE.with_suffix(".json.tmp")
-    temp.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
+            print(f"ERROR {login}: {exc}",file=sys.stderr)
+            members.append({"login":login,"status":"error","error":str(exc),"stats":empty_stats(),
+                "live":{"is_live":False},"games":[],"vods":[]})
+    ok=sum(x["status"]=="ok" for x in members)
+    if ok==0: raise TwitchAPIError("Ningún canal sincronizado; no se sobrescribe el último archivo válido.")
+    result={"schema_version":3,"updated_at":now.isoformat(),"period_days":PERIOD_DAYS,
+        "source":"Twitch Helix API","refresh_minutes":5,
+        "methodology":{
+            "hours_streamed":"Suma de duración de VODs archivados creados en el período; puede excluir directos sin VOD.",
+            "video_views":"Suma de view_count de los VODs del período; no equivale a horas vistas.",
+            "games":"Categoría de Twitch asociada a cada VOD; horas calculadas sumando la duración de VODs por categoría.",
+            "live":"Estado consultado con Get Streams en el momento de sincronización; actualización programada cada cinco minutos.",
+            "followers":"No disponible con token de aplicación; requiere autorización individual con scope moderator:read:followers.",
+            "avg_viewers":"No disponible históricamente mediante Get Videos; requiere muestreo propio durante directos.",
+            "peak_viewers":"No disponible históricamente mediante Get Videos; requiere muestreo propio durante directos.",
+            "hours_watched":"No disponible mediante Get Videos; no se calcula a partir de reproducciones."
+        },"channels_total":len(CHANNELS),"channels_synced":ok,"channels":members}
+    temp=DATA_FILE.with_suffix(".json.tmp")
+    temp.write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding="utf-8")
     temp.replace(DATA_FILE)
-    print(f"Sincronización: {successes}/{len(integrantes)} canales, período {PERIOD_DAYS} días.")
-
-
-if __name__ == "__main__":
-    try:
-        main()
+    print(f"Sincronizados {ok}/{len(CHANNELS)} canales.")
+if __name__=="__main__":
+    try: main()
     except TwitchAPIError as exc:
-        print(f"ERROR FATAL: {exc}", file=sys.stderr)
-        sys.exit(1)
+        print(f"ERROR FATAL: {exc}",file=sys.stderr); sys.exit(1)
