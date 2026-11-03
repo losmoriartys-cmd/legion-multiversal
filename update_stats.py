@@ -4,7 +4,7 @@ import urllib.parse
 import urllib.request
 from datetime import datetime, timedelta, timezone
 
-CLIENT_ID = os.environ.get("TWITCH_CLIENT_ID", "gp762nuuoqcoxypju8c569th9wz7q5")
+CLIENT_ID = os.environ.get("TWITCH_CLIENT_ID") or "gp762nuuoqcoxypju8c569th9wz7q5"
 CLIENT_SECRET = os.environ.get("TWITCH_CLIENT_SECRET")
 CHANNELS = [
     "losmoriartys", "ladymoriarty01", "ther0d3r1k", "elgabii",
