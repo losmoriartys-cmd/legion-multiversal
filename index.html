@@ -966,12 +966,22 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
         ];
 
         
+let instituteStatsData = null;
+function findChannelStats(hero){
+ if(!instituteStatsData || !hero || !hero.twitch)return null;
+ const login=hero.twitch.split('/').filter(Boolean).pop().toLowerCase();
+ return (instituteStatsData.channels||[]).find(c=>(c.login||'').toLowerCase()===login) || null;
+}
+function formatMetric(value,digits=2){
+ if(value===null||value===undefined)return 'Pendiente de verificación';
+ return typeof value==='number'?value.toLocaleString('es-AR',{maximumFractionDigits:digits}):value;
+}
 async function loadInstituteStats(){
  const body=document.getElementById('stats-table-body'); if(!body)return;
  const fmt=(v,d=2)=>v===null||v===undefined?'—':(typeof v==='number'?v.toLocaleString('es-AR',{maximumFractionDigits:d}):v);
  try{
   const res=await fetch('stats-data.json',{cache:'no-store'}); if(!res.ok)throw new Error('No se pudo leer stats-data.json');
-  const data=await res.json(); const channels=data.channels||[];
+  const data=await res.json(); instituteStatsData=data; const channels=data.channels||[];
   document.getElementById('stats-updated').textContent='Actualizado: '+new Date(data.updated_at).toLocaleString('es-AR')+' · Período: '+data.period_days+' días · Fuente: '+data.source+' · Sincronizados: '+data.channels_synced+'/'+data.channels_total;
   const totalFollowers=channels.reduce((n,c)=>n+(c.stats?.followers||0),0);
   const totalVods=channels.reduce((n,c)=>n+(c.stats?.streams||0),0);
@@ -1029,7 +1039,26 @@ function renderRoster() {
             document.getElementById('modal-hero-title').innerText = `EXPEDIENTE: ${hero.name}`;
             document.getElementById('modal-bio-text').innerText = hero.bio;
             document.getElementById('modal-powers-text').innerText = hero.powers || 'Habilidades y poderes pendientes de definir con el integrante.';
-            document.getElementById('modal-stats-text').innerText = hero.stats;
+            const channelStats=findChannelStats(hero);
+            if(channelStats){
+                const s=channelStats.stats||{};
+                const games=(channelStats.games||[]).filter(g=>g.game && g.game!=="Categoría no informada");
+                document.getElementById('modal-stats-text').innerText =
+                    'PERÍODO: '+(instituteStatsData.period_days||30)+' DÍAS\\n'+
+                    'Seguidores: '+formatMetric(s.followers,0)+'\\n'+
+                    'VODs archivados: '+formatMetric(s.streams,0)+'\\n'+
+                    'Horas transmitidas (duración VOD): '+formatMetric(s.hours_streamed)+'\\n'+
+                    'Reproducciones de VOD: '+formatMetric(s.video_views,0)+'\\n'+
+                    'Promedio oficial de espectadores: '+formatMetric(s.avg_viewers)+'\\n'+
+                    'Pico oficial de espectadores: '+formatMetric(s.peak_viewers)+'\\n'+
+                    'Promedio por muestreo: '+formatMetric(s.avg_viewers_sampled)+'\\n'+
+                    'Pico observado por muestreo: '+formatMetric(s.peak_viewers_sampled,0)+'\\n'+
+                    'Muestras registradas: '+formatMetric(s.viewer_samples,0)+'\\n'+
+                    'Juegos/categorías: '+(games.length?games.map(g=>g.game+' ('+g.hours_streamed+' h)').join(', '):'Sin categorías identificables en esta sincronización')+'\\n\\n'+
+                    'Fuente: '+(instituteStatsData.source||'Twitch Helix API')+'. Las reproducciones de VOD no equivalen a horas vistas.';
+            }else{
+                document.getElementById('modal-stats-text').innerText=hero.stats||'Las métricas de esta plataforma se integrarán por separado.';
+            }
             document.getElementById('modal-log-text').innerText = hero.log;
             document.getElementById('modal-twitch-btn').href = hero.youtube || hero.twitch || "#";
             document.getElementById('modal-twitch-btn').textContent = hero.youtube ? "VISITAR CANAL DE YOUTUBE" : "VISITAR CANAL DE TWITCH";
