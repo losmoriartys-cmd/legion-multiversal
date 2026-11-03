@@ -121,6 +121,8 @@
         .f-box { background: #1a202c; border: 3px solid var(--border-color); padding: 15px; box-shadow: 4px 4px 0 var(--border-color); }
         .f-box h4 { font-family: 'Bangers', cursive; font-size: 1.4rem; color: var(--blue-accent); margin-bottom: 5px; }
 
+        .dossier-areas{display:flex;flex-wrap:wrap;justify-content:center;gap:5px;padding:10px 12px 14px;position:relative;z-index:1}
+        .dossier-areas span{font-family:Arial,sans-serif;font-size:.68rem;font-weight:800;letter-spacing:.35px;text-transform:uppercase;color:#d9f5ff;background:rgba(0,210,255,.12);border:1px solid rgba(0,210,255,.55);padding:5px 8px;clip-path:polygon(5px 0,100% 0,calc(100% - 5px) 100%,0 100%)}
         .roster-grid {
             display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 30px; margin-top: 20px;
@@ -970,6 +972,7 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
         const heroesData = [
             { 
                 name: "MORIARTYS",
+                areas: ["Gaming", "Entretenimiento", "Comunidad"],
                 role: "director", 
                 img: "moriartys.jpg", 
                 twitch: "https://twitch.tv/losmoriartys",
@@ -980,6 +983,7 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
             },
             { 
                 name: "ROD3R1K",
+                areas: ["Gaming", "Eventos", "Comunidad"],
                 role: "director", 
                 img: "rod3r1k.jpg", 
                 twitch: "https://twitch.tv/TheR0D3R1K",
@@ -990,6 +994,7 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
             },
             { 
                 name: "LADYMORIARTY",
+                areas: ["Gaming", "Entretenimiento", "IRL"],
                 role: "teacher", 
                 img: "ladymoriarty.jpg", 
                 twitch: "https://twitch.tv/ladymoriarty01",
@@ -1000,6 +1005,7 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
             },
             { 
                 name: "CAPY",
+                areas: ["Gaming", "Cooperativo", "Supervivencia"],
                 role: "teacher", 
                 img: "capy.jpg", 
                 twitch: "https://twitch.tv/capyunaplay",
@@ -1009,6 +1015,7 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
             },
             { 
                 name: "ARDIPII",
+                areas: ["Gaming", "Comunidad"],
                 role: "teacher", 
                 img: "ardipii.jpg", 
                 twitch: "https://twitch.tv/ardipii",
@@ -1018,6 +1025,7 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
             },
             { 
                 name: "AKUMA",
+                areas: ["Gaming", "Charlas", "Comunidad"],
                 role: "teacher", 
                 img: "akuma.jpg", 
                 twitch: "https://twitch.tv/akumazoldyck",
@@ -1027,6 +1035,7 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
             },
             { 
                 name: "ELGABII",
+                areas: ["Gaming", "Construcción", "Servidores"],
                 role: "teacher", 
                 img: "elgabii.jpg", 
                 twitch: "https://twitch.tv/elgabii090",
@@ -1037,6 +1046,7 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
             },
             { 
                 name: "DAVE — NEXUS",
+                areas: ["Especialidad por definir"],
                 role: "student",
                 img: "nexus.jpg",
                 twitch: "https://twitch.tv/daved0608",
@@ -1047,6 +1057,7 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
             },
                         {
                 name: "PATO — ORATORIS",
+                areas: ["Programación", "Tecnología", "Desarrollo personal"],
                 role: "collaborator",
                 img: "oratoris.jpg",
                 twitch: "",
@@ -1058,6 +1069,7 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
             },
             { 
                 name: "HABITOS",
+                areas: ["Gaming", "Filosofía", "Desarrollo personal"],
                 role: "collaborator", 
                 img: "habitos.jpg", 
                 twitch: "https://twitch.tv/habitos_atomicos",
@@ -1214,6 +1226,7 @@ function renderRoster() {
                         '<span class="dossier-subtitle">' + subtitle + '</span>' +
                         '<div class="dossier-portrait">' + imageMarkup + '</div>' +
                         '<div class="dossier-field-values"><span>' + group.label + '</span><span>PENDIENTE</span><span>EN FORMACIÓN</span></div>' +
+                        '<div class="dossier-areas">' + (hero.areas || []).map(area => '<span>' + area + '</span>').join('') + '</div>' +
                         '<div class="dossier-footer">' + channelName + ' · SERIE 1 · #' + seriesNumber + '</div>';
                     grid.appendChild(card);
                 });
