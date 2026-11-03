@@ -1,6 +1,6 @@
 {
   "schema_version": 4,
-  "updated_at": "2026-11-03T06:52:34.963643+00:00",
+  "updated_at": "2026-11-03T08:11:18.123667+00:00",
   "period_days": 30,
   "source": "Twitch Helix API",
   "refresh_minutes": 5,
