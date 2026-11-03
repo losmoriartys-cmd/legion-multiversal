@@ -223,6 +223,389 @@
         .comic-submit-btn { background: var(--yellow-accent); color: #000; font-family: 'Bangers', cursive; font-size: 1.6rem; padding: 12px; border: 3px solid var(--border-color); box-shadow: 5px 5px 0 var(--border-color); cursor: pointer; text-align: center; }
         .comic-submit-btn:hover { background: var(--red-accent); color: #fff; }
         .mt-20 { margin-top: 20px; }
+        .institute-banner{display:flex;align-items:center;gap:20px;padding:22px;margin:12px 0 18px;background:linear-gradient(110deg,#172438,#101722);border:3px solid #000;box-shadow:6px 6px 0 #000}
+        .institute-stamp{flex:0 0 94px;height:94px;display:grid;place-items:center;text-align:center;border:3px double #ffde00;color:#ffde00;font-family:'Bangers',cursive;font-size:1.3rem;transform:rotate(-5deg)}
+        .institute-banner h3{font-family:'Bangers',cursive;font-size:1.8rem;color:#ffde00;letter-spacing:1px;margin-bottom:6px}
+        .institute-banner p{color:#d5deea;line-height:1.6}
+        .institute-counts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:18px 0 24px}
+        .institute-counts div{background:#1a202c;border:2px solid #000;box-shadow:4px 4px 0 #000;padding:12px;text-align:center;display:flex;flex-direction:column;gap:2px}
+        .institute-counts strong{color:#ffde00;font-family:'Bangers',cursive;font-size:2rem}
+        .institute-counts span{color:#aab7c8;font-size:.75rem;font-weight:900;letter-spacing:1px}
+        .hero-power-text{white-space:pre-line;color:#e2e8f0;line-height:1.7}
+        @media(max-width:560px){.institute-banner{align-items:flex-start;padding:14px;gap:14px}.institute-stamp{flex-basis:70px;height:70px;font-size:1rem}.institute-counts{gap:7px}.institute-counts div{padding:9px 4px}.institute-counts span{font-size:.62rem}}
+
+        .roster-intro { color:#cbd5e0; line-height:1.7; margin:0 0 18px; }
+        .roster-legend { display:flex; flex-wrap:wrap; gap:10px; margin:0 0 26px; }
+        .rank-director,.rank-teacher,.rank-student,.hero-rank { display:inline-block; padding:6px 12px; border:2px solid #05070b; font-family:'Bangers',cursive; letter-spacing:1px; box-shadow:3px 3px 0 #000; }
+        .rank-director { background:#ffde00; color:#080808; }
+        .rank-teacher { background:#00d2ff; color:#06121a; }
+        .rank-student { background:#a78bfa; color:#10091f; }
+        .roster-section { margin:28px 0 36px; }
+        .roster-section-title { font-family:'Bangers',cursive; font-size:2rem; letter-spacing:1px; margin:0 0 7px; }
+        .roster-section-desc { color:#9aa8bb; margin:0 0 16px; line-height:1.5; }
+        .roster-section.directors .roster-section-title { color:#ffde00; }
+        .roster-section.teachers .roster-section-title { color:#00d2ff; }
+        .roster-section.students .roster-section-title { color:#c4b5fd; }
+        .roster-section .roster-grid { margin-top:14px; }
+        .hero-placeholder { height:100%; min-height:280px; display:flex; align-items:center; justify-content:center; background:repeating-linear-gradient(135deg,#171e2c,#171e2c 12px,#202a3b 12px,#202a3b 24px); color:#c4b5fd; font-family:"Bangers",cursive; font-size:1.6rem; letter-spacing:2px; text-align:center; }
+        .hero-rank { font-size:1rem; margin-top:2px; }
+        .hero-card.director { border-color:#b99b00; }
+        .hero-card.teacher { border-color:#007f9b; }
+        .hero-card.student { border-color:#7655c9; }
+        .hero-card.director:hover { border-color:#ffde00; }
+        .hero-card.teacher:hover { border-color:#00d2ff; }
+        .hero-card.student:hover { border-color:#c4b5fd; }
+
+        .hero-card {
+            background: #1a202c;
+            border: 4px solid var(--border-color);
+            box-shadow: 8px 8px 0 var(--border-color);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .hero-card:hover {
+            transform: translate(-3px, -3px);
+            box-shadow: 11px 11px 0 var(--border-color);
+            border-color: var(--yellow-accent);
+        }
+
+        .hero-card-img-wrapper {
+            width: 100%;
+            background: #000;
+            border-bottom: 4px solid var(--border-color);
+            overflow: hidden;
+            height: 280px;
+        }
+
+        .hero-card-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .hero-card-info {
+            padding: 20px;
+            background: #121824;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            text-align: center;
+        }
+
+        .hero-card-info h3 {
+            font-family: 'Bangers', cursive;
+            font-size: 1.8rem;
+            color: var(--yellow-accent);
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 0 var(--border-color);
+        }
+
+        .hero-click-hint {
+            background: var(--blue-accent);
+            color: #000;
+            font-family: 'Bangers', cursive;
+            font-size: 1.1rem;
+            padding: 8px;
+            border: 3px solid var(--border-color);
+            box-shadow: 3px 3px 0 var(--border-color);
+            text-transform: uppercase;
+            margin-top: 5px;
+        }
+
+        .kpi-card {
+            background-color: var(--card-bg);
+            border: 4px solid var(--border-color);
+            border-radius: 6px;
+            padding: 20px;
+            box-shadow: 6px 6px 0 var(--border-color);
+            text-align: center;
+            transition: transform 0.15s ease;
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--yellow-accent);
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #121824;
+            border: 5px solid var(--border-color);
+            box-shadow: 12px 12px 0 var(--border-color);
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .modal-header {
+            background: var(--yellow-accent);
+            color: #000;
+            padding: 15px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 4px solid var(--border-color);
+        }
+
+        .modal-header h2 {
+            font-family: 'Bangers', cursive;
+            font-size: 2.2rem;
+            letter-spacing: 1px;
+        }
+
+        .close-modal-btn {
+            background: var(--red-accent);
+            color: #fff;
+            border: 3px solid var(--border-color);
+            font-family: 'Bangers', cursive;
+            font-size: 1.5rem;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 3px 3px 0 var(--border-color);
+        }
+
+        .modal-body {
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .modal-tabs {
+            display: flex;
+            gap: 10px;
+            border-bottom: 3px solid var(--border-color);
+            padding-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .modal-tab-btn {
+            background: #1a202c;
+            color: #8892b0;
+            border: 3px solid var(--border-color);
+            padding: 10px 20px;
+            font-family: 'Bangers', cursive;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 4px 4px 0 var(--border-color);
+        }
+
+        .modal-tab-btn:hover {
+            color: var(--yellow-accent);
+        }
+
+        .modal-tab-btn.active {
+            background: var(--red-accent);
+            color: #fff;
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0 var(--border-color);
+        }
+
+        .modal-tab-pane {
+            display: none;
+            background: #1a202c;
+            border: 3px solid var(--border-color);
+            padding: 25px;
+            box-shadow: 5px 5px 0 var(--border-color);
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .modal-tab-pane.active {
+            display: flex;
+        }
+
+        .modal-tab-pane h3 {
+            font-family: 'Bangers', cursive;
+            font-size: 1.8rem;
+            color: var(--yellow-accent);
+            border-bottom: 2px dashed rgba(255,255,255,0.2);
+            padding-bottom: 8px;
+        }
+
+        .modal-tab-pane p {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: #e2e8f0;
+        }
+
+        .twitch-link-btn {
+            display: inline-block;
+            background: var(--yellow-accent);
+            color: #000;
+            font-family: 'Bangers', cursive;
+            font-size: 1.5rem;
+            padding: 12px 25px;
+            text-align: center;
+            border: 3px solid var(--border-color);
+            box-shadow: 5px 5px 0 var(--border-color);
+            text-decoration: none;
+            margin-top: 10px;
+        }
+
+        .twitch-link-btn:hover {
+            background: var(--red-accent);
+            color: #fff;
+        }
+
+        .comic-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            border: 4px solid var(--border-color);
+            box-shadow: 6px 6px 0 var(--border-color);
+            background: #1a202c;
+        }
+
+        .comic-table th, .comic-table td {
+            padding: 12px 15px;
+            border: 2px solid var(--border-color);
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
+        .comic-table th {
+            background: var(--yellow-accent);
+            color: #000;
+            font-family: 'Bangers', cursive;
+            font-size: 1.3rem;
+        }
+
+        .comic-grid-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .comic-item-card {
+            background: #1a202c;
+            border: 3px solid var(--border-color);
+            padding: 20px;
+            box-shadow: 5px 5px 0 var(--border-color);
+        }
+
+        .comic-item-card h3 {
+            font-family: 'Bangers', cursive;
+            font-size: 1.6rem;
+            color: var(--yellow-accent);
+            margin-bottom: 10px;
+            border-bottom: 2px dashed var(--border-color);
+            padding-bottom: 5px;
+        }
+
+        .comic-item-card p, .comic-item-card li {
+            font-size: 0.9rem;
+            color: #cbd5e0;
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+
+        .comic-item-card ul {
+            padding-left: 18px;
+            margin-top: 5px;
+        }
+
+        .btn-link {
+            display: inline-block;
+            background: var(--blue-accent);
+            color: #000;
+            padding: 6px 12px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            border: 2px solid var(--border-color);
+            box-shadow: 3px 3px 0 var(--border-color);
+            text-decoration: none;
+            margin-top: 10px;
+        }
+
+        .btn-link:hover {
+            background: var(--yellow-accent);
+        }
+
+        .comic-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+            background: #1a202c;
+            border: 4px solid var(--border-color);
+            padding: 30px;
+            box-shadow: 6px 6px 0 var(--border-color);
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .form-group label {
+            font-family: 'Bangers', cursive;
+            font-size: 1.2rem;
+            color: var(--yellow-accent);
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            background: #0b0f19;
+            border: 3px solid var(--border-color);
+            color: #fff;
+            padding: 10px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            box-shadow: 3px 3px 0 var(--border-color);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .comic-submit-btn {
+            background: var(--yellow-accent);
+            color: #000;
+            font-family: 'Bangers', cursive;
+            font-size: 1.6rem;
+            padding: 12px;
+            border: 3px solid var(--border-color);
+            box-shadow: 5px 5px 0 var(--border-color);
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .comic-submit-btn:hover {
+            background: var(--red-accent);
+            color: #fff;
+        }
+
+        .mt-20 { margin-top: 20px; }
     </style>
 </head>
 <body>
@@ -230,10 +613,10 @@
     <header>
         <div class="header-top">
             <div class="logo-container">
-                <div class="badge-comic">S.H.I.E.L.D.</div>
+                <div class="badge-comic">INSTITUTO</div>
                 <div class="title-group">
                     <h1>LOS S3X-MEN</h1>
-                    <p>TURNO NOCHE LATAM • ARCHIVO SECRETO COMERCIAL</p>
+                    <p>INSTITUTO DE TALENTOS EXTRAORDINARIOS • TURNO NOCHE LATAM</p>
                 </div>
             </div>
         </div>
@@ -282,9 +665,12 @@
         <!-- CAPÍTULO 2: ROSTER -->
         <section id="chapter-2" class="chapter-panel">
             <div class="chapter-tag">CAPÍTULO 02</div>
-            <h2 class="comic-title">ROSTER DE HÉROES</h2>
-            <p style="margin-bottom: 20px; color: #a0aec0;">Haz clic en cualquier carta de héroe en primera plana para abrir su expediente con las Páginas #1, #2 y #3.</p>
-            <div class="roster-grid" id="roster-container"></div>
+            <h2 class="comic-title">INSTITUTO S3X-MEN — ROSTER OFICIAL</h2>
+            <div class="institute-banner"><div class="institute-stamp">ARCHIVO<br>ACADÉMICO</div><div><h3>UN LUGAR PARA CADA TALENTO EXTRAORDINARIO</h3><p>La Dirección coordina el instituto, el cuerpo docente comparte experiencia y los estudiantes desarrollan su potencial. Cada integrante tiene un expediente propio y un lugar dentro de la comunidad.</p></div></div>
+            <div class="institute-counts"><div><strong>02</strong><span>DIRECTORES</span></div><div><strong>06</strong><span>PROFESORES</span></div><div><strong>01</strong><span>ESTUDIANTE</span></div></div>
+            <p class="roster-intro">Seleccioná una ficha para consultar su biografía, poderes, estadísticas y registro de misiones.</p>
+            <div class="roster-legend"><span class="rank-director">DIRECCIÓN</span><span class="rank-teacher">CUERPO DOCENTE</span><span class="rank-student">ESTUDIANTES</span></div>
+            <div id="roster-container"><!-- Se inyectarán dinámicamente las tarjetas de los héroes --></div>
         </section>
 
         <!-- CAPÍTULO 3: DATABASE -->
@@ -371,7 +757,7 @@
         </section>
     </main>
 
-    <!-- VENTANA MODAL -->
+    <!-- VENTANA MODAL / EXPEDIENTE INDIVIDUAL (PÁGINAS A, B, C) -->
     <div class="modal-overlay" id="hero-modal" onclick="if(event.target === this) closeModal();">
         <div class="modal-content">
             <div class="modal-header">
@@ -380,105 +766,181 @@
             </div>
             <div class="modal-body">
                 <div class="modal-tabs">
-                    <button class="modal-tab-btn active" onclick="switchModalTab(0)">PÁGINA A: BIO</button>
-                    <button class="modal-tab-btn" onclick="switchModalTab(1)">PÁGINA B: STATS</button>
-                    <button class="modal-tab-btn" onclick="switchModalTab(2)">PÁGINA C: STREAM LOG</button>
+                    <button class="modal-tab-btn active" onclick="switchModalTab(0)">A: BIOGRAFÍA</button>
+                    <button class="modal-tab-btn" onclick="switchModalTab(1)">B: PODERES</button>
+                    <button class="modal-tab-btn" onclick="switchModalTab(2)">C: ESTADÍSTICAS</button>
+                    <button class="modal-tab-btn" onclick="switchModalTab(3)">D: MISIONES</button>
                 </div>
+
+                <!-- PÁGINA A -->
                 <div class="modal-tab-pane active" id="modal-pane-0">
-                    <h3>BIOGRAFÍA TÁCTICA</h3>
-                    <p id="modal-bio-text"></p>
+                    <h3>EXPEDIENTE PERSONAL — BIOGRAFÍA</h3>
+                    <p id="modal-bio-text" style="white-space: pre-line;"></p>
                 </div>
-                <div class="modal-tab-pane" id="modal-pane-1">
-                    <h3>ESTADÍSTICAS DEL CANAL</h3>
-                    <div class="sully-grid" id="modal-sully-grid"></div>
-                    <div style="margin-top: 15px; font-size: 0.85rem; color: #a0aec0;"><span id="modal-sully-ranks"></span></div>
-                </div>
-                <div class="modal-tab-pane" id="modal-pane-2">
-                    <h3>HISTORIAL DE DIRECTOS</h3>
-                    <table class="comic-table">
-                        <thead><tr><th>Fecha</th><th>Duración</th><th>Watch time</th><th>Avg</th><th>Peak</th><th>Seguidores</th></tr></thead>
-                        <tbody id="modal-streams-body"></tbody>
-                    </table>
-                </div>
+
+                <!-- PÁGINA B -->
+                <div class="modal-tab-pane" id="modal-pane-1"><h3>HABILIDADES Y PODERES</h3><p id="modal-powers-text" class="hero-power-text"></p></div>
+                <div class="modal-tab-pane" id="modal-pane-2"><h3>ESTADÍSTICAS DE TWITCH Y JUEGOS</h3><p id="modal-stats-text" style="white-space:pre-line"></p></div>
+                <div class="modal-tab-pane" id="modal-pane-3"><h3>REGISTRO DE MISIONES Y LOGROS</h3><p id="modal-log-text" style="white-space:pre-line"></p></div>
+
                 <a id="modal-twitch-btn" href="#" target="_blank" class="twitch-link-btn">⚡ VISITAR CANAL DE TWITCH</a>
             </div>
         </div>
     </div>
 
     <script>
+        // Fuente de verdad del roster: editar role para cambiar jerarquía; completar powers y log con datos confirmados.
         const heroesData = [
-            { name: "LosMoriartys", img: "moriartys.jpg", twitch: "https://twitch.tv/losmoriartys", bio: "Bienvenido al videoclub 📼 Somos Demi y Ari - Los Moriartys. Pareja gamer y orgullosos nerds. LUN/MIE 20HS | VIE 21HS ARG", sullyStats: { avgViewers: "22", hoursWatched: "820", followersGained: "52", peakViewers: "101", hoursStreamed: "36", streamsCount: "21", ranks: "Peak Viewer Rank: 80,680th" }, streamsLog: [{ time: "Sun 1st Nov 2026, 02:00", length: "2 hours", watch: "18", avg: 9, peak: 19, followers: 1 }] },
-            { name: "TheR0D3R1K", img: "rod3r1k.jpg", twitch: "https://twitch.tv/ther0d3rik", bio: "Bienvenidos al canal, me llamo Roderik o mejor conocido como ElKrakenaso.", sullyStats: { avgViewers: "30", hoursWatched: "950", followersGained: "85", peakViewers: "110", hoursStreamed: "42", streamsCount: "24", ranks: "Rank: 65,200th" }, streamsLog: [{ time: "Sat 31st Oct 2026, 22:00", length: "3 hrs", watch: "96", avg: 32, peak: 58, followers: 2 }] },
-            { name: "LadyMoriarty01", img: "ladymoriarty.jpg", twitch: "https://twitch.tv/ladymoriarty01", bio: "Canal secundario de Los Moriartys. Gameplay chill e IRL 💜", sullyStats: { avgViewers: "20", hoursWatched: "480", followersGained: "40", peakViewers: "45", hoursStreamed: "28", streamsCount: "16", ranks: "Rank: 112,000th" }, streamsLog: [{ time: "Sun 1st Nov 2026, 20:00", length: "2 hrs", watch: "44", avg: 22, peak: 35, followers: 1 }] },
-            { name: "Capyunaplay", img: "capy.jpg", twitch: "https://twitch.tv/capyunaplay", bio: "Lista de juegos cooperativos: SMITE, LoL, Fall Guys, Among Us, DBD.", sullyStats: { avgViewers: "18", hoursWatched: "510", followersGained: "35", peakViewers: "38", hoursStreamed: "32", streamsCount: "18", ranks: "Rank: 130,000th" }, streamsLog: [{ time: "Sat 31st Oct 2026, 21:00", length: "2.5 hrs", watch: "45", avg: 18, peak: 32, followers: 1 }] },
-            { name: "Ardipii", img: "ardipii.jpg", twitch: "https://twitch.tv/ardipii", bio: "Welcome a mi humilde perfil, gasten sus puntos en alertas.", sullyStats: { avgViewers: "22", hoursWatched: "620", followersGained: "48", peakViewers: "55", hoursStreamed: "30", streamsCount: "17", ranks: "Rank: 95,000th" }, streamsLog: [{ time: "Fri 30th Oct 2026, 22:00", length: "2 hrs", watch: "48", avg: 24, peak: 42, followers: 2 }] },
-            { name: "Akumazoldyck", img: "akuma.jpg", twitch: "https://twitch.tv/akumazoldyck", bio: "Directo todos los dias a las 7 de la tarde hora mexico.", sullyStats: { avgViewers: "28", hoursWatched: "890", followersGained: "65", peakViewers: "72", hoursStreamed: "40", streamsCount: "25", ranks: "Rank: 72,000th" }, streamsLog: [{ time: "Sat 31st Oct 2026, 19:00", length: "2.5 hrs", watch: "72", avg: 29, peak: 55, followers: 3 }] },
-            { name: "Elgabii090", img: "elgabii.jpg", twitch: "https://twitch.tv/elgabii090", bio: "Buenaaaas gente :D soy argentino 🇦🇷 Jugador de fortnite, dbd y rocket league.", sullyStats: { avgViewers: "15", hoursWatched: "380", followersGained: "22", peakViewers: "30", hoursStreamed: "25", streamsCount: "14", ranks: "Rank: 145,000th" }, streamsLog: [{ time: "Thu 29th Oct 2026, 22:00", length: "2 hrs", watch: "30", avg: 15, peak: 26, followers: 1 }] },
-            { name: "Habitos_atomicos", img: "habitos.jpg", twitch: "https://twitch.tv/habitos_atomicos", bio: "habitos_atomicos hace streams diariamente.", sullyStats: { avgViewers: "19", hoursWatched: "530", followersGained: "38", peakViewers: "42", hoursStreamed: "31", streamsCount: "18", ranks: "Rank: 118,000th" }, streamsLog: [{ time: "Wed 28th Oct 2026, 21:00", length: "2 hrs", watch: "38", avg: 19, peak: 35, followers: 1 }] },
-            { name: "Daved0608", img: "daved.jpg", twitch: "https://twitch.tv/daved0608", bio: "Agente táctico del escuadrón Los S3X-Men.", sullyStats: { avgViewers: "20", hoursWatched: "400", followersGained: "30", peakViewers: "60", hoursStreamed: "25", streamsCount: "12", ranks: "Rank: 125,000th" }, streamsLog: [{ time: "Tue 27th Oct 2026, 21:00", length: "2 hrs", watch: "40", avg: 20, peak: 40, followers: 1 }] }
+            { 
+                name: "MORIARTYS",
+                role: "director", 
+                img: "moriartys.jpg", 
+                twitch: "https://twitch.tv/losmoriartys",
+                bio: "Bienvenido al videoclub 📼 Somos Demi y Ari - Los Moriartys. Pareja gamer y orgullosos nerds. Acá no hay pro-players, hay partidas que salen mal y terminan mejor. Sims de tienda, coop caótico, pelis y cómics. LUN/MIE 20HS | VIE 21HS ARG",
+                powers: "Perfil de habilidades en construcción. Se completará con la descripción de personaje aprobada por el integrante.",
+                stats: "Métricas en proceso de integración. Los datos se publicarán cuando estén conectados a una fuente verificable y acompañados de su período de medición.", 
+                log: "Fundadores de la iniciativa Turno Noche. Pioneros en colaboraciones cruzadas LATAM y organización de directos en conjunto." 
+            },
+            { 
+                name: "ROD3R1K",
+                role: "director", 
+                img: "rod3r1k.jpg", 
+                twitch: "https://twitch.tv",
+                bio: "Bienvenidos al canal, me llamo Roderik o mejor conocido como 'ElKrakenaso' encontraras momentos divertidos y epicos, acompañame en las partidas, diviertete!",
+                powers: "Perfil de habilidades en construcción. Pendiente de confirmar con el integrante.",
+                stats: "Métricas en proceso de integración. Los datos se publicarán cuando estén conectados a una fuente verificable y acompañados de su período de medición.", 
+                log: "Impulsor de eventos masivos, torneos multicanal y coordinación técnica del escuadrón." 
+            },
+            { 
+                name: "LADYMORIARTY",
+                role: "teacher", 
+                img: "ladymoriarty.jpg", 
+                twitch: "https://twitch.tv/losmoriartys",
+                bio: "Canal secundario de Los Moriartys (https://www.twitch.tv/losmoriartys). Acá encontraran gameplay chill, IRL y lo que se me cante en el momento....Lo importante es divertirnos y pasarla bien 💜",
+                powers: "Especialidad: entretenimiento chill, IRL y conexión con la comunidad.",
+                stats: "Métricas en proceso de integración. Los datos se publicarán cuando estén conectados a una fuente verificable y acompañados de su período de medición.", 
+                log: "Especialista en streaming relajado, IRL y entretenimiento dinámico con la comunidad." 
+            },
+            { 
+                name: "CAPY",
+                role: "teacher", 
+                img: "capy.jpg", 
+                twitch: "https://twitch.tv",
+                bio: "Juegos que voy a jugar en modo cooperativo:\nSMITE, League of Legends, Fall Guys, Among Us, Goose Goose Duck, Farlight 84, Overwatch, Apex Legends, Rocket League, Dead by Daylight, The Forest, KartRider Drift, Raft, 7 Days to Die, ProjectZomboid, Brawlhalla, DEVOUR, Left 4 Dead 2.", 
+                stats: "Métricas en proceso de integración. Los datos se publicarán cuando estén conectados a una fuente verificable y acompañados de su período de medición.", 
+                log: "Representante clave de Bolivia en las misiones nocturnas cooperativas y de supervivencia." 
+            },
+            { 
+                name: "ARDIPII",
+                role: "teacher", 
+                img: "ardipii.jpg", 
+                twitch: "https://twitch.tv",
+                bio: "Welcome a mi humilde perfil, gasten sus puntos en alertas, saluden a todos, traigan unas palomitas y 'Lo único que podemos decidir es qué hacer con el tiempo que se nos ha dado'.", 
+                stats: "Métricas en proceso de integración. Los datos se publicarán cuando estén conectados a una fuente verificable y acompañados de su período de medición.", 
+                log: "Enlace directo con la base operativa de México en directos intensivos y comunidad." 
+            },
+            { 
+                name: "AKUMA",
+                role: "teacher", 
+                img: "akuma.jpg", 
+                twitch: "https://twitch.tv",
+                bio: "Directo todos los dias a las 7 de la tarde hora mexico. Talk show, friends and games.", 
+                stats: "Métricas en proceso de integración. Los datos se publicarán cuando estén conectados a una fuente verificable y acompañados de su período de medición.", 
+                log: "Veterano en transmisiones diarias, charlas con amigos y comunidad constante." 
+            },
+            { 
+                name: "ELGABII",
+                role: "teacher", 
+                img: "elgabii.jpg", 
+                twitch: "https://twitch.tv",
+                bio: "Rol: Habilidoso / Kinetic Manipulator\nClase: Mutant - Kinetic Energy\nLema: 'Construyendo la victoria bloque a bloque.'",
+                powers: "Manipulación de energía cinética. Atributos ficticios del personaje: Fuerza 7/10 · Velocidad 8/10 · Energía 9/10. No son métricas de Twitch.",
+                stats: "Métricas en proceso de integración. Los datos se publicarán cuando estén conectados a una fuente verificable y acompañados de su período de medición.", 
+                log: "Especialista en arquitecturas de servidores, construcciones y supervivencia en grupo." 
+            },
+            { 
+                name: "DAVE",
+                role: "student",
+                img: "",
+                twitch: "https://twitch.tv/daved0608",
+                bio: "Estudiante del Instituto S3X-MEN. Su expediente está abierto y listo para completarse cuando se incorpore su retrato y presentación personal.",
+                powers: "Poderes y especialidad todavía sin definir. Se completarán cuando Dave aporte o apruebe su concepto de personaje.",
+                stats: "Canal incorporado al sistema de estadísticas. Las métricas se mostrarán cuando la automatización publique datos verificables.",
+                log: "Ingreso al roster como estudiante. Perfil visual y ficha de personaje pendientes de completar."
+            },
+            { 
+                name: "HABITOS",
+                role: "teacher", 
+                img: "habitos.jpg", 
+                twitch: "https://twitch.tv",
+                bio: "habitos_atomicos hace streams de Call of Duty: Warzone, Solo chateando y Pro Evolution Soccer 2008.", 
+                stats: "Métricas en proceso de integración. Los datos se publicarán cuando estén conectados a una fuente verificable y acompañados de su período de medición.", 
+                log: "Impulsor de hábitos de crecimiento, constancia y transmisiones dinámicas." 
+            }
         ];
 
         function renderRoster() {
             const container = document.getElementById('roster-container');
             if (!container) return;
             container.innerHTML = '';
-            heroesData.forEach((hero, index) => {
-                const card = document.createElement('div');
-                card.className = 'hero-card';
-                card.onclick = () => openHeroModal(index);
-                card.innerHTML = `
-                    <div class="hero-card-img-wrapper">
-                        <img src="${hero.img}" alt="${hero.name}" onerror="this.src='https://via.placeholder.com/300x300/1a202c/ffde00?text=${hero.name}'">
-                    </div>
-                    <div class="hero-card-info">
-                        <h3>${hero.name}</h3>
-                        <div class="hero-click-hint">⚡ VER EXPEDIENTE (A - B - C)</div>
-                    </div>
-                `;
-                container.appendChild(card);
+            const groups = [
+                { key: 'director', title: 'DIRECCIÓN DEL INSTITUTO', desc: 'Fundadores y responsables de la visión, coordinación y rumbo del equipo.', label: 'DIRECTOR', cls: 'directors' },
+                { key: 'teacher', title: 'CUERPO DOCENTE', desc: 'Profesores y especialistas que aportan experiencia, conocimiento y liderazgo en las misiones.', label: 'PROFESOR', cls: 'teachers' },
+                { key: 'student', title: 'ESTUDIANTES', desc: 'Nuevos talentos en formación. Cada expediente podrá ampliarse a medida que se incorpore su material.', label: 'ESTUDIANTE', cls: 'students' }
+            ];
+            groups.forEach(group => {
+                const members = heroesData.map((hero, index) => ({ hero, index })).filter(item => item.hero.role === group.key);
+                if (!members.length) return;
+                const section = document.createElement('section');
+                section.className = 'roster-section ' + group.cls;
+                section.innerHTML = '<h3 class="roster-section-title">' + group.title + '</h3><p class="roster-section-desc">' + group.desc + '</p>';
+                const grid = document.createElement('div');
+                grid.className = 'roster-grid';
+                members.forEach(({hero,index}) => {
+                    const card = document.createElement('div');
+                    card.className = 'hero-card ' + group.key;
+                    card.onclick = () => openHeroModal(index);
+                    const imageMarkup = hero.img
+                        ? '<img src="' + hero.img + '" alt="' + hero.name + '" onerror="this.style.display=\'none\'">'
+                        : '<div class="hero-placeholder"><span>EXPEDIENTE<br>EN FORMACIÓN</span></div>';
+                    card.innerHTML = '<div class="hero-card-img-wrapper">' + imageMarkup + '</div>' +
+                        '<div class="hero-card-info"><span class="hero-rank">' + group.label + '</span><h3>' + hero.name + '</h3>' +
+                        '<div class="hero-click-hint">⚡ VER EXPEDIENTE (A - B - C)</div></div>';
+                    grid.appendChild(card);
+                });
+                section.appendChild(grid);
+                container.appendChild(section);
             });
         }
 
         function openHeroModal(index) {
             const hero = heroesData[index];
-            if (!hero) return;
             document.getElementById('modal-hero-title').innerText = `EXPEDIENTE: ${hero.name}`;
             document.getElementById('modal-bio-text').innerText = hero.bio;
-            
-            const s = hero.sullyStats || {};
-            const sullyGrid = document.getElementById('modal-sully-grid');
-            sullyGrid.innerHTML = `
-                <div class="sully-box"><div class="lbl">Avg Viewers</div><div class="val">${s.avgViewers}</div></div>
-                <div class="sully-box"><div class="lbl">Hours Watched</div><div class="val">${s.hoursWatched}</div></div>
-                <div class="sully-box"><div class="lbl">Followers</div><div class="val">${s.followersGained}</div></div>
-                <div class="sully-box"><div class="lbl">Peak Viewers</div><div class="val">${s.peakViewers}</div></div>
-                <div class="sully-box"><div class="lbl">Hours Streamed</div><div class="val">${s.hoursStreamed}</div></div>
-                <div class="sully-box"><div class="lbl">Streams</div><div class="val">${s.streamsCount}</div></div>
-            `;
-            document.getElementById('modal-sully-ranks').innerText = s.ranks;
-
-            const tableBody = document.getElementById('modal-streams-body');
-            tableBody.innerHTML = '';
-            (hero.streamsLog || []).forEach(row => {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `<td><strong>${row.time}</strong></td><td>${row.length}</td><td>${row.watch} hrs</td><td><span style="color: var(--yellow-accent);">${row.avg}</span></td><td>${row.peak}</td><td>${row.followers}</td>`;
-                tableBody.appendChild(tr);
-            });
-
+            document.getElementById('modal-powers-text').innerText = hero.powers || 'Habilidades y poderes pendientes de definir con el integrante.';
+            document.getElementById('modal-stats-text').innerText = hero.stats;
+            document.getElementById('modal-log-text').innerText = hero.log;
             document.getElementById('modal-twitch-btn').href = hero.twitch;
+            
             document.getElementById('hero-modal').classList.add('active');
             switchModalTab(0);
         }
 
-        function closeModal() { document.getElementById('hero-modal').classList.remove('active'); }
+        function closeModal() {
+            document.getElementById('hero-modal').classList.remove('active');
+        }
 
         function switchModalTab(tabIndex) {
-            for (let t = 0; t < 3; t++) {
-                document.getElementById(`modal-pane-${t}`).classList.remove('active');
-                document.querySelectorAll('.modal-tab-btn')[t].classList.remove('active');
+            for (let t = 0; t < 4; t++) {
+                const pane = document.getElementById(`modal-pane-${t}`);
+                const btn = document.querySelectorAll('.modal-tab-btn')[t];
+                if (pane) pane.classList.remove('active');
+                if (btn) btn.classList.remove('active');
             }
-            document.getElementById(`modal-pane-${tabIndex}`).classList.add('active');
-            document.querySelectorAll('.modal-tab-btn')[tabIndex].classList.add('active');
+            const activePane = document.getElementById(`modal-pane-${tabIndex}`);
+            const activeBtn = document.querySelectorAll('.modal-tab-btn')[tabIndex];
+            if (activePane) activePane.classList.add('active');
+            if (activeBtn) activeBtn.classList.add('active');
         }
 
         function switchChapter(chapterNum) {
