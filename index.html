@@ -698,16 +698,11 @@
         <section id="chapter-3" class="chapter-panel">
             <div class="chapter-tag">CAPÍTULO 03</div>
             <h2 class="comic-title">THE TEAM DATABASE</h2>
-            <div class="cc-note" role="status">
-                <strong>BASE DE DATOS EN CONSTRUCCIÓN.</strong> Estamos preparando la conexión segura de las nueve cuentas de Twitch. Las métricas de audiencia, seguidores, horas transmitidas y rendimiento aparecerán cuando estén verificadas, con su fuente y período de medición.
-            </div>
-            <div class="comic-grid-list">
-                <div class="comic-item-card"><h3>IDENTIDAD DEL EQUIPO</h3><p>Nueve creadores de Twitch y un creador de YouTube, con perfiles individuales y enlaces oficiales. La información pública se revisará con cada integrante.</p></div>
-                <div class="comic-item-card"><h3>MÉTRICAS DE TWITCH</h3><p>Seguidores, espectadores y evolución histórica, siempre con fecha de captura y fuente identificable.</p></div>
-                <div class="comic-item-card"><h3>ACTIVIDAD DE STREAMING</h3><p>Horas transmitidas y categorías/juegos por período, distinguiendo datos de API de estimaciones externas.</p></div>
-                <div class="comic-item-card"><h3>DATOS PARA PUBLISHERS</h3><p>Un dossier comercial transparente, actualizado y preparado para campañas y colaboraciones.</p></div>
-            </div>
-            <p class="mt-20 cc-muted">Estado: integración pendiente. No se publican cifras históricas sin respaldo verificable.</p>
+            <div class="cc-note" role="status"><strong>DATOS VERIFICADOS · TWITCH HELIX.</strong> Panel común para los nueve canales Twitch del roster. Se excluye el canal de YouTube de Pato de este conjunto.</div>
+            <div id="team-stats-summary" class="comic-grid-list"><div class="comic-item-card">Esperando la primera sincronización automática…</div></div>
+            <div class="comic-item-card"><h3>ESTADO DE LOS CANALES</h3><div id="team-live-list">Consultando estado en directo…</div></div>
+            <div class="comic-item-card"><h3>ACTIVIDAD POR CREADOR</h3><div id="team-stats-table">Las métricas aparecerán cuando GitHub Actions complete la primera ejecución.</div></div>
+            <p class="mt-20 cc-muted">Período estándar: últimos 30 días. Vistas de VOD no equivalen a horas vistas. Seguidores, promedio y pico históricos quedan como no disponibles hasta contar con permisos o muestreo válido.</p>
         </section>
 
         <!-- CAPÍTULO 4: MISIONES Y TUTORIALES -->
@@ -1042,6 +1037,21 @@
         window.onload = function() {
             renderRoster();
         };
-    </script>
+    
+async function loadInstituteStats(){
+ const summary=document.getElementById("team-stats-summary"),live=document.getElementById("team-live-list"),table=document.getElementById("team-stats-table");
+ if(!summary||!live||!table)return;
+ try{
+  const res=await fetch("data.json?ts="+Date.now(),{cache:"no-store"});if(!res.ok)throw new Error("La primera ejecución automática todavía no publicó data.json.");
+  const d=await res.json();const rows=d.channels||[];
+  if(!rows.length)throw new Error("Esperando la primera sincronización de Twitch.");
+  const ok=rows.filter(x=>x.status==="ok"),online=ok.filter(x=>x.live&&x.live.is_live).length;
+  summary.innerHTML="<div class='comic-item-card'><h3>CANALES SINCRONIZADOS</h3><strong>"+(d.channels_synced||ok.length)+"/"+d.channels_total+"</strong></div><div class='comic-item-card'><h3>EN DIRECTO AHORA</h3><strong>"+online+"</strong></div><div class='comic-item-card'><h3>PERÍODO</h3><strong>ÚLTIMOS "+d.period_days+" DÍAS</strong></div>";
+  live.innerHTML=ok.map(x=>"<p><strong>"+(x.display_name||x.login)+"</strong> · "+(x.live&&x.live.is_live?"<span style='color:#4dff9b'>● EN DIRECTO</span>":"○ Offline")+" · "+(x.live&&x.live.is_live?(x.live.game_name||"Categoría no informada"):"")+" <a href='https://twitch.tv/"+x.login+"' target='_blank' rel='noopener'>Abrir canal ↗</a></p>").join("");
+  table.innerHTML="<div style='overflow-x:auto'><table><thead><tr><th>Canal</th><th>Directos</th><th>Horas emitidas</th><th>Vistas VOD</th><th>Juegos</th><th>Estado</th></tr></thead><tbody>"+rows.map(x=>{const s=x.stats||{};return "<tr><td>"+(x.display_name||x.login)+"</td><td>"+(s.streams??"N/D")+"</td><td>"+(s.hours_streamed??"N/D")+"</td><td>"+(s.video_views??"N/D")+"</td><td>"+((x.games||[]).length)+"</td><td>"+(x.status==="ok"?"Datos OK":"Error / sin datos")+"</td></tr>"}).join("")+"</tbody></table></div><p>Actualizado: "+new Date(d.updated_at).toLocaleString("es-AR")+"</p>";
+ }catch(e){summary.innerHTML="<div class='comic-item-card'>"+e.message+"</div>";live.textContent="Estado en directo pendiente de la primera ejecución.";table.textContent="Sin datos publicados todavía.";}
+}
+loadInstituteStats();
+</script>
 </body>
 </html>
