@@ -769,7 +769,7 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
         <section id="chapter-7" class="chapter-panel">
             <div class="chapter-tag">CAPÍTULO 07</div>
             <h2 class="comic-title">CUARTEL DE RECLUTAMIENTO S.H.I.E.L.D.</h2>
-            <form class="comic-form" onsubmit="event.preventDefault();const d=new FormData(this);const body=Array.from(d.entries()).map(([k,v])=>k+': '+v).join('%0A');window.location.href='mailto:losmoriartys@gmail.com?subject='+encodeURIComponent('Solicitud de ingreso al Instituto S3X-MEN')+'&body='+encodeURIComponent(body);">
+            <form class="comic-form" onsubmit="event.preventDefault();const d=new FormData(this);const body=Array.from(d.entries()).map(([k,v])=>k+': '+v).join('\n');window.location.href='mailto:losmoriartys@gmail.com?subject='+encodeURIComponent('Solicitud de ingreso al Instituto S3X-MEN')+'&body='+encodeURIComponent(body);">
 <div class="premium-grid">
 <div class="form-group"><label>Nombre o alias *</label><input name="Nombre o alias" type="text" required placeholder="Tu nombre de creador"></div>
 <div class="form-group"><label>País *</label><input name="País" type="text" required placeholder="País de residencia"></div>
@@ -1044,17 +1044,17 @@ function renderRoster() {
                 const s=channelStats.stats||{};
                 const games=(channelStats.games||[]).filter(g=>g.game && g.game!=="Categoría no informada");
                 document.getElementById('modal-stats-text').innerText =
-                    'PERÍODO: '+(instituteStatsData.period_days||30)+' DÍAS\\n'+
-                    'Seguidores: '+formatMetric(s.followers,0)+'\\n'+
-                    'VODs archivados: '+formatMetric(s.streams,0)+'\\n'+
-                    'Horas transmitidas (duración VOD): '+formatMetric(s.hours_streamed)+'\\n'+
-                    'Reproducciones de VOD: '+formatMetric(s.video_views,0)+'\\n'+
-                    'Promedio oficial de espectadores: '+formatMetric(s.avg_viewers)+'\\n'+
-                    'Pico oficial de espectadores: '+formatMetric(s.peak_viewers)+'\\n'+
-                    'Promedio por muestreo: '+formatMetric(s.avg_viewers_sampled)+'\\n'+
-                    'Pico observado por muestreo: '+formatMetric(s.peak_viewers_sampled,0)+'\\n'+
-                    'Muestras registradas: '+formatMetric(s.viewer_samples,0)+'\\n'+
-                    'Juegos/categorías: '+(games.length?games.map(g=>g.game+' ('+g.hours_streamed+' h)').join(', '):'Sin categorías identificables en esta sincronización')+'\\n\\n'+
+                    'PERÍODO: '+(instituteStatsData.period_days||30)+' DÍAS\n'+
+                    'Seguidores: '+formatMetric(s.followers,0)+'\n'+
+                    'VODs archivados: '+formatMetric(s.streams,0)+'\n'+
+                    'Horas transmitidas (duración VOD): '+formatMetric(s.hours_streamed)+'\n'+
+                    'Reproducciones de VOD: '+formatMetric(s.video_views,0)+'\n'+
+                    'Promedio oficial de espectadores: '+formatMetric(s.avg_viewers)+'\n'+
+                    'Pico oficial de espectadores: '+formatMetric(s.peak_viewers)+'\n'+
+                    'Promedio por muestreo: '+formatMetric(s.avg_viewers_sampled)+'\n'+
+                    'Pico observado por muestreo: '+formatMetric(s.peak_viewers_sampled,0)+'\n'+
+                    'Muestras registradas: '+formatMetric(s.viewer_samples,0)+'\n'+
+                    'Juegos/categorías: '+(games.length?games.map(g=>g.game+' ('+g.hours_streamed+' h)').join(', '):'Sin categorías identificables en esta sincronización')+'\n\n'+
                     'Fuente: '+(instituteStatsData.source||'Twitch Helix API')+'. Las reproducciones de VOD no equivalen a horas vistas.';
             }else{
                 document.getElementById('modal-stats-text').innerText=hero.stats||'Las métricas de esta plataforma se integrarán por separado.';
