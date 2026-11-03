@@ -3,6 +3,331 @@
   "source": "Twitch Helix API",
   "window_days": 10,
   "sampling_interval_minutes": 15,
-  "updated_at": null,
-  "channels": {}
+  "updated_at": "2026-11-03T17:47:50Z",
+  "channels": {
+    "ladymoriarty01": {
+      "login": "ladymoriarty01",
+      "display_name": "LadyMoriarty01",
+      "description": "Canal secundario de Los Moriartys (https://www.twitch.tv/losmoriartys). Acá encontraran gameplay chill, IRL y lo que se me cante en el momento....Lo importante es divertirnos y pasarla bien 💜",
+      "profile_image_url": "https://static-cdn.jtvnw.net/jtv_user_pictures/1729ff07-94b4-4b9f-a03e-a10142f3a658-profile_image-300x300.jpeg",
+      "twitch_url": "https://twitch.tv/ladymoriarty01",
+      "followers_total": null,
+      "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
+      "live": false,
+      "current_viewers": null,
+      "current_game": null,
+      "current_title": null,
+      "stream_started_at": null,
+      "updated_at": "2026-11-03T17:47:50Z",
+      "window": {
+        "samples_total": 1,
+        "live_samples": 0,
+        "streams_observed": 0,
+        "average_viewers_sampled": null,
+        "peak_viewers_sampled": null,
+        "observed_live_hours": 0.0,
+        "estimated_hours_watched": 0.0,
+        "method": "Muestras propias cada 15 minutos; horas estimadas solo entre muestras consecutivas del mismo directo."
+      },
+      "snapshots": [
+        {
+          "sampled_at": "2026-11-03T17:47:50Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
+        }
+      ]
+    },
+    "ther0d3r1k": {
+      "login": "ther0d3r1k",
+      "display_name": "TheR0D3R1K",
+      "description": "Bienvenidos al canal, me llamo Roderik o mejor conocido como \"ElKrakenaso\"  encontraras momentos divertidos y epicos, acompañame en las partidas, diviertete! ",
+      "profile_image_url": "https://static-cdn.jtvnw.net/jtv_user_pictures/1db2e1df-454f-4728-9bc8-84258fab8934-profile_image-300x300.png",
+      "twitch_url": "https://twitch.tv/ther0d3r1k",
+      "followers_total": null,
+      "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
+      "live": false,
+      "current_viewers": null,
+      "current_game": null,
+      "current_title": null,
+      "stream_started_at": null,
+      "updated_at": "2026-11-03T17:47:50Z",
+      "window": {
+        "samples_total": 1,
+        "live_samples": 0,
+        "streams_observed": 0,
+        "average_viewers_sampled": null,
+        "peak_viewers_sampled": null,
+        "observed_live_hours": 0.0,
+        "estimated_hours_watched": 0.0,
+        "method": "Muestras propias cada 15 minutos; horas estimadas solo entre muestras consecutivas del mismo directo."
+      },
+      "snapshots": [
+        {
+          "sampled_at": "2026-11-03T17:47:50Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
+        }
+      ]
+    },
+    "capyunaplay": {
+      "login": "capyunaplay",
+      "display_name": "capyunaplay",
+      "description": " lista juego que voy a jugar en modo cooperativo SMITE League of Legends Fall Guys Among Us Goose Goose Duck Farlight 84 Overwatch Apex Legends Rocket League Dead by Daylight The Forest KartRider Drift Raft 7 Days to Die ProjectZomboid Brawlhalla DEVOUR Left 4 Dead 2",
+      "profile_image_url": "https://static-cdn.jtvnw.net/jtv_user_pictures/72d00cca-1890-454a-995b-c55ecc6aba24-profile_image-300x300.png",
+      "twitch_url": "https://twitch.tv/capyunaplay",
+      "followers_total": null,
+      "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
+      "live": false,
+      "current_viewers": null,
+      "current_game": null,
+      "current_title": null,
+      "stream_started_at": null,
+      "updated_at": "2026-11-03T17:47:50Z",
+      "window": {
+        "samples_total": 1,
+        "live_samples": 0,
+        "streams_observed": 0,
+        "average_viewers_sampled": null,
+        "peak_viewers_sampled": null,
+        "observed_live_hours": 0.0,
+        "estimated_hours_watched": 0.0,
+        "method": "Muestras propias cada 15 minutos; horas estimadas solo entre muestras consecutivas del mismo directo."
+      },
+      "snapshots": [
+        {
+          "sampled_at": "2026-11-03T17:47:50Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
+        }
+      ]
+    },
+    "ardipii": {
+      "login": "ardipii",
+      "display_name": "ArDipii",
+      "description": "Welcome a mi humilde perfil, gasten sus puntos en alertas, saluden a todos, traigan unas palomitas y \"Lo único que podemos decidir es qué hacer con el tiempo que se nos ha dado\".",
+      "profile_image_url": "https://static-cdn.jtvnw.net/jtv_user_pictures/7714bc29-07fc-4738-90f3-29cba205df91-profile_image-300x300.png",
+      "twitch_url": "https://twitch.tv/ardipii",
+      "followers_total": null,
+      "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
+      "live": false,
+      "current_viewers": null,
+      "current_game": null,
+      "current_title": null,
+      "stream_started_at": null,
+      "updated_at": "2026-11-03T17:47:50Z",
+      "window": {
+        "samples_total": 1,
+        "live_samples": 0,
+        "streams_observed": 0,
+        "average_viewers_sampled": null,
+        "peak_viewers_sampled": null,
+        "observed_live_hours": 0.0,
+        "estimated_hours_watched": 0.0,
+        "method": "Muestras propias cada 15 minutos; horas estimadas solo entre muestras consecutivas del mismo directo."
+      },
+      "snapshots": [
+        {
+          "sampled_at": "2026-11-03T17:47:50Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
+        }
+      ]
+    },
+    "akumazoldyck": {
+      "login": "akumazoldyck",
+      "display_name": "akumazoldyck",
+      "description": "directo todos los dias a las 7 de la tarde hora mexicoTalk show, friends and games",
+      "profile_image_url": "https://static-cdn.jtvnw.net/jtv_user_pictures/960db8a3-a588-4829-8b26-5b4ed95db93a-profile_image-300x300.png",
+      "twitch_url": "https://twitch.tv/akumazoldyck",
+      "followers_total": null,
+      "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
+      "live": false,
+      "current_viewers": null,
+      "current_game": null,
+      "current_title": null,
+      "stream_started_at": null,
+      "updated_at": "2026-11-03T17:47:50Z",
+      "window": {
+        "samples_total": 1,
+        "live_samples": 0,
+        "streams_observed": 0,
+        "average_viewers_sampled": null,
+        "peak_viewers_sampled": null,
+        "observed_live_hours": 0.0,
+        "estimated_hours_watched": 0.0,
+        "method": "Muestras propias cada 15 minutos; horas estimadas solo entre muestras consecutivas del mismo directo."
+      },
+      "snapshots": [
+        {
+          "sampled_at": "2026-11-03T17:47:50Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
+        }
+      ]
+    },
+    "daved0608": {
+      "login": "daved0608",
+      "display_name": "daved0608",
+      "description": "🎮 Tú decides lo que pasa aquí⚔️ For Honor | 🔥 Marvel Rivals | 🏎️ Forza Horizon 5😈 Retos en vivo + decisiones del chat👇 No seas espectador, participa",
+      "profile_image_url": "https://static-cdn.jtvnw.net/jtv_user_pictures/ba3e3310-1575-4518-86e2-e7fee2073dcd-profile_image-300x300.png",
+      "twitch_url": "https://twitch.tv/daved0608",
+      "followers_total": null,
+      "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
+      "live": false,
+      "current_viewers": null,
+      "current_game": null,
+      "current_title": null,
+      "stream_started_at": null,
+      "updated_at": "2026-11-03T17:47:50Z",
+      "window": {
+        "samples_total": 1,
+        "live_samples": 0,
+        "streams_observed": 0,
+        "average_viewers_sampled": null,
+        "peak_viewers_sampled": null,
+        "observed_live_hours": 0.0,
+        "estimated_hours_watched": 0.0,
+        "method": "Muestras propias cada 15 minutos; horas estimadas solo entre muestras consecutivas del mismo directo."
+      },
+      "snapshots": [
+        {
+          "sampled_at": "2026-11-03T17:47:50Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
+        }
+      ]
+    },
+    "elgabii090": {
+      "login": "elgabii090",
+      "display_name": "elgabii090",
+      "description": "Buenaaaas gente :D soy argentino 🇦🇷 ....Vengo a poner humor en cada directo :v ..jugador de fortnite ,dbd , rocket league y clash royales ... ",
+      "profile_image_url": "https://static-cdn.jtvnw.net/jtv_user_pictures/867665c4-ed9a-46a3-8ff5-80ceee006cb3-profile_image-300x300.jpeg",
+      "twitch_url": "https://twitch.tv/elgabii090",
+      "followers_total": null,
+      "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
+      "live": false,
+      "current_viewers": null,
+      "current_game": null,
+      "current_title": null,
+      "stream_started_at": null,
+      "updated_at": "2026-11-03T17:47:50Z",
+      "window": {
+        "samples_total": 1,
+        "live_samples": 0,
+        "streams_observed": 0,
+        "average_viewers_sampled": null,
+        "peak_viewers_sampled": null,
+        "observed_live_hours": 0.0,
+        "estimated_hours_watched": 0.0,
+        "method": "Muestras propias cada 15 minutos; horas estimadas solo entre muestras consecutivas del mismo directo."
+      },
+      "snapshots": [
+        {
+          "sampled_at": "2026-11-03T17:47:50Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
+        }
+      ]
+    },
+    "habitos_atomicos": {
+      "login": "habitos_atomicos",
+      "display_name": "habitos_atomicos",
+      "description": "",
+      "profile_image_url": "https://static-cdn.jtvnw.net/jtv_user_pictures/cbc6f35d-8bdf-403a-bbfc-93bd3dec3eb9-profile_image-300x300.jpeg",
+      "twitch_url": "https://twitch.tv/habitos_atomicos",
+      "followers_total": null,
+      "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
+      "live": false,
+      "current_viewers": null,
+      "current_game": null,
+      "current_title": null,
+      "stream_started_at": null,
+      "updated_at": "2026-11-03T17:47:50Z",
+      "window": {
+        "samples_total": 1,
+        "live_samples": 0,
+        "streams_observed": 0,
+        "average_viewers_sampled": null,
+        "peak_viewers_sampled": null,
+        "observed_live_hours": 0.0,
+        "estimated_hours_watched": 0.0,
+        "method": "Muestras propias cada 15 minutos; horas estimadas solo entre muestras consecutivas del mismo directo."
+      },
+      "snapshots": [
+        {
+          "sampled_at": "2026-11-03T17:47:50Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
+        }
+      ]
+    },
+    "losmoriartys": {
+      "login": "losmoriartys",
+      "display_name": "LosMoriartys",
+      "description": "Bienvenido al videoclub 📼 Somos Demi y Ari - Los Moriartys. Pareja gamer y orgullosos nerds. Acá no hay pro-players, hay partidas que salen mal y terminan mejor. Sims de tienda, coop caótico, pelis y cómics. LUN/MIE 20HS | VIE 21HS ARG",
+      "profile_image_url": "https://static-cdn.jtvnw.net/jtv_user_pictures/ce75dbf8-4471-4884-890e-a4acb80b1838-profile_image-300x300.png",
+      "twitch_url": "https://twitch.tv/losmoriartys",
+      "followers_total": null,
+      "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
+      "live": false,
+      "current_viewers": null,
+      "current_game": null,
+      "current_title": null,
+      "stream_started_at": null,
+      "updated_at": "2026-11-03T17:47:50Z",
+      "window": {
+        "samples_total": 1,
+        "live_samples": 0,
+        "streams_observed": 0,
+        "average_viewers_sampled": null,
+        "peak_viewers_sampled": null,
+        "observed_live_hours": 0.0,
+        "estimated_hours_watched": 0.0,
+        "method": "Muestras propias cada 15 minutos; horas estimadas solo entre muestras consecutivas del mismo directo."
+      },
+      "snapshots": [
+        {
+          "sampled_at": "2026-11-03T17:47:50Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
+        }
+      ]
+    }
+  }
 }
