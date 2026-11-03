@@ -80,6 +80,7 @@ def summarize(snapshots, now):
     return {
         "samples_total": len(snapshots),
         "live_samples": len(live),
+        "streams_observed": len({s.get("stream_id") for s in live if s.get("stream_id")}),
         "average_viewers_sampled": round(sum(viewers) / len(viewers), 1) if viewers else None,
         "peak_viewers_sampled": max(viewers) if viewers else None,
         "observed_live_hours": round(observed_minutes / 60, 2),
