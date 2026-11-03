@@ -765,11 +765,26 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
         <section id="chapter-7" class="chapter-panel">
             <div class="chapter-tag">CAPÍTULO 07</div>
             <h2 class="comic-title">CUARTEL DE RECLUTAMIENTO S.H.I.E.L.D.</h2>
-            <form class="comic-form" onsubmit="event.preventDefault(); alert('¡Expediente enviado con éxito a la central!');">
-                <div class="form-group"><label>Nombre de Agente / Alias:</label><input type="text" placeholder="Ej. AgenteX" required></div>
-                <div class="form-group"><label>Canal de Twitch:</label><input type="url" placeholder="https://twitch.tv/tu_canal" required></div>
-                <button type="submit" class="comic-submit-btn">⚡ ENVIAR EXPEDIENTE</button>
-            </form>
+            <form class="comic-form" onsubmit="event.preventDefault();const d=new FormData(this);const body=Array.from(d.entries()).map(([k,v])=>k+': '+v).join('%0A');window.location.href='mailto:losmoriartys@gmail.com?subject='+encodeURIComponent('Solicitud de ingreso al Instituto S3X-MEN')+'&body='+encodeURIComponent(body);">
+<div class="premium-grid">
+<div class="form-group"><label>Nombre o alias *</label><input name="Nombre o alias" type="text" required placeholder="Tu nombre de creador"></div>
+<div class="form-group"><label>País *</label><input name="País" type="text" required placeholder="País de residencia"></div>
+<div class="form-group"><label>Zona horaria</label><input name="Zona horaria" type="text" placeholder="Ej. GMT-3"></div>
+<div class="form-group"><label>Edad (opcional)</label><input name="Edad" type="text" placeholder="Opcional"></div>
+<div class="form-group"><label>Twitch / YouTube / otras redes *</label><input name="Canales y redes" type="url" required placeholder="https://..."></div>
+<div class="form-group"><label>Seguidores actuales</label><input name="Seguidores" type="text" placeholder="Indicar plataforma y fecha"></div>
+<div class="form-group"><label>Promedio de espectadores</label><input name="Promedio espectadores" type="text" placeholder="Promedio y período"></div>
+<div class="form-group"><label>Pico de espectadores</label><input name="Pico espectadores" type="text" placeholder="Pico y período"></div>
+<div class="form-group"><label>Frecuencia de transmisiones</label><input name="Frecuencia" type="text" placeholder="Ej. 3 veces por semana"></div>
+<div class="form-group"><label>Juegos y categorías habituales</label><input name="Juegos y categorías" type="text" placeholder="Tus contenidos principales"></div>
+<div class="form-group"><label>Horarios habituales</label><input name="Horarios" type="text" placeholder="Días y franjas horarias"></div>
+<div class="form-group"><label>Experiencia como creador</label><input name="Experiencia" type="text" placeholder="Tiempo, formatos y fortalezas"></div>
+</div>
+<div class="form-group"><label>¿Por qué querés sumarte al Instituto?</label><textarea name="Motivación" rows="3" placeholder="Contanos qué te motiva y qué aportarías"></textarea></div>
+<div class="form-group"><label>Colaboraciones y trabajo en equipo</label><textarea name="Colaboraciones" rows="3" placeholder="Experiencias, disponibilidad y propuestas"></textarea></div>
+<p class="stats-note">Los datos de audiencia son orientativos, no el único criterio de evaluación. Dirección también tendrá en cuenta constancia, personalidad, respeto, compromiso y compatibilidad con la comunidad.</p>
+<button type="submit" class="comic-submit-btn">ENVIAR EXPEDIENTE</button>
+</form>
         </section>
 
         <!-- CAPÍTULO 8: STAFF -->
@@ -798,7 +813,17 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
 <section id="chapter-10" class="chapter-panel comic-page"><div class="chapter-tag">CAPÍTULO 10</div><h2 class="comic-title">CENTRO DE COMUNIDAD — AGENDA Y SUGERENCIAS</h2>
 <div class="premium-grid"><div class="premium-card"><div class="premium-kicker">Horario grupal documentado</div><h3>Sábados — 21:00 ARG</h3><p>Colaboración principal propuesta en el Excel: 19:00 Bolivia y 18:00 México CDMX. La participación se coordina según disponibilidad.</p></div><div class="premium-card"><div class="premium-kicker">Encuentro opcional</div><h3>Miércoles — 20:00 ARG</h3><p>Mini colaboración sugerida para grupos reducidos.</p></div><div class="premium-card"><div class="premium-kicker">Franja sugerida</div><h3>Viernes — 23:00 ARG</h3><p>Encuentro propuesto para conectar con integrantes de México.</p></div></div>
 <div class="premium-panel"><h3>Rotación de juegos sugerida en el Excel</h3><ul><li>Semana 1: Lethal Company</li><li>Semana 2: Supermarket Together</li><li>Semana 3: R.E.P.O.</li><li>Semana 4: Fortnite Customs</li><li>Semana 5: Phasmophobia</li><li>Semana 6: Valheim</li></ul><p class="stats-note">Agenda propuesta, no calendario confirmado. Los horarios individuales de cada integrante se completarán con disponibilidad aprobada.</p></div>
-<div class="premium-panel"><h3>Reglas de colaboración</h3><ul><li>Evitar lurkeo masivo y prácticas de follow-for-follow.</li><li>Priorizar interacción real con el contenido y la comunidad.</li><li>Coordinar raids al finalizar, cuando corresponda.</li><li>Preparar clips individuales de las colaboraciones y etiquetar a los participantes.</li></ul></div>
+<div class="premium-panel"><h3>Horarios individuales registrados en el Excel</h3><div class="stats-table-wrap"><table class="stats-table"><thead><tr><th>Integrante</th><th>Disponibilidad documentada</th></tr></thead><tbody>
+<tr><td>Los Moriartys</td><td>Lun/Mié/Vie 20:00 ARG · Sáb 21:00 ARG</td></tr>
+<tr><td>TheR0D3R1K</td><td>20:00 Bolivia · Sábados en horario grupal</td></tr>
+<tr><td>Capyunaplay</td><td>Lun/Mié/Jue 18:00 ARG · Sáb 21:00 ARG</td></tr>
+<tr><td>ArdiPii</td><td>18:00 México CDMX · Sábados en horario grupal</td></tr>
+<tr><td>Akumazoldyck</td><td>18:00 México CDMX · Sábados en horario grupal</td></tr>
+<tr><td>elgabii090</td><td>19:00 ARG</td></tr>
+<tr><td>habitos_atomicos</td><td>20:00 ARG</td></tr>
+<tr><td>Dave</td><td>Horario pendiente de confirmar</td></tr>
+<tr><td>Pato</td><td>Horario pendiente de confirmar</td></tr>
+</tbody></table></div><p class="stats-note">Horarios recuperados de la planilla del equipo. Confirmar con cada integrante antes de publicar como calendario definitivo; el Excel contiene datos de una etapa anterior.</p></div><div class="premium-panel"><h3>Reglas de colaboración</h3><ul><li>Evitar lurkeo masivo y prácticas de follow-for-follow.</li><li>Priorizar interacción real con el contenido y la comunidad.</li><li>Coordinar raids al finalizar, cuando corresponda.</li><li>Preparar clips individuales de las colaboraciones y etiquetar a los participantes.</li></ul></div>
 <div class="premium-panel"><h3>Buzón de sugerencias</h3><p>Proponé juegos, eventos, actividades, colaboraciones o mejoras para el Instituto.</p><form class="comic-form" onsubmit="event.preventDefault();const t=this.querySelector('textarea').value.trim();if(t){const s='Sugerencia Instituto S3X-MEN: '+t;window.location.href='mailto:losmoriartys@gmail.com?subject='+encodeURIComponent('Sugerencia para el Instituto')+'&body='+encodeURIComponent(s)}"><div class="form-group"><label>Tu propuesta</label><textarea rows="4" placeholder="Contanos tu idea…" required></textarea></div><button class="comic-submit-btn" type="submit">ENVIAR SUGERENCIA</button></form></div>
 </section>
 </main>
