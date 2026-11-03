@@ -656,7 +656,42 @@
         .dashboard-analytics-empty{padding:16px;border:1px dashed #465268;color:#b8c5d6;font-size:.8rem;line-height:1.6}
         @media(max-width:760px){.dashboard-analytics-grid{grid-template-columns:1fr}}
 
-    </style>
+    
+        /* Plantilla maestra de cartas: expediente noir 2:3 */
+        .roster-grid.dossier-roster { grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:26px; align-items:start; }
+        .hero-card.dossier-card {
+            position:relative; display:block; width:100%; max-width:390px; aspect-ratio:2/3; overflow:hidden;
+            border:0; border-radius:0; padding:0; cursor:pointer; isolation:isolate;
+            background:#08111d url('image_20261103_160331.jpg') center/100% 100% no-repeat;
+            box-shadow:0 10px 28px rgba(0,0,0,.55); transition:transform .18s ease,filter .18s ease;
+        }
+        .hero-card.dossier-card::before { content:""; position:absolute; inset:1.7%; z-index:5; border:1px solid rgba(232,198,126,.28); pointer-events:none; }
+        .hero-card.dossier-card:hover { transform:translateY(-5px) scale(1.012); border:0; box-shadow:0 16px 34px rgba(0,0,0,.68),0 0 18px rgba(40,145,207,.18); filter:brightness(1.06); }
+        .dossier-top { position:absolute; z-index:3; top:3.1%; left:20%; width:60%; height:14.4%; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px; text-align:center; color:#f4d37d; background:radial-gradient(ellipse at center,#07101b 62%,rgba(7,16,27,.88) 76%,transparent 100%); }
+        .dossier-classification { position:absolute; top:-5%; left:-28%; color:#f5d88e; font:900 clamp(5px,.62vw,8px) 'Montserrat',sans-serif; letter-spacing:.7px; }
+        .dossier-top h3 { margin:0; max-width:100%; color:#50b8e8; font:900 clamp(18px,4.5vw,39px) 'Bangers',cursive; letter-spacing:1.2px; line-height:.95; text-shadow:3px 3px 0 #05080d,-1px -1px 0 #05080d; overflow-wrap:anywhere; }
+        .dossier-subtitle { color:#ef4b3e; font:900 clamp(8px,1.65vw,15px) 'Bangers',cursive; letter-spacing:.7px; text-shadow:2px 2px 0 #05080d; }
+        .dossier-art { position:absolute; z-index:2; left:11.5%; top:19.5%; width:77%; height:52%; display:flex; align-items:center; justify-content:center; overflow:hidden; background:radial-gradient(ellipse at center,rgba(8,23,37,.2),rgba(4,10,17,.32)); }
+        .dossier-portrait { display:block; width:100%; height:100%; object-fit:contain; object-position:center bottom; filter:drop-shadow(0 5px 9px rgba(0,0,0,.65)); }
+        .dossier-portrait-placeholder { width:100%; height:100%; display:grid; place-content:center; text-align:center; color:#e5c779; font:24px 'Bangers',cursive; letter-spacing:2px; background:repeating-linear-gradient(135deg,rgba(7,15,25,.5),rgba(7,15,25,.5) 10px,rgba(30,48,65,.45) 10px,rgba(30,48,65,.45) 20px); }
+        .dossier-fields { position:absolute; z-index:4; left:9%; top:73.8%; width:82%; height:16.3%; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:3.3%; }
+        .dossier-field { min-width:0; display:flex; flex-direction:column; align-items:center; justify-content:flex-start; padding:16% 5% 2%; color:#f8d778; text-align:center; overflow:hidden; }
+        .dossier-field strong { display:none; }
+        .dossier-field span { width:100%; max-height:100%; overflow:hidden; display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:3; color:#f6d879; font:900 clamp(7px,1.15vw,11px) 'Montserrat',sans-serif; line-height:1.2; text-shadow:1px 1px 2px #000; overflow-wrap:anywhere; }
+        .dossier-footer { position:absolute; z-index:6; left:10%; bottom:2.5%; width:80%; height:5.6%; display:flex; align-items:center; justify-content:center; padding:0 3%; background:linear-gradient(90deg,#09111d 0%,#0c1724 50%,#09111d 100%); border-top:1px solid rgba(218,177,91,.6); border-bottom:1px solid rgba(218,177,91,.6); color:#f6d477; text-align:center; }
+        .dossier-footer span { font:900 clamp(8px,1.55vw,15px) 'Bangers',cursive; letter-spacing:.5px; line-height:1; white-space:nowrap; text-shadow:2px 2px 0 #000; }
+        .dossier-open-hint { position:absolute; z-index:8; right:4%; top:18.5%; padding:4px 7px; background:rgba(5,12,20,.82); border:1px solid rgba(238,199,112,.6); color:#f5d98e; font:700 8px 'Montserrat',sans-serif; letter-spacing:.5px; opacity:0; transition:opacity .15s ease; }
+        .dossier-card:hover .dossier-open-hint,.dossier-card:focus-visible .dossier-open-hint { opacity:1; }
+        .dossier-card:focus-visible { outline:3px solid #f5d98e; outline-offset:5px; }
+        @media(max-width:600px) {
+            .roster-grid.dossier-roster { grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+            .dossier-top h3 { font-size:clamp(16px,5vw,26px); }
+            .dossier-fields { top:73.8%; }
+            .dossier-field span { font-size:clamp(6px,1.7vw,9px); }
+            .dossier-footer span { font-size:clamp(7px,1.7vw,11px); }
+        }
+
+</style>
 </head>
 <body>
 
@@ -926,6 +961,8 @@
                 { key: 'teacher', title: 'CUERPO DOCENTE', desc: 'Profesores y especialistas que aportan experiencia, conocimiento y liderazgo en las misiones.', label: 'PROFESOR', cls: 'teachers' },
                 { key: 'student', title: 'ESTUDIANTES', desc: 'Nuevos talentos en formación. Cada expediente podrá ampliarse a medida que se incorpore su material.', label: 'ESTUDIANTE', cls: 'students' }
             ];
+            const escapeHTML = value => String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+            heroesData.forEach((hero, index) => { hero.cardNumber = String(index + 1).padStart(3, '0'); });
             groups.forEach(group => {
                 const members = heroesData.map((hero, index) => ({ hero, index })).filter(item => item.hero.role === group.key);
                 if (!members.length) return;
@@ -933,17 +970,34 @@
                 section.className = 'roster-section ' + group.cls;
                 section.innerHTML = '<h3 class="roster-section-title">' + group.title + '</h3><p class="roster-section-desc">' + group.desc + '</p>';
                 const grid = document.createElement('div');
-                grid.className = 'roster-grid';
+                grid.className = 'roster-grid dossier-roster';
                 members.forEach(({hero,index}) => {
                     const card = document.createElement('div');
-                    card.className = 'hero-card ' + group.key;
+                    card.className = 'hero-card dossier-card ' + group.key;
+                    card.setAttribute('role', 'button');
+                    card.setAttribute('tabindex', '0');
+                    card.setAttribute('aria-label', 'Abrir expediente de ' + hero.name);
                     card.onclick = () => openHeroModal(index);
-                    const imageMarkup = hero.img
-                        ? '<img src="' + hero.img + '" alt="' + hero.name + '" onerror="this.style.display=\'none\'">'
-                        : '<div class="hero-placeholder"><span>EXPEDIENTE<br>EN FORMACIÓN</span></div>';
-                    card.innerHTML = '<div class="hero-card-img-wrapper">' + imageMarkup + '</div>' +
-                        '<div class="hero-card-info"><span class="hero-rank">' + group.label + '</span><h3>' + hero.name + '</h3>' +
-                        '<div class="hero-click-hint">⚡ VER EXPEDIENTE (A - B - C)</div></div>';
+                    card.onkeydown = event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); openHeroModal(index); } };
+
+                    const fileLabel = hero.img
+                        ? hero.img.replace(/\\.[^.]+$/, '').replace(/[-_]+/g, ' ').toUpperCase()
+                        : (hero.twitch || '').split('/').filter(Boolean).pop().toUpperCase();
+                    const roleLabel = group.label;
+                    const powerLabel = hero.powers ? hero.powers.replace(/\\s+/g, ' ').trim() : 'EN DESARROLLO';
+                    const portrait = hero.img
+                        ? '<img class="dossier-portrait" src="assets/' + escapeHTML(hero.img) + '" alt="' + escapeHTML(hero.name) + '" onerror="this.style.display=\'none\'">'
+                        : '<div class="dossier-portrait-placeholder">RETRATO<br>EN FORMACIÓN</div>';
+                    card.innerHTML =
+                        '<div class="dossier-top"><span class="dossier-classification">CLASIFICADO · NIVEL ALFA</span><h3>' + escapeHTML(hero.name) + '</h3><span class="dossier-subtitle">' + roleLabel + ' · EXPEDIENTE X</span></div>' +
+                        '<div class="dossier-art">' + portrait + '</div>' +
+                        '<div class="dossier-fields">' +
+                            '<div class="dossier-field"><strong>ROL:</strong><span>' + roleLabel + '</span></div>' +
+                            '<div class="dossier-field"><strong>PODER:</strong><span title="' + escapeHTML(powerLabel) + '">' + escapeHTML(powerLabel) + '</span></div>' +
+                            '<div class="dossier-field"><strong>RANGO:</strong><span>' + roleLabel + '</span></div>' +
+                        '</div>' +
+                        '<div class="dossier-footer"><span>' + escapeHTML(fileLabel) + ' · SERIE 1 · #' + hero.cardNumber + '</span></div>' +
+                        '<div class="dossier-open-hint">⚡ ABRIR EXPEDIENTE</div>';
                     grid.appendChild(card);
                 });
                 section.appendChild(grid);
