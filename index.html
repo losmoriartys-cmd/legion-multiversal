@@ -1043,7 +1043,7 @@ function renderSullyStats(channel){
  if(channel.status==='partial' && !channel.annual_summary_2026){
   lines.push('RESUMEN DEL CONJUNTO RECIBIDO:');
   lines.push('Transmisiones registradas: '+(x.streams_count??'—'));
-  lines.push('Tiempo transmitido: '+(x.airtime_minutes!==null&&x.airtime_minutes!==undefined?Math.floor(x.airtime_minutes/60)+' h '+(x.airtime_minutes%60)+' min:'—'));
+  lines.push('Tiempo transmitido: '+(x.airtime_minutes!==null&&x.airtime_minutes!==undefined?Math.floor(x.airtime_minutes/60)+' h '+(x.airtime_minutes%60)+' min':'—'));
   lines.push('Horas vistas: '+(x.hours_watched??'—'));
   lines.push('Promedio ponderado por duración (cálculo): '+(x.average_viewers_duration_weighted??'—'));
   lines.push('Pico máximo: '+(x.peak_viewers??'—'));
