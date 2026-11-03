@@ -913,12 +913,56 @@
             });
         }
 
+        let twitchMetrics = null;
+
+        async function loadTwitchMetrics() {
+            try {
+                const response = await fetch("./data.json?updated=" + Date.now(), { cache: "no-store" });
+                if (!response.ok) throw new Error("HTTP " + response.status);
+                twitchMetrics = await response.json();
+            } catch (error) {
+                console.warn("No se pudieron cargar las estadísticas de Twitch:", error);
+                twitchMetrics = null;
+            }
+        }
+
+        function buildTwitchStats(hero) {
+            const login = (hero.twitch || "").replace(/\\/$/, "").split("/").pop().toLowerCase();
+            const channel = twitchMetrics && twitchMetrics.channels ? twitchMetrics.channels[login] : null;
+            if (!channel) {
+                return "Estadísticas automáticas todavía no disponibles para este canal. La página volverá a intentarlo en la próxima actualización.";
+            }
+            const w = channel.window || {};
+            const number = value => value === null || value === undefined ? "—" : Number(value).toLocaleString("es-AR");
+            const status = channel.live
+                ? "🟢 EN DIRECTO · " + number(channel.current_viewers) + " espectadores ahora"
+                : "⚫ FUERA DE DIRECTO";
+            const lines = [
+                status,
+                "PERÍODO: últimos " + (twitchMetrics.window_days || 10) + " días · Muestras propias",
+                "",
+                "Promedio de espectadores (muestras): " + number(w.average_viewers_sampled),
+                "Pico observado en las muestras: " + number(w.peak_viewers_sampled),
+                "Horas vistas estimadas: " + number(w.estimated_hours_watched),
+                "Horas en directo observadas: " + number(w.observed_live_hours),
+                "Muestras registradas: " + number(w.samples_total),
+                "",
+                "Categoría actual: " + (channel.current_game || (channel.live ? "No informada" : "—")),
+                "Título actual: " + (channel.current_title || "—"),
+                "Seguidores: " + (channel.followers_total === null ? "No disponible con el permiso actual de la API" : number(channel.followers_total)),
+                "",
+                "Última sincronización: " + new Date(twitchMetrics.updated_at).toLocaleString("es-AR"),
+                "METODOLOGÍA: " + (w.method || "Muestreo automático de Twitch.")
+            ];
+            return lines.join("\\n");
+        }
+
         function openHeroModal(index) {
             const hero = heroesData[index];
             document.getElementById('modal-hero-title').innerText = `EXPEDIENTE: ${hero.name}`;
             document.getElementById('modal-bio-text').innerText = hero.bio;
             document.getElementById('modal-powers-text').innerText = hero.powers || 'Habilidades y poderes pendientes de definir con el integrante.';
-            document.getElementById('modal-stats-text').innerText = hero.stats;
+            document.getElementById('modal-stats-text').innerText = buildTwitchStats(hero);
             document.getElementById('modal-log-text').innerText = hero.log;
             document.getElementById('modal-twitch-btn').href = hero.twitch;
             
@@ -951,7 +995,7 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        window.onload = function() { renderRoster(); };
+        window.onload = async function() { await loadTwitchMetrics(); renderRoster(); };
     </script>
 </body>
 </html>
