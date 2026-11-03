@@ -615,6 +615,7 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
 .hero-card-img-wrapper img { width:100%;height:100%;object-fit:contain;object-position:center center;padding:8px; }
 .hero-card .hero-number { position:absolute;z-index:2;top:10px;left:10px;background:linear-gradient(135deg,#fff0b0,#bd8730);color:#21132e;border:2px solid #21132e;box-shadow:3px 3px 0 #000;font-family:'Bangers',cursive;font-size:1.35rem;padding:5px 10px;transform:rotate(-4deg); }
 .hero-card { position:relative; }
+.hero-card:focus-visible { outline:3px solid #ffdf9c; outline-offset:5px; }
 .premium-panel { margin:24px 0;padding:22px;border:2px solid #b98c42;background:linear-gradient(145deg,rgba(25,21,43,.97),rgba(8,10,20,.97));box-shadow:0 0 24px rgba(130,70,220,.12); }
 .premium-panel h3,.premium-panel h4 { font-family:'Bangers',cursive;color:#ffde9a;letter-spacing:1px;margin-bottom:10px; }
 .premium-grid { display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin:18px 0; }
@@ -1128,7 +1129,17 @@ function renderRoster() {
                 members.forEach(({hero,index}) => {
                     const card = document.createElement('div');
                     card.className = 'hero-card ' + group.key;
+                    card.setAttribute('role', 'button');
+                    card.setAttribute('tabindex', '0');
+                    card.setAttribute('aria-haspopup', 'dialog');
+                    card.setAttribute('aria-label', 'Abrir expediente de ' + hero.name);
                     card.onclick = () => openHeroModal(index);
+                    card.addEventListener('keydown', event => {
+                        if (event.key === 'Enter' || event.key === ' ') {
+                            event.preventDefault();
+                            openHeroModal(index);
+                        }
+                    });
                     const imageMarkup = hero.img
                         ? '<img src="' + hero.img + '" alt="' + hero.name + '" onerror="this.style.display=\'none\'">'
                         : '<div class="hero-placeholder"><span>EXPEDIENTE<br>EN FORMACIÓN</span></div>';
