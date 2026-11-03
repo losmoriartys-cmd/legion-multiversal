@@ -1044,7 +1044,7 @@ function renderSullyStats(channel){
   lines.push('Todavía no hay filas de transmisiones verificadas para este integrante.');
  }
  (channel.notes||[]).forEach(n=>lines.push('Nota: '+n));
- return lines.join('\\n');
+ return lines.join('\n');
 }
 async function loadSullyGnomeData(){
  try{
@@ -1151,7 +1151,7 @@ function renderRoster() {
             const sullyText=renderSullyStats(sullyChannel);
             if(sullyText){
                 const statsNode=document.getElementById('modal-stats-text');
-                statsNode.innerText += '\\n\\n' + sullyText;
+                statsNode.innerText += '\n\n' + sullyText;
             }
             document.getElementById('modal-log-text').innerText = hero.log;
             document.getElementById('modal-twitch-btn').href = hero.youtube || hero.twitch || "#";
