@@ -1013,6 +1013,47 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
         ];
 
         
+let sullyGnomeData = null;
+function findSullyChannel(hero){
+ if(!sullyGnomeData || !hero || !hero.twitch)return null;
+ const login=hero.twitch.split('/').filter(Boolean).pop().toLowerCase();
+ return (sullyGnomeData.channels||[]).find(c=>(c.login||'').toLowerCase()===login) || null;
+}
+function renderSullyStats(channel){
+ if(!channel)return '';
+ const lines=[
+  'SULLYGNOME · TRANSMISIONES INDIVIDUALES',
+  'Fuente: SullyGnome · Datos separados de Twitch Helix',
+  'Estado: '+(channel.status==='partial'?'Parcial — hay registros cargados':'Pendiente de recopilar transmisiones'),
+  'Historial: '+channel.source_url
+ ];
+ const x=channel.summary||{};
+ if(channel.status==='partial'){
+  lines.push('Transmisiones registradas: '+(x.streams_count??'—'));
+  lines.push('Tiempo transmitido: '+(x.airtime_minutes!==null?Math.floor(x.airtime_minutes/60)+' h '+(x.airtime_minutes%60)+' min':'—'));
+  lines.push('Horas vistas: '+(x.hours_watched??'—'));
+  lines.push('Promedio ponderado por duración (cálculo): '+(x.average_viewers_duration_weighted??'—'));
+  lines.push('Pico máximo: '+(x.peak_viewers??'—'));
+  lines.push('Columna «Seguidores» (suma reportada): '+(x.followers_gain_reported??'—')+' · interpretación pendiente de confirmación');
+  lines.push('DETALLE POR TRANSMISIÓN:');
+  (channel.streams||[]).forEach(v=>lines.push(
+   v.date+' · '+Math.floor(v.duration_minutes/60)+' h '+(v.duration_minutes%60)+' min · promedio '+v.average_viewers+
+   ' · pico '+v.peak_viewers+' · horas vistas '+v.hours_watched+' · seguidores '+v.followers_reported
+  ));
+ }else{
+  lines.push('Todavía no hay filas de transmisiones verificadas para este integrante.');
+ }
+ (channel.notes||[]).forEach(n=>lines.push('Nota: '+n));
+ return lines.join('\\n');
+}
+async function loadSullyGnomeData(){
+ try{
+  const res=await fetch('sullygnome-data.json',{cache:'no-store'});
+  if(!res.ok)throw new Error('No se pudo leer sullygnome-data.json');
+  sullyGnomeData=await res.json();
+ }catch(e){console.warn('SullyGnome roster data unavailable:',e);}
+}
+
 let instituteStatsData = null;
 function findChannelStats(hero){
  if(!instituteStatsData || !hero || !hero.twitch)return null;
@@ -1106,6 +1147,12 @@ function renderRoster() {
             }else{
                 document.getElementById('modal-stats-text').innerText=hero.stats||'Las métricas de esta plataforma se integrarán por separado.';
             }
+            const sullyChannel=findSullyChannel(hero);
+            const sullyText=renderSullyStats(sullyChannel);
+            if(sullyText){
+                const statsNode=document.getElementById('modal-stats-text');
+                statsNode.innerText += '\\n\\n' + sullyText;
+            }
             document.getElementById('modal-log-text').innerText = hero.log;
             document.getElementById('modal-twitch-btn').href = hero.youtube || hero.twitch || "#";
             document.getElementById('modal-twitch-btn').textContent = hero.youtube ? "VISITAR CANAL DE YOUTUBE" : "VISITAR CANAL DE TWITCH";
@@ -1140,7 +1187,7 @@ function renderRoster() {
         }
 
         window.onload = function() { renderRoster();
-        loadInstituteStats(); loadPartnerMetrics(); };
+        loadInstituteStats(); loadPartnerMetrics(); loadSullyGnomeData(); };
     </script>
 </body>
 </html>
