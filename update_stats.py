@@ -4,10 +4,10 @@ import urllib.parse
 import urllib.request
 from datetime import datetime, timedelta, timezone
 
-CLIENT_ID = os.environ.get("TWITCH_CLIENT_ID") or "gp762nuuoqcoxypju8c569th9wz7q5"
+CLIENT_ID = os.environ.get("TWITCH_CLIENT_ID") or "ec7tx8ufdef9v9b13dtde93g1zbts9"
 CLIENT_SECRET = os.environ.get("TWITCH_CLIENT_SECRET")
 CHANNELS = [
-    "losmoriartys", "ladymoriarty01", "ther0d3r1k", "elgabii",
+    "losmoriartys", "ladymoriarty01", "ther0d3r1k", "elgabii090",
     "capyunaplay", "habitos_atomicos", "ardipii", "akumazoldyck", "daved0608"
 ]
 WINDOW_DAYS = 10
