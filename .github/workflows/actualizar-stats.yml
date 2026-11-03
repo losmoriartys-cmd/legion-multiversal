@@ -35,7 +35,14 @@ jobs:
         run: python update_stats.py
 
       - name: Guardar historial actualizado
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "📊 Actualización automática de estadísticas Twitch"
-          file_pattern: data.json
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data.json
+          if git diff --cached --quiet; then
+            echo "No hay cambios de estadísticas para guardar."
+            exit 0
+          fi
+          git commit -m "📊 Actualización automática de estadísticas Twitch"
+          git pull --rebase origin main
+          git push
