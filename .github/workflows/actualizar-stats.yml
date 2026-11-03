@@ -1,6 +1,10 @@
 name: Actualizar estadísticas Twitch
 
 on:
+  push:
+    paths:
+      - 'update_stats.py'
+      - '.github/workflows/actualizar-stats.yml'
   schedule:
     - cron: '*/15 * * * *'
   workflow_dispatch:
