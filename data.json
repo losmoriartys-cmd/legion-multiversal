@@ -1,0 +1,20 @@
+{
+  "schema_version": 3,
+  "updated_at": null,
+  "period_days": 30,
+  "source": "Twitch Helix API",
+  "refresh_minutes": 5,
+  "channels_total": 9,
+  "channels_synced": 0,
+  "methodology": {
+    "hours_streamed": "Suma de duración de VODs archivados creados en el período; puede excluir directos sin VOD.",
+    "video_views": "Suma de view_count de VODs; no equivale a horas vistas.",
+    "games": "Categoría de Twitch asociada a cada VOD; horas calculadas sumando la duración de VODs por categoría.",
+    "live": "Estado consultado con Get Streams al momento de la última sincronización.",
+    "followers": "No disponible con token de aplicación; requiere autorización individual con moderator:read:followers.",
+    "avg_viewers": "No disponible históricamente mediante Get Videos; requiere muestreo propio.",
+    "peak_viewers": "No disponible históricamente mediante Get Videos; requiere muestreo propio.",
+    "hours_watched": "No disponible mediante Get Videos; no se calcula a partir de reproducciones."
+  },
+  "channels": []
+}
