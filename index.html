@@ -715,6 +715,25 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
         @media(max-width:850px){.origin-cover{grid-template-columns:1fr}.origin-timeline{grid-template-columns:repeat(2,minmax(0,1fr))}}
         @media(max-width:560px){.origin-timeline{grid-template-columns:1fr}.origin-cover{padding:15px}.origin-mission{padding:20px}.origin-heroes{grid-template-columns:repeat(2,minmax(0,1fr))}.origin-heroes img{height:170px}}
 
+    
+        /* Identidad visual provisional de Legión Multiversal */
+        .brand-emblem{position:relative;width:82px;height:82px;flex:0 0 82px;display:grid;place-items:center;background:linear-gradient(145deg,#ffe66b,#e7a900 48%,#7b3d00);border:4px solid #05070c;clip-path:polygon(50% 0,91% 13%,100% 50%,86% 88%,50% 100%,12% 87%,0 50%,12% 13%);filter:drop-shadow(4px 4px 0 #000)}
+        .emblem-orbit{position:absolute;width:59px;height:34px;border:3px solid #07111f;border-radius:50%;transform:rotate(-35deg);box-shadow:0 0 0 2px rgba(255,255,255,.28)}
+        .emblem-letter{position:relative;font-family:'Bangers',cursive;font-size:3.2rem;line-height:1;color:#101827;text-shadow:2px 2px 0 #fff}
+        .brand-emblem small{position:absolute;bottom:8px;right:12px;font:900 .55rem Montserrat,sans-serif;color:#fff;background:#101827;padding:2px 4px;border:1px solid #fff}
+        .future-recruits{margin-top:28px;padding:22px;background:linear-gradient(120deg,#101a2b,#1a1230);border:2px dashed #65718a}
+        .future-recruits-heading{text-align:center;margin-bottom:18px}
+        .future-recruits-heading span{font:1rem 'Bangers',cursive;letter-spacing:2px;color:#00d2ff}
+        .future-recruits-heading h4{font:1.65rem 'Bangers',cursive;color:#ffde00;margin:5px 0}
+        .future-recruits-heading p{color:#aebbd0;font-size:.88rem;line-height:1.5}
+        .future-silhouettes{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+        .future-silhouette{min-height:160px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:10px;padding:14px 7px;background:radial-gradient(ellipse at 50% 45%,#29344b,#101522 68%);border:1px solid #3a4a66;overflow:hidden}
+        .silhouette-art{position:relative;width:72px;height:92px;display:block;opacity:.48;filter:drop-shadow(0 0 10px #00d2ff)}
+        .silhouette-art:before{content:"";position:absolute;top:0;left:22px;width:30px;height:30px;border-radius:50%;background:#080d18;box-shadow:0 0 0 2px #66758d}
+        .silhouette-art:after{content:"";position:absolute;bottom:0;left:5px;width:62px;height:58px;background:#080d18;clip-path:polygon(25% 0,75% 0,100% 100%,0 100%);border:1px solid #66758d}
+        .future-silhouette b{font:1rem 'Bangers',cursive;letter-spacing:1px;color:#94a3b8}
+        @media(max-width:560px){.brand-emblem{width:64px;height:64px;flex-basis:64px}.emblem-letter{font-size:2.5rem}.future-silhouettes{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
     </style>
 </head>
 <body>
@@ -722,7 +741,7 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
     <header>
         <div class="header-top">
             <div class="logo-container">
-                <div class="badge-comic">LEGIÓN</div>
+                <div class="brand-emblem" aria-label="Emblema de Legión Multiversal"><span class="emblem-orbit"></span><span class="emblem-letter">M</span><small>LM</small></div>
                 <div class="title-group">
                     <h1>LEGIÓN MULTIVERSAL</h1>
                     <p>DIFERENTES MUNDOS. UNA MISMA LEGIÓN.</p>
@@ -793,9 +812,17 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
                     <figure><img src="assets/ladymoriarty.jpg" alt="Lady Moriarty"><figcaption>Lady Moriarty</figcaption></figure>
                     <figure><img src="assets/ardipii.jpg" alt="ArDipii"><figcaption>ArDipii</figcaption></figure>
                     <figure><img src="assets/habitos.jpg" alt="Hábitos Atómicos"><figcaption>Hábitos Atómicos</figcaption></figure>
-                    <figure><img src="PatoTeksplika.jpg" alt="Pato — Oratoris"><figcaption>Pato — Oratoris</figcaption></figure>
+                    
                 </div>
-                <p class="origin-roster-note">El porfolio sigue creciendo. Las próximas incorporaciones tendrán su propio lugar cuando llegue el momento.</p>
+                <p class="origin-roster-note">El porfolio sigue creciendo. Las próximas incorporaciones tendrán su propio lugar cuando llegue el momento.</p><div class="future-recruits">
+                    <div class="future-recruits-heading"><span>PRÓXIMAS INCORPORACIONES</span><h4>Hay nuevos universos por descubrir</h4><p>Cuatro lugares reservados para quienes todavía están por cruzar el portal. No son personajes confirmados: son una invitación a lo que viene.</p></div>
+                    <div class="future-silhouettes" aria-label="Cuatro espacios reservados para futuras incorporaciones">
+                        <div class="future-silhouette"><span class="silhouette-art"></span><b>PRÓXIMO HÉROE</b></div>
+                        <div class="future-silhouette"><span class="silhouette-art"></span><b>PRÓXIMA HEROÍNA</b></div>
+                        <div class="future-silhouette"><span class="silhouette-art"></span><b>PRÓXIMO HÉROE</b></div>
+                        <div class="future-silhouette"><span class="silhouette-art"></span><b>PRÓXIMA HEROÍNA</b></div>
+                    </div>
+                </div>
             </div>
 
             <div class="origin-mission">
@@ -820,8 +847,8 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
         <!-- CAPÍTULO 2: ROSTER -->
         <section id="chapter-2" class="chapter-panel">
             <div class="chapter-tag">CAPÍTULO 02</div>
-            <h2 class="comic-title">INSTITUTO S3X-MEN — ROSTER OFICIAL</h2>
-            <div class="institute-banner"><div class="institute-stamp">ARCHIVO<br>ACADÉMICO</div><div><h3>UN LUGAR PARA CADA TALENTO EXTRAORDINARIO</h3><p>La Dirección coordina el instituto, el cuerpo docente comparte experiencia y los estudiantes desarrollan su potencial. Cada integrante tiene un expediente propio y un lugar dentro de la comunidad.</p></div></div>
+            <h2 class="comic-title">LEGIÓN MULTIVERSAL — NUESTRO ROSTER</h2>
+            <div class="institute-banner"><div class="institute-stamp">ARCHIVO<br>DE LA LEGIÓN</div><div><h3>UN LUGAR PARA CADA TALENTO EXTRAORDINARIO</h3><p>Una comunidad de creadores con identidades y especialidades diferentes. Cada integrante tiene un expediente propio y un lugar dentro de este universo compartido.</p></div></div>
             <div class="institute-counts"><div><strong>02</strong><span>DIRECTORES</span></div><div><strong>06</strong><span>PROFESORES</span></div><div><strong>02</strong><span>ESTUDIANTES</span></div></div>
             <p class="roster-intro">Seleccioná una ficha para consultar su biografía, poderes, estadísticas y registro de misiones.</p>
             <div class="roster-legend"><span class="rank-director">DIRECCIÓN</span><span class="rank-teacher">CUERPO DOCENTE</span><span class="rank-student">ESTUDIANTES</span></div>
