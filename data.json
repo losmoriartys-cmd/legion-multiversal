@@ -3,7 +3,7 @@
   "source": "Twitch Helix API",
   "window_days": 10,
   "sampling_interval_minutes": 15,
-  "updated_at": "2026-11-03T22:22:38Z",
+  "updated_at": "2026-11-03T22:32:14Z",
   "channels": {
     "ladymoriarty01": {
       "login": "ladymoriarty01",
@@ -18,7 +18,7 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-03T22:22:38Z",
+      "updated_at": "2026-11-03T22:32:14Z",
       "window": {
         "samples_total": 7,
         "live_samples": 0,
@@ -108,7 +108,7 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-03T22:22:38Z",
+      "updated_at": "2026-11-03T22:32:14Z",
       "window": {
         "samples_total": 7,
         "live_samples": 0,
@@ -198,7 +198,7 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-03T22:22:38Z",
+      "updated_at": "2026-11-03T22:32:14Z",
       "window": {
         "samples_total": 7,
         "live_samples": 0,
@@ -288,7 +288,7 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-03T22:22:38Z",
+      "updated_at": "2026-11-03T22:32:14Z",
       "window": {
         "samples_total": 7,
         "live_samples": 0,
@@ -378,7 +378,7 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-03T22:22:38Z",
+      "updated_at": "2026-11-03T22:32:14Z",
       "window": {
         "samples_total": 7,
         "live_samples": 0,
@@ -468,7 +468,7 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-03T22:22:38Z",
+      "updated_at": "2026-11-03T22:32:14Z",
       "window": {
         "samples_total": 7,
         "live_samples": 0,
@@ -558,7 +558,7 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-03T22:22:38Z",
+      "updated_at": "2026-11-03T22:32:14Z",
       "window": {
         "samples_total": 7,
         "live_samples": 0,
@@ -648,7 +648,7 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-03T22:22:38Z",
+      "updated_at": "2026-11-03T22:32:14Z",
       "window": {
         "samples_total": 7,
         "live_samples": 0,
@@ -738,7 +738,7 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-03T22:22:38Z",
+      "updated_at": "2026-11-03T22:32:14Z",
       "window": {
         "samples_total": 7,
         "live_samples": 0,
