@@ -157,3 +157,5 @@ if __name__=="__main__":
     try: main()
     except TwitchAPIError as exc:
         print(f"ERROR FATAL: {exc}",file=sys.stderr); sys.exit(1)
+
+# Trigger de validación inicial en la rama de desarrollo.
