@@ -927,7 +927,7 @@
         }
 
         function buildTwitchStats(hero) {
-            const login = (hero.twitch || "").replace(/\\/$/, "").split("/").pop().toLowerCase();
+            const login = (hero.twitch || "").split("/").filter(Boolean).pop().toLowerCase();
             const channel = twitchMetrics && twitchMetrics.channels ? twitchMetrics.channels[login] : null;
             if (!channel) {
                 return "Estadísticas automáticas todavía no disponibles para este canal. La página volverá a intentarlo en la próxima actualización.";
