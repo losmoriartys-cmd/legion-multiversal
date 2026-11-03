@@ -126,30 +126,26 @@
             gap: 30px; margin-top: 20px;
         }
 
+        /* Plantilla maestra: misma composición para Dirección, Docentes y Estudiantes */
         .hero-card {
-            background: #1a202c; border: 4px solid var(--border-color);
-            box-shadow: 8px 8px 0 var(--border-color); display: flex;
-            flex-direction: column; overflow: hidden; cursor: pointer;
-            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            position: relative; isolation: isolate; min-width: 0;
+            background: linear-gradient(155deg, #171329 0%, #0b0d18 58%, #171329 100%);
+            border: 3px solid #c8a75b !important; border-radius: 12px;
+            box-shadow: 0 0 0 3px #30204e, 0 12px 28px rgba(0,0,0,.48), inset 0 0 22px rgba(151,91,255,.12) !important;
+            display: flex; flex-direction: column; overflow: hidden; cursor: pointer;
+            transition: transform .2s ease, box-shadow .2s ease;
         }
-        .hero-card:hover { transform: translate(-3px, -3px); box-shadow: 11px 11px 0 var(--border-color); border-color: var(--yellow-accent); }
-
-        .hero-card-img-wrapper { width: 100%; background: #000; border-bottom: 4px solid var(--border-color); height: 280px; }
-        .hero-card-img-wrapper img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-        .hero-card-info { padding: 20px; background: #121824; display: flex; flex-direction: column; gap: 8px; text-align: center; }
-        .hero-card-info h3 {
-            font-family: 'Bangers', cursive; font-size: 1.8rem;
-            color: var(--yellow-accent); letter-spacing: 1px;
-            text-shadow: 2px 2px 0 var(--border-color);
-        }
-
-        .hero-click-hint {
-            background: var(--blue-accent); color: #000;
-            font-family: 'Bangers', cursive; font-size: 1.1rem;
-            padding: 8px; border: 3px solid var(--border-color);
-            box-shadow: 3px 3px 0 var(--border-color); text-transform: uppercase; margin-top: 5px;
-        }
+        .hero-card::before { content:""; position:absolute; inset:7px; border:1px solid rgba(192,157,255,.55); border-radius:6px; pointer-events:none; z-index:2; }
+        .hero-card:hover { transform: translateY(-5px); box-shadow: 0 0 0 3px #49316f, 0 18px 34px rgba(0,0,0,.58), 0 0 22px rgba(176,126,255,.25) !important; }
+        .hero-number { position:absolute; z-index:3; top:15px; left:15px; padding:5px 10px; border:1px solid #d7bd7a; border-radius:4px; background:rgba(9,8,20,.88); color:#f5d98e; font:700 .85rem 'Montserrat',sans-serif; letter-spacing:1px; }
+        .hero-card-img-wrapper { width:100%; height:290px; padding:24px 18px 12px; box-sizing:border-box; display:flex; align-items:center; justify-content:center; background:radial-gradient(ellipse at 50% 42%, rgba(124,77,190,.28), transparent 66%), linear-gradient(180deg,#171329,#090b13); border-bottom:1px solid rgba(211,181,117,.65); }
+        .hero-card-img-wrapper img { width:100%; height:100%; object-fit:contain; object-position:center; display:block; filter:drop-shadow(0 8px 12px rgba(0,0,0,.55)); }
+        .hero-card-info { min-height:125px; box-sizing:border-box; padding:17px 20px 20px; background:linear-gradient(180deg,#171329,#0d0c18); display:flex; flex-direction:column; align-items:center; gap:9px; text-align:center; }
+        .hero-card-info h3 { margin:0; font-family:'Bangers',cursive; font-size:1.85rem; color:#f2d58b; letter-spacing:1.2px; text-shadow:0 2px 10px rgba(180,135,255,.35); }
+        .hero-rank { display:inline-flex; align-items:center; justify-content:center; min-height:22px; padding:3px 12px; border:1px solid rgba(178,142,231,.7); border-radius:20px; background:rgba(92,57,139,.28); color:#d8c2ff; font:700 .68rem 'Montserrat',sans-serif; letter-spacing:1.4px; }
+        .hero-click-hint { width:100%; box-sizing:border-box; margin-top:4px; padding:9px 12px; border:1px solid #aa8bce; border-radius:4px; background:linear-gradient(90deg,#30204d,#49316b,#30204d); color:#f7e8c1; box-shadow:none; font:700 .76rem 'Montserrat',sans-serif; letter-spacing:1.2px; text-transform:uppercase; }
+        .hero-card:focus-visible { outline:3px solid #f3d58a; outline-offset:5px; }
+        @media (max-width:600px) { .roster-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; } .hero-card-img-wrapper { height:220px; padding:24px 12px 10px; } .hero-card-info { padding:14px 12px 16px; } .hero-card-info h3 { font-size:1.45rem; } .hero-click-hint { font-size:.65rem; } }
 
         .modal-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -158,10 +154,17 @@
         .modal-overlay.active { display: flex; }
 
         .modal-content {
-            background: #121824; border: 5px solid var(--border-color);
-            box-shadow: 12px 12px 0 var(--border-color); max-width: 950px; width: 100%;
-            max-height: 90vh; overflow-y: auto; display: flex; flex-direction: column; position: relative;
+            background:linear-gradient(155deg,#171329,#0b0d18 62%,#171329);
+            border:3px solid #c8a75b; border-radius:12px;
+            box-shadow:0 0 0 3px #30204e,0 18px 48px rgba(0,0,0,.65),inset 0 0 28px rgba(151,91,255,.1);
+            max-width:950px;width:100%;max-height:90vh;overflow-y:auto;display:flex;flex-direction:column;position:relative;
         }
+        .modal-header { background:linear-gradient(90deg,#30204d,#49316b,#30204d); color:#f5d98e; border-bottom:1px solid #c8a75b; }
+        .modal-header h2 { color:#f5d98e; }
+        .modal-tab-btn { border:1px solid rgba(200,167,91,.65); border-radius:5px; box-shadow:none; }
+        .modal-tab-btn.active { background:#49316b; color:#f5d98e; border-color:#e2c47d; box-shadow:0 0 12px rgba(176,126,255,.22); transform:none; }
+        .modal-tab-pane { background:rgba(23,19,41,.92); border:1px solid rgba(200,167,91,.55); border-radius:7px; box-shadow:none; }
+        .modal-tab-pane h3 { color:#f2d58b; }
 
         .modal-header {
             background: var(--yellow-accent); color: #000; padding: 15px 25px;
@@ -1140,9 +1143,9 @@ function renderRoster() {
                     const imageMarkup = hero.img
                         ? '<img src="' + hero.img + '" alt="' + hero.name + '" onerror="this.style.display=\'none\'">'
                         : '<div class="hero-placeholder"><span>EXPEDIENTE<br>EN FORMACIÓN</span></div>';
-                    card.innerHTML = '<span class="hero-number">#' + String(index + 1).padStart(2,'0') + '</span><div class="hero-card-img-wrapper">' + imageMarkup + '</div>' +
-                        '<div class="hero-card-info"><span class="hero-rank">' + group.label + '</span><h3>' + hero.name + '</h3>' +
-                        '<div class="hero-click-hint">⚡ VER EXPEDIENTE (A - B - C)</div></div>';
+                    card.innerHTML = '<span class="hero-number">EXP. #' + String(index + 1).padStart(2,'0') + '</span><div class="hero-card-img-wrapper">' + imageMarkup + '</div>' +
+                        '<div class="hero-card-info"><span class="hero-rank">' + group.label + ' · INSTITUTO</span><h3>' + hero.name + '</h3>' +
+                        '<div class="hero-click-hint">✦ ABRIR EXPEDIENTE ✦</div></div>';
                     grid.appendChild(card);
                 });
                 section.appendChild(grid);
