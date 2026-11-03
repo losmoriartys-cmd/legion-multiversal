@@ -862,16 +862,16 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
 <div class="premium-panel">
  <div class="premium-kicker">Instituto S3X-MEN · Observatorio de actividad</div>
  <h3>Estadísticas verificables del roster</h3>
- <p>Datos obtenidos de Twitch Helix para un período móvil de 30 días: 9 canales de Twitch del roster. Pato utiliza YouTube y se integrará por separado. Los valores no disponibles permanecen vacíos.</p>
+ <p>Panel conectado a Twitch Helix mediante <b>data.json</b>: 9 canales, historial propio de hasta 10 días y una muestra programada cada 15 minutos. La información se presenta tal como la devuelve la API; los campos sin autorización o sin observaciones se muestran como no disponibles.</p>
  <div id="stats-updated" class="stats-note">Cargando fecha de actualización…</div>
  <div id="stats-summary" class="premium-grid"></div>
- <div class="stats-table-wrap"><table class="stats-table"><thead><tr><th>Canal</th><th>Seguidores</th><th>VODs</th><th>Horas transmitidas</th><th>Vistas VOD</th><th>Promedio oficial</th><th>Pico oficial</th><th>Promedio muestreo</th><th>Pico muestreo</th><th>Muestras</th></tr></thead><tbody id="stats-table-body"><tr><td colspan="10">Cargando estadísticas…</td></tr></tbody></table></div>
- <p class="stats-note">Metodología: horas transmitidas = duración acumulada de VODs archivados; vistas VOD = reproducciones de esos videos. No equivalen a horas vistas. Promedio y pico oficiales históricos no están cargados. El promedio y pico por muestreo son estimaciones: se calculan con muestras cada cinco minutos durante directos. El muestreo todavía no tiene registros. Twitch no devolvió categorías identificables para estos VODs en esta captura; por eso no mostramos un ranking de juegos por integrante.</p>
+ <div class="stats-table-wrap"><table class="stats-table"><thead><tr><th>Canal</th><th>Estado</th><th>Espectadores actuales</th><th>Categoría actual</th><th>Promedio observado</th><th>Pico observado</th><th>Horas en directo observadas</th><th>Muestras</th></tr></thead><tbody id="stats-table-body"><tr><td colspan="8">Cargando estadísticas…</td></tr></tbody></table></div>
+ <p class="stats-note">Metodología: el sistema registra el estado del canal y los espectadores visibles en cada consulta. El promedio y el pico son estadísticas de las muestras propias, no métricas oficiales de Creator Dashboard. Las horas observadas y las horas vistas estimadas solo se calculan entre muestras consecutivas del mismo directo. Seguidores y analíticas históricas oficiales requieren permisos adicionales y no se completan con estimaciones.</p>
 </div>
 <div class="premium-grid">
- <div class="premium-card"><h3>Qué medimos</h3><p>Seguidores, actividad publicada, reproducciones de VOD y presencia en directo. La información se actualizará cuando la automatización esté activa.</p></div>
- <div class="premium-card"><h3>Qué no inventamos</h3><p>No sustituimos métricas faltantes por estimaciones. Cada número debe tener fuente, período y método identificables.</p></div>
- <div class="premium-card"><h3>Próxima evolución</h3><p>Incorporar reportes históricos oficiales de Creator Dashboard y acumular muestras de espectadores en directo.</p></div>
+ <div class="premium-card"><h3>Qué medimos</h3><p>Estado en directo, espectadores actuales, categoría y evolución de las muestras propias registradas.</p></div>
+ <div class="premium-card"><h3>Qué no inventamos</h3><p>Seguidores, promedio oficial y pico oficial quedan pendientes cuando Twitch no los entrega con los permisos disponibles.</p></div>
+ <div class="premium-card"><h3>Próxima evolución</h3><p>Acumular historial de hasta 10 días y sumar reportes oficiales de Creator Dashboard cuando cada canal los facilite.</p></div>
 </div>
 </section>
 
@@ -989,7 +989,7 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
 <section id="chapter-9" class="chapter-panel comic-page"><div class="chapter-tag">CAPÍTULO 09</div><h2 class="comic-title">ALIANZAS, PARTNERS Y OPORTUNIDADES</h2>
 <div class="premium-panel"><div class="premium-kicker">Relaciones y colaboraciones declaradas</div><h3>Una comunidad abierta a trabajar con la industria</h3><p>El Instituto reúne creadores con experiencia en programas de partners, campañas de claves y colaboraciones con desarrolladores. Diferenciamos claramente una asociación oficial, un programa de creadores y una campaña puntual.</p>
 <div class="premium-grid"><div class="premium-card"><h3>TheR0D3R1K</h3><p>Partner de Twitch — Bolivia.</p></div><div class="premium-card"><h3>Los Moriartys</h3><p>Partner Creator declarado de Enshrouded y Cinderia.</p></div><div class="premium-card"><h3>Roster</h3><p>Participación en campañas y solicitudes mediante Lurkit y Keymailer.</p></div></div></div>
-<div class="premium-panel"><div class="premium-kicker">Ficha de aplicación · datos actuales de Twitch</div><h3>Métricas disponibles del roster</h3><p>Seguidores consultados por Twitch Helix en la última sincronización. Promedio y pico oficiales requieren el reporte Analytics de cada canal; no se reemplazan por cifras antiguas del Excel. Pato queda fuera de esta tabla porque su canal es YouTube.</p><div class="stats-table-wrap"><table class="stats-table"><thead><tr><th>Canal</th><th>Seguidores actuales</th><th>Promedio oficial 30d</th><th>Pico oficial 30d</th><th>Muestras</th></tr></thead><tbody id="partner-metrics-body"><tr><td colspan="5">Cargando métricas…</td></tr></tbody></table></div><p class="stats-note">Esta tabla es la base verificable para armar cada pitch. Antes de aplicar, completar promedio y pico desde Twitch Creator Dashboard → Analytics → Overview, con el mismo período de 30 días.</p></div><div class="premium-panel"><h3>Directorio de estudios y programas documentados</h3><p class="stats-note">Los umbrales y beneficios siguientes provienen del Excel del equipo. Son referencias de trabajo, no confirmación de que las convocatorias sigan abiertas ni de que un integrante esté aprobado.</p>
+<div class="premium-panel"><div class="premium-kicker">Ficha de aplicación · datos de actividad observada</div><h3>Estado verificable de los canales</h3><p>La sincronización automática muestra presencia en directo y muestras observadas durante una ventana de hasta 10 días. Estos datos sirven para seguimiento interno, pero <b>no sustituyen</b> el promedio de espectadores de 30 días ni las métricas oficiales exigidas por los programas de partners. Pato utiliza YouTube y se gestiona por separado.</p><div class="stats-table-wrap"><table class="stats-table"><thead><tr><th>Canal</th><th>Estado</th><th>Espectadores actuales</th><th>Categoría</th><th>Promedio observado</th><th>Pico observado</th><th>Muestras</th></tr></thead><tbody id="partner-metrics-body"><tr><td colspan="7">Cargando métricas…</td></tr></tbody></table></div><p class="stats-note">Para solicitudes comerciales, completar por separado las métricas oficiales del período solicitado desde Twitch Creator Dashboard → Analytics → Overview. No usar las muestras parciales como sustituto.</p></div><div class="premium-panel"><h3>Directorio de estudios y programas documentados</h3><p class="stats-note">Los umbrales y beneficios siguientes provienen del Excel del equipo. Son referencias de trabajo, no confirmación de que las convocatorias sigan abiertas ni de que un integrante esté aprobado.</p>
 <div class="premium-grid">
 <div class="premium-card"><h3>THQ Nordic Creator Portal</h3><p><b>Referencia de requisitos:</b> El Excel sugería 0–5+ promedio y 100 seguidores. El portal oficial no publica un mínimo numérico general; revisa cada misión. La selección del Creator Portal puede ser manual.</p><p>Keys, noticias, embargos, sorteos y assets.</p><p><span class="premium-kicker">Verificar convocatoria actual antes de aplicar</span></p></div><div class="premium-card"><h3>Raw Fury Creator Program</h3><p><b>Referencia de requisitos:</b> El programa Fellowship of the Furies pide como referencia 20 espectadores concurrentes promedio en Twitch durante el último mes o 800 vistas promedio en los últimos 5 videos de YouTube. La selección es manual y cumplir el umbral no garantiza ingreso.</p><p>Indies, misiones, recompensas y posibles Paid Quests.</p><p><span class="premium-kicker">Verificar convocatoria actual antes de aplicar</span></p></div><div class="premium-card"><h3>Solasta II Partner Program</h3><p><b>Referencia de requisitos:</b> Excel: 5+ promedio; 200 seguidores mínimos</p><p>Claves, acceso anticipado y comunidad con desarrolladores.</p><p><span class="premium-kicker">Verificar convocatoria actual antes de aplicar</span></p></div><div class="premium-card"><h3>The Lord of the Rings: Return to Moria</h3><p><b>Referencia de requisitos:</b> Excel: 5–10+ promedio; 200 seguidores mínimos</p><p>Claves de juego/DLC y acceso anticipado.</p><p><span class="premium-kicker">Verificar convocatoria actual antes de aplicar</span></p></div><div class="premium-card"><h3>DayZ Creator Program</h3><p><b>Referencia de requisitos:</b> El Excel anotaba 10+ promedio y 300 seguidores. Creator Crew oficial es abierto a creadores de cualquier tamaño; no confundirlo con el Partner Programme, que tiene criterios separados.</p><p>Claves, showcases y materiales promocionales.</p><p><span class="premium-kicker">Verificar convocatoria actual antes de aplicar</span></p></div><div class="premium-card"><h3>Ready or Not Creator Program</h3><p><b>Referencia de requisitos:</b> Excel: 10–15+ promedio; 300 seguidores mínimos</p><p>Claves, DLC y campañas.</p><p><span class="premium-kicker">Verificar convocatoria actual antes de aplicar</span></p></div><div class="premium-card"><h3>Sea of Thieves Programme</h3><p><b>Referencia de requisitos:</b> El Excel anotaba 10+ promedio y 300 seguidores; Creator Crew oficial está abierto a creadores de cualquier tamaño y no equivale al Partner Programme.</p><p>Creator Crew ofrece recursos, desafíos y recompensas comunitarias. No confundirlo con el Partner Programme.</p><p><span class="premium-kicker">Verificar convocatoria actual antes de aplicar</span></p></div><div class="premium-card"><h3>Rematch Content Creator</h3><p><b>Referencia de requisitos:</b> Excel: 10+ promedio; 250 seguidores mínimos</p><p>Pruebas, contacto con desarrolladores y perks.</p><p><span class="premium-kicker">Verificar convocatoria actual antes de aplicar</span></p></div><div class="premium-card"><h3>Funcom Creator Program</h3><p><b>Referencia de requisitos:</b> El Excel sugería 15–20+ promedio y 500 seguidores. La guía oficial actual de Funcom usa como referencia 20 CCV en Twitch (últimos 30 días) o 1.500 vistas promedio en YouTube.</p><p>Conan Exiles, Dune: Awakening y Metal: Hellsinger. Requisitos actuales: 20 CCV Twitch o 1.500 vistas medias YouTube como referencia.</p><p><span class="premium-kicker">Verificar convocatoria actual antes de aplicar</span></p></div><div class="premium-card"><h3>V Rising / Stunlock</h3><p><b>Referencia de requisitos:</b> Excel: 15+ promedio; 400 seguidores mínimos</p><p>Programa de creadores y claves.</p><p><span class="premium-kicker">Verificar convocatoria actual antes de aplicar</span></p></div><div class="premium-card"><h3>Kinetic Games / Phasmophobia</h3><p><b>Referencia de requisitos:</b> El Excel anotaba 20–50+ promedio y 500+ seguidores; la página oficial actual exige 100 CCV como mínimo (ideal 150) dos veces por semana o videos de Phasmophobia con 2.500 vistas promedio (ideal 5.000). El programa está cerrado a nuevas solicitudes.</p><p>El Excel registró estos beneficios históricos. Estado oficial consultado: solicitudes de Partner cerradas; los requisitos vigentes y la apertura deben revisarse en el enlace oficial.</p><p><span class="premium-kicker">Verificar convocatoria actual antes de aplicar</span></p></div><div class="premium-card"><h3>Hunt: Showdown 1896</h3><p><b>Referencia de requisitos:</b> Excel: 30–50+ promedio para paid; 1.000 seguidores</p><p>Claves, campañas y posibles acciones pagas.</p><p><span class="premium-kicker">Verificar convocatoria actual antes de aplicar</span></p></div><div class="premium-card"><h3>Quantic Dream</h3><p><b>Referencia de requisitos:</b> Excel: 20+ promedio; 500 seguidores mínimos</p><p>Detroit: Become Human / Heavy Rain; programa de creadores.</p><p><span class="premium-kicker">Verificar convocatoria actual antes de aplicar</span></p></div><div class="premium-card"><h3>ARMA Reforger</h3><p><b>Referencia de requisitos:</b> Excel: 25+ promedio; 500 seguidores mínimos</p><p>Campañas de claves y posibles acciones pagas.</p><p><span class="premium-kicker">Verificar convocatoria actual antes de aplicar</span></p></div><div class="premium-card"><h3>Clair Obscur: Expedition 33</h3><p><b>Referencia de requisitos:</b> Excel: 15+ promedio; 300 seguidores mínimos</p><p>Accesos, códigos y eventos.</p><p><span class="premium-kicker">Verificar convocatoria actual antes de aplicar</span></p></div>
 </div></div>
@@ -1223,7 +1223,7 @@ let instituteStatsData = null;
 function findChannelStats(hero){
  if(!instituteStatsData || !hero || !hero.twitch)return null;
  const login=hero.twitch.split('/').filter(Boolean).pop().toLowerCase();
- return (instituteStatsData.channels||[]).find(c=>(c.login||'').toLowerCase()===login) || null;
+ return Object.values(instituteStatsData.channels||{}).find(c=>(c.login||'').toLowerCase()===login) || null;
 }
 function formatMetric(value,digits=2){
  if(value===null||value===undefined)return 'Pendiente de verificación';
@@ -1233,24 +1233,27 @@ async function loadInstituteStats(){
  const body=document.getElementById('stats-table-body'); if(!body)return;
  const fmt=(v,d=2)=>v===null||v===undefined?'—':(typeof v==='number'?v.toLocaleString('es-AR',{maximumFractionDigits:d}):v);
  try{
-  const res=await fetch('stats-data.json',{cache:'no-store'}); if(!res.ok)throw new Error('No se pudo leer stats-data.json');
-  const data=await res.json(); instituteStatsData=data; const channels=data.channels||[];
-  document.getElementById('stats-updated').textContent='Actualizado: '+new Date(data.updated_at).toLocaleString('es-AR')+' · Período: '+data.period_days+' días · Fuente: '+data.source+' · Sincronizados: '+data.channels_synced+'/'+data.channels_total;
-  const totalFollowers=channels.reduce((n,c)=>n+(c.stats?.followers||0),0);
-  const totalVods=channels.reduce((n,c)=>n+(c.stats?.streams||0),0);
-  document.getElementById('stats-summary').innerHTML='<div class="premium-card"><h3>'+fmt(totalFollowers,0)+'</h3><p>Seguidores sumados</p></div><div class="premium-card"><h3>'+fmt(totalVods,0)+'</h3><p>VODs archivados</p></div><div class="premium-card"><h3>'+fmt(channels.reduce((n,c)=>n+(c.stats?.hours_streamed||0),0))+'</h3><p>Horas transmitidas (VOD)</p></div>';
-  body.innerHTML=channels.map(c=>'<tr><td>'+c.display_name+'</td><td>'+fmt(c.stats?.followers,0)+'</td><td>'+fmt(c.stats?.streams,0)+'</td><td>'+fmt(c.stats?.hours_streamed)+'</td><td>'+fmt(c.stats?.video_views,0)+'</td><td>'+fmt(c.stats?.avg_viewers)+'</td><td>'+fmt(c.stats?.peak_viewers)+'</td><td>'+fmt(c.stats?.avg_viewers_sampled)+'</td><td>'+fmt(c.stats?.peak_viewers_sampled,0)+'</td><td>'+fmt(c.stats?.viewer_samples,0)+'</td></tr>').join('');
- }catch(e){body.innerHTML='<tr><td colspan="10">Estadísticas temporalmente no disponibles. '+e.message+'</td></tr>';}
+  const res=await fetch('data.json',{cache:'no-store'}); if(!res.ok)throw new Error('No se pudo leer data.json');
+  const data=await res.json(); instituteStatsData=data;
+  const channels=Object.values(data.channels||{});
+  const liveCount=channels.filter(c=>c.live).length;
+  const totalSamples=channels.reduce((n,c)=>n+(c.window?.samples_total||0),0);
+  const observedHours=channels.reduce((n,c)=>n+(c.window?.observed_live_hours||0),0);
+  const estimatedHoursWatched=channels.reduce((n,c)=>n+(c.window?.estimated_hours_watched||0),0);
+  document.getElementById('stats-updated').textContent='Actualizado: '+new Date(data.updated_at).toLocaleString('es-AR')+' · Ventana histórica: hasta '+data.window_days+' días · Frecuencia programada: '+data.sampling_interval_minutes+' min · Fuente: '+data.source+' · Canales: '+channels.length;
+  document.getElementById('stats-summary').innerHTML='<div class="premium-card"><h3>'+fmt(liveCount,0)+' / '+fmt(channels.length,0)+'</h3><p>Canales en directo ahora</p></div><div class="premium-card"><h3>'+fmt(totalSamples,0)+'</h3><p>Muestras acumuladas</p></div><div class="premium-card"><h3>'+fmt(observedHours)+'</h3><p>Horas en directo observadas</p></div><div class="premium-card"><h3>'+fmt(estimatedHoursWatched)+'</h3><p>Horas vistas estimadas por muestreo</p></div>';
+  body.innerHTML=channels.map(c=>'<tr><td>'+c.display_name+'</td><td>'+(c.live?'EN DIRECTO':'OFFLINE')+'</td><td>'+fmt(c.current_viewers,0)+'</td><td>'+fmt(c.current_game)+'</td><td>'+fmt(c.window?.average_viewers_sampled)+'</td><td>'+fmt(c.window?.peak_viewers_sampled,0)+'</td><td>'+fmt(c.window?.observed_live_hours)+'</td><td>'+fmt(c.window?.samples_total,0)+'</td></tr>').join('');
+ }catch(e){body.innerHTML='<tr><td colspan="8">Estadísticas temporalmente no disponibles. '+e.message+'</td></tr>';}
 }
 
 async function loadPartnerMetrics(){
  const body=document.getElementById('partner-metrics-body'); if(!body)return;
- const fmt=(v)=>v===null||v===undefined?'Pendiente':(typeof v==='number'?v.toLocaleString('es-AR',{maximumFractionDigits:2}):v);
+ const fmt=(v,d=2)=>v===null||v===undefined?'Pendiente':(typeof v==='number'?v.toLocaleString('es-AR',{maximumFractionDigits:d}):v);
  try{
-  const res=await fetch('stats-data.json',{cache:'no-store'}); if(!res.ok)throw new Error('No se pudo leer stats-data.json');
-  const data=await res.json(); const channels=data.channels||[];
-  body.innerHTML=channels.map(c=>'<tr><td>'+c.display_name+'</td><td>'+fmt(c.stats?.followers)+'</td><td>'+fmt(c.stats?.avg_viewers)+'</td><td>'+fmt(c.stats?.peak_viewers)+'</td><td>'+fmt(c.stats?.viewer_samples)+'</td></tr>').join('');
- }catch(e){body.innerHTML='<tr><td colspan="5">Métricas temporalmente no disponibles.</td></tr>';}
+  const res=await fetch('data.json',{cache:'no-store'}); if(!res.ok)throw new Error('No se pudo leer data.json');
+  const data=await res.json(); const channels=Object.values(data.channels||{});
+  body.innerHTML=channels.map(c=>'<tr><td>'+c.display_name+'</td><td>'+(c.live?'EN DIRECTO':'OFFLINE')+'</td><td>'+fmt(c.current_viewers,0)+'</td><td>'+fmt(c.current_game)+'</td><td>'+fmt(c.window?.average_viewers_sampled)+'</td><td>'+fmt(c.window?.peak_viewers_sampled,0)+'</td><td>'+fmt(c.window?.samples_total,0)+'</td></tr>').join('');
+ }catch(e){body.innerHTML='<tr><td colspan="7">Métricas temporalmente no disponibles.</td></tr>';}
 }
 
 function renderRoster() {
@@ -1320,21 +1323,25 @@ function renderRoster() {
             document.getElementById('modal-powers-text').innerText = hero.powers || 'Habilidades y poderes pendientes de definir con el integrante.';
             const channelStats=findChannelStats(hero);
             if(channelStats){
-                const s=channelStats.stats||{};
-                const games=(channelStats.games||[]).filter(g=>g.game && g.game!=="Categoría no informada");
+                const w=channelStats.window||{};
                 document.getElementById('modal-stats-text').innerText =
-                    'PERÍODO: '+(instituteStatsData.period_days||30)+' DÍAS\n'+
-                    'Seguidores: '+formatMetric(s.followers,0)+'\n'+
-                    'VODs archivados: '+formatMetric(s.streams,0)+'\n'+
-                    'Horas transmitidas (duración VOD): '+formatMetric(s.hours_streamed)+'\n'+
-                    'Reproducciones de VOD: '+formatMetric(s.video_views,0)+'\n'+
-                    'Promedio oficial de espectadores: '+formatMetric(s.avg_viewers)+'\n'+
-                    'Pico oficial de espectadores: '+formatMetric(s.peak_viewers)+'\n'+
-                    'Promedio por muestreo: '+formatMetric(s.avg_viewers_sampled)+'\n'+
-                    'Pico observado por muestreo: '+formatMetric(s.peak_viewers_sampled,0)+'\n'+
-                    'Muestras registradas: '+formatMetric(s.viewer_samples,0)+'\n'+
-                    'Juegos/categorías: '+(games.length?games.map(g=>g.game+' ('+g.hours_streamed+' h)').join(', '):'Sin categorías identificables en esta sincronización')+'\n\n'+
-                    'Fuente: '+(instituteStatsData.source||'Twitch Helix API')+'. Las reproducciones de VOD no equivalen a horas vistas.';
+                    'FUENTE: '+(instituteStatsData.source||'Twitch Helix API')+'\n'+
+                    'Última sincronización: '+(channelStats.updated_at?new Date(channelStats.updated_at).toLocaleString('es-AR'):'Pendiente')+'\n'+
+                    'Estado actual: '+(channelStats.live?'EN DIRECTO':'OFFLINE')+'\n'+
+                    'Espectadores actuales: '+formatMetric(channelStats.current_viewers,0)+'\n'+
+                    'Categoría actual: '+formatMetric(channelStats.current_game)+'\n'+
+                    'Seguidores: '+formatMetric(channelStats.followers_total,0)+'\n'+
+                    'Nota de seguidores: '+(channelStats.followers_note||'No disponible')+'\n\n'+
+                    'HISTORIAL PROPIO · ÚLTIMOS '+(instituteStatsData.window_days||10)+' DÍAS\n'+
+                    'Muestras registradas: '+formatMetric(w.samples_total,0)+'\n'+
+                    'Muestras en directo: '+formatMetric(w.live_samples,0)+'\n'+
+                    'Directos observados: '+formatMetric(w.streams_observed,0)+'\n'+
+                    'Promedio de espectadores por muestreo: '+formatMetric(w.average_viewers_sampled)+'\n'+
+                    'Pico observado: '+formatMetric(w.peak_viewers_sampled,0)+'\n'+
+                    'Horas en directo observadas: '+formatMetric(w.observed_live_hours)+'\n'+
+                    'Horas vistas estimadas: '+formatMetric(w.estimated_hours_watched)+'\n'+
+                    'Método: '+(w.method||'Muestras periódicas de Twitch Helix.')+'\n\n'+
+                    'Las muestras no equivalen a las métricas oficiales de Twitch Creator Dashboard.';
             }else{
                 document.getElementById('modal-stats-text').innerText=hero.stats||'Las métricas de esta plataforma se integrarán por separado.';
             }
