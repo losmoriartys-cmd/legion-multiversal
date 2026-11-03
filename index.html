@@ -606,7 +606,34 @@
         }
 
         .mt-20 { margin-top: 20px; }
-    </style>
+    
+/* Instituto premium: fotografía centrada, páginas de cómic y fondos animados */
+body { background-image: radial-gradient(rgba(150,90,255,.10) 1px, transparent 1px), linear-gradient(135deg,#080914,#111021 55%,#090b16); background-size:18px 18px, cover; }
+body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:none; opacity:.22; background:radial-gradient(ellipse at 15% 25%,rgba(133,60,255,.22),transparent 42%),radial-gradient(ellipse at 85% 75%,rgba(40,120,255,.16),transparent 40%); animation: instituteGlow 18s ease-in-out infinite alternate; }
+@keyframes instituteGlow { from {transform:translate3d(-1%,0,0);opacity:.16} to {transform:translate3d(1%,1%,0);opacity:.32} }
+.hero-card-img-wrapper { display:flex;align-items:center;justify-content:center;background:radial-gradient(circle,#29213f 0%,#080914 72%);height:320px; }
+.hero-card-img-wrapper img { width:100%;height:100%;object-fit:contain;object-position:center center;padding:8px; }
+.hero-card .hero-number { position:absolute;z-index:2;top:10px;left:10px;background:linear-gradient(135deg,#fff0b0,#bd8730);color:#21132e;border:2px solid #21132e;box-shadow:3px 3px 0 #000;font-family:'Bangers',cursive;font-size:1.35rem;padding:5px 10px;transform:rotate(-4deg); }
+.hero-card { position:relative; }
+.premium-panel { margin:24px 0;padding:22px;border:2px solid #b98c42;background:linear-gradient(145deg,rgba(25,21,43,.97),rgba(8,10,20,.97));box-shadow:0 0 24px rgba(130,70,220,.12); }
+.premium-panel h3,.premium-panel h4 { font-family:'Bangers',cursive;color:#ffde9a;letter-spacing:1px;margin-bottom:10px; }
+.premium-grid { display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin:18px 0; }
+.premium-card { padding:16px;background:rgba(255,255,255,.045);border:1px solid rgba(220,174,96,.48);border-radius:8px; }
+.premium-card p,.premium-panel p,.premium-panel li { line-height:1.55;color:#e6e1f1; }
+.premium-panel a { color:#ffd77b; }
+.premium-kicker { color:#c6a5ff;text-transform:uppercase;letter-spacing:2px;font-size:.75rem;font-weight:900; }
+.stats-note { color:#b8b2c9;font-size:.85rem;line-height:1.5;margin:12px 0; }
+.stats-table-wrap { overflow-x:auto; }
+.stats-table { width:100%;border-collapse:collapse;min-width:700px;background:#090b15; }
+.stats-table th,.stats-table td { padding:10px;border:1px solid #3a304d;text-align:left; }
+.stats-table th { background:#2b2142;color:#ffdf9c;font-family:'Bangers',cursive;font-size:1.05rem; }
+.stats-table tr:nth-child(even) { background:rgba(255,255,255,.035); }
+.comic-page { position:relative;overflow:hidden; }
+.comic-page::before { content:"";position:absolute;inset:0;pointer-events:none;opacity:.09;background-image:radial-gradient(#fff 1px,transparent 1px);background-size:6px 6px; }
+.chapter-panel { background-image:linear-gradient(145deg,rgba(15,17,31,.97),rgba(20,15,34,.97)); }
+@media(max-width:600px){.hero-card-img-wrapper{height:270px}.premium-panel{padding:14px}}
+
+</style>
 </head>
 <body>
 
@@ -629,7 +656,7 @@
             <button class="nav-btn" onclick="switchChapter(6)">CAP 6: ARSENAL JUEGOS</button>
             <button class="nav-btn" onclick="switchChapter(7)">CAP 7: RECLUTA</button>
             <button class="nav-btn" onclick="switchChapter(8)">CAP 8: STAFF</button>
-        </nav>
+        <a href="#chapter-9" class="nav-btn" onclick="showChapter('chapter-9',this)">09 · PARTNERS</a><a href="#chapter-10" class="nav-btn" onclick="showChapter('chapter-10',this)">10 · COMUNIDAD</a></nav>
     </header>
 
     <main>
@@ -674,63 +701,52 @@
         </section>
 
         <!-- CAPÍTULO 3: DATABASE -->
-        <section id="chapter-3" class="chapter-panel">
-            <div class="chapter-tag">CAPÍTULO 03</div>
-            <h2 class="comic-title">THE TEAM DATABASE (ESTADÍSTICAS GLOBALES)</h2>
-            <div class="comic-grid-list">
-                <div class="comic-item-card"><h3>⚡ ALCANCE TOTAL</h3><p><strong>8.5K+ Seguidores:</strong> Sumatoria combinada de los creadores del escuadrón.</p></div>
-                <div class="comic-item-card"><h3>📈 AUDIENCIA GLOBAL</h3><p><strong>70+ Avg / 150+ Pico:</strong> Máximo histórico alcanzado en transmisiones simultáneas.</p></div>
-                <div class="comic-item-card"><h3>🕒 VOLUMEN MENSUAL</h3><p><strong>250+ Horas:</strong> Producción total de contenido generado mes a mes.</p></div>
-                <div class="comic-item-card"><h3>🌍 GEOGRAFÍA TÁCTICA</h3><p><strong>3 Países:</strong> Puente internacional activo entre Argentina 🇦🇷, Bolivia 🇧🇴 y México 🇲🇽.</p></div>
-            </div>
-            <h3 style="font-family: 'Bangers', cursive; font-size: 1.8rem; color: var(--yellow-accent); margin-top: 30px; margin-bottom: 10px;">TABLA COMPARATIVA DE RENDIMIENTO</h3>
-            <table class="comic-table">
-                <thead><tr><th>Agente / Héroe</th><th>País y Rol</th><th>Seguidores</th><th>Media Viewers</th><th>Juego Principal</th><th>Estado</th></tr></thead>
-                <tbody>
-                    <tr><td><strong>LosMoriartys</strong></td><td>🇦🇷 Argentina<br>Estratega / Fundador</td><td>1,500+</td><td>25 Avg</td><td>Estrategia / Shooter</td><td>🟢 En Guardia</td></tr>
-                    <tr><td><strong>TheR0D3R1K</strong></td><td>🇦🇷 Argentina<br>El Fuerte / Co-Fundador</td><td>2,100+</td><td>30 Avg</td><td>Acción / Coop</td><td>🟢 En Guardia</td></tr>
-                    <tr><td><strong>LadyMoriarty01</strong></td><td>🇦🇷 Argentina<br>Hechicera Táctica</td><td>1,200+</td><td>20 Avg</td><td>Terror / Variedad</td><td>🟢 En Guardia</td></tr>
-                    <tr><td><strong>Capyunaplay</strong></td><td>🇧🇴 Bolivia<br>Agente de Asalto</td><td>980+</td><td>18 Avg</td><td>Shooters / Survival</td><td>🟢 En Guardia</td></tr>
-                    <tr><td><strong>ArdiPii</strong></td><td>🇲🇽 México<br>Artillería Rápida</td><td>1,350+</td><td>22 Avg</td><td>Battle Royale</td><td>🟢 En Guardia</td></tr>
-                    <tr><td><strong>Akumazoldyck</strong></td><td>🇲🇽 México<br>Asesino de Sombras</td><td>1,800+</td><td>28 Avg</td><td>Competitivo / Shooters</td><td>🟢 En Guardia</td></tr>
-                    <tr><td><strong>Elgabii090</strong></td><td>🇦🇷 Argentina<br>Ingeniero de Campo</td><td>850+</td><td>15 Avg</td><td>Sandbox / Coop</td><td>🟢 En Guardia</td></tr>
-                    <tr><td><strong>Habitos_atomicos</strong></td><td>🇲🇽 México<br>Cronista Táctico</td><td>1,100+</td><td>19 Avg</td><td>Indie / Simuladores</td><td>🟢 En Guardia</td></tr>
-                    <tr><td><strong>Daved0608</strong></td><td>🇦🇷 Argentina<br>Agente Táctico</td><td>900+</td><td>17 Avg</td><td>Variedad</td><td>🟢 En Guardia</td></tr>
-                </tbody>
-            </table>
-        </section>
+<section id="chapter-3" class="chapter-panel comic-page">
+<div class="chapter-tag">CAPÍTULO 03</div>
+<h2 class="comic-title">THE TEAM DATABASE — DATOS REALES</h2>
+<div class="premium-panel">
+ <div class="premium-kicker">Instituto S3X-MEN · Observatorio de actividad</div>
+ <h3>Estadísticas verificables del roster</h3>
+ <p>Datos obtenidos de Twitch Helix para un período móvil de 30 días. Los valores se muestran como fueron recibidos; las métricas no disponibles permanecen vacías.</p>
+ <div id="stats-updated" class="stats-note">Cargando fecha de actualización…</div>
+ <div id="stats-summary" class="premium-grid"></div>
+ <div class="stats-table-wrap"><table class="stats-table"><thead><tr><th>Canal</th><th>Seguidores</th><th>VODs</th><th>Horas transmitidas</th><th>Vistas VOD</th><th>Promedio oficial</th><th>Pico oficial</th><th>Muestras</th></tr></thead><tbody id="stats-table-body"><tr><td colspan="8">Cargando estadísticas…</td></tr></tbody></table></div>
+ <p class="stats-note">Metodología: horas transmitidas = duración acumulada de VODs archivados; vistas VOD = reproducciones de esos videos. No equivalen a horas vistas. Promedio y pico oficiales históricos no están cargados. El muestreo de espectadores se encuentra en fase inicial y todavía no tiene muestras.</p>
+</div>
+<div class="premium-grid">
+ <div class="premium-card"><h3>Qué medimos</h3><p>Seguidores, actividad publicada, reproducciones de VOD y presencia en directo. La información se actualizará cuando la automatización esté activa.</p></div>
+ <div class="premium-card"><h3>Qué no inventamos</h3><p>No sustituimos métricas faltantes por estimaciones. Cada número debe tener fuente, período y método identificables.</p></div>
+ <div class="premium-card"><h3>Próxima evolución</h3><p>Incorporar reportes históricos oficiales de Creator Dashboard y acumular muestras de espectadores en directo.</p></div>
+</div>
+</section>
 
-        <!-- CAPÍTULO 4: MISIONES -->
-        <section id="chapter-4" class="chapter-panel">
-            <div class="chapter-tag">CAPÍTULO 04</div>
-            <h2 class="comic-title">MISIONES Y TUTORIALES (LURKIT + KEYMAILER)</h2>
-            <div class="comic-grid-list">
-                <div class="comic-item-card"><h3>1. LURKIT.COM</h3><p>Plataforma all-in-one para Key Campaigns, Creator Programs y Paid Quests oficiales.</p></div>
-                <div class="comic-item-card"><h3>2. KEYMAILER.CO</h3><p>Donde pedís juegos premium y AAA todos los días (60,000 influencers, 2,500 estudios).</p></div>
-            </div>
-        </section>
+        <!-- CAPÍTULO 4: LURKIT + KEYMAILER -->
+<section id="chapter-4" class="chapter-panel comic-page"><div class="chapter-tag">CAPÍTULO 04</div><h2 class="comic-title">CENTRO DE OPERACIONES — LURKIT + KEYMAILER</h2>
+<div class="premium-grid">
+<div class="premium-card"><div class="premium-kicker">Plataforma de campañas</div><h3><a href="https://www.lurkit.com/campaigns/browse" target="_blank">LURKIT</a></h3><p>Según el instructivo del equipo, reúne campañas de claves, Creator Programs y Paid Quests. Es la herramienta recomendada en el Excel para campañas cooperativas y oportunidades de largo plazo.</p></div>
+<div class="premium-card"><div class="premium-kicker">Descubrimiento de juegos</div><h3><a href="https://keymailer.co/creators" target="_blank">KEYMAILER</a></h3><p>Permite vincular canales, explorar campañas y solicitar juegos. El Excel la recomienda especialmente para ampliar la búsqueda de lanzamientos y títulos premium.</p></div>
+</div>
+<div class="premium-panel"><h3>Ruta de trabajo para cada integrante</h3><ol><li>Crear la cuenta y vincular los canales que correspondan.</li><li>Completar biografía, país, idioma, géneros y redes.</li><li>Revisar los requisitos específicos de cada campaña.</li><li>Enviar una solicitud personalizada, sin copiar el mismo texto a todos los estudios.</li><li>Si se aprueba, respetar fechas, plataformas, embargos y condiciones.</li><li>Publicar la cobertura solicitada y entregar VOD, clips o enlaces como evidencia.</li></ol></div>
+<div class="premium-grid">
+<div class="premium-card"><h3>Lurkit — tipos de oportunidad</h3><ul><li><b>Key Campaigns:</b> solicitudes de claves.</li><li><b>Creator Programs:</b> relaciones continuas, posibles accesos anticipados, recursos y beneficios según cada programa.</li><li><b>Paid Quests:</b> campañas remuneradas sujetas a objetivos, elegibilidad y condiciones.</li></ul><p><a href="https://www.lurkit.com/campaigns/browse" target="_blank">Explorar campañas</a></p></div>
+<div class="premium-card"><h3>Keymailer — flujo de solicitud</h3><ul><li>Vincular y verificar los canales.</li><li>Completar géneros, idioma y perfil.</li><li>Filtrar campañas disponibles.</li><li>Solicitar y esperar respuesta del publisher.</li><li>Publicar la cobertura y mantener actualizado el perfil.</li></ul><p><a href="https://keymailer.co/how-it-works" target="_blank">Cómo funciona</a></p></div>
+</div>
+<div class="premium-panel"><h3>Pitch institucional — español</h3><p>Hola, equipo de [ESTUDIO]. Somos el Instituto S3X-MEN, una comunidad latinoamericana de creadores de contenido que trabaja en colaboraciones entre Argentina, Bolivia y México. Producimos directos en español, sesiones cooperativas y contenidos individuales. Nos interesa conocer [JUEGO] y evaluar una cobertura acorde a nuestra comunidad. Canal: [ENLACE]. Métricas verificables: [SEGUIDORES], [PROMEDIO], [PICO] y período [30 DÍAS]. Muchas gracias por considerar nuestra propuesta.</p><h3>Institutional pitch — English</h3><p>Hello [STUDIO] team. We are Instituto S3X-MEN, a Latin American creator collective from Argentina, Bolivia and Mexico. We produce Spanish-language livestreams, co-op sessions and individual gaming content. We would love to explore a possible coverage opportunity for [GAME]. Channel: [LINK]. Verified metrics: [FOLLOWERS], [AVERAGE VIEWERS], [PEAK VIEWERS], period: [30 DAYS]. Thank you for your consideration.</p></div>
+</section>
 
-        <!-- CAPÍTULO 5: TOP CATEGORIAS -->
-        <section id="chapter-5" class="chapter-panel">
-            <div class="chapter-tag">CAPÍTULO 05</div>
-            <h2 class="comic-title">TOP CATEGORIAS (TENDENCIAS EN TWITCH)</h2>
-            <div class="comic-grid-list">
-                <div class="comic-item-card"><h3>1. JUST CHATTING</h3><p>Interacción directa y comunidad.</p></div>
-                <div class="comic-item-card"><h3>2. FORTNITE</h3><p>Shooter líder y customs de grupo.</p></div>
-                <div class="comic-item-card"><h3>3. MINECRAFT</h3><p>Sandbox y servidores cooperativos.</p></div>
-            </div>
-        </section>
+        <!-- CAPÍTULO 5: TOP 20 CATEGORÍAS -->
+<section id="chapter-5" class="chapter-panel comic-page"><div class="chapter-tag">CAPÍTULO 05</div><h2 class="comic-title">TOP 20 — CATEGORÍAS DE TWITCH</h2>
+<div class="premium-panel"><div class="premium-kicker">Radar de tendencias</div><h3>Las categorías que mueven la plataforma</h3><p>Este capítulo tendrá un ranking de 20 categorías con espectadores, canales activos, promedio y evolución. El Excel adjunto no contiene un ranking de categorías con datos verificables, por lo que no publicamos una lista inventada.</p><p>Cuando incorporemos una fuente fechada, cada puesto mostrará período, región y criterio de ordenamiento. También podremos distinguir tendencias globales de categorías relevantes para el roster.</p></div>
+<div class="premium-grid"><div class="premium-card"><h3>Ficha de cada categoría</h3><p>Nombre, descripción, audiencia, canales activos, tendencia y oportunidad de contenido.</p></div><div class="premium-card"><h3>Aplicación al roster</h3><p>Relación con los géneros y formatos que ya producen los integrantes, sin confundir popularidad global con rendimiento individual.</p></div><div class="premium-card"><h3>Fuente pendiente</h3><p>Ranking externo actualizado, fecha de consulta y metodología antes de publicar posiciones.</p></div></div>
+</section>
 
-        <!-- CAPÍTULO 6: ARSENAL JUEGOS -->
-        <section id="chapter-6" class="chapter-panel">
-            <div class="chapter-tag">CAPÍTULO 06</div>
-            <h2 class="comic-title">ARSENAL TÁCTICO (TOP 20 JUEGOS COOP)</h2>
-            <div class="comic-grid-list">
-                <div class="comic-item-card"><h3>1. FORTNITE</h3><p><strong>Plataforma:</strong> Epic Games Store</p></div>
-                <div class="comic-item-card"><h3>2. MINECRAFT</h3><p><strong>Plataforma:</strong> Java / Bedrock</p></div>
-                <div class="comic-item-card"><h3>3. LETHAL COMPANY</h3><p><strong>Plataforma:</strong> Steam</p></div>
-            </div>
-        </section>
+        <!-- CAPÍTULO 6: JUEGOS COOPERATIVOS -->
+<section id="chapter-6" class="chapter-panel comic-page"><div class="chapter-tag">CAPÍTULO 06</div><h2 class="comic-title">ARSENAL COOPERATIVO — 20 JUEGOS</h2>
+<div class="premium-panel"><h3>Selección documentada en el Excel</h3><p>La pestaña “Juegos Coop 4+” contiene 16 entradas. Se muestran sus datos originales; cuatro espacios quedan reservados para ampliar el catálogo sin atribuir datos que no figuran en la planilla.</p></div>
+<div class="premium-grid">
+<div class="premium-card"><div class="premium-kicker">Battle Royale / Creativo</div><h3>Fortnite</h3><p><b>Jugadores:</b> 4–100<br><b>Plataforma:</b> Crossplay<br><b>Desarrollador:</b> Epic Games<br><b>Precio:</b> Gratis<br><b>Uso:</b> Customs entre integrantes</p></div><div class="premium-card"><div class="premium-kicker">Sandbox Survival</div><h3>Minecraft</h3><p><b>Jugadores:</b> 4–30<br><b>Plataforma:</b> Java / Bedrock<br><b>Desarrollador:</b> Mojang<br><b>Precio:</b> Precio variable<br><b>Uso:</b> Construcción y minijuegos</p></div><div class="premium-card"><div class="premium-kicker">Survival vikingo</div><h3>Valheim</h3><p><b>Jugadores:</b> 4–10<br><b>Plataforma:</b> Steam<br><b>Desarrollador:</b> Iron Gate<br><b>Precio:</b> Precio variable<br><b>Uso:</b> Cooperativo de supervivencia</p></div><div class="premium-card"><div class="premium-kicker">Horror cooperativo</div><h3>Lethal Company</h3><p><b>Jugadores:</b> 4–8<br><b>Plataforma:</b> Steam<br><b>Desarrollador:</b> Zeekerss<br><b>Precio:</b> Precio variable<br><b>Uso:</b> Ideal para clips</p></div><div class="premium-card"><div class="premium-kicker">Horror cooperativo físico</div><h3>R.E.P.O.</h3><p><b>Jugadores:</b> 4–6<br><b>Plataforma:</b> Steam<br><b>Desarrollador:</b> semiwork<br><b>Precio:</b> Precio variable<br><b>Uso:</b> Caos cooperativo</p></div><div class="premium-card"><div class="premium-kicker">Simulador de tienda</div><h3>Supermarket Together</h3><p><b>Jugadores:</b> 4–16<br><b>Plataforma:</b> Steam<br><b>Desarrollador:</b> DeadDevs<br><b>Precio:</b> Precio variable<br><b>Uso:</b> Gestión de supermercado</p></div><div class="premium-card"><div class="premium-kicker">Simulador de tienda</div><h3>Supermarket Simulator</h3><p><b>Jugadores:</b> 4 (mod)<br><b>Plataforma:</b> Steam<br><b>Desarrollador:</b> Nokta Games<br><b>Precio:</b> Precio variable<br><b>Uso:</b> Cooperativo mediante mod</p></div><div class="premium-card"><div class="premium-kicker">Party cooperativo</div><h3>One-Armed Cook / Robber</h3><p><b>Jugadores:</b> 4–8<br><b>Plataforma:</b> Steam<br><b>Desarrollador:</b> Duhndal<br><b>Precio:</b> Precio variable<br><b>Uso:</b> Cocina y robos caóticos</p></div><div class="premium-card"><div class="premium-kicker">FPS táctico</div><h3>Valorant</h3><p><b>Jugadores:</b> 5–10<br><b>Plataforma:</b> PC<br><b>Desarrollador:</b> Riot Games<br><b>Precio:</b> Gratis<br><b>Uso:</b> Torneos internos</p></div><div class="premium-card"><div class="premium-kicker">Simulador de tienda anime</div><h3>Anime Shop Simulator</h3><p><b>Jugadores:</b> 4–8<br><b>Plataforma:</b> Steam<br><b>Desarrollador:</b> No indicado<br><b>Precio:</b> Precio variable<br><b>Uso:</b> Gestión de tienda temática</p></div><div class="premium-card"><div class="premium-kicker">Simulador de restaurante</div><h3>PlateUp!</h3><p><b>Jugadores:</b> 4<br><b>Plataforma:</b> Steam<br><b>Desarrollador:</b> It's Happening<br><b>Precio:</b> Precio variable<br><b>Uso:</b> Cocina roguelike</p></div><div class="premium-card"><div class="premium-kicker">Party / minijuegos</div><h3>Pummel Party</h3><p><b>Jugadores:</b> 4–8<br><b>Plataforma:</b> Steam<br><b>Desarrollador:</b> Rebuilt Games<br><b>Precio:</b> Precio variable<br><b>Uso:</b> Competencia tipo party</p></div><div class="premium-card"><div class="premium-kicker">Horror / clips</div><h3>Content Warning</h3><p><b>Jugadores:</b> 4<br><b>Plataforma:</b> Steam<br><b>Desarrollador:</b> Landfall<br><b>Precio:</b> Precio variable<br><b>Uso:</b> Grabar videos juntos</p></div><div class="premium-card"><div class="premium-kicker">Investigación paranormal</div><h3>Phasmophobia</h3><p><b>Jugadores:</b> 4<br><b>Plataforma:</b> Steam<br><b>Desarrollador:</b> Kinetic Games<br><b>Precio:</b> Precio variable<br><b>Uso:</b> Caza de fantasmas</p></div><div class="premium-card"><div class="premium-kicker">Cocina cooperativa</div><h3>Overcooked 2</h3><p><b>Jugadores:</b> 4<br><b>Plataforma:</b> Steam / consolas<br><b>Desarrollador:</b> Ghost Town Games<br><b>Precio:</b> Precio variable<br><b>Uso:</b> Clásico cooperativo</p></div><div class="premium-card"><div class="premium-kicker">Aventura cooperativa</div><h3>It Takes Two / A Way Out</h3><p><b>Jugadores:</b> 2 (rotativo)<br><b>Plataforma:</b> Steam / EA<br><b>Desarrollador:</b> Hazelight<br><b>Precio:</b> Precio variable<br><b>Uso:</b> Turnar parejas</p></div>
+<div class="premium-card"><div class="premium-kicker">Espacio reservado</div><h3>#17 — Próxima incorporación</h3><p>Completar con juego confirmado.</p></div><div class="premium-card"><div class="premium-kicker">Espacio reservado</div><h3>#18 — Próxima incorporación</h3><p>Completar con juego confirmado.</p></div><div class="premium-card"><div class="premium-kicker">Espacio reservado</div><h3>#19 — Próxima incorporación</h3><p>Completar con juego confirmado.</p></div><div class="premium-card"><div class="premium-kicker">Espacio reservado</div><h3>#20 — Próxima incorporación</h3><p>Completar con juego confirmado.</p></div>
+</div></section>
 
         <!-- CAPÍTULO 7: RECLUTAMIENTO -->
         <section id="chapter-7" class="chapter-panel">
@@ -755,7 +771,24 @@
                 </div>
             </div>
         </section>
-    </main>
+    <!-- CAPÍTULO 9: PARTNERS Y MARCAS -->
+<section id="chapter-9" class="chapter-panel comic-page"><div class="chapter-tag">CAPÍTULO 09</div><h2 class="comic-title">ALIANZAS, PARTNERS Y OPORTUNIDADES</h2>
+<div class="premium-panel"><div class="premium-kicker">Relaciones y colaboraciones declaradas</div><h3>Una comunidad abierta a trabajar con la industria</h3><p>El Instituto reúne creadores con experiencia en programas de partners, campañas de claves y colaboraciones con desarrolladores. Diferenciamos claramente una asociación oficial, un programa de creadores y una campaña puntual.</p>
+<div class="premium-grid"><div class="premium-card"><h3>TheR0D3R1K</h3><p>Partner de Twitch — Bolivia.</p></div><div class="premium-card"><h3>Los Moriartys</h3><p>Partner Creator declarado de Enshrouded y Cinderia.</p></div><div class="premium-card"><h3>Roster</h3><p>Participación en campañas y solicitudes mediante Lurkit y Keymailer.</p></div></div></div>
+<div class="premium-panel"><h3>Directorio de estudios y programas documentados</h3><p class="stats-note">Los umbrales y beneficios siguientes provienen del Excel del equipo. Son referencias de trabajo, no confirmación de que las convocatorias sigan abiertas ni de que un integrante esté aprobado.</p>
+<div class="premium-grid">
+<div class="premium-card"><h3>THQ Nordic Creator Portal</h3><p><b>Referencia de requisitos:</b> Excel: 0–5+ promedio; 100 seguidores mínimos</p><p>Keys, noticias, embargos, sorteos y assets.</p><p><span class="premium-kicker">Verificar convocatoria actual antes de aplicar</span></p></div><div class="premium-card"><h3>Raw Fury Creator Program</h3><p><b>Referencia de requisitos:</b> Excel: 0–10+ promedio; 100 seguidores mínimos</p><p>Indies, misiones, recompensas y posibles Paid Quests.</p><p><span class="premium-kicker">Verificar convocatoria actual antes de aplicar</span></p></div><div class="premium-card"><h3>Solasta II Partner Program</h3><p><b>Referencia de requisitos:</b> Excel: 5+ promedio; 200 seguidores mínimos</p><p>Claves, acceso anticipado y comunidad con desarrolladores.</p><p><span class="premium-kicker">Verificar convocatoria actual antes de aplicar</span></p></div><div class="premium-card"><h3>The Lord of the Rings: Return to Moria</h3><p><b>Referencia de requisitos:</b> Excel: 5–10+ promedio; 200 seguidores mínimos</p><p>Claves de juego/DLC y acceso anticipado.</p><p><span class="premium-kicker">Verificar convocatoria actual antes de aplicar</span></p></div><div class="premium-card"><h3>DayZ Creator Program</h3><p><b>Referencia de requisitos:</b> Excel: 10+ promedio; 300 seguidores mínimos</p><p>Claves, showcases y materiales promocionales.</p><p><span class="premium-kicker">Verificar convocatoria actual antes de aplicar</span></p></div><div class="premium-card"><h3>Ready or Not Creator Program</h3><p><b>Referencia de requisitos:</b> Excel: 10–15+ promedio; 300 seguidores mínimos</p><p>Claves, DLC y campañas.</p><p><span class="premium-kicker">Verificar convocatoria actual antes de aplicar</span></p></div><div class="premium-card"><h3>Sea of Thieves Programme</h3><p><b>Referencia de requisitos:</b> Excel: 10+ promedio; 300 seguidores mínimos</p><p>Ancient Coins, Drops y contenido anticipado según programa.</p><p><span class="premium-kicker">Verificar convocatoria actual antes de aplicar</span></p></div><div class="premium-card"><h3>Rematch Content Creator</h3><p><b>Referencia de requisitos:</b> Excel: 10+ promedio; 250 seguidores mínimos</p><p>Pruebas, contacto con desarrolladores y perks.</p><p><span class="premium-kicker">Verificar convocatoria actual antes de aplicar</span></p></div><div class="premium-card"><h3>Funcom Creator Program</h3><p><b>Referencia de requisitos:</b> Excel: 15–20+ promedio; 500 seguidores mínimos</p><p>Conan Exiles / Dune: Awakening; claves y beneficios de programa.</p><p><span class="premium-kicker">Verificar convocatoria actual antes de aplicar</span></p></div><div class="premium-card"><h3>V Rising / Stunlock</h3><p><b>Referencia de requisitos:</b> Excel: 15+ promedio; 400 seguidores mínimos</p><p>Programa de creadores y claves.</p><p><span class="premium-kicker">Verificar convocatoria actual antes de aplicar</span></p></div><div class="premium-card"><h3>Kinetic Games / Phasmophobia</h3><p><b>Referencia de requisitos:</b> Excel: 20–50+ promedio; 500+ seguidores</p><p>Acceso anticipado, assets y comunidad partner.</p><p><span class="premium-kicker">Verificar convocatoria actual antes de aplicar</span></p></div><div class="premium-card"><h3>Hunt: Showdown 1896</h3><p><b>Referencia de requisitos:</b> Excel: 30–50+ promedio para paid; 1.000 seguidores</p><p>Claves, campañas y posibles acciones pagas.</p><p><span class="premium-kicker">Verificar convocatoria actual antes de aplicar</span></p></div><div class="premium-card"><h3>Quantic Dream</h3><p><b>Referencia de requisitos:</b> Excel: 20+ promedio; 500 seguidores mínimos</p><p>Detroit: Become Human / Heavy Rain; programa de creadores.</p><p><span class="premium-kicker">Verificar convocatoria actual antes de aplicar</span></p></div><div class="premium-card"><h3>ARMA Reforger</h3><p><b>Referencia de requisitos:</b> Excel: 25+ promedio; 500 seguidores mínimos</p><p>Campañas de claves y posibles acciones pagas.</p><p><span class="premium-kicker">Verificar convocatoria actual antes de aplicar</span></p></div><div class="premium-card"><h3>Clair Obscur: Expedition 33</h3><p><b>Referencia de requisitos:</b> Excel: 15+ promedio; 300 seguidores mínimos</p><p>Accesos, códigos y eventos.</p><p><span class="premium-kicker">Verificar convocatoria actual antes de aplicar</span></p></div>
+</div></div>
+<div class="premium-panel"><h3>Propuestas comerciales y de prensa</h3><p>¿Sos desarrollador, publisher, agencia, marca o equipo de marketing? Podés acercarnos propuestas de campañas, claves, accesos anticipados, patrocinios, sorteos o colaboraciones.</p><p><b>Información útil:</b> nombre de empresa, persona de contacto, juego o producto, objetivo de campaña, fechas, plataformas, entregables, presupuesto (si corresponde) y enlace a materiales oficiales.</p><p>Contacto inicial: <a href="mailto:losmoriartys@gmail.com">losmoriartys@gmail.com</a></p></div>
+</section>
+<!-- CAPÍTULO 10: COMUNIDAD Y AGENDA -->
+<section id="chapter-10" class="chapter-panel comic-page"><div class="chapter-tag">CAPÍTULO 10</div><h2 class="comic-title">CENTRO DE COMUNIDAD — AGENDA Y SUGERENCIAS</h2>
+<div class="premium-grid"><div class="premium-card"><div class="premium-kicker">Horario grupal documentado</div><h3>Sábados — 21:00 ARG</h3><p>Colaboración principal propuesta en el Excel: 19:00 Bolivia y 18:00 México CDMX. La participación se coordina según disponibilidad.</p></div><div class="premium-card"><div class="premium-kicker">Encuentro opcional</div><h3>Miércoles — 20:00 ARG</h3><p>Mini colaboración sugerida para grupos reducidos.</p></div><div class="premium-card"><div class="premium-kicker">Franja sugerida</div><h3>Viernes — 23:00 ARG</h3><p>Encuentro propuesto para conectar con integrantes de México.</p></div></div>
+<div class="premium-panel"><h3>Rotación de juegos sugerida en el Excel</h3><ul><li>Semana 1: Lethal Company</li><li>Semana 2: Supermarket Together</li><li>Semana 3: R.E.P.O.</li><li>Semana 4: Fortnite Customs</li><li>Semana 5: Phasmophobia</li><li>Semana 6: Valheim</li></ul><p class="stats-note">Agenda propuesta, no calendario confirmado. Los horarios individuales de cada integrante se completarán con disponibilidad aprobada.</p></div>
+<div class="premium-panel"><h3>Reglas de colaboración</h3><ul><li>Evitar lurkeo masivo y prácticas de follow-for-follow.</li><li>Priorizar interacción real con el contenido y la comunidad.</li><li>Coordinar raids al finalizar, cuando corresponda.</li><li>Preparar clips individuales de las colaboraciones y etiquetar a los participantes.</li></ul></div>
+<div class="premium-panel"><h3>Buzón de sugerencias</h3><p>Proponé juegos, eventos, actividades, colaboraciones o mejoras para el Instituto.</p><form class="comic-form" onsubmit="event.preventDefault();const t=this.querySelector('textarea').value.trim();if(t){const s='Sugerencia Instituto S3X-MEN: '+t;window.location.href='mailto:losmoriartys@gmail.com?subject='+encodeURIComponent('Sugerencia para el Instituto')+'&body='+encodeURIComponent(s)}"><div class="form-group"><label>Tu propuesta</label><textarea rows="4" placeholder="Contanos tu idea…" required></textarea></div><button class="comic-submit-btn" type="submit">ENVIAR SUGERENCIA</button></form></div>
+</section>
+</main>
 
     <!-- VENTANA MODAL / EXPEDIENTE INDIVIDUAL (PÁGINAS A, B, C) -->
     <div class="modal-overlay" id="hero-modal" onclick="if(event.target === this) closeModal();">
@@ -805,7 +838,7 @@
                 name: "ROD3R1K",
                 role: "director", 
                 img: "rod3r1k.jpg", 
-                twitch: "https://twitch.tv",
+                twitch: "https://twitch.tv/TheR0D3R1K",
                 bio: "Bienvenidos al canal, me llamo Roderik o mejor conocido como 'ElKrakenaso' encontraras momentos divertidos y epicos, acompañame en las partidas, diviertete!",
                 powers: "Perfil de habilidades en construcción. Pendiente de confirmar con el integrante.",
                 stats: "Métricas en proceso de integración. Los datos se publicarán cuando estén conectados a una fuente verificable y acompañados de su período de medición.", 
@@ -815,7 +848,7 @@
                 name: "LADYMORIARTY",
                 role: "teacher", 
                 img: "ladymoriarty.jpg", 
-                twitch: "https://twitch.tv/losmoriartys",
+                twitch: "https://twitch.tv/ladymoriarty01",
                 bio: "Canal secundario de Los Moriartys (https://www.twitch.tv/losmoriartys). Acá encontraran gameplay chill, IRL y lo que se me cante en el momento....Lo importante es divertirnos y pasarla bien 💜",
                 powers: "Especialidad: entretenimiento chill, IRL y conexión con la comunidad.",
                 stats: "Métricas en proceso de integración. Los datos se publicarán cuando estén conectados a una fuente verificable y acompañados de su período de medición.", 
@@ -825,7 +858,7 @@
                 name: "CAPY",
                 role: "teacher", 
                 img: "capy.jpg", 
-                twitch: "https://twitch.tv",
+                twitch: "https://twitch.tv/capyunaplay",
                 bio: "Juegos que voy a jugar en modo cooperativo:\nSMITE, League of Legends, Fall Guys, Among Us, Goose Goose Duck, Farlight 84, Overwatch, Apex Legends, Rocket League, Dead by Daylight, The Forest, KartRider Drift, Raft, 7 Days to Die, ProjectZomboid, Brawlhalla, DEVOUR, Left 4 Dead 2.", 
                 stats: "Métricas en proceso de integración. Los datos se publicarán cuando estén conectados a una fuente verificable y acompañados de su período de medición.", 
                 log: "Representante clave de Bolivia en las misiones nocturnas cooperativas y de supervivencia." 
@@ -834,7 +867,7 @@
                 name: "ARDIPII",
                 role: "teacher", 
                 img: "ardipii.jpg", 
-                twitch: "https://twitch.tv",
+                twitch: "https://twitch.tv/ardipii",
                 bio: "Welcome a mi humilde perfil, gasten sus puntos en alertas, saluden a todos, traigan unas palomitas y 'Lo único que podemos decidir es qué hacer con el tiempo que se nos ha dado'.", 
                 stats: "Métricas en proceso de integración. Los datos se publicarán cuando estén conectados a una fuente verificable y acompañados de su período de medición.", 
                 log: "Enlace directo con la base operativa de México en directos intensivos y comunidad." 
@@ -843,7 +876,7 @@
                 name: "AKUMA",
                 role: "teacher", 
                 img: "akuma.jpg", 
-                twitch: "https://twitch.tv",
+                twitch: "https://twitch.tv/akumazoldyck",
                 bio: "Directo todos los dias a las 7 de la tarde hora mexico. Talk show, friends and games.", 
                 stats: "Métricas en proceso de integración. Los datos se publicarán cuando estén conectados a una fuente verificable y acompañados de su período de medición.", 
                 log: "Veterano en transmisiones diarias, charlas con amigos y comunidad constante." 
@@ -852,34 +885,60 @@
                 name: "ELGABII",
                 role: "teacher", 
                 img: "elgabii.jpg", 
-                twitch: "https://twitch.tv",
+                twitch: "https://twitch.tv/elgabii090",
                 bio: "Rol: Habilidoso / Kinetic Manipulator\nClase: Mutant - Kinetic Energy\nLema: 'Construyendo la victoria bloque a bloque.'",
                 powers: "Manipulación de energía cinética. Atributos ficticios del personaje: Fuerza 7/10 · Velocidad 8/10 · Energía 9/10. No son métricas de Twitch.",
                 stats: "Métricas en proceso de integración. Los datos se publicarán cuando estén conectados a una fuente verificable y acompañados de su período de medición.", 
                 log: "Especialista en arquitecturas de servidores, construcciones y supervivencia en grupo." 
             },
             { 
-                name: "DAVE",
+                name: "DAVE — NEXUS",
                 role: "student",
-                img: "",
+                img: "nexus.jpg",
                 twitch: "https://twitch.tv/daved0608",
                 bio: "Estudiante del Instituto S3X-MEN. Su expediente está abierto y listo para completarse cuando se incorpore su retrato y presentación personal.",
                 powers: "Poderes y especialidad todavía sin definir. Se completarán cuando Dave aporte o apruebe su concepto de personaje.",
                 stats: "Canal incorporado al sistema de estadísticas. Las métricas se mostrarán cuando la automatización publique datos verificables.",
                 log: "Ingreso al roster como estudiante. Perfil visual y ficha de personaje pendientes de completar."
             },
+                        {
+                name: "PATO — ORATORIS",
+                role: "student",
+                img: "oratoris.jpg",
+                twitch: "",
+                youtube: "https://www.youtube.com/@patoteexplica",
+                bio: "Estudiante del Instituto S3X-MEN. Creador del canal Pato te explica. Expediente incorporado; presentación personal y horarios por completar.",
+                powers: "Perfil de habilidades y especialidad pendiente de definir con Pato.",
+                stats: "Canal de YouTube. Sus métricas se integrarán por separado y nunca se mezclarán con las estadísticas de Twitch.",
+                log: "Ingreso al roster como estudiante. Canal: https://www.youtube.com/@patoteexplica"
+            },
             { 
                 name: "HABITOS",
                 role: "teacher", 
                 img: "habitos.jpg", 
-                twitch: "https://twitch.tv",
+                twitch: "https://twitch.tv/habitos_atomicos",
                 bio: "habitos_atomicos hace streams de Call of Duty: Warzone, Solo chateando y Pro Evolution Soccer 2008.", 
                 stats: "Métricas en proceso de integración. Los datos se publicarán cuando estén conectados a una fuente verificable y acompañados de su período de medición.", 
                 log: "Impulsor de hábitos de crecimiento, constancia y transmisiones dinámicas." 
             }
         ];
 
-        function renderRoster() {
+        
+async function loadInstituteStats(){
+ const body=document.getElementById('stats-table-body'); if(!body)return;
+ const fmt=(v,d=2)=>v===null||v===undefined?'—':(typeof v==='number'?v.toLocaleString('es-AR',{maximumFractionDigits:d}):v);
+ try{
+  const res=await fetch('stats-data.json',{cache:'no-store'}); if(!res.ok)throw new Error('No se pudo leer stats-data.json');
+  const data=await res.json(); const channels=data.channels||[];
+  document.getElementById('stats-updated').textContent='Actualizado: '+new Date(data.updated_at).toLocaleString('es-AR')+' · Período: '+data.period_days+' días · Fuente: '+data.source+' · Sincronizados: '+data.channels_synced+'/'+data.channels_total;
+  const totalFollowers=channels.reduce((n,c)=>n+(c.stats?.followers||0),0);
+  const totalVods=channels.reduce((n,c)=>n+(c.stats?.streams||0),0);
+  document.getElementById('stats-summary').innerHTML='<div class="premium-card"><h3>'+fmt(totalFollowers,0)+'</h3><p>Seguidores sumados</p></div><div class="premium-card"><h3>'+fmt(totalVods,0)+'</h3><p>VODs archivados</p></div><div class="premium-card"><h3>'+fmt(channels.reduce((n,c)=>n+(c.stats?.hours_streamed||0),0))+'</h3><p>Horas transmitidas (VOD)</p></div>';
+  body.innerHTML=channels.map(c=>'<tr><td>'+c.display_name+'</td><td>'+fmt(c.stats?.followers,0)+'</td><td>'+fmt(c.stats?.streams,0)+'</td><td>'+fmt(c.stats?.hours_streamed)+'</td><td>'+fmt(c.stats?.video_views,0)+'</td><td>'+fmt(c.stats?.avg_viewers)+'</td><td>'+fmt(c.stats?.peak_viewers)+'</td><td>'+fmt(c.stats?.viewer_samples,0)+'</td></tr>').join('');
+ }catch(e){body.innerHTML='<tr><td colspan="8">Estadísticas temporalmente no disponibles. '+e.message+'</td></tr>';}
+}
+
+function renderRoster() {
             const container = document.getElementById('roster-container');
             if (!container) return;
             container.innerHTML = '';
@@ -903,7 +962,7 @@
                     const imageMarkup = hero.img
                         ? '<img src="' + hero.img + '" alt="' + hero.name + '" onerror="this.style.display=\'none\'">'
                         : '<div class="hero-placeholder"><span>EXPEDIENTE<br>EN FORMACIÓN</span></div>';
-                    card.innerHTML = '<div class="hero-card-img-wrapper">' + imageMarkup + '</div>' +
+                    card.innerHTML = '<span class="hero-number">#' + String(index + 1).padStart(2,'0') + '</span><div class="hero-card-img-wrapper">' + imageMarkup + '</div>' +
                         '<div class="hero-card-info"><span class="hero-rank">' + group.label + '</span><h3>' + hero.name + '</h3>' +
                         '<div class="hero-click-hint">⚡ VER EXPEDIENTE (A - B - C)</div></div>';
                     grid.appendChild(card);
@@ -951,7 +1010,8 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        window.onload = function() { renderRoster(); };
+        window.onload = function() { renderRoster();
+        loadInstituteStats(); };
     </script>
 </body>
 </html>
