@@ -234,6 +234,21 @@
         .hero-power-text{white-space:pre-line;color:#e2e8f0;line-height:1.7}
         @media(max-width:560px){.institute-banner{align-items:flex-start;padding:14px;gap:14px}.institute-stamp{flex-basis:70px;height:70px;font-size:1rem}.institute-counts{gap:7px}.institute-counts div{padding:9px 4px}.institute-counts span{font-size:.62rem}}
 
+        .institute-pillars{margin-top:28px;padding:26px;background:linear-gradient(145deg,#111d2c,#0c121d);border:3px solid #000;box-shadow:7px 7px 0 #000}
+        .pillars-heading{text-align:center;max-width:850px;margin:0 auto 22px}
+        .pillars-heading>span{font-family:'Bangers',cursive;color:#ff9f43;letter-spacing:2px;font-size:1.1rem}
+        .pillars-heading h3{font-family:'Bangers',cursive;color:#ffde00;font-size:2rem;letter-spacing:1px;margin:5px 0 8px}
+        .pillars-heading p{color:#cbd5e0;line-height:1.65}
+        .pillars-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+        .pillar-card{position:relative;min-height:210px;padding:22px 18px;background:#1a202c;border:3px solid #000;box-shadow:4px 4px 0 #000}
+        .pillar-card h4{font-family:'Bangers',cursive;font-size:1.35rem;letter-spacing:1px;margin:12px 0 8px}
+        .pillar-card p{color:#cbd5e0;font-size:.9rem;line-height:1.65}
+        .pillar-number{font-family:'Bangers',cursive;font-size:1.5rem;color:#fff;opacity:.75}
+        .pillar-gaming{border-top:5px solid #ffde00}.pillar-gaming h4{color:#ffde00}
+        .pillar-tech{border-top:5px solid #00d2ff}.pillar-tech h4{color:#00d2ff}
+        .pillar-growth{border-top:5px solid #ff9f43}.pillar-growth h4{color:#ff9f43}
+        .pillars-note{margin-top:18px;padding:14px;background:rgba(0,0,0,.35);border-left:4px solid #ff9f43;color:#d5deea;line-height:1.6}
+        @media(max-width:760px){.pillars-grid{grid-template-columns:1fr}.pillar-card{min-height:0}.institute-pillars{padding:18px}.pillars-heading h3{font-size:1.65rem}}
         .roster-intro { color:#cbd5e0; line-height:1.7; margin:0 0 18px; }
         .roster-legend { display:flex; flex-wrap:wrap; gap:10px; margin:0 0 26px; }
         .rank-director,.rank-teacher,.rank-student,.hero-rank { display:inline-block; padding:6px 12px; border:2px solid #05070b; font-family:'Bangers',cursive; letter-spacing:1px; box-shadow:3px 3px 0 #000; }
@@ -737,6 +752,15 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
 <div class="premium-card"><h3>Unidad latinoamericana</h3><p>Las fronteras no limitan el talento ni la posibilidad de construir juntos.</p></div>
 </div>
 <p><strong>“No reclutamos números. Reclutamos personas con una identidad, una comunidad y algo que aportar. Ningún talento debería quedarse aislado por una frontera.”</strong></p>
+</div>
+<div class="institute-pillars">
+    <div class="pillars-heading"><span>IDENTIDAD DEL INSTITUTO</span><h3>TRES DIMENSIONES. UNA MISMA COMUNIDAD.</h3><p>El talento no tiene una sola forma. Conectamos entretenimiento, conocimiento y crecimiento personal para construir una comunidad donde cada persona pueda aportar desde su especialidad.</p></div>
+    <div class="pillars-grid">
+        <article class="pillar-card pillar-gaming"><span class="pillar-number">01</span><h4>GAMING Y ENTRETENIMIENTO</h4><p>Videojuegos, streaming, eventos, experiencias cooperativas y creación de contenido para compartir momentos memorables.</p></article>
+        <article class="pillar-card pillar-tech"><span class="pillar-number">02</span><h4>CONOCIMIENTO Y TECNOLOGÍA</h4><p>Programación, herramientas digitales, innovación, aprendizaje y experiencias que ayudan a ampliar nuestras capacidades.</p></article>
+        <article class="pillar-card pillar-growth"><span class="pillar-number">03</span><h4>DESARROLLO PERSONAL</h4><p>Filosofía, motivación, hábitos, reflexión y conversaciones que también nos hacen crecer fuera de la pantalla.</p></article>
+    </div>
+    <p class="pillars-note"><strong>Una identidad abierta:</strong> cada integrante puede conectar con más de una dimensión. No son compartimentos cerrados, sino distintas formas de sumar al equipo.</p>
 </div>
         </section>
 
