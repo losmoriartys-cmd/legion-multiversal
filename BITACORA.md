@@ -63,3 +63,31 @@ Este archivo registra cada intervención relevante realizada en el repositorio. 
   - Revisar el resultado responsive y continuar la actualización de textos antiguos en los capítulos restantes.
 - **Commit:** `159c877e43ed1f75e69bdacaa3155e3303844dc8`
 - **Despliegue:** pendiente de verificación en GitHub Actions.
+
+
+## 2026-11-03 — Conexión del panel web con la automatización Twitch
+
+- **Archivos modificados:**
+  - `index.html`
+  - `BITACORA.md` (este registro).
+- **Cambios realizados:**
+  - Se corrigió la discrepancia entre la automatización, que publica `data.json`, y la web, que todavía intentaba leer `stats-data.json`.
+  - El Capítulo 03 ahora consume el esquema vigente de Twitch Helix: canales, estado en directo, espectadores actuales, categoría, muestras, promedio/pico observados y horas calculadas a partir de muestras consecutivas.
+  - Las fichas individuales del roster consultan el mismo archivo y muestran el período real de hasta 10 días, la frecuencia programada de 15 minutos y las limitaciones de cada dato.
+  - El panel de Partners deja de presentar seguidores y promedios oficiales como si estuvieran disponibles; distingue las muestras internas de las métricas oficiales de Creator Dashboard.
+  - Se mantiene YouTube/Pato separado del conjunto Twitch.
+- **Validaciones:**
+  - Se confirmó que `data.json` existe en `main`, contiene 9 canales y declara `window_days: 10` y `sampling_interval_minutes: 15`.
+  - Se confirmó que `stats-data.json` y `sullygnome-data.json` no existen en `main`; por eso se eliminó la dependencia del primero para los paneles Twitch.
+  - GitHub aceptó la actualización de `index.html`.
+  - Pendiente comprobar el despliegue de GitHub Pages y la visualización final en escritorio/móvil.
+- **Pendientes / riesgos:**
+  - El muestreo recién comienza: los promedios, picos y horas observadas pueden permanecer vacíos hasta que haya directos registrados.
+  - Seguidores y analíticas oficiales requieren permisos/reportes adicionales; no se deben completar por inferencia.
+  - Revisar visualmente el Capítulo 03 y las fichas individuales tras el despliegue.
+- **Commit:** `98d7cea54d23b35113659686a6921532636a9627`
+- **Despliegue:** pendiente de verificación en GitHub Actions / GitHub Pages.
+
+### Informe breve para cada intervención futura
+
+Al finalizar cada cambio, registrar: archivos tocados; qué se modificó y por qué; validaciones ejecutadas y resultado; pendientes/riesgos; hash del commit; estado y enlace/ID del despliegue. Diferenciar siempre lo acordado, lo implementado y lo pendiente.
