@@ -668,7 +668,6 @@
         .hero-card.dossier-card::before { content:""; position:absolute; inset:1.7%; z-index:5; border:1px solid rgba(232,198,126,.28); pointer-events:none; }
         .hero-card.dossier-card:hover { transform:translateY(-5px) scale(1.012); border:0; box-shadow:0 16px 34px rgba(0,0,0,.68),0 0 18px rgba(40,145,207,.18); filter:brightness(1.06); }
         .dossier-top { position:absolute; z-index:3; top:3.1%; left:20%; width:60%; height:14.4%; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px; text-align:center; color:#f4d37d; background:radial-gradient(ellipse at center,#07101b 62%,rgba(7,16,27,.88) 76%,transparent 100%); }
-        .dossier-classification { position:absolute; top:-5%; left:-28%; color:#f5d88e; font:900 clamp(5px,.62vw,8px) 'Montserrat',sans-serif; letter-spacing:.7px; }
         .dossier-top h3 { margin:0; max-width:100%; color:#50b8e8; font:900 clamp(18px,4.5vw,39px) 'Bangers',cursive; letter-spacing:1.2px; line-height:.95; text-shadow:3px 3px 0 #05080d,-1px -1px 0 #05080d; overflow-wrap:anywhere; }
         .dossier-subtitle { color:#ef4b3e; font:900 clamp(8px,1.65vw,15px) 'Bangers',cursive; letter-spacing:.7px; text-shadow:2px 2px 0 #05080d; }
         .dossier-art { position:absolute; z-index:2; left:11.5%; top:19.5%; width:77%; height:52%; display:flex; align-items:center; justify-content:center; overflow:hidden; background:radial-gradient(ellipse at center,rgba(8,23,37,.2),rgba(4,10,17,.32)); }
@@ -989,7 +988,7 @@
                         ? '<img class="dossier-portrait" src="assets/' + escapeHTML(hero.img) + '" alt="' + escapeHTML(hero.name) + '" onerror="this.style.display=\'none\'">'
                         : '<div class="dossier-portrait-placeholder">RETRATO<br>EN FORMACIÓN</div>';
                     card.innerHTML =
-                        '<div class="dossier-top"><span class="dossier-classification">CLASIFICADO · NIVEL ALFA</span><h3>' + escapeHTML(hero.name) + '</h3><span class="dossier-subtitle">' + roleLabel + ' · EXPEDIENTE X</span></div>' +
+                        '<div class="dossier-top"><h3>' + escapeHTML(hero.name) + '</h3><span class="dossier-subtitle">' + roleLabel + ' · EXPEDIENTE X</span></div>' +
                         '<div class="dossier-art">' + portrait + '</div>' +
                         '<div class="dossier-fields">' +
                             '<div class="dossier-field"><strong>ROL:</strong><span>' + roleLabel + '</span></div>' +
