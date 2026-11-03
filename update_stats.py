@@ -12,6 +12,7 @@ from urllib.request import Request, urlopen
 CLIENT_ID = os.environ.get("TWITCH_CLIENT_ID", "ec7tx8ufdef9v9b13dtde93g1zbts9")
 CLIENT_SECRET = os.environ.get("TWITCH_CLIENT_SECRET")
 DATA_FILE = Path(__file__).with_name("data.json")
+SAMPLES_FILE = Path(__file__).with_name("viewer_samples.json")
 PERIOD_DAYS = int(os.environ.get("STATS_PERIOD_DAYS", "30"))
 API = "https://api.twitch.tv/helix"
 TOKEN_URL = "https://id.twitch.tv/oauth2/token"
@@ -84,6 +85,9 @@ def game_names(ids, access):
         for g in data.get("data",[]): result[g["id"]]=g.get("name","Categoría desconocida")
     return result
 
+def follower_total(uid, access):
+    return int(helix("channels/followers", access, {"broadcaster_id":uid,"first":1}).get("total", 0))
+
 def live_status(uid, login, access):
     rows=helix("streams",access,{"user_id":uid,"first":1}).get("data",[])
     if not rows:
@@ -99,7 +103,7 @@ def channel(login, access, cutoff):
     if not users:
         return {"login":login,"status":"not_found","error":"Canal no encontrado en Twitch.",
             "stats":empty_stats(),"live":{"is_live":False},"games":[],"vods":[]}
-    u=users[0]; vods=fetch_vods(u["id"],access,cutoff); live=live_status(u["id"],login,access)
+    u=users[0]; vods=fetch_vods(u["id"],access,cutoff); live=live_status(u["id"],login,access); followers=follower_total(u["id"],access)
     names=game_names([v["game_id"] for v in vods]+[live.get("game_id")],access)
     by_game={}
     for v in vods:
@@ -115,12 +119,40 @@ def channel(login, access, cutoff):
     return {"login":u.get("login",login),"display_name":u.get("display_name",login),
         "user_id":u["id"],"profile_image_url":u.get("profile_image_url"),"channel_url":f"https://twitch.tv/{login}",
         "status":"ok","live":live,"games":games,"vods":vods,
-        "stats":{"followers":None,"avg_viewers":None,"peak_viewers":None,"hours_watched":None,
+        "stats":{"followers":followers,"avg_viewers":None,"peak_viewers":None,"avg_viewers_sampled":None,"peak_viewers_sampled":None,"viewer_samples":0,"hours_watched":None,
             "video_views":sum(v["video_views"] for v in vods),"hours_streamed":round(secs/3600,2),
             "streams":len(vods)}}
 
+def load_samples():
+    if not SAMPLES_FILE.exists(): return {"schema_version":1,"samples":[]}
+    try:
+        obj=json.loads(SAMPLES_FILE.read_text(encoding="utf-8"))
+        if isinstance(obj,dict) and isinstance(obj.get("samples"),list): return obj
+    except (OSError, json.JSONDecodeError): pass
+    raise TwitchAPIError("viewer_samples.json está dañado; se evita sobrescribir el historial.")
+
+def record_samples(members, now):
+    store=load_samples(); stamp=now.isoformat()
+    for item in members:
+        live=item.get("live") or {}
+        if item.get("status")=="ok" and live.get("is_live") and live.get("viewer_count") is not None:
+            store["samples"].append({"login":item["login"],"sampled_at":stamp,"viewer_count":int(live["viewer_count"])})
+    cutoff=now-timedelta(days=PERIOD_DAYS)
+    store["samples"]=[x for x in store["samples"] if datetime.fromisoformat(x["sampled_at"].replace("Z","+00:00")) >= cutoff]
+    store["updated_at"]=stamp
+    temp=SAMPLES_FILE.with_suffix(".json.tmp")
+    temp.write_text(json.dumps(store,ensure_ascii=False,indent=2),encoding="utf-8"); temp.replace(SAMPLES_FILE)
+    by_login={}
+    for sample in store["samples"]: by_login.setdefault(sample["login"],[]).append(sample["viewer_count"])
+    for item in members:
+        values=by_login.get(item.get("login"),[])
+        if item.get("status")=="ok":
+            item["stats"]["avg_viewers_sampled"]=round(sum(values)/len(values),2) if values else None
+            item["stats"]["peak_viewers_sampled"]=max(values) if values else None
+            item["stats"]["viewer_samples"]=len(values)
+
 def empty_stats():
-    return {"followers":None,"avg_viewers":None,"peak_viewers":None,"hours_watched":None,
+    return {"followers":None,"avg_viewers":None,"peak_viewers":None,"avg_viewers_sampled":None,"peak_viewers_sampled":None,"viewer_samples":0,"hours_watched":None,
             "video_views":None,"hours_streamed":None,"streams":None}
 
 def main():
@@ -135,18 +167,20 @@ def main():
             print(f"ERROR {login}: {exc}",file=sys.stderr)
             members.append({"login":login,"status":"error","error":str(exc),"stats":empty_stats(),
                 "live":{"is_live":False},"games":[],"vods":[]})
+    record_samples(members,now)
     ok=sum(x["status"]=="ok" for x in members)
     if ok==0: raise TwitchAPIError("Ningún canal sincronizado; no se sobrescribe el último archivo válido.")
-    result={"schema_version":3,"updated_at":now.isoformat(),"period_days":PERIOD_DAYS,
+    result={"schema_version":4,"updated_at":now.isoformat(),"period_days":PERIOD_DAYS,
         "source":"Twitch Helix API","refresh_minutes":5,
         "methodology":{
             "hours_streamed":"Suma de duración de VODs archivados creados en el período; puede excluir directos sin VOD.",
             "video_views":"Suma de view_count de los VODs del período; no equivale a horas vistas.",
             "games":"Categoría de Twitch asociada a cada VOD; horas calculadas sumando la duración de VODs por categoría.",
             "live":"Estado consultado con Get Streams en el momento de sincronización; actualización programada cada cinco minutos.",
-            "followers":"No disponible con token de aplicación; requiere autorización individual con scope moderator:read:followers.",
-            "avg_viewers":"No disponible históricamente mediante Get Videos; requiere muestreo propio durante directos.",
-            "peak_viewers":"No disponible históricamente mediante Get Videos; requiere muestreo propio durante directos.",
+            "followers":"Total consultado por Get Channel Followers; Twitch permite devolver solo el total sin autorización individual.",
+            "avg_viewers":"El promedio oficial histórico se carga desde Twitch Creator Dashboard Analytics; avg_viewers_sampled es el promedio de muestras cada cinco minutos durante directos.",
+            "peak_viewers":"El máximo oficial histórico se carga desde Twitch Creator Dashboard Analytics; peak_viewers_sampled es el mayor recuento observado en las muestras cada cinco minutos.",
+            "viewer_sampling":"Muestras solo cuando el canal figura en directo; intervalo objetivo cinco minutos. El promedio es aproximado y el pico es el máximo observado; pueden perderse picos entre muestras.",
             "hours_watched":"No disponible mediante Get Videos; no se calcula a partir de reproducciones."
         },"channels_total":len(CHANNELS),"channels_synced":ok,"channels":members}
     temp=DATA_FILE.with_suffix(".json.tmp")
