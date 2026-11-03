@@ -1,6 +1,6 @@
 {
-  "schema_version": 3,
-  "updated_at": "2026-11-03T06:44:30.477003+00:00",
+  "schema_version": 4,
+  "updated_at": "2026-11-03T06:52:34.963643+00:00",
   "period_days": 30,
   "source": "Twitch Helix API",
   "refresh_minutes": 5,
@@ -9,9 +9,10 @@
     "video_views": "Suma de view_count de los VODs del período; no equivale a horas vistas.",
     "games": "Categoría de Twitch asociada a cada VOD; horas calculadas sumando la duración de VODs por categoría.",
     "live": "Estado consultado con Get Streams en el momento de sincronización; actualización programada cada cinco minutos.",
-    "followers": "No disponible con token de aplicación; requiere autorización individual con scope moderator:read:followers.",
-    "avg_viewers": "No disponible históricamente mediante Get Videos; requiere muestreo propio durante directos.",
-    "peak_viewers": "No disponible históricamente mediante Get Videos; requiere muestreo propio durante directos.",
+    "followers": "Total consultado por Get Channel Followers; Twitch permite devolver solo el total sin autorización individual.",
+    "avg_viewers": "El promedio oficial histórico se carga desde Twitch Creator Dashboard Analytics; avg_viewers_sampled es el promedio de muestras cada cinco minutos durante directos.",
+    "peak_viewers": "El máximo oficial histórico se carga desde Twitch Creator Dashboard Analytics; peak_viewers_sampled es el mayor recuento observado en las muestras cada cinco minutos.",
+    "viewer_sampling": "Muestras solo cuando el canal figura en directo; intervalo objetivo cinco minutos. El promedio es aproximado y el pico es el máximo observado; pueden perderse picos entre muestras.",
     "hours_watched": "No disponible mediante Get Videos; no se calcula a partir de reproducciones."
   },
   "channels_total": 9,
@@ -134,9 +135,12 @@
         }
       ],
       "stats": {
-        "followers": null,
+        "followers": 1145,
         "avg_viewers": null,
         "peak_viewers": null,
+        "avg_viewers_sampled": null,
+        "peak_viewers_sampled": null,
+        "viewer_samples": 0,
         "hours_watched": null,
         "video_views": 1298,
         "hours_streamed": 17.26,
@@ -210,9 +214,12 @@
         }
       ],
       "stats": {
-        "followers": null,
+        "followers": 180,
         "avg_viewers": null,
         "peak_viewers": null,
+        "avg_viewers_sampled": null,
+        "peak_viewers_sampled": null,
+        "viewer_samples": 0,
         "hours_watched": null,
         "video_views": 267,
         "hours_streamed": 6.04,
@@ -476,9 +483,12 @@
         }
       ],
       "stats": {
-        "followers": null,
+        "followers": 5186,
         "avg_viewers": null,
         "peak_viewers": null,
+        "avg_viewers_sampled": null,
+        "peak_viewers_sampled": null,
+        "viewer_samples": 0,
         "hours_watched": null,
         "video_views": 6820,
         "hours_streamed": 84.69,
@@ -562,9 +572,12 @@
         }
       ],
       "stats": {
-        "followers": null,
+        "followers": 682,
         "avg_viewers": null,
         "peak_viewers": null,
+        "avg_viewers_sampled": null,
+        "peak_viewers_sampled": null,
+        "viewer_samples": 0,
         "hours_watched": null,
         "video_views": 334,
         "hours_streamed": 5.89,
@@ -778,9 +791,12 @@
         }
       ],
       "stats": {
-        "followers": null,
+        "followers": 177,
         "avg_viewers": null,
         "peak_viewers": null,
+        "avg_viewers_sampled": null,
+        "peak_viewers_sampled": null,
+        "viewer_samples": 0,
         "hours_watched": null,
         "video_views": 1397,
         "hours_streamed": 67.24,
@@ -824,9 +840,12 @@
         }
       ],
       "stats": {
-        "followers": null,
+        "followers": 435,
         "avg_viewers": null,
         "peak_viewers": null,
+        "avg_viewers_sampled": null,
+        "peak_viewers_sampled": null,
+        "viewer_samples": 0,
         "hours_watched": null,
         "video_views": 27,
         "hours_streamed": 0.75,
@@ -1080,9 +1099,12 @@
         }
       ],
       "stats": {
-        "followers": null,
+        "followers": 142,
         "avg_viewers": null,
         "peak_viewers": null,
+        "avg_viewers_sampled": null,
+        "peak_viewers_sampled": null,
+        "viewer_samples": 0,
         "hours_watched": null,
         "video_views": 926,
         "hours_streamed": 38.71,
@@ -1146,9 +1168,12 @@
         }
       ],
       "stats": {
-        "followers": null,
+        "followers": 595,
         "avg_viewers": null,
         "peak_viewers": null,
+        "avg_viewers_sampled": null,
+        "peak_viewers_sampled": null,
+        "viewer_samples": 0,
         "hours_watched": null,
         "video_views": 225,
         "hours_streamed": 3.51,
@@ -1202,9 +1227,12 @@
         }
       ],
       "stats": {
-        "followers": null,
+        "followers": 47,
         "avg_viewers": null,
         "peak_viewers": null,
+        "avg_viewers_sampled": null,
+        "peak_viewers_sampled": null,
+        "viewer_samples": 0,
         "hours_watched": null,
         "video_views": 14,
         "hours_streamed": 3.91,
