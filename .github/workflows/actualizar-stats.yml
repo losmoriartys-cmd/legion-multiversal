@@ -1,32 +1,56 @@
-name: Automatizar Estadísticas
+name: Actualizar estadísticas de Twitch
 
 on:
+  push:
+    branches:
+      - instituto-premium-redesign
+    paths:
+      - update_stats.py
+      - .github/workflows/actualizar-stats.yml
   schedule:
-    - cron: '0 0 * * *'
+    - cron: "*/5 * * * *"
   workflow_dispatch:
+    inputs:
+      period_days:
+        description: "Período de estadísticas (días)"
+        required: false
+        default: "30"
 
 permissions:
   contents: write
 
+concurrency:
+  group: twitch-stats-sync
+  cancel-in-progress: false
+
 jobs:
-  actualizar:
+  update:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-version: "3.12"
 
-      - name: Run update script
+      - name: Sync Twitch data
         env:
+          TWITCH_CLIENT_ID: ${{ secrets.TWITCH_CLIENT_ID || 'ec7tx8ufdef9v9b13dtde93g1zbts9' }}
           TWITCH_CLIENT_SECRET: ${{ secrets.TWITCH_CLIENT_SECRET }}
+          STATS_PERIOD_DAYS: ${{ inputs.period_days || '30' }}
         run: python update_stats.py
 
-      - name: Commit and push changes
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: "🤖 Actualización automática de estadísticas de Twitch"
-          file_pattern: data.json
+      - name: Commit updated data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add stats-data.json viewer_samples.json
+          if git diff --cached --quiet; then
+            echo "No hay cambios de datos para guardar."
+            exit 0
+          fi
+          git commit -m "chore: update Twitch channel statistics"
+          git push
