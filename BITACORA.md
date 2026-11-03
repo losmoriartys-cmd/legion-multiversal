@@ -39,3 +39,27 @@ Este archivo registra cada intervención relevante realizada en el repositorio. 
   - La disponibilidad legal/comercial del nombre y de los perfiles sociales debe verificarse antes de su uso comercial.
 - **Commit:** `af16ccb53e328f19a27d2628e76d7fbcef8e6c1c`
 - **Despliegue:** pendiente de verificación en GitHub Actions.
+
+
+## 2026-11-03 — Primera propuesta visual de Legión Multiversal en la web
+
+- **Archivos modificados:**
+  - `index.html`
+  - `BITACORA.md` (este registro).
+- **Cambios realizados:**
+  - Se incorporó en la cabecera un emblema geométrico provisional con una M central y un anillo orbital, construido en CSS para que pueda revisarse directamente en la web.
+  - Se actualizó el título del roster a **Legión Multiversal — Nuestro roster** y se reemplazó parte del lenguaje institucional antiguo por lenguaje de comunidad.
+  - Se añadieron cuatro siluetas neutrales como espacios reservados para futuras incorporaciones, identificadas explícitamente como no confirmadas.
+  - Se retiró de la galería del Capítulo 01 la referencia a una imagen de Pato que no existe actualmente en `assets/`; su ficha de colaborador permanece en el roster.
+  - Se mantuvieron los retratos originales de los personajes ya disponibles. No se generaron ni sustituyeron ilustraciones.
+- **Validaciones:**
+  - Se comprobó que las rutas de los retratos conservados apuntan a recursos existentes del repositorio.
+  - GitHub aceptó la actualización en `main`.
+  - Despliegue pendiente de comprobar.
+- **Pendientes / riesgos:**
+  - El emblema es una primera propuesta web y debe recibir comentarios antes de considerarse definitivo.
+  - Las cuatro siluetas son marcadores visuales, no integrantes anunciados.
+  - La imagen individual de Pato — Oratoris no está en `assets/`; agregarla solo cuando el equipo la proporcione y apruebe.
+  - Revisar el resultado responsive y continuar la actualización de textos antiguos en los capítulos restantes.
+- **Commit:** `159c877e43ed1f75e69bdacaa3155e3303844dc8`
+- **Despliegue:** pendiente de verificación en GitHub Actions.
