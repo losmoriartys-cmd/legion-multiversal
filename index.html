@@ -606,6 +606,35 @@
         }
 
         .mt-20 { margin-top: 20px; }
+     
+        /* Panel global de estadísticas Twitch */
+        .dashboard-heading{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:10px}
+        .dashboard-heading .comic-title{margin-bottom:4px}
+        .dashboard-subtitle{font-size:.78rem;font-weight:900;letter-spacing:1.4px;color:#9fb0c5}
+        .dashboard-refresh{background:var(--yellow-accent);color:#080808;border:3px solid #000;padding:10px 15px;font-family:'Bangers',cursive;font-size:1.15rem;box-shadow:4px 4px 0 #000;cursor:pointer}
+        .dashboard-refresh:hover{background:var(--blue-accent)}
+        .dashboard-loading,.dashboard-empty{padding:22px;background:#0b0f19;border:2px dashed #465268;color:#cbd5e0;text-align:center;line-height:1.6}
+        .dashboard-meta{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:#9aa8bb;font-size:.8rem;margin:10px 0 18px}
+        .dashboard-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:14px;margin:18px 0 26px}
+        .dashboard-kpi{background:#1a202c;border:3px solid #000;box-shadow:5px 5px 0 #000;padding:16px;text-align:center;min-width:0}
+        .dashboard-kpi strong{display:block;color:var(--yellow-accent);font-family:'Bangers',cursive;font-size:2.2rem;line-height:1.1;margin-bottom:6px}
+        .dashboard-kpi span{display:block;color:#aab7c8;font-size:.7rem;font-weight:900;letter-spacing:.8px}
+        .dashboard-section-title{font-family:'Bangers',cursive;font-size:1.8rem;color:var(--yellow-accent);margin:26px 0 12px}
+        .dashboard-live-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+        .dashboard-live-card{background:#171f2d;border:2px solid #e34b58;box-shadow:4px 4px 0 #000;padding:14px;min-width:0}
+        .dashboard-live-card h4{font-family:'Bangers',cursive;font-size:1.35rem;color:#fff;margin-bottom:6px}
+        .dashboard-live-card p{font-size:.82rem;color:#cbd5e0;line-height:1.5;overflow-wrap:anywhere}
+        .dashboard-live-card a{display:inline-block;color:var(--blue-accent);font-weight:900;font-size:.8rem;margin-top:9px}
+        .dashboard-table-wrap{overflow-x:auto;border:3px solid #000;box-shadow:5px 5px 0 #000}
+        .dashboard-table{width:100%;min-width:760px;border-collapse:collapse;background:#0b0f19}
+        .dashboard-table th,.dashboard-table td{padding:11px 12px;border:1px solid #303a4b;text-align:left;font-size:.82rem;white-space:nowrap}
+        .dashboard-table th{background:var(--yellow-accent);color:#000;font-family:'Bangers',cursive;font-size:1.05rem}
+        .dashboard-table td:first-child{font-weight:900}
+        .dashboard-status-live{color:#ff6975;font-weight:900}
+        .dashboard-status-off{color:#9aa8bb}
+        .dashboard-note{background:#111a28;border-left:4px solid var(--blue-accent);padding:13px 16px;margin-top:18px;color:#b8c5d6;font-size:.8rem;line-height:1.6}
+        @media(max-width:600px){.dashboard-heading{align-items:flex-start}.dashboard-refresh{width:100%}.dashboard-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.dashboard-kpi{padding:12px 7px}.dashboard-kpi strong{font-size:1.8rem}}
+
     </style>
 </head>
 <body>
@@ -676,28 +705,16 @@
         <!-- CAPÍTULO 3: DATABASE -->
         <section id="chapter-3" class="chapter-panel">
             <div class="chapter-tag">CAPÍTULO 03</div>
-            <h2 class="comic-title">THE TEAM DATABASE (ESTADÍSTICAS GLOBALES)</h2>
-            <div class="comic-grid-list">
-                <div class="comic-item-card"><h3>⚡ ALCANCE TOTAL</h3><p><strong>8.5K+ Seguidores:</strong> Sumatoria combinada de los creadores del escuadrón.</p></div>
-                <div class="comic-item-card"><h3>📈 AUDIENCIA GLOBAL</h3><p><strong>70+ Avg / 150+ Pico:</strong> Máximo histórico alcanzado en transmisiones simultáneas.</p></div>
-                <div class="comic-item-card"><h3>🕒 VOLUMEN MENSUAL</h3><p><strong>250+ Horas:</strong> Producción total de contenido generado mes a mes.</p></div>
-                <div class="comic-item-card"><h3>🌍 GEOGRAFÍA TÁCTICA</h3><p><strong>3 Países:</strong> Puente internacional activo entre Argentina 🇦🇷, Bolivia 🇧🇴 y México 🇲🇽.</p></div>
+            <div class="dashboard-heading">
+                <div>
+                    <h2 class="comic-title">THE TEAM DATABASE</h2>
+                    <p class="dashboard-subtitle">CENTRAL DE OPERACIONES · ACTIVIDAD TWITCH DEL INSTITUTO</p>
+                </div>
+                <button class="dashboard-refresh" type="button" onclick="refreshInstituteStats()">↻ ACTUALIZAR DATOS</button>
             </div>
-            <h3 style="font-family: 'Bangers', cursive; font-size: 1.8rem; color: var(--yellow-accent); margin-top: 30px; margin-bottom: 10px;">TABLA COMPARATIVA DE RENDIMIENTO</h3>
-            <table class="comic-table">
-                <thead><tr><th>Agente / Héroe</th><th>País y Rol</th><th>Seguidores</th><th>Media Viewers</th><th>Juego Principal</th><th>Estado</th></tr></thead>
-                <tbody>
-                    <tr><td><strong>LosMoriartys</strong></td><td>🇦🇷 Argentina<br>Estratega / Fundador</td><td>1,500+</td><td>25 Avg</td><td>Estrategia / Shooter</td><td>🟢 En Guardia</td></tr>
-                    <tr><td><strong>TheR0D3R1K</strong></td><td>🇦🇷 Argentina<br>El Fuerte / Co-Fundador</td><td>2,100+</td><td>30 Avg</td><td>Acción / Coop</td><td>🟢 En Guardia</td></tr>
-                    <tr><td><strong>LadyMoriarty01</strong></td><td>🇦🇷 Argentina<br>Hechicera Táctica</td><td>1,200+</td><td>20 Avg</td><td>Terror / Variedad</td><td>🟢 En Guardia</td></tr>
-                    <tr><td><strong>Capyunaplay</strong></td><td>🇧🇴 Bolivia<br>Agente de Asalto</td><td>980+</td><td>18 Avg</td><td>Shooters / Survival</td><td>🟢 En Guardia</td></tr>
-                    <tr><td><strong>ArdiPii</strong></td><td>🇲🇽 México<br>Artillería Rápida</td><td>1,350+</td><td>22 Avg</td><td>Battle Royale</td><td>🟢 En Guardia</td></tr>
-                    <tr><td><strong>Akumazoldyck</strong></td><td>🇲🇽 México<br>Asesino de Sombras</td><td>1,800+</td><td>28 Avg</td><td>Competitivo / Shooters</td><td>🟢 En Guardia</td></tr>
-                    <tr><td><strong>Elgabii090</strong></td><td>🇦🇷 Argentina<br>Ingeniero de Campo</td><td>850+</td><td>15 Avg</td><td>Sandbox / Coop</td><td>🟢 En Guardia</td></tr>
-                    <tr><td><strong>Habitos_atomicos</strong></td><td>🇲🇽 México<br>Cronista Táctico</td><td>1,100+</td><td>19 Avg</td><td>Indie / Simuladores</td><td>🟢 En Guardia</td></tr>
-                    <tr><td><strong>Daved0608</strong></td><td>🇦🇷 Argentina<br>Agente Táctico</td><td>900+</td><td>17 Avg</td><td>Variedad</td><td>🟢 En Guardia</td></tr>
-                </tbody>
-            </table>
+            <div id="institute-dashboard">
+                <p class="dashboard-loading">Conectando con la central de estadísticas...</p>
+            </div>
         </section>
 
         <!-- CAPÍTULO 4: MISIONES -->
@@ -958,6 +975,75 @@
                         return lines.join("\n");
         }
 
+        function formatDashboardNumber(value, digits = 0) {
+            if (value === null || value === undefined || !Number.isFinite(Number(value))) return "—";
+            return Number(value).toLocaleString("es-AR", { minimumFractionDigits: digits, maximumFractionDigits: digits });
+        }
+
+        function renderInstituteDashboard() {
+            const root = document.getElementById("institute-dashboard");
+            if (!root) return;
+            if (!twitchMetrics || !twitchMetrics.channels) {
+                root.innerHTML = '<p class="dashboard-empty">No se pudo cargar data.json. La central volverá a intentarlo en la próxima consulta.</p>';
+                return;
+            }
+
+            const channels = Object.values(twitchMetrics.channels);
+            const live = channels.filter(channel => channel.live);
+            const sum = key => channels.reduce((total, channel) => total + (Number(channel.window && channel.window[key]) || 0), 0);
+            const viewersNow = live.reduce((total, channel) => total + (Number(channel.current_viewers) || 0), 0);
+            const totalStreams = sum("streams_observed");
+            const totalLiveHours = sum("observed_live_hours");
+            const totalWatched = sum("estimated_hours_watched");
+            const sampled = channels.reduce((total, channel) => total + (Number(channel.window && channel.window.samples_total) || 0), 0);
+            const updated = twitchMetrics.updated_at ? new Date(twitchMetrics.updated_at) : null;
+            const updatedLabel = updated && !Number.isNaN(updated.getTime()) ? updated.toLocaleString("es-AR") : "Sin dato";
+
+            const liveMarkup = live.length ? live.map(channel => {
+                const title = channel.current_title || "Transmisión sin título informado";
+                const game = channel.current_game || "Categoría no informada";
+                return '<article class="dashboard-live-card"><h4>🔴 ' + escapeDashboardHTML(channel.display_name || channel.login) + '</h4><p><strong>' + formatDashboardNumber(channel.current_viewers) + '</strong> espectadores · ' + escapeDashboardHTML(game) + '</p><p>' + escapeDashboardHTML(title) + '</p><a href="' + escapeDashboardHTML(channel.twitch_url || ("https://twitch.tv/" + channel.login)) + '" target="_blank" rel="noopener">VER DIRECTO ↗</a></article>';
+            }).join("") : '<p class="dashboard-empty">No hay integrantes en directo en la última muestra registrada. Cuando alguien encienda cámara, aparecerá acá.</p>';
+
+            const rows = channels.slice().sort((a,b) => {
+                if (Boolean(a.live) !== Boolean(b.live)) return a.live ? -1 : 1;
+                return (Number(b.current_viewers) || 0) - (Number(a.current_viewers) || 0);
+            }).map(channel => {
+                const w = channel.window || {};
+                return '<tr><td>' + escapeDashboardHTML(channel.display_name || channel.login) + '</td><td class="' + (channel.live ? 'dashboard-status-live' : 'dashboard-status-off') + '">' + (channel.live ? '🔴 EN DIRECTO' : '⚫ OFFLINE') + '</td><td>' + formatDashboardNumber(channel.current_viewers) + '</td><td>' + formatDashboardNumber(w.average_viewers_sampled,1) + '</td><td>' + formatDashboardNumber(w.peak_viewers_sampled) + '</td><td>' + formatDashboardNumber(w.streams_observed) + '</td><td>' + formatDashboardNumber(w.estimated_hours_watched,1) + '</td></tr>';
+            }).join("");
+
+            root.innerHTML =
+                '<div class="dashboard-meta"><span>VENTANA DE ANÁLISIS: ÚLTIMOS ' + formatDashboardNumber(twitchMetrics.window_days || 10) + ' DÍAS</span><span>ÚLTIMA SINCRONIZACIÓN: ' + updatedLabel + '</span></div>' +
+                '<div class="dashboard-kpis">' +
+                    '<div class="dashboard-kpi"><strong>' + channels.length + '</strong><span>CANALES CONECTADOS</span></div>' +
+                    '<div class="dashboard-kpi"><strong>' + live.length + '</strong><span>EN DIRECTO AHORA*</span></div>' +
+                    '<div class="dashboard-kpi"><strong>' + formatDashboardNumber(viewersNow) + '</strong><span>ESPECTADORES EN DIRECTO*</span></div>' +
+                    '<div class="dashboard-kpi"><strong>' + formatDashboardNumber(totalStreams) + '</strong><span>DIRECTOS OBSERVADOS</span></div>' +
+                    '<div class="dashboard-kpi"><strong>' + formatDashboardNumber(totalWatched,1) + ' h</strong><span>HORAS VISTAS ESTIMADAS</span></div>' +
+                    '<div class="dashboard-kpi"><strong>' + formatDashboardNumber(totalLiveHours,1) + ' h</strong><span>HORAS EN DIRECTO OBSERVADAS</span></div>' +
+                '</div>' +
+                '<h3 class="dashboard-section-title">SEÑAL EN VIVO · ESTADO DE LOS CANALES</h3>' +
+                '<div class="dashboard-live-grid">' + liveMarkup + '</div>' +
+                '<h3 class="dashboard-section-title">RENDIMIENTO POR INTEGRANTE</h3>' +
+                '<div class="dashboard-table-wrap"><table class="dashboard-table"><thead><tr><th>CANAL</th><th>ESTADO</th><th>ESPECTADORES*</th><th>PROMEDIO MUESTREADO</th><th>PICO OBSERVADO</th><th>DIRECTOS</th><th>HORAS VISTAS EST.</th></tr></thead><tbody>' + rows + '</tbody></table></div>' +
+                '<div class="dashboard-note">* El estado y los espectadores actuales corresponden a la última consulta, no a una conexión en tiempo real segundo a segundo. La captura se ejecuta aproximadamente cada ' + formatDashboardNumber(twitchMetrics.sampling_interval_minutes || 15) + ' minutos. Promedios y picos se calculan sobre muestras registradas. Las horas vistas son estimaciones propias; no son métricas oficiales de Twitch. Muestras acumuladas en esta ventana: ' + formatDashboardNumber(sampled) + '. Los seguidores no se incluyen porque la autorización actual no permite consultarlos.</div>';
+        }
+
+        function escapeDashboardHTML(value) {
+            return String(value == null ? "" : value).replace(/[&<>"']/g, character => ({
+                "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+            })[character]);
+        }
+
+        async function refreshInstituteStats() {
+            const button = document.querySelector(".dashboard-refresh");
+            if (button) { button.disabled = true; button.textContent = "ACTUALIZANDO..."; }
+            await loadTwitchMetrics();
+            renderInstituteDashboard();
+            if (button) { button.disabled = false; button.textContent = "↻ ACTUALIZAR DATOS"; }
+        }
+
         function openHeroModal(index) {
             const hero = heroesData[index];
             document.getElementById('modal-hero-title').innerText = `EXPEDIENTE: ${hero.name}`;
@@ -996,7 +1082,7 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        window.onload = async function() { await loadTwitchMetrics(); renderRoster(); };
+        window.onload = async function() { await loadTwitchMetrics(); renderRoster(); renderInstituteDashboard(); };
     </script>
 </body>
 </html>
