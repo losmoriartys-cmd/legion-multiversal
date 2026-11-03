@@ -1,0 +1,326 @@
+{
+  "schema_version": 1,
+  "source": "SullyGnome",
+  "generated_at_utc": "2026-11-03T00:00:00Z",
+  "source_methodology": "Datos de transmisiones individuales de Twitch, conservados separadamente de Twitch Helix. Las métricas se agregan solo cuando se dispone de las filas originales.",
+  "channels_total": 9,
+  "channels_with_stream_data": 1,
+  "channels": [
+    {
+      "platform": "twitch",
+      "login": "losmoriartys",
+      "display_name": "Los Moriartys",
+      "source": "SullyGnome",
+      "source_url": "https://sullygnome.com/channel/losmoriartys/2026/streams",
+      "checked_at_utc": null,
+      "status": "partial",
+      "period": {
+        "start_date": "2026-10-19",
+        "end_date": "2026-11-02"
+      },
+      "streams": [
+        {
+          "date": "2026-11-02",
+          "duration_minutes": 110,
+          "average_viewers": 32,
+          "peak_viewers": 43,
+          "hours_watched": 58,
+          "followers_reported": 2
+        },
+        {
+          "date": "2026-11-01",
+          "duration_minutes": 120,
+          "average_viewers": 9,
+          "peak_viewers": 19,
+          "hours_watched": 18,
+          "followers_reported": 1
+        },
+        {
+          "date": "2026-10-30",
+          "duration_minutes": 95,
+          "average_viewers": 17,
+          "peak_viewers": 24,
+          "hours_watched": 26,
+          "followers_reported": 0
+        },
+        {
+          "date": "2026-10-28",
+          "duration_minutes": 122,
+          "average_viewers": 27,
+          "peak_viewers": 50,
+          "hours_watched": 54,
+          "followers_reported": 0
+        },
+        {
+          "date": "2026-10-26",
+          "duration_minutes": 126,
+          "average_viewers": 32,
+          "peak_viewers": 53,
+          "hours_watched": 67,
+          "followers_reported": 0
+        },
+        {
+          "date": "2026-10-24",
+          "duration_minutes": 81,
+          "average_viewers": 8,
+          "peak_viewers": 15,
+          "hours_watched": 10,
+          "followers_reported": 0
+        },
+        {
+          "date": "2026-10-23",
+          "duration_minutes": 96,
+          "average_viewers": 26,
+          "peak_viewers": 39,
+          "hours_watched": 41,
+          "followers_reported": 1
+        },
+        {
+          "date": "2026-10-21",
+          "duration_minutes": 125,
+          "average_viewers": 15,
+          "peak_viewers": 28,
+          "hours_watched": 31,
+          "followers_reported": 5
+        },
+        {
+          "date": "2026-10-19",
+          "duration_minutes": 95,
+          "average_viewers": 37,
+          "peak_viewers": 65,
+          "hours_watched": 58,
+          "followers_reported": 5
+        }
+      ],
+      "summary": {
+        "streams_count": 9,
+        "airtime_minutes": 970,
+        "airtime_hours": 16.1667,
+        "hours_watched": 363,
+        "average_viewers_duration_weighted": 22.8,
+        "peak_viewers": 65,
+        "followers_gain_reported": 14
+      },
+      "notes": [
+        "Registros transcritos de la tabla de SullyGnome compartida por el usuario; aún falta contraste visual directo con la página.",
+        "followers_reported conserva el valor de la columna 'Seguidores'; su interpretación como ganancia por transmisión debe confirmarse antes de usarla como total.",
+        "El promedio ponderado por duración es un cálculo derivado de los promedios por transmisión; no es una cifra publicada directamente por SullyGnome."
+      ]
+    },
+    {
+      "platform": "twitch",
+      "login": "ladymoriarty01",
+      "display_name": "LADYMORIARTY",
+      "source": "SullyGnome",
+      "source_url": "https://sullygnome.com/channel/ladymoriarty01/2026/streams",
+      "checked_at_utc": null,
+      "status": "pending",
+      "period": {
+        "start_date": null,
+        "end_date": null
+      },
+      "streams": [],
+      "summary": {
+        "streams_count": null,
+        "airtime_minutes": null,
+        "airtime_hours": null,
+        "hours_watched": null,
+        "average_viewers_duration_weighted": null,
+        "peak_viewers": null,
+        "followers_gain_reported": null
+      },
+      "notes": [
+        "Enlace del historial identificado; faltan las filas de transmisiones para cargar métricas verificadas."
+      ]
+    },
+    {
+      "platform": "twitch",
+      "login": "ther0d3r1k",
+      "display_name": "TheR0D3R1K",
+      "source": "SullyGnome",
+      "source_url": "https://sullygnome.com/channel/ther0d3r1k/2026/streams",
+      "checked_at_utc": null,
+      "status": "pending",
+      "period": {
+        "start_date": null,
+        "end_date": null
+      },
+      "streams": [],
+      "summary": {
+        "streams_count": null,
+        "airtime_minutes": null,
+        "airtime_hours": null,
+        "hours_watched": null,
+        "average_viewers_duration_weighted": null,
+        "peak_viewers": null,
+        "followers_gain_reported": null
+      },
+      "notes": [
+        "Enlace del historial identificado; faltan las filas de transmisiones para cargar métricas verificadas."
+      ]
+    },
+    {
+      "platform": "twitch",
+      "login": "habitos_atomicos",
+      "display_name": "HÁBITOS ATÓMICOS",
+      "source": "SullyGnome",
+      "source_url": "https://sullygnome.com/channel/habitos_atomicos/2026/streams",
+      "checked_at_utc": null,
+      "status": "pending",
+      "period": {
+        "start_date": null,
+        "end_date": null
+      },
+      "streams": [],
+      "summary": {
+        "streams_count": null,
+        "airtime_minutes": null,
+        "airtime_hours": null,
+        "hours_watched": null,
+        "average_viewers_duration_weighted": null,
+        "peak_viewers": null,
+        "followers_gain_reported": null
+      },
+      "notes": [
+        "Enlace del historial identificado; faltan las filas de transmisiones para cargar métricas verificadas."
+      ]
+    },
+    {
+      "platform": "twitch",
+      "login": "elgabii090",
+      "display_name": "ELGABII090",
+      "source": "SullyGnome",
+      "source_url": "https://sullygnome.com/channel/elgabii090/2026/streams",
+      "checked_at_utc": null,
+      "status": "pending",
+      "period": {
+        "start_date": null,
+        "end_date": null
+      },
+      "streams": [],
+      "summary": {
+        "streams_count": null,
+        "airtime_minutes": null,
+        "airtime_hours": null,
+        "hours_watched": null,
+        "average_viewers_duration_weighted": null,
+        "peak_viewers": null,
+        "followers_gain_reported": null
+      },
+      "notes": [
+        "Enlace del historial identificado; faltan las filas de transmisiones para cargar métricas verificadas."
+      ]
+    },
+    {
+      "platform": "twitch",
+      "login": "capyunaplay",
+      "display_name": "CAPYUNAPLAY",
+      "source": "SullyGnome",
+      "source_url": "https://sullygnome.com/channel/capyunaplay/2026/streams",
+      "checked_at_utc": null,
+      "status": "pending",
+      "period": {
+        "start_date": null,
+        "end_date": null
+      },
+      "streams": [],
+      "summary": {
+        "streams_count": null,
+        "airtime_minutes": null,
+        "airtime_hours": null,
+        "hours_watched": null,
+        "average_viewers_duration_weighted": null,
+        "peak_viewers": null,
+        "followers_gain_reported": null
+      },
+      "notes": [
+        "Enlace del historial identificado; faltan las filas de transmisiones para cargar métricas verificadas."
+      ]
+    },
+    {
+      "platform": "twitch",
+      "login": "akumazoldyck",
+      "display_name": "AKUMAZOLDYCK",
+      "source": "SullyGnome",
+      "source_url": "https://sullygnome.com/channel/akumazoldyck/2026/streams",
+      "checked_at_utc": null,
+      "status": "pending",
+      "period": {
+        "start_date": null,
+        "end_date": null
+      },
+      "streams": [],
+      "summary": {
+        "streams_count": null,
+        "airtime_minutes": null,
+        "airtime_hours": null,
+        "hours_watched": null,
+        "average_viewers_duration_weighted": null,
+        "peak_viewers": null,
+        "followers_gain_reported": null
+      },
+      "notes": [
+        "Enlace del historial identificado; faltan las filas de transmisiones para cargar métricas verificadas."
+      ]
+    },
+    {
+      "platform": "twitch",
+      "login": "ardipii",
+      "display_name": "ARDIPII",
+      "source": "SullyGnome",
+      "source_url": "https://sullygnome.com/channel/ardipii/2026/streams",
+      "checked_at_utc": null,
+      "status": "pending",
+      "period": {
+        "start_date": null,
+        "end_date": null
+      },
+      "streams": [],
+      "summary": {
+        "streams_count": null,
+        "airtime_minutes": null,
+        "airtime_hours": null,
+        "hours_watched": null,
+        "average_viewers_duration_weighted": null,
+        "peak_viewers": null,
+        "followers_gain_reported": null
+      },
+      "notes": [
+        "Enlace del historial identificado; faltan las filas de transmisiones para cargar métricas verificadas."
+      ]
+    },
+    {
+      "platform": "twitch",
+      "login": "daved0608",
+      "display_name": "DAVE",
+      "source": "SullyGnome",
+      "source_url": "https://sullygnome.com/channel/daved0608/2026/streams",
+      "checked_at_utc": null,
+      "status": "pending",
+      "period": {
+        "start_date": null,
+        "end_date": null
+      },
+      "streams": [],
+      "summary": {
+        "streams_count": null,
+        "airtime_minutes": null,
+        "airtime_hours": null,
+        "hours_watched": null,
+        "average_viewers_duration_weighted": null,
+        "peak_viewers": null,
+        "followers_gain_reported": null
+      },
+      "notes": [
+        "Enlace del historial identificado; faltan las filas de transmisiones para cargar métricas verificadas."
+      ]
+    }
+  ],
+  "metric_definitions": {
+    "duration_minutes": "Duración de cada transmisión, en minutos.",
+    "average_viewers": "Promedio de espectadores informado para esa transmisión.",
+    "peak_viewers": "Pico de espectadores informado para esa transmisión.",
+    "hours_watched": "Horas vistas informadas para esa transmisión.",
+    "followers_reported": "Valor literal de la columna 'Seguidores'; interpretación pendiente de confirmación."
+  }
+}
