@@ -635,6 +635,27 @@
         .dashboard-note{background:#111a28;border-left:4px solid var(--blue-accent);padding:13px 16px;margin-top:18px;color:#b8c5d6;font-size:.8rem;line-height:1.6}
         @media(max-width:600px){.dashboard-heading{align-items:flex-start}.dashboard-refresh{width:100%}.dashboard-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.dashboard-kpi{padding:12px 7px}.dashboard-kpi strong{font-size:1.8rem}}
 
+    
+        .dashboard-analytics-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(260px,.85fr);gap:16px;margin:18px 0}
+        .dashboard-analytics-card{background:#111a28;border:2px solid #303a4b;box-shadow:4px 4px 0 #000;padding:16px;min-width:0}
+        .dashboard-analytics-card h3{font-family:'Bangers',cursive;color:var(--yellow-accent);font-size:1.55rem;margin-bottom:5px}
+        .dashboard-analytics-caption{color:#9aa8bb;font-size:.76rem;line-height:1.5;margin-bottom:12px}
+        .dashboard-chart{display:block;width:100%;height:auto;overflow:visible}
+        .dashboard-chart text{font-family:Arial,sans-serif;fill:#aab7c8;font-size:10px}
+        .dashboard-chart .chart-grid{stroke:#344154;stroke-width:1;stroke-dasharray:3 4}
+        .dashboard-chart .chart-line{fill:none;stroke:var(--blue-accent);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+        .dashboard-chart .chart-dot{fill:var(--yellow-accent);stroke:#111a28;stroke-width:2}
+        .dashboard-chart .chart-bar{fill:var(--blue-accent);stroke:#000;stroke-width:1}
+        .dashboard-chart .chart-bar.active{fill:var(--yellow-accent)}
+        .dashboard-ranking{display:flex;flex-direction:column;gap:9px}
+        .dashboard-rank-row{display:grid;grid-template-columns:30px minmax(0,1fr) auto;align-items:center;gap:9px;background:#1a2433;padding:10px;border-left:3px solid #52647c}
+        .dashboard-rank-number{font-family:'Bangers',cursive;color:var(--yellow-accent);font-size:1.35rem}
+        .dashboard-rank-name{color:#f1f5f9;font-weight:900;font-size:.83rem;overflow-wrap:anywhere}
+        .dashboard-rank-detail{color:#9aa8bb;font-size:.7rem;margin-top:3px}
+        .dashboard-rank-value{color:#fff;font-weight:900;font-size:.85rem;white-space:nowrap}
+        .dashboard-analytics-empty{padding:16px;border:1px dashed #465268;color:#b8c5d6;font-size:.8rem;line-height:1.6}
+        @media(max-width:760px){.dashboard-analytics-grid{grid-template-columns:1fr}}
+
     </style>
 </head>
 <body>
@@ -980,6 +1001,66 @@
             return Number(value).toLocaleString("es-AR", { minimumFractionDigits: digits, maximumFractionDigits: digits });
         }
 
+        function buildDailyActivityChart(channels) {
+            const days = new Map();
+            const today = new Date();
+            for (let offset = 9; offset >= 0; offset--) {
+                const date = new Date(Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate() - offset));
+                const key = date.toISOString().slice(0, 10);
+                days.set(key, { key, liveSamples: 0, peakViewers: 0, streams: new Set() });
+            }
+            channels.forEach(channel => (channel.snapshots || []).forEach(snapshot => {
+                if (!snapshot.sampled_at) return;
+                const key = new Date(snapshot.sampled_at).toISOString().slice(0, 10);
+                if (!days.has(key)) return;
+                const day = days.get(key);
+                if (snapshot.is_live) {
+                    day.liveSamples += 1;
+                    day.peakViewers = Math.max(day.peakViewers, Number(snapshot.viewer_count) || 0);
+                    if (snapshot.stream_id) day.streams.add(snapshot.stream_id);
+                }
+            }));
+            const points = Array.from(days.values());
+            const width = 620, height = 190, left = 34, right = 12, top = 16, bottom = 32;
+            const plotW = width - left - right, plotH = height - top - bottom;
+            const max = Math.max(1, ...points.map(point => point.liveSamples));
+            const x = index => left + (points.length <= 1 ? plotW / 2 : index * plotW / (points.length - 1));
+            const y = value => top + plotH - (value / max) * plotH;
+            const grid = [0, .5, 1].map(fraction => {
+                const gy = top + plotH * fraction;
+                return '<line class="chart-grid" x1="' + left + '" y1="' + gy + '" x2="' + (width-right) + '" y2="' + gy + '"/>';
+            }).join("");
+            const bars = points.map((point,index) => {
+                const barW = Math.min(28, plotW / points.length * .55);
+                const barH = point.liveSamples ? Math.max(2, (point.liveSamples / max) * plotH) : 1;
+                return '<rect class="chart-bar' + (point.liveSamples ? ' active' : '') + '" x="' + (x(index)-barW/2) + '" y="' + (top+plotH-barH) + '" width="' + barW + '" height="' + barH + '" rx="2"><title>' + point.key + ': ' + point.liveSamples + ' muestras en directo · pico observado ' + point.peakViewers + ' espectadores</title></rect>';
+            }).join("");
+            const labels = points.map((point,index) => index % 2 === 0 || index === points.length-1
+                ? '<text x="' + x(index) + '" y="' + (height-9) + '" text-anchor="middle">' + point.key.slice(5).replace("-","/") + '</text>' : "").join("");
+            const hasActivity = points.some(point => point.liveSamples > 0);
+            return '<svg class="dashboard-chart" viewBox="0 0 ' + width + ' ' + height + '" role="img" aria-label="Muestras de actividad en directo por día durante los últimos diez días">' +
+                grid + bars + '<text x="4" y="' + (top+5) + '">' + max + '</text><text x="12" y="' + (top+plotH+4) + '">0</text>' + labels + '</svg>' +
+                (hasActivity ? '<p class="dashboard-analytics-caption">Cada barra representa la cantidad de muestras en las que se detectó al menos un canal en directo. No equivale a horas exactas de transmisión.</p>' :
+                '<div class="dashboard-analytics-empty">Todavía no se registraron transmisiones en las muestras disponibles. El gráfico se completará automáticamente cuando detectemos actividad.</div>');
+        }
+
+        function buildActivityRanking(channels) {
+            const ranked = channels.map(channel => {
+                const w = channel.window || {};
+                return {
+                    name: channel.display_name || channel.login,
+                    hours: Number(w.observed_live_hours) || 0,
+                    liveSamples: Number(w.live_samples) || 0,
+                    streams: Number(w.streams_observed) || 0
+                };
+            }).sort((a,b) => b.hours-a.hours || b.liveSamples-a.liveSamples || b.streams-a.streams);
+            const hasActivity = ranked.some(item => item.hours > 0 || item.liveSamples > 0 || item.streams > 0);
+            if (!hasActivity) return '<div class="dashboard-analytics-empty">El ranking se habilitará cuando haya actividad observada. Así evitamos asignar puestos por diferencias inexistentes.</div>';
+            return '<div class="dashboard-ranking">' + ranked.slice(0,5).map((item,index) =>
+                '<div class="dashboard-rank-row"><span class="dashboard-rank-number">#' + (index+1) + '</span><div><div class="dashboard-rank-name">' + escapeDashboardHTML(item.name) + '</div><div class="dashboard-rank-detail">' + formatDashboardNumber(item.streams) + ' directos · ' + formatDashboardNumber(item.liveSamples) + ' muestras en vivo</div></div><span class="dashboard-rank-value">' + formatDashboardNumber(item.hours,1) + ' h</span></div>'
+            ).join("") + '</div><p class="dashboard-analytics-caption" style="margin-top:10px">Ordenado por horas en directo observadas; desempate por muestras en vivo y directos detectados. Top 5 de la ventana actual.</p>';
+        }
+
         function renderInstituteDashboard() {
             const root = document.getElementById("institute-dashboard");
             if (!root) return;
@@ -1022,6 +1103,10 @@
                     '<div class="dashboard-kpi"><strong>' + formatDashboardNumber(totalStreams) + '</strong><span>DIRECTOS OBSERVADOS</span></div>' +
                     '<div class="dashboard-kpi"><strong>' + formatDashboardNumber(totalWatched,1) + ' h</strong><span>HORAS VISTAS ESTIMADAS</span></div>' +
                     '<div class="dashboard-kpi"><strong>' + formatDashboardNumber(totalLiveHours,1) + ' h</strong><span>HORAS EN DIRECTO OBSERVADAS</span></div>' +
+                '</div>' +
+                '<div class="dashboard-analytics-grid">' +
+                    '<section class="dashboard-analytics-card"><h3>EVOLUCIÓN DIARIA</h3><p class="dashboard-analytics-caption">Actividad detectada en la ventana móvil de diez días</p>' + buildDailyActivityChart(channels) + '</section>' +
+                    '<section class="dashboard-analytics-card"><h3>RANKING DE ACTIVIDAD</h3><p class="dashboard-analytics-caption">Integrantes con mayor tiempo de transmisión observado</p>' + buildActivityRanking(channels) + '</section>' +
                 '</div>' +
                 '<h3 class="dashboard-section-title">SEÑAL EN VIVO · ESTADO DE LOS CANALES</h3>' +
                 '<div class="dashboard-live-grid">' + liveMarkup + '</div>' +
