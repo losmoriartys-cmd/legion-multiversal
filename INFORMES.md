@@ -775,3 +775,15 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Datos y automatizaciones:** no se modificaron cifras de origen, `data.json`, ni automatizaciones.
 - **Commit de interfaz:** [`cb72e6c5`](https://github.com/losmoriartys-cmd/s3xmen/commit/cb72e6c5e7e885d22dae8984aa73abf6d18c8aa3).
 - **Despliegue:** pendiente de verificar GitHub Pages.
+
+
+## 2026-11-04 — Refuerzo de visibilidad del fondo y las animaciones del Roster
+
+- **Motivo:** el usuario indicó que no percibía el nuevo fondo ni el movimiento de las cartas. La primera capa de textura tenía poca presencia y los pseudo-elementos decorativos podían quedar visualmente ocultos detrás del fondo del panel.
+- **Corrección:** se elevó la capa de semitonos y líneas cinéticas por encima del fondo base, manteniendo el contenido del Roster en una capa superior para no bloquear texto ni controles.
+- **Fondo:** se aumentó el contraste de la trama de cómic, los acentos de energía cian/rojo y el patrón de impresión. Cada grupo del Roster ahora se presenta sobre un panel semitransparente con borde editorial.
+- **Animación:** las cartas de integrantes ahora tienen una flotación lenta y escalonada visible sin interacción; al pasar el cursor o enfocar con teclado, la flotación se pausa y aparece la elevación 3D con brillo.
+- **Accesibilidad:** se conserva la desactivación de movimiento para usuarios con `prefers-reduced-motion`.
+- **Archivo modificado:** `index.html`.
+- **Commit:** [`532d2849`](https://github.com/losmoriartys-cmd/s3xmen/commit/532d28498e1da21aa9c4aedc41de911f1e29e426).
+- **Pendiente:** confirmar el despliegue de GitHub Pages; después de publicarse, recargar el sitio con Ctrl+F5 para evitar caché del navegador.
