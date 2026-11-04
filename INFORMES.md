@@ -381,3 +381,39 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Preservado:** roles y asignaciones de integrantes, contadores, retratos, cartas oficiales, estadísticas y automatizaciones.
 - **Commit de interfaz:** `d143ca53102075ab97d1dbfda394091927134136`.
 - **Despliegue:** pendiente de verificación visual en GitHub Pages.
+
+
+## 2026-11-04 — Renovar el Arsenal: diez juegos para compartir en directo
+
+- **Responsable:** ChatGPT + equipo Los Moriartys.
+- **Objetivo:** reemplazar el catálogo anterior de veinte títulos por una selección editorial de diez juegos orientada a la diversión compartida, el contenido en directo y la variedad de experiencias.
+- **Archivo modificado:** `index.html`.
+- **Selección publicada:**
+  1. Mimic Party.
+  2. MECCHA CHAMELEON.
+  3. Backrooms: Escape Together.
+  4. R.E.P.O.
+  5. Content Warning.
+  6. Dale & Dawson Stationery Supplies.
+  7. Lethal Company.
+  8. Minecraft.
+  9. Among Us.
+  10. The Forest.
+- **Implementado:** se reemplazaron las veinte fichas anteriores por diez tarjetas con imagen, descripción editorial, categoría y enlace directo a la tienda oficial. Se añadió una presentación que deja claro que el Arsenal incluye party games, deducción social, escondidas, terror, supervivencia y sandbox; no todos los títulos se presentan como cooperativos tradicionales.
+- **Imágenes:** se enlazan las cabeceras oficiales de Steam para los nueve títulos disponibles en esa tienda y una captura del sitio oficial de Minecraft. Son recursos externos; no se copiaron ni almacenaron imágenes dentro del repositorio.
+- **Verificaciones de contenido:** diez títulos exactos, diez imágenes declaradas, diez enlaces de tienda, numeración 01–10 y estilos responsive para las tarjetas. Se preservaron el resto de los capítulos, el roster, los expedientes, las estadísticas y las automatizaciones.
+- **Datos de juego destacados:** Mimic Party (1–5 online) y Among Us (4–15) según sus fichas de Steam; Backrooms: Escape Together (1–6) y R.E.P.O. (hasta 6) según sus páginas de Steam; Minecraft distingue Java y Bedrock y sus posibilidades de juego cruzado según la documentación oficial.
+- **Fuentes oficiales consultadas:**
+  - Steam — Mimic Party: https://store.steampowered.com/app/5053820/
+  - Steam — MECCHA CHAMELEON: https://store.steampowered.com/app/4704690/
+  - Steam — Backrooms: Escape Together: https://store.steampowered.com/app/2141730/
+  - Steam — R.E.P.O.: https://store.steampowered.com/app/3241660/
+  - Steam — Content Warning: https://store.steampowered.com/app/2881650/
+  - Steam — Dale & Dawson Stationery Supplies: https://store.steampowered.com/app/2920570/
+  - Steam — Lethal Company: https://store.steampowered.com/app/1966720/
+  - Minecraft — tienda oficial: https://www.minecraft.net/es-es/store/minecraft-java-bedrock-edition-pc
+  - Steam — Among Us: https://store.steampowered.com/app/945360/
+  - Steam — The Forest: https://store.steampowered.com/app/242760/
+- **Pendientes / riesgos:** comprobar visualmente el sitio publicado y que los recursos remotos de imágenes carguen correctamente en GitHub Pages. Las condiciones de crossplay, disponibilidad regional y requisitos pueden variar por edición; por eso se remite a las fichas oficiales y no se anuncian compatibilidades no verificadas.
+- **Commit de interfaz:** `1751350bf63c954ad502335b6895bc53fdbb0c39`.
+- **Despliegue:** pendiente de comprobar GitHub Actions / GitHub Pages.
