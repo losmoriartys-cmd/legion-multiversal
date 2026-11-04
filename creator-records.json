@@ -26,7 +26,16 @@
           "source": "Información confirmada por Demi."
         }
       ],
-      "highlights": []
+      "highlights": [
+        {
+          "title": "Clip destacado 1",
+          "description": "Primer clip seleccionado para el media kit de Los Moriartys. Pendiente de descripción editorial.",
+          "source": "Twitch Clips",
+          "url": "https://clips.twitch.tv/AgileAssiduousConsoleCeilingCat-N-95sSpINtTMo3wj",
+          "platform": "twitch",
+          "clip_id": "AgileAssiduousConsoleCeilingCat-N-95sSpINtTMo3wj"
+        }
+      ]
     },
     "ladymoriarty01": {
       "milestones": [],
