@@ -639,8 +639,9 @@
 .dossier-classification { position:absolute; z-index:2; top:3.1%; left:5%; color:#f4d88c; font:900 clamp(5px,.72vw,8px)/1.05 Montserrat,sans-serif; letter-spacing:.04em; text-transform:uppercase; }
 .dossier-name { position:absolute; z-index:3; top:4.2%; left:19%; width:68%; height:8.5%; display:flex; align-items:center; justify-content:center; overflow:hidden; color:#53c8f3; font:900 clamp(17px,2.25vw,27px)/.95 Bangers,cursive; letter-spacing:.025em; text-align:center; text-shadow:2px 3px 0 #07101a,-1px -1px 0 #07101a; }
 .dossier-subtitle { position:absolute; z-index:3; top:13.1%; left:20%; width:66%; height:4.5%; display:flex; align-items:center; justify-content:center; overflow:hidden; color:#f04b42; font:900 clamp(10px,1.35vw,16px)/1 Bangers,cursive; letter-spacing:.04em; text-align:center; text-shadow:1px 2px 0 #090b12; }
-.dossier-portrait { position:absolute; z-index:1; left:12.5%; top:21.5%; width:75%; height:50.5%; display:flex; align-items:center; justify-content:center; overflow:hidden; }
-.dossier-portrait img { display:block; width:100%; height:100%; object-fit:contain; object-position:center; }
+.dossier-portrait { position:absolute; z-index:1; left:12.5%; top:21.5%; width:75%; height:50.5%; display:flex; align-items:center; justify-content:center; overflow:hidden; background:#07101a; }
+.dossier-portrait img { display:block; width:118%; height:118%; max-width:none; object-fit:cover; object-position:center 30%; transform:scale(1.02); }
+.dossier-portrait::after { content:""; position:absolute; inset:0; pointer-events:none; background:linear-gradient(180deg,rgba(3,8,16,.04),transparent 18%,transparent 82%,rgba(3,8,16,.22)); }
 .dossier-portrait .hero-placeholder { width:100%; height:100%; display:flex; align-items:center; justify-content:center; color:#d7c18d; font:900 12px Montserrat,sans-serif; text-align:center; background:rgba(5,10,18,.55); }
 .dossier-field-values { position:absolute; z-index:3; left:9%; bottom:12.3%; width:82%; height:5.5%; display:grid; grid-template-columns:repeat(3,1fr); align-items:center; gap:3%; color:#f6d77d; font:900 clamp(7px,.9vw,10px)/1 Montserrat,sans-serif; text-align:center; text-transform:uppercase; text-shadow:1px 1px 2px #000; }
 .dossier-footer { position:absolute; z-index:4; left:10%; bottom:3.4%; width:80%; height:4.2%; display:flex; align-items:center; justify-content:center; overflow:hidden; padding:0 2%; background:rgba(5,10,17,.96); color:#ffdc78; font:900 clamp(8px,1.15vw,13px)/1 Bangers,cursive; letter-spacing:.025em; text-align:center; text-shadow:1px 2px 0 #241408; white-space:nowrap; }
@@ -1052,7 +1053,7 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
                 name: "MORIARTYS",
                 areas: ["Gaming", "Entretenimiento", "Comunidad"],
                 role: "director", 
-                img: "moriartys.jpg", 
+                img: "assets/moriartys.jpg", 
                 twitch: "https://twitch.tv/losmoriartys",
                 bio: "Bienvenido al videoclub 📼 Somos Demi y Ari - Los Moriartys. Pareja gamer y orgullosos nerds. Acá no hay pro-players, hay partidas que salen mal y terminan mejor. Sims de tienda, coop caótico, pelis y cómics. LUN/MIE 20HS | VIE 21HS ARG",
                 powers: "Perfil de habilidades en construcción. Se completará con la descripción de personaje aprobada por el integrante.",
@@ -1063,7 +1064,7 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
                 name: "ROD3R1K",
                 areas: ["Gaming", "Eventos", "Comunidad"],
                 role: "director", 
-                img: "rod3r1k.jpg", 
+                img: "assets/rod3r1k.jpg", 
                 twitch: "https://twitch.tv/TheR0D3R1K",
                 bio: "Bienvenidos al canal, me llamo Roderik o mejor conocido como 'ElKrakenaso' encontraras momentos divertidos y epicos, acompañame en las partidas, diviertete!",
                 powers: "Perfil de habilidades en construcción. Pendiente de confirmar con el integrante.",
@@ -1074,7 +1075,7 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
                 name: "LADYMORIARTY",
                 areas: ["Gaming", "Entretenimiento", "IRL"],
                 role: "teacher", 
-                img: "ladymoriarty.jpg", 
+                img: "assets/ladymoriarty.jpg", 
                 twitch: "https://twitch.tv/ladymoriarty01",
                 bio: "Canal secundario de Los Moriartys (https://www.twitch.tv/losmoriartys). Acá encontraran gameplay chill, IRL y lo que se me cante en el momento....Lo importante es divertirnos y pasarla bien 💜",
                 powers: "Especialidad: entretenimiento chill, IRL y conexión con la comunidad.",
@@ -1085,7 +1086,7 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
                 name: "CAPY",
                 areas: ["Gaming", "Cooperativo", "Supervivencia"],
                 role: "teacher", 
-                img: "capy.jpg", 
+                img: "assets/capy.jpg", 
                 twitch: "https://twitch.tv/capyunaplay",
                 bio: "Juegos que voy a jugar en modo cooperativo:\nSMITE, League of Legends, Fall Guys, Among Us, Goose Goose Duck, Farlight 84, Overwatch, Apex Legends, Rocket League, Dead by Daylight, The Forest, KartRider Drift, Raft, 7 Days to Die, ProjectZomboid, Brawlhalla, DEVOUR, Left 4 Dead 2.", 
                 stats: "Métricas en proceso de integración. Los datos se publicarán cuando estén conectados a una fuente verificable y acompañados de su período de medición.", 
@@ -1095,7 +1096,7 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
                 name: "ARDIPII",
                 areas: ["Gaming", "Comunidad"],
                 role: "teacher", 
-                img: "ardipii.jpg", 
+                img: "assets/ardipii.jpg", 
                 twitch: "https://twitch.tv/ardipii",
                 bio: "Welcome a mi humilde perfil, gasten sus puntos en alertas, saluden a todos, traigan unas palomitas y 'Lo único que podemos decidir es qué hacer con el tiempo que se nos ha dado'.", 
                 stats: "Métricas en proceso de integración. Los datos se publicarán cuando estén conectados a una fuente verificable y acompañados de su período de medición.", 
@@ -1105,7 +1106,7 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
                 name: "AKUMA",
                 areas: ["Gaming", "Charlas", "Comunidad"],
                 role: "teacher", 
-                img: "akuma.jpg", 
+                img: "assets/akuma.jpg", 
                 twitch: "https://twitch.tv/akumazoldyck",
                 bio: "Directo todos los dias a las 7 de la tarde hora mexico. Talk show, friends and games.", 
                 stats: "Métricas en proceso de integración. Los datos se publicarán cuando estén conectados a una fuente verificable y acompañados de su período de medición.", 
@@ -1115,7 +1116,7 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
                 name: "ELGABII",
                 areas: ["Gaming", "Construcción", "Servidores"],
                 role: "teacher", 
-                img: "elgabii.jpg", 
+                img: "assets/elgabii.jpg", 
                 twitch: "https://twitch.tv/elgabii090",
                 bio: "Rol: Habilidoso / Kinetic Manipulator\nClase: Mutant - Kinetic Energy\nLema: 'Construyendo la victoria bloque a bloque.'",
                 powers: "Manipulación de energía cinética. Atributos ficticios del personaje: Fuerza 7/10 · Velocidad 8/10 · Energía 9/10. No son métricas de Twitch.",
@@ -1149,7 +1150,7 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
                 name: "HABITOS",
                 areas: ["Gaming", "Filosofía", "Desarrollo personal"],
                 role: "collaborator", 
-                img: "habitos.jpg", 
+                img: "assets/habitos.jpg", 
                 twitch: "https://twitch.tv/habitos_atomicos",
                 bio: "Creador y colaborador del Instituto S3X-MEN. Combina su faceta gamer con charlas motivacionales y filosóficas, generando espacios de conversación, reflexión y comunidad. Su contenido aporta una mirada versátil que conecta entretenimiento y crecimiento personal.", 
                 stats: "Métricas en proceso de integración. Los datos se publicarán cuando estén conectados a una fuente verificable y acompañados de su período de medición.", 
@@ -1302,7 +1303,6 @@ function renderRoster() {
                         : '<div class="hero-placeholder"><span>RETRATO<br>PENDIENTE</span></div>';
                     card.innerHTML =
                         '<img class="dossier-template" src="https://raw.githubusercontent.com/losmoriartys-cmd/s3xmen/main/image_20261103_160331.jpg" alt="" aria-hidden="true">' +
-                        '<span class="dossier-classification">CLASIFICADO · NIVEL ALFA</span>' +
                         '<span class="dossier-name">' + displayName + '</span>' +
                         '<span class="dossier-subtitle">' + subtitle + '</span>' +
                         '<div class="dossier-portrait">' + imageMarkup + '</div>' +
