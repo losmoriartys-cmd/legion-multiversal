@@ -546,3 +546,16 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Pendientes:** comprobar el workflow de GitHub Pages y revisar visualmente el expediente en escritorio y móvil. El piloto no incorpora gráfico de distribución por juegos porque el histórico de Los Moriartys no contiene ese desglose.
 - **Commit de interfaz:** [`9d02c882`](https://github.com/losmoriartys-cmd/s3xmen/commit/9d02c882a1e2bf7758f011497342f08a10691520).
 - **Despliegue:** pendiente de verificación.
+
+## 2026-11-04 — Transiciones de expedientes e identidad sonora arcade
+
+- **Objetivo:** reforzar la experiencia de navegación de Legión Multiversal con una transición reconocible entre expedientes y una identidad sonora retro inspirada en arcades de los años 80/90.
+- **Archivo de interfaz:** `index.html`.
+- **Transiciones:** se incorporó una cortinilla breve de pantalla completa con trama de puntos, colores de la identidad visual y el nombre del expediente de destino. La animación acompaña el cambio de panel sin alterar el orden ni el contenido de los capítulos.
+- **Accesibilidad:** se respeta `prefers-reduced-motion`; en ese modo se omite la cortinilla animada y el desplazamiento utiliza comportamiento inmediato.
+- **Identidad sonora:** se implementó una composición chiptune original generada en tiempo real mediante Web Audio API, con melodía de onda cuadrada, bajo triangular y acentos electrónicos. No se descargan pistas ni se incorporan obras comerciales.
+- **Control de usuario:** botón visible `SONIDO: OFF/ON`; el audio está desactivado por defecto, solo comienza tras una interacción explícita y puede pausarse desde el mismo control. Se suma un breve acorde de navegación al cambiar de expediente mientras el audio está activo.
+- **Preservado:** estructura, capítulos, roster, cartas, estadísticas, enlaces, automatizaciones y contenido editorial existente.
+- **Pendiente de prueba:** escuchar el resultado en navegador real, comprobar niveles y compatibilidad de Web Audio API en escritorio/móvil y revisar el workflow de GitHub Pages. La implementación evita autoplay, pero la experiencia sonora debe calibrarse con escucha real.
+- **Commit de interfaz:** `01668723c26abdd75368ac3216e8774919586d50` — https://github.com/losmoriartys-cmd/s3xmen/commit/01668723c26abdd75368ac3216e8774919586d50
+- **Despliegue:** sujeto al workflow de GitHub Pages asociado al commit.
