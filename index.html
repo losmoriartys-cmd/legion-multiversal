@@ -1364,10 +1364,16 @@ function openHeroModal(index) {
                 const statsNode=document.getElementById('modal-stats-text');
                 statsNode.innerText += '\n\n' + observedStreamsText;
             }
-            document.getElementById('modal-stats-text').innerText +=
-                '\n\nMÉTRICAS COMPARABLES · ÚLTIMOS 30 DÍAS\n' +
-                'Fuente acordada para analítica de canales: Streams Charts.\n' +
-                'Estado: pendiente de integrar una exportación verificable de Streams Charts. No se reemplaza con estimaciones ni con métricas de otra fuente.';
+            if(hero.youtube){
+                document.getElementById('modal-stats-text').innerText +=
+                    '\n\nPLATAFORMA PRINCIPAL · YOUTUBE\n' +
+                    'Las métricas de suscriptores, visualizaciones y publicaciones se mantendrán separadas. Estado: pendientes de una fuente pública verificable; no se mezclan con Twitch ni con Streams Charts.';
+            }else{
+                document.getElementById('modal-stats-text').innerText +=
+                    '\n\nMÉTRICAS COMPARABLES · ÚLTIMOS 30 DÍAS\n' +
+                    'Fuente acordada para analítica de canales: Streams Charts.\n' +
+                    'Estado: pendiente de integrar una exportación verificable de Streams Charts. No se reemplaza con estimaciones ni con métricas de otra fuente.';
+            }
             document.getElementById('modal-log-text').innerText =
                 'ARCHIVO DE PERSONAJE\n' +
                 'Serie: ' + (hero.series || 'Pendiente') + ' · Registro: #' + (hero.cardNumber || '---') + '\n' +
