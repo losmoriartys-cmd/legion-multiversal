@@ -722,3 +722,12 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Pendientes / riesgos:** comprobar visualmente en GitHub Pages que la sección muestre los tres reproductores.
 - **Commit de registros:** [`6e89ebff`](https://github.com/losmoriartys-cmd/s3xmen/commit/6e89ebffb9478d41704ebad55958a78d2755438e).
 - **Despliegue:** pendiente de verificación visual.
+
+## 2026-11-04 — Integrar la foto de S3X-MEN en el relato de la primera formación
+
+- **Solicitud:** ubicar la fotografía de S3X-MEN dentro del recuadro del bloque «ANTES DE LA LEGIÓN, FUIMOS S3X-MEN», en lugar de dejarla aislada más abajo en el capítulo.
+- **Implementado:** la imagen `banner-s3xmen-original.jpg` ahora acompaña el sello «DOCUMENTO DE ORIGEN · S3X-MEN · PRIMERA FORMACIÓN», junto al relato que presenta a Demian, ROD3R1K, Akuma, ElGabii y Capy.
+- **Presentación:** se conserva el recuadro editorial, con imagen adaptable y sin recorte; se elimina la repetición de esa misma fotografía en el bloque posterior.
+- **Conservado:** la imagen `Demi&Rod.jpg` permanece en su viñeta propia «EL COMIENZO DE TODO», porque documenta el origen entre los dos primeros amigos.
+- **Commit de interfaz:** [`422e5e0b`](https://github.com/losmoriartys-cmd/s3xmen/commit/422e5e0bd5a9600b0364cf09dc1fac6b55e84038).
+
