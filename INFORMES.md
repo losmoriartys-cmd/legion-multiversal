@@ -130,3 +130,29 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
   - Los textos biográficos y de misiones siguen siendo los que ya estaban en el repositorio; deben ampliarse con información aprobada por cada integrante.
 - **Commit:** [`2f894140`](https://github.com/losmoriartys-cmd/s3xmen/commit/2f89414009bc1c9486bccb5b500edf60176005c6).
 - **Despliegue:** pendiente de verificación.
+
+
+## 2026-11-04 — Ampliar estadísticas y registro de directos en expedientes
+
+- **Responsable:** ChatGPT + equipo Los Moriartys.
+- **Objetivo:** hacer que la página C de cada expediente distinga las métricas observadas en Twitch del historial de directos y de las analíticas comparables de 30 días.
+- **Archivos modificados:**
+  - `index.html`: renderizado de la página C de los expedientes.
+  - `INFORMES.md`: registro de esta intervención.
+- **Implementado:**
+  - Se agregó un registro por integrante de las sesiones en directo detectadas por el muestreo de Twitch Helix, agrupadas por ID de transmisión.
+  - Cada sesión muestra fecha de inicio observada, categorías detectadas, pico entre muestras y cantidad de muestras en directo.
+  - Se aclara que el registro puede no incluir todos los directos y que no equivale al archivo/VOD de Twitch.
+  - Se separó explícitamente el estado en directo y la telemetría de Twitch Helix de las métricas comparables de los últimos 30 días, cuya fuente acordada es Streams Charts.
+  - Se dejó indicado “pendiente de integrar” cuando todavía no existe una exportación verificable de Streams Charts; no se inventan cifras.
+  - Se conserva el enlace de cada expediente a su plataforma principal; Oratoris mantiene YouTube separado de Twitch.
+- **Validaciones y resultados:**
+  - Se comprobó que el esquema de `data.json` contiene `snapshots`, `stream_id`, `started_at`, `game_name` y `viewer_count`, necesarios para construir el registro observado.
+  - Se comprobó que el muestreo actual conserva una ventana de 10 días; el registro declara esa ventana y no la presenta como historial completo.
+  - Pendiente validar en navegador la apertura de los diez expedientes y el formato responsive.
+- **Pendientes / riesgos:**
+  - Integrar exportación/datos de Streams Charts para la ventana común de 30 días y mostrar fuente y fecha de corte.
+  - La ampliación de la ventana de muestreo de Twitch Helix, si se desea, deberá tratarse por separado: el histórico previo a su cambio no puede reconstruirse retroactivamente.
+  - Verificar GitHub Pages tras el commit.
+- **Commit:** se registra el hash del commit que actualiza `index.html` inmediatamente después de su confirmación.
+- **Despliegue:** pendiente de verificación.
