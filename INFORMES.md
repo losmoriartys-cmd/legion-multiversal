@@ -673,3 +673,14 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - Reutiliza el reproductor Twitch adaptable configurado con el dominio GitHub Pages.
 - Commit: [`d0895bca`](https://github.com/losmoriartys-cmd/s3xmen/commit/d0895bcaa99876e6a5e97aac5d04589c361e5d8d).
 - Pendiente: completar título y descripción editorial y revisar reproducción en Pages.
+
+
+## 2026-11-04 — Cuarto clip Twitch registrado para Los Moriartys
+
+- Se agregó a `creator-records.json` el clip `HedonisticMistyOysterVoteNay--xMrzAmq01gmtKcW` como "Clip destacado 4".
+- Se reutiliza el reproductor Twitch adaptable ya implementado, configurado para el dominio `losmoriartys-cmd.github.io`; no se requiere descargar el video.
+- La selección inicial del canal conjunto queda completa con cuatro clips directos.
+- **Commit de registros:** [`08d0aae4`](https://github.com/losmoriartys-cmd/s3xmen/commit/08d0aae43d4b2c89fa98a59992eca3711a2bb4da).
+- **Validación:** JSON parseado y confirmados cuatro identificadores de clip únicos en `channels.losmoriartys.highlights`.
+- **Pendiente:** revisar la reproducción de los cuatro clips en GitHub Pages y completar títulos/descripciones editoriales cuando se definan.
+- **Despliegue:** pendiente de verificación visual.
