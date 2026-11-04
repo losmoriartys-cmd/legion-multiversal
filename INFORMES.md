@@ -699,3 +699,12 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Validaciones:** cambio acotado al renderizado del archivo de trayectoria y a los títulos/descripciones provisionales de los tres clips; se preservan URLs, IDs, reproductores y colaboraciones.
 - **Commits:** [interfaz `071f8ab1`](https://github.com/losmoriartys-cmd/s3xmen/commit/071f8ab1d51f219cede616e62856fdb5bc56aac0) · [registros `966f5469`](https://github.com/losmoriartys-cmd/s3xmen/commit/966f54693148c9b9c3ca9cbad398e16970ac1371).
 - **Despliegue:** pendiente de verificación visual en GitHub Pages.
+
+
+## 2026-11-04 — Imagen fundacional de Demian y ROD3R1K
+
+- Se incorporó `Demi&Rod.jpg` al bloque «EL COMIENZO DE TODO» del Capítulo 01, sustituyendo el placeholder de ilustración pendiente.
+- Se conservó el marco editorial y el encabezado de viñeta fundacional; la imagen mantiene proporción intrínseca, se adapta al ancho disponible y no se recorta.
+- Se actualizó el texto alternativo y el epígrafe para contextualizar el origen del proyecto.
+- **Validación estática:** referencia al asset presente, placeholder retirado y regla de imagen responsive confirmada.
+- **Commit de interfaz:** [`1e9e1a92`](https://github.com/losmoriartys-cmd/s3xmen/commit/1e9e1a9225ddb9d26a8e6ec9174a434af2ec268f).
