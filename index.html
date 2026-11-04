@@ -1158,6 +1158,9 @@ function renderSullyStats(channel){
   'Estado: '+(channel.status==='partial'?'Parcial — datos recibidos':'Pendiente de recopilar transmisiones'),
   'Historial: '+channel.source_url
  ];
+ if(channel.period && (channel.period.start_date || channel.period.end_date)){
+  lines.push('Período: '+(channel.period.start_date||'—')+' a '+(channel.period.end_date||'—'));
+ }
  if(channel.annual_summary_2026){
   const a=channel.annual_summary_2026;
   lines.push('RESUMEN 2026 (acumulado informado por SullyGnome):');
@@ -1410,6 +1413,11 @@ function openHeroModal(index) {
                 const statsNode=document.getElementById('modal-stats-text');
                 statsNode.innerText += '\n\n' + observedStreamsText;
             }
+            const sullyChannel=findSullyChannel(hero);
+            const sullyText=renderSullyStats(sullyChannel);
+            if(sullyText){
+                document.getElementById('modal-stats-text').innerText += '\n\n' + sullyText;
+            }
             if(hero.youtube){
                 document.getElementById('modal-stats-text').innerText +=
                     '\n\nPLATAFORMA PRINCIPAL · YOUTUBE\n' +
@@ -1458,8 +1466,11 @@ function openHeroModal(index) {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        window.onload = function() { renderRoster();
-        loadInstituteStats(); loadPartnerMetrics(); loadCreatorRecords(); };
+        window.onload = async function() {
+        await loadSullyGnomeData();
+        renderRoster();
+        loadInstituteStats(); loadPartnerMetrics(); loadCreatorRecords();
+        };
     </script>
 </body>
 </html>
