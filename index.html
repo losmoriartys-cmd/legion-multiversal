@@ -319,6 +319,16 @@
 
         /* Piloto de estadísticas: expediente conjunto Los Moriartys */
         .pilot-stats { display:flex; flex-direction:column; gap:16px; }
+
+        .pilot-stats .pilot-feature-strip{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:13px 16px;background:linear-gradient(100deg,#17263a,#0a111e);border:1px solid #354761;border-left:3px solid #ffe04a}
+        .pilot-stats .pilot-feature-strip strong{font-family:'Bangers',cursive;color:#ffe04a;font-size:1.2rem;letter-spacing:.6px}
+        .pilot-stats .pilot-feature-strip span{color:#aebbd0;font-size:.8rem}
+        .pilot-stats .pilot-feature-strip b{color:#fff;font-size:1rem}
+        .pilot-stats .pilot-table{min-width:650px}
+        .mission-clips-intro{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;background:#0a111e;border:1px solid #34445c;padding:14px;margin:12px 0}
+        .mission-clips-intro p{color:#aebbd0;font-size:.78rem;margin:0;line-height:1.5}
+        .mission-clips-intro a,.mission-clip-link{color:#ffe06a;font-weight:800;text-decoration:none}
+        .mission-clips-intro a:hover,.mission-clip-link:hover{text-decoration:underline}
         .pilot-stats .pilot-subsection{display:flex;flex-direction:column;gap:10px;padding-top:8px;border-top:1px solid #2b3a50}
         .pilot-stats .pilot-donut-real{width:142px;height:142px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(#69c3ff 0 22.7%,#364357 22.7% 100%);position:relative}
         .pilot-stats .pilot-donut-hole{width:94px;height:94px;border-radius:50%;background:#080e18;display:flex;flex-direction:column;justify-content:center;align-items:center;position:relative}
@@ -1638,37 +1648,29 @@ function renderStatsBars(title,items,labelFn,valueFn,suffix,maxItems=10){
  return out+'</div>';
 }
 function renderLosMoriartysSullyPilot(channel){
- const x=channel.summary||{}, rows=Array.isArray(channel.streams)?channel.streams:[];
- const period=channel.period?statsDate(channel.period.start_date)+' — '+statsDate(channel.period.end_date):'Período del panel de referencia no indicado';
+ const x=channel.summary||{};
  const games=[
-  {name:'Enshrouded',av:26,air:'4 h',fg:5,fph:'1'},
-  {name:'Minecraft',av:34,air:'3 h',fg:7,fph:'2'},
-  {name:'Fortnite',av:27,air:'4 h',fg:5,fph:'1',hw:103,share:22.7},
-  {name:'Supercar Collection Together',av:31,air:'2 h',fg:null,fph:null},
-  {name:'Marvel Rivals',av:33,air:'2 h',fg:3,fph:'2'}
+  {name:'Enshrouded',av:26,air:'4 h',fg:5,fph:'1',hw:null},
+  {name:'Minecraft',av:34,air:'3 h',fg:7,fph:'2',hw:null},
+  {name:'Fortnite',av:27,air:'4 h',fg:5,fph:'1',hw:'103',share:'22,7%'},
+  {name:'Supercar Collection Together',av:31,air:'2 h',fg:null,fph:null,hw:null},
+  {name:'Marvel Rivals',av:33,air:'2 h',fg:3,fph:'2',hw:null}
  ];
- const lifetime=[['Seguidores','1K','dato mostrado en la captura'],['Pico de espectadores','101','07 oct 2026'],['Promedio de espectadores','6','promedio lifetime'],['Airtime','348 h','aprox. 1 h 2 min por día'],['Días activos','335','histórico'],['Bans','0','histórico']];
+ const lifetime=[['Seguidores','1K','Lifetime'],['Pico de espectadores','101','07 oct 2026'],['Promedio de espectadores','6','Lifetime'],['Airtime','348 h','Aprox. 1 h 2 min por día'],['Días activos','335','Lifetime'],['Bans','0','Lifetime']];
  const periodMetrics=[['HORAS VISTAS','846','↑ 35%'],['PICO DE ESPECTADORES','101','↑ 107%'],['PROMEDIO DE ESPECTADORES','26','↑ 34%'],['AUTHORIZED / ALL VIEWERS','117%','ratio informado'],['LIVE VIEWS','102','vistas en directo'],['FOLLOWERS GAIN','48','↓ 94%'],['AIRTIME','32 h 10 min','↓ 1%'],['DÍAS ACTIVOS','28','1 h 8 min por día']];
- let out='<section class="stats-section pilot-stats"><div class="stats-source-head"><div><strong>ANALÍTICA DEL CANAL · LOS MORIARTYS</strong><br><small>Datos de las capturas compartidas por Demi · paneles de referencia</small></div><span class="stats-status partial">DATOS APORTADOS</span></div>';
- out+='<p class="stats-section-intro">Los indicadores siguientes reproducen los valores visibles en las capturas de analítica. El período exacto del panel de rendimiento no aparece en la imagen.</p>';
- out+='<section class="pilot-subsection"><div class="pilot-subhead"><h5>01 · JUEGOS Y CATEGORÍAS POPULARES</h5><small>Actividad por juego · datos del panel compartido</small></div>';
- out+='<div class="pilot-game-empty"><div class="pilot-donut-real"><div class="pilot-donut-hole"><strong>103</strong><small>HORAS VISTAS</small></div></div><div class="pilot-game-copy"><strong>Fortnite · 22,7% del total de horas vistas</strong><p>La captura destaca Fortnite con 103 horas vistas. La distribución circular completa se conserva como referencia visual; no calculamos porcentajes para los demás juegos porque no están indicados numéricamente.</p></div></div>';
- out+='<div class="stats-table-wrap"><table class="stats-table pilot-table"><thead><tr><th>Juego</th><th>Promedio</th><th>Tiempo emitido</th><th>Seguidores ganados</th><th>Por hora</th><th>Horas vistas</th></tr></thead><tbody>';
- games.forEach(g=>out+='<tr><th>'+g.name+'</th><td class="num">'+g.av+'</td><td>'+g.air+'</td><td class="num">'+(g.fg===null?'—':g.fg)+'</td><td class="num">'+(g.fph===null?'—':g.fph)+'</td><td class="num">'+(g.hw===undefined?'—':g.hw)+'</td></tr>');
- out+='</tbody></table></div><p class="stats-note">AV = promedio de espectadores · AT = tiempo emitido · FG = seguidores ganados · fph = seguidores por hora. El pico individual por juego no figura en la captura.</p></section>';
- out+='<section class="pilot-subsection"><div class="pilot-subhead"><h5>02 · DATOS HISTÓRICOS · LIFETIME</h5><small>Acumulados históricos visibles en la captura</small></div><div class="stats-table-wrap"><table class="stats-table pilot-table"><thead><tr><th>Indicador</th><th>Valor</th><th>Detalle</th></tr></thead><tbody>';
+ let out='<section class="stats-section pilot-stats"><div class="stats-source-head"><div><strong>ANALÍTICA DEL CANAL · LOS MORIARTYS</strong><br><small>Datos de los paneles compartidos por Demi</small></div><span class="stats-status partial">DATOS APORTADOS</span></div>';
+ out+='<p class="stats-section-intro">Las tablas distinguen los datos por juego, los acumulados Lifetime y el rendimiento del período. El rango de fechas del panel de rendimiento no aparece en la captura.</p>';
+ out+='<section class="pilot-subsection"><div class="pilot-subhead"><h5>01 · JUEGOS POPULARES</h5><small>Rendimiento por juego</small></div>';
+ out+='<div class="pilot-feature-strip"><strong>FORTNITE</strong><span><b>103 h</b> vistas</span><span><b>22,7%</b> del total</span></div>';
+ out+='<div class="stats-table-wrap"><table class="stats-table pilot-table"><thead><tr><th>Juego</th><th>Horas emitidas</th><th>Promedio</th><th>Seguidores ganados</th><th>Por hora</th><th>Horas vistas</th></tr></thead><tbody>';
+ games.forEach(g=>out+='<tr><th>'+g.name+'</th><td>'+g.air+'</td><td class="num">'+g.av+'</td><td class="num">'+(g.fg===null?'—':g.fg)+'</td><td class="num">'+(g.fph===null?'—':g.fph)+'</td><td class="num">'+(g.hw===null?'—':g.hw)+'</td></tr>');
+ out+='</tbody></table></div><p class="stats-note">Promedio = espectadores medios del juego · Por hora = seguidores ganados por hora. Las horas vistas solo están disponibles para Fortnite en la captura. El pico por juego no fue aportado.</p></section>';
+ out+='<section class="pilot-subsection"><div class="pilot-subhead"><h5>02 · DATOS HISTÓRICOS · LIFETIME</h5><small>Acumulados del canal</small></div><div class="stats-table-wrap"><table class="stats-table pilot-table"><thead><tr><th>Indicador</th><th>Valor</th><th>Referencia</th></tr></thead><tbody>';
  lifetime.forEach(v=>out+='<tr><th>'+v[0]+'</th><td class="num">'+v[1]+'</td><td>'+v[2]+'</td></tr>');
- out+='</tbody></table></div><p class="stats-note">Seguidores se muestra como 1K, tal como aparece en el panel, sin inferir una cifra exacta.</p></section>';
- out+='<section class="pilot-subsection"><div class="pilot-subhead"><h5>03 · RENDIMIENTO DEL PERÍODO</h5><small>Resumen de la captura de analítica · rango de fechas no visible</small></div><div class="pilot-performance-grid">';
+ out+='</tbody></table></div></section>';
+ out+='<section class="pilot-subsection"><div class="pilot-subhead"><h5>03 · RENDIMIENTO DEL PERÍODO</h5><small>Resumen del panel compartido · fechas no visibles</small></div><div class="pilot-performance-grid">';
  periodMetrics.forEach(v=>out+='<div class="pilot-metric"><span>'+v[0]+'</span><strong>'+v[1]+'</strong><small>'+v[2]+'</small></div>');
- out+='</div><div class="pilot-callout"><strong>Comparativas:</strong> las variaciones (+35%, +107%, +34%, -94% y -1%) se reproducen tal como aparecen en el panel. No se atribuye un rango temporal que la captura no muestra.</div></section>';
- out+='<section class="pilot-subsection"><div class="pilot-subhead"><h5>REGISTRO DE TRANSMISIONES · SULLYGNOME</h5><small>Fuente histórica complementaria</small></div><p class="stats-section-intro">Período del archivo: '+period+' · <a class="stats-link" href="'+escapeStatsHtml(channel.source_url)+'" target="_blank" rel="noopener">Abrir fuente ↗</a></p>';
- if(rows.length){
-  out+='<div class="stats-table-wrap"><table class="stats-table pilot-table"><thead><tr><th>Fecha</th><th>Duración</th><th>Promedio</th><th>Pico</th><th>Horas vistas</th></tr></thead><tbody>';
-  rows.forEach(v=>out+='<tr><td>'+statsDate(v.date)+'</td><td>'+statsDuration(v)+'</td><td class="num">'+statsNumber(v.average_viewers,0)+'</td><td class="num">'+statsNumber(v.peak_viewers,0)+'</td><td class="num">'+statsNumber(v.hours_watched,1)+'</td></tr>');
-  out+='</tbody></table></div>';
- }
- out+='<p class="stats-note">El historial de transmisiones y las capturas de analítica se mantienen como referencias diferenciadas. Sus períodos y metodologías no se mezclan.</p></section></section>';
+ out+='</div><div class="pilot-callout"><strong>Comparativas:</strong> las variaciones se reproducen tal como aparecen en la captura. No se les asigna un rango temporal que no está visible.</div></section></section>';
  return out;
 }
 function renderSullyStats(channel){
@@ -1771,12 +1773,21 @@ function renderStatsDashboard(hero,helix,sully){
 }
 function renderMissionArchive(hero){
  const key=creatorRecordKey(hero),record=creatorRecordsData?.channels?.[key]||{};
- const groups=[['HITOS','milestones'],['COLABORACIONES','collaborations'],['DIRECTOS Y CLIPS DESTACADOS','highlights']];
+ const groups=[['HITOS','milestones'],['COLABORACIONES','collaborations'],['REGISTROS Y CLIPS DESTACADOS','highlights']];
+ const channelUrl=hero.youtube||hero.twitch||'';
+ const isYoutube=!!hero.youtube;
  let out='<div class="mission-archive"><div class="mission-hero-card"><span class="eyebrow">ARCHIVO OPERATIVO · EXPEDIENTE '+escapeStatsHtml(hero.cardNumber||'—')+'</span><p>'+escapeStatsHtml(hero.log||'Todavía no hay misiones registradas.')+'</p></div>';
+ out+='<section class="mission-section"><h4>CLIPS DEL CANAL</h4>';
+ if(channelUrl){
+  const clipUrl=isYoutube?channelUrl.replace(/\/$/,'')+'/shorts':channelUrl.replace(/\/$/,'')+'/clips?filter=clips&range=all&sort=views';
+  const recentUrl=isYoutube?channelUrl.replace(/\/$/,'')+'/videos':channelUrl.replace(/\/$/,'')+'/clips?filter=clips&range=30d&sort=recent';
+  out+='<div class="mission-clips-intro"><p>'+(isYoutube?'Explorá los Shorts y videos publicados en el canal oficial.':'Explorá los clips destacados del canal de Twitch. Los enlaces abren la selección dinámica de clips, no clips elegidos manualmente.')+'</p><a href="'+escapeStatsHtml(clipUrl)+'" target="_blank" rel="noopener">CLIPS MÁS VISTOS ↗</a><a href="'+escapeStatsHtml(recentUrl)+'" target="_blank" rel="noopener">'+(isYoutube?'VER VIDEOS ↗':'CLIPS RECIENTES ↗')+'</a></div>';
+ }else out+='<p class="mission-empty">Canal no configurado para este expediente.</p>';
+ out+='</section>';
  groups.forEach(([label,field])=>{
   const items=Array.isArray(record[field])?record[field]:[];
   out+='<section class="mission-section"><h4>'+label+'</h4>';
-  if(!items.length)out+='<p class="mission-empty">No hay registros verificados cargados en esta sección.</p>';
+  if(!items.length)out+='<p class="mission-empty">No hay registros individuales cargados todavía. Los clips se pueden fijar aquí pegando sus enlaces directos.</p>';
   else{
    out+='<div class="mission-grid">';
    items.forEach(item=>{
@@ -1791,7 +1802,7 @@ function renderMissionArchive(hero){
   }
   out+='</section>';
  });
- out+='<p class="stats-muted">Los hitos, colaboraciones y destacados se incorporan únicamente con fecha y fuente comprobable. El archivo de personaje se conserva separado de las métricas de plataforma.</p></div>';
+ out+='<p class="stats-muted">Los clips enlazados desde el canal se actualizan dinámicamente. Para mostrar 3 o 4 clips individuales seleccionados, se agregan sus URLs directas en highlights.</p></div>';
  return out;
 }
 async function loadSullyGnomeData(){
