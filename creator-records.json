@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "description": "Registros editoriales verificables de cada creador. No completar con datos estimados. Cada elemento admite date (YYYY-MM-DD), title, description, url y source.",
+  "channels": {
+    "losmoriartys": {
+      "milestones": [],
+      "collaborations": [],
+      "highlights": []
+    },
+    "ladymoriarty01": {
+      "milestones": [],
+      "collaborations": [],
+      "highlights": []
+    },
+    "ther0d3r1k": {
+      "milestones": [],
+      "collaborations": [],
+      "highlights": []
+    },
+    "elgabii090": {
+      "milestones": [],
+      "collaborations": [],
+      "highlights": []
+    },
+    "capyunaplay": {
+      "milestones": [],
+      "collaborations": [],
+      "highlights": []
+    },
+    "habitos_atomicos": {
+      "milestones": [],
+      "collaborations": [],
+      "highlights": []
+    },
+    "ardipii": {
+      "milestones": [],
+      "collaborations": [],
+      "highlights": []
+    },
+    "akumazoldyck": {
+      "milestones": [],
+      "collaborations": [],
+      "highlights": []
+    },
+    "daved0608": {
+      "milestones": [],
+      "collaborations": [],
+      "highlights": []
+    },
+    "patoteexplica": {
+      "milestones": [],
+      "collaborations": [],
+      "highlights": []
+    }
+  }
+}
