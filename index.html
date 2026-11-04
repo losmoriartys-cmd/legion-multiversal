@@ -1152,6 +1152,85 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
             #chapter-2 .roster-portrait-card:focus-visible::after { animation:none!important; }
         }
 
+
+        /* Ajuste de visibilidad · Roster comic y movimiento perceptible */
+        #chapter-2.comic-page {
+            isolation:isolate;
+            background-color:#0b1020 !important;
+            background-image:
+                radial-gradient(ellipse at 8% 10%,rgba(0,210,255,.24),transparent 34%),
+                radial-gradient(ellipse at 92% 82%,rgba(255,48,58,.2),transparent 36%),
+                radial-gradient(rgba(255,255,255,.22) 1px,transparent 1.6px),
+                repeating-linear-gradient(135deg,transparent 0 110px,rgba(255,255,255,.025) 111px 113px,transparent 114px 220px),
+                linear-gradient(145deg,#101a2d 0%,#171126 52%,#0b1322 100%) !important;
+            background-size:auto,auto,8px 8px,auto,auto !important;
+        }
+        #chapter-2.comic-page::before {
+            z-index:0;
+            opacity:.34;
+            background-image:
+                radial-gradient(rgba(255,255,255,.9) 1.15px,transparent 1.7px),
+                repeating-linear-gradient(118deg,transparent 0 72px,rgba(0,210,255,.12) 73px 75px,transparent 76px 148px),
+                linear-gradient(115deg,transparent 38%,rgba(255,42,42,.09) 49%,transparent 60%);
+            background-size:7px 7px,auto,auto;
+            animation:comicDrift 24s linear infinite;
+        }
+        #chapter-2.comic-page::after {
+            z-index:0;
+            opacity:.65;
+            background:
+                radial-gradient(ellipse at 12% 12%,rgba(0,210,255,.2),transparent 34%),
+                radial-gradient(ellipse at 88% 76%,rgba(255,42,42,.17),transparent 36%),
+                repeating-linear-gradient(0deg,transparent 0 5px,rgba(255,255,255,.018) 6px 7px);
+        }
+        #chapter-2 > :not(.chapter-tag) { position:relative;z-index:1; }
+        #chapter-2 .roster-section {
+            padding:clamp(14px,2vw,22px);
+            margin:30px 0 38px;
+            border:1px solid rgba(128,177,220,.22);
+            border-left:4px solid rgba(0,210,255,.62);
+            background:linear-gradient(115deg,rgba(4,12,25,.72),rgba(12,15,32,.5));
+            box-shadow:0 12px 32px rgba(0,0,0,.2);
+        }
+        #chapter-2 .roster-portrait-card {
+            animation:rosterCardBob 5.2s ease-in-out infinite;
+            will-change:transform;
+            border-color:rgba(93,142,184,.72);
+            box-shadow:0 0 0 1px rgba(0,210,255,.12),6px 7px 0 rgba(0,0,0,.9),0 8px 24px rgba(0,0,0,.28);
+        }
+        #chapter-2 .roster-portrait-card:nth-child(3n+2) { animation-delay:-1.7s; }
+        #chapter-2 .roster-portrait-card:nth-child(3n) { animation-delay:-3.4s; }
+        #chapter-2 .roster-portrait-card:hover,
+        #chapter-2 .roster-portrait-card:focus-visible {
+            animation-play-state:paused;
+            transform:perspective(900px) rotateX(3deg) rotateY(-3deg) translateY(-9px) scale(1.015);
+            border-color:#00d2ff;
+            box-shadow:0 0 0 2px rgba(0,210,255,.24),0 14px 30px rgba(0,0,0,.55),9px 9px 0 #000;
+        }
+        #chapter-2 .roster-portrait-card::after {
+            opacity:0;
+            transition:opacity .25s ease;
+        }
+        #chapter-2 .roster-portrait-card:hover::after,
+        #chapter-2 .roster-portrait-card:focus-visible::after {
+            opacity:1;
+            animation:rosterCardShine .85s ease-out;
+        }
+        @keyframes rosterCardBob {
+            0%,100% { transform:translateY(0); }
+            50% { transform:translateY(-5px); }
+        }
+        @media(prefers-reduced-motion:reduce) {
+            #chapter-2.comic-page::before { animation:none!important; }
+            #chapter-2 .roster-portrait-card,
+            #chapter-2 .hero-profile-card { animation:none!important;will-change:auto; }
+            #chapter-2 .roster-portrait-card:hover,
+            #chapter-2 .roster-portrait-card:focus-visible,
+            #chapter-2 .hero-profile-card:hover { transform:none!important; }
+            #chapter-2 .roster-portrait-card:hover::after,
+            #chapter-2 .roster-portrait-card:focus-visible::after { animation:none!important; }
+        }
+
     </style>
 </head>
 <body>
