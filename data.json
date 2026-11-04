@@ -1,9 +1,9 @@
 {
   "schema_version": 2,
   "source": "Twitch Helix API",
-  "window_days": 10,
+  "window_days": 30,
   "sampling_interval_minutes": 15,
-  "updated_at": "2026-11-04T02:06:41Z",
+  "updated_at": "2026-11-04T02:41:59Z",
   "channels": {
     "ladymoriarty01": {
       "login": "ladymoriarty01",
@@ -18,16 +18,18 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-04T02:06:41Z",
+      "updated_at": "2026-11-04T02:41:59Z",
       "window": {
-        "samples_total": 11,
+        "samples_total": 12,
         "live_samples": 0,
         "streams_observed": 0,
         "average_viewers_sampled": null,
         "peak_viewers_sampled": null,
         "observed_live_hours": 0.0,
         "estimated_hours_watched": 0.0,
-        "method": "Muestras propias cada 15 minutos; horas estimadas solo entre muestras consecutivas del mismo directo."
+        "game_breakdown": [],
+        "daily_activity": [],
+        "method": "Muestreo propio cada 15 minutos; horas estimadas solo entre muestras consecutivas del mismo directo. Categorías y evolución diaria se calculan sobre las muestras observadas."
       },
       "snapshots": [
         {
@@ -128,6 +130,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-04T02:41:59Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -139,21 +150,53 @@
       "twitch_url": "https://twitch.tv/ther0d3r1k",
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
-      "live": true,
-      "current_viewers": 10,
-      "current_game": "Fortnite",
-      "current_title": "🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
-      "stream_started_at": "2026-11-03T22:57:34Z",
-      "updated_at": "2026-11-04T02:06:41Z",
+      "live": false,
+      "current_viewers": null,
+      "current_game": null,
+      "current_title": null,
+      "stream_started_at": null,
+      "updated_at": "2026-11-04T02:41:59Z",
       "window": {
-        "samples_total": 11,
+        "samples_total": 12,
         "live_samples": 4,
         "streams_observed": 1,
         "average_viewers_sampled": 23.2,
         "peak_viewers_sampled": 40,
         "observed_live_hours": 0.0,
         "estimated_hours_watched": 0.0,
-        "method": "Muestras propias cada 15 minutos; horas estimadas solo entre muestras consecutivas del mismo directo."
+        "game_breakdown": [
+          {
+            "name": "Counter-Strike",
+            "live_samples": 2,
+            "streams_observed": 1,
+            "average_viewers_sampled": 31.5,
+            "peak_viewers_sampled": 40
+          },
+          {
+            "name": "Fortnite",
+            "live_samples": 2,
+            "streams_observed": 1,
+            "average_viewers_sampled": 15.0,
+            "peak_viewers_sampled": 20
+          }
+        ],
+        "daily_activity": [
+          {
+            "date": "2026-11-03",
+            "live_samples": 1,
+            "streams_observed": 1,
+            "average_viewers_sampled": 23.0,
+            "peak_viewers_sampled": 23
+          },
+          {
+            "date": "2026-11-04",
+            "live_samples": 3,
+            "streams_observed": 1,
+            "average_viewers_sampled": 23.3,
+            "peak_viewers_sampled": 40
+          }
+        ],
+        "method": "Muestreo propio cada 15 minutos; horas estimadas solo entre muestras consecutivas del mismo directo. Categorías y evolución diaria se calculan sobre las muestras observadas."
       },
       "snapshots": [
         {
@@ -254,6 +297,15 @@
           "title": "🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
           "stream_id": "319348846454",
           "started_at": "2026-11-03T22:57:34Z"
+        },
+        {
+          "sampled_at": "2026-11-04T02:41:59Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -270,16 +322,34 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-04T02:06:41Z",
+      "updated_at": "2026-11-04T02:41:59Z",
       "window": {
-        "samples_total": 11,
+        "samples_total": 12,
         "live_samples": 1,
         "streams_observed": 1,
         "average_viewers_sampled": 9.0,
         "peak_viewers_sampled": 9,
         "observed_live_hours": 0.0,
         "estimated_hours_watched": 0.0,
-        "method": "Muestras propias cada 15 minutos; horas estimadas solo entre muestras consecutivas del mismo directo."
+        "game_breakdown": [
+          {
+            "name": "Dead by Daylight",
+            "live_samples": 1,
+            "streams_observed": 1,
+            "average_viewers_sampled": 9.0,
+            "peak_viewers_sampled": 9
+          }
+        ],
+        "daily_activity": [
+          {
+            "date": "2026-11-03",
+            "live_samples": 1,
+            "streams_observed": 1,
+            "average_viewers_sampled": 9.0,
+            "peak_viewers_sampled": 9
+          }
+        ],
+        "method": "Muestreo propio cada 15 minutos; horas estimadas solo entre muestras consecutivas del mismo directo. Categorías y evolución diaria se calculan sobre las muestras observadas."
       },
       "snapshots": [
         {
@@ -380,6 +450,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-04T02:41:59Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -392,20 +471,38 @@
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
       "live": true,
-      "current_viewers": 6,
+      "current_viewers": 7,
       "current_game": "Just Chatting",
       "current_title": "Tenemos 346 seguidores, dia 10 de 30 jugando al streamer!",
       "stream_started_at": "2026-11-04T01:59:55Z",
-      "updated_at": "2026-11-04T02:06:41Z",
+      "updated_at": "2026-11-04T02:41:59Z",
       "window": {
-        "samples_total": 11,
-        "live_samples": 1,
+        "samples_total": 12,
+        "live_samples": 2,
         "streams_observed": 1,
-        "average_viewers_sampled": 6.0,
-        "peak_viewers_sampled": 6,
+        "average_viewers_sampled": 6.5,
+        "peak_viewers_sampled": 7,
         "observed_live_hours": 0.0,
         "estimated_hours_watched": 0.0,
-        "method": "Muestras propias cada 15 minutos; horas estimadas solo entre muestras consecutivas del mismo directo."
+        "game_breakdown": [
+          {
+            "name": "Just Chatting",
+            "live_samples": 2,
+            "streams_observed": 1,
+            "average_viewers_sampled": 6.5,
+            "peak_viewers_sampled": 7
+          }
+        ],
+        "daily_activity": [
+          {
+            "date": "2026-11-04",
+            "live_samples": 2,
+            "streams_observed": 1,
+            "average_viewers_sampled": 6.5,
+            "peak_viewers_sampled": 7
+          }
+        ],
+        "method": "Muestreo propio cada 15 minutos; horas estimadas solo entre muestras consecutivas del mismo directo. Categorías y evolución diaria se calculan sobre las muestras observadas."
       },
       "snapshots": [
         {
@@ -506,6 +603,15 @@
           "title": "Tenemos 346 seguidores, dia 10 de 30 jugando al streamer!",
           "stream_id": "321161141216",
           "started_at": "2026-11-04T01:59:55Z"
+        },
+        {
+          "sampled_at": "2026-11-04T02:41:59Z",
+          "is_live": true,
+          "viewer_count": 7,
+          "game_name": "Just Chatting",
+          "title": "Tenemos 346 seguidores, dia 10 de 30 jugando al streamer!",
+          "stream_id": "321161141216",
+          "started_at": "2026-11-04T01:59:55Z"
         }
       ]
     },
@@ -518,20 +624,45 @@
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
       "live": true,
-      "current_viewers": 1,
+      "current_viewers": 4,
       "current_game": "Fortnite",
       "current_title": "unos fornacho a buscar el one piece!!!",
       "stream_started_at": "2026-11-04T00:50:10Z",
-      "updated_at": "2026-11-04T02:06:41Z",
+      "updated_at": "2026-11-04T02:41:59Z",
       "window": {
-        "samples_total": 11,
-        "live_samples": 2,
+        "samples_total": 12,
+        "live_samples": 3,
         "streams_observed": 1,
-        "average_viewers_sampled": 2.0,
-        "peak_viewers_sampled": 3,
+        "average_viewers_sampled": 2.7,
+        "peak_viewers_sampled": 4,
         "observed_live_hours": 0.0,
         "estimated_hours_watched": 0.0,
-        "method": "Muestras propias cada 15 minutos; horas estimadas solo entre muestras consecutivas del mismo directo."
+        "game_breakdown": [
+          {
+            "name": "Fortnite",
+            "live_samples": 2,
+            "streams_observed": 1,
+            "average_viewers_sampled": 2.5,
+            "peak_viewers_sampled": 4
+          },
+          {
+            "name": "Can 'Em All",
+            "live_samples": 1,
+            "streams_observed": 1,
+            "average_viewers_sampled": 3.0,
+            "peak_viewers_sampled": 3
+          }
+        ],
+        "daily_activity": [
+          {
+            "date": "2026-11-04",
+            "live_samples": 3,
+            "streams_observed": 1,
+            "average_viewers_sampled": 2.7,
+            "peak_viewers_sampled": 4
+          }
+        ],
+        "method": "Muestreo propio cada 15 minutos; horas estimadas solo entre muestras consecutivas del mismo directo. Categorías y evolución diaria se calculan sobre las muestras observadas."
       },
       "snapshots": [
         {
@@ -632,6 +763,15 @@
           "title": "unos fornacho a buscar el one piece!!!",
           "stream_id": "322128940634",
           "started_at": "2026-11-04T00:50:10Z"
+        },
+        {
+          "sampled_at": "2026-11-04T02:41:59Z",
+          "is_live": true,
+          "viewer_count": 4,
+          "game_name": "Fortnite",
+          "title": "unos fornacho a buscar el one piece!!!",
+          "stream_id": "322128940634",
+          "started_at": "2026-11-04T00:50:10Z"
         }
       ]
     },
@@ -648,16 +788,34 @@
       "current_game": "Fortnite",
       "current_title": "Buscando la moneda de oro en Fornite",
       "stream_started_at": "2026-11-04T01:23:26Z",
-      "updated_at": "2026-11-04T02:06:41Z",
+      "updated_at": "2026-11-04T02:41:59Z",
       "window": {
-        "samples_total": 11,
-        "live_samples": 1,
+        "samples_total": 12,
+        "live_samples": 2,
         "streams_observed": 1,
         "average_viewers_sampled": 1.0,
         "peak_viewers_sampled": 1,
         "observed_live_hours": 0.0,
         "estimated_hours_watched": 0.0,
-        "method": "Muestras propias cada 15 minutos; horas estimadas solo entre muestras consecutivas del mismo directo."
+        "game_breakdown": [
+          {
+            "name": "Fortnite",
+            "live_samples": 2,
+            "streams_observed": 1,
+            "average_viewers_sampled": 1.0,
+            "peak_viewers_sampled": 1
+          }
+        ],
+        "daily_activity": [
+          {
+            "date": "2026-11-04",
+            "live_samples": 2,
+            "streams_observed": 1,
+            "average_viewers_sampled": 1.0,
+            "peak_viewers_sampled": 1
+          }
+        ],
+        "method": "Muestreo propio cada 15 minutos; horas estimadas solo entre muestras consecutivas del mismo directo. Categorías y evolución diaria se calculan sobre las muestras observadas."
       },
       "snapshots": [
         {
@@ -758,6 +916,15 @@
           "title": "Buscando la moneda de oro en Fornite",
           "stream_id": "321160197216",
           "started_at": "2026-11-04T01:23:26Z"
+        },
+        {
+          "sampled_at": "2026-11-04T02:41:59Z",
+          "is_live": true,
+          "viewer_count": 1,
+          "game_name": "Fortnite",
+          "title": "Buscando la moneda de oro en Fornite",
+          "stream_id": "321160197216",
+          "started_at": "2026-11-04T01:23:26Z"
         }
       ]
     },
@@ -774,16 +941,18 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-04T02:06:41Z",
+      "updated_at": "2026-11-04T02:41:59Z",
       "window": {
-        "samples_total": 11,
+        "samples_total": 12,
         "live_samples": 0,
         "streams_observed": 0,
         "average_viewers_sampled": null,
         "peak_viewers_sampled": null,
         "observed_live_hours": 0.0,
         "estimated_hours_watched": 0.0,
-        "method": "Muestras propias cada 15 minutos; horas estimadas solo entre muestras consecutivas del mismo directo."
+        "game_breakdown": [],
+        "daily_activity": [],
+        "method": "Muestreo propio cada 15 minutos; horas estimadas solo entre muestras consecutivas del mismo directo. Categorías y evolución diaria se calculan sobre las muestras observadas."
       },
       "snapshots": [
         {
@@ -878,6 +1047,15 @@
         },
         {
           "sampled_at": "2026-11-04T02:06:41Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-04T02:41:59Z",
           "is_live": false,
           "viewer_count": null,
           "game_name": null,
@@ -900,16 +1078,18 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-04T02:06:41Z",
+      "updated_at": "2026-11-04T02:41:59Z",
       "window": {
-        "samples_total": 11,
+        "samples_total": 12,
         "live_samples": 0,
         "streams_observed": 0,
         "average_viewers_sampled": null,
         "peak_viewers_sampled": null,
         "observed_live_hours": 0.0,
         "estimated_hours_watched": 0.0,
-        "method": "Muestras propias cada 15 minutos; horas estimadas solo entre muestras consecutivas del mismo directo."
+        "game_breakdown": [],
+        "daily_activity": [],
+        "method": "Muestreo propio cada 15 minutos; horas estimadas solo entre muestras consecutivas del mismo directo. Categorías y evolución diaria se calculan sobre las muestras observadas."
       },
       "snapshots": [
         {
@@ -1004,6 +1184,15 @@
         },
         {
           "sampled_at": "2026-11-04T02:06:41Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-04T02:41:59Z",
           "is_live": false,
           "viewer_count": null,
           "game_name": null,
@@ -1026,16 +1215,18 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-04T02:06:41Z",
+      "updated_at": "2026-11-04T02:41:59Z",
       "window": {
-        "samples_total": 11,
+        "samples_total": 12,
         "live_samples": 0,
         "streams_observed": 0,
         "average_viewers_sampled": null,
         "peak_viewers_sampled": null,
         "observed_live_hours": 0.0,
         "estimated_hours_watched": 0.0,
-        "method": "Muestras propias cada 15 minutos; horas estimadas solo entre muestras consecutivas del mismo directo."
+        "game_breakdown": [],
+        "daily_activity": [],
+        "method": "Muestreo propio cada 15 minutos; horas estimadas solo entre muestras consecutivas del mismo directo. Categorías y evolución diaria se calculan sobre las muestras observadas."
       },
       "snapshots": [
         {
@@ -1130,6 +1321,15 @@
         },
         {
           "sampled_at": "2026-11-04T02:06:41Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-04T02:41:59Z",
           "is_live": false,
           "viewer_count": null,
           "game_name": null,
