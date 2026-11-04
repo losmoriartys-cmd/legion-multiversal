@@ -926,7 +926,7 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
             <div id="roster-home">
               <div class="institute-counts" id="roster-counts"></div>
               <p class="roster-intro">Seleccioná el retrato de un integrante para conocer su carta oficial y abrir su bitácora individual.</p>
-              <div class="roster-legend"><span class="rank-director">DIRECCIÓN</span><span class="rank-teacher">CUERPO DOCENTE</span><span class="rank-student">ESTUDIANTES</span><span class="rank-collaborator">COLABORADORES</span></div>
+              <div class="roster-legend"><span class="rank-director">DIRECCIÓN</span><span class="rank-teacher">PROFESORES</span><span class="rank-student">ESTUDIANTES</span><span class="rank-collaborator">COLABORADORES</span></div>
               <div id="roster-container"><!-- Retratos del roster --></div>
             </div>
             <section id="hero-profile-page" class="hero-profile-page" hidden aria-live="polite"></section>
@@ -1520,7 +1520,7 @@ function renderRoster() {
     container.innerHTML = '';
     const groups = [
         { key: 'director', title: 'DIRECCIÓN DEL INSTITUTO', desc: 'Fundadores y responsables de la visión, coordinación y rumbo del equipo.' },
-        { key: 'teacher', title: 'CUERPO DOCENTE', desc: 'Profesores y especialistas que aportan experiencia, conocimiento y liderazgo en las misiones.' },
+        { key: 'teacher', title: 'PROFESORES', desc: 'Integrantes que enseñan, orientan y comparten su experiencia y conocimiento en las misiones.' },
         { key: 'student', title: 'ESTUDIANTES', desc: 'Nuevos talentos en formación dentro del Instituto.' },
         { key: 'collaborator', title: 'COLABORADORES', desc: 'Creadores y especialistas que aportan conocimientos, experiencias y nuevas perspectivas.' }
     ];
@@ -1528,7 +1528,7 @@ function renderRoster() {
     if (counts) {
         counts.innerHTML = groups.map(group => {
             const total = heroesData.filter(hero => hero.role === group.key).length;
-            return '<div><strong>' + String(total).padStart(2,'0') + '</strong><span>' + group.title.replace(' DEL INSTITUTO','').replace('CUERPO DOCENTE','PROFESORES') + '</span></div>';
+            return '<div><strong>' + String(total).padStart(2,'0') + '</strong><span>' + group.title.replace(' DEL INSTITUTO','').replace('PROFESORES','PROFESORES') + '</span></div>';
         }).join('');
     }
     groups.forEach(group => {
