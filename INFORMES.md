@@ -221,3 +221,20 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Pendiente funcional:** una vez obtenido el snapshot, comprobar cuáles de nuestros creadores aparecen en el top 100. La ausencia de un canal solo significa que no figura en ese ranking, no que no haya tenido actividad. Para métricas históricas individuales de los nueve canales hará falta habilitar consultas pagas o acordar otra fuente.
 - **Commits:** `385eb998b3389c962f75d0e1f7eba5bb8e76c288` (recolector) y `35f27b717e0da2282d5cdeed176c9eac2f6f35e4` (workflow manual).
 - **Despliegue:** el snapshot aún no existe; la integración no está conectada visualmente a los expedientes.
+
+
+
+## 2026-11-04 — Retirar rankings globales y limitar el sitio al roster
+
+- **Responsable:** ChatGPT + equipo Los Moriartys.
+- **Objetivo:** dejar explícito que el sitio integra información y estadísticas únicamente de los integrantes del roster. Los rankings mundiales y el TOP 100 eran referencias informativas y quedan fuera del alcance.
+- **Archivos modificados / retirados:**
+  - `index.html`: eliminado el antiguo Capítulo 05 «Radar del Instituto», que reunía rankings globales de juegos, streamers y categorías. Se renumeraron los capítulos siguientes y se conservó el Arsenal Cooperativo como Capítulo 05 independiente. Se retiraron las menciones a Streams Charts en las fichas y se dejó como alcance de analítica las estadísticas propias observadas de cada canal.
+  - `update_streamscharts.py`: eliminado; era exclusivamente el recolector del TOP 100 gratuito de Twitch de los últimos 7 días.
+  - `.github/workflows/streamscharts-free.yml`: eliminado; ejecutaba únicamente ese recolector.
+  - `INFORMES.md`: se conserva el registro histórico de la prueba anterior y se agrega esta decisión de retiro.
+- **Preservado:** `data.json`, `update_stats.py`, el workflow `actualizar-stats.yml`, la base de estadísticas de Twitch Helix y las secciones del roster, fichas y Arsenal Cooperativo.
+- **Validaciones:** confirmada la numeración consecutiva de capítulos 01–09 y la eliminación de los archivos exclusivos del ranking. No se modificaron estadísticas ni automatizaciones propias del roster.
+- **Pendientes:** verificar el despliegue de GitHub Pages. Los secretos `STREAMSCHARTS_CLIENT_ID` y `STREAMSCHARTS_TOKEN` dejan de ser utilizados por el repositorio; su eliminación de Settings → Secrets and variables → Actions queda a cargo del propietario del repositorio.
+- **Commits de implementación:** `0011f4c2` (sitio), `9b998ff6` (recolector eliminado) y `8ff804e6` (workflow eliminado).
+- **Despliegue:** pendiente de comprobar el workflow de GitHub Pages.
