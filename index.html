@@ -917,11 +917,12 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
         .live-player-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}
         .live-player-heading h3{font:1.5rem 'Bangers',cursive;color:#ffde00}
         .live-player-heading a{color:#00d2ff}
-        .live-player{width:100%;aspect-ratio:16/9;min-height:300px;background:#000}
-        .live-player iframe{display:block;width:100%;height:100%;min-height:300px;border:0}
+        .live-player-wrap{overflow-x:auto}
+        .live-player{width:100%;min-width:400px;aspect-ratio:16/9;min-height:300px;background:#000}
+        .live-player iframe{display:block;width:100%;height:100%;min-width:400px;min-height:300px;border:0}
         .site-technical-footer{max-width:1300px;margin:28px auto 0;padding:18px 22px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:#8191a8;font-size:.76rem;border-top:1px solid #263449}
         .site-technical-footer a{color:#00d2ff}
-        @media(max-width:560px){.live-player{min-height:240px}.live-player iframe{min-height:240px}.site-technical-footer{padding:16px 20px}}
+        @media(max-width:560px){.live-player{min-height:300px}.live-player iframe{min-height:300px}.site-technical-footer{padding:16px 20px}}
 
     </style>
 </head>
