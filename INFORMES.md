@@ -529,3 +529,20 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - No se incorporó música todavía: no hay una pista propia/licenciada en los assets del proyecto. No se debe enlazar música comercial ni iniciar audio automáticamente. Próximo paso recomendado: incorporar una pista original o con licencia confirmada y un control explícito de reproducción/pausa, siempre apagado por defecto.
 - Pendiente: revisión visual de la combinación tipográfica en escritorio/móvil y validación del despliegue de GitHub Pages.
 - Commit: `f498bddf08b54482c5602c3bac8169a898256243`.
+
+## 2026-11-04 — Rediseño piloto de estadísticas para Los Moriartys
+
+- **Objetivo:** probar una presentación más clara y comercial del apartado B · Audiencia y estadísticas, tomando como referencia la jerarquía visual de dashboards de analítica.
+- **Archivos modificados:** `index.html`; `INFORMES.md`.
+- **Implementado:**
+  - Se creó un diseño piloto específico para el canal conjunto `losmoriartys`, sin alterar el renderizado estadístico del resto de los integrantes.
+  - SullyGnome presenta cinco indicadores principales, período visible, gráfico comparativo de horas vistas por directo y tabla de nueve transmisiones con fecha, duración, promedio, pico y horas vistas.
+  - Se omitió la columna de seguidores porque su significado en la fuente todavía no está confirmado.
+  - Se aclara que el desglose por juego/categoría no está incluido en la exportación histórica disponible.
+  - Twitch Helix se presenta en un panel independiente con cantidad de consultas, muestras en directo, directos detectados y última sincronización. Se explica que la ventana técnica de 30 días no equivale a 30 días completos de observación en el archivo actual.
+  - Los indicadores sin datos verificables se muestran como no disponibles; no se sustituyen por ceros ni se extrapolan las muestras.
+- **Preservado:** `data.json`, `sullygnome-data.json`, `creator-records.json`, automatizaciones, estadísticas del resto del roster, biografías, cartas y estructura de las tres pestañas.
+- **Validaciones:** se volvió a leer el archivo publicado desde `main`; se confirmó la presencia de ambos renderizadores piloto, su aplicación exclusiva al login `losmoriartys` y la conservación de los renderizadores genéricos.
+- **Pendientes:** comprobar el workflow de GitHub Pages y revisar visualmente el expediente en escritorio y móvil. El piloto no incorpora gráfico de distribución por juegos porque el histórico de Los Moriartys no contiene ese desglose.
+- **Commit de interfaz:** [`9d02c882`](https://github.com/losmoriartys-cmd/s3xmen/commit/9d02c882a1e2bf7758f011497342f08a10691520).
+- **Despliegue:** pendiente de verificación.
