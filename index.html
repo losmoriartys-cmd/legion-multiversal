@@ -173,6 +173,11 @@
         .archive-stamp strong { color:#ffde00;font:2.7rem 'Bangers',cursive; }
         .archive-stamp p { color:#aebbd0;font-size:.78rem;line-height:1.6;margin-top:8px; }
         .founding-panel { max-width:850px;margin:34px auto 0;background:#080d16;border:3px solid #030509;box-shadow:7px 7px 0 #000; }
+        .founding-archive-heading { display:flex;flex-direction:column;align-items:center;gap:8px;padding:22px 18px;text-align:center;background:linear-gradient(135deg,#111d2d,#080d16);border-bottom:2px solid rgba(0,210,255,.35); }
+        .founding-archive-heading strong { color:#ffde00;font:clamp(2rem,5vw,3.1rem) 'Bangers',cursive;letter-spacing:.05em;text-shadow:3px 3px #000; }
+        .founding-archive-heading>span:last-child { color:#b9c5d6;font-size:.72rem;font-weight:800;letter-spacing:.12em; }
+        .founding-archive-panel>img { display:block;width:100%;height:auto;max-height:620px;object-fit:contain;background:#05080e; }
+        .founding-origin-story { margin-top:26px; }
         .founding-art-placeholder { min-height:270px;padding:30px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:12px;background:radial-gradient(ellipse at center,rgba(0,210,255,.13),transparent 65%),repeating-linear-gradient(135deg,#111b2a 0,#111b2a 2px,#0d1521 2px,#0d1521 7px); }
         .founding-number,.founding-art-placeholder small { color:#00d2ff;font-size:.65rem;font-weight:900;letter-spacing:.17em; }
         .founding-art-placeholder strong { font:clamp(2rem,5vw,3.4rem) 'Bangers',cursive;color:#ffde00;text-shadow:3px 3px #000; }
@@ -1099,7 +1104,7 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
             <div class="chapter-cover-meta"><span>ORIGEN: S3X-MEN</span><span>IDENTIDAD ACTUAL: LEGIÓN MULTIVERSAL</span></div>
         </div>
         <figure class="chapter-cover-art">
-            <img src="assets/banner-grupal.jpg" alt="Formación actual de Legión Multiversal">
+            <img src="gruponuevo.jpg" alt="Formación actual de Legión Multiversal">
             <figcaption>La comunidad que hoy continúa aquella primera idea.</figcaption>
         </figure>
     </div>
@@ -1123,14 +1128,23 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
                 <p>La imagen histórica de esta etapa se conserva como archivo fundacional y se integrará aquí en su versión original.</p>
             </aside>
         </div>
-        <figure class="founding-panel">
+        <figure class="founding-panel founding-archive-panel">
+            <div class="founding-archive-heading">
+                <span class="founding-number">ARCHIVO HISTÓRICO · ETAPA ORIGINAL</span>
+                <strong>PRIMERA FORMACIÓN</strong>
+                <span>S3X-MEN · EL GRUPO QUE DIO INICIO A ESTA HISTORIA</span>
+            </div>
+            <img src="banner-s3xmen-original.jpg" alt="Banner original de la primera formación de S3X-MEN">
+            <figcaption>Esta es la formación original. Su lugar en el archivo fundacional conserva la identidad y el recuerdo de la primera etapa, antes de la evolución hacia Legión Multiversal.</figcaption>
+        </figure>
+        <figure class="founding-panel founding-origin-story">
             <div class="founding-art-placeholder">
                 <span class="founding-number">VIÑETA FUNDACIONAL · 001</span>
                 <strong>EL COMIENZO DE TODO</strong>
                 <span>Demian + ROD3R1K · Una partida. Una conversación. Una idea.</span>
                 <small>ILUSTRACIÓN DE NOVELA GRÁFICA PENDIENTE DE INCORPORAR</small>
             </div>
-            <figcaption>Antes de los nombres, los rangos y los expedientes, hubo dos amigos frente a una pantalla imaginando lo que podían construir juntos.</figcaption>
+            <figcaption>Antes de los nombres, los rangos y los expedientes, hubo dos amigos frente a una pantalla imaginando lo que podían construir juntos. Esta ilustración se incorporará cuando esté lista.</figcaption>
         </figure>
     </section>
 
