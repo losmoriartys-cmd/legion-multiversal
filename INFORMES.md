@@ -684,3 +684,18 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Validación:** JSON parseado y confirmados cuatro identificadores de clip únicos en `channels.losmoriartys.highlights`.
 - **Pendiente:** revisar la reproducción de los cuatro clips en GitHub Pages y completar títulos/descripciones editoriales cuando se definan.
 - **Despliegue:** pendiente de verificación visual.
+
+
+## 2026-11-04 — Pulir trayectoria y títulos de clips de Los Moriartys
+
+- **Solicitud:** quitar las referencias visibles del tipo «REFERENCIA · Información confirmada por Demi», eliminar el bloque vacío de hitos y asignar títulos descriptivos a los tres primeros clips.
+- **Archivos modificados:** `index.html`, `creator-records.json`, `INFORMES.md`.
+- **Interfaz:** se dejó de mostrar la línea de referencia/fuente en las tarjetas; los metadatos internos de origen se conservan en los registros. La sección «HITOS Y TRAYECTORIA» se omite cuando no tiene elementos, sin mostrar el mensaje de ausencia de registros. El bloque de clips conserva su contenido.
+- **Clips renombrados:**
+  1. «Música del Rincón del Nerd hecha por Demi».
+  2. «Ari modo tóxica».
+  3. «El Demi casi muere del susto».
+- **Cuarto clip:** conserva por ahora el título provisional «Clip destacado 4», porque todavía no se recibió su título editorial.
+- **Validaciones:** cambio acotado al renderizado del archivo de trayectoria y a los títulos/descripciones provisionales de los tres clips; se preservan URLs, IDs, reproductores y colaboraciones.
+- **Commits:** [interfaz `071f8ab1`](https://github.com/losmoriartys-cmd/s3xmen/commit/071f8ab1d51f219cede616e62856fdb5bc56aac0) · [registros `966f5469`](https://github.com/losmoriartys-cmd/s3xmen/commit/966f54693148c9b9c3ca9cbad398e16970ac1371).
+- **Despliegue:** pendiente de verificación visual en GitHub Pages.
