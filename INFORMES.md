@@ -286,3 +286,6 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Límite de datos:** SullyGnome no suministró horarios de inicio para las nueve transmisiones de Los Moriartys; el diseño lo deja visible en la columna de horario. Dave sí conserva horario en las diez filas transcritas.
 - **Despliegue:** pendiente de comprobar GitHub Pages tras el commit.
 - **Commit de interfaz:** d16ceb407ec5eb175d49912f2e16ed4635ed0b24
+
+- **Ajuste de marcado:** los contenedores de las páginas C y D se cambiaron de párrafos a bloques `div`, necesarios para alojar correctamente tarjetas, secciones y tablas HTML sin anidamiento inválido.
+- **Commit de ajuste:** 949e9549142bcb9e94b336ac3e0775d769f208e2
