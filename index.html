@@ -350,7 +350,9 @@
         .pilot-stats .pilot-chart-footnote{font-size:.64rem;line-height:1.45;color:#8291a7;margin:10px 0 0}
         @media(max-width:700px){.pilot-stats .pilot-game-charts{grid-template-columns:1fr}}
 
-        .mission-clip-embed{position:relative;width:100%;aspect-ratio:16/9;margin:10px 0;overflow:hidden;background:#05070c;border:1px solid #354761;border-radius:8px}
+        .pilot-stats .tm-metrics-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+        @media(max-width:900px){.pilot-stats .tm-metrics-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+                .mission-clip-embed{position:relative;width:100%;aspect-ratio:16/9;margin:10px 0;overflow:hidden;background:#05070c;border:1px solid #354761;border-radius:8px}
         .mission-clip-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
         .mission-clips-intro{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;background:#0a111e;border:1px solid #34445c;padding:14px;margin:12px 0}
         .mission-clips-intro p{color:#aebbd0;font-size:.78rem;margin:0;line-height:1.5}
@@ -1910,8 +1912,34 @@ function renderLosMoriartysSullyPilot(channel){
  out+='</div><div class="pilot-callout"><strong>Nota de lectura:</strong> las variaciones porcentuales se reproducen tal como aparecen en la captura. Como el rango de fechas no está visible, no se asigna un período que no podamos verificar.</div></section></section>';
  return out;
 }
+function renderTwitchMetricsStats(channel){
+ const profile=twitchMetricsData?.channels?.[channel.login];
+ if(!profile)return '';
+ const m=profile.metrics||{}, streams=Array.isArray(profile.recent_streams)?profile.recent_streams:[];
+ const period=profile.period_label||'Período no indicado';
+ let out='<section class="stats-section pilot-stats"><div class="stats-source-head"><div><strong>TWITCHMETRICS · ANALÍTICA DEL CANAL</strong><br><small>Fuente externa complementaria · independiente de SullyGnome y Twitch Helix</small></div><span class="stats-status partial">REGISTRO PARCIAL</span></div>';
+ out+='<p class="stats-section-intro">Ventana consultada: '+escapeStatsHtml(period)+'. Datos públicos visibles en TwitchMetrics al 4 nov 2026. La plataforma advierte que sus registros de directos pueden estar limitados a transmisiones con más de 10 espectadores.</p>';
+ out+='<div class="pilot-lifetime-grid tm-metrics-grid">';
+ [['Seguidores',m.followers,'canal'],['Variación de seguidores',m.follower_change,'ventana consultada'],['Horas vistas',m.viewer_hours,'ventana consultada'],['Pico de espectadores',m.peak_viewers,'ventana consultada'],['Horas en directo',m.hours_live,'ventana consultada'],['Promedio de espectadores',m.average_viewers,'últimos 30 días, según FAQ']].forEach(v=>{if(v[1]!==null&&v[1]!==undefined)out+='<div class="pilot-metric"><span>'+v[0]+'</span><strong>'+statsNumber(v[1])+(v[0].includes('Horas')?' h':'')+'</strong><small>'+v[2]+'</small></div>';});
+ out+='</div>';
+ if(streams.length){
+  out+='<section class="pilot-subsection"><div class="pilot-subhead"><h5>DIRECTOS RECIENTES VISIBLES</h5><small>Muestra pública, no necesariamente el historial completo</small></div>';
+  if(streams.length>1){
+   out+='<div class="pilot-chart-card"><div class="pilot-chart-heading"><strong>PROMEDIO DE ESPECTADORES POR DIRECTO</strong><small>Comparación de las sesiones visibles</small></div><div class="pilot-bar-list">';
+   streams.forEach(s=>out+='<div class="pilot-bar-row"><span class="pilot-bar-label">'+escapeStatsHtml(s.date_label)+'</span><div class="pilot-bar-track"><i style="width:'+Math.round(Number(s.average_viewers)/Math.max(...streams.map(x=>Number(x.average_viewers)||0),1)*100)+'%"></i></div><b>'+statsNumber(s.average_viewers)+'</b></div>');
+   out+='</div></div>';
+  }
+  out+='<div class="stats-table-wrap"><table class="stats-table pilot-table"><thead><tr><th>Fecha</th><th>Duración</th><th>Juegos / categorías</th><th>Promedio</th><th>Pico</th></tr></thead><tbody>';
+  streams.forEach(s=>out+='<tr><th>'+escapeStatsHtml(s.date_label)+'</th><td>'+escapeStatsHtml(s.duration_label)+'</td><td>'+escapeStatsHtml((s.games||[]).map(g=>g.name+(g.share?' ('+g.share+')':'')).join(' · '))+'</td><td class="num">'+statsNumber(s.average_viewers)+'</td><td class="num">'+statsNumber(s.peak_viewers)+'</td></tr>');
+  out+='</tbody></table></div></section>';
+ }
+ out+='<div class="pilot-callout"><strong>Lectura comercial:</strong> '+escapeStatsHtml(profile.commercial_read||'Los datos permiten describir actividad y audiencia observada, pero no proyectar resultados de campaña.')+'</div>';
+ out+='<p class="stats-note">Fuente: <a class="stats-link" href="'+escapeStatsHtml(profile.source_url)+'" target="_blank" rel="noopener">abrir perfil e historial en TwitchMetrics ↗</a>. Las métricas de esta fuente se muestran separadas de SullyGnome y de las muestras propias de Twitch Helix; no se suman entre sí. Las categorías de un directo mixto no equivalen a promedios de audiencia por juego.</p></section>';
+ return out;
+}
 function renderSullyStats(channel){
  if(channel.login==='losmoriartys')return renderLosMoriartysSullyPilot(channel);
+ if(twitchMetricsData?.channels?.[channel.login])return renderTwitchMetricsStats(channel);
  if(!channel)return '<div class="stats-empty"><strong>Historial no disponible</strong>No hay registros históricos cargados para este canal.</div>';
  const status=channel.status==='partial'?'partial':'pending';
  const statusLabel=channel.status==='partial'?'REGISTRO PARCIAL':'PENDIENTE DE DATOS';
@@ -2036,6 +2064,14 @@ function renderMissionArchive(hero){
  });
  out+='<p class="stats-muted">Los clips aparecen una sola vez en esta sección. Se priorizan enlaces directos a piezas concretas, no accesos generales repetidos al canal.</p></div>';
  return out;
+}
+let twitchMetricsData = null;
+async function loadTwitchMetricsData(){
+ try{
+  const res=await fetch('twitchmetrics-data.json',{cache:'no-store'});
+  if(!res.ok)throw new Error('No se pudo leer twitchmetrics-data.json');
+  twitchMetricsData=await res.json();
+ }catch(e){console.warn('TwitchMetrics data unavailable:',e);}
 }
 async function loadSullyGnomeData(){
  try{
@@ -2452,7 +2488,7 @@ function openHeroModal(index) {
         }
 
         window.onload = async function() {
-        await loadSullyGnomeData();
+        await Promise.all([loadSullyGnomeData(),loadTwitchMetricsData()]);
         renderRoster();
         restoreHeroProfileFromHash();
         loadInstituteStats(); loadPartnerMetrics(); loadCreatorRecords();
