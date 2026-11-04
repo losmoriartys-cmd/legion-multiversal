@@ -362,3 +362,13 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Preservado:** `data.json`, `sullygnome-data.json`, estadísticas, automatizaciones, roles, poderes, bitácoras y archivos de cartas.
 - **Commit de interfaz:** `539751301becc7d19fd4e6b57d4a8bcb720f7059`.
 - **Despliegue:** pendiente de verificación visual en GitHub Pages.
+
+## 2026-11-04 — Actualizar jerarquía del roster: Capy y ElGabii
+
+- **Solicitud:** mover a CAPYUNAPLAY y ELGABII090 del Cuerpo Docente a Estudiantes.
+- **Archivo modificado:** `index.html`.
+- **Implementado:** se actualizó `role` de `teacher` a `student` en los expedientes de CAPY y ELGABII. Sus retratos, cartas oficiales, perfiles, horarios y demás contenidos permanecen sin cambios.
+- **Efecto en el roster:** los contadores dinámicos y la agrupación reflejan automáticamente Dirección: 2, Cuerpo Docente: 3, Estudiantes: 3 y Colaboradores: 2.
+- **Preservado:** el resto de la jerarquía y todos los datos, estadísticas, automatizaciones, poderes y cartas oficiales.
+- **Commit de interfaz:** `18fc410d0b3bb18f6629b7d065baaafb1779687c`.
+- **Despliegue:** pendiente de verificación visual en GitHub Pages.
