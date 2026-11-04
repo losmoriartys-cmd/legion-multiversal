@@ -619,3 +619,11 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Viñeta de origen:** se conserva un espacio independiente para la futura ilustración de Demian y ROD3R1K; la foto grupal no sustituye esa pieza.
 - **Alcance:** cambio de presentación y ubicación de imágenes en `index.html`; no se modificaron cartas, roster, estadísticas ni assets.
 - **Commit de interfaz:** [`176c2b75`](https://github.com/losmoriartys-cmd/s3xmen/commit/176c2b751a9de0e01a90b388f2acc5ef19b1257e).
+
+
+## 2026-11-04 — Mostrar completa la foto de la formación actual en Capítulo 01
+
+- **Ajuste:** la imagen de portada de la formación actual deja de forzarse a una proporción 16:9 con `object-fit: cover`, que recortaba integrantes/partes de la composición.
+- **Nuevo comportamiento:** ancho adaptable, altura automática, proporción intrínseca y `object-fit: contain`; se prioriza que el roster completo quede visible en escritorio y móvil.
+- **Alcance:** únicamente presentación de la imagen `gruponuevo.jpg` en la portada del Capítulo 01. No se alteró el banner histórico S3X-MEN ni las cartas del roster.
+- **Commit de interfaz:** [`f867ac6d`](https://github.com/losmoriartys-cmd/s3xmen/commit/f867ac6d7e70a709907e7c79dc4763ab8c543b69).
