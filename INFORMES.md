@@ -666,3 +666,10 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - No se descarga ni se duplica el video; se reproduce desde Twitch.
 - Commit: [`a1dc91f9`](https://github.com/losmoriartys-cmd/s3xmen/commit/a1dc91f97ad256a367fe38b1af6e327a52067032).
 - Pendiente: confirmar reproducción en Pages y completar título/descripción editorial.
+
+## 2026-11-04 — Tercer clip Twitch registrado para Los Moriartys
+
+- Se agregó a `creator-records.json` el clip `GiantUninterestedTardigradeBrokeBack-PLdKJCgbad8xhKp-` como "Clip destacado 3".
+- Reutiliza el reproductor Twitch adaptable configurado con el dominio GitHub Pages.
+- Commit: [`d0895bca`](https://github.com/losmoriartys-cmd/s3xmen/commit/d0895bcaa99876e6a5e97aac5d04589c361e5d8d).
+- Pendiente: completar título y descripción editorial y revisar reproducción en Pages.
