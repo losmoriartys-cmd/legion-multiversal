@@ -708,3 +708,17 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - Se actualizó el texto alternativo y el epígrafe para contextualizar el origen del proyecto.
 - **Validación estática:** referencia al asset presente, placeholder retirado y regla de imagen responsive confirmada.
 - **Commit de interfaz:** [`1e9e1a92`](https://github.com/losmoriartys-cmd/s3xmen/commit/1e9e1a9225ddb9d26a8e6ec9174a434af2ec268f).
+
+
+## 2026-11-04 — Dejar únicamente los tres clips aprobados de Los Moriartys
+
+- **Solicitud:** aclarar que los títulos enviados corresponden a los tres clips que deben aparecer en la sección; no incorporar un cuarto clip.
+- **Archivo modificado:** `creator-records.json`.
+- **Implementado:** se retiró de `channels.losmoriartys.highlights` el cuarto registro provisional (`HedonisticMistyOysterVoteNay--xMrzAmq01gmtKcW`). Se conservaron los tres clips y sus IDs/URLs de Twitch, con los títulos editoriales aprobados:
+  1. «Música del Rincón del Nerd hecha por Demi».
+  2. «Ari modo tóxica».
+  3. «El Demi casi muere del susto».
+- **Validaciones:** JSON parseado; confirmados exactamente tres registros, cada uno con identificador y URL de Twitch. El renderizador existente presenta todos los elementos de `highlights`, por lo que no fue necesario modificar `index.html`.
+- **Pendientes / riesgos:** comprobar visualmente en GitHub Pages que la sección muestre los tres reproductores.
+- **Commit de registros:** [`6e89ebff`](https://github.com/losmoriartys-cmd/s3xmen/commit/6e89ebffb9478d41704ebad55958a78d2755438e).
+- **Despliegue:** pendiente de verificación visual.
