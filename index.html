@@ -1787,36 +1787,28 @@ function renderStatsDashboard(hero,helix,sully){
 }
 function renderMissionArchive(hero){
  const key=creatorRecordKey(hero),record=creatorRecordsData?.channels?.[key]||{};
- const groups=[['HITOS','milestones'],['COLABORACIONES','collaborations'],['REGISTROS Y CLIPS DESTACADOS','highlights']];
- const channelUrl=hero.youtube||hero.twitch||'';
- const isYoutube=!!hero.youtube;
- let out='<div class="mission-archive"><div class="mission-hero-card"><span class="eyebrow">ARCHIVO OPERATIVO · EXPEDIENTE '+escapeStatsHtml(hero.cardNumber||'—')+'</span><p>'+escapeStatsHtml(hero.log||'Todavía no hay misiones registradas.')+'</p></div>';
- out+='<section class="mission-section"><h4>CLIPS DEL CANAL</h4>';
- if(channelUrl){
-  const clipUrl=isYoutube?channelUrl.replace(/\/$/,'')+'/shorts':channelUrl.replace(/\/$/,'')+'/clips?filter=clips&range=all&sort=views';
-  const recentUrl=isYoutube?channelUrl.replace(/\/$/,'')+'/videos':channelUrl.replace(/\/$/,'')+'/clips?filter=clips&range=30d&sort=recent';
-  out+='<div class="mission-clips-intro"><p>'+(isYoutube?'Explorá los Shorts y videos publicados en el canal oficial.':'Explorá los clips destacados del canal de Twitch. Los enlaces abren la selección dinámica de clips, no clips elegidos manualmente.')+'</p><a href="'+escapeStatsHtml(clipUrl)+'" target="_blank" rel="noopener">CLIPS MÁS VISTOS ↗</a><a href="'+escapeStatsHtml(recentUrl)+'" target="_blank" rel="noopener">'+(isYoutube?'VER VIDEOS ↗':'CLIPS RECIENTES ↗')+'</a></div>';
- }else out+='<p class="mission-empty">Canal no configurado para este expediente.</p>';
- out+='</section>';
+ const groups=[['COLABORACIONES Y ACCESOS A JUEGOS','collaborations'],['HITOS Y TRAYECTORIA','milestones'],['CLIPS DESTACADOS','highlights']];
+ let out='<div class="mission-archive"><div class="mission-hero-card"><span class="eyebrow">TRAYECTORIA · MEDIA KIT</span><p>'+escapeStatsHtml(hero.log||'Trayectoria y colaboraciones del creador.')+'</p></div>';
  groups.forEach(([label,field])=>{
   const items=Array.isArray(record[field])?record[field]:[];
   out+='<section class="mission-section"><h4>'+label+'</h4>';
-  if(!items.length)out+='<p class="mission-empty">No hay registros individuales cargados todavía. Los clips se pueden fijar aquí pegando sus enlaces directos.</p>';
-  else{
+  if(!items.length){
+   out+='<p class="mission-empty">'+(field==='highlights'?'Los clips seleccionados se incorporarán aquí con sus enlaces directos.':'No hay registros adicionales cargados por el momento.')+'</p>';
+  }else{
    out+='<div class="mission-grid">';
    items.forEach(item=>{
-    out+='<article class="mission-card"><h5>'+escapeStatsHtml(item.title||'Registro sin título')+'</h5>';
+    out+='<article class="mission-card"><h5>'+escapeStatsHtml(item.title||'Registro')+'</h5>';
     if(item.date)out+='<p>FECHA · '+statsDate(item.date)+'</p>';
     if(item.description)out+='<p>'+escapeStatsHtml(item.description)+'</p>';
-    if(item.source)out+='<p>FUENTE · '+escapeStatsHtml(item.source)+'</p>';
-    if(item.url)out+='<a href="'+escapeStatsHtml(item.url)+'" target="_blank" rel="noopener">VER REGISTRO ↗</a>';
+    if(item.source)out+='<p class="mission-source">REFERENCIA · '+escapeStatsHtml(item.source)+'</p>';
+    if(item.url)out+='<a href="'+escapeStatsHtml(item.url)+'" target="_blank" rel="noopener">VER DETALLE ↗</a>';
     out+='</article>';
    });
    out+='</div>';
   }
   out+='</section>';
  });
- out+='<p class="stats-muted">Los clips enlazados desde el canal se actualizan dinámicamente. Para mostrar 3 o 4 clips individuales seleccionados, se agregan sus URLs directas en highlights.</p></div>';
+ out+='<p class="stats-muted">Los clips aparecen una sola vez en esta sección. Se priorizan enlaces directos a piezas concretas, no accesos generales repetidos al canal.</p></div>';
  return out;
 }
 async function loadSullyGnomeData(){
