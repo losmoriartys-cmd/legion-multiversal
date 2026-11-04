@@ -91,3 +91,17 @@ Este archivo registra cada intervención relevante realizada en el repositorio. 
 ### Informe breve para cada intervención futura
 
 Al finalizar cada cambio, registrar: archivos tocados; qué se modificó y por qué; validaciones ejecutadas y resultado; pendientes/riesgos; hash del commit; estado y enlace/ID del despliegue. Diferenciar siempre lo acordado, lo implementado y lo pendiente.
+
+
+## 2026-11-03 — Rediseño de cartas del roster
+
+- **Archivo modificado:** `index.html`.
+- **Objetivo visual:** mostrar únicamente el retrato del héroe dentro del marco nuevo del expediente, sin superponer la carta antigua completa.
+- **Cambios realizados:**
+  - Se corrigieron las rutas de los retratos disponibles para apuntar a `assets/` (Moriartys, ROD3R1K, LadyMoriarty, Capy, Ardipii, Akuma, ElGabii y Hábitos).
+  - Se ajustó el recorte del retrato dentro de la ventana central del marco: ampliación controlada, centrado vertical y máscara de desvanecido sutil para ocultar el marco/título de la carta antigua que venía incorporada en las imágenes.
+  - Se retiró la etiqueta de clasificación duplicada porque ya está dibujada en el marco maestro.
+  - Dave/Nexus y Pato/Oratoris conservan el placeholder porque no se encontraron archivos de retrato con los nombres actuales en `assets/`; no se les asignó una imagen inventada.
+- **Validación de fuentes:** se comprobaron en el repositorio los ocho archivos de retrato referenciados en `assets/`.
+- **Pendiente:** revisión visual en GitHub Pages para afinar el encuadre individual si algún personaje queda demasiado cortado; comprobar despliegue.
+- **Commit:** `7822c4525739100ac7bb829611817d8ca203f3cf`.
