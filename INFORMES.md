@@ -810,3 +810,14 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Validación estática:** se comprobó la sustitución del bloque exacto y la incorporación de reglas responsive para la grilla Lifetime.
 - **Commit de interfaz:** [`e2e0c332`](https://github.com/losmoriartys-cmd/s3xmen/commit/e2e0c332cd9d13639ab55f6b463b50feb004d8ed).
 - **Despliegue:** pendiente de comprobar el workflow de GitHub Pages y la vista publicada.
+
+## 2026-11-04 — Gráficos comparativos para la pestaña B de Los Moriartys
+
+- **Solicitud:** combinar un panel visual de estadísticas con una lectura profesional orientada a marcas.
+- **Archivo modificado:** `index.html`.
+- **Implementado:** se añadieron dos gráficos de barras horizontales para los juegos populares: espectadores promedio y seguidores ganados por hora. Las barras usan escalas comparables dentro de cada gráfico y se adaptan a pantallas pequeñas.
+- **Lectura comercial:** se incorporó una síntesis basada únicamente en los datos disponibles: Minecraft registra el promedio más alto (34) y comparte el mayor ritmo de captación informado (2 seguidores/h) con Marvel Rivals; Fortnite conserva el destacado de 103 horas vistas (22,7% del total informado).
+- **Criterio de datos:** los juegos sin dato de seguidores por hora no se grafican en esa comparación; no se completan valores ausentes ni se inventan períodos. La tabla detallada permanece debajo de los gráficos como referencia precisa.
+- **Conservado:** Lifetime, rendimiento del período, cifras de origen, clips, colaboraciones, `data.json` y automatizaciones sin cambios.
+- **Commit de interfaz:** [`c586b989`](https://github.com/losmoriartys-cmd/s3xmen/commit/c586b9893eb8b8cccd62023365dbc1a426ae0969).
+- **Despliegue:** pendiente de comprobar el workflow de GitHub Pages.
