@@ -308,3 +308,32 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Pendientes / riesgos:** revisar la presentación en el sitio publicado y comprobar el workflow de GitHub Pages. Los datos históricos siguen sujetos a los estados parciales y notas de verificación ya documentados.
 - **Commit de interfaz:** `5b817b17c034f34ae81ccaf10e3d0376be0ed580`.
 - **Despliegue:** pendiente de verificación.
+
+
+## 2026-11-04 — Rediseñar la entrada del roster y el acceso a expedientes individuales
+
+- **Responsable:** ChatGPT + equipo Los Moriartys.
+- **Objetivo:** separar la presentación grupal del roster de la experiencia individual de cada integrante, conservando las cartas oficiales y la jerarquía vigente.
+- **Archivos modificados:**
+  - `index.html`: presentación del roster, contadores, leyenda, vista individual y navegación hacia la bitácora.
+  - `INFORMES.md`: registro de esta intervención.
+- **Implementado:**
+  - El roster presenta retratos en tarjetas compactas, agrupados por Dirección, Cuerpo Docente, Estudiantes y Colaboradores.
+  - Los contadores se calculan desde `heroesData`, evitando cifras fijas desactualizadas.
+  - Se incorpora la categoría visual Colaboradores en la leyenda.
+  - Al seleccionar un integrante se abre una vista individual con su carta oficial completa, presentación y acceso a la bitácora existente (páginas A–D).
+  - La vista individual actualiza el fragmento de URL para permitir enlaces directos al expediente; se restaura al cargar la página.
+  - Se conserva el renderizador de estadísticas, historial y misiones. No se alteraron datos, poderes, imágenes oficiales ni automatizaciones.
+  - Las tarjetas del roster utilizan por ahora un recorte de la imagen oficial disponible como retrato; no se agregaron fotografías nuevas ni se alteraron los archivos de imagen.
+  - Se respeta `prefers-reduced-motion` para reducir las transiciones nuevas.
+- **Validaciones:**
+  - Comprobada la presencia en `heroesData` de dos directores, cinco profesores, un estudiante y dos colaboradores: PATO — ORATORIS y HÁBITOS ATÓMICOS.
+  - Comprobada la presencia de la leyenda de colaboradores, contadores dinámicos, vista individual, ruta por fragmento y acceso a la bitácora A–D.
+  - La carta oficial se sigue mostrando desde la ruta ya asignada a cada integrante.
+  - No se ha realizado todavía una prueba visual manual en navegador ni se ha confirmado el despliegue de GitHub Pages.
+- **Pendientes / riesgos:**
+  - Revisar el recorte de los retratos en escritorio y móvil. Si el equipo dispone de retratos independientes, podrán reemplazar los recortes sin modificar las cartas oficiales.
+  - Completar las presentaciones personales y los contenidos comerciales con información aprobada por cada integrante.
+  - Verificar el workflow de Pages y la visualización publicada.
+- **Commit de interfaz:** `60aec08c4906ff10ef6db64ad23e5040c3998c84` (ajuste final de contadores y enlaces; incluye el commit anterior de estructura `50599cb33c3cc8288655216314cdc8ff16cb9b13`).
+- **Despliegue:** pendiente de verificación.
