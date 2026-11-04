@@ -474,3 +474,22 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Commits:** interfaz y reorganización `ce6554351fd2455d0e44dd00d307998db38e1a51` — https://github.com/losmoriartys-cmd/s3xmen/commit/ce6554351fd2455d0e44dd00d307998db38e1a51; ajuste de reproductor Twitch (mínimo 400 × 300 px) `ff1624a218fc528255b426131f3035dcb1c8959f` — https://github.com/losmoriartys-cmd/s3xmen/commit/ff1624a218fc528255b426131f3035dcb1c8959f
 - **Despliegue:** pendiente de verificación en GitHub Actions / GitHub Pages.
 
+
+## 2026-11-04 — Revisión posterior al despliegue
+
+- **Responsable:** ChatGPT.
+- **Objetivo:** revisión estática de la reorganización del media kit y del capítulo En vivo.
+- **Archivos modificados:** `index.html`, `INFORMES.md`.
+- **Revisión realizada:**
+  - Se confirmó que el workflow de GitHub Pages asociado al commit `ece6dfcc81cf9672514b216c2d67d15ad6d0baff` terminó con resultado `success`; los jobs de build y deploy finalizaron correctamente.
+  - Se verificó que la navegación apunta a los ocho capítulos existentes: 1, 2, 3, 10, 5, 8, 9 y 6. No quedaron llamadas a los capítulos 4 o 7 retirados.
+  - Se confirmó que el capítulo 3 tiene sus contenedores de estadísticas, fecha de actualización y tabla de detalle; el script consume `data.json`.
+  - Se confirmó que el capítulo En vivo reutiliza los canales de `data.json`, arma enlaces de fallback y construye el reproductor Twitch con `parent=window.location.hostname`. Se comprobó en CSS el mínimo de 400 px de ancho y 300 px de alto.
+  - Se verificó que el Arsenal conserva diez tarjetas.
+  - Se observó que `creator-records.json` no contiene todavía registros de colaboraciones ni hitos para respaldar las relaciones comerciales nombradas en el texto. Para evitar afirmaciones públicas sin evidencia enlazable, se retiraron las menciones concretas a TheR0D3R1K, Enshrouded y Cinderia del apartado de alianzas. Se incorporó un criterio explícito de publicación de acreditaciones y campañas verificables.
+  - Los datos de Twitch consultados mostraban nueve canales y ninguno en directo en la última sincronización; por eso no se pudo probar un iframe con una transmisión real.
+- **Limitación de esta revisión:** se realizó auditoría del código, datos y estado de GitHub Actions. El navegador de revisión no pudo recuperar el dominio público de GitHub Pages, por lo que no se certifica la apariencia visual final en escritorio/móvil ni el funcionamiento real del reproductor con una transmisión activa. Se requiere comprobación manual en el navegador.
+- **Pendientes:** prueba visual en desktop y móvil; prueba del reproductor cuando un canal esté en vivo; completar `creator-records.json` con pruebas documentales antes de volver a mostrar colaboraciones específicas.
+- **Commit de corrección de transparencia:** `b9a29c250000cb0a1648a494914f8619677b0b60` — https://github.com/losmoriartys-cmd/s3xmen/commit/b9a29c250000cb0a1648a494914f8619677b0b60
+- **Despliegue de la reorganización anterior:** exitoso; workflow `41798161727`. El commit de corrección de transparencia queda sujeto a su propio workflow de Pages.
+
