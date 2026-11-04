@@ -3,7 +3,7 @@
   "source": "Twitch Helix API",
   "window_days": 10,
   "sampling_interval_minutes": 15,
-  "updated_at": "2026-11-04T00:00:30Z",
+  "updated_at": "2026-11-04T01:10:40Z",
   "channels": {
     "ladymoriarty01": {
       "login": "ladymoriarty01",
@@ -18,9 +18,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-04T00:00:30Z",
+      "updated_at": "2026-11-04T01:10:40Z",
       "window": {
-        "samples_total": 9,
+        "samples_total": 10,
         "live_samples": 0,
         "streams_observed": 0,
         "average_viewers_sampled": null,
@@ -110,6 +110,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-04T01:10:40Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -122,16 +131,16 @@
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
       "live": true,
-      "current_viewers": 40,
-      "current_game": "Counter-Strike",
+      "current_viewers": 20,
+      "current_game": "Fortnite",
       "current_title": "🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
       "stream_started_at": "2026-11-03T22:57:34Z",
-      "updated_at": "2026-11-04T00:00:30Z",
+      "updated_at": "2026-11-04T01:10:40Z",
       "window": {
-        "samples_total": 9,
-        "live_samples": 2,
+        "samples_total": 10,
+        "live_samples": 3,
         "streams_observed": 1,
-        "average_viewers_sampled": 31.5,
+        "average_viewers_sampled": 27.7,
         "peak_viewers_sampled": 40,
         "observed_live_hours": 0.0,
         "estimated_hours_watched": 0.0,
@@ -218,6 +227,15 @@
           "title": "🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
           "stream_id": "319348846454",
           "started_at": "2026-11-03T22:57:34Z"
+        },
+        {
+          "sampled_at": "2026-11-04T01:10:40Z",
+          "is_live": true,
+          "viewer_count": 20,
+          "game_name": "Fortnite",
+          "title": "🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
+          "stream_id": "319348846454",
+          "started_at": "2026-11-03T22:57:34Z"
         }
       ]
     },
@@ -234,9 +252,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-04T00:00:30Z",
+      "updated_at": "2026-11-04T01:10:40Z",
       "window": {
-        "samples_total": 9,
+        "samples_total": 10,
         "live_samples": 1,
         "streams_observed": 1,
         "average_viewers_sampled": 9.0,
@@ -326,6 +344,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-04T01:10:40Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -342,9 +369,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-04T00:00:30Z",
+      "updated_at": "2026-11-04T01:10:40Z",
       "window": {
-        "samples_total": 9,
+        "samples_total": 10,
         "live_samples": 0,
         "streams_observed": 0,
         "average_viewers_sampled": null,
@@ -428,6 +455,15 @@
         },
         {
           "sampled_at": "2026-11-04T00:00:30Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-04T01:10:40Z",
           "is_live": false,
           "viewer_count": null,
           "game_name": null,
@@ -445,18 +481,18 @@
       "twitch_url": "https://twitch.tv/akumazoldyck",
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
-      "live": false,
-      "current_viewers": null,
-      "current_game": null,
-      "current_title": null,
-      "stream_started_at": null,
-      "updated_at": "2026-11-04T00:00:30Z",
+      "live": true,
+      "current_viewers": 3,
+      "current_game": "Can 'Em All",
+      "current_title": "a matar monstruitos kawaiis",
+      "stream_started_at": "2026-11-04T00:50:10Z",
+      "updated_at": "2026-11-04T01:10:40Z",
       "window": {
-        "samples_total": 9,
-        "live_samples": 0,
-        "streams_observed": 0,
-        "average_viewers_sampled": null,
-        "peak_viewers_sampled": null,
+        "samples_total": 10,
+        "live_samples": 1,
+        "streams_observed": 1,
+        "average_viewers_sampled": 3.0,
+        "peak_viewers_sampled": 3,
         "observed_live_hours": 0.0,
         "estimated_hours_watched": 0.0,
         "method": "Muestras propias cada 15 minutos; horas estimadas solo entre muestras consecutivas del mismo directo."
@@ -542,6 +578,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-04T01:10:40Z",
+          "is_live": true,
+          "viewer_count": 3,
+          "game_name": "Can 'Em All",
+          "title": "a matar monstruitos kawaiis",
+          "stream_id": "322128940634",
+          "started_at": "2026-11-04T00:50:10Z"
         }
       ]
     },
@@ -558,9 +603,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-04T00:00:30Z",
+      "updated_at": "2026-11-04T01:10:40Z",
       "window": {
-        "samples_total": 9,
+        "samples_total": 10,
         "live_samples": 0,
         "streams_observed": 0,
         "average_viewers_sampled": null,
@@ -644,6 +689,15 @@
         },
         {
           "sampled_at": "2026-11-04T00:00:30Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-04T01:10:40Z",
           "is_live": false,
           "viewer_count": null,
           "game_name": null,
@@ -666,9 +720,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-04T00:00:30Z",
+      "updated_at": "2026-11-04T01:10:40Z",
       "window": {
-        "samples_total": 9,
+        "samples_total": 10,
         "live_samples": 0,
         "streams_observed": 0,
         "average_viewers_sampled": null,
@@ -752,6 +806,15 @@
         },
         {
           "sampled_at": "2026-11-04T00:00:30Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-04T01:10:40Z",
           "is_live": false,
           "viewer_count": null,
           "game_name": null,
@@ -774,9 +837,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-04T00:00:30Z",
+      "updated_at": "2026-11-04T01:10:40Z",
       "window": {
-        "samples_total": 9,
+        "samples_total": 10,
         "live_samples": 0,
         "streams_observed": 0,
         "average_viewers_sampled": null,
@@ -860,6 +923,15 @@
         },
         {
           "sampled_at": "2026-11-04T00:00:30Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-04T01:10:40Z",
           "is_live": false,
           "viewer_count": null,
           "game_name": null,
@@ -882,9 +954,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-04T00:00:30Z",
+      "updated_at": "2026-11-04T01:10:40Z",
       "window": {
-        "samples_total": 9,
+        "samples_total": 10,
         "live_samples": 0,
         "streams_observed": 0,
         "average_viewers_sampled": null,
@@ -968,6 +1040,15 @@
         },
         {
           "sampled_at": "2026-11-04T00:00:30Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-04T01:10:40Z",
           "is_live": false,
           "viewer_count": null,
           "game_name": null,
