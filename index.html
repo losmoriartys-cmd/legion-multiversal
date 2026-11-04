@@ -723,6 +723,15 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
 .premium-panel a { color:#ffd77b; }
 .premium-kicker { color:#c6a5ff;text-transform:uppercase;letter-spacing:2px;font-size:.75rem;font-weight:900; }
 .stats-note { color:#b8b2c9;font-size:.85rem;line-height:1.5;margin:12px 0; }
+.stats-chart { margin:16px 0 20px;padding:15px 16px;background:linear-gradient(145deg,rgba(9,12,24,.92),rgba(26,20,43,.82));border:1px solid rgba(185,140,66,.42);border-radius:8px; }
+.stats-chart-title { display:flex;justify-content:space-between;gap:12px;align-items:baseline;margin-bottom:12px;color:#ffdf9c;font:1.05rem 'Bangers',cursive;letter-spacing:.8px; }
+.stats-chart-title small { color:#a9a2b9;font:700 .68rem Montserrat,sans-serif;letter-spacing:0;text-align:right; }
+.stats-bar-row { display:grid;grid-template-columns:minmax(95px,1.1fr) minmax(70px,2fr) minmax(65px,.55fr);gap:10px;align-items:center;margin:9px 0; }
+.stats-bar-label { overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#ddd7e9;font-size:.76rem;font-weight:700; }
+.stats-bar-track { height:10px;background:#080b14;border:1px solid #3c3450;border-radius:20px;overflow:hidden; }
+.stats-bar-fill { display:block;height:100%;min-width:2px;background:linear-gradient(90deg,#7b54d8,#00d2ff);border-radius:20px; }
+.stats-bar-value { color:#f5d995;text-align:right;font-size:.75rem;font-weight:900;font-variant-numeric:tabular-nums; }
+@media(max-width:560px){.stats-bar-row{grid-template-columns:minmax(78px,1fr) minmax(55px,1.2fr) minmax(52px,.55fr);gap:6px}.stats-bar-label,.stats-bar-value{font-size:.68rem}.stats-chart{padding:12px 10px}}
 .stats-table-wrap { overflow-x:auto; }
 .stats-table { width:100%;border-collapse:collapse;min-width:700px;background:#090b15; }
 .stats-table th,.stats-table td { padding:10px;border:1px solid #3a304d;text-align:left; }
@@ -1215,6 +1224,17 @@ function statsDuration(stream){
  }
  return '—';
 }
+function renderStatsBars(title,items,labelFn,valueFn,suffix,maxItems=10){
+ const rows=(Array.isArray(items)?items:[]).map(item=>({item,value:Number(valueFn(item))})).filter(row=>Number.isFinite(row.value)&&row.value>=0).slice(-maxItems);
+ if(!rows.length||!rows.some(row=>row.value>0))return '';
+ const max=Math.max(...rows.map(row=>row.value),1);
+ let out='<div class="stats-chart"><div class="stats-chart-title"><span>'+escapeStatsHtml(title)+'</span><small>'+escapeStatsHtml(suffix)+'</small></div>';
+ rows.forEach(row=>{
+  const width=Math.max(row.value>0?2:0,Math.min(100,(row.value/max)*100));
+  out+='<div class="stats-bar-row"><span class="stats-bar-label" title="'+escapeStatsHtml(labelFn(row.item))+'">'+escapeStatsHtml(labelFn(row.item))+'</span><span class="stats-bar-track"><i class="stats-bar-fill" style="width:'+width.toFixed(1)+'%"></i></span><b class="stats-bar-value">'+statsNumber(row.value,1)+'</b></div>';
+ });
+ return out+'</div>';
+}
 function renderSullyStats(channel){
  if(!channel)return '<div class="stats-empty"><strong>Historial no disponible</strong>No hay registros históricos cargados para este canal.</div>';
  const status=channel.status==='partial'?'partial':'pending';
@@ -1241,6 +1261,7 @@ function renderSullyStats(channel){
  }
  const streams=Array.isArray(channel.streams)?channel.streams:[];
  if(streams.length){
+  out+=renderStatsBars('HORAS VISTAS POR DIRECTO',streams.slice().reverse(),v=>statsDate(v.date),v=>v.hours_watched,'horas vistas',10);
   out+='<h4>REGISTRO DE DIRECTOS</h4><p class="stats-section-intro">Cada fila corresponde a una transmisión recibida en el historial disponible.</p><div class="stats-table-wrap"><table class="stats-table"><thead><tr><th>Fecha</th><th>Inicio</th><th>Duración</th><th>Promedio</th><th>Pico</th><th>Horas vistas</th><th>Seguidores*</th></tr></thead><tbody>';
   streams.forEach(v=>out+='<tr><td>'+statsDate(v.date)+'</td><td>'+(v.start_time?escapeStatsHtml(v.start_time):'No informado')+'</td><td>'+statsDuration(v)+'</td><td class="num">'+statsNumber(v.average_viewers,0)+'</td><td class="num">'+statsNumber(v.peak_viewers,0)+'</td><td class="num">'+statsNumber(v.hours_watched,2)+'</td><td class="num">'+statsNumber(v.followers_reported,0)+'</td></tr>');
   out+='</tbody></table></div>';
@@ -1268,6 +1289,8 @@ function renderHelixDashboard(channel){
  out+='<div class="stats-kpis">';
  [['Espectadores ahora',channel.current_viewers,'lectura actual'],['Seguidores',channel.followers_total,'total informado por Helix'],['Muestras',w.samples_total,'ventana disponible'],['Directos detectados',w.streams_observed,'por muestreo'],['Pico observado',w.peak_viewers_sampled,'no es pico oficial'],['Horas vistas',w.estimated_hours_watched,'estimación por muestreo']].forEach(k=>out+='<div class="stats-kpi"><span>'+k[0]+'</span><strong>'+statsNumber(k[1],0)+'</strong><em>'+k[2]+'</em></div>');
  out+='</div><p class="stats-muted">Categoría actual: '+escapeStatsHtml(channel.current_game||'No disponible')+' · Última sincronización: '+(channel.updated_at?new Date(channel.updated_at).toLocaleString('es-AR'):'Pendiente')+'</p>';
+ out+=renderStatsBars('ACTIVIDAD DIARIA OBSERVADA',(w.daily_activity||[]).slice(-10),v=>statsDate(v.date),v=>v.live_samples,'muestras en directo',10);
+ out+=renderStatsBars('CATEGORÍAS MÁS OBSERVADAS',w.game_breakdown||[],v=>v.name,v=>v.live_samples,'muestras por categoría',5);
  const snaps=Array.isArray(channel.snapshots)?channel.snapshots:[];
  const sessions=new Map();
  snaps.filter(v=>v&&v.is_live&&v.stream_id).forEach(v=>{
