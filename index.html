@@ -1796,16 +1796,16 @@ function renderMissionArchive(hero){
  let out='<div class="mission-archive"><div class="mission-hero-card"><span class="eyebrow">TRAYECTORIA · MEDIA KIT</span><p>'+escapeStatsHtml(hero.log||'Trayectoria y colaboraciones del creador.')+'</p></div>';
  groups.forEach(([label,field])=>{
   const items=Array.isArray(record[field])?record[field]:[];
+  if(!items.length && field!=='highlights')return;
   out+='<section class="mission-section"><h4>'+label+'</h4>';
   if(!items.length){
-   out+='<p class="mission-empty">'+(field==='highlights'?'Los clips seleccionados se incorporarán aquí con sus enlaces directos.':'No hay registros adicionales cargados por el momento.')+'</p>';
+   out+='<p class="mission-empty">Los clips seleccionados se incorporarán aquí con sus enlaces directos.</p>';
   }else{
    out+='<div class="mission-grid">';
    items.forEach(item=>{
     out+='<article class="mission-card"><h5>'+escapeStatsHtml(item.title||'Registro')+'</h5>';
     if(item.date)out+='<p>FECHA · '+statsDate(item.date)+'</p>';
-    if(item.description)out+='<p>'+escapeStatsHtml(item.description)+'</p>';
-    if(item.source)out+='<p class="mission-source">REFERENCIA · '+escapeStatsHtml(item.source)+'</p>';
+    if(item.description && !item.description.includes('Pendiente de descripción editorial'))out+='<p>'+escapeStatsHtml(item.description)+'</p>';
     if(item.platform==='twitch' && item.clip_id){
      out+='<div class="mission-clip-embed"><iframe src="https://clips.twitch.tv/embed?clip='+encodeURIComponent(item.clip_id)+'&parent=losmoriartys-cmd.github.io" title="'+escapeStatsHtml(item.title||'Clip de Twitch')+'" loading="lazy" allowfullscreen="true" scrolling="no"></iframe></div>';
      out+='<a href="https://clips.twitch.tv/'+encodeURIComponent(item.clip_id)+'" target="_blank" rel="noopener">ABRIR EN TWITCH ↗</a>';
