@@ -53,3 +53,16 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Commit README:** [`5055ce8d`](https://github.com/losmoriartys-cmd/s3xmen/commit/5055ce8d647f34c9cef023737722c8342a921941).
 - **Commit INFORMES (creación inicial):** [`5ea303b5`](https://github.com/losmoriartys-cmd/s3xmen/commit/5ea303b572b61dc493657ef7e9920e3870f3f0e1).
 - **Despliegue:** pendiente de verificación.
+
+## 2026-11-03 — Ordenar ubicación del retrato de Nexus
+
+- **Responsable:** colaboración ChatGPT + equipo del proyecto.
+- **Objetivo:** ubicar el retrato de Dave/Nexus dentro de la carpeta de recursos visuales y mantener la ruta del sitio coherente.
+- **Archivos modificados:**
+  - `nexus.jpg`: trasladado a `assets/nexus.jpg` sin alterar la imagen.
+  - `index.html`: actualizada únicamente la ruta del retrato de Dave/Nexus.
+- **Implementado:** se conserva el marco y la composición actuales. El rediseño global de las cartas queda separado para no interferir con el trabajo visual que el equipo está realizando.
+- **Validaciones y resultados:** commit creado sobre el `main` vigente; queda pendiente comprobar el despliegue de Pages y la visualización final en navegador.
+- **Pendientes / riesgos:** el equipo está unificando el marco de todas las cartas; no se modificaron estilos ni capas del marco en esta intervención.
+- **Commit:** se completará al registrar el cambio.
+- **Despliegue:** pendiente de verificación.
