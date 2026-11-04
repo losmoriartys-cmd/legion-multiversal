@@ -470,6 +470,6 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
   - El reproductor debe probarse en el dominio publicado de GitHub Pages y requiere conexión, navegador compatible y permiso de inserción de Twitch. No se pudo validar una transmisión real porque los nueve canales figuraban offline en la última lectura.
   - Revisar visualmente escritorio y móvil tras el despliegue.
   - Confirmar con el equipo las acreditaciones y colaboraciones citadas en el apartado comercial antes de utilizar el media kit en una campaña externa.
-- **Commit:** `ce6554351fd2455d0e44dd00d307998db38e1a51` — https://github.com/losmoriartys-cmd/s3xmen/commit/ce6554351fd2455d0e44dd00d307998db38e1a51
+- **Commits:** interfaz y reorganización `ce6554351fd2455d0e44dd00d307998db38e1a51` — https://github.com/losmoriartys-cmd/s3xmen/commit/ce6554351fd2455d0e44dd00d307998db38e1a51; ajuste de reproductor Twitch (mínimo 400 × 300 px) `ff1624a218fc528255b426131f3035dcb1c8959f` — https://github.com/losmoriartys-cmd/s3xmen/commit/ff1624a218fc528255b426131f3035dcb1c8959f
 - **Despliegue:** pendiente de verificación en GitHub Actions / GitHub Pages.
 
