@@ -193,10 +193,55 @@
         .modal-tab-pane h3 { font-family: 'Bangers', cursive; font-size: 1.8rem; color: var(--yellow-accent); border-bottom: 2px dashed rgba(255,255,255,0.2); padding-bottom: 8px; }
         .modal-tab-pane p { font-size: 1.05rem; line-height: 1.6; color: #e2e8f0; }
 
-        .sully-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 12px; margin-top: 15px; }
-        .sully-box { background: #0b0f19; border: 2px solid var(--border-color); padding: 12px; box-shadow: 3px 3px 0 var(--border-color); text-align: center; }
-        .sully-box .lbl { font-size: 0.75rem; color: #a0aec0; text-transform: uppercase; font-weight: 700; }
-        .sully-box .val { font-size: 1.6rem; font-family: 'Bangers', cursive; color: var(--yellow-accent); margin: 4px 0; }
+        .stats-dashboard-host, .dossier-log-host { width: 100%; min-width: 0; }
+        .stats-dashboard { display: flex; flex-direction: column; gap: 22px; color: #e2e8f0; }
+        .stats-source-head { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; padding:14px 16px; background:linear-gradient(110deg,#172438,#0b0f19); border:1px solid #34445c; border-left:4px solid var(--yellow-accent); }
+        .stats-source-head strong { color:var(--yellow-accent); font-family:'Bangers',cursive; font-size:1.35rem; letter-spacing:.5px; }
+        .stats-source-head small, .stats-muted { color:#9aa9bf; font-size:.78rem; line-height:1.5; }
+        .stats-status { display:inline-flex; align-items:center; gap:7px; padding:5px 9px; border:1px solid #53657d; background:#111a28; color:#dbeafe; font-size:.72rem; font-weight:800; letter-spacing:.5px; text-transform:uppercase; }
+        .stats-status.partial { border-color:#a8792b; color:#ffd78a; }
+        .stats-status.pending { border-color:#586579; color:#bdc8d8; }
+        .stats-section { background:#111a28; border:1px solid #2b3a50; padding:16px; min-width:0; }
+        .stats-section h4, .mission-section h4 { color:var(--yellow-accent); font-family:'Bangers',cursive; font-size:1.45rem; letter-spacing:.4px; margin-bottom:5px; }
+        .stats-section-intro { color:#a9b6c9; font-size:.8rem; margin-bottom:13px; line-height:1.5; }
+        .stats-kpis { display:grid; grid-template-columns:repeat(auto-fit,minmax(125px,1fr)); gap:10px; margin:14px 0; }
+        .stats-kpi { background:#080e18; border:1px solid #2b3a50; border-bottom:3px solid #b89a29; padding:12px; min-width:0; }
+        .stats-kpi span { display:block; color:#9aa9bf; font-size:.68rem; font-weight:800; text-transform:uppercase; letter-spacing:.5px; }
+        .stats-kpi strong { display:block; color:#fff; font-family:'Bangers',cursive; font-size:1.55rem; margin-top:4px; overflow-wrap:anywhere; }
+        .stats-kpi em { display:block; color:#8191a8; font-style:normal; font-size:.68rem; margin-top:2px; }
+        .stats-table-wrap { width:100%; overflow-x:auto; border:1px solid #34445c; margin-top:12px; }
+        .stats-table { width:100%; min-width:690px; border-collapse:collapse; background:#080e18; font-size:.78rem; }
+        .stats-table th { background:#24344a; color:#ffdf65; text-transform:uppercase; letter-spacing:.35px; font-size:.68rem; text-align:left; padding:11px 9px; white-space:nowrap; }
+        .stats-table td { padding:10px 9px; border-top:1px solid #263348; color:#dce5f1; white-space:nowrap; }
+        .stats-table tbody tr:nth-child(even) { background:#101a29; }
+        .stats-table td.num { font-variant-numeric:tabular-nums; text-align:right; }
+        .stats-note { background:#0b1320; border-left:3px solid #5b789d; padding:10px 12px; color:#aebbd0; font-size:.76rem; line-height:1.55; margin-top:12px; }
+        .stats-note.warning { border-left-color:#c18a37; }
+        .stats-link { color:#83dfff; font-weight:800; text-decoration:none; }
+        .stats-link:hover { text-decoration:underline; }
+        .stats-empty { padding:22px; text-align:center; border:1px dashed #52637b; background:#0b1320; color:#b8c5d8; line-height:1.6; }
+        .stats-empty strong { display:block; color:#ffdf65; font-family:'Bangers',cursive; font-size:1.35rem; margin-bottom:5px; }
+        .stats-mini-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:10px; margin-top:12px; }
+        .stats-mini-card { background:#0b1320; border:1px solid #2c3a4e; padding:12px; }
+        .stats-mini-card strong { display:block; color:#ffdf65; font-size:.78rem; margin-bottom:5px; }
+        .stats-mini-card span { color:#b8c5d8; font-size:.76rem; line-height:1.5; }
+        .mission-archive { display:flex; flex-direction:column; gap:16px; }
+        .mission-hero-card { background:linear-gradient(120deg,#172438,#0b1320); border:1px solid #34445c; border-left:4px solid var(--yellow-accent); padding:16px; }
+        .mission-hero-card .eyebrow { color:#9aa9bf; font-size:.68rem; font-weight:800; letter-spacing:1px; text-transform:uppercase; }
+        .mission-hero-card p { margin-top:7px; color:#e2e8f0; font-size:.88rem; line-height:1.6; }
+        .mission-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px; }
+        .mission-card { background:#111a28; border:1px solid #2b3a50; padding:14px; }
+        .mission-card h5 { color:#ffdf65; font-family:'Bangers',cursive; font-size:1.15rem; margin-bottom:7px; }
+        .mission-card p { color:#c4cfdd; font-size:.78rem; line-height:1.55; margin:5px 0; }
+        .mission-card a { color:#83dfff; font-size:.76rem; font-weight:800; }
+        .mission-empty { color:#93a4ba; font-size:.76rem; font-style:italic; }
+        @media(max-width:650px) {
+          .stats-section { padding:12px; }
+          .stats-kpis { grid-template-columns:repeat(2,minmax(0,1fr)); }
+          .stats-kpi strong { font-size:1.35rem; }
+          .stats-source-head { align-items:flex-start; }
+          .mission-grid { grid-template-columns:1fr; }
+        }
 
         .twitch-link-btn {
             display: inline-block; background: var(--yellow-accent); color: #000;
@@ -1150,55 +1195,132 @@ function findSullyChannel(hero){
  const login=hero.twitch.split('/').filter(Boolean).pop().toLowerCase();
  return (sullyGnomeData.channels||[]).find(c=>(c.login||'').toLowerCase()===login) || null;
 }
+function escapeStatsHtml(value){
+ return String(value===null||value===undefined?'—':value).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+}
+function statsNumber(value,digits=1){
+ if(value===null||value===undefined||value==='')return '—';
+ return typeof value==='number'?value.toLocaleString('es-AR',{maximumFractionDigits:digits}):escapeStatsHtml(value);
+}
+function statsDate(value){
+ if(!value)return '—';
+ const p=String(value).split('-');
+ return p.length===3?p[2]+'/'+p[1]+'/'+p[0]:escapeStatsHtml(value);
+}
+function statsDuration(stream){
+ if(stream.duration_hours!==undefined)return statsNumber(stream.duration_hours,2)+' h';
+ if(stream.duration_minutes!==undefined){
+  const mins=Number(stream.duration_minutes);
+  return Math.floor(mins/60)+' h '+(mins%60)+' min';
+ }
+ return '—';
+}
 function renderSullyStats(channel){
- if(!channel)return '';
- const lines=[
-  'SULLYGNOME · ESTADÍSTICAS E HISTORIAL',
-  'Fuente: SullyGnome · Datos separados de Twitch Helix',
-  'Estado: '+(channel.status==='partial'?'Parcial — datos recibidos':'Pendiente de recopilar transmisiones'),
-  'Historial: '+channel.source_url
- ];
- if(channel.period && (channel.period.start_date || channel.period.end_date)){
-  lines.push('Período: '+(channel.period.start_date||'—')+' a '+(channel.period.end_date||'—'));
- }
- if(channel.annual_summary_2026){
-  const a=channel.annual_summary_2026;
-  lines.push('RESUMEN 2026 (acumulado informado por SullyGnome):');
-  lines.push('Promedio de espectadores: '+(a.average_viewers??'—'));
-  lines.push('Horas vistas: '+(a.hours_watched??'—'));
-  lines.push('Seguidores ganados: '+(a.followers_gained??'—'));
-  lines.push('Pico de espectadores: '+(a.peak_viewers??'—'));
-  lines.push('Horas transmitidas: '+(a.hours_streamed??'—'));
-  lines.push('Transmisiones: '+(a.streams??'—'));
-  const c=a.comparisons_to_2025||{};
-  lines.push('Variación vs. 2025 · horas vistas: '+(c.hours_watched_percent??'—')+'% · seguidores: '+(c.followers_gained_percent??'—')+'% · pico: '+(c.peak_viewers_percent??'—')+'% · horas transmitidas: '+(c.hours_streamed_percent??'—')+'% · streams: '+(c.streams_percent??'—')+'%');
- }
+ if(!channel)return '<div class="stats-empty"><strong>Historial no disponible</strong>No hay registros históricos cargados para este canal.</div>';
+ const status=channel.status==='partial'?'partial':'pending';
+ const statusLabel=channel.status==='partial'?'REGISTRO PARCIAL':'PENDIENTE DE DATOS';
+ const period=channel.period&&channel.period.start_date?
+  statsDate(channel.period.start_date)+' — '+statsDate(channel.period.end_date):'Período todavía no disponible';
+ let out='<section class="stats-section"><div class="stats-source-head"><div><strong>SULLYGNOME · HISTORIAL</strong><br><small>Fuente histórica externa · separada del muestreo propio</small></div><span class="stats-status '+status+'">'+statusLabel+'</span></div>';
+ out+='<p class="stats-section-intro">Período: '+period+' · <a class="stats-link" href="'+escapeStatsHtml(channel.source_url)+'" target="_blank" rel="noopener">Abrir historial de SullyGnome ↗</a></p>';
+ const a=channel.annual_summary_2026;
  const x=channel.summary||{};
- if(channel.status==='partial' && !channel.annual_summary_2026){
-  lines.push('RESUMEN DEL CONJUNTO RECIBIDO:');
-  lines.push('Transmisiones registradas: '+(x.streams_count??'—'));
-  lines.push('Tiempo transmitido: '+(x.airtime_minutes!==null&&x.airtime_minutes!==undefined?Math.floor(x.airtime_minutes/60)+' h '+(x.airtime_minutes%60)+' min':'—'));
-  lines.push('Horas vistas: '+(x.hours_watched??'—'));
-  lines.push('Promedio ponderado por duración (cálculo): '+(x.average_viewers_duration_weighted??'—'));
-  lines.push('Pico máximo: '+(x.peak_viewers??'—'));
-  lines.push('Columna «Seguidores» (suma reportada): '+(x.followers_gain_reported??'—')+' · interpretación pendiente de confirmación');
+ if(a){
+  out+='<div class="stats-kpis">';
+  [['Directos',a.streams,'acumulado 2026'],['Horas transmitidas',a.hours_streamed,'acumulado 2026'],['Horas vistas',a.hours_watched,'acumulado 2026'],['Promedio',a.average_viewers,'espectadores'],['Pico',a.peak_viewers,'espectadores'],['Seguidores ganados',a.followers_gained,'según resumen anual']].forEach(k=>out+='<div class="stats-kpi"><span>'+k[0]+'</span><strong>'+statsNumber(k[1])+'</strong><em>'+k[2]+'</em></div>');
+  out+='</div>';
+  const c=a.comparisons_to_2025||{};
+  const changes=[['Horas vistas',c.hours_watched_percent],['Seguidores',c.followers_gained_percent],['Pico',c.peak_viewers_percent],['Horas emitidas',c.hours_streamed_percent],['Directos',c.streams_percent]];
+  if(changes.some(v=>v[1]!==null&&v[1]!==undefined)){
+   out+='<div class="stats-mini-grid">'+changes.filter(v=>v[1]!==null&&v[1]!==undefined).map(v=>'<div class="stats-mini-card"><strong>VARIACIÓN · '+v[0].toUpperCase()+'</strong><span>'+statsNumber(v[1])+'% respecto de 2025</span></div>').join('')+'</div>';
+  }
+ }else if(channel.status==='partial'){
+  out+='<div class="stats-kpis">';
+  [['Transmisiones',x.streams_count,'filas recibidas'],['Tiempo emitido',x.airtime_minutes!==null&&x.airtime_minutes!==undefined?Math.floor(x.airtime_minutes/60)+' h '+(x.airtime_minutes%60)+' min':'—','acumulado recibido'],['Horas vistas',x.hours_watched,'según fuente'],['Promedio',x.average_viewers_duration_weighted,'cálculo ponderado'],['Pico máximo',x.peak_viewers,'espectadores']].forEach(k=>out+='<div class="stats-kpi"><span>'+k[0]+'</span><strong>'+escapeStatsHtml(k[1])+'</strong><em>'+k[2]+'</em></div>');
+  out+='</div>';
+ }
+ const streams=Array.isArray(channel.streams)?channel.streams:[];
+ if(streams.length){
+  out+='<h4>REGISTRO DE DIRECTOS</h4><p class="stats-section-intro">Cada fila corresponde a una transmisión recibida en el historial disponible.</p><div class="stats-table-wrap"><table class="stats-table"><thead><tr><th>Fecha</th><th>Inicio</th><th>Duración</th><th>Promedio</th><th>Pico</th><th>Horas vistas</th><th>Seguidores*</th></tr></thead><tbody>';
+  streams.forEach(v=>out+='<tr><td>'+statsDate(v.date)+'</td><td>'+(v.start_time?escapeStatsHtml(v.start_time):'No informado')+'</td><td>'+statsDuration(v)+'</td><td class="num">'+statsNumber(v.average_viewers,0)+'</td><td class="num">'+statsNumber(v.peak_viewers,0)+'</td><td class="num">'+statsNumber(v.hours_watched,2)+'</td><td class="num">'+statsNumber(v.followers_reported,0)+'</td></tr>');
+  out+='</tbody></table></div>';
+ }else{
+  out+='<div class="stats-empty"><strong>Historial en preparación</strong>Ya está identificado el canal de SullyGnome, pero todavía no tenemos filas de transmisiones verificadas para mostrar.</div>';
  }
  if(channel.observed_rows_summary){
   const o=channel.observed_rows_summary;
-  lines.push('FILAS TRANSCRITAS: '+o.rows+' · duración acumulada '+o.duration_hours+' h · horas vistas '+o.hours_watched+' · seguidores netos reportados '+o.followers_net_reported+' · pico en estas filas '+o.peak_viewers_in_rows);
+  out+='<div class="stats-note">Detalle visible: '+o.rows+' de '+(a?.streams||'—')+' transmisiones del año · '+statsNumber(o.duration_hours,1)+' horas de duración · '+statsNumber(o.hours_watched,1)+' horas vistas. El pico de estas filas ('+statsNumber(o.peak_viewers_in_rows,0)+') no reemplaza el pico anual ('+statsNumber(a?.peak_viewers,0)+').</div>';
  }
- if((channel.streams||[]).length){
-  lines.push('DETALLE DE TRANSMISIONES RECIBIDAS:');
-  (channel.streams||[]).forEach(v=>{
-   const duration=v.duration_hours!==undefined?(v.duration_hours+' h'):(Math.floor(v.duration_minutes/60)+' h '+(v.duration_minutes%60)+' min');
-   lines.push(v.date+(v.start_time?' '+v.start_time:'')+' · '+duration+' · promedio '+v.average_viewers+
-    ' · pico '+v.peak_viewers+' · horas vistas '+v.hours_watched+' · seguidores '+(v.followers_reported??'—'));
-  });
+ if(channel.notes?.length){
+  out+='<div class="stats-note warning">'+channel.notes.map(n=>escapeStatsHtml(n)).join('<br>')+'</div>';
+ }
+ if(channel.login==='losmoriartys'){
+  out+='<div class="stats-note warning">La fuente recibida no incluye horarios de inicio para estas transmisiones; por eso se muestran como “No informado”. La columna de seguidores conserva el valor reportado por SullyGnome y no se interpreta como ganancia confirmada.</div>';
+ }
+ out+='</section>';
+ return out;
+}
+function renderHelixDashboard(channel){
+ if(!channel)return '<div class="stats-empty"><strong>Seguimiento propio</strong>Esperando la primera sincronización de Twitch Helix para este canal.</div>';
+ const w=channel.window||{};
+ const live=channel.live;
+ let out='<section class="stats-section"><div class="stats-source-head"><div><strong>TWITCH HELIX · SEGUIMIENTO PROPIO</strong><br><small>Observaciones periódicas del Instituto</small></div><span class="stats-status '+(live?'partial':'pending')+'">'+(live?'EN DIRECTO':'OFFLINE')+'</span></div>';
+ out+='<div class="stats-kpis">';
+ [['Espectadores ahora',channel.current_viewers,'lectura actual'],['Seguidores',channel.followers_total,'total informado por Helix'],['Muestras',w.samples_total,'ventana disponible'],['Directos detectados',w.streams_observed,'por muestreo'],['Pico observado',w.peak_viewers_sampled,'no es pico oficial'],['Horas vistas',w.estimated_hours_watched,'estimación por muestreo']].forEach(k=>out+='<div class="stats-kpi"><span>'+k[0]+'</span><strong>'+statsNumber(k[1],0)+'</strong><em>'+k[2]+'</em></div>');
+ out+='</div><p class="stats-muted">Categoría actual: '+escapeStatsHtml(channel.current_game||'No disponible')+' · Última sincronización: '+(channel.updated_at?new Date(channel.updated_at).toLocaleString('es-AR'):'Pendiente')+'</p>';
+ const snaps=Array.isArray(channel.snapshots)?channel.snapshots:[];
+ const sessions=new Map();
+ snaps.filter(v=>v&&v.is_live&&v.stream_id).forEach(v=>{
+  const id=String(v.stream_id);
+  if(!sessions.has(id))sessions.set(id,{started_at:v.started_at||null,last:v.sampled_at||null,samples:0,peak:null,game:v.game_name||'—'});
+  const x=sessions.get(id);x.samples++;if(v.sampled_at)x.last=v.sampled_at;
+  if(typeof v.viewer_count==='number')x.peak=x.peak===null?v.viewer_count:Math.max(x.peak,v.viewer_count);
+  if(v.started_at&&!x.started_at)x.started_at=v.started_at;
+ });
+ const rows=Array.from(sessions.values()).sort((a,b)=>String(b.started_at||'').localeCompare(String(a.started_at||'')));
+ if(rows.length){
+  out+='<h4>DIRECTOS DETECTADOS POR HORARIO</h4><div class="stats-table-wrap"><table class="stats-table"><thead><tr><th>Inicio detectado</th><th>Categoría</th><th>Pico muestreado</th><th>Muestras</th></tr></thead><tbody>';
+  rows.slice(0,12).forEach(v=>out+='<tr><td>'+(v.started_at?new Date(v.started_at).toLocaleString('es-AR'):'—')+'</td><td>'+escapeStatsHtml(v.game)+'</td><td class="num">'+statsNumber(v.peak,0)+'</td><td class="num">'+v.samples+'</td></tr>');
+  out+='</tbody></table></div>';
+ }else out+='<p class="stats-muted">Todavía no se detectaron sesiones en la ventana disponible.</p>';
+ out+='<div class="stats-note">Las horas y picos de esta sección son observaciones/estimaciones propias del muestreo. No sustituyen las métricas oficiales del panel de creador de Twitch ni reconstruyen directos anteriores al inicio de la recolección.</div></section>';
+ return out;
+}
+function renderStatsDashboard(hero,helix,sully){
+ let out='<div class="stats-dashboard">';
+ out+='<div class="stats-source-head"><div><strong>ARCHIVO DE RENDIMIENTO · '+escapeStatsHtml(hero.name)+'</strong><br><small>Ficha individual · cada fuente conserva su propio período y metodología</small></div></div>';
+ if(hero.youtube){
+  out+='<section class="stats-section"><h4>YOUTUBE · CANAL DEL CREADOR</h4><p class="stats-section-intro">Las métricas de YouTube se incorporarán por separado cuando haya una fuente pública verificable. No se mezclan con Twitch.</p><div class="stats-empty"><strong>Datos pendientes de verificación</strong>Canal: <a class="stats-link" href="'+escapeStatsHtml(hero.youtube)+'" target="_blank" rel="noopener">patoteexplica ↗</a></div></section>';
  }else{
-  lines.push('Todavía no hay filas de transmisiones verificadas para este integrante.');
+  out+=renderHelixDashboard(helix);
+  out+=renderSullyStats(sully);
  }
- (channel.notes||[]).forEach(n=>lines.push('Nota: '+n));
- return lines.join('\\n');
+ out+='</div>';return out;
+}
+function renderMissionArchive(hero){
+ const key=creatorRecordKey(hero),record=creatorRecordsData?.channels?.[key]||{};
+ const groups=[['HITOS','milestones'],['COLABORACIONES','collaborations'],['DIRECTOS Y CLIPS DESTACADOS','highlights']];
+ let out='<div class="mission-archive"><div class="mission-hero-card"><span class="eyebrow">ARCHIVO OPERATIVO · EXPEDIENTE '+escapeStatsHtml(hero.cardNumber||'—')+'</span><p>'+escapeStatsHtml(hero.log||'Todavía no hay misiones registradas.')+'</p></div>';
+ groups.forEach(([label,field])=>{
+  const items=Array.isArray(record[field])?record[field]:[];
+  out+='<section class="mission-section"><h4>'+label+'</h4>';
+  if(!items.length)out+='<p class="mission-empty">No hay registros verificados cargados en esta sección.</p>';
+  else{
+   out+='<div class="mission-grid">';
+   items.forEach(item=>{
+    out+='<article class="mission-card"><h5>'+escapeStatsHtml(item.title||'Registro sin título')+'</h5>';
+    if(item.date)out+='<p>FECHA · '+statsDate(item.date)+'</p>';
+    if(item.description)out+='<p>'+escapeStatsHtml(item.description)+'</p>';
+    if(item.source)out+='<p>FUENTE · '+escapeStatsHtml(item.source)+'</p>';
+    if(item.url)out+='<a href="'+escapeStatsHtml(item.url)+'" target="_blank" rel="noopener">VER REGISTRO ↗</a>';
+    out+='</article>';
+   });
+   out+='</div>';
+  }
+  out+='</section>';
+ });
+ out+='<p class="stats-muted">Los hitos, colaboraciones y destacados se incorporan únicamente con fecha y fuente comprobable. El archivo de personaje se conserva separado de las métricas de plataforma.</p></div>';
+ return out;
 }
 async function loadSullyGnomeData(){
  try{
@@ -1381,59 +1503,9 @@ function openHeroModal(index) {
                 'PODERES Y HABILIDADES:\n' + (hero.powerSet || hero.powers || 'Pendiente de definir.') + '\n\n' +
                 'RANGO OPERATIVO: ' + (hero.rank || 'PENDIENTE');
             const channelStats=findChannelStats(hero);
-            if(channelStats){
-                const w=channelStats.window||{};
-                document.getElementById('modal-stats-text').innerText =
-                    'FUENTE: '+(instituteStatsData.source||'Twitch Helix API')+'\n'+
-                    'Última sincronización: '+(channelStats.updated_at?new Date(channelStats.updated_at).toLocaleString('es-AR'):'Pendiente')+'\n'+
-                    'Estado actual: '+(channelStats.live?'EN DIRECTO':'OFFLINE')+'\n'+
-                    'Espectadores actuales: '+formatMetric(channelStats.current_viewers,0)+'\n'+
-                    'Categoría actual: '+formatMetric(channelStats.current_game)+'\n'+
-                    'Seguidores: '+formatMetric(channelStats.followers_total,0)+'\n'+
-                    'Nota de seguidores: '+(channelStats.followers_note||'No disponible')+'\n\n'+
-                    'HISTORIAL PROPIO · ÚLTIMOS '+(instituteStatsData.window_days||10)+' DÍAS\n'+
-                    'Muestras registradas: '+formatMetric(w.samples_total,0)+'\n'+
-                    'Muestras en directo: '+formatMetric(w.live_samples,0)+'\n'+
-                    'Directos observados: '+formatMetric(w.streams_observed,0)+'\n'+
-                    'Promedio de espectadores por muestreo: '+formatMetric(w.average_viewers_sampled)+'\n'+
-                    'Pico observado: '+formatMetric(w.peak_viewers_sampled,0)+'\n'+
-                    'Horas en directo observadas: '+formatMetric(w.observed_live_hours)+'\n'+
-                    'Horas vistas estimadas: '+formatMetric(w.estimated_hours_watched)+'\n'+
-                    'Método: '+(w.method||'Muestras periódicas de Twitch Helix.')+'\n\n'+
-                    'Las muestras no equivalen a las métricas oficiales de Twitch Creator Dashboard.';
-            }else{
-                document.getElementById('modal-stats-text').innerText=hero.stats||'Las métricas de esta plataforma se integrarán por separado.';
-            }
-            const evolutionText=renderCreatorEvolution(channelStats);
-            if(evolutionText){
-                document.getElementById('modal-stats-text').innerText += '\n\n' + evolutionText;
-            }
-            const observedStreamsText=renderObservedStreams(channelStats);
-            if(observedStreamsText){
-                const statsNode=document.getElementById('modal-stats-text');
-                statsNode.innerText += '\n\n' + observedStreamsText;
-            }
             const sullyChannel=findSullyChannel(hero);
-            const sullyText=renderSullyStats(sullyChannel);
-            if(sullyText){
-                document.getElementById('modal-stats-text').innerText += '\n\n' + sullyText;
-            }
-            if(hero.youtube){
-                document.getElementById('modal-stats-text').innerText +=
-                    '\n\nPLATAFORMA PRINCIPAL · YOUTUBE\n' +
-                    'Las métricas de suscriptores, visualizaciones y publicaciones se mantendrán separadas de las estadísticas de Twitch. Estado: pendientes de una fuente pública verificable.';
-            }else{
-                document.getElementById('modal-stats-text').innerText +=
-                    '\n\nMÉTRICAS COMPARABLES · ÚLTIMOS 30 DÍAS\n' +
-                    'Fuente: estadísticas propias del canal mediante Twitch Helix.\n' +
-                    'Alcance: actividad y métricas observadas de este integrante; no se incorporan rankings globales ni datos de terceros.';
-            }
-            document.getElementById('modal-log-text').innerText =
-                'ARCHIVO DE PERSONAJE\n' +
-                'Serie: ' + (hero.series || 'Pendiente') + ' · Registro: #' + (hero.cardNumber || '---') + '\n' +
-                'Clasificación: Nivel Alfa · Instituto S3X-MEN\n\n' +
-                (hero.log || 'Sin misiones registradas todavía.');
-            document.getElementById('modal-log-text').innerText += '\n\n' + renderCreatorRecords(hero);
+            document.getElementById('modal-stats-text').innerHTML=renderStatsDashboard(hero,channelStats,sullyChannel);
+            document.getElementById('modal-log-text').innerHTML=renderMissionArchive(hero);
             document.getElementById('modal-twitch-btn').href = hero.youtube || hero.twitch || "#";
             document.getElementById('modal-twitch-btn').textContent = hero.youtube ? "VISITAR CANAL DE YOUTUBE" : "VISITAR CANAL DE TWITCH";
             
