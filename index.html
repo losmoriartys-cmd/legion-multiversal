@@ -1067,6 +1067,91 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
         @media(max-width:650px){.sound-toggle{font-size:.9rem;padding:7px 10px}.header-top{align-items:flex-start}}
         @media(prefers-reduced-motion:reduce){#chapter-transition.play{animation:none!important;transform:translateY(0);opacity:0}.sound-toggle{transition:none}}
 
+    
+        /* Capítulo 02 · Roster con lenguaje visual de novela gráfica */
+        #chapter-2.comic-page {
+            background-color:#0b1020;
+            background-image:
+                radial-gradient(circle at 14% 9%,rgba(0,210,255,.13),transparent 29%),
+                radial-gradient(circle at 88% 82%,rgba(255,42,42,.11),transparent 31%),
+                radial-gradient(rgba(255,255,255,.17) .8px,transparent 1px),
+                linear-gradient(145deg,#111a2b,#100e1c);
+            background-size:auto,auto,9px 9px,auto;
+        }
+        #chapter-2.comic-page::before {
+            opacity:.2;
+            background-image:
+                radial-gradient(rgba(255,255,255,.95) 1px,transparent 1.4px),
+                repeating-linear-gradient(118deg,transparent 0 88px,rgba(0,210,255,.075) 89px 91px,transparent 92px 178px);
+            background-size:8px 8px,auto;
+        }
+        #chapter-2.comic-page::after {
+            opacity:.42;
+            background:
+                radial-gradient(ellipse at 12% 12%,rgba(0,210,255,.17),transparent 34%),
+                radial-gradient(ellipse at 88% 76%,rgba(255,42,42,.12),transparent 36%),
+                linear-gradient(132deg,transparent 0 47%,rgba(255,255,255,.025) 48% 49%,transparent 50% 100%);
+        }
+        #chapter-2 .institute-banner,
+        #chapter-2 .roster-section,
+        #chapter-2 #roster-home,
+        #chapter-2 .comic-title,
+        #chapter-2 .hero-profile-page { position:relative;z-index:1; }
+        #chapter-2 .roster-portrait-card {
+            position:relative;
+            transform-style:preserve-3d;
+            transition:transform .32s cubic-bezier(.2,.75,.25,1),border-color .25s ease,box-shadow .32s ease;
+        }
+        #chapter-2 .roster-portrait-card::after {
+            content:"";
+            position:absolute;
+            inset:0;
+            z-index:2;
+            pointer-events:none;
+            opacity:0;
+            background:linear-gradient(112deg,transparent 22%,rgba(255,255,255,.04) 38%,rgba(0,210,255,.2) 48%,rgba(255,255,255,.08) 54%,transparent 70%);
+            transform:translateX(-115%);
+        }
+        #chapter-2 .roster-portrait-card:hover,
+        #chapter-2 .roster-portrait-card:focus-visible {
+            transform:perspective(900px) rotateX(2deg) rotateY(-2deg) translateY(-7px);
+            border-color:#00d2ff;
+            box-shadow:0 0 0 2px rgba(0,210,255,.14),0 12px 28px rgba(0,0,0,.48),9px 9px 0 #000;
+        }
+        #chapter-2 .roster-portrait-card:hover::after,
+        #chapter-2 .roster-portrait-card:focus-visible::after {
+            opacity:1;
+            animation:rosterCardShine .85s ease-out;
+        }
+        @keyframes rosterCardShine { to { transform:translateX(115%); } }
+        #chapter-2 .roster-portrait-wrap img { transition:transform .45s ease,filter .35s ease; }
+        #chapter-2 .roster-portrait-card:hover .roster-portrait-wrap img { transform:scale(1.055);filter:saturate(1.12) contrast(1.04); }
+        #chapter-2 .hero-profile-card {
+            transform-origin:center;
+            animation:heroCardFloat 5.8s ease-in-out infinite;
+            transition:filter .3s ease,transform .3s ease,box-shadow .3s ease;
+            box-shadow:0 0 0 2px rgba(0,210,255,.18),9px 10px 0 #000,0 0 24px rgba(0,210,255,.13);
+        }
+        #chapter-2 .hero-profile-card:hover {
+            animation-play-state:paused;
+            transform:perspective(1000px) rotateY(-3deg) rotateX(2deg) scale(1.018);
+            filter:drop-shadow(0 0 12px rgba(0,210,255,.28));
+        }
+        @keyframes heroCardFloat {
+            0%,100% { transform:translateY(0) rotate(-.35deg); }
+            50% { transform:translateY(-6px) rotate(.35deg); }
+        }
+        @media(prefers-reduced-motion:reduce) {
+            #chapter-2 .hero-profile-card { animation:none!important; }
+            #chapter-2 .roster-portrait-card,
+            #chapter-2 .roster-portrait-wrap img { transition:none!important; }
+            #chapter-2 .roster-portrait-card:hover,
+            #chapter-2 .roster-portrait-card:focus-visible,
+            #chapter-2 .hero-profile-card:hover { transform:none!important; }
+            #chapter-2 .roster-portrait-card:hover::after,
+            #chapter-2 .roster-portrait-card:focus-visible::after { animation:none!important; }
+        }
+
     </style>
 </head>
 <body>
@@ -1195,7 +1280,7 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
 </section>
 
         <!-- CAPÍTULO 2: ROSTER -->
-        <section id="chapter-2" class="chapter-panel">
+        <section id="chapter-2" class="chapter-panel comic-page">
             <div class="chapter-tag">CAPÍTULO 02</div>
             <h2 class="comic-title">LEGIÓN MULTIVERSAL — NUESTRO ROSTER</h2>
             <div class="institute-banner"><div class="institute-stamp">ARCHIVO<br>DE LA LEGIÓN</div><div><h3>UN LUGAR PARA CADA TALENTO EXTRAORDINARIO</h3><p>Una comunidad de creadores con identidades y especialidades diferentes. Cada integrante tiene un expediente propio y un lugar dentro de este universo compartido.</p></div></div>
@@ -2074,13 +2159,14 @@ function openHeroModal(index) {
     document.getElementById('modal-twitch-btn').href = hero.youtube || hero.twitch || "#";
     document.getElementById('modal-twitch-btn').textContent = hero.youtube ? "VISITAR CANAL DE YOUTUBE" : "VISITAR CANAL";
     document.getElementById('hero-modal').classList.add('active');
-    switchModalTab(0);
+    switchModalTab(0, true);
 }
         function closeModal() {
             document.getElementById('hero-modal').classList.remove('active');
         }
 
-        function switchModalTab(tabIndex) {
+        function switchModalTab(tabIndex, silent = false) {
+            const previousIndex = Array.from(document.querySelectorAll('.modal-tab-btn')).findIndex(button => button.classList.contains('active'));
             for (let t = 0; t < 3; t++) {
                 const pane = document.getElementById(`modal-pane-${t}`);
                 const btn = document.querySelectorAll('.modal-tab-btn')[t];
@@ -2091,6 +2177,7 @@ function openHeroModal(index) {
             const activeBtn = document.querySelectorAll('.modal-tab-btn')[tabIndex];
             if (activePane) activePane.classList.add('active');
             if (activeBtn) activeBtn.classList.add('active');
+            if (!silent && previousIndex >= 0 && previousIndex !== tabIndex) playPageTurnCue();
         }
 
         /* Identidad sonora: lounge jazz heroico, original y sintetizado en Web Audio.
@@ -2179,6 +2266,31 @@ function openHeroModal(index) {
             // Acorde maj7 suave, como una pequeña firma de entrada.
             [392.00,493.88,587.33,659.25].forEach((note,index)=>jazzVoice(note,.72,now+index*.025,.018,'sine',1700,.16));
         }
+        function playPageTurnCue(){
+            if(!arcadeAudioContext || arcadeAudioContext.state !== 'running') return;
+            const now=arcadeAudioContext.currentTime;
+            const length=Math.floor(arcadeAudioContext.sampleRate*.24);
+            const buffer=arcadeAudioContext.createBuffer(1,length,arcadeAudioContext.sampleRate);
+            const samples=buffer.getChannelData(0);
+            for(let i=0;i<length;i++){
+                const fade=1-i/length;
+                samples[i]=(Math.random()*2-1)*fade;
+            }
+            const source=arcadeAudioContext.createBufferSource();
+            const filter=arcadeAudioContext.createBiquadFilter();
+            const gain=arcadeAudioContext.createGain();
+            source.buffer=buffer;
+            filter.type='bandpass';
+            filter.frequency.setValueAtTime(1550,now);
+            filter.frequency.exponentialRampToValueAtTime(620,now+.22);
+            filter.Q.value=.65;
+            gain.gain.setValueAtTime(.0001,now);
+            gain.gain.linearRampToValueAtTime(.028,now+.035);
+            gain.gain.exponentialRampToValueAtTime(.0001,now+.23);
+            source.connect(filter);filter.connect(gain);gain.connect(arcadeAudioContext.destination);
+            source.start(now);source.stop(now+.25);
+        }
+
         function switchChapter(chapterNum) {
             const panel=document.getElementById(`chapter-${chapterNum}`);
             if(!panel)return;
