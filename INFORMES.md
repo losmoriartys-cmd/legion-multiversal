@@ -172,3 +172,21 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Pendientes / riesgos:** comprobar el despliegue de GitHub Pages.
 - **Commit:** se registra en el commit de esta intervención.
 - **Despliegue:** pendiente de verificación.
+
+
+## 2026-11-04 — Evolución de creadores y registros verificables
+
+- **Alcance:** ampliar la telemetría propia de Twitch a una ventana móvil de 30 días y separar el historial real del lore narrativo.
+- **Archivos modificados:**
+  - `update_stats.py`: retención de muestras ampliada de 10 a 30 días; cálculo de categorías/juegos más observados y actividad diaria.
+  - `index.html`: la página de estadísticas del expediente presenta ranking de categorías por muestras y evolución diaria observada; la página de trayectoria distingue hitos, colaboraciones y directos/clips destacados.
+  - `creator-records.json`: nueva base estructurada para cargar hitos, colaboraciones y destacados con fecha, descripción, URL y fuente.
+- **Criterios de medición:** el ranking de juegos usa cantidad de muestras en directo, no horas jugadas. La actividad diaria se etiqueta en UTC. La ventana local de 30 días se irá completando desde este cambio y no reconstruye muestras anteriores a los últimos 10 días conservados.
+- **Fuentes:** Twitch Helix para estado en vivo y muestreo propio; Streams Charts queda como integración histórica independiente pendiente de credenciales.
+- **Streams Charts:** API oficial autenticada con Client-ID y Token; las consultas se miden en créditos. El endpoint estándar de canal devuelve el resumen de los últimos 30 días y cuesta 1 crédito por canal según la documentación vigente. No se habilita consumo automático de créditos sin credenciales y aprobación del presupuesto.
+- **Pendiente editorial:** cargar hitos, colaboraciones y enlaces destacados confirmados por cada creador; los arreglos JSON se inicializan vacíos intencionalmente para no inventar logros.
+- **Validación:** pendiente verificar ejecución de GitHub Actions y despliegue de Pages tras los commits.
+- **Commit del colector:** [`bcc73dfa`](https://github.com/losmoriartys-cmd/s3xmen/commit/bcc73dfaa253a9b6cb8cfa3779535aaae7ea9b6a).
+- **Commit de UI de evolución:** [`2403b741`](https://github.com/losmoriartys-cmd/s3xmen/commit/2403b7410584e3b93ad2105c3bdff714af4d58d3).
+- **Commit de trayectoria:** [`06ffda1f`](https://github.com/losmoriartys-cmd/s3xmen/commit/06ffda1f52cea07e1bdfe95bf2ebce5db145bbfa).
+- **Commit de base editorial:** [`3b3f905b`](https://github.com/losmoriartys-cmd/s3xmen/commit/3b3f905b1132b6881370c774ba1987f6ed653ab7).
