@@ -2043,33 +2043,66 @@ function openHeroModal(index) {
             if (activeBtn) activeBtn.classList.add('active');
         }
 
-        /* Identidad sonora original: chiptune sintetizado en el navegador.
-           No descarga audio, no usa material comercial y nunca arranca sin interacción. */
+        /* Identidad sonora: lounge jazz heroico, original y sintetizado en Web Audio.
+           Rhodes cálido, bajo redondo y percusión tipo escobillas. Sin pistas externas ni autoplay. */
         let arcadeAudioContext = null;
         let arcadeAudioTimer = null;
-        let arcadeStep = 0;
-        const arcadeTempo = 112;
-        const arcadeMelody = [523.25,659.25,783.99,659.25,587.33,698.46,880,698.46,523.25,659.25,783.99,1046.5,880,783.99,659.25,587.33];
-        function arcadeTone(frequency, duration, type, volume, when) {
+        let jazzStep = 0;
+        const jazzTempo = 76;
+        const jazzBeatMs = 60000 / jazzTempo;
+        const jazzProgression = [
+            { chord:[130.81,164.81,196.00,246.94,293.66], bass:65.41, color:[523.25,587.33,659.25,783.99] }, // Cmaj9
+            { chord:[110.00,130.81,164.81,196.00,246.94], bass:55.00, color:[493.88,587.33,659.25,783.99] }, // Am9
+            { chord:[146.83,174.61,220.00,261.63,329.63], bass:73.42, color:[523.25,587.33,698.46,783.99] }, // Dm9
+            { chord:[130.81,164.81,196.00,233.08,293.66], bass:65.41, color:[493.88,587.33,659.25,783.99] }  // G13
+        ];
+        function jazzVoice(frequency,duration,when,volume,wave='sine',cutoff=1800,attack=.12){
             if(!arcadeAudioContext)return;
             const osc=arcadeAudioContext.createOscillator();
+            const filter=arcadeAudioContext.createBiquadFilter();
             const gain=arcadeAudioContext.createGain();
-            osc.type=type;
-            osc.frequency.setValueAtTime(frequency,when);
-            gain.gain.setValueAtTime(0.0001,when);
-            gain.gain.exponentialRampToValueAtTime(volume,when+0.012);
-            gain.gain.exponentialRampToValueAtTime(0.0001,when+duration);
-            osc.connect(gain);gain.connect(arcadeAudioContext.destination);
-            osc.start(when);osc.stop(when+duration+0.025);
+            osc.type=wave;osc.frequency.setValueAtTime(frequency,when);
+            filter.type='lowpass';filter.frequency.setValueAtTime(cutoff,when);filter.Q.value=.55;
+            gain.gain.setValueAtTime(.0001,when);
+            gain.gain.exponentialRampToValueAtTime(volume,when+attack);
+            gain.gain.setValueAtTime(volume,Math.max(when+attack,when+duration-.22));
+            gain.gain.exponentialRampToValueAtTime(.0001,when+duration);
+            osc.connect(filter);filter.connect(gain);gain.connect(arcadeAudioContext.destination);
+            osc.start(when);osc.stop(when+duration+.03);
+        }
+        function jazzBrush(when){
+            if(!arcadeAudioContext)return;
+            const length=Math.floor(arcadeAudioContext.sampleRate*.19);
+            const buffer=arcadeAudioContext.createBuffer(1,length,arcadeAudioContext.sampleRate);
+            const data=buffer.getChannelData(0);
+            for(let i=0;i<length;i++)data[i]=(Math.random()*2-1)*(1-i/length);
+            const source=arcadeAudioContext.createBufferSource();
+            const filter=arcadeAudioContext.createBiquadFilter();
+            const gain=arcadeAudioContext.createGain();
+            source.buffer=buffer;filter.type='bandpass';filter.frequency.value=3400;filter.Q.value=.7;
+            gain.gain.setValueAtTime(.0001,when);gain.gain.linearRampToValueAtTime(.012,when+.025);gain.gain.exponentialRampToValueAtTime(.0001,when+.18);
+            source.connect(filter);filter.connect(gain);gain.connect(arcadeAudioContext.destination);
+            source.start(when);source.stop(when+.2);
         }
         function playArcadeStep(){
-            if(!arcadeAudioContext)return;
+            if(!arcadeAudioContext||arcadeAudioContext.state!=='running')return;
             const now=arcadeAudioContext.currentTime;
-            const note=arcadeMelody[arcadeStep%arcadeMelody.length];
-            if(arcadeStep%4!==3)arcadeTone(note,.105,'square',.035,now);
-            if(arcadeStep%4===0)arcadeTone(note/4,.28,'triangle',.055,now);
-            if(arcadeStep%8===0)arcadeTone(110,.055,'sawtooth',.018,now);
-            arcadeStep++;
+            const step=jazzStep%16;
+            const bar=Math.floor(jazzStep/16)%jazzProgression.length;
+            const harmony=jazzProgression[bar];
+            if(step===0){
+                harmony.chord.forEach((note,index)=>jazzVoice(note,3.65,now,.012,index===0?'triangle':'sine',1250,.55));
+                jazzVoice(harmony.bass,1.25,now,.075,'triangle',420,.08);
+            }
+            if(step===8)jazzVoice(harmony.bass*1.5,.72,now,.045,'triangle',500,.08);
+            if(step===4||step===12)jazzBrush(now);
+            // Motivo breve y espaciado: color de aventura, sin sonar a alarma de videojuego.
+            const phrases={2:0,5:2,9:1,11:3,14:2};
+            if(Object.prototype.hasOwnProperty.call(phrases,step)){
+                const note=harmony.color[phrases[step]];
+                jazzVoice(note,.48,now,.025,'sine',2200,.035);
+            }
+            jazzStep++;
         }
         async function toggleArcadeSound(){
             const button=document.getElementById('sound-toggle');
@@ -2085,16 +2118,16 @@ function openHeroModal(index) {
                 if(!AudioContextClass){button.textContent='AUDIO NO DISPONIBLE';return;}
                 if(!arcadeAudioContext)arcadeAudioContext=new AudioContextClass();
                 await arcadeAudioContext.resume();
-                arcadeStep=0;playArcadeStep();
-                arcadeAudioTimer=window.setInterval(playArcadeStep,60000/arcadeTempo/4);
-                button.textContent='♫ SONIDO: ON';button.setAttribute('aria-pressed','true');
+                jazzStep=0;playArcadeStep();
+                arcadeAudioTimer=window.setInterval(playArcadeStep,jazzBeatMs/2);
+                button.textContent='♫ JAZZ MODE: ON';button.setAttribute('aria-pressed','true');
             }catch(error){button.textContent='AUDIO NO DISPONIBLE';}
         }
         function playChapterCue(){
             if(!arcadeAudioContext||arcadeAudioContext.state!=='running')return;
             const now=arcadeAudioContext.currentTime;
-            arcadeTone(659.25,.07,'square',.045,now);
-            arcadeTone(987.77,.11,'square',.035,now+.075);
+            // Acorde maj7 suave, como una pequeña firma de entrada.
+            [392.00,493.88,587.33,659.25].forEach((note,index)=>jazzVoice(note,.72,now+index*.025,.018,'sine',1700,.16));
         }
         function switchChapter(chapterNum) {
             const panel=document.getElementById(`chapter-${chapterNum}`);
