@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "source": "TwitchMetrics",
+  "captured_at": "2026-11-04",
+  "methodology": "Transcripción de métricas públicas visibles en los perfiles de TwitchMetrics. Ventana de 30 días indicada por la plataforma. Los directos recientes son una muestra visible, no necesariamente el historial completo; TwitchMetrics indica que registra transmisiones con más de 10 espectadores. No combinar con SullyGnome ni Twitch Helix.",
+  "channels": {
+    "ladymoriarty01": {
+      "display_name": "LADYMORIARTY01",
+      "source_url": "https://www.twitchmetrics.net/c/710295249-ladymoriarty01",
+      "period_label": "5 oct 2026 – 4 nov 2026",
+      "metrics": {
+        "followers": 180,
+        "follower_change": 17,
+        "viewer_hours": 59,
+        "peak_viewers": 33,
+        "hours_live": 3,
+        "average_viewers": 19
+      },
+      "recent_streams": [
+        {
+          "date_label": "6 oct 2026",
+          "duration_label": "2 h",
+          "average_viewers": 17,
+          "peak_viewers": 19,
+          "games": [
+            {
+              "name": "Assassin's Creed Odyssey",
+              "share": "75%"
+            },
+            {
+              "name": "911 Dispatcher: Unknown Caller",
+              "share": "25%"
+            }
+          ]
+        }
+      ],
+      "commercial_read": "En la ventana consultada se registran 59 horas vistas, un pico de 33 espectadores y una variación de +17 seguidores. El directo visible del 6 de octubre promedió 17 espectadores y alcanzó un pico de 19. La muestra pública es acotada y no representa por sí sola todo el historial del canal."
+    },
+    "ther0d3r1k": {
+      "display_name": "TheR0D3R1K",
+      "source_url": "https://www.twitchmetrics.net/c/518856416-ther0d3r1k",
+      "period_label": "5 oct 2026 – 4 nov 2026",
+      "metrics": {
+        "followers": 5188,
+        "follower_change": 63,
+        "viewer_hours": 2073,
+        "peak_viewers": 78,
+        "hours_live": 75,
+        "average_viewers": 27
+      },
+      "recent_streams": [
+        {
+          "date_label": "24 oct 2026",
+          "duration_label": "5 h",
+          "average_viewers": 29,
+          "peak_viewers": 51,
+          "games": [
+            {
+              "name": "Fortnite",
+              "share": "42%"
+            },
+            {
+              "name": "Counter-Strike",
+              "share": "39%"
+            },
+            {
+              "name": "Just Chatting",
+              "share": "19%"
+            }
+          ]
+        },
+        {
+          "date_label": "22 oct 2026",
+          "duration_label": "3 h",
+          "average_viewers": 22,
+          "peak_viewers": 33,
+          "games": [
+            {
+              "name": "Luto",
+              "share": "50%"
+            },
+            {
+              "name": "Just Chatting",
+              "share": "50%"
+            }
+          ]
+        },
+        {
+          "date_label": "21 oct 2026",
+          "duration_label": "4 h",
+          "average_viewers": 25,
+          "peak_viewers": 47,
+          "games": [
+            {
+              "name": "Just Chatting",
+              "share": "100%"
+            }
+          ]
+        },
+        {
+          "date_label": "20 oct 2026",
+          "duration_label": "3 h",
+          "average_viewers": 25,
+          "peak_viewers": 50,
+          "games": [
+            {
+              "name": "Just Chatting",
+              "share": "67%"
+            },
+            {
+              "name": "Luto",
+              "share": "33%"
+            }
+          ]
+        },
+        {
+          "date_label": "19 oct 2026",
+          "duration_label": "3 h",
+          "average_viewers": 33,
+          "peak_viewers": 47,
+          "games": [
+            {
+              "name": "Alien: Isolation",
+              "share": "53%"
+            },
+            {
+              "name": "Fortnite",
+              "share": "42%"
+            },
+            {
+              "name": "Just Chatting",
+              "share": "5%"
+            }
+          ]
+        }
+      ],
+      "commercial_read": "En la ventana consultada se registran 2.073 horas vistas, 75 horas en directo, un promedio de 27 espectadores y un pico de 78. La variación publicada es de +63 seguidores. En los cinco directos recientes visibles, los promedios oscilaron entre 22 y 33 espectadores; las categorías cambian entre sesiones, con presencia de Fortnite, Counter-Strike, Luto, Alien: Isolation y Just Chatting."
+    }
+  }
+}
