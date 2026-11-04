@@ -319,6 +319,17 @@
 
         /* Piloto de estadísticas: expediente conjunto Los Moriartys */
         .pilot-stats { display:flex; flex-direction:column; gap:16px; }
+        .pilot-stats .pilot-subsection{display:flex;flex-direction:column;gap:10px;padding-top:8px;border-top:1px solid #2b3a50}
+        .pilot-stats .pilot-game-empty{display:grid;grid-template-columns:145px minmax(0,1fr);align-items:center;gap:18px;background:#080e18;border:1px solid #2b3a50;padding:16px}
+        .pilot-stats .pilot-empty-donut{width:126px;height:126px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(#364357 0 100%);position:relative}
+        .pilot-stats .pilot-empty-donut:before{content:'';position:absolute;inset:13px;border-radius:50%;background:#080e18}
+        .pilot-stats .pilot-empty-donut span{position:relative;display:flex;flex-direction:column;align-items:center}
+        .pilot-stats .pilot-empty-donut strong{color:#fff;font:1.8rem 'Bangers',cursive}
+        .pilot-stats .pilot-empty-donut small{color:#9aa9bf;font-size:.55rem}
+        .pilot-stats .pilot-game-copy strong{color:#ffdf65;font-family:'Bangers',cursive;font-size:1.2rem}
+        .pilot-stats .pilot-game-copy p{color:#aebbd0;font-size:.76rem;line-height:1.55;margin:5px 0 10px}
+        .pilot-stats .pilot-table{min-width:620px}
+        @media(max-width:520px){.pilot-stats .pilot-game-empty{grid-template-columns:1fr;justify-items:center;text-align:center}}
         .pilot-stats .pilot-summary { display:grid; grid-template-columns:repeat(auto-fit,minmax(145px,1fr)); gap:9px; margin:14px 0; }
         .pilot-stats .pilot-metric { background:linear-gradient(145deg,#172438,#080e18); border:1px solid #34445c; border-top:2px solid var(--yellow-accent); padding:13px; min-width:0; }
         .pilot-stats .pilot-metric span { display:block; color:#9aa9bf; font-size:.68rem; font-weight:800; letter-spacing:.6px; text-transform:uppercase; }
@@ -1621,24 +1632,22 @@ function renderStatsBars(title,items,labelFn,valueFn,suffix,maxItems=10){
  return out+'</div>';
 }
 function renderLosMoriartysSullyPilot(channel){
- const x=channel.summary||{}, streams=Array.isArray(channel.streams)?channel.streams:[];
- const period=channel.period&&channel.period.start_date?statsDate(channel.period.start_date)+' — '+statsDate(channel.period.end_date):'Período no disponible';
- const minutes=Number(x.airtime_minutes);
- const airtime=Number.isFinite(minutes)?Math.floor(minutes/60)+' h '+(minutes%60)+' min':'No disponible';
- let out='<section class="stats-section pilot-stats"><div class="stats-source-head"><div><strong>HISTORIAL DE TRANSMISIONES · SULLYGNOME</strong><br><small>Datos históricos externos · canal conjunto</small></div><span class="stats-status partial">REGISTRO PARCIAL</span></div>';
- out+='<p class="stats-section-intro">Período cubierto: '+period+' · <a class="stats-link" href="'+escapeStatsHtml(channel.source_url)+'" target="_blank" rel="noopener">Consultar fuente original ↗</a></p>';
- out+='<div class="pilot-summary">';
- [['DIRECTOS',statsNumber(x.streams_count,0),'9 transmisiones registradas'],['HORAS VISTAS',statsNumber(x.hours_watched,0),'consumo acumulado'],['TIEMPO EN VIVO',airtime,'duración emitida'],['PROMEDIO',statsNumber(x.average_viewers_duration_weighted,1),'espectadores · ponderado'],['PICO',statsNumber(x.peak_viewers,0),'máximo del período']].forEach(k=>out+='<div class="pilot-metric"><span>'+k[0]+'</span><strong>'+k[1]+'</strong><small>'+k[2]+'</small></div>');
- out+='</div>';
- out+='<div class="pilot-subhead"><h5>HORAS VISTAS POR TRANSMISIÓN</h5><small>Comparación entre los registros recibidos</small></div>';
- out+=renderStatsBars('CONSUMO POR DIRECTO',streams.slice().reverse(),v=>statsDate(v.date),v=>v.hours_watched,'horas vistas',20);
- if(streams.length){
-  out+='<div class="pilot-subhead"><h5>DETALLE DE TRANSMISIONES</h5><small>'+streams.length+' filas disponibles · ordenadas por fecha de fuente</small></div><div class="stats-table-wrap"><table class="stats-table pilot-table"><thead><tr><th>Fecha</th><th>Duración</th><th>Promedio</th><th>Pico</th><th>Horas vistas</th></tr></thead><tbody>';
-  streams.forEach(v=>out+='<tr><td>'+statsDate(v.date)+'</td><td>'+statsDuration(v)+'</td><td class="num">'+statsNumber(v.average_viewers,0)+'</td><td class="num">'+statsNumber(v.peak_viewers,0)+'</td><td class="num">'+statsNumber(v.hours_watched,1)+'</td></tr>');
-  out+='</tbody></table></div>';
- }else out+='<div class="stats-empty"><strong>Sin filas disponibles</strong>El historial todavía no tiene transmisiones verificadas.</div>';
- out+='<div class="pilot-callout warning"><strong>Alcance del dato.</strong> Este registro contiene 9 transmisiones recibidas para el período indicado; no debe interpretarse como historial completo de toda la trayectoria. El promedio es un cálculo ponderado por duración. La columna original de seguidores se omite hasta confirmar su interpretación.</div>';
- out+='<div class="pilot-callout"><strong>Juegos y categorías.</strong> La exportación histórica disponible no incluye desglose por juego. Preferimos dejar este análisis pendiente antes que asignar categorías o porcentajes sin evidencia.</div></section>';
+ const x=channel.summary||{}, rows=Array.isArray(channel.streams)?channel.streams:[];
+ const period=channel.period?statsDate(channel.period.start_date)+' — '+statsDate(channel.period.end_date):'No disponible';
+ const mins=Number(x.airtime_minutes);
+ const airtime=Number.isFinite(mins)?Math.floor(mins/60)+' h '+(mins%60)+' min':'No disponible';
+ let out='<section class="stats-section pilot-stats"><div class="stats-source-head"><div><strong>AUDIENCIA Y RENDIMIENTO · SULLYGNOME</strong><br><small>Historial externo · canal conjunto</small></div><span class="stats-status partial">REGISTRO PARCIAL</span></div><p class="stats-section-intro">Período: '+period+' · <a class="stats-link" href="'+escapeStatsHtml(channel.source_url)+'" target="_blank" rel="noopener">Abrir fuente ↗</a></p>';
+ out+='<section class="pilot-subsection"><div class="pilot-subhead"><h5>01 · JUEGOS Y CATEGORÍAS POPULARES</h5><small>Distribución por horas emitidas</small></div><div class="pilot-game-empty"><div class="pilot-empty-donut"><span><strong>—</strong><small>SIN DESGLOSE</small></span></div><div class="pilot-game-copy"><strong>Distribución pendiente</strong><p>Las filas históricas no identifican el juego de cada transmisión. No es posible calcular porcentajes ni ordenar categorías.</p><span class="stats-status pending">DATOS NO DISPONIBLES</span></div></div><div class="stats-table-wrap"><table class="stats-table pilot-table"><thead><tr><th>Juego</th><th>Horas emitidas</th><th>Promedio</th><th>Pico</th><th>Horas vistas</th></tr></thead><tbody><tr><td colspan="5">Pendiente de un desglose verificable por juego.</td></tr></tbody></table></div></section>';
+ out+='<section class="pilot-subsection"><div class="pilot-subhead"><h5>02 · DATOS HISTÓRICOS · LIFETIME</h5><small>Acumulados de toda la trayectoria</small></div><div class="stats-table-wrap"><table class="stats-table pilot-table"><thead><tr><th>Indicador</th><th>Valor</th><th>Alcance</th></tr></thead><tbody>';
+ [['Seguidores totales','No disponible','Helix no autorizó este dato'],['Pico histórico','No disponible','Pico del período: '+statsNumber(x.peak_viewers,0)],['Promedio histórico','No disponible','Solo hay promedio del período'],['Horas transmitidas históricas','No disponible','Historial parcial disponible'],['Días activos históricos','No disponible','Sin conteo lifetime verificado'],['Bloqueos / bans','No disponible','Sin dato verificable']].forEach(v=>out+='<tr><th>'+v[0]+'</th><td>'+v[1]+'</td><td>'+v[2]+'</td></tr>');
+ out+='</tbody></table></div><p class="stats-note">No se presentan como lifetime las métricas parciales de octubre y noviembre.</p></section>';
+ out+='<section class="pilot-subsection"><div class="pilot-subhead"><h5>03 · RENDIMIENTO DEL PERÍODO</h5><small>Resumen de las transmisiones recibidas</small></div><div class="pilot-summary">';
+ [['DIRECTOS',statsNumber(x.streams_count,0),'registros disponibles'],['HORAS VISTAS',statsNumber(x.hours_watched,0),'acumulado'],['TIEMPO TRANSMITIDO',airtime,'duración emitida'],['PROMEDIO',statsNumber(x.average_viewers_duration_weighted,1),'ponderado por duración'],['PICO',statsNumber(x.peak_viewers,0),'máximo del período']].forEach(v=>out+='<div class="pilot-metric"><span>'+v[0]+'</span><strong>'+v[1]+'</strong><small>'+v[2]+'</small></div>');
+ out+='</div><div class="pilot-subhead"><h5>HORAS VISTAS POR DIRECTO</h5><small>'+rows.length+' transmisiones registradas</small></div>'+renderStatsBars('CONSUMO POR TRANSMISIÓN',rows.slice().reverse(),v=>statsDate(v.date),v=>v.hours_watched,'horas vistas',20);
+ out+='<div class="stats-table-wrap"><table class="stats-table pilot-table"><thead><tr><th>Fecha</th><th>Juego</th><th>Horas emitidas</th><th>Promedio</th><th>Pico</th><th>Horas vistas</th></tr></thead><tbody>';
+ rows.forEach(v=>out+='<tr><td>'+statsDate(v.date)+'</td><td>No informado</td><td>'+statsDuration(v)+'</td><td class="num">'+statsNumber(v.average_viewers,0)+'</td><td class="num">'+statsNumber(v.peak_viewers,0)+'</td><td class="num">'+statsNumber(v.hours_watched,1)+'</td></tr>');
+ out+='</tbody></table></div><p class="stats-note">No se muestra variación porcentual porque no hay otro período equivalente para comparar. El promedio 22,8 es un cálculo ponderado por duración.</p></section>';
+ out+='<div class="pilot-callout warning"><strong>Alcance:</strong> '+rows.length+' transmisiones entre '+period+'. No representa toda la trayectoria. Se omite la columna original “Seguidores” porque su significado no está confirmado.</div></section>';
  return out;
 }
 function renderSullyStats(channel){
