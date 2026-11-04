@@ -158,3 +158,17 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Commit del informe:** se agrega este registro en el commit actual.
 - **Ajuste posterior:** [`50fc5b79`](https://github.com/losmoriartys-cmd/s3xmen/commit/50fc5b79b116669d1e71079d716b76f58367a8e0) — Oratoris conserva un bloque de métricas de YouTube independiente; no se le aplica la fuente ni la ventana de Twitch.
 - **Despliegue:** pendiente de verificación.
+
+
+## 2026-11-04 — Asignar número de expediente único a Dave — Nexus
+
+- **Responsable:** ChatGPT + equipo Los Moriartys.
+- **Objetivo:** eliminar la duplicación del número de expediente dentro del roster.
+- **Archivos modificados:**
+  - `index.html`: se actualizó únicamente el número de expediente de Dave — Nexus.
+  - `INFORMES.md`: registro de esta intervención.
+- **Implementado:** Dave — Nexus pasa del expediente `#047` al `#048`. Se conserva `#047` para MORIARTYS. No se modificaron la imagen `nexus_dark.webp`, los poderes, la serie ni otros datos de los integrantes.
+- **Validaciones y resultados:** se revisaron los diez registros de `heroesData`; los números quedan únicos: #047, #008, #025, #038, #037, #024, #090, #048, #039 y #007.
+- **Pendientes / riesgos:** comprobar el despliegue de GitHub Pages.
+- **Commit:** se registra en el commit de esta intervención.
+- **Despliegue:** pendiente de verificación.
