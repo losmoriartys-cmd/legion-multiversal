@@ -559,3 +559,13 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Pendiente de prueba:** escuchar el resultado en navegador real, comprobar niveles y compatibilidad de Web Audio API en escritorio/móvil y revisar el workflow de GitHub Pages. La implementación evita autoplay, pero la experiencia sonora debe calibrarse con escucha real.
 - **Commit de interfaz:** `01668723c26abdd75368ac3216e8774919586d50` — https://github.com/losmoriartys-cmd/s3xmen/commit/01668723c26abdd75368ac3216e8774919586d50
 - **Despliegue:** sujeto al workflow de GitHub Pages asociado al commit.
+
+## 2026-11-04 — Revisión de identidad sonora: lounge jazz superheroico
+
+- **Motivo:** la primera melodía chiptune se percibía demasiado simple y con energía de arcade clásico; se reemplazó por una atmósfera más cálida, relajada y cinematográfica.
+- **Dirección musical:** lounge jazz / jazz de cómic y aventura; tempo moderado (76 BPM), acordes extendidos maj9, m9 y 13, colchón armónico tipo Rhodes, bajo redondo, percusión sutil tipo escobillas y pequeñas frases melódicas.
+- **Navegación:** el efecto de cambio de expediente se sustituyó por un acorde maj7 suave, integrado en la misma paleta sonora.
+- **Implementación:** composición generativa original mediante Web Audio API; no utiliza canciones, samples ni archivos externos. Se mantiene el inicio manual, apagado por defecto y el control de silencio.
+- **Criterio de mezcla:** volúmenes deliberadamente discretos para funcionar como ambiente y no competir con la lectura. Pendiente de escucha y calibración final en navegador y dispositivos reales.
+- **Archivo:** `index.html`.
+- **Commit:** `51ec264f44d98cc44763bfb307cbcb92fe8c0142` — https://github.com/losmoriartys-cmd/s3xmen/commit/51ec264f44d98cc44763bfb307cbcb92fe8c0142
