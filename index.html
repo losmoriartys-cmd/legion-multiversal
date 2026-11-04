@@ -316,6 +316,25 @@
         .hero-card-official { width:100%; max-width:300px; padding:0; border:0; border-radius:2px; background:#070b12; box-shadow:7px 7px 0 #000; cursor:pointer; }
         .hero-card-official:hover { border-color:transparent; box-shadow:10px 10px 0 #000; }
         .hero-card-art { display:block; width:100%; height:auto; aspect-ratio:2/3; object-fit:contain; background:#070b12; }
+        .rank-collaborator { display:inline-block; padding:6px 12px; border:2px solid #05070b; background:#ff9f43; color:#211006; font-family:'Bangers',cursive; letter-spacing:1px; box-shadow:3px 3px 0 #000; }
+        .roster-section.collaborators .roster-section-title { color:#ff9f43; }
+        .roster-portrait-card { width:100%; max-width:250px; padding:0; border:2px solid #26364b; background:#101722; color:#f0f4f8; cursor:pointer; overflow:hidden; box-shadow:6px 6px 0 #000; transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease; text-align:left; }
+        .roster-portrait-card:hover,.roster-portrait-card:focus-visible { transform:translateY(-5px); border-color:#ffde00; box-shadow:9px 9px 0 #000; outline:none; }
+        .roster-portrait-wrap { height:250px; overflow:hidden; background:#080d16; border-bottom:2px solid #26364b; }
+        .roster-portrait-wrap img { width:100%; height:100%; display:block; object-fit:cover; object-position:50% 12%; transition:transform .35s ease; }
+        .roster-portrait-card:hover img { transform:scale(1.045); }
+        .roster-portrait-info { padding:12px 14px 14px; display:flex; flex-direction:column; gap:5px; }
+        .roster-portrait-info strong { color:#ffde00; font-family:'Bangers',cursive; font-size:1.35rem; letter-spacing:.7px; }
+        .roster-portrait-info span { color:#aab7c8; font-size:.72rem; font-weight:800; letter-spacing:.7px; }
+        .hero-profile-page { margin-top:22px; padding:clamp(16px,3vw,32px); background:linear-gradient(145deg,#111d2c,#080d16); border:3px solid #000; box-shadow:8px 8px 0 #000; }
+        .hero-profile-page[hidden] { display:none; }
+        .hero-profile-layout { display:grid; grid-template-columns:minmax(220px, .8fr) minmax(0,1.2fr); gap:clamp(20px,4vw,42px); align-items:center; }
+        .hero-profile-card { width:min(100%,360px); margin:auto; display:block; border:2px solid #526174; box-shadow:8px 8px 0 #000; }
+        .hero-profile-copy h3 { color:#ffde00; font-family:'Bangers',cursive; font-size:clamp(2rem,4vw,3rem); margin:8px 0; }
+        .hero-profile-copy p { color:#d5deea; line-height:1.7; margin:10px 0 18px; }
+        .hero-profile-actions { display:flex; flex-wrap:wrap; gap:12px; align-items:center; }
+        .hero-profile-back { border:2px solid #617087; color:#dce5f1; background:#172438; padding:11px 16px; font-weight:800; cursor:pointer; }
+        @media(max-width:700px){.hero-profile-layout{grid-template-columns:1fr}.hero-profile-card{width:min(78%,300px)}.roster-portrait-card{max-width:none}.roster-portrait-wrap{height:220px}}
         .hero-identity-panel { white-space:pre-line; padding:14px 16px; border:2px solid #00d2ff; background:rgba(0,210,255,.08); color:#bcefff; font-weight:800; line-height:1.7; letter-spacing:.4px; }
 
         .hero-placeholder { height:100%; min-height:280px; display:flex; align-items:center; justify-content:center; background:repeating-linear-gradient(135deg,#171e2c,#171e2c 12px,#202a3b 12px,#202a3b 24px); color:#c4b5fd; font-family:"Bangers",cursive; font-size:1.6rem; letter-spacing:2px; text-align:center; }
@@ -804,7 +823,8 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
         .origin-values-note{max-width:900px;margin:20px auto 0;text-align:center;color:#ffde9a;font:1.25rem 'Bangers',cursive;letter-spacing:.7px;line-height:1.55}
         @media(max-width:1000px){.origin-timeline{grid-template-columns:repeat(2,minmax(0,1fr))}}
         @media(max-width:560px){.origin-timeline{grid-template-columns:1fr}.origin-values-panel{padding:16px}.origin-values span{font-size:.7rem}}
-</style>
+@media(prefers-reduced-motion:reduce){.roster-portrait-card,.roster-portrait-wrap img{transition:none!important}.roster-portrait-card:hover{transform:none}}
+    </style>
 </head>
 <body>
 
@@ -903,10 +923,13 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
             <div class="chapter-tag">CAPÍTULO 02</div>
             <h2 class="comic-title">LEGIÓN MULTIVERSAL — NUESTRO ROSTER</h2>
             <div class="institute-banner"><div class="institute-stamp">ARCHIVO<br>DE LA LEGIÓN</div><div><h3>UN LUGAR PARA CADA TALENTO EXTRAORDINARIO</h3><p>Una comunidad de creadores con identidades y especialidades diferentes. Cada integrante tiene un expediente propio y un lugar dentro de este universo compartido.</p></div></div>
-            <div class="institute-counts"><div><strong>02</strong><span>DIRECTORES</span></div><div><strong>06</strong><span>PROFESORES</span></div><div><strong>02</strong><span>ESTUDIANTES</span></div></div>
-            <p class="roster-intro">Seleccioná una ficha para consultar su biografía, poderes, estadísticas y registro de misiones.</p>
-            <div class="roster-legend"><span class="rank-director">DIRECCIÓN</span><span class="rank-teacher">CUERPO DOCENTE</span><span class="rank-student">ESTUDIANTES</span></div>
-            <div id="roster-container"><!-- Se inyectarán dinámicamente las tarjetas de los héroes --></div>
+            <div id="roster-home">
+              <div class="institute-counts" id="roster-counts"></div>
+              <p class="roster-intro">Seleccioná el retrato de un integrante para conocer su carta oficial y abrir su bitácora individual.</p>
+              <div class="roster-legend"><span class="rank-director">DIRECCIÓN</span><span class="rank-teacher">CUERPO DOCENTE</span><span class="rank-student">ESTUDIANTES</span><span class="rank-collaborator">COLABORADORES</span></div>
+              <div id="roster-container"><!-- Retratos del roster --></div>
+            </div>
+            <section id="hero-profile-page" class="hero-profile-page" hidden aria-live="polite"></section>
         </section>
 
         <!-- CAPÍTULO 3: DATABASE -->
@@ -1491,6 +1514,13 @@ function renderRoster() {
         { key: 'student', title: 'ESTUDIANTES', desc: 'Nuevos talentos en formación dentro del Instituto.' },
         { key: 'collaborator', title: 'COLABORADORES', desc: 'Creadores y especialistas que aportan conocimientos, experiencias y nuevas perspectivas.' }
     ];
+    const counts = document.getElementById('roster-counts');
+    if (counts) {
+        counts.innerHTML = groups.map(group => {
+            const total = heroesData.filter(hero => hero.role === group.key).length;
+            return '<div><strong>' + String(total).padStart(2,'0') + '</strong><span>' + group.title.replace(' DEL INSTITUTO','').replace('CUERPO DOCENTE','PROFESORES') + '</span></div>';
+        }).join('');
+    }
     groups.forEach(group => {
         const members = heroesData.map((hero, index) => ({ hero, index })).filter(item => item.hero.role === group.key);
         if (!members.length) return;
@@ -1502,27 +1532,47 @@ function renderRoster() {
         members.forEach(({hero,index}) => {
             const card = document.createElement('button');
             card.type = 'button';
-            card.className = 'hero-card ' + group.key + ' hero-card-official';
-            card.setAttribute('aria-haspopup', 'dialog');
-            card.setAttribute('aria-label', 'Abrir expediente de ' + hero.name);
-            card.onclick = () => openHeroModal(index);
+            card.className = 'roster-portrait-card';
+            card.setAttribute('aria-label', 'Ver carta y expediente de ' + hero.name);
+            card.onclick = () => openHeroProfile(index);
+            const imageWrap = document.createElement('div');
+            imageWrap.className = 'roster-portrait-wrap';
             const image = document.createElement('img');
-            image.className = 'hero-card-art';
             image.src = hero.img;
-            image.alt = 'Carta oficial de ' + hero.name;
+            image.alt = 'Retrato de ' + hero.name;
             image.loading = 'lazy';
-            image.onerror = () => {
-                const placeholder = document.createElement('div');
-                placeholder.className = 'hero-placeholder';
-                placeholder.textContent = 'CARTA NO DISPONIBLE';
-                image.replaceWith(placeholder);
-            };
-            card.appendChild(image);
+            image.onerror = () => { imageWrap.textContent = 'RETRATO PENDIENTE'; };
+            imageWrap.appendChild(image);
+            const info = document.createElement('div');
+            info.className = 'roster-portrait-info';
+            info.innerHTML = '<strong>' + escapeStatsHtml(hero.name) + '</strong><span>' + escapeStatsHtml(hero.rank || group.title) + '</span>';
+            card.append(imageWrap,info);
             grid.appendChild(card);
         });
         section.appendChild(grid);
         container.appendChild(section);
     });
+}
+function openHeroProfile(index) {
+    const hero = heroesData[index];
+    if (!hero) return;
+    const home = document.getElementById('roster-home');
+    const page = document.getElementById('hero-profile-page');
+    if (!home || !page) return;
+    const channel = hero.youtube || hero.twitch || '';
+    page.innerHTML = '<div class="hero-profile-layout"><img class="hero-profile-card" src="' + escapeStatsHtml(hero.img) + '" alt="Carta oficial de ' + escapeStatsHtml(hero.name) + '"><div class="hero-profile-copy"><span class="stats-status">EXPEDIENTE INDIVIDUAL · ' + escapeStatsHtml(hero.rank || 'CLASIFICACIÓN PENDIENTE') + '</span><h3>' + escapeStatsHtml(hero.name) + '</h3><p>' + escapeStatsHtml(hero.bio || 'Presentación personal pendiente de completar.') + '</p><div class="hero-profile-actions"><button class="twitch-link-btn" type="button" onclick="openHeroModal(' + index + ')">ABRIR BITÁCORA COMPLETA</button>' + (channel ? '<a class="btn-link" href="' + escapeStatsHtml(channel) + '" target="_blank" rel="noopener">VISITAR CANAL</a>' : '') + '<button class="hero-profile-back" type="button" onclick="closeHeroProfile()">VOLVER AL ROSTER</button></div></div></div>';
+    home.hidden = true;
+    page.hidden = false;
+    history.replaceState(null, '', '#expediente-' + encodeURIComponent(hero.name.toLowerCase().replace(/[^a-z0-9]+/g,'-')));
+    page.scrollIntoView({behavior:'smooth',block:'start'});
+}
+function closeHeroProfile() {
+    const home = document.getElementById('roster-home');
+    const page = document.getElementById('hero-profile-page');
+    if (page) page.hidden = true;
+    if (home) home.hidden = false;
+    history.replaceState(null, '', '#chapter-2');
+    document.getElementById('chapter-2')?.scrollIntoView({behavior:'smooth',block:'start'});
 }
 
 function openHeroModal(index) {
