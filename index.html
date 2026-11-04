@@ -1013,9 +1013,24 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
             .header-brand-emblem { animation: none !important; }
         }
 
+    
+        /* TRANSICIÓN ENTRE EXPEDIENTES · cortinilla arcade sutil */
+        #chapter-transition{position:fixed;inset:0;z-index:2000;pointer-events:none;display:grid;place-items:center;overflow:hidden;background:linear-gradient(135deg,#090d18 0%,#17142b 52%,#071923 100%);transform:translateY(-105%);opacity:0}
+        #chapter-transition::before{content:"";position:absolute;inset:0;opacity:.16;background-image:radial-gradient(#fff 1px,transparent 1.5px);background-size:9px 9px}
+        #chapter-transition::after{content:attr(data-title);position:relative;color:#ffde00;font:clamp(2rem,7vw,5rem) 'Bangers',cursive;letter-spacing:.09em;text-shadow:4px 4px 0 #000,0 0 24px rgba(0,210,255,.5);padding:18px 28px;border-top:2px solid rgba(0,210,255,.7);border-bottom:2px solid rgba(0,210,255,.7);text-align:center}
+        #chapter-transition.play{animation:dossierWipe .72s cubic-bezier(.72,0,.22,1) both}
+        @keyframes dossierWipe{0%{transform:translateY(-105%);opacity:1}18%{transform:translateY(0);opacity:1}72%{transform:translateY(0);opacity:1}100%{transform:translateY(105%);opacity:1}}
+        .sound-toggle{display:inline-flex;align-items:center;gap:8px;padding:8px 13px;background:#101a29;color:#00d2ff;border:2px solid #00d2ff;box-shadow:3px 3px 0 #000;font:1rem 'Bangers',cursive;letter-spacing:.06em;cursor:pointer;transition:transform .15s ease,background .15s ease,color .15s ease}
+        .sound-toggle:hover{transform:translate(-2px,-2px);background:#00d2ff;color:#07101b}
+        .sound-toggle[aria-pressed="true"]{background:#ffde00;border-color:#ffde00;color:#080b10}
+        .sound-toggle:focus-visible{outline:3px solid #fff;outline-offset:4px}
+        @media(max-width:650px){.sound-toggle{font-size:.9rem;padding:7px 10px}.header-top{align-items:flex-start}}
+        @media(prefers-reduced-motion:reduce){#chapter-transition.play{animation:none!important;transform:translateY(0);opacity:0}.sound-toggle{transition:none}}
+
     </style>
 </head>
 <body>
+    <div id="chapter-transition" aria-hidden="true" data-title="LEGIÓN MULTIVERSAL"></div>
 
     <header>
         <div class="header-top">
@@ -1026,6 +1041,7 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
                     <p>DIFERENTES MUNDOS. UNA MISMA LEGIÓN.</p>
                 </div>
             </div>
+            <button id="sound-toggle" class="sound-toggle" type="button" aria-pressed="false" onclick="toggleArcadeSound()" title="Activar o silenciar la identidad sonora">♫ SONIDO: OFF</button>
         </div>
         <nav aria-label="Navegación principal">
             <button class="nav-btn active" data-chapter="1" onclick="switchChapter(1)">PORTADA</button>
@@ -2027,13 +2043,79 @@ function openHeroModal(index) {
             if (activeBtn) activeBtn.classList.add('active');
         }
 
+        /* Identidad sonora original: chiptune sintetizado en el navegador.
+           No descarga audio, no usa material comercial y nunca arranca sin interacción. */
+        let arcadeAudioContext = null;
+        let arcadeAudioTimer = null;
+        let arcadeStep = 0;
+        const arcadeTempo = 112;
+        const arcadeMelody = [523.25,659.25,783.99,659.25,587.33,698.46,880,698.46,523.25,659.25,783.99,1046.5,880,783.99,659.25,587.33];
+        function arcadeTone(frequency, duration, type, volume, when) {
+            if(!arcadeAudioContext)return;
+            const osc=arcadeAudioContext.createOscillator();
+            const gain=arcadeAudioContext.createGain();
+            osc.type=type;
+            osc.frequency.setValueAtTime(frequency,when);
+            gain.gain.setValueAtTime(0.0001,when);
+            gain.gain.exponentialRampToValueAtTime(volume,when+0.012);
+            gain.gain.exponentialRampToValueAtTime(0.0001,when+duration);
+            osc.connect(gain);gain.connect(arcadeAudioContext.destination);
+            osc.start(when);osc.stop(when+duration+0.025);
+        }
+        function playArcadeStep(){
+            if(!arcadeAudioContext)return;
+            const now=arcadeAudioContext.currentTime;
+            const note=arcadeMelody[arcadeStep%arcadeMelody.length];
+            if(arcadeStep%4!==3)arcadeTone(note,.105,'square',.035,now);
+            if(arcadeStep%4===0)arcadeTone(note/4,.28,'triangle',.055,now);
+            if(arcadeStep%8===0)arcadeTone(110,.055,'sawtooth',.018,now);
+            arcadeStep++;
+        }
+        async function toggleArcadeSound(){
+            const button=document.getElementById('sound-toggle');
+            if(!button)return;
+            if(arcadeAudioTimer){
+                window.clearInterval(arcadeAudioTimer);arcadeAudioTimer=null;
+                if(arcadeAudioContext)await arcadeAudioContext.suspend();
+                button.textContent='♫ SONIDO: OFF';button.setAttribute('aria-pressed','false');
+                return;
+            }
+            try{
+                const AudioContextClass=window.AudioContext||window.webkitAudioContext;
+                if(!AudioContextClass){button.textContent='AUDIO NO DISPONIBLE';return;}
+                if(!arcadeAudioContext)arcadeAudioContext=new AudioContextClass();
+                await arcadeAudioContext.resume();
+                arcadeStep=0;playArcadeStep();
+                arcadeAudioTimer=window.setInterval(playArcadeStep,60000/arcadeTempo/4);
+                button.textContent='♫ SONIDO: ON';button.setAttribute('aria-pressed','true');
+            }catch(error){button.textContent='AUDIO NO DISPONIBLE';}
+        }
+        function playChapterCue(){
+            if(!arcadeAudioContext||arcadeAudioContext.state!=='running')return;
+            const now=arcadeAudioContext.currentTime;
+            arcadeTone(659.25,.07,'square',.045,now);
+            arcadeTone(987.77,.11,'square',.035,now+.075);
+        }
         function switchChapter(chapterNum) {
             const panel=document.getElementById(`chapter-${chapterNum}`);
             if(!panel)return;
+            const current=document.querySelector('.chapter-panel.active');
+            if(current===panel)return;
+            const transition=document.getElementById('chapter-transition');
+            const chapterName=(document.querySelector(`.nav-btn[data-chapter="${chapterNum}"]`)||{}).textContent||'NUEVO EXPEDIENTE';
+            if(transition){
+                transition.setAttribute('data-title',chapterName.trim());
+                transition.classList.remove('play');
+                if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+                    void transition.offsetWidth;
+                    transition.classList.add('play');
+                }
+            }
             document.querySelectorAll('.chapter-panel').forEach(p => p.classList.remove('active'));
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.toggle('active',Number(b.dataset.chapter)===Number(chapterNum)));
             panel.classList.add('active');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            playChapterCue();
+            window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth' });
         }
 
         window.onload = async function() {
