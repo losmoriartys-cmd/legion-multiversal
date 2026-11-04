@@ -10,7 +10,7 @@ CHANNELS = [
     "losmoriartys", "ladymoriarty01", "ther0d3r1k", "elgabii090",
     "capyunaplay", "habitos_atomicos", "ardipii", "akumazoldyck", "daved0608"
 ]
-WINDOW_DAYS = 10
+WINDOW_DAYS = 30
 SAMPLE_INTERVAL_MINUTES = 15
 DATA_FILE = "data.json"
 
@@ -77,6 +77,45 @@ def summarize(snapshots, now):
             minutes = min(gap, SAMPLE_INTERVAL_MINUTES)
             observed_minutes += minutes
             estimated_watch_hours += current["viewer_count"] * minutes / 60
+    game_groups = {}
+    daily_groups = {}
+    for sample in live:
+        game = sample.get("game_name") or "Categoría no informada"
+        group = game_groups.setdefault(game, {"samples": 0, "viewers": [], "streams": set()})
+        group["samples"] += 1
+        if isinstance(sample.get("viewer_count"), int):
+            group["viewers"].append(sample["viewer_count"])
+        if sample.get("stream_id"):
+            group["streams"].add(str(sample["stream_id"]))
+        day = sample["sampled_at"][:10]
+        daily = daily_groups.setdefault(day, {"samples": 0, "viewers": [], "streams": set()})
+        daily["samples"] += 1
+        if isinstance(sample.get("viewer_count"), int):
+            daily["viewers"].append(sample["viewer_count"])
+        if sample.get("stream_id"):
+            daily["streams"].add(str(sample["stream_id"]))
+
+    games = [
+        {
+            "name": name,
+            "live_samples": value["samples"],
+            "streams_observed": len(value["streams"]),
+            "average_viewers_sampled": round(sum(value["viewers"]) / len(value["viewers"]), 1) if value["viewers"] else None,
+            "peak_viewers_sampled": max(value["viewers"]) if value["viewers"] else None
+        }
+        for name, value in game_groups.items()
+    ]
+    games.sort(key=lambda item: item["live_samples"], reverse=True)
+    daily_activity = [
+        {
+            "date": day,
+            "live_samples": value["samples"],
+            "streams_observed": len(value["streams"]),
+            "average_viewers_sampled": round(sum(value["viewers"]) / len(value["viewers"]), 1) if value["viewers"] else None,
+            "peak_viewers_sampled": max(value["viewers"]) if value["viewers"] else None
+        }
+        for day, value in sorted(daily_groups.items())
+    ]
     return {
         "samples_total": len(snapshots),
         "live_samples": len(live),
@@ -85,7 +124,9 @@ def summarize(snapshots, now):
         "peak_viewers_sampled": max(viewers) if viewers else None,
         "observed_live_hours": round(observed_minutes / 60, 2),
         "estimated_hours_watched": round(estimated_watch_hours, 2),
-        "method": "Muestras propias cada 15 minutos; horas estimadas solo entre muestras consecutivas del mismo directo."
+        "game_breakdown": games,
+        "daily_activity": daily_activity,
+        "method": "Muestreo propio cada 15 minutos; horas estimadas solo entre muestras consecutivas del mismo directo. Categorías y evolución diaria se calculan sobre las muestras observadas."
     }
 
 
