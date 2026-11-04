@@ -102,3 +102,31 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Pendientes / riesgos:** comprobar el encuadre de los retratos en el navegador y verificar el despliegue de GitHub Pages.
 - **Commit:** e5b381066eb541cb27774e0a1497fea67aeba069.
 - **Despliegue:** pendiente de verificación.
+
+## 2026-11-03 — Integrar las cartas oficiales y ampliar los expedientes del Roster
+
+- **Responsable:** ChatGPT + equipo Los Moriartys.
+- **Objetivo:** reemplazar las composiciones anteriores del Roster por las cartas finales con marco unificado y llevar los datos impresos en cada carta a las páginas del expediente individual.
+- **Archivos modificados:**
+  - `index.html`: rutas de las diez cartas oficiales, renderizado del Roster y contenido de las páginas A, B y D del expediente.
+  - `INFORMES.md`: registro de esta intervención.
+- **Implementado:**
+  - Se integraron diez cartas oficiales desde `assets/heroes/`: Los Moriartys, Lady Moriarty, Rod3r1k, Capy, Ardipii, Akuma, Elgabii, Nexus, Oratoris y Habitos.
+  - El Roster ahora muestra cada carta completa como una única imagen clickeable. Se quitó de su renderizado la plantilla superpuesta, los textos duplicados y el retrato antiguo dentro de otro marco.
+  - Página A — Biografía: incorpora identidad/codename, rol y rango junto a la biografía existente.
+  - Página B — Poderes: muestra función, conjunto de poderes y rango operativo tomados de las cartas finales.
+  - Página C — Estadísticas: conserva las métricas de plataformas y su lógica de fuentes verificables; no se inventaron cifras.
+  - Página D — Misiones: agrega serie, número de registro y clasificación del expediente junto al historial existente.
+  - Se mantuvieron las biografías, enlaces y funciones de estadísticas existentes. No se eliminaron los archivos visuales anteriores.
+- **Validaciones y resultados:**
+  - Confirmada la presencia de diez recursos visuales en `assets/heroes/` y su asignación a diez integrantes de `heroesData`.
+  - Confirmado que el nuevo renderizador no conserva el elemento de plantilla superpuesta `dossier-template`.
+  - GitHub aceptó el commit de `index.html`.
+  - No se realizó una prueba visual automatizada en navegador ni se confirmó la publicación final de GitHub Pages.
+- **Pendientes / riesgos:**
+  - Revisar en navegador el encuadre y tamaño de las diez cartas en escritorio y móvil.
+  - Abrir cada expediente y comprobar las cuatro páginas, especialmente los saltos de línea y la visualización de métricas.
+  - Verificar el workflow de GitHub Pages antes de declarar el despliegue exitoso.
+  - Los textos biográficos y de misiones siguen siendo los que ya estaban en el repositorio; deben ampliarse con información aprobada por cada integrante.
+- **Commit:** [`2f894140`](https://github.com/losmoriartys-cmd/s3xmen/commit/2f89414009bc1c9486bccb5b500edf60176005c6).
+- **Despliegue:** pendiente de verificación.
