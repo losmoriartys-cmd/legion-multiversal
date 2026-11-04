@@ -238,3 +238,29 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Pendientes:** verificar el despliegue de GitHub Pages. Los secretos `STREAMSCHARTS_CLIENT_ID` y `STREAMSCHARTS_TOKEN` dejan de ser utilizados por el repositorio; su eliminación de Settings → Secrets and variables → Actions queda a cargo del propietario del repositorio.
 - **Commits de implementación:** `0011f4c2` (sitio), `9b998ff6` (recolector eliminado) y `8ff804e6` (workflow eliminado).
 - **Despliegue:** pendiente de comprobar el workflow de GitHub Pages.
+
+
+## 2026-11-04 — Integrar SullyGnome como fuente histórica complementaria del roster
+
+- **Responsable:** ChatGPT + equipo Los Moriartys.
+- **Objetivo:** incorporar el historial de SullyGnome en los expedientes individuales, separado de las observaciones actuales de Twitch Helix.
+- **Archivos creados/modificados:**
+  - `sullygnome-data.json`: incorporada la base histórica de trabajo que ya existía en la rama `instituto-premium-redesign`, sin fusionar esa rama ni sobrescribir `main`.
+  - `index.html`: activada la carga del archivo histórico y conectada su información al panel de estadísticas de cada integrante Twitch. Se muestra el período y el enlace de fuente cuando están disponibles.
+  - `INFORMES.md`: agregado este registro.
+- **Implementado:**
+  - SullyGnome queda como fuente histórica complementaria; Twitch Helix continúa como fuente de seguimiento actual y muestreo propio.
+  - Las estadísticas se presentan en bloques separados, sin mezclar métricas ni períodos.
+  - La base importada conserva los estados y notas originales: Los Moriartys y Dave figuran como parciales; los otros siete canales Twitch figuran pendientes.
+  - Para Los Moriartys se conservan 9 transmisiones transcritas (19/10/2026–02/11/2026). Para Dave se conserva el resumen anual informado de 45 transmisiones y las 10 filas visibles por separado; esas 10 filas no se presentan como historial completo.
+  - Las cifras de seguidores reportadas en las filas de Los Moriartys mantienen la advertencia de interpretación pendiente; el promedio ponderado se identifica como cálculo derivado.
+  - Pato/Oratoris, cuyo canal es YouTube, queda fuera del dataset Twitch/SullyGnome y mantiene sus métricas separadas.
+- **Validaciones y límites:**
+  - Se verificó que el archivo fuente ya existía en la rama histórica, con 9 canales Twitch y estructura compatible con el renderizador de SullyGnome existente en `index.html`.
+  - Se comprobó que el renderizador existía pero no estaba conectado: no se cargaba el JSON ni se añadía su contenido a la ficha. Esta intervención activa ambas partes.
+  - No fue posible contrastar en esta intervención las tablas históricas directamente contra las páginas dinámicas de SullyGnome. Por eso los registros heredados conservan explícitamente sus notas de transcripción y estado parcial; no se elevan a datos completos ni se inventan filas para los canales pendientes.
+  - No se modificaron `data.json`, `update_stats.py`, workflows, secretos ni automatizaciones.
+- **Pendientes / riesgos:** revisar visualmente los expedientes de Los Moriartys y Dave, y completar/contrastar los datos de los siete canales pendientes con sus tablas de SullyGnome. Las métricas de YouTube de Pato requieren una fuente independiente.
+- **Commit de datos:** a269338ba3ae379e4c68088ac23e894e8e161584
+- **Commit de interfaz:** 765fbcfa47d147d81dfb182738c18baf8f271ffd
+- **Despliegue:** pendiente de comprobar GitHub Actions / GitHub Pages.
