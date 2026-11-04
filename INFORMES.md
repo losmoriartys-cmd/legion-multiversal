@@ -798,3 +798,15 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Archivos:** `index.html` y este informe.
 - **Commit de interfaz:** [`20d7f528`](https://github.com/losmoriartys-cmd/s3xmen/commit/20d7f528cad8edba11900de6de688bf1c96462ad).
 - **Despliegue:** pendiente de verificar GitHub Pages.
+
+
+## 2026-11-04 — Pulir la jerarquía visual de audiencia y rendimiento de Los Moriartys
+
+- **Solicitud:** continuar el ajuste de la pestaña B del expediente conjunto de Los Moriartys.
+- **Archivo modificado:** `index.html`.
+- **Implementado:** la sección de audiencia acumulada ahora tiene una grilla propia de cinco indicadores, adaptable a tablet y móvil; el pico histórico recibe un énfasis visual moderado para distinguirlo del resto de los acumulados. Se acortó el encabezado para separar mejor el concepto de audiencia del período de vida del canal.
+- **Lectura de rendimiento:** se retiró la nota que repetía el valor 101 del pico histórico y se reemplazó por una aclaración metodológica breve: las variaciones se mantienen tal como fueron aportadas y no se inventa un rango de fechas ausente en la captura.
+- **Conservado:** todos los valores de origen, los cinco juegos, la separación Lifetime/período, el promedio del período y la eliminación del promedio histórico confuso. No se modificaron `data.json`, automatizaciones ni registros de integrantes.
+- **Validación estática:** se comprobó la sustitución del bloque exacto y la incorporación de reglas responsive para la grilla Lifetime.
+- **Commit de interfaz:** [`e2e0c332`](https://github.com/losmoriartys-cmd/s3xmen/commit/e2e0c332cd9d13639ab55f6b463b50feb004d8ed).
+- **Despliegue:** pendiente de comprobar el workflow de GitHub Pages y la vista publicada.
