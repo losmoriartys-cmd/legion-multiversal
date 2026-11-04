@@ -569,3 +569,18 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Criterio de mezcla:** volúmenes deliberadamente discretos para funcionar como ambiente y no competir con la lectura. Pendiente de escucha y calibración final en navegador y dispositivos reales.
 - **Archivo:** `index.html`.
 - **Commit:** `51ec264f44d98cc44763bfb307cbcb92fe8c0142` — https://github.com/losmoriartys-cmd/s3xmen/commit/51ec264f44d98cc44763bfb307cbcb92fe8c0142
+
+## 2026-11-04 — Reorganización del piloto estadístico en tres bloques
+
+- **Ajuste solicitado:** aplicar el criterio editorial completo de juegos/categorías, datos históricos lifetime y rendimiento del período.
+- **Interfaz:** el expediente de Los Moriartys ahora ordena SullyGnome en tres bloques numerados:
+  1. Juegos y categorías populares, con espacio de gráfico circular y tabla comparativa. Se informa que el desglose no está disponible porque las filas actuales no contienen el nombre del juego; no se inventa una distribución.
+  2. Datos históricos lifetime, en tabla compacta. Seguidores totales, pico histórico, promedio histórico, horas históricas, días activos y bans quedan explícitamente como no disponibles cuando no existe evidencia lifetime.
+  3. Rendimiento del período, con KPIs, gráfico de horas vistas por transmisión y tabla con fecha, juego, duración, promedio, pico y horas vistas. El juego figura como no informado en las filas actuales.
+- **Comparaciones:** no se muestran porcentajes de crecimiento porque no hay un segundo período comparable.
+- **Fuentes:** el panel Twitch Helix permanece separado y no se mezcla con SullyGnome.
+- **Alcance:** modificación específica del login `losmoriartys`; los demás perfiles conservan su renderizado.
+- **Datos y automatizaciones:** sin cambios en archivos de datos, workflows, credenciales ni recolectores.
+- **Validación estática:** confirmada la presencia de los tres bloques, la separación lifetime/período y el alcance exclusivo del piloto.
+- **Commit:** [`6a6229fa`](https://github.com/losmoriartys-cmd/s3xmen/commit/6a6229fa09defe4bd17e26ff7534ca3c4b1506f0).
+- **Despliegue y revisión visual:** pendientes de comprobación.
