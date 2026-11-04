@@ -627,3 +627,15 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Nuevo comportamiento:** ancho adaptable, altura automática, proporción intrínseca y `object-fit: contain`; se prioriza que el roster completo quede visible en escritorio y móvil.
 - **Alcance:** únicamente presentación de la imagen `gruponuevo.jpg` en la portada del Capítulo 01. No se alteró el banner histórico S3X-MEN ni las cartas del roster.
 - **Commit de interfaz:** [`f867ac6d`](https://github.com/losmoriartys-cmd/s3xmen/commit/f867ac6d7e70a709907e7c79dc4763ab8c543b69).
+
+## 2026-11-04 — Reorganización de trayectoria y colaboraciones del expediente Los Moriartys
+
+- **Problema corregido:** la pestaña C repetía enlaces generales a clips y dejaba hitos/colaboraciones como bloques vacíos y desconectados.
+- **Nueva estructura:** tres bloques coherentes: colaboraciones y accesos a juegos; hitos y trayectoria; clips destacados. Se eliminó la sección separada de clips generales (más vistos/recientes). Los clips se mostrarán una sola vez mediante enlaces directos cargados en `highlights`.
+- **Colaboraciones aportadas por Demi para Los Moriartys:** partner vigente de Enshrouded; partner vigente de Cinderia; acceso a keys mediante Lurkit; acceso a keys mediante Keymailer.
+- **Distinción comercial:** Lurkit y Keymailer se describen como plataformas de campañas/distribución de claves, no como marcas patrocinadoras ni acuerdos comerciales directos. No se inventan enlaces, fechas, remuneraciones ni condiciones.
+- **Datos:** `creator-records.json` modificado solo para el canal conjunto `losmoriartys`; el resto de canales permanece intacto. No se alteraron estadísticas ni automatizaciones.
+- **Interfaz:** `renderMissionArchive` simplificado para eliminar enlaces generales duplicados y mostrar los registros editoriales configurados.
+- **Validación estática:** confirmadas las cuatro colaboraciones/accesos y la eliminación del bloque general duplicado de clips.
+- **Commits:** [interfaz `5337c4d9`](https://github.com/losmoriartys-cmd/s3xmen/commit/5337c4d95ab6499fc08674db8a40a39e2ccd68a1) · [registros `3508c10c`](https://github.com/losmoriartys-cmd/s3xmen/commit/3508c10cc3292718a0d0e83ad39493a47c1b93cc).
+- **Despliegue:** pendiente de comprobación visual.
