@@ -1223,6 +1223,31 @@ function findChannelStats(hero){
  const login=hero.twitch.split('/').filter(Boolean).pop().toLowerCase();
  return Object.values(instituteStatsData.channels||{}).find(c=>(c.login||'').toLowerCase()===login) || null;
 }
+function renderObservedStreams(channel){
+ if(!channel)return '';
+ const snapshots=Array.isArray(channel.snapshots)?channel.snapshots:[];
+ const sessions=new Map();
+ snapshots.filter(s=>s && s.is_live && s.stream_id).forEach(s=>{
+  const id=String(s.stream_id);
+  if(!sessions.has(id))sessions.set(id,{id,started_at:s.started_at||null,first:s.sampled_at||null,last:s.sampled_at||null,samples:0,peak:null,games:new Set()});
+  const session=sessions.get(id);
+  session.samples++;
+  if(s.sampled_at)session.last=s.sampled_at;
+  if(s.started_at&&!session.started_at)session.started_at=s.started_at;
+  if(typeof s.viewer_count==='number')session.peak=session.peak===null?s.viewer_count:Math.max(session.peak,s.viewer_count);
+  if(s.game_name)session.games.add(s.game_name);
+ });
+ const rows=Array.from(sessions.values()).sort((a,b)=>String(b.started_at||b.first).localeCompare(String(a.started_at||a.first)));
+ const lines=['REGISTRO DE DIRECTOS DETECTADOS','Fuente: muestreo propio de Twitch Helix · ventana de '+(instituteStatsData?.window_days||10)+' días','Sesiones detectadas: '+rows.length];
+ if(!rows.length)lines.push('Todavía no se detectaron sesiones en la ventana disponible.');
+ rows.slice(0,6).forEach((v,i)=>{
+  const date=v.started_at||v.first;
+  const when=date?new Date(date).toLocaleString('es-AR'):'Fecha no disponible';
+  lines.push((i+1)+'. '+when+' · '+(v.games.size?Array.from(v.games).join(' / '):'Categoría no disponible')+' · pico entre muestras: '+(v.peak===null?'—':v.peak)+' · muestras en directo: '+v.samples);
+ });
+ lines.push('Importante: son sesiones captadas por el muestreo; no representan necesariamente todos los directos ni sustituyen el historial/VOD de Twitch.');
+ return lines.join('\\n');
+}
 function formatMetric(value,digits=2){
  if(value===null||value===undefined)return 'Pendiente de verificación';
  return typeof value==='number'?value.toLocaleString('es-AR',{maximumFractionDigits:digits}):value;
@@ -1334,12 +1359,15 @@ function openHeroModal(index) {
             }else{
                 document.getElementById('modal-stats-text').innerText=hero.stats||'Las métricas de esta plataforma se integrarán por separado.';
             }
-            const sullyChannel=findSullyChannel(hero);
-            const sullyText=renderSullyStats(sullyChannel);
-            if(sullyText){
+            const observedStreamsText=renderObservedStreams(channelStats);
+            if(observedStreamsText){
                 const statsNode=document.getElementById('modal-stats-text');
-                statsNode.innerText += '\n\n' + sullyText;
+                statsNode.innerText += '\n\n' + observedStreamsText;
             }
+            document.getElementById('modal-stats-text').innerText +=
+                '\n\nMÉTRICAS COMPARABLES · ÚLTIMOS 30 DÍAS\n' +
+                'Fuente acordada para analítica de canales: Streams Charts.\n' +
+                'Estado: pendiente de integrar una exportación verificable de Streams Charts. No se reemplaza con estimaciones ni con métricas de otra fuente.';
             document.getElementById('modal-log-text').innerText =
                 'ARCHIVO DE PERSONAJE\n' +
                 'Serie: ' + (hero.series || 'Pendiente') + ' · Registro: #' + (hero.cardNumber || '---') + '\n' +
