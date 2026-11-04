@@ -347,3 +347,18 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Formatos sugeridos:** JPG, PNG o WebP.
 - **Commit:** `1cadb43e14680a37cdd121d9c4c2d8129f7515b1`.
 - **Estado:** carpeta disponible en `main`; pendiente de que el usuario cargue las fotografías.
+
+## 2026-11-04 — Integrar retratos carnet en el roster
+
+- **Objetivo:** reemplazar los recortes de cartas oficiales por los retratos individuales cargados por el equipo, manteniendo las cartas completas en cada expediente.
+- **Archivo modificado:** `index.html`.
+- **Implementado:**
+  - Se asignó un campo `portrait` independiente a cada uno de los diez integrantes.
+  - El roster utiliza `hero.portrait` y conserva `hero.img` como alternativa si faltara un retrato.
+  - La vista individual y la bitácora siguen utilizando `hero.img`; no se reemplazaron ni editaron las cartas oficiales.
+  - Se respetó la jerarquía existente: 2 en Dirección, 5 en Cuerpo Docente, 1 Estudiante y 2 Colaboradores.
+  - Los archivos de retrato se consumen desde `assets/carnet/` con sus nombres exactos, sin renombrarlos.
+- **Validaciones de código:** diez asignaciones de retrato; el render del roster prioriza `portrait`; la vista de expediente continúa leyendo `img` para mostrar la carta oficial.
+- **Preservado:** `data.json`, `sullygnome-data.json`, estadísticas, automatizaciones, roles, poderes, bitácoras y archivos de cartas.
+- **Commit de interfaz:** `539751301becc7d19fd4e6b57d4a8bcb720f7059`.
+- **Despliegue:** pendiente de verificación visual en GitHub Pages.
