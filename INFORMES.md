@@ -417,3 +417,15 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Pendientes / riesgos:** comprobar visualmente el sitio publicado y que los recursos remotos de imágenes carguen correctamente en GitHub Pages. Las condiciones de crossplay, disponibilidad regional y requisitos pueden variar por edición; por eso se remite a las fichas oficiales y no se anuncian compatibilidades no verificadas.
 - **Commit de interfaz:** `1751350bf63c954ad502335b6895bc53fdbb0c39`.
 - **Despliegue:** pendiente de comprobar GitHub Actions / GitHub Pages.
+
+
+## 2026-11-04 — Corregir portadas rotas del Arsenal
+
+- **Solicitud:** corregir las imágenes de Mimic Party y MECCHA CHAMELEON que aparecían rotas en GitHub Pages.
+- **Causa identificada:** las tarjetas apuntaban a rutas antiguas del CDN de Steam que no resolvían las portadas de esos dos juegos.
+- **Archivo modificado:** `index.html`.
+- **Corrección:** se reemplazaron ambas direcciones por las rutas actuales de recursos de Steam con sus identificadores de asset verificados.
+- **Verificación de recursos:** se abrió y comprobó que las dos nuevas URLs devuelven las cabeceras oficiales correctas: Mimic Party y MECCHA CHAMELEON.
+- **Preservado:** textos, diseño, orden de los diez juegos, enlaces a tiendas, resto del sitio, estadísticas y automatizaciones.
+- **Commit de interfaz:** `47c6076e66f084f94ada8287e00fc54e41629da4`.
+- **Despliegue:** pendiente de verificar GitHub Actions y la visualización final en GitHub Pages.
