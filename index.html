@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LEGIÓN MULTIVERSAL | Diferentes mundos. Una misma Legión.</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Permanent+Marker&family=Roboto+Condensed:wght@400;500;600;700;800;900&family=Special+Elite&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-color: #0b0f19;
@@ -26,6 +26,28 @@
             overflow-x: hidden;
             background-image: radial-gradient(rgba(255, 222, 0, 0.05) 1px, transparent 1px);
             background-size: 20px 20px;
+        }
+
+        /* Identidad tipográfica: cómic vintage + retro contemporáneo */
+        body { font-family: 'Roboto Condensed', sans-serif; }
+        h1, h2, h3, h4, .comic-title, .chapter-tag, .nav-btn,
+        .hero-card-info h3, .premium-panel h3, .premium-panel h4 {
+            font-family: 'Bangers', cursive;
+            letter-spacing: .045em;
+        }
+        .chapter-eyebrow, .section-kicker, .premium-kicker,
+        .stats-methodology summary, .chapter-cover-meta,
+        .origin-kicker, .origin-section-heading>span {
+            font-family: 'Special Elite', cursive;
+            letter-spacing: .055em;
+        }
+        .badge-comic, .hero-click-hint { font-family: 'Permanent Marker', cursive; }
+        p, li, label, input, textarea, select, button, small {
+            font-family: 'Roboto Condensed', sans-serif;
+        }
+        .nav-btn, .chapter-cta, .comic-submit-btn, .hero-click-hint,
+        .chapter-tag, .hero-card-info h3, h2.comic-title {
+            font-family: 'Bangers', cursive;
         }
 
         body::before {
@@ -933,6 +955,42 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
         .site-technical-footer{max-width:1300px;margin:28px auto 0;padding:18px 22px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:#8191a8;font-size:.76rem;border-top:1px solid #263449}
         .site-technical-footer a{color:#00d2ff}
         @media(max-width:560px){.live-player{min-height:300px}.live-player iframe{min-height:300px}.site-technical-footer{padding:16px 20px}}
+
+        /* Microinteracciones: movimiento sutil, sin competir con el contenido */
+        .header-brand-emblem { animation: emblemFloat 7s ease-in-out infinite; }
+        @keyframes emblemFloat {
+            0%,100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-3px) rotate(1deg); }
+        }
+        .chapter-panel.active { animation: chapterArrive .48s cubic-bezier(.2,.75,.25,1) both; }
+        @keyframes chapterArrive {
+            from { opacity: 0; transform: translateY(12px) scale(.996); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .premium-card, .arsenal-card, .hero-card, .chapter-cta, .comic-submit-btn {
+            transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease, filter .22s ease;
+        }
+        @media (hover:hover) and (pointer:fine) {
+            .premium-card:hover, .arsenal-card:hover {
+                transform: translateY(-4px);
+                border-color: rgba(255,222,0,.78);
+                box-shadow: 0 9px 24px rgba(0,0,0,.24);
+            }
+            .chapter-cta:hover, .comic-submit-btn:hover { filter: brightness(1.12); transform: translateY(-2px); }
+        }
+        .chapter-panel :focus-visible, header :focus-visible, footer :focus-visible {
+            outline: 3px solid #ffde00;
+            outline-offset: 4px;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                scroll-behavior: auto !important;
+                transition-duration: .01ms !important;
+            }
+            .header-brand-emblem { animation: none !important; }
+        }
 
     </style>
 </head>
