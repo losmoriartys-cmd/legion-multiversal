@@ -4,7 +4,28 @@
   "channels": {
     "losmoriartys": {
       "milestones": [],
-      "collaborations": [],
+      "collaborations": [
+        {
+          "title": "Partner · Enshrouded",
+          "description": "Colaboración/partner vigente vinculada al juego Enshrouded.",
+          "source": "Información confirmada por Demi."
+        },
+        {
+          "title": "Partner · Cinderia",
+          "description": "Colaboración/partner vigente vinculada a Cinderia.",
+          "source": "Información confirmada por Demi."
+        },
+        {
+          "title": "Acceso a keys · Lurkit",
+          "description": "Participación en campañas y acceso a claves de juegos mediante Lurkit. Se presenta como plataforma de distribución de keys, no como patrocinio directo.",
+          "source": "Información confirmada por Demi."
+        },
+        {
+          "title": "Acceso a keys · Keymailer",
+          "description": "Participación en campañas y acceso a claves de juegos mediante Keymailer. Se presenta como plataforma de distribución de keys, no como patrocinio directo.",
+          "source": "Información confirmada por Demi."
+        }
+      ],
       "highlights": []
     },
     "ladymoriarty01": {
