@@ -584,3 +584,14 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Validación estática:** confirmada la presencia de los tres bloques, la separación lifetime/período y el alcance exclusivo del piloto.
 - **Commit:** [`6a6229fa`](https://github.com/losmoriartys-cmd/s3xmen/commit/6a6229fa09defe4bd17e26ff7534ca3c4b1506f0).
 - **Despliegue y revisión visual:** pendientes de comprobación.
+
+## 2026-11-04 — Incorporación de métricas aportadas en capturas para Los Moriartys
+
+- **Corrección de fuente:** se recuperaron e incorporaron los valores que Demi había compartido en capturas de paneles analíticos. La versión anterior había considerado únicamente los JSON del repositorio y omitido estos datos.
+- **Juegos y categorías:** Enshrouded (AV 26, AT 4 h, FG 5, 1 seguidor/h); Minecraft (AV 34, AT 3 h, FG 7, 2/h); Fortnite (AV 27, AT 4 h, FG 5, 1/h, 103 horas vistas y 22,7% del total); Supercar Collection Together (AV 31, AT 2 h); Marvel Rivals (AV 33, AT 2 h, FG 3, 2/h). El gráfico circular solo destaca el 22,7% confirmado de Fortnite; el resto se muestra como distribución no desglosada, sin inventar proporciones.
+- **Lifetime:** seguidores 1K; pico 101 (07 Oct 2026); promedio 6; airtime 348 h; actividad 335 días; bans 0; ritmo aproximado 1 h 2 min/día.
+- **Rendimiento del período:** horas vistas 846 (+35%); pico 101 (+107%); promedio 26 (+34%); Authorized to All Viewers Ratio 117%; Live Views 102; Followers Gain 48 (-94%); Airtime 32 h 10 min (-1%); 28 días activos y 1 h 8 min/día.
+- **Criterio temporal:** el rango de fechas del panel de rendimiento no aparece en la captura; se informa expresamente como no indicado. Las métricas capturadas no se mezclan con el registro de 9 transmisiones de SullyGnome, que conserva su período propio.
+- **Alcance:** el cambio corresponde solo al renderizador del login `losmoriartys`. No se modifican JSON, automatizaciones ni los otros perfiles.
+- **Commits de interfaz:** [`76829890`](https://github.com/losmoriartys-cmd/s3xmen/commit/7682989088ad5c766208dacd5a2d1275128c53eb) y [`a6f3d4c1`](https://github.com/losmoriartys-cmd/s3xmen/commit/a6f3d4c1f50c5b7bfc5e6c9a7b5d0f1a8c6d0a11).
+- **Pendiente:** verificar visualmente el despliegue y confirmar el período exacto del panel de rendimiento.
