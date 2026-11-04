@@ -664,5 +664,5 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - Se agregó a `creator-records.json` el clip `DelightfulSneakyMonkeyBleedPurple-gDdjWpKPkU5irwbo` como "Clip destacado 2".
 - Se reutiliza el reproductor Twitch responsive implementado previamente, con `parent=losmoriartys-cmd.github.io`.
 - No se descarga ni se duplica el video; se reproduce desde Twitch.
-- Commit: [`c13b3b4d`](https://github.com/losmoriartys-cmd/s3xmen/commit/c13b3b4d6a9cba2b5f4e2c6d8a2b8c7e9f0a1234).
+- Commit: [`a1dc91f9`](https://github.com/losmoriartys-cmd/s3xmen/commit/a1dc91f97ad256a367fe38b1af6e327a52067032).
 - Pendiente: confirmar reproducción en Pages y completar título/descripción editorial.
