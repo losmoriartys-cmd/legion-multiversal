@@ -429,3 +429,18 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Preservado:** textos, diseño, orden de los diez juegos, enlaces a tiendas, resto del sitio, estadísticas y automatizaciones.
 - **Commit de interfaz:** `47c6076e66f084f94ada8287e00fc54e41629da4`.
 - **Despliegue:** pendiente de verificar GitHub Actions y la visualización final en GitHub Pages.
+
+
+## 2026-11-04 — Expediente institucional piloto: Los Moriartys (Demi + Ari)
+
+- **Objetivo:** iniciar la ampliación del Capítulo 2 con el expediente del proyecto conjunto, antes de replicar el modelo en perfiles individuales.
+- **Archivo modificado:** `index.html`.
+- **Identidad editorial:** Los Moriartys se presenta como proyecto compartido de Demi y Ari. Se distingue explícitamente a Demi como cofundador/coanfitrión y a Ari como cofundadora/coanfitriona, indicando que Ari también mantiene su canal individual LADYMORIARTY01.
+- **Presentación:** se actualizó la biografía del canal conjunto para describir su propuesta de gaming, cooperativo, humor y cultura pop desde la identidad de videoclub retro.
+- **Secciones añadidas a la vista individual:** A · Identidad y presentación; B · Contenido y especialidades; E · Oportunidades de colaboración.
+- **Formatos propuestos:** directos compartidos, videojuegos/cooperativo, humor y situaciones espontáneas, cultura pop/conversación; posibles integraciones contextuales, dinámicas participativas, presentación de juegos y colaboraciones con creadores.
+- **Contacto:** se utiliza `losmoriartys@gmail.com` como dirección de contacto propuesta para oportunidades. No se anuncian acuerdos comerciales ni alianzas vigentes.
+- **Preservado:** carta oficial, retrato, estructura del roster, roles, estadísticas, automatizaciones, datos de Twitch y expedientes de los demás integrantes.
+- **Pendiente editorial:** validar con Ari y Demi los textos finales, completar ejemplos reales de contenido y añadir evidencias/hitos/colaboraciones con fuentes comprobables. Las secciones C y D siguen usando los sistemas de datos existentes; no se inventaron métricas ni registros.
+- **Commits de interfaz:** `be6629fcaed1102c6a6016deb4f006c3d006805f`, `bd25cb19493a212a9f0fc7028a4ff565ce52a68b`, `ade1afc0ef5f2ef3e50d88ef101fff51a62ff757`.
+- **Despliegue:** pendiente de comprobar GitHub Actions y visualización final en GitHub Pages.
