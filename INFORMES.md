@@ -190,3 +190,19 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Commit de UI de evolución:** [`2403b741`](https://github.com/losmoriartys-cmd/s3xmen/commit/2403b7410584e3b93ad2105c3bdff714af4d58d3).
 - **Commit de trayectoria:** [`06ffda1f`](https://github.com/losmoriartys-cmd/s3xmen/commit/06ffda1f52cea07e1bdfe95bf2ebce5db145bbfa).
 - **Commit de base editorial:** [`3b3f905b`](https://github.com/losmoriartys-cmd/s3xmen/commit/3b3f905b1132b6881370c774ba1987f6ed653ab7).
+
+
+## 2026-11-04 — Alinear la descripción del historial de Twitch con la ventana real de 30 días
+
+- **Responsable:** ChatGPT + equipo Los Moriartys.
+- **Objetivo:** corregir textos del sitio que todavía describían una ventana de 10 días, aunque el colector y los datos publicados ya operan con una ventana móvil de 30 días.
+- **Archivos modificados:**
+  - `index.html`: actualizadas las referencias de la base de datos y del panel de métricas para indicar 30 días.
+  - `INFORMES.md`: registro de esta intervención.
+- **Implementado:** se corrigieron tres textos. La descripción ahora coincide con `data.json` (`window_days: 30`, muestreo cada 15 minutos) y con `update_stats.py` (`WINDOW_DAYS = 30`). No se modificaron la automatización, sus credenciales, los datos ni las métricas.
+- **Chequeo de consolidación:** la rama `instituto-premium-redesign` está divergida respecto de `main` (29 commits por delante y 86 por detrás). No se fusionó completa porque contiene versiones anteriores de `index.html`, retratos y datos estadísticos parciales/desactualizados. Los capítulos 01–07, las diez fichas oficiales y la carta actual de Nexus ya están en `main`.
+- **Validaciones y resultados:** comprobado el valor real de 30 días en el colector y en `data.json`; se verificó que las tres referencias antiguas de 10 días fueron reemplazadas. No se realizó una nueva prueba visual en navegador.
+- **Pendientes / riesgos:** revisar visualmente la página publicada. Los datos de SullyGnome de la rama antigua siguen sin integrarse: solo contienen registros parciales para algunos canales y requieren contraste con la fuente antes de publicarse.
+- **Commit de implementación:** [`784f8f3d`](https://github.com/losmoriartys-cmd/s3xmen/commit/784f8f3de816b7a613f374e5d51bc999cf72452e).
+- **Commit del informe:** se agrega este registro en el commit actual.
+- **Despliegue:** pendiente de verificar el workflow de GitHub Pages.
