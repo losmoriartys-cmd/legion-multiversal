@@ -289,3 +289,22 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 
 - **Ajuste de marcado:** los contenedores de las páginas C y D se cambiaron de párrafos a bloques `div`, necesarios para alojar correctamente tarjetas, secciones y tablas HTML sin anidamiento inválido.
 - **Commit de ajuste:** 949e9549142bcb9e94b336ac3e0775d769f208e2
+
+
+## 2026-11-04 — Incorporar gráficos de actividad a los expedientes
+
+- **Responsable:** ChatGPT + equipo Los Moriartys.
+- **Objetivo:** reforzar la lectura visual del panel C para que las estadísticas individuales se perciban como un dashboard y no únicamente como una tabla.
+- **Archivos modificados:**
+  - `index.html`: agregado un componente reutilizable de barras horizontales y estilos adaptables a pantallas pequeñas.
+  - `INFORMES.md`: agregado este registro.
+- **Implementado:**
+  - En el bloque SullyGnome, gráfico de horas vistas por transmisión a partir de las filas históricas disponibles.
+  - En el bloque Twitch Helix, gráfico de actividad diaria según muestras en directo y gráfico de categorías según cantidad de muestras observadas.
+  - Los gráficos se ocultan cuando no hay valores observados suficientes; no se rellenan períodos ni canales pendientes con ceros ficticios.
+  - Se conservan separadas las fuentes y metodologías: los gráficos históricos proceden de SullyGnome y los gráficos Helix reflejan únicamente el muestreo propio.
+- **Preservado:** `data.json`, `sullygnome-data.json`, automatizaciones, workflows, roster, poderes y archivo de misiones.
+- **Validaciones:** actualización de `index.html` aceptada por GitHub sobre el SHA vigente. Se comprobó la presencia de los estilos, el renderizador reutilizable y las tres inserciones de gráficos. No se realizó todavía una inspección visual en navegador ni se confirmó el despliegue de Pages.
+- **Pendientes / riesgos:** revisar la presentación en el sitio publicado y comprobar el workflow de GitHub Pages. Los datos históricos siguen sujetos a los estados parciales y notas de verificación ya documentados.
+- **Commit de interfaz:** `5b817b17c034f34ae81ccaf10e3d0376be0ed580`.
+- **Despliegue:** pendiente de verificación.
