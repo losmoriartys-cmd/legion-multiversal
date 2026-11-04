@@ -3,7 +3,7 @@
   "source": "Twitch Helix API",
   "window_days": 30,
   "sampling_interval_minutes": 15,
-  "updated_at": "2026-11-04T22:13:04Z",
+  "updated_at": "2026-11-04T22:57:30Z",
   "channels": {
     "ladymoriarty01": {
       "login": "ladymoriarty01",
@@ -18,9 +18,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-04T22:13:04Z",
+      "updated_at": "2026-11-04T22:57:30Z",
       "window": {
-        "samples_total": 32,
+        "samples_total": 33,
         "live_samples": 0,
         "streams_observed": 0,
         "average_viewers_sampled": null,
@@ -319,6 +319,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-04T22:57:30Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -330,17 +339,17 @@
       "twitch_url": "https://twitch.tv/ther0d3r1k",
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
-      "live": false,
-      "current_viewers": null,
-      "current_game": null,
-      "current_title": null,
-      "stream_started_at": null,
-      "updated_at": "2026-11-04T22:13:04Z",
+      "live": true,
+      "current_viewers": 1,
+      "current_game": "Just Chatting",
+      "current_title": "🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
+      "stream_started_at": "2026-11-04T22:56:00Z",
+      "updated_at": "2026-11-04T22:57:30Z",
       "window": {
-        "samples_total": 32,
-        "live_samples": 4,
-        "streams_observed": 1,
-        "average_viewers_sampled": 23.2,
+        "samples_total": 33,
+        "live_samples": 5,
+        "streams_observed": 2,
+        "average_viewers_sampled": 18.8,
         "peak_viewers_sampled": 40,
         "observed_live_hours": 0.0,
         "estimated_hours_watched": 0.0,
@@ -358,6 +367,13 @@
             "streams_observed": 1,
             "average_viewers_sampled": 15.0,
             "peak_viewers_sampled": 20
+          },
+          {
+            "name": "Just Chatting",
+            "live_samples": 1,
+            "streams_observed": 1,
+            "average_viewers_sampled": 1.0,
+            "peak_viewers_sampled": 1
           }
         ],
         "daily_activity": [
@@ -370,9 +386,9 @@
           },
           {
             "date": "2026-11-04",
-            "live_samples": 3,
-            "streams_observed": 1,
-            "average_viewers_sampled": 23.3,
+            "live_samples": 4,
+            "streams_observed": 2,
+            "average_viewers_sampled": 17.8,
             "peak_viewers_sampled": 40
           }
         ],
@@ -666,6 +682,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-04T22:57:30Z",
+          "is_live": true,
+          "viewer_count": 1,
+          "game_name": "Just Chatting",
+          "title": "🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
+          "stream_id": "319422843765",
+          "started_at": "2026-11-04T22:56:00Z"
         }
       ]
     },
@@ -682,9 +707,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-04T22:13:04Z",
+      "updated_at": "2026-11-04T22:57:30Z",
       "window": {
-        "samples_total": 32,
+        "samples_total": 33,
         "live_samples": 1,
         "streams_observed": 1,
         "average_viewers_sampled": 9.0,
@@ -999,6 +1024,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-04T22:57:30Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -1015,9 +1049,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-04T22:13:04Z",
+      "updated_at": "2026-11-04T22:57:30Z",
       "window": {
-        "samples_total": 32,
+        "samples_total": 33,
         "live_samples": 3,
         "streams_observed": 1,
         "average_viewers_sampled": 6.3,
@@ -1332,6 +1366,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-04T22:57:30Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -1348,9 +1391,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-04T22:13:04Z",
+      "updated_at": "2026-11-04T22:57:30Z",
       "window": {
-        "samples_total": 32,
+        "samples_total": 33,
         "live_samples": 4,
         "streams_observed": 1,
         "average_viewers_sampled": 2.8,
@@ -1672,6 +1715,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-04T22:57:30Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -1688,9 +1740,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-04T22:13:04Z",
+      "updated_at": "2026-11-04T22:57:30Z",
       "window": {
-        "samples_total": 32,
+        "samples_total": 33,
         "live_samples": 3,
         "streams_observed": 1,
         "average_viewers_sampled": 1.0,
@@ -2005,6 +2057,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-04T22:57:30Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -2021,9 +2082,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-04T22:13:04Z",
+      "updated_at": "2026-11-04T22:57:30Z",
       "window": {
-        "samples_total": 32,
+        "samples_total": 33,
         "live_samples": 0,
         "streams_observed": 0,
         "average_viewers_sampled": null,
@@ -2322,6 +2383,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-04T22:57:30Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -2338,9 +2408,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-04T22:13:04Z",
+      "updated_at": "2026-11-04T22:57:30Z",
       "window": {
-        "samples_total": 32,
+        "samples_total": 33,
         "live_samples": 2,
         "streams_observed": 1,
         "average_viewers_sampled": 2.5,
@@ -2662,6 +2732,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-04T22:57:30Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -2673,22 +2752,38 @@
       "twitch_url": "https://twitch.tv/losmoriartys",
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
-      "live": false,
-      "current_viewers": null,
-      "current_game": null,
-      "current_title": null,
-      "stream_started_at": null,
-      "updated_at": "2026-11-04T22:13:04Z",
+      "live": true,
+      "current_viewers": 3,
+      "current_game": "Barfender",
+      "current_title": "[Publi] Hoy nos escabiamos y divertimos con @ladymoriarty01 con nuestra tienda de #Barfender",
+      "stream_started_at": "2026-11-04T22:53:33Z",
+      "updated_at": "2026-11-04T22:57:30Z",
       "window": {
-        "samples_total": 32,
-        "live_samples": 0,
-        "streams_observed": 0,
-        "average_viewers_sampled": null,
-        "peak_viewers_sampled": null,
+        "samples_total": 33,
+        "live_samples": 1,
+        "streams_observed": 1,
+        "average_viewers_sampled": 3.0,
+        "peak_viewers_sampled": 3,
         "observed_live_hours": 0.0,
         "estimated_hours_watched": 0.0,
-        "game_breakdown": [],
-        "daily_activity": [],
+        "game_breakdown": [
+          {
+            "name": "Barfender",
+            "live_samples": 1,
+            "streams_observed": 1,
+            "average_viewers_sampled": 3.0,
+            "peak_viewers_sampled": 3
+          }
+        ],
+        "daily_activity": [
+          {
+            "date": "2026-11-04",
+            "live_samples": 1,
+            "streams_observed": 1,
+            "average_viewers_sampled": 3.0,
+            "peak_viewers_sampled": 3
+          }
+        ],
         "method": "Muestreo propio cada 15 minutos; horas estimadas solo entre muestras consecutivas del mismo directo. Categorías y evolución diaria se calculan sobre las muestras observadas."
       },
       "snapshots": [
@@ -2979,6 +3074,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-04T22:57:30Z",
+          "is_live": true,
+          "viewer_count": 3,
+          "game_name": "Barfender",
+          "title": "[Publi] Hoy nos escabiamos y divertimos con @ladymoriarty01 con nuestra tienda de #Barfender",
+          "stream_id": "319422813045",
+          "started_at": "2026-11-04T22:53:33Z"
         }
       ]
     }
