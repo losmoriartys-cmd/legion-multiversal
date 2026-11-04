@@ -765,3 +765,13 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Validación estática:** se confirmó la clase visual del Capítulo 02, las reglas de textura y animación, el efecto de página, el silencio de la pestaña inicial y la conservación del control de jazz.
 - **Commit de interfaz:** [`28b555f5`](https://github.com/losmoriartys-cmd/s3xmen/commit/28b555f5f156f728d0641c8b034970ad2d72c976).
 - **Pendiente:** comprobar el resultado visual y el audio en GitHub Pages después de finalizar el despliegue.
+
+
+## 2026-11-04 — Retirar promedio histórico de la audiencia Lifetime
+
+- **Solicitud:** quitar el indicador «Promedio histórico · 6» de la sección «02 · Audiencia acumulada · Lifetime», porque puede confundirse con el pico histórico y con el promedio del período.
+- **Archivo modificado:** `index.html`.
+- **Implementado:** se retiró únicamente la tarjeta «Promedio histórico». Se mantienen seguidores, pico histórico con fecha, días activos, airtime acumulado y bans. El promedio del período (26) permanece en su sección correspondiente.
+- **Datos y automatizaciones:** no se modificaron cifras de origen, `data.json`, ni automatizaciones.
+- **Commit de interfaz:** [`cb72e6c5`](https://github.com/losmoriartys-cmd/s3xmen/commit/cb72e6c5e7e885d22dae8984aa73abf6d18c8aa3).
+- **Despliegue:** pendiente de verificar GitHub Pages.
