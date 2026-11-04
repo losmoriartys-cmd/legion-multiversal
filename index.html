@@ -899,6 +899,30 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
         @media(max-width:1000px){.origin-timeline{grid-template-columns:repeat(2,minmax(0,1fr))}}
         @media(max-width:560px){.origin-timeline{grid-template-columns:1fr}.origin-values-panel{padding:16px}.origin-values span{font-size:.7rem}}
 @media(prefers-reduced-motion:reduce){.roster-portrait-card,.roster-portrait-wrap img{transition:none!important}.roster-portrait-card:hover{transform:none}}
+     
+        .stats-methodology{margin-top:14px;border:1px solid #34445c;background:#0b1421;padding:14px 16px;color:#aebbd0;line-height:1.7}
+        .stats-methodology summary{cursor:pointer;color:#00d2ff;font-weight:900;letter-spacing:.04em}
+        .stats-methodology p{margin:12px 0 0;font-size:.86rem}
+        .live-intro{border-left:4px solid #ff4545}
+        .live-pulse{display:inline-block;width:9px;height:9px;margin-right:7px;border-radius:50%;background:#ff4545;box-shadow:0 0 0 5px rgba(255,69,69,.12);vertical-align:middle}
+        .live-directory{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:20px 0}
+        .live-channel-card{padding:16px;background:#111a28;border:1px solid #34445c;display:flex;flex-direction:column;gap:8px}
+        .live-channel-card strong{color:#fff;font-family:'Bangers',cursive;font-size:1.35rem}
+        .live-channel-card small{color:#9aa9bf}
+        .live-channel-card button{padding:10px 12px;background:#ff4545;color:#fff;border:2px solid #05070b;font-family:'Bangers',cursive;font-size:1.05rem;cursor:pointer}
+        .live-channel-card button:hover{background:#ffde00;color:#000}
+        .live-channel-card.offline{opacity:.8}
+        .live-channel-card.offline a{color:#00d2ff;font-weight:800}
+        .live-player-wrap{margin-top:24px;padding:18px;background:#080e18;border:2px solid #34445c}
+        .live-player-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+        .live-player-heading h3{font:1.5rem 'Bangers',cursive;color:#ffde00}
+        .live-player-heading a{color:#00d2ff}
+        .live-player{width:100%;aspect-ratio:16/9;min-height:300px;background:#000}
+        .live-player iframe{display:block;width:100%;height:100%;min-height:300px;border:0}
+        .site-technical-footer{max-width:1300px;margin:28px auto 0;padding:18px 22px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:#8191a8;font-size:.76rem;border-top:1px solid #263449}
+        .site-technical-footer a{color:#00d2ff}
+        @media(max-width:560px){.live-player{min-height:240px}.live-player iframe{min-height:240px}.site-technical-footer{padding:16px 20px}}
+
     </style>
 </head>
 <body>
@@ -913,16 +937,16 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
                 </div>
             </div>
         </div>
-        <nav>
-            <button class="nav-btn active" onclick="switchChapter(1)">CAP 1: PORTADA</button>
-            <button class="nav-btn" onclick="switchChapter(2)">CAP 2: ROSTER</button>
-            <button class="nav-btn" onclick="switchChapter(3)">CAP 3: DATABASE</button>
-            <button class="nav-btn" onclick="switchChapter(4)">CAP 4: MISIONES</button>
-            
-            <button class="nav-btn" onclick="switchChapter(5)">CAP 5: ARSENAL JUEGOS</button>
-            <button class="nav-btn" onclick="switchChapter(6)">CAP 6: RECLUTA</button>
-            <button class="nav-btn" onclick="switchChapter(7)">CAP 7: STAFF</button>
-        <button class="nav-btn" onclick="switchChapter(8)">CAP 8: PARTNERS</button><button class="nav-btn" onclick="switchChapter(9)">CAP 9: COMUNIDAD</button></nav>
+        <nav aria-label="Navegación principal">
+            <button class="nav-btn active" data-chapter="1" onclick="switchChapter(1)">PORTADA</button>
+            <button class="nav-btn" data-chapter="2" onclick="switchChapter(2)">ROSTER</button>
+            <button class="nav-btn" data-chapter="3" onclick="switchChapter(3)">ESTADÍSTICAS</button>
+            <button class="nav-btn" data-chapter="10" onclick="switchChapter(10)">EN VIVO</button>
+            <button class="nav-btn" data-chapter="5" onclick="switchChapter(5)">ARSENAL</button>
+            <button class="nav-btn" data-chapter="8" onclick="switchChapter(8)">ALIANZAS</button>
+            <button class="nav-btn" data-chapter="9" onclick="switchChapter(9)">COMUNIDAD</button>
+            <button class="nav-btn" data-chapter="6" onclick="switchChapter(6)">RECLUTAMIENTO</button>
+        </nav>
     </header>
 
     <main>
@@ -1038,36 +1062,28 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
         <!-- CAPÍTULO 3: DATABASE -->
 <section id="chapter-3" class="chapter-panel comic-page">
 <div class="chapter-tag">CAPÍTULO 03</div>
-<h2 class="comic-title">THE TEAM DATABASE — DATOS REALES</h2>
+<h2 class="comic-title">EL ALCANCE DE NUESTRA COMUNIDAD</h2>
 <div class="premium-panel">
- <div class="premium-kicker">Instituto S3X-MEN · Observatorio de actividad</div>
- <h3>Estadísticas verificables del roster</h3>
- <p>Panel conectado a Twitch Helix mediante <b>data.json</b>: 9 canales, historial propio de hasta 30 días y una muestra programada cada 15 minutos. La información se presenta tal como la devuelve la API; los campos sin autorización o sin observaciones se muestran como no disponibles.</p>
- <div id="stats-updated" class="stats-note">Cargando fecha de actualización…</div>
+ <div class="premium-kicker">Media kit · actividad observada</div>
+ <h3>Una comunidad activa, conectada y en crecimiento</h3>
+ <p>Reunimos creadores con propuestas propias y una identidad compartida. Este panel ofrece una fotografía de la actividad reciente de los canales Twitch que integran el roster, con datos observados y fecha de actualización.</p>
+ <div id="stats-updated" class="stats-note">Actualizando indicadores…</div>
  <div id="stats-summary" class="premium-grid"></div>
- <div class="stats-table-wrap"><table class="stats-table"><thead><tr><th>Canal</th><th>Estado</th><th>Espectadores actuales</th><th>Categoría actual</th><th>Promedio observado</th><th>Pico observado</th><th>Horas en directo observadas</th><th>Muestras</th></tr></thead><tbody id="stats-table-body"><tr><td colspan="8">Cargando estadísticas…</td></tr></tbody></table></div>
- <p class="stats-note">Metodología: el sistema registra el estado del canal y los espectadores visibles en cada consulta. El promedio y el pico son estadísticas de las muestras propias, no métricas oficiales de Creator Dashboard. Las horas observadas y las horas vistas estimadas solo se calculan entre muestras consecutivas del mismo directo. Seguidores y analíticas históricas oficiales requieren permisos adicionales y no se completan con estimaciones.</p>
-</div>
-<div class="premium-grid">
- <div class="premium-card"><h3>Qué medimos</h3><p>Estado en directo, espectadores actuales, categoría y evolución de las muestras propias registradas.</p></div>
- <div class="premium-card"><h3>Qué no inventamos</h3><p>Seguidores, promedio oficial y pico oficial quedan pendientes cuando Twitch no los entrega con los permisos disponibles.</p></div>
- <div class="premium-card"><h3>Próxima evolución</h3><p>Mantener un historial móvil de hasta 30 días y sumar reportes oficiales de Creator Dashboard cuando cada canal los facilite.</p></div>
+ <details class="stats-methodology">
+  <summary>Fuentes, metodología y alcance de los datos</summary>
+  <p>La información se obtiene de Twitch Helix mediante <b>data.json</b>. El sistema consulta los canales de forma programada cada 15 minutos y conserva una ventana móvil de hasta 30 días. La frecuencia es programada: no representa una detección instantánea ni garantiza que cada cambio de estado se registre en el momento exacto.</p>
+  <p>Los espectadores actuales y el estado en directo corresponden a la última consulta disponible. Los promedios, picos, horas en directo y horas vistas se calculan a partir de las muestras propias y no sustituyen las métricas oficiales de Twitch Creator Dashboard. Las horas vistas son estimaciones derivadas del muestreo; los intervalos sin observaciones no se reconstruyen.</p>
+  <p>Los totales de seguidores y las analíticas históricas oficiales solo se publican cuando la fuente y los permisos permiten verificarlos. No se completan valores faltantes mediante estimaciones.</p>
+ </details>
+ <details class="stats-methodology">
+  <summary>Ver detalle técnico por canal</summary>
+  <div class="stats-table-wrap"><table class="stats-table"><thead><tr><th>Canal</th><th>Estado</th><th>Espectadores actuales</th><th>Categoría</th><th>Promedio observado</th><th>Pico observado</th><th>Horas observadas</th><th>Muestras</th></tr></thead><tbody id="stats-table-body"><tr><td colspan="8">Cargando estadísticas…</td></tr></tbody></table></div>
+ </details>
 </div>
 </section>
 
         <!-- CAPÍTULO 4: LURKIT + KEYMAILER -->
-<section id="chapter-4" class="chapter-panel comic-page"><div class="chapter-tag">CAPÍTULO 04</div><h2 class="comic-title">CENTRO DE OPERACIONES — LURKIT + KEYMAILER</h2>
-<div class="premium-grid">
-<div class="premium-card"><div class="premium-kicker">Plataforma de campañas</div><h3><a href="https://www.lurkit.com/campaigns/browse" target="_blank">LURKIT</a></h3><p>Según el instructivo del equipo, reúne campañas de claves, Creator Programs y Paid Quests. Es la herramienta recomendada en el Excel para campañas cooperativas y oportunidades de largo plazo.</p></div>
-<div class="premium-card"><div class="premium-kicker">Descubrimiento de juegos</div><h3><a href="https://keymailer.co/creators" target="_blank">KEYMAILER</a></h3><p>Permite vincular canales, explorar campañas y solicitar juegos. El Excel la recomienda especialmente para ampliar la búsqueda de lanzamientos y títulos premium.</p></div>
-</div>
-<div class="premium-panel"><h3>Ruta de trabajo para cada integrante</h3><ol><li>Crear la cuenta y vincular los canales que correspondan.</li><li>Completar biografía, país, idioma, géneros y redes.</li><li>Revisar los requisitos específicos de cada campaña.</li><li>Enviar una solicitud personalizada, sin copiar el mismo texto a todos los estudios.</li><li>Si se aprueba, respetar fechas, plataformas, embargos y condiciones.</li><li>Publicar la cobertura solicitada y entregar VOD, clips o enlaces como evidencia.</li></ol></div>
-<div class="premium-grid">
-<div class="premium-card"><h3>Lurkit — tipos de oportunidad</h3><ul><li><b>Key Campaigns:</b> solicitudes de claves.</li><li><b>Creator Programs:</b> relaciones continuas, posibles accesos anticipados, recursos y beneficios según cada programa.</li><li><b>Paid Quests:</b> campañas remuneradas sujetas a objetivos, elegibilidad y condiciones.</li></ul><p><a href="https://www.lurkit.com/campaigns/browse" target="_blank">Explorar campañas</a></p></div>
-<div class="premium-card"><h3>Keymailer — flujo de solicitud</h3><ul><li>Vincular y verificar los canales.</li><li>Completar géneros, idioma y perfil.</li><li>Filtrar campañas disponibles.</li><li>Solicitar y esperar respuesta del publisher.</li><li>Publicar la cobertura y mantener actualizado el perfil.</li></ul><p><a href="https://keymailer.co/how-it-works" target="_blank">Cómo funciona</a></p></div>
-</div>
-<div class="premium-panel"><h3>Pitch institucional — español</h3><p>Hola, equipo de [ESTUDIO]. Somos el Instituto S3X-MEN, una comunidad latinoamericana de creadores de contenido que trabaja en colaboraciones entre Argentina, Bolivia y México. Producimos directos en español, sesiones cooperativas y contenidos individuales. Nos interesa conocer [JUEGO] y evaluar una cobertura acorde a nuestra comunidad. Canal: [ENLACE]. Métricas verificables: [SEGUIDORES], [PROMEDIO], [PICO] y período [30 DÍAS]. Muchas gracias por considerar nuestra propuesta.</p><h3>Institutional pitch — English</h3><p>Hello [STUDIO] team. We are Instituto S3X-MEN, a Latin American creator collective from Argentina, Bolivia and Mexico. We produce Spanish-language livestreams, co-op sessions and individual gaming content. We would love to explore a possible coverage opportunity for [GAME]. Channel: [LINK]. Verified metrics: [FOLLOWERS], [AVERAGE VIEWERS], [PEAK VIEWERS], period: [30 DAYS]. Thank you for your consideration.</p></div>
-</section>
+<!-- Recursos de Lurkit y Keymailer: material operativo retirado de la navegación pública. -->
 
         <!-- CAPÍTULO 6: JUEGOS COOPERATIVOS -->
 <section id="chapter-5" class="chapter-panel comic-page">
@@ -1167,6 +1183,15 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
 <p>Las fichas enlazan a la tienda oficial de cada juego. Antes de convocar al roster, confirmá que todos tengan la misma edición o una versión compatible. En Minecraft, distinguí Java de Bedrock; en los títulos de Steam, revisá los requisitos y el modo online de la ficha vigente.</p>
 </div>
 </section>
+<section id="chapter-10" class="chapter-panel comic-page live-chapter">
+ <div class="chapter-tag">TRANSMISIONES</div>
+ <h2 class="comic-title">LEGIÓN MULTIVERSAL · EN VIVO</h2>
+ <div class="premium-panel live-intro"><div class="premium-kicker"><span class="live-pulse"></span> CENTRAL DE TRANSMISIONES</div><h3>La Legión está en directo</h3><p>Cuando uno o más integrantes estén transmitiendo, vas a poder elegir un canal y verlo directamente desde esta página. La disponibilidad se actualiza a partir de las consultas programadas del sistema.</p></div>
+ <div id="live-directory" class="live-directory"><p class="stats-note">Consultando el estado de los canales…</p></div>
+ <div id="live-player-wrap" class="live-player-wrap" hidden><div class="live-player-heading"><h3 id="live-player-title">TRANSMISIÓN SELECCIONADA</h3><a id="live-open-channel" href="https://twitch.tv/losmoriartys" target="_blank" rel="noopener noreferrer">Abrir canal en Twitch ↗</a></div><div id="live-player" class="live-player"></div></div>
+ <p class="stats-note">El reproductor oficial de Twitch requiere conexión a internet y un navegador compatible. En GitHub Pages se utiliza el dominio publicado como parámetro de inserción; si abrís una copia local, Twitch puede bloquear la reproducción.</p>
+</section>
+
 <!-- CAPÍTULO 7: RECLUTAMIENTO -->
         <section id="chapter-6" class="chapter-panel">
             <div class="chapter-tag">CAPÍTULO 06</div>
@@ -1194,45 +1219,37 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
         </section>
 
         <!-- CAPÍTULO 8: STAFF -->
-        <section id="chapter-7" class="chapter-panel">
-            <div class="chapter-tag">CAPÍTULO 07</div>
-            <h2 class="comic-title">CONTACTO DIRECTO CON EL STAFF</h2>
-            <div class="comic-grid-list">
-                <div class="comic-item-card">
-                    <h3>LOSMORIARTYS</h3>
-                    <p>Fundador y Estratega General</p>
-                    <a href="https://twitch.tv/losmoriartys" target="_blank" class="btn-link">CONTACTAR</a>
-                </div>
-            </div>
-        </section>
+        <!-- Contacto técnico trasladado al pie de página. -->
     <!-- CAPÍTULO 9: PARTNERS Y MARCAS -->
-<section id="chapter-8" class="chapter-panel comic-page"><div class="chapter-tag">CAPÍTULO 08</div><h2 class="comic-title">ALIANZAS, PARTNERS Y OPORTUNIDADES</h2>
-<div class="premium-panel"><div class="premium-kicker">Relaciones y colaboraciones declaradas</div><h3>Una comunidad abierta a trabajar con la industria</h3><p>El Instituto reúne creadores con experiencia en programas de partners, campañas de claves y colaboraciones con desarrolladores. Diferenciamos claramente una asociación oficial, un programa de creadores y una campaña puntual.</p>
-<div class="premium-grid"><div class="premium-card"><h3>TheR0D3R1K</h3><p>Partner de Twitch — Bolivia.</p></div><div class="premium-card"><h3>Los Moriartys</h3><p>Partner Creator declarado de Enshrouded y Cinderia.</p></div><div class="premium-card"><h3>Roster</h3><p>Participación en campañas y solicitudes mediante Lurkit y Keymailer.</p></div></div></div>
-<div class="premium-panel"><div class="premium-kicker">Ficha de aplicación · datos de actividad observada</div><h3>Estado verificable de los canales</h3><p>La sincronización automática muestra presencia en directo y muestras observadas durante una ventana móvil de hasta 30 días. Estos datos sirven para seguimiento interno, pero <b>no sustituyen</b> el promedio de espectadores de 30 días ni las métricas oficiales exigidas por los programas de partners. Pato utiliza YouTube y se gestiona por separado.</p><div class="stats-table-wrap"><table class="stats-table"><thead><tr><th>Canal</th><th>Estado</th><th>Espectadores actuales</th><th>Categoría</th><th>Promedio observado</th><th>Pico observado</th><th>Muestras</th></tr></thead><tbody id="partner-metrics-body"><tr><td colspan="7">Cargando métricas…</td></tr></tbody></table></div><p class="stats-note">Para solicitudes comerciales, completar por separado las métricas oficiales del período solicitado desde Twitch Creator Dashboard → Analytics → Overview. No usar las muestras parciales como sustituto.</p></div><div class="premium-panel"><h3>Directorio de estudios y programas documentados</h3><p class="stats-note">Los umbrales y beneficios siguientes provienen del Excel del equipo. Son referencias de trabajo, no confirmación de que las convocatorias sigan abiertas ni de que un integrante esté aprobado.</p>
-<div class="premium-grid">
-<div class="premium-card"><h3>THQ Nordic Creator Portal</h3><p><b>Referencia de requisitos:</b> El Excel sugería 0–5+ promedio y 100 seguidores. El portal oficial no publica un mínimo numérico general; revisa cada misión. La selección del Creator Portal puede ser manual.</p><p>Keys, noticias, embargos, sorteos y assets.</p><p><span class="premium-kicker">Verificar convocatoria actual antes de aplicar</span></p></div><div class="premium-card"><h3>Raw Fury Creator Program</h3><p><b>Referencia de requisitos:</b> El programa Fellowship of the Furies pide como referencia 20 espectadores concurrentes promedio en Twitch durante el último mes o 800 vistas promedio en los últimos 5 videos de YouTube. La selección es manual y cumplir el umbral no garantiza ingreso.</p><p>Indies, misiones, recompensas y posibles Paid Quests.</p><p><span class="premium-kicker">Verificar convocatoria actual antes de aplicar</span></p></div><div class="premium-card"><h3>Solasta II Partner Program</h3><p><b>Referencia de requisitos:</b> Excel: 5+ promedio; 200 seguidores mínimos</p><p>Claves, acceso anticipado y comunidad con desarrolladores.</p><p><span class="premium-kicker">Verificar convocatoria actual antes de aplicar</span></p></div><div class="premium-card"><h3>The Lord of the Rings: Return to Moria</h3><p><b>Referencia de requisitos:</b> Excel: 5–10+ promedio; 200 seguidores mínimos</p><p>Claves de juego/DLC y acceso anticipado.</p><p><span class="premium-kicker">Verificar convocatoria actual antes de aplicar</span></p></div><div class="premium-card"><h3>DayZ Creator Program</h3><p><b>Referencia de requisitos:</b> El Excel anotaba 10+ promedio y 300 seguidores. Creator Crew oficial es abierto a creadores de cualquier tamaño; no confundirlo con el Partner Programme, que tiene criterios separados.</p><p>Claves, showcases y materiales promocionales.</p><p><span class="premium-kicker">Verificar convocatoria actual antes de aplicar</span></p></div><div class="premium-card"><h3>Ready or Not Creator Program</h3><p><b>Referencia de requisitos:</b> Excel: 10–15+ promedio; 300 seguidores mínimos</p><p>Claves, DLC y campañas.</p><p><span class="premium-kicker">Verificar convocatoria actual antes de aplicar</span></p></div><div class="premium-card"><h3>Sea of Thieves Programme</h3><p><b>Referencia de requisitos:</b> El Excel anotaba 10+ promedio y 300 seguidores; Creator Crew oficial está abierto a creadores de cualquier tamaño y no equivale al Partner Programme.</p><p>Creator Crew ofrece recursos, desafíos y recompensas comunitarias. No confundirlo con el Partner Programme.</p><p><span class="premium-kicker">Verificar convocatoria actual antes de aplicar</span></p></div><div class="premium-card"><h3>Rematch Content Creator</h3><p><b>Referencia de requisitos:</b> Excel: 10+ promedio; 250 seguidores mínimos</p><p>Pruebas, contacto con desarrolladores y perks.</p><p><span class="premium-kicker">Verificar convocatoria actual antes de aplicar</span></p></div><div class="premium-card"><h3>Funcom Creator Program</h3><p><b>Referencia de requisitos:</b> El Excel sugería 15–20+ promedio y 500 seguidores. La guía oficial actual de Funcom usa como referencia 20 CCV en Twitch (últimos 30 días) o 1.500 vistas promedio en YouTube.</p><p>Conan Exiles, Dune: Awakening y Metal: Hellsinger. Requisitos actuales: 20 CCV Twitch o 1.500 vistas medias YouTube como referencia.</p><p><span class="premium-kicker">Verificar convocatoria actual antes de aplicar</span></p></div><div class="premium-card"><h3>V Rising / Stunlock</h3><p><b>Referencia de requisitos:</b> Excel: 15+ promedio; 400 seguidores mínimos</p><p>Programa de creadores y claves.</p><p><span class="premium-kicker">Verificar convocatoria actual antes de aplicar</span></p></div><div class="premium-card"><h3>Kinetic Games / Phasmophobia</h3><p><b>Referencia de requisitos:</b> El Excel anotaba 20–50+ promedio y 500+ seguidores; la página oficial actual exige 100 CCV como mínimo (ideal 150) dos veces por semana o videos de Phasmophobia con 2.500 vistas promedio (ideal 5.000). El programa está cerrado a nuevas solicitudes.</p><p>El Excel registró estos beneficios históricos. Estado oficial consultado: solicitudes de Partner cerradas; los requisitos vigentes y la apertura deben revisarse en el enlace oficial.</p><p><span class="premium-kicker">Verificar convocatoria actual antes de aplicar</span></p></div><div class="premium-card"><h3>Hunt: Showdown 1896</h3><p><b>Referencia de requisitos:</b> Excel: 30–50+ promedio para paid; 1.000 seguidores</p><p>Claves, campañas y posibles acciones pagas.</p><p><span class="premium-kicker">Verificar convocatoria actual antes de aplicar</span></p></div><div class="premium-card"><h3>Quantic Dream</h3><p><b>Referencia de requisitos:</b> Excel: 20+ promedio; 500 seguidores mínimos</p><p>Detroit: Become Human / Heavy Rain; programa de creadores.</p><p><span class="premium-kicker">Verificar convocatoria actual antes de aplicar</span></p></div><div class="premium-card"><h3>ARMA Reforger</h3><p><b>Referencia de requisitos:</b> Excel: 25+ promedio; 500 seguidores mínimos</p><p>Campañas de claves y posibles acciones pagas.</p><p><span class="premium-kicker">Verificar convocatoria actual antes de aplicar</span></p></div><div class="premium-card"><h3>Clair Obscur: Expedition 33</h3><p><b>Referencia de requisitos:</b> Excel: 15+ promedio; 300 seguidores mínimos</p><p>Accesos, códigos y eventos.</p><p><span class="premium-kicker">Verificar convocatoria actual antes de aplicar</span></p></div>
-</div></div>
-<div class="premium-panel"><div class="premium-kicker">Verificación externa · 03/11/2026</div><h3>Programas con información oficial comprobada</h3><div class="premium-grid"><div class="premium-card"><h3><a href="https://creators.thqnordic.com/" target="_blank" rel="noopener">THQ Nordic</a></h3><p>Publisher con catálogo amplio de acción, RPG, aventura y plataformas. Entre sus franquicias figuran Darksiders, Gothic, Titan Quest y Destroy All Humans! El portal contempla claves, noticias, embargos, sorteos, assets y promoción. No publica un umbral universal de espectadores; las solicitudes se revisan manualmente. Los títulos disponibles dependen de cada campaña.</p></div><div class="premium-card"><h3><a href="https://www.lurkit.gg/creators/creator-programs" target="_blank" rel="noopener">Raw Fury</a></h3><p>Publisher especializado en juegos independientes. Su catálogo incluye títulos como Cassette Beasts, Kingdom Two Crowns, Sable y Dome Keeper. Fellowship of the Furies se gestiona mediante Lurkit y ofrece acceso a juegos, novedades, misiones, recompensas, quests privadas y embargos anticipados. Requisitos de referencia: 20 CCV Twitch o 800 vistas promedio en los últimos 5 videos de YouTube; la selección es manual.</p></div><div class="premium-card"><h3><a href="https://creators.funcom.com/" target="_blank" rel="noopener">Funcom</a></h3><p>Estudio detrás de Dune: Awakening, Conan Exiles y Metal: Hellsinger. La guía oficial usa 20 CCV en Twitch durante los últimos 30 días o 1.500 vistas promedio en YouTube como referencia, además de actividad y buen estado del canal.</p></div><div class="premium-card"><h3><a href="https://creators.kineticgames.co.uk/" target="_blank" rel="noopener">Kinetic Games · Phasmophobia</a></h3><p>Phasmophobia es un juego de terror cooperativo para cuatro jugadores. La página oficial informa que las solicitudes del Partner Program están cerradas actualmente. Requisitos publicados: mínimo 100 CCV (ideal 150) dos veces por semana o videos con 2.500 vistas promedio (ideal 5.000).</p></div><div class="premium-card"><h3><a href="https://www.seaofthieves.com/creator-crew" target="_blank" rel="noopener">Sea of Thieves · Creator Crew</a></h3><p>Programa comunitario oficial abierto a creadores de cualquier tamaño, con recursos, desafíos y recompensas. No equivale al Partner Programme, que es una categoría separada.</p></div></div><p class="stats-note">La matriz del Excel conserva sus objetivos históricos para planificar solicitudes; esta verificación externa prevalece cuando hay diferencias. La disponibilidad de campañas y los requisitos pueden cambiar.</p></div><div class="premium-panel"><h3>Propuestas comerciales y de prensa</h3><p>¿Sos desarrollador, publisher, agencia, marca o equipo de marketing? Podés acercarnos propuestas de campañas, claves, accesos anticipados, patrocinios, sorteos o colaboraciones.</p><p><b>Información útil:</b> nombre de empresa, persona de contacto, juego o producto, objetivo de campaña, fechas, plataformas, entregables, presupuesto (si corresponde) y enlace a materiales oficiales.</p><p>Contacto inicial: <a href="mailto:losmoriartys@gmail.com">losmoriartys@gmail.com</a></p></div>
+<section id="chapter-8" class="chapter-panel comic-page">
+ <div class="chapter-tag">CAPÍTULO 08</div><h2 class="comic-title">ALIANZAS, PARTNERS Y OPORTUNIDADES</h2>
+ <div class="premium-panel"><div class="premium-kicker">Propuesta para marcas, estudios y publishers</div><h3>Colaborar para crear experiencias que conecten</h3>
+ <p>Legión Multiversal reúne creadores de gaming, entretenimiento, tecnología y desarrollo personal. Diseñamos colaboraciones que respetan la identidad de cada canal y buscan una conexión genuina con la audiencia.</p></div>
+ <div class="premium-grid">
+  <article class="premium-card"><h3>DIRECTOS Y COBERTURA</h3><p>Presentaciones de juegos, primeras impresiones, sesiones especiales, cobertura de lanzamientos y experiencias en vivo.</p></article>
+  <article class="premium-card"><h3>CONTENIDO COOPERATIVO</h3><p>Sesiones grupales, desafíos, eventos con varios creadores y formatos que muestran la interacción real del equipo.</p></article>
+  <article class="premium-card"><h3>CLIPS Y DIFUSIÓN</h3><p>Momentos destacados, piezas breves y publicaciones complementarias para extender la conversación más allá del directo.</p></article>
+  <article class="premium-card"><h3>ACCIONES CON LA COMUNIDAD</h3><p>Dinámicas participativas, sorteos cuando estén autorizados, encuentros y experiencias alineadas con cada campaña.</p></article>
+ </div>
+ <div class="premium-panel"><div class="premium-kicker">Experiencia y relaciones</div><h3>Un equipo con experiencia en el ecosistema creator</h3>
+ <p>Los integrantes cuentan con experiencia en transmisiones, campañas de videojuegos, solicitudes de acceso y programas para creadores. Las colaboraciones y acreditaciones se comunican de forma individual y únicamente cuando pueden respaldarse.</p>
+ <p><b>Relaciones declaradas:</b> TheR0D3R1K cuenta con Partner de Twitch. Los Moriartys han participado en iniciativas de creadores vinculadas a Enshrouded y Cinderia. La participación en campañas o plataformas de gestión no implica por sí sola una asociación oficial con sus publishers.</p>
+ </div>
+ <div class="premium-panel"><div class="premium-kicker">Contacto comercial</div><h3>Hablemos de una colaboración</h3><p>Desarrolladores, publishers, agencias y marcas pueden acercar propuestas de campañas, patrocinios, cobertura, accesos anticipados o acciones con la comunidad.</p><p>Para evaluar una propuesta, compartí la marca o juego, objetivos, fechas, plataformas, entregables esperados y presupuesto disponible.</p><p><a class="btn-link" href="mailto:losmoriartys@gmail.com?subject=Propuesta%20comercial%20-%20Legi%C3%B3n%20Multiversal">losmoriartys@gmail.com</a></p></div>
 </section>
 <!-- CAPÍTULO 09: COMUNIDAD Y AGENDA -->
-<section id="chapter-9" class="chapter-panel comic-page"><div class="chapter-tag">CAPÍTULO 09</div><h2 class="comic-title">CENTRO DE COMUNIDAD — AGENDA Y SUGERENCIAS</h2>
-<div class="premium-grid"><div class="premium-card"><div class="premium-kicker">Horario grupal documentado</div><h3>Sábados — 21:00 ARG</h3><p>Colaboración principal propuesta en el Excel: 19:00 Bolivia y 18:00 México CDMX. La participación se coordina según disponibilidad.</p></div><div class="premium-card"><div class="premium-kicker">Encuentro opcional</div><h3>Miércoles — 20:00 ARG</h3><p>Mini colaboración sugerida para grupos reducidos.</p></div><div class="premium-card"><div class="premium-kicker">Franja sugerida</div><h3>Viernes — 23:00 ARG</h3><p>Encuentro propuesto para conectar con integrantes de México.</p></div></div>
-<div class="premium-panel"><h3>Rotación de juegos sugerida en el Excel</h3><ul><li>Semana 1: Lethal Company</li><li>Semana 2: Supermarket Together</li><li>Semana 3: R.E.P.O.</li><li>Semana 4: Fortnite Customs</li><li>Semana 5: Phasmophobia</li><li>Semana 6: Valheim</li></ul><p class="stats-note">Agenda propuesta, no calendario confirmado. Los horarios individuales de cada integrante se completarán con disponibilidad aprobada.</p></div>
-<div class="premium-panel"><h3>Horarios individuales registrados en el Excel</h3><div class="stats-table-wrap"><table class="stats-table"><thead><tr><th>Integrante</th><th>Disponibilidad documentada</th></tr></thead><tbody>
-<tr><td>Los Moriartys</td><td>Lun/Mié/Vie 20:00 ARG · Sáb 21:00 ARG</td></tr>
-<tr><td>TheR0D3R1K</td><td>20:00 Bolivia · Sábados en horario grupal</td></tr>
-<tr><td>Capyunaplay</td><td>Lun/Mié/Jue 18:00 ARG · Sáb 21:00 ARG</td></tr>
-<tr><td>ArdiPii</td><td>18:00 México CDMX · Sábados en horario grupal</td></tr>
-<tr><td>Akumazoldyck</td><td>18:00 México CDMX · Sábados en horario grupal</td></tr>
-<tr><td>elgabii090</td><td>19:00 ARG</td></tr>
-<tr><td>habitos_atomicos</td><td>20:00 ARG</td></tr>
-<tr><td>Dave</td><td>Horario pendiente de confirmar</td></tr>
-<tr><td>Pato</td><td>Horario pendiente de confirmar</td></tr>
-</tbody></table></div><p class="stats-note">Horarios recuperados de la planilla del equipo. Confirmar con cada integrante antes de publicar como calendario definitivo; el Excel contiene datos de una etapa anterior.</p></div><div class="premium-panel"><h3>Reglas de colaboración</h3><ul><li>Evitar lurkeo masivo y prácticas de follow-for-follow.</li><li>Priorizar interacción real con el contenido y la comunidad.</li><li>Coordinar raids al finalizar, cuando corresponda.</li><li>Preparar clips individuales de las colaboraciones y etiquetar a los participantes.</li></ul></div>
-<div class="premium-panel"><h3>Buzón de sugerencias</h3><p>Proponé juegos, eventos, actividades, colaboraciones o mejoras para el Instituto.</p><form class="comic-form" onsubmit="event.preventDefault();const t=this.querySelector('textarea').value.trim();if(t){const s='Sugerencia Instituto S3X-MEN: '+t;window.location.href='mailto:losmoriartys@gmail.com?subject='+encodeURIComponent('Sugerencia para el Instituto')+'&body='+encodeURIComponent(s)}"><div class="form-group"><label>Tu propuesta</label><textarea rows="4" placeholder="Contanos tu idea…" required></textarea></div><button class="comic-submit-btn" type="submit">ENVIAR SUGERENCIA</button></form></div>
+<section id="chapter-9" class="chapter-panel comic-page">
+ <div class="chapter-tag">COMUNIDAD</div><h2 class="comic-title">UN UNIVERSO QUE SE CONSTRUYE EN EQUIPO</h2>
+ <div class="premium-panel"><div class="premium-kicker">Comunidad · participación · colaboración</div><h3>Hay muchas formas de formar parte</h3><p>La Legión conecta personas, canales y proyectos distintos. Compartimos partidas, conversaciones, ideas y oportunidades para que cada integrante pueda crecer con su propia identidad.</p></div>
+ <div class="premium-grid">
+  <article class="premium-card"><h3>COMPARTIR</h3><p>Descubrí los canales del roster, acompañá sus directos y conocé las distintas propuestas que conviven en la Legión.</p></article>
+  <article class="premium-card"><h3>PARTICIPAR</h3><p>Sumate a las conversaciones, sugerí juegos y proponé actividades grupales a través de nuestros canales públicos.</p></article>
+  <article class="premium-card"><h3>CRECER</h3><p>Creemos en la colaboración genuina, el respeto entre creadores y el intercambio de conocimientos y audiencias.</p></article>
+ </div>
+ <div class="premium-panel"><h3>Encontranos en Twitch</h3><p>La actividad de cada integrante se publica en su propio canal. Los horarios y las agendas se anuncian cuando cada directo o encuentro está confirmado.</p><p><a href="https://twitch.tv/losmoriartys" target="_blank" rel="noopener noreferrer">Los Moriartys ↗</a></p></div>
 </section>
 </main>
+<footer class="site-technical-footer"><span>LEGIÓN MULTIVERSAL · DIFERENTES MUNDOS. UNA MISMA LEGIÓN.</span><a href="mailto:losmoriartys@gmail.com?subject=Reporte%20t%C3%A9cnico%20del%20sitio">Reportar un problema técnico</a></footer>
 
     <!-- VENTANA MODAL / EXPEDIENTE INDIVIDUAL (PÁGINAS A, B, C) -->
     <div class="modal-overlay" id="hero-modal" onclick="if(event.target === this) closeModal();">
@@ -1652,6 +1669,28 @@ function formatMetric(value,digits=2){
  if(value===null||value===undefined)return 'Pendiente de verificación';
  return typeof value==='number'?value.toLocaleString('es-AR',{maximumFractionDigits:digits}):value;
 }
+function renderLiveDirectory(channels){
+ const host=document.getElementById('live-directory');if(!host)return;
+ const live=(channels||[]).filter(c=>c.live);
+ const offline=(channels||[]).filter(c=>!c.live);
+ if(!live.length){
+  host.innerHTML='<div class="premium-panel"><div class="premium-kicker">ESTADO ACTUAL</div><h3>En este momento no hay integrantes detectados en directo</h3><p>La próxima consulta programada actualizará el estado. Mientras tanto, podés visitar los canales del roster.</p></div>'+offline.map(c=>'<article class="live-channel-card offline"><strong>'+escapeStatsHtml(c.display_name)+'</strong><small>Sin directo detectado en la última consulta</small><a href="https://twitch.tv/'+encodeURIComponent(c.login)+'" target="_blank" rel="noopener noreferrer">Visitar canal ↗</a></article>').join('');
+  return;
+ }
+ host.innerHTML=live.map(c=>'<article class="live-channel-card"><span class="stats-status partial">● EN DIRECTO</span><strong>'+escapeStatsHtml(c.display_name)+'</strong><small>'+escapeStatsHtml(c.current_game||'Categoría no informada')+' · '+(c.current_viewers===null?'Espectadores no disponibles':statsNumber(c.current_viewers,0)+' espectadores')+'</small><button type="button" onclick="selectLiveChannel(\''+escapeStatsHtml(c.login)+'\',\''+escapeStatsHtml(c.display_name)+'\')">VER TRANSMISIÓN</button></article>').join('');
+}
+function selectLiveChannel(login,displayName){
+ const wrap=document.getElementById('live-player-wrap'),player=document.getElementById('live-player'),title=document.getElementById('live-player-title'),link=document.getElementById('live-open-channel');
+ if(!wrap||!player)return;
+ const parent=window.location.hostname;
+ const safeLogin=String(login||'').toLowerCase().replace(/[^a-z0-9_]/g,'');
+ if(!safeLogin||!parent)return;
+ title.textContent='EN VIVO · '+displayName;
+ link.href='https://twitch.tv/'+safeLogin;
+ player.innerHTML='<iframe src="https://player.twitch.tv/?channel='+encodeURIComponent(safeLogin)+'&parent='+encodeURIComponent(parent)+'&autoplay=false&muted=true" allowfullscreen="true" scrolling="no" title="Transmisión de '+escapeStatsHtml(displayName)+' en Twitch"></iframe>';
+ wrap.hidden=false;
+ wrap.scrollIntoView({behavior:'smooth',block:'start'});
+}
 async function loadInstituteStats(){
  const body=document.getElementById('stats-table-body'); if(!body)return;
  const fmt=(v,d=2)=>v===null||v===undefined?'—':(typeof v==='number'?v.toLocaleString('es-AR',{maximumFractionDigits:d}):v);
@@ -1663,9 +1702,10 @@ async function loadInstituteStats(){
   const totalSamples=channels.reduce((n,c)=>n+(c.window?.samples_total||0),0);
   const observedHours=channels.reduce((n,c)=>n+(c.window?.observed_live_hours||0),0);
   const estimatedHoursWatched=channels.reduce((n,c)=>n+(c.window?.estimated_hours_watched||0),0);
-  document.getElementById('stats-updated').textContent='Actualizado: '+new Date(data.updated_at).toLocaleString('es-AR')+' · Ventana histórica: hasta '+data.window_days+' días · Frecuencia programada: '+data.sampling_interval_minutes+' min · Fuente: '+data.source+' · Canales: '+channels.length;
-  document.getElementById('stats-summary').innerHTML='<div class="premium-card"><h3>'+fmt(liveCount,0)+' / '+fmt(channels.length,0)+'</h3><p>Canales en directo ahora</p></div><div class="premium-card"><h3>'+fmt(totalSamples,0)+'</h3><p>Muestras acumuladas</p></div><div class="premium-card"><h3>'+fmt(observedHours)+'</h3><p>Horas en directo observadas</p></div><div class="premium-card"><h3>'+fmt(estimatedHoursWatched)+'</h3><p>Horas vistas estimadas por muestreo</p></div>';
-  body.innerHTML=channels.map(c=>'<tr><td>'+c.display_name+'</td><td>'+(c.live?'EN DIRECTO':'OFFLINE')+'</td><td>'+fmt(c.current_viewers,0)+'</td><td>'+fmt(c.current_game)+'</td><td>'+fmt(c.window?.average_viewers_sampled)+'</td><td>'+fmt(c.window?.peak_viewers_sampled,0)+'</td><td>'+fmt(c.window?.observed_live_hours)+'</td><td>'+fmt(c.window?.samples_total,0)+'</td></tr>').join('');
+  document.getElementById('stats-updated').textContent='Actualizado el '+new Date(data.updated_at).toLocaleString('es-AR')+' · Datos de '+channels.length+' canales';
+  document.getElementById('stats-summary').innerHTML='<div class="premium-card"><h3>'+fmt(channels.length,0)+'</h3><p>Canales representados</p></div><div class="premium-card"><h3>'+fmt(liveCount,0)+'</h3><p>En directo en la última consulta</p></div><div class="premium-card"><h3>'+fmt(data.window_days,0)+' días</h3><p>Ventana de observación</p></div><div class="premium-card"><h3>'+fmt(totalSamples,0)+'</h3><p>Muestras registradas</p></div>';
+  body.innerHTML=channels.map(c=>'<tr><td>'+escapeStatsHtml(c.display_name)+'</td><td>'+(c.live?'EN DIRECTO':'OFFLINE')+'</td><td>'+fmt(c.current_viewers,0)+'</td><td>'+escapeStatsHtml(fmt(c.current_game))+'</td><td>'+fmt(c.window?.average_viewers_sampled)+'</td><td>'+fmt(c.window?.peak_viewers_sampled,0)+'</td><td>'+fmt(c.window?.observed_live_hours)+'</td><td>'+fmt(c.window?.samples_total,0)+'</td></tr>').join('');
+  renderLiveDirectory(channels);
  }catch(e){body.innerHTML='<tr><td colspan="8">Estadísticas temporalmente no disponibles. '+e.message+'</td></tr>';}
 }
 
@@ -1857,10 +1897,11 @@ function openHeroModal(index) {
         }
 
         function switchChapter(chapterNum) {
+            const panel=document.getElementById(`chapter-${chapterNum}`);
+            if(!panel)return;
             document.querySelectorAll('.chapter-panel').forEach(p => p.classList.remove('active'));
-            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById(`chapter-${chapterNum}`).classList.add('active');
-            document.querySelectorAll('.nav-btn')[chapterNum - 1].classList.add('active');
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.toggle('active',Number(b.dataset.chapter)===Number(chapterNum)));
+            panel.classList.add('active');
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
