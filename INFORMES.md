@@ -639,3 +639,13 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Validación estática:** confirmadas las cuatro colaboraciones/accesos y la eliminación del bloque general duplicado de clips.
 - **Commits:** [interfaz `5337c4d9`](https://github.com/losmoriartys-cmd/s3xmen/commit/5337c4d95ab6499fc08674db8a40a39e2ccd68a1) · [registros `3508c10c`](https://github.com/losmoriartys-cmd/s3xmen/commit/3508c10cc3292718a0d0e83ad39493a47c1b93cc).
 - **Despliegue:** pendiente de comprobación visual.
+
+
+## 2026-11-04 — Reordenamiento narrativo y fotográfico del Capítulo 01
+
+- **Orden editorial:** la cronología «Las personas cambiaron el tamaño del universo» ahora queda seguida por la imagen histórica «Primera formación · S3X-MEN».
+- **Dimensiones:** «Tres dimensiones. Una misma comunidad» pasa antes del bloque institucional de cambio de era.
+- **Formación actual:** `gruponuevo.jpg` se trasladó desde la portada al bloque «Legión Multiversal · Es lo que estamos construyendo», después del lema institucional.
+- **Continuidad:** se conserva la ilustración pendiente de Demian y ROD3R1K; no se modificaron cartas, roster, estadísticas ni assets.
+- **Validación estática:** se confirmó el orden de las secciones y que cada fotografía aparece una sola vez en el Capítulo 01.
+- **Commit de interfaz:** [`ca9d91fb`](https://github.com/losmoriartys-cmd/s3xmen/commit/ca9d91fb899b70242dc040a362982fb86a47a28c).
