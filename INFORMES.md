@@ -264,3 +264,25 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Commit de datos:** a269338ba3ae379e4c68088ac23e894e8e161584
 - **Commit de interfaz:** 765fbcfa47d147d81dfb182738c18baf8f271ffd
 - **Despliegue:** pendiente de comprobar GitHub Actions / GitHub Pages.
+
+
+## 2026-11-04 — Rediseño visual de páginas C y D de expedientes
+
+- **Objetivo:** reemplazar los bloques de texto crudo por paneles visuales legibles y estructurados.
+- **Archivo modificado:** `index.html`.
+- **Página C — Estadísticas:**
+  - Paneles separados para Twitch Helix (seguimiento propio) y SullyGnome (historial histórico).
+  - Indicadores KPI en tarjetas, estado del registro, períodos, enlace a la fuente y notas metodológicas.
+  - Tabla individual de transmisiones con fecha, horario de inicio cuando está informado, duración, promedio, pico, horas vistas y seguidores reportados.
+  - En Dave, el resumen anual de 45 directos permanece separado de las 10 filas visibles.
+  - En Los Moriartys, los horarios no informados se muestran expresamente como tales; no se inventan horas de inicio.
+  - Canales sin filas históricas muestran un estado pendiente claro, no una tabla falsa ni ceros.
+- **Página D — Misiones y logros:**
+  - Archivo de personaje en una tarjeta destacada.
+  - Secciones visuales separadas para hitos, colaboraciones y directos/clips destacados.
+  - Los registros vacíos se identifican como pendientes de datos verificados.
+- **Seguridad de presentación:** el contenido dinámico se escapa antes de insertarse como HTML.
+- **Preservado:** datos de roster, `data.json`, `sullygnome-data.json`, `creator-records.json`, poderes, automatizaciones y workflows.
+- **Límite de datos:** SullyGnome no suministró horarios de inicio para las nueve transmisiones de Los Moriartys; el diseño lo deja visible en la columna de horario. Dave sí conserva horario en las diez filas transcritas.
+- **Despliegue:** pendiente de comprobar GitHub Pages tras el commit.
+- **Commit de interfaz:** d16ceb407ec5eb175d49912f2e16ed4635ed0b24
