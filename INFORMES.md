@@ -372,3 +372,12 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Preservado:** el resto de la jerarquía y todos los datos, estadísticas, automatizaciones, poderes y cartas oficiales.
 - **Commit de interfaz:** `18fc410d0b3bb18f6629b7d065baaafb1779687c`.
 - **Despliegue:** pendiente de verificación visual en GitHub Pages.
+
+## 2026-11-04 — Renombrar la sección del roster a Profesores
+
+- **Solicitud:** reemplazar la denominación «Cuerpo Docente» por «Profesores».
+- **Archivo modificado:** `index.html`.
+- **Implementado:** se actualizó la leyenda, el encabezado de la sección y la etiqueta usada por el contador dinámico. Se ajustó la descripción de la sección para mantener coherencia con el nuevo nombre.
+- **Preservado:** roles y asignaciones de integrantes, contadores, retratos, cartas oficiales, estadísticas y automatizaciones.
+- **Commit de interfaz:** `d143ca53102075ab97d1dbfda394091927134136`.
+- **Despliegue:** pendiente de verificación visual en GitHub Pages.
