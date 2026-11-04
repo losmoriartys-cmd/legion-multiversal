@@ -89,3 +89,16 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
   - Continuar la revisión de rutas de retratos restantes y completar el estado del Command Center 2.0.
 - **Commit:** bcc433532e471c693a40db1bea4dce29dc60e517
 - **Despliegue:** pendiente de verificación.
+
+## 2026-11-04 — Corregir la ruta del retrato de Pato — Oratoris
+
+- **Responsable:** ChatGPT + equipo Los Moriartys.
+- **Objetivo:** evitar que el expediente de Pato — Oratoris muestre un retrato roto.
+- **Archivos modificados:**
+  - index.html: reemplazada la ruta inexistente oratoris.jpg por PatoTeksplika.jpg, archivo existente en la raíz del repositorio.
+  - INFORMES.md: agregado este registro.
+- **Implementado:** la ficha de Oratoris apunta ahora al recurso visual disponible cuyo nombre identifica al creador Pato te explica.
+- **Validaciones y resultados:** auditadas las rutas de imagen declaradas en heroesData contra los archivos actuales de la raíz y de assets/. Tras el ajuste, todas las rutas declaradas en heroesData corresponden a archivos existentes.
+- **Pendientes / riesgos:** comprobar el encuadre de los retratos en el navegador y verificar el despliegue de GitHub Pages.
+- **Commit:** e5b381066eb541cb27774e0a1497fea67aeba069.
+- **Despliegue:** pendiente de verificación.
