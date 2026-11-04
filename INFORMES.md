@@ -509,3 +509,14 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Preservado:** roster, cartas, roles, fuentes de estadísticas, `data.json`, `sullygnome-data.json`, automatizaciones y registros editoriales.
 - **Commit de interfaz:** `683bca4d2449e91c3e8a14ac5b19e0f7022e897f`.
 - **Despliegue:** pendiente de comprobar el workflow de GitHub Pages y la lectura visual en escritorio/móvil.
+
+## 2026-11-04 — Incorporación del capítulo «Nuestros valores»
+- Se añadió un capítulo institucional independiente, accesible desde la navegación principal como «NUESTROS VALORES».
+- Se ubicó después del Roster y antes de Estadísticas para presentar primero a las personas y luego explicar la identidad que comparten.
+- El contenido desarrolla el propósito del Instituto como espacio creativo y de colaboración; la creación de contenido con identidad; la convivencia de distintas voces; el compañerismo, el respeto y el crecimiento compartido; la responsabilidad y la transparencia.
+- Se explica qué experiencia se busca ofrecer a la comunidad y qué sentido tienen las colaboraciones para marcas, estudios y publishers.
+- Se añadieron accesos directos a Alianzas y Comunidad.
+- El texto evita atribuir al Instituto una condición jurídica o acreditaciones no documentadas; presenta su identidad y propósito en términos institucionales y creativos.
+- Validación realizada: nuevo ID único `chapter-11`, enlace de navegación asociado a `switchChapter(11)` y ubicación antes del Capítulo 03.
+- Pendiente de validación visual en GitHub Pages y en vista móvil una vez completado el despliegue.
+- Commit: `f3770022fa11ebfd26f03c27b91024a06d95d2d3`.
