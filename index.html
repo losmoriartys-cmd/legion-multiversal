@@ -364,6 +364,12 @@
         .pilot-stats .pilot-metric span { display:block; color:#9aa9bf; font-size:.68rem; font-weight:800; letter-spacing:.6px; text-transform:uppercase; }
         .pilot-stats .pilot-metric strong { display:block; color:#fff; font-family:'Bangers',cursive; font-size:1.65rem; margin-top:4px; }
         .pilot-stats .pilot-metric small { display:block; color:#8d9bb0; font-size:.68rem; margin-top:2px; }
+        .pilot-stats .pilot-lifetime-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin:12px 0}
+        .pilot-stats .pilot-lifetime-metric{min-height:112px;display:flex;flex-direction:column;justify-content:space-between}
+        .pilot-stats .pilot-lifetime-metric.is-peak{border-color:#b18b35;border-top-color:#ffe04a;background:linear-gradient(145deg,#293047,#101522)}
+        .pilot-stats .pilot-lifetime-metric.is-peak strong{color:#ffe36a}
+        @media(max-width:900px){.pilot-stats .pilot-lifetime-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+        @media(max-width:560px){.pilot-stats .pilot-lifetime-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.pilot-stats .pilot-lifetime-metric{min-height:100px}}
         .pilot-stats .pilot-subhead { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:baseline; gap:8px; margin-top:5px; }
         .pilot-stats .pilot-subhead h5 { color:#ffdf65; font-family:'Bangers',cursive; font-size:1.18rem; letter-spacing:.5px; }
         .pilot-stats .pilot-subhead small { color:#8d9bb0; font-size:.7rem; }
@@ -1877,12 +1883,12 @@ function renderLosMoriartysSullyPilot(channel){
  out+='<div class="stats-table-wrap"><table class="stats-table pilot-table"><thead><tr><th>Juego</th><th>Horas emitidas</th><th>Promedio</th><th>Seguidores ganados</th><th>Por hora</th><th>Horas vistas</th></tr></thead><tbody>';
  games.forEach(g=>out+='<tr><th>'+g.name+'</th><td>'+g.air+'</td><td class="num">'+g.av+'</td><td class="num">'+(g.fg===null?'—':g.fg)+'</td><td class="num">'+(g.fph===null?'—':g.fph)+'</td><td class="num">'+(g.hw===null?'—':g.hw)+'</td></tr>');
  out+='</tbody></table></div><p class="stats-note">Promedio = espectadores medios del juego · Por hora = seguidores ganados por hora. Las horas vistas solo están disponibles para Fortnite en la captura. El pico por juego no fue aportado.</p></section>';
- out+='<section class="pilot-subsection"><div class="pilot-subhead"><h5>02 · AUDIENCIA ACUMULADA · LIFETIME</h5><small>Panorama histórico del canal</small></div><div class="pilot-performance-grid">';
- lifetime.forEach(v=>out+='<div class="pilot-metric"><span>'+v[0]+'</span><strong>'+v[1]+'</strong><small>'+v[2]+'</small></div>');
+ out+='<section class="pilot-subsection"><div class="pilot-subhead"><h5>02 · AUDIENCIA ACUMULADA</h5><small>Trayectoria histórica · Lifetime</small></div><div class="pilot-lifetime-grid">';
+ lifetime.forEach((v,i)=>out+='<div class="pilot-metric pilot-lifetime-metric'+(i===1?' is-peak':'')+'"><span>'+v[0]+'</span><strong>'+v[1]+'</strong><small>'+v[2]+'</small></div>');
  out+='</div></section>';
- out+='<section class="pilot-subsection"><div class="pilot-subhead"><h5>03 · RENDIMIENTO DEL PERÍODO</h5><small>Resumen del panel compartido · fechas no visibles</small></div><div class="pilot-performance-grid">';
+ out+='<section class="pilot-subsection"><div class="pilot-subhead"><h5>03 · RENDIMIENTO DEL PERÍODO</h5><small>Resumen del panel compartido</small></div><div class="pilot-performance-grid">';
  periodMetrics.forEach(v=>out+='<div class="pilot-metric"><span>'+v[0]+'</span><strong>'+v[1]+'</strong><small>'+v[2]+'</small></div>');
- out+='</div><div class="pilot-callout"><strong>Pico del período:</strong> 101 espectadores, el mismo valor que el pico histórico registrado el 07 oct 2026. Se deja fuera de las tarjetas para no repetirlo. Las variaciones se reproducen tal como aparecen en la captura; no se asigna un rango temporal que no está visible.</div></section></section>';
+ out+='</div><div class="pilot-callout"><strong>Nota de lectura:</strong> las variaciones porcentuales se reproducen tal como aparecen en la captura. Como el rango de fechas no está visible, no se asigna un período que no podamos verificar.</div></section></section>';
  return out;
 }
 function renderSullyStats(channel){
