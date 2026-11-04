@@ -520,3 +520,12 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - Validación realizada: nuevo ID único `chapter-11`, enlace de navegación asociado a `switchChapter(11)` y ubicación antes del Capítulo 03.
 - Pendiente de validación visual en GitHub Pages y en vista móvil una vez completado el despliegue.
 - Commit: `f3770022fa11ebfd26f03c27b91024a06d95d2d3`.
+
+## 2026-11-04 — Identidad visual: tipografía y microinteracciones
+- Se actualizó la combinación tipográfica global: **Bangers** para títulos y elementos de impacto; **Roboto Condensed** para lectura y controles; **Special Elite** para etiquetas editoriales y detalles de archivo; **Permanent Marker** para acentos puntuales.
+- Se añadieron microanimaciones de baja intensidad: entrada suave al cambiar de capítulo, flotación mínima del emblema y realce discreto de tarjetas y botones al pasar el cursor.
+- Se reforzó el indicador de foco visible para navegación por teclado.
+- Se amplió el tratamiento `prefers-reduced-motion` para respetar la preferencia de accesibilidad del sistema y reducir todas las animaciones/transiciones.
+- No se incorporó música todavía: no hay una pista propia/licenciada en los assets del proyecto. No se debe enlazar música comercial ni iniciar audio automáticamente. Próximo paso recomendado: incorporar una pista original o con licencia confirmada y un control explícito de reproducción/pausa, siempre apagado por defecto.
+- Pendiente: revisión visual de la combinación tipográfica en escritorio/móvil y validación del despliegue de GitHub Pages.
+- Commit: `f498bddf08b54482c5602c3bac8169a898256243`.
