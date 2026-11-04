@@ -1217,6 +1217,43 @@ async function loadSullyGnomeData(){
  }catch(e){console.warn('SullyGnome roster data unavailable:',e);}
 }
 
+let creatorRecordsData = null;
+function creatorRecordKey(hero){
+ if(hero && hero.youtube)return 'patoteexplica';
+ if(!hero || !hero.twitch)return '';
+ return hero.twitch.split('/').filter(Boolean).pop().toLowerCase();
+}
+function renderCreatorRecords(hero){
+ const key=creatorRecordKey(hero);
+ const record=creatorRecordsData?.channels?.[key];
+ const lines=['TRAYECTORIA REAL DEL CREADOR · REGISTROS VERIFICADOS'];
+ const groups=[
+  ['HITOS','milestones'],
+  ['COLABORACIONES','collaborations'],
+  ['DIRECTOS / CLIPS DESTACADOS','highlights']
+ ];
+ groups.forEach(([label,field])=>{
+  lines.push(label+':');
+  const items=Array.isArray(record?.[field])?record[field]:[];
+  if(!items.length){lines.push('Sin registros verificados cargados todavía.');return;}
+  items.forEach((item,i)=>{
+   const date=item.date?(' · '+item.date):'';
+   lines.push((i+1)+'. '+(item.title||'Registro sin título')+date);
+   if(item.description)lines.push('   '+item.description);
+   if(item.url)lines.push('   Enlace: '+item.url);
+   if(item.source)lines.push('   Fuente: '+item.source);
+  });
+ });
+ lines.push('Los registros se incorporan con fecha y enlace/fuente comprobable; el lore del personaje se conserva separado de la trayectoria real.');
+ return lines.join('\\n');
+}
+async function loadCreatorRecords(){
+ try{
+  const res=await fetch('creator-records.json',{cache:'no-store'});
+  if(!res.ok)throw new Error('No se pudo leer creator-records.json');
+  creatorRecordsData=await res.json();
+ }catch(e){console.warn('Creator records unavailable:',e);}
+}
 let instituteStatsData = null;
 function findChannelStats(hero){
  if(!instituteStatsData || !hero || !hero.twitch)return null;
@@ -1400,6 +1437,7 @@ function openHeroModal(index) {
                 'Serie: ' + (hero.series || 'Pendiente') + ' · Registro: #' + (hero.cardNumber || '---') + '\n' +
                 'Clasificación: Nivel Alfa · Instituto S3X-MEN\n\n' +
                 (hero.log || 'Sin misiones registradas todavía.');
+            document.getElementById('modal-log-text').innerText += '\n\n' + renderCreatorRecords(hero);
             document.getElementById('modal-twitch-btn').href = hero.youtube || hero.twitch || "#";
             document.getElementById('modal-twitch-btn').textContent = hero.youtube ? "VISITAR CANAL DE YOUTUBE" : "VISITAR CANAL DE TWITCH";
             
@@ -1433,7 +1471,7 @@ function openHeroModal(index) {
         }
 
         window.onload = function() { renderRoster();
-        loadInstituteStats(); loadPartnerMetrics(); loadSullyGnomeData(); };
+        loadInstituteStats(); loadPartnerMetrics(); loadCreatorRecords(); };
     </script>
 </body>
 </html>
