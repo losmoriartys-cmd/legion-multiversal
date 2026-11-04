@@ -156,4 +156,5 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
   - Verificar GitHub Pages tras el commit.
 - **Commit de implementación:** [`5fc8f9de`](https://github.com/losmoriartys-cmd/s3xmen/commit/5fc8f9dea4a3952d3b3be64a1e4eea432aad8764) — actualización de `index.html`.
 - **Commit del informe:** se agrega este registro en el commit actual.
+- **Ajuste posterior:** [`50fc5b79`](https://github.com/losmoriartys-cmd/s3xmen/commit/50fc5b79b116669d1e71079d716b76f58367a8e0) — Oratoris conserva un bloque de métricas de YouTube independiente; no se le aplica la fuente ni la ventana de Twitch.
 - **Despliegue:** pendiente de verificación.
