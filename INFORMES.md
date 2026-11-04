@@ -444,3 +444,32 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Pendiente editorial:** validar con Ari y Demi los textos finales, completar ejemplos reales de contenido y añadir evidencias/hitos/colaboraciones con fuentes comprobables. Las secciones C y D siguen usando los sistemas de datos existentes; no se inventaron métricas ni registros.
 - **Commits de interfaz:** `be6629fcaed1102c6a6016deb4f006c3d006805f`, `bd25cb19493a212a9f0fc7028a4ff565ce52a68b`, `ade1afc0ef5f2ef3e50d88ef101fff51a62ff757`.
 - **Despliegue:** pendiente de comprobar GitHub Actions y visualización final en GitHub Pages.
+
+## 2026-11-04 — Reorganización del media kit y central de transmisiones
+
+- **Responsable:** ChatGPT + equipo de Legión Multiversal.
+- **Objetivo:** priorizar la presentación comercial y comunitaria, simplificar la información institucional y preparar una experiencia de transmisiones en vivo.
+- **Archivo modificado:** `index.html`.
+- **Implementado:**
+  - Capítulo 03 renovado como presentación de alcance y actividad de la comunidad, con indicadores legibles y fecha de actualización visible.
+  - La metodología, fuente Twitch Helix, ventana móvil, frecuencia de muestreo y limitaciones pasan a desplegables secundarios. El detalle por canal también queda disponible bajo demanda.
+  - Se retiró de la navegación pública el tutorial operativo de Lurkit y Keymailer; su contenido ya no ocupa un capítulo del media kit.
+  - Capítulo 05 conserva la selección editorial de diez juegos, sus imágenes y enlaces a tiendas oficiales.
+  - Se retiró la página de contacto con el staff como capítulo público. El pie de página incorpora un enlace discreto para reportes técnicos, separado del contacto comercial.
+  - Capítulo 08 se simplificó como presentación de alianzas, experiencia, formatos de colaboración y contacto comercial. Se eliminaron matrices de requisitos históricos y programas en investigación.
+  - Capítulo 09 se convirtió en una presentación permanente de comunidad, sin agenda tentativa ni horarios individuales heredados de planillas antiguas.
+  - Reclutamiento queda como último capítulo público de navegación.
+  - Se incorporó una sección **En vivo** que detecta los canales marcados como activos en la última lectura de `data.json`, permite seleccionar una transmisión y carga el reproductor oficial de Twitch con el dominio actual como parámetro `parent`. Si no hay canales activos, muestra el estado y accesos a los canales del roster.
+- **Validaciones realizadas:**
+  - Se confirmó que `data.json` contiene 9 canales, ventana declarada de 30 días y frecuencia programada de 15 minutos; en la última lectura todos figuraban offline.
+  - Se verificó en el archivo actualizado la presencia de los desplegables metodológicos, el nuevo capítulo En vivo, el reproductor embebido, el contacto técnico del pie de página y la ausencia de los capítulos operativos retirados.
+  - Se comprobó que el Arsenal conserva exactamente diez tarjetas.
+  - Se confirmó que la navegación utiliza identificadores explícitos de capítulo para permitir el nuevo orden sin renombrar los identificadores internos.
+- **Pendientes / riesgos:**
+  - El estado de Twitch se basa en la última sincronización programada; no es detección instantánea.
+  - El reproductor debe probarse en el dominio publicado de GitHub Pages y requiere conexión, navegador compatible y permiso de inserción de Twitch. No se pudo validar una transmisión real porque los nueve canales figuraban offline en la última lectura.
+  - Revisar visualmente escritorio y móvil tras el despliegue.
+  - Confirmar con el equipo las acreditaciones y colaboraciones citadas en el apartado comercial antes de utilizar el media kit en una campaña externa.
+- **Commit:** `ce6554351fd2455d0e44dd00d307998db38e1a51` — https://github.com/losmoriartys-cmd/s3xmen/commit/ce6554351fd2455d0e44dd00d307998db38e1a51
+- **Despliegue:** pendiente de verificación en GitHub Actions / GitHub Pages.
+
