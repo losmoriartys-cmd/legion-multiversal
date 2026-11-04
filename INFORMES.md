@@ -751,3 +751,17 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Alineación:** emblema y rótulo institucional centrados como conjunto; título, descripción y metadatos alineados al eje central. Se conserva el comportamiento responsive y la identidad visual existente.
 - **Commit de interfaz:** [`560255be`](https://github.com/losmoriartys-cmd/s3xmen/commit/560255bed1f32dc5dce26c3a881cafc593a35f65).
 
+
+
+## 2026-11-04 — Ambientación de historieta, cartas animadas y sonido de bitácora en el Roster
+
+- **Solicitud:** reemplazar la sensación de fondo negro plano del Roster por una ambientación de viñeta de cómic; sumar un efecto de pasar página en la bitácora y animar las cartas de los superhéroes.
+- **Archivo modificado:** `index.html`.
+- **Ambientación:** el Capítulo 02 incorpora una composición oscura de novela gráfica con tramas de semitono, puntos de impresión, líneas cinéticas y acentos de energía cian/rojo. Se conserva contraste suficiente para leer los expedientes y distinguir las cartas.
+- **Cartas del Roster:** las tarjetas de integrantes ahora tienen profundidad 3D muy sutil, elevación, brillo de barrido y respuesta visual al foco de teclado. No se modificaron imágenes, archivos ni marcos oficiales.
+- **Carta individual:** la carta del héroe en su expediente tiene una flotación lenta y discreta, con inclinación y resplandor al interactuar.
+- **Bitácora:** al cambiar entre las pestañas A, B y C del expediente se reproduce un efecto breve de hoja pasando, sintetizado con Web Audio. Solo funciona si el visitante activó previamente el audio; al abrir un expediente no se dispara un sonido accidental.
+- **Accesibilidad y audio:** se mantiene el jazz existente, apagado por defecto y sin autoplay. Las nuevas animaciones respetan `prefers-reduced-motion`.
+- **Validación estática:** se confirmó la clase visual del Capítulo 02, las reglas de textura y animación, el efecto de página, el silencio de la pestaña inicial y la conservación del control de jazz.
+- **Commit de interfaz:** [`28b555f5`](https://github.com/losmoriartys-cmd/s3xmen/commit/28b555f5f156f728d0641c8b034970ad2d72c976).
+- **Pendiente:** comprobar el resultado visual y el audio en GitHub Pages después de finalizar el despliegue.
