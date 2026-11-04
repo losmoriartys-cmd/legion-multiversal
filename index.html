@@ -127,6 +127,9 @@
         .chapter-one { padding: clamp(22px,4vw,54px); background:linear-gradient(160deg,#121b2a 0%,#0c111b 72%); }
         .chapter-one .chapter-tag { z-index:2; }
         .chapter-cover { display:grid;grid-template-columns:minmax(0,1fr) minmax(320px,.95fr);gap:clamp(24px,4vw,52px);align-items:center;padding:28px 0 42px;border-bottom:1px solid rgba(255,255,255,.16); }
+        .chapter-brand-lockup { display:flex;align-items:center;gap:16px;margin-bottom:20px; }
+        .chapter-brand-emblem { display:block;width:clamp(76px,10vw,116px);height:clamp(76px,10vw,116px);object-fit:contain;flex:0 0 auto;filter:drop-shadow(0 5px 12px rgba(0,210,255,.22)); }
+        .chapter-brand-lockup .chapter-eyebrow { margin:0; }
         .chapter-eyebrow,.section-kicker { color:#00d2ff;font-size:.72rem;font-weight:900;letter-spacing:.19em;text-transform:uppercase;margin-bottom:14px; }
         .chapter-main-title { font-family:'Bangers',cursive;font-size:clamp(3.3rem,7vw,6.4rem);line-height:.91;letter-spacing:.025em;color:#f4f6fa;text-shadow:4px 4px 0 #000;margin:0 0 22px; }
         .chapter-main-title span,.section-heading h3 span,.era-transition h3 span,.protagonists-cta h3 span { color:#ffde00; }
@@ -920,7 +923,10 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
 
     <div class="chapter-cover">
         <div class="chapter-cover-copy">
-            <p class="chapter-eyebrow">ARCHIVO CENTRAL · LEGIÓN MULTIVERSAL</p>
+            <div class="chapter-brand-lockup">
+                <img class="chapter-brand-emblem" src="legion_logo_final_hybrid.png" alt="Emblema oficial de Legión Multiversal">
+                <p class="chapter-eyebrow">ARCHIVO CENTRAL · LEGIÓN MULTIVERSAL</p>
+            </div>
             <h2 class="chapter-main-title">DE UNA PARTIDA<br><span>NACIÓ UNA LEGIÓN</span></h2>
             <p class="chapter-deck">No nacimos como una gran organización. Nacimos jugando, compartiendo directos y descubriendo que, cuando las personas correctas se encuentran, pueden construir algo mucho más grande que una colaboración.</p>
             <div class="chapter-cover-meta"><span>ORIGEN: S3X-MEN</span><span>IDENTIDAD ACTUAL: LEGIÓN MULTIVERSAL</span></div>
