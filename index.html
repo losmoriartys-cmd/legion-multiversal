@@ -391,6 +391,14 @@
         .hero-profile-card { width:min(100%,360px); margin:auto; display:block; border:2px solid #526174; box-shadow:8px 8px 0 #000; }
         .hero-profile-copy h3 { color:#ffde00; font-family:'Bangers',cursive; font-size:clamp(2rem,4vw,3rem); margin:8px 0; }
         .hero-profile-copy p { color:#d5deea; line-height:1.7; margin:10px 0 18px; }
+        .profile-editorial-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; margin-top:28px; }
+        .profile-editorial-section { background:rgba(5,12,22,.82); border:1px solid #34465d; border-left:3px solid #00b8d8; padding:20px; min-width:0; }
+        .profile-editorial-section h4 { color:#ffde00; font-family:'Bangers',cursive; font-size:1.65rem; margin:9px 0 12px; }
+        .profile-section-kicker { color:#8edff0; font-size:.72rem; font-weight:900; letter-spacing:1.2px; }
+        .profile-detail-list { color:#d5deea; padding-left:20px; line-height:1.8; }
+        .profile-contact-line { color:#ffde00; overflow-wrap:anywhere; }
+        .profile-editorial-section small { color:#9eacbf; line-height:1.5; }
+        @media(max-width:700px){.profile-editorial-grid{grid-template-columns:1fr}}
         .hero-profile-actions { display:flex; flex-wrap:wrap; gap:12px; align-items:center; }
         .hero-profile-back { border:2px solid #617087; color:#dce5f1; background:#172438; padding:11px 16px; font-weight:800; cursor:pointer; }
         @media(max-width:700px){.hero-profile-layout{grid-template-columns:1fr}.hero-profile-card{width:min(78%,300px)}.roster-portrait-card{max-width:none}.roster-portrait-wrap{height:220px}}
@@ -1720,6 +1728,60 @@ function renderRoster() {
         container.appendChild(section);
     });
 }
+function appendMediaProfile(hero, page) {
+    const data = hero && hero.mediaProfile;
+    if (!data || !page) return;
+    const wrap = document.createElement('div');
+    wrap.className = 'profile-editorial-grid';
+    const addSection = (kicker, title, paragraphs, list, contact, note) => {
+        const section = document.createElement('section');
+        section.className = 'profile-editorial-section';
+        const label = document.createElement('span');
+        label.className = 'profile-section-kicker';
+        label.textContent = kicker;
+        section.appendChild(label);
+        if (title) {
+            const heading = document.createElement('h4');
+            heading.textContent = title;
+            section.appendChild(heading);
+        }
+        (paragraphs || []).forEach(value => {
+            const p = document.createElement('p');
+            p.textContent = value;
+            section.appendChild(p);
+        });
+        if (list && list.length) {
+            const ul = document.createElement('ul');
+            ul.className = 'profile-detail-list';
+            list.forEach(value => {
+                const li = document.createElement('li');
+                li.textContent = value;
+                ul.appendChild(li);
+            });
+            section.appendChild(ul);
+        }
+        if (contact) {
+            const p = document.createElement('p');
+            p.className = 'profile-contact-line';
+            p.textContent = 'CONTACTO · ' + contact;
+            section.appendChild(p);
+        }
+        if (note) {
+            const small = document.createElement('small');
+            small.textContent = note;
+            section.appendChild(small);
+        }
+        wrap.appendChild(section);
+    };
+    addSection('A · IDENTIDAD Y PRESENTACIÓN', 'Un proyecto compartido, dos creadores', [
+        data.project,
+        'DEMI · ' + data.demi,
+        'ARI · ' + data.ari
+    ]);
+    addSection('B · CONTENIDO Y ESPECIALIDADES', 'La experiencia del videoclub', [data.editorial], data.formats);
+    addSection('E · OPORTUNIDADES DE COLABORACIÓN', 'Formatos posibles para marcas y aliados', [], data.opportunities, data.contact, data.disclaimer);
+    page.appendChild(wrap);
+}
 function openHeroProfile(index) {
     const hero = heroesData[index];
     if (!hero) return;
@@ -1728,6 +1790,7 @@ function openHeroProfile(index) {
     if (!home || !page) return;
     const channel = hero.youtube || hero.twitch || '';
     page.innerHTML = '<div class="hero-profile-layout"><img class="hero-profile-card" src="' + escapeStatsHtml(hero.img) + '" alt="Carta oficial de ' + escapeStatsHtml(hero.name) + '"><div class="hero-profile-copy"><span class="stats-status">EXPEDIENTE INDIVIDUAL · ' + escapeStatsHtml(hero.rank || 'CLASIFICACIÓN PENDIENTE') + '</span><h3>' + escapeStatsHtml(hero.name) + '</h3><p>' + escapeStatsHtml(hero.bio || 'Presentación personal pendiente de completar.') + '</p><div class="hero-profile-actions"><button class="twitch-link-btn" type="button" onclick="openHeroModal(' + index + ')">ABRIR BITÁCORA COMPLETA</button>' + (channel ? '<a class="btn-link" href="' + escapeStatsHtml(channel) + '" target="_blank" rel="noopener">VISITAR CANAL</a>' : '') + '<button class="hero-profile-back" type="button" onclick="closeHeroProfile()">VOLVER AL ROSTER</button></div></div></div>';
+    appendMediaProfile(hero, page);
     home.hidden = true;
     page.hidden = false;
     history.replaceState(null, '', '#expediente-' + encodeURIComponent(hero.name.toLowerCase().replace(/[^a-z0-9]+/g,'-')));
