@@ -609,3 +609,13 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Validación estática:** confirmadas tabla de juegos, Lifetime, métricas del período, ausencia de gráficos por transmisión dentro del piloto y enlaces dinámicos de clips/Shorts.
 - **Commit de interfaz:** [`4c88315a`](https://github.com/losmoriartys-cmd/s3xmen/commit/4c88315a68fbc62792d70d1d47acf5618a00981e).
 - **Despliegue:** pendiente de comprobación visual en GitHub Pages.
+
+
+## 2026-11-04 — Reubicación del archivo visual fundacional en el Capítulo 01
+
+- **Solicitud:** ordenar las dos imágenes históricas/actuales del Capítulo 01 para que cada una ocupe su sección narrativa correcta.
+- **Imagen de portada:** se utiliza `gruponuevo.jpg` para representar la formación actual de Legión Multiversal.
+- **Primera formación:** el banner original `banner-s3xmen-original.jpg` se trasladó al bloque inferior del archivo histórico, dentro de un marco propio y con el rótulo visible **PRIMERA FORMACIÓN · S3X-MEN**.
+- **Viñeta de origen:** se conserva un espacio independiente para la futura ilustración de Demian y ROD3R1K; la foto grupal no sustituye esa pieza.
+- **Alcance:** cambio de presentación y ubicación de imágenes en `index.html`; no se modificaron cartas, roster, estadísticas ni assets.
+- **Commit de interfaz:** [`176c2b75`](https://github.com/losmoriartys-cmd/s3xmen/commit/176c2b751a9de0e01a90b388f2acc5ef19b1257e).
