@@ -337,3 +337,13 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
   - Verificar el workflow de Pages y la visualización publicada.
 - **Commit de interfaz:** `60aec08c4906ff10ef6db64ad23e5040c3998c84` (ajuste final de contadores y enlaces; incluye el commit anterior de estructura `50599cb33c3cc8288655216314cdc8ff16cb9b13`).
 - **Despliegue:** pendiente de verificación.
+
+
+## 2026-11-04 — Crear carpeta de retratos tipo carnet
+
+- **Objetivo:** preparar un espacio para que el equipo cargue retratos individuales destinados al roster.
+- **Ruta creada:** `assets/carnet/` (materializada mediante `README.md`, ya que Git no conserva carpetas vacías).
+- **Convención:** una imagen por integrante, con nombre estable basado en el alias; estos retratos son independientes de las cartas oficiales y no las reemplazan.
+- **Formatos sugeridos:** JPG, PNG o WebP.
+- **Commit:** `1cadb43e14680a37cdd121d9c4c2d8129f7515b1`.
+- **Estado:** carpeta disponible en `main`; pendiente de que el usuario cargue las fotografías.
