@@ -154,5 +154,6 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
   - Integrar exportación/datos de Streams Charts para la ventana común de 30 días y mostrar fuente y fecha de corte.
   - La ampliación de la ventana de muestreo de Twitch Helix, si se desea, deberá tratarse por separado: el histórico previo a su cambio no puede reconstruirse retroactivamente.
   - Verificar GitHub Pages tras el commit.
-- **Commit:** se registra el hash del commit que actualiza `index.html` inmediatamente después de su confirmación.
+- **Commit de implementación:** [`5fc8f9de`](https://github.com/losmoriartys-cmd/s3xmen/commit/5fc8f9dea4a3952d3b3be64a1e4eea432aad8764) — actualización de `index.html`.
+- **Commit del informe:** se agrega este registro en el commit actual.
 - **Despliegue:** pendiente de verificación.
