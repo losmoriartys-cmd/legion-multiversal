@@ -66,3 +66,26 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Pendientes / riesgos:** el equipo está unificando el marco de todas las cartas; no se modificaron estilos ni capas del marco en esta intervención.
 - **Commit:** [`f55f6561`](https://github.com/losmoriartys-cmd/s3xmen/commit/f55f656167288bb430613de9a344271026710aec).
 - **Despliegue:** pendiente de verificación.
+
+## 2026-11-04 — Integrar el retrato Moriarty y eliminar la galería duplicada del Capítulo 1
+
+- **Responsable:** ChatGPT + equipo Los Moriartys.
+- **Objetivo:** integrar el nuevo retrato moriarty.jpg en el expediente principal y evitar que el Capítulo 1 vuelva a mostrar miniaturas antiguas duplicadas respecto del Roster.
+- **Archivos modificados:**
+  - index.html: corregida la ruta del retrato de Los Moriartys; sustituida la galería antigua del Capítulo 1 por una invitación al Capítulo 02.
+  - INFORMES.md: agregado este registro.
+- **Implementado:**
+  - El expediente de Los Moriartys utiliza moriarty.jpg (archivo existente en la raíz del repositorio).
+  - El Capítulo 1 conserva la narrativa, pero ya no duplica los retratos de los integrantes por fuera de sus fichas oficiales.
+  - Se agregó un acceso directo al Capítulo 02, donde vive el Roster con el marco oficial.
+- **Validaciones y resultados:**
+  - Confirmada la existencia de moriarty.jpg en main.
+  - Confirmado que el Roster se genera desde heroesData y que el retrato anterior apuntaba a assets/moriartys.jpg, ruta inexistente.
+  - Confirmado que la galería eliminada repetía integrantes por fuera de las fichas oficiales.
+  - No se ejecutó una prueba visual en navegador; queda pendiente revisar GitHub Pages.
+- **Pendientes / riesgos:**
+  - Revisar visualmente el encuadre de moriarty.jpg dentro del área de retrato del marco.
+  - Verificar el despliegue de GitHub Pages y el comportamiento del botón de acceso al Roster.
+  - Continuar la revisión de rutas de retratos restantes y completar el estado del Command Center 2.0.
+- **Commit:** bcc433532e471c693a40db1bea4dce29dc60e517
+- **Despliegue:** pendiente de verificación.
