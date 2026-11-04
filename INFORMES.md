@@ -649,3 +649,12 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Continuidad:** se conserva la ilustración pendiente de Demian y ROD3R1K; no se modificaron cartas, roster, estadísticas ni assets.
 - **Validación estática:** se confirmó el orden de las secciones y que cada fotografía aparece una sola vez en el Capítulo 01.
 - **Commit de interfaz:** [`ca9d91fb`](https://github.com/losmoriartys-cmd/s3xmen/commit/ca9d91fb899b70242dc040a362982fb86a47a28c).
+
+## 2026-11-04 — Primer clip incrustado en expediente Los Moriartys
+
+- Se recibió el código iframe de Twitch y se extrajo el identificador `AgileAssiduousConsoleCeilingCat-N-95sSpINtTMo3wj`.
+- Se agregó como primer elemento de `highlights` en `creator-records.json`, con título provisional "Clip destacado 1"; descripción editorial pendiente.
+- `renderMissionArchive` ahora incrusta clips Twitch que tengan `platform: "twitch"` y `clip_id`, usando el dominio oficial de GitHub Pages en el parámetro `parent`. El reproductor es adaptable 16:9 e incluye enlace para abrir el clip en Twitch.
+- No se requiere descargar el video. El contenido se reproduce desde Twitch.
+- Commits: [interfaz `860433cd`](https://github.com/losmoriartys-cmd/s3xmen/commit/860433cdeeda71ec48bc94821292de554e244f5a) · [registro `37972f33`](https://github.com/losmoriartys-cmd/s3xmen/commit/37972f33a02e48bf40ad0f7d6c35f4e8bf111521).
+- Pendiente: probar reproducción en GitHub Pages y recibir título/descripción del clip.
