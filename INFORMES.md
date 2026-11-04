@@ -787,3 +787,14 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Archivo modificado:** `index.html`.
 - **Commit:** [`532d2849`](https://github.com/losmoriartys-cmd/s3xmen/commit/532d28498e1da21aa9c4aedc41de911f1e29e426).
 - **Pendiente:** confirmar el despliegue de GitHub Pages; después de publicarse, recargar el sitio con Ctrl+F5 para evitar caché del navegador.
+
+
+## 2026-11-04 — Rediseño del fondo del Roster como página de revista de historietas
+
+- **Motivo:** el usuario pidió que el fondo se lea como una viñeta/página de cómic y señaló que la ambientación anterior no se distinguía en pantalla.
+- **Cambio visual:** se reemplazó la textura ambiental abstracta por una composición editorial explícita: márgenes con bloques de color tipo viñeta, trama de impresión visible, estallido gráfico radial, marco negro de página y separación de paneles.
+- **Jerarquía:** el título del Roster pasa a funcionar como una banda editorial amarilla de historieta; el banner institucional adopta papel claro con borde negro y sombra dura; las secciones de integrantes quedan como paneles oscuros enmarcados.
+- **Conservación:** no se modifican ilustraciones, marcos oficiales, datos de integrantes ni expedientes. Se mantiene la animación de las cartas y el respeto por `prefers-reduced-motion`.
+- **Archivos:** `index.html` y este informe.
+- **Commit de interfaz:** [`20d7f528`](https://github.com/losmoriartys-cmd/s3xmen/commit/20d7f528cad8edba11900de6de688bf1c96462ad).
+- **Despliegue:** pendiente de verificar GitHub Pages.
