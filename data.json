@@ -3,7 +3,7 @@
   "source": "Twitch Helix API",
   "window_days": 30,
   "sampling_interval_minutes": 15,
-  "updated_at": "2026-11-04T02:41:59Z",
+  "updated_at": "2026-11-04T02:56:23Z",
   "channels": {
     "ladymoriarty01": {
       "login": "ladymoriarty01",
@@ -18,9 +18,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-04T02:41:59Z",
+      "updated_at": "2026-11-04T02:56:23Z",
       "window": {
-        "samples_total": 12,
+        "samples_total": 13,
         "live_samples": 0,
         "streams_observed": 0,
         "average_viewers_sampled": null,
@@ -139,6 +139,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-04T02:56:23Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -155,9 +164,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-04T02:41:59Z",
+      "updated_at": "2026-11-04T02:56:23Z",
       "window": {
-        "samples_total": 12,
+        "samples_total": 13,
         "live_samples": 4,
         "streams_observed": 1,
         "average_viewers_sampled": 23.2,
@@ -306,6 +315,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-04T02:56:23Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -322,9 +340,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-04T02:41:59Z",
+      "updated_at": "2026-11-04T02:56:23Z",
       "window": {
-        "samples_total": 12,
+        "samples_total": 13,
         "live_samples": 1,
         "streams_observed": 1,
         "average_viewers_sampled": 9.0,
@@ -459,6 +477,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-04T02:56:23Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -471,34 +498,34 @@
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
       "live": true,
-      "current_viewers": 7,
+      "current_viewers": 6,
       "current_game": "Just Chatting",
       "current_title": "Tenemos 346 seguidores, dia 10 de 30 jugando al streamer!",
       "stream_started_at": "2026-11-04T01:59:55Z",
-      "updated_at": "2026-11-04T02:41:59Z",
+      "updated_at": "2026-11-04T02:56:23Z",
       "window": {
-        "samples_total": 12,
-        "live_samples": 2,
+        "samples_total": 13,
+        "live_samples": 3,
         "streams_observed": 1,
-        "average_viewers_sampled": 6.5,
+        "average_viewers_sampled": 6.3,
         "peak_viewers_sampled": 7,
-        "observed_live_hours": 0.0,
-        "estimated_hours_watched": 0.0,
+        "observed_live_hours": 0.24,
+        "estimated_hours_watched": 1.44,
         "game_breakdown": [
           {
             "name": "Just Chatting",
-            "live_samples": 2,
+            "live_samples": 3,
             "streams_observed": 1,
-            "average_viewers_sampled": 6.5,
+            "average_viewers_sampled": 6.3,
             "peak_viewers_sampled": 7
           }
         ],
         "daily_activity": [
           {
             "date": "2026-11-04",
-            "live_samples": 2,
+            "live_samples": 3,
             "streams_observed": 1,
-            "average_viewers_sampled": 6.5,
+            "average_viewers_sampled": 6.3,
             "peak_viewers_sampled": 7
           }
         ],
@@ -612,6 +639,15 @@
           "title": "Tenemos 346 seguidores, dia 10 de 30 jugando al streamer!",
           "stream_id": "321161141216",
           "started_at": "2026-11-04T01:59:55Z"
+        },
+        {
+          "sampled_at": "2026-11-04T02:56:23Z",
+          "is_live": true,
+          "viewer_count": 6,
+          "game_name": "Just Chatting",
+          "title": "Tenemos 346 seguidores, dia 10 de 30 jugando al streamer!",
+          "stream_id": "321161141216",
+          "started_at": "2026-11-04T01:59:55Z"
         }
       ]
     },
@@ -624,25 +660,25 @@
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
       "live": true,
-      "current_viewers": 4,
+      "current_viewers": 3,
       "current_game": "Fortnite",
       "current_title": "unos fornacho a buscar el one piece!!!",
       "stream_started_at": "2026-11-04T00:50:10Z",
-      "updated_at": "2026-11-04T02:41:59Z",
+      "updated_at": "2026-11-04T02:56:23Z",
       "window": {
-        "samples_total": 12,
-        "live_samples": 3,
+        "samples_total": 13,
+        "live_samples": 4,
         "streams_observed": 1,
-        "average_viewers_sampled": 2.7,
+        "average_viewers_sampled": 2.8,
         "peak_viewers_sampled": 4,
-        "observed_live_hours": 0.0,
-        "estimated_hours_watched": 0.0,
+        "observed_live_hours": 0.24,
+        "estimated_hours_watched": 0.72,
         "game_breakdown": [
           {
             "name": "Fortnite",
-            "live_samples": 2,
+            "live_samples": 3,
             "streams_observed": 1,
-            "average_viewers_sampled": 2.5,
+            "average_viewers_sampled": 2.7,
             "peak_viewers_sampled": 4
           },
           {
@@ -656,9 +692,9 @@
         "daily_activity": [
           {
             "date": "2026-11-04",
-            "live_samples": 3,
+            "live_samples": 4,
             "streams_observed": 1,
-            "average_viewers_sampled": 2.7,
+            "average_viewers_sampled": 2.8,
             "peak_viewers_sampled": 4
           }
         ],
@@ -772,6 +808,15 @@
           "title": "unos fornacho a buscar el one piece!!!",
           "stream_id": "322128940634",
           "started_at": "2026-11-04T00:50:10Z"
+        },
+        {
+          "sampled_at": "2026-11-04T02:56:23Z",
+          "is_live": true,
+          "viewer_count": 3,
+          "game_name": "Fortnite",
+          "title": "unos fornacho a buscar el one piece!!!",
+          "stream_id": "322128940634",
+          "started_at": "2026-11-04T00:50:10Z"
         }
       ]
     },
@@ -788,19 +833,19 @@
       "current_game": "Fortnite",
       "current_title": "Buscando la moneda de oro en Fornite",
       "stream_started_at": "2026-11-04T01:23:26Z",
-      "updated_at": "2026-11-04T02:41:59Z",
+      "updated_at": "2026-11-04T02:56:23Z",
       "window": {
-        "samples_total": 12,
-        "live_samples": 2,
+        "samples_total": 13,
+        "live_samples": 3,
         "streams_observed": 1,
         "average_viewers_sampled": 1.0,
         "peak_viewers_sampled": 1,
-        "observed_live_hours": 0.0,
-        "estimated_hours_watched": 0.0,
+        "observed_live_hours": 0.24,
+        "estimated_hours_watched": 0.24,
         "game_breakdown": [
           {
             "name": "Fortnite",
-            "live_samples": 2,
+            "live_samples": 3,
             "streams_observed": 1,
             "average_viewers_sampled": 1.0,
             "peak_viewers_sampled": 1
@@ -809,7 +854,7 @@
         "daily_activity": [
           {
             "date": "2026-11-04",
-            "live_samples": 2,
+            "live_samples": 3,
             "streams_observed": 1,
             "average_viewers_sampled": 1.0,
             "peak_viewers_sampled": 1
@@ -919,6 +964,15 @@
         },
         {
           "sampled_at": "2026-11-04T02:41:59Z",
+          "is_live": true,
+          "viewer_count": 1,
+          "game_name": "Fortnite",
+          "title": "Buscando la moneda de oro en Fornite",
+          "stream_id": "321160197216",
+          "started_at": "2026-11-04T01:23:26Z"
+        },
+        {
+          "sampled_at": "2026-11-04T02:56:23Z",
           "is_live": true,
           "viewer_count": 1,
           "game_name": "Fortnite",
@@ -941,9 +995,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-04T02:41:59Z",
+      "updated_at": "2026-11-04T02:56:23Z",
       "window": {
-        "samples_total": 12,
+        "samples_total": 13,
         "live_samples": 0,
         "streams_observed": 0,
         "average_viewers_sampled": null,
@@ -1056,6 +1110,15 @@
         },
         {
           "sampled_at": "2026-11-04T02:41:59Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-04T02:56:23Z",
           "is_live": false,
           "viewer_count": null,
           "game_name": null,
@@ -1078,9 +1141,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-04T02:41:59Z",
+      "updated_at": "2026-11-04T02:56:23Z",
       "window": {
-        "samples_total": 12,
+        "samples_total": 13,
         "live_samples": 0,
         "streams_observed": 0,
         "average_viewers_sampled": null,
@@ -1193,6 +1256,15 @@
         },
         {
           "sampled_at": "2026-11-04T02:41:59Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-04T02:56:23Z",
           "is_live": false,
           "viewer_count": null,
           "game_name": null,
@@ -1215,9 +1287,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-04T02:41:59Z",
+      "updated_at": "2026-11-04T02:56:23Z",
       "window": {
-        "samples_total": 12,
+        "samples_total": 13,
         "live_samples": 0,
         "streams_observed": 0,
         "average_viewers_sampled": null,
@@ -1330,6 +1402,15 @@
         },
         {
           "sampled_at": "2026-11-04T02:41:59Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-04T02:56:23Z",
           "is_live": false,
           "viewer_count": null,
           "game_name": null,
