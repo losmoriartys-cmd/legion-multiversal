@@ -743,3 +743,11 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Validación:** se comprobó que el renderizador contiene los seis indicadores Lifetime y siete indicadores del período, sin duplicar el pico; se preservaron los datos por juego.
 - **Commit de interfaz:** [`bbf93418`](https://github.com/losmoriartys-cmd/s3xmen/commit/bbf934186cd64363eaad0d129dbb05bcbbfeb96b).
 - **Despliegue:** pendiente de verificar el workflow de GitHub Pages.
+
+## 2026-11-04 — Centrar la portada del Capítulo 01 tras retirar la imagen lateral
+
+- **Solicitud:** corregir la composición de la portada del Capítulo 01, cuyo contenido había quedado desplazado hacia un costado después de retirar la imagen que ocupaba la segunda columna.
+- **Implementado:** se eliminó la estructura de dos columnas que ya no tenía sentido sin la imagen; el bloque de portada ahora ocupa una sola columna, con ancho máximo controlado y centrado.
+- **Alineación:** emblema y rótulo institucional centrados como conjunto; título, descripción y metadatos alineados al eje central. Se conserva el comportamiento responsive y la identidad visual existente.
+- **Commit de interfaz:** [`560255be`](https://github.com/losmoriartys-cmd/s3xmen/commit/560255bed1f32dc5dce26c3a881cafc593a35f65).
+
