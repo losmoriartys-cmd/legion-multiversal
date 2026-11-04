@@ -463,6 +463,7 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Validaciones realizadas:**
   - Se confirmó que `data.json` contiene 9 canales, ventana declarada de 30 días y frecuencia programada de 15 minutos; en la última lectura todos figuraban offline.
   - Se verificó en el archivo actualizado la presencia de los desplegables metodológicos, el nuevo capítulo En vivo, el reproductor embebido, el contacto técnico del pie de página y la ausencia de los capítulos operativos retirados.
+  - Se añadió una aclaración visible en la metodología: una ventana máxima configurada de 30 días no implica que los 30 días estén completos; la cobertura depende de la antigüedad y continuidad de la recolección.
   - Se comprobó que el Arsenal conserva exactamente diez tarjetas.
   - Se confirmó que la navegación utiliza identificadores explícitos de capítulo para permitir el nuevo orden sin renombrar los identificadores internos.
 - **Pendientes / riesgos:**
