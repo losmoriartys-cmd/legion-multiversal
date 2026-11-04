@@ -54,6 +54,7 @@
 
         .header-top { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
         .logo-container { display: flex; align-items: center; gap: 15px; }
+        .header-brand-emblem { display:block;width:82px;height:82px;flex:0 0 82px;object-fit:contain;filter:drop-shadow(4px 4px 0 #000) drop-shadow(0 0 9px rgba(0,210,255,.18)); }
         .badge-comic {
             background: var(--yellow-accent); color: #000;
             font-family: 'Bangers', cursive; font-size: 1.8rem;
@@ -878,7 +879,7 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
         .silhouette-art:before{content:"";position:absolute;top:0;left:22px;width:30px;height:30px;border-radius:50%;background:#080d18;box-shadow:0 0 0 2px #66758d}
         .silhouette-art:after{content:"";position:absolute;bottom:0;left:5px;width:62px;height:58px;background:#080d18;clip-path:polygon(25% 0,75% 0,100% 100%,0 100%);border:1px solid #66758d}
         .future-silhouette b{font:1rem 'Bangers',cursive;letter-spacing:1px;color:#94a3b8}
-        @media(max-width:560px){.brand-emblem{width:64px;height:64px;flex-basis:64px}.emblem-letter{font-size:2.5rem}.future-silhouettes{grid-template-columns:repeat(2,minmax(0,1fr))}}
+        @media(max-width:560px){.header-brand-emblem{width:64px;height:64px;flex-basis:64px}.future-silhouettes{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
     
         /* Capítulo 01 · narrativa unificada y banner de la formación actual */
@@ -897,7 +898,7 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
     <header>
         <div class="header-top">
             <div class="logo-container">
-                <div class="brand-emblem" aria-label="Emblema de Legión Multiversal"><span class="emblem-orbit"></span><span class="emblem-letter">M</span><small>LM</small></div>
+                <img class="header-brand-emblem" src="legion_logo_final_hybrid.png" alt="Emblema oficial de Legión Multiversal">
                 <div class="title-group">
                     <h1>LEGIÓN MULTIVERSAL</h1>
                     <p>DIFERENTES MUNDOS. UNA MISMA LEGIÓN.</p>
