@@ -231,6 +231,62 @@
             margin-bottom: 5px;
         }
 
+
+        /* CAPÍTULO 01 · narrativa editorial */
+        .chapter-one { padding: clamp(22px,4vw,54px); background:linear-gradient(160deg,#121b2a 0%,#0c111b 72%); }
+        .chapter-one .chapter-tag { z-index:2; }
+        .chapter-cover { display:grid;grid-template-columns:minmax(0,1fr) minmax(320px,.95fr);gap:clamp(24px,4vw,52px);align-items:center;padding:28px 0 42px;border-bottom:1px solid rgba(255,255,255,.16); }
+        .chapter-eyebrow,.section-kicker { color:#00d2ff;font-size:.72rem;font-weight:900;letter-spacing:.19em;text-transform:uppercase;margin-bottom:14px; }
+        .chapter-main-title { font-family:'Bangers',cursive;font-size:clamp(3.3rem,7vw,6.4rem);line-height:.91;letter-spacing:.025em;color:#f4f6fa;text-shadow:4px 4px 0 #000;margin:0 0 22px; }
+        .chapter-main-title span,.section-heading h3 span,.era-transition h3 span,.protagonists-cta h3 span { color:#ffde00; }
+        .chapter-deck { max-width:650px;color:#d6deea;font-size:clamp(1rem,1.4vw,1.18rem);line-height:1.8; }
+        .chapter-cover-meta { display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:26px;color:#91a2b8;font-size:.68rem;font-weight:900;letter-spacing:.12em; }
+        .chapter-cover-art { margin:0;background:#05080e;border:4px solid #05070b;box-shadow:9px 9px 0 #000;transform:rotate(.5deg); }
+        .chapter-cover-art img { display:block;width:100%;aspect-ratio:16/9;object-fit:cover; }
+        .chapter-cover-art figcaption,.founding-panel figcaption { padding:12px 15px;color:#aebbd0;font-size:.78rem;line-height:1.5;font-style:italic; }
+        .origin-sequence,.evolution-sequence,.dimensions-section { padding:46px 0;border-bottom:1px solid rgba(255,255,255,.14); }
+        .section-heading { display:grid;grid-template-columns:1fr minmax(220px,.65fr);gap:24px;align-items:end;margin-bottom:28px; }
+        .section-heading h3,.protagonists-cta h3 { font-family:'Bangers',cursive;font-size:clamp(2.2rem,4.5vw,3.7rem);line-height:1;letter-spacing:.03em;color:#f4f6fa; }
+        .section-heading>p { color:#aebbd0;line-height:1.7;max-width:480px; }
+        .origin-layout { display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:30px;align-items:start; }
+        .origin-copy p,.era-transition>p:not(.section-kicker) { color:#d5deea;line-height:1.85;margin-bottom:15px; }
+        .origin-copy strong,.era-transition strong { color:#fff; }
+        .archive-stamp { padding:22px;border:1px solid rgba(255,222,0,.5);background:linear-gradient(145deg,rgba(255,222,0,.08),rgba(0,0,0,.16));display:flex;flex-direction:column;gap:8px; }
+        .archive-stamp-label,.archive-stamp>span:last-of-type { color:#aebbd0;font-size:.65rem;font-weight:900;letter-spacing:.14em; }
+        .archive-stamp strong { color:#ffde00;font:2.7rem 'Bangers',cursive; }
+        .archive-stamp p { color:#aebbd0;font-size:.78rem;line-height:1.6;margin-top:8px; }
+        .founding-panel { max-width:850px;margin:34px auto 0;background:#080d16;border:3px solid #030509;box-shadow:7px 7px 0 #000; }
+        .founding-art-placeholder { min-height:270px;padding:30px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:12px;background:radial-gradient(ellipse at center,rgba(0,210,255,.13),transparent 65%),repeating-linear-gradient(135deg,#111b2a 0,#111b2a 2px,#0d1521 2px,#0d1521 7px); }
+        .founding-number,.founding-art-placeholder small { color:#00d2ff;font-size:.65rem;font-weight:900;letter-spacing:.17em; }
+        .founding-art-placeholder strong { font:clamp(2rem,5vw,3.4rem) 'Bangers',cursive;color:#ffde00;text-shadow:3px 3px #000; }
+        .founding-art-placeholder>span:not(.founding-number) { color:#e1e8f2; }
+        .founding-art-placeholder small { color:#8292a8;margin-top:12px; }
+        .timeline { position:relative;display:grid;grid-template-columns:1fr 1fr;gap:0 38px; }
+        .timeline:before { content:"";position:absolute;top:16px;bottom:16px;left:31px;width:2px;background:linear-gradient(#00d2ff,#ffde00);opacity:.55; }
+        .timeline-entry { position:relative;display:grid;grid-template-columns:64px 1fr;gap:14px;padding:20px 0;border-top:1px solid rgba(255,255,255,.12); }
+        .timeline-no { z-index:1;width:48px;height:48px;display:grid;place-items:center;background:#111c2b;border:2px solid #00d2ff;color:#00d2ff;font:1.5rem 'Bangers',cursive; }
+        .timeline-entry h4,.dimension h4 { color:#ffde00;font:1.45rem 'Bangers',cursive;letter-spacing:.04em;margin:2px 0 7px; }
+        .timeline-entry p,.dimension p { color:#b9c5d6;font-size:.88rem;line-height:1.7; }
+        .era-transition { margin:44px 0;padding:clamp(26px,5vw,58px);background:linear-gradient(110deg,#17263a,#101722 65%,#17132b);border-left:5px solid #ffde00;box-shadow:7px 7px 0 #000; }
+        .era-transition .era-origin { color:#00d2ff;font:1.4rem 'Bangers',cursive;letter-spacing:.08em;margin-bottom:8px; }
+        .era-transition h3 { color:#f4f6fa;font:clamp(2.4rem,5vw,4.2rem)/.98 'Bangers',cursive;margin-bottom:22px; }
+        .era-transition>p:not(.section-kicker) { max-width:900px; }
+        .legion-motto { display:block;margin-top:25px;color:#ffde00!important;font:clamp(1.4rem,3vw,2.2rem) 'Bangers',cursive;letter-spacing:.1em; }
+        .dimensions-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:16px; }
+        .dimension { min-height:220px;padding:24px;background:#141e2c;border-top:3px solid #00d2ff; }
+        .dimension>span { color:#00d2ff;font:2.2rem 'Bangers',cursive; }
+        .dimension-tech { border-color:#ffde00; }.dimension-tech>span { color:#ffde00; }
+        .dimension-growth { border-color:#b69aff; }.dimension-growth>span { color:#b69aff; }
+        .identity-note { margin-top:20px;padding:16px 20px;border-left:3px solid #b69aff;background:rgba(182,154,255,.07);color:#b9c5d6;line-height:1.7; }
+        .protagonists-cta { display:flex;justify-content:space-between;align-items:center;gap:30px;padding:44px 0 8px; }
+        .protagonists-cta>div { max-width:680px; }
+        .protagonists-cta h3 { margin-bottom:14px; }
+        .protagonists-cta>div>p:last-child { color:#b9c5d6;line-height:1.7; }
+        .chapter-cta { flex:0 0 auto;padding:15px 22px;background:#ffde00;color:#080b10;border:3px solid #000;box-shadow:5px 5px 0 #000;font:1.3rem 'Bangers',cursive;letter-spacing:.04em;cursor:pointer; }
+        .chapter-cta:hover { background:#00d2ff;transform:translate(-2px,-2px); }
+        @media(max-width:850px){.chapter-cover,.section-heading,.origin-layout{grid-template-columns:1fr}.chapter-cover-art{max-width:680px}.archive-stamp{max-width:420px}.timeline{grid-template-columns:1fr}.dimensions-grid{grid-template-columns:1fr}.dimension{min-height:0}.protagonists-cta{align-items:flex-start;flex-direction:column}}
+        @media(max-width:560px){.chapter-one{padding:28px 18px}.chapter-cover{padding-top:20px}.chapter-main-title{font-size:3.2rem}.timeline{gap:0}.timeline-entry{grid-template-columns:54px 1fr}.timeline:before{left:23px}.timeline-no{width:42px;height:42px}.founding-art-placeholder{min-height:220px;padding:22px}.chapter-cover-meta{flex-direction:column;gap:8px}}
+
         .roster-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -653,35 +709,98 @@
 
     <main>
         <!-- CAPÍTULO 1: PORTADA -->
-        <section id="chapter-1" class="chapter-panel active">
-            <div class="chapter-tag">CAPÍTULO 01</div>
-            <h2 class="comic-title">LOS S3X-MEN: LA LEYENDA DEL TURNO NOCHE</h2>
-            <div class="cover-grid">
-                <div class="cover-text">
-                    <p>Una noche cualquiera de directos y charlas de medianoche, tiramos sobre la mesa una idea casi de película: ¿y si cruzamos las fronteras y armamos nuestro propio escuadrón? Una especie de <strong>Avengers internacionales</strong> unidos no para salvar el mundo de Thanos, sino para traer diversión, risas y entretenimiento de altísima calidad a la pantalla cada semana. Así nació <strong>LOS S3X-MEN</strong>, un puente directo entre <strong>Argentina, Bolivia y México</strong>.</p>
-                    <div class="feature-boxes">
-                        <div class="f-box">
-                            <h4>HERMANDAD GENUINA</h4>
-                            <p>Cero toxicidad, compañerismo absoluto y apoyo mutuo incondicional en cada directo.</p>
-                        </div>
-                        <div class="f-box">
-                            <h4>ESTÁNDAR PROFESIONAL</h4>
-                            <p>Creadores maduros e independientes que ofrecen calidad y colaboración real para la industria.</p>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div class="banner-img-wrapper">
-                        <img src="banner-grupal.jpg" alt="Los S3X-Men Banner Grupal">
-                    </div>
-                    <div style="text-align: center; margin-top: 15px;">
-                        <span style="font-family: 'Bangers', cursive; font-size: 1.4rem; color: var(--yellow-accent);">“UN INSTITUTO. DIEZ TALENTOS. UNA MISIÓN MULTICANAL.”</span>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <section id="chapter-1" class="chapter-panel active chapter-one">
+    <div class="chapter-tag">CAPÍTULO 01 · EL ORIGEN</div>
 
-        <!-- CAPÍTULO 2: ROSTER DE HÉROES EN 1RA PLANA -->
+    <header class="chapter-cover">
+        <div class="chapter-cover-copy">
+            <p class="chapter-eyebrow">ARCHIVO CENTRAL · LEGIÓN MULTIVERSAL</p>
+            <h2 class="chapter-main-title">DE UNA PARTIDA<br><span>NACIÓ UNA LEGIÓN</span></h2>
+            <p class="chapter-deck">No nacimos como una gran organización. Nacimos jugando, compartiendo directos y descubriendo que, cuando las personas correctas se encuentran, pueden construir algo mucho más grande que una colaboración.</p>
+            <div class="chapter-cover-meta"><span>ORIGEN: S3X-MEN</span><span>IDENTIDAD ACTUAL: LEGIÓN MULTIVERSAL</span></div>
+        </div>
+        <figure class="chapter-cover-art">
+            <img src="assets/banner-grupal.jpg" alt="Formación actual de Legión Multiversal">
+            <figcaption>La comunidad que hoy continúa aquella primera idea.</figcaption>
+        </figure>
+    </header>
+
+    <section class="origin-sequence">
+        <div class="section-kicker">01 / ARCHIVO HISTÓRICO · PRIMERA ETAPA</div>
+        <div class="section-heading">
+            <h3>ANTES DE LA LEGIÓN,<br><span>FUIMOS S3X-MEN.</span></h3>
+            <p>Una primera formación. Una idea compartida. El punto de partida de todo lo que vino después.</p>
+        </div>
+        <div class="origin-layout">
+            <div class="origin-copy">
+                <p>Todo comenzó con <strong>Demian y ROD3R1K</strong>, compartiendo partidas de <strong>Marvel Rivals</strong> y una idea que todavía no tenía nombre: reunir a creadores con personalidades distintas para hacer algo juntos. <strong>Akuma</strong> se sumó a aquellas primeras misiones y el equipo empezó a tomar forma.</p>
+                <p>Después llegó <strong>Fortnite</strong>. Lo que parecía una serie de encuentros entre amigos empezó a convertirse en una comunidad: se incorporaron <strong>ElGabii y Capy</strong>, y cada nueva persona amplió el universo que estábamos construyendo.</p>
+                <p>En ese momento entendimos que no queríamos limitarnos a jugar juntos. Queríamos conectar comunidades, potenciar proyectos y abrir un espacio donde cada integrante pudiera crecer sin dejar de ser quien es.</p>
+            </div>
+            <aside class="archive-stamp">
+                <span class="archive-stamp-label">DOCUMENTO DE ORIGEN</span>
+                <strong>S3X-MEN</strong>
+                <span>PRIMERA FORMACIÓN</span>
+                <p>La imagen histórica de esta etapa se conserva como archivo fundacional y se integrará aquí en su versión original.</p>
+            </aside>
+        </div>
+        <figure class="founding-panel">
+            <div class="founding-art-placeholder">
+                <span class="founding-number">VIÑETA FUNDACIONAL · 001</span>
+                <strong>EL COMIENZO DE TODO</strong>
+                <span>Demian + ROD3R1K · Una partida. Una conversación. Una idea.</span>
+                <small>ILUSTRACIÓN DE NOVELA GRÁFICA PENDIENTE DE INCORPORAR</small>
+            </div>
+            <figcaption>Antes de los nombres, los rangos y los expedientes, hubo dos amigos frente a una pantalla imaginando lo que podían construir juntos.</figcaption>
+        </figure>
+    </section>
+
+    <section class="evolution-sequence">
+        <div class="section-kicker">02 / LA EVOLUCIÓN</div>
+        <div class="section-heading">
+            <h3>LAS PERSONAS CAMBIARON<br><span>EL TAMAÑO DEL UNIVERSO.</span></h3>
+            <p>Cada incorporación abrió una puerta nueva. No reemplazamos lo que éramos: lo hicimos crecer.</p>
+        </div>
+        <div class="timeline">
+            <article class="timeline-entry"><span class="timeline-no">01</span><div><h4>LA PRIMERA CHISPA</h4><p>Demian y ROD3R1K cruzan caminos en Marvel Rivals. Akuma se suma y nace el primer núcleo de esta aventura.</p></div></article>
+            <article class="timeline-entry"><span class="timeline-no">02</span><div><h4>EL EQUIPO SE EXPANDE</h4><p>Fortnite se convierte en otro punto de encuentro. Con ElGabii y Capy, la colaboración empieza a tomar forma de comunidad.</p></div></article>
+            <article class="timeline-entry"><span class="timeline-no">03</span><div><h4>UNA VISIÓN MÁS GRANDE</h4><p>La idea deja de ser solamente compartir partidas: queremos unir creadores, impulsar sus proyectos y generar oportunidades entre comunidades.</p></div></article>
+            <article class="timeline-entry"><span class="timeline-no">04</span><div><h4>NUEVAS VOCES, NUEVOS MUNDOS</h4><p>Se incorporan colaboradores como Pato — Oratoris y Hábitos Atómicos. La tecnología, la comunicación, la filosofía y el desarrollo personal también encuentran su lugar.</p></div></article>
+            <article class="timeline-entry"><span class="timeline-no">05</span><div><h4>UNA NUEVA INTEGRANTE</h4><p>Lady Moriarty se convierte en la primera mujer en sumarse a esta historia y aporta una nueva energía al equipo, además de compartir el universo de Los Moriartys.</p></div></article>
+            <article class="timeline-entry"><span class="timeline-no">06</span><div><h4>EL SIGUIENTE CAPÍTULO</h4><p>Llega Dave como estudiante, con su propio espacio y un camino por descubrir. La Legión sigue abierta a nuevas personas, talentos y universos.</p></div></article>
+        </div>
+    </section>
+
+    <section class="era-transition">
+        <p class="section-kicker">03 / CAMBIO DE ERA</p>
+        <p class="era-origin">S3X-MEN FUE NUESTRO ORIGEN.</p>
+        <h3>LEGIÓN MULTIVERSAL<br><span>ES LO QUE ESTAMOS CONSTRUYENDO.</span></h3>
+        <p>Somos una comunidad internacional de creadores que conecta <strong>gaming y entretenimiento, conocimiento y tecnología, y desarrollo personal</strong>. Queremos cruzar fronteras, culturas y disciplinas; compartir audiencias, aprender unos de otros y crear oportunidades que individualmente serían más difíciles de alcanzar.</p>
+        <p>No buscamos que todos hagan lo mismo. Buscamos que cada persona aporte algo propio.</p>
+        <strong class="legion-motto">DIFERENTES MUNDOS. UNA MISMA LEGIÓN.</strong>
+    </section>
+
+    <section class="dimensions-section">
+        <div class="section-kicker">04 / EL UNIVERSO DE LA LEGIÓN</div>
+        <div class="section-heading">
+            <h3>TRES DIMENSIONES.<br><span>UNA MISMA COMUNIDAD.</span></h3>
+            <p>El talento no tiene una sola forma. Conectamos entretenimiento, conocimiento y crecimiento personal para construir una comunidad donde cada persona pueda aportar desde su especialidad.</p>
+        </div>
+        <div class="dimensions-grid">
+            <article class="dimension dimension-gaming"><span>01</span><h4>GAMING Y ENTRETENIMIENTO</h4><p>Videojuegos, streaming, eventos, experiencias cooperativas y creación de contenido para compartir momentos memorables.</p></article>
+            <article class="dimension dimension-tech"><span>02</span><h4>CONOCIMIENTO Y TECNOLOGÍA</h4><p>Programación, herramientas digitales, innovación, aprendizaje y experiencias que ayudan a ampliar nuestras capacidades.</p></article>
+            <article class="dimension dimension-growth"><span>03</span><h4>DESARROLLO PERSONAL</h4><p>Filosofía, motivación, hábitos, reflexión y conversaciones que también nos hacen crecer fuera de la pantalla.</p></article>
+        </div>
+        <p class="identity-note"><strong>UNA IDENTIDAD ABIERTA:</strong> cada integrante puede conectar con más de una dimensión. No son compartimentos cerrados, sino distintas formas de sumar al equipo.</p>
+    </section>
+
+    <section class="protagonists-cta">
+        <div><p class="section-kicker">05 / LOS PROTAGONISTAS</p><h3>UN UNIVERSO.<br><span>MUCHAS IDENTIDADES.</span></h3><p>Los expedientes visuales de cada integrante están reunidos en el Capítulo 02. Allí vas a encontrar a cada héroe una sola vez, presentado dentro de su marco oficial y con acceso a su ficha completa.</p></div>
+        <button class="chapter-cta" type="button" onclick="switchChapter(2)">EXPLORAR EL ROSTER <span>↗</span></button>
+    </section>
+</section>
+
+<!-- CAPÍTULO 2: ROSTER DE HÉROES EN 1RA PLANA -->
         <section id="chapter-2" class="chapter-panel">
             <div class="chapter-tag">CAPÍTULO 02</div>
             <h2 class="comic-title">INSTITUTO S3X-MEN — ROSTER OFICIAL</h2>
