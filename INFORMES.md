@@ -51,5 +51,5 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
   - Revisar el estado de Dave/Nexus y su retrato actual en `assets/` en la siguiente intervención visual.
   - Antes de nuevas modificaciones, confirmar la identidad/nomenclatura vigente del sitio: el historial de `BITACORA.md` documenta una etapa de rebranding a “Legión Multiversal”, mientras que el proyecto y el equipo siguen usando “Los Moriartys” como referencia de trabajo.
 - **Commit README:** [`5055ce8d`](https://github.com/losmoriartys-cmd/s3xmen/commit/5055ce8d647f34c9cef023737722c8342a921941).
-- **Commit INFORMES:** pendiente de registrar tras la creación.
+- **Commit INFORMES (creación inicial):** [`5ea303b5`](https://github.com/losmoriartys-cmd/s3xmen/commit/5ea303b572b61dc493657ef7e9920e3870f3f0e1).
 - **Despliegue:** pendiente de verificación.
