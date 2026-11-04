@@ -274,7 +274,7 @@
         .institute-stamp{flex:0 0 94px;height:94px;display:grid;place-items:center;text-align:center;border:3px double #ffde00;color:#ffde00;font-family:'Bangers',cursive;font-size:1.3rem;transform:rotate(-5deg)}
         .institute-banner h3{font-family:'Bangers',cursive;font-size:1.8rem;color:#ffde00;letter-spacing:1px;margin-bottom:6px}
         .institute-banner p{color:#d5deea;line-height:1.6}
-        .institute-counts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:18px 0 24px}
+        .institute-counts{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:18px 0 24px}
         .institute-counts div{background:#1a202c;border:2px solid #000;box-shadow:4px 4px 0 #000;padding:12px;text-align:center;display:flex;flex-direction:column;gap:2px}
         .institute-counts strong{color:#ffde00;font-family:'Bangers',cursive;font-size:2rem}
         .institute-counts span{color:#aab7c8;font-size:.75rem;font-weight:900;letter-spacing:1px}
@@ -1566,6 +1566,17 @@ function openHeroProfile(index) {
     history.replaceState(null, '', '#expediente-' + encodeURIComponent(hero.name.toLowerCase().replace(/[^a-z0-9]+/g,'-')));
     page.scrollIntoView({behavior:'smooth',block:'start'});
 }
+function restoreHeroProfileFromHash() {
+    const slug = decodeURIComponent((location.hash || '').replace(/^#expediente-/, ''));
+    if (!slug || slug === location.hash.replace(/^#/, '')) return;
+    const index = heroesData.findIndex(hero => hero.name.toLowerCase().replace(/[^a-z0-9]+/g,'-') === slug);
+    if (index >= 0) {
+        const chapter = document.getElementById('chapter-2');
+        document.querySelectorAll('.chapter-panel').forEach(panel => panel.classList.remove('active'));
+        chapter?.classList.add('active');
+        openHeroProfile(index);
+    }
+}
 function closeHeroProfile() {
     const home = document.getElementById('roster-home');
     const page = document.getElementById('hero-profile-page');
@@ -1626,6 +1637,7 @@ function openHeroModal(index) {
         window.onload = async function() {
         await loadSullyGnomeData();
         renderRoster();
+        restoreHeroProfileFromHash();
         loadInstituteStats(); loadPartnerMetrics(); loadCreatorRecords();
         };
     </script>
