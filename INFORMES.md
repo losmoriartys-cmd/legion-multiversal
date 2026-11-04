@@ -593,5 +593,5 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Rendimiento del período:** horas vistas 846 (+35%); pico 101 (+107%); promedio 26 (+34%); Authorized to All Viewers Ratio 117%; Live Views 102; Followers Gain 48 (-94%); Airtime 32 h 10 min (-1%); 28 días activos y 1 h 8 min/día.
 - **Criterio temporal:** el rango de fechas del panel de rendimiento no aparece en la captura; se informa expresamente como no indicado. Las métricas capturadas no se mezclan con el registro de 9 transmisiones de SullyGnome, que conserva su período propio.
 - **Alcance:** el cambio corresponde solo al renderizador del login `losmoriartys`. No se modifican JSON, automatizaciones ni los otros perfiles.
-- **Commits de interfaz:** [`76829890`](https://github.com/losmoriartys-cmd/s3xmen/commit/7682989088ad5c766208dacd5a2d1275128c53eb) y [`a6f3d4c1`](https://github.com/losmoriartys-cmd/s3xmen/commit/a6f3d4c1f50c5b7bfc5e6c9a7b5d0f1a8c6d0a11).
+- **Commits de interfaz:** [`11f43232`](https://github.com/losmoriartys-cmd/s3xmen/commit/11f432329c6cada7d88cc3b9eba4c8f655b37901).
 - **Pendiente:** verificar visualmente el despliegue y confirmar el período exacto del panel de rendimiento.
