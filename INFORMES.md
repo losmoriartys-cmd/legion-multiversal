@@ -493,3 +493,19 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Commit de corrección de transparencia:** `b9a29c250000cb0a1648a494914f8619677b0b60` — https://github.com/losmoriartys-cmd/s3xmen/commit/b9a29c250000cb0a1648a494914f8619677b0b60
 - **Despliegue de la reorganización anterior:** exitoso; workflow `41798161727`. El commit de corrección de transparencia queda sujeto a su propio workflow de Pages.
 
+
+
+## 2026-11-04 — Unificación del media kit y la bitácora
+
+- **Objetivo:** eliminar la duplicación entre la vista de perfil y la bitácora modal; convertir la bitácora existente en el expediente comercial completo.
+- **Archivo modificado:** `index.html`.
+- **Nueva estructura integrada en la bitácora:**
+  - **A · Perfil y contenido:** presentación del creador/proyecto, identidad de sus integrantes, especialidades, formatos y posibilidades de colaboración.
+  - **B · Audiencia y estadísticas:** paneles de Twitch Helix y SullyGnome existentes, cada fuente separada, con sus períodos y aclaraciones metodológicas.
+  - **C · Trayectoria y colaboraciones:** hitos, colaboraciones y directos/clips destacados desde `creator-records.json`, con fecha y fuente/enlace.
+- **Retirado de la bitácora:** pestaña de poderes/habilidades ficticias. Esa información permanece en la carta oficial y no se duplica en el media kit.
+- **Vista previa del perfil:** vuelve a funcionar como acceso a la carta oficial y a la bitácora unificada; se retiró la repetición de bloques editoriales fuera del expediente.
+- **Legibilidad:** se añadieron estilos para la presentación, perfiles de integrantes y navegación responsive. Se conserva el sistema de estadísticas existente y no se inventan cifras ni registros.
+- **Preservado:** roster, cartas, roles, fuentes de estadísticas, `data.json`, `sullygnome-data.json`, automatizaciones y registros editoriales.
+- **Commit de interfaz:** `683bca4d2449e91c3e8a14ac5b19e0f7022e897f`.
+- **Despliegue:** pendiente de comprobar el workflow de GitHub Pages y la lectura visual en escritorio/móvil.
