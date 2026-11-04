@@ -1248,6 +1248,23 @@ function renderObservedStreams(channel){
  lines.push('Importante: son sesiones captadas por el muestreo; no representan necesariamente todos los directos ni sustituyen el historial/VOD de Twitch.');
  return lines.join('\\n');
 }
+function renderCreatorEvolution(channel){
+ if(!channel || !channel.window)return '';
+ const w=channel.window;
+ const lines=['EVOLUCIÓN DEL CANAL · VENTANA MÓVIL DE '+(instituteStatsData?.window_days||30)+' DÍAS'];
+ const games=Array.isArray(w.game_breakdown)?w.game_breakdown:[];
+ lines.push('JUEGOS / CATEGORÍAS MÁS OBSERVADOS (por muestras en directo):');
+ if(games.length){
+  games.slice(0,5).forEach((g,i)=>lines.push((i+1)+'. '+g.name+' · '+g.live_samples+' muestras · '+g.streams_observed+' directos detectados · promedio '+formatMetric(g.average_viewers_sampled)+' · pico '+formatMetric(g.peak_viewers_sampled,0)));
+ }else lines.push('Sin muestras en directo suficientes para elaborar el ranking.');
+ const days=Array.isArray(w.daily_activity)?w.daily_activity:[];
+ lines.push('ACTIVIDAD POR DÍA (UTC):');
+ if(days.length){
+  days.slice(-7).forEach(d=>lines.push(d.date+' · '+d.streams_observed+' directos detectados · '+d.live_samples+' muestras · pico '+formatMetric(d.peak_viewers_sampled,0)));
+ }else lines.push('Todavía no hay días con directos observados.');
+ lines.push('Lectura correcta: ranking por cantidad de muestras, no por horas jugadas. La ventana de 30 días comienza a acumularse desde que se amplió el colector; no reconstruye el período anterior.');
+ return lines.join('\\n');
+}
 function formatMetric(value,digits=2){
  if(value===null||value===undefined)return 'Pendiente de verificación';
  return typeof value==='number'?value.toLocaleString('es-AR',{maximumFractionDigits:digits}):value;
@@ -1358,6 +1375,10 @@ function openHeroModal(index) {
                     'Las muestras no equivalen a las métricas oficiales de Twitch Creator Dashboard.';
             }else{
                 document.getElementById('modal-stats-text').innerText=hero.stats||'Las métricas de esta plataforma se integrarán por separado.';
+            }
+            const evolutionText=renderCreatorEvolution(channelStats);
+            if(evolutionText){
+                document.getElementById('modal-stats-text').innerText += '\n\n' + evolutionText;
             }
             const observedStreamsText=renderObservedStreams(channelStats);
             if(observedStreamsText){
