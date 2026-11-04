@@ -731,3 +731,15 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Conservado:** la imagen `Demi&Rod.jpg` permanece en su viñeta propia «EL COMIENZO DE TODO», porque documenta el origen entre los dos primeros amigos.
 - **Commit de interfaz:** [`422e5e0b`](https://github.com/losmoriartys-cmd/s3xmen/commit/422e5e0bd5a9600b0364cf09dc1fac6b55e84038).
 
+
+
+## 2026-11-04 — Reorganizar audiencia y rendimiento de Los Moriartys
+
+- **Solicitud:** reducir la repetición visual en la pestaña B del media kit, separando claramente los acumulados históricos del rendimiento del período.
+- **Archivo modificado:** `index.html`.
+- **Implementado:** «DATOS HISTÓRICOS · LIFETIME» pasa a presentarse como tarjetas de audiencia acumulada: seguidores, pico histórico con fecha, promedio histórico, días activos, airtime acumulado y bans.
+- **Rendimiento del período:** conserva horas vistas, promedio, ratio, live views, followers gain, airtime y días activos. Se retiró la tarjeta de pico del período porque informa el mismo valor (101) que el pico histórico; el dato queda aclarado en una nota para no perder contexto.
+- **Conservado:** todos los valores originales, la tabla de juegos populares, las fuentes y la advertencia de que el rango temporal del panel no está visible. No se modificaron `data.json`, automatizaciones ni estadísticas.
+- **Validación:** se comprobó que el renderizador contiene los seis indicadores Lifetime y siete indicadores del período, sin duplicar el pico; se preservaron los datos por juego.
+- **Commit de interfaz:** [`bbf93418`](https://github.com/losmoriartys-cmd/s3xmen/commit/bbf934186cd64363eaad0d129dbb05bcbbfeb96b).
+- **Despliegue:** pendiente de verificar el workflow de GitHub Pages.
