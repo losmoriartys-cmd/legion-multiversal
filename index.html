@@ -1153,44 +1153,78 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
         }
 
 
-        /* Ajuste de visibilidad · Roster comic y movimiento perceptible */
+        /* ROSTER · página editorial de historieta impresa */
         #chapter-2.comic-page {
             isolation:isolate;
-            background-color:#0b1020 !important;
+            overflow:hidden;
+            border:7px solid #05070b;
+            background-color:#111827 !important;
             background-image:
-                radial-gradient(ellipse at 8% 10%,rgba(0,210,255,.24),transparent 34%),
-                radial-gradient(ellipse at 92% 82%,rgba(255,48,58,.2),transparent 36%),
-                radial-gradient(rgba(255,255,255,.22) 1px,transparent 1.6px),
-                repeating-linear-gradient(135deg,transparent 0 110px,rgba(255,255,255,.025) 111px 113px,transparent 114px 220px),
-                linear-gradient(145deg,#101a2d 0%,#171126 52%,#0b1322 100%) !important;
-            background-size:auto,auto,8px 8px,auto,auto !important;
+                radial-gradient(rgba(255,255,255,.2) 1px,transparent 1.8px),
+                repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 1px,transparent 1px 5px),
+                linear-gradient(145deg,#172238 0%,#101522 48%,#211522 100%) !important;
+            background-size:7px 7px,auto,auto !important;
         }
+        /* Márgenes ilustrados: bloques de color como viñetas impresas */
         #chapter-2.comic-page::before {
+            content:"";
+            position:absolute;
+            inset:12px;
             z-index:0;
-            opacity:.34;
+            pointer-events:none;
+            opacity:.62;
+            border:4px solid rgba(3,5,9,.95);
             background-image:
-                radial-gradient(rgba(255,255,255,.9) 1.15px,transparent 1.7px),
-                repeating-linear-gradient(118deg,transparent 0 72px,rgba(0,210,255,.12) 73px 75px,transparent 76px 148px),
-                linear-gradient(115deg,transparent 38%,rgba(255,42,42,.09) 49%,transparent 60%);
-            background-size:7px 7px,auto,auto;
-            animation:comicDrift 24s linear infinite;
+                radial-gradient(#101522 1.1px,transparent 1.7px),
+                linear-gradient(135deg,transparent 0 42%,rgba(255,255,255,.18) 42.3% 43%,transparent 43.3%),
+                linear-gradient(90deg,#d9ad4e 0 30%,#111827 30.5% 33%,#b94643 33.5% 64%,#111827 64.5% 67%,#267da0 67.5% 100%);
+            background-size:6px 6px,100% 100%,100% 100%;
+            background-position:0 0,center,center;
+            background-blend-mode:multiply,screen,normal;
+            box-shadow:inset 0 0 0 5px rgba(0,0,0,.8),0 0 0 2px rgba(255,255,255,.12);
         }
+        /* Trama de impresión y estallido gráfico */
         #chapter-2.comic-page::after {
+            content:"";
+            position:absolute;
+            inset:0;
             z-index:0;
-            opacity:.65;
-            background:
-                radial-gradient(ellipse at 12% 12%,rgba(0,210,255,.2),transparent 34%),
-                radial-gradient(ellipse at 88% 76%,rgba(255,42,42,.17),transparent 36%),
-                repeating-linear-gradient(0deg,transparent 0 5px,rgba(255,255,255,.018) 6px 7px);
+            pointer-events:none;
+            opacity:.48;
+            background-image:
+                radial-gradient(circle at 86% 12%,rgba(255,221,112,.95) 0 2px,transparent 2.8px),
+                repeating-conic-gradient(from 8deg at 86% 12%,rgba(255,221,112,.3) 0deg 2deg,transparent 2deg 8deg),
+                radial-gradient(ellipse at 8% 88%,rgba(0,210,255,.26),transparent 26%),
+                radial-gradient(ellipse at 92% 82%,rgba(255,42,42,.24),transparent 28%);
+            background-size:100% 100%;
         }
         #chapter-2 > :not(.chapter-tag) { position:relative;z-index:1; }
+        #chapter-2 .comic-title {
+            display:table;
+            max-width:100%;
+            padding:8px 18px 5px;
+            background:#f4d46d;
+            color:#17131b;
+            border:4px solid #05070b;
+            box-shadow:6px 6px 0 #05070b;
+            text-shadow:2px 2px 0 rgba(255,255,255,.28);
+            transform:rotate(-.6deg);
+        }
+        #chapter-2 .institute-banner {
+            border:4px solid #05070b;
+            box-shadow:8px 8px 0 #05070b;
+            background:linear-gradient(110deg,#f1d36f 0 34%,#f7eee0 34% 100%);
+            color:#17131b;
+        }
+        #chapter-2 .institute-banner h3,
+        #chapter-2 .institute-banner p { color:#17131b; }
         #chapter-2 .roster-section {
             padding:clamp(14px,2vw,22px);
             margin:30px 0 38px;
-            border:1px solid rgba(128,177,220,.22);
-            border-left:4px solid rgba(0,210,255,.62);
-            background:linear-gradient(115deg,rgba(4,12,25,.72),rgba(12,15,32,.5));
-            box-shadow:0 12px 32px rgba(0,0,0,.2);
+            border:4px solid #05070b;
+            border-left:10px solid #e34b43;
+            background:linear-gradient(115deg,rgba(8,15,29,.94),rgba(17,23,39,.9));
+            box-shadow:8px 8px 0 #05070b,0 0 0 2px rgba(255,220,116,.42);
         }
         #chapter-2 .roster-portrait-card {
             animation:rosterCardBob 5.2s ease-in-out infinite;
