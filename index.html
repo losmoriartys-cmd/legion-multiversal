@@ -316,6 +316,27 @@
         .stats-mini-card { background:#0b1320; border:1px solid #2c3a4e; padding:12px; }
         .stats-mini-card strong { display:block; color:#ffdf65; font-size:.78rem; margin-bottom:5px; }
         .stats-mini-card span { color:#b8c5d8; font-size:.76rem; line-height:1.5; }
+
+        /* Piloto de estadísticas: expediente conjunto Los Moriartys */
+        .pilot-stats { display:flex; flex-direction:column; gap:16px; }
+        .pilot-stats .pilot-summary { display:grid; grid-template-columns:repeat(auto-fit,minmax(145px,1fr)); gap:9px; margin:14px 0; }
+        .pilot-stats .pilot-metric { background:linear-gradient(145deg,#172438,#080e18); border:1px solid #34445c; border-top:2px solid var(--yellow-accent); padding:13px; min-width:0; }
+        .pilot-stats .pilot-metric span { display:block; color:#9aa9bf; font-size:.68rem; font-weight:800; letter-spacing:.6px; text-transform:uppercase; }
+        .pilot-stats .pilot-metric strong { display:block; color:#fff; font-family:'Bangers',cursive; font-size:1.65rem; margin-top:4px; }
+        .pilot-stats .pilot-metric small { display:block; color:#8d9bb0; font-size:.68rem; margin-top:2px; }
+        .pilot-stats .pilot-subhead { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:baseline; gap:8px; margin-top:5px; }
+        .pilot-stats .pilot-subhead h5 { color:#ffdf65; font-family:'Bangers',cursive; font-size:1.18rem; letter-spacing:.5px; }
+        .pilot-stats .pilot-subhead small { color:#8d9bb0; font-size:.7rem; }
+        .pilot-stats .pilot-table { min-width:570px; font-size:.76rem; }
+        .pilot-stats .pilot-callout { background:#0b1320; border:1px solid #34445c; border-left:3px solid #5b789d; padding:12px 14px; color:#b8c5d8; font-size:.77rem; line-height:1.6; }
+        .pilot-stats .pilot-callout strong { color:#ffdf65; }
+        .pilot-stats .pilot-callout.warning { border-left-color:#c18a37; }
+        .pilot-stats .pilot-status-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:9px; }
+        .pilot-stats .pilot-status-item { background:#080e18; border:1px solid #2b3a50; padding:12px; }
+        .pilot-stats .pilot-status-item span { display:block; color:#8d9bb0; font-size:.67rem; text-transform:uppercase; letter-spacing:.5px; }
+        .pilot-stats .pilot-status-item strong { display:block; color:#fff; font-family:'Bangers',cursive; font-size:1.35rem; margin-top:4px; }
+        @media(max-width:650px){.pilot-stats .pilot-summary{grid-template-columns:repeat(2,minmax(0,1fr))}.pilot-stats .pilot-metric{padding:10px}.pilot-stats .pilot-metric strong{font-size:1.4rem}}
+
         .mission-archive { display:flex; flex-direction:column; gap:16px; }
         .mission-hero-card { background:linear-gradient(120deg,#172438,#0b1320); border:1px solid #34445c; border-left:4px solid var(--yellow-accent); padding:16px; }
         .mission-hero-card .eyebrow { color:#9aa9bf; font-size:.68rem; font-weight:800; letter-spacing:1px; text-transform:uppercase; }
@@ -1583,7 +1604,29 @@ function renderStatsBars(title,items,labelFn,valueFn,suffix,maxItems=10){
  });
  return out+'</div>';
 }
+function renderLosMoriartysSullyPilot(channel){
+ const x=channel.summary||{}, streams=Array.isArray(channel.streams)?channel.streams:[];
+ const period=channel.period&&channel.period.start_date?statsDate(channel.period.start_date)+' — '+statsDate(channel.period.end_date):'Período no disponible';
+ const minutes=Number(x.airtime_minutes);
+ const airtime=Number.isFinite(minutes)?Math.floor(minutes/60)+' h '+(minutes%60)+' min':'No disponible';
+ let out='<section class="stats-section pilot-stats"><div class="stats-source-head"><div><strong>HISTORIAL DE TRANSMISIONES · SULLYGNOME</strong><br><small>Datos históricos externos · canal conjunto</small></div><span class="stats-status partial">REGISTRO PARCIAL</span></div>';
+ out+='<p class="stats-section-intro">Período cubierto: '+period+' · <a class="stats-link" href="'+escapeStatsHtml(channel.source_url)+'" target="_blank" rel="noopener">Consultar fuente original ↗</a></p>';
+ out+='<div class="pilot-summary">';
+ [['DIRECTOS',statsNumber(x.streams_count,0),'9 transmisiones registradas'],['HORAS VISTAS',statsNumber(x.hours_watched,0),'consumo acumulado'],['TIEMPO EN VIVO',airtime,'duración emitida'],['PROMEDIO',statsNumber(x.average_viewers_duration_weighted,1),'espectadores · ponderado'],['PICO',statsNumber(x.peak_viewers,0),'máximo del período']].forEach(k=>out+='<div class="pilot-metric"><span>'+k[0]+'</span><strong>'+k[1]+'</strong><small>'+k[2]+'</small></div>');
+ out+='</div>';
+ out+='<div class="pilot-subhead"><h5>HORAS VISTAS POR TRANSMISIÓN</h5><small>Comparación entre los registros recibidos</small></div>';
+ out+=renderStatsBars('CONSUMO POR DIRECTO',streams.slice().reverse(),v=>statsDate(v.date),v=>v.hours_watched,'horas vistas',20);
+ if(streams.length){
+  out+='<div class="pilot-subhead"><h5>DETALLE DE TRANSMISIONES</h5><small>'+streams.length+' filas disponibles · ordenadas por fecha de fuente</small></div><div class="stats-table-wrap"><table class="stats-table pilot-table"><thead><tr><th>Fecha</th><th>Duración</th><th>Promedio</th><th>Pico</th><th>Horas vistas</th></tr></thead><tbody>';
+  streams.forEach(v=>out+='<tr><td>'+statsDate(v.date)+'</td><td>'+statsDuration(v)+'</td><td class="num">'+statsNumber(v.average_viewers,0)+'</td><td class="num">'+statsNumber(v.peak_viewers,0)+'</td><td class="num">'+statsNumber(v.hours_watched,1)+'</td></tr>');
+  out+='</tbody></table></div>';
+ }else out+='<div class="stats-empty"><strong>Sin filas disponibles</strong>El historial todavía no tiene transmisiones verificadas.</div>';
+ out+='<div class="pilot-callout warning"><strong>Alcance del dato.</strong> Este registro contiene 9 transmisiones recibidas para el período indicado; no debe interpretarse como historial completo de toda la trayectoria. El promedio es un cálculo ponderado por duración. La columna original de seguidores se omite hasta confirmar su interpretación.</div>';
+ out+='<div class="pilot-callout"><strong>Juegos y categorías.</strong> La exportación histórica disponible no incluye desglose por juego. Preferimos dejar este análisis pendiente antes que asignar categorías o porcentajes sin evidencia.</div></section>';
+ return out;
+}
 function renderSullyStats(channel){
+ if(channel.login==='losmoriartys')return renderLosMoriartysSullyPilot(channel);
  if(!channel)return '<div class="stats-empty"><strong>Historial no disponible</strong>No hay registros históricos cargados para este canal.</div>';
  const status=channel.status==='partial'?'partial':'pending';
  const statusLabel=channel.status==='partial'?'REGISTRO PARCIAL':'PENDIENTE DE DATOS';
@@ -1629,7 +1672,19 @@ function renderSullyStats(channel){
  out+='</section>';
  return out;
 }
+function renderLosMoriartysHelixPilot(channel){
+ const w=channel.window||{}, samples=Array.isArray(channel.snapshots)?channel.snapshots:[];
+ const last=channel.updated_at?new Date(channel.updated_at).toLocaleString('es-AR'):'Sin fecha de sincronización';
+ let out='<section class="stats-section pilot-stats"><div class="stats-source-head"><div><strong>SEGUIMIENTO PROPIO · TWITCH HELIX</strong><br><small>Telemetría observada por el Instituto · fuente separada del historial</small></div><span class="stats-status pending">OFFLINE EN ÚLTIMA LECTURA</span></div>';
+ out+='<p class="stats-section-intro">Última sincronización: '+last+' · frecuencia objetivo: cada '+(instituteStatsData?.sampling_interval_minutes||15)+' minutos</p>';
+ out+='<div class="pilot-status-grid"><div class="pilot-status-item"><span>Consultas recibidas</span><strong>'+statsNumber(w.samples_total,0)+'</strong></div><div class="pilot-status-item"><span>Muestras en directo</span><strong>'+statsNumber(w.live_samples,0)+'</strong></div><div class="pilot-status-item"><span>Directos detectados</span><strong>'+statsNumber(w.streams_observed,0)+'</strong></div><div class="pilot-status-item"><span>Seguidores</span><strong>No disponible</strong></div></div>';
+ out+='<div class="pilot-callout"><strong>Cómo leer este panel.</strong> El seguimiento propio registra consultas puntuales. En las '+statsNumber(w.samples_total,0)+' consultas conservadas para este canal no se detectó actividad en directo. Esto no demuestra que el canal no haya transmitido durante el resto del período ni representa estadísticas oficiales de audiencia.</div>';
+ out+='<div class="pilot-callout warning"><strong>Datos todavía no publicables:</strong> espectadores actuales, promedio, pico, horas vistas y evolución. No hay muestras en directo suficientes para calcularlos. La ventana técnica del colector es de '+(instituteStatsData?.window_days||30)+' días, pero el archivo actual solo contiene consultas recientes; no equivale a 30 días completos de observación.</div>';
+ out+='</section>';
+ return out;
+}
 function renderHelixDashboard(channel){
+ if(channel.login==='losmoriartys')return renderLosMoriartysHelixPilot(channel);
  if(!channel)return '<div class="stats-empty"><strong>Seguimiento propio</strong>Esperando la primera sincronización de Twitch Helix para este canal.</div>';
  const w=channel.window||{};
  const live=channel.live;
