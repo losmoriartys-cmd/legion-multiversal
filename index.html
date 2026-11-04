@@ -330,6 +330,9 @@
         .pilot-stats .pilot-feature-strip span{color:#aebbd0;font-size:.8rem}
         .pilot-stats .pilot-feature-strip b{color:#fff;font-size:1rem}
         .pilot-stats .pilot-table{min-width:650px}
+
+        .mission-clip-embed{position:relative;width:100%;aspect-ratio:16/9;margin:10px 0;overflow:hidden;background:#05070c;border:1px solid #354761;border-radius:8px}
+        .mission-clip-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
         .mission-clips-intro{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;background:#0a111e;border:1px solid #34445c;padding:14px;margin:12px 0}
         .mission-clips-intro p{color:#aebbd0;font-size:.78rem;margin:0;line-height:1.5}
         .mission-clips-intro a,.mission-clip-link{color:#ffe06a;font-weight:800;text-decoration:none}
@@ -1803,7 +1806,10 @@ function renderMissionArchive(hero){
     if(item.date)out+='<p>FECHA · '+statsDate(item.date)+'</p>';
     if(item.description)out+='<p>'+escapeStatsHtml(item.description)+'</p>';
     if(item.source)out+='<p class="mission-source">REFERENCIA · '+escapeStatsHtml(item.source)+'</p>';
-    if(item.url)out+='<a href="'+escapeStatsHtml(item.url)+'" target="_blank" rel="noopener">VER DETALLE ↗</a>';
+    if(item.platform==='twitch' && item.clip_id){
+     out+='<div class="mission-clip-embed"><iframe src="https://clips.twitch.tv/embed?clip='+encodeURIComponent(item.clip_id)+'&parent=losmoriartys-cmd.github.io" title="'+escapeStatsHtml(item.title||'Clip de Twitch')+'" loading="lazy" allowfullscreen="true" scrolling="no"></iframe></div>';
+     out+='<a href="https://clips.twitch.tv/'+encodeURIComponent(item.clip_id)+'" target="_blank" rel="noopener">ABRIR EN TWITCH ↗</a>';
+    }else if(item.url)out+='<a href="'+escapeStatsHtml(item.url)+'" target="_blank" rel="noopener">VER DETALLE ↗</a>';
     out+='</article>';
    });
    out+='</div>';
