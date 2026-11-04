@@ -1660,7 +1660,6 @@ function renderStatsBars(title,items,labelFn,valueFn,suffix,maxItems=10){
  return out+'</div>';
 }
 function renderLosMoriartysSullyPilot(channel){
- const x=channel.summary||{};
  const games=[
   {name:'Enshrouded',av:26,air:'4 h',fg:5,fph:'1',hw:null},
   {name:'Minecraft',av:34,air:'3 h',fg:7,fph:'2',hw:null},
@@ -1668,21 +1667,21 @@ function renderLosMoriartysSullyPilot(channel){
   {name:'Supercar Collection Together',av:31,air:'2 h',fg:null,fph:null,hw:null},
   {name:'Marvel Rivals',av:33,air:'2 h',fg:3,fph:'2',hw:null}
  ];
- const lifetime=[['Seguidores','1K','Lifetime'],['Pico de espectadores','101','07 oct 2026'],['Promedio de espectadores','6','Lifetime'],['Airtime','348 h','Aprox. 1 h 2 min por día'],['Días activos','335','Lifetime'],['Bans','0','Lifetime']];
- const periodMetrics=[['HORAS VISTAS','846','↑ 35%'],['PICO DE ESPECTADORES','101','↑ 107%'],['PROMEDIO DE ESPECTADORES','26','↑ 34%'],['AUTHORIZED / ALL VIEWERS','117%','ratio informado'],['LIVE VIEWS','102','vistas en directo'],['FOLLOWERS GAIN','48','↓ 94%'],['AIRTIME','32 h 10 min','↓ 1%'],['DÍAS ACTIVOS','28','1 h 8 min por día']];
+ const lifetime=[['Seguidores','1K','Comunidad acumulada'],['Pico histórico','101','07 oct 2026'],['Promedio histórico','6','Espectadores'],['Días activos','335','Lifetime'],['Airtime acumulado','348 h','Aprox. 1 h 2 min por día'],['Bans','0','Lifetime']];
+ const periodMetrics=[['HORAS VISTAS','846','↑ 35%'],['PROMEDIO DE ESPECTADORES','26','↑ 34%'],['AUTHORIZED / ALL VIEWERS','117%','ratio informado'],['LIVE VIEWS','102','vistas en directo'],['FOLLOWERS GAIN','48','↓ 94%'],['AIRTIME','32 h 10 min','↓ 1%'],['DÍAS ACTIVOS','28','1 h 8 min por día']];
  let out='<section class="stats-section pilot-stats"><div class="stats-source-head"><div><strong>ANALÍTICA DEL CANAL · LOS MORIARTYS</strong><br><small>Datos de los paneles compartidos por Demi</small></div><span class="stats-status partial">DATOS APORTADOS</span></div>';
- out+='<p class="stats-section-intro">Las tablas distinguen los datos por juego, los acumulados Lifetime y el rendimiento del período. El rango de fechas del panel de rendimiento no aparece en la captura.</p>';
+ out+='<p class="stats-section-intro">La audiencia acumulada y el rendimiento del período se presentan por separado para evitar repetir indicadores. El rango de fechas del panel de rendimiento no aparece en la captura.</p>';
  out+='<section class="pilot-subsection"><div class="pilot-subhead"><h5>01 · JUEGOS POPULARES</h5><small>Rendimiento por juego</small></div>';
  out+='<div class="pilot-feature-strip"><strong>FORTNITE</strong><span><b>103 h</b> vistas</span><span><b>22,7%</b> del total</span></div>';
  out+='<div class="stats-table-wrap"><table class="stats-table pilot-table"><thead><tr><th>Juego</th><th>Horas emitidas</th><th>Promedio</th><th>Seguidores ganados</th><th>Por hora</th><th>Horas vistas</th></tr></thead><tbody>';
  games.forEach(g=>out+='<tr><th>'+g.name+'</th><td>'+g.air+'</td><td class="num">'+g.av+'</td><td class="num">'+(g.fg===null?'—':g.fg)+'</td><td class="num">'+(g.fph===null?'—':g.fph)+'</td><td class="num">'+(g.hw===null?'—':g.hw)+'</td></tr>');
  out+='</tbody></table></div><p class="stats-note">Promedio = espectadores medios del juego · Por hora = seguidores ganados por hora. Las horas vistas solo están disponibles para Fortnite en la captura. El pico por juego no fue aportado.</p></section>';
- out+='<section class="pilot-subsection"><div class="pilot-subhead"><h5>02 · DATOS HISTÓRICOS · LIFETIME</h5><small>Acumulados del canal</small></div><div class="stats-table-wrap"><table class="stats-table pilot-table"><thead><tr><th>Indicador</th><th>Valor</th><th>Referencia</th></tr></thead><tbody>';
- lifetime.forEach(v=>out+='<tr><th>'+v[0]+'</th><td class="num">'+v[1]+'</td><td>'+v[2]+'</td></tr>');
- out+='</tbody></table></div></section>';
+ out+='<section class="pilot-subsection"><div class="pilot-subhead"><h5>02 · AUDIENCIA ACUMULADA · LIFETIME</h5><small>Panorama histórico del canal</small></div><div class="pilot-performance-grid">';
+ lifetime.forEach(v=>out+='<div class="pilot-metric"><span>'+v[0]+'</span><strong>'+v[1]+'</strong><small>'+v[2]+'</small></div>');
+ out+='</div></section>';
  out+='<section class="pilot-subsection"><div class="pilot-subhead"><h5>03 · RENDIMIENTO DEL PERÍODO</h5><small>Resumen del panel compartido · fechas no visibles</small></div><div class="pilot-performance-grid">';
  periodMetrics.forEach(v=>out+='<div class="pilot-metric"><span>'+v[0]+'</span><strong>'+v[1]+'</strong><small>'+v[2]+'</small></div>');
- out+='</div><div class="pilot-callout"><strong>Comparativas:</strong> las variaciones se reproducen tal como aparecen en la captura. No se les asigna un rango temporal que no está visible.</div></section></section>';
+ out+='</div><div class="pilot-callout"><strong>Pico del período:</strong> 101 espectadores, el mismo valor que el pico histórico registrado el 07 oct 2026. Se deja fuera de las tarjetas para no repetirlo. Las variaciones se reproducen tal como aparecen en la captura; no se asigna un rango temporal que no está visible.</div></section></section>';
  return out;
 }
 function renderSullyStats(channel){
