@@ -206,3 +206,18 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Commit de implementación:** [`784f8f3d`](https://github.com/losmoriartys-cmd/s3xmen/commit/784f8f3de816b7a613f374e5d51bc999cf72452e).
 - **Commit del informe:** se agrega este registro en el commit actual.
 - **Despliegue:** pendiente de verificar el workflow de GitHub Pages.
+
+
+## 2026-11-04 — Preparar consulta gratuita de Streams Charts
+
+- **Responsable:** ChatGPT + equipo Los Moriartys.
+- **Objetivo:** validar la autenticación de Streams Charts y obtener un primer conjunto de datos sin activar un plan de pago ni consumir créditos.
+- **Archivos creados:**
+  - `update_streamscharts.py`: consulta exclusivamente el endpoint gratuito `/api/v2/channels?platform=twitch&time=7-days`, valida la respuesta y guarda el snapshot en `streamscharts-data.json`. No imprime credenciales.
+  - `.github/workflows/streamscharts-free.yml`: workflow manual (`workflow_dispatch`) que utiliza los secretos `STREAMCHARTS_CLIENT_ID` y `STREAMCHARTS_TOKEN`.
+- **Credenciales:** el equipo confirmó mediante captura que ambos secretos están creados en GitHub Actions. Sus valores no se leen ni se registran en el repositorio.
+- **Límite de coste:** la consulta elegida es el top 100 de Twitch de los últimos 7 días, página 1, documentada por Streams Charts como gratuita (0 créditos). No se llaman endpoints individuales por canal: esos cuestan créditos y requieren plan/ saldo habilitado.
+- **Estado:** código y workflow agregados a `main`. La primera ejecución manual queda pendiente de iniciarse desde GitHub Actions; hasta entonces no se afirma que la autenticación haya sido probada ni que existan datos descargados.
+- **Pendiente funcional:** una vez obtenido el snapshot, comprobar cuáles de nuestros creadores aparecen en el top 100. La ausencia de un canal solo significa que no figura en ese ranking, no que no haya tenido actividad. Para métricas históricas individuales de los nueve canales hará falta habilitar consultas pagas o acordar otra fuente.
+- **Commits:** `385eb998b3389c962f75d0e1f7eba5bb8e76c288` (recolector) y `35f27b717e0da2282d5cdeed176c9eac2f6f35e4` (workflow manual).
+- **Despliegue:** el snapshot aún no existe; la integración no está conectada visualmente a los expedientes.
