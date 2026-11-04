@@ -821,3 +821,14 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Conservado:** Lifetime, rendimiento del período, cifras de origen, clips, colaboraciones, `data.json` y automatizaciones sin cambios.
 - **Commit de interfaz:** [`c586b989`](https://github.com/losmoriartys-cmd/s3xmen/commit/c586b9893eb8b8cccd62023365dbc1a426ae0969).
 - **Despliegue:** pendiente de comprobar el workflow de GitHub Pages.
+## 2026-11-04 — Integrar TwitchMetrics en los expedientes de LADYMORIARTY01 y TheR0D3R1K
+
+- **Solicitud:** extender el panel analítico visual y la lectura comercial ya aprobados para los canales individuales de Ari y Roderik.
+- **Archivos:** `index.html`, nuevo `twitchmetrics-data.json` y este informe.
+- **Implementado:** se añadió un renderizador común que presenta métricas de TwitchMetrics por canal, ventana consultada, tarjetas de audiencia/actividad, directos recientes y lectura comercial. TheR0D3R1K incorpora además una comparación visual de espectadores promedio entre cinco directos visibles. LADYMORIARTY01 muestra la sesión visible en tabla, sin forzar una comparativa con una sola observación.
+- **LADYMORIARTY01:** ventana 5 oct–4 nov 2026; 180 seguidores, variación +17, 59 horas vistas, pico 33, 3 horas en directo y promedio 19 según FAQ de la plataforma. El directo visible del 6 oct: promedio 17, pico 19; Assassin's Creed Odyssey (75%) y 911 Dispatcher: Unknown Caller (25%).
+- **TheR0D3R1K:** ventana 5 oct–4 nov 2026; 5.188 seguidores, variación +63, 2.073 horas vistas, pico 78, 75 horas en directo y promedio 27 según FAQ. Se transcribieron cinco directos recientes visibles (19–24 oct) para una comparación de promedios y una tabla de juegos/categorías.
+- **Metodología:** TwitchMetrics indica que los registros de directos pueden limitarse a transmisiones con más de 10 espectadores. Por eso se rotulan como muestra visible y no como historial exhaustivo. No se calculan promedios por juego a partir de directos mixtos. TwitchMetrics permanece separado de SullyGnome y Twitch Helix; no se suman métricas de fuentes distintas.
+- **Fuentes:** [perfil LADYMORIARTY01](https://www.twitchmetrics.net/c/710295249-ladymoriarty01) y [perfil TheR0D3R1K](https://www.twitchmetrics.net/c/518856416-ther0d3r1k).
+- **Commits:** interfaz [`06e06b37`](https://github.com/losmoriartys-cmd/s3xmen/commit/06e06b37b3943582f16efb22d0a64db4fd0c60ab); datos [`50036a87`](https://github.com/losmoriartys-cmd/s3xmen/commit/50036a871be796823e802ebc4f7bad7636b7e19e).
+- **Validación:** renderizador, carga paralela del archivo de TwitchMetrics y separación de fuentes comprobados estáticamente. Despliegue pendiente de verificar GitHub Pages.
