@@ -795,7 +795,16 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
         .future-silhouette b{font:1rem 'Bangers',cursive;letter-spacing:1px;color:#94a3b8}
         @media(max-width:560px){.brand-emblem{width:64px;height:64px;flex-basis:64px}.emblem-letter{font-size:2.5rem}.future-silhouettes{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
-    </style>
+    
+        /* Capítulo 01 · narrativa unificada y banner de la formación actual */
+        .origin-timeline{grid-template-columns:repeat(4,minmax(0,1fr))}
+        .origin-values-panel{margin-top:34px;padding:26px;background:linear-gradient(135deg,#121c2d,#1c1530);border:3px solid #000;box-shadow:7px 7px 0 #000}
+        .origin-values{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+        .origin-values span{padding:10px 14px;background:#0c1523;border:1px solid rgba(0,210,255,.55);color:#bcefff;font:900 .78rem Montserrat,sans-serif;letter-spacing:.7px;box-shadow:3px 3px 0 #000}
+        .origin-values-note{max-width:900px;margin:20px auto 0;text-align:center;color:#ffde9a;font:1.25rem 'Bangers',cursive;letter-spacing:.7px;line-height:1.55}
+        @media(max-width:1000px){.origin-timeline{grid-template-columns:repeat(2,minmax(0,1fr))}}
+        @media(max-width:560px){.origin-timeline{grid-template-columns:1fr}.origin-values-panel{padding:16px}.origin-values span{font-size:.7rem}}
+</style>
 </head>
 <body>
 
@@ -823,56 +832,50 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
 
     <main>
         <!-- CAPÍTULO 1: ORIGEN DE LA LEGIÓN -->
-        <section id="chapter-1" class="chapter-panel active">
+        <section id="chapter-1" class="chapter-panel active comic-page">
             <div class="chapter-tag">CAPÍTULO 01 · EL ORIGEN</div>
-            <h2 class="comic-title">DE UNA PARTIDA NACIÓ UNA LEGIÓN</h2>
-            <p class="origin-lead">No nacimos como una gran organización. Nacimos jugando, compartiendo directos y descubriendo que, cuando las personas correctas se encuentran, pueden construir algo mucho más grande que una colaboración.</p>
+            <h2 class="comic-title">LA SEÑAL QUE NOS REUNIÓ</h2>
+            <p class="origin-lead">Ninguna gran historia comienza con todos sus protagonistas en el mismo lugar. A veces empieza con una partida, una conversación y la decisión de no caminar en solitario.</p>
 
             <div class="origin-cover">
                 <div class="origin-cover-copy">
-                    <span class="origin-kicker">ARCHIVO HISTÓRICO · PRIMERA ETAPA</span>
-                    <h3>Antes de la Legión, fuimos S3X-MEN.</h3>
-                    <p>Todo comenzó con <strong>Demian y ROD3R1K</strong>, compartiendo partidas de <strong>Marvel Rivals</strong> y una idea que todavía no tenía nombre: reunir a creadores con personalidades distintas para hacer algo juntos. <strong>Akuma</strong> se sumó a aquellas primeras misiones y el equipo empezó a tomar forma.</p>
-                    <p>Después llegó <strong>Fortnite</strong>. Lo que parecía una serie de encuentros entre amigos empezó a convertirse en una comunidad: se incorporaron <strong>ElGabii y Capy</strong>, y cada nueva persona amplió el universo que estábamos construyendo.</p>
-                    <p>En ese momento entendimos que no queríamos limitarnos a jugar juntos. Queríamos conectar comunidades, potenciar proyectos y abrir un espacio donde cada integrante pudiera crecer sin dejar de ser quien es.</p>
+                    <span class="origin-kicker">ARCHIVO CENTRAL · EDICIÓN ORÍGENES</span>
+                    <h3>Diez identidades. Una misma misión.</h3>
+                    <p>Todo comenzó con <strong>Demian y ROD3R1K</strong>, compartiendo partidas de <strong>Marvel Rivals</strong> y una idea que todavía no tenía nombre: reunir a creadores con personalidades, talentos y comunidades diferentes. <strong>Akuma</strong> se sumó a aquellas primeras misiones y el núcleo empezó a tomar forma.</p>
+                    <p>Con el tiempo llegaron nuevos encuentros, otras partidas y nuevas voces. <strong>Capy, ElGabii, Ardipii, Lady Moriarty, Dave, Hábitos Atómicos y Pato — Oratoris</strong> ampliaron el universo desde sus propios mundos y especialidades. No todos crean el mismo contenido ni recorren el mismo camino: justamente ahí está nuestra fortaleza.</p>
+                    <p>La antigua etapa <strong>S3X-MEN</strong> fue el punto de partida. Hoy esa historia evoluciona hacia la <strong>Legión Multiversal</strong>: una iniciativa latinoamericana que conecta gaming y entretenimiento, conocimiento y tecnología, y desarrollo personal. Oratoris conserva su identidad y su espacio de creación en YouTube; cada plataforma y cada trayectoria se presentan por separado en sus respectivos expedientes.</p>
                 </div>
                 <figure class="origin-archive-art">
-                    <img src="assets/banner-grupal.jpg" alt="Imagen grupal de la etapa original S3X-MEN">
-                    <figcaption>La primera formación. El comienzo de nuestra historia.</figcaption>
+                    <img src="gruponuevo.jpg" alt="Formación actual de la Legión Multiversal, edición Orígenes">
+                    <figcaption>FORMACIÓN ACTUAL · EDICIÓN ORÍGENES · ARCHIVO ALFA</figcaption>
                 </figure>
             </div>
 
             <div class="origin-story">
                 <div class="origin-section-heading">
-                    <span>LA EVOLUCIÓN</span>
-                    <h3>Las personas cambiaron el tamaño del universo</h3>
-                    <p>Cada incorporación abrió una puerta nueva. No reemplazamos lo que éramos: lo hicimos crecer.</p>
+                    <span>LA INICIATIVA</span>
+                    <h3>De caminos separados a una misión compartida</h3>
+                    <p>La Legión no nació para uniformar a sus integrantes. Nació para reunir lo que hace único a cada uno y convertir esa diversidad en una fuerza colectiva.</p>
                 </div>
                 <div class="origin-timeline">
-                    <article class="origin-step"><span class="origin-step-no">01</span><h4>La primera chispa</h4><p>Demian y ROD3R1K cruzan caminos en Marvel Rivals. Akuma se suma y nace el primer núcleo de esta aventura.</p></article>
-                    <article class="origin-step"><span class="origin-step-no">02</span><h4>El equipo se expande</h4><p>Fortnite se convierte en otro punto de encuentro. Con ElGabii y Capy, la colaboración empieza a tomar forma de comunidad.</p></article>
-                    <article class="origin-step"><span class="origin-step-no">03</span><h4>Una visión más grande</h4><p>La idea deja de ser solamente compartir partidas: queremos unir creadores, impulsar sus proyectos y generar oportunidades entre comunidades.</p></article>
-                    <article class="origin-step"><span class="origin-step-no">04</span><h4>Nuevas voces, nuevos mundos</h4><p>Se incorporan colaboradores como Pato — Oratoris y Hábitos Atómicos. La tecnología, la comunicación, la filosofía y el desarrollo personal también encuentran su lugar.</p></article>
-                    <article class="origin-step"><span class="origin-step-no">05</span><h4>Una nueva integrante</h4><p>Lady Moriarty se convierte en la primera mujer en sumarse a esta historia y aporta una nueva energía al equipo, además de compartir el universo de Los Moriartys.</p></article>
-                    <article class="origin-step"><span class="origin-step-no">06</span><h4>El siguiente capítulo</h4><p>Llega Dave como estudiante, con su propio espacio y un camino por descubrir. La Legión sigue abierta a nuevas personas, talentos y universos.</p></article>
+                    <article class="origin-step"><span class="origin-step-no">01</span><h4>La señal</h4><p>Creadores de distintos lugares de Latinoamérica construían sus comunidades por separado. Una partida y una colaboración demostraron que había algo más grande por descubrir si conectábamos esos mundos.</p></article>
+                    <article class="origin-step"><span class="origin-step-no">02</span><h4>La iniciativa</h4><p>La Dirección tomó la decisión de convocar talentos con identidad propia. No buscamos copias ni canales idénticos: buscamos personas con algo auténtico para aportar.</p></article>
+                    <article class="origin-step"><span class="origin-step-no">03</span><h4>La selección</h4><p>Cada integrante llega con su historia, su comunidad y su especialidad. Gaming, entretenimiento, tecnología, comunicación y crecimiento personal conviven dentro de una misma organización.</p></article>
+                    <article class="origin-step"><span class="origin-step-no">04</span><h4>La misión</h4><p>Conectar comunidades latinoamericanas, impulsar colaboraciones, compartir oportunidades y demostrar que las fronteras no tienen por qué limitar el alcance de una buena idea.</p></article>
                 </div>
             </div>
 
-            <div class="origin-roster-panel">
-                <div class="origin-section-heading origin-roster-invitation">
-                    <span>LOS PROTAGONISTAS</span>
-                    <h3>Un universo. Muchas identidades.</h3>
-                    <p>Los expedientes visuales de cada integrante están reunidos en el Capítulo 02. Allí vas a encontrar a cada héroe una sola vez, presentado dentro de su marco oficial y con acceso a su ficha completa.</p>
-                    <button class="twitch-link-btn" type="button" onclick="switchChapter(2)">EXPLORAR EL ROSTER</button>
+            <div class="origin-values-panel">
+                <div class="origin-section-heading">
+                    <span>NUESTRO CÓDIGO</span>
+                    <h3>Los valores que sostienen la Legión</h3>
+                    <p>El emblema nos identifica; la forma en que trabajamos juntos es lo que realmente nos representa.</p>
                 </div>
-            </div>
-
-            <div class="origin-mission">
-                <span>HOY COMIENZA OTRA ETAPA</span>
-                <h3>S3X-MEN fue nuestro origen. Legión Multiversal es lo que estamos construyendo.</h3>
-                <p>Somos una comunidad internacional de creadores que conecta <strong>gaming y entretenimiento, conocimiento y tecnología, y desarrollo personal</strong>. Queremos cruzar fronteras, culturas y disciplinas; compartir audiencias, aprender unos de otros y crear oportunidades que individualmente serían más difíciles de alcanzar.</p>
-                <p>No buscamos que todos hagan lo mismo. Buscamos que cada persona aporte algo propio.</p>
-                <strong class="origin-motto">DIFERENTES MUNDOS. UNA MISMA LEGIÓN.</strong>
+                <div class="origin-values">
+                    <span>COMPAÑERISMO</span><span>RESPETO</span><span>COMPROMISO</span>
+                    <span>CREATIVIDAD</span><span>INCLUSIÓN</span><span>CRECIMIENTO COLECTIVO</span>
+                </div>
+                <p class="origin-values-note">No reclutamos números. Reclutamos personas con una identidad, una comunidad y algo que aportar. Ningún talento debería quedarse aislado por una frontera.</p>
             </div>
 
             <div class="institute-pillars">
@@ -883,6 +886,15 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
                     <article class="pillar-card pillar-growth"><span class="pillar-number">03</span><h4>DESARROLLO PERSONAL</h4><p>Filosofía, motivación, hábitos, reflexión y conversaciones que también nos hacen crecer fuera de la pantalla.</p></article>
                 </div>
                 <p class="pillars-note"><strong>Una identidad abierta:</strong> cada integrante puede conectar con más de una dimensión. No son compartimentos cerrados, sino distintas formas de sumar al equipo.</p>
+            </div>
+
+            <div class="origin-mission">
+                <span>EL PRÓXIMO PASO</span>
+                <h3>La historia colectiva se conoce aquí. Las historias individuales empiezan en el siguiente capítulo.</h3>
+                <p>En el <strong>Capítulo 02</strong> vas a encontrar el roster oficial. Cada integrante aparece una sola vez, con su nueva carta y acceso a un expediente que reúne identidad, biografía, habilidades, estadísticas verificables, trayectoria y misiones.</p>
+                <p>La Legión crece cuando cada uno puede avanzar sin dejar de ser quien es.</p>
+                <button class="twitch-link-btn" type="button" onclick="switchChapter(2)">CONOCER A LOS INTEGRANTES</button>
+                <strong class="origin-motto">DIFERENTES MUNDOS. UNA MISMA LEGIÓN.</strong>
             </div>
         </section>
 
