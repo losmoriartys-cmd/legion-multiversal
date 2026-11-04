@@ -267,6 +267,12 @@
         .hero-card.collaborator { border-color:#b86b24; }
         .hero-card.collaborator:hover { border-color:#ff9f43; }
         .roster-section .roster-grid { margin-top:14px; }
+        .roster-grid { grid-template-columns:repeat(auto-fit,minmax(220px,300px)); justify-content:center; align-items:start; gap:24px; }
+        .hero-card-official { width:100%; max-width:300px; padding:0; border:0; border-radius:2px; background:#070b12; box-shadow:7px 7px 0 #000; cursor:pointer; }
+        .hero-card-official:hover { border-color:transparent; box-shadow:10px 10px 0 #000; }
+        .hero-card-art { display:block; width:100%; height:auto; aspect-ratio:2/3; object-fit:contain; background:#070b12; }
+        .hero-identity-panel { white-space:pre-line; padding:14px 16px; border:2px solid #00d2ff; background:rgba(0,210,255,.08); color:#bcefff; font-weight:800; line-height:1.7; letter-spacing:.4px; }
+
         .hero-placeholder { height:100%; min-height:280px; display:flex; align-items:center; justify-content:center; background:repeating-linear-gradient(135deg,#171e2c,#171e2c 12px,#202a3b 12px,#202a3b 24px); color:#c4b5fd; font-family:"Bangers",cursive; font-size:1.6rem; letter-spacing:2px; text-align:center; }
         .hero-rank { font-size:1rem; margin-top:2px; }
         .hero-card.director { border-color:#b99b00; }
@@ -1014,7 +1020,7 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
                 <!-- PÁGINA A -->
                 <div class="modal-tab-pane active" id="modal-pane-0">
                     <h3>EXPEDIENTE PERSONAL — BIOGRAFÍA</h3>
-                    <p id="modal-bio-text" style="white-space: pre-line;"></p>
+                    <div id="modal-identity-text" class="hero-identity-panel"></div><p id="modal-bio-text" style="white-space: pre-line;"></p>
                 </div>
 
                 <!-- PÁGINA B -->
@@ -1032,9 +1038,10 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
         const heroesData = [
             { 
                 name: "MORIARTYS",
+                codename: "EL ESTRATEGA", characterRole: "ESTRATEGA CIBERNÉTICO", powerSet: "Guerra cibernética · Hackeo táctico · Control de drones", rank: "DIRECTOR", series: "1", cardNumber: "047",
                 areas: ["Gaming", "Entretenimiento", "Comunidad"],
                 role: "director", 
-                img: "moriarty.jpg", 
+                img: "assets/heroes/image_20261103_160331-y-ahora-mezclando-el-nuevo-mio-y-el-marco-nuevo-co-pero-porque-quedo-pelado-xd (1).jpg", 
                 twitch: "https://twitch.tv/losmoriartys",
                 bio: "Bienvenido al videoclub 📼 Somos Demi y Ari - Los Moriartys. Pareja gamer y orgullosos nerds. Acá no hay pro-players, hay partidas que salen mal y terminan mejor. Sims de tienda, coop caótico, pelis y cómics. LUN/MIE 20HS | VIE 21HS ARG",
                 powers: "Perfil de habilidades en construcción. Se completará con la descripción de personaje aprobada por el integrante.",
@@ -1043,9 +1050,10 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
             },
             { 
                 name: "ROD3R1K",
+                codename: "EL FUERTE", characterRole: "INGENIERO SÓNICO", powerSet: "Onda sónica · Fotografía táctica · Resonancia", rank: "OPERADOR", series: "3", cardNumber: "008",
                 areas: ["Gaming", "Eventos", "Comunidad"],
                 role: "director", 
-                img: "assets/rod3r1k.jpg", 
+                img: "assets/heroes/rod3r1k_dark.webp", 
                 twitch: "https://twitch.tv/TheR0D3R1K",
                 bio: "Bienvenidos al canal, me llamo Roderik o mejor conocido como 'ElKrakenaso' encontraras momentos divertidos y epicos, acompañame en las partidas, diviertete!",
                 powers: "Perfil de habilidades en construcción. Pendiente de confirmar con el integrante.",
@@ -1054,9 +1062,10 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
             },
             { 
                 name: "LADYMORIARTY",
+                codename: "LA BRUJA", characterRole: "BRUJA CAÓTICA", powerSet: "Magia caótica · Hechizos · Distorsión de la realidad", rank: "HECHICERA", series: "3", cardNumber: "025",
                 areas: ["Gaming", "Entretenimiento", "IRL"],
                 role: "teacher", 
-                img: "assets/ladymoriarty.jpg", 
+                img: "assets/heroes/image_20261103_213640.jpg", 
                 twitch: "https://twitch.tv/ladymoriarty01",
                 bio: "Canal secundario de Los Moriartys (https://www.twitch.tv/losmoriartys). Acá encontraran gameplay chill, IRL y lo que se me cante en el momento....Lo importante es divertirnos y pasarla bien 💜",
                 powers: "Especialidad: entretenimiento chill, IRL y conexión con la comunidad.",
@@ -1065,9 +1074,10 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
             },
             { 
                 name: "CAPY",
+                codename: "EL RÁPIDO ASTUTO", characterRole: "VELOCISTA TÁCTICO", powerSet: "Supervelocidad · Sigilo · Táctica", rank: "EXPLORADOR", series: "3", cardNumber: "038",
                 areas: ["Gaming", "Cooperativo", "Supervivencia"],
                 role: "teacher", 
-                img: "assets/capy.jpg", 
+                img: "assets/heroes/capy_dark.webp", 
                 twitch: "https://twitch.tv/capyunaplay",
                 bio: "Juegos que voy a jugar en modo cooperativo:\nSMITE, League of Legends, Fall Guys, Among Us, Goose Goose Duck, Farlight 84, Overwatch, Apex Legends, Rocket League, Dead by Daylight, The Forest, KartRider Drift, Raft, 7 Days to Die, ProjectZomboid, Brawlhalla, DEVOUR, Left 4 Dead 2.", 
                 stats: "Métricas en proceso de integración. Los datos se publicarán cuando estén conectados a una fuente verificable y acompañados de su período de medición.", 
@@ -1075,9 +1085,10 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
             },
             { 
                 name: "ARDIPII",
+                codename: "EL FANTASMA", characterRole: "GUARDIÁN ESPECTRAL", powerSet: "Fase espectral · Intangibilidad · Llama ectoplásmica", rank: "SOMBRA", series: "3", cardNumber: "037",
                 areas: ["Gaming", "Comunidad"],
                 role: "teacher", 
-                img: "assets/ardipii.jpg", 
+                img: "assets/heroes/ardipii_dark.webp", 
                 twitch: "https://twitch.tv/ardipii",
                 bio: "Welcome a mi humilde perfil, gasten sus puntos en alertas, saluden a todos, traigan unas palomitas y 'Lo único que podemos decidir es qué hacer con el tiempo que se nos ha dado'.", 
                 stats: "Métricas en proceso de integración. Los datos se publicarán cuando estén conectados a una fuente verificable y acompañados de su período de medición.", 
@@ -1085,9 +1096,10 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
             },
             { 
                 name: "AKUMA",
+                codename: "EL INFERNAL", characterRole: "TANQUE DEMONÍACO", powerSet: "Llama infernal · Vuelo · Fuerza abismal", rank: "DOCENTE", series: "3", cardNumber: "024",
                 areas: ["Gaming", "Charlas", "Comunidad"],
                 role: "teacher", 
-                img: "assets/akuma.jpg", 
+                img: "assets/heroes/image_20261103_160331-podemos-humanizar-a-akuma-pero-que-mantenga-un-poc.jpg", 
                 twitch: "https://twitch.tv/akumazoldyck",
                 bio: "Directo todos los dias a las 7 de la tarde hora mexico. Talk show, friends and games.", 
                 stats: "Métricas en proceso de integración. Los datos se publicarán cuando estén conectados a una fuente verificable y acompañados de su período de medición.", 
@@ -1095,9 +1107,10 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
             },
             { 
                 name: "ELGABII",
+                codename: "HABILIDOSO", characterRole: "MANIPULADOR CINÉTICO", powerSet: "Orbes cinéticos · Explosión · Escudo de energía", rank: "COMBATIENTE", series: "3", cardNumber: "090",
                 areas: ["Gaming", "Construcción", "Servidores"],
                 role: "teacher", 
-                img: "assets/elgabii.jpg", 
+                img: "assets/heroes/elgabii_dark.webp", 
                 twitch: "https://twitch.tv/elgabii090",
                 bio: "Rol: Habilidoso / Kinetic Manipulator\nClase: Mutant - Kinetic Energy\nLema: 'Construyendo la victoria bloque a bloque.'",
                 powers: "Manipulación de energía cinética. Atributos ficticios del personaje: Fuerza 7/10 · Velocidad 8/10 · Energía 9/10. No son métricas de Twitch.",
@@ -1106,9 +1119,10 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
             },
             { 
                 name: "DAVE — NEXUS",
+                codename: "EL NEXO", characterRole: "GUARDIÁN TECNOLÓGICO", powerSet: "Manipulación tecnológica · Campo psiónico · Runas", rank: "VANGUARDIA", series: "1", cardNumber: "047",
                 areas: ["Especialidad por definir"],
                 role: "student",
-                img: "assets/nexus.jpg",
+                img: "assets/heroes/nexus_dark.webp",
                 twitch: "https://twitch.tv/daved0608",
                 bio: "Estudiante del Instituto S3X-MEN. Su expediente está abierto y listo para completarse cuando se incorpore su retrato y presentación personal.",
                 powers: "Poderes y especialidad todavía sin definir. Se completarán cuando Dave aporte o apruebe su concepto de personaje.",
@@ -1117,9 +1131,10 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
             },
                         {
                 name: "PATO — ORATORIS",
+                codename: "EL ORADOR", characterRole: "ESTRATEGA MENTAL", powerSet: "Voz de la razón · Estrategia · Inspiración", rank: "MENTOR", series: "3", cardNumber: "039",
                 areas: ["Programación", "Tecnología", "Desarrollo personal"],
                 role: "collaborator",
-                img: "PatoTeksplika.jpg",
+                img: "assets/heroes/oratoris_dark.webp",
                 twitch: "",
                 youtube: "https://www.youtube.com/@patoteexplica",
                 bio: "Colaborador del Instituto S3X-MEN y creador de Pato te explica. Su contenido aporta una mirada diferente a la comunidad, con programación, tecnología y charlas motivacionales.",
@@ -1129,9 +1144,10 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
             },
             { 
                 name: "HABITOS",
+                codename: "FILÓSOFO JUSTICIERO", characterRole: "FILÓSOFO ATÓMICO", powerSet: "Rayo atómico · Física atómica · Combate cuerpo a cuerpo", rank: "JUSTICIERO", series: "3", cardNumber: "007",
                 areas: ["Gaming", "Filosofía", "Desarrollo personal"],
                 role: "collaborator", 
-                img: "assets/habitos.jpg", 
+                img: "assets/heroes/habitos_dark.webp", 
                 twitch: "https://twitch.tv/habitos_atomicos",
                 bio: "Creador y colaborador del Instituto S3X-MEN. Combina su faceta gamer con charlas motivacionales y filosóficas, generando espacios de conversación, reflexión y comunidad. Su contenido aporta una mirada versátil que conecta entretenimiento y crecimiento personal.", 
                 stats: "Métricas en proceso de integración. Los datos se publicarán cuando estén conectados a una fuente verificable y acompañados de su período de medición.", 
@@ -1239,69 +1255,61 @@ async function loadPartnerMetrics(){
 }
 
 function renderRoster() {
-            const container = document.getElementById('roster-container');
-            if (!container) return;
-            container.innerHTML = '';
-            const groups = [
-                { key: 'director', title: 'DIRECCIÓN DEL INSTITUTO', desc: 'Fundadores y responsables de la visión, coordinación y rumbo del equipo.', label: 'DIRECTOR', cls: 'directors' },
-                { key: 'teacher', title: 'CUERPO DOCENTE', desc: 'Profesores y especialistas que aportan experiencia, conocimiento y liderazgo en las misiones.', label: 'PROFESOR', cls: 'teachers' },
-                { key: 'student', title: 'ESTUDIANTES', desc: 'Nuevos talentos en formación. Cada expediente podrá ampliarse a medida que se incorpore su material.', label: 'ESTUDIANTE', cls: 'students' },
-                { key: 'collaborator', title: 'COLABORADORES', desc: 'Creadores y especialistas que forman parte importante del Instituto y aportan conocimientos, experiencias y nuevas perspectivas más allá del gaming.', label: 'COLABORADOR', cls: 'collaborators' }
-            ];
-            groups.forEach(group => {
-                const members = heroesData.map((hero, index) => ({ hero, index })).filter(item => item.hero.role === group.key);
-                if (!members.length) return;
-                const section = document.createElement('section');
-                section.className = 'roster-section ' + group.cls;
-                section.innerHTML = '<h3 class="roster-section-title">' + group.title + '</h3><p class="roster-section-desc">' + group.desc + '</p>';
-                const grid = document.createElement('div');
-                grid.className = 'roster-grid';
-                members.forEach(({hero,index}) => {
-                    const card = document.createElement('div');
-                    card.className = 'hero-card ' + group.key;
-                    card.setAttribute('role', 'button');
-                    card.setAttribute('tabindex', '0');
-                    card.setAttribute('aria-haspopup', 'dialog');
-                    card.setAttribute('aria-label', 'Abrir expediente de ' + hero.name);
-                    card.onclick = () => openHeroModal(index);
-                    card.addEventListener('keydown', event => {
-                        if (event.key === 'Enter' || event.key === ' ') {
-                            event.preventDefault();
-                            openHeroModal(index);
-                        }
-                    });
-                    const seriesNumber = String(index + 1).padStart(3,'0');
-                    const nameParts = hero.name.split(/\s+[—–-]\s+/);
-                    const displayName = nameParts[0] || hero.name;
-                    const subtitle = nameParts[1] || 'EXPEDIENTE DE SUPERHÉROE';
-                    const channelUrl = hero.twitch || hero.youtube || '';
-                    let channelName = hero.name.replace(/\s+[—–-]\s+/g,' ').toUpperCase();
-                    if (channelUrl) {
-                        try { channelName = new URL(channelUrl).pathname.replace(/^\/+|\/+$/g,'').split('/')[0].toUpperCase() || channelName; } catch (e) {}
-                    }
-                    const imageMarkup = hero.img
-                        ? '<img src="' + hero.img + '" alt="' + hero.name + '" onerror="this.style.display=\'none\'">'
-                        : '<div class="hero-placeholder"><span>RETRATO<br>PENDIENTE</span></div>';
-                    card.innerHTML =
-                        '<img class="dossier-template" src="https://raw.githubusercontent.com/losmoriartys-cmd/s3xmen/main/image_20261103_160331.jpg" alt="" aria-hidden="true">' +
-                        '<span class="dossier-name">' + displayName + '</span>' +
-                        '<span class="dossier-subtitle">' + subtitle + '</span>' +
-                        '<div class="dossier-portrait">' + imageMarkup + '</div>' +
-                        '<div class="dossier-field-values"><span>' + group.label + '</span><span>PENDIENTE</span><span>EN FORMACIÓN</span></div>' +
-                        '<div class="dossier-areas">' + (hero.areas || []).map(area => '<span>' + area + '</span>').join('') + '</div>' +
-                        '<div class="dossier-footer">' + channelName + ' · SERIE 1 · #' + seriesNumber + '</div>';
-                    grid.appendChild(card);
-                });
-                section.appendChild(grid);
-                container.appendChild(section);
-            });
-        }
+    const container = document.getElementById('roster-container');
+    if (!container) return;
+    container.innerHTML = '';
+    const groups = [
+        { key: 'director', title: 'DIRECCIÓN DEL INSTITUTO', desc: 'Fundadores y responsables de la visión, coordinación y rumbo del equipo.' },
+        { key: 'teacher', title: 'CUERPO DOCENTE', desc: 'Profesores y especialistas que aportan experiencia, conocimiento y liderazgo en las misiones.' },
+        { key: 'student', title: 'ESTUDIANTES', desc: 'Nuevos talentos en formación dentro del Instituto.' },
+        { key: 'collaborator', title: 'COLABORADORES', desc: 'Creadores y especialistas que aportan conocimientos, experiencias y nuevas perspectivas.' }
+    ];
+    groups.forEach(group => {
+        const members = heroesData.map((hero, index) => ({ hero, index })).filter(item => item.hero.role === group.key);
+        if (!members.length) return;
+        const section = document.createElement('section');
+        section.className = 'roster-section ' + (group.key === 'director' ? 'directors' : group.key === 'teacher' ? 'teachers' : group.key === 'student' ? 'students' : 'collaborators');
+        section.innerHTML = '<h3 class="roster-section-title">' + group.title + '</h3><p class="roster-section-desc">' + group.desc + '</p>';
+        const grid = document.createElement('div');
+        grid.className = 'roster-grid';
+        members.forEach(({hero,index}) => {
+            const card = document.createElement('button');
+            card.type = 'button';
+            card.className = 'hero-card ' + group.key + ' hero-card-official';
+            card.setAttribute('aria-haspopup', 'dialog');
+            card.setAttribute('aria-label', 'Abrir expediente de ' + hero.name);
+            card.onclick = () => openHeroModal(index);
+            const image = document.createElement('img');
+            image.className = 'hero-card-art';
+            image.src = hero.img;
+            image.alt = 'Carta oficial de ' + hero.name;
+            image.loading = 'lazy';
+            image.onerror = () => {
+                const placeholder = document.createElement('div');
+                placeholder.className = 'hero-placeholder';
+                placeholder.textContent = 'CARTA NO DISPONIBLE';
+                image.replaceWith(placeholder);
+            };
+            card.appendChild(image);
+            grid.appendChild(card);
+        });
+        section.appendChild(grid);
+        container.appendChild(section);
+    });
+}
 
-        function openHeroModal(index) {
+function openHeroModal(index) {
             const hero = heroesData[index];
             document.getElementById('modal-hero-title').innerText = `EXPEDIENTE: ${hero.name}`;
+            document.getElementById('modal-identity-text').innerText =
+                'IDENTIDAD: ' + (hero.codename || 'PENDIENTE') + '\n' +
+                'ROL: ' + (hero.characterRole || 'PENDIENTE') + '\n' +
+                'RANGO: ' + (hero.rank || 'PENDIENTE');
             document.getElementById('modal-bio-text').innerText = hero.bio;
-            document.getElementById('modal-powers-text').innerText = hero.powers || 'Habilidades y poderes pendientes de definir con el integrante.';
+            document.getElementById('modal-powers-text').innerText =
+                'FUNCIÓN: ' + (hero.characterRole || 'PENDIENTE') + '\n\n' +
+                'PODERES Y HABILIDADES:\n' + (hero.powerSet || hero.powers || 'Pendiente de definir.') + '\n\n' +
+                'RANGO OPERATIVO: ' + (hero.rank || 'PENDIENTE');
             const channelStats=findChannelStats(hero);
             if(channelStats){
                 const w=channelStats.window||{};
@@ -1332,7 +1340,11 @@ function renderRoster() {
                 const statsNode=document.getElementById('modal-stats-text');
                 statsNode.innerText += '\n\n' + sullyText;
             }
-            document.getElementById('modal-log-text').innerText = hero.log;
+            document.getElementById('modal-log-text').innerText =
+                'ARCHIVO DE PERSONAJE\n' +
+                'Serie: ' + (hero.series || 'Pendiente') + ' · Registro: #' + (hero.cardNumber || '---') + '\n' +
+                'Clasificación: Nivel Alfa · Instituto S3X-MEN\n\n' +
+                (hero.log || 'Sin misiones registradas todavía.');
             document.getElementById('modal-twitch-btn').href = hero.youtube || hero.twitch || "#";
             document.getElementById('modal-twitch-btn').textContent = hero.youtube ? "VISITAR CANAL DE YOUTUBE" : "VISITAR CANAL DE TWITCH";
             
