@@ -1115,6 +1115,7 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
         const heroesData = [
             { 
                 name: "MORIARTYS",
+                portrait: "assets/carnet/DemuianCarnet.jpg",
                 codename: "EL ESTRATEGA", characterRole: "ESTRATEGA CIBERNÉTICO", powerSet: "Guerra cibernética · Hackeo táctico · Control de drones", rank: "DIRECTOR", series: "1", cardNumber: "047",
                 areas: ["Gaming", "Entretenimiento", "Comunidad"],
                 role: "director", 
@@ -1127,6 +1128,7 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
             },
             { 
                 name: "ROD3R1K",
+                portrait: "assets/carnet/rod3r1k_dark-necesito-que-me-hagas-fotos-de-todos-ellos-pero-qu.jpg",
                 codename: "EL FUERTE", characterRole: "INGENIERO SÓNICO", powerSet: "Onda sónica · Fotografía táctica · Resonancia", rank: "OPERADOR", series: "3", cardNumber: "008",
                 areas: ["Gaming", "Eventos", "Comunidad"],
                 role: "director", 
@@ -1139,6 +1141,7 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
             },
             { 
                 name: "LADYMORIARTY",
+                portrait: "assets/carnet/LadyCarnet.jpg",
                 codename: "LA BRUJA", characterRole: "BRUJA CAÓTICA", powerSet: "Magia caótica · Hechizos · Distorsión de la realidad", rank: "HECHICERA", series: "3", cardNumber: "025",
                 areas: ["Gaming", "Entretenimiento", "IRL"],
                 role: "teacher", 
@@ -1151,6 +1154,7 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
             },
             { 
                 name: "CAPY",
+                portrait: "assets/carnet/capy_dark-necesito-que-me-hagas-fotos-de-todos-ellos-pero-qu.jpg",
                 codename: "EL RÁPIDO ASTUTO", characterRole: "VELOCISTA TÁCTICO", powerSet: "Supervelocidad · Sigilo · Táctica", rank: "EXPLORADOR", series: "3", cardNumber: "038",
                 areas: ["Gaming", "Cooperativo", "Supervivencia"],
                 role: "teacher", 
@@ -1162,6 +1166,7 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
             },
             { 
                 name: "ARDIPII",
+                portrait: "assets/carnet/ardipii_dark-necesito-que-me-hagas-fotos-de-todos-ellos-pero-qu.jpg",
                 codename: "EL FANTASMA", characterRole: "GUARDIÁN ESPECTRAL", powerSet: "Fase espectral · Intangibilidad · Llama ectoplásmica", rank: "SOMBRA", series: "3", cardNumber: "037",
                 areas: ["Gaming", "Comunidad"],
                 role: "teacher", 
@@ -1173,6 +1178,7 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
             },
             { 
                 name: "AKUMA",
+                portrait: "assets/carnet/Akuma_dark.jpg",
                 codename: "EL INFERNAL", characterRole: "TANQUE DEMONÍACO", powerSet: "Llama infernal · Vuelo · Fuerza abismal", rank: "DOCENTE", series: "3", cardNumber: "024",
                 areas: ["Gaming", "Charlas", "Comunidad"],
                 role: "teacher", 
@@ -1184,6 +1190,7 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
             },
             { 
                 name: "ELGABII",
+                portrait: "assets/carnet/elgabii_dark-necesito-que-me-hagas-fotos-de-todos-ellos-pero-qu.jpg",
                 codename: "HABILIDOSO", characterRole: "MANIPULADOR CINÉTICO", powerSet: "Orbes cinéticos · Explosión · Escudo de energía", rank: "COMBATIENTE", series: "3", cardNumber: "090",
                 areas: ["Gaming", "Construcción", "Servidores"],
                 role: "teacher", 
@@ -1196,6 +1203,7 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
             },
             { 
                 name: "DAVE — NEXUS",
+                portrait: "assets/carnet/nexus_dark-necesito-que-me-hagas-fotos-de-todos-ellos-pero-qu.jpg",
                 codename: "EL NEXO", characterRole: "GUARDIÁN TECNOLÓGICO", powerSet: "Manipulación tecnológica · Campo psiónico · Runas", rank: "VANGUARDIA", series: "1", cardNumber: "048",
                 areas: ["Especialidad por definir"],
                 role: "student",
@@ -1208,6 +1216,7 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
             },
                         {
                 name: "PATO — ORATORIS",
+                portrait: "assets/carnet/oratoris_dark-necesito-que-me-hagas-fotos-de-todos-ellos-pero-qu.jpg",
                 codename: "EL ORADOR", characterRole: "ESTRATEGA MENTAL", powerSet: "Voz de la razón · Estrategia · Inspiración", rank: "MENTOR", series: "3", cardNumber: "039",
                 areas: ["Programación", "Tecnología", "Desarrollo personal"],
                 role: "collaborator",
@@ -1221,6 +1230,7 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
             },
             { 
                 name: "HABITOS",
+                portrait: "assets/carnet/habitos_dark-necesito-que-me-hagas-fotos-de-todos-ellos-pero-qu.jpg",
                 codename: "FILÓSOFO JUSTICIERO", characterRole: "FILÓSOFO ATÓMICO", powerSet: "Rayo atómico · Física atómica · Combate cuerpo a cuerpo", rank: "JUSTICIERO", series: "3", cardNumber: "007",
                 areas: ["Gaming", "Filosofía", "Desarrollo personal"],
                 role: "collaborator", 
@@ -1538,7 +1548,7 @@ function renderRoster() {
             const imageWrap = document.createElement('div');
             imageWrap.className = 'roster-portrait-wrap';
             const image = document.createElement('img');
-            image.src = hero.img;
+            image.src = hero.portrait || hero.img;
             image.alt = 'Retrato de ' + hero.name;
             image.loading = 'lazy';
             image.onerror = () => { imageWrap.textContent = 'RETRATO PENDIENTE'; };
