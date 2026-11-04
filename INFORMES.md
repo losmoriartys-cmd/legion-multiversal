@@ -595,3 +595,17 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Alcance:** el cambio corresponde solo al renderizador del login `losmoriartys`. No se modifican JSON, automatizaciones ni los otros perfiles.
 - **Commits de interfaz:** [`11f43232`](https://github.com/losmoriartys-cmd/s3xmen/commit/11f432329c6cada7d88cc3b9eba4c8f655b37901).
 - **Pendiente:** verificar visualmente el despliegue y confirmar el período exacto del panel de rendimiento.
+
+## 2026-11-04 — Ajuste de estadísticas y clips por canal
+
+- **Solicitud:** retirar del piloto el gráfico de horas vistas por transmisión que no aporta al objetivo editorial; priorizar tabla por juego, tabla Lifetime y clips en la última pestaña.
+- **Los Moriartys · juegos:** tabla con Enshrouded (26 promedio, 4 h, 5 seguidores, 1 seguidor/h), Minecraft (34, 3 h, 7 seguidores, 2/h), Fortnite (27, 4 h, 5 seguidores, 1/h, 103 horas vistas), Supercar Collection Together (31, 2 h) y Marvel Rivals (33, 2 h, 3 seguidores, 2/h). Fortnite queda destacado con 22,7% de horas vistas. No se inventan picos individuales ni horas vistas faltantes.
+- **Lifetime:** tabla visible con 1K seguidores, pico 101 (07 Oct 2026), promedio 6, airtime 348 h, 335 días activos y 0 bans.
+- **Rendimiento del período:** se mantienen los ocho indicadores aportados y sus variaciones, con la nota de que el rango de fechas no aparece en la captura.
+- **Historial por directo:** se retiró del renderizador piloto el gráfico de consumo por transmisión y la tabla de nueve filas con juego no informado.
+- **Clips en la última pestaña:** se añadió para cada expediente un acceso a clips más vistos y clips recientes de Twitch; para canales YouTube se muestran accesos a Shorts y videos. Los enlaces abren las páginas oficiales del canal; no simulan clips individuales seleccionados. La selección de 3–4 clips concretos puede cargarse como URLs directas en `creator-records.json`, campo `highlights`.
+- **Alcance:** el nuevo formato estadístico sigue limitado al piloto Los Moriartys; el módulo de acceso a clips se aplica a todos los expedientes según su plataforma/canal.
+- **Datos, automatizaciones y otros perfiles estadísticos:** sin cambios.
+- **Validación estática:** confirmadas tabla de juegos, Lifetime, métricas del período, ausencia de gráficos por transmisión dentro del piloto y enlaces dinámicos de clips/Shorts.
+- **Commit de interfaz:** [`4c88315a`](https://github.com/losmoriartys-cmd/s3xmen/commit/4c88315a68fbc62792d70d1d47acf5618a00981e).
+- **Despliegue:** pendiente de comprobación visual en GitHub Pages.
