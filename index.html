@@ -951,6 +951,7 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
         <nav aria-label="Navegación principal">
             <button class="nav-btn active" data-chapter="1" onclick="switchChapter(1)">PORTADA</button>
             <button class="nav-btn" data-chapter="2" onclick="switchChapter(2)">ROSTER</button>
+            <button class="nav-btn" data-chapter="11" onclick="switchChapter(11)">NUESTROS VALORES</button>
             <button class="nav-btn" data-chapter="3" onclick="switchChapter(3)">ESTADÍSTICAS</button>
             <button class="nav-btn" data-chapter="10" onclick="switchChapter(10)">EN VIVO</button>
             <button class="nav-btn" data-chapter="5" onclick="switchChapter(5)">ARSENAL</button>
@@ -1068,6 +1069,56 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
               <div id="roster-container"><!-- Retratos del roster --></div>
             </div>
             <section id="hero-profile-page" class="hero-profile-page" hidden aria-live="polite"></section>
+        </section>
+
+        <!-- CAPÍTULO 11: IDENTIDAD Y VALORES DEL INSTITUTO -->
+        <section id="chapter-11" class="chapter-panel comic-page">
+            <div class="chapter-tag">CAPÍTULO 11 · NUESTRA IDENTIDAD</div>
+            <h2 class="comic-title">NUESTROS VALORES</h2>
+            <div class="premium-panel">
+                <div class="premium-kicker">EL INSTITUTO · IDENTIDAD, PROPÓSITO Y CULTURA</div>
+                <h3>No somos solamente canales que comparten una pantalla. Somos personas que construyen algo en común.</h3>
+                <p>Legión Multiversal es un instituto creativo y una comunidad de creadores que encuentra en los videojuegos, el entretenimiento y la comunicación un punto de encuentro. Cada integrante conserva su voz, su estilo y su propio universo; la Legión aparece cuando esas identidades se conectan alrededor de una visión compartida.</p>
+                <p>Entendemos el Instituto como un espacio de encuentro, aprendizaje y colaboración: un lugar para desarrollar ideas, probar formatos, compartir experiencias y crecer sin perder aquello que hace único a cada creador.</p>
+            </div>
+
+            <div class="premium-grid">
+                <article class="premium-card">
+                    <h3>CREAR CON IDENTIDAD</h3>
+                    <p>Crear contenido es mucho más que estar en directo o publicar una pieza. Es encontrar una voz, generar experiencias y construir una relación honesta con quienes nos acompañan. Apostamos por propuestas con personalidad, criterio y libertad creativa.</p>
+                </article>
+                <article class="premium-card">
+                    <h3>UNA LEGIÓN, MUCHAS VOCES</h3>
+                    <p>Nuestra identidad colectiva no borra las diferencias: las reúne. Cada integrante aporta su mirada, sus conocimientos, su humor, sus intereses y su manera de conectar. La diversidad de perfiles es parte de nuestra fuerza.</p>
+                </article>
+                <article class="premium-card">
+                    <h3>COMPAÑERISMO Y RESPETO</h3>
+                    <p>La colaboración empieza por escuchar, respetar los tiempos y reconocer el trabajo de los demás. Buscamos un entorno donde se pueda participar, proponer, equivocarse, aprender y disentir con respeto.</p>
+                </article>
+                <article class="premium-card">
+                    <h3>CRECIMIENTO COMPARTIDO</h3>
+                    <p>Crecer no significa competir entre nosotros. Significa abrir oportunidades, compartir herramientas y experiencia, impulsar proyectos conjuntos y celebrar los avances individuales y colectivos.</p>
+                </article>
+                <article class="premium-card">
+                    <h3>COMUNIDAD ANTES QUE NÚMEROS</h3>
+                    <p>Las métricas ayudan a entender el alcance, pero no definen por sí solas el valor de una comunidad. Nos importa ofrecer conversaciones, entretenimiento y espacios participativos donde las personas se sientan bienvenidas.</p>
+                </article>
+                <article class="premium-card">
+                    <h3>CREATIVIDAD CON RESPONSABILIDAD</h3>
+                    <p>Queremos experimentar y sorprender, manteniendo la transparencia con la audiencia y con quienes confían en nuestros proyectos. La autenticidad, el cumplimiento de los acuerdos y la comunicación clara forman parte de nuestro trabajo.</p>
+                </article>
+            </div>
+
+            <div class="premium-panel">
+                <div class="premium-kicker">LO QUE QUEREMOS GENERAR</div>
+                <h3>Experiencias valiosas para la comunidad. Colaboraciones con sentido para las marcas.</h3>
+                <p>A nuestra comunidad queremos ofrecerle entretenimiento compartido, cercanía, participación y un entorno respetuoso donde descubrir nuevos juegos, ideas y creadores. A las marcas, estudios y publishers queremos acercarles un equipo con identidades complementarias, capacidad de generar contenido en distintos formatos y disposición para construir acciones coherentes con cada proyecto.</p>
+                <p>No buscamos colaboraciones vacías ni mensajes que no representen a quienes somos. Nos interesa trabajar con propuestas que tengan sentido para ambas partes, respeten a la audiencia y permitan crear una experiencia genuina.</p>
+                <div class="chapter-actions">
+                    <button class="chapter-cta" type="button" onclick="switchChapter(8)">CONOCER NUESTRAS ALIANZAS <span>↗</span></button>
+                    <button class="chapter-cta" type="button" onclick="switchChapter(9)">DESCUBRIR LA COMUNIDAD <span>↗</span></button>
+                </div>
+            </div>
         </section>
 
         <!-- CAPÍTULO 3: DATABASE -->
