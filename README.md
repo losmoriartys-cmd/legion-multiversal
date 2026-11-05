@@ -1,7 +1,8 @@
-# Los Moriartys — Proyecto web y automatizaciones
+# Legión Multiversal — Proyecto web y automatizaciones
 
-Repositorio de trabajo compartido: [losmoriartys-cmd/s3xmen](https://github.com/losmoriartys-cmd/s3xmen)  
-Sitio publicado: [GitHub Pages](https://losmoriartys-cmd.github.io/s3xmen/)
+Repositorio de trabajo compartido: [losmoriartys-cmd/s3xmen](https://github.com/losmoriartys-cmd/legion-multiversal)  
+Sitio publicado actualmente: [GitHub Pages](https://losmoriartys-cmd.github.io/legion-multiversal/)  
+Nueva publicación prevista: Cloudflare Pages (`https://legionmultiversal.pages.dev/`), pendiente de conectar la cuenta y verificar el primer despliegue.
 
 > **Fuente única de verdad:** el contenido vigente del repositorio y su historial de commits. Las conversaciones sirven para acordar y explicar el trabajo, pero una modificación solo se considera compartida cuando está registrada en GitHub.
 
@@ -25,7 +26,7 @@ Cada colaborador debe:
 ## 3. Protocolo obligatorio
 
 ### Antes de empezar
-1. Abrir [los commits recientes](https://github.com/losmoriartys-cmd/s3xmen/commits/main).
+1. Abrir [los commits recientes](https://github.com/losmoriartys-cmd/legion-multiversal/commits/main).
 2. Revisar el último informe de [`INFORMES.md`](./INFORMES.md).
 3. Consultar los archivos actuales de `main`; no asumir que una versión vista en una conversación sigue vigente.
 4. Si hubo cambios recientes en un archivo que se va a tocar, integrarlos antes de editar.
