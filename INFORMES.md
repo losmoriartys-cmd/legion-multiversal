@@ -934,3 +934,22 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Validaciones:** revisión de bloques editados y coherencia de columnas; no se alteró `data.json` ni la automatización de Twitch. No se atribuyeron datos del canal compartido a MORIARTY individualmente.
 - **Pendientes:** obtener una nueva exportación/captura geográfica con período visible y una tabla de juegos con período y fuente; revisar visualmente en Cloudflare Pages después del despliegue.
 - **Despliegue:** pendiente de verificación.
+
+
+## 2026-11-05 — Unificar los nueve expedientes restantes en formato de cómic
+
+- **Responsable:** ChatGPT + equipo de Legión Multiversal.
+- **Objetivo:** extender a los otros nueve integrantes la experiencia editorial del expediente MORIARTY, manteniendo una colección visual común y contenido individual.
+- **Archivo modificado:**
+  - `index.html`: los diez expedientes abren ahora con navegación de cuatro páginas en formato cómic.
+- **Implementado:**
+  - Se conserva el expediente especial MORIARTY con su portada, métricas, juegos, clips y contenido comercial existentes.
+  - Los otros nueve expedientes reutilizan sus cartas oficiales como portada y presentan cuatro páginas: identidad, audiencia/actividad, trayectoria y capacidades, y universo comercial.
+  - Las páginas interiores utilizan el sistema visual de cómic ya existente: papel editorial, viñetas, encabezados de capítulo, navegación y transición de página.
+  - Se mantienen las fuentes y los bloques estadísticos existentes por integrante; las métricas ausentes continúan identificadas como pendientes y no se completan con estimaciones.
+  - Las oportunidades comerciales se distinguen de acuerdos vigentes. Si no existe contacto o información editorial confirmada, el expediente lo indica expresamente.
+  - El Roster y sus carnets compactos no se modificaron.
+- **Validaciones realizadas:** se confirmó que el cambio se aplicó sobre el `main` vigente y que la función de apertura asigna cuatro páginas a cada integrante. No se ejecutó una prueba visual automatizada ni se confirmó todavía la publicación final en el sitio.
+- **Pendientes:** revisar los diez expedientes en escritorio y móvil; confirmar que los paneles de estadísticas e historial se adapten correctamente al papel de cómic; completar biografías, clips, contactos y datos verificables de cada creador a medida que se reciban.
+- **Commit:** [`0530d347`](https://github.com/losmoriartys-cmd/legion-multiversal/commit/0530d34722d6381e8dfeaccd49b9dca37f2e5304).
+- **Despliegue:** pendiente de verificación.
