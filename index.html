@@ -289,6 +289,14 @@
         .comic-page-count{color:#fff;font:1.15rem 'Bangers',cursive;letter-spacing:1px;text-align:center}
         .modal-content.comic-mode .modal-body{gap:14px}
         .modal-content.comic-mode .modal-tab-pane{background:linear-gradient(145deg,#172235,#0b111c);border:3px solid #718096;box-shadow:7px 7px 0 #05080e;min-height:360px}
+        .modal-content.comic-mode .modal-tab-pane{position:relative;isolation:isolate;overflow:hidden;background-color:#e9dfc7;background-image:radial-gradient(rgba(28,24,20,.16) .65px,transparent .8px),linear-gradient(135deg,rgba(255,255,255,.08),rgba(20,16,12,.13));background-size:5px 5px,100% 100%;color:#172235}
+        .modal-content.comic-mode .modal-tab-pane:before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.28;background:repeating-linear-gradient(0deg,transparent 0 5px,rgba(40,32,22,.08) 6px,transparent 7px),linear-gradient(90deg,rgba(70,48,20,.13),transparent 9%,transparent 91%,rgba(70,48,20,.12))}
+        .modal-content.comic-mode .modal-tab-pane.active{animation:comicPageEnter .48s cubic-bezier(.2,.75,.25,1) both}
+        @keyframes comicPageEnter{0%{opacity:.35;transform:perspective(1100px) rotateY(-7deg) translateX(18px);filter:brightness(.78)}65%{opacity:1;transform:perspective(1100px) rotateY(2deg) translateX(-2px)}100%{opacity:1;transform:perspective(1100px) rotateY(0) translateX(0);filter:brightness(1)}}
+        .modal-content.comic-mode .comic-metric,.modal-content.comic-mode .comic-chart-box,.modal-content.comic-mode .comic-clip-card{background:rgba(9,17,29,.94)}
+        .modal-content.comic-mode .comic-page-kicker{ text-shadow:1px 1px 0 #172235 }
+        @media(prefers-reduced-motion:reduce){.modal-content.comic-mode .modal-tab-pane.active{animation:none}}
+
         .comic-cover-layout{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(220px,.9fr);gap:18px;align-items:center}
         .comic-cover-art{width:100%;max-height:420px;object-fit:contain;background:#05080e;border:3px solid #718096}
         .comic-cover-copy h2{font:clamp(2rem,5vw,3.5rem) 'Bangers',cursive;color:#ffe06a;line-height:.95;margin:8px 0 14px}
@@ -2619,6 +2627,10 @@ function openHeroModal(index) {
             }
             window.currentModalPage=tabIndex;
             if(!silent&&previousIndex!==tabIndex)playPageTurnCue();
+            if(isComic&&!silent&&previousIndex!==tabIndex){
+                const activePane=document.getElementById(`modal-pane-${tabIndex}`);
+                if(activePane){activePane.classList.remove('comic-page-arrival');void activePane.offsetWidth;activePane.classList.add('comic-page-arrival');}
+            }
             if(isComic)updateComicPageControls(true);
         }
 
