@@ -289,57 +289,93 @@
         .comic-page-count{color:#fff;font:1.15rem 'Bangers',cursive;letter-spacing:1px;text-align:center}
         .modal-content.comic-mode .modal-body{gap:14px}
         .modal-content.comic-mode .modal-tab-pane{background:linear-gradient(145deg,#172235,#0b111c);border:3px solid #718096;box-shadow:7px 7px 0 #05080e;min-height:360px}
-        .modal-content.comic-mode .modal-tab-pane{position:relative;isolation:isolate;overflow:hidden;background-color:#e9dfc7;background-image:radial-gradient(rgba(28,24,20,.13) .65px,transparent .8px),linear-gradient(135deg,rgba(255,255,255,.08),rgba(20,16,12,.10));background-size:5px 5px,100% 100%;color:#172235}
-        .modal-content.comic-mode .modal-tab-pane:before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.22;background:repeating-linear-gradient(0deg,transparent 0 5px,rgba(40,32,22,.07) 6px,transparent 7px)}
+                .modal-content.comic-mode .modal-tab-pane{position:relative;isolation:isolate;overflow:hidden;background:#0a1422;border:0;padding:clamp(8px,2vw,18px);box-shadow:none;color:#172235}
+        .modal-content.comic-mode .modal-tab-pane:before{content:none}
         .modal-content.comic-mode .modal-tab-pane.active{animation:comicPageEnter .48s cubic-bezier(.2,.75,.25,1) both}
         @keyframes comicPageEnter{0%{opacity:.35;transform:perspective(1100px) rotateY(-7deg) translateX(18px);filter:brightness(.78)}65%{opacity:1;transform:perspective(1100px) rotateY(2deg) translateX(-2px)}100%{opacity:1;transform:perspective(1100px) rotateY(0) translateX(0);filter:brightness(1)}}
-        .modal-content.comic-mode .comic-metric,.modal-content.comic-mode .comic-chart-box,.modal-content.comic-mode .comic-clip-card{background:#101d30;border-color:#34516d}
-        .modal-content.comic-mode .comic-cover-layout{display:grid;grid-template-columns:1fr;gap:22px;align-items:start}
-        .modal-content.comic-mode .comic-cover-art{display:block;width:100%;height:clamp(440px,68vh,680px);max-height:680px;object-fit:contain;object-position:center;background:#070d18;border:3px solid #28415d;box-shadow:0 12px 28px rgba(4,12,24,.32)}
-        .modal-content.comic-mode .comic-cover-copy{max-width:900px;margin:0 auto;width:100%}
-        .modal-content.comic-mode .comic-cover-copy h2{font:clamp(2rem,5vw,3.5rem) 'Bangers',cursive;color:#176f91;line-height:.95;margin:8px 0 14px}
-        .modal-content.comic-mode .comic-cover-copy p{font-size:.98rem;line-height:1.65;color:#172b43}
-        .modal-content.comic-mode .comic-page-kicker{color:#176f91;font:1.15rem 'Bangers',cursive;letter-spacing:1px;margin-bottom:12px;text-shadow:none}
-        .modal-content.comic-mode .comic-bio-panel{margin-top:18px;padding:18px 20px;background:#f5edda;border:2px solid #263c55;border-left:6px solid #1687a8}
-        .modal-content.comic-mode .comic-bio-panel>span,.modal-content.comic-mode .comic-epic-code>span{display:block;font:1.05rem 'Bangers',cursive;letter-spacing:1px;color:#176f91;margin-bottom:8px}
-        .modal-content.comic-mode .comic-epic-code{margin-top:14px;padding:20px;background:linear-gradient(120deg,#14263d,#203b59);border:2px solid #0b1728;box-shadow:5px 5px 0 #0b1728;color:#f4f7fb}
-        .modal-content.comic-mode .comic-epic-code>span{color:#8bdcf0}
-        .modal-content.comic-mode .comic-epic-code strong{display:block;font:clamp(2.1rem,5vw,3.3rem) 'Bangers',cursive;color:#fff;letter-spacing:.08em;margin:4px 0}
-        .modal-content.comic-mode .comic-epic-code p{color:#e1edf7}
-        .modal-content.comic-mode .comic-kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-top:16px}
-        .modal-content.comic-mode .comic-kpi{background:#101d30;border:1px solid #34516d;border-bottom:4px solid #1687a8;padding:14px;min-width:0}
-        .modal-content.comic-mode .comic-kpi small{display:block;color:#c4d7e8;font-size:.68rem;font-weight:800}
-        .modal-content.comic-mode .comic-kpi strong{display:block;color:#fff;font:2rem 'Bangers',cursive;margin:4px 0}
-        .modal-content.comic-mode .comic-kpi em{display:block;color:#b6c8d9;font-size:.68rem}
-        .modal-content.comic-mode .comic-intro{color:#263c55;font-size:.95rem;line-height:1.6}
-        .modal-content.comic-mode .comic-metric{background:#101d30;border:1px solid #34516d}
-        .modal-content.comic-mode .comic-metric:before{background:#35b4d0}
-        .modal-content.comic-mode .comic-metric span{color:#c5d9e9}
-        .modal-content.comic-mode .comic-metric strong{color:#fff}
-        .modal-content.comic-mode .comic-metric small{color:#b6c8d9}
-        .modal-content.comic-mode .comic-chart-box h4{color:#8bdcf0}
-        .modal-content.comic-mode .comic-chart-row span{color:#e1edf7}
-        .modal-content.comic-mode .comic-chart-row b{color:#fff}
-        .modal-content.comic-mode .comic-games-table th{background:#1b3551;color:#a9e7f4}
-        .modal-content.comic-mode .comic-games-table td{color:#e1edf7}
-        .modal-content.comic-mode .comic-profile-callout,.modal-content.comic-mode .comic-audience-note,.modal-content.comic-mode .comic-game-insight,.modal-content.comic-mode .comic-partner-panel{background:#172b43;color:#eef5fb;border-left-color:#35b4d0}
-        .modal-content.comic-mode .comic-profile-callout strong,.modal-content.comic-mode .comic-audience-note strong,.modal-content.comic-mode .comic-game-insight strong,.modal-content.comic-mode .comic-partner-panel>strong{color:#8bdcf0}
-        .modal-content.comic-mode .comic-profile-callout p,.modal-content.comic-mode .comic-audience-note p,.modal-content.comic-mode .comic-game-insight p,.modal-content.comic-mode .comic-partner-panel p{color:#eef5fb}
-        .modal-content.comic-mode .comic-clip-card strong{color:#f4f8fc}
-        .modal-content.comic-mode .comic-clip-card small{color:#c2d2e1}
-        .modal-content.comic-mode .comic-clip-card a{color:#8bdcf0}
-        .modal-content.comic-mode .comic-format-list span{background:#1b3551;border-color:#45617e;color:#eef5fb}
-        .modal-content.comic-mode .comic-geo-grid{background:#f5edda;border-color:#263c55}
-        .modal-content.comic-mode .comic-geo-row{color:#172b43}
-        .modal-content.comic-mode .comic-geo-track{background:#cbd5df}
-        .modal-content.comic-mode .comic-geo-track i{background:linear-gradient(90deg,#176f91,#35b4d0)}
-        .modal-content.comic-mode .comic-final-cta{background:#172b43;color:#eef5fb;border-color:#0b1728}
-        .modal-content.comic-mode .comic-final-cta h4{color:#8bdcf0}
-        .modal-content.comic-mode .comic-final-cta a{color:#a9e7f4}
-        .modal-content.comic-mode .comic-clip-preview{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;background:#05080e;border:1px solid #45617e}
+        .modal-content.comic-mode .comic-book-sheet{position:relative;isolation:isolate;overflow:hidden;width:100%;padding:clamp(16px,2.8vw,30px);background-color:#e9dfc7;background-image:radial-gradient(rgba(28,24,20,.15) .65px,transparent .8px),linear-gradient(135deg,rgba(255,255,255,.12),rgba(20,16,12,.08));background-size:5px 5px,100% 100%;border:5px solid #111b2a;box-shadow:8px 9px 0 #03070d,0 18px 36px rgba(0,0,0,.28);color:#172235;display:flex;flex-direction:column;gap:16px}
+        .modal-content.comic-mode .comic-book-sheet:after{content:"";position:absolute;inset:8px;border:1px solid rgba(20,31,45,.45);pointer-events:none;z-index:-1}
+        .modal-content.comic-mode .comic-cover-sheet{background-color:#d9d0bc;background-image:radial-gradient(rgba(20,26,34,.18) .7px,transparent .9px),linear-gradient(145deg,#f1e8d5,#c8c0b1)}
+        .modal-content.comic-mode .comic-cover-masthead,.modal-content.comic-mode .comic-interior-header{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 10px;background:#14243a;color:#f3f0e8;border:2px solid #0b1421;font:.78rem 'Bangers',cursive;letter-spacing:1px}
+        .modal-content.comic-mode .comic-cover-masthead b{font-size:1.25rem;color:#8bdcf0}
+        .modal-content.comic-mode .comic-cover-art-frame{position:relative;padding:9px;background:#101c2c;border:3px solid #101c2c;box-shadow:6px 7px 0 #263b52}
+        .modal-content.comic-mode .comic-cover-art{display:block;width:100%;height:clamp(470px,70vh,760px);max-height:760px;object-fit:contain;object-position:center;background:#070d18;border:1px solid #49627b}
+        .modal-content.comic-mode .comic-cover-burst{position:absolute;z-index:2;top:18px;right:18px;width:112px;height:112px;display:grid;place-content:center;text-align:center;clip-path:polygon(50% 0%,61% 16%,79% 5%,81% 25%,100% 30%,87% 48%,100% 65%,79% 72%,80% 94%,59% 85%,47% 100%,37% 81%,16% 91%,18% 68%,0 57%,15% 41%,4% 21%,27% 22%,34% 2%);background:#28a8c3;color:#071827;font:1.05rem 'Bangers',cursive;letter-spacing:1px;transform:rotate(9deg);filter:drop-shadow(3px 4px 0 #071827)}
+        .modal-content.comic-mode .comic-cover-titleline{display:flex;align-items:center;gap:12px;margin-top:6px}
+        .modal-content.comic-mode .comic-cover-titleline>span{font:1rem 'Bangers',cursive;color:#176f91;writing-mode:vertical-rl;transform:rotate(180deg)}
+        .modal-content.comic-mode .comic-cover-titleline h2{flex:1;margin:0;color:#10243b;font:clamp(3rem,9vw,5.8rem) 'Bangers',cursive;line-height:.86;letter-spacing:2px;text-shadow:2px 2px 0 #fff}
+        .modal-content.comic-mode .comic-cover-titleline>b{font:2.3rem 'Bangers',cursive;color:#176f91}
+        .modal-content.comic-mode .comic-cover-subtitle{margin:0;color:#176f91;font:1.1rem 'Bangers',cursive;letter-spacing:1.2px}
+        .modal-content.comic-mode .comic-panel{position:relative;min-width:0;padding:14px;background:#f7efdd;border:3px solid #17283d;box-shadow:4px 4px 0 rgba(16,31,49,.28);color:#172b43}
+        .modal-content.comic-mode .comic-panel:after{content:"";position:absolute;right:0;top:0;width:28px;height:28px;background:linear-gradient(225deg,#d5c8ad 0 48%,#17283d 49% 56%,transparent 57%);opacity:.85}
+        .modal-content.comic-mode .comic-panel-wide{width:100%}
+        .modal-content.comic-mode .comic-panel-heading{display:flex;align-items:center;gap:9px;margin:-2px 22px 10px -2px;color:#14243a;font:1.05rem 'Bangers',cursive;letter-spacing:.8px}
+        .modal-content.comic-mode .comic-panel-heading span{display:grid;place-items:center;flex:0 0 28px;height:28px;background:#1687a8;color:white;border:2px solid #14243a;transform:rotate(-5deg)}
+        .modal-content.comic-mode .comic-panel-heading b{font-weight:400}
+        .modal-content.comic-mode .comic-panel h3{margin:5px 0 10px;color:#176f91;font:1.3rem 'Bangers',cursive;letter-spacing:.5px}
+        .modal-content.comic-mode .comic-panel-caption{margin:0 0 12px;color:#33465c;font-size:.83rem;line-height:1.45}
+        .modal-content.comic-mode .comic-page-title{padding:4px 0 10px;border-bottom:4px solid #14243a}
+        .modal-content.comic-mode .comic-page-title small{color:#176f91;font:.85rem 'Bangers',cursive;letter-spacing:1px}
+        .modal-content.comic-mode .comic-page-title h2{margin:2px 0 0;color:#14243a;font:clamp(2rem,5vw,3.3rem) 'Bangers',cursive;line-height:.95;letter-spacing:.5px}
+        .modal-content.comic-mode .comic-page-lead{margin:0;padding:12px 15px;background:#14243a;color:#f2f5f8;font-size:.95rem;line-height:1.55;border-left:6px solid #35b4d0;box-shadow:3px 3px 0 rgba(0,0,0,.2)}
+        .modal-content.comic-mode .comic-cover-bio p{margin:0;color:#172b43;font-size:.96rem;line-height:1.65}
+        .modal-content.comic-mode .comic-epic-code{padding:18px 20px;background:linear-gradient(120deg,#14263d,#203b59);border:3px solid #0b1728;box-shadow:5px 5px 0 #0b1728;color:#f4f7fb}
+        .modal-content.comic-mode .comic-epic-code>span{display:block;color:#8bdcf0;font:1rem 'Bangers',cursive;letter-spacing:1px}
+        .modal-content.comic-mode .comic-epic-code strong{display:block;color:#fff;font:clamp(2.3rem,6vw,3.6rem) 'Bangers',cursive;letter-spacing:.08em;margin:3px 0}
+        .modal-content.comic-mode .comic-epic-code p{margin:0;color:#e1edf7;font-size:.9rem}
+        .modal-content.comic-mode .comic-cover-footer,.modal-content.comic-mode .comic-page-footer{display:flex;justify-content:space-between;gap:10px;align-items:center;padding-top:9px;border-top:2px solid #17283d;color:#17283d;font:.9rem 'Bangers',cursive;letter-spacing:.7px}
+        .modal-content.comic-mode .comic-cover-footer b{color:#176f91}
+        .modal-content.comic-mode .comic-interior-header{font-size:.72rem}
+        .modal-content.comic-mode .comic-interior-header b{color:#8bdcf0}
+        .modal-content.comic-mode .comic-page-split{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(210px,.8fr);gap:14px;align-items:stretch}
+        .modal-content.comic-mode .comic-metric-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+        .modal-content.comic-mode .comic-metric{position:relative;overflow:hidden;padding:12px 10px;background:#14243a;border:2px solid #294761;border-bottom:5px solid #1687a8;min-width:0}
+        .modal-content.comic-mode .comic-metric span{display:block;color:#c5d9e9;font-size:.7rem;font-weight:800}
+        .modal-content.comic-mode .comic-metric strong{display:block;color:#fff;font:clamp(1.5rem,3vw,2.2rem) 'Bangers',cursive;margin:3px 0;overflow-wrap:anywhere}
+        .modal-content.comic-mode .comic-metric small{display:block;color:#b6c8d9;font-size:.62rem;line-height:1.3}
+        .modal-content.comic-mode .comic-geo-grid{display:grid;grid-template-columns:1fr;gap:7px;padding:10px;background:#e7ddc8;border:1px solid #a89a80}
+        .modal-content.comic-mode .comic-geo-row{display:grid;grid-template-columns:minmax(95px,1fr) minmax(60px,1.2fr) 38px;gap:8px;align-items:center;color:#172b43;font-size:.72rem}
+        .modal-content.comic-mode .comic-geo-track{height:7px;background:#cbd5df;overflow:hidden}
+        .modal-content.comic-mode .comic-geo-track i{display:block;height:100%;background:linear-gradient(90deg,#176f91,#35b4d0)}
+        .modal-content.comic-mode .comic-geo-row b{text-align:right}
+        .modal-content.comic-mode .comic-speech-bubble{align-self:center;position:relative;padding:18px 16px;background:#fff7e8;border:3px solid #17283d;border-radius:46% 48% 42% 45% / 12% 14% 12% 14%;box-shadow:4px 5px 0 rgba(16,31,49,.24);color:#172b43}
+        .modal-content.comic-mode .comic-speech-bubble:after{content:"";position:absolute;left:24px;bottom:-19px;width:24px;height:24px;background:#fff7e8;border-left:3px solid #17283d;border-bottom:3px solid #17283d;transform:skew(-28deg) rotate(-28deg)}
+        .modal-content.comic-mode .comic-speech-bubble span{color:#176f91;font:1rem 'Bangers',cursive;letter-spacing:.5px}
+        .modal-content.comic-mode .comic-speech-bubble p{margin:8px 0 0;color:#172b43;font-size:.88rem;line-height:1.5}
+        .modal-content.comic-mode .comic-game-layout{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+        .modal-content.comic-mode .comic-chart-row{display:grid;grid-template-columns:minmax(90px,1fr) minmax(65px,1.5fr) 34px;gap:8px;align-items:center;margin:10px 0;color:#172b43;font-size:.75rem}
+        .modal-content.comic-mode .comic-chart-row span{color:#172b43;font-weight:800}
+        .modal-content.comic-mode .comic-chart-row b{color:#14243a;text-align:right}
+        .modal-content.comic-mode .comic-chart-track{height:10px;background:#c7d0d9;border:1px solid #17283d;overflow:hidden}
+        .modal-content.comic-mode .comic-chart-track i{display:block;height:100%;background:linear-gradient(90deg,#176f91,#35b4d0)}
+        .modal-content.comic-mode .comic-chart-track.growth i{background:linear-gradient(90deg,#b96d32,#e7b85c)}
+        .modal-content.comic-mode .stats-table-wrap{width:100%;overflow-x:auto;border:2px solid #17283d;margin-top:5px}
+        .modal-content.comic-mode .comic-games-table{width:100%;min-width:540px;border-collapse:collapse;background:#f7efdd;font-size:.76rem}
+        .modal-content.comic-mode .comic-games-table th{background:#14243a;color:#a9e7f4;text-transform:uppercase;font-size:.67rem;text-align:left;padding:10px 8px}
+        .modal-content.comic-mode .comic-games-table td{padding:9px 8px;border-top:1px solid #c9bda6;color:#172b43;white-space:nowrap}
+        .modal-content.comic-mode .comic-games-table tbody tr:nth-child(even){background:#e9dfc7}
+        .modal-content.comic-mode .comic-impact-box{padding:15px 18px;background:#d8eef0;border:3px solid #14243a;border-left:9px solid #1687a8;box-shadow:4px 4px 0 rgba(16,31,49,.2);color:#172b43}
+        .modal-content.comic-mode .comic-impact-box>b{font:1.1rem 'Bangers',cursive;color:#176f91;letter-spacing:.7px}
+        .modal-content.comic-mode .comic-impact-box p{margin:6px 0 0;color:#172b43;font-size:.9rem;line-height:1.5}
+        .modal-content.comic-mode .comic-clips-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+        .modal-content.comic-mode .comic-clip-card{background:#f7efdd;border:3px solid #17283d;padding:10px;box-shadow:4px 4px 0 rgba(16,31,49,.24)}
+        .modal-content.comic-mode .comic-clip-card:nth-child(2){transform:rotate(.4deg)}
+        .modal-content.comic-mode .comic-clip-card:nth-child(3){transform:rotate(-.35deg)}
+        .modal-content.comic-mode .comic-clip-preview{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;background:#05080e;border:2px solid #17283d}
         .modal-content.comic-mode .comic-clip-preview iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+        .modal-content.comic-mode .comic-clip-card h3{margin:10px 0 5px;color:#14243a;font:1.15rem 'Bangers',cursive;line-height:1.15}
+        .modal-content.comic-mode .comic-clip-card p{margin:0 0 8px;color:#33465c;font-size:.78rem;line-height:1.4}
+        .modal-content.comic-mode .comic-clip-card a{display:inline-block;color:#176f91;font-weight:900;font-size:.72rem;text-decoration:underline}
+        .modal-content.comic-mode .comic-format-list{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+        .modal-content.comic-mode .comic-format-list span{padding:9px;background:#14243a;border:1px solid #45617e;color:#eef5fb;font-size:.77rem;font-weight:800}
+        .modal-content.comic-mode .comic-partner-panel p{margin:7px 0;color:#172b43;font-size:.86rem;line-height:1.5}
+        .modal-content.comic-mode .comic-final-cta{padding:18px;background:#14243a;border:3px solid #0b1728;box-shadow:5px 5px 0 #0b1728;color:#eef5fb;text-align:center}
+        .modal-content.comic-mode .comic-final-cta>span{color:#8bdcf0;font:1rem 'Bangers',cursive;letter-spacing:1px}
+        .modal-content.comic-mode .comic-final-cta h3{margin:5px 0;color:#fff;font:clamp(1.4rem,4vw,2.2rem) 'Bangers',cursive}
+        .modal-content.comic-mode .comic-final-cta p{margin:5px 0;color:#d7e5f2;font-size:.88rem}
+        .modal-content.comic-mode .comic-final-cta a{color:#a9e7f4;font-weight:900}
         @media(prefers-reduced-motion:reduce){.modal-content.comic-mode .modal-tab-pane.active{animation:none}}
-        @media(max-width:650px){.modal-content.comic-mode .comic-cover-art{height:clamp(350px,58vh,520px)}.modal-content.comic-mode .comic-geo-grid{grid-template-columns:1fr}.modal-content.comic-mode .comic-geo-row{grid-template-columns:minmax(110px,1fr) minmax(60px,1.3fr) 38px}.modal-content.comic-mode .comic-game-layout{grid-template-columns:1fr}.modal-content.comic-mode .comic-metric-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+        @media(max-width:700px){.modal-content.comic-mode .comic-cover-art{height:clamp(380px,60vh,540px)}.modal-content.comic-mode .comic-metric-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.modal-content.comic-mode .comic-page-split,.modal-content.comic-mode .comic-game-layout,.modal-content.comic-mode .comic-clips-grid{grid-template-columns:1fr}.modal-content.comic-mode .comic-cover-masthead,.modal-content.comic-mode .comic-interior-header{font-size:.6rem}.modal-content.comic-mode .comic-book-sheet{padding:12px;border-width:3px}.modal-content.comic-mode .comic-panel{padding:11px}}
         .modal-tab-pane h3 { font-family: 'Bangers', cursive; font-size: 1.8rem; color: var(--yellow-accent); border-bottom: 2px dashed rgba(255,255,255,0.2); padding-bottom: 8px; }
         .modal-tab-pane p { font-size: 1.05rem; line-height: 1.6; color: #e2e8f0; }
 
@@ -2576,24 +2612,20 @@ function renderMoriartysComicPages(hero){
   ['México','31%','31'],['Argentina','23%','23'],['Colombia','8%','8'],['Perú','7%','7'],['Chile','7%','7'],['Estados Unidos','5%','5'],['Uruguay','4%','4'],['Ecuador','3%','3'],['España','3%','3'],['Bolivia','2%','2'],['República Dominicana','1%','1'],['Costa Rica','1%','1'],['Venezuela','1%','1'],['Nicaragua','1%','1'],['Panamá','<1%','1']
  ];
  const maxAvg=Math.max(...games.map(g=>g.avg));
- const cover='<div class="comic-cover-layout"><img class="comic-cover-art" src="'+escapeStatsHtml(hero.img)+'" alt="Carta de superhéroe de MORIARTY"><div class="comic-cover-copy"><div class="comic-page-kicker">EXPEDIENTE 001 · MEDIA KIT</div><h2>MORIARTY</h2><p><strong>CREADOR DE LEGIÓN MULTIVERSAL</strong></p><div class="comic-bio-panel"><span>BIOGRAFÍA DEL CANAL</span><p>Bienvenido al videoclub 📼 Somos Demi y Ari - Los Moriartys. Pareja gamer y orgullosos nerds. Acá no hay pro-players, hay partidas que salen mal y terminan mejor. Simuladores de tienda, coop caótico, pelis y cómics. LUN/MIE 20HS | VIE 21HS ARG</p></div><div class="comic-epic-code"><span>CÓDIGO DE CREADOR · EPIC GAMES</span><strong>LosMoriartys</strong><p>Si apoyás el contenido, podés usar nuestro código en Epic Games.</p></div></div></div>';
- const metrics=[
-  ['Seguidores','1.145','Total actual del canal'],
-  ['Media de espectadores','26','CCV · últimos 30 días'],
-  ['Pico de espectadores','101','Máximo histórico · 7 oct 2026'],
-  ['Horas vistas','860 h','Últimos 30 días'],
-  ['Nuevos seguidores','+49','Últimos 30 días'],
-  ['Horas emitidas','32 h 15 min','Últimos 30 días']
- ];
- const metricsPage='<div class="comic-page-kicker">01 · AUDIENCIA Y RENDIMIENTO</div><p class="comic-intro">Una comunidad que dedica tiempo al contenido y acompaña las transmisiones. Las cifras recientes permiten dimensionar la actividad del canal; cada indicador conserva su ventana de medición.</p><div class="comic-metric-grid">'+metrics.map(v=>'<article class="comic-metric"><span>'+v[0]+'</span><strong>'+v[1]+'</strong><small>'+v[2]+'</small></article>').join('')+'</div><div class="comic-page-kicker" style="margin-top:24px">ALCANCE GEOGRÁFICO · 2.695 VISTAS</div><p class="comic-intro">La distribución compartida muestra una presencia especialmente marcada en Latinoamérica, con México y Argentina como mercados principales.</p><div class="comic-geo-grid">'+geography.map(v=>'<div class="comic-geo-row"><span>'+v[0]+'</span><div class="comic-geo-track"><i style="width:'+v[2]+'%"></i></div><b>'+v[1]+'</b></div>').join('')+'</div><div class="comic-audience-note"><strong>PERFIL DE AUDIENCIA · REFERENCIA ORIENTATIVA</strong><p>Por la observación y el conocimiento directo de la comunidad, se estima una presencia predominante de personas de entre <b>25 y 40 años</b>. Es una apreciación cualitativa del creador, no un dato demográfico medido por Twitch.</p></div>';
- let gamesPage='<div class="comic-page-kicker">02 · JUEGOS Y RENDIMIENTO</div><p class="comic-intro">La variedad de categorías permite adaptar el contenido a distintos públicos y propuestas: desde construcción y aventura hasta acción competitiva y experiencias cooperativas.</p><div class="comic-game-layout"><section class="comic-chart-box"><h4>AUDIENCIA MEDIA POR JUEGO</h4>';
- games.slice().sort((a,b)=>b.avg-a.avg).forEach(g=>gamesPage+='<div class="comic-chart-row"><span>'+g.name+'</span><div class="comic-chart-track"><i style="width:'+Math.round(g.avg/maxAvg*100)+'%"></i></div><b>'+g.avg+'</b></div>');
- gamesPage+='</section><section class="comic-chart-box"><h4>CAPTACIÓN POR HORA EMITIDA</h4>';
- games.filter(g=>g.perHour!==null).slice().sort((a,b)=>b.perHour-a.perHour||b.followers-a.followers).forEach(g=>gamesPage+='<div class="comic-chart-row"><span>'+g.name+'</span><div class="comic-chart-track growth"><i style="width:'+Math.round(g.perHour/2*100)+'%"></i></div><b>'+g.perHour+'/h</b></div>');
- gamesPage+='</section></div><div class="stats-table-wrap"><table class="comic-games-table"><thead><tr><th>Juego</th><th>Horas emitidas</th><th>Media espectadores</th><th>Seguidores ganados</th><th>Por hora</th></tr></thead><tbody>';
- games.forEach(g=>gamesPage+='<tr><td>'+g.name+'</td><td>'+g.air+'</td><td>'+g.avg+'</td><td>'+(g.followers===null?'—':'+'+g.followers)+'</td><td>'+(g.perHour===null?'—':g.perHour+'/h')+'</td></tr>');
- gamesPage+='</tbody></table></div><div class="comic-game-insight"><strong>LECTURA PARA MARCAS</strong><p>Minecraft presenta la mayor media de espectadores de esta selección (34), seguido de Marvel Rivals (33) y Supercar Collection Together (31). Minecraft y Marvel Rivals registran el mejor ritmo de captación disponible: 2 seguidores por hora emitida.</p></div>';
- const clipsPage='<div class="comic-page-kicker">03 · CLIPS Y PERSONALIDAD DEL CANAL</div><p class="comic-intro">Los momentos destacados permiten conocer el tono del canal más allá de las métricas: creatividad, humor, complicidad y reacciones espontáneas.</p><div class="comic-clips-grid">'+clips.map(c=>'<article class="comic-clip-card"><div class="comic-clip-preview"><iframe src="https://clips.twitch.tv/embed?clip='+c.id+'&parent='+encodeURIComponent(location.hostname)+'&autoplay=false" title="Previsualización: '+escapeStatsHtml(c.title)+'" loading="lazy" allowfullscreen></iframe></div><strong>'+c.title+'</strong><small>'+c.note+'</small><a href="https://clips.twitch.tv/'+c.id+'" target="_blank" rel="noopener">VER CLIP EN TWITCH ↗</a></article>').join('')+'</div><div class="comic-page-kicker" style="margin-top:24px">FORMATOS DE COLABORACIÓN</div><div class="comic-format-list"><span>Presentación y prueba de videojuegos</span><span>Integraciones naturales en directo</span><span>Retos y dinámicas participativas</span><span>Contenido cooperativo</span><span>Clips y piezas destacadas</span><span>Activaciones con otros creadores</span></div><div class="comic-partner-panel"><strong>COLABORACIONES Y VÍNCULOS</strong><p><b>Partner:</b> Enshrouded · Cinderia.</p><p><b>Plataformas de acceso a juegos:</b> Lurkit y Keymailer. Se identifican como plataformas utilizadas para campañas y acceso a claves, no como patrocinadores directos.</p></div><div class="comic-final-cta"><h4>HAGAMOS QUE TU MARCA FORME PARTE DE LA EXPERIENCIA.</h4><p>Propuestas comerciales, presentaciones de producto y colaboraciones de contenido:</p><a href="mailto:losmoriartys@gmail.com">losmoriartys@gmail.com</a></div><div class="stats-note">Los clips enlazan a Twitch Clips. Los formatos enumerados son posibilidades de colaboración, no campañas contratadas. Las alianzas se describen según la información confirmada por el creador.</div>';
+ const cover='<article class="comic-book-sheet comic-cover-sheet"><header class="comic-cover-masthead"><b>LEGIÓN MULTIVERSAL</b><span>EDICIÓN ESPECIAL · N.º 001</span><span>MEDIA KIT</span></header><div class="comic-cover-art-frame"><span class="comic-cover-burst">EL EXPEDIENTE<br>DEL HÉROE</span><img class="comic-cover-art" src="'+escapeStatsHtml(hero.img)+'" alt="Carta de superhéroe de MORIARTY"></div><div class="comic-cover-copy"><div class="comic-cover-titleline"><span>PROTAGONISTA</span><h2>MORIARTY</h2><b>001</b></div><p class="comic-cover-subtitle">CREADOR DE LEGIÓN MULTIVERSAL</p><section class="comic-panel comic-cover-bio"><div class="comic-panel-heading"><span>01</span><b>IDENTIDAD SECRETA · BIOGRAFÍA DEL CANAL</b></div><p>Bienvenido al videoclub 📼 Somos Demi y Ari - Los Moriartys. Pareja gamer y orgullosos nerds. Acá no hay pro-players, hay partidas que salen mal y terminan mejor. Simuladores de tienda, coop caótico, pelis y cómics. LUN/MIE 20HS | VIE 21HS ARG</p></section><section class="comic-epic-code"><span>CÓDIGO DE CREADOR · EPIC GAMES</span><strong>LosMoriartys</strong><p>Apoyá al canal usando nuestro código de creador en Epic Games.</p></section><footer class="comic-cover-footer"><span>UNA HISTORIA DE JUEGOS, HUMOR Y CULTURA GEEK</span><b>¡COMIENZA LA AVENTURA!</b></footer></div></article>';
+ const metrics=[['Seguidores','1.145','TOTAL DEL CANAL'],['Media de espectadores','26','CCV · ÚLTIMOS 30 DÍAS'],['Pico de espectadores','101','MÁXIMO HISTÓRICO · 7 OCT 2026'],['Horas vistas','860 h','ÚLTIMOS 30 DÍAS'],['Nuevos seguidores','+49','ÚLTIMOS 30 DÍAS'],['Horas emitidas','32 h 15 min','ÚLTIMOS 30 DÍAS']];
+ const metricsPage='<article class="comic-book-sheet comic-interior-page"><header class="comic-interior-header"><span>LEGIÓN MULTIVERSAL</span><b>CAPÍTULO 01</b><span>LA COMUNIDAD</span></header><div class="comic-page-title"><small>EXPEDIENTE MORIARTY · PÁGINA 02</small><h2>EL PODER DE LA AUDIENCIA</h2></div><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>01</span><b>SEÑALES DE ACTIVIDAD</b></div><p class="comic-panel-caption">Una mirada a la dimensión y al movimiento de la comunidad del canal.</p><div class="comic-metric-grid">'+metrics.map((v,i)=>'<article class="comic-metric comic-metric-v'+(i+1)+'"><span>'+v[0]+'</span><strong>'+v[1]+'</strong><small>'+v[2]+'</small></article>').join('')+'</div></section><div class="comic-page-split"><section class="comic-panel"><div class="comic-panel-heading"><span>02</span><b>ALCANCE INTERNACIONAL</b></div><h3>2.695 VISTAS</h3><p class="comic-panel-caption">México y Argentina encabezan las ubicaciones compartidas en el informe geográfico.</p><div class="comic-geo-grid">'+geography.map(v=>'<div class="comic-geo-row"><span>'+v[0]+'</span><div class="comic-geo-track"><i style="width:'+v[2]+'%"></i></div><b>'+v[1]+'</b></div>').join('')+'</div></section><aside class="comic-speech-bubble"><span>¿QUIÉN ESTÁ DEL OTRO LADO?</span><p>Por observación directa del creador, la comunidad parece concentrarse principalmente entre los <b>25 y 40 años</b>. Es una estimación cualitativa, no una medición demográfica oficial.</p></aside></div><footer class="comic-page-footer"><span>LA COMUNIDAD ES PARTE DE LA HISTORIA</span><b>02 / 04</b></footer></article>';
+ let gameCharts='<section class="comic-panel"><div class="comic-panel-heading"><span>01</span><b>QUIÉN ACOMPAÑA CADA AVENTURA</b></div><h3>AUDIENCIA MEDIA POR JUEGO</h3>';
+ games.slice().sort((a,b)=>b.avg-a.avg).forEach(g=>gameCharts+='<div class="comic-chart-row"><span>'+g.name+'</span><div class="comic-chart-track"><i style="width:'+Math.round(g.avg/maxAvg*100)+'%"></i></div><b>'+g.avg+'</b></div>');
+ gameCharts+='</section><section class="comic-panel"><div class="comic-panel-heading"><span>02</span><b>NUEVOS ALIADOS</b></div><h3>SEGUIDORES POR HORA EMITIDA</h3>';
+ games.filter(g=>g.perHour!==null).slice().sort((a,b)=>b.perHour-a.perHour||b.followers-a.followers).forEach(g=>gameCharts+='<div class="comic-chart-row"><span>'+g.name+'</span><div class="comic-chart-track growth"><i style="width:'+Math.round(g.perHour/2*100)+'%"></i></div><b>'+g.perHour+'/h</b></div>');
+ gameCharts+='</section>';
+ let table='<section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>03</span><b>REGISTRO DE MISIONES</b></div><div class="stats-table-wrap"><table class="comic-games-table"><thead><tr><th>Juego</th><th>Horas emitidas</th><th>Media espectadores</th><th>Seguidores ganados</th><th>Por hora</th></tr></thead><tbody>';
+ games.forEach(g=>table+='<tr><td>'+g.name+'</td><td>'+g.air+'</td><td>'+g.avg+'</td><td>'+(g.followers===null?'—':'+'+g.followers)+'</td><td>'+(g.perHour===null?'—':g.perHour+'/h')+'</td></tr>');
+ table+='</tbody></table></div></section>';
+ const gamesPage='<article class="comic-book-sheet comic-interior-page"><header class="comic-interior-header"><span>LEGIÓN MULTIVERSAL</span><b>CAPÍTULO 02</b><span>LAS MISIONES</span></header><div class="comic-page-title"><small>EXPEDIENTE MORIARTY · PÁGINA 03</small><h2>UN HÉROE, MUCHOS UNIVERSOS</h2></div><p class="comic-page-lead">Cada juego abre una historia distinta: construcción, acción, aventura, simulación y caos cooperativo. La variedad permite conectar con comunidades y propuestas diferentes.</p><div class="comic-game-layout">'+gameCharts+'</div>'+table+'<aside class="comic-impact-box"><b>LECTURA PARA MARCAS</b><p>Minecraft presenta la mayor media de espectadores de esta selección (34), seguido de Marvel Rivals (33) y Supercar Collection Together (31). Minecraft y Marvel Rivals registran el mayor ritmo de captación disponible: 2 seguidores por hora emitida.</p></aside><footer class="comic-page-footer"><span>CADA DIRECTO, UNA NUEVA MISIÓN</span><b>03 / 04</b></footer></article>';
+ const clipsPanel=clips.map((c,i)=>'<article class="comic-panel comic-clip-card"><div class="comic-panel-heading"><span>0'+(i+1)+'</span><b>ESCENA DESTACADA</b></div><div class="comic-clip-preview"><iframe src="https://clips.twitch.tv/embed?clip='+c.id+'&parent='+encodeURIComponent(location.hostname)+'&autoplay=false" title="Previsualización: '+escapeStatsHtml(c.title)+'" loading="lazy" allowfullscreen></iframe></div><h3>'+c.title+'</h3><p>'+c.note+'</p><a href="https://clips.twitch.tv/'+c.id+'" target="_blank" rel="noopener">VER CLIP COMPLETO ↗</a></article>').join('');
+ const clipsPage='<article class="comic-book-sheet comic-interior-page"><header class="comic-interior-header"><span>LEGIÓN MULTIVERSAL</span><b>CAPÍTULO 03</b><span>EL ESPECTÁCULO</span></header><div class="comic-page-title"><small>EXPEDIENTE MORIARTY · PÁGINA 04</small><h2>ASÍ SE VIVE EL CANAL</h2></div><p class="comic-page-lead">La personalidad también cuenta una historia. Estos momentos muestran el humor, la complicidad y las reacciones que forman parte de la experiencia.</p><div class="comic-clips-grid">'+clipsPanel+'</div><div class="comic-page-split"><section class="comic-panel"><div class="comic-panel-heading"><span>04</span><b>FORMATOS DE COLABORACIÓN</b></div><div class="comic-format-list"><span>Presentación y prueba de videojuegos</span><span>Integraciones naturales en directo</span><span>Retos y dinámicas participativas</span><span>Contenido cooperativo</span><span>Clips y piezas destacadas</span><span>Activaciones con otros creadores</span></div></section><section class="comic-panel comic-partner-panel"><div class="comic-panel-heading"><span>05</span><b>ALIANZAS Y CONEXIONES</b></div><p><b>Partners:</b> Enshrouded · Cinderia.</p><p><b>Plataformas de acceso a juegos:</b> Lurkit y Keymailer.</p></section></div><section class="comic-final-cta"><span>¿PREPARADOS PARA EL PRÓXIMO NÚMERO?</span><h3>HAGAMOS QUE TU MARCA FORME PARTE DE LA HISTORIA.</h3><p>Presentaciones de producto, propuestas comerciales y colaboraciones:</p><a href="mailto:losmoriartys@gmail.com">losmoriartys@gmail.com</a></section><footer class="comic-page-footer"><span>CONTINUARÁ…</span><b>04 / 04</b></footer></article>';
  return [cover,metricsPage,gamesPage,clipsPage];
 }
 document.getElementById('comic-page-prev')?.addEventListener('click',()=>switchModalTab((window.currentModalPage||0)-1));
