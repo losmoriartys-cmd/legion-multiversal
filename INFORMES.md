@@ -915,3 +915,22 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Responsive:** composición de viñetas adaptada a móvil, manteniendo contraste alto y lectura clara.
 - No se modificaron cifras, biografía, código Epic, clips ni enlaces. No se añadieron métricas nuevas.
 - **Pendiente:** verificar visualmente en el sitio publicado en escritorio y móvil, y comprobar la carga de los embeds de Twitch.
+
+
+## 2026-11-05 — Actualización y normalización del Media Kit de MORIARTY
+
+- **Archivo modificado:** `index.html`.
+- **Objetivo:** actualizar las métricas del canal compartido y explicitar períodos, procedencia y límites de interpretación sin atribuirlas personalmente a MORIARTY.
+- **Implementado:**
+  - Se actualizaron las métricas de los últimos 30 días contrastadas el 5 nov 2026 en Streams Charts: 1.145 seguidores totales, 26 espectadores medios, pico de 101 (7 oct 2026), 860 horas vistas, +49 seguidores y 32 h 15 min emitidas. Se añadió enlace a la fuente.
+  - Se actualizó el panel de rendimiento secundario y se retiraron porcentajes comparativos y ratios sin base temporal verificable. Se conserva 102 como vistas en directo del período.
+  - Se corrigieron los encabezados de la tabla de juegos para que las columnas coincidan con sus valores.
+  - Se aclaró que la selección de métricas por juego fue aportada y su período exacto no está identificado; no se compara con los últimos 30 días.
+  - Se aclaró que las 2.695 vistas geográficas son una referencia aportada, sin período especificado y no equivalen a espectadores únicos.
+  - Se mantiene 25–40 años únicamente como estimación cualitativa del creador, no como demografía oficial.
+  - Se explicitó que las métricas de audiencia pertenecen al canal compartido Los Moriartys (Demi + Ari), no a la cuenta personal de MORIARTY. El calendario se identifica como horario habitual declarado por los creadores.
+  - Se conservan los tres clips destacados, sus enlaces, los formatos de colaboración y las referencias a partners/plataformas.
+- **Fuentes:** Streams Charts, perfil público del canal, consultado el 5 nov 2026: https://streamscharts.com/channels/losmoriartys. Geografía y selección de juegos: material aportado por el creador, sin período identificable.
+- **Validaciones:** revisión de bloques editados y coherencia de columnas; no se alteró `data.json` ni la automatización de Twitch. No se atribuyeron datos del canal compartido a MORIARTY individualmente.
+- **Pendientes:** obtener una nueva exportación/captura geográfica con período visible y una tabla de juegos con período y fuente; revisar visualmente en Cloudflare Pages después del despliegue.
+- **Despliegue:** pendiente de verificación.
