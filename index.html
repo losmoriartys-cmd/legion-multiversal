@@ -106,7 +106,8 @@
         .chapter-panel {
             display: none; background: var(--panel-bg);
             border: 5px solid var(--border-color); box-shadow: 10px 10px 0 var(--border-color);
-            padding: 35px; position: relative; animation: fadeIn 0.3s ease-in-out;
+            padding: 68px 35px 35px; position: relative; animation: fadeIn 0.3s ease-in-out;
+            scroll-margin-top: 16px;
         }
         .chapter-panel.active { display: block; }
 
@@ -116,7 +117,7 @@
         }
 
         .chapter-tag {
-            position: absolute; top: -20px; left: 30px;
+            position: absolute; top: 12px; left: 30px;
             background: var(--red-accent); color: #fff;
             font-family: 'Bangers', cursive; font-size: 1.4rem;
             padding: 4px 20px; border: 3px solid var(--border-color);
@@ -212,7 +213,7 @@
         .chapter-cta { flex:0 0 auto;padding:15px 22px;background:#ffde00;color:#080b10;border:3px solid #000;box-shadow:5px 5px 0 #000;font:1.3rem 'Bangers',cursive;letter-spacing:.04em;cursor:pointer; }
         .chapter-cta:hover { background:#00d2ff;transform:translate(-2px,-2px); }
         @media(max-width:850px){.section-heading,.origin-layout{grid-template-columns:1fr}.chapter-cover-art{max-width:680px}.archive-stamp{max-width:420px}.timeline{grid-template-columns:1fr}.dimensions-grid{grid-template-columns:1fr}.dimension{min-height:0}.protagonists-cta{align-items:flex-start;flex-direction:column}}
-        @media(max-width:560px){.chapter-one{padding:28px 18px}.chapter-cover{padding-top:20px}.chapter-main-title{font-size:3.2rem}.timeline{gap:0}.timeline-entry{grid-template-columns:54px 1fr}.timeline:before{left:23px}.timeline-no{width:42px;height:42px}.founding-art-placeholder{min-height:220px;padding:22px}.chapter-cover-meta{flex-direction:column;gap:8px}}
+        @media(max-width:560px){.chapter-one{padding:68px 18px 28px}.chapter-cover{padding-top:20px}.chapter-main-title{font-size:3.2rem}.timeline{gap:0}.timeline-entry{grid-template-columns:54px 1fr}.timeline:before{left:23px}.timeline-no{width:42px;height:42px}.founding-art-placeholder{min-height:220px;padding:22px}.chapter-cover-meta{flex-direction:column;gap:8px}}
 
         .roster-grid {
             display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
