@@ -1973,6 +1973,8 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
                     <h3>CONTENIDO DESTACADO</h3>
                     <div id="modal-extra-text" class="dossier-log-host"></div>
                 </div>
+                <div class="modal-tab-pane" id="modal-pane-4"><div id="modal-lady-page-5" class="dossier-log-host"></div></div>
+                <div class="modal-tab-pane" id="modal-pane-5"><div id="modal-lady-page-6" class="dossier-log-host"></div></div>
 
                 <a id="modal-twitch-btn" href="#" target="_blank" class="twitch-link-btn">⚡ VISITAR CANAL DE TWITCH</a>
             </div>
@@ -2623,13 +2625,47 @@ function updateComicPageControls(enabled){
  if(!nav)return;
  nav.hidden=!enabled;
  if(!enabled)return;
- const page=window.currentModalPage||0,total=4;
+ const page=window.currentModalPage||0,total=window.currentComicTotal||4;
  const count=document.getElementById('comic-page-count');
  const prev=document.getElementById('comic-page-prev'),next=document.getElementById('comic-page-next');
  if(count)count.textContent='PÁGINA '+String(page+1).padStart(2,'0')+' / '+String(total).padStart(2,'0');
  if(prev)prev.disabled=page===0;
  if(next)next.disabled=page===total-1;
 }
+function renderLadyMoriartyComicPages(hero,sullyChannel){
+ const safe=v=>escapeStatsHtml(v===null||v===undefined?'':String(v));
+ const areas=Array.isArray(hero.areas)?hero.areas:[];
+ const profile=twitchMetricsData?.channels?.ladymoriarty01||{};
+ const metrics=profile.metrics||{};
+ const period=profile.period_label||'Período no indicado';
+ const games=Array.isArray(sullyChannel?.game_performance)?sullyChannel.game_performance:[];
+ const record=creatorRecordsData?.channels?.ladymoriarty01||{};
+ const clips=Array.isArray(record.highlights)?record.highlights:[];
+ const page=(n,title,body,foot)=>'<article class="comic-book-sheet comic-interior-page"><header class="comic-interior-header"><span>LEGIÓN MULTIVERSAL</span><b>CAPÍTULO 0'+n+'</b><span>'+foot+'</span></header><div class="comic-page-title"><small>EXPEDIENTE LADYMORIARTY01 · PÁGINA 0'+(n+1)+'</small><h2>'+title+'</h2></div>'+(hero.voice?'<aside class="hero-voice voice-lady"><span>VOZ DE LA BRUJA</span><p>'+safe(hero.voice)+'</p></aside>':'')+body+'<footer class="comic-page-footer"><span>LADYMORIARTY01 · ARCHIVO INDIVIDUAL</span><b>0'+(n+1)+' / 06</b></footer></article>';
+ const cover='<article class="comic-book-sheet comic-cover-sheet"><header class="comic-cover-masthead"><b>LEGIÓN MULTIVERSAL</b><span>EXPEDIENTE INDIVIDUAL · N.º '+safe(hero.cardNumber||'S/N')+'</span><span>MEDIA KIT</span></header><div class="comic-cover-art-frame"><span class="comic-cover-burst">EXPEDIENTE<br>CLASIFICADO</span><img class="comic-cover-art" src="'+safe(hero.img)+'" alt="Carta oficial de LADYMORIARTY01"></div><div class="comic-cover-copy"><div class="comic-cover-titleline"><span>PROTAGONISTA</span><h2>LADYMORIARTY01</h2><b>'+safe(hero.series||'01')+'</b></div><p class="comic-cover-subtitle">'+safe(hero.codename)+' · '+safe(hero.characterRole)+'</p><section class="comic-panel comic-cover-bio"><div class="comic-panel-heading"><span>01</span><b>IDENTIDAD SECRETA · PERFIL DE LA HEROÍNA</b></div><p>'+safe(hero.bio)+'</p><p class="comic-panel-caption">Canal individual de Ari. Sus métricas y trayectoria se presentan por separado del canal compartido Los Moriartys.</p></section><footer class="comic-cover-footer"><span>'+areas.map(safe).join(' · ')+'</span><b>¡ABRIR EXPEDIENTE!</b></footer></div></article>';
+ const identityBody='<div class="comic-page-split"><section class="comic-panel"><div class="comic-panel-heading"><span>01</span><b>IDENTIDAD Y ESTILO</b></div><h3>'+safe(hero.codename)+' · '+safe(hero.characterRole)+'</h3><p>'+safe(hero.log)+'</p></section><section class="comic-panel"><div class="comic-panel-heading"><span>02</span><b>CAPACIDADES DEL PERSONAJE</b></div><h3>'+safe(hero.rank)+'</h3><p>'+safe(hero.powerSet)+'</p><p class="comic-panel-caption">'+safe(hero.powers)+'</p></section></div><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>03</span><b>UNIVERSOS Y FORMATOS</b></div><div class="comic-format-list">'+areas.map(v=>'<span>'+safe(v)+'</span>').join('')+'</div><p class="comic-panel-caption">La identidad narrativa de la carta representa al personaje; no es una certificación ni una métrica de rendimiento.</p></section>';
+ const identityPage=page(1,'LA BRUJA: IDENTIDAD PROPIA',identityBody,'EL PERSONAJE');
+ let metricCards='';
+ [['Seguidores',metrics.followers,'total publicado'],['Nuevos seguidores','+'+(metrics.follower_change??'—'),'ventana consultada'],['Horas vistas',metrics.viewer_hours,'ventana consultada'],['Pico de espectadores',metrics.peak_viewers,'ventana consultada'],['Horas en directo',metrics.hours_live,'ventana consultada'],['Promedio',metrics.average_viewers,'ventana consultada']].forEach(v=>metricCards+='<article class="comic-metric"><span>'+v[0]+'</span><strong>'+safe(v[1])+'</strong><small>'+v[2]+'</small></article>');
+ const statsBody='<section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>01</span><b>SEÑALES DE AUDIENCIA</b></div><p class="comic-panel-caption">TwitchMetrics · '+safe(period)+' · consulta 4 nov 2026. Esta fuente externa registra una muestra pública limitada; no debe interpretarse como el historial completo del canal.</p><div class="comic-metric-grid">'+metricCards+'</div></section><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>02</span><b>ALCANCE OBSERVADO</b></div><p>En la ventana consultada se informan 59 horas vistas, un pico de 33 espectadores y una variación de +17 seguidores. El promedio publicado fue de 19 espectadores.</p><p class="comic-panel-caption">Los indicadores pertenecen exclusivamente a LADYMORIARTY01. No se suman ni se comparan con las estadísticas de MORIARTYS.</p><a href="'+safe(profile.source_url||'https://www.twitchmetrics.net/c/710295249-ladymoriarty01')+'" target="_blank" rel="noopener">CONSULTAR FUENTE TWITCHMETRICS ↗</a></section>';
+ const statsPage=page(2,'EL PODER DE SU COMUNIDAD',statsBody,'LA AUDIENCIA');
+ let gameRows='';
+ games.forEach(g=>gameRows+='<tr><th>'+safe(g.name)+'</th><td>'+safe(g.stream_time_hours)+' h</td><td>'+safe(g.stream_time_share)+'</td><td>'+safe(g.watch_time_hours)+' h</td><td>'+safe(g.watch_time_share)+'</td><td>'+safe(g.average_viewers)+'</td><td>'+safe(g.peak_viewers)+'</td></tr>');
+ const gamesBody='<p class="comic-page-lead">Seis juegos registrados en la tabla de SullyGnome para la ventana de los últimos 30 días. Las horas emitidas se reproducen tal como aparecen en la fuente, incluso cuando figuran redondeadas a cero.</p><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>01</span><b>REGISTRO DE UNIVERSOS</b></div><div class="stats-table-wrap"><table class="comic-games-table"><thead><tr><th>Juego</th><th>Emitidas</th><th>% tiempo</th><th>Vistas</th><th>% vistas</th><th>Media</th><th>Pico</th></tr></thead><tbody>'+gameRows+'</tbody></table></div><p class="comic-panel-caption">Fuente: <a href="https://sullygnome.com/channel/ladymoriarty01/games" target="_blank" rel="noopener">SullyGnome · juegos ↗</a>. Período: últimos 30 días. Las cifras y porcentajes corresponden a las columnas de la tabla consultada.</p></section><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>02</span><b>LECTURA DESTACADA</b></div><p>Aniimo lidera esta selección en horas vistas (28 h), promedio (23) y pico (33). Assassin’s Creed Odyssey registra 26 horas vistas y un promedio de 17 espectadores.</p></section>';
+ const gamesPage=page(3,'CADA JUEGO, UNA NUEVA HISTORIA',gamesBody,'LAS MISIONES');
+ let clipsHtml='';
+ clips.forEach((c,i)=>{
+  clipsHtml+='<article class="comic-panel comic-clip-card"><div class="comic-panel-heading"><span>0'+(i+1)+'</span><b>MOMENTO DESTACADO</b></div><div class="comic-clip-preview"><iframe src="https://clips.twitch.tv/embed?clip='+encodeURIComponent(c.clip_id||'')+'&parent='+encodeURIComponent(location.hostname)+'&autoplay=false" title="Clip de LADYMORIARTY01" loading="lazy" allowfullscreen></iframe></div><h3>'+safe(c.title||('Momento destacado 0'+(i+1)))+'</h3><a href="https://clips.twitch.tv/'+encodeURIComponent(c.clip_id||'')+'" target="_blank" rel="noopener">VER CLIP COMPLETO ↗</a></article>';
+ });
+ const clipsBody='<p class="comic-page-lead">Una selección de momentos del canal. Los títulos se mantienen neutrales mientras no haya una descripción editorial confirmada.</p><div class="comic-clips-grid">'+(clipsHtml||'<p>Clips pendientes de incorporar.</p>')+'</div>';
+ const clipsPage=page(4,'MOMENTOS FUERA DEL GUIÓN',clipsBody,'EL ESPECTÁCULO');
+ const collabs=Array.isArray(record.collaborations)?record.collaborations:[];
+ const milestones=Array.isArray(record.milestones)?record.milestones:[];
+ const collabBody='<div class="comic-page-split"><section class="comic-panel"><div class="comic-panel-heading"><span>01</span><b>COLABORACIONES CONFIRMADAS</b></div>'+(collabs.length?'<ul class="profile-detail-list">'+collabs.map(c=>'<li><b>'+safe(c.title)+'</b> '+safe(c.description||'')+'</li>').join('')+'</ul>':'<p>Sin colaboraciones comerciales confirmadas cargadas en el expediente individual.</p>')+'</section><section class="comic-panel"><div class="comic-panel-heading"><span>02</span><b>HITOS Y TRAYECTORIA</b></div>'+(milestones.length?'<ul class="profile-detail-list">'+milestones.map(m=>'<li>'+safe(m.title)+' '+safe(m.description||'')+'</li>').join('')+'</ul>':'<p>Registro histórico pendiente de documentación verificable.</p>')+'</section></div><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>03</span><b>FORMATOS PARA EXPLORAR</b></div><div class="comic-format-list"><span>Gaming y presentación de videojuegos</span><span>Entretenimiento y conversación</span><span>Experiencias IRL</span><span>Clips y momentos destacados</span></div><p class="comic-panel-caption">Líneas potenciales de colaboración, no campañas contratadas ni alianzas vigentes. Contacto comercial pendiente de confirmar.</p></section><section class="comic-final-cta"><span>PRÓXIMO NÚMERO · NUEVAS HISTORIAS</span><h3>QUE TU MARCA ENTRE EN EL UNIVERSO DE LA BRUJA.</h3><p>Propuestas sujetas a conversación y aprobación de LADYMORIARTY01.</p></section>';
+ const collabPage=page(5,'EL UNIVERSO DE LAS COLABORACIONES',collabBody,'NUEVAS ALIANZAS');
+ return [cover,identityPage,statsPage,gamesPage,clipsPage,collabPage];
+}
+
 function renderRosterComicPages(hero,index,channelStats,sullyChannel){
  const safe=v=>escapeStatsHtml(v||'');
  const identity=hero.codename||'IDENTIDAD EN ARCHIVO';
@@ -2690,6 +2726,7 @@ function openHeroModal(index) {
     const modal=document.getElementById('hero-modal');
     const modalContent=modal.querySelector('.modal-content');
     const isMoriartys=hero.name==='MORIARTYS';
+    const isLady=hero.name==='LADYMORIARTY';
     document.getElementById('modal-hero-title').innerText = 'MEDIA KIT · ' + hero.name;
     document.getElementById('modal-tab-navigation').hidden=true;
     document.getElementById('modal-comic-navigation').hidden=false;
@@ -2697,6 +2734,8 @@ function openHeroModal(index) {
     let pages;
     if(isMoriartys){
         pages=renderMoriartysComicPages(hero);
+    }else if(isLady){
+        pages=renderLadyMoriartyComicPages(hero,findSullyChannel(hero));
     }else{
         const channelStats=findChannelStats(hero);
         const sullyChannel=findSullyChannel(hero);
@@ -2706,11 +2745,16 @@ function openHeroModal(index) {
     document.getElementById('modal-stats-text').innerHTML=pages[1];
     document.getElementById('modal-log-text').innerHTML=pages[2];
     document.getElementById('modal-extra-text').innerHTML=pages[3];
+    const fifth=document.getElementById('modal-lady-page-5');
+    const sixth=document.getElementById('modal-lady-page-6');
+    if(fifth)fifth.innerHTML=pages[4]||'';
+    if(sixth)sixth.innerHTML=pages[5]||'';
+    window.currentComicTotal=pages.length;
     document.getElementById('modal-twitch-btn').href = hero.youtube || hero.twitch || "#";
     document.getElementById('modal-twitch-btn').textContent = hero.youtube ? "VISITAR CANAL DE YOUTUBE" : "VISITAR CANAL";
     modal.classList.add('active');
     switchModalTab(0, true);
-    updateComicPageControls(isMoriartys);
+    updateComicPageControls(true);
 }
         function closeModal() {
             document.getElementById('hero-modal').classList.remove('active');
@@ -2718,10 +2762,10 @@ function openHeroModal(index) {
 
         function switchModalTab(tabIndex, silent = false) {
             const isComic=document.querySelector('.modal-content')?.classList.contains('comic-mode');
-            const maxPage=isComic?4:3;
+            const maxPage=isComic?(window.currentComicTotal||4):3;
             const previousIndex=window.currentModalPage??0;
             tabIndex=Math.max(0,Math.min(maxPage-1,Number(tabIndex)||0));
-            for(let t=0;t<4;t++){
+            for(let t=0;t<6;t++){
                 const pane=document.getElementById(`modal-pane-${t}`);
                 const btn=document.querySelectorAll('.modal-tab-btn')[t];
                 if(pane)pane.classList.toggle('active',t===tabIndex);
