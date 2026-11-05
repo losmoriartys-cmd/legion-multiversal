@@ -3,12 +3,12 @@
   "source": "Twitch Helix API",
   "window_days": 30,
   "sampling_interval_minutes": 15,
-  "updated_at": "2026-11-05T02:35:42Z",
+  "updated_at": "2026-11-05T03:31:35Z",
   "channels": {
     "ladymoriarty01": {
       "login": "ladymoriarty01",
       "display_name": "LadyMoriarty01",
-      "description": "Canal secundario de Los Moriartys (https://www.twitch.tv/losmoriartys). Acá encontraran gameplay chill, IRL y lo que se me cante en el momento....Lo importante es divertirnos y pasarla bien 💜",
+      "description": "Canal secundario de Los Moriartys (https://www.twitch.tv/losmoriartys). Acá encontraran gameplay chill, IRL y lo que se me ocurra en el momento....Lo importante es divertirnos y pasarla bien 💜",
       "profile_image_url": "https://static-cdn.jtvnw.net/jtv_user_pictures/1729ff07-94b4-4b9f-a03e-a10142f3a658-profile_image-300x300.jpeg",
       "twitch_url": "https://twitch.tv/ladymoriarty01",
       "followers_total": null,
@@ -18,9 +18,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-05T02:35:42Z",
+      "updated_at": "2026-11-05T03:31:35Z",
       "window": {
-        "samples_total": 37,
+        "samples_total": 38,
         "live_samples": 2,
         "streams_observed": 1,
         "average_viewers_sampled": 2.0,
@@ -387,6 +387,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-05T03:31:35Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -398,14 +407,14 @@
       "twitch_url": "https://twitch.tv/ther0d3r1k",
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
-      "live": true,
-      "current_viewers": 11,
-      "current_game": "Fortnite",
-      "current_title": "🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
-      "stream_started_at": "2026-11-04T22:56:00Z",
-      "updated_at": "2026-11-05T02:35:42Z",
+      "live": false,
+      "current_viewers": null,
+      "current_game": null,
+      "current_title": null,
+      "stream_started_at": null,
+      "updated_at": "2026-11-05T03:31:35Z",
       "window": {
-        "samples_total": 37,
+        "samples_total": 38,
         "live_samples": 9,
         "streams_observed": 2,
         "average_viewers_sampled": 19.7,
@@ -800,6 +809,15 @@
           "title": "🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
           "stream_id": "319422843765",
           "started_at": "2026-11-04T22:56:00Z"
+        },
+        {
+          "sampled_at": "2026-11-05T03:31:35Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -816,9 +834,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-05T02:35:42Z",
+      "updated_at": "2026-11-05T03:31:35Z",
       "window": {
-        "samples_total": 37,
+        "samples_total": 38,
         "live_samples": 2,
         "streams_observed": 2,
         "average_viewers_sampled": 7.0,
@@ -1192,6 +1210,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-05T03:31:35Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -1208,9 +1235,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-05T02:35:42Z",
+      "updated_at": "2026-11-05T03:31:35Z",
       "window": {
-        "samples_total": 37,
+        "samples_total": 38,
         "live_samples": 3,
         "streams_observed": 1,
         "average_viewers_sampled": 6.3,
@@ -1570,6 +1597,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-05T03:31:35Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -1581,14 +1617,14 @@
       "twitch_url": "https://twitch.tv/akumazoldyck",
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
-      "live": true,
-      "current_viewers": 6,
-      "current_game": "Can 'Em All",
-      "current_title": "TENEMOS UN BAAAAR!!!",
-      "stream_started_at": "2026-11-05T00:58:35Z",
-      "updated_at": "2026-11-05T02:35:42Z",
+      "live": false,
+      "current_viewers": null,
+      "current_game": null,
+      "current_title": null,
+      "stream_started_at": null,
+      "updated_at": "2026-11-05T03:31:35Z",
       "window": {
-        "samples_total": 37,
+        "samples_total": 38,
         "live_samples": 6,
         "streams_observed": 2,
         "average_viewers_sampled": 5.7,
@@ -1962,6 +1998,15 @@
           "title": "TENEMOS UN BAAAAR!!!",
           "stream_id": "322095164889",
           "started_at": "2026-11-05T00:58:35Z"
+        },
+        {
+          "sampled_at": "2026-11-05T03:31:35Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -1973,14 +2018,14 @@
       "twitch_url": "https://twitch.tv/daved0608",
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
-      "live": true,
-      "current_viewers": 2,
-      "current_game": "Fortnite",
-      "current_title": "Buscando el one pice.",
-      "stream_started_at": "2026-11-05T01:34:31Z",
-      "updated_at": "2026-11-05T02:35:42Z",
+      "live": false,
+      "current_viewers": null,
+      "current_game": null,
+      "current_title": null,
+      "stream_started_at": null,
+      "updated_at": "2026-11-05T03:31:35Z",
       "window": {
-        "samples_total": 37,
+        "samples_total": 38,
         "live_samples": 5,
         "streams_observed": 2,
         "average_viewers_sampled": 1.2,
@@ -2354,6 +2399,15 @@
           "title": "Buscando el one pice.",
           "stream_id": "322270562651",
           "started_at": "2026-11-05T01:34:31Z"
+        },
+        {
+          "sampled_at": "2026-11-05T03:31:35Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -2370,9 +2424,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-05T02:35:42Z",
+      "updated_at": "2026-11-05T03:31:35Z",
       "window": {
-        "samples_total": 37,
+        "samples_total": 38,
         "live_samples": 0,
         "streams_observed": 0,
         "average_viewers_sampled": null,
@@ -2716,6 +2770,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-05T03:31:35Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -2732,9 +2795,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-05T02:35:42Z",
+      "updated_at": "2026-11-05T03:31:35Z",
       "window": {
-        "samples_total": 37,
+        "samples_total": 38,
         "live_samples": 2,
         "streams_observed": 1,
         "average_viewers_sampled": 2.5,
@@ -3101,6 +3164,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-05T03:31:35Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -3117,9 +3189,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-05T02:35:42Z",
+      "updated_at": "2026-11-05T03:31:35Z",
       "window": {
-        "samples_total": 37,
+        "samples_total": 38,
         "live_samples": 3,
         "streams_observed": 1,
         "average_viewers_sampled": 19.0,
@@ -3480,6 +3552,15 @@
         },
         {
           "sampled_at": "2026-11-05T02:35:42Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-05T03:31:35Z",
           "is_live": false,
           "viewer_count": null,
           "game_name": null,
