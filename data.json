@@ -3,7 +3,7 @@
   "source": "Twitch Helix API",
   "window_days": 30,
   "sampling_interval_minutes": 15,
-  "updated_at": "2026-11-05T23:10:27Z",
+  "updated_at": "2026-11-05T23:50:21Z",
   "channels": {
     "ladymoriarty01": {
       "login": "ladymoriarty01",
@@ -14,17 +14,17 @@
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
       "live": true,
-      "current_viewers": 4,
+      "current_viewers": 7,
       "current_game": "Once Human",
       "current_title": "[Once Human] - Capitulo 1 - Se arranca una historia terrorifica",
       "stream_started_at": "2026-11-05T22:56:29Z",
-      "updated_at": "2026-11-05T23:10:27Z",
+      "updated_at": "2026-11-05T23:50:21Z",
       "window": {
-        "samples_total": 58,
-        "live_samples": 3,
+        "samples_total": 59,
+        "live_samples": 4,
         "streams_observed": 2,
-        "average_viewers_sampled": 2.7,
-        "peak_viewers_sampled": 4,
+        "average_viewers_sampled": 3.8,
+        "peak_viewers_sampled": 7,
         "observed_live_hours": 0.0,
         "estimated_hours_watched": 0.0,
         "game_breakdown": [
@@ -37,10 +37,10 @@
           },
           {
             "name": "Once Human",
-            "live_samples": 1,
+            "live_samples": 2,
             "streams_observed": 1,
-            "average_viewers_sampled": 4.0,
-            "peak_viewers_sampled": 4
+            "average_viewers_sampled": 5.5,
+            "peak_viewers_sampled": 7
           }
         ],
         "daily_activity": [
@@ -53,10 +53,10 @@
           },
           {
             "date": "2026-11-05",
-            "live_samples": 2,
+            "live_samples": 3,
             "streams_observed": 2,
-            "average_viewers_sampled": 3.5,
-            "peak_viewers_sampled": 4
+            "average_viewers_sampled": 4.7,
+            "peak_viewers_sampled": 7
           }
         ],
         "method": "Muestreo propio cada 15 minutos; horas estimadas solo entre muestras consecutivas del mismo directo. Categorías y evolución diaria se calculan sobre las muestras observadas."
@@ -583,6 +583,15 @@
           "title": "[Once Human] - Capitulo 1 - Se arranca una historia terrorifica",
           "stream_id": "319365858038",
           "started_at": "2026-11-05T22:56:29Z"
+        },
+        {
+          "sampled_at": "2026-11-05T23:50:21Z",
+          "is_live": true,
+          "viewer_count": 7,
+          "game_name": "Once Human",
+          "title": "[Once Human] - Capitulo 1 - Se arranca una historia terrorifica",
+          "stream_id": "319365858038",
+          "started_at": "2026-11-05T22:56:29Z"
         }
       ]
     },
@@ -595,16 +604,16 @@
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
       "live": true,
-      "current_viewers": 8,
-      "current_game": "Just Chatting",
+      "current_viewers": 14,
+      "current_game": "Counter-Strike",
       "current_title": "🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
       "stream_started_at": "2026-11-05T22:56:39Z",
-      "updated_at": "2026-11-05T23:10:27Z",
+      "updated_at": "2026-11-05T23:50:21Z",
       "window": {
-        "samples_total": 58,
-        "live_samples": 10,
+        "samples_total": 59,
+        "live_samples": 11,
         "streams_observed": 3,
-        "average_viewers_sampled": 18.5,
+        "average_viewers_sampled": 18.1,
         "peak_viewers_sampled": 40,
         "observed_live_hours": 0.0,
         "estimated_hours_watched": 0.0,
@@ -618,9 +627,9 @@
           },
           {
             "name": "Counter-Strike",
-            "live_samples": 2,
-            "streams_observed": 1,
-            "average_viewers_sampled": 31.5,
+            "live_samples": 3,
+            "streams_observed": 2,
+            "average_viewers_sampled": 25.7,
             "peak_viewers_sampled": 40
           },
           {
@@ -655,9 +664,9 @@
           },
           {
             "date": "2026-11-05",
-            "live_samples": 4,
+            "live_samples": 5,
             "streams_observed": 2,
-            "average_viewers_sampled": 19.2,
+            "average_viewers_sampled": 18.2,
             "peak_viewers_sampled": 38
           }
         ],
@@ -1185,6 +1194,15 @@
           "title": "🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
           "stream_id": "319433849333",
           "started_at": "2026-11-05T22:56:39Z"
+        },
+        {
+          "sampled_at": "2026-11-05T23:50:21Z",
+          "is_live": true,
+          "viewer_count": 14,
+          "game_name": "Counter-Strike",
+          "title": "🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
+          "stream_id": "319433849333",
+          "started_at": "2026-11-05T22:56:39Z"
         }
       ]
     },
@@ -1201,9 +1219,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-05T23:10:27Z",
+      "updated_at": "2026-11-05T23:50:21Z",
       "window": {
-        "samples_total": 58,
+        "samples_total": 59,
         "live_samples": 2,
         "streams_observed": 2,
         "average_viewers_sampled": 7.0,
@@ -1766,6 +1784,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-05T23:50:21Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -1782,9 +1809,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-05T23:10:27Z",
+      "updated_at": "2026-11-05T23:50:21Z",
       "window": {
-        "samples_total": 58,
+        "samples_total": 59,
         "live_samples": 3,
         "streams_observed": 1,
         "average_viewers_sampled": 6.3,
@@ -2333,6 +2360,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-05T23:50:21Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -2349,9 +2385,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-05T23:10:27Z",
+      "updated_at": "2026-11-05T23:50:21Z",
       "window": {
-        "samples_total": 58,
+        "samples_total": 59,
         "live_samples": 6,
         "streams_observed": 2,
         "average_viewers_sampled": 5.7,
@@ -2914,6 +2950,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-05T23:50:21Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -2930,9 +2975,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-05T23:10:27Z",
+      "updated_at": "2026-11-05T23:50:21Z",
       "window": {
-        "samples_total": 58,
+        "samples_total": 59,
         "live_samples": 5,
         "streams_observed": 2,
         "average_viewers_sampled": 1.2,
@@ -3495,6 +3540,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-05T23:50:21Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -3511,9 +3565,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-05T23:10:27Z",
+      "updated_at": "2026-11-05T23:50:21Z",
       "window": {
-        "samples_total": 58,
+        "samples_total": 59,
         "live_samples": 0,
         "streams_observed": 0,
         "average_viewers_sampled": null,
@@ -4046,6 +4100,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-05T23:50:21Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -4062,9 +4125,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-05T23:10:27Z",
+      "updated_at": "2026-11-05T23:50:21Z",
       "window": {
-        "samples_total": 58,
+        "samples_total": 59,
         "live_samples": 5,
         "streams_observed": 2,
         "average_viewers_sampled": 1.8,
@@ -4627,6 +4690,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-05T23:50:21Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -4643,9 +4715,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-05T23:10:27Z",
+      "updated_at": "2026-11-05T23:50:21Z",
       "window": {
-        "samples_total": 58,
+        "samples_total": 59,
         "live_samples": 3,
         "streams_observed": 1,
         "average_viewers_sampled": 19.0,
@@ -5195,6 +5267,15 @@
         },
         {
           "sampled_at": "2026-11-05T23:10:27Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-05T23:50:21Z",
           "is_live": false,
           "viewer_count": null,
           "game_name": null,
