@@ -2506,6 +2506,7 @@ function renderRoster() {
 function openHeroProfile(index) {
     const hero = heroesData[index];
     if (!hero) return;
+    if (hero.name === 'MORIARTYS') { openHeroModal(index); return; }
     const home = document.getElementById('roster-home');
     const page = document.getElementById('hero-profile-page');
     if (!home || !page) return;
