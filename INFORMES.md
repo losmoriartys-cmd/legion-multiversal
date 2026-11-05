@@ -902,3 +902,16 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Diseño:** se sustituyeron los amarillos pálidos y blancos de bajo contraste por una paleta azul marino, cian y tonos tinta, con colores diferenciados para texto sobre papel claro y tarjetas oscuras. Se ajustaron títulos, tablas, gráficos, paneles y clips en las cuatro páginas.
 - **Datos:** no se modificaron las cifras existentes, la geografía, los títulos/enlaces de los clips ni las colaboraciones. No se publicó ninguna cifra nueva.
 - **Pendiente de validación:** comprobar visualmente en el sitio de Cloudflare Pages, especialmente la altura de la carta, los embeds de Twitch y el contraste en móvil/escritorio.
+
+
+## 2026-11-05 — Convertir el Media Kit de MORIARTY en un cómic editorial completo
+
+- El creador aclaró que el Media Kit debe leerse como un cómic completo: la portada es la carta del streamer y las páginas siguientes son páginas interiores de historieta, no un informe convencional con colores de cómic.
+- **Portada:** cabecera de edición/número, carta protagonista a gran escala, título del personaje, sello gráfico tipo explosión, biografía del canal, código de creador Epic Games y pie editorial.
+- **Páginas interiores:** audiencia, juegos y clips remaquetados como páginas de historieta con cabeceras de capítulo, numeración de viñetas, paneles de distintos tamaños, globo de diálogo, llamadas de impacto, marcos de tinta, textura de papel y pies de página.
+- **Audiencia:** métricas y distribución geográfica agrupadas en viñetas; estimación cualitativa de edad dentro de un globo de diálogo.
+- **Juegos:** gráficos, tabla y lectura comercial integrados en paneles narrativos.
+- **Clips:** cada previsualización presentada como viñeta con título, descripción y enlace a Twitch.
+- **Responsive:** composición de viñetas adaptada a móvil, manteniendo contraste alto y lectura clara.
+- No se modificaron cifras, biografía, código Epic, clips ni enlaces. No se añadieron métricas nuevas.
+- **Pendiente:** verificar visualmente en el sitio publicado en escritorio y móvil, y comprobar la carga de los embeds de Twitch.
