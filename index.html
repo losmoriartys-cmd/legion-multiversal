@@ -2202,7 +2202,7 @@ function renderMissionArchive(hero){
     if(item.date)out+='<p>FECHA · '+statsDate(item.date)+'</p>';
     if(item.description && !item.description.includes('Pendiente de descripción editorial'))out+='<p>'+escapeStatsHtml(item.description)+'</p>';
     if(item.platform==='twitch' && item.clip_id){
-     out+='<div class="mission-clip-embed"><iframe src="https://clips.twitch.tv/embed?clip='+encodeURIComponent(item.clip_id)+'&parent=losmoriartys-cmd.github.io" title="'+escapeStatsHtml(item.title||'Clip de Twitch')+'" loading="lazy" allowfullscreen="true" scrolling="no"></iframe></div>';
+     out+='<div class="mission-clip-embed"><iframe src="https://clips.twitch.tv/embed?clip='+encodeURIComponent(item.clip_id)+'&parent='+encodeURIComponent(location.hostname)+'" title="'+escapeStatsHtml(item.title||'Clip de Twitch')+'" loading="lazy" allowfullscreen="true" scrolling="no"></iframe></div>';
      out+='<a href="https://clips.twitch.tv/'+encodeURIComponent(item.clip_id)+'" target="_blank" rel="noopener">ABRIR EN TWITCH ↗</a>';
     }else if(item.url)out+='<a href="'+escapeStatsHtml(item.url)+'" target="_blank" rel="noopener">VER DETALLE ↗</a>';
     out+='</article>';
