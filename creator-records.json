@@ -53,7 +53,26 @@
     "ladymoriarty01": {
       "milestones": [],
       "collaborations": [],
-      "highlights": []
+      "highlights": [
+        {
+          "title": "Momento destacado 01",
+          "platform": "twitch",
+          "clip_id": "VainPluckyPrariedogBuddhaBar-MFzfVejHyMIbsWyS",
+          "source": "Enlace de clip proporcionado para el expediente por el equipo"
+        },
+        {
+          "title": "Momento destacado 02",
+          "platform": "twitch",
+          "clip_id": "ThankfulCogentCodMikeHogu-DUWGz_j_OIBmWYbQ",
+          "source": "Enlace de clip proporcionado para el expediente por el equipo"
+        },
+        {
+          "title": "Momento destacado 03",
+          "platform": "twitch",
+          "clip_id": "WittySecretiveAmazonWholeWheat-_YY-Mo8YtTK4nra7",
+          "source": "Enlace de clip proporcionado para el expediente por el equipo"
+        }
+      ]
     },
     "ther0d3r1k": {
       "milestones": [],
