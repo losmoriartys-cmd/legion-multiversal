@@ -966,3 +966,21 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - ORATORIS se presenta como colaborador y comunicador de YouTube, sin atribuirle métricas de Twitch.
 - **Commit:** [`bff1ff3a`](https://github.com/losmoriartys-cmd/legion-multiversal/commit/bff1ff3a3395c3be189edb16fb00704bb9e46641).
 - **Despliegue:** pendiente de verificación visual en el sitio publicado.
+
+
+## 2026-11-05 · Voz narrativa individual en los expedientes
+
+Se incorporó una frase de voz propia para cada integrante y para el expediente compartido MORIARTYS. La voz aparece en la portada del cómic y como recurso editorial en las páginas interiores del expediente, para reforzar la identidad narrativa sin depender únicamente del nombre o del arte.
+
+- MORIARTYS: tono cercano, cooperativo y de videoclub compartido.
+- ROD3R1K: energía, espectáculo y espíritu de equipo.
+- LADYMORIARTY: improvisación, libertad y magia espontánea.
+- CAPY: lectura táctica, velocidad y coordinación.
+- ARDIPII: bienvenida, comunidad y calma.
+- AKUMA: encuentro nocturno, conversación y energía.
+- ELGABII: creación, prueba y construcción.
+- DAVE — NEXUS: conexión entre sistemas y mundos, sin inventar biografía personal.
+- PATO — ORATORIS: pensamiento claro, explicación y estrategia.
+- HABITOS: reflexión, aprendizaje y constancia.
+
+**Alcance del cambio:** solo se añadieron líneas de voz y su presentación visual en los expedientes. No se modificaron poderes, ilustraciones, estadísticas, horarios ni datos comerciales. Cambios publicados en main.
