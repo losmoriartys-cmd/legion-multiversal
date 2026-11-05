@@ -889,3 +889,16 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - Los demás integrantes conservan el flujo actual de expediente individual.
 - **Commit:** `aaca301e79ef14df239e6ba0f68b5fe1aa9c3b9f`.
 - **Despliegue:** iniciado automáticamente; pendiente de comprobación final.
+
+
+## 2026-11-05 — Rediseñar el media kit de MORIARTY según feedback visual y comercial
+
+- **Solicitud:** mejorar contraste y coherencia cromática; dar protagonismo a la carta de superhéroe en la primera página; usar la biografía real de Twitch; retirar leyendas metodológicas indicadas; simplificar la tabla de juegos; previsualizar clips e incorporar el código de creador de Epic Games.
+- **Archivo de interfaz:** `index.html`.
+- **Primera página:** la ilustración/carta de MORIARTY ocupa ahora el ancho y la mayor parte de la apertura del expediente. Debajo se presenta la biografía compartida por el creador para su canal y un bloque destacado «Código de creador · Epic Games» con el código **LosMoriartys**.
+- **Página 2:** se retiró la leyenda institucional sobre canal compartido y el bloque de fuente/metodología que el usuario pidió eliminar. Se conserva la referencia cualitativa de audiencia de 25–40 años y el desglose geográfico de 2.695 vistas.
+- **Página 3:** se eliminó la columna «Horas vistas» de la tabla y el texto aclaratorio metodológico solicitado; también se retiró la mención de horas vistas de Fortnite en la lectura comercial para no mantener un dato fuera de la tabla.
+- **Página 4:** cada clip ahora incluye un reproductor embebido de Twitch con carga diferida y enlace directo alternativo.
+- **Diseño:** se sustituyeron los amarillos pálidos y blancos de bajo contraste por una paleta azul marino, cian y tonos tinta, con colores diferenciados para texto sobre papel claro y tarjetas oscuras. Se ajustaron títulos, tablas, gráficos, paneles y clips en las cuatro páginas.
+- **Datos:** no se modificaron las cifras existentes, la geografía, los títulos/enlaces de los clips ni las colaboraciones. No se publicó ninguna cifra nueva.
+- **Pendiente de validación:** comprobar visualmente en el sitio de Cloudflare Pages, especialmente la altura de la carta, los embeds de Twitch y el contraste en móvil/escritorio.
