@@ -1254,6 +1254,45 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
         }
         #chapter-2 .institute-banner h3,
         #chapter-2 .institute-banner p { color:#17131b; }
+        #chapter-2 .institute-stamp {
+            flex:0 0 132px;
+            width:132px;
+            height:132px;
+            padding:9px;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            justify-content:center;
+            gap:5px;
+            border:2px solid #9a7426;
+            outline:1px solid rgba(255,255,255,.72);
+            outline-offset:-6px;
+            background:radial-gradient(circle at 50% 38%,#fff8d8 0,#e8d49c 58%,#c7a75d 100%);
+            box-shadow:0 0 0 4px #171d2a,0 0 18px rgba(255,221,125,.42),5px 6px 0 #05070b;
+            transform:rotate(-2deg);
+        }
+        #chapter-2 .institute-stamp img {
+            display:block;
+            width:82px;
+            height:82px;
+            object-fit:contain;
+            filter:drop-shadow(0 3px 3px rgba(0,0,0,.25));
+        }
+        #chapter-2 .institute-stamp span {
+            color:#292317;
+            font-family:'Bangers',cursive;
+            font-size:.72rem;
+            font-weight:900;
+            letter-spacing:1.2px;
+            line-height:1;
+            text-align:center;
+        }
+        #chapter-2 .institute-banner-copy { flex:1;min-width:0; }
+        @media(max-width:560px) {
+            #chapter-2 .institute-stamp { flex-basis:104px;width:104px;height:104px;padding:7px; }
+            #chapter-2 .institute-stamp img { width:62px;height:62px; }
+            #chapter-2 .institute-stamp span { font-size:.58rem;letter-spacing:.8px; }
+        }
         #chapter-2 .roster-section {
             padding:clamp(14px,2vw,22px);
             margin:30px 0 38px;
@@ -1529,7 +1568,7 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
         <section id="chapter-2" class="chapter-panel comic-page">
             <div class="chapter-tag">CAPÍTULO 02</div>
             <h2 class="comic-title">LEGIÓN MULTIVERSAL — NUESTRO ROSTER</h2>
-            <div class="institute-banner"><div class="institute-stamp">ARCHIVO<br>DE LA LEGIÓN</div><div><h3>UN LUGAR PARA CADA TALENTO EXTRAORDINARIO</h3><p>Una comunidad de creadores con identidades y especialidades diferentes. Cada integrante tiene un expediente propio y un lugar dentro de este universo compartido.</p></div></div>
+            <div class="institute-banner"><div class="institute-stamp" aria-label="Emblema oficial de la Legión Multiversal"><img src="legion_logo_final_hybrid.png" alt="Emblema de Legión Multiversal"><span>ARCHIVO DE LA LEGIÓN</span></div><div class="institute-banner-copy"><h3>UN LUGAR PARA CADA TALENTO EXTRAORDINARIO</h3><p>Una comunidad de creadores con identidades y especialidades diferentes. Cada integrante tiene un expediente propio y un lugar dentro de este universo compartido.</p></div></div>
             <div id="roster-home">
               <p class="roster-intro">Seleccioná un área para explorar sus integrantes o elegí directamente un retrato para abrir su expediente individual.</p>
               <nav class="institute-counts roster-jump-nav" id="roster-counts" aria-label="Accesos directos a las áreas del roster"></nav>
