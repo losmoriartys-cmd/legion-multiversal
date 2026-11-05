@@ -842,3 +842,18 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Corrección:** las etiquetas ahora quedan dentro del panel (`top: 12px`), se reserva espacio superior uniforme en todos los capítulos y se añade margen de desplazamiento para anclas. Se ajustó también el espaciado móvil del capítulo de portada.
 - **Alcance:** regla común para todos los capítulos, no un parche exclusivo de Roster o Reclutamiento. No se modificaron estadísticas, datos de integrantes ni automatizaciones.
 - **Validación:** revisión estática de la regla compartida y del comportamiento de navegación `switchChapter()`; despliegue pendiente de verificar.
+
+## 2026-11-05 — Preparar compatibilidad con Cloudflare Pages
+
+- **Responsable:** ChatGPT + equipo del proyecto.
+- **Objetivo:** preparar la publicación alternativa gratuita en `legionmultiversal.pages.dev` sin interrumpir GitHub Pages ni la automatización de Twitch.
+- **Archivos modificados:** `index.html`, `README.md`, `INFORMES.md`.
+- **Implementado:**
+  - El reproductor de clips de Twitch ahora toma el dominio anfitrión desde `location.hostname`, de modo que los embeds puedan funcionar tanto en GitHub Pages como en el futuro dominio `pages.dev` sin duplicar ni fijar dominios.
+  - README actualizado al nombre actual del repositorio y a la dirección vigente de GitHub Pages; Cloudflare Pages queda identificado como destino previsto, todavía pendiente de conexión.
+- **Validaciones y resultados:**
+  - Confirmado que `index.html` está en la raíz y que los archivos JSON principales se cargan mediante rutas relativas desde esa misma raíz; el sitio es estático y compatible con el flujo Git de Cloudflare Pages.
+  - Confirmado que el workflow de Twitch permanece sin cambios y conserva `*/15 * * * *`.
+  - No se modificaron datos, imágenes, secretos ni workflows.
+- **Pendientes / riesgos:** crear o conectar el proyecto Cloudflare Pages con el repositorio `losmoriartys-cmd/legion-multiversal`, elegir `main` como rama de producción, usar la raíz como directorio de salida y comprobar el primer despliegue, los recursos, las estadísticas y los clips. Mantener GitHub Pages activo hasta completar esas pruebas.
+- **Despliegue:** Cloudflare Pages todavía no conectado; no se declara una publicación nueva como exitosa.
