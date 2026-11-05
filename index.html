@@ -453,6 +453,19 @@
         .institute-counts div{background:#1a202c;border:2px solid #000;box-shadow:4px 4px 0 #000;padding:12px;text-align:center;display:flex;flex-direction:column;gap:2px}
         .institute-counts strong{color:#ffde00;font-family:'Bangers',cursive;font-size:2rem}
         .institute-counts span{color:#aab7c8;font-size:.75rem;font-weight:900;letter-spacing:1px}
+        .roster-jump-nav{gap:12px;margin:18px 0 28px;scroll-margin-top:100px}
+        .roster-jump-link{position:relative;isolation:isolate;overflow:hidden;min-height:94px;padding:12px 14px;text-align:center;text-decoration:none;background:linear-gradient(145deg,#1a2637,#101722);border:2px solid #34445a;box-shadow:4px 4px 0 #000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease,background .25s ease}
+        .roster-jump-link::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(110deg,transparent 25%,rgba(255,255,255,.13) 48%,transparent 70%);transform:translateX(-120%);transition:transform .55s ease}
+        .roster-jump-link:hover,.roster-jump-link:focus-visible{transform:translateY(-4px);border-color:currentColor;box-shadow:6px 7px 0 #000;outline:none}
+        .roster-jump-link:hover::after,.roster-jump-link:focus-visible::after{transform:translateX(120%)}
+        .roster-jump-link strong{font-family:'Bangers',cursive;font-size:2rem;line-height:1.05;color:#ffde00}
+        .roster-jump-link span{font-size:.78rem;font-weight:900;letter-spacing:1px;color:#e2e8f0}
+        .roster-jump-link i{font-size:.58rem;font-style:normal;letter-spacing:1.5px;color:#91a1b7;margin-top:5px}
+        .roster-jump-link.director{color:#ffde00}.roster-jump-link.teacher{color:#00d2ff}.roster-jump-link.student{color:#c4b5fd}.roster-jump-link.collaborator{color:#ff9f43}
+        .roster-jump-link.teacher strong{color:#00d2ff}.roster-jump-link.student strong{color:#c4b5fd}.roster-jump-link.collaborator strong{color:#ff9f43}
+        .roster-section{scroll-margin-top:110px}
+        .roster-section:target .roster-section-title{text-shadow:0 0 18px currentColor}
+        @media(max-width:560px){.roster-jump-nav{grid-template-columns:repeat(2,minmax(0,1fr))}.roster-jump-link{min-height:82px;padding:9px 6px}}
         .hero-power-text{white-space:pre-line;color:#e2e8f0;line-height:1.7}
         @media(max-width:560px){.institute-banner{align-items:flex-start;padding:14px;gap:14px}.institute-stamp{flex-basis:70px;height:70px;font-size:1rem}.institute-counts{gap:7px}.institute-counts div{padding:9px 4px}.institute-counts span{font-size:.62rem}}
 
@@ -1518,9 +1531,8 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
             <h2 class="comic-title">LEGIÓN MULTIVERSAL — NUESTRO ROSTER</h2>
             <div class="institute-banner"><div class="institute-stamp">ARCHIVO<br>DE LA LEGIÓN</div><div><h3>UN LUGAR PARA CADA TALENTO EXTRAORDINARIO</h3><p>Una comunidad de creadores con identidades y especialidades diferentes. Cada integrante tiene un expediente propio y un lugar dentro de este universo compartido.</p></div></div>
             <div id="roster-home">
-              <div class="institute-counts" id="roster-counts"></div>
-              <p class="roster-intro">Seleccioná el retrato de un integrante para conocer su carta oficial y abrir su bitácora individual.</p>
-              <div class="roster-legend"><span class="rank-director">DIRECCIÓN</span><span class="rank-teacher">PROFESORES</span><span class="rank-student">ESTUDIANTES</span><span class="rank-collaborator">COLABORADORES</span></div>
+              <p class="roster-intro">Seleccioná un área para explorar sus integrantes o elegí directamente un retrato para abrir su expediente individual.</p>
+              <nav class="institute-counts roster-jump-nav" id="roster-counts" aria-label="Accesos directos a las áreas del roster"></nav>
               <div id="roster-container"><!-- Retratos del roster --></div>
             </div>
             <section id="hero-profile-page" class="hero-profile-page" hidden aria-live="polite"></section>
@@ -2332,7 +2344,8 @@ function renderRoster() {
     if (counts) {
         counts.innerHTML = groups.map(group => {
             const total = heroesData.filter(hero => hero.role === group.key).length;
-            return '<div><strong>' + String(total).padStart(2,'0') + '</strong><span>' + group.title.replace(' DEL INSTITUTO','').replace('PROFESORES','PROFESORES') + '</span></div>';
+            const label = group.title.replace(' DEL INSTITUTO','');
+            return '<a class="roster-jump-link ' + group.key + '" href="#roster-group-' + group.key + '" aria-label="Ir a ' + label + ', ' + total + ' integrantes"><strong>' + String(total).padStart(2,'0') + '</strong><span>' + label + '</span><i aria-hidden="true">EXPLORAR ↓</i></a>';
         }).join('');
     }
     groups.forEach(group => {
@@ -2340,6 +2353,7 @@ function renderRoster() {
         if (!members.length) return;
         const section = document.createElement('section');
         section.className = 'roster-section ' + (group.key === 'director' ? 'directors' : group.key === 'teacher' ? 'teachers' : group.key === 'student' ? 'students' : 'collaborators');
+        section.id = 'roster-group-' + group.key;
         section.innerHTML = '<h3 class="roster-section-title">' + group.title + '</h3><p class="roster-section-desc">' + group.desc + '</p>';
         const grid = document.createElement('div');
         grid.className = 'roster-grid';
