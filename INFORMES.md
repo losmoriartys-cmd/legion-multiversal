@@ -984,3 +984,10 @@ Se incorporó una frase de voz propia para cada integrante y para el expediente 
 - HABITOS: reflexión, aprendizaje y constancia.
 
 **Alcance del cambio:** solo se añadieron líneas de voz y su presentación visual en los expedientes. No se modificaron poderes, ilustraciones, estadísticas, horarios ni datos comerciales. Cambios publicados en main.
+
+
+## 2026-11-05 · Firmas gráficas para las voces de los héroes
+
+Se añadieron tratamientos visuales individuales a los globos de voz de los diez expedientes (MORIARTYS y los nueve integrantes). Cada uno conserva el mismo componente editorial y legibilidad, pero recibe una combinación propia de tonos, borde y motivo geométrico de fondo. Las diferencias son sutiles y coherentes con el universo común; no sustituyen ni alteran las ilustraciones oficiales.
+
+**Alcance:** estilos CSS y clases por personaje en `index.html`. Sin cambios en poderes, biografías, frases, ilustraciones, estadísticas ni fichas comerciales.
