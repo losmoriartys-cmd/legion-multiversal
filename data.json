@@ -3,7 +3,7 @@
   "source": "Twitch Helix API",
   "window_days": 30,
   "sampling_interval_minutes": 15,
-  "updated_at": "2026-11-05T00:22:45Z",
+  "updated_at": "2026-11-05T01:40:34Z",
   "channels": {
     "ladymoriarty01": {
       "login": "ladymoriarty01",
@@ -13,14 +13,14 @@
       "twitch_url": "https://twitch.tv/ladymoriarty01",
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
-      "live": true,
-      "current_viewers": 3,
-      "current_game": "Barfender",
-      "current_title": "[Publi] - Abrimos barcito con @losmoriartys @ther0d3r1k en el #Barfender",
-      "stream_started_at": "2026-11-04T23:31:27Z",
-      "updated_at": "2026-11-05T00:22:45Z",
+      "live": false,
+      "current_viewers": null,
+      "current_game": null,
+      "current_title": null,
+      "stream_started_at": null,
+      "updated_at": "2026-11-05T01:40:34Z",
       "window": {
-        "samples_total": 35,
+        "samples_total": 36,
         "live_samples": 2,
         "streams_observed": 1,
         "average_viewers_sampled": 2.0,
@@ -369,6 +369,15 @@
           "title": "[Publi] - Abrimos barcito con @losmoriartys @ther0d3r1k en el #Barfender",
           "stream_id": "319423390581",
           "started_at": "2026-11-04T23:31:27Z"
+        },
+        {
+          "sampled_at": "2026-11-05T01:40:34Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -381,33 +390,33 @@
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
       "live": true,
-      "current_viewers": 38,
-      "current_game": "Barfender",
-      "current_title": "🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁#Barfender",
+      "current_viewers": 20,
+      "current_game": "Fortnite",
+      "current_title": "🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
       "stream_started_at": "2026-11-04T22:56:00Z",
-      "updated_at": "2026-11-05T00:22:45Z",
+      "updated_at": "2026-11-05T01:40:34Z",
       "window": {
-        "samples_total": 35,
-        "live_samples": 7,
+        "samples_total": 36,
+        "live_samples": 8,
         "streams_observed": 2,
-        "average_viewers_sampled": 20.9,
+        "average_viewers_sampled": 20.8,
         "peak_viewers_sampled": 40,
         "observed_live_hours": 0.0,
         "estimated_hours_watched": 0.0,
         "game_breakdown": [
+          {
+            "name": "Fortnite",
+            "live_samples": 3,
+            "streams_observed": 2,
+            "average_viewers_sampled": 16.7,
+            "peak_viewers_sampled": 20
+          },
           {
             "name": "Counter-Strike",
             "live_samples": 2,
             "streams_observed": 1,
             "average_viewers_sampled": 31.5,
             "peak_viewers_sampled": 40
-          },
-          {
-            "name": "Fortnite",
-            "live_samples": 2,
-            "streams_observed": 1,
-            "average_viewers_sampled": 15.0,
-            "peak_viewers_sampled": 20
           },
           {
             "name": "Barfender",
@@ -441,9 +450,9 @@
           },
           {
             "date": "2026-11-05",
-            "live_samples": 1,
+            "live_samples": 2,
             "streams_observed": 1,
-            "average_viewers_sampled": 38.0,
+            "average_viewers_sampled": 29.0,
             "peak_viewers_sampled": 38
           }
         ],
@@ -764,6 +773,15 @@
           "title": "🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁#Barfender",
           "stream_id": "319422843765",
           "started_at": "2026-11-04T22:56:00Z"
+        },
+        {
+          "sampled_at": "2026-11-05T01:40:34Z",
+          "is_live": true,
+          "viewer_count": 20,
+          "game_name": "Fortnite",
+          "title": "🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
+          "stream_id": "319422843765",
+          "started_at": "2026-11-04T22:56:00Z"
         }
       ]
     },
@@ -780,9 +798,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-05T00:22:45Z",
+      "updated_at": "2026-11-05T01:40:34Z",
       "window": {
-        "samples_total": 35,
+        "samples_total": 36,
         "live_samples": 2,
         "streams_observed": 2,
         "average_viewers_sampled": 7.0,
@@ -1138,6 +1156,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-05T01:40:34Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -1154,9 +1181,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-05T00:22:45Z",
+      "updated_at": "2026-11-05T01:40:34Z",
       "window": {
-        "samples_total": 35,
+        "samples_total": 36,
         "live_samples": 3,
         "streams_observed": 1,
         "average_viewers_sampled": 6.3,
@@ -1498,6 +1525,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-05T01:40:34Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -1509,18 +1545,18 @@
       "twitch_url": "https://twitch.tv/akumazoldyck",
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
-      "live": false,
-      "current_viewers": null,
-      "current_game": null,
-      "current_title": null,
-      "stream_started_at": null,
-      "updated_at": "2026-11-05T00:22:45Z",
+      "live": true,
+      "current_viewers": 17,
+      "current_game": "Can 'Em All",
+      "current_title": "TENEMOS UN BAAAAR!!!",
+      "stream_started_at": "2026-11-05T00:58:35Z",
+      "updated_at": "2026-11-05T01:40:34Z",
       "window": {
-        "samples_total": 35,
-        "live_samples": 4,
-        "streams_observed": 1,
-        "average_viewers_sampled": 2.8,
-        "peak_viewers_sampled": 4,
+        "samples_total": 36,
+        "live_samples": 5,
+        "streams_observed": 2,
+        "average_viewers_sampled": 5.6,
+        "peak_viewers_sampled": 17,
         "observed_live_hours": 0.24,
         "estimated_hours_watched": 0.72,
         "game_breakdown": [
@@ -1533,10 +1569,10 @@
           },
           {
             "name": "Can 'Em All",
-            "live_samples": 1,
-            "streams_observed": 1,
-            "average_viewers_sampled": 3.0,
-            "peak_viewers_sampled": 3
+            "live_samples": 2,
+            "streams_observed": 2,
+            "average_viewers_sampled": 10.0,
+            "peak_viewers_sampled": 17
           }
         ],
         "daily_activity": [
@@ -1546,6 +1582,13 @@
             "streams_observed": 1,
             "average_viewers_sampled": 2.8,
             "peak_viewers_sampled": 4
+          },
+          {
+            "date": "2026-11-05",
+            "live_samples": 1,
+            "streams_observed": 1,
+            "average_viewers_sampled": 17.0,
+            "peak_viewers_sampled": 17
           }
         ],
         "method": "Muestreo propio cada 15 minutos; horas estimadas solo entre muestras consecutivas del mismo directo. Categorías y evolución diaria se calculan sobre las muestras observadas."
@@ -1865,6 +1908,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-05T01:40:34Z",
+          "is_live": true,
+          "viewer_count": 17,
+          "game_name": "Can 'Em All",
+          "title": "TENEMOS UN BAAAAR!!!",
+          "stream_id": "322095164889",
+          "started_at": "2026-11-05T00:58:35Z"
         }
       ]
     },
@@ -1876,16 +1928,16 @@
       "twitch_url": "https://twitch.tv/daved0608",
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
-      "live": false,
-      "current_viewers": null,
-      "current_game": null,
-      "current_title": null,
-      "stream_started_at": null,
-      "updated_at": "2026-11-05T00:22:45Z",
+      "live": true,
+      "current_viewers": 1,
+      "current_game": "Gears of War: E-Day",
+      "current_title": "Manceando en gears E-day, unete a jugar.",
+      "stream_started_at": "2026-11-05T01:34:31Z",
+      "updated_at": "2026-11-05T01:40:34Z",
       "window": {
-        "samples_total": 35,
-        "live_samples": 3,
-        "streams_observed": 1,
+        "samples_total": 36,
+        "live_samples": 4,
+        "streams_observed": 2,
         "average_viewers_sampled": 1.0,
         "peak_viewers_sampled": 1,
         "observed_live_hours": 0.24,
@@ -1897,12 +1949,26 @@
             "streams_observed": 1,
             "average_viewers_sampled": 1.0,
             "peak_viewers_sampled": 1
+          },
+          {
+            "name": "Gears of War: E-Day",
+            "live_samples": 1,
+            "streams_observed": 1,
+            "average_viewers_sampled": 1.0,
+            "peak_viewers_sampled": 1
           }
         ],
         "daily_activity": [
           {
             "date": "2026-11-04",
             "live_samples": 3,
+            "streams_observed": 1,
+            "average_viewers_sampled": 1.0,
+            "peak_viewers_sampled": 1
+          },
+          {
+            "date": "2026-11-05",
+            "live_samples": 1,
             "streams_observed": 1,
             "average_viewers_sampled": 1.0,
             "peak_viewers_sampled": 1
@@ -2225,6 +2291,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-05T01:40:34Z",
+          "is_live": true,
+          "viewer_count": 1,
+          "game_name": "Gears of War: E-Day",
+          "title": "Manceando en gears E-day, unete a jugar.",
+          "stream_id": "322270562651",
+          "started_at": "2026-11-05T01:34:31Z"
         }
       ]
     },
@@ -2241,9 +2316,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-05T00:22:45Z",
+      "updated_at": "2026-11-05T01:40:34Z",
       "window": {
-        "samples_total": 35,
+        "samples_total": 36,
         "live_samples": 0,
         "streams_observed": 0,
         "average_viewers_sampled": null,
@@ -2569,6 +2644,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-05T01:40:34Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -2585,9 +2669,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-05T00:22:45Z",
+      "updated_at": "2026-11-05T01:40:34Z",
       "window": {
-        "samples_total": 35,
+        "samples_total": 36,
         "live_samples": 2,
         "streams_observed": 1,
         "average_viewers_sampled": 2.5,
@@ -2936,6 +3020,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-05T01:40:34Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -2947,14 +3040,14 @@
       "twitch_url": "https://twitch.tv/losmoriartys",
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
-      "live": true,
-      "current_viewers": 23,
-      "current_game": "Barfender",
-      "current_title": "[Publi] Hoy nos escabiamos y divertimos con 53X-M3n con nuestra tienda de #Barfender  🎁⚜️CODIGO DE CREADOR EPIC: LosMoriartys ⚜️🎁",
-      "stream_started_at": "2026-11-04T22:53:33Z",
-      "updated_at": "2026-11-05T00:22:45Z",
+      "live": false,
+      "current_viewers": null,
+      "current_game": null,
+      "current_title": null,
+      "stream_started_at": null,
+      "updated_at": "2026-11-05T01:40:34Z",
       "window": {
-        "samples_total": 35,
+        "samples_total": 36,
         "live_samples": 3,
         "streams_observed": 1,
         "average_viewers_sampled": 19.0,
@@ -3303,6 +3396,15 @@
           "title": "[Publi] Hoy nos escabiamos y divertimos con 53X-M3n con nuestra tienda de #Barfender  🎁⚜️CODIGO DE CREADOR EPIC: LosMoriartys ⚜️🎁",
           "stream_id": "319422813045",
           "started_at": "2026-11-04T22:53:33Z"
+        },
+        {
+          "sampled_at": "2026-11-05T01:40:34Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     }
