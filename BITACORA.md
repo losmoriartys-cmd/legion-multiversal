@@ -105,3 +105,26 @@ Al finalizar cada cambio, registrar: archivos tocados; qué se modificó y por q
 - **Validación de fuentes:** se comprobaron en el repositorio los ocho archivos de retrato referenciados en `assets/`.
 - **Pendiente:** revisión visual en GitHub Pages para afinar el encuadre individual si algún personaje queda demasiado cortado; comprobar despliegue.
 - **Commit:** `7822c4525739100ac7bb829611817d8ca203f3cf`.
+
+
+## 2026-11-05 — Primera maqueta del cómic individual de MORIARTYS
+
+- **Archivo creado:** `comic-moriartys.html`.
+- **Cambios realizados:**
+  - Se inició la colección de cómics individuales de los héroes de Legión Multiversal, reemplazando el enfoque de bitácora/libro para esta presentación.
+  - Se conservó la carta original de MORIARTYS como portada, sin regenerarla ni editarla.
+  - Se maquetaron seis páginas navegables: portada, origen de la Legión, perfil del héroe, métricas del canal, expediente promocional Bar Fender y continuidad/alianzas.
+  - Se incorporaron estadísticas del directo de Los Moriartys del 5/11/2026 y métricas de Twitch Shared Viewership con aclaraciones sobre alcance y fuente.
+  - Se documentó Bar Fender con cuatro participantes, tres VOD públicos, 3:43:35 de tiempo efectivo sumado en esos tres VOD y ocho clips identificados por título. No se atribuyeron ventas, ROI ni audiencia única deduplicada.
+  - Se incorporaron partners Enshrouded y Cinderia, y se diferenciaron Lurkit/Keymailer como plataformas de acceso a keys.
+- **Validaciones:**
+  - Se volvió a leer el archivo desde GitHub y se verificó la presencia de portada, capítulos, navegación, estadísticas, enlaces a VOD y sección Bar Fender.
+  - Se verificó el despliegue de GitHub Pages asociado al commit `aa258406308a17b7993249bed584a215edb7d5cd`: workflow `pages build and deployment` completado con éxito.
+  - Se comprobó en navegador que la página carga, la carta original se visualiza, las seis páginas se pueden recorrer y la página 05/06 muestra el expediente Bar Fender con sus tres VOD.
+- **Pendientes / riesgos:**
+  - Es una primera maqueta individual; todavía no está enlazada desde la navegación principal.
+  - Los ocho clips de Bar Fender están identificados por título, pero faltan sus URLs individuales.
+  - Revisar textos y diseño con el usuario antes de replicar la plantilla para los demás héroes.
+  - Las estadísticas históricas ampliadas deben seguir incorporándose solo cuando estén verificadas.
+- **Commit de la maqueta:** `aa258406308a17b7993249bed584a215edb7d5cd`.
+- **Despliegue:** GitHub Pages completado con éxito (workflow run `41989248368`).
