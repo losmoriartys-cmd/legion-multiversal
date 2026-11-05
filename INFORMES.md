@@ -953,3 +953,16 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Pendientes:** revisar los diez expedientes en escritorio y móvil; confirmar que los paneles de estadísticas e historial se adapten correctamente al papel de cómic; completar biografías, clips, contactos y datos verificables de cada creador a medida que se reciban.
 - **Commit:** [`0530d347`](https://github.com/losmoriartys-cmd/legion-multiversal/commit/0530d34722d6381e8dfeaccd49b9dca37f2e5304).
 - **Despliegue:** pendiente de verificación.
+
+
+## 2026-11-05 — Personalidad narrativa de los nueve expedientes
+
+- **Archivo actualizado:** `index.html`.
+- Se redactaron biografías narrativas y entradas de bitácora individuales para ROD3R1K, LADYMORIARTY, ARDIPII, AKUMA, CAPY, ELGABII, DAVE — NEXUS, PATO — ORATORIS y HABITOS.
+- Cada texto parte de los contenidos, roles, lemas y antecedentes que ya constaban en sus fichas. Se trabajó la voz de cómic sin convertir propuestas en hechos biográficos.
+- Se preservaron nombres de héroe, cartas, imágenes, colores/arte existente, poderes y conceptos aprobados. No se modificaron estadísticas, horarios ni datos comerciales.
+- LADYMORIARTY se mantiene como canal individual, separado del canal compartido Los Moriartys.
+- En NEXUS se desarrolla el concepto visual/narrativo ya establecido, pero se dejan pendientes los datos personales y la trayectoria del creador.
+- ORATORIS se presenta como colaborador y comunicador de YouTube, sin atribuirle métricas de Twitch.
+- **Commit:** [`bff1ff3a`](https://github.com/losmoriartys-cmd/legion-multiversal/commit/bff1ff3a3395c3be189edb16fb00704bb9e46641).
+- **Despliegue:** pendiente de verificación visual en el sitio publicado.
