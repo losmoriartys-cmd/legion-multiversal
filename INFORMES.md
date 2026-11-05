@@ -881,3 +881,11 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Pendiente:** comprobación visual del expediente en GitHub Pages en escritorio y móvil, y revisión de enlaces de clips tras el despliegue.
 - **Commit:** `6d0aae5527bdadaa52e888f40205b767a1e384d0`.
 - **Despliegue:** pendiente de verificación.
+
+
+### Ajuste de navegación — expediente MORIARTY
+
+- Se modificó `openHeroProfile()` para que seleccionar directamente el carnet de MORIARTYS abra el media kit completo, sin exigir un segundo clic en «Abrir bitácora completa».
+- Los demás integrantes conservan el flujo actual de expediente individual.
+- **Commit:** `aaca301e79ef14df239e6ba0f68b5fe1aa9c3b9f`.
+- **Despliegue:** iniciado automáticamente; pendiente de comprobación final.
