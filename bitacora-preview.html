@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bitácora de la Legión | Maqueta</title>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Special+Elite&family=Roboto+Condensed:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#101722;--paper:#e9dfc9;--gold:#e5c36b;--red:#9f3936;--muted:#9ba9b9}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% 10%,#28374b,#090d15 68%);color:#f4eee1;font-family:'Roboto Condensed',sans-serif;display:grid;place-items:center;padding:30px 16px}
+.shell{width:min(1100px,100%);text-align:center}.eyebrow{font:14px 'Special Elite',serif;letter-spacing:3px;color:var(--gold)}h1{font:clamp(2.5rem,6vw,4.8rem) 'Bangers',cursive;letter-spacing:2px;margin:8px 0;color:#f3d783;text-shadow:4px 4px #000}.intro{color:#b8c4d2;max-width:650px;margin:0 auto 26px;line-height:1.6}
+.book-stage{perspective:1800px;min-height:590px;display:grid;place-items:center}.book{position:relative;width:min(860px,96vw);height:560px;transform-style:preserve-3d;filter:drop-shadow(0 25px 28px #0009)}
+.page{position:absolute;inset:0;background:linear-gradient(110deg,#d7c9a9,#f1e8d5 8%,#e9dfc9 50%,#d4c5a5);color:#20232a;border:1px solid #9c8d70;box-shadow:inset 12px 0 18px #44351c22;overflow:hidden}
+.page:before{content:'';position:absolute;inset:18px;border:1px solid #9f8d68;pointer-events:none}
+.cover{z-index:3;transform-origin:left center;transition:transform 1.15s cubic-bezier(.2,.75,.2,1);background:linear-gradient(135deg,#172336,#080c14);border:7px solid #05070a;box-shadow:inset 0 0 0 2px #c5a65e,12px 12px 0 #000}
+.cover.open{transform:rotateY(-158deg);pointer-events:none}
+.cover-inner{height:100%;display:flex;align-items:center;justify-content:center;gap:30px;padding:28px;background:radial-gradient(ellipse at 50% 40%,#24344b,#0a101a 72%)}
+.hero-art{height:100%;max-height:490px;max-width:48%;object-fit:contain;filter:drop-shadow(10px 12px 0 #000)}
+.cover-copy{max-width:300px;text-align:left}.cover-copy .stamp{font:13px 'Special Elite';color:#e9cb78;letter-spacing:2px;border:1px solid #a98c4c;padding:8px 10px;display:inline-block}.cover-copy h2{font:clamp(2.4rem,5vw,4rem) 'Bangers';line-height:.95;margin:18px 0;color:#f4d77e}.cover-copy p{color:#c3ccd7;line-height:1.55}.open-btn,.turn{border:2px solid #080b10;background:#e4c36c;color:#16130d;padding:12px 20px;font:22px 'Bangers';letter-spacing:1px;cursor:pointer;box-shadow:4px 4px #000;margin-top:12px}.open-btn:hover,.turn:hover{background:#fff0b7}
+.inside{display:grid;grid-template-columns:1fr 1fr;gap:24px;padding:55px 48px 42px;text-align:left}
+.inside h3{font:32px 'Bangers';color:#7f302d;margin:0 0 12px}.inside p{line-height:1.55}.index-list{list-style:none;padding:0;margin:16px 0}.index-list li{padding:10px 0;border-bottom:1px dashed #9f9276;font:18px 'Special Elite'}.index-list b{color:#873a32;margin-right:10px}.note{font:13px 'Special Elite';color:#776d5c;letter-spacing:1px;margin-top:24px}
+.right-page{display:flex;flex-direction:column;justify-content:center;padding:58px}.right-page .seal{font:14px 'Special Elite';letter-spacing:2px;color:#8b3d35}.right-page h3{font:42px 'Bangers';margin:14px 0;color:#222}.right-page p{line-height:1.65}.placeholder{border:1px dashed #a18f6d;padding:22px;margin-top:12px;background:#fff9e9aa}
+.book-nav{display:flex;justify-content:space-between;gap:12px;position:absolute;bottom:20px;left:35px;right:35px;z-index:2}.book-nav button{margin:0}.page-number{font:13px 'Special Elite';color:#756b59;align-self:center}
+.closed-hint{margin-top:12px;color:#9ba9b9;font-size:13px}
+@media(max-width:700px){.book-stage{min-height:720px}.book{height:690px}.cover-inner{flex-direction:column;gap:10px;padding:20px}.hero-art{max-height:390px;max-width:78%;height:58%}.cover-copy{text-align:center}.cover-copy p{display:none}.cover-copy h2{font-size:2.5rem;margin:8px}.inside{grid-template-columns:1fr;padding:38px 30px 76px;gap:12px}.inside h3{font-size:25px}.inside p{font-size:14px}.index-list li{font-size:15px;padding:7px 0}.right-page{padding:40px 30px 80px}.right-page h3{font-size:34px}.book-nav{left:25px;right:25px;bottom:15px}.book-nav button{font-size:17px;padding:9px 13px}}
+@media(prefers-reduced-motion:reduce){.cover{transition:none}}
+</style>
+</head>
+<body>
+<main class="shell">
+<div class="eyebrow">LEGIÓN MULTIVERSAL · ARCHIVO CENTRAL</div>
+<h1>BITÁCORA DE LA LEGIÓN</h1>
+<p class="intro">Una historia que se construye misión a misión. Abrí la tapa para entrar al legajo y recorrer sus páginas.</p>
+<div class="book-stage">
+<div class="book" id="book">
+<section class="page inside" aria-label="Índice de la bitácora">
+<div><div class="eyebrow" style="color:#8b3d35">ARCHIVO GENERAL · ÍNDICE</div><h3>Contenido del legajo</h3><p>La bitácora reúne la identidad, las personas y el trabajo colectivo de la Legión. Cada capítulo conserva su propio registro.</p>
+<ol class="index-list"><li><b>01</b> Nuestro origen</li><li><b>02</b> Los integrantes</li><li><b>03</b> Identidad y valores</li><li><b>04</b> Estadísticas y evolución</li><li><b>05</b> Colaboraciones</li><li><b>06</b> Proyectos y oportunidades</li></ol><div class="note">DOCUMENTO VIVO · EDICIÓN 2026</div></div>
+<div class="right-page"><div class="seal">CAPÍTULO DESTACADO · 001</div><h3>BAR FENDER</h3><p>La primera activación promocional documentada de la Legión Multiversal. Una experiencia coordinada entre cuatro creadores, con cobertura en distintos canales y material audiovisual conservado.</p><div class="placeholder"><b>EXPEDIENTE COMERCIAL N.º 001</b><br>Publisher: Rock Paper Publisher<br>Desarrollador: Photo Division<br>Acceso al juego: Keymailer</div><p class="note">La campaña se presenta con métricas diferenciadas por fuente y sin atribuir resultados no verificados.</p></div>
+<div class="book-nav"><button class="turn" type="button" onclick="turn(-1)">← ANTERIOR</button><span class="page-number" id="pageNumber">ÍNDICE · 01 / 02</span><button class="turn" type="button" onclick="turn(1)">SIGUIENTE →</button></div>
+</section>
+<div class="page" style="z-index:1;transform:translateX(5px);"></div>
+<button class="page cover" id="cover" type="button" aria-label="Abrir la bitácora">
+<div class="cover-inner"><img class="hero-art" src="assets/heroes/image_20261103_160331-y-ahora-mezclando-el-nuevo-mio-y-el-marco-nuevo-co-pero-porque-quedo-pelado-xd%20(1).jpg" alt="Carta de MORIARTYS, héroe de la Legión Multiversal">
+<div class="cover-copy"><span class="stamp">ARCHIVO DE LA LEGIÓN · 2026</span><h2>BITÁCORA<br>MULTIVERSAL</h2><p>Un registro de personas, misiones, colaboraciones y nuevas historias.</p><span class="open-btn" style="display:inline-block">ABRIR LEGAJO ↗</span></div></div>
+</button>
+</div></div>
+<p class="closed-hint">Maqueta interactiva · La tapa se abre con un clic. En el interior podés recorrer el índice y el primer expediente.</p>
+</main>
+<script>
+const cover=document.getElementById('cover');let opened=false;let page=1;
+cover.addEventListener('click',()=>{if(!opened){opened=true;cover.classList.add('open');}});
+function turn(direction){if(!opened){opened=true;cover.classList.add('open');}
+page=Math.max(1,Math.min(2,page+direction));
+document.getElementById('pageNumber').textContent=page===1?'ÍNDICE · 01 / 02':'EXPEDIENTE · 02 / 02';
+document.querySelector('.right-page h3').textContent=page===1?'BAR FENDER':'PRÓXIMOS CAPÍTULOS';
+document.querySelector('.right-page .seal').textContent=page===1?'CAPÍTULO DESTACADO · 001':'ARCHIVO EN EXPANSIÓN';
+document.querySelector('.right-page p').textContent=page===1?'La primera activación promocional documentada de la Legión Multiversal. Una experiencia coordinada entre cuatro creadores, con cobertura en distintos canales y material audiovisual conservado.':'La bitácora está preparada para incorporar nuevas campañas, hitos y proyectos sin reemplazar los expedientes anteriores.';
+}
+</script>
+</body></html>
