@@ -1288,6 +1288,103 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
             #chapter-2 .roster-portrait-card:focus-visible::after { animation:none!important; }
         }
 
+
+        /* LIFE_PASS_2026 · La interfaz vuelve a respirar */
+        nav .nav-btn {
+            position:relative;
+            isolation:isolate;
+            overflow:hidden;
+            transition:transform .22s cubic-bezier(.2,.75,.25,1),background-color .22s ease,color .22s ease,box-shadow .22s ease,border-color .22s ease;
+        }
+        nav .nav-btn::after {
+            content:"";
+            position:absolute;
+            z-index:-1;
+            inset:-40% auto -40% -65%;
+            width:42%;
+            background:linear-gradient(100deg,transparent,rgba(255,255,255,.28),transparent);
+            transform:skewX(-22deg);
+            opacity:0;
+            pointer-events:none;
+        }
+        nav .nav-btn:hover::after,
+        nav .nav-btn:focus-visible::after {
+            opacity:1;
+            animation:navLightSweep .72s ease-out;
+        }
+        nav .nav-btn.active {
+            border-color:#ffde00;
+            box-shadow:0 0 0 1px rgba(255,222,0,.18),0 0 15px rgba(255,69,69,.22),1px 1px 0 var(--border-color);
+            animation:activeNavBreath 3.8s ease-in-out infinite;
+        }
+        nav .nav-btn:hover { transform:translateY(-3px); }
+        nav .nav-btn.active:hover { transform:translateY(-1px); }
+        @keyframes navLightSweep {
+            0% { left:-65%; }
+            100% { left:130%; }
+        }
+        @keyframes activeNavBreath {
+            0%,100% { filter:brightness(1); }
+            50% { filter:brightness(1.13); }
+        }
+
+        /* Entrada editorial: cada capítulo aparece con continuidad */
+        .chapter-panel.active {
+            animation:chapterArrive .58s cubic-bezier(.2,.75,.25,1) both;
+        }
+        .chapter-panel.active .chapter-tag,
+        .chapter-panel.active .comic-title {
+            animation:chapterHeadingReveal .62s .08s cubic-bezier(.2,.75,.25,1) both;
+        }
+        @keyframes chapterHeadingReveal {
+            from { opacity:0; letter-spacing:.16em; }
+            to { opacity:1; letter-spacing:inherit; }
+        }
+
+        /* Movimiento ambiental de las cartas: mínimo, constante y elegante */
+        .hero-card:not(.hero-profile-card),
+        .premium-card,
+        .arsenal-card {
+            translate:0 0;
+            transition:translate .3s cubic-bezier(.2,.75,.25,1),filter .3s ease,box-shadow .3s ease;
+        }
+        .hero-card:not(.hero-profile-card) {
+            animation:lifeCardDrift 6.4s ease-in-out infinite;
+        }
+        .hero-card:not(.hero-profile-card):nth-child(3n+2) { animation-delay:-2.1s; }
+        .hero-card:not(.hero-profile-card):nth-child(3n) { animation-delay:-4.2s; }
+        .hero-card:not(.hero-profile-card):hover,
+        .premium-card:hover,
+        .arsenal-card:hover {
+            translate:0 -6px;
+            filter:brightness(1.07);
+        }
+        .hero-card:not(.hero-profile-card):hover { animation-play-state:paused; }
+        @keyframes lifeCardDrift {
+            0%,100% { translate:0 0; }
+            50% { translate:0 -4px; }
+        }
+
+        /* La cortinilla mantiene el lenguaje de expediente, con un destello de apertura */
+        #chapter-transition::before {
+            background-image:radial-gradient(#fff 1px,transparent 1.5px),linear-gradient(115deg,transparent 35%,rgba(0,210,255,.12) 50%,transparent 65%);
+            background-size:9px 9px,220% 100%;
+        }
+        #chapter-transition.play::before { animation:transitionStarfield .72s ease-out both; }
+        @keyframes transitionStarfield {
+            from { background-position:0 0,0% 50%; opacity:.08; }
+            to { background-position:0 0,100% 50%; opacity:.24; }
+        }
+
+        @media(prefers-reduced-motion:reduce) {
+            nav .nav-btn.active,
+            .hero-card:not(.hero-profile-card),
+            #chapter-transition.play::before { animation:none!important; }
+            .hero-card:not(.hero-profile-card),
+            .premium-card,
+            .arsenal-card { translate:none!important; }
+        }
+
     </style>
 </head>
 <body>
