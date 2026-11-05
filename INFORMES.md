@@ -857,3 +857,27 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
   - No se modificaron datos, imágenes, secretos ni workflows.
 - **Pendientes / riesgos:** crear o conectar el proyecto Cloudflare Pages con el repositorio `losmoriartys-cmd/legion-multiversal`, elegir `main` como rama de producción, usar la raíz como directorio de salida y comprobar el primer despliegue, los recursos, las estadísticas y los clips. Mantener GitHub Pages activo hasta completar esas pruebas.
 - **Despliegue:** Cloudflare Pages todavía no conectado; no se declara una publicación nueva como exitosa.
+
+
+## 2026-11-05 — Actualización del media kit individual de MORIARTY
+
+- **Archivo modificado:** `index.html`.
+- **Objetivo:** convertir el expediente de MORIARTY en una ficha comercial clara, con identidad, estadísticas, alcance geográfico, juegos, clips y oportunidades de colaboración.
+- **Cambios realizados:**
+  - Se actualizó la portada para presentar a MORIARTY como creador de Legión Multiversal y mantener explícito que las métricas corresponden al canal compartido Los Moriartys.
+  - Se reemplazaron indicadores antiguos e inconsistentes por las cifras recientes utilizadas en el media kit: 1.145 seguidores, 26 espectadores medios, pico histórico de 101 (7 oct 2026), 860 horas vistas, +49 seguidores y 32 h 15 min emitidas en los últimos 30 días.
+  - Se incorporó el desglose geográfico aportado por el creador: 2.695 vistas; México 31 %, Argentina 23 %, Colombia 8 %, Perú 7 %, Chile 7 %, Estados Unidos 5 %, Uruguay 4 %, Ecuador 3 %, España 3 %, Bolivia 2 %, República Dominicana 1 %, Costa Rica 1 %, Venezuela 1 %, Nicaragua 1 % y Panamá <1 %.
+  - Se añadió el rango de 25–40 años como referencia cualitativa basada en la observación del creador, expresamente diferenciada de una medición demográfica verificada. No se inventan porcentajes de edad o género.
+  - Se reconstruyó la tabla de cinco juegos con audiencia media, horas emitidas, seguidores ganados, ritmo por hora y horas vistas cuando estaban disponibles: Minecraft, Marvel Rivals, Supercar Collection Together, Fortnite y Enshrouded.
+  - Se incorporaron los tres clips destacados con sus enlaces de Twitch.
+  - Se añadieron formatos potenciales de colaboración, partners Enshrouded y Cinderia, y la distinción de Lurkit/Keymailer como plataformas de acceso a claves, no patrocinadores directos.
+  - Se agregaron estilos para el desglose geográfico y los paneles comerciales, manteniendo el diseño de cómic del expediente.
+- **Criterios de transparencia:**
+  - El informe de 2.695 vistas por ubicación no indica un período exacto y no se presenta como espectadores únicos.
+  - El rango de edad es orientativo, no una analítica oficial.
+  - La tabla de juegos es una selección de datos aportados y no se presenta como total mensual del canal.
+  - Los datos faltantes permanecen sin completar; no se incorpora actividad del chat como métrica comercial.
+- **Validaciones realizadas:** comprobación programática de la sustitución del bloque del expediente, presencia del desglose geográfico, tabla de juegos y clips, y retirada de las cifras históricas antiguas de la portada.
+- **Pendiente:** comprobación visual del expediente en GitHub Pages en escritorio y móvil, y revisión de enlaces de clips tras el despliegue.
+- **Commit:** `6d0aae5527bdadaa52e888f40205b767a1e384d0`.
+- **Despliegue:** pendiente de verificación.
