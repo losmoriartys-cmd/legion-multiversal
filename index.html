@@ -2110,7 +2110,7 @@ function renderLosMoriartysSullyPilot(channel){
  out+='</div></article><article class="pilot-chart-card"><div class="pilot-chart-heading"><strong>RITMO DE SEGUIDORES</strong><small>Seguidores ganados por hora emitida · dato aportado</small></div><div class="pilot-bar-list">';
  games.filter(g=>g.fph!==null).slice().sort((a,b)=>Number(b.fph)-Number(a.fph)||b.fg-a.fg).forEach(g=>out+='<div class="pilot-bar-row"><span class="pilot-bar-label">'+g.name+'</span><div class="pilot-bar-track growth"><i style="width:'+Math.round(Number(g.fph)/2*100)+'%"></i></div><b>'+g.fph+'/h</b></div>');
  out+='</div><p class="pilot-chart-footnote">Solo se muestran juegos con dato de seguidores por hora disponible.</p></article></div>';
- out+='<div class="stats-table-wrap"><table class="stats-table pilot-table"><thead><tr><th>Juego</th><th>Horas emitidas</th><th>Promedio</th><th>Seguidores ganados</th><th>Por hora</th><th>Horas vistas</th></tr></thead><tbody>';
+ out+='<div class="stats-table-wrap"><table class="stats-table pilot-table"><thead><tr><th>Juego</th><th>Último directo</th><th>Horas emitidas</th><th>Promedio</th><th>Seguidores ganados</th><th>Por hora</th><th>Horas vistas</th></tr></thead><tbody>';
  games.forEach(g=>out+='<tr><th>'+g.name+'</th><td>'+g.air+'</td><td class="num">'+g.av+'</td><td class="num">'+(g.fg===null?'—':g.fg)+'</td><td class="num">'+(g.fph===null?'—':g.fph)+'</td><td class="num">'+(g.hw===null?'—':g.hw)+'</td></tr>');
  out+='</tbody></table></div><div class="pilot-callout"><strong>Lectura para marcas:</strong> Minecraft lidera la audiencia media registrada (34) y comparte el mejor ritmo de captación disponible (2 seguidores por hora) con Marvel Rivals. Fortnite aporta el único dato de horas vistas desglosado: 103 h, equivalentes al 22,7% del total informado. En los demás juegos no se completan métricas que no aparecen en la captura.</div><p class="stats-note">Promedio = espectadores medios del juego · Por hora = seguidores ganados por hora emitida; no es una tasa de conversión. Las horas vistas solo están disponibles para Fortnite. El pico por juego no fue aportado.</p></section>';
  out+='<section class="pilot-subsection"><div class="pilot-subhead"><h5>02 · AUDIENCIA ACUMULADA</h5><small>Trayectoria histórica · Lifetime</small></div><div class="pilot-lifetime-grid">';
@@ -2553,11 +2553,11 @@ function updateComicPageControls(enabled){
 }
 function renderMoriartysComicPages(hero){
  const games=[
-  {name:'Enshrouded',air:'4 h',avg:26,followers:5,perHour:1,views:'—'},
-  {name:'Minecraft',air:'3 h',avg:34,followers:7,perHour:2,views:'—'},
-  {name:'Fortnite',air:'4 h',avg:27,followers:5,perHour:1,views:'103 h'},
-  {name:'Supercar Collection Together',air:'2 h',avg:31,followers:null,perHour:null,views:'—'},
-  {name:'Marvel Rivals',air:'2 h',avg:33,followers:3,perHour:2,views:'—'}
+  {name:'Supercar Collection Together',lastPlayed:'30 oct 2026',air:'2 h',avg:31,followers:null,perHour:null,views:'—'},
+  {name:'Enshrouded',lastPlayed:'26 oct 2026',air:'4 h',avg:26,followers:5,perHour:1,views:'—'},
+  {name:'Marvel Rivals',lastPlayed:'10 oct 2026',air:'2 h',avg:33,followers:3,perHour:2,views:'—'},
+  {name:'Fortnite',lastPlayed:'02 oct 2026',air:'4 h',avg:27,followers:5,perHour:1,views:'103 h'},
+  {name:'Minecraft',lastPlayed:'02 oct 2026',air:'3 h',avg:34,followers:7,perHour:2,views:'—'}
  ];
  const clips=[
   {title:'Música del Rincón del Nerd hecha por Demi',url:'https://clips.twitch.tv/AgileAssiduousConsoleCeilingCat-N-95sSpINtTMo3wj'},
@@ -2573,8 +2573,8 @@ function renderMoriartysComicPages(hero){
  gamesPage+='</section><section class="comic-chart-box"><h4>SEGUIDORES POR HORA</h4>';
  games.filter(g=>g.perHour!==null).slice().sort((a,b)=>b.perHour-a.perHour||b.followers-a.followers).forEach(g=>gamesPage+='<div class="comic-chart-row"><span>'+g.name+'</span><div class="comic-chart-track"><i style="width:'+Math.round(g.perHour/2*100)+'%"></i></div><b>'+g.perHour+'/h</b></div>');
  gamesPage+='<small class="stats-muted">Solo juegos con dato disponible.</small></section></div><div class="stats-table-wrap"><table class="comic-games-table"><thead><tr><th>Juego</th><th>Horas emitidas</th><th>Promedio</th><th>Seguidores</th><th>Horas vistas</th></tr></thead><tbody>';
- games.forEach(g=>gamesPage+='<tr><td>'+g.name+'</td><td>'+g.air+'</td><td>'+g.avg+'</td><td>'+(g.followers===null?'—':g.followers)+'</td><td>'+g.views+'</td></tr>');
- gamesPage+='</tbody></table></div><div class="stats-note">Esta tabla conserva los datos por juego que ya habíamos reunido. Para consultar el historial ampliado de juegos, fechas, espectadores, máximos y seguidores por transmisión, abrí <a class="stats-link" href="https://twitchtracker.com/losmoriartys/games" target="_blank" rel="noopener">TwitchTracker · juegos ↗</a>. El detalle completo de esa página no pudo extraerse automáticamente durante esta consulta; no voy a completar fechas ni cifras que no pude verificar.</div>';
+ games.forEach(g=>gamesPage+='<tr><td>'+g.name+'</td><td>'+g.lastPlayed+'</td><td>'+g.air+'</td><td>'+g.avg+'</td><td>'+(g.followers===null?'—':g.followers)+'</td><td>'+g.views+'</td></tr>');
+ gamesPage+='</tbody></table></div><div class="stats-note">La lista está ordenada por última aparición en el historial de directos, del más reciente al más antiguo. Las fechas se contrastaron con TwitchTracker · streams. Las cifras de rendimiento se conservan sin alteraciones. Para consultar el historial ampliado de juegos, fechas, espectadores, máximos y seguidores por transmisión, abrí <a class="stats-link" href="https://twitchtracker.com/losmoriartys/games" target="_blank" rel="noopener">TwitchTracker · juegos ↗</a>. El detalle completo de esa página no pudo extraerse automáticamente durante esta consulta; no voy a completar fechas ni cifras que no pude verificar.</div>';
  const clipsPage='<div class="comic-page-kicker">03 · MOMENTOS DESTACADOS</div><div class="comic-clips-grid">'+clips.map(c=>'<article class="comic-clip-card"><strong>▶ '+c.title+'</strong><a href="'+c.url+'" target="_blank" rel="noopener">VER CLIP ↗</a></article>').join('')+'</div><div class="comic-page-kicker" style="margin-top:22px">FORMATOS DEL CANAL</div><div class="comic-format-list"><span>Directos compartidos</span><span>Videojuegos cooperativos</span><span>Humor espontáneo</span><span>Cultura pop</span><span>Cine y cómics</span><span>Comunidad participativa</span></div><div class="stats-note">Contacto comercial: <a class="stats-link" href="mailto:losmoriartys@gmail.com">losmoriartys@gmail.com</a></div>';
  return [cover,lifetimePage,gamesPage,clipsPage];
 }
