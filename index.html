@@ -282,6 +282,49 @@
             padding: 25px; box-shadow: 5px 5px 0 var(--border-color); flex-direction: column; gap: 15px;
         }
         .modal-tab-pane.active { display: flex; }
+        .comic-page-navigation{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:3px solid var(--border-color)}
+        .comic-page-navigation[hidden]{display:none}
+        .comic-page-arrow{min-height:42px;padding:9px 15px;background:#18283b;color:#ffe06a;border:2px solid #52647b;font-family:'Bangers',cursive;font-size:1.05rem;letter-spacing:.5px;cursor:pointer}
+        .comic-page-arrow:disabled{opacity:.35;cursor:not-allowed}
+        .comic-page-count{color:#fff;font:1.15rem 'Bangers',cursive;letter-spacing:1px;text-align:center}
+        .modal-content.comic-mode .modal-body{gap:14px}
+        .modal-content.comic-mode .modal-tab-pane{background:linear-gradient(145deg,#172235,#0b111c);border:3px solid #718096;box-shadow:7px 7px 0 #05080e;min-height:360px}
+        .comic-cover-layout{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(220px,.9fr);gap:18px;align-items:center}
+        .comic-cover-art{width:100%;max-height:420px;object-fit:contain;background:#05080e;border:3px solid #718096}
+        .comic-cover-copy h2{font:clamp(2rem,5vw,3.5rem) 'Bangers',cursive;color:#ffe06a;line-height:.95;margin:8px 0 14px}
+        .comic-cover-copy p{font-size:.95rem;line-height:1.5;color:#dce5f1}
+        .comic-kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-top:16px}
+        .comic-kpi{background:#080e18;border:1px solid #45566c;border-bottom:4px solid #d7b943;padding:14px;min-width:0}
+        .comic-kpi small{display:block;color:#aebbd0;font-size:.68rem;font-weight:800;letter-spacing:.5px;text-transform:uppercase}
+        .comic-kpi strong{display:block;color:#fff;font:2rem 'Bangers',cursive;margin:4px 0;overflow-wrap:anywhere}
+        .comic-kpi em{display:block;color:#8494aa;font-size:.68rem;font-style:normal}
+        .comic-page-kicker{color:#ffe06a;font:1.15rem 'Bangers',cursive;letter-spacing:1px;margin-bottom:12px}
+        .comic-metric-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:12px}
+        .comic-metric{background:#080e18;border:1px solid #40516a;padding:18px;min-width:0;position:relative}
+        .comic-metric:before{content:'';position:absolute;top:0;left:0;width:32px;height:4px;background:#ffe06a}
+        .comic-metric span{display:block;color:#aebbd0;font-size:.72rem;text-transform:uppercase;font-weight:800}
+        .comic-metric strong{display:block;color:#fff;font:2.15rem 'Bangers',cursive;margin:7px 0 2px}
+        .comic-metric small{color:#8494aa;font-size:.7rem}
+        .comic-game-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}
+        .comic-chart-box{background:#080e18;border:1px solid #34445c;padding:14px;min-width:0}
+        .comic-chart-box h4{color:#ffe06a;font:1.15rem 'Bangers',cursive;margin-bottom:12px}
+        .comic-chart-row{display:grid;grid-template-columns:minmax(80px,1fr) minmax(55px,1.6fr) 36px;gap:8px;align-items:center;margin:10px 0}
+        .comic-chart-row span{font-size:.72rem;color:#dce5f1;overflow-wrap:anywhere}
+        .comic-chart-track{height:9px;background:#27364a;overflow:hidden}
+        .comic-chart-track i{display:block;height:100%;background:linear-gradient(90deg,#438dbb,#8dd8f0)}
+        .comic-chart-row b{font-size:.75rem;color:#fff;text-align:right}
+        .comic-games-table{width:100%;border-collapse:collapse;min-width:560px;background:#080e18;font-size:.76rem}
+        .comic-games-table th{background:#27384e;color:#ffe06a;text-align:left;padding:10px 8px;font-size:.68rem;text-transform:uppercase}
+        .comic-games-table td{padding:10px 8px;border-top:1px solid #2a3b51;color:#e0e8f2}
+        .comic-games-table tr:nth-child(even){background:#111d2c}
+        .comic-clips-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
+        .comic-clip-card{display:flex;flex-direction:column;justify-content:space-between;gap:15px;min-height:145px;padding:16px;background:#080e18;border:1px solid #40516a}
+        .comic-clip-card strong{color:#fff;font-size:.95rem;line-height:1.35}
+        .comic-clip-card a{color:#ffe06a;font-weight:900;text-decoration:none}
+        .comic-clip-card a:hover{text-decoration:underline}
+        .comic-format-list{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+        .comic-format-list span{padding:8px 11px;background:#1b2c40;border:1px solid #465c75;color:#dce5f1;font-size:.76rem}
+        @media(max-width:650px){.comic-cover-layout,.comic-game-layout{grid-template-columns:1fr}.comic-cover-art{max-height:330px}.comic-page-navigation{gap:6px}.comic-page-arrow{padding:8px;font-size:.9rem}.comic-page-count{font-size:1rem}.comic-metric-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
         .modal-tab-pane h3 { font-family: 'Bangers', cursive; font-size: 1.8rem; color: var(--yellow-accent); border-bottom: 2px dashed rgba(255,255,255,0.2); padding-bottom: 8px; }
         .modal-tab-pane p { font-size: 1.05rem; line-height: 1.6; color: #e2e8f0; }
 
@@ -1827,10 +1870,15 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
                 <button class="close-modal-btn" onclick="closeModal()">X</button>
             </div>
             <div class="modal-body">
-                <div class="modal-tabs">
+                <div class="modal-tabs" id="modal-tab-navigation">
                     <button class="modal-tab-btn active" onclick="switchModalTab(0)">A · PERFIL Y CONTENIDO</button>
                     <button class="modal-tab-btn" onclick="switchModalTab(1)">B · AUDIENCIA Y ESTADÍSTICAS</button>
                     <button class="modal-tab-btn" onclick="switchModalTab(2)">C · TRAYECTORIA Y COLABORACIONES</button>
+                </div>
+                <div class="comic-page-navigation" id="modal-comic-navigation" hidden>
+                    <button type="button" class="comic-page-arrow" id="comic-page-prev" aria-label="Página anterior">← ANTERIOR</button>
+                    <span class="comic-page-count" id="comic-page-count" aria-live="polite">PÁGINA 01 / 04</span>
+                    <button type="button" class="comic-page-arrow" id="comic-page-next" aria-label="Página siguiente">SIGUIENTE →</button>
                 </div>
 
                 <div class="modal-tab-pane active" id="modal-pane-0">
@@ -1844,6 +1892,10 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
                 <div class="modal-tab-pane" id="modal-pane-2">
                     <h3>TRAYECTORIA, CONTENIDOS DESTACADOS Y CONTACTO</h3>
                     <div id="modal-log-text" class="dossier-log-host"></div>
+                </div>
+                <div class="modal-tab-pane" id="modal-pane-3">
+                    <h3>CONTENIDO DESTACADO</h3>
+                    <div id="modal-extra-text" class="dossier-log-host"></div>
                 </div>
 
                 <a id="modal-twitch-btn" href="#" target="_blank" class="twitch-link-btn">⚡ VISITAR CANAL DE TWITCH</a>
@@ -2479,37 +2531,95 @@ function renderProfileOverview(hero) {
     out += '</div>';
     return out;
 }
+function updateComicPageControls(enabled){
+ const nav=document.getElementById('modal-comic-navigation');
+ if(!nav)return;
+ nav.hidden=!enabled;
+ if(!enabled)return;
+ const page=window.currentModalPage||0,total=4;
+ const count=document.getElementById('comic-page-count');
+ const prev=document.getElementById('comic-page-prev'),next=document.getElementById('comic-page-next');
+ if(count)count.textContent='PÁGINA '+String(page+1).padStart(2,'0')+' / '+String(total).padStart(2,'0');
+ if(prev)prev.disabled=page===0;
+ if(next)next.disabled=page===total-1;
+}
+function renderMoriartysComicPages(hero){
+ const games=[
+  {name:'Enshrouded',air:'4 h',avg:26,followers:5,perHour:1,views:'—'},
+  {name:'Minecraft',air:'3 h',avg:34,followers:7,perHour:2,views:'—'},
+  {name:'Fortnite',air:'4 h',avg:27,followers:5,perHour:1,views:'103 h'},
+  {name:'Supercar Collection Together',air:'2 h',avg:31,followers:null,perHour:null,views:'—'},
+  {name:'Marvel Rivals',air:'2 h',avg:33,followers:3,perHour:2,views:'—'}
+ ];
+ const clips=[
+  {title:'Música del Rincón del Nerd hecha por Demi',url:'https://clips.twitch.tv/AgileAssiduousConsoleCeilingCat-N-95sSpINtTMo3wj'},
+  {title:'Ari modo tóxica',url:'https://clips.twitch.tv/DelightfulSneakyMonkeyBleedPurple-gDdjWpKPkU5irwbo'},
+  {title:'El Demi casi muere del susto',url:'https://clips.twitch.tv/GiantUninterestedTardigradeBrokeBack-PLdKJCgbad8xhKp-'}
+ ];
+ const lifetime=[['Seguidores','1K','Comunidad acumulada'],['Pico histórico','101','07 oct 2026'],['Días activos','335','Lifetime'],['Tiempo en directo','348 h','Acumulado'],['Bans','0','Lifetime']];
+ const maxAvg=Math.max(...games.map(g=>g.avg));
+ const cover='<div class="comic-cover-layout"><img class="comic-cover-art" src="'+escapeStatsHtml(hero.img)+'" alt="Portada original del expediente MORIARTYS"><div class="comic-cover-copy"><div class="comic-page-kicker">EXPEDIENTE 001 · MEDIA KIT</div><h2>LOS MORIARTYS</h2><p>Demi + Ari. Una dupla gamer que convierte cada directo en una experiencia compartida: videojuegos, cooperativo, humor y cultura pop dentro de un videoclub retro.</p><div class="comic-kpi-grid"><div class="comic-kpi"><small>Comunidad</small><strong>1K</strong><em>seguidores</em></div><div class="comic-kpi"><small>Trayectoria</small><strong>335</strong><em>días activos</em></div><div class="comic-kpi"><small>En directo</small><strong>348 h</strong><em>acumuladas</em></div></div><p class="stats-muted">Canal conjunto · Twitch · Argentina</p></div></div>';
+ const lifetimePage='<div class="comic-page-kicker">01 · TRAYECTORIA DEL CANAL</div><div class="comic-metric-grid">'+lifetime.map((v,i)=>'<article class="comic-metric"><span>'+v[0]+'</span><strong>'+v[1]+'</strong><small>'+v[2]+'</small></article>').join('')+'</div><div class="stats-note">Pico histórico registrado el 7 de octubre de 2026. Los indicadores Lifetime se muestran como acumulados, no como rendimiento de un único mes.</div>';
+ let gamesPage='<div class="comic-page-kicker">02 · JUEGOS Y RENDIMIENTO</div><div class="comic-game-layout"><section class="comic-chart-box"><h4>ESPECTADORES PROMEDIO</h4>';
+ games.slice().sort((a,b)=>b.avg-a.avg).forEach(g=>gamesPage+='<div class="comic-chart-row"><span>'+g.name+'</span><div class="comic-chart-track"><i style="width:'+Math.round(g.avg/maxAvg*100)+'%"></i></div><b>'+g.avg+'</b></div>');
+ gamesPage+='</section><section class="comic-chart-box"><h4>SEGUIDORES POR HORA</h4>';
+ games.filter(g=>g.perHour!==null).slice().sort((a,b)=>b.perHour-a.perHour||b.followers-a.followers).forEach(g=>gamesPage+='<div class="comic-chart-row"><span>'+g.name+'</span><div class="comic-chart-track"><i style="width:'+Math.round(g.perHour/2*100)+'%"></i></div><b>'+g.perHour+'/h</b></div>');
+ gamesPage+='<small class="stats-muted">Solo juegos con dato disponible.</small></section></div><div class="stats-table-wrap"><table class="comic-games-table"><thead><tr><th>Juego</th><th>Horas emitidas</th><th>Promedio</th><th>Seguidores</th><th>Horas vistas</th></tr></thead><tbody>';
+ games.forEach(g=>gamesPage+='<tr><td>'+g.name+'</td><td>'+g.air+'</td><td>'+g.avg+'</td><td>'+(g.followers===null?'—':g.followers)+'</td><td>'+g.views+'</td></tr>');
+ gamesPage+='</tbody></table></div><div class="stats-note">Las cifras por juego corresponden a los registros aportados para esta ficha. “Seguidores por hora” es una relación entre seguidores ganados y horas emitidas; no es una tasa de conversión. Solo Fortnite tiene horas vistas desglosadas: 103 h (22,7% del total informado).</div>';
+ const clipsPage='<div class="comic-page-kicker">03 · MOMENTOS DESTACADOS</div><div class="comic-clips-grid">'+clips.map(c=>'<article class="comic-clip-card"><strong>▶ '+c.title+'</strong><a href="'+c.url+'" target="_blank" rel="noopener">VER CLIP ↗</a></article>').join('')+'</div><div class="comic-page-kicker" style="margin-top:22px">FORMATOS DEL CANAL</div><div class="comic-format-list"><span>Directos compartidos</span><span>Videojuegos cooperativos</span><span>Humor espontáneo</span><span>Cultura pop</span><span>Cine y cómics</span><span>Comunidad participativa</span></div><div class="stats-note">Contacto comercial: <a class="stats-link" href="mailto:losmoriartys@gmail.com">losmoriartys@gmail.com</a></div>';
+ return [cover,lifetimePage,gamesPage,clipsPage];
+}
+document.getElementById('comic-page-prev')?.addEventListener('click',()=>switchModalTab((window.currentModalPage||0)-1));
+document.getElementById('comic-page-next')?.addEventListener('click',()=>switchModalTab((window.currentModalPage||0)+1));
 function openHeroModal(index) {
     const hero = heroesData[index];
     if (!hero) return;
+    const modal=document.getElementById('hero-modal');
+    const modalContent=modal.querySelector('.modal-content');
+    const isMoriartys=hero.name==='MORIARTYS';
     document.getElementById('modal-hero-title').innerText = 'MEDIA KIT · ' + hero.name;
-    document.getElementById('modal-profile-text').innerHTML = renderProfileOverview(hero);
-    const channelStats=findChannelStats(hero);
-    const sullyChannel=findSullyChannel(hero);
-    document.getElementById('modal-stats-text').innerHTML=renderStatsDashboard(hero,channelStats,sullyChannel);
-    document.getElementById('modal-log-text').innerHTML=renderMissionArchive(hero);
+    document.getElementById('modal-tab-navigation').hidden=isMoriartys;
+    document.getElementById('modal-comic-navigation').hidden=!isMoriartys;
+    modalContent.classList.toggle('comic-mode',isMoriartys);
+    if(isMoriartys){
+        const pages=renderMoriartysComicPages(hero);
+        document.getElementById('modal-profile-text').innerHTML=pages[0];
+        document.getElementById('modal-stats-text').innerHTML=pages[1];
+        document.getElementById('modal-log-text').innerHTML=pages[2];
+        document.getElementById('modal-extra-text').innerHTML=pages[3];
+    }else{
+        document.getElementById('modal-profile-text').innerHTML = renderProfileOverview(hero);
+        const channelStats=findChannelStats(hero);
+        const sullyChannel=findSullyChannel(hero);
+        document.getElementById('modal-stats-text').innerHTML=renderStatsDashboard(hero,channelStats,sullyChannel);
+        document.getElementById('modal-log-text').innerHTML=renderMissionArchive(hero);
+        document.getElementById('modal-extra-text').innerHTML='';
+    }
     document.getElementById('modal-twitch-btn').href = hero.youtube || hero.twitch || "#";
     document.getElementById('modal-twitch-btn').textContent = hero.youtube ? "VISITAR CANAL DE YOUTUBE" : "VISITAR CANAL";
-    document.getElementById('hero-modal').classList.add('active');
+    modal.classList.add('active');
     switchModalTab(0, true);
+    updateComicPageControls(isMoriartys);
 }
         function closeModal() {
             document.getElementById('hero-modal').classList.remove('active');
         }
 
         function switchModalTab(tabIndex, silent = false) {
-            const previousIndex = Array.from(document.querySelectorAll('.modal-tab-btn')).findIndex(button => button.classList.contains('active'));
-            for (let t = 0; t < 3; t++) {
-                const pane = document.getElementById(`modal-pane-${t}`);
-                const btn = document.querySelectorAll('.modal-tab-btn')[t];
-                if (pane) pane.classList.remove('active');
-                if (btn) btn.classList.remove('active');
+            const isComic=document.querySelector('.modal-content')?.classList.contains('comic-mode');
+            const maxPage=isComic?4:3;
+            const previousIndex=window.currentModalPage??0;
+            tabIndex=Math.max(0,Math.min(maxPage-1,Number(tabIndex)||0));
+            for(let t=0;t<4;t++){
+                const pane=document.getElementById(`modal-pane-${t}`);
+                const btn=document.querySelectorAll('.modal-tab-btn')[t];
+                if(pane)pane.classList.toggle('active',t===tabIndex);
+                if(btn)btn.classList.toggle('active',t===tabIndex);
             }
-            const activePane = document.getElementById(`modal-pane-${tabIndex}`);
-            const activeBtn = document.querySelectorAll('.modal-tab-btn')[tabIndex];
-            if (activePane) activePane.classList.add('active');
-            if (activeBtn) activeBtn.classList.add('active');
-            if (!silent && previousIndex >= 0 && previousIndex !== tabIndex) playPageTurnCue();
+            window.currentModalPage=tabIndex;
+            if(!silent&&previousIndex!==tabIndex)playPageTurnCue();
+            if(isComic)updateComicPageControls(true);
         }
 
         /* Identidad sonora: lounge jazz heroico, original y sintetizado en Web Audio.
