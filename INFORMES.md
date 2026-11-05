@@ -832,3 +832,13 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Fuentes:** [perfil LADYMORIARTY01](https://www.twitchmetrics.net/c/710295249-ladymoriarty01) y [perfil TheR0D3R1K](https://www.twitchmetrics.net/c/518856416-ther0d3r1k).
 - **Commits:** interfaz [`06e06b37`](https://github.com/losmoriartys-cmd/s3xmen/commit/06e06b37b3943582f16efb22d0a64db4fd0c60ab); datos [`50036a87`](https://github.com/losmoriartys-cmd/s3xmen/commit/50036a871be796823e802ebc4f7bad7636b7e19e).
 - **Validación:** renderizador, carga paralela del archivo de TwitchMetrics y separación de fuentes comprobados estáticamente. Despliegue pendiente de verificar GitHub Pages.
+
+
+## 2026-11-05 — Corregir el encabezado de los capítulos en toda la navegación
+
+- **Solicitud:** revisar por qué las etiquetas superiores de los capítulos se veían cortadas al navegar desde Roster hasta Reclutamiento y comprobar el criterio de forma global.
+- **Archivo modificado:** `index.html`.
+- **Causa identificada:** las etiquetas `.chapter-tag` estaban posicionadas a `top: -20px`, por fuera del panel. Al volver al inicio con la navegación fija, ese margen negativo dejaba el rótulo expuesto a quedar parcialmente oculto según el alto de la cabecera y el viewport.
+- **Corrección:** las etiquetas ahora quedan dentro del panel (`top: 12px`), se reserva espacio superior uniforme en todos los capítulos y se añade margen de desplazamiento para anclas. Se ajustó también el espaciado móvil del capítulo de portada.
+- **Alcance:** regla común para todos los capítulos, no un parche exclusivo de Roster o Reclutamiento. No se modificaron estadísticas, datos de integrantes ni automatizaciones.
+- **Validación:** revisión estática de la regla compartida y del comportamiento de navegación `switchChapter()`; despliegue pendiente de verificar.
