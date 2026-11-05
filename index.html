@@ -1556,7 +1556,116 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
             .arsenal-card { translate:none!important; }
         }
 
-    </style>
+    
+/* LADYMORIARTY01 · contraste editorial y contacto comercial */
+.modal-content.comic-mode .comic-book-sheet{
+ color:#172235;
+}
+.modal-content.comic-mode .comic-book-sheet .comic-page-title,
+.modal-content.comic-mode .comic-book-sheet .comic-page-title h2,
+.modal-content.comic-mode .comic-book-sheet .comic-page-title small,
+.modal-content.comic-mode .comic-book-sheet .comic-page-lead{
+ color:#172b43;
+}
+.modal-content.comic-mode .comic-book-sheet .comic-page-title h2{
+ text-shadow:none;
+}
+.modal-content.comic-mode .comic-book-sheet p,
+.modal-content.comic-mode .comic-book-sheet li,
+.modal-content.comic-mode .comic-book-sheet .comic-panel p,
+.modal-content.comic-mode .comic-book-sheet .comic-panel li{
+ color:#24384f;
+}
+.modal-content.comic-mode .comic-book-sheet .comic-panel-caption,
+.modal-content.comic-mode .comic-book-sheet small,
+.modal-content.comic-mode .comic-book-sheet .comic-cover-masthead span,
+.modal-content.comic-mode .comic-book-sheet .comic-interior-header span{
+ color:#40536a;
+}
+.modal-content.comic-mode .comic-book-sheet .comic-panel-heading,
+.modal-content.comic-mode .comic-book-sheet .comic-panel-heading b,
+.modal-content.comic-mode .comic-book-sheet .comic-cover-titleline h2,
+.modal-content.comic-mode .comic-book-sheet .comic-clip-card h3{
+ color:#12304b;
+}
+.modal-content.comic-mode .comic-book-sheet a{
+ color:#075d7d;
+ font-weight:800;
+ text-decoration:underline;
+ text-underline-offset:2px;
+}
+.modal-content.comic-mode .comic-book-sheet a:focus-visible{
+ outline:3px solid #d36b36;
+ outline-offset:3px;
+}
+.modal-content.comic-mode .comic-book-sheet .comic-metric span{
+ color:#e0f3fa;
+}
+.modal-content.comic-mode .comic-book-sheet .comic-metric strong{
+ color:#ffffff;
+ text-shadow:0 1px 2px #071525;
+}
+.modal-content.comic-mode .comic-book-sheet .comic-metric small{
+ color:#d1e2ee;
+}
+.modal-content.comic-mode .comic-book-sheet .comic-format-list span{
+ color:#f4f8fc;
+ background:#142b43;
+ border-color:#3b6680;
+}
+.modal-content.comic-mode .comic-book-sheet .comic-final-cta,
+.modal-content.comic-mode .comic-book-sheet .comic-final-cta h3,
+.modal-content.comic-mode .comic-book-sheet .comic-final-cta p{
+ color:#f5f8fc;
+}
+.modal-content.comic-mode .comic-book-sheet .comic-final-cta>span,
+.modal-content.comic-mode .comic-book-sheet .comic-final-cta a{
+ color:#9ce8f4;
+}
+.modal-content.comic-mode .comic-book-sheet .comic-page-footer,
+.modal-content.comic-mode .comic-book-sheet .comic-cover-footer{
+ color:#172b43;
+}
+.modal-content.comic-mode .comic-book-sheet .comic-games-table th{
+ color:#e6f7fb;
+}
+.modal-content.comic-mode .comic-book-sheet .comic-games-table td,
+.modal-content.comic-mode .comic-book-sheet .comic-games-table tbody th{
+ color:#172b43;
+}
+.modal-content.comic-mode .comic-book-sheet .comic-clip-card a{
+ color:#075d7d;
+}
+.modal-content.comic-mode .comic-book-sheet .lady-contact-panel{
+ padding:16px;
+ background:#142b43;
+ border:3px solid #0b1728;
+ box-shadow:4px 4px 0 rgba(16,31,49,.25);
+ color:#f5f8fc;
+ text-align:center;
+}
+.modal-content.comic-mode .comic-book-sheet .lady-contact-panel span{
+ display:block;
+ color:#9ce8f4;
+ font:1rem 'Bangers',cursive;
+ letter-spacing:1px;
+}
+.modal-content.comic-mode .comic-book-sheet .lady-contact-panel p{
+ margin:7px 0;
+ color:#f5f8fc;
+}
+.modal-content.comic-mode .comic-book-sheet .lady-contact-panel a{
+ display:inline-block;
+ margin-top:5px;
+ padding:9px 14px;
+ background:#f0dfbd;
+ border:2px solid #0b1728;
+ color:#12304b;
+ font-weight:900;
+ text-decoration:none;
+}
+
+</style>
 </head>
 <body>
     <div id="chapter-transition" aria-hidden="true" data-title="LEGIÓN MULTIVERSAL"></div>
@@ -2661,7 +2770,7 @@ function renderLadyMoriartyComicPages(hero,sullyChannel){
  const clipsPage=page(4,'MOMENTOS FUERA DEL GUIÓN',clipsBody,'EL ESPECTÁCULO');
  const collabs=Array.isArray(record.collaborations)?record.collaborations:[];
  const milestones=Array.isArray(record.milestones)?record.milestones:[];
- const collabBody='<div class="comic-page-split"><section class="comic-panel"><div class="comic-panel-heading"><span>01</span><b>COLABORACIONES CONFIRMADAS</b></div>'+(collabs.length?'<ul class="profile-detail-list">'+collabs.map(c=>'<li><b>'+safe(c.title)+'</b> '+safe(c.description||'')+'</li>').join('')+'</ul>':'<p>Sin colaboraciones comerciales confirmadas cargadas en el expediente individual.</p>')+'</section><section class="comic-panel"><div class="comic-panel-heading"><span>02</span><b>HITOS Y TRAYECTORIA</b></div>'+(milestones.length?'<ul class="profile-detail-list">'+milestones.map(m=>'<li>'+safe(m.title)+' '+safe(m.description||'')+'</li>').join('')+'</ul>':'<p>Registro histórico pendiente de documentación verificable.</p>')+'</section></div><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>03</span><b>FORMATOS PARA EXPLORAR</b></div><div class="comic-format-list"><span>Gaming y presentación de videojuegos</span><span>Entretenimiento y conversación</span><span>Experiencias IRL</span><span>Clips y momentos destacados</span></div><p class="comic-panel-caption">Líneas potenciales de colaboración, no campañas contratadas ni alianzas vigentes. Contacto comercial pendiente de confirmar.</p></section><section class="comic-final-cta"><span>PRÓXIMO NÚMERO · NUEVAS HISTORIAS</span><h3>QUE TU MARCA ENTRE EN EL UNIVERSO DE LA BRUJA.</h3><p>Propuestas sujetas a conversación y aprobación de LADYMORIARTY01.</p></section>';
+ const collabBody='<div class="comic-page-split"><section class="comic-panel"><div class="comic-panel-heading"><span>01</span><b>COLABORACIONES CONFIRMADAS</b></div>'+(collabs.length?'<ul class="profile-detail-list">'+collabs.map(c=>'<li><b>'+safe(c.title)+'</b> '+safe(c.description||'')+'</li>').join('')+'</ul>':'<p>Sin colaboraciones comerciales confirmadas cargadas en el expediente individual.</p>')+'</section><section class="comic-panel"><div class="comic-panel-heading"><span>02</span><b>HITOS Y TRAYECTORIA</b></div>'+(milestones.length?'<ul class="profile-detail-list">'+milestones.map(m=>'<li>'+safe(m.title)+' '+safe(m.description||'')+'</li>').join('')+'</ul>':'<p>Registro histórico pendiente de documentación verificable.</p>')+'</section></div><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>03</span><b>FORMATOS PARA EXPLORAR</b></div><div class="comic-format-list"><span>Gaming y presentación de videojuegos</span><span>Entretenimiento y conversación</span><span>Experiencias IRL</span><span>Clips y momentos destacados</span></div><p class="comic-panel-caption">Líneas potenciales de colaboración, no campañas contratadas ni alianzas vigentes. Contacto comercial pendiente de confirmar.</p></section><section class="comic-final-cta"><span>PRÓXIMO NÚMERO · NUEVAS HISTORIAS</span><h3>QUE TU MARCA ENTRE EN EL UNIVERSO DE LA BRUJA.</h3><p>Propuestas sujetas a conversación y aprobación de LADYMORIARTY01.</p></section><section class="lady-contact-panel"><span>CONTACTO COMERCIAL · LEGIÓN MULTIVERSAL</span><p>Para propuestas, campañas y consultas de colaboración:</p><a href="mailto:losmoriartys@gmail.com">losmoriartys@gmail.com</a></section>';
  const collabPage=page(5,'EL UNIVERSO DE LAS COLABORACIONES',collabBody,'NUEVAS ALIANZAS');
  return [cover,identityPage,statsPage,gamesPage,clipsPage,collabPage];
 }
