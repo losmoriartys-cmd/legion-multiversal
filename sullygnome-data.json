@@ -130,8 +130,67 @@
         "followers_gain_reported": null
       },
       "notes": [
-        "Enlace del historial identificado; faltan las filas de transmisiones para cargar métricas verificadas."
-      ]
+        "Enlace del historial identificado; faltan las filas de transmisiones para cargar métricas verificadas.",
+        "La tabla de juegos se conserva como transcripción aportada por el equipo para los últimos 30 días; los valores de horas emitidas se mantienen tal como aparecen en la fuente, incluidos los redondeos a 0."
+      ],
+      "game_performance": [
+        {
+          "name": "Minecraft",
+          "stream_time_hours": 2,
+          "stream_time_share": "31.3%",
+          "watch_time_hours": 11,
+          "watch_time_share": "13.4%",
+          "average_viewers": 4,
+          "peak_viewers": 6
+        },
+        {
+          "name": "Assassin's Creed Odyssey",
+          "stream_time_hours": 1,
+          "stream_time_share": "18.8%",
+          "watch_time_hours": 26,
+          "watch_time_share": "31.5%",
+          "average_viewers": 17,
+          "peak_viewers": 18
+        },
+        {
+          "name": "Fall Guys",
+          "stream_time_hours": 1,
+          "stream_time_share": "18.8%",
+          "watch_time_hours": 7,
+          "watch_time_share": "9.2%",
+          "average_viewers": 6,
+          "peak_viewers": 8
+        },
+        {
+          "name": "Aniimo",
+          "stream_time_hours": 1,
+          "stream_time_share": "15.6%",
+          "watch_time_hours": 28,
+          "watch_time_share": "34.1%",
+          "average_viewers": 23,
+          "peak_viewers": 33
+        },
+        {
+          "name": "911 Dispatcher: Unknown Caller",
+          "stream_time_hours": 0,
+          "stream_time_share": "9.4%",
+          "watch_time_hours": 9,
+          "watch_time_share": "11.3%",
+          "average_viewers": 12,
+          "peak_viewers": 17
+        },
+        {
+          "name": "Barfender",
+          "stream_time_hours": 0,
+          "stream_time_share": "6.3%",
+          "watch_time_hours": 0,
+          "watch_time_share": "0.6%",
+          "average_viewers": 1,
+          "peak_viewers": 2
+        }
+      ],
+      "game_performance_period": "Últimos 30 días",
+      "game_performance_source": "https://sullygnome.com/channel/ladymoriarty01/games"
     },
     {
       "platform": "twitch",
