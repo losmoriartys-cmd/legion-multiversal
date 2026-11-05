@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b101b">
+<title>MORIARTYS · El primer cómic | Legión Multiversal</title>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Permanent+Marker&family=Roboto+Condensed:wght@400;500;600;700;800;900&family=Special+Elite&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#090e18;--panel:#111c2b;--paper:#eee5d2;--ink:#151b26;--gold:#f1ca67;--red:#b93c3b;--cyan:#64d8e8;--muted:#b6c1cf}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 50% 0,#26354a 0,#0b111d 45%,#060910 100%);color:#f7f1e5;font-family:'Roboto Condensed',sans-serif;min-height:100vh}
+button,a{font:inherit}.wrap{width:min(1160px,calc(100% - 28px));margin:auto;padding:24px 0 54px}
+.topline{display:flex;justify-content:space-between;align-items:center;gap:14px;color:var(--gold);font:12px 'Special Elite';letter-spacing:2px;text-transform:uppercase;border-bottom:1px solid #f1ca6744;padding:8px 2px 16px}
+.brand{display:flex;align-items:center;gap:10px}.brand img{width:36px;height:36px;object-fit:contain}
+.issue{color:#b8c6d7}
+.heading{text-align:center;padding:24px 0 18px}.heading .kicker{font:13px 'Special Elite';letter-spacing:4px;color:var(--cyan)}h1{font:clamp(42px,8vw,76px)/.95 Bangers;margin:10px 0;color:var(--gold);letter-spacing:2px;text-shadow:4px 4px #000}.heading p{margin:8px auto;color:#c1cbd7;max-width:680px;line-height:1.5}
+.comic{position:relative;max-width:1000px;margin:0 auto;background:#090d14;border:7px solid #030508;box-shadow:0 24px 70px #000a,0 0 0 1px #d3b76c66;min-height:600px}
+.page{display:none;min-height:600px;padding:clamp(20px,4vw,42px);background-color:var(--paper);color:var(--ink);background-image:radial-gradient(#1d29351c .8px,transparent .8px);background-size:6px 6px;position:relative;overflow:hidden}
+.page.active{display:block;animation:appear .35s ease both}@keyframes appear{from{opacity:.3;transform:translateY(8px)}to{opacity:1;transform:none}}
+.page:after{content:'';position:absolute;inset:12px;border:2px solid #172235;pointer-events:none;opacity:.65}
+.cover{padding:0;background:#101a29;background-image:radial-gradient(circle at 70% 30%,#31465d,#0c1320 68%);color:white;min-height:640px}
+.cover-layout{min-height:640px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(260px,.9fr);align-items:center;gap:18px;padding:34px}
+.cover-art{width:100%;max-height:550px;object-fit:contain;filter:drop-shadow(14px 16px 0 #000b);position:relative;z-index:1}
+.cover-text{position:relative;z-index:2}.cover-stamp{display:inline-block;border:2px solid var(--gold);padding:8px 12px;color:var(--gold);font:13px 'Special Elite';letter-spacing:2px;transform:rotate(-2deg)}
+.cover h2{font:clamp(54px,8vw,94px)/.82 Bangers;color:#f6d77c;margin:24px 0 18px;text-shadow:5px 5px #05070b}.cover h2 span{display:block;color:#fff;font-size:.62em;margin-top:12px}
+.cover .tag{font:clamp(17px,2.2vw,24px) 'Permanent Marker';color:#b9e9f0;line-height:1.25}.cover .sub{color:#c6cfda;line-height:1.5;max-width:350px;margin:20px 0}.issue-number{font:12px 'Special Elite';letter-spacing:2px;color:#d8c28b}
+.page-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;border-bottom:4px solid var(--ink);padding-bottom:12px;margin-bottom:22px;position:relative;z-index:1}
+.page-head small{font:12px 'Special Elite';letter-spacing:2px;color:#8a3534}.page-head h2{font:clamp(34px,5vw,54px)/.95 Bangers;margin:5px 0 0;color:#17263b}.page-no{font:13px 'Special Elite';border:2px solid var(--ink);padding:6px 9px;white-space:nowrap;transform:rotate(2deg)}
+.panel-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:18px;position:relative;z-index:1}
+.panel{border:3px solid var(--ink);background:#f8f0df;padding:18px;box-shadow:5px 5px 0 #172235;position:relative}
+.panel.dark{background:#17263b;color:#f4eddf}.panel.red{background:#9d3536;color:#fff}.panel h3{font:28px Bangers;margin:0 0 10px;letter-spacing:.5px}.panel p{line-height:1.55;margin:8px 0}.caption{font:12px 'Special Elite';letter-spacing:1px;color:#8b3a35;text-transform:uppercase}.dark .caption,.red .caption{color:#f4d57b}
+.storyline{font-size:18px;line-height:1.55}.pull{font:clamp(24px,3.5vw,38px)/1.1 'Permanent Marker';color:#9c3434;margin:14px 0}.timeline{display:grid;gap:10px}.beat{display:grid;grid-template-columns:42px 1fr;gap:12px;align-items:start;border-bottom:1px dashed #8c8069;padding:10px 0}.beat b{font:26px Bangers;color:#a43737}.beat p{margin:0;line-height:1.4}
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;position:relative;z-index:1}.stat{background:#17263b;color:#fff;border:3px solid #080d16;padding:16px 12px;box-shadow:4px 4px 0 #a43b3b;min-height:116px}.stat strong{display:block;font:clamp(30px,4vw,44px)/1 Bangers;color:var(--gold)}.stat span{display:block;margin-top:8px;font:12px 'Special Elite';letter-spacing:1px;text-transform:uppercase}.stat-note{position:relative;z-index:1;font:12px 'Special Elite';line-height:1.6;color:#5e5b52;margin-top:18px}
+.game-table{width:100%;border-collapse:collapse;position:relative;z-index:1;background:#f8f0df}.game-table th,.game-table td{padding:11px 9px;border:2px solid #172235;text-align:left}.game-table th{background:#17263b;color:#f4d57b;font:15px Bangers;letter-spacing:1px}.game-table td{font-weight:700}
+.campaign-title{font:clamp(36px,6vw,64px)/.9 Bangers;color:#9d3536;margin:0 0 12px}.campaign-meta{font:12px 'Special Elite';letter-spacing:1px;color:#655b4d}.campaign-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;position:relative;z-index:1;margin-top:18px}.metric{border:3px solid #172235;padding:14px;background:#fff8e9}.metric strong{display:block;font:34px Bangers;color:#9d3536}.metric small{font:12px 'Special Elite';letter-spacing:1px}
+.links{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.links a,.navbtn{display:inline-block;text-decoration:none;border:2px solid #101722;background:#e8c96e;color:#151b26;padding:10px 14px;font:18px Bangers;letter-spacing:.6px;box-shadow:3px 3px #111;cursor:pointer}.links a:hover,.navbtn:hover{background:#fff1bd}
+.disclaimer{font:12px 'Special Elite';line-height:1.55;color:#5c5a53;margin-top:16px;position:relative;z-index:1}
+.final-panel{background:#17263b;color:#fff;padding:24px;border:4px solid #070b12;box-shadow:7px 7px #a43b3b;position:relative;z-index:1}.final-panel h3{font:42px Bangers;color:var(--gold);margin:0 0 10px}.final-panel p{line-height:1.6}
+.controls{display:flex;align-items:center;justify-content:space-between;gap:10px;max-width:1000px;margin:18px auto 0}.navbtn{min-width:130px}.navbtn:disabled{opacity:.35;cursor:not-allowed}.progress{font:12px 'Special Elite';letter-spacing:1px;color:#c5d0df;text-align:center}
+.footer{text-align:center;color:#8f9cad;font:11px 'Special Elite';letter-spacing:1px;margin-top:26px}
+@media(max-width:720px){.cover-layout{grid-template-columns:1fr;gap:4px;padding:22px;min-height:660px;text-align:center}.cover-art{max-height:390px;width:85%;margin:auto}.cover-text{margin-top:-8px}.cover .sub{margin:12px auto}.comic,.page{min-height:unset}.page{padding:26px 20px 32px}.panel-grid,.campaign-grid{grid-template-columns:1fr}.stat-grid{grid-template-columns:repeat(2,1fr)}.topline{font-size:10px}.page-head{align-items:center}.page-no{font-size:10px}.controls{gap:6px}.navbtn{min-width:0;padding:9px 11px;font-size:16px}.progress{font-size:10px}}
+@media(prefers-reduced-motion:reduce){.page.active{animation:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="topline"><div class="brand"><img src="legion_logo_final_hybrid.png" alt=""> LEGIÓN MULTIVERSAL</div><div class="issue">COLECCIÓN DE HÉROES · N.º 001</div></header>
+<div class="heading"><div class="kicker">DIFERENTES MUNDOS. UNA MISMA LEGIÓN.</div><h1>HISTORIAS DE LA LEGIÓN</h1><p>Cada héroe tiene su historia. Cada misión deja una página. Esta es la primera edición del cómic individual de MORIARTYS.</p></div>
+<main class="comic" aria-live="polite">
+<section class="page cover active" data-page="0" aria-label="Portada del cómic MORIARTYS">
+<div class="cover-layout">
+<img class="cover-art" src="assets/heroes/image_20261103_160331-y-ahora-mezclando-el-nuevo-mio-y-el-marco-nuevo-co-pero-porque-quedo-pelado-xd%20(1).jpg" alt="Carta original del héroe MORIARTYS">
+<div class="cover-text"><span class="cover-stamp">EDICIÓN DE COLECCIÓN · 2026</span><h2>MORIARTYS<span>EL ARQUITECTO DE LA LEGIÓN</span></h2><div class="tag">Diferentes mundos.<br>Una misma Legión.</div><p class="sub">Una historia de comunidad, videojuegos, creatividad y alianzas. El expediente personal del héroe que impulsa este universo.</p><div class="issue-number">N.º 001 · PRIMERA AVENTURA · ARGENTINA</div></div>
+</div></section>
+<section class="page" data-page="1" aria-label="Origen">
+<div class="page-head"><div><small>CAPÍTULO 01 · EL COMIENZO</small><h2>TODO GRAN EQUIPO TIENE UN ORIGEN</h2></div><span class="page-no">02</span></div>
+<div class="panel-grid">
+<article class="panel dark"><div class="caption">La primera alianza</div><h3>DE UNA PARTIDA A UN UNIVERSO</h3><p class="storyline">La historia de la Legión comenzó con Demian y ROD3R1K compartiendo partidas de <b>Marvel Rivals</b>. Lo que empezó como una conexión entre jugadores fue creciendo: llegó Akuma, después la expansión a Fortnite junto a ElGabii y Capy, y más adelante se sumaron nuevas voces, talentos y comunidades.</p><p>Con el tiempo, el proyecto dejó de ser solamente un grupo para jugar. Se convirtió en un espacio donde conviven entretenimiento, conocimiento, tecnología y desarrollo personal.</p></article>
+<article class="panel red"><div class="caption">La idea que nos une</div><h3>NO SOMOS SOLO UN ROSTER</h3><p class="pull">“Distintos caminos. Un mismo equipo.”</p><p>La Legión crece cuando cada integrante puede aportar su propia identidad sin perder lo que construimos en conjunto.</p></article>
+</div>
+<div class="timeline" style="position:relative;z-index:1;margin-top:18px">
+<div class="beat"><b>01</b><p><strong>Marvel Rivals:</strong> Demian y ROD3R1K ponen en marcha la primera conexión.</p></div>
+<div class="beat"><b>02</b><p><strong>La expansión:</strong> se incorpora Akuma y el grupo crece hacia Fortnite con ElGabii y Capy.</p></div>
+<div class="beat"><b>03</b><p><strong>Nuevas voces:</strong> llegan colaboradores y se integran Lady Moriarty, Dave y más creadores.</p></div>
+</div>
+</section>
+<section class="page" data-page="2" aria-label="Identidad del héroe">
+<div class="page-head"><div><small>CAPÍTULO 02 · PERFIL DEL HÉROE</small><h2>MORIARTYS</h2></div><span class="page-no">03</span></div>
+<div class="panel-grid">
+<article class="panel"><div class="caption">Identidad / función en la Legión</div><h3>EL CREADOR DE ESTE UNIVERSO</h3><p class="storyline">MORIARTYS representa la construcción del proyecto colectivo: conectar personas, generar experiencias compartidas y convertir cada colaboración en una historia que pueda crecer.</p><p>Su propuesta combina gaming y entretenimiento con una mirada de comunidad. La Legión no busca que todos hagan lo mismo: busca que cada integrante encuentre su lugar y pueda brillar con su propio estilo.</p></article>
+<article class="panel dark"><div class="caption">Tres dimensiones</div><h3>EL PODER ESTÁ EN LA DIVERSIDAD</h3><p><b>Gaming y entretenimiento</b><br>Partidas, directos, humor y experiencias compartidas.</p><p><b>Conocimiento y tecnología</b><br>Curiosidad, herramientas y aprendizaje colaborativo.</p><p><b>Desarrollo personal</b><br>Compartir experiencias, acompañar y crecer en comunidad.</p></article>
+</div>
+<div class="pull" style="position:relative;z-index:1;margin-top:24px">“Una comunidad donde cada persona suma algo que nadie más puede reemplazar.”</div>
+</section>
+<section class="page" data-page="3" aria-label="Estadísticas del canal">
+<div class="page-head"><div><small>CAPÍTULO 03 · MÉTRICAS DEL CANAL</small><h2>EL HÉROE EN NÚMEROS</h2></div><span class="page-no">04</span></div>
+<div class="stat-grid">
+<div class="stat"><strong>25</strong><span>Espectadores promedio*</span></div>
+<div class="stat"><strong>40</strong><span>Pico máximo*</span></div>
+<div class="stat"><strong>80</strong><span>Espectadores únicos*</span></div>
+<div class="stat"><strong>97</strong><span>Usuarios en chat*</span></div>
+<div class="stat"><strong>154</strong><span>Vistas en vivo*</span></div>
+<div class="stat"><strong>+2</strong><span>Nuevos seguidores*</span></div>
+<div class="stat"><strong>1</strong><span>Nueva suscripción*</span></div>
+<div class="stat"><strong>2 h 27 min</strong><span>Duración del directo*</span></div>
+<div class="stat"><strong>98</strong><span>Espectadores compartidos únicos**</span></div>
+</div>
+<p class="stat-note">* Métricas del directo de Los Moriartys del 5/11/2026, duración exacta del VOD: 2:27:20. ** Dato informado por el panel Twitch Shared Viewership de Los Moriartys. No equivale a espectadores únicos deduplicados de toda la campaña. Las métricas del directo corresponden al stream completo, no solamente al tramo de Bar Fender.</p>
+<div class="panel" style="margin-top:18px;position:relative;z-index:1"><div class="caption">Contenido destacado</div><h3>ALGUNOS MOMENTOS DEL CANAL</h3><div class="links">
+<a href="https://clips.twitch.tv/AgileAssiduousConsoleCeilingCat-N-95sSpINtTMo3wj" target="_blank" rel="noopener">Música del Rincón del Nerd</a>
+<a href="https://clips.twitch.tv/DelightfulSneakyMonkeyBleedPurple-gDdjWpKPkU5irwbo" target="_blank" rel="noopener">Ari modo tóxica</a>
+<a href="https://clips.twitch.tv/GiantUninterestedTardigradeBrokeBack-PLdKJCgbad8xhKp-" target="_blank" rel="noopener">El Demi casi muere del susto</a>
+</div></div>
+</section>
+<section class="page" data-page="4" aria-label="Primera campaña Bar Fender">
+<div class="page-head"><div><small>CAPÍTULO 04 · PRIMERA AVENTURA COMERCIAL</small><h2>EXPEDIENTE DE MISIÓN N.º 001</h2></div><span class="page-no">05</span></div>
+<div class="campaign-title">BAR FENDER</div><div class="campaign-meta">5 DE NOVIEMBRE DE 2026 · ACTIVACIÓN PROMOCIONAL COORDINADA</div>
+<div class="panel-grid" style="margin-top:16px">
+<article class="panel dark"><div class="caption">La misión</div><h3>CUATRO CREADORES. UNA MISMA PARTIDA.</h3><p>Activación coordinada previamente: cuatro integrantes de la Legión transmitieron simultáneamente Bar Fender desde sus canales de Twitch. La campaña generó cobertura en distintos canales y material audiovisual para futuras piezas.</p><p><b>Publisher:</b> Rock Paper Publisher<br><b>Desarrollador:</b> Photo Division<br><b>Acceso al juego:</b> facilitado mediante Keymailer.</p></article>
+<article class="panel"><div class="caption">Equipo desplegado</div><h3>FORMACIÓN DE LA LEGIÓN</h3><p><b>Los Moriartys</b> · canal conjunto</p><p><b>Lady Moriarty01</b> · canal individual</p><p><b>TheR0D3R1K</b> · canal individual</p><p><b>akumazoldyck</b> · participación simultánea; sin VOD público localizado</p></article>
+</div>
+<div class="campaign-grid">
+<div class="metric"><strong>3 h 43 min 35 s</strong><small>TIEMPO EFECTIVO SUMADO EN 3 VODS DOCUMENTADOS</small></div>
+<div class="metric"><strong>8</strong><small>CLIPS IDENTIFICADOS POR TÍTULO (2 + 4 + 2)</small></div>
+<div class="metric"><strong>98</strong><small>ESPECTADORES COMPARTIDOS ÚNICOS · PANEL DE LOS MORIARTYS</small></div>
+<div class="metric"><strong>4</strong><small>CREADORES PARTICIPANTES EN SIMULTÁNEO</small></div>
+</div>
+<p class="disclaimer">El tiempo sumado corresponde a tres tramos efectivos de Bar Fender documentados en VOD; no representa horas vistas. Los 98 espectadores compartidos únicos son el dato del panel Shared Viewership del canal Los Moriartys, no una medición independiente de audiencia única total entre los cuatro canales. No se atribuyen ventas, conversiones, ROI ni pago económico. Keymailer facilitó el acceso al juego; no es el publisher ni el desarrollador.</p>
+<div class="links" style="position:relative;z-index:1">
+<a href="https://www.twitch.tv/videos/2919716450" target="_blank" rel="noopener">VOD · Los Moriartys</a>
+<a href="https://www.twitch.tv/videos/2919755971" target="_blank" rel="noopener">VOD · Lady Moriarty01</a>
+<a href="https://www.twitch.tv/videos/2919719142" target="_blank" rel="noopener">VOD · TheR0D3R1K</a>
+</div>
+<div class="panel" style="margin-top:16px;position:relative;z-index:1"><div class="caption">Clips identificados · enlaces pendientes de recopilar</div><p><b>Los Moriartys:</b> “Ojo ojo vomita” · “Se boxean en nuestro bar”.</p><p><b>Lady Moriarty01:</b> “Le pegué a Harry Potter” · “No me dejan bailar a Kame” · “Te voy a pegar boludo” · “Quería pelear”.</p><p><b>TheR0D3R1K:</b> “Se busca empleado para el bar” · “Pero qué pasó”.</p></div>
+</section>
+<section class="page" data-page="5" aria-label="Alianzas y próximos capítulos">
+<div class="page-head"><div><small>CAPÍTULO 05 · CONTINUIDAD</small><h2>ESTA HISTORIA SIGUE</h2></div><span class="page-no">06</span></div>
+<div class="panel-grid">
+<article class="panel dark"><div class="caption">Alianzas y colaboraciones</div><h3>PUERTAS QUE SE ABREN</h3><p><b>Partner · Enshrouded</b><br>Colaboración/partner vigente vinculada al juego.</p><p><b>Partner · Cinderia</b><br>Colaboración/partner vigente vinculada al juego.</p><p><b>Lurkit y Keymailer</b><br>Plataformas utilizadas para campañas y acceso a claves. Se presentan como plataformas, no como patrocinadores directos.</p></article>
+<article class="panel red"><div class="caption">Próximas ediciones</div><h3>EL MULTIVERSO NO SE DETIENE</h3><p>Este cómic es una primera maqueta de la colección. Nuevas misiones, colaboraciones, hitos y estadísticas verificadas podrán incorporarse como páginas de futuras ediciones.</p><p class="pull">Continuará…</p></article>
+</div>
+<div class="final-panel" style="margin-top:22px"><h3>¿QUERÉS FORMAR PARTE DE LA PRÓXIMA HISTORIA?</h3><p>Legión Multiversal presenta creadores con identidades propias y capacidad de trabajar en conjunto. Las propuestas comerciales se conversan directamente con el equipo, según el contenido y el alcance de cada acción.</p><p><b>Contacto:</b> losmoriartys@gmail.com</p></div>
+<p class="disclaimer">Edición de presentación. Las métricas se muestran con su fuente y alcance; los datos no disponibles no se completan por estimación. Próximas versiones incorporarán estadísticas históricas verificadas y enlaces individuales a los clips de campaña.</p>
+</section>
+</main>
+<nav class="controls" aria-label="Navegación del cómic"><button class="navbtn" id="prev" disabled>← ANTERIOR</button><div class="progress" id="progress">PORTADA · 01 / 06</div><button class="navbtn" id="next">SIGUIENTE →</button></nav>
+<div class="footer">LEGIÓN MULTIVERSAL · COLECCIÓN DE HÉROES · MORIARTYS N.º 001</div>
+</div>
+<script>
+const pages=[...document.querySelectorAll('.page')],prev=document.getElementById('prev'),next=document.getElementById('next'),progress=document.getElementById('progress');
+const labels=['PORTADA','ORIGEN','EL HÉROE','ESTADÍSTICAS','BAR FENDER · MISIÓN 001','PRÓXIMOS CAPÍTULOS'];let current=0;
+function show(n){current=Math.max(0,Math.min(pages.length-1,n));pages.forEach((p,i)=>p.classList.toggle('active',i===current));prev.disabled=current===0;next.disabled=current===pages.length-1;progress.textContent=labels[current]+' · '+String(current+1).padStart(2,'0')+' / '+String(pages.length).padStart(2,'0');document.querySelector('.comic').scrollIntoView({behavior:'smooth',block:'start'});}
+prev.addEventListener('click',()=>show(current-1));next.addEventListener('click',()=>show(current+1));document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')show(current+1);if(e.key==='ArrowLeft')show(current-1)});
+</script>
+</body></html>
