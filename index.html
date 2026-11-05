@@ -2595,6 +2595,24 @@ function updateComicPageControls(enabled){
  if(prev)prev.disabled=page===0;
  if(next)next.disabled=page===total-1;
 }
+function renderRosterComicPages(hero,index,channelStats,sullyChannel){
+ const safe=v=>escapeStatsHtml(v||'');
+ const identity=hero.codename||'IDENTIDAD EN ARCHIVO';
+ const role=hero.characterRole||hero.rank||'INTEGRANTE DE LA LEGIÓN';
+ const areas=Array.isArray(hero.areas)?hero.areas:[];
+ const page=(chapter,title,body,foot)=>'<article class="comic-book-sheet comic-interior-page"><header class="comic-interior-header"><span>LEGIÓN MULTIVERSAL</span><b>CAPÍTULO '+chapter+'</b><span>'+foot+'</span></header><div class="comic-page-title"><small>EXPEDIENTE '+safe(hero.name)+' · PÁGINA 0'+chapter+'</small><h2>'+title+'</h2></div>'+body+'<footer class="comic-page-footer"><span>'+safe(hero.name)+' · ARCHIVO INDIVIDUAL</span><b>0'+chapter+' / 04</b></footer></article>';
+ const cover='<article class="comic-book-sheet comic-cover-sheet"><header class="comic-cover-masthead"><b>LEGIÓN MULTIVERSAL</b><span>EXPEDIENTE INDIVIDUAL · N.º '+safe(hero.cardNumber||'S/N')+'</span><span>MEDIA KIT</span></header><div class="comic-cover-art-frame"><span class="comic-cover-burst">EXPEDIENTE<br>CLASIFICADO</span><img class="comic-cover-art" src="'+safe(hero.img)+'" alt="Carta oficial de '+safe(hero.name)+'"></div><div class="comic-cover-copy"><div class="comic-cover-titleline"><span>PROTAGONISTA</span><h2>'+safe(hero.name)+'</h2><b>'+safe(hero.series||'01')+'</b></div><p class="comic-cover-subtitle">'+safe(identity)+' · '+safe(role)+'</p><section class="comic-panel comic-cover-bio"><div class="comic-panel-heading"><span>01</span><b>IDENTIDAD SECRETA · PERFIL DEL HÉROE</b></div><p>'+safe(hero.bio||'Presentación individual pendiente de confirmación.')+'</p><p class="comic-panel-caption">Expediente individual. Los datos no disponibles se identifican como pendientes de verificación.</p></section><footer class="comic-cover-footer"><span>'+areas.map(safe).join(' · ')+'</span><b>¡ABRIR EXPEDIENTE!</b></footer></div></article>';
+ const statsBody='<section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>01</span><b>ACTIVIDAD Y ALCANCE</b></div><p class="comic-panel-caption">Las métricas se muestran según la disponibilidad de fuentes para este canal. Las ventanas, fechas y fuentes se conservan en cada bloque; los datos ausentes no se estiman.</p>'+renderStatsDashboard(hero,channelStats,sullyChannel)+'</section>';
+ const stats=page('01','EL PODER DE LA AUDIENCIA',statsBody,'LA COMUNIDAD');
+ const powerBody='<div class="comic-page-split"><section class="comic-panel"><div class="comic-panel-heading"><span>01</span><b>CAPACIDADES REGISTRADAS</b></div><h3>'+safe(identity)+'</h3><p>'+safe(hero.powers||hero.powerSet||'Descripción de habilidades pendiente de confirmar con el integrante.')+'</p><p class="comic-panel-caption">Los elementos narrativos de la carta identifican al personaje dentro de la Legión; no representan certificaciones ni métricas de rendimiento.</p></section><section class="comic-panel"><div class="comic-panel-heading"><span>02</span><b>ESPECIALIDADES Y UNIVERSOS</b></div><div class="comic-format-list">'+(areas.length?areas.map(v=>'<span>'+safe(v)+'</span>').join(''):'<span>Especialidades pendientes de confirmar</span>')+'</div></section></div><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>03</span><b>BITÁCORA DE MISIONES</b></div>'+renderMissionArchive(hero)+'</section>';
+ const missions=page('02','TRAYECTORIA Y MISIONES',powerBody,'LAS MISIONES');
+ const profile=hero.mediaProfile||{};
+ const formats=profile.formats||areas;
+ const opportunities=profile.opportunities||[];
+ const commercialBody='<div class="comic-page-split"><section class="comic-panel"><div class="comic-panel-heading"><span>01</span><b>CONTENIDO Y FORMATOS</b></div><p>'+safe(profile.editorial||'La propuesta editorial se construye a partir de las áreas y contenidos públicos del creador.')+'</p><div class="comic-format-list">'+(formats.length?formats.map(v=>'<span>'+safe(v)+'</span>').join(''):'<span>Formatos por confirmar</span>')+'</div></section><section class="comic-panel"><div class="comic-panel-heading"><span>02</span><b>OPORTUNIDADES DE COLABORACIÓN</b></div>'+(opportunities.length?'<ul class="profile-detail-list">'+opportunities.map(v=>'<li>'+safe(v)+'</li>').join('')+'</ul>':'<p>Se pueden evaluar presentaciones de producto, pruebas de videojuegos, integraciones y acciones con comunidad, siempre sujetas a conversación y aprobación del creador.</p>')+'<p class="comic-panel-caption">'+safe(profile.disclaimer||'Propuestas potenciales; no implican campañas contratadas ni alianzas vigentes.')+'</p></section></div><section class="comic-final-cta"><span>PRÓXIMO NÚMERO · NUEVAS COLABORACIONES</span><h3>HAGAMOS QUE TU MARCA FORME PARTE DE LA HISTORIA.</h3><p>Contacto y propuestas comerciales:</p>'+(profile.contact?'<a href="mailto:'+safe(profile.contact)+'">'+safe(profile.contact)+'</a>':'<p>Canal de contacto pendiente de confirmar con el creador.</p>')+'</section>';
+ const commercial=page('03','EL UNIVERSO COMERCIAL',commercialBody,'COLABORACIONES');
+ return [cover,stats,missions,commercial];
+}
 function renderMoriartysComicPages(hero){
  const games=[
   {name:'Minecraft',air:'3 h',avg:34,followers:7,perHour:2},
@@ -2637,23 +2655,21 @@ function openHeroModal(index) {
     const modalContent=modal.querySelector('.modal-content');
     const isMoriartys=hero.name==='MORIARTYS';
     document.getElementById('modal-hero-title').innerText = 'MEDIA KIT · ' + hero.name;
-    document.getElementById('modal-tab-navigation').hidden=isMoriartys;
-    document.getElementById('modal-comic-navigation').hidden=!isMoriartys;
-    modalContent.classList.toggle('comic-mode',isMoriartys);
+    document.getElementById('modal-tab-navigation').hidden=true;
+    document.getElementById('modal-comic-navigation').hidden=false;
+    modalContent.classList.add('comic-mode');
+    let pages;
     if(isMoriartys){
-        const pages=renderMoriartysComicPages(hero);
-        document.getElementById('modal-profile-text').innerHTML=pages[0];
-        document.getElementById('modal-stats-text').innerHTML=pages[1];
-        document.getElementById('modal-log-text').innerHTML=pages[2];
-        document.getElementById('modal-extra-text').innerHTML=pages[3];
+        pages=renderMoriartysComicPages(hero);
     }else{
-        document.getElementById('modal-profile-text').innerHTML = renderProfileOverview(hero);
         const channelStats=findChannelStats(hero);
         const sullyChannel=findSullyChannel(hero);
-        document.getElementById('modal-stats-text').innerHTML=renderStatsDashboard(hero,channelStats,sullyChannel);
-        document.getElementById('modal-log-text').innerHTML=renderMissionArchive(hero);
-        document.getElementById('modal-extra-text').innerHTML='';
+        pages=renderRosterComicPages(hero,index,channelStats,sullyChannel);
     }
+    document.getElementById('modal-profile-text').innerHTML=pages[0];
+    document.getElementById('modal-stats-text').innerHTML=pages[1];
+    document.getElementById('modal-log-text').innerHTML=pages[2];
+    document.getElementById('modal-extra-text').innerHTML=pages[3];
     document.getElementById('modal-twitch-btn').href = hero.youtube || hero.twitch || "#";
     document.getElementById('modal-twitch-btn').textContent = hero.youtube ? "VISITAR CANAL DE YOUTUBE" : "VISITAR CANAL";
     modal.classList.add('active');
