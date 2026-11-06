@@ -199,23 +199,207 @@
       "source": "SullyGnome",
       "source_url": "https://sullygnome.com/channel/ther0d3r1k/2026/streams",
       "checked_at_utc": null,
-      "status": "pending",
+      "status": "partial",
       "period": {
-        "start_date": null,
-        "end_date": null
+        "start_date": "2026-10-24",
+        "end_date": "2026-11-05"
       },
-      "streams": [],
+      "streams": [
+        {
+          "date": "2026-11-05",
+          "duration_minutes": 229,
+          "hours_watched": 72,
+          "average_viewers": 19,
+          "peak_viewers": 52,
+          "followers_gain": 0
+        },
+        {
+          "date": "2026-11-04",
+          "duration_minutes": 244,
+          "hours_watched": 69,
+          "average_viewers": 17,
+          "peak_viewers": 38,
+          "followers_gain": 3
+        },
+        {
+          "date": "2026-11-03",
+          "duration_minutes": 198,
+          "hours_watched": 69,
+          "average_viewers": 21,
+          "peak_viewers": 46,
+          "followers_gain": 2
+        },
+        {
+          "date": "2026-11-02",
+          "duration_minutes": 215,
+          "hours_watched": 93,
+          "average_viewers": 26,
+          "peak_viewers": 51,
+          "followers_gain": -1
+        },
+        {
+          "date": "2026-10-31",
+          "duration_minutes": 469,
+          "hours_watched": 117,
+          "average_viewers": 15,
+          "peak_viewers": 35,
+          "followers_gain": 2
+        },
+        {
+          "date": "2026-10-29",
+          "duration_minutes": 215,
+          "hours_watched": 50,
+          "average_viewers": 14,
+          "peak_viewers": 25,
+          "followers_gain": 1
+        },
+        {
+          "date": "2026-10-28",
+          "duration_minutes": 246,
+          "hours_watched": 82,
+          "average_viewers": 20,
+          "peak_viewers": 44,
+          "followers_gain": 3
+        },
+        {
+          "date": "2026-10-27",
+          "duration_minutes": 201,
+          "hours_watched": 56,
+          "average_viewers": 17,
+          "peak_viewers": 44,
+          "followers_gain": 4
+        },
+        {
+          "date": "2026-10-26",
+          "duration_minutes": 246,
+          "hours_watched": 94,
+          "average_viewers": 23,
+          "peak_viewers": 47,
+          "followers_gain": 5
+        },
+        {
+          "date": "2026-10-24",
+          "duration_minutes": 305,
+          "hours_watched": 142,
+          "average_viewers": 28,
+          "peak_viewers": 55,
+          "followers_gain": 3
+        }
+      ],
       "summary": {
-        "streams_count": null,
-        "airtime_minutes": null,
-        "airtime_hours": null,
-        "hours_watched": null,
-        "average_viewers_duration_weighted": null,
-        "peak_viewers": null,
-        "followers_gain_reported": null
+        "streams_count": 10,
+        "airtime_minutes": 2568,
+        "airtime_hours": 42.8,
+        "hours_watched": 844,
+        "average_viewers_duration_weighted": 19.8,
+        "peak_viewers": 55,
+        "followers_gain_reported": 22
       },
       "notes": [
-        "Enlace del historial identificado; faltan las filas de transmisiones para cargar métricas verificadas."
+        "Muestra de diez transmisiones compartida para el dossier; no representa necesariamente el historial completo del canal.",
+        "Desglose de juegos aportado por el creador; el período exacto no fue especificado.",
+        "La duración de emisión de Marvel Rivals figura como 0 h (0,5%) en la tabla original y se conserva por redondeo."
+      ],
+      "game_breakdown": [
+        {
+          "name": "Fortnite",
+          "stream_hours": 28,
+          "stream_share_pct": 28.9,
+          "hours_watched": 596,
+          "watch_share_pct": 26.5,
+          "average_viewers": 18,
+          "peak_viewers": 51
+        },
+        {
+          "name": "Just Chatting",
+          "stream_hours": 24,
+          "stream_share_pct": 25.1,
+          "hours_watched": 509,
+          "watch_share_pct": 22.6,
+          "average_viewers": 16,
+          "peak_viewers": 50
+        },
+        {
+          "name": "Alien: Isolation",
+          "stream_hours": 9,
+          "stream_share_pct": 10.1,
+          "hours_watched": 295,
+          "watch_share_pct": 13.1,
+          "average_viewers": 34,
+          "peak_viewers": 48
+        },
+        {
+          "name": "Clive Barker's Hellraiser: Revival",
+          "stream_hours": 8,
+          "stream_share_pct": 8.8,
+          "hours_watched": 257,
+          "watch_share_pct": 11.4,
+          "average_viewers": 24,
+          "peak_viewers": 66
+        },
+        {
+          "name": "Rogue Company",
+          "stream_hours": 8,
+          "stream_share_pct": 8.8,
+          "hours_watched": 185,
+          "watch_share_pct": 8.3,
+          "average_viewers": 19,
+          "peak_viewers": 48
+        },
+        {
+          "name": "Luto",
+          "stream_hours": 7,
+          "stream_share_pct": 7.2,
+          "hours_watched": 173,
+          "watch_share_pct": 7.7,
+          "average_viewers": 27,
+          "peak_viewers": 46
+        },
+        {
+          "name": "Counter-Strike",
+          "stream_hours": 3,
+          "stream_share_pct": 3.6,
+          "hours_watched": 99,
+          "watch_share_pct": 4.4,
+          "average_viewers": 26,
+          "peak_viewers": 41
+        },
+        {
+          "name": "Among Us",
+          "stream_hours": 2,
+          "stream_share_pct": 2.6,
+          "hours_watched": 18,
+          "watch_share_pct": 0.8,
+          "average_viewers": 7,
+          "peak_viewers": 11
+        },
+        {
+          "name": "Barfender",
+          "stream_hours": 2,
+          "stream_share_pct": 2.3,
+          "hours_watched": 50,
+          "watch_share_pct": 2.2,
+          "average_viewers": 19,
+          "peak_viewers": 37
+        },
+        {
+          "name": "Dead by Daylight",
+          "stream_hours": 2,
+          "stream_share_pct": 2.1,
+          "hours_watched": 48,
+          "watch_share_pct": 2.2,
+          "average_viewers": 24,
+          "peak_viewers": 33
+        },
+        {
+          "name": "Marvel Rivals",
+          "stream_hours": 0,
+          "stream_share_pct": 0.5,
+          "hours_watched": 17,
+          "watch_share_pct": 0.8,
+          "average_viewers": 34,
+          "peak_viewers": 39
+        }
       ]
     },
     {
