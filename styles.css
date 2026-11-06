@@ -1679,3 +1679,141 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
         .modal-content.comic-mode .rod3r1k-page .comic-games-table td{color:#172b43!important;background:#f7efdd!important}
         .modal-content.comic-mode .rod3r1k-page .comic-games-table td small{color:#46566b!important}
         .modal-content.comic-mode .rod3r1k-page .comic-chart-row span,.modal-content.comic-mode .rod3r1k-page .comic-chart-row b{color:#172b43!important}
+
+
+/* SISTEMA VISUAL · MULTIVERSO CINEMATOGRÁFICO */
+:root {
+    --lm-night: #080d18;
+    --lm-panel: #101a2a;
+    --lm-panel-raised: #15243a;
+    --lm-ice: #c8e5f5;
+    --lm-cyan: #62d9e8;
+    --lm-violet: #a99bff;
+    --lm-magenta: #d18acb;
+    --lm-muted: #9eafc4;
+    --lm-line: rgba(153, 190, 220, .24);
+}
+body {
+    background-color: var(--lm-night);
+    background-image:
+        radial-gradient(ellipse at 14% 7%, rgba(67, 126, 177, .14), transparent 34rem),
+        radial-gradient(ellipse at 88% 24%, rgba(129, 94, 185, .10), transparent 38rem),
+        radial-gradient(rgba(169, 205, 232, .12) .7px, transparent .7px);
+    background-size: auto, auto, 28px 28px;
+}
+.chapter-panel { background-color: transparent; }
+.chapter-one {
+    background:
+        radial-gradient(ellipse at 80% 8%, rgba(97, 150, 207, .13), transparent 35rem),
+        linear-gradient(155deg, #101b2d 0%, #0a111e 62%, #080d18 100%);
+}
+.chapter-one .chapter-eyebrow,
+.chapter-one .section-kicker { color: var(--lm-cyan); }
+.chapter-one .section-heading h3 span,
+.chapter-one .era-transition h3 span,
+.chapter-one .protagonists-cta h3 span { color: var(--lm-ice); }
+.chapter-one .chapter-main-title span { color: var(--lm-ice); }
+.chapter-one .chapter-main-title { text-shadow: 0 8px 34px rgba(72, 157, 208, .2); }
+.chapter-one .chapter-cover-art {
+    border: 1px solid rgba(153, 190, 220, .35);
+    border-radius: 18px;
+    box-shadow: 0 24px 70px rgba(0,0,0,.42), 0 0 34px rgba(89, 188, 221, .09);
+    transform: none;
+    overflow: hidden;
+}
+.chapter-one .chapter-cover-art figcaption { background: rgba(10, 18, 31, .92); }
+#chapter-2 {
+    background:
+        radial-gradient(ellipse at 50% 0%, rgba(74, 134, 185, .11), transparent 42rem),
+        linear-gradient(180deg, #0b1321, #080d18 72%);
+}
+#chapter-2 > .comic-title {
+    color: var(--lm-ice);
+    text-shadow: 0 8px 30px rgba(77, 183, 211, .13);
+}
+#chapter-2 .roster-intro { color: #bdcadd; max-width: 760px; line-height: 1.7; }
+#chapter-2 .roster-section-title {
+    color: var(--lm-ice);
+    letter-spacing: .08em;
+    text-shadow: 0 0 22px rgba(98, 217, 232, .13);
+}
+#chapter-2 .roster-section-desc { color: var(--lm-muted); }
+.roster-portrait-card {
+    --tilt-x: 0deg; --tilt-y: 0deg; --shine-x: 50%; --shine-y: 50%;
+    position: relative; isolation: isolate;
+    border: 1px solid rgba(153, 190, 220, .3);
+    border-radius: 15px;
+    background: linear-gradient(155deg, #17263b, #0a111d 78%);
+    box-shadow: 0 14px 34px rgba(0,0,0,.28);
+    transform: translateZ(0);
+    transition: transform .28s cubic-bezier(.2,.75,.25,1), border-color .28s ease, box-shadow .28s ease;
+}
+.roster-portrait-card:hover,
+.roster-portrait-card:focus-visible {
+    border-color: rgba(98,217,232,.7);
+    box-shadow: 0 20px 44px rgba(0,0,0,.38), 0 0 24px rgba(98,217,232,.1);
+}
+.roster-portrait-wrap { border-bottom: 1px solid rgba(153,190,220,.22); background: #080d18; }
+.roster-portrait-info { background: linear-gradient(180deg, rgba(17,29,47,.98), rgba(9,16,28,.99)); }
+.roster-portrait-info strong { color: var(--lm-ice); text-shadow: 0 0 18px rgba(98,217,232,.13); }
+.roster-portrait-info span { color: #aebed2; }
+.roster-card--moriarty {
+    width: min(100%, 286px); max-width: 286px;
+    border: 1px solid rgba(153,190,220,.46); border-radius: 17px; overflow: visible;
+    transform: perspective(1000px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) translateY(0);
+    transform-style: preserve-3d; will-change: transform;
+    transition: transform .36s cubic-bezier(.18,.72,.22,1), box-shadow .3s ease, border-color .3s ease;
+}
+.roster-card--moriarty.is-tilting {
+    transition: transform .08s linear, box-shadow .2s ease;
+    box-shadow: 0 28px 58px rgba(0,0,0,.48), 0 0 34px rgba(98,217,232,.18);
+    border-color: rgba(180,224,255,.9);
+}
+.roster-portrait-wrap--collectible {
+    position: relative; height: auto; aspect-ratio: 2 / 3;
+    overflow: hidden; border: 0; border-radius: 16px 16px 0 0;
+    transform: translateZ(1px);
+}
+.roster-portrait-wrap--collectible img {
+    object-fit: contain; object-position: center; background: #080d18;
+    transition: transform .45s ease, filter .45s ease;
+}
+.roster-card--moriarty:hover .roster-portrait-wrap--collectible img {
+    transform: scale(1.018); filter: saturate(1.08) contrast(1.025);
+}
+.roster-card-foil {
+    position: absolute; inset: 0; pointer-events: none; z-index: 2;
+    opacity: .5; mix-blend-mode: screen;
+    background:
+        radial-gradient(circle at var(--shine-x) var(--shine-y), rgba(255,255,255,.42), transparent 21%),
+        linear-gradient(118deg, transparent 15%, rgba(103,224,242,.08) 34%, rgba(190,151,255,.18) 48%, rgba(255,255,255,.08) 54%, transparent 72%);
+    background-size: auto, 220% 220%;
+    background-position: center, var(--shine-x) var(--shine-y);
+    transition: opacity .3s ease;
+}
+.roster-card--moriarty.is-tilting .roster-card-foil { opacity: .82; }
+.roster-card-number, .roster-card-cue {
+    position: absolute; z-index: 3; display: inline-flex; align-items: center;
+    padding: 6px 9px; border: 1px solid rgba(193,226,246,.58);
+    border-radius: 999px; color: #eaf7ff; background: rgba(6,13,25,.72);
+    backdrop-filter: blur(8px); font: 700 .62rem 'Roboto Condensed', sans-serif;
+    letter-spacing: .12em; text-shadow: 0 1px 4px #000;
+}
+.roster-card-number { top: 12px; left: 12px; }
+.roster-card-cue { right: 10px; bottom: 12px; color: #c6f3fa; }
+.roster-card--moriarty .roster-portrait-info { border-radius: 0 0 16px 16px; transform: translateZ(2px); }
+.roster-card--moriarty .roster-portrait-info strong { font-size: 1.5rem; letter-spacing: .09em; }
+@media (hover: hover) and (pointer: fine) {
+    .roster-card--moriarty:hover { transform: perspective(1000px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) translateY(-3px); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .roster-card--moriarty, .roster-card--moriarty *, .roster-portrait-card, .roster-portrait-card * {
+        transition-duration: .01ms !important; animation-duration: .01ms !important; scroll-behavior: auto !important;
+    }
+    .roster-card--moriarty { transform: none !important; }
+    .roster-card-foil { opacity: .18; }
+}
+@media (max-width: 600px) {
+    .roster-card--moriarty { width: min(100%, 310px); max-width: 310px; }
+    .roster-card-cue { font-size: .56rem; }
+}
