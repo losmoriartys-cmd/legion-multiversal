@@ -493,7 +493,7 @@ function renderRoster() {
             card.type = 'button';
             card.className = 'roster-portrait-card';
             card.setAttribute('aria-label', 'Ver carta y expediente de ' + hero.name);
-            card.onclick = () => openHeroProfile(index);
+            card.onclick = (event) => openHeroProfile(index, event.currentTarget);
             const imageWrap = document.createElement('div');
             imageWrap.className = 'roster-portrait-wrap';
             const image = document.createElement('img');
@@ -593,20 +593,20 @@ function renderCommercialQuickView(hero) {
     out += '</section>';
     return out;
 }
-function openHeroProfile(index) {
+function openHeroProfile(index, triggerElement = document.activeElement) {
     const hero = heroesData[index];
     if (!hero) return;
     const home = document.getElementById('roster-home');
     const page = document.getElementById('hero-profile-page');
     if (!home || !page) return;
     const channel = hero.youtube || hero.twitch || '';
-    window.lastHeroProfileTrigger = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    window.lastHeroProfileTrigger = triggerElement instanceof HTMLElement ? triggerElement : null;
     page.innerHTML = '<div class="hero-profile-layout"><img class="hero-profile-card" src="' + escapeStatsHtml(hero.img) + '" alt="Carta oficial de ' + escapeStatsHtml(hero.name) + '"><div class="hero-profile-copy"><span class="stats-status">EXPEDIENTE INDIVIDUAL · ' + escapeStatsHtml(hero.rank || 'CLASIFICACIÓN PENDIENTE') + '</span><h3 id="hero-profile-title" tabindex="-1">' + escapeStatsHtml(hero.name) + '</h3><p>' + escapeStatsHtml(hero.bio || 'Presentación personal pendiente de completar.') + '</p><div class="hero-profile-actions"><button class="twitch-link-btn" type="button" onclick="openHeroModal(' + index + ')">ABRIR BITÁCORA COMPLETA</button>' + (channel ? '<a class="btn-link" href="' + escapeStatsHtml(channel) + '" target="_blank" rel="noopener">VISITAR CANAL</a>' : '') + '<button class="hero-profile-back" type="button" onclick="closeHeroProfile()">VOLVER AL ROSTER</button></div></div></div>' + renderCommercialQuickView(hero);
     home.hidden = true;
     page.hidden = false;
     history.replaceState(null, '', '#expediente-' + encodeURIComponent(hero.name.toLowerCase().replace(/[^a-z0-9]+/g,'-')));
     page.scrollIntoView({behavior:'smooth',block:'start'});
-    document.getElementById('hero-profile-title')?.focus({preventScroll:true});
+    requestAnimationFrame(() => document.getElementById('hero-profile-title')?.focus({preventScroll:true}));
 }
 function restoreHeroProfileFromHash() {
     const slug = decodeURIComponent((location.hash || '').replace(/^#expediente-/, ''));
@@ -629,10 +629,12 @@ function closeHeroProfile() {
     const trigger = window.lastHeroProfileTrigger;
     window.lastHeroProfileTrigger = null;
     if (trigger && trigger.isConnected && typeof trigger.focus === 'function') {
-        trigger.focus({preventScroll:true});
+        requestAnimationFrame(() => {
+            if (trigger.isConnected) trigger.focus({preventScroll:true});
+        });
     } else if (home) {
         home.setAttribute('tabindex', '-1');
-        home.focus({preventScroll:true});
+        requestAnimationFrame(() => home.focus({preventScroll:true}));
     }
 }
 
