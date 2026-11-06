@@ -1191,3 +1191,15 @@ Se añadieron tratamientos visuales individuales a los globos de voz de los diez
 - **Pendientes / riesgos:** verificar visualmente escritorio y móvil; después continuar con la separación del JavaScript en una intervención independiente. No se cambió la lógica de la página.
 - **Commits de implementación:** [`3ed032b`](https://github.com/losmoriartys-cmd/legion-multiversal/commit/3ed032bd5c94bf2767a1fa6ad1d1985485645285) y [`6c66751`](https://github.com/losmoriartys-cmd/legion-multiversal/commit/6c6675128e5c56bbda43e21e98e5c70a26a3cdec).
 - **Despliegue:** GitHub Pages completó correctamente el build y deploy en el workflow [42175669581](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/42175669581). Verificación posterior en navegador: página principal correcta y `styles.css` respondió HTTP 200; los estilos se aplicaron y no se observaron errores visuales.
+
+
+## 2026-11-06 — Separar la lógica principal de JavaScript
+
+- **Responsable:** colaboración ChatGPT + equipo del proyecto.
+- **Objetivo:** reducir el código embebido en `index.html` y continuar la modularización sin reescribir funciones ni alterar deliberadamente su lógica.
+- **Archivos modificados:** `index.html`, `app.js`, `INFORMES.md`.
+- **Implementado:** se trasladó íntegramente el bloque principal de JavaScript (187.781 caracteres) a `app.js`. El HTML carga ahora `<script src="./app.js"></script>` en la misma posición donde estaba el bloque inline, antes de `navigation-fix.js`; se conserva así el orden de ejecución y el comportamiento de inicialización existente.
+- **Validaciones:** comprobada la extracción exacta del bloque y la presencia del nuevo archivo. La compilación aislada del bloque mediante el parser V8 de la herramienta de edición devolvió un error de sintaxis genérico sin ubicación; por eso no se da por validada la sintaxis hasta la comprobación real en navegador. QA visual y funcional pendiente del despliegue.
+- **Pendientes / riesgos:** verificar que `app.js` responda HTTP 200, que el roster, navegación, expedientes/modales, datos estadísticos y paneles de plataforma sigan funcionando, y revisar la consola del navegador. Si aparece un error, corregirlo antes de continuar con nuevas separaciones.
+- **Commits:** [`3772b82`](https://github.com/losmoriartys-cmd/legion-multiversal/commit/3772b82e416ca15da1a927dd5694f99d9df44fe3) y [`1eb2be6`](https://github.com/losmoriartys-cmd/legion-multiversal/commit/1eb2be697cf3a1891730d82f514cfe630693bd90).
+- **Despliegue:** pendiente de verificar.
