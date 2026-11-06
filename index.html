@@ -634,7 +634,8 @@
         .commercial-quickview-head strong { color:#8edff0; font-family:'Bangers',cursive; font-size:1.45rem; letter-spacing:1px; }
         .commercial-quickview-meta { display:flex; flex-wrap:wrap; gap:8px; margin:16px 0; }
         .commercial-quickview-meta span { padding:6px 9px; border:1px solid #49617d; background:#172438; color:#dce5f1; font-size:.72rem; font-weight:900; letter-spacing:.6px; }
-        .commercial-quickview-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+        .commercial-quickview-editorial { margin-top:14px; padding:16px; background:rgba(5,12,22,.7); border-left:3px solid #00b8d8; }
+        .commercial-quickview-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; margin-top:14px; }
         .commercial-quickview-grid section,.commercial-quickview-proof,.commercial-quickview-links { min-width:0; padding:16px; background:rgba(5,12,22,.7); border:1px solid #34465d; }
         .commercial-quickview h4 { margin:0 0 10px; color:#ffde00; font-family:'Bangers',cursive; font-size:1.35rem; letter-spacing:.5px; }
         .commercial-quickview ul { margin:0; padding-left:20px; color:#dce5f1; line-height:1.7; }
@@ -2693,9 +2694,40 @@ function renderRoster() {
 }
 function renderCommercialQuickView(hero) {
     const safe = escapeStatsHtml;
-    const data = hero.mediaProfile || {};
     const twitchLogin = hero.twitch ? hero.twitch.split("/").filter(Boolean).pop().toLowerCase() : "";
     const youtubeLogin = hero.youtube ? (hero.youtube.split("/").filter(Boolean).pop().replace("@","").toLowerCase()) : "";
+    const profileKey = twitchLogin || youtubeLogin;
+    const tailoredProfiles = {
+        ther0d3r1k: {
+            editorial: "Gaming y entretenimiento en directo con una presencia expresiva, energía de equipo y variedad de experiencias competitivas, de acción, terror y conversación.",
+            opportunities: ["Presentación y prueba de videojuegos de acción, competitivos o de terror","Integraciones de periféricos y accesorios durante su uso real","Retos, eventos y dinámicas con otros creadores","Clips y piezas breves de momentos destacados"]
+        },
+        ladymoriarty01: {
+            editorial: "Un canal individual de gaming, entretenimiento chill e IRL, con una identidad espontánea que combina gameplay, charla y experiencias fuera del juego.",
+            opportunities: ["Presentación de videojuegos y experiencias de juego relajadas","Integraciones naturales en charlas o sesiones IRL","Dinámicas participativas y encuentros con la comunidad","Contenido breve a partir de momentos destacados"]
+        },
+        ardipii: {
+            editorial: "Una propuesta de conversación, gaming y comunidad, con espacio para explicar, mostrar y conversar en directo de manera cercana.",
+            opportunities: ["Presentación de juegos y primeras impresiones en directo","Integraciones de productos dentro de conversaciones pertinentes","Dinámicas participativas con la comunidad","Clips de momentos y conversaciones destacadas"]
+        },
+        akumazoldyck: {
+            editorial: "Gaming, charlas y encuentros compartidos. Su propuesta combina experiencias de juego con el rol de anfitrión de una comunidad y eventos grupales.",
+            opportunities: ["Presentación y prueba de videojuegos competitivos o de terror","Partidas especiales y eventos con otros creadores","Integraciones de productos gaming en contexto de uso","Dinámicas comunitarias y clips de una activación"]
+        },
+        daved0608: {
+            editorial: "Un creador que inicia una nueva etapa de transmisiones. Su especialidad y sus líneas editoriales todavía están en definición; la propuesta debe construirse junto a Dave, sin atribuirle una trayectoria no documentada.",
+            opportunities: ["Primeras impresiones y descubrimiento de videojuegos","Experiencias cooperativas y desafíos con la comunidad","Integraciones sencillas, acordadas con el creador","Registro de clips de la nueva etapa, cuando haya material disponible"]
+        },
+        habitos_atomicos: {
+            editorial: "Gaming y conversación se cruzan con filosofía y desarrollo personal. El canal alterna entretenimiento con espacios para compartir ideas y reflexiones.",
+            opportunities: ["Conversaciones temáticas vinculadas a ideas y hábitos cotidianos","Presentación de videojuegos y experiencias en directo","Dinámicas participativas que conecten juego y reflexión","Integraciones de productos pertinentes al contenido y a la audiencia"]
+        },
+        patoteexplica: {
+            editorial: "Un perfil de creación audiovisual educativa y divulgación, con contenidos sobre programación HTML y JavaScript, ciencia y comportamiento. No realiza directos; su formato actual es YouTube.",
+            opportunities: ["Videos educativos o explicativos","Presentación de herramientas y plataformas digitales","Integraciones editoriales de software o tecnología, sujetas a criterio de contenido","Piezas divulgativas patrocinadas con transparencia"]
+        }
+    };
+    const data = hero.mediaProfile || tailoredProfiles[profileKey] || {};
     const record = creatorRecordsData?.channels?.[twitchLogin] || creatorRecordsData?.channels?.[youtubeLogin] || {};
     const typeLabel = hero.creator_type === "video_creator" ? "CREADOR DE VIDEO" : hero.creator_type === "live_streamer" ? "CREADOR EN DIRECTO" : "FORMATO POR CONFIRMAR";
     const roleLabels = {director:"DIRECCIÓN",teacher:"PROFESOR",student:"ESTUDIANTE",collaborator:"COLABORADOR"};
@@ -2716,6 +2748,7 @@ function renderCommercialQuickView(hero) {
     let out = '<section class="commercial-quickview" aria-label="Ficha comercial resumida">';
     out += '<div class="commercial-quickview-head"><span class="profile-section-kicker">LECTURA RÁPIDA PARA MARCAS</span><strong>FICHA EJECUTIVA</strong></div>';
     out += '<div class="commercial-quickview-meta"><span>' + safe(roleLabels[hero.role] || "INTEGRANTE") + '</span><span>' + safe(typeLabel) + '</span><span>' + safe((hero.platforms || []).map(v=>v.toUpperCase()).join(" · ") || "PLATAFORMA POR CONFIRMAR") + '</span></div>';
+    if (data.editorial) out += '<section class="commercial-quickview-editorial"><h4>ENFOQUE PARA MARCAS</h4><p>' + safe(data.editorial) + '</p></section>';
     out += '<div class="commercial-quickview-grid">';
     out += '<section><h4>TERRITORIOS DE CONTENIDO</h4>' + (areas.length ? '<ul>' + areas.map(v=>'<li>'+safe(v)+'</li>').join('') + '</ul>' : '<p>Especialidades pendientes de documentar.</p>') + '</section>';
     out += '<section><h4>FORMATOS A CONVERSAR</h4><ul>' + opportunities.map(v=>'<li>'+safe(v)+'</li>').join('') + '</ul><small>Son posibilidades sujetas a conversación, disponibilidad y aprobación del creador; no representan campañas contratadas.</small></section>';
