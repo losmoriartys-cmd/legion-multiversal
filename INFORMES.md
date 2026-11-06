@@ -1378,3 +1378,14 @@ Se añadieron tratamientos visuales individuales a los globos de voz de los diez
 - **Presentación:** la bitácora usa las ocho filas disponibles; el listado de juegos está rotulado como selección proporcionada por el creador y no como ranking calculado. Los formatos comerciales se presentan como posibilidades, no como campañas confirmadas.
 - **Cambios:** ninguno; se requiere contraste de las ocho filas con la captura original de SullyGnome o el material fuente antes de consolidar totales.
 - **Pendientes:** confirmar los totales de duración y horas vistas de ARDIPII; revisar visualmente el dossier en escritorio y móvil y validar reproducción real de los cuatro clips.
+
+## 2026-11-06 — Auditoría estática de DAVE — NEXUS y correcciones puntuales
+
+- **Responsable:** colaboración ChatGPT + equipo del proyecto.
+- **Archivos revisados:** `app.js`, `roster-data.json`, `sullygnome-data.json`, `creator-records.json`.
+- **Datos anuales:** el renderizador presenta correctamente el resumen anual 2026 (45 transmisiones, 68 h emitidas, 132 h vistas, promedio 1, pico 9 y +25 seguidores) separado de las diez filas visibles. La muestra suma 2.092 minutos (34,9 h) y 43 horas vistas; no se presenta como historial completo.
+- **Error confirmado y corregido:** el conteo de apariciones de Marvel Rivals en la tabla de juegos era 4; aparece en cinco de las diez filas. Se corrigió a 5.
+- **Horario:** el registro anterior indicaba todos los días a las 19:00, pero la información de agenda previamente confirmada para DAVE era que no tenía horario fijo. Se retiró el horario diario no confirmado del roster y el renderizador ahora muestra “Sin horario fijo confirmado”.
+- **Pendiente de estructura:** el renderizador construye una página específica de juegos (`gamesPage`) pero no la incluye en el array final de seis páginas. Por eso la tabla de universos/juegos construida en esa página no se muestra en el expediente. No se añadió una séptima página ni se comprimió contenido en otra página sin validar el diseño; queda pendiente decidir y comprobar visualmente cómo integrar esa información conservando la legibilidad.
+- **Clips:** los dos IDs registrados para DAVE coinciden con los dos reproductores construidos. La reproducción real sigue pendiente de prueba en navegador.
+- **Validación:** se contrastaron los conteos de juegos contra las diez filas y se revisaron las cifras anuales y de muestra. La modificación se limita al conteo incorrecto y al horario no confirmado.
