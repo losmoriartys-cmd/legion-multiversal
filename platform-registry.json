@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "description": "Registro extensible de cuentas por creador y plataforma. Solo incorporar handles confirmados por el propio creador.",
+  "creators": {
+    "patoteexplica": {
+      "display_name": "PATO — ORATORIS",
+      "accounts": [
+        {
+          "platform": "youtube",
+          "handle": "@patoteexplica",
+          "url": "https://www.youtube.com/@patoteexplica",
+          "verified_by": "Enlace ya registrado en el expediente del proyecto."
+        }
+      ]
+    }
+  },
+  "onboarding_template": {
+    "note": "Para sumar un candidato, agregar una clave estable en creators y cuentas con platform=kick o youtube. No necesita tener Twitch."
+  }
+}
