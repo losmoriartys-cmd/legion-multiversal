@@ -1400,3 +1400,13 @@ Se añadieron tratamientos visuales individuales a los globos de voz de los diez
 - **Bitácora:** `observed_rows_summary` declara 24 filas recibidas de 28 transmisiones, pero el array `streams` está vacío y el renderizador no construye una tabla de transmisiones individuales. Por lo tanto, el expediente actual presenta el resumen y el desglose por categoría, no una bitácora fila por fila.
 - **Cambios:** ninguno; los totales y el detalle por categoría requieren contraste con la fuente original antes de corregirlos. No se reconstruyeron las 24 filas ausentes.
 - **Pendientes:** conciliar horas emitidas y horas vistas del desglose, recuperar las filas individuales si se desea incorporar bitácora, y completar la revisión visual en escritorio/móvil y la reproducción real de los cuatro clips.
+
+## 2026-11-06 — Auditoría estática del dossier de PATO — ORATORIS
+
+- **Responsable:** colaboración ChatGPT + equipo del proyecto.
+- **Archivos revisados:** `app.js`, `creator-records.json`, `platform-stats.json`, `roster-data.json`.
+- **Identidad y plataformas:** el perfil conserva correctamente a Pato como creador de video y colaborador, con YouTube, Instagram y Cafecito; no se agrega Twitch ni una agenda de publicación no confirmada. La posible vuelta en 2027 se presenta como proyección, no calendario.
+- **Métricas verificadas:** la integración de YouTube figura como verificada. Los datos visibles son 56 suscriptores, 6 videos y 430 visualizaciones acumuladas. Las seis publicaciones del registro editorial coinciden en título y vistas con los seis videos recientes de la API; sus visualizaciones suman 430.
+- **Discrepancia editorial corregida:** los dos videos destacados embebidos tenían `title: null` y el expediente los describía como títulos pendientes, aunque sus IDs coinciden con dos publicaciones ya identificadas en el registro/API. Se incorporaron sus títulos exactos: “Dopamina, motivación y adicción: Qué es y cómo funciona” y “Tu primera página HTML en menos de una hora. Curso HTML + Javascript (1/5)”. El caption del reproductor ahora toma el título registrado y mantiene una salida neutral si faltara.
+- **Estructura:** el renderizador conserva seis páginas: portada, identidad, alcance, archivo de producciones con dos videos embebidos, proyección y colaboraciones.
+- **Pendientes:** confirmar con Pato el enfoque final de la eventual etapa 2027 y la aprobación de formatos comerciales; probar visualmente los dos reproductores y la versión móvil.
