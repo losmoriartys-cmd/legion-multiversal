@@ -1563,3 +1563,28 @@ Se añadieron tratamientos visuales individuales a los globos de voz de los diez
 
 - **Archivos:** app.js, styles.css, INFORMES.md.
 - **Estado:** implementación inicial; pendiente validación automatizada y revisión visual del usuario.
+
+
+## 2026-11-06 — Capítulo 02: coherencia del Roster y recorrido hacia las bitácoras
+
+### Objetivo
+Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet como identificación de entrada y carta ilustrada completa como pieza principal dentro de la bitácora individual. Mejorar la lectura de las áreas y la adaptación de las tarjetas sin sustituir recursos existentes.
+
+### Cambios implementados
+- Se corrigió la excepción de MORIARTYS: el Roster vuelve a tomar el campo portrait, igual que los otros siete integrantes. La carta ilustrada del campo img queda reservada para la bitácora.
+- Se retiró la carta completa de la pantalla intermedia de presentación del expediente. Esa pantalla funciona ahora como acceso editorial a la bitácora y evita repetir la misma ilustración antes de abrirla.
+- Se mantuvieron las ocho fichas y sus recursos existentes; no se generaron, borraron ni renombraron imágenes.
+- Se actualizaron las descripciones de las áreas para hablar de la Legión y no del antiguo Instituto.
+- Se ajustaron jerarquía, separación, proporciones y grilla de carnets, con un diseño adaptable a pantallas angostas y controles de movimiento reducido ya existentes.
+- Se conservó el número de colección y el efecto holográfico de MORIARTY como detalle de su carnet, pero sin reemplazar su imagen de identificación.
+
+### Validación y límites
+- Comprobación estática de las ocho entradas de roster-data.json: todas conservan portrait e img.
+- Comprobación de la lógica: el Roster utiliza portrait como fuente prioritaria para todos; la portada de la bitácora de MORIARTY conserva hero.img.
+- No se declara prueba visual independiente en navegador ni prueba física en móvil/tablet. Debe revisarse el resultado publicado en ambos tamaños antes de dar por cerrado el capítulo.
+- No se modificaron cifras, biografías, roles ni recursos gráficos originales.
+
+### Archivos
+- app.js
+- styles.css
+- INFORMES.md
