@@ -2335,8 +2335,14 @@ function renderSullyStats(channel){
   }
  }else if(channel.status==='partial'){
   out+='<div class="stats-kpis">';
-  [['Transmisiones',x.streams_count,'filas recibidas'],['Tiempo emitido',x.airtime_minutes!==null&&x.airtime_minutes!==undefined?Math.floor(x.airtime_minutes/60)+' h '+(x.airtime_minutes%60)+' min':'—','acumulado recibido'],['Horas vistas',x.hours_watched,'según fuente'],['Promedio',x.average_viewers_duration_weighted,'cálculo ponderado'],['Pico máximo',x.peak_viewers,'espectadores']].forEach(k=>out+='<div class="stats-kpi"><span>'+k[0]+'</span><strong>'+escapeStatsHtml(k[1])+'</strong><em>'+k[2]+'</em></div>');
+  [['Transmisiones',x.streams_count,'informa la fuente'],['Tiempo emitido',x.airtime_minutes!==null&&x.airtime_minutes!==undefined?Math.floor(x.airtime_minutes/60)+' h '+(x.airtime_minutes%60)+' min':'—','informa la fuente'],['Horas vistas',x.hours_watched,'informa la fuente'],['Promedio',x.average_viewers_duration_weighted,'espectadores'],['Pico máximo',x.peak_viewers,'espectadores'],['Seguidores ganados',x.followers_gain_reported,'en el período']].forEach(k=>out+='<div class="stats-kpi"><span>'+k[0]+'</span><strong>'+escapeStatsHtml(k[1])+'</strong><em>'+k[2]+'</em></div>');
   out+='</div>';
+ }
+ const gameRows=Array.isArray(channel.game_breakdown)?channel.game_breakdown:[];
+ if(gameRows.length){
+  out+='<h4>JUEGOS Y CATEGORÍAS · DESGLOSE DEL PERÍODO</h4><p class="stats-section-intro">Horas emitidas, horas vistas y audiencia media/pico según el resumen compartido.</p><div class="stats-table-wrap"><table class="stats-table"><thead><tr><th>Categoría</th><th>Horas emitidas</th><th>% emisión</th><th>Horas vistas</th><th>% vistas</th><th>Promedio</th><th>Pico</th></tr></thead><tbody>';
+  gameRows.forEach(g=>out+='<tr><td>'+escapeStatsHtml(g.name)+'</td><td class="num">'+statsNumber(g.stream_hours,1)+'</td><td class="num">'+statsNumber(g.stream_share_pct,1)+'%</td><td class="num">'+statsNumber(g.hours_watched,1)+'</td><td class="num">'+statsNumber(g.watch_share_pct,1)+'%</td><td class="num">'+statsNumber(g.average_viewers,0)+'</td><td class="num">'+statsNumber(g.peak_viewers,0)+'</td></tr>');
+  out+='</tbody></table></div>';
  }
  const streams=Array.isArray(channel.streams)?channel.streams:[];
  if(streams.length){
@@ -2345,7 +2351,7 @@ function renderSullyStats(channel){
   streams.forEach(v=>out+='<tr><td>'+statsDate(v.date)+'</td><td>'+(v.start_time?escapeStatsHtml(v.start_time):'No informado')+'</td><td>'+statsDuration(v)+'</td><td class="num">'+statsNumber(v.average_viewers,0)+'</td><td class="num">'+statsNumber(v.peak_viewers,0)+'</td><td class="num">'+statsNumber(v.hours_watched,2)+'</td><td class="num">'+statsNumber(v.followers_reported,0)+'</td></tr>');
   out+='</tbody></table></div>';
  }else{
-  out+='<div class="stats-empty"><strong>Historial en preparación</strong>Ya está identificado el canal de SullyGnome, pero todavía no tenemos filas de transmisiones verificadas para mostrar.</div>';
+  out+='<div class="stats-empty"><strong>Detalle de transmisiones incompleto</strong>El resumen y el desglose por categorías ya están cargados. Falta incorporar el detalle de las 28 transmisiones para completar la bitácora individual.</div>';
  }
  if(channel.observed_rows_summary){
   const o=channel.observed_rows_summary;
@@ -2353,6 +2359,9 @@ function renderSullyStats(channel){
  }
  if(channel.notes?.length){
   out+='<div class="stats-note warning">'+channel.notes.map(n=>escapeStatsHtml(n)).join('<br>')+'</div>';
+ }
+ if(channel.login==='habitos_atomicos'&&channel.observed_rows_summary){
+  out+='<div class="stats-note warning">Detalle recibido: '+channel.observed_rows_summary.rows+' de '+channel.observed_rows_summary.expected_rows+' transmisiones. '+escapeStatsHtml(channel.observed_rows_summary.note)+' El máximo de 29 espectadores se conserva sin fecha hasta resolver la discrepancia del informe.</div>';
  }
  if(channel.login==='losmoriartys'){
   out+='<div class="stats-note warning">La fuente recibida no incluye horarios de inicio para estas transmisiones; por eso se muestran como “No informado”. La columna de seguidores conserva el valor reportado por SullyGnome y no se interpreta como ganancia confirmada.</div>';
