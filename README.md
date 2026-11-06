@@ -2,7 +2,7 @@
 
 Repositorio de trabajo compartido: [losmoriartys-cmd/s3xmen](https://github.com/losmoriartys-cmd/legion-multiversal)  
 Sitio publicado actualmente: [GitHub Pages](https://losmoriartys-cmd.github.io/legion-multiversal/)  
-Nueva publicación prevista: Cloudflare Pages (`https://legionmultiversal.pages.dev/`), pendiente de conectar la cuenta y verificar el primer despliegue.
+Nueva publicación prevista: Cloudflare Pages (`https://legionmultiversal.pages.dev/`), pendiente de conectar la cuenta y verificar el primer despliegue. Guía: [`CLOUDFLARE_PAGES.md`](./CLOUDFLARE_PAGES.md).
 
 > **Fuente única de verdad:** el contenido vigente del repositorio y su historial de commits. Las conversaciones sirven para acordar y explicar el trabajo, pero una modificación solo se considera compartida cuando está registrada en GitHub.
 
