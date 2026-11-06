@@ -1609,3 +1609,16 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 ### Validación
 - Pendiente de validación automática de sintaxis y rutas tras el commit.
 - Pendiente de revisión visual en navegador de las ocho cartas, con especial atención a la legibilidad del reverso en móvil y a la proporción de los retratos.
+
+
+## 2026-11-06 — Roster: doble arte coleccionable y acabado premium
+
+- **Responsable:** colaboración ChatGPT + equipo del proyecto.
+- **Objetivo:** elevar el tratamiento visual de las cartas del Roster sin limitar la experiencia al retrato tipo carnet.
+- **Archivos modificados:** `app.js`, `styles.css`, `INFORMES.md`.
+- **Implementado:** el frente conserva el retrato carnet con marco metálico y acabado premium; el reverso ahora incorpora la ilustración completa original del integrante como arte principal, con degradado cinematográfico para mantener legibles la identidad, clasificación, función, perfil de creación y presentación. Se refuerzan profundidad de bordes, brillos, foil holográfico, reflejos que siguen el puntero, microzoom de imagen y sombras multicapa. Se reutilizan los archivos existentes de `roster-data.json`; no se generan ni sustituyen retratos.
+- **Criterio de movimiento:** la inclinación 3D y el reflejo responden al puntero en escritorio; el giro de carta sigue disponible mediante toque/clic. Se conserva la preferencia de movimiento reducido del sistema.
+- **Validaciones:** revisión estática del flujo de renderizado y de los campos de datos; pendiente ejecutar comprobación de sintaxis, comprobar las ocho rutas de imagen en el árbol del repositorio y confirmar el workflow de Pages. No se declara prueba visual en navegador.
+- **Pendientes / riesgos:** revisar en el sitio publicado el encuadre de las ocho ilustraciones en el reverso, la legibilidad de las fichas y el giro en pantallas pequeñas; ajustar `object-position` si alguna composición lo necesita.
+- **Commits:** app.js `0493a9b49e77648418a2c63fbc1ae75f749c390e`; styles.css `e51dee9bc15ceb8833fae2eeaf55ab7c3055ea71`.
+- **Despliegue:** pendiente de verificar el workflow generado por los commits.
