@@ -21,6 +21,23 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 
 ---
 
+## 2026-11-06 — Separar roster activo del archivo histórico y transparentar cobertura Twitch
+
+- **Responsable:** colaboración ChatGPT + equipo del proyecto.
+- **Objetivo:** evitar que exintegrantes aparezcan en indicadores comerciales del roster actual y aclarar que una ventana máxima de 30 días no implica 30 días completos de observación.
+- **Archivos modificados:** `update_stats.py`, `data.json`, `index.html`, `INFORMES.md`.
+- **Implementado:**
+  - Capy (`capyunaplay`) y Gabi (`elgabii090`) salen de la lista de canales consultados por el colector.
+  - Sus registros y muestras anteriores permanecen en `data.json`, identificados como archivo histórico.
+  - Se incorpora `active_channels` como lista explícita de canales del roster activo y se conserva la lista de canales archivados.
+  - Los indicadores generales y la tabla de actividad para marcas utilizan exclusivamente los canales activos.
+  - La tabla técnica agrega una estimación de cobertura dentro del intervalo comprendido entre la primera y la última muestra disponible por canal; no se presenta como porcentaje de los 30 días completos.
+  - La interfaz denomina los 30 días como ventana máxima configurada y advierte que la cobertura efectiva varía por canal.
+- **Validaciones:** se verificó que los siete canales Twitch actuales estén presentes en el registro; se confirmó que Capy y Gabi permanecen en el archivo histórico y ya no forman parte de `CHANNELS`. Se comprobó que el HTML conserva los nueve encabezados/columnas y que ambos paneles estadísticos filtran por `active_channels`.
+- **Pendientes / riesgos:** ejecutar el workflow de Twitch para validar el colector en vivo; revisar visualmente el capítulo de estadísticas en escritorio y móvil; auditar los perfiles individuales y su cobertura estadística en la siguiente etapa. La cobertura mostrada compara muestras observadas con el intervalo temporal entre la primera y última muestra, no reconstruye períodos sin datos.
+- **Commit:** se registra al completar esta intervención.
+- **Despliegue:** pendiente de verificar GitHub Pages.
+ 
 ## 2026-11-06 — Dossier comercial de ROD3R1K
 
 - **Responsable:** colaboración ChatGPT + equipo del proyecto.
