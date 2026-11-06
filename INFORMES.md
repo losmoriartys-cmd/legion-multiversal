@@ -21,6 +21,18 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 
 ---
 
+## 2026-11-06 — Personalizar el enfoque comercial de cada perfil
+
+- **Responsable:** colaboración ChatGPT + equipo del proyecto.
+- **Objetivo:** evitar que la lectura rápida para marcas presente la misma propuesta genérica a todos los integrantes.
+- **Archivos modificados:** `index.html`, `INFORMES.md`.
+- **Implementado:** se incorporan enfoques editoriales y formatos potenciales diferenciados para ROD3R1K, LADYMORIARTY01, ARDIPII, AKUMA, DAVE — NEXUS, HABITOS y PATO — ORATORIS. Los textos se construyen a partir de las áreas, biografías y propuestas ya documentadas en sus expedientes. Para Dave se explicita que su especialidad está por definir; para Pato se mantiene el modelo de video educativo en YouTube, sin atribuirle directos.
+- **Criterio:** propuestas posibles, no campañas realizadas ni resultados garantizados. La ficha de MORIARTYS conserva el enfoque compartido y las oportunidades ya documentadas en su `mediaProfile`.
+- **Validaciones:** comprobada la existencia de los siete perfiles diferenciados en el código y su selección por login de plataforma. La verificación visual queda pendiente de publicación.
+- **Pendientes:** revisión de tono y aprobación individual de cada propuesta por parte de su creador.
+- **Commit:** se registra al completar esta intervención.
+- **Despliegue:** pendiente de verificar GitHub Pages.
+
 ## 2026-11-06 — Incorporar ficha ejecutiva comercial antes del media kit
 
 - **Responsable:** colaboración ChatGPT + equipo del proyecto.
