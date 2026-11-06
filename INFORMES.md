@@ -1458,3 +1458,16 @@ Se añadieron tratamientos visuales individuales a los globos de voz de los diez
 - **Automatizaciones de seguimiento:** se pausó la tarea semanal separada de salud web y sus controles se integraron a la revisión semanal del proyecto, evitando duplicación. Se creó la tarea diaria de vigilancia de la cadencia real del colector Twitch.
 - **Archivos de sitio modificados:** ninguno en esta etapa.
 - **Despliegue:** no se requirió un nuevo despliegue por esta auditoría documental.
+
+
+## 2026-11-06 — Completar metadatos de portada y compartición social
+
+- **Responsable:** colaboración ChatGPT + equipo del proyecto.
+- **Objetivo:** mejorar la identificación de la web en buscadores, pestañas del navegador y vistas previas al compartir el enlace.
+- **Archivos modificados:** `index.html`, `INFORMES.md`.
+- **Hallazgo:** la portada tenía título y viewport, pero no descripción SEO, URL canónica, color de tema ni metadatos Open Graph/Twitter.
+- **Implementado:** descripción en español alineada con la propuesta institucional; color de tema basado en el fondo principal; URL canónica; Open Graph con tipo, locale, nombre del sitio, título, descripción y URL; tarjeta de Twitter tipo `summary`. No se declaró una imagen social porque no se verificó un recurso horizontal optimizado para compartir; evitar reutilizar a ciegas una foto de roster o una imagen de identidad histórica.
+- **Validaciones:** inserción acotada dentro de `<head>`; se mantuvieron el título, viewport, fuentes y hoja de estilos existentes. La validación automática y el despliegue de Pages se comprobarán después del commit.
+- **Pendientes / riesgos:** crear y verificar una imagen social horizontal específica (idealmente 1200×630) y comprobar visualmente la vista previa en plataformas externas. La auditoría visual de escritorio, móvil y tablet sigue pendiente por falta de saldo de la herramienta de navegador; no se presenta como realizada.
+- **Commit de portada:** [95af81e6](https://github.com/losmoriartys-cmd/legion-multiversal/commit/95af81e625804fb6caa08e5c722905ba40433e97).
+- **Despliegue:** pendiente de verificar.
