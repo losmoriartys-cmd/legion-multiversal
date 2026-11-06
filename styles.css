@@ -2200,3 +2200,128 @@ body {
     }
     .roster-collectible-card { transform: none !important; }
 }
+
+
+/* ROSTER · edición premium de doble arte: carnet al frente e ilustración completa al reverso */
+#chapter-2 .roster-collectible-card {
+    isolation: isolate;
+    filter: drop-shadow(0 18px 24px rgba(0,0,0,.42)) drop-shadow(0 0 10px rgba(63,190,226,.08));
+}
+#chapter-2 .roster-collectible-card::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    z-index: -1;
+    border-radius: 19px;
+    background: linear-gradient(135deg, rgba(239,222,181,.85), rgba(89,176,207,.42) 28%, rgba(18,30,49,.9) 52%, rgba(188,151,230,.58) 78%, rgba(239,222,181,.72));
+    transform: translateZ(-8px);
+}
+.roster-card-3d-shell { filter: drop-shadow(0 2px 1px rgba(255,255,255,.06)); }
+.roster-card-face {
+    border: 1px solid rgba(195,225,241,.78);
+    box-shadow: inset 0 0 0 2px rgba(239,225,194,.14), inset 0 0 0 5px rgba(4,10,19,.78), inset 0 0 26px rgba(90,183,219,.10), 0 8px 18px rgba(0,0,0,.34);
+}
+.roster-card-front::after {
+    content: "";
+    position: absolute;
+    inset: 7px;
+    z-index: 2;
+    border: 1px solid rgba(218,232,240,.24);
+    border-radius: 12px;
+    pointer-events: none;
+    box-shadow: inset 0 0 18px rgba(255,255,255,.035);
+}
+.roster-card-portrait {
+    inset: 43px 17px 84px;
+    border: 2px solid rgba(215,222,222,.72);
+    border-radius: 8px;
+    box-shadow: 0 0 0 3px rgba(7,17,29,.94), 0 0 0 4px rgba(205,177,124,.54), 0 12px 28px rgba(0,0,0,.5), inset 0 0 22px rgba(83,203,234,.17);
+    transform: translateZ(8px);
+}
+.roster-card-portrait img { filter: saturate(1.06) contrast(1.04); transition: transform .7s cubic-bezier(.2,.7,.2,1), filter .7s ease; }
+.roster-collectible-card.is-tilting .roster-card-portrait img { transform: scale(1.045); filter: saturate(1.18) contrast(1.07); }
+.roster-card-front-header { text-transform: uppercase; }
+.roster-card-front-name {
+    padding: 10px 8px 8px;
+    border: 1px solid rgba(208,183,133,.38);
+    border-radius: 7px;
+    background: linear-gradient(100deg, rgba(5,12,23,.88), rgba(18,38,56,.82), rgba(5,12,23,.9));
+    box-shadow: 0 5px 16px rgba(0,0,0,.34), inset 0 1px rgba(255,255,255,.12);
+}
+.roster-card-holo {
+    z-index: 4;
+    opacity: .24;
+    background:
+      radial-gradient(ellipse at var(--card-shine-x) var(--card-shine-y), rgba(255,255,255,.58), transparent 18%),
+      linear-gradient(118deg, transparent 10%, rgba(65,220,244,.10) 30%, rgba(176,133,255,.19) 43%, rgba(255,224,157,.14) 51%, rgba(255,255,255,.08) 57%, transparent 76%),
+      repeating-linear-gradient(135deg, transparent 0 13px, rgba(255,255,255,.025) 14px 15px);
+    background-size: auto, 240% 240%, auto;
+}
+.roster-card-back {
+    display: block;
+    padding: 0;
+    overflow: hidden;
+    background: #08111d;
+}
+.roster-card-back-art {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 24%;
+    filter: saturate(1.08) contrast(1.05);
+    transform: scale(1.015);
+}
+.roster-card-back-shade {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(4,10,18,.20) 0%, rgba(4,10,18,.08) 25%, rgba(4,10,18,.76) 47%, rgba(4,10,18,.97) 100%), linear-gradient(90deg, rgba(3,9,17,.22), transparent 50%, rgba(3,9,17,.24));
+}
+.roster-card-back-content {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    padding: 14px 15px 13px;
+    background: linear-gradient(180deg, transparent 0 23%, rgba(4,10,18,.12) 30%, rgba(4,10,18,.72) 49%, rgba(4,10,18,.96) 100%);
+}
+.roster-card-back-top {
+    flex: 0 0 auto;
+    padding: 0 0 8px;
+    border-color: rgba(226,224,208,.34);
+    text-shadow: 0 2px 8px #000;
+}
+.roster-card-back-identity { margin-top: auto; padding: 0 2px 8px; text-shadow: 0 2px 8px #000; }
+.roster-card-back-identity h4 { font-size: 1.12rem; }
+.roster-card-facts {
+    gap: 7px 9px;
+    padding: 8px 0;
+    border-color: rgba(191,218,230,.28);
+    background: rgba(5,12,22,.52);
+    backdrop-filter: blur(7px);
+}
+.roster-card-facts div { padding: 2px 4px; }
+.roster-card-facts dd { text-shadow: 0 1px 5px #000; }
+.roster-card-back-bio {
+    margin: 8px 1px 7px;
+    -webkit-line-clamp: 3;
+    font-size: .68rem;
+    line-height: 1.34;
+    text-shadow: 0 1px 5px #000;
+}
+.roster-card-back-actions { flex: 0 0 auto; }
+.roster-card-back-actions button { backdrop-filter: blur(8px); box-shadow: 0 3px 12px rgba(0,0,0,.3), inset 0 1px rgba(255,255,255,.1); }
+.roster-card-back-actions .roster-card-open-log { background: linear-gradient(135deg, rgba(128,91,42,.82), rgba(42,35,28,.9)); }
+.roster-card-back.back-art-missing { background: radial-gradient(ellipse at 50% 20%, #29445d, #080f1d 75%); }
+@media (max-width: 600px) {
+    .roster-card-back-content { padding: 12px 11px 10px; }
+    .roster-card-back-identity { padding-bottom: 6px; }
+    .roster-card-back-bio { -webkit-line-clamp: 2; font-size: .62rem; }
+}
+@media (prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine) {
+    #chapter-2 .roster-collectible-card:hover { filter: drop-shadow(0 26px 32px rgba(0,0,0,.48)) drop-shadow(0 0 16px rgba(69,202,232,.14)); }
+    .roster-card-back-art { transition: transform .8s cubic-bezier(.2,.7,.2,1), filter .8s ease; }
+    .roster-collectible-card.is-tilting .roster-card-back-art { transform: scale(1.045); filter: saturate(1.18) contrast(1.08); }
+}
