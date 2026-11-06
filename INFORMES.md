@@ -145,6 +145,18 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Commit:** se registra al completar esta intervención.
 - **Despliegue:** pendiente de verificar GitHub Pages.
  
+## 2026-11-06 — Revisión estática del dossier comercial de ROD3R1K
+
+- **Responsable:** colaboración ChatGPT + equipo del proyecto.
+- **Objetivo:** contrastar la estructura editorial, las cifras y las tres muestras audiovisuales antes de la verificación visual final.
+- **Archivos revisados:** `app.js`, `creator-records.json`, `sullygnome-data.json`, `roster-data.json`.
+- **Estructura:** el renderizador especializado conserva seis páginas: portada, identidad, audiencia, juegos, clips y colaboraciones. El diseño de la página comercial presenta formatos potenciales y aclara que no son campañas ni alianzas confirmadas.
+- **Contraste de métricas:** las diez transmisiones codificadas suman 2.568 minutos (42,8 h), 844 horas vistas y +22 seguidores netos; el mayor pico de la muestra es 55. El promedio ponderado por duración es 19,79 (19,8 mostrado). Las cifras concuerdan con la tabla y el período declarado 24/10/2026–05/11/2026.
+- **Clips:** los tres IDs de Twitch de la página de cómic coinciden con los tres registros editoriales del canal. El código genera para cada uno un iframe `clips.twitch.tv/embed` con el dominio publicado como `parent` y un enlace directo de salida. Se comprobó la construcción estática, no la reproducción real: Twitch no fue accesible desde la herramienta de consulta utilizada.
+- **Pendientes / riesgos:** falta la revisión visual del dossier en escritorio y móvil y confirmar en navegador que los tres reproductores externos carguen. No se modificaron títulos ni enlaces aportados por el creador.
+- **Cambios de código:** ninguno; la revisión estática no encontró una inconsistencia numérica ni una discrepancia entre IDs.
+- **Despliegue:** no se requirió un nuevo despliegue para esta revisión.
+
 ## 2026-11-06 — Dossier comercial de ROD3R1K
 
 - **Responsable:** colaboración ChatGPT + equipo del proyecto.
