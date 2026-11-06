@@ -194,7 +194,78 @@
     "patoteexplica": {
       "milestones": [],
       "collaborations": [],
-      "highlights": []
+      "highlights": [],
+      "youtube_videos": [
+        {
+          "title": "Dopamina, motivación y adicción: Qué es y cómo funciona",
+          "views": 47,
+          "age": "hace 1 año",
+          "source": "Listado del canal compartido por el equipo"
+        },
+        {
+          "title": "Uniendo Javascript y HTML. Curso HTML + Javascript (5/5)",
+          "views": 75,
+          "age": "hace 1 año",
+          "series": "Curso HTML + Javascript",
+          "source": "Listado del canal compartido por el equipo"
+        },
+        {
+          "title": "Javascript Mapping y Filtering. Curso HTML + Javascript (4/5)",
+          "views": 58,
+          "age": "hace 1 año",
+          "series": "Curso HTML + Javascript",
+          "source": "Listado del canal compartido por el equipo"
+        },
+        {
+          "title": "Javascript segunda clase. Curso HTML + Javascript (3/5)",
+          "views": 50,
+          "age": "hace 1 año",
+          "series": "Curso HTML + Javascript",
+          "source": "Listado del canal compartido por el equipo"
+        },
+        {
+          "title": "Tu primera clase de Javascript. Curso HTML + Javascript (2/5)",
+          "views": 43,
+          "age": "hace 1 año",
+          "series": "Curso HTML + Javascript",
+          "source": "Listado del canal compartido por el equipo"
+        },
+        {
+          "title": "Tu primera página HTML en menos de una hora. Curso HTML + Javascript (1/5)",
+          "views": 157,
+          "age": "hace 1 año",
+          "series": "Curso HTML + Javascript",
+          "source": "Listado del canal compartido por el equipo"
+        }
+      ],
+      "featured_embeds": [
+        {
+          "video_id": "iX9dw_fYHg8",
+          "title": null,
+          "source": "Iframe de YouTube compartido por el equipo; título pendiente de identificar"
+        },
+        {
+          "video_id": "WmtAu_JU99M",
+          "title": null,
+          "source": "Iframe de YouTube compartido por el equipo; título pendiente de identificar"
+        }
+      ],
+      "profile_notes": {
+        "role": "Colaborador",
+        "content_focus": [
+          "Educación y divulgación",
+          "Programación: HTML y JavaScript",
+          "Dopamina, motivación y adicción"
+        ],
+        "future_direction": "Posible regreso durante 2027 con un enfoque renovado; incorporación gradual de temática gamer como línea complementaria, no principal.",
+        "schedule": "Sin frecuencia de publicación definida.",
+        "platform_metrics": {
+          "subscribers": 56,
+          "videos": 6,
+          "views": 430,
+          "source": "Datos compartidos por el equipo; fecha exacta de captura no indicada."
+        }
+      }
     }
   }
 }
