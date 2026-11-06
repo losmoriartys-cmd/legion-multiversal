@@ -2342,7 +2342,6 @@ function renderTwitchMetricsStats(channel){
 }
 function renderSullyStats(channel){
  if(channel.login==='losmoriartys')return renderLosMoriartysSullyPilot(channel);
- if(twitchMetricsData?.channels?.[channel.login])return renderTwitchMetricsStats(channel);
  if(!channel)return '<div class="stats-empty"><strong>Historial no disponible</strong>No hay registros históricos cargados para este canal.</div>';
  const status=channel.status==='partial'?'partial':'pending';
  const statusLabel=channel.status==='partial'?'REGISTRO PARCIAL':'PENDIENTE DE DATOS';
@@ -2416,17 +2415,30 @@ function renderLosMoriartysHelixPilot(channel){
  return out;
 }
 function renderHelixDashboard(channel){
- if(channel.login==='losmoriartys')return renderLosMoriartysHelixPilot(channel);
+ if(channel && channel.login==='losmoriartys')return renderLosMoriartysHelixPilot(channel);
  if(!channel)return '<div class="stats-empty"><strong>Seguimiento propio</strong>Esperando la primera sincronización de Twitch Helix para este canal.</div>';
  const w=channel.window||{};
  const live=channel.live;
- let out='<section class="stats-section"><div class="stats-source-head"><div><strong>TWITCH HELIX · SEGUIMIENTO PROPIO</strong><br><small>Observaciones periódicas del Instituto</small></div><span class="stats-status '+(live?'partial':'pending')+'">'+(live?'EN DIRECTO':'OFFLINE')+'</span></div>';
+ const snaps=Array.isArray(channel.snapshots)?channel.snapshots.filter(v=>v&&v.sampled_at):[];
+ const first=snaps.length?Date.parse(snaps[0].sampled_at):NaN;
+ const last=snaps.length?Date.parse(snaps[snaps.length-1].sampled_at):NaN;
+ const interval=Number(instituteStatsData?.sampling_interval_minutes||15);
+ const expected=Number.isFinite(first)&&Number.isFinite(last)&&last>=first?Math.floor((last-first)/(interval*60000))+1:0;
+ const coverage=expected?Math.min(100,snaps.length/expected*100):null;
+ const gaps=snaps.slice(1).map((v,i)=>(Date.parse(v.sampled_at)-Date.parse(snaps[i].sampled_at))/60000).filter(v=>Number.isFinite(v)&&v>0).sort((a,b)=>a-b);
+ const medianGap=gaps.length?gaps[Math.floor(gaps.length/2)]:null;
+ const maxGap=gaps.length?Math.max(...gaps):null;
+ const quality=coverage===null?'SIN COBERTURA CALCULABLE':coverage>=80?'COBERTURA ADECUADA':coverage>=50?'COBERTURA PARCIAL':'MUESTRA INSUFICIENTE';
+ const qualityClass=coverage===null?'pending':coverage>=80?'verified':coverage>=50?'partial':'pending';
+ const periodLabel=Number.isFinite(first)&&Number.isFinite(last)?new Date(first).toLocaleString('es-AR')+' — '+new Date(last).toLocaleString('es-AR'):'Fechas no disponibles';
+ let out='<section class="stats-section"><div class="stats-source-head"><div><strong>TWITCH HELIX · SEGUIMIENTO PROPIO</strong><br><small>Observaciones periódicas del Instituto · no equivale al panel analítico oficial</small></div><span class="stats-status '+(live?'partial':'pending')+'">'+(live?'EN DIRECTO':'OFFLINE')+'</span></div>';
+ out+='<div class="stats-source-head"><div><strong>CALIDAD DE LA MUESTRA</strong><br><small>'+quality+' · objetivo de recolección: cada '+interval+' minutos</small></div><span class="stats-status '+qualityClass+'">'+(coverage===null?'SIN DATOS':statsNumber(coverage,1)+'%')+'</span></div>';
+ out+='<p class="stats-section-intro">Período realmente observado: '+escapeStatsHtml(periodLabel)+'. Registros: '+statsNumber(snaps.length,0)+' de '+statsNumber(expected,0)+' esperados en ese intervalo. Separación mediana: '+(medianGap===null?'—':statsNumber(medianGap,1)+' min')+'; mayor intervalo sin muestra: '+(maxGap===null?'—':statsNumber(maxGap,1)+' min')+'. Esta cobertura describe el tramo observado, no los 30 días configurados.</p>';
  out+='<div class="stats-kpis">';
- [['Espectadores ahora',channel.current_viewers,'lectura actual'],['Seguidores',channel.followers_total,'total informado por Helix'],['Muestras',w.samples_total,'ventana disponible'],['Directos detectados',w.streams_observed,'por muestreo'],['Pico observado',w.peak_viewers_sampled,'no es pico oficial'],['Horas vistas',w.estimated_hours_watched,'estimación por muestreo']].forEach(k=>out+='<div class="stats-kpi"><span>'+k[0]+'</span><strong>'+statsNumber(k[1],0)+'</strong><em>'+k[2]+'</em></div>');
+ [['Espectadores ahora',channel.current_viewers,'lectura actual'],['Seguidores',channel.followers_total,'no disponible vía Helix público'],['Muestras',w.samples_total,'registros capturados'],['Promedio muestreado',w.average_viewers_sampled,'solo muestras en directo'],['Pico observado',w.peak_viewers_sampled,'no es pico oficial'],['Horas vistas estimadas',w.estimated_hours_watched,'solo intervalos consecutivos válidos']].forEach(k=>out+='<div class="stats-kpi"><span>'+k[0]+'</span><strong>'+statsNumber(k[1],1)+'</strong><em>'+k[2]+'</em></div>');
  out+='</div><p class="stats-muted">Categoría actual: '+escapeStatsHtml(channel.current_game||'No disponible')+' · Última sincronización: '+(channel.updated_at?new Date(channel.updated_at).toLocaleString('es-AR'):'Pendiente')+'</p>';
  out+=renderStatsBars('ACTIVIDAD DIARIA OBSERVADA',(w.daily_activity||[]).slice(-10),v=>statsDate(v.date),v=>v.live_samples,'muestras en directo',10);
  out+=renderStatsBars('CATEGORÍAS MÁS OBSERVADAS',w.game_breakdown||[],v=>v.name,v=>v.live_samples,'muestras por categoría',5);
- const snaps=Array.isArray(channel.snapshots)?channel.snapshots:[];
  const sessions=new Map();
  snaps.filter(v=>v&&v.is_live&&v.stream_id).forEach(v=>{
   const id=String(v.stream_id);
@@ -2452,6 +2464,7 @@ function renderStatsDashboard(hero,helix,sully){
  }else{
   out+=renderHelixDashboard(helix);
   out+=renderSullyStats(sully);
+  out+=renderTwitchMetricsStats(helix);
  }
  out+='</div>';return out;
 }
