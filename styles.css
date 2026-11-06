@@ -2325,3 +2325,114 @@ body {
     .roster-card-back-art { transition: transform .8s cubic-bezier(.2,.7,.2,1), filter .8s ease; }
     .roster-collectible-card.is-tilting .roster-card-back-art { transform: scale(1.045); filter: saturate(1.18) contrast(1.08); }
 }
+
+
+/* ROSTER · firmas visuales individuales de la edición coleccionable */
+#chapter-2 .roster-collectible-card {
+    --theme-core: 90, 190, 224;
+    --theme-metal: 203, 218, 226;
+    --theme-glow: 70, 170, 218;
+    --theme-foil: 152, 184, 255;
+    --theme-pattern: rgba(115,190,220,.12);
+    border-radius: 18px;
+}
+#chapter-2 .roster-collectible-card::before {
+    background: linear-gradient(138deg,
+      rgba(var(--theme-metal),.92) 0%,
+      rgba(var(--theme-core),.72) 17%,
+      rgba(9,17,31,.96) 43%,
+      rgba(var(--theme-foil),.62) 73%,
+      rgba(var(--theme-metal),.84) 100%);
+}
+#chapter-2 .roster-collectible-card::after {
+    content: "";
+    position: absolute;
+    inset: 3px;
+    z-index: 5;
+    border-radius: 15px;
+    pointer-events: none;
+    opacity: .42;
+    background: linear-gradient(125deg, transparent 0 36%, rgba(var(--theme-core),.12) 49%, transparent 62%);
+    mix-blend-mode: screen;
+}
+#chapter-2 .roster-card-front {
+    background:
+      radial-gradient(ellipse at 50% 30%, rgba(var(--theme-glow),.16), transparent 58%),
+      linear-gradient(155deg, #101b2a, #050b14 72%);
+}
+#chapter-2 .roster-card-front-header,
+#chapter-2 .roster-card-back-top {
+    border-color: rgba(var(--theme-core),.55);
+}
+#chapter-2 .roster-card-front-name {
+    border-color: rgba(var(--theme-metal),.52);
+    box-shadow: 0 5px 16px rgba(0,0,0,.34), inset 0 1px rgba(255,255,255,.14), 0 0 14px rgba(var(--theme-glow),.12);
+}
+#chapter-2 .roster-card-holo {
+    background:
+      radial-gradient(ellipse at var(--card-shine-x) var(--card-shine-y), rgba(255,255,255,.64), transparent 18%),
+      linear-gradient(118deg, transparent 10%, rgba(var(--theme-core),.13) 30%, rgba(var(--theme-foil),.22) 43%, rgba(var(--theme-metal),.12) 51%, rgba(255,255,255,.08) 57%, transparent 76%),
+      repeating-linear-gradient(135deg, transparent 0 13px, var(--theme-pattern) 14px 15px);
+}
+#chapter-2 .roster-card-back-shade {
+    background:
+      linear-gradient(180deg, rgba(4,10,18,.12) 0%, rgba(4,10,18,.08) 25%, rgba(4,10,18,.72) 47%, rgba(4,10,18,.97) 100%),
+      linear-gradient(90deg, rgba(var(--theme-glow),.20), transparent 55%, rgba(3,9,17,.28));
+}
+#chapter-2 .roster-card-facts {
+    border-color: rgba(var(--theme-core),.38);
+    box-shadow: inset 0 0 18px rgba(var(--theme-glow),.08);
+}
+#chapter-2 .roster-card-open-log {
+    border-color: rgba(var(--theme-metal),.48);
+    box-shadow: 0 0 15px rgba(var(--theme-glow),.16), inset 0 1px rgba(255,255,255,.15);
+}
+#chapter-2 .roster-collectible-card[data-edition-mark] .roster-card-front::before {
+    content: attr(data-edition-mark);
+    position: absolute;
+    z-index: 5;
+    right: 14px;
+    top: 14px;
+    padding: 3px 6px;
+    border: 1px solid rgba(var(--theme-metal),.48);
+    border-radius: 4px;
+    color: rgba(242,247,250,.9);
+    background: rgba(4,10,18,.72);
+    font: 700 .52rem/1.2 'Roboto Condensed', sans-serif;
+    letter-spacing: .13em;
+    box-shadow: 0 2px 8px rgba(0,0,0,.35), 0 0 9px rgba(var(--theme-glow),.18);
+    pointer-events: none;
+}
+#chapter-2 .roster-collectible-card[data-card-theme="strategist"] {
+    --theme-core: 74, 204, 226; --theme-metal: 220, 195, 143; --theme-glow: 46, 174, 208; --theme-foil: 188, 157, 226; --theme-pattern: rgba(220,195,143,.13);
+}
+#chapter-2 .roster-collectible-card[data-card-theme="titan"] {
+    --theme-core: 174, 190, 204; --theme-metal: 218, 222, 226; --theme-glow: 114, 144, 174; --theme-foil: 201, 105, 100; --theme-pattern: rgba(174,190,204,.15);
+}
+#chapter-2 .roster-collectible-card[data-card-theme="arcana"] {
+    --theme-core: 186, 126, 235; --theme-metal: 228, 190, 231; --theme-glow: 153, 83, 201; --theme-foil: 83, 205, 221; --theme-pattern: rgba(186,126,235,.17);
+}
+#chapter-2 .roster-collectible-card[data-card-theme="phantom"] {
+    --theme-core: 103, 193, 218; --theme-metal: 181, 211, 224; --theme-glow: 66, 135, 190; --theme-foil: 156, 147, 230; --theme-pattern: rgba(103,193,218,.17);
+}
+#chapter-2 .roster-collectible-card[data-card-theme="inferno"] {
+    --theme-core: 224, 105, 79; --theme-metal: 225, 174, 126; --theme-glow: 188, 65, 54; --theme-foil: 240, 177, 104; --theme-pattern: rgba(224,105,79,.17);
+}
+#chapter-2 .roster-collectible-card[data-card-theme="nexus"] {
+    --theme-core: 70, 219, 202; --theme-metal: 170, 221, 221; --theme-glow: 42, 171, 188; --theme-foil: 150, 123, 238; --theme-pattern: rgba(70,219,202,.16);
+}
+#chapter-2 .roster-collectible-card[data-card-theme="orator"] {
+    --theme-core: 211, 174, 104; --theme-metal: 236, 217, 175; --theme-glow: 171, 125, 61; --theme-foil: 133, 173, 191; --theme-pattern: rgba(211,174,104,.16);
+}
+#chapter-2 .roster-collectible-card[data-card-theme="sage"] {
+    --theme-core: 133, 190, 143; --theme-metal: 209, 195, 151; --theme-glow: 82, 145, 111; --theme-foil: 169, 177, 132; --theme-pattern: rgba(133,190,143,.16);
+}
+@media (prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine) {
+    #chapter-2 .roster-collectible-card::before { transition: filter .45s ease, opacity .45s ease; }
+    #chapter-2 .roster-collectible-card.is-tilting::before {
+        filter: brightness(1.16) saturate(1.12);
+    }
+    #chapter-2 .roster-collectible-card.is-tilting .roster-card-holo {
+        opacity: .42;
+    }
+}
