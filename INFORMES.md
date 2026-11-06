@@ -1635,3 +1635,12 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 - **Pendientes / riesgos:** comprobar en publicación que cada firma cromática conserve contraste y no compita con el arte del reverso; ajustar intensidades si algún retrato ya contiene colores muy dominantes.
 - **Commits:** app.js `160ff760669cfeff85fc9f80f460d00c94ac2a31`; styles.css `fa0bde302f742e7d3446ec23e033041b7eeaf1a6`.
 - **Despliegue:** pendiente de verificar GitHub Pages.
+
+
+## 2026-11-06 — Bitácora: portada editorial con ilustración oficial reutilizada
+
+- Se corrigió la pantalla de entrada al expediente individual, que antes mostraba únicamente texto y acciones.
+- Ahora presenta la ilustración completa ya existente (`hero.img`) en un marco editorial vertical, con número de expediente, tratamiento cinematográfico y composición adaptable a escritorio y móvil.
+- Se conserva el carnet para el frente de la carta y la ilustración completa para el reverso; la Bitácora reutiliza esa misma ilustración con una tercera función de diseño, sin exigir generar otro archivo.
+- Se agregó alternativa de respaldo si la imagen no está disponible y texto alternativo descriptivo.
+- Validación realizada: reemplazo del bloque exacto, presencia de clases y reglas CSS añadidas, revisión de estructura textual. No se realizó prueba visual en navegador.
