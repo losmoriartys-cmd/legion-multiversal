@@ -21,6 +21,18 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 
 ---
 
+## 2026-11-06 — Corregir gestión de foco en expedientes del Roster
+
+- **Responsable:** colaboración ChatGPT + equipo del proyecto.
+- **Objetivo:** adaptar la revisión de accesibilidad a la arquitectura publicada actualmente y asegurar una navegación por teclado comprensible al entrar y salir de un expediente.
+- **Archivos modificados:** `app.js`, `INFORMES.md`.
+- **Hallazgo de auditoría:** la vista pública actual abre los expedientes como páginas integradas del Roster, no como un diálogo modal. Por eso, los controles de trampa de foco, cierre con Escape y paginación de modal descritos en un informe anterior no corresponden a esta ruta actual.
+- **Implementado:** se conserva el elemento que abrió el expediente; al abrir, el foco pasa al encabezado del perfil (con `tabindex="-1"` para permitir foco programático sin incorporarlo al recorrido Tab ordinario); al volver al Roster, el foco se devuelve a la tarjeta original. Si la tarjeta ya no existe, se enfoca el contenedor del Roster como alternativa. El resumen de rol, tipo de creador y plataformas queda identificado semánticamente como un grupo informativo, sin presentarlo como control interactivo.
+- **Validaciones:** la navegación a Roster con Tab/Enter y el botón VOLVER AL ROSTER con Enter funcionan. La prueba en navegador identificó que antes el foco no llegaba al título ni regresaba a la tarjeta original; también confirmó que las etiquetas de lectura rápida son metadatos, no controles. Se aplicó la corrección a esos dos problemas de foco.
+- **Pendientes / riesgos:** verificar en navegador el nuevo foco al abrir y volver; ejecutar validación automatizada del sitio y comprobar el despliegue Pages. La evaluación con lector de pantalla no se considera realizada.
+- **Commit de código:** [e51c1d56](https://github.com/losmoriartys-cmd/legion-multiversal/commit/e51c1d5694480c7b17d1d49e29019131c1ca6f6f).
+- **Despliegue:** pendiente de verificar.
+
 ## 2026-11-06 — Mejorar accesibilidad del modal de expedientes
 
 - **Responsable:** colaboración ChatGPT + equipo del proyecto.
