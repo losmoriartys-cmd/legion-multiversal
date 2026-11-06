@@ -101,7 +101,40 @@
     "habitos_atomicos": {
       "milestones": [],
       "collaborations": [],
-      "highlights": []
+      "highlights": [
+        {
+          "title": "Momento destacado 01",
+          "description": "Clip destacado compartido para el expediente.",
+          "source": "Twitch · enlace aportado por el creador",
+          "platform": "twitch",
+          "clip_id": "AbrasiveSilkyCockroachOhMyDog-ivUKinvojfXgOKOB",
+          "url": "https://www.twitch.tv/habitos_atomicos/clip/AbrasiveSilkyCockroachOhMyDog-ivUKinvojfXgOKOB"
+        },
+        {
+          "title": "Momento destacado 02",
+          "description": "Clip destacado compartido para el expediente.",
+          "source": "Twitch · enlace aportado por el creador",
+          "platform": "twitch",
+          "clip_id": "CharmingScaryPuffinOpieOP-zSj2FaBFzk1MCG1D",
+          "url": "https://www.twitch.tv/habitos_atomicos/clip/CharmingScaryPuffinOpieOP-zSj2FaBFzk1MCG1D"
+        },
+        {
+          "title": "Momento destacado 03",
+          "description": "Clip destacado compartido para el expediente.",
+          "source": "Twitch · enlace aportado por el creador",
+          "platform": "twitch",
+          "clip_id": "CrispyAffluentSpindleMau5-VxVG-mH4GeZfcisE",
+          "url": "https://www.twitch.tv/habitos_atomicos/clip/CrispyAffluentSpindleMau5-VxVG-mH4GeZfcisE"
+        },
+        {
+          "title": "Momento destacado 04",
+          "description": "Clip destacado compartido para el expediente.",
+          "source": "Twitch · enlace aportado por el creador",
+          "platform": "twitch",
+          "clip_id": "AggressiveIronicChinchillaPipeHype-iL_UVWlsNhrVYtO9",
+          "url": "https://www.twitch.tv/habitos_atomicos/clip/AggressiveIronicChinchillaPipeHype-iL_UVWlsNhrVYtO9"
+        }
+      ]
     },
     "ardipii": {
       "milestones": [],
