@@ -1247,3 +1247,14 @@ Se añadieron tratamientos visuales individuales a los globos de voz de los diez
 - **Prueba funcional:** [ejecución 7de84160](https://agent.tinyfish.ai/runs/7de84160-ff23-4696-b8de-25574c735a98) confirmó los ocho perfiles en los cuatro grupos, apertura del expediente MORIARTYS, retorno al roster y carga de Estadísticas y En Vivo sin errores.
 - **Commit de extracción:** [`2451492`](https://github.com/losmoriartys-cmd/legion-multiversal/commit/2451492ba683670b32a4f1c15a6c89dd079115f6). **Commit de integración:** [`63a7fac`](https://github.com/losmoriartys-cmd/legion-multiversal/commit/63a7facb52bc1be246fd6373a295da1980ee3d65).
 - **Estado:** completado y verificado en GitHub Pages.
+
+
+## 2026-11-06 · Ampliar controles automáticos de calidad
+
+- **Objetivo:** detectar antes de publicar errores de sintaxis, JSON inválido y referencias locales rotas a recursos.
+- **Implementado:** se añadió `scripts/validate_site.py`, que revisa referencias locales en HTML/CSS, los retratos e ilustraciones de los perfiles del roster, estructura mínima y duplicados de nombres, y formato de URLs declaradas en los JSON. El workflow `validar-sitio.yml` ejecuta `node --check app.js`, valida todos los JSON raíz y ejecuta el validador estático. Los disparadores cubren cambios en JS, HTML, CSS, JSON, assets y scripts tanto en push como en pull request.
+- **Validación:** [workflow 42179004385](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/42179004385) completado con éxito; sintaxis JS, JSON y referencias locales/imágenes revisadas sin errores.
+- **Archivos:** `scripts/validate_site.py`, `.github/workflows/validar-sitio.yml`, `INFORMES.md`.
+- **Commits:** [`18b1fc3`](https://github.com/losmoriartys-cmd/legion-multiversal/commit/18b1fc35b9683b75b1011c71c22b4bad61b23e43), [`c23373b`](https://github.com/losmoriartys-cmd/legion-multiversal/commit/c23373b2ccc8042aa83c9bf7114a52f07d3191f1), [`19c2ca7`](https://github.com/losmoriartys-cmd/legion-multiversal/commit/19c2ca71f3768f7f90cfdda5b4ec2734247ad849).
+- **Límites:** la comprobación valida la existencia de recursos locales y el formato de enlaces externos, pero no hace peticiones a todos los dominios externos para comprobar disponibilidad remota, evitando fallos intermitentes por terceros.
+- **Estado:** completado y validado.
