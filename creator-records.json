@@ -174,7 +174,22 @@
     "daved0608": {
       "milestones": [],
       "collaborations": [],
-      "highlights": []
+      "highlights": [
+        {
+          "title": "Momento destacado 01",
+          "platform": "twitch",
+          "clip_id": "InventiveTentativeCarabeefYee-oJMzI-Lt4xxRlJNt",
+          "url": "https://clips.twitch.tv/InventiveTentativeCarabeefYee-oJMzI-Lt4xxRlJNt",
+          "source": "Twitch Clips · enlace proporcionado para el expediente por el creador"
+        },
+        {
+          "title": "Momento destacado 02",
+          "platform": "twitch",
+          "clip_id": "MotionlessCuteTigerLitFam-ZsZEyMq1lrkNq2dW",
+          "url": "https://clips.twitch.tv/MotionlessCuteTigerLitFam-ZsZEyMq1lrkNq2dW",
+          "source": "Twitch Clips · enlace proporcionado para el expediente por el creador"
+        }
+      ]
     },
     "patoteexplica": {
       "milestones": [],
