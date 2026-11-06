@@ -1179,3 +1179,15 @@ Se añadieron tratamientos visuales individuales a los globos de voz de los diez
 - **Pendientes:** configurar los tres secretos nuevos; verificar el primer ciclo real; incorporar handles Kick solo cuando los candidatos los confirmen; ampliar el registro de cuentas a varios canales por creador cuando corresponda; decidir más adelante el mecanismo de autorización individual para analíticas privadas.
 - **Commits:** colector `ba805271`; registro `f7397e5`; archivo de datos `18c3709`; workflow `f28dace`; render `ce61b99`; corrección de carga inicial `8372b05` y `a02fe89`.
 - **Despliegue:** pendiente de verificar el workflow de GitHub Pages correspondiente a estos commits.
+
+
+## 2026-11-06 — Separar la hoja de estilos del documento principal
+
+- **Responsable:** colaboración ChatGPT + equipo del proyecto.
+- **Objetivo:** reducir el acoplamiento de `index.html` y preparar una refactorización gradual sin alterar el diseño ni el comportamiento.
+- **Archivos modificados:** `index.html`, `styles.css`, `INFORMES.md`.
+- **Implementado:** se extrajeron los 119.403 caracteres del único bloque `<style>` de `index.html` a `styles.css`; el documento ahora carga la hoja externa mediante `<link rel="stylesheet" href="./styles.css">`. No se modificaron reglas CSS ni se encontraron rutas relativas, `url(...)` o `@import` que requirieran adaptación.
+- **Validaciones:** confirmado que `index.html` ya no contiene bloques `<style>`, que referencia `./styles.css` y que el archivo externo existe en la raíz del repositorio. La extracción se hizo conservando el contenido CSS original. Pendiente la comprobación visual en navegador y la confirmación del despliegue.
+- **Pendientes / riesgos:** verificar visualmente escritorio y móvil; después continuar con la separación del JavaScript en una intervención independiente. No se cambió la lógica de la página.
+- **Commits de implementación:** [`3ed032b`](https://github.com/losmoriartys-cmd/legion-multiversal/commit/3ed032bd5c94bf2767a1fa6ad1d1985485645285) y [`6c66751`](https://github.com/losmoriartys-cmd/legion-multiversal/commit/6c6675128e5c56bbda43e21e98e5c70a26a3cdec).
+- **Despliegue:** pendiente de verificar.
