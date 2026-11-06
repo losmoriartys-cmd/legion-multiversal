@@ -1622,3 +1622,16 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 - **Pendientes / riesgos:** revisar en el sitio publicado el encuadre de las ocho ilustraciones en el reverso, la legibilidad de las fichas y el giro en pantallas pequeñas; ajustar `object-position` si alguna composición lo necesita.
 - **Commits:** app.js `0493a9b49e77648418a2c63fbc1ae75f749c390e`; styles.css `e51dee9bc15ceb8833fae2eeaf55ab7c3055ea71`.
 - **Despliegue:** pendiente de verificar el workflow generado por los commits.
+
+
+## 2026-11-06 — Roster: identidad visual singular para cada carta
+
+- **Responsable:** colaboración ChatGPT + equipo del proyecto.
+- **Objetivo:** convertir las ocho cartas en piezas distinguibles de una misma colección, evitando una plantilla idéntica con solo el retrato cambiado.
+- **Archivos modificados:** `app.js`, `styles.css`, `INFORMES.md`.
+- **Implementado:** se asigna a cada integrante un tema cromático/material propio, manteniendo la misma estructura, proporciones, tipografía y lenguaje de la Legión. MORIARTYS usa cian y metal cálido; ROD3R1K acero con acento rojo; LADYMORIARTY violeta arcano y cian; ARDIPII azul espectral; AKUMA brasa y cobre; DAVE — NEXUS energía teal-violeta; PATO — ORATORIS oro editorial y acero; HABITOS jade y bronce. Los temas afectan el marco, el halo, el foil, las líneas de información y los botones; cada carta incorpora además una pequeña marca de edición con su número.
+- **Criterio:** la diferenciación es puramente artística y no añade poderes, estadísticas, rangos ni afirmaciones biográficas. Se mantiene la unidad de colección y el comportamiento de movimiento reducido.
+- **Validaciones:** mapeo de temas vinculado a los ocho nombres del roster; comprobación estática de que el render asigna tema y marca. Pendiente de sintaxis automatizada, despliegue y revisión visual real en escritorio/móvil. No se declara prueba de navegador.
+- **Pendientes / riesgos:** comprobar en publicación que cada firma cromática conserve contraste y no compita con el arte del reverso; ajustar intensidades si algún retrato ya contiene colores muy dominantes.
+- **Commits:** app.js `160ff760669cfeff85fc9f80f460d00c94ac2a31`; styles.css `fa0bde302f742e7d3446ec23e033041b7eeaf1a6`.
+- **Despliegue:** pendiente de verificar GitHub Pages.
