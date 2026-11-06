@@ -3,7 +3,7 @@
   "source": "SullyGnome",
   "generated_at_utc": "2026-11-03T00:00:00Z",
   "source_methodology": "Datos de transmisiones individuales de Twitch, conservados separadamente de Twitch Helix. Las métricas se agregan solo cuando se dispone de las filas originales.",
-  "channels_total": 9,
+  "channels_total": 7,
   "channels_with_stream_data": 1,
   "channels": [
     {
@@ -224,58 +224,6 @@
       "display_name": "HÁBITOS ATÓMICOS",
       "source": "SullyGnome",
       "source_url": "https://sullygnome.com/channel/habitos_atomicos/2026/streams",
-      "checked_at_utc": null,
-      "status": "pending",
-      "period": {
-        "start_date": null,
-        "end_date": null
-      },
-      "streams": [],
-      "summary": {
-        "streams_count": null,
-        "airtime_minutes": null,
-        "airtime_hours": null,
-        "hours_watched": null,
-        "average_viewers_duration_weighted": null,
-        "peak_viewers": null,
-        "followers_gain_reported": null
-      },
-      "notes": [
-        "Enlace del historial identificado; faltan las filas de transmisiones para cargar métricas verificadas."
-      ]
-    },
-    {
-      "platform": "twitch",
-      "login": "elgabii090",
-      "display_name": "ELGABII090",
-      "source": "SullyGnome",
-      "source_url": "https://sullygnome.com/channel/elgabii090/2026/streams",
-      "checked_at_utc": null,
-      "status": "pending",
-      "period": {
-        "start_date": null,
-        "end_date": null
-      },
-      "streams": [],
-      "summary": {
-        "streams_count": null,
-        "airtime_minutes": null,
-        "airtime_hours": null,
-        "hours_watched": null,
-        "average_viewers_duration_weighted": null,
-        "peak_viewers": null,
-        "followers_gain_reported": null
-      },
-      "notes": [
-        "Enlace del historial identificado; faltan las filas de transmisiones para cargar métricas verificadas."
-      ]
-    },
-    {
-      "platform": "twitch",
-      "login": "capyunaplay",
-      "display_name": "CAPYUNAPLAY",
-      "source": "SullyGnome",
-      "source_url": "https://sullygnome.com/channel/capyunaplay/2026/streams",
       "checked_at_utc": null,
       "status": "pending",
       "period": {
