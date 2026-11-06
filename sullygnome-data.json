@@ -1003,121 +1003,178 @@
       "login": "daved0608",
       "display_name": "DAVE",
       "source": "SullyGnome",
-      "source_url": "https://sullygnome.com/channel/daved0608/2026/streams",
+      "source_url": "https://sullygnome.com/channel/daved0608",
       "checked_at_utc": "2026-11-03T00:00:00Z",
-      "status": "partial",
+      "status": "user_supplied_annual_summary",
       "period": {
         "start_date": "2026-01-01",
         "end_date": "2026-11-03",
-        "label": "2026 acumulado según resumen compartido"
+        "label": "Año 2026 acumulado según resumen de SullyGnome"
       },
       "streams": [
         {
           "date": "2026-08-13",
           "start_time": "01:29",
-          "duration_hours": 1.8,
+          "duration_minutes": 106,
+          "duration_hours": 1.77,
           "average_viewers": 1,
-          "peak_viewers": 4,
-          "hours_watched": 1.8,
-          "followers_reported": 0
+          "peak_viewers": 1,
+          "hours_watched": 1,
+          "followers_gained": 4,
+          "followers_per_hour": 0,
+          "games": [
+            "Backrooms: Escape Together"
+          ]
         },
         {
           "date": "2026-07-16",
           "start_time": "01:22",
-          "duration_hours": 2.9,
-          "average_viewers": 1,
-          "peak_viewers": 4,
-          "hours_watched": 2.9,
-          "followers_reported": 0
+          "duration_minutes": 173,
+          "duration_hours": 2.88,
+          "average_viewers": 2,
+          "peak_viewers": 1,
+          "hours_watched": 2,
+          "followers_gained": 4,
+          "followers_per_hour": 0,
+          "games": [
+            "Marvel Rivals",
+            "Bombanana"
+          ]
         },
         {
           "date": "2026-05-22",
           "start_time": "01:21",
+          "duration_minutes": 174,
           "duration_hours": 2.9,
-          "average_viewers": 2,
-          "peak_viewers": 4,
-          "hours_watched": 5.8,
-          "followers_reported": 0
+          "average_viewers": 5,
+          "peak_viewers": 2,
+          "hours_watched": 5,
+          "followers_gained": 4,
+          "followers_per_hour": 0,
+          "games": [
+            "Marvel Rivals",
+            "Warhammer 40,000: Space Marine II"
+          ]
         },
         {
           "date": "2026-05-14",
           "start_time": "02:29",
-          "duration_hours": 4,
-          "average_viewers": 2,
-          "peak_viewers": 5,
+          "duration_minutes": 241,
+          "duration_hours": 4.02,
+          "average_viewers": 8,
+          "peak_viewers": 2,
           "hours_watched": 8,
-          "followers_reported": 1
+          "followers_gained": 5,
+          "followers_per_hour": 1,
+          "games": [
+            "Marvel Rivals",
+            "For Honor"
+          ]
         },
         {
           "date": "2026-05-13",
           "start_time": "01:09",
-          "duration_hours": 3.4,
-          "average_viewers": 1,
-          "peak_viewers": 4,
-          "hours_watched": 3.4,
-          "followers_reported": -1
+          "duration_minutes": 201,
+          "duration_hours": 3.35,
+          "average_viewers": 3,
+          "peak_viewers": 1,
+          "hours_watched": 3,
+          "followers_gained": 4,
+          "followers_per_hour": -1,
+          "games": [
+            "Marvel Rivals",
+            "For Honor"
+          ]
         },
         {
           "date": "2026-05-11",
           "start_time": "01:40",
-          "duration_hours": 4.8,
-          "average_viewers": 2,
-          "peak_viewers": 4,
-          "hours_watched": 9.7,
-          "followers_reported": 1
+          "duration_minutes": 290,
+          "duration_hours": 4.83,
+          "average_viewers": 9,
+          "peak_viewers": 2,
+          "hours_watched": 9,
+          "followers_gained": 4,
+          "followers_per_hour": 1,
+          "games": [
+            "Marvel Rivals",
+            "For Honor"
+          ]
         },
         {
           "date": "2026-05-09",
           "start_time": "03:08",
-          "duration_hours": 2.4,
-          "average_viewers": 2,
-          "peak_viewers": 4,
-          "hours_watched": 4.7,
-          "followers_reported": 1
+          "duration_minutes": 142,
+          "duration_hours": 2.37,
+          "average_viewers": 4,
+          "peak_viewers": 2,
+          "hours_watched": 4,
+          "followers_gained": 4,
+          "followers_per_hour": 1,
+          "games": [
+            "Monster Hunter: World"
+          ]
         },
         {
           "date": "2026-05-08",
           "start_time": "01:20",
-          "duration_hours": 2.7,
-          "average_viewers": 1,
-          "peak_viewers": 6,
-          "hours_watched": 2.7,
-          "followers_reported": 4
+          "duration_minutes": 160,
+          "duration_hours": 2.67,
+          "average_viewers": 2,
+          "peak_viewers": 1,
+          "hours_watched": 2,
+          "followers_gained": 6,
+          "followers_per_hour": 4,
+          "games": [
+            "Monster Hunter: World"
+          ]
         },
         {
           "date": "2026-05-03",
           "start_time": "21:18",
-          "duration_hours": 9,
-          "average_viewers": 1,
-          "peak_viewers": 4,
-          "hours_watched": 9,
-          "followers_reported": 0
+          "duration_minutes": 537,
+          "duration_hours": 8.95,
+          "average_viewers": 8,
+          "peak_viewers": 1,
+          "hours_watched": 8,
+          "followers_gained": 4,
+          "followers_per_hour": 0,
+          "games": [
+            "Dark Souls Remastered",
+            "For Honor",
+            "Warhammer 40,000: Space Marine II",
+            "Project Zomboid"
+          ]
         },
         {
           "date": "2026-05-03",
           "start_time": "08:07",
-          "duration_hours": 1.1,
+          "duration_minutes": 68,
+          "duration_hours": 1.13,
           "average_viewers": 1,
-          "peak_viewers": 4,
-          "hours_watched": 1.1,
-          "followers_reported": 0
+          "peak_viewers": 1,
+          "hours_watched": 1,
+          "followers_gained": 4,
+          "followers_per_hour": 0,
+          "games": [
+            "Dark Souls Remastered"
+          ]
         }
       ],
       "summary": {
-        "streams_count": null,
-        "airtime_minutes": null,
-        "airtime_hours": null,
-        "hours_watched": null,
-        "average_viewers_duration_weighted": null,
-        "peak_viewers": null,
-        "followers_gain_reported": null
+        "streams_count": 45,
+        "airtime_minutes": 4080,
+        "airtime_hours": 68,
+        "hours_watched": 132,
+        "average_viewers_duration_weighted": 1,
+        "peak_viewers": 9,
+        "followers_gain_reported": 25
       },
       "notes": [
         "Resumen anual 2026 y comparaciones con 2025 transcritos del bloque de SullyGnome compartido por el usuario.",
         "Se recibieron 10 filas visibles de un total anual indicado de 45 streams; no representan el historial completo.",
-        "La suma de las 10 filas visibles es 35,0 horas de duración, 49,1 horas vistas y 6 seguidores netos reportados. El pico máximo de estas filas es 6; el resumen anual indica 9.",
-        "Se conserva el valor -1 de seguidores del 13 de mayo tal como fue informado por la fuente.",
-        "Fechas y horas locales tal como aparecen en la tabla; el año 2026 se deduce del encabezado de la página."
+        "Las columnas de seguidores ganados y seguidores por hora se conservan separadas tal como aparecen en las filas aportadas. No se agregan para reemplazar el total anual de +25.",
+        "Las fechas, horas, duraciones, espectadores y juegos de las diez filas se transcribieron del material compartido por el creador."
       ],
       "annual_summary_2026": {
         "average_viewers": 1,
@@ -1133,14 +1190,14 @@
           "hours_streamed_percent": 423.1,
           "streams_percent": 350
         },
-        "source_note": "Resumen 2026 copiado por el usuario desde SullyGnome; comparaciones interanuales conservadas tal como aparecen en la fuente."
+        "source_note": "Resumen 2026 y comparaciones con 2025 transcritos del bloque de SullyGnome compartido por el usuario."
       },
       "observed_rows_summary": {
         "rows": 10,
-        "duration_hours": 35,
-        "hours_watched": 49.1,
-        "followers_net_reported": 6,
-        "peak_viewers_in_rows": 6
+        "duration_minutes": 2092,
+        "hours_watched": 43,
+        "followers_gained_values": "Preservados por fila; no sumar para sustituir el resumen anual.",
+        "peak_viewers_in_rows": 2
       }
     }
   ],
