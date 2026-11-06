@@ -1203,3 +1203,15 @@ Se añadieron tratamientos visuales individuales a los globos de voz de los diez
 - **Pendientes / riesgos:** verificar que `app.js` responda HTTP 200, que el roster, navegación, expedientes/modales, datos estadísticos y paneles de plataforma sigan funcionando, y revisar la consola del navegador. Si aparece un error, corregirlo antes de continuar con nuevas separaciones.
 - **Commits:** [`3772b82`](https://github.com/losmoriartys-cmd/legion-multiversal/commit/3772b82e416ca15da1a927dd5694f99d9df44fe3) y [`1eb2be6`](https://github.com/losmoriartys-cmd/legion-multiversal/commit/1eb2be697cf3a1891730d82f514cfe630693bd90).
 - **Despliegue:** pendiente de verificar.
+
+
+## 2026-11-06 · Corrección prioritaria: renderizado inmediato del roster
+
+- **Objetivo:** corregir la ausencia de tarjetas de integrantes observada en la prueba funcional publicada.
+- **Causa abordada:** el renderizado inicial del roster estaba colocado después de esperar seis cargas asíncronas de datos externos mediante `Promise.all`. Aunque las funciones de carga manejan errores, una petición que tarde indefinidamente puede demorar el renderizado local de los integrantes.
+- **Implementado:** `renderRoster()` se ejecuta ahora al inicializar el script, antes de las consultas externas. Se conserva el renderizado posterior al completar las cargas, y el intento inicial está protegido con captura y registro de errores para no impedir la inicialización restante.
+- **Archivos modificados:** `app.js`, `INFORMES.md`.
+- **Validaciones:** confirmado el punto de inserción en la versión de `main` y que el roster se construye desde `heroesData` local. Pendiente comprobar visualmente las tarjetas en GitHub Pages, abrir un expediente y recorrer sus controles.
+- **Riesgos / pendientes:** si el roster continúa vacío, inspeccionar el error exacto del navegador y la estructura de datos/DOM; esta modificación elimina la dependencia temporal de las API, pero no se declara todavía resuelto hasta la prueba publicada.
+- **Commit:** [`8527304`](https://github.com/losmoriartys-cmd/legion-multiversal/commit/85273046f049a5421a8c5bd9e010e14954c837fd).
+- **Despliegue:** pendiente de verificar.
