@@ -504,22 +504,56 @@ function renderRoster() {
         members.forEach(({hero,index}) => {
             const card = document.createElement('button');
             card.type = 'button';
-            card.className = 'roster-portrait-card';
+            const isMoriartyPilot = hero.name === 'MORIARTYS';
+            card.className = 'roster-portrait-card' + (isMoriartyPilot ? ' roster-card--moriarty' : '');
             card.setAttribute('aria-label', 'Ver carta y expediente de ' + hero.name);
+            if (isMoriartyPilot) card.dataset.cardTilt = 'moriarty';
             card.onclick = (event) => openHeroProfile(index, event.currentTarget);
             const imageWrap = document.createElement('div');
-            imageWrap.className = 'roster-portrait-wrap';
+            imageWrap.className = 'roster-portrait-wrap' + (isMoriartyPilot ? ' roster-portrait-wrap--collectible' : '');
             const image = document.createElement('img');
-            image.src = hero.portrait || hero.img;
-            image.alt = 'Retrato de ' + hero.name;
+            image.src = isMoriartyPilot ? (hero.img || hero.portrait) : (hero.portrait || hero.img);
+            image.alt = isMoriartyPilot ? 'Carta coleccionable número ' + (hero.cardNumber || '047') + ' de ' + hero.name : 'Retrato de ' + hero.name;
             image.loading = 'lazy';
-            image.onerror = () => { imageWrap.textContent = 'RETRATO PENDIENTE'; };
+            image.onerror = () => { imageWrap.textContent = isMoriartyPilot ? 'CARTA PENDIENTE' : 'RETRATO PENDIENTE'; };
             imageWrap.appendChild(image);
+            if (isMoriartyPilot) {
+                const foil = document.createElement('span');
+                foil.className = 'roster-card-foil';
+                foil.setAttribute('aria-hidden', 'true');
+                const number = document.createElement('span');
+                number.className = 'roster-card-number';
+                number.textContent = 'N.º ' + (hero.cardNumber || '047');
+                const cue = document.createElement('span');
+                cue.className = 'roster-card-cue';
+                cue.textContent = 'EXPEDIENTE · TOCÁ PARA ABRIR';
+                imageWrap.append(foil, number, cue);
+            }
             const info = document.createElement('div');
             info.className = 'roster-portrait-info';
             const creatorTypeLabel = hero.creator_type === 'video_creator' ? 'CREADOR DE VIDEO' : hero.creator_type === 'live_streamer' ? 'STREAMER' : 'FORMATO POR DEFINIR';
             info.innerHTML = '<strong>' + escapeStatsHtml(hero.name) + '</strong><span>' + escapeStatsHtml(hero.rank || group.title) + '</span><span class="roster-creator-type">' + creatorTypeLabel + '</span>';
             card.append(imageWrap,info);
+            if (isMoriartyPilot) {
+                card.addEventListener('pointermove', (event) => {
+                    if (event.pointerType !== 'mouse' || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+                    const rect = card.getBoundingClientRect();
+                    const x = (event.clientX - rect.left) / rect.width;
+                    const y = (event.clientY - rect.top) / rect.height;
+                    card.style.setProperty('--tilt-x', ((.5 - y) * 13).toFixed(2) + 'deg');
+                    card.style.setProperty('--tilt-y', ((x - .5) * 16).toFixed(2) + 'deg');
+                    card.style.setProperty('--shine-x', (x * 100).toFixed(1) + '%');
+                    card.style.setProperty('--shine-y', (y * 100).toFixed(1) + '%');
+                    card.classList.add('is-tilting');
+                });
+                card.addEventListener('pointerleave', () => {
+                    card.classList.remove('is-tilting');
+                    card.style.setProperty('--tilt-x', '0deg');
+                    card.style.setProperty('--tilt-y', '0deg');
+                    card.style.setProperty('--shine-x', '50%');
+                    card.style.setProperty('--shine-y', '50%');
+                });
+            }
             grid.appendChild(card);
         });
         section.appendChild(grid);
