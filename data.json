@@ -17,7 +17,7 @@
     "elgabii090"
   ],
   "channel_registry_note": "Los canales archivados se conservan para consulta histórica y no se incluyen en los indicadores del roster activo.",
-  "updated_at": "2026-11-06T06:35:20Z",
+  "updated_at": "2026-11-06T06:40:55Z",
   "channels": {
     "ladymoriarty01": {
       "login": "ladymoriarty01",
@@ -32,7 +32,7 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-06T06:35:20Z",
+      "updated_at": "2026-11-06T06:40:55Z",
       "window": {
         "samples_total": 67,
         "live_samples": 5,
@@ -701,7 +701,7 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-06T06:35:20Z",
+      "updated_at": "2026-11-06T06:40:55Z",
       "window": {
         "samples_total": 67,
         "live_samples": 15,
@@ -2044,7 +2044,7 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-06T06:35:20Z",
+      "updated_at": "2026-11-06T06:40:55Z",
       "window": {
         "samples_total": 67,
         "live_samples": 4,
@@ -2699,7 +2699,7 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-06T06:35:20Z",
+      "updated_at": "2026-11-06T06:40:55Z",
       "window": {
         "samples_total": 67,
         "live_samples": 8,
@@ -3368,7 +3368,7 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-06T06:35:20Z",
+      "updated_at": "2026-11-06T06:40:55Z",
       "window": {
         "samples_total": 67,
         "live_samples": 7,
@@ -4653,7 +4653,7 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-06T06:35:20Z",
+      "updated_at": "2026-11-06T06:40:55Z",
       "window": {
         "samples_total": 67,
         "live_samples": 5,
@@ -5315,7 +5315,7 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-06T06:35:20Z",
+      "updated_at": "2026-11-06T06:40:55Z",
       "window": {
         "samples_total": 67,
         "live_samples": 3,
