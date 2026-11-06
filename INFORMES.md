@@ -21,6 +21,23 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 
 ---
 
+## 2026-11-06 — Incorporar ficha ejecutiva comercial antes del media kit
+
+- **Responsable:** colaboración ChatGPT + equipo del proyecto.
+- **Objetivo:** ofrecer a una marca una lectura rápida y comparable antes de abrir el expediente completo, sin sustituir el cómic ni mezclar datos sin fuente.
+- **Archivos modificados:** `index.html`, `INFORMES.md`.
+- **Implementado:**
+  - Cada presentación individual incorpora una ficha ejecutiva con rol institucional, tipo de creador y plataformas, manteniendo separados esos conceptos.
+  - Se muestran territorios de contenido y formatos potenciales de colaboración. Cuando existen oportunidades específicas aprobadas/documentadas en `mediaProfile`, se priorizan; en los demás casos se usan formatos generales acordes al tipo de creador y se identifican expresamente como posibilidades, no campañas realizadas.
+  - Se muestra la cantidad de clips, videos y registros editoriales cargados, sin confundir volumen de material con visualizaciones o rendimiento.
+  - Las alianzas/accesos se etiquetan como registros documentados, sin convertir automáticamente accesos a keys en patrocinios.
+  - Se agregan enlaces directos a las plataformas que cada perfil declara. Pato mantiene YouTube como única plataforma de publicación de contenido del expediente; no se incorpora Twitch.
+  - La ausencia de muestras en el archivo se describe como falta de documentación cargada, no como cero audiencia ni ausencia de contenido.
+- **Validaciones:** comprobada la existencia de la función nueva, su invocación en la presentación de cada perfil y la presencia de estilos responsive. Se validará visualmente al revisar la publicación de GitHub Pages.
+- **Pendientes / riesgos:** completar propuestas comerciales particulares con aprobación de cada creador; confirmar títulos y enlaces de muestras sin URL; verificar el diseño en móvil y escritorio.
+- **Commit:** se registra al completar esta intervención.
+- **Despliegue:** pendiente de verificar GitHub Pages.
+
 ## 2026-11-06 — Normalizar tipo de creador y carga inicial de expedientes
 
 - **Responsable:** colaboración ChatGPT + equipo del proyecto.
