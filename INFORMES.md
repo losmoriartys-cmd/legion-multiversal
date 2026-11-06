@@ -1284,3 +1284,15 @@ Se añadieron tratamientos visuales individuales a los globos de voz de los diez
 
 - Se actualizó `README.md` para reflejar los archivos reales tras la refactorización (HTML, CSS, JavaScript, roster JSON, datos de analítica, validador y guía Cloudflare) y se corrigió el nombre visible del repositorio.
 - Commit: [`99b1082`](https://github.com/losmoriartys-cmd/legion-multiversal/commit/99b1082a9d6e031f78c8333f8dcfa085b15eac6e).
+
+
+## 2026-11-06 — Normalizar estados de resúmenes estadísticos por fuente
+
+- **Responsable:** colaboración ChatGPT + equipo del proyecto.
+- **Objetivo:** evitar que los resúmenes aportados por el creador aparezcan como datos pendientes cuando sí contienen métricas utilizables, diferenciándolos de registros parciales y de fuentes todavía sin datos.
+- **Archivos modificados:** `app.js`, `INFORMES.md`.
+- **Implementado:** `renderSullyStats()` ahora distingue cuatro estados: `partial` (REGISTRO PARCIAL), `user_supplied_summary` (RESUMEN APORTADO), `user_supplied_annual_summary` (RESUMEN ANUAL APORTADO) y `pending` (PENDIENTE DE DATOS). Los dos estados de resumen aportado también habilitan la presentación de sus indicadores agregados, sin etiquetarlos como registros completos ni como datos automáticos verificados.
+- **Validaciones y resultados:** el cambio se limita al estado editorial y a la condición que decide mostrar el resumen en el renderizador común. Se contrastó con los estados vigentes de ArDipii y Dave en `sullygnome-data.json`; ArDipii conserva su resumen de período aportado y Dave su resumen anual 2026. La presentación especializada de ambos expedientes no se altera.
+- **Pendientes / riesgos:** la página utiliza renderizadores especializados para varios integrantes; continuar el contraste visual de cada expediente y revisar diferencias conocidas entre resúmenes y desgloses antes de cambiar cifras. La discrepancia de Hábitos entre 472 horas vistas en el resumen y 474 en la categoría «Solo charlando» permanece señalada, no corregida por inferencia.
+- **Commit:** [`30e3565`](https://github.com/losmoriartys-cmd/legion-multiversal/commit/30e356503467df07f50796e1bc2a9929509cc22e).
+- **Despliegue:** pendiente de verificar tras la actualización de este informe.
