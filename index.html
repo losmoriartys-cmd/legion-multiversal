@@ -1877,7 +1877,7 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
  </details>
  <details class="stats-methodology">
   <summary>Ver detalle técnico por canal</summary>
-  <div class="stats-table-wrap"><table class="stats-table"><thead><tr><th>Canal</th><th>Estado</th><th>Espectadores actuales</th><th>Categoría</th><th>Promedio observado</th><th>Pico observado</th><th>Horas observadas</th><th>Muestras</th></tr></thead><tbody id="stats-table-body"><tr><td colspan="8">Cargando estadísticas…</td></tr></tbody></table></div>
+  <div class="stats-table-wrap"><table class="stats-table"><thead><tr><th>Canal</th><th>Estado</th><th>Espectadores actuales</th><th>Categoría</th><th>Promedio observado</th><th>Pico observado</th><th>Horas observadas</th><th>Muestras</th><th>Cobertura del intervalo muestreado</th></tr></thead><tbody id="stats-table-body"><tr><td colspan="9">Cargando estadísticas…</td></tr></tbody></table></div>
  </details>
 </div>
 </section>
@@ -2592,16 +2592,17 @@ async function loadInstituteStats(){
  try{
   const res=await fetch('data.json',{cache:'no-store'}); if(!res.ok)throw new Error('No se pudo leer data.json');
   const data=await res.json(); instituteStatsData=data;
-  const channels=Object.values(data.channels||{});
+  const activeLogins=Array.isArray(data.active_channels)?data.active_channels:Object.keys(data.channels||{});
+  const channels=activeLogins.map(login=>data.channels?.[login]).filter(Boolean);
   const liveCount=channels.filter(c=>c.live).length;
   const totalSamples=channels.reduce((n,c)=>n+(c.window?.samples_total||0),0);
   const observedHours=channels.reduce((n,c)=>n+(c.window?.observed_live_hours||0),0);
   const estimatedHoursWatched=channels.reduce((n,c)=>n+(c.window?.estimated_hours_watched||0),0);
-  document.getElementById('stats-updated').textContent='Actualizado el '+new Date(data.updated_at).toLocaleString('es-AR')+' · Datos de '+channels.length+' canales';
-  document.getElementById('stats-summary').innerHTML='<div class="premium-card"><h3>'+fmt(channels.length,0)+'</h3><p>Canales representados</p></div><div class="premium-card"><h3>'+fmt(liveCount,0)+'</h3><p>En directo en la última consulta</p></div><div class="premium-card"><h3>'+fmt(data.window_days,0)+' días</h3><p>Ventana de observación</p></div><div class="premium-card"><h3>'+fmt(totalSamples,0)+'</h3><p>Muestras registradas</p></div>';
-  body.innerHTML=channels.map(c=>'<tr><td>'+escapeStatsHtml(c.display_name)+'</td><td>'+(c.live?'EN DIRECTO':'OFFLINE')+'</td><td>'+fmt(c.current_viewers,0)+'</td><td>'+escapeStatsHtml(fmt(c.current_game))+'</td><td>'+fmt(c.window?.average_viewers_sampled)+'</td><td>'+fmt(c.window?.peak_viewers_sampled,0)+'</td><td>'+fmt(c.window?.observed_live_hours)+'</td><td>'+fmt(c.window?.samples_total,0)+'</td></tr>').join('');
+  document.getElementById('stats-updated').textContent='Actualizado el '+new Date(data.updated_at).toLocaleString('es-AR')+' · '+channels.length+' canales del roster activo. Ventana máxima: '+fmt(data.window_days,0)+' días; cobertura efectiva variable según canal.';
+  document.getElementById('stats-summary').innerHTML='<div class="premium-card"><h3>'+fmt(channels.length,0)+'</h3><p>Canales activos representados</p></div><div class="premium-card"><h3>'+fmt(liveCount,0)+'</h3><p>En directo en la última consulta</p></div><div class="premium-card"><h3>'+fmt(data.window_days,0)+' días</h3><p>Ventana máxima configurada</p></div><div class="premium-card"><h3>'+fmt(totalSamples,0)+'</h3><p>Muestras registradas</p></div>';
+  body.innerHTML=channels.map(c=>{const samples=Array.isArray(c.snapshots)?c.snapshots.filter(s=>s?.sampled_at):[];const first=samples.length?Date.parse(samples[0].sampled_at):NaN;const last=samples.length?Date.parse(samples[samples.length-1].sampled_at):NaN;const expected=Number.isFinite(first)&&Number.isFinite(last)&&last>=first?Math.floor((last-first)/(Number(data.sampling_interval_minutes||15)*60000))+1:0;const coverage=expected?Math.min(100,(samples.length/expected)*100):null;const coverageLabel=coverage===null?'Insuficiente':coverage.toLocaleString('es-AR',{maximumFractionDigits:1})+'% ('+samples.length+'/'+expected+')';return '<tr><td>'+escapeStatsHtml(c.display_name)+'</td><td>'+(c.live?'EN DIRECTO':'OFFLINE')+'</td><td>'+fmt(c.current_viewers,0)+'</td><td>'+escapeStatsHtml(fmt(c.current_game))+'</td><td>'+fmt(c.window?.average_viewers_sampled)+'</td><td>'+fmt(c.window?.peak_viewers_sampled,0)+'</td><td>'+fmt(c.window?.observed_live_hours)+'</td><td>'+fmt(c.window?.samples_total,0)+'</td><td>'+coverageLabel+'</td></tr>';}).join('');
   renderLiveDirectory(channels);
- }catch(e){body.innerHTML='<tr><td colspan="8">Estadísticas temporalmente no disponibles. '+e.message+'</td></tr>';}
+ }catch(e){body.innerHTML='<tr><td colspan="9">Estadísticas temporalmente no disponibles. '+escapeStatsHtml(e.message)+'</td></tr>';}
 }
 
 async function loadPartnerMetrics(){
@@ -2609,8 +2610,8 @@ async function loadPartnerMetrics(){
  const fmt=(v,d=2)=>v===null||v===undefined?'Pendiente':(typeof v==='number'?v.toLocaleString('es-AR',{maximumFractionDigits:d}):v);
  try{
   const res=await fetch('data.json',{cache:'no-store'}); if(!res.ok)throw new Error('No se pudo leer data.json');
-  const data=await res.json(); const channels=Object.values(data.channels||{});
-  body.innerHTML=channels.map(c=>'<tr><td>'+c.display_name+'</td><td>'+(c.live?'EN DIRECTO':'OFFLINE')+'</td><td>'+fmt(c.current_viewers,0)+'</td><td>'+fmt(c.current_game)+'</td><td>'+fmt(c.window?.average_viewers_sampled)+'</td><td>'+fmt(c.window?.peak_viewers_sampled,0)+'</td><td>'+fmt(c.window?.samples_total,0)+'</td></tr>').join('');
+  const data=await res.json(); const activeLogins=Array.isArray(data.active_channels)?data.active_channels:Object.keys(data.channels||{}); const channels=activeLogins.map(login=>data.channels?.[login]).filter(Boolean);
+  body.innerHTML=channels.map(c=>'<tr><td>'+escapeStatsHtml(c.display_name)+'</td><td>'+(c.live?'EN DIRECTO':'OFFLINE')+'</td><td>'+fmt(c.current_viewers,0)+'</td><td>'+fmt(c.current_game)+'</td><td>'+fmt(c.window?.average_viewers_sampled)+'</td><td>'+fmt(c.window?.peak_viewers_sampled,0)+'</td><td>'+fmt(c.window?.samples_total,0)+'</td></tr>').join('');
  }catch(e){body.innerHTML='<tr><td colspan="7">Métricas temporalmente no disponibles.</td></tr>';}
 }
 
