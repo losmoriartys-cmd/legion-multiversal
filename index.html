@@ -1661,7 +1661,15 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
  text-decoration:none;
 }
 
-</style>
+/* Contraste reforzado del dossier ROD3R1K: papel claro, tinta oscura y acentos legibles. */
+        .modal-content.comic-mode .rod3r1k-page{color:#172b43}
+        .modal-content.comic-mode .rod3r1k-page .comic-page-lead{color:#f5f7fb;background:#14243a}
+        .modal-content.comic-mode .rod3r1k-page .comic-panel-caption{color:#33465c}
+        .modal-content.comic-mode .rod3r1k-page .comic-games-table th{background:#14243a!important;color:#fff!important}
+        .modal-content.comic-mode .rod3r1k-page .comic-games-table td{color:#172b43!important;background:#f7efdd!important}
+        .modal-content.comic-mode .rod3r1k-page .comic-games-table td small{color:#46566b!important}
+        .modal-content.comic-mode .rod3r1k-page .comic-chart-row span,.modal-content.comic-mode .rod3r1k-page .comic-chart-row b{color:#172b43!important}
+        </style>
 </head>
 <body>
     <div id="chapter-transition" aria-hidden="true" data-title="LEGIÓN MULTIVERSAL"></div>
@@ -2121,7 +2129,7 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
                 role: "director", 
                 img: "assets/heroes/rod3r1k_dark.webp", 
                 twitch: "https://twitch.tv/TheR0D3R1K",
-                bio: "ROD3R1K, conocido como ElKrakenaso, es una de las raíces de esta historia: estuvo desde aquellas primeras partidas con Demian que terminaron dando origen al equipo. Su presencia combina energía, espectáculo y espíritu de encuentro. En la Legión es quien convierte una partida en acontecimiento y una reunión de creadores en una misión compartida.",
+                bio: "Bienvenidos al canal. Me llamo Roderik, mejor conocido como «ElKrakenaso». Encontrarás momentos divertidos y épicos. ¡Acompañame en las partidas y divertite!",
                 voice: "«¡Que se escuche hasta el último rincón! Si vamos a jugar, que cada partida deje una historia.»",
                 powers: "Perfil de habilidades en construcción. Pendiente de confirmar con el integrante.",
                 stats: "Métricas en proceso de integración. Los datos se publicarán cuando estén conectados a una fuente verificable y acompañados de su período de medición.", 
@@ -2763,6 +2771,50 @@ function renderRosterComicPages(hero,index,channelStats,sullyChannel){
  const commercial=page('03','EL UNIVERSO COMERCIAL',commercialBody,'COLABORACIONES');
  return [cover,stats,missions,commercial];
 }
+
+function renderRod3r1kComicPages(hero){
+ const games=[
+  ['Fortnite',28,'28,9%',596,'26,5%',18,51],
+  ['Just Chatting',24,'25,1%',509,'22,6%',16,50],
+  ['Alien: Isolation',9,'10,1%',295,'13,1%',34,48],
+  ["Clive Barker's Hellraiser: Revival",8,'8,8%',257,'11,4%',24,66],
+  ['Rogue Company',8,'8,8%',185,'8,3%',19,48],
+  ['Luto',7,'7,2%',173,'7,7%',27,46],
+  ['Counter-Strike',3,'3,6%',99,'4,4%',26,41],
+  ['Among Us',2,'2,6%',18,'0,8%',7,11],
+  ['Barfender',2,'2,3%',50,'2,2%',19,37],
+  ['Dead by Daylight',2,'2,1%',48,'2,2%',24,33],
+  ['Marvel Rivals',0,'0,5%',17,'0,8%',34,39]
+ ];
+ const streams=[
+  ['05 nov 2026','3 h 49 min',72,19,52,0],
+  ['04 nov 2026','4 h 04 min',69,17,38,3],
+  ['03 nov 2026','3 h 18 min',69,21,46,2],
+  ['02 nov 2026','3 h 35 min',93,26,51,-1],
+  ['31 oct 2026','7 h 49 min',117,15,35,2],
+  ['29 oct 2026','3 h 35 min',50,14,25,1],
+  ['28 oct 2026','4 h 06 min',82,20,44,3],
+  ['27 oct 2026','3 h 21 min',56,17,44,4],
+  ['26 oct 2026','4 h 06 min',94,23,47,5],
+  ['24 oct 2026','5 h 05 min',142,28,55,3]
+ ];
+ const clips=[
+  ['Spicy Piliable Poultry Corgi Derp','SpicyPiliablePoultryCorgiDerp-flAxKL1oWuPkWDWA','Momentos divertidos y espontáneos'],
+  ['Hilarious Ironic Soybean Chocolate Rain','HilariousIronicSoybeanChocolateRain','Una escena destacada del canal'],
+  ['Cooperative Popular Flamingo','CooperativePopularFlamingoM4xHeh-3bJjuJyiLiZOEEaC','Partidas y complicidad en directo']
+ ];
+ const esc=escapeStatsHtml;
+ const cover='<article class="comic-book-sheet comic-cover-sheet"><header class="comic-cover-masthead"><b>LEGIÓN MULTIVERSAL</b><span>EXPEDIENTE INDIVIDUAL · N.º '+esc(hero.cardNumber||'008')+'</span><span>MEDIA KIT</span></header><div class="comic-cover-art-frame"><span class="comic-cover-burst">EL EXPEDIENTE<br>DEL FUERTE</span><img class="comic-cover-art" src="'+esc(hero.img)+'" alt="Carta oficial de ROD3R1K"></div><div class="comic-cover-copy"><div class="comic-cover-titleline"><span>PROTAGONISTA</span><h2>ROD3R1K</h2><b>008</b></div><p class="comic-cover-subtitle">EL FUERTE · INGENIERO SÓNICO</p><section class="comic-panel comic-cover-bio"><div class="comic-panel-heading"><span>01</span><b>IDENTIDAD SECRETA · BIOGRAFÍA DEL CREADOR</b></div><p>Bienvenidos al canal. Me llamo Roderik, mejor conocido como «ElKrakenaso». Encontrarás momentos divertidos y épicos. ¡Acompañame en las partidas y divertite!</p></section><aside class="hero-voice voice-rod3r1k"><span>SU LEMA EN LA LEGIÓN</span><p>«¡Que se escuche hasta el último rincón! Si vamos a jugar, que cada partida deje una historia.»</p></aside><footer class="comic-cover-footer"><span>GAMING · EVENTOS · COMUNIDAD</span><b>¡ABRIR EXPEDIENTE!</b></footer></div></article>';
+ const totalHours=(2568/60).toFixed(1).replace('.',',')+' h';
+ const stats='<article class="comic-book-sheet comic-interior-page rod3r1k-page"><header class="comic-interior-header"><span>LEGIÓN MULTIVERSAL</span><b>CAPÍTULO 01</b><span>LA COMUNIDAD</span></header><div class="comic-page-title"><small>EXPEDIENTE ROD3R1K · PÁGINA 02</small><h2>EL PODER DE LA AUDIENCIA</h2></div><p class="comic-page-lead">Actividad reciente registrada en las diez transmisiones compartidas, del 24 de octubre al 5 de noviembre de 2026. Los resultados describen esta muestra, no el historial completo del canal.</p><div class="comic-metric-grid"><article class="comic-metric"><span>HORAS EN DIRECTO</span><strong>'+totalHours+'</strong><small>10 transmisiones · suma de duraciones</small></article><article class="comic-metric"><span>HORAS VISTAS</span><strong>844</strong><small>Acumulado de la muestra</small></article><article class="comic-metric"><span>PICO DE ESPECTADORES</span><strong>55</strong><small>Máximo de estas 10 transmisiones</small></article><article class="comic-metric"><span>SEGUIDORES NETOS</span><strong>+22</strong><small>Suma reportada en la muestra</small></article><article class="comic-metric"><span>MEDIA PONDERADA</span><strong>19,8</strong><small>Estimación ponderada por duración de cada directo</small></article><article class="comic-metric"><span>TRANSMISIONES</span><strong>10</strong><small>24 oct – 5 nov 2026</small></article></div><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>02</span><b>ÚLTIMAS TRANSMISIONES</b></div><p class="comic-panel-caption">Valores por directo: horas vistas, espectadores promedio y pico, y seguidores ganados. El orden es cronológico inverso.</p><div class="stats-table-wrap"><table class="comic-games-table"><thead><tr><th>Fecha</th><th>Duración</th><th>Horas vistas</th><th>Media</th><th>Pico</th><th>Seguidores</th></tr></thead><tbody>'+streams.map(x=>'<tr><td>'+x[0]+'</td><td>'+x[1]+'</td><td>'+x[2]+'</td><td>'+x[3]+'</td><td>'+x[4]+'</td><td>'+(x[5]>0?'+':'')+x[5]+'</td></tr>').join('')+'</tbody></table></div></section><p class="comic-panel-caption">Fuente: tabla de transmisiones compartida para este expediente. El promedio ponderado se calcula a partir de la duración y los espectadores promedio de cada sesión; no equivale a un promedio histórico de Twitch.</p><footer class="comic-page-footer"><span>LA COMUNIDAD ES PARTE DE LA HISTORIA</span><b>02 / 04</b></footer></article>';
+ const maxHours=Math.max(...games.map(g=>g[1]));
+ const gameRows=games.map(g=>'<tr><td>'+g[0]+'</td><td>'+g[1]+' h <small>('+g[2]+')</small></td><td>'+g[3]+' h <small>('+g[4]+')</small></td><td>'+g[5]+'</td><td>'+g[6]+'</td></tr>').join('');
+ const gamesPage='<article class="comic-book-sheet comic-interior-page rod3r1k-page"><header class="comic-interior-header"><span>LEGIÓN MULTIVERSAL</span><b>CAPÍTULO 02</b><span>LAS MISIONES</span></header><div class="comic-page-title"><small>EXPEDIENTE ROD3R1K · PÁGINA 03</small><h2>UN HÉROE, MUCHOS UNIVERSOS</h2></div><p class="comic-page-lead">De la acción competitiva a los juegos de terror y las charlas en directo: un recorrido variado por los mundos que forman parte del canal.</p><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>01</span><b>JUEGOS Y RENDIMIENTO</b></div><p class="comic-panel-caption">Horas de emisión y horas vistas con participación porcentual, espectadores promedio y pico. Se conserva el redondeo de la fuente.</p><div class="stats-table-wrap"><table class="comic-games-table"><thead><tr><th>Juego</th><th>Emisión</th><th>Horas vistas</th><th>Media</th><th>Pico</th></tr></thead><tbody>'+gameRows+'</tbody></table></div></section><div class="comic-page-split"><section class="comic-panel"><div class="comic-panel-heading"><span>02</span><b>MAYOR AUDIENCIA MEDIA</b></div>'+games.slice().sort((a,b)=>b[5]-a[5]).slice(0,5).map(g=>'<div class="comic-chart-row"><span>'+g[0]+'</span><div class="comic-chart-track"><i style="width:'+Math.round(g[5]/34*100)+'%"></i></div><b>'+g[5]+'</b></div>').join('')+'</section><section class="comic-panel"><div class="comic-panel-heading"><span>03</span><b>MAYOR PICO REGISTRADO</b></div>'+games.slice().sort((a,b)=>b[6]-a[6]).slice(0,5).map(g=>'<div class="comic-chart-row"><span>'+g[0]+'</span><div class="comic-chart-track"><i style="width:'+Math.round(g[6]/66*100)+'%"></i></div><b>'+g[6]+'</b></div>').join('')+'</section></div><p class="comic-panel-caption">Nota: el valor de 0 h para Marvel Rivals se conserva tal como aparece en la tabla original, aunque registra 0,5% del tiempo de emisión; puede deberse al redondeo.</p><footer class="comic-page-footer"><span>CADA DIRECTO, UNA NUEVA MISIÓN</span><b>03 / 04</b></footer></article>';
+ const clipCards=clips.map((c,i)=>'<article class="comic-panel comic-clip-card"><div class="comic-panel-heading"><span>0'+(i+1)+'</span><b>ESCENA DESTACADA</b></div><div class="comic-clip-preview"><iframe src="https://clips.twitch.tv/embed?clip='+encodeURIComponent(c[1])+'&parent='+encodeURIComponent(location.hostname)+'&autoplay=false" title="Clip de ROD3R1K" loading="lazy" allowfullscreen></iframe></div><h3>'+c[0]+'</h3><p>'+c[2]+'</p><a href="https://clips.twitch.tv/'+encodeURIComponent(c[1])+'" target="_blank" rel="noopener">VER CLIP COMPLETO ↗</a></article>').join('');
+ const clipsPage='<article class="comic-book-sheet comic-interior-page rod3r1k-page"><header class="comic-interior-header"><span>LEGIÓN MULTIVERSAL</span><b>CAPÍTULO 03</b><span>EL ESPECTÁCULO</span></header><div class="comic-page-title"><small>EXPEDIENTE ROD3R1K · PÁGINA 04</small><h2>MOMENTOS QUE HACEN HISTORIA</h2></div><p class="comic-page-lead">Una selección de clips para conocer el humor, la energía y los momentos épicos que aparecen en sus partidas.</p><div class="comic-clips-grid">'+clipCards+'</div><div class="comic-page-split"><section class="comic-panel"><div class="comic-panel-heading"><span>04</span><b>FORMATOS DE COLABORACIÓN</b></div><div class="comic-format-list"><span>Presentación y prueba de videojuegos</span><span>Integraciones naturales durante directos</span><span>Retos y dinámicas con la comunidad</span><span>Contenido de gaming y entretenimiento</span><span>Clips y piezas audiovisuales</span></div></section><section class="comic-panel"><div class="comic-panel-heading"><span>05</span><b>IDENTIDAD EN LA LEGIÓN</b></div><p>Integrante de la primera etapa junto a Demian. Su recorrido está ligado a las partidas fundacionales y al impulso de encuentros y experiencias compartidas.</p><p class="comic-panel-caption">Las propuestas comerciales son posibilidades a conversar; no representan campañas ni alianzas confirmadas.</p></section></div><section class="comic-final-cta"><span>PRÓXIMO NÚMERO · NUEVAS COLABORACIONES</span><h3>HAGAMOS QUE TU MARCA FORME PARTE DE LA HISTORIA.</h3><p>Contacto y propuestas comerciales:</p><a href="mailto:losmoriartys@gmail.com">losmoriartys@gmail.com</a></section><footer class="comic-page-footer"><span>CONTINUARÁ…</span><b>04 / 04</b></footer></article>';
+ return [cover,stats,gamesPage,clipsPage];
+}
+
 function renderMoriartysComicPages(hero){
  const games=[
   {name:'Minecraft',air:'3 h',avg:34,followers:7,perHour:2},
@@ -2814,6 +2866,8 @@ function openHeroModal(index) {
         pages=renderMoriartysComicPages(hero);
     }else if(isLady){
         pages=renderLadyMoriartyComicPages(hero,findSullyChannel(hero));
+    }else if(hero.name==='ROD3R1K'){
+        pages=renderRod3r1kComicPages(hero);
     }else{
         const channelStats=findChannelStats(hero);
         const sullyChannel=findSullyChannel(hero);
