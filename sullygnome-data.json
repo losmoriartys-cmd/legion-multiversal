@@ -911,23 +911,91 @@
       "source": "SullyGnome",
       "source_url": "https://sullygnome.com/channel/ardipii/2026/streams",
       "checked_at_utc": null,
-      "status": "pending",
+      "status": "user_supplied_summary",
       "period": {
-        "start_date": null,
-        "end_date": null
+        "start_date": "2026-10-06",
+        "end_date": "2026-11-05"
       },
-      "streams": [],
+      "streams": [
+        {
+          "date": "2026-11-04",
+          "duration_minutes": 48,
+          "average_viewers": 7,
+          "peak_viewers": 9,
+          "hours_watched": 5.4,
+          "category": "Just Chatting"
+        },
+        {
+          "date": "2026-10-30",
+          "duration_minutes": 60,
+          "average_viewers": 21,
+          "peak_viewers": 31,
+          "hours_watched": 21.4,
+          "category": "Just Chatting"
+        },
+        {
+          "date": "2026-10-28",
+          "duration_minutes": 66,
+          "average_viewers": 11,
+          "peak_viewers": 21,
+          "hours_watched": 11.9,
+          "category": "Just Chatting"
+        },
+        {
+          "date": "2026-10-23",
+          "duration_minutes": 60,
+          "average_viewers": 10,
+          "peak_viewers": 17,
+          "hours_watched": 10,
+          "category": "Just Chatting"
+        },
+        {
+          "date": "2026-10-16",
+          "duration_minutes": 66,
+          "average_viewers": 14,
+          "peak_viewers": 21,
+          "hours_watched": 15.9,
+          "category": "Just Chatting"
+        },
+        {
+          "date": "2026-10-14",
+          "duration_minutes": 66,
+          "average_viewers": 7,
+          "peak_viewers": 11,
+          "hours_watched": 7.6,
+          "category": "Just Chatting"
+        },
+        {
+          "date": "2026-10-09",
+          "duration_minutes": 60,
+          "average_viewers": 5,
+          "peak_viewers": 12,
+          "hours_watched": 5.2,
+          "category": "Just Chatting"
+        },
+        {
+          "date": "2026-10-07",
+          "duration_minutes": 84,
+          "average_viewers": 11,
+          "peak_viewers": 24,
+          "hours_watched": 14.8,
+          "category": "Gears of War: E-Day"
+        }
+      ],
       "summary": {
-        "streams_count": null,
-        "airtime_minutes": null,
-        "airtime_hours": null,
-        "hours_watched": null,
-        "average_viewers_duration_weighted": null,
-        "peak_viewers": null,
-        "followers_gain_reported": null
+        "streams_count": 8,
+        "airtime_minutes": 510,
+        "airtime_hours": 11,
+        "hours_watched": 121,
+        "average_viewers_duration_weighted": 11,
+        "peak_viewers": 31,
+        "followers_gain_reported": 83
       },
       "notes": [
-        "Enlace del historial identificado; faltan las filas de transmisiones para cargar métricas verificadas."
+        "Resumen agregado y filas individuales transcritos de la información de SullyGnome compartida por el creador; pendientes de contraste visual directo con la página.",
+        "El resumen agregado informa 8 transmisiones, 11 horas emitidas, 121 horas vistas, promedio de 11 espectadores, pico de 31 y +83 seguidores.",
+        "Se excluyó del detalle de los últimos 30 días la fila del 6 nov 2026 porque está fuera del período 6 oct–5 nov 2026.",
+        "Los valores de seguidores por fila no se suman para sustituir el total agregado del período."
       ]
     },
     {
