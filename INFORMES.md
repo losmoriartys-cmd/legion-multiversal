@@ -1368,3 +1368,13 @@ Se añadieron tratamientos visuales individuales a los globos de voz de los diez
 - **Discrepancia detectada:** `sullygnome-data.json` contiene dos representaciones de algunas transmisiones de AKUMA: `streams` y `last_30_days.recent_streams_30d`. Para fechas coincidentes aparecen diferencias de duración y/o horas vistas (por ejemplo, 5/11: 122 vs. 120 minutos; 4/11: 130 vs. 132; 3/11: 97 vs. 96; 24/10: 50 vs. 48). El renderizador prioriza `recent_streams_30d`, por lo que la bitácora visible usa esa serie. No se puede determinar desde el archivo cuál transcripción es la correcta sin contrastar la fuente original.
 - **Cambios:** no se alteraron métricas ni código; no corresponde escoger una cifra por inferencia.
 - **Pendientes:** contrastar las filas discrepantes de AKUMA con SullyGnome o con el material original compartido por el creador antes de consolidar o eliminar cualquiera de las dos representaciones. Completar también la revisión visual del dossier en escritorio y móvil.
+
+## 2026-11-06 — Auditoría estática del dossier de ARDIPII
+
+- **Responsable:** colaboración ChatGPT + equipo del proyecto.
+- **Archivos revisados:** `app.js`, `sullygnome-data.json`, `creator-records.json`, `roster-data.json`.
+- **Estructura y contenido:** el renderizador conserva seis páginas (portada, identidad, audiencia, juegos/bitácora, clips y colaboraciones). La frecuencia publicada del perfil aparece como martes y jueves a las 20:00, hora de México, en línea con el horario registrado para el integrante. Los cuatro IDs de clips coinciden con los cuatro registros editoriales; sus títulos siguen identificados como pendientes de confirmación.
+- **Discrepancia estadística:** el resumen del período 6/10–5/11 informa 8 transmisiones, 11 horas emitidas y 121 horas vistas. El archivo contiene ocho filas individuales para ese mismo período, pero sus duraciones suman 510 minutos (8,5 h) y sus horas vistas suman 92,2 h. El promedio ponderado por duración de las filas es aproximadamente 10,9, compatible con el promedio agregado de 11, pero los totales de emisión y horas vistas no coinciden. No se modificaron cifras ni se eligió una versión por inferencia.
+- **Presentación:** la bitácora usa las ocho filas disponibles; el listado de juegos está rotulado como selección proporcionada por el creador y no como ranking calculado. Los formatos comerciales se presentan como posibilidades, no como campañas confirmadas.
+- **Cambios:** ninguno; se requiere contraste de las ocho filas con la captura original de SullyGnome o el material fuente antes de consolidar totales.
+- **Pendientes:** confirmar los totales de duración y horas vistas de ARDIPII; revisar visualmente el dossier en escritorio y móvil y validar reproducción real de los cuatro clips.
