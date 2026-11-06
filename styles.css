@@ -1938,3 +1938,265 @@ body {
     #chapter-2 .roster-grid { grid-template-columns: minmax(0, 1fr); }
     #chapter-2 .roster-portrait-card { max-width: 270px; }
 }
+
+
+/* ROSTER · cartas coleccionables reversibles para toda la Legión */
+#chapter-2 .roster-grid {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 236px), 1fr));
+    align-items: start;
+    perspective: 1400px;
+}
+#chapter-2 .roster-collectible-card {
+    width: min(100%, 292px);
+    min-width: 0;
+    margin: 0 auto;
+    perspective: 1400px;
+    transform: perspective(1100px) rotateX(var(--card-tilt-x, 0deg)) rotateY(var(--card-tilt-y, 0deg));
+    transform-style: preserve-3d;
+    transition: transform .28s cubic-bezier(.2,.7,.2,1), filter .25s ease;
+    filter: drop-shadow(0 16px 22px rgba(0,0,0,.28));
+}
+#chapter-2 .roster-collectible-card.is-tilting {
+    filter: drop-shadow(0 24px 30px rgba(0,0,0,.42));
+}
+.roster-card-3d-shell {
+    width: 100%;
+    aspect-ratio: 5 / 7;
+    perspective: 1400px;
+}
+.roster-card-3d-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform .72s cubic-bezier(.2,.72,.18,1);
+}
+.roster-collectible-card.is-flipped .roster-card-3d-inner {
+    transform: rotateY(180deg);
+}
+.roster-card-face {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid rgba(150,203,230,.64);
+    border-radius: 17px;
+    color: #eef8ff;
+    text-align: left;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    background:
+        linear-gradient(145deg, rgba(30,54,78,.98), rgba(7,14,27,.99) 62%),
+        #0a1424;
+    box-shadow: inset 0 0 0 4px rgba(179,214,237,.08), inset 0 0 0 6px rgba(4,10,19,.8), 0 0 0 1px rgba(0,0,0,.6);
+}
+.roster-card-front {
+    cursor: pointer;
+    appearance: none;
+}
+.roster-card-portrait {
+    position: absolute;
+    inset: 42px 14px 82px;
+    overflow: hidden;
+    border: 1px solid rgba(178,218,242,.7);
+    border-radius: 9px;
+    background: radial-gradient(ellipse at center, #243e57, #08111e 78%);
+    box-shadow: 0 8px 24px rgba(0,0,0,.4), inset 0 0 18px rgba(115,205,228,.12);
+}
+.roster-card-portrait img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 28%;
+}
+.roster-card-front-header,
+.roster-card-front-name,
+.roster-card-flip-hint,
+.roster-card-holo {
+    position: absolute;
+    z-index: 2;
+    pointer-events: none;
+}
+.roster-card-front-header {
+    top: 12px;
+    left: 15px;
+    right: 15px;
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    color: #ccebf7;
+    font: 700 .62rem 'Roboto Condensed', sans-serif;
+    letter-spacing: .12em;
+    text-shadow: 0 1px 5px #000;
+}
+.roster-card-front-header b { color: #f0d9a2; }
+.roster-card-front-name {
+    left: 15px;
+    right: 15px;
+    bottom: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    text-align: center;
+    text-shadow: 0 2px 7px #000;
+}
+.roster-card-front-name strong {
+    color: #f1f7ff;
+    font: 700 clamp(1rem, 1.5vw, 1.28rem) 'Roboto Condensed', sans-serif;
+    letter-spacing: .09em;
+}
+.roster-card-front-name small {
+    color: #9ddce9;
+    font: 700 .7rem 'Roboto Condensed', sans-serif;
+    letter-spacing: .15em;
+}
+.roster-card-flip-hint {
+    right: 14px;
+    bottom: 9px;
+    color: rgba(211,233,245,.7);
+    font: 600 .56rem 'Roboto Condensed', sans-serif;
+    letter-spacing: .12em;
+}
+.roster-card-holo {
+    inset: 0;
+    opacity: .28;
+    mix-blend-mode: screen;
+    background:
+      radial-gradient(circle at var(--card-shine-x) var(--card-shine-y), rgba(255,255,255,.46), transparent 23%),
+      linear-gradient(118deg, transparent 18%, rgba(83,215,235,.12) 37%, rgba(184,142,255,.16) 49%, rgba(255,255,255,.1) 55%, transparent 75%);
+    background-size: auto, 240% 240%;
+    background-position: center, var(--card-shine-x) var(--card-shine-y);
+    transition: opacity .25s ease;
+}
+.roster-collectible-card.is-tilting .roster-card-holo { opacity: .72; }
+.roster-card-back {
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+    padding: 15px 16px 13px;
+    border-color: rgba(189,165,230,.72);
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(91,153,190,.18), transparent 58%),
+      repeating-linear-gradient(135deg, rgba(185,215,235,.025) 0 2px, transparent 2px 7px),
+      linear-gradient(155deg, #17243a, #080f1d 72%);
+}
+.roster-card-back::before {
+    content: "";
+    position: absolute;
+    inset: 7px;
+    border: 1px solid rgba(167,207,230,.24);
+    border-radius: 11px;
+    pointer-events: none;
+}
+.roster-card-back-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    padding-bottom: 9px;
+    border-bottom: 1px solid rgba(157,204,225,.25);
+    color: #a9dce9;
+    font: 700 .62rem 'Roboto Condensed', sans-serif;
+    letter-spacing: .13em;
+}
+.roster-card-back-top b { color: #f0d9a2; }
+.roster-card-back-identity { padding: 12px 2px 9px; text-align: center; }
+.roster-card-back-identity small,
+.roster-card-facts dt {
+    color: #8cb9d0;
+    font: 700 .58rem 'Roboto Condensed', sans-serif;
+    letter-spacing: .14em;
+}
+.roster-card-back-identity h4 {
+    margin: 4px 0 2px;
+    color: #f3f7ff;
+    font: 700 1.16rem 'Roboto Condensed', sans-serif;
+    letter-spacing: .08em;
+}
+.roster-card-back-identity p {
+    margin: 0;
+    color: #d4c3f5;
+    font-size: .78rem;
+    font-weight: 700;
+}
+.roster-card-facts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin: 0;
+    padding: 9px 0;
+    border-top: 1px solid rgba(157,204,225,.18);
+    border-bottom: 1px solid rgba(157,204,225,.18);
+}
+.roster-card-facts div { min-width: 0; }
+.roster-card-facts dt { margin-bottom: 3px; font-size: .52rem; }
+.roster-card-facts dd {
+    margin: 0;
+    color: #e5edf8;
+    font: 700 .72rem 'Roboto Condensed', sans-serif;
+    overflow-wrap: anywhere;
+}
+.roster-card-back-bio {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin: 10px 1px 8px;
+    color: #c6d3e1;
+    font-size: .72rem;
+    line-height: 1.4;
+}
+.roster-card-back-actions {
+    display: flex;
+    gap: 7px;
+    margin-top: auto;
+}
+.roster-card-back-actions button {
+    min-height: 32px;
+    border: 1px solid rgba(135,202,224,.48);
+    border-radius: 6px;
+    padding: 6px 8px;
+    color: #eaf8ff;
+    background: rgba(37,82,108,.34);
+    font: 700 .61rem 'Roboto Condensed', sans-serif;
+    letter-spacing: .07em;
+    cursor: pointer;
+}
+.roster-card-back-actions .roster-card-open-log {
+    flex: 1;
+    border-color: rgba(220,188,123,.68);
+    color: #ffe6b4;
+    background: linear-gradient(135deg, rgba(115,80,37,.48), rgba(42,35,28,.68));
+}
+.roster-card-face:focus-visible,
+.roster-card-back-actions button:focus-visible {
+    outline: 3px solid #9be8f3;
+    outline-offset: -5px;
+}
+@media (hover: hover) and (pointer: fine) {
+    #chapter-2 .roster-collectible-card:hover { transform: perspective(1100px) rotateX(var(--card-tilt-x)) rotateY(var(--card-tilt-y)) translateY(-3px); }
+}
+@media (max-width: 600px) {
+    #chapter-2 .roster-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    #chapter-2 .roster-collectible-card { width: 100%; }
+    .roster-card-back { padding: 12px 11px 10px; }
+    .roster-card-back-bio { -webkit-line-clamp: 3; font-size: .65rem; }
+    .roster-card-facts { gap: 5px; }
+    .roster-card-facts dd { font-size: .64rem; }
+    .roster-card-back-actions { gap: 4px; }
+    .roster-card-back-actions button { font-size: .54rem; padding: 5px 6px; }
+}
+@media (max-width: 380px) {
+    #chapter-2 .roster-grid { grid-template-columns: minmax(0, 1fr); }
+    #chapter-2 .roster-collectible-card { max-width: 292px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .roster-collectible-card, .roster-card-3d-inner, .roster-card-face, .roster-card-holo {
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
+    }
+    .roster-collectible-card { transform: none !important; }
+}
