@@ -1030,3 +1030,17 @@ Se añadieron tratamientos visuales individuales a los globos de voz de los diez
 - **Criterios de transparencia:** el resumen anual se mantiene separado de las diez filas visibles. Los datos por fila de seguidores se conservan según las columnas compartidas y no se suman para sustituir el total anual. Las apariciones de juegos se presentan como conteo de la muestra, no como ranking anual. No se inventan horarios, contactos, acuerdos comerciales ni títulos descriptivos de clips.
 - **Validaciones:** estructura de seis páginas y despacho específico para DAVE — NEXUS comprobados estáticamente; pendientes pruebas visuales de embeds y diseño responsive.
 - **Despliegue:** commit aplicado a `main`; publicación de GitHub Pages pendiente de verificación.
+
+
+## 2026-11-06 — Actualizar rango institucional y horario de DAVE — NEXUS
+
+- **Responsable:** colaboración ChatGPT + equipo del proyecto.
+- **Objetivo:** reflejar la reincorporación de Dave a las transmisiones y su nuevo horario habitual.
+- **Archivos modificados:** `index.html`, `INFORMES.md`.
+- **Implementado:**
+  - Se cambia el rango institucional visible de DAVE — NEXUS de VANGUARDIA a **ESTUDIANTE**. El rol interno ya estaba clasificado como `student`; ahora también coincide el rótulo mostrado en su carta y expediente.
+  - Se incorpora el contexto de regreso tras un período de pausa, presentando ESTUDIANTE como el comienzo de una nueva etapa y no como una evaluación de su experiencia.
+  - Se registra el horario habitual diario: **19:00, hora de México (MX)**, tanto en los datos del integrante como en su expediente individual.
+  - Se conserva la identidad narrativa NEXUS / EL NEXO y su conjunto de poderes.
+- **Validaciones:** perfil de Dave, rango, horario y texto del expediente comprobados en el archivo actualizado de `main`.
+- **Pendientes / riesgos:** comprobar visualmente la carta y las seis páginas en GitHub Pages; el despliegue no se declara verificado.
