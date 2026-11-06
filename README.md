@@ -1,6 +1,6 @@
 # Legión Multiversal — Proyecto web y automatizaciones
 
-Repositorio de trabajo compartido: [losmoriartys-cmd/s3xmen](https://github.com/losmoriartys-cmd/legion-multiversal)  
+Repositorio de trabajo compartido: [losmoriartys-cmd/legion-multiversal](https://github.com/losmoriartys-cmd/legion-multiversal)  
 Sitio publicado actualmente: [GitHub Pages](https://losmoriartys-cmd.github.io/legion-multiversal/)  
 Nueva publicación prevista: Cloudflare Pages (`https://legionmultiversal.pages.dev/`), pendiente de conectar la cuenta y verificar el primer despliegue. Guía: [`CLOUDFLARE_PAGES.md`](./CLOUDFLARE_PAGES.md).
 
@@ -60,14 +60,23 @@ Cada colaborador debe:
 
 | Recurso | Propósito |
 |---|---|
-| `index.html` | Sitio y lógica de presentación/interacción (si esa estructura sigue vigente). |
+| `index.html` | Estructura y contenido HTML del sitio. |
+| `styles.css` | Hoja de estilos externa. |
+| `app.js` | Lógica de presentación, navegación y expedientes. |
+| `navigation-fix.js` | Respaldo de navegación por capítulos. |
+| `roster-data.json` | Perfiles y datos editoriales de los ocho integrantes. |
 | `assets/` | Imágenes y recursos visuales. Confirmar siempre nombres y rutas reales. |
 | `data.json` | Seguimiento automático de actividad Twitch (Helix). No editar manualmente salvo corrección acordada. |
 | `platform-registry.json` | Cuentas confirmadas por creador y plataforma (YouTube, Kick y futuras integraciones). |
 | `platform-stats.json` | Datos automáticos de YouTube/Kick, separados por plataforma, fuente y captura. |
 | `update_stats.py` | Colector Twitch Helix. |
 | `update_platform_stats.py` | Colectores YouTube Data API v3 y Kick Developer Public API. |
+| `creator-records.json` | Registros editoriales y trayectoria documentada por creador. |
+| `sullygnome-data.json` / `twitchmetrics-data.json` | Referencias históricas de analítica externa, separadas de las APIs propias. |
 | `INFORMES.md` | Bitácora vigente de intervenciones, validaciones y pendientes. |
+| `scripts/validate_site.py` | Validación estática de rutas, recursos y datos. |
+| `.github/workflows/validar-sitio.yml` | Validación automática de JavaScript, JSON, enlaces locales e imágenes. |
+| `CLOUDFLARE_PAGES.md` | Guía de preparación para una futura migración; no implica que esté desplegada. |
 | `BITACORA.md` | Archivo histórico anterior a este protocolo. Se conserva como antecedente; no duplicar allí los nuevos informes. |
 | `README.md` | Reglas de colaboración y guía de entrada al proyecto. |
 
