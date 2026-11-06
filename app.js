@@ -1318,6 +1318,14 @@ function openHeroModal(index) {
             window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth' });
         }
 
+        // Renderizar el roster sin esperar a las consultas externas. La ficha de cada
+        // integrante usa heroesData local y no debe quedar bloqueada por una API lenta.
+        try {
+            renderRoster();
+        } catch (error) {
+            console.error('No se pudo renderizar el roster inicial:', error);
+        }
+
         window.onload = async function() {
         await Promise.all([
             loadSullyGnomeData(),
