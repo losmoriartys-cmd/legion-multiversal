@@ -1235,3 +1235,15 @@ Se añadieron tratamientos visuales individuales a los globos de voz de los diez
 - **Prueba funcional:** [ejecución de navegador](https://agent.tinyfish.ai/runs/f9df177f-1bc1-440a-bdde-46a9614c8645) completada tras el despliegue.
 - **Resultado:** aparecen los 8 integrantes en sus cuatro grupos: Dirección (2), Profesores (3), Estudiantes (1) y Colaboradores (2). Se abrió el expediente MORIARTYS, se comprobó su contenido y se cerró con Escape / Volver al roster. La prueba también confirmó que Estadísticas muestra datos de 7 canales y En Vivo muestra correctamente que no hay canales detectados en directo en esa consulta.
 - **Conclusión:** roster restaurado y probado en la web publicada. La causa raíz fue la sintaxis inválida de `app.js`, no la espera de datos externos; el renderizado temprano se mantiene como mejora de resiliencia.
+
+
+## 2026-11-06 · Separar los datos del roster en JSON
+
+- **Objetivo:** sacar los perfiles de integrantes del código de presentación y mantenerlos como datos independientes.
+- **Implementado:** los ocho perfiles confirmados se trasladaron íntegramente a `roster-data.json` (schema_version 1). `app.js` ahora declara una colección vacía, carga el JSON y valida que la respuesta contenga un arreglo de integrantes antes de renderizar. El roster se inicializa al terminar esa carga, independientemente de las consultas de estadísticas y plataformas; ante un error muestra un mensaje de recuperación en lugar de dejar el capítulo sin explicación.
+- **Archivos modificados:** `roster-data.json`, `app.js`, `INFORMES.md`.
+- **Validación automatizada:** workflow [42178747721](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/42178747721) exitoso: sintaxis JavaScript y JSON válidos.
+- **Despliegue:** workflow Pages [42178748914](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/42178748914) exitoso.
+- **Prueba funcional:** [ejecución 7de84160](https://agent.tinyfish.ai/runs/7de84160-ff23-4696-b8de-25574c735a98) confirmó los ocho perfiles en los cuatro grupos, apertura del expediente MORIARTYS, retorno al roster y carga de Estadísticas y En Vivo sin errores.
+- **Commit de extracción:** [`2451492`](https://github.com/losmoriartys-cmd/legion-multiversal/commit/2451492ba683670b32a4f1c15a6c89dd079115f6). **Commit de integración:** [`63a7fac`](https://github.com/losmoriartys-cmd/legion-multiversal/commit/63a7facb52bc1be246fd6373a295da1980ee3d65).
+- **Estado:** completado y verificado en GitHub Pages.
