@@ -502,60 +502,112 @@ function renderRoster() {
         const grid = document.createElement('div');
         grid.className = 'roster-grid';
         members.forEach(({hero,index}) => {
-            const card = document.createElement('button');
-            card.type = 'button';
-            const isMoriartyPilot = hero.name === 'MORIARTYS';
-            card.className = 'roster-portrait-card' + (isMoriartyPilot ? ' roster-card--moriarty' : '');
-            card.setAttribute('aria-label', 'Abrir bitácora de ' + hero.name);
-            if (isMoriartyPilot) card.dataset.cardTilt = 'moriarty';
-            card.onclick = (event) => openHeroProfile(index, event.currentTarget);
-            const imageWrap = document.createElement('div');
-            imageWrap.className = 'roster-portrait-wrap' + (isMoriartyPilot ? ' roster-portrait-wrap--collectible' : '');
+            const card = document.createElement('article');
+            card.className = 'roster-collectible-card';
+            card.style.setProperty('--card-tilt-x', '0deg');
+            card.style.setProperty('--card-tilt-y', '0deg');
+            card.style.setProperty('--card-shine-x', '50%');
+            card.style.setProperty('--card-shine-y', '50%');
+
+            const creatorTypeLabel = hero.creator_type === 'video_creator' ? 'CREADOR DE VIDEO' : hero.creator_type === 'live_streamer' ? 'STREAMER' : 'FORMATO POR DEFINIR';
+            const cardNumber = hero.cardNumber || 'S/N';
+            const classification = hero.rank || 'CLASIFICACIÓN PENDIENTE';
+            const roleLabels = { director: 'DIRECCIÓN', teacher: 'PROFESOR', student: 'ESTUDIANTE', collaborator: 'COLABORADOR' };
+            const legionRole = roleLabels[hero.role] || 'INTEGRANTE';
+            const identity = hero.codename || hero.characterRole || classification;
+            const safeName = escapeStatsHtml(hero.name);
+            const safeNumber = escapeStatsHtml(cardNumber);
+            const safeClassification = escapeStatsHtml(classification);
+            const safeIdentity = escapeStatsHtml(identity);
+            const safeRole = escapeStatsHtml(legionRole);
+            const safeBio = escapeStatsHtml(hero.bio || 'Presentación personal pendiente de completar.');
+            const safeType = escapeStatsHtml(creatorTypeLabel);
+
+            const shell = document.createElement('div');
+            shell.className = 'roster-card-3d-shell';
+            const inner = document.createElement('div');
+            inner.className = 'roster-card-3d-inner';
+
+            const front = document.createElement('button');
+            front.type = 'button';
+            front.className = 'roster-card-face roster-card-front';
+            front.setAttribute('aria-label', 'Girar carta de ' + hero.name + ' para ver el reverso');
+            const portrait = document.createElement('div');
+            portrait.className = 'roster-card-portrait';
             const image = document.createElement('img');
             image.src = hero.portrait || hero.img;
-            image.alt = 'Carnet de integrante de ' + hero.name;
+            image.alt = 'Retrato tipo carnet de ' + hero.name;
             image.loading = 'lazy';
-            image.onerror = () => { imageWrap.textContent = 'CARNET PENDIENTE'; };
-            imageWrap.appendChild(image);
-            if (isMoriartyPilot) {
-                const foil = document.createElement('span');
-                foil.className = 'roster-card-foil';
-                foil.setAttribute('aria-hidden', 'true');
-                const number = document.createElement('span');
-                number.className = 'roster-card-number';
-                number.textContent = 'N.º ' + (hero.cardNumber || '047');
-                const cue = document.createElement('span');
-                cue.className = 'roster-card-cue';
-                cue.textContent = 'EXPEDIENTE · TOCÁ PARA ABRIR';
-                imageWrap.append(foil, number, cue);
-            }
-            const info = document.createElement('div');
-            info.className = 'roster-portrait-info';
-            const creatorTypeLabel = hero.creator_type === 'video_creator' ? 'CREADOR DE VIDEO' : hero.creator_type === 'live_streamer' ? 'STREAMER' : 'FORMATO POR DEFINIR';
-            info.innerHTML = '<strong>' + escapeStatsHtml(hero.name) + '</strong><span>' + escapeStatsHtml(hero.rank || group.title) + '</span><span class="roster-creator-type">' + creatorTypeLabel + '</span>';
-            card.append(imageWrap,info);
-            if (isMoriartyPilot) {
-                card.addEventListener('pointermove', (event) => {
-                    if (event.pointerType !== 'mouse' || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-                    const rect = card.getBoundingClientRect();
-                    const x = (event.clientX - rect.left) / rect.width;
-                    const y = (event.clientY - rect.top) / rect.height;
-                    card.style.setProperty('--tilt-x', ((.5 - y) * 13).toFixed(2) + 'deg');
-                    card.style.setProperty('--tilt-y', ((x - .5) * 16).toFixed(2) + 'deg');
-                    card.style.setProperty('--shine-x', (x * 100).toFixed(1) + '%');
-                    card.style.setProperty('--shine-y', (y * 100).toFixed(1) + '%');
-                    card.classList.add('is-tilting');
-                });
-                card.addEventListener('pointerleave', () => {
-                    card.classList.remove('is-tilting');
-                    card.style.setProperty('--tilt-x', '0deg');
-                    card.style.setProperty('--tilt-y', '0deg');
-                    card.style.setProperty('--shine-x', '50%');
-                    card.style.setProperty('--shine-y', '50%');
-                });
-            }
+            image.onerror = () => { portrait.classList.add('portrait-missing'); portrait.textContent = 'RETRATO NO DISPONIBLE'; };
+            portrait.appendChild(image);
+            const foil = document.createElement('span');
+            foil.className = 'roster-card-holo';
+            foil.setAttribute('aria-hidden', 'true');
+            const frontHeader = document.createElement('span');
+            frontHeader.className = 'roster-card-front-header';
+            frontHeader.innerHTML = '<span>LEGIÓN MULTIVERSAL</span><b>EXPEDIENTE N.º ' + safeNumber + '</b>';
+            const frontName = document.createElement('span');
+            frontName.className = 'roster-card-front-name';
+            frontName.innerHTML = '<strong>' + safeName + '</strong><small>' + safeClassification + '</small>';
+            const flipHint = document.createElement('span');
+            flipHint.className = 'roster-card-flip-hint';
+            flipHint.textContent = 'GIRAR CARTA ↻';
+            front.append(portrait, foil, frontHeader, frontName, flipHint);
+
+            const back = document.createElement('div');
+            back.className = 'roster-card-face roster-card-back';
+            back.innerHTML = '<div class="roster-card-back-top"><span>LEGIÓN MULTIVERSAL</span><b>N.º ' + safeNumber + '</b></div>' +
+                '<div class="roster-card-back-identity"><small>IDENTIDAD / DESIGNACIÓN</small><h4>' + safeName + '</h4><p>' + safeIdentity + '</p></div>' +
+                '<dl class="roster-card-facts"><div><dt>CLASIFICACIÓN</dt><dd>' + safeClassification + '</dd></div><div><dt>FUNCIÓN EN LA LEGIÓN</dt><dd>' + safeRole + '</dd></div><div><dt>PERFIL DE CREACIÓN</dt><dd>' + safeType + '</dd></div></dl>' +
+                '<p class="roster-card-back-bio">' + safeBio + '</p>';
+            const backActions = document.createElement('div');
+            backActions.className = 'roster-card-back-actions';
+            const openLog = document.createElement('button');
+            openLog.type = 'button';
+            openLog.className = 'roster-card-open-log';
+            openLog.textContent = 'ABRIR BITÁCORA';
+            openLog.setAttribute('aria-label', 'Abrir bitácora personal de ' + hero.name);
+            openLog.addEventListener('click', (event) => { event.stopPropagation(); openHeroProfile(index, card); });
+            const flipBack = document.createElement('button');
+            flipBack.type = 'button';
+            flipBack.className = 'roster-card-flip-back';
+            flipBack.textContent = 'VER RETRATO ↺';
+            flipBack.addEventListener('click', () => {
+                card.classList.remove('is-flipped');
+                front.focus();
+            });
+            backActions.append(openLog, flipBack);
+            back.appendChild(backActions);
+
+            front.addEventListener('click', () => {
+                card.classList.add('is-flipped');
+                window.setTimeout(() => flipBack.focus(), 420);
+            });
+            inner.append(front, back);
+            shell.appendChild(inner);
+            card.appendChild(shell);
+
+            card.addEventListener('pointermove', (event) => {
+                if (event.pointerType !== 'mouse' || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+                const rect = card.getBoundingClientRect();
+                const x = (event.clientX - rect.left) / rect.width;
+                const y = (event.clientY - rect.top) / rect.height;
+                card.style.setProperty('--card-tilt-x', ((.5 - y) * 8).toFixed(2) + 'deg');
+                card.style.setProperty('--card-tilt-y', ((x - .5) * 10).toFixed(2) + 'deg');
+                card.style.setProperty('--card-shine-x', (x * 100).toFixed(1) + '%');
+                card.style.setProperty('--card-shine-y', (y * 100).toFixed(1) + '%');
+                card.classList.add('is-tilting');
+            });
+            card.addEventListener('pointerleave', () => {
+                card.classList.remove('is-tilting');
+                card.style.setProperty('--card-tilt-x', '0deg');
+                card.style.setProperty('--card-tilt-y', '0deg');
+                card.style.setProperty('--card-shine-x', '50%');
+                card.style.setProperty('--card-shine-y', '50%');
+            });
             grid.appendChild(card);
         });
+
         section.appendChild(grid);
         container.appendChild(section);
     });
