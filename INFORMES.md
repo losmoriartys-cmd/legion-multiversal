@@ -1052,7 +1052,7 @@ Se añadieron tratamientos visuales individuales a los globos de voz de los diez
 - **Archivos modificados:** `index.html`, `creator-records.json`, `INFORMES.md`.
 - **Implementado:**
   - Se conserva su identidad PATO — ORATORIS, el rol institucional **COLABORADOR** y su carta existente.
-  - Se incorpora un renderer editorial propio de siete páginas: portada, identidad y propósito, referencia de alcance, archivo de producciones, videos destacados, nueva etapa y propuesta comercial.
+  - Se incorpora un renderer editorial propio de seis páginas: portada, identidad y propósito, referencia de alcance, archivo de producciones, videos destacados, nueva etapa y propuesta comercial.
   - Se transcriben seis publicaciones compartidas: cinco partes de un curso de HTML/JavaScript y un video sobre dopamina, motivación y adicción, con sus visualizaciones informadas.
   - Se agregan dos reproductores de YouTube mediante los identificadores aportados. Sus títulos quedan pendientes de identificar; no se inventan.
   - Se registran como referencia histórica 56 suscriptores, 6 videos y 430 visualizaciones. La fecha de captura no fue indicada, por lo que no se presentan como métricas actuales.
