@@ -5,7 +5,10 @@ on:
     paths:
       - 'app.js'
       - 'index.html'
+      - 'styles.css'
       - '*.json'
+      - 'assets/**'
+      - 'scripts/**'
       - '.github/workflows/validar-sitio.yml'
   pull_request:
     paths:
@@ -36,3 +39,5 @@ jobs:
             echo "Validando $file"
             python -m json.tool "$file" > /dev/null
           done
+      - name: Validar rutas, imágenes y enlaces declarados
+        run: python scripts/validate_site.py
