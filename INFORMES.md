@@ -1015,3 +1015,18 @@ Se añadieron tratamientos visuales individuales a los globos de voz de los diez
 - **Pendientes / riesgos:** comprobar visualmente la distribución de las seis páginas en el sitio publicado; confirmar descripciones de los cuatro clips si se desean títulos específicos.
 - **Commit:** actualizaciones independientes en `main`; commits de contenido registrados por GitHub.
 - **Despliegue:** pendiente de verificación del workflow de GitHub Pages.
+
+
+## 2026-11-06 · Expediente de DAVE — NEXUS en seis páginas
+
+- **Objetivo:** completar el expediente individual de DAVE — NEXUS con la misma estructura editorial de seis páginas y formato de cómic.
+- **Archivos modificados:** `index.html`, `sullygnome-data.json`, `creator-records.json`, `INFORMES.md`.
+- **Implementado:**
+  - Renderizador específico de seis páginas: portada con carta oficial, identidad y personaje, resumen anual, bitácora de transmisiones, universos de juego, clips y propuesta comercial.
+  - Resumen anual 2026 de SullyGnome transcrito del material aportado: 45 transmisiones, 68 horas emitidas, 132 horas vistas, 1 espectador promedio, pico de 9 y +25 seguidores.
+  - Diez filas visibles de transmisiones guardadas como muestra parcial, con fecha, hora, duración, horas vistas, promedio, pico, columnas de seguidores y juegos registrados.
+  - Dos clips de Twitch incorporados con reproductor embebido y enlace directo.
+  - Se mantiene la identidad narrativa EL NEXO · GUARDIÁN TECNOLÓGICO y se distingue de la biografía personal, que queda pendiente de información confirmada por Dave.
+- **Criterios de transparencia:** el resumen anual se mantiene separado de las diez filas visibles. Los datos por fila de seguidores se conservan según las columnas compartidas y no se suman para sustituir el total anual. Las apariciones de juegos se presentan como conteo de la muestra, no como ranking anual. No se inventan horarios, contactos, acuerdos comerciales ni títulos descriptivos de clips.
+- **Validaciones:** estructura de seis páginas y despacho específico para DAVE — NEXUS comprobados estáticamente; pendientes pruebas visuales de embeds y diseño responsive.
+- **Despliegue:** commit aplicado a `main`; publicación de GitHub Pages pendiente de verificación.
