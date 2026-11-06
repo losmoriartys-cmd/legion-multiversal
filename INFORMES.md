@@ -116,6 +116,18 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Cambios de código:** ninguno; la verificación no encontró inconsistencias que justifiquen alterar datos.
 - **Despliegue:** no se requirió un nuevo despliegue.
 
+## 2026-11-06 — Transparentar cadencia real del muestreo Twitch en el panel de MORIARTYS
+
+- **Responsable:** colaboración ChatGPT + equipo del proyecto.
+- **Objetivo:** evitar que la frecuencia programada del colector se confunda con la frecuencia efectivamente observada en la serie publicada.
+- **Archivos revisados/modificados:** `data.json`, `.github/workflows/actualizar-stats.yml`, `update_stats.py`, `app.js`, `INFORMES.md`.
+- **Validación del colector:** el workflow [Actualizar estadísticas multiplataforma 42236816791](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/42236816791) se ejecutó por evento `schedule` y terminó correctamente. La tarea de actualización duró aproximadamente 8 segundos. El cron configurado es `*/15 * * * *`, pero la serie conservada entre 03/11 y 06/11 contiene 75 muestras por canal activo, con separación mediana de 54,9 minutos y un intervalo máximo de 129,2 minutos.
+- **Cobertura observada:** para el canal MORIARTYS, el tramo de 68,97 horas habría esperado 276 registros con el objetivo de 15 minutos; hay 75, equivalente a 27,2% de cobertura del intervalo. Los siete canales activos comparten las mismas marcas de tiempo en esta captura. El cron expresa la frecuencia programada, no garantiza que GitHub ejecute cada consulta puntualmente.
+- **Implementado:** el panel especial de MORIARTYS ahora calcula y presenta la cobertura real del tramo, la separación mediana y el mayor intervalo sin muestra, junto al objetivo de frecuencia programada. También aclara que la programación no garantiza que todas las ejecuciones ocurran a ese ritmo. No se altera ninguna métrica ni se reconstruyen intervalos sin datos.
+- **Riesgos / pendientes:** investigar por qué los eventos `schedule` llegan a una cadencia efectiva cercana a una hora pese al cron de 15 minutos; no atribuirlo a una causa sin evidencia. La cobertura baja limita las estimaciones de horas observadas/vistas y la representatividad de tendencias. Revisar visualmente el capítulo de estadísticas y las fichas individuales en navegador después del despliegue.
+- **Commit de código:** se registra al completar esta intervención.
+- **Despliegue:** pendiente de validar el workflow de Pages posterior a este cambio.
+
 ## 2026-11-06 — Separar roster activo del archivo histórico y transparentar cobertura Twitch
 
 - **Responsable:** colaboración ChatGPT + equipo del proyecto.
