@@ -1471,3 +1471,15 @@ Se añadieron tratamientos visuales individuales a los globos de voz de los diez
 - **Pendientes / riesgos:** crear y verificar una imagen social horizontal específica (idealmente 1200×630) y comprobar visualmente la vista previa en plataformas externas. La auditoría visual de escritorio, móvil y tablet sigue pendiente por falta de saldo de la herramienta de navegador; no se presenta como realizada.
 - **Commit de portada:** [95af81e6](https://github.com/losmoriartys-cmd/legion-multiversal/commit/95af81e625804fb6caa08e5c722905ba40433e97).
 - **Despliegue:** pendiente de verificar.
+
+## 2026-11-06 — Integrar portada social oficial en metadatos
+
+- **Responsable:** colaboración ChatGPT + equipo del proyecto.
+- **Objetivo:** incorporar la portada social creada por el equipo a las vistas previas al compartir el sitio.
+- **Archivos modificados:** `index.html`, `INFORMES.md`.
+- **Recurso utilizado:** `og-legion-multiversal.jpg`, ya presente en la raíz del repositorio en `main`; se reutilizó sin moverlo ni duplicarlo.
+- **Implementado:** se agregó `og:image`, dimensiones declaradas (2048 × 1077), texto alternativo y metadatos de Twitter Cards con formato `summary_large_image`; se mantuvieron los metadatos generales, canonical y Open Graph existentes.
+- **Validaciones y resultados:** la ruta del archivo fue comprobada en el contenido del repositorio. Se verificará la publicación de Pages y la respuesta pública de la imagen después del commit de este informe. La actualización del preview en plataformas externas puede quedar sujeta a sus cachés.
+- **Pendientes / riesgos:** no se realizó una prueba visual de las tarjetas en WhatsApp, Discord, X u otras plataformas; tampoco se verificó manualmente el recorte en cada una.
+- **Commit de implementación:** 460527a6044d36b2b6f3c2cf332838637d9448e5.
+- **Despliegue:** pendiente de verificación tras el commit del informe.
