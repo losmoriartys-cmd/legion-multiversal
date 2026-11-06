@@ -1588,3 +1588,24 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 - app.js
 - styles.css
 - INFORMES.md
+
+
+## 2026-11-06 — Roster: cartas coleccionables reversibles para los ocho integrantes
+
+### Concepto e interacción
+- El carnet del roster se convierte en una carta coleccionable premium, con frente y dorso para cada integrante.
+- Frente: retrato existente, identidad, número de expediente y clasificación.
+- Dorso: designación/codename disponible, función en la Legión, tipo de creador y presentación breve basada en la biografía ya registrada.
+- Giro de 180 grados mediante interacción explícita; el reverso ofrece un botón separado para abrir la bitácora. Así se evita anidar botones y se mantiene un recorrido accesible.
+- Inclinación 3D suave con mouse y reflejo holográfico reactivo. En pantallas táctiles se gira con toque; el movimiento no depende del hover.
+- Se respetan preferencias de movimiento reducido.
+
+### Integridad de datos y recursos
+- Se utilizan los ocho retratos carnet existentes en roster-data.json; no se crean imágenes ni se reemplazan recursos.
+- Los números y clasificaciones proceden de los campos ya presentes. Si falta un número, se muestra S/N.
+- No se agregan poderes, estadísticas ni credenciales no confirmadas.
+- La ilustración hero completa continúa reservada para la portada de la bitácora individual.
+
+### Validación
+- Pendiente de validación automática de sintaxis y rutas tras el commit.
+- Pendiente de revisión visual en navegador de las ocho cartas, con especial atención a la legibilidad del reverso en móvil y a la proporción de los retratos.
