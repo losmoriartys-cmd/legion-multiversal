@@ -1410,3 +1410,12 @@ Se añadieron tratamientos visuales individuales a los globos de voz de los diez
 - **Discrepancia editorial corregida:** los dos videos destacados embebidos tenían `title: null` y el expediente los describía como títulos pendientes, aunque sus IDs coinciden con dos publicaciones ya identificadas en el registro/API. Se incorporaron sus títulos exactos: “Dopamina, motivación y adicción: Qué es y cómo funciona” y “Tu primera página HTML en menos de una hora. Curso HTML + Javascript (1/5)”. El caption del reproductor ahora toma el título registrado y mantiene una salida neutral si faltara.
 - **Estructura:** el renderizador conserva seis páginas: portada, identidad, alcance, archivo de producciones con dos videos embebidos, proyección y colaboraciones.
 - **Pendientes:** confirmar con Pato el enfoque final de la eventual etapa 2027 y la aprobación de formatos comerciales; probar visualmente los dos reproductores y la versión móvil.
+
+## 2026-11-06 — Auditoría estática del dossier individual de LADYMORIARTY01
+
+- **Responsable:** colaboración ChatGPT + equipo del proyecto.
+- **Archivos revisados:** `app.js`, `twitchmetrics-data.json`, `sullygnome-data.json`, `creator-records.json`, `roster-data.json`.
+- **Estructura:** el renderizador conserva seis páginas: portada, identidad, audiencia, juegos, clips y colaboraciones. Los tres IDs de clips coinciden con los registros editoriales; los títulos se mantienen neutrales mientras no exista una descripción editorial confirmada.
+- **Métricas:** el expediente utiliza TwitchMetrics para la ventana 5/10/2026–4/11/2026: 180 seguidores, +17 en la ventana, 59 horas vistas, pico 33, 3 horas en directo y promedio 19. La lectura narrativa repite correctamente 59 horas vistas, pico 33 y +17. La tabla de juegos proviene de SullyGnome y se identifica como fuente separada.
+- **Corrección editorial:** se retiró de la portada la frase “Canal secundario de Los Moriartys” y el enlace promocional al canal grupal. Se reemplazó por una descripción centrada en LADYMORIARTY01 como canal individual, manteniendo los formatos chill, IRL y espontáneos. Esto evita presentar su canal propio como una extensión subordinada del proyecto compartido.
+- **Pendientes:** confirmar títulos de los tres clips con la creadora; revisar visualmente el dossier en escritorio y móvil y probar los reproductores de Twitch. La aprobación final del enfoque comercial corresponde a la creadora.
