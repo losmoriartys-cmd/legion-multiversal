@@ -568,7 +568,7 @@ function renderCommercialQuickView(hero) {
     const collaborations = Array.isArray(record.collaborations) ? record.collaborations.length : 0;
     let out = '<section class="commercial-quickview" aria-label="Ficha comercial resumida">';
     out += '<div class="commercial-quickview-head"><span class="profile-section-kicker">LECTURA RÁPIDA PARA MARCAS</span><strong>FICHA EJECUTIVA</strong></div>';
-    out += '<div class="commercial-quickview-meta"><span>' + safe(roleLabels[hero.role] || "INTEGRANTE") + '</span><span>' + safe(typeLabel) + '</span><span>' + safe((hero.platforms || []).map(v=>v.toUpperCase()).join(" · ") || "PLATAFORMA POR CONFIRMAR") + '</span></div>';
+    out += '<div class="commercial-quickview-meta" role="group" aria-label="Resumen del rol institucional, tipo de creador y plataformas declaradas"><span>' + safe(roleLabels[hero.role] || "INTEGRANTE") + '</span><span>' + safe(typeLabel) + '</span><span>' + safe((hero.platforms || []).map(v=>v.toUpperCase()).join(" · ") || "PLATAFORMA POR CONFIRMAR") + '</span></div>';
     if (data.editorial) out += '<section class="commercial-quickview-editorial"><h4>ENFOQUE PARA MARCAS</h4><p>' + safe(data.editorial) + '</p></section>';
     out += '<div class="commercial-quickview-grid">';
     out += '<section><h4>TERRITORIOS DE CONTENIDO</h4>' + (areas.length ? '<ul>' + areas.map(v=>'<li>'+safe(v)+'</li>').join('') + '</ul>' : '<p>Especialidades pendientes de documentar.</p>') + '</section>';
@@ -600,11 +600,13 @@ function openHeroProfile(index) {
     const page = document.getElementById('hero-profile-page');
     if (!home || !page) return;
     const channel = hero.youtube || hero.twitch || '';
-    page.innerHTML = '<div class="hero-profile-layout"><img class="hero-profile-card" src="' + escapeStatsHtml(hero.img) + '" alt="Carta oficial de ' + escapeStatsHtml(hero.name) + '"><div class="hero-profile-copy"><span class="stats-status">EXPEDIENTE INDIVIDUAL · ' + escapeStatsHtml(hero.rank || 'CLASIFICACIÓN PENDIENTE') + '</span><h3>' + escapeStatsHtml(hero.name) + '</h3><p>' + escapeStatsHtml(hero.bio || 'Presentación personal pendiente de completar.') + '</p><div class="hero-profile-actions"><button class="twitch-link-btn" type="button" onclick="openHeroModal(' + index + ')">ABRIR BITÁCORA COMPLETA</button>' + (channel ? '<a class="btn-link" href="' + escapeStatsHtml(channel) + '" target="_blank" rel="noopener">VISITAR CANAL</a>' : '') + '<button class="hero-profile-back" type="button" onclick="closeHeroProfile()">VOLVER AL ROSTER</button></div></div></div>' + renderCommercialQuickView(hero);
+    window.lastHeroProfileTrigger = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    page.innerHTML = '<div class="hero-profile-layout"><img class="hero-profile-card" src="' + escapeStatsHtml(hero.img) + '" alt="Carta oficial de ' + escapeStatsHtml(hero.name) + '"><div class="hero-profile-copy"><span class="stats-status">EXPEDIENTE INDIVIDUAL · ' + escapeStatsHtml(hero.rank || 'CLASIFICACIÓN PENDIENTE') + '</span><h3 id="hero-profile-title" tabindex="-1">' + escapeStatsHtml(hero.name) + '</h3><p>' + escapeStatsHtml(hero.bio || 'Presentación personal pendiente de completar.') + '</p><div class="hero-profile-actions"><button class="twitch-link-btn" type="button" onclick="openHeroModal(' + index + ')">ABRIR BITÁCORA COMPLETA</button>' + (channel ? '<a class="btn-link" href="' + escapeStatsHtml(channel) + '" target="_blank" rel="noopener">VISITAR CANAL</a>' : '') + '<button class="hero-profile-back" type="button" onclick="closeHeroProfile()">VOLVER AL ROSTER</button></div></div></div>' + renderCommercialQuickView(hero);
     home.hidden = true;
     page.hidden = false;
     history.replaceState(null, '', '#expediente-' + encodeURIComponent(hero.name.toLowerCase().replace(/[^a-z0-9]+/g,'-')));
     page.scrollIntoView({behavior:'smooth',block:'start'});
+    document.getElementById('hero-profile-title')?.focus({preventScroll:true});
 }
 function restoreHeroProfileFromHash() {
     const slug = decodeURIComponent((location.hash || '').replace(/^#expediente-/, ''));
@@ -624,6 +626,14 @@ function closeHeroProfile() {
     if (home) home.hidden = false;
     history.replaceState(null, '', '#chapter-2');
     document.getElementById('chapter-2')?.scrollIntoView({behavior:'smooth',block:'start'});
+    const trigger = window.lastHeroProfileTrigger;
+    window.lastHeroProfileTrigger = null;
+    if (trigger && trigger.isConnected && typeof trigger.focus === 'function') {
+        trigger.focus({preventScroll:true});
+    } else if (home) {
+        home.setAttribute('tabindex', '-1');
+        home.focus({preventScroll:true});
+    }
 }
 
 function renderProfileOverview(hero) {
