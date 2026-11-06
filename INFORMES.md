@@ -1227,3 +1227,11 @@ Se añadieron tratamientos visuales individuales a los globos de voz de los diez
 - **Commits:** [`9573e82`](https://github.com/losmoriartys-cmd/legion-multiversal/commit/9573e8223da8929618c5801d2546be00f743a34b) (salto de línea), [`41e3c64`](https://github.com/losmoriartys-cmd/legion-multiversal/commit/41e3c64fa54da372af58c374ef9343c5d7d67a4b) (cadena), [`b454acc`](https://github.com/losmoriartys-cmd/legion-multiversal/commit/b454acc320cbefb6dfdc4dcbe2131d78f17506e6) (validación CI).
 - **Despliegue:** pendiente de completar GitHub Pages y repetir prueba funcional del roster.
 - **Pendientes:** confirmar en navegador la aparición de los integrantes, apertura y cierre de expediente, y funcionamiento de estadísticas/estado en vivo tras recuperar la ejecución de `app.js`.
+
+
+### Verificación posterior del roster — 2026-11-06
+
+- **GitHub Pages:** workflow [42178413931](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/42178413931) completado con éxito.
+- **Prueba funcional:** [ejecución de navegador](https://agent.tinyfish.ai/runs/f9df177f-1bc1-440a-bdde-46a9614c8645) completada tras el despliegue.
+- **Resultado:** aparecen los 8 integrantes en sus cuatro grupos: Dirección (2), Profesores (3), Estudiantes (1) y Colaboradores (2). Se abrió el expediente MORIARTYS, se comprobó su contenido y se cerró con Escape / Volver al roster. La prueba también confirmó que Estadísticas muestra datos de 7 canales y En Vivo muestra correctamente que no hay canales detectados en directo en esa consulta.
+- **Conclusión:** roster restaurado y probado en la web publicada. La causa raíz fue la sintaxis inválida de `app.js`, no la espera de datos externos; el renderizado temprano se mantiene como mejora de resiliencia.
