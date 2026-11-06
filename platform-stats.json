@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "updated_at": null,
+  "methodology": "Las métricas se conservan por creador y plataforma. No sumar ni comparar directamente unidades de plataformas distintas.",
+  "creators": {},
+  "collection_status": {
+    "youtube": "awaiting_secret",
+    "kick": "awaiting_secrets",
+    "captured_at": null
+  }
+}
