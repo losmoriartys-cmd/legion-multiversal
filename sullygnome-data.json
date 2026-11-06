@@ -408,24 +408,135 @@
       "display_name": "HÁBITOS ATÓMICOS",
       "source": "SullyGnome",
       "source_url": "https://sullygnome.com/channel/habitos_atomicos/2026/streams",
-      "checked_at_utc": null,
-      "status": "pending",
+      "checked_at_utc": "2026-11-05T23:59:00Z",
+      "status": "partial",
       "period": {
-        "start_date": null,
-        "end_date": null
+        "start_date": "2026-10-06",
+        "end_date": "2026-11-05",
+        "label": "6 oct — 5 nov 2026"
       },
       "streams": [],
       "summary": {
-        "streams_count": null,
-        "airtime_minutes": null,
-        "airtime_hours": null,
-        "hours_watched": null,
-        "average_viewers_duration_weighted": null,
-        "peak_viewers": null,
-        "followers_gain_reported": null
+        "streams_count": 28,
+        "airtime_minutes": 7440,
+        "airtime_hours": 124,
+        "hours_watched": 472,
+        "average_viewers_duration_weighted": 3,
+        "peak_viewers": 29,
+        "peak_date": null,
+        "followers_gain_reported": 27
       },
       "notes": [
-        "Enlace del historial identificado; faltan las filas de transmisiones para cargar métricas verificadas."
+        "Resumen del período aportado desde SullyGnome. El conteo general informa 28 transmisiones; se recibieron 24 filas individuales, por lo que el detalle queda parcial.",
+        "El informe resume un pico de 29 espectadores, pero no permite fijar con seguridad su fecha: los datos compartidos también mencionan 28 el 21/10 y 24 el 21/10 a las 21:00. Se conserva el máximo de 29 sin atribuir fecha.",
+        "La métrica «Seguidores ganan rango: 128.511 (-59.416)» corresponde a una posición/rango del sitio, no al total de seguidores, y no se incorpora como seguidores del canal.",
+        "Las horas y porcentajes por categoría se muestran tal como fueron informados; sus totales pueden diferir del resumen general por redondeos o criterios de medición de la fuente."
+      ],
+      "observed_rows_summary": {
+        "rows": 24,
+        "expected_rows": 28,
+        "note": "El resumen general informa 28 transmisiones; el detalle compartido contiene 24 filas. No se completan las cuatro filas faltantes."
+      },
+      "game_breakdown": [
+        {
+          "name": "Solo charlando",
+          "stream_hours": 105,
+          "stream_share_pct": 83.6,
+          "hours_watched": 474,
+          "watch_share_pct": 89.5,
+          "average_viewers": 4,
+          "peak_viewers": 26
+        },
+        {
+          "name": "Fortnite",
+          "stream_hours": 3,
+          "stream_share_pct": 3,
+          "hours_watched": 13,
+          "watch_share_pct": 2.5,
+          "average_viewers": 2,
+          "peak_viewers": 6
+        },
+        {
+          "name": "Call of Duty: Warzone",
+          "stream_hours": 3,
+          "stream_share_pct": 2.8,
+          "hours_watched": 13,
+          "watch_share_pct": 2.6,
+          "average_viewers": 3,
+          "peak_viewers": 5
+        },
+        {
+          "name": "Pro Evolution Soccer 2008",
+          "stream_hours": 3,
+          "stream_share_pct": 2.6,
+          "hours_watched": 6,
+          "watch_share_pct": 1.1,
+          "average_viewers": 1,
+          "peak_viewers": 3
+        },
+        {
+          "name": "FC Mobile",
+          "stream_hours": 1,
+          "stream_share_pct": 1.4,
+          "hours_watched": 4,
+          "watch_share_pct": 0.8,
+          "average_viewers": 2,
+          "peak_viewers": 4
+        },
+        {
+          "name": "Clash Royale",
+          "stream_hours": 1,
+          "stream_share_pct": 1.2,
+          "hours_watched": 2,
+          "watch_share_pct": 0.4,
+          "average_viewers": 1,
+          "peak_viewers": 2
+        },
+        {
+          "name": "Overcooked 2",
+          "stream_hours": 1,
+          "stream_share_pct": 1,
+          "hours_watched": 4,
+          "watch_share_pct": 0.8,
+          "average_viewers": 3,
+          "peak_viewers": 4
+        },
+        {
+          "name": "Banana Airways",
+          "stream_hours": 1,
+          "stream_share_pct": 0.8,
+          "hours_watched": 2,
+          "watch_share_pct": 0.5,
+          "average_viewers": 2,
+          "peak_viewers": 4
+        },
+        {
+          "name": "FIFA 23",
+          "stream_hours": 1,
+          "stream_share_pct": 0.8,
+          "hours_watched": 2,
+          "watch_share_pct": 0.4,
+          "average_viewers": 2,
+          "peak_viewers": 3
+        },
+        {
+          "name": "Counter-Strike",
+          "stream_hours": 1,
+          "stream_share_pct": 0.8,
+          "hours_watched": 2,
+          "watch_share_pct": 0.5,
+          "average_viewers": 2,
+          "peak_viewers": 4
+        },
+        {
+          "name": "No hay más espacio en el...",
+          "stream_hours": 0,
+          "stream_share_pct": 0.6,
+          "hours_watched": 2,
+          "watch_share_pct": 0.5,
+          "average_viewers": 3,
+          "peak_viewers": 4
+        }
       ]
     },
     {
