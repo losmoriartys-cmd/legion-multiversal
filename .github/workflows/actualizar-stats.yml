@@ -1,9 +1,11 @@
-name: Actualizar estadísticas Twitch
+name: Actualizar estadísticas multiplataforma
 
 on:
   push:
     paths:
       - 'update_stats.py'
+      - 'update_platform_stats.py'
+      - 'platform-registry.json'
       - '.github/workflows/actualizar-stats.yml'
   schedule:
     - cron: '*/15 * * * *'
@@ -34,15 +36,22 @@ jobs:
           TWITCH_CLIENT_SECRET: ${{ secrets.TWITCH_CLIENT_SECRET }}
         run: python update_stats.py
 
+      - name: Consultar YouTube y Kick
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          KICK_CLIENT_ID: ${{ secrets.KICK_CLIENT_ID }}
+          KICK_CLIENT_SECRET: ${{ secrets.KICK_CLIENT_SECRET }}
+        run: python update_platform_stats.py
+
       - name: Guardar historial actualizado
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data.json
+          git add data.json platform-stats.json
           if git diff --cached --quiet; then
             echo "No hay cambios de estadísticas para guardar."
             exit 0
           fi
-          git commit -m "📊 Actualización automática de estadísticas Twitch"
+          git commit -m "📊 Actualización automática de estadísticas multiplataforma"
           git pull --rebase origin main
           git push
