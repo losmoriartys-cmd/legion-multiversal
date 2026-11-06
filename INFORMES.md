@@ -125,7 +125,7 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Cobertura observada:** para el canal MORIARTYS, el tramo de 68,97 horas habría esperado 276 registros con el objetivo de 15 minutos; hay 75, equivalente a 27,2% de cobertura del intervalo. Los siete canales activos comparten las mismas marcas de tiempo en esta captura. El cron expresa la frecuencia programada, no garantiza que GitHub ejecute cada consulta puntualmente.
 - **Implementado:** el panel especial de MORIARTYS ahora calcula y presenta la cobertura real del tramo, la separación mediana y el mayor intervalo sin muestra, junto al objetivo de frecuencia programada. También aclara que la programación no garantiza que todas las ejecuciones ocurran a ese ritmo. No se altera ninguna métrica ni se reconstruyen intervalos sin datos.
 - **Riesgos / pendientes:** investigar por qué los eventos `schedule` llegan a una cadencia efectiva cercana a una hora pese al cron de 15 minutos; no atribuirlo a una causa sin evidencia. La cobertura baja limita las estimaciones de horas observadas/vistas y la representatividad de tendencias. Revisar visualmente el capítulo de estadísticas y las fichas individuales en navegador después del despliegue.
-- **Commit de código:** se registra al completar esta intervención.
+- **Commit de código:** [f5f27649](https://github.com/losmoriartys-cmd/legion-multiversal/commit/f5f276490133780f675aca8083ee4f7d3681f422).
 - **Despliegue:** pendiente de validar el workflow de Pages posterior a este cambio.
 
 ## 2026-11-06 — Separar roster activo del archivo histórico y transparentar cobertura Twitch
