@@ -1215,3 +1215,15 @@ Se añadieron tratamientos visuales individuales a los globos de voz de los diez
 - **Riesgos / pendientes:** si el roster continúa vacío, inspeccionar el error exacto del navegador y la estructura de datos/DOM; esta modificación elimina la dependencia temporal de las API, pero no se declara todavía resuelto hasta la prueba publicada.
 - **Commit:** [`8527304`](https://github.com/losmoriartys-cmd/legion-multiversal/commit/85273046f049a5421a8c5bd9e010e14954c837fd).
 - **Despliegue:** pendiente de verificar.
+
+
+## 2026-11-06 · Diagnóstico y reparación del roster vacío / JavaScript inválido
+
+- **Objetivo:** restablecer las tarjetas del roster y evitar que una falla de sintaxis deje sin ejecutar toda la aplicación.
+- **Causa raíz confirmada:** el archivo `app.js` contenía una secuencia literal `\\n` fuera de una cadena JavaScript, entre la construcción de `growthBody` y `statsBody`, y además un apóstrofo ASCII sin escapar en el texto `Clive Barker's Hellraiser`, dentro de una cadena delimitada por comillas simples. El navegador no podía analizar el archivo completo; por eso no se ejecutaban `renderRoster()`, las cargas de estadísticas ni el resto de la lógica principal. La navegación básica seguía pareciendo operativa por el respaldo independiente `navigation-fix.js`.
+- **Implementado:** se convirtió la secuencia literal fuera de cadena en un salto de línea real; se sustituyó el apóstrofo del nombre del juego por su forma tipográfica para mantener la cadena válida. Se conserva el renderizado temprano de `renderRoster()` antes de las consultas externas como protección adicional.
+- **Archivos modificados:** `app.js`, `.github/workflows/validar-sitio.yml`, `INFORMES.md`.
+- **Validación automatizada:** nuevo workflow [Validar código y datos del sitio](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/42178367415) completado con éxito: `node --check app.js` y validación de todos los JSON del directorio raíz superadas.
+- **Commits:** [`9573e82`](https://github.com/losmoriartys-cmd/legion-multiversal/commit/9573e8223da8929618c5801d2546be00f743a34b) (salto de línea), [`41e3c64`](https://github.com/losmoriartys-cmd/legion-multiversal/commit/41e3c64fa54da372af58c374ef9343c5d7d67a4b) (cadena), [`b454acc`](https://github.com/losmoriartys-cmd/legion-multiversal/commit/b454acc320cbefb6dfdc4dcbe2131d78f17506e6) (validación CI).
+- **Despliegue:** pendiente de completar GitHub Pages y repetir prueba funcional del roster.
+- **Pendientes:** confirmar en navegador la aparición de los integrantes, apertura y cierre de expediente, y funcionamiento de estadísticas/estado en vivo tras recuperar la ejecución de `app.js`.
