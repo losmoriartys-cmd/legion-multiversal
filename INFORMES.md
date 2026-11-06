@@ -1268,3 +1268,13 @@ Se añadieron tratamientos visuales individuales a los globos de voz de los diez
 - **Archivos:** `CLOUDFLARE_PAGES.md`, `README.md`, `INFORMES.md`.
 - **Commits:** [`724c37c`](https://github.com/losmoriartys-cmd/legion-multiversal/commit/724c37c90511851e933e5951c596e75f659c5d8a), [`6c70236`](https://github.com/losmoriartys-cmd/legion-multiversal/commit/6c70236da7883224df01c3333427e2455698f6f7).
 - **Estado:** preparación documental completada. No se conectó ninguna cuenta, no se creó un despliegue Cloudflare y GitHub Pages permanece como publicación vigente.
+
+
+## 2026-11-06 · Auditoría funcional final posterior a la refactorización
+
+- **Alcance:** revisión completa de la publicación GitHub Pages tras extraer CSS, JavaScript y datos del roster, corregir errores de sintaxis, añadir validaciones y documentar la futura migración.
+- **Despliegue:** workflow Pages [42179107813](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/42179107813) exitoso.
+- **Prueba funcional:** [auditoría de navegador b53985c4](https://agent.tinyfish.ai/runs/b53985c4-af89-4b45-8867-8db369ba12c3) completada.
+- **Resultado:** superados los nueve capítulos principales: PORTADA, ROSTER, NUESTROS VALORES, ESTADÍSTICAS, EN VIVO, ARSENAL, ALIANZAS, COMUNIDAD y RECLUTAMIENTO. Se confirmaron los ocho perfiles y cuatro grupos; apertura y retorno del expediente MORIARTYS; datos de siete canales en Estadísticas; estado En Vivo sin carga infinita; Arsenal con diez juegos y enlaces; y contenido visible en las demás secciones. No se observaron secciones vacías, imágenes rotas ni desbordes evidentes durante la revisión visual.
+- **Limitaciones de esta auditoría:** la comprobación fue funcional/visual en navegador y no sustituye una prueba exhaustiva de accesibilidad con lectores de pantalla, dispositivos físicos ni disponibilidad permanente de cada servicio externo. El validador CI comprueba rutas locales y formato de URLs, no disponibilidad remota de terceros.
+- **Conclusión:** no quedan fallos bloqueantes detectados en la auditoría funcional final. La futura migración a Cloudflare está preparada documentalmente, pero no ejecutada; su conexión y la estrategia para commits automáticos cada 15 minutos siguen pendientes de acceso/decisión de cuenta.
