@@ -21,6 +21,23 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 
 ---
 
+## 2026-11-06 — Normalizar tipo de creador y carga inicial de expedientes
+
+- **Responsable:** colaboración ChatGPT + equipo del proyecto.
+- **Objetivo:** separar la jerarquía institucional del formato real de creación de contenido y evitar diferencias de navegación/cargas incompletas entre expedientes.
+- **Archivos modificados:** `index.html`, `INFORMES.md`.
+- **Implementado:**
+  - Los ocho perfiles activos reciben los campos `creator_type`, `platforms` y `activity_status`, independientes del campo institucional `role`.
+  - Los perfiles con directos se clasifican como `live_streamer`; Pato — Oratoris se clasifica como `video_creator` y YouTube, sin Twitch.
+  - El estado de actividad se deja como `not_assessed` hasta contar con confirmación actualizada; no se infiere inactividad a partir de una muestra incompleta.
+  - Las cartas del Roster identifican visualmente el formato de creador sin alterar su rol institucional.
+  - Se unifica la entrada a expedientes: MORIARTYS deja de saltar directamente a la bitácora mientras los demás muestran una presentación intermedia.
+  - La carga inicial ahora espera también estadísticas, métricas de alianzas y registros editoriales antes de habilitar la navegación del Roster, reduciendo condiciones de carrera.
+- **Validaciones:** comprobada la presencia de ocho perfiles actuales y la asignación de tipo/plataforma; se verificó que Pato conserva YouTube como única plataforma y no se agregó Twitch. Se comprobó que la excepción de navegación fue retirada y que las cinco cargas se esperan antes del renderizado.
+- **Pendientes / riesgos:** revisar en navegador el nuevo rótulo de formato en las tarjetas, comprobar la navegación de todos los expedientes y completar estados de actividad solo con confirmación de cada creador.
+- **Commit:** se registra al completar esta intervención.
+- **Despliegue:** pendiente de verificar GitHub Pages.
+
 ## 2026-11-06 — Separar roster activo del archivo histórico y transparentar cobertura Twitch
 
 - **Responsable:** colaboración ChatGPT + equipo del proyecto.
