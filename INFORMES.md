@@ -21,6 +21,17 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 
 ---
 
+## 2026-11-06 — Mejorar accesibilidad del modal de expedientes
+
+- **Responsable:** colaboración ChatGPT + equipo del proyecto.
+- **Objetivo:** permitir que el expediente modal pueda abrirse, recorrerse y cerrarse sin perder el contexto de navegación, también mediante teclado.
+- **Archivos modificados:** `index.html`, `INFORMES.md`.
+- **Implementado:** se incorpora semántica de diálogo (`role=dialog`, `aria-modal` y título asociado), etiqueta accesible para el botón de cierre, foco inicial al abrir, contención del foco con Tab/Mayús+Tab, cierre con Escape, bloqueo del desplazamiento del documento mientras el modal está abierto y devolución del foco al elemento que abrió el expediente.
+- **Validaciones:** comprobados los puntos de inserción y la presencia de las nuevas reglas de foco y cierre en el código de `main`. Prueba manual de teclado y lectores de pantalla pendiente de ejecutar en navegador.
+- **Pendientes / riesgos:** verificar que los controles de paginación de cómic y pestañas mantengan una secuencia de foco coherente en escritorio y móvil.
+- **Commit:** se registra al completar esta intervención.
+- **Despliegue:** pendiente de verificar GitHub Pages.
+
 ## 2026-11-06 — Personalizar el enfoque comercial de cada perfil
 
 - **Responsable:** colaboración ChatGPT + equipo del proyecto.
