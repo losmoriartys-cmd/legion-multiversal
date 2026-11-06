@@ -3,7 +3,21 @@
   "source": "Twitch Helix API",
   "window_days": 30,
   "sampling_interval_minutes": 15,
-  "updated_at": "2026-11-06T05:38:58Z",
+  "active_channels": [
+    "losmoriartys",
+    "ladymoriarty01",
+    "ther0d3r1k",
+    "habitos_atomicos",
+    "ardipii",
+    "akumazoldyck",
+    "daved0608"
+  ],
+  "archived_channels": [
+    "capyunaplay",
+    "elgabii090"
+  ],
+  "channel_registry_note": "Los canales archivados se conservan para consulta histórica y no se incluyen en los indicadores del roster activo.",
+  "updated_at": "2026-11-06T06:22:48Z",
   "channels": {
     "ladymoriarty01": {
       "login": "ladymoriarty01",
@@ -18,15 +32,15 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-06T05:38:58Z",
+      "updated_at": "2026-11-06T06:22:48Z",
       "window": {
-        "samples_total": 65,
+        "samples_total": 66,
         "live_samples": 5,
         "streams_observed": 2,
         "average_viewers_sampled": 5.4,
         "peak_viewers_sampled": 12,
-        "observed_live_hours": 0,
-        "estimated_hours_watched": 0,
+        "observed_live_hours": 0.0,
+        "estimated_hours_watched": 0.0,
         "game_breakdown": [
           {
             "name": "Once Human",
@@ -39,7 +53,7 @@
             "name": "Barfender",
             "live_samples": 2,
             "streams_observed": 1,
-            "average_viewers_sampled": 2,
+            "average_viewers_sampled": 2.0,
             "peak_viewers_sampled": 3
           }
         ],
@@ -48,7 +62,7 @@
             "date": "2026-11-04",
             "live_samples": 1,
             "streams_observed": 1,
-            "average_viewers_sampled": 1,
+            "average_viewers_sampled": 1.0,
             "peak_viewers_sampled": 1
           },
           {
@@ -62,7 +76,7 @@
             "date": "2026-11-06",
             "live_samples": 1,
             "streams_observed": 1,
-            "average_viewers_sampled": 12,
+            "average_viewers_sampled": 12.0,
             "peak_viewers_sampled": 12
           }
         ],
@@ -653,9 +667,17 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-06T06:22:48Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
-      ],
-      "roster_status": "active"
+      ]
     },
     "ther0d3r1k": {
       "login": "ther0d3r1k",
@@ -670,15 +692,15 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-06T05:38:58Z",
+      "updated_at": "2026-11-06T06:22:48Z",
       "window": {
-        "samples_total": 65,
+        "samples_total": 66,
         "live_samples": 15,
         "streams_observed": 3,
         "average_viewers_sampled": 18.3,
         "peak_viewers_sampled": 40,
-        "observed_live_hours": 0,
-        "estimated_hours_watched": 0,
+        "observed_live_hours": 0.0,
+        "estimated_hours_watched": 0.0,
         "game_breakdown": [
           {
             "name": "Counter-Strike",
@@ -705,7 +727,7 @@
             "name": "Barfender",
             "live_samples": 2,
             "streams_observed": 1,
-            "average_viewers_sampled": 26,
+            "average_viewers_sampled": 26.0,
             "peak_viewers_sampled": 38
           },
           {
@@ -721,14 +743,14 @@
             "date": "2026-11-03",
             "live_samples": 1,
             "streams_observed": 1,
-            "average_viewers_sampled": 23,
+            "average_viewers_sampled": 23.0,
             "peak_viewers_sampled": 23
           },
           {
             "date": "2026-11-04",
             "live_samples": 5,
             "streams_observed": 2,
-            "average_viewers_sampled": 17,
+            "average_viewers_sampled": 17.0,
             "peak_viewers_sampled": 40
           },
           {
@@ -1333,9 +1355,17 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-06T06:22:48Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
-      ],
-      "roster_status": "active"
+      ]
     },
     "capyunaplay": {
       "login": "capyunaplay",
@@ -1996,12 +2026,12 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-06T05:38:58Z",
+      "updated_at": "2026-11-06T06:22:48Z",
       "window": {
-        "samples_total": 65,
+        "samples_total": 66,
         "live_samples": 4,
         "streams_observed": 2,
-        "average_viewers_sampled": 6,
+        "average_viewers_sampled": 6.0,
         "peak_viewers_sampled": 7,
         "observed_live_hours": 0.24,
         "estimated_hours_watched": 1.44,
@@ -2010,7 +2040,7 @@
             "name": "Just Chatting",
             "live_samples": 4,
             "streams_observed": 2,
-            "average_viewers_sampled": 6,
+            "average_viewers_sampled": 6.0,
             "peak_viewers_sampled": 7
           }
         ],
@@ -2026,7 +2056,7 @@
             "date": "2026-11-06",
             "live_samples": 1,
             "streams_observed": 1,
-            "average_viewers_sampled": 5,
+            "average_viewers_sampled": 5.0,
             "peak_viewers_sampled": 5
           }
         ],
@@ -2617,9 +2647,17 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-06T06:22:48Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
-      ],
-      "roster_status": "active"
+      ]
     },
     "akumazoldyck": {
       "login": "akumazoldyck",
@@ -2634,9 +2672,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-06T05:38:58Z",
+      "updated_at": "2026-11-06T06:22:48Z",
       "window": {
-        "samples_total": 65,
+        "samples_total": 66,
         "live_samples": 8,
         "streams_observed": 3,
         "average_viewers_sampled": 6.4,
@@ -2648,7 +2686,7 @@
             "name": "Fortnite",
             "live_samples": 5,
             "streams_observed": 2,
-            "average_viewers_sampled": 5,
+            "average_viewers_sampled": 5.0,
             "peak_viewers_sampled": 10
           },
           {
@@ -3269,9 +3307,17 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-06T06:22:48Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
-      ],
-      "roster_status": "active"
+      ]
     },
     "daved0608": {
       "login": "daved0608",
@@ -3286,9 +3332,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-06T05:38:58Z",
+      "updated_at": "2026-11-06T06:22:48Z",
       "window": {
-        "samples_total": 65,
+        "samples_total": 66,
         "live_samples": 7,
         "streams_observed": 3,
         "average_viewers_sampled": 1.3,
@@ -3307,7 +3353,7 @@
             "name": "Gears of War: E-Day",
             "live_samples": 1,
             "streams_observed": 1,
-            "average_viewers_sampled": 1,
+            "average_viewers_sampled": 1.0,
             "peak_viewers_sampled": 1
           }
         ],
@@ -3316,7 +3362,7 @@
             "date": "2026-11-04",
             "live_samples": 3,
             "streams_observed": 1,
-            "average_viewers_sampled": 1,
+            "average_viewers_sampled": 1.0,
             "peak_viewers_sampled": 1
           },
           {
@@ -3921,9 +3967,17 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-06T06:22:48Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
-      ],
-      "roster_status": "active"
+      ]
     },
     "elgabii090": {
       "login": "elgabii090",
@@ -4554,15 +4608,15 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-06T05:38:58Z",
+      "updated_at": "2026-11-06T06:22:48Z",
       "window": {
-        "samples_total": 65,
+        "samples_total": 66,
         "live_samples": 5,
         "streams_observed": 2,
         "average_viewers_sampled": 1.8,
         "peak_viewers_sampled": 4,
-        "observed_live_hours": 0,
-        "estimated_hours_watched": 0,
+        "observed_live_hours": 0.0,
+        "estimated_hours_watched": 0.0,
         "game_breakdown": [
           {
             "name": "Just Chatting",
@@ -5182,9 +5236,17 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-06T06:22:48Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
-      ],
-      "roster_status": "active"
+      ]
     },
     "losmoriartys": {
       "login": "losmoriartys",
@@ -5199,21 +5261,21 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-06T05:38:58Z",
+      "updated_at": "2026-11-06T06:22:48Z",
       "window": {
-        "samples_total": 65,
+        "samples_total": 66,
         "live_samples": 3,
         "streams_observed": 1,
-        "average_viewers_sampled": 19,
+        "average_viewers_sampled": 19.0,
         "peak_viewers_sampled": 31,
-        "observed_live_hours": 0,
-        "estimated_hours_watched": 0,
+        "observed_live_hours": 0.0,
+        "estimated_hours_watched": 0.0,
         "game_breakdown": [
           {
             "name": "Barfender",
             "live_samples": 3,
             "streams_observed": 1,
-            "average_viewers_sampled": 19,
+            "average_viewers_sampled": 19.0,
             "peak_viewers_sampled": 31
           }
         ],
@@ -5222,14 +5284,14 @@
             "date": "2026-11-04",
             "live_samples": 2,
             "streams_observed": 1,
-            "average_viewers_sampled": 17,
+            "average_viewers_sampled": 17.0,
             "peak_viewers_sampled": 31
           },
           {
             "date": "2026-11-05",
             "live_samples": 1,
             "streams_observed": 1,
-            "average_viewers_sampled": 23,
+            "average_viewers_sampled": 23.0,
             "peak_viewers_sampled": 23
           }
         ],
@@ -5820,23 +5882,17 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-06T06:22:48Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
-      ],
-      "roster_status": "active"
+      ]
     }
-  },
-  "active_channels": [
-    "losmoriartys",
-    "ladymoriarty01",
-    "ther0d3r1k",
-    "habitos_atomicos",
-    "ardipii",
-    "akumazoldyck",
-    "daved0608"
-  ],
-  "archived_channels": [
-    "capyunaplay",
-    "elgabii090"
-  ],
-  "channel_registry_note": "Los canales archivados se conservan para consulta histórica y no se incluyen en los indicadores del roster activo."
+  }
 }

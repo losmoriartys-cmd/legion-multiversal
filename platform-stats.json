@@ -1,11 +1,25 @@
 {
   "schema_version": 1,
-  "updated_at": null,
+  "updated_at": "2026-11-06T06:22:49Z",
   "methodology": "Las métricas se conservan por creador y plataforma. No sumar ni comparar directamente unidades de plataformas distintas.",
-  "creators": {},
+  "creators": {
+    "patoteexplica": {
+      "display_name": "PATO — ORATORIS",
+      "platforms": {
+        "youtube": {
+          "platform": "youtube",
+          "handle": "@patoteexplica",
+          "url": "https://www.youtube.com/@patoteexplica",
+          "status": "credentials_required",
+          "source": "YouTube Data API v3",
+          "note": "Falta el secreto YOUTUBE_API_KEY."
+        }
+      }
+    }
+  },
   "collection_status": {
     "youtube": "awaiting_secret",
     "kick": "awaiting_secrets",
-    "captured_at": null
+    "captured_at": "2026-11-06T06:22:49Z"
   }
 }
