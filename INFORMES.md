@@ -1483,3 +1483,62 @@ Se añadieron tratamientos visuales individuales a los globos de voz de los diez
 - **Pendientes / riesgos:** no se realizó una prueba visual de las tarjetas en WhatsApp, Discord, X u otras plataformas; tampoco se verificó manualmente el recorte en cada una.
 - **Commit de implementación:** 460527a6044d36b2b6f3c2cf332838637d9448e5.
 - **Despliegue:** GitHub Pages exitoso; workflow 42249250007.
+
+## 2026-11-06 — Auditoría integral inicial de identidad, lore, contenido y enfoque comercial
+
+- **Responsable:** colaboración ChatGPT + equipo del proyecto.
+- **Objetivo:** evaluar la coherencia editorial y narrativa de Legión Multiversal y detectar oportunidades de mejora en experiencia, identidad visual, navegación, música y presentación comercial.
+- **Archivos revisados:** `index.html`, `styles.css`, `app.js`, `roster-data.json`, `creator-records.json`, `platform-registry.json`, `platform-stats.json`, `sullygnome-data.json` y estructura de recursos del repositorio.
+- **Alcance de la revisión:** inspección estática del contenido, datos, referencias, estructura, CSS y lógica JavaScript. El usuario informó que comprobó en PC la ficha de MORIARTYS (cuatro páginas) y los demás paneles, y que los encontró funcionando correctamente. No se realizó una nueva prueba visual independiente en navegador, ni una auditoría móvil/tablet, ni una comprobación externa de reproductores o sonido.
+
+### Fortalezas confirmadas
+
+- La web tiene una narrativa reconocible: origen, evolución, roster, valores, estadísticas, arsenal, transmisiones, reclutamiento, alianzas y comunidad.
+- El proyecto diferencia ocho perfiles activos y conserva las etapas históricas separadas.
+- Las ocho rutas de retrato y arte principal declaradas en `roster-data.json` existen en el repositorio.
+- Los expedientes comerciales distinguen formatos potenciales de campañas contratadas y explican límites de las métricas.
+- El capítulo de estadísticas aclara la fuente, la ventana de observación, las limitaciones del muestreo y que las horas vistas son estimaciones.
+- Los expedientes modales incorporan cierre con Escape, contención de foco y devolución del foco al control que los abrió.
+- La música no se reproduce automáticamente: se activa mediante una acción explícita y puede apagarse.
+
+### Hallazgos prioritarios de contenido y coherencia
+
+1. **Imagen de formación actual pendiente de validación visual.** La portada del capítulo 01 usa `PortadaNueva-seguis-agregando-a-este-que-no-existe-en-el-roster.jpg` y su texto alternativo la presenta como formación actual. El nombre del recurso sugiere que podría contener una figura ajena al roster. No se debe seguir presentando como fotografía/ilustración fiel de la formación hasta contrastarla con los ocho perfiles activos y aprobarla.
+2. **Horario contradictorio en el expediente de DAVE — NEXUS.** `roster-data.json` declara “Sin horario fijo confirmado”, pero el texto de trayectoria todavía afirma una agenda diaria a las 19:00 de México. Retirar esa afirmación del relato o reemplazarla únicamente con información confirmada.
+3. **Asunto de reclutamiento desactualizado.** El formulario prepara un correo con el asunto “Solicitud de ingreso al Instituto S3X-MEN”, aunque la identidad vigente es Legión Multiversal. El encabezado también usa “S.H.I.E.L.D.”, referencia externa reconocible que conviene sustituir por una denominación original del universo de la Legión.
+4. **Cronología sin fechas ni respaldo editorial suficiente.** La línea de tiempo ordena hitos, pero no muestra fechas ni fuentes. Expresiones como “pioneros” y “primera mujer en sumarse” requieren confirmación explícita y contexto para que no se lean como afirmaciones históricas verificadas sin respaldo. El registro de hitos en `creator-records.json` está vacío para los canales consultados.
+5. **Clips todavía no curados para uso comercial.** Varios expedientes muestran títulos genéricos (“Momento destacado 01…”) o slugs automáticos en inglés; AKUMA no tiene clips incorporados. Para una marca, cada muestra debería tener título editorial aprobado, breve contexto y enlace probado. No inventar títulos a partir del identificador.
+6. **Diferenciar rol narrativo de credencial real.** Dirección, Profesores, Estudiantes, Colaboradores, rangos y poderes son parte del universo ficticio. En la presentación comercial debe quedar inequívoco que no son cargos laborales, certificaciones ni indicadores de experiencia profesional.
+7. **Revisión de cifras antes de convertirlas en argumentos de venta.** Permanecen discrepancias ya documentadas en los expedientes de AKUMA, ARDIPII y HÁBITOS ATÓMICOS entre resúmenes y tablas de detalle. Mantener la advertencia de fuente/periodo y resolver las diferencias antes de destacar esos valores en una propuesta a marcas.
+
+### Hallazgos de identidad visual y experiencia
+
+- La portada social nueva trabaja una estética azul/cian/violeta, mientras que la interfaz conserva un uso muy frecuente del amarillo intenso, cian, rojo de estado, bordes negros gruesos y recursos de cómic clásico. La mezcla puede funcionar si se define una jerarquía; actualmente falta una guía común de color y aplicación.
+- La hoja de estilos tiene 39 bloques `@media`, 16 animaciones `@keyframes`, 30 usos de `!important` y numerosos colores literales además de las variables globales. Hay selectores repetidos y reglas de `body` en distintas etapas. No demuestra por sí solo fallos visuales, pero evidencia deuda de cascada y aumenta el riesgo de que una corrección futura sea anulada por otra regla.
+- Se importa Roboto Condensed, Bangers, Special Elite y Permanent Marker. También se declara Montserrat en una regla inicial, pero esa familia no se carga y luego el cuerpo vuelve a Roboto Condensed. Conviene eliminar la declaración muerta y definir usos limitados para la tipografía display, lectura y metadatos.
+- La navegación por capítulos cambia el panel y desplaza la página, pero `switchChapter()` no actualiza la URL ni el historial del navegador. El acceso directo por hash existe para expedientes, no como mecanismo general de capítulos. Evaluar enlaces compartibles por capítulo y comportamiento coherente con Atrás/Adelante.
+- La identidad sonora es una pieza jazz sintetizada en tiempo real mediante Web Audio, no un archivo musical. Está apagada por defecto y no tiene control de volumen; el temporizador continúa activo mientras está habilitada. Evaluar volumen, pausa al ocultar la pestaña y una descripción clara de que es una ambientación opcional.
+- El formulario de reclutamiento utiliza `mailto:`: prepara un correo en el cliente del visitante, no envía datos a un servidor de la web. Conviene explicarlo junto al botón y añadir una nota breve sobre el tratamiento de la información compartida.
+
+### Oportunidades para el enfoque de marcas
+
+- El capítulo de alianzas comunica formatos posibles, pero todavía funciona más como declaración institucional que como portfolio demostrable. Puede ganar fuerza con casos breves verificables: objetivo, creadores participantes, formato, entregables publicados y evidencia disponible.
+- Mostrar por separado la experiencia colectiva y la oferta individual de cada creador; no atribuir al grupo métricas, campañas o partners que pertenecen a un canal específico.
+- Convertir clips aprobados, colaboraciones respaldadas y datos con periodo/fuente en pruebas de capacidad. No presentar solicitudes de keys ni plataformas de distribución como patrocinios.
+- Añadir un recorrido claro para marcas: qué ofrece la Legión, qué puede contratarse con el grupo, qué puede contratarse individualmente, ejemplos reales y contacto comercial.
+
+### Orden recomendado de intervención
+
+1. Corregir datos y referencias inequívocamente desactualizadas (horario de DAVE y asunto de reclutamiento); validar la imagen de formación.
+2. Resolver y etiquetar las discrepancias estadísticas antes de usar cifras como argumento comercial.
+3. Confirmar la cronología y las afirmaciones históricas con el equipo; separar lore de hechos comprobables.
+4. Curar clips y muestras con cada creador; dejar visible lo pendiente sin usar placeholders como si fueran piezas editoriales.
+5. Aprobar una guía visual: paleta institucional, colores de estado, tipografía, fondos, bordes, tarjetas, imágenes y movimiento.
+6. Consolidar CSS y corregir la navegación por URL/historial.
+7. Refinar música opcional, controles y explicación del formulario.
+8. Reestructurar el capítulo de alianzas como portfolio con pruebas verificables y ofertas diferenciadas.
+
+- **Implementado en esta auditoría:** diagnóstico y prioridades documentados; no se modificó el diseño ni el contenido público.
+- **Pendientes / riesgos:** validación visual independiente en móvil/tablet; contraste visual de la portada de formación; confirmaciones editoriales de integrantes; revisión externa de embeds y de la reproducción sonora.
+- **Commit:** se registrará al guardar esta entrada.
+- **Despliegue:** no corresponde; esta entrada es documental y no altera el sitio publicado.
