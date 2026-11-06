@@ -548,8 +548,9 @@
       "checked_at_utc": null,
       "status": "partial",
       "period": {
-        "start_date": "2026-10-24",
-        "end_date": "2026-11-06"
+        "start_date": "2026-10-06",
+        "end_date": "2026-11-05",
+        "label": "Últimos 30 días"
       },
       "streams": [
         {
@@ -701,20 +702,206 @@
         }
       ],
       "summary": {
-        "streams_count": 10,
-        "airtime_minutes": 1230,
-        "airtime_hours": 20.5,
-        "hours_watched": 114,
-        "average_viewers_duration_weighted": 5.8,
+        "streams_count": 22,
+        "airtime_minutes": 2580,
+        "airtime_hours": 43,
+        "hours_watched": 190,
+        "average_viewers_duration_weighted": 4,
         "peak_viewers": 41,
-        "followers_gain_reported": 3
+        "followers_gain_reported": 34,
+        "followers_total": 142,
+        "period_label": "Últimos 30 días · 6 oct–5 nov 2026"
       },
       "notes": [
-        "Diez transmisiones transcritas de la tabla de SullyGnome compartida por el creador; muestra parcial, no necesariamente el historial completo del canal.",
-        "Los horarios de inicio y fin se conservan tal como aparecen en SullyGnome; no se les asigna zona horaria porque la tabla aportada no la especifica.",
-        "El promedio ponderado por duración se calcula a partir de los promedios por transmisión; es un cálculo derivado, no una cifra agregada publicada directamente por SullyGnome.",
-        "Followers_gain_reported suma la columna Seguidores ganados de las diez filas compartidas. No equivale al total actual de seguidores del canal.",
-        "Los juegos se conservan por transmisión. La tabla aportada no incluye duración ni audiencia desglosada por juego, por lo que no se atribuyen métricas individuales a cada título."
+        "Resumen agregado de los últimos 30 días transcrito de la información de SullyGnome compartida por el creador: 22 transmisiones, 43 horas en directo, 190 horas vistas, promedio 4, pico 41 y 34 seguidores ganados.",
+        "El canal registra 142 seguidores totales, estado Afiliado, idioma Español y fecha de creación 7 de julio de 2017.",
+        "El detalle de diez transmisiones es la lista visible dentro del resumen de 30 días; no constituye el listado completo de las 22 emisiones.",
+        "Se conserva aparte el directo del 6 de noviembre, que queda fuera de la ventana 6 de octubre–5 de noviembre de 2026.",
+        "El promedio de 4 espectadores corresponde al resumen publicado por SullyGnome; no es el promedio ponderado recalculado de la muestra visible.",
+        "Los rankings de directorio (clasificación de audiencia y posición de Twitch) son posiciones de ranking, no cantidades de espectadores ni seguidores.",
+        "Los datos de juegos son los destacados del resumen: más tiempo transmitido Clive Barker's Hellraiser: Revival (11 h); mayor promedio Echoes in Darkness (13 espectadores); Gears of War: E-Day 3 h 15 min.",
+        "El pico máximo de 41 espectadores se registró el 24 de octubre de 2026 a las 18:55, durante Rogue Legacy. La hora del pico de actividad del directorio (23 de octubre, 23:00) es un indicador diferente."
+      ],
+      "last_30_days": {
+        "followers_total": 142,
+        "account_status": "Afiliado",
+        "language": "Español",
+        "mature_content": false,
+        "created_date": "2017-07-07",
+        "streams_count": 22,
+        "airtime_hours": 43,
+        "airtime_minutes": 2580,
+        "average_stream_minutes": 119,
+        "hours_watched": 190,
+        "average_viewers": 4,
+        "average_viewers_change": 2,
+        "peak_viewers": 41,
+        "peak_viewers_change": 33,
+        "followers_gained": 34,
+        "followers_gained_change": 32,
+        "airtime_change_hours": 23,
+        "streams_change": 7,
+        "peak_date": "2026-10-24",
+        "peak_time": "18:55",
+        "peak_game": "Rogue Legacy",
+        "peak_activity_date": "2026-10-23",
+        "peak_activity_time": "23:00",
+        "peak_activity_timezone": "hora local",
+        "peak_activity_game_rank": 1,
+        "peak_activity_twitch_rank": 14026,
+        "most_streamed_game": "Clive Barker's Hellraiser: Revival",
+        "most_streamed_game_hours": 11,
+        "highest_average_game": "Echoes in Darkness",
+        "highest_average_game_viewers": 13,
+        "other_game_time": {
+          "name": "Gears of War: E-Day",
+          "hours": 3,
+          "minutes": 15
+        },
+        "source": "SullyGnome · resumen últimos 30 días"
+      },
+      "recent_streams_30d": [
+        {
+          "date": "2026-11-05",
+          "start_time": "00:58",
+          "duration_minutes": 120,
+          "average_viewers": 6,
+          "peak_viewers": 17,
+          "hours_watched": 12.2,
+          "followers_gain": 0,
+          "games": [
+            "Just Chatting",
+            "Can 'Em All"
+          ]
+        },
+        {
+          "date": "2026-11-04",
+          "start_time": "00:50",
+          "duration_minutes": 132,
+          "average_viewers": 2,
+          "peak_viewers": 6,
+          "hours_watched": 4.3,
+          "followers_gain": 0,
+          "games": [
+            "Can 'Em All",
+            "Fortnite"
+          ]
+        },
+        {
+          "date": "2026-11-03",
+          "start_time": "00:38",
+          "duration_minutes": 96,
+          "average_viewers": 8,
+          "peak_viewers": 17,
+          "hours_watched": 12.9,
+          "followers_gain": 1,
+          "games": [
+            "Fortnite",
+            "Just Chatting",
+            "Among Us"
+          ]
+        },
+        {
+          "date": "2026-11-01",
+          "start_time": "02:45",
+          "duration_minutes": 300,
+          "average_viewers": 3,
+          "peak_viewers": 11,
+          "hours_watched": 15,
+          "followers_gain": 1,
+          "games": [
+            "Just Chatting",
+            "Fortnite",
+            "Among Us"
+          ]
+        },
+        {
+          "date": "2026-10-31",
+          "start_time": "00:54",
+          "duration_minutes": 108,
+          "average_viewers": 7,
+          "peak_viewers": 17,
+          "hours_watched": 13,
+          "followers_gain": 0,
+          "games": [
+            "Staged Open House"
+          ]
+        },
+        {
+          "date": "2026-10-30",
+          "start_time": "00:46",
+          "duration_minutes": 102,
+          "average_viewers": 5,
+          "peak_viewers": 9,
+          "hours_watched": 8.7,
+          "followers_gain": 0,
+          "games": [
+            "Rogue Legacy"
+          ]
+        },
+        {
+          "date": "2026-10-29",
+          "start_time": "00:54",
+          "duration_minutes": 126,
+          "average_viewers": 3,
+          "peak_viewers": 9,
+          "hours_watched": 6.3,
+          "followers_gain": 1,
+          "games": [
+            "Amenti",
+            "Fortnite"
+          ]
+        },
+        {
+          "date": "2026-10-28",
+          "start_time": "00:54",
+          "duration_minutes": 84,
+          "average_viewers": 6,
+          "peak_viewers": 15,
+          "hours_watched": 8.1,
+          "followers_gain": 0,
+          "games": [
+            "Just Chatting"
+          ]
+        },
+        {
+          "date": "2026-10-24",
+          "start_time": "17:55",
+          "duration_minutes": 48,
+          "average_viewers": 31,
+          "peak_viewers": 41,
+          "hours_watched": 25.8,
+          "followers_gain": 1,
+          "games": [
+            "Just Chatting"
+          ]
+        },
+        {
+          "date": "2026-10-24",
+          "start_time": "00:57",
+          "duration_minutes": 78,
+          "average_viewers": 1,
+          "peak_viewers": 4,
+          "hours_watched": 1.3,
+          "followers_gain": 0,
+          "games": []
+        }
+      ],
+      "streams_outside_30d": [
+        {
+          "date": "2026-11-06",
+          "start_time": "00:56",
+          "end_time": "02:45",
+          "duration_minutes": 109,
+          "hours_watched": 12,
+          "average_viewers": 7,
+          "peak_viewers": 13,
+          "followers_gain": 0,
+          "followers_per_hour": 0,
+          "games": [
+            "Fortnite"
+          ]
+        }
       ]
     },
     {
