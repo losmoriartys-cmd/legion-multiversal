@@ -30,7 +30,7 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Validaciones y resultados:** la muestra de diez transmisiones suma 2.568 minutos (42,8 h), 844 horas vistas, pico de 55 espectadores y +22 seguidores netos. Promedio ponderado por duración: 19,8 espectadores. Se identificó el período 24/10/2026–05/11/2026. El período del desglose de juegos no fue especificado y queda indicado como tal. El valor de 0 h / 0,5% para Marvel Rivals se conserva por redondeo.
 - **Contraste:** se reforzaron reglas de tinta oscura sobre paneles claros y cabeceras oscuras con texto blanco; evitar amarillos de bajo contraste.
 - **Pendientes / riesgos:** revisar visualmente el dossier publicado en distintos tamaños de pantalla y confirmar que los tres embeds de Twitch carguen correctamente.
-- **Commit:** pendiente de completar los commits de datos y bitácora.
+- **Commit:** `04c07d1` (index.html), `12f5b9e` (sullygnome-data.json), `33b6baa` (creator-records.json), `614e96d` (INFORMES.md).
 - **Despliegue:** pendiente de verificación.
 
 ## 2026-11-03 — Inicio del protocolo compartido y registro de estado
