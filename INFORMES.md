@@ -1154,3 +1154,28 @@ Se añadieron tratamientos visuales individuales a los globos de voz de los diez
 - **Pendientes / riesgos:** investigar por qué GitHub Actions no sostiene la cadencia prevista; verificar y completar las filas originales de SullyGnome donde el estado es parcial o aportado por el creador; incorporar YouTube cuando exista una fuente verificable.
 - **Commit:** se registra en el historial de GitHub al aplicar esta actualización.
 - **Despliegue:** pendiente de ejecución y verificación del workflow de Pages.
+
+
+## 2026-11-06 — Base de estadísticas multiplataforma (Twitch + YouTube + Kick)
+
+- **Objetivo:** preparar Legión Multiversal para integrar creadores que transmiten en Twitch o Kick y creadores que publican videos en YouTube, sin exigir una plataforma única ni mezclar métricas incompatibles.
+- **Archivos nuevos:**
+  - `platform-registry.json`: registro extensible de cuentas por creador y plataforma. Se incorporó el canal confirmado `@patoteexplica` de PATO — ORATORIS.
+  - `platform-stats.json`: salida normalizada para datos de YouTube y Kick, con fuente, estado y fecha de captura.
+  - `update_platform_stats.py`: colector automatizado para YouTube Data API v3 (suscriptores, vistas totales, cantidad de videos y hasta diez videos recientes) y Kick Developer Public API (estado live, espectadores actuales, categoría y título).
+- **Archivos modificados:**
+  - `.github/workflows/actualizar-stats.yml`: el workflow programado ejecuta ahora los colectores Twitch y multiplataforma y versiona `data.json` junto con `platform-stats.json`.
+  - `index.html`: se añadió lectura y presentación independiente de métricas YouTube/Kick dentro del expediente; se sustituyó el placeholder de YouTube de PATO por el panel conectado a la nueva fuente. La clave de creador admite perfiles solo Kick en futuras incorporaciones.
+- **Criterios de seguridad y calidad:**
+  - El colector de Kick selecciona campos permitidos y nunca persiste el objeto `stream` completo, porque la respuesta de canales puede incluir `stream.key`.
+  - No se mezclan métricas entre plataformas ni se presentan métricas actuales de Kick como histórico.
+  - No se inventaron cuentas Kick para el roster actual. Los nuevos candidatos se incorporan agregando su slug y plataforma al registro.
+  - Las métricas de YouTube son públicas y acumuladas; el contador de suscriptores puede estar redondeado por la plataforma.
+- **Configuración necesaria en GitHub Actions → Secrets and variables → Actions:**
+  - `YOUTUBE_API_KEY`: clave de un proyecto con YouTube Data API v3 habilitada.
+  - `KICK_CLIENT_ID` y `KICK_CLIENT_SECRET`: credenciales de una aplicación registrada en Kick Developer.
+  - Los secretos existentes `TWITCH_CLIENT_ID` y `TWITCH_CLIENT_SECRET` se mantienen.
+- **Validaciones:** lectura de archivos vigentes, actualización de referencias del expediente y revisión estática del flujo de ejecución. El workflow no se ejecutó todavía con las nuevas credenciales; la conexión real y las respuestas de ambas APIs quedan pendientes hasta que se configuren los secretos. Tampoco se ha hecho QA visual del sitio publicado.
+- **Pendientes:** configurar los tres secretos nuevos; verificar el primer ciclo real; incorporar handles Kick solo cuando los candidatos los confirmen; ampliar el registro de cuentas a varios canales por creador cuando corresponda; decidir más adelante el mecanismo de autorización individual para analíticas privadas.
+- **Commits:** colector `ba805271`; registro `f7397e5`; archivo de datos `18c3709`; workflow `f28dace`; render `ce61b99`; corrección de carga inicial `8372b05` y `a02fe89`.
+- **Despliegue:** pendiente de verificar el workflow de GitHub Pages correspondiente a estos commits.
