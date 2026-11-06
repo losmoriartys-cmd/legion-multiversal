@@ -1278,3 +1278,9 @@ Se añadieron tratamientos visuales individuales a los globos de voz de los diez
 - **Resultado:** superados los nueve capítulos principales: PORTADA, ROSTER, NUESTROS VALORES, ESTADÍSTICAS, EN VIVO, ARSENAL, ALIANZAS, COMUNIDAD y RECLUTAMIENTO. Se confirmaron los ocho perfiles y cuatro grupos; apertura y retorno del expediente MORIARTYS; datos de siete canales en Estadísticas; estado En Vivo sin carga infinita; Arsenal con diez juegos y enlaces; y contenido visible en las demás secciones. No se observaron secciones vacías, imágenes rotas ni desbordes evidentes durante la revisión visual.
 - **Limitaciones de esta auditoría:** la comprobación fue funcional/visual en navegador y no sustituye una prueba exhaustiva de accesibilidad con lectores de pantalla, dispositivos físicos ni disponibilidad permanente de cada servicio externo. El validador CI comprueba rutas locales y formato de URLs, no disponibilidad remota de terceros.
 - **Conclusión:** no quedan fallos bloqueantes detectados en la auditoría funcional final. La futura migración a Cloudflare está preparada documentalmente, pero no ejecutada; su conexión y la estrategia para commits automáticos cada 15 minutos siguen pendientes de acceso/decisión de cuenta.
+
+
+### Documentación técnica sincronizada — 2026-11-06
+
+- Se actualizó `README.md` para reflejar los archivos reales tras la refactorización (HTML, CSS, JavaScript, roster JSON, datos de analítica, validador y guía Cloudflare) y se corrigió el nombre visible del repositorio.
+- Commit: [`99b1082`](https://github.com/losmoriartys-cmd/legion-multiversal/commit/99b1082a9d6e031f78c8333f8dcfa085b15eac6e).
