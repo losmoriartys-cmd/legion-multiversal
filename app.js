@@ -479,9 +479,9 @@ function renderRoster() {
     if (!container) return;
     container.innerHTML = '';
     const groups = [
-        { key: 'director', title: 'DIRECCIÓN DEL INSTITUTO', desc: 'Fundadores y responsables de la visión, coordinación y rumbo del equipo.' },
-        { key: 'teacher', title: 'PROFESORES', desc: 'Integrantes que enseñan, orientan y comparten su experiencia y conocimiento en las misiones.' },
-        { key: 'student', title: 'ESTUDIANTES', desc: 'Nuevos talentos en formación dentro del Instituto.' },
+        { key: 'director', title: 'DIRECCIÓN', desc: 'Quienes impulsan la visión compartida y coordinan el rumbo de la Legión.' },
+        { key: 'teacher', title: 'PROFESORES', desc: 'Integrantes que aportan experiencia, orientación y distintas formas de acompañar al equipo.' },
+        { key: 'student', title: 'ESTUDIANTE', desc: 'Un perfil en desarrollo que suma su propia mirada al universo de la Legión.' },
         { key: 'collaborator', title: 'COLABORADORES', desc: 'Creadores y especialistas que aportan conocimientos, experiencias y nuevas perspectivas.' }
     ];
     const counts = document.getElementById('roster-counts');
@@ -506,16 +506,16 @@ function renderRoster() {
             card.type = 'button';
             const isMoriartyPilot = hero.name === 'MORIARTYS';
             card.className = 'roster-portrait-card' + (isMoriartyPilot ? ' roster-card--moriarty' : '');
-            card.setAttribute('aria-label', 'Ver carta y expediente de ' + hero.name);
+            card.setAttribute('aria-label', 'Abrir bitácora de ' + hero.name);
             if (isMoriartyPilot) card.dataset.cardTilt = 'moriarty';
             card.onclick = (event) => openHeroProfile(index, event.currentTarget);
             const imageWrap = document.createElement('div');
             imageWrap.className = 'roster-portrait-wrap' + (isMoriartyPilot ? ' roster-portrait-wrap--collectible' : '');
             const image = document.createElement('img');
-            image.src = isMoriartyPilot ? (hero.img || hero.portrait) : (hero.portrait || hero.img);
-            image.alt = isMoriartyPilot ? 'Carta coleccionable número ' + (hero.cardNumber || '047') + ' de ' + hero.name : 'Retrato de ' + hero.name;
+            image.src = hero.portrait || hero.img;
+            image.alt = 'Carnet de integrante de ' + hero.name;
             image.loading = 'lazy';
-            image.onerror = () => { imageWrap.textContent = isMoriartyPilot ? 'CARTA PENDIENTE' : 'RETRATO PENDIENTE'; };
+            image.onerror = () => { imageWrap.textContent = 'CARNET PENDIENTE'; };
             imageWrap.appendChild(image);
             if (isMoriartyPilot) {
                 const foil = document.createElement('span');
@@ -648,7 +648,7 @@ function openHeroProfile(index, triggerElement = document.activeElement) {
     if (!home || !page) return;
     const channel = hero.youtube || hero.twitch || '';
     window.lastHeroProfileTrigger = triggerElement instanceof HTMLElement ? triggerElement : null;
-    page.innerHTML = '<div class="hero-profile-layout"><img class="hero-profile-card" src="' + escapeStatsHtml(hero.img) + '" alt="Carta oficial de ' + escapeStatsHtml(hero.name) + '"><div class="hero-profile-copy"><span class="stats-status">EXPEDIENTE INDIVIDUAL · ' + escapeStatsHtml(hero.rank || 'CLASIFICACIÓN PENDIENTE') + '</span><h3 id="hero-profile-title" tabindex="-1">' + escapeStatsHtml(hero.name) + '</h3><p>' + escapeStatsHtml(hero.bio || 'Presentación personal pendiente de completar.') + '</p><div class="hero-profile-actions"><button class="twitch-link-btn" type="button" onclick="openHeroModal(' + index + ')">ABRIR BITÁCORA COMPLETA</button>' + (channel ? '<a class="btn-link" href="' + escapeStatsHtml(channel) + '" target="_blank" rel="noopener">VISITAR CANAL</a>' : '') + '<button class="hero-profile-back" type="button" onclick="closeHeroProfile()">VOLVER AL ROSTER</button></div></div></div>' + renderCommercialQuickView(hero);
+    page.innerHTML = '<div class="hero-profile-layout hero-profile-gateway"><div class="hero-profile-copy"><span class="stats-status">EXPEDIENTE INDIVIDUAL · ' + escapeStatsHtml(hero.rank || 'CLASIFICACIÓN PENDIENTE') + '</span><p class="profile-section-kicker">ARCHIVO PERSONAL · ' + escapeStatsHtml(hero.cardNumber ? 'N.º ' + hero.cardNumber : 'REGISTRO DE LA LEGIÓN') + '</p><h3 id="hero-profile-title" tabindex="-1">' + escapeStatsHtml(hero.name) + '</h3><p>' + escapeStatsHtml(hero.bio || 'Presentación personal pendiente de completar.') + '</p><div class="hero-profile-actions"><button class="twitch-link-btn" type="button" onclick="openHeroModal(' + index + ')">ABRIR BITÁCORA COMPLETA</button>' + (channel ? '<a class="btn-link" href="' + escapeStatsHtml(channel) + '" target="_blank" rel="noopener">VISITAR CANAL</a>' : '') + '<button class="hero-profile-back" type="button" onclick="closeHeroProfile()">VOLVER AL ROSTER</button></div></div></div>' + renderCommercialQuickView(hero);
     home.hidden = true;
     page.hidden = false;
     history.replaceState(null, '', '#expediente-' + encodeURIComponent(hero.name.toLowerCase().replace(/[^a-z0-9]+/g,'-')));
