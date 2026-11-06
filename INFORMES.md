@@ -1258,3 +1258,13 @@ Se añadieron tratamientos visuales individuales a los globos de voz de los diez
 - **Commits:** [`18b1fc3`](https://github.com/losmoriartys-cmd/legion-multiversal/commit/18b1fc35b9683b75b1011c71c22b4bad61b23e43), [`c23373b`](https://github.com/losmoriartys-cmd/legion-multiversal/commit/c23373b2ccc8042aa83c9bf7114a52f07d3191f1), [`19c2ca7`](https://github.com/losmoriartys-cmd/legion-multiversal/commit/19c2ca71f3768f7f90cfdda5b4ec2734247ad849).
 - **Límites:** la comprobación valida la existencia de recursos locales y el formato de enlaces externos, pero no hace peticiones a todos los dominios externos para comprobar disponibilidad remota, evitando fallos intermitentes por terceros.
 - **Estado:** completado y validado.
+
+
+## 2026-11-06 · Preparar futura migración a Cloudflare Pages
+
+- **Objetivo:** documentar una ruta de migración sin afectar la publicación actual.
+- **Implementado:** se creó `CLOUDFLARE_PAGES.md` con la configuración de un sitio estático desde la raíz, la rama `main`, variables, lista de comprobación funcional y procedimiento de vuelta atrás. Se enlazó desde `README.md`.
+- **Riesgo identificado:** el colector actual puede crear commits de datos cada 15 minutos. Una integración Git directa puede provocar despliegues frecuentes; excluir esos JSON sin una alternativa dejaría las estadísticas obsoletas. La guía exige resolver este punto antes de convertir Cloudflare en producción.
+- **Archivos:** `CLOUDFLARE_PAGES.md`, `README.md`, `INFORMES.md`.
+- **Commits:** [`724c37c`](https://github.com/losmoriartys-cmd/legion-multiversal/commit/724c37c90511851e933e5951c596e75f659c5d8a), [`6c70236`](https://github.com/losmoriartys-cmd/legion-multiversal/commit/6c70236da7883224df01c3333427e2455698f6f7).
+- **Estado:** preparación documental completada. No se conectó ninguna cuenta, no se creó un despliegue Cloudflare y GitHub Pages permanece como publicación vigente.
