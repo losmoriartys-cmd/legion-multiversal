@@ -107,8 +107,8 @@ function renderTwitchMetricsStats(channel){
  return out;
 }
 function renderSullyStats(channel){
- if(channel.login==='losmoriartys')return renderLosMoriartysSullyPilot(channel);
  if(!channel)return '<div class="stats-empty"><strong>Historial no disponible</strong>No hay registros históricos cargados para este canal.</div>';
+ if(channel.login==='losmoriartys')return renderLosMoriartysSullyPilot(channel);
  const sourceStatus=channel.status||'pending';
  const status=sourceStatus==='partial'?'partial':(sourceStatus==='user_supplied_summary'||sourceStatus==='user_supplied_annual_summary'?'partial':'pending');
  const statusLabel=sourceStatus==='partial'?'REGISTRO PARCIAL':sourceStatus==='user_supplied_summary'?'RESUMEN APORTADO':sourceStatus==='user_supplied_annual_summary'?'RESUMEN ANUAL APORTADO':'PENDIENTE DE DATOS';
@@ -145,11 +145,15 @@ function renderSullyStats(channel){
   streams.forEach(v=>out+='<tr><td>'+statsDate(v.date)+'</td><td>'+(v.start_time?escapeStatsHtml(v.start_time):'No informado')+'</td><td>'+statsDuration(v)+'</td><td class="num">'+statsNumber(v.average_viewers,0)+'</td><td class="num">'+statsNumber(v.peak_viewers,0)+'</td><td class="num">'+statsNumber(v.hours_watched,2)+'</td><td class="num">'+statsNumber(v.followers_reported,0)+'</td></tr>');
   out+='</tbody></table></div>';
  }else{
-  out+='<div class="stats-empty"><strong>Detalle de transmisiones incompleto</strong>El resumen y el desglose por categorías ya están cargados. Falta incorporar el detalle de las 28 transmisiones para completar la bitácora individual.</div>';
+  const detailMessage=channel.observed_rows_summary
+   ? 'El equipo reportó '+channel.observed_rows_summary.rows+' de '+channel.observed_rows_summary.expected_rows+' transmisiones, pero las filas individuales no están cargadas en este archivo. No se reconstruye la bitácora sin los registros originales.'
+   : 'No hay filas individuales de transmisiones cargadas para este canal. Se conserva el resumen o desglose disponible sin reconstruir una bitácora.';
+  out+='<div class="stats-empty"><strong>Detalle de transmisiones no cargado</strong>'+escapeStatsHtml(detailMessage)+'</div>';
  }
- if(channel.observed_rows_summary){
+ if(channel.observed_rows_summary && a){
   const o=channel.observed_rows_summary;
-  out+='<div class="stats-note">Detalle visible: '+o.rows+' de '+(a?.streams||'—')+' transmisiones del año · '+statsNumber(o.duration_hours,1)+' horas de duración · '+statsNumber(o.hours_watched,1)+' horas vistas. El pico de estas filas ('+statsNumber(o.peak_viewers_in_rows,0)+') no reemplaza el pico anual ('+statsNumber(a?.peak_viewers,0)+').</div>';
+  const durationHours=o.duration_hours!==undefined?o.duration_hours:(o.duration_minutes!==undefined?o.duration_minutes/60:null);
+  out+='<div class="stats-note">Detalle visible: '+o.rows+' de '+a.streams+' transmisiones del año · '+statsNumber(durationHours,1)+' horas de duración · '+statsNumber(o.hours_watched,1)+' horas vistas. El pico de estas filas ('+statsNumber(o.peak_viewers_in_rows,0)+') no reemplaza el pico anual ('+statsNumber(a.peak_viewers,0)+').</div>';
  }
  if(channel.notes?.length){
   out+='<div class="stats-note warning">'+channel.notes.map(n=>escapeStatsHtml(n)).join('<br>')+'</div>';
@@ -174,7 +178,7 @@ function renderLosMoriartysHelixPilot(channel){
  const expected=Number.isFinite(firstTime)&&Number.isFinite(lastTime)&&lastTime>=firstTime?Math.floor((lastTime-firstTime)/(interval*60000))+1:0;
  const coverage=expected?Math.min(100,samples.length/expected*100):null;
  const gaps=samples.slice(1).map((v,i)=>(Date.parse(v.sampled_at)-Date.parse(samples[i].sampled_at))/60000).filter(v=>Number.isFinite(v)&&v>0).sort((a,b)=>a-b);
- const medianGap=gaps.length?gaps[Math.floor(gaps.length/2)]:null;
+ const medianGap=gaps.length?(gaps.length%2?gaps[(gaps.length-1)/2]:(gaps[gaps.length/2-1]+gaps[gaps.length/2])/2):null;
  const maxGap=gaps.length?Math.max(...gaps):null;
  const coverageText=coverage===null?'cobertura no calculable':'cobertura del tramo observado: '+statsNumber(coverage,1)+'% ('+statsNumber(samples.length,0)+'/'+statsNumber(expected,0)+' muestras esperadas) · separación mediana: '+(medianGap===null?'—':statsNumber(medianGap,1)+' min')+' · mayor intervalo sin muestra: '+(maxGap===null?'—':statsNumber(maxGap,1)+' min');
  const liveSamples=Number(w.live_samples)||0, detectedStreams=Number(w.streams_observed)||0;
@@ -202,7 +206,7 @@ function renderHelixDashboard(channel){
  const expected=Number.isFinite(first)&&Number.isFinite(last)&&last>=first?Math.floor((last-first)/(interval*60000))+1:0;
  const coverage=expected?Math.min(100,snaps.length/expected*100):null;
  const gaps=snaps.slice(1).map((v,i)=>(Date.parse(v.sampled_at)-Date.parse(snaps[i].sampled_at))/60000).filter(v=>Number.isFinite(v)&&v>0).sort((a,b)=>a-b);
- const medianGap=gaps.length?gaps[Math.floor(gaps.length/2)]:null;
+ const medianGap=gaps.length?(gaps.length%2?gaps[(gaps.length-1)/2]:(gaps[gaps.length/2-1]+gaps[gaps.length/2])/2):null;
  const maxGap=gaps.length?Math.max(...gaps):null;
  const quality=coverage===null?'SIN COBERTURA CALCULABLE':coverage>=80?'COBERTURA ADECUADA':coverage>=50?'COBERTURA PARCIAL':'MUESTRA INSUFICIENTE';
  const qualityClass=coverage===null?'pending':coverage>=80?'verified':coverage>=50?'partial':'pending';
