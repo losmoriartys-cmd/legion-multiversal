@@ -1817,3 +1817,124 @@ body {
     .roster-card--moriarty { width: min(100%, 310px); max-width: 310px; }
     .roster-card-cue { font-size: .56rem; }
 }
+
+
+/* CAPÍTULO 02 · coherencia del roster y acceso al expediente */
+#chapter-2 .institute-banner {
+    border-color: rgba(123, 174, 210, .34);
+    box-shadow: 0 16px 38px rgba(0,0,0,.24);
+    border-radius: 16px;
+}
+#chapter-2 .institute-stamp {
+    border-color: rgba(131, 211, 228, .72);
+    color: #bdeefa;
+}
+#chapter-2 .institute-banner h3 {
+    color: #d9f5fb;
+    text-shadow: 0 0 18px rgba(98,217,232,.12);
+}
+#chapter-2 .roster-intro {
+    max-width: 820px;
+    margin: 22px auto 12px;
+    color: #c5d2e2;
+    font-size: clamp(.98rem, 1.3vw, 1.08rem);
+    line-height: 1.75;
+    text-align: center;
+}
+#chapter-2 .roster-jump-link {
+    min-height: 104px;
+    border: 1px solid rgba(153,190,220,.25);
+    border-radius: 12px;
+    background: linear-gradient(145deg, rgba(23,38,59,.94), rgba(8,15,27,.96));
+    box-shadow: 0 8px 22px rgba(0,0,0,.18);
+    transition: transform .2s ease, border-color .2s ease, background .2s ease;
+}
+#chapter-2 .roster-jump-link:hover,
+#chapter-2 .roster-jump-link:focus-visible {
+    transform: translateY(-2px);
+    border-color: rgba(98,217,232,.68);
+    background: linear-gradient(145deg, rgba(27,49,72,.98), rgba(9,19,33,.98));
+}
+#chapter-2 .roster-section {
+    margin-top: 34px;
+    padding: clamp(16px, 2.5vw, 26px);
+    border: 1px solid rgba(125,164,198,.2);
+    border-radius: 16px;
+    background: linear-gradient(145deg, rgba(12,22,36,.72), rgba(7,13,23,.48));
+}
+#chapter-2 .roster-section-title {
+    margin-bottom: 7px;
+    font-size: clamp(1.55rem, 2.6vw, 2rem);
+}
+#chapter-2 .roster-section-desc {
+    max-width: 720px;
+    line-height: 1.65;
+}
+#chapter-2 .roster-grid {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 224px), 1fr));
+    justify-items: center;
+    gap: clamp(16px, 2.2vw, 26px);
+}
+#chapter-2 .roster-portrait-card {
+    width: min(100%, 270px);
+    overflow: hidden;
+    border-radius: 14px;
+    text-align: center;
+}
+#chapter-2 .roster-portrait-wrap {
+    height: auto;
+    aspect-ratio: 2 / 3;
+    overflow: hidden;
+}
+#chapter-2 .roster-portrait-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+#chapter-2 .roster-portrait-info {
+    min-height: 92px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    padding: 13px 12px 15px;
+}
+#chapter-2 .roster-portrait-info strong {
+    font-size: 1.16rem;
+    letter-spacing: .045em;
+}
+#chapter-2 .roster-portrait-info span {
+    line-height: 1.35;
+}
+#chapter-2 .roster-card--moriarty .roster-portrait-wrap--collectible {
+    aspect-ratio: 2 / 3;
+    height: auto;
+}
+#chapter-2 .roster-card--moriarty .roster-portrait-wrap--collectible img {
+    object-fit: cover;
+}
+.hero-profile-gateway {
+    display: block;
+    max-width: 920px;
+    margin: 0 auto;
+}
+.hero-profile-gateway .hero-profile-copy {
+    max-width: 780px;
+    margin: 0 auto;
+    text-align: center;
+}
+.hero-profile-gateway .hero-profile-actions {
+    justify-content: center;
+}
+@media (max-width: 600px) {
+    #chapter-2 .roster-section { padding: 14px 10px; }
+    #chapter-2 .roster-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    #chapter-2 .roster-portrait-card { width: 100%; }
+    #chapter-2 .roster-portrait-info { min-height: 82px; padding: 10px 7px; }
+    #chapter-2 .roster-portrait-info strong { font-size: .98rem; }
+}
+@media (max-width: 380px) {
+    #chapter-2 .roster-grid { grid-template-columns: minmax(0, 1fr); }
+    #chapter-2 .roster-portrait-card { max-width: 270px; }
+}
