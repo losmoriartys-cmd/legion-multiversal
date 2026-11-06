@@ -62,7 +62,11 @@ Cada colaborador debe:
 |---|---|
 | `index.html` | Sitio y lógica de presentación/interacción (si esa estructura sigue vigente). |
 | `assets/` | Imágenes y recursos visuales. Confirmar siempre nombres y rutas reales. |
-| `data.json` | Datos generados por la automatización de Twitch. No editar manualmente salvo corrección acordada. |
+| `data.json` | Seguimiento automático de actividad Twitch (Helix). No editar manualmente salvo corrección acordada. |
+| `platform-registry.json` | Cuentas confirmadas por creador y plataforma (YouTube, Kick y futuras integraciones). |
+| `platform-stats.json` | Datos automáticos de YouTube/Kick, separados por plataforma, fuente y captura. |
+| `update_stats.py` | Colector Twitch Helix. |
+| `update_platform_stats.py` | Colectores YouTube Data API v3 y Kick Developer Public API. |
 | `INFORMES.md` | Bitácora vigente de intervenciones, validaciones y pendientes. |
 | `BITACORA.md` | Archivo histórico anterior a este protocolo. Se conserva como antecedente; no duplicar allí los nuevos informes. |
 | `README.md` | Reglas de colaboración y guía de entrada al proyecto. |
@@ -93,3 +97,31 @@ Marcar el despliegue como **exitoso** solo después de comprobar el workflow cor
 ## 8. Regla final
 
 **Primero leer, después modificar, luego registrar y finalmente verificar.** Ningún colaborador debe dar por hecho que otro conoce sus cambios si no quedaron reflejados en GitHub y documentados en el informe.
+
+
+## 9. Estadísticas multiplataforma
+
+El sistema admite creadores de directo y de video sin exigir una cuenta Twitch. Las métricas se conservan por plataforma; **no se suman seguidores, vistas, horas ni espectadores entre servicios**.
+
+- Twitch: `update_stats.py` → `data.json`.
+- YouTube y Kick: `update_platform_stats.py` → `platform-stats.json`.
+- Cuentas confirmadas: `platform-registry.json`. Para sumar un creador, agregar una clave estable y una entrada por plataforma con `platform` y `handle`. En Kick se usa el slug del canal; en YouTube se admite el handle `@...`.
+- Los perfiles que solo usan Kick o YouTube pueden formar parte del roster aunque no tengan Twitch. No crear identificadores ni handles por inferencia.
+
+### Secretos necesarios
+
+En GitHub → Settings → Secrets and variables → Actions:
+
+- `TWITCH_CLIENT_ID` y `TWITCH_CLIENT_SECRET` (ya utilizados por el colector Twitch).
+- `YOUTUBE_API_KEY` (proyecto con YouTube Data API v3 habilitada).
+- `KICK_CLIENT_ID` y `KICK_CLIENT_SECRET` (aplicación registrada en Kick Developer).
+
+Nunca guardar claves o tokens en JSON, código, informes o commits. Si una credencial no está configurada, el colector debe dejar constancia del estado pendiente en vez de inventar métricas.
+
+### Alcance actual y límites
+
+- YouTube: estadísticas públicas acumuladas del canal y hasta diez videos recientes. No equivale a Analytics privado del creador.
+- Kick: estado actual, espectadores, categoría y título de la transmisión. No reconstruye estadísticas históricas ni sustituye el panel de creador.
+- Twitch Helix: actividad pública observada. Las analíticas privadas e históricas del Creator Dashboard requieren autorización del creador o datos aportados por él.
+- SullyGnome y TwitchMetrics siguen como referencias históricas separadas; no se mezclan con APIs oficiales.
+
