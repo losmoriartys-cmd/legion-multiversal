@@ -2069,11 +2069,11 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
 <footer class="site-technical-footer"><span>LEGIÓN MULTIVERSAL · DIFERENTES MUNDOS. UNA MISMA LEGIÓN.</span><a href="mailto:losmoriartys@gmail.com?subject=Reporte%20t%C3%A9cnico%20del%20sitio">Reportar un problema técnico</a></footer>
 
     <!-- VENTANA MODAL / EXPEDIENTE INDIVIDUAL (PÁGINAS A, B, C) -->
-    <div class="modal-overlay" id="hero-modal" onclick="if(event.target === this) closeModal();">
-        <div class="modal-content">
+    <div class="modal-overlay" id="hero-modal" role="dialog" aria-modal="true" aria-labelledby="modal-hero-title" onclick="if(event.target === this) closeModal();">
+        <div class="modal-content" tabindex="-1">
             <div class="modal-header">
                 <h2 id="modal-hero-title">EXPEDIENTE DE HÉROE</h2>
-                <button class="close-modal-btn" onclick="closeModal()">X</button>
+                <button class="close-modal-btn" type="button" aria-label="Cerrar expediente" onclick="closeModal()">X</button>
             </div>
             <div class="modal-body">
                 <div class="modal-tabs" id="modal-tab-navigation">
@@ -3180,13 +3180,49 @@ function openHeroModal(index) {
     window.currentComicTotal=pages.length;
     document.getElementById('modal-twitch-btn').href = hero.youtube || hero.twitch || "#";
     document.getElementById('modal-twitch-btn').textContent = hero.youtube ? "VISITAR CANAL DE YOUTUBE" : "VISITAR CANAL";
+    window.lastModalTrigger = document.activeElement;
+    window.previousBodyOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
     modal.classList.add('active');
     switchModalTab(0, true);
     updateComicPageControls(true);
+    modal.querySelector('.close-modal-btn')?.focus();
 }
         function closeModal() {
-            document.getElementById('hero-modal').classList.remove('active');
+            const modal = document.getElementById('hero-modal');
+            if (!modal || !modal.classList.contains('active')) return;
+            modal.classList.remove('active');
+            document.body.style.overflow = window.previousBodyOverflow || '';
+            const trigger = window.lastModalTrigger;
+            window.lastModalTrigger = null;
+            if (trigger && typeof trigger.focus === 'function' && document.contains(trigger)) trigger.focus();
         }
+
+        document.addEventListener('keydown', function(event) {
+            const modal = document.getElementById('hero-modal');
+            if (!modal || !modal.classList.contains('active')) return;
+            if (event.key === 'Escape') {
+                event.preventDefault();
+                closeModal();
+                return;
+            }
+            if (event.key !== 'Tab') return;
+            const focusable = Array.from(modal.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])')).filter(el => el.offsetParent !== null);
+            if (!focusable.length) {
+                event.preventDefault();
+                modal.querySelector('.modal-content')?.focus();
+                return;
+            }
+            const first = focusable[0];
+            const last = focusable[focusable.length - 1];
+            if (event.shiftKey && (document.activeElement === first || !modal.contains(document.activeElement))) {
+                event.preventDefault();
+                last.focus();
+            } else if (!event.shiftKey && (document.activeElement === last || !modal.contains(document.activeElement))) {
+                event.preventDefault();
+                first.focus();
+            }
+        });
 
         function switchModalTab(tabIndex, silent = false) {
             const isComic=document.querySelector('.modal-content')?.classList.contains('comic-mode');
