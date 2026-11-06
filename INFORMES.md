@@ -1479,7 +1479,7 @@ Se añadieron tratamientos visuales individuales a los globos de voz de los diez
 - **Archivos modificados:** `index.html`, `INFORMES.md`.
 - **Recurso utilizado:** `og-legion-multiversal.jpg`, ya presente en la raíz del repositorio en `main`; se reutilizó sin moverlo ni duplicarlo.
 - **Implementado:** se agregó `og:image`, dimensiones declaradas (2048 × 1077), texto alternativo y metadatos de Twitter Cards con formato `summary_large_image`; se mantuvieron los metadatos generales, canonical y Open Graph existentes.
-- **Validaciones y resultados:** la ruta del archivo fue comprobada en el contenido del repositorio. Se verificará la publicación de Pages y la respuesta pública de la imagen después del commit de este informe. La actualización del preview en plataformas externas puede quedar sujeta a sus cachés.
+- **Validaciones y resultados:** la ruta del archivo fue comprobada en el contenido del repositorio. GitHub Pages publicó correctamente el commit de este informe: workflow [42249250007](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/42249250007), con build, deploy y reporte de estado en éxito. La presencia del archivo y los metadatos quedó confirmada en el repositorio; el navegador de verificación disponible no pudo abrir el dominio público para comprobar la respuesta HTTP directa de la imagen. La actualización del preview en plataformas externas puede quedar sujeta a sus cachés.
 - **Pendientes / riesgos:** no se realizó una prueba visual de las tarjetas en WhatsApp, Discord, X u otras plataformas; tampoco se verificó manualmente el recorte en cada una.
 - **Commit de implementación:** 460527a6044d36b2b6f3c2cf332838637d9448e5.
-- **Despliegue:** pendiente de verificación tras el commit del informe.
+- **Despliegue:** GitHub Pages exitoso; workflow 42249250007.
