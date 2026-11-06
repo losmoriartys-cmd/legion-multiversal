@@ -546,23 +546,175 @@
       "source": "SullyGnome",
       "source_url": "https://sullygnome.com/channel/akumazoldyck/2026/streams",
       "checked_at_utc": null,
-      "status": "pending",
+      "status": "partial",
       "period": {
-        "start_date": null,
-        "end_date": null
+        "start_date": "2026-10-24",
+        "end_date": "2026-11-06"
       },
-      "streams": [],
+      "streams": [
+        {
+          "date": "2026-11-06",
+          "start_time": "00:56",
+          "end_time": "02:45",
+          "duration_minutes": 109,
+          "hours_watched": 12,
+          "average_viewers": 7,
+          "peak_viewers": 13,
+          "followers_gain": 0,
+          "followers_per_hour": 0,
+          "games": [
+            "Fortnite"
+          ]
+        },
+        {
+          "date": "2026-11-05",
+          "start_time": "00:58",
+          "end_time": "03:00",
+          "duration_minutes": 122,
+          "hours_watched": 12,
+          "average_viewers": 6,
+          "peak_viewers": 17,
+          "followers_gain": 0,
+          "followers_per_hour": 0,
+          "games": [
+            "Just Chatting",
+            "Can 'Em All"
+          ]
+        },
+        {
+          "date": "2026-11-04",
+          "start_time": "00:50",
+          "end_time": "03:00",
+          "duration_minutes": 130,
+          "hours_watched": 4,
+          "average_viewers": 2,
+          "peak_viewers": 6,
+          "followers_gain": 0,
+          "followers_per_hour": 0,
+          "games": [
+            "Can 'Em All",
+            "Fortnite"
+          ]
+        },
+        {
+          "date": "2026-11-03",
+          "start_time": "00:38",
+          "end_time": "02:15",
+          "duration_minutes": 97,
+          "hours_watched": 12,
+          "average_viewers": 8,
+          "peak_viewers": 17,
+          "followers_gain": 0,
+          "followers_per_hour": 1,
+          "games": [
+            "Fortnite",
+            "Just Chatting",
+            "Among Us"
+          ]
+        },
+        {
+          "date": "2026-11-01",
+          "start_time": "02:45",
+          "end_time": "07:45",
+          "duration_minutes": 300,
+          "hours_watched": 15,
+          "average_viewers": 3,
+          "peak_viewers": 11,
+          "followers_gain": 1,
+          "followers_per_hour": 1,
+          "games": [
+            "Just Chatting",
+            "Fortnite",
+            "Among Us"
+          ]
+        },
+        {
+          "date": "2026-10-31",
+          "start_time": "00:54",
+          "end_time": "02:45",
+          "duration_minutes": 111,
+          "hours_watched": 12,
+          "average_viewers": 7,
+          "peak_viewers": 17,
+          "followers_gain": 0,
+          "followers_per_hour": 0,
+          "games": [
+            "Staged Open House"
+          ]
+        },
+        {
+          "date": "2026-10-30",
+          "start_time": "00:46",
+          "end_time": "02:30",
+          "duration_minutes": 104,
+          "hours_watched": 8,
+          "average_viewers": 5,
+          "peak_viewers": 9,
+          "followers_gain": 0,
+          "followers_per_hour": 0,
+          "games": [
+            "Rogue Legacy"
+          ]
+        },
+        {
+          "date": "2026-10-29",
+          "start_time": "00:54",
+          "end_time": "03:00",
+          "duration_minutes": 126,
+          "hours_watched": 6,
+          "average_viewers": 3,
+          "peak_viewers": 9,
+          "followers_gain": 1,
+          "followers_per_hour": 1,
+          "games": [
+            "Amenti",
+            "Fortnite"
+          ]
+        },
+        {
+          "date": "2026-10-28",
+          "start_time": "00:54",
+          "end_time": "02:15",
+          "duration_minutes": 81,
+          "hours_watched": 8,
+          "average_viewers": 6,
+          "peak_viewers": 15,
+          "followers_gain": 0,
+          "followers_per_hour": 0,
+          "games": [
+            "Just Chatting"
+          ]
+        },
+        {
+          "date": "2026-10-24",
+          "start_time": "17:55",
+          "end_time": "18:45",
+          "duration_minutes": 50,
+          "hours_watched": 25,
+          "average_viewers": 31,
+          "peak_viewers": 41,
+          "followers_gain": 1,
+          "followers_per_hour": 1,
+          "games": [
+            "Just Chatting"
+          ]
+        }
+      ],
       "summary": {
-        "streams_count": null,
-        "airtime_minutes": null,
-        "airtime_hours": null,
-        "hours_watched": null,
-        "average_viewers_duration_weighted": null,
-        "peak_viewers": null,
-        "followers_gain_reported": null
+        "streams_count": 10,
+        "airtime_minutes": 1230,
+        "airtime_hours": 20.5,
+        "hours_watched": 114,
+        "average_viewers_duration_weighted": 5.8,
+        "peak_viewers": 41,
+        "followers_gain_reported": 3
       },
       "notes": [
-        "Enlace del historial identificado; faltan las filas de transmisiones para cargar métricas verificadas."
+        "Diez transmisiones transcritas de la tabla de SullyGnome compartida por el creador; muestra parcial, no necesariamente el historial completo del canal.",
+        "Los horarios de inicio y fin se conservan tal como aparecen en SullyGnome; no se les asigna zona horaria porque la tabla aportada no la especifica.",
+        "El promedio ponderado por duración se calcula a partir de los promedios por transmisión; es un cálculo derivado, no una cifra agregada publicada directamente por SullyGnome.",
+        "Followers_gain_reported suma la columna Seguidores ganados de las diez filas compartidas. No equivale al total actual de seguidores del canal.",
+        "Los juegos se conservan por transmisión. La tabla aportada no incluye duración ni audiencia desglosada por juego, por lo que no se atribuyen métricas individuales a cada título."
       ]
     },
     {
