@@ -1135,3 +1135,22 @@ Se añadieron tratamientos visuales individuales a los globos de voz de los diez
 - **Criterios de transparencia:** Twitch y métricas de directo no aplican a este perfil. Las propuestas comerciales son posibilidades, no campañas ni acuerdos confirmados.
 - **Pendientes:** confirmar los títulos de los dos videos embebidos y actualizar las métricas cuando exista una nueva fecha de referencia; revisar visualmente la ficha publicada y el ajuste responsive.
 - **Despliegue:** los cambios se guardan en `main`; la publicación de GitHub Pages debe verificarse por separado.
+
+
+## 2026-11-06 — Separar fuentes y transparentar calidad de estadísticas
+
+- **Responsable:** colaboración ChatGPT + equipo del proyecto.
+- **Objetivo:** impedir que las métricas de Twitch Helix, TwitchMetrics y SullyGnome se presenten como equivalentes o se oculten entre sí; mostrar el período y la cobertura real del muestreo propio.
+- **Archivos modificados:** `index.html`, `INFORMES.md`.
+- **Implementado:**
+  - El panel individual ahora calcula la cobertura de Helix sobre el tramo realmente observado, usando el número de muestras capturadas frente a las que corresponderían al intervalo configurado.
+  - Se muestran primera y última observación, cobertura porcentual, separación mediana entre muestras y mayor hueco de recolección.
+  - Se diferencia el promedio de espectadores muestreado del promedio oficial del canal; el pico se etiqueta como observado y no oficial.
+  - TwitchMetrics y SullyGnome ahora aparecen como bloques independientes cuando hay registros para ambos. La presencia de TwitchMetrics ya no reemplaza ni oculta la ficha histórica de SullyGnome.
+  - Pato conserva su bloque de YouTube independiente: no se le asignan métricas Twitch.
+- **Hallazgos de auditoría:** el archivo Helix consultado contiene 65 muestras por canal entre el 3 y el 6 de noviembre de 2026, no una serie completa de 30 días. En el conjunto examinado, la separación mediana entre muestras es de aproximadamente 55 minutos y el mayor hueco supera 129 minutos, pese al objetivo de 15 minutos del workflow. Por eso los valores Helix deben leerse como observaciones parciales.
+- **Criterios de transparencia:** la cobertura se calcula únicamente dentro del intervalo entre la primera y última muestra disponible; no se presenta como porcentaje de los 30 días completos. No se combinan métricas de fuentes diferentes.
+- **Validaciones:** modificaciones de renderizado comprobadas estáticamente contra los datos y funciones actuales. Pendiente revisión visual de los expedientes y de la tabla institucional.
+- **Pendientes / riesgos:** investigar por qué GitHub Actions no sostiene la cadencia prevista; verificar y completar las filas originales de SullyGnome donde el estado es parcial o aportado por el creador; incorporar YouTube cuando exista una fuente verificable.
+- **Commit:** se registra en el historial de GitHub al aplicar esta actualización.
+- **Despliegue:** pendiente de ejecución y verificación del workflow de Pages.
