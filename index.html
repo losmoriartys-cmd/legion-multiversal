@@ -417,6 +417,7 @@
         .stats-source-head small, .stats-muted { color:#9aa9bf; font-size:.78rem; line-height:1.5; }
         .stats-status { display:inline-flex; align-items:center; gap:7px; padding:5px 9px; border:1px solid #53657d; background:#111a28; color:#dbeafe; font-size:.72rem; font-weight:800; letter-spacing:.5px; text-transform:uppercase; }
         .stats-status.partial { border-color:#a8792b; color:#ffd78a; }
+        .stats-status.verified { border-color:#347b65; color:#a8e5c9; }
         .stats-status.pending { border-color:#586579; color:#bdc8d8; }
         .stats-section { background:#111a28; border:1px solid #2b3a50; padding:16px; min-width:0; }
         .stats-section h4, .mission-section h4 { color:var(--yellow-accent); font-family:'Bangers',cursive; font-size:1.45rem; letter-spacing:.4px; margin-bottom:5px; }
@@ -2316,6 +2317,7 @@ function renderLosMoriartysSullyPilot(channel){
  return out;
 }
 function renderTwitchMetricsStats(channel){
+ if(!channel||!channel.login)return '';
  const profile=twitchMetricsData?.channels?.[channel.login];
  if(!profile)return '';
  const m=profile.metrics||{}, streams=Array.isArray(profile.recent_streams)?profile.recent_streams:[];
