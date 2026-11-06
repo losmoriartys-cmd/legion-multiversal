@@ -109,8 +109,9 @@ function renderTwitchMetricsStats(channel){
 function renderSullyStats(channel){
  if(channel.login==='losmoriartys')return renderLosMoriartysSullyPilot(channel);
  if(!channel)return '<div class="stats-empty"><strong>Historial no disponible</strong>No hay registros históricos cargados para este canal.</div>';
- const status=channel.status==='partial'?'partial':'pending';
- const statusLabel=channel.status==='partial'?'REGISTRO PARCIAL':'PENDIENTE DE DATOS';
+ const sourceStatus=channel.status||'pending';
+ const status=sourceStatus==='partial'?'partial':(sourceStatus==='user_supplied_summary'||sourceStatus==='user_supplied_annual_summary'?'partial':'pending');
+ const statusLabel=sourceStatus==='partial'?'REGISTRO PARCIAL':sourceStatus==='user_supplied_summary'?'RESUMEN APORTADO':sourceStatus==='user_supplied_annual_summary'?'RESUMEN ANUAL APORTADO':'PENDIENTE DE DATOS';
  const period=channel.period&&channel.period.start_date?
   statsDate(channel.period.start_date)+' — '+statsDate(channel.period.end_date):'Período todavía no disponible';
  let out='<section class="stats-section"><div class="stats-source-head"><div><strong>SULLYGNOME · HISTORIAL</strong><br><small>Fuente histórica externa · separada del muestreo propio</small></div><span class="stats-status '+status+'">'+statusLabel+'</span></div>';
@@ -126,7 +127,7 @@ function renderSullyStats(channel){
   if(changes.some(v=>v[1]!==null&&v[1]!==undefined)){
    out+='<div class="stats-mini-grid">'+changes.filter(v=>v[1]!==null&&v[1]!==undefined).map(v=>'<div class="stats-mini-card"><strong>VARIACIÓN · '+v[0].toUpperCase()+'</strong><span>'+statsNumber(v[1])+'% respecto de 2025</span></div>').join('')+'</div>';
   }
- }else if(channel.status==='partial'){
+ }else if(['partial','user_supplied_summary','user_supplied_annual_summary'].includes(sourceStatus)){
   out+='<div class="stats-kpis">';
   [['Transmisiones',x.streams_count,'informa la fuente'],['Tiempo emitido',x.airtime_minutes!==null&&x.airtime_minutes!==undefined?Math.floor(x.airtime_minutes/60)+' h '+(x.airtime_minutes%60)+' min':'—','informa la fuente'],['Horas vistas',x.hours_watched,'informa la fuente'],['Promedio',x.average_viewers_duration_weighted,'espectadores'],['Pico máximo',x.peak_viewers,'espectadores'],['Seguidores ganados',x.followers_gain_reported,'en el período']].forEach(k=>out+='<div class="stats-kpi"><span>'+k[0]+'</span><strong>'+escapeStatsHtml(k[1])+'</strong><em>'+k[2]+'</em></div>');
   out+='</div>';
