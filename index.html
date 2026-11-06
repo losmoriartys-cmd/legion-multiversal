@@ -2461,12 +2461,15 @@ function renderHelixDashboard(channel){
 function renderStatsDashboard(hero,helix,sully){
  let out='<div class="stats-dashboard">';
  out+='<div class="stats-source-head"><div><strong>ARCHIVO DE RENDIMIENTO · '+escapeStatsHtml(hero.name)+'</strong><br><small>Ficha individual · cada fuente conserva su propio período y metodología</small></div></div>';
- if(hero.youtube){
-  out+='<section class="stats-section"><h4>YOUTUBE · CANAL DEL CREADOR</h4><p class="stats-section-intro">Las métricas de YouTube se incorporarán por separado cuando haya una fuente pública verificable. No se mezclan con Twitch.</p><div class="stats-empty"><strong>Datos pendientes de verificación</strong>Canal: <a class="stats-link" href="'+escapeStatsHtml(hero.youtube)+'" target="_blank" rel="noopener">patoteexplica ↗</a></div></section>';
+ if(hero.youtube && !hero.twitch && !hero.kick){
+  out+=renderPlatformStats(hero);
+ }else if(!hero.twitch && hero.kick){
+  out+=renderPlatformStats(hero);
  }else{
   out+=renderHelixDashboard(helix);
   out+=renderSullyStats(sully);
   out+=renderTwitchMetricsStats(helix);
+  out+=renderPlatformStats(hero);
  }
  out+='</div>';return out;
 }
@@ -2516,10 +2519,48 @@ async function loadSullyGnomeData(){
 }
 
 let creatorRecordsData = null;
+let platformStatsData = null;
+async function loadPlatformStatsData(){
+ try{
+  const res=await fetch('platform-stats.json',{cache:'no-store'});
+  if(!res.ok)throw new Error('No se pudo leer platform-stats.json');
+  platformStatsData=await res.json();
+ }catch(e){console.warn('Platform statistics unavailable:',e);}
+}
+function renderPlatformStats(hero){
+ const key=creatorRecordKey(hero);
+ const profile=platformStatsData?.creators?.[key];
+ if(!profile || !profile.platforms)return '';
+ let out='';
+ Object.entries(profile.platforms).forEach(([platform,p])=>{
+  const title=platform==='youtube'?'YOUTUBE · DATOS PÚBLICOS DEL CANAL':platform==='kick'?'KICK · ACTIVIDAD DEL CANAL':platform.toUpperCase();
+  const status=p.status==='verified'?'FUENTE OFICIAL':p.status==='credentials_required'?'CONFIGURACIÓN PENDIENTE':p.status==='error'?'ERROR DE CONSULTA':'REFERENCIA';
+  out+='<section class="stats-section"><div class="stats-source-head"><div><strong>'+title+'</strong><br><small>Cuenta vinculada: '+escapeStatsHtml(p.handle||'—')+'</small></div><span class="stats-status '+(p.status==='verified'?'verified':'pending')+'">'+status+'</span></div>';
+  if(p.status!=='verified'){
+   out+='<div class="stats-empty"><strong>Datos automáticos todavía no disponibles</strong>'+escapeStatsHtml(p.note||'La cuenta está registrada, pero falta completar su configuración.')+'</div>';
+  }else if(platform==='youtube'){
+   const m=p.metrics||{};
+   out+='<p class="stats-section-intro">Captura: '+escapeStatsHtml(platformStatsData.updated_at||'fecha no disponible')+' · fuente: YouTube Data API v3. No se mezcla con estadísticas de streaming.</p><div class="pilot-lifetime-grid tm-metrics-grid">';
+   [['Suscriptores',m.subscribers],['Visualizaciones totales',m.total_views],['Videos publicados',m.videos_total]].forEach(v=>out+='<div class="pilot-metric"><span>'+v[0]+'</span><strong>'+statsNumber(v[1],0)+'</strong><small>Acumulado del canal</small></div>');
+   out+='</div>';
+   const videos=Array.isArray(p.recent_videos)?p.recent_videos:[];
+   if(videos.length){out+='<div class="stats-table-wrap"><table class="stats-table"><thead><tr><th>Video reciente</th><th>Publicado</th><th>Vistas</th></tr></thead><tbody>';videos.forEach(v=>out+='<tr><td><a class="stats-link" href="'+escapeStatsHtml(v.url)+'" target="_blank" rel="noopener">'+escapeStatsHtml(v.title)+'</a></td><td>'+escapeStatsHtml(v.published_at?v.published_at.slice(0,10):'—')+'</td><td class="num">'+statsNumber(v.views,0)+'</td></tr>');out+='</tbody></table></div>';}
+  }else if(platform==='kick'){
+   const m=p.metrics||{};
+   out+='<p class="stats-section-intro">Captura: '+escapeStatsHtml(platformStatsData.updated_at||'fecha no disponible')+' · fuente: Kick Developer Public API. La API permite consultar estado y audiencia actual; no equivale a historial completo.</p><div class="pilot-lifetime-grid tm-metrics-grid">';
+   [['Estado',m.live?'En directo':'Offline'],['Espectadores actuales',m.current_viewers],['Categoría',m.category],['Título',m.stream_title]].forEach(v=>out+='<div class="pilot-metric"><span>'+v[0]+'</span><strong>'+statsNumber(v[1],0)+'</strong><small>Última lectura</small></div>');
+   out+='</div>';
+  }
+  if(p.url)out+='<p class="stats-note">Fuente: <a class="stats-link" href="'+escapeStatsHtml(p.url)+'" target="_blank" rel="noopener">abrir canal en '+platform.toUpperCase()+' ↗</a>. '+escapeStatsHtml(p.methodology||'Cada métrica conserva su propia metodología.')+'</p>';
+  out+='</section>';
+ });
+ return out;
+}
 function creatorRecordKey(hero){
  if(hero && hero.youtube)return 'patoteexplica';
- if(!hero || !hero.twitch)return '';
- return hero.twitch.split('/').filter(Boolean).pop().toLowerCase();
+ if(hero && hero.twitch)return hero.twitch.split('/').filter(Boolean).pop().toLowerCase();
+ if(hero && hero.kick)return hero.kick.split('/').filter(Boolean).pop().toLowerCase();
+ return '';
 }
 function renderCreatorRecords(hero){
  const key=creatorRecordKey(hero);
@@ -2545,7 +2586,8 @@ function renderCreatorRecords(hero){
  lines.push('Los registros se incorporan con fecha y enlace/fuente comprobable; el lore del personaje se conserva separado de la trayectoria real.');
  return lines.join('\\n');
 }
-async function loadCreatorRecords(){
+async function loadCreatorRecords(),
+             loadPlatformStatsData(){
  try{
   const res=await fetch('creator-records.json',{cache:'no-store'});
   if(!res.ok)throw new Error('No se pudo leer creator-records.json');
