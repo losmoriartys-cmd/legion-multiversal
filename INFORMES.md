@@ -1389,3 +1389,14 @@ Se añadieron tratamientos visuales individuales a los globos de voz de los diez
 - **Pendiente de estructura:** el renderizador construye una página específica de juegos (`gamesPage`) pero no la incluye en el array final de seis páginas. Por eso la tabla de universos/juegos construida en esa página no se muestra en el expediente. No se añadió una séptima página ni se comprimió contenido en otra página sin validar el diseño; queda pendiente decidir y comprobar visualmente cómo integrar esa información conservando la legibilidad.
 - **Clips:** los dos IDs registrados para DAVE coinciden con los dos reproductores construidos. La reproducción real sigue pendiente de prueba en navegador.
 - **Validación:** se contrastaron los conteos de juegos contra las diez filas y se revisaron las cifras anuales y de muestra. La modificación se limita al conteo incorrecto y al horario no confirmado.
+
+## 2026-11-06 — Auditoría estática del dossier de HÁBITOS ATÓMICOS
+
+- **Responsable:** colaboración ChatGPT + equipo del proyecto.
+- **Archivos revisados:** `app.js`, `sullygnome-data.json`, `creator-records.json`, `roster-data.json`.
+- **Estructura:** el renderizador conserva seis páginas: portada, identidad, audiencia, categorías/juegos, clips y colaboraciones. Los cuatro IDs de clips y sus enlaces coinciden con los registros editoriales. Los títulos continúan como etiquetas neutrales, sin inventar descripciones de escenas.
+- **Resumen general:** 28 transmisiones, 124 horas emitidas, 472 horas vistas, promedio ponderado de 3 espectadores, pico de 29 (sin fecha atribuida) y +27 seguidores, para el período 6/10–5/11/2026.
+- **Diferencias entre resumen y desglose por categoría:** las categorías suman 120 horas emitidas frente a 124 del resumen; sus horas vistas suman 524 frente a 472 del resumen. La fila Solo charlando informa 474 horas vistas, incluso por encima del total general. Los porcentajes de tiempo suman 98,6% y los de horas vistas 99,6%. La interfaz ya advierte una diferencia entre 474 y 472, pero el total de todas las categorías también debe contrastarse. No se ajustaron cifras por inferencia.
+- **Bitácora:** `observed_rows_summary` declara 24 filas recibidas de 28 transmisiones, pero el array `streams` está vacío y el renderizador no construye una tabla de transmisiones individuales. Por lo tanto, el expediente actual presenta el resumen y el desglose por categoría, no una bitácora fila por fila.
+- **Cambios:** ninguno; los totales y el detalle por categoría requieren contraste con la fuente original antes de corregirlos. No se reconstruyeron las 24 filas ausentes.
+- **Pendientes:** conciliar horas emitidas y horas vistas del desglose, recuperar las filas individuales si se desea incorporar bitácora, y completar la revisión visual en escritorio/móvil y la reproducción real de los cuatro clips.
