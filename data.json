@@ -3,7 +3,7 @@
   "source": "Twitch Helix API",
   "window_days": 30,
   "sampling_interval_minutes": 15,
-  "updated_at": "2026-11-06T02:44:34Z",
+  "updated_at": "2026-11-06T03:35:35Z",
   "channels": {
     "ladymoriarty01": {
       "login": "ladymoriarty01",
@@ -18,9 +18,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-06T02:44:34Z",
+      "updated_at": "2026-11-06T03:35:35Z",
       "window": {
-        "samples_total": 62,
+        "samples_total": 63,
         "live_samples": 5,
         "streams_observed": 2,
         "average_viewers_sampled": 5.4,
@@ -626,6 +626,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-06T03:35:35Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -638,16 +647,16 @@
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
       "live": true,
-      "current_viewers": 11,
-      "current_game": "Apex Legends",
+      "current_viewers": 8,
+      "current_game": "Just Chatting",
       "current_title": "🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
       "stream_started_at": "2026-11-05T22:56:39Z",
-      "updated_at": "2026-11-06T02:44:34Z",
+      "updated_at": "2026-11-06T03:35:35Z",
       "window": {
-        "samples_total": 62,
-        "live_samples": 14,
+        "samples_total": 63,
+        "live_samples": 15,
         "streams_observed": 3,
-        "average_viewers_sampled": 19.0,
+        "average_viewers_sampled": 18.3,
         "peak_viewers_sampled": 40,
         "observed_live_hours": 0.0,
         "estimated_hours_watched": 0.0,
@@ -668,9 +677,9 @@
           },
           {
             "name": "Just Chatting",
-            "live_samples": 2,
+            "live_samples": 3,
             "streams_observed": 2,
-            "average_viewers_sampled": 4.5,
+            "average_viewers_sampled": 5.7,
             "peak_viewers_sampled": 8
           },
           {
@@ -712,9 +721,9 @@
           },
           {
             "date": "2026-11-06",
-            "live_samples": 3,
+            "live_samples": 4,
             "streams_observed": 1,
-            "average_viewers_sampled": 22.3,
+            "average_viewers_sampled": 18.8,
             "peak_viewers_sampled": 40
           }
         ],
@@ -1278,6 +1287,15 @@
           "title": "🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
           "stream_id": "319433849333",
           "started_at": "2026-11-05T22:56:39Z"
+        },
+        {
+          "sampled_at": "2026-11-06T03:35:35Z",
+          "is_live": true,
+          "viewer_count": 8,
+          "game_name": "Just Chatting",
+          "title": "🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
+          "stream_id": "319433849333",
+          "started_at": "2026-11-05T22:56:39Z"
         }
       ]
     },
@@ -1294,9 +1312,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-06T02:44:34Z",
+      "updated_at": "2026-11-06T03:35:35Z",
       "window": {
-        "samples_total": 62,
+        "samples_total": 63,
         "live_samples": 2,
         "streams_observed": 2,
         "average_viewers_sampled": 7.0,
@@ -1895,6 +1913,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-06T03:35:35Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -1906,14 +1933,14 @@
       "twitch_url": "https://twitch.tv/ardipii",
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
-      "live": true,
-      "current_viewers": 5,
-      "current_game": "Just Chatting",
-      "current_title": "Tenemos 346 seguidores, dia 10 de 30 jugando al streamer!",
-      "stream_started_at": "2026-11-06T01:56:05Z",
-      "updated_at": "2026-11-06T02:44:34Z",
+      "live": false,
+      "current_viewers": null,
+      "current_game": null,
+      "current_title": null,
+      "stream_started_at": null,
+      "updated_at": "2026-11-06T03:35:35Z",
       "window": {
-        "samples_total": 62,
+        "samples_total": 63,
         "live_samples": 4,
         "streams_observed": 2,
         "average_viewers_sampled": 6.0,
@@ -2505,6 +2532,15 @@
           "title": "Tenemos 346 seguidores, dia 10 de 30 jugando al streamer!",
           "stream_id": "321046841820",
           "started_at": "2026-11-06T01:56:05Z"
+        },
+        {
+          "sampled_at": "2026-11-06T03:35:35Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -2516,14 +2552,14 @@
       "twitch_url": "https://twitch.tv/akumazoldyck",
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
-      "live": true,
-      "current_viewers": 7,
-      "current_game": "Fortnite",
-      "current_title": "seguimos buscando el one pice!!!!",
-      "stream_started_at": "2026-11-06T00:56:08Z",
-      "updated_at": "2026-11-06T02:44:34Z",
+      "live": false,
+      "current_viewers": null,
+      "current_game": null,
+      "current_title": null,
+      "stream_started_at": null,
+      "updated_at": "2026-11-06T03:35:35Z",
       "window": {
-        "samples_total": 62,
+        "samples_total": 63,
         "live_samples": 8,
         "streams_observed": 3,
         "average_viewers_sampled": 6.4,
@@ -3129,6 +3165,15 @@
           "title": "seguimos buscando el one pice!!!!",
           "stream_id": "322283031515",
           "started_at": "2026-11-06T00:56:08Z"
+        },
+        {
+          "sampled_at": "2026-11-06T03:35:35Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -3140,14 +3185,14 @@
       "twitch_url": "https://twitch.tv/daved0608",
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
-      "live": true,
-      "current_viewers": 1,
-      "current_game": "Fortnite",
-      "current_title": "Buscando el one pice.",
-      "stream_started_at": "2026-11-06T01:13:09Z",
-      "updated_at": "2026-11-06T02:44:34Z",
+      "live": false,
+      "current_viewers": null,
+      "current_game": null,
+      "current_title": null,
+      "stream_started_at": null,
+      "updated_at": "2026-11-06T03:35:35Z",
       "window": {
-        "samples_total": 62,
+        "samples_total": 63,
         "live_samples": 7,
         "streams_observed": 3,
         "average_viewers_sampled": 1.3,
@@ -3753,6 +3798,15 @@
           "title": "Buscando el one pice.",
           "stream_id": "321197663584",
           "started_at": "2026-11-06T01:13:09Z"
+        },
+        {
+          "sampled_at": "2026-11-06T03:35:35Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -3769,9 +3823,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-06T02:44:34Z",
+      "updated_at": "2026-11-06T03:35:35Z",
       "window": {
-        "samples_total": 62,
+        "samples_total": 63,
         "live_samples": 0,
         "streams_observed": 0,
         "average_viewers_sampled": null,
@@ -4340,6 +4394,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-06T03:35:35Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -4356,9 +4419,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-06T02:44:34Z",
+      "updated_at": "2026-11-06T03:35:35Z",
       "window": {
-        "samples_total": 62,
+        "samples_total": 63,
         "live_samples": 5,
         "streams_observed": 2,
         "average_viewers_sampled": 1.8,
@@ -4957,6 +5020,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-06T03:35:35Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -4973,9 +5045,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-06T02:44:34Z",
+      "updated_at": "2026-11-06T03:35:35Z",
       "window": {
-        "samples_total": 62,
+        "samples_total": 63,
         "live_samples": 3,
         "streams_observed": 1,
         "average_viewers_sampled": 19.0,
@@ -5561,6 +5633,15 @@
         },
         {
           "sampled_at": "2026-11-06T02:44:34Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-06T03:35:35Z",
           "is_live": false,
           "viewer_count": null,
           "game_name": null,
