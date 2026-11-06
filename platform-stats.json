@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-06T06:22:49Z",
+  "updated_at": "2026-11-06T06:35:21Z",
   "methodology": "Las métricas se conservan por creador y plataforma. No sumar ni comparar directamente unidades de plataformas distintas.",
   "creators": {
     "patoteexplica": {
@@ -10,16 +10,79 @@
           "platform": "youtube",
           "handle": "@patoteexplica",
           "url": "https://www.youtube.com/@patoteexplica",
-          "status": "credentials_required",
+          "display_name": "Patricio Santos",
+          "thumbnail_url": "https://yt3.ggpht.com/5IfMo9I0MXu8cqQjNbLKqeys8ESbWr8qQ0_wq3IjDml0EdGZDe3uqg63ZOZ4SBIIHmtnOiayyg=s800-c-k-c0x00ffffff-no-rj",
+          "metrics": {
+            "subscribers": 56,
+            "total_views": 430,
+            "videos_total": 6
+          },
+          "recent_videos": [
+            {
+              "video_id": "iX9dw_fYHg8",
+              "title": "Dopamina, motivación y adicción: Qué es y cómo funciona",
+              "published_at": "2025-05-01T00:20:31Z",
+              "views": 47,
+              "likes": 6,
+              "comments": 1,
+              "url": "https://www.youtube.com/watch?v=iX9dw_fYHg8"
+            },
+            {
+              "video_id": "kD6OQ59_RxQ",
+              "title": "Uniendo Javascript y HTML. Curso HTML + Javascript (5/5)",
+              "published_at": "2025-01-09T10:14:14Z",
+              "views": 75,
+              "likes": 11,
+              "comments": 2,
+              "url": "https://www.youtube.com/watch?v=kD6OQ59_RxQ"
+            },
+            {
+              "video_id": "6iTtFtLYTXc",
+              "title": "Javascript Mapping y Filtering. Curso HTML + Javascript (4/5)",
+              "published_at": "2025-01-09T10:03:06Z",
+              "views": 58,
+              "likes": 10,
+              "comments": 1,
+              "url": "https://www.youtube.com/watch?v=6iTtFtLYTXc"
+            },
+            {
+              "video_id": "5Ky01F9RwP0",
+              "title": "Javascript segunda clase. Curso HTML + Javascript (3/5)",
+              "published_at": "2025-01-09T09:50:10Z",
+              "views": 50,
+              "likes": 12,
+              "comments": 2,
+              "url": "https://www.youtube.com/watch?v=5Ky01F9RwP0"
+            },
+            {
+              "video_id": "FT3OksHauPA",
+              "title": "Tu primera clase de Javascript. Curso HTML + Javascript (2/5)",
+              "published_at": "2025-01-09T09:22:04Z",
+              "views": 43,
+              "likes": 9,
+              "comments": 1,
+              "url": "https://www.youtube.com/watch?v=FT3OksHauPA"
+            },
+            {
+              "video_id": "WmtAu_JU99M",
+              "title": "Tu primera página HTML en menos de una hora. Curso HTML + Javascript (1/5)",
+              "published_at": "2025-01-09T08:55:45Z",
+              "views": 157,
+              "likes": 20,
+              "comments": 6,
+              "url": "https://www.youtube.com/watch?v=WmtAu_JU99M"
+            }
+          ],
           "source": "YouTube Data API v3",
-          "note": "Falta el secreto YOUTUBE_API_KEY."
+          "status": "verified",
+          "methodology": "Datos públicos acumulados del canal y hasta 10 videos recientes. El contador de suscriptores puede estar redondeado por YouTube."
         }
       }
     }
   },
   "collection_status": {
-    "youtube": "awaiting_secret",
+    "youtube": "enabled",
     "kick": "awaiting_secrets",
-    "captured_at": "2026-11-06T06:22:49Z"
+    "captured_at": "2026-11-06T06:35:21Z"
   }
 }
