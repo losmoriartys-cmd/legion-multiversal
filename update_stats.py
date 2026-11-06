@@ -7,8 +7,8 @@ from datetime import datetime, timedelta, timezone
 CLIENT_ID = os.environ.get("TWITCH_CLIENT_ID") or "ec7tx8ufdef9v9b13dtde93g1zbts9"
 CLIENT_SECRET = os.environ.get("TWITCH_CLIENT_SECRET")
 CHANNELS = [
-    "losmoriartys", "ladymoriarty01", "ther0d3r1k", "elgabii090",
-    "capyunaplay", "habitos_atomicos", "ardipii", "akumazoldyck", "daved0608"
+    "losmoriartys", "ladymoriarty01", "ther0d3r1k",
+    "habitos_atomicos", "ardipii", "akumazoldyck", "daved0608"
 ]
 WINDOW_DAYS = 30
 SAMPLE_INTERVAL_MINUTES = 15
@@ -186,6 +186,9 @@ def main():
         "source": "Twitch Helix API",
         "window_days": WINDOW_DAYS,
         "sampling_interval_minutes": SAMPLE_INTERVAL_MINUTES,
+        "active_channels": CHANNELS,
+        "archived_channels": [login for login in channel_data if login not in CHANNELS],
+        "channel_registry_note": "Los canales archivados se conservan para consulta histórica y no se incluyen en los indicadores del roster activo.",
         "updated_at": now_iso,
         "channels": channel_data
     }
