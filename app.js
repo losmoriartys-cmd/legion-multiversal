@@ -556,10 +556,22 @@ function renderRoster() {
 
             const back = document.createElement('div');
             back.className = 'roster-card-face roster-card-back';
-            back.innerHTML = '<div class="roster-card-back-top"><span>LEGIÓN MULTIVERSAL</span><b>N.º ' + safeNumber + '</b></div>' +
+            const heroArt = document.createElement('img');
+            heroArt.className = 'roster-card-back-art';
+            heroArt.src = hero.img || hero.portrait;
+            heroArt.alt = 'Ilustración completa de ' + hero.name;
+            heroArt.loading = 'lazy';
+            heroArt.onerror = () => { heroArt.hidden = true; back.classList.add('back-art-missing'); };
+            const backShade = document.createElement('span');
+            backShade.className = 'roster-card-back-shade';
+            backShade.setAttribute('aria-hidden', 'true');
+            const backContent = document.createElement('div');
+            backContent.className = 'roster-card-back-content';
+            backContent.innerHTML = '<div class="roster-card-back-top"><span>LEGIÓN MULTIVERSAL</span><b>N.º ' + safeNumber + '</b></div>' +
                 '<div class="roster-card-back-identity"><small>IDENTIDAD / DESIGNACIÓN</small><h4>' + safeName + '</h4><p>' + safeIdentity + '</p></div>' +
                 '<dl class="roster-card-facts"><div><dt>CLASIFICACIÓN</dt><dd>' + safeClassification + '</dd></div><div><dt>FUNCIÓN EN LA LEGIÓN</dt><dd>' + safeRole + '</dd></div><div><dt>PERFIL DE CREACIÓN</dt><dd>' + safeType + '</dd></div></dl>' +
                 '<p class="roster-card-back-bio">' + safeBio + '</p>';
+            back.append(heroArt, backShade, backContent);
             const backActions = document.createElement('div');
             backActions.className = 'roster-card-back-actions';
             const openLog = document.createElement('button');
@@ -577,7 +589,7 @@ function renderRoster() {
                 front.focus();
             });
             backActions.append(openLog, flipBack);
-            back.appendChild(backActions);
+            backContent.appendChild(backActions);
 
             front.addEventListener('click', () => {
                 card.classList.add('is-flipped');
