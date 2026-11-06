@@ -1,0 +1,38 @@
+name: Validar código y datos del sitio
+
+on:
+  push:
+    paths:
+      - 'app.js'
+      - 'index.html'
+      - '*.json'
+      - '.github/workflows/validar-sitio.yml'
+  pull_request:
+    paths:
+      - 'app.js'
+      - 'index.html'
+      - '*.json'
+      - '.github/workflows/validar-sitio.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Comprobar sintaxis JavaScript
+        run: node --check app.js
+      - name: Validar archivos JSON
+        run: |
+          for file in ./*.json; do
+            echo "Validando $file"
+            python -m json.tool "$file" > /dev/null
+          done
