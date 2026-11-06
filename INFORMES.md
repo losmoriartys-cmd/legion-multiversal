@@ -1438,3 +1438,23 @@ Se añadieron tratamientos visuales individuales a los globos de voz de los diez
 - **Corrección estadística:** se ajustó el cálculo de mediana de intervalos para promediar los dos valores centrales cuando el número de intervalos es par. Se aplica tanto al panel especial de MORIARTYS como al panel Helix general.
 - **Cambios de datos:** ninguno. Se mantienen separados los resúmenes, muestras parciales y fuentes históricas.
 - **Pendientes:** revisar visualmente el capítulo de estadísticas en escritorio y móvil; contrastar las diferencias de totales ya documentadas para AKUMA, ARDIPII y HÁBITOS ATÓMICOS; verificar la cadencia real del cron desplazado en las próximas ejecuciones.
+
+## 2026-11-06 — Auditoría estática inicial de la publicación y consolidación de controles programados
+
+- **Responsable:** colaboración ChatGPT + equipo del proyecto.
+- **Objetivo:** continuar la auditoría integral de presentación, integridad y funcionamiento de Legión Multiversal.
+- **Publicación consultada:** https://losmoriartys-cmd.github.io/legion-multiversal/
+- **Verificaciones realizadas:**
+  - La página pública respondió a la extracción de contenido y entregó su estructura HTML, enlaces e imágenes.
+  - El HTML principal contiene 43 identificadores sin duplicados, 16 imágenes con atributo `alt`, 15 enlaces con destino y 8 referencias locales que existen en el árbol actual del repositorio.
+  - La validación automatizada del proyecto concluyó correctamente en el workflow [42243756121](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/42243756121): sintaxis JavaScript, JSON, rutas, imágenes y enlaces declarados.
+  - Se verificó que el workflow de estadísticas quedó configurado en los minutos 07, 22, 37 y 52 de cada hora, manteniendo intervalos nominales de 15 minutos y evitando el inicio exacto de la hora. La frecuencia efectiva todavía requiere observación de nuevas ejecuciones `schedule`.
+  - El último despliegue consultado [42243763839](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/42243763839) terminó con `success`.
+- **Hallazgos pendientes:**
+  - `index.html` no incluye meta descripción ni metadatos Open Graph/Twitter para vistas previas al compartir. Evaluar su incorporación.
+  - La portada utiliza la imagen `PortadaNueva-seguis-agregando-a-este-que-no-existe-en-el-roster.jpg` como formación actual. La ruta existe, pero la correspondencia visual de las personas representadas con el roster activo no queda validada por el chequeo de rutas; requiere inspección visual.
+  - La extracción HTML no sustituye una inspección visual real de escritorio y móvil, ni permite comprobar interacción, reproducción de clips, consola del navegador o foco efectivo.
+- **Limitación de pruebas:** el modo estricto de automatización visual no está disponible en esta cuenta. Antes de repetir la auditoría con el modo de navegador estándar, se solicitará confirmación al usuario.
+- **Automatizaciones de seguimiento:** se pausó la tarea semanal separada de salud web y sus controles se integraron a la revisión semanal del proyecto, evitando duplicación. Se creó la tarea diaria de vigilancia de la cadencia real del colector Twitch.
+- **Archivos de sitio modificados:** ninguno en esta etapa.
+- **Despliegue:** no se requirió un nuevo despliegue por esta auditoría documental.
