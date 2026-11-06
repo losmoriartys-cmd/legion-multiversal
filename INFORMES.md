@@ -1428,3 +1428,13 @@ Se añadieron tratamientos visuales individuales a los globos de voz de los diez
 - **Contexto de plataforma:** la documentación oficial de GitHub indica que los eventos programados pueden retrasarse o descartarse con alta carga y señala el comienzo de cada hora como un momento de congestión. Recomienda desplazar la programación a otro minuto. Esto es compatible con el patrón observado, pero no permite conocer el estado interno de cada evento ni probar una causa específica.
 - **Mitigación aplicada:** se mantiene una separación objetivo de 15 minutos, desplazando el cron de `*/15 * * * *` a `7,22,37,52 * * * *` para evitar el minuto 00 y distribuir las ejecuciones fuera del inicio de hora.
 - **Validación pendiente:** observar varias ejecuciones programadas después del cambio y comparar sus marcas de creación, intervalos entre muestras y cobertura. La modificación es una mitigación, no una garantía de puntualidad ni una confirmación de que la causa haya sido eliminada.
+
+## 2026-11-06 — Auditoría y ajuste del renderizador general de estadísticas
+
+- **Responsable:** colaboración ChatGPT + equipo del proyecto.
+- **Archivos revisados/modificados:** `app.js`, `data.json`, `sullygnome-data.json`, `twitchmetrics-data.json`.
+- **Roster y cobertura:** los siete canales Twitch activos declarados por el roster coinciden exactamente con `active_channels`. Capy y Gabi siguen en el archivo histórico, no en la lista activa. El panel distingue la ventana máxima de 30 días de la cobertura real y las muestras disponibles.
+- **Correcciones de presentación:** el mensaje de bitácora vacía ya no afirma que todos los canales tienen 28 transmisiones pendientes; informa si no hay filas individuales cargadas y, para HÁBITOS ATÓMICOS, conserva la distinción entre 24 filas reportadas y 28 transmisiones agregadas. El resumen de filas observadas ahora se muestra solo cuando existe un resumen anual, y convierte `duration_minutes` a horas para el acumulado anual de DAVE.
+- **Corrección estadística:** se ajustó el cálculo de mediana de intervalos para promediar los dos valores centrales cuando el número de intervalos es par. Se aplica tanto al panel especial de MORIARTYS como al panel Helix general.
+- **Cambios de datos:** ninguno. Se mantienen separados los resúmenes, muestras parciales y fuentes históricas.
+- **Pendientes:** revisar visualmente el capítulo de estadísticas en escritorio y móvil; contrastar las diferencias de totales ya documentadas para AKUMA, ARDIPII y HÁBITOS ATÓMICOS; verificar la cadencia real del cron desplazado en las próximas ejecuciones.
