@@ -1003,3 +1003,15 @@ Se incorporó una frase de voz propia para cada integrante y para el expediente 
 Se añadieron tratamientos visuales individuales a los globos de voz de los diez expedientes (MORIARTYS y los nueve integrantes). Cada uno conserva el mismo componente editorial y legibilidad, pero recibe una combinación propia de tonos, borde y motivo geométrico de fondo. Las diferencias son sutiles y coherentes con el universo común; no sustituyen ni alteran las ilustraciones oficiales.
 
 **Alcance:** estilos CSS y clases por personaje en `index.html`. Sin cambios en poderes, biografías, frases, ilustraciones, estadísticas ni fichas comerciales.
+
+
+## 2026-11-06 · Expediente de ARDIPII en seis páginas
+
+- **Responsable:** ChatGPT, en colaboración con el equipo de Legión Multiversal.
+- **Objetivo:** completar el media kit individual de ARDIPII con la misma estructura editorial de seis páginas utilizada en otros expedientes.
+- **Archivos modificados:** `index.html`, `sullygnome-data.json`, `creator-records.json`, `INFORMES.md`.
+- **Implementado:** renderer específico de seis páginas para ARDIPII; identidad institucional masculina como Docente, diferenciada del rango narrativo SOMBRA; métricas del período 6 oct–5 nov 2026; selección de diez juegos proporcionada por el creador; ocho filas de transmisiones dentro del período; cuatro embeds de clips con títulos neutrales; página comercial con formatos potenciales claramente diferenciados de colaboraciones confirmadas.
+- **Validaciones y resultados:** el resumen agregado informado es 8 transmisiones, 11 h emitidas, 121 h vistas, 11 espectadores promedio, pico de 31 y +83 seguidores. Se excluyó la fila del 6 nov porque está fuera de la ventana. Los datos fueron transcritos de material compartido por el creador y quedan pendientes de contraste visual directo con SullyGnome. Los títulos de los clips no se inventaron.
+- **Pendientes / riesgos:** comprobar visualmente la distribución de las seis páginas en el sitio publicado; confirmar descripciones de los cuatro clips si se desean títulos específicos.
+- **Commit:** actualizaciones independientes en `main`; commits de contenido registrados por GitHub.
+- **Despliegue:** pendiente de verificación del workflow de GitHub Pages.
