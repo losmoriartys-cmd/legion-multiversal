@@ -2436,3 +2436,52 @@ body {
         opacity: .42;
     }
 }
+
+
+/* EXPEDIENTE INDIVIDUAL · portada editorial con la ilustración oficial existente */
+.hero-profile-gateway {
+    display: grid; grid-template-columns: minmax(230px, .78fr) minmax(0, 1.22fr);
+    align-items: center; gap: clamp(24px, 4vw, 48px); max-width: 1080px;
+    padding: clamp(14px, 2vw, 26px); position: relative; isolation: isolate;
+}
+.hero-profile-gateway::before {
+    content: ""; position: absolute; inset: 0; z-index: -1;
+    border: 1px solid rgba(108,191,221,.28);
+    background: linear-gradient(135deg,rgba(10,24,43,.94),rgba(18,13,39,.88));
+    box-shadow: 0 24px 60px rgba(0,0,0,.28),inset 0 0 36px rgba(44,145,190,.08);
+}
+.hero-profile-art-wrap { width: 100%; max-width: 390px; margin: 0 auto; }
+.hero-profile-art-frame {
+    position: relative; overflow: hidden; aspect-ratio: 3 / 4; border: 1px solid rgba(151,220,241,.72);
+    padding: 8px; background: linear-gradient(145deg,#d6bd82,#293e58 28%,#111b2e 62%,#7652a4);
+    box-shadow: 0 16px 34px rgba(0,0,0,.48),0 0 24px rgba(62,180,221,.16);
+}
+.hero-profile-art-frame::before {
+    content: ""; position: absolute; inset: 8px; z-index: 2; pointer-events: none;
+    border: 1px solid rgba(218,239,247,.58);
+    background: linear-gradient(125deg,rgba(255,255,255,.16),transparent 27%,transparent 70%,rgba(108,203,240,.12));
+}
+.hero-profile-art { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 22%; }
+.hero-profile-art-stamp,.hero-profile-art-caption {
+    position: absolute; z-index: 3; color: #f1e5c5; font-weight: 900; letter-spacing: 1.4px; text-shadow: 0 2px 8px #000;
+}
+.hero-profile-art-stamp { top: 20px; left: 20px; font-size: .68rem; line-height: 1.15; }
+.hero-profile-art-caption {
+    right: 17px; bottom: 17px; left: 17px; padding: 9px 10px; text-align: center; font-size: .72rem;
+    background: linear-gradient(90deg,transparent,rgba(5,12,24,.9) 16%,rgba(5,12,24,.9) 84%,transparent);
+}
+.hero-profile-art-fallback { height: 100%; display: grid; place-items: center; color: #d5deea; text-align: center; font-weight: 800; }
+.hero-profile-art-frame.art-unavailable { background: #101c2d; }
+.hero-profile-gateway .hero-profile-copy { max-width: 100%; margin: 0; text-align: left; }
+.hero-profile-gateway .hero-profile-copy h3 { color: #d8f4ff; text-shadow: 0 3px 18px rgba(47,178,218,.25); }
+.hero-profile-gateway .hero-profile-actions { justify-content: flex-start; }
+@media (max-width: 700px) {
+    .hero-profile-gateway { grid-template-columns: minmax(0,1fr); gap: 22px; padding: 14px; }
+    .hero-profile-art-wrap { max-width: min(78%,320px); }
+    .hero-profile-gateway .hero-profile-copy { text-align: center; }
+    .hero-profile-gateway .hero-profile-actions { justify-content: center; }
+}
+@media (prefers-reduced-motion: no-preference) {
+    .hero-profile-art-frame { transition: transform .35s ease,box-shadow .35s ease; }
+    .hero-profile-art-frame:hover { transform: translateY(-4px); box-shadow: 0 22px 42px rgba(0,0,0,.52),0 0 30px rgba(62,180,221,.22); }
+}
