@@ -104,6 +104,18 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Commit:** se registra al completar esta intervención.
 - **Despliegue:** pendiente de verificar GitHub Pages.
 
+## 2026-11-06 — Verificación de normalización de perfiles y separación del archivo histórico
+
+- **Responsable:** colaboración ChatGPT + equipo del proyecto.
+- **Objetivo:** comprobar que rol institucional, tipo de creador, plataformas y canales activos estén alineados después de los cambios del Roster.
+- **Archivos revisados:** `roster-data.json`, `data.json`, `app.js`.
+- **Validaciones de datos:** los ocho perfiles activos tienen un rol permitido (`director`, `teacher`, `student`, `collaborator`) y un tipo válido (`live_streamer` o `video_creator`). La correspondencia entre tipo, plataforma declarada y URL de canal es consistente en los ocho registros.
+- **Roster y archivo:** se mantienen ocho fichas activas. Capy (`capyunaplay`) y Gabi (`elgabii090`) figuran en `archived_channels` y no aparecen en `roster-data.json`. La lista de siete canales activos coincide con los perfiles que declaran Twitch; Pato — Oratoris conserva YouTube, Instagram y Cafecito como presencia digital, sin incorporarse al colector Twitch.
+- **Presentación:** el renderizador del Roster agrupa por rol institucional, independiente del tipo de creador. La prueba funcional publicada anterior confirmó los cuatro grupos y ocho tarjetas.
+- **Pendientes / riesgos:** los ocho estados `activity_status` siguen en `not_assessed`. Se conserva así deliberadamente hasta recibir confirmación actualizada de cada creador; no se infiere inactividad por falta de muestras.
+- **Cambios de código:** ninguno; la verificación no encontró inconsistencias que justifiquen alterar datos.
+- **Despliegue:** no se requirió un nuevo despliegue.
+
 ## 2026-11-06 — Separar roster activo del archivo histórico y transparentar cobertura Twitch
 
 - **Responsable:** colaboración ChatGPT + equipo del proyecto.
