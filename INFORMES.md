@@ -1044,3 +1044,20 @@ Se añadieron tratamientos visuales individuales a los globos de voz de los diez
   - Se conserva la identidad narrativa NEXUS / EL NEXO y su conjunto de poderes.
 - **Validaciones:** perfil de Dave, rango, horario y texto del expediente comprobados en el archivo actualizado de `main`.
 - **Pendientes / riesgos:** comprobar visualmente la carta y las seis páginas en GitHub Pages; el despliegue no se declara verificado.
+
+
+## 2026-11-06 — Expediente de PATO — ORATORIS como colaborador audiovisual
+
+- **Objetivo:** diferenciar el expediente de Pato de los perfiles de streaming y presentarlo como creador audiovisual educativo en YouTube.
+- **Archivos modificados:** `index.html`, `creator-records.json`, `INFORMES.md`.
+- **Implementado:**
+  - Se conserva su identidad PATO — ORATORIS, el rol institucional **COLABORADOR** y su carta existente.
+  - Se incorpora un renderer editorial propio de siete páginas: portada, identidad y propósito, referencia de alcance, archivo de producciones, videos destacados, nueva etapa y propuesta comercial.
+  - Se transcriben seis publicaciones compartidas: cinco partes de un curso de HTML/JavaScript y un video sobre dopamina, motivación y adicción, con sus visualizaciones informadas.
+  - Se agregan dos reproductores de YouTube mediante los identificadores aportados. Sus títulos quedan pendientes de identificar; no se inventan.
+  - Se registran como referencia histórica 56 suscriptores, 6 videos y 430 visualizaciones. La fecha de captura no fue indicada, por lo que no se presentan como métricas actuales.
+  - Se documenta que no tiene frecuencia de publicación definida y que posiblemente retome el canal durante 2027 con un enfoque renovado. La temática gamer queda descrita como posible línea complementaria futura, no como especialidad actual.
+  - Se incorporan los enlaces públicos de YouTube, Instagram y Cafecito.
+- **Criterios de transparencia:** Twitch y métricas de directo no aplican a este perfil. Las propuestas comerciales son posibilidades, no campañas ni acuerdos confirmados.
+- **Pendientes:** confirmar los títulos de los dos videos embebidos y actualizar las métricas cuando exista una nueva fecha de referencia; revisar visualmente la ficha publicada y el ajuste responsive.
+- **Despliegue:** los cambios se guardan en `main`; la publicación de GitHub Pages debe verificarse por separado.
