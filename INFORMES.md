@@ -1358,3 +1358,13 @@ Se añadieron tratamientos visuales individuales a los globos de voz de los diez
 - **Pendientes / riesgos:** la página utiliza renderizadores especializados para varios integrantes; continuar el contraste visual de cada expediente y revisar diferencias conocidas entre resúmenes y desgloses antes de cambiar cifras. La discrepancia de Hábitos entre 472 horas vistas en el resumen y 474 en la categoría «Solo charlando» permanece señalada, no corregida por inferencia.
 - **Commit:** [`30e3565`](https://github.com/losmoriartys-cmd/legion-multiversal/commit/30e356503467df07f50796e1bc2a9929509cc22e).
 - **Despliegue:** pendiente de verificar tras la actualización de este informe.
+
+## 2026-11-06 — Verificación del despliegue, recursos gráficos y auditoría estática de AKUMA
+
+- **Responsable:** colaboración ChatGPT + equipo del proyecto.
+- **Despliegue:** el workflow anterior de Pages (42238682278) terminó cancelado. El despliegue posterior [42238843902](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/42238843902), sobre el commit `e40bf363fcf5eb09491df951bb3c72ffc15d4fef`, completó correctamente los jobs `build`, `report-build-status` y `deploy`. Ese commit desciende del cambio de código `f5f27649`, por lo que incluye el panel de transparencia de cadencia Twitch.
+- **Recursos gráficos:** se contrastaron las 16 rutas `portrait` e `img` de los ocho perfiles del roster contra el árbol completo de archivos de `main`. No se encontraron rutas inexistentes.
+- **AKUMA — estructura:** el renderizador especializado conserva seis páginas y usa el resumen agregado de SullyGnome para los indicadores generales; la bitácora se limita a diez filas visibles de las 22 transmisiones del período. El directo del 6 de noviembre se mantiene fuera de la ventana 6 de octubre–5 de noviembre.
+- **Discrepancia detectada:** `sullygnome-data.json` contiene dos representaciones de algunas transmisiones de AKUMA: `streams` y `last_30_days.recent_streams_30d`. Para fechas coincidentes aparecen diferencias de duración y/o horas vistas (por ejemplo, 5/11: 122 vs. 120 minutos; 4/11: 130 vs. 132; 3/11: 97 vs. 96; 24/10: 50 vs. 48). El renderizador prioriza `recent_streams_30d`, por lo que la bitácora visible usa esa serie. No se puede determinar desde el archivo cuál transcripción es la correcta sin contrastar la fuente original.
+- **Cambios:** no se alteraron métricas ni código; no corresponde escoger una cifra por inferencia.
+- **Pendientes:** contrastar las filas discrepantes de AKUMA con SullyGnome o con el material original compartido por el creador antes de consolidar o eliminar cualquiera de las dos representaciones. Completar también la revisión visual del dossier en escritorio y móvil.
