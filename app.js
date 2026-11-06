@@ -492,6 +492,16 @@ function renderRoster() {
             return '<a class="roster-jump-link ' + group.key + '" href="#roster-group-' + group.key + '" aria-label="Ir a ' + label + ', ' + total + ' integrantes"><strong>' + String(total).padStart(2,'0') + '</strong><span>' + label + '</span><i aria-hidden="true">EXPLORAR ↓</i></a>';
         }).join('');
     }
+    const collectibleThemes = {
+        'MORIARTYS': { theme: 'strategist', mark: 'M·047' },
+        'ROD3R1K': { theme: 'titan', mark: 'R·008' },
+        'LADYMORIARTY': { theme: 'arcana', mark: 'L·025' },
+        'ARDIPII': { theme: 'phantom', mark: 'A·037' },
+        'AKUMA': { theme: 'inferno', mark: 'K·024' },
+        'DAVE — NEXUS': { theme: 'nexus', mark: 'N·048' },
+        'PATO — ORATORIS': { theme: 'orator', mark: 'O·039' },
+        'HABITOS': { theme: 'sage', mark: 'H·007' }
+    };
     groups.forEach(group => {
         const members = heroesData.map((hero, index) => ({ hero, index })).filter(item => item.hero.role === group.key);
         if (!members.length) return;
@@ -504,6 +514,9 @@ function renderRoster() {
         members.forEach(({hero,index}) => {
             const card = document.createElement('article');
             card.className = 'roster-collectible-card';
+            const collectibleTheme = collectibleThemes[hero.name] || { theme: 'legion-standard', mark: 'LEGIÓN' };
+            card.dataset.cardTheme = collectibleTheme.theme;
+            card.dataset.editionMark = collectibleTheme.mark;
             card.style.setProperty('--card-tilt-x', '0deg');
             card.style.setProperty('--card-tilt-y', '0deg');
             card.style.setProperty('--card-shine-x', '50%');
