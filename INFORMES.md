@@ -1542,3 +1542,24 @@ Se añadieron tratamientos visuales individuales a los globos de voz de los diez
 - **Pendientes / riesgos:** validación visual independiente en móvil/tablet; contraste visual de la portada de formación; confirmaciones editoriales de integrantes; revisión externa de embeds y de la reproducción sonora.
 - **Commit:** se registrará al guardar esta entrada.
 - **Despliegue:** no corresponde; esta entrada es documental y no altera el sitio publicado.
+
+## 2026-11-06 — Primera evolución del lenguaje visual y carta piloto MORIARTY 047
+
+### Dirección conceptual aprobada para la implementación
+- Evolución gradual de la identidad: universo editorial cinematográfico y coleccionable, con expedientes y personajes como piezas centrales. Se conserva el ADN narrativo de multiverso/cómic, pero se reduce el aspecto de plantilla clásica mediante fondos profundos, superficies más limpias, bordes contenidos, luz ambiental y acentos cian/hielo/violeta.
+- No se reemplaza el enfoque de superhéroes ni se rehace la arquitectura completa en esta primera etapa. Se establece una dirección visual que puede extenderse capítulo por capítulo tras validar el prototipo.
+
+### Implementación
+- El roster incorpora una primera carta coleccionable interactiva para MORIARTYS, número 047. Usa la ilustración de carta existente (hero.img) en lugar del retrato tipo carnet y mantiene nombre, rol y tipo de creador.
+- La carta tiene inclinación 3D controlada por el puntero, reflejo holográfico y retorno suave al estado neutro. Solo se activa para puntero fino/ratón; no requiere permisos de giroscopio ni sensores del dispositivo.
+- Se conservan el botón accesible, la acción existente de abrir el expediente y el recorrido hacia la bitácora de cuatro páginas. El resto de integrantes conserva su presentación anterior, aunque recibe ajustes suaves de superficie, borde y color dentro del roster.
+- Se añade una primera capa del sistema visual a la portada, fondo general y roster: azul noche, cian frío, hielo y violeta moderado, con menor dependencia del amarillo y de sombras negras duras.
+
+### Validación y límites
+- Revisión estática de los puntos de inserción y preservación de openHeroProfile(index, event.currentTarget).
+- Se comprobarán sintaxis JavaScript, estructura CSS y publicación de GitHub Pages después del commit.
+- No se afirma prueba visual en navegador ni validación real de interacción táctil/ratón en esta etapa. La evaluación visual final de la carta y la imagen de portada queda pendiente de la revisión del usuario.
+- No se cambian imágenes fuente ni se eliminan recursos.
+
+- **Archivos:** app.js, styles.css, INFORMES.md.
+- **Estado:** implementación inicial; pendiente validación automatizada y revisión visual del usuario.
