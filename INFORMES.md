@@ -1806,3 +1806,10 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 - **Accesibilidad y adaptación:** etiquetas semánticas, títulos asociados, estados aria-current, foco visible, controles operables por teclado y ajustes responsive; se respeta prefers-reduced-motion.
 - **Archivos modificados:** index.html, styles.css, app.js, INFORMES.md.
 - **Validación inicial:** se verifican por inspección estática los identificadores de capítulos y destinos, las acciones de navegación, la preservación de los cuatro accesos secundarios y las referencias de imágenes ya existentes. Esta anotación no declara todavía una auditoría visual independiente ni un despliegue publicado; ambos quedan sujetos a los workflows y comprobaciones posteriores.
+
+
+### Ajuste de navegación posterior — fragmentos y menú secundario
+
+- Se corrigió navigation-fix.js para actualizar la URL con #chapter-N también cuando está disponible la función principal switchChapter() de app.js.
+- Al elegir una sección desde «Otras secciones», el desplegable se cierra después de navegar, evitando que quede abierto sobre el contenido del capítulo.
+- Se conserva la compatibilidad con la navegación de respaldo y con accesos directos por fragmento.

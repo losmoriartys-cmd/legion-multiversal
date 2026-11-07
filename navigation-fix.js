@@ -10,6 +10,11 @@
     // Si la función original está disponible, conservamos su transición y sonido.
     if (typeof window.switchChapter === 'function') {
       window.switchChapter(Number(chapterNumber));
+      const secondaryMenu = document.querySelector('.secondary-navigation[open]');
+      if (secondaryMenu) secondaryMenu.open = false;
+      if (window.history && window.history.replaceState) {
+        window.history.replaceState(null, '', '#chapter-' + chapterNumber);
+      }
       return true;
     }
 
