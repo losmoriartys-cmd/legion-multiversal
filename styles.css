@@ -2504,3 +2504,18 @@ body {
 .chapter-one .founding-origin-story>img { display:block;width:100%;height:auto;max-height:760px;object-fit:contain;background:#05080e; }
 @media(max-width:850px){.chapter-one .origin-story-grid{grid-template-columns:1fr}.chapter-one .origin-story-grid .archive-stamp{max-width:100%}}
 @media(max-width:560px){.chapter-one .origin-beat{padding:18px}.chapter-one .origin-visual{margin:20px auto}.chapter-one .origin-visual figcaption{padding:11px 13px}}
+
+
+/* Capítulo 01 · cronología fundacional y primera misión */
+.chapter-one .founding-origin-story { margin:30px auto 38px;max-width:980px; }
+.chapter-one .founding-archive-heading>span:last-child { color:#b8c8d9; }
+.chapter-one .legion-first-mission { margin:42px 0 18px;padding:clamp(20px,3vw,34px);display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:26px;align-items:center;border:2px solid rgba(0,210,255,.38);background:linear-gradient(135deg,rgba(9,20,36,.96),rgba(18,12,31,.96));box-shadow:8px 8px 0 rgba(0,0,0,.72); }
+.chapter-one .mission-copy h4 { margin:10px 0 16px;font-family:'Bangers',cursive;font-size:clamp(2rem,3.5vw,3.1rem);line-height:1;color:#f4f6fa;letter-spacing:.03em; }
+.chapter-one .mission-copy p { color:#d5deea;line-height:1.8;margin:0 0 13px; }
+.chapter-one .legion-first-mission .origin-current-banner { margin:0;max-width:none; }
+.chapter-one .commercial-bridge { margin-top:16px;color:#b8c8d9;line-height:1.65; }
+.chapter-one .commercial-bridge strong { color:#fff; }
+.chapter-one .chapter-cta-group { display:flex;flex-wrap:wrap;gap:12px;justify-content:flex-end; }
+.chapter-one .chapter-cta-secondary { background:linear-gradient(135deg,#172b43,#263d59);border-color:#42c8e8; }
+@media(max-width:850px){.chapter-one .legion-first-mission{grid-template-columns:1fr}.chapter-one .chapter-cta-group{justify-content:flex-start}}
+@media(max-width:560px){.chapter-one .chapter-cta-group{width:100%}.chapter-one .chapter-cta-group .chapter-cta{width:100%}}
