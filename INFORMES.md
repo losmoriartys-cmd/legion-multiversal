@@ -1776,4 +1776,6 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 - `INFORMES.md`
 
 ### Commit
-- Pendiente de confirmación tras guardar los tres archivos en `main`.
+- `index.html`: `8491b54fb105624413c6747f2f3a5e3aeb204ee8`
+- `styles.css`: `4eff89659073b3da4593133fb397599cfc524f3c`
+- `INFORMES.md`: esta actualización de bitácora registra los commits anteriores.
