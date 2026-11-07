@@ -2025,3 +2025,14 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 - **Validación estática:** el fragmento anterior se encontró en `main`, se sustituyó una sola vez y el nuevo recurso quedó en el bloque de primera misión.
 - **Commit:** [c2a8f1f0](https://github.com/losmoriartys-cmd/legion-multiversal/commit/c2a8f1f0b5c9141e36d0ffed9b1e09388831b31b).
 - **Despliegue y revisión visual:** pendientes de comprobar.
+
+
+## 2026-11-07 — Banner grupal en la portada de Inicio
+
+- **Pedido:** usar la imagen grupal que se ve en la captura Enca.jpg como banner horizontal por encima del título **DIFERENTES MUNDOS. UNA MISMA LEGIÓN.**, y quitar el texto que aparecía debajo de la imagen.
+- **Implementado:** la imagen existente image_20261106_124855.jpg ahora ocupa una franja visual de ancho completo antes del bloque de título y presentación. Se eliminó el epígrafe inferior. La imagen original no se editó ni se reemplazó.
+- **Diseño responsive:** se agregó estilo específico para escritorio y móvil; la imagen conserva su proporción sin recortar el grupo.
+- **Archivos modificados:** index.html, styles.css.
+- **Validaciones estáticas:** se confirmó que el banner aparece antes del título, conserva la ruta original de la imagen, no tiene epígrafe debajo y cuenta con reglas para móvil. No se modificó el Capítulo 05 — Arsenal ni ningún asset.
+- **Commits:** [7a6a1b77](https://github.com/losmoriartys-cmd/legion-multiversal/commit/7a6a1b77a3ea767bcf1cd28728111be602a9cca9) (estructura) · [7dc47ab8](https://github.com/losmoriartys-cmd/legion-multiversal/commit/7dc47ab8760a8a72a711ca449cf73b9ab6f5b9c7) (estilos).
+- **Pendiente:** comprobar el workflow de GitHub Pages y revisar visualmente el resultado publicado en escritorio y móvil.
