@@ -1758,3 +1758,22 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 
 ### Despliegue
 - Pendiente de comprobar el workflow de GitHub Pages y revisar el resultado visual publicado.
+
+
+## 2026-11-07 — Capítulo 01: confirmación de la primera formación y misión inaugural
+
+- El creador confirmó expresamente que la primera formación de S3X-MEN estuvo integrada por **Demian, Rod3r1k, Akuma y Ardipii**. Se incorporaron los cuatro nombres en la viñeta documental y en el texto alternativo de la fotografía.
+- Se corrigió el orden cronológico: la imagen documental de la primera formación ahora aparece después de la portada ilustrada de «Orígenes #0001» y antes del bloque de nuevas incorporaciones. Dave (estudiante) y Hábitos (colaborador) quedan narrados como incorporaciones posteriores.
+- Se aclaró que «Orígenes #0001» es una portada ilustrada que representa el nacimiento del primer equipo, mientras que el archivo fotográfico de la primera formación funciona como registro documental.
+- La portada de Legión Multiversal dejó de funcionar como banner genérico y pasó a encabezar la **MISIÓN 001 · PRIMERA MISIÓN: LEGIÓN MULTIVERSAL**. El texto presenta como primera misión la unión de identidades, talentos y comunidades bajo la nueva identidad, sin inventar una aventura o acontecimiento externo.
+- Se añadió un puente de presentación comercial al cierre del Capítulo 01, con accesos directos al Roster y a Alianzas. Se incorporó el dato operativo de 8 perfiles y 7 canales activos de Twitch, diferenciando perfiles de canales.
+- Se añadió a Alianzas el formato «Keys, lanzamientos y primeras impresiones», dirigido a estudios y publishers, sin prometer resultados garantizados.
+- Se agregaron estilos responsivos para la nueva viñeta de misión y el CTA doble. Validación estática: se comprobaron los bloques y referencias reemplazados en el HTML; no se realizó inspección visual en navegador ni se declara verificación visual del despliegue.
+
+### Archivos modificados
+- `index.html`
+- `styles.css`
+- `INFORMES.md`
+
+### Commit
+- Pendiente de confirmación tras guardar los tres archivos en `main`.
