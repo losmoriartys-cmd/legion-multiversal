@@ -2911,3 +2911,59 @@ header .primary-navigation { display:flex; flex-wrap:wrap; gap:7px; align-items:
  .collaboration-chapter .clip-card-source img { width:34px;height:34px;flex-basis:34px; }
  .collaboration-chapter .clip-feature-card h5 { min-height:0; }
 }
+
+
+/* ARCHIVO AUDIOVISUAL · dimensiones mínimas exigidas por Twitch */
+.collaboration-chapter .clip-channel-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+}
+.collaboration-chapter .clip-feature-card {
+  min-width: 0;
+  overflow: visible;
+}
+.collaboration-chapter .clip-card-source img {
+  width: 48px;
+  height: 48px;
+  flex: 0 0 48px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #71d8ef;
+  box-shadow: 0 0 0 3px rgba(113,216,239,.16);
+}
+.collaboration-chapter .clip-player-wrap {
+  width: 100%;
+  min-width: 400px;
+  min-height: 300px;
+  aspect-ratio: 4 / 3;
+  height: 300px;
+  margin: 14px 0;
+  overflow: hidden;
+  background: #050a12;
+}
+.collaboration-chapter .clip-player-wrap iframe {
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  min-width: 400px;
+  height: 300px;
+  border: 0;
+}
+@media (max-width: 900px) {
+  .collaboration-chapter .clip-channel-grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 520px) {
+  .collaboration-chapter .clip-channel-grid {
+    display: flex;
+    flex-direction: column;
+    overflow-x: auto;
+    padding-bottom: 10px;
+  }
+  .collaboration-chapter .clip-feature-card {
+    min-width: 420px;
+    max-width: 420px;
+  }
+}
