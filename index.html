@@ -41,17 +41,17 @@
         </div>
         <nav class="primary-navigation" aria-label="Navegación principal">
             <button class="nav-btn active" data-chapter="0" aria-current="page" onclick="switchChapter(0)">INICIO</button>
+            <button class="nav-btn" data-chapter="1" onclick="switchChapter(1)">ORIGEN</button>
             <button class="nav-btn" data-chapter="2" onclick="switchChapter(2)">ROSTER</button>
             <button class="nav-btn" data-chapter="3" onclick="switchChapter(3)">ESTADÍSTICAS</button>
+            <button class="nav-btn" data-chapter="11" onclick="switchChapter(11)">VALORES</button>
+            <button class="nav-btn" data-chapter="9" onclick="switchChapter(9)">COMUNIDAD</button>
             <button class="nav-btn" data-chapter="8" onclick="switchChapter(8)">ALIANZAS</button>
             <button class="nav-btn" data-chapter="12" onclick="switchChapter(12)">COLABORACIONES</button>
-            <button class="nav-btn" data-chapter="9" onclick="switchChapter(9)">COMUNIDAD</button>
-            <button class="nav-btn" data-chapter="1" onclick="switchChapter(1)">ORIGEN</button>
         </nav>
         <details class="secondary-navigation">
             <summary>OTRAS SECCIONES <span aria-hidden="true">＋</span></summary>
             <div class="secondary-navigation-links" aria-label="Secciones adicionales">
-                <button class="nav-btn nav-btn-secondary" data-chapter="11" onclick="switchChapter(11)">NUESTROS VALORES</button>
                 <button class="nav-btn nav-btn-secondary" data-chapter="10" onclick="switchChapter(10)">EN VIVO</button>
                 <button class="nav-btn nav-btn-secondary" data-chapter="5" onclick="switchChapter(5)">ARSENAL</button>
                 <button class="nav-btn nav-btn-secondary" data-chapter="6" onclick="switchChapter(6)">RECLUTAMIENTO</button>
@@ -60,8 +60,8 @@
     </header>
 
     <main>
-        <!-- CAPÍTULO 0: NUEVA PORTADA EJECUTIVA -->
-        <section id="chapter-0" class="chapter-panel executive-home active" aria-labelledby="home-title">
+    <!-- Recorrido institucional: origen, personas, actividad, comunidad y experiencias. Arsenal y Reclutamiento quedan como recursos complementarios. -->
+<section id="chapter-0" class="chapter-panel executive-home active" aria-labelledby="home-title">
             <div class="executive-hero">
                 <div class="executive-hero-copy">
                     <p class="executive-kicker">ARCHIVO CENTRAL · PRESENTACIÓN INSTITUCIONAL</p>
@@ -130,8 +130,7 @@
             </section>
         </section>
 
-        <!-- CAPÍTULO 1: ORIGEN DE LA LEGIÓN -->
-        <section id="chapter-1" class="chapter-panel chapter-one">
+<section id="chapter-1" class="chapter-panel chapter-one">
     <div class="chapter-tag">CAPÍTULO 01 · EL ORIGEN</div>
 
     <div class="chapter-cover">
@@ -275,8 +274,7 @@
     </section>
 </section>
 
-        <!-- CAPÍTULO 2: ROSTER -->
-        <section id="chapter-2" class="chapter-panel comic-page">
+<section id="chapter-2" class="chapter-panel comic-page">
             <div class="chapter-tag">CAPÍTULO 02</div>
             <h2 class="comic-title">LEGIÓN MULTIVERSAL — NUESTRO ROSTER</h2>
             <div class="institute-banner"><div class="institute-stamp" aria-label="Emblema oficial de la Legión Multiversal"><img src="legion_logo_final_hybrid.png" alt="Emblema de Legión Multiversal"><span>ARCHIVO DE LA LEGIÓN</span></div><div class="institute-banner-copy"><h3>UN LUGAR PARA CADA TALENTO EXTRAORDINARIO</h3><p>Una comunidad de creadores con identidades y especialidades diferentes. Cada integrante tiene un expediente propio y un lugar dentro de este universo compartido.</p></div></div>
@@ -288,8 +286,29 @@
             <section id="hero-profile-page" class="hero-profile-page" hidden aria-live="polite"></section>
         </section>
 
-        <!-- CAPÍTULO 11: IDENTIDAD Y VALORES DE LA LEGIÓN -->
-        <section id="chapter-11" class="chapter-panel comic-page">
+<section id="chapter-3" class="chapter-panel comic-page">
+<div class="chapter-tag">CAPÍTULO 03</div>
+<h2 class="comic-title">EL ALCANCE DE NUESTRA COMUNIDAD</h2>
+<div class="premium-panel">
+ <div class="premium-kicker">Media kit · actividad observada</div>
+ <h3>Una comunidad activa, conectada y en crecimiento</h3>
+ <p>Reunimos creadores con propuestas propias y una identidad compartida. Este panel ofrece una fotografía de la actividad reciente de los canales Twitch que integran el roster, con datos observados y fecha de actualización.</p>
+ <div id="stats-updated" class="stats-note">Actualizando indicadores…</div>
+ <div id="stats-summary" class="premium-grid"></div>
+ <details class="stats-methodology">
+  <summary>Fuentes, metodología y alcance de los datos</summary>
+  <p>La información se obtiene de Twitch Helix mediante <b>data.json</b>. El sistema consulta los canales de forma programada cada 15 minutos y conserva una ventana móvil de hasta 30 días. La frecuencia es programada: no representa una detección instantánea ni garantiza que cada cambio de estado se registre en el momento exacto. La ventana máxima configurada no significa que los 30 días estén completos: la cobertura efectiva depende de la antigüedad y continuidad de la recolección.</p>
+  <p>Los espectadores actuales y el estado en directo corresponden a la última consulta disponible. Los promedios, picos, horas en directo y horas vistas se calculan a partir de las muestras propias y no sustituyen las métricas oficiales de Twitch Creator Dashboard. Las horas vistas son estimaciones derivadas del muestreo; los intervalos sin observaciones no se reconstruyen.</p>
+  <p>Los totales de seguidores y las analíticas históricas oficiales solo se publican cuando la fuente y los permisos permiten verificarlos. No se completan valores faltantes mediante estimaciones.</p>
+ </details>
+ <details class="stats-methodology">
+  <summary>Ver detalle técnico por canal</summary>
+  <div class="stats-table-wrap"><table class="stats-table"><thead><tr><th>Canal</th><th>Estado</th><th>Espectadores actuales</th><th>Categoría</th><th>Promedio observado</th><th>Pico observado</th><th>Horas observadas</th><th>Muestras</th><th>Cobertura del intervalo muestreado</th></tr></thead><tbody id="stats-table-body"><tr><td colspan="9">Cargando estadísticas…</td></tr></tbody></table></div>
+ </details>
+</div>
+</section>
+
+<section id="chapter-11" class="chapter-panel comic-page">
             <div class="chapter-tag">CAPÍTULO ESPECIAL · NUESTRA IDENTIDAD</div>
             <h2 class="comic-title">NUESTROS VALORES</h2>
             <div class="premium-panel">
@@ -338,33 +357,138 @@
             </div>
         </section>
 
-        <!-- CAPÍTULO 3: DATABASE -->
-<section id="chapter-3" class="chapter-panel comic-page">
-<div class="chapter-tag">CAPÍTULO 03</div>
-<h2 class="comic-title">EL ALCANCE DE NUESTRA COMUNIDAD</h2>
-<div class="premium-panel">
- <div class="premium-kicker">Media kit · actividad observada</div>
- <h3>Una comunidad activa, conectada y en crecimiento</h3>
- <p>Reunimos creadores con propuestas propias y una identidad compartida. Este panel ofrece una fotografía de la actividad reciente de los canales Twitch que integran el roster, con datos observados y fecha de actualización.</p>
- <div id="stats-updated" class="stats-note">Actualizando indicadores…</div>
- <div id="stats-summary" class="premium-grid"></div>
- <details class="stats-methodology">
-  <summary>Fuentes, metodología y alcance de los datos</summary>
-  <p>La información se obtiene de Twitch Helix mediante <b>data.json</b>. El sistema consulta los canales de forma programada cada 15 minutos y conserva una ventana móvil de hasta 30 días. La frecuencia es programada: no representa una detección instantánea ni garantiza que cada cambio de estado se registre en el momento exacto. La ventana máxima configurada no significa que los 30 días estén completos: la cobertura efectiva depende de la antigüedad y continuidad de la recolección.</p>
-  <p>Los espectadores actuales y el estado en directo corresponden a la última consulta disponible. Los promedios, picos, horas en directo y horas vistas se calculan a partir de las muestras propias y no sustituyen las métricas oficiales de Twitch Creator Dashboard. Las horas vistas son estimaciones derivadas del muestreo; los intervalos sin observaciones no se reconstruyen.</p>
-  <p>Los totales de seguidores y las analíticas históricas oficiales solo se publican cuando la fuente y los permisos permiten verificarlos. No se completan valores faltantes mediante estimaciones.</p>
- </details>
- <details class="stats-methodology">
-  <summary>Ver detalle técnico por canal</summary>
-  <div class="stats-table-wrap"><table class="stats-table"><thead><tr><th>Canal</th><th>Estado</th><th>Espectadores actuales</th><th>Categoría</th><th>Promedio observado</th><th>Pico observado</th><th>Horas observadas</th><th>Muestras</th><th>Cobertura del intervalo muestreado</th></tr></thead><tbody id="stats-table-body"><tr><td colspan="9">Cargando estadísticas…</td></tr></tbody></table></div>
- </details>
-</div>
+<section id="chapter-9" class="chapter-panel comic-page">
+ <div class="chapter-tag">COMUNIDAD</div><h2 class="comic-title">UN UNIVERSO QUE SE CONSTRUYE EN EQUIPO</h2>
+ <div class="premium-panel"><div class="premium-kicker">Comunidad · participación · colaboración</div><h3>Hay muchas formas de formar parte</h3><p>La Legión conecta personas, canales y proyectos distintos. Compartimos partidas, conversaciones, ideas y oportunidades para que cada integrante pueda crecer con su propia identidad.</p></div>
+ <div class="premium-grid">
+  <article class="premium-card"><h3>COMPARTIR</h3><p>Descubrí los canales del roster, acompañá sus directos y conocé las distintas propuestas que conviven en la Legión.</p></article>
+  <article class="premium-card"><h3>PARTICIPAR</h3><p>Sumate a las conversaciones, sugerí juegos y proponé actividades grupales a través de nuestros canales públicos.</p></article>
+  <article class="premium-card"><h3>CRECER</h3><p>Creemos en la colaboración genuina, el respeto entre creadores y el intercambio de conocimientos y audiencias.</p></article>
+ </div>
+ <div class="premium-panel"><h3>Encontranos en Twitch</h3><p>La actividad de cada integrante se publica en su propio canal. Los horarios y las agendas se anuncian cuando cada directo o encuentro está confirmado.</p><p><a href="https://twitch.tv/losmoriartys" target="_blank" rel="noopener noreferrer">Los Moriartys ↗</a></p></div>
 </section>
 
-        <!-- CAPÍTULO 4: LURKIT + KEYMAILER -->
-<!-- Recursos de Lurkit y Keymailer: material operativo retirado de la navegación pública. -->
+<section id="chapter-10" class="chapter-panel comic-page live-chapter">
+ <div class="chapter-tag">TRANSMISIONES</div>
+ <h2 class="comic-title">LEGIÓN MULTIVERSAL · EN VIVO</h2>
+ <div class="premium-panel live-intro"><div class="premium-kicker"><span class="live-pulse"></span> CENTRAL DE TRANSMISIONES</div><h3>La Legión está en directo</h3><p>Cuando uno o más integrantes estén transmitiendo, vas a poder elegir un canal y verlo directamente desde esta página. La disponibilidad se actualiza a partir de las consultas programadas del sistema.</p></div>
+ <div id="live-directory" class="live-directory"><p class="stats-note">Consultando el estado de los canales…</p></div>
+ <div id="live-player-wrap" class="live-player-wrap" hidden><div class="live-player-heading"><h3 id="live-player-title">TRANSMISIÓN SELECCIONADA</h3><a id="live-open-channel" href="https://twitch.tv/losmoriartys" target="_blank" rel="noopener noreferrer">Abrir canal en Twitch ↗</a></div><div id="live-player" class="live-player"></div></div>
+ <p class="stats-note">El reproductor oficial de Twitch requiere conexión a internet y un navegador compatible. En GitHub Pages se utiliza el dominio publicado como parámetro de inserción; si abrís una copia local, Twitch puede bloquear la reproducción.</p>
+</section>
 
-        <!-- CAPÍTULO 6: JUEGOS COOPERATIVOS -->
+<section id="chapter-8" class="chapter-panel comic-page">
+ <div class="chapter-tag">CAPÍTULO 08</div><h2 class="comic-title">ALIANZAS Y OPORTUNIDADES</h2>
+ <div class="premium-panel"><div class="premium-kicker">Propuesta para marcas, estudios y publishers</div><h3>Colaborar para crear experiencias que conecten</h3>
+ <p>Legión Multiversal reúne creadores de gaming, entretenimiento, tecnología y desarrollo personal. Diseñamos colaboraciones que respetan la identidad de cada canal y buscan una conexión genuina con la audiencia.</p></div>
+ <div class="premium-grid">
+  <article class="premium-card"><h3>DIRECTOS Y COBERTURA</h3><p>Presentaciones de juegos, primeras impresiones, sesiones especiales, cobertura de lanzamientos y experiencias en vivo.</p></article>
+  <article class="premium-card"><h3>CONTENIDO COOPERATIVO</h3><p>Sesiones grupales, desafíos, eventos con varios creadores y formatos que muestran la interacción real del equipo.</p></article>
+  <article class="premium-card"><h3>CLIPS Y DIFUSIÓN</h3><p>Momentos destacados, piezas breves y publicaciones complementarias para extender la conversación más allá del directo.</p></article>
+  <article class="premium-card"><h3>ACCIONES CON LA COMUNIDAD</h3><p>Dinámicas participativas, sorteos cuando estén autorizados, encuentros y experiencias alineadas con cada campaña.</p></article>
+  <article class="premium-card"><h3>KEYS, LANZAMIENTOS Y PRIMERAS IMPRESIONES</h3><p>Recepción y presentación de claves, primeras partidas, cobertura de lanzamientos, sesiones cooperativas y clips posteriores. Cada propuesta se adapta al juego, al perfil del creador y a las condiciones acordadas con el estudio o publisher.</p></article>
+ </div>
+ <div class="premium-panel"><div class="premium-kicker">Experiencia y relaciones</div><h3>Un equipo con experiencia en el ecosistema creator</h3>
+ <p>Los integrantes cuentan con experiencia en transmisiones, campañas de videojuegos, solicitudes de acceso y programas para creadores. Las colaboraciones y acreditaciones se comunican de forma individual y únicamente cuando pueden respaldarse. Keymailer y Lurkit son herramientas externas que algunos integrantes utilizan para solicitar accesos; su uso no implica una alianza comercial.</p>
+ <p><b>Transparencia:</b> las colaboraciones, acreditaciones y campañas se incorporarán a esta presentación cuando cada una cuente con respaldo verificable —por ejemplo, una página oficial, una comunicación del publisher o un registro fechado—. Una solicitud de acceso, una clave recibida o la participación en una plataforma de campañas no se presentarán como una alianza oficial.</p>
+ </div>
+ <div class="premium-panel">
+    <div class="premium-kicker">RECURSOS PARA INTEGRANTES</div>
+    <h3>¿QUERÉS CONOCER LAS PLATAFORMAS DE ACCESO A JUEGOS?</h3>
+    <p>Consultá la guía operativa de Keymailer y Lurkit dentro de Arsenal. Son herramientas externas, no alianzas comerciales de la Legión.</p>
+    <p><button class="chapter-cta" type="button" onclick="switchChapter(5)">IR A ARSENAL · GUÍAS PARA CREADORES ↗</button></p>
+</div>
+<div class="premium-panel collaboration-bridge"><div class="premium-kicker">Experiencias reales · archivo de campañas</div><h3>Conocé cómo trabajamos en equipo</h3><p>Las propuestas comerciales también se respaldan con experiencias documentadas: sesiones coordinadas, creadores participantes, VOD, clips y métricas presentadas con su fuente y alcance.</p><p><button class="chapter-cta" type="button" onclick="switchChapter(12)">EXPLORAR EXPEDIENTES DE COLABORACIÓN <span>↗</span></button></p></div>
+ <div class="premium-panel"><div class="premium-kicker">Contacto comercial</div><h3>Hablemos de una colaboración</h3><p>Desarrolladores, publishers, agencias y marcas pueden acercar propuestas de campañas, patrocinios, cobertura, accesos anticipados o acciones con la comunidad.</p><p>Para evaluar una propuesta, compartí la marca o juego, objetivos, fechas, plataformas, entregables esperados y presupuesto disponible.</p><p><a class="btn-link" href="mailto:losmoriartys@gmail.com?subject=Propuesta%20comercial%20-%20Legi%C3%B3n%20Multiversal">losmoriartys@gmail.com</a></p></div>
+</section>
+
+<section id="chapter-12" class="chapter-panel comic-page collaboration-chapter">
+ <div class="chapter-tag">CAPÍTULO 12 · ARCHIVO DE EXPERIENCIAS COMPARTIDAS</div>
+ <div class="collab-cover">
+  <div class="collab-cover-copy">
+   <span class="collab-kicker">ARCHIVO CENTRAL · LEGIÓN MULTIVERSAL</span>
+   <h2>CUANDO LOS UNIVERSOS<br><span>SE ENCUENTRAN.</span></h2>
+   <p>Las colaboraciones son parte de nuestra historia. Este archivo registra partidas compartidas, directos simultáneos, eventos y proyectos en los que los integrantes de la Legión unen sus comunidades para crear algo en común.</p>
+   <div class="collab-cover-stamp">BITÁCORA VIVA · CAMPAÑAS Y ENCUENTROS</div>
+  </div>
+  <figure class="collab-cover-art"><img src="barfe.jpg" alt="Imagen de archivo de la colaboración BarFender" loading="lazy"><figcaption>EXPEDIENTE DESTACADO · BARFENDER · CAMPAÑA 001</figcaption></figure>
+ </div>
+ <section class="collab-intro">
+  <div class="section-kicker">01 / EL ARCHIVO</div>
+  <div class="section-heading"><h3>NO SON SOLO PARTIDAS.<br><span>SON EXPERIENCIAS CONSTRUIDAS EN EQUIPO.</span></h3><p>Cada expediente conserva quiénes participaron, qué hicieron, dónde se transmitió, qué contenido quedó registrado y qué resultados pueden respaldarse. Las cifras individuales y compartidas se presentan por separado para que cada dato tenga contexto.</p></div>
+  <div class="collab-principles">
+   <article><strong>01</strong><h4>CREADORES</h4><p>Visibilidad para cada integrante y su canal.</p></article>
+   <article><strong>02</strong><h4>CONTENIDO</h4><p>VOD, clips y momentos que prolongan la experiencia.</p></article>
+   <article><strong>03</strong><h4>COMUNIDADES</h4><p>Distintas audiencias reunidas alrededor de una actividad común.</p></article>
+   <article><strong>04</strong><h4>TRANSPARENCIA</h4><p>Métricas con fuente, período y alcance identificados.</p></article>
+  </div>
+ </section>
+ <section class="campaign-feature" id="barfender-expediente">
+  <div class="campaign-feature-head"><div><span class="collab-kicker">EXPEDIENTE COMERCIAL · N.º 001</span><h3>BARFENDER</h3><p>Cuatro creadores. Cuatro canales. Una misma partida.</p></div><div class="campaign-edition">CAMPAÑA<br><strong>001</strong><br>05 · 11 · 2026</div></div>
+  <figure class="campaign-wide-art"><img src="1batalla.jpg" alt="Imagen de la sesión de juego BarFender" loading="lazy"><figcaption>REGISTRO VISUAL · Una noche de juego y colaboración transmitida desde cuatro canales.</figcaption></figure>
+  <figure class="barfender-steam-art"><a href="https://store.steampowered.com/app/4159680/Barfender_COOP_Bar_Simulator/" target="_blank" rel="noopener noreferrer"><img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4159680/c1225b8fe18d0878c5be25b0081c801e50bb258e/header_alt_assets_8.jpg?t=1793628252" alt="Barfender, simulador cooperativo de bar para 1 a 4 jugadores" loading="lazy"></a><figcaption>BARFENDER · FICHA DEL JUEGO · <a href="https://store.steampowered.com/app/4159680/Barfender_COOP_Bar_Simulator/#app_reviews_hash" target="_blank" rel="noopener noreferrer">VER EN STEAM ↗</a></figcaption></figure>
+  <div class="barfender-game-profile"><div><span class="collab-kicker">EL JUEGO DE LA CAMPAÑA</span><p>Un caótico simulador cooperativo de bar para 1–4 jugadores: servir copas, limpiar desastres, detener peleas y mantener el local en pie mientras la noche se descontrola. Los jugadores preparan el bar, atienden a la multitud e intentan sobrevivir al turno.</p></div><dl><div><dt>LANZAMIENTO</dt><dd>12 OCT 2026</dd></div><div><dt>DESARROLLADOR</dt><dd>Proto Division</dd></div><div><dt>EDITOR</dt><dd>Rock Paper Publisher</dd></div><div><dt>RESEÑAS EN STEAM</dt><dd>Muy positivas · 330 reseñas</dd></div></dl></div>
+  <div class="campaign-summary-grid">
+   <article class="campaign-summary-copy"><span class="collab-kicker">LA EXPERIENCIA</span><h4>UNA SESIÓN, CUATRO PUNTOS DE VISTA.</h4>
+    <p>El 5 de noviembre de 2026, <strong>Demian, Lady Moriarty, Rod3rik y Akuma</strong> se reunieron para jugar BarFender y colaborar en directo desde sus propios canales de Twitch. La actividad compartida se extendió durante aproximadamente una hora y media.</p>
+    <p>La propuesta permitió mostrar una misma experiencia desde cuatro comunidades y estilos de transmisión, generar interacción entre creadores y conservar momentos destacados para seguir difundiendo la actividad después del directo.</p>
+    <p class="campaign-credit"><b>Juego:</b> BarFender<br><b>Publisher:</b> Rock Paper Publisher<br><b>Desarrollador:</b> Proto Division<br><b>Acceso al juego:</b> facilitado mediante Keymailer.</p>
+   </article>
+   <aside class="campaign-roster"><span class="collab-kicker">EQUIPO DESPLEGADO</span>
+    <div class="campaign-agent"><img src="assets/carnet/DemuianCarnet.jpg" alt="" loading="lazy"><div><strong>DEMIAN</strong><small>LOS MORIARTYS · CANAL CONJUNTO</small></div></div>
+    <div class="campaign-agent"><img class="campaign-agent-lady" src="assets/ladymoriarty.jpg" alt="Retrato de Lady Moriarty" loading="lazy"><div><strong>LADY MORIARTY</strong><small>LADYMORIARTY01 · CANAL INDIVIDUAL</small></div></div>
+    <div class="campaign-agent"><img src="assets/rod3r1k.jpg" alt="" loading="lazy"><div><strong>ROD3RIK</strong><small>THER0D3R1K · CANAL INDIVIDUAL</small></div></div>
+    <div class="campaign-agent"><img src="assets/akuma.jpg" alt="" loading="lazy"><div><strong>AKUMA</strong><small>AKUMAZOLDYCK · CANAL INDIVIDUAL</small></div></div>
+   </aside>
+  </div>
+  <div class="campaign-metrics">
+   <article><strong>4</strong><span>CANALES EN SIMULTÁNEO</span></article><article><strong>~1 H 30 MIN</strong><span>ACTIVIDAD COLABORATIVA</span></article><article><strong>8</strong><span>CLIPS IDENTIFICADOS</span></article><article><strong>98</strong><span>ESPECTADORES COMPARTIDOS ÚNICOS*</span></article>
+  </div>
+  <p class="campaign-footnote">* Los 98 espectadores compartidos únicos corresponden al panel Twitch Shared Viewership del canal Los Moriartys. No representan una deduplicación global de la audiencia de los cuatro canales ni deben sumarse a los espectadores únicos individuales.</p>
+  <section class="campaign-impact">
+   <div class="campaign-subhead"><span class="collab-kicker">02 / MÉTRICAS Y ALCANCE</span><h4>EL DIRECTO DE LOS MORIARTYS</h4><p>Datos del VOD completo del 5/11/2026. Estas métricas corresponden a toda la transmisión, no exclusivamente al tramo de BarFender.</p></div>
+   <div class="campaign-stat-grid">
+    <div><strong>25</strong><span>ESPECTADORES PROMEDIO</span></div><div><strong>40</strong><span>PICO MÁXIMO · CANAL LOS MORIARTYS</span></div><div><strong>80</strong><span>ESPECTADORES ÚNICOS</span></div><div><strong>91</strong><span>USUARIOS EN CHAT</span></div><div><strong>154</strong><span>VISTAS EN DIRECTO</span></div><div><strong>+2</strong><span>NUEVOS SEGUIDORES</span></div><div><strong>1</strong><span>NUEVA SUSCRIPCIÓN</span></div><div><strong>2 H 27 MIN</strong><span>DURACIÓN DEL VOD · 2:27:20</span></div>
+   </div>
+   <p class="campaign-footnote">Fuente: estadísticas del directo de Los Moriartys y panel Twitch Shared Viewership. El VOD completo tuvo una duración de 2:27:20. El indicador de 98 espectadores compartidos únicos se conserva como dato independiente del panel y no equivale a espectadores únicos deduplicados de toda la campaña.</p>
+  </section>
+  <section class="campaign-vods">
+   <div class="campaign-subhead"><span class="collab-kicker">03 / REGISTROS DE TRANSMISIÓN</span><h4>LA ACTIVIDAD, DESDE CADA CANAL</h4><p>Se localizaron tres VOD públicos. Akuma participó en simultáneo, pero no se localizó un VOD público para incorporar al archivo.</p></div>
+   <div class="vod-grid">
+    <a href="https://www.twitch.tv/videos/2919716450" target="_blank" rel="noopener noreferrer"><span>VOD 01 · LOS MORIARTYS</span><strong>1:15:36</strong><small>ABRIR TRANSMISIÓN ↗</small></a>
+    <a href="https://www.twitch.tv/videos/2919755971" target="_blank" rel="noopener noreferrer"><span>VOD 02 · LADY MORIARTY01</span><strong>1:13:58</strong><small>ABRIR TRANSMISIÓN ↗</small></a>
+    <a href="https://www.twitch.tv/videos/2919719142" target="_blank" rel="noopener noreferrer"><span>VOD 03 · THER0D3R1K</span><strong>1:14:01</strong><small>ABRIR TRANSMISIÓN ↗</small></a>
+   </div>
+   <div class="vod-total"><strong>3 H 43 MIN 35 S</strong><span>TIEMPO EFECTIVO SUMADO EN LOS TRES VOD DOCUMENTADOS · NO REPRESENTA HORAS VISTAS.</span></div>
+  </section>
+  <section class="campaign-clips">
+   <div class="campaign-subhead"><span class="collab-kicker">04 / ARCHIVO AUDIOVISUAL</span><h4>OCHO MOMENTOS PARA VOLVER A LA NOCHE</h4><p>El archivo incorpora los clips recuperados de Los Moriartys. Cada reproducción conserva su título original y abre el contenido alojado en Twitch.</p></div>
+   <div class="clip-channel-grid">
+    <article class="clip-feature-card"><span>LOS MORIARTYS · CLIP 01</span><h5>OJO OJO OJO VOMITA... ALV VOMITÓ</h5><div class="twitch-clip-frame"><iframe src="https://clips.twitch.tv/embed?clip=ImportantExuberantSoybeanCopyThis-_YjtRbUlzhf1SFEY&parent=losmoriartys-cmd.github.io" title="Ojo ojo ojo vomita... alv vomitó · Los Moriartys" loading="lazy" allowfullscreen="true" scrolling="no"></iframe></div><a class="clip-open-link" href="https://clips.twitch.tv/ImportantExuberantSoybeanCopyThis-_YjtRbUlzhf1SFEY" target="_blank" rel="noopener noreferrer">ABRIR CLIP EN TWITCH ↗</a></article>
+    <article class="clip-feature-card"><span>LOS MORIARTYS · CLIP 02</span><h5>SE BOXEAN EN NUESTRO BAR</h5><p class="clip-context">En @TheR0D3R1k, @Akumazoldyck y @LadyMoriarty01 · #BarFender</p><div class="twitch-clip-frame"><iframe src="https://clips.twitch.tv/embed?clip=AssiduousMildSkirretWoofer-IWeZeQsl3J_cFI_x&parent=losmoriartys-cmd.github.io" title="Se boxean en nuestro bar · Los Moriartys" loading="lazy" allowfullscreen="true" scrolling="no"></iframe></div><a class="clip-open-link" href="https://clips.twitch.tv/AssiduousMildSkirretWoofer-IWeZeQsl3J_cFI_x" target="_blank" rel="noopener noreferrer">ABRIR CLIP EN TWITCH ↗</a></article>
+    <article class="clip-feature-card"><span>LADY MORIARTY01 · CLIP 01</span><h5>LE PEGUÉ A HARRY POTTER</h5><div class="twitch-clip-frame"><iframe src="https://clips.twitch.tv/embed?clip=ThankfulCogentCodMikeHogu-DUWGz_j_OIBmWYbQ&parent=losmoriartys-cmd.github.io" title="Le pegué a Harry Potter · Lady Moriarty01" loading="lazy" allowfullscreen="true" scrolling="no"></iframe></div><a class="clip-open-link" href="https://www.twitch.tv/ladymoriarty01/clip/ThankfulCogentCodMikeHogu-DUWGz_j_OIBmWYbQ" target="_blank" rel="noopener noreferrer">ABRIR CLIP EN TWITCH ↗</a></article>
+    <article class="clip-feature-card"><span>LADY MORIARTY01 · CLIP 02</span><h5>NO ME DEJAN BAILAR A KAME</h5><div class="twitch-clip-frame"><iframe src="https://clips.twitch.tv/embed?clip=WittySecretiveAmazonWholeWheat-_YY-Mo8YtTK4nra7&parent=losmoriartys-cmd.github.io" title="No me dejan bailar a Kame · Lady Moriarty01" loading="lazy" allowfullscreen="true" scrolling="no"></iframe></div><a class="clip-open-link" href="https://www.twitch.tv/ladymoriarty01/clip/WittySecretiveAmazonWholeWheat-_YY-Mo8YtTK4nra7" target="_blank" rel="noopener noreferrer">ABRIR CLIP EN TWITCH ↗</a></article>
+    <article class="clip-feature-card"><span>LADY MORIARTY01 · CLIP 03</span><h5>TE VOY A PEGAR, BOLUDO</h5><div class="twitch-clip-frame"><iframe src="https://clips.twitch.tv/embed?clip=GlamorousTrustworthyOstrichItsBoshyTime-PV_g8RnQvAsm1cPh&parent=losmoriartys-cmd.github.io" title="Te voy a pegar, boludo · Lady Moriarty01" loading="lazy" allowfullscreen="true" scrolling="no"></iframe></div><a class="clip-open-link" href="https://www.twitch.tv/ladymoriarty01/clip/GlamorousTrustworthyOstrichItsBoshyTime-PV_g8RnQvAsm1cPh" target="_blank" rel="noopener noreferrer">ABRIR CLIP EN TWITCH ↗</a></article>
+    <article class="clip-feature-card"><span>LADY MORIARTY01 · CLIP 04</span><h5>QUERÍA PELEAR</h5><div class="twitch-clip-frame"><iframe src="https://clips.twitch.tv/embed?clip=HeartlessVictoriousMosquitoOpieOP-_blki6PZI15cPHas&parent=losmoriartys-cmd.github.io" title="Quería pelear · Lady Moriarty01" loading="lazy" allowfullscreen="true" scrolling="no"></iframe></div><a class="clip-open-link" href="https://www.twitch.tv/ladymoriarty01/clip/HeartlessVictoriousMosquitoOpieOP-_blki6PZI15cPHas" target="_blank" rel="noopener noreferrer">ABRIR CLIP EN TWITCH ↗</a></article>
+    <article class="clip-feature-card"><span>THER0D3R1K · CLIP 01</span><h5>SE BUSCA EMPLEADO PARA EL BAR</h5><div class="twitch-clip-frame"><iframe src="https://clips.twitch.tv/embed?clip=SuccessfulEsteemedJellyfishKappaWealth-BmNdj5Xculcpr4tI&parent=losmoriartys-cmd.github.io" title="Se busca empleado para el bar · TheR0D3R1K" loading="lazy" allowfullscreen="true" scrolling="no"></iframe></div><a class="clip-open-link" href="https://www.twitch.tv/ther0d3r1k/clip/SuccessfulEsteemedJellyfishKappaWealth-BmNdj5Xculcpr4tI" target="_blank" rel="noopener noreferrer">ABRIR CLIP EN TWITCH ↗</a></article>
+    <article class="clip-feature-card"><span>THER0D3R1K · CLIP 02</span><h5>PERO QUÉ PASÓ</h5><div class="twitch-clip-frame"><iframe src="https://clips.twitch.tv/embed?clip=PrettyAmazingSnailYouWHY-77jNNuLbSzX0NvJa&parent=losmoriartys-cmd.github.io" title="Pero qué pasó · TheR0D3R1K" loading="lazy" allowfullscreen="true" scrolling="no"></iframe></div><a class="clip-open-link" href="https://www.twitch.tv/ther0d3r1k/clip/PrettyAmazingSnailYouWHY-77jNNuLbSzX0NvJa" target="_blank" rel="noopener noreferrer">ABRIR CLIP EN TWITCH ↗</a></article>
+   </div>
+  </section>
+  <section class="campaign-brand-value">
+   <div class="campaign-subhead"><span class="collab-kicker">05 / VALOR PARA MARCAS Y PUBLISHERS</span><h4>¿QUÉ DEMUESTRA ESTA EXPERIENCIA?</h4></div>
+   <div class="campaign-value-grid">
+    <article><h5>COORDINACIÓN MULTICANAL</h5><p>Cuatro creadores pudieron organizar una actividad compartida y emitirla desde sus canales individuales.</p></article>
+    <article><h5>CONTENIDO DESDE DISTINTAS VOCES</h5><p>Una misma experiencia generó perspectivas, reacciones y momentos diferentes para cada comunidad.</p></article>
+    <article><h5>CONTINUIDAD DESPUÉS DEL DIRECTO</h5><p>Los VOD y los ocho clips identificados permiten conservar y prolongar la vida del contenido.</p></article>
+    <article><h5>COMUNIDADES CONECTADAS</h5><p>La actividad ofrece un ejemplo concreto de colaboración entre creadores sin borrar la identidad de cada canal.</p></article>
+   </div>
+   <p class="campaign-transparency"><b>Transparencia:</b> esta ficha documenta una sesión colaborativa con acceso al juego facilitado mediante Keymailer. No se presenta como patrocinio remunerado ni se atribuyen ventas, conversiones o ROI. Las métricas se muestran con su fuente y alcance; los 98 espectadores compartidos únicos no son una cifra global deduplicada de los cuatro canales.</p>
+  </section>
+ </section>
+ <section class="collab-next"><div><span class="collab-kicker">EL ARCHIVO SIGUE ABIERTO</span><h3>CADA COLABORACIÓN<br><span>SUMA UNA NUEVA HISTORIA.</span></h3><p>La próxima bitácora podrá documentar otro juego, evento, encuentro, directo conjunto o proyecto comunitario. Cada experiencia tendrá su propio expediente y conservará el registro de quienes la hicieron posible.</p></div><div class="collab-next-stamp">PRÓXIMO<br><strong>EXPEDIENTE</strong><br>002 · PENDIENTE</div></section>
+ <div class="collab-contact"><span>¿REPRESENTÁS UN ESTUDIO, PUBLISHER, AGENCIA O MARCA?</span><p>Podemos conversar sobre experiencias multicanal, contenido cooperativo y activaciones con creadores.</p><a href="mailto:losmoriartys@gmail.com?subject=Colaboraciones%20-%20Legi%C3%B3n%20Multiversal">CONTACTAR A LA LEGIÓN ↗</a></div>
+</section>
+
 <section id="chapter-5" class="chapter-panel comic-page">
 <div class="chapter-tag">CAPÍTULO 05 · SELECCIÓN DE LA LEGIÓN</div>
 <h2 class="comic-title">ARSENAL MULTIVERSAL — 10 JUEGOS</h2>
@@ -374,6 +498,55 @@
 <p>Una selección para reunir al roster y a la comunidad alrededor de experiencias distintas: juegos de fiesta, engaño social, escondidas, terror cooperativo, supervivencia y mundos para construir juntos. No todos son cooperativos tradicionales; elegimos cada título por lo que puede generar cuando lo compartimos en directo.</p>
 <p><b>Nuestro criterio:</b> priorizamos la diversión en grupo, las situaciones inesperadas, la participación y el potencial de crear momentos memorables. Antes de organizar una sesión, revisá la tienda oficial para confirmar edición, requisitos y compatibilidad entre plataformas.</p>
 </div>
+<section class="premium-panel creator-platform-guide" aria-labelledby="creator-platform-guide-title">
+    <div class="premium-kicker">CENTRAL DE RECURSOS · HERRAMIENTAS PARA CREADORES</div>
+    <h3 id="creator-platform-guide-title">DESCUBRIR JUEGOS. SOLICITAR ACCESO. CREAR CONTENIDO.</h3>
+    <p>Compartimos orientación para que cada integrante explore oportunidades de acceso a videojuegos. Son servicios externos: cada creador administra su cuenta, presenta sus solicitudes y acepta las condiciones de cada campaña.</p>
+    <div class="premium-grid">
+        <article class="premium-card creator-platform-card">
+            <div class="premium-kicker">PLATAFORMA DE SOLICITUDES · CLAVES DE JUEGOS</div>
+            <h3>KEYMAILER</h3>
+            <p>Conecta creadores con publishers, desarrolladores y agencias. La decisión de ofrecer una clave corresponde a quien gestiona cada juego, no a Keymailer ni a la Legión.</p>
+            <ol>
+                <li>Creá tu cuenta de creador y completá el perfil con información real.</li>
+                <li>Vinculá tus canales y mantené actualizados contenidos, categorías y actividad.</li>
+                <li>Buscá un juego que encaje con tu canal y revisá sus condiciones.</li>
+                <li>Si está habilitado, seleccioná <b>REQUEST KEY</b>; si no admite solicitudes, usá <b>Notify Me</b> si aparece.</li>
+                <li>Revisá <b>My Keys</b> y tu correo. Solicitar no significa tener aprobación.</li>
+                <li>Si aceptás, cumplí el plazo, las instrucciones y los requisitos de publicación de la oferta.</li>
+            </ol>
+            <p class="stats-note">Para partidas grupales, completá correctamente el tamaño habitual de tu equipo en el perfil si la opción está disponible. El publisher decide si ofrece claves adicionales.</p>
+            <p><a href="https://www.keymailer.co/" target="_blank" rel="noopener noreferrer">ENTRAR EN KEYMAILER ↗</a> · <a href="https://www.keymailer.co/allfaq" target="_blank" rel="noopener noreferrer">AYUDA OFICIAL ↗</a></p>
+        </article>
+        <article class="premium-card creator-platform-card">
+            <div class="premium-kicker">CAMPAÑAS PARA CREADORES · ACCESO A JUEGOS</div>
+            <h3>LURKIT</h3>
+            <p>Reúne campañas de juegos y oportunidades para creadores. Cada campaña puede tener requisitos, entregables, fechas y criterios propios.</p>
+            <ol>
+                <li>Creá una cuenta gratuita.</li>
+                <li>Completá tu perfil y conectá tus canales de streaming, vídeo y redes disponibles.</li>
+                <li>Explorá campañas y leé requisitos, contenido esperado y fechas.</li>
+                <li>Solicitá participar solo en campañas que encajen con tu contenido y disponibilidad.</li>
+                <li>Esperá la aprobación y, si te aceptan, accedé al Key Kit según las instrucciones.</li>
+                <li>Creá el contenido y enviá el enlace desde campañas activas antes del vencimiento.</li>
+            </ol>
+            <p class="stats-note">En campañas de claves, Lurkit indica 30 días desde que se accede al Key Kit. Prevalecen la fecha y condiciones de cada campaña.</p>
+            <p><a href="https://www.lurkit.gg/creators/key-campaigns" target="_blank" rel="noopener noreferrer">LURKIT PARA CREADORES ↗</a> · <a href="https://support.lurkit.com/how-to-submit-content" target="_blank" rel="noopener noreferrer">GUÍA DE ENVÍO ↗</a></p>
+        </article>
+    </div>
+    <div class="premium-panel">
+        <div class="premium-kicker">PROTOCOLO DE LA LEGIÓN · BUENAS PRÁCTICAS</div>
+        <h3>UNA CLAVE ES UNA OPORTUNIDAD, TAMBIÉN UN COMPROMISO.</h3>
+        <ul>
+            <li>Solicitá juegos relacionados con tu canal y contenido que quieras producir.</li>
+            <li>No solicites claves si no podés cumplir las condiciones.</li>
+            <li>Respetá embargos, fechas, formatos y entregables.</li>
+            <li>Publicá y reportá el contenido; guardá enlaces y evidencias.</li>
+            <li>Para sesiones grupales, coordiná quién solicita, quién recibe cada acceso y qué contenido se producirá.</li>
+        </ul>
+        <p><b>Importante:</b> la Legión comparte orientación, pero no garantiza aprobaciones, claves gratuitas, campañas remuneradas ni acceso a cuentas de terceros. Keymailer y Lurkit son plataformas independientes; utilizarlas no implica alianza, patrocinio ni representación oficial.</p>
+    </div>
+</section>
 <div class="premium-grid arsenal-grid">
 <article class="premium-card arsenal-card">
 <img class="arsenal-cover" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/5053820/cb42d784567e89c1c409e49856ece32c9cf8ab36/header.jpg" alt="Arte oficial de Mimic Party" loading="lazy" decoding="async">
@@ -462,19 +635,23 @@
 <p>Las fichas enlazan a la tienda oficial de cada juego. Antes de convocar al roster, confirmá que todos tengan la misma edición o una versión compatible. En Minecraft, distinguí Java de Bedrock; en los títulos de Steam, revisá los requisitos y el modo online de la ficha vigente.</p>
 </div>
 </section>
-<section id="chapter-10" class="chapter-panel comic-page live-chapter">
- <div class="chapter-tag">TRANSMISIONES</div>
- <h2 class="comic-title">LEGIÓN MULTIVERSAL · EN VIVO</h2>
- <div class="premium-panel live-intro"><div class="premium-kicker"><span class="live-pulse"></span> CENTRAL DE TRANSMISIONES</div><h3>La Legión está en directo</h3><p>Cuando uno o más integrantes estén transmitiendo, vas a poder elegir un canal y verlo directamente desde esta página. La disponibilidad se actualiza a partir de las consultas programadas del sistema.</p></div>
- <div id="live-directory" class="live-directory"><p class="stats-note">Consultando el estado de los canales…</p></div>
- <div id="live-player-wrap" class="live-player-wrap" hidden><div class="live-player-heading"><h3 id="live-player-title">TRANSMISIÓN SELECCIONADA</h3><a id="live-open-channel" href="https://twitch.tv/losmoriartys" target="_blank" rel="noopener noreferrer">Abrir canal en Twitch ↗</a></div><div id="live-player" class="live-player"></div></div>
- <p class="stats-note">El reproductor oficial de Twitch requiere conexión a internet y un navegador compatible. En GitHub Pages se utiliza el dominio publicado como parámetro de inserción; si abrís una copia local, Twitch puede bloquear la reproducción.</p>
-</section>
 
-<!-- CAPÍTULO 7: RECLUTAMIENTO -->
-        <section id="chapter-6" class="chapter-panel">
+<section id="chapter-6" class="chapter-panel">
             <div class="chapter-tag">CAPÍTULO 06</div>
             <h2 class="comic-title">RECLUTAMIENTO · LEGIÓN MULTIVERSAL</h2>
+            <div class="premium-panel recruitment-onboarding">
+                <div class="premium-kicker">INCORPORACIÓN · CÓMO TRABAJAMOS</div>
+                <h3>SUMARTE A LA LEGIÓN ES ENTRAR EN UNA COMUNIDAD, NO EN UNA PROMESA DE RESULTADOS.</h3>
+                <p>Buscamos creadores con identidad propia, ganas de colaborar y disposición para construir proyectos compartidos. Cada integrante conserva su canal, sus cuentas y sus decisiones profesionales.</p>
+                <div class="premium-grid">
+                    <article class="premium-card"><h3>IDENTIDAD PROPIA</h3><p>No necesitás cambiar tu nombre, contenido ni estilo.</p></article>
+                    <article class="premium-card"><h3>RECURSOS COMPARTIDOS</h3><p>Compartimos orientación y experiencias para descubrir juegos y campañas. Las guías están en Arsenal.</p></article>
+                    <article class="premium-card"><h3>GESTIÓN INDIVIDUAL</h3><p>Cada creador administra sus perfiles, solicita sus claves y acepta personalmente las condiciones. La aprobación depende de cada publisher o campaña.</p></article>
+                    <article class="premium-card"><h3>COMPROMISO COLECTIVO</h3><p>Para actividades grupales coordinamos participantes, disponibilidad, accesos y contenido antes de confirmar.</p></article>
+                </div>
+                <p class="stats-note">Formar parte del roster no garantiza claves, patrocinios, ingresos, campañas ni crecimiento de audiencia.</p>
+                <p><button class="chapter-cta" type="button" onclick="switchChapter(5)">CONSULTAR ARSENAL · GUÍAS PARA CREADORES ↗</button></p>
+            </div>
             <form class="comic-form" onsubmit="event.preventDefault();const d=new FormData(this);const body=Array.from(d.entries()).map(([k,v])=>k+': '+v).join('\n');window.location.href='mailto:losmoriartys@gmail.com?subject='+encodeURIComponent('Postulación a Legión Multiversal')+'&body='+encodeURIComponent(body);">
 <div class="premium-grid">
 <div class="form-group"><label>Nombre o alias *</label><input name="Nombre o alias" type="text" required placeholder="Tu nombre de creador"></div>
@@ -497,128 +674,9 @@
 </form>
         </section>
 
-        <!-- CAPÍTULO 8: STAFF -->
-        <!-- Contacto técnico trasladado al pie de página. -->
-    <!-- CAPÍTULO 9: PARTNERS Y MARCAS -->
-<section id="chapter-8" class="chapter-panel comic-page">
- <div class="chapter-tag">CAPÍTULO 08</div><h2 class="comic-title">ALIANZAS, PARTNERS Y OPORTUNIDADES</h2>
- <div class="premium-panel"><div class="premium-kicker">Propuesta para marcas, estudios y publishers</div><h3>Colaborar para crear experiencias que conecten</h3>
- <p>Legión Multiversal reúne creadores de gaming, entretenimiento, tecnología y desarrollo personal. Diseñamos colaboraciones que respetan la identidad de cada canal y buscan una conexión genuina con la audiencia.</p></div>
- <div class="premium-grid">
-  <article class="premium-card"><h3>DIRECTOS Y COBERTURA</h3><p>Presentaciones de juegos, primeras impresiones, sesiones especiales, cobertura de lanzamientos y experiencias en vivo.</p></article>
-  <article class="premium-card"><h3>CONTENIDO COOPERATIVO</h3><p>Sesiones grupales, desafíos, eventos con varios creadores y formatos que muestran la interacción real del equipo.</p></article>
-  <article class="premium-card"><h3>CLIPS Y DIFUSIÓN</h3><p>Momentos destacados, piezas breves y publicaciones complementarias para extender la conversación más allá del directo.</p></article>
-  <article class="premium-card"><h3>ACCIONES CON LA COMUNIDAD</h3><p>Dinámicas participativas, sorteos cuando estén autorizados, encuentros y experiencias alineadas con cada campaña.</p></article>
-  <article class="premium-card"><h3>KEYS, LANZAMIENTOS Y PRIMERAS IMPRESIONES</h3><p>Recepción y presentación de claves, primeras partidas, cobertura de lanzamientos, sesiones cooperativas y clips posteriores. Cada propuesta se adapta al juego, al perfil del creador y a las condiciones acordadas con el estudio o publisher.</p></article>
- </div>
- <div class="premium-panel"><div class="premium-kicker">Experiencia y relaciones</div><h3>Un equipo con experiencia en el ecosistema creator</h3>
- <p>Los integrantes cuentan con experiencia en transmisiones, campañas de videojuegos, solicitudes de acceso y programas para creadores. Las colaboraciones y acreditaciones se comunican de forma individual y únicamente cuando pueden respaldarse.</p>
- <p><b>Transparencia:</b> las colaboraciones, acreditaciones y campañas se incorporarán a esta presentación cuando cada una cuente con respaldo verificable —por ejemplo, una página oficial, una comunicación del publisher o un registro fechado—. Una solicitud de acceso, una clave recibida o la participación en una plataforma de campañas no se presentarán como una alianza oficial.</p>
- </div>
- <div class="premium-panel collaboration-bridge"><div class="premium-kicker">Experiencias reales · archivo de campañas</div><h3>Conocé cómo trabajamos en equipo</h3><p>Las propuestas comerciales también se respaldan con experiencias documentadas: sesiones coordinadas, creadores participantes, VOD, clips y métricas presentadas con su fuente y alcance.</p><p><button class="chapter-cta" type="button" onclick="switchChapter(12)">EXPLORAR EXPEDIENTES DE COLABORACIÓN <span>↗</span></button></p></div>
- <div class="premium-panel"><div class="premium-kicker">Contacto comercial</div><h3>Hablemos de una colaboración</h3><p>Desarrolladores, publishers, agencias y marcas pueden acercar propuestas de campañas, patrocinios, cobertura, accesos anticipados o acciones con la comunidad.</p><p>Para evaluar una propuesta, compartí la marca o juego, objetivos, fechas, plataformas, entregables esperados y presupuesto disponible.</p><p><a class="btn-link" href="mailto:losmoriartys@gmail.com?subject=Propuesta%20comercial%20-%20Legi%C3%B3n%20Multiversal">losmoriartys@gmail.com</a></p></div>
-</section>
+        <!-- Recursos de Lurkit y Keymailer: material operativo retirado de la navegación pública. -->
 
-<!-- CAPÍTULO 12: COLABORACIONES Y BITÁCORA DE CAMPAÑAS -->
-<section id="chapter-12" class="chapter-panel comic-page collaboration-chapter">
- <div class="chapter-tag">CAPÍTULO 12 · ARCHIVO DE EXPERIENCIAS COMPARTIDAS</div>
- <div class="collab-cover">
-  <div class="collab-cover-copy">
-   <span class="collab-kicker">ARCHIVO CENTRAL · LEGIÓN MULTIVERSAL</span>
-   <h2>CUANDO LOS UNIVERSOS<br><span>SE ENCUENTRAN.</span></h2>
-   <p>Las colaboraciones son parte de nuestra historia. Este archivo registra partidas compartidas, directos simultáneos, eventos y proyectos en los que los integrantes de la Legión unen sus comunidades para crear algo en común.</p>
-   <div class="collab-cover-stamp">BITÁCORA VIVA · CAMPAÑAS Y ENCUENTROS</div>
-  </div>
-  <figure class="collab-cover-art"><img src="barfe.jpg" alt="Imagen de archivo de la colaboración BarFender" loading="lazy"><figcaption>EXPEDIENTE DESTACADO · BARFENDER · CAMPAÑA 001</figcaption></figure>
- </div>
- <section class="collab-intro">
-  <div class="section-kicker">01 / EL ARCHIVO</div>
-  <div class="section-heading"><h3>NO SON SOLO PARTIDAS.<br><span>SON EXPERIENCIAS CONSTRUIDAS EN EQUIPO.</span></h3><p>Cada expediente conserva quiénes participaron, qué hicieron, dónde se transmitió, qué contenido quedó registrado y qué resultados pueden respaldarse. Las cifras individuales y compartidas se presentan por separado para que cada dato tenga contexto.</p></div>
-  <div class="collab-principles">
-   <article><strong>01</strong><h4>CREADORES</h4><p>Visibilidad para cada integrante y su canal.</p></article>
-   <article><strong>02</strong><h4>CONTENIDO</h4><p>VOD, clips y momentos que prolongan la experiencia.</p></article>
-   <article><strong>03</strong><h4>COMUNIDADES</h4><p>Distintas audiencias reunidas alrededor de una actividad común.</p></article>
-   <article><strong>04</strong><h4>TRANSPARENCIA</h4><p>Métricas con fuente, período y alcance identificados.</p></article>
-  </div>
- </section>
- <section class="campaign-feature" id="barfender-expediente">
-  <div class="campaign-feature-head"><div><span class="collab-kicker">EXPEDIENTE COMERCIAL · N.º 001</span><h3>BARFENDER</h3><p>Cuatro creadores. Cuatro canales. Una misma partida.</p></div><div class="campaign-edition">CAMPAÑA<br><strong>001</strong><br>05 · 11 · 2026</div></div>
-  <figure class="campaign-wide-art"><img src="1batalla.jpg" alt="Imagen de la sesión de juego BarFender" loading="lazy"><figcaption>REGISTRO VISUAL · Una noche de juego y colaboración transmitida desde cuatro canales.</figcaption></figure>
-  <figure class="barfender-steam-art"><a href="https://store.steampowered.com/app/4159680/Barfender_COOP_Bar_Simulator/" target="_blank" rel="noopener noreferrer"><img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4159680/c1225b8fe18d0878c5be25b0081c801e50bb258e/header_alt_assets_8.jpg?t=1793628252" alt="Barfender, simulador cooperativo de bar para 1 a 4 jugadores" loading="lazy"></a><figcaption>BARFENDER · FICHA DEL JUEGO · <a href="https://store.steampowered.com/app/4159680/Barfender_COOP_Bar_Simulator/#app_reviews_hash" target="_blank" rel="noopener noreferrer">VER EN STEAM ↗</a></figcaption></figure>
-  <div class="barfender-game-profile"><div><span class="collab-kicker">EL JUEGO DE LA CAMPAÑA</span><p>Un caótico simulador cooperativo de bar para 1–4 jugadores: servir copas, limpiar desastres, detener peleas y mantener el local en pie mientras la noche se descontrola. Los jugadores preparan el bar, atienden a la multitud e intentan sobrevivir al turno.</p></div><dl><div><dt>LANZAMIENTO</dt><dd>12 OCT 2026</dd></div><div><dt>DESARROLLADOR</dt><dd>Proto Division</dd></div><div><dt>EDITOR</dt><dd>Rock Paper Publisher</dd></div><div><dt>RESEÑAS EN STEAM</dt><dd>Muy positivas · 330 reseñas</dd></div></dl></div>
-  <div class="campaign-summary-grid">
-   <article class="campaign-summary-copy"><span class="collab-kicker">LA EXPERIENCIA</span><h4>UNA SESIÓN, CUATRO PUNTOS DE VISTA.</h4>
-    <p>El 5 de noviembre de 2026, <strong>Demian, Lady Moriarty, Rod3rik y Akuma</strong> se reunieron para jugar BarFender y colaborar en directo desde sus propios canales de Twitch. La actividad compartida se extendió durante aproximadamente una hora y media.</p>
-    <p>La propuesta permitió mostrar una misma experiencia desde cuatro comunidades y estilos de transmisión, generar interacción entre creadores y conservar momentos destacados para seguir difundiendo la actividad después del directo.</p>
-    <p class="campaign-credit"><b>Juego:</b> BarFender<br><b>Publisher:</b> Rock Paper Publisher<br><b>Desarrollador:</b> Proto Division<br><b>Acceso al juego:</b> facilitado mediante Keymailer.</p>
-   </article>
-   <aside class="campaign-roster"><span class="collab-kicker">EQUIPO DESPLEGADO</span>
-    <div class="campaign-agent"><img src="assets/carnet/DemuianCarnet.jpg" alt="" loading="lazy"><div><strong>DEMIAN</strong><small>LOS MORIARTYS · CANAL CONJUNTO</small></div></div>
-    <div class="campaign-agent"><img class="campaign-agent-lady" src="assets/ladymoriarty.jpg" alt="Retrato de Lady Moriarty" loading="lazy"><div><strong>LADY MORIARTY</strong><small>LADYMORIARTY01 · CANAL INDIVIDUAL</small></div></div>
-    <div class="campaign-agent"><img src="assets/rod3r1k.jpg" alt="" loading="lazy"><div><strong>ROD3RIK</strong><small>THER0D3R1K · CANAL INDIVIDUAL</small></div></div>
-    <div class="campaign-agent"><img src="assets/akuma.jpg" alt="" loading="lazy"><div><strong>AKUMA</strong><small>AKUMAZOLDYCK · CANAL INDIVIDUAL</small></div></div>
-   </aside>
-  </div>
-  <div class="campaign-metrics">
-   <article><strong>4</strong><span>CANALES EN SIMULTÁNEO</span></article><article><strong>~1 H 30 MIN</strong><span>ACTIVIDAD COLABORATIVA</span></article><article><strong>8</strong><span>CLIPS IDENTIFICADOS</span></article><article><strong>98</strong><span>ESPECTADORES COMPARTIDOS ÚNICOS*</span></article>
-  </div>
-  <p class="campaign-footnote">* Los 98 espectadores compartidos únicos corresponden al panel Twitch Shared Viewership del canal Los Moriartys. No representan una deduplicación global de la audiencia de los cuatro canales ni deben sumarse a los espectadores únicos individuales.</p>
-  <section class="campaign-impact">
-   <div class="campaign-subhead"><span class="collab-kicker">02 / MÉTRICAS Y ALCANCE</span><h4>EL DIRECTO DE LOS MORIARTYS</h4><p>Datos del VOD completo del 5/11/2026. Estas métricas corresponden a toda la transmisión, no exclusivamente al tramo de BarFender.</p></div>
-   <div class="campaign-stat-grid">
-    <div><strong>25</strong><span>ESPECTADORES PROMEDIO</span></div><div><strong>40</strong><span>PICO MÁXIMO · CANAL LOS MORIARTYS</span></div><div><strong>80</strong><span>ESPECTADORES ÚNICOS</span></div><div><strong>91</strong><span>USUARIOS EN CHAT</span></div><div><strong>154</strong><span>VISTAS EN DIRECTO</span></div><div><strong>+2</strong><span>NUEVOS SEGUIDORES</span></div><div><strong>1</strong><span>NUEVA SUSCRIPCIÓN</span></div><div><strong>2 H 27 MIN</strong><span>DURACIÓN DEL VOD · 2:27:20</span></div>
-   </div>
-   <p class="campaign-footnote">Fuente: estadísticas del directo de Los Moriartys y panel Twitch Shared Viewership. El VOD completo tuvo una duración de 2:27:20. El indicador de 98 espectadores compartidos únicos se conserva como dato independiente del panel y no equivale a espectadores únicos deduplicados de toda la campaña.</p>
-  </section>
-  <section class="campaign-vods">
-   <div class="campaign-subhead"><span class="collab-kicker">03 / REGISTROS DE TRANSMISIÓN</span><h4>LA ACTIVIDAD, DESDE CADA CANAL</h4><p>Se localizaron tres VOD públicos. Akuma participó en simultáneo, pero no se localizó un VOD público para incorporar al archivo.</p></div>
-   <div class="vod-grid">
-    <a href="https://www.twitch.tv/videos/2919716450" target="_blank" rel="noopener noreferrer"><span>VOD 01 · LOS MORIARTYS</span><strong>1:15:36</strong><small>ABRIR TRANSMISIÓN ↗</small></a>
-    <a href="https://www.twitch.tv/videos/2919755971" target="_blank" rel="noopener noreferrer"><span>VOD 02 · LADY MORIARTY01</span><strong>1:13:58</strong><small>ABRIR TRANSMISIÓN ↗</small></a>
-    <a href="https://www.twitch.tv/videos/2919719142" target="_blank" rel="noopener noreferrer"><span>VOD 03 · THER0D3R1K</span><strong>1:14:01</strong><small>ABRIR TRANSMISIÓN ↗</small></a>
-   </div>
-   <div class="vod-total"><strong>3 H 43 MIN 35 S</strong><span>TIEMPO EFECTIVO SUMADO EN LOS TRES VOD DOCUMENTADOS · NO REPRESENTA HORAS VISTAS.</span></div>
-  </section>
-  <section class="campaign-clips">
-   <div class="campaign-subhead"><span class="collab-kicker">04 / ARCHIVO AUDIOVISUAL</span><h4>OCHO MOMENTOS PARA VOLVER A LA NOCHE</h4><p>El archivo incorpora los clips recuperados de Los Moriartys. Cada reproducción conserva su título original y abre el contenido alojado en Twitch.</p></div>
-   <div class="clip-channel-grid">
-    <article class="clip-feature-card"><span>LOS MORIARTYS · CLIP 01</span><h5>OJO OJO OJO VOMITA... ALV VOMITÓ</h5><div class="twitch-clip-frame"><iframe src="https://clips.twitch.tv/embed?clip=ImportantExuberantSoybeanCopyThis-_YjtRbUlzhf1SFEY&parent=losmoriartys-cmd.github.io" title="Ojo ojo ojo vomita... alv vomitó · Los Moriartys" loading="lazy" allowfullscreen="true" scrolling="no"></iframe></div><a class="clip-open-link" href="https://clips.twitch.tv/ImportantExuberantSoybeanCopyThis-_YjtRbUlzhf1SFEY" target="_blank" rel="noopener noreferrer">ABRIR CLIP EN TWITCH ↗</a></article>
-    <article class="clip-feature-card"><span>LOS MORIARTYS · CLIP 02</span><h5>SE BOXEAN EN NUESTRO BAR</h5><p class="clip-context">En @TheR0D3R1k, @Akumazoldyck y @LadyMoriarty01 · #BarFender</p><div class="twitch-clip-frame"><iframe src="https://clips.twitch.tv/embed?clip=AssiduousMildSkirretWoofer-IWeZeQsl3J_cFI_x&parent=losmoriartys-cmd.github.io" title="Se boxean en nuestro bar · Los Moriartys" loading="lazy" allowfullscreen="true" scrolling="no"></iframe></div><a class="clip-open-link" href="https://clips.twitch.tv/AssiduousMildSkirretWoofer-IWeZeQsl3J_cFI_x" target="_blank" rel="noopener noreferrer">ABRIR CLIP EN TWITCH ↗</a></article>
-    <article class="clip-feature-card"><span>LADY MORIARTY01 · CLIP 01</span><h5>LE PEGUÉ A HARRY POTTER</h5><div class="twitch-clip-frame"><iframe src="https://clips.twitch.tv/embed?clip=ThankfulCogentCodMikeHogu-DUWGz_j_OIBmWYbQ&parent=losmoriartys-cmd.github.io" title="Le pegué a Harry Potter · Lady Moriarty01" loading="lazy" allowfullscreen="true" scrolling="no"></iframe></div><a class="clip-open-link" href="https://www.twitch.tv/ladymoriarty01/clip/ThankfulCogentCodMikeHogu-DUWGz_j_OIBmWYbQ" target="_blank" rel="noopener noreferrer">ABRIR CLIP EN TWITCH ↗</a></article>
-    <article class="clip-feature-card"><span>LADY MORIARTY01 · CLIP 02</span><h5>NO ME DEJAN BAILAR A KAME</h5><div class="twitch-clip-frame"><iframe src="https://clips.twitch.tv/embed?clip=WittySecretiveAmazonWholeWheat-_YY-Mo8YtTK4nra7&parent=losmoriartys-cmd.github.io" title="No me dejan bailar a Kame · Lady Moriarty01" loading="lazy" allowfullscreen="true" scrolling="no"></iframe></div><a class="clip-open-link" href="https://www.twitch.tv/ladymoriarty01/clip/WittySecretiveAmazonWholeWheat-_YY-Mo8YtTK4nra7" target="_blank" rel="noopener noreferrer">ABRIR CLIP EN TWITCH ↗</a></article>
-    <article class="clip-feature-card"><span>LADY MORIARTY01 · CLIP 03</span><h5>TE VOY A PEGAR, BOLUDO</h5><div class="twitch-clip-frame"><iframe src="https://clips.twitch.tv/embed?clip=GlamorousTrustworthyOstrichItsBoshyTime-PV_g8RnQvAsm1cPh&parent=losmoriartys-cmd.github.io" title="Te voy a pegar, boludo · Lady Moriarty01" loading="lazy" allowfullscreen="true" scrolling="no"></iframe></div><a class="clip-open-link" href="https://www.twitch.tv/ladymoriarty01/clip/GlamorousTrustworthyOstrichItsBoshyTime-PV_g8RnQvAsm1cPh" target="_blank" rel="noopener noreferrer">ABRIR CLIP EN TWITCH ↗</a></article>
-    <article class="clip-feature-card"><span>LADY MORIARTY01 · CLIP 04</span><h5>QUERÍA PELEAR</h5><div class="twitch-clip-frame"><iframe src="https://clips.twitch.tv/embed?clip=HeartlessVictoriousMosquitoOpieOP-_blki6PZI15cPHas&parent=losmoriartys-cmd.github.io" title="Quería pelear · Lady Moriarty01" loading="lazy" allowfullscreen="true" scrolling="no"></iframe></div><a class="clip-open-link" href="https://www.twitch.tv/ladymoriarty01/clip/HeartlessVictoriousMosquitoOpieOP-_blki6PZI15cPHas" target="_blank" rel="noopener noreferrer">ABRIR CLIP EN TWITCH ↗</a></article>
-    <article class="clip-feature-card"><span>THER0D3R1K · CLIP 01</span><h5>SE BUSCA EMPLEADO PARA EL BAR</h5><div class="twitch-clip-frame"><iframe src="https://clips.twitch.tv/embed?clip=SuccessfulEsteemedJellyfishKappaWealth-BmNdj5Xculcpr4tI&parent=losmoriartys-cmd.github.io" title="Se busca empleado para el bar · TheR0D3R1K" loading="lazy" allowfullscreen="true" scrolling="no"></iframe></div><a class="clip-open-link" href="https://www.twitch.tv/ther0d3r1k/clip/SuccessfulEsteemedJellyfishKappaWealth-BmNdj5Xculcpr4tI" target="_blank" rel="noopener noreferrer">ABRIR CLIP EN TWITCH ↗</a></article>
-    <article class="clip-feature-card"><span>THER0D3R1K · CLIP 02</span><h5>PERO QUÉ PASÓ</h5><div class="twitch-clip-frame"><iframe src="https://clips.twitch.tv/embed?clip=PrettyAmazingSnailYouWHY-77jNNuLbSzX0NvJa&parent=losmoriartys-cmd.github.io" title="Pero qué pasó · TheR0D3R1K" loading="lazy" allowfullscreen="true" scrolling="no"></iframe></div><a class="clip-open-link" href="https://www.twitch.tv/ther0d3r1k/clip/PrettyAmazingSnailYouWHY-77jNNuLbSzX0NvJa" target="_blank" rel="noopener noreferrer">ABRIR CLIP EN TWITCH ↗</a></article>
-   </div>
-  </section>
-  <section class="campaign-brand-value">
-   <div class="campaign-subhead"><span class="collab-kicker">05 / VALOR PARA MARCAS Y PUBLISHERS</span><h4>¿QUÉ DEMUESTRA ESTA EXPERIENCIA?</h4></div>
-   <div class="campaign-value-grid">
-    <article><h5>COORDINACIÓN MULTICANAL</h5><p>Cuatro creadores pudieron organizar una actividad compartida y emitirla desde sus canales individuales.</p></article>
-    <article><h5>CONTENIDO DESDE DISTINTAS VOCES</h5><p>Una misma experiencia generó perspectivas, reacciones y momentos diferentes para cada comunidad.</p></article>
-    <article><h5>CONTINUIDAD DESPUÉS DEL DIRECTO</h5><p>Los VOD y los ocho clips identificados permiten conservar y prolongar la vida del contenido.</p></article>
-    <article><h5>COMUNIDADES CONECTADAS</h5><p>La actividad ofrece un ejemplo concreto de colaboración entre creadores sin borrar la identidad de cada canal.</p></article>
-   </div>
-   <p class="campaign-transparency"><b>Transparencia:</b> esta ficha documenta una sesión colaborativa con acceso al juego facilitado mediante Keymailer. No se presenta como patrocinio remunerado ni se atribuyen ventas, conversiones o ROI. Las métricas se muestran con su fuente y alcance; los 98 espectadores compartidos únicos no son una cifra global deduplicada de los cuatro canales.</p>
-  </section>
- </section>
- <section class="collab-next"><div><span class="collab-kicker">EL ARCHIVO SIGUE ABIERTO</span><h3>CADA COLABORACIÓN<br><span>SUMA UNA NUEVA HISTORIA.</span></h3><p>La próxima bitácora podrá documentar otro juego, evento, encuentro, directo conjunto o proyecto comunitario. Cada experiencia tendrá su propio expediente y conservará el registro de quienes la hicieron posible.</p></div><div class="collab-next-stamp">PRÓXIMO<br><strong>EXPEDIENTE</strong><br>002 · PENDIENTE</div></section>
- <div class="collab-contact"><span>¿REPRESENTÁS UN ESTUDIO, PUBLISHER, AGENCIA O MARCA?</span><p>Podemos conversar sobre experiencias multicanal, contenido cooperativo y activaciones con creadores.</p><a href="mailto:losmoriartys@gmail.com?subject=Colaboraciones%20-%20Legi%C3%B3n%20Multiversal">CONTACTAR A LA LEGIÓN ↗</a></div>
-</section>
-
-<!-- CAPÍTULO 09: COMUNIDAD Y AGENDA -->
-<section id="chapter-9" class="chapter-panel comic-page">
- <div class="chapter-tag">COMUNIDAD</div><h2 class="comic-title">UN UNIVERSO QUE SE CONSTRUYE EN EQUIPO</h2>
- <div class="premium-panel"><div class="premium-kicker">Comunidad · participación · colaboración</div><h3>Hay muchas formas de formar parte</h3><p>La Legión conecta personas, canales y proyectos distintos. Compartimos partidas, conversaciones, ideas y oportunidades para que cada integrante pueda crecer con su propia identidad.</p></div>
- <div class="premium-grid">
-  <article class="premium-card"><h3>COMPARTIR</h3><p>Descubrí los canales del roster, acompañá sus directos y conocé las distintas propuestas que conviven en la Legión.</p></article>
-  <article class="premium-card"><h3>PARTICIPAR</h3><p>Sumate a las conversaciones, sugerí juegos y proponé actividades grupales a través de nuestros canales públicos.</p></article>
-  <article class="premium-card"><h3>CRECER</h3><p>Creemos en la colaboración genuina, el respeto entre creadores y el intercambio de conocimientos y audiencias.</p></article>
- </div>
- <div class="premium-panel"><h3>Encontranos en Twitch</h3><p>La actividad de cada integrante se publica en su propio canal. Los horarios y las agendas se anuncian cuando cada directo o encuentro está confirmado.</p><p><a href="https://twitch.tv/losmoriartys" target="_blank" rel="noopener noreferrer">Los Moriartys ↗</a></p></div>
-</section>
-</main>
+        </main>
 <footer class="site-technical-footer"><span>LEGIÓN MULTIVERSAL · DIFERENTES MUNDOS. UNA MISMA LEGIÓN.</span><a href="mailto:losmoriartys@gmail.com?subject=Reporte%20t%C3%A9cnico%20del%20sitio">Reportar un problema técnico</a></footer>
 
     <!-- VENTANA MODAL / EXPEDIENTE INDIVIDUAL (PÁGINAS A, B, C) -->
