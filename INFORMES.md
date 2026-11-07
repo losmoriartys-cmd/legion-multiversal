@@ -2087,3 +2087,11 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 - **No se modificó:** el cron existente (`7,22,37,52 * * * *`), la fuente Twitch Helix, el intervalo anti-duplicados de 10 minutos ni las muestras históricas.
 - **Validación pendiente:** ejecutar el workflow y comprobar en una ejecución real que Helix resuelva los siete canales, que se escriban las marcas temporales y que el push quede publicado. Esto mejora la detección de recolecciones parciales y errores de publicación; no impide por sí solo que GitHub retrase u omita eventos `schedule`.
 - **Respaldo externo pendiente:** no se configuró todavía un programador independiente. Hace falta elegir/autorizar un servicio externo y proveer una credencial limitada para invocar `workflow_dispatch`; no se inventaron secretos ni se incorporaron credenciales al repositorio.
+
+## 2026-11-07 — Corrección del orden de sincronización Git en el workflow de estadísticas
+
+- **Hallazgo en producción:** la primera ejecución del workflow endurecido (run [#131](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/42404579029)) consultó Twitch correctamente y verificó los siete canales, pero falló al publicar.
+- **Causa confirmada por el log:** el paso ejecutaba `git add` antes de `git pull --rebase`; Git rechazó el rebase porque el índice ya contenía cambios preparados (`cannot pull with rebase: Your index contains uncommitted changes`).
+- **Corrección:** se movió `git pull --rebase origin main` antes de `git add data.json platform-stats.json`. El commit y los tres intentos de push permanecen después de la preparación de los archivos.
+- **Resultado verificado de la recolección:** la ejecución #131 resolvió los siete canales; la comprobación explícita pasó con siete canales cubiertos y siete omitidos por el umbral anti-duplicados de 10 minutos. Por eso no generó muestras nuevas en esa ejecución. Esto valida la consulta y la integridad del registro, pero no una nueva muestra por canal.
+- **Pendiente:** confirmar que la siguiente ejecución publique correctamente `data.json` y `platform-stats.json`; después medir cobertura y cadencia durante 24 horas. El respaldo mediante un programador externo sigue pendiente de elegir servicio y autorizar credencial.
