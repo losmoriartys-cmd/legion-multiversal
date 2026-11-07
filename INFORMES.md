@@ -1981,3 +1981,14 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 - **Alcance visual:** las portadas son piezas gráficas editoriales de reemplazo, no miniaturas/fotogramas extraídos del video. No se inventan imágenes de los clips; la reproducción completa queda alojada en Twitch.
 - **Archivos modificados:** `index.html` y `styles.css`.
 - **Validación prevista:** comprobar que la sección no conserve iframes de clips, que haya ocho tarjetas y ocho enlaces externos válidos, y que el CSS mantenga la grilla responsive. La publicación en GitHub Pages y la apertura real desde el navegador del usuario quedan pendientes de confirmación.
+
+## 2026-11-07 — Extensión de la solución de clips a los expedientes individuales y auditoría del Capítulo 08
+
+- **Prioridad atendida:** eliminar reproductores incrustados de Twitch que podían mostrar el mismo rechazo de conexión observado en BarFender.
+- **Diagnóstico:** antes del cambio quedaban siete plantillas de reproductor de Twitch Clips en `app.js`, usadas por los expedientes individuales y por el bloque de muestras. Los ocho embeds del archivo BarFender ya habían sido reemplazados en `index.html`.
+- **Implementación:** las siete plantillas ahora muestran una portada gráfica editorial accesible que abre el clip original en Twitch en una pestaña nueva. Se conservan los títulos, slugs/IDs, textos de contexto y enlaces aportados cuando existen. Los destinos externos se limitan a URLs HTTPS de Twitch; si no hay URL propia, se usa el enlace público del clip a partir de su ID. No se modifican los videos de YouTube ni los reproductores de transmisiones en vivo.
+- **Estilos:** se añadieron reglas para que las portadas ocupen el mismo marco 16:9 y mantengan la identidad visual de los expedientes.
+- **Auditoría estática del Capítulo 08 — Alianzas:** el CSS específico está enlazado desde `index.html`; las dos imágenes locales referenciadas existen; los cinco enlaces internos apuntan a secciones presentes; no se detectaron IDs duplicados; los cuatro enlaces externos abren con `noopener noreferrer`; la acción hacia BarFender llama al capítulo 12; y hay reglas responsive para 760 px y 480 px junto con estilos de foco visible. La inspección no equivale a una prueba visual en navegador.
+- **Hallazgos previos revalidados:** el expediente DAVE — NEXUS ya toma el horario desde `hero.schedule` y declara “Sin horario fijo confirmado”; el formulario de reclutamiento ya utiliza el asunto “Quiero unirme a Legión Multiversal”. Esos dos hallazgos del informe histórico están resueltos en el código actual y no requirieron cambios.
+- **Archivos modificados:** `app.js`, `styles.css`, `INFORMES.md`.
+- **Validación pendiente tras el commit:** comprobar sintaxis JavaScript, que no queden embeds de clips Twitch en las plantillas, que permanezcan los embeds de YouTube, y revisar el despliegue publicado. No se declara validación visual manual.
