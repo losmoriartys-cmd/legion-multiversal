@@ -1958,3 +1958,16 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 - **Pendiente:** comprobar la reproducción real de los ocho embeds en la página publicada. Si Twitch sigue mostrando rechazo, solicitar captura del mensaje exacto o probar un clip concreto; no pedir playback IDs salvo que se decida insertar VODs completos en lugar de clips.
 - **Commit de código:** [849e12fa](https://github.com/losmoriartys-cmd/legion-multiversal/commit/849e12fa7c846ec88f8627873d9a4887aa0e00d7).
 - **Despliegue:** commit realizado en `main`; publicación de GitHub Pages y reproducción externa todavía pendientes de verificación.
+
+
+## 2026-11-07 — Coordinación de auditoría visual y revisión del expediente BarFender
+
+- **Responsable:** colaboración ChatGPT + equipo del proyecto.
+- **Objetivo:** dejar registrada la próxima secuencia de trabajo y evitar conflictos con la intervención activa del Capítulo 05 — Arsenal.
+- **Plan de trabajo:** 1) auditoría visual de Capítulo 00 — Portada; 2) auditoría visual de Capítulo 02 — Roster; 3) auditoría visual de Capítulo 08 — Alianzas; 4) revisión editorial, visual y funcional del Capítulo 12 — BarFender.
+- **Alcance de esta etapa:** primero se revisará la versión publicada en escritorio y móvil, navegación, enlaces, legibilidad, jerarquía visual y comportamiento responsive. Se documentarán hallazgos y se propondrán correcciones concretas antes de modificar código.
+- **Archivos previstos para inspección:** `index.html`, `styles.css`, `app.js`, `chapter-8.css`, recursos visuales y datos asociados a los capítulos indicados. La inspección no autoriza cambios automáticos: cada corrección se limitará a los componentes del capítulo correspondiente.
+- **Aislamiento y exclusiones:** no modificar el contenido, estilos, datos, recursos ni lógica del Capítulo 05 — Arsenal; tampoco editar archivos que el responsable de Arsenal esté modificando. Si una corrección compartida afectara un archivo común, se aislará en una rama propia y se coordinará mediante PR, sin sobrescribir trabajo ajeno.
+- **Secuencia de integración:** trabajar una tarea por vez, registrar resultados y validaciones en esta bitácora, revisar el diff para confirmar que no incluya cambios del Capítulo 05 y solicitar revisión antes de integrar cambios de código a `main`.
+- **Estado:** coordinación registrada; auditorías visuales y revisión de BarFender pendientes de ejecución. No se declara todavía ninguna de esas revisiones como completada.
+- **Despliegue:** no aplica a este registro de coordinación.
