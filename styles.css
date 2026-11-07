@@ -2803,3 +2803,55 @@ header .primary-navigation { display:flex; flex-wrap:wrap; gap:7px; align-items:
 .recruitment-contact-note strong { color:#dce8f3; }
 @media(max-width:760px) { .recruitment-path-grid,.recruitment-fields-grid { grid-template-columns:1fr; } .recruitment-path-card { min-height:0; } .recruitment-form-section { padding:17px 14px; } }
 @media(prefers-reduced-motion:reduce) { .recruitment-path-link { scroll-behavior:auto; } }
+
+
+/* Arsenal · expediente de plataformas y actividad */
+.arsenal-platform-records{margin:34px 0 42px;padding:clamp(16px,3vw,30px);border:1px solid rgba(107,190,220,.34);background:linear-gradient(145deg,rgba(9,18,31,.97),rgba(5,10,19,.98));box-shadow:0 18px 48px rgba(0,0,0,.28)}
+.arsenal-records-heading{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:22px;align-items:center;padding-bottom:22px;border-bottom:1px solid rgba(107,190,220,.2)}
+.arsenal-records-heading h3{margin:8px 0;color:#8be3f3;font:clamp(2rem,4.5vw,3.4rem)/.95 'Bangers',cursive;letter-spacing:.04em}
+.arsenal-records-heading p,.arsenal-platform-head p{max-width:850px;color:#c1cede;line-height:1.65}
+.arsenal-record-stamp{min-width:100px;padding:13px;text-align:center;border:1px solid rgba(232,198,117,.5);background:rgba(232,198,117,.06);color:#e9d28e}
+.arsenal-record-stamp span,.arsenal-record-stamp small{display:block;font-size:.58rem;font-weight:900;letter-spacing:.13em}
+.arsenal-record-stamp strong{display:block;font:2.7rem 'Bangers',cursive}
+.arsenal-platform-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:22px 0}
+.arsenal-platform-kpis article{min-height:112px;padding:15px;background:linear-gradient(140deg,#172b40,#0a1422);border:1px solid rgba(110,192,220,.25)}
+.arsenal-platform-kpis strong{display:block;color:#80e0f1;font:2.3rem/1 'Bangers',cursive}
+.arsenal-platform-kpis span,.arsenal-platform-kpis small{display:block;margin-top:8px;color:#e6edf5;font-size:.68rem;font-weight:900;letter-spacing:.07em}
+.arsenal-platform-kpis small{color:#9fb0c3;font-size:.65rem;font-weight:500;letter-spacing:0}
+.arsenal-platform-dossier{margin-top:24px;padding:clamp(15px,2.5vw,24px);background:rgba(17,29,44,.72);border:1px solid rgba(132,177,207,.2)}
+.arsenal-platform-head{display:flex;justify-content:space-between;align-items:flex-start;gap:20px}
+.arsenal-platform-index{color:#7ed9ec;font-size:.65rem;font-weight:900;letter-spacing:.16em}
+.arsenal-platform-head h4{margin:7px 0;color:#f1d58c;font:clamp(1.7rem,3.5vw,2.5rem)/1 'Bangers',cursive;letter-spacing:.04em}
+.arsenal-platform-head a{flex:0 0 auto;color:#83dff0;font-size:.72rem;font-weight:900;text-decoration:none}
+.arsenal-platform-head a:hover{text-decoration:underline}
+.arsenal-partner-chips{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0}
+.arsenal-partner-chips span{display:flex;flex-direction:column;gap:5px;min-width:170px;padding:12px 15px;border:1px solid rgba(230,199,123,.4);background:rgba(230,199,123,.06)}
+.arsenal-partner-chips small{color:#b5c5d4;font-size:.58rem;font-weight:900;letter-spacing:.12em}
+.arsenal-partner-chips b{color:#f0d58e;font:1.4rem 'Bangers',cursive;letter-spacing:.06em}
+.arsenal-status-legend,.arsenal-keymailer-legend{display:flex;flex-wrap:wrap;gap:10px 18px;margin:16px 0;color:#c4d0df;font-size:.75rem}
+.arsenal-status-legend span{display:flex;align-items:center;gap:7px}
+.status-dot{width:9px;height:9px;display:inline-block;border-radius:50%}
+.status-dot.is-complete{background:#65d5a0}.status-dot.is-failed{background:#e28b83}.status-dot.is-pending{background:#e9c86f}
+.arsenal-campaign-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:18px}
+.arsenal-campaign-group{border:1px solid rgba(134,177,207,.2);background:rgba(4,10,18,.56)}
+.arsenal-campaign-group summary{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:13px;cursor:pointer;color:#dce8f2;font-size:.68rem;font-weight:900;letter-spacing:.08em}
+.arsenal-campaign-group summary b{color:#80dfef;font:1.8rem 'Bangers',cursive}
+.arsenal-campaign-group ul{list-style:none;margin:0;padding:0 13px 12px}
+.arsenal-campaign-group li{padding:10px 0;border-top:1px solid rgba(132,171,200,.14)}
+.arsenal-campaign-group li a{display:block;color:#e7edf4;font-size:.78rem;font-weight:700;text-decoration:none}
+.arsenal-campaign-group li a:hover{color:#83e1f2;text-decoration:underline}
+.arsenal-campaign-group li small{display:block;margin-top:4px;color:#9eafc1;font-size:.65rem;line-height:1.45}
+.arsenal-status-note,.arsenal-record-footnote{margin:14px 0 0;color:#9eafc1;font-size:.72rem;line-height:1.6}
+.arsenal-keymailer-legend span{padding:8px 10px;border:1px solid rgba(134,177,207,.18);background:rgba(4,10,18,.45)}
+.arsenal-keymailer-legend b{color:#f0d58e}
+.arsenal-table-wrap{overflow-x:auto;margin-top:16px;border:1px solid rgba(132,177,207,.2)}
+.arsenal-campaign-table{width:100%;min-width:650px;border-collapse:collapse;color:#dce6f0;font-size:.75rem}
+.arsenal-campaign-table th{padding:12px;text-align:left;color:#8fe1ef;background:#12243a;font-size:.64rem;letter-spacing:.09em}
+.arsenal-campaign-table td{padding:10px 12px;border-top:1px solid rgba(132,171,200,.15);vertical-align:top}
+.arsenal-campaign-table tbody tr:nth-child(even){background:rgba(28,46,66,.28)}
+.arsenal-campaign-table td:first-child{font-weight:700}
+.arsenal-campaign-table td small{display:block;margin-top:4px;color:#96a9bc;font-size:.64rem;font-weight:400}
+.interest-tag{display:inline-block;padding:4px 8px;border:1px solid rgba(125,211,232,.35);color:#8be2f1;font-size:.68rem;font-weight:900;white-space:nowrap}
+.interest-decision{color:#f0d58e;border-color:rgba(232,198,117,.4)}
+@media(max-width:800px){.arsenal-platform-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.arsenal-campaign-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.arsenal-records-heading{grid-template-columns:1fr}.arsenal-record-stamp{justify-self:start}.arsenal-platform-head{flex-direction:column}.arsenal-campaign-grid{grid-template-columns:1fr}.arsenal-platform-kpis article{min-height:100px}}
