@@ -1813,3 +1813,23 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 - Se corrigió navigation-fix.js para actualizar la URL con #chapter-N también cuando está disponible la función principal switchChapter() de app.js.
 - Al elegir una sección desde «Otras secciones», el desplegable se cierra después de navegar, evitando que quede abierto sobre el contenido del capítulo.
 - Se conserva la compatibilidad con la navegación de respaldo y con accesos directos por fragmento.
+
+
+## 2026-11-07 — Auditoría estática inicial de la nueva Portada ejecutiva
+
+- **Responsable:** colaboración ChatGPT + equipo del proyecto.
+- **Objetivo:** continuar la aceptación de la Tarea 01 sobre la implementación publicada en `main`, sin confundir validación de código con validación visual del sitio.
+- **Estado del repositorio:** se verificó que `main` apunta al commit `a26505e70e50ab0a8c414dc413b79b51d89a1e40`, precedido por `0bd56675668e098f2ee73c4d839bb0429d1468de`.
+- **Arquitectura revisada:** `chapter-0` existe como Inicio y es el panel activo inicial; `chapter-1` sigue siendo el Origen S3X-MEN. No se renumeraron los capítulos.
+- **Navegación revisada:** los once paneles existentes (`0, 1, 2, 3, 5, 6, 8, 9, 10, 11, 12`) coinciden con los once destinos declarados en la navegación principal y secundaria. No se detectaron paneles sin acceso ni destinos que apunten a paneles inexistentes.
+- **Integridad HTML estática:** no se detectaron identificadores duplicados ni enlaces internos por fragmento que apunten a identificadores ausentes.
+- **Navegación por código:** `navigation-fix.js` intercepta los accesos a capítulos, delega en `switchChapter()` cuando está disponible, actualiza el fragmento `#chapter-N`, mantiene un respaldo independiente y cierra el desplegable «Otras secciones» tras seleccionar un destino. La prueba real de clics y recarga con fragmentos queda pendiente.
+- **Responsive y movimiento:** existen reglas específicas para reorganizar el hero, la consola, los formatos y la navegación en anchos reducidos; también hay reglas `prefers-reduced-motion`. Esto es evidencia estática, no una comprobación visual.
+- **Imágenes:** el HTML declara 28 referencias de imagen, 23 con `loading="lazy"` y una con `fetchpriority="high"`. No se realizó en esta auditoría una verificación independiente de cada archivo ni de sus dimensiones/peso.
+- **Estado de checks:** la consulta de estados combinados del commit `a26505e` no devolvió checks publicados; por tanto, no se utiliza como prueba de que GitHub Pages haya terminado el despliegue.
+- **Limitación de validación:** no se pudo completar una sesión independiente de navegador para inspeccionar el sitio publicado. No se declara probada la apariencia visual, el funcionamiento real de los clics, el comportamiento en 390 px, el foco por teclado ni el estado final de GitHub Pages.
+- **Resultado:** auditoría estática inicial favorable, sin incidencias estructurales detectadas en los identificadores y destinos revisados. La Tarea 01 permanece **En curso**, no Completada.
+- **Archivos modificados en esta intervención:** `BIBLIA_EVOLUCION_LEGION_MULTIVERSAL.md`, `INFORMES.md`.
+- **Commit de seguimiento:** se registra al guardar este informe y el estado operativo de la hoja de ruta.
+- **Pendientes / riesgos:** inspección visual y funcional del sitio publicado en escritorio y móvil; comprobación del despliegue de Pages; prueba de accesos directos por URL y navegación por teclado.
+- **Despliegue:** no confirmado en esta intervención.
