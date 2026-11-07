@@ -1871,3 +1871,13 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
   2. **“Pero qué pasó”**
 - Los embeds usan `parent=losmoriartys-cmd.github.io` y la grilla responsive existente.
 - Se actualiza el texto de continuidad del caso para reflejar **ocho clips identificados** en total: dos de Los Moriartys, cuatro de Lady Moriarty01 y dos de TheR0D3R1K; sin sumar de nuevo los dos clips de TheR0D3R1K que ya figuraban en el recuento anterior.
+
+
+## 2026-11-07 — Ampliación del expediente BarFender con ficha oficial del juego
+
+- Se incorpora el header gráfico de Steam aportado por el usuario, enlazado a la ficha oficial de **Barfender: COOP Bar Simulator**.
+- Se añade una presentación contextual del juego: simulador cooperativo caótico para 1–4 jugadores, con tareas de servicio, limpieza, gestión de peleas y mantenimiento del bar.
+- Se incorporan los datos facilitados de Steam: lanzamiento **12/10/2026**, desarrollador **Proto Division**, editor **Rock Paper Publisher** y valoración **Muy positivas (330 reseñas)**.
+- Se corrige el crédito de desarrollador en la ficha de la campaña: **Proto Division** (en lugar de Photo Division).
+- Se añade diseño responsive para la cabecera y la ficha informativa. El enlace de reseñas apunta al apartado de opiniones de Steam.
+- La fecha de lanzamiento del juego se distingue de la fecha de la sesión colaborativa, que se mantiene como **05/11/2026**.
