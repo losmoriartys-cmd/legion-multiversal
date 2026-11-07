@@ -39,23 +39,99 @@
             </div>
             <button id="sound-toggle" class="sound-toggle" type="button" aria-pressed="false" onclick="toggleArcadeSound()" title="Activar o silenciar la identidad sonora">♫ SONIDO: OFF</button>
         </div>
-        <nav aria-label="Navegación principal">
-            <button class="nav-btn active" data-chapter="1" onclick="switchChapter(1)">PORTADA</button>
+        <nav class="primary-navigation" aria-label="Navegación principal">
+            <button class="nav-btn active" data-chapter="0" aria-current="page" onclick="switchChapter(0)">INICIO</button>
             <button class="nav-btn" data-chapter="2" onclick="switchChapter(2)">ROSTER</button>
-            <button class="nav-btn" data-chapter="11" onclick="switchChapter(11)">NUESTROS VALORES</button>
             <button class="nav-btn" data-chapter="3" onclick="switchChapter(3)">ESTADÍSTICAS</button>
-            <button class="nav-btn" data-chapter="10" onclick="switchChapter(10)">EN VIVO</button>
-            <button class="nav-btn" data-chapter="5" onclick="switchChapter(5)">ARSENAL</button>
             <button class="nav-btn" data-chapter="8" onclick="switchChapter(8)">ALIANZAS</button>
             <button class="nav-btn" data-chapter="12" onclick="switchChapter(12)">COLABORACIONES</button>
             <button class="nav-btn" data-chapter="9" onclick="switchChapter(9)">COMUNIDAD</button>
-            <button class="nav-btn" data-chapter="6" onclick="switchChapter(6)">RECLUTAMIENTO</button>
+            <button class="nav-btn" data-chapter="1" onclick="switchChapter(1)">ORIGEN</button>
         </nav>
+        <details class="secondary-navigation">
+            <summary>OTRAS SECCIONES <span aria-hidden="true">＋</span></summary>
+            <div class="secondary-navigation-links" aria-label="Secciones adicionales">
+                <button class="nav-btn nav-btn-secondary" data-chapter="11" onclick="switchChapter(11)">NUESTROS VALORES</button>
+                <button class="nav-btn nav-btn-secondary" data-chapter="10" onclick="switchChapter(10)">EN VIVO</button>
+                <button class="nav-btn nav-btn-secondary" data-chapter="5" onclick="switchChapter(5)">ARSENAL</button>
+                <button class="nav-btn nav-btn-secondary" data-chapter="6" onclick="switchChapter(6)">RECLUTAMIENTO</button>
+            </div>
+        </details>
     </header>
 
     <main>
+        <!-- CAPÍTULO 0: NUEVA PORTADA EJECUTIVA -->
+        <section id="chapter-0" class="chapter-panel executive-home active" aria-labelledby="home-title">
+            <div class="executive-hero">
+                <div class="executive-hero-copy">
+                    <p class="executive-kicker">ARCHIVO CENTRAL · PRESENTACIÓN INSTITUCIONAL</p>
+                    <img class="executive-emblem" src="legion_logo_final_hybrid.png" alt="Emblema oficial de Legión Multiversal">
+                    <h2 id="home-title">DIFERENTES MUNDOS.<br><span>UNA MISMA LEGIÓN.</span></h2>
+                    <p class="executive-lead">Una comunidad de creadores que conecta gaming, entretenimiento, tecnología y nuevas experiencias. Cada integrante conserva su identidad; juntos construimos algo más grande.</p>
+                    <div class="executive-hero-actions">
+                        <button class="executive-button executive-button-primary" type="button" onclick="switchChapter(1)">CONOCER NUESTRA HISTORIA <span aria-hidden="true">↗</span></button>
+                        <button class="executive-button" type="button" onclick="switchChapter(8)">EXPLORAR OPORTUNIDADES <span aria-hidden="true">↗</span></button>
+                    </div>
+                </div>
+                <figure class="executive-hero-art">
+                    <img src="image_20261107_021355.jpg" alt="Formación ilustrada de Legión Multiversal reunida para su primera misión" fetchpriority="high">
+                    <figcaption>UNA NUEVA ETAPA · UNA HISTORIA QUE SIGUE CRECIENDO</figcaption>
+                </figure>
+                <span class="executive-hero-index" aria-hidden="true">LM / 001</span>
+            </div>
+
+            <section class="executive-console" aria-labelledby="executive-console-title">
+                <div class="executive-section-heading"><span>01 / ACCESO RÁPIDO</span><h3 id="executive-console-title">CONSOLA DE EXPEDIENTES</h3><p>Entrá directamente a la información que necesitás.</p></div>
+                <div class="executive-console-grid">
+                    <button type="button" class="executive-console-link" onclick="switchChapter(2)"><span>01</span><strong>ROSTER</strong><small>Integrantes y perfiles</small><b aria-hidden="true">↗</b></button>
+                    <button type="button" class="executive-console-link" onclick="switchChapter(3)"><span>02</span><strong>ESTADÍSTICAS</strong><small>Actividad y rendimiento</small><b aria-hidden="true">↗</b></button>
+                    <button type="button" class="executive-console-link" onclick="switchChapter(8)"><span>03</span><strong>ALIANZAS</strong><small>Formatos de colaboración</small><b aria-hidden="true">↗</b></button>
+                </div>
+            </section>
+
+            <section class="executive-featured-case" aria-labelledby="featured-case-title">
+                <div class="executive-featured-copy">
+                    <span class="executive-kicker">02 / EXPERIENCIA DOCUMENTADA · EXPEDIENTE 001</span>
+                    <h3 id="featured-case-title">BAR FENDER</h3>
+                    <p class="executive-case-deck">Cuatro creadores. Cuatro canales. Una misma partida.</p>
+                    <p>Una experiencia colaborativa transmitida desde cuatro canales de Twitch, conservada en VOD y clips. El expediente reúne participantes, registros audiovisuales y métricas con sus fuentes y limitaciones.</p>
+                    <button class="executive-button executive-button-primary" type="button" onclick="switchChapter(12)">ABRIR EXPEDIENTE 001 <span aria-hidden="true">↗</span></button>
+                </div>
+                <figure class="executive-case-art"><img src="barfe.jpg" alt="Imagen de archivo de la experiencia colaborativa Bar Fender" loading="lazy"><figcaption>CAMPAÑA 001 · ARCHIVO DE COLABORACIONES</figcaption></figure>
+            </section>
+
+            <section class="executive-community" aria-labelledby="executive-community-title">
+                <div><span class="executive-kicker">03 / LAS PERSONAS DETRÁS DEL PROYECTO</span><h3 id="executive-community-title">NO SOMOS SOLAMENTE CANALES.</h3></div>
+                <p>Somos personas con recorridos, intereses y talentos diferentes que eligieron compartir partidas, ideas y proyectos. La Legión existe porque cada identidad aporta algo propio a una comunidad común.</p>
+                <button class="executive-text-link" type="button" onclick="switchChapter(9)">CONOCER NUESTRA COMUNIDAD ↗</button>
+            </section>
+
+            <section class="executive-offers" aria-labelledby="executive-offers-title">
+                <div class="executive-section-heading"><span>04 / POSIBILIDADES DE COLABORACIÓN</span><h3 id="executive-offers-title">¿QUÉ PODEMOS CONSTRUIR JUNTOS?</h3><p>Diseñamos experiencias que se adaptan al proyecto, a los creadores participantes y a los objetivos acordados.</p></div>
+                <div class="executive-offer-grid">
+                    <article><span>01</span><h4>INTEGRACIONES EN DIRECTO</h4><p>Presencia de marca, menciones y demostraciones durante transmisiones.</p></article>
+                    <article><span>02</span><h4>EXPERIENCIAS MULTICANAL</h4><p>Partidas, eventos y desafíos compartidos entre distintos creadores.</p></article>
+                    <article><span>03</span><h4>CONTENIDO Y CLIPS</h4><p>Piezas breves y momentos destacados que prolongan cada experiencia.</p></article>
+                    <article><span>04</span><h4>ACTIVACIONES COMUNITARIAS</h4><p>Dinámicas participativas alineadas con cada comunidad y campaña.</p></article>
+                </div>
+                <button class="executive-text-link" type="button" onclick="switchChapter(8)">EXPLORAR FORMATOS Y CONDICIONES EN ALIANZAS ↗</button>
+            </section>
+
+            <section class="executive-origin" aria-labelledby="executive-origin-title">
+                <div class="executive-origin-art"><img src="image_20261106_024612-me-gusta-la-foto-pero-la-enmarcaria-coso-si-fuese (1).jpg" alt="Portada ilustrada que representa el origen del equipo S3X-MEN" loading="lazy"></div>
+                <div><span class="executive-kicker">05 / NUESTRO PUNTO DE PARTIDA</span><h3 id="executive-origin-title">DE S3X-MEN A LEGIÓN MULTIVERSAL.</h3><p>No borramos nuestro pasado: lo reconocemos como el comienzo de una historia que continúa creciendo.</p><button class="executive-button" type="button" onclick="switchChapter(1)">EXPLORAR EL CAPÍTULO DE ORIGEN <span aria-hidden="true">↗</span></button></div>
+            </section>
+
+            <section class="executive-contact" aria-labelledby="executive-contact-title">
+                <span class="executive-kicker">06 / CONTACTO Y NUEVAS OPORTUNIDADES</span>
+                <h3 id="executive-contact-title">¿CREAMOS ALGO JUNTOS?</h3>
+                <p>Agencias, publishers, estudios, marcas y colaboradores pueden acercarnos sus proyectos y propuestas.</p>
+                <a class="executive-contact-link" href="mailto:losmoriartys@gmail.com?subject=Propuesta%20comercial%20-%20Legi%C3%B3n%20Multiversal">CONTACTAR A LA LEGIÓN ↗</a>
+            </section>
+        </section>
+
         <!-- CAPÍTULO 1: ORIGEN DE LA LEGIÓN -->
-        <section id="chapter-1" class="chapter-panel active chapter-one">
+        <section id="chapter-1" class="chapter-panel chapter-one">
     <div class="chapter-tag">CAPÍTULO 01 · EL ORIGEN</div>
 
     <div class="chapter-cover">

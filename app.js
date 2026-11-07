@@ -1338,7 +1338,12 @@ function openHeroModal(index) {
                 }
             }
             document.querySelectorAll('.chapter-panel').forEach(p => p.classList.remove('active'));
-            document.querySelectorAll('.nav-btn').forEach(b => b.classList.toggle('active',Number(b.dataset.chapter)===Number(chapterNum)));
+            document.querySelectorAll('.nav-btn[data-chapter]').forEach(b => {
+                const isCurrent = Number(b.dataset.chapter) === Number(chapterNum);
+                b.classList.toggle('active', isCurrent);
+                if (isCurrent) b.setAttribute('aria-current', 'page');
+                else b.removeAttribute('aria-current');
+            });
             panel.classList.add('active');
             playChapterCue();
             window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth' });

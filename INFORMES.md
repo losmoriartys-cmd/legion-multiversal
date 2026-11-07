@@ -1794,3 +1794,15 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 - **Validación:** comprobadas estáticamente las referencias de imágenes existentes, los tres enlaces de VOD, los ocho títulos de clips, las etiquetas de métricas y la presencia del capítulo 12 y sus accesos. El workflow «Validar código y datos del sitio» finalizó correctamente y GitHub Pages completó el despliegue asociado al commit del informe (run 42346974240). No se declara inspección visual independiente en navegador.
 - **Archivos modificados:** index.html, styles.css, INFORMES.md.
 - **Commits:** index.html 8f775166fa080eaae836464f0f916555ed46f9be; styles.css 1c4bbde61be384609f39beb9c6aebb70deff6fb2.
+
+
+## 2026-11-07 — Tarea 01: nueva Portada ejecutiva independiente
+
+- **Arquitectura:** se creó el panel chapter-0 como Inicio ejecutivo y se conservó chapter-1 exclusivamente para el origen S3X-MEN. No se renumeraron ni eliminaron capítulos existentes.
+- **Navegación principal:** Inicio, Roster (02), Estadísticas (03), Alianzas (08), Colaboraciones (12), Comunidad (09) y Origen (01).
+- **Accesos secundarios preservados:** Nuestros Valores (11), En Vivo (10), Arsenal (05) y Reclutamiento (06), agrupados en un desplegable accesible que mantiene los mismos identificadores y acciones.
+- **Contenido de Inicio:** presentación institucional, dos recorridos de entrada, consola ejecutiva, caso documentado Bar Fender, presentación humana de la comunidad, cuatro formatos de colaboración, puente al origen y contacto comercial directo.
+- **Integridad editorial:** la Portada deriva a los capítulos existentes; no duplica fichas, estadísticas, contenido comercial extendido ni la bitácora de campañas. Bar Fender se presenta como experiencia documentada y enlaza al Capítulo 12.
+- **Accesibilidad y adaptación:** etiquetas semánticas, títulos asociados, estados aria-current, foco visible, controles operables por teclado y ajustes responsive; se respeta prefers-reduced-motion.
+- **Archivos modificados:** index.html, styles.css, app.js, INFORMES.md.
+- **Validación inicial:** se verifican por inspección estática los identificadores de capítulos y destinos, las acciones de navegación, la preservación de los cuatro accesos secundarios y las referencias de imágenes ya existentes. Esta anotación no declara todavía una auditoría visual independiente ni un despliegue publicado; ambos quedan sujetos a los workflows y comprobaciones posteriores.
