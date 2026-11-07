@@ -376,6 +376,13 @@
         .modal-content.comic-mode .comic-clip-card:nth-child(3){transform:rotate(-.35deg)}
         .modal-content.comic-mode .comic-clip-preview{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;background:#05080e;border:2px solid #17283d}
         .modal-content.comic-mode .comic-clip-preview iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+        .mission-clip-embed .twitch-clip-preview-link,.modal-content.comic-mode .comic-clip-preview .twitch-clip-preview-link{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:14px;text-align:center;text-decoration:none!important;color:#e9f8ff!important;background:radial-gradient(circle at 75% 20%,rgba(0,217,255,.2),transparent 38%),linear-gradient(135deg,#101d30,#07101b 65%,#24152b);border:1px solid rgba(0,217,255,.28);transition:filter .18s ease,background .18s ease}
+        .mission-clip-embed .twitch-clip-preview-link:hover,.modal-content.comic-mode .comic-clip-preview .twitch-clip-preview-link:hover{filter:brightness(1.18)}
+        .twitch-clip-preview-link .twitch-clip-play{display:grid;place-items:center;width:48px;height:48px;border:2px solid #f0d58c;border-radius:50%;padding-left:3px;color:#f0d58c;background:rgba(3,10,19,.75);font-size:1.15rem;box-shadow:0 0 22px rgba(0,217,255,.2)}
+        .twitch-clip-preview-link strong{color:#f0d58c!important;font-size:.75rem;letter-spacing:.12em}
+        .twitch-clip-preview-link small{color:#b9c8d8!important;font-size:.66rem;letter-spacing:.04em}
+        .twitch-clip-preview-empty{display:grid;place-items:center;min-height:100%;color:#b9c8d8;font-size:.72rem;letter-spacing:.1em}
+
         .modal-content.comic-mode .comic-clip-card h3{margin:10px 0 5px;color:#14243a;font:1.15rem 'Bangers',cursive;line-height:1.15}
         .modal-content.comic-mode .comic-clip-card p{margin:0 0 8px;color:#33465c;font-size:.78rem;line-height:1.4}
         .modal-content.comic-mode .comic-clip-card a{display:inline-block;color:#176f91;font-weight:900;font-size:.72rem;text-decoration:underline}
