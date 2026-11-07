@@ -1994,3 +1994,16 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 
 - **Ajuste de validación:** la revisión posterior detectó un escape excesivo en las expresiones regulares que validan los dominios HTTPS de Twitch. Se corrigió antes de cerrar la tarea; ahora se aceptan los hosts `twitch.tv`, `www.twitch.tv` y `clips.twitch.tv`, y los demás destinos vuelven al enlace construido desde el slug.
 - **Validación pendiente tras el commit:** comprobar sintaxis JavaScript, que no queden embeds de clips Twitch en las plantillas, que permanezcan los embeds de YouTube, y revisar el despliegue publicado. No se declara validación visual manual.
+
+
+## 2026-11-07 — Limpieza estructural del Capítulo 01 · El Origen
+
+- **Responsable:** colaboración ChatGPT + equipo del proyecto.
+- **Objetivo:** cerrar un detalle estructural detectado al retomar el relato histórico, sin reemplazar ni mover los recursos visuales aportados.
+- **Archivo modificado:** `index.html`.
+- **Implementado:** se retiró una figura vacía al final del Capítulo 01 que solo contenía un epígrafe y no tenía imagen ni recurso de fondo. La composición ya contaba con la portada del primer equipo, la imagen de la primera formación, la portada de ampliación y la imagen de la primera misión; el bloque vacío generaba un marco visual sin contenido.
+- **Preservado:** no se modificaron las imágenes, sus nombres, las ubicaciones existentes, el Roster, el Capítulo 05 — Arsenal ni los archivos que el otro colaborador está incorporando.
+- **Validaciones estáticas:** se confirmó que las cinco imágenes utilizadas por el Capítulo 01 (incluido el emblema) existen en la raíz del repositorio; los cinco bloques narrativos principales siguen presentes; el bloque vacío fue retirado una sola vez. No se realizó inspección visual manual en escritorio/móvil.
+- **Pendientes:** revisar visualmente el Capítulo 01 publicado y confirmar con el equipo que la secuencia narrativa y las atribuciones de la primera formación sean definitivas.
+- **Commit:** [fd2d3d8c](https://github.com/losmoriartys-cmd/legion-multiversal/commit/fd2d3d8c2fbe2d482e03b9dbbc50426a45160a22).
+- **Despliegue:** pendiente de verificar el workflow generado por este commit.
