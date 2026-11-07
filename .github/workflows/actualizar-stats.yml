@@ -52,12 +52,12 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git pull --rebase origin main
           git add data.json platform-stats.json
           if git diff --cached --quiet; then
             echo "No hay cambios de estadísticas para guardar."
             exit 0
           fi
-          git pull --rebase origin main
           git commit -m "📊 Actualización automática de estadísticas multiplataforma"
           for attempt in 1 2 3; do
             if git push origin HEAD:main; then
