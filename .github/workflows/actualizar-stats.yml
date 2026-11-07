@@ -21,6 +21,7 @@ concurrency:
 jobs:
   actualizar:
     runs-on: ubuntu-latest
+    timeout-minutes: 8
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -35,6 +36,10 @@ jobs:
           TWITCH_CLIENT_ID: ${{ secrets.TWITCH_CLIENT_ID }}
           TWITCH_CLIENT_SECRET: ${{ secrets.TWITCH_CLIENT_SECRET }}
         run: python update_stats.py
+
+      - name: Verificar muestras Twitch completas
+        run: |
+          python -c "import json; from pathlib import Path; d=json.loads(Path('data.json').read_text(encoding='utf-8')); e=set(d.get('active_channels', [])); c=d.get('collection', {}); covered=set(c.get('sampled_channels', [])) | set(c.get('skipped_channels', [])); missing=[x for x in e if x not in d.get('channels', {}) or not d['channels'][x].get('updated_at')]; assert c.get('complete') and covered == e and not missing, 'Recolección Twitch incompleta: ' + ', '.join(missing); print('Verificación OK: {} canales; {} muestras nuevas; {} omitidas por anti-duplicados.'.format(len(e), len(c.get('sampled_channels', [])), len(c.get('skipped_channels', []))))"
 
       - name: Consultar YouTube y Kick
         env:
@@ -52,6 +57,15 @@ jobs:
             echo "No hay cambios de estadísticas para guardar."
             exit 0
           fi
-          git commit -m "📊 Actualización automática de estadísticas multiplataforma"
           git pull --rebase origin main
-          git push
+          git commit -m "📊 Actualización automática de estadísticas multiplataforma"
+          for attempt in 1 2 3; do
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            echo "Push rechazado (intento ${attempt}); sincronizando main antes de reintentar."
+            git fetch origin main
+            git rebase origin/main
+          done
+          echo "ERROR: no se pudo publicar tras 3 intentos."
+          exit 1
