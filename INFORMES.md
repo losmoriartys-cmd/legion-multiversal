@@ -2126,3 +2126,12 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 - **Pendiente:** comprobar el despliegue de GitHub Pages y revisar visualmente el resultado publicado en escritorio y móvil.
 - **Commits:** HTML `84dae846126bad9eace342fe1bb97288b73ffaaa`; estilos `ef67d95a6796d4d995c621ef07c2b14c89d30869`; registro de esta intervención, en el commit siguiente.
 - **Despliegue:** pendiente de verificación; los commits en `main` no demuestran por sí solos que GitHub Pages haya terminado de publicar.
+
+## 2026-11-07 — Revisión visual y ajuste de encuadre de BarFender
+
+- **Revisión de recursos:** se abrieron y comprobaron los tres archivos originales en el repositorio. La pieza `image_20261107_184951-si-que-tenga-referencias-y-el-titutlo-del-juego-ba.jpg` es la ilustración principal de BarFender con el rótulo del juego; `image_20261107_184728.jpg` muestra al equipo alrededor de una mesa de planificación; `image_20261107_184546.jpg` presenta al equipo en clave multiversal.
+- **Coherencia editorial:** las tres piezas son ilustraciones de identidad/editoriales, no capturas documentales del gameplay. Sus pies de imagen y textos alternativos las identifican como tales.
+- **Ajuste aplicado:** se eliminó el límite de altura y el recorte `object-fit:cover` de la ilustración editorial complementaria. Ahora conserva su proporción y encuadre completo mediante `height:auto` y `object-fit:contain`.
+- **Validación de repositorio:** los tres recursos existen en la raíz de `main`; cada uno aparece exactamente una vez en el capítulo BarFender. No se encontraron referencias restantes a `stream4.jpg` dentro del capítulo.
+- **Pendiente externo:** el navegador de revisión no pudo acceder a la URL de GitHub Pages en esta sesión. Por eso no se certifica todavía la publicación ni el render final en escritorio/móvil; el HTML/CSS de `main` sí quedó comprobado.
+- **Commit de ajuste:** `4403e2ece8b2823c9e4b28ce7d5f7d21b4de9ebe`.
