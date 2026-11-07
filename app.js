@@ -27,7 +27,7 @@ function renderTwitchClipPreview(clipId,title,destination){
  if(!id)return '<div class="twitch-clip-preview-empty">CLIP PENDIENTE DE ENLACE</div>';
  const fallback='https://clips.twitch.tv/'+encodeURIComponent(id);
  const candidate=String(destination||'').trim();
- const href=/^https:\/\/(?:www\\.)?twitch\\.tv\//i.test(candidate)||/^https:\/\/clips\\.twitch\\.tv\//i.test(candidate)?candidate:fallback;
+ const href=/^https:\/\/(?:www\.)?twitch\.tv\//i.test(candidate)||/^https:\/\/clips\.twitch\.tv\//i.test(candidate)?candidate:fallback;
  const label=String(title||'Clip destacado');
  return '<a class="twitch-clip-preview-link" href="'+escapeStatsHtml(href)+'" target="_blank" rel="noopener noreferrer" aria-label="Abrir '+escapeStatsHtml(label)+' en Twitch"><span class="twitch-clip-play" aria-hidden="true">▶</span><strong>ABRIR CLIP EN TWITCH</strong><small>Se abre en una pestaña nueva</small></a>';
 }
