@@ -1971,3 +1971,13 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 - **Secuencia de integración:** trabajar una tarea por vez, registrar resultados y validaciones en esta bitácora, revisar el diff para confirmar que no incluya cambios del Capítulo 05 y solicitar revisión antes de integrar cambios de código a `main`.
 - **Estado:** coordinación registrada; auditorías visuales y revisión de BarFender pendientes de ejecución. No se declara todavía ninguna de esas revisiones como completada.
 - **Despliegue:** no aplica a este registro de coordinación.
+
+## 2026-11-07 — Sustitución de reproductores incrustados por portadas de acceso directo en el archivo BarFender
+
+- **Objetivo:** resolver el rechazo de conexión mostrado por Twitch dentro de los ocho reproductores insertados en la página.
+- **Diagnóstico confirmado por el usuario:** los enlaces externos abren correctamente cada clip en el canal correspondiente; el fallo se limita a la reproducción dentro de la página.
+- **Implementación:** se retiraron los ocho `iframe` de clips del Capítulo 12 y se reemplazaron por tarjetas editoriales responsivas con identificación del canal, numeración, título conservado, portada gráfica de archivo y acceso directo al clip original en Twitch. Tanto la portada como el enlace de acción abren el destino externo en una pestaña nueva.
+- **Integridad del archivo:** se conservaron los ocho slugs/destinos y la atribución individual de cada streamer. No se modificaron los VOD, las métricas ni otros capítulos.
+- **Alcance visual:** las portadas son piezas gráficas editoriales de reemplazo, no miniaturas/fotogramas extraídos del video. No se inventan imágenes de los clips; la reproducción completa queda alojada en Twitch.
+- **Archivos modificados:** `index.html` y `styles.css`.
+- **Validación prevista:** comprobar que la sección no conserve iframes de clips, que haya ocho tarjetas y ocho enlaces externos válidos, y que el CSS mantenga la grilla responsive. La publicación en GitHub Pages y la apertura real desde el navegador del usuario quedan pendientes de confirmación.
