@@ -137,14 +137,23 @@ def main():
     users = helix_get("users", token, [("login", name) for name in CHANNELS])
     streams = helix_get("streams", token, [("user_login", name) for name in CHANNELS])
     streams_by_login = {s["user_login"].lower(): s for s in streams}
+    resolved = {u["login"].lower() for u in users}
+    missing = sorted(set(CHANNELS) - resolved)
+    if missing:
+        raise RuntimeError("Twitch Helix no devolvió todos los canales esperados; no se publican datos parciales: " + ", ".join(missing))
+    if len(resolved) != len(CHANNELS):
+        raise RuntimeError("La respuesta de Twitch contiene canales duplicados o inesperados; se cancela la publicación.")
     old = load_data()
     channel_data = old.get("channels", {})
 
+    sampled_channels = []
+    skipped_channels = []
     for user in users:
         login = user["login"].lower()
         previous = channel_data.get(login, {})
         snapshots = previous.get("snapshots", [])
-        last_sample = datetime.fromisoformat(snapshots[-1]["sampled_at"]) if snapshots else None
+        valid_times = [datetime.fromisoformat(s["sampled_at"].replace("Z", "+00:00")) for s in snapshots if s.get("sampled_at")]
+        last_sample = max(valid_times) if valid_times else None
         should_sample = last_sample is None or (now - last_sample) >= timedelta(minutes=10)
         stream = streams_by_login.get(login)
         sample = {
@@ -158,6 +167,10 @@ def main():
         }
         if should_sample:
             snapshots.append(sample)
+            sampled_channels.append(login)
+        else:
+            skipped_channels.append(login)
+        snapshots.sort(key=lambda item: item["sampled_at"])
         cutoff = now - timedelta(days=WINDOW_DAYS)
         snapshots = [
             s for s in snapshots
@@ -187,6 +200,14 @@ def main():
         "window_days": WINDOW_DAYS,
         "sampling_interval_minutes": SAMPLE_INTERVAL_MINUTES,
         "active_channels": CHANNELS,
+        "collection": {
+            "started_at": now_iso,
+            "expected_channels": len(CHANNELS),
+            "resolved_channels": len(resolved),
+            "sampled_channels": sampled_channels,
+            "skipped_channels": skipped_channels,
+            "complete": len(resolved) == len(CHANNELS) and len(sampled_channels) + len(skipped_channels) == len(CHANNELS)
+        },
         "archived_channels": [login for login in channel_data if login not in CHANNELS],
         "channel_registry_note": "Los canales archivados se conservan para consulta histórica y no se incluyen en los indicadores del roster activo.",
         "updated_at": now_iso,
