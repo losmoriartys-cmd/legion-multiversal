@@ -2095,3 +2095,10 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 - **Corrección:** se movió `git pull --rebase origin main` antes de `git add data.json platform-stats.json`. El commit y los tres intentos de push permanecen después de la preparación de los archivos.
 - **Resultado verificado de la recolección:** la ejecución #131 resolvió los siete canales; la comprobación explícita pasó con siete canales cubiertos y siete omitidos por el umbral anti-duplicados de 10 minutos. Por eso no generó muestras nuevas en esa ejecución. Esto valida la consulta y la integridad del registro, pero no una nueva muestra por canal.
 - **Pendiente:** confirmar que la siguiente ejecución publique correctamente `data.json` y `platform-stats.json`; después medir cobertura y cadencia durante 24 horas. El respaldo mediante un programador externo sigue pendiente de elegir servicio y autorizar credencial.
+
+## 2026-11-07 — Ajuste adicional: sincronización antes de generar archivos
+
+- **Segunda ejecución de validación:** la ejecución #132 volvió a completar la consulta Twitch y la verificación de siete canales, pero el paso de publicación falló porque los recolectores ya habían modificado archivos del árbol de trabajo cuando se intentó ejecutar `git pull --rebase`. El log confirmó `cannot pull with rebase: You have unstaged changes`.
+- **Causa raíz:** la sincronización debe ocurrir antes de que los scripts generen o modifiquen `data.json` y `platform-stats.json`, no dentro del paso de guardado.
+- **Corrección aplicada:** se añadió un paso `Sincronizar main antes de recolectar`, inmediatamente después del checkout/configuración de Python. Se eliminó el `git pull` del paso de publicación. La publicación ahora prepara, confirma y empuja los archivos; si el push encuentra una actualización concurrente, conserva los reintentos de fetch/rebase sobre el commit ya creado.
+- **Estado:** pendiente validar una ejecución completa posterior a este cambio. Las ejecuciones #131 y #132 no publicaron sus cambios de estadísticas; la siguiente prueba determinará si el nuevo orden resuelve el bloqueo.
