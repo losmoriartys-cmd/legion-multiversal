@@ -1739,3 +1739,22 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 
 ### Commit
 - `index.html`: `8878155219f56e731511f768ffc9a05ccd5cc39a`
+
+
+## 2026-11-07 — Capítulo 01: secuencia fundacional detallada e integración de imágenes
+
+- Se amplió el relato histórico con la secuencia acordada por el creador: Demi y Roderik comparten la idea inicial; Roderik convoca a Akuma; Demi invita a Lady Moriarty y Patricio; Demi y Roderik buscan a Ardipii; más adelante se incorporan Dave como estudiante y Hábitos como colaborador.
+- Se reforzó que el origen fue una iniciativa compartida entre Demi y Roderik, evitando atribuir la creación a una sola persona.
+- Se añadió la fotografía de Demi y Roderik frente a las computadoras como viñeta de la noche fundacional.
+- Se integraron las cuatro imágenes compartidas en la raíz del repositorio: portada de la primera formación, portada de la etapa ampliada, imagen de archivo del grupo y composición épica de Legión Multiversal. Se conservaron sus nombres originales y no se movieron ni renombraron archivos.
+- La narrativa distingue el origen S3X-MEN de la identidad posterior Legión Multiversal: la segunda continúa la historia sin borrar la primera.
+- Se añadieron estilos específicos para las nuevas viñetas y figuras, manteniendo la paleta y el lenguaje visual existente del Capítulo 01.
+- Validación estática: comprobada la existencia de los cinco archivos de imagen en la raíz de `main`; comprobadas las referencias nuevas en el HTML y los estilos correspondientes. No se declara prueba visual en navegador ni despliegue verificado.
+
+### Archivos modificados
+- `index.html`
+- `styles.css`
+- `INFORMES.md`
+
+### Despliegue
+- Pendiente de comprobar el workflow de GitHub Pages y revisar el resultado visual publicado.
