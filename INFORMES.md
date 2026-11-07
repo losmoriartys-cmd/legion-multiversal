@@ -2102,3 +2102,11 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 - **Causa raíz:** la sincronización debe ocurrir antes de que los scripts generen o modifiquen `data.json` y `platform-stats.json`, no dentro del paso de guardado.
 - **Corrección aplicada:** se añadió un paso `Sincronizar main antes de recolectar`, inmediatamente después del checkout/configuración de Python. Se eliminó el `git pull` del paso de publicación. La publicación ahora prepara, confirma y empuja los archivos; si el push encuentra una actualización concurrente, conserva los reintentos de fetch/rebase sobre el commit ya creado.
 - **Estado:** pendiente validar una ejecución completa posterior a este cambio. Las ejecuciones #131 y #132 no publicaron sus cambios de estadísticas; la siguiente prueba determinará si el nuevo orden resuelve el bloqueo.
+
+## 2026-11-07 — Primera ejecución completa publicada tras corregir la sincronización
+
+- **Ejecución:** workflow #133 ([run](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/42404744547)).
+- **Resultado:** el job `actualizar` terminó correctamente. Checkout, sincronización previa, consulta Twitch, verificación de los siete canales, consulta multiplataforma y publicación finalizaron sin errores.
+- **Publicación comprobada:** `data.json` en `main` quedó actualizado a `2026-11-07T19:08:36Z`; el objeto `collection` informa siete canales esperados, siete resueltos y `complete: true`. Los siete canales tienen `updated_at` renovado.
+- **Muestras nuevas:** cero en esta ejecución; los siete canales fueron omitidos por el control anti-duplicados de 10 minutos. La ejecución demuestra que el flujo puede publicar correctamente, pero todavía no demuestra la cadencia objetivo ni el ingreso de muestras nuevas.
+- **Próxima validación:** observar la ventana de 24 horas y comparar muestras reales, cobertura, mediana y máximo hueco con los umbrales definidos. Después, configurar un disparador externo para reducir la dependencia del evento `schedule` de GitHub.
