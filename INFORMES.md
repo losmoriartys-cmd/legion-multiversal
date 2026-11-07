@@ -2067,3 +2067,13 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 - **Validación estática:** se reemplazaron exactamente ocho reproductores; no quedan URLs `clips.twitch.tv/embed` en `index.html`; permanecen ocho tarjetas, ocho destinos externos de Twitch y ocho identificadores de canal; se actualizaron los estilos para escritorio y móvil. Esto no sustituye una comprobación visual manual del sitio publicado.
 - **Archivos modificados:** `index.html`, `styles.css`, `INFORMES.md`.
 - **Pendiente:** confirmar en navegador que las ocho portadas se ven correctamente y que los ocho enlaces abren los clips esperados.
+
+
+## 2026-11-07 — Actualización fotográfica del Expediente Comercial N.º 001 · BarFender
+
+- **Solicitud:** reemplazar la fotografía asociada al expediente «BARFENDER — Cuatro creadores. Cuatro canales. Una misma partida.» por el archivo `stream4.jpg` aportado en el repositorio.
+- **Implementación:** se sustituyeron las cuatro referencias a `BarFenderLos4.jpg` por `stream4.jpg` en las presentaciones del caso: ficha destacada, tarjeta de alianzas, portada del archivo colaborativo y fotografía principal del expediente comercial.
+- **Accesibilidad:** se actualizaron los textos alternativos para describir la fotografía grupal de los cuatro creadores.
+- **Validación estática:** el árbol de GitHub confirma que `stream4.jpg` existe en la raíz del repositorio; el HTML queda con cuatro referencias a `stream4.jpg` y ninguna referencia a `BarFenderLos4.jpg`.
+- **Archivos modificados:** `index.html`, `INFORMES.md`.
+- **Pendiente:** revisar visualmente la imagen ya publicada en GitHub Pages.
