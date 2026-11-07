@@ -427,11 +427,12 @@
         "followers_gain_reported": 27
       },
       "notes": [
-        "Resumen general actualizado por el creador desde SullyGnome para el período 7 oct–6 nov de 2026: 26 transmisiones, 121 horas emitidas, 469 horas vistas, promedio de 3 espectadores, pico de 29 y +27 seguidores.",
-        "La captura del historial compartida contiene diez filas visibles, del 26 oct al 6 nov; no representa el detalle completo de las 26 transmisiones.",
-        "El resumen indica un pico de 29 espectadores, pero el gráfico compartido identifica un pico de 24 en una transmisión marcada como Unlisted el 21/10 a las 21:00. Se conserva el valor agregado de 29 y no se le asigna fecha hasta aclarar la diferencia entre ambas vistas.",
-        "El desglose por categorías disponible corresponde al corte anterior 6 oct–5 nov de 2026. No se recibió una tabla de categorías actualizada para el nuevo período, por lo que se conserva separada y no se presenta como si perteneciera al resumen 7 oct–6 nov.",
-        "En el desglose anterior, Solo charlando muestra 474 horas vistas, cifra que supera las 469 horas vistas del nuevo resumen general. La diferencia no puede conciliarse sin la tabla de categorías actualizada.",
+        "Resumen general de SullyGnome para los últimos 30 días (7 oct–6 nov de 2026): 26 transmisiones, 121 horas emitidas, 469 horas vistas, promedio de 3 espectadores, pico de 29 y +27 seguidores.",
+        "El desglose de categorías compartido por el creador también corresponde a los últimos 30 días. Se transcriben las diez categorías visibles, con sus horas emitidas, horas vistas, porcentajes, promedio y pico.",
+        "La fila Just Chatting informa 469 horas vistas y un 88,4% del total; el resumen general informa 469 horas vistas para todo el canal. Además, la suma de las diez filas del desglose es 525 horas vistas. Las vistas de resumen y categorías no concilian entre sí; se conservan ambas transcripciones y no se altera el resumen general sin aclaración de la fuente.",
+        "La suma de horas emitidas de las diez categorías visibles es 119; el resumen general informa 121 horas emitidas. La diferencia puede corresponder a redondeos o categorías no visibles; no se inventa una fila adicional.",
+        "El resumen indica un pico de 29 espectadores, mientras que el gráfico compartido identifica un pico de 24 durante una transmisión marcada como Unlisted el 21/10 a las 21:00. Se conserva el valor agregado de 29 sin atribuirle fecha hasta aclarar la diferencia.",
+        "La captura del historial contiene diez transmisiones visibles de las 26 informadas para el período; no se reconstruyen las otras 16 filas.",
         "La métrica «Follower gain rank» es una posición/rango del sitio, no la cantidad de seguidores ganados; no se incorpora como métrica de audiencia."
       ],
       "observed_rows_summary": {
@@ -441,11 +442,11 @@
       },
       "game_breakdown": [
         {
-          "name": "Solo charlando",
-          "stream_hours": 105,
-          "stream_share_pct": 83.6,
-          "hours_watched": 474,
-          "watch_share_pct": 89.5,
+          "name": "Just Chatting",
+          "stream_hours": 104,
+          "stream_share_pct": 83.5,
+          "hours_watched": 469,
+          "watch_share_pct": 88.4,
           "average_viewers": 4,
           "peak_viewers": 26
         },
@@ -495,21 +496,21 @@
           "peak_viewers": 2
         },
         {
-          "name": "Overcooked 2",
+          "name": "EA Sports FC 26",
+          "stream_hours": 1,
+          "stream_share_pct": 1.2,
+          "hours_watched": 10,
+          "watch_share_pct": 1.9,
+          "average_viewers": 5,
+          "peak_viewers": 13
+        },
+        {
+          "name": "Overcooked! 2",
           "stream_hours": 1,
           "stream_share_pct": 1,
           "hours_watched": 4,
           "watch_share_pct": 0.8,
           "average_viewers": 3,
-          "peak_viewers": 4
-        },
-        {
-          "name": "Banana Airways",
-          "stream_hours": 1,
-          "stream_share_pct": 0.8,
-          "hours_watched": 2,
-          "watch_share_pct": 0.5,
-          "average_viewers": 2,
           "peak_viewers": 4
         },
         {
@@ -529,18 +530,9 @@
           "watch_share_pct": 0.5,
           "average_viewers": 2,
           "peak_viewers": 4
-        },
-        {
-          "name": "No hay más espacio en el...",
-          "stream_hours": 0,
-          "stream_share_pct": 0.6,
-          "hours_watched": 2,
-          "watch_share_pct": 0.5,
-          "average_viewers": 3,
-          "peak_viewers": 4
         }
       ],
-      "game_breakdown_period": "6 oct — 5 nov 2026"
+      "game_breakdown_period": "Últimos 30 días · 7 oct — 6 nov 2026"
     },
     {
       "platform": "twitch",
