@@ -1644,3 +1644,14 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 - Se conserva el carnet para el frente de la carta y la ilustración completa para el reverso; la Bitácora reutiliza esa misma ilustración con una tercera función de diseño, sin exigir generar otro archivo.
 - Se agregó alternativa de respaldo si la imagen no está disponible y texto alternativo descriptivo.
 - Validación realizada: reemplazo del bloque exacto, presencia de clases y reglas CSS añadidas, revisión de estructura textual. No se realizó prueba visual en navegador.
+
+
+## 2026-11-07 — Identidad institucional: referencias vigentes de Legión Multiversal
+
+- Se actualizaron los textos activos de «Nuestros valores» para presentar a Legión Multiversal como comunidad creativa y espacio de encuentro, aprendizaje y colaboración, sin denominarla Instituto.
+- Se reemplazó el encabezado de reclutamiento que aludía a S.H.I.E.L.D. por «Reclutamiento · Legión Multiversal».
+- Se corrigieron el asunto del correo de postulación y la pregunta de motivación para que nombren a la Legión.
+- Los paneles de seguimiento Twitch ahora atribuyen la observación técnica a Legión Multiversal, sin cambiar los datos ni la lógica de medición.
+- Se conservaron deliberadamente las referencias a S3X-MEN en el capítulo histórico de origen: identifican la etapa fundacional y el material de archivo, no la identidad vigente.
+- Validación estática: comprobadas las sustituciones exactas en index.html y app.js; se revisaron las menciones restantes para separar historia de interfaz activa. No se realizó prueba visual en navegador.
+- Commits de interfaz: 4fd62f1d72ca6699526622a2233b45c7b77c7453 (index.html) y 5d908a81b46cf44af9d51905bae35c2b73666844 (app.js).
