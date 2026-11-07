@@ -1934,3 +1934,13 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 - **Pendientes / riesgos:** obtener URLs directas o capturas de los programas Lurkit de Cinderia y Enshrouded; verificar la activación de los códigos Epic antes de marcarlos como activos; probar visualmente escritorio/móvil y los enlaces internos en el sitio publicado.
 - **Commits de implementación:** [a81e007](https://github.com/losmoriartys-cmd/legion-multiversal/commit/a81e00786a7be2d3c9af1fbbb7a2d2d029aa1c3b) y [3012155](https://github.com/losmoriartys-cmd/legion-multiversal/commit/301215557fbceb683f6094b9041dc069387de0f9).
 - **Despliegue:** no publicado en `main`; pendiente de revisión e integración.
+
+
+## 2026-11-07 — Arsenal · verificación visual de checks Keymailer
+
+- Se recuperó directamente desde GitHub la imagen original `KeyMailer.jpg` mediante lectura base64 del archivo del repositorio; no fue necesario moverla ni volver a adjuntarla.
+- La captura permite leer los checks de las últimas once filas: nueve acciones marcadas (checks verdes) y dos acciones no marcadas (cruces rojas): Hot Meals Fast Wheels — Prologue y Mall: Tidy Up Together.
+- El usuario aportó los datos textuales de las ocho primeras filas (CRACK a Football Academy Simulator), pero el texto no conserva sus iconos y la captura visible comienza más abajo. Esas ocho filas se etiquetan como **No verificable en la captura**, sin inventar estados.
+- Se añadió a la tabla una columna independiente “Indicador de acción”. Se mantiene separado del porcentaje de interés editorial y de las condiciones Required/Allowed.
+- No se publica un total de cumplimiento de 19 campañas porque faltan ocho indicadores visuales.
+- Auditoría estática pendiente de ejecutar tras los cambios y revisión visual del sitio publicado aún no realizada.
