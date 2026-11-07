@@ -1896,3 +1896,16 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 - Se ajusta el lenguaje de Alianzas para no presentar el uso de Keymailer o Lurkit como partnership, patrocinio o representación oficial.
 - **Verificación estática inicial:** los once paneles continúan presentes; la secuencia DOM coincide con el recorrido aprobado y los once destinos están incluidos en la navegación principal o secundaria.
 - **Pendiente:** revisión visual y funcional del sitio publicado en escritorio y móvil; no se declara validado el despliegue ni la experiencia visual en navegador.
+
+
+## 2026-11-07 — Rediseño de Reclutamiento en dos recorridos
+
+- Se reemplaza el formulario único de Reclutamiento por dos vías claramente separadas: **Quiero unirme a la Legión** y **Quiero colaborar con la Legión**.
+- El recorrido de creadores conserva la identidad del postulante y solicita solo datos iniciales útiles: alias, canal principal, otras redes, contenido, disponibilidad y motivación. Se retira la exigencia inicial de aportar estadísticas detalladas.
+- El recorrido comercial incorpora un formulario independiente para empresa/marca, contacto, correo, juego o proyecto, tipo de propuesta, fechas, presupuesto opcional y objetivos.
+- Ambos formularios preparan un correo a losmoriartys@gmail.com para que la persona pueda revisarlo antes de enviarlo. Se explica expresamente ese comportamiento.
+- Se mantienen los límites: ingresar al roster no garantiza claves, patrocinios, ingresos, campañas ni crecimiento; las propuestas comerciales se evalúan según cada proyecto.
+- Se añaden anclas de navegación directa desde las dos tarjetas a sus formularios y estilos responsive para escritorio/móvil, con foco visible y respeto por movimiento reducido.
+- **Auditoría estática:** un único panel chapter-6; existen los dos destinos y formularios; no se detectaron IDs duplicados; las 33 etiquetas section tienen su cierre correspondiente; se comprobó la presencia de reglas responsive y prefers-reduced-motion.
+- **Pendiente:** probar los dos envíos en navegador sin enviar correos reales, revisar visualmente escritorio/móvil y comprobar el despliegue de GitHub Pages. La auditoría estática no acredita el comportamiento visual ni la entrega del correo.
+- **Archivos modificados:** index.html, styles.css, INFORMES.md y BIBLIA_EVOLUCION_LEGION_MULTIVERSAL.md.
