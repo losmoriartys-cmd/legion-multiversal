@@ -2897,3 +2897,17 @@ header .primary-navigation { display:flex; flex-wrap:wrap; gap:7px; align-items:
         max-height:300px;
     }
 }
+
+
+/* ARCHIVO AUDIOVISUAL · reproductores reales e identidad de canal */
+.collaboration-chapter .clip-feature-card { overflow:hidden; }
+.collaboration-chapter .clip-card-source { display:flex;align-items:center;gap:10px;min-height:42px; }
+.collaboration-chapter .clip-card-source img { width:38px;height:38px;flex:0 0 38px;object-fit:cover;border-radius:50%;border:2px solid rgba(113,216,239,.8);box-shadow:0 0 0 3px rgba(113,216,239,.10); }
+.collaboration-chapter .clip-card-source .clip-card-channel { line-height:1.35; }
+.collaboration-chapter .clip-player-wrap { position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;margin:12px 0 14px;background:#050a12;border:1px solid rgba(113,216,239,.48);box-shadow:0 10px 26px rgba(0,0,0,.3); }
+.collaboration-chapter .clip-player-wrap iframe { position:absolute;inset:0;width:100%;height:100%;border:0; }
+.collaboration-chapter .clip-feature-card h5 { min-height:2.3em; }
+@media(max-width:650px) {
+ .collaboration-chapter .clip-card-source img { width:34px;height:34px;flex-basis:34px; }
+ .collaboration-chapter .clip-feature-card h5 { min-height:0; }
+}
