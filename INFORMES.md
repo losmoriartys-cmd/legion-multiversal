@@ -1702,3 +1702,22 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 ### Commits
 - `sullygnome-data.json`: `67a199aaa95584856fb16101625951ca0bd5ec9c`
 - `app.js`: `8e7e74c9aa2918912cd13e1d35695c59f9440a37`
+
+
+## 2026-11-07 — Desglose de categorías de HÁBITOS ATÓMICOS: últimos 30 días
+
+- El creador confirmó que la tabla de categorías compartida corresponde a «los últimos 30 días», por lo que se actualizó el período del desglose a **7 oct — 6 nov 2026**, en línea con el resumen general ya incorporado.
+- Se reemplazó el desglose anterior por las diez categorías visibles en la nueva tabla: Just Chatting, Fortnite, Call of Duty: Warzone, Pro Evolution Soccer 2008, FC Mobile, Clash Royale, EA Sports FC 26, Overcooked! 2, FIFA 23 y Counter-Strike. Se transcribieron horas emitidas, participación, horas vistas, participación, promedio y pico sin crear categorías adicionales.
+- La tabla atribuye a Just Chatting **104 horas emitidas (83,5%)**, **469 horas vistas (88,4%)**, promedio 4 y pico 26.
+- **Discrepancia pendiente de SullyGnome:** el resumen general del canal informa 469 horas vistas totales, pero la fila de Just Chatting también informa 469 horas vistas como 88,4% del total. Las diez categorías visibles suman 525 horas vistas. Por otra parte, suman 119 horas emitidas, frente a 121 del resumen general. Se preservan los valores originales y se explica la inconsistencia en la bitácora; no se estima ni reemplaza el resumen general.
+- Se mantiene el resumen general: 26 transmisiones, 121 horas emitidas, 469 horas vistas, promedio 3, pico 29 y +27 seguidores. La diferencia de pico 29 vs. 24 en el gráfico del 21/10 continúa pendiente de aclaración.
+- Validación estática prevista: diez categorías en el JSON, período etiquetado como últimos 30 días, sumas de control 525 horas vistas y 119 horas emitidas, textos de discrepancia presentes en la página. No se realizó una revisión visual en navegador.
+
+### Archivos modificados
+- `sullygnome-data.json`
+- `app.js`
+- `INFORMES.md`
+
+### Commits
+- `sullygnome-data.json`: `4198c8a8e8f2847532c9217edde0d54d2fd078ae`
+- `app.js`: `8dfa21e1aa64a3db6b160c3073cab162239f8603`
