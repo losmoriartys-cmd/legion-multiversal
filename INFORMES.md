@@ -2077,3 +2077,13 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 - **Validación estática:** el árbol de GitHub confirma que `stream4.jpg` existe en la raíz del repositorio; el HTML queda con cuatro referencias a `stream4.jpg` y ninguna referencia a `BarFenderLos4.jpg`.
 - **Archivos modificados:** `index.html`, `INFORMES.md`.
 - **Pendiente:** revisar visualmente la imagen ya publicada en GitHub Pages.
+
+
+## 2026-11-07 — Endurecimiento de la recolección Twitch y publicación
+
+- **Motivo:** la cadencia observada seguía muy por debajo de los 15 minutos configurados. El colector podía terminar como exitoso aunque Twitch devolviera menos canales que los siete esperados; el workflow tampoco verificaba explícitamente la integridad de la recolección.
+- **Cambios en `update_stats.py`:** exige que Helix devuelva los siete canales activos, cancela la publicación si falta alguno o la respuesta no coincide con el registro esperado, ordena las muestras por fecha y registra un resumen de cobertura de cada ejecución (`collection`, canales muestreados y omitidos por el umbral anti-duplicados).
+- **Cambios en `.github/workflows/actualizar-stats.yml`:** límite de duración de 8 minutos; paso de verificación explícita de los siete canales; sincronización con `main` antes del commit y hasta tres intentos de publicación con rebase, haciendo fallar el job si no puede publicar.
+- **No se modificó:** el cron existente (`7,22,37,52 * * * *`), la fuente Twitch Helix, el intervalo anti-duplicados de 10 minutos ni las muestras históricas.
+- **Validación pendiente:** ejecutar el workflow y comprobar en una ejecución real que Helix resuelva los siete canales, que se escriban las marcas temporales y que el push quede publicado. Esto mejora la detección de recolecciones parciales y errores de publicación; no impide por sí solo que GitHub retrase u omita eventos `schedule`.
+- **Respaldo externo pendiente:** no se configuró todavía un programador independiente. Hace falta elegir/autorizar un servicio externo y proveer una credencial limitada para invocar `workflow_dispatch`; no se inventaron secretos ni se incorporaron credenciales al repositorio.
