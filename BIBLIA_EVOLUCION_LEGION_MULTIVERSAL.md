@@ -220,6 +220,7 @@ Estados oficiales:
 | 06 | Menú de integraciones comerciales en Capítulo 08 | Pendiente | Revisar capacidades reales, condiciones y límites de cada formato. |
 | 07 | Datos geográficos de audiencia LATAM | Pendiente | Reunir fuentes legítimas y cobertura; no inferir ni inventar porcentajes. |
 | 08 | Gráficos y visualización de campañas | Pendiente | Mejorar gráficos existentes sin mezclar métricas o ventanas incompatibles. |
+| 09 | Reorganización editorial y guías de Keymailer/Lurkit | **En curso** | Revisión visual y funcional en GitHub Pages, escritorio y móvil; comprobar navegación y legibilidad. |
 
 ### Registro de la Tarea 01
 
