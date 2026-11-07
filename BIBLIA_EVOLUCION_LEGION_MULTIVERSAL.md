@@ -191,10 +191,10 @@ Cada punto se considera una tarea independiente. Al finalizar cada una:
 ## 10. Doble recorrido final que debe ofrecer la web
 
 ### Recorrido comercial
-Portada ejecutiva → Roster → Estadísticas → Caso Bar Fender / Colaboraciones → Formatos de integración → Contacto.
+Portada ejecutiva → Roster → Estadísticas → Alianzas / formatos de integración → Caso BarFender y otros expedientes de Colaboraciones → Contacto. El acceso al expediente destacado debe seguir visible desde Inicio.
 
-### Recorrido narrativo
-Portada ilustrada → Origen S3X-MEN → Historia y evolución → Integrantes y expedientes → Misiones → Comunidad → Colaboraciones y bitácora.
+### Recorrido institucional y narrativo
+Inicio → Origen S3X-MEN → Roster → Estadísticas → Nuestros Valores → Comunidad → En Vivo → Alianzas → Colaboraciones. Arsenal y Reclutamiento quedan como recursos complementarios al final del recorrido, no como capítulos que interrumpan la presentación institucional.
 
 Ambos recorridos deben convivir y reforzarse. El recorrido comercial facilita la decisión de una marca; el narrativo explica por qué Legión Multiversal tiene una identidad y una comunidad propias.
 
@@ -228,3 +228,53 @@ Estados oficiales:
 - **Navegación confirmada estáticamente:** los once paneles existentes tienen destino de navegación; no se detectaron identificadores duplicados ni destinos de navegación ausentes.
 - **Ajuste incluido:** navegación con fragmento `#chapter-N` y cierre del desplegable secundario al elegir una sección.
 - **Pendiente de aceptación:** confirmar publicación de GitHub Pages y probar interacciones reales, accesibilidad por teclado y presentación visual en escritorio y móvil. La inspección estática no sustituye esas pruebas.
+
+
+## 12. Arquitectura editorial aprobada · reorganización del 7 de noviembre de 2026
+
+### Criterio
+Colaboraciones es una sección de evidencia y archivo de experiencias reales, no la primera explicación de quiénes somos. Se mantiene visible en el recorrido comercial mediante la navegación principal y el acceso destacado a BarFender desde Inicio, pero en el recorrido institucional aparece después de Origen, Roster, Estadísticas, Valores, Comunidad y Alianzas.
+
+### Orden de lectura de los paneles
+1. Inicio ejecutivo — `chapter-0`.
+2. Origen S3X-MEN — `chapter-1`.
+3. Roster — `chapter-2`.
+4. Estadísticas — `chapter-3`.
+5. Nuestros Valores — `chapter-11`.
+6. Comunidad — `chapter-9`.
+7. En Vivo — `chapter-10`.
+8. Alianzas — `chapter-8`.
+9. Colaboraciones — `chapter-12`.
+10. Arsenal — `chapter-5`.
+11. Reclutamiento — `chapter-6`.
+
+Los identificadores técnicos y las referencias de navegación se conservan: no se renumeran los paneles ni se rompen enlaces existentes. La secuencia anterior es editorial; los IDs originales se mantienen por compatibilidad.
+
+### Navegación
+- Principal: Inicio, Origen, Roster, Estadísticas, Valores, Comunidad, Alianzas, Colaboraciones.
+- Otras secciones: En Vivo, Arsenal, Reclutamiento.
+- El capítulo 12 permanece en la navegación principal y como destino del expediente destacado BarFender en Inicio.
+- Arsenal y Reclutamiento son herramientas para integrantes y aspirantes; no deben competir con el recorrido institucional ni convertirse en nuevas áreas comerciales.
+
+### Keymailer y Lurkit dentro de Arsenal
+Se aprueba una guía práctica integrada en Arsenal, no dos capítulos independientes. Incluye:
+- explicación del rol de cada plataforma;
+- pasos básicos de registro, perfil, conexión de canales, búsqueda y solicitud;
+- revisión de campañas, aprobación, recepción del acceso y entrega de contenido;
+- buenas prácticas y cumplimiento de plazos;
+- enlaces a páginas y ayudas oficiales.
+
+La guía debe aclarar que las plataformas son servicios externos y que la decisión de conceder claves depende del publisher, desarrollador, agencia o campaña correspondiente. El uso de Keymailer o Lurkit por parte de integrantes no constituye por sí solo una alianza, patrocinio ni representación oficial de la Legión.
+
+### Reclutamiento
+La sección explica que cada integrante conserva sus canales, cuentas y autonomía; las solicitudes de claves y la aceptación de condiciones son individuales. La Legión puede compartir orientación y coordinar sesiones grupales, pero no garantiza claves, patrocinios, ingresos, campañas ni crecimiento de audiencia.
+
+### Límites de comunicación
+- No usar logotipos, sellos o expresiones como “partner oficial” sin autorización o evidencia.
+- No presentar una clave recibida como campaña remunerada.
+- No prometer aprobación ni acceso garantizado.
+- Diferenciar una plataforma de acceso a claves de una alianza comercial.
+- Mantener las guías actualizadas cuando cambien las interfaces o condiciones oficiales.
+
+### Estado de implementación
+La reorganización del HTML, la navegación y los bloques de orientación se guardó en `main` el 7/11/2026. La comprobación estática de estructura no equivale a aceptación visual: queda pendiente revisar GitHub Pages en escritorio y móvil y probar los recorridos completos.
