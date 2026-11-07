@@ -339,3 +339,5 @@ Convertir Arsenal en una herramienta útil para integrantes y una evidencia tran
 - La captura muestra once filas, desde Supercar Collection Together hasta Ciao Pizza: nueve checks verdes (acción marcada) y dos cruces rojas (acción no marcada). Las dos filas rojas son Hot Meals Fast Wheels — Prologue y Mall: Tidy Up Together.
 - El usuario facilitó los datos de las ocho primeras campañas, pero el texto pegado no conserva los iconos de estado. Hasta obtener una imagen que incluya esas filas, deben figurar como “No verificable en la captura”.
 - No sumar las acciones marcadas como un porcentaje global de cumplimiento ni confundirlas con 100%/66% de interés editorial.
+
+- Auditoría estática posterior a la implementación: 19 filas de campaña y 19 indicadores; distribución 9 marcadas, 2 no marcadas y 8 no verificables; sin IDs duplicados y con estilo CSS presente. La comprobación visual de GitHub Pages continúa pendiente.
