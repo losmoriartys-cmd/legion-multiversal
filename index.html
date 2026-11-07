@@ -274,88 +274,68 @@
             <section id="hero-profile-page" class="hero-profile-page" hidden aria-live="polite"></section>
         </section>
 
-<section id="chapter-3" class="chapter-panel comic-page">
-<div class="chapter-tag">CAPÍTULO 03</div>
-<h2 class="comic-title">EL ALCANCE DE NUESTRA COMUNIDAD</h2>
-<div class="premium-panel">
- <div class="premium-kicker">Media kit · actividad observada</div>
- <h3>Una comunidad activa, conectada y en crecimiento</h3>
- <p>Reunimos creadores con propuestas propias y una identidad compartida. Este panel ofrece una fotografía de la actividad reciente de los canales Twitch que integran el roster, con datos observados y fecha de actualización.</p>
- <div id="stats-updated" class="stats-note">Actualizando indicadores…</div>
- <div id="stats-summary" class="premium-grid"></div>
+<section id="chapter-3" class="chapter-panel comic-page impact-chapter">
+ <div class="chapter-tag">CAPÍTULO 03 · INFORME DE IMPACTO</div>
+ <header class="impact-hero">
+  <div class="impact-hero-copy">
+   <span class="impact-kicker">LEGIÓN MULTIVERSAL · ACTIVIDAD Y ALCANCE</span>
+   <h2 class="comic-title">UNA LEGIÓN.<br><em>MÚLTIPLES UNIVERSOS.</em></h2>
+   <p>Somos una red de creadores con canales, estilos y comunidades propias. Acá mostramos actividad que podemos respaldar, experiencias que construimos juntos y el alcance que estamos desarrollando.</p>
+   <div class="impact-proof-line"><span>DATOS CON FUENTE</span><span>PERÍODOS IDENTIFICADOS</span><span>RESULTADOS SIN INFLAR</span></div>
+  </div>
+  <div class="impact-hero-mark"><span>LM</span><small>INFORME<br>DE IMPACTO</small></div>
+ </header>
+ <section class="impact-live-board" aria-labelledby="impact-live-title">
+  <div class="impact-section-heading"><span>01 / ACTIVIDAD OBSERVADA</span><h3 id="impact-live-title">LA LEGIÓN EN MOVIMIENTO</h3><p>Indicadores del roster activo a partir de las consultas registradas. Los datos se actualizan automáticamente cuando se renueva el archivo de actividad.</p></div>
+  <div id="stats-updated" class="stats-note">Actualizando indicadores…</div>
+  <div id="stats-summary" class="impact-kpi-grid"><article class="impact-kpi"><strong>—</strong><span>CANALES EN SEGUIMIENTO</span></article></div>
+  <div id="stats-highlights" class="impact-highlights" aria-live="polite"></div>
+ </section>
+ <section class="impact-story-grid">
+  <article class="impact-story-card"><span class="impact-story-index">02 / EXPERIENCIAS</span><h3>NO SOLO CONTAMOS CANALES. DOCUMENTAMOS LO QUE HACEMOS JUNTOS.</h3><p>Las colaboraciones reúnen creadores y comunidades alrededor de una misma experiencia. Cada expediente conserva participantes, transmisiones, clips y métricas con su contexto.</p><button class="chapter-cta" type="button" onclick="switchChapter(12)">VER EXPEDIENTES DE COLABORACIÓN ↗</button></article>
+  <article class="impact-story-card impact-story-accent"><span class="impact-story-index">03 / OPORTUNIDADES</span><h3>UN EQUIPO, DISTINTOS PERFILES Y FORMATOS.</h3><p>Una marca puede conocer el canal compartido, evaluar perfiles individuales o explorar una acción multicanal. La propuesta se define según el objetivo, la disponibilidad y los datos verificables.</p><button class="chapter-cta" type="button" onclick="switchChapter(8)">CONOCER NUESTRAS ALIANZAS ↗</button></article>
+ </section>
  <details class="stats-methodology">
   <summary>Fuentes, metodología y alcance de los datos</summary>
-  <p>La información se obtiene de Twitch Helix mediante <b>data.json</b>. El sistema consulta los canales de forma programada cada 15 minutos y conserva una ventana móvil de hasta 30 días. La frecuencia es programada: no representa una detección instantánea ni garantiza que cada cambio de estado se registre en el momento exacto. La ventana máxima configurada no significa que los 30 días estén completos: la cobertura efectiva depende de la antigüedad y continuidad de la recolección.</p>
-  <p>Los espectadores actuales y el estado en directo corresponden a la última consulta disponible. Los promedios, picos, horas en directo y horas vistas se calculan a partir de las muestras propias y no sustituyen las métricas oficiales de Twitch Creator Dashboard. Las horas vistas son estimaciones derivadas del muestreo; los intervalos sin observaciones no se reconstruyen.</p>
-  <p>Los totales de seguidores y las analíticas históricas oficiales solo se publican cuando la fuente y los permisos permiten verificarlos. No se completan valores faltantes mediante estimaciones.</p>
+  <p>La actividad de Twitch se obtiene de Twitch Helix mediante <b>data.json</b>. El sistema consulta los canales de forma programada cada 15 minutos y conserva una ventana móvil máxima de 30 días. La cobertura efectiva depende de la antigüedad y continuidad de la recolección; no se interpreta la ventana configurada como 30 días completos de datos.</p>
+  <p>Los directos detectados y las muestras en directo se cuentan a partir de los registros por canal. Los espectadores actuales y el estado en directo corresponden a la última consulta disponible. Los promedios y picos son valores observados por muestreo y no sustituyen las analíticas oficiales de Twitch.</p>
+  <p>Las métricas de otras plataformas se mantienen separadas por creador y plataforma. No se suman seguidores, vistas ni audiencias de servicios distintos como si fueran una misma unidad. Streams Charts se incorpora como fuente de referencia para análisis del roster cuando existan datos verificables y comparables.</p>
  </details>
  <details class="stats-methodology">
   <summary>Ver detalle técnico por canal</summary>
   <div class="stats-table-wrap"><table class="stats-table"><thead><tr><th>Canal</th><th>Estado</th><th>Espectadores actuales</th><th>Categoría</th><th>Promedio observado</th><th>Pico observado</th><th>Horas observadas</th><th>Muestras</th><th>Cobertura del intervalo muestreado</th></tr></thead><tbody id="stats-table-body"><tr><td colspan="9">Cargando estadísticas…</td></tr></tbody></table></div>
  </details>
-</div>
 </section>
-
-<section id="chapter-11" class="chapter-panel comic-page">
-            <div class="chapter-tag">CAPÍTULO ESPECIAL · NUESTRA IDENTIDAD</div>
-            <h2 class="comic-title">NUESTROS VALORES</h2>
-            <div class="premium-panel">
-                <div class="premium-kicker">LA LEGIÓN · IDENTIDAD, PROPÓSITO Y CULTURA</div>
-                <h3>No somos solamente canales que comparten una pantalla. Somos personas que construyen algo en común.</h3>
-                <p>Legión Multiversal es una comunidad creativa de creadores que encuentra en los videojuegos, el entretenimiento y la comunicación un punto de encuentro. Cada integrante conserva su voz, su estilo y su propio universo; la Legión aparece cuando esas identidades se conectan alrededor de una visión compartida.</p>
-                <p>Entendemos la Legión como un espacio de encuentro, aprendizaje y colaboración: un lugar para desarrollar ideas, probar formatos, compartir experiencias y crecer sin perder aquello que hace único a cada creador.</p>
-            </div>
-
-            <div class="premium-grid">
-                <article class="premium-card">
-                    <h3>CREAR CON IDENTIDAD</h3>
-                    <p>Crear contenido es mucho más que estar en directo o publicar una pieza. Es encontrar una voz, generar experiencias y construir una relación honesta con quienes nos acompañan. Apostamos por propuestas con personalidad, criterio y libertad creativa.</p>
-                </article>
-                <article class="premium-card">
-                    <h3>UNA LEGIÓN, MUCHAS VOCES</h3>
-                    <p>Nuestra identidad colectiva no borra las diferencias: las reúne. Cada integrante aporta su mirada, sus conocimientos, su humor, sus intereses y su manera de conectar. La diversidad de perfiles es parte de nuestra fuerza.</p>
-                </article>
-                <article class="premium-card">
-                    <h3>COMPAÑERISMO Y RESPETO</h3>
-                    <p>La colaboración empieza por escuchar, respetar los tiempos y reconocer el trabajo de los demás. Buscamos un entorno donde se pueda participar, proponer, equivocarse, aprender y disentir con respeto.</p>
-                </article>
-                <article class="premium-card">
-                    <h3>CRECIMIENTO COMPARTIDO</h3>
-                    <p>Crecer no significa competir entre nosotros. Significa abrir oportunidades, compartir herramientas y experiencia, impulsar proyectos conjuntos y celebrar los avances individuales y colectivos.</p>
-                </article>
-                <article class="premium-card">
-                    <h3>COMUNIDAD ANTES QUE NÚMEROS</h3>
-                    <p>Las métricas ayudan a entender el alcance, pero no definen por sí solas el valor de una comunidad. Nos importa ofrecer conversaciones, entretenimiento y espacios participativos donde las personas se sientan bienvenidas.</p>
-                </article>
-                <article class="premium-card">
-                    <h3>CREATIVIDAD CON RESPONSABILIDAD</h3>
-                    <p>Queremos experimentar y sorprender, manteniendo la transparencia con la audiencia y con quienes confían en nuestros proyectos. La autenticidad, el cumplimiento de los acuerdos y la comunicación clara forman parte de nuestro trabajo.</p>
-                </article>
-            </div>
-
-            <div class="premium-panel">
-                <div class="premium-kicker">LO QUE QUEREMOS GENERAR</div>
-                <h3>Experiencias valiosas para la comunidad. Colaboraciones con sentido para las marcas.</h3>
-                <p>A nuestra comunidad queremos ofrecerle entretenimiento compartido, cercanía, participación y un entorno respetuoso donde descubrir nuevos juegos, ideas y creadores. A las marcas, estudios y publishers queremos acercarles un equipo con identidades complementarias, capacidad de generar contenido en distintos formatos y disposición para construir acciones coherentes con cada proyecto.</p>
-                <p>No buscamos colaboraciones vacías ni mensajes que no representen a quienes somos. Nos interesa trabajar con propuestas que tengan sentido para ambas partes, respeten a la audiencia y permitan crear una experiencia genuina.</p>
-                <div class="chapter-actions">
-                    <button class="chapter-cta" type="button" onclick="switchChapter(8)">CONOCER NUESTRAS ALIANZAS <span>↗</span></button>
-                    <button class="chapter-cta" type="button" onclick="switchChapter(9)">DESCUBRIR LA COMUNIDAD <span>↗</span></button>
-                </div>
-            </div>
-        </section>
-
-<section id="chapter-9" class="chapter-panel comic-page">
- <div class="chapter-tag">COMUNIDAD</div><h2 class="comic-title">UN UNIVERSO QUE SE CONSTRUYE EN EQUIPO</h2>
- <div class="premium-panel"><div class="premium-kicker">Comunidad · participación · colaboración</div><h3>Hay muchas formas de formar parte</h3><p>La Legión conecta personas, canales y proyectos distintos. Compartimos partidas, conversaciones, ideas y oportunidades para que cada integrante pueda crecer con su propia identidad.</p></div>
- <div class="premium-grid">
-  <article class="premium-card"><h3>COMPARTIR</h3><p>Descubrí los canales del roster, acompañá sus directos y conocé las distintas propuestas que conviven en la Legión.</p></article>
-  <article class="premium-card"><h3>PARTICIPAR</h3><p>Sumate a las conversaciones, sugerí juegos y proponé actividades grupales a través de nuestros canales públicos.</p></article>
-  <article class="premium-card"><h3>CRECER</h3><p>Creemos en la colaboración genuina, el respeto entre creadores y el intercambio de conocimientos y audiencias.</p></article>
+<section id="chapter-11" class="chapter-panel comic-page manifesto-chapter">
+ <div class="chapter-tag">CAPÍTULO ESPECIAL · NUESTRA IDENTIDAD</div>
+ <header class="manifesto-hero"><span class="manifesto-kicker">LEGIÓN MULTIVERSAL · MANIFIESTO</span><h2>NO BUSCAMOS QUE<br>TODOS SEAN IGUALES.<br><em>BUSCAMOS QUE CADA UNO<br>TENGA UN LUGAR.</em></h2><p>Una Legión no se construye sumando nombres. Se construye cuando personas distintas eligen avanzar juntas.</p></header>
+ <section class="manifesto-origin"><span>LO QUE NOS UNE</span><h3>CADA INTEGRANTE TIENE SU PROPIO UNIVERSO.</h3><p>Su voz, su humor, sus intereses, sus tiempos y su manera de crear. No queremos borrar esas diferencias: queremos que convivan. Legión Multiversal es un espacio para compartir videojuegos, entretenimiento, ideas y proyectos sin tener que dejar de ser quien sos.</p></section>
+ <div class="manifesto-values-grid">
+  <article><b>01</b><h3>IDENTIDAD PROPIA</h3><p>No pedimos que copies un molde. Valoramos las ideas, el estilo y la personalidad que cada integrante trae consigo.</p></article>
+  <article><b>02</b><h3>COMPAÑERISMO REAL</h3><p>Nos damos una mano, reconocemos el trabajo ajeno y entendemos que el crecimiento de otro integrante también puede fortalecer al conjunto.</p></article>
+  <article><b>03</b><h3>RESPETO Y CONFIANZA</h3><p>Escuchar, cuidar los espacios compartidos y respetar límites, tiempos y diferencias es la base para crear juntos.</p></article>
+  <article><b>04</b><h3>LIBERTAD PARA CREAR</h3><p>Las buenas ideas pueden venir de cualquier integrante. Queremos experimentar, proponer y probar formatos sin perder autenticidad.</p></article>
+  <article><b>05</b><h3>CRECER EN EQUIPO</h3><p>Compartimos aprendizajes, experiencias y oportunidades. Cada avance individual suma cuando se construye con generosidad.</p></article>
+  <article><b>06</b><h3>HONESTIDAD CON LA COMUNIDAD</h3><p>Comunicamos con claridad lo que hacemos, qué acuerdos existen y qué resultados podemos respaldar. La confianza no se negocia.</p></article>
  </div>
- <div class="premium-panel"><h3>Encontranos en Twitch</h3><p>La actividad de cada integrante se publica en su propio canal. Los horarios y las agendas se anuncian cuando cada directo o encuentro está confirmado.</p><p><a href="https://twitch.tv/losmoriartys" target="_blank" rel="noopener noreferrer">Los Moriartys ↗</a></p></div>
+ <section class="manifesto-promise"><span>LO QUE PROMETEMOS</span><h3>UN ESPACIO PARA PROPONER, APRENDER, COMPARTIR Y CREAR.</h3><p>No prometemos fama, contratos ni crecimiento automático. Ofrecemos una cultura de colaboración, respeto y trabajo compartido, donde cada persona pueda aportar desde su propio lugar.</p></section>
+ <section class="manifesto-invitation"><div><span>¿TE IDENTIFICÁS CON ESTA FORMA DE HACER LAS COSAS?</span><h3>ENTONCES HAY UNA CONVERSACIÓN QUE PODEMOS EMPEZAR.</h3></div><div class="chapter-actions"><button class="chapter-cta" type="button" onclick="switchChapter(6)">QUIERO FORMAR PARTE <span>↗</span></button><button class="chapter-cta" type="button" onclick="switchChapter(8)">QUIERO COLABORAR CON LA LEGIÓN <span>↗</span></button></div></section>
 </section>
-
+<section id="chapter-9" class="chapter-panel comic-page belonging-chapter">
+ <div class="chapter-tag">CAPÍTULO 09 · COMUNIDAD</div>
+ <header class="belonging-hero">
+  <img src="image_20261106_124855.jpg" alt="Integrantes de Legión Multiversal reunidos frente a distintos universos" loading="lazy">
+  <div class="belonging-hero-shade"></div>
+  <div class="belonging-hero-copy"><span class="belonging-kicker">NO HACE FALTA VENIR DEL MISMO UNIVERSO</span><h2>HAY UN LUGAR<br><em>PARA VOS.</em></h2><p>Distintas historias, juegos y formas de crear. Nos une la curiosidad, las ganas de compartir y el respeto por lo que cada persona aporta.</p></div>
+ </header>
+ <section class="belonging-intro"><span class="belonging-index">01 / UNA COMUNIDAD ABIERTA</span><h3>NO TENÉS QUE SER ESPECTADOR PARA SENTIRTE PARTE.</h3><p>Podés llegar para descubrir un canal, quedarte por una partida, proponer una idea o encontrar personas con quienes crear algo nuevo. La Legión se construye con participación real, no con una lista de nombres.</p></section>
+ <div class="belonging-path-grid">
+  <article class="belonging-path-card"><span>01 · DESCUBRIR</span><h3>CONOCÉ NUESTROS UNIVERSOS</h3><p>Explorá quiénes somos, qué juega cada integrante y qué propuestas conviven dentro del roster. Cada creador mantiene su canal y su personalidad.</p><button class="chapter-cta" type="button" onclick="switchChapter(2)">EXPLORAR EL ROSTER ↗</button></article>
+  <article class="belonging-path-card"><span>02 · PARTICIPAR</span><h3>ENTRÁ EN LA CONVERSACIÓN</h3><p>Acompañá los directos, compartí ideas, sugerí juegos y sumate a los encuentros cuando se anuncien. Las actividades se comunican cuando están confirmadas.</p><button class="chapter-cta" type="button" onclick="switchChapter(10)">VER QUIÉN ESTÁ EN VIVO ↗</button></article>
+  <article class="belonging-path-card belonging-path-featured"><span>03 · PERTENECER</span><h3>¿TE GUSTARÍA CONSTRUIR CON NOSOTROS?</h3><p>Si creás contenido y te interesa colaborar, conocé cómo presentar tu perfil. No necesitás copiar el estilo de nadie: queremos conocer tu propia voz y lo que podrías aportar.</p><button class="chapter-cta" type="button" onclick="switchChapter(6)">QUIERO UNIRME A LA LEGIÓN ↗</button></article>
+ </div>
+ <div class="belonging-bottom"><p>Una comunidad crece cuando hay lugar para nuevas voces.</p><button class="chapter-cta" type="button" onclick="switchChapter(11)">CONOCÉ LO QUE NOS IDENTIFICA ↗</button></div>
+</section>
 <section id="chapter-10" class="chapter-panel comic-page live-chapter">
  <div class="chapter-tag">TRANSMISIONES</div>
  <h2 class="comic-title">LEGIÓN MULTIVERSAL · EN VIVO</h2>
