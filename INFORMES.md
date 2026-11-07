@@ -1909,3 +1909,17 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 - **Auditoría estática:** un único panel chapter-6; existen los dos destinos y formularios; no se detectaron IDs duplicados; las 33 etiquetas section tienen su cierre correspondiente; se comprobó la presencia de reglas responsive y prefers-reduced-motion.
 - **Pendiente:** probar los dos envíos en navegador sin enviar correos reales, revisar visualmente escritorio/móvil y comprobar el despliegue de GitHub Pages. La auditoría estática no acredita el comportamiento visual ni la entrega del correo.
 - **Archivos modificados:** index.html, styles.css, INFORMES.md y BIBLIA_EVOLUCION_LEGION_MULTIVERSAL.md.
+
+
+## 2026-11-07 — Arsenal · expediente de plataformas y campañas
+
+- Se amplía el Capítulo 05 con un expediente documental de Keymailer y Lurkit, separado del catálogo editorial de diez juegos.
+- Lurkit: se incorporan 12 registros (8 completados, 2 fallidos y 2 pendientes) y las etiquetas Partner Creator que figuran para Cinderia y Enshrouded. Se aclara que esta denominación no demuestra por sí sola un patrocinio económico ni un contrato.
+- Keymailer: se incorporan los 19 registros compartidos, con fechas límite, condición Required/Allowed y el campo de interés editorial tal como fue interpretado por el usuario. Se explica expresamente que 100%/66% no son porcentajes de cumplimiento ni reputación.
+- No se publica un recuento de acciones entregadas/no entregadas en Keymailer porque el texto extraído de la captura no conserva de forma fiable los indicadores visuales de estado.
+- Se fecha el corte documental al 07/11/2026; las fechas límite no se presentan como datos en tiempo real.
+- Se añaden enlaces a campañas Lurkit que fueron facilitados por el usuario, tarjetas de resumen, grupos desplegables y tabla con desplazamiento horizontal accesible para Keymailer.
+- No se agregan imágenes de logotipos no aportadas ni se atribuyen relaciones comerciales no verificadas.
+- Auditoría estática inicial: se conserva el catálogo de diez juegos; el nuevo bloque queda dentro de chapter-5 antes del catálogo; se comprueba presencia de 12 registros Lurkit y 19 filas Keymailer; se agregan estilos responsive para tablet y móvil.
+- Pendiente: revisión visual en navegador y contraste real en escritorio/móvil. La inspección estática no equivale a una prueba visual ni confirma el despliegue final.
+- Archivos modificados: index.html, styles.css, INFORMES.md y BIBLIA_EVOLUCION_LEGION_MULTIVERSAL.md.
