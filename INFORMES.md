@@ -1779,3 +1779,18 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 - `index.html`: `8491b54fb105624413c6747f2f3a5e3aeb204ee8`
 - `styles.css`: `4eff89659073b3da4593133fb397599cfc524f3c`
 - `INFORMES.md`: esta actualización de bitácora registra los commits anteriores.
+
+
+## 2026-11-07 — Nuevo capítulo 12: Colaboraciones · Expediente 001 Bar Fender
+
+- **Objetivo:** crear un capítulo independiente para documentar colaboraciones reales de los integrantes de Legión Multiversal como bitácora viva, con expedientes individuales por actividad.
+- **Implementación:** se incorporó «COLABORACIONES» a la navegación principal y se creó el Capítulo 12 con portada editorial, explicación del archivo, principios de documentación, campaña destacada, participantes, métricas, VOD, clips identificados, valor para marcas y contacto comercial.
+- **Expediente 001 — Bar Fender:** documentado el encuentro del 5 de noviembre de 2026 con Demian (Los Moriartys), Lady Moriarty01, TheR0D3R1K y akumazoldyck. Se describe como una sesión colaborativa transmitida simultáneamente desde cuatro canales, con una duración aproximada de una hora y media.
+- **Contexto comercial:** se incorporan los datos editoriales registrados para Bar Fender: publisher Rock Paper Publisher, desarrollador Photo Division y acceso al juego facilitado mediante Keymailer. No se presenta como patrocinio remunerado ni se atribuyen ventas, conversiones o ROI.
+- **Material audiovisual:** se reutilizan barfe.jpg y 1batalla.jpg, ya presentes en el repositorio. Se enlazan los tres VOD públicos documentados (Los Moriartys, Lady Moriarty01 y TheR0D3R1K), con sus duraciones registradas. Akuma queda correctamente identificado como participante simultáneo sin VOD público localizado.
+- **Clips:** se incorporan los ocho títulos recuperados y se agrupan por canal (2 Los Moriartys, 4 Lady Moriarty01, 2 TheR0D3R1K). Los enlaces individuales no se inventan: el archivo histórico indica que faltaba recopilar sus URLs.
+- **Métricas:** se separan los indicadores del VOD completo de Los Moriartys (25 promedio, 40 pico, 80 espectadores únicos, 97 usuarios en chat, 154 vistas en vivo, +2 seguidores, 1 suscripción, duración 2:27:20) del dato de 98 espectadores compartidos únicos del panel Shared Viewership. Se aclara que el VOD cubre la transmisión completa, no solo el tramo de Bar Fender, y que 98 no equivale a audiencia total deduplicada entre los cuatro canales.
+- **Enlaces de navegación:** se añadió acceso al capítulo desde la portada histórica y desde Alianzas, además de la entrada en la navegación principal.
+- **Validación estática:** comprobadas las referencias de imágenes existentes, los tres enlaces de VOD, los ocho títulos de clips, las etiquetas de métricas y la presencia del capítulo 12 y sus accesos. Pendiente la comprobación visual en navegador y la verificación del despliegue de GitHub Pages.
+- **Archivos modificados:** index.html, styles.css, INFORMES.md.
+- **Commits:** index.html 8f775166fa080eaae836464f0f916555ed46f9be; styles.css 1c4bbde61be384609f39beb9c6aebb70deff6fb2.
