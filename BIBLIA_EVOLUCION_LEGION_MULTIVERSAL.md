@@ -331,3 +331,11 @@ Convertir Arsenal en una herramienta útil para integrantes y una evidencia tran
 - Se añadieron estilos adaptables a móvil y tableta y desplazamiento horizontal accesible para la tabla.
 - Se conservaron los diez juegos y las guías de uso ya existentes.
 - Estado: **En curso** hasta revisión visual y funcional del sitio publicado; auditoría estática realizada, sin afirmar prueba de navegador.
+
+
+### Addendum · checks de Keymailer recuperados desde KeyMailer.jpg · 7/11/2026
+
+- La imagen se pudo recuperar directamente del repositorio en formato base64; no mover el archivo de la raíz ni pedir una nueva carga al usuario.
+- La captura muestra once filas, desde Supercar Collection Together hasta Ciao Pizza: nueve checks verdes (acción marcada) y dos cruces rojas (acción no marcada). Las dos filas rojas son Hot Meals Fast Wheels — Prologue y Mall: Tidy Up Together.
+- El usuario facilitó los datos de las ocho primeras campañas, pero el texto pegado no conserva los iconos de estado. Hasta obtener una imagen que incluya esas filas, deben figurar como “No verificable en la captura”.
+- No sumar las acciones marcadas como un porcentaje global de cumplimiento ni confundirlas con 100%/66% de interés editorial.
