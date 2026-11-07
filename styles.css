@@ -2872,3 +2872,28 @@ header .primary-navigation { display:flex; flex-wrap:wrap; gap:7px; align-items:
 
 /* Keymailer: indicador visual de acciones según los checks de la captura */
 .arsenal-action-status{display:inline-block;padding:4px 7px;border:1px solid rgba(143,225,239,.25);color:#b8c8d8;font-size:.65rem;line-height:1.35;white-space:nowrap}
+
+
+/* PORTADA · banner grupal por encima del título */
+.executive-hero { grid-template-columns:minmax(0,1fr); gap:clamp(18px,2.5vw,28px); }
+.executive-hero-art.executive-hero-banner {
+    width:100%;
+    max-width:none;
+    margin:0;
+    padding:8px;
+    transform:none;
+    background:#080d16;
+}
+.executive-hero-art.executive-hero-banner img {
+    width:100%;
+    height:clamp(220px,34vw,430px);
+    max-height:none;
+    object-fit:contain;
+    object-position:center;
+}
+@media(max-width:640px) {
+    .executive-hero-art.executive-hero-banner img {
+        height:auto;
+        max-height:300px;
+    }
+}
