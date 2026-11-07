@@ -1870,4 +1870,4 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
   1. **“Se busca empleado para el bar”**
   2. **“Pero qué pasó”**
 - Los embeds usan `parent=losmoriartys-cmd.github.io` y la grilla responsive existente.
-- Se actualiza el texto de continuidad del caso para reflejar **diez clips identificados** en total: dos de Los Moriartys, cuatro de Lady Moriarty01 y dos de TheR0D3R1K; (más los otros clips previamente registrados en el expediente).
+- Se actualiza el texto de continuidad del caso para reflejar **ocho clips identificados** en total: dos de Los Moriartys, cuatro de Lady Moriarty01 y dos de TheR0D3R1K; sin sumar de nuevo los dos clips de TheR0D3R1K que ya figuraban en el recuento anterior.
