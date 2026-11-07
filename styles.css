@@ -2485,3 +2485,22 @@ body {
     .hero-profile-art-frame { transition: transform .35s ease,box-shadow .35s ease; }
     .hero-profile-art-frame:hover { transform: translateY(-4px); box-shadow: 0 22px 42px rgba(0,0,0,.52),0 0 30px rgba(62,180,221,.22); }
 }
+
+
+/* CAPÍTULO 01 · viñetas y archivo fotográfico del origen */
+.chapter-one .origin-story-grid { display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:30px;align-items:start; }
+.chapter-one .origin-story-copy { display:grid;gap:22px; }
+.chapter-one .origin-beat { padding:22px 24px;background:linear-gradient(145deg,rgba(20,34,53,.88),rgba(8,14,24,.92));border:1px solid rgba(125,184,218,.2);border-left:3px solid var(--lm-cyan);border-radius:12px; }
+.chapter-one .origin-beat h4 { margin:7px 0 10px;color:var(--lm-ice);font:clamp(1.45rem,3vw,2rem) 'Bangers',cursive;letter-spacing:.035em; }
+.chapter-one .origin-beat p { color:#c4d0df;line-height:1.75;margin:0; }
+.chapter-one .origin-beat-no { color:var(--lm-cyan);font-size:.68rem;font-weight:900;letter-spacing:.14em; }
+.chapter-one .origin-visual { margin:28px auto;overflow:hidden;background:#070d17;border:1px solid rgba(139,190,220,.28);border-radius:14px;box-shadow:0 18px 48px rgba(0,0,0,.32); }
+.chapter-one .origin-visual img { display:block;width:100%;height:auto;max-height:760px;object-fit:contain;background:#05080e; }
+.chapter-one .origin-visual figcaption { padding:13px 17px;color:#b8c8d9;font-size:.78rem;line-height:1.55;background:rgba(10,18,31,.96); }
+.chapter-one .origin-photo { max-width:760px; }
+.chapter-one .origin-cover { max-width:980px; }
+.chapter-one .origin-expansion { margin-top:30px; }
+.chapter-one .origin-current-banner { max-width:1100px;margin-top:36px; }
+.chapter-one .founding-origin-story>img { display:block;width:100%;height:auto;max-height:760px;object-fit:contain;background:#05080e; }
+@media(max-width:850px){.chapter-one .origin-story-grid{grid-template-columns:1fr}.chapter-one .origin-story-grid .archive-stamp{max-width:100%}}
+@media(max-width:560px){.chapter-one .origin-beat{padding:18px}.chapter-one .origin-visual{margin:20px auto}.chapter-one .origin-visual figcaption{padding:11px 13px}}
