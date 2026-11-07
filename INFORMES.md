@@ -2007,3 +2007,13 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 - **Pendientes:** revisar visualmente el Capítulo 01 publicado y confirmar con el equipo que la secuencia narrativa y las atribuciones de la primera formación sean definitivas.
 - **Commit:** [fd2d3d8c](https://github.com/losmoriartys-cmd/legion-multiversal/commit/fd2d3d8c2fbe2d482e03b9dbbc50426a45160a22).
 - **Despliegue:** pendiente de verificar el workflow generado por este commit.
+
+## 2026-11-07 — Reorganización visual y narrativa del Capítulo 01 · El Origen
+
+- **Objetivo:** ordenar la secuencia de imágenes para que la portada de S3X-MEN, la primera formación y la expansión del grupo se lean en orden, sin un bloque fundacional redundante.
+- **Archivo modificado:** `index.html`.
+- **Implementado:** `image_20261107_021355.jpg` pasa a la portada `ORÍGENES #0001`; se retiró el bloque independiente `VIÑETA FUNDACIONAL · 002` y su encabezado repetitivo; la fotografía `image_20261106_125112.jpg` se ubica bajo `EL UNIVERSO SE HIZO MÁS GRANDE`; y `image_20261106_124855.jpg` pasa a la imagen principal de cabecera de Inicio.
+- **Preservado:** no se editaron ni eliminaron archivos de imagen, no se modificó el Roster ni el Capítulo 05 — Arsenal, y se conservaron los cambios recientes de otros colaboradores.
+- **Validación estática:** los cuatro reemplazos se aplicaron sobre el contenido vigente de `main`; se confirmó la ausencia del bloque `founding-origin-story` y la presencia de cada imagen en su nueva ubicación. La revisión visual real en escritorio/móvil queda pendiente.
+- **Commit de implementación:** [c25cfec8](https://github.com/losmoriartys-cmd/legion-multiversal/commit/c25cfec8aea02b17d58508116bd7c747bc236384).
+- **Despliegue:** pendiente de comprobar el workflow de GitHub Pages asociado a este commit.
