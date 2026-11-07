@@ -308,3 +308,26 @@ Que un creador que quiere sumarse al roster y una marca/desarrollador que quiere
 
 ### Continuidad comercial
 El formulario comercial de Reclutamiento y el Capítulo 08 deben usar el mismo correo y el mismo encuadre, pero no duplicar formularios completos innecesariamente. El Capítulo 08 presenta formatos y credenciales; Reclutamiento ofrece la puerta de entrada para iniciar una conversación.
+
+
+## 14. Arsenal · expediente de actividad Keymailer y Lurkit · 7 de noviembre de 2026
+
+### Objetivo
+Convertir Arsenal en una herramienta útil para integrantes y una evidencia transparente de actividad en plataformas de acceso a juegos, sin confundirla con una cartera de patrocinios.
+
+### Criterios editoriales
+- El catálogo editorial de diez juegos se conserva.
+- La actividad de plataformas se presenta como expediente documental con corte 07/11/2026.
+- Lurkit: registrar 12 campañas según los estados compartidos (8 completadas, 2 fallidas, 2 pendientes). “Fallida” describe el estado de la campaña en la plataforma, no la calidad del creador ni una causa conocida.
+- Las etiquetas Partner Creator para Cinderia y Enshrouded se atribuyen expresamente a lo que muestra el perfil de Lurkit. No implican por sí mismas patrocinio económico, contrato ni alianza comercial formal.
+- Keymailer: registrar los 19 elementos compartidos, con fecha límite, condición Required/Allowed e interés editorial. Los valores 100% y 66% indican la decisión/interés del creador de llevar el juego al canal; nunca deben etiquetarse como cumplimiento, reputación o porcentaje de entrega.
+- El registro textual recibido no permite reconstruir con fiabilidad los indicadores gráficos de acciones completadas/no realizadas/pendientes. No publicar totales de entregas hasta disponer de evidencia legible.
+- Los plazos y estados son una fotografía fechada, no datos vivos. Actualizar antes de presentarlos como actuales.
+- No publicar IDs privados de claves.
+- Mantener Keymailer y Lurkit como plataformas externas; su uso no equivale a partnership, patrocinio o representación oficial.
+
+### Implementación
+- Se añadió un panel documental con KPIs, etiquetas de Partner Creator, grupos desplegables para Lurkit y tabla de 19 filas para Keymailer.
+- Se añadieron estilos adaptables a móvil y tableta y desplazamiento horizontal accesible para la tabla.
+- Se conservaron los diez juegos y las guías de uso ya existentes.
+- Estado: **En curso** hasta revisión visual y funcional del sitio publicado; auditoría estática realizada, sin afirmar prueba de navegador.
