@@ -1994,3 +1994,18 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 
 - **Ajuste de validación:** la revisión posterior detectó un escape excesivo en las expresiones regulares que validan los dominios HTTPS de Twitch. Se corrigió antes de cerrar la tarea; ahora se aceptan los hosts `twitch.tv`, `www.twitch.tv` y `clips.twitch.tv`, y los demás destinos vuelven al enlace construido desde el slug.
 - **Validación pendiente tras el commit:** comprobar sintaxis JavaScript, que no queden embeds de clips Twitch en las plantillas, que permanezcan los embeds de YouTube, y revisar el despliegue publicado. No se declara validación visual manual.
+
+
+## 2026-11-07 — Auditoría y corrección de encuadre de imagen · Capítulo 01
+
+- **Responsable:** colaboración ChatGPT + equipo del proyecto.
+- **Objetivo:** corregir la presentación de la portada vertical de «Orígenes #0001» sin recortar personajes, rótulos ni elementos de la ilustración.
+- **Evidencia:** `error2.jpg` muestra el avance institucional «05 / Nuestro punto de partida» con la portada recortada dentro de un marco apaisado. Se contrastó con el original `image_20261106_024612-me-gusta-la-foto-pero-la-enmarcaria-coso-si-fuese (1).jpg`, de composición vertical. `error111.jpg` muestra una pieza de BarFender/Capítulo 12; queda registrada como evidencia ajena a esta intervención y no se modifica.
+- **Hallazgo técnico:** `.executive-origin-art img` imponía `object-fit: cover`, provocando el recorte visible. El marco de la misma portada en el Capítulo 01 permitía un ancho excesivo para una pieza editorial vertical.
+- **Implementado en rama:** el avance institucional conserva la proporción original, centra la imagen y limita su ancho a 300 px; en el Capítulo 01, el marco de «Orígenes #0001» se limita a 640 px y la imagen conserva altura automática, sin límite de altura ni recorte.
+- **Alcance:** solo estilos. No se reemplazaron imágenes ni se alteró el texto narrativo. Roster, BarFender y Capítulo 05 — Arsenal no se modifican.
+- **Validaciones:** revisión estática de los selectores y reglas nuevas; referencias HTML a la portada intactas. Inspección visual en navegador, escritorio/móvil y despliegue pendientes de revisión.
+- **Archivos modificados:** `styles.css`, `INFORMES.md`.
+- **Pendientes / riesgos:** verificar legibilidad y proporciones en móvil y escritorio; cualquier ajuste posterior debe conservar `object-fit: contain`.
+- **Commit:** se registrará al completar el PR.
+- **Despliegue:** pendiente; la rama todavía no se publicó.
