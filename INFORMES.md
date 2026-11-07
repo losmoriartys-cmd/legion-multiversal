@@ -1946,3 +1946,15 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 - Auditoría estática pendiente de ejecutar tras los cambios y revisión visual del sitio publicado aún no realizada.
 
 - **Auditoría estática posterior:** 19 filas de campañas y 19 celdas de indicador; 9 acciones marcadas, 2 no marcadas y 8 no verificables; los 17 nombres auditados están presentes; no se detectaron IDs HTML duplicados; la clase CSS del indicador existe. La revisión visual del sitio publicado sigue pendiente.
+
+
+## 2026-11-07 — Corrección de imagen principal del expediente BARFENDER y diagnóstico de clips
+
+- **Responsable:** colaboración ChatGPT + equipo del proyecto.
+- **Objetivo:** utilizar la imagen solicitada para el expediente comercial BARFENDER y revisar el reporte de rechazo de los reproductores de Twitch.
+- **Archivo modificado:** `index.html`.
+- **Implementado:** se reemplazaron las cuatro referencias visuales anteriores (`barfe.jpg` y `1batalla.jpg`) por `BarFenderLos4.jpg`, alojada en la raíz del repositorio `legion-multiversal`. Esto actualiza la imagen destacada de inicio, la portada del archivo de colaboraciones y la imagen principal del expediente BARFENDER.
+- **Diagnóstico de Twitch:** los ocho clips del expediente están insertados mediante el formato oficial de Twitch Clips con sus respectivos slugs/IDs y el parámetro `parent=losmoriartys-cmd.github.io`, que coincide con el dominio de GitHub Pages. Para clips no se necesita un playback ID de VOD: el slug/ID del clip es el identificador correcto. La revisión estática no permite confirmar que Twitch autorice la reproducción en el navegador ni determinar si algún clip fue eliminado, restringido o bloqueado.
+- **Pendiente:** comprobar la reproducción real de los ocho embeds en la página publicada. Si Twitch sigue mostrando rechazo, solicitar captura del mensaje exacto o probar un clip concreto; no pedir playback IDs salvo que se decida insertar VODs completos en lugar de clips.
+- **Commit de código:** [849e12fa](https://github.com/losmoriartys-cmd/legion-multiversal/commit/849e12fa7c846ec88f8627873d9a4887aa0e00d7).
+- **Despliegue:** commit realizado en `main`; publicación de GitHub Pages y reproducción externa todavía pendientes de verificación.
