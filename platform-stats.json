@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-07T19:08:37Z",
+  "updated_at": "2026-11-07T19:44:41Z",
   "methodology": "Las métricas se conservan por creador y plataforma. No sumar ni comparar directamente unidades de plataformas distintas.",
   "creators": {
     "patoteexplica": {
@@ -14,7 +14,7 @@
           "thumbnail_url": "https://yt3.ggpht.com/5IfMo9I0MXu8cqQjNbLKqeys8ESbWr8qQ0_wq3IjDml0EdGZDe3uqg63ZOZ4SBIIHmtnOiayyg=s800-c-k-c0x00ffffff-no-rj",
           "metrics": {
             "subscribers": 56,
-            "total_views": 430,
+            "total_views": 431,
             "videos_total": 6
           },
           "recent_videos": [
@@ -83,6 +83,6 @@
   "collection_status": {
     "youtube": "enabled",
     "kick": "awaiting_secrets",
-    "captured_at": "2026-11-07T19:08:37Z"
+    "captured_at": "2026-11-07T19:44:41Z"
   }
 }
