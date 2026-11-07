@@ -221,6 +221,7 @@ Estados oficiales:
 | 07 | Datos geográficos de audiencia LATAM | Pendiente | Reunir fuentes legítimas y cobertura; no inferir ni inventar porcentajes. |
 | 08 | Gráficos y visualización de campañas | Pendiente | Mejorar gráficos existentes sin mezclar métricas o ventanas incompatibles. |
 | 09 | Reorganización editorial y guías de Keymailer/Lurkit | **En curso** | Revisión visual y funcional en GitHub Pages, escritorio y móvil; comprobar navegación y legibilidad. |
+| 10 | Reclutamiento en dos recorridos independientes | **En curso** | Validar visualmente ambos recorridos, navegación a formularios y preparación de correo en escritorio y móvil. |
 
 ### Registro de la Tarea 01
 
@@ -279,3 +280,31 @@ La sección explica que cada integrante conserva sus canales, cuentas y autonom�
 
 ### Estado de implementación
 La reorganización del HTML, la navegación y los bloques de orientación se guardó en `main` el 7/11/2026. La comprobación estática de estructura no equivale a aceptación visual: queda pendiente revisar GitHub Pages en escritorio y móvil y probar los recorridos completos.
+
+
+## 13. Reclutamiento en dos recorridos · decisión del 7 de noviembre de 2026
+
+### Objetivo
+Que un creador que quiere sumarse al roster y una marca/desarrollador que quiere colaborar encuentren caminos separados, claros y cómodos. No mezclar postulaciones personales con propuestas comerciales.
+
+### Recorrido A · Quiero unirme a la Legión
+- Presentación breve de la filosofía: identidad propia, autonomía del canal, actividades compartidas y participación según disponibilidad.
+- Formulario inicial sencillo: nombre/alias, país o zona horaria, canal principal, otras redes, contenido habitual, disponibilidad y motivación.
+- No exigir estadísticas detalladas como condición para el primer contacto.
+- La evaluación es individual; pertenecer al roster no garantiza claves, patrocinios, ingresos, campañas ni crecimiento.
+
+### Recorrido B · Quiero colaborar con la Legión
+- Destinado a estudios, publishers, agencias y marcas.
+- Formulario separado para organización, persona de contacto, correo, juego/proyecto, tipo de propuesta, fechas, presupuesto opcional y objetivos.
+- Debe admitir propuestas para la Legión en conjunto o para creadores individuales.
+- Los formularios preparan un correo a losmoriartys@gmail.com y dejan a la persona revisar el contenido antes del envío; no simular un envío automático ni almacenar datos en el sitio.
+
+### Implementación inicial
+- El panel chapter-6 ya contiene dos tarjetas de entrada y dos formularios diferenciados.
+- Se conservan los IDs de capítulos existentes y se incorporan anclas internas para llegar a cada formulario.
+- Se añadieron estilos responsive, estados de foco visibles y respeto por prefers-reduced-motion.
+- Auditoría estática inicial: un solo chapter-6; ambos formularios y anclas presentes; IDs HTML sin duplicados; etiquetas section equilibradas.
+- Estado: **En curso** hasta realizar pruebas visuales y funcionales en GitHub Pages en escritorio y móvil.
+
+### Continuidad comercial
+El formulario comercial de Reclutamiento y el Capítulo 08 deben usar el mismo correo y el mismo encuadre, pero no duplicar formularios completos innecesariamente. El Capítulo 08 presenta formatos y credenciales; Reclutamiento ofrece la puerta de entrada para iniciar una conversación.
