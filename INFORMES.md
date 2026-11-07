@@ -2046,3 +2046,13 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 - **Archivos modificados:** `index.html`, `styles.css`, `INFORMES.md`.
 - **Validación estática:** se encontraron y transformaron exactamente ocho tarjetas; cada iframe usa el slug del enlace original de su propio clip y el dominio GitHub Pages como parent; se verificaron las tres rutas de imagen de canal contra el árbol del repositorio.
 - **Pendiente de revisión visual:** confirmar en la web publicada que Twitch carga los reproductores correctamente en el dominio GitHub Pages y que las imágenes elegidas corresponden a los avatares/logos que el equipo quiere mostrar. Los archivos disponibles son retratos/identidades existentes del repositorio; no se inventaron logos nuevos.
+
+
+## 2026-11-07 — Corrección del archivo audiovisual · avatares oficiales y tamaño de reproductores
+
+- **Problema detectado:** la versión anterior mostraba retratos/archivos locales como identidad de canal y los reproductores estaban limitados a 16:9. Twitch establece un mínimo de 400 × 300 px para sus embeds.
+- **Corregido:** las ocho tarjetas usan ahora las imágenes de perfil oficiales obtenidas de los metadatos públicos de los canales de Twitch: Los Moriartys, Lady Moriarty01 y TheR0D3R1K.
+- **Reproductores:** se fijó un marco de 400 × 300 px, con dimensiones explícitas en los iframes y parent=losmoriartys-cmd.github.io. En pantallas angostas, las tarjetas conservan el ancho mínimo necesario y permiten desplazamiento horizontal para no reducir el reproductor por debajo del mínimo.
+- **Archivos modificados:** index.html, styles.css, INFORMES.md.
+- **Validación estática:** se comprobaron ocho iframes, ocho referencias a avatares oficiales distribuidas por canal, y las dimensiones mínimas de 400 × 300 px en el CSS y los atributos HTML.
+- **Alcance de la comprobación:** la implementación está corregida en main; la reproducción efectiva debe confirmarse en el navegador publicado, ya que Twitch puede aplicar bloqueos externos o restricciones del propio servicio.
