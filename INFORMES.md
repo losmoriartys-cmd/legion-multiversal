@@ -1841,3 +1841,12 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 - **Encuadre de imágenes:** se corrigió el comportamiento de la imagen de portada del archivo para mostrar la fotografía completa, centrada y sin recortes por `object-fit: cover`. Se reforzó también el centrado de la imagen panorámica del expediente y se identificó el retrato de Lady para ajustar su punto de encuadre en la ficha de participantes.
 - **Métricas del VOD de Los Moriartys:** el pico de **40** queda rotulado expresamente como **“PICO MÁXIMO · CANAL LOS MORIARTYS”**. Se actualiza el dato de usuarios en chat a **91**, según la corrección facilitada por el responsable del canal. Los **80 espectadores únicos** permanecen como indicador independiente.
 - **Límite de validación:** los cambios están preparados para revisión visual en el sitio publicado. El encuadre definitivo de Lady debe comprobarse en navegador; si la fotografía fuente tiene el rostro ya cortado, será necesario sustituirla por una imagen original con más margen.
+
+
+## 2026-11-07 — Incorporación de clips de Los Moriartys · BarFender
+
+- Se incorporan dos clips de Twitch proporcionados por el responsable del canal, con sus reproductores embebidos, títulos y enlaces directos de respaldo.
+- Clip 01: **“Ojo ojo ojo vomita... alv vomitó”**.
+- Clip 02: **“Se boxean en nuestro bar”**, con contexto de participación de @TheR0D3R1k, @Akumazoldyck y @LadyMoriarty01.
+- Los embeds usan como dominio padre `losmoriartys-cmd.github.io`, correspondiente al sitio GitHub Pages, en lugar del valor de ejemplo `www.example.com`.
+- Los demás clips de Lady Moriarty01 y TheR0D3R1K permanecen listados sin enlaces inventados.
