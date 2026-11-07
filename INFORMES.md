@@ -1682,3 +1682,23 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 
 ### Commit
 - `roster-data.json`: `f619531dbb667aaa2fd632f73349a597f69b6015`
+
+
+## 2026-11-07 — Actualización de métricas de HÁBITOS ATÓMICOS con nuevo corte de SullyGnome
+
+- Se recibió una captura más reciente del resumen de SullyGnome, correspondiente al **7 oct — 6 nov 2026**. Este corte reemplaza al resumen anterior (6 oct — 5 nov) para las métricas generales del expediente.
+- Valores vigentes incorporados en `sullygnome-data.json` y en la bitácora: **26 transmisiones**, **121 horas emitidas**, **469 horas vistas**, **3 espectadores promedio**, **29 de pico** y **+27 seguidores**.
+- La captura del historial incluida en el mensaje muestra diez filas recientes (26 oct — 6 nov), no las 26 transmisiones completas. Se registra como muestra parcial de 10/26; no se inventan las otras 16 filas.
+- Se conserva sin fecha el pico agregado de 29. El gráfico compartido señala 24 espectadores durante una transmisión marcada como «Unlisted» el 21/10 a las 21:00. Como las dos vistas no coinciden, no se atribuye una fecha al máximo agregado hasta aclarar qué incluye cada panel.
+- El desglose por categorías disponible sigue perteneciendo al corte anterior (6 oct — 5 nov). Se etiqueta con su propio período y no se mezcla con el resumen nuevo. En ese desglose, «Solo charlando» muestra 474 horas vistas, cifra superior a las 469 horas del resumen general actualizado; queda pendiente una tabla de categorías del nuevo período para reconciliarla.
+- Se descarta la interpretación de «Follower gain rank» como seguidores ganados: es una posición/rango del directorio. La métrica de seguidores ganados usada en el perfil es +27, tomada del resumen general.
+- Se actualizaron las etiquetas y textos del expediente para que el período del resumen y el del desglose por categorías queden claramente diferenciados.
+
+### Archivos modificados
+- `sullygnome-data.json`
+- `app.js`
+- `INFORMES.md`
+
+### Commits
+- `sullygnome-data.json`: `67a199aaa95584856fb16101625951ca0bd5ec9c`
+- `app.js`: `8e7e74c9aa2918912cd13e1d35695c59f9440a37`
