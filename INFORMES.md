@@ -1861,3 +1861,13 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
   3. **“Te voy a pegar, boludo”**
   4. **“Quería pelear”**
 - Los embeds usan `parent=losmoriartys-cmd.github.io`. Se conserva la grilla responsive compartida con los clips de Los Moriartys.
+
+
+## 2026-11-07 — Incorporación de dos clips de TheR0D3R1K · BarFender
+
+- Se reemplaza el listado textual de TheR0D3R1K por dos reproductores embebidos de Twitch con enlaces directos.
+- Títulos asociados en el mismo orden de los enlaces entregados:
+  1. **“Se busca empleado para el bar”**
+  2. **“Pero qué pasó”**
+- Los embeds usan `parent=losmoriartys-cmd.github.io` y la grilla responsive existente.
+- Se actualiza el texto de continuidad del caso para reflejar **diez clips identificados** en total: dos de Los Moriartys, cuatro de Lady Moriarty01 y dos de TheR0D3R1K; (más los otros clips previamente registrados en el expediente).
