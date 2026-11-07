@@ -2554,7 +2554,7 @@ body {
 .collaboration-chapter .campaign-wide-art { margin:0 auto 26px;max-width:1050px;border:1px solid rgba(117,183,215,.3);background:#05080d; }
 .collaboration-chapter .campaign-wide-art img { display:block;width:100%;max-height:480px;object-fit:contain;background:#05080d; }
 .collaboration-chapter .campaign-editorial-art { margin:18px 0 4px;max-width:760px;border:1px solid rgba(117,183,215,.3);background:#05080d; }
-.collaboration-chapter .campaign-editorial-art img { display:block;width:100%;max-height:360px;object-fit:cover; }
+.collaboration-chapter .campaign-editorial-art img { display:block;width:100%;height:auto;max-height:none;object-fit:contain; }
 .collaboration-chapter .campaign-editorial-art figcaption { padding:10px 12px;color:#c4d0df;background:#101a29;font-size:.68rem;letter-spacing:.08em; }
 .collaboration-chapter .campaign-summary-grid { display:grid;grid-template-columns:minmax(0,1.2fr) minmax(270px,.8fr);gap:22px;align-items:start; }
 .collaboration-chapter .campaign-summary-copy { padding:22px;background:rgba(25,41,61,.58);border-left:3px solid #42c8e8; }
