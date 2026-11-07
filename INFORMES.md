@@ -1881,3 +1881,18 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 - Se corrige el crédito de desarrollador en la ficha de la campaña: **Proto Division** (en lugar de Photo Division).
 - Se añade diseño responsive para la cabecera y la ficha informativa. El enlace de reseñas apunta al apartado de opiniones de Steam.
 - La fecha de lanzamiento del juego se distingue de la fecha de la sesión colaborativa, que se mantiene como **05/11/2026**.
+
+
+## 2026-11-07 — Reorganización editorial y guía de acceso a juegos · Arsenal / Reclutamiento
+
+- Se reorganiza el orden real de los paneles del sitio para que el recorrido institucional siga esta secuencia: Inicio, Origen, Roster, Estadísticas, Valores, Comunidad, En Vivo, Alianzas, Colaboraciones, Arsenal y Reclutamiento.
+- Se conserva el identificador técnico de cada panel (`chapter-0`, `chapter-1`, etc.). No se renumeran IDs ni se eliminan secciones, para preservar los enlaces y las funciones existentes.
+- La navegación principal queda ordenada como: Inicio, Origen, Roster, Estadísticas, Valores, Comunidad, Alianzas y Colaboraciones. En “Otras secciones” quedan En Vivo, Arsenal y Reclutamiento.
+- El Capítulo 12 / Colaboraciones queda después de Comunidad y Alianzas en el recorrido institucional, pero sigue visible en la navegación principal y recibe tráfico directo desde el expediente BarFender destacado en Inicio.
+- Se incorpora en Arsenal una guía operativa de Keymailer y Lurkit con pasos generales para crear el perfil, conectar canales, buscar juegos/campañas, solicitar acceso y cumplir la entrega de contenido.
+- Se incorporan enlaces a los sitios y centros de ayuda oficiales. La guía aclara que las solicitudes no garantizan claves y que la aprobación corresponde al publisher, desarrollador, agencia o campaña.
+- Se añade un protocolo de buenas prácticas para respetar embargos, fechas, entregables y reportes; también se recomienda coordinar con antelación las solicitudes y accesos cuando una partida sea grupal.
+- Se amplía Reclutamiento con una explicación de identidad propia, recursos compartidos, gestión individual y compromiso colectivo. Se aclara que pertenecer al roster no garantiza claves, patrocinios, ingresos, campañas ni crecimiento.
+- Se ajusta el lenguaje de Alianzas para no presentar el uso de Keymailer o Lurkit como partnership, patrocinio o representación oficial.
+- **Verificación estática inicial:** los once paneles continúan presentes; la secuencia DOM coincide con el recorrido aprobado y los once destinos están incluidos en la navegación principal o secundaria.
+- **Pendiente:** revisión visual y funcional del sitio publicado en escritorio y móvil; no se declara validado el despliegue ni la experiencia visual en navegador.
