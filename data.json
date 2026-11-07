@@ -17,7 +17,7 @@
     "elgabii090"
   ],
   "channel_registry_note": "Los canales archivados se conservan para consulta histórica y no se incluyen en los indicadores del roster activo.",
-  "updated_at": "2026-11-07T01:36:34Z",
+  "updated_at": "2026-11-07T02:24:26Z",
   "channels": {
     "ladymoriarty01": {
       "login": "ladymoriarty01",
@@ -32,9 +32,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-07T01:36:34Z",
+      "updated_at": "2026-11-07T02:24:26Z",
       "window": {
-        "samples_total": 88,
+        "samples_total": 89,
         "live_samples": 5,
         "streams_observed": 2,
         "average_viewers_sampled": 5.4,
@@ -874,6 +874,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-07T02:24:26Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -890,9 +899,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-07T01:36:34Z",
+      "updated_at": "2026-11-07T02:24:26Z",
       "window": {
-        "samples_total": 88,
+        "samples_total": 89,
         "live_samples": 15,
         "streams_observed": 3,
         "average_viewers_sampled": 18.3,
@@ -1760,6 +1769,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-07T02:24:26Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -2422,9 +2440,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-07T01:36:34Z",
+      "updated_at": "2026-11-07T02:24:26Z",
       "window": {
-        "samples_total": 88,
+        "samples_total": 89,
         "live_samples": 4,
         "streams_observed": 2,
         "average_viewers_sampled": 6.0,
@@ -3250,6 +3268,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-07T02:24:26Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -3262,16 +3289,16 @@
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
       "live": true,
-      "current_viewers": 14,
+      "current_viewers": 3,
       "current_game": "Terrible Lizards",
       "current_title": "iniciamos una nueva aventura de dinosaurios !!!",
       "stream_started_at": "2026-11-07T00:53:55Z",
-      "updated_at": "2026-11-07T01:36:34Z",
+      "updated_at": "2026-11-07T02:24:26Z",
       "window": {
-        "samples_total": 88,
-        "live_samples": 9,
+        "samples_total": 89,
+        "live_samples": 10,
         "streams_observed": 4,
-        "average_viewers_sampled": 7.2,
+        "average_viewers_sampled": 6.8,
         "peak_viewers_sampled": 17,
         "observed_live_hours": 0.24,
         "estimated_hours_watched": 0.72,
@@ -3292,9 +3319,9 @@
           },
           {
             "name": "Terrible Lizards",
-            "live_samples": 1,
+            "live_samples": 2,
             "streams_observed": 1,
-            "average_viewers_sampled": 14.0,
+            "average_viewers_sampled": 8.5,
             "peak_viewers_sampled": 14
           }
         ],
@@ -3322,9 +3349,9 @@
           },
           {
             "date": "2026-11-07",
-            "live_samples": 1,
+            "live_samples": 2,
             "streams_observed": 1,
-            "average_viewers_sampled": 14.0,
+            "average_viewers_sampled": 8.5,
             "peak_viewers_sampled": 14
           }
         ],
@@ -4122,6 +4149,15 @@
           "title": "iniciamos una nueva aventura de dinosaurios !!!",
           "stream_id": "322121363289",
           "started_at": "2026-11-07T00:53:55Z"
+        },
+        {
+          "sampled_at": "2026-11-07T02:24:26Z",
+          "is_live": true,
+          "viewer_count": 3,
+          "game_name": "Terrible Lizards",
+          "title": "iniciamos una nueva aventura de dinosaurios !!!",
+          "stream_id": "322121363289",
+          "started_at": "2026-11-07T00:53:55Z"
         }
       ]
     },
@@ -4138,9 +4174,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-07T01:36:34Z",
+      "updated_at": "2026-11-07T02:24:26Z",
       "window": {
-        "samples_total": 88,
+        "samples_total": 89,
         "live_samples": 7,
         "streams_observed": 3,
         "average_viewers_sampled": 1.3,
@@ -4980,6 +5016,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-07T02:24:26Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -5612,9 +5657,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-07T01:36:34Z",
+      "updated_at": "2026-11-07T02:24:26Z",
       "window": {
-        "samples_total": 88,
+        "samples_total": 89,
         "live_samples": 9,
         "streams_observed": 3,
         "average_viewers_sampled": 3.9,
@@ -6454,6 +6499,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-07T02:24:26Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -6465,14 +6519,14 @@
       "twitch_url": "https://twitch.tv/losmoriartys",
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
-      "live": true,
-      "current_viewers": 15,
-      "current_game": "Clive Barker's Hellraiser: Revival",
-      "current_title": "[Contenido +18] Hoy nos adentramos en Clive Barker's Hellraiser: Revival - 🎁⚜️CODIGO DE CREADOR EPIC: LosMoriartys ⚜️🎁",
-      "stream_started_at": "2026-11-07T01:26:24Z",
-      "updated_at": "2026-11-07T01:36:34Z",
+      "live": false,
+      "current_viewers": null,
+      "current_game": null,
+      "current_title": null,
+      "stream_started_at": null,
+      "updated_at": "2026-11-07T02:24:26Z",
       "window": {
-        "samples_total": 88,
+        "samples_total": 89,
         "live_samples": 5,
         "streams_observed": 3,
         "average_viewers_sampled": 19.4,
@@ -7312,6 +7366,15 @@
           "title": "[Contenido +18] Hoy nos adentramos en Clive Barker's Hellraiser: Revival - 🎁⚜️CODIGO DE CREADOR EPIC: LosMoriartys ⚜️🎁",
           "stream_id": "319447148789",
           "started_at": "2026-11-07T01:26:24Z"
+        },
+        {
+          "sampled_at": "2026-11-07T02:24:26Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     }
