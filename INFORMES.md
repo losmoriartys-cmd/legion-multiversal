@@ -2036,3 +2036,13 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 - **Validaciones estáticas:** se confirmó que el banner aparece antes del título, conserva la ruta original de la imagen, no tiene epígrafe debajo y cuenta con reglas para móvil. No se modificó el Capítulo 05 — Arsenal ni ningún asset.
 - **Commits:** [7a6a1b77](https://github.com/losmoriartys-cmd/legion-multiversal/commit/7a6a1b77a3ea767bcf1cd28728111be602a9cca9) (estructura) · [7dc47ab8](https://github.com/losmoriartys-cmd/legion-multiversal/commit/7dc47ab8760a8a72a711ca449cf73b9ab6f5b9c7) (estilos).
 - **Pendiente:** comprobar el workflow de GitHub Pages y revisar visualmente el resultado publicado en escritorio y móvil.
+
+
+## 2026-11-07 — Archivo audiovisual con clips originales y canales identificados
+
+- **Pedido:** mejorar la sección **04 / ARCHIVO AUDIOVISUAL — OCHO MOMENTOS PARA VOLVER A LA NOCHE**, reemplazando los fondos vacíos por frames/contenido real y dando presencia a los logos o identidades de los canales.
+- **Implementado:** las ocho tarjetas ahora incluyen reproductores oficiales de los clips de Twitch en formato 16:9, con carga diferida, para mostrar el contenido audiovisual original en lugar de las portadas decorativas genéricas. Cada tarjeta incorpora además una imagen circular de identificación del canal correspondiente: Los Moriartys, Lady Moriarty01 o TheR0D3R1K.
+- **Diseño:** se conservaron títulos, enlaces de reproducción, contexto de los clips y la estética oscura/celeste del expediente; se mejoró la jerarquía visual de la identidad de canal y del reproductor.
+- **Archivos modificados:** `index.html`, `styles.css`, `INFORMES.md`.
+- **Validación estática:** se encontraron y transformaron exactamente ocho tarjetas; cada iframe usa el slug del enlace original de su propio clip y el dominio GitHub Pages como parent; se verificaron las tres rutas de imagen de canal contra el árbol del repositorio.
+- **Pendiente de revisión visual:** confirmar en la web publicada que Twitch carga los reproductores correctamente en el dominio GitHub Pages y que las imágenes elegidas corresponden a los avatares/logos que el equipo quiere mostrar. Los archivos disponibles son retratos/identidades existentes del repositorio; no se inventaron logos nuevos.
