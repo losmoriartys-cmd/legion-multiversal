@@ -1655,3 +1655,30 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 - Se conservaron deliberadamente las referencias a S3X-MEN en el capítulo histórico de origen: identifican la etapa fundacional y el material de archivo, no la identidad vigente.
 - Validación estática: comprobadas las sustituciones exactas en index.html y app.js; se revisaron las menciones restantes para separar historia de interfaz activa. No se realizó prueba visual en navegador.
 - Commits de interfaz: 4fd62f1d72ca6699526622a2233b45c7b77c7453 (index.html) y 5d908a81b46cf44af9d51905bae35c2b73666844 (app.js).
+
+
+## 2026-11-07 — Integridad de datos: horario de DAVE y revisión de métricas individuales
+
+### Corrección aplicada
+- Se detectó una contradicción en el expediente de DAVE — NEXUS: el campo `schedule` indicaba «Sin horario fijo confirmado», mientras que la bitácora afirmaba que transmitía diariamente a las 19:00 de México.
+- Se corrigió el texto de la bitácora para dejar claro que no existe un horario fijo confirmado y que los anuncios se comunicarán cuando cada transmisión esté programada.
+- No se inventó ni se trasladó un horario desde otro integrante.
+
+### Revisión de métricas
+- **AKUMA:** el resumen de SullyGnome informa 22 transmisiones, 43 horas emitidas, 190 horas vistas, promedio de 4 espectadores, pico de 41 y +34 seguidores para el período 6 oct–5 nov de 2026. La bitácora individual distingue correctamente ese resumen de las diez transmisiones visibles en el detalle. El directo del 6 nov se mantiene separado por quedar fuera de la ventana. No se detectó una contradicción numérica que justifique alterar las cifras.
+- **ARDIPII:** el resumen informa 8 transmisiones, 11 horas emitidas, 121 horas vistas, promedio de 11 espectadores, pico de 31 y +83 seguidores en la ventana 6 oct–5 nov de 2026. Las ocho filas cargadas corresponden a ese período. La página individual presenta los mismos indicadores. Se mantiene la atribución a SullyGnome y no se mezclan con el muestreo propio de Twitch Helix.
+- **HÁBITOS ATÓMICOS:** el resumen general informa 472 horas vistas, mientras que la suma de las filas del desglose por categoría llega a 474. Se conserva la diferencia explícita en la página, sin modificar ninguno de los valores de origen. El resumen indica 28 transmisiones, pero solo se recibieron 24 filas individuales; no se reconstruyen ni inventan las cuatro faltantes. El pico de 29 espectadores permanece sin fecha por la discrepancia del registro recibido. La cifra de ranking «Seguidores ganan rango» se excluye de los seguidores del canal porque representa una posición del directorio, no una cantidad.
+- Las métricas de SullyGnome, TwitchMetrics y el muestreo propio de Twitch Helix permanecen separadas por fuente, período y metodología. No se comparan como si fueran mediciones equivalentes ni se suman entre sí.
+
+### Estado y pendientes
+- La contradicción del horario de DAVE queda corregida.
+- La revisión estática no encontró motivo para alterar las cifras principales de AKUMA o ARDIPII.
+- La diferencia de 472/474 horas vistas de HÁBITOS y la falta de cuatro filas requieren contraste con el resumen o la captura original de SullyGnome para poder conciliarlas. Hasta entonces, ambas advertencias deben permanecer visibles.
+- No se realizó una verificación visual independiente en navegador ni una consulta autenticada a los paneles privados de los creadores.
+
+### Archivos
+- `roster-data.json`
+- `INFORMES.md`
+
+### Commit
+- `roster-data.json`: `f619531dbb667aaa2fd632f73349a597f69b6015`
