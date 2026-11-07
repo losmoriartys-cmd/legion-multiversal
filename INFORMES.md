@@ -1850,3 +1850,14 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 - Clip 02: **“Se boxean en nuestro bar”**, con contexto de participación de @TheR0D3R1k, @Akumazoldyck y @LadyMoriarty01.
 - Los embeds usan como dominio padre `losmoriartys-cmd.github.io`, correspondiente al sitio GitHub Pages, en lugar del valor de ejemplo `www.example.com`.
 - Los demás clips de Lady Moriarty01 y TheR0D3R1K permanecen listados sin enlaces inventados.
+
+
+## 2026-11-07 — Incorporación de cuatro clips de Lady Moriarty01 · BarFender
+
+- Se reemplaza el listado textual de cuatro momentos de Lady Moriarty01 por sus cuatro reproductores embebidos de Twitch y enlaces directos.
+- Títulos conservados del registro editorial previo y asociados en el mismo orden en que se entregaron los enlaces:
+  1. **“Le pegué a Harry Potter”**
+  2. **“No me dejan bailar a Kame”**
+  3. **“Te voy a pegar, boludo”**
+  4. **“Quería pelear”**
+- Los embeds usan `parent=losmoriartys-cmd.github.io`. Se conserva la grilla responsive compartida con los clips de Los Moriartys.
