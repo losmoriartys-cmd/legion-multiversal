@@ -2017,3 +2017,11 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 - **Validación estática:** los cuatro reemplazos se aplicaron sobre el contenido vigente de `main`; se confirmó la ausencia del bloque `founding-origin-story` y la presencia de cada imagen en su nueva ubicación. La revisión visual real en escritorio/móvil queda pendiente.
 - **Commit de implementación:** [c25cfec8](https://github.com/losmoriartys-cmd/legion-multiversal/commit/c25cfec8aea02b17d58508116bd7c747bc236384).
 - **Despliegue:** pendiente de comprobar el workflow de GitHub Pages asociado a este commit.
+
+## 2026-11-07 — Imagen de la primera misión · Capítulo 01
+
+- **Pedido:** ubicar `image_20261106_024612-me-gusta-la-foto-pero-la-enmarcaria-coso-si-fuese (1).jpg` debajo del título **PRIMERA MISIÓN: LEGIÓN MULTIVERSAL**.
+- **Implementado:** se reemplazó únicamente la imagen del bloque `legion-first-mission` en `index.html`. La portada `ORÍGENES #0001` y el resto de la secuencia permanecen sin cambios.
+- **Validación estática:** el fragmento anterior se encontró en `main`, se sustituyó una sola vez y el nuevo recurso quedó en el bloque de primera misión.
+- **Commit:** [c2a8f1f0](https://github.com/losmoriartys-cmd/legion-multiversal/commit/c2a8f1f0b5c9141e36d0ffed9b1e09388831b31b).
+- **Despliegue y revisión visual:** pendientes de comprobar.
