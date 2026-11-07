@@ -408,34 +408,36 @@
       "display_name": "HÁBITOS ATÓMICOS",
       "source": "SullyGnome",
       "source_url": "https://sullygnome.com/channel/habitos_atomicos/2026/streams",
-      "checked_at_utc": "2026-11-05T23:59:00Z",
+      "checked_at_utc": "2026-11-07T05:08:00Z",
       "status": "partial",
       "period": {
-        "start_date": "2026-10-06",
-        "end_date": "2026-11-05",
-        "label": "6 oct — 5 nov 2026"
+        "start_date": "2026-10-07",
+        "end_date": "2026-11-06",
+        "label": "7 oct — 6 nov 2026"
       },
       "streams": [],
       "summary": {
-        "streams_count": 28,
-        "airtime_minutes": 7440,
-        "airtime_hours": 124,
-        "hours_watched": 472,
+        "streams_count": 26,
+        "airtime_minutes": 7260,
+        "airtime_hours": 121,
+        "hours_watched": 469,
         "average_viewers_duration_weighted": 3,
         "peak_viewers": 29,
         "peak_date": null,
         "followers_gain_reported": 27
       },
       "notes": [
-        "Resumen del período aportado desde SullyGnome. El conteo general informa 28 transmisiones; se recibieron 24 filas individuales, por lo que el detalle queda parcial.",
-        "El informe resume un pico de 29 espectadores, pero no permite fijar con seguridad su fecha: los datos compartidos también mencionan 28 el 21/10 y 24 el 21/10 a las 21:00. Se conserva el máximo de 29 sin atribuir fecha.",
-        "La métrica «Seguidores ganan rango: 128.511 (-59.416)» corresponde a una posición/rango del sitio, no al total de seguidores, y no se incorpora como seguidores del canal.",
-        "Las horas y porcentajes por categoría se muestran tal como fueron informados; sus totales pueden diferir del resumen general por redondeos o criterios de medición de la fuente."
+        "Resumen general actualizado por el creador desde SullyGnome para el período 7 oct–6 nov de 2026: 26 transmisiones, 121 horas emitidas, 469 horas vistas, promedio de 3 espectadores, pico de 29 y +27 seguidores.",
+        "La captura del historial compartida contiene diez filas visibles, del 26 oct al 6 nov; no representa el detalle completo de las 26 transmisiones.",
+        "El resumen indica un pico de 29 espectadores, pero el gráfico compartido identifica un pico de 24 en una transmisión marcada como Unlisted el 21/10 a las 21:00. Se conserva el valor agregado de 29 y no se le asigna fecha hasta aclarar la diferencia entre ambas vistas.",
+        "El desglose por categorías disponible corresponde al corte anterior 6 oct–5 nov de 2026. No se recibió una tabla de categorías actualizada para el nuevo período, por lo que se conserva separada y no se presenta como si perteneciera al resumen 7 oct–6 nov.",
+        "En el desglose anterior, Solo charlando muestra 474 horas vistas, cifra que supera las 469 horas vistas del nuevo resumen general. La diferencia no puede conciliarse sin la tabla de categorías actualizada.",
+        "La métrica «Follower gain rank» es una posición/rango del sitio, no la cantidad de seguidores ganados; no se incorpora como métrica de audiencia."
       ],
       "observed_rows_summary": {
-        "rows": 24,
-        "expected_rows": 28,
-        "note": "El resumen general informa 28 transmisiones; el detalle compartido contiene 24 filas. No se completan las cuatro filas faltantes."
+        "rows": 10,
+        "expected_rows": 26,
+        "note": "La captura compartida muestra las diez transmisiones más recientes, del 26 de octubre al 6 de noviembre. El resumen general informa 26 transmisiones en el período; no se recibieron las otras 16 filas y no se reconstruyen."
       },
       "game_breakdown": [
         {
@@ -537,7 +539,8 @@
           "average_viewers": 3,
           "peak_viewers": 4
         }
-      ]
+      ],
+      "game_breakdown_period": "6 oct — 5 nov 2026"
     },
     {
       "platform": "twitch",
