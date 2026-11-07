@@ -636,43 +636,84 @@
 </div>
 </section>
 
-<section id="chapter-6" class="chapter-panel">
-            <div class="chapter-tag">CAPÍTULO 06</div>
-            <h2 class="comic-title">RECLUTAMIENTO · LEGIÓN MULTIVERSAL</h2>
-            <div class="premium-panel recruitment-onboarding">
-                <div class="premium-kicker">INCORPORACIÓN · CÓMO TRABAJAMOS</div>
-                <h3>SUMARTE A LA LEGIÓN ES ENTRAR EN UNA COMUNIDAD, NO EN UNA PROMESA DE RESULTADOS.</h3>
-                <p>Buscamos creadores con identidad propia, ganas de colaborar y disposición para construir proyectos compartidos. Cada integrante conserva su canal, sus cuentas y sus decisiones profesionales.</p>
-                <div class="premium-grid">
-                    <article class="premium-card"><h3>IDENTIDAD PROPIA</h3><p>No necesitás cambiar tu nombre, contenido ni estilo.</p></article>
-                    <article class="premium-card"><h3>RECURSOS COMPARTIDOS</h3><p>Compartimos orientación y experiencias para descubrir juegos y campañas. Las guías están en Arsenal.</p></article>
-                    <article class="premium-card"><h3>GESTIÓN INDIVIDUAL</h3><p>Cada creador administra sus perfiles, solicita sus claves y acepta personalmente las condiciones. La aprobación depende de cada publisher o campaña.</p></article>
-                    <article class="premium-card"><h3>COMPROMISO COLECTIVO</h3><p>Para actividades grupales coordinamos participantes, disponibilidad, accesos y contenido antes de confirmar.</p></article>
-                </div>
-                <p class="stats-note">Formar parte del roster no garantiza claves, patrocinios, ingresos, campañas ni crecimiento de audiencia.</p>
-                <p><button class="chapter-cta" type="button" onclick="switchChapter(5)">CONSULTAR ARSENAL · GUÍAS PARA CREADORES ↗</button></p>
+<section id="chapter-6" class="chapter-panel recruitment-chapter">
+    <div class="chapter-tag">CAPÍTULO 06 · PUERTAS DE ENTRADA</div>
+    <h2 class="comic-title">RECLUTAR · CONECTAR · CRECER</h2>
+    <div class="premium-panel recruitment-intro">
+        <div class="premium-kicker">LEGIÓN MULTIVERSAL · NUEVOS CONTACTOS</div>
+        <h3>DOS CAMINOS. UNA MISMA LEGIÓN.</h3>
+        <p>Este espacio está pensado para dos tipos de personas: creadores que quieren sumarse al roster y estudios, publishers o marcas que quieren explorar una colaboración. Elegí el recorrido que corresponde a tu propuesta.</p>
+    </div>
+
+    <div class="recruitment-path-grid">
+        <article class="recruitment-path-card">
+            <span class="recruitment-path-number">01 / CREADORES</span>
+            <h3>QUIERO UNIRME A LA LEGIÓN</h3>
+            <p>Para streamers y creadores que quieran compartir partidas, proyectos y experiencias sin perder su identidad ni autonomía.</p>
+            <ul>
+                <li>Conservás tu canal, nombre y estilo.</li>
+                <li>Participás en actividades según tu disponibilidad.</li>
+                <li>Compartís experiencias, ideas y oportunidades con el roster.</li>
+            </ul>
+            <a class="recruitment-path-link" href="#creator-application">PRESENTAR MI PERFIL ↓</a>
+        </article>
+        <article class="recruitment-path-card recruitment-brand-path">
+            <span class="recruitment-path-number">02 / MARCAS Y DESARROLLADORES</span>
+            <h3>QUIERO COLABORAR CON LA LEGIÓN</h3>
+            <p>Para estudios, publishers, agencias y marcas que quieran proponer una campaña, presentar un juego o crear una experiencia con uno o varios integrantes.</p>
+            <ul>
+                <li>Propuestas individuales o multicanal.</li>
+                <li>Integraciones, cobertura, clips y experiencias comunitarias.</li>
+                <li>Alcance y entregables definidos según cada proyecto.</li>
+            </ul>
+            <a class="recruitment-path-link" href="#brand-proposal">ENVIAR UNA PROPUESTA ↓</a>
+        </article>
+    </div>
+
+    <section class="recruitment-form-section" id="creator-application" aria-labelledby="creator-application-title">
+        <div class="recruitment-form-heading">
+            <span class="recruitment-path-number">RECORRIDO 01 · INCORPORACIÓN</span>
+            <h3 id="creator-application-title">TU EXPEDIENTE DE INGRESO</h3>
+            <p>Contanos quién sos, dónde creás contenido y qué te gustaría construir con la Legión. No hace falta preparar un informe de estadísticas para el primer contacto.</p>
+        </div>
+        <form class="comic-form recruitment-contact-form" onsubmit="event.preventDefault();const d=new FormData(this);const body=Array.from(d.entries()).map(([k,v])=>k+': '+v).join('\n');window.location.href='mailto:losmoriartys@gmail.com?subject='+encodeURIComponent('Quiero unirme a Legión Multiversal')+'&body='+encodeURIComponent(body);">
+            <div class="recruitment-fields-grid">
+                <div class="form-group"><label for="creator-name">Nombre o alias *</label><input id="creator-name" name="Nombre o alias" type="text" required placeholder="¿Cómo te conocemos?"></div>
+                <div class="form-group"><label for="creator-country">País / zona horaria</label><input id="creator-country" name="País y zona horaria" type="text" placeholder="Ej. Argentina · GMT-3"></div>
+                <div class="form-group"><label for="creator-channel">Canal principal *</label><input id="creator-channel" name="Canal principal" type="url" required placeholder="https://twitch.tv/..."></div>
+                <div class="form-group"><label for="creator-other-links">Otras redes o canales</label><input id="creator-other-links" name="Otras redes" type="text" placeholder="YouTube, TikTok, Instagram..."></div>
+                <div class="form-group"><label for="creator-content">¿Qué contenido hacés?</label><input id="creator-content" name="Contenido habitual" type="text" placeholder="Juegos, categorías y formatos"></div>
+                <div class="form-group"><label for="creator-availability">Disponibilidad aproximada</label><input id="creator-availability" name="Disponibilidad" type="text" placeholder="Días, horarios o flexibilidad"></div>
             </div>
-            <form class="comic-form" onsubmit="event.preventDefault();const d=new FormData(this);const body=Array.from(d.entries()).map(([k,v])=>k+': '+v).join('\n');window.location.href='mailto:losmoriartys@gmail.com?subject='+encodeURIComponent('Postulación a Legión Multiversal')+'&body='+encodeURIComponent(body);">
-<div class="premium-grid">
-<div class="form-group"><label>Nombre o alias *</label><input name="Nombre o alias" type="text" required placeholder="Tu nombre de creador"></div>
-<div class="form-group"><label>País *</label><input name="País" type="text" required placeholder="País de residencia"></div>
-<div class="form-group"><label>Zona horaria</label><input name="Zona horaria" type="text" placeholder="Ej. GMT-3"></div>
-<div class="form-group"><label>Edad (opcional)</label><input name="Edad" type="text" placeholder="Opcional"></div>
-<div class="form-group"><label>Twitch / YouTube / otras redes *</label><input name="Canales y redes" type="url" required placeholder="https://..."></div>
-<div class="form-group"><label>Seguidores actuales</label><input name="Seguidores" type="text" placeholder="Indicar plataforma y fecha"></div>
-<div class="form-group"><label>Promedio de espectadores</label><input name="Promedio espectadores" type="text" placeholder="Promedio y período"></div>
-<div class="form-group"><label>Pico de espectadores</label><input name="Pico espectadores" type="text" placeholder="Pico y período"></div>
-<div class="form-group"><label>Frecuencia de transmisiones</label><input name="Frecuencia" type="text" placeholder="Ej. 3 veces por semana"></div>
-<div class="form-group"><label>Juegos y categorías habituales</label><input name="Juegos y categorías" type="text" placeholder="Tus contenidos principales"></div>
-<div class="form-group"><label>Horarios habituales</label><input name="Horarios" type="text" placeholder="Días y franjas horarias"></div>
-<div class="form-group"><label>Experiencia como creador</label><input name="Experiencia" type="text" placeholder="Tiempo, formatos y fortalezas"></div>
-</div>
-<div class="form-group"><label>¿Por qué querés sumarte a la Legión?</label><textarea name="Motivación" rows="3" placeholder="Contanos qué te motiva y qué aportarías"></textarea></div>
-<div class="form-group"><label>Colaboraciones y trabajo en equipo</label><textarea name="Colaboraciones" rows="3" placeholder="Experiencias, disponibilidad y propuestas"></textarea></div>
-<p class="stats-note">Los datos de audiencia son orientativos, no el único criterio de evaluación. Dirección también tendrá en cuenta constancia, personalidad, respeto, compromiso y compatibilidad con la comunidad.</p>
-<button type="submit" class="comic-submit-btn">ENVIAR EXPEDIENTE</button>
-</form>
-        </section>
+            <div class="form-group"><label for="creator-motivation">¿Por qué te gustaría sumarte? *</label><textarea id="creator-motivation" name="Motivación" rows="4" required placeholder="Contanos qué buscás y qué te gustaría aportar."></textarea></div>
+            <div class="form-group"><label for="creator-collaboration">¿Qué tipo de actividades te interesan?</label><textarea id="creator-collaboration" name="Ideas de colaboración" rows="3" placeholder="Partidas grupales, eventos, proyectos, campañas..."></textarea></div>
+            <p class="stats-note">La incorporación se evalúa de forma individual. La pertenencia al roster no garantiza claves, patrocinios, ingresos, campañas ni crecimiento de audiencia.</p>
+            <button type="submit" class="comic-submit-btn">ENVIAR MI PRESENTACIÓN</button>
+        </form>
+    </section>
+
+    <section class="recruitment-form-section brand-proposal-section" id="brand-proposal" aria-labelledby="brand-proposal-title">
+        <div class="recruitment-form-heading">
+            <span class="recruitment-path-number">RECORRIDO 02 · CONTACTO COMERCIAL</span>
+            <h3 id="brand-proposal-title">CONTANOS QUÉ TENÉS EN MENTE</h3>
+            <p>Compartí la información inicial del proyecto. Podemos evaluar propuestas para la Legión en conjunto o para creadores individuales, según el objetivo y el encaje.</p>
+        </div>
+        <form class="comic-form recruitment-contact-form" onsubmit="event.preventDefault();const d=new FormData(this);const body=Array.from(d.entries()).map(([k,v])=>k+': '+v).join('\n');window.location.href='mailto:losmoriartys@gmail.com?subject='+encodeURIComponent('Propuesta de colaboración para Legión Multiversal')+'&body='+encodeURIComponent(body);">
+            <div class="recruitment-fields-grid">
+                <div class="form-group"><label for="brand-company">Empresa, estudio o marca *</label><input id="brand-company" name="Empresa o marca" type="text" required placeholder="Nombre de la organización"></div>
+                <div class="form-group"><label for="brand-contact">Persona de contacto *</label><input id="brand-contact" name="Persona de contacto" type="text" required placeholder="Nombre y cargo"></div>
+                <div class="form-group"><label for="brand-email">Correo de contacto *</label><input id="brand-email" name="Correo de contacto" type="email" required placeholder="nombre@empresa.com"></div>
+                <div class="form-group"><label for="brand-project">Juego, producto o proyecto</label><input id="brand-project" name="Juego o proyecto" type="text" placeholder="Nombre del proyecto"></div>
+                <div class="form-group"><label for="brand-format">Tipo de propuesta</label><select id="brand-format" name="Tipo de propuesta"><option value="">Seleccionar (opcional)</option><option>Presentación o cobertura de videojuego</option><option>Campaña con varios creadores</option><option>Colaboración individual</option><option>Integración en directo o contenido</option><option>Activación comunitaria</option><option>Patrocinio o alianza comercial</option><option>Otra propuesta</option></select></div>
+                <div class="form-group"><label for="brand-timing">Fechas o período estimado</label><input id="brand-timing" name="Fechas estimadas" type="text" placeholder="Lanzamiento, campaña o calendario"></div>
+                <div class="form-group"><label for="brand-budget">Presupuesto orientativo (opcional)</label><input id="brand-budget" name="Presupuesto orientativo" type="text" placeholder="Si ya está definido"></div>
+            </div>
+            <div class="form-group"><label for="brand-details">Descripción y objetivos de la propuesta *</label><textarea id="brand-details" name="Descripción y objetivos" rows="5" required placeholder="¿Qué necesitan, qué esperan y qué tipo de colaboración imaginan?"></textarea></div>
+            <button type="submit" class="comic-submit-btn">ENVIAR PROPUESTA COMERCIAL</button>
+        </form>
+    </section>
+    <p class="recruitment-contact-note">Al enviar, se abrirá tu aplicación de correo con el mensaje preparado para <strong>losmoriartys@gmail.com</strong>. Podrás revisarlo antes de enviarlo.</p>
+</section>
 
         <!-- Recursos de Lurkit y Keymailer: material operativo retirado de la navegación pública. -->
 
