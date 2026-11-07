@@ -1923,3 +1923,14 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 - Auditoría estática inicial: se conserva el catálogo de diez juegos; el nuevo bloque queda dentro de chapter-5 antes del catálogo; se comprueba presencia de 12 registros Lurkit y 19 filas Keymailer; se agregan estilos responsive para tablet y móvil.
 - Pendiente: revisión visual en navegador y contraste real en escritorio/móvil. La inspección estática no equivale a una prueba visual ni confirma el despliegue final.
 - Archivos modificados: index.html, styles.css, INFORMES.md y BIBLIA_EVOLUCION_LEGION_MULTIVERSAL.md.
+## 2026-11-07 — Evolución editorial del Capítulo 08 · Alianzas
+
+- **Responsable:** colaboración ChatGPT + equipo del proyecto.
+- **Objetivo:** presentar credenciales colectivas e individuales, plataformas y oportunidades comerciales sin atribuir patrocinios ni acuerdos no confirmados.
+- **Archivos modificados:** `index.html`, `chapter-8.css`, `INFORMES.md`.
+- **Implementado:** se reorganizó exclusivamente `chapter-8` con apertura comercial; credencial colectiva Los Moriartys como Partner Creator de Cinderia y Enshrouded mediante Lurkit; código Epic `LosMoriartys` con estado pendiente; credenciales individuales de TheR0d3R1k (Twitch Partner y código Epic informado); bloque independiente de Lurkit, Keymailer y Epic Games; cuatro formatos comerciales; puente al expediente Barfender del Capítulo 12; transparencia y contacto.
+- **Criterio de precisión:** no se afirma que el código `LosMoriartys` esté activo; no se presentan credenciales como patrocinio económico; el código de TheR0d3R1k se muestra como informado, sin atribuirle vigencia no comprobada; Barfender se presenta como experiencia documentada, no como campaña remunerada.
+- **Validaciones estáticas previstas:** verificar que el reemplazo afecte únicamente el bloque `chapter-8`, que los IDs de destino existan, que los enlaces externos tengan `rel=noopener noreferrer`, y que los estilos estén aislados bajo `.chapter-8-alliance`. La revisión visual responsive y la comprobación del despliegue quedan pendientes.
+- **Pendientes / riesgos:** obtener URLs directas o capturas de los programas Lurkit de Cinderia y Enshrouded; verificar la activación de los códigos Epic antes de marcarlos como activos; probar visualmente escritorio/móvil y los enlaces internos en el sitio publicado.
+- **Commit:** pendiente de creación en la rama `feature/chapter-08-alliances`.
+- **Despliegue:** no publicado en `main`; pendiente de revisión e integración.

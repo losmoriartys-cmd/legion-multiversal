@@ -24,6 +24,7 @@
     <meta name="twitter:image:alt" content="Portada ilustrada de Legión Multiversal con su equipo de héroes y el lema Diferentes mundos. Una misma Legión.">
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Permanent+Marker&family=Roboto+Condensed:wght@400;500;600;700;800;900&family=Special+Elite&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="./chapter-8.css">
 </head>
 <body>
     <div id="chapter-transition" aria-hidden="true" data-title="LEGIÓN MULTIVERSAL"></div>
@@ -377,30 +378,55 @@
  <p class="stats-note">El reproductor oficial de Twitch requiere conexión a internet y un navegador compatible. En GitHub Pages se utiliza el dominio publicado como parámetro de inserción; si abrís una copia local, Twitch puede bloquear la reproducción.</p>
 </section>
 
-<section id="chapter-8" class="chapter-panel comic-page">
- <div class="chapter-tag">CAPÍTULO 08</div><h2 class="comic-title">ALIANZAS Y OPORTUNIDADES</h2>
- <div class="premium-panel"><div class="premium-kicker">Propuesta para marcas, estudios y publishers</div><h3>Colaborar para crear experiencias que conecten</h3>
- <p>Legión Multiversal reúne creadores de gaming, entretenimiento, tecnología y desarrollo personal. Diseñamos colaboraciones que respetan la identidad de cada canal y buscan una conexión genuina con la audiencia.</p></div>
- <div class="premium-grid">
-  <article class="premium-card"><h3>DIRECTOS Y COBERTURA</h3><p>Presentaciones de juegos, primeras impresiones, sesiones especiales, cobertura de lanzamientos y experiencias en vivo.</p></article>
-  <article class="premium-card"><h3>CONTENIDO COOPERATIVO</h3><p>Sesiones grupales, desafíos, eventos con varios creadores y formatos que muestran la interacción real del equipo.</p></article>
-  <article class="premium-card"><h3>CLIPS Y DIFUSIÓN</h3><p>Momentos destacados, piezas breves y publicaciones complementarias para extender la conversación más allá del directo.</p></article>
-  <article class="premium-card"><h3>ACCIONES CON LA COMUNIDAD</h3><p>Dinámicas participativas, sorteos cuando estén autorizados, encuentros y experiencias alineadas con cada campaña.</p></article>
-  <article class="premium-card"><h3>KEYS, LANZAMIENTOS Y PRIMERAS IMPRESIONES</h3><p>Recepción y presentación de claves, primeras partidas, cobertura de lanzamientos, sesiones cooperativas y clips posteriores. Cada propuesta se adapta al juego, al perfil del creador y a las condiciones acordadas con el estudio o publisher.</p></article>
- </div>
- <div class="premium-panel"><div class="premium-kicker">Experiencia y relaciones</div><h3>Un equipo con experiencia en el ecosistema creator</h3>
- <p>Los integrantes cuentan con experiencia en transmisiones, campañas de videojuegos, solicitudes de acceso y programas para creadores. Las colaboraciones y acreditaciones se comunican de forma individual y únicamente cuando pueden respaldarse. Keymailer y Lurkit son herramientas externas que algunos integrantes utilizan para solicitar accesos; su uso no implica una alianza comercial.</p>
- <p><b>Transparencia:</b> las colaboraciones, acreditaciones y campañas se incorporarán a esta presentación cuando cada una cuente con respaldo verificable —por ejemplo, una página oficial, una comunicación del publisher o un registro fechado—. Una solicitud de acceso, una clave recibida o la participación en una plataforma de campañas no se presentarán como una alianza oficial.</p>
- </div>
- <div class="premium-panel">
-    <div class="premium-kicker">RECURSOS PARA INTEGRANTES</div>
-    <h3>¿QUERÉS CONOCER LAS PLATAFORMAS DE ACCESO A JUEGOS?</h3>
-    <p>Consultá la guía operativa de Keymailer y Lurkit dentro de Arsenal. Son herramientas externas, no alianzas comerciales de la Legión.</p>
-    <p><button class="chapter-cta" type="button" onclick="switchChapter(5)">IR A ARSENAL · GUÍAS PARA CREADORES ↗</button></p>
-</div>
-<div class="premium-panel collaboration-bridge"><div class="premium-kicker">Experiencias reales · archivo de campañas</div><h3>Conocé cómo trabajamos en equipo</h3><p>Las propuestas comerciales también se respaldan con experiencias documentadas: sesiones coordinadas, creadores participantes, VOD, clips y métricas presentadas con su fuente y alcance.</p><p><button class="chapter-cta" type="button" onclick="switchChapter(12)">EXPLORAR EXPEDIENTES DE COLABORACIÓN <span>↗</span></button></p></div>
- <div class="premium-panel"><div class="premium-kicker">Contacto comercial</div><h3>Hablemos de una colaboración</h3><p>Desarrolladores, publishers, agencias y marcas pueden acercar propuestas de campañas, patrocinios, cobertura, accesos anticipados o acciones con la comunidad.</p><p>Para evaluar una propuesta, compartí la marca o juego, objetivos, fechas, plataformas, entregables esperados y presupuesto disponible.</p><p><a class="btn-link" href="mailto:losmoriartys@gmail.com?subject=Propuesta%20comercial%20-%20Legi%C3%B3n%20Multiversal">losmoriartys@gmail.com</a></p></div>
-</section>
+<section id="chapter-8" class="chapter-panel comic-page chapter-8-alliance" aria-labelledby="alliance-title">
+ <header class="alliance-hero">
+  <div class="chapter-tag">CAPÍTULO 08 · EXPEDIENTE DE ALIANZAS</div>
+  <p class="alliance-eyebrow">LEGIÓN MULTIVERSAL · CREDENCIALES Y OPORTUNIDADES</p>
+  <h2 id="alliance-title" class="comic-title">ALIANZAS Y OPORTUNIDADES</h2>
+  <p class="alliance-lead">Una red de creadores. Distintas credenciales. Una propuesta compartida.</p>
+  <p class="alliance-intro">Legión Multiversal reúne creadores con trayectorias, plataformas y experiencias diferentes. Combinamos capacidades individuales y trabajo colaborativo para desarrollar experiencias de contenido junto a estudios, publishers, agencias y marcas.</p>
+  <nav class="alliance-quick-nav" aria-label="Secciones del expediente de alianzas">
+   <a href="#alliance-collective">Credenciales colectivas</a>
+   <a href="#alliance-individual">Credenciales individuales</a>
+   <a href="#alliance-platforms">Plataformas</a>
+   <a href="#alliance-formats">Formatos</a>
+   <a href="#alliance-cases">Experiencias</a>
+  </nav>
+ </header>
+
+ <section class="alliance-section" id="alliance-collective" aria-labelledby="alliance-collective-title">
+  <div class="alliance-section-heading">
+   <span class="alliance-index">01 / CANAL COMPARTIDO</span>
+   <h3 id="alliance-collective-title">CREDENCIALES COLECTIVAS</h3>
+   <p>Reconocimientos vinculados al proyecto y al canal compartido de Los Moriartys.</p>
+  </div>
+  <article class="alliance-credential alliance-credential-featured">
+   <div class="alliance-credential-top">
+    <span class="alliance-stamp alliance-stamp-platform">PLATAFORMA · LURKIT</span>
+    <span class="alliance-status alliance-status-confirmed">PARTNER CREATOR</span>
+   </div>
+   <div class="alliance-credential-body">
+    <div class="alliance-brand-mark" aria-hidden="true">LM<span>×</span>LURKIT</div>
+    <div class="alliance-credential-copy">
+     <h4>LOS MORIARTYS</h4>
+     <p>Los Moriartys figura como Partner Creator de Cinderia y Enshrouded dentro de Lurkit. Esta participación corresponde al canal compartido y constituye una credencial dentro del ecosistema creator.</p>
+     <div class="alliance-game-tags" aria-label="Programas asociados">
+      <span>CINDERIA</span>
+      <span>ENSHROUDED</span>
+     </div>
+     <p class="alliance-fineprint">Información confirmada por el equipo. No implica, por sí sola, un patrocinio económico ni una campaña remunerada.</p>
+    </div>
+   </div>
+  </article>
+  <article class="alliance-code-card">
+   <div>
+    <span class="alliance-stamp alliance-stamp-platform">EPIC GAMES · CÓDIGO DE CREADOR</span>
+    <h4>LOSMORIARTYS</h4>
+    <p>Código informado para el canal compartido. La activación todavía no fue confirmada.</p>
+   </div>
+   <span class="alliance-status alliance-status-pending">ESTADO PENDIENTE</span>
+  </article>
+ </section>
 
 <section id="chapter-12" class="chapter-panel comic-page collaboration-chapter">
  <div class="chapter-tag">CAPÍTULO 12 · ARCHIVO DE EXPERIENCIAS COMPARTIDAS</div>
