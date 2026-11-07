@@ -1944,3 +1944,5 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 - Se añadió a la tabla una columna independiente “Indicador de acción”. Se mantiene separado del porcentaje de interés editorial y de las condiciones Required/Allowed.
 - No se publica un total de cumplimiento de 19 campañas porque faltan ocho indicadores visuales.
 - Auditoría estática pendiente de ejecutar tras los cambios y revisión visual del sitio publicado aún no realizada.
+
+- **Auditoría estática posterior:** 19 filas de campañas y 19 celdas de indicador; 9 acciones marcadas, 2 no marcadas y 8 no verificables; los 17 nombres auditados están presentes; no se detectaron IDs HTML duplicados; la clase CSS del indicador existe. La revisión visual del sitio publicado sigue pendiente.
