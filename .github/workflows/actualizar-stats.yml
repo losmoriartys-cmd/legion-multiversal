@@ -31,6 +31,9 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Sincronizar main antes de recolectar
+        run: git pull --rebase origin main
+
       - name: Consultar Twitch y guardar muestras
         env:
           TWITCH_CLIENT_ID: ${{ secrets.TWITCH_CLIENT_ID }}
@@ -52,7 +55,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git pull --rebase origin main
           git add data.json platform-stats.json
           if git diff --cached --quiet; then
             echo "No hay cambios de estadísticas para guardar."
