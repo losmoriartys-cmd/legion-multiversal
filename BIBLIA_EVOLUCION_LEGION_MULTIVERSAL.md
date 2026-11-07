@@ -201,3 +201,30 @@ Ambos recorridos deben convivir y reforzarse. El recorrido comercial facilita la
 ---
 
 **Regla de continuidad:** esta Biblia es la referencia maestra para las mejoras descritas. No eliminar, simplificar ni cambiar una decisión acordada sin conversarlo con el usuario. Si aparece nueva información, actualizar el documento conservando el historial y distinguiendo claramente lo aprobado de lo pendiente.
+
+
+## 11. Seguimiento operativo de tareas
+
+Estados oficiales:
+- **Pendiente:** todavía no se inició.
+- **En curso:** hay implementación, pero faltan verificaciones o aceptación.
+- **Completado:** está publicado en `main`, pasó la revisión funcional y visual correspondiente, no presenta regresiones conocidas y quedó documentado en `INFORMES.md`.
+
+| Orden | Tarea | Estado | Condición para avanzar |
+|---:|---|---|---|
+| 01 | Nueva Portada ejecutiva independiente | **En curso** | Confirmar despliegue de Pages y completar revisión funcional y visual en escritorio y móvil. |
+| 02 | Caso Bar Fender / Expediente 001 destacado | Pendiente | Auditar precisión editorial, destino al Capítulo 12 y presentación de evidencias; no duplicar el expediente. |
+| 03 | Contraste y jerarquía de CTA | Pendiente | Medir contraste y comprobar estados hover/focus y legibilidad responsive. |
+| 04 | Skeleton Screens para estadísticas | Pendiente | Verificar carga, error y ausencia de datos sin skeletons infinitos. |
+| 05 | Imágenes y rendimiento móvil | Pendiente | Auditar peso, dimensiones, lazy loading, estabilidad visual y rendimiento en móvil. |
+| 06 | Menú de integraciones comerciales en Capítulo 08 | Pendiente | Revisar capacidades reales, condiciones y límites de cada formato. |
+| 07 | Datos geográficos de audiencia LATAM | Pendiente | Reunir fuentes legítimas y cobertura; no inferir ni inventar porcentajes. |
+| 08 | Gráficos y visualización de campañas | Pendiente | Mejorar gráficos existentes sin mezclar métricas o ventanas incompatibles. |
+
+### Registro de la Tarea 01
+
+- **Implementación en main:** commits `0bd56675668e098f2ee73c4d839bb0429d1468de` y `a26505e70e50ab0a8c414dc413b79b51d89a1e40`.
+- **Arquitectura confirmada estáticamente:** `chapter-0` es Inicio; `chapter-1` conserva el Origen S3X-MEN; no se renumeraron capítulos.
+- **Navegación confirmada estáticamente:** los once paneles existentes tienen destino de navegación; no se detectaron identificadores duplicados ni destinos de navegación ausentes.
+- **Ajuste incluido:** navegación con fragmento `#chapter-N` y cierre del desplegable secundario al elegir una sección.
+- **Pendiente de aceptación:** confirmar publicación de GitHub Pages y probar interacciones reales, accesibilidad por teclado y presentación visual en escritorio y móvil. La inspección estática no sustituye esas pruebas.
