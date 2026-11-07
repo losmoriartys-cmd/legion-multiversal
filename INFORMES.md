@@ -2110,3 +2110,19 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 - **Publicación comprobada:** `data.json` en `main` quedó actualizado a `2026-11-07T19:08:36Z`; el objeto `collection` informa siete canales esperados, siete resueltos y `complete: true`. Los siete canales tienen `updated_at` renovado.
 - **Muestras nuevas:** cero en esta ejecución; los siete canales fueron omitidos por el control anti-duplicados de 10 minutos. La ejecución demuestra que el flujo puede publicar correctamente, pero todavía no demuestra la cadencia objetivo ni el ingreso de muestras nuevas.
 - **Próxima validación:** observar la ventana de 24 horas y comparar muestras reales, cobertura, mediana y máximo hueco con los umbrales definidos. Después, configurar un disparador externo para reducir la dependencia del evento `schedule` de GitHub.
+
+## 2026-11-07 — Actualización visual del Expediente BarFender con tres ilustraciones nuevas
+
+- **Objetivo:** incorporar las tres imágenes aportadas para BarFender, sin repetir ninguna dentro del expediente y sin modificar otros capítulos.
+- **Implementación en `index.html`:**
+  - `image_20261107_184951-si-que-tenga-referencias-y-el-titutlo-del-juego-ba.jpg`: portada del archivo de colaboraciones, con el título BarFender integrado.
+  - `image_20261107_184728.jpg`: ilustración editorial de coordinación del equipo, en la apertura visual del expediente.
+  - `image_20261107_184546.jpg`: ilustración editorial del universo de Legión Multiversal, junto a la descripción de la campaña.
+- **Presentación:** se identificaron expresamente como ilustraciones editoriales; no se presentan como fotografías documentales ni como fotogramas reales del directo. Cada archivo se utiliza una sola vez en el HTML.
+- **Estilos:** se añadió en `styles.css` el tratamiento responsive de la tercera pieza editorial, conservando el lenguaje visual existente.
+- **Alcance:** no se modificaron métricas, VOD, clips, participantes ni enlaces a Steam/Twitch. No se tocaron los demás capítulos.
+- **Validación estática:** los tres nombres de archivo están referenciados en `index.html` exactamente una vez cada uno; las dos ubicaciones fotográficas principales anteriores del expediente fueron sustituidas; se añadió el estilo específico para la pieza editorial complementaria.
+- **Archivos modificados:** `index.html`, `styles.css`, `INFORMES.md`.
+- **Pendiente:** comprobar el despliegue de GitHub Pages y revisar visualmente el resultado publicado en escritorio y móvil.
+- **Commits:** HTML `84dae846126bad9eace342fe1bb97288b73ffaaa`; estilos `ef67d95a6796d4d995c621ef07c2b14c89d30869`; registro de esta intervención, en el commit siguiente.
+- **Despliegue:** pendiente de verificación; los commits en `main` no demuestran por sí solos que GitHub Pages haya terminado de publicar.
