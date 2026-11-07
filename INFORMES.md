@@ -2056,3 +2056,14 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 - **Archivos modificados:** index.html, styles.css, INFORMES.md.
 - **Validación estática:** se comprobaron ocho iframes, ocho referencias a avatares oficiales distribuidas por canal, y las dimensiones mínimas de 400 × 300 px en el CSS y los atributos HTML.
 - **Alcance de la comprobación:** la implementación está corregida en main; la reproducción efectiva debe confirmarse en el navegador publicado, ya que Twitch puede aplicar bloqueos externos o restricciones del propio servicio.
+
+
+## 2026-11-07 — Archivo audiovisual BarFender · reemplazo de embeds de Twitch por portadas de acceso directo
+
+- **Motivo:** el usuario reportó que Twitch rechazaba la conexión dentro de la página, aunque los enlaces externos abrían los clips correctamente.
+- **Implementación:** se retiraron los ocho reproductores incrustados del archivo audiovisual del expediente BarFender. Cada tarjeta conserva título, canal, avatar oficial y destino original, y ahora presenta una portada editorial clicable que abre el clip en Twitch en una pestaña nueva.
+- **Transparencia visual:** las portadas son composiciones gráficas del sitio; no son miniaturas ni fotogramas de los videos. La miniatura real de Twitch está disponible mediante el campo `thumbnail_url` de su API Get Clips, pero no se incorporó porque requiere acceso autenticado a la API y no se dispuso de esas URLs verificadas en esta intervención. Referencia: [documentación oficial de Twitch](https://dev.twitch.tv/docs/api/clips/).
+- **Alcance:** se conservaron los ocho enlaces y la atribución de canal. No se modificaron los VOD, las métricas, las plantillas de clips de otros capítulos ni el Capítulo 05 — Arsenal.
+- **Validación estática:** se reemplazaron exactamente ocho reproductores; no quedan URLs `clips.twitch.tv/embed` en `index.html`; permanecen ocho tarjetas, ocho destinos externos de Twitch y ocho identificadores de canal; se actualizaron los estilos para escritorio y móvil. Esto no sustituye una comprobación visual manual del sitio publicado.
+- **Archivos modificados:** `index.html`, `styles.css`, `INFORMES.md`.
+- **Pendiente:** confirmar en navegador que las ocho portadas se ven correctamente y que los ocho enlaces abren los clips esperados.
