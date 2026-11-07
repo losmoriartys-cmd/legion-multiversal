@@ -1721,3 +1721,21 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 ### Commits
 - `sullygnome-data.json`: `4198c8a8e8f2847532c9217edde0d54d2fd078ae`
 - `app.js`: `8dfa21e1aa64a3db6b160c3073cab162239f8603`
+
+
+## 2026-11-07 — Capítulo 01: relato fundacional S3X-MEN → Legión Multiversal
+
+- Se reescribió el relato del Capítulo 01 para presentar con claridad la secuencia histórica confirmada por el creador: **S3X-MEN fue la primera formación de cuatro integrantes** y, con el tiempo, el proyecto evolucionó hacia Legión Multiversal.
+- Se reforzó el tono de archivo/historieta: primera identidad, expansión del universo, idea colectiva más amplia y cambio de era. Se dejó explícito que la Legión no borra ni desacredita la etapa S3X-MEN.
+- Se retiraron afirmaciones cronológicas o personales que no estaban suficientemente verificadas en el relato anterior (por ejemplo, hitos individuales presentados como hechos cerrados). La cronología ahora describe etapas del proyecto sin inventar fechas ni adjudicar méritos no confirmados.
+- Se eliminaron tres referencias a imágenes con nombres de archivo que no existían en la raíz del repositorio y que podían provocar imágenes rotas. No se reutilizó una imagen distinta como si fuera la nueva formación.
+- **Pendiente de integración visual:** las cuatro imágenes nuevas compartidas en la conversación deben incorporarse al directorio `assets/` y luego ubicarse en la portada de transición, la primera formación S3X-MEN, la portada «Orígenes #0001» y el banner de la Legión actual. En este commit se avanzó el relato y se evitó dejar enlaces rotos; las cuatro imágenes todavía no están publicadas en el repositorio.
+- El Roster conserva su estructura principal de ocho cartas y accesos a bitácoras. Se mantiene pendiente una pasada posterior de revisión visual y de contenido fino; esta tarea no bloquea el avance del Capítulo 01.
+- Validación estática: bloque del capítulo reemplazado; referencias antiguas a archivos inexistentes retiradas; estructura de secciones conservada. No se realizó prueba visual en navegador.
+
+### Archivos modificados
+- `index.html`
+- `INFORMES.md`
+
+### Commit
+- `index.html`: `8878155219f56e731511f768ffc9a05ccd5cc39a`
