@@ -2135,3 +2135,13 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 - **Validación de repositorio:** los tres recursos existen en la raíz de `main`; cada uno aparece exactamente una vez en el capítulo BarFender. No se encontraron referencias restantes a `stream4.jpg` dentro del capítulo.
 - **Pendiente externo:** el navegador de revisión no pudo acceder a la URL de GitHub Pages en esta sesión. Por eso no se certifica todavía la publicación ni el render final en escritorio/móvil; el HTML/CSS de `main` sí quedó comprobado.
 - **Commit de ajuste:** `4403e2ece8b2823c9e4b28ce7d5f7d21b4de9ebe`.
+
+
+## 2026-11-07 — Corrección de asignación de imágenes entre portada y expediente BarFender
+
+- **Motivo:** se habían cruzado los conceptos visuales de la portada institucional de colaboraciones y la apertura del expediente comercial BarFender.
+- **Corrección en `index.html`:** la ilustración de coordinación del equipo (`image_20261107_184728.jpg`) quedó asignada a «CUANDO LOS UNIVERSOS SE ENCUENTRAN»; la ilustración con el título del juego integrado (`image_20261107_184951-si-que-tenga-referencias-y-el-titutlo-del-juego-ba.jpg`) quedó asignada a «EXPEDIENTE COMERCIAL · N.º 001 — BARFENDER».
+- **Ajuste editorial:** se actualizaron textos alternativos y pies de imagen para que cada recurso describa correctamente su concepto. No se duplicaron ni se modificaron los archivos de imagen.
+- **Alcance:** solo se intercambiaron las dos asignaciones visuales indicadas; no se alteraron las métricas, los participantes ni el resto del capítulo.
+- **Commit:** `96ea4b41b3d9d763a95cec35ee327c609c47813d`.
+- **Pendiente:** comprobar el render publicado en GitHub Pages; el commit en `main` no certifica por sí solo que el despliegue haya finalizado.
