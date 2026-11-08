@@ -13,17 +13,17 @@
     "daved0608"
   ],
   "collection": {
-    "started_at": "2026-11-08T20:57:08Z",
+    "started_at": "2026-11-08T21:36:17Z",
     "expected_channels": 7,
     "resolved_channels": 7,
     "sampled_channels": [
+      "akumazoldyck",
+      "daved0608",
+      "losmoriartys",
       "ladymoriarty01",
       "ther0d3r1k",
       "habitos_atomicos",
-      "ardipii",
-      "akumazoldyck",
-      "daved0608",
-      "losmoriartys"
+      "ardipii"
     ],
     "skipped_channels": [],
     "complete": true
@@ -33,7 +33,7 @@
     "elgabii090"
   ],
   "channel_registry_note": "Los canales archivados se conservan para consulta histórica y no se incluyen en los indicadores del roster activo.",
-  "updated_at": "2026-11-08T20:57:08Z",
+  "updated_at": "2026-11-08T21:36:17Z",
   "channels": {
     "ladymoriarty01": {
       "login": "ladymoriarty01",
@@ -48,9 +48,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-08T20:57:08Z",
+      "updated_at": "2026-11-08T21:36:17Z",
       "window": {
-        "samples_total": 142,
+        "samples_total": 143,
         "live_samples": 5,
         "streams_observed": 2,
         "average_viewers_sampled": 5.4,
@@ -1376,6 +1376,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-08T21:36:17Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -1392,9 +1401,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-08T20:57:08Z",
+      "updated_at": "2026-11-08T21:36:17Z",
       "window": {
-        "samples_total": 142,
+        "samples_total": 143,
         "live_samples": 15,
         "streams_observed": 3,
         "average_viewers_sampled": 18.3,
@@ -2748,6 +2757,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-08T21:36:17Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -3410,9 +3428,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-08T20:57:08Z",
+      "updated_at": "2026-11-08T21:36:17Z",
       "window": {
-        "samples_total": 142,
+        "samples_total": 143,
         "live_samples": 4,
         "streams_observed": 2,
         "average_viewers_sampled": 6.0,
@@ -4724,6 +4742,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-08T21:36:17Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -4740,9 +4767,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-08T20:57:08Z",
+      "updated_at": "2026-11-08T21:36:17Z",
       "window": {
-        "samples_total": 142,
+        "samples_total": 143,
         "live_samples": 10,
         "streams_observed": 4,
         "average_viewers_sampled": 6.8,
@@ -6082,6 +6109,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-08T21:36:17Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -6093,17 +6129,17 @@
       "twitch_url": "https://twitch.tv/daved0608",
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
-      "live": false,
-      "current_viewers": null,
-      "current_game": null,
-      "current_title": null,
-      "stream_started_at": null,
-      "updated_at": "2026-11-08T20:57:08Z",
+      "live": true,
+      "current_viewers": 1,
+      "current_game": "Cult of the Lamb",
+      "current_title": "Unete a la orden",
+      "stream_started_at": "2026-11-08T21:06:04Z",
+      "updated_at": "2026-11-08T21:36:17Z",
       "window": {
-        "samples_total": 142,
-        "live_samples": 9,
-        "streams_observed": 4,
-        "average_viewers_sampled": 2.0,
+        "samples_total": 143,
+        "live_samples": 10,
+        "streams_observed": 5,
+        "average_viewers_sampled": 1.9,
         "peak_viewers_sampled": 5,
         "observed_live_hours": 0.24,
         "estimated_hours_watched": 0.24,
@@ -6124,6 +6160,13 @@
           },
           {
             "name": "Gears of War: E-Day",
+            "live_samples": 1,
+            "streams_observed": 1,
+            "average_viewers_sampled": 1.0,
+            "peak_viewers_sampled": 1
+          },
+          {
+            "name": "Cult of the Lamb",
             "live_samples": 1,
             "streams_observed": 1,
             "average_viewers_sampled": 1.0,
@@ -6154,9 +6197,9 @@
           },
           {
             "date": "2026-11-08",
-            "live_samples": 2,
-            "streams_observed": 1,
-            "average_viewers_sampled": 4.5,
+            "live_samples": 3,
+            "streams_observed": 2,
+            "average_viewers_sampled": 3.3,
             "peak_viewers_sampled": 5
           }
         ],
@@ -7440,6 +7483,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-08T21:36:17Z",
+          "is_live": true,
+          "viewer_count": 1,
+          "game_name": "Cult of the Lamb",
+          "title": "Unete a la orden",
+          "stream_id": "321007917918",
+          "started_at": "2026-11-08T21:06:04Z"
         }
       ]
     },
@@ -8072,9 +8124,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-08T20:57:08Z",
+      "updated_at": "2026-11-08T21:36:17Z",
       "window": {
-        "samples_total": 142,
+        "samples_total": 143,
         "live_samples": 18,
         "streams_observed": 5,
         "average_viewers_sampled": 2.4,
@@ -9421,6 +9473,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-08T21:36:17Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -9437,9 +9498,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-08T20:57:08Z",
+      "updated_at": "2026-11-08T21:36:17Z",
       "window": {
-        "samples_total": 142,
+        "samples_total": 143,
         "live_samples": 5,
         "streams_observed": 3,
         "average_viewers_sampled": 19.4,
@@ -10759,6 +10820,15 @@
         },
         {
           "sampled_at": "2026-11-08T20:57:08Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-08T21:36:17Z",
           "is_live": false,
           "viewer_count": null,
           "game_name": null,
