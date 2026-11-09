@@ -13,17 +13,17 @@
     "daved0608"
   ],
   "collection": {
-    "started_at": "2026-11-09T22:19:33Z",
+    "started_at": "2026-11-09T23:03:24Z",
     "expected_channels": 7,
     "resolved_channels": 7,
     "sampled_channels": [
-      "ardipii",
-      "akumazoldyck",
-      "daved0608",
       "losmoriartys",
       "ladymoriarty01",
       "ther0d3r1k",
-      "habitos_atomicos"
+      "habitos_atomicos",
+      "ardipii",
+      "akumazoldyck",
+      "daved0608"
     ],
     "skipped_channels": [],
     "complete": true
@@ -33,7 +33,7 @@
     "elgabii090"
   ],
   "channel_registry_note": "Los canales archivados se conservan para consulta histórica y no se incluyen en los indicadores del roster activo.",
-  "updated_at": "2026-11-09T22:19:33Z",
+  "updated_at": "2026-11-09T23:03:24Z",
   "channels": {
     "ladymoriarty01": {
       "login": "ladymoriarty01",
@@ -48,9 +48,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-09T22:19:33Z",
+      "updated_at": "2026-11-09T23:03:24Z",
       "window": {
-        "samples_total": 168,
+        "samples_total": 169,
         "live_samples": 5,
         "streams_observed": 2,
         "average_viewers_sampled": 5.4,
@@ -1610,6 +1610,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-09T23:03:24Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -1621,17 +1630,17 @@
       "twitch_url": "https://twitch.tv/ther0d3r1k",
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
-      "live": false,
-      "current_viewers": null,
-      "current_game": null,
-      "current_title": null,
-      "stream_started_at": null,
-      "updated_at": "2026-11-09T22:19:33Z",
+      "live": true,
+      "current_viewers": 21,
+      "current_game": "Just Chatting",
+      "current_title": "🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
+      "stream_started_at": "2026-11-09T22:54:54Z",
+      "updated_at": "2026-11-09T23:03:24Z",
       "window": {
-        "samples_total": 168,
-        "live_samples": 15,
-        "streams_observed": 3,
-        "average_viewers_sampled": 18.3,
+        "samples_total": 169,
+        "live_samples": 16,
+        "streams_observed": 4,
+        "average_viewers_sampled": 18.4,
         "peak_viewers_sampled": 40,
         "observed_live_hours": 0.0,
         "estimated_hours_watched": 0.0,
@@ -1652,10 +1661,10 @@
           },
           {
             "name": "Just Chatting",
-            "live_samples": 3,
-            "streams_observed": 2,
-            "average_viewers_sampled": 5.7,
-            "peak_viewers_sampled": 8
+            "live_samples": 4,
+            "streams_observed": 3,
+            "average_viewers_sampled": 9.5,
+            "peak_viewers_sampled": 21
           },
           {
             "name": "Barfender",
@@ -1700,6 +1709,13 @@
             "streams_observed": 1,
             "average_viewers_sampled": 18.8,
             "peak_viewers_sampled": 40
+          },
+          {
+            "date": "2026-11-09",
+            "live_samples": 1,
+            "streams_observed": 1,
+            "average_viewers_sampled": 21.0,
+            "peak_viewers_sampled": 21
           }
         ],
         "method": "Muestreo propio cada 15 minutos; horas estimadas solo entre muestras consecutivas del mismo directo. Categorías y evolución diaria se calculan sobre las muestras observadas."
@@ -3216,6 +3232,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-09T23:03:24Z",
+          "is_live": true,
+          "viewer_count": 21,
+          "game_name": "Just Chatting",
+          "title": "🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
+          "stream_id": "319477741045",
+          "started_at": "2026-11-09T22:54:54Z"
         }
       ]
     },
@@ -3878,9 +3903,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-09T22:19:33Z",
+      "updated_at": "2026-11-09T23:03:24Z",
       "window": {
-        "samples_total": 168,
+        "samples_total": 169,
         "live_samples": 4,
         "streams_observed": 2,
         "average_viewers_sampled": 6.0,
@@ -5426,6 +5451,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-09T23:03:24Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -5442,9 +5476,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-09T22:19:33Z",
+      "updated_at": "2026-11-09T23:03:24Z",
       "window": {
-        "samples_total": 168,
+        "samples_total": 169,
         "live_samples": 10,
         "streams_observed": 4,
         "average_viewers_sampled": 6.8,
@@ -7018,6 +7052,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-09T23:03:24Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -7034,9 +7077,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-09T22:19:33Z",
+      "updated_at": "2026-11-09T23:03:24Z",
       "window": {
-        "samples_total": 168,
+        "samples_total": 169,
         "live_samples": 10,
         "streams_observed": 5,
         "average_viewers_sampled": 1.9,
@@ -8617,6 +8660,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-09T23:03:24Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -9245,26 +9297,26 @@
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
       "live": true,
-      "current_viewers": 32,
+      "current_viewers": 45,
       "current_game": "Call of Duty: Warzone",
       "current_title": "es mi primer dia",
       "stream_started_at": "2026-11-09T21:54:08Z",
-      "updated_at": "2026-11-09T22:19:33Z",
+      "updated_at": "2026-11-09T23:03:24Z",
       "window": {
-        "samples_total": 168,
-        "live_samples": 23,
+        "samples_total": 169,
+        "live_samples": 24,
         "streams_observed": 7,
-        "average_viewers_sampled": 3.6,
-        "peak_viewers_sampled": 32,
+        "average_viewers_sampled": 5.3,
+        "peak_viewers_sampled": 45,
         "observed_live_hours": 0.0,
         "estimated_hours_watched": 0.0,
         "game_breakdown": [
           {
             "name": "Call of Duty: Warzone",
-            "live_samples": 12,
+            "live_samples": 13,
             "streams_observed": 4,
-            "average_viewers_sampled": 3.8,
-            "peak_viewers_sampled": 32
+            "average_viewers_sampled": 6.9,
+            "peak_viewers_sampled": 45
           },
           {
             "name": "Just Chatting",
@@ -9319,10 +9371,10 @@
           },
           {
             "date": "2026-11-09",
-            "live_samples": 5,
+            "live_samples": 6,
             "streams_observed": 2,
-            "average_viewers_sampled": 7.6,
-            "peak_viewers_sampled": 32
+            "average_viewers_sampled": 13.8,
+            "peak_viewers_sampled": 45
           }
         ],
         "method": "Muestreo propio cada 15 minutos; horas estimadas solo entre muestras consecutivas del mismo directo. Categorías y evolución diaria se calculan sobre las muestras observadas."
@@ -10839,6 +10891,15 @@
           "title": "es mi primer dia",
           "stream_id": "319476744053",
           "started_at": "2026-11-09T21:54:08Z"
+        },
+        {
+          "sampled_at": "2026-11-09T23:03:24Z",
+          "is_live": true,
+          "viewer_count": 45,
+          "game_name": "Call of Duty: Warzone",
+          "title": "es mi primer dia",
+          "stream_id": "319476744053",
+          "started_at": "2026-11-09T21:54:08Z"
         }
       ]
     },
@@ -10850,17 +10911,17 @@
       "twitch_url": "https://twitch.tv/losmoriartys",
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
-      "live": false,
-      "current_viewers": null,
-      "current_game": null,
-      "current_title": null,
-      "stream_started_at": null,
-      "updated_at": "2026-11-09T22:19:33Z",
+      "live": true,
+      "current_viewers": 7,
+      "current_game": "Just Chatting",
+      "current_title": "[Rincon del Nerd]  Boca campeon + Noticias de Harry potter + Simuladores de tienda? - 🎁⚜️CODIGO DE CREADOR EPIC: LosMoriartys ⚜️🎁",
+      "stream_started_at": "2026-11-09T22:56:21Z",
+      "updated_at": "2026-11-09T23:03:24Z",
       "window": {
-        "samples_total": 168,
-        "live_samples": 5,
-        "streams_observed": 3,
-        "average_viewers_sampled": 19.4,
+        "samples_total": 169,
+        "live_samples": 6,
+        "streams_observed": 4,
+        "average_viewers_sampled": 17.3,
         "peak_viewers_sampled": 31,
         "observed_live_hours": 0.0,
         "estimated_hours_watched": 0.0,
@@ -10878,6 +10939,13 @@
             "streams_observed": 2,
             "average_viewers_sampled": 20.0,
             "peak_viewers_sampled": 25
+          },
+          {
+            "name": "Just Chatting",
+            "live_samples": 1,
+            "streams_observed": 1,
+            "average_viewers_sampled": 7.0,
+            "peak_viewers_sampled": 7
           }
         ],
         "daily_activity": [
@@ -10901,6 +10969,13 @@
             "streams_observed": 2,
             "average_viewers_sampled": 20.0,
             "peak_viewers_sampled": 25
+          },
+          {
+            "date": "2026-11-09",
+            "live_samples": 1,
+            "streams_observed": 1,
+            "average_viewers_sampled": 7.0,
+            "peak_viewers_sampled": 7
           }
         ],
         "method": "Muestreo propio cada 15 minutos; horas estimadas solo entre muestras consecutivas del mismo directo. Categorías y evolución diaria se calculan sobre las muestras observadas."
@@ -12417,6 +12492,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-09T23:03:24Z",
+          "is_live": true,
+          "viewer_count": 7,
+          "game_name": "Just Chatting",
+          "title": "[Rincon del Nerd]  Boca campeon + Noticias de Harry potter + Simuladores de tienda? - 🎁⚜️CODIGO DE CREADOR EPIC: LosMoriartys ⚜️🎁",
+          "stream_id": "319403211126",
+          "started_at": "2026-11-09T22:56:21Z"
         }
       ]
     }
