@@ -2180,3 +2180,15 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 - **Alcance de archivos:** solo `index.html` (etiquetas históricas dentro de Arsenal) y `INFORMES.md` (esta bitácora). Se conserva el catálogo de diez juegos y no se modifican imágenes ni datos de otros capítulos.
 - **Pendiente:** revisión visual y funcional en GitHub Pages en escritorio y móvil. La auditoría estática no se presenta como prueba visual de navegador. Para actualizar estados y vencimientos posteriores al 07/11 se necesitará evidencia nueva de las plataformas.
 - **Estado:** primera corrección documental preparada para revisión en PR independiente; no se integra directamente en `main` hasta validar la vista previa.
+
+
+## 2026-11-10 — Rediseño editorial del Capítulo 05 · ARSENAL
+
+- **Responsable:** colaboración ChatGPT + equipo del proyecto.
+- **Objetivo:** devolver el protagonismo del capítulo a la selección de videojuegos y a las experiencias compartidas por la Legión, reduciendo el peso visual de la información sobre plataformas externas.
+- **Implementado en la propuesta:** se simplifica la apertura, se presenta la selección de diez juegos como contenido principal y se reubican la guía de Keymailer/Lurkit y los registros históricos dentro de un desplegable complementario cerrado por defecto. No se eliminan datos, campañas, enlaces ni estados documentales.
+- **Criterio editorial:** ARSENAL se lee primero como repertorio de juego y comunidad; la documentación de accesos queda disponible para consulta secundaria, sin competir con las fichas de juegos.
+- **Alcance:** index.html, styles.css e INFORMES.md; no se modifican assets, métricas ni otros capítulos.
+- **Validaciones:** estructura y enlaces preservados por transformación de bloques; pendientes validaciones automatizadas y revisión visual en escritorio/móvil antes de integrar.
+- **Coordinación:** propuesta apilada sobre work/chapter-05-arsenal-review-2026-11-10; requiere integrar PR #8 antes de fusionar esta intervención.
+- **Despliegue:** no publicado; sujeto a revisión e integración.
