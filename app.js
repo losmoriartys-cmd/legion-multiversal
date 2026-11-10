@@ -457,7 +457,7 @@ function selectLiveChannel(login,displayName){
 }
 async function loadInstituteStats(){
  const body=document.getElementById('stats-table-body'); if(!body)return;
- const fmt=(v,d=2)=>v===null||v===undefined?'—':(typeof v==='number'?v.toLocaleString('es-AR',{maximumFractionDigits:d}):v);
+ const fmt=(v,d=1)=>v===null||v===undefined?'—':(typeof v==='number'?v.toLocaleString('es-AR',{maximumFractionDigits:d}):v);
  try{
   const res=await fetch('data.json',{cache:'no-store'}); if(!res.ok)throw new Error('No se pudo leer data.json');
   const data=await res.json(); instituteStatsData=data;
@@ -465,13 +465,29 @@ async function loadInstituteStats(){
   const channels=activeLogins.map(login=>data.channels?.[login]).filter(Boolean);
   const liveCount=channels.filter(c=>c.live).length;
   const totalSamples=channels.reduce((n,c)=>n+(c.window?.samples_total||0),0);
-  const observedHours=channels.reduce((n,c)=>n+(c.window?.observed_live_hours||0),0);
-  const estimatedHoursWatched=channels.reduce((n,c)=>n+(c.window?.estimated_hours_watched||0),0);
-  document.getElementById('stats-updated').textContent='Actualizado el '+new Date(data.updated_at).toLocaleString('es-AR')+' · '+channels.length+' canales del roster activo. Ventana máxima: '+fmt(data.window_days,0)+' días; cobertura efectiva variable según canal.';
-  document.getElementById('stats-summary').innerHTML='<div class="premium-card"><h3>'+fmt(channels.length,0)+'</h3><p>Canales activos representados</p></div><div class="premium-card"><h3>'+fmt(liveCount,0)+'</h3><p>En directo en la última consulta</p></div><div class="premium-card"><h3>'+fmt(data.window_days,0)+' días</h3><p>Ventana máxima configurada</p></div><div class="premium-card"><h3>'+fmt(totalSamples,0)+'</h3><p>Muestras registradas</p></div>';
+  const observedStreams=channels.reduce((n,c)=>n+(c.window?.streams_observed||0),0);
+  const liveSamples=channels.reduce((n,c)=>n+(c.window?.live_samples||0),0);
+  const interval=Number(data.sampling_interval_minutes)||15;
+  const updated=data.updated_at?new Date(data.updated_at):null;
+  const updatedLabel=updated&&!Number.isNaN(updated.getTime())?updated.toLocaleString('es-AR'):'fecha no disponible';
+  document.getElementById('stats-updated').textContent='Última actualización: '+updatedLabel+' · '+channels.length+' canales activos · ventana máxima configurada: '+fmt(data.window_days,0)+' días.';
+  document.getElementById('stats-summary').innerHTML=[
+   [fmt(channels.length,0),'CANALES EN SEGUIMIENTO','Canales activos del roster'],
+   [fmt(observedStreams,0),'DIRECTOS DETECTADOS','Sesiones observadas en la ventana disponible'],
+   [fmt(liveSamples,0),'MUESTRAS EN DIRECTO','Registros capturados mientras había transmisión'],
+   [interval+' MIN','FRECUENCIA PROGRAMADA','Intervalo objetivo entre consultas']
+  ].map(([value,label,note])=>'<article class="impact-kpi"><strong>'+value+'</strong><span>'+label+'</span><small>'+note+'</small></article>').join('');
+  const games={};
+  channels.forEach(c=>(c.window?.game_breakdown||[]).forEach(g=>{if(g?.name)games[g.name]=(games[g.name]||0)+(g.live_samples||0);}));
+  const topGames=Object.entries(games).sort((a,b)=>b[1]-a[1]).slice(0,5);
+  const highlights=document.getElementById('stats-highlights');
+  if(highlights)highlights.innerHTML='<div class="impact-highlight-copy"><span>LECTURA DEL PERÍODO</span><strong>'+fmt(totalSamples,0)+' muestras de actividad registradas</strong><p>La cifra reúne consultas realizadas a los canales activos; no equivale a espectadores ni a horas vistas.</p></div>'+(topGames.length?'<div class="impact-game-list"><span>CATEGORÍAS CON MÁS MUESTRAS EN DIRECTO</span>'+topGames.map(([name,count])=>'<div><b>'+escapeStatsHtml(name)+'</b><span>'+fmt(count,0)+' muestras</span></div>').join('')+'</div>':'<div class="impact-game-list"><span>CATEGORÍAS</span><p>Aún no hay suficientes muestras para mostrar un resumen.</p></div>');
   body.innerHTML=channels.map(c=>{const samples=Array.isArray(c.snapshots)?c.snapshots.filter(s=>s?.sampled_at):[];const first=samples.length?Date.parse(samples[0].sampled_at):NaN;const last=samples.length?Date.parse(samples[samples.length-1].sampled_at):NaN;const expected=Number.isFinite(first)&&Number.isFinite(last)&&last>=first?Math.floor((last-first)/(Number(data.sampling_interval_minutes||15)*60000))+1:0;const coverage=expected?Math.min(100,(samples.length/expected)*100):null;const coverageLabel=coverage===null?'Insuficiente':coverage.toLocaleString('es-AR',{maximumFractionDigits:1})+'% ('+samples.length+'/'+expected+')';return '<tr><td>'+escapeStatsHtml(c.display_name)+'</td><td>'+(c.live?'EN DIRECTO':'OFFLINE')+'</td><td>'+fmt(c.current_viewers,0)+'</td><td>'+escapeStatsHtml(fmt(c.current_game))+'</td><td>'+fmt(c.window?.average_viewers_sampled)+'</td><td>'+fmt(c.window?.peak_viewers_sampled,0)+'</td><td>'+fmt(c.window?.observed_live_hours)+'</td><td>'+fmt(c.window?.samples_total,0)+'</td><td>'+coverageLabel+'</td></tr>';}).join('');
   renderLiveDirectory(channels);
- }catch(e){body.innerHTML='<tr><td colspan="9">Estadísticas temporalmente no disponibles. '+escapeStatsHtml(e.message)+'</td></tr>';}
+ }catch(e){
+  body.innerHTML='<tr><td colspan="9">Estadísticas temporalmente no disponibles. '+escapeStatsHtml(e.message)+'</td></tr>';
+  const summary=document.getElementById('stats-summary');if(summary)summary.innerHTML='<article class="impact-kpi"><strong>—</strong><span>DATOS NO DISPONIBLES</span><small>Volvé a consultar más tarde.</small></article>';
+ }
 }
 
 async function loadPartnerMetrics(){

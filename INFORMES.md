@@ -2157,3 +2157,13 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 - **Validación:** pendiente de comprobaciones automáticas y revisión visual en escritorio/móvil sobre la versión actual de `main`.
 - **Sustitución de PR:** esta rama actualizada reemplaza técnicamente la propuesta antigua #5, que queda obsoleta por divergencia histórica. No se integra automáticamente; requiere revisión y validación.
 - **Despliegue:** pendiente de integración y publicación.
+
+
+## 2026-11-10 — Reconstrucción del PR #6 sobre main actualizado
+
+- **Objetivo:** recuperar la propuesta editorial de los capítulos 03 (Impacto), 09 (Comunidad) y 11 (Valores) sin arrastrar la historia divergente de la rama original.
+- **Diagnóstico:** la rama original estaba 122 commits detrás de main y divergía con tres commits propios. El PR original modificaba `app.js`, `index.html` y `styles.css`.
+- **Integración controlada:** se comprobó que los bloques de los capítulos 03, 09 y 11 en `index.html` no habían cambiado en main respecto de la base original; se reemplazaron únicamente esos tres bloques por la propuesta del PR. `app.js` seguía idéntico a la base original, por lo que se aplicó el cambio de estadísticas sin conflictos. Los estilos específicos se añadieron al final del CSS vigente.
+- **Conservación:** se mantienen todas las actualizaciones posteriores ya presentes en main fuera de esos bloques. No se modifica el Capítulo 05 — Arsenal, ni el Capítulo 06, ni assets o datos estadísticos.
+- **Criterios de datos:** se conservan las etiquetas de actividad observada y la limitación de cobertura. Streams Charts queda como fuente de referencia futura, sin simular una integración ni sumar métricas de plataformas distintas.
+- **Validación previa al push:** verificación de coincidencia exacta de los tres bloques de origen con main, comprobación de que `app.js` no tuvo cambios concurrentes y comprobación de que el bloque CSS no existía previamente. Las comprobaciones automáticas y revisión visual quedan pendientes en la rama reconstruida.
