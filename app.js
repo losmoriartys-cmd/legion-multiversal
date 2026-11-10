@@ -437,11 +437,14 @@ function renderLiveDirectory(channels){
  const host=document.getElementById('live-directory');if(!host)return;
  const live=(channels||[]).filter(c=>c.live);
  const offline=(channels||[]).filter(c=>!c.live);
+ const updated=instituteStatsData?.updated_at?new Date(instituteStatsData.updated_at):null;
+ const updatedLabel=updated&&!Number.isNaN(updated.getTime())?updated.toLocaleString('es-AR'):'fecha no disponible';
+ const refreshNote='<p class="stats-note live-refresh-note">Estado consultado: '+escapeStatsHtml(updatedLabel)+' · actualización automática cada 60 segundos.</p>';
  if(!live.length){
-  host.innerHTML='<div class="premium-panel"><div class="premium-kicker">ESTADO ACTUAL</div><h3>En este momento no hay integrantes detectados en directo</h3><p>La próxima consulta programada actualizará el estado. Mientras tanto, podés visitar los canales del roster.</p></div>'+offline.map(c=>'<article class="live-channel-card offline"><strong>'+escapeStatsHtml(c.display_name)+'</strong><small>Sin directo detectado en la última consulta</small><a href="https://twitch.tv/'+encodeURIComponent(c.login)+'" target="_blank" rel="noopener noreferrer">Visitar canal ↗</a></article>').join('');
+  host.innerHTML=refreshNote+'<div class="premium-panel"><div class="premium-kicker">ESTADO ACTUAL</div><h3>En este momento no hay integrantes detectados en directo</h3><p>La próxima consulta actualizará el estado. Mientras tanto, podés visitar los canales del roster.</p></div>'+offline.map(c=>'<article class="live-channel-card offline"><strong>'+escapeStatsHtml(c.display_name)+'</strong><small>Sin directo detectado en la última consulta</small><a href="https://twitch.tv/'+encodeURIComponent(c.login)+'" target="_blank" rel="noopener noreferrer">Visitar canal ↗</a></article>').join('');
   return;
  }
- host.innerHTML=live.map(c=>'<article class="live-channel-card"><span class="stats-status partial">● EN DIRECTO</span><strong>'+escapeStatsHtml(c.display_name)+'</strong><small>'+escapeStatsHtml(c.current_game||'Categoría no informada')+' · '+(c.current_viewers===null?'Espectadores no disponibles':statsNumber(c.current_viewers,0)+' espectadores')+'</small><button type="button" onclick="selectLiveChannel(\''+escapeStatsHtml(c.login)+'\',\''+escapeStatsHtml(c.display_name)+'\')">VER TRANSMISIÓN</button></article>').join('');
+ host.innerHTML=refreshNote+live.map(c=>'<article class="live-channel-card"><span class="stats-status partial">● EN DIRECTO</span><strong>'+escapeStatsHtml(c.display_name)+'</strong><small>'+escapeStatsHtml(c.current_game||'Categoría no informada')+' · '+(c.current_viewers===null?'Espectadores no disponibles':statsNumber(c.current_viewers,0)+' espectadores')+'</small><button type="button" onclick="selectLiveChannel(\''+escapeStatsHtml(c.login)+'\',\''+escapeStatsHtml(c.display_name)+'\')">VER TRANSMISIÓN</button></article>').join('');
 }
 function selectLiveChannel(login,displayName){
  const wrap=document.getElementById('live-player-wrap'),player=document.getElementById('live-player'),title=document.getElementById('live-player-title'),link=document.getElementById('live-open-channel');
@@ -455,8 +458,11 @@ function selectLiveChannel(login,displayName){
  wrap.hidden=false;
  wrap.scrollIntoView({behavior:'smooth',block:'start'});
 }
+let instituteStatsLoading = false;
+
 async function loadInstituteStats(){
- const body=document.getElementById('stats-table-body'); if(!body)return;
+ const body=document.getElementById('stats-table-body'); if(!body||instituteStatsLoading)return;
+ instituteStatsLoading=true;
  const fmt=(v,d=1)=>v===null||v===undefined?'—':(typeof v==='number'?v.toLocaleString('es-AR',{maximumFractionDigits:d}):v);
  try{
   const res=await fetch('data.json',{cache:'no-store'}); if(!res.ok)throw new Error('No se pudo leer data.json');
@@ -487,6 +493,8 @@ async function loadInstituteStats(){
  }catch(e){
   body.innerHTML='<tr><td colspan="9">Estadísticas temporalmente no disponibles. '+escapeStatsHtml(e.message)+'</td></tr>';
   const summary=document.getElementById('stats-summary');if(summary)summary.innerHTML='<article class="impact-kpi"><strong>—</strong><span>DATOS NO DISPONIBLES</span><small>Volvé a consultar más tarde.</small></article>';
+ } finally {
+  instituteStatsLoading=false;
  }
 }
 
@@ -1395,4 +1403,5 @@ function openHeroModal(index) {
             loadCreatorRecords(),
             loadPlatformStatsData()
         ]);
+        window.setInterval(() => { loadInstituteStats(); }, 60000);
         };
