@@ -13,17 +13,17 @@
     "daved0608"
   ],
   "collection": {
-    "started_at": "2026-11-10T23:13:09Z",
+    "started_at": "2026-11-10T23:52:21Z",
     "expected_channels": 7,
     "resolved_channels": 7,
     "sampled_channels": [
+      "akumazoldyck",
+      "daved0608",
+      "losmoriartys",
       "ladymoriarty01",
       "ther0d3r1k",
       "habitos_atomicos",
-      "ardipii",
-      "akumazoldyck",
-      "daved0608",
-      "losmoriartys"
+      "ardipii"
     ],
     "skipped_channels": [],
     "complete": true
@@ -33,7 +33,7 @@
     "elgabii090"
   ],
   "channel_registry_note": "Los canales archivados se conservan para consulta histórica y no se incluyen en los indicadores del roster activo.",
-  "updated_at": "2026-11-10T23:13:09Z",
+  "updated_at": "2026-11-10T23:52:21Z",
   "channels": {
     "ladymoriarty01": {
       "login": "ladymoriarty01",
@@ -43,14 +43,14 @@
       "twitch_url": "https://twitch.tv/ladymoriarty01",
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
-      "live": true,
-      "current_viewers": 3,
-      "current_game": "Toto's Journey",
-      "current_title": "[Publi] Hoy recorreremos el mapa de  #totosjourney  y seremos un lindo perrito.",
-      "stream_started_at": "2026-11-10T22:00:13Z",
-      "updated_at": "2026-11-10T23:13:09Z",
+      "live": false,
+      "current_viewers": null,
+      "current_game": null,
+      "current_title": null,
+      "stream_started_at": null,
+      "updated_at": "2026-11-10T23:52:21Z",
       "window": {
-        "samples_total": 195,
+        "samples_total": 196,
         "live_samples": 7,
         "streams_observed": 3,
         "average_viewers_sampled": 6.4,
@@ -1867,6 +1867,15 @@
           "title": "[Publi] Hoy recorreremos el mapa de  #totosjourney  y seremos un lindo perrito.",
           "stream_id": "319411155702",
           "started_at": "2026-11-10T22:00:13Z"
+        },
+        {
+          "sampled_at": "2026-11-10T23:52:21Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -1879,16 +1888,16 @@
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
       "live": true,
-      "current_viewers": 30,
-      "current_game": "Just Chatting",
+      "current_viewers": 33,
+      "current_game": "Apex Legends",
       "current_title": "ABRIMOS EL BAR....? 🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
       "stream_started_at": "2026-11-10T22:57:11Z",
-      "updated_at": "2026-11-10T23:13:09Z",
+      "updated_at": "2026-11-10T23:52:21Z",
       "window": {
-        "samples_total": 195,
-        "live_samples": 21,
+        "samples_total": 196,
+        "live_samples": 22,
         "streams_observed": 5,
-        "average_viewers_sampled": 21.7,
+        "average_viewers_sampled": 22.2,
         "peak_viewers_sampled": 46,
         "observed_live_hours": 0.0,
         "estimated_hours_watched": 0.0,
@@ -1916,9 +1925,9 @@
           },
           {
             "name": "Apex Legends",
-            "live_samples": 3,
-            "streams_observed": 2,
-            "average_viewers_sampled": 23.0,
+            "live_samples": 4,
+            "streams_observed": 3,
+            "average_viewers_sampled": 25.5,
             "peak_viewers_sampled": 42
           },
           {
@@ -1967,9 +1976,9 @@
           },
           {
             "date": "2026-11-10",
-            "live_samples": 4,
+            "live_samples": 5,
             "streams_observed": 2,
-            "average_viewers_sampled": 29.5,
+            "average_viewers_sampled": 30.2,
             "peak_viewers_sampled": 46
           }
         ],
@@ -3730,6 +3739,15 @@
           "title": "ABRIMOS EL BAR....? 🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
           "stream_id": "319561000564",
           "started_at": "2026-11-10T22:57:11Z"
+        },
+        {
+          "sampled_at": "2026-11-10T23:52:21Z",
+          "is_live": true,
+          "viewer_count": 33,
+          "game_name": "Apex Legends",
+          "title": "ABRIMOS EL BAR....? 🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
+          "stream_id": "319561000564",
+          "started_at": "2026-11-10T22:57:11Z"
         }
       ]
     },
@@ -4392,9 +4410,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-10T23:13:09Z",
+      "updated_at": "2026-11-10T23:52:21Z",
       "window": {
-        "samples_total": 195,
+        "samples_total": 196,
         "live_samples": 4,
         "streams_observed": 2,
         "average_viewers_sampled": 6.0,
@@ -6183,6 +6201,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-10T23:52:21Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -6199,9 +6226,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-10T23:13:09Z",
+      "updated_at": "2026-11-10T23:52:21Z",
       "window": {
-        "samples_total": 195,
+        "samples_total": 196,
         "live_samples": 13,
         "streams_observed": 5,
         "average_viewers_sampled": 6.2,
@@ -8032,6 +8059,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-10T23:52:21Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -8048,9 +8084,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-10T23:13:09Z",
+      "updated_at": "2026-11-10T23:52:21Z",
       "window": {
-        "samples_total": 195,
+        "samples_total": 196,
         "live_samples": 11,
         "streams_observed": 6,
         "average_viewers_sampled": 2.0,
@@ -9881,6 +9917,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-10T23:52:21Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -10513,12 +10558,12 @@
       "current_game": "Fortnite",
       "current_title": "es mi primer dia",
       "stream_started_at": "2026-11-10T21:50:17Z",
-      "updated_at": "2026-11-10T23:13:09Z",
+      "updated_at": "2026-11-10T23:52:21Z",
       "window": {
-        "samples_total": 195,
-        "live_samples": 31,
+        "samples_total": 196,
+        "live_samples": 32,
         "streams_observed": 8,
-        "average_viewers_sampled": 7.2,
+        "average_viewers_sampled": 7.0,
         "peak_viewers_sampled": 45,
         "observed_live_hours": 0.0,
         "estimated_hours_watched": 0.0,
@@ -10546,7 +10591,7 @@
           },
           {
             "name": "Fortnite",
-            "live_samples": 1,
+            "live_samples": 2,
             "streams_observed": 1,
             "average_viewers_sampled": 1.0,
             "peak_viewers_sampled": 1
@@ -10597,9 +10642,9 @@
           },
           {
             "date": "2026-11-10",
-            "live_samples": 6,
+            "live_samples": 7,
             "streams_observed": 2,
-            "average_viewers_sampled": 12.2,
+            "average_viewers_sampled": 10.6,
             "peak_viewers_sampled": 22
           }
         ],
@@ -12360,6 +12405,15 @@
           "title": "es mi primer dia",
           "stream_id": "319487102965",
           "started_at": "2026-11-10T21:50:17Z"
+        },
+        {
+          "sampled_at": "2026-11-10T23:52:21Z",
+          "is_live": true,
+          "viewer_count": 1,
+          "game_name": "Fortnite",
+          "title": "es mi primer dia",
+          "stream_id": "319487102965",
+          "started_at": "2026-11-10T21:50:17Z"
         }
       ]
     },
@@ -12376,9 +12430,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-10T23:13:09Z",
+      "updated_at": "2026-11-10T23:52:21Z",
       "window": {
-        "samples_total": 195,
+        "samples_total": 196,
         "live_samples": 8,
         "streams_observed": 4,
         "average_viewers_sampled": 18.0,
@@ -14203,6 +14257,15 @@
         },
         {
           "sampled_at": "2026-11-10T23:13:09Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-10T23:52:21Z",
           "is_live": false,
           "viewer_count": null,
           "game_name": null,
