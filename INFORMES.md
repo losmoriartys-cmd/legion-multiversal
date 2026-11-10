@@ -2167,3 +2167,12 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 - **Conservación:** se mantienen todas las actualizaciones posteriores ya presentes en main fuera de esos bloques. No se modifica el Capítulo 05 — Arsenal, ni el Capítulo 06, ni assets o datos estadísticos.
 - **Criterios de datos:** se conservan las etiquetas de actividad observada y la limitación de cobertura. Streams Charts queda como fuente de referencia futura, sin simular una integración ni sumar métricas de plataformas distintas.
 - **Validación previa al push:** verificación de coincidencia exacta de los tres bloques de origen con main, comprobación de que `app.js` no tuvo cambios concurrentes y comprobación de que el bloque CSS no existía previamente. Las comprobaciones automáticas y revisión visual quedan pendientes en la rama reconstruida.
+
+## 2026-11-10 — Actualización automática del apartado «En vivo»
+
+- **Motivo:** la sección consultaba `data.json` únicamente durante la carga inicial; una transmisión que comenzara después podía no aparecer hasta recargar manualmente la página.
+- **Cambio en `app.js`:** se programa una nueva consulta de estadísticas cada 60 segundos, reutilizando `loadInstituteStats()` para actualizar el directorio de directos y los indicadores relacionados.
+- **Protección:** se evita solapar solicitudes si una consulta tarda más de un intervalo.
+- **Transparencia:** el apartado «En vivo» muestra la fecha/hora de los datos consultados y aclara la frecuencia de actualización.
+- **Alcance:** no se modifican el roster, los canales registrados, las métricas históricas ni los capítulos editoriales. El cambio está aislado en una rama y requiere revisión y despliegue para reflejarse en la web pública.
+- **Validación pendiente:** comprobar sintaxis, comportamiento de refresco y despliegue en GitHub Pages/Cloudflare Pages.
