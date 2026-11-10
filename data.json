@@ -13,17 +13,17 @@
     "daved0608"
   ],
   "collection": {
-    "started_at": "2026-11-10T01:30:15Z",
+    "started_at": "2026-11-10T02:28:16Z",
     "expected_channels": 7,
     "resolved_channels": 7,
     "sampled_channels": [
-      "losmoriartys",
-      "ladymoriarty01",
       "ther0d3r1k",
       "habitos_atomicos",
       "ardipii",
       "akumazoldyck",
-      "daved0608"
+      "daved0608",
+      "losmoriartys",
+      "ladymoriarty01"
     ],
     "skipped_channels": [],
     "complete": true
@@ -33,7 +33,7 @@
     "elgabii090"
   ],
   "channel_registry_note": "Los canales archivados se conservan para consulta histórica y no se incluyen en los indicadores del roster activo.",
-  "updated_at": "2026-11-10T01:30:15Z",
+  "updated_at": "2026-11-10T02:28:16Z",
   "channels": {
     "ladymoriarty01": {
       "login": "ladymoriarty01",
@@ -48,9 +48,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-10T01:30:15Z",
+      "updated_at": "2026-11-10T02:28:16Z",
       "window": {
-        "samples_total": 172,
+        "samples_total": 173,
         "live_samples": 5,
         "streams_observed": 2,
         "average_viewers_sampled": 5.4,
@@ -1646,6 +1646,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-10T02:28:16Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -1658,25 +1667,25 @@
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
       "live": true,
-      "current_viewers": 24,
+      "current_viewers": 18,
       "current_game": "Fortnite",
       "current_title": "🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
       "stream_started_at": "2026-11-09T22:54:54Z",
-      "updated_at": "2026-11-10T01:30:15Z",
+      "updated_at": "2026-11-10T02:28:16Z",
       "window": {
-        "samples_total": 172,
-        "live_samples": 19,
+        "samples_total": 173,
+        "live_samples": 20,
         "streams_observed": 4,
-        "average_viewers_sampled": 21.4,
+        "average_viewers_sampled": 21.2,
         "peak_viewers_sampled": 46,
         "observed_live_hours": 0.0,
         "estimated_hours_watched": 0.0,
         "game_breakdown": [
           {
             "name": "Fortnite",
-            "live_samples": 6,
+            "live_samples": 7,
             "streams_observed": 3,
-            "average_viewers_sampled": 21.8,
+            "average_viewers_sampled": 21.3,
             "peak_viewers_sampled": 46
           },
           {
@@ -1746,9 +1755,9 @@
           },
           {
             "date": "2026-11-10",
-            "live_samples": 2,
+            "live_samples": 3,
             "streams_observed": 1,
-            "average_viewers_sampled": 35.0,
+            "average_viewers_sampled": 29.3,
             "peak_viewers_sampled": 46
           }
         ],
@@ -3302,6 +3311,15 @@
           "title": "🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
           "stream_id": "319477741045",
           "started_at": "2026-11-09T22:54:54Z"
+        },
+        {
+          "sampled_at": "2026-11-10T02:28:16Z",
+          "is_live": true,
+          "viewer_count": 18,
+          "game_name": "Fortnite",
+          "title": "🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
+          "stream_id": "319477741045",
+          "started_at": "2026-11-09T22:54:54Z"
         }
       ]
     },
@@ -3964,9 +3982,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-10T01:30:15Z",
+      "updated_at": "2026-11-10T02:28:16Z",
       "window": {
-        "samples_total": 172,
+        "samples_total": 173,
         "live_samples": 4,
         "streams_observed": 2,
         "average_viewers_sampled": 6.0,
@@ -5548,6 +5566,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-10T02:28:16Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -5560,25 +5587,25 @@
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
       "live": true,
-      "current_viewers": 10,
-      "current_game": "The Unworthy",
+      "current_viewers": 1,
+      "current_game": "Fortnite",
       "current_title": "demo unworthy y despues d¿vemos que se hace",
       "stream_started_at": "2026-11-10T01:10:36Z",
-      "updated_at": "2026-11-10T01:30:15Z",
+      "updated_at": "2026-11-10T02:28:16Z",
       "window": {
-        "samples_total": 172,
-        "live_samples": 11,
+        "samples_total": 173,
+        "live_samples": 12,
         "streams_observed": 5,
-        "average_viewers_sampled": 7.1,
+        "average_viewers_sampled": 6.6,
         "peak_viewers_sampled": 17,
         "observed_live_hours": 0.24,
         "estimated_hours_watched": 0.72,
         "game_breakdown": [
           {
             "name": "Fortnite",
-            "live_samples": 5,
-            "streams_observed": 2,
-            "average_viewers_sampled": 5.0,
+            "live_samples": 6,
+            "streams_observed": 3,
+            "average_viewers_sampled": 4.3,
             "peak_viewers_sampled": 10
           },
           {
@@ -5634,9 +5661,9 @@
           },
           {
             "date": "2026-11-10",
-            "live_samples": 1,
+            "live_samples": 2,
             "streams_observed": 1,
-            "average_viewers_sampled": 10.0,
+            "average_viewers_sampled": 5.5,
             "peak_viewers_sampled": 10
           }
         ],
@@ -7190,6 +7217,15 @@
           "title": "demo unworthy y despues d¿vemos que se hace",
           "stream_id": "322345678043",
           "started_at": "2026-11-10T01:10:36Z"
+        },
+        {
+          "sampled_at": "2026-11-10T02:28:16Z",
+          "is_live": true,
+          "viewer_count": 1,
+          "game_name": "Fortnite",
+          "title": "demo unworthy y despues d¿vemos que se hace",
+          "stream_id": "322345678043",
+          "started_at": "2026-11-10T01:10:36Z"
         }
       ]
     },
@@ -7206,9 +7242,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-10T01:30:15Z",
+      "updated_at": "2026-11-10T02:28:16Z",
       "window": {
-        "samples_total": 172,
+        "samples_total": 173,
         "live_samples": 10,
         "streams_observed": 5,
         "average_viewers_sampled": 1.9,
@@ -8825,6 +8861,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-10T02:28:16Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -9453,16 +9498,16 @@
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
       "live": true,
-      "current_viewers": 22,
+      "current_viewers": 13,
       "current_game": "Just Chatting",
       "current_title": "es mi primer dia",
       "stream_started_at": "2026-11-09T21:54:08Z",
-      "updated_at": "2026-11-10T01:30:15Z",
+      "updated_at": "2026-11-10T02:28:16Z",
       "window": {
-        "samples_total": 172,
-        "live_samples": 27,
+        "samples_total": 173,
+        "live_samples": 28,
         "streams_observed": 7,
-        "average_viewers_sampled": 7.0,
+        "average_viewers_sampled": 7.2,
         "peak_viewers_sampled": 45,
         "observed_live_hours": 0.0,
         "estimated_hours_watched": 0.0,
@@ -9476,9 +9521,9 @@
           },
           {
             "name": "Just Chatting",
-            "live_samples": 9,
+            "live_samples": 10,
             "streams_observed": 5,
-            "average_viewers_sampled": 4.6,
+            "average_viewers_sampled": 5.4,
             "peak_viewers_sampled": 22
           },
           {
@@ -9534,9 +9579,9 @@
           },
           {
             "date": "2026-11-10",
-            "live_samples": 2,
+            "live_samples": 3,
             "streams_observed": 1,
-            "average_viewers_sampled": 20.0,
+            "average_viewers_sampled": 17.7,
             "peak_viewers_sampled": 22
           }
         ],
@@ -11090,6 +11135,15 @@
           "title": "es mi primer dia",
           "stream_id": "319476744053",
           "started_at": "2026-11-09T21:54:08Z"
+        },
+        {
+          "sampled_at": "2026-11-10T02:28:16Z",
+          "is_live": true,
+          "viewer_count": 13,
+          "game_name": "Just Chatting",
+          "title": "es mi primer dia",
+          "stream_id": "319476744053",
+          "started_at": "2026-11-09T21:54:08Z"
         }
       ]
     },
@@ -11106,9 +11160,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-10T01:30:15Z",
+      "updated_at": "2026-11-10T02:28:16Z",
       "window": {
-        "samples_total": 172,
+        "samples_total": 173,
         "live_samples": 8,
         "streams_observed": 4,
         "average_viewers_sampled": 18.0,
@@ -12726,6 +12780,15 @@
         },
         {
           "sampled_at": "2026-11-10T01:30:15Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-10T02:28:16Z",
           "is_live": false,
           "viewer_count": null,
           "game_name": null,
