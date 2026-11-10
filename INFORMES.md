@@ -2167,3 +2167,16 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 - **Conservación:** se mantienen todas las actualizaciones posteriores ya presentes en main fuera de esos bloques. No se modifica el Capítulo 05 — Arsenal, ni el Capítulo 06, ni assets o datos estadísticos.
 - **Criterios de datos:** se conservan las etiquetas de actividad observada y la limitación de cobertura. Streams Charts queda como fuente de referencia futura, sin simular una integración ni sumar métricas de plataformas distintas.
 - **Validación previa al push:** verificación de coincidencia exacta de los tres bloques de origen con main, comprobación de que `app.js` no tuvo cambios concurrentes y comprobación de que el bloque CSS no existía previamente. Las comprobaciones automáticas y revisión visual quedan pendientes en la rama reconstruida.
+
+
+## 2026-11-10 — Reanudación y auditoría inicial del Capítulo 05 — Arsenal
+
+- **Autorización y coordinación:** el usuario autorizó retomar Arsenal porque el compañero no está trabajando actualmente en ese capítulo. Se trabaja en una rama aislada y se limita el cambio al Capítulo 05; no se presume ni se modifica trabajo de otros capítulos.
+- **Punto de partida:** `main` en `e8877c9df9fcfd3999ee25e0995d3b8fe1d535e1`, posterior a la integración del PR #6 (`e8877c9`). No había PRs abiertos en el repositorio al iniciar esta revisión.
+- **Auditoría estática de contenido:** se verificaron 10 fichas de juegos con 10 URLs de portada distintas; 19 filas de Keymailer con 9 acciones marcadas, 2 no marcadas y 8 no verificables en la captura; y 12 campañas de Lurkit con distribución 8 completadas, 2 fallidas y 2 pendientes.
+- **Evidencia:** `KeyMailer.jpg` confirma visualmente los checks de las últimas 11 filas (9 marcadas y 2 no marcadas). Se conservan las primeras 8 como no verificables; no se inventan sus estados. La documentación del proyecto mantiene el corte de Lurkit y las etiquetas Partner Creator de Cinderia y Enshrouded con sus límites de atribución.
+- **Validación estructural:** no se detectaron IDs HTML duplicados; las reglas responsive del panel Arsenal y el desplazamiento horizontal de la tabla están presentes; los enlaces externos con nueva pestaña incluyen `rel="noopener noreferrer"`.
+- **Corrección aplicada:** las ocho campañas Lurkit completadas tenían expresiones relativas de antigüedad (por ejemplo, “hace 4 horas” o “hace 14 días”) que podían leerse como actuales pese a pertenecer a una captura fechada. Se sustituyeron por “estado visible al corte 07/11/2026”, manteniendo el dato histórico sin simular actualización en tiempo real.
+- **Alcance de archivos:** solo `index.html` (etiquetas históricas dentro de Arsenal) y `INFORMES.md` (esta bitácora). Se conserva el catálogo de diez juegos y no se modifican imágenes ni datos de otros capítulos.
+- **Pendiente:** revisión visual y funcional en GitHub Pages en escritorio y móvil. La auditoría estática no se presenta como prueba visual de navegador. Para actualizar estados y vencimientos posteriores al 07/11 se necesitará evidencia nueva de las plataformas.
+- **Estado:** primera corrección documental preparada para revisión en PR independiente; no se integra directamente en `main` hasta validar la vista previa.
