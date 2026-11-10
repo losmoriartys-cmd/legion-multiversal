@@ -2145,3 +2145,15 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 - **Alcance:** solo se intercambiaron las dos asignaciones visuales indicadas; no se alteraron las métricas, los participantes ni el resto del capítulo.
 - **Commit:** `96ea4b41b3d9d763a95cec35ee327c609c47813d`.
 - **Pendiente:** comprobar el render publicado en GitHub Pages; el commit en `main` no certifica por sí solo que el despliegue haya finalizado.
+
+
+## 2026-11-10 — Continuación PR #5: actualización de corrección de encuadre sobre main
+
+- **Motivo:** PR #5 quedó desactualizado respecto de `main` (139 commits por detrás) y GitHub lo marcó como `dirty`; no era seguro fusionar la rama antigua.
+- **Acción:** se recrea la propuesta sobre el `main` vigente en una rama limpia, conservando el alcance original de dos archivos: estilos de encuadre y este informe.
+- **Corrección conservada:** portada vertical «Orígenes #0001» completa, centrada y sin recorte tanto en el avance institucional como en el marco del Capítulo 01. No se reemplaza el recurso ni se modifica el texto narrativo.
+- **Evidencia:** `error2.jpg` respalda el recorte de la portada vertical en el avance institucional. `error111.jpg` corresponde a BarFender/Capítulo 12 y queda fuera de alcance.
+- **Coordinación:** no se modifica Capítulo 05 — Arsenal ni archivos del colaborador.
+- **Validación:** pendiente de comprobaciones automáticas y revisión visual en escritorio/móvil sobre la versión actual de `main`.
+- **Sustitución de PR:** esta rama actualizada reemplaza técnicamente la propuesta antigua #5, que queda obsoleta por divergencia histórica. No se integra automáticamente; requiere revisión y validación.
+- **Despliegue:** pendiente de integración y publicación.
