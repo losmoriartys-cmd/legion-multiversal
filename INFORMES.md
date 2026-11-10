@@ -2189,6 +2189,6 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 - **Implementado en la propuesta:** se simplifica la apertura, se presenta la selección de diez juegos como contenido principal y se reubican la guía de Keymailer/Lurkit y los registros históricos dentro de un desplegable complementario cerrado por defecto. No se eliminan datos, campañas, enlaces ni estados documentales.
 - **Criterio editorial:** ARSENAL se lee primero como repertorio de juego y comunidad; la documentación de accesos queda disponible para consulta secundaria, sin competir con las fichas de juegos.
 - **Alcance:** index.html, styles.css e INFORMES.md; no se modifican assets, métricas ni otros capítulos.
-- **Validaciones:** estructura y enlaces preservados por transformación de bloques; pendientes validaciones automatizadas y revisión visual en escritorio/móvil antes de integrar.
+- **Validaciones estáticas posteriores:** comprobadas 10 fichas y 10 portadas distintas; selección de juegos antes del archivo; desplegable cerrado por defecto; conservación de la sección de plataformas y registros; estilos nuevos presentes y ausencia de IDs duplicados. El PR está en borrador y no generó workflows de CI; revisión visual y funcional en escritorio/móvil pendiente.
 - **Coordinación:** propuesta apilada sobre work/chapter-05-arsenal-review-2026-11-10; requiere integrar PR #8 antes de fusionar esta intervención.
 - **Despliegue:** no publicado; sujeto a revisión e integración.
