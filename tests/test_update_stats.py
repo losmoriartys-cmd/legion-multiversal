@@ -19,35 +19,20 @@ class SummarizeSamplingTests(unittest.TestCase):
         }
 
     def test_estimates_same_stream_using_observed_gap(self):
-        snapshots = [
-            self.sample(30, viewers=8),
-            self.sample(0, viewers=12),
-        ]
-
+        snapshots = [self.sample(30, viewers=8), self.sample(0, viewers=12)]
         result = summarize(snapshots, self.now)
-
         self.assertEqual(result["observed_live_hours"], 0.5)
-        self.assertEqual(result["estimated_hours_watched"], 0.1)
+        self.assertEqual(result["estimated_hours_watched"], 6.0)
 
     def test_caps_each_estimated_interval_at_55_minutes(self):
-        snapshots = [
-            self.sample(70, viewers=8),
-            self.sample(0, viewers=12),
-        ]
-
+        snapshots = [self.sample(70, viewers=8), self.sample(0, viewers=12)]
         result = summarize(snapshots, self.now)
-
         self.assertEqual(result["observed_live_hours"], round(55 / 60, 2))
         self.assertEqual(result["estimated_hours_watched"], 11.0)
 
     def test_ignores_gaps_longer_than_110_minutes(self):
-        snapshots = [
-            self.sample(111, viewers=8),
-            self.sample(0, viewers=12),
-        ]
-
+        snapshots = [self.sample(111, viewers=8), self.sample(0, viewers=12)]
         result = summarize(snapshots, self.now)
-
         self.assertEqual(result["observed_live_hours"], 0)
         self.assertEqual(result["estimated_hours_watched"], 0)
 
@@ -56,9 +41,7 @@ class SummarizeSamplingTests(unittest.TestCase):
             self.sample(30, stream_id="stream-old", viewers=8),
             self.sample(0, stream_id="stream-new", viewers=12),
         ]
-
         result = summarize(snapshots, self.now)
-
         self.assertEqual(result["observed_live_hours"], 0)
         self.assertEqual(result["estimated_hours_watched"], 0)
 
@@ -68,9 +51,7 @@ class SummarizeSamplingTests(unittest.TestCase):
             self.sample(30, live=False),
             self.sample(0, viewers=12),
         ]
-
         result = summarize(snapshots, self.now)
-
         self.assertEqual(result["observed_live_hours"], 0)
         self.assertEqual(result["estimated_hours_watched"], 0)
 
@@ -82,9 +63,7 @@ class SummarizeSamplingTests(unittest.TestCase):
                 "sampled_at": (self.now - timedelta(days=31)).isoformat().replace("+00:00", "Z"),
             },
         ]
-
         result = summarize(snapshots, self.now)
-
         self.assertEqual(result["samples_total"], 1)
         self.assertEqual(result["live_samples"], 1)
         self.assertEqual(result["observed_live_hours"], 0)
