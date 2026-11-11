@@ -1,25 +1,22 @@
-# Informes de intervenciones — Los Moriartys
+## 2026-11-11 — Roster 02: filtros por especialidad y navegación entre expedientes
 
-Esta es la bitácora vigente de trabajo compartido del repositorio. Cada colaborador debe leer la entrada más reciente antes de intervenir y agregar un informe al finalizar una tarea relevante.
-
-Los registros anteriores a la adopción de este archivo se conservan en [`BITACORA.md`](./BITACORA.md), que queda como archivo histórico. Para evitar duplicaciones, los informes nuevos se agregan únicamente aquí.
-
-## Plantilla para nuevas intervenciones
-
-### AAAA-MM-DD — Título de la intervención
-
-- **Responsable:**
-- **Objetivo:**
-- **Archivos modificados:**
+- **Responsable:** colaboración ChatGPT + equipo del proyecto.
+- **Objetivo:** completar la exploración del roster sin duplicar las funciones de búsqueda, filtros generales y expedientes individuales que ya existían.
+- **Base:** rama de Inicio y navegación global `work/home-navigation-refresh-2026-11-11`; no se modifica `main`.
+- **Archivos modificados:** `app.js`, `index.html`, `styles.css`, `INFORMES.md`.
 - **Implementado:**
-- **Validaciones y resultados:**
-- **Pendientes / riesgos:**
-- **Commit:** hash y enlace.
-- **Despliegue:** pendiente / exitoso / fallido; incluir enlace o ID verificable del workflow.
-
-> Diferenciar siempre lo acordado, lo implementado y lo que efectivamente se verificó. No marcar un despliegue como exitoso sin comprobarlo.
+  - Filtro por especialidad construido dinámicamente a partir de las áreas presentes en `roster-data.json`; no se mantienen categorías duplicadas a mano.
+  - Resumen visual de filtros activos con controles individuales para quitar cada criterio y acción para limpiar todos.
+  - Recuento de resultados que informa cuántos integrantes coinciden sobre el total del archivo.
+  - Navegación anterior/siguiente dentro del conjunto filtrado y ordenado, con posición actual y límites deshabilitados.
+  - Se conserva el retorno al roster con los filtros aplicados y la restauración del foco al control que abrió el expediente.
+- **Validaciones estáticas:** JavaScript compila sintácticamente; 107 IDs HTML sin duplicados; llaves CSS balanceadas; 8 integrantes presentes; opciones de especialidad generadas desde el JSON canónico; el blob de `roster-data.json` no se modificó.
+- **Pendientes / riesgos:** checks de GitHub Actions y Cloudflare Pages en ejecución al registrar esta entrada. Revisión visual y funcional manual de escritorio/móvil pendiente; no se declara realizada.
+- **Commit de código:** [082793f4](https://github.com/losmoriartys-cmd/legion-multiversal/commit/082793f4bcfd89c636c767f33e87dec2db72b4ab).
+- **Despliegue:** preview pendiente de confirmar mediante los checks de la PR.
 
 ---
+
 
 ## 2026-11-11 — Integración de producto entre Roster 02 y Bitácora (validación de preview)
 
