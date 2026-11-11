@@ -2290,3 +2290,16 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 - **Validación pendiente:** revisar estructura, IDs, sintaxis, responsive, apertura del desplegable y enlaces; después ejecutar GitHub Actions y Cloudflare Pages. No se declara validación visual hasta inspeccionar la vista previa en escritorio y móvil.
 - **Coordinación:** reconstrucción directa desde main porque las ramas originales #8/#9 estaban 48 commits detrás y divergidas. Los PR originales no se fusionan para evitar conflictos y duplicación de historial.
 - **Estado:** rama de integración preparada para validación; main permanece sin cambios en esta etapa.
+
+
+## 2026-11-11 — Arsenal: navegación, plataformas y tablas simplificadas
+
+- Juegos cooperativos: se conservan las diez fichas y se mantienen como primera sección del capítulo.
+- Plataformas: se hace visible un panel independiente para Keymailer y Lurkit; la guía operativa queda en un desplegable secundario para reducir el texto inicial.
+- Lurkit: la vista principal muestra exclusivamente las ocho campañas completadas al corte documental 07/11/2026. Se retiran de la presentación los grupos fallidos y pendientes.
+- Keymailer: la tabla se simplifica a juego/campaña y fecha límite. Se eliminan las columnas condición, interés editorial e indicador de acción.
+- Indicadores: el resumen presenta registros Keymailer, campañas completadas Lurkit y etiquetas Partner Creator.
+- Otras secciones: el acceso secundario pasa de un desplegable a una navegación visible con capítulos numerados.
+- Navegación: se añade al pie de cada capítulo una botonera contextual con anterior, siguiente y volver al índice.
+- Conservación: no se cambian las diez portadas ni sus enlaces. Los cambios quedan en la rama del PR #15; main permanece sin cambios.
+- Validación pendiente: revisar estructura, JavaScript, CSS, responsive, conteos y checks de GitHub/Cloudflare; inspeccionar la vista previa en escritorio y móvil.
