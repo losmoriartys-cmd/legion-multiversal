@@ -20,23 +20,23 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 > Diferenciar siempre lo acordado, lo implementado y lo que efectivamente se verificó. No marcar un despliegue como exitoso sin comprobarlo.
 
 ---
-## 2026-11-11 — Evolución visual transversal del Roster 02 y Bitácora interactiva
+
+## 2026-11-11 — Integración de producto entre Roster 02 y Bitácora
 
 - **Responsable:** colaboración ChatGPT + equipo del proyecto.
-- **Base:** rama independiente desde `main`; no se modifica la rama publicada.
-- **Objetivo:** iniciar la implementación visual solicitada para cartas y Bitácora, reutilizando los activos y datos existentes.
-- **Archivos modificados:** `styles.css`, `index.html`, `bitacora-preview.html`, `INFORMES.md`.
-- **Cartas:** refinamiento transversal para las ocho cartas existentes: entrada escalonada, deriva holográfica sutil y barrido de luz al hover/foco. Se conserva el diseño 3D, reversos, imágenes, datos y comportamiento preexistentes; se respeta `prefers-reduced-motion`.
-- **Bitácora:** se reemplaza la maqueta de dos páginas por un libro editorial interactivo con portada, índice y cinco capítulos enlazados al sitio principal (origen, roster, impacto, colaboraciones y expediente BarFender). Incluye navegación anterior/siguiente, teclado con flechas, diseño responsive y sonido de página opcional activado por el usuario; no hay reproducción automática ni archivos de audio externos.
-- **Integración:** se agrega un acceso visible a la Bitácora desde el Capítulo 12. Los enlaces del libro llevan a los capítulos existentes, sin duplicar expedientes ni alterar el contenido de campañas.
-- **Rigor de datos:** se mantienen los datos actuales y sus fuentes. No se agregan métricas, fechas ni hitos no respaldados.
-- **Validaciones:** cambios preparados en rama para revisión. Pendiente ejecutar validadores del repositorio y revisar visualmente preview en escritorio/móvil; el sonido requiere prueba manual en navegador.
-- **Alcance preservado:** no se toca Arsenal ni PR #8/#9; no se reemplazan ni duplican fotografías; no se modifica `main`.
-- **Pendientes / riesgos:** confirmar el comportamiento de los selectores de carta con el DOM real del Roster, la navegación del libro en móvil y el enlace de retorno.
-- **Despliegue:** pendiente de checks de la PR.
- 
----
+- **Objetivo:** hacer que Roster y Bitácora funcionen como dos vistas conectadas de un mismo archivo editorial, sin duplicar perfiles ni campañas.
+- **Base:** rama de trabajo independiente; se incorporan los cambios vigentes de `main` antes de extender la integración.
+- **Archivos modificados:** `index.html`, `app.js`, `styles.css`, `bitacora-preview.html`, `INFORMES.md`.
+- **Implementado:** navegación cruzada desde Roster a Bitácora central y al archivo de colaboraciones; desde cada expediente individual se puede saltar al Archivo Central; Capítulo 12 permite regresar a la colección del Roster.
+- **Fuente compartida:** la Bitácora genera su directorio de cartas desde `roster-data.json` en tiempo de ejecución, con enlaces a los expedientes individuales por hash. No se mantiene un segundo catálogo manual.
+- **Identidad visual:** navegación compartida, lenguaje cromático y editorial, tarjetas compactas de expediente y jerarquía tipográfica consistente. Se conservan los diseños de carta premium ya integrados por PR #12.
+- **Animación:** entrada escalonada y movimiento foil sutil sobre las cartas existentes, respetando `prefers-reduced-motion`; se evita sobrescribir el pseudo-elemento de marco de las cartas.
+- **Recursos:** se reutilizan los retratos ya asignados al Roster; no se incorporan ni reasignan fotografías de campañas.
+- **Validaciones:** pendiente ejecutar validadores, probar rutas hash desde la Bitácora y revisar escritorio/móvil con el despliegue de preview.
+- **Integridad:** no se modifica `main`, Arsenal, ni los PR #8/#9; no se alteran métricas ni datos de los integrantes.
+- **Despliegue:** pendiente de checks verificables de la PR.
 
+---
 
 ## 2026-11-06 — Corregir gestión de foco en expedientes del Roster
 
