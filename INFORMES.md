@@ -11,9 +11,9 @@
   - Nuevo centro de novedades del archivo, alimentado por `news-data.json`, con fecha, categoría, resumen y enlace a la fuente.
   - Se publican dos entradas respaldadas: integración Roster/Bitácora (PR #14 ya integrada) y cobertura de siete canales en la captura del 11/11/2026.
 - **Validaciones estáticas:** JavaScript compila; HTML con 111 IDs sin duplicados; CSS con llaves balanceadas; dos entradas de novedades con fecha válida; el roster canónico conserva sus ocho integrantes.
-- **Pendientes / riesgos:** checks de GitHub Actions y Cloudflare Pages pendientes para el head final. La revisión visual manual en escritorio/móvil no se declara realizada.
+- **Validaciones:** el primer chequeo de enlaces detectó que el validador del sitio exige URL absoluta para la fuente del JSON. Se sustituyó la ruta relativa por el enlace directo al archivo en GitHub; los checks se vuelven a ejecutar sobre el head corregido. Revisión visual manual en escritorio/móvil pendiente.
 - **Commit de código:** [ce43ec65](https://github.com/losmoriartys-cmd/legion-multiversal/commit/ce43ec65b21c88b4fac2159e022f63b389888a51).
-- **Despliegue:** pendiente de los checks de la PR.
+- **Despliegue:** Cloudflare Pages publicó el primer preview de esta etapa; se espera la nueva ejecución después de corregir la URL de fuente.
 
 ---
 
