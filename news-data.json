@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-11-11",
+  "description": "Novedades verificadas del proyecto Legión Multiversal. Cada entrada debe tener fecha y una fuente consultable.",
+  "items": [
+    {
+      "date": "2026-11-11",
+      "category": "ARCHIVO",
+      "title": "Roster 02 y Bitácora conectados",
+      "summary": "La Bitácora genera su directorio desde roster-data.json y enlaza los ocho expedientes individuales. Así se evita mantener dos listados manuales que puedan desincronizarse.",
+      "source_label": "Ver implementación",
+      "source_url": "https://github.com/losmoriartys-cmd/legion-multiversal/pull/14"
+    },
+    {
+      "date": "2026-11-11",
+      "category": "DATOS",
+      "title": "Siete canales en seguimiento",
+      "summary": "La captura registrada el 11/11/2026 resolvió los siete canales esperados del roster activo. Las cifras del informe describen actividad observada por muestreo y no sustituyen las analíticas oficiales de cada plataforma.",
+      "source_label": "Consultar registro de actividad",
+      "source_url": "./data.json"
+    }
+  ]
+}
