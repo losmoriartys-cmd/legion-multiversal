@@ -543,7 +543,6 @@ function bindRosterControls() {
         renderRoster();
         document.getElementById('roster-search')?.focus();
     });
-    if (!filteredEntries.length) container.innerHTML = '<p class="roster-empty-state">NO HAY EXPEDIENTES QUE COINCIDAN. Probá con otro nombre o limpiá los filtros.</p>';
 }
 function setRosterCardFace(card, flipped) {
     const front = card.querySelector('.roster-card-front');
@@ -733,6 +732,7 @@ function renderRoster() {
         section.appendChild(grid);
         container.appendChild(section);
     });
+    if (!filteredEntries.length) container.innerHTML = '<p class="roster-empty-state">NO HAY EXPEDIENTES QUE COINCIDAN. Probá con otro nombre o limpiá los filtros.</p>';
 }
 function renderCommercialQuickView(hero) {
     const safe = escapeStatsHtml;
