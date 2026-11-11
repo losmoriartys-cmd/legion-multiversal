@@ -2,6 +2,8 @@ name: Actualizar estadísticas multiplataforma
 
 on:
   push:
+    branches:
+      - main
     paths:
       - 'update_stats.py'
       - 'update_platform_stats.py'
