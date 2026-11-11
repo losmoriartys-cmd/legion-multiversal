@@ -23,7 +23,7 @@
     <meta name="twitter:image" content="https://losmoriartys-cmd.github.io/legion-multiversal/og-legion-multiversal.jpg">
     <meta name="twitter:image:alt" content="Portada ilustrada de Legión Multiversal con su equipo de héroes y el lema Diferentes mundos. Una misma Legión.">
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Permanent+Marker&family=Roboto+Condensed:wght@400;500;600;700;800;900&family=Special+Elite&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="./styles.css?v=20261111-roster-visual-2">
     <link rel="stylesheet" href="./chapter-8.css">
 </head>
 <body>
@@ -267,7 +267,16 @@
             <h2 class="comic-title">LEGIÓN MULTIVERSAL — NUESTRO ROSTER</h2>
             <div class="institute-banner"><div class="institute-stamp" aria-label="Emblema oficial de la Legión Multiversal"><img src="legion_logo_final_hybrid.png" alt="Emblema de Legión Multiversal"><span>ARCHIVO DE LA LEGIÓN</span></div><div class="institute-banner-copy"><h3>UN LUGAR PARA CADA TALENTO EXTRAORDINARIO</h3><p>Una comunidad de creadores con identidades y especialidades diferentes. Cada integrante tiene un expediente propio y un lugar dentro de este universo compartido.</p></div></div>
             <div id="roster-home">
-              <p class="roster-intro">Seleccioná un área para explorar sus integrantes o elegí directamente un retrato para abrir su expediente individual.</p>
+              <p class="roster-intro">Explorá las cartas de la Legión, filtrá por especialidad o plataforma y abrí cualquier expediente directamente. Cada creador conserva su identidad y su espacio propio.</p>
+              <div class="roster-tools" role="search" aria-label="Buscar y filtrar integrantes">
+                <label class="roster-search-field" for="roster-search"><span>BUSCAR EN EL ROSTER</span><input id="roster-search" type="search" placeholder="Nombre, alias o especialidad…" autocomplete="off"></label>
+                <label for="roster-role-filter"><span>FUNCIÓN</span><select id="roster-role-filter"><option value="all">Todas las funciones</option><option value="director">Dirección</option><option value="teacher">Profesores</option><option value="student">Estudiante</option><option value="collaborator">Colaboradores</option></select></label>
+                <label for="roster-platform-filter"><span>PLATAFORMA</span><select id="roster-platform-filter"><option value="all">Todas las plataformas</option><option value="twitch">Twitch</option><option value="youtube">YouTube</option><option value="instagram">Instagram</option></select></label>
+                <label for="roster-format-filter"><span>FORMATO</span><select id="roster-format-filter"><option value="all">Todos los formatos</option><option value="live_streamer">Creador en directo</option><option value="video_creator">Creador de video</option></select></label>
+                <label for="roster-sort"><span>ORDENAR</span><select id="roster-sort"><option value="featured">Orden de la Legión</option><option value="name">Nombre A–Z</option><option value="number">Número de expediente</option></select></label>
+                <button id="roster-reset" type="button" class="roster-reset-button">LIMPIAR FILTROS</button>
+                <p id="roster-results" class="roster-results" aria-live="polite"></p>
+              </div>
               <nav class="institute-counts roster-jump-nav" id="roster-counts" aria-label="Accesos directos a las áreas del roster"></nav>
               <div id="roster-container"><!-- Retratos del roster --></div>
             </div>
@@ -947,7 +956,7 @@
         </div>
     </div>
 
-    <script src="./app.js?v=20261106-stats-1"></script>
+    <script src="./app.js?v=20261111-roster-visual-2"></script>
     <script src="./navigation-fix.js" defer></script>
 </body>
 </html>

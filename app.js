@@ -508,10 +508,62 @@ async function loadPartnerMetrics(){
  }catch(e){body.innerHTML='<tr><td colspan="7">Métricas temporalmente no disponibles.</td></tr>';}
 }
 
+function getRosterFilteredEntries() {
+    const search = (document.getElementById('roster-search')?.value || '').trim().toLocaleLowerCase('es');
+    const role = document.getElementById('roster-role-filter')?.value || 'all';
+    const platform = document.getElementById('roster-platform-filter')?.value || 'all';
+    const format = document.getElementById('roster-format-filter')?.value || 'all';
+    const sort = document.getElementById('roster-sort')?.value || 'featured';
+    const entries = heroesData.map((hero, index) => ({ hero, index })).filter(({hero}) => {
+        const haystack = [hero.name, hero.codename, hero.characterRole, hero.rank, ...(hero.areas || []), ...(hero.platforms || [])].join(' ').toLocaleLowerCase('es');
+        return (!search || haystack.includes(search))
+            && (role === 'all' || hero.role === role)
+            && (platform === 'all' || (hero.platforms || []).includes(platform) || Boolean(hero[platform]))
+            && (format === 'all' || hero.creator_type === format);
+    });
+    if (sort === 'name') entries.sort((a,b) => a.hero.name.localeCompare(b.hero.name, 'es'));
+    if (sort === 'number') entries.sort((a,b) => String(a.hero.cardNumber || '999999').localeCompare(String(b.hero.cardNumber || '999999'), 'es', {numeric:true}));
+    return entries;
+}
+function bindRosterControls() {
+    const root = document.getElementById('roster-home');
+    if (!root || root.dataset.controlsBound === 'true') return;
+    root.dataset.controlsBound = 'true';
+    ['roster-search','roster-role-filter','roster-platform-filter','roster-format-filter','roster-sort'].forEach(id => {
+        const control = document.getElementById(id);
+        if (control) control.addEventListener(control.tagName === 'INPUT' ? 'input' : 'change', renderRoster);
+    });
+    document.getElementById('roster-reset')?.addEventListener('click', () => {
+        ['roster-search','roster-role-filter','roster-platform-filter','roster-format-filter'].forEach(id => {
+            const control = document.getElementById(id);
+            if (control) control.value = id === 'roster-search' ? '' : 'all';
+        });
+        const sort = document.getElementById('roster-sort');
+        if (sort) sort.value = 'featured';
+        renderRoster();
+        document.getElementById('roster-search')?.focus();
+    });
+}
+function setRosterCardFace(card, flipped) {
+    const front = card.querySelector('.roster-card-front');
+    const back = card.querySelector('.roster-card-back');
+    if (!front || !back) return;
+    front.inert = Boolean(flipped);
+    back.inert = !flipped;
+    front.toggleAttribute('inert', Boolean(flipped));
+    back.toggleAttribute('inert', !flipped);
+    front.setAttribute('aria-hidden', String(Boolean(flipped)));
+    back.setAttribute('aria-hidden', String(!flipped));
+    card.classList.toggle('is-flipped', Boolean(flipped));
+}
 function renderRoster() {
     const container = document.getElementById('roster-container');
     if (!container) return;
     container.innerHTML = '';
+    bindRosterControls();
+    const filteredEntries = getRosterFilteredEntries();
+    const results = document.getElementById('roster-results');
+    if (results) results.textContent = filteredEntries.length + (filteredEntries.length === 1 ? ' integrante encontrado' : ' integrantes encontrados');
     const groups = [
         { key: 'director', title: 'DIRECCIÓN', desc: 'Quienes impulsan la visión compartida y coordinan el rumbo de la Legión.' },
         { key: 'teacher', title: 'PROFESORES', desc: 'Integrantes que aportan experiencia, orientación y distintas formas de acompañar al equipo.' },
@@ -520,8 +572,8 @@ function renderRoster() {
     ];
     const counts = document.getElementById('roster-counts');
     if (counts) {
-        counts.innerHTML = groups.map(group => {
-            const total = heroesData.filter(hero => hero.role === group.key).length;
+        counts.innerHTML = groups.filter(group => filteredEntries.some(({hero}) => hero.role === group.key)).map(group => {
+            const total = filteredEntries.filter(({hero}) => hero.role === group.key).length;
             const label = group.title.replace(' DEL INSTITUTO','');
             return '<a class="roster-jump-link ' + group.key + '" href="#roster-group-' + group.key + '" aria-label="Ir a ' + label + ', ' + total + ' integrantes"><strong>' + String(total).padStart(2,'0') + '</strong><span>' + label + '</span><i aria-hidden="true">EXPLORAR ↓</i></a>';
         }).join('');
@@ -537,7 +589,7 @@ function renderRoster() {
         'HABITOS': { theme: 'sage', mark: 'H·007' }
     };
     groups.forEach(group => {
-        const members = heroesData.map((hero, index) => ({ hero, index })).filter(item => item.hero.role === group.key);
+        const members = filteredEntries.filter(item => item.hero.role === group.key);
         if (!members.length) return;
         const section = document.createElement('section');
         section.className = 'roster-section ' + (group.key === 'director' ? 'directors' : group.key === 'teacher' ? 'teachers' : group.key === 'student' ? 'students' : 'collaborators');
@@ -595,11 +647,14 @@ function renderRoster() {
             frontHeader.innerHTML = '<span>LEGIÓN MULTIVERSAL</span><b>EXPEDIENTE N.º ' + safeNumber + '</b>';
             const frontName = document.createElement('span');
             frontName.className = 'roster-card-front-name';
-            frontName.innerHTML = '<strong>' + safeName + '</strong><small>' + safeClassification + '</small>';
+            frontName.innerHTML = '<strong>' + safeName + '</strong><small>' + safeClassification + '</small><em>' + safeIdentity + '</em>';
+            const frontMeta = document.createElement('span');
+            frontMeta.className = 'roster-card-front-meta';
+            frontMeta.innerHTML = '<b>' + safeRole + '</b><small>' + safeType + ' · SERIE ' + escapeStatsHtml(hero.series || '01') + '</small>';
             const flipHint = document.createElement('span');
             flipHint.className = 'roster-card-flip-hint';
-            flipHint.textContent = 'GIRAR CARTA ↻';
-            front.append(portrait, foil, frontHeader, frontName, flipHint);
+            flipHint.textContent = 'GIRAR ↻';
+            front.append(portrait, foil, frontHeader, frontName, frontMeta, flipHint);
 
             const back = document.createElement('div');
             back.className = 'roster-card-face roster-card-back';
@@ -632,19 +687,30 @@ function renderRoster() {
             flipBack.className = 'roster-card-flip-back';
             flipBack.textContent = 'VER RETRATO ↺';
             flipBack.addEventListener('click', () => {
-                card.classList.remove('is-flipped');
+                setRosterCardFace(card, false);
                 front.focus();
             });
             backActions.append(openLog, flipBack);
             backContent.appendChild(backActions);
 
             front.addEventListener('click', () => {
-                card.classList.add('is-flipped');
-                window.setTimeout(() => flipBack.focus(), 420);
+                front.blur();
+                setRosterCardFace(card, true);
+                window.setTimeout(() => {
+                    if (card.classList.contains('is-flipped') && !flipBack.disabled) flipBack.focus();
+                }, 420);
             });
             inner.append(front, back);
             shell.appendChild(inner);
             card.appendChild(shell);
+            setRosterCardFace(card, false);
+            const directProfile = document.createElement('button');
+            directProfile.type = 'button';
+            directProfile.className = 'roster-card-direct-profile';
+            directProfile.textContent = 'ABRIR EXPEDIENTE ↗';
+            directProfile.setAttribute('aria-label', 'Abrir directamente el expediente de ' + hero.name);
+            directProfile.addEventListener('click', () => openHeroProfile(index, directProfile));
+            card.appendChild(directProfile);
 
             card.addEventListener('pointermove', (event) => {
                 if (event.pointerType !== 'mouse' || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -670,6 +736,7 @@ function renderRoster() {
         section.appendChild(grid);
         container.appendChild(section);
     });
+    if (!filteredEntries.length) container.innerHTML = '<p class="roster-empty-state">NO HAY EXPEDIENTES QUE COINCIDAN. Probá con otro nombre o limpiá los filtros.</p>';
 }
 function renderCommercialQuickView(hero) {
     const safe = escapeStatsHtml;
@@ -779,6 +846,16 @@ function restoreHeroProfileFromHash() {
         openHeroProfile(index);
     }
 }
+document.addEventListener('keydown', function(event) {
+    if (event.key !== 'Escape') return;
+    const modal = document.getElementById('hero-modal');
+    if (modal?.classList.contains('active')) return;
+    const profilePage = document.getElementById('hero-profile-page');
+    if (profilePage && !profilePage.hidden) {
+        event.preventDefault();
+        closeHeroProfile();
+    }
+});
 function closeHeroProfile() {
     const home = document.getElementById('roster-home');
     const page = document.getElementById('hero-profile-page');
