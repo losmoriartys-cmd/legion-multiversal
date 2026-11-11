@@ -1,21 +1,22 @@
-## 2026-11-11 — Roster 02: filtros por especialidad y navegación entre expedientes
+## 2026-11-11 — Informe de impacto y centro de novedades verificadas
 
 - **Responsable:** colaboración ChatGPT + equipo del proyecto.
-- **Objetivo:** completar la exploración del roster sin duplicar las funciones de búsqueda, filtros generales y expedientes individuales que ya existían.
-- **Base:** rama de Inicio y navegación global `work/home-navigation-refresh-2026-11-11`; no se modifica `main`.
-- **Archivos modificados:** `app.js`, `index.html`, `styles.css`, `INFORMES.md`.
+- **Objetivo:** hacer más legible y auditable el tablero de actividad, corregir la descripción de la cadencia real del colector y ofrecer un espacio de novedades del propio proyecto.
+- **Base:** rama Roster 02 `work/roster-expedientes-enhancement-2026-11-11`; no se modifica `main`.
+- **Archivos modificados:** `app.js`, `index.html`, `styles.css`, nuevo `news-data.json`, `INFORMES.md`.
 - **Implementado:**
-  - Filtro por especialidad construido dinámicamente a partir de las áreas presentes en `roster-data.json`; no se mantienen categorías duplicadas a mano.
-  - Resumen visual de filtros activos con controles individuales para quitar cada criterio y acción para limpiar todos.
-  - Recuento de resultados que informa cuántos integrantes coinciden sobre el total del archivo.
-  - Navegación anterior/siguiente dentro del conjunto filtrado y ordenado, con posición actual y límites deshabilitados.
-  - Se conserva el retorno al roster con los filtros aplicados y la restauración del foco al control que abrió el expediente.
-- **Validaciones estáticas:** JavaScript compila sintácticamente; 107 IDs HTML sin duplicados; llaves CSS balanceadas; 8 integrantes presentes; opciones de especialidad generadas desde el JSON canónico; el blob de `roster-data.json` no se modificó.
-- **Pendientes / riesgos:** checks de GitHub Actions y Cloudflare Pages en ejecución al registrar esta entrada. Revisión visual y funcional manual de escritorio/móvil pendiente; no se declara realizada.
-- **Commit de código:** [082793f4](https://github.com/losmoriartys-cmd/legion-multiversal/commit/082793f4bcfd89c636c767f33e87dec2db72b4ab).
-- **Despliegue:** preview pendiente de confirmar mediante los checks de la PR.
+  - La cadencia y ventana metodológica se presentan desde los valores reales de `data.json`, no desde un texto fijo.
+  - El tablero diferencia captura completa/parcial y datos con demora, e informa canales resueltos frente a esperados.
+  - Se agrega una quinta métrica de cobertura de canales y se adapta la grilla.
+  - Nuevo centro de novedades del archivo, alimentado por `news-data.json`, con fecha, categoría, resumen y enlace a la fuente.
+  - Se publican dos entradas respaldadas: integración Roster/Bitácora (PR #14 ya integrada) y cobertura de siete canales en la captura del 11/11/2026.
+- **Validaciones estáticas:** JavaScript compila; HTML con 111 IDs sin duplicados; CSS con llaves balanceadas; dos entradas de novedades con fecha válida; el roster canónico conserva sus ocho integrantes.
+- **Pendientes / riesgos:** checks de GitHub Actions y Cloudflare Pages pendientes para el head final. La revisión visual manual en escritorio/móvil no se declara realizada.
+- **Commit de código:** [ce43ec65](https://github.com/losmoriartys-cmd/legion-multiversal/commit/ce43ec65b21c88b4fac2159e022f63b389888a51).
+- **Despliegue:** pendiente de los checks de la PR.
 
 ---
+
 
 
 ## 2026-11-11 — Integración de producto entre Roster 02 y Bitácora (validación de preview)
