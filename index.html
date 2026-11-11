@@ -338,14 +338,18 @@
   <div id="stats-summary" class="impact-kpi-grid"><article class="impact-kpi"><strong>—</strong><span>CANALES EN SEGUIMIENTO</span></article></div>
   <div id="stats-highlights" class="impact-highlights" aria-live="polite"></div>
  </section>
+ <section class="legion-news-section" aria-labelledby="legion-news-title">
+  <div class="impact-section-heading"><span>02 / NOVEDADES DEL ARCHIVO</span><h3 id="legion-news-title">LO QUE SE MUEVE EN LA LEGIÓN</h3><p>Actualizaciones verificadas del proyecto y del trabajo compartido. Cada entrada conserva su fecha y una fuente para consultar el detalle.</p></div>
+  <div id="legion-news-feed" class="legion-news-feed" aria-live="polite"><p class="stats-note">Cargando novedades del archivo…</p></div>
+ </section>
  <section class="impact-story-grid">
   <article class="impact-story-card"><span class="impact-story-index">02 / EXPERIENCIAS</span><h3>NO SOLO CONTAMOS CANALES. DOCUMENTAMOS LO QUE HACEMOS JUNTOS.</h3><p>Las colaboraciones reúnen creadores y comunidades alrededor de una misma experiencia. Cada expediente conserva participantes, transmisiones, clips y métricas con su contexto.</p><button class="chapter-cta" type="button" onclick="switchChapter(12)">VER EXPEDIENTES DE COLABORACIÓN ↗</button></article>
   <article class="impact-story-card impact-story-accent"><span class="impact-story-index">03 / OPORTUNIDADES</span><h3>UN EQUIPO, DISTINTOS PERFILES Y FORMATOS.</h3><p>Una marca puede conocer el canal compartido, evaluar perfiles individuales o explorar una acción multicanal. La propuesta se define según el objetivo, la disponibilidad y los datos verificables.</p><button class="chapter-cta" type="button" onclick="switchChapter(8)">CONOCER NUESTRAS ALIANZAS ↗</button></article>
  </section>
  <details class="stats-methodology">
   <summary>Fuentes, metodología y alcance de los datos</summary>
-  <p>La actividad de Twitch se obtiene de Twitch Helix mediante <b>data.json</b>. El sistema consulta los canales de forma programada cada 15 minutos y conserva una ventana móvil máxima de 30 días. La cobertura efectiva depende de la antigüedad y continuidad de la recolección; no se interpreta la ventana configurada como 30 días completos de datos.</p>
-  <p>Los directos detectados y las muestras en directo se cuentan a partir de los registros por canal. Los espectadores actuales y el estado en directo corresponden a la última consulta disponible. Los promedios y picos son valores observados por muestreo y no sustituyen las analíticas oficiales de Twitch.</p>
+  <p id="stats-methodology-sampling">La actividad de Twitch se obtiene de Twitch Helix mediante <b>data.json</b>. El sistema consulta los canales de forma programada y conserva una ventana móvil máxima configurada. La cobertura efectiva depende de la antigüedad y continuidad de la recolección; no se interpreta la ventana configurada como un período completo de datos.</p>
+  <p id="stats-methodology-coverage">La cobertura de la última captura se informa según los canales esperados, resueltos y omitidos por el colector. Los directos detectados y las muestras en directo se cuentan a partir de los registros por canal.</p>
   <p>Las métricas de otras plataformas se mantienen separadas por creador y plataforma. No se suman seguidores, vistas ni audiencias de servicios distintos como si fueran una misma unidad. Streams Charts se incorpora como fuente de referencia para análisis del roster cuando existan datos verificables y comparables.</p>
  </details>
  <details class="stats-methodology">
