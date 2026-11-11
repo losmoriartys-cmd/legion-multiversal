@@ -2185,3 +2185,11 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 - **Corrección propuesta:** alinear la cadencia informada con la observada (55 minutos), evitar muestras duplicadas antes de 45 minutos y permitir estimaciones entre muestras consecutivas del mismo directo hasta 110 minutos, con un máximo estimado de 55 minutos por intervalo. Se aclara que GitHub Actions puede retrasar la programación.
 - **Alcance:** `update_stats.py`, `.github/workflows/actualizar-stats.yml` y este informe. El evento `push` del colector queda limitado a `main` para evitar ejecuciones desde ramas de PR que intenten rebasarse sobre `main`. No se modifican canales, datos históricos almacenados, capítulos ni el trabajo del colaborador en Arsenal (#8/#9).
 - **Validación:** pendiente de checks y revisión del PR. La corrección metodológica no garantiza que GitHub ejecute el cron cada 15 minutos; refleja la cadencia real observada.
+
+## 2026-11-11 — Restringir ejecución manual del colector de estadísticas
+
+- **Motivo:** la revisión del PR #11 detectó que limitar el evento `push` a `main` no impedía que `workflow_dispatch` iniciara el workflow desde una rama secundaria seleccionada manualmente. Como el job sincroniza con `main` y puede publicar en `main`, esa ruta conservaba un riesgo de incorporar cambios de una rama de trabajo.
+- **Corrección:** se añadió al job `actualizar` la condición `if: github.ref == 'refs/heads/main'`. El job completo solo se ejecuta cuando la referencia seleccionada es `main`, incluidos los disparos manuales.
+- **Alcance:** cambio limitado a `.github/workflows/actualizar-stats.yml` y este registro, dentro de la rama del PR #11. No se modificó `main`, no se ejecutó una recolección manual y no se tocó Arsenal (#8/#9).
+- **Validación:** pendiente revisar el nuevo commit y sus checks. El check de Cloudflare Pages valida el despliegue de la vista previa, no la lógica del colector Python; la condición del job requiere además inspección estática y, si corresponde, validación específica del workflow.
+- **Integración:** el PR #11 permanece sujeto a revisión y autorización expresa; no se fusiona automáticamente.
