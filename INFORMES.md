@@ -21,6 +21,26 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 
 ---
 
+## 2026-11-11 — Integración de producto entre Roster 02 y Bitácora (validación de preview)
+
+- **Responsable:** colaboración ChatGPT + equipo del proyecto.
+- **Objetivo:** hacer que Roster y Bitácora funcionen como dos vistas conectadas de un mismo archivo editorial, sin duplicar perfiles ni campañas.
+- **Base:** rama de trabajo independiente; se incorporan los cambios vigentes de `main` antes de extender la integración.
+- **Archivos modificados:** `index.html`, `app.js`, `styles.css`, `bitacora-preview.html`, `INFORMES.md`.
+- **Implementado:** navegación cruzada desde Roster a Bitácora central y al archivo de colaboraciones; desde cada expediente individual se puede saltar al Archivo Central; Capítulo 12 permite regresar a la colección del Roster.
+- **Fuente compartida:** la Bitácora genera su directorio de cartas desde `roster-data.json` en tiempo de ejecución, con enlaces a los expedientes individuales por hash. No se mantiene un segundo catálogo manual.
+- **Identidad visual:** navegación compartida, lenguaje cromático y editorial, tarjetas compactas de expediente y jerarquía tipográfica consistente. Se conservan los diseños de carta premium ya integrados por PR #12.
+- **Animación:** entrada escalonada y movimiento foil sutil sobre las cartas existentes, respetando `prefers-reduced-motion`; se evita sobrescribir el pseudo-elemento de marco de las cartas.
+- **Recursos:** se reutilizan los retratos ya asignados al Roster; no se incorporan ni reasignan fotografías de campañas.
+- **Validaciones:** JavaScript de `app.js` y Bitácora parsean correctamente; CSS con llaves balanceadas; directorio dinámico enlaza los ocho integrantes con los slugs utilizados por `restoreHeroProfileFromHash()`.
+- **Checks del head `fa581290ec21f40cc240dbd7a49107fc53b9e83f`:** GitHub Actions `validar` = success; Cloudflare Pages = success.
+- **Preview publicada:** `https://5ba031e0.legion-multiversal.pages.dev` (branch preview: `https://work-roster-02-bitacora-card.legion-multiversal.pages.dev`).
+- **Revisión visual:** pendiente de inspección en navegador de escritorio y móvil; el entorno de revisión disponible no pudo abrir la URL de Cloudflare, por lo que no se declara validación visual.
+- **Integridad:** no se modifica `main`, Arsenal, ni los PR #8/#9; no se alteran métricas ni datos de los integrantes.
+- **Despliegue:** pendiente de checks verificables de la PR.
+
+---
+
 ## 2026-11-06 — Corregir gestión de foco en expedientes del Roster
 
 - **Responsable:** colaboración ChatGPT + equipo del proyecto.
