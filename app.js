@@ -1433,6 +1433,41 @@ function openHeroModal(index) {
             source.start(now);source.stop(now+.25);
         }
 
+        function renderChapterPager(activeNumber) {
+            const panels = Array.from(document.querySelectorAll('.chapter-panel')).sort((a,b) =>
+                Number(a.id.replace('chapter-','')) - Number(b.id.replace('chapter-',''))
+            );
+            const index = panels.findIndex(panel => Number(panel.id.replace('chapter-','')) === Number(activeNumber));
+            const panel = panels[index];
+            if (!panel) return;
+            let pager = panel.querySelector('.chapter-pager');
+            if (!pager) {
+                pager = document.createElement('nav');
+                pager.className = 'chapter-pager';
+                pager.setAttribute('aria-label','Navegación entre capítulos');
+                panel.appendChild(pager);
+            }
+            const labelFor = target => {
+                const number = Number(target.id.replace('chapter-',''));
+                const nav = document.querySelector('.nav-btn[data-chapter="' + number + '"]');
+                return nav ? nav.textContent.replace(/^\\d+\\s*/, '').trim() : (number === 0 ? 'ÍNDICE' : 'CAPÍTULO ' + String(number).padStart(2,'0'));
+            };
+            const previous = panels[index-1], next = panels[index+1];
+            pager.innerHTML = '';
+            const prevButton = document.createElement('button');
+            prevButton.type = 'button'; prevButton.className = 'chapter-pager-button chapter-pager-prev';
+            prevButton.disabled = !previous; prevButton.textContent = previous ? '← ANTERIOR · ' + labelFor(previous) : '← INICIO';
+            prevButton.addEventListener('click', () => { if (previous) switchChapter(Number(previous.id.replace('chapter-',''))); });
+            const indexButton = document.createElement('button');
+            indexButton.type = 'button'; indexButton.className = 'chapter-pager-index'; indexButton.textContent = 'VOLVER AL ÍNDICE';
+            indexButton.addEventListener('click', () => switchChapter(0));
+            const nextButton = document.createElement('button');
+            nextButton.type = 'button'; nextButton.className = 'chapter-pager-button chapter-pager-next';
+            nextButton.disabled = !next; nextButton.textContent = next ? labelFor(next) + ' · SIGUIENTE →' : 'FIN DEL ARCHIVO →';
+            nextButton.addEventListener('click', () => { if (next) switchChapter(Number(next.id.replace('chapter-',''))); });
+            pager.append(prevButton,indexButton,nextButton);
+        }
+
         function switchChapter(chapterNum) {
             const panel=document.getElementById(`chapter-${chapterNum}`);
             if(!panel)return;
@@ -1456,6 +1491,7 @@ function openHeroModal(index) {
                 else b.removeAttribute('aria-current');
             });
             panel.classList.add('active');
+            renderChapterPager(chapterNum);
             playChapterCue();
             window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth' });
         }
