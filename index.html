@@ -29,6 +29,7 @@
 <body>
     <div id="chapter-transition" aria-hidden="true" data-title="LEGIÓN MULTIVERSAL"></div>
 
+    <a class="skip-to-content" href="#main-content">SALTAR AL CONTENIDO</a>
     <header>
         <div class="header-top">
             <div class="logo-container">
@@ -40,7 +41,8 @@
             </div>
             <button id="sound-toggle" class="sound-toggle" type="button" aria-pressed="false" onclick="toggleArcadeSound()" title="Activar o silenciar la identidad sonora">♫ SONIDO: OFF</button>
         </div>
-        <nav class="primary-navigation" aria-label="Navegación principal">
+        <div class="navigation-group-label">EXPLORAR EL ARCHIVO</div>
+        <nav class="primary-navigation" aria-label="Capítulos principales">
             <button class="nav-btn active" data-chapter="0" aria-current="page" onclick="switchChapter(0)">INICIO</button>
             <button class="nav-btn" data-chapter="1" onclick="switchChapter(1)">ORIGEN</button>
             <button class="nav-btn" data-chapter="2" onclick="switchChapter(2)">ROSTER</button>
@@ -50,17 +52,18 @@
             <button class="nav-btn" data-chapter="8" onclick="switchChapter(8)">ALIANZAS</button>
             <button class="nav-btn" data-chapter="12" onclick="switchChapter(12)">COLABORACIONES</button>
         </nav>
-        <section class="secondary-navigation" aria-label="Otras secciones">
-            <div class="secondary-navigation-heading"><span>OTRAS SECCIONES</span><small>EXPEDIENTES COMPLEMENTARIOS</small></div>
+        <nav class="secondary-navigation" aria-label="Más expedientes">
+            <div class="secondary-navigation-heading"><span>MÁS EXPEDIENTES</span><small>OTRAS RUTAS DEL UNIVERSO</small></div>
             <div class="secondary-navigation-links">
                 <button class="nav-btn nav-btn-secondary" data-chapter="10" onclick="switchChapter(10)"><span>10</span> EN VIVO</button>
                 <button class="nav-btn nav-btn-secondary" data-chapter="5" onclick="switchChapter(5)"><span>05</span> ARSENAL</button>
                 <button class="nav-btn nav-btn-secondary" data-chapter="6" onclick="switchChapter(6)"><span>06</span> RECLUTAMIENTO</button>
             </div>
-        </section>
+        </nav>
     </header>
 
-    <main>
+    <main id="main-content" tabindex="-1">
+    <p id="chapter-announcement" class="sr-only" aria-live="polite" aria-atomic="true"></p>
     <!-- Recorrido institucional: origen, personas, actividad, comunidad y experiencias. Arsenal y Reclutamiento quedan como recursos complementarios. -->
 <section id="chapter-0" class="chapter-panel executive-home active" aria-labelledby="home-title">
             <div class="executive-hero">
@@ -80,12 +83,44 @@
                 <span class="executive-hero-index" aria-hidden="true">LM / 001</span>
             </div>
 
-            <section class="executive-console" aria-labelledby="executive-console-title">
-                <div class="executive-section-heading"><span>01 / ACCESO RÁPIDO</span><h3 id="executive-console-title">CONSOLA DE EXPEDIENTES</h3><p>Entrá directamente a la información que necesitás.</p></div>
-                <div class="executive-console-grid">
-                    <button type="button" class="executive-console-link" onclick="switchChapter(2)"><span>01</span><strong>ROSTER</strong><small>Integrantes y perfiles</small><b aria-hidden="true">↗</b></button>
-                    <button type="button" class="executive-console-link" onclick="switchChapter(3)"><span>02</span><strong>ESTADÍSTICAS</strong><small>Actividad y rendimiento</small><b aria-hidden="true">↗</b></button>
-                    <button type="button" class="executive-console-link" onclick="switchChapter(8)"><span>03</span><strong>ALIANZAS</strong><small>Formatos de colaboración</small><b aria-hidden="true">↗</b></button>
+            <section class="executive-directory" aria-labelledby="executive-directory-title">
+                <div class="executive-section-heading">
+                    <span>01 / RECORRIDO GUIADO</span>
+                    <h3 id="executive-directory-title">EXPLORÁ EL UNIVERSO DE LA LEGIÓN</h3>
+                    <p>Tres caminos para conocer quiénes somos, descubrir lo que hacemos y encontrar tu forma de participar.</p>
+                </div>
+                <div class="executive-directory-grid">
+                    <article class="executive-directory-card">
+                        <span class="executive-directory-index">01 · CONOCÉ LA LEGIÓN</span>
+                        <h4>LAS PERSONAS Y NUESTRA HISTORIA</h4>
+                        <p>Descubrí de dónde venimos, quiénes forman parte y qué valores compartimos.</p>
+                        <div class="executive-directory-links">
+                            <button type="button" onclick="switchChapter(1)">ORIGEN <span>↗</span></button>
+                            <button type="button" onclick="switchChapter(2)">ROSTER <span>↗</span></button>
+                            <button type="button" onclick="switchChapter(11)">VALORES <span>↗</span></button>
+                            <button type="button" onclick="switchChapter(9)">COMUNIDAD <span>↗</span></button>
+                        </div>
+                    </article>
+                    <article class="executive-directory-card">
+                        <span class="executive-directory-index">02 · MIRÁ LO QUE HACEMOS</span>
+                        <h4>PARTIDAS, DIRECTOS Y EXPERIENCIAS</h4>
+                        <p>Conocé nuestras actividades, juegos y colaboraciones documentadas.</p>
+                        <div class="executive-directory-links">
+                            <button type="button" onclick="switchChapter(10)">EN VIVO <span>↗</span></button>
+                            <button type="button" onclick="switchChapter(5)">ARSENAL <span>↗</span></button>
+                            <button type="button" onclick="switchChapter(12)">COLABORACIONES <span>↗</span></button>
+                        </div>
+                    </article>
+                    <article class="executive-directory-card">
+                        <span class="executive-directory-index">03 · CONECTÁ CON LA LEGIÓN</span>
+                        <h4>DATOS, OPORTUNIDADES Y CONTACTO</h4>
+                        <p>Explorá nuestra actividad y encontrá el canal adecuado para acercar una propuesta.</p>
+                        <div class="executive-directory-links">
+                            <button type="button" onclick="switchChapter(3)">ESTADÍSTICAS <span>↗</span></button>
+                            <button type="button" onclick="switchChapter(8)">ALIANZAS <span>↗</span></button>
+                            <button type="button" onclick="switchChapter(6)">RECLUTAMIENTO <span>↗</span></button>
+                        </div>
+                    </article>
                 </div>
             </section>
 

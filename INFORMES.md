@@ -2303,3 +2303,13 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 - Navegación: se añade al pie de cada capítulo una botonera contextual con anterior, siguiente y volver al índice.
 - Conservación: no se cambian las diez portadas ni sus enlaces. Los cambios quedan en la rama del PR #15; main permanece sin cambios.
 - Validación pendiente: revisar estructura, JavaScript, CSS, responsive, conteos y checks de GitHub/Cloudflare; inspeccionar la vista previa en escritorio y móvil.
+
+## 2026-11-11 — Etapa 1: Inicio y navegación global
+
+- **Objetivo:** mejorar la primera impresión y permitir que una persona nueva encuentre las secciones principales sin conocer previamente la estructura del sitio.
+- **Inicio:** el antiguo bloque de tres accesos rápidos se reorganiza como un directorio editorial en tres recorridos: conocer la Legión, descubrir sus actividades y conectar con la comunidad. Incluye accesos a los once capítulos existentes, sin duplicar contenido ni inventar novedades.
+- **Navegación:** se hace explícita la separación entre capítulos principales y expedientes complementarios; se conserva el cambio de capítulo existente y se refuerza el estado activo. En móvil, la navegación principal puede recorrerse horizontalmente sin forzar una grilla demasiado comprimida.
+- **Accesibilidad:** se incorpora un enlace para saltar al contenido, una región viva que anuncia el capítulo abierto y actualización del título del documento al navegar. Se mantienen controles nativos y foco visible.
+- **Conservación:** se mantienen textos institucionales, fotografías, enlaces, capítulos, roster y estadísticas existentes. No se alteran assets ni datos canónicos.
+- **Alcance:** index.html, styles.css, app.js e INFORMES.md. Esta rama se apoya temporalmente en la rama del PR #15 para no duplicar ni pisar los cambios de Arsenal; el PR de esta etapa deberá cambiar su base a main después de integrar PR #15.
+- **Validación pendiente:** comprobar IDs y enlaces internos, sintaxis JavaScript, balance CSS y checks de GitHub/Cloudflare. La revisión visual de escritorio y móvil sigue pendiente; no se declara aprobada hasta inspeccionar la vista previa.
