@@ -1647,7 +1647,7 @@ function openHeroModal(index) {
             const labelFor = target => {
                 const number = Number(target.id.replace('chapter-',''));
                 const nav = document.querySelector('.nav-btn[data-chapter="' + number + '"]');
-                return nav ? nav.textContent.replace(/^\\d+\\s*/, '').trim() : (number === 0 ? 'ÍNDICE' : 'CAPÍTULO ' + String(panel.dataset.editorialNumber || number).padStart(2,'0'));
+                return nav ? nav.textContent.replace(/^\d+\s*/, '').trim() : (number === 0 ? 'ÍNDICE' : 'CAPÍTULO ' + String(target.dataset.editorialNumber || number).padStart(2,'0'));
             };
             const previous = panels[index-1], next = panels[index+1];
             pager.innerHTML = '';
