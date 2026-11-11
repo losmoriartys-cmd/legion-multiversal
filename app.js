@@ -647,11 +647,14 @@ function renderRoster() {
             frontHeader.innerHTML = '<span>LEGIÓN MULTIVERSAL</span><b>EXPEDIENTE N.º ' + safeNumber + '</b>';
             const frontName = document.createElement('span');
             frontName.className = 'roster-card-front-name';
-            frontName.innerHTML = '<strong>' + safeName + '</strong><small>' + safeClassification + '</small>';
+            frontName.innerHTML = '<strong>' + safeName + '</strong><small>' + safeClassification + '</small><em>' + safeIdentity + '</em>';
+            const frontMeta = document.createElement('span');
+            frontMeta.className = 'roster-card-front-meta';
+            frontMeta.innerHTML = '<b>' + safeRole + '</b><small>' + safeType + ' · SERIE ' + escapeStatsHtml(hero.series || '01') + '</small>';
             const flipHint = document.createElement('span');
             flipHint.className = 'roster-card-flip-hint';
-            flipHint.textContent = 'GIRAR CARTA ↻';
-            front.append(portrait, foil, frontHeader, frontName, flipHint);
+            flipHint.textContent = 'GIRAR ↻';
+            front.append(portrait, foil, frontHeader, frontName, frontMeta, flipHint);
 
             const back = document.createElement('div');
             back.className = 'roster-card-face roster-card-back';
