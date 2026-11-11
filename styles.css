@@ -3678,3 +3678,26 @@ header .primary-navigation .nav-btn[aria-current="page"]{border-color:#8be3f3;co
  .multiverse-node strong { font-size:.95rem; }
  .multiverse-node-areas i { font-size:.56rem; }
 }
+
+
+/* Estadísticas: panorama visible por canal, no solo indicadores agregados. */
+.stats-channel-heading{display:flex;align-items:end;justify-content:space-between;gap:18px;margin:26px 0 12px;border-bottom:1px solid rgba(134,223,240,.28);padding-bottom:12px}
+.stats-channel-heading h4{margin:0;color:#f3e5bd;font:clamp(1.5rem,2.4vw,2.1rem)/1 'Bangers',cursive;letter-spacing:.04em}
+.stats-channel-heading p{max-width:580px;margin:0;color:#aebed0;font-size:.78rem;line-height:1.55}
+.stats-channel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,245px),1fr));gap:12px;margin:14px 0 28px}
+.stats-channel-card{min-width:0;padding:16px;background:linear-gradient(155deg,#142238,#0a111d 72%);border:1px solid #34445c;box-shadow:0 9px 22px rgba(0,0,0,.2)}
+.stats-channel-card.is-live{border-color:rgba(85,220,157,.65);box-shadow:inset 0 0 0 1px rgba(85,220,157,.12),0 9px 22px rgba(0,0,0,.2)}
+.stats-channel-card-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.stats-channel-platform{color:#8498b2;font-size:.62rem;font-weight:900;letter-spacing:.12em}
+.stats-channel-card h5{margin:13px 0 2px;color:#fff;font:1.55rem/1.1 'Bangers',cursive;overflow-wrap:anywhere}
+.stats-channel-card>a{color:#86dff0;font-size:.68rem;font-weight:900;text-decoration:none}
+.stats-channel-card>a:hover{text-decoration:underline}
+.stats-channel-viewers{display:flex;align-items:baseline;gap:9px;margin:14px 0 10px;padding:10px 0;border-top:1px solid rgba(255,255,255,.1);border-bottom:1px solid rgba(255,255,255,.1)}
+.stats-channel-viewers strong{color:#86dff0;font:2.1rem/1 'Bangers',cursive;font-variant-numeric:tabular-nums}
+.stats-channel-viewers span{color:#aebed0;font-size:.62rem;font-weight:900;letter-spacing:.08em}
+.stats-channel-card dl{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:0}
+.stats-channel-card dl div{min-width:0}
+.stats-channel-card dt{color:#8fa0b7;font-size:.65rem;line-height:1.35}
+.stats-channel-card dd{margin:3px 0 0;color:#f3e5bd;font-size:.92rem;font-weight:800;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.stats-channel-foot{display:block;margin-top:12px;color:#7f91a9;font-size:.64rem}
+@media(max-width:600px){.stats-channel-heading{align-items:flex-start;flex-direction:column;gap:6px}.stats-channel-grid{grid-template-columns:1fr}.stats-channel-card{padding:14px}}
