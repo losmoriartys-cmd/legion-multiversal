@@ -621,14 +621,15 @@ function renderCommunityProgress() {
     const missionsHost = document.getElementById('community-missions');
     if (missionsHost) missionsHost.innerHTML = (communityPlaybook.missions || []).map(mission => {
         const value = progressFor(mission.progress_key);
-        const target = Math.max(1, Number(mission.target) || 1);
+        const target = mission.target === 'roster_total' ? Math.max(1, heroesData.length) : Math.max(1, Number(mission.target) || 1);
         const percent = Math.min(100, value / target * 100);
         const complete = value >= target;
         return '<article class="community-mission' + (complete ? ' is-complete' : '') + '"><div class="community-mission-top"><span>' + escapeStatsHtml(mission.category || 'MISIÓN') + '</span><b>' + (complete ? 'COMPLETADA' : 'EN CURSO') + '</b></div><h4>' + escapeStatsHtml(mission.title) + '</h4><p>' + escapeStatsHtml(mission.description) + '</p><div class="community-progress-track" role="progressbar" aria-label="' + escapeStatsHtml(mission.title) + '" aria-valuemin="0" aria-valuemax="' + target + '" aria-valuenow="' + Math.min(value,target) + '"><i style="width:' + percent.toFixed(1) + '%"></i></div><small>' + Math.min(value,target) + ' / ' + target + ' · ' + escapeStatsHtml(mission.progress_label || 'progreso') + '</small></article>';
     }).join('');
     const achievementsHost = document.getElementById('community-achievements');
     if (achievementsHost) achievementsHost.innerHTML = (communityPlaybook.achievements || []).map(achievement => {
-        const unlocked = progressFor(achievement.progress_key) >= Number(achievement.target || 1);
+        const achievementTarget = achievement.target === 'roster_total' ? Math.max(1, heroesData.length) : Number(achievement.target || 1);
+        const unlocked = progressFor(achievement.progress_key) >= achievementTarget;
         return '<article class="community-achievement' + (unlocked ? ' is-unlocked' : ' is-locked') + '"><span class="achievement-seal">' + (unlocked ? '✦' : '◇') + '</span><div><small>' + (unlocked ? 'INSIGNIA DESBLOQUEADA' : 'INSIGNIA POR DESCUBRIR') + '</small><h4>' + escapeStatsHtml(achievement.title) + '</h4><p>' + escapeStatsHtml(achievement.description) + '</p></div></article>';
     }).join('');
 }
@@ -1002,7 +1003,7 @@ function renderCommercialQuickView(hero) {
 function openHeroProfile(index, triggerElement = document.activeElement) {
     const hero = heroesData[index];
     if (!hero) return;
-    recordLegionProgress('profile', String(index));
+    recordLegionProgress('profile', hero.cardNumber || hero.name);
     const home = document.getElementById('roster-home');
     const page = document.getElementById('hero-profile-page');
     if (!home || !page) return;
