@@ -22,6 +22,8 @@ concurrency:
 
 jobs:
   actualizar:
+    # Evita que workflow_dispatch ejecute el colector desde ramas distintas de main.
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 8
     steps:
