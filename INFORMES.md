@@ -2279,3 +2279,14 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 - **Validación pendiente:** compilar JavaScript, revisar balance CSS y comprobar el diff; luego verificar en preview el encuadre de cada retrato/ilustración, giro, texto largo y controles. Esta modificación visual no se considera aprobada hasta inspección de la vista previa.
 
 - **Actualización de despliegue — 2026-11-11:** el commit visual `9f26759c3535d993943a5ec935749663d7067882` superó el workflow de validación y Cloudflare Pages confirmó `Deployed successfully`. Preview de rama: `https://work-roster-02-ux-accessibil.legion-multiversal.pages.dev`. La inspección automatizada disponible no permite certificar la composición visual en navegador; queda revisión humana de la preview.
+
+## 2026-11-11 — Reorganización editorial del Capítulo 05 · Arsenal (reconstrucción sobre main)
+
+- **Responsable:** colaboración ChatGPT + equipo del proyecto.
+- **Objetivo:** integrar en una rama actualizada la corrección documental del PR #8 y la jerarquía editorial del PR #9, sin arrastrar la base antigua de esas ramas.
+- **Base:** `main` después de integrar Roster 02 y Bitácora (commit `49cdf88`).
+- **Implementado:** Arsenal presenta primero su introducción y las diez fichas de juegos; la guía de Keymailer/Lurkit y los registros de campañas quedan agrupados en un desplegable complementario cerrado por defecto. Las ocho campañas Lurkit completadas se expresan como estados históricos al corte 07/11/2026, sin tiempos relativos que parezcan actuales.
+- **Conservación:** se mantienen las diez fichas y sus diez imágenes/portadas distintas, enlaces, datos y registros de plataformas. No se modifican assets, roster, estadísticas ni otros capítulos.
+- **Validación pendiente:** revisar estructura, IDs, sintaxis, responsive, apertura del desplegable y enlaces; después ejecutar GitHub Actions y Cloudflare Pages. No se declara validación visual hasta inspeccionar la vista previa en escritorio y móvil.
+- **Coordinación:** reconstrucción directa desde main porque las ramas originales #8/#9 estaban 48 commits detrás y divergidas. Los PR originales no se fusionan para evitar conflictos y duplicación de historial.
+- **Estado:** rama de integración preparada para validación; main permanece sin cambios en esta etapa.
