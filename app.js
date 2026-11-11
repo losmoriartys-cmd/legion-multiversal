@@ -572,7 +572,7 @@ function renderRoster() {
     ];
     const counts = document.getElementById('roster-counts');
     if (counts) {
-        counts.innerHTML = groups.map(group => {
+        counts.innerHTML = groups.filter(group => filteredEntries.some(({hero}) => hero.role === group.key)).map(group => {
             const total = filteredEntries.filter(({hero}) => hero.role === group.key).length;
             const label = group.title.replace(' DEL INSTITUTO','');
             return '<a class="roster-jump-link ' + group.key + '" href="#roster-group-' + group.key + '" aria-label="Ir a ' + label + ', ' + total + ' integrantes"><strong>' + String(total).padStart(2,'0') + '</strong><span>' + label + '</span><i aria-hidden="true">EXPLORAR ↓</i></a>';
@@ -691,6 +691,7 @@ function renderRoster() {
             backContent.appendChild(backActions);
 
             front.addEventListener('click', () => {
+                front.blur();
                 setRosterCardFace(card, true);
                 window.setTimeout(() => {
                     if (card.classList.contains('is-flipped') && !flipBack.disabled) flipBack.focus();
