@@ -43,21 +43,22 @@
         </div>
         <div class="navigation-group-label">EXPLORAR EL ARCHIVO</div>
         <nav class="primary-navigation" aria-label="Capítulos principales">
-            <button class="nav-btn active" data-chapter="0" aria-current="page" onclick="switchChapter(0)">INICIO</button>
-            <button class="nav-btn" data-chapter="1" onclick="switchChapter(1)">ORIGEN</button>
-            <button class="nav-btn" data-chapter="2" onclick="switchChapter(2)">ROSTER</button>
-            <button class="nav-btn" data-chapter="3" onclick="switchChapter(3)">ESTADÍSTICAS</button>
-            <button class="nav-btn" data-chapter="11" onclick="switchChapter(11)">VALORES</button>
-            <button class="nav-btn" data-chapter="9" onclick="switchChapter(9)">COMUNIDAD</button>
-            <button class="nav-btn" data-chapter="8" onclick="switchChapter(8)">ALIANZAS</button>
-            <button class="nav-btn" data-chapter="12" onclick="switchChapter(12)">COLABORACIONES</button>
+            <button class="nav-btn active" data-chapter="0" aria-current="page" onclick="switchChapter(0)">01 INICIO</button>
+            <button class="nav-btn" data-chapter="1" onclick="switchChapter(1)">02 ORIGEN</button>
+            <button class="nav-btn" data-chapter="2" onclick="switchChapter(2)">03 ROSTER</button>
+            <button class="nav-btn" data-chapter="3" onclick="switchChapter(3)">04 ESTADÍSTICAS</button>
+            <button class="nav-btn" data-chapter="11" onclick="switchChapter(11)">05 VALORES</button>
+            <button class="nav-btn" data-chapter="9" onclick="switchChapter(9)">06 COMUNIDAD</button>
+            <button class="nav-btn" data-chapter="8" onclick="switchChapter(8)">07 ALIANZAS</button>
+            <button class="nav-btn" data-chapter="12" onclick="switchChapter(12)">08 COLABORACIONES</button>
         </nav>
         <nav class="secondary-navigation" aria-label="Más expedientes">
             <div class="secondary-navigation-heading"><span>MÁS EXPEDIENTES</span><small>OTRAS RUTAS DEL UNIVERSO</small></div>
             <div class="secondary-navigation-links">
-                <button class="nav-btn nav-btn-secondary" data-chapter="10" onclick="switchChapter(10)"><span>10</span> EN VIVO</button>
-                <button class="nav-btn nav-btn-secondary" data-chapter="5" onclick="switchChapter(5)"><span>05</span> ARSENAL</button>
-                <button class="nav-btn nav-btn-secondary" data-chapter="6" onclick="switchChapter(6)"><span>06</span> RECLUTAMIENTO</button>
+                <button class="nav-btn nav-btn-secondary" data-chapter="10" onclick="switchChapter(10)">09 EN VIVO</button>
+                <button class="nav-btn nav-btn-secondary" data-chapter="5" onclick="switchChapter(5)">10 ARSENAL</button>
+                <button class="nav-btn nav-btn-secondary" data-chapter="6" onclick="switchChapter(6)">11 RECLUTAMIENTO</button>
+                <button class="nav-btn nav-btn-secondary" data-chapter="13" onclick="switchChapter(13)">12 MAPA MULTIVERSAL</button>
             </div>
         </nav>
     </header>
@@ -65,7 +66,8 @@
     <main id="main-content" tabindex="-1">
     <p id="chapter-announcement" class="sr-only" aria-live="polite" aria-atomic="true"></p>
     <!-- Recorrido institucional: origen, personas, actividad, comunidad y experiencias. Arsenal y Reclutamiento quedan como recursos complementarios. -->
-<section id="chapter-0" class="chapter-panel executive-home active" aria-labelledby="home-title">
+<section id="chapter-0" class="chapter-panel executive-home active" aria-labelledby="home-title" data-editorial-number="1">
+            <div class="chapter-tag">CAPÍTULO 01 · INICIO</div>
             <div class="executive-hero">
                 <figure class="executive-hero-art executive-hero-banner">
                     <img src="image_20261106_124855.jpg" alt="Imagen grupal de Legión Multiversal, con sus integrantes reunidos frente a distintos portales" fetchpriority="high">
@@ -119,6 +121,7 @@
                             <button type="button" onclick="switchChapter(3)">ESTADÍSTICAS <span>↗</span></button>
                             <button type="button" onclick="switchChapter(8)">ALIANZAS <span>↗</span></button>
                             <button type="button" onclick="switchChapter(6)">RECLUTAMIENTO <span>↗</span></button>
+                            <button type="button" onclick="switchChapter(13)">MAPA MULTIVERSAL <span>↗</span></button>
                         </div>
                     </article>
                 </div>
@@ -165,8 +168,8 @@
             </section>
         </section>
 
-<section id="chapter-1" class="chapter-panel chapter-one">
-    <div class="chapter-tag">CAPÍTULO 01 · EL ORIGEN</div>
+<section id="chapter-1" class="chapter-panel chapter-one" data-editorial-number="2">
+    <div class="chapter-tag">CAPÍTULO 02 · EL ORIGEN</div>
 
     <div class="chapter-cover">
         <div class="chapter-cover-copy">
@@ -297,8 +300,8 @@
     </section>
 </section>
 
-<section id="chapter-2" class="chapter-panel comic-page">
-            <div class="chapter-tag">CAPÍTULO 02</div>
+<section id="chapter-2" class="chapter-panel comic-page" data-editorial-number="3">
+            <div class="chapter-tag">CAPÍTULO 03 · ROSTER</div>
             <h2 class="comic-title">LEGIÓN MULTIVERSAL — NUESTRO ROSTER</h2>
             <div class="institute-banner"><div class="institute-stamp" aria-label="Emblema oficial de la Legión Multiversal"><img src="legion_logo_final_hybrid.png" alt="Emblema de Legión Multiversal"><span>ARCHIVO DE LA LEGIÓN</span></div><div class="institute-banner-copy"><h3>UN LUGAR PARA CADA TALENTO EXTRAORDINARIO</h3><p>Una comunidad de creadores con identidades y especialidades diferentes. Cada integrante tiene un expediente propio y un lugar dentro de este universo compartido.</p></div></div>
             <nav class="roster-product-nav" aria-label="Navegación entre Roster y Bitácora"><a href="./bitacora-preview.html">ABRIR BITÁCORA CENTRAL ↗</a><a href="./index.html#chapter-12">ARCHIVO DE COLABORACIONES ↗</a></nav>
@@ -321,8 +324,8 @@
             <section id="hero-profile-page" class="hero-profile-page" hidden aria-live="polite"></section>
         </section>
 
-<section id="chapter-3" class="chapter-panel comic-page impact-chapter">
- <div class="chapter-tag">CAPÍTULO 03 · INFORME DE IMPACTO</div>
+<section id="chapter-3" class="chapter-panel comic-page impact-chapter" data-editorial-number="4">
+ <div class="chapter-tag">CAPÍTULO 04 · INFORME DE IMPACTO</div>
  <header class="impact-hero">
   <div class="impact-hero-copy">
    <span class="impact-kicker">LEGIÓN MULTIVERSAL · ACTIVIDAD Y ALCANCE</span>
@@ -357,8 +360,8 @@
   <div class="stats-table-wrap"><table class="stats-table"><thead><tr><th>Canal</th><th>Estado</th><th>Espectadores actuales</th><th>Categoría</th><th>Promedio observado</th><th>Pico observado</th><th>Horas observadas</th><th>Muestras</th><th>Cobertura del intervalo muestreado</th></tr></thead><tbody id="stats-table-body"><tr><td colspan="9">Cargando estadísticas…</td></tr></tbody></table></div>
  </details>
 </section>
-<section id="chapter-11" class="chapter-panel comic-page manifesto-chapter">
- <div class="chapter-tag">CAPÍTULO ESPECIAL · NUESTRA IDENTIDAD</div>
+<section id="chapter-11" class="chapter-panel comic-page manifesto-chapter" data-editorial-number="5">
+ <div class="chapter-tag">CAPÍTULO 05 · NUESTRA IDENTIDAD</div>
  <header class="manifesto-hero"><span class="manifesto-kicker">LEGIÓN MULTIVERSAL · MANIFIESTO</span><h2>NO BUSCAMOS QUE<br>TODOS SEAN IGUALES.<br><em>BUSCAMOS QUE CADA UNO<br>TENGA UN LUGAR.</em></h2><p>Una Legión no se construye sumando nombres. Se construye cuando personas distintas eligen avanzar juntas.</p></header>
  <section class="manifesto-origin"><span>LO QUE NOS UNE</span><h3>CADA INTEGRANTE TIENE SU PROPIO UNIVERSO.</h3><p>Su voz, su humor, sus intereses, sus tiempos y su manera de crear. No queremos borrar esas diferencias: queremos que convivan. Legión Multiversal es un espacio para compartir videojuegos, entretenimiento, ideas y proyectos sin tener que dejar de ser quien sos.</p></section>
  <div class="manifesto-values-grid">
@@ -372,8 +375,8 @@
  <section class="manifesto-promise"><span>LO QUE PROMETEMOS</span><h3>UN ESPACIO PARA PROPONER, APRENDER, COMPARTIR Y CREAR.</h3><p>No prometemos fama, contratos ni crecimiento automático. Ofrecemos una cultura de colaboración, respeto y trabajo compartido, donde cada persona pueda aportar desde su propio lugar.</p></section>
  <section class="manifesto-invitation"><div><span>¿TE IDENTIFICÁS CON ESTA FORMA DE HACER LAS COSAS?</span><h3>ENTONCES HAY UNA CONVERSACIÓN QUE PODEMOS EMPEZAR.</h3></div><div class="chapter-actions"><button class="chapter-cta" type="button" onclick="switchChapter(6)">QUIERO FORMAR PARTE <span>↗</span></button><button class="chapter-cta" type="button" onclick="switchChapter(8)">QUIERO COLABORAR CON LA LEGIÓN <span>↗</span></button></div></section>
 </section>
-<section id="chapter-9" class="chapter-panel comic-page belonging-chapter">
- <div class="chapter-tag">CAPÍTULO 09 · COMUNIDAD</div>
+<section id="chapter-9" class="chapter-panel comic-page belonging-chapter" data-editorial-number="6">
+ <div class="chapter-tag">CAPÍTULO 06 · COMUNIDAD</div>
  <header class="belonging-hero">
   <img src="image_20261106_124855.jpg" alt="Integrantes de Legión Multiversal reunidos frente a distintos universos" loading="lazy">
   <div class="belonging-hero-shade"></div>
@@ -387,8 +390,8 @@
  </div>
  <div class="belonging-bottom"><p>Una comunidad crece cuando hay lugar para nuevas voces.</p><button class="chapter-cta" type="button" onclick="switchChapter(11)">CONOCÉ LO QUE NOS IDENTIFICA ↗</button></div>
 </section>
-<section id="chapter-10" class="chapter-panel comic-page live-chapter">
- <div class="chapter-tag">TRANSMISIONES</div>
+<section id="chapter-10" class="chapter-panel comic-page live-chapter" data-editorial-number="9">
+ <div class="chapter-tag">CAPÍTULO 09 · TRANSMISIONES</div>
  <h2 class="comic-title">LEGIÓN MULTIVERSAL · EN VIVO</h2>
  <div class="premium-panel live-intro"><div class="premium-kicker"><span class="live-pulse"></span> CENTRAL DE TRANSMISIONES</div><h3>La Legión está en directo</h3><p>Cuando uno o más integrantes estén transmitiendo, vas a poder elegir un canal y verlo directamente desde esta página. La disponibilidad se actualiza a partir de las consultas programadas del sistema.</p></div>
  <div id="live-directory" class="live-directory"><p class="stats-note">Consultando el estado de los canales…</p></div>
@@ -396,9 +399,9 @@
  <p class="stats-note">El reproductor oficial de Twitch requiere conexión a internet y un navegador compatible. En GitHub Pages se utiliza el dominio publicado como parámetro de inserción; si abrís una copia local, Twitch puede bloquear la reproducción.</p>
 </section>
 
-<section id="chapter-8" class="chapter-panel comic-page chapter-8-alliance" aria-labelledby="alliance-title">
+<section id="chapter-8" class="chapter-panel comic-page chapter-8-alliance" aria-labelledby="alliance-title" data-editorial-number="7">
  <header class="alliance-hero">
-  <div class="chapter-tag">CAPÍTULO 08 · EXPEDIENTE DE ALIANZAS</div>
+  <div class="chapter-tag">CAPÍTULO 07 · EXPEDIENTE DE ALIANZAS</div>
   <p class="alliance-eyebrow">LEGIÓN MULTIVERSAL · CREDENCIALES Y OPORTUNIDADES</p>
   <h2 id="alliance-title" class="comic-title">ALIANZAS Y OPORTUNIDADES</h2>
   <p class="alliance-lead">Una red de creadores. Distintas credenciales. Una propuesta compartida.</p>
@@ -450,8 +453,8 @@
  <section class="alliance-contact" id="alliance-contact" aria-labelledby="alliance-contact-title"><span class="alliance-index">07 / CONTACTO COMERCIAL</span><h3 id="alliance-contact-title">HABLEMOS DE UNA COLABORACIÓN</h3><p>Desarrolladores, publishers, agencias y marcas pueden acercar propuestas de campañas, cobertura, accesos anticipados o activaciones con la comunidad.</p><p>Para evaluar una propuesta, compartí la marca o juego, objetivos, fechas, plataformas, entregables esperados y presupuesto disponible.</p><a class="alliance-contact-link" href="mailto:losmoriartys@gmail.com?subject=Propuesta%20comercial%20-%20Legi%C3%B3n%20Multiversal">losmoriartys@gmail.com ↗</a></section>
 </section>
 
-<section id="chapter-12" class="chapter-panel comic-page collaboration-chapter">
- <div class="chapter-tag">CAPÍTULO 12 · ARCHIVO DE EXPERIENCIAS COMPARTIDAS</div>
+<section id="chapter-12" class="chapter-panel comic-page collaboration-chapter" data-editorial-number="8">
+ <div class="chapter-tag">CAPÍTULO 08 · EXPERIENCIAS COMPARTIDAS</div>
  <div class="bitacora-launch"><div><span>ARCHIVO CENTRAL · EDICIÓN INTERACTIVA</span><strong>BITÁCORA MULTIVERSAL</strong><small>Un mismo universo editorial para perfiles, trayectorias y experiencias compartidas.</small></div><a href="./bitacora-preview.html">ABRIR BITÁCORA ↗</a><a href="./index.html#chapter-2">EXPLORAR ROSTER ↗</a></div>
  <div class="collab-cover">
   <div class="collab-cover-copy">
@@ -619,8 +622,8 @@
  <div class="collab-contact"><span>¿REPRESENTÁS UN ESTUDIO, PUBLISHER, AGENCIA O MARCA?</span><p>Podemos conversar sobre experiencias multicanal, contenido cooperativo y activaciones con creadores.</p><a href="mailto:losmoriartys@gmail.com?subject=Colaboraciones%20-%20Legi%C3%B3n%20Multiversal">CONTACTAR A LA LEGIÓN ↗</a></div>
 </section>
 
-<section id="chapter-5" class="chapter-panel comic-page">
-<div class="chapter-tag">CAPÍTULO 05 · EL CAMPO DE JUEGO DE LA LEGIÓN</div>
+<section id="chapter-5" class="chapter-panel comic-page" data-editorial-number="10">
+<div class="chapter-tag">CAPÍTULO 10 · ARSENAL MULTIVERSAL</div>
 <h2 class="comic-title">ARSENAL MULTIVERSAL</h2>
 <div class="premium-panel arsenal-intro">
 <div class="premium-kicker">DIEZ JUEGOS · UNA MISMA ESCUADRA</div>
@@ -862,8 +865,8 @@
   </div>
 </section>
 
-<section id="chapter-6" class="chapter-panel recruitment-chapter">
-    <div class="chapter-tag">CAPÍTULO 06 · PUERTAS DE ENTRADA</div>
+<section id="chapter-6" class="chapter-panel recruitment-chapter" data-editorial-number="11">
+    <div class="chapter-tag">CAPÍTULO 11 · PUERTAS DE ENTRADA</div>
     <h2 class="comic-title">RECLUTAR · CONECTAR · CRECER</h2>
     <div class="premium-panel recruitment-intro">
         <div class="premium-kicker">LEGIÓN MULTIVERSAL · NUEVOS CONTACTOS</div>
@@ -943,7 +946,29 @@
 
         <!-- Recursos de Lurkit y Keymailer: material operativo retirado de la navegación pública. -->
 
-        </main>
+        <section id="chapter-13" class="chapter-panel comic-page multiverse-chapter" aria-labelledby="multiverse-title" data-editorial-number="12">
+ <div class="chapter-tag">CAPÍTULO 12 · CARTOGRAFÍA DE LA LEGIÓN</div>
+ <header class="multiverse-hero">
+  <span class="multiverse-kicker">ARCHIVO CENTRAL · CONEXIONES ENTRE UNIVERSOS</span>
+  <h2 id="multiverse-title" class="comic-title">UN MAPA. MUCHOS UNIVERSOS.<br><em>UNA MISMA LEGIÓN.</em></h2>
+  <p>Este mapa reúne a los integrantes y sus especialidades alrededor del núcleo común. Las conexiones representan pertenencia a la Legión, no jerarquías ni alianzas comerciales.</p>
+ </header>
+ <section class="multiverse-map-section" aria-labelledby="multiverse-map-title">
+  <div class="multiverse-section-heading"><span>01 / CONSTELACIÓN DEL ROSTER</span><h3 id="multiverse-map-title">CARTOGRAFÍA MULTIVERSAL</h3><p>Seleccioná un nodo para abrir el expediente individual. El mapa se construye desde el roster canónico.</p></div>
+  <div id="multiverse-map" class="multiverse-map"><p class="stats-note">Cargando mapa de integrantes…</p></div>
+ </section>
+ <section class="multiverse-progress-section" aria-labelledby="multiverse-progress-title">
+  <div class="multiverse-section-heading"><span>02 / RECORRIDO DE EXPLORACIÓN</span><h3 id="multiverse-progress-title">TUS MISIONES</h3><p>Pequeños recorridos para descubrir el archivo, sus integrantes y las actividades de la comunidad.</p></div>
+  <div id="community-missions" class="community-missions"><p class="stats-note">Cargando misiones…</p></div>
+ </section>
+ <section class="multiverse-achievements-section" aria-labelledby="multiverse-achievements-title">
+  <div class="multiverse-section-heading"><span>03 / DISTINCIONES</span><h3 id="multiverse-achievements-title">INSIGNIAS DE EXPLORACIÓN</h3><p>Se desbloquean al recorrer el sitio. Son logros de navegación personales, no premios oficiales de plataformas.</p></div>
+  <div id="community-achievements" class="community-achievements"><p class="stats-note">Cargando insignias…</p></div>
+  <p class="community-progress-note">Tu progreso se guarda únicamente en este navegador. No se sincroniza entre dispositivos ni se comparte con otros integrantes. Si el navegador bloquea el almacenamiento local, el avance se conserva solo mientras la página permanezca abierta.</p>
+ </section>
+</section>
+
+</main>
 <footer class="site-technical-footer"><span>LEGIÓN MULTIVERSAL · DIFERENTES MUNDOS. UNA MISMA LEGIÓN.</span><a href="mailto:losmoriartys@gmail.com?subject=Reporte%20t%C3%A9cnico%20del%20sitio">Reportar un problema técnico</a></footer>
 
     <!-- VENTANA MODAL / EXPEDIENTE INDIVIDUAL (PÁGINAS A, B, C) -->

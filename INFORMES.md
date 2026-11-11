@@ -1,21 +1,17 @@
-## 2026-11-11 — Informe de impacto y centro de novedades verificadas
+## 2026-11-11 — Normalización de numeración editorial y orden de capítulos
 
-- **Responsable:** colaboración ChatGPT + equipo del proyecto.
-- **Objetivo:** hacer más legible y auditable el tablero de actividad, corregir la descripción de la cadencia real del colector y ofrecer un espacio de novedades del propio proyecto.
-- **Base:** rama Roster 02 `work/roster-expedientes-enhancement-2026-11-11`; no se modifica `main`.
-- **Archivos modificados:** `app.js`, `index.html`, `styles.css`, nuevo `news-data.json`, `INFORMES.md`.
-- **Implementado:**
-  - La cadencia y ventana metodológica se presentan desde los valores reales de `data.json`, no desde un texto fijo.
-  - El tablero diferencia captura completa/parcial y datos con demora, e informa canales resueltos frente a esperados.
-  - Se agrega una quinta métrica de cobertura de canales y se adapta la grilla.
-  - Nuevo centro de novedades del archivo, alimentado por `news-data.json`, con fecha, categoría, resumen y enlace a la fuente.
-  - Se publican dos entradas respaldadas: integración Roster/Bitácora (PR #14 ya integrada) y cobertura de siete canales en la captura del 11/11/2026.
-- **Validaciones estáticas:** JavaScript compila; HTML con 111 IDs sin duplicados; CSS con llaves balanceadas; dos entradas de novedades con fecha válida; el roster canónico conserva sus ocho integrantes.
-- **Validaciones:** el primer chequeo de enlaces detectó que el validador del sitio exige URL absoluta para la fuente del JSON. Se sustituyó la ruta relativa por el enlace directo al archivo en GitHub; los checks se vuelven a ejecutar sobre el head corregido. Revisión visual manual en escritorio/móvil pendiente.
-- **Commit de código:** [ce43ec65](https://github.com/losmoriartys-cmd/legion-multiversal/commit/ce43ec65b21c88b4fac2159e022f63b389888a51).
-- **Despliegue:** Cloudflare Pages publicó el primer preview de esta etapa; se espera la nueva ejecución después de corregir la URL de fuente.
+- **Motivo:** tras incorporar nuevas solapas y reordenar secciones, el número impreso en la cabecera de algunos capítulos ya no coincidía con su posición en la navegación. Ejemplo detectado: Origen figuraba como Capítulo 01 aunque Inicio ocupa el primer lugar.
+- **Criterio editorial aplicado:** numeración secuencial por el orden actual de las solapas, incluyendo Inicio como Capítulo 01. El identificador técnico `chapter-N` se conserva para no romper enlaces, datos ni funciones internas.
+- **Orden validado:** 01 Inicio; 02 Origen; 03 Roster; 04 Estadísticas; 05 Valores; 06 Comunidad; 07 Alianzas; 08 Colaboraciones; 09 En Vivo; 10 Arsenal; 11 Reclutamiento; 12 Mapa Multiversal.
+- **Cambios:** se actualizan los zócalos superiores de los doce paneles, se numeran las doce solapas de navegación y se agrega el zócalo que identifica Inicio como Capítulo 01. Se conserva el nombre de cada capítulo y el contenido editorial.
+- **Paginación:** anterior/siguiente ahora sigue el orden editorial explícito mediante `data-editorial-number`, no el ID técnico del panel. Esto corrige el recorrido de capítulos con IDs históricos fuera de secuencia.
+- **Alcance:** `index.html`, `app.js` e `INFORMES.md`. No se modifican fotografías, roster, estadísticas ni assets.
+- **Validación estática:** pendiente sobre el commit final, junto con checks de GitHub Actions y Cloudflare Pages. La inspección visual real de navegador/escritorio/móvil sigue siendo una comprobación separada.
+- **Integración:** se incorpora en la etapa final del conjunto de mejoras para que la versión publicada reciba simultáneamente navegación y numeración coherentes.
 
 ---
+
+
 
 
 
