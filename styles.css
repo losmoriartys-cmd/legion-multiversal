@@ -3484,3 +3484,24 @@ header .primary-navigation { display:flex; flex-wrap:wrap; gap:7px; align-items:
  #chapter-2 .roster-card-holo { animation:none; }
  .roster-product-nav a { transition:none; }
 }
+
+/* Arsenal · jerarquía editorial y archivo complementario */
+.arsenal-intro{position:relative;overflow:hidden;margin:18px 0 30px;padding:clamp(22px,4vw,38px);border:1px solid rgba(126,205,230,.42);background:radial-gradient(circle at 92% 8%,rgba(72,157,202,.2),transparent 35%),linear-gradient(130deg,rgba(13,26,43,.98),rgba(13,14,29,.96));}
+.arsenal-intro h3{font-size:clamp(1.8rem,4vw,2.65rem);line-height:1.02;color:#f5dca0;margin:9px 0 13px;}
+.arsenal-intro p{max-width:900px;font-size:1rem;line-height:1.65;}
+.arsenal-selection-heading{margin:30px 0 16px;padding:0 2px 14px;border-bottom:1px solid rgba(126,205,230,.28);}
+.arsenal-selection-heading h3{margin:6px 0;color:#8be3f3;font:clamp(1.8rem,4vw,2.6rem)/1 'Bangers',cursive;letter-spacing:.04em;}
+.arsenal-selection-heading p{max-width:760px;color:#c1cede;line-height:1.55;}
+.arsenal-archive-fold{margin:34px 0 18px;border:1px solid rgba(126,205,230,.3);background:rgba(8,15,27,.76);border-radius:10px;overflow:hidden;}
+.arsenal-archive-fold>summary{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:18px 22px;cursor:pointer;list-style:none;}
+.arsenal-archive-fold>summary::-webkit-details-marker{display:none;}
+.arsenal-archive-fold>summary span{display:grid;gap:4px;}
+.arsenal-archive-fold>summary small{color:#9acfe0;font-size:.68rem;font-weight:900;letter-spacing:.15em;}
+.arsenal-archive-fold>summary strong{color:#f1d99c;font:1.45rem 'Bangers',cursive;letter-spacing:.04em;}
+.arsenal-archive-fold>summary em{color:#aebdce;font-size:.86rem;font-style:normal;}
+.arsenal-archive-fold>summary>b{display:grid;place-items:center;width:34px;height:34px;flex:0 0 34px;border:1px solid rgba(126,205,230,.4);border-radius:50%;color:#8be3f3;font-size:1.3rem;transition:transform .2s ease;}
+.arsenal-archive-fold[open]>summary>b{transform:rotate(45deg);}
+.arsenal-archive-content{padding:0 18px 18px;border-top:1px solid rgba(126,205,230,.18);}
+.arsenal-archive-content>.creator-platform-guide{margin-top:18px;}
+.arsenal-archive-content .arsenal-platform-records{margin-bottom:8px;}
+@media(max-width:640px){.arsenal-archive-fold>summary{padding:15px;}.arsenal-archive-fold>summary strong{font-size:1.2rem;}.arsenal-archive-content{padding:0 10px 12px;}}
