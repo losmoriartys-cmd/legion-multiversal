@@ -58,6 +58,7 @@
                 <button class="nav-btn nav-btn-secondary" data-chapter="10" onclick="switchChapter(10)"><span>10</span> EN VIVO</button>
                 <button class="nav-btn nav-btn-secondary" data-chapter="5" onclick="switchChapter(5)"><span>05</span> ARSENAL</button>
                 <button class="nav-btn nav-btn-secondary" data-chapter="6" onclick="switchChapter(6)"><span>06</span> RECLUTAMIENTO</button>
+                <button class="nav-btn nav-btn-secondary" data-chapter="13" onclick="switchChapter(13)"><span>13</span> MAPA MULTIVERSAL</button>
             </div>
         </nav>
     </header>
@@ -119,6 +120,7 @@
                             <button type="button" onclick="switchChapter(3)">ESTADÍSTICAS <span>↗</span></button>
                             <button type="button" onclick="switchChapter(8)">ALIANZAS <span>↗</span></button>
                             <button type="button" onclick="switchChapter(6)">RECLUTAMIENTO <span>↗</span></button>
+                            <button type="button" onclick="switchChapter(13)">MAPA MULTIVERSAL <span>↗</span></button>
                         </div>
                     </article>
                 </div>
@@ -943,7 +945,29 @@
 
         <!-- Recursos de Lurkit y Keymailer: material operativo retirado de la navegación pública. -->
 
-        </main>
+        <section id="chapter-13" class="chapter-panel comic-page multiverse-chapter" aria-labelledby="multiverse-title">
+ <div class="chapter-tag">CAPÍTULO 13 · CARTOGRAFÍA DE LA LEGIÓN</div>
+ <header class="multiverse-hero">
+  <span class="multiverse-kicker">ARCHIVO CENTRAL · CONEXIONES ENTRE UNIVERSOS</span>
+  <h2 id="multiverse-title" class="comic-title">UN MAPA. OCHO UNIVERSOS.<br><em>UNA MISMA LEGIÓN.</em></h2>
+  <p>Este mapa reúne a los integrantes y sus especialidades alrededor del núcleo común. Las conexiones representan pertenencia a la Legión, no jerarquías ni alianzas comerciales.</p>
+ </header>
+ <section class="multiverse-map-section" aria-labelledby="multiverse-map-title">
+  <div class="multiverse-section-heading"><span>01 / CONSTELACIÓN DEL ROSTER</span><h3 id="multiverse-map-title">CARTOGRAFÍA MULTIVERSAL</h3><p>Seleccioná un nodo para abrir el expediente individual. El mapa se construye desde el roster canónico.</p></div>
+  <div id="multiverse-map" class="multiverse-map"><p class="stats-note">Cargando mapa de integrantes…</p></div>
+ </section>
+ <section class="multiverse-progress-section" aria-labelledby="multiverse-progress-title">
+  <div class="multiverse-section-heading"><span>02 / RECORRIDO DE EXPLORACIÓN</span><h3 id="multiverse-progress-title">TUS MISIONES</h3><p>Pequeños recorridos para descubrir el archivo, sus integrantes y las actividades de la comunidad.</p></div>
+  <div id="community-missions" class="community-missions"><p class="stats-note">Cargando misiones…</p></div>
+ </section>
+ <section class="multiverse-achievements-section" aria-labelledby="multiverse-achievements-title">
+  <div class="multiverse-section-heading"><span>03 / DISTINCIONES</span><h3 id="multiverse-achievements-title">INSIGNIAS DE EXPLORACIÓN</h3><p>Se desbloquean al recorrer el sitio. Son logros de navegación personales, no premios oficiales de plataformas.</p></div>
+  <div id="community-achievements" class="community-achievements"><p class="stats-note">Cargando insignias…</p></div>
+  <p class="community-progress-note">Tu progreso se guarda únicamente en este navegador. No se sincroniza entre dispositivos ni se comparte con otros integrantes. Si el navegador bloquea el almacenamiento local, el avance se conserva solo mientras la página permanezca abierta.</p>
+ </section>
+</section>
+
+</main>
 <footer class="site-technical-footer"><span>LEGIÓN MULTIVERSAL · DIFERENTES MUNDOS. UNA MISMA LEGIÓN.</span><a href="mailto:losmoriartys@gmail.com?subject=Reporte%20t%C3%A9cnico%20del%20sitio">Reportar un problema técnico</a></footer>
 
     <!-- VENTANA MODAL / EXPEDIENTE INDIVIDUAL (PÁGINAS A, B, C) -->
