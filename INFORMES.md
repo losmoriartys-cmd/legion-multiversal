@@ -34,8 +34,9 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 - **Accesibilidad/responsive:** botones nativos, estados `aria-selected`, roles tab/tablist/tabpanel, navegación de pestañas con flechas/Home/End, caras inactivas con `inert` y `aria-hidden`, foco al cambiar de cara, controles táctiles y media queries para móvil; `prefers-reduced-motion` desactiva animaciones. La inspección de código no sustituye pruebas con lector de pantalla ni pruebas reales en navegador.
 - **Alcance preservado:** no se modifica `main`, `app.js`, `styles.css`, `index.html`, `roster-data.json` ni ninguna imagen; no se toca Arsenal (#8/#9), ni el trabajo del colaborador. El prototipo es independiente y no se enlaza desde la navegación principal.
 - **Pendientes / riesgos:** comprobar visualmente la preview de la PR en escritorio y móvil; probar giro/foco con teclado, tacto y lector de pantalla; contrastar el tratamiento editorial de las cifras con el equipo. Solo después de aprobación se propondrá integrar el patrón en el Roster completo.
-- **Commit de prototipo:** [cff1afba](https://github.com/losmoriartys-cmd/legion-multiversal/commit/cff1afbaa4ca6451a209020648e394181a2bf420).
-- **Despliegue:** pendiente de los checks de la PR. No se certifica todavía preview ni prueba visual real.
+- **Commit de prototipo:** [a0193f63](https://github.com/losmoriartys-cmd/legion-multiversal/commit/a0193f63e0b7c4ed8ed2e401e4da3b0d1bfd3cd5) (incluye prototipo e informe).
+- **Despliegue de preview:** Cloudflare Pages check [130783662385](https://github.com/losmoriartys-cmd/legion-multiversal/runs/130783662385) completado en `success` para el commit `a0193f6`. Preview de rama: https://work-roster-02-moriartys-pro.legion-multiversal.pages.dev ; preview de commit: https://e509d142.legion-multiversal.pages.dev.
+- **Limitación de verificación:** el proveedor confirmó el despliegue, pero la herramienta de inspección web de esta sesión no pudo abrir la preview; por tanto no se afirma revisión visual real en navegador ni prueba funcional manual. La revisión visual en escritorio/móvil y con lector de pantalla sigue pendiente.
 
 ---
 
