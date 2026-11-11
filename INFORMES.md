@@ -1,22 +1,16 @@
-## 2026-11-11 — Mapa Multiversal, misiones e insignias de exploración
+## 2026-11-11 — Normalización de numeración editorial y orden de capítulos
 
-- **Responsable:** colaboración ChatGPT + equipo del proyecto.
-- **Objetivo:** convertir el universo de integrantes en una experiencia navegable y sumar recorridos de exploración con progreso transparente.
-- **Base:** rama de estadísticas y novedades `work/impact-news-center-2026-11-11`; no se modifica `main`.
-- **Archivos modificados:** `index.html`, `app.js`, `styles.css`, nuevo `community-playbook.json`, `INFORMES.md`.
-- **Implementado:**
-  - Nuevo Capítulo 13, accesible desde la navegación global, el directorio del Inicio y la paginación entre capítulos.
-  - Mapa/constelación generado desde `roster-data.json`: cada nodo muestra número de expediente, nombre, identidad y áreas; al seleccionarlo abre el expediente real.
-  - Las conexiones representan únicamente pertenencia al proyecto; no se inventan alianzas ni jerarquías entre integrantes.
-  - Cuatro misiones de navegación y seis insignias, con progreso local por perfiles visitados, capítulos recorridos, apertura de Bitácora y visita a En Vivo.
-  - Progreso guardado en el navegador cuando el almacenamiento está disponible; si no, se mantiene en memoria durante la sesión.
-  - Identificadores de integrantes basados en número de expediente/nombre y objetivo de exploración completa adaptado al tamaño actual del roster.
-- **Validaciones estáticas:** JavaScript compila; 119 IDs HTML sin duplicados; 12 capítulos presentes, incluido el nuevo 13; navegación global incluye capítulo 13; ocho integrantes canónicos; cuatro misiones y seis insignias; CSS con llaves balanceadas.
-- **Pendientes / riesgos:** checks de GitHub Actions y Cloudflare Pages pendientes para el head final. Revisión visual y funcional manual de escritorio/móvil pendiente. El progreso es local al navegador y no se presenta como ranking ni logro oficial de Twitch/Steam.
-- **Commit de código:** [d6a7fc80](https://github.com/losmoriartys-cmd/legion-multiversal/commit/d6a7fc80f062d1ae6904e6c73ff10b371f19fea6).
-- **Despliegue:** pendiente de los checks de la PR.
+- **Motivo:** tras incorporar nuevas solapas y reordenar secciones, el número impreso en la cabecera de algunos capítulos ya no coincidía con su posición en la navegación. Ejemplo detectado: Origen figuraba como Capítulo 01 aunque Inicio ocupa el primer lugar.
+- **Criterio editorial aplicado:** numeración secuencial por el orden actual de las solapas, incluyendo Inicio como Capítulo 01. El identificador técnico `chapter-N` se conserva para no romper enlaces, datos ni funciones internas.
+- **Orden validado:** 01 Inicio; 02 Origen; 03 Roster; 04 Estadísticas; 05 Valores; 06 Comunidad; 07 Alianzas; 08 Colaboraciones; 09 En Vivo; 10 Arsenal; 11 Reclutamiento; 12 Mapa Multiversal.
+- **Cambios:** se actualizan los zócalos superiores de los doce paneles, se numeran las doce solapas de navegación y se agrega el zócalo que identifica Inicio como Capítulo 01. Se conserva el nombre de cada capítulo y el contenido editorial.
+- **Paginación:** anterior/siguiente ahora sigue el orden editorial explícito mediante `data-editorial-number`, no el ID técnico del panel. Esto corrige el recorrido de capítulos con IDs históricos fuera de secuencia.
+- **Alcance:** `index.html`, `app.js` e `INFORMES.md`. No se modifican fotografías, roster, estadísticas ni assets.
+- **Validación estática:** pendiente sobre el commit final, junto con checks de GitHub Actions y Cloudflare Pages. La inspección visual real de navegador/escritorio/móvil sigue siendo una comprobación separada.
+- **Integración:** se incorpora en la etapa final del conjunto de mejoras para que la versión publicada reciba simultáneamente navegación y numeración coherentes.
 
 ---
+
 
 
 
