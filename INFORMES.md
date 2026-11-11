@@ -2257,3 +2257,5 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 - **Recursos gráficos:** se mantienen exactamente los retratos e ilustraciones existentes de los ocho integrantes. No se solicita ni se genera material nuevo en esta etapa.
 - **Responsive:** se reajustan proporciones, márgenes, tipografías y metadatos para escritorio, tablet y móvil; en móvil se conserva una carta por fila en anchos reducidos.
 - **Validación pendiente:** compilar JavaScript, revisar balance CSS y comprobar el diff; luego verificar en preview el encuadre de cada retrato/ilustración, giro, texto largo y controles. Esta modificación visual no se considera aprobada hasta inspección de la vista previa.
+
+- **Actualización de despliegue — 2026-11-11:** el commit visual `9f26759c3535d993943a5ec935749663d7067882` superó el workflow de validación y Cloudflare Pages confirmó `Deployed successfully`. Preview de rama: `https://work-roster-02-ux-accessibil.legion-multiversal.pages.dev`. La inspección automatizada disponible no permite certificar la composición visual en navegador; queda revisión humana de la preview.
