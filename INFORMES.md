@@ -2202,4 +2202,4 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 - **Pruebas:** seis casos cubren el cálculo entre muestras del mismo directo, el tope de 55 minutos por intervalo, el rechazo de huecos superiores a 110 minutos, el cambio de ID de directo, los períodos offline y el recorte de la ventana histórica de 30 días.
 - **Automatización:** el nuevo workflow ejecuta `python -m unittest discover -s tests -v` con Python 3.12 ante pull requests a `main` que afecten al colector, las pruebas o el propio workflow.
 - **Validación:** el workflow se acaba de incorporar a la rama del PR; el resultado de GitHub Actions queda pendiente. El check de Cloudflare Pages sigue siendo únicamente una validación del despliegue de vista previa.
-- **Alcance:** no se ejecuta una recolección real, no se usan secretos, no se modifican datos ni canales y no se toca Arsenal (#8/#9. El PR #11 permanece abierto y no se fusiona automáticamente.
+- **Alcance:** no se ejecuta una recolección real, no se usan secretos, no se modifican datos ni canales y no se toca Arsenal (#8/#9). El PR #11 permanece abierto y no se fusiona automáticamente.
