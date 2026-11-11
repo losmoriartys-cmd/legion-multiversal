@@ -2176,3 +2176,12 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 - **Transparencia:** el apartado «En vivo» muestra la fecha/hora de los datos consultados y aclara la frecuencia de actualización.
 - **Alcance:** no se modifican el roster, los canales registrados, las métricas históricas ni los capítulos editoriales. El cambio está aislado en una rama y requiere revisión y despliegue para reflejarse en la web pública.
 - **Validación pendiente:** comprobar sintaxis, comportamiento de refresco y despliegue en GitHub Pages/Cloudflare Pages.
+
+
+## 2026-11-11 — Corrección de cadencia declarada en estadísticas Twitch
+
+- **Diagnóstico:** las últimas 100 ejecuciones programadas de `Actualizar estadísticas multiplataforma` finalizaron correctamente, pero sus inicios tuvieron una mediana de 52,95 minutos entre ejecuciones (percentil 90: 73,53 minutos), pese al cron configurado cada 15 minutos. En las 1.393 separaciones entre muestras del roster activo, la mediana fue de 54,48 minutos (P90: 71,27; P95: 76,87).
+- **Credenciales:** Twitch se autentica correctamente; `TWITCH_CLIENT_ID` dispone de un valor alternativo en el código y `TWITCH_CLIENT_SECRET` está disponible. YouTube procesó su perfil. Kick figura explícitamente como `awaiting_secrets` porque faltan sus credenciales; no afecta la recolección de Twitch.
+- **Corrección propuesta:** alinear la cadencia informada con la observada (55 minutos), evitar muestras duplicadas antes de 45 minutos y permitir estimaciones entre muestras consecutivas del mismo directo hasta 110 minutos, con un máximo estimado de 55 minutos por intervalo. Se aclara que GitHub Actions puede retrasar la programación.
+- **Alcance:** `update_stats.py` y este informe. No se modifican canales, datos históricos almacenados, workflow, capítulos ni el trabajo del colaborador en Arsenal (#8/#9).
+- **Validación:** pendiente de checks y revisión del PR. La corrección metodológica no garantiza que GitHub ejecute el cron cada 15 minutos; refleja la cadencia real observada.
