@@ -2193,3 +2193,13 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 - **Alcance:** cambio limitado a `.github/workflows/actualizar-stats.yml` y este registro, dentro de la rama del PR #11. No se modificó `main`, no se ejecutó una recolección manual y no se tocó Arsenal (#8/#9).
 - **Validación:** pendiente revisar el nuevo commit y sus checks. El check de Cloudflare Pages valida el despliegue de la vista previa, no la lógica del colector Python; la condición del job requiere además inspección estática y, si corresponde, validación específica del workflow.
 - **Integración:** el PR #11 permanece sujeto a revisión y autorización expresa; no se fusiona automáticamente.
+
+
+## 2026-11-11 — Incorporar pruebas de regresión para el muestreo Twitch
+
+- **Objetivo:** agregar validación ejecutable de la metodología de estimación modificada en el PR #11, sin consultar APIs externas ni utilizar credenciales.
+- **Archivos añadidos:** `tests/test_update_stats.py` y `.github/workflows/test-stats.yml`.
+- **Pruebas:** seis casos cubren el cálculo entre muestras del mismo directo, el tope de 55 minutos por intervalo, el rechazo de huecos superiores a 110 minutos, el cambio de ID de directo, los períodos offline y el recorte de la ventana histórica de 30 días.
+- **Automatización:** el nuevo workflow ejecuta `python -m unittest discover -s tests -v` con Python 3.12 ante pull requests a `main` que afecten al colector, las pruebas o el propio workflow.
+- **Validación:** el workflow se acaba de incorporar a la rama del PR; el resultado de GitHub Actions queda pendiente. El check de Cloudflare Pages sigue siendo únicamente una validación del despliegue de vista previa.
+- **Alcance:** no se ejecuta una recolección real, no se usan secretos, no se modifican datos ni canales y no se toca Arsenal (#8/#9. El PR #11 permanece abierto y no se fusiona automáticamente.
