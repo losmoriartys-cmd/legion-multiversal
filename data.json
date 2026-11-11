@@ -13,7 +13,7 @@
     "daved0608"
   ],
   "collection": {
-    "started_at": "2026-11-11T22:54:56Z",
+    "started_at": "2026-11-11T23:48:34Z",
     "expected_channels": 7,
     "resolved_channels": 7,
     "sampled_channels": [
@@ -33,7 +33,7 @@
     "elgabii090"
   ],
   "channel_registry_note": "Los canales archivados se conservan para consulta histórica y no se incluyen en los indicadores del roster activo.",
-  "updated_at": "2026-11-11T22:54:56Z",
+  "updated_at": "2026-11-11T23:48:34Z",
   "channels": {
     "ladymoriarty01": {
       "login": "ladymoriarty01",
@@ -48,9 +48,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-11T22:54:56Z",
+      "updated_at": "2026-11-11T23:48:34Z",
       "window": {
-        "samples_total": 218,
+        "samples_total": 219,
         "live_samples": 7,
         "streams_observed": 3,
         "average_viewers_sampled": 6.4,
@@ -2074,6 +2074,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-11T23:48:34Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -2085,17 +2094,17 @@
       "twitch_url": "https://twitch.tv/ther0d3r1k",
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
-      "live": false,
-      "current_viewers": null,
-      "current_game": null,
-      "current_title": null,
-      "stream_started_at": null,
-      "updated_at": "2026-11-11T22:54:56Z",
+      "live": true,
+      "current_viewers": 43,
+      "current_game": "Apex Legends",
+      "current_title": "🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
+      "stream_started_at": "2026-11-11T22:55:01Z",
+      "updated_at": "2026-11-11T23:48:34Z",
       "window": {
-        "samples_total": 218,
-        "live_samples": 24,
-        "streams_observed": 5,
-        "average_viewers_sampled": 22.1,
+        "samples_total": 219,
+        "live_samples": 25,
+        "streams_observed": 6,
+        "average_viewers_sampled": 22.9,
         "peak_viewers_sampled": 46,
         "observed_live_hours": 15.49,
         "estimated_hours_watched": 349.34,
@@ -2115,6 +2124,13 @@
             "peak_viewers_sampled": 30
           },
           {
+            "name": "Apex Legends",
+            "live_samples": 5,
+            "streams_observed": 4,
+            "average_viewers_sampled": 29.0,
+            "peak_viewers_sampled": 43
+          },
+          {
             "name": "Counter-Strike",
             "live_samples": 4,
             "streams_observed": 2,
@@ -2127,13 +2143,6 @@
             "streams_observed": 2,
             "average_viewers_sampled": 23.5,
             "peak_viewers_sampled": 38
-          },
-          {
-            "name": "Apex Legends",
-            "live_samples": 4,
-            "streams_observed": 3,
-            "average_viewers_sampled": 25.5,
-            "peak_viewers_sampled": 42
           }
         ],
         "daily_activity": [
@@ -2181,10 +2190,10 @@
           },
           {
             "date": "2026-11-11",
-            "live_samples": 2,
-            "streams_observed": 1,
-            "average_viewers_sampled": 21.0,
-            "peak_viewers_sampled": 26
+            "live_samples": 3,
+            "streams_observed": 2,
+            "average_viewers_sampled": 28.3,
+            "peak_viewers_sampled": 43
           }
         ],
         "method": "Muestreo propio con cadencia observada cercana a 55 minutos, variable por la programación de GitHub Actions; horas estimadas solo entre muestras consecutivas del mismo directo cuando el intervalo no supera 110 minutos. Categorías y evolución diaria se calculan sobre las muestras observadas."
@@ -4151,6 +4160,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-11T23:48:34Z",
+          "is_live": true,
+          "viewer_count": 43,
+          "game_name": "Apex Legends",
+          "title": "🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
+          "stream_id": "319498806773",
+          "started_at": "2026-11-11T22:55:01Z"
         }
       ]
     },
@@ -4813,9 +4831,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-11T22:54:56Z",
+      "updated_at": "2026-11-11T23:48:34Z",
       "window": {
-        "samples_total": 218,
+        "samples_total": 219,
         "live_samples": 6,
         "streams_observed": 3,
         "average_viewers_sampled": 7.2,
@@ -6818,6 +6836,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-11T23:48:34Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -6834,9 +6861,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-11T22:54:56Z",
+      "updated_at": "2026-11-11T23:48:34Z",
       "window": {
-        "samples_total": 218,
+        "samples_total": 219,
         "live_samples": 15,
         "streams_observed": 6,
         "average_viewers_sampled": 6.7,
@@ -8888,6 +8915,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-11T23:48:34Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -8904,9 +8940,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-11T22:54:56Z",
+      "updated_at": "2026-11-11T23:48:34Z",
       "window": {
-        "samples_total": 218,
+        "samples_total": 219,
         "live_samples": 11,
         "streams_observed": 6,
         "average_viewers_sampled": 2.0,
@@ -10944,6 +10980,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-11T23:48:34Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -11572,25 +11617,25 @@
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
       "live": true,
-      "current_viewers": 19,
+      "current_viewers": 4,
       "current_game": "Just Chatting",
       "current_title": "es mi primer dia",
       "stream_started_at": "2026-11-11T18:54:06Z",
-      "updated_at": "2026-11-11T22:54:56Z",
+      "updated_at": "2026-11-11T23:48:34Z",
       "window": {
-        "samples_total": 218,
-        "live_samples": 39,
+        "samples_total": 219,
+        "live_samples": 40,
         "streams_observed": 10,
-        "average_viewers_sampled": 7.1,
+        "average_viewers_sampled": 7.0,
         "peak_viewers_sampled": 45,
-        "observed_live_hours": 24.62,
-        "estimated_hours_watched": 170.18,
+        "observed_live_hours": 25.52,
+        "estimated_hours_watched": 173.75,
         "game_breakdown": [
           {
             "name": "Just Chatting",
-            "live_samples": 15,
+            "live_samples": 16,
             "streams_observed": 7,
-            "average_viewers_sampled": 7.1,
+            "average_viewers_sampled": 6.9,
             "peak_viewers_sampled": 22
           },
           {
@@ -11667,9 +11712,9 @@
           },
           {
             "date": "2026-11-11",
-            "live_samples": 7,
+            "live_samples": 8,
             "streams_observed": 2,
-            "average_viewers_sampled": 7.3,
+            "average_viewers_sampled": 6.9,
             "peak_viewers_sampled": 19
           }
         ],
@@ -13637,6 +13682,15 @@
           "title": "es mi primer dia",
           "stream_id": "321307262944",
           "started_at": "2026-11-11T18:54:06Z"
+        },
+        {
+          "sampled_at": "2026-11-11T23:48:34Z",
+          "is_live": true,
+          "viewer_count": 4,
+          "game_name": "Just Chatting",
+          "title": "es mi primer dia",
+          "stream_id": "321307262944",
+          "started_at": "2026-11-11T18:54:06Z"
         }
       ]
     },
@@ -13648,17 +13702,17 @@
       "twitch_url": "https://twitch.tv/losmoriartys",
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
-      "live": false,
-      "current_viewers": null,
-      "current_game": null,
-      "current_title": null,
-      "stream_started_at": null,
-      "updated_at": "2026-11-11T22:54:56Z",
+      "live": true,
+      "current_viewers": 21,
+      "current_game": "Just Chatting",
+      "current_title": "[Rincon del Nerd De ULTIMO MOMENTO]  Bombazo con el Postcredito de VisionQuest (Spoiler del futuro de Marvel) + Despido de James Gunn",
+      "stream_started_at": "2026-11-11T22:57:08Z",
+      "updated_at": "2026-11-11T23:48:34Z",
       "window": {
-        "samples_total": 218,
-        "live_samples": 8,
-        "streams_observed": 4,
-        "average_viewers_sampled": 18.0,
+        "samples_total": 219,
+        "live_samples": 9,
+        "streams_observed": 5,
+        "average_viewers_sampled": 18.3,
         "peak_viewers_sampled": 31,
         "observed_live_hours": 2.73,
         "estimated_hours_watched": 63.48,
@@ -13671,18 +13725,18 @@
             "peak_viewers_sampled": 31
           },
           {
+            "name": "Just Chatting",
+            "live_samples": 3,
+            "streams_observed": 2,
+            "average_viewers_sampled": 19.0,
+            "peak_viewers_sampled": 29
+          },
+          {
             "name": "Clive Barker's Hellraiser: Revival",
             "live_samples": 2,
             "streams_observed": 2,
             "average_viewers_sampled": 20.0,
             "peak_viewers_sampled": 25
-          },
-          {
-            "name": "Just Chatting",
-            "live_samples": 2,
-            "streams_observed": 1,
-            "average_viewers_sampled": 18.0,
-            "peak_viewers_sampled": 29
           },
           {
             "name": "Fortnite",
@@ -13727,6 +13781,13 @@
             "streams_observed": 1,
             "average_viewers_sampled": 11.0,
             "peak_viewers_sampled": 11
+          },
+          {
+            "date": "2026-11-11",
+            "live_samples": 1,
+            "streams_observed": 1,
+            "average_viewers_sampled": 21.0,
+            "peak_viewers_sampled": 21
           }
         ],
         "method": "Muestreo propio con cadencia observada cercana a 55 minutos, variable por la programación de GitHub Actions; horas estimadas solo entre muestras consecutivas del mismo directo cuando el intervalo no supera 110 minutos. Categorías y evolución diaria se calculan sobre las muestras observadas."
@@ -15693,6 +15754,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-11T23:48:34Z",
+          "is_live": true,
+          "viewer_count": 21,
+          "game_name": "Just Chatting",
+          "title": "[Rincon del Nerd De ULTIMO MOMENTO]  Bombazo con el Postcredito de VisionQuest (Spoiler del futuro de Marvel) + Despido de James Gunn",
+          "stream_id": "319498840053",
+          "started_at": "2026-11-11T22:57:08Z"
         }
       ]
     }
