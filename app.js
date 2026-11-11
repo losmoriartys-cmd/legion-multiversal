@@ -1632,7 +1632,7 @@ function openHeroModal(index) {
 
         function renderChapterPager(activeNumber) {
             const panels = Array.from(document.querySelectorAll('.chapter-panel')).sort((a,b) =>
-                Number(a.id.replace('chapter-','')) - Number(b.id.replace('chapter-',''))
+                Number(a.dataset.editorialNumber || 999) - Number(b.dataset.editorialNumber || 999)
             );
             const index = panels.findIndex(panel => Number(panel.id.replace('chapter-','')) === Number(activeNumber));
             const panel = panels[index];
@@ -1647,7 +1647,7 @@ function openHeroModal(index) {
             const labelFor = target => {
                 const number = Number(target.id.replace('chapter-',''));
                 const nav = document.querySelector('.nav-btn[data-chapter="' + number + '"]');
-                return nav ? nav.textContent.replace(/^\\d+\\s*/, '').trim() : (number === 0 ? 'ÍNDICE' : 'CAPÍTULO ' + String(number).padStart(2,'0'));
+                return nav ? nav.textContent.replace(/^\\d+\\s*/, '').trim() : (number === 0 ? 'ÍNDICE' : 'CAPÍTULO ' + String(panel.dataset.editorialNumber || number).padStart(2,'0'));
             };
             const previous = panels[index-1], next = panels[index+1];
             pager.innerHTML = '';
