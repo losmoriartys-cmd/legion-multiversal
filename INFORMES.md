@@ -2320,3 +2320,6 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 - **Corrección metodológica:** una muestra omitida por la regla anti-duplicados no se interpreta como fallo de cobertura; la captura puede ser completa cuando todos los canales esperados están contabilizados entre muestras nuevas y omisiones válidas.
 - **Alcance:** index.html, app.js, styles.css e INFORMES.md. No se modifican data.json, roster-data.json, credenciales, retratos ni fotografías. No se altera el contenido interno de Arsenal; únicamente se actualizan su posición y rótulo editorial.
 - **Estado:** cambios preparados en la rama work/chapter-order-stats-overhaul-2026-11-11, aislada de main. Pendiente ejecutar validaciones, checks y revisar preview en escritorio/móvil. No se fusiona automáticamente.
+
+
+- **En Vivo y vigencia:** el acceso especial «09 EN VIVO» recibe un indicador visual dinámico solo si la última captura es reciente y detecta transmisiones. El capítulo distingue una captura reciente de una lectura demorada; no presenta un estado antiguo como si fuera tiempo real. Se documenta que la página vuelve a leer el JSON cada 60 segundos, mientras que el colector de Twitch tiene una cadencia objetivo cercana a 55 minutos.
