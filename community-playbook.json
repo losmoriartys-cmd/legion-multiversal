@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "missions": [
+    {
+      "id": "expedientes",
+      "category": "EXPLORACIÓN",
+      "title": "Conocé tres integrantes",
+      "description": "Abrí tres expedientes distintos desde el Roster o desde el Mapa Multiversal.",
+      "progress_key": "profiles",
+      "target": 3,
+      "progress_label": "expedientes visitados"
+    },
+    {
+      "id": "rutas",
+      "category": "CARTOGRAFÍA",
+      "title": "Recorré cinco capítulos",
+      "description": "Visitá cinco secciones diferentes del archivo para descubrir los distintos universos de la Legión.",
+      "progress_key": "chapters",
+      "target": 5,
+      "progress_label": "capítulos visitados"
+    },
+    {
+      "id": "bitacora",
+      "category": "ARCHIVO",
+      "title": "Consultá la Bitácora Central",
+      "description": "Abrí la Bitácora para conocer el registro compartido y sus conexiones con los expedientes.",
+      "progress_key": "bitacora",
+      "target": 1,
+      "progress_label": "archivo consultado"
+    },
+    {
+      "id": "envivo",
+      "category": "COMUNIDAD",
+      "title": "Visitá la Central En Vivo",
+      "description": "Entrá a la sección de transmisiones para consultar qué integrantes aparecen en directo.",
+      "progress_key": "live",
+      "target": 1,
+      "progress_label": "central visitada"
+    }
+  ],
+  "achievements": [
+    {
+      "id": "primer-contacto",
+      "title": "Primer contacto",
+      "description": "Abriste tu primer expediente.",
+      "progress_key": "profiles",
+      "target": 1
+    },
+    {
+      "id": "explorador",
+      "title": "Explorador de universos",
+      "description": "Conociste a tres integrantes diferentes.",
+      "progress_key": "profiles",
+      "target": 3
+    },
+    {
+      "id": "cartografo",
+      "title": "Cartógrafo de la Legión",
+      "description": "Visitaste los ocho expedientes del roster.",
+      "progress_key": "profiles",
+      "target": "roster_total"
+    },
+    {
+      "id": "viajero",
+      "title": "Viajero multiversal",
+      "description": "Recorriste cinco capítulos del archivo.",
+      "progress_key": "chapters",
+      "target": 5
+    },
+    {
+      "id": "cronista",
+      "title": "Cronista del archivo",
+      "description": "Consultaste la Bitácora Central.",
+      "progress_key": "bitacora",
+      "target": 1
+    },
+    {
+      "id": "testigo",
+      "title": "Testigo de la transmisión",
+      "description": "Visitaste la Central En Vivo.",
+      "progress_key": "live",
+      "target": 1
+    }
+  ]
+}

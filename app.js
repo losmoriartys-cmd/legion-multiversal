@@ -559,6 +559,84 @@ async function loadPartnerMetrics(){
  }catch(e){body.innerHTML='<tr><td colspan="7">Métricas temporalmente no disponibles.</td></tr>';}
 }
 
+let communityPlaybook = null;
+let legionProgressFallback = { profiles: [], chapters: [], bitacora: false, live: false };
+const LEGION_PROGRESS_KEY = 'legion-multiversal-exploration-v1';
+function readLegionProgress() {
+    try {
+        const stored = JSON.parse(localStorage.getItem(LEGION_PROGRESS_KEY) || 'null');
+        if (stored && typeof stored === 'object') return {
+            profiles: Array.isArray(stored.profiles) ? stored.profiles : [],
+            chapters: Array.isArray(stored.chapters) ? stored.chapters : [],
+            bitacora: Boolean(stored.bitacora),
+            live: Boolean(stored.live)
+        };
+    } catch (error) { /* almacenamiento local no disponible */ }
+    return legionProgressFallback;
+}
+function saveLegionProgress(state) {
+    legionProgressFallback = state;
+    try { localStorage.setItem(LEGION_PROGRESS_KEY, JSON.stringify(state)); } catch (error) { /* se mantiene en memoria */ }
+}
+function recordLegionProgress(type, value) {
+    const state = readLegionProgress();
+    if (type === 'profile' && value !== undefined && !state.profiles.includes(String(value))) state.profiles.push(String(value));
+    if (type === 'chapter' && value !== undefined && !state.chapters.includes(String(value))) state.chapters.push(String(value));
+    if (type === 'bitacora') state.bitacora = true;
+    if (type === 'live') state.live = true;
+    if (type === 'chapter' && String(value) === '10') state.live = true;
+    saveLegionProgress(state);
+    renderCommunityProgress();
+}
+function renderMultiverseMap() {
+    const host = document.getElementById('multiverse-map');
+    if (!host || !heroesData.length) return;
+    const makeNode = (hero, index) => '<button type="button" class="multiverse-node" onclick="openMappedHero(' + index + ')" aria-label="Abrir expediente de ' + escapeStatsHtml(hero.name) + '"><span class="multiverse-node-number">N.º ' + escapeStatsHtml(hero.cardNumber || 'S/N') + '</span><strong>' + escapeStatsHtml(hero.name) + '</strong><span class="multiverse-node-role">' + escapeStatsHtml(hero.codename || hero.characterRole || hero.rank || 'Integrante de la Legión') + '</span><span class="multiverse-node-areas">' + (hero.areas || []).slice(0,3).map(area => '<i>' + escapeStatsHtml(area) + '</i>').join('') + '</span><em>ABRIR EXPEDIENTE ↗</em></button>';
+    const top = heroesData.slice(0,4).map(makeNode).join('');
+    const bottom = heroesData.slice(4).map((hero,index) => makeNode(hero,index+4)).join('');
+    host.innerHTML = '<div class="multiverse-map-canvas"><svg class="multiverse-connections" viewBox="0 0 1000 620" preserveAspectRatio="none" aria-hidden="true">' + [125,375,625,875].map(x => '<line x1="500" y1="310" x2="' + x + '" y2="105"></line><line x1="500" y1="310" x2="' + x + '" y2="515"></line>').join('') + '</svg><div class="multiverse-node-row">' + top + '</div><div class="multiverse-core"><span>LM</span><strong>NEXUS CENTRAL</strong><small>' + heroesData.length + ' UNIVERSOS CONECTADOS</small></div><div class="multiverse-node-row">' + bottom + '</div></div>';
+}
+function openMappedHero(index) {
+    switchChapter(2);
+    window.lastHeroProfileTrigger = null;
+    openHeroProfile(index, null);
+}
+async function loadCommunityPlaybook() {
+    try {
+        const response = await fetch('community-playbook.json', { cache: 'no-store' });
+        if (!response.ok) throw new Error('No se pudo leer community-playbook.json');
+        communityPlaybook = await response.json();
+        renderCommunityProgress();
+    } catch (error) {
+        const missions = document.getElementById('community-missions');
+        const achievements = document.getElementById('community-achievements');
+        if (missions) missions.innerHTML = '<p class="stats-note">Las misiones no están disponibles temporalmente.</p>';
+        if (achievements) achievements.innerHTML = '<p class="stats-note">Las insignias no están disponibles temporalmente.</p>';
+    }
+}
+function renderCommunityProgress() {
+    if (!communityPlaybook) return;
+    const state = readLegionProgress();
+    const progressFor = key => key === 'profiles' ? state.profiles.length : key === 'chapters' ? state.chapters.length : key === 'bitacora' ? Number(state.bitacora) : key === 'live' ? Number(state.live) : 0;
+    const missionsHost = document.getElementById('community-missions');
+    if (missionsHost) missionsHost.innerHTML = (communityPlaybook.missions || []).map(mission => {
+        const value = progressFor(mission.progress_key);
+        const target = mission.target === 'roster_total' ? Math.max(1, heroesData.length) : Math.max(1, Number(mission.target) || 1);
+        const percent = Math.min(100, value / target * 100);
+        const complete = value >= target;
+        return '<article class="community-mission' + (complete ? ' is-complete' : '') + '"><div class="community-mission-top"><span>' + escapeStatsHtml(mission.category || 'MISIÓN') + '</span><b>' + (complete ? 'COMPLETADA' : 'EN CURSO') + '</b></div><h4>' + escapeStatsHtml(mission.title) + '</h4><p>' + escapeStatsHtml(mission.description) + '</p><div class="community-progress-track" role="progressbar" aria-label="' + escapeStatsHtml(mission.title) + '" aria-valuemin="0" aria-valuemax="' + target + '" aria-valuenow="' + Math.min(value,target) + '"><i style="width:' + percent.toFixed(1) + '%"></i></div><small>' + Math.min(value,target) + ' / ' + target + ' · ' + escapeStatsHtml(mission.progress_label || 'progreso') + '</small></article>';
+    }).join('');
+    const achievementsHost = document.getElementById('community-achievements');
+    if (achievementsHost) achievementsHost.innerHTML = (communityPlaybook.achievements || []).map(achievement => {
+        const achievementTarget = achievement.target === 'roster_total' ? Math.max(1, heroesData.length) : Number(achievement.target || 1);
+        const unlocked = progressFor(achievement.progress_key) >= achievementTarget;
+        return '<article class="community-achievement' + (unlocked ? ' is-unlocked' : ' is-locked') + '"><span class="achievement-seal">' + (unlocked ? '✦' : '◇') + '</span><div><small>' + (unlocked ? 'INSIGNIA DESBLOQUEADA' : 'INSIGNIA POR DESCUBRIR') + '</small><h4>' + escapeStatsHtml(achievement.title) + '</h4><p>' + escapeStatsHtml(achievement.description) + '</p></div></article>';
+    }).join('');
+}
+document.addEventListener('click', event => {
+    const link = event.target.closest('a[href*="bitacora-preview.html"]');
+    if (link) recordLegionProgress('bitacora');
+});
 function getRosterFilteredEntries() {
     const search = (document.getElementById('roster-search')?.value || '').trim().toLocaleLowerCase('es');
     const role = document.getElementById('roster-role-filter')?.value || 'all';
@@ -925,6 +1003,7 @@ function renderCommercialQuickView(hero) {
 function openHeroProfile(index, triggerElement = document.activeElement) {
     const hero = heroesData[index];
     if (!hero) return;
+    recordLegionProgress('profile', hero.cardNumber || hero.name);
     const home = document.getElementById('roster-home');
     const page = document.getElementById('hero-profile-page');
     if (!home || !page) return;
@@ -1553,7 +1632,7 @@ function openHeroModal(index) {
 
         function renderChapterPager(activeNumber) {
             const panels = Array.from(document.querySelectorAll('.chapter-panel')).sort((a,b) =>
-                Number(a.id.replace('chapter-','')) - Number(b.id.replace('chapter-',''))
+                Number(a.dataset.editorialNumber || 999) - Number(b.dataset.editorialNumber || 999)
             );
             const index = panels.findIndex(panel => Number(panel.id.replace('chapter-','')) === Number(activeNumber));
             const panel = panels[index];
@@ -1568,7 +1647,7 @@ function openHeroModal(index) {
             const labelFor = target => {
                 const number = Number(target.id.replace('chapter-',''));
                 const nav = document.querySelector('.nav-btn[data-chapter="' + number + '"]');
-                return nav ? nav.textContent.replace(/^\\d+\\s*/, '').trim() : (number === 0 ? 'ÍNDICE' : 'CAPÍTULO ' + String(number).padStart(2,'0'));
+                return nav ? nav.textContent.replace(/^\d+\s*/, '').trim() : (number === 0 ? 'ÍNDICE' : 'CAPÍTULO ' + String(target.dataset.editorialNumber || number).padStart(2,'0'));
             };
             const previous = panels[index-1], next = panels[index+1];
             pager.innerHTML = '';
@@ -1613,6 +1692,7 @@ function openHeroModal(index) {
                 else b.removeAttribute('aria-current');
             });
             panel.classList.add('active');
+            recordLegionProgress('chapter', String(chapterNum));
             renderChapterPager(chapterNum);
             playChapterCue();
             window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth' });
@@ -1627,6 +1707,7 @@ function openHeroModal(index) {
         try {
             await loadRosterData();
             renderRoster();
+            renderMultiverseMap();
             restoreHeroProfileFromHash();
         } catch (error) {
             console.error('No se pudo inicializar el roster:', error);
@@ -1639,7 +1720,9 @@ function openHeroModal(index) {
             loadPartnerMetrics(),
             loadCreatorRecords(),
             loadPlatformStatsData(),
-            loadLegionNews()
+            loadLegionNews(),
+            loadCommunityPlaybook()
         ]);
+        if (initialChapter) recordLegionProgress('chapter', String(initialChapter.id.replace('chapter-','')));
         window.setInterval(() => { loadInstituteStats(); }, 60000);
         };
