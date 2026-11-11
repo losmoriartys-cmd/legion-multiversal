@@ -3701,3 +3701,10 @@ header .primary-navigation .nav-btn[aria-current="page"]{border-color:#8be3f3;co
 .stats-channel-card dd{margin:3px 0 0;color:#f3e5bd;font-size:.92rem;font-weight:800;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
 .stats-channel-foot{display:block;margin-top:12px;color:#7f91a9;font-size:.64rem}
 @media(max-width:600px){.stats-channel-heading{align-items:flex-start;flex-direction:column;gap:6px}.stats-channel-grid{grid-template-columns:1fr}.stats-channel-card{padding:14px}}
+
+
+/* El acceso a En Vivo gana jerarquía solo cuando la última captura es reciente. */
+.nav-btn-live{position:relative;border-color:rgba(255,112,112,.55)!important}
+.nav-btn-live::before{content:"";display:inline-block;width:7px;height:7px;margin:0 8px 1px 0;border-radius:50%;background:#8793a5;vertical-align:middle}
+.nav-btn-live.is-live{color:#fff!important;background:linear-gradient(110deg,rgba(133,22,38,.9),rgba(57,17,31,.95))!important;border-color:#ff626f!important;box-shadow:0 0 0 1px rgba(255,98,111,.18),0 0 18px rgba(255,70,90,.2)}
+.nav-btn-live.is-live::before{background:#ff5365;box-shadow:0 0 0 4px rgba(255,83,101,.16),0 0 12px rgba(255,83,101,.8)}
