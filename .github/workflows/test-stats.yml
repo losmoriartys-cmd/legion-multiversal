@@ -1,0 +1,26 @@
+name: Validar colector de estadísticas
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'update_stats.py'
+      - 'tests/**'
+      - '.github/workflows/test-stats.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  python-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Ejecutar pruebas del colector
+        run: python -m unittest discover -s tests -v

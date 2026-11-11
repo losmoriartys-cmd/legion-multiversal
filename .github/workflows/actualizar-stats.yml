@@ -2,6 +2,8 @@ name: Actualizar estadísticas multiplataforma
 
 on:
   push:
+    branches:
+      - main
     paths:
       - 'update_stats.py'
       - 'update_platform_stats.py'
@@ -20,6 +22,8 @@ concurrency:
 
 jobs:
   actualizar:
+    # Evita que workflow_dispatch ejecute el colector desde ramas distintas de main.
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 8
     steps:
