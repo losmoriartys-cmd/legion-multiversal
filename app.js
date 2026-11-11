@@ -513,13 +513,15 @@ function getRosterFilteredEntries() {
     const role = document.getElementById('roster-role-filter')?.value || 'all';
     const platform = document.getElementById('roster-platform-filter')?.value || 'all';
     const format = document.getElementById('roster-format-filter')?.value || 'all';
+    const area = document.getElementById('roster-area-filter')?.value || 'all';
     const sort = document.getElementById('roster-sort')?.value || 'featured';
     const entries = heroesData.map((hero, index) => ({ hero, index })).filter(({hero}) => {
         const haystack = [hero.name, hero.codename, hero.characterRole, hero.rank, ...(hero.areas || []), ...(hero.platforms || [])].join(' ').toLocaleLowerCase('es');
         return (!search || haystack.includes(search))
             && (role === 'all' || hero.role === role)
             && (platform === 'all' || (hero.platforms || []).includes(platform) || Boolean(hero[platform]))
-            && (format === 'all' || hero.creator_type === format);
+            && (format === 'all' || hero.creator_type === format)
+            && (area === 'all' || (hero.areas || []).includes(area));
     });
     if (sort === 'name') entries.sort((a,b) => a.hero.name.localeCompare(b.hero.name, 'es'));
     if (sort === 'number') entries.sort((a,b) => String(a.hero.cardNumber || '999999').localeCompare(String(b.hero.cardNumber || '999999'), 'es', {numeric:true}));
@@ -529,12 +531,41 @@ function bindRosterControls() {
     const root = document.getElementById('roster-home');
     if (!root || root.dataset.controlsBound === 'true') return;
     root.dataset.controlsBound = 'true';
-    ['roster-search','roster-role-filter','roster-platform-filter','roster-format-filter','roster-sort'].forEach(id => {
+    const areaSelect = document.getElementById('roster-area-filter');
+    if (areaSelect && areaSelect.dataset.optionsReady !== 'true') {
+        const areas = [...new Set(heroesData.flatMap(hero => hero.areas || []))].sort((a,b) => a.localeCompare(b, 'es'));
+        areas.forEach(area => {
+            const option = document.createElement('option');
+            option.value = area;
+            option.textContent = area;
+            areaSelect.appendChild(option);
+        });
+        areaSelect.dataset.optionsReady = 'true';
+    }
+    ['roster-search','roster-role-filter','roster-platform-filter','roster-format-filter','roster-area-filter','roster-sort'].forEach(id => {
         const control = document.getElementById(id);
         if (control) control.addEventListener(control.tagName === 'INPUT' ? 'input' : 'change', renderRoster);
     });
+    root.addEventListener('click', event => {
+        const clearButton = event.target.closest('[data-remove-roster-filter]');
+        if (!clearButton) return;
+        const id = clearButton.getAttribute('data-remove-roster-filter');
+        if (id === 'all') {
+            ['roster-search','roster-role-filter','roster-platform-filter','roster-format-filter','roster-area-filter'].forEach(filterId => {
+                const field = document.getElementById(filterId);
+                if (field) field.value = filterId === 'roster-search' ? '' : 'all';
+            });
+            renderRoster();
+            return;
+        }
+        const control = document.getElementById(id);
+        if (!control) return;
+        control.value = id === 'roster-search' ? '' : 'all';
+        renderRoster();
+        if (id === 'roster-search') control.focus();
+    });
     document.getElementById('roster-reset')?.addEventListener('click', () => {
-        ['roster-search','roster-role-filter','roster-platform-filter','roster-format-filter'].forEach(id => {
+        ['roster-search','roster-role-filter','roster-platform-filter','roster-format-filter','roster-area-filter'].forEach(id => {
             const control = document.getElementById(id);
             if (control) control.value = id === 'roster-search' ? '' : 'all';
         });
@@ -556,6 +587,27 @@ function setRosterCardFace(card, flipped) {
     back.setAttribute('aria-hidden', String(!flipped));
     card.classList.toggle('is-flipped', Boolean(flipped));
 }
+function updateRosterFilterSummary() {
+    const host = document.getElementById('roster-active-filters');
+    if (!host) return;
+    const fields = [
+        ['roster-search', 'Búsqueda', value => '«' + value + '»'],
+        ['roster-role-filter', 'Función', value => document.querySelector('#roster-role-filter option:checked')?.textContent || value],
+        ['roster-platform-filter', 'Plataforma', value => value.toUpperCase()],
+        ['roster-format-filter', 'Formato', value => document.querySelector('#roster-format-filter option:checked')?.textContent || value],
+        ['roster-area-filter', 'Especialidad', value => value]
+    ];
+    const active = fields.filter(([id]) => {
+        const value = document.getElementById(id)?.value;
+        return value && value !== 'all';
+    });
+    host.innerHTML = active.length
+        ? '<span class="roster-filter-caption">FILTROS ACTIVOS</span>' + active.map(([id,label,format]) => {
+            const value = document.getElementById(id).value;
+            return '<button type="button" class="roster-filter-chip" data-remove-roster-filter="' + id + '" aria-label="Quitar filtro ' + escapeStatsHtml(label) + ': ' + escapeStatsHtml(format(value)) + '">' + escapeStatsHtml(label) + ': ' + escapeStatsHtml(format(value)) + ' <span aria-hidden="true">×</span></button>';
+        }).join('') + '<button type="button" class="roster-filter-clear-inline" data-remove-roster-filter="all">LIMPIAR</button>'
+        : '<span class="roster-filter-caption">MOSTRANDO EL ARCHIVO COMPLETO</span>';
+}
 function renderRoster() {
     const container = document.getElementById('roster-container');
     if (!container) return;
@@ -563,7 +615,8 @@ function renderRoster() {
     bindRosterControls();
     const filteredEntries = getRosterFilteredEntries();
     const results = document.getElementById('roster-results');
-    if (results) results.textContent = filteredEntries.length + (filteredEntries.length === 1 ? ' integrante encontrado' : ' integrantes encontrados');
+    if (results) results.textContent = filteredEntries.length + (filteredEntries.length === 1 ? ' integrante encontrado' : ' integrantes encontrados') + ' de ' + heroesData.length + ' en el archivo';
+    updateRosterFilterSummary();
     const groups = [
         { key: 'director', title: 'DIRECCIÓN', desc: 'Quienes impulsan la visión compartida y coordinan el rumbo de la Legión.' },
         { key: 'teacher', title: 'PROFESORES', desc: 'Integrantes que aportan experiencia, orientación y distintas formas de acompañar al equipo.' },
@@ -825,15 +878,28 @@ function openHeroProfile(index, triggerElement = document.activeElement) {
     const page = document.getElementById('hero-profile-page');
     if (!home || !page) return;
     const channel = hero.youtube || hero.twitch || '';
-    window.lastHeroProfileTrigger = triggerElement instanceof HTMLElement ? triggerElement : null;
+    window.lastHeroProfileTrigger = triggerElement instanceof HTMLElement ? triggerElement : window.lastHeroProfileTrigger || null;
+    window.currentHeroProfileIndex = index;
     const profileArt = hero.img || hero.portrait || '';
     const profileArtAlt = 'Ilustración oficial de ' + hero.name + ' para su expediente individual';
+    const filteredProfiles = getRosterFilteredEntries();
+    const profilePosition = filteredProfiles.findIndex(entry => entry.index === index);
+    const previousDisabled = profilePosition <= 0;
+    const nextDisabled = profilePosition < 0 || profilePosition >= filteredProfiles.length - 1;
+    const profilePager = '<nav class="hero-profile-pager" aria-label="Navegación entre expedientes"><button type="button" onclick="navigateHeroProfile(-1)"' + (previousDisabled ? ' disabled' : '') + '>← ANTERIOR</button><span>EXPEDIENTE ' + (profilePosition >= 0 ? profilePosition + 1 : '—') + ' / ' + filteredProfiles.length + '</span><button type="button" onclick="navigateHeroProfile(1)"' + (nextDisabled ? ' disabled' : '') + '>SIGUIENTE →</button></nav>';
     page.innerHTML = '<div class="hero-profile-layout hero-profile-gateway"><div class="hero-profile-art-wrap"><div class="hero-profile-art-frame"><span class="hero-profile-art-stamp">LEGIÓN<br>MULTIVERSAL</span>' + (profileArt ? '<img class="hero-profile-art" src="' + escapeStatsHtml(profileArt) + '" alt="' + escapeStatsHtml(profileArtAlt) + '" loading="eager" onerror="this.closest(\'.hero-profile-art-frame\').classList.add(\'art-unavailable\');this.remove();">' : '<div class="hero-profile-art-fallback">ILUSTRACIÓN NO DISPONIBLE</div>') + '<span class="hero-profile-art-caption">EXPEDIENTE N.º ' + escapeStatsHtml(hero.cardNumber || 'S/N') + '</span></div></div><div class="hero-profile-copy"><span class="stats-status">EXPEDIENTE INDIVIDUAL · ' + escapeStatsHtml(hero.rank || 'CLASIFICACIÓN PENDIENTE') + '</span><p class="profile-section-kicker">ARCHIVO PERSONAL · ' + escapeStatsHtml(hero.cardNumber ? 'N.º ' + hero.cardNumber : 'REGISTRO DE LA LEGIÓN') + '</p><h3 id="hero-profile-title" tabindex="-1">' + escapeStatsHtml(hero.name) + '</h3><p>' + escapeStatsHtml(hero.bio || 'Presentación personal pendiente de completar.') + '</p><div class="hero-profile-actions"><button class="twitch-link-btn" type="button" onclick="openHeroModal(' + index + ')">ABRIR BITÁCORA COMPLETA</button><a class=\"btn-link\" href=\"./bitacora-preview.html\">ARCHIVO CENTRAL ↗</a>' + (channel ? '<a class="btn-link" href="' + escapeStatsHtml(channel) + '" target="_blank" rel="noopener">VISITAR CANAL</a>' : '') + '<button class="hero-profile-back" type="button" onclick="closeHeroProfile()">VOLVER AL ROSTER</button></div></div></div>' + renderCommercialQuickView(hero);
     home.hidden = true;
     page.hidden = false;
     history.replaceState(null, '', '#expediente-' + encodeURIComponent(hero.name.toLowerCase().replace(/[^a-z0-9]+/g,'-')));
     page.scrollIntoView({behavior:'smooth',block:'start'});
     requestAnimationFrame(() => document.getElementById('hero-profile-title')?.focus({preventScroll:true}));
+}
+function navigateHeroProfile(direction) {
+    const entries = getRosterFilteredEntries();
+    const currentPosition = entries.findIndex(entry => entry.index === window.currentHeroProfileIndex);
+    const nextEntry = entries[currentPosition + Number(direction)];
+    if (!nextEntry) return;
+    openHeroProfile(nextEntry.index, window.lastHeroProfileTrigger || document.activeElement);
 }
 function restoreHeroProfileFromHash() {
     const slug = decodeURIComponent((location.hash || '').replace(/^#expediente-/, ''));
@@ -865,6 +931,7 @@ function closeHeroProfile() {
     document.getElementById('chapter-2')?.scrollIntoView({behavior:'smooth',block:'start'});
     const trigger = window.lastHeroProfileTrigger;
     window.lastHeroProfileTrigger = null;
+    window.currentHeroProfileIndex = null;
     if (trigger && trigger.isConnected && typeof trigger.focus === 'function') {
         requestAnimationFrame(() => {
             if (trigger.isConnected) trigger.focus({preventScroll:true});
