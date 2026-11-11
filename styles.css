@@ -3546,3 +3546,40 @@ header .primary-navigation { display:flex; flex-wrap:wrap; gap:7px; align-items:
 .chapter-pager-next{text-align:right}
 @media(max-width:760px){.arsenal-hub-heading{align-items:flex-start;flex-direction:column}.arsenal-platform-kpis{grid-template-columns:1fr 1fr}.secondary-navigation{min-width:0;width:100%}.secondary-navigation-links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}.nav-btn-secondary{justify-content:center}.chapter-pager{grid-template-columns:1fr 1fr}.chapter-pager-index{grid-column:1/-1;grid-row:1}.chapter-pager-prev{grid-column:1}.chapter-pager-next{grid-column:2}}
 @media(max-width:480px){.secondary-navigation-links{grid-template-columns:1fr}.nav-btn-secondary{justify-content:flex-start}.arsenal-platform-kpis{grid-template-columns:1fr}.chapter-pager button{font-size:.58rem;padding:9px 7px}}
+
+
+/* Inicio y navegación global · recorrido editorial accesible */
+.skip-to-content{position:absolute;left:14px;top:-80px;z-index:10000;padding:11px 15px;background:#f4d98d;color:#101722;border:2px solid #101722;font-weight:900;text-decoration:none}
+.skip-to-content:focus{top:12px}
+.sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+.navigation-group-label{margin:10px 0 6px;color:#8be3f3;font:.68rem 'Special Elite',cursive;font-weight:700;letter-spacing:.16em}
+header .primary-navigation{width:100%;padding-bottom:5px}
+header .primary-navigation .nav-btn[aria-current="page"]{border-color:#8be3f3;color:#fff;background:linear-gradient(145deg,rgba(25,94,123,.9),rgba(17,35,55,.96));box-shadow:0 0 0 1px rgba(139,227,243,.18),0 4px 14px rgba(0,0,0,.2)}
+.secondary-navigation{width:100%;max-width:none;margin-top:5px}
+.secondary-navigation-heading{padding-bottom:2px}
+.secondary-navigation .nav-btn[aria-current="page"]{border-color:#8be3f3;color:#fff;background:rgba(25,94,123,.45)}
+.executive-directory{padding:34px 0;border-bottom:1px solid rgba(148,190,220,.2)}
+.executive-directory-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;margin-top:20px}
+.executive-directory-card{display:flex;flex-direction:column;align-items:flex-start;min-width:0;padding:clamp(17px,2.2vw,24px);border:1px solid rgba(126,205,230,.3);background:linear-gradient(145deg,rgba(20,37,57,.96),rgba(9,17,29,.98));box-shadow:5px 5px 0 #03070d}
+.executive-directory-index{color:#8be3f3;font:.68rem 'Special Elite',cursive;font-weight:700;letter-spacing:.12em}
+.executive-directory-card h4{margin:12px 0 8px;color:#f2d99a;font:clamp(1.25rem,2vw,1.65rem)/1.05 'Bangers',cursive;letter-spacing:.035em}
+.executive-directory-card p{margin:0 0 18px;color:#bdcad9;font-size:.9rem;line-height:1.55}
+.executive-directory-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;width:100%;margin-top:auto}
+.executive-directory-links button{display:flex;justify-content:space-between;align-items:center;gap:8px;min-height:39px;padding:9px 10px;border:1px solid rgba(126,205,230,.25);background:rgba(6,14,24,.65);color:#e8f0f7;text-align:left;font-size:.68rem;font-weight:900;letter-spacing:.035em;cursor:pointer;transition:background .18s ease,border-color .18s ease,transform .18s ease}
+.executive-directory-links button span{color:#8be3f3;font-size:.9rem}
+.executive-directory-links button:hover{transform:translateY(-2px);border-color:#8be3f3;background:rgba(35,90,115,.35)}
+.executive-directory-links button:focus-visible,.primary-navigation .nav-btn:focus-visible,.secondary-navigation .nav-btn:focus-visible{outline:3px solid #fff;outline-offset:3px}
+@media(max-width:900px){.executive-directory-grid{grid-template-columns:1fr 1fr}.executive-directory-card:last-child{grid-column:1/-1}}
+@media(max-width:760px){
+ header .primary-navigation{display:flex;flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;gap:7px;padding:5px 2px 12px;scroll-snap-type:x proximity;overscroll-behavior-inline:contain}
+ header .primary-navigation .nav-btn{flex:0 0 auto;white-space:nowrap;scroll-snap-align:start}
+ .secondary-navigation-links{display:flex;flex-wrap:wrap}
+ .secondary-navigation .nav-btn-secondary{flex:1 1 145px;justify-content:center}
+}
+@media(max-width:600px){
+ .executive-directory-grid{grid-template-columns:1fr}
+ .executive-directory-card:last-child{grid-column:auto}
+ .executive-directory-links{grid-template-columns:1fr 1fr}
+ .navigation-group-label{margin-top:8px}
+}
+@media(max-width:380px){.executive-directory-links{grid-template-columns:1fr}}

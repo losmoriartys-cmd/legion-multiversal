@@ -1475,6 +1475,10 @@ function openHeroModal(index) {
             if(current===panel)return;
             const transition=document.getElementById('chapter-transition');
             const chapterName=(document.querySelector(`.nav-btn[data-chapter="${chapterNum}"]`)||{}).textContent||'NUEVO EXPEDIENTE';
+            const readableChapterName=chapterName.replace(/\\s+/g,' ').trim();
+            document.title=Number(chapterNum)===0?'LEGIÓN MULTIVERSAL | Diferentes mundos. Una misma Legión.':`${readableChapterName} | LEGIÓN MULTIVERSAL`;
+            const announcement=document.getElementById('chapter-announcement');
+            if(announcement)announcement.textContent=`Sección ${readableChapterName} abierta.`;
             if(transition){
                 transition.setAttribute('data-title',chapterName.trim());
                 transition.classList.remove('play');
