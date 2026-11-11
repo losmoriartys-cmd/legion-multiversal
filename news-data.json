@@ -17,7 +17,7 @@
       "title": "Siete canales en seguimiento",
       "summary": "La captura registrada el 11/11/2026 resolvió los siete canales esperados del roster activo. Las cifras del informe describen actividad observada por muestreo y no sustituyen las analíticas oficiales de cada plataforma.",
       "source_label": "Consultar registro de actividad",
-      "source_url": "./data.json"
+      "source_url": "https://github.com/losmoriartys-cmd/legion-multiversal/blob/main/data.json"
     }
   ]
 }
