@@ -13,17 +13,17 @@
     "daved0608"
   ],
   "collection": {
-    "started_at": "2026-11-10T23:52:21Z",
+    "started_at": "2026-11-11T00:59:16Z",
     "expected_channels": 7,
     "resolved_channels": 7,
     "sampled_channels": [
+      "habitos_atomicos",
+      "ardipii",
       "akumazoldyck",
       "daved0608",
       "losmoriartys",
       "ladymoriarty01",
-      "ther0d3r1k",
-      "habitos_atomicos",
-      "ardipii"
+      "ther0d3r1k"
     ],
     "skipped_channels": [],
     "complete": true
@@ -33,7 +33,7 @@
     "elgabii090"
   ],
   "channel_registry_note": "Los canales archivados se conservan para consulta histórica y no se incluyen en los indicadores del roster activo.",
-  "updated_at": "2026-11-10T23:52:21Z",
+  "updated_at": "2026-11-11T00:59:16Z",
   "channels": {
     "ladymoriarty01": {
       "login": "ladymoriarty01",
@@ -48,9 +48,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-10T23:52:21Z",
+      "updated_at": "2026-11-11T00:59:16Z",
       "window": {
-        "samples_total": 196,
+        "samples_total": 197,
         "live_samples": 7,
         "streams_observed": 3,
         "average_viewers_sampled": 6.4,
@@ -1876,6 +1876,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-11T00:59:16Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -1888,16 +1897,16 @@
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
       "live": true,
-      "current_viewers": 33,
-      "current_game": "Apex Legends",
-      "current_title": "ABRIMOS EL BAR....? 🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
+      "current_viewers": 26,
+      "current_game": "Barfender",
+      "current_title": "ABRIMOS EL BAR....? #barfender #keymailer  🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
       "stream_started_at": "2026-11-10T22:57:11Z",
-      "updated_at": "2026-11-10T23:52:21Z",
+      "updated_at": "2026-11-11T00:59:16Z",
       "window": {
-        "samples_total": 196,
-        "live_samples": 22,
+        "samples_total": 197,
+        "live_samples": 23,
         "streams_observed": 5,
-        "average_viewers_sampled": 22.2,
+        "average_viewers_sampled": 22.3,
         "peak_viewers_sampled": 46,
         "observed_live_hours": 0.0,
         "estimated_hours_watched": 0.0,
@@ -1932,8 +1941,8 @@
           },
           {
             "name": "Barfender",
-            "live_samples": 2,
-            "streams_observed": 1,
+            "live_samples": 3,
+            "streams_observed": 2,
             "average_viewers_sampled": 26.0,
             "peak_viewers_sampled": 38
           }
@@ -1980,6 +1989,13 @@
             "streams_observed": 2,
             "average_viewers_sampled": 30.2,
             "peak_viewers_sampled": 46
+          },
+          {
+            "date": "2026-11-11",
+            "live_samples": 1,
+            "streams_observed": 1,
+            "average_viewers_sampled": 26.0,
+            "peak_viewers_sampled": 26
           }
         ],
         "method": "Muestreo propio cada 15 minutos; horas estimadas solo entre muestras consecutivas del mismo directo. Categorías y evolución diaria se calculan sobre las muestras observadas."
@@ -3748,6 +3764,15 @@
           "title": "ABRIMOS EL BAR....? 🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
           "stream_id": "319561000564",
           "started_at": "2026-11-10T22:57:11Z"
+        },
+        {
+          "sampled_at": "2026-11-11T00:59:16Z",
+          "is_live": true,
+          "viewer_count": 26,
+          "game_name": "Barfender",
+          "title": "ABRIMOS EL BAR....? #barfender #keymailer  🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
+          "stream_id": "319561000564",
+          "started_at": "2026-11-10T22:57:11Z"
         }
       ]
     },
@@ -4410,9 +4435,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-10T23:52:21Z",
+      "updated_at": "2026-11-11T00:59:16Z",
       "window": {
-        "samples_total": 196,
+        "samples_total": 197,
         "live_samples": 4,
         "streams_observed": 2,
         "average_viewers_sampled": 6.0,
@@ -6210,6 +6235,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-11T00:59:16Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -6221,17 +6255,17 @@
       "twitch_url": "https://twitch.tv/akumazoldyck",
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
-      "live": false,
-      "current_viewers": null,
-      "current_game": null,
-      "current_title": null,
-      "stream_started_at": null,
-      "updated_at": "2026-11-10T23:52:21Z",
+      "live": true,
+      "current_viewers": 5,
+      "current_game": "Barfender",
+      "current_title": "sponsor #barfemder #keymailer con La legion Multiversal @TheR0D3R1K @LosMoriartys @LadyMoriarty01",
+      "stream_started_at": "2026-11-10T23:58:47Z",
+      "updated_at": "2026-11-11T00:59:16Z",
       "window": {
-        "samples_total": 196,
-        "live_samples": 13,
-        "streams_observed": 5,
-        "average_viewers_sampled": 6.2,
+        "samples_total": 197,
+        "live_samples": 14,
+        "streams_observed": 6,
+        "average_viewers_sampled": 6.1,
         "peak_viewers_sampled": 17,
         "observed_live_hours": 0.24,
         "estimated_hours_watched": 0.72,
@@ -6263,6 +6297,13 @@
             "streams_observed": 1,
             "average_viewers_sampled": 10.0,
             "peak_viewers_sampled": 10
+          },
+          {
+            "name": "Barfender",
+            "live_samples": 1,
+            "streams_observed": 1,
+            "average_viewers_sampled": 5.0,
+            "peak_viewers_sampled": 5
           }
         ],
         "daily_activity": [
@@ -6300,6 +6341,13 @@
             "streams_observed": 1,
             "average_viewers_sampled": 4.0,
             "peak_viewers_sampled": 10
+          },
+          {
+            "date": "2026-11-11",
+            "live_samples": 1,
+            "streams_observed": 1,
+            "average_viewers_sampled": 5.0,
+            "peak_viewers_sampled": 5
           }
         ],
         "method": "Muestreo propio cada 15 minutos; horas estimadas solo entre muestras consecutivas del mismo directo. Categorías y evolución diaria se calculan sobre las muestras observadas."
@@ -8068,6 +8116,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-11T00:59:16Z",
+          "is_live": true,
+          "viewer_count": 5,
+          "game_name": "Barfender",
+          "title": "sponsor #barfemder #keymailer con La legion Multiversal @TheR0D3R1K @LosMoriartys @LadyMoriarty01",
+          "stream_id": "322228739930",
+          "started_at": "2026-11-10T23:58:47Z"
         }
       ]
     },
@@ -8084,9 +8141,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-10T23:52:21Z",
+      "updated_at": "2026-11-11T00:59:16Z",
       "window": {
-        "samples_total": 196,
+        "samples_total": 197,
         "live_samples": 11,
         "streams_observed": 6,
         "average_viewers_sampled": 2.0,
@@ -9926,6 +9983,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-11T00:59:16Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -10553,14 +10619,14 @@
       "twitch_url": "https://twitch.tv/habitos_atomicos",
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
-      "live": true,
-      "current_viewers": 1,
-      "current_game": "Fortnite",
-      "current_title": "es mi primer dia",
-      "stream_started_at": "2026-11-10T21:50:17Z",
-      "updated_at": "2026-11-10T23:52:21Z",
+      "live": false,
+      "current_viewers": null,
+      "current_game": null,
+      "current_title": null,
+      "stream_started_at": null,
+      "updated_at": "2026-11-11T00:59:16Z",
       "window": {
-        "samples_total": 196,
+        "samples_total": 197,
         "live_samples": 32,
         "streams_observed": 8,
         "average_viewers_sampled": 7.0,
@@ -12414,6 +12480,15 @@
           "title": "es mi primer dia",
           "stream_id": "319487102965",
           "started_at": "2026-11-10T21:50:17Z"
+        },
+        {
+          "sampled_at": "2026-11-11T00:59:16Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -12430,9 +12505,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-10T23:52:21Z",
+      "updated_at": "2026-11-11T00:59:16Z",
       "window": {
-        "samples_total": 196,
+        "samples_total": 197,
         "live_samples": 8,
         "streams_observed": 4,
         "average_viewers_sampled": 18.0,
@@ -14266,6 +14341,15 @@
         },
         {
           "sampled_at": "2026-11-10T23:52:21Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-11T00:59:16Z",
           "is_live": false,
           "viewer_count": null,
           "game_name": null,
