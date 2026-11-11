@@ -2247,3 +2247,13 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 - **Alcance:** `index.html`, `app.js`, `styles.css` y este informe. No se modifican `roster-data.json`, imágenes, métricas ni otros capítulos. No se toca Arsenal ni PR #8/#9.
 - **Validación estática inicial:** transformaciones verificadas sobre los bloques existentes; se conserva la agrupación de categorías y la lógica de expedientes/bitácoras. Pendiente ejecutar comprobaciones de sintaxis y validar el comportamiento en navegador con teclado, lector de pantalla y anchos representativos. No se declara prueba visual ni funcional real en esta etapa.
 - **Pendiente:** checks de GitHub y revisión de la vista previa; el cambio no está integrado ni publicado.
+
+## 2026-11-11 — Renovación visual avanzada de las cartas del Roster 02
+
+- **Alcance:** ampliación visual sobre la PR #12 existente, en la misma rama de trabajo. No se altera `main`, ni se modifican los PR #8/#9 de Arsenal.
+- **Cartas:** nueva jerarquía de portada, marco metálico multicapas, acabado foil/holográfico, placa de identidad, designación del personaje, clasificación, función, formato y serie. Se amplía la presencia visual del retrato y se armonizan el botón de expediente y el reverso ilustrado.
+- **Identidad por integrante:** se conservan los ocho temas cromáticos existentes (estratega, titán, arcana, fantasma, inferno, nexus, orator y sage) y se refuerzan sus acentos sin imponer una plantilla cromática única.
+- **Presentación del roster:** se transforman las secciones en paneles editoriales de archivo, con títulos jerarquizados, divisores y mayor separación entre grupos.
+- **Recursos gráficos:** se mantienen exactamente los retratos e ilustraciones existentes de los ocho integrantes. No se solicita ni se genera material nuevo en esta etapa.
+- **Responsive:** se reajustan proporciones, márgenes, tipografías y metadatos para escritorio, tablet y móvil; en móvil se conserva una carta por fila en anchos reducidos.
+- **Validación pendiente:** compilar JavaScript, revisar balance CSS y comprobar el diff; luego verificar en preview el encuadre de cada retrato/ilustración, giro, texto largo y controles. Esta modificación visual no se considera aprobada hasta inspección de la vista previa.
