@@ -13,17 +13,17 @@
     "daved0608"
   ],
   "collection": {
-    "started_at": "2026-11-11T18:08:20Z",
+    "started_at": "2026-11-11T19:22:17Z",
     "expected_channels": 7,
     "resolved_channels": 7,
     "sampled_channels": [
+      "ardipii",
+      "akumazoldyck",
+      "daved0608",
       "losmoriartys",
       "ladymoriarty01",
       "ther0d3r1k",
-      "habitos_atomicos",
-      "ardipii",
-      "akumazoldyck",
-      "daved0608"
+      "habitos_atomicos"
     ],
     "skipped_channels": [],
     "complete": true
@@ -33,7 +33,7 @@
     "elgabii090"
   ],
   "channel_registry_note": "Los canales archivados se conservan para consulta histórica y no se incluyen en los indicadores del roster activo.",
-  "updated_at": "2026-11-11T18:08:20Z",
+  "updated_at": "2026-11-11T19:22:17Z",
   "channels": {
     "ladymoriarty01": {
       "login": "ladymoriarty01",
@@ -48,9 +48,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-11T18:08:20Z",
+      "updated_at": "2026-11-11T19:22:17Z",
       "window": {
-        "samples_total": 214,
+        "samples_total": 215,
         "live_samples": 7,
         "streams_observed": 3,
         "average_viewers_sampled": 6.4,
@@ -2038,6 +2038,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-11T19:22:17Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -2054,9 +2063,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-11T18:08:20Z",
+      "updated_at": "2026-11-11T19:22:17Z",
       "window": {
-        "samples_total": 214,
+        "samples_total": 215,
         "live_samples": 24,
         "streams_observed": 5,
         "average_viewers_sampled": 22.1,
@@ -4079,6 +4088,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-11T19:22:17Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -4741,9 +4759,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-11T18:08:20Z",
+      "updated_at": "2026-11-11T19:22:17Z",
       "window": {
-        "samples_total": 214,
+        "samples_total": 215,
         "live_samples": 6,
         "streams_observed": 3,
         "average_viewers_sampled": 7.2,
@@ -6710,6 +6728,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-11T19:22:17Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -6726,9 +6753,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-11T18:08:20Z",
+      "updated_at": "2026-11-11T19:22:17Z",
       "window": {
-        "samples_total": 214,
+        "samples_total": 215,
         "live_samples": 15,
         "streams_observed": 6,
         "average_viewers_sampled": 6.7,
@@ -8744,6 +8771,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-11T19:22:17Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -8760,9 +8796,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-11T18:08:20Z",
+      "updated_at": "2026-11-11T19:22:17Z",
       "window": {
-        "samples_total": 214,
+        "samples_total": 215,
         "live_samples": 11,
         "streams_observed": 6,
         "average_viewers_sampled": 2.0,
@@ -10764,6 +10800,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-11T19:22:17Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -11391,17 +11436,17 @@
       "twitch_url": "https://twitch.tv/habitos_atomicos",
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
-      "live": false,
-      "current_viewers": null,
-      "current_game": null,
-      "current_title": null,
-      "stream_started_at": null,
-      "updated_at": "2026-11-11T18:08:20Z",
+      "live": true,
+      "current_viewers": 10,
+      "current_game": "Fortnite",
+      "current_title": "es mi primer dia",
+      "stream_started_at": "2026-11-11T18:54:06Z",
+      "updated_at": "2026-11-11T19:22:17Z",
       "window": {
-        "samples_total": 214,
-        "live_samples": 35,
-        "streams_observed": 9,
-        "average_viewers_sampled": 6.6,
+        "samples_total": 215,
+        "live_samples": 36,
+        "streams_observed": 10,
+        "average_viewers_sampled": 6.7,
         "peak_viewers_sampled": 45,
         "observed_live_hours": 21.97,
         "estimated_hours_watched": 140.88,
@@ -11422,10 +11467,10 @@
           },
           {
             "name": "Fortnite",
-            "live_samples": 5,
-            "streams_observed": 2,
-            "average_viewers_sampled": 1.8,
-            "peak_viewers_sampled": 3
+            "live_samples": 6,
+            "streams_observed": 3,
+            "average_viewers_sampled": 3.2,
+            "peak_viewers_sampled": 10
           },
           {
             "name": "EA Sports FC 26",
@@ -11487,10 +11532,10 @@
           },
           {
             "date": "2026-11-11",
-            "live_samples": 3,
-            "streams_observed": 1,
-            "average_viewers_sampled": 2.3,
-            "peak_viewers_sampled": 3
+            "live_samples": 4,
+            "streams_observed": 2,
+            "average_viewers_sampled": 4.2,
+            "peak_viewers_sampled": 10
           }
         ],
         "method": "Muestreo propio con cadencia observada cercana a 55 minutos, variable por la programación de GitHub Actions; horas estimadas solo entre muestras consecutivas del mismo directo cuando el intervalo no supera 110 minutos. Categorías y evolución diaria se calculan sobre las muestras observadas."
@@ -13421,6 +13466,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-11T19:22:17Z",
+          "is_live": true,
+          "viewer_count": 10,
+          "game_name": "Fortnite",
+          "title": "es mi primer dia",
+          "stream_id": "321307262944",
+          "started_at": "2026-11-11T18:54:06Z"
         }
       ]
     },
@@ -13437,9 +13491,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-11T18:08:20Z",
+      "updated_at": "2026-11-11T19:22:17Z",
       "window": {
-        "samples_total": 214,
+        "samples_total": 215,
         "live_samples": 8,
         "streams_observed": 4,
         "average_viewers_sampled": 18.0,
@@ -15435,6 +15489,15 @@
         },
         {
           "sampled_at": "2026-11-11T18:08:20Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-11T19:22:17Z",
           "is_live": false,
           "viewer_count": null,
           "game_name": null,
