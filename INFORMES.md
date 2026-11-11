@@ -2323,3 +2323,19 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 
 
 - **En Vivo y vigencia:** el acceso especial «09 EN VIVO» recibe un indicador visual dinámico solo si la última captura es reciente y detecta transmisiones. El capítulo distingue una captura reciente de una lectura demorada; no presenta un estado antiguo como si fuera tiempo real. Se documenta que la página vuelve a leer el JSON cada 60 segundos, mientras que el colector de Twitch tiene una cadencia objetivo cercana a 55 minutos.
+
+
+## Hoja de ruta acordada — mejoras anteriores, ejecución secuencial
+
+Se conserva el compromiso de avanzar una mejora por etapa, con validación y revisión antes de pasar a la siguiente. El reordenamiento de capítulos solicitado se trata como una tarea transversal y el apartado estadístico se aborda en esta primera entrega.
+
+1. **Portada ejecutiva:** revisar la jerarquía de presentación y los recorridos de entrada. La estructura editorial ya está implementada; queda revisión visual y ajuste fino.
+2. **BarFender en Inicio:** conservar el expediente destacado, revisar asignación de imágenes y evitar reutilizar fotografías entre secciones. No sustituir recursos hasta confirmar con el responsable qué imagen nueva corresponde a cada ubicación.
+3. **Jerarquía de CTA:** revisar contraste, prioridad y claridad de las acciones para visitantes, colaboradores y marcas.
+4. **Estadísticas:** mostrar cobertura por canal, estados de carga/error/vacío y separar analítica externa de muestreo propio. La grilla multicanal y el control de vigencia quedan incluidos en esta rama; la ampliación histórica con Streams Charts para todo el roster requiere capturas comparables verificadas por perfil.
+5. **Rendimiento y responsive:** revisar carga de recursos, estabilidad visual y navegación en escritorio, tablet y móvil.
+6. **Alianzas:** revisar y ampliar los formatos comerciales y colaborativos del capítulo, con condiciones y ejemplos documentados.
+7. **Audiencia LATAM:** investigar y documentar la audiencia regional y oportunidades de posicionamiento con fuentes actuales.
+8. **Gráficos y campañas:** mejorar visualizaciones, lectura de campañas y presentación de resultados sin mezclar métricas incompatibles.
+
+**Coordinación:** no se interviene en el contenido de Arsenal ni se fusionan los PR #8/#9 del colaborador desde esta tarea. Esta rama modifica la navegación global y el orden editorial, por lo que deberá reconciliarse con el trabajo de Arsenal antes de integrar. Ningún cambio se publica en main automáticamente.
