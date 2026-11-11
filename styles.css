@@ -3606,3 +3606,19 @@ header .primary-navigation .nav-btn[aria-current="page"]{border-color:#8be3f3;co
  #chapter-2 .hero-profile-pager button { padding:8px 9px; font-size:.64rem; }
  #chapter-2 .hero-profile-pager span { font-size:.58rem; }
 }
+
+/* Capítulo 03 · centro de novedades y calidad de la recolección */
+.impact-kpi-grid { grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); }
+#stats-updated[data-status="complete"] { border-left:3px solid #4bd69a; padding-left:12px; }
+#stats-updated[data-status="partial"] { border-left:3px solid #e4b45e; padding-left:12px; }
+#stats-updated[data-status="stale"] { border-left:3px solid #e16b6b; padding-left:12px; }
+.legion-news-section { margin:34px 0; padding:28px; border:1px solid rgba(91,190,218,.32); border-radius:16px; background:linear-gradient(145deg,rgba(15,29,46,.96),rgba(8,14,25,.96)); box-shadow:0 14px 34px rgba(0,0,0,.2); }
+.legion-news-feed { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,270px),1fr)); gap:14px; margin-top:20px; }
+.legion-news-card { display:flex; flex-direction:column; gap:12px; min-height:210px; padding:18px; border:1px solid rgba(122,179,207,.32); border-radius:10px; background:rgba(19,34,51,.88); }
+.legion-news-meta { display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; color:#9db8cc; font:800 .66rem 'Roboto Condensed',sans-serif; letter-spacing:.1em; }
+.legion-news-meta span:first-child { color:#ffdb94; }
+.legion-news-card h4 { color:#f1f7fc; font-size:1.35rem; line-height:1.1; }
+.legion-news-card p { color:#b7c8d8; line-height:1.6; font-size:.92rem; }
+.legion-news-card a { align-self:flex-start; margin-top:auto; color:#8beaff; font-weight:800; text-decoration:none; }
+.legion-news-card a:hover { text-decoration:underline; }
+@media(max-width:600px) { .legion-news-section { padding:18px 14px; margin:24px 0; } .legion-news-card { min-height:0; } }

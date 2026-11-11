@@ -458,6 +458,38 @@ function selectLiveChannel(login,displayName){
  wrap.hidden=false;
  wrap.scrollIntoView({behavior:'smooth',block:'start'});
 }
+let legionNewsData = null;
+async function loadLegionNews() {
+    const host = document.getElementById('legion-news-feed');
+    if (!host) return;
+    try {
+        const response = await fetch('news-data.json', { cache: 'no-store' });
+        if (!response.ok) throw new Error('No se pudo leer news-data.json');
+        legionNewsData = await response.json();
+        renderLegionNews();
+    } catch (error) {
+        host.innerHTML = '<p class="stats-note">Las novedades no están disponibles temporalmente.</p>';
+        console.warn('Legion news unavailable:', error);
+    }
+}
+function renderLegionNews() {
+    const host = document.getElementById('legion-news-feed');
+    if (!host) return;
+    const items = Array.isArray(legionNewsData?.items) ? legionNewsData.items.slice() : [];
+    items.sort((a,b) => String(b.date || '').localeCompare(String(a.date || '')));
+    if (!items.length) {
+        host.innerHTML = '<p class="stats-note">Todavía no hay novedades publicadas. Las entradas aparecerán cuando exista una actualización confirmada.</p>';
+        return;
+    }
+    host.innerHTML = items.map(item => {
+        const date = String(item.date || '');
+        const validDate = date.length === 10 && date[4] === '-' && date[7] === '-' && !Number.isNaN(Date.parse(date));
+        const source = String(item.source_url || '');
+        const safeSource = source.startsWith('https://') || source.startsWith('./') || source.startsWith('../') || source.startsWith('/') ? source : '';
+        const sourceLink = safeSource ? '<a href="' + escapeStatsHtml(safeSource) + '" target="' + (safeSource.startsWith('http') ? '_blank' : '_self') + '" rel="noopener noreferrer">' + escapeStatsHtml(item.source_label || 'Consultar fuente') + ' ↗</a>' : '';
+        return '<article class="legion-news-card"><div class="legion-news-meta"><span>' + escapeStatsHtml(item.category || 'ACTUALIZACIÓN') + '</span>' + (validDate ? '<time datetime="' + date + '">' + statsDate(date) + '</time>' : '<span>FECHA NO INFORMADA</span>') + '</div><h4>' + escapeStatsHtml(item.title || 'Actualización') + '</h4><p>' + escapeStatsHtml(item.summary || '') + '</p>' + sourceLink + '</article>';
+    }).join('');
+}
 let instituteStatsLoading = false;
 
 async function loadInstituteStats(){
@@ -475,13 +507,32 @@ async function loadInstituteStats(){
   const liveSamples=channels.reduce((n,c)=>n+(c.window?.live_samples||0),0);
   const interval=Number(data.sampling_interval_minutes)||15;
   const updated=data.updated_at?new Date(data.updated_at):null;
-  const updatedLabel=updated&&!Number.isNaN(updated.getTime())?updated.toLocaleString('es-AR'):'fecha no disponible';
-  document.getElementById('stats-updated').textContent='Última actualización: '+updatedLabel+' · '+channels.length+' canales activos · ventana máxima configurada: '+fmt(data.window_days,0)+' días.';
+  const updatedValid=updated&&!Number.isNaN(updated.getTime());
+  const updatedLabel=updatedValid?updated.toLocaleString('es-AR'):'fecha no disponible';
+  const collection=data.collection||{};
+  const expectedChannels=Number(collection.expected_channels)||activeLogins.length;
+  const resolvedChannels=Number(collection.resolved_channels)||channels.length;
+  const skippedChannels=Array.isArray(collection.skipped_channels)?collection.skipped_channels:[];
+  const collectionComplete=collection.complete===true && expectedChannels>0 && resolvedChannels>=expectedChannels && skippedChannels.length===0;
+  const ageMinutes=updatedValid?Math.max(0,(Date.now()-updated.getTime())/60000):Infinity;
+  const freshnessLimit=Math.max(interval*2.5,120);
+  const isFresh=ageMinutes<=freshnessLimit;
+  const statusLabel=!updatedValid?'FECHA NO DISPONIBLE':!isFresh?'DATOS CON DEMORA':collectionComplete?'CAPTURA COMPLETA':'CAPTURA PARCIAL';
+  const updatedNode=document.getElementById('stats-updated');
+  if(updatedNode){
+   updatedNode.textContent='Última actualización: '+updatedLabel+' · '+channels.length+' canales activos · '+statusLabel+' · intervalo objetivo: '+interval+' min.';
+   updatedNode.dataset.status=!updatedValid||!isFresh?'stale':collectionComplete?'complete':'partial';
+  }
+  const samplingNote=document.getElementById('stats-methodology-sampling');
+  if(samplingNote)samplingNote.textContent='La actividad de Twitch se obtiene de Twitch Helix mediante data.json. La cadencia objetivo del colector es de '+interval+' minutos y la ventana móvil configurada es de hasta '+fmt(data.window_days,0)+' días. La continuidad real depende de las ejecuciones y de la disponibilidad de la API; una ventana configurada no equivale a un período completo de datos.';
+  const coverageNote=document.getElementById('stats-methodology-coverage');
+  if(coverageNote)coverageNote.textContent='En la última captura se resolvieron '+resolvedChannels+' de '+expectedChannels+' canales esperados'+(skippedChannels.length?' y se omitieron '+skippedChannels.length+' ('+skippedChannels.join(', ')+')':'')+'. Estado informado por el colector: '+(collectionComplete?'completo':'parcial o pendiente')+'. Los espectadores actuales reflejan la última consulta; promedios y picos son valores observados por muestreo, no analíticas oficiales de Twitch.';
   document.getElementById('stats-summary').innerHTML=[
    [fmt(channels.length,0),'CANALES EN SEGUIMIENTO','Canales activos del roster'],
    [fmt(observedStreams,0),'DIRECTOS DETECTADOS','Sesiones observadas en la ventana disponible'],
    [fmt(liveSamples,0),'MUESTRAS EN DIRECTO','Registros capturados mientras había transmisión'],
-   [interval+' MIN','FRECUENCIA PROGRAMADA','Intervalo objetivo entre consultas']
+   [interval+' MIN','FRECUENCIA OBJETIVO','Cadencia configurada del colector'],
+   [resolvedChannels+'/'+expectedChannels,'COBERTURA DE CANALES',collectionComplete?'Todos los canales esperados fueron resueltos':'Revisar canales omitidos o pendientes']
   ].map(([value,label,note])=>'<article class="impact-kpi"><strong>'+value+'</strong><span>'+label+'</span><small>'+note+'</small></article>').join('');
   const games={};
   channels.forEach(c=>(c.window?.game_breakdown||[]).forEach(g=>{if(g?.name)games[g.name]=(games[g.name]||0)+(g.live_samples||0);}));
@@ -1587,7 +1638,8 @@ function openHeroModal(index) {
             loadInstituteStats(),
             loadPartnerMetrics(),
             loadCreatorRecords(),
-            loadPlatformStatsData()
+            loadPlatformStatsData(),
+            loadLegionNews()
         ]);
         window.setInterval(() => { loadInstituteStats(); }, 60000);
         };
