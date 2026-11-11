@@ -50,14 +50,14 @@
             <button class="nav-btn" data-chapter="8" onclick="switchChapter(8)">ALIANZAS</button>
             <button class="nav-btn" data-chapter="12" onclick="switchChapter(12)">COLABORACIONES</button>
         </nav>
-        <details class="secondary-navigation">
-            <summary>OTRAS SECCIONES <span aria-hidden="true">＋</span></summary>
-            <div class="secondary-navigation-links" aria-label="Secciones adicionales">
-                <button class="nav-btn nav-btn-secondary" data-chapter="10" onclick="switchChapter(10)">EN VIVO</button>
-                <button class="nav-btn nav-btn-secondary" data-chapter="5" onclick="switchChapter(5)">ARSENAL</button>
-                <button class="nav-btn nav-btn-secondary" data-chapter="6" onclick="switchChapter(6)">RECLUTAMIENTO</button>
+        <section class="secondary-navigation" aria-label="Otras secciones">
+            <div class="secondary-navigation-heading"><span>OTRAS SECCIONES</span><small>EXPEDIENTES COMPLEMENTARIOS</small></div>
+            <div class="secondary-navigation-links">
+                <button class="nav-btn nav-btn-secondary" data-chapter="10" onclick="switchChapter(10)"><span>10</span> EN VIVO</button>
+                <button class="nav-btn nav-btn-secondary" data-chapter="5" onclick="switchChapter(5)"><span>05</span> ARSENAL</button>
+                <button class="nav-btn nav-btn-secondary" data-chapter="6" onclick="switchChapter(6)"><span>06</span> RECLUTAMIENTO</button>
             </div>
-        </details>
+        </section>
     </header>
 
     <main>
@@ -680,14 +680,16 @@
 <p>Las fichas enlazan a la tienda oficial de cada juego. Antes de convocar al roster, confirmá que todos tengan la misma edición o una versión compatible. En Minecraft, distinguí Java de Bedrock; en los títulos de Steam, revisá los requisitos y el modo online de la ficha vigente.</p>
 </div>
 
-<details class="arsenal-archive-fold">
-  <summary>
-    <span><small>DOCUMENTACIÓN COMPLEMENTARIA</small><strong>Plataformas, accesos y registros históricos</strong><em>Información de apoyo para consulta; no forma parte del recorrido principal del Arsenal.</em></span>
-    <b aria-hidden="true">＋</b>
-  </summary>
+<section class="arsenal-platform-hub" id="arsenal-platform-hub" aria-labelledby="arsenal-platform-hub-title">
+  <div class="arsenal-hub-heading">
+    <div><div class="premium-kicker">CENTRAL DE RECURSOS · CREADORES</div><h3 id="arsenal-platform-hub-title">PLATAFORMAS Y CAMPAÑAS</h3><p>Herramientas para descubrir juegos, gestionar accesos y consultar el historial de colaboraciones.</p></div>
+    <div class="arsenal-hub-links"><a href="#lurkit-record-title">LURKIT ↓</a><a href="#keymailer-record-title">KEYMAILER ↓</a></div>
+  </div>
   <div class="arsenal-archive-content">
-    <section class="premium-panel creator-platform-guide" aria-labelledby="creator-platform-guide-title">
-    <div class="premium-kicker">CENTRAL DE RECURSOS · HERRAMIENTAS PARA CREADORES</div>
+    <details class="creator-platform-guide-fold">
+      <summary><span><b>GUÍA DE USO DE KEYMAILER Y LURKIT</b><small>Pasos, requisitos y buenas prácticas para creadores</small></span><strong>＋</strong></summary>
+      <section class="premium-panel creator-platform-guide" aria-labelledby="creator-platform-guide-title">
+    <div class="premium-kicker">HERRAMIENTAS PARA CREADORES</div>
     <h3 id="creator-platform-guide-title">DESCUBRIR JUEGOS. SOLICITAR ACCESO. CREAR CONTENIDO.</h3>
     <p>Compartimos orientación para que cada integrante explore oportunidades de acceso a videojuegos. Son servicios externos: cada creador administra su cuenta, presenta sus solicitudes y acepta las condiciones de cada campaña.</p>
     <div class="premium-grid">
@@ -735,6 +737,7 @@
         <p><b>Importante:</b> la Legión comparte orientación, pero no garantiza aprobaciones, claves gratuitas, campañas remuneradas ni acceso a cuentas de terceros. Keymailer y Lurkit son plataformas independientes; utilizarlas no implica alianza, patrocinio ni representación oficial.</p>
     </div>
 </section>
+    </details>
 
 <section class="arsenal-platform-records" id="arsenal-platform-records" aria-labelledby="arsenal-platform-title">
   <div class="arsenal-records-heading">
@@ -747,10 +750,9 @@
   </div>
 
   <div class="arsenal-platform-kpis" aria-label="Resumen de actividad registrado">
-    <article><strong>19</strong><span>REGISTROS EN KEYMAILER</span><small>Campañas y accesos listados</small></article>
-    <article><strong>12</strong><span>REGISTROS EN LURKIT</span><small>Campañas observadas</small></article>
-    <article><strong>8</strong><span>COMPLETADAS EN LURKIT</span><small>Estado mostrado por la plataforma</small></article>
-    <article><strong>2 · 2</strong><span>FALLIDAS · PENDIENTES</span><small>Estados mostrados por Lurkit</small></article>
+    <article><strong>19</strong><span>REGISTROS KEYMAILER</span><small>Campañas y accesos documentados</small></article>
+    <article><strong>8</strong><span>CAMPAÑAS COMPLETADAS</span><small>Lurkit · corte 07/11/2026</small></article>
+    <article><strong>2</strong><span>VÍNCULOS PARTNER CREATOR</span><small>Cinderia y Enshrouded</small></article>
   </div>
 
   <section class="arsenal-platform-dossier" aria-labelledby="lurkit-record-title">
@@ -762,40 +764,20 @@
       <span><small>PARTNER CREATOR</small><b>CINDERIA</b></span>
       <span><small>PARTNER CREATOR</small><b>ENSHROUDED</b></span>
     </div>
-    <div class="arsenal-status-legend">
-      <span><i class="status-dot is-complete"></i> Completada · 8</span>
-      <span><i class="status-dot is-failed"></i> Fallida · 2</span>
-      <span><i class="status-dot is-pending"></i> Pendiente · 2</span>
-    </div>
-    <div class="arsenal-campaign-grid">
-      <details class="arsenal-campaign-group" open>
-        <summary><span>COMPLETADAS</span><b>08</b></summary>
-        <ul>
-          <li><a href="https://www.lurkit.com/campaigns/c54f-dune-awakening-the-water-wars-dlc" target="_blank" rel="noopener noreferrer">Dune: Awakening — The Water Wars DLC</a><small>Completada · estado visible al corte 07/11/2026</small></li>
-          <li><a href="https://www.lurkit.com/campaigns/4485-the-lord-of-the-rings-return-to-moria" target="_blank" rel="noopener noreferrer">The Lord of the Rings: Return to Moria</a><small>Completada · estado visible al corte 07/11/2026</small></li>
-          <li><a href="https://www.lurkit.com/campaigns/a524-anime-shop-simulator" target="_blank" rel="noopener noreferrer">Anime Shop Simulator</a><small>Completada · estado visible al corte 07/11/2026</small></li>
-          <li><a href="https://www.lurkit.com/campaigns/love-love-mystery-club-first-thai-romcom-fmv" target="_blank" rel="noopener noreferrer">Love Love Mystery Club — First Thai Romcom FMV</a><small>Completada · estado visible al corte 07/11/2026</small></li>
-          <li><a href="https://www.lurkit.com/campaigns/tcg-multiplayer-card-shop-sim" target="_blank" rel="noopener noreferrer">TCG Multiplayer Card Shop Sim</a><small>Completada · estado visible al corte 07/11/2026</small></li>
-          <li><a href="https://www.lurkit.com/campaigns/enshrouded-welcome-to-the-club" target="_blank" rel="noopener noreferrer">Enshrouded — Welcome to the Club!</a><small>Completada · estado visible al corte 07/11/2026</small></li>
-          <li><a href="https://www.lurkit.com/campaigns/dune-awakening-console-launch-update-1-5" target="_blank" rel="noopener noreferrer">Dune: Awakening — Console Launch &amp; Update 1.5</a><small>Completada · estado visible al corte 07/11/2026</small></li>
-          <li><a href="https://www.lurkit.com/campaigns/tailor-simulator-early-access" target="_blank" rel="noopener noreferrer">Tailor Simulator — Early Access</a><small>Completada · estado visible al corte 07/11/2026</small></li>
-        </ul>
-      </details>
-      <details class="arsenal-campaign-group">
-        <summary><span>CON ESTADO FALLIDO</span><b>02</b></summary>
-        <ul>
-          <li><a href="https://www.lurkit.com/campaigns/drunk-builder-simulator-4x-keys" target="_blank" rel="noopener noreferrer">Drunk Builder Simulator — 4x Keys</a><small>Fallida · estado mostrado por Lurkit</small></li>
-          <li><a href="https://www.lurkit.com/campaigns/monkey-bizniz" target="_blank" rel="noopener noreferrer">Monkey Bizniz</a><small>Fallida · estado mostrado por Lurkit</small></li>
-        </ul>
-        <p class="arsenal-status-note">“Fallida” reproduce el estado de la campaña en la plataforma. No es una valoración de la calidad del creador ni permite inferir el motivo.</p>
-      </details>
-      <details class="arsenal-campaign-group">
-        <summary><span>PENDIENTES AL CORTE</span><b>02</b></summary>
-        <ul>
-          <li><a href="https://www.lurkit.com/campaigns/v-rising-2026-halloween" target="_blank" rel="noopener noreferrer">V Rising — 2026 Halloween</a><small>Pendiente · plazo indicado: 24 días al momento de la captura</small></li>
-          <li><a href="https://www.lurkit.com/campaigns/c65f-soulmask" target="_blank" rel="noopener noreferrer">Soulmask</a><small>Pendiente · plazo indicado: 20 días al momento de la captura</small></li>
-        </ul>
-      </details>
+    <div class="arsenal-table-wrap lurkit-completed-wrap" role="region" aria-label="Campañas Lurkit completadas" tabindex="0">
+      <table class="arsenal-campaign-table">
+        <thead><tr><th>Campaña completada</th><th>Estado documental</th></tr></thead>
+        <tbody>
+          <tr><td><a href="https://www.lurkit.com/campaigns/c54f-dune-awakening-the-water-wars-dlc" target="_blank" rel="noopener noreferrer">Dune: Awakening — The Water Wars DLC</a></td><td><span class="arsenal-complete-tag">COMPLETADA</span></td></tr>
+          <tr><td><a href="https://www.lurkit.com/campaigns/4485-the-lord-of-the-rings-return-to-moria" target="_blank" rel="noopener noreferrer">The Lord of the Rings: Return to Moria</a></td><td><span class="arsenal-complete-tag">COMPLETADA</span></td></tr>
+          <tr><td><a href="https://www.lurkit.com/campaigns/a524-anime-shop-simulator" target="_blank" rel="noopener noreferrer">Anime Shop Simulator</a></td><td><span class="arsenal-complete-tag">COMPLETADA</span></td></tr>
+          <tr><td><a href="https://www.lurkit.com/campaigns/love-love-mystery-club-first-thai-romcom-fmv" target="_blank" rel="noopener noreferrer">Love Love Mystery Club — First Thai Romcom FMV</a></td><td><span class="arsenal-complete-tag">COMPLETADA</span></td></tr>
+          <tr><td><a href="https://www.lurkit.com/campaigns/tcg-multiplayer-card-shop-sim" target="_blank" rel="noopener noreferrer">TCG Multiplayer Card Shop Sim</a></td><td><span class="arsenal-complete-tag">COMPLETADA</span></td></tr>
+          <tr><td><a href="https://www.lurkit.com/campaigns/enshrouded-welcome-to-the-club" target="_blank" rel="noopener noreferrer">Enshrouded — Welcome to the Club!</a></td><td><span class="arsenal-complete-tag">COMPLETADA</span></td></tr>
+          <tr><td><a href="https://www.lurkit.com/campaigns/dune-awakening-console-launch-update-1-5" target="_blank" rel="noopener noreferrer">Dune: Awakening — Console Launch &amp; Update 1.5</a></td><td><span class="arsenal-complete-tag">COMPLETADA</span></td></tr>
+          <tr><td><a href="https://www.lurkit.com/campaigns/tailor-simulator-early-access" target="_blank" rel="noopener noreferrer">Tailor Simulator — Early Access</a></td><td><span class="arsenal-complete-tag">COMPLETADA</span></td></tr>
+        </tbody>
+      </table>
     </div>
   </section>
 
@@ -804,46 +786,39 @@
       <div><span class="arsenal-platform-index">ARCHIVO B · KEYMAILER</span><h4 id="keymailer-record-title">SOLICITUDES, ACCESOS Y DECISIONES EDITORIALES</h4><p>Los porcentajes reflejan la decisión o el interés del creador respecto de llevar el juego a su canal. <b>No representan cumplimiento, reputación ni porcentaje de campaña completada.</b></p></div>
       <a href="https://www.keymailer.co/" target="_blank" rel="noopener noreferrer">ABRIR KEYMAILER ↗</a>
     </div>
-    <div class="arsenal-keymailer-legend">
-      <span><b>100%</b> Interés/decisión registrada</span>
-      <span><b>66%</b> Interés/decisión registrada</span>
-      <span><b>PLAY THEN DECIDE</b> Probar y decidir después</span>
-      <span><b>REQUIRED / ALLOWED</b> Condición indicada en el registro</span>
-    </div>
     <div class="arsenal-table-wrap" role="region" aria-label="Campañas registradas en Keymailer" tabindex="0">
       <table class="arsenal-campaign-table">
-        <thead><tr><th>Juego / campaña</th><th>Fecha límite al corte</th><th>Condición</th><th>Interés editorial</th><th>Indicador de acción</th></tr></thead>
+        <thead><tr><th>Juego / campaña</th><th>Fecha límite al corte</th></tr></thead>
         <tbody>
-          <tr><td>CRACK <small>Launch Campaign</small></td><td>26 nov 2026</td><td>Required</td><td><span class="interest-tag interest-decision">Play then decide</span></td><td><span class="arsenal-action-status">No verificable en la captura</span></td></tr>
-          <tr><td>Gun Restoration Shop Simulator <small>Campaign 1</small></td><td>20 nov 2026</td><td>Required</td><td><span class="interest-tag">100%</span></td><td><span class="arsenal-action-status">No verificable en la captura</span></td></tr>
-          <tr><td>Weed Lord Simulator <small>Launch Campaign</small></td><td>17 nov 2026</td><td>Allowed</td><td><span class="interest-tag">100%</span></td><td><span class="arsenal-action-status">No verificable en la captura</span></td></tr>
-          <tr><td>Bus Terminal Simulator: Prologue <small>Campaign 1</small></td><td>17 nov 2026</td><td>Required</td><td><span class="interest-tag">100%</span></td><td><span class="arsenal-action-status">No verificable en la captura</span></td></tr>
-          <tr><td>Only Booze: Liquor Store Simulator <small>Creator Access</small></td><td>30 nov 2026</td><td>Required</td><td><span class="interest-tag">100%</span></td><td><span class="arsenal-action-status">No verificable en la captura</span></td></tr>
-          <tr><td>Barfender <small>Early Access Launch Campaign</small></td><td>20 nov 2026</td><td>Required</td><td><span class="interest-tag">100%</span></td><td><span class="arsenal-action-status">No verificable en la captura</span></td></tr>
-          <tr><td>Picker Magnate Simulator <small>Campaign</small></td><td>11 nov 2026</td><td>Required</td><td><span class="interest-tag">100%</span></td><td><span class="arsenal-action-status">No verificable en la captura</span></td></tr>
-          <tr><td>Football Academy Simulator <small>Campaign</small></td><td>18 nov 2026</td><td>Allowed</td><td><span class="interest-tag">66%</span></td><td><span class="arsenal-action-status">No verificable en la captura</span></td></tr>
-          <tr><td>Supercar Collection Together <small>Campaign</small></td><td>Fuera de plazo al corte</td><td>Required</td><td><span class="interest-tag">66%</span></td><td><span class="arsenal-action-status">Acción marcada</span></td></tr>
-          <tr><td>Clothing Store Simulator <small>Release Campaign</small></td><td>Fuera de plazo al corte</td><td>Required</td><td><span class="interest-tag">100%</span></td><td><span class="arsenal-action-status">Acción marcada</span></td></tr>
-          <tr><td>Supercar Collection Simulator <small>Full Release Campaign</small></td><td>Fuera de plazo al corte</td><td>Required</td><td><span class="interest-tag">100%</span></td><td><span class="arsenal-action-status">Acción marcada</span></td></tr>
-          <tr><td>Trading Card Shop Simulator <small>Game Access</small></td><td>Fuera de plazo al corte</td><td>Required</td><td><span class="interest-tag">66%</span></td><td><span class="arsenal-action-status">Acción marcada</span></td></tr>
-          <tr><td>Hot Meals Fast Wheels — Prologue <small>Campaign 1</small></td><td>Fuera de plazo al corte</td><td>Required</td><td><span class="interest-tag">100%</span></td><td><span class="arsenal-action-status">Acción no marcada</span></td></tr>
-          <tr><td>Tabletop Shop Simulator Demo <small>Campaign</small></td><td>02 dic 2026</td><td>Required</td><td><span class="interest-tag">100%</span></td><td><span class="arsenal-action-status">Acción marcada</span></td></tr>
-          <tr><td>Mall: Tidy Up Together <small>Campaign 1</small></td><td>Fuera de plazo al corte</td><td>Required</td><td><span class="interest-tag">100%</span></td><td><span class="arsenal-action-status">Acción no marcada</span></td></tr>
-          <tr><td>Night Club Simulator: Party King <small>Early Access Launch Campaign</small></td><td>Fuera de plazo al corte</td><td>Required</td><td><span class="interest-tag">100%</span></td><td><span class="arsenal-action-status">Acción marcada</span></td></tr>
-          <tr><td>Ultimate Pet Shop Simulator Demo <small>Campaign</small></td><td>21 nov 2026</td><td>Required</td><td><span class="interest-tag">100%</span></td><td><span class="arsenal-action-status">Acción marcada</span></td></tr>
-          <tr><td>Parisian Bistro Simulator <small>1.0 Campaign</small></td><td>17 nov 2026</td><td>Required</td><td><span class="interest-tag">100%</span></td><td><span class="arsenal-action-status">Acción marcada</span></td></tr>
-          <tr><td>Ciao Pizza: Cooking Chaos <small>Early Access Demo Campaign</small></td><td>Fuera de plazo al corte</td><td>Allowed</td><td><span class="interest-tag">66%</span></td><td><span class="arsenal-action-status">Acción marcada</span></td></tr>
+          <tr><td>CRACK <small>Launch Campaign</small></td><td>26 nov 2026</td></tr>
+          <tr><td>Gun Restoration Shop Simulator <small>Campaign 1</small></td><td>20 nov 2026</td></tr>
+          <tr><td>Weed Lord Simulator <small>Launch Campaign</small></td><td>17 nov 2026</td></tr>
+          <tr><td>Bus Terminal Simulator: Prologue <small>Campaign 1</small></td><td>17 nov 2026</td></tr>
+          <tr><td>Only Booze: Liquor Store Simulator <small>Creator Access</small></td><td>30 nov 2026</td></tr>
+          <tr><td>Barfender <small>Early Access Launch Campaign</small></td><td>20 nov 2026</td></tr>
+          <tr><td>Picker Magnate Simulator <small>Campaign</small></td><td>11 nov 2026</td></tr>
+          <tr><td>Football Academy Simulator <small>Campaign</small></td><td>18 nov 2026</td></tr>
+          <tr><td>Supercar Collection Together <small>Campaign</small></td><td>Fuera de plazo al corte</td></tr>
+          <tr><td>Clothing Store Simulator <small>Release Campaign</small></td><td>Fuera de plazo al corte</td></tr>
+          <tr><td>Supercar Collection Simulator <small>Full Release Campaign</small></td><td>Fuera de plazo al corte</td></tr>
+          <tr><td>Trading Card Shop Simulator <small>Game Access</small></td><td>Fuera de plazo al corte</td></tr>
+          <tr><td>Hot Meals Fast Wheels — Prologue <small>Campaign 1</small></td><td>Fuera de plazo al corte</td></tr>
+          <tr><td>Tabletop Shop Simulator Demo <small>Campaign</small></td><td>02 dic 2026</td></tr>
+          <tr><td>Mall: Tidy Up Together <small>Campaign 1</small></td><td>Fuera de plazo al corte</td></tr>
+          <tr><td>Night Club Simulator: Party King <small>Early Access Launch Campaign</small></td><td>Fuera de plazo al corte</td></tr>
+          <tr><td>Ultimate Pet Shop Simulator Demo <small>Campaign</small></td><td>21 nov 2026</td></tr>
+          <tr><td>Parisian Bistro Simulator <small>1.0 Campaign</small></td><td>17 nov 2026</td></tr>
+          <tr><td>Ciao Pizza: Cooking Chaos <small>Early Access Demo Campaign</small></td><td>Fuera de plazo al corte</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="arsenal-status-note">Los checks verdes visibles en la captura se registran como “Acción marcada” y los rojos como “Acción no marcada”. La captura disponible comienza en Supercar Collection Together: los ocho primeros registros quedan expresamente como “No verificable en la captura”, sin inferir su estado. Estos indicadores no se confunden con el interés editorial (100%/66%) ni con Required/Allowed. Las fechas y estados son una fotografía documental del 07/11/2026, no un panel actualizado en tiempo real.</p>
+    <p class="arsenal-status-note">Las fechas reflejan el registro documental del 07/11/2026. “Fuera de plazo al corte” indica que la fecha límite ya había pasado en esa captura; no implica una actualización en tiempo real ni permite inferir el resultado de la campaña.</p>
   </section>
   <p class="arsenal-record-footnote">Fuente: registros y capturas compartidos por la administración de la Legión. Los estados describen lo que mostraban las plataformas al momento de recopilar la información; no constituyen una auditoría independiente.</p>
 </section>
 
 
   </div>
-</details>
 </section>
 
 <section id="chapter-6" class="chapter-panel recruitment-chapter">
