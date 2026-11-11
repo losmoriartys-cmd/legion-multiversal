@@ -21,6 +21,24 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 
 ---
 
+## 2026-11-11 — Prototipo visual aislado del Roster 02: MORIARTYS
+
+- **Responsable:** colaboración ChatGPT + equipo del proyecto.
+- **Base auditada:** `main` en `e1aa99ff605dbbbe7b9cbedc07c6ae0d99713653` (incluye la actualización automática de estadísticas del 11/11).
+- **Objetivo:** construir una prueba funcional aislada para validar una dirección visual premium de carta y expediente antes de intervenir las ocho fichas o el Roster publicado.
+- **Archivos modificados:** `roster-02-moriartys-prototype.html` (nuevo); `INFORMES.md`.
+- **Auditoría previa:** el Roster actual ya cuenta con cartas reversibles en 3D, giro de 0,72 s, foil/shine, inclinación por hover/foco, ocho temas individuales y regla `prefers-reduced-motion`. La mejora no debe consistir en sumar efectos indiscriminadamente: el valor está en mejorar jerarquía, legibilidad, entrada, navegación y continuidad entre carta y expediente. El perfil existente abre una página intermedia y luego un media kit/cómic modal; la Bitácora existente separa trayectoria, colaboraciones y clips, pero parte de la cronología aún carece de fechas.
+- **Prototipo implementado:** página autónoma con carta MORIARTYS, retrato original `assets/carnet/DemuianCarnet.jpg`, giro accesible y reverso de identidad; inclinación 3D solo con mouse/trackpad; acabado holográfico sutil y entrada escalonada; expediente editorial de cinco secciones (identidad, actividad, trayectoria, clips y conexiones); navegación por pestañas con teclado; adaptación responsive y reducción de movimiento. Se reutilizan `roster-data.json`, `creator-records.json` y `data.json` como fuentes vivas, sin copiar métricas al HTML ni crear assets.
+- **Datos y rigor editorial:** el canal MORIARTYS se identifica como canal compartido de Demi y Ari. La fuente `data.json` declara ventana de 30 días y cadencia programada de 55 minutos; el prototipo presenta únicamente muestras observadas, directos observados, promedio/pico muestreados y horas vistas estimadas, con metodología y última actualización. El registro de creador contiene cuatro colaboraciones/accesos y tres clips, pero no hitos con fecha: no se inventa una cronología ni se asignan fechas ausentes.
+- **Validaciones estáticas:** estructura HTML y script embebido inspeccionados; pendiente de ejecutar parser y checks automatizados en GitHub. La carga de datos está condicionada a las tres fuentes y muestra estados vacíos si no están disponibles.
+- **Accesibilidad/responsive:** botones nativos, estados `aria-selected`, roles tab/tablist/tabpanel, navegación de pestañas con flechas/Home/End, caras inactivas con `inert` y `aria-hidden`, foco al cambiar de cara, controles táctiles y media queries para móvil; `prefers-reduced-motion` desactiva animaciones. La inspección de código no sustituye pruebas con lector de pantalla ni pruebas reales en navegador.
+- **Alcance preservado:** no se modifica `main`, `app.js`, `styles.css`, `index.html`, `roster-data.json` ni ninguna imagen; no se toca Arsenal (#8/#9), ni el trabajo del colaborador. El prototipo es independiente y no se enlaza desde la navegación principal.
+- **Pendientes / riesgos:** comprobar visualmente la preview de la PR en escritorio y móvil; probar giro/foco con teclado, tacto y lector de pantalla; contrastar el tratamiento editorial de las cifras con el equipo. Solo después de aprobación se propondrá integrar el patrón en el Roster completo.
+- **Commit de prototipo:** [cff1afba](https://github.com/losmoriartys-cmd/legion-multiversal/commit/cff1afbaa4ca6451a209020648e394181a2bf420).
+- **Despliegue:** pendiente de los checks de la PR. No se certifica todavía preview ni prueba visual real.
+
+---
+
 ## 2026-11-06 — Corregir gestión de foco en expedientes del Roster
 
 - **Responsable:** colaboración ChatGPT + equipo del proyecto.
