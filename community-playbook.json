@@ -58,7 +58,7 @@
       "title": "Cartógrafo de la Legión",
       "description": "Visitaste los ocho expedientes del roster.",
       "progress_key": "profiles",
-      "target": 8
+      "target": "roster_total"
     },
     {
       "id": "viajero",
