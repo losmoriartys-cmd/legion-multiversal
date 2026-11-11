@@ -2235,3 +2235,15 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 - **Cambios de código:** ninguno. Se documentan hallazgos antes de intervenir el diseño o sustituir recursos.
 - **Siguiente paso propuesto:** acordar qué recurso exclusivo debe ocupar cada una de las tres ubicaciones duplicadas, preservando la asignación que el usuario quiera mantener en los capítulos 01, 08 y 09. Luego implementar únicamente las reasignaciones aprobadas y validar el despliegue y las vistas de escritorio/móvil.
 - **Despliegue:** no se requirió un nuevo despliegue; la auditoría no modificó archivos de la web.
+
+## 2026-11-11 — Implementación de mejoras UX del Roster 02 (etapas 1 a 5)
+
+- **Base:** `main` en `bd29f88528cd2fe11240823273195602432fd128`. Trabajo aislado en `work/roster-02-ux-accessibility-2026-11-11`; no se modifica `main`.
+- **Etapa 1 — accesibilidad de cartas:** al girar una carta se actualizan `aria-hidden` e `inert` en ambas caras; solo la cara activa conserva controles accesibles. El foco se traslada al control de la cara visible y vuelve al retrato al deshacer el giro. Se añade cierre del expediente con Escape, sin interferir con el modal de bitácora que ya gestiona Escape y el foco.
+- **Etapa 2 — acceso directo:** cada carta incorpora un botón visible «ABRIR EXPEDIENTE», que abre la ficha individual sin obligar a girar la carta y abrir primero la bitácora.
+- **Etapa 3 — exploración:** se agregan búsqueda por nombre, alias, clasificación, áreas y plataformas; filtros por función, plataforma y formato; orden por presentación, nombre o número de expediente; contador de resultados y limpieza de filtros. Los accesos por categoría reflejan el resultado filtrado.
+- **Etapa 4 — presentación visual:** se refuerza la jerarquía de las herramientas, los encabezados de categoría, los estados de foco y el botón de acceso directo, manteniendo la estética de cartas coleccionables/cómic.
+- **Etapa 5 — responsive:** los controles pasan de una grilla amplia a tres/dos columnas y finalmente una columna en móvil; las cartas quedan centradas y con controles táctiles de mayor tamaño. Se mantiene la preferencia de movimiento reducido.
+- **Alcance:** `index.html`, `app.js`, `styles.css` y este informe. No se modifican `roster-data.json`, imágenes, métricas ni otros capítulos. No se toca Arsenal ni PR #8/#9.
+- **Validación estática inicial:** transformaciones verificadas sobre los bloques existentes; se conserva la agrupación de categorías y la lógica de expedientes/bitácoras. Pendiente ejecutar comprobaciones de sintaxis y validar el comportamiento en navegador con teclado, lector de pantalla y anchos representativos. No se declara prueba visual ni funcional real en esta etapa.
+- **Pendiente:** checks de GitHub y revisión de la vista previa; el cambio no está integrado ni publicado.
