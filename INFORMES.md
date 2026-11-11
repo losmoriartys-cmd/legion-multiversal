@@ -1,21 +1,23 @@
-## 2026-11-11 — Informe de impacto y centro de novedades verificadas
+## 2026-11-11 — Mapa Multiversal, misiones e insignias de exploración
 
 - **Responsable:** colaboración ChatGPT + equipo del proyecto.
-- **Objetivo:** hacer más legible y auditable el tablero de actividad, corregir la descripción de la cadencia real del colector y ofrecer un espacio de novedades del propio proyecto.
-- **Base:** rama Roster 02 `work/roster-expedientes-enhancement-2026-11-11`; no se modifica `main`.
-- **Archivos modificados:** `app.js`, `index.html`, `styles.css`, nuevo `news-data.json`, `INFORMES.md`.
+- **Objetivo:** convertir el universo de integrantes en una experiencia navegable y sumar recorridos de exploración con progreso transparente.
+- **Base:** rama de estadísticas y novedades `work/impact-news-center-2026-11-11`; no se modifica `main`.
+- **Archivos modificados:** `index.html`, `app.js`, `styles.css`, nuevo `community-playbook.json`, `INFORMES.md`.
 - **Implementado:**
-  - La cadencia y ventana metodológica se presentan desde los valores reales de `data.json`, no desde un texto fijo.
-  - El tablero diferencia captura completa/parcial y datos con demora, e informa canales resueltos frente a esperados.
-  - Se agrega una quinta métrica de cobertura de canales y se adapta la grilla.
-  - Nuevo centro de novedades del archivo, alimentado por `news-data.json`, con fecha, categoría, resumen y enlace a la fuente.
-  - Se publican dos entradas respaldadas: integración Roster/Bitácora (PR #14 ya integrada) y cobertura de siete canales en la captura del 11/11/2026.
-- **Validaciones estáticas:** JavaScript compila; HTML con 111 IDs sin duplicados; CSS con llaves balanceadas; dos entradas de novedades con fecha válida; el roster canónico conserva sus ocho integrantes.
-- **Validaciones:** el primer chequeo de enlaces detectó que el validador del sitio exige URL absoluta para la fuente del JSON. Se sustituyó la ruta relativa por el enlace directo al archivo en GitHub; los checks se vuelven a ejecutar sobre el head corregido. Revisión visual manual en escritorio/móvil pendiente.
-- **Commit de código:** [ce43ec65](https://github.com/losmoriartys-cmd/legion-multiversal/commit/ce43ec65b21c88b4fac2159e022f63b389888a51).
-- **Despliegue:** Cloudflare Pages publicó el primer preview de esta etapa; se espera la nueva ejecución después de corregir la URL de fuente.
+  - Nuevo Capítulo 13, accesible desde la navegación global, el directorio del Inicio y la paginación entre capítulos.
+  - Mapa/constelación generado desde `roster-data.json`: cada nodo muestra número de expediente, nombre, identidad y áreas; al seleccionarlo abre el expediente real.
+  - Las conexiones representan únicamente pertenencia al proyecto; no se inventan alianzas ni jerarquías entre integrantes.
+  - Cuatro misiones de navegación y seis insignias, con progreso local por perfiles visitados, capítulos recorridos, apertura de Bitácora y visita a En Vivo.
+  - Progreso guardado en el navegador cuando el almacenamiento está disponible; si no, se mantiene en memoria durante la sesión.
+  - Identificadores de integrantes basados en número de expediente/nombre y objetivo de exploración completa adaptado al tamaño actual del roster.
+- **Validaciones estáticas:** JavaScript compila; 119 IDs HTML sin duplicados; 12 capítulos presentes, incluido el nuevo 13; navegación global incluye capítulo 13; ocho integrantes canónicos; cuatro misiones y seis insignias; CSS con llaves balanceadas.
+- **Pendientes / riesgos:** checks de GitHub Actions y Cloudflare Pages pendientes para el head final. Revisión visual y funcional manual de escritorio/móvil pendiente. El progreso es local al navegador y no se presenta como ranking ni logro oficial de Twitch/Steam.
+- **Commit de código:** [d6a7fc80](https://github.com/losmoriartys-cmd/legion-multiversal/commit/d6a7fc80f062d1ae6904e6c73ff10b371f19fea6).
+- **Despliegue:** pendiente de los checks de la PR.
 
 ---
+
 
 
 
