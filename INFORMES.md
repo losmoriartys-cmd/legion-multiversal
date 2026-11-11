@@ -2203,3 +2203,16 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 - **Automatización:** el nuevo workflow ejecuta `python -m unittest discover -s tests -v` con Python 3.12 ante pull requests a `main` que afecten al colector, las pruebas o el propio workflow.
 - **Validación:** el workflow se acaba de incorporar a la rama del PR; el resultado de GitHub Actions queda pendiente. El check de Cloudflare Pages sigue siendo únicamente una validación del despliegue de vista previa.
 - **Alcance:** no se ejecuta una recolección real, no se usan secretos, no se modifican datos ni canales y no se toca Arsenal (#8/#9). El PR #11 permanece abierto y no se fusiona automáticamente.
+
+
+## 2026-11-11 — Integración del PR #11: cadencia real de estadísticas Twitch
+
+- **Autorización:** integración realizada con autorización expresa del responsable del proyecto.
+- **PR:** [#11 — Alinear estadísticas Twitch con la cadencia real de muestreo](https://github.com/losmoriartys-cmd/legion-multiversal/pull/11), cerrado e integrado en `main`.
+- **Commit de merge:** [`49a68f4719709d937926fd4485cc1b4cbd8386fd`](https://github.com/losmoriartys-cmd/legion-multiversal/commit/49a68f4719709d937926fd4485cc1b4cbd8386fd). La referencia `main` se verificó apuntando a este mismo SHA después de la integración.
+- **Cambios integrados:** cadencia de referencia de 55 minutos, umbral anti-duplicados de 45 minutos, estimaciones acotadas a 55 minutos por intervalo válido y rechazo de huecos superiores a 110 minutos; disparador `push` del colector restringido a `main`; ejecución manual del job restringida a `main`; seis pruebas de regresión y workflow de validación Python; documentación metodológica y operativa.
+- **Validación previa al merge:** seis pruebas Python aprobadas en el run [42978923872](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/42978923872); workflow de validación aprobado en [42978918224](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/42978918224); Cloudflare Pages preview aprobado en el check [130384563465](https://github.com/losmoriartys-cmd/legion-multiversal/runs/130384563465).
+- **Validación posterior al merge:** el check de Cloudflare Pages para el commit de merge terminó en `success` el 2026-11-11 a las 07:24:13 UTC. El workflow [Actualizar estadísticas multiplataforma, run 42979211798](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/42979211798) terminó correctamente; el job `actualizar` finalizó en `success`.
+- **Despliegue GitHub Pages:** el workflow `pages build and deployment` asociado al merge terminó como `cancelled` (run [42979210389](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/42979210389)). Por lo tanto, no se certifica con esta ejecución una publicación nueva en GitHub Pages. El check de Cloudflare Pages sí figura exitoso; no se confunde con GitHub Pages.
+- **Alcance preservado:** no se tocaron Arsenal (#8/#9), sus ramas ni el trabajo del colaborador. No se modificaron canales ni credenciales.
+- **Estado:** PR #11 integrado; `main` confirmado en el commit de merge. La publicación GitHub Pages queda pendiente de una ejecución no cancelada y verificación correspondiente.
