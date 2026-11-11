@@ -2307,3 +2307,16 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 - **Conservación:** se mantienen textos institucionales, fotografías, enlaces, capítulos, roster y estadísticas existentes. No se alteran assets ni datos canónicos.
 - **Alcance:** index.html, styles.css, app.js e INFORMES.md. Esta rama se apoya temporalmente en la rama del PR #15 para no duplicar ni pisar los cambios de Arsenal; el PR de esta etapa deberá cambiar su base a main después de integrar PR #15.
 - **Validación pendiente:** comprobar IDs y enlaces internos, sintaxis JavaScript, balance CSS y checks de GitHub/Cloudflare. La revisión visual de escritorio y móvil sigue pendiente; no se declara aprobada hasta inspeccionar la vista previa.
+
+
+## 2026-11-11 — Reordenamiento editorial y mejora del panel de estadísticas
+
+- **Solicitud del responsable:** establecer la numeración visible desde cero y separar capítulos principales de capítulos especiales.
+- **Orden principal aprobado:** 00 Inicio; 01 Origen; 02 Valores; 03 Roster; 04 Estadísticas; 05 Comunidad; 06 Alianzas; 07 Colaboraciones.
+- **Orden especial:** 08 Arsenal; 09 En Vivo; 10 Reclutamiento. El Mapa Multiversal se conserva como EXTRA independiente, sin desplazar ni renumerar los capítulos solicitados.
+- **Implementación:** se reordenan los botones principales y secundarios; se actualizan los zócalos superiores y el atributo editorial de los paneles. Los IDs técnicos chapter-* se conservan para no romper enlaces, expedientes, llamadas de navegación ni datos asociados. Se corrige la referencia del texto de Origen al Roster (Capítulo 03).
+- **Auditoría estadística:** el archivo actual de Twitch registra 7 canales activos, 7/7 resueltos en la última captura y 9 registros históricos en data.json (7 activos + 2 archivados). En la lectura consultada, Habitos Atomicos era el único canal en directo; los otros seis estaban offline, pero todos seguían dentro del seguimiento. Por lo tanto, la impresión de que el sistema consultaba un solo canal se debía a la presentación poco visible de los canales offline y a que la tabla completa estaba dentro de un desplegable.
+- **Mejora de presentación:** se añade una tarjeta visible por cada canal activo, con estado, espectadores actuales, promedio y pico observados, horas en directo observadas, sesiones detectadas y muestras registradas. Se agrega el KPI «En directo ahora» y se mantiene la tabla técnica detallada como contenido complementario. Los datos siguen siendo muestreo propio de Twitch Helix, no analítica oficial.
+- **Corrección metodológica:** una muestra omitida por la regla anti-duplicados no se interpreta como fallo de cobertura; la captura puede ser completa cuando todos los canales esperados están contabilizados entre muestras nuevas y omisiones válidas.
+- **Alcance:** index.html, app.js, styles.css e INFORMES.md. No se modifican data.json, roster-data.json, credenciales, retratos ni fotografías. No se altera el contenido interno de Arsenal; únicamente se actualizan su posición y rótulo editorial.
+- **Estado:** cambios preparados en la rama work/chapter-order-stats-overhaul-2026-11-11, aislada de main. Pendiente ejecutar validaciones, checks y revisar preview en escritorio/móvil. No se fusiona automáticamente.
