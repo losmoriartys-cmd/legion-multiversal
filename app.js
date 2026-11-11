@@ -483,9 +483,9 @@ function renderLegionNews() {
     }
     host.innerHTML = items.map(item => {
         const date = String(item.date || '');
-        const validDate = /^\\d{4}-\\d{2}-\\d{2}$/.test(date);
+        const validDate = date.length === 10 && date[4] === '-' && date[7] === '-' && !Number.isNaN(Date.parse(date));
         const source = String(item.source_url || '');
-        const safeSource = /^(https:\\/\\/|\\.\\.?\\/|\\/)/i.test(source) ? source : '';
+        const safeSource = source.startsWith('https://') || source.startsWith('./') || source.startsWith('../') || source.startsWith('/') ? source : '';
         const sourceLink = safeSource ? '<a href="' + escapeStatsHtml(safeSource) + '" target="' + (safeSource.startsWith('http') ? '_blank' : '_self') + '" rel="noopener noreferrer">' + escapeStatsHtml(item.source_label || 'Consultar fuente') + ' ↗</a>' : '';
         return '<article class="legion-news-card"><div class="legion-news-meta"><span>' + escapeStatsHtml(item.category || 'ACTUALIZACIÓN') + '</span>' + (validDate ? '<time datetime="' + date + '">' + statsDate(date) + '</time>' : '<span>FECHA NO INFORMADA</span>') + '</div><h4>' + escapeStatsHtml(item.title || 'Actualización') + '</h4><p>' + escapeStatsHtml(item.summary || '') + '</p>' + sourceLink + '</article>';
     }).join('');
@@ -526,7 +526,7 @@ async function loadInstituteStats(){
   const samplingNote=document.getElementById('stats-methodology-sampling');
   if(samplingNote)samplingNote.textContent='La actividad de Twitch se obtiene de Twitch Helix mediante data.json. La cadencia objetivo del colector es de '+interval+' minutos y la ventana móvil configurada es de hasta '+fmt(data.window_days,0)+' días. La continuidad real depende de las ejecuciones y de la disponibilidad de la API; una ventana configurada no equivale a un período completo de datos.';
   const coverageNote=document.getElementById('stats-methodology-coverage');
-  if(coverageNote)coverageNote.textContent='En la última captura se resolvieron '+resolvedChannels+' de '+expectedChannels+' canales esperados'+(skippedChannels.length?' y se omitieron '+skippedChannels.length+' ('+skippedChannels.join(', ')+')':'')+'. Estado informado por el colector: '+(collectionComplete?'completo':'parcial o pendiente').'. Los espectadores actuales reflejan la última consulta; promedios y picos son valores observados por muestreo, no analíticas oficiales de Twitch.';
+  if(coverageNote)coverageNote.textContent='En la última captura se resolvieron '+resolvedChannels+' de '+expectedChannels+' canales esperados'+(skippedChannels.length?' y se omitieron '+skippedChannels.length+' ('+skippedChannels.join(', ')+')':'')+'. Estado informado por el colector: '+(collectionComplete?'completo':'parcial o pendiente')+'. Los espectadores actuales reflejan la última consulta; promedios y picos son valores observados por muestreo, no analíticas oficiales de Twitch.';
   document.getElementById('stats-summary').innerHTML=[
    [fmt(channels.length,0),'CANALES EN SEGUIMIENTO','Canales activos del roster'],
    [fmt(observedStreams,0),'DIRECTOS DETECTADOS','Sesiones observadas en la ventana disponible'],
