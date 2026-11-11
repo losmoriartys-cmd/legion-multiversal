@@ -2216,3 +2216,22 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 - **Despliegue GitHub Pages:** el workflow `pages build and deployment` asociado al merge terminó como `cancelled` (run [42979210389](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/42979210389)). Por lo tanto, no se certifica con esta ejecución una publicación nueva en GitHub Pages. El check de Cloudflare Pages sí figura exitoso; no se confunde con GitHub Pages.
 - **Alcance preservado:** no se tocaron Arsenal (#8/#9), sus ramas ni el trabajo del colaborador. No se modificaron canales ni credenciales.
 - **Estado:** PR #11 integrado; `main` confirmado en el commit de merge. La publicación GitHub Pages queda pendiente de una ejecución no cancelada y verificación correspondiente.
+
+
+## 2026-11-11 — Auditoría estática inicial de Portada / Capítulo 00
+
+- **Responsable:** colaboración ChatGPT + equipo del proyecto.
+- **Objetivo:** revisar la estructura, navegación, recursos gráficos y coherencia editorial de la portada publicada en `main`, antes de proponer modificaciones.
+- **Archivos revisados:** `index.html`, `styles.css`, `app.js` y recursos de la raíz del repositorio.
+- **Hallazgos de reutilización de imágenes (requieren resolución):**
+  - `image_20261106_124855.jpg` aparece en el hero de Capítulo 00 y vuelve a utilizarse como hero de Capítulo 09 — Comunidad.
+  - `stream4.jpg` aparece como imagen destacada de BarFender en Capítulo 00 y vuelve a utilizarse en el bloque de casos de Capítulo 08 — Alianzas.
+  - `image_20261106_024612-me-gusta-la-foto-pero-la-enmarcaria-coso-si-fuese (1).jpg` aparece en el bloque de origen de Capítulo 00 y vuelve a utilizarse en Capítulo 01 — El Origen.
+  - Estas tres reutilizaciones contradicen el criterio acordado de no repetir fotografías/ilustraciones entre secciones. No se reemplazó ni reasignó ningún archivo en esta auditoría.
+  - El emblema `legion_logo_final_hybrid.png` se repite en cabecera y elementos de identidad institucional; se considera marca, no fotografía editorial duplicada.
+- **Navegación:** los botones de acceso rápido de la portada apuntan a paneles existentes (Roster 02, Estadísticas 03, Alianzas 08, Comunidad 09, Colaboraciones 12 y Origen 01). La función `switchChapter()` comprueba la existencia del destino antes de cambiar de panel y contempla `prefers-reduced-motion`.
+- **Recursos:** los cuatro recursos gráficos referenciados en la portada existen en la raíz de `main`.
+- **Limitación de validación:** la inspección del HTML/CSS/JS fue estática. La URL pública no pudo abrirse con el navegador de revisión en esta sesión; por lo tanto, no se certifica todavía el render visual real ni el comportamiento responsive en escritorio/móvil.
+- **Cambios de código:** ninguno. Se documentan hallazgos antes de intervenir el diseño o sustituir recursos.
+- **Siguiente paso propuesto:** acordar qué recurso exclusivo debe ocupar cada una de las tres ubicaciones duplicadas, preservando la asignación que el usuario quiera mantener en los capítulos 01, 08 y 09. Luego implementar únicamente las reasignaciones aprobadas y validar el despliegue y las vistas de escritorio/móvil.
+- **Despliegue:** no se requirió un nuevo despliegue; la auditoría no modificó archivos de la web.
