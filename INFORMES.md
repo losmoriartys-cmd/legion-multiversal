@@ -2176,3 +2176,30 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 - **Transparencia:** el apartado «En vivo» muestra la fecha/hora de los datos consultados y aclara la frecuencia de actualización.
 - **Alcance:** no se modifican el roster, los canales registrados, las métricas históricas ni los capítulos editoriales. El cambio está aislado en una rama y requiere revisión y despliegue para reflejarse en la web pública.
 - **Validación pendiente:** comprobar sintaxis, comportamiento de refresco y despliegue en GitHub Pages/Cloudflare Pages.
+
+
+## 2026-11-11 — Corrección de cadencia declarada en estadísticas Twitch
+
+- **Diagnóstico:** las últimas 100 ejecuciones programadas de `Actualizar estadísticas multiplataforma` finalizaron correctamente, pero sus inicios tuvieron una mediana de 52,95 minutos entre ejecuciones (percentil 90: 73,53 minutos), pese al cron configurado cada 15 minutos. En las 1.393 separaciones entre muestras del roster activo, la mediana fue de 54,48 minutos (P90: 71,27; P95: 76,87).
+- **Credenciales:** Twitch se autentica correctamente; `TWITCH_CLIENT_ID` dispone de un valor alternativo en el código y `TWITCH_CLIENT_SECRET` está disponible. YouTube procesó su perfil. Kick figura explícitamente como `awaiting_secrets` porque faltan sus credenciales; no afecta la recolección de Twitch.
+- **Corrección propuesta:** alinear la cadencia informada con la observada (55 minutos), evitar muestras duplicadas antes de 45 minutos y permitir estimaciones entre muestras consecutivas del mismo directo hasta 110 minutos, con un máximo estimado de 55 minutos por intervalo. Se aclara que GitHub Actions puede retrasar la programación.
+- **Alcance:** `update_stats.py`, `.github/workflows/actualizar-stats.yml` y este informe. El evento `push` del colector queda limitado a `main` para evitar ejecuciones desde ramas de PR que intenten rebasarse sobre `main`. No se modifican canales, datos históricos almacenados, capítulos ni el trabajo del colaborador en Arsenal (#8/#9).
+- **Validación:** pendiente de checks y revisión del PR. La corrección metodológica no garantiza que GitHub ejecute el cron cada 15 minutos; refleja la cadencia real observada.
+
+## 2026-11-11 — Restringir ejecución manual del colector de estadísticas
+
+- **Motivo:** la revisión del PR #11 detectó que limitar el evento `push` a `main` no impedía que `workflow_dispatch` iniciara el workflow desde una rama secundaria seleccionada manualmente. Como el job sincroniza con `main` y puede publicar en `main`, esa ruta conservaba un riesgo de incorporar cambios de una rama de trabajo.
+- **Corrección:** se añadió al job `actualizar` la condición `if: github.ref == 'refs/heads/main'`. El job completo solo se ejecuta cuando la referencia seleccionada es `main`, incluidos los disparos manuales.
+- **Alcance:** cambio limitado a `.github/workflows/actualizar-stats.yml` y este registro, dentro de la rama del PR #11. No se modificó `main`, no se ejecutó una recolección manual y no se tocó Arsenal (#8/#9).
+- **Validación:** pendiente revisar el nuevo commit y sus checks. El check de Cloudflare Pages valida el despliegue de la vista previa, no la lógica del colector Python; la condición del job requiere además inspección estática y, si corresponde, validación específica del workflow.
+- **Integración:** el PR #11 permanece sujeto a revisión y autorización expresa; no se fusiona automáticamente.
+
+
+## 2026-11-11 — Incorporar pruebas de regresión para el muestreo Twitch
+
+- **Objetivo:** agregar validación ejecutable de la metodología de estimación modificada en el PR #11, sin consultar APIs externas ni utilizar credenciales.
+- **Archivos añadidos:** `tests/test_update_stats.py` y `.github/workflows/test-stats.yml`.
+- **Pruebas:** seis casos cubren el cálculo entre muestras del mismo directo, el tope de 55 minutos por intervalo, el rechazo de huecos superiores a 110 minutos, el cambio de ID de directo, los períodos offline y el recorte de la ventana histórica de 30 días.
+- **Automatización:** el nuevo workflow ejecuta `python -m unittest discover -s tests -v` con Python 3.12 ante pull requests a `main` que afecten al colector, las pruebas o el propio workflow.
+- **Validación:** el workflow se acaba de incorporar a la rama del PR; el resultado de GitHub Actions queda pendiente. El check de Cloudflare Pages sigue siendo únicamente una validación del despliegue de vista previa.
+- **Alcance:** no se ejecuta una recolección real, no se usan secretos, no se modifican datos ni canales y no se toca Arsenal (#8/#9). El PR #11 permanece abierto y no se fusiona automáticamente.

@@ -11,7 +11,7 @@ CHANNELS = [
     "habitos_atomicos", "ardipii", "akumazoldyck", "daved0608"
 ]
 WINDOW_DAYS = 30
-SAMPLE_INTERVAL_MINUTES = 15
+SAMPLE_INTERVAL_MINUTES = 55
 DATA_FILE = "data.json"
 
 
@@ -126,7 +126,7 @@ def summarize(snapshots, now):
         "estimated_hours_watched": round(estimated_watch_hours, 2),
         "game_breakdown": games,
         "daily_activity": daily_activity,
-        "method": "Muestreo propio cada 15 minutos; horas estimadas solo entre muestras consecutivas del mismo directo. Categorías y evolución diaria se calculan sobre las muestras observadas."
+        "method": "Muestreo propio con cadencia observada cercana a 55 minutos, variable por la programación de GitHub Actions; horas estimadas solo entre muestras consecutivas del mismo directo cuando el intervalo no supera 110 minutos. Categorías y evolución diaria se calculan sobre las muestras observadas."
     }
 
 
@@ -154,7 +154,7 @@ def main():
         snapshots = previous.get("snapshots", [])
         valid_times = [datetime.fromisoformat(s["sampled_at"].replace("Z", "+00:00")) for s in snapshots if s.get("sampled_at")]
         last_sample = max(valid_times) if valid_times else None
-        should_sample = last_sample is None or (now - last_sample) >= timedelta(minutes=10)
+        should_sample = last_sample is None or (now - last_sample) >= timedelta(minutes=45)
         stream = streams_by_login.get(login)
         sample = {
             "sampled_at": now_iso,
