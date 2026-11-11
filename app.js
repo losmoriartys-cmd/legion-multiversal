@@ -441,7 +441,8 @@ function renderLiveDirectory(channels){
  const updated=instituteStatsData?.updated_at?new Date(instituteStatsData.updated_at):null;
  const updatedLabel=updated&&!Number.isNaN(updated.getTime())?updated.toLocaleString('es-AR'):'fecha no disponible';
  const interval=Number(instituteStatsData?.sampling_interval_minutes)||55;
-  const fresh=updated&&((Date.now()-updated.getTime())/60000)<=Math.max(interval*2.5,120);
+  const ageMinutes=updated?(Date.now()-updated.getTime())/60000:Infinity;
+  const fresh=updated&&ageMinutes>=-5&&ageMinutes<=Math.max(interval*2.5,120);
   const staleLive=(channels||[]).filter(c=>c.live&&!fresh);
   const refreshNote='<p class="stats-note live-refresh-note">Última captura: '+escapeStatsHtml(updatedLabel)+' · el colector consulta Twitch con una cadencia objetivo de '+interval+' minutos; la página vuelve a leer el archivo cada 60 segundos. No es una conexión en tiempo real.</p>';
  if(!live.length){
@@ -520,9 +521,9 @@ async function loadInstituteStats(){
   const sampledChannels=Array.isArray(collection.sampled_channels)?collection.sampled_channels:[];
   const accountedChannels=new Set([...sampledChannels,...skippedChannels]);
   const collectionComplete=collection.complete===true && expectedChannels>0 && resolvedChannels>=expectedChannels && accountedChannels.size>=expectedChannels;
-  const ageMinutes=updatedValid?Math.max(0,(Date.now()-updated.getTime())/60000):Infinity;
+  const ageMinutes=updatedValid?(Date.now()-updated.getTime())/60000:Infinity;
   const freshnessLimit=Math.max(interval*2.5,120);
-  const isFresh=ageMinutes<=freshnessLimit;
+  const isFresh=ageMinutes>=-5&&ageMinutes<=freshnessLimit;
   const statusLabel=!updatedValid?'FECHA NO DISPONIBLE':!isFresh?'DATOS CON DEMORA':collectionComplete?'CAPTURA COMPLETA':'CAPTURA PARCIAL';
   const updatedNode=document.getElementById('stats-updated');
   if(updatedNode){
