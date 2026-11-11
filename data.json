@@ -2,7 +2,7 @@
   "schema_version": 2,
   "source": "Twitch Helix API",
   "window_days": 30,
-  "sampling_interval_minutes": 15,
+  "sampling_interval_minutes": 55,
   "active_channels": [
     "losmoriartys",
     "ladymoriarty01",
@@ -13,10 +13,11 @@
     "daved0608"
   ],
   "collection": {
-    "started_at": "2026-11-11T06:45:50Z",
+    "started_at": "2026-11-11T07:24:05Z",
     "expected_channels": 7,
     "resolved_channels": 7,
-    "sampled_channels": [
+    "sampled_channels": [],
+    "skipped_channels": [
       "ardipii",
       "akumazoldyck",
       "daved0608",
@@ -25,7 +26,6 @@
       "ther0d3r1k",
       "habitos_atomicos"
     ],
-    "skipped_channels": [],
     "complete": true
   },
   "archived_channels": [
@@ -33,7 +33,7 @@
     "elgabii090"
   ],
   "channel_registry_note": "Los canales archivados se conservan para consulta histórica y no se incluyen en los indicadores del roster activo.",
-  "updated_at": "2026-11-11T06:45:50Z",
+  "updated_at": "2026-11-11T07:24:05Z",
   "channels": {
     "ladymoriarty01": {
       "login": "ladymoriarty01",
@@ -48,15 +48,15 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-11T06:45:50Z",
+      "updated_at": "2026-11-11T07:24:05Z",
       "window": {
         "samples_total": 203,
         "live_samples": 7,
         "streams_observed": 3,
         "average_viewers_sampled": 6.4,
         "peak_viewers_sampled": 15,
-        "observed_live_hours": 0.0,
-        "estimated_hours_watched": 0.0,
+        "observed_live_hours": 3.07,
+        "estimated_hours_watched": 19.29,
         "game_breakdown": [
           {
             "name": "Once Human",
@@ -110,7 +110,7 @@
             "peak_viewers_sampled": 15
           }
         ],
-        "method": "Muestreo propio cada 15 minutos; horas estimadas solo entre muestras consecutivas del mismo directo. Categorías y evolución diaria se calculan sobre las muestras observadas."
+        "method": "Muestreo propio con cadencia observada cercana a 55 minutos, variable por la programación de GitHub Actions; horas estimadas solo entre muestras consecutivas del mismo directo cuando el intervalo no supera 110 minutos. Categorías y evolución diaria se calculan sobre las muestras observadas."
       },
       "snapshots": [
         {
@@ -1955,15 +1955,15 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-11T06:45:50Z",
+      "updated_at": "2026-11-11T07:24:05Z",
       "window": {
         "samples_total": 203,
         "live_samples": 24,
         "streams_observed": 5,
         "average_viewers_sampled": 22.1,
         "peak_viewers_sampled": 46,
-        "observed_live_hours": 0.0,
-        "estimated_hours_watched": 0.0,
+        "observed_live_hours": 15.49,
+        "estimated_hours_watched": 349.34,
         "game_breakdown": [
           {
             "name": "Fortnite",
@@ -2052,7 +2052,7 @@
             "peak_viewers_sampled": 26
           }
         ],
-        "method": "Muestreo propio cada 15 minutos; horas estimadas solo entre muestras consecutivas del mismo directo. Categorías y evolución diaria se calculan sobre las muestras observadas."
+        "method": "Muestreo propio con cadencia observada cercana a 55 minutos, variable por la programación de GitHub Actions; horas estimadas solo entre muestras consecutivas del mismo directo cuando el intervalo no supera 110 minutos. Categorías y evolución diaria se calculan sobre las muestras observadas."
       },
       "snapshots": [
         {
@@ -4543,15 +4543,15 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-11T06:45:50Z",
+      "updated_at": "2026-11-11T07:24:05Z",
       "window": {
         "samples_total": 203,
         "live_samples": 6,
         "streams_observed": 3,
         "average_viewers_sampled": 7.2,
         "peak_viewers_sampled": 14,
-        "observed_live_hours": 0.24,
-        "estimated_hours_watched": 1.44,
+        "observed_live_hours": 1.66,
+        "estimated_hours_watched": 17.23,
         "game_breakdown": [
           {
             "name": "Just Chatting",
@@ -4584,7 +4584,7 @@
             "peak_viewers_sampled": 14
           }
         ],
-        "method": "Muestreo propio cada 15 minutos; horas estimadas solo entre muestras consecutivas del mismo directo. Categorías y evolución diaria se calculan sobre las muestras observadas."
+        "method": "Muestreo propio con cadencia observada cercana a 55 minutos, variable por la programación de GitHub Actions; horas estimadas solo entre muestras consecutivas del mismo directo cuando el intervalo no supera 110 minutos. Categorías y evolución diaria se calculan sobre las muestras observadas."
       },
       "snapshots": [
         {
@@ -6429,15 +6429,15 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-11T06:45:50Z",
+      "updated_at": "2026-11-11T07:24:05Z",
       "window": {
         "samples_total": 203,
         "live_samples": 15,
         "streams_observed": 6,
         "average_viewers_sampled": 6.7,
         "peak_viewers_sampled": 17,
-        "observed_live_hours": 0.24,
-        "estimated_hours_watched": 0.72,
+        "observed_live_hours": 7.07,
+        "estimated_hours_watched": 34.59,
         "game_breakdown": [
           {
             "name": "Fortnite",
@@ -6519,7 +6519,7 @@
             "peak_viewers_sampled": 16
           }
         ],
-        "method": "Muestreo propio cada 15 minutos; horas estimadas solo entre muestras consecutivas del mismo directo. Categorías y evolución diaria se calculan sobre las muestras observadas."
+        "method": "Muestreo propio con cadencia observada cercana a 55 minutos, variable por la programación de GitHub Actions; horas estimadas solo entre muestras consecutivas del mismo directo cuando el intervalo no supera 110 minutos. Categorías y evolución diaria se calculan sobre las muestras observadas."
       },
       "snapshots": [
         {
@@ -8364,15 +8364,15 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-11T06:45:50Z",
+      "updated_at": "2026-11-11T07:24:05Z",
       "window": {
         "samples_total": 203,
         "live_samples": 11,
         "streams_observed": 6,
         "average_viewers_sampled": 2.0,
         "peak_viewers_sampled": 5,
-        "observed_live_hours": 0.24,
-        "estimated_hours_watched": 0.24,
+        "observed_live_hours": 3.55,
+        "estimated_hours_watched": 7.22,
         "game_breakdown": [
           {
             "name": "Fortnite",
@@ -8440,7 +8440,7 @@
             "peak_viewers_sampled": 3
           }
         ],
-        "method": "Muestreo propio cada 15 minutos; horas estimadas solo entre muestras consecutivas del mismo directo. Categorías y evolución diaria se calculan sobre las muestras observadas."
+        "method": "Muestreo propio con cadencia observada cercana a 55 minutos, variable por la programación de GitHub Actions; horas estimadas solo entre muestras consecutivas del mismo directo cuando el intervalo no supera 110 minutos. Categorías y evolución diaria se calculan sobre las muestras observadas."
       },
       "snapshots": [
         {
@@ -10901,15 +10901,15 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-11T06:45:50Z",
+      "updated_at": "2026-11-11T07:24:05Z",
       "window": {
         "samples_total": 203,
         "live_samples": 35,
         "streams_observed": 9,
         "average_viewers_sampled": 6.6,
         "peak_viewers_sampled": 45,
-        "observed_live_hours": 0.0,
-        "estimated_hours_watched": 0.0,
+        "observed_live_hours": 21.97,
+        "estimated_hours_watched": 140.88,
         "game_breakdown": [
           {
             "name": "Call of Duty: Warzone",
@@ -10998,7 +10998,7 @@
             "peak_viewers_sampled": 3
           }
         ],
-        "method": "Muestreo propio cada 15 minutos; horas estimadas solo entre muestras consecutivas del mismo directo. Categorías y evolución diaria se calculan sobre las muestras observadas."
+        "method": "Muestreo propio con cadencia observada cercana a 55 minutos, variable por la programación de GitHub Actions; horas estimadas solo entre muestras consecutivas del mismo directo cuando el intervalo no supera 110 minutos. Categorías y evolución diaria se calculan sobre las muestras observadas."
       },
       "snapshots": [
         {
@@ -12843,15 +12843,15 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-11T06:45:50Z",
+      "updated_at": "2026-11-11T07:24:05Z",
       "window": {
         "samples_total": 203,
         "live_samples": 8,
         "streams_observed": 4,
         "average_viewers_sampled": 18.0,
         "peak_viewers_sampled": 31,
-        "observed_live_hours": 0.0,
-        "estimated_hours_watched": 0.0,
+        "observed_live_hours": 2.73,
+        "estimated_hours_watched": 63.48,
         "game_breakdown": [
           {
             "name": "Barfender",
@@ -12919,7 +12919,7 @@
             "peak_viewers_sampled": 11
           }
         ],
-        "method": "Muestreo propio cada 15 minutos; horas estimadas solo entre muestras consecutivas del mismo directo. Categorías y evolución diaria se calculan sobre las muestras observadas."
+        "method": "Muestreo propio con cadencia observada cercana a 55 minutos, variable por la programación de GitHub Actions; horas estimadas solo entre muestras consecutivas del mismo directo cuando el intervalo no supera 110 minutos. Categorías y evolución diaria se calculan sobre las muestras observadas."
       },
       "snapshots": [
         {
