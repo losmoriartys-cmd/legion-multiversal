@@ -20,6 +20,23 @@ Los registros anteriores a la adopción de este archivo se conservan en [`BITACO
 > Diferenciar siempre lo acordado, lo implementado y lo que efectivamente se verificó. No marcar un despliegue como exitoso sin comprobarlo.
 
 ---
+## 2026-11-11 — Evolución visual transversal del Roster 02 y Bitácora interactiva
+
+- **Responsable:** colaboración ChatGPT + equipo del proyecto.
+- **Base:** rama independiente desde `main`; no se modifica la rama publicada.
+- **Objetivo:** iniciar la implementación visual solicitada para cartas y Bitácora, reutilizando los activos y datos existentes.
+- **Archivos modificados:** `styles.css`, `index.html`, `bitacora-preview.html`, `INFORMES.md`.
+- **Cartas:** refinamiento transversal para las ocho cartas existentes: entrada escalonada, deriva holográfica sutil y barrido de luz al hover/foco. Se conserva el diseño 3D, reversos, imágenes, datos y comportamiento preexistentes; se respeta `prefers-reduced-motion`.
+- **Bitácora:** se reemplaza la maqueta de dos páginas por un libro editorial interactivo con portada, índice y cinco capítulos enlazados al sitio principal (origen, roster, impacto, colaboraciones y expediente BarFender). Incluye navegación anterior/siguiente, teclado con flechas, diseño responsive y sonido de página opcional activado por el usuario; no hay reproducción automática ni archivos de audio externos.
+- **Integración:** se agrega un acceso visible a la Bitácora desde el Capítulo 12. Los enlaces del libro llevan a los capítulos existentes, sin duplicar expedientes ni alterar el contenido de campañas.
+- **Rigor de datos:** se mantienen los datos actuales y sus fuentes. No se agregan métricas, fechas ni hitos no respaldados.
+- **Validaciones:** cambios preparados en rama para revisión. Pendiente ejecutar validadores del repositorio y revisar visualmente preview en escritorio/móvil; el sonido requiere prueba manual en navegador.
+- **Alcance preservado:** no se toca Arsenal ni PR #8/#9; no se reemplazan ni duplican fotografías; no se modifica `main`.
+- **Pendientes / riesgos:** confirmar el comportamiento de los selectores de carta con el DOM real del Roster, la navegación del libro en móvil y el enlace de retorno.
+- **Despliegue:** pendiente de checks de la PR.
+ 
+---
+
 
 ## 2026-11-06 — Corregir gestión de foco en expedientes del Roster
 
