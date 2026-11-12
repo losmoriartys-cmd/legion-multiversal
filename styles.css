@@ -3678,3 +3678,48 @@ header .primary-navigation .nav-btn[aria-current="page"]{border-color:#8be3f3;co
  .multiverse-node strong { font-size:.95rem; }
  .multiverse-node-areas i { font-size:.56rem; }
 }
+
+
+/* Estadísticas: panorama visible por canal, no solo indicadores agregados. */
+.stats-channel-heading{display:flex;align-items:end;justify-content:space-between;gap:18px;margin:26px 0 12px;border-bottom:1px solid rgba(134,223,240,.28);padding-bottom:12px}
+.stats-channel-heading h4{margin:0;color:#f3e5bd;font:clamp(1.5rem,2.4vw,2.1rem)/1 'Bangers',cursive;letter-spacing:.04em}
+.stats-channel-heading p{max-width:580px;margin:0;color:#aebed0;font-size:.78rem;line-height:1.55}
+.stats-channel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,245px),1fr));gap:12px;margin:14px 0 28px}
+.stats-channel-card{min-width:0;padding:16px;background:linear-gradient(155deg,#142238,#0a111d 72%);border:1px solid #34445c;box-shadow:0 9px 22px rgba(0,0,0,.2)}
+.stats-channel-card.is-live{border-color:rgba(85,220,157,.65);box-shadow:inset 0 0 0 1px rgba(85,220,157,.12),0 9px 22px rgba(0,0,0,.2)}
+.stats-channel-card-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.stats-channel-platform{color:#8498b2;font-size:.62rem;font-weight:900;letter-spacing:.12em}
+.stats-channel-card h5{margin:13px 0 2px;color:#fff;font:1.55rem/1.1 'Bangers',cursive;overflow-wrap:anywhere}
+.stats-channel-card>a{color:#86dff0;font-size:.68rem;font-weight:900;text-decoration:none}
+.stats-channel-card>a:hover{text-decoration:underline}
+.stats-channel-viewers{display:flex;align-items:baseline;gap:9px;margin:14px 0 10px;padding:10px 0;border-top:1px solid rgba(255,255,255,.1);border-bottom:1px solid rgba(255,255,255,.1)}
+.stats-channel-viewers strong{color:#86dff0;font:2.1rem/1 'Bangers',cursive;font-variant-numeric:tabular-nums}
+.stats-channel-viewers span{color:#aebed0;font-size:.62rem;font-weight:900;letter-spacing:.08em}
+.stats-channel-card dl{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:0}
+.stats-channel-card dl div{min-width:0}
+.stats-channel-card dt{color:#8fa0b7;font-size:.65rem;line-height:1.35}
+.stats-channel-card dd{margin:3px 0 0;color:#f3e5bd;font-size:.92rem;font-weight:800;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.stats-channel-foot{display:block;margin-top:12px;color:#7f91a9;font-size:.64rem}
+@media(max-width:600px){.stats-channel-heading{align-items:flex-start;flex-direction:column;gap:6px}.stats-channel-grid{grid-template-columns:1fr}.stats-channel-card{padding:14px}}
+
+
+/* El acceso a En Vivo gana jerarquía solo cuando la última captura es reciente. */
+.nav-btn-live{position:relative;border-color:rgba(255,112,112,.55)!important}
+.nav-btn-live::before{content:"";display:inline-block;width:7px;height:7px;margin:0 8px 1px 0;border-radius:50%;background:#8793a5;vertical-align:middle}
+.nav-btn-live.is-live{color:#fff!important;background:linear-gradient(110deg,rgba(133,22,38,.9),rgba(57,17,31,.95))!important;border-color:#ff626f!important;box-shadow:0 0 0 1px rgba(255,98,111,.18),0 0 18px rgba(255,70,90,.2)}
+.nav-btn-live.is-live::before{background:#ff5365;box-shadow:0 0 0 4px rgba(255,83,101,.16),0 0 12px rgba(255,83,101,.8)}
+
+/* BarFender: tarjeta de caso sin reutilizar fotografías del expediente. */
+.alliance-case-card{display:grid;grid-template-columns:minmax(220px,.78fr) minmax(0,1.22fr);gap:22px;align-items:stretch;margin:28px 0;padding:20px;background:linear-gradient(145deg,rgba(18,31,48,.96),rgba(7,13,23,.98));border:1px solid rgba(226,190,103,.38);box-shadow:0 16px 38px rgba(0,0,0,.24)}
+.alliance-case-art{display:flex;min-height:220px;flex-direction:column;justify-content:center;align-items:center;gap:12px;padding:22px;text-align:center;background:radial-gradient(circle at 50% 35%,rgba(224,183,91,.18),transparent 55%),linear-gradient(145deg,#18283d,#080e18);border:1px solid rgba(226,190,103,.42)}
+.alliance-case-art span,.alliance-case-art small{color:#b7c5d6;font-size:.62rem;font-weight:900;letter-spacing:.14em;line-height:1.5}
+.alliance-case-art strong{color:#f3d98e;font:clamp(2.4rem,5vw,4.4rem)/.9 'Bangers',cursive;letter-spacing:.06em;text-shadow:3px 3px #000}
+.alliance-case-copy{align-self:center;min-width:0}
+.alliance-case-copy h4{margin:8px 0;color:#f3d98e;font:2rem 'Bangers',cursive;letter-spacing:.05em}
+.alliance-case-copy p{color:#c4d0df;line-height:1.65}
+.alliance-case-copy .alliance-fineprint{color:#9eafc2;font-size:.78rem}
+.collaboration-chapter .campaign-four-views{max-width:900px;margin:18px 0 22px}
+.collaboration-chapter .campaign-four-views img{display:block;width:100%;height:auto;max-height:520px;object-fit:contain;background:#05080d}
+@media(max-width:900px){.alliance-case-card{grid-template-columns:1fr}.alliance-case-art{min-height:170px}}
+@media(max-width:650px){.collaboration-chapter .campaign-feature-head{flex-wrap:wrap}.collaboration-chapter .campaign-summary-copy{padding:17px}.alliance-case-card{padding:14px;gap:14px}.alliance-case-art{min-height:145px;padding:16px}}
+@media(max-width:420px){.collaboration-chapter .campaign-feature-head{gap:12px}.collaboration-chapter .campaign-edition{margin-left:auto}.collaboration-chapter .campaign-four-views figcaption{font-size:.58rem;line-height:1.5}}

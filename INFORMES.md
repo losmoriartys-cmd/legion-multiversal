@@ -2307,3 +2307,46 @@ Alinear el Roster con la arquitectura visual ya creada por el equipo: carnet com
 - **Conservación:** se mantienen textos institucionales, fotografías, enlaces, capítulos, roster y estadísticas existentes. No se alteran assets ni datos canónicos.
 - **Alcance:** index.html, styles.css, app.js e INFORMES.md. Esta rama se apoya temporalmente en la rama del PR #15 para no duplicar ni pisar los cambios de Arsenal; el PR de esta etapa deberá cambiar su base a main después de integrar PR #15.
 - **Validación pendiente:** comprobar IDs y enlaces internos, sintaxis JavaScript, balance CSS y checks de GitHub/Cloudflare. La revisión visual de escritorio y móvil sigue pendiente; no se declara aprobada hasta inspeccionar la vista previa.
+
+
+## 2026-11-11 — Reordenamiento editorial y mejora del panel de estadísticas
+
+- **Solicitud del responsable:** establecer la numeración visible desde cero y separar capítulos principales de capítulos especiales.
+- **Orden principal aprobado:** 00 Inicio; 01 Origen; 02 Valores; 03 Roster; 04 Estadísticas; 05 Comunidad; 06 Alianzas; 07 Colaboraciones.
+- **Orden especial:** 08 Arsenal; 09 En Vivo; 10 Reclutamiento. El Mapa Multiversal se conserva como EXTRA independiente, sin desplazar ni renumerar los capítulos solicitados.
+- **Implementación:** se reordenan los botones principales y secundarios; se actualizan los zócalos superiores y el atributo editorial de los paneles. Los IDs técnicos chapter-* se conservan para no romper enlaces, expedientes, llamadas de navegación ni datos asociados. Se corrige la referencia del texto de Origen al Roster (Capítulo 03).
+- **Auditoría estadística:** el archivo actual de Twitch registra 7 canales activos, 7/7 resueltos en la última captura y 9 registros históricos en data.json (7 activos + 2 archivados). En la lectura consultada, Habitos Atomicos era el único canal en directo; los otros seis estaban offline, pero todos seguían dentro del seguimiento. Por lo tanto, la impresión de que el sistema consultaba un solo canal se debía a la presentación poco visible de los canales offline y a que la tabla completa estaba dentro de un desplegable.
+- **Mejora de presentación:** se añade una tarjeta visible por cada canal activo, con estado, espectadores actuales, promedio y pico observados, horas en directo observadas, sesiones detectadas y muestras registradas. Se agrega el KPI «En directo ahora» y se mantiene la tabla técnica detallada como contenido complementario. Los datos siguen siendo muestreo propio de Twitch Helix, no analítica oficial.
+- **Corrección metodológica:** una muestra omitida por la regla anti-duplicados no se interpreta como fallo de cobertura; la captura puede ser completa cuando todos los canales esperados están contabilizados entre muestras nuevas y omisiones válidas.
+- **Alcance:** index.html, app.js, styles.css e INFORMES.md. No se modifican data.json, roster-data.json, credenciales, retratos ni fotografías. No se altera el contenido interno de Arsenal; únicamente se actualizan su posición y rótulo editorial.
+- **Estado:** cambios preparados en la rama work/chapter-order-stats-overhaul-2026-11-11, aislada de main. Pendiente ejecutar validaciones, checks y revisar preview en escritorio/móvil. No se fusiona automáticamente.
+
+
+- **En Vivo y vigencia:** el acceso especial «09 EN VIVO» recibe un indicador visual dinámico solo si la última captura es reciente y detecta transmisiones. El capítulo distingue una captura reciente de una lectura demorada; no presenta un estado antiguo como si fuera tiempo real. Se documenta que la página vuelve a leer el JSON cada 60 segundos, mientras que el colector de Twitch tiene una cadencia objetivo cercana a 55 minutos.
+
+
+## Hoja de ruta acordada — mejoras anteriores, ejecución secuencial
+
+Se conserva el compromiso de avanzar una mejora por etapa, con validación y revisión antes de pasar a la siguiente. El reordenamiento de capítulos solicitado se trata como una tarea transversal y el apartado estadístico se aborda en esta primera entrega.
+
+1. **Portada ejecutiva:** revisar la jerarquía de presentación y los recorridos de entrada. La estructura editorial ya está implementada; queda revisión visual y ajuste fino.
+2. **BarFender en Inicio:** conservar el expediente destacado, revisar asignación de imágenes y evitar reutilizar fotografías entre secciones. No sustituir recursos hasta confirmar con el responsable qué imagen nueva corresponde a cada ubicación.
+3. **Jerarquía de CTA:** revisar contraste, prioridad y claridad de las acciones para visitantes, colaboradores y marcas.
+4. **Estadísticas:** mostrar cobertura por canal, estados de carga/error/vacío y separar analítica externa de muestreo propio. La grilla multicanal y el control de vigencia quedan incluidos en esta rama; la ampliación histórica con Streams Charts para todo el roster requiere capturas comparables verificadas por perfil.
+5. **Rendimiento y responsive:** revisar carga de recursos, estabilidad visual y navegación en escritorio, tablet y móvil.
+6. **Alianzas:** revisar y ampliar los formatos comerciales y colaborativos del capítulo, con condiciones y ejemplos documentados.
+7. **Audiencia LATAM:** investigar y documentar la audiencia regional y oportunidades de posicionamiento con fuentes actuales.
+8. **Gráficos y campañas:** mejorar visualizaciones, lectura de campañas y presentación de resultados sin mezclar métricas incompatibles.
+
+**Coordinación:** no se interviene en el contenido de Arsenal ni se fusionan los PR #8/#9 del colaborador desde esta tarea. Esta rama modifica la navegación global y el orden editorial, por lo que deberá reconciliarse con el trabajo de Arsenal antes de integrar. Ningún cambio se publica en main automáticamente.
+
+## 2026-11-12 — Reconciliación del PR #20 y auditoría integral de BarFender
+
+- Reconciliación: se preparó una rama nueva basada en el main vigente y se reaplicaron los cambios editoriales y estadísticos del PR #20 sobre esa base, evitando arrastrar su divergencia histórica. Se conservan los cuatro archivos previstos: index.html, app.js, styles.css e INFORMES.md.
+- Corrección funcional: en renderLiveDirectory() se calculaba live usando fresh antes de declarar esta última variable. Se reordenó el cálculo, se valida la fecha de captura y se conserva la ventana de vigencia; esto evita el ReferenceError que podía interrumpir el directorio En Vivo.
+- BarFender — imagen asignada: BarFenderLos4.jpg (presente en la raíz del repositorio) queda asignada exclusivamente al bloque «UNA SESIÓN, CUATRO PUNTOS DE VISTA». Se conserva la ilustración principal con el título del juego y la ilustración editorial secundaria, cada una en su ubicación y sin duplicarlas dentro del expediente.
+- No repetición: stream4.jpg queda en una sola ubicación, la ficha destacada de Inicio. La tarjeta de Alianzas deja de reutilizar esa fotografía y pasa a una placa tipográfica propia, sin fotografía repetida.
+- Diseño responsive: se incorporan estilos propios para la tarjeta BarFender de Alianzas y ajustes de composición para la portada de cuatro creadores, el encabezado del expediente y el resumen en tablet/móvil. Los breakpoints existentes de 900, 650 y 420 px se conservan y complementan.
+- CTA y lectura editorial: se mantiene la acción principal de Inicio hacia el expediente 001 y el acceso desde Alianzas; la placa tipográfica hace más clara la identificación del caso sin competir con la fotografía principal.
+- Validación pendiente de CI: ejecutar los workflows automáticos y revisar la vista previa de Cloudflare en escritorio y móvil. La inspección estática no se presenta como prueba visual real de navegador.
+- Alcance y seguridad: no se modifican data.json, roster-data.json, credenciales, archivos de métricas ni contenidos internos de Arsenal. La rama se entrega mediante PR para revisión antes de integrar en main.
