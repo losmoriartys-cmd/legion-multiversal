@@ -1,3 +1,14 @@
+## 2026-11-12 — Roster 02: segunda pasada, lectura visual tipo cómic
+
+- **Problema detectado en revisión:** la primera iteración mejoró la carta 3D, pero las páginas interiores seguían sintiéndose como bloques de información con una transición discreta. No cumplía todavía la idea de portfolio/cómic solicitada.
+- **Corrección:** se reforzó la jerarquía tipográfica, el tamaño de titulares, los paneles, las tarjetas de métricas, la tabla, los clips y los módulos de colaboración/contacto. Se pasó a un lenguaje visual más cinematográfico, con fondos oscuros, contraste, profundidad, marcos y sombras.
+- **Paso de páginas:** se incorporaron transiciones direccionales con perspectiva 3D y rotación tipo hoja de cómic; avanzar y retroceder tienen movimientos opuestos. Se mantienen navegación por flechas, puntos, teclado y gestos táctiles.
+- **Portada:** se amplió el espacio para la carta protagonista, manteniendo el giro interactivo, reflejo y flotación sutil.
+- **Validación estática:** 7 páginas, un documento HTML, un bloque de estilos, referencias a la carta y controles presentes; JavaScript embebido pasa comprobación de sintaxis. Sigue pendiente revisión visual real en navegador.
+- **Estado:** cambios aislados en `work/roster-02-living-card-portfolio-2026-11-12`; no publicados en `main`.
+
+---
+
 ## 2026-11-12 — Roster 02: portfolio de carta viva MORIARTYS
 
 - **Cambio de dirección visual:** se abandona la composición de portada editorial estática y se transforma el expediente en un portfolio interactivo donde la carta coleccionable ocupa el centro visual.
