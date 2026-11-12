@@ -1,3 +1,13 @@
+## 2026-11-12 — Revisión técnica del PR #32
+
+- Se revisa la cronología y se confirma la corrección de roles: Demian y ROD3R1K como punto de partida; Akuma como tercer integrante; Ardipi como cuarto miembro de la primera formación; Habitos (canal `Habitos_Atomicos`) y Patoexpone como colaboradores.
+- Se comprueba que las tres imágenes editoriales definidas para Origen aparecen una sola vez en el HTML y que no quedan referencias a «Mismo Hábitos» ni «Mismo Habitos» en `index.html` o este informe.
+- Se mejora la carga de la imagen principal de Origen: texto alternativo descriptivo, carga eager y prioridad alta para evitar que un recurso visible al inicio quede relegado.
+- El cambio se mantiene aislado en la rama del PR #32; no se modifica `main` ni se integra el pull request.
+- Validación del último commit: el workflow «Validar código y datos del sitio» fue iniciado y quedó en cola (`queued`). No se declara aprobado hasta obtener un resultado final. La inspección visual real en escritorio y móvil sigue pendiente.
+
+---
+
 ## 2026-11-12 — Confirmación de la ilustración grupal
 
 - Demian confirma que la ilustración `image_20261106_125112.jpg` contiene **ocho personajes** y que los ocho representan exclusivamente a integrantes actuales de Legión Multiversal.
