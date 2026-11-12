@@ -2529,3 +2529,12 @@ Se conserva el compromiso de avanzar una mejora por etapa, con validación y rev
 - **Propuesta comercial y contacto:** se incorporan formatos de activación posibles y un texto comercial orientativo, distinguiéndolos expresamente de campañas contratadas. El correo abre con asunto sugerido.
 - **Validación de datos:** al corte de data.json del 12/11/2026, la ventana de 30 días contiene 239 muestras, 10 muestras live y 5 directos observados; la cobertura live es baja (4,2%). Por eso los indicadores se presentan como observaciones exploratorias, no como métricas oficiales de Twitch. Seguidores: no disponibles por permisos.
 - **Alcance:** solo se modifica el piloto MORIARTYS. No se replica a otros perfiles ni se integra en main en esta etapa.
+
+
+## 2026-11-12 — Corrección de acceso desde el perfil personal MORIARTYS
+
+- Se localizó el origen de los dos accesos duplicados en `app.js`, dentro de `openHeroProfile()`.
+- Para MORIARTYS, el perfil ahora presenta una única acción de lectura: `ABRIR ARCHIVO PERSONAL`, que enlaza directamente con `roster-02-moriartys.html`, el libro interactivo integral del piloto.
+- Se elimina del perfil MORIARTYS el botón `ABRIR BITÁCORA COMPLETA` que abría el modal anterior y el enlace `ARCHIVO CENTRAL` que llevaba a `bitacora-preview.html` (libro general independiente).
+- Se conserva el acceso a Twitch y el retorno al Roster. Los perfiles restantes mantienen temporalmente su flujo actual; esta corrección no cambia su contenido.
+- Alcance: rama de trabajo del PR #31. No se integra en `main` hasta aprobación.
