@@ -1,3 +1,17 @@
+## 2026-11-12 — Rediseño editorial Roster 02: MORIARTYS
+
+- **Objetivo:** evolucionar el prototipo visual anterior hacia un expediente narrativo de lectura secuencial, inspirado en un cómic editorial, sin modificar las ocho fichas ni la experiencia publicada.
+- **Archivo nuevo:** `roster-02-moriartys.html`, aislado en la rama `work/roster-02-editorial-redesign-2026-11-12`.
+- **Dirección visual:** portada de colección, siete páginas interiores navegables, jerarquía tipográfica de cómic, paneles editoriales, paleta tinta/papel/azul/rojo/dorado y adaptación responsive. Reutiliza la ilustración existente del expediente; no crea ni reemplaza imágenes.
+- **Contenido:** identidad compartida de Demi y Ari; actividad del canal MORIARTYS; desglose de juegos detectados; partners separados de accesos a claves; tres clips enlazados; contacto comercial y aclaración de identidades individuales.
+- **Fuentes vivas:** `roster-data.json`, `creator-records.json` y `data.json`. Las cifras se cargan en tiempo real desde el archivo del proyecto y conservan su metodología; no se atribuyen al canal individual de Ari ni al perfil individual de Demi.
+- **Criterios de rigor:** las métricas son muestras propias de Twitch Helix, no analítica oficial. Se distinguen muestras, directos observados, promedio y pico muestreados y horas vistas estimadas. Los partners Enshrouded/Cinderia no se mezclan con los registros de acceso de Lurkit/Keymailer.
+- **Interacción y accesibilidad:** navegación por botones, indicadores de página, flechas del teclado, estados accesibles, enlaces externos con `rel=noopener` y respeto de `prefers-reduced-motion`.
+- **Alcance preservado:** no se modifica `main`, `app.js`, `styles.css`, `index.html`, las fuentes de datos ni assets. El archivo se mantiene como propuesta aislada para revisión visual antes de decidir su integración.
+- **Pendiente de revisión:** inspección real en navegador de escritorio/móvil, prueba manual de navegación y contraste, revisión editorial del tono y aprobación del usuario. No se declara validación visual o funcional manual.
+
+---
+
 ## 2026-11-12 — Cierre de la pasada editorial de capítulos 1 a 7
 
 - **Alcance:** revisión secuencial de Inicio, Origen, Valores, Alianzas/Colaboraciones, Arsenal, En Vivo/Reclutamiento/Mapa Multiversal y Roster/Estadísticas. Se corrigieron detalles puntuales y se separaron los pendientes que dependen de verificación externa o de los creadores.
