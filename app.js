@@ -435,13 +435,18 @@ function formatMetric(value,digits=2){
 }
 function renderLiveDirectory(channels){
  const host=document.getElementById('live-directory');if(!host)return;
- const live=(channels||[]).filter(c=>c.live);
+ const detectedLive=(channels||[]).filter(c=>c.live);
  const offline=(channels||[]).filter(c=>!c.live);
  const updated=instituteStatsData?.updated_at?new Date(instituteStatsData.updated_at):null;
  const updatedLabel=updated&&!Number.isNaN(updated.getTime())?updated.toLocaleString('es-AR'):'fecha no disponible';
- const refreshNote='<p class="stats-note live-refresh-note">Estado consultado: '+escapeStatsHtml(updatedLabel)+' · actualización automática cada 60 segundos.</p>';
+ const interval=Number(instituteStatsData?.sampling_interval_minutes)||55;
+ const ageMinutes=updated?(Date.now()-updated.getTime())/60000:Infinity;
+ const fresh=Boolean(updated&&!Number.isNaN(updated.getTime())&&ageMinutes>=-5&&ageMinutes<=Math.max(interval*2.5,120));
+ const live=fresh?detectedLive:[];
+ const staleLive=(channels||[]).filter(c=>c.live&&!fresh);
+  const refreshNote='<p class="stats-note live-refresh-note">Última captura: '+escapeStatsHtml(updatedLabel)+' · el colector consulta Twitch con una cadencia objetivo de '+interval+' minutos; la página vuelve a leer el archivo cada 60 segundos. No es una conexión en tiempo real.</p>';
  if(!live.length){
-  host.innerHTML=refreshNote+'<div class="premium-panel"><div class="premium-kicker">ESTADO ACTUAL</div><h3>En este momento no hay integrantes detectados en directo</h3><p>La próxima consulta actualizará el estado. Mientras tanto, podés visitar los canales del roster.</p></div>'+offline.map(c=>'<article class="live-channel-card offline"><strong>'+escapeStatsHtml(c.display_name)+'</strong><small>Sin directo detectado en la última consulta</small><a href="https://twitch.tv/'+encodeURIComponent(c.login)+'" target="_blank" rel="noopener noreferrer">Visitar canal ↗</a></article>').join('');
+  host.innerHTML=refreshNote+'<div class="premium-panel"><div class="premium-kicker">ESTADO DE TRANSMISIONES</div><h3>'+(staleLive.length?'La última captura registró '+staleLive.length+' canal(es) en directo, pero los datos están demorados':'En la última captura no había integrantes detectados en directo')+'</h3><p>Los canales permanecen en seguimiento aunque estén offline. Consultá cada perfil para comprobar si inició una transmisión más reciente.</p></div>'+(channels||[]).map(c=>'<article class="live-channel-card offline"><strong>'+escapeStatsHtml(c.display_name)+'</strong><small>'+(staleLive.includes(c)?'Último estado registrado: EN DIRECTO · captura demorada':'OFFLINE · continúa en seguimiento')+'</small><a href="https://twitch.tv/'+encodeURIComponent(c.login)+'" target="_blank" rel="noopener noreferrer">Visitar canal ↗</a></article>').join('');
   return;
  }
  host.innerHTML=refreshNote+live.map(c=>'<article class="live-channel-card"><span class="stats-status partial">● EN DIRECTO</span><strong>'+escapeStatsHtml(c.display_name)+'</strong><small>'+escapeStatsHtml(c.current_game||'Categoría no informada')+' · '+(c.current_viewers===null?'Espectadores no disponibles':statsNumber(c.current_viewers,0)+' espectadores')+'</small><button type="button" onclick="selectLiveChannel(\''+escapeStatsHtml(c.login)+'\',\''+escapeStatsHtml(c.display_name)+'\')">VER TRANSMISIÓN</button></article>').join('');
@@ -513,10 +518,12 @@ async function loadInstituteStats(){
   const expectedChannels=Number(collection.expected_channels)||activeLogins.length;
   const resolvedChannels=Number(collection.resolved_channels)||channels.length;
   const skippedChannels=Array.isArray(collection.skipped_channels)?collection.skipped_channels:[];
-  const collectionComplete=collection.complete===true && expectedChannels>0 && resolvedChannels>=expectedChannels && skippedChannels.length===0;
-  const ageMinutes=updatedValid?Math.max(0,(Date.now()-updated.getTime())/60000):Infinity;
+  const sampledChannels=Array.isArray(collection.sampled_channels)?collection.sampled_channels:[];
+  const accountedChannels=new Set([...sampledChannels,...skippedChannels]);
+  const collectionComplete=collection.complete===true && expectedChannels>0 && resolvedChannels>=expectedChannels && accountedChannels.size>=expectedChannels;
+  const ageMinutes=updatedValid?(Date.now()-updated.getTime())/60000:Infinity;
   const freshnessLimit=Math.max(interval*2.5,120);
-  const isFresh=ageMinutes<=freshnessLimit;
+  const isFresh=ageMinutes>=-5&&ageMinutes<=freshnessLimit;
   const statusLabel=!updatedValid?'FECHA NO DISPONIBLE':!isFresh?'DATOS CON DEMORA':collectionComplete?'CAPTURA COMPLETA':'CAPTURA PARCIAL';
   const updatedNode=document.getElementById('stats-updated');
   if(updatedNode){
@@ -528,17 +535,31 @@ async function loadInstituteStats(){
   const coverageNote=document.getElementById('stats-methodology-coverage');
   if(coverageNote)coverageNote.textContent='En la última captura se resolvieron '+resolvedChannels+' de '+expectedChannels+' canales esperados'+(skippedChannels.length?' y se omitieron '+skippedChannels.length+' ('+skippedChannels.join(', ')+')':'')+'. Estado informado por el colector: '+(collectionComplete?'completo':'parcial o pendiente')+'. Los espectadores actuales reflejan la última consulta; promedios y picos son valores observados por muestreo, no analíticas oficiales de Twitch.';
   document.getElementById('stats-summary').innerHTML=[
-   [fmt(channels.length,0),'CANALES EN SEGUIMIENTO','Canales activos del roster'],
+   [fmt(channels.length,0),'CANALES EN SEGUIMIENTO','Todos los canales Twitch registrados del roster'],
+   [fmt(isFresh?liveCount:0,0),'EN DIRECTO EN ÚLTIMA LECTURA',isFresh?'Canales con transmisión en la captura reciente':'Estado de transmisión con datos demorados'],
    [fmt(observedStreams,0),'DIRECTOS DETECTADOS','Sesiones observadas en la ventana disponible'],
    [fmt(liveSamples,0),'MUESTRAS EN DIRECTO','Registros capturados mientras había transmisión'],
    [interval+' MIN','FRECUENCIA OBJETIVO','Cadencia configurada del colector'],
-   [resolvedChannels+'/'+expectedChannels,'COBERTURA DE CANALES',collectionComplete?'Todos los canales esperados fueron resueltos':'Revisar canales omitidos o pendientes']
+   [resolvedChannels+'/'+expectedChannels,'COBERTURA DE CANALES',collectionComplete?'Todos los canales esperados fueron contabilizados':'Revisar canales pendientes o no contabilizados']
   ].map(([value,label,note])=>'<article class="impact-kpi"><strong>'+value+'</strong><span>'+label+'</span><small>'+note+'</small></article>').join('');
+  const liveNav=document.querySelector('.nav-btn-live[data-chapter="10"]');
+  if(liveNav){const showLive=isFresh&&liveCount>0;liveNav.classList.toggle('is-live',showLive);liveNav.textContent='09 EN VIVO'+(showLive?' · '+liveCount:'');liveNav.setAttribute('aria-label',showLive?liveCount+' canal(es) detectado(s) en directo en la última captura':'Consultar estado de transmisiones');}
+  const channelGrid=document.getElementById('stats-channel-grid');
+  if(channelGrid){
+   const orderedChannels=channels.slice().sort((a,b)=>Number(Boolean(b.live))-Number(Boolean(a.live))||String(a.display_name||a.login).localeCompare(String(b.display_name||b.login),'es'));
+   channelGrid.innerHTML=orderedChannels.map(c=>{
+    const w=c.window||{};
+    const status=c.live&&isFresh?'<span class="stats-status verified">● EN DIRECTO</span>':c.live?'<span class="stats-status partial">ÚLTIMA LECTURA: EN DIRECTO</span>':'<span class="stats-status pending">OFFLINE · EN SEGUIMIENTO</span>';
+    const viewers=c.live&&c.current_viewers!==null&&c.current_viewers!==undefined?fmt(c.current_viewers,0):'—';
+    const metric=(value,suffix='')=>value===null||value===undefined?'—':fmt(value)+suffix;
+    return '<article class="stats-channel-card '+(c.live?'is-live':'is-offline')+'"><div class="stats-channel-card-top">'+status+'<span class="stats-channel-platform">TWITCH</span></div><h5>'+escapeStatsHtml(c.display_name||c.login)+'</h5><a href="https://twitch.tv/'+encodeURIComponent(c.login)+'" target="_blank" rel="noopener noreferrer">ABRIR CANAL ↗</a><div class="stats-channel-viewers"><strong>'+viewers+'</strong><span>ESPECTADORES ACTUALES</span></div><dl><div><dt>Promedio observado</dt><dd>'+metric(w.average_viewers_sampled)+'</dd></div><div><dt>Pico observado</dt><dd>'+metric(w.peak_viewers_sampled,' viewers')+'</dd></div><div><dt>Horas en directo observadas</dt><dd>'+metric(w.observed_live_hours,' h')+'</dd></div><div><dt>Directos detectados</dt><dd>'+metric(w.streams_observed)+'</dd></div></dl><small class="stats-channel-foot">Muestras registradas: '+metric(w.samples_total)+'</small></article>';
+   }).join('');
+  }
   const games={};
   channels.forEach(c=>(c.window?.game_breakdown||[]).forEach(g=>{if(g?.name)games[g.name]=(games[g.name]||0)+(g.live_samples||0);}));
   const topGames=Object.entries(games).sort((a,b)=>b[1]-a[1]).slice(0,5);
   const highlights=document.getElementById('stats-highlights');
-  if(highlights)highlights.innerHTML='<div class="impact-highlight-copy"><span>LECTURA DEL PERÍODO</span><strong>'+fmt(totalSamples,0)+' muestras de actividad registradas</strong><p>La cifra reúne consultas realizadas a los canales activos; no equivale a espectadores ni a horas vistas.</p></div>'+(topGames.length?'<div class="impact-game-list"><span>CATEGORÍAS CON MÁS MUESTRAS EN DIRECTO</span>'+topGames.map(([name,count])=>'<div><b>'+escapeStatsHtml(name)+'</b><span>'+fmt(count,0)+' muestras</span></div>').join('')+'</div>':'<div class="impact-game-list"><span>CATEGORÍAS</span><p>Aún no hay suficientes muestras para mostrar un resumen.</p></div>');
+  if(highlights)highlights.innerHTML='<div class="impact-highlight-copy"><span>LECTURA DEL PERÍODO</span><strong>'+fmt(totalSamples,0)+' muestras de actividad registradas</strong><p>La cifra reúne consultas realizadas a los '+channels.length+' canales Twitch activos; '+liveCount+' detectados en directo en la última consulta. No equivale a espectadores ni a horas vistas.</p></div>'+(topGames.length?'<div class="impact-game-list"><span>CATEGORÍAS CON MÁS MUESTRAS EN DIRECTO</span>'+topGames.map(([name,count])=>'<div><b>'+escapeStatsHtml(name)+'</b><span>'+fmt(count,0)+' muestras</span></div>').join('')+'</div>':'<div class="impact-game-list"><span>CATEGORÍAS</span><p>Aún no hay suficientes muestras para mostrar un resumen.</p></div>');
   body.innerHTML=channels.map(c=>{const samples=Array.isArray(c.snapshots)?c.snapshots.filter(s=>s?.sampled_at):[];const first=samples.length?Date.parse(samples[0].sampled_at):NaN;const last=samples.length?Date.parse(samples[samples.length-1].sampled_at):NaN;const expected=Number.isFinite(first)&&Number.isFinite(last)&&last>=first?Math.floor((last-first)/(Number(data.sampling_interval_minutes||15)*60000))+1:0;const coverage=expected?Math.min(100,(samples.length/expected)*100):null;const coverageLabel=coverage===null?'Insuficiente':coverage.toLocaleString('es-AR',{maximumFractionDigits:1})+'% ('+samples.length+'/'+expected+')';return '<tr><td>'+escapeStatsHtml(c.display_name)+'</td><td>'+(c.live?'EN DIRECTO':'OFFLINE')+'</td><td>'+fmt(c.current_viewers,0)+'</td><td>'+escapeStatsHtml(fmt(c.current_game))+'</td><td>'+fmt(c.window?.average_viewers_sampled)+'</td><td>'+fmt(c.window?.peak_viewers_sampled,0)+'</td><td>'+fmt(c.window?.observed_live_hours)+'</td><td>'+fmt(c.window?.samples_total,0)+'</td><td>'+coverageLabel+'</td></tr>';}).join('');
   renderLiveDirectory(channels);
  }catch(e){
