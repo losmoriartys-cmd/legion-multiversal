@@ -2508,10 +2508,11 @@ Se conserva el compromiso de avanzar una mejora por etapa, con validación y rev
 ## 2026-11-12 — Etapa 1: refinamiento editorial del Capítulo 01 · Origen
 
 - Se inicia una rama aislada `work/origen-editorial-refinement-2026-11-12`, basada en el `main` consultado al comenzar esta etapa. No se modifica `main`.
-- Se reorganiza el capítulo como relato visual secuencial: inicio compartido, etapa Marvel Rivals, expansión durante Fortnite, incorporación de nuevas voces y transición a Legión Multiversal.
-- Se corrigen asignaciones visuales: `image_20261104_055611.jpg` se utiliza como ilustración del punto de partida de Demian y ROD3R1K; `image_20261106_024612-me-gusta-la-foto-pero-la-enmarcaria-coso-si-fuese (1).jpg` se identifica como portada ilustrada de Orígenes #0001; `image_20261106_125112.jpg` se reasigna a la formación actual de Legión Multiversal. Se retira del relato la atribución errónea de esta última imagen como primera formación de S3X-MEN.
-- No se utiliza `image_20261107_060057.jpg` en la nueva secuencia: la ilustración contiene una referencia gráfica a 1997 que no forma parte de la cronología histórica confirmada.
-- Se preservan las asignaciones únicas de las dos imágenes nuevas del 12/11: la ilustración de ropa cotidiana permanece en el bloque ejecutivo de Inicio y la imagen de sala gamer permanece como hero de Comunidad.
-- Se incorporan estilos editoriales específicos para Origen y breakpoints de escritorio/tablet/móvil. Se mantiene el resto de capítulos fuera del alcance.
-- La redacción no inventa fechas. Se reflejan las etapas históricas confirmadas: Demian y ROD3R1K; incorporación temprana de Akuma; expansión Fortnite con ElGabii y Capy; aportes de Patoexpone y Mismo Hábitos; incorporaciones posteriores de Lady Moriarty y Dave.
-- Estado: implementación inicial en rama de trabajo. Pendiente: verificar la ubicación histórica de Ardipii y el orden/alcance exacto de las incorporaciones no fechadas; ejecutar validaciones automáticas, revisar preview real en escritorio y móvil, y ajustar el encuadre de las imágenes antes de solicitar revisión del cierre visual.
+- Se reorganiza la narrativa como una secuencia visual: inicio compartido, primeras incorporaciones, expansión a nuevas experiencias y transición a Legión Multiversal.
+- Se corrige la cronología inicial: Demian y ROD3R1K comienzan el proyecto; Akuma se incorpora después; Ardipi es el cuarto integrante de la primera formación.
+- Se elimina del relato público toda referencia a personas que ya no forman parte del proyecto. La etapa de Fortnite se mantiene como referencia a una experiencia de juego, sin asociarla a esas personas.
+- Se corrigen asignaciones visuales: `image_20261104_055611.jpg` representa el punto de partida de Demian y ROD3R1K; `image_20261106_024612-me-gusta-la-foto-pero-la-enmarcaria-coso-si-fuese (1).jpg` es la portada ilustrada de Orígenes #0001; `image_20261106_125112.jpg` representa la formación actual de Legión Multiversal.
+- Se preservan las asignaciones únicas de las dos imágenes nuevas del 12/11: la ilustración de ropa cotidiana permanece en Inicio y la imagen de sala gamer permanece en Comunidad.
+- Se incorporan estilos editoriales específicos para Origen y breakpoints de escritorio/tablet/móvil.
+- No se inventan fechas ni se fuerza un orden no confirmado para las incorporaciones posteriores.
+- Estado: implementación inicial en rama de trabajo. Pendiente: validaciones automáticas y revisión de la preview real en escritorio y móvil antes de solicitar revisión del cierre visual.
