@@ -1,3 +1,15 @@
+## 2026-11-12 — Roster 02: portfolio de carta viva MORIARTYS
+
+- **Cambio de dirección visual:** se abandona la composición de portada editorial estática y se transforma el expediente en un portfolio interactivo donde la carta coleccionable ocupa el centro visual.
+- **Carta protagonista:** se conserva la ilustración completa del expediente MORIARTYS y se presenta en una estructura 3D CSS con perspectiva, grosor visual, bordes, sombra, reflejo holográfico y brillo que sigue la posición del cursor.
+- **Movimiento:** inclinación de la carta con el puntero, animación flotante sutil y reinicio suave al retirar el cursor. En dispositivos táctiles se puede avanzar/retroceder con gestos horizontales; se mantienen flechas, botones e indicadores.
+- **Recorrido:** se conservan las siete secciones editoriales (portada + identidad, actividad, juegos, colaboraciones, clips y contacto), con transiciones de lectura tipo portfolio/cómic.
+- **Responsive y accesibilidad:** adaptación de la carta a pantallas estrechas y respeto de `prefers-reduced-motion`; los controles de navegación existentes siguen disponibles.
+- **Alcance:** trabajo aislado en `work/roster-02-living-card-portfolio-2026-11-12`, basado en el PR #29. No modifica `main`, el Roster público, los datos ni los assets originales.
+- **Pendiente:** inspección visual manual en navegador de escritorio y móvil; calibrar el tamaño de la carta y la intensidad de inclinación con la revisión del usuario. El efecto es 3D CSS/parallax, no un modelo 3D geométrico independiente.
+
+---
+
 ## 2026-11-12 — Rediseño editorial Roster 02: MORIARTYS
 
 - **Objetivo:** evolucionar el prototipo visual anterior hacia un expediente narrativo de lectura secuencial, inspirado en un cómic editorial, sin modificar las ocho fichas ni la experiencia publicada.
