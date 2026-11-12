@@ -48,6 +48,83 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.1;bac
 @media(max-width:800px){.cover{grid-template-columns:1fr;min-height:0;gap:10px}.cover-copy{padding:10px 0 0}.cover h2{font-size:clamp(3.5rem,13vw,6rem)}.card-stage{min-height:570px}.card-3d{width:min(78%,390px)}}
 @media(max-width:540px){.cover{padding:20px 18px 74px}.cover h2{font-size:3.8rem}.card-stage{min-height:465px}.card-3d{width:min(82%,330px)}}
 @media(prefers-reduced-motion:reduce){.card-3d{animation:none}}
+
+/* PORTFOLIO / COMIC READER — segunda pasada visual */
+.reader-bar{position:relative;max-width:1120px;margin:20px auto 14px;padding:0 2px}
+.book{max-width:1120px;perspective:2200px;transform-style:preserve-3d;filter:drop-shadow(0 35px 70px #000b)}
+.page{min-height:740px;padding:clamp(28px,5vw,64px);background:radial-gradient(ellipse at 90% 0%,#25415a 0,transparent 38%),linear-gradient(145deg,#142236,#0a1220 80%);color:#f3f0e9;border:1px solid #91b0c52e;box-shadow:inset 0 0 0 9px #ffffff04,inset 0 0 90px #0006}
+.page:before{inset:14px;border:1px solid #a6c5d536}
+.page:after{opacity:.08;background:repeating-linear-gradient(135deg,transparent 0 22px,#b4d2e6 23px,transparent 24px 46px)}
+.page.active{display:block;animation:comicPageNext .72s cubic-bezier(.2,.72,.2,1) both;transform-origin:left center;backface-visibility:hidden}
+.page.active.flip-prev{transform-origin:right center;animation:comicPagePrev .72s cubic-bezier(.2,.72,.2,1) both}
+.page-top{color:#a8bdce;border-bottom:1px solid #8ba8bc55;font-size:.58rem;letter-spacing:.2em}
+.page-foot{color:#a8bdce;border-top:1px solid #8ba8bc55}
+.page h2{font:clamp(2.7rem,6vw,5.8rem)/.88 Georgia,serif;letter-spacing:-.055em;color:#f5f0e7;max-width:950px;margin:24px 0 18px;text-shadow:0 6px 24px #0005}
+.page-lead{font-size:clamp(1rem,1.4vw,1.2rem);line-height:1.55;color:#c3d0dc;max-width:780px}
+.page .kicker{color:#8dd8e6!important}
+.page:not(.cover){background-image:radial-gradient(ellipse at 95% 8%,#21435c55 0,transparent 36%),linear-gradient(145deg,#15263a,#0a1321 80%)}
+.page:not(.cover)>.kicker{display:inline-block;padding:6px 10px;border:1px solid #83d9e966;background:#0b1928;color:#83d9e9!important}
+.cover{min-height:790px;grid-template-columns:.82fr 1.18fr;gap:22px 38px;background:radial-gradient(ellipse at 72% 45%,#24506a 0,transparent 48%),linear-gradient(120deg,#091321,#142a40 65%,#0b1523);padding:clamp(26px,4vw,54px)}
+.cover h2{font:clamp(4rem,8.8vw,8.5rem)/.74 Georgia,serif;letter-spacing:-.085em;margin:28px 0 18px;text-shadow:0 10px 28px #000a}
+.cover h2 span{font:clamp(1.35rem,2.3vw,2.15rem)/1.05 Georgia,serif;letter-spacing:.1em;margin-top:26px;color:#e0b45f}
+.cover-subtitle{font-size:.7rem;letter-spacing:.15em;color:#d3e1eb}
+.cover-bio{font-size:.94rem;line-height:1.65;color:#e0e7ec;max-width:440px;border-left:4px solid #d95b55;background:#0b1726a8;padding:16px 18px;margin:26px 0}
+.cover .tag{background:#dbe9ee;color:#132a3b;border-color:#9bc4d3}
+.card-stage{min-height:620px;align-self:stretch}
+.card-3d{width:min(100%,500px);aspect-ratio:2/3;animation:cardFloat 5s ease-in-out infinite}
+.card-3d img{object-fit:contain;background:#090f18}
+.card-hint{bottom:2px;text-align:center;left:0;right:0;color:#b9cad7}
+.two-col{grid-template-columns:1fr 1fr;gap:18px;margin-top:28px}
+.comic-panel{position:relative;padding:24px 25px;background:linear-gradient(145deg,#20364d,#111e2e);border:1px solid #66849a;box-shadow:8px 9px 0 #050a12;min-height:160px}
+.comic-panel:before{content:"";position:absolute;left:-1px;top:-1px;width:34px;height:34px;border-top:3px solid #d8aa5a;border-left:3px solid #d8aa5a}
+.comic-panel h3{font:clamp(1.45rem,2.4vw,2.1rem)/.95 Georgia,serif;color:#f3d69d}
+.comic-panel p{color:#c6d4df;line-height:1.65}
+.comic-panel.dark{background:linear-gradient(145deg,#091522,#172c40);border-color:#83d9e966}
+.person-grid{gap:18px;margin:24px 0}
+.person{background:linear-gradient(140deg,#1c334a,#101b2a);border:1px solid #55738a;border-top:4px solid #d8aa5a;padding:22px;box-shadow:6px 7px 0 #050a12}
+.person b{font:clamp(1.8rem,3vw,2.7rem) Georgia,serif;color:#f6f0e7;letter-spacing:.04em}
+.person p{font-size:.9rem;line-height:1.6;color:#c6d2dc}
+.quote{font-size:clamp(1.2rem,2vw,1.65rem);padding:24px 30px;box-shadow:7px 8px 0 #050a12}
+.stat-grid{gap:16px;margin:30px 0}
+.stat{position:relative;min-height:150px;padding:22px;background:linear-gradient(145deg,#20384f,#0d1928);border:1px solid #58778e;border-bottom:4px solid #d8aa5a;box-shadow:6px 7px 0 #050a12}
+.stat strong{font-size:clamp(2.1rem,4.2vw,3.6rem);color:#f3d69d}
+.stat span{font-size:.68rem;letter-spacing:.15em;color:#d2e0e9}
+.stat small{font-size:.72rem;color:#9fb4c5}
+.method{background:#0c1928;border:1px solid #52718a;color:#b9cad7;padding:18px 20px;line-height:1.6}
+.method strong{color:#e3b861}
+.table-wrap{border:1px solid #56758b;background:#0d1928;box-shadow:7px 8px 0 #050a12}
+.game-table{color:#e3eaf0;margin:0}
+.game-table th{background:#27435c;padding:15px 12px;color:#f6f1e8}
+.game-table td{padding:14px 12px;border-bottom:1px solid #ffffff24}
+.game-table td:first-child{color:#f1d49a;font-weight:900}
+.game-note{color:#aabcca;margin-top:12px}
+.timeline{gap:15px;margin-top:28px}
+.timeline-item{background:linear-gradient(135deg,#1a3046,#0d1928);border:1px solid #52718a;padding:20px;box-shadow:6px 7px 0 #050a12}
+.timeline-label{color:#e0b45f;font-size:.62rem}
+.timeline-item h3{font:clamp(1.3rem,2vw,1.8rem) Georgia,serif;color:#f5f0e7}
+.timeline-item p{color:#c4d0da;line-height:1.6}
+.timeline-item small{color:#91a9bb}
+.clip-grid{gap:17px;margin-top:30px}
+.clip-card{min-height:290px;padding:22px;background:linear-gradient(145deg,#20384f,#0d1928);border:1px solid #58778e;box-shadow:7px 8px 0 #050a12;position:relative;overflow:hidden}
+.clip-card:after{content:"";position:absolute;right:-24px;top:-24px;width:100px;height:100px;border:1px solid #d8aa5a66;transform:rotate(45deg)}
+.clip-card .clip-no{font-size:3.6rem;color:#e0b45f}
+.clip-card h3{font:1.45rem/1.08 Georgia,serif;color:#f5f0e7}
+.final-grid{gap:18px;margin-top:30px}
+.contact-card{background:linear-gradient(145deg,#20384f,#0d1928);border:1px solid #58778e;box-shadow:7px 8px 0 #050a12;padding:26px}
+.contact-card h3{font:2rem Georgia,serif;color:#f2d49a}
+.partner{background:#172b40;color:#e8edf0;border:1px solid #47657b;border-left:4px solid #83d9e9;padding:16px}
+.partner span{color:#b4c5d2}
+.reader-controls{max-width:1120px;margin:22px auto 0}
+.control-btn{border:1px solid #66869c;background:linear-gradient(145deg,#1a3046,#101c2b);padding:14px 22px;box-shadow:4px 4px 0 #050a12}
+.page-dots{gap:10px}
+.dot{width:11px;height:11px;border-color:#83a0b4}
+.dot[aria-current=true]{background:#e0b45f;border-color:#e0b45f;transform:scale(1.35)}
+@keyframes comicPageNext{0%{opacity:.25;transform:rotateY(-19deg) translateX(38px);filter:brightness(.7)}55%{opacity:1;filter:brightness(.95)}100%{opacity:1;transform:rotateY(0) translateX(0);filter:brightness(1)}}
+@keyframes comicPagePrev{0%{opacity:.25;transform:rotateY(19deg) translateX(-38px);filter:brightness(.7)}55%{opacity:1;filter:brightness(.95)}100%{opacity:1;transform:rotateY(0) translateX(0);filter:brightness(1)}}
+@media(max-width:800px){.page{min-height:720px}.cover{grid-template-columns:1fr;min-height:0}.cover-copy{padding:10px 0}.card-stage{min-height:560px}.card-3d{width:min(76%,390px)}.two-col{grid-template-columns:1fr}.stat-grid{grid-template-columns:repeat(2,1fr)}.clip-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:540px){.page{padding:22px 18px 76px;min-height:730px}.page h2{font-size:clamp(2.5rem,12vw,4rem)}.cover h2{font-size:clamp(4rem,18vw,5.8rem)}.card-stage{min-height:470px}.card-3d{width:min(83%,330px)}.stat-grid,.person-grid,.clip-grid{grid-template-columns:1fr}.stat{min-height:120px}.reader-controls{gap:8px}.control-btn{padding:11px 12px;font-size:.57rem}}
+@media(prefers-reduced-motion:reduce){.page.active,.card-3d{animation:none!important;transition:none!important}}
+
 </style>
 </head>
 <body>
@@ -115,11 +192,12 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.1;bac
 (()=> {
  const $=id=>document.getElementById(id);
  const pages=[...document.querySelectorAll('.page')];
- let current=0;
+ let current=0; let indexDirection='next';
  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
  const showPage=(index,scroll=true)=>{
+  indexDirection=index<current?'prev':'next';
   current=Math.max(0,Math.min(pages.length-1,index));
-  pages.forEach((p,i)=>{p.classList.toggle('active',i===current);p.setAttribute('aria-hidden',String(i!==current));});
+  pages.forEach((p,i)=>{p.classList.remove('flip-next','flip-prev');p.classList.toggle('active',i===current);p.setAttribute('aria-hidden',String(i!==current));if(i===current&&!reduced)p.classList.add(indexDirection==='prev'?'flip-prev':'flip-next');});
   $('prev-page').disabled=current===0;$('next-page').disabled=current===pages.length-1;
   $('page-count').textContent=String(current+1).padStart(2,'0')+' / '+String(pages.length).padStart(2,'0');
   $('progress-fill').style.width=((current+1)/pages.length*100)+'%';
