@@ -1,3 +1,15 @@
+## 2026-11-12 — Roster 02: lector inmersivo de páginas completas
+
+- **Cambio estructural solicitado:** la experiencia deja de comportarse como una página web convencional con cabecera, introducción y contenido desplazable. La cabecera y la introducción se ocultan en esta vista de portfolio.
+- **Lienzo de presentación:** el lector ocupa la altura visible de la pantalla. Solo una de las siete páginas está activa; cada página se presenta como una lámina completa dentro del escenario, con controles persistentes debajo.
+- **Paso de hoja:** al avanzar o retroceder, la página entrante gira sobre su eje vertical con perspectiva 3D, con dirección distinta según el sentido. El libro suma profundidad, sombra y una referencia central de encuadernación.
+- **Navegación:** se conserva el contador, progreso, indicadores, flechas y teclado; se elimina el desplazamiento automático de la página al navegar. El contenido interno conserva desplazamiento de respaldo si una pantalla pequeña no permite mostrar todo.
+- **Responsive:** composición adaptada a móviles; botones se compactan y la navegación táctil existente sigue habilitada.
+- **Validación estática:** 7 páginas; 1 script(s); sintaxis JS: ok; balance de llaves CSS: 0.
+- **Pendiente:** revisión real de escritorio y móvil para calibrar la altura y comprobar que el contenido de cada lámina cabe sin desplazamiento interno en las resoluciones objetivo. No publicar en `main` hasta aprobación del usuario.
+
+---
+
 ## 2026-11-12 — Roster 02: segunda pasada, lectura visual tipo cómic
 
 - **Problema detectado en revisión:** la primera iteración mejoró la carta 3D, pero las páginas interiores seguían sintiéndose como bloques de información con una transición discreta. No cumplía todavía la idea de portfolio/cómic solicitada.
