@@ -2359,3 +2359,9 @@ Se conserva el compromiso de avanzar una mejora por etapa, con validación y rev
 - Cloudflare informó «Deploy successful» para la preview del PR #21: https://04634d39.legion-multiversal.pages.dev.
 - La validación estática post-merge confirmó cero IDs HTML duplicados, balance de llaves CSS igual a cero, cálculo de vigencia antes del filtrado de transmisiones y una referencia única a BarFenderLos4.jpg y stream4.jpg en sus ubicaciones acordadas.
 - No se declara inspección visual manual de píxel: el acceso automatizado a la preview no permitió abrir la página en esta sesión. La revisión visual final en navegador queda identificada como control pendiente, no como cambio de código pendiente.
+
+
+## 2026-11-12 — Conservación de la segunda ilustración editorial de BarFender
+
+- Se mantiene BarFenderLos4.jpg como imagen específica de «UNA SESIÓN, CUATRO PUNTOS DE VISTA» y se conserva image_20261107_184546.jpg como ilustración editorial secundaria independiente. Ambas aparecen una sola vez en el expediente y no se reutilizan entre sí.
+- La ilustración principal image_20261107_184951-si-que-tenga-referencias-y-el-titutlo-del-juego-ba.jpg permanece como portada del expediente. stream4.jpg continúa reservado a la ficha destacada de Inicio; la tarjeta de Alianzas mantiene su placa tipográfica sin fotografía.
