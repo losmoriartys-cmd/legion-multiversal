@@ -2503,3 +2503,15 @@ Se conserva el compromiso de avanzar una mejora por etapa, con validación y rev
 
 - Se mantiene BarFenderLos4.jpg como imagen específica de «UNA SESIÓN, CUATRO PUNTOS DE VISTA» y se conserva image_20261107_184546.jpg como ilustración editorial secundaria independiente. Ambas aparecen una sola vez en el expediente y no se reutilizan entre sí.
 - La ilustración principal image_20261107_184951-si-que-tenga-referencias-y-el-titutlo-del-juego-ba.jpg permanece como portada del expediente. stream4.jpg continúa reservado a la ficha destacada de Inicio; la tarjeta de Alianzas mantiene su placa tipográfica sin fotografía.
+
+
+## 2026-11-12 — Etapa 1: refinamiento editorial del Capítulo 01 · Origen
+
+- Se inicia una rama aislada `work/origen-editorial-refinement-2026-11-12`, basada en el `main` consultado al comenzar esta etapa. No se modifica `main`.
+- Se reorganiza el capítulo como relato visual secuencial: inicio compartido, etapa Marvel Rivals, expansión durante Fortnite, incorporación de nuevas voces y transición a Legión Multiversal.
+- Se corrigen asignaciones visuales: `image_20261104_055611.jpg` se utiliza como ilustración del punto de partida de Demian y ROD3R1K; `image_20261106_024612-me-gusta-la-foto-pero-la-enmarcaria-coso-si-fuese (1).jpg` se identifica como portada ilustrada de Orígenes #0001; `image_20261106_125112.jpg` se reasigna a la formación actual de Legión Multiversal. Se retira del relato la atribución errónea de esta última imagen como primera formación de S3X-MEN.
+- No se utiliza `image_20261107_060057.jpg` en la nueva secuencia: la ilustración contiene una referencia gráfica a 1997 que no forma parte de la cronología histórica confirmada.
+- Se preservan las asignaciones únicas de las dos imágenes nuevas del 12/11: la ilustración de ropa cotidiana permanece en el bloque ejecutivo de Inicio y la imagen de sala gamer permanece como hero de Comunidad.
+- Se incorporan estilos editoriales específicos para Origen y breakpoints de escritorio/tablet/móvil. Se mantiene el resto de capítulos fuera del alcance.
+- La redacción no inventa fechas. Se reflejan las etapas históricas confirmadas: Demian y ROD3R1K; incorporación temprana de Akuma; expansión Fortnite con ElGabii y Capy; aportes de Patoexpone y Mismo Hábitos; incorporaciones posteriores de Lady Moriarty y Dave.
+- Estado: implementación inicial en rama de trabajo. Pendiente: verificar la ubicación histórica de Ardipii y el orden/alcance exacto de las incorporaciones no fechadas; ejecutar validaciones automáticas, revisar preview real en escritorio y móvil, y ajustar el encuadre de las imágenes antes de solicitar revisión del cierre visual.
