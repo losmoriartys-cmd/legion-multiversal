@@ -1,3 +1,12 @@
+## 2026-11-12 — Protección del encuadre grupal y legibilidad de Origen
+
+- En la revisión del CSS se detecta un riesgo de recorte de la ilustración grupal en móvil: la regla anterior imponía una relación 1.15:1 con `object-fit: cover`, aunque la imagen representa a los ocho integrantes actuales.
+- Se elimina el recorte forzado en escritorio y móvil: la imagen conserva su proporción intrínseca, usa `object-fit: contain` y mantiene un fondo oscuro para integrar los márgenes sin ocultar personajes.
+- Se mejora la lectura de la cronología aumentando el tamaño mínimo de las etiquetas, ajustando su espaciado y reforzando el interlineado y ancho de lectura de los párrafos.
+- Estas correcciones se implementan en la rama del PR #32. La confirmación visual definitiva requiere inspeccionar la preview renderizada en navegador; no se declara aprobada solo por revisar CSS o por el éxito de CI.
+
+---
+
 ## 2026-11-12 — Revisión técnica del PR #32
 
 - Se revisa la cronología y se confirma la corrección de roles: Demian y ROD3R1K como punto de partida; Akuma como tercer integrante; Ardipi como cuarto miembro de la primera formación; Habitos (canal `Habitos_Atomicos`) y Patoexpone como colaboradores.
