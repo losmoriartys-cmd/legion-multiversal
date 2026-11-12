@@ -1,3 +1,12 @@
+## 2026-11-12 — Fecha de corte para la valoración de Steam en BarFender
+
+- El expediente mostraba «Muy positivas · 330 reseñas» sin indicar que era un dato aportado durante la revisión del 07/11/2026. Al ser un contador variable, podía interpretarse como actual.
+- Se conserva la cifra histórica y se añade «corte 07/11/2026» junto a ella. No se reemplaza por un contador de terceros ni se presenta una cifra dinámica sin una fuente oficial integrada.
+- No se alteran los resultados de la sesión, las métricas Twitch, los VOD, los clips, las imágenes ni las atribuciones.
+- Validación estática pendiente de checks en la rama. La reproducción real de clips y la inspección visual responsive siguen siendo pruebas de navegador independientes.
+
+---
+
 ## 2026-11-12 — Reconstrucción de portada ejecutiva sobre main actualizado
 
 - **Origen:** se recuperan las mejoras del PR #22 sobre el `main` que ya contiene la integración de Origen y Comunidad del PR #23. Se conserva la nueva imagen de transición y la imagen de Comunidad sin revertir ni sobrescribir esos cambios.
