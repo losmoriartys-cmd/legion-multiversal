@@ -2348,5 +2348,14 @@ Se conserva el compromiso de avanzar una mejora por etapa, con validación y rev
 - No repetición: stream4.jpg queda en una sola ubicación, la ficha destacada de Inicio. La tarjeta de Alianzas deja de reutilizar esa fotografía y pasa a una placa tipográfica propia, sin fotografía repetida.
 - Diseño responsive: se incorporan estilos propios para la tarjeta BarFender de Alianzas y ajustes de composición para la portada de cuatro creadores, el encabezado del expediente y el resumen en tablet/móvil. Los breakpoints existentes de 900, 650 y 420 px se conservan y complementan.
 - CTA y lectura editorial: se mantiene la acción principal de Inicio hacia el expediente 001 y el acceso desde Alianzas; la placa tipográfica hace más clara la identificación del caso sin competir con la fotografía principal.
-- Validación pendiente de CI: ejecutar los workflows automáticos y revisar la vista previa de Cloudflare en escritorio y móvil. La inspección estática no se presenta como prueba visual real de navegador.
+- Validación: el deploy de preview de Cloudflare para el PR #21 terminó en «Deploy successful». La comprobación estática posterior al merge confirmó IDs HTML sin duplicados, balance CSS en cero, orden correcto de fresh antes de su uso y una sola referencia a cada imagen de BarFender revisada. El conector no devolvió runs de GitHub Actions para el commit de merge; no se declara un check de CI adicional como aprobado. La inspección visual de píxel en navegador de escritorio y móvil queda como revisión humana final.
 - Alcance y seguridad: no se modifican data.json, roster-data.json, credenciales, archivos de métricas ni contenidos internos de Arsenal. La rama se entrega mediante PR para revisión antes de integrar en main.
+
+
+## 2026-11-12 — Cierre de integración PR #21
+
+- El PR #21 se fusionó correctamente mediante squash en main (commit 36ddae79c0442b625c08df9cf5af76162eb2e87c).
+- El PR #20 se cerró como reemplazado por la rama reconciliada del PR #21; no se fusionó su historial divergente.
+- Cloudflare informó «Deploy successful» para la preview del PR #21: https://04634d39.legion-multiversal.pages.dev.
+- La validación estática post-merge confirmó cero IDs HTML duplicados, balance de llaves CSS igual a cero, cálculo de vigencia antes del filtrado de transmisiones y una referencia única a BarFenderLos4.jpg y stream4.jpg en sus ubicaciones acordadas.
+- No se declara inspección visual manual de píxel: el acceso automatizado a la preview no permitió abrir la página en esta sesión. La revisión visual final en navegador queda identificada como control pendiente, no como cambio de código pendiente.
