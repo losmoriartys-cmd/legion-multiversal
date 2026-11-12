@@ -2564,3 +2564,8 @@ Se conserva el compromiso de avanzar una mejora por etapa, con validación y rev
 - Se comprobó que el sistema del Roster ya contempla ambos expedientes dentro del grupo funcional `COLABORADORES`, con sus perfiles diferenciados. No se altera su categoría ni se los presenta como miembros fundadores.
 - El archivo de Colaboraciones mantiene su función de registrar experiencias y campañas documentadas; no se crea una campaña ni una alianza ficticia por el hecho de que existan estos perfiles de colaboración.
 - Pendiente: volver a ejecutar los checks del PR y revisar visualmente la preview en escritorio y móvil. Esta actualización no implica aprobación visual ni integración en `main`.
+
+
+### Ajuste editorial · Orígenes #0001
+- Se reemplazó la imagen de portada asociada al epígrafe “ORÍGENES #0001 · Una nueva identidad para una historia que continúa.” por `image_20261107_021355.jpg`, ya presente en el repositorio.
+- El cambio se limita a esa portada; no altera la imagen grupal del presente ni la cronología histórica.
