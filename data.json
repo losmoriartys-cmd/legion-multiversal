@@ -13,17 +13,17 @@
     "daved0608"
   ],
   "collection": {
-    "started_at": "2026-11-12T18:23:16Z",
+    "started_at": "2026-11-12T19:30:07Z",
     "expected_channels": 7,
     "resolved_channels": 7,
     "sampled_channels": [
-      "akumazoldyck",
-      "daved0608",
       "losmoriartys",
       "ladymoriarty01",
       "ther0d3r1k",
       "habitos_atomicos",
-      "ardipii"
+      "ardipii",
+      "akumazoldyck",
+      "daved0608"
     ],
     "skipped_channels": [],
     "complete": true
@@ -33,7 +33,7 @@
     "elgabii090"
   ],
   "channel_registry_note": "Los canales archivados se conservan para consulta histórica y no se incluyen en los indicadores del roster activo.",
-  "updated_at": "2026-11-12T18:23:16Z",
+  "updated_at": "2026-11-12T19:30:07Z",
   "channels": {
     "ladymoriarty01": {
       "login": "ladymoriarty01",
@@ -48,9 +48,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-12T18:23:16Z",
+      "updated_at": "2026-11-12T19:30:07Z",
       "window": {
-        "samples_total": 237,
+        "samples_total": 238,
         "live_samples": 7,
         "streams_observed": 3,
         "average_viewers_sampled": 6.4,
@@ -2245,6 +2245,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-12T19:30:07Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -2261,9 +2270,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-12T18:23:16Z",
+      "updated_at": "2026-11-12T19:30:07Z",
       "window": {
-        "samples_total": 237,
+        "samples_total": 238,
         "live_samples": 27,
         "streams_observed": 6,
         "average_viewers_sampled": 23.5,
@@ -4500,6 +4509,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-12T19:30:07Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -5162,9 +5180,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-12T18:23:16Z",
+      "updated_at": "2026-11-12T19:30:07Z",
       "window": {
-        "samples_total": 237,
+        "samples_total": 238,
         "live_samples": 6,
         "streams_observed": 3,
         "average_viewers_sampled": 7.2,
@@ -7338,6 +7356,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-12T19:30:07Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -7354,9 +7381,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-12T18:23:16Z",
+      "updated_at": "2026-11-12T19:30:07Z",
       "window": {
-        "samples_total": 237,
+        "samples_total": 238,
         "live_samples": 17,
         "streams_observed": 7,
         "average_viewers_sampled": 7.1,
@@ -9586,6 +9613,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-12T19:30:07Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -9602,9 +9638,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-12T18:23:16Z",
+      "updated_at": "2026-11-12T19:30:07Z",
       "window": {
-        "samples_total": 237,
+        "samples_total": 238,
         "live_samples": 12,
         "streams_observed": 7,
         "average_viewers_sampled": 1.9,
@@ -11820,6 +11856,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-12T19:30:07Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -12448,25 +12493,25 @@
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
       "live": true,
-      "current_viewers": 7,
+      "current_viewers": 1,
       "current_game": "Just Chatting",
       "current_title": "es mi primer dia",
       "stream_started_at": "2026-11-12T15:12:32Z",
-      "updated_at": "2026-11-12T18:23:16Z",
+      "updated_at": "2026-11-12T19:30:07Z",
       "window": {
-        "samples_total": 237,
-        "live_samples": 48,
+        "samples_total": 238,
+        "live_samples": 49,
         "streams_observed": 11,
-        "average_viewers_sampled": 6.3,
+        "average_viewers_sampled": 6.2,
         "peak_viewers_sampled": 45,
-        "observed_live_hours": 31.64,
-        "estimated_hours_watched": 192.47,
+        "observed_live_hours": 32.56,
+        "estimated_hours_watched": 193.39,
         "game_breakdown": [
           {
             "name": "Just Chatting",
-            "live_samples": 24,
+            "live_samples": 25,
             "streams_observed": 8,
-            "average_viewers_sampled": 5.7,
+            "average_viewers_sampled": 5.5,
             "peak_viewers_sampled": 22
           },
           {
@@ -12550,9 +12595,9 @@
           },
           {
             "date": "2026-11-12",
-            "live_samples": 8,
+            "live_samples": 9,
             "streams_observed": 2,
-            "average_viewers_sampled": 3.1,
+            "average_viewers_sampled": 2.9,
             "peak_viewers_sampled": 7
           }
         ],
@@ -14691,6 +14736,15 @@
           "title": "es mi primer dia",
           "stream_id": "319576831732",
           "started_at": "2026-11-12T15:12:32Z"
+        },
+        {
+          "sampled_at": "2026-11-12T19:30:07Z",
+          "is_live": true,
+          "viewer_count": 1,
+          "game_name": "Just Chatting",
+          "title": "es mi primer dia",
+          "stream_id": "319576831732",
+          "started_at": "2026-11-12T15:12:32Z"
         }
       ]
     },
@@ -14707,9 +14761,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-12T18:23:16Z",
+      "updated_at": "2026-11-12T19:30:07Z",
       "window": {
-        "samples_total": 237,
+        "samples_total": 238,
         "live_samples": 10,
         "streams_observed": 5,
         "average_viewers_sampled": 17.7,
@@ -16926,6 +16980,15 @@
         },
         {
           "sampled_at": "2026-11-12T18:23:16Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-12T19:30:07Z",
           "is_live": false,
           "viewer_count": null,
           "game_name": null,
