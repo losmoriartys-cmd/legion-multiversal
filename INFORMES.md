@@ -1,3 +1,15 @@
+## 2026-11-12 — MORIARTYS: Bitácora integral en formato Archivo Central
+
+- **Objetivo:** unificar toda la información disponible del streamer MORIARTYS en un único expediente-libro. ARCHIVO CENTRAL deja de ser una sección aislada y pasa a ser la mecánica de lectura de la Bitácora completa.
+- **Prueba piloto:** se actualiza únicamente `roster-02-moriartys.html`; no se replica todavía en los demás perfiles.
+- **Estructura:** portada; identidad compartida de Demi y Ari; estadísticas del canal; actividad diaria observada; juegos; alianzas y accesos a plataformas; clips; hitos y trayectoria; oportunidades y contacto.
+- **Presentación:** dobles páginas enfrentadas en escritorio, portada que se abre, lomo y papel texturado; en móvil se recorre una página por vez. Índice visual con acceso directo a cada una de las ocho páginas.
+- **Fuentes:** `roster-data.json`, `creator-records.json` y `data.json`. Los registros de actividad conservan la metodología de muestreo Helix; partners y plataformas de acceso se distinguen; no se inventan hitos si el registro está vacío.
+- **Alcance de la prueba:** el expediente MORIARTYS representa el canal compartido, sin mezclar sus métricas con los canales individuales de Demi o Ari.
+- **Estado:** propuesta en PR #31, rama `work/bitacora-libro-moriartys-2026-11-12`. Pendiente de revisión visual y funcional en escritorio y móvil antes de integrar en `main` y replicar el patrón al resto del roster.
+
+---
+
 ## 2026-11-12 — MORIARTYS: reconstrucción como libro de cómic de doble página
 
 - **Cambio de concepto:** se deja atrás el lector de una sola lámina y se reconstruye el expediente como un libro físico ilustrado. La portada funciona como tapa cerrada; al abrirla aparece el interior.
