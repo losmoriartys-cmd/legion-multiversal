@@ -1,3 +1,14 @@
+## 2026-11-12 — Origen: cronología fundacional confirmada
+
+- Se precisa la secuencia de la primera formación: Demian y ROD3R1K ponen en marcha la idea; Akuma se incorpora como tercer integrante y Ardipi llega después como cuarto miembro.
+- La etapa de Fortnite se conserva como referencia a una experiencia de juego, sin asociarla a incorporaciones ni personas ajenas a la formación vigente.
+- Se refuerza la asignación narrativa: imagen de los fundadores para el punto de partida; portada ilustrada para Orígenes #0001; imagen grupal para representar la formación actual de Legión Multiversal.
+- Se mantienen separadas la ilustración de ropa cotidiana del bloque ejecutivo de Inicio y la imagen de sala gamer del capítulo Comunidad.
+- La actualización se realiza únicamente en la rama `work/origen-editorial-refinement-2026-11-12`; `main` no se modifica.
+- Pendiente: comprobar visualmente los encuadres y la composición de la imagen grupal, y revisar el capítulo en navegador de escritorio y móvil. El despliegue de preview y los checks automáticos no sustituyen esa inspección.
+ 
+---
+
 ## 2026-11-12 — MORIARTYS: reconstrucción como libro de cómic de doble página
 
 - **Cambio de concepto:** se deja atrás el lector de una sola lámina y se reconstruye el expediente como un libro físico ilustrado. La portada funciona como tapa cerrada; al abrirla aparece el interior.
