@@ -1,3 +1,42 @@
+## 2026-11-12 — Protección del encuadre grupal y legibilidad de Origen
+
+- En la revisión del CSS se detecta un riesgo de recorte de la ilustración grupal en móvil: la regla anterior imponía una relación 1.15:1 con `object-fit: cover`, aunque la imagen representa a los ocho integrantes actuales.
+- Se elimina el recorte forzado en escritorio y móvil: la imagen conserva su proporción intrínseca, usa `object-fit: contain` y mantiene un fondo oscuro para integrar los márgenes sin ocultar personajes.
+- Se mejora la lectura de la cronología aumentando el tamaño mínimo de las etiquetas, ajustando su espaciado y reforzando el interlineado y ancho de lectura de los párrafos.
+- Estas correcciones se implementan en la rama del PR #32. La confirmación visual definitiva requiere inspeccionar la preview renderizada en navegador; no se declara aprobada solo por revisar CSS o por el éxito de CI.
+
+---
+
+## 2026-11-12 — Revisión técnica del PR #32
+
+- Se revisa la cronología y se confirma la corrección de roles: Demian y ROD3R1K como punto de partida; Akuma como tercer integrante; Ardipi como cuarto miembro de la primera formación; Habitos (canal `Habitos_Atomicos`) y Patoexpone como colaboradores.
+- Se comprueba que las tres imágenes editoriales definidas para Origen aparecen una sola vez en el HTML y que no quedan referencias a «Mismo Hábitos» ni «Mismo Habitos» en `index.html` o este informe.
+- Se mejora la carga de la imagen principal de Origen: texto alternativo descriptivo, carga eager y prioridad alta para evitar que un recurso visible al inicio quede relegado.
+- El cambio se mantiene aislado en la rama del PR #32; no se modifica `main` ni se integra el pull request.
+- Validación del último commit: el workflow «Validar código y datos del sitio» fue iniciado y quedó en cola (`queued`). No se declara aprobado hasta obtener un resultado final. La inspección visual real en escritorio y móvil sigue pendiente.
+
+---
+
+## 2026-11-12 — Confirmación de la ilustración grupal
+
+- Demian confirma que la ilustración `image_20261106_125112.jpg` contiene **ocho personajes** y que los ocho representan exclusivamente a integrantes actuales de Legión Multiversal.
+- Se acepta la ilustración como representación visual válida de la formación actual. No debe describirse como una imagen de siete integrantes ni confundirse con la primera formación histórica de S3X-MEN.
+- Se mantiene su uso único en Origen, con encuadre que permita reconocer a los ocho personajes en escritorio y móvil.
+- La identificación individual de cada personaje no se presume ni se inventa; la confirmación recibida valida la pertenencia del conjunto.
+
+---
+
+## 2026-11-12 — Origen: cronología fundacional confirmada
+
+- Se precisa la secuencia de la primera formación: Demian y ROD3R1K ponen en marcha la idea; Akuma se incorpora como tercer integrante y Ardipi llega después como cuarto miembro.
+- La etapa de Fortnite se conserva como referencia a una experiencia de juego, sin asociarla a incorporaciones ni personas ajenas a la formación vigente.
+- Se refuerza la asignación narrativa: imagen de los fundadores para el punto de partida; portada ilustrada para Orígenes #0001; imagen grupal para representar la formación actual de Legión Multiversal.
+- Se mantienen separadas la ilustración de ropa cotidiana del bloque ejecutivo de Inicio y la imagen de sala gamer del capítulo Comunidad.
+- La actualización se realiza únicamente en la rama `work/origen-editorial-refinement-2026-11-12`; `main` no se modifica.
+- Pendiente: comprobar visualmente los encuadres y la composición de la imagen grupal, y revisar el capítulo en navegador de escritorio y móvil. El despliegue de preview y los checks automáticos no sustituyen esa inspección.
+ 
+---
+
 ## 2026-11-12 — MORIARTYS: reconstrucción como libro de cómic de doble página
 
 - **Cambio de concepto:** se deja atrás el lector de una sola lámina y se reconstruye el expediente como un libro físico ilustrado. La portada funciona como tapa cerrada; al abrirla aparece el interior.
@@ -2503,3 +2542,30 @@ Se conserva el compromiso de avanzar una mejora por etapa, con validación y rev
 
 - Se mantiene BarFenderLos4.jpg como imagen específica de «UNA SESIÓN, CUATRO PUNTOS DE VISTA» y se conserva image_20261107_184546.jpg como ilustración editorial secundaria independiente. Ambas aparecen una sola vez en el expediente y no se reutilizan entre sí.
 - La ilustración principal image_20261107_184951-si-que-tenga-referencias-y-el-titutlo-del-juego-ba.jpg permanece como portada del expediente. stream4.jpg continúa reservado a la ficha destacada de Inicio; la tarjeta de Alianzas mantiene su placa tipográfica sin fotografía.
+
+
+## 2026-11-12 — Etapa 1: refinamiento editorial del Capítulo 01 · Origen
+
+- Se inicia una rama aislada `work/origen-editorial-refinement-2026-11-12`, basada en el `main` consultado al comenzar esta etapa. No se modifica `main`.
+- Se reorganiza la narrativa como una secuencia visual: inicio compartido, primeras incorporaciones, expansión a nuevas experiencias y transición a Legión Multiversal.
+- Se corrige la cronología inicial: Demian y ROD3R1K comienzan el proyecto; Akuma se incorpora después; Ardipi es el cuarto integrante de la primera formación.
+- Se elimina del relato público toda referencia a personas que ya no forman parte del proyecto. La etapa de Fortnite se mantiene como referencia a una experiencia de juego, sin asociarla a esas personas.
+- Se corrigen asignaciones visuales: `image_20261104_055611.jpg` representa el punto de partida de Demian y ROD3R1K; `image_20261106_024612-me-gusta-la-foto-pero-la-enmarcaria-coso-si-fuese (1).jpg` es la portada ilustrada de Orígenes #0001; `image_20261106_125112.jpg` representa la formación actual de Legión Multiversal.
+- Se preservan las asignaciones únicas de las dos imágenes nuevas del 12/11: la ilustración de ropa cotidiana permanece en Inicio y la imagen de sala gamer permanece en Comunidad.
+- Se incorporan estilos editoriales específicos para Origen y breakpoints de escritorio/tablet/móvil.
+- No se inventan fechas ni se fuerza un orden no confirmado para las incorporaciones posteriores.
+- Estado: implementación inicial en rama de trabajo. Pendiente: validaciones automáticas y revisión de la preview real en escritorio y móvil antes de solicitar revisión del cierre visual.
+
+
+## 2026-11-12 — Precisión de roles: colaboradores en Origen
+
+- Se explicita en la cronología que Habitos (canal `Habitos_Atomicos`) y Patoexpone se incorporan como colaboradores, no como integrantes de la formación histórica.
+- Se distinguen sus aportes: Habitos desde la filosofía, los hábitos y la conversación; Patoexpone desde la programación, la divulgación y los contenidos educativos.
+- Se comprobó que el sistema del Roster ya contempla ambos expedientes dentro del grupo funcional `COLABORADORES`, con sus perfiles diferenciados. No se altera su categoría ni se los presenta como miembros fundadores.
+- El archivo de Colaboraciones mantiene su función de registrar experiencias y campañas documentadas; no se crea una campaña ni una alianza ficticia por el hecho de que existan estos perfiles de colaboración.
+- Pendiente: volver a ejecutar los checks del PR y revisar visualmente la preview en escritorio y móvil. Esta actualización no implica aprobación visual ni integración en `main`.
+
+
+### Ajuste editorial · Orígenes #0001
+- Se reemplazó la imagen de portada asociada al epígrafe “ORÍGENES #0001 · Una nueva identidad para una historia que continúa.” por `image_20261107_021355.jpg`, ya presente en el repositorio.
+- El cambio se limita a esa portada; no altera la imagen grupal del presente ni la cronología histórica.
