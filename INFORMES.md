@@ -1,3 +1,12 @@
+## 2026-11-12 — Confirmación de la ilustración grupal
+
+- Demian confirma que la ilustración `image_20261106_125112.jpg` contiene **ocho personajes** y que los ocho representan exclusivamente a integrantes actuales de Legión Multiversal.
+- Se acepta la ilustración como representación visual válida de la formación actual. No debe describirse como una imagen de siete integrantes ni confundirse con la primera formación histórica de S3X-MEN.
+- Se mantiene su uso único en Origen, con encuadre que permita reconocer a los ocho personajes en escritorio y móvil.
+- La identificación individual de cada personaje no se presume ni se inventa; la confirmación recibida valida la pertenencia del conjunto.
+
+---
+
 ## 2026-11-12 — Origen: cronología fundacional confirmada
 
 - Se precisa la secuencia de la primera formación: Demian y ROD3R1K ponen en marcha la idea; Akuma se incorpora como tercer integrante y Ardipi llega después como cuarto miembro.
