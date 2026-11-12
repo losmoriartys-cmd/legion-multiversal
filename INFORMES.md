@@ -2365,3 +2365,15 @@ Se conserva el compromiso de avanzar una mejora por etapa, con validación y rev
 
 - Se mantiene BarFenderLos4.jpg como imagen específica de «UNA SESIÓN, CUATRO PUNTOS DE VISTA» y se conserva image_20261107_184546.jpg como ilustración editorial secundaria independiente. Ambas aparecen una sola vez en el expediente y no se reutilizan entre sí.
 - La ilustración principal image_20261107_184951-si-que-tenga-referencias-y-el-titutlo-del-juego-ba.jpg permanece como portada del expediente. stream4.jpg continúa reservado a la ficha destacada de Inicio; la tarjeta de Alianzas mantiene su placa tipográfica sin fotografía.
+
+
+## 2026-11-12 — Portada ejecutiva y CTA comerciales
+
+- **Objetivo:** separar la navegación institucional de la captación comercial y ofrecer rutas de contacto claras según el tipo de interlocutor.
+- **Hero de Inicio:** la acción principal pasa a ser «Proponer una colaboración», con correo precompletado para ordenar la información inicial; la acción secundaria conduce a Alianzas para consultar credenciales, formatos y condiciones. El recorrido histórico continúa disponible en el directorio de capítulos.
+- **Señales de propuesta:** se incorpora una línea de lectura breve —propuestas a medida, métricas con fuente y alcance acordado—, consistente con los criterios de transparencia publicados en Alianzas.
+- **CTA segmentados:** se agregan accesos diferenciados para estudios/publishers, agencias/marcas y creadores/comunidades. Cada enlace abre un correo con asunto y guía de información pertinente; no se presenta como formulario enviado ni como contratación automática.
+- **Contacto final:** se refuerza el llamado a iniciar una conversación y se aclara que participantes, entregables y condiciones se definen antes de confirmar una acción.
+- **Diseño responsive y accesibilidad:** se mejora la jerarquía del bloque hero, el contraste y los estados hover/focus; las tres rutas comerciales pasan de tres columnas a dos y luego a una en pantallas pequeñas.
+- **Conservación editorial:** no se cambian fotografías, ilustraciones, métricas, credenciales ni datos canónicos. BarFender mantiene sus imágenes únicas y sus ubicaciones ya acordadas.
+- **Validación pendiente:** revisar enlaces mailto y estructura HTML, comprobar sintaxis/llaves CSS y verificar preview de Cloudflare en escritorio y móvil antes de integrar.
