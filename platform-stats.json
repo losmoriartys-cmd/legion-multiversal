@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-12T11:00:39Z",
+  "updated_at": "2026-11-12T11:57:11Z",
   "methodology": "Las métricas se conservan por creador y plataforma. No sumar ni comparar directamente unidades de plataformas distintas.",
   "creators": {
     "patoteexplica": {
@@ -83,6 +83,6 @@
   "collection_status": {
     "youtube": "enabled",
     "kick": "awaiting_secrets",
-    "captured_at": "2026-11-12T11:00:39Z"
+    "captured_at": "2026-11-12T11:57:11Z"
   }
 }
