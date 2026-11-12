@@ -436,14 +436,14 @@ function formatMetric(value,digits=2){
 function renderLiveDirectory(channels){
  const host=document.getElementById('live-directory');if(!host)return;
  const detectedLive=(channels||[]).filter(c=>c.live);
- const live=fresh?detectedLive:[];
  const offline=(channels||[]).filter(c=>!c.live);
  const updated=instituteStatsData?.updated_at?new Date(instituteStatsData.updated_at):null;
  const updatedLabel=updated&&!Number.isNaN(updated.getTime())?updated.toLocaleString('es-AR'):'fecha no disponible';
  const interval=Number(instituteStatsData?.sampling_interval_minutes)||55;
-  const ageMinutes=updated?(Date.now()-updated.getTime())/60000:Infinity;
-  const fresh=updated&&ageMinutes>=-5&&ageMinutes<=Math.max(interval*2.5,120);
-  const staleLive=(channels||[]).filter(c=>c.live&&!fresh);
+ const ageMinutes=updated?(Date.now()-updated.getTime())/60000:Infinity;
+ const fresh=Boolean(updated&&!Number.isNaN(updated.getTime())&&ageMinutes>=-5&&ageMinutes<=Math.max(interval*2.5,120));
+ const live=fresh?detectedLive:[];
+ const staleLive=(channels||[]).filter(c=>c.live&&!fresh);
   const refreshNote='<p class="stats-note live-refresh-note">Última captura: '+escapeStatsHtml(updatedLabel)+' · el colector consulta Twitch con una cadencia objetivo de '+interval+' minutos; la página vuelve a leer el archivo cada 60 segundos. No es una conexión en tiempo real.</p>';
  if(!live.length){
   host.innerHTML=refreshNote+'<div class="premium-panel"><div class="premium-kicker">ESTADO DE TRANSMISIONES</div><h3>'+(staleLive.length?'La última captura registró '+staleLive.length+' canal(es) en directo, pero los datos están demorados':'En la última captura no había integrantes detectados en directo')+'</h3><p>Los canales permanecen en seguimiento aunque estén offline. Consultá cada perfil para comprobar si inició una transmisión más reciente.</p></div>'+(channels||[]).map(c=>'<article class="live-channel-card offline"><strong>'+escapeStatsHtml(c.display_name)+'</strong><small>'+(staleLive.includes(c)?'Último estado registrado: EN DIRECTO · captura demorada':'OFFLINE · continúa en seguimiento')+'</small><a href="https://twitch.tv/'+encodeURIComponent(c.login)+'" target="_blank" rel="noopener noreferrer">Visitar canal ↗</a></article>').join('');
