@@ -20,20 +20,54 @@
 @media(max-width:760px){.intro{display:block}.intro-note{margin-top:14px}.cover{grid-template-columns:1fr;min-height:0}.cover-art{grid-row:auto;min-height:390px;max-height:480px}.cover-art img{min-height:390px;max-height:480px}.cover-copy{padding:4px 0 30px}.two-col,.final-grid{grid-template-columns:1fr}.clip-grid{grid-template-columns:1fr 1fr}.page{min-height:650px}.stat-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:520px){.wrap{width:calc(100% - 22px)}.mast-meta{display:none}.intro{padding-top:28px}.reader-bar{font-size:.58rem}.page{padding:20px 18px 72px;min-height:690px}.page:before{inset:8px}.page-top{font-size:.5rem}.page-foot{left:18px;right:18px;bottom:18px;font-size:.5rem}.cover h2{font-size:3.6rem}.cover-art,.cover-art img{min-height:340px}.person-grid,.clip-grid{grid-template-columns:1fr}.stat-grid{grid-template-columns:1fr 1fr;gap:8px}.stat{padding:13px;min-height:100px}.stat strong{font-size:1.7rem}.timeline-item{grid-template-columns:1fr;gap:6px}.game-table{min-width:560px}.reader-controls{gap:7px}.control-btn{padding:11px 10px;font-size:.57rem}.page-dots{gap:5px}.dot{width:8px;height:8px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+<style>
+:root{--ink:#101522;--paper:#f2eee5;--night:#111c2c;--cyan:#83d9e9;--gold:#d8aa5a;--red:#d95b55}
+body{background:radial-gradient(ellipse at 50% -15%,#29445e 0,transparent 55%),linear-gradient(145deg,#080d16,#0d1522 60%,#080d16);color:#f3f0e9}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.1;background:repeating-linear-gradient(135deg,transparent 0 30px,#9ab5ca 31px,transparent 32px 62px)}
+.intro h1 em{color:var(--gold)}.intro-note{color:#b4c2d0}
+.book{max-width:1120px;perspective:1800px;filter:drop-shadow(0 28px 65px #0009)}
+.page{background:linear-gradient(135deg,#142236,#0c1421 70%);color:#f3f0e9;border:1px solid #b6d2e42b;border-radius:5px;box-shadow:inset 0 0 0 8px #ffffff05,inset 0 0 70px #0004}
+.page:before{border-color:#b8d0df35}.page:after{opacity:.1;background:repeating-linear-gradient(135deg,transparent 0 17px,#a6c3d7 18px,transparent 19px 36px)}
+.page-top,.page-foot{color:#aebdca;border-color:#ffffff30}.page h2{color:#f5f0e7}.page-lead{color:#bdc9d4}
+.page.active{animation:portfolioIn .48s cubic-bezier(.2,.75,.2,1) both}
+.cover{background:radial-gradient(ellipse at 72% 42%,#284d67 0,transparent 45%),linear-gradient(115deg,#0c1422,#14283d 58%,#0c1523);grid-template-columns:.9fr 1.1fr;grid-template-rows:auto 1fr auto;gap:20px 34px;min-height:760px;padding:clamp(24px,4vw,48px);align-items:center}
+.cover:before{border-color:#b8d0df48}.cover .page-top,.cover .page-foot{grid-column:1/-1;color:#c2ced8;border-color:#ffffff35}
+.cover-copy{position:relative;z-index:2}.cover-stamp{color:#f1d49c}.cover h2{font-size:clamp(3.3rem,7vw,7rem);line-height:.78;letter-spacing:-.075em;color:#f7f1e8;text-shadow:0 7px 25px #0008}.cover h2 span{color:var(--gold);font-size:clamp(1.2rem,2.3vw,2rem);letter-spacing:.1em;line-height:1.05;margin-top:24px}.cover-subtitle{color:#c3d3df}.cover-bio{color:#d2dce4}.cover .tag{background:#d9e8ec;color:#1c3548}
+.card-stage{min-height:590px;display:grid;place-items:center;position:relative;perspective:1600px;isolation:isolate}
+.card-stage:before{content:"";position:absolute;width:72%;height:14%;bottom:5%;left:14%;background:#000a;filter:blur(28px);border-radius:50%;transform:rotate(-7deg)}
+.card-stage:after{content:"";position:absolute;z-index:-1;width:80%;height:90%;background:radial-gradient(ellipse,#51c6e52a,transparent 65%);filter:blur(12px)}
+.card-hint{position:absolute;bottom:0;right:2%;color:#9fb7c8;font-size:.57rem;letter-spacing:.16em;text-transform:uppercase}
+.card-3d{--rx:0deg;--ry:0deg;--mx:50%;--my:50%;position:relative;width:min(100%,460px);aspect-ratio:2/3;transform-style:preserve-3d;transform:rotateX(var(--rx)) rotateY(var(--ry));transition:transform .18s ease-out;will-change:transform;animation:cardFloat 5.5s ease-in-out infinite;filter:drop-shadow(18px 24px 22px #0009)}
+.card-3d:before{content:"";position:absolute;inset:0;border-radius:7px;background:linear-gradient(110deg,#b9a16b,#f6e6b9 12%,#5e7c90 25%,#172337 45%,#d3b26c 65%,#111a28 82%,#a78b55);transform:translateZ(-14px) translate(9px,12px);box-shadow:0 0 0 1px #f4e2ad66}
+.card-3d:after{content:"";position:absolute;inset:0;border:1px solid #f4e4beaa;border-radius:5px;transform:translateZ(8px);pointer-events:none;box-shadow:inset 0 0 0 5px #0004,inset 0 0 30px #fff2}
+.card-3d img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;border-radius:4px;transform:translateZ(2px);box-shadow:0 15px 40px #0008}
+.card-foil{position:absolute;inset:0;z-index:2;border-radius:4px;transform:translateZ(10px);pointer-events:none;opacity:.45;background:radial-gradient(circle at var(--mx) var(--my),#ffffffa8 0,#8be8ff45 8%,#b87dff25 22%,transparent 48%),linear-gradient(125deg,transparent 25%,#ffffff25 38%,transparent 50%,#7be5e522 62%,transparent 72%);mix-blend-mode:screen}
+.card-edge{position:absolute;inset:0;z-index:3;border:1px solid #fff7;transform:translateZ(12px);pointer-events:none;border-radius:4px}.card-glint{position:absolute;z-index:4;inset:-2px;border-radius:6px;transform:translateZ(15px);pointer-events:none;background:linear-gradient(115deg,transparent 35%,#ffffff55 48%,transparent 55%);opacity:0;transition:opacity .2s}.card-3d:hover .card-glint{opacity:.5}
+.two-col,.final-grid{gap:16px}.comic-panel,.person,.contact-card,.clip-card,.timeline-item,.stat,.method{background:linear-gradient(145deg,#1a3046,#101a29);border:1px solid #49667b;color:#e9edf0;box-shadow:0 10px 24px #0003}
+.comic-panel p,.person p,.timeline-item p,.contact-card p{color:#c2cdd7}.comic-panel h3,.contact-card h3{color:#f1d59c}.panel-tag{color:var(--cyan)}
+.quote{background:linear-gradient(100deg,#963d42,#bd5550);box-shadow:0 10px 25px #0003}
+.stat{border-bottom:3px solid var(--gold)}.stat strong{color:#f2d49a}.stat span{color:#c5d3df}.stat small,.fineprint,.game-note{color:#9eafbd}
+.game-table{color:#dfe6ec}.game-table th{background:#263e55;color:#f5f0e7}.game-table td{border-color:#ffffff20}.game-table td:first-child{color:#f2d49a}
+.timeline-item h3{color:#f1eee8}.timeline-label{color:var(--gold)}.clip-card{background:linear-gradient(145deg,#1c3046,#0d1725);border-color:#4c6a82}.clip-card a,.contact-card a{color:var(--cyan)}
+.reader-controls{max-width:1120px}.control-btn{background:#142438;border-color:#57758c}.control-btn:hover:not(:disabled){background:#274762;border-color:var(--cyan)}.dot{border-color:#91a8ba}.dot[aria-current=true]{background:var(--gold);border-color:var(--gold)}
+@keyframes portfolioIn{from{opacity:0;transform:translateX(32px) rotateY(-3deg)}to{opacity:1;transform:none}}@keyframes cardFloat{0%,100%{translate:0 0}50%{translate:0 -10px}}
+@media(max-width:800px){.cover{grid-template-columns:1fr;min-height:0;gap:10px}.cover-copy{padding:10px 0 0}.cover h2{font-size:clamp(3.5rem,13vw,6rem)}.card-stage{min-height:570px}.card-3d{width:min(78%,390px)}.clip-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:540px){.cover{padding:20px 18px 74px}.cover h2{font-size:3.8rem}.card-stage{min-height:465px}.card-3d{width:min(82%,330px)}.reader-controls{gap:7px}}
+@media(prefers-reduced-motion:reduce){.card-3d{animation:none}}
 </style>
 </head>
 <body>
 <header class="wrap masthead"><div class="mast-brand"><span class="sigil">LM</span><span>Legión Multiversal<br><small style="font-weight:500;color:#9baaba">Archivo de personajes</small></span></div><div class="mast-meta">Colección · Serie 01<br>Expediente 047</div><a href="./index.html#chapter-2">← Volver al Roster</a></header>
 <main class="wrap">
-<section class="intro"><div><span class="kicker">Roster 02 · Rediseño editorial</span><h1>Una dupla.<br><em>Un universo.</em></h1></div><p class="intro-note">Expediente del proyecto compartido de Demi y Ari. Una lectura en formato cómic: identidad, actividad observada, juegos, colaboraciones y momentos de comunidad.</p></section>
+<section class="intro"><div><span class="kicker">Roster 02 · Rediseño editorial</span><h1>Una dupla.<br><em>Un universo.</em></h1></div><p class="intro-note">Una carta coleccionable en primer plano y un recorrido por el universo compartido de Demi y Ari.</p></section>
 <section class="reader" aria-label="Expediente digital MORIARTYS">
-<div class="reader-bar"><span>Archivo clasificado · MORIARTYS</span><div class="progress" aria-hidden="true"><i id="progress-fill"></i></div><strong id="page-count">01 / 07</strong></div>
+<div class="reader-bar"><span>Portfolio de personaje · MORIARTYS</span><div class="progress" aria-hidden="true"><i id="progress-fill"></i></div><strong id="page-count">01 / 07</strong></div>
 <div class="book" id="book">
 <section class="page cover active" data-page="0" aria-label="Portada del expediente">
 <header class="page-top"><span>Legión Multiversal</span><span>Edición de colección · N.º 047</span><span>2026</span></header>
 <div class="cover-copy"><span class="cover-stamp">Expediente individual · canal compartido</span><h2>MORI<br>ARTYS<span>EL ESTRATEGA · SERIE 01</span></h2><p class="cover-subtitle">Demi + Ari · Gaming · Entretenimiento · Comunidad</p><p class="cover-bio">Dos miradas, una misma partida. Un proyecto compartido que convierte cada directo en una visita al videoclub: videojuegos, humor, cultura pop y momentos que se construyen en compañía.</p><div class="tag-row"><span class="tag">Twitch</span><span class="tag">Cooperativo</span><span class="tag">Cultura pop</span></div></div>
-<div class="cover-art"><img id="cover-art" src="assets/heroes/image_20261103_160331-y-ahora-mezclando-el-nuevo-mio-y-el-marco-nuevo-co-pero-porque-quedo-pelado-xd (1).jpg" alt="Ilustración oficial del proyecto MORIARTYS"><span class="cover-number">047</span><span class="cover-art-label">Archivo visual · MORIARTYS</span></div>
-<footer class="page-foot"><span>Legión Multiversal · Personajes</span><b>Deslizá o avanzá para abrir</b></footer>
+<div class="card-stage" id="card-stage" aria-label="Carta coleccionable interactiva MORIARTYS"><div class="card-3d" id="hero-card"><img id="cover-art" src="assets/heroes/image_20261103_160331-y-ahora-mezclando-el-nuevo-mio-y-el-marco-nuevo-co-pero-porque-quedo-pelado-xd (1).jpg" alt="Carta ilustrada oficial del proyecto MORIARTYS"><span class="card-foil"></span><span class="card-edge"></span><span class="card-glint"></span></div><span class="card-hint">Mové el cursor para explorar la carta · 3D interactivo</span></div>
+<footer class="page-foot"><span>Legión Multiversal · Personajes</span><b>Explorá la carta · descubrí el expediente</b></footer>
 </section>
 <section class="page" data-page="1" aria-label="Página 2: identidad">
 <header class="page-top"><span>Capítulo 01 · Identidad</span><span>MORIARTYS / 047</span><span>La dupla</span></header>
