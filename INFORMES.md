@@ -2538,3 +2538,14 @@ Se conserva el compromiso de avanzar una mejora por etapa, con validación y rev
 - Se elimina del perfil MORIARTYS el botón `ABRIR BITÁCORA COMPLETA` que abría el modal anterior y el enlace `ARCHIVO CENTRAL` que llevaba a `bitacora-preview.html` (libro general independiente).
 - Se conserva el acceso a Twitch y el retorno al Roster. Los perfiles restantes mantienen temporalmente su flujo actual; esta corrección no cambia su contenido.
 - Alcance: rama de trabajo del PR #31. No se integra en `main` hasta aprobación.
+
+
+## 2026-11-12 — MORIARTYS: segunda dirección artística, historieta interactiva y portfolio de marca
+
+- Se conserva la apertura de expediente aprobada por el usuario y se transforma el interior hacia una estética de historieta: trama de semitono, marcos de viñeta, contornos de tinta, sombras impresas, cintillos editoriales y paneles con jerarquía visual.
+- Se refuerza el paso de hoja con giro 3D más marcado, textura de papel y animación de entrada de las páginas. Se añaden efectos sonoros originales sintetizados en el navegador para apertura y cambio de página; quedan desactivados por defecto y se activan voluntariamente mediante el control SONIDO.
+- La información estadística se presenta en tarjetas identificatorias; actividad en una tabla visual; juegos en barras comparativas; alianzas en paneles de marca; clips como escenas destacadas.
+- Se sustituye la página de hitos vacía por una página de activaciones comerciales: integración en partida, desafío comunitario, presentación de juegos y contenido colaborativo.
+- Se retiran explicaciones internas y notas editoriales que no aportan valor a una visita comercial. La ficha conserva una línea breve de fuente/actualización para contextualizar las cifras.
+- Se mantiene el alcance de piloto MORIARTYS en la rama del PR #31. No se replica al resto del roster ni se integra en main sin aprobación.
+- Validación estática posterior: JavaScript embebido válido; 8 páginas; IDs HTML sin duplicados; todos los selectores de elementos usados por JavaScript tienen correspondencia en el documento. No se realizó inspección visual manual en navegador; queda pendiente calibrar composición y legibilidad en escritorio y móvil con la revisión del usuario.
