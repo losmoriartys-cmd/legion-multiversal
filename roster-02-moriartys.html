@@ -125,15 +125,57 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.1;bac
 @media(max-width:540px){.page{padding:22px 18px 76px;min-height:730px}.page h2{font-size:clamp(2.5rem,12vw,4rem)}.cover h2{font-size:clamp(4rem,18vw,5.8rem)}.card-stage{min-height:470px}.card-3d{width:min(83%,330px)}.stat-grid,.person-grid,.clip-grid{grid-template-columns:1fr}.stat{min-height:120px}.reader-controls{gap:8px}.control-btn{padding:11px 12px;font-size:.57rem}}
 @media(prefers-reduced-motion:reduce){.page.active,.card-3d{animation:none!important;transition:none!important}}
 
+
+/* EXPERIENCIA INMERSIVA: un lienzo, una página por vez */
+html,body{height:100%;min-height:100%;overflow:hidden;scroll-behavior:auto}
+body{display:flex;flex-direction:column;background:radial-gradient(ellipse at 50% 35%,#243d54 0,#0b121d 60%,#070b12 100%)}
+body:after{content:"";position:fixed;inset:0;pointer-events:none;z-index:20;opacity:.16;background:repeating-linear-gradient(0deg,transparent 0 3px,#9eb4c51a 4px,transparent 5px 7px);mix-blend-mode:screen}
+.masthead,.intro{display:none!important}
+.wrap{width:min(1440px,100% - 36px);margin-inline:auto}
+.reader{height:100svh;min-height:0;display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:12px;padding:18px 0 16px;box-sizing:border-box}
+.reader-bar{width:min(1240px,100%);margin:0 auto;min-height:30px;display:flex;align-items:center;gap:16px;color:#aebdca}
+.reader-bar:before{content:"LEGIÓN MULTIVERSAL  /  MORIARTYS";font-size:.62rem;letter-spacing:.2em;color:#e1c17f;font-weight:900}
+.reader-bar strong{font-size:.68rem;white-space:nowrap}
+.progress{max-width:none;flex:1;height:2px;background:#ffffff22}
+.book{width:min(1240px,100%);height:100%;min-height:0;margin:0 auto;position:relative;perspective:2600px;transform-style:preserve-3d;filter:drop-shadow(0 28px 55px #000b)}
+.book:before{content:"";position:absolute;z-index:0;top:9px;bottom:9px;left:50%;width:18px;transform:translateX(-50%);background:linear-gradient(90deg,#0008,#ffffff12 45%,#0008);opacity:.45;pointer-events:none}
+.page{position:absolute;inset:0;width:100%;height:100%;min-height:0;overflow:auto;overscroll-behavior:contain;padding:clamp(24px,3.4vw,52px);border-radius:5px 12px 12px 5px;border:1px solid #b6c9d855;box-shadow:inset 13px 0 20px #0002,inset 0 0 0 8px #ffffff05,0 16px 40px #0007;transform-origin:left center;backface-visibility:hidden;scrollbar-color:#8ba9bd #111c29;scrollbar-width:thin}
+.page:before{inset:13px;border-color:#b8d0df42}
+.page.active{display:block;z-index:2;animation:leafEnter .82s cubic-bezier(.18,.72,.18,1) both}
+.page.active.cover{display:grid}
+.page.active.flip-prev{transform-origin:right center;animation:leafEnterBack .82s cubic-bezier(.18,.72,.18,1) both}
+.page:not(.active){display:none}
+.page-top{font-size:.57rem;letter-spacing:.2em}
+.page-foot{position:sticky;left:auto;right:auto;bottom:-1px;margin:34px calc(clamp(24px,3.4vw,52px)*-1) calc(clamp(24px,3.4vw,52px)*-1);padding:12px clamp(24px,3.4vw,52px);background:linear-gradient(90deg,#101b2b,#172a3d);color:#c2ced8;border-top:1px solid #ffffff30;z-index:3}
+.cover{grid-template-columns:.88fr 1.12fr;grid-template-rows:auto minmax(0,1fr) auto;gap:18px 34px;min-height:0;padding:clamp(26px,4vw,58px);background:radial-gradient(ellipse at 75% 42%,#2b536b 0,transparent 48%),linear-gradient(115deg,#091321,#142a40 65%,#0b1523)}
+.cover-copy{padding:0 0 20px}
+.cover h2{font-size:clamp(4rem,8vw,8rem)}
+.card-stage{height:100%;min-height:0;max-height:calc(100svh - 190px);align-self:center}
+.card-3d{width:min(100%,min(440px,42vh));max-height:100%}
+.card-3d img{object-fit:contain}
+.card-hint{bottom:0;left:0;right:0;text-align:center;font-size:.55rem}
+.reader-controls{width:min(1240px,100%);max-width:none;margin:0 auto;min-height:44px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px}
+.reader-controls .control-btn:first-child{justify-self:start}
+.reader-controls .control-btn:last-child{justify-self:end}
+.control-btn{min-width:142px;padding:12px 18px;border-radius:2px;box-shadow:0 5px 0 #050a12,0 10px 24px #0005}
+.page-dots{align-items:center}
+.dot{width:9px;height:9px}
+.dot[aria-current=true]{transform:scale(1.55);box-shadow:0 0 14px #e0b45f99}
+@keyframes leafEnter{0%{opacity:.35;transform:rotateY(-78deg);filter:brightness(.5)}45%{opacity:1;filter:brightness(.8)}100%{opacity:1;transform:rotateY(0);filter:brightness(1)}}
+@keyframes leafEnterBack{0%{opacity:.35;transform:rotateY(78deg);filter:brightness(.5)}45%{opacity:1;filter:brightness(.8)}100%{opacity:1;transform:rotateY(0);filter:brightness(1)}}
+@media(max-width:800px){.reader{padding:10px 0;gap:8px}.wrap{width:calc(100% - 16px)}.page{padding:22px 20px 28px}.cover{grid-template-columns:1fr;grid-template-rows:auto auto auto;gap:8px}.cover-copy{padding:0}.cover h2{font-size:clamp(3.2rem,12vw,5.4rem)}.card-stage{height:46svh;max-height:460px;min-height:250px}.card-3d{width:min(72%,340px)}.reader-controls{grid-template-columns:auto 1fr auto;gap:8px}.control-btn{min-width:0;padding:10px 12px;font-size:.58rem}.reader-controls .page-dots{gap:6px}}
+@media(max-width:520px){.reader-bar{gap:8px}.reader-bar:before{font-size:.48rem;letter-spacing:.12em}.reader-bar strong{font-size:.56rem}.page{padding:17px 16px 24px}.page:before{inset:7px}.page h2{font-size:clamp(2.2rem,10vw,3.5rem)}.cover h2{font-size:3.5rem}.card-stage{height:40svh;min-height:230px}.card-3d{width:min(66%,285px)}.reader-controls .control-btn{font-size:0;width:42px;height:40px;padding:0;position:relative}.reader-controls .control-btn:first-child:after{content:"‹";font-size:1.5rem}.reader-controls .control-btn:last-child:after{content:"›";font-size:1.5rem}.page-dots{gap:5px}.dot{width:7px;height:7px}}
+@media(prefers-reduced-motion:reduce){.page.active,.page.active.flip-prev{animation:none!important}}
+
 </style>
 </head>
 <body>
 <header class="wrap masthead"><div class="mast-brand"><span class="sigil">LM</span><span>Legión Multiversal<br><small style="font-weight:500;color:#9baaba">Archivo de personajes</small></span></div><div class="mast-meta">Colección · Serie 01<br>Expediente 047</div><a href="./index.html#chapter-2">← Volver al Roster</a></header>
 <main class="wrap">
 <section class="intro"><div><span class="kicker">Roster 02 · Rediseño editorial</span><h1>Una dupla.<br><em>Un universo.</em></h1></div><p class="intro-note">Una carta coleccionable en primer plano y un recorrido por el universo compartido de Demi y Ari.</p></section>
-<section class="reader" aria-label="Expediente digital MORIARTYS">
+<section class="reader" aria-label="Portfolio interactivo MORIARTYS">
 <div class="reader-bar"><span>Portfolio de personaje · MORIARTYS</span><div class="progress" aria-hidden="true"><i id="progress-fill"></i></div><strong id="page-count">01 / 07</strong></div>
-<div class="book" id="book">
+<div class="book" id="book" tabindex="-1" aria-live="polite">
 <section class="page cover active" data-page="0" aria-label="Portada del expediente">
 <header class="page-top"><span>Legión Multiversal</span><span>Edición de colección · N.º 047</span><span>2026</span></header>
 <div class="cover-copy"><span class="cover-stamp">Expediente individual · canal compartido</span><h2>MORI<br>ARTYS<span>EL ESTRATEGA · SERIE 01</span></h2><p class="cover-subtitle">Demi + Ari · Gaming · Entretenimiento · Comunidad</p><p class="cover-bio">Dos miradas, una misma partida. Un proyecto compartido que convierte cada directo en una visita al videoclub: videojuegos, humor, cultura pop y momentos que se construyen en compañía.</p><div class="tag-row"><span class="tag">Twitch</span><span class="tag">Cooperativo</span><span class="tag">Cultura pop</span></div></div>
@@ -202,7 +244,7 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.1;bac
   $('page-count').textContent=String(current+1).padStart(2,'0')+' / '+String(pages.length).padStart(2,'0');
   $('progress-fill').style.width=((current+1)/pages.length*100)+'%';
   [...$('page-dots').children].forEach((d,i)=>d.setAttribute('aria-current',String(i===current)));
-  if(scroll)$('book').scrollIntoView({behavior:reduced?'auto':'smooth',block:'start'});
+  if(scroll){$('book').focus({preventScroll:true});}
  };
  pages.forEach((p,i)=>{const b=document.createElement('button');b.className='dot';b.type='button';b.setAttribute('aria-label','Ir a página '+(i+1));b.addEventListener('click',()=>showPage(i));$('page-dots').append(b)});
  $('prev-page').addEventListener('click',()=>showPage(current-1));$('next-page').addEventListener('click',()=>showPage(current+1));
