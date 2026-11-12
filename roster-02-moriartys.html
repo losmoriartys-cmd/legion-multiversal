@@ -89,19 +89,19 @@
  const pages=[...document.querySelectorAll('.page')];
  let current=0;
  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
- const showPage=index=>{
+ const showPage=(index,scroll=true)=>{
   current=Math.max(0,Math.min(pages.length-1,index));
   pages.forEach((p,i)=>{p.classList.toggle('active',i===current);p.setAttribute('aria-hidden',String(i!==current));});
   $('prev-page').disabled=current===0;$('next-page').disabled=current===pages.length-1;
   $('page-count').textContent=String(current+1).padStart(2,'0')+' / '+String(pages.length).padStart(2,'0');
   $('progress-fill').style.width=((current+1)/pages.length*100)+'%';
   [...$('page-dots').children].forEach((d,i)=>d.setAttribute('aria-current',String(i===current)));
-  $('book').scrollIntoView({behavior:reduced?'auto':'smooth',block:'start'});
+  if(scroll)$('book').scrollIntoView({behavior:reduced?'auto':'smooth',block:'start'});
  };
  pages.forEach((p,i)=>{const b=document.createElement('button');b.className='dot';b.type='button';b.setAttribute('aria-label','Ir a página '+(i+1));b.addEventListener('click',()=>showPage(i));$('page-dots').append(b)});
  $('prev-page').addEventListener('click',()=>showPage(current-1));$('next-page').addEventListener('click',()=>showPage(current+1));
  document.addEventListener('keydown',e=>{if(e.altKey||e.ctrlKey||e.metaKey)return;if(e.key==='ArrowRight'&&current<pages.length-1)showPage(current+1);if(e.key==='ArrowLeft'&&current>0)showPage(current-1)});
- showPage(0);
+ showPage(0,false);
  const text=(id,value)=>{if(value!==undefined&&value!==null)$(id).textContent=value};
  const make=(tag,cls,content)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(content!==undefined)n.textContent=content;return n};
  const fmt=(v,d=1)=>typeof v==='number'?v.toLocaleString('es-AR',{maximumFractionDigits:d}):v??'—';
