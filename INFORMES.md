@@ -1,3 +1,16 @@
+## 2026-11-12 — Reconstrucción de portada ejecutiva sobre main actualizado
+
+- **Origen:** se recuperan las mejoras del PR #22 sobre el `main` que ya contiene la integración de Origen y Comunidad del PR #23. Se conserva la nueva imagen de transición y la imagen de Comunidad sin revertir ni sobrescribir esos cambios.
+- **Inicio:** CTA principal para proponer una colaboración, acceso secundario a credenciales y formatos, y línea de confianza sobre propuestas a medida, métricas con fuente y alcance acordado.
+- **Recorridos comerciales:** se incorporan tres rutas diferenciadas para estudios/publishers, agencias/marcas y creadores/comunidades. Los enlaces preparan correos con asunto y guía de datos; no envían formularios ni correos automáticamente.
+- **Contacto:** se aclara que participantes, entregables y condiciones se definen antes de confirmar una acción.
+- **Responsive y accesibilidad:** estilos para jerarquía del hero, contraste, foco visible y distribución de tarjetas en escritorio y pantallas pequeñas.
+- **Validación estática de la reconstrucción:** se conservan los 12 capítulos y sus destinos; los IDs HTML no se duplican; los enlaces internos y llamadas `switchChapter()` apuntan a capítulos existentes; el balance de llaves CSS queda en cero. Las referencias nuevas de Origen y Comunidad permanecen en una sola ubicación cada una.
+- **Validación pendiente:** la rama reconstruida necesita nuevos checks de GitHub Actions y Cloudflare Pages. La inspección visual real de escritorio y móvil sigue pendiente; no se declara responsive visualmente validado.
+- **Coordinación:** reconstrucción aislada en `work/executive-cover-commercial-ctas-rebased-2026-11-12`; no se modifica `main` directamente ni se altera el Roster, Estadísticas, Arsenal o los datos canónicos.
+
+---
+
 ## 2026-11-12 — Asignación editorial de nuevas imágenes: Origen y Comunidad
 
 - **Objetivo:** incorporar las dos imágenes nuevas recibidas sin reutilizar fotografías ni alterar el archivo visual histórico ya aprobado.
