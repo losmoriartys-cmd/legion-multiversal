@@ -1,3 +1,64 @@
+## 2026-11-12 — MORIARTYS: reconstrucción como libro de cómic de doble página
+
+- **Cambio de concepto:** se deja atrás el lector de una sola lámina y se reconstruye el expediente como un libro físico ilustrado. La portada funciona como tapa cerrada; al abrirla aparece el interior.
+- **Escritorio:** el interior se organiza en dobles páginas enfrentadas, con lomo central, papel texturado, marcos, sombras, tinta, detalles editoriales y composición de viñetas. Cada doble página agrupa dos capítulos con identidad visual propia.
+- **Móvil:** se adapta a lectura de una página por vez, conservando el paso de capítulo, gestos táctiles y controles.
+- **Interacción:** apertura de tapa, transición de hoja con giro 3D, navegación por botones, puntos, teclado e índice visual de capítulos.
+- **Contenido preservado:** identidad compartida de Demi y Ari; actividad muestreada del canal MORIARTYS; juegos observados; partners separados de plataformas de acceso; clips enlazados; contacto. Se conservan las fuentes dinámicas `roster-data.json`, `creator-records.json` y `data.json`.
+- **Mejoras editoriales:** la portada prioriza la ilustración oficial; se añaden un índice de capítulos, composición de doble página, cajas de cómic, citas destacadas, tarjetas de datos y un cierre comercial. No se inventan métricas ni alianzas.
+- **Estado:** commit `6ec4f15` en la rama de prueba del PR #30. `main` permanece intacta. Pendiente validar visualmente en navegador de escritorio y móvil; no se considera aprobado ni se publica hasta la revisión del usuario.
+
+---
+
+## 2026-11-12 — Roster 02: lector inmersivo de páginas completas
+
+- **Cambio estructural solicitado:** la experiencia deja de comportarse como una página web convencional con cabecera, introducción y contenido desplazable. La cabecera y la introducción se ocultan en esta vista de portfolio.
+- **Lienzo de presentación:** el lector ocupa la altura visible de la pantalla. Solo una de las siete páginas está activa; cada página se presenta como una lámina completa dentro del escenario, con controles persistentes debajo.
+- **Paso de hoja:** al avanzar o retroceder, la página entrante gira sobre su eje vertical con perspectiva 3D, con dirección distinta según el sentido. El libro suma profundidad, sombra y una referencia central de encuadernación.
+- **Navegación:** se conserva el contador, progreso, indicadores, flechas y teclado; se elimina el desplazamiento automático de la página al navegar. El contenido interno conserva desplazamiento de respaldo si una pantalla pequeña no permite mostrar todo.
+- **Responsive:** composición adaptada a móviles; botones se compactan y la navegación táctil existente sigue habilitada.
+- **Validación estática:** 7 páginas; 1 script(s); sintaxis JS: ok; balance de llaves CSS: 0.
+- **Pendiente:** revisión real de escritorio y móvil para calibrar la altura y comprobar que el contenido de cada lámina cabe sin desplazamiento interno en las resoluciones objetivo. No publicar en `main` hasta aprobación del usuario.
+
+---
+
+## 2026-11-12 — Roster 02: segunda pasada, lectura visual tipo cómic
+
+- **Problema detectado en revisión:** la primera iteración mejoró la carta 3D, pero las páginas interiores seguían sintiéndose como bloques de información con una transición discreta. No cumplía todavía la idea de portfolio/cómic solicitada.
+- **Corrección:** se reforzó la jerarquía tipográfica, el tamaño de titulares, los paneles, las tarjetas de métricas, la tabla, los clips y los módulos de colaboración/contacto. Se pasó a un lenguaje visual más cinematográfico, con fondos oscuros, contraste, profundidad, marcos y sombras.
+- **Paso de páginas:** se incorporaron transiciones direccionales con perspectiva 3D y rotación tipo hoja de cómic; avanzar y retroceder tienen movimientos opuestos. Se mantienen navegación por flechas, puntos, teclado y gestos táctiles.
+- **Portada:** se amplió el espacio para la carta protagonista, manteniendo el giro interactivo, reflejo y flotación sutil.
+- **Validación estática:** 7 páginas, un documento HTML, un bloque de estilos, referencias a la carta y controles presentes; JavaScript embebido pasa comprobación de sintaxis. Sigue pendiente revisión visual real en navegador.
+- **Estado:** cambios aislados en `work/roster-02-living-card-portfolio-2026-11-12`; no publicados en `main`.
+
+---
+
+## 2026-11-12 — Roster 02: portfolio de carta viva MORIARTYS
+
+- **Cambio de dirección visual:** se abandona la composición de portada editorial estática y se transforma el expediente en un portfolio interactivo donde la carta coleccionable ocupa el centro visual.
+- **Carta protagonista:** se conserva la ilustración completa del expediente MORIARTYS y se presenta en una estructura 3D CSS con perspectiva, grosor visual, bordes, sombra, reflejo holográfico y brillo que sigue la posición del cursor.
+- **Movimiento:** inclinación de la carta con el puntero, animación flotante sutil y reinicio suave al retirar el cursor. En dispositivos táctiles se puede avanzar/retroceder con gestos horizontales; se mantienen flechas, botones e indicadores.
+- **Recorrido:** se conservan las siete secciones editoriales (portada + identidad, actividad, juegos, colaboraciones, clips y contacto), con transiciones de lectura tipo portfolio/cómic.
+- **Responsive y accesibilidad:** adaptación de la carta a pantallas estrechas y respeto de `prefers-reduced-motion`; los controles de navegación existentes siguen disponibles.
+- **Alcance:** trabajo aislado en `work/roster-02-living-card-portfolio-2026-11-12`, basado en el PR #29. No modifica `main`, el Roster público, los datos ni los assets originales.
+- **Pendiente:** inspección visual manual en navegador de escritorio y móvil; calibrar el tamaño de la carta y la intensidad de inclinación con la revisión del usuario. El efecto es 3D CSS/parallax, no un modelo 3D geométrico independiente.
+
+---
+
+## 2026-11-12 — Rediseño editorial Roster 02: MORIARTYS
+
+- **Objetivo:** evolucionar el prototipo visual anterior hacia un expediente narrativo de lectura secuencial, inspirado en un cómic editorial, sin modificar las ocho fichas ni la experiencia publicada.
+- **Archivo nuevo:** `roster-02-moriartys.html`, aislado en la rama `work/roster-02-editorial-redesign-2026-11-12`.
+- **Dirección visual:** portada de colección y siete páginas totales navegables (portada + seis interiores), jerarquía tipográfica de cómic, paneles editoriales, paleta tinta/papel/azul/rojo/dorado y adaptación responsive. Reutiliza la ilustración existente del expediente; no crea ni reemplaza imágenes.
+- **Contenido:** identidad compartida de Demi y Ari; actividad del canal MORIARTYS; desglose de juegos detectados; partners separados de accesos a claves; tres clips enlazados; contacto comercial y aclaración de identidades individuales.
+- **Fuentes vivas:** `roster-data.json`, `creator-records.json` y `data.json`. Las cifras se cargan en tiempo real desde el archivo del proyecto y conservan su metodología; no se atribuyen al canal individual de Ari ni al perfil individual de Demi.
+- **Criterios de rigor:** las métricas son muestras propias de Twitch Helix, no analítica oficial. Se distinguen muestras, directos observados, promedio y pico muestreados y horas vistas estimadas. Los partners Enshrouded/Cinderia no se mezclan con los registros de acceso de Lurkit/Keymailer.
+- **Interacción y accesibilidad:** navegación por botones, indicadores de página, flechas del teclado, estados accesibles, enlaces externos con `rel=noopener` y respeto de `prefers-reduced-motion`.
+- **Alcance preservado:** no se modifica `main`, `app.js`, `styles.css`, `index.html`, las fuentes de datos ni assets. El archivo se mantiene como propuesta aislada para revisión visual antes de decidir su integración.
+- **Pendiente de revisión:** inspección real en navegador de escritorio/móvil, prueba manual de navegación y contraste, revisión editorial del tono y aprobación del usuario. No se declara validación visual o funcional manual.
+
+---
+
 ## 2026-11-12 — Cierre de la pasada editorial de capítulos 1 a 7
 
 - **Alcance:** revisión secuencial de Inicio, Origen, Valores, Alianzas/Colaboraciones, Arsenal, En Vivo/Reclutamiento/Mapa Multiversal y Roster/Estadísticas. Se corrigieron detalles puntuales y se separaron los pendientes que dependen de verificación externa o de los creadores.
