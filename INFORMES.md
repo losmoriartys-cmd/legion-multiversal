@@ -1,3 +1,17 @@
+## 2026-11-12 — Asignación editorial de nuevas imágenes: Origen y Comunidad
+
+- **Objetivo:** incorporar las dos imágenes nuevas recibidas sin reutilizar fotografías ni alterar el archivo visual histórico ya aprobado.
+- **Origen:** `image_20261112_151833-volver-a-ropa-humana-con-guios-geek-8090-para-todo-ahora-con-estos-mismos-pers.jpg` queda asignada una sola vez al bloque ejecutivo «De S3X-MEN a Legión Multiversal». Se conserva la fotografía original del interior del capítulo Origen y el arte original de Inicio.
+- **Comunidad:** `image_20261112_151833.jpg` queda asignada una sola vez como imagen principal del hero del capítulo Comunidad. Se conserva el resto del contenido del capítulo.
+- **Integridad editorial:** cada archivo nuevo tiene una única referencia en `index.html`; no se reutilizan entre capítulos. No se modifican Roster, Estadísticas, Alianzas, Colaboraciones, BarFender ni Arsenal.
+- **Accesibilidad:** se actualizan los textos alternativos para describir la función editorial de cada imagen.
+- **Verificación técnica:** las referencias de ambos archivos existen en la raíz de `main`; la búsqueda en el HTML confirma una sola aparición por archivo. Las imágenes fueron recibidas en formato 16:9 (2048×1152), sin necesidad de recorte declarado.
+- **Epic Games:** la documentación oficial indica que el código activo se consulta dentro de la cuenta Epic, en «Creator & developer tools» → «Programs» → «Support-A-Creator». No existe una consulta pública oficial que permita confirmar desde fuera que `LOSMORIARTYS` está activo o asociado a la cuenta. Por lo tanto, no se declara esa activación como verificada; queda pendiente la comprobación autenticada en el portal.
+- **Alcance de esta intervención:** rama independiente `work/editorial-images-origin-community-2026-11-12`. No se modifica `main`, no se toca Arsenal ni el trabajo reservado al colaborador y no se intervienen fallos de CI.
+- **Revisión visual:** pendiente de comprobación real en navegador de escritorio y móvil; la inspección visual directa de los archivos de imagen no está disponible en esta sesión. No se declara validación visual ni despliegue de producción.
+
+---
+
 ## 2026-11-11 — Normalización de numeración editorial y orden de capítulos
 
 - **Motivo:** tras incorporar nuevas solapas y reordenar secciones, el número impreso en la cabecera de algunos capítulos ya no coincidía con su posición en la navegación. Ejemplo detectado: Origen figuraba como Capítulo 01 aunque Inicio ocupa el primer lugar.
