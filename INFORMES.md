@@ -2540,8 +2540,8 @@ Se conserva el compromiso de avanzar una mejora por etapa, con validación y rev
 
 ## 2026-11-12 — Precisión de roles: colaboradores en Origen
 
-- Se explicita en la cronología que Mismo Hábitos y Patoexpone se incorporan como colaboradores, no como integrantes de la formación histórica.
-- Se distinguen sus aportes: Mismo Hábitos desde la filosofía, los hábitos y la conversación; Patoexpone desde la programación, la divulgación y los contenidos educativos.
+- Se explicita en la cronología que Habitos (canal `Habitos_Atomicos`) y Patoexpone se incorporan como colaboradores, no como integrantes de la formación histórica.
+- Se distinguen sus aportes: Habitos desde la filosofía, los hábitos y la conversación; Patoexpone desde la programación, la divulgación y los contenidos educativos.
 - Se comprobó que el sistema del Roster ya contempla ambos expedientes dentro del grupo funcional `COLABORADORES`, con sus perfiles diferenciados. No se altera su categoría ni se los presenta como miembros fundadores.
 - El archivo de Colaboraciones mantiene su función de registrar experiencias y campañas documentadas; no se crea una campaña ni una alianza ficticia por el hecho de que existan estos perfiles de colaboración.
 - Pendiente: volver a ejecutar los checks del PR y revisar visualmente la preview en escritorio y móvil. Esta actualización no implica aprobación visual ni integración en `main`.
