@@ -1,3 +1,13 @@
+## 2026-11-12 — Precisión editorial del capítulo En Vivo
+
+- **Hallazgo:** el encabezado «La Legión está en directo» afirmaba que había transmisiones activas incluso cuando el directorio podía mostrar todos los canales offline o una captura demorada.
+- **Corrección:** se cambia por «Consultá quién está en directo» y se explica que el panel refleja el último estado registrado, distingue capturas demoradas y permite elegir un canal solo cuando hay una transmisión detectada con datos vigentes.
+- **Lógica conservada:** la página vuelve a leer `data.json` cada 60 segundos; el estado en directo se considera vigente según el intervalo de muestreo configurado y la ventana de tolerancia. No se presenta como conexión en tiempo real.
+- **Validación estática:** destinos internos de navegación existentes; la función de selección construye el reproductor Twitch con el hostname actual como parámetro `parent`; no se modifican datos ni credenciales.
+- **Pendiente:** comprobar el directorio y el reproductor en navegador en escritorio/móvil. No se declara prueba visual ni reproducción real en esta etapa.
+
+---
+
 ## 2026-11-12 — Fecha de corte para la valoración de Steam en BarFender
 
 - El expediente mostraba «Muy positivas · 330 reseñas» sin indicar que era un dato aportado durante la revisión del 07/11/2026. Al ser un contador variable, podía interpretarse como actual.
