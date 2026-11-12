@@ -1,3 +1,18 @@
+## 2026-11-12 — Asignación editorial de nuevas imágenes: Origen y Comunidad
+
+- **Objetivo:** incorporar las dos imágenes nuevas recibidas sin reutilizar fotografías ni alterar el archivo visual histórico ya aprobado.
+- **Origen:** `image_20261112_151833-volver-a-ropa-humana-con-guios-geek-8090-para-todo-ahora-con-estos-mismos-pers.jpg` queda asignada una sola vez al bloque ejecutivo «De S3X-MEN a Legión Multiversal». Se conserva la fotografía original del interior del capítulo Origen y el arte original de Inicio.
+- **Comunidad:** `image_20261112_151833.jpg` queda asignada una sola vez como imagen principal del hero del capítulo Comunidad. Se conserva el resto del contenido del capítulo.
+- **Integridad editorial:** cada archivo nuevo tiene una única referencia en `index.html`; no se reutilizan entre capítulos. La imagen anterior de Comunidad deja de repetirse con Inicio, y la ilustración anterior del bloque ejecutivo de Origen permanece solo en el interior histórico del capítulo. No se modifican Roster, Estadísticas, Alianzas, Colaboraciones, BarFender ni Arsenal.
+- **Accesibilidad:** se actualizan los textos alternativos con descripciones concretas de lo que muestran las imágenes.
+- **Revisión visual de assets:** ambas imágenes se inspeccionaron directamente. La de Comunidad muestra al grupo reunido alrededor de una mesa en una sala gamer retro y funciona como imagen de bienvenida comunitaria. La de Origen presenta a los mismos personajes en ropa cotidiana, con ambientación geek/arcade de los 80 y 90, adecuada para el bloque que conecta S3X-MEN con Legión Multiversal. Ambas son 16:9 (2048×1152); no requieren recorte para su función editorial.
+- **Verificación técnica:** las referencias de ambos archivos existen en la raíz de `main`; la búsqueda en el HTML confirma una sola aparición por archivo y conserva una sola aparición de cada imagen anterior en su ubicación interior/original.
+- **Epic Games:** se normaliza la presentación del código informado a `LOSMORIARTYS` y se conserva el estado «activación todavía no confirmada». La documentación oficial indica que el código activo se consulta dentro de la cuenta Epic, en «Creator & developer tools» → «Programs» → «Support-A-Creator». No se puede certificar desde una consulta pública que esté activo o asociado a la cuenta; queda pendiente la comprobación autenticada en el portal.
+- **Alcance de esta intervención:** rama independiente `work/editorial-images-origin-community-2026-11-12`. No se modifica `main`, no se toca Arsenal ni el trabajo reservado al colaborador y no se intervienen fallos de CI.
+- **Revisión visual:** assets revisados y asignaciones confirmadas. La inspección de la composición ya integrada en navegador de escritorio y móvil sigue pendiente; no se declara validación responsive ni despliegue de producción.
+
+---
+
 ## 2026-11-11 — Normalización de numeración editorial y orden de capítulos
 
 - **Motivo:** tras incorporar nuevas solapas y reordenar secciones, el número impreso en la cabecera de algunos capítulos ya no coincidía con su posición en la navegación. Ejemplo detectado: Origen figuraba como Capítulo 01 aunque Inicio ocupa el primer lugar.
