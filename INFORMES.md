@@ -2549,3 +2549,12 @@ Se conserva el compromiso de avanzar una mejora por etapa, con validación y rev
 - Se retiran explicaciones internas y notas editoriales que no aportan valor a una visita comercial. La ficha conserva una línea breve de fuente/actualización para contextualizar las cifras.
 - Se mantiene el alcance de piloto MORIARTYS en la rama del PR #31. No se replica al resto del roster ni se integra en main sin aprobación.
 - Validación estática posterior: JavaScript embebido válido; 8 páginas; IDs HTML sin duplicados; todos los selectores de elementos usados por JavaScript tienen correspondencia en el documento. No se realizó inspección visual manual en navegador; queda pendiente calibrar composición y legibilidad en escritorio y móvil con la revisión del usuario.
+
+
+## 2026-11-12 — Revisión de legibilidad y recorrido comercial MORIARTYS
+
+- Auditoría estática de la última versión: JavaScript embebido válido; ocho páginas; sin IDs duplicados; todos los selectores DOM usados por el script apuntan a elementos existentes.
+- Corrección de lectura: las hojas ahora permiten desplazamiento vertical interno para que el contenido extenso no quede recortado en escritorio o móvil; se conserva el diseño de página.
+- Ficha de audiencia simplificada a cuatro indicadores legibles: promedio observado en capturas, pico capturado, directos detectados y días con actividad registrada. Se informa la base de muestreo (capturas live frente al total de registros) sin presentar la muestra parcial como analítica completa.
+- Se eliminó la repetición de los formatos de colaboración en la última página. El cierre comercial presenta ahora un recorrido de briefing, concepto creativo y definición de formato/calendario.
+- La revisión visual real en navegador no pudo ejecutarse: el servicio de navegador devolvió saldo de wallet insuficiente. Por tanto, no se certifica todavía la apariencia final en desktop/móvil ni el funcionamiento audible en un dispositivo real.
