@@ -13,17 +13,17 @@
     "daved0608"
   ],
   "collection": {
-    "started_at": "2026-11-12T00:40:06Z",
+    "started_at": "2026-11-12T02:00:17Z",
     "expected_channels": 7,
     "resolved_channels": 7,
     "sampled_channels": [
-      "daved0608",
-      "losmoriartys",
       "ladymoriarty01",
       "ther0d3r1k",
       "habitos_atomicos",
       "ardipii",
-      "akumazoldyck"
+      "akumazoldyck",
+      "daved0608",
+      "losmoriartys"
     ],
     "skipped_channels": [],
     "complete": true
@@ -33,7 +33,7 @@
     "elgabii090"
   ],
   "channel_registry_note": "Los canales archivados se conservan para consulta histórica y no se incluyen en los indicadores del roster activo.",
-  "updated_at": "2026-11-12T00:40:06Z",
+  "updated_at": "2026-11-12T02:00:17Z",
   "channels": {
     "ladymoriarty01": {
       "login": "ladymoriarty01",
@@ -48,9 +48,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-12T00:40:06Z",
+      "updated_at": "2026-11-12T02:00:17Z",
       "window": {
-        "samples_total": 220,
+        "samples_total": 221,
         "live_samples": 7,
         "streams_observed": 3,
         "average_viewers_sampled": 6.4,
@@ -2092,6 +2092,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-12T02:00:17Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -2104,25 +2113,25 @@
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
       "live": true,
-      "current_viewers": 45,
+      "current_viewers": 16,
       "current_game": "Fortnite",
       "current_title": "🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
       "stream_started_at": "2026-11-11T22:55:01Z",
-      "updated_at": "2026-11-12T00:40:06Z",
+      "updated_at": "2026-11-12T02:00:17Z",
       "window": {
-        "samples_total": 220,
-        "live_samples": 26,
+        "samples_total": 221,
+        "live_samples": 27,
         "streams_observed": 6,
-        "average_viewers_sampled": 23.8,
+        "average_viewers_sampled": 23.5,
         "peak_viewers_sampled": 46,
-        "observed_live_hours": 16.35,
-        "estimated_hours_watched": 387.99,
+        "observed_live_hours": 17.27,
+        "estimated_hours_watched": 402.66,
         "game_breakdown": [
           {
             "name": "Fortnite",
-            "live_samples": 8,
+            "live_samples": 9,
             "streams_observed": 4,
-            "average_viewers_sampled": 24.2,
+            "average_viewers_sampled": 23.3,
             "peak_viewers_sampled": 46
           },
           {
@@ -2206,9 +2215,9 @@
           },
           {
             "date": "2026-11-12",
-            "live_samples": 1,
+            "live_samples": 2,
             "streams_observed": 1,
-            "average_viewers_sampled": 45.0,
+            "average_viewers_sampled": 30.5,
             "peak_viewers_sampled": 45
           }
         ],
@@ -4194,6 +4203,15 @@
           "title": "🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
           "stream_id": "319498806773",
           "started_at": "2026-11-11T22:55:01Z"
+        },
+        {
+          "sampled_at": "2026-11-12T02:00:17Z",
+          "is_live": true,
+          "viewer_count": 16,
+          "game_name": "Fortnite",
+          "title": "🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
+          "stream_id": "319498806773",
+          "started_at": "2026-11-11T22:55:01Z"
         }
       ]
     },
@@ -4856,9 +4874,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-12T00:40:06Z",
+      "updated_at": "2026-11-12T02:00:17Z",
       "window": {
-        "samples_total": 220,
+        "samples_total": 221,
         "live_samples": 6,
         "streams_observed": 3,
         "average_viewers_sampled": 7.2,
@@ -6879,6 +6897,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-12T02:00:17Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -6891,26 +6918,26 @@
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
       "live": true,
-      "current_viewers": 2,
+      "current_viewers": 17,
       "current_game": "Fortnite",
       "current_title": "las esperanzas nuca mueren !!! hoy se saca la token pirata",
       "stream_started_at": "2026-11-12T00:21:33Z",
-      "updated_at": "2026-11-12T00:40:06Z",
+      "updated_at": "2026-11-12T02:00:17Z",
       "window": {
-        "samples_total": 220,
-        "live_samples": 16,
+        "samples_total": 221,
+        "live_samples": 17,
         "streams_observed": 7,
-        "average_viewers_sampled": 6.4,
+        "average_viewers_sampled": 7.1,
         "peak_viewers_sampled": 17,
-        "observed_live_hours": 7.07,
-        "estimated_hours_watched": 34.59,
+        "observed_live_hours": 7.99,
+        "estimated_hours_watched": 50.17,
         "game_breakdown": [
           {
             "name": "Fortnite",
-            "live_samples": 8,
+            "live_samples": 9,
             "streams_observed": 4,
-            "average_viewers_sampled": 3.6,
-            "peak_viewers_sampled": 10
+            "average_viewers_sampled": 5.1,
+            "peak_viewers_sampled": 17
           },
           {
             "name": "Can 'Em All",
@@ -6986,10 +7013,10 @@
           },
           {
             "date": "2026-11-12",
-            "live_samples": 1,
+            "live_samples": 2,
             "streams_observed": 1,
-            "average_viewers_sampled": 2.0,
-            "peak_viewers_sampled": 2
+            "average_viewers_sampled": 9.5,
+            "peak_viewers_sampled": 17
           }
         ],
         "method": "Muestreo propio con cadencia observada cercana a 55 minutos, variable por la programación de GitHub Actions; horas estimadas solo entre muestras consecutivas del mismo directo cuando el intervalo no supera 110 minutos. Categorías y evolución diaria se calculan sobre las muestras observadas."
@@ -8974,6 +9001,15 @@
           "title": "las esperanzas nuca mueren !!! hoy se saca la token pirata",
           "stream_id": "322194067289",
           "started_at": "2026-11-12T00:21:33Z"
+        },
+        {
+          "sampled_at": "2026-11-12T02:00:17Z",
+          "is_live": true,
+          "viewer_count": 17,
+          "game_name": "Fortnite",
+          "title": "las esperanzas nuca mueren !!! hoy se saca la token pirata",
+          "stream_id": "322194067289",
+          "started_at": "2026-11-12T00:21:33Z"
         }
       ]
     },
@@ -8985,26 +9021,26 @@
       "twitch_url": "https://twitch.tv/daved0608",
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
-      "live": false,
-      "current_viewers": null,
-      "current_game": null,
-      "current_title": null,
-      "stream_started_at": null,
-      "updated_at": "2026-11-12T00:40:06Z",
+      "live": true,
+      "current_viewers": 1,
+      "current_game": "Fortnite",
+      "current_title": "Fortniete con amigos, en busca del token",
+      "stream_started_at": "2026-11-12T01:03:11Z",
+      "updated_at": "2026-11-12T02:00:17Z",
       "window": {
-        "samples_total": 220,
-        "live_samples": 11,
-        "streams_observed": 6,
-        "average_viewers_sampled": 2.0,
+        "samples_total": 221,
+        "live_samples": 12,
+        "streams_observed": 7,
+        "average_viewers_sampled": 1.9,
         "peak_viewers_sampled": 5,
         "observed_live_hours": 3.55,
         "estimated_hours_watched": 7.22,
         "game_breakdown": [
           {
             "name": "Fortnite",
-            "live_samples": 7,
-            "streams_observed": 4,
-            "average_viewers_sampled": 1.6,
+            "live_samples": 8,
+            "streams_observed": 5,
+            "average_viewers_sampled": 1.5,
             "peak_viewers_sampled": 3
           },
           {
@@ -9064,6 +9100,13 @@
             "streams_observed": 1,
             "average_viewers_sampled": 3.0,
             "peak_viewers_sampled": 3
+          },
+          {
+            "date": "2026-11-12",
+            "live_samples": 1,
+            "streams_observed": 1,
+            "average_viewers_sampled": 1.0,
+            "peak_viewers_sampled": 1
           }
         ],
         "method": "Muestreo propio con cadencia observada cercana a 55 minutos, variable por la programación de GitHub Actions; horas estimadas solo entre muestras consecutivas del mismo directo cuando el intervalo no supera 110 minutos. Categorías y evolución diaria se calculan sobre las muestras observadas."
@@ -11048,6 +11091,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-12T02:00:17Z",
+          "is_live": true,
+          "viewer_count": 1,
+          "game_name": "Fortnite",
+          "title": "Fortniete con amigos, en busca del token",
+          "stream_id": "322373152475",
+          "started_at": "2026-11-12T01:03:11Z"
         }
       ]
     },
@@ -11676,25 +11728,25 @@
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
       "live": true,
-      "current_viewers": 2,
+      "current_viewers": 1,
       "current_game": "Just Chatting",
       "current_title": "es mi primer dia",
       "stream_started_at": "2026-11-11T18:54:06Z",
-      "updated_at": "2026-11-12T00:40:06Z",
+      "updated_at": "2026-11-12T02:00:17Z",
       "window": {
-        "samples_total": 220,
-        "live_samples": 41,
+        "samples_total": 221,
+        "live_samples": 42,
         "streams_observed": 10,
-        "average_viewers_sampled": 6.9,
+        "average_viewers_sampled": 6.7,
         "peak_viewers_sampled": 45,
-        "observed_live_hours": 26.38,
-        "estimated_hours_watched": 175.47,
+        "observed_live_hours": 27.29,
+        "estimated_hours_watched": 176.39,
         "game_breakdown": [
           {
             "name": "Just Chatting",
-            "live_samples": 17,
+            "live_samples": 18,
             "streams_observed": 7,
-            "average_viewers_sampled": 6.6,
+            "average_viewers_sampled": 6.3,
             "peak_viewers_sampled": 22
           },
           {
@@ -11778,9 +11830,9 @@
           },
           {
             "date": "2026-11-12",
-            "live_samples": 1,
+            "live_samples": 2,
             "streams_observed": 1,
-            "average_viewers_sampled": 2.0,
+            "average_viewers_sampled": 1.5,
             "peak_viewers_sampled": 2
           }
         ],
@@ -13766,6 +13818,15 @@
           "title": "es mi primer dia",
           "stream_id": "321307262944",
           "started_at": "2026-11-11T18:54:06Z"
+        },
+        {
+          "sampled_at": "2026-11-12T02:00:17Z",
+          "is_live": true,
+          "viewer_count": 1,
+          "game_name": "Just Chatting",
+          "title": "es mi primer dia",
+          "stream_id": "321307262944",
+          "started_at": "2026-11-11T18:54:06Z"
         }
       ]
     },
@@ -13777,14 +13838,14 @@
       "twitch_url": "https://twitch.tv/losmoriartys",
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
-      "live": true,
-      "current_viewers": 12,
-      "current_game": "Just Chatting",
-      "current_title": "[Rincon del Nerd De ULTIMO MOMENTO]  Bombazo con el Postcredito de VisionQuest (Spoiler del futuro de Marvel) + Despido de James Gunn",
-      "stream_started_at": "2026-11-11T22:57:08Z",
-      "updated_at": "2026-11-12T00:40:06Z",
+      "live": false,
+      "current_viewers": null,
+      "current_game": null,
+      "current_title": null,
+      "stream_started_at": null,
+      "updated_at": "2026-11-12T02:00:17Z",
       "window": {
-        "samples_total": 220,
+        "samples_total": 221,
         "live_samples": 10,
         "streams_observed": 5,
         "average_viewers_sampled": 17.7,
@@ -15854,6 +15915,15 @@
           "title": "[Rincon del Nerd De ULTIMO MOMENTO]  Bombazo con el Postcredito de VisionQuest (Spoiler del futuro de Marvel) + Despido de James Gunn",
           "stream_id": "319498840053",
           "started_at": "2026-11-11T22:57:08Z"
+        },
+        {
+          "sampled_at": "2026-11-12T02:00:17Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     }
