@@ -2515,3 +2515,17 @@ Se conserva el compromiso de avanzar una mejora por etapa, con validación y rev
 
 - Se mantiene BarFenderLos4.jpg como imagen específica de «UNA SESIÓN, CUATRO PUNTOS DE VISTA» y se conserva image_20261107_184546.jpg como ilustración editorial secundaria independiente. Ambas aparecen una sola vez en el expediente y no se reutilizan entre sí.
 - La ilustración principal image_20261107_184951-si-que-tenga-referencias-y-el-titutlo-del-juego-ba.jpg permanece como portada del expediente. stream4.jpg continúa reservado a la ficha destacada de Inicio; la tarjeta de Alianzas mantiene su placa tipográfica sin fotografía.
+
+
+## 2026-11-12 — MORIARTYS: mejora editorial integral de la Bitácora (puntos 1 a 8)
+
+- **Identidad:** se refuerza la presentación de Demi y Ari como dupla del canal compartido, aclarando que sus canales y estadísticas individuales no se atribuyen al expediente conjunto.
+- **Estadísticas:** se reorganiza el panel en métricas de audiencia y rendimiento del muestreo. Se muestran capturas live, directos observados, promedio y pico muestreados, horas observadas y horas vistas estimadas. Se calcula el porcentaje de muestras live y se advierte cuando la cobertura es baja. Los seguidores se mantienen como no disponibles cuando Twitch no entrega el dato.
+- **Actividad:** se ordenan cronológicamente los días con señal, se muestran barras comparables y un resumen automático del período. Se aclara que los días sin capturas no prueban ausencia de emisión.
+- **Juegos:** se ordenan las categorías por cantidad de muestras, con participación porcentual, barras, promedio y pico observados. No se presentan como ranking ni como horas jugadas.
+- **Alianzas:** se diferencian los partners confirmados (Enshrouded y Cinderia) de las plataformas de acceso a campañas/keys (Lurkit y Keymailer), evitando presentarlas como patrocinadores.
+- **Clips:** se conservan los tres clips editoriales registrados y sus enlaces directos.
+- **Trayectoria:** se mantiene la cronología basada en hechos fechados; al no existir hitos cargados en creator-records.json, se informa esa ausencia en lugar de inventar logros.
+- **Propuesta comercial y contacto:** se incorporan formatos de activación posibles y un texto comercial orientativo, distinguiéndolos expresamente de campañas contratadas. El correo abre con asunto sugerido.
+- **Validación de datos:** al corte de data.json del 12/11/2026, la ventana de 30 días contiene 239 muestras, 10 muestras live y 5 directos observados; la cobertura live es baja (4,2%). Por eso los indicadores se presentan como observaciones exploratorias, no como métricas oficiales de Twitch. Seguidores: no disponibles por permisos.
+- **Alcance:** solo se modifica el piloto MORIARTYS. No se replica a otros perfiles ni se integra en main en esta etapa.
