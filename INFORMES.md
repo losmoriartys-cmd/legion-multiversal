@@ -1,3 +1,13 @@
+## 2026-11-12 — Completar la secuencia del expediente DAVE — NEXUS
+
+- **Hallazgo:** el renderer construía una página independiente de juegos y categorías a partir de las diez transmisiones visibles, pero la omitía al devolver la lista final de páginas. Como consecuencia, el contenido quedaba sin mostrar y los números de las páginas de clips y colaboración no reservaban su lugar.
+- **Corrección:** se incorpora `gamesPage` entre la bitácora y los clips. El expediente pasa a siete páginas interiores/portada en total; se ajustan la numeración y los pies a `01 / 07` … `07 / 07`.
+- **Conservación:** se mantienen las ocho categorías observadas, las diez filas de transmisiones, el resumen anual aportado por el creador y los dos enlaces de clips. No se inventan especialidad, horario, títulos editoriales ni nuevas métricas.
+- **Validación estática:** el arreglo final incluye las siete páginas en orden; cada página tiene un número único (portada + identidad, estadísticas, bitácora, juegos, clips y colaboración); el total indicado en el pie coincide con siete.
+- **Pendiente:** comprobar el giro/navegación del expediente y la lectura de tablas en navegador de escritorio y móvil. No se declara validación visual hasta inspeccionar la preview.
+
+---
+
 ## 2026-11-12 — Precisión editorial del capítulo En Vivo
 
 - **Hallazgo:** el encabezado «La Legión está en directo» afirmaba que había transmisiones activas incluso cuando el directorio podía mostrar todos los canales offline o una captura demorada.
