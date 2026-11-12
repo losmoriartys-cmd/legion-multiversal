@@ -1,3 +1,15 @@
+## 2026-11-12 — MORIARTYS: reconstrucción como libro de cómic de doble página
+
+- **Cambio de concepto:** se deja atrás el lector de una sola lámina y se reconstruye el expediente como un libro físico ilustrado. La portada funciona como tapa cerrada; al abrirla aparece el interior.
+- **Escritorio:** el interior se organiza en dobles páginas enfrentadas, con lomo central, papel texturado, marcos, sombras, tinta, detalles editoriales y composición de viñetas. Cada doble página agrupa dos capítulos con identidad visual propia.
+- **Móvil:** se adapta a lectura de una página por vez, conservando el paso de capítulo, gestos táctiles y controles.
+- **Interacción:** apertura de tapa, transición de hoja con giro 3D, navegación por botones, puntos, teclado e índice visual de capítulos.
+- **Contenido preservado:** identidad compartida de Demi y Ari; actividad muestreada del canal MORIARTYS; juegos observados; partners separados de plataformas de acceso; clips enlazados; contacto. Se conservan las fuentes dinámicas `roster-data.json`, `creator-records.json` y `data.json`.
+- **Mejoras editoriales:** la portada prioriza la ilustración oficial; se añaden un índice de capítulos, composición de doble página, cajas de cómic, citas destacadas, tarjetas de datos y un cierre comercial. No se inventan métricas ni alianzas.
+- **Estado:** commit `6ec4f15` en la rama de prueba del PR #30. `main` permanece intacta. Pendiente validar visualmente en navegador de escritorio y móvil; no se considera aprobado ni se publica hasta la revisión del usuario.
+
+---
+
 ## 2026-11-12 — Roster 02: lector inmersivo de páginas completas
 
 - **Cambio estructural solicitado:** la experiencia deja de comportarse como una página web convencional con cabecera, introducción y contenido desplazable. La cabecera y la introducción se ocultan en esta vista de portfolio.
