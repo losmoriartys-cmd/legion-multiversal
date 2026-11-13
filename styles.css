@@ -4145,3 +4145,80 @@ header .primary-navigation .nav-btn[aria-current="page"]{border-color:#8be3f3;co
         animation: none !important;
     }
 }
+
+/* AUDITORÍA UX · roster: búsqueda, foco y adaptación táctil */
+.roster-tools input,
+.roster-tools select,
+.roster-tools button,
+.roster-card-front,
+.roster-card-open-log,
+.roster-card-direct-profile,
+.roster-card-flip-back,
+.roster-empty-reset {
+    min-height: 44px;
+}
+.roster-tools :focus-visible,
+.roster-card-front:focus-visible,
+.roster-card-open-log:focus-visible,
+.roster-card-direct-profile:focus-visible,
+.roster-card-flip-back:focus-visible,
+.roster-empty-reset:focus-visible {
+    outline: 3px solid #72d9f3;
+    outline-offset: 3px;
+}
+.roster-empty-state {
+    display: grid;
+    justify-items: center;
+    gap: 12px;
+    max-width: 720px;
+    margin: 28px auto;
+    padding: clamp(24px, 4vw, 42px);
+    text-align: center;
+    border: 1px solid rgba(114,217,243,.34);
+    background: radial-gradient(ellipse at 50% 0%, rgba(0,210,255,.11), transparent 68%), #101a29;
+    box-shadow: 0 12px 34px rgba(0,0,0,.24);
+}
+.roster-empty-kicker {
+    color: #72d9f3;
+    font: 800 .7rem 'Roboto Condensed', sans-serif;
+    letter-spacing: .16em;
+}
+.roster-empty-state h3 {
+    color: #f5f7fa;
+    font: clamp(1.8rem,4vw,2.6rem)/1 'Bangers',cursive;
+    letter-spacing: .04em;
+}
+.roster-empty-state p {
+    max-width: 52ch;
+    color: #c5d1df;
+    line-height: 1.65;
+}
+.roster-empty-reset {
+    padding: 10px 18px;
+    border: 1px solid rgba(114,217,243,.58);
+    background: #143044;
+    color: #f5fbff;
+    font-weight: 800;
+    letter-spacing: .06em;
+    cursor: pointer;
+}
+.roster-empty-reset:hover { background: #1b4961; }
+@media (max-width: 700px) {
+    .roster-tools { grid-template-columns: minmax(0,1fr) !important; }
+    .roster-tools label,
+    .roster-tools input,
+    .roster-tools select { width: 100%; min-width: 0; }
+    .roster-tools button { width: 100%; }
+    .roster-grid { grid-template-columns: repeat(auto-fit,minmax(min(100%,230px),1fr)); }
+    .roster-card-collectible-card { min-width: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .roster-card-3d-inner,
+    .roster-card-collectible-card,
+    .roster-card-holo,
+    .roster-card-front,
+    .roster-card-back {
+        animation: none !important;
+        transition-duration: .01ms !important;
+    }
+}
