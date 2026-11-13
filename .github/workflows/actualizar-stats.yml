@@ -15,6 +15,7 @@ on:
 
 permissions:
   contents: write
+  issues: write
 
 concurrency:
   group: twitch-stats-update
@@ -38,6 +39,21 @@ jobs:
       - name: Sincronizar main antes de recolectar
         run: git pull --rebase origin main
 
+      - name: Verificar credenciales de Twitch
+        env:
+          TWITCH_CLIENT_ID: ${{ secrets.TWITCH_CLIENT_ID }}
+          TWITCH_CLIENT_SECRET: ${{ secrets.TWITCH_CLIENT_SECRET }}
+        run: |
+          if [ -z "$TWITCH_CLIENT_ID" ]; then
+            echo "::error::Falta configurar TWITCH_CLIENT_ID en GitHub Actions Secrets."
+            exit 1
+          fi
+          if [ -z "$TWITCH_CLIENT_SECRET" ]; then
+            echo "::error::Falta configurar TWITCH_CLIENT_SECRET en GitHub Actions Secrets."
+            exit 1
+          fi
+          echo "Credenciales Twitch presentes; valores omitidos por seguridad."
+
       - name: Consultar Twitch y guardar muestras
         env:
           TWITCH_CLIENT_ID: ${{ secrets.TWITCH_CLIENT_ID }}
@@ -54,6 +70,9 @@ jobs:
           KICK_CLIENT_ID: ${{ secrets.KICK_CLIENT_ID }}
           KICK_CLIENT_SECRET: ${{ secrets.KICK_CLIENT_SECRET }}
         run: python update_platform_stats.py
+
+      - name: Validar sitio antes de guardar datos
+        run: python scripts/validate_site.py
 
       - name: Guardar historial actualizado
         run: |
@@ -75,3 +94,35 @@ jobs:
           done
           echo "ERROR: no se pudo publicar tras 3 intentos."
           exit 1
+
+      - name: Abrir incidencia si falla el colector
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const runUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            const title = `Fallo del colector de estadísticas · ejecución ${context.runId}`;
+            const existing = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              per_page: 100
+            });
+            if (existing.data.some(issue => issue.title === title)) {
+              core.info('La incidencia de esta ejecución ya existe.');
+              return;
+            }
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title,
+              body: [
+                'El workflow del colector de estadísticas terminó con error.',
+                '',
+                `Ejecución: ${runUrl}`,
+                `Rama: ${context.ref}`,
+                `Commit: ${context.sha}`,
+                '',
+                'Revisar los pasos fallidos y los logs. No incluir credenciales en comentarios ni en la incidencia.'
+              ].join('\n')
+            });
