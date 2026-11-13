@@ -1,8 +1,8 @@
 # Legión Multiversal — Proyecto web y automatizaciones
 
 Repositorio de trabajo compartido: [losmoriartys-cmd/legion-multiversal](https://github.com/losmoriartys-cmd/legion-multiversal)  
-Sitio publicado actualmente: [GitHub Pages](https://losmoriartys-cmd.github.io/legion-multiversal/)  
-Nueva publicación prevista: Cloudflare Pages (`https://legionmultiversal.pages.dev/`), pendiente de conectar la cuenta y verificar el primer despliegue. Guía: [`CLOUDFLARE_PAGES.md`](./CLOUDFLARE_PAGES.md).
+Sitio accesible en GitHub Pages: [losmoriartys-cmd.github.io/legion-multiversal](https://losmoriartys-cmd.github.io/legion-multiversal/)  
+Sitio accesible en Cloudflare Pages: [legion-multiversal.pages.dev](https://legion-multiversal.pages.dev/). La portada responde en ambos dominios y Cloudflare genera previews de los pull requests. La configuración exacta de la rama de producción y las variables de Pages Functions se mantiene como control operativo pendiente; ver [CLOUDFLARE_PAGES.md](./CLOUDFLARE_PAGES.md).
 
 > **Fuente única de verdad:** el contenido vigente del repositorio y su historial de commits. Las conversaciones sirven para acordar y explicar el trabajo, pero una modificación solo se considera compartida cuando está registrada en GitHub.
 
