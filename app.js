@@ -1,4 +1,14 @@
 
+function activateChapterHash() {
+    const raw = decodeURIComponent((location.hash || '').slice(1));
+    if (!raw) return;
+    const semantic = document.querySelector('[data-semantic-anchor="' + raw + '"]');
+    if (semantic) { const panel = semantic; const id = panel.id.replace('chapter-',''); switchChapter(Number(id)); return; }
+    const alias = raw.match(/^chapter-(\\d+)$/);
+    if (alias && document.getElementById(raw)) switchChapter(Number(alias[1]));
+}
+window.addEventListener('hashchange', activateChapterHash);
+
 async function fetchJSON(url, options = {}) {
     const timeoutMs = Number(options.timeout) || 10000;
     const retries = Number.isInteger(options.retries) ? options.retries : 2;
@@ -1897,6 +1907,7 @@ function openHeroModal(index) {
         window.onload = async function() {
         initContactForms();
         initResourceRetry();
+        activateChapterHash();
         const initialChapter = document.querySelector('.chapter-panel.active');
         if (initialChapter) renderChapterPager(Number(initialChapter.id.replace('chapter-','')));
         try {
