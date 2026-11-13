@@ -1766,6 +1766,6 @@ function openHeroModal(index) {
             loadCommunityPlaybook()
         ]);
         if (initialChapter) recordLegionProgress('chapter', String(initialChapter.id.replace('chapter-','')));
-        window.setInterval(() => { loadInstituteStats(); }, 60000);
+        window.setInterval(() => { loadInstituteStats(); }, 15 * 60 * 1000);
         window.setInterval(() => { loadPlatformStatsData(); }, 15 * 60 * 1000);
         };

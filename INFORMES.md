@@ -2751,3 +2751,13 @@ Se conserva el compromiso de avanzar una mejora por etapa, con validación y rev
 - Se actualizan las versiones de caché de `app.js` y `styles.css`. No se cambian credenciales, archivos de datos, cuentas, imágenes ni métricas de origen.
 - Alcance: `index.html`, `app.js`, `styles.css`, `INFORMES.md`.
 - Validación automática: el workflow `Validar código y datos del sitio` del PR #43 finalizó correctamente (run 43378273926). El PR #43 se fusionó mediante squash en `ae956e4bed02450f43c3647d3f600bb4f9f137bd`. Al registrar esta entrada, GitHub aún no devolvía un run post-merge para ese SHA; tampoco se declara verificación de Cloudflare ni aprobación visual. La revisión renderizada de escritorio/móvil queda a cargo del responsable del proyecto.
+
+
+## 2026-11-13 — Rendimiento: carga diferida y cadencia de actualización
+
+- Auditoría estática: `data.json` ocupa aproximadamente 487 KB y el capítulo 04 volvía a descargarlo cada 60 segundos, aunque el workflow de recolección se programa cada 15 minutos y el muestreo Twitch tiene una cadencia objetivo de 55 minutos. Se alinea la consulta del navegador a 15 minutos para evitar descargas repetidas sin datos nuevos esperables.
+- La recarga del directorio multiplataforma permanece en 15 minutos, alineada con su colector.
+- Se agregan `preconnect` a Google Fonts y `decoding=async` a emblemas e imágenes principales. La imagen LCP de Inicio conserva prioridad alta y carga eager; la imagen histórica del capítulo Origen deja de solicitarse eager/high mientras la sección está oculta y pasa a lazy/low. El emblema del Roster se carga de forma diferida.
+- No se modifican ni recomprimen ilustraciones o logos originales. Tampoco se asignan dimensiones intrínsecas no verificadas; la reducción de peso binario y la revisión de CLS quedan como posibles pasos posteriores con medición real.
+- Alcance: `index.html`, `app.js`, `INFORMES.md`. Sin cambios en contenido, datos, navegación ni assets originales.
+- QA: pendiente de validación automática. La comprobación de carga real, LCP/CLS y experiencia responsive queda pendiente de revisión en navegador por el responsable del proyecto.
