@@ -46,3 +46,5 @@ jobs:
           done
       - name: Validar rutas, imágenes y enlaces declarados
         run: python scripts/validate_site.py
+      - name: Comprobar anclas semánticas y enlaces internos
+        run: python scripts/check_anchors.py

@@ -13,7 +13,7 @@ function activateChapterHash() {
     if (!raw) return;
     const semantic = document.querySelector('[data-semantic-anchor="' + raw + '"]');
     if (semantic) { const panel = semantic; const id = panel.id.replace('chapter-',''); switchChapter(Number(id)); return; }
-    const alias = raw.match(/^chapter-(\\d+)$/);
+    const alias = raw.match(/^chapter-(\d+)$/);
     if (alias && document.getElementById(raw)) switchChapter(Number(alias[1]));
 }
 window.addEventListener('hashchange', activateChapterHash);
