@@ -89,7 +89,7 @@ function initContactForms() {
         const submit = form.querySelector('[type="submit"]');
         const buildMailto = () => {
             const values = [...new FormData(form).entries()].filter(([key]) => key !== 'website');
-            const body = values.map(([key, value]) => key + ': ' + value).join('\\n');
+            const body = values.map(([key, value]) => key + ': ' + value).join('\n');
             const url = new URL('mailto:losmoriartys@gmail.com');
             url.searchParams.set('subject', form.dataset.contactSubject || 'Contacto · Legión Multiversal');
             url.searchParams.set('body', body);
@@ -539,7 +539,7 @@ function renderCreatorRecords(hero){
   });
  });
  lines.push('Los registros se incorporan con fecha y enlace/fuente comprobable; el lore del personaje se conserva separado de la trayectoria real.');
- return lines.join('\\n');
+ return lines.join('\n');
 }
 async function loadCreatorRecords(){
  try{
@@ -575,7 +575,7 @@ function renderObservedStreams(channel){
   lines.push((i+1)+'. '+when+' · '+(v.games.size?Array.from(v.games).join(' / '):'Categoría no disponible')+' · pico entre muestras: '+(v.peak===null?'—':v.peak)+' · muestras en directo: '+v.samples);
  });
  lines.push('Importante: son sesiones captadas por el muestreo; no representan necesariamente todos los directos ni sustituyen el historial/VOD de Twitch.');
- return lines.join('\\n');
+ return lines.join('\n');
 }
 function renderCreatorEvolution(channel){
  if(!channel || !channel.window)return '';
@@ -592,7 +592,7 @@ function renderCreatorEvolution(channel){
   days.slice(-7).forEach(d=>lines.push(d.date+' · '+d.streams_observed+' directos detectados · '+d.live_samples+' muestras · pico '+formatMetric(d.peak_viewers_sampled,0)));
  }else lines.push('Todavía no hay días con directos observados.');
  lines.push('Lectura correcta: ranking por cantidad de muestras, no por horas jugadas. La ventana de 30 días comienza a acumularse desde que se amplió el colector; no reconstruye el período anterior.');
- return lines.join('\\n');
+ return lines.join('\n');
 }
 function formatMetric(value,digits=2){
  if(value===null||value===undefined)return 'Pendiente de verificación';
