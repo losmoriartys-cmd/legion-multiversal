@@ -2844,3 +2844,12 @@ Se conserva el compromiso de avanzar una mejora por etapa, con validación y rev
 - **Integridad:** no se modifica creator-records.json ni se reemplazan los valores históricos aportados por el equipo. Las métricas acumuladas del canal siguen procediendo de platform-stats.json (captura 13/11/2026); suscriptores, vistas totales y videos publicados no se mezclan con Twitch.
 - **Archivos:** app.js, index.html (versión de caché) e INFORMES.md. No se cambian cuentas, enlaces del perfil, roles, historia ni datos fuente.
 - **Validación:** pendiente de CI y despliegue de preview sobre este commit. La revisión visual de escritorio/móvil sigue pendiente.
+
+
+## 2026-11-13 — Formularios: formato de correo y validación de servidor
+
+- **Hallazgo:** el formato del cuerpo del correo usaba separadores doblemente escapados en el cliente y en la Pages Function; eso podía dejar los caracteres literales \n en el mensaje en vez de separar los campos en líneas. La validación de campos obligatorios existía en HTML, pero no se repetía en el servidor.
+- **Corrección:** los cuerpos de correo del fallback mailto y de las vistas de resumen usan saltos de línea reales. La función /api/contact ahora reconoce únicamente los dos asuntos de formulario existentes, valida del lado servidor los campos obligatorios de incorporación y propuesta comercial, verifica el URL del canal y limita el tiempo de espera de Resend a 10 segundos. Se conserva el honeypot, el límite de tamaño/campo y el fallback de correo.
+- **Integridad:** no se envía ningún mensaje real durante esta revisión. El comportamiento POST queda pendiente de una prueba autorizada después de configurar Resend en Cloudflare; un GET a /api/contact devuelve 405 porque el endpoint solo acepta POST.
+- **Archivos:** app.js, functions/api/contact.js e INFORMES.md. No se modifican el destinatario predeterminado, credenciales ni datos de formularios.
+- **Validación:** pendiente de CI y despliegue de preview sobre este commit; inspección visual de escritorio/móvil pendiente.
