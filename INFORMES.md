@@ -1,3 +1,27 @@
+## 2026-11-13 · Red de seguridad GitHub Pages y colector
+
+- **Fecha y responsable:** 13/11/2026 · Asistencia técnica.
+- **Objetivo:** mantener GitHub Pages como producción y tratar Cloudflare Pages únicamente como entorno de previews; reforzar el colector de estadísticas en la rama `auditoria-ux`.
+- **Archivos modificados:** `app.js`, `.github/workflows/actualizar-stats.yml`, `INFORMES.md`.
+- **Implementado:**
+  - Se añadió `HAS_API = /\.pages\.dev$/.test(location.hostname)`. En GitHub Pages, los formularios abren directamente el `mailto:` construido con `buildMailto()`, sin solicitar `/api/contact`.
+  - En GitHub Pages, EN VIVO recupera directamente `data.json`; la ruta `/api/live` queda reservada a previews `*.pages.dev`.
+  - El workflow verifica que `TWITCH_CLIENT_ID` y `TWITCH_CLIENT_SECRET` estén presentes antes de invocar Twitch. Los errores identifican el secreto ausente sin imprimir valores.
+  - Se añadió `python scripts/validate_site.py` antes del commit de datos.
+  - El workflow ahora tiene `issues: write` y abre una incidencia con enlace a la ejecución si falla, evitando duplicar una incidencia abierta para el mismo run.
+- **Validaciones y resultados:**
+  - Pendiente de ejecutar `scripts/validate_site.py` y `scripts/check_anchors.py` sobre el árbol completo de la rama.
+  - Smoke test HTTP de GitHub Pages, preview Cloudflare y `/api/live`: pendiente.
+  - No se modificó `main`, ningún secreto ni la configuración de hosting.
+- **Pendientes / riesgos:**
+  - Confirmar que los secretos `TWITCH_CLIENT_ID` y `TWITCH_CLIENT_SECRET` estén configurados en GitHub → Settings → Secrets and variables → Actions. El workflow los lee desde `secrets.*`, no desde `vars.*`; no se inspeccionaron ni modificaron sus valores.
+  - La producción continúa siendo GitHub Pages. Cloudflare Pages solo genera previews; no se configura como producción.
+  - Revisar el límite/cuota de builds de Cloudflare Pages y el impacto en previews; no se cambia el plan ni la configuración.
+  - Confirmar CI y revisar logs tras el siguiente run.
+- **Commit:** pendiente de escritura y verificación.
+- **Despliegue:** no aplica; cambios confinados a `auditoria-ux`. No se publicó en producción.
+
+---
 ## 2026-11-13 · Auditoría UX y robustez del sitio
 
 - **Fecha y responsable:** 13/11/2026 · Asistencia técnica.
