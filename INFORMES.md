@@ -2934,3 +2934,9 @@ Se conserva el compromiso de avanzar una mejora por etapa, con validación y rev
 - **Datos de preview:** `data.json` y `platform-stats.json` de la rama se sincronizaron con las versiones actuales de `main` para evitar que la preview mostrara una captura anterior (247 registros) frente a la captura vigente (249). No se editaron los datos de origen manualmente.
 - **Validación automática:** workflow [43513991818](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43513991818) finalizó correctamente sobre el commit de código `5278be414e4759f1ac47878b544eb2018c6c459e`. Los commits posteriores solo sincronizaron archivos de datos idénticos a los de `main`; no cambiaron la lógica validada.
 - **QA visual/funcional pendiente:** no se pudo acceder al hostname de preview desde el entorno de verificación para inspeccionar el render de escritorio/móvil ni comprobar HTTP de `/api/live`. El reproductor solo podrá probarse funcionalmente cuando alguno de los canales activos esté transmitiendo y el endpoint/entorno de preview responda correctamente. No se declara aprobación visual ni reproducción real comprobada.
+
+### Actualización de cierre de esta intervención
+
+- Se sincronizó la rama con el HEAD actual de `main` mediante un commit de merge en `auditoria-ux`; `main` no se modificó. El PR ya no está detrás de la rama base y los archivos automáticos de estadísticas coinciden con la versión actual de `main`.
+- Validación del commit de sincronización `d3150795344552851b8230d41877e7ebd20a07cb`: workflow [43514317294](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43514317294), resultado **success**.
+- Comparación final: rama `auditoria-ux` 70 commits por delante y 0 por detrás de `main`; 16 archivos de cambios propios en el PR. El PR sigue abierto, Draft y sin fusionar.
