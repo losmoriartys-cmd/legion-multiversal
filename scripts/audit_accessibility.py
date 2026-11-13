@@ -25,14 +25,14 @@ class AuditParser(HTMLParser):
         if tag == "iframe" and not a.get("title", "").strip():
             ERRORS.append(f"{self.path.name}: iframe sin title")
         if tag in ("input", "select", "textarea") and a.get("type") != "hidden":
-            if not (a.get("aria-label") or a.get("aria-labelledby")) and not (a.get("name") == "website" and a.get("tabindex") == "-1"):
+            if not (a.get("aria-label") or a.get("aria-labelledby")):
                 self.controls.append((a.get("id"), tag))
         if tag == "a" and a.get("target") == "_blank":
             rel = set((a.get("rel") or "").lower().split())
             if not {"noopener", "noreferrer"}.issubset(rel):
                 ERRORS.append(f"{self.path.name}: target=_blank sin noopener noreferrer ({a.get('href','')})")
 
-files = [ROOT / name for name in ("index.html", "bitacora-preview.html", "roster-02-moriartys.html") if (ROOT / name).is_file()]
+files = sorted(ROOT.glob("*.html"))
 total_images = no_dimensions = 0
 for path in files:
     parser = AuditParser(path)
@@ -51,7 +51,7 @@ if "prefers-reduced-motion" not in css: ERRORS.append("CSS: falta soporte para m
 if no_dimensions:
     WARNINGS.append(f"{no_dimensions}/{total_images} imágenes HTML sin width/height intrínsecos; medir dimensiones reales antes de fijarlas para reducir CLS.")
 
-print(f"HTML de producción: {len(files)} documentos; imágenes: {total_images}; sin dimensiones intrínsecas: {no_dimensions}")
+print(f"HTML: {len(files)} documentos; imágenes: {total_images}; sin dimensiones intrínsecas: {no_dimensions}")
 for warning in WARNINGS: print("ADVERTENCIA: " + warning)
 if ERRORS:
     print("ERRORES:")
