@@ -100,7 +100,7 @@ function initContactForms() {
         const submit = form.querySelector('[type="submit"]');
         const buildMailto = () => {
             const values = [...new FormData(form).entries()].filter(([key]) => key !== 'contact_hp');
-            const body = values.map(([key, value]) => key + ': ' + value).join('\\n').slice(0, 1500);
+            const body = values.map(([key, value]) => key + ': ' + value).join('\n').slice(0, 1500);
             const subject = form.dataset.contactSubject || 'Contacto · Legión Multiversal';
             return 'mailto:losmoriartys@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
         };
