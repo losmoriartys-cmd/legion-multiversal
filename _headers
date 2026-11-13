@@ -1,0 +1,16 @@
+/*.jpg
+  Cache-Control: public, max-age=31536000, immutable
+/*.jpeg
+  Cache-Control: public, max-age=31536000, immutable
+/*.png
+  Cache-Control: public, max-age=31536000, immutable
+/*.webp
+  Cache-Control: public, max-age=31536000, immutable
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+/*.json
+  Cache-Control: public, max-age=300, stale-while-revalidate=600
+/api/*
+  Cache-Control: no-store
+/*-preview.html
+  X-Robots-Tag: noindex, nofollow
