@@ -75,6 +75,16 @@ async function retryResource(key) {
 function initResourceRetry() {
     if (document.documentElement.dataset.resourceRetryBound === 'true') return;
     document.documentElement.dataset.resourceRetryBound = 'true';
+    document.addEventListener('click', event => {
+        const target = event.target instanceof Element
+            ? event.target.closest('[data-open-mapped-hero], [data-close-hero-profile], [data-open-hero-modal], [data-navigate-hero-profile]')
+            : null;
+        if (!target) return;
+        if (target.hasAttribute('data-open-mapped-hero')) openMappedHero(Number(target.dataset.openMappedHero));
+        else if (target.hasAttribute('data-close-hero-profile')) closeHeroProfile();
+        else if (target.hasAttribute('data-open-hero-modal')) openHeroModal(Number(target.dataset.openHeroModal));
+        else if (target.hasAttribute('data-navigate-hero-profile')) navigateHeroProfile(Number(target.dataset.navigateHeroProfile));
+    });
     document.addEventListener('click', async event => {
         const button = event.target.closest('[data-resource-retry]');
         if (!button) return;
@@ -861,7 +871,7 @@ function renderMultiverseMap() {
     const host = document.getElementById('multiverse-map');
     if (!host) return;
     if (!heroesData.length) { host.innerHTML = '<div class="resource-state resource-empty"><p>No hay integrantes disponibles para construir el mapa.</p><button type="button" data-resource-retry="map">REINTENTAR</button></div>'; return; }
-    const makeNode = (hero, index) => '<button type="button" class="multiverse-node" onclick="openMappedHero(' + index + ')" aria-label="Abrir expediente de ' + escapeStatsHtml(hero.name) + '"><span class="multiverse-node-number">N.º ' + escapeStatsHtml(hero.cardNumber || 'S/N') + '</span><strong>' + escapeStatsHtml(hero.name) + '</strong><span class="multiverse-node-role">' + escapeStatsHtml(hero.codename || hero.characterRole || hero.rank || 'Integrante de la Legión') + '</span><span class="multiverse-node-areas">' + (hero.areas || []).slice(0,3).map(area => '<i>' + escapeStatsHtml(area) + '</i>').join('') + '</span><em>ABRIR EXPEDIENTE ↗</em></button>';
+    const makeNode = (hero, index) => '<button type="button" class="multiverse-node" data-open-mapped-hero="' + index + '" aria-label="Abrir expediente de ' + escapeStatsHtml(hero.name) + '"><span class="multiverse-node-number">N.º ' + escapeStatsHtml(hero.cardNumber || 'S/N') + '</span><strong>' + escapeStatsHtml(hero.name) + '</strong><span class="multiverse-node-role">' + escapeStatsHtml(hero.codename || hero.characterRole || hero.rank || 'Integrante de la Legión') + '</span><span class="multiverse-node-areas">' + (hero.areas || []).slice(0,3).map(area => '<i>' + escapeStatsHtml(area) + '</i>').join('') + '</span><em>ABRIR EXPEDIENTE ↗</em></button>';
     const top = heroesData.slice(0,4).map(makeNode).join('');
     const bottom = heroesData.slice(4).map((hero,index) => makeNode(hero,index+4)).join('');
     host.innerHTML = '<div class="multiverse-map-canvas"><svg class="multiverse-connections" viewBox="0 0 1000 620" preserveAspectRatio="none" aria-hidden="true">' + [125,375,625,875].map(x => '<line x1="500" y1="310" x2="' + x + '" y2="105"></line><line x1="500" y1="310" x2="' + x + '" y2="515"></line>').join('') + '</svg><div class="multiverse-node-row">' + top + '</div><div class="multiverse-core"><span>LM</span><strong>NEXUS CENTRAL</strong><small>' + heroesData.length + ' UNIVERSOS CONECTADOS</small></div><div class="multiverse-node-row">' + bottom + '</div></div>';
@@ -1297,9 +1307,9 @@ function openHeroProfile(index, triggerElement = document.activeElement) {
     const nextDisabled = profilePosition < 0 || profilePosition >= filteredProfiles.length - 1;
     const platformActions = renderHeroPlatformLinks(hero);
     const profileActions = hero.name === 'MORIARTYS'
-        ? '<a class="twitch-link-btn" href="./roster-02-moriartys.html">ABRIR ARCHIVO PERSONAL ↗</a>' + platformActions + '<button class="hero-profile-back" type="button" onclick="closeHeroProfile()">VOLVER AL ROSTER</button>'
-        : '<button class="twitch-link-btn" type="button" onclick="openHeroModal(' + index + ')">ABRIR BITÁCORA COMPLETA</button>' + platformActions + '<button class="hero-profile-back" type="button" onclick="closeHeroProfile()">VOLVER AL ROSTER</button>';
-    const profilePager = '<nav class="hero-profile-pager" aria-label="Navegación entre expedientes"><button type="button" onclick="navigateHeroProfile(-1)"' + (previousDisabled ? ' disabled' : '') + '>← ANTERIOR</button><span>EXPEDIENTE ' + (profilePosition >= 0 ? profilePosition + 1 : '—') + ' / ' + filteredProfiles.length + '</span><button type="button" onclick="navigateHeroProfile(1)"' + (nextDisabled ? ' disabled' : '') + '>SIGUIENTE →</button></nav>';
+        ? '<a class="twitch-link-btn" href="./roster-02-moriartys.html">ABRIR ARCHIVO PERSONAL ↗</a>' + platformActions + '<button class="hero-profile-back" type="button" data-close-hero-profile>VOLVER AL ROSTER</button>'
+        : '<button class="twitch-link-btn" type="button" data-open-hero-modal="' + index + '">ABRIR BITÁCORA COMPLETA</button>' + platformActions + '<button class="hero-profile-back" type="button" data-close-hero-profile>VOLVER AL ROSTER</button>';
+    const profilePager = '<nav class="hero-profile-pager" aria-label="Navegación entre expedientes"><button type="button" data-navigate-hero-profile="-1"' + (previousDisabled ? ' disabled' : '') + '>← ANTERIOR</button><span>EXPEDIENTE ' + (profilePosition >= 0 ? profilePosition + 1 : '—') + ' / ' + filteredProfiles.length + '</span><button type="button" data-navigate-hero-profile="1"' + (nextDisabled ? ' disabled' : '') + '>SIGUIENTE →</button></nav>';
     page.innerHTML = '<div class="hero-profile-layout hero-profile-gateway"><div class="hero-profile-art-wrap"><div class="hero-profile-art-frame"><span class="hero-profile-art-stamp">LEGIÓN<br>MULTIVERSAL</span>' + (profileArt ? '<img class="hero-profile-art" src="' + escapeStatsHtml(profileArt) + '" alt="' + escapeStatsHtml(profileArtAlt) + '" loading="eager" onerror="this.closest(\'.hero-profile-art-frame\').classList.add(\'art-unavailable\');this.remove();">' : '<div class="hero-profile-art-fallback">ILUSTRACIÓN NO DISPONIBLE</div>') + '<span class="hero-profile-art-caption">EXPEDIENTE N.º ' + escapeStatsHtml(hero.cardNumber || 'S/N') + '</span></div></div><div class="hero-profile-copy"><span class="stats-status">EXPEDIENTE INDIVIDUAL · ' + escapeStatsHtml(hero.rank || 'CLASIFICACIÓN PENDIENTE') + '</span><p class="profile-section-kicker">ARCHIVO PERSONAL · ' + escapeStatsHtml(hero.cardNumber ? 'N.º ' + hero.cardNumber : 'REGISTRO DE LA LEGIÓN') + '</p><h3 id="hero-profile-title" tabindex="-1">' + escapeStatsHtml(hero.name) + '</h3><p>' + escapeStatsHtml(hero.bio || 'Presentación personal pendiente de completar.') + '</p><div class="hero-profile-actions">' + profileActions + '</div></div></div>' + renderCommercialQuickView(hero);
     home.hidden = true;
     page.hidden = false;
