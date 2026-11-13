@@ -67,7 +67,10 @@ function initResourceRetry() {
         button.disabled = true;
         button.textContent = 'REINTENTANDO…';
         try { await retryResource(key); }
-        catch (error) { console.error('Reintento fallido:', error); }
+        catch (error) {
+            console.error('Reintento fallido:', error);
+            if (button.isConnected) { button.disabled = false; button.textContent = 'REINTENTAR'; }
+        }
     });
 }
 
