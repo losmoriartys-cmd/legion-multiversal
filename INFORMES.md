@@ -2761,3 +2761,11 @@ Se conserva el compromiso de avanzar una mejora por etapa, con validación y rev
 - No se modifican ni recomprimen ilustraciones o logos originales. Tampoco se asignan dimensiones intrínsecas no verificadas; la reducción de peso binario y la revisión de CLS quedan como posibles pasos posteriores con medición real.
 - Alcance: `index.html`, `app.js`, `INFORMES.md`. Sin cambios en contenido, datos, navegación ni assets originales.
 - Integración: PR #44 fusionado mediante squash en `0b8910f875ab28128f2640f5ab87589c607ca63c`. La validación automática post-merge finalizó correctamente (run 43378599684) y el build/deploy de GitHub Pages terminó correctamente (run 43378598997). No se declara verificación de Cloudflare ni aprobación visual; la medición real de LCP/CLS y la revisión responsive quedan a cargo del responsable del proyecto.
+
+
+## 2026-11-13 — Accesibilidad y seguridad de enlaces externos
+
+- La auditoría estática de `index.html`, `bitacora-preview.html` y `roster-02-moriartys.html` no detectó imágenes sin texto alternativo, iframes sin título, IDs duplicados, controles de formulario sin etiqueta ni elementos no semánticos con `onclick`.
+- Se detectó un enlace dinámico del modal de perfiles (`#modal-twitch-btn`) con `target="_blank"` sin `rel`. Se agrega `rel="noopener noreferrer"` para aislar la nueva pestaña y evitar acceso a `window.opener`.
+- Alcance: `index.html`, `INFORMES.md`. Sin cambios de contenido, destinos ni comportamiento del enlace.
+- QA: pendiente de validación automática; no sustituye una auditoría de accesibilidad renderizada con teclado y lector de pantalla.
