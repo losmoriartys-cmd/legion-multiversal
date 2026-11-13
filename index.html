@@ -23,7 +23,7 @@
     <meta name="twitter:image" content="https://legion-multiversal.pages.dev/og-legion-multiversal.jpg">
     <meta name="twitter:image:alt" content="Portada ilustrada de Legión Multiversal con su equipo de héroes y el lema Diferentes mundos. Una misma Legión.">
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Permanent+Marker&family=Roboto+Condensed:wght@400;500;600;700;800;900&family=Special+Elite&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./styles.css?v=20261113-typography-spacing-links-1">
+    <link rel="stylesheet" href="./styles.css?v=20261113-multiplatform-stats-1">
     <link rel="stylesheet" href="./chapter-8.css">
 </head>
 <body>
@@ -279,6 +279,8 @@
   <div id="stats-summary" class="impact-kpi-grid"><article class="impact-kpi"><strong>7</strong><span>CANALES TWITCH EN SEGUIMIENTO</span><small>7 canales Twitch del roster activo. Oratoris se informa por separado desde YouTube.</small></article></div>
   <div class="stats-channel-heading"><h4>ESTADO DE CADA CANAL</h4><p>Una ficha por canal del roster, con estado actual y métricas observadas. Estar offline no significa que el canal esté fuera del seguimiento.</p></div>
   <div id="stats-channel-grid" class="stats-channel-grid" aria-live="polite"><p class="stats-note">Cargando canales registrados…</p></div>
+  <div class="stats-channel-heading stats-platform-heading"><h4>OTRAS PLATAFORMAS DEL ROSTER</h4><p>Datos públicos por creador y plataforma. Cada unidad conserva su fuente y metodología; no se suma a espectadores ni a métricas de Twitch.</p></div>
+  <div id="stats-platform-grid" class="stats-platform-grid" aria-live="polite"><p class="stats-note">Cargando cuentas multiplataforma…</p></div>
   <div id="stats-highlights" class="impact-highlights" aria-live="polite"></div>
  </section>
  <section class="legion-news-section" aria-labelledby="legion-news-title">
@@ -293,7 +295,7 @@
   <summary>Fuentes, metodología y alcance de los datos</summary>
   <p id="stats-methodology-sampling">La actividad de Twitch se obtiene de Twitch Helix mediante <b>data.json</b>. El sistema consulta los canales de forma programada y conserva una ventana móvil máxima configurada. La cobertura efectiva depende de la antigüedad y continuidad de la recolección; no se interpreta la ventana configurada como un período completo de datos.</p>
   <p id="stats-methodology-coverage">La cobertura de la última captura se informa según los canales esperados, resueltos y omitidos por el colector. Los directos detectados y las muestras en directo se cuentan a partir de los registros por canal.</p>
-  <p>Las métricas de otras plataformas se mantienen separadas por creador y plataforma. No se suman seguidores, vistas ni audiencias de servicios distintos como si fueran una misma unidad. Streams Charts se incorpora como fuente de referencia para análisis del roster cuando existan datos verificables y comparables.</p>
+  <p>Las métricas de otras plataformas se obtienen de platform-stats.json y se muestran por creador y plataforma (por ejemplo, YouTube Data API v3). No se suman suscriptores, vistas ni audiencias de servicios distintos como si fueran una misma unidad. Los datos ausentes o las plataformas sin credenciales no se estiman. Streams Charts se incorpora como fuente de referencia para análisis del roster cuando existan datos verificables y comparables.</p>
  </details>
  <details class="stats-methodology">
   <summary>Ver detalle técnico por canal</summary>
@@ -1020,7 +1022,7 @@
         </div>
     </div>
 
-    <script src="./app.js?v=20261113-roster-ux-audit-1"></script>
+    <script src="./app.js?v=20261113-multiplatform-stats-1"></script>
     <script src="./navigation-fix.js" defer></script>
 </body>
 </html>
