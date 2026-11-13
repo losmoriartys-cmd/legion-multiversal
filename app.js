@@ -283,7 +283,51 @@ async function loadPlatformStatsData(){
   const res=await fetch('platform-stats.json',{cache:'no-store'});
   if(!res.ok)throw new Error('No se pudo leer platform-stats.json');
   platformStatsData=await res.json();
- }catch(e){console.warn('Platform statistics unavailable:',e);}
+  renderStatsPlatformDirectory();
+ }catch(e){
+  console.warn('Platform statistics unavailable:',e);
+  const host=document.getElementById('stats-platform-grid');
+  if(host)host.innerHTML='<p class="stats-note">Las estadísticas de otras plataformas no están disponibles en esta consulta. Volvé a intentarlo más tarde.</p>';
+ }
+}
+function renderStatsPlatformDirectory(){
+ const host=document.getElementById('stats-platform-grid');
+ if(!host)return;
+ const creators=Object.entries(platformStatsData?.creators||{});
+ if(!creators.length){
+  host.innerHTML='<p class="stats-note">Todavía no hay cuentas de otras plataformas registradas con datos verificables.</p>';
+  return;
+ }
+ let out='';
+ creators.forEach(([key,creator])=>{
+  Object.entries(creator.platforms||{}).forEach(([platform,p])=>{
+   const verified=p.status==='verified';
+   const label=platform==='youtube'?'YOUTUBE':platform==='kick'?'KICK':platform.toUpperCase();
+   const status=verified?'FUENTE OFICIAL':p.status==='credentials_required'?'CONFIGURACIÓN PENDIENTE':p.status==='error'?'ERROR DE CONSULTA':'REFERENCIA';
+   out+='<article class="stats-platform-card"><div class="stats-platform-card-top"><span>'+escapeStatsHtml(label)+'</span><span class="stats-status '+(verified?'verified':'pending')+'">'+status+'</span></div><h5>'+escapeStatsHtml(creator.display_name||key)+'</h5><p class="stats-platform-handle">'+escapeStatsHtml(p.handle||'Cuenta registrada')+'</p>';
+   if(!verified){
+    out+='<p class="stats-platform-note">'+escapeStatsHtml(p.note||'La cuenta está registrada, pero todavía no hay una lectura pública disponible.')+'</p>';
+   }else if(platform==='youtube'){
+    const m=p.metrics||{};
+    out+='<div class="stats-platform-metrics"><div><strong>'+statsNumber(m.subscribers,0)+'</strong><span>SUSCRIPTORES</span></div><div><strong>'+statsNumber(m.total_views,0)+'</strong><span>VISUALIZACIONES</span></div><div><strong>'+statsNumber(m.videos_total,0)+'</strong><span>VIDEOS PUBLICADOS</span></div></div>';
+    const videos=Array.isArray(p.recent_videos)?p.recent_videos.slice(0,3):[];
+    if(videos.length){
+     out+='<div class="stats-platform-recent"><b>PUBLICACIONES RECIENTES</b>';
+     videos.forEach(v=>out+='<a href="'+escapeStatsHtml(v.url)+'" target="_blank" rel="noopener noreferrer"><span>'+escapeStatsHtml(v.title||'Video de YouTube')+'</span><small>'+statsNumber(v.views,0)+' vistas · '+escapeStatsHtml(v.published_at?v.published_at.slice(0,10):'fecha no disponible')+' ↗</small></a>');
+     out+='</div>';
+    }
+    out+='<p class="stats-platform-note">Datos acumulados del canal · YouTube Data API v3 · captura '+escapeStatsHtml(platformStatsData.updated_at||'sin fecha')+'. El contador de suscriptores puede estar redondeado por YouTube.</p>';
+   }else if(platform==='kick'){
+    const m=p.metrics||{};
+    out+='<div class="stats-platform-metrics"><div><strong>'+escapeStatsHtml(m.live?'EN DIRECTO':'OFFLINE')+'</strong><span>ESTADO</span></div><div><strong>'+statsNumber(m.current_viewers,0)+'</strong><span>ESPECTADORES ACTUALES</span></div><div><strong>'+escapeStatsHtml(m.category||'—')+'</strong><span>CATEGORÍA</span></div></div><p class="stats-platform-note">Última lectura de Kick Developer Public API · '+escapeStatsHtml(platformStatsData.updated_at||'sin fecha')+'. No representa analítica histórica.</p>';
+   }else{
+    out+='<p class="stats-platform-note">'+escapeStatsHtml(p.methodology||'Datos de plataforma disponibles.')+'</p>';
+   }
+   if(p.url)out+='<a class="stats-platform-open" href="'+escapeStatsHtml(p.url)+'" target="_blank" rel="noopener noreferrer">ABRIR CANAL ↗</a>';
+   out+='</article>';
+  });
+ });
+ host.innerHTML=out||'<p class="stats-note">No hay cuentas de otras plataformas configuradas.</p>';
 }
 function renderPlatformStats(hero){
  const key=creatorRecordKey(hero);
@@ -1723,4 +1767,5 @@ function openHeroModal(index) {
         ]);
         if (initialChapter) recordLegionProgress('chapter', String(initialChapter.id.replace('chapter-','')));
         window.setInterval(() => { loadInstituteStats(); }, 60000);
+        window.setInterval(() => { loadPlatformStatsData(); }, 15 * 60 * 1000);
         };
