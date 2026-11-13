@@ -177,3 +177,80 @@
 @media (max-width: 900px) {
     .chapter-8-alliance .alliance-model-grid { grid-template-columns: 1fr; }
 }
+
+
+/* Contexto de mercado LATAM: cifras externas separadas de métricas propias. */
+.chapter-8-alliance .alliance-market-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+}
+.chapter-8-alliance .alliance-market-stat {
+    min-width: 0;
+    padding: clamp(18px, 2.8vw, 26px);
+    border: 1px solid rgba(0, 217, 255, .28);
+    border-radius: 10px;
+    background: linear-gradient(145deg, rgba(16, 31, 48, .96), rgba(10, 15, 25, .98));
+}
+.chapter-8-alliance .alliance-market-stat-accent {
+    border-color: rgba(255, 59, 189, .38);
+    background: linear-gradient(145deg, rgba(37, 20, 43, .95), rgba(10, 15, 25, .98));
+}
+.chapter-8-alliance .alliance-market-stat strong {
+    display: block;
+    color: #fff;
+    font: 900 clamp(1.6rem, 3.5vw, 2.45rem) 'Roboto Condensed', sans-serif;
+    line-height: 1;
+}
+.chapter-8-alliance .alliance-market-stat span {
+    display: block;
+    margin-top: 12px;
+    color: #9af2ff;
+    font-size: .72rem;
+    font-weight: 900;
+    letter-spacing: .08em;
+}
+.chapter-8-alliance .alliance-market-stat small {
+    display: block;
+    margin-top: 9px;
+    color: #aebccc;
+    font-size: .78rem;
+    line-height: 1.45;
+}
+.chapter-8-alliance .alliance-market-reading {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 14px;
+}
+.chapter-8-alliance .alliance-market-reading > div {
+    min-width: 0;
+    padding: clamp(16px, 2.5vw, 22px);
+    border-left: 3px solid var(--a-cyan);
+    background: rgba(0, 217, 255, .055);
+}
+.chapter-8-alliance .alliance-market-label {
+    color: #9af2ff;
+    font-size: .68rem;
+    font-weight: 900;
+    letter-spacing: .1em;
+}
+.chapter-8-alliance .alliance-market-reading p {
+    margin: 10px 0;
+    color: #d0d8e4;
+    font-size: .9rem;
+    line-height: 1.6;
+}
+.chapter-8-alliance .alliance-market-reading a {
+    color: #8beaff;
+    font-size: .72rem;
+    font-weight: 900;
+    letter-spacing: .06em;
+    text-decoration: underline;
+    text-underline-offset: .2em;
+}
+.chapter-8-alliance .alliance-market-caveat { margin-top: 14px; }
+@media (max-width: 760px) {
+    .chapter-8-alliance .alliance-market-grid,
+    .chapter-8-alliance .alliance-market-reading { grid-template-columns: 1fr; }
+}

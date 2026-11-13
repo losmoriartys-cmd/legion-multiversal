@@ -2729,3 +2729,14 @@ Se conserva el compromiso de avanzar una mejora por etapa, con validación y rev
 - Se refuerza la metodología: métricas por canal y plataforma, sin sumar espectadores como usuarios únicos ni mezclar vistas, impresiones o audiencias incompatibles.
 - Alcance: `index.html`, `chapter-8.css` e `INFORMES.md`. No se modifican credenciales, códigos, imágenes, estadísticas ni casos documentados. Los ejemplos son modelos orientativos, no campañas ejecutadas.
 - QA: pendiente de checks automáticos y verificación de la preview. La revisión visual de escritorio/móvil queda a cargo del responsable del proyecto.
+
+
+## 2026-11-13 — Alianzas: contexto de mercado LATAM con fuentes
+
+- Se incorpora un bloque de contexto regional en el capítulo 06, separado explícitamente de las métricas propias de Legión Multiversal.
+- Se documentan 372,3 millones de jugadores regionales y crecimiento anual de ingresos del 6,4 % como cifras de mercado 2025 atribuidas a Newzoo a través del análisis publicado por gamescom latam. Se evita presentarlas como audiencia alcanzable o seguidores de nuestros canales.
+- Se añade contexto argentino de un estudio Comscore de 2024 sobre 1.050 gamers activos de 18 a 65 años: el 40 % llevaba más de diez años jugando. La referencia se presenta como contexto de perfil, no como dato de audiencia del roster.
+- Se traduce la evidencia en criterio comercial: segmentar por país, idioma, huso horario, plataforma y comunidad; no tratar LATAM como mercado homogéneo.
+- Fuentes: https://latam.gamescom.global/en/what-sets-the-latin-american-gaming-market-apart-from-the-rest-of-the-world/ y https://www.prensario.net/Comscore-Los-numeros-del-Gaming-en-Argentina-50080.note.aspx.
+- Alcance: `index.html`, `chapter-8.css` e `INFORMES.md`. Sin cambios en métricas internas, credenciales, imágenes ni campañas.
+- QA: pendiente de validación automática y preview. La inspección visual de escritorio/móvil queda a cargo del responsable del proyecto.
