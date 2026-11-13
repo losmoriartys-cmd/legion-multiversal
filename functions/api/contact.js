@@ -1,6 +1,6 @@
 const EMAIL_RE = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
 const MAX_FIELD_LENGTH = 4000;
-const ALLOWED_FIELDS = new Set(["Nombre o alias","País y zona horaria","Canal principal","Otras redes","Contenido habitual","Disponibilidad","Motivación","Ideas de colaboración","Empresa o marca","Persona de contacto","Correo de contacto","Juego o proyecto","Objetivo","Fechas","Plataformas y entregables","Presupuesto o modalidad","subject","website"]);
+const ALLOWED_FIELDS = new Set(["Nombre o alias","País y zona horaria","Canal principal","Otras redes","Contenido habitual","Disponibilidad","Motivación","Ideas de colaboración","Empresa o marca","Persona de contacto","Correo de contacto","Juego o proyecto","Objetivo","Fechas","Plataformas y entregables","Presupuesto o modalidad","Tipo de propuesta","Fechas estimadas","Presupuesto orientativo","Descripción y objetivos","subject","website"]);
 function json(body,status=200){return new Response(JSON.stringify(body),{status,headers:{"content-type":"application/json; charset=utf-8","cache-control":"no-store"}});}
 export async function onRequest({request,env}){
  if(request.method!=="POST")return json({error:"Método no permitido."},405);
