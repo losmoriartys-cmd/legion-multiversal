@@ -118,7 +118,7 @@ function renderTwitchMetricsStats(channel){
 }
 function renderSullyStats(channel){
  if(!channel)return '<div class="stats-empty"><strong>Historial no disponible</strong>No hay registros históricos cargados para este canal.</div>';
- if(channel.login==='losmoriartys')return renderLosMoriartysSullyPilot(channel);
+ // MORIARTYS utiliza el mismo render histórico que el resto del roster: evita cifras antiguas hardcodeadas y mantiene la fuente y el período visibles.
  const sourceStatus=channel.status||'pending';
  const status=sourceStatus==='partial'?'partial':(sourceStatus==='user_supplied_summary'||sourceStatus==='user_supplied_annual_summary'?'partial':'pending');
  const statusLabel=sourceStatus==='partial'?'REGISTRO PARCIAL':sourceStatus==='user_supplied_summary'?'RESUMEN APORTADO':sourceStatus==='user_supplied_annual_summary'?'RESUMEN ANUAL APORTADO':'PENDIENTE DE DATOS';
@@ -666,7 +666,7 @@ function getRosterFilteredEntries() {
     const area = document.getElementById('roster-area-filter')?.value || 'all';
     const sort = document.getElementById('roster-sort')?.value || 'featured';
     const entries = heroesData.map((hero, index) => ({ hero, index })).filter(({hero}) => {
-        const haystack = [hero.name, hero.codename, hero.characterRole, hero.rank, ...(hero.areas || []), ...(hero.platforms || [])].join(' ').toLocaleLowerCase('es');
+        const haystack = [hero.name, hero.codename, hero.characterRole, hero.rank, hero.bio, hero.voice, hero.log, ...(hero.areas || []), ...(hero.platforms || []), ...(hero.mediaProfile?.formats || []), ...(hero.mediaProfile?.opportunities || [])].join(' ').toLocaleLowerCase('es');
         return (!search || haystack.includes(search))
             && (role === 'all' || hero.role === role)
             && (platform === 'all' || (hero.platforms || []).includes(platform) || Boolean(hero[platform]))
@@ -697,6 +697,10 @@ function bindRosterControls() {
         if (control) control.addEventListener(control.tagName === 'INPUT' ? 'input' : 'change', renderRoster);
     });
     root.addEventListener('click', event => {
+        if (event.target.closest('[data-reset-roster-empty]')) {
+            document.getElementById('roster-reset')?.click();
+            return;
+        }
         const clearButton = event.target.closest('[data-remove-roster-filter]');
         if (!clearButton) return;
         const id = clearButton.getAttribute('data-remove-roster-filter');
@@ -939,7 +943,7 @@ function renderRoster() {
         section.appendChild(grid);
         container.appendChild(section);
     });
-    if (!filteredEntries.length) container.innerHTML = '<p class="roster-empty-state">NO HAY EXPEDIENTES QUE COINCIDAN. Probá con otro nombre o limpiá los filtros.</p>';
+    if (!filteredEntries.length) container.innerHTML = '<section class="roster-empty-state" role="status"><span class="roster-empty-kicker">ARCHIVO SIN COINCIDENCIAS</span><h3>NO ENCONTRAMOS ESE EXPEDIENTE.</h3><p>Probá con otro nombre, una especialidad diferente o quitá los filtros activos para volver a explorar toda la Legión.</p><button type="button" class="roster-empty-reset" data-reset-roster-empty>RESTABLECER BÚSQUEDA</button></section>';
 }
 function renderCommercialQuickView(hero) {
     const safe = escapeStatsHtml;
