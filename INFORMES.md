@@ -2750,4 +2750,4 @@ Se conserva el compromiso de avanzar una mejora por etapa, con validación y rev
 - Se actualiza la metodología para identificar `platform-stats.json` y se programa la recarga del directorio cada 15 minutos, acorde con el ciclo del colector multiplataforma.
 - Se actualizan las versiones de caché de `app.js` y `styles.css`. No se cambian credenciales, archivos de datos, cuentas, imágenes ni métricas de origen.
 - Alcance: `index.html`, `app.js`, `styles.css`, `INFORMES.md`.
-- QA: pendiente de validación automática y revisión de preview. La comprobación visual de escritorio/móvil queda a cargo del responsable del proyecto.
+- Validación automática: el workflow `Validar código y datos del sitio` del PR #43 finalizó correctamente (run 43378273926). El PR #43 se fusionó mediante squash en `ae956e4bed02450f43c3647d3f600bb4f9f137bd`. Al registrar esta entrada, GitHub aún no devolvía un run post-merge para ese SHA; tampoco se declara verificación de Cloudflare ni aprobación visual. La revisión renderizada de escritorio/móvil queda a cargo del responsable del proyecto.
