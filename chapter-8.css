@@ -1,7 +1,7 @@
-/* Capítulo 08 · Alianzas y oportunidades. Estilos aislados para no interferir con otros expedientes. */
+/* Capítulo 06 · Alianzas y oportunidades. Estilos aislados para no interferir con otros expedientes. */
 .chapter-8-alliance {
- --a-cyan:#00d9ff; --a-magenta:#ff3bbd; --a-yellow:#ffe15a; --a-red:#ff5252;
- --a-ink:#090d16; --a-panel:#111a29; --a-line:rgba(0,217,255,.24);
+ --a-cyan:var(--blue-accent); --a-magenta:#ff3bbd; --a-yellow:var(--yellow-accent); --a-red:var(--red-accent);
+ --a-ink:var(--bg-color); --a-panel:var(--panel-bg); --a-line:rgba(0,210,255,.24);
 }
 .chapter-8-alliance .alliance-hero {
  position:relative; overflow:hidden; padding:clamp(22px,4vw,48px);

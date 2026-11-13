@@ -59,13 +59,14 @@ else:
     for value, origin in parser.refs:
         check_local_reference(value, origin)
 
-css = ROOT / "styles.css"
-if css.is_file():
-    text = css.read_text(encoding="utf-8")
-    for value in re.findall(r"url\(\s*['\"]?([^'\"\)]+)", text, flags=re.I):
-        check_local_reference(value, "styles.css url()")
+css_files = sorted(ROOT.glob("*.css"))
+if not css_files:
+    ERRORS.append("No hay hojas de estilo CSS para validar")
 else:
-    ERRORS.append("No existe styles.css")
+    for css in css_files:
+        text = css.read_text(encoding="utf-8")
+        for value in re.findall(r"url\(\s*['\"]?([^'\")]+)", text, flags=re.I):
+            check_local_reference(value, f"{css.name} url()")
 
 # Comprueba los recursos de imagen declarados por cada integrante.
 roster_path = ROOT / "roster-data.json"
