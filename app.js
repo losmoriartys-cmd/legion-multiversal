@@ -1,3 +1,65 @@
+
+// Formularios de contacto: envío seguro por Pages Function y alternativa manual.
+function initContactForms() {
+    document.querySelectorAll('[data-contact-form]').forEach(form => {
+        if (form.dataset.contactBound === 'true') return;
+        form.dataset.contactBound = 'true';
+        const status = form.querySelector('.contact-form-status');
+        const fallback = form.querySelector('.contact-form-fallback');
+        const fallbackLink = form.querySelector('.contact-mailto-fallback');
+        const submit = form.querySelector('[type="submit"]');
+        const buildMailto = () => {
+            const values = [...new FormData(form).entries()].filter(([key]) => key !== 'website');
+            const body = values.map(([key, value]) => key + ': ' + value).join('\\n');
+            const url = new URL('mailto:losmoriartys@gmail.com');
+            url.searchParams.set('subject', form.dataset.contactSubject || 'Contacto · Legión Multiversal');
+            url.searchParams.set('body', body);
+            return url.toString();
+        };
+        form.addEventListener('submit', async event => {
+            event.preventDefault();
+            if (!form.reportValidity()) return;
+            if (status) status.textContent = 'Enviando…';
+            if (fallback) fallback.hidden = true;
+            if (submit) { submit.disabled = true; submit.dataset.originalText = submit.textContent; submit.textContent = 'ENVIANDO…'; }
+            const payload = Object.fromEntries(new FormData(form).entries());
+            payload.subject = form.dataset.contactSubject || 'Contacto · Legión Multiversal';
+            try {
+                const controller = new AbortController();
+                const timeout = window.setTimeout(() => controller.abort(), 12000);
+                let response;
+                try {
+                    response = await fetch('/api/contact', {
+                        method: 'POST', headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload), signal: controller.signal
+                    });
+                } finally { window.clearTimeout(timeout); }
+                if (!response.ok) throw new Error('El servicio respondió ' + response.status);
+                if (status) status.textContent = 'Mensaje enviado. Gracias por contactar a la Legión.';
+                form.reset();
+            } catch (error) {
+                console.warn('No se pudo enviar el formulario:', error);
+                if (status) status.textContent = 'El envío automático no está disponible.';
+                if (fallbackLink) fallbackLink.href = buildMailto();
+                if (fallback) fallback.hidden = false;
+            } finally {
+                if (submit) { submit.disabled = false; submit.textContent = submit.dataset.originalText || 'ENVIAR'; }
+            }
+        });
+    });
+    document.querySelectorAll('[data-copy-contact-email]').forEach(button => {
+        if (button.dataset.copyBound === 'true') return;
+        button.dataset.copyBound = 'true';
+        button.addEventListener('click', async () => {
+            try {
+                await navigator.clipboard.writeText('losmoriartys@gmail.com');
+                button.textContent = 'EMAIL COPIADO';
+            } catch {
+                window.prompt('Copiá el email de contacto:', 'losmoriartys@gmail.com');
+            }
+        });
+    });
+}
         // Fuente de verdad del roster: editar role para cambiar jerarquía; completar powers y log con datos confirmados.
         let heroesData = [];
 

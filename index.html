@@ -915,7 +915,8 @@
             <h3 id="creator-application-title">TU EXPEDIENTE DE INGRESO</h3>
             <p>Contanos quién sos, dónde creás contenido y qué te gustaría construir con la Legión. No hace falta preparar un informe de estadísticas para el primer contacto.</p>
         </div>
-        <form class="comic-form recruitment-contact-form" onsubmit="event.preventDefault();const d=new FormData(this);const body=Array.from(d.entries()).map(([k,v])=>k+': '+v).join('\n');window.location.href='mailto:losmoriartys@gmail.com?subject='+encodeURIComponent('Quiero unirme a Legión Multiversal')+'&body='+encodeURIComponent(body);">
+        <form class="comic-form recruitment-contact-form" data-contact-form data-contact-subject="Solicitud de incorporación a Legión Multiversal">
+            <div class="contact-honeypot" aria-hidden="true"><label>Dejar vacío <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
             <div class="recruitment-fields-grid">
                 <div class="form-group"><label for="creator-name">Nombre o alias *</label><input id="creator-name" name="Nombre o alias" type="text" required placeholder="¿Cómo te conocemos?"></div>
                 <div class="form-group"><label for="creator-country">País / zona horaria</label><input id="creator-country" name="País y zona horaria" type="text" placeholder="Ej. Argentina · GMT-3"></div>
@@ -928,6 +929,9 @@
             <div class="form-group"><label for="creator-collaboration">¿Qué tipo de actividades te interesan?</label><textarea id="creator-collaboration" name="Ideas de colaboración" rows="3" placeholder="Partidas grupales, eventos, proyectos, campañas..."></textarea></div>
             <p class="stats-note">La incorporación se evalúa de forma individual. La pertenencia al roster no garantiza claves, patrocinios, ingresos, campañas ni crecimiento de audiencia.</p>
             <button type="submit" class="comic-submit-btn">ENVIAR MI PRESENTACIÓN</button>
+            <p class="contact-form-status" role="status" aria-live="polite"></p>
+            <div class="contact-form-fallback" hidden><p>No pudimos enviar el formulario automáticamente. Podés continuar por correo.</p><a class="contact-mailto-fallback" href="mailto:losmoriartys@gmail.com">ABRIR CORREO ↗</a></div>
+            <button type="button" class="contact-copy-email" data-copy-contact-email>COPIAR EMAIL DE CONTACTO</button>
         </form>
     </section>
 
@@ -937,7 +941,8 @@
             <h3 id="brand-proposal-title">CONTANOS QUÉ TENÉS EN MENTE</h3>
             <p>Compartí la información inicial del proyecto. Podemos evaluar propuestas para la Legión en conjunto o para creadores individuales, según el objetivo y el encaje.</p>
         </div>
-        <form class="comic-form recruitment-contact-form" onsubmit="event.preventDefault();const d=new FormData(this);const body=Array.from(d.entries()).map(([k,v])=>k+': '+v).join('\n');window.location.href='mailto:losmoriartys@gmail.com?subject='+encodeURIComponent('Propuesta de colaboración para Legión Multiversal')+'&body='+encodeURIComponent(body);">
+        <form class="comic-form recruitment-contact-form" data-contact-form data-contact-subject="Propuesta de colaboración para Legión Multiversal">
+            <div class="contact-honeypot" aria-hidden="true"><label>Dejar vacío <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
             <div class="recruitment-fields-grid">
                 <div class="form-group"><label for="brand-company">Empresa, estudio o marca *</label><input id="brand-company" name="Empresa o marca" type="text" required placeholder="Nombre de la organización"></div>
                 <div class="form-group"><label for="brand-contact">Persona de contacto *</label><input id="brand-contact" name="Persona de contacto" type="text" required placeholder="Nombre y cargo"></div>
@@ -949,6 +954,9 @@
             </div>
             <div class="form-group"><label for="brand-details">Descripción y objetivos de la propuesta *</label><textarea id="brand-details" name="Descripción y objetivos" rows="5" required placeholder="¿Qué necesitan, qué esperan y qué tipo de colaboración imaginan?"></textarea></div>
             <button type="submit" class="comic-submit-btn">ENVIAR PROPUESTA COMERCIAL</button>
+            <p class="contact-form-status" role="status" aria-live="polite"></p>
+            <div class="contact-form-fallback" hidden><p>No pudimos enviar el formulario automáticamente. Podés continuar por correo.</p><a class="contact-mailto-fallback" href="mailto:losmoriartys@gmail.com">ABRIR CORREO ↗</a></div>
+            <button type="button" class="contact-copy-email" data-copy-contact-email>COPIAR EMAIL DE CONTACTO</button>
         </form>
     </section>
     <p class="recruitment-contact-note">Al enviar, se abrirá tu aplicación de correo con el mensaje preparado para <strong>losmoriartys@gmail.com</strong>. Podrás revisarlo antes de enviarlo.</p>
