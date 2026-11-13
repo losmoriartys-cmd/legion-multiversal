@@ -22,6 +22,8 @@ on:
       - '*.json'
       - 'assets/**'
       - 'scripts/**'
+      - 'functions/**'
+      - '_headers'
       - '.github/workflows/validar-sitio.yml'
   workflow_dispatch:
 
@@ -40,7 +42,10 @@ jobs:
           node-version: '22'
       - name: Comprobar sintaxis JavaScript
         run: node --check app.js
-      - name: Comprobar sintaxis de Pages Functions\n        run: |\n          node --input-type=module --check < functions/api/contact.js\n          node --input-type=module --check < functions/api/live.js
+      - name: Comprobar sintaxis de Pages Functions
+        run: |
+          node --input-type=module --check < functions/api/contact.js
+          node --input-type=module --check < functions/api/live.js
       - name: Validar archivos JSON
         run: |
           for file in ./*.json; do
