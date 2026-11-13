@@ -20,6 +20,11 @@ export async function onRequest({request,env}){
    const login=raw.split("/").filter(Boolean).pop()||"";
    return login?{login:login.toLowerCase(),display_name:hero.name||login}:null;
   }).filter(Boolean);
+  if(!tracked.length){
+   const response=json({source:"twitch-helix",updated_at:new Date().toISOString(),cache_seconds:60,channels:[]});
+   if(cache)await cache.put(cacheKey,response.clone());
+   return response;
+  }
   const token=await getToken(env);
   const params=new URLSearchParams();
   tracked.forEach(item=>params.append("user_login",item.login));
