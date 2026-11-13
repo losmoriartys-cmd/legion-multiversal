@@ -2643,3 +2643,21 @@ Se conserva el compromiso de avanzar una mejora por etapa, con validación y rev
 - Validación visual final de escritorio/móvil y verificación del deployment quedan pendientes de preview renderizada.
 
 - Colaboraciones: se incorpora el expediente 002 de Barfender (10/11/2026) para Akuma y TheR0D3R1K a partir de las muestras verificadas en `data.json`: Akuma 2 muestras (promedio 10,5; pico 16); TheR0D3R1K 4 muestras (promedio 26,3; pico 33). Se explicita que son métricas observadas por muestreo y no analíticas oficiales ni espectadores únicos. Los VOD quedan pendientes de enlace.
+
+---
+
+## 2026-11-12 — Auditoría de ramas sin PR y estado de integración
+
+- **Base de auditoría:** se compararon las ramas de trabajo del repositorio contra `main`, que al iniciar esta revisión apuntaba a `5a3d6e6712b85913126ac943e3cf1fea5c388842` (integración del PR #34).
+- **Actualización posterior de main:** durante la auditoría, el puntero de `main` avanzó automáticamente a `e65de3902a03ea86d13592b6831bf5aa4a3ce2fd`, con el commit `📊 Actualización automática de estadísticas multiplataforma`. Este es el HEAD más reciente observado al documentar el informe.
+- **Pull requests:** la consulta de GitHub devolvió cero PR abiertos.
+- **Ramas sin PR asociado identificadas:** `card-template-rollout`, `command-center-3.0` e `instituto-premium-redesign`. Se revisaron sus diferencias y el contenido de sus árboles frente a la estructura actual.
+  - `card-template-rollout`: conserva una iteración anterior de plantillas y presentación de expedientes, con cambios sobre `index.html` de una arquitectura previa. No se trasplanta porque la experiencia publicada evolucionó desde entonces.
+  - `command-center-3.0`: conserva una versión anterior del sitio, con estructura y contenidos previos del roster. Incluye referencias a perfiles que ya no forman parte de la formación actual; no debe reincorporarse al sitio vigente.
+  - `instituto-premium-redesign`: conserva otra iteración histórica del rediseño, también basada en la arquitectura y roster anteriores. No se incorpora en bloque para evitar reintroducir contenido y recursos obsoletos.
+- **Decisión de integración:** ninguna de estas tres ramas se fusiona ni se trasplanta automáticamente. No se detectó en esta revisión una pieza aislada que justifique recuperar sin una nueva comparación funcional y editorial. Se conservan las ramas como archivo histórico; no se eliminan.
+- **Ramas vinculadas a PR o a integraciones anteriores:** se consideran parte del historial de trabajo ya revisado, consolidado, reemplazado o cerrado. No se deben reabrir ni fusionar por el solo hecho de que sigan apareciendo en el listado de ramas.
+- **Protección de contenido vigente:** no se modificaron archivos del sitio a partir de estas ramas antiguas. La cronología pública debe conservar a Demian y ROD3R1K como iniciadores, Akuma como tercer integrante y Ardipi como cuarto; no reincorporar a ElGabii ni Capy como miembros actuales.
+- **Resultado operativo:** cero PR abiertos; tres ramas históricas sin PR conservadas y clasificadas como obsoletas/no aptas para merge directo; ninguna fusión realizada durante esta auditoría.
+- **Alcance de la verificación:** la comparación de ramas y la lectura de archivos no equivalen a una revisión visual del sitio publicado. La inspección manual renderizada en escritorio y móvil continúa pendiente, al igual que confirmar que el deployment de producción corresponde al HEAD más reciente de `main`.
+- **Siguiente control recomendado:** verificar el deployment de producción contra `e65de3902a03ea86d13592b6831bf5aa4a3ce2fd`; después completar revisión visual responsive y, si aparece una mejora rescatable de alguna rama histórica, reaplicarla como cambio pequeño sobre `main`, nunca fusionando la rama antigua completa.
