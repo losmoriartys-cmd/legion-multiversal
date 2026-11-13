@@ -75,7 +75,7 @@ Cada colaborador debe:
 | `sullygnome-data.json` / `twitchmetrics-data.json` | Referencias históricas de analítica externa, separadas de las APIs propias. |
 | `INFORMES.md` | Bitácora vigente de intervenciones, validaciones y pendientes. |
 | `scripts/validate_site.py` | Validación estática de rutas, recursos y datos. |\n| `scripts/check_anchors.py` | Comprobación de anclas semánticas, alias de capítulos y enlaces internos. |
-| `.github/workflows/validar-sitio.yml` | Validación automática de JavaScript, JSON, enlaces locales e imágenes. |
+| `.github/workflows/validar-sitio.yml` | Validación automática de JavaScript, Pages Functions, JSON, rutas y anclas. |
 | `CLOUDFLARE_PAGES.md` | Guía de preparación para una futura migración; no implica que esté desplegada. |
 | `BITACORA.md` | Archivo histórico anterior a este protocolo. Se conserva como antecedente; no duplicar allí los nuevos informes. |
 | `README.md` | Reglas de colaboración y guía de entrada al proyecto. |

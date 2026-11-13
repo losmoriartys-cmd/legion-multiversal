@@ -1,3 +1,35 @@
+## 2026-11-13 · Auditoría UX y robustez del sitio
+
+- **Fecha y responsable:** 13/11/2026 · Asistencia técnica.
+- **Objetivo:** implementar la auditoría UX solicitada en la rama `auditoria-ux`, con cambios acotados y sin mover, borrar ni renombrar imágenes de la raíz.
+- **Archivos modificados:** `index.html`, `app.js`, `styles.css`, `functions/api/contact.js`, `functions/api/live.js`, `scripts/check_anchors.py`, `.github/workflows/validar-sitio.yml`, `bitacora-preview.html`, `_headers`, `README.md` y `CLOUDFLARE_PAGES.md`.
+- **Implementado:**
+  - Los dos formularios de reclutamiento y contacto comercial envían a `/api/contact`; la función usa Resend, honeypot, allowlist de campos, validación de correo y límites de longitud. El cliente ofrece fallback `mailto:` y botón para copiar el email.
+  - Se incorporó `fetchJSON` con timeout y reintentos; skeletons, estados de error con reintento y estados vacíos para roster, estadísticas, EN VIVO, mapa y misiones. Los filtros del roster se agrupan en `<details>` en móvil y el empty state permite limpiar filtros.
+  - EN VIVO consulta Twitch Helix mediante `/api/live`, con caché de 60 segundos y fallback a `data.json` que muestra fuente y antigüedad. Se agregó CTA en el hero y actualización de la navegación.
+  - El botón del expediente resuelve el canal disponible, usa `rel=noopener` y queda deshabilitado cuando no hay canal.
+  - Se añadieron anclas semánticas para los capítulos, conservando los IDs `#chapter-N`; se actualizaron enlaces de Bitácora y se incorporó `scripts/check_anchors.py` al workflow.
+  - Las imágenes del HTML principal usan carga diferida salvo la imagen hero; se fijó prioridad alta para esa imagen, se completaron alt de los carnés del expediente BarFender y se añadió fallback para imágenes externas. Se declararon dimensiones para avatares Twitch (300×300) y cabeceras Steam (460×215).
+  - Se añadió `_headers` con caché para imágenes y JSON y `X-Robots-Tag: noindex` para archivos `*-preview.html`.
+  - No se movió, borró ni renombró ningún recurso de imagen de la raíz. Se preparó una propuesta de nombres y dependencias para revisión antes de cualquier operación.
+- **Validaciones y resultados:**
+  - GitHub Actions: [run 43382504880](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43382504880), commit `29c87bbd6b312bb3834251a1df570e52abcd57bf`: **success**.
+  - `node --check app.js`: correcto.
+  - `node --input-type=module --check` para ambas Pages Functions: correcto.
+  - Validación JSON de los archivos de raíz: correcta.
+  - `scripts/validate_site.py`: `Roster: 8 perfiles revisados.`; `Referencias locales comprobadas: 37`; `Validación estática superada.`
+  - `scripts/check_anchors.py`: `Anclas locales comprobadas: 18`; `Comprobación de anclas superada.`
+  - No se realizó revisión visual manual en navegador ni prueba end-to-end de Resend/Helix: requieren entorno Cloudflare y credenciales configuradas.
+- **Pendientes / riesgos:**
+  - Cloudflare Pages aún no está conectado como publicación. Las Pages Functions y `_headers` no se ejecutan en GitHub Pages.
+  - Configurar `RESEND_API_KEY`, `RESEND_FROM` validado, `CONTACT_TO` opcional, `TWITCH_CLIENT_ID` y `TWITCH_CLIENT_SECRET` en Cloudflare Pages; después probar envío real y consulta Helix.
+  - Las dimensiones intrínsecas de las imágenes locales de la raíz no se han añadido porque no se pudo verificar su metadata binaria. No se inventaron proporciones; completar esos atributos después de medir los archivos.
+  - Pendiente revisión visual en escritorio y móvil, y validación funcional sobre el despliegue de Pages.
+- **Commit:** implementación validada `29c87bbd6b312bb3834251a1df570e52abcd57bf` — [ver commit](https://github.com/losmoriartys-cmd/legion-multiversal/commit/29c87bbd6b312bb3834251a1df570e52abcd57bf). Rama: `auditoria-ux`.
+- **Despliegue:** pendiente. No se modificó `main` ni se declaró un despliegue de producción; GitHub Pages continúa siendo la referencia.
+
+---
+
 ## 2026-11-12 — MORIARTYS: Bitácora integral en formato Archivo Central
 
 - **Objetivo:** unificar toda la información disponible del streamer MORIARTYS en un único expediente-libro. ARCHIVO CENTRAL deja de ser una sección aislada y pasa a ser la mecánica de lectura de la Bitácora completa.
