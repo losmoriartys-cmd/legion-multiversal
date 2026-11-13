@@ -4256,6 +4256,7 @@ main .chapter-panel :where(.chapter-deck, .executive-lead) {
 
 main .chapter-panel :where(.section-heading, .executive-section-heading) {
     row-gap: 12px;
+    margin-bottom: var(--space-content);
 }
 
 main .chapter-panel :where(.section-heading h3, .executive-section-heading h3,
@@ -4268,7 +4269,7 @@ main .chapter-panel :where(.premium-panel, .premium-card) {
 }
 
 main .chapter-panel :where(.premium-panel, .premium-card) > :where(p, ul, ol) + :where(p, ul, ol) {
-    margin-top: .8em;
+    margin-top: var(--space-content);
 }
 
 main .chapter-panel :where(.premium-panel, .premium-card) :where(ul, ol) {
