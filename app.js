@@ -630,7 +630,10 @@ function renderLiveDirectory(channels, options = {}){
   }).join('');
   return;
  }
- host.innerHTML=refreshNote+live.map(c=>'<article class="live-channel-card"><span class="stats-status verified">● EN DIRECTO</span><strong>'+escapeStatsHtml(c.display_name||c.login)+'</strong><small>'+escapeStatsHtml(c.current_game||'Categoría no informada')+' · '+(c.current_viewers===null||c.current_viewers===undefined?'Espectadores no disponibles':statsNumber(c.current_viewers,0)+' espectadores')+'</small><button type="button" onclick="selectLiveChannel(\\''+escapeStatsHtml(c.login)+'\\',\\''+escapeStatsHtml(c.display_name||c.login)+'\\')">VER TRANSMISIÓN</button></article>').join('');
+ host.innerHTML=refreshNote+live.map(c=>'<article class="live-channel-card"><span class="stats-status verified">● EN DIRECTO</span><strong>'+escapeStatsHtml(c.display_name||c.login)+'</strong><small>'+escapeStatsHtml(c.current_game||'Categoría no informada')+' · '+(c.current_viewers===null||c.current_viewers===undefined?'Espectadores no disponibles':statsNumber(c.current_viewers,0)+' espectadores')+'</small><button type="button" data-live-login="'+escapeStatsHtml(c.login)+'" data-live-name="'+escapeStatsHtml(c.display_name||c.login)+'">VER TRANSMISIÓN</button></article>').join('');
+ host.querySelectorAll('[data-live-login]').forEach(button=>{
+  button.addEventListener('click',()=>selectLiveChannel(button.dataset.liveLogin,button.dataset.liveName));
+ });
 }
 
 async function loadLiveDirectory(){
