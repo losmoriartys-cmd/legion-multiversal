@@ -2719,3 +2719,13 @@ Se conserva el compromiso de avanzar una mejora por etapa, con validación y rev
 - Alcance: CSS y versión de caché; sin cambios de texto, imágenes, métricas, datos ni estructura de capítulos.
 - Validación automática: el workflow «Validar código y datos del sitio» finalizó correctamente para el PR #40 (run 315) y volvió a finalizar correctamente tras la integración en main (run 316).
 - Integración: PR #40 fusionado mediante squash en fa2d909ff2b7b13861eea77bdc66dc9a42683223. La preview/producción de Cloudflare y la revisión visual renderizada en escritorio y móvil siguen sin confirmación en esta entrada; no se declara aprobación visual.
+
+
+## 2026-11-13 — Alianzas: modelos de activación y criterios de propuesta
+
+- Se amplía el capítulo 06 con tres escenarios ilustrativos: descubrimiento/lanzamiento, experiencia multicanal y continuidad de contenido/comunidad.
+- Cada escenario distingue objetivo, activación posible, entregables a definir y lectura de resultados. La redacción evita presentar posibilidades como servicios contratados o compromisos garantizados.
+- Se agrega un criterio previo de confirmación: perfiles, accesos/materiales, fechas, entregables, compensación si corresponde, divulgación publicitaria, derechos de uso y métricas disponibles deben acordarse por escrito.
+- Se refuerza la metodología: métricas por canal y plataforma, sin sumar espectadores como usuarios únicos ni mezclar vistas, impresiones o audiencias incompatibles.
+- Alcance: `index.html`, `chapter-8.css` e `INFORMES.md`. No se modifican credenciales, códigos, imágenes, estadísticas ni casos documentados. Los ejemplos son modelos orientativos, no campañas ejecutadas.
+- QA: pendiente de checks automáticos y verificación de la preview. La revisión visual de escritorio/móvil queda a cargo del responsable del proyecto.
