@@ -16,6 +16,7 @@ on:
       - 'app.js'
       - 'index.html'
       - 'styles.css'
+      - '*.css'
       - '*.json'
       - 'assets/**'
       - 'scripts/**'
