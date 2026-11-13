@@ -1,3 +1,4 @@
+const HAS_API = /\.pages\.dev$/.test(location.hostname);
 function handleThirdPartyImageError(image) {
     if (!image || !image.parentNode) return;
     const fallback = document.createElement('span');
@@ -117,6 +118,10 @@ function initContactForms() {
         form.addEventListener('submit', async event => {
             event.preventDefault();
             if (!form.reportValidity()) return;
+            if (!HAS_API) {
+                window.location.href = buildMailto();
+                return;
+            }
             if (status) status.textContent = 'Enviando…';
             if (fallback) fallback.hidden = true;
             if (submit) { submit.disabled = true; submit.dataset.originalText = submit.textContent; submit.textContent = 'ENVIANDO…'; }
@@ -669,6 +674,18 @@ function renderLiveDirectory(channels, options = {}){
 
 async function loadLiveDirectory(){
  const host=document.getElementById('live-directory');if(!host)return;
+ if(!HAS_API){
+  try{
+   const data=await fetchJSON('data.json',{timeout:10000,retries:1});
+   instituteStatsData=instituteStatsData||data;
+   const logins=Array.isArray(data.active_channels)?data.active_channels:Object.keys(data.channels||{});
+   const channels=logins.map(login=>data.channels?.[login]).filter(Boolean);
+   renderLiveDirectory(channels,{source:'data',updatedAt:data.updated_at,fallback:true});
+  }catch(fallbackError){
+   host.innerHTML=resourceRetryMarkup('No se pudo recuperar data.json. '+fallbackError.message,'live');
+  }
+  return;
+ }
  try{
   const payload=await fetchJSON('/api/live',{timeout:10000,retries:1});
   if(!Array.isArray(payload.channels))throw new Error('Respuesta Helix sin canales.');
