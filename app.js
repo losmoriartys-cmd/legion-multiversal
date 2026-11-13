@@ -1655,7 +1655,7 @@ function openHeroModal(index) {
         }
 
         function renderChapterPager(activeNumber) {
-            const panels = Array.from(document.querySelectorAll('.chapter-panel')).sort((a,b) =>
+            const panels = Array.from(document.querySelectorAll('.chapter-panel')).filter(panel => panel.dataset.pager !== 'false').sort((a,b) =>
                 Number(a.dataset.editorialNumber || 999) - Number(b.dataset.editorialNumber || 999)
             );
             const index = panels.findIndex(panel => Number(panel.id.replace('chapter-','')) === Number(activeNumber));
@@ -1695,8 +1695,8 @@ function openHeroModal(index) {
             const current=document.querySelector('.chapter-panel.active');
             if(current===panel)return;
             const transition=document.getElementById('chapter-transition');
-            const chapterName=(document.querySelector(`.nav-btn[data-chapter="${chapterNum}"]`)||{}).textContent||'NUEVO EXPEDIENTE';
-            const readableChapterName=chapterName.replace(/\\s+/g,' ').trim();
+            const chapterName=(document.querySelector(`.nav-btn[data-chapter="${chapterNum}"]`)||{}).textContent||panel.querySelector("h2")?.textContent||"NUEVO EXPEDIENTE";
+            const readableChapterName=chapterName.replace(/\s+/g,' ').trim();
             document.title=Number(chapterNum)===0?'LEGIÓN MULTIVERSAL | Diferentes mundos. Una misma Legión.':`${readableChapterName} | LEGIÓN MULTIVERSAL`;
             const announcement=document.getElementById('chapter-announcement');
             if(announcement)announcement.textContent=`Sección ${readableChapterName} abierta.`;
