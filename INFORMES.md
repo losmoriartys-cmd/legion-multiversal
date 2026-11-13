@@ -10,15 +10,15 @@
   - Se añadió `python scripts/validate_site.py` antes del commit de datos.
   - El workflow ahora tiene `issues: write` y abre una incidencia con enlace a la ejecución si falla, evitando duplicar una incidencia abierta para el mismo run.
 - **Validaciones y resultados:**
-  - Pendiente de ejecutar `scripts/validate_site.py` y `scripts/check_anchors.py` sobre el árbol completo de la rama.
-  - Smoke test HTTP de GitHub Pages, preview Cloudflare y `/api/live`: pendiente.
+  - GitHub Actions [run 43478130620](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43478130620), asociado al commit `c15edeb07de672bd63728a2829a649e9923b18e3`: **success**. `scripts/validate_site.py`: `Roster: 8 perfiles revisados`; `Referencias locales comprobadas: 37`; `Validación estática superada`. `scripts/check_anchors.py`: `Anclas locales comprobadas: 18`; `Comprobación de anclas superada`.
+  - Smoke test HTTP solicitado para GitHub Pages, Cloudflare Pages y `/api/live`: no se obtuvieron códigos HTTP. Las solicitudes de comprobación desde este entorno devolvieron error de acceso de la herramienta y el entorno de ejecución no tiene salida DNS; no se infiere un 200/404 ni se declara el endpoint probado.
   - No se modificó `main`, ningún secreto ni la configuración de hosting.
 - **Pendientes / riesgos:**
   - Confirmar que los secretos `TWITCH_CLIENT_ID` y `TWITCH_CLIENT_SECRET` estén configurados en GitHub → Settings → Secrets and variables → Actions. El workflow los lee desde `secrets.*`, no desde `vars.*`; no se inspeccionaron ni modificaron sus valores.
   - La producción continúa siendo GitHub Pages. Cloudflare Pages solo genera previews; no se configura como producción.
   - Revisar el límite/cuota de builds de Cloudflare Pages y el impacto en previews; no se cambia el plan ni la configuración.
-  - Confirmar CI y revisar logs tras el siguiente run.
-- **Commit:** pendiente de escritura y verificación.
+  - El CI de validación de la rama terminó correctamente. Falta una comprobación HTTP desde navegador/terminal con conectividad externa.
+- **Commit:** `c15edeb07de672bd63728a2829a649e9923b18e3` — [ver commit](https://github.com/losmoriartys-cmd/legion-multiversal/commit/c15edeb07de672bd63728a2829a649e9923b18e3). Rama: `auditoria-ux`.
 - **Despliegue:** no aplica; cambios confinados a `auditoria-ux`. No se publicó en producción.
 
 ---
