@@ -3129,10 +3129,11 @@ header .primary-navigation { display:flex; flex-wrap:wrap; gap:7px; align-items:
     line-height:1.65;
 }
 #chapter-2 .roster-grid {
-    grid-template-columns:repeat(auto-fill,minmax(min(100%,292px),1fr));
+    grid-template-columns:repeat(auto-fit,minmax(min(100%,292px),1fr));
     align-items:start;
     gap:clamp(20px,2.7vw,34px);
     margin-top:18px;
+    justify-items:center;
 }
 #chapter-2 .roster-collectible-card {
     width:min(100%,320px);
@@ -3726,7 +3727,8 @@ header .primary-navigation .nav-btn[aria-current="page"]{border-color:#8be3f3;co
 
 
 /* Portada ejecutiva · jerarquía de conversión y CTA comerciales */
-.executive-hero-copy{max-width:760px;padding:clamp(18px,2.4vw,30px);border:1px solid rgba(141,223,242,.2);background:linear-gradient(145deg,rgba(18,34,52,.82),rgba(7,14,25,.58));box-shadow:6px 6px 0 rgba(0,0,0,.28)}
+.executive-hero-copy{width:100%;max-width:none;padding:clamp(18px,2.4vw,30px);border:1px solid rgba(141,223,242,.2);background:linear-gradient(145deg,rgba(18,34,52,.82),rgba(7,14,25,.58));box-shadow:6px 6px 0 rgba(0,0,0,.28)}
+.executive-hero h2{max-width:100%;width:100%;overflow-wrap:normal;text-wrap:balance}
 .executive-hero-art{transform:rotate(-.6deg);border-color:rgba(141,223,242,.55)}
 .executive-hero-art img{aspect-ratio:1.18/1;max-height:570px;object-position:center}
 .executive-proofline{display:flex;flex-wrap:wrap;gap:7px;margin:18px 0 0}
@@ -3989,3 +3991,32 @@ header .primary-navigation .nav-btn[aria-current="page"]{border-color:#8be3f3;co
     .origin-editorial-cta { align-items: stretch; }
     .origin-editorial-cta .chapter-cta { width: 100%; }
 }
+
+
+/* CAPÍTULO 08.5 · archivo documental de campañas y accesos */
+.campaign-archive-chapter{width:100%;}
+.campaign-archive-intro{max-width:1000px;margin:0 0 24px;color:#c7d5e5;line-height:1.75;font-size:clamp(.98rem,1.2vw,1.08rem)}
+.campaign-archive-chapter .arsenal-platform-hub{margin-top:18px}
+.alliance-code-meta{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:12px;color:#dce8f2;font-size:.82rem}
+.alliance-code-meta span{display:flex;flex-wrap:wrap;gap:7px;align-items:baseline}
+.alliance-code-meta b{color:#86dff0;font-size:.65rem;letter-spacing:.1em}
+.alliance-code-card-confirmed{border-color:rgba(91,210,160,.55)}
+@media(max-width:640px){.executive-hero-copy{width:100%;max-width:none}.alliance-code-meta{display:grid;gap:8px}}
+
+ 
+/* COLABORACIONES · bitácora de sesiones verificadas */
+.collab-log-section{margin:34px 0;padding:clamp(18px,2.5vw,28px);border:1px solid rgba(120,185,220,.28);background:linear-gradient(145deg,rgba(13,25,40,.9),rgba(8,14,25,.82));}
+.collab-log-card{padding:clamp(16px,2.2vw,24px);border:1px solid rgba(134,223,240,.25);background:rgba(5,11,20,.7)}
+.collab-log-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.collab-log-card-head h5{margin:7px 0;color:#f4f7fb;font:clamp(1.8rem,3vw,2.6rem)/1 'Bangers',cursive;letter-spacing:.035em}
+.collab-log-card-head p{max-width:720px;color:#c4d2e2;line-height:1.6}
+.collab-log-status{padding:7px 10px;border:1px solid rgba(255,211,107,.42);color:#ffdf9b;font:700 .62rem 'Roboto Condensed',sans-serif;letter-spacing:.1em}
+.collab-log-participants{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:18px 0}
+.collab-log-participants a{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:13px 15px;border:1px solid rgba(134,223,240,.24);background:#101d2c;color:#f5f8fb;text-decoration:none}
+.collab-log-participants a span{color:#86dff0;font-size:.7rem;font-weight:800}
+.collab-log-metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.collab-log-metrics>div{display:flex;flex-direction:column;gap:5px;padding:16px;background:linear-gradient(145deg,#17283d,#0a1320);border-left:3px solid #86dff0}
+.collab-log-metrics span{color:#9bb0c5;font-size:.66rem;font-weight:900;letter-spacing:.1em}
+.collab-log-metrics strong{color:#fff;font:2.5rem/1 'Bangers',cursive}
+.collab-log-metrics small{color:#c2d0df;font-size:.76rem}
+@media(max-width:620px){.collab-log-section{padding:14px 10px}.collab-log-participants,.collab-log-metrics{grid-template-columns:1fr}.collab-log-participants a{align-items:flex-start;flex-direction:column}}
