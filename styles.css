@@ -4329,3 +4329,101 @@ main .chapter-panel :where(.chapter-cta, .executive-button, .comic-submit-btn,
         transition: none !important;
     }
 }
+
+
+/* Directorio multiplataforma del capítulo 04 · métricas separadas por fuente. */
+.stats-platform-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+    gap: 14px;
+    margin: 14px 0 28px;
+}
+.stats-platform-card {
+    min-width: 0;
+    padding: 18px;
+    border: 1px solid rgba(134, 223, 240, .28);
+    background: linear-gradient(150deg, #17263b, #0a111d 78%);
+    box-shadow: 0 9px 22px rgba(0, 0, 0, .18);
+}
+.stats-platform-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.stats-platform-card-top > span:first-child {
+    color: #86dff0;
+    font-size: .66rem;
+    font-weight: 900;
+    letter-spacing: .13em;
+}
+.stats-platform-card h5 {
+    margin: 14px 0 2px;
+    color: #fff;
+    font: 1.65rem/1.1 'Bangers', cursive;
+}
+.stats-platform-handle {
+    color: #aebed0;
+    font-size: .76rem;
+    overflow-wrap: anywhere;
+}
+.stats-platform-metrics {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 9px;
+    margin: 16px 0;
+    padding: 14px 0;
+    border-top: 1px solid rgba(255,255,255,.1);
+    border-bottom: 1px solid rgba(255,255,255,.1);
+}
+.stats-platform-metrics > div { min-width: 0; }
+.stats-platform-metrics strong {
+    display: block;
+    color: #86dff0;
+    font: clamp(1.35rem, 2.8vw, 2rem)/1 'Bangers', cursive;
+    overflow-wrap: anywhere;
+}
+.stats-platform-metrics span {
+    display: block;
+    margin-top: 6px;
+    color: #aebed0;
+    font-size: .58rem;
+    font-weight: 900;
+    letter-spacing: .06em;
+    line-height: 1.35;
+}
+.stats-platform-recent { display: grid; gap: 7px; margin: 12px 0; }
+.stats-platform-recent > b {
+    color: #f3e5bd;
+    font-size: .64rem;
+    letter-spacing: .1em;
+}
+.stats-platform-recent a {
+    display: grid;
+    gap: 4px;
+    padding: 9px 10px;
+    border-left: 2px solid rgba(134,223,240,.45);
+    background: rgba(255,255,255,.035);
+    color: #e7edf5;
+    text-decoration: none;
+}
+.stats-platform-recent a:hover { background: rgba(134,223,240,.09); }
+.stats-platform-recent a span { font-size: .78rem; line-height: 1.4; }
+.stats-platform-recent a small { color: #8fa0b7; font-size: .66rem; }
+.stats-platform-note { margin: 12px 0 0; color: #9eafc3; font-size: .7rem; line-height: 1.5; }
+.stats-platform-open {
+    display: inline-flex;
+    margin-top: 12px;
+    color: #86dff0;
+    font-size: .7rem;
+    font-weight: 900;
+    text-decoration: underline;
+    text-underline-offset: .2em;
+}
+.stats-platform-heading { margin-top: 28px; }
+@media (max-width: 600px) {
+    .stats-platform-grid { grid-template-columns: 1fr; }
+    .stats-platform-card { padding: 14px; }
+    .stats-platform-metrics { gap: 6px; }
+}
