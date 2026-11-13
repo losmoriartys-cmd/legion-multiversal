@@ -13,19 +13,19 @@
     "daved0608"
   ],
   "collection": {
-    "started_at": "2026-11-13T23:02:11Z",
+    "started_at": "2026-11-13T23:40:15Z",
     "expected_channels": 7,
     "resolved_channels": 7,
-    "sampled_channels": [],
-    "skipped_channels": [
-      "losmoriartys",
-      "ladymoriarty01",
+    "sampled_channels": [
       "ther0d3r1k",
       "habitos_atomicos",
       "ardipii",
       "akumazoldyck",
-      "daved0608"
+      "daved0608",
+      "losmoriartys",
+      "ladymoriarty01"
     ],
+    "skipped_channels": [],
     "complete": true
   },
   "archived_channels": [
@@ -33,7 +33,7 @@
     "elgabii090"
   ],
   "channel_registry_note": "Los canales archivados se conservan para consulta histórica y no se incluyen en los indicadores del roster activo.",
-  "updated_at": "2026-11-13T23:02:11Z",
+  "updated_at": "2026-11-13T23:40:15Z",
   "channels": {
     "ladymoriarty01": {
       "login": "ladymoriarty01",
@@ -43,17 +43,17 @@
       "twitch_url": "https://twitch.tv/ladymoriarty01",
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
-      "live": false,
-      "current_viewers": null,
-      "current_game": null,
-      "current_title": null,
-      "stream_started_at": null,
-      "updated_at": "2026-11-13T23:02:11Z",
+      "live": true,
+      "current_viewers": 5,
+      "current_game": "Hogwarts Legacy",
+      "current_title": "[Improvisado] Directo de charla capaz y fornite. Sin lady hoy esta enfermucha :(   Vengan a darle amor por fas <3 <3",
+      "stream_started_at": "2026-11-13T23:08:47Z",
+      "updated_at": "2026-11-13T23:40:15Z",
       "window": {
-        "samples_total": 250,
-        "live_samples": 7,
-        "streams_observed": 3,
-        "average_viewers_sampled": 6.4,
+        "samples_total": 251,
+        "live_samples": 8,
+        "streams_observed": 4,
+        "average_viewers_sampled": 6.2,
         "peak_viewers_sampled": 15,
         "observed_live_hours": 3.07,
         "estimated_hours_watched": 19.29,
@@ -78,6 +78,13 @@
             "streams_observed": 1,
             "average_viewers_sampled": 9.0,
             "peak_viewers_sampled": 15
+          },
+          {
+            "name": "Hogwarts Legacy",
+            "live_samples": 1,
+            "streams_observed": 1,
+            "average_viewers_sampled": 5.0,
+            "peak_viewers_sampled": 5
           }
         ],
         "daily_activity": [
@@ -108,6 +115,13 @@
             "streams_observed": 1,
             "average_viewers_sampled": 9.0,
             "peak_viewers_sampled": 15
+          },
+          {
+            "date": "2026-11-13",
+            "live_samples": 1,
+            "streams_observed": 1,
+            "average_viewers_sampled": 5.0,
+            "peak_viewers_sampled": 5
           }
         ],
         "method": "Muestreo propio con cadencia observada cercana a 55 minutos, variable por la programación de GitHub Actions; horas estimadas solo entre muestras consecutivas del mismo directo cuando el intervalo no supera 110 minutos. Categorías y evolución diaria se calculan sobre las muestras observadas."
@@ -2362,6 +2376,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-13T23:40:15Z",
+          "is_live": true,
+          "viewer_count": 5,
+          "game_name": "Hogwarts Legacy",
+          "title": "[Improvisado] Directo de charla capaz y fornite. Sin lady hoy esta enfermucha :(   Vengan a darle amor por fas <3 <3",
+          "stream_id": "319590153204",
+          "started_at": "2026-11-13T23:08:47Z"
         }
       ]
     },
@@ -2373,17 +2396,17 @@
       "twitch_url": "https://twitch.tv/ther0d3r1k",
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
-      "live": false,
-      "current_viewers": null,
-      "current_game": null,
-      "current_title": null,
-      "stream_started_at": null,
-      "updated_at": "2026-11-13T23:02:11Z",
+      "live": true,
+      "current_viewers": 43,
+      "current_game": "Apex Legends",
+      "current_title": "🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
+      "stream_started_at": "2026-11-13T23:02:00Z",
+      "updated_at": "2026-11-13T23:40:15Z",
       "window": {
-        "samples_total": 250,
-        "live_samples": 27,
-        "streams_observed": 6,
-        "average_viewers_sampled": 23.5,
+        "samples_total": 251,
+        "live_samples": 28,
+        "streams_observed": 7,
+        "average_viewers_sampled": 24.2,
         "peak_viewers_sampled": 46,
         "observed_live_hours": 17.27,
         "estimated_hours_watched": 402.66,
@@ -2396,18 +2419,18 @@
             "peak_viewers_sampled": 46
           },
           {
+            "name": "Apex Legends",
+            "live_samples": 6,
+            "streams_observed": 5,
+            "average_viewers_sampled": 31.3,
+            "peak_viewers_sampled": 43
+          },
+          {
             "name": "Just Chatting",
             "live_samples": 5,
             "streams_observed": 4,
             "average_viewers_sampled": 13.6,
             "peak_viewers_sampled": 30
-          },
-          {
-            "name": "Apex Legends",
-            "live_samples": 5,
-            "streams_observed": 4,
-            "average_viewers_sampled": 29.0,
-            "peak_viewers_sampled": 43
           },
           {
             "name": "Counter-Strike",
@@ -2480,6 +2503,13 @@
             "streams_observed": 1,
             "average_viewers_sampled": 30.5,
             "peak_viewers_sampled": 45
+          },
+          {
+            "date": "2026-11-13",
+            "live_samples": 1,
+            "streams_observed": 1,
+            "average_viewers_sampled": 43.0,
+            "peak_viewers_sampled": 43
           }
         ],
         "method": "Muestreo propio con cadencia observada cercana a 55 minutos, variable por la programación de GitHub Actions; horas estimadas solo entre muestras consecutivas del mismo directo cuando el intervalo no supera 110 minutos. Categorías y evolución diaria se calculan sobre las muestras observadas."
@@ -4734,6 +4764,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-13T23:40:15Z",
+          "is_live": true,
+          "viewer_count": 43,
+          "game_name": "Apex Legends",
+          "title": "🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
+          "stream_id": "319590058484",
+          "started_at": "2026-11-13T23:02:00Z"
         }
       ]
     },
@@ -5396,9 +5435,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-13T23:02:11Z",
+      "updated_at": "2026-11-13T23:40:15Z",
       "window": {
-        "samples_total": 250,
+        "samples_total": 251,
         "live_samples": 6,
         "streams_observed": 3,
         "average_viewers_sampled": 7.2,
@@ -7689,6 +7728,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-13T23:40:15Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -7705,9 +7753,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-13T23:02:11Z",
+      "updated_at": "2026-11-13T23:40:15Z",
       "window": {
-        "samples_total": 250,
+        "samples_total": 251,
         "live_samples": 17,
         "streams_observed": 7,
         "average_viewers_sampled": 7.1,
@@ -10054,6 +10102,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-13T23:40:15Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -10070,9 +10127,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-13T23:02:11Z",
+      "updated_at": "2026-11-13T23:40:15Z",
       "window": {
-        "samples_total": 250,
+        "samples_total": 251,
         "live_samples": 12,
         "streams_observed": 7,
         "average_viewers_sampled": 1.9,
@@ -12405,6 +12462,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-13T23:40:15Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -13037,9 +13103,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-13T23:02:11Z",
+      "updated_at": "2026-11-13T23:40:15Z",
       "window": {
-        "samples_total": 250,
+        "samples_total": 251,
         "live_samples": 50,
         "streams_observed": 11,
         "average_viewers_sampled": 6.1,
@@ -15393,6 +15459,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-13T23:40:15Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -15409,9 +15484,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-13T23:02:11Z",
+      "updated_at": "2026-11-13T23:40:15Z",
       "window": {
-        "samples_total": 250,
+        "samples_total": 251,
         "live_samples": 10,
         "streams_observed": 5,
         "average_viewers_sampled": 17.7,
@@ -17745,6 +17820,15 @@
         },
         {
           "sampled_at": "2026-11-13T22:19:08Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-13T23:40:15Z",
           "is_live": false,
           "viewer_count": null,
           "game_name": null,
