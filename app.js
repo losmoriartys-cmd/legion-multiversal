@@ -1,3 +1,12 @@
+function handleThirdPartyImageError(image) {
+    if (!image || !image.parentNode) return;
+    const fallback = document.createElement('span');
+    fallback.className = 'image-fallback';
+    fallback.setAttribute('role', 'img');
+    fallback.setAttribute('aria-label', image.alt || 'Imagen no disponible');
+    fallback.textContent = 'Imagen no disponible';
+    image.replaceWith(fallback);
+}
 
 function activateChapterHash() {
     const raw = decodeURIComponent((location.hash || '').slice(1));

@@ -4452,3 +4452,5 @@ main .chapter-panel :where(.chapter-cta, .executive-button, .comic-submit-btn,
 .contact-form-status{min-height:1.4em;color:#b9dceb;font-size:.9rem}
 .contact-form-fallback[hidden]{display:none}
 .contact-copy-email{margin:8px 0 0;min-height:42px;padding:9px 14px;border:1px solid rgba(114,217,243,.5);border-radius:5px;background:#102338;color:#e8f8ff;font-weight:800;cursor:pointer}
+
+.image-fallback{display:grid;place-items:center;min-height:90px;padding:12px;border:1px dashed rgba(130,160,185,.45);background:rgba(10,20,32,.82);color:#a9bfd1;font:700 .72rem 'Roboto Condensed',sans-serif;text-align:center;letter-spacing:.06em}
