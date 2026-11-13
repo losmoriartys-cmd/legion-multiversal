@@ -340,7 +340,7 @@
 <section id="chapter-10" data-semantic-anchor="en-vivo" class="chapter-panel comic-page live-chapter" data-editorial-number="9"><span id="en-vivo" class="semantic-chapter-anchor" aria-hidden="true"></span>
  <div class="chapter-tag">CAPÍTULO 09 · EN VIVO</div>
  <h2 class="comic-title">LEGIÓN MULTIVERSAL · EN VIVO</h2>
- <div class="premium-panel live-intro"><div class="premium-kicker"><span class="live-pulse"></span> CENTRAL DE TRANSMISIONES</div><h3>Consultá quién está en directo</h3><p>El directorio muestra el último estado registrado de cada canal. Si la captura está demorada, lo indica antes de ofrecer una transmisión. Cuando haya integrantes en directo, vas a poder elegir un canal y verlo desde esta página.</p></div>
+ <div class="premium-panel live-intro"><div class="premium-kicker"><span class="live-pulse"></span> CENTRAL DE TRANSMISIONES</div><h3>Consultá quién está en directo</h3><p>El directorio muestra la última lectura disponible. En producción, el archivo de respaldo se vuelve a consultar cada 2 minutos; en entornos con API, Twitch Helix se consulta desde el servidor y la respuesta puede mantenerse en caché durante 60 segundos. El colector histórico registra actividad con una cadencia objetivo de 55 minutos. Ninguna de estas frecuencias equivale a una conexión en tiempo real.</p></div>
  <div id="live-directory" class="live-directory"><div class="resource-skeleton-list" aria-label="Consultando canales"><div class="resource-skeleton-card"></div><div class="resource-skeleton-card"></div></div></div>
  <div id="live-player-wrap" class="live-player-wrap" hidden><div class="live-player-heading"><h3 id="live-player-title">TRANSMISIÓN SELECCIONADA</h3><a id="live-open-channel" href="https://twitch.tv/losmoriartys" target="_blank" rel="noopener noreferrer">Abrir canal en Twitch ↗</a></div><div id="live-player" class="live-player"></div></div>
  
@@ -1036,7 +1036,7 @@
         </div>
     </div>
 
-    <script src="./app.js?v=20261113-oratoris-views-3"></script>
+    <script src="./app.js?v=20261113-ux-time-live-1"></script>
     <script src="./navigation-fix.js" defer></script>
 </body>
 </html>
