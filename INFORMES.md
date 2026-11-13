@@ -2835,3 +2835,12 @@ Se conserva el compromiso de avanzar una mejora por etapa, con validación y rev
 - **Validación automática:** el workflow «Validar código y datos del sitio» finalizó correctamente en el commit 5f72af2ceef5be3fcea9be9195c82dede064e396 (run [43385958912](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43385958912)): sintaxis JavaScript y Pages Functions, JSON, rutas/recursos, anclas y auditoría estática de accesibilidad, todos aprobados. Cloudflare Pages confirmó «Deploy successful» para la preview [b399c4fd](https://b399c4fd.legion-multiversal.pages.dev); preview de rama: https://auditoria-ux.legion-multiversal.pages.dev.
 - **Pendiente externo:** /api/live en la preview devolvió HTTP 503. El código reserva ese estado a la ausencia de TWITCH_CLIENT_ID o TWITCH_CLIENT_SECRET en el entorno; no se modificaron secretos ni variables. Se conserva el fallback a data.json.
 - **QA visual:** la comprobación renderizada de escritorio/móvil continúa pendiente. Los checks estáticos y el despliegue de preview no prueban composición visual, navegación táctil ni funcionamiento real del reproductor. No se declara aprobación ni se integra el PR hasta completar esa revisión.
+
+
+## 2026-11-13 — ORATORIS: alinear vistas del archivo con YouTube Data API
+
+- **Hallazgo:** el archivo editorial de seis videos mostraba las vistas transcritas al incorporarse el listado. Para «Dopamina, motivación y adicción: Qué es y cómo funciona» conservaba 47, mientras que YouTube Data API v3 registra 48 en la captura del 13/11/2026. Los otros cinco títulos del listado coinciden con sus recuentos consultados por la API.
+- **Corrección de presentación:** el render del expediente coteja por título cada producción editorial con los videos recientes que devuelve la API. Si hay coincidencia verificable, usa el recuento y enlace oficiales de esa captura; si no, conserva el número aportado, pero lo rotula como referencia compartida sin fecha. La tabla explica la procedencia de cada cifra.
+- **Integridad:** no se modifica creator-records.json ni se reemplazan los valores históricos aportados por el equipo. Las métricas acumuladas del canal siguen procediendo de platform-stats.json (captura 13/11/2026); suscriptores, vistas totales y videos publicados no se mezclan con Twitch.
+- **Archivos:** app.js, index.html (versión de caché) e INFORMES.md. No se cambian cuentas, enlaces del perfil, roles, historia ni datos fuente.
+- **Validación:** pendiente de CI y despliegue de preview sobre este commit. La revisión visual de escritorio/móvil sigue pendiente.
