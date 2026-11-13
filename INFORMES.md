@@ -2569,3 +2569,17 @@ Se conserva el compromiso de avanzar una mejora por etapa, con validación y rev
 ### Ajuste editorial · Orígenes #0001
 - Se reemplazó la imagen de portada asociada al epígrafe “ORÍGENES #0001 · Una nueva identidad para una historia que continúa.” por `image_20261107_021355.jpg`, ya presente en el repositorio.
 - El cambio se limita a esa portada; no altera la imagen grupal del presente ni la cronología histórica.
+
+
+## Auditoría editorial y estructural · 12/11/2026
+- Portada ejecutiva: se amplía el bloque del lema para alinear su ancho con el resto del contenido y evitar cortes visuales.
+- Origen: se conserva `image_20261107_021355.jpg` como portada de ORÍGENES #0001 y se añade versión de caché para que el navegador no siga mostrando el recurso anterior.
+- Roster: se cambia `auto-fill` por `auto-fit` en la grilla de expedientes; así no se reservan columnas vacías a la derecha.
+- Estadísticas: el colector `data.json` registra siete canales Twitch activos y captura completa (7/7). El roster tiene ocho expedientes, pero Oratoris está registrado como creador de YouTube; no se cuenta falsamente como canal Twitch. Se aclara la cobertura en el panel.
+- Alianzas: se actualiza el código Epic compartido a estado confirmado y se incorpora el ID de creador entregado por la administración. Se mantiene separado el código individual confirmado de TheR0D3R1K.
+- Colaboraciones/Arsenal: el archivo existente de Lurkit y Keymailer se mueve íntegro a un capítulo documental nuevo 08.5, separado de los diez juegos cooperativos del Arsenal.
+- En Vivo: se retira la leyenda técnica solicitada.
+- Reclutamiento: se corrige el anidamiento HTML que dejaba el capítulo 10 dentro del panel ocultable de Arsenal. El contenido de formularios y recorridos se conserva. También se agrega la clase visual de página institucional.
+- Valores y Comunidad: se conservan sin cambios estructurales, dado que fueron aprobados por la administración.
+- Pendiente para el expediente BarFender 002: incorporar fecha, VOD/enlaces de los dos canales y métricas de la segunda sesión una vez recibidos. No se inventan estadísticas ni URLs.
+- Validación visual final de escritorio/móvil y verificación del deployment quedan pendientes de preview renderizada.
