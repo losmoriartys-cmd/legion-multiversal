@@ -2768,4 +2768,4 @@ Se conserva el compromiso de avanzar una mejora por etapa, con validación y rev
 - La auditoría estática de `index.html`, `bitacora-preview.html` y `roster-02-moriartys.html` no detectó imágenes sin texto alternativo, iframes sin título, IDs duplicados, controles de formulario sin etiqueta ni elementos no semánticos con `onclick`.
 - Se detectó un enlace dinámico del modal de perfiles (`#modal-twitch-btn`) con `target="_blank"` sin `rel`. Se agrega `rel="noopener noreferrer"` para aislar la nueva pestaña y evitar acceso a `window.opener`.
 - Alcance: `index.html`, `INFORMES.md`. Sin cambios de contenido, destinos ni comportamiento del enlace.
-- QA: pendiente de validación automática; no sustituye una auditoría de accesibilidad renderizada con teclado y lector de pantalla.
+- Integración: PR #45 fusionado mediante squash en `1eb236fdef67e5582488c2a3787401128060ba4e`. La validación automática post-merge finalizó correctamente (run 43378868338) y el build/deploy de GitHub Pages también (run 43378867510). La revisión de teclado y lector de pantalla sigue pendiente; no se declara auditoría accesible completa.
