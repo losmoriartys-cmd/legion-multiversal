@@ -2717,4 +2717,5 @@ Se conserva el compromiso de avanzar una mejora por etapa, con validación y rev
 - Enlaces e interacción: los enlaces de contenido reciben subrayado más legible y feedback hover; enlaces, botones y campos obtienen foco visible consistente. Las transiciones respetan prefers-reduced-motion y no modifican destinos ni lógica de navegación.
 - Responsive y caché: se ajusta el ritmo de secciones en pantallas pequeñas y se actualiza la versión de styles.css en index.html.
 - Alcance: CSS y versión de caché; sin cambios de texto, imágenes, métricas, datos ni estructura de capítulos.
-- QA pendiente: ejecutar validaciones automáticas y revisar la preview renderizada en escritorio y móvil. La inspección estática del CSS no equivale a aprobación visual.
+- Validación automática: el workflow «Validar código y datos del sitio» finalizó correctamente para el PR #40 (run 315) y volvió a finalizar correctamente tras la integración en main (run 316).
+- Integración: PR #40 fusionado mediante squash en fa2d909ff2b7b13861eea77bdc66dc9a42683223. La preview/producción de Cloudflare y la revisión visual renderizada en escritorio y móvil siguen sin confirmación en esta entrada; no se declara aprobación visual.
