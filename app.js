@@ -1944,5 +1944,7 @@ function openHeroModal(index) {
         ]);
         if (initialChapter) recordLegionProgress('chapter', String(initialChapter.id.replace('chapter-','')));
         window.setInterval(() => { loadInstituteStats(); }, 15 * 60 * 1000);
+        // Actualización del estado En Vivo cada 2 minutos; Helix aplica caché de 60 segundos.
+        window.setInterval(() => { loadLiveDirectory(); }, 120 * 1000);
         window.setInterval(() => { loadPlatformStatsData(); }, 15 * 60 * 1000);
         };

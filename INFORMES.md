@@ -2801,3 +2801,13 @@ Se conserva el compromiso de avanzar una mejora por etapa, con validación y rev
 - Se detectó un enlace dinámico del modal de perfiles (`#modal-twitch-btn`) con `target="_blank"` sin `rel`. Se agrega `rel="noopener noreferrer"` para aislar la nueva pestaña y evitar acceso a `window.opener`.
 - Alcance: `index.html`, `INFORMES.md`. Sin cambios de contenido, destinos ni comportamiento del enlace.
 - Integración: PR #45 fusionado mediante squash en `1eb236fdef67e5582488c2a3787401128060ba4e`. La validación automática post-merge finalizó correctamente (run 43378868338) y el build/deploy de GitHub Pages también (run 43378867510). La revisión de teclado y lector de pantalla sigue pendiente; no se declara auditoría accesible completa.
+
+
+## 2026-11-13 — Ajustes de robustez: Helix, contacto y caché
+
+- **Alcance:** `app.js`, `functions/api/contact.js`, `functions/api/live.js`, `_headers` e `INFORMES.md`.
+- **En Vivo:** se agrega actualización del directorio cada 120 segundos en el cliente; el endpoint mantiene caché de 60 segundos. Se limitan a 8 segundos las solicitudes de OAuth, roster y Twitch Helix para evitar esperas indefinidas.
+- **Contacto:** se corrige la expresión regular de correo para validar espacios y punto de dominio como corresponde. Se limita el cuerpo de la solicitud a 20.000 caracteres antes de parsear JSON; se conserva honeypot, allowlist de campos, límite individual y fallback mailto.
+- **Caché de imágenes:** se elimina `immutable` para imágenes con nombres no versionados. Se conserva caché de 24 horas con revalidación; JSON y API mantienen sus políticas separadas.
+- **Validaciones:** pendientes de ejecución automática sobre este commit. No se declara todavía CI exitoso, despliegue ni QA visual. La revisión manual en escritorio/móvil sigue pendiente.
+- **Datos y recursos:** sin cambios en roster, estadísticas, imágenes, textos editoriales ni orden de capítulos.

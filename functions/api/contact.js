@@ -1,10 +1,10 @@
-const EMAIL_RE = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MAX_FIELD_LENGTH = 4000;
 const ALLOWED_FIELDS = new Set(["Nombre o alias","País y zona horaria","Canal principal","Otras redes","Contenido habitual","Disponibilidad","Motivación","Ideas de colaboración","Empresa o marca","Persona de contacto","Correo de contacto","Juego o proyecto","Objetivo","Fechas","Plataformas y entregables","Presupuesto o modalidad","Tipo de propuesta","Fechas estimadas","Presupuesto orientativo","Descripción y objetivos","subject","website"]);
 function json(body,status=200){return new Response(JSON.stringify(body),{status,headers:{"content-type":"application/json; charset=utf-8","cache-control":"no-store"}});}
 export async function onRequest({request,env}){
  if(request.method!=="POST")return json({error:"Método no permitido."},405);
- let payload;try{payload=await request.json();}catch{return json({error:"Solicitud JSON inválida."},400);}
+ let payload;try{const raw=await request.text();if(raw.length>20000)return json({error:"La solicitud supera el tamaño permitido."},413);payload=JSON.parse(raw);}catch{return json({error:"Solicitud JSON inválida."},400);}
  if(!payload||typeof payload!=="object"||Array.isArray(payload))return json({error:"Formulario inválido."},400);
  if(typeof payload.website==="string"&&payload.website.trim())return json({ok:true});
  const entries=Object.entries(payload).filter(([key])=>key!=="website");
