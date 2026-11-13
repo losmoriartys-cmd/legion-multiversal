@@ -56,5 +56,7 @@ jobs:
         run: python scripts/validate_site.py
       - name: Comprobar anclas semánticas y enlaces internos
         run: python scripts/check_anchors.py
+      - name: Validar campos de formularios contra Pages Function
+        run: python scripts/check_form_fields.py
       - name: Auditar accesibilidad estática
         run: python scripts/audit_accessibility.py
