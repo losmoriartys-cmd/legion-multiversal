@@ -20,11 +20,11 @@ function activateChapterHash() {
     const semantic = [...document.querySelectorAll('[data-semantic-anchor]')]
         .find(element => element.getAttribute('data-semantic-anchor') === raw);
     if (semantic) {
-        const match = semantic.id.match(/^chapter-(\\d+)$/);
+        const match = semantic.id.match(/^chapter-(\d+)$/);
         if (match) switchChapter(Number(match[1]));
         return;
     }
-    const alias = raw.match(/^chapter-(\\d+)$/);
+    const alias = raw.match(/^chapter-(\d+)$/);
     if (alias && document.getElementById(raw)) switchChapter(Number(alias[1]));
 }
 window.addEventListener('hashchange', activateChapterHash);
