@@ -2822,3 +2822,14 @@ Se conserva el compromiso de avanzar una mejora por etapa, con validación y rev
 - **Rendimiento:** la auditoría estática detectó 22 imágenes HTML sin atributos intrínsecos `width`/`height` sobre 40 imágenes de las páginas publicadas. No se asignan medidas ficticias; se agrega una advertencia automatizada para resolverlo con dimensiones reales y medición CLS.
 - **Validación:** pendiente de CI sobre este commit. No se declara prueba de teclado/lector de pantalla, medición Lighthouse, CLS real ni revisión visual.
 - **Alcance:** `app.js`, `styles.css`, `.github/workflows/validar-sitio.yml`, `scripts/audit_accessibility.py` e `INFORMES.md`. Sin cambios de roster, cuentas, imágenes, métricas, orden de capítulos ni `main`.
+
+
+## 2026-11-13 — Corrección de vigencia: En Vivo y métricas por canal
+
+- **Base:** PR #46, rama `auditoria-ux`; no se altera `main`. Se revisaron la ruta Helix directa, el respaldo `data.json`, el directorio del capítulo 09, las tarjetas/tablas de Estadísticas y los expedientes individuales.
+- **Defecto localizado:** el directorio calculaba la vigencia pero seguía renderizando la lista completa de canales con `live=true` aun cuando la captura estuviera vencida. Además, el cálculo con `Math.max(freshnessMinutes, 120)` anulaba el umbral breve de la consulta Helix. En Estadísticas y algunas fichas seguían mostrándose espectadores/categoría actuales con una captura demorada.
+- **Corrección:** el directorio solo habilita reproductor y etiqueta «EN DIRECTO» cuando la lectura pasa el umbral correspondiente; con captura demorada conserva el último estado como referencia y ofrece acceso externo al canal. La consulta Helix directa usa una ventana de 3 minutos, compatible con el caché de 60 segundos del endpoint; el respaldo `data.json` mantiene el criterio histórico basado en la cadencia del colector. En fichas, tarjetas y tablas, los espectadores/categoría actuales quedan ocultos al vencer la captura y el estado pasa a «ÚLTIMA LECTURA»/«CAPTURA DEMORADA».
+- **Metodología:** se unifica el fallback del intervalo Twitch en 55 minutos, acorde con `data.json` y `update_stats.py`. No se alteran snapshots, promedios históricos, roles, enlaces ni datos de los creadores.
+- **Entorno:** la preview Cloudflare de `auditoria-ux` devuelve HTTP 503 en `/api/live`. Según `functions/api/live.js`, ese estado corresponde a que falta `TWITCH_CLIENT_ID` o `TWITCH_CLIENT_SECRET` en las variables del entorno; es una configuración externa que no se modifica desde el repositorio. El cliente conserva el respaldo a `data.json`.
+- **Archivos:** `app.js`, `index.html` (versión de caché) e `INFORMES.md`.
+- **Validación:** pendiente de CI sobre el commit final de la rama. La comprobación visual renderizada de escritorio/móvil continúa pendiente; no se declara aprobación ni se integra el PR hasta completar esa revisión.
