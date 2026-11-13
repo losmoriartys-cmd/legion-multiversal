@@ -60,36 +60,6 @@ function renderStatsBars(title,items,labelFn,valueFn,suffix,maxItems=10){
  });
  return out+'</div>';
 }
-function renderLosMoriartysSullyPilot(channel){
- const games=[
-  {name:'Enshrouded',av:26,air:'4 h',fg:5,fph:'1',hw:null},
-  {name:'Minecraft',av:34,air:'3 h',fg:7,fph:'2',hw:null},
-  {name:'Fortnite',av:27,air:'4 h',fg:5,fph:'1',hw:'103',share:'22,7%'},
-  {name:'Supercar Collection Together',av:31,air:'2 h',fg:null,fph:null,hw:null},
-  {name:'Marvel Rivals',av:33,air:'2 h',fg:3,fph:'2',hw:null}
- ];
- const lifetime=[['Seguidores','1.145','Total actual del canal compartido · 05 nov 2026'],['Pico histórico','101','07 oct 2026'],['Días activos','335','Lifetime · dato aportado'],['Airtime acumulado','348 h','Lifetime · dato aportado'],['Bans','0','Lifetime · dato aportado']];
- const periodMetrics=[['HORAS VISTAS','860 h','últimos 30 días'],['PROMEDIO DE ESPECTADORES','26','últimos 30 días'],['PICO DE ESPECTADORES','101','7 oct 2026 · dentro del período'],['NUEVOS SEGUIDORES','+49','últimos 30 días'],['HORAS EMITIDAS','32 h 15 min','últimos 30 días'],['VISTAS EN DIRECTO','102','últimos 30 días']];
- let out='<section class="stats-section pilot-stats"><div class="stats-source-head"><div><strong>ANALÍTICA DEL CANAL · LOS MORIARTYS</strong><br><small>Canal compartido Los Moriartys · métricas de Demi y Ari, no estadísticas personales de MORIARTY</small></div><span class="stats-status partial">DATOS APORTADOS</span></div>';
- out+='<p class="stats-section-intro">La ficha individual identifica a MORIARTY como creador, pero las cifras de audiencia pertenecen al canal compartido Los Moriartys. Rendimiento de los últimos 30 días consultado el 5 nov 2026 en <a class="stats-link" href="https://streamscharts.com/channels/losmoriartys" target="_blank" rel="noopener">Streams Charts ↗</a>. Los datos Lifetime marcados como aportados proceden del panel compartido y no se atribuyen individualmente.</p>';
- out+='<section class="pilot-subsection"><div class="pilot-subhead"><h5>01 · JUEGOS POPULARES</h5><small>Selección aportada · período exacto no especificado</small></div>';
- out+='<div class="pilot-feature-strip"><strong>FORTNITE</strong><span><b>103 h</b> vistas</span><span><b>22,7%</b> del total</span></div>';
- out+='<div class="pilot-game-charts"><article class="pilot-chart-card"><div class="pilot-chart-heading"><strong>AUDIENCIA MEDIA</strong><small>Espectadores promedio por juego</small></div><div class="pilot-bar-list">';
- games.slice().sort((a,b)=>b.av-a.av).forEach(g=>out+='<div class="pilot-bar-row"><span class="pilot-bar-label">'+g.name+'</span><div class="pilot-bar-track"><i style="width:'+Math.round(g.av/34*100)+'%"></i></div><b>'+g.av+'</b></div>');
- out+='</div></article><article class="pilot-chart-card"><div class="pilot-chart-heading"><strong>RITMO DE SEGUIDORES</strong><small>Seguidores ganados por hora emitida · dato aportado</small></div><div class="pilot-bar-list">';
- games.filter(g=>g.fph!==null).slice().sort((a,b)=>Number(b.fph)-Number(a.fph)||b.fg-a.fg).forEach(g=>out+='<div class="pilot-bar-row"><span class="pilot-bar-label">'+g.name+'</span><div class="pilot-bar-track growth"><i style="width:'+Math.round(Number(g.fph)/2*100)+'%"></i></div><b>'+g.fph+'/h</b></div>');
- out+='</div><p class="pilot-chart-footnote">Solo se muestran juegos con dato de seguidores por hora disponible.</p></article></div>';
- out+='<div class="stats-table-wrap"><table class="stats-table pilot-table"><thead><tr><th>Juego</th><th>Horas emitidas</th><th>Promedio</th><th>Seguidores ganados</th><th>Por hora</th><th>Horas vistas</th></tr></thead><tbody>';
- games.forEach(g=>out+='<tr><th>'+g.name+'</th><td>'+g.air+'</td><td class="num">'+g.av+'</td><td class="num">'+(g.fg===null?'—':g.fg)+'</td><td class="num">'+(g.fph===null?'—':g.fph)+'</td><td class="num">'+(g.hw===null?'—':g.hw)+'</td></tr>');
- out+='</tbody></table></div><div class="pilot-callout"><strong>Lectura para marcas:</strong> Minecraft lidera la audiencia media registrada (34) y comparte el mejor ritmo de captación disponible (2 seguidores por hora) con Marvel Rivals. Fortnite aporta el único dato de horas vistas desglosado: 103 h, equivalentes al 22,7% del total informado. En los demás juegos no se completan métricas que no aparecen en la captura.</div><p class="stats-note">Promedio = espectadores medios del juego · Por hora = seguidores ganados por hora emitida; no es una tasa de conversión. La selección de juegos fue aportada por el creador y su período exacto no está identificado: no se compara directamente con los últimos 30 días. Las horas vistas solo están disponibles para Fortnite. El pico por juego no fue aportado.</p></section>';
- out+='<section class="pilot-subsection"><div class="pilot-subhead"><h5>02 · AUDIENCIA ACUMULADA</h5><small>Trayectoria histórica · Lifetime</small></div><div class="pilot-lifetime-grid">';
- lifetime.forEach((v,i)=>out+='<div class="pilot-metric pilot-lifetime-metric'+(i===1?' is-peak':'')+'"><span>'+v[0]+'</span><strong>'+v[1]+'</strong><small>'+v[2]+'</small></div>');
- out+='</div></section>';
- out+='<section class="pilot-subsection"><div class="pilot-subhead"><h5>03 · RENDIMIENTO DEL PERÍODO</h5><small>Últimos 30 días · consulta 05 nov 2026 · fuente: Streams Charts</small></div><div class="pilot-performance-grid">';
- periodMetrics.forEach(v=>out+='<div class="pilot-metric"><span>'+v[0]+'</span><strong>'+v[1]+'</strong><small>'+v[2]+'</small></div>');
- out+='</div><div class="pilot-callout"><strong>Nota de lectura:</strong> las variaciones porcentuales se reproducen tal como aparecen en la captura. Como el rango de fechas no está visible, no se asigna un período que no podamos verificar.</div></section></section>';
- return out;
-}
 function renderTwitchMetricsStats(channel){
  if(!channel||!channel.login)return '';
  const profile=twitchMetricsData?.channels?.[channel.login];
