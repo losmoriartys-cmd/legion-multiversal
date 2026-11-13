@@ -144,7 +144,7 @@ button,a{font:inherit}.shell{width:min(1440px,100%);margin:auto;padding:22px cla
   $('cover-image').src=hero.img||hero.portrait;$('cover-image').alt='Ilustración de portada '+hero.name;
   $('bio').textContent=hero.bio||'';$('demi').textContent=media.demi||'';$('ari').textContent=media.ari||'';$('editorial').textContent=media.editorial||'';$('voice').textContent=hero.voice||'';
   $('formats').textContent=(media.formats||hero.areas||[]).join(' · ');
-  const stamp=channel.updated_at?formatDateTime(channel.updated_at,{dateStyle:'medium',timeStyle:'short'}):'fecha no disponible';
+  const stamp=channel.updated_at?formatDateTime(channel.updated_at,{dateStyle:'medium',timeStyle:'medium'}):'fecha no disponible';
   const activeDates=(w.daily_activity||[]).filter(d=>(Number(d.live_samples)||0)>0).length;
   const snapshots=Array.isArray(channel.snapshots)?channel.snapshots.filter(s=>s&&s.sampled_at):[];
   const firstObserved=snapshots.length?snapshots[0].sampled_at:null,lastObserved=snapshots.length?snapshots[snapshots.length-1].sampled_at:null;
