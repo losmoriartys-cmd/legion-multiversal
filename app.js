@@ -9,11 +9,22 @@ function handleThirdPartyImageError(image) {
 }
 
 function activateChapterHash() {
-    const raw = decodeURIComponent((location.hash || '').slice(1));
+    let raw;
+    try {
+        raw = decodeURIComponent((location.hash || '').slice(1));
+    } catch (error) {
+        console.warn('Se ignoró un hash de navegación mal formado:', error);
+        return;
+    }
     if (!raw) return;
-    const semantic = document.querySelector('[data-semantic-anchor="' + raw + '"]');
-    if (semantic) { const panel = semantic; const id = panel.id.replace('chapter-',''); switchChapter(Number(id)); return; }
-    const alias = raw.match(/^chapter-(\d+)$/);
+    const semantic = [...document.querySelectorAll('[data-semantic-anchor]')]
+        .find(element => element.getAttribute('data-semantic-anchor') === raw);
+    if (semantic) {
+        const match = semantic.id.match(/^chapter-(\\d+)$/);
+        if (match) switchChapter(Number(match[1]));
+        return;
+    }
+    const alias = raw.match(/^chapter-(\\d+)$/);
     if (alias && document.getElementById(raw)) switchChapter(Number(alias[1]));
 }
 window.addEventListener('hashchange', activateChapterHash);
@@ -88,12 +99,10 @@ function initContactForms() {
         const fallbackLink = form.querySelector('.contact-mailto-fallback');
         const submit = form.querySelector('[type="submit"]');
         const buildMailto = () => {
-            const values = [...new FormData(form).entries()].filter(([key]) => key !== 'website');
-            const body = values.map(([key, value]) => key + ': ' + value).join('\n');
-            const url = new URL('mailto:losmoriartys@gmail.com');
-            url.searchParams.set('subject', form.dataset.contactSubject || 'Contacto · Legión Multiversal');
-            url.searchParams.set('body', body);
-            return url.toString();
+            const values = [...new FormData(form).entries()].filter(([key]) => key !== 'contact_hp');
+            const body = values.map(([key, value]) => key + ': ' + value).join('\\n').slice(0, 1500);
+            const subject = form.dataset.contactSubject || 'Contacto · Legión Multiversal';
+            return 'mailto:losmoriartys@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
         };
         form.addEventListener('submit', async event => {
             event.preventDefault();
@@ -113,14 +122,23 @@ function initContactForms() {
                         body: JSON.stringify(payload), signal: controller.signal
                     });
                 } finally { window.clearTimeout(timeout); }
-                if (!response.ok) throw new Error('El servicio respondió ' + response.status);
+                if (!response.ok) {
+                    const result = await response.json().catch(() => ({}));
+                    const error = new Error(result.error || 'El servicio respondió ' + response.status);
+                    error.status = response.status;
+                    throw error;
+                }
                 if (status) status.textContent = 'Mensaje enviado. Gracias por contactar a la Legión.';
                 form.reset();
             } catch (error) {
                 console.warn('No se pudo enviar el formulario:', error);
-                if (status) status.textContent = 'El envío automático no está disponible.';
-                if (fallbackLink) fallbackLink.href = buildMailto();
-                if (fallback) fallback.hidden = false;
+                if (error.status && error.status >= 400 && error.status < 500 && error.status !== 429) {
+                    if (status) status.textContent = error.message;
+                } else {
+                    if (status) status.textContent = 'El envío automático no está disponible.';
+                    if (fallbackLink) fallbackLink.href = buildMailto();
+                    if (fallback) fallback.hidden = false;
+                }
             } finally {
                 if (submit) { submit.disabled = false; submit.textContent = submit.dataset.originalText || 'ENVIAR'; }
             }
@@ -598,8 +616,11 @@ function formatMetric(value,digits=2){
  if(value===null||value===undefined)return 'Pendiente de verificación';
  return typeof value==='number'?value.toLocaleString('es-AR',{maximumFractionDigits:digits}):value;
 }
+let liveDirectorySource = null;
 function renderLiveDirectory(channels, options = {}){
  const host=document.getElementById('live-directory');if(!host)return;
+ if(options.source!=='helix' && !options.fallback && liveDirectorySource==='helix')return;
+ liveDirectorySource=options.source||'data';
  const list=Array.isArray(channels)?channels:[];
  const updatedAt=options.updatedAt||instituteStatsData?.updated_at||null;
  const freshness=getCaptureFreshness(updatedAt,instituteStatsData?.sampling_interval_minutes,options.freshnessMinutes);
