@@ -2880,3 +2880,9 @@ Se conserva el compromiso de avanzar una mejora por etapa, con validación y rev
 - **Fallo de CI investigado:** sintaxis, funciones Pages, JSON, recursos y anclas pasaron; la auditoría de accesibilidad falló por los dos campos `contact_hp`, uno por formulario. No son controles interactivos para visitantes: viven dentro de `aria-hidden="true"`, tienen `tabindex="-1"` y se excluyen del cuerpo enviado.
 - **Corrección:** `scripts/audit_accessibility.py` reconoce tanto el nombre histórico `website` como el actual `contact_hp` únicamente cuando el campo tiene `tabindex="-1"`. Los campos visibles siguen requiriendo `label` asociado o nombre ARIA. No se desactiva la auditoría ni se omiten los demás controles.
 - **Validación:** pendiente del nuevo workflow; el commit previo falló exclusivamente por esta discrepancia entre el honeypot y la excepción del auditor.
+
+
+## 2026-11-13 — Acciones del Roster sin handlers inline
+
+- Se reemplazan los `onclick` generados en el mapa multiversal y los controles de expedientes por atributos `data-*` y delegación de eventos en el documento. Se conserva la misma acción y navegación; no se cambia el contenido ni los perfiles.
+- **Validación:** pendiente de CI sobre el head actualizado.
