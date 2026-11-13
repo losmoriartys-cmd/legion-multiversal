@@ -2728,7 +2728,7 @@ Se conserva el compromiso de avanzar una mejora por etapa, con validación y rev
 - Se agrega un criterio previo de confirmación: perfiles, accesos/materiales, fechas, entregables, compensación si corresponde, divulgación publicitaria, derechos de uso y métricas disponibles deben acordarse por escrito.
 - Se refuerza la metodología: métricas por canal y plataforma, sin sumar espectadores como usuarios únicos ni mezclar vistas, impresiones o audiencias incompatibles.
 - Alcance: `index.html`, `chapter-8.css` e `INFORMES.md`. No se modifican credenciales, códigos, imágenes, estadísticas ni casos documentados. Los ejemplos son modelos orientativos, no campañas ejecutadas.
-- QA: pendiente de checks automáticos y verificación de la preview. La revisión visual de escritorio/móvil queda a cargo del responsable del proyecto.
+- Integración: PR #41 fusionado mediante squash en `6a04b2b049d06c1a65c70a74f3e66f7b668f36c1`. El workflow de validación y el build/deploy de GitHub Pages finalizaron correctamente (run 43377809536 y run 43377808852). No se declara verificación de Cloudflare ni aprobación visual; la revisión renderizada queda a cargo del responsable del proyecto.
 
 
 ## 2026-11-13 — Alianzas: contexto de mercado LATAM con fuentes
@@ -2739,4 +2739,4 @@ Se conserva el compromiso de avanzar una mejora por etapa, con validación y rev
 - Se traduce la evidencia en criterio comercial: segmentar por país, idioma, huso horario, plataforma y comunidad; no tratar LATAM como mercado homogéneo.
 - Fuentes: https://latam.gamescom.global/en/what-sets-the-latin-american-gaming-market-apart-from-the-rest-of-the-world/ y https://www.prensario.net/Comscore-Los-numeros-del-Gaming-en-Argentina-50080.note.aspx.
 - Alcance: `index.html`, `chapter-8.css` e `INFORMES.md`. Sin cambios en métricas internas, credenciales, imágenes ni campañas.
-- QA: pendiente de validación automática y preview. La inspección visual de escritorio/móvil queda a cargo del responsable del proyecto.
+- Integración: PR #42 fusionado mediante squash en `5717276d608a411b3cf2d34d00e236cff619585a`. La validación automática post-merge finalizó correctamente (run 43378021037); el build/deploy de GitHub Pages seguía en curso al último sondeo (run 43378019981). No se declara verificación de Cloudflare ni aprobación visual; la revisión renderizada queda a cargo del responsable del proyecto.
