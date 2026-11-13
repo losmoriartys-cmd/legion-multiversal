@@ -2863,7 +2863,7 @@ Se conserva el compromiso de avanzar una mejora por etapa, con validación y rev
 - **Formularios:** se incorpora correo obligatorio al formulario de ingreso y se alinea la validación del servidor. El honeypot cambia a `contact_hp`, excluido del contenido y de la allowlist funcional. El endpoint exige `Origin` coincidente con el origen de Pages, fija el asunto según el tipo de formulario y mantiene límites de cuerpo/campo y timeout de Resend. Los errores de validación 4xx se muestran al usuario en lugar de ocultarse detrás del fallback; el mailto codifica explícitamente asunto/cuerpo y limita el cuerpo a 1.500 caracteres.
 - **En Vivo:** una actualización de estadísticas de respaldo no puede sobrescribir una lectura Helix más reciente en el mismo ciclo de página. Si el roster no contiene canales Twitch, el endpoint responde una lista vacía cacheable sin pedir token ni consultar Helix.
 - **Archivos:** `app.js`, `index.html`, `functions/api/contact.js`, `functions/api/live.js`, `INFORMES.md`.
-- **Validación:** pendiente de ejecutar sobre estos cambios. No se declara prueba end-to-end de Resend/Twitch ni despliegue de Cloudflare.
+- **Validación:** workflow [43388343377](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43388343377) finalizado correctamente sobre el head `cb9ef731f363910167d1c3be41d3389b0bf52d3a`: sintaxis JavaScript y Pages Functions, JSON, rutas/recursos, anclas, consistencia de campos de formularios y auditoría estática de accesibilidad, todos aprobados. No se declara prueba end-to-end de Resend/Twitch ni despliegue de Cloudflare.
 - **Pendientes / riesgos:** comprobar el comportamiento del formulario desde Preview y Production; la verificación de Origin requiere que el navegador envíe el encabezado estándar en POST same-origin. Continúan pendientes rate limiting/Turnstile (requieren configuración externa), pruebas de Cache API en Pages, QA visual de filtros roster, teclado/lector de pantalla y medición Lighthouse.
 - **Despliegue:** pendiente de verificación.
 
@@ -2872,7 +2872,7 @@ Se conserva el compromiso de avanzar una mejora por etapa, con validación y rev
 
 - Se incorpora `scripts/check_form_fields.py` y se integra al workflow para comparar los nombres de campos de ambos formularios `data-contact-form` con la allowlist de `functions/api/contact.js`; también verifica honeypot y correo del formulario de incorporación.
 - Los dos emblemas de marca visibles en la cabecera/portada dejan de usar carga diferida, evitando que elementos iniciales dependan de lazy loading. No se asigna `fetchpriority=high` sin medición que confirme que sean el recurso LCP.
-- Validación automática de este bloque: pendiente de ejecución en GitHub Actions.
+- Validación automática: el workflow [43388343377](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43388343377) finalizó correctamente sobre `cb9ef731f363910167d1c3be41d3389b0bf52d3a`, incluyendo la prueba de consistencia de formularios y la auditoría estática de accesibilidad.
 
 
 ## 2026-11-13 — Ajuste del auditor para honeypot de contacto
@@ -2885,4 +2885,4 @@ Se conserva el compromiso de avanzar una mejora por etapa, con validación y rev
 ## 2026-11-13 — Acciones del Roster sin handlers inline
 
 - Se reemplazan los `onclick` generados en el mapa multiversal y los controles de expedientes por atributos `data-*` y delegación de eventos en el documento. Se conserva la misma acción y navegación; no se cambia el contenido ni los perfiles.
-- **Validación:** pendiente de CI sobre el head actualizado.
+- **Validación:** el workflow [43388343377](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43388343377) finalizó correctamente sobre `cb9ef731f363910167d1c3be41d3389b0bf52d3a`; la sintaxis JavaScript y las Pages Functions, rutas, anclas, datos, campos de formularios y accesibilidad estática pasaron.
