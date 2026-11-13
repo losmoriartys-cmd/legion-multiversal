@@ -4210,7 +4210,7 @@ header .primary-navigation .nav-btn[aria-current="page"]{border-color:#8be3f3;co
     .roster-tools select { width: 100%; min-width: 0; }
     .roster-tools button { width: 100%; }
     .roster-grid { grid-template-columns: repeat(auto-fit,minmax(min(100%,230px),1fr)); }
-    .roster-card-collectible-card { min-width: 0; }
+    .roster-collectible-card { min-width: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
     .roster-card-3d-inner,
