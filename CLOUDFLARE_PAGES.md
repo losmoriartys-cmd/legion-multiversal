@@ -1,6 +1,6 @@
 # Preparación para una futura publicación en Cloudflare Pages
 
-**Estado:** guía preparada; el proyecto todavía no está conectado ni desplegado en Cloudflare Pages. GitHub Pages continúa siendo la publicación de referencia.
+**Estado:** guía preparada; el proyecto todavía no está conectado ni desplegado en Cloudflare Pages. GitHub Pages continúa siendo la publicación de referencia. Las funciones `/api/contact` y `/api/live` y el archivo `_headers` solo tendrán efecto al publicar con Cloudflare Pages.
 
 ## Configuración del proyecto
 
@@ -13,9 +13,9 @@ Cuando se conecte la cuenta de Cloudflare:
 - **Build command:** vacío (sitio estático, sin compilación).
 - **Build output directory:** `.` (raíz del repositorio).
 - **Root directory:** `/` (raíz del repositorio).
-- **Variables de entorno:** ninguna para servir la web estática.
+- **Variables de entorno:** para el sitio estático no hacen falta. Para activar las Pages Functions de contacto y En Vivo, configurar en Production/Preview: `RESEND_API_KEY` (secret), `RESEND_FROM` (remitente validado en Resend), `CONTACT_TO` (opcional; por defecto losmoriartys@gmail.com), `TWITCH_CLIENT_ID` y `TWITCH_CLIENT_SECRET` (secrets de Twitch). No almacenar valores en el repositorio.
 
-No copiar secretos de GitHub Actions a Cloudflare. Las credenciales de Twitch, YouTube y Kick permanecen en GitHub Actions y los JSON públicos contienen únicamente resultados, nunca tokens ni claves.
+No copiar secretos de GitHub Actions a Cloudflare automáticamente. Configurar por separado las credenciales que las Pages Functions necesitan: Resend para contacto y Twitch OAuth para Helix. Las credenciales de YouTube y Kick permanecen en GitHub Actions; los JSON públicos contienen únicamente resultados, nunca tokens ni claves.
 
 ## Riesgo que debe resolverse antes de activar producción
 

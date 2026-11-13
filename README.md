@@ -127,6 +127,19 @@ En GitHub → Settings → Secrets and variables → Actions:
 
 Nunca guardar claves o tokens en JSON, código, informes o commits. Si una credencial no está configurada, el colector debe dejar constancia del estado pendiente en vez de inventar métricas.
 
+### Funciones de Cloudflare Pages: contacto y En Vivo
+
+Las rutas `functions/api/contact.js` y `functions/api/live.js` requieren Cloudflare Pages Functions. **No se ejecutan en GitHub Pages**: mientras GitHub Pages siga siendo la publicación activa, los formularios ofrecen fallback a `mailto:` y En Vivo utiliza `data.json` con la antigüedad de la captura.
+
+En Cloudflare Pages → Settings → Variables and Secrets → Production (y Preview si corresponde), configurar:
+
+- `RESEND_API_KEY` (secret): clave privada de Resend.
+- `RESEND_FROM` (variable): remitente validado en Resend; usar el formato admitido por la cuenta y el dominio verificado.
+- `CONTACT_TO` (opcional): destinatario; por defecto `losmoriartys@gmail.com`.
+- `TWITCH_CLIENT_ID` y `TWITCH_CLIENT_SECRET` (secrets): credenciales de aplicación Twitch para OAuth Client Credentials y Helix.
+
+No reutilizar automáticamente secretos de GitHub Actions ni incluirlos en el repositorio. Sin estas variables, la función de contacto devuelve un estado de configuración pendiente y el cliente habilita el fallback; la consulta Helix falla de forma controlada y el cliente recupera `data.json`. El archivo `_headers` también es una configuración específica de Cloudflare Pages.
+
 ### Alcance actual y límites
 
 - YouTube: estadísticas públicas acumuladas del canal y hasta diez videos recientes. No equivale a Analytics privado del creador.
