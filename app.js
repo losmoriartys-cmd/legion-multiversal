@@ -56,6 +56,10 @@ async function retryResource(key) {
     else if (key === 'map') { await loadRosterData(); renderMultiverseMap(); }
     else if (key === 'missions') await loadCommunityPlaybook();
     else if (key === 'platform') await loadPlatformStatsData();
+    else if (key === 'news') await loadLegionNews();
+    else if (key === 'creator-records') await loadCreatorRecords();
+    else if (key === 'twitchmetrics') await loadTwitchMetricsData();
+    else if (key === 'sullygnome') await loadSullyGnomeData();
 }
 function initResourceRetry() {
     if (document.documentElement.dataset.resourceRetryBound === 'true') return;
@@ -398,16 +402,12 @@ function renderMissionArchive(hero){
 let twitchMetricsData = null;
 async function loadTwitchMetricsData(){
  try{
-  const res=await fetch('twitchmetrics-data.json',{cache:'no-store'});
-  if(!res.ok)throw new Error('No se pudo leer twitchmetrics-data.json');
-  twitchMetricsData=await res.json();
+  twitchMetricsData=await fetchJSON('twitchmetrics-data.json',{timeout:10000,retries:2});
  }catch(e){console.warn('TwitchMetrics data unavailable:',e);}
 }
 async function loadSullyGnomeData(){
  try{
-  const res=await fetch('sullygnome-data.json',{cache:'no-store'});
-  if(!res.ok)throw new Error('No se pudo leer sullygnome-data.json');
-  sullyGnomeData=await res.json();
+  sullyGnomeData=await fetchJSON('sullygnome-data.json',{timeout:10000,retries:2});
  }catch(e){console.warn('SullyGnome roster data unavailable:',e);}
 }
 
@@ -523,9 +523,7 @@ function renderCreatorRecords(hero){
 }
 async function loadCreatorRecords(){
  try{
-  const res=await fetch('creator-records.json',{cache:'no-store'});
-  if(!res.ok)throw new Error('No se pudo leer creator-records.json');
-  creatorRecordsData=await res.json();
+  creatorRecordsData=await fetchJSON('creator-records.json',{timeout:10000,retries:2});
  }catch(e){console.warn('Creator records unavailable:',e);}
 }
 let instituteStatsData = null;
@@ -635,12 +633,10 @@ async function loadLegionNews() {
     const host = document.getElementById('legion-news-feed');
     if (!host) return;
     try {
-        const response = await fetch('news-data.json', { cache: 'no-store' });
-        if (!response.ok) throw new Error('No se pudo leer news-data.json');
-        legionNewsData = await response.json();
+        legionNewsData = await fetchJSON('news-data.json', { timeout: 10000, retries: 2 });
         renderLegionNews();
     } catch (error) {
-        host.innerHTML = '<p class="stats-note">Las novedades no están disponibles temporalmente.</p>';
+        host.innerHTML = resourceRetryMarkup('Las novedades no están disponibles temporalmente.', 'news');
         console.warn('Legion news unavailable:', error);
     }
 }
@@ -1011,6 +1007,7 @@ function renderRoster() {
             image.src = hero.portrait || hero.img;
             image.alt = 'Retrato tipo carnet de ' + hero.name;
             image.loading = 'lazy';
+            image.decoding = 'async';
             image.onerror = () => { portrait.classList.add('portrait-missing'); portrait.textContent = 'RETRATO NO DISPONIBLE'; };
             portrait.appendChild(image);
             const foil = document.createElement('span');
@@ -1037,6 +1034,7 @@ function renderRoster() {
             heroArt.src = hero.img || hero.portrait;
             heroArt.alt = 'Ilustración completa de ' + hero.name;
             heroArt.loading = 'lazy';
+            heroArt.decoding = 'async';
             heroArt.onerror = () => { heroArt.hidden = true; back.classList.add('back-art-missing'); };
             const backShade = document.createElement('span');
             backShade.className = 'roster-card-back-shade';
@@ -1111,6 +1109,12 @@ function renderRoster() {
         container.appendChild(section);
     });
     if (!filteredEntries.length) container.innerHTML = '<section class="roster-empty-state" role="status"><span class="roster-empty-kicker">ARCHIVO SIN COINCIDENCIAS</span><h3>NO ENCONTRAMOS ESE EXPEDIENTE.</h3><p>Probá con otro nombre, una especialidad diferente o quitá los filtros activos para volver a explorar toda la Legión.</p><button type="button" class="roster-empty-reset" data-reset-roster-empty>RESTABLECER BÚSQUEDA</button></section>';
+}
+function renderHeroPlatformLinks(hero) {
+    const platforms = [['twitch','TWITCH'],['youtube','YOUTUBE'],['instagram','INSTAGRAM'],['cafecito','CAFECITO']];
+    return platforms.filter(([key]) => typeof hero[key] === 'string' && /^https:\/\//i.test(hero[key]))
+        .map(([key,label]) => '<a class="btn-link hero-platform-link" href="' + escapeStatsHtml(hero[key]) + '" target="_blank" rel="noopener noreferrer" aria-label="Visitar ' + label + ' de ' + escapeStatsHtml(hero.name) + '">' + label + ' ↗</a>')
+        .join('');
 }
 function renderCommercialQuickView(hero) {
     const safe = escapeStatsHtml;
@@ -1199,7 +1203,6 @@ function openHeroProfile(index, triggerElement = document.activeElement) {
     const home = document.getElementById('roster-home');
     const page = document.getElementById('hero-profile-page');
     if (!home || !page) return;
-    const channel = hero.youtube || hero.twitch || '';
     window.lastHeroProfileTrigger = triggerElement instanceof HTMLElement ? triggerElement : window.lastHeroProfileTrigger || null;
     window.currentHeroProfileIndex = index;
     const profileArt = hero.img || hero.portrait || '';
@@ -1208,9 +1211,10 @@ function openHeroProfile(index, triggerElement = document.activeElement) {
     const profilePosition = filteredProfiles.findIndex(entry => entry.index === index);
     const previousDisabled = profilePosition <= 0;
     const nextDisabled = profilePosition < 0 || profilePosition >= filteredProfiles.length - 1;
+    const platformActions = renderHeroPlatformLinks(hero);
     const profileActions = hero.name === 'MORIARTYS'
-        ? '<a class="twitch-link-btn" href="./roster-02-moriartys.html">ABRIR ARCHIVO PERSONAL ↗</a>' + (channel ? '<a class="btn-link" href="' + escapeStatsHtml(channel) + '" target="_blank" rel="noopener">VISITAR CANAL ↗</a>' : '') + '<button class="hero-profile-back" type="button" onclick="closeHeroProfile()">VOLVER AL ROSTER</button>'
-        : '<button class="twitch-link-btn" type="button" onclick="openHeroModal(' + index + ')">ABRIR BITÁCORA COMPLETA</button>' + (channel ? '<a class="btn-link" href="' + escapeStatsHtml(channel) + '" target="_blank" rel="noopener">VISITAR CANAL ↗</a>' : '') + '<button class="hero-profile-back" type="button" onclick="closeHeroProfile()">VOLVER AL ROSTER</button>';
+        ? '<a class="twitch-link-btn" href="./roster-02-moriartys.html">ABRIR ARCHIVO PERSONAL ↗</a>' + platformActions + '<button class="hero-profile-back" type="button" onclick="closeHeroProfile()">VOLVER AL ROSTER</button>'
+        : '<button class="twitch-link-btn" type="button" onclick="openHeroModal(' + index + ')">ABRIR BITÁCORA COMPLETA</button>' + platformActions + '<button class="hero-profile-back" type="button" onclick="closeHeroProfile()">VOLVER AL ROSTER</button>';
     const profilePager = '<nav class="hero-profile-pager" aria-label="Navegación entre expedientes"><button type="button" onclick="navigateHeroProfile(-1)"' + (previousDisabled ? ' disabled' : '') + '>← ANTERIOR</button><span>EXPEDIENTE ' + (profilePosition >= 0 ? profilePosition + 1 : '—') + ' / ' + filteredProfiles.length + '</span><button type="button" onclick="navigateHeroProfile(1)"' + (nextDisabled ? ' disabled' : '') + '>SIGUIENTE →</button></nav>';
     page.innerHTML = '<div class="hero-profile-layout hero-profile-gateway"><div class="hero-profile-art-wrap"><div class="hero-profile-art-frame"><span class="hero-profile-art-stamp">LEGIÓN<br>MULTIVERSAL</span>' + (profileArt ? '<img class="hero-profile-art" src="' + escapeStatsHtml(profileArt) + '" alt="' + escapeStatsHtml(profileArtAlt) + '" loading="eager" onerror="this.closest(\'.hero-profile-art-frame\').classList.add(\'art-unavailable\');this.remove();">' : '<div class="hero-profile-art-fallback">ILUSTRACIÓN NO DISPONIBLE</div>') + '<span class="hero-profile-art-caption">EXPEDIENTE N.º ' + escapeStatsHtml(hero.cardNumber || 'S/N') + '</span></div></div><div class="hero-profile-copy"><span class="stats-status">EXPEDIENTE INDIVIDUAL · ' + escapeStatsHtml(hero.rank || 'CLASIFICACIÓN PENDIENTE') + '</span><p class="profile-section-kicker">ARCHIVO PERSONAL · ' + escapeStatsHtml(hero.cardNumber ? 'N.º ' + hero.cardNumber : 'REGISTRO DE LA LEGIÓN') + '</p><h3 id="hero-profile-title" tabindex="-1">' + escapeStatsHtml(hero.name) + '</h3><p>' + escapeStatsHtml(hero.bio || 'Presentación personal pendiente de completar.') + '</p><div class="hero-profile-actions">' + profileActions + '</div></div></div>' + renderCommercialQuickView(hero);
     home.hidden = true;

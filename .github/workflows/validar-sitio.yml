@@ -56,3 +56,5 @@ jobs:
         run: python scripts/validate_site.py
       - name: Comprobar anclas semánticas y enlaces internos
         run: python scripts/check_anchors.py
+      - name: Auditar accesibilidad estática
+        run: python scripts/audit_accessibility.py

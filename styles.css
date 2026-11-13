@@ -4456,3 +4456,20 @@ main .chapter-panel :where(.chapter-cta, .executive-button, .comic-submit-btn,
 .image-fallback{display:grid;place-items:center;min-height:90px;padding:12px;border:1px dashed rgba(130,160,185,.45);background:rgba(10,20,32,.82);color:#a9bfd1;font:700 .72rem 'Roboto Condensed',sans-serif;text-align:center;letter-spacing:.06em}
 
 .impact-kpi-grid>.resource-skeleton-list{grid-column:1/-1}
+
+
+/* AUDITORÍA UX · foco universal y decodificación de imágenes */
+:where(a[href],button,input,select,textarea,[tabindex]):focus-visible {
+    outline: 3px solid #8beaff;
+    outline-offset: 3px;
+}
+img { max-width: 100%; }
+.hero-profile-actions .hero-platform-link {
+    min-height: 42px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+@media (prefers-reduced-motion: reduce) {
+    html:focus-within { scroll-behavior: auto; }
+}

@@ -2811,3 +2811,14 @@ Se conserva el compromiso de avanzar una mejora por etapa, con validación y rev
 - **Caché de imágenes:** se elimina `immutable` para imágenes con nombres no versionados. Se conserva caché de 24 horas con revalidación; JSON y API mantienen sus políticas separadas.
 - **Validaciones:** pendientes de ejecución automática sobre este commit. No se declara todavía CI exitoso, despliegue ni QA visual. La revisión manual en escritorio/móvil sigue pendiente.
 - **Datos y recursos:** sin cambios en roster, estadísticas, imágenes, textos editoriales ni orden de capítulos.
+
+
+## 2026-11-13 — Auditoría de cargas, CTA multiplataforma y accesibilidad
+
+- **Cargas directas:** se sustituyen las llamadas directas restantes a `fetch()` para `twitchmetrics-data.json`, `sullygnome-data.json`, `creator-records.json` y `news-data.json` por el helper común `fetchJSON`, con timeout y reintentos. El feed de novedades muestra estado de error con acción de reintento.
+- **Reintentos:** se amplía el despachador para reconocer noticias, registros de creadores y fuentes de métricas, además de los recursos principales.
+- **Expedientes:** se incorporan CTA para todas las plataformas declaradas con URL HTTPS válida (Twitch, YouTube, Instagram y Cafecito), sin inventar ni sustituir cuentas. La ficha comercial ya mostraba la presencia digital; ahora también está disponible en la cabecera del expediente individual.
+- **Accesibilidad:** se agrega foco visible universal para controles y enlaces, se conserva el soporte de movimiento reducido y se agrega decodificación asíncrona a las ilustraciones dinámicas del roster y expediente.
+- **Rendimiento:** la auditoría estática detectó 20 imágenes HTML sin atributos intrínsecos `width`/`height` sobre 38 imágenes. No se asignan medidas ficticias; se agrega una advertencia automatizada para resolverlo con dimensiones reales y medición CLS.
+- **Validación:** pendiente de CI sobre este commit. No se declara prueba de teclado/lector de pantalla, medición Lighthouse, CLS real ni revisión visual.
+- **Alcance:** `app.js`, `styles.css`, `.github/workflows/validar-sitio.yml`, `scripts/audit_accessibility.py` e `INFORMES.md`. Sin cambios de roster, cuentas, imágenes, métricas, orden de capítulos ni `main`.
