@@ -2707,3 +2707,14 @@ Se conserva el compromiso de avanzar una mejora por etapa, con validación y rev
 - **Caché:** se actualizó la versión de `app.js` y `styles.css` en `index.html` para evitar que el navegador conserve los recursos anteriores.
 - **Validación estática posterior:** cero IDs duplicados; cero capítulos sin navegación y cero destinos de navegación inexistentes; renderizador de analítica obsoleto retirado; controles de búsqueda/filtros siguen presentes y conectados.
 - **Límite de QA:** la apertura de producción mediante navegador web no estuvo disponible en esta sesión. No se certifica todavía la experiencia visual renderizada, el comportamiento táctil real ni el estado de despliegue de Cloudflare. La validación realizada es de código y estructura.
+
+
+## 2026-11-13 — Sistema editorial compartido: tipografía, espaciado y enlaces
+
+- Base: revisión sobre main en 6ca080eb9806039333a76c345a7cb4ab01dc9cda, preservando los ajustes de Roster y la unificación visual ya integrados.
+- Tipografía: se normaliza el tamaño base con escala fluida, altura de línea y renderizado legible; se mejora el balance de títulos y el ancho de lectura de los bloques editoriales sin sustituir las familias tipográficas de identidad (Bangers, Roboto Condensed, Special Elite y Permanent Marker).
+- Espaciado: se establecen medidas compartidas para el ritmo entre párrafos, listas, títulos y paneles premium; los cambios se limitan al contenido de capítulos y no reescriben las composiciones particulares.
+- Enlaces e interacción: los enlaces de contenido reciben subrayado más legible y feedback hover; enlaces, botones y campos obtienen foco visible consistente. Las transiciones respetan prefers-reduced-motion y no modifican destinos ni lógica de navegación.
+- Responsive y caché: se ajusta el ritmo de secciones en pantallas pequeñas y se actualiza la versión de styles.css en index.html.
+- Alcance: CSS y versión de caché; sin cambios de texto, imágenes, métricas, datos ni estructura de capítulos.
+- QA pendiente: ejecutar validaciones automáticas y revisar la preview renderizada en escritorio y móvil. La inspección estática del CSS no equivale a aprobación visual.
