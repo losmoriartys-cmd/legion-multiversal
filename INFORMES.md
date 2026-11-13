@@ -2685,3 +2685,15 @@ Se conserva el compromiso de avanzar una mejora por etapa, con validación y rev
 - **Estado de main al registrar:** SHA `ca561832e8b1d827a2db977c7f3b4ccfd134f1b4`; cero PR abiertos. Cloudflare Pages informó `Deployed successfully` para ese SHA. La validación de sitio y el build de GitHub Pages finalizaron correctamente; el job de publicación de GitHub Pages seguía en espera al último sondeo (run [43374810584](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43374810584)).
 - **Inspección visual:** se intentó abrir la preview `https://945c9603.legion-multiversal.pages.dev`, pero el navegador de revisión devolvió error interno. Por eso no se certifica inspección visual ni aprobación responsive; el cambio de paleta está validado técnicamente, no visualmente.
 - **Siguiente pasada:** continuar con la auditoría de componentes compartidos y consistencia tipográfica/espaciado, evitando refactorizaciones masivas de las 260 KB de CSS sin una comparación renderizada. Mantener pendiente la revisión visual real en escritorio y móvil.
+
+
+## 2026-11-13 — Unificación de componentes compartidos
+
+- **PR #39:** fusionado mediante squash en `b1a9597c7246acee27c78ddcadf2b957423e8f2d`; un solo archivo modificado (`styles.css`), sin cambios de contenido ni datos.
+- **Superficies y tarjetas:** los componentes reutilizados `.premium-panel` y `.premium-card` adoptan una base institucional compartida: fondos del sistema, borde cian discreto, sombras moderadas y texto secundario uniforme. Esto alinea los paneles de En Vivo, Reclutamiento y el anexo de campañas con el lenguaje visual general.
+- **Identidad por capítulo:** Arsenal conserva explícitamente su tratamiento dorado/violeta mediante reglas acotadas a `#chapter-5`; la unificación no elimina su acento editorial.
+- **Controles:** navegación, CTA, botones ejecutivos y envío de formularios comparten radio de borde, foco visible de alto contraste, estado deshabilitado consistente y respeto por `prefers-reduced-motion`.
+- **Validación del PR #39:** los checks `validar` finalizaron en éxito; Cloudflare Pages informó `Deploy successful` para la preview `https://561c6c0c.legion-multiversal.pages.dev`. El build de GitHub Pages también finalizó correctamente en el commit de integración.
+- **Estado de main al integrar:** SHA `b1a9597c7246acee27c78ddcadf2b957423e8f2d`; cero PR abiertos al momento de la consulta. Cloudflare Pages informó `Deploy successful` para ese SHA.
+- **Límite de QA:** se intentó abrir la preview `https://561c6c0c.legion-multiversal.pages.dev` y el navegador de revisión devolvió error interno. La estructura CSS y los checks fueron validados; no se declara inspección visual de escritorio/móvil.
+- **Próxima tarea:** seguir con la consistencia tipográfica, jerarquía de títulos, espaciado y componentes de enlace; no ampliar la refactorización global sin capturas renderizadas que permitan comprobar el resultado visual.
