@@ -26,7 +26,9 @@ class AuditParser(HTMLParser):
         if tag == "iframe" and not a.get("title", "").strip():
             ERRORS.append(f"{self.path.name}: iframe sin title")
         if tag in ("input", "select", "textarea") and a.get("type") != "hidden":
-            if a.get("name") == "website" and a.get("tabindex") == "-1":
+            # Honeypot de anti-spam: oculto intencionalmente del árbol accesible
+            # y del orden de tabulación. No confundir con controles de usuario.
+            if a.get("name") in {"website", "contact_hp"} and a.get("tabindex") == "-1":
                 return
             if not (a.get("aria-label") or a.get("aria-labelledby")):
                 self.controls.append((a.get("id"), tag))
