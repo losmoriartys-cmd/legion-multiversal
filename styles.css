@@ -629,7 +629,7 @@
         .roster-portrait-info { padding:12px 14px 14px; display:flex; flex-direction:column; gap:5px; }
         .roster-portrait-info strong { color:#ffde00; font-family:'Bangers',cursive; font-size:1.35rem; letter-spacing:.7px; }
         .roster-portrait-info span { color:#aab7c8; font-size:.72rem; font-weight:800; letter-spacing:.7px; }
-        .commercial-quickview { margin-top:28px; padding:clamp(16px,3vw,28px); background:linear-gradient(145deg,#111d2c,#0a111c); border:2px solid #40536d; box-shadow:6px 6px 0 #000; color:#dce5f1; }
+        .commercial-quickview { width:100%; min-width:0; margin-top:28px; padding:clamp(16px,3vw,28px); background:linear-gradient(145deg,#111d2c,#0a111c); border:2px solid #40536d; box-shadow:6px 6px 0 #000; color:#dce5f1; }
         .commercial-quickview-head { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px; border-bottom:1px solid #40536d; padding-bottom:12px; }
         .commercial-quickview-head strong { color:#8edff0; font-family:'Bangers',cursive; font-size:1.45rem; letter-spacing:1px; }
         .commercial-quickview-meta { display:flex; flex-wrap:wrap; gap:8px; margin:16px 0; }
