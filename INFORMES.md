@@ -1,3 +1,61 @@
+## 2026-11-12 — MORIARTYS: Bitácora integral en formato Archivo Central
+
+- **Objetivo:** unificar toda la información disponible del streamer MORIARTYS en un único expediente-libro. ARCHIVO CENTRAL deja de ser una sección aislada y pasa a ser la mecánica de lectura de la Bitácora completa.
+- **Prueba piloto:** se actualiza únicamente `roster-02-moriartys.html`; no se replica todavía en los demás perfiles.
+- **Estructura:** portada; identidad compartida de Demi y Ari; estadísticas del canal; actividad diaria observada; juegos; alianzas y accesos a plataformas; clips; hitos y trayectoria; oportunidades y contacto.
+- **Presentación:** dobles páginas enfrentadas en escritorio, portada que se abre, lomo y papel texturado; en móvil se recorre una página por vez. Índice visual con acceso directo a cada una de las ocho páginas.
+- **Fuentes:** `roster-data.json`, `creator-records.json` y `data.json`. Los registros de actividad conservan la metodología de muestreo Helix; partners y plataformas de acceso se distinguen; no se inventan hitos si el registro está vacío.
+- **Alcance de la prueba:** el expediente MORIARTYS representa el canal compartido, sin mezclar sus métricas con los canales individuales de Demi o Ari.
+- **Estado:** propuesta en PR #31, rama `work/bitacora-libro-moriartys-2026-11-12`. Pendiente de revisión visual y funcional en escritorio y móvil antes de integrar en `main` y replicar el patrón al resto del roster.
+
+---
+
+
+## 2026-11-12 — MORIARTYS: mejora editorial integral de la Bitácora (puntos 1 a 8)
+
+- **Identidad:** se refuerza la presentación de Demi y Ari como dupla del canal compartido, aclarando que sus canales y estadísticas individuales no se atribuyen al expediente conjunto.
+- **Estadísticas:** se reorganiza el panel en métricas de audiencia y rendimiento del muestreo. Se muestran capturas live, directos observados, promedio y pico muestreados, horas observadas y horas vistas estimadas. Se calcula el porcentaje de muestras live y se advierte cuando la cobertura es baja. Los seguidores se mantienen como no disponibles cuando Twitch no entrega el dato.
+- **Actividad:** se ordenan cronológicamente los días con señal, se muestran barras comparables y un resumen automático del período. Se aclara que los días sin capturas no prueban ausencia de emisión.
+- **Juegos:** se ordenan las categorías por cantidad de muestras, con participación porcentual, barras, promedio y pico observados. No se presentan como ranking ni como horas jugadas.
+- **Alianzas:** se diferencian los partners confirmados (Enshrouded y Cinderia) de las plataformas de acceso a campañas/keys (Lurkit y Keymailer), evitando presentarlas como patrocinadores.
+- **Clips:** se conservan los tres clips editoriales registrados y sus enlaces directos.
+- **Trayectoria:** se mantiene la cronología basada en hechos fechados; al no existir hitos cargados en creator-records.json, se informa esa ausencia en lugar de inventar logros.
+- **Propuesta comercial y contacto:** se incorporan formatos de activación posibles y un texto comercial orientativo, distinguiéndolos expresamente de campañas contratadas. El correo abre con asunto sugerido.
+- **Validación de datos:** al corte de data.json del 12/11/2026, la ventana de 30 días contiene 239 muestras, 10 muestras live y 5 directos observados; la cobertura live es baja (4,2%). Por eso los indicadores se presentan como observaciones exploratorias, no como métricas oficiales de Twitch. Seguidores: no disponibles por permisos.
+- **Alcance:** solo se modifica el piloto MORIARTYS. No se replica a otros perfiles ni se integra en main en esta etapa.
+
+
+
+## 2026-11-12 — Corrección de acceso desde el perfil personal MORIARTYS
+
+- Se localizó el origen de los dos accesos duplicados en `app.js`, dentro de `openHeroProfile()`.
+- Para MORIARTYS, el perfil ahora presenta una única acción de lectura: `ABRIR ARCHIVO PERSONAL`, que enlaza directamente con `roster-02-moriartys.html`, el libro interactivo integral del piloto.
+- Se elimina del perfil MORIARTYS el botón `ABRIR BITÁCORA COMPLETA` que abría el modal anterior y el enlace `ARCHIVO CENTRAL` que llevaba a `bitacora-preview.html` (libro general independiente).
+- Se conserva el acceso a Twitch y el retorno al Roster. Los perfiles restantes mantienen temporalmente su flujo actual; esta corrección no cambia su contenido.
+- Alcance: rama de trabajo del PR #31. No se integra en `main` hasta aprobación.
+
+
+
+## 2026-11-12 — MORIARTYS: segunda dirección artística, historieta interactiva y portfolio de marca
+
+- Se conserva la apertura de expediente aprobada por el usuario y se transforma el interior hacia una estética de historieta: trama de semitono, marcos de viñeta, contornos de tinta, sombras impresas, cintillos editoriales y paneles con jerarquía visual.
+- Se refuerza el paso de hoja con giro 3D más marcado, textura de papel y animación de entrada de las páginas. Se añaden efectos sonoros originales sintetizados en el navegador para apertura y cambio de página; quedan desactivados por defecto y se activan voluntariamente mediante el control SONIDO.
+- La información estadística se presenta en tarjetas identificatorias; actividad en una tabla visual; juegos en barras comparativas; alianzas en paneles de marca; clips como escenas destacadas.
+- Se sustituye la página de hitos vacía por una página de activaciones comerciales: integración en partida, desafío comunitario, presentación de juegos y contenido colaborativo.
+- Se retiran explicaciones internas y notas editoriales que no aportan valor a una visita comercial. La ficha conserva una línea breve de fuente/actualización para contextualizar las cifras.
+- Se mantiene el alcance de piloto MORIARTYS en la rama del PR #31. No se replica al resto del roster ni se integra en main sin aprobación.
+- Validación estática posterior: JavaScript embebido válido; 8 páginas; IDs HTML sin duplicados; todos los selectores de elementos usados por JavaScript tienen correspondencia en el documento. No se realizó inspección visual manual en navegador; queda pendiente calibrar composición y legibilidad en escritorio y móvil con la revisión del usuario.
+
+
+
+## 2026-11-12 — Revisión de legibilidad y recorrido comercial MORIARTYS
+
+- Auditoría estática de la última versión: JavaScript embebido válido; ocho páginas; sin IDs duplicados; todos los selectores DOM usados por el script apuntan a elementos existentes.
+- Corrección de lectura: las hojas ahora permiten desplazamiento vertical interno para que el contenido extenso no quede recortado en escritorio o móvil; se conserva el diseño de página.
+- Ficha de audiencia simplificada a cuatro indicadores legibles: promedio observado en capturas, pico capturado, directos detectados y días con actividad registrada. Se informa la base de muestreo (capturas live frente al total de registros) sin presentar la muestra parcial como analítica completa.
+- Se eliminó la repetición de los formatos de colaboración en la última página. El cierre comercial presenta ahora un recorrido de briefing, concepto creativo y definición de formato/calendario.
+- La revisión visual real en navegador no pudo ejecutarse: el servicio de navegador devolvió saldo de wallet insuficiente. Por tanto, no se certifica todavía la apariencia final en desktop/móvil ni el funcionamiento audible en un dispositivo real.
+
 ## 2026-11-12 — Protección del encuadre grupal y legibilidad de Origen
 
 - En la revisión del CSS se detecta un riesgo de recorte de la ilustración grupal en móvil: la regla anterior imponía una relación 1.15:1 con `object-fit: cover`, aunque la imagen representa a los ocho integrantes actuales.
