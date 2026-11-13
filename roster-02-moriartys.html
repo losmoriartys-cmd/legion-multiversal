@@ -68,7 +68,7 @@ button,a{font:inherit}.shell{width:min(1440px,100%);margin:auto;padding:22px cla
     </div></article>
     <article class="paper-page" data-leaf="1"><div class="page-inner">
      <div class="page-top"><span>02 · Ficha de audiencia</span><span>Los números del canal</span></div><h2>La comunidad<br>en cifras.</h2><p class="lead">Una radiografía del alcance observado de Los Moriartys.</p>
-     <div class="metric-group"><div class="metric-heading">Pulso de audiencia · últimos 30 días</div><div class="stats" id="stats"><div class="stat"><strong>…</strong><span>Cargando</span></div></div></div><div class="comic-ribbon" id="stats-insight">AUDIENCIA · ACTIVIDAD · PRESENCIA</div><div class="source-line" id="method"></div>
+     <div class="metric-group"><div class="metric-heading">Pulso de audiencia · muestra observada</div><div class="stats" id="stats"><div class="stat"><strong>…</strong><span>Cargando</span></div></div></div><div class="comic-ribbon" id="stats-insight">AUDIENCIA · ACTIVIDAD · PRESENCIA</div><div class="source-line" id="method"></div>
     </div></article>
    </section>
    <section class="spread" data-spread="1" aria-label="Actividad y juegos">
@@ -85,7 +85,7 @@ button,a{font:inherit}.shell{width:min(1440px,100%);margin:auto;padding:22px cla
      <div class="brand-fit"><div class="brand-fit-title">ESPACIOS NATURALES PARA UNA MARCA</div><div class="opportunities" id="opportunities"></div></div><p class="source-line" id="disclaimer"></p>
     </div></article>
     <article class="paper-page" data-leaf="5"><div class="page-inner">
-     <div class="page-top"><span>06 · Escenas destacadas</span><span>Selección de clips</span></div><h2>Esto es lo que<br>pasa en directo.</h2><p class="lead">Momentos reales que muestran el tono y la química del canal.</p><div class="list" id="clips"><p class="smallnote">Cargando clips…</p></div>
+     <div class="page-top"><span>06 · Escenas destacadas</span><span>Selección de clips</span></div><h2>Momentos que<br>definen el canal.</h2><p class="lead">Clips de transmisiones anteriores que muestran el tono, el humor y la química del canal.</p><div class="list" id="clips"><p class="smallnote">Cargando clips…</p></div>
      <div class="comic-ribbon">HUMOR · IMPROVISACIÓN · COMPLICIDAD</div>
     </div></article>
    </section>
@@ -134,6 +134,8 @@ button,a{font:inherit}.shell{width:min(1440px,100%);margin:auto;padding:22px cla
  let sx=0;$('book').addEventListener('touchstart',e=>{sx=e.changedTouches[0].clientX},{passive:true});$('book').addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>55)step(dx<0?1:-1)},{passive:true});
  const node=(tag,cls,txt)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(txt!==undefined)n.textContent=txt;return n};
  const fmt=(v,d=1)=>typeof v==='number'?v.toLocaleString('es-AR',{maximumFractionDigits:d}):v??'—';
+  const formatDateTime=(value,options={})=>{if(!value)return 'fecha no disponible';const date=value instanceof Date?value:new Date(value);return Number.isNaN(date.getTime())?'fecha no disponible':new Intl.DateTimeFormat('es-AR',{...options,timeZone:'America/Argentina/Buenos_Aires'}).format(date)};
+  const formatDate=(value,options={})=>formatDateTime(value,options.day||options.month||options.year?options:{day:'2-digit',month:'2-digit',year:'numeric'});
  const addLink=(parent,label,url)=>{const a=node('a','',label);a.href=url;a.target='_blank';a.rel='noopener noreferrer';parent.append(a)};
  async function load(){try{
   const [roster,records,activity]=await Promise.all(['roster-data.json','creator-records.json','data.json'].map(path=>fetch(path,{cache:'no-store'}).then(r=>{if(!r.ok)throw Error(path+' '+r.status);return r.json()})));
@@ -142,22 +144,27 @@ button,a{font:inherit}.shell{width:min(1440px,100%);margin:auto;padding:22px cla
   $('cover-image').src=hero.img||hero.portrait;$('cover-image').alt='Ilustración de portada '+hero.name;
   $('bio').textContent=hero.bio||'';$('demi').textContent=media.demi||'';$('ari').textContent=media.ari||'';$('editorial').textContent=media.editorial||'';$('voice').textContent=hero.voice||'';
   $('formats').textContent=(media.formats||hero.areas||[]).join(' · ');
-  const stamp=channel.updated_at?new Date(channel.updated_at).toLocaleString('es-AR',{dateStyle:'medium',timeStyle:'short'}):'fecha no disponible';
+  const stamp=channel.updated_at?formatDateTime(channel.updated_at,{dateStyle:'medium',timeStyle:'short'}):'fecha no disponible';
   const activeDates=(w.daily_activity||[]).filter(d=>(Number(d.live_samples)||0)>0).length;
-  const stats=[[w.average_viewers_sampled==null?'—':fmt(w.average_viewers_sampled,1),'Promedio en capturas','AUDIENCIA'],[w.peak_viewers_sampled==null?'—':fmt(w.peak_viewers_sampled,0),'Pico capturado','AUDIENCIA'],[fmt(w.streams_observed,0),'Directos detectados','ACTIVIDAD'],[fmt(activeDates,0),'Días con actividad registrada','ACTIVIDAD']];
+  const snapshots=Array.isArray(channel.snapshots)?channel.snapshots.filter(s=>s&&s.sampled_at):[];
+  const firstObserved=snapshots.length?snapshots[0].sampled_at:null,lastObserved=snapshots.length?snapshots[snapshots.length-1].sampled_at:null;
+  const coverageDays=firstObserved&&lastObserved?Math.max(0,(Date.parse(lastObserved)-Date.parse(firstObserved))/86400000):null;
+  const configuredDays=Number(activity.window_days)||30;
+  const coverageLabel=firstObserved&&lastObserved?formatDateTime(firstObserved,{dateStyle:'medium'})+' — '+formatDateTime(lastObserved,{dateStyle:'medium'})+' · '+fmt(coverageDays,1)+' días observados':'cobertura temporal no disponible';
+  const stats=[[w.average_viewers_sampled==null?'—':fmt(w.average_viewers_sampled,1),'Promedio por muestra en directo','AUDIENCIA'],[w.peak_viewers_sampled==null?'—':fmt(w.peak_viewers_sampled,0),'Pico entre muestras','AUDIENCIA'],[fmt(w.streams_observed,0),'Transmisiones detectadas','ACTIVIDAD'],[fmt(activeDates,0),'Días con actividad registrada','ACTIVIDAD'],[w.observed_live_hours==null?'—':fmt(w.observed_live_hours,1)+' h','Horas en directo observadas (est.)','ACTIVIDAD']];
   $('stats').replaceChildren(...stats.map(([value,label,tag])=>{const n=node('div','stat');n.append(node('b','stat-tag',tag),node('strong','',value),node('span','',label));return n}));
   const coverage=w.samples_total?Math.round((w.live_samples/w.samples_total)*100):0;
-  $('stats-insight').textContent=fmt(w.live_samples,0)+' CAPTURAS LIVE · '+fmt(w.samples_total,0)+' REGISTROS TOTALES · MUESTRA PARCIAL';
-  $('method').textContent='FUENTE: TWITCH HELIX · ÚLTIMA ACTUALIZACIÓN: '+stamp+' · CANAL: LOS MORIARTYS';
+  $('stats-insight').textContent=fmt(w.live_samples,0)+' MUESTRAS EN DIRECTO · '+fmt(w.streams_observed,0)+' TRANSMISIONES DETECTADAS · '+fmt(w.samples_total,0)+' REGISTROS TOTALES · MUESTRA PARCIAL';
+  $('method').textContent='FUENTE: TWITCH HELIX · ÚLTIMA ACTUALIZACIÓN: '+stamp+' · VENTANA CONFIGURADA: '+configuredDays+' DÍAS · COBERTURA DISPONIBLE: '+coverageLabel+' · CANAL: LOS MORIARTYS. Las horas observadas son una estimación entre muestras consecutivas válidas; no equivalen a la duración oficial completa de cada directo.';
   const daily=$('daily'),days=[...(w.daily_activity||[])].sort((a,b)=>a.date.localeCompare(b.date)),max=Math.max(1,...days.map(d=>Number(d.live_samples)||0));
-  daily.replaceChildren();days.forEach(d=>{const row=node('div','day');row.append(node('strong','',new Date(d.date+'T12:00:00').toLocaleDateString('es-AR',{day:'2-digit',month:'short'})));const bar=node('div','bar'),fill=node('i','');fill.style.width=((Number(d.live_samples)||0)/max*100)+'%';bar.append(fill);row.append(bar,node('span','',fmt(d.live_samples,0)+' capt.'));daily.append(row)});
+  daily.replaceChildren();days.forEach(d=>{const row=node('div','day');row.append(node('strong','',formatDate(d.date+'T12:00:00',{day:'2-digit',month:'short'})));const bar=node('div','bar'),fill=node('i','');fill.style.width=((Number(d.live_samples)||0)/max*100)+'%';bar.append(fill);row.append(bar,node('span','',fmt(d.live_samples,0)+' muestras'));daily.append(row)});
   if(!days.length)daily.append(node('p','empty-state','No hay actividad diaria disponible para este período.'));
   const observedDays=days.length,totalLive=days.reduce((sum,d)=>sum+(Number(d.live_samples)||0),0),peakDay=days.reduce((best,d)=>!best||(Number(d.live_samples)||0)>Number(best.live_samples)?d:best,null);
-  $('activity-insight').textContent=observedDays?observedDays+' DÍAS CON ACTIVIDAD · '+totalLive+' REGISTROS · DÍA MÁS ACTIVO: '+new Date(peakDay.date+'T12:00:00').toLocaleDateString('es-AR',{day:'numeric',month:'long'})+' ('+peakDay.live_samples+')':'ACTIVIDAD EN PROCESO DE REGISTRO';
+  $('activity-insight').textContent=observedDays?observedDays+' DÍAS CON ACTIVIDAD · '+totalLive+' MUESTRAS EN DIRECTO · DÍA MÁS ACTIVO: '+formatDate(peakDay.date+'T12:00:00',{day:'numeric',month:'long'})+' ('+peakDay.live_samples+')':'ACTIVIDAD EN PROCESO DE REGISTRO';
   const gameList=$('games'),games=[...(w.game_breakdown||[])].sort((a,b)=>(Number(b.live_samples)||0)-(Number(a.live_samples)||0)),denom=Math.max(1,Number(w.live_samples)||games.reduce((s,g)=>s+(Number(g.live_samples)||0),0));
-  gameList.replaceChildren();games.forEach(g=>{const n=node('div','game');n.append(node('strong','',g.name||'Juego'),node('span','game-share',Math.round((Number(g.live_samples)||0)/denom*100)+'% de muestras'));const track=node('div','game-track'),fill=node('i','');fill.style.width=Math.min(100,(Number(g.live_samples)||0)/denom*100)+'%';track.append(fill);n.append(track);const meta=node('div','game-meta');[['Capturas',fmt(g.live_samples,0)],['Promedio',g.average_viewers_sampled==null?'—':fmt(g.average_viewers_sampled,1)],['Pico',g.peak_viewers_sampled==null?'—':fmt(g.peak_viewers_sampled,0)]].forEach(([k,v])=>{const s=node('span','',k);s.append(node('b','',v));meta.append(s)});n.append(meta);gameList.append(n)});
+  gameList.replaceChildren();games.forEach(g=>{const n=node('div','game');n.append(node('strong','',g.name||'Juego'),node('span','game-share',Math.round((Number(g.live_samples)||0)/denom*100)+'% de muestras en directo'));const track=node('div','game-track'),fill=node('i','');fill.style.width=Math.min(100,(Number(g.live_samples)||0)/denom*100)+'%';track.append(fill);n.append(track);const meta=node('div','game-meta');[['Muestras',fmt(g.live_samples,0)],['Promedio por muestra',g.average_viewers_sampled==null?'—':fmt(g.average_viewers_sampled,1)],['Pico muestreado',g.peak_viewers_sampled==null?'—':fmt(g.peak_viewers_sampled,0)]].forEach(([k,v])=>{const s=node('span','',k);s.append(node('b','',v));meta.append(s)});n.append(meta);gameList.append(n)});
   if(!games.length)gameList.append(node('p','empty-state','No se detectaron categorías en las capturas disponibles.'));
-  const topGame=games[0];$('game-insight').textContent=topGame?'MAYOR PRESENCIA EN EL REGISTRO: '+topGame.name.toUpperCase()+' · '+topGame.live_samples+' CAPTURAS':'CATÁLOGO DE JUEGOS EN ACTUALIZACIÓN';
+  const topGame=games[0];$('game-insight').textContent=topGame?'MAYOR PRESENCIA EN EL REGISTRO: '+topGame.name.toUpperCase()+' · '+topGame.live_samples+' MUESTRAS':'CATÁLOGO DE JUEGOS EN ACTUALIZACIÓN';
   const collabs=$('collabs');collabs.replaceChildren();(record.collaborations||[]).forEach(item=>{const n=node('div','timeline'),isPartner=/Partner/i.test(item.title||'');n.append(node('span','tag',isPartner?'Colaboración confirmada':'Plataforma de acceso'));const body=node('div','');body.append(node('h3','',item.title||'Registro'),node('p','',item.description||''));if(item.source && !/Información confirmada por Demi/i.test(item.source))body.append(node('p','smallnote',item.source));n.append(body);collabs.append(n)});if(!collabs.children.length)collabs.append(node('p','smallnote','No hay alianzas documentadas.'));
   const clips=$('clips');clips.replaceChildren();(record.highlights||[]).forEach((item,i)=>{const n=node('div','clip'),body=node('div','');n.append(node('span','clip-num',String(i+1).padStart(2,'0')));body.append(node('h3','',item.title||'Momento destacado'),node('p','',item.source||'Twitch Clips'));n.append(body);if(item.url)addLink(n,'VER CLIP ↗',item.url);else if(item.clip_id)addLink(n,'ABRIR CLIP ↗','https://clips.twitch.tv/'+item.clip_id);clips.append(n)});if(!clips.children.length)clips.append(node('p','smallnote','No hay clips registrados.'));
   const opp=media.opportunities||[];$('opportunities').replaceChildren(...opp.map(t=>node('div','opportunity',t)));$('disclaimer').textContent=media.disclaimer||'';
