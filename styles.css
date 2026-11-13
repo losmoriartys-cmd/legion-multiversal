@@ -4222,3 +4222,109 @@ header .primary-navigation .nav-btn[aria-current="page"]{border-color:#8be3f3;co
         transition-duration: .01ms !important;
     }
 }
+
+
+/* SISTEMA EDITORIAL COMPARTIDO · tipografía, ritmo y enlaces */
+:root {
+    --type-body-size: clamp(.98rem, .94rem + .16vw, 1.06rem);
+    --type-body-leading: 1.68;
+    --space-section: clamp(28px, 4vw, 48px);
+    --space-content: clamp(14px, 2vw, 22px);
+    --link-focus-ring: #8beaff;
+}
+
+body {
+    font-size: var(--type-body-size);
+    line-height: 1.58;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+}
+
+main .chapter-panel :where(p, li) {
+    line-height: var(--type-body-leading);
+}
+
+main .chapter-panel :where(.chapter-deck, .executive-lead, .section-heading > p,
+    .executive-section-heading > p, .premium-panel > p, .premium-card > p) {
+    max-width: 68ch;
+    text-wrap: pretty;
+}
+
+main .chapter-panel :where(.chapter-deck, .executive-lead) {
+    line-height: 1.72;
+}
+
+main .chapter-panel :where(.section-heading, .executive-section-heading) {
+    row-gap: 12px;
+}
+
+main .chapter-panel :where(.section-heading h3, .executive-section-heading h3,
+    .premium-panel h3, .premium-card h3) {
+    text-wrap: balance;
+}
+
+main .chapter-panel :where(.premium-panel, .premium-card) {
+    min-width: 0;
+}
+
+main .chapter-panel :where(.premium-panel, .premium-card) > :where(p, ul, ol) + :where(p, ul, ol) {
+    margin-top: .8em;
+}
+
+main .chapter-panel :where(.premium-panel, .premium-card) :where(ul, ol) {
+    padding-inline-start: 1.25em;
+}
+
+main .chapter-panel :where(.premium-panel, .premium-card) li + li {
+    margin-top: .38em;
+}
+
+/* Enlaces: feedback claro sin alterar las paletas particulares de cada capítulo. */
+main .chapter-panel a[href]:not(.nav-btn):not(.executive-button):not(.chapter-cta) {
+    text-decoration-thickness: 1px;
+    text-underline-offset: .2em;
+    transition: color .16s ease, text-decoration-color .16s ease, background-color .16s ease;
+}
+
+main .chapter-panel a[href]:not(.nav-btn):not(.executive-button):not(.chapter-cta):hover {
+    text-decoration-thickness: 2px;
+}
+
+main .chapter-panel a[href]:focus-visible,
+main .chapter-panel button:focus-visible,
+main .chapter-panel input:focus-visible,
+main .chapter-panel select:focus-visible,
+main .chapter-panel textarea:focus-visible,
+header a[href]:focus-visible,
+header button:focus-visible {
+    outline: 3px solid var(--link-focus-ring);
+    outline-offset: 3px;
+}
+
+main .chapter-panel :where(.chapter-cta, .executive-button, .comic-submit-btn,
+    .nav-btn-secondary, .chapter-pager button, .hero-profile-pager button) {
+    transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease,
+        background-color .16s ease, color .16s ease;
+}
+
+@media (max-width: 700px) {
+    main .chapter-panel {
+        scroll-margin-top: 12px;
+    }
+
+    main .chapter-panel :where(.section-heading, .executive-section-heading) {
+        margin-bottom: clamp(18px, 4vw, 26px);
+    }
+
+    main .chapter-panel :where(.premium-panel, .premium-card) {
+        overflow-wrap: anywhere;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    main .chapter-panel a[href],
+    main .chapter-panel :where(.chapter-cta, .executive-button, .comic-submit-btn,
+        .nav-btn-secondary, .chapter-pager button, .hero-profile-pager button) {
+        transition: none !important;
+    }
+}
