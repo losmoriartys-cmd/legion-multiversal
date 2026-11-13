@@ -56,6 +56,7 @@
             <div class="secondary-navigation-heading"><span>CAPÍTULOS ESPECIALES</span><small>EXTRAS Y TRANSMISIONES</small></div>
             <div class="secondary-navigation-links">
                 <button class="nav-btn nav-btn-secondary" data-chapter="5" onclick="switchChapter(5)">08 ARSENAL</button>
+                <button class="nav-btn nav-btn-secondary" data-chapter="14" onclick="switchChapter(14)">08.5 CAMPAÑAS Y ACCESOS</button>
                 <button class="nav-btn nav-btn-secondary nav-btn-live" data-chapter="10" onclick="switchChapter(10)">09 EN VIVO</button>
                 <button class="nav-btn nav-btn-secondary" data-chapter="6" onclick="switchChapter(6)">10 RECLUTAMIENTO</button>
                 <button class="nav-btn nav-btn-secondary" data-chapter="13" onclick="switchChapter(13)">EXTRA · MAPA MULTIVERSAL</button>
@@ -217,7 +218,7 @@
    <strong>DIFERENTES MUNDOS. UNA MISMA LEGIÓN.</strong>
   </div>
   <figure class="origin-editorial-cover">
-   <img src="image_20261107_021355.jpg" alt="Portada ilustrada de Legión Multiversal: Orígenes número 0001, con los personajes del universo de la Legión" loading="lazy">
+   <img src="image_20261107_021355.jpg?v=20261112" alt="Portada ilustrada de Legión Multiversal: Orígenes número 0001, con los personajes del universo de la Legión" loading="eager" fetchpriority="high" decoding="async">
    <figcaption>ORÍGENES #0001 · Una nueva identidad para una historia que continúa.</figcaption>
   </figure>
  </section>
@@ -274,7 +275,7 @@
  <section class="impact-live-board" aria-labelledby="impact-live-title">
   <div class="impact-section-heading"><span>01 / ACTIVIDAD OBSERVADA</span><h3 id="impact-live-title">LA LEGIÓN EN MOVIMIENTO</h3><p>Indicadores del roster activo a partir de las consultas registradas. Los datos se actualizan automáticamente cuando se renueva el archivo de actividad.</p></div>
   <div id="stats-updated" class="stats-note">Actualizando indicadores…</div>
-  <div id="stats-summary" class="impact-kpi-grid"><article class="impact-kpi"><strong>—</strong><span>CANALES EN SEGUIMIENTO</span></article></div>
+  <div id="stats-summary" class="impact-kpi-grid"><article class="impact-kpi"><strong>7</strong><span>CANALES TWITCH EN SEGUIMIENTO</span><small>7 canales Twitch del roster activo. Oratoris se informa por separado desde YouTube.</small></article></div>
   <div class="stats-channel-heading"><h4>ESTADO DE CADA CANAL</h4><p>Una ficha por canal del roster, con estado actual y métricas observadas. Estar offline no significa que el canal esté fuera del seguimiento.</p></div>
   <div id="stats-channel-grid" class="stats-channel-grid" aria-live="polite"><p class="stats-note">Cargando canales registrados…</p></div>
   <div id="stats-highlights" class="impact-highlights" aria-live="polite"></div>
@@ -334,7 +335,7 @@
  <div class="premium-panel live-intro"><div class="premium-kicker"><span class="live-pulse"></span> CENTRAL DE TRANSMISIONES</div><h3>Consultá quién está en directo</h3><p>El directorio muestra el último estado registrado de cada canal. Si la captura está demorada, lo indica antes de ofrecer una transmisión. Cuando haya integrantes en directo, vas a poder elegir un canal y verlo desde esta página.</p></div>
  <div id="live-directory" class="live-directory"><p class="stats-note">Consultando el estado de los canales…</p></div>
  <div id="live-player-wrap" class="live-player-wrap" hidden><div class="live-player-heading"><h3 id="live-player-title">TRANSMISIÓN SELECCIONADA</h3><a id="live-open-channel" href="https://twitch.tv/losmoriartys" target="_blank" rel="noopener noreferrer">Abrir canal en Twitch ↗</a></div><div id="live-player" class="live-player"></div></div>
- <p class="stats-note">El reproductor oficial de Twitch requiere conexión a internet y un navegador compatible. En GitHub Pages se utiliza el dominio publicado como parámetro de inserción; si abrís una copia local, Twitch puede bloquear la reproducción.</p>
+ 
 </section>
 
 <section id="chapter-8" class="chapter-panel comic-page chapter-8-alliance" aria-labelledby="alliance-title" data-editorial-number="6">
@@ -354,14 +355,14 @@
    <div class="alliance-credential-top"><span class="alliance-stamp alliance-stamp-platform">PLATAFORMA · LURKIT</span><span class="alliance-status alliance-status-confirmed">PARTNER CREATOR</span></div>
    <div class="alliance-credential-body"><div class="alliance-brand-mark" aria-hidden="true">LM<span>×</span>LURKIT</div><div class="alliance-credential-copy"><h4>LOS MORIARTYS</h4><p>Los Moriartys figura como Partner Creator de Cinderia y Enshrouded dentro de Lurkit. Esta participación corresponde al canal compartido y constituye una credencial dentro del ecosistema creator.</p><div class="alliance-game-tags" aria-label="Programas asociados"><span>CINDERIA</span><span>ENSHROUDED</span></div><p class="alliance-fineprint">Información confirmada por el equipo. No implica, por sí sola, un patrocinio económico ni una campaña remunerada.</p></div></div>
   </article>
-  <article class="alliance-code-card"><div><span class="alliance-stamp alliance-stamp-platform">EPIC GAMES · CÓDIGO DE CREADOR</span><h4>LOSMORIARTYS</h4><p>Código informado para el canal compartido. La activación todavía no fue confirmada.</p></div><span class="alliance-status alliance-status-pending">ESTADO PENDIENTE</span></article>
+  <article class="alliance-code-card alliance-code-card-confirmed"><div><span class="alliance-stamp alliance-stamp-platform">EPIC GAMES · CÓDIGO DE CREADOR</span><h4>LOSMORIARTYS</h4><p>Código de creador confirmado para el canal compartido.</p><div class="alliance-code-meta"><span><b>CÓDIGO</b> losmoriartys</span><span><b>ID DE CREADOR</b> dc2236199d3c4fc88932c290ad87be97</span></div></div><span class="alliance-status alliance-status-confirmed">CONFIRMADO</span></article>
  </section>
  <section class="alliance-section" id="alliance-individual" aria-labelledby="alliance-individual-title">
   <div class="alliance-section-heading"><span class="alliance-index">02 / TRAYECTORIAS PERSONALES</span><h3 id="alliance-individual-title">CREDENCIALES INDIVIDUALES</h3><p>Las acreditaciones personales pertenecen a cada creador y a su canal. No se atribuyen automáticamente a toda la Legión.</p></div>
   <article class="alliance-person-card"><img class="alliance-person-avatar" src="assets/heroes/rod3r1k_dark.webp" alt="Identidad visual de TheR0d3R1k" loading="lazy"><div class="alliance-person-main">
    <div class="alliance-person-heading"><div><span class="alliance-stamp alliance-stamp-personal">CREDENCIAL INDIVIDUAL</span><h4>TheR0d3R1k</h4></div><span class="alliance-status alliance-status-confirmed">TWITCH PARTNER</span></div>
    <p>Reconocimiento correspondiente a su canal individual de Twitch.</p><div class="alliance-person-links"><a href="https://www.twitch.tv/TheR0d3R1k" target="_blank" rel="noopener noreferrer">VISITAR CANAL DE TWITCH ↗</a></div>
-   <div class="alliance-epic-code"><span>EPIC GAMES · CÓDIGO DE CREADOR</span><strong>TheR0d3R1k</strong><small>Código informado por el creador. No se presenta como patrocinio ni como acuerdo comercial con Epic Games.</small></div>
+   <div class="alliance-epic-code"><span>EPIC GAMES · CÓDIGO DE CREADOR</span><strong>TheR0d3R1k</strong><small>Código de creador confirmado por el titular. No se presenta como patrocinio ni como acuerdo comercial con Epic Games.</small></div>
   </div></article>
  </section>
  <section class="alliance-section" id="alliance-platforms" aria-labelledby="alliance-platforms-title">
@@ -664,6 +665,12 @@
 <p>Las fichas enlazan a la tienda oficial de cada juego. Antes de convocar al roster, confirmá que todos tengan la misma edición o una versión compatible. En Minecraft, distinguí Java de Bedrock; en los títulos de Steam, revisá los requisitos y el modo online de la ficha vigente.</p>
 </div>
 
+
+
+<section id="chapter-14" class="chapter-panel comic-page campaign-archive-chapter" data-editorial-number="8.5" aria-labelledby="campaign-archive-title">
+ <div class="chapter-tag">CAPÍTULO 08.5 · CAMPAÑAS Y ACCESOS</div>
+ <h2 id="campaign-archive-title" class="comic-title">EL ARCHIVO DE CAMPAÑAS</h2>
+ <p class="campaign-archive-intro">Un registro documental de solicitudes, accesos y campañas gestionadas por los creadores. Se conserva separado del Arsenal: acá documentamos oportunidades y procesos de plataformas; en el Arsenal, los juegos que queremos compartir.</p>
 <section class="arsenal-platform-hub" id="arsenal-platform-hub" aria-labelledby="arsenal-platform-hub-title">
   <div class="arsenal-hub-heading">
     <div><div class="premium-kicker">CENTRAL DE RECURSOS · CREADORES</div><h3 id="arsenal-platform-hub-title">PLATAFORMAS Y CAMPAÑAS</h3><p>Herramientas para descubrir juegos, gestionar accesos y consultar el historial de colaboraciones.</p></div>
@@ -804,8 +811,9 @@
 
   </div>
 </section>
+</section>
 
-<section id="chapter-6" class="chapter-panel recruitment-chapter" data-editorial-number="10">
+<section id="chapter-6" class="chapter-panel comic-page recruitment-chapter" data-editorial-number="10">
     <div class="chapter-tag">CAPÍTULO 10 · RECLUTAMIENTO</div>
     <h2 class="comic-title">RECLUTAR · CONECTAR · CRECER</h2>
     <div class="premium-panel recruitment-intro">
