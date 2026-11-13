@@ -1,14 +1,16 @@
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MAX_FIELD_LENGTH = 4000;
 const MAX_BODY_LENGTH = 20000;
-const ALLOWED_FIELDS = new Set(["Nombre o alias","País y zona horaria","Canal principal","Otras redes","Contenido habitual","Disponibilidad","Motivación","Ideas de colaboración","Empresa o marca","Persona de contacto","Correo de contacto","Juego o proyecto","Objetivo","Fechas","Plataformas y entregables","Presupuesto o modalidad","Tipo de propuesta","Fechas estimadas","Presupuesto orientativo","Descripción y objetivos","subject","website"]);
+const ALLOWED_FIELDS = new Set(["Nombre o alias","País y zona horaria","Canal principal","Otras redes","Contenido habitual","Disponibilidad","Motivación","Ideas de colaboración","Empresa o marca","Persona de contacto","Correo de contacto","Juego o proyecto","Objetivo","Fechas","Plataformas y entregables","Presupuesto o modalidad","Tipo de propuesta","Fechas estimadas","Presupuesto orientativo","Descripción y objetivos","subject","contact_hp"]);
 const REQUIRED_FIELDS = {
- "Solicitud de incorporación a Legión Multiversal": ["Nombre o alias","Canal principal","Motivación"],
+ "Solicitud de incorporación a Legión Multiversal": ["Nombre o alias","Canal principal","Correo de contacto","Motivación"],
  "Propuesta de colaboración para Legión Multiversal": ["Empresa o marca","Persona de contacto","Correo de contacto","Descripción y objetivos"]
 };
 function json(body,status=200){return new Response(JSON.stringify(body),{status,headers:{"content-type":"application/json; charset=utf-8","cache-control":"no-store"}});}
 export async function onRequest({request,env}){
  if(request.method!=="POST")return json({error:"Método no permitido."},405);
+ const origin=request.headers.get("Origin");
+ if(!origin || origin!==new URL(request.url).origin)return json({error:"Origen de solicitud no permitido."},403);
  let payload;
  try{
   const raw=await request.text();
@@ -16,8 +18,8 @@ export async function onRequest({request,env}){
   payload=JSON.parse(raw);
  }catch{return json({error:"Solicitud JSON inválida."},400);}
  if(!payload||typeof payload!=="object"||Array.isArray(payload))return json({error:"Formulario inválido."},400);
- if(typeof payload.website==="string"&&payload.website.trim())return json({ok:true});
- const entries=Object.entries(payload).filter(([key])=>key!=="website");
+ if(typeof payload.contact_hp==="string"&&payload.contact_hp.trim())return json({ok:true});
+ const entries=Object.entries(payload).filter(([key])=>key!=="contact_hp");
  if(!entries.length||entries.some(([key,value])=>!ALLOWED_FIELDS.has(key)||typeof value!=="string"||value.length>MAX_FIELD_LENGTH))return json({error:"Hay campos inválidos o demasiado extensos."},400);
  const subjectType=typeof payload.subject==="string"?payload.subject.trim():"";
  const requiredFields=REQUIRED_FIELDS[subjectType];
@@ -25,7 +27,7 @@ export async function onRequest({request,env}){
  const missing=requiredFields.filter(key=>typeof payload[key]!=="string"||!payload[key].trim());
  if(missing.length)return json({error:"Faltan campos obligatorios: "+missing.join(", ")+"."},400);
  const email=typeof payload["Correo de contacto"]==="string"?payload["Correo de contacto"].trim():"";
- if(email&&!EMAIL_RE.test(email))return json({error:"El correo de contacto no es válido."},400);
+ if(!email||!EMAIL_RE.test(email))return json({error:"El correo de contacto es obligatorio y debe ser válido."},400);
  if(subjectType==="Solicitud de incorporación a Legión Multiversal"){
   try{
    const channelUrl=new URL(payload["Canal principal"].trim());
