@@ -558,23 +558,43 @@ function formatMetric(value,digits=2){
  if(value===null||value===undefined)return 'Pendiente de verificación';
  return typeof value==='number'?value.toLocaleString('es-AR',{maximumFractionDigits:digits}):value;
 }
-function renderLiveDirectory(channels){
+function renderLiveDirectory(channels, options = {}){
  const host=document.getElementById('live-directory');if(!host)return;
- const detectedLive=(channels||[]).filter(c=>c.live);
- const offline=(channels||[]).filter(c=>!c.live);
- const updated=instituteStatsData?.updated_at?new Date(instituteStatsData.updated_at):null;
- const updatedLabel=updated&&!Number.isNaN(updated.getTime())?updated.toLocaleString('es-AR'):'fecha no disponible';
- const interval=Number(instituteStatsData?.sampling_interval_minutes)||55;
- const ageMinutes=updated?(Date.now()-updated.getTime())/60000:Infinity;
- const fresh=Boolean(updated&&!Number.isNaN(updated.getTime())&&ageMinutes>=-5&&ageMinutes<=Math.max(interval*2.5,120));
- const live=fresh?detectedLive:[];
- const staleLive=(channels||[]).filter(c=>c.live&&!fresh);
-  const refreshNote='<p class="stats-note live-refresh-note">Última captura: '+escapeStatsHtml(updatedLabel)+' · el colector consulta Twitch con una cadencia objetivo de '+interval+' minutos; la página vuelve a leer el archivo cada 60 segundos. No es una conexión en tiempo real.</p>';
+ const list=Array.isArray(channels)?channels:[];
+ const updated=options.updatedAt?new Date(options.updatedAt):(instituteStatsData?.updated_at?new Date(instituteStatsData.updated_at):null);
+ const validUpdated=updated&&!Number.isNaN(updated.getTime());
+ const ageMinutes=validUpdated?Math.max(0,(Date.now()-updated.getTime())/60000):Infinity;
+ const fresh=validUpdated&&ageMinutes<=Math.max(Number(options.freshnessMinutes)||120,120);
+ const live=list.filter(c=>c.live);
+ const ageLabel=!validUpdated?'antigüedad no disponible':ageMinutes<1?'actualizado hace menos de 1 min':ageMinutes<60?'actualizado hace '+Math.round(ageMinutes)+' min':'actualizado hace '+Math.floor(ageMinutes/60)+' h '+Math.round(ageMinutes%60)+' min';
+ const sourceLabel=options.source==='helix'?'Twitch Helix · consulta actual':'data.json · última captura registrada';
+ const refreshNote='<p class="stats-note live-refresh-note">Fuente: '+sourceLabel+' · '+escapeStatsHtml(ageLabel)+(options.fallback?' · modo de respaldo':'')+'</p>';
+ const nav=document.querySelector('.nav-btn-live[data-chapter="10"]');
+ if(nav){nav.classList.toggle('is-live',fresh&&live.length>0);nav.textContent='09 EN VIVO'+(fresh&&live.length?' · '+live.length:'');nav.setAttribute('aria-label',fresh&&live.length?live.length+' canal(es) detectado(s) en directo':'Consultar estado de transmisiones');}
+ if(!list.length){host.innerHTML=refreshNote+'<div class="resource-state resource-empty"><p>No hay canales Twitch registrados para consultar.</p></div>';return;}
  if(!live.length){
-  host.innerHTML=refreshNote+'<div class="premium-panel"><div class="premium-kicker">ESTADO DE TRANSMISIONES</div><h3>'+(staleLive.length?'La última captura registró '+staleLive.length+' canal(es) en directo, pero los datos están demorados':'En la última captura no había integrantes detectados en directo')+'</h3><p>Los canales permanecen en seguimiento aunque estén offline. Consultá cada perfil para comprobar si inició una transmisión más reciente.</p></div>'+(channels||[]).map(c=>'<article class="live-channel-card offline"><strong>'+escapeStatsHtml(c.display_name)+'</strong><small>'+(staleLive.includes(c)?'Último estado registrado: EN DIRECTO · captura demorada':'OFFLINE · continúa en seguimiento')+'</small><a href="https://twitch.tv/'+encodeURIComponent(c.login)+'" target="_blank" rel="noopener noreferrer">Visitar canal ↗</a></article>').join('');
+  host.innerHTML=refreshNote+'<div class="premium-panel"><div class="premium-kicker">ESTADO DE TRANSMISIONES</div><h3>'+(fresh?'No hay integrantes en directo en este momento':'No hay una lectura reciente disponible')+'</h3><p>'+(fresh?'Los canales permanecen en seguimiento aunque estén offline.':'La última captura puede estar desactualizada; consultá los canales directamente para confirmar su estado actual.')+'</p></div>'+list.map(c=>'<article class="live-channel-card offline"><strong>'+escapeStatsHtml(c.display_name||c.login)+'</strong><small>'+(c.live?'Último estado registrado: EN DIRECTO · captura demorada':'OFFLINE · continúa en seguimiento')+'</small><a href="https://twitch.tv/'+encodeURIComponent(c.login)+'" target="_blank" rel="noopener noreferrer">Visitar canal ↗</a></article>').join('');
   return;
  }
- host.innerHTML=refreshNote+live.map(c=>'<article class="live-channel-card"><span class="stats-status partial">● EN DIRECTO</span><strong>'+escapeStatsHtml(c.display_name)+'</strong><small>'+escapeStatsHtml(c.current_game||'Categoría no informada')+' · '+(c.current_viewers===null?'Espectadores no disponibles':statsNumber(c.current_viewers,0)+' espectadores')+'</small><button type="button" onclick="selectLiveChannel(\''+escapeStatsHtml(c.login)+'\',\''+escapeStatsHtml(c.display_name)+'\')">VER TRANSMISIÓN</button></article>').join('');
+ host.innerHTML=refreshNote+live.map(c=>'<article class="live-channel-card"><span class="stats-status partial">● EN DIRECTO</span><strong>'+escapeStatsHtml(c.display_name||c.login)+'</strong><small>'+escapeStatsHtml(c.current_game||'Categoría no informada')+' · '+(c.current_viewers===null||c.current_viewers===undefined?'Espectadores no disponibles':statsNumber(c.current_viewers,0)+' espectadores')+'</small><button type="button" onclick="selectLiveChannel(\''+escapeStatsHtml(c.login)+'\',\''+escapeStatsHtml(c.display_name||c.login)+'\')">VER TRANSMISIÓN</button></article>').join('');
+}
+async function loadLiveDirectory(){
+ const host=document.getElementById('live-directory');if(!host)return;
+ try{
+  const payload=await fetchJSON('/api/live',{timeout:10000,retries:1});
+  if(!Array.isArray(payload.channels))throw new Error('Respuesta Helix sin canales.');
+  renderLiveDirectory(payload.channels.map(c=>({login:c.login,display_name:c.display_name,live:Boolean(c.live),current_game:c.game_name||null,current_viewers:c.viewer_count??null})),{source:'helix',updatedAt:payload.updated_at,freshnessMinutes:2});
+ }catch(apiError){
+  try{
+   const data=await fetchJSON('data.json',{timeout:10000,retries:1});
+   instituteStatsData=instituteStatsData||data;
+   const logins=Array.isArray(data.active_channels)?data.active_channels:Object.keys(data.channels||{});
+   const channels=logins.map(login=>data.channels?.[login]).filter(Boolean);
+   renderLiveDirectory(channels,{source:'data',updatedAt:data.updated_at,fallback:true});
+  }catch(fallbackError){
+   host.innerHTML=resourceRetryMarkup('No se pudo consultar Twitch Helix ni recuperar data.json. '+fallbackError.message,'live');
+  }
+ }
 }
 function selectLiveChannel(login,displayName){
  const wrap=document.getElementById('live-player-wrap'),player=document.getElementById('live-player'),title=document.getElementById('live-player-title'),link=document.getElementById('live-open-channel');
@@ -1893,6 +1913,7 @@ function openHeroModal(index) {
             loadSullyGnomeData(),
             loadTwitchMetricsData(),
             loadInstituteStats(),
+            loadLiveDirectory(),
             loadPartnerMetrics(),
             loadCreatorRecords(),
             loadPlatformStatsData(),
