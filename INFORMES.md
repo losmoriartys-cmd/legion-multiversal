@@ -2,7 +2,7 @@
 
 - **Fecha y responsable:** 13/11/2026 · Asistencia técnica.
 - **Objetivo:** implementar la auditoría UX solicitada en la rama `auditoria-ux`, con cambios acotados y sin mover, borrar ni renombrar imágenes de la raíz.
-- **Archivos modificados:** `index.html`, `app.js`, `styles.css`, `functions/api/contact.js`, `functions/api/live.js`, `scripts/check_anchors.py`, `.github/workflows/validar-sitio.yml`, `bitacora-preview.html`, `_headers`, `README.md` y `CLOUDFLARE_PAGES.md`.
+- **Archivos modificados:** `index.html`, `app.js`, `styles.css`, `functions/api/contact.js`, `functions/api/live.js`, `scripts/check_anchors.py`, `.github/workflows/validar-sitio.yml`, `bitacora-preview.html`, `_headers`, `README.md`, `CLOUDFLARE_PAGES.md` e `INFORMES.md`.
 - **Implementado:**
   - Los dos formularios de reclutamiento y contacto comercial envían a `/api/contact`; la función usa Resend, honeypot, allowlist de campos, validación de correo y límites de longitud. El cliente ofrece fallback `mailto:` y botón para copiar el email.
   - Se incorporó `fetchJSON` con timeout y reintentos; skeletons, estados de error con reintento y estados vacíos para roster, estadísticas, EN VIVO, mapa y misiones. Los filtros del roster se agrupan en `<details>` en móvil y el empty state permite limpiar filtros.

@@ -74,7 +74,11 @@ Cada colaborador debe:
 | `creator-records.json` | Registros editoriales y trayectoria documentada por creador. |
 | `sullygnome-data.json` / `twitchmetrics-data.json` | Referencias históricas de analítica externa, separadas de las APIs propias. |
 | `INFORMES.md` | Bitácora vigente de intervenciones, validaciones y pendientes. |
-| `scripts/validate_site.py` | Validación estática de rutas, recursos y datos. |\n| `scripts/check_anchors.py` | Comprobación de anclas semánticas, alias de capítulos y enlaces internos. |
+| `scripts/validate_site.py` | Validación estática de rutas, recursos y datos. |
+| `scripts/check_anchors.py` | Comprobación de anclas semánticas, alias de capítulos y enlaces internos. |
+| `functions/api/contact.js` | Endpoint de contacto con Resend, honeypot y validación. |
+| `functions/api/live.js` | Endpoint de estado en vivo mediante Twitch Helix. |
+| `_headers` | Políticas de caché y robots para Cloudflare Pages. |
 | `.github/workflows/validar-sitio.yml` | Validación automática de JavaScript, Pages Functions, JSON, rutas y anclas. |
 | `CLOUDFLARE_PAGES.md` | Guía de preparación para una futura migración; no implica que esté desplegada. |
 | `BITACORA.md` | Archivo histórico anterior a este protocolo. Se conserva como antecedente; no duplicar allí los nuevos informes. |
