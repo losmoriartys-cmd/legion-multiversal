@@ -13,19 +13,19 @@
     "daved0608"
   ],
   "collection": {
-    "started_at": "2026-11-13T21:07:05Z",
+    "started_at": "2026-11-13T21:22:55Z",
     "expected_channels": 7,
     "resolved_channels": 7,
-    "sampled_channels": [
-      "losmoriartys",
-      "ladymoriarty01",
-      "ther0d3r1k",
+    "sampled_channels": [],
+    "skipped_channels": [
       "habitos_atomicos",
       "ardipii",
       "akumazoldyck",
-      "daved0608"
+      "daved0608",
+      "losmoriartys",
+      "ladymoriarty01",
+      "ther0d3r1k"
     ],
-    "skipped_channels": [],
     "complete": true
   },
   "archived_channels": [
@@ -33,7 +33,7 @@
     "elgabii090"
   ],
   "channel_registry_note": "Los canales archivados se conservan para consulta histórica y no se incluyen en los indicadores del roster activo.",
-  "updated_at": "2026-11-13T21:07:05Z",
+  "updated_at": "2026-11-13T21:22:55Z",
   "channels": {
     "ladymoriarty01": {
       "login": "ladymoriarty01",
@@ -48,7 +48,7 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-13T21:07:05Z",
+      "updated_at": "2026-11-13T21:22:55Z",
       "window": {
         "samples_total": 249,
         "live_samples": 7,
@@ -2369,7 +2369,7 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-13T21:07:05Z",
+      "updated_at": "2026-11-13T21:22:55Z",
       "window": {
         "samples_total": 249,
         "live_samples": 27,
@@ -5378,7 +5378,7 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-13T21:07:05Z",
+      "updated_at": "2026-11-13T21:22:55Z",
       "window": {
         "samples_total": 249,
         "live_samples": 6,
@@ -7678,7 +7678,7 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-13T21:07:05Z",
+      "updated_at": "2026-11-13T21:22:55Z",
       "window": {
         "samples_total": 249,
         "live_samples": 17,
@@ -10034,7 +10034,7 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-13T21:07:05Z",
+      "updated_at": "2026-11-13T21:22:55Z",
       "window": {
         "samples_total": 249,
         "live_samples": 12,
@@ -12992,7 +12992,7 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-13T21:07:05Z",
+      "updated_at": "2026-11-13T21:22:55Z",
       "window": {
         "samples_total": 249,
         "live_samples": 50,
@@ -15355,7 +15355,7 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-13T21:07:05Z",
+      "updated_at": "2026-11-13T21:22:55Z",
       "window": {
         "samples_total": 249,
         "live_samples": 10,
