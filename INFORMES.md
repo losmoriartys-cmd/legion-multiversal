@@ -2697,3 +2697,13 @@ Se conserva el compromiso de avanzar una mejora por etapa, con validación y rev
 - **Estado de main al integrar:** SHA `b1a9597c7246acee27c78ddcadf2b957423e8f2d`; cero PR abiertos al momento de la consulta. Cloudflare Pages informó `Deploy successful` para ese SHA.
 - **Límite de QA:** se intentó abrir la preview `https://561c6c0c.legion-multiversal.pages.dev` y el navegador de revisión devolvió error interno. La estructura CSS y los checks fueron validados; no se declara inspección visual de escritorio/móvil.
 - **Próxima tarea:** seguir con la consistencia tipográfica, jerarquía de títulos, espaciado y componentes de enlace; no ampliar la refactorización global sin capturas renderizadas que permitan comprobar el resultado visual.
+
+## 2026-11-13 — Auditoría UX del roster y fiabilidad de métricas
+
+- **Analítica de MORIARTYS:** se retiró el renderizador especial con cifras estáticas del 5/11/2026. La ficha ahora utiliza el mismo render histórico que el resto del roster, con fuente, período y estado parcial procedentes de `sullygnome-data.json`. Se evita presentar cifras antiguas como si fueran actuales.
+- **Búsqueda del roster:** el índice incorpora biografía, voz, trayectoria y formatos/oportunidades editoriales, además de nombre, alias, clasificación, áreas y plataformas.
+- **Estado vacío:** reemplazado el mensaje genérico por un estado explicativo con acción directa para restablecer filtros y búsqueda.
+- **Accesibilidad y responsive:** se añadieron objetivos táctiles de al menos 44 px para controles principales, foco visible de alto contraste y ajustes de una columna para herramientas del roster en móvil. Se reforzó el respeto a `prefers-reduced-motion` en las cartas.
+- **Caché:** se actualizó la versión de `app.js` y `styles.css` en `index.html` para evitar que el navegador conserve los recursos anteriores.
+- **Validación estática posterior:** cero IDs duplicados; cero capítulos sin navegación y cero destinos de navegación inexistentes; renderizador de analítica obsoleto retirado; controles de búsqueda/filtros siguen presentes y conectados.
+- **Límite de QA:** la apertura de producción mediante navegador web no estuvo disponible en esta sesión. No se certifica todavía la experiencia visual renderizada, el comportamiento táctil real ni el estado de despliegue de Cloudflare. La validación realizada es de código y estructura.
