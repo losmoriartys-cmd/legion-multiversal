@@ -2866,3 +2866,10 @@ Se conserva el compromiso de avanzar una mejora por etapa, con validación y rev
 - **Validación:** pendiente de ejecutar sobre estos cambios. No se declara prueba end-to-end de Resend/Twitch ni despliegue de Cloudflare.
 - **Pendientes / riesgos:** comprobar el comportamiento del formulario desde Preview y Production; la verificación de Origin requiere que el navegador envíe el encabezado estándar en POST same-origin. Continúan pendientes rate limiting/Turnstile (requieren configuración externa), pruebas de Cache API en Pages, QA visual de filtros roster, teclado/lector de pantalla y medición Lighthouse.
 - **Despliegue:** pendiente de verificación.
+
+
+## 2026-11-13 — Controles preventivos de formularios y prioridad de marca
+
+- Se incorpora `scripts/check_form_fields.py` y se integra al workflow para comparar los nombres de campos de ambos formularios `data-contact-form` con la allowlist de `functions/api/contact.js`; también verifica honeypot y correo del formulario de incorporación.
+- Los dos emblemas de marca visibles en la cabecera/portada dejan de usar carga diferida, evitando que elementos iniciales dependan de lazy loading. No se asigna `fetchpriority=high` sin medición que confirme que sean el recurso LCP.
+- Validación automática de este bloque: pendiente de ejecución en GitHub Actions.
