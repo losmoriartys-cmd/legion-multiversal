@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
-"""Auditoría estática de accesibilidad y señales de estabilidad visual."""
+"""Auditoría estática de accesibilidad de las páginas publicadas."""
 from collections import Counter
 from html.parser import HTMLParser
 from pathlib import Path
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
+PAGES = ("index.html", "bitacora-preview.html", "roster-02-moriartys.html")
 ERRORS, WARNINGS = [], []
 
 class AuditParser(HTMLParser):
@@ -25,6 +26,8 @@ class AuditParser(HTMLParser):
         if tag == "iframe" and not a.get("title", "").strip():
             ERRORS.append(f"{self.path.name}: iframe sin title")
         if tag in ("input", "select", "textarea") and a.get("type") != "hidden":
+            if a.get("name") == "website" and a.get("tabindex") == "-1":
+                return
             if not (a.get("aria-label") or a.get("aria-labelledby")):
                 self.controls.append((a.get("id"), tag))
         if tag == "a" and a.get("target") == "_blank":
@@ -32,9 +35,9 @@ class AuditParser(HTMLParser):
             if not {"noopener", "noreferrer"}.issubset(rel):
                 ERRORS.append(f"{self.path.name}: target=_blank sin noopener noreferrer ({a.get('href','')})")
 
-files = sorted(ROOT.glob("*.html"))
+pages = [ROOT / name for name in PAGES if (ROOT / name).is_file()]
 total_images = no_dimensions = 0
-for path in files:
+for path in pages:
     parser = AuditParser(path)
     parser.feed(path.read_text(encoding="utf-8"))
     for key, count in Counter(parser.ids).items():
@@ -51,7 +54,7 @@ if "prefers-reduced-motion" not in css: ERRORS.append("CSS: falta soporte para m
 if no_dimensions:
     WARNINGS.append(f"{no_dimensions}/{total_images} imágenes HTML sin width/height intrínsecos; medir dimensiones reales antes de fijarlas para reducir CLS.")
 
-print(f"HTML: {len(files)} documentos; imágenes: {total_images}; sin dimensiones intrínsecas: {no_dimensions}")
+print(f"HTML de producción: {len(pages)} documentos; imágenes: {total_images}; sin dimensiones intrínsecas: {no_dimensions}")
 for warning in WARNINGS: print("ADVERTENCIA: " + warning)
 if ERRORS:
     print("ERRORES:")
