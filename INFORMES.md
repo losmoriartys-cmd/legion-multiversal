@@ -2854,3 +2854,15 @@ Se conserva el compromiso de avanzar una mejora por etapa, con validación y rev
 - **Integridad:** no se envía ningún mensaje real durante esta revisión. El comportamiento POST queda pendiente de una prueba autorizada después de configurar Resend en Cloudflare; un GET a /api/contact devuelve 405 porque el endpoint solo acepta POST.
 - **Archivos:** app.js, functions/api/contact.js e INFORMES.md. No se modifican el destinatario predeterminado, credenciales ni datos de formularios.
 - **Validación posterior:** el mismo workflow en el commit 16eca075d5374055594e97ae36ca17989d390f89 finalizó correctamente (run [43387674529](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43387674529)) y Cloudflare confirmó la preview [384fae9f](https://384fae9f.legion-multiversal.pages.dev). GET /api/contact devuelve 405, esperado porque la función solo acepta POST; no se probó POST ni se envió correo. La revisión visual de escritorio/móvil continúa pendiente.
+
+
+## 2026-11-13 — Robustez de navegación, formularios y En Vivo (PR #46)
+
+- **Base:** rama `auditoria-ux`; PR #46 abierto y en Draft. No se modificó `main`.
+- **Navegación:** el lector de hash ahora captura secuencias percent-encoded inválidas y busca anclas semánticas por atributo exacto, sin interpolar el hash en un selector CSS. Los alias `chapter-N` siguen admitidos.
+- **Formularios:** se incorpora correo obligatorio al formulario de ingreso y se alinea la validación del servidor. El honeypot cambia a `contact_hp`, excluido del contenido y de la allowlist funcional. El endpoint exige `Origin` coincidente con el origen de Pages, fija el asunto según el tipo de formulario y mantiene límites de cuerpo/campo y timeout de Resend. Los errores de validación 4xx se muestran al usuario en lugar de ocultarse detrás del fallback; el mailto codifica explícitamente asunto/cuerpo y limita el cuerpo a 1.500 caracteres.
+- **En Vivo:** una actualización de estadísticas de respaldo no puede sobrescribir una lectura Helix más reciente en el mismo ciclo de página. Si el roster no contiene canales Twitch, el endpoint responde una lista vacía cacheable sin pedir token ni consultar Helix.
+- **Archivos:** `app.js`, `index.html`, `functions/api/contact.js`, `functions/api/live.js`, `INFORMES.md`.
+- **Validación:** pendiente de ejecutar sobre estos cambios. No se declara prueba end-to-end de Resend/Twitch ni despliegue de Cloudflare.
+- **Pendientes / riesgos:** comprobar el comportamiento del formulario desde Preview y Production; la verificación de Origin requiere que el navegador envíe el encabezado estándar en POST same-origin. Continúan pendientes rate limiting/Turnstile (requieren configuración externa), pruebas de Cache API en Pages, QA visual de filtros roster, teclado/lector de pantalla y medición Lighthouse.
+- **Despliegue:** pendiente de verificación.
