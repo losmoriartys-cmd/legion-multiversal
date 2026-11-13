@@ -2740,3 +2740,14 @@ Se conserva el compromiso de avanzar una mejora por etapa, con validación y rev
 - Fuentes: https://latam.gamescom.global/en/what-sets-the-latin-american-gaming-market-apart-from-the-rest-of-the-world/ y https://www.prensario.net/Comscore-Los-numeros-del-Gaming-en-Argentina-50080.note.aspx.
 - Alcance: `index.html`, `chapter-8.css` e `INFORMES.md`. Sin cambios en métricas internas, credenciales, imágenes ni campañas.
 - Integración: PR #42 fusionado mediante squash en `5717276d608a411b3cf2d34d00e236cff619585a`. La validación automática post-merge finalizó correctamente (run 43378021037); el build/deploy de GitHub Pages seguía en curso al último sondeo (run 43378019981). No se declara verificación de Cloudflare ni aprobación visual; la revisión renderizada queda a cargo del responsable del proyecto.
+
+
+## 2026-11-13 — Estadísticas: directorio multiplataforma del roster
+
+- Se detectó que `platform-stats.json` ya contenía métricas públicas verificadas de YouTube para PATO — ORATORIS, pero el capítulo 04 solo mostraba las siete fichas Twitch; la presencia YouTube quedaba mencionada en una nota y visible únicamente dentro del expediente individual.
+- Se incorpora un directorio multiplataforma en Estadísticas que lee `platform-stats.json` y presenta por creador/plataforma el estado de fuente, métricas acumuladas de YouTube y hasta tres publicaciones recientes con enlace, fecha y vistas. El renderer contempla también cuentas Kick si se registran y verifican en el futuro; no inventa cuentas ni valores.
+- Las cifras de YouTube (suscriptores, visualizaciones totales y videos publicados) permanecen separadas de espectadores, horas y muestras de Twitch. Se aclara que son acumulados públicos, que la captura tiene fecha y que YouTube puede redondear el contador de suscriptores.
+- Se actualiza la metodología para identificar `platform-stats.json` y se programa la recarga del directorio cada 15 minutos, acorde con el ciclo del colector multiplataforma.
+- Se actualizan las versiones de caché de `app.js` y `styles.css`. No se cambian credenciales, archivos de datos, cuentas, imágenes ni métricas de origen.
+- Alcance: `index.html`, `app.js`, `styles.css`, `INFORMES.md`.
+- QA: pendiente de validación automática y revisión de preview. La comprobación visual de escritorio/móvil queda a cargo del responsable del proyecto.
