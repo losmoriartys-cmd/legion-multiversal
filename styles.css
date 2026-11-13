@@ -4020,3 +4020,128 @@ header .primary-navigation .nav-btn[aria-current="page"]{border-color:#8be3f3;co
 .collab-log-metrics strong{color:#fff;font:2.5rem/1 'Bangers',cursive}
 .collab-log-metrics small{color:#c2d0df;font-size:.76rem}
 @media(max-width:620px){.collab-log-section{padding:14px 10px}.collab-log-participants,.collab-log-metrics{grid-template-columns:1fr}.collab-log-participants a{align-items:flex-start;flex-direction:column}}
+
+/* SISTEMA VISUAL COMPARTIDO · superficies, tarjetas y controles */
+:root {
+    --ui-surface-border: rgba(0, 210, 255, .26);
+    --ui-surface-shadow: 0 8px 24px rgba(0, 0, 0, .24);
+    --ui-focus-ring: var(--blue-accent);
+    --ui-muted-text: #bdcad9;
+}
+
+/* Los paneles reutilizados comparten la superficie institucional de la Legión. */
+.premium-panel {
+    border: 1px solid var(--ui-surface-border);
+    border-radius: 4px;
+    background: linear-gradient(145deg, var(--panel-bg), #0e1522);
+    box-shadow: var(--ui-surface-shadow);
+}
+
+.premium-panel h3,
+.premium-panel h4 {
+    color: var(--text-color);
+}
+
+.premium-card {
+    border: 1px solid var(--ui-surface-border);
+    border-radius: 4px;
+    background: var(--card-bg);
+}
+
+.premium-card p,
+.premium-panel p,
+.premium-panel li {
+    color: var(--ui-muted-text);
+}
+
+.premium-panel a {
+    color: var(--blue-accent);
+}
+
+.premium-kicker {
+    color: var(--blue-accent);
+}
+
+/* Arsenal conserva su identidad dorada como acento editorial propio. */
+.chapter-panel#chapter-5 .premium-panel {
+    border: 2px solid #b98c42;
+    border-radius: 0;
+    background: linear-gradient(145deg, rgba(25, 21, 43, .97), rgba(8, 10, 20, .97));
+    box-shadow: 0 0 24px rgba(130, 70, 220, .12);
+}
+
+.chapter-panel#chapter-5 .premium-panel h3,
+.chapter-panel#chapter-5 .premium-panel h4 {
+    color: #ffde9a;
+}
+
+.chapter-panel#chapter-5 .premium-card {
+    border: 1px solid rgba(220, 174, 96, .48);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, .045);
+}
+
+.chapter-panel#chapter-5 .premium-card p,
+.chapter-panel#chapter-5 .premium-panel p,
+.chapter-panel#chapter-5 .premium-panel li {
+    color: #e6e1f1;
+}
+
+.chapter-panel#chapter-5 .premium-panel a {
+    color: #ffd77b;
+}
+
+.chapter-panel#chapter-5 .premium-kicker {
+    color: #c6a5ff;
+}
+
+.chapter-panel#chapter-5 .arsenal-card h3 {
+    color: #ffdf9c;
+}
+
+/* Controles compartidos: foco visible y estados previsibles en todo el sitio. */
+.nav-btn,
+.chapter-cta,
+.executive-button,
+.comic-submit-btn,
+.nav-btn-secondary {
+    border-radius: 2px;
+}
+
+.nav-btn:focus-visible,
+.chapter-cta:focus-visible,
+.executive-button:focus-visible,
+.comic-submit-btn:focus-visible,
+.nav-btn-secondary:focus-visible {
+    outline: 3px solid var(--ui-focus-ring);
+    outline-offset: 3px;
+}
+
+.nav-btn:disabled,
+.chapter-cta:disabled,
+.executive-button:disabled,
+.comic-submit-btn:disabled,
+.nav-btn-secondary:disabled,
+.nav-btn[aria-disabled="true"],
+.chapter-cta[aria-disabled="true"],
+.executive-button[aria-disabled="true"],
+.comic-submit-btn[aria-disabled="true"],
+.nav-btn-secondary[aria-disabled="true"] {
+    cursor: not-allowed;
+    opacity: .58;
+    filter: saturate(.65);
+    transform: none !important;
+    box-shadow: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .nav-btn,
+    .chapter-cta,
+    .executive-button,
+    .comic-submit-btn,
+    .nav-btn-secondary {
+        scroll-behavior: auto !important;
+        transition: none !important;
+        animation: none !important;
+    }
+}
