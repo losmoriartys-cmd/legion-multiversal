@@ -2873,3 +2873,10 @@ Se conserva el compromiso de avanzar una mejora por etapa, con validación y rev
 - Se incorpora `scripts/check_form_fields.py` y se integra al workflow para comparar los nombres de campos de ambos formularios `data-contact-form` con la allowlist de `functions/api/contact.js`; también verifica honeypot y correo del formulario de incorporación.
 - Los dos emblemas de marca visibles en la cabecera/portada dejan de usar carga diferida, evitando que elementos iniciales dependan de lazy loading. No se asigna `fetchpriority=high` sin medición que confirme que sean el recurso LCP.
 - Validación automática de este bloque: pendiente de ejecución en GitHub Actions.
+
+
+## 2026-11-13 — Ajuste del auditor para honeypot de contacto
+
+- **Fallo de CI investigado:** sintaxis, funciones Pages, JSON, recursos y anclas pasaron; la auditoría de accesibilidad falló por los dos campos `contact_hp`, uno por formulario. No son controles interactivos para visitantes: viven dentro de `aria-hidden="true"`, tienen `tabindex="-1"` y se excluyen del cuerpo enviado.
+- **Corrección:** `scripts/audit_accessibility.py` reconoce tanto el nombre histórico `website` como el actual `contact_hp` únicamente cuando el campo tiene `tabindex="-1"`. Los campos visibles siguen requiriendo `label` asociado o nombre ARIA. No se desactiva la auditoría ni se omiten los demás controles.
+- **Validación:** pendiente del nuevo workflow; el commit previo falló exclusivamente por esta discrepancia entre el honeypot y la excepción del auditor.
