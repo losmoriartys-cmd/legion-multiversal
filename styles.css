@@ -4427,3 +4427,28 @@ main .chapter-panel :where(.chapter-cta, .executive-button, .comic-submit-btn,
     .stats-platform-card { padding: 14px; }
     .stats-platform-metrics { gap: 6px; }
 }
+
+/* Estados de carga, error y vacío compartidos. */
+.resource-state{display:grid;justify-items:center;gap:12px;margin:18px auto;padding:22px;max-width:680px;border:1px solid rgba(114,217,243,.3);border-radius:10px;background:#101a29;color:#dce9f3;text-align:center}
+.resource-state p{margin:0;line-height:1.6}
+.resource-state button{min-height:42px;padding:9px 16px;border:1px solid #72d9f3;border-radius:6px;background:#143044;color:#fff;font-weight:800;cursor:pointer}
+.resource-skeleton-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;width:100%}
+.resource-skeleton-card{display:grid;gap:12px;min-height:140px;padding:18px;border:1px solid rgba(114,217,243,.14);border-radius:10px;background:linear-gradient(110deg,#111c2b 8%,#1a2a3d 18%,#111c2b 33%);background-size:200% 100%;animation:resource-shimmer 1.4s linear infinite}
+.resource-skeleton-card i,.resource-skeleton-card b,.resource-skeleton-card span{display:block;height:12px;border-radius:8px;background:rgba(180,210,230,.13)}
+.resource-skeleton-card i{width:42%;height:18px}.resource-skeleton-card b{width:72%}.resource-skeleton-card span:nth-last-child(1){width:55%}
+@keyframes resource-shimmer{to{background-position-x:-200%}}
+.roster-filter-disclosure{margin:18px 0}
+.roster-filter-disclosure>summary{display:none}
+@media(max-width:700px){
+ .roster-filter-disclosure>summary{display:block;min-height:46px;padding:13px 16px;border:1px solid rgba(91,190,218,.5);border-radius:8px;background:#102338;color:#e9faff;font-weight:800;letter-spacing:.08em;cursor:pointer}
+ .roster-filter-disclosure[open]>summary{border-radius:8px 8px 0 0}
+ .roster-filter-disclosure:not([open])>.roster-tools{display:none}
+ .roster-filter-disclosure[open]>.roster-tools{display:grid;margin-top:0;border-radius:0 0 10px 10px}
+}
+@media(min-width:701px){.roster-filter-disclosure:not([open])>.roster-tools{display:grid}}
+@media(prefers-reduced-motion:reduce){.resource-skeleton-card{animation:none}}
+/* Formularios: protección anti-spam y fallback accesible. */
+.contact-honeypot{position:absolute!important;left:-10000px!important;width:1px;height:1px;overflow:hidden}
+.contact-form-status{min-height:1.4em;color:#b9dceb;font-size:.9rem}
+.contact-form-fallback[hidden]{display:none}
+.contact-copy-email{margin:8px 0 0;min-height:42px;padding:9px 14px;border:1px solid rgba(114,217,243,.5);border-radius:5px;background:#102338;color:#e8f8ff;font-weight:800;cursor:pointer}

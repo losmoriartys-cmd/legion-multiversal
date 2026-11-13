@@ -247,7 +247,8 @@
             <nav class="roster-product-nav" aria-label="Navegación entre Roster y Bitácora"><a href="./bitacora-preview.html">ABRIR BITÁCORA CENTRAL ↗</a><a href="./index.html#chapter-12">ARCHIVO DE COLABORACIONES ↗</a></nav>
             <div id="roster-home">
               <p class="roster-intro">Explorá las cartas de la Legión, filtrá por especialidad o plataforma y abrí cualquier expediente directamente. Cada creador conserva su identidad y su espacio propio.</p>
-              <div class="roster-tools" role="search" aria-label="Buscar y filtrar integrantes">
+              <details class="roster-filter-disclosure"><summary>FILTRAR Y BUSCAR INTEGRANTES</summary>
+<div class="roster-tools" role="search" aria-label="Buscar y filtrar integrantes">
                 <label class="roster-search-field" for="roster-search"><span>BUSCAR EN EL ROSTER</span><input id="roster-search" type="search" placeholder="Nombre, alias o especialidad…" autocomplete="off"></label>
                 <label for="roster-role-filter"><span>FUNCIÓN</span><select id="roster-role-filter"><option value="all">Todas las funciones</option><option value="director">Dirección</option><option value="teacher">Profesores</option><option value="student">Estudiante</option><option value="collaborator">Colaboradores</option></select></label>
                 <label for="roster-platform-filter"><span>PLATAFORMA</span><select id="roster-platform-filter"><option value="all">Todas las plataformas</option><option value="twitch">Twitch</option><option value="youtube">YouTube</option><option value="instagram">Instagram</option></select></label>
@@ -258,6 +259,7 @@
                 <p id="roster-results" class="roster-results" aria-live="polite"></p>
                 <div id="roster-active-filters" class="roster-active-filters" aria-label="Filtros aplicados"></div>
               </div>
+              </details>
               <nav class="institute-counts roster-jump-nav" id="roster-counts" aria-label="Accesos directos a las áreas del roster"></nav>
               <div id="roster-container"><!-- Retratos del roster --></div>
             </div>
@@ -338,7 +340,7 @@
  <div class="chapter-tag">CAPÍTULO 09 · EN VIVO</div>
  <h2 class="comic-title">LEGIÓN MULTIVERSAL · EN VIVO</h2>
  <div class="premium-panel live-intro"><div class="premium-kicker"><span class="live-pulse"></span> CENTRAL DE TRANSMISIONES</div><h3>Consultá quién está en directo</h3><p>El directorio muestra el último estado registrado de cada canal. Si la captura está demorada, lo indica antes de ofrecer una transmisión. Cuando haya integrantes en directo, vas a poder elegir un canal y verlo desde esta página.</p></div>
- <div id="live-directory" class="live-directory"><p class="stats-note">Consultando el estado de los canales…</p></div>
+ <div id="live-directory" class="live-directory"><div class="resource-skeleton-list" aria-label="Consultando canales"><div class="resource-skeleton-card"></div><div class="resource-skeleton-card"></div></div></div>
  <div id="live-player-wrap" class="live-player-wrap" hidden><div class="live-player-heading"><h3 id="live-player-title">TRANSMISIÓN SELECCIONADA</h3><a id="live-open-channel" href="https://twitch.tv/losmoriartys" target="_blank" rel="noopener noreferrer">Abrir canal en Twitch ↗</a></div><div id="live-player" class="live-player"></div></div>
  
 </section>
@@ -973,11 +975,11 @@
  </header>
  <section class="multiverse-map-section" aria-labelledby="multiverse-map-title">
   <div class="multiverse-section-heading"><span>01 / CONSTELACIÓN DEL ROSTER</span><h3 id="multiverse-map-title">CARTOGRAFÍA MULTIVERSAL</h3><p>Seleccioná un nodo para abrir el expediente individual. El mapa se construye desde el roster canónico.</p></div>
-  <div id="multiverse-map" class="multiverse-map"><p class="stats-note">Cargando mapa de integrantes…</p></div>
+  <div id="multiverse-map" class="multiverse-map"><div class="resource-skeleton-list" aria-label="Cargando mapa"><div class="resource-skeleton-card"></div><div class="resource-skeleton-card"></div></div></div>
  </section>
  <section class="multiverse-progress-section" aria-labelledby="multiverse-progress-title">
   <div class="multiverse-section-heading"><span>02 / RECORRIDO DE EXPLORACIÓN</span><h3 id="multiverse-progress-title">TUS MISIONES</h3><p>Pequeños recorridos para descubrir el archivo, sus integrantes y las actividades de la comunidad.</p></div>
-  <div id="community-missions" class="community-missions"><p class="stats-note">Cargando misiones…</p></div>
+  <div id="community-missions" class="community-missions"><div class="resource-skeleton-list" aria-label="Cargando misiones"><div class="resource-skeleton-card"></div><div class="resource-skeleton-card"></div></div></div>
  </section>
  <section class="multiverse-achievements-section" aria-labelledby="multiverse-achievements-title">
   <div class="multiverse-section-heading"><span>03 / DISTINCIONES</span><h3 id="multiverse-achievements-title">INSIGNIAS DE EXPLORACIÓN</h3><p>Se desbloquean al recorrer el sitio. Son logros de navegación personales, no premios oficiales de plataformas.</p></div>

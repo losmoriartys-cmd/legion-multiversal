@@ -1,4 +1,57 @@
 
+async function fetchJSON(url, options = {}) {
+    const timeoutMs = Number(options.timeout) || 10000;
+    const retries = Number.isInteger(options.retries) ? options.retries : 2;
+    const fetchOptions = { cache: options.cache || 'no-store', ...options.fetchOptions };
+    let lastError;
+    for (let attempt = 0; attempt <= retries; attempt++) {
+        const controller = new AbortController();
+        const timer = window.setTimeout(() => controller.abort(), timeoutMs);
+        try {
+            const response = await fetch(url, { ...fetchOptions, signal: controller.signal });
+            if (!response.ok) {
+                const error = new Error('HTTP ' + response.status + ' al cargar ' + url);
+                error.status = response.status;
+                if (![408, 429].includes(response.status) && response.status < 500) throw error;
+                throw error;
+            }
+            return await response.json();
+        } catch (error) {
+            lastError = error.name === 'AbortError' ? new Error('Tiempo de espera agotado al cargar ' + url) : error;
+            if (attempt >= retries || (error.status && ![408,429].includes(error.status) && error.status < 500)) break;
+            await new Promise(resolve => window.setTimeout(resolve, 300 * (attempt + 1)));
+        } finally { window.clearTimeout(timer); }
+    }
+    throw lastError || new Error('No se pudo cargar ' + url);
+}
+function resourceRetryMarkup(message, key) {
+    return '<div class="resource-state resource-error" role="alert"><p>' + escapeStatsHtml(message) + '</p><button type="button" data-resource-retry="' + key + '">REINTENTAR</button></div>';
+}
+function resourceSkeletonMarkup(count = 3) {
+    return '<div class="resource-skeleton-list" aria-label="Cargando contenido">' + Array.from({length:count}, () => '<div class="resource-skeleton-card" aria-hidden="true"><i></i><b></b><span></span><span></span></div>').join('') + '</div>';
+}
+async function retryResource(key) {
+    if (key === 'roster') { await loadRosterData(); renderRoster(); renderMultiverseMap(); }
+    else if (key === 'stats') await loadInstituteStats();
+    else if (key === 'live') await loadLiveDirectory();
+    else if (key === 'map') { await loadRosterData(); renderMultiverseMap(); }
+    else if (key === 'missions') await loadCommunityPlaybook();
+    else if (key === 'platform') await loadPlatformStatsData();
+}
+function initResourceRetry() {
+    if (document.documentElement.dataset.resourceRetryBound === 'true') return;
+    document.documentElement.dataset.resourceRetryBound = 'true';
+    document.addEventListener('click', async event => {
+        const button = event.target.closest('[data-resource-retry]');
+        if (!button) return;
+        const key = button.dataset.resourceRetry;
+        button.disabled = true;
+        button.textContent = 'REINTENTANDO…';
+        try { await retryResource(key); }
+        catch (error) { console.error('Reintento fallido:', error); }
+    });
+}
+
 // Formularios de contacto: envío seguro por Pages Function y alternativa manual.
 function initContactForms() {
     document.querySelectorAll('[data-contact-form]').forEach(form => {
@@ -64,9 +117,7 @@ function initContactForms() {
         let heroesData = [];
 
 async function loadRosterData() {
-    const response = await fetch('./roster-data.json', { cache: 'no-store' });
-    if (!response.ok) throw new Error('No se pudo cargar roster-data.json (' + response.status + ').');
-    const payload = await response.json();
+    const payload = await fetchJSON('./roster-data.json', { timeout: 10000, retries: 2 });
     if (!payload || !Array.isArray(payload.heroes) || payload.heroes.length === 0) {
         throw new Error('roster-data.json no contiene integrantes válidos.');
     }
@@ -342,14 +393,12 @@ let creatorRecordsData = null;
 let platformStatsData = null;
 async function loadPlatformStatsData(){
  try{
-  const res=await fetch('platform-stats.json',{cache:'no-store'});
-  if(!res.ok)throw new Error('No se pudo leer platform-stats.json');
-  platformStatsData=await res.json();
+  platformStatsData=await fetchJSON('platform-stats.json',{timeout:10000,retries:2});
   renderStatsPlatformDirectory();
  }catch(e){
   console.warn('Platform statistics unavailable:',e);
   const host=document.getElementById('stats-platform-grid');
-  if(host)host.innerHTML='<p class="stats-note">Las estadísticas de otras plataformas no están disponibles en esta consulta. Volvé a intentarlo más tarde.</p>';
+  if(host)host.innerHTML=resourceRetryMarkup('Las estadísticas de otras plataformas no están disponibles.', 'platform');
  }
 }
 function renderStatsPlatformDirectory(){
@@ -578,10 +627,10 @@ async function loadInstituteStats(){
  instituteStatsLoading=true;
  const fmt=(v,d=1)=>v===null||v===undefined?'—':(typeof v==='number'?v.toLocaleString('es-AR',{maximumFractionDigits:d}):v);
  try{
-  const res=await fetch('data.json',{cache:'no-store'}); if(!res.ok)throw new Error('No se pudo leer data.json');
-  const data=await res.json(); instituteStatsData=data;
+  const data=await fetchJSON('data.json',{timeout:12000,retries:2}); instituteStatsData=data;
   const activeLogins=Array.isArray(data.active_channels)?data.active_channels:Object.keys(data.channels||{});
   const channels=activeLogins.map(login=>data.channels?.[login]).filter(Boolean);
+  if(!channels.length){const summary=document.getElementById('stats-summary');if(summary)summary.innerHTML='<div class="resource-state resource-empty"><p>No hay canales Twitch con datos disponibles en esta captura.</p></div>';const grid=document.getElementById('stats-channel-grid');if(grid)grid.innerHTML='<div class="resource-state resource-empty"><p>El directorio aparecerá cuando existan canales registrados.</p></div>';body.innerHTML='<tr><td colspan="9">Sin canales registrados en esta captura.</td></tr>';renderLiveDirectory([]);return;}
   const liveCount=channels.filter(c=>c.live).length;
   const totalSamples=channels.reduce((n,c)=>n+(c.window?.samples_total||0),0);
   const observedStreams=channels.reduce((n,c)=>n+(c.window?.streams_observed||0),0);
@@ -639,8 +688,10 @@ async function loadInstituteStats(){
   body.innerHTML=channels.map(c=>{const samples=Array.isArray(c.snapshots)?c.snapshots.filter(s=>s?.sampled_at):[];const first=samples.length?Date.parse(samples[0].sampled_at):NaN;const last=samples.length?Date.parse(samples[samples.length-1].sampled_at):NaN;const expected=Number.isFinite(first)&&Number.isFinite(last)&&last>=first?Math.floor((last-first)/(Number(data.sampling_interval_minutes||15)*60000))+1:0;const coverage=expected?Math.min(100,(samples.length/expected)*100):null;const coverageLabel=coverage===null?'Insuficiente':coverage.toLocaleString('es-AR',{maximumFractionDigits:1})+'% ('+samples.length+'/'+expected+')';return '<tr><td>'+escapeStatsHtml(c.display_name)+'</td><td>'+(c.live?'EN DIRECTO':'OFFLINE')+'</td><td>'+fmt(c.current_viewers,0)+'</td><td>'+escapeStatsHtml(fmt(c.current_game))+'</td><td>'+fmt(c.window?.average_viewers_sampled)+'</td><td>'+fmt(c.window?.peak_viewers_sampled,0)+'</td><td>'+fmt(c.window?.observed_live_hours)+'</td><td>'+fmt(c.window?.samples_total,0)+'</td><td>'+coverageLabel+'</td></tr>';}).join('');
   renderLiveDirectory(channels);
  }catch(e){
-  body.innerHTML='<tr><td colspan="9">Estadísticas temporalmente no disponibles. '+escapeStatsHtml(e.message)+'</td></tr>';
-  const summary=document.getElementById('stats-summary');if(summary)summary.innerHTML='<article class="impact-kpi"><strong>—</strong><span>DATOS NO DISPONIBLES</span><small>Volvé a consultar más tarde.</small></article>';
+  body.innerHTML='<tr><td colspan="9">'+escapeStatsHtml(e.message)+' <button type="button" data-resource-retry="stats">REINTENTAR</button></td></tr>';
+  const summary=document.getElementById('stats-summary');if(summary)summary.innerHTML=resourceRetryMarkup('Las estadísticas no están disponibles temporalmente.', 'stats');
+  const grid=document.getElementById('stats-channel-grid');if(grid)grid.innerHTML=resourceRetryMarkup('No se pudo cargar el estado de los canales.', 'stats');
+  const live=document.getElementById('live-directory');if(live)live.innerHTML=resourceRetryMarkup('No se pudo actualizar el directorio en vivo.', 'live');
  } finally {
   instituteStatsLoading=false;
  }
@@ -687,7 +738,8 @@ function recordLegionProgress(type, value) {
 }
 function renderMultiverseMap() {
     const host = document.getElementById('multiverse-map');
-    if (!host || !heroesData.length) return;
+    if (!host) return;
+    if (!heroesData.length) { host.innerHTML = '<div class="resource-state resource-empty"><p>No hay integrantes disponibles para construir el mapa.</p><button type="button" data-resource-retry="map">REINTENTAR</button></div>'; return; }
     const makeNode = (hero, index) => '<button type="button" class="multiverse-node" onclick="openMappedHero(' + index + ')" aria-label="Abrir expediente de ' + escapeStatsHtml(hero.name) + '"><span class="multiverse-node-number">N.º ' + escapeStatsHtml(hero.cardNumber || 'S/N') + '</span><strong>' + escapeStatsHtml(hero.name) + '</strong><span class="multiverse-node-role">' + escapeStatsHtml(hero.codename || hero.characterRole || hero.rank || 'Integrante de la Legión') + '</span><span class="multiverse-node-areas">' + (hero.areas || []).slice(0,3).map(area => '<i>' + escapeStatsHtml(area) + '</i>').join('') + '</span><em>ABRIR EXPEDIENTE ↗</em></button>';
     const top = heroesData.slice(0,4).map(makeNode).join('');
     const bottom = heroesData.slice(4).map((hero,index) => makeNode(hero,index+4)).join('');
@@ -700,14 +752,12 @@ function openMappedHero(index) {
 }
 async function loadCommunityPlaybook() {
     try {
-        const response = await fetch('community-playbook.json', { cache: 'no-store' });
-        if (!response.ok) throw new Error('No se pudo leer community-playbook.json');
-        communityPlaybook = await response.json();
+        communityPlaybook = await fetchJSON('community-playbook.json', { timeout: 10000, retries: 2 });
         renderCommunityProgress();
     } catch (error) {
         const missions = document.getElementById('community-missions');
         const achievements = document.getElementById('community-achievements');
-        if (missions) missions.innerHTML = '<p class="stats-note">Las misiones no están disponibles temporalmente.</p>';
+        if (missions) missions.innerHTML = resourceRetryMarkup('No se pudieron cargar las misiones.', 'missions');
         if (achievements) achievements.innerHTML = '<p class="stats-note">Las insignias no están disponibles temporalmente.</p>';
     }
 }
@@ -716,13 +766,13 @@ function renderCommunityProgress() {
     const state = readLegionProgress();
     const progressFor = key => key === 'profiles' ? state.profiles.length : key === 'chapters' ? state.chapters.length : key === 'bitacora' ? Number(state.bitacora) : key === 'live' ? Number(state.live) : 0;
     const missionsHost = document.getElementById('community-missions');
-    if (missionsHost) missionsHost.innerHTML = (communityPlaybook.missions || []).map(mission => {
+    if (missionsHost) missionsHost.innerHTML = (communityPlaybook.missions || []).length ? communityPlaybook.missions.map(mission => {
         const value = progressFor(mission.progress_key);
         const target = mission.target === 'roster_total' ? Math.max(1, heroesData.length) : Math.max(1, Number(mission.target) || 1);
         const percent = Math.min(100, value / target * 100);
         const complete = value >= target;
         return '<article class="community-mission' + (complete ? ' is-complete' : '') + '"><div class="community-mission-top"><span>' + escapeStatsHtml(mission.category || 'MISIÓN') + '</span><b>' + (complete ? 'COMPLETADA' : 'EN CURSO') + '</b></div><h4>' + escapeStatsHtml(mission.title) + '</h4><p>' + escapeStatsHtml(mission.description) + '</p><div class="community-progress-track" role="progressbar" aria-label="' + escapeStatsHtml(mission.title) + '" aria-valuemin="0" aria-valuemax="' + target + '" aria-valuenow="' + Math.min(value,target) + '"><i style="width:' + percent.toFixed(1) + '%"></i></div><small>' + Math.min(value,target) + ' / ' + target + ' · ' + escapeStatsHtml(mission.progress_label || 'progreso') + '</small></article>';
-    }).join('');
+    }).join('') : '<div class="resource-state resource-empty"><p>No hay misiones publicadas por el momento.</p></div>';
     const achievementsHost = document.getElementById('community-achievements');
     if (achievementsHost) achievementsHost.innerHTML = (communityPlaybook.achievements || []).map(achievement => {
         const achievementTarget = achievement.target === 'roster_total' ? Math.max(1, heroesData.length) : Number(achievement.target || 1);
@@ -1822,10 +1872,11 @@ function openHeroModal(index) {
         }
 
         const rosterContainer = document.getElementById('roster-container');
-        if (rosterContainer) rosterContainer.innerHTML = '<p class="roster-loading">CARGANDO EXPEDIENTES DE LA LEGIÓN…</p>';
+        if (rosterContainer) rosterContainer.innerHTML = resourceSkeletonMarkup(6);
 
         window.onload = async function() {
         initContactForms();
+        initResourceRetry();
         const initialChapter = document.querySelector('.chapter-panel.active');
         if (initialChapter) renderChapterPager(Number(initialChapter.id.replace('chapter-','')));
         try {
@@ -1835,7 +1886,8 @@ function openHeroModal(index) {
             restoreHeroProfileFromHash();
         } catch (error) {
             console.error('No se pudo inicializar el roster:', error);
-            if (rosterContainer) rosterContainer.innerHTML = '<p class="roster-load-error">No se pudieron cargar los expedientes. Volvé a intentarlo más tarde.</p>';
+            if (rosterContainer) rosterContainer.innerHTML = resourceRetryMarkup('No se pudieron cargar los expedientes de la Legión.', 'roster');
+            const mapHost=document.getElementById('multiverse-map');if(mapHost)mapHost.innerHTML=resourceRetryMarkup('No se pudo cargar la cartografía del roster.', 'map');
         }
         await Promise.all([
             loadSullyGnomeData(),
