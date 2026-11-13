@@ -1557,8 +1557,27 @@ function openHeroModal(index) {
     if(fifth)fifth.innerHTML=pages[4]||'';
     if(sixth)sixth.innerHTML=pages[5]||'';
     window.currentComicTotal=pages.length;
-    document.getElementById('modal-twitch-btn').href = hero.youtube || hero.twitch || "#";
-    document.getElementById('modal-twitch-btn').textContent = hero.youtube ? "VISITAR CANAL DE YOUTUBE" : "VISITAR CANAL";
+    const channelButton = document.getElementById('modal-twitch-btn');
+    const channelUrl = hero.youtube || hero.twitch || '';
+    if (channelButton) {
+        if (channelUrl) {
+            channelButton.href = channelUrl;
+            channelButton.target = '_blank';
+            channelButton.rel = 'noopener';
+            channelButton.removeAttribute('aria-disabled');
+            channelButton.removeAttribute('tabindex');
+            channelButton.classList.remove('is-disabled');
+            channelButton.textContent = hero.youtube ? 'VISITAR CANAL DE YOUTUBE' : 'VISITAR CANAL DE TWITCH';
+        } else {
+            channelButton.removeAttribute('href');
+            channelButton.removeAttribute('target');
+            channelButton.removeAttribute('rel');
+            channelButton.setAttribute('aria-disabled', 'true');
+            channelButton.setAttribute('tabindex', '-1');
+            channelButton.classList.add('is-disabled');
+            channelButton.textContent = 'CANAL NO DISPONIBLE';
+        }
+    }
     window.lastModalTrigger = document.activeElement;
     window.previousBodyOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
