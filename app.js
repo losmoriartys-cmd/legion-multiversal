@@ -1806,6 +1806,7 @@ function openHeroModal(index) {
         if (rosterContainer) rosterContainer.innerHTML = '<p class="roster-loading">CARGANDO EXPEDIENTES DE LA LEGIÓN…</p>';
 
         window.onload = async function() {
+        initContactForms();
         const initialChapter = document.querySelector('.chapter-panel.active');
         if (initialChapter) renderChapterPager(Number(initialChapter.id.replace('chapter-','')));
         try {
