@@ -654,7 +654,7 @@ function renderLiveDirectory(channels, options = {}){
  const ageMinutes=freshness.ageMinutes;
  const ageLabel=!freshness.valid?'antigüedad no disponible':ageMinutes<1?'actualizado hace menos de 1 min':ageMinutes<60?'actualizado hace '+Math.round(ageMinutes)+' min':'actualizado hace '+Math.floor(ageMinutes/60)+' h '+Math.round(ageMinutes%60)+' min';
  const sourceLabel=options.source==='helix'?'Twitch Helix · última consulta':'data.json · última captura';
- const stamp=freshness.valid?formatArgentinaDateTime(updatedAt,{dateStyle:'medium',timeStyle:'short'}):'fecha no disponible';
+ const stamp=freshness.valid?formatArgentinaDateTime(updatedAt,{dateStyle:'medium',timeStyle:'medium'}):'fecha no disponible';
  const refreshNote='<p class="stats-note live-refresh-note">'+sourceLabel+' · '+(options.source==='helix'?'Última consulta: ':'Última captura: ')+escapeStatsHtml(stamp)+' · '+escapeStatsHtml(ageLabel)+(options.fallback?' · modo de respaldo':'')+(freshness.fresh?'':' · captura demorada; estado actual no confirmado')+'</p>';
  const nav=document.querySelector('.nav-btn-live[data-chapter="10"]');
  if(nav){nav.classList.toggle('is-live',freshness.fresh&&live.length>0);nav.textContent='09 EN VIVO'+(freshness.fresh&&live.length?' · '+live.length:'');nav.setAttribute('aria-label',freshness.fresh&&live.length?live.length+' canal(es) detectado(s) en directo':'Consultar estado de transmisiones');}
