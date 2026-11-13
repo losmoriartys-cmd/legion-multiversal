@@ -2583,3 +2583,5 @@ Se conserva el compromiso de avanzar una mejora por etapa, con validación y rev
 - Valores y Comunidad: se conservan sin cambios estructurales, dado que fueron aprobados por la administración.
 - Pendiente para el expediente BarFender 002: incorporar fecha, VOD/enlaces de los dos canales y métricas de la segunda sesión una vez recibidos. No se inventan estadísticas ni URLs.
 - Validación visual final de escritorio/móvil y verificación del deployment quedan pendientes de preview renderizada.
+
+- Colaboraciones: se incorpora el expediente 002 de Barfender (10/11/2026) para Akuma y TheR0D3R1K a partir de las muestras verificadas en `data.json`: Akuma 2 muestras (promedio 10,5; pico 16); TheR0D3R1K 4 muestras (promedio 26,3; pico 33). Se explicita que son métricas observadas por muestreo y no analíticas oficiales ni espectadores únicos. Los VOD quedan pendientes de enlace.
