@@ -13,19 +13,19 @@
     "daved0608"
   ],
   "collection": {
-    "started_at": "2026-11-14T17:13:38Z",
+    "started_at": "2026-11-14T17:52:33Z",
     "expected_channels": 7,
     "resolved_channels": 7,
-    "sampled_channels": [
-      "ther0d3r1k",
+    "sampled_channels": [],
+    "skipped_channels": [
       "habitos_atomicos",
       "ardipii",
       "akumazoldyck",
       "daved0608",
       "losmoriartys",
-      "ladymoriarty01"
+      "ladymoriarty01",
+      "ther0d3r1k"
     ],
-    "skipped_channels": [],
     "complete": true
   },
   "archived_channels": [
@@ -33,7 +33,7 @@
     "elgabii090"
   ],
   "channel_registry_note": "Los canales archivados se conservan para consulta histórica y no se incluyen en los indicadores del roster activo.",
-  "updated_at": "2026-11-14T17:13:38Z",
+  "updated_at": "2026-11-14T17:52:33Z",
   "channels": {
     "ladymoriarty01": {
       "login": "ladymoriarty01",
@@ -48,7 +48,7 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-14T17:13:38Z",
+      "updated_at": "2026-11-14T17:52:33Z",
       "window": {
         "samples_total": 268,
         "live_samples": 9,
@@ -2568,7 +2568,7 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-14T17:13:38Z",
+      "updated_at": "2026-11-14T17:52:33Z",
       "window": {
         "samples_total": 268,
         "live_samples": 31,
@@ -5762,7 +5762,7 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-14T17:13:38Z",
+      "updated_at": "2026-11-14T17:52:33Z",
       "window": {
         "samples_total": 268,
         "live_samples": 6,
@@ -8233,7 +8233,7 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-14T17:13:38Z",
+      "updated_at": "2026-11-14T17:52:33Z",
       "window": {
         "samples_total": 268,
         "live_samples": 19,
@@ -10767,7 +10767,7 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-14T17:13:38Z",
+      "updated_at": "2026-11-14T17:52:33Z",
       "window": {
         "samples_total": 268,
         "live_samples": 12,
@@ -13892,11 +13892,11 @@
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
       "live": true,
-      "current_viewers": 2,
+      "current_viewers": 1,
       "current_game": "Just Chatting",
       "current_title": "es mi primer dia",
       "stream_started_at": "2026-11-14T15:14:20Z",
-      "updated_at": "2026-11-14T17:13:38Z",
+      "updated_at": "2026-11-14T17:52:33Z",
       "window": {
         "samples_total": 268,
         "live_samples": 53,
@@ -16437,7 +16437,7 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-14T17:13:38Z",
+      "updated_at": "2026-11-14T17:52:33Z",
       "window": {
         "samples_total": 268,
         "live_samples": 11,
