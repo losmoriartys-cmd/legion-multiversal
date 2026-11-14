@@ -3127,3 +3127,23 @@ Durante esta tanda, `main` avanzó de `b67079b8d6bbde268a967e60ef642987072c6c52`
 - **Artefacto de evidencia:** [auditoria-ux-43570146758](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43570146758/artifacts/14104247361), con JSON/HTML de Lighthouse, diagnóstico, LCP, QA y capturas.
 - **Siguiente etapa:** generar candidatos WebP para los seis recursos pesados en una carpeta de reportes, sin reemplazar archivos fuente ni actualizar referencias. Cada candidato mantiene dimensiones y proporción exactas; se compara tamaño, PSNR y apariencia antes de decidir si se integra. No se aceptan cambios por tamaño solamente.
 - **Salvaguardas:** rama auditoria-ux; PR #46 permanece Draft y abierto, sin merge. main y producción no se modificaron en esta tanda.
+
+## 2026-11-14 — Auditoría #66 y aprobación visual de variantes WebP
+
+- **Ejecución:** [Auditoría #66](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43570884021), commit evaluado `39bcd928e95d1cfe499506d941541b9f1714e76d`. Estado terminal `success`; 1 job, 24/24 pasos completados, sin fallos ni pasos omitidos.
+- **Artefacto de evidencia:** [auditoria-ux-43570884021.zip](https://api.github.com/repos/losmoriartys-cmd/legion-multiversal/actions/artifacts/14104054134/zip), ID `14104054134`, SHA-256 `ccea76058c642bcb70f07cfd421c3537702595e812167df2461d06a4da8a961f`. Incluye `comparison.json`, originales y candidatos para comparación.
+- **Criterio:** no se redimensionó ninguna imagen. Las seis variantes mantienen exactamente ancho, alto y proporción de sus fuentes. Se inspeccionaron pares original/candidato; el logo transparente se comparó compuesto sobre tablero para no confundir RGB invisible con pérdida de transparencia.
+- **Resultados medidos:**
+
+| Imagen | Original | WebP | Ahorro | Calidad / geometría |
+|---|---:|---:|---:|---|
+| Emblema PNG | 1.336.538 B | 839.602 B | 37,18 % | Lossless; RGB visible y alfa sin diferencia; 1600×1600 |
+| Roderik | 865.372 B | 610.896 B | 29,41 % | PSNR 39,489 dB; 1280×1920 |
+| Orígenes | 514.266 B | 426.502 B | 17,07 % | PSNR 37,096 dB; 1312×1920 |
+| BarFender | 475.134 B | 373.466 B | 21,40 % | PSNR 37,703 dB; 2240×1120 |
+| Banner LCP | 413.391 B | 340.222 B | 17,70 % | PSNR 37,843 dB; 2128×1120 |
+| Carnet Demian | 357.320 B | 287.312 B | 19,59 % | PSNR 38,954 dB; 1280×1920 |
+
+- **Decisión:** las seis variantes pasan la revisión técnica y visual como candidatas de entrega. El ahorro agregado sobre estas seis fuentes es de 1.084.021 bytes (aprox. 26,9 % del peso combinado de las fuentes). Los originales no se sobrescriben.
+- **Implementación segura preparada:** el workflow ahora puede publicar copias WebP bajo `assets/optimized/` en `auditoria-ux`, conservando los originales y el artefacto de comparación. Esta publicación está limitada a la rama de auditoría; no afecta `main` ni GitHub Pages de producción. La actualización de referencias HTML se realizará después de verificar la publicación de los archivos.
+- **Pendiente de validación posterior:** comprobar el commit automático de variantes, cambiar solo referencias cuya ubicación y fallback estén confirmados, y ejecutar una nueva auditoría de Lighthouse/QA. Las cifras de ahorro son por archivo, no una promesa de mejora equivalente en Performance/LCP.
