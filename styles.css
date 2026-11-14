@@ -4544,15 +4544,17 @@ img { max-width: 100%; }
 }
 #chapter-2.comic-page::before,
 #chapter-2.comic-page::after { pointer-events:none; }
-#chapter-2 > .comic-title {
+#chapter-2.comic-page > h2.comic-title {
   display:block;
   width:fit-content;
   max-width:100%;
-  padding:0;
-  border:0;
-  background:transparent;
+  padding:0 !important;
+  border:0 !important;
+  background:transparent !important;
+  box-shadow:none !important;
   color:#f4ead5 !important;
   text-shadow:0 3px 0 #080d16,0 0 22px rgba(0,210,255,.16) !important;
+  transform:none !important;
 }
 #chapter-2 .institute-banner {
   background:linear-gradient(115deg,rgba(18,34,52,.98),rgba(9,17,29,.98)) !important;
@@ -4605,7 +4607,7 @@ img { max-width: 100%; }
 }
 @media (max-width:560px) {
   #chapter-2.comic-page { padding-left:14px; padding-right:14px; }
-  #chapter-2 > .comic-title { font-size:clamp(2rem,9vw,2.6rem); line-height:1.05; }
+  #chapter-2.comic-page > h2.comic-title { font-size:clamp(2rem,9vw,2.6rem); line-height:1.05; }
   #chapter-2 .institute-banner { gap:14px; padding:16px; }
   #chapter-2 .institute-stamp { flex-basis:68px; height:68px; font-size:.95rem; }
 }
