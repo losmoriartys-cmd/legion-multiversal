@@ -8,6 +8,8 @@ on:
       - 'update_stats.py'
       - 'update_platform_stats.py'
       - 'update_clips.py'
+      - 'scripts/build_creator_metrics.py'
+      - 'scripts/validate_creator_metrics.py'
       - 'roster-data.json'
       - 'scripts/validate_roster_data.py'
       - '.github/workflows/actualizar-stats.yml'
@@ -72,11 +74,17 @@ jobs:
       - name: Validar cuentas multiplataforma publicadas
         run: python scripts/validate_roster_data.py --check-platforms
 
+      - name: Generar registro normalizado de métricas por creador
+        run: python scripts/build_creator_metrics.py
+
+      - name: Validar registro normalizado de métricas
+        run: python scripts/validate_creator_metrics.py
+
       - name: Guardar historial actualizado
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data.json platform-stats.json clips-data.json
+          git add data.json platform-stats.json clips-data.json creator-metrics.json
           if git diff --cached --quiet; then
             echo "No hay cambios de estadísticas para guardar."
             exit 0
