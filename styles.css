@@ -4712,3 +4712,19 @@ main .chapter-panel :where(.chapter-cta, .executive-button, .comic-submit-btn,
   #chapter-2 .roster-skeleton-card em { animation:none; }
   #chapter-2 .roster-quick-chip { transition:none; }
 }
+
+
+/* Accesos multiplataforma del expediente modal */
+.modal-platform-links {
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:10px;
+  margin:14px 0 4px;
+}
+.modal-platform-links[hidden] { display:none; }
+.modal-platform-links .twitch-link-btn {
+  flex:1 1 150px;
+  min-width:0;
+  text-align:center;
+}
