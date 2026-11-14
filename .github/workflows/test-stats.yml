@@ -6,7 +6,9 @@ on:
       - main
     paths:
       - 'update_stats.py'
+      - 'update_clips.py'
       - 'tests/**'
+      - 'scripts/validate_clips_data.py'
       - '.github/workflows/test-stats.yml'
 
 permissions:
