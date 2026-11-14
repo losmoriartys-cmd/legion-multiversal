@@ -3254,5 +3254,5 @@ Durante esta tanda, `main` avanzó de `b67079b8d6bbde268a967e60ef642987072c6c52`
 - **Dato de PATO — ORATORIS:** el registro de YouTube queda en 56 suscriptores, 6 videos y 431 visualizaciones, con captura de YouTube Data API del 14/11/2026 a las 07:39:11 UTC (04:39:11 Argentina).
 - **Alcance:** se mantienen los roles institucionales, la voz individual de cada creador y el archivo histórico de plataformas. No se cambió la jerarquía del roster ni se eliminó documentación de Keymailer.
 - **Archivos:** `styles.css`, `app.js`, `index.html`, `roster-data.json`, `creator-records.json`.
-- **Validación:** pendiente de la ejecución de CI sobre el commit final y de la inspección visual en Safari iOS real. No se afirma compatibilidad Safari probada sin ese dispositivo.
+- **Validación:** CI del commit anterior completó sintaxis JavaScript, funciones, JSON, rutas, anclas, formularios y accesibilidad estática. La inspección visual automatizada no pudo iniciarse por saldo insuficiente del servicio de navegador; la preview sí obtuvo check de Cloudflare Pages exitoso. Safari iOS real sigue pendiente y no se declara probado.
 - **Publicación:** cambios únicamente en `auditoria-ux`; `main` y producción permanecen sin modificar.
