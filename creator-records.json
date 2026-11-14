@@ -85,12 +85,12 @@
       "collaborations": [],
       "highlights": [
         {
-          "title": "Título pendiente de confirmar",
+          "title": "NO VOY A DECIR NADA xd",
           "description": "Clip destacado compartido para el media kit.",
           "url": "https://www.twitch.tv/ther0d3r1k/clip/SpicyPiliablePoultryCorgiDerp-flAxKL1oWuPkWDWA",
-          "source": "Twitch · enlace aportado por el creador",
-          "title_source": "Twitch no devolvió metadatos públicos suficientes en esta consulta. Confirmar el título con el creador.",
-          "editorial_status": "pending_creator_confirmation"
+          "source": "Metadatos públicos de Twitch",
+          "title_source": "Título verificado en metadatos públicos de Twitch · 14/11/2026",
+          "editorial_status": "verified_public_metadata"
         },
         {
           "title": "Ff se mueve la puerta",
@@ -113,14 +113,14 @@
       "collaborations": [],
       "highlights": [
         {
-          "title": "Título pendiente de confirmar",
+          "title": "el cerebro humano",
           "description": "Clip destacado compartido para el expediente.",
-          "source": "Twitch · enlace aportado por el creador",
+          "source": "Metadatos públicos de Twitch",
           "platform": "twitch",
           "clip_id": "AbrasiveSilkyCockroachOhMyDog-ivUKinvojfXgOKOB",
           "url": "https://www.twitch.tv/habitos_atomicos/clip/AbrasiveSilkyCockroachOhMyDog-ivUKinvojfXgOKOB",
-          "title_source": "Twitch no devolvió metadatos públicos suficientes en esta consulta. Confirmar el título con el creador.",
-          "editorial_status": "pending_creator_confirmation"
+          "title_source": "Título verificado en metadatos públicos de Twitch · 14/11/2026",
+          "editorial_status": "verified_public_metadata"
         },
         {
           "title": "Te vengué PatoPeligroso",
@@ -156,12 +156,13 @@
       "collaborations": [],
       "highlights": [
         {
-          "title": "Título pendiente de confirmar",
+          "title": "El token nos esta volviendo locos",
           "platform": "twitch",
           "clip_id": "WildUglyAdminBloodTrail-qmNfWZpxEFnIl8Oz",
-          "source": "Enlace de clip proporcionado por el creador; título editorial pendiente de confirmar",
-          "title_source": "Twitch no devolvió metadatos públicos suficientes en esta consulta. Confirmar el título con el creador.",
-          "editorial_status": "pending_creator_confirmation"
+          "source": "Metadatos públicos de Twitch",
+          "title_source": "Título verificado en metadatos públicos de Twitch · 14/11/2026",
+          "editorial_status": "verified_public_metadata",
+          "url": "https://www.twitch.tv/ardipii/clip/WildUglyAdminBloodTrail-qmNfWZpxEFnIl8Oz"
         },
         {
           "title": "Soy un botcito genérico en Gears",
@@ -196,22 +197,22 @@
       "collaborations": [],
       "highlights": [
         {
-          "title": "Título pendiente de confirmar",
+          "title": "compañero ayuda al rescate xd",
           "platform": "twitch",
           "clip_id": "InventiveTentativeCarabeefYee-oJMzI-Lt4xxRlJNt",
-          "url": "https://clips.twitch.tv/InventiveTentativeCarabeefYee-oJMzI-Lt4xxRlJNt",
-          "source": "Twitch Clips · enlace proporcionado para el expediente por el creador",
-          "editorial_status": "pending_creator_confirmation",
-          "title_source": "Twitch no devolvió metadatos públicos suficientes en esta consulta. Confirmar el título con el creador."
+          "url": "https://www.twitch.tv/daved0608/clip/InventiveTentativeCarabeefYee-oJMzI-Lt4xxRlJNt",
+          "source": "Metadatos públicos de Twitch",
+          "editorial_status": "verified_public_metadata",
+          "title_source": "Título verificado en metadatos públicos de Twitch · 14/11/2026"
         },
         {
-          "title": "Título pendiente de confirmar",
+          "title": "cosas de mexico que superan la ia",
           "platform": "twitch",
           "clip_id": "MotionlessCuteTigerLitFam-ZsZEyMq1lrkNq2dW",
-          "url": "https://clips.twitch.tv/MotionlessCuteTigerLitFam-ZsZEyMq1lrkNq2dW",
-          "source": "Twitch Clips · enlace proporcionado para el expediente por el creador",
-          "editorial_status": "pending_creator_confirmation",
-          "title_source": "Twitch no devolvió metadatos públicos suficientes en esta consulta. Confirmar el título con el creador."
+          "url": "https://www.twitch.tv/daved0608/clip/MotionlessCuteTigerLitFam-ZsZEyMq1lrkNq2dW",
+          "source": "Metadatos públicos de Twitch",
+          "editorial_status": "verified_public_metadata",
+          "title_source": "Título verificado en metadatos públicos de Twitch · 14/11/2026"
         }
       ]
     },
@@ -221,45 +222,75 @@
       "highlights": [],
       "youtube_videos": [
         {
+          "video_id": "iX9dw_fYHg8",
           "title": "Dopamina, motivación y adicción: Qué es y cómo funciona",
-          "views": 47,
-          "age": "hace 1 año",
-          "source": "Listado del canal compartido por el equipo"
+          "published_at": "2025-05-01T00:20:31Z",
+          "views": 48,
+          "likes": 6,
+          "comments": 1,
+          "url": "https://www.youtube.com/watch?v=iX9dw_fYHg8",
+          "source": "YouTube Data API v3",
+          "captured_at": "2026-11-14T07:39:11Z"
         },
         {
+          "video_id": "kD6OQ59_RxQ",
           "title": "Uniendo Javascript y HTML. Curso HTML + Javascript (5/5)",
+          "published_at": "2025-01-09T10:14:14Z",
           "views": 75,
-          "age": "hace 1 año",
+          "likes": 11,
+          "comments": 2,
+          "url": "https://www.youtube.com/watch?v=kD6OQ59_RxQ",
           "series": "Curso HTML + Javascript",
-          "source": "Listado del canal compartido por el equipo"
+          "source": "YouTube Data API v3",
+          "captured_at": "2026-11-14T07:39:11Z"
         },
         {
+          "video_id": "6iTtFtLYTXc",
           "title": "Javascript Mapping y Filtering. Curso HTML + Javascript (4/5)",
+          "published_at": "2025-01-09T10:03:06Z",
           "views": 58,
-          "age": "hace 1 año",
+          "likes": 10,
+          "comments": 1,
+          "url": "https://www.youtube.com/watch?v=6iTtFtLYTXc",
           "series": "Curso HTML + Javascript",
-          "source": "Listado del canal compartido por el equipo"
+          "source": "YouTube Data API v3",
+          "captured_at": "2026-11-14T07:39:11Z"
         },
         {
+          "video_id": "5Ky01F9RwP0",
           "title": "Javascript segunda clase. Curso HTML + Javascript (3/5)",
+          "published_at": "2025-01-09T09:50:10Z",
           "views": 50,
-          "age": "hace 1 año",
+          "likes": 12,
+          "comments": 2,
+          "url": "https://www.youtube.com/watch?v=5Ky01F9RwP0",
           "series": "Curso HTML + Javascript",
-          "source": "Listado del canal compartido por el equipo"
+          "source": "YouTube Data API v3",
+          "captured_at": "2026-11-14T07:39:11Z"
         },
         {
+          "video_id": "FT3OksHauPA",
           "title": "Tu primera clase de Javascript. Curso HTML + Javascript (2/5)",
+          "published_at": "2025-01-09T09:22:04Z",
           "views": 43,
-          "age": "hace 1 año",
+          "likes": 9,
+          "comments": 1,
+          "url": "https://www.youtube.com/watch?v=FT3OksHauPA",
           "series": "Curso HTML + Javascript",
-          "source": "Listado del canal compartido por el equipo"
+          "source": "YouTube Data API v3",
+          "captured_at": "2026-11-14T07:39:11Z"
         },
         {
+          "video_id": "WmtAu_JU99M",
           "title": "Tu primera página HTML en menos de una hora. Curso HTML + Javascript (1/5)",
+          "published_at": "2025-01-09T08:55:45Z",
           "views": 157,
-          "age": "hace 1 año",
+          "likes": 20,
+          "comments": 6,
+          "url": "https://www.youtube.com/watch?v=WmtAu_JU99M",
           "series": "Curso HTML + Javascript",
-          "source": "Listado del canal compartido por el equipo"
+          "source": "YouTube Data API v3",
+          "captured_at": "2026-11-14T07:39:11Z"
         }
       ],
       "featured_embeds": [
