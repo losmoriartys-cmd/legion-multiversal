@@ -3089,3 +3089,9 @@ Se conserva el compromiso de avanzar una mejora por etapa, con validación y rev
 - **Best Practices 96:** en producción el mensaje exacto sigue siendo 404 a `https://losmoriartys-cmd.github.io/favicon.ico` (la corrección de `rel=icon` está en la rama, todavía no publicada); en preview son dos respuestas 503 de `/api/live`. No son errores de imágenes remotas.
 - **Estado operativo:** `/api/live` sigue sin 200 en Preview. Resend sigue sin prueba de envío real. Lector de pantalla NVDA/VoiceOver pendiente. La QA no se aprueba.
 - Artifact con reportes JSON, capturas, QA y cabeceras: [auditoria-ux-43562174824](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43562174824).
+
+
+### Valores individuales LCP — run 43562174824
+- GitHub Pages, Lighthouse simulado: **13,80 / 4,36 / 14,16 s**. LCP observado en las trazas: **409 / 293 / 280 ms**.
+- Preview, Lighthouse simulado: **12,76 / 11,67 / 12,63 s**. LCP observado en las trazas: **455 / 291 / 305 ms**.
+- Medianas: simulado 13,80 / 12,63 s; observado 293 / 305 ms. El informe de Lighthouse debe conservar ambos indicadores para no mezclar la proyección de throttling con el evento observado.
