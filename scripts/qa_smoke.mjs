@@ -46,6 +46,30 @@ for (const vp of VIEWPORTS) {
       check(`${tag}: CTA de contacto mailto disponible`, mailtoCount > 0, `enlaces: ${mailtoCount}`);
       const formFallback = await page.locator('[data-contact-form] .contact-mailto-fallback').count();
       check(`${tag}: respaldo mailto del formulario presente`, formFallback > 0);
+      if (vp.name === "desktop-1440") {
+        const form = page.locator('[data-contact-form]').first();
+        await form.evaluate(el => el.closest('.chapter-panel')?.classList.add('active'));
+        await page.route("**/api/contact", route => route.fulfill({
+          status: 503,
+          contentType: "application/json",
+          body: JSON.stringify({ error: "QA: servicio simulado como no disponible" })
+        }));
+        await page.locator("#creator-name").fill("QA automatizado");
+        await page.locator("#creator-channel").fill("https://twitch.tv/qa_demo");
+        await page.locator("#creator-email").fill("qa@example.com");
+        await page.locator("#creator-motivation").fill("Prueba automatizada; no enviar.");
+        await form.locator('button[type="submit"]').click({ force: true });
+        let fallbackHref = "";
+        try {
+          await page.waitForFunction(() => {
+            const link = document.querySelector('[data-contact-form] .contact-mailto-fallback');
+            const container = document.querySelector('[data-contact-form] .contact-form-fallback');
+            return Boolean(link && container && !container.hidden && link.href.startsWith('mailto:'));
+          }, null, { timeout: 5000 });
+          fallbackHref = await form.locator('.contact-mailto-fallback').getAttribute('href') || "";
+        } catch {}
+        check("desktop-1440: envío fallido ofrece fallback mailto de un clic", fallbackHref.startsWith("mailto:"));
+      }
       await page.keyboard.press("Tab");
       const keyboardFocus = await page.evaluate(() => document.activeElement && document.activeElement !== document.body && document.activeElement !== document.documentElement);
       check(`${tag}: navegación por teclado mueve el foco`, keyboardFocus);
