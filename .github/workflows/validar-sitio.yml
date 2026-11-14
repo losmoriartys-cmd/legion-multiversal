@@ -10,6 +10,9 @@ on:
       - '*.json'
       - 'assets/**'
       - 'scripts/**'
+      - 'schemas/**'
+      - 'tests/**'
+      - 'update_clips.py'
       - '.github/workflows/validar-sitio.yml'
   pull_request:
     paths:
@@ -20,6 +23,9 @@ on:
       - '*.json'
       - 'assets/**'
       - 'scripts/**'
+      - 'schemas/**'
+      - 'tests/**'
+      - 'update_clips.py'
       - '.github/workflows/validar-sitio.yml'
   workflow_dispatch:
 
@@ -47,10 +53,16 @@ jobs:
       - name: Validar modelo del roster y cobertura Twitch
         run: python scripts/validate_roster_data.py --check-activity --check-platforms
       - name: Compilar colectores Python
-        run: python -m py_compile update_stats.py update_platform_stats.py scripts/validate_roster_data.py
+        run: python -m py_compile update_stats.py update_platform_stats.py update_clips.py scripts/validate_roster_data.py scripts/validate_clips_data.py
       - name: Probar lectura de cuentas por los colectores
         run: |
           python -c "import update_stats; channels=update_stats.load_active_channels(); assert len(channels)==7 and 'losmoriartys' in channels; print('OK: colector Twitch lee {} canales'.format(len(channels)))"
           python -c "import update_platform_stats; creators=update_platform_stats.load_creator_accounts(); assert 'pato-oratoris' in creators and 'youtube' in [a['platform'] for a in creators['pato-oratoris']['accounts']]; print('OK: colector multiplataforma lee {} perfiles'.format(len(creators)))"
+      - name: Validar registro de clips públicos
+        run: python scripts/validate_clips_data.py
+      - name: Ejecutar pruebas unitarias de colectores
+        run: python -m unittest discover -s tests -v
+      - name: Comprobar el registro de canales para el colector de clips
+        run: python -c "import update_clips; accounts=update_clips.load_roster_accounts(); assert len(accounts)==7 and any(a['creator_id']=='moriartys' for a in accounts); print('OK: colector de clips lee {} canales Twitch'.format(len(accounts)))"
       - name: Validar rutas, imágenes y enlaces declarados
         run: python scripts/validate_site.py
