@@ -35,7 +35,7 @@ for (const vp of VIEWPORTS) {
     if (!/\.pages\.dev$/i.test(new URL(BASE).hostname)) {
       check(`${tag}: sin llamadas a /api/*`, apiCalls.length === 0, apiCalls.join(", "));
     } else {
-      console.log(`INFO ${tag}: ${apiCalls.length} llamadas a /api/* en preview; revisar el fallback 503 manualmente.`);
+      console.log(`INFO ${tag}: ${apiCalls.length} llamadas a /api/* en preview; revisar las respuestas y el fallback cuando Pages Functions no tenga credenciales.`);
     }
 
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1);
