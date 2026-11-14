@@ -56,7 +56,8 @@ jobs:
           git diff --check
           git diff -- > reports/lighthouse/image-dimensions.patch
           git diff --stat
-          echo "El diff completo queda adjunto como artifact para revisión."
+          echo "--- DIFF COMPLETO DE DIMENSIONES ---"
+          cat reports/lighthouse/image-dimensions.patch
 
       - name: Paso 4 — validar sitio después de aplicar dimensiones
         run: python scripts/validate_site.py
