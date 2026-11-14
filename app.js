@@ -1468,6 +1468,9 @@ function renderCommercialQuickView(hero) {
     out += '<section><h4>TERRITORIOS DE CONTENIDO</h4>' + (areas.length ? '<ul>' + areas.map(v=>'<li>'+safe(v)+'</li>').join('') + '</ul>' : '<p>Especialidades pendientes de documentar.</p>') + '</section>';
     out += '<section><h4>FORMATOS A CONVERSAR</h4><ul>' + opportunities.map(v=>'<li>'+safe(v)+'</li>').join('') + '</ul><small>Son posibilidades sujetas a conversación, disponibilidad y aprobación del creador; no representan campañas contratadas.</small></section>';
     out += '</div>';
+    out += renderCommercialEvidence(hero, twitchLogin, youtubeLogin);
+    out += renderHelixFreshnessEvidence(hero);
+    out += renderCommercialPortfolio(hero, twitchLogin, youtubeLogin);
     out += '<section class="commercial-quickview-proof"><h4>MATERIAL DE MUESTRA REGISTRADO</h4>';
     if (highlights || videos || embeds || collaborations) {
         const items=[];
