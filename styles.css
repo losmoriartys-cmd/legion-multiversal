@@ -4503,3 +4503,8 @@ img { max-width: 100%; }
 @media(max-width:760px){.roster-commercial-intro{grid-template-columns:1fr}.roster-commercial-offers{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:420px){.roster-commercial-offers{grid-template-columns:1fr}.roster-commercial-intro{padding:18px}.commercial-evidence-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(prefers-reduced-motion:reduce){.roster-commercial-copy>a{transition:none}}
+
+.commercial-quickview-strengths{margin:16px 0;padding:16px 18px;border:1px solid rgba(220,185,112,.38);background:linear-gradient(110deg,rgba(40,34,25,.62),rgba(9,17,27,.82));box-shadow:inset 3px 0 #d5ad68}
+.commercial-quickview-strengths h4{margin:0 0 10px;color:#f0d59b;font:1.35rem 'Bangers',cursive;letter-spacing:.06em}
+.commercial-quickview-strengths ul{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:8px 22px;margin:0;padding-left:18px;color:#d4deea;font-size:.8rem;line-height:1.6}
+.commercial-quickview-strengths li::marker{color:#83d9e9}
