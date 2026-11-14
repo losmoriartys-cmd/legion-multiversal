@@ -8,6 +8,12 @@ on:
       - 'scripts/lighthouse_runs.sh'
       - 'scripts/summarize_lighthouse.py'
       - 'scripts/qa_smoke.mjs'
+      - 'scripts/qa_production.mjs'
+      - 'robots.txt'
+      - 'sitemap.xml'
+      - 'scripts/qa_production.mjs'
+      - 'robots.txt'
+      - 'sitemap.xml'
       - 'app.js'
       - 'styles.css'
       - 'data.json'
@@ -105,6 +111,25 @@ jobs:
             --output reports/lighthouse/preview-robots.txt https://auditoria-ux.legion-multiversal.pages.dev/robots.txt
           echo "--- robots.txt preview ---"
           cat reports/lighthouse/preview-robots.txt
+          for target in \
+            "production|https://losmoriartys-cmd.github.io/legion-multiversal/robots.txt" \
+            "preview|https://auditoria-ux.legion-multiversal.pages.dev/robots.txt" \
+            "main-pages-dev|https://legion-multiversal.pages.dev/robots.txt"; do
+            name="${target%%|*}"
+            url="${target#*|}"
+            curl --silent --show-error --location \
+              --dump-header "reports/lighthouse/${name}-robots-headers.txt" \
+              --output "reports/lighthouse/${name}-robots.txt" \
+              --write-out "${name}: HTTP %{http_code} · Content-Type %{content_type} · URL %{url_effective}\n" "$url"
+          done
+          echo "--- Sitemap production ---"
+          curl --silent --show-error --location --write-out "HTTP %{http_code} · Content-Type %{content_type}\n" \
+            --output reports/lighthouse/sitemap-production.xml \
+            https://losmoriartys-cmd.github.io/legion-multiversal/sitemap.xml
+          echo "--- Sitemap preview ---"
+          curl --silent --show-error --location --write-out "HTTP %{http_code} · Content-Type %{content_type}\n" \
+            --output reports/lighthouse/sitemap-preview.xml \
+            https://auditoria-ux.legion-multiversal.pages.dev/sitemap.xml
 
       - name: Pasos 5 y 6 — tres corridas Lighthouse por entorno y medianas
         env:
@@ -129,6 +154,9 @@ jobs:
         env:
           QA_BASE: https://auditoria-ux.legion-multiversal.pages.dev/
         run: node scripts/qa_smoke.mjs
+
+      - name: Verificar GitHub Pages producción sin Pages Functions
+        run: node scripts/qa_production.mjs
 
       - name: Publicar reportes, resumen, diff y capturas QA
         if: always()
