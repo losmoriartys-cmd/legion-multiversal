@@ -1,3 +1,17 @@
+## 2026-11-14 — Ajustes de coherencia tras inspección de la preview
+
+- **Estadísticas:** el texto público del capítulo de impacto ahora identifica expresamente los siete canales Twitch activos; aclara que son observaciones/muestras y no espectadores únicos ni analítica oficial de los paneles de cada canal. Los perfiles de otras plataformas permanecen separados.
+- **En Vivo:** se aclara que la relectura del archivo cada 2 minutos no actualiza por sí misma Twitch; se distingue de la cadencia objetivo del colector (55 minutos, variable) y de la caché Helix (hasta 60 segundos). Se evita presentar cualquiera de estas frecuencias como conexión permanente o garantía de tiempo real.
+- **Cómic MORIARTYS / BarFender:** el capítulo se rotula como colaboración documentada, no como «aventura comercial» ni «misión». Se agregan los ocho enlaces públicos de clips de BarFender (2 Los Moriartys, 4 LADYMORIARTY01 y 2 TheR0D3R1K), además de los tres clips individuales de Los Moriartys y los tres VOD. Se retira la leyenda incorrecta de enlaces pendientes.
+- **Canonical, sitemap y robots:** se verificó que la producción de Cloudflare Pages es `https://legion-multiversal.pages.dev/` y que la página independiente del cómic resuelve a `/comic-moriartys`. Se alinean el canonical del cómic, las dos entradas del sitemap y la directiva Sitemap de `robots.txt` con ese host. Se mantiene fuera del sitemap la página legacy `roster-02-moriartys.html` (noindex).
+- **CI:** el workflow también se dispara ante cambios en `robots.txt`, además de `*.html` y `sitemap.xml`.
+- **Archivos adicionales modificados:** `index.html`, `comic-moriartys.html`, `sitemap.xml`, `robots.txt`, `.github/workflows/validar-sitio.yml`, `INFORMES.md`.
+- **Commits adicionales:** claridad de estadísticas y frescura `be18a800d57955efb4c9c1ca78f11256b7f70239`; ocho clips y nomenclatura de colaboración `8af7632c4c37f4714bdeab1d7bda6fa209401032`; canonical del cómic `05cd792d18a0007eccd38276a98f867fa09bb502`; sitemap `6a344d3b1799470300132459033355b0929d9dd3`; robots `8173c4157a12fb26fe57dd74efd93381360df80a`; filtros CI `b105a303ca56820ac8177c85a171d275e09128c5`.
+- **Comprobación de contenido en GitHub:** 8 expedientes; 0 títulos audiovisuales pendientes; seis videos de YouTube de PATO con vistas que suman 431; 8 clips BarFender enlazados; canonical y sitemap alineados; ID Epic sin respaldo eliminado. La inspección de preview confirma que los cambios de texto y rutas se sirven en la rama de auditoría.
+- **Estado:** sigue siendo trabajo de `auditoria-ux`; `main` no se modificó, PR #46 sigue Draft y no se publicó producción. La validación final del HEAD actualizado se comprobará después de este registro.
+
+---
+
 ## 2026-11-14 — Cierre editorial informativo de páginas, roster y credenciales
 
 - **Alcance:** implementación de los siete puntos solicitados: credenciales Epic Games; sincronización YouTube de PATO — ORATORIS; revisión de los ocho expedientes; títulos audiovisuales; coherencia de páginas independientes y sitemap; corte documental y fuentes comerciales; lectura integral Inicio–Contacto.
