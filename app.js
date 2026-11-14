@@ -19,6 +19,15 @@ function handleThirdPartyImageError(image) {
     image.replaceWith(fallback);
 }
 
+function syncRosterFilters() {
+    const disclosure = document.querySelector('.roster-filter-disclosure');
+    if (!disclosure) return;
+    const desktop = window.matchMedia('(min-width:701px)');
+    const apply = () => { disclosure.open = desktop.matches; };
+    apply();
+    desktop.addEventListener('change', apply);
+}
+
 function activateChapterHash() {
     let raw;
     try {
@@ -1330,7 +1339,15 @@ function navigateHeroProfile(direction) {
     openHeroProfile(nextEntry.index, window.lastHeroProfileTrigger || document.activeElement);
 }
 function restoreHeroProfileFromHash() {
-    const slug = decodeURIComponent((location.hash || '').replace(/^#expediente-/, ''));
+    let slug = '';
+    try {
+        const hash = location.hash || '';
+        if (!hash.startsWith('#expediente-')) return;
+        slug = decodeURIComponent(hash.slice('#expediente-'.length));
+    } catch (error) {
+        console.warn('Se ignoró un hash de expediente mal formado:', error);
+        return;
+    }
     if (!slug || slug === location.hash.replace(/^#/, '')) return;
     const index = heroesData.findIndex(hero => hero.name.toLowerCase().replace(/[^a-z0-9]+/g,'-') === slug);
     if (index >= 0) {
@@ -2030,6 +2047,7 @@ function openHeroModal(index) {
         window.onload = async function() {
         initContactForms();
         initResourceRetry();
+        syncRosterFilters();
         activateChapterHash();
         const initialChapter = document.querySelector('.chapter-panel.active');
         if (initialChapter) renderChapterPager(Number(initialChapter.id.replace('chapter-','')));
