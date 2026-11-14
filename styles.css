@@ -4571,8 +4571,11 @@ img { max-width: 100%; }
 #chapter-2 .roster-collectible-card {
   width:min(100%,340px);
   animation-fill-mode:backwards;
+  filter:none !important;
   will-change:transform;
 }
+#chapter-2 .roster-collectible-card.is-tilting { filter:none !important; }
+#chapter-2 .roster-card-back :where(p,li,small,span) { font-size:max(10px,.72rem); }
 #chapter-2 .roster-card-3d-shell {
   container-type:inline-size;
   overflow:visible;
