@@ -317,8 +317,9 @@
         "platform_metrics": {
           "subscribers": 56,
           "videos": 6,
-          "views": 430,
-          "source": "Datos compartidos por el equipo; fecha exacta de captura no indicada."
+          "views": 431,
+          "source": "YouTube Data API · captura 2026-11-14 07:39:11 UTC (04:39:11 Argentina).",
+          "captured_at": "2026-11-14T07:39:11Z"
         }
       }
     }
