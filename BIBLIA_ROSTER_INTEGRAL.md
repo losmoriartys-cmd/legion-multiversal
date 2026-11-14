@@ -216,9 +216,9 @@ Objetivo: reducir fricción para un roster de ocho perfiles, sin perder capacida
 
 ### 5.4 Tabs A/B/C
 
-- [ ] Hacer que la navegación de tabs sea scrolleable en móvil sin cortar controles.
-- [ ] Exponer semántica `tablist`, `tab` y `tabpanel`, o controles equivalentes accesibles.
-- [ ] Recordar la última pestaña elegida por expediente o sesión según la decisión de producto.
+- [~] Hacer que la navegación de tabs sea scrolleable en móvil sin cortar controles (A/B/C visibles en el modal; QA táctil pendiente).
+- [~] Exponer semántica `tablist`, `tab` y `tabpanel`, o controles equivalentes accesibles (roles, selección, foco y teclado implementados; lector de pantalla pendiente).
+- [~] Recordar la última pestaña elegida por expediente en el almacenamiento local (implementado; QA de persistencia pendiente).
 - [ ] Permitir navegación por teclado y foco visible.
 - [ ] En Audiencia, mostrar “SIN DATOS VERIFICADOS” cuando no existan datos aptos para mostrar.
 - [ ] Diferenciar carga, error, fuente no disponible y ausencia de datos.
@@ -567,3 +567,5 @@ No fusionar, publicar en producción, cambiar credenciales ni retirar datos/asse
 - **Piloto MORIARTYS:** el libro de cuatro páginas consume `data.json` y `creator-records.json`; se retiraron métricas históricas hardcodeadas y porcentajes geográficos no respaldados. Promedios/picos se identifican como muestreo propio y seguidores/demografía como no verificados.
 - **Directorio:** filtros simplificados, contador, búsqueda de handles, chips rápidos, panel avanzado responsive, titular actualizado, skeletons, `noscript`, badge EN VIVO dependiente de frescura y CTAs movidos al cierre.
 - **Estado:** implementación en curso. Aún no se ha ejecutado CI sobre un PR, no se ha cotejado el piloto con una cuenta/consulta externa real y no se realizó revisión visual manual. No marcar como completado hasta pasar esos controles.
+
+- **Mecánica del expediente:** rutas compartibles `#roster/<slug>`, navegación del historial Atrás/Adelante, slugs estables, pestañas A/B/C reorganizadas por identidad, audiencia/juegos y contenido/colaboraciones, con desplazamiento horizontal en móvil y persistencia por creador.
