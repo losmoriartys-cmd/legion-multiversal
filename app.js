@@ -1863,6 +1863,24 @@ function openHeroModal(index) {
     updateComicPageControls(false);
     modal.querySelector('.close-modal-btn')?.focus();
 }
+function printHeroDossier(){
+    const modal=document.getElementById('hero-modal');
+    if(!modal||!modal.classList.contains('active'))return;
+    const panes=Array.from(modal.querySelectorAll('.modal-tab-pane[role="tabpanel"]'));
+    const previousHidden=panes.map(pane=>pane.hidden);
+    panes.forEach(pane=>{pane.hidden=false;});
+    const cleanup=()=>{
+        panes.forEach((pane,index)=>{pane.hidden=previousHidden[index];});
+        document.body.classList.remove('printing-roster-dossier');
+        window.removeEventListener('afterprint',cleanup);
+    };
+    document.body.classList.add('printing-roster-dossier');
+    window.addEventListener('afterprint',cleanup);
+    window.print();
+    // Algunos navegadores móviles omiten afterprint; la visibilidad normal vuelve al cerrar/abrir.
+    setTimeout(cleanup,30000);
+}
+
         function closeModal() {
             const modal = document.getElementById('hero-modal');
             if (!modal || !modal.classList.contains('active')) return;
