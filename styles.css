@@ -4804,3 +4804,85 @@ main .chapter-panel :where(.chapter-cta, .executive-button, .comic-submit-btn,
   opacity: .6;
   cursor: wait;
 }
+
+
+/* Expedientes · clips automáticos públicos, separados del archivo editorial */
+.modal-content.comic-mode .automatic-twitch-clips {
+  margin-top: 16px;
+  border-top: 4px solid #1687a8;
+}
+.modal-content.comic-mode .automatic-twitch-clips-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+.modal-content.comic-mode .automatic-twitch-clip-card {
+  display: grid;
+  grid-template-columns: minmax(90px, .72fr) minmax(0, 1.28fr);
+  min-width: 0;
+  overflow: hidden;
+  border: 2px solid #17283d;
+  background: #f7efdd;
+  box-shadow: 3px 3px 0 rgba(16,31,49,.2);
+}
+.modal-content.comic-mode .automatic-twitch-clip-thumb {
+  min-width: 0;
+  aspect-ratio: 16 / 9;
+  background: #14243a;
+  display: grid;
+  place-items: center;
+  align-self: start;
+  overflow: hidden;
+}
+.modal-content.comic-mode .automatic-twitch-clip-thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+.modal-content.comic-mode .automatic-twitch-clip-thumb span {
+  color: #a9e7f4;
+  font: .75rem 'Bangers', cursive;
+  letter-spacing: .08em;
+}
+.modal-content.comic-mode .automatic-twitch-clip-copy {
+  min-width: 0;
+  padding: 9px 10px;
+  color: #172b43;
+}
+.modal-content.comic-mode .automatic-twitch-clip-copy small {
+  display: block;
+  color: #176f91;
+  font: .7rem 'Bangers', cursive;
+  letter-spacing: .06em;
+}
+.modal-content.comic-mode .automatic-twitch-clip-copy h4 {
+  margin: 4px 0 6px;
+  color: #14243a;
+  font: 1rem 'Roboto Condensed', sans-serif;
+  font-weight: 900;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+.modal-content.comic-mode .automatic-twitch-clip-copy p {
+  margin: 0 0 7px;
+  color: #3d4f62;
+  font-size: .72rem;
+  line-height: 1.35;
+}
+.modal-content.comic-mode .automatic-twitch-clip-copy a,
+.modal-content.comic-mode .automatic-twitch-clip-copy>span {
+  color: #176f91;
+  font-size: .72rem;
+  font-weight: 900;
+  text-decoration: underline;
+}
+@media(max-width:760px) {
+  .modal-content.comic-mode .automatic-twitch-clips-grid { grid-template-columns: 1fr; }
+  .modal-content.comic-mode .automatic-twitch-clip-card { grid-template-columns: minmax(110px, .72fr) minmax(0, 1.28fr); }
+}
+@media(max-width:420px) {
+  .modal-content.comic-mode .automatic-twitch-clip-card { grid-template-columns: 1fr; }
+}
