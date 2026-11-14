@@ -1114,7 +1114,31 @@ function renderCreatorPlatformLinks(hero) {
     return links.map(account => '<a class="btn-link" href="' + escapeStatsHtml(account.url) + '" target="_blank" rel="noopener noreferrer">' + labels[account.platform] + ' ↗</a>').join('');
 }
 
-function openHeroProfile(index, triggerElement = document.activeElement) {
+function getHeroRosterSlug(hero) {
+    return String(hero?.slug || hero?.id || hero?.name || '')
+        .toLocaleLowerCase('es')
+        .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+        .replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+}
+function setHeroProfileRoute(hero, mode = 'push') {
+    const slug = getHeroRosterSlug(hero);
+    if (!slug || mode === 'none') return;
+    const route = '#roster/' + encodeURIComponent(slug);
+    if (mode === 'replace') {
+        history.replaceState({ ...(history.state || {}), lmRosterProfile: true }, '', route);
+        return;
+    }
+    if (!history.state?.lmRosterBase) {
+        history.pushState({ lmRosterBase: true }, '', '#roster');
+    }
+    history.pushState({ lmRosterProfile: true }, '', route);
+}
+function showRosterChapter() {
+    const chapter = document.getElementById('chapter-2');
+    if (!chapter) return;
+    if (!chapter.classList.contains('active')) switchChapter(2);
+}
+function openHeroProfile(index, triggerElement = document.activeElement, options = {}) {
     const hero = heroesData[index];
     if (!hero) return;
     recordLegionProgress('profile', hero.cardNumber || hero.name);
@@ -1139,7 +1163,7 @@ function openHeroProfile(index, triggerElement = document.activeElement) {
     page.innerHTML = '<div class="hero-profile-layout hero-profile-gateway"><div class="hero-profile-art-wrap"><div class="hero-profile-art-frame"><span class="hero-profile-art-stamp">LEGIÓN<br>MULTIVERSAL</span>' + (profileArt ? '<img class="hero-profile-art" src="' + escapeStatsHtml(profileArt) + '" alt="' + escapeStatsHtml(profileArtAlt) + '" loading="eager" onerror="this.closest(\'.hero-profile-art-frame\').classList.add(\'art-unavailable\');this.remove();">' : '<div class="hero-profile-art-fallback">ILUSTRACIÓN NO DISPONIBLE</div>') + '<span class="hero-profile-art-caption">EXPEDIENTE N.º ' + escapeStatsHtml(hero.cardNumber || 'S/N') + '</span></div></div><div class="hero-profile-copy"><span class="stats-status">EXPEDIENTE INDIVIDUAL · ' + escapeStatsHtml(hero.rank || 'CLASIFICACIÓN PENDIENTE') + '</span><p class="profile-section-kicker">ARCHIVO PERSONAL · ' + escapeStatsHtml(hero.cardNumber ? 'N.º ' + hero.cardNumber : 'REGISTRO DE LA LEGIÓN') + '</p><h3 id="hero-profile-title" tabindex="-1">' + escapeStatsHtml(hero.name) + '</h3><p>' + escapeStatsHtml(hero.bio || 'Presentación personal pendiente de completar.') + '</p><div class="hero-profile-actions">' + profileActions + '</div></div></div>' + renderCommercialQuickView(hero);
     home.hidden = true;
     page.hidden = false;
-    history.replaceState(null, '', '#expediente-' + encodeURIComponent(hero.name.toLowerCase().replace(/[^a-z0-9]+/g,'-')));
+    setHeroProfileRoute(hero, options.historyMode || 'push');
     page.scrollIntoView({behavior:'smooth',block:'start'});
     requestAnimationFrame(() => document.getElementById('hero-profile-title')?.focus({preventScroll:true}));
 }
@@ -1148,19 +1172,63 @@ function navigateHeroProfile(direction) {
     const currentPosition = entries.findIndex(entry => entry.index === window.currentHeroProfileIndex);
     const nextEntry = entries[currentPosition + Number(direction)];
     if (!nextEntry) return;
-    openHeroProfile(nextEntry.index, window.lastHeroProfileTrigger || document.activeElement);
+    openHeroProfile(nextEntry.index, window.lastHeroProfileTrigger || document.activeElement, { historyMode: 'replace' });
+}
+function findHeroIndexBySlug(slug) {
+    const normalized = String(slug || '').toLocaleLowerCase('es');
+    return heroesData.findIndex(hero => getHeroRosterSlug(hero) === normalized
+        || hero.name.toLocaleLowerCase('es').replace(/[^a-z0-9]+/g,'-') === normalized);
+}
+function openHeroFromRoute(slug, normalizeHistory = false) {
+    const index = findHeroIndexBySlug(slug);
+    if (index < 0) return false;
+    showRosterChapter();
+    const hero = heroesData[index];
+    if (normalizeHistory) {
+        history.replaceState({ lmRosterBase: true }, '', '#roster');
+        history.pushState({ lmRosterProfile: true }, '', '#roster/' + encodeURIComponent(getHeroRosterSlug(hero)));
+    }
+    openHeroProfile(index, null, { historyMode: 'none' });
+    return true;
 }
 function restoreHeroProfileFromHash() {
-    const slug = decodeURIComponent((location.hash || '').replace(/^#expediente-/, ''));
-    if (!slug || slug === location.hash.replace(/^#/, '')) return;
-    const index = heroesData.findIndex(hero => hero.name.toLowerCase().replace(/[^a-z0-9]+/g,'-') === slug);
-    if (index >= 0) {
-        const chapter = document.getElementById('chapter-2');
-        document.querySelectorAll('.chapter-panel').forEach(panel => panel.classList.remove('active'));
-        chapter?.classList.add('active');
-        openHeroProfile(index);
+    const hash = location.hash || '';
+    if (hash === '#roster') {
+        showRosterChapter();
+        return;
+    }
+    let slug = '';
+    let legacy = false;
+    if (hash.startsWith('#roster/')) {
+        slug = decodeURIComponent(hash.slice('#roster/'.length));
+    } else if (hash.startsWith('#expediente-')) {
+        slug = decodeURIComponent(hash.slice('#expediente-'.length));
+        legacy = true;
+    }
+    if (!slug) return;
+    if (!openHeroFromRoute(slug, legacy || !history.state?.lmRosterProfile)) {
+        history.replaceState({ lmRosterBase: true }, '', '#roster');
+        showRosterChapter();
     }
 }
+window.addEventListener('popstate', () => {
+    const hash = location.hash || '';
+    if (hash === '#roster') {
+        if (window.currentHeroProfileIndex !== null && window.currentHeroProfileIndex !== undefined) {
+            closeHeroProfile({ fromHistory: true });
+        }
+        showRosterChapter();
+        return;
+    }
+    if (hash.startsWith('#roster/')) {
+        const slug = decodeURIComponent(hash.slice('#roster/'.length));
+        openHeroFromRoute(slug, false);
+        return;
+    }
+    if (window.currentHeroProfileIndex !== null && window.currentHeroProfileIndex !== undefined) {
+        closeHeroProfile({ fromHistory: true });
+    }
+});
 document.addEventListener('keydown', function(event) {
     if (event.key !== 'Escape') return;
     const modal = document.getElementById('hero-modal');
@@ -1171,12 +1239,18 @@ document.addEventListener('keydown', function(event) {
         closeHeroProfile();
     }
 });
-function closeHeroProfile() {
+function closeHeroProfile(options = {}) {
+    if (!options.fromHistory && history.state?.lmRosterProfile) {
+        history.back();
+        return;
+    }
     const home = document.getElementById('roster-home');
     const page = document.getElementById('hero-profile-page');
     if (page) page.hidden = true;
     if (home) home.hidden = false;
-    history.replaceState(null, '', '#chapter-2');
+    if (!options.fromHistory && location.hash.startsWith('#roster/')) {
+        history.replaceState({ lmRosterBase: true }, '', '#roster');
+    }
     document.getElementById('chapter-2')?.scrollIntoView({behavior:'smooth',block:'start'});
     const trigger = window.lastHeroProfileTrigger;
     window.lastHeroProfileTrigger = null;
@@ -1817,6 +1891,9 @@ function openHeroModal(index) {
         function switchChapter(chapterNum) {
             const panel=document.getElementById(`chapter-${chapterNum}`);
             if(!panel)return;
+            if (Number(chapterNum) !== 2 && location.hash.startsWith('#roster/')) {
+                history.replaceState(null, '', '#chapter-' + chapterNum);
+            }
             const current=document.querySelector('.chapter-panel.active');
             if(current===panel)return;
             const transition=document.getElementById('chapter-transition');
