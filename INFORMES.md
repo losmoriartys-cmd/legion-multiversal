@@ -3243,3 +3243,16 @@ Durante esta tanda, `main` avanzó de `b67079b8d6bbde268a967e60ef642987072c6c52`
 - **Variantes WebP:** publicadas seis candidatas de revisión en `assets/optimized/`, conservando originales, dimensiones, proporciones y referencias visuales. Commit de publicación: `c3b5909348af1a694418c82764f2e137d35aa9e2`. Ahorro conjunto aproximado 1,08 MB (26,9 %): logo lossless 37,18 %; Roderik 29,41 %; Orígenes 17,07 %; BarFender 21,40 %; banner LCP 17,70 %; carnet Demian 19,59 %. Los archivos candidatos no están conectados a las páginas ni reemplazan los originales; cualquier sustitución requerirá una comparación visual y una autorización posterior.
 - **Resultado del workflow:** todos los pasos, incluido el nuevo sincronizado de rama previo al push de variantes, finalizaron correctamente. La rama de auditoría quedó actualizada sin tocar `main`.
 - **Estado:** PR #46 continúa abierto, Draft y sin fusionar. No se desplegó producción.
+
+
+## 2026-11-14 — Implementación de mejoras verificadas del Roster
+
+- **Diseño y legibilidad:** se corrigió el contraste del título y del banner del Roster, se reforzó el fondo cinematográfico del capítulo y se ajustaron tamaños tipográficos y grilla responsive de las cartas.
+- **Cartas 3D:** se conserva el giro accesible ya implementado con sincronización de `inert` y `aria-hidden` en cada cambio de cara. Se redujeron efectos que podían interferir con la composición 3D en Safari y se respeta `prefers-reduced-motion`.
+- **Filtros:** las opciones de plataforma ahora se generan desde los perfiles y enlaces presentes en los datos canónicos; Instagram no depende de una lista escrita a mano. Las especialidades también ignoran valores vacíos.
+- **Limpieza editorial:** se retiraron estados internos genéricos de métricas, especialidades «por definir» y el campo `activity_status` sin consumo real. No se inventaron categorías para completar el perfil de DAVE — NEXUS.
+- **Dato de PATO — ORATORIS:** el registro de YouTube queda en 56 suscriptores, 6 videos y 431 visualizaciones, con captura de YouTube Data API del 14/11/2026 a las 07:39:11 UTC (04:39:11 Argentina).
+- **Alcance:** se mantienen los roles institucionales, la voz individual de cada creador y el archivo histórico de plataformas. No se cambió la jerarquía del roster ni se eliminó documentación de Keymailer.
+- **Archivos:** `styles.css`, `app.js`, `index.html`, `roster-data.json`, `creator-records.json`.
+- **Validación:** pendiente de la ejecución de CI sobre el commit final y de la inspección visual en Safari iOS real. No se afirma compatibilidad Safari probada sin ese dispositivo.
+- **Publicación:** cambios únicamente en `auditoria-ux`; `main` y producción permanecen sin modificar.
