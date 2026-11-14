@@ -9,6 +9,7 @@ on:
       - 'update_clips.py'
       - 'tests/**'
       - 'scripts/validate_clips_data.py'
+      - 'scripts/validate_metric_history.py'
       - '.github/workflows/test-stats.yml'
 
 permissions:
