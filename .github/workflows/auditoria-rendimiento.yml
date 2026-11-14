@@ -5,6 +5,7 @@ on:
     branches: [auditoria-ux]
     paths:
       - 'scripts/add_image_dimensions.py'
+      - 'scripts/optimize_images.py'
       - 'scripts/lighthouse_runs.sh'
       - 'scripts/summarize_lighthouse.py'
       - 'scripts/qa_smoke.mjs'
@@ -23,6 +24,7 @@ on:
     branches: [main]
     paths:
       - 'scripts/add_image_dimensions.py'
+      - 'scripts/optimize_images.py'
       - 'scripts/lighthouse_runs.sh'
       - 'scripts/summarize_lighthouse.py'
       - 'scripts/qa_smoke.mjs'
@@ -141,6 +143,8 @@ jobs:
           python scripts/lh_failures.py reports/lighthouse/github-pages/run1.report.json | tee reports/lighthouse/diagnostico-produccion.txt
           python scripts/lh_failures.py reports/lighthouse/preview/run1.report.json | tee reports/lighthouse/diagnostico-preview.txt
 
+      - name: Generar variantes WebP de revisión sin tocar originales
+        run: python scripts/optimize_images.py
       - name: Preparar Playwright para smoke QA
         run: |
           npm init -y
@@ -158,7 +162,7 @@ jobs:
       - name: Verificar GitHub Pages producción sin Pages Functions
         run: node scripts/qa_production.mjs
 
-      - name: Publicar reportes, resumen, diff y capturas QA
+      - name: Publicar reportes, variantes candidatas y capturas QA
         if: always()
         uses: actions/upload-artifact@v4
         with:

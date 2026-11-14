@@ -3099,3 +3099,31 @@ Se conserva el compromiso de avanzar una mejora por etapa, con validación y rev
 
 ### Nota de integridad de ramas
 Durante esta tanda, `main` avanzó de `b67079b8d6bbde268a967e60ef642987072c6c52` a `d380f8ff95fe60ac360d306cf1e8721ff8ba32bb` por un commit automático de `github-actions[bot]` (`Actualización automática de estadísticas multiplataforma`) que modificó únicamente `data.json` y `platform-stats.json`. No fue una escritura de esta auditoría. No se hicieron commits de `auditoria-ux` sobre `main`, no se fusionó el PR ni se desplegó producción.
+
+
+## Validación endpoint y auditoría de imágenes — run 43570146758 (14/11/2026)
+
+- **Ejecución integral SUCCESS:** [workflow #61 / run 43570146758](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43570146758), sobre el commit c15aa5aab34129c98978ff34c128aefa7434d845. Job único completado: 23 pasos, todos SUCCESS.
+- **Pruebas nuevas de /api/live: 13/13 OK** en desktop (5), tablet (4) y mobile (4). Cada respuesta observada fue HTTP 200 y JSON válido con source fallback, status unavailable y channels como array. Esto prueba el contrato de fallback de Preview; no prueba credenciales Twitch ni un flujo Helix en vivo.
+- **Smoke QA Preview: 43/43 OK** en 1440, 768 y 390 px. Sin errores JS ni scroll horizontal; incluye navegación por teclado, CTA y fallback del formulario.
+- **QA producción GitHub Pages: 10/10 OK.** Sin solicitudes /api/*, errores JavaScript ni errores de página. No se cambió ni desplegó producción.
+- **Lighthouse (medianas de 3 corridas por entorno):**
+
+| Métrica | GitHub Pages | Preview |
+|---|---:|---:|
+| Performance | 72 | 72 |
+| Accessibility | 100 | 100 |
+| Best Practices | 96 | 100 |
+| SEO | 100 | 69 |
+| LCP simulado | 15,35 s | 12,59 s |
+| CLS | 0,089 | 0,090 |
+| TBT | 2 ms | 0 ms |
+| Peso transferido | 4.179 KB | 3.667 KB |
+
+- **LCP observado por PerformanceObserver:** 392 ms en producción y 324 ms en Preview. No confundir estos eventos observados con el LCP simulado de Lighthouse bajo throttling, que es el valor utilizado para el score y permanece alto.
+- **Elemento LCP:** image_20261106_124855.jpg, 413.391 B de recurso (413.794 B transferidos en producción); imagen eager y con fetchpriority high. La imagen aparece como elemento LCP en ambos hosts.
+- **Recursos de imagen más pesados medidos por transferencia en producción:** legion_logo_final_hybrid.png 1.337.459 B; assets/heroes/rod3r1k_dark.webp 865.994 B; image_20261107_021355.jpg 514.918 B; stream4.jpg 475.532 B; image_20261106_124855.jpg 413.794 B; assets/carnet/DemuianCarnet.jpg 357.873 B.
+- **Diagnóstico no atribuible a imágenes:** Best Practices 96 en producción por 404 a /favicon.ico en la raíz del dominio GitHub Pages; la URL está fuera del subpath del proyecto y no se arregla cambiando solo el favicon del sitio. Preview conserva X-Robots-Tag noindex, intencional; SEO 69 no se considera regresión a corregir.
+- **Artefacto de evidencia:** [auditoria-ux-43570146758](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43570146758/artifacts/14104247361), con JSON/HTML de Lighthouse, diagnóstico, LCP, QA y capturas.
+- **Siguiente etapa:** generar candidatos WebP para los seis recursos pesados en una carpeta de reportes, sin reemplazar archivos fuente ni actualizar referencias. Cada candidato mantiene dimensiones y proporción exactas; se compara tamaño, PSNR y apariencia antes de decidir si se integra. No se aceptan cambios por tamaño solamente.
+- **Salvaguardas:** rama auditoria-ux; PR #46 permanece Draft y abierto, sin merge. main y producción no se modificaron en esta tanda.
