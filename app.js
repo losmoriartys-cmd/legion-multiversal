@@ -1356,6 +1356,21 @@ function renderCommercialPortfolio(hero, twitchLogin, youtubeLogin) {
     return out;
 }
 
+function renderHelixFreshnessEvidence(hero){
+ if(!hero?.twitch)return '';
+ const login=hero.twitch.split('/').filter(Boolean).pop().toLowerCase();
+ const channel=findChannelStats(hero);
+ const collection=instituteStatsData?.collection||{};
+ const sampled=(collection.sampled_channels||[]).includes(login);
+ const skipped=(collection.skipped_channels||[]).includes(login);
+ const snapshots=Array.isArray(channel?.snapshots)?channel.snapshots:[];
+ const last=snapshots.map(v=>v?.sampled_at).filter(Boolean).sort().pop()||null;
+ const freshness=getCaptureFreshness(last,Number(instituteStatsData?.sampling_interval_minutes||55));
+ const sync=instituteStatsData?.updated_at||null;
+ const status=sampled?'MUESTRA NUEVA EN LA ÚLTIMA CONSULTA':skipped?'OMITIDO EN LA ÚLTIMA CONSULTA':'SIN MUESTRA NUEVA CONFIRMADA';
+ const age=freshness.valid?formatArgentinaDateTime(freshness.updated):'sin muestras históricas registradas';
+ return '<section class="commercial-evidence '+(freshness.fresh?'':'is-pending')+'"><header><span>SEGUIMIENTO PROPIO · TWITCH HELIX</span><b>'+status+'</b></header><p class="commercial-evidence-period">Última muestra observada: '+escapeStatsHtml(age)+' · última consulta del colector: '+escapeStatsHtml(sync?formatArgentinaDateTime(sync):'sin fecha')+'</p><small>'+(freshness.fresh?'La muestra más reciente está dentro de la ventana operativa del colector, pero describe únicamente observaciones puntuales.':'No hay una muestra reciente que permita describir la audiencia actual. Los registros históricos se conservan para análisis interno y no se presentan como alcance vigente.')+' '+(skipped?'El canal fue omitido en la última consulta por la lógica de anti-duplicados; esto no equivale a una nueva observación.':'')+' La consulta resuelta no garantiza que se haya capturado una muestra nueva.</small></section>';
+}
 function renderCommercialQuickView(hero) {
     const safe = escapeStatsHtml;
     const twitchLogin = hero.twitch ? hero.twitch.split("/").filter(Boolean).pop().toLowerCase() : "";
