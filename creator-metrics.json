@@ -1,0 +1,1691 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-11-14T23:47:16Z",
+  "source_files": {
+    "identity": "roster-data.json",
+    "twitch": "data.json",
+    "platforms": "platform-stats.json",
+    "clips": "clips-data.json"
+  },
+  "methodology": [
+    "Registro normalizado derivado de archivos de fuente; no reemplaza las capturas originales.",
+    "No sumar ni comparar directamente métricas con unidades o períodos diferentes.",
+    "Los valores muestreados y estimados no son analítica oficial ni espectadores únicos.",
+    "Los estados delayed/unavailable no se presentan como métricas actuales.",
+    "Solo se incluyen datos públicos; métricas privadas requieren autorización individual."
+  ],
+  "creators": {
+    "moriartys": {
+      "display_name": "LOS MORIARTYS",
+      "identity_scope": "shared_project",
+      "represented_people": [
+        "Demian",
+        "Ari"
+      ],
+      "accounts": [
+        {
+          "account_ref": "twitch:losmoriartys",
+          "platform": "twitch",
+          "account_type": "creator_channel",
+          "handle": "losmoriartys",
+          "login": "losmoriartys",
+          "url": "https://twitch.tv/losmoriartys",
+          "ownership": "shared",
+          "account_status": "registered",
+          "collection_mode": "public_app_token",
+          "collection_source": "Twitch Helix API",
+          "restricted_metrics": [
+            "followers_total",
+            "unique_viewers",
+            "watch_time_official",
+            "creator_dashboard_analytics",
+            "revenue"
+          ]
+        }
+      ],
+      "metrics": [
+        {
+          "metric_id": "twitch:losmoriartys:live_status",
+          "platform": "twitch",
+          "account_handle": "losmoriartys",
+          "key": "live_status",
+          "label": "Estado de transmisión",
+          "value": null,
+          "unit": "status",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "public_helix_snapshot",
+          "status": "delayed",
+          "visibility": "public",
+          "interpretation": "Estado observado en la última consulta pública; un estado vencido queda oculto.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:losmoriartys:current_viewers",
+          "platform": "twitch",
+          "account_handle": "losmoriartys",
+          "key": "current_viewers",
+          "label": "Espectadores en la última captura",
+          "value": null,
+          "unit": "viewers",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "public_helix_snapshot",
+          "status": "delayed",
+          "visibility": "public",
+          "interpretation": "Lectura puntual de stream en vivo; no equivale a espectadores únicos ni promedio.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:losmoriartys:samples_total",
+          "platform": "twitch",
+          "account_handle": "losmoriartys",
+          "key": "samples_total",
+          "label": "Muestras históricas",
+          "value": 271,
+          "unit": "samples",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "55_minute_public_sampling",
+          "status": "sampled",
+          "visibility": "public",
+          "interpretation": "Cantidad de observaciones almacenadas en el período efectivo.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:losmoriartys:live_samples",
+          "platform": "twitch",
+          "account_handle": "losmoriartys",
+          "key": "live_samples",
+          "label": "Muestras en directo",
+          "value": 11,
+          "unit": "samples",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "55_minute_public_sampling",
+          "status": "sampled",
+          "visibility": "public",
+          "interpretation": "Observaciones que encontraron el canal en directo.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:losmoriartys:streams_observed",
+          "platform": "twitch",
+          "account_handle": "losmoriartys",
+          "key": "streams_observed",
+          "label": "Sesiones observadas",
+          "value": 6,
+          "unit": "streams",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "55_minute_public_sampling",
+          "status": "sampled",
+          "visibility": "public",
+          "interpretation": "Sesiones distinguibles mediante stream_id dentro del muestreo.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:losmoriartys:average_viewers_sampled",
+          "platform": "twitch",
+          "account_handle": "losmoriartys",
+          "key": "average_viewers_sampled",
+          "label": "Promedio de viewers muestreado",
+          "value": 17.6,
+          "unit": "viewers_sampled_avg",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "55_minute_public_sampling",
+          "status": "sampled",
+          "visibility": "public",
+          "interpretation": "Promedio de las observaciones disponibles en directo; no es CCV oficial.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:losmoriartys:peak_viewers_sampled",
+          "platform": "twitch",
+          "account_handle": "losmoriartys",
+          "key": "peak_viewers_sampled",
+          "label": "Pico observado",
+          "value": 31,
+          "unit": "viewers_sampled_peak",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "55_minute_public_sampling",
+          "status": "sampled",
+          "visibility": "public",
+          "interpretation": "Mayor lectura puntual registrada; no es pico oficial de Twitch.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:losmoriartys:observed_live_hours",
+          "platform": "twitch",
+          "account_handle": "losmoriartys",
+          "key": "observed_live_hours",
+          "label": "Horas en directo observadas",
+          "value": 3.59,
+          "unit": "hours_observed",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "55_minute_public_sampling",
+          "status": "sampled",
+          "visibility": "public",
+          "interpretation": "Duración aproximada de intervalos consecutivos admisibles del mismo directo.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:losmoriartys:estimated_hours_watched",
+          "platform": "twitch",
+          "account_handle": "losmoriartys",
+          "key": "estimated_hours_watched",
+          "label": "Horas vistas estimadas",
+          "value": 73.79,
+          "unit": "hours_estimated",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "55_minute_public_sampling",
+          "status": "estimated",
+          "visibility": "public",
+          "interpretation": "Estimación entre muestras consecutivas; no es watch time oficial.",
+          "source_file": "data.json"
+        }
+      ],
+      "content": {
+        "twitch_clips_status": "awaiting_collection",
+        "twitch_clips_captured_at": null,
+        "twitch_clips_count": 0
+      }
+    },
+    "rod3r1k": {
+      "display_name": "ROD3R1K",
+      "identity_scope": "individual_creator",
+      "represented_people": [],
+      "accounts": [
+        {
+          "account_ref": "twitch:TheR0D3R1K",
+          "platform": "twitch",
+          "account_type": "creator_channel",
+          "handle": "TheR0D3R1K",
+          "login": "ther0d3r1k",
+          "url": "https://twitch.tv/TheR0D3R1K",
+          "ownership": "individual",
+          "account_status": "registered",
+          "collection_mode": "public_app_token",
+          "collection_source": "Twitch Helix API",
+          "restricted_metrics": [
+            "followers_total",
+            "unique_viewers",
+            "watch_time_official",
+            "creator_dashboard_analytics",
+            "revenue"
+          ]
+        }
+      ],
+      "metrics": [
+        {
+          "metric_id": "twitch:TheR0D3R1K:live_status",
+          "platform": "twitch",
+          "account_handle": "TheR0D3R1K",
+          "key": "live_status",
+          "label": "Estado de transmisión",
+          "value": null,
+          "unit": "status",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "public_helix_snapshot",
+          "status": "delayed",
+          "visibility": "public",
+          "interpretation": "Estado observado en la última consulta pública; un estado vencido queda oculto.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:TheR0D3R1K:current_viewers",
+          "platform": "twitch",
+          "account_handle": "TheR0D3R1K",
+          "key": "current_viewers",
+          "label": "Espectadores en la última captura",
+          "value": null,
+          "unit": "viewers",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "public_helix_snapshot",
+          "status": "delayed",
+          "visibility": "public",
+          "interpretation": "Lectura puntual de stream en vivo; no equivale a espectadores únicos ni promedio.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:TheR0D3R1K:samples_total",
+          "platform": "twitch",
+          "account_handle": "TheR0D3R1K",
+          "key": "samples_total",
+          "label": "Muestras históricas",
+          "value": 271,
+          "unit": "samples",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "55_minute_public_sampling",
+          "status": "sampled",
+          "visibility": "public",
+          "interpretation": "Cantidad de observaciones almacenadas en el período efectivo.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:TheR0D3R1K:live_samples",
+          "platform": "twitch",
+          "account_handle": "TheR0D3R1K",
+          "key": "live_samples",
+          "label": "Muestras en directo",
+          "value": 31,
+          "unit": "samples",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "55_minute_public_sampling",
+          "status": "sampled",
+          "visibility": "public",
+          "interpretation": "Observaciones que encontraron el canal en directo.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:TheR0D3R1K:streams_observed",
+          "platform": "twitch",
+          "account_handle": "TheR0D3R1K",
+          "key": "streams_observed",
+          "label": "Sesiones observadas",
+          "value": 7,
+          "unit": "streams",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "55_minute_public_sampling",
+          "status": "sampled",
+          "visibility": "public",
+          "interpretation": "Sesiones distinguibles mediante stream_id dentro del muestreo.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:TheR0D3R1K:average_viewers_sampled",
+          "platform": "twitch",
+          "account_handle": "TheR0D3R1K",
+          "key": "average_viewers_sampled",
+          "label": "Promedio de viewers muestreado",
+          "value": 22.7,
+          "unit": "viewers_sampled_avg",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "55_minute_public_sampling",
+          "status": "sampled",
+          "visibility": "public",
+          "interpretation": "Promedio de las observaciones disponibles en directo; no es CCV oficial.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:TheR0D3R1K:peak_viewers_sampled",
+          "platform": "twitch",
+          "account_handle": "TheR0D3R1K",
+          "key": "peak_viewers_sampled",
+          "label": "Pico observado",
+          "value": 46,
+          "unit": "viewers_sampled_peak",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "55_minute_public_sampling",
+          "status": "sampled",
+          "visibility": "public",
+          "interpretation": "Mayor lectura puntual registrada; no es pico oficial de Twitch.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:TheR0D3R1K:observed_live_hours",
+          "platform": "twitch",
+          "account_handle": "TheR0D3R1K",
+          "key": "observed_live_hours",
+          "label": "Horas en directo observadas",
+          "value": 18.97,
+          "unit": "hours_observed",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "55_minute_public_sampling",
+          "status": "sampled",
+          "visibility": "public",
+          "interpretation": "Duración aproximada de intervalos consecutivos admisibles del mismo directo.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:TheR0D3R1K:estimated_hours_watched",
+          "platform": "twitch",
+          "account_handle": "TheR0D3R1K",
+          "key": "estimated_hours_watched",
+          "label": "Horas vistas estimadas",
+          "value": 411.99,
+          "unit": "hours_estimated",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "55_minute_public_sampling",
+          "status": "estimated",
+          "visibility": "public",
+          "interpretation": "Estimación entre muestras consecutivas; no es watch time oficial.",
+          "source_file": "data.json"
+        }
+      ],
+      "content": {
+        "twitch_clips_status": "awaiting_collection",
+        "twitch_clips_captured_at": null,
+        "twitch_clips_count": 0
+      }
+    },
+    "lady-moriarty": {
+      "display_name": "LADY MORIARTY",
+      "identity_scope": "individual_creator",
+      "represented_people": [],
+      "accounts": [
+        {
+          "account_ref": "twitch:ladymoriarty01",
+          "platform": "twitch",
+          "account_type": "creator_channel",
+          "handle": "ladymoriarty01",
+          "login": "ladymoriarty01",
+          "url": "https://twitch.tv/ladymoriarty01",
+          "ownership": "individual",
+          "account_status": "registered",
+          "collection_mode": "public_app_token",
+          "collection_source": "Twitch Helix API",
+          "restricted_metrics": [
+            "followers_total",
+            "unique_viewers",
+            "watch_time_official",
+            "creator_dashboard_analytics",
+            "revenue"
+          ]
+        }
+      ],
+      "metrics": [
+        {
+          "metric_id": "twitch:ladymoriarty01:live_status",
+          "platform": "twitch",
+          "account_handle": "ladymoriarty01",
+          "key": "live_status",
+          "label": "Estado de transmisión",
+          "value": null,
+          "unit": "status",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "public_helix_snapshot",
+          "status": "delayed",
+          "visibility": "public",
+          "interpretation": "Estado observado en la última consulta pública; un estado vencido queda oculto.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:ladymoriarty01:current_viewers",
+          "platform": "twitch",
+          "account_handle": "ladymoriarty01",
+          "key": "current_viewers",
+          "label": "Espectadores en la última captura",
+          "value": null,
+          "unit": "viewers",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "public_helix_snapshot",
+          "status": "delayed",
+          "visibility": "public",
+          "interpretation": "Lectura puntual de stream en vivo; no equivale a espectadores únicos ni promedio.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:ladymoriarty01:samples_total",
+          "platform": "twitch",
+          "account_handle": "ladymoriarty01",
+          "key": "samples_total",
+          "label": "Muestras históricas",
+          "value": 271,
+          "unit": "samples",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "55_minute_public_sampling",
+          "status": "sampled",
+          "visibility": "public",
+          "interpretation": "Cantidad de observaciones almacenadas en el período efectivo.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:ladymoriarty01:live_samples",
+          "platform": "twitch",
+          "account_handle": "ladymoriarty01",
+          "key": "live_samples",
+          "label": "Muestras en directo",
+          "value": 9,
+          "unit": "samples",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "55_minute_public_sampling",
+          "status": "sampled",
+          "visibility": "public",
+          "interpretation": "Observaciones que encontraron el canal en directo.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:ladymoriarty01:streams_observed",
+          "platform": "twitch",
+          "account_handle": "ladymoriarty01",
+          "key": "streams_observed",
+          "label": "Sesiones observadas",
+          "value": 4,
+          "unit": "streams",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "55_minute_public_sampling",
+          "status": "sampled",
+          "visibility": "public",
+          "interpretation": "Sesiones distinguibles mediante stream_id dentro del muestreo.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:ladymoriarty01:average_viewers_sampled",
+          "platform": "twitch",
+          "account_handle": "ladymoriarty01",
+          "key": "average_viewers_sampled",
+          "label": "Promedio de viewers muestreado",
+          "value": 6.1,
+          "unit": "viewers_sampled_avg",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "55_minute_public_sampling",
+          "status": "sampled",
+          "visibility": "public",
+          "interpretation": "Promedio de las observaciones disponibles en directo; no es CCV oficial.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:ladymoriarty01:peak_viewers_sampled",
+          "platform": "twitch",
+          "account_handle": "ladymoriarty01",
+          "key": "peak_viewers_sampled",
+          "label": "Pico observado",
+          "value": 15,
+          "unit": "viewers_sampled_peak",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "55_minute_public_sampling",
+          "status": "sampled",
+          "visibility": "public",
+          "interpretation": "Mayor lectura puntual registrada; no es pico oficial de Twitch.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:ladymoriarty01:observed_live_hours",
+          "platform": "twitch",
+          "account_handle": "ladymoriarty01",
+          "key": "observed_live_hours",
+          "label": "Horas en directo observadas",
+          "value": 3.07,
+          "unit": "hours_observed",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "55_minute_public_sampling",
+          "status": "sampled",
+          "visibility": "public",
+          "interpretation": "Duración aproximada de intervalos consecutivos admisibles del mismo directo.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:ladymoriarty01:estimated_hours_watched",
+          "platform": "twitch",
+          "account_handle": "ladymoriarty01",
+          "key": "estimated_hours_watched",
+          "label": "Horas vistas estimadas",
+          "value": 19.29,
+          "unit": "hours_estimated",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "55_minute_public_sampling",
+          "status": "estimated",
+          "visibility": "public",
+          "interpretation": "Estimación entre muestras consecutivas; no es watch time oficial.",
+          "source_file": "data.json"
+        }
+      ],
+      "content": {
+        "twitch_clips_status": "awaiting_collection",
+        "twitch_clips_captured_at": null,
+        "twitch_clips_count": 0
+      }
+    },
+    "ardipii": {
+      "display_name": "ARDIPII",
+      "identity_scope": "individual_creator",
+      "represented_people": [],
+      "accounts": [
+        {
+          "account_ref": "twitch:ardipii",
+          "platform": "twitch",
+          "account_type": "creator_channel",
+          "handle": "ardipii",
+          "login": "ardipii",
+          "url": "https://twitch.tv/ardipii",
+          "ownership": "individual",
+          "account_status": "registered",
+          "collection_mode": "public_app_token",
+          "collection_source": "Twitch Helix API",
+          "restricted_metrics": [
+            "followers_total",
+            "unique_viewers",
+            "watch_time_official",
+            "creator_dashboard_analytics",
+            "revenue"
+          ]
+        }
+      ],
+      "metrics": [
+        {
+          "metric_id": "twitch:ardipii:live_status",
+          "platform": "twitch",
+          "account_handle": "ardipii",
+          "key": "live_status",
+          "label": "Estado de transmisión",
+          "value": null,
+          "unit": "status",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "public_helix_snapshot",
+          "status": "delayed",
+          "visibility": "public",
+          "interpretation": "Estado observado en la última consulta pública; un estado vencido queda oculto.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:ardipii:current_viewers",
+          "platform": "twitch",
+          "account_handle": "ardipii",
+          "key": "current_viewers",
+          "label": "Espectadores en la última captura",
+          "value": null,
+          "unit": "viewers",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "public_helix_snapshot",
+          "status": "delayed",
+          "visibility": "public",
+          "interpretation": "Lectura puntual de stream en vivo; no equivale a espectadores únicos ni promedio.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:ardipii:samples_total",
+          "platform": "twitch",
+          "account_handle": "ardipii",
+          "key": "samples_total",
+          "label": "Muestras históricas",
+          "value": 271,
+          "unit": "samples",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "55_minute_public_sampling",
+          "status": "sampled",
+          "visibility": "public",
+          "interpretation": "Cantidad de observaciones almacenadas en el período efectivo.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:ardipii:live_samples",
+          "platform": "twitch",
+          "account_handle": "ardipii",
+          "key": "live_samples",
+          "label": "Muestras en directo",
+          "value": 6,
+          "unit": "samples",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "55_minute_public_sampling",
+          "status": "sampled",
+          "visibility": "public",
+          "interpretation": "Observaciones que encontraron el canal en directo.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:ardipii:streams_observed",
+          "platform": "twitch",
+          "account_handle": "ardipii",
+          "key": "streams_observed",
+          "label": "Sesiones observadas",
+          "value": 3,
+          "unit": "streams",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "55_minute_public_sampling",
+          "status": "sampled",
+          "visibility": "public",
+          "interpretation": "Sesiones distinguibles mediante stream_id dentro del muestreo.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:ardipii:average_viewers_sampled",
+          "platform": "twitch",
+          "account_handle": "ardipii",
+          "key": "average_viewers_sampled",
+          "label": "Promedio de viewers muestreado",
+          "value": 7.2,
+          "unit": "viewers_sampled_avg",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "55_minute_public_sampling",
+          "status": "sampled",
+          "visibility": "public",
+          "interpretation": "Promedio de las observaciones disponibles en directo; no es CCV oficial.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:ardipii:peak_viewers_sampled",
+          "platform": "twitch",
+          "account_handle": "ardipii",
+          "key": "peak_viewers_sampled",
+          "label": "Pico observado",
+          "value": 14,
+          "unit": "viewers_sampled_peak",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "55_minute_public_sampling",
+          "status": "sampled",
+          "visibility": "public",
+          "interpretation": "Mayor lectura puntual registrada; no es pico oficial de Twitch.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:ardipii:observed_live_hours",
+          "platform": "twitch",
+          "account_handle": "ardipii",
+          "key": "observed_live_hours",
+          "label": "Horas en directo observadas",
+          "value": 1.66,
+          "unit": "hours_observed",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "55_minute_public_sampling",
+          "status": "sampled",
+          "visibility": "public",
+          "interpretation": "Duración aproximada de intervalos consecutivos admisibles del mismo directo.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:ardipii:estimated_hours_watched",
+          "platform": "twitch",
+          "account_handle": "ardipii",
+          "key": "estimated_hours_watched",
+          "label": "Horas vistas estimadas",
+          "value": 17.23,
+          "unit": "hours_estimated",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "55_minute_public_sampling",
+          "status": "estimated",
+          "visibility": "public",
+          "interpretation": "Estimación entre muestras consecutivas; no es watch time oficial.",
+          "source_file": "data.json"
+        }
+      ],
+      "content": {
+        "twitch_clips_status": "awaiting_collection",
+        "twitch_clips_captured_at": null,
+        "twitch_clips_count": 0
+      }
+    },
+    "akuma": {
+      "display_name": "AKUMA",
+      "identity_scope": "individual_creator",
+      "represented_people": [],
+      "accounts": [
+        {
+          "account_ref": "twitch:akumazoldyck",
+          "platform": "twitch",
+          "account_type": "creator_channel",
+          "handle": "akumazoldyck",
+          "login": "akumazoldyck",
+          "url": "https://twitch.tv/akumazoldyck",
+          "ownership": "individual",
+          "account_status": "registered",
+          "collection_mode": "public_app_token",
+          "collection_source": "Twitch Helix API",
+          "restricted_metrics": [
+            "followers_total",
+            "unique_viewers",
+            "watch_time_official",
+            "creator_dashboard_analytics",
+            "revenue"
+          ]
+        }
+      ],
+      "metrics": [
+        {
+          "metric_id": "twitch:akumazoldyck:live_status",
+          "platform": "twitch",
+          "account_handle": "akumazoldyck",
+          "key": "live_status",
+          "label": "Estado de transmisión",
+          "value": null,
+          "unit": "status",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "public_helix_snapshot",
+          "status": "delayed",
+          "visibility": "public",
+          "interpretation": "Estado observado en la última consulta pública; un estado vencido queda oculto.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:akumazoldyck:current_viewers",
+          "platform": "twitch",
+          "account_handle": "akumazoldyck",
+          "key": "current_viewers",
+          "label": "Espectadores en la última captura",
+          "value": null,
+          "unit": "viewers",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "public_helix_snapshot",
+          "status": "delayed",
+          "visibility": "public",
+          "interpretation": "Lectura puntual de stream en vivo; no equivale a espectadores únicos ni promedio.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:akumazoldyck:samples_total",
+          "platform": "twitch",
+          "account_handle": "akumazoldyck",
+          "key": "samples_total",
+          "label": "Muestras históricas",
+          "value": 271,
+          "unit": "samples",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "55_minute_public_sampling",
+          "status": "sampled",
+          "visibility": "public",
+          "interpretation": "Cantidad de observaciones almacenadas en el período efectivo.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:akumazoldyck:live_samples",
+          "platform": "twitch",
+          "account_handle": "akumazoldyck",
+          "key": "live_samples",
+          "label": "Muestras en directo",
+          "value": 19,
+          "unit": "samples",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "55_minute_public_sampling",
+          "status": "sampled",
+          "visibility": "public",
+          "interpretation": "Observaciones que encontraron el canal en directo.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:akumazoldyck:streams_observed",
+          "platform": "twitch",
+          "account_handle": "akumazoldyck",
+          "key": "streams_observed",
+          "label": "Sesiones observadas",
+          "value": 9,
+          "unit": "streams",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "55_minute_public_sampling",
+          "status": "sampled",
+          "visibility": "public",
+          "interpretation": "Sesiones distinguibles mediante stream_id dentro del muestreo.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:akumazoldyck:average_viewers_sampled",
+          "platform": "twitch",
+          "account_handle": "akumazoldyck",
+          "key": "average_viewers_sampled",
+          "label": "Promedio de viewers muestreado",
+          "value": 6.8,
+          "unit": "viewers_sampled_avg",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "55_minute_public_sampling",
+          "status": "sampled",
+          "visibility": "public",
+          "interpretation": "Promedio de las observaciones disponibles en directo; no es CCV oficial.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:akumazoldyck:peak_viewers_sampled",
+          "platform": "twitch",
+          "account_handle": "akumazoldyck",
+          "key": "peak_viewers_sampled",
+          "label": "Pico observado",
+          "value": 17,
+          "unit": "viewers_sampled_peak",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "55_minute_public_sampling",
+          "status": "sampled",
+          "visibility": "public",
+          "interpretation": "Mayor lectura puntual registrada; no es pico oficial de Twitch.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:akumazoldyck:observed_live_hours",
+          "platform": "twitch",
+          "account_handle": "akumazoldyck",
+          "key": "observed_live_hours",
+          "label": "Horas en directo observadas",
+          "value": 7.99,
+          "unit": "hours_observed",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "55_minute_public_sampling",
+          "status": "sampled",
+          "visibility": "public",
+          "interpretation": "Duración aproximada de intervalos consecutivos admisibles del mismo directo.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:akumazoldyck:estimated_hours_watched",
+          "platform": "twitch",
+          "account_handle": "akumazoldyck",
+          "key": "estimated_hours_watched",
+          "label": "Horas vistas estimadas",
+          "value": 50.17,
+          "unit": "hours_estimated",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "55_minute_public_sampling",
+          "status": "estimated",
+          "visibility": "public",
+          "interpretation": "Estimación entre muestras consecutivas; no es watch time oficial.",
+          "source_file": "data.json"
+        }
+      ],
+      "content": {
+        "twitch_clips_status": "awaiting_collection",
+        "twitch_clips_captured_at": null,
+        "twitch_clips_count": 0
+      }
+    },
+    "dave-nexus": {
+      "display_name": "DAVE — NEXUS",
+      "identity_scope": "individual_creator",
+      "represented_people": [],
+      "accounts": [
+        {
+          "account_ref": "twitch:daved0608",
+          "platform": "twitch",
+          "account_type": "creator_channel",
+          "handle": "daved0608",
+          "login": "daved0608",
+          "url": "https://twitch.tv/daved0608",
+          "ownership": "individual",
+          "account_status": "registered",
+          "collection_mode": "public_app_token",
+          "collection_source": "Twitch Helix API",
+          "restricted_metrics": [
+            "followers_total",
+            "unique_viewers",
+            "watch_time_official",
+            "creator_dashboard_analytics",
+            "revenue"
+          ]
+        }
+      ],
+      "metrics": [
+        {
+          "metric_id": "twitch:daved0608:live_status",
+          "platform": "twitch",
+          "account_handle": "daved0608",
+          "key": "live_status",
+          "label": "Estado de transmisión",
+          "value": null,
+          "unit": "status",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "public_helix_snapshot",
+          "status": "delayed",
+          "visibility": "public",
+          "interpretation": "Estado observado en la última consulta pública; un estado vencido queda oculto.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:daved0608:current_viewers",
+          "platform": "twitch",
+          "account_handle": "daved0608",
+          "key": "current_viewers",
+          "label": "Espectadores en la última captura",
+          "value": null,
+          "unit": "viewers",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "public_helix_snapshot",
+          "status": "delayed",
+          "visibility": "public",
+          "interpretation": "Lectura puntual de stream en vivo; no equivale a espectadores únicos ni promedio.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:daved0608:samples_total",
+          "platform": "twitch",
+          "account_handle": "daved0608",
+          "key": "samples_total",
+          "label": "Muestras históricas",
+          "value": 271,
+          "unit": "samples",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "55_minute_public_sampling",
+          "status": "sampled",
+          "visibility": "public",
+          "interpretation": "Cantidad de observaciones almacenadas en el período efectivo.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:daved0608:live_samples",
+          "platform": "twitch",
+          "account_handle": "daved0608",
+          "key": "live_samples",
+          "label": "Muestras en directo",
+          "value": 12,
+          "unit": "samples",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "55_minute_public_sampling",
+          "status": "sampled",
+          "visibility": "public",
+          "interpretation": "Observaciones que encontraron el canal en directo.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:daved0608:streams_observed",
+          "platform": "twitch",
+          "account_handle": "daved0608",
+          "key": "streams_observed",
+          "label": "Sesiones observadas",
+          "value": 7,
+          "unit": "streams",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "55_minute_public_sampling",
+          "status": "sampled",
+          "visibility": "public",
+          "interpretation": "Sesiones distinguibles mediante stream_id dentro del muestreo.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:daved0608:average_viewers_sampled",
+          "platform": "twitch",
+          "account_handle": "daved0608",
+          "key": "average_viewers_sampled",
+          "label": "Promedio de viewers muestreado",
+          "value": 1.9,
+          "unit": "viewers_sampled_avg",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "55_minute_public_sampling",
+          "status": "sampled",
+          "visibility": "public",
+          "interpretation": "Promedio de las observaciones disponibles en directo; no es CCV oficial.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:daved0608:peak_viewers_sampled",
+          "platform": "twitch",
+          "account_handle": "daved0608",
+          "key": "peak_viewers_sampled",
+          "label": "Pico observado",
+          "value": 5,
+          "unit": "viewers_sampled_peak",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "55_minute_public_sampling",
+          "status": "sampled",
+          "visibility": "public",
+          "interpretation": "Mayor lectura puntual registrada; no es pico oficial de Twitch.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:daved0608:observed_live_hours",
+          "platform": "twitch",
+          "account_handle": "daved0608",
+          "key": "observed_live_hours",
+          "label": "Horas en directo observadas",
+          "value": 3.55,
+          "unit": "hours_observed",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "55_minute_public_sampling",
+          "status": "sampled",
+          "visibility": "public",
+          "interpretation": "Duración aproximada de intervalos consecutivos admisibles del mismo directo.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:daved0608:estimated_hours_watched",
+          "platform": "twitch",
+          "account_handle": "daved0608",
+          "key": "estimated_hours_watched",
+          "label": "Horas vistas estimadas",
+          "value": 7.22,
+          "unit": "hours_estimated",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "55_minute_public_sampling",
+          "status": "estimated",
+          "visibility": "public",
+          "interpretation": "Estimación entre muestras consecutivas; no es watch time oficial.",
+          "source_file": "data.json"
+        }
+      ],
+      "content": {
+        "twitch_clips_status": "awaiting_collection",
+        "twitch_clips_captured_at": null,
+        "twitch_clips_count": 0
+      }
+    },
+    "pato-oratoris": {
+      "display_name": "PATO — ORATORIS",
+      "identity_scope": "individual_creator",
+      "represented_people": [],
+      "accounts": [
+        {
+          "account_ref": "youtube:@patoteexplica",
+          "platform": "youtube",
+          "account_type": "creator_channel",
+          "handle": "@patoteexplica",
+          "login": "patoteexplica",
+          "url": "https://www.youtube.com/@patoteexplica",
+          "ownership": "individual",
+          "account_status": "registered",
+          "collection_mode": "public_api_key",
+          "collection_source": "YouTube Data API v3",
+          "restricted_metrics": [
+            "watch_time",
+            "unique_viewers",
+            "audience_demographics",
+            "revenue",
+            "private_analytics"
+          ]
+        },
+        {
+          "account_ref": "instagram:patoteexplica",
+          "platform": "instagram",
+          "account_type": "social_profile",
+          "handle": "patoteexplica",
+          "login": "patoteexplica",
+          "url": "https://www.instagram.com/patoteexplica/",
+          "ownership": "individual",
+          "account_status": "registered",
+          "collection_mode": "manual_link_only",
+          "collection_source": "Enlace aportado por el equipo",
+          "restricted_metrics": [
+            "followers",
+            "reach",
+            "impressions",
+            "demographics",
+            "insights"
+          ]
+        }
+      ],
+      "metrics": [
+        {
+          "metric_id": "youtube:@patoteexplica:subscribers",
+          "platform": "youtube",
+          "account_handle": "@patoteexplica",
+          "key": "subscribers",
+          "label": "Suscriptores públicos",
+          "value": 56,
+          "unit": "subscribers",
+          "captured_at": "2026-11-14T20:56:28Z",
+          "period": {
+            "kind": "cumulative",
+            "from": null,
+            "to": "2026-11-14T20:56:28Z"
+          },
+          "source": "YouTube Data API v3",
+          "method": "youtube_data_api_public",
+          "status": "verified_public",
+          "visibility": "public",
+          "interpretation": "Conteo público de YouTube; puede estar redondeado.",
+          "source_file": "platform-stats.json"
+        },
+        {
+          "metric_id": "youtube:@patoteexplica:total_views",
+          "platform": "youtube",
+          "account_handle": "@patoteexplica",
+          "key": "total_views",
+          "label": "Visualizaciones acumuladas",
+          "value": 431,
+          "unit": "views",
+          "captured_at": "2026-11-14T20:56:28Z",
+          "period": {
+            "kind": "cumulative",
+            "from": null,
+            "to": "2026-11-14T20:56:28Z"
+          },
+          "source": "YouTube Data API v3",
+          "method": "youtube_data_api_public",
+          "status": "verified_public",
+          "visibility": "public",
+          "interpretation": "Acumulado del canal informado por YouTube Data API.",
+          "source_file": "platform-stats.json"
+        },
+        {
+          "metric_id": "youtube:@patoteexplica:videos_total",
+          "platform": "youtube",
+          "account_handle": "@patoteexplica",
+          "key": "videos_total",
+          "label": "Videos publicados",
+          "value": 6,
+          "unit": "videos",
+          "captured_at": "2026-11-14T20:56:28Z",
+          "period": {
+            "kind": "cumulative",
+            "from": null,
+            "to": "2026-11-14T20:56:28Z"
+          },
+          "source": "YouTube Data API v3",
+          "method": "youtube_data_api_public",
+          "status": "verified_public",
+          "visibility": "public",
+          "interpretation": "Cantidad total de videos del canal.",
+          "source_file": "platform-stats.json"
+        }
+      ],
+      "content": {
+        "twitch_clips_status": "not_collected",
+        "twitch_clips_captured_at": null,
+        "twitch_clips_count": 0
+      }
+    },
+    "habitos": {
+      "display_name": "HABITOS",
+      "identity_scope": "individual_creator",
+      "represented_people": [],
+      "accounts": [
+        {
+          "account_ref": "twitch:habitos_atomicos",
+          "platform": "twitch",
+          "account_type": "creator_channel",
+          "handle": "habitos_atomicos",
+          "login": "habitos_atomicos",
+          "url": "https://twitch.tv/habitos_atomicos",
+          "ownership": "individual",
+          "account_status": "registered",
+          "collection_mode": "public_app_token",
+          "collection_source": "Twitch Helix API",
+          "restricted_metrics": [
+            "followers_total",
+            "unique_viewers",
+            "watch_time_official",
+            "creator_dashboard_analytics",
+            "revenue"
+          ]
+        }
+      ],
+      "metrics": [
+        {
+          "metric_id": "twitch:habitos_atomicos:live_status",
+          "platform": "twitch",
+          "account_handle": "habitos_atomicos",
+          "key": "live_status",
+          "label": "Estado de transmisión",
+          "value": null,
+          "unit": "status",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "public_helix_snapshot",
+          "status": "delayed",
+          "visibility": "public",
+          "interpretation": "Estado observado en la última consulta pública; un estado vencido queda oculto.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:habitos_atomicos:current_viewers",
+          "platform": "twitch",
+          "account_handle": "habitos_atomicos",
+          "key": "current_viewers",
+          "label": "Espectadores en la última captura",
+          "value": null,
+          "unit": "viewers",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "public_helix_snapshot",
+          "status": "delayed",
+          "visibility": "public",
+          "interpretation": "Lectura puntual de stream en vivo; no equivale a espectadores únicos ni promedio.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:habitos_atomicos:samples_total",
+          "platform": "twitch",
+          "account_handle": "habitos_atomicos",
+          "key": "samples_total",
+          "label": "Muestras históricas",
+          "value": 271,
+          "unit": "samples",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "55_minute_public_sampling",
+          "status": "sampled",
+          "visibility": "public",
+          "interpretation": "Cantidad de observaciones almacenadas en el período efectivo.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:habitos_atomicos:live_samples",
+          "platform": "twitch",
+          "account_handle": "habitos_atomicos",
+          "key": "live_samples",
+          "label": "Muestras en directo",
+          "value": 56,
+          "unit": "samples",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "55_minute_public_sampling",
+          "status": "sampled",
+          "visibility": "public",
+          "interpretation": "Observaciones que encontraron el canal en directo.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:habitos_atomicos:streams_observed",
+          "platform": "twitch",
+          "account_handle": "habitos_atomicos",
+          "key": "streams_observed",
+          "label": "Sesiones observadas",
+          "value": 12,
+          "unit": "streams",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "55_minute_public_sampling",
+          "status": "sampled",
+          "visibility": "public",
+          "interpretation": "Sesiones distinguibles mediante stream_id dentro del muestreo.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:habitos_atomicos:average_viewers_sampled",
+          "platform": "twitch",
+          "account_handle": "habitos_atomicos",
+          "key": "average_viewers_sampled",
+          "label": "Promedio de viewers muestreado",
+          "value": 5.7,
+          "unit": "viewers_sampled_avg",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "55_minute_public_sampling",
+          "status": "sampled",
+          "visibility": "public",
+          "interpretation": "Promedio de las observaciones disponibles en directo; no es CCV oficial.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:habitos_atomicos:peak_viewers_sampled",
+          "platform": "twitch",
+          "account_handle": "habitos_atomicos",
+          "key": "peak_viewers_sampled",
+          "label": "Pico observado",
+          "value": 45,
+          "unit": "viewers_sampled_peak",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "55_minute_public_sampling",
+          "status": "sampled",
+          "visibility": "public",
+          "interpretation": "Mayor lectura puntual registrada; no es pico oficial de Twitch.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:habitos_atomicos:observed_live_hours",
+          "platform": "twitch",
+          "account_handle": "habitos_atomicos",
+          "key": "observed_live_hours",
+          "label": "Horas en directo observadas",
+          "value": 37.68,
+          "unit": "hours_observed",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "55_minute_public_sampling",
+          "status": "sampled",
+          "visibility": "public",
+          "interpretation": "Duración aproximada de intervalos consecutivos admisibles del mismo directo.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:habitos_atomicos:estimated_hours_watched",
+          "platform": "twitch",
+          "account_handle": "habitos_atomicos",
+          "key": "estimated_hours_watched",
+          "label": "Horas vistas estimadas",
+          "value": 201.63,
+          "unit": "hours_estimated",
+          "captured_at": "2026-11-14T20:56:27Z",
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-14T20:56:27Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "55_minute_public_sampling",
+          "status": "estimated",
+          "visibility": "public",
+          "interpretation": "Estimación entre muestras consecutivas; no es watch time oficial.",
+          "source_file": "data.json"
+        }
+      ],
+      "content": {
+        "twitch_clips_status": "awaiting_collection",
+        "twitch_clips_captured_at": null,
+        "twitch_clips_count": 0
+      }
+    }
+  }
+}
