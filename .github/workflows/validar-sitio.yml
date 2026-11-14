@@ -63,6 +63,7 @@ jobs:
       - name: Ejecutar pruebas unitarias de colectores
         run: python -m unittest discover -s tests -v
       - name: Comprobar el registro de canales para el colector de clips
-        run: python -c "import update_clips; accounts=update_clips.load_roster_accounts(); assert len(accounts)==7 and any(a['creator_id']=='moriartys' for a in accounts); print('OK: colector de clips lee {} canales Twitch'.format(len(accounts)))"
+        run: |
+          python -c "import update_clips; accounts=update_clips.load_roster_accounts(); assert len(accounts)==7 and any(a['creator_id']=='moriartys' for a in accounts); print('OK: colector de clips lee {} canales Twitch'.format(len(accounts)))"
       - name: Validar rutas, imágenes y enlaces declarados
         run: python scripts/validate_site.py
