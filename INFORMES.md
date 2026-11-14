@@ -1,3 +1,17 @@
+## 2026-11-14 — Pulido de Estadísticas y expediente MORIARTYS (QA de capturas)
+
+- **Alcance:** correcciones puntuales en la rama `auditoria-ux`, a partir de las capturas aportadas para Estadísticas, el directorio multiplataforma y el expediente MORIARTYS. No se modificó `main`, no se fusionó el PR #46 y no se cambió el hosting.
+- **Timestamps multiplataforma:** las marcas de captura de YouTube y Kick dejan de imprimirse como ISO UTC crudo. Se convierten con el helper compartido `formatArgentinaDateTime` y la zona `America/Argentina/Buenos_Aires`, manteniendo la fuente y fecha/hora de captura de cada conjunto. Esto evita mezclar visualmente una hora local con otra expresada en UTC.
+- **Estados de espectadores:** las tarjetas Twitch distinguen ahora tres situaciones: sin transmisión activa, espectadores actuales disponibles y espectadores no disponibles durante una transmisión. Si la captura está vencida, se mantiene la advertencia de estado sin confirmación.
+- **Expediente MORIARTYS:** el resumen del día más activo especifica que el número entre paréntesis representa muestras en directo, no transmisiones detectadas. Se conserva la separación entre muestras, transmisiones y registros totales.
+- **Datos no alterados:** no se editaron manualmente `data.json` ni `platform-stats.json`. En la rama consultada ambos registran capturas casi simultáneas: Twitch `2026-11-13T21:22:55Z` y plataformas `2026-11-13T21:22:56Z`. La captura aportada muestra una versión/lectura distinta; la diferencia observada no justifica modificar timestamps históricos sin verificar el origen del colector.
+- **Pendiente de QA:** revisar en preview que las fechas se presenten en hora argentina en Estadísticas y expedientes, confirmar los estados de espectadores con un canal en directo y otro offline, y comprobar la composición responsive. La aprobación visual no se declara hasta esa revisión renderizada.
+- **Commits de código:** `5e7e721762cad40739e4ff8c1352596bfed80f4e` (timestamps de plataformas y estados de espectadores) y `66dfda6ddcc44bd1ccaf1e96af4cb3762847874a` (rotulación de actividad MORIARTYS). Rama: `auditoria-ux`.
+- **Validación automática:** pendiente de resultado del workflow disparado por los commits anteriores.
+- **Despliegue:** no se declara publicación ni cambio en producción. GitHub Pages continúa siendo producción; Cloudflare Pages se mantiene como entorno de preview.
+
+---
+
 ## 2026-11-13 · Red de seguridad GitHub Pages y colector
 
 - **Fecha y responsable:** 13/11/2026 · Asistencia técnica.
