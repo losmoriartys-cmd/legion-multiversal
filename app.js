@@ -449,6 +449,8 @@ function renderMissionArchive(hero){
  const validLink=url=>/^https:\/\/(?:www\.)?twitch\.tv\//i.test(String(url||''))||/^https:\/\/clips\.twitch\.tv\//i.test(String(url||''))||/^https:\/\/(?:www\.)?youtube\.com\//i.test(String(url||''));
  const groups=[['COLABORACIONES Y ACCESOS','collaborations'],['HITOS Y TRAYECTORIA','milestones'],['MUESTRAS AUDIOVISUALES','highlights']];
  let out='<div class="mission-archive"><div class="mission-hero-card"><span class="eyebrow">TRAYECTORIA · MEDIA KIT</span><p>'+safe(hero.log||'La trayectoria pública se amplía con hitos, colaboraciones y piezas verificables.')+'</p></div>';
+ const strengths=Array.isArray(hero.mediaProfile?.strengths)?hero.mediaProfile.strengths:[];
+ if(strengths.length)out+='<section class="mission-section mission-strengths"><h4>FORTALEZAS DIFERENCIALES</h4><ul class="profile-detail-list">'+strengths.map(v=>'<li>'+safe(v)+'</li>').join('')+'</ul></section>';
  groups.forEach(([label,field])=>{
   const items=Array.isArray(record[field])?record[field]:[];
   out+='<section class="mission-section"><h4>'+label+'</h4>';
@@ -1835,10 +1837,7 @@ function renderRosterComicPages(hero,index,channelStats,sullyChannel){
  const formats=profile.formats||areas;
  const opportunities=profile.opportunities||[];
  const commercialBody='<div class="comic-page-split"><section class="comic-panel"><div class="comic-panel-heading"><span>01</span><b>CONTENIDO Y FORMATOS</b></div><p>'+safe(profile.editorial||'La propuesta editorial se construye a partir de las áreas y contenidos públicos del creador.')+'</p><div class="comic-format-list">'+(formats.length?formats.map(v=>'<span>'+safe(v)+'</span>').join(''):'<span>Formatos por confirmar</span>')+'</div></section><section class="comic-panel"><div class="comic-panel-heading"><span>02</span><b>OPORTUNIDADES DE COLABORACIÓN</b></div>'+(opportunities.length?'<ul class="profile-detail-list">'+opportunities.map(v=>'<li>'+safe(v)+'</li>').join('')+'</ul>':'<p>Se pueden evaluar presentaciones de producto, pruebas de videojuegos, integraciones y acciones con comunidad, siempre sujetas a conversación y aprobación del creador.</p>')+'<p class="comic-panel-caption">'+safe(profile.disclaimer||'Propuestas potenciales; no implican campañas contratadas ni alianzas vigentes.')+'</p></section></div><section class="comic-final-cta"><span>PRÓXIMO NÚMERO · NUEVAS COLABORACIONES</span><h3>HAGAMOS QUE TU MARCA FORME PARTE DE LA HISTORIA.</h3><p>Contacto y propuestas comerciales:</p>'+(profile.contact?'<a href="mailto:'+safe(profile.contact)+'">'+safe(profile.contact)+'</a>':'<p>Canal de contacto pendiente de confirmar con el creador.</p>')+'</section>';
- const strengths=Array.isArray(profile.strengths)?profile.strengths:[];
- const strengthBlock=strengths.length?'<section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>03</span><b>FORTALEZAS DIFERENCIALES</b></div><ul class="profile-detail-list">'+strengths.map(v=>'<li>'+safe(v)+'</li>').join('')+'</ul></section>':'';
- const commercialWithStrengths=commercialBody.replace('</div><section class="comic-final-cta">',strengthBlock+'</div><section class="comic-final-cta">');
- const commercial=page('03','EL UNIVERSO COMERCIAL',commercialWithStrengths,'COLABORACIONES');
+ const commercial=page('03','EL UNIVERSO COMERCIAL',commercialBody,'COLABORACIONES');
  return [cover,stats,missions,commercial];
 }
 
