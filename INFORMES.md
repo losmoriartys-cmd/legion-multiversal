@@ -2779,3 +2779,12 @@ Se conserva el compromiso de avanzar una mejora por etapa, con validación y rev
 - **Composición de datos de partida:** `roster-data.json` contiene ocho expedientes; el seguimiento documentado distingue siete canales Twitch y ORATORIS como perfil YouTube. MORIARTYS se conserva como canal/proyecto compartido de Demian y Ari.
 - **Salvaguardas:** esta etapa no modifica `main`, no integra PRs, no altera producción ni cambia credenciales. El checklist no considera completada una tarea sin QA funcional, responsive y evidencia registrada.
 - **Siguiente bloque:** simplificación de la interfaz del directorio y jerarquía editorial; después identidad canónica, rutas de expediente, accesibilidad, fallback y conexión de estado EN VIVO.
+
+## 2026-11-14 — Primer bloque del Roster integral: modelo, colectores y piloto MORIARTYS
+
+- **Rama:** `feat/roster-integral-2026-11-14` (basada en `main`). Cambios aislados; no hay merge ni despliegue de producción.
+- **Modelo de identidad:** `roster-data.json` schema v2; ocho perfiles con IDs/slugs estables, display name, alcance individual/compartido y cuentas por plataforma. MORIARTYS está marcado como proyecto compartido de Demian y Ari. Añadidos `schemas/roster-data.schema.json` y `scripts/validate_roster_data.py`.
+- **Automatización:** `update_stats.py` toma los logins Twitch desde el registro del roster, requiere `TWITCH_CLIENT_ID` y `TWITCH_CLIENT_SECRET` en entorno seguro y conserva el muestreo histórico existente. `update_platform_stats.py` lee las cuentas de plataformas del mismo registro. El flujo de estadísticas incorpora una comprobación de cobertura.
+- **Piloto:** la función de expediente MORIARTYS elimina cifras fijas no actualizadas y consume el muestreo de `data.json` y los clips/colaboraciones de `creator-records.json`; distingue datos observados, estimados y no disponibles.
+- **UX inicial:** filtros simplificados, chip de vínculo/plataforma, especialidad/orden avanzados, contador, skeletons, `noscript`, encabezado coherente, badge EN VIVO condicionado por frescura y CTAs al final.
+- **QA pendiente:** integrar el nuevo validador al workflow CI de PR, validar esquema/registro/data.json, inspeccionar errores JS/HTML/CSS y revisar la preview en desktop/tablet/móvil. No se afirma que la API se haya consultado desde esta rama ni que el despliegue esté publicado.
