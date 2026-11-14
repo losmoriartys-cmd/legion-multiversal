@@ -3256,3 +3256,13 @@ Durante esta tanda, `main` avanzó de `b67079b8d6bbde268a967e60ef642987072c6c52`
 - **Archivos:** `styles.css`, `app.js`, `index.html`, `roster-data.json`, `creator-records.json`.
 - **Validación:** CI del commit anterior completó sintaxis JavaScript, funciones, JSON, rutas, anclas, formularios y accesibilidad estática. La inspección visual automatizada no pudo iniciarse por saldo insuficiente del servicio de navegador; la preview sí obtuvo check de Cloudflare Pages exitoso. Safari iOS real sigue pendiente y no se declara probado.
 - **Publicación:** cambios únicamente en `auditoria-ux`; `main` y producción permanecen sin modificar.
+
+
+## 2026-11-14 — Corrección de proporción y encuadre de portadas
+
+- **Hallazgo:** la portada ilustrada «Orígenes #0001» es un arte vertical (1312 × 1920), adecuado como tapa editorial, pero su contenedor se ampliaba hasta 560 px en el apilado responsive y la imagen tenía un límite de altura que podía generar una presentación inconsistente entre anchos.
+- **Corrección:** se fijó un ancho editorial controlado (máximo 420 px en escritorio/tablet y 380 px en móvil), manteniendo la proporción intrínseca con altura automática, sin recorte ni deformación. La portada queda centrada y el resto del capítulo conserva su grilla fluida.
+- **Criterio:** no convertir una ilustración vertical en banner horizontal ni estirar fotos para llenar un contenedor. Los banners panorámicos y las cartas/retratos del roster mantienen sus tratamientos propios.
+- **Archivos:** `styles.css`, `index.html`, `INFORMES.md`.
+- **Alcance:** solo `auditoria-ux`; no se modificó `main` ni se fusionó el PR #46.
+- **QA:** pendiente de ejecución de CI y captura visual real de preview en desktop, tablet y móvil. No se declara validación visual hasta contar con esas capturas.
