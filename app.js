@@ -1327,6 +1327,35 @@ function renderCommercialEvidence(hero, twitchLogin, youtubeLogin) {
     return '<section class="commercial-evidence is-pending"><header><span>TRANSPARENCIA DE DATOS</span><b>MÉTRICAS EN INTEGRACIÓN</b></header><p>Este perfil todavía no cuenta con una captura estadística comparable y suficientemente documentada para publicar cifras comerciales. La ausencia de métricas en esta ficha no representa una valoración del creador.</p></section>';
 }
 
+function renderCommercialPortfolio(hero, twitchLogin, youtubeLogin) {
+    const safe = escapeStatsHtml;
+    const record = creatorRecordsData?.channels?.[twitchLogin] || creatorRecordsData?.channels?.[youtubeLogin] || {};
+    const clips = Array.isArray(record.highlights) ? record.highlights.slice(0,3) : [];
+    const platformCreator = Object.entries(platformStatsData?.creators || {}).find(([key,creator]) => key === youtubeLogin || (creator.platforms?.youtube?.handle || "").replace(/^@/,"").toLowerCase() === youtubeLogin);
+    const youtube = platformCreator?.[1]?.platforms?.youtube;
+    const videos = hero.creator_type === "video_creator" && Array.isArray(youtube?.recent_videos) ? youtube.recent_videos.slice(0,3) : [];
+    const collaborations = Array.isArray(record.collaborations) ? record.collaborations : [];
+    let out = '<section class="commercial-portfolio"><header><span>PORTAFOLIO</span><b>MUESTRAS Y EXPERIENCIAS DOCUMENTADAS</b></header>';
+    const samples = clips.map(item => {
+        const url = item.url || (item.clip_id ? "https://clips.twitch.tv/" + encodeURIComponent(item.clip_id) : "");
+        const valid = /^https:\/\/(?:clips\.twitch\.tv|www\.)?twitch\.tv\//i.test(url) || /^https:\/\/(?:www\.)?youtube\.com\//i.test(url);
+        return valid ? '<a href="' + safe(url) + '" target="_blank" rel="noopener noreferrer"><span>CLIP</span><strong>' + safe(item.title || "Momento destacado") + '</strong><i>ABRIR ↗</i></a>' : "";
+    }).filter(Boolean);
+    videos.forEach(item => {
+        if (/^https:\/\/(?:www\.)?youtube\.com\//i.test(item.url || "")) samples.push('<a href="' + safe(item.url) + '" target="_blank" rel="noopener noreferrer"><span>YOUTUBE</span><strong>' + safe(item.title || "Video publicado") + '</strong><i>ABRIR ↗</i></a>');
+    });
+    out += '<div class="commercial-portfolio-samples">' + (samples.length ? samples.join("") : '<p>Las muestras audiovisuales de este perfil todavía no están incorporadas al expediente.</p>') + '</div>';
+    if (collaborations.length) {
+        out += '<div class="commercial-portfolio-collabs"><h4>COLABORACIONES Y ACCESOS REGISTRADOS</h4><ul>' + collaborations.map(item => {
+            const title = String(item.title || "Registro");
+            const type = /^partner\s*[·:-]/i.test(title) ? "PARTNER" : /^acceso a keys/i.test(title) ? "ACCESO A KEYS" : "REGISTRO";
+            return '<li><span>' + safe(type) + '</span><strong>' + safe(title.replace(/^partner\s*[·:-]\s*/i,"").replace(/^acceso a keys\s*[·:-]\s*/i,"")) + '</strong><small>' + safe(item.description || "") + '</small></li>';
+        }).join("") + '</ul><small>Los accesos a keys o campañas de plataformas no se presentan como patrocinios. Los acuerdos se describen según el registro disponible.</small></div>';
+    }
+    out += '</section>';
+    return out;
+}
+
 function renderCommercialQuickView(hero) {
     const safe = escapeStatsHtml;
     const twitchLogin = hero.twitch ? hero.twitch.split("/").filter(Boolean).pop().toLowerCase() : "";
