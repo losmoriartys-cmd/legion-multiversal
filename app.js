@@ -8,7 +8,44 @@ async function loadRosterData() {
     if (!payload || !Array.isArray(payload.heroes) || payload.heroes.length === 0) {
         throw new Error('roster-data.json no contiene integrantes válidos.');
     }
+    const identifiers = new Set();
+    for (const hero of payload.heroes) {
+        const identifier = hero && (hero.id || hero.slug);
+        if (!identifier || identifiers.has(identifier)) {
+            throw new Error('roster-data.json contiene un integrante sin identificador o con ID duplicado.');
+        }
+        identifiers.add(identifier);
+    }
     heroesData = payload.heroes;
+    return payload;
+}
+
+function renderRosterLoadError(error) {
+    const host = document.getElementById('roster-container');
+    if (!host) return;
+    console.error('No se pudo inicializar el roster:', error);
+    host.setAttribute('aria-busy', 'false');
+    host.innerHTML = '<section class="roster-load-error" role="alert" aria-live="assertive"><strong>EL ARCHIVO NO PUDO CARGARSE</strong><p>La información del Roster no está disponible en este momento. No significa que los expedientes se hayan perdido.</p><button class="roster-load-retry" type="button">REINTENTAR CARGA</button></section>';
+    const retry = host.querySelector('.roster-load-retry');
+    retry?.addEventListener('click', async () => {
+        if (!retry) return;
+        retry.disabled = true;
+        retry.textContent = 'VOLVIENDO A INTENTAR…';
+        host.setAttribute('aria-busy', 'true');
+        try {
+            await loadRosterData();
+            renderRoster();
+            renderMultiverseMap();
+            restoreHeroProfileFromHash();
+        } catch (retryError) {
+            retry.disabled = false;
+            retry.textContent = 'REINTENTAR CARGA';
+            host.setAttribute('aria-busy', 'false');
+            const message = host.querySelector('p');
+            if (message) message.textContent = 'Todavía no se pudo leer la fuente de datos. Revisá la conexión y volvé a intentar. Los detalles técnicos quedaron registrados en la consola.';
+            console.error('Reintento de carga del roster fallido:', retryError);
+        }
+    });
 }
 
 
@@ -176,9 +213,16 @@ function renderLosMoriartysHelixPilot(channel){
 }
 function renderHelixDashboard(channel){
  if(channel && channel.login==='losmoriartys')return renderLosMoriartysHelixPilot(channel);
- if(!channel)return '<div class="stats-empty"><strong>Seguimiento propio</strong>Esperando la primera sincronización de Twitch Helix para este canal.</div>';
+ if(!channel)return '<div class="stats-empty"><strong>SIN DATOS VERIFICADOS</strong>El canal está registrado, pero todavía no existe una captura utilizable de Twitch Helix para este perfil.</div>';
  const w=channel.window||{};
- const live=channel.live;
+ const capturedAt=channel.updated_at||instituteStatsData?.updated_at||null;
+ const capturedDate=capturedAt?new Date(capturedAt):null;
+ const ageMinutes=capturedDate&&!Number.isNaN(capturedDate.getTime())?(Date.now()-capturedDate.getTime())/60000:Infinity;
+ const interval=Number(instituteStatsData?.sampling_interval_minutes)||55;
+ const fresh=ageMinutes>=-5&&ageMinutes<=Math.max(interval*2.5,120);
+ const live=Boolean(fresh&&channel.live);
+ const statusLabel=!Number.isFinite(ageMinutes)?'FECHA NO DISPONIBLE':!fresh?'DATOS DEMORADOS':live?'● EN DIRECTO':'OFFLINE · CAPTURA RECIENTE';
+ const statusClass=!fresh?'partial':live?'verified':'pending';
  const snaps=Array.isArray(channel.snapshots)?channel.snapshots.filter(v=>v&&v.sampled_at):[];
  const first=snaps.length?Date.parse(snaps[0].sampled_at):NaN;
  const last=snaps.length?Date.parse(snaps[snaps.length-1].sampled_at):NaN;
@@ -191,12 +235,12 @@ function renderHelixDashboard(channel){
  const quality=coverage===null?'SIN COBERTURA CALCULABLE':coverage>=80?'COBERTURA ADECUADA':coverage>=50?'COBERTURA PARCIAL':'MUESTRA INSUFICIENTE';
  const qualityClass=coverage===null?'pending':coverage>=80?'verified':coverage>=50?'partial':'pending';
  const periodLabel=Number.isFinite(first)&&Number.isFinite(last)?new Date(first).toLocaleString('es-AR')+' — '+new Date(last).toLocaleString('es-AR'):'Fechas no disponibles';
- let out='<section class="stats-section"><div class="stats-source-head"><div><strong>TWITCH HELIX · SEGUIMIENTO PROPIO</strong><br><small>Observaciones periódicas de Legión Multiversal · no equivalen al panel analítico oficial</small></div><span class="stats-status '+(live?'partial':'pending')+'">'+(live?'EN DIRECTO':'OFFLINE')+'</span></div>';
+ let out='<section class="stats-section"><div class="stats-source-head"><div><strong>TWITCH HELIX · SEGUIMIENTO PROPIO</strong><br><small>Observaciones periódicas de Legión Multiversal · no equivalen al panel analítico oficial</small></div><span class="stats-status '+statusClass+'">'+statusLabel+'</span></div>';
  out+='<div class="stats-source-head"><div><strong>CALIDAD DE LA MUESTRA</strong><br><small>'+quality+' · objetivo de recolección: cada '+interval+' minutos</small></div><span class="stats-status '+qualityClass+'">'+(coverage===null?'SIN DATOS':statsNumber(coverage,1)+'%')+'</span></div>';
  out+='<p class="stats-section-intro">Período realmente observado: '+escapeStatsHtml(periodLabel)+'. Registros: '+statsNumber(snaps.length,0)+' de '+statsNumber(expected,0)+' esperados en ese intervalo. Separación mediana: '+(medianGap===null?'—':statsNumber(medianGap,1)+' min')+'; mayor intervalo sin muestra: '+(maxGap===null?'—':statsNumber(maxGap,1)+' min')+'. Esta cobertura describe el tramo observado, no los 30 días configurados.</p>';
  out+='<div class="stats-kpis">';
- [['Espectadores ahora',channel.current_viewers,'lectura actual'],['Seguidores',channel.followers_total,'no disponible vía Helix público'],['Muestras',w.samples_total,'registros capturados'],['Promedio muestreado',w.average_viewers_sampled,'solo muestras en directo'],['Pico observado',w.peak_viewers_sampled,'no es pico oficial'],['Horas vistas estimadas',w.estimated_hours_watched,'solo intervalos consecutivos válidos']].forEach(k=>out+='<div class="stats-kpi"><span>'+k[0]+'</span><strong>'+statsNumber(k[1],1)+'</strong><em>'+k[2]+'</em></div>');
- out+='</div><p class="stats-muted">Categoría actual: '+escapeStatsHtml(channel.current_game||'No disponible')+' · Última sincronización: '+(channel.updated_at?new Date(channel.updated_at).toLocaleString('es-AR'):'Pendiente')+'</p>';
+ [['Espectadores ahora',fresh?channel.current_viewers:null,fresh?'lectura reciente':'dato oculto: captura demorada'],['Seguidores',channel.followers_total,'no disponible vía Helix público'],['Muestras',w.samples_total,'registros capturados'],['Promedio muestreado',w.average_viewers_sampled,'solo muestras en directo'],['Pico observado',w.peak_viewers_sampled,'no es pico oficial'],['Horas vistas estimadas',w.estimated_hours_watched,'solo intervalos consecutivos válidos']].forEach(k=>out+='<div class="stats-kpi"><span>'+k[0]+'</span><strong>'+(k[1]===null||k[1]===undefined?'SIN DATOS VERIFICADOS':statsNumber(k[1],1))+'</strong><em>'+k[2]+'</em></div>');
+ out+='</div><p class="stats-muted">Categoría en la última captura: '+escapeStatsHtml(channel.current_game||'No disponible')+' · Última sincronización: '+(capturedDate&&!Number.isNaN(capturedDate.getTime())?capturedDate.toLocaleString('es-AR'):'Pendiente')+(fresh?'':' · No se interpreta como estado actual porque la captura superó la ventana de frescura.')+'</p>';
  out+=renderStatsBars('ACTIVIDAD DIARIA OBSERVADA',(w.daily_activity||[]).slice(-10),v=>statsDate(v.date),v=>v.live_samples,'muestras en directo',10);
  out+=renderStatsBars('CATEGORÍAS MÁS OBSERVADAS',w.game_breakdown||[],v=>v.name,v=>v.live_samples,'muestras por categoría',5);
  const sessions=new Map();
@@ -582,7 +626,9 @@ async function loadInstituteStats(){
   refreshRosterLiveIndicators();
  }catch(e){
   body.innerHTML='<tr><td colspan="9">Estadísticas temporalmente no disponibles. '+escapeStatsHtml(e.message)+'</td></tr>';
-  const summary=document.getElementById('stats-summary');if(summary)summary.innerHTML='<article class="impact-kpi"><strong>—</strong><span>DATOS NO DISPONIBLES</span><small>Volvé a consultar más tarde.</small></article>';
+  const summary=document.getElementById('stats-summary');if(summary)summary.innerHTML='<article class="impact-kpi"><strong>—</strong><span>DATOS NO DISPONIBLES</span><small>La fuente de actividad no respondió. No se interpreta el último estado conocido como actual.</small></article>';
+  const updatedNode=document.getElementById('stats-updated');if(updatedNode){updatedNode.textContent='No se pudo consultar data.json. El estado en directo queda sin confirmar hasta la próxima carga exitosa.';updatedNode.dataset.status='error';}
+  const channelGrid=document.getElementById('stats-channel-grid');if(channelGrid)channelGrid.innerHTML='<p class="stats-note" role="status">Estado de canales no disponible: no se pudo leer la fuente de actividad. Los datos anteriores no se presentan como actuales.</p>';
   refreshRosterLiveIndicators();
  } finally {
   instituteStatsLoading=false;
@@ -832,21 +878,43 @@ function getRosterLiveState(hero) {
     const ageMinutes = (Date.now() - updated.getTime()) / 60000;
     const interval = Number(instituteStatsData.sampling_interval_minutes) || 55;
     const fresh = Number.isFinite(ageMinutes) && ageMinutes >= -5 && ageMinutes <= Math.max(interval * 2.5, 120);
-    return { login, channel, fresh, url: account?.url || hero.twitch || ('https://twitch.tv/' + login) };
+    return { login, channel, fresh, updatedAt: instituteStatsData.updated_at || channel.updated_at || null, ageMinutes, url: account?.url || hero.twitch || ('https://twitch.tv/' + login) };
 }
 function refreshRosterLiveIndicators() {
     document.querySelectorAll('.roster-collectible-card[data-creator-id]').forEach(card => {
         const hero = heroesData.find(item => (item.id || item.slug || item.name) === card.dataset.creatorId);
         const badge = card.querySelector('.roster-card-live-badge');
         if (!badge) return;
+        const trackedOnTwitch = Boolean(hero && ((hero.accounts || []).some(item => item.platform === 'twitch' && item.account_type === 'creator_channel') || hero.twitch));
+        if (!trackedOnTwitch) {
+            badge.hidden = true;
+            badge.removeAttribute('href');
+            badge.tabIndex = -1;
+            badge.classList.remove('is-stale');
+            return;
+        }
         const state = getRosterLiveState(hero);
         const isLive = Boolean(state && state.fresh && state.channel.live);
-        badge.hidden = !isLive;
+        const isStale = Boolean(state && !state.fresh);
+        const unavailable = !state;
+        badge.hidden = !isLive && !isStale && !unavailable;
+        badge.classList.toggle('is-stale', !isLive);
         if (isLive) {
             const game = state.channel.current_game ? ' · ' + state.channel.current_game : '';
             badge.href = state.url;
+            badge.tabIndex = 0;
+            badge.removeAttribute('aria-disabled');
             badge.textContent = '● EN VIVO' + game;
+            badge.title = state.channel.current_title || 'Abrir transmisión en directo';
             badge.setAttribute('aria-label', 'Abrir transmisión en directo de ' + (hero.display_name || hero.name) + (state.channel.current_game ? ' jugando ' + state.channel.current_game : ''));
+        } else {
+            badge.removeAttribute('href');
+            badge.tabIndex = -1;
+            badge.setAttribute('aria-disabled', 'true');
+            const captured = state?.updatedAt ? new Date(state.updatedAt).toLocaleString('es-AR') : '';
+            badge.textContent = unavailable ? 'ESTADO NO DISPONIBLE' : 'ESTADO SIN ACTUALIZAR';
+            badge.title = captured ? 'Última captura disponible: ' + captured : 'No hay una captura disponible para esta cuenta.';
+            badge.setAttribute('aria-label', badge.textContent + ' para ' + (hero.display_name || hero.name));
         }
     });
 }
@@ -2005,7 +2073,7 @@ function openHeroModal(index) {
             restoreHeroProfileFromHash();
         } catch (error) {
             console.error('No se pudo inicializar el roster:', error);
-            if (rosterContainer) { rosterContainer.setAttribute('aria-busy', 'false'); rosterContainer.innerHTML = '<p class="roster-load-error">No se pudieron cargar los expedientes. Volvé a intentarlo más tarde.</p>'; }
+            renderRosterLoadError(error);
         }
         await Promise.all([
             loadSullyGnomeData(),
