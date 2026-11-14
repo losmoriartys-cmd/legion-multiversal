@@ -3161,3 +3161,11 @@ Durante esta tanda, `main` avanzó de `b67079b8d6bbde268a967e60ef642987072c6c52`
 - **Criterio de rediseño:** portada comercial colectiva breve; directorio de perfiles sin ranking; expediente comercial individual homogéneo; bitácora individual separada del expediente de una colaboración; metodología y fuentes accesibles sin dominar la lectura.
 - **Próxima implementación:** P0 integridad/frescura y normalización editorial; P1 plantilla individual y portfolio; P2 resumen colectivo; P3 bitácoras de actividad y casos; P4 QA responsive, accesibilidad y rendimiento.
 - **Salvaguardas:** todo el trabajo continúa en `auditoria-ux`; no se modifica `main`, no se fusiona PR ni se publica producción. No se inventan métricas, resultados comerciales, alianzas ni audiencias únicas.
+
+
+### Implementación inicial P0 — claridad de cobertura de muestras
+
+- **Cambio:** `app.js`, commit `70d7e8a5f8d2d6161c28b5253317d9067499bb3a`.
+- **Mejora:** el panel de impacto distingue canales resueltos por el colector de canales que efectivamente generaron una muestra nueva. El KPI ahora informa `muestras nuevas / canales esperados`, y el detalle explicita resueltos, muestreados y omitidos.
+- **Motivo:** evitar que una ejecución con siete canales resueltos, cero muestras nuevas y siete omitidos se interprete visualmente como cobertura estadística completa. La antigüedad de la captura sigue controlando la presentación del estado en vivo.
+- **Validación:** la validación de código para el commit previo de documentación pasó en los workflows #520 y #521. La validación del commit de código y la auditoría integral posteriores están pendientes de ejecución: [auditoría #73](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43573324140).
