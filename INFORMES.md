@@ -3071,3 +3071,21 @@ Se conserva el compromiso de avanzar una mejora por etapa, con validación y rev
 - Probar manualmente con NVDA en Windows o VoiceOver en Apple. La auditoría automática y el foco de teclado no certifican lector de pantalla.
 
 **Estado:** QA no aprobada. PR #46 permanece Draft y sin merge; `main` no se modificó y producción no se desplegó.
+
+
+## Segunda validación de producción, robots y LCP — run 43562174824
+
+- **Workflow completo SUCCESS** sobre el HEAD de auditoría `ba66ec7481a9b8ccaeae5d1946440a10ab93f05e`: [ejecución 43562174824](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43562174824).
+- **QA en producción GitHub Pages: 10/10 OK.** Portada y capítulo EN VIVO cargan; 0 solicitudes de red a `/api/*`; formulario presente, válido y con handler directo `window.location.href='mailto:...'`; 0 errores JS. El navegador headless no produjo evento de navegación `mailto:` (`mailtoNavigations=[]`), por lo que se verificó el handler y el recorrido de submit sin llamada API, pero no el lanzamiento de una aplicación de correo externa.
+- **QA preview: 43/43 OK** en 1440, 768 y 390 px. En preview se registran 2 solicitudes `/api/live` por carga, ambas HTTP 503; el frontend conserva el respaldo estático. No hay errores JS ni scroll horizontal.
+- **robots.txt y sitemap:**
+  - GitHub Pages producción: `/robots.txt` responde HTTP 503, `text/html` (página de error de GitHub/Fastly); `/sitemap.xml` también HTTP 503, `text/html`.
+  - Preview de rama: `/robots.txt` HTTP 200, `text/plain; charset=utf-8`; `/sitemap.xml` HTTP 200, `application/xml`.
+  - `legion-multiversal.pages.dev` principal: `/robots.txt` HTTP 200, pero `text/html; charset=utf-8` (fallback de portada), no un robots válido.
+  - Se confirma que los dos archivos nuevos funcionan en la preview de la rama, pero todavía no están publicados en producción ni en el Pages principal. No se cambió `main`.
+- La preview conserva `X-Robots-Tag: noindex`; el `robots.txt` válido no altera esa protección. Lighthouse SEO preview subió de 61 a 69 porque ya no falla la auditoría `robots-txt`; queda solo `is-crawlable` por el noindex intencional.
+- **Lighthouse run 43562174824, medianas de 3 corridas:** Performance 72/72, Accessibility 100/100, Best Practices 96/96, SEO 100/69, LCP simulado 13,80/12,63 s, CLS 0,090/0,079, TBT 0/0 ms, peso 4179/3667 KB.
+- **LCP observado en la traza Lighthouse:** producción 409/293/280 ms (mediana 293 ms); preview 455/291/305 ms (mediana 305 ms). `PerformanceObserver` separado: 364 ms / 320 ms. Se mantiene la distinción obligatoria entre LCP simulado (para scoring móvil/throttling) y LCP observado; el nodo sigue siendo el banner `image_20261106_124855.jpg`, `loading=eager`, `fetchpriority=high`.
+- **Best Practices 96:** en producción el mensaje exacto sigue siendo 404 a `https://losmoriartys-cmd.github.io/favicon.ico` (la corrección de `rel=icon` está en la rama, todavía no publicada); en preview son dos respuestas 503 de `/api/live`. No son errores de imágenes remotas.
+- **Estado operativo:** `/api/live` sigue sin 200 en Preview. Resend sigue sin prueba de envío real. Lector de pantalla NVDA/VoiceOver pendiente. La QA no se aprueba.
+- Artifact con reportes JSON, capturas, QA y cabeceras: [auditoria-ux-43562174824](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43562174824).
