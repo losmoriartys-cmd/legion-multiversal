@@ -430,27 +430,27 @@ Los IDs numéricos históricos se conservan por compatibilidad; no renumerar los
 - [x] Añadir vínculo a esta Biblia desde la Biblia maestra del proyecto e `INFORMES.md`.
 
 ### Fase 1 — UX del directorio
-- [~] Simplificar filtros a búsqueda + chips de vínculo/plataforma + “Más filtros” (implementado; QA visual pendiente).
-- [~] Incorporar bottom sheet móvil accesible (implementado; QA táctil/teclado pendiente).
-- [~] Añadir contador y estado vacío robusto (contador implementado; QA pendiente).
-- [~] Reemplazar el titular de cabecera (implementado; QA editorial pendiente).
-- [~] Mover CTAs de Bitácora/Colaboraciones al final (implementado; QA de orden pendiente).
-- [ ] Revisar orden editorial y textos.
-- [ ] QA responsive y teclado.
+- [~] Simplificar filtros a búsqueda + chips de vínculo/plataforma + “Más filtros” (implementado; QA visual/táctil final pendiente).
+- [~] Incorporar panel móvil de filtros con cierre/Escape y gestión de foco (implementado; QA táctil/teclado real pendiente).
+- [x] Añadir contador, resumen de filtros activos, limpieza y estado vacío robusto.
+- [x] Reemplazar el titular de cabecera por “LAS PERSONAS DETRÁS DE LA LEGIÓN”.
+- [x] Mover CTAs de Bitácora/Colaboraciones al final del capítulo Roster.
+- [~] Revisar orden editorial y textos (estructura principal implementada; validación editorial humana pendiente).
+- [ ] QA responsive, teclado y lector de pantalla en navegadores reales.
 
 ### Fase 2 — Identidad y datos editoriales
-- [~] Definir `display_name`, slug, identity scope y handles por plataforma (modelo inicial creado para ocho perfiles; validación editorial pendiente).
-- [ ] Validar nombres canónicos con el equipo.
+- [x] Definir IDs/slugs, display_name, identity_scope, personas representadas y handles por cuenta para ocho perfiles; validación editorial editorial final pendiente.
+- [!] Validar la convención final de nombres canónicos con el equipo, en particular ROD3R1K / TheR0D3R1K.
 - [x] Distinguir canal compartido MORIARTYS de canales individuales en el modelo (`shared_project`, Demian + Ari).
-- [~] Hacer enlaces externos dinámicos por plataforma en expedientes y modal (implementado para Twitch/YouTube/Instagram; QA visual y de destinos pendiente).
-- [ ] Uniformar nombres en Roster, Estadísticas, Bitácora, Alianzas y Colaboraciones.
+- [~] Enlaces externos dinámicos por plataforma en expedientes y modal implementados; QA visual/destinos pendiente.
+- [~] Uniformar nombres mediante IDs/display names canónicos; quedan registros históricos y secciones editoriales por homologar.
 
 ### Fase 3 — Carga, SEO y fallback
-- [~] Skeleton cards (implementados; no se completan hasta pasar pruebas de carga/JS deshabilitado).
-- [ ] Error/reintento y ausencia de datos diferenciados.
+- [~] Skeleton cards, fallback sin JavaScript y error/reintento implementados; probar comportamiento real de carga/JS deshabilitado y CLS.
+- [x] Error/reintento de carga del Roster y estados de ausencia de datos/demora implementados; QA visual pendiente.
 - [~] `noscript` con datos esenciales (implementado; QA crawler pendiente).
-- [ ] Prueba de pre-render desde la fuente JSON y decisión según pipeline real de Pages.
-- [ ] Enlaces semánticos y metadatos sociales cuando corresponda.
+- [~] Fallback no-JS se genera desde la fuente JSON; pre-render completo de tarjetas requiere pipeline confirmado sin alterar GitHub Pages.
+- [~] Deep links semánticos y metadatos OG/Twitter globales existentes; no hay metadata individual server-side para cada hash en la arquitectura estática.
 
 ### Fase 4 — Mecánica del expediente
 - [~] Deep links por slug (`#roster/<slug>`) implementados; probar enlaces copiados y acceso directo en navegador.
@@ -458,51 +458,51 @@ Los IDs numéricos históricos se conservan por compatibilidad; no renumerar los
 - [~] Navegación anterior/siguiente implementada dentro del conjunto filtrado; QA manual pendiente.
 - [~] Se conserva y amplía el manejo existente de foco, Escape, devolución de foco y cierre; QA con teclado/lector de pantalla pendiente.
 - [~] Tabs A/B/C semánticas, scrolleables en móvil, navegación por flechas y persistencia local por creador implementadas; QA manual pendiente.
-- [ ] Estado “Sin datos verificados”.
+- [~] Estado “SIN DATOS VERIFICADOS” implementado en módulos de estadísticas; cubrir todos los casos/perfiles en QA.
 - [ ] QA de teclado, pantalla táctil y lector de pantalla.
 
 ### Fase 5 — Integración en vivo y contenido
 - [~] Reutilizar `data.json` en cartas (MORIARTYS piloto y estado EN VIVO; extensión/QA pendiente).
 - [~] Badge EN VIVO con frescura y enlace (implementado en cartas; QA del intervalo/fallo pendiente).
-- [ ] Categoría/juego actual cuando esté disponible.
-- [ ] Historial de transmisiones y juegos.
-- [ ] Biblioteca de clips y VOD por creador.
-- [ ] QA de cobertura y enlaces.
+- [~] Categoría/juego y metadatos del directo se consumen desde Twitch; asegurar que título aparezca en todas las superficies que lo requieren.
+- [~] Historial parcial por muestreo, actividad por juegos y calidad de datos implementados; historial completo y duración fiable siguen pendientes.
+- [~] Muestra automática de clips públicos por creador implementada; VOD completos y videoteca exhaustiva pendientes.
+- [~] Cobertura de siete cuentas y URLs de clips validadas por código; primera captura API real y revisión de enlaces pendientes tras activación.
 
 ### Fase 6 — Plataforma de datos multiplataforma
-- [ ] Inventario de APIs, permisos y cuotas.
-- [~] Modelo inicial unificado de identidad/cuentas, método y permisos definido en `roster-data.json` schema v2; falta ampliar el esquema histórico de métricas con capturas/estado detallado por fuente.
-- [~] Twitch: colector público App Token y muestreo automático existente integrados al registro del Roster. OAuth por creador para datos privados queda pendiente y requiere autorización individual.
-- [~] YouTube: datos públicos integrados al ID estable `pato-oratoris`; OAuth de analítica privada pendiente de autorización del titular.
-- [ ] Evaluar Kick/Instagram y plataformas adicionales.
-- [ ] Backend seguro y persistencia histórica.
-- [ ] Consola privada: estado de conectores, errores y cobertura.
+- [~] Inventario inicial de Helix, YouTube Data API, Kick e Instagram manual; cuota real y scopes OAuth individuales pendientes.
+- [~] Modelo de identidad/cuentas en `roster-data.json`; contrato de snapshots Twitch y contrato de clips públicos añadidos. Falta un esquema universal de métrica común a todas las fuentes.
+- [~] Twitch: muestreo público App Token, validación de historial y colector público de clips integrados; OAuth privado por creador requiere consentimiento. Primera captura del nuevo colector pendiente en main.
+- [~] YouTube: datos públicos integrados al ID estable `pato-oratoris`; frescura marcada, OAuth privado requiere autorización del titular.
+- [~] Kick dispone de lectura pública vía colector multiplataforma; Instagram permanece como enlace manual sin métricas.
+- [!] Backend seguro/D1 y persistencia independiente bloqueados por falta de provisionamiento, decisión de arquitectura y permisos. El histórico actual se conserva en JSON versionado.
+- [!] Consola privada requiere backend, autenticación y definición de roles; infraestructura sin provisionar.
 - [~] Prueba piloto MORIARTYS conectada al histórico Twitch; CI y preview técnica aprobados. Falta revisión visual y cotejo con el Creator Dashboard del titular.
-- [ ] Validar cifras con la fuente original y documentar límites.
+- [~] Límites/metodología documentados; cotejo del histórico con fuente original/Creator Dashboard pendiente.
 
 ### Fase 7 — Fichas comerciales
-- [ ] Ficha individual basada en datos verificados.
-- [ ] Clips destacados y actividad.
+- [~] Expedientes individuales consumen fuentes y clips disponibles; pulido comercial, validación por titulares y exportación pendientes.
+- [~] Actividad y clips públicos/editoriales diferenciados; primera captura real y validación comercial por titular pendientes.
 - [ ] Media kit colectivo.
 - [ ] Exportación/impresión.
 - [ ] Revisión editorial, legal y de permisos de uso de contenido.
 
 ### Fase 8 — Imágenes y rendimiento
-- [ ] Inventario de imágenes y referencias.
+- [~] Inventario de assets existente; auditoría detallada de encuadres, peso, derechos/atribución pendiente.
 - [ ] Conversión con originales preservados.
-- [ ] Dimensiones intrínsecas y responsive.
+- [~] Adición de dimensiones se inició en páginas intervenidas; completar inventario y srcset/sizes con mediciones.
 - [ ] Alt text y nombres semánticos.
 - [ ] Medición de LCP/CLS/peso en varios viewports.
 - [ ] Validación visual de encuadres y calidad.
 
 ### Fase 9 — Cierre
-- [~] CI ejecuta sintaxis JS, validación JSON, registro/cobertura Twitch y plataformas, compilación Python, smoke tests de los loaders y `validate_site.py`; QA funcional/visual completa pendiente.
-- [ ] Pruebas funcionales automatizadas del roster.
+- [~] CI ejecuta sintaxis JS, JSON, modelo/cobertura, fallback no-JS, validadores de clips/histórico, compilación, smoke tests, suite unitaria y `validate_site.py`; QA humana pendiente.
+- [~] Pruebas unitarias de colectores/validadores incorporadas; tests de navegador/flujo interactivo del Roster pendientes.
 - [ ] Pruebas responsive en escritorio, tablet y móvil.
 - [ ] Prueba manual de teclado y lector de pantalla.
-- [ ] Revisión de enlaces, deep links y navegación del navegador.
-- [ ] Verificación de datos, fuentes, cuotas y frescura.
-- [ ] Actualización final de `INFORMES.md`.
+- [~] Validación estática de enlaces en CI; revisión funcional manual de deep links/back-forward pendiente.
+- [~] Validadores automáticos de históricos, clips y frescura incorporados; primer sondeo real de API nueva y cotejo con titulares pendientes.
+- [x] Actualización de `INFORMES.md` con el segundo bloque técnico; volver a actualizar al cerrar QA/activación real.
 - [ ] Revisión humana de la preview por el responsable del proyecto.
 - [ ] Aprobación explícita antes de integrar en `main`.
 - [ ] Confirmación del despliegue correcto según el hosting de producción.
