@@ -1585,11 +1585,25 @@ function openHeroModal(index) {
     if(fifth)fifth.innerHTML=pages[4]||'';
     if(sixth)sixth.innerHTML=pages[5]||'';
     window.currentComicTotal=pages.length;
-    const modalAccount = (hero.accounts || []).find(account => account.account_type === 'creator_channel' && account.url);
-    const modalDestination = modalAccount?.url || hero.youtube || hero.twitch || "#";
-    const modalPlatform = modalAccount?.platform || (hero.youtube ? "youtube" : hero.twitch ? "twitch" : "");
-    document.getElementById('modal-twitch-btn').href = modalDestination;
-    document.getElementById('modal-twitch-btn').textContent = modalPlatform === "youtube" ? "VISITAR CANAL DE YOUTUBE" : modalPlatform === "twitch" ? "VISITAR CANAL DE TWITCH" : "VISITAR PLATAFORMA";
+    const platformLabels = { twitch:"TWITCH", youtube:"YOUTUBE", instagram:"INSTAGRAM", kick:"KICK" };
+    const accounts = (hero.accounts || []).filter(account => platformLabels[account.platform] && account.url);
+    const modalLink = document.getElementById('modal-twitch-btn');
+    const modalLinks = document.getElementById('modal-platform-links');
+    if (accounts.length > 1 && modalLinks) {
+        modalLink.hidden = true;
+        modalLinks.hidden = false;
+        modalLinks.innerHTML = accounts.map(account =>
+            '<a class="twitch-link-btn" href="' + escapeStatsHtml(account.url) + '" target="_blank" rel="noopener noreferrer">VISITAR ' + platformLabels[account.platform] + ' ↗</a>'
+        ).join('');
+    } else {
+        if (modalLinks) { modalLinks.hidden = true; modalLinks.innerHTML = ''; }
+        const primary = accounts[0];
+        const destination = primary?.url || hero.youtube || hero.twitch || "#";
+        const platform = primary?.platform || (hero.youtube ? "youtube" : hero.twitch ? "twitch" : "");
+        modalLink.href = destination;
+        modalLink.textContent = platform === "youtube" ? "VISITAR CANAL DE YOUTUBE" : platform === "twitch" ? "VISITAR CANAL DE TWITCH" : platform ? "VISITAR " + platform.toUpperCase() : "PLATAFORMA NO DISPONIBLE";
+        modalLink.hidden = !platform;
+    }
     window.lastModalTrigger = document.activeElement;
     window.previousBodyOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
