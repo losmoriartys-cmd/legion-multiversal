@@ -22,9 +22,10 @@ const check = (label, ok, extra = "") => {
 for (const vp of VIEWPORTS) {
   for (const hash of HASHES) {
     const page = await browser.newPage({ viewport: { width: vp.width, height: vp.height } });
-    const errors = [], apiCalls = [];
+    const errors = [], apiCalls = [], apiResponses = [];
     page.on("pageerror", (e) => errors.push(e.message));
     page.on("request", (r) => { if (r.url().includes("/api/")) apiCalls.push(r.url()); });
+    page.on("response", (r) => { if (r.url().includes("/api/")) apiResponses.push(`${r.status()} ${r.url()}`); });
 
     await page.goto(BASE + hash, { waitUntil: "networkidle" });
     const tag = `${vp.name} ${hash || "(sin hash)"}`;
@@ -35,7 +36,7 @@ for (const vp of VIEWPORTS) {
     if (!/\.pages\.dev$/i.test(new URL(BASE).hostname)) {
       check(`${tag}: sin llamadas a /api/*`, apiCalls.length === 0, apiCalls.join(", "));
     } else {
-      console.log(`INFO ${tag}: ${apiCalls.length} llamadas a /api/* en preview; revisar las respuestas y el fallback cuando Pages Functions no tenga credenciales.`);
+      console.log(`INFO ${tag}: ${apiCalls.length} llamadas a /api/* en preview · respuestas: ${apiResponses.join(" | ") || "pendientes"}`);
     }
 
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1);
