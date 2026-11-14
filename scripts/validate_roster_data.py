@@ -16,7 +16,7 @@ from urllib.parse import urlparse
 ROOT = Path(__file__).resolve().parents[1]
 ROSTER = ROOT / "roster-data.json"
 ACTIVITY = ROOT / "data.json"
-SUPPORTED_PLATFORMS = {"twitch", "youtube", "instagram"}
+SUPPORTED_PLATFORMS = {"twitch", "youtube", "instagram", "kick"}
 SCOPES = {"shared_project", "individual_creator"}
 MODES = {"public_app_token", "public_api_key", "manual_link_only"}
 
@@ -76,7 +76,8 @@ def validate_roster(roster: dict) -> list[str]:
             expected_hosts = {
                 "twitch": {"twitch.tv", "www.twitch.tv"},
                 "youtube": {"youtube.com", "www.youtube.com"},
-                "instagram": {"instagram.com", "www.instagram.com"}
+                "instagram": {"instagram.com", "www.instagram.com"},
+                "kick": {"kick.com", "www.kick.com"}
             }[platform]
             if parsed.scheme != "https" or parsed.hostname not in expected_hosts:
                 errors.append("{}: URL no válida para {}.".format(label, platform))
@@ -114,6 +115,14 @@ def validate_activity(roster: dict, activity: dict) -> list[str]:
     missing_records = registered - set((activity.get("channels") or {}).keys())
     if registered != active:
         errors.append("Los logins Twitch del Roster no coinciden con data.json: roster={}, data.json={}.".format(sorted(registered), sorted(active)))
+    collection = activity.get("collection") or {}
+    if collection.get("complete") is not True:
+        errors.append("data.json no informa una recolección Twitch completa.")
+    if int(collection.get("expected_channels") or 0) != len(registered):
+        errors.append("data.json.expected_channels no coincide con el registro.")
+    covered = set(collection.get("sampled_channels") or []) | set(collection.get("skipped_channels") or [])
+    if covered != registered:
+        errors.append("La captura no contabiliza todos los canales esperados: faltan {}.".format(sorted(registered - covered)))
     if missing_records:
         errors.append("Faltan registros Twitch en data.json: {}.".format(sorted(missing_records)))
     for login in registered:
