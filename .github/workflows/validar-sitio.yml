@@ -53,7 +53,7 @@ jobs:
       - name: Validar modelo del roster y cobertura Twitch
         run: python scripts/validate_roster_data.py --check-activity --check-platforms
       - name: Comprobar índice accesible sin JavaScript
-        run: python scripts/render_roster_noscript.py --check
+        run: python scripts/render_roster_noscript.py scripts/validate_metric_history.py --check
       - name: Compilar colectores Python
         run: python -m py_compile update_stats.py update_platform_stats.py update_clips.py scripts/validate_roster_data.py scripts/validate_clips_data.py scripts/render_roster_noscript.py
       - name: Probar lectura de cuentas por los colectores
@@ -62,6 +62,8 @@ jobs:
           python -c "import update_platform_stats; creators=update_platform_stats.load_creator_accounts(); assert 'pato-oratoris' in creators and 'youtube' in [a['platform'] for a in creators['pato-oratoris']['accounts']]; print('OK: colector multiplataforma lee {} perfiles'.format(len(creators)))"
       - name: Validar registro de clips públicos
         run: python scripts/validate_clips_data.py
+      - name: Validar historial y semántica de métricas Twitch
+        run: python scripts/validate_metric_history.py
       - name: Ejecutar pruebas unitarias de colectores
         run: python -m unittest discover -s tests -v
       - name: Comprobar el registro de canales para el colector de clips
