@@ -83,7 +83,28 @@
       "log": "ARCHIVO DE ORIGEN: integrante de la primera etapa junto a Demian. Su recorrido está ligado a las partidas fundacionales de Marvel Rivals y al impulso de encuentros, eventos y experiencias compartidas. Su historia representa el paso de jugar entre amigos a construir una comunidad.",
       "imageSource": "assets/carnet/rod3r1k_dark-necesito-que-me-hagas-fotos-de-todos-ellos-pero-qu.jpg",
       "imageWidth": 1280,
-      "imageHeight": 1920
+      "imageHeight": 1920,
+      "mediaProfile": {
+        "editorial": "Gaming de acción, competencia, terror y encuentros con otros creadores. Su propuesta combina presencia en directo, energía de equipo y variedad de experiencias.",
+        "strengths": [
+          "Trayectoria en partidas fundacionales y encuentros de la Legión",
+          "Versatilidad entre Fortnite, Counter-Strike, terror y conversación según registros históricos",
+          "Experiencia en directos compartidos y eventos de comunidad"
+        ],
+        "formats": [
+          "Directos de gaming y conversación",
+          "Acción y juegos competitivos",
+          "Terror y experiencias narrativas",
+          "Partidas y eventos con otros creadores"
+        ],
+        "opportunities": [
+          "Presentación y prueba de juegos de acción, competencia o terror",
+          "Activaciones grupales y retos con otros creadores",
+          "Integraciones de periféricos en contexto real de uso",
+          "Clips de momentos destacados de una campaña"
+        ],
+        "disclaimer": "Las métricas históricas disponibles corresponden a ventanas parciales y no describen la audiencia actual."
+      }
     },
     {
       "name": "LADYMORIARTY",
@@ -114,7 +135,28 @@
       "log": "ARCHIVO DE LA HECHICERA: opera con libertad entre gameplay relajado, IRL y momentos espontáneos. Su canal individual tiene voz y recorrido propios, distintos del proyecto compartido Los Moriartys. Su presencia aporta frescura, humor y cercanía.",
       "imageSource": "assets/carnet/LadyCarnet.jpg",
       "imageWidth": 1280,
-      "imageHeight": 1920
+      "imageHeight": 1920,
+      "mediaProfile": {
+        "editorial": "Un canal individual con una voz espontánea que combina gaming, humor, charlas e IRL. Su recorrido propio convive con la participación en el proyecto compartido Los Moriartys.",
+        "strengths": [
+          "Identidad individual diferenciada del canal compartido",
+          "Espontaneidad y humor en partidas y encuentros",
+          "Variedad entre gameplay, conversación e IRL"
+        ],
+        "formats": [
+          "Gaming y partidas compartidas",
+          "Charlas y momentos espontáneos",
+          "IRL y experiencias cotidianas",
+          "Contenido de cultura pop y comunidad"
+        ],
+        "opportunities": [
+          "Presentación de videojuegos y experiencias relajadas",
+          "Integraciones naturales en charlas o sesiones IRL",
+          "Activaciones participativas con la comunidad",
+          "Clips de momentos espontáneos y colaboraciones"
+        ],
+        "disclaimer": "Las métricas externas visibles son una captura de TwitchMetrics del 5 oct al 4 nov de 2026; no representan datos actuales."
+      }
     },
     {
       "name": "ARDIPII",
@@ -143,7 +185,28 @@
       "log": "ARCHIVO DE LA SOMBRA: mantiene un vínculo directo con su comunidad y transmite desde México con una presencia constante. Su sello combina cercanía, interacción y una mirada reflexiva sobre el tiempo y las decisiones.",
       "imageSource": "assets/carnet/ardipii_dark-necesito-que-me-hagas-fotos-de-todos-ellos-pero-qu.jpg",
       "imageWidth": 1280,
-      "imageHeight": 1920
+      "imageHeight": 1920,
+      "mediaProfile": {
+        "editorial": "Creador en directo desde México con una propuesta cercana, conversacional y centrada en la interacción. El juego funciona como punto de encuentro para el humor y la comunidad.",
+        "strengths": [
+          "Vínculo directo y conversacional con su comunidad",
+          "Clips recientes de Just Chatting y juegos, con títulos recuperados de Twitch",
+          "Participación en experiencias compartidas como BarFender"
+        ],
+        "formats": [
+          "Gaming y conversación",
+          "Just Chatting e interacción con la comunidad",
+          "Experiencias multijugador y partidas compartidas",
+          "Primeras impresiones y momentos espontáneos"
+        ],
+        "opportunities": [
+          "Presentación de juegos y primeras impresiones en directo",
+          "Integraciones pertinentes dentro de conversaciones",
+          "Activaciones participativas con su comunidad",
+          "Colaboraciones y partidas multicanal"
+        ],
+        "disclaimer": "Las estadísticas de período disponibles fueron aportadas por el equipo y deben tratarse como referencia histórica, no como analítica oficial."
+      }
     },
     {
       "name": "AKUMA",
@@ -173,7 +236,28 @@
       "log": "ARCHIVO DEL INFERNAL: veterano de las primeras misiones del equipo y anfitrión de encuentros frecuentes. Su territorio mezcla talk show, videojuegos y charlas con amigos; la constancia es parte central de su identidad.",
       "imageSource": "assets/carnet/Akuma_dark.jpg",
       "imageWidth": 1600,
-      "imageHeight": 1600
+      "imageHeight": 1600,
+      "mediaProfile": {
+        "editorial": "Anfitrión de encuentros de gaming y conversación. Su aporte combina partidas, charlas y espacios compartidos que ayudan a reunir a la comunidad.",
+        "strengths": [
+          "Experiencia como anfitrión de encuentros de la Legión",
+          "Cruce entre videojuegos, charla y dinámica de grupo",
+          "Afinidad con formatos comunitarios y multijugador"
+        ],
+        "formats": [
+          "Gaming y partidas con amigos",
+          "Charlas y talk show",
+          "Eventos y encuentros de comunidad",
+          "Experiencias cooperativas y competitivas"
+        ],
+        "opportunities": [
+          "Presentación de juegos con participación grupal",
+          "Eventos y partidas especiales con otros creadores",
+          "Integraciones de productos gaming en contexto de uso",
+          "Acciones de comunidad y contenidos derivados"
+        ],
+        "disclaimer": "El historial disponible de SullyGnome es parcial y corresponde a octubre–noviembre de 2026; no debe presentarse como rendimiento actual."
+      }
     },
     {
       "name": "DAVE — NEXUS",
@@ -203,7 +287,28 @@
       "log": "ARCHIVO DEL NEXO: tras un período de pausa, Dave regresa a las transmisiones y comienza una nueva etapa dentro de la Legión. Su rango institucional es ESTUDIANTE: representa su reincorporación y el comienzo de este nuevo recorrido, no una valoración de su experiencia. La agenda de sus directos todavía no tiene un horario fijo confirmado; los anuncios se comunicarán cuando cada transmisión esté programada. La biografía personal y las áreas de contenido podrán ampliarse con su propia voz y datos confirmados.",
       "imageSource": "assets/carnet/nexus_dark-necesito-que-me-hagas-fotos-de-todos-ellos-pero-qu.jpg",
       "imageWidth": 1280,
-      "imageHeight": 1920
+      "imageHeight": 1920,
+      "mediaProfile": {
+        "editorial": "Creador que retoma las transmisiones y abre una nueva etapa dentro de la Legión. La propuesta comercial debe construirse junto a Dave a medida que defina sus formatos y objetivos.",
+        "strengths": [
+          "Nueva etapa abierta a construir una identidad editorial propia",
+          "Registros históricos de juegos de acción, aventura y experiencias cooperativas",
+          "Posibilidad de diseñar contenidos desde el comienzo de esta etapa"
+        ],
+        "formats": [
+          "Gaming y descubrimiento de videojuegos",
+          "Acción, aventura y exploración",
+          "Experiencias cooperativas y desafíos",
+          "Nuevos formatos a definir con el creador"
+        ],
+        "opportunities": [
+          "Primeras impresiones y descubrimiento de juegos",
+          "Experiencias cooperativas y desafíos con la comunidad",
+          "Integraciones puntuales acordadas con el creador",
+          "Construcción de una serie de contenidos para la nueva etapa"
+        ],
+        "disclaimer": "Perfil en reactivación. Los registros de 2026 son históricos y no constituyen una previsión de frecuencia ni de audiencia."
+      }
     },
     {
       "name": "PATO — ORATORIS",
@@ -238,7 +343,28 @@
       "log": "ARCHIVO ORATORIS: colaborador y creador de Pato te explica. Su primera etapa pública incluye una serie introductoria de HTML y JavaScript y un video sobre dopamina, motivación y adicción. No tiene una frecuencia de publicación definida actualmente. Pato comentó que posiblemente retome el proyecto durante 2027 con un enfoque renovado e incorpore contenido gamer de manera gradual, como línea secundaria. Esta proyección todavía no constituye un calendario ni una programación confirmada.",
       "imageSource": "assets/carnet/oratoris_dark-necesito-que-me-hagas-fotos-de-todos-ellos-pero-qu.jpg",
       "imageWidth": 1280,
-      "imageHeight": 1920
+      "imageHeight": 1920,
+      "mediaProfile": {
+        "editorial": "Creador audiovisual educativo y divulgador. Su archivo combina una serie introductoria de HTML y JavaScript con contenidos sobre ciencia, comportamiento, motivación y aprendizaje.",
+        "strengths": [
+          "Serie didáctica de HTML y JavaScript con cinco entregas",
+          "Contenido de divulgación sobre dopamina, motivación y adicción",
+          "Formato de video educativo, diferente del streaming en directo"
+        ],
+        "formats": [
+          "Tutoriales y cursos introductorios de programación",
+          "Divulgación sobre ciencia y comportamiento",
+          "Explicaciones de herramientas y conceptos digitales",
+          "Posible cruce futuro con cultura gamer, aún no confirmado"
+        ],
+        "opportunities": [
+          "Videos educativos o explicativos patrocinados con transparencia",
+          "Presentación de herramientas, plataformas y software",
+          "Integraciones editoriales de tecnología",
+          "Piezas divulgativas adaptadas a objetivos de aprendizaje"
+        ],
+        "disclaimer": "El canal no tiene una frecuencia de publicación confirmada. La posible nueva etapa durante 2027 es una intención compartida, no un calendario comprometido."
+      }
     },
     {
       "name": "HABITOS",
@@ -268,7 +394,28 @@
       "log": "ARCHIVO DEL JUSTICIERO: impulsa conversaciones sobre hábitos, crecimiento y filosofía sin abandonar el entretenimiento. Su propuesta alterna partidas y reflexión, con una presencia orientada a motivar, compartir ideas y construir comunidad.",
       "imageSource": "assets/carnet/habitos_dark-necesito-que-me-hagas-fotos-de-todos-ellos-pero-qu.jpg",
       "imageWidth": 1280,
-      "imageHeight": 1920
+      "imageHeight": 1920,
+      "mediaProfile": {
+        "editorial": "Un espacio que cruza gaming y conversación con filosofía y desarrollo personal. El valor diferencial está en abrir temas, compartir ideas y construir comunidad sin abandonar el entretenimiento.",
+        "strengths": [
+          "Cruce distintivo entre gaming, filosofía y desarrollo personal",
+          "Potencial para conversaciones temáticas y contenido reflexivo",
+          "Variedad de juegos y clips públicos en Twitch"
+        ],
+        "formats": [
+          "Conversación y Just Chatting",
+          "Gaming y partidas variadas",
+          "Reflexión sobre hábitos y desarrollo personal",
+          "Encuentros y colaboraciones con la comunidad"
+        ],
+        "opportunities": [
+          "Conversaciones temáticas vinculadas a hábitos y bienestar cotidiano",
+          "Presentación de videojuegos con lectura y reflexión",
+          "Dinámicas participativas que conecten juego y conversación",
+          "Integraciones pertinentes al contenido y al criterio del creador"
+        ],
+        "disclaimer": "Las estadísticas de SullyGnome del 7 oct al 6 nov de 2026 presentan discrepancias internas. Se retienen hasta recibir una aclaración verificable."
+      }
     }
   ]
 }
