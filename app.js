@@ -377,24 +377,30 @@ function renderPlatformStats(hero){
  const key=platformStatsKey(hero);
  const profile=platformStatsData?.creators?.[key];
  if(!profile || !profile.platforms)return '';
+ const captureDate=platformStatsData.updated_at?new Date(platformStatsData.updated_at):null;
+ const captureAge=captureDate&&!Number.isNaN(captureDate.getTime())?(Date.now()-captureDate.getTime())/60000:Infinity;
+ const sourceFresh=captureAge>=-5&&captureAge<=120;
+ const captureLabel=captureDate&&!Number.isNaN(captureDate.getTime())?captureDate.toLocaleString('es-AR'):'fecha no disponible';
  let out='';
  Object.entries(profile.platforms).forEach(([platform,p])=>{
   const title=platform==='youtube'?'YOUTUBE · DATOS PÚBLICOS DEL CANAL':platform==='kick'?'KICK · ACTIVIDAD DEL CANAL':platform.toUpperCase();
-  const status=p.status==='verified'?'FUENTE OFICIAL':p.status==='credentials_required'?'CONFIGURACIÓN PENDIENTE':p.status==='error'?'ERROR DE CONSULTA':'REFERENCIA';
-  out+='<section class="stats-section"><div class="stats-source-head"><div><strong>'+title+'</strong><br><small>Cuenta vinculada: '+escapeStatsHtml(p.handle||'—')+'</small></div><span class="stats-status '+(p.status==='verified'?'verified':'pending')+'">'+status+'</span></div>';
+  const verified=p.status==='verified';
+  const status=verified?(sourceFresh?'FUENTE OFICIAL':'FUENTE OFICIAL · CAPTURA DEMORADA'):p.status==='credentials_required'?'CONFIGURACIÓN PENDIENTE':p.status==='error'?'ERROR DE CONSULTA':'REFERENCIA';
+  const statusClass=verified?(sourceFresh?'verified':'partial'):'pending';
+  out+='<section class="stats-section"><div class="stats-source-head"><div><strong>'+title+'</strong><br><small>Cuenta vinculada: '+escapeStatsHtml(p.handle||'—')+'</small></div><span class="stats-status '+statusClass+'">'+status+'</span></div>';
   if(p.status!=='verified'){
    out+='<div class="stats-empty"><strong>Datos automáticos todavía no disponibles</strong>'+escapeStatsHtml(p.note||'La cuenta está registrada, pero falta completar su configuración.')+'</div>';
   }else if(platform==='youtube'){
    const m=p.metrics||{};
-   out+='<p class="stats-section-intro">Captura: '+escapeStatsHtml(platformStatsData.updated_at||'fecha no disponible')+' · fuente: YouTube Data API v3. No se mezcla con estadísticas de streaming.</p><div class="pilot-lifetime-grid tm-metrics-grid">';
+   out+='<p class="stats-section-intro">Captura: '+escapeStatsHtml(captureLabel)+' · fuente: YouTube Data API v3. '+(sourceFresh?'Lectura dentro de la ventana de actualización esperada.':'La captura tiene más de dos horas o no tiene fecha; se conserva como referencia histórica, no como estado actual.')+' No se mezcla con estadísticas de streaming.</p><div class="pilot-lifetime-grid tm-metrics-grid">';
    [['Suscriptores',m.subscribers],['Visualizaciones totales',m.total_views],['Videos publicados',m.videos_total]].forEach(v=>out+='<div class="pilot-metric"><span>'+v[0]+'</span><strong>'+statsNumber(v[1],0)+'</strong><small>Acumulado del canal</small></div>');
    out+='</div>';
    const videos=Array.isArray(p.recent_videos)?p.recent_videos:[];
    if(videos.length){out+='<div class="stats-table-wrap"><table class="stats-table"><thead><tr><th>Video reciente</th><th>Publicado</th><th>Vistas</th></tr></thead><tbody>';videos.forEach(v=>out+='<tr><td><a class="stats-link" href="'+escapeStatsHtml(v.url)+'" target="_blank" rel="noopener">'+escapeStatsHtml(v.title)+'</a></td><td>'+escapeStatsHtml(v.published_at?v.published_at.slice(0,10):'—')+'</td><td class="num">'+statsNumber(v.views,0)+'</td></tr>');out+='</tbody></table></div>';}
   }else if(platform==='kick'){
    const m=p.metrics||{};
-   out+='<p class="stats-section-intro">Captura: '+escapeStatsHtml(platformStatsData.updated_at||'fecha no disponible')+' · fuente: Kick Developer Public API. La API permite consultar estado y audiencia actual; no equivale a historial completo.</p><div class="pilot-lifetime-grid tm-metrics-grid">';
-   [['Estado',m.live?'En directo':'Offline'],['Espectadores actuales',m.current_viewers],['Categoría',m.category],['Título',m.stream_title]].forEach(v=>out+='<div class="pilot-metric"><span>'+v[0]+'</span><strong>'+statsNumber(v[1],0)+'</strong><small>Última lectura</small></div>');
+   out+='<p class="stats-section-intro">Captura: '+escapeStatsHtml(captureLabel)+' · fuente: Kick Developer Public API. La API permite consultar estado y audiencia actual; no equivale a historial completo. '+(sourceFresh?'':'La lectura está demorada y no se presenta como estado actual.')+'</p><div class="pilot-lifetime-grid tm-metrics-grid">';
+   [['Estado',sourceFresh?(m.live?'En directo':'Offline'):'SIN DATOS VERIFICADOS'],['Espectadores actuales',sourceFresh?m.current_viewers:null],['Categoría',m.category],['Título',m.stream_title]].forEach(v=>out+='<div class="pilot-metric"><span>'+v[0]+'</span><strong>'+(v[1]===null||v[1]===undefined?'SIN DATOS VERIFICADOS':escapeStatsHtml(v[1]))+'</strong><small>Última lectura</small></div>');
    out+='</div>';
   }
   if(p.url)out+='<p class="stats-note">Fuente: <a class="stats-link" href="'+escapeStatsHtml(p.url)+'" target="_blank" rel="noopener">abrir canal en '+platform.toUpperCase()+' ↗</a>. '+escapeStatsHtml(p.methodology||'Cada métrica conserva su propia metodología.')+'</p>';
