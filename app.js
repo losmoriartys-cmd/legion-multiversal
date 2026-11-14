@@ -831,6 +831,7 @@ function renderRoster() {
     const container = document.getElementById('roster-container');
     if (!container) return;
     container.innerHTML = '';
+    container.setAttribute('aria-busy', 'false');
     bindRosterControls();
     const filteredEntries = getRosterFilteredEntries();
     const results = document.getElementById('roster-results');
@@ -1844,7 +1845,7 @@ function openHeroModal(index) {
             restoreHeroProfileFromHash();
         } catch (error) {
             console.error('No se pudo inicializar el roster:', error);
-            if (rosterContainer) rosterContainer.innerHTML = '<p class="roster-load-error">No se pudieron cargar los expedientes. Volvé a intentarlo más tarde.</p>';
+            if (rosterContainer) { rosterContainer.setAttribute('aria-busy', 'false'); rosterContainer.innerHTML = '<p class="roster-load-error">No se pudieron cargar los expedientes. Volvé a intentarlo más tarde.</p>'; }
         }
         await Promise.all([
             loadSullyGnomeData(),
