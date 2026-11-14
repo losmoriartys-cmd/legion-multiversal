@@ -426,8 +426,8 @@ Los IDs numéricos históricos se conservan por compatibilidad; no renumerar los
 - [x] Confirmar que no hay PR de Roster abiertos pendientes de absorber.
 - [x] Crear una rama única de implementación integral.
 - [x] Crear esta Biblia y centralizar aquí el checklist.
-- [ ] Crear un único PR Draft del Roster integral.
-- [ ] Añadir vínculo a esta Biblia desde la Biblia maestra del proyecto e `INFORMES.md`.
+- [x] Crear un único PR Draft del Roster integral: [PR #47](https://github.com/losmoriartys-cmd/legion-multiversal/pull/47).
+- [x] Añadir vínculo a esta Biblia desde la Biblia maestra del proyecto e `INFORMES.md`.
 
 ### Fase 1 — UX del directorio
 - [~] Simplificar filtros a búsqueda + chips de vínculo/plataforma + “Más filtros” (implementado; QA visual pendiente).
@@ -442,7 +442,7 @@ Los IDs numéricos históricos se conservan por compatibilidad; no renumerar los
 - [~] Definir `display_name`, slug, identity scope y handles por plataforma (modelo inicial creado para ocho perfiles; validación editorial pendiente).
 - [ ] Validar nombres canónicos con el equipo.
 - [x] Distinguir canal compartido MORIARTYS de canales individuales en el modelo (`shared_project`, Demian + Ari).
-- [~] Hacer enlaces externos dinámicos por plataforma en expedientes (pendiente terminar enlace múltiple en modal).
+- [~] Hacer enlaces externos dinámicos por plataforma en expedientes y modal (implementado para Twitch/YouTube/Instagram; QA visual y de destinos pendiente).
 - [ ] Uniformar nombres en Roster, Estadísticas, Bitácora, Alianzas y Colaboraciones.
 
 ### Fase 3 — Carga, SEO y fallback
@@ -453,11 +453,11 @@ Los IDs numéricos históricos se conservan por compatibilidad; no renumerar los
 - [ ] Enlaces semánticos y metadatos sociales cuando corresponda.
 
 ### Fase 4 — Mecánica del expediente
-- [ ] Deep links por slug.
-- [ ] Atrás/adelante del navegador.
-- [ ] Navegación anterior/siguiente.
-- [ ] Foco, Escape y devolución de foco.
-- [ ] Tabs scrolleables y persistencia.
+- [~] Deep links por slug (`#roster/<slug>`) implementados; probar enlaces copiados y acceso directo en navegador.
+- [~] Atrás/adelante del navegador implementados mediante `popstate`; probar manualmente entrada, salida y navegación entre expedientes.
+- [~] Navegación anterior/siguiente implementada dentro del conjunto filtrado; QA manual pendiente.
+- [~] Se conserva y amplía el manejo existente de foco, Escape, devolución de foco y cierre; QA con teclado/lector de pantalla pendiente.
+- [~] Tabs A/B/C semánticas, scrolleables en móvil, navegación por flechas y persistencia local por creador implementadas; QA manual pendiente.
 - [ ] Estado “Sin datos verificados”.
 - [ ] QA de teclado, pantalla táctil y lector de pantalla.
 
@@ -471,13 +471,13 @@ Los IDs numéricos históricos se conservan por compatibilidad; no renumerar los
 
 ### Fase 6 — Plataforma de datos multiplataforma
 - [ ] Inventario de APIs, permisos y cuotas.
-- [ ] Esquema unificado con procedencia y estado.
-- [ ] Twitch: datos públicos y OAuth para datos autorizados.
-- [ ] YouTube: datos públicos y OAuth de analítica cuando se autorice.
+- [~] Modelo inicial unificado de identidad/cuentas, método y permisos definido en `roster-data.json` schema v2; falta ampliar el esquema histórico de métricas con capturas/estado detallado por fuente.
+- [~] Twitch: colector público App Token y muestreo automático existente integrados al registro del Roster. OAuth por creador para datos privados queda pendiente y requiere autorización individual.
+- [~] YouTube: datos públicos integrados al ID estable `pato-oratoris`; OAuth de analítica privada pendiente de autorización del titular.
 - [ ] Evaluar Kick/Instagram y plataformas adicionales.
 - [ ] Backend seguro y persistencia histórica.
 - [ ] Consola privada: estado de conectores, errores y cobertura.
-- [~] Prueba piloto MORIARTYS conectada al muestreo Twitch; falta cotejar cifras con la fuente original y QA en preview.
+- [~] Prueba piloto MORIARTYS conectada al histórico Twitch; CI y preview técnica aprobados. Falta revisión visual y cotejo con el Creator Dashboard del titular.
 - [ ] Validar cifras con la fuente original y documentar límites.
 
 ### Fase 7 — Fichas comerciales
@@ -496,7 +496,7 @@ Los IDs numéricos históricos se conservan por compatibilidad; no renumerar los
 - [ ] Validación visual de encuadres y calidad.
 
 ### Fase 9 — Cierre
-- [ ] Tests estáticos y de datos.
+- [~] CI ejecuta sintaxis JS, validación JSON, registro/cobertura Twitch y plataformas, compilación Python, smoke tests de los loaders y `validate_site.py`; QA funcional/visual completa pendiente.
 - [ ] Pruebas funcionales automatizadas del roster.
 - [ ] Pruebas responsive en escritorio, tablet y móvil.
 - [ ] Prueba manual de teclado y lector de pantalla.
@@ -569,3 +569,37 @@ No fusionar, publicar en producción, cambiar credenciales ni retirar datos/asse
 - **Estado:** implementación en curso. Aún no se ha ejecutado CI sobre un PR, no se ha cotejado el piloto con una cuenta/consulta externa real y no se realizó revisión visual manual. No marcar como completado hasta pasar esos controles.
 
 - **Mecánica del expediente:** rutas compartibles `#roster/<slug>`, navegación del historial Atrás/Adelante, slugs estables, pestañas A/B/C reorganizadas por identidad, audiencia/juegos y contenido/colaboraciones, con desplazamiento horizontal en móvil y persistencia por creador.
+### Estado verificable de la primera entrega — 14/11/2026
+
+**Consolidación**
+- PR único: [#47 · Roster integral](https://github.com/losmoriartys-cmd/legion-multiversal/pull/47), Draft y abierto, base `main`, rama `feat/roster-integral-2026-11-14`.
+- La auditoría global PR #46 permanece separada. No se fusionó ni cerró ningún PR anterior como parte de esta entrega.
+
+**Modelo y colectores**
+- `roster-data.json` schema v2: ocho expedientes; siete logins Twitch y ORATORIS/YouTube por separado. Los siete logins registrados coinciden con `data.json.active_channels` y la última captura informaba cobertura completa 7/7.
+- `update_stats.py` toma los logins del registro de roster, requiere `TWITCH_CLIENT_ID` y `TWITCH_CLIENT_SECRET` seguros y conserva el muestreo de 55 minutos/ventana móvil de hasta 30 días. No usa la clave hardcodeada anterior.
+- `update_platform_stats.py` toma las cuentas del mismo registro. El ID de ORATORIS es ahora `pato-oratoris`; el antiguo `platform-registry.json` queda deprecado.
+- El sistema sigue limitado a datos públicos con App Token/API key. Analíticas privadas, OAuth individual, consola privada y almacenamiento histórico dedicado (por ejemplo D1) no están implementados aún.
+
+**Piloto MORIARTYS — lectura de `data.json` existente**
+- Muestras almacenadas: **271**; primera muestra **03/11/2026 17:47:50 UTC** y última **14/11/2026 20:56:27 UTC**.
+- Muestras tomadas durante directos: **11**; sesiones distintas observadas: **6**; categorías con muestras live: **4**.
+- Promedio de espectadores muestreados: **17,6**; pico capturado: **31**.
+- Tiempo en directo observado entre muestras: **3,59 h**; horas vistas estimadas entre muestras consecutivas admisibles: **73,79 h**.
+- Categorías: Just Chatting (4 muestras live), BarFender (3), Clive Barker's Hellraiser: Revival (2) y Fortnite (2).
+- La última lectura guardada mostraba el canal **offline**; seguidores totales y demografía siguen **sin datos verificados**.
+- **Limitación:** el período cubierto es el intervalo real entre la primera y última muestra indicada, no 30 días completos. Promedio/pico son métricas de muestreo propio: no son CCV oficial, espectadores únicos ni Analytics privadas. Las 73,79 h son estimación del muestreo, no watch time oficial. Estos valores proceden del `data.json` versionado; no se realizó una consulta directa al Creator Dashboard desde esta rama.
+
+**UX y mecánica implementadas en código**
+- Filtros reducidos, chips de vínculo/plataforma, filtros avanzados, contador, estado vacío, skeleton y fallback `noscript`.
+- Titular “LAS PERSONAS DETRÁS DE LA LEGIÓN”; enlaces Bitácora/Colaboraciones al cierre.
+- Insignia EN VIVO con control de frescura; enlaces dinámicos a plataformas; modal con pestañas A/B/C y persistencia por creador.
+- Rutas `#roster/<slug>`, `popstate`, anterior/siguiente y manejo accesible de foco/teclado.
+
+**Evidencia técnica**
+- GitHub Actions [run 43645619308](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43645619308): **SUCCESS**. Incluye sintaxis JS, JSON, validación de roster/Twitch/YouTube, `py_compile`, smoke tests de lectura de ambos colectores y `validate_site.py`.
+- Cloudflare Pages: despliegue de preview correcto para el commit `5e98c5b21257752ab7b0941225513a48d03ae2eb`.
+- Preview inmutable: https://f8207995.legion-multiversal.pages.dev
+- Preview de rama: https://feat-roster-integral-2026-11.legion-multiversal.pages.dev
+- **Pendiente de aceptación:** inspección humana en desktop/tablet/móvil; pruebas funcionales de filtros, bottom sheet, flip, deeplinks, Back/Forward, tabs, lector de pantalla y destinos externos; cotejo de cifras con el titular; revisión de imágenes y métricas visuales Lighthouse. No se declara aprobada la revisión visual.
+- No hubo merge ni despliegue de producción; `main` permanece intacta.
