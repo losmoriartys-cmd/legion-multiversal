@@ -746,6 +746,26 @@ function bindRosterControls() {
         if (details) details.open = false;
         document.getElementById('roster-more-filters')?.focus();
     });
+    document.addEventListener('keydown', event => {
+        const details = document.getElementById('roster-advanced-filters');
+        if (!details?.open) return;
+        if (event.key === 'Escape') {
+            event.preventDefault();
+            details.open = false;
+            document.getElementById('roster-more-filters')?.focus();
+            return;
+        }
+        if (event.key !== 'Tab') return;
+        const focusable = Array.from(details.querySelectorAll('summary, button:not([disabled]), select:not([disabled]), input:not([disabled]), a[href]'))
+            .filter(element => element.offsetParent !== null);
+        if (!focusable.length) return;
+        const first = focusable[0], last = focusable[focusable.length - 1];
+        if (event.shiftKey && (document.activeElement === first || !details.contains(document.activeElement))) {
+            event.preventDefault(); last.focus();
+        } else if (!event.shiftKey && (document.activeElement === last || !details.contains(document.activeElement))) {
+            event.preventDefault(); first.focus();
+        }
+    });
     document.getElementById('roster-reset')?.addEventListener('click', () => {
         ['roster-search','roster-role-filter','roster-platform-filter','roster-area-filter'].forEach(id => {
             const control = document.getElementById(id);
@@ -1659,6 +1679,7 @@ function openHeroModal(index) {
     if(fifth)fifth.innerHTML=pages[4]||'';
     if(sixth)sixth.innerHTML=pages[5]||'';
     window.currentComicTotal=pages.length;
+    window.currentModalCreatorKey = hero.id || hero.slug || hero.name;
     const platformLabels = { twitch:"TWITCH", youtube:"YOUTUBE", instagram:"INSTAGRAM", kick:"KICK" };
     const accounts = (hero.accounts || []).filter(account => platformLabels[account.platform] && account.url);
     const modalLink = document.getElementById('modal-twitch-btn');
@@ -1682,7 +1703,12 @@ function openHeroModal(index) {
     window.previousBodyOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
     modal.classList.add('active');
-    switchModalTab(0, true);
+    let rememberedPage = 0;
+    try {
+        const saved = Number(localStorage.getItem('legion-roster-modal-page:' + window.currentModalCreatorKey));
+        if (Number.isInteger(saved) && saved >= 0 && saved < pages.length) rememberedPage = saved;
+    } catch (error) { /* almacenamiento bloqueado: iniciar en la primera página */ }
+    switchModalTab(rememberedPage, true);
     updateComicPageControls(true);
     modal.querySelector('.close-modal-btn')?.focus();
 }
@@ -1722,6 +1748,16 @@ function openHeroModal(index) {
             }
         });
 
+        document.getElementById('modal-tab-navigation')?.addEventListener('keydown', event => {
+            const tabs = Array.from(document.querySelectorAll('#modal-tab-navigation [role="tab"]'));
+            const active = tabs.indexOf(document.activeElement);
+            if (active < 0 || !['ArrowLeft','ArrowRight','Home','End'].includes(event.key)) return;
+            event.preventDefault();
+            const next = event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1
+                : (active + (event.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
+            tabs[next]?.focus();
+            tabs[next]?.click();
+        });
         function switchModalTab(tabIndex, silent = false) {
             const isComic=document.querySelector('.modal-content')?.classList.contains('comic-mode');
             const maxPage=isComic?(window.currentComicTotal||4):3;
@@ -1730,10 +1766,17 @@ function openHeroModal(index) {
             for(let t=0;t<6;t++){
                 const pane=document.getElementById(`modal-pane-${t}`);
                 const btn=document.querySelectorAll('.modal-tab-btn')[t];
-                if(pane)pane.classList.toggle('active',t===tabIndex);
-                if(btn)btn.classList.toggle('active',t===tabIndex);
+                if(pane){pane.classList.toggle('active',t===tabIndex);pane.hidden=t!==tabIndex;}
+                if(btn){
+                    btn.classList.toggle('active',t===tabIndex);
+                    btn.setAttribute('aria-selected',String(t===tabIndex));
+                    btn.tabIndex=t===tabIndex?0:-1;
+                }
             }
             window.currentModalPage=tabIndex;
+            if(!silent&&window.currentModalCreatorKey){
+                try { localStorage.setItem('legion-roster-modal-page:' + window.currentModalCreatorKey, String(tabIndex)); } catch (error) { /* sin persistencia */ }
+            }
             if(!silent&&previousIndex!==tabIndex)playPageTurnCue();
             if(isComic&&!silent&&previousIndex!==tabIndex){
                 const activePane=document.getElementById(`modal-pane-${tabIndex}`);
@@ -1891,6 +1934,14 @@ function openHeroModal(index) {
         function switchChapter(chapterNum) {
             const panel=document.getElementById(`chapter-${chapterNum}`);
             if(!panel)return;
+            if (Number(chapterNum) !== 2 && window.currentHeroProfileIndex !== null && window.currentHeroProfileIndex !== undefined) {
+                const profilePage = document.getElementById('hero-profile-page');
+                const rosterHome = document.getElementById('roster-home');
+                if (profilePage) profilePage.hidden = true;
+                if (rosterHome) rosterHome.hidden = false;
+                window.lastHeroProfileTrigger = null;
+                window.currentHeroProfileIndex = null;
+            }
             if (Number(chapterNum) !== 2 && location.hash.startsWith('#roster/')) {
                 history.replaceState(null, '', '#chapter-' + chapterNum);
             }
@@ -1925,7 +1976,6 @@ function openHeroModal(index) {
         }
 
         const rosterContainer = document.getElementById('roster-container');
-        if (rosterContainer) rosterContainer.innerHTML = '<p class="roster-loading">CARGANDO EXPEDIENTES DE LA LEGIÓN…</p>';
 
         window.onload = async function() {
         const initialChapter = document.querySelector('.chapter-panel.active');
