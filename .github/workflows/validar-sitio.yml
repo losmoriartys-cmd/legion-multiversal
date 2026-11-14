@@ -5,6 +5,8 @@ on:
     paths:
       - 'app.js'
       - 'index.html'
+      - '*.html'
+      - 'sitemap.xml'
       - 'styles.css'
       - '*.css'
       - '*.json'
@@ -18,6 +20,8 @@ on:
     paths:
       - 'app.js'
       - 'index.html'
+      - '*.html'
+      - 'sitemap.xml'
       - 'styles.css'
       - '*.css'
       - '*.json'
