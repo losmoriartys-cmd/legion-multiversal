@@ -13,17 +13,17 @@
     "daved0608"
   ],
   "collection": {
-    "started_at": "2026-11-14T01:41:40Z",
+    "started_at": "2026-11-14T02:32:34Z",
     "expected_channels": 7,
     "resolved_channels": 7,
     "sampled_channels": [
-      "losmoriartys",
-      "ladymoriarty01",
       "ther0d3r1k",
       "habitos_atomicos",
       "ardipii",
       "akumazoldyck",
-      "daved0608"
+      "daved0608",
+      "losmoriartys",
+      "ladymoriarty01"
     ],
     "skipped_channels": [],
     "complete": true
@@ -33,7 +33,7 @@
     "elgabii090"
   ],
   "channel_registry_note": "Los canales archivados se conservan para consulta histórica y no se incluyen en los indicadores del roster activo.",
-  "updated_at": "2026-11-14T01:41:40Z",
+  "updated_at": "2026-11-14T02:32:34Z",
   "channels": {
     "ladymoriarty01": {
       "login": "ladymoriarty01",
@@ -43,14 +43,14 @@
       "twitch_url": "https://twitch.tv/ladymoriarty01",
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
-      "live": true,
-      "current_viewers": 5,
-      "current_game": "Fortnite",
-      "current_title": "[Improvisado] Directo de charla capaz y fornite. Sin lady hoy esta enfermucha :(   Vengan a darle amor por fas <3 <3",
-      "stream_started_at": "2026-11-13T23:08:47Z",
-      "updated_at": "2026-11-14T01:41:40Z",
+      "live": false,
+      "current_viewers": null,
+      "current_game": null,
+      "current_title": null,
+      "stream_started_at": null,
+      "updated_at": "2026-11-14T02:32:34Z",
       "window": {
-        "samples_total": 252,
+        "samples_total": 253,
         "live_samples": 9,
         "streams_observed": 4,
         "average_viewers_sampled": 6.1,
@@ -2408,6 +2408,15 @@
           "title": "[Improvisado] Directo de charla capaz y fornite. Sin lady hoy esta enfermucha :(   Vengan a darle amor por fas <3 <3",
           "stream_id": "319590153204",
           "started_at": "2026-11-13T23:08:47Z"
+        },
+        {
+          "sampled_at": "2026-11-14T02:32:34Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -2420,19 +2429,19 @@
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
       "live": true,
-      "current_viewers": 16,
+      "current_viewers": 6,
       "current_game": "Apex Legends",
       "current_title": "🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
       "stream_started_at": "2026-11-13T23:02:00Z",
-      "updated_at": "2026-11-14T01:41:40Z",
+      "updated_at": "2026-11-14T02:32:34Z",
       "window": {
-        "samples_total": 252,
-        "live_samples": 29,
+        "samples_total": 253,
+        "live_samples": 30,
         "streams_observed": 7,
-        "average_viewers_sampled": 23.9,
+        "average_viewers_sampled": 23.3,
         "peak_viewers_sampled": 46,
-        "observed_live_hours": 17.27,
-        "estimated_hours_watched": 402.66,
+        "observed_live_hours": 18.12,
+        "estimated_hours_watched": 407.75,
         "game_breakdown": [
           {
             "name": "Fortnite",
@@ -2443,9 +2452,9 @@
           },
           {
             "name": "Apex Legends",
-            "live_samples": 7,
+            "live_samples": 8,
             "streams_observed": 5,
-            "average_viewers_sampled": 29.1,
+            "average_viewers_sampled": 26.2,
             "peak_viewers_sampled": 43
           },
           {
@@ -2536,9 +2545,9 @@
           },
           {
             "date": "2026-11-14",
-            "live_samples": 1,
+            "live_samples": 2,
             "streams_observed": 1,
-            "average_viewers_sampled": 16.0,
+            "average_viewers_sampled": 11.0,
             "peak_viewers_sampled": 16
           }
         ],
@@ -4812,6 +4821,15 @@
           "title": "🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
           "stream_id": "319590058484",
           "started_at": "2026-11-13T23:02:00Z"
+        },
+        {
+          "sampled_at": "2026-11-14T02:32:34Z",
+          "is_live": true,
+          "viewer_count": 6,
+          "game_name": "Apex Legends",
+          "title": "🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
+          "stream_id": "319590058484",
+          "started_at": "2026-11-13T23:02:00Z"
         }
       ]
     },
@@ -5474,9 +5492,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-14T01:41:40Z",
+      "updated_at": "2026-11-14T02:32:34Z",
       "window": {
-        "samples_total": 252,
+        "samples_total": 253,
         "live_samples": 6,
         "streams_observed": 3,
         "average_viewers_sampled": 7.2,
@@ -7785,6 +7803,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-14T02:32:34Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -7797,15 +7824,15 @@
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
       "live": true,
-      "current_viewers": 2,
+      "current_viewers": 7,
       "current_game": "Fortnite",
       "current_title": "buscando la token con el team La Legion multiversal",
-      "stream_started_at": "2026-11-14T00:54:09Z",
-      "updated_at": "2026-11-14T01:41:40Z",
+      "stream_started_at": "2026-11-14T02:07:00Z",
+      "updated_at": "2026-11-14T02:32:34Z",
       "window": {
-        "samples_total": 252,
-        "live_samples": 18,
-        "streams_observed": 8,
+        "samples_total": 253,
+        "live_samples": 19,
+        "streams_observed": 9,
         "average_viewers_sampled": 6.8,
         "peak_viewers_sampled": 17,
         "observed_live_hours": 7.99,
@@ -7813,9 +7840,9 @@
         "game_breakdown": [
           {
             "name": "Fortnite",
-            "live_samples": 10,
-            "streams_observed": 5,
-            "average_viewers_sampled": 4.8,
+            "live_samples": 11,
+            "streams_observed": 6,
+            "average_viewers_sampled": 5.0,
             "peak_viewers_sampled": 17
           },
           {
@@ -7899,10 +7926,10 @@
           },
           {
             "date": "2026-11-14",
-            "live_samples": 1,
-            "streams_observed": 1,
-            "average_viewers_sampled": 2.0,
-            "peak_viewers_sampled": 2
+            "live_samples": 2,
+            "streams_observed": 2,
+            "average_viewers_sampled": 4.5,
+            "peak_viewers_sampled": 7
           }
         ],
         "method": "Muestreo propio con cadencia observada cercana a 55 minutos, variable por la programación de GitHub Actions; horas estimadas solo entre muestras consecutivas del mismo directo cuando el intervalo no supera 110 minutos. Categorías y evolución diaria se calculan sobre las muestras observadas."
@@ -10175,6 +10202,15 @@
           "title": "buscando la token con el team La Legion multiversal",
           "stream_id": "322220119641",
           "started_at": "2026-11-14T00:54:09Z"
+        },
+        {
+          "sampled_at": "2026-11-14T02:32:34Z",
+          "is_live": true,
+          "viewer_count": 7,
+          "game_name": "Fortnite",
+          "title": "buscando la token con el team La Legion multiversal",
+          "stream_id": "321078909534",
+          "started_at": "2026-11-14T02:07:00Z"
         }
       ]
     },
@@ -10191,9 +10227,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-14T01:41:40Z",
+      "updated_at": "2026-11-14T02:32:34Z",
       "window": {
-        "samples_total": 252,
+        "samples_total": 253,
         "live_samples": 12,
         "streams_observed": 7,
         "average_viewers_sampled": 1.9,
@@ -12544,6 +12580,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-14T02:32:34Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -13176,9 +13221,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-14T01:41:40Z",
+      "updated_at": "2026-11-14T02:32:34Z",
       "window": {
-        "samples_total": 252,
+        "samples_total": 253,
         "live_samples": 50,
         "streams_observed": 11,
         "average_viewers_sampled": 6.1,
@@ -15550,6 +15595,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-14T02:32:34Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -15561,14 +15615,14 @@
       "twitch_url": "https://twitch.tv/losmoriartys",
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
-      "live": true,
-      "current_viewers": 17,
-      "current_game": "Fortnite",
-      "current_title": "[Publicidad +18]  Tenemos tienda de la Buena <3 #WeedLordSimulator + Fornite?",
-      "stream_started_at": "2026-11-13T23:55:24Z",
-      "updated_at": "2026-11-14T01:41:40Z",
+      "live": false,
+      "current_viewers": null,
+      "current_game": null,
+      "current_title": null,
+      "stream_started_at": null,
+      "updated_at": "2026-11-14T02:32:34Z",
       "window": {
-        "samples_total": 252,
+        "samples_total": 253,
         "live_samples": 11,
         "streams_observed": 6,
         "average_viewers_sampled": 17.6,
@@ -17933,6 +17987,15 @@
           "title": "[Publicidad +18]  Tenemos tienda de la Buena <3 #WeedLordSimulator + Fornite?",
           "stream_id": "319590792692",
           "started_at": "2026-11-13T23:55:24Z"
+        },
+        {
+          "sampled_at": "2026-11-14T02:32:34Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     }
