@@ -49,7 +49,10 @@
       },
       "powers": "Perfil de habilidades en construcción. Se completará con la descripción de personaje aprobada por el integrante.",
       "stats": "Métricas en proceso de integración. Los datos se publicarán cuando estén conectados a una fuente verificable y acompañados de su período de medición.",
-      "log": "Fundadores de la iniciativa Turno Noche. Pioneros en colaboraciones cruzadas LATAM y organización de directos en conjunto."
+      "log": "Fundadores de la iniciativa Turno Noche. Pioneros en colaboraciones cruzadas LATAM y organización de directos en conjunto.",
+      "imageSource": "assets/carnet/DemuianCarnet.jpg",
+      "imageWidth": 1280,
+      "imageHeight": 1920
     },
     {
       "name": "ROD3R1K",
@@ -77,7 +80,10 @@
       "voice": "«¡Que se escuche hasta el último rincón! Si vamos a jugar, que cada partida deje una historia.»",
       "powers": "Perfil de habilidades en construcción. Pendiente de confirmar con el integrante.",
       "stats": "Métricas en proceso de integración. Los datos se publicarán cuando estén conectados a una fuente verificable y acompañados de su período de medición.",
-      "log": "ARCHIVO DE ORIGEN: integrante de la primera etapa junto a Demian. Su recorrido está ligado a las partidas fundacionales de Marvel Rivals y al impulso de encuentros, eventos y experiencias compartidas. Su historia representa el paso de jugar entre amigos a construir una comunidad."
+      "log": "ARCHIVO DE ORIGEN: integrante de la primera etapa junto a Demian. Su recorrido está ligado a las partidas fundacionales de Marvel Rivals y al impulso de encuentros, eventos y experiencias compartidas. Su historia representa el paso de jugar entre amigos a construir una comunidad.",
+      "imageSource": "assets/carnet/rod3r1k_dark-necesito-que-me-hagas-fotos-de-todos-ellos-pero-qu.jpg",
+      "imageWidth": 1280,
+      "imageHeight": 1920
     },
     {
       "name": "LADYMORIARTY",
@@ -105,7 +111,10 @@
       "voice": "«¿Plan? Puede ser. ¿Improvisar? También. La magia está en no saber qué viene después.»",
       "powers": "Especialidad: entretenimiento chill, IRL y conexión con la comunidad.",
       "stats": "Métricas en proceso de integración. Los datos se publicarán cuando estén conectados a una fuente verificable y acompañados de su período de medición.",
-      "log": "ARCHIVO DE LA HECHICERA: opera con libertad entre gameplay relajado, IRL y momentos espontáneos. Su canal individual tiene voz y recorrido propios, distintos del proyecto compartido Los Moriartys. Su presencia aporta frescura, humor y cercanía."
+      "log": "ARCHIVO DE LA HECHICERA: opera con libertad entre gameplay relajado, IRL y momentos espontáneos. Su canal individual tiene voz y recorrido propios, distintos del proyecto compartido Los Moriartys. Su presencia aporta frescura, humor y cercanía.",
+      "imageSource": "assets/carnet/LadyCarnet.jpg",
+      "imageWidth": 1280,
+      "imageHeight": 1920
     },
     {
       "name": "ARDIPII",
@@ -131,7 +140,10 @@
       "bio": "El Fantasma aparece sin hacer ruido y encuentra su lugar en cualquier escenario. Su guarida es una comunidad donde cada visitante puede saludar, activar una alerta, acomodarse con unas palomitas y compartir la misión. Su lema recuerda que el tiempo es el recurso más valioso: cada directo es una oportunidad para decidir qué hacer con él.",
       "voice": "«Pasen, pónganse cómodos. Siempre hay lugar para uno más en esta misión.»",
       "stats": "Métricas en proceso de integración. Los datos se publicarán cuando estén conectados a una fuente verificable y acompañados de su período de medición.",
-      "log": "ARCHIVO DE LA SOMBRA: mantiene un vínculo directo con su comunidad y transmite desde México con una presencia constante. Su sello combina cercanía, interacción y una mirada reflexiva sobre el tiempo y las decisiones."
+      "log": "ARCHIVO DE LA SOMBRA: mantiene un vínculo directo con su comunidad y transmite desde México con una presencia constante. Su sello combina cercanía, interacción y una mirada reflexiva sobre el tiempo y las decisiones.",
+      "imageSource": "assets/carnet/ardipii_dark-necesito-que-me-hagas-fotos-de-todos-ellos-pero-qu.jpg",
+      "imageWidth": 1280,
+      "imageHeight": 1920
     },
     {
       "name": "AKUMA",
@@ -158,7 +170,10 @@
       "bio": "El Infernal es una presencia constante: cuando cae la noche, el portal vuelve a abrirse. Entre juegos, conversaciones y amigos, AKUMA sostiene un punto de encuentro donde siempre puede aparecer una nueva historia. Su fuerza no está solamente en entrar en combate, sino en mantener encendida la reunión y darle lugar a quienes llegan.",
       "voice": "«El portal está abierto. Traigan una partida, una historia o simplemente ganas de quedarse.»",
       "stats": "Métricas en proceso de integración. Los datos se publicarán cuando estén conectados a una fuente verificable y acompañados de su período de medición.",
-      "log": "ARCHIVO DEL INFERNAL: veterano de las primeras misiones del equipo y anfitrión de encuentros frecuentes. Su territorio mezcla talk show, videojuegos y charlas con amigos; la constancia es parte central de su identidad."
+      "log": "ARCHIVO DEL INFERNAL: veterano de las primeras misiones del equipo y anfitrión de encuentros frecuentes. Su territorio mezcla talk show, videojuegos y charlas con amigos; la constancia es parte central de su identidad.",
+      "imageSource": "assets/carnet/Akuma_dark.jpg",
+      "imageWidth": 1600,
+      "imageHeight": 1600
     },
     {
       "name": "DAVE — NEXUS",
@@ -185,7 +200,10 @@
       "voice": "«Conexión establecida. Estoy buscando el puente entre este mundo y el siguiente.»",
       "powers": "Poderes y especialidad todavía sin definir. Se completarán cuando Dave aporte o apruebe su concepto de personaje.",
       "stats": "Canal incorporado al sistema de estadísticas. Las métricas se mostrarán cuando la automatización publique datos verificables.",
-      "log": "ARCHIVO DEL NEXO: tras un período de pausa, Dave regresa a las transmisiones y comienza una nueva etapa dentro de la Legión. Su rango institucional es ESTUDIANTE: representa su reincorporación y el comienzo de este nuevo recorrido, no una valoración de su experiencia. La agenda de sus directos todavía no tiene un horario fijo confirmado; los anuncios se comunicarán cuando cada transmisión esté programada. La biografía personal y las áreas de contenido podrán ampliarse con su propia voz y datos confirmados."
+      "log": "ARCHIVO DEL NEXO: tras un período de pausa, Dave regresa a las transmisiones y comienza una nueva etapa dentro de la Legión. Su rango institucional es ESTUDIANTE: representa su reincorporación y el comienzo de este nuevo recorrido, no una valoración de su experiencia. La agenda de sus directos todavía no tiene un horario fijo confirmado; los anuncios se comunicarán cuando cada transmisión esté programada. La biografía personal y las áreas de contenido podrán ampliarse con su propia voz y datos confirmados.",
+      "imageSource": "assets/carnet/nexus_dark-necesito-que-me-hagas-fotos-de-todos-ellos-pero-qu.jpg",
+      "imageWidth": 1280,
+      "imageHeight": 1920
     },
     {
       "name": "PATO — ORATORIS",
@@ -217,7 +235,10 @@
       "voice": "«Compartir conocimiento también es abrir caminos. Entender cómo funciona algo nos da herramientas para elegir mejor.»",
       "powers": "Comunicación y divulgación; enseñanza introductoria de programación; organización de ideas complejas en explicaciones accesibles. Las capacidades del personaje son una representación narrativa de su aporte como creador, no certificaciones profesionales.",
       "stats": "YOUTUBE · referencia compartida por el equipo: 56 suscriptores, 6 videos y 430 visualizaciones. La fecha exacta de captura no fue indicada; estos valores se presentan como referencia histórica y no como métricas actuales verificadas. Twitch: no aplica.",
-      "log": "ARCHIVO ORATORIS: colaborador y creador de Pato te explica. Su primera etapa pública incluye una serie introductoria de HTML y JavaScript y un video sobre dopamina, motivación y adicción. No tiene una frecuencia de publicación definida actualmente. Pato comentó que posiblemente retome el proyecto durante 2027 con un enfoque renovado e incorpore contenido gamer de manera gradual, como línea secundaria. Esta proyección todavía no constituye un calendario ni una programación confirmada."
+      "log": "ARCHIVO ORATORIS: colaborador y creador de Pato te explica. Su primera etapa pública incluye una serie introductoria de HTML y JavaScript y un video sobre dopamina, motivación y adicción. No tiene una frecuencia de publicación definida actualmente. Pato comentó que posiblemente retome el proyecto durante 2027 con un enfoque renovado e incorpore contenido gamer de manera gradual, como línea secundaria. Esta proyección todavía no constituye un calendario ni una programación confirmada.",
+      "imageSource": "assets/carnet/oratoris_dark-necesito-que-me-hagas-fotos-de-todos-ellos-pero-qu.jpg",
+      "imageWidth": 1280,
+      "imageHeight": 1920
     },
     {
       "name": "HABITOS",
@@ -244,7 +265,10 @@
       "bio": "El Filósofo Atómico combina reflexión y acción. Puede detener la marcha para cuestionar una idea y, al instante siguiente, volver al juego con energía renovada. Su universo une gaming, filosofía y desarrollo personal: no se trata de tener todas las respuestas, sino de entrenar la mente, sostener buenos hábitos y seguir avanzando.",
       "voice": "«La mente también se entrena. Cuestioná, aprendé y volvé al juego con más herramientas.»",
       "stats": "Métricas en proceso de integración. Los datos se publicarán cuando estén conectados a una fuente verificable y acompañados de su período de medición.",
-      "log": "ARCHIVO DEL JUSTICIERO: impulsa conversaciones sobre hábitos, crecimiento y filosofía sin abandonar el entretenimiento. Su propuesta alterna partidas y reflexión, con una presencia orientada a motivar, compartir ideas y construir comunidad."
+      "log": "ARCHIVO DEL JUSTICIERO: impulsa conversaciones sobre hábitos, crecimiento y filosofía sin abandonar el entretenimiento. Su propuesta alterna partidas y reflexión, con una presencia orientada a motivar, compartir ideas y construir comunidad.",
+      "imageSource": "assets/carnet/habitos_dark-necesito-que-me-hagas-fotos-de-todos-ellos-pero-qu.jpg",
+      "imageWidth": 1280,
+      "imageHeight": 1920
     }
   ]
 }
