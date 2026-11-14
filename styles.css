@@ -4530,3 +4530,92 @@ img { max-width: 100%; }
 @media(max-width:480px){.commercial-portfolio-collabs li{grid-template-columns:1fr}.commercial-portfolio-collabs li>span{grid-row:auto}}
 
 .mission-source-note{margin:9px 0;color:#9aa9b8;font-size:.68rem;line-height:1.55}.mission-card .mission-source-note{font-size:.63rem}.mission-card h5{overflow-wrap:anywhere}
+
+
+/* ROSTER · correcciones de legibilidad, contraste y estabilidad 3D */
+#chapter-2.comic-page {
+  background:
+    radial-gradient(circle at 14% 9%, rgba(0,210,255,.14), transparent 30%),
+    radial-gradient(circle at 88% 82%, rgba(255,42,42,.10), transparent 32%),
+    radial-gradient(rgba(255,255,255,.11) .8px, transparent 1px),
+    linear-gradient(145deg,#111a2b,#100e1c) !important;
+  background-size:auto,auto,9px 9px,auto !important;
+  isolation:isolate;
+}
+#chapter-2.comic-page::before,
+#chapter-2.comic-page::after { pointer-events:none; }
+#chapter-2 > .comic-title {
+  display:block;
+  width:fit-content;
+  max-width:100%;
+  padding:0;
+  border:0;
+  background:transparent;
+  color:#f4ead5 !important;
+  text-shadow:0 3px 0 #080d16,0 0 22px rgba(0,210,255,.16) !important;
+}
+#chapter-2 .institute-banner {
+  background:linear-gradient(115deg,rgba(18,34,52,.98),rgba(9,17,29,.98)) !important;
+  border:1px solid rgba(120,177,204,.42);
+  box-shadow:0 12px 30px rgba(0,0,0,.28),inset 0 1px rgba(255,255,255,.04);
+}
+#chapter-2 .institute-banner h3 {
+  color:#f4ead5 !important;
+  text-shadow:0 2px 0 #080d16;
+}
+#chapter-2 .institute-banner p { color:#d3deeb !important; }
+#chapter-2 .roster-grid {
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));
+  gap:clamp(18px,2.2vw,28px);
+}
+#chapter-2 .roster-collectible-card {
+  width:min(100%,340px);
+  animation-fill-mode:backwards;
+  will-change:transform;
+}
+#chapter-2 .roster-card-3d-shell {
+  container-type:inline-size;
+  overflow:visible;
+}
+#chapter-2 .roster-card-holo { animation:none !important; }
+#chapter-2 .roster-card-face {
+  -webkit-backface-visibility:hidden;
+  backface-visibility:hidden;
+  transform-style:preserve-3d;
+}
+#chapter-2 .roster-card-front-header { font-size:clamp(.68rem,2.7cqw,.78rem); }
+#chapter-2 .roster-card-front-name strong { font-size:clamp(1.05rem,5.2cqw,1.45rem); }
+#chapter-2 .roster-card-front-name small,
+#chapter-2 .roster-card-front-meta,
+#chapter-2 .roster-card-flip-hint { font-size:clamp(.68rem,2.6cqw,.78rem); }
+#chapter-2 .roster-card-back { font-size:clamp(.72rem,2.75cqw,.86rem); }
+#chapter-2 .roster-card-back p,
+#chapter-2 .roster-card-back li { font-size:clamp(.72rem,2.8cqw,.88rem); line-height:1.45; }
+#chapter-2 .roster-card-back small { font-size:clamp(.68rem,2.55cqw,.78rem); }
+#chapter-2 .roster-card-back-art { object-position:center; }
+@media (max-width:760px) {
+  #chapter-2 .roster-grid { grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr)); }
+  #chapter-2 .roster-collectible-card { width:min(100%,360px); }
+  #chapter-2 .roster-card-3d-inner { transition-duration:.55s; }
+  #chapter-2 .roster-card-holo { opacity:.32; }
+  #chapter-2 .institute-banner { align-items:flex-start; }
+}
+@media (max-width:560px) {
+  #chapter-2.comic-page { padding-left:14px; padding-right:14px; }
+  #chapter-2 > .comic-title { font-size:clamp(2rem,9vw,2.6rem); line-height:1.05; }
+  #chapter-2 .institute-banner { gap:14px; padding:16px; }
+  #chapter-2 .institute-stamp { flex-basis:68px; height:68px; font-size:.95rem; }
+}
+@media (max-width:760px) {
+  #chapter-2 input,
+  #chapter-2 textarea,
+  #chapter-2 select,
+  .recruitment-contact-form input,
+  .recruitment-contact-form textarea,
+  .recruitment-contact-form select { font-size:16px !important; }
+}
+@media (prefers-reduced-motion:reduce) {
+  #chapter-2 .roster-collectible-card,
+  #chapter-2 .roster-card-3d-inner,
+  #chapter-2 .roster-card-holo { animation:none !important; transition:none !important; }
+}
