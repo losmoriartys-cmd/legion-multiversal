@@ -3032,3 +3032,41 @@ Se conserva el compromiso de avanzar una mejora por etapa, con validación y rev
 - **Elemento LCP:** el JSON de Lighthouse no incluye el audit node esperado en esta versión. Se añadió `scripts/lcp_probe.mjs` con PerformanceObserver para identificar el elemento real en producción y preview; ejecución [43560863457](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43560863457) pendiente al momento de esta nota.
 - **Accesibilidad manual:** la navegación por teclado está cubierta por smoke QA; sigue pendiente probar con un lector de pantalla real. Lighthouse 100 no sustituye esa comprobación.
 - **Estado y salvaguardas:** rama `auditoria-ux`; PR #46 Draft y sin merge; `main` no fue modificado; no se desplegó producción.
+
+
+## Revisión crítica de QA — conciliación y nueva evidencia (14/11/2026)
+
+### Dimensiones y commit e5dbcc3
+- Revisión automatizada de cada archivo contra su padre, eliminando de ambos lados los atributos numéricos `width` y `height`: `bitacora-preview.html`, `comic-moriartys.html`, `index.html`, `instituto-preview.html` y `roster-02-moriartys.html` pasan. No se detectaron diferencias restantes; el commit modifica exclusivamente dimensiones intrínsecas.
+- El diff de GitHub muestra 25 líneas/etiquetas `<img>` modificadas en total (no 24).
+- Recuento final del script en el HEAD auditado: 46 etiquetas `<img>`; 43 ya tienen ambas dimensiones, 0 son completables en el `--check` y 3 quedan sin medir:
+  1. `bitacora-preview.html`: `src="'+esc(image)+'"`, plantilla de una imagen insertada dinámicamente por JavaScript; no es una ruta física que Pillow pueda abrir.
+  2. `index.html`: imagen remota `https://www.minecraft.net/content/dam/minecraftnet/games/minecraft/screenshots/PDP-US-Bundle-Screenshot-2.png`.
+  3. `instituto-preview.html`: `assets/banner-grupal.jpg`, ruta local que no se encontró en el checkout.
+- Las cifras antiguas 18 + 24 + 5 corresponden a una corrida/alcance previo y no son conciliables con el recuento final; se reemplazan por el conteo reproducible de 46/43/0/3.
+
+### LCP: datos individuales de Lighthouse
+- Run [43561161022](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43561161022), reportes JSON individuales:
+  - GitHub Pages: 13,93 s / 15,21 s / 15,02 s; mediana 15,02 s.
+  - Preview: 11,60 s / 12,70 s / 12,82 s; mediana 12,70 s.
+- Las seis corridas repiten el LCP elevado. No se descarta como un valor aislado.
+- `scripts/lcp_probe.mjs` identificó en ambos hosts el banner `image_20261106_124855.jpg` (`IMG`, `loading=eager`, `fetchpriority=high`), con `PerformanceObserver` en 580 ms (producción) y 248 ms (preview). No es el emblema ni una imagen lazy. Hay una discrepancia entre ese evento de navegador y la auditoría LCP de Lighthouse que requiere aislar condiciones del runner/red antes de cambiar prioridades.
+
+### Best Practices: detalle real de errors-in-console
+- Producción: `errors-in-console` registra `GET https://losmoriartys-cmd.github.io/favicon.ico` con HTTP 404. En producción actual (main) falta el icono declarado. La rama `auditoria-ux` ya declara un favicon PNG existente en el `<head>`; la corrección aún no está en producción porque no se fusionó.
+- Preview: `errors-in-console` registra dos respuestas HTTP 503 a `/api/live`. El código de Pages Function responde 503 si faltan `TWITCH_CLIENT_ID` o `TWITCH_CLIENT_SECRET`; el frontend mantiene la captura estática de respaldo. No se atribuye a imágenes bloqueadas.
+- La preview tiene además `robots-txt` inválido (984 errores en el JSON de Lighthouse) porque `/robots.txt` estaba devolviendo el HTML de la portada. Producción todavía requiere verificar su Content-Type desde HTTP.
+
+### Producción GitHub Pages: alcance de QA
+- El `app.js` de producción no contiene llamadas a `/api/*`; los formularios del HTML de producción tienen un handler inline que arma `mailto:losmoriartys@gmail.com`. Esto es inspección de código servido, no sustituye la prueba de navegador sobre producción.
+- Se agregó `scripts/qa_production.mjs` para probar en Chromium el host real `github.io`, navegar a EN VIVO, enviar un formulario de prueba sin envío real y registrar solicitudes `/api/*`, errores JS y la ruta mailto.
+- Se agregaron `robots.txt` y `sitemap.xml` a `auditoria-ux`. La sitemap excluye páginas de preview. Aún no están en producción hasta que el PR se integre; el workflow ahora registra HTTP y Content-Type de robots y sitemap en los tres hosts (GitHub Pages, preview de rama y Pages principal).
+
+### Pendientes bloqueantes de aprobación
+- Completar el nuevo smoke QA contra GitHub Pages y revisar que no haya ninguna solicitud `/api/*`, que EN VIVO renderice y que el formulario active la ruta mailto.
+- Revisar los Content-Type HTTP de `robots.txt` y la disponibilidad del `sitemap.xml` en los tres hosts; producción solo cambiará al integrar el PR.
+- Configurar por separado en Cloudflare Pages > Preview `TWITCH_CLIENT_ID`, `TWITCH_CLIENT_SECRET`, `RESEND_API_KEY`, `RESEND_FROM` y, si se usa, `CONTACT_TO`. No se registran ni se solicitan valores secretos en GitHub.
+- Validar `/api/live` con HTTP 200 y el envío real a Resend con una dirección de prueba acordada. Hasta entonces, Resend no está probado de punta a punta.
+- Probar manualmente con NVDA en Windows o VoiceOver en Apple. La auditoría automática y el foco de teclado no certifican lector de pantalla.
+
+**Estado:** QA no aprobada. PR #46 permanece Draft y sin merge; `main` no se modificó y producción no se desplegó.
