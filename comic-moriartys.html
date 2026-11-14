@@ -107,7 +107,7 @@ button,a{font:inherit}.wrap{width:min(1160px,calc(100% - 28px));margin:auto;padd
 <div class="metric"><strong>98</strong><small>ESPECTADORES COMPARTIDOS ÚNICOS · PANEL DE LOS MORIARTYS</small></div>
 <div class="metric"><strong>4</strong><small>CREADORES PARTICIPANTES EN SIMULTÁNEO</small></div>
 </div>
-<p class="disclaimer">El tiempo sumado corresponde a tres tramos efectivos de Bar Fender documentados en VOD; no representa horas vistas. Los 98 espectadores compartidos únicos son el dato del panel Shared Viewership del canal Los Moriartys, no una medición independiente de audiencia única total entre los cuatro canales. No se atribuyen ventas, conversiones, ROI ni pago económico. Keymailer facilitó el acceso al juego; no es el publisher ni el desarrollador.</p>
+<p class="disclaimer">El tiempo sumado corresponde a tres tramos efectivos de BarFender documentados en VOD; no representa horas vistas. Los 98 espectadores compartidos únicos son el dato del panel Shared Viewership del canal Los Moriartys, no una medición independiente de audiencia única total entre los cuatro canales. No se atribuyen ventas, conversiones, ROI ni pago económico. Keymailer facilitó el acceso al juego; no es el publisher ni el desarrollador.</p>
 <div class="links" style="position:relative;z-index:1">
 <a href="https://www.twitch.tv/videos/2919716450" target="_blank" rel="noopener">VOD · Los Moriartys</a>
 <a href="https://www.twitch.tv/videos/2919755971" target="_blank" rel="noopener">VOD · Lady Moriarty01</a>
@@ -130,7 +130,7 @@ button,a{font:inherit}.wrap{width:min(1160px,calc(100% - 28px));margin:auto;padd
 </div>
 <script>
 const pages=[...document.querySelectorAll('.page')],prev=document.getElementById('prev'),next=document.getElementById('next'),progress=document.getElementById('progress');
-const labels=['PORTADA','ORIGEN','EL HÉROE','ESTADÍSTICAS','BAR FENDER · MISIÓN 001','PRÓXIMOS CAPÍTULOS'];let current=0;
+const labels=['PORTADA','ORIGEN','EL HÉROE','ESTADÍSTICAS','BARFENDER · COLABORACIÓN 001','PRÓXIMOS CAPÍTULOS'];let current=0;
 function show(n){current=Math.max(0,Math.min(pages.length-1,n));pages.forEach((p,i)=>p.classList.toggle('active',i===current));prev.disabled=current===0;next.disabled=current===pages.length-1;progress.textContent=labels[current]+' · '+String(current+1).padStart(2,'0')+' / '+String(pages.length).padStart(2,'0');document.querySelector('.comic').scrollIntoView({behavior:'smooth',block:'start'});}
 prev.addEventListener('click',()=>show(current-1));next.addEventListener('click',()=>show(current+1));document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')show(current+1);if(e.key==='ArrowLeft')show(current-1)});
 </script>
