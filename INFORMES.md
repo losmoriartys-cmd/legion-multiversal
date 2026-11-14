@@ -3095,3 +3095,7 @@ Se conserva el compromiso de avanzar una mejora por etapa, con validación y rev
 - GitHub Pages, Lighthouse simulado: **13,80 / 4,36 / 14,16 s**. LCP observado en las trazas: **409 / 293 / 280 ms**.
 - Preview, Lighthouse simulado: **12,76 / 11,67 / 12,63 s**. LCP observado en las trazas: **455 / 291 / 305 ms**.
 - Medianas: simulado 13,80 / 12,63 s; observado 293 / 305 ms. El informe de Lighthouse debe conservar ambos indicadores para no mezclar la proyección de throttling con el evento observado.
+
+
+### Nota de integridad de ramas
+Durante esta tanda, `main` avanzó de `b67079b8d6bbde268a967e60ef642987072c6c52` a `d380f8ff95fe60ac360d306cf1e8721ff8ba32bb` por un commit automático de `github-actions[bot]` (`Actualización automática de estadísticas multiplataforma`) que modificó únicamente `data.json` y `platform-stats.json`. No fue una escritura de esta auditoría. No se hicieron commits de `auditoria-ux` sobre `main`, no se fusionó el PR ni se desplegó producción.
