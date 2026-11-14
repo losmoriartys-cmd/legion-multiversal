@@ -444,31 +444,49 @@ function renderStatsDashboard(hero,helix,sully){
 }
 function renderMissionArchive(hero){
  const key=creatorRecordKey(hero),record=creatorRecordsData?.channels?.[key]||{};
- const groups=[['COLABORACIONES Y ACCESOS A JUEGOS','collaborations'],['HITOS Y TRAYECTORIA','milestones'],['CLIPS DESTACADOS','highlights']];
- let out='<div class="mission-archive"><div class="mission-hero-card"><span class="eyebrow">TRAYECTORIA · MEDIA KIT</span><p>'+escapeStatsHtml(hero.log||'Trayectoria y colaboraciones del creador.')+'</p></div>';
+ const safe=escapeStatsHtml;
+ const validLink=url=>/^https:\/\/(?:www\.)?twitch\.tv\//i.test(String(url||''))||/^https:\/\/clips\.twitch\.tv\//i.test(String(url||''))||/^https:\/\/(?:www\.)?youtube\.com\//i.test(String(url||''));
+ const groups=[['COLABORACIONES Y ACCESOS','collaborations'],['HITOS Y TRAYECTORIA','milestones'],['MUESTRAS AUDIOVISUALES','highlights']];
+ let out='<div class="mission-archive"><div class="mission-hero-card"><span class="eyebrow">TRAYECTORIA · MEDIA KIT</span><p>'+safe(hero.log||'La trayectoria pública se amplía con hitos, colaboraciones y piezas verificables.')+'</p></div>';
  groups.forEach(([label,field])=>{
   const items=Array.isArray(record[field])?record[field]:[];
-  if(!items.length && field!=='highlights')return;
   out+='<section class="mission-section"><h4>'+label+'</h4>';
   if(!items.length){
-   out+='<p class="mission-empty">Los clips seleccionados se incorporarán aquí con sus enlaces directos.</p>';
+   out+='<p class="mission-empty">'+(field==='highlights'?'Todavía no hay clips o videos incorporados a este expediente.':'No hay registros verificables cargados en esta categoría. La sección queda abierta para futuras incorporaciones.')+'</p>';
   }else{
    out+='<div class="mission-grid">';
    items.forEach(item=>{
-    out+='<article class="mission-card"><h5>'+escapeStatsHtml(item.title||'Registro')+'</h5>';
+    const titlePending=item.editorial_status==='pending_creator_confirmation'||String(item.title||'').toLowerCase().includes('pendiente');
+    const title=titlePending?'Título pendiente de confirmar':(item.title||'Registro');
+    out+='<article class="mission-card"><h5>'+safe(title)+'</h5>';
     if(item.date)out+='<p>FECHA · '+statsDate(item.date)+'</p>';
-    if(item.description && !item.description.includes('Pendiente de descripción editorial'))out+='<p>'+escapeStatsHtml(item.description)+'</p>';
-    if(item.platform==='twitch' && item.clip_id){
-     out+='<div class="mission-clip-embed">'+renderTwitchClipPreview(item.clip_id,item.title,item.url)+'</div>';
-     out+='<a href="https://clips.twitch.tv/'+encodeURIComponent(item.clip_id)+'" target="_blank" rel="noopener">ABRIR EN TWITCH ↗</a>';
-    }else if(item.url)out+='<a href="'+escapeStatsHtml(item.url)+'" target="_blank" rel="noopener">VER DETALLE ↗</a>';
+    if(item.description&&!item.description.includes('Pendiente de descripción editorial'))out+='<p>'+safe(item.description)+'</p>';
+    if(item.title_source)out+='<p class="mission-source-note">'+safe(item.title_source)+'</p>';
+    if(item.platform==='twitch'&&item.clip_id){
+     out+='<div class="mission-clip-embed">'+renderTwitchClipPreview(item.clip_id,title,item.url)+'</div>';
+     const clipUrl=validLink(item.url)?item.url:'https://clips.twitch.tv/'+encodeURIComponent(item.clip_id);
+     out+='<a href="'+safe(clipUrl)+'" target="_blank" rel="noopener noreferrer">VER CLIP EN TWITCH ↗</a>';
+    }else if(validLink(item.url)){
+     out+='<a href="'+safe(item.url)+'" target="_blank" rel="noopener noreferrer">VER PIEZA ↗</a>';
+    }
+    if(item.source)out+='<p class="mission-source-note">REGISTRO · '+safe(item.source)+'</p>';
     out+='</article>';
    });
    out+='</div>';
   }
   out+='</section>';
  });
- out+='<p class="stats-muted">Los clips aparecen una sola vez en esta sección. Se priorizan enlaces directos a piezas concretas, no accesos generales repetidos al canal.</p></div>';
+ const youtube=platformStatsData?.creators?.patoteexplica?.platforms?.youtube;
+ if(hero.creator_type==='video_creator'&&youtube?.status==='verified'&&Array.isArray(youtube.recent_videos)){
+  out+='<section class="mission-section"><h4>PUBLICACIONES DE YOUTUBE</h4><div class="mission-grid">';
+  youtube.recent_videos.slice(0,6).forEach(video=>{
+   if(!validLink(video.url))return;
+   out+='<article class="mission-card"><h5>'+safe(video.title||'Video publicado')+'</h5><p>'+statsNumber(video.views,0)+' vistas · '+safe(video.published_at?video.published_at.slice(0,10):'fecha no disponible')+'</p><a href="'+safe(video.url)+'" target="_blank" rel="noopener noreferrer">VER EN YOUTUBE ↗</a></article>';
+  });
+  out+='</div><p class="mission-source-note">Fuente: YouTube Data API v3 · datos acumulados consultados en '+safe(platformStatsData.updated_at||'fecha no disponible')+'.</p></section>';
+ }
+ if(Array.isArray(record.collaborations)&&record.collaborations.length)out+='<p class="mission-source-note">Criterio editorial: partners, campañas y accesos a claves se describen por separado. El acceso a una key o campaña de plataforma no equivale por sí mismo a un patrocinio.</p>';
+ out+='<p class="stats-muted">El expediente diferencia trayectoria documentada, muestras audiovisuales y colaboraciones. Los espacios sin registros no implican ausencia de experiencia: indican que todavía no hay evidencia incorporada.</p></div>';
  return out;
 }
 let twitchMetricsData = null;
