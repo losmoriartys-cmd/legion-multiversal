@@ -3010,3 +3010,25 @@ Se conserva el compromiso de avanzar una mejora por etapa, con validación y rev
 - **CI del HEAD e5db:** `validar-sitio.yml` pasó en [run 43560270902](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43560270902).
 - **Pendiente manual:** prueba real de lector de pantalla; Playwright/Lighthouse no la sustituyen. No se reemplazaron referencias de imágenes ni se generaron variantes WebP/AVIF.
 - **Salvaguardas:** `main` continúa en `b67079b8d6bbde268a967e60ef642987072c6c52`; rama de trabajo `auditoria-ux` en `e5dbcc306ec12861bcfe6073f4dbefee30e9a1d7`. PR #46 sigue Draft, abierto y sin merge; no hubo despliegue de producción.
+
+
+## Cierre de diagnóstico y QA — 14/11/2026
+
+- **Noindex de preview confirmado:** la respuesta de `https://auditoria-ux.legion-multiversal.pages.dev/` contiene `X-Robots-Tag: noindex`. No se elimina ni se modifica esta protección.
+- **robots.txt preview:** `/robots.txt` devuelve el HTML de la portada en lugar de un archivo robots válido; Lighthouse detecta 983 errores de sintaxis. No se modificó para elevar el score de la preview. Una posible corrección independiente sería publicar un `robots.txt` real que permita rastreo, manteniendo el `X-Robots-Tag: noindex`; queda como decisión pendiente.
+- **Lighthouse estable (3 corridas por entorno):** run [43560270922](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43560270922): Performance 95/95, Accessibility 100/100, Best Practices 96/96, SEO 100/61, LCP 1,75/2,02 s, CLS 0,079/0,079, TBT 6/2 ms, peso 4179/3698 KB. La tanda previa de 71 y LCP >11 s fue anómala y no se tomó como regresión.
+- **Best Practices producción:** el fallo `errors-in-console` era una solicitud 404 a `/favicon.ico`. Se añadió en `index.html` un icono apuntando al logo ya existente; la validación de ese cambio está en el run actual.
+- **Best Practices preview:** `/api/live` responde 503. La Function devuelve 503 cuando falta al menos una credencial Twitch en ese entorno. El frontend captura el fallo y mantiene `data.json` como respaldo, sin errores JS. Revisar que `TWITCH_CLIENT_ID` y `TWITCH_CLIENT_SECRET` estén disponibles también en Cloudflare Pages > Preview, no solo en Production.
+- **QA Playwright:** 43/43 comprobaciones OK en 1440×900, 768×1024 y 390×844. Incluye cinco hashes por viewport, ausencia de errores JS, ausencia de scroll horizontal, CTA mailto, fallback de un clic ante 503 simulado, navegación por Tab y estado del disclosure del roster. Capturas y `reports/qa/resultado.json` se publicaron como artifact del run 43560270922.
+- **Dimensiones:** el `--check` final reporta 46 imágenes; 43 con ambas dimensiones, 0 completables y 3 sin medir. Las 3 restantes son remotas/dinámicas y conservan espacio mediante CSS (ratio 16:9, caja 76×92 o wrapper de altura fija). El commit separado `e5dbcc306ec12861bcfe6073f4dbefee30e9a1d7` incorpora las 24 medidas reales y reserva 1280×1920 para la portada dinámica MORIARTYS.
+- **Peso — 6 imágenes cargadas en la navegación inicial (run 43560270922):**
+  1. `legion_logo_final_hybrid.png` — 1.337.475 B.
+  2. `assets/heroes/rod3r1k_dark.webp` — 866.057 B.
+  3. `image_20261107_021355.jpg` — 514.735 B.
+  4. `stream4.jpg` — 475.573 B.
+  5. `image_20261106_124855.jpg` — 413.794 B.
+  6. `assets/carnet/DemuianCarnet.jpg` — 357.879 B.
+  No se generaron ni sustituyeron variantes WebP/AVIF; requiere aprobación.
+- **Elemento LCP:** el JSON de Lighthouse no incluye el audit node esperado en esta versión. Se añadió `scripts/lcp_probe.mjs` con PerformanceObserver para identificar el elemento real en producción y preview; ejecución [43560863457](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43560863457) pendiente al momento de esta nota.
+- **Accesibilidad manual:** la navegación por teclado está cubierta por smoke QA; sigue pendiente probar con un lector de pantalla real. Lighthouse 100 no sustituye esa comprobación.
+- **Estado y salvaguardas:** rama `auditoria-ux`; PR #46 Draft y sin merge; `main` no fue modificado; no se desplegó producción.
