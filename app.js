@@ -703,6 +703,49 @@ function selectLiveChannel(login,displayName){
  wrap.hidden=false;
  wrap.scrollIntoView({behavior:'smooth',block:'start'});
 }
+async function loadLiveDirectory() {
+    const host = document.getElementById('live-directory');
+    if (!host) return;
+
+    // GitHub Pages no ejecuta Pages Functions: la lectura histórica de data.json
+    // ya renderiza el estado de respaldo. En reintentos, refrescar esa captura.
+    if (!HAS_API) {
+        if (!instituteStatsLoading) await loadInstituteStats();
+        return;
+    }
+
+    try {
+        const data = await fetchJSON('/api/live', { timeout: 8000, retries: 1 });
+        const channels = Array.isArray(data.channels) ? data.channels.map(channel => ({
+            ...channel,
+            current_game: channel.game_name ?? null,
+            current_viewers: channel.viewer_count ?? null
+        })) : [];
+        renderLiveDirectory(channels, {
+            source: 'helix',
+            updatedAt: data.updated_at,
+            freshnessMinutes: 3
+        });
+    } catch (error) {
+        console.warn('Twitch Helix no está disponible; se conserva la última captura de data.json.', error);
+        // No reemplazar una lectura de Helix válida. Si aún no hay captura cargada,
+        // loadInstituteStats() la renderizará al completar su propia consulta.
+        if (instituteStatsData) {
+            const logins = Array.isArray(instituteStatsData.active_channels)
+                ? instituteStatsData.active_channels
+                : Object.keys(instituteStatsData.channels || {});
+            const fallbackChannels = logins
+                .map(login => instituteStatsData.channels?.[login])
+                .filter(Boolean);
+            renderLiveDirectory(fallbackChannels, {
+                source: 'data',
+                updatedAt: instituteStatsData.updated_at,
+                fallback: true
+            });
+        }
+    }
+}
+
 let legionNewsData = null;
 async function loadLegionNews() {
     const host = document.getElementById('legion-news-feed');
