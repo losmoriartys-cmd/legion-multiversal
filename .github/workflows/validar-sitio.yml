@@ -53,7 +53,7 @@ jobs:
       - name: Validar modelo del roster y cobertura Twitch
         run: python scripts/validate_roster_data.py --check-activity --check-platforms
       - name: Comprobar índice accesible sin JavaScript
-        run: python scripts/render_roster_noscript.py scripts/validate_metric_history.py --check
+        run: python scripts/render_roster_noscript.py --check
       - name: Compilar colectores Python
         run: python -m py_compile update_stats.py update_platform_stats.py update_clips.py scripts/validate_roster_data.py scripts/validate_clips_data.py scripts/render_roster_noscript.py
       - name: Probar lectura de cuentas por los colectores
