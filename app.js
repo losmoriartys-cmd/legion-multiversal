@@ -1289,6 +1289,44 @@ function renderHeroPlatformLinks(hero) {
         .map(([key,label]) => '<a class="btn-link hero-platform-link" href="' + escapeStatsHtml(hero[key]) + '" target="_blank" rel="noopener noreferrer" aria-label="Visitar ' + label + ' de ' + escapeStatsHtml(hero.name) + '">' + label + ' ↗</a>')
         .join('');
 }
+function renderCommercialEvidence(hero, twitchLogin, youtubeLogin) {
+    const safe = escapeStatsHtml;
+    const fmt = value => statsNumber(value, 1);
+    const twitchProfile = twitchMetricsData?.channels?.[twitchLogin];
+    if (twitchProfile?.metrics) {
+        const m = twitchProfile.metrics;
+        const tiles = [
+            ["SEGUIDORES", m.followers],
+            ["VARIACIÓN", m.follower_change === null || m.follower_change === undefined ? null : (m.follower_change > 0 ? "+" : "") + m.follower_change],
+            ["HORAS VISTAS", m.viewer_hours],
+            ["PICO DE ESPECTADORES", m.peak_viewers],
+            ["HORAS EN DIRECTO", m.hours_live],
+            ["PROMEDIO", m.average_viewers]
+        ].filter(([,value]) => value !== null && value !== undefined);
+        return '<section class="commercial-evidence"><header><span>DATOS DE REFERENCIA</span><b>TWITCHMETRICS</b></header><p class="commercial-evidence-period">' + safe(twitchProfile.period_label || "Período no indicado") + ' · captura ' + safe(twitchMetricsData.captured_at || "sin fecha") + '</p><div class="commercial-evidence-grid">' + tiles.map(([label,value]) => '<div><strong>' + safe(fmt(value)) + '</strong><span>' + safe(label) + '</span></div>').join("") + '</div><small>Fuente externa: TwitchMetrics. La plataforma indica una muestra de transmisiones visibles y puede no incluir directos con menos de 10 espectadores. No combinar con otras fuentes ni interpretar como analítica oficial de Twitch.</small><a href="' + safe(twitchProfile.source_url) + '" target="_blank" rel="noopener noreferrer">CONSULTAR PERFIL DE ORIGEN ↗</a></section>';
+    }
+    const platformCreator = Object.entries(platformStatsData?.creators || {}).find(([key,creator]) => key === youtubeLogin || (creator.platforms?.youtube?.handle || "").replace(/^@/,"").toLowerCase() === youtubeLogin);
+    const youtube = platformCreator?.[1]?.platforms?.youtube;
+    if (youtube?.status === "verified" && youtube.metrics) {
+        const m = youtube.metrics;
+        const capture = platformStatsData?.updated_at || platformStatsData?.collection_status?.captured_at || "fecha no indicada";
+        return '<section class="commercial-evidence"><header><span>DATOS DE REFERENCIA</span><b>YOUTUBE · FUENTE VERIFICADA</b></header><p class="commercial-evidence-period">Captura ' + safe(capture) + '</p><div class="commercial-evidence-grid">' + [["SUSCRIPTORES",m.subscribers],["VISUALIZACIONES",m.total_views],["VIDEOS PUBLICADOS",m.videos_total]].map(([label,value]) => '<div><strong>' + safe(fmt(value)) + '</strong><span>' + safe(label) + '</span></div>').join("") + '</div><small>Fuente: YouTube Data API v3. Datos públicos acumulados del canal; el contador de suscriptores puede estar redondeado por YouTube.</small><a href="' + safe(youtube.url) + '" target="_blank" rel="noopener noreferrer">CONSULTAR CANAL DE ORIGEN ↗</a></section>';
+    }
+    const channel = (sullyGnomeData?.channels || []).find(item => (item.login || "").toLowerCase() === twitchLogin);
+    const summary = channel?.summary;
+    const usable = summary && channel.status !== "pending" && channel.status !== "partial_discrepancy" && (Number(summary.streams_count) > 0 || Number(summary.airtime_hours) > 0);
+    if (usable && channel.login !== "habitos_atomicos") {
+        const statusLabel = channel.status === "user_supplied_summary" || channel.status === "user_supplied_annual_summary" ? "RESUMEN APORTADO POR EL EQUIPO" : "REGISTRO PARCIAL";
+        const period = channel.period?.label || (channel.period?.start_date && channel.period?.end_date ? statsDate(channel.period.start_date) + " — " + statsDate(channel.period.end_date) : "Período no indicado");
+        const tiles = [["DIRECTOS REGISTRADOS",summary.streams_count],["HORAS EN DIRECTO",summary.airtime_hours],["HORAS VISTAS",summary.hours_watched],["PICO OBSERVADO",summary.peak_viewers],["PROMEDIO PONDERADO",summary.average_viewers_duration_weighted]].filter(([,value]) => value !== null && value !== undefined);
+        return '<section class="commercial-evidence"><header><span>REFERENCIA HISTÓRICA</span><b>SULLYGNOME · ' + safe(statusLabel) + '</b></header><p class="commercial-evidence-period">' + safe(period) + ' · archivo generado ' + safe((sullyGnomeData.generated_at_utc || "").slice(0,10) || "sin fecha") + '</p><div class="commercial-evidence-grid">' + tiles.map(([label,value]) => '<div><strong>' + safe(fmt(value)) + '</strong><span>' + safe(label) + '</span></div>').join("") + '</div><small>Referencia histórica y parcial. El promedio ponderado es un cálculo derivado; las cifras no equivalen a analítica oficial de Twitch. No sumar ni comparar con otros perfiles o fuentes. ' + (channel.status === "user_supplied_summary" || channel.status === "user_supplied_annual_summary" ? "Resumen transcripto a partir de información aportada por el equipo." : "Registros disponibles incompletos; consultar el detalle y su metodología antes de cotizar una campaña.") + '</small><a href="' + safe(channel.source_url || "https://sullygnome.com/") + '" target="_blank" rel="noopener noreferrer">CONSULTAR FUENTE ↗</a></section>';
+    }
+    if (twitchLogin === "habitos_atomicos") {
+        return '<section class="commercial-evidence is-pending"><header><span>TRANSPARENCIA DE DATOS</span><b>REVISIÓN PENDIENTE</b></header><p>El archivo histórico presenta una discrepancia entre el resumen del canal y el desglose por categorías. Retenemos las cifras para no publicar una ficha comercial inconsistente.</p></section>';
+    }
+    return '<section class="commercial-evidence is-pending"><header><span>TRANSPARENCIA DE DATOS</span><b>MÉTRICAS EN INTEGRACIÓN</b></header><p>Este perfil todavía no cuenta con una captura estadística comparable y suficientemente documentada para publicar cifras comerciales. La ausencia de métricas en esta ficha no representa una valoración del creador.</p></section>';
+}
+
 function renderCommercialQuickView(hero) {
     const safe = escapeStatsHtml;
     const twitchLogin = hero.twitch ? hero.twitch.split("/").filter(Boolean).pop().toLowerCase() : "";
