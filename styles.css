@@ -4624,3 +4624,32 @@ img { max-width: 100%; }
   #chapter-2 .roster-card-3d-inner,
   #chapter-2 .roster-card-holo { animation:none !important; transition:none !important; }
 }
+
+
+/* 2026-11-14 · Portadas editoriales: preservar proporción original en escritorio y móvil */
+.origin-editorial-cover {
+    width: min(100%, 420px);
+    justify-self: center;
+    align-self: center;
+}
+.origin-editorial-cover img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: none;
+    aspect-ratio: auto;
+    object-fit: contain;
+    object-position: center;
+}
+@media (max-width: 850px) {
+    .origin-editorial-cover {
+        width: min(100%, 420px);
+        max-width: 420px;
+        margin-inline: auto;
+    }
+}
+@media (max-width: 600px) {
+    .origin-editorial-cover {
+        width: min(100%, 380px);
+    }
+}
