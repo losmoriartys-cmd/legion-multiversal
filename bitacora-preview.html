@@ -1,7 +1,8 @@
 <!doctype html>
 <html lang="es">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#090d15">
 <title>Bitácora Multiversal | Legión Multiversal</title>
 <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Special+Elite&family=Roboto+Condensed:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -44,17 +45,17 @@
 </style>
 </head>
 <body><main class="shell">
-<header class="top"><div><div class="eyebrow">LEGIÓN MULTIVERSAL · ARCHIVO CENTRAL</div><h1>BITÁCORA DE LA LEGIÓN</h1></div><nav class="archive-nav" aria-label="Navegación principal"><a href="./index.html#chapter-2">← ROSTER</a><a href="./index.html#chapter-12">CAPÍTULO 12 · COLABORACIONES</a></nav></header>
+<header class="top"><div><div class="eyebrow">LEGIÓN MULTIVERSAL · ARCHIVO CENTRAL</div><h1>BITÁCORA DE LA LEGIÓN</h1></div><nav class="archive-nav" aria-label="Navegación principal"><a href="./index.html#roster">← ROSTER</a><a href="./index.html#colaboraciones">CAPÍTULO 12 · COLABORACIONES</a></nav></header>
 <p class="intro">Un registro vivo de personas, capítulos, actividad y experiencias compartidas. Pasá las páginas para recorrer el archivo; cada sección enlaza con su capítulo correspondiente en el sitio principal.</p>
 <section class="book-stage" aria-label="Libro interactivo de la Bitácora">
 <div class="book" id="book" aria-live="polite">
-<article class="leaf cover" id="cover"><img class="cover-art" src="assets/heroes/image_20261103_160331-y-ahora-mezclando-el-nuevo-mio-y-el-marco-nuevo-co-pero-porque-quedo-pelado-xd%20(1).jpg" alt="Ilustración oficial de MORIARTYS para la Legión Multiversal"><div><span class="stamp">ARCHIVO DE LA LEGIÓN · 2026</span><h2>BITÁCORA<br>MULTIVERSAL</h2><p>Personas, misiones, colaboraciones y nuevas historias.</p><p class="note">EDICIÓN INTERACTIVA · ABRIR EL LEGAJO</p></div></article>
+<article class="leaf cover" id="cover"><img class="cover-art" src="assets/heroes/image_20261103_160331-y-ahora-mezclando-el-nuevo-mio-y-el-marco-nuevo-co-pero-porque-quedo-pelado-xd%20(1).jpg" alt="Ilustración oficial de MORIARTYS para la Legión Multiversal" width="1280" height="1920"><div><span class="stamp">ARCHIVO DE LA LEGIÓN · 2026</span><h2>BITÁCORA<br>MULTIVERSAL</h2><p>Personas, misiones, colaboraciones y nuevas historias.</p><p class="note">EDICIÓN INTERACTIVA · ABRIR EL LEGAJO</p></div></article>
 </div></section>
 <nav class="controls" aria-label="Navegación de la Bitácora">
 <button id="prev" type="button" disabled>← ANTERIOR</button><span class="page-number" id="page-number">PORTADA · 00 / 06</span><button id="next" type="button">ABRIR BITÁCORA →</button><button class="sound-toggle" id="sound" type="button" aria-pressed="false">♫ SONIDO: DESACTIVADO</button>
 </nav><p class="intro" id="page-help" aria-live="polite" style="font-size:.8rem;margin-top:14px">El sonido está desactivado de forma predeterminada. Podés activarlo cuando quieras.</p>
 <section class="roster-directory" id="roster-directory" aria-labelledby="roster-directory-title">
- <div class="directory-heading"><div><span class="eyebrow">COLECCIÓN OFICIAL · EXPEDIENTES INDIVIDUALES</span><h2 id="roster-directory-title">LAS CARTAS DE LA LEGIÓN</h2><p>La misma colección que vive en el Roster. Elegí un expediente para abrir su perfil completo en el archivo principal.</p></div><a href="./index.html#chapter-2">ABRIR ROSTER COMPLETO ↗</a></div>
+ <div class="directory-heading"><div><span class="eyebrow">COLECCIÓN OFICIAL · EXPEDIENTES INDIVIDUALES</span><h2 id="roster-directory-title">LAS CARTAS DE LA LEGIÓN</h2><p>La misma colección que vive en el Roster. Elegí un expediente para abrir su perfil completo en el archivo principal.</p></div><a href="./index.html#roster">ABRIR ROSTER COMPLETO ↗</a></div>
  <div class="directory-grid" id="directory-grid" aria-live="polite"><p class="directory-state">Conectando con el registro oficial del Roster…</p></div>
  <p class="directory-footnote">Los perfiles se cargan desde <code>roster-data.json</code>; no se mantienen copias paralelas de nombres, roles o imágenes en esta página.</p>
 </section>
@@ -73,7 +74,7 @@ let current=-1,soundOn=false,audioContext=null;
 const book=document.getElementById('book'),number=document.getElementById('page-number'),help=document.getElementById('page-help'),prev=document.getElementById('prev'),next=document.getElementById('next'),sound=document.getElementById('sound');
 function pageMarkup(p){const links=p.items.map(x=>'<li><b>'+x[0]+'</b> <a href="./'+x[2]+'">'+x[1]+' ↗</a></li>').join('');return '<article class="leaf"><div class="eyebrow" style="color:#8b3d35">'+p.tag+'</div><h2>'+p.title+'</h2><p>'+p.left+'</p><ol class="index-list">'+links+'</ol><p class="note">DOCUMENTO VIVO · EDICIÓN 2026</p></article><article class="leaf"><div class="seal">'+p.rightTag+'</div><h2>'+p.rightTitle+'</h2><p>'+p.right+'</p><p class="note">LEGIÓN MULTIVERSAL · ARCHIVO CENTRAL</p></article>'}
 function pageSound(){if(!soundOn)return;try{const C=window.AudioContext||window.webkitAudioContext;if(!C)return;if(!audioContext)audioContext=new C();if(audioContext.state==='suspended')audioContext.resume();const t=audioContext.currentTime;const osc=audioContext.createOscillator(),gain=audioContext.createGain();osc.type='triangle';osc.frequency.setValueAtTime(520,t);osc.frequency.exponentialRampToValueAtTime(190,t+.12);gain.gain.setValueAtTime(.0001,t);gain.gain.exponentialRampToValueAtTime(.035,t+.012);gain.gain.exponentialRampToValueAtTime(.0001,t+.15);osc.connect(gain);gain.connect(audioContext.destination);osc.start(t);osc.stop(t+.16)}catch(e){help.textContent='El navegador no permitió reproducir el sonido. La navegación sigue funcionando.'}}
-const coverMarkup='<article class="leaf cover"><img class="cover-art" src="assets/heroes/image_20261103_160331-y-ahora-mezclando-el-nuevo-mio-y-el-marco-nuevo-co-pero-porque-quedo-pelado-xd%20(1).jpg" alt="Ilustración oficial de MORIARTYS para la Legión Multiversal"><div><span class="stamp">ARCHIVO DE LA LEGIÓN · 2026</span><h2>BITÁCORA<br>MULTIVERSAL</h2><p>Personas, misiones, colaboraciones y nuevas historias.</p><p class="note">EDICIÓN INTERACTIVA · ABRIR EL LEGAJO</p></div></article>';
+const coverMarkup='<article class="leaf cover"><img class="cover-art" src="assets/heroes/image_20261103_160331-y-ahora-mezclando-el-nuevo-mio-y-el-marco-nuevo-co-pero-porque-quedo-pelado-xd%20(1).jpg" alt="Ilustración oficial de MORIARTYS para la Legión Multiversal" width="1280" height="1920"><div><span class="stamp">ARCHIVO DE LA LEGIÓN · 2026</span><h2>BITÁCORA<br>MULTIVERSAL</h2><p>Personas, misiones, colaboraciones y nuevas historias.</p><p class="note">EDICIÓN INTERACTIVA · ABRIR EL LEGAJO</p></div></article>';
 
 async function loadRosterDirectory(){
  const grid=document.getElementById('directory-grid');
@@ -88,10 +89,13 @@ async function loadRosterDirectory(){
   const slug=name=>String(name||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
   grid.innerHTML=heroes.map(hero=>{
    const image=hero.portrait||hero.img||'';
+   const dims=hero.imageSource===image&&hero.imageWidth&&hero.imageHeight
+    ? ' width="'+Number(hero.imageWidth)+'" height="'+Number(hero.imageHeight)+'"'
+    : '';
    const name=hero.name||'Integrante';
    const role=hero.rank||hero.role||'EXPEDIENTE';
    const code=hero.cardNumber?'N.º '+hero.cardNumber:'REGISTRO ACTIVO';
-   return '<a class="directory-card" href="./index.html#expediente-'+encodeURIComponent(slug(name))+'" aria-label="Abrir expediente de '+esc(name)+'"><img src="'+esc(image)+'" alt="" loading="lazy"><span><small>'+esc(code)+'</small><strong>'+esc(name)+'</strong><em>'+esc(hero.codename||role)+'</em></span></a>';
+   return '<a class="directory-card" href="./index.html#expediente-'+encodeURIComponent(slug(name))+'" aria-label="Abrir expediente de '+esc(name)+'"><img src="'+esc(image)+'" alt=""'+dims+' loading="lazy" decoding="async"><span><small>'+esc(code)+'</small><strong>'+esc(name)+'</strong><em>'+esc(hero.codename||role)+'</em></span></a>';
   }).join('');
   grid.dataset.loaded='true';
  }catch(error){

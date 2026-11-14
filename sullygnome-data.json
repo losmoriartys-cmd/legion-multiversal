@@ -409,7 +409,7 @@
       "source": "SullyGnome",
       "source_url": "https://sullygnome.com/channel/habitos_atomicos/2026/streams",
       "checked_at_utc": "2026-11-07T05:08:00Z",
-      "status": "partial",
+      "status": "partial_discrepancy",
       "period": {
         "start_date": "2026-10-07",
         "end_date": "2026-11-06",
@@ -433,7 +433,8 @@
         "La suma de horas emitidas de las diez categorías visibles es 119; el resumen general informa 121 horas emitidas. La diferencia puede corresponder a redondeos o categorías no visibles; no se inventa una fila adicional.",
         "El resumen indica un pico de 29 espectadores, mientras que el gráfico compartido identifica un pico de 24 durante una transmisión marcada como Unlisted el 21/10 a las 21:00. Se conserva el valor agregado de 29 sin atribuirle fecha hasta aclarar la diferencia.",
         "La captura del historial contiene diez transmisiones visibles de las 26 informadas para el período; no se reconstruyen las otras 16 filas.",
-        "La métrica «Follower gain rank» es una posición/rango del sitio, no la cantidad de seguidores ganados; no se incorpora como métrica de audiencia."
+        "La métrica «Follower gain rank» es una posición/rango del sitio, no la cantidad de seguidores ganados; no se incorpora como métrica de audiencia.",
+        "14 nov 2026: estado de publicación actualizado a partial_discrepancy. Las métricas quedan retenidas de comparaciones y fichas comerciales hasta recibir una nueva exportación o aclaración de la fuente. Se documentan diferencias entre resumen, categorías y gráfico de pico."
       ],
       "observed_rows_summary": {
         "rows": 10,
@@ -532,7 +533,34 @@
           "peak_viewers": 4
         }
       ],
-      "game_breakdown_period": "Últimos 30 días · 7 oct — 6 nov 2026"
+      "game_breakdown_period": "Últimos 30 días · 7 oct — 6 nov 2026",
+      "reconciliation": {
+        "status": "unresolved_source_conflict",
+        "decision": "withhold_metrics_from_commercial_comparison",
+        "checked_at": "2026-11-14",
+        "conflicts": [
+          {
+            "metric": "hours_watched",
+            "summary_value": 469,
+            "game_breakdown_sum": 525,
+            "just_chatting_value": 469,
+            "note": "La fila Just Chatting repite el total general, mientras la suma de las diez categorías excede el resumen en 56 horas."
+          },
+          {
+            "metric": "airtime_hours",
+            "summary_value": 121,
+            "game_breakdown_sum": 119,
+            "note": "La suma de categorías queda 2 horas por debajo del resumen general."
+          },
+          {
+            "metric": "peak_viewers",
+            "summary_value": 29,
+            "visible_stream_peak": 24,
+            "note": "El resumen informa 29; el gráfico compartido señala 24 en una transmisión unlisted. No hay atribución verificable de fecha para el pico 29."
+          }
+        ],
+        "note": "No se elige una cifra como correcta sin una nueva exportación o aclaración de SullyGnome. Las diez transmisiones visibles representan 10 de las 26 informadas."
+      }
     },
     {
       "platform": "twitch",

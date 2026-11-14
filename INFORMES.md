@@ -1,3 +1,101 @@
+## 2026-11-14 — Protección temporal de Bitácora y herramienta QA local
+
+- **Decisión editorial recibida:** mantener la Bitácora como activo comercial indexable a futuro, pero no indexar la página con sufijo `-preview` mientras el piloto MORIARTYS no tenga QA visual y funcional aprobado.
+- **Implementado:** `bitacora-preview.html` ahora incluye `<meta name="robots" content="noindex, nofollow">`. Se mantiene el nombre actual; no se renombró el archivo ni se modificaron enlaces o canonical. El renombrado a `bitacora.html`, la actualización de enlaces/canonical y el redirect HTML quedan expresamente reservados para un PR independiente después de la aprobación de QA. Commit: `5f6e6756a7171cc2ea43c2ca51fd81dbe50637b2`.
+- **Herramienta local agregada:** `scripts/qa_smoke.mjs` implementa smoke tests Playwright en 1440×900, 768×1024 y 390×844 con hashes normal, inválido y anclas conocidas; captura errores JS, scroll horizontal, estado del disclosure y llamadas a `/api/*`. Genera capturas PNG y `reports/qa/resultado.json`. Commit: `61cbd896897198ef7c09e8db7fa7a6882d8295e7`.
+- **Diferencia por entorno:** en localhost el script exige cero llamadas a `/api/*`; en `*.pages.dev` registra las llamadas como INFO para revisión manual del fallback, en lugar de marcar como fallo el comportamiento esperado de preview sin secretos.
+- **Dependencias y ejecución:** el script no se incorporó al CI ni se agregó Playwright al manifiesto del proyecto; es una herramienta local opt-in. Ejecutar `npm i -D playwright`, `npx playwright install chromium`, levantar `python3 -m http.server 8080` y correr `node scripts/qa_smoke.mjs`. Para preview: `QA_BASE=https://auditoria-ux.legion-multiversal.pages.dev/ node scripts/qa_smoke.mjs`.
+- **Limitaciones:** no se ejecutó el navegador en esta sesión; no hay resultados, capturas ni aprobación visual. En preview se debe comprobar manualmente que las respuestas 503 de Functions activen el respaldo previsto. El script no verifica envío real de `mailto:`, accesibilidad con teclado/lector de pantalla ni jerarquía/contraste visual.
+- **Pendiente:** ejecutar local y preview; adjuntar `reports/qa/`; validar el fallback y el formulario manualmente; completar dimensiones de imágenes y Lighthouse (tres corridas por entorno); obtener CI del HEAD resultante. Mantener el PR #46 en Draft y sin fusionar hasta completar QA y recibir aprobación.
+ 
+---
+
+## 2026-11-14 — Cierre de hallazgos críticos de navegación y roster
+
+- **Rama y límites:** trabajo realizado únicamente en `auditoria-ux`. `main` no fue modificada directamente, el PR #46 sigue sin fusionar y GitHub Pages continúa siendo producción.
+- **Hash de capítulos:** verificado y endurecido `activateChapterHash()`. La decodificación está protegida con `try/catch`; los anclajes semánticos se localizan recorriendo `[data-semantic-anchor]` y comparando el valor, sin construir selectores con `location.hash`. Se detectó además una segunda decodificación insegura en `restoreHeroProfileFromHash()`; se añadió control de prefijo y `try/catch` para que hashes de expediente mal formados no interrumpan la carga. Commit: `45cb76367eef6341ecddcbc4f9690bce919faccc`.
+- **Filtros del roster:** se agregó `open` por defecto al `details.roster-filter-disclosure` y `syncRosterFilters()` en `app.js`, que mantiene el disclosure abierto desde 701 px y lo colapsa en pantallas menores, reaccionando a cambios de breakpoint. El CSS anterior ocultaba el summary en desktop y forzaba el display del hijo; el atributo `open` elimina la dependencia de ese override para que el contenido de `details` sea visible. Commits: `719041467c6502a079fc85c29beb279715e37bbd` (HTML) y `45cb76367eef6341ecddcbc4f9690bce919faccc` (JS).
+- **Escapes dobles:** búsqueda literal de secuencias de doble barra invertida seguidas de `n`, `s` o `d` sin coincidencias en `app.js`, `functions/api/contact.js` y `functions/api/live.js`. No se requirió corrección.
+- **Noindex:** agregado `<meta name="robots" content="noindex, nofollow">` en `instituto-preview.html` y `roster-02-moriartys.html`. `bitacora-preview.html` queda pendiente de decisión editorial del responsable: confirmar si debe permanecer fuera de buscadores o si se desea publicar/indexar como `bitacora.html`. Commits: `1bd0da1bc15c156822481c459f9bdb1d015e0d63` y `f4fa9de4f506da8770635e0568f9c76395881981`.
+- **Colector — evidencia observable:** en `main` se encontraron ocho commits consecutivos de actualización automática de `data.json` y `platform-stats.json`, desde `2026-11-13T23:02:12Z` hasta `2026-11-14T04:27:30Z`. El `data.json` de `main` registra `updated_at=2026-11-14T04:27:29Z`. Esto confirma que hubo recolecciones y persistencia posteriores a los fallos informados, pero no reemplaza la inspección del historial de Actions ni demuestra por sí solo que todas las ejecuciones programadas terminaran en verde.
+- **Causa del fallo de credencial:** no se pudo recuperar el historial de las cuatro ejecuciones fallidas ni sus logs con las acciones de GitHub disponibles en esta sesión. Por lo tanto no se atribuye una causa concreta (secreto ausente, nombre incorrecto, alcance u otra) ni se afirma cómo se corrigió. La rama `main` tiene el workflow activo sin un paso de preflight de secretos; `auditoria-ux` agrega validación explícita de presencia de `TWITCH_CLIENT_ID` y `TWITCH_CLIENT_SECRET` sin imprimir valores. La revisión de Secrets sigue pendiente de confirmación segura en Settings → Secrets and variables → Actions.
+- **Validación de código:** el último workflow de validación consultable antes de estos cambios fue #43553044233, exitoso sobre el commit `66dfda6ddcc44bd1ccaf1e96af4cb3762847874a`. No se obtuvo un run asociado al nuevo HEAD; la validación de los cambios recién agregados queda pendiente de un CI del HEAD final.
+- **QA de navegador:** pendiente confirmar 1440 px, 768 px y 390 px; probar `#a"b` y `#%E0%A4%A`; probar los dos caminos de ejecución (preview `*.pages.dev` y servidor local con `HAS_API=false`). No se declara QA visual/funcional completada.
+- **Imágenes y Lighthouse:** `scripts/add_image_dimensions.py` no está presente en la rama consultada y no se localizó como archivo adjunto/material de trabajo accesible; no se ejecutó ni se inventaron dimensiones. Lighthouse no se ejecutó: faltan navegador/runner y acceso de medición a los dos dominios. Queda pendiente reportar medianas reales de tres corridas por entorno.
+- **Pendientes restantes:** decisión sobre indexación de Bitácora; historial de Actions y causa documentada del fallo de credenciales; revisión segura de Secrets; CI del HEAD final; QA en los tres anchos y hashes inválidos; dimensiones de imágenes; Lighthouse x3 en producción y preview; actualización final del PR con run del HEAD cuando exista. No se fusiona sin aprobación explícita.
+
+---
+
+## 2026-11-14 — Pulido de Estadísticas y expediente MORIARTYS (QA de capturas)
+
+- **Alcance:** correcciones puntuales en la rama `auditoria-ux`, a partir de las capturas aportadas para Estadísticas, el directorio multiplataforma y el expediente MORIARTYS. No se modificó `main`, no se fusionó el PR #46 y no se cambió el hosting.
+- **Timestamps multiplataforma:** las marcas de captura de YouTube y Kick dejan de imprimirse como ISO UTC crudo. Se convierten con el helper compartido `formatArgentinaDateTime` y la zona `America/Argentina/Buenos_Aires`, manteniendo la fuente y fecha/hora de captura de cada conjunto. Esto evita mezclar visualmente una hora local con otra expresada en UTC.
+- **Estados de espectadores:** las tarjetas Twitch distinguen ahora tres situaciones: sin transmisión activa, espectadores actuales disponibles y espectadores no disponibles durante una transmisión. Si la captura está vencida, se mantiene la advertencia de estado sin confirmación.
+- **Expediente MORIARTYS:** el resumen del día más activo especifica que el número entre paréntesis representa muestras en directo, no transmisiones detectadas. Se conserva la separación entre muestras, transmisiones y registros totales.
+- **Datos no alterados:** no se editaron manualmente `data.json` ni `platform-stats.json`. En la rama consultada ambos registran capturas casi simultáneas: Twitch `2026-11-13T21:22:55Z` y plataformas `2026-11-13T21:22:56Z`. La captura aportada muestra una versión/lectura distinta; la diferencia observada no justifica modificar timestamps históricos sin verificar el origen del colector.
+- **Pendiente de QA:** revisar en preview que las fechas se presenten en hora argentina en Estadísticas y expedientes, confirmar los estados de espectadores con un canal en directo y otro offline, y comprobar la composición responsive. La aprobación visual no se declara hasta esa revisión renderizada.
+- **Commits de código:** `5e7e721762cad40739e4ff8c1352596bfed80f4e` (timestamps de plataformas y estados de espectadores) y `66dfda6ddcc44bd1ccaf1e96af4cb3762847874a` (rotulación de actividad MORIARTYS). Rama: `auditoria-ux`.
+- **Validación automática:** workflow [43553044233](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43553044233), ejecución 425, finalizó con **success** sobre el commit `66dfda6ddcc44bd1ccaf1e96af4cb3762847874a`. Pasaron sintaxis JavaScript, Pages Functions, JSON, rutas/recursos, anclas, formularios y auditoría estática de accesibilidad. El registro documental posterior no modifica código.
+- **Despliegue:** no se declara publicación ni cambio en producción. GitHub Pages continúa siendo producción; Cloudflare Pages se mantiene como entorno de preview.
+
+---
+
+## 2026-11-13 · Red de seguridad GitHub Pages y colector
+
+- **Fecha y responsable:** 13/11/2026 · Asistencia técnica.
+- **Objetivo:** mantener GitHub Pages como producción y tratar Cloudflare Pages únicamente como entorno de previews; reforzar el colector de estadísticas en la rama `auditoria-ux`.
+- **Archivos modificados:** `app.js`, `.github/workflows/actualizar-stats.yml`, `INFORMES.md`.
+- **Implementado:**
+  - Se añadió `HAS_API = /\.pages\.dev$/.test(location.hostname)`. En GitHub Pages, los formularios abren directamente el `mailto:` construido con `buildMailto()`, sin solicitar `/api/contact`.
+  - En GitHub Pages, EN VIVO recupera directamente `data.json`; la ruta `/api/live` queda reservada a previews `*.pages.dev`.
+  - El workflow verifica que `TWITCH_CLIENT_ID` y `TWITCH_CLIENT_SECRET` estén presentes antes de invocar Twitch. Los errores identifican el secreto ausente sin imprimir valores.
+  - Se añadió `python scripts/validate_site.py` antes del commit de datos.
+  - El workflow ahora tiene `issues: write` y abre una incidencia con enlace a la ejecución si falla, evitando duplicar una incidencia abierta para el mismo run.
+- **Validaciones y resultados:**
+  - GitHub Actions [run 43478130620](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43478130620), asociado al commit `c15edeb07de672bd63728a2829a649e9923b18e3`: **success**. `scripts/validate_site.py`: `Roster: 8 perfiles revisados`; `Referencias locales comprobadas: 37`; `Validación estática superada`. `scripts/check_anchors.py`: `Anclas locales comprobadas: 18`; `Comprobación de anclas superada`.
+  - Smoke test HTTP solicitado para GitHub Pages, Cloudflare Pages y `/api/live`: no se obtuvieron códigos HTTP. Las solicitudes de comprobación desde este entorno devolvieron error de acceso de la herramienta y el entorno de ejecución no tiene salida DNS; no se infiere un 200/404 ni se declara el endpoint probado.
+  - No se modificó `main`, ningún secreto ni la configuración de hosting.
+- **Pendientes / riesgos:**
+  - Confirmar que los secretos `TWITCH_CLIENT_ID` y `TWITCH_CLIENT_SECRET` estén configurados en GitHub → Settings → Secrets and variables → Actions. El workflow los lee desde `secrets.*`, no desde `vars.*`; no se inspeccionaron ni modificaron sus valores.
+  - La producción continúa siendo GitHub Pages. Cloudflare Pages solo genera previews; no se configura como producción.
+  - Revisar el límite/cuota de builds de Cloudflare Pages y el impacto en previews; no se cambia el plan ni la configuración.
+  - El CI de validación de la rama terminó correctamente. Falta una comprobación HTTP desde navegador/terminal con conectividad externa.
+- **Commit:** `c15edeb07de672bd63728a2829a649e9923b18e3` — [ver commit](https://github.com/losmoriartys-cmd/legion-multiversal/commit/c15edeb07de672bd63728a2829a649e9923b18e3). Rama: `auditoria-ux`.
+- **Despliegue:** no aplica; cambios confinados a `auditoria-ux`. No se publicó en producción.
+
+---
+## 2026-11-13 · Auditoría UX y robustez del sitio
+
+- **Fecha y responsable:** 13/11/2026 · Asistencia técnica.
+- **Objetivo:** implementar la auditoría UX solicitada en la rama `auditoria-ux`, con cambios acotados y sin mover, borrar ni renombrar imágenes de la raíz.
+- **Archivos modificados:** `index.html`, `app.js`, `styles.css`, `functions/api/contact.js`, `functions/api/live.js`, `scripts/check_anchors.py`, `.github/workflows/validar-sitio.yml`, `bitacora-preview.html`, `_headers`, `README.md`, `CLOUDFLARE_PAGES.md` e `INFORMES.md`.
+- **Implementado:**
+  - Los dos formularios de reclutamiento y contacto comercial envían a `/api/contact`; la función usa Resend, honeypot, allowlist de campos, validación de correo y límites de longitud. El cliente ofrece fallback `mailto:` y botón para copiar el email.
+  - Se incorporó `fetchJSON` con timeout y reintentos; skeletons, estados de error con reintento y estados vacíos para roster, estadísticas, EN VIVO, mapa y misiones. Los filtros del roster se agrupan en `<details>` en móvil y el empty state permite limpiar filtros.
+  - EN VIVO consulta Twitch Helix mediante `/api/live`, con caché de 60 segundos y fallback a `data.json` que muestra fuente y antigüedad. Se agregó CTA en el hero y actualización de la navegación.
+  - El botón del expediente resuelve el canal disponible, usa `rel=noopener` y queda deshabilitado cuando no hay canal.
+  - Se añadieron anclas semánticas para los capítulos, conservando los IDs `#chapter-N`; se actualizaron enlaces de Bitácora y se incorporó `scripts/check_anchors.py` al workflow.
+  - Las imágenes del HTML principal usan carga diferida salvo la imagen hero; se fijó prioridad alta para esa imagen, se completaron alt de los carnés del expediente BarFender y se añadió fallback para imágenes externas. Se declararon dimensiones para avatares Twitch (300×300) y cabeceras Steam (460×215).
+  - Se añadió `_headers` con caché para imágenes y JSON y `X-Robots-Tag: noindex` para archivos `*-preview.html`.
+  - No se movió, borró ni renombró ningún recurso de imagen de la raíz. Se preparó una propuesta de nombres y dependencias para revisión antes de cualquier operación.
+- **Validaciones y resultados:**
+  - GitHub Actions: [run 43382504880](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43382504880), commit `29c87bbd6b312bb3834251a1df570e52abcd57bf`: **success**.
+  - `node --check app.js`: correcto.
+  - `node --input-type=module --check` para ambas Pages Functions: correcto.
+  - Validación JSON de los archivos de raíz: correcta.
+  - `scripts/validate_site.py`: `Roster: 8 perfiles revisados.`; `Referencias locales comprobadas: 37`; `Validación estática superada.`
+  - `scripts/check_anchors.py`: `Anclas locales comprobadas: 18`; `Comprobación de anclas superada.`
+  - No se realizó revisión visual manual en navegador ni prueba end-to-end de Resend/Helix: requieren entorno Cloudflare y credenciales configuradas.
+- **Pendientes / riesgos:**
+  - Cloudflare Pages aún no está conectado como publicación. Las Pages Functions y `_headers` no se ejecutan en GitHub Pages.
+  - Configurar `RESEND_API_KEY`, `RESEND_FROM` validado, `CONTACT_TO` opcional, `TWITCH_CLIENT_ID` y `TWITCH_CLIENT_SECRET` en Cloudflare Pages; después probar envío real y consulta Helix.
+  - Las dimensiones intrínsecas de las imágenes locales de la raíz no se han añadido porque no se pudo verificar su metadata binaria. No se inventaron proporciones; completar esos atributos después de medir los archivos.
+  - Pendiente revisión visual en escritorio y móvil, y validación funcional sobre el despliegue de Pages.
+- **Commit:** implementación validada `29c87bbd6b312bb3834251a1df570e52abcd57bf` — [ver commit](https://github.com/losmoriartys-cmd/legion-multiversal/commit/29c87bbd6b312bb3834251a1df570e52abcd57bf). Rama: `auditoria-ux`.
+- **Despliegue:** pendiente. No se modificó `main` ni se declaró un despliegue de producción; GitHub Pages continúa siendo la referencia.
+
+---
+
 ## 2026-11-12 — MORIARTYS: Bitácora integral en formato Archivo Central
 
 - **Objetivo:** unificar toda la información disponible del streamer MORIARTYS en un único expediente-libro. ARCHIVO CENTRAL deja de ser una sección aislada y pasa a ser la mecánica de lectura de la Bitácora completa.
@@ -2769,3 +2867,329 @@ Se conserva el compromiso de avanzar una mejora por etapa, con validación y rev
 - Se detectó un enlace dinámico del modal de perfiles (`#modal-twitch-btn`) con `target="_blank"` sin `rel`. Se agrega `rel="noopener noreferrer"` para aislar la nueva pestaña y evitar acceso a `window.opener`.
 - Alcance: `index.html`, `INFORMES.md`. Sin cambios de contenido, destinos ni comportamiento del enlace.
 - Integración: PR #45 fusionado mediante squash en `1eb236fdef67e5582488c2a3787401128060ba4e`. La validación automática post-merge finalizó correctamente (run 43378868338) y el build/deploy de GitHub Pages también (run 43378867510). La revisión de teclado y lector de pantalla sigue pendiente; no se declara auditoría accesible completa.
+
+
+## 2026-11-13 — Ajustes de robustez: Helix, contacto y caché
+
+- **Alcance:** `app.js`, `functions/api/contact.js`, `functions/api/live.js`, `_headers` e `INFORMES.md`.
+- **En Vivo:** se agrega actualización del directorio cada 120 segundos en el cliente; el endpoint mantiene caché de 60 segundos. Se limitan a 8 segundos las solicitudes de OAuth, roster y Twitch Helix para evitar esperas indefinidas.
+- **Contacto:** se corrige la expresión regular de correo para validar espacios y punto de dominio como corresponde. Se limita el cuerpo de la solicitud a 20.000 caracteres antes de parsear JSON; se conserva honeypot, allowlist de campos, límite individual y fallback mailto.
+- **Caché de imágenes:** se elimina `immutable` para imágenes con nombres no versionados. Se conserva caché de 24 horas con revalidación; JSON y API mantienen sus políticas separadas.
+- **Validaciones:** pendientes de ejecución automática sobre este commit. No se declara todavía CI exitoso, despliegue ni QA visual. La revisión manual en escritorio/móvil sigue pendiente.
+- **Datos y recursos:** sin cambios en roster, estadísticas, imágenes, textos editoriales ni orden de capítulos.
+
+
+## 2026-11-13 — Auditoría de cargas, CTA multiplataforma y accesibilidad
+
+- **Cargas directas:** se sustituyen las llamadas directas restantes a `fetch()` para `twitchmetrics-data.json`, `sullygnome-data.json`, `creator-records.json` y `news-data.json` por el helper común `fetchJSON`, con timeout y reintentos. El feed de novedades muestra estado de error con acción de reintento.
+- **Reintentos:** se amplía el despachador para reconocer noticias, registros de creadores y fuentes de métricas, además de los recursos principales.
+- **Expedientes:** se incorporan CTA para todas las plataformas declaradas con URL HTTPS válida (Twitch, YouTube, Instagram y Cafecito), sin inventar ni sustituir cuentas. La ficha comercial ya mostraba la presencia digital; ahora también está disponible en la cabecera del expediente individual.
+- **Accesibilidad:** se agrega foco visible universal para controles y enlaces, se conserva el soporte de movimiento reducido y se agrega decodificación asíncrona a las ilustraciones dinámicas del roster y expediente.
+- **Rendimiento:** la auditoría estática detectó 22 imágenes HTML sin atributos intrínsecos `width`/`height` sobre 40 imágenes de las páginas publicadas. No se asignan medidas ficticias; se agrega una advertencia automatizada para resolverlo con dimensiones reales y medición CLS.
+- **Validación automática:** el workflow del commit 16eca075d5374055594e97ae36ca17989d390f89 finalizó correctamente (run [43387674529](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43387674529)), incluyendo la auditoría estática. No se declara prueba manual de teclado/lector de pantalla, medición Lighthouse, CLS real ni revisión visual.
+- **Alcance:** `app.js`, `styles.css`, `.github/workflows/validar-sitio.yml`, `scripts/audit_accessibility.py` e `INFORMES.md`. Sin cambios de roster, cuentas, imágenes, métricas, orden de capítulos ni `main`.
+
+
+## 2026-11-13 — Corrección de vigencia: En Vivo y métricas por canal
+
+- **Base:** PR #46, rama `auditoria-ux`; no se altera `main`. Se revisaron la ruta Helix directa, el respaldo `data.json`, el directorio del capítulo 09, las tarjetas/tablas de Estadísticas y los expedientes individuales.
+- **Defecto localizado:** el directorio calculaba la vigencia pero seguía renderizando la lista completa de canales con `live=true` aun cuando la captura estuviera vencida. Además, el cálculo con `Math.max(freshnessMinutes, 120)` anulaba el umbral breve de la consulta Helix. En Estadísticas y algunas fichas seguían mostrándose espectadores/categoría actuales con una captura demorada.
+- **Corrección:** el directorio solo habilita reproductor y etiqueta «EN DIRECTO» cuando la lectura pasa el umbral correspondiente; con captura demorada conserva el último estado como referencia y ofrece acceso externo al canal. La consulta Helix directa usa una ventana de 3 minutos, compatible con el caché de 60 segundos del endpoint; el respaldo `data.json` mantiene el criterio histórico basado en la cadencia del colector. En fichas, tarjetas y tablas, los espectadores/categoría actuales quedan ocultos al vencer la captura y el estado pasa a «ÚLTIMA LECTURA»/«CAPTURA DEMORADA».
+- **Metodología:** se unifica el fallback del intervalo Twitch en 55 minutos, acorde con `data.json` y `update_stats.py`. No se alteran snapshots, promedios históricos, roles, enlaces ni datos de los creadores.
+- **Entorno:** la preview Cloudflare de `auditoria-ux` devuelve HTTP 503 en `/api/live`. Según `functions/api/live.js`, ese estado corresponde a que falta `TWITCH_CLIENT_ID` o `TWITCH_CLIENT_SECRET` en las variables del entorno; es una configuración externa que no se modifica desde el repositorio. El cliente conserva el respaldo a `data.json`.
+- **Archivos:** `app.js`, `index.html` (versión de caché) e `INFORMES.md`.
+- **Validación automática:** el workflow «Validar código y datos del sitio» finalizó correctamente en el commit 5f72af2ceef5be3fcea9be9195c82dede064e396 (run [43385958912](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43385958912)): sintaxis JavaScript y Pages Functions, JSON, rutas/recursos, anclas y auditoría estática de accesibilidad, todos aprobados. Cloudflare Pages confirmó «Deploy successful» para la preview [b399c4fd](https://b399c4fd.legion-multiversal.pages.dev); preview de rama: https://auditoria-ux.legion-multiversal.pages.dev.
+- **Pendiente externo:** /api/live en la preview devolvió HTTP 503. El código reserva ese estado a la ausencia de TWITCH_CLIENT_ID o TWITCH_CLIENT_SECRET en el entorno; no se modificaron secretos ni variables. Se conserva el fallback a data.json.
+- **QA visual:** la comprobación renderizada de escritorio/móvil continúa pendiente. Los checks estáticos y el despliegue de preview no prueban composición visual, navegación táctil ni funcionamiento real del reproductor. No se declara aprobación ni se integra el PR hasta completar esa revisión.
+
+
+## 2026-11-13 — ORATORIS: alinear vistas del archivo con YouTube Data API
+
+- **Hallazgo:** el archivo editorial de seis videos mostraba las vistas transcritas al incorporarse el listado. Para «Dopamina, motivación y adicción: Qué es y cómo funciona» conservaba 47, mientras que YouTube Data API v3 registra 48 en la captura del 13/11/2026. Los otros cinco títulos del listado coinciden con sus recuentos consultados por la API.
+- **Corrección de presentación:** el render del expediente coteja por título cada producción editorial con los videos recientes que devuelve la API. Si hay coincidencia verificable, usa el recuento y enlace oficiales de esa captura; si no, conserva el número aportado, pero lo rotula como referencia compartida sin fecha. La tabla explica la procedencia de cada cifra.
+- **Integridad:** no se modifica creator-records.json ni se reemplazan los valores históricos aportados por el equipo. Las métricas acumuladas del canal siguen procediendo de platform-stats.json (captura 13/11/2026); suscriptores, vistas totales y videos publicados no se mezclan con Twitch.
+- **Archivos:** app.js, index.html (versión de caché) e INFORMES.md. No se cambian cuentas, enlaces del perfil, roles, historia ni datos fuente.
+- **Validación posterior:** el workflow de sitio finalizó correctamente en el commit 16eca075d5374055594e97ae36ca17989d390f89 (run [43387674529](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43387674529)); Cloudflare confirmó el despliegue de preview [384fae9f](https://384fae9f.legion-multiversal.pages.dev). La revisión visual de escritorio/móvil sigue pendiente.
+
+
+## 2026-11-13 — Formularios: formato de correo y validación de servidor
+
+- **Hallazgo:** el formato del cuerpo del correo usaba separadores doblemente escapados en el cliente y en la Pages Function; eso podía dejar los caracteres literales \n en el mensaje en vez de separar los campos en líneas. La validación de campos obligatorios existía en HTML, pero no se repetía en el servidor.
+- **Corrección:** los cuerpos de correo del fallback mailto y de las vistas de resumen usan saltos de línea reales. La función /api/contact ahora reconoce únicamente los dos asuntos de formulario existentes, valida del lado servidor los campos obligatorios de incorporación y propuesta comercial, verifica el URL del canal y limita el tiempo de espera de Resend a 10 segundos. Se conserva el honeypot, el límite de tamaño/campo y el fallback de correo.
+- **Pendiente de protección contra abuso:** el formulario tiene honeypot, validación de campos y límites de tamaño, pero el repositorio no implementa un limitador persistente de solicitudes. Antes de habilitarlo ampliamente, configurar una regla de rate limiting/WAF para /api/contact en Cloudflare o una solución equivalente.
+- **Integridad:** no se envía ningún mensaje real durante esta revisión. El comportamiento POST queda pendiente de una prueba autorizada después de configurar Resend en Cloudflare; un GET a /api/contact devuelve 405 porque el endpoint solo acepta POST.
+- **Archivos:** app.js, functions/api/contact.js e INFORMES.md. No se modifican el destinatario predeterminado, credenciales ni datos de formularios.
+- **Validación posterior:** el mismo workflow en el commit 16eca075d5374055594e97ae36ca17989d390f89 finalizó correctamente (run [43387674529](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43387674529)) y Cloudflare confirmó la preview [384fae9f](https://384fae9f.legion-multiversal.pages.dev). GET /api/contact devuelve 405, esperado porque la función solo acepta POST; no se probó POST ni se envió correo. La revisión visual de escritorio/móvil continúa pendiente.
+
+
+## 2026-11-13 — Robustez de navegación, formularios y En Vivo (PR #46)
+
+- **Base:** rama `auditoria-ux`; PR #46 abierto y en Draft. No se modificó `main`.
+- **Navegación:** el lector de hash ahora captura secuencias percent-encoded inválidas y busca anclas semánticas por atributo exacto, sin interpolar el hash en un selector CSS. Los alias `chapter-N` siguen admitidos.
+- **Formularios:** se incorpora correo obligatorio al formulario de ingreso y se alinea la validación del servidor. El honeypot cambia a `contact_hp`, excluido del contenido y de la allowlist funcional. El endpoint exige `Origin` coincidente con el origen de Pages, fija el asunto según el tipo de formulario y mantiene límites de cuerpo/campo y timeout de Resend. Los errores de validación 4xx se muestran al usuario en lugar de ocultarse detrás del fallback; el mailto codifica explícitamente asunto/cuerpo y limita el cuerpo a 1.500 caracteres.
+- **En Vivo:** una actualización de estadísticas de respaldo no puede sobrescribir una lectura Helix más reciente en el mismo ciclo de página. Si el roster no contiene canales Twitch, el endpoint responde una lista vacía cacheable sin pedir token ni consultar Helix.
+- **Archivos:** `app.js`, `index.html`, `functions/api/contact.js`, `functions/api/live.js`, `INFORMES.md`.
+- **Validación:** workflow [43388343377](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43388343377) finalizado correctamente sobre el head `cb9ef731f363910167d1c3be41d3389b0bf52d3a`: sintaxis JavaScript y Pages Functions, JSON, rutas/recursos, anclas, consistencia de campos de formularios y auditoría estática de accesibilidad, todos aprobados. No se declara prueba end-to-end de Resend/Twitch ni despliegue de Cloudflare.
+- **Pendientes / riesgos:** comprobar el comportamiento del formulario desde Preview y Production; la verificación de Origin requiere que el navegador envíe el encabezado estándar en POST same-origin. Continúan pendientes rate limiting/Turnstile (requieren configuración externa), pruebas de Cache API en Pages, QA visual de filtros roster, teclado/lector de pantalla y medición Lighthouse.
+- **Despliegue:** pendiente de verificación.
+
+
+## 2026-11-13 — Controles preventivos de formularios y prioridad de marca
+
+- Se incorpora `scripts/check_form_fields.py` y se integra al workflow para comparar los nombres de campos de ambos formularios `data-contact-form` con la allowlist de `functions/api/contact.js`; también verifica honeypot y correo del formulario de incorporación.
+- Los dos emblemas de marca visibles en la cabecera/portada dejan de usar carga diferida, evitando que elementos iniciales dependan de lazy loading. No se asigna `fetchpriority=high` sin medición que confirme que sean el recurso LCP.
+- Validación automática: el workflow [43388343377](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43388343377) finalizó correctamente sobre `cb9ef731f363910167d1c3be41d3389b0bf52d3a`, incluyendo la prueba de consistencia de formularios y la auditoría estática de accesibilidad.
+
+
+## 2026-11-13 — Ajuste del auditor para honeypot de contacto
+
+- **Fallo de CI investigado:** sintaxis, funciones Pages, JSON, recursos y anclas pasaron; la auditoría de accesibilidad falló por los dos campos `contact_hp`, uno por formulario. No son controles interactivos para visitantes: viven dentro de `aria-hidden="true"`, tienen `tabindex="-1"` y se excluyen del cuerpo enviado.
+- **Corrección:** `scripts/audit_accessibility.py` reconoce tanto el nombre histórico `website` como el actual `contact_hp` únicamente cuando el campo tiene `tabindex="-1"`. Los campos visibles siguen requiriendo `label` asociado o nombre ARIA. No se desactiva la auditoría ni se omiten los demás controles.
+- **Validación:** pendiente del nuevo workflow; el commit previo falló exclusivamente por esta discrepancia entre el honeypot y la excepción del auditor.
+
+
+## 2026-11-13 — Acciones del Roster sin handlers inline
+
+- Se reemplazan los `onclick` generados en el mapa multiversal y los controles de expedientes por atributos `data-*` y delegación de eventos en el documento. Se conserva la misma acción y navegación; no se cambia el contenido ni los perfiles.
+- **Validación:** el workflow [43388343377](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43388343377) finalizó correctamente sobre `cb9ef731f363910167d1c3be41d3389b0bf52d3a`; la sintaxis JavaScript y las Pages Functions, rutas, anclas, datos, campos de formularios y accesibilidad estática pasaron.
+
+
+## 2026-11-13 — Estado consolidado de auditoría (PR #46)
+
+- **Rama y protección:** PR #46 `auditoria-ux` permanece abierto como Draft. No se fusionó; `main` conserva la versión pública actual.
+- **Cabeza del PR:** commit documental `e6f0d10f27c5b2b0c62084217dc77bae8d0862e9`. El último commit funcional revisado es `cb9ef731f363910167d1c3be41d3389b0bf52d3a` y su workflow [43388343377](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43388343377) terminó correctamente. Pasaron sintaxis JavaScript y Pages Functions, JSON, validación de rutas/recursos, anclas, consistencia de campos de formularios y auditoría estática de accesibilidad.
+- **Cloudflare preview:** el head documental `e6f0d10` tiene despliegue exitoso: https://f563a99a.legion-multiversal.pages.dev y preview de rama https://auditoria-ux.legion-multiversal.pages.dev. Se comprobó que sirven la portada con canonical `https://legion-multiversal.pages.dev/`.
+- **Pages Functions:** `GET /api/live` continúa devolviendo HTTP 503 en Preview; el código informa credenciales Twitch Helix ausentes. Configurar `TWITCH_CLIENT_ID` y `TWITCH_CLIENT_SECRET` en Cloudflare Preview/Production y volver a probar. `GET /api/contact` devuelve HTTP 405, esperado para un endpoint que solo admite POST; no se envió un formulario ni correo de prueba. Falta probar POST same-origin con Resend configurado.
+- **Trabajo funcional ya incorporado a la rama:** vigencia coherente de estados Live y espectadores; prioridad a la lectura Helix frente al respaldo; atribución de vistas de Oratoris a YouTube Data API; corrección de saltos de línea y validación de formularios en servidor; honeypot reconocido por el auditor; enlaces/CTA multiplataforma y handlers delegados del Roster.
+- **Pendientes reales para cerrar:** (1) QA visual en escritorio, tablet y móvil, incluidos filtros y cambio entre expedientes; (2) pruebas manuales de teclado y lector de pantalla; (3) Lighthouse y mediciones reales de LCP/CLS, revisando 22 de 40 imágenes HTML que no declaran dimensiones intrínsecas antes de asignarlas; (4) configurar rate limiting/WAF o Turnstile para `/api/contact`; (5) verificar Cache API de Pages y la precedencia Helix/respaldo en ejecución; (6) confirmar variables y rama de producción en Cloudflare y probar ambos POST/GET en sus métodos adecuados; (7) revisar la posible imagen de formación señalada en la auditoría histórica antes de seguir presentándola como roster actual.
+- **Criterio de cierre:** no sacar el PR de Draft ni fusionarlo hasta completar QA visual y pruebas funcionales de las funciones que dependan de variables externas. No presentar la preview como producción ni afirmar que Resend/Twitch están operativos mientras no pasen las pruebas.
+
+## 2026-11-13 — Corrección horaria, cobertura estadística y En Vivo (PR #46)
+
+- **Rama y salvaguardas:** trabajo realizado en `auditoria-ux`. PR #46 permanece abierto y en Draft; no se modifica `main` ni se fusiona el PR.
+- **Conversión horaria:** se centraliza el formato de fechas/horas del sitio y del expediente MORIARTYS con la zona explícita `America/Argentina/Buenos_Aires`. La marca `2026-11-13T21:22:55Z` se presenta como 13/11/2026 a las 18:22:55 en Argentina, evitando diferencias entre el directorio, Estadísticas y expedientes.
+- **Cobertura estadística:** Capítulo 04 distingue la ventana configurada de hasta 30 días del intervalo realmente observado. Se informa el rango temporal de las muestras disponibles y se aclara que «consulta completa» significa que se resolvieron los canales, no que todos hayan agregado una muestra nueva.
+- **Unidades de actividad:** se separan registros totales, muestras en directo, transmisiones detectadas y horas en directo observadas. Las horas se identifican como estimación entre muestras consecutivas válidas, no como duración oficial completa de emisiones. Se incorpora este criterio al expediente MORIARTYS.
+- **En Vivo:** el directorio presenta la marca temporal de la última lectura/captura, distingue estados EN DIRECTO, OFFLINE y CAPTURA DEMORADA y no promociona como activa una transmisión cuya lectura venció. Se aclara la cadencia de actualización del directorio (2 minutos), la caché de API (60 segundos) y la cadencia objetivo del colector histórico (55 minutos).
+- **Reproductor:** se mantiene la selección de canal con el parámetro `parent` correspondiente al hostname, se explicitan permisos del iframe de Twitch y se elimina el ancho mínimo de 400 px que provocaba desbordamiento en pantallas estrechas. Se añade una señal visual diferenciada para tarjetas con captura demorada.
+- **Clips:** el encabezado del expediente MORIARTYS cambia a «Momentos que definen el canal» y aclara que son clips de transmisiones anteriores.
+- **Datos de preview:** `data.json` y `platform-stats.json` de la rama se sincronizaron con las versiones actuales de `main` para evitar que la preview mostrara una captura anterior (247 registros) frente a la captura vigente (249). No se editaron los datos de origen manualmente.
+- **Validación automática:** workflow [43513991818](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43513991818) finalizó correctamente sobre el commit de código `5278be414e4759f1ac47878b544eb2018c6c459e`. Los commits posteriores solo sincronizaron archivos de datos idénticos a los de `main`; no cambiaron la lógica validada.
+- **QA visual/funcional pendiente:** no se pudo acceder al hostname de preview desde el entorno de verificación para inspeccionar el render de escritorio/móvil ni comprobar HTTP de `/api/live`. El reproductor solo podrá probarse funcionalmente cuando alguno de los canales activos esté transmitiendo y el endpoint/entorno de preview responda correctamente. No se declara aprobación visual ni reproducción real comprobada.
+
+### Actualización de cierre de esta intervención
+
+- Se sincronizó la rama con el HEAD actual de `main` mediante un commit de merge en `auditoria-ux`; `main` no se modificó. El PR ya no está detrás de la rama base y los archivos automáticos de estadísticas coinciden con la versión actual de `main`.
+- Validación del commit de sincronización `d3150795344552851b8230d41877e7ebd20a07cb`: workflow [43514317294](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43514317294), resultado **success**.
+- Comparación final: rama `auditoria-ux` 70 commits por delante y 0 por detrás de `main`; 16 archivos de cambios propios en el PR. El PR sigue abierto, Draft y sin fusionar.
+
+- **Revalidación tras precisar segundos locales:** la última lectura se muestra con fecha, hora y segundos en Argentina (por ejemplo, `2026-11-13T21:22:55Z` → `13 nov 2026, 18:22:55`). El head final de código `98e5e3a8968f5e2c4c7c4a134d714b54e18b3671` pasó los workflows [43514477313](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43514477313) y [43514472036](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43514472036): sintaxis JS y Pages Functions, JSON, rutas/recursos, anclas, formularios y auditoría estática de accesibilidad, todo correcto.
+
+
+## 2026-11-14 — Auditoría de rendimiento, diagnóstico y QA de navegador
+
+- **Rama y límites:** trabajo en `auditoria-ux`; PR #46 sigue abierto como Draft y sin fusionar. Producción sigue siendo GitHub Pages. No se modificó `main` ni se inició un despliegue de producción.
+- **Lighthouse de referencia (3 corridas por entorno):** ejecución [43558434105](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43558434105). Medianas producción / preview: Performance 96/96; Accessibility 100/100; Best Practices 96/96; SEO 100/61; LCP 1,69/1,97 s; CLS 0,079/0,079; TBT 14/28 ms; peso 4179/3690 KB. Son resultados de Lighthouse, no una evaluación de conversión o jerarquía editorial.
+- **SEO preview:** `bitacora-preview.html` ya contiene `<meta name="robots" content="noindex, nofollow">`; `_headers` incluye `X-Robots-Tag: noindex, nofollow` para `/*-preview.html`. Se agregó comprobación HTTP de la cabecera para la raíz de la preview y diagnóstico de auditorías fallidas con `scripts/lh_failures.py`. La causa exacta del SEO 61 y la cabecera efectiva de `*.pages.dev` quedan pendientes de leer en los logs de la nueva ejecución.
+- **QA de navegador — hallazgo y corrección:** Playwright en preview detectó `ReferenceError: loadLiveDirectory is not defined` en los 3 viewports y 5 hashes; el resultado inicial fue 27/42. Se agregó `loadLiveDirectory()` en `app.js`: consulta `/api/live` solo en Pages preview, adapta `game_name/viewer_count` al renderizador y conserva `data.json` como respaldo. Commit de la corrección: `f26596c33e981201915f0150fd5a2798812c46ca`.
+- **QA adicional:** pasaron las comprobaciones de ausencia de scroll horizontal, CTA `mailto:`, presencia del enlace de respaldo del formulario, navegación por teclado con Tab y estado responsive del disclosure del roster. Se extendió el smoke test para simular un 503 de `/api/contact` y comprobar el fallback de correo de un clic; la repetición está pendiente. El lector de pantalla no se probó manualmente y no se declara aprobado.
+- **Ruta de imagen corregida:** `instituto-preview.html` apuntaba a `banner-grupal.jpg` en la raíz aunque el recurso está en `assets/banner-grupal.jpg`; se corrigió la referencia en la rama.
+- **Dimensiones:** el `--check` anterior registró 46 imágenes, 18 con ambas dimensiones, 23 completables y 5 sin medir. Después se corrigió la ruta del banner; la nueva cuenta debe tomarse del workflow actual. La aplicación de dimensiones sigue siendo temporal en el runner: no se incorporó ni commiteó el diff todavía, a la espera de revisar el patch completo.
+- **Peso y LCP:** se agregó el diagnóstico de auditorías SEO/BP, elemento LCP y diez imágenes de mayor transferencia. La lista y las medianas nuevas están pendientes de que termine la ejecución [43559559083](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43559559083). No se reemplazaron referencias JPG/PNG ni se generaron variantes WebP/AVIF.
+- **CI:** `validar-sitio.yml` pasó en el HEAD `bf9672025e3f96bd7857fcd04bd0188753e72b72`: [run 43559563075](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43559563075). La siguiente aprobación requiere el resultado de la QA repetida, inspección manual con lector de pantalla y revisión del diff de dimensiones.
+
+
+## Seguimiento — 14/11/2026, cierre de dimensiones y repetición QA
+
+- **Corrección del estado de dimensiones:** el diff completo se revisó en los logs del workflow y se incorporó en el commit separado `e5dbcc306ec12861bcfe6073f4dbefee30e9a1d7`. Añade dimensiones medidas a 24 etiquetas `img` en `index.html`, `bitacora-preview.html`, `comic-moriartys.html` e `instituto-preview.html`. También reserva la portada dinámica de `roster-02-moriartys.html` con `width=1280` y `height=1920`, medidas de ese mismo recurso. Por tanto, la anotación anterior que decía que el diff seguía sin commitear quedó superada por este commit.
+- **Imágenes no medibles:** quedan tres casos a verificar en el nuevo `--check`: imagen remota de Minecraft (ratio CSS 16:9), imágenes de directorio generadas dinámicamente en Bitácora (caja CSS 76×92) y retratos dinámicos del Instituto (wrapper CSS de altura fija). No se inventan dimensiones.
+- **QA/Lighthouse de la tanda anterior:** run [43559559083](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43559559083) completó Lighthouse y diagnóstico, pero falló en Playwright porque `page.goto(..., waitUntil: "networkidle")` agotó 30 s en la preview. Se cambió a `domcontentloaded` más una espera corta; se agregó un test de fallback `mailto:` con 503 simulado y captura de estados HTTP de Pages Functions.
+- **Diagnóstico Lighthouse previo:** Performance 71/71; Accessibility 100/100; Best Practices 96/96; SEO 100/61; LCP 14,18/11,62 s; CLS 0,089/0,090; TBT 0/0 ms; peso 4179/3698 KB. Best Practices falla por `errors-in-console` en ambos entornos. La versión previa de `lh_failures.py` no extrajo el nodo LCP por una diferencia de estructura JSON; se corrigió para imprimir nodo o detalle bruto y evidencia de errores de consola.
+- **SEO preview:** fallan `is-crawlable` y `robots-txt`; no se debe quitar `noindex`. La ejecución siguiente captura la cabecera `X-Robots-Tag` y el cuerpo/headers de `robots.txt` para distinguir la protección esperada de una respuesta inválida del host preview.
+- **Ejecución actual:** [43560270922](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43560270922), sobre HEAD `e5dbcc306ec12861bcfe6073f4dbefee30e9a1d7`, pendiente al momento de esta nota. Incluye recuento final, Lighthouse 3× por entorno, diagnóstico corregido y QA Playwright corregida.
+- **CI del HEAD e5db:** `validar-sitio.yml` pasó en [run 43560270902](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43560270902).
+- **Pendiente manual:** prueba real de lector de pantalla; Playwright/Lighthouse no la sustituyen. No se reemplazaron referencias de imágenes ni se generaron variantes WebP/AVIF.
+- **Salvaguardas:** `main` continúa en `b67079b8d6bbde268a967e60ef642987072c6c52`; rama de trabajo `auditoria-ux` en `e5dbcc306ec12861bcfe6073f4dbefee30e9a1d7`. PR #46 sigue Draft, abierto y sin merge; no hubo despliegue de producción.
+
+
+## Cierre de diagnóstico y QA — 14/11/2026
+
+- **Noindex de preview confirmado:** la respuesta de `https://auditoria-ux.legion-multiversal.pages.dev/` contiene `X-Robots-Tag: noindex`. No se elimina ni se modifica esta protección.
+- **robots.txt preview:** `/robots.txt` devuelve el HTML de la portada en lugar de un archivo robots válido; Lighthouse detecta 983 errores de sintaxis. No se modificó para elevar el score de la preview. Una posible corrección independiente sería publicar un `robots.txt` real que permita rastreo, manteniendo el `X-Robots-Tag: noindex`; queda como decisión pendiente.
+- **Lighthouse estable (3 corridas por entorno):** run [43560270922](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43560270922): Performance 95/95, Accessibility 100/100, Best Practices 96/96, SEO 100/61, LCP 1,75/2,02 s, CLS 0,079/0,079, TBT 6/2 ms, peso 4179/3698 KB. La tanda previa de 71 y LCP >11 s fue anómala y no se tomó como regresión.
+- **Best Practices producción:** el fallo `errors-in-console` era una solicitud 404 a `/favicon.ico`. Se añadió en `index.html` un icono apuntando al logo ya existente; la validación de ese cambio está en el run actual.
+- **Best Practices preview:** `/api/live` responde 503. La Function devuelve 503 cuando falta al menos una credencial Twitch en ese entorno. El frontend captura el fallo y mantiene `data.json` como respaldo, sin errores JS. Revisar que `TWITCH_CLIENT_ID` y `TWITCH_CLIENT_SECRET` estén disponibles también en Cloudflare Pages > Preview, no solo en Production.
+- **QA Playwright:** 43/43 comprobaciones OK en 1440×900, 768×1024 y 390×844. Incluye cinco hashes por viewport, ausencia de errores JS, ausencia de scroll horizontal, CTA mailto, fallback de un clic ante 503 simulado, navegación por Tab y estado del disclosure del roster. Capturas y `reports/qa/resultado.json` se publicaron como artifact del run 43560270922.
+- **Dimensiones:** el `--check` final reporta 46 imágenes; 43 con ambas dimensiones, 0 completables y 3 sin medir. Las 3 restantes son remotas/dinámicas y conservan espacio mediante CSS (ratio 16:9, caja 76×92 o wrapper de altura fija). El commit separado `e5dbcc306ec12861bcfe6073f4dbefee30e9a1d7` incorpora las 24 medidas reales y reserva 1280×1920 para la portada dinámica MORIARTYS.
+- **Peso — 6 imágenes cargadas en la navegación inicial (run 43560270922):**
+  1. `legion_logo_final_hybrid.png` — 1.337.475 B.
+  2. `assets/heroes/rod3r1k_dark.webp` — 866.057 B.
+  3. `image_20261107_021355.jpg` — 514.735 B.
+  4. `stream4.jpg` — 475.573 B.
+  5. `image_20261106_124855.jpg` — 413.794 B.
+  6. `assets/carnet/DemuianCarnet.jpg` — 357.879 B.
+  No se generaron ni sustituyeron variantes WebP/AVIF; requiere aprobación.
+- **Elemento LCP:** el JSON de Lighthouse no incluye el audit node esperado en esta versión. Se añadió `scripts/lcp_probe.mjs` con PerformanceObserver para identificar el elemento real en producción y preview; ejecución [43560863457](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43560863457) pendiente al momento de esta nota.
+- **Accesibilidad manual:** la navegación por teclado está cubierta por smoke QA; sigue pendiente probar con un lector de pantalla real. Lighthouse 100 no sustituye esa comprobación.
+- **Estado y salvaguardas:** rama `auditoria-ux`; PR #46 Draft y sin merge; `main` no fue modificado; no se desplegó producción.
+
+
+## Revisión crítica de QA — conciliación y nueva evidencia (14/11/2026)
+
+### Dimensiones y commit e5dbcc3
+- Revisión automatizada de cada archivo contra su padre, eliminando de ambos lados los atributos numéricos `width` y `height`: `bitacora-preview.html`, `comic-moriartys.html`, `index.html`, `instituto-preview.html` y `roster-02-moriartys.html` pasan. No se detectaron diferencias restantes; el commit modifica exclusivamente dimensiones intrínsecas.
+- El diff de GitHub muestra 25 líneas/etiquetas `<img>` modificadas en total (no 24).
+- Recuento final del script en el HEAD auditado: 46 etiquetas `<img>`; 43 ya tienen ambas dimensiones, 0 son completables en el `--check` y 3 quedan sin medir:
+  1. `bitacora-preview.html`: `src="'+esc(image)+'"`, plantilla de una imagen insertada dinámicamente por JavaScript; no es una ruta física que Pillow pueda abrir.
+  2. `index.html`: imagen remota `https://www.minecraft.net/content/dam/minecraftnet/games/minecraft/screenshots/PDP-US-Bundle-Screenshot-2.png`.
+  3. `instituto-preview.html`: `assets/banner-grupal.jpg`, ruta local que no se encontró en el checkout.
+- Las cifras antiguas 18 + 24 + 5 corresponden a una corrida/alcance previo y no son conciliables con el recuento final; se reemplazan por el conteo reproducible de 46/43/0/3.
+
+### LCP: datos individuales de Lighthouse
+- Run [43561161022](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43561161022), reportes JSON individuales:
+  - GitHub Pages: 13,93 s / 15,21 s / 15,02 s; mediana 15,02 s.
+  - Preview: 11,60 s / 12,70 s / 12,82 s; mediana 12,70 s.
+- Las seis corridas repiten un LCP **simulado** elevado. El valor `audits.largest-contentful-paint` (11,60–15,21 s) no equivale al LCP observado en la traza. El objeto `audits.metrics.details.items[0]` contiene ambos: `largestContentfulPaint` (simulado) y `observedLargestContentfulPaint` (observado en navegador).
+- LCP observado en los seis reportes: GitHub Pages 435/239/257 ms (mediana 257 ms); preview 308/334/279 ms (mediana 308 ms). El `PerformanceObserver` independiente midió 580 ms y 248 ms respectivamente. No hay evidencia de un LCP real de 14 s en el navegador sin throttling.
+- El simulador de Lighthouse sí proyecta un escenario móvil lento: `lcpLoadDelay` 2,1–4,7 s y `lcpLoadDuration` 1,2–8,1 s. El nodo LCP es el banner `image_20261106_124855.jpg` (`IMG`, `loading=eager`, `fetchpriority=high`), de 413.391 B. El recurso se descubre en el documento inicial; no está lazy. El peso del banner y la competencia con otros recursos de alta prioridad pueden explicar parte de la proyección. No se cambia el atributo lazy ni la prioridad; la optimización de imágenes queda pendiente de aprobación y deberá medir ambos indicadores por separado.
+
+### Best Practices: detalle real de errors-in-console
+- Producción: `errors-in-console` registra `GET https://losmoriartys-cmd.github.io/favicon.ico` con HTTP 404. En producción actual (main) falta el icono declarado. La rama `auditoria-ux` ya declara un favicon PNG existente en el `<head>`; la corrección aún no está en producción porque no se fusionó.
+- Preview: `errors-in-console` registra dos respuestas HTTP 503 a `/api/live`. El código de Pages Function responde 503 si faltan `TWITCH_CLIENT_ID` o `TWITCH_CLIENT_SECRET`; el frontend mantiene la captura estática de respaldo. No se atribuye a imágenes bloqueadas.
+- La preview tiene además `robots-txt` inválido (984 errores en el JSON de Lighthouse) porque `/robots.txt` estaba devolviendo el HTML de la portada. Producción todavía requiere verificar su Content-Type desde HTTP.
+
+### Producción GitHub Pages: alcance de QA
+- El `app.js` de producción no contiene llamadas a `/api/*`; los formularios del HTML de producción tienen un handler inline que arma `mailto:losmoriartys@gmail.com`. Esto es inspección de código servido, no sustituye la prueba de navegador sobre producción.
+- Se agregó `scripts/qa_production.mjs` para probar en Chromium el host real `github.io`, navegar a EN VIVO, enviar un formulario de prueba sin envío real y registrar solicitudes `/api/*`, errores JS y la ruta mailto.
+- Se agregaron `robots.txt` y `sitemap.xml` a `auditoria-ux`. La sitemap excluye páginas de preview. Aún no están en producción hasta que el PR se integre; el workflow ahora registra HTTP y Content-Type de robots y sitemap en los tres hosts (GitHub Pages, preview de rama y Pages principal).
+
+### Pendientes bloqueantes de aprobación
+- Completar el nuevo smoke QA contra GitHub Pages y revisar que no haya ninguna solicitud `/api/*`, que EN VIVO renderice y que el formulario active la ruta mailto.
+- Revisar los Content-Type HTTP de `robots.txt` y la disponibilidad del `sitemap.xml` en los tres hosts; producción solo cambiará al integrar el PR.
+- Configurar por separado en Cloudflare Pages > Preview `TWITCH_CLIENT_ID`, `TWITCH_CLIENT_SECRET`, `RESEND_API_KEY`, `RESEND_FROM` y, si se usa, `CONTACT_TO`. No se registran ni se solicitan valores secretos en GitHub.
+- Validar `/api/live` con HTTP 200 y el envío real a Resend con una dirección de prueba acordada. Hasta entonces, Resend no está probado de punta a punta.
+- Probar manualmente con NVDA en Windows o VoiceOver en Apple. La auditoría automática y el foco de teclado no certifican lector de pantalla.
+
+**Estado:** QA no aprobada. PR #46 permanece Draft y sin merge; `main` no se modificó y producción no se desplegó.
+
+
+## Segunda validación de producción, robots y LCP — run 43562174824
+
+- **Workflow completo SUCCESS** sobre el HEAD de auditoría `ba66ec7481a9b8ccaeae5d1946440a10ab93f05e`: [ejecución 43562174824](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43562174824).
+- **QA en producción GitHub Pages: 10/10 OK.** Portada y capítulo EN VIVO cargan; 0 solicitudes de red a `/api/*`; formulario presente, válido y con handler directo `window.location.href='mailto:...'`; 0 errores JS. El navegador headless no produjo evento de navegación `mailto:` (`mailtoNavigations=[]`), por lo que se verificó el handler y el recorrido de submit sin llamada API, pero no el lanzamiento de una aplicación de correo externa.
+- **QA preview: 43/43 OK** en 1440, 768 y 390 px. En preview se registran 2 solicitudes `/api/live` por carga, ambas HTTP 503; el frontend conserva el respaldo estático. No hay errores JS ni scroll horizontal.
+- **robots.txt y sitemap:**
+  - GitHub Pages producción: `/robots.txt` responde HTTP 503, `text/html` (página de error de GitHub/Fastly); `/sitemap.xml` también HTTP 503, `text/html`.
+  - Preview de rama: `/robots.txt` HTTP 200, `text/plain; charset=utf-8`; `/sitemap.xml` HTTP 200, `application/xml`.
+  - `legion-multiversal.pages.dev` principal: `/robots.txt` HTTP 200, pero `text/html; charset=utf-8` (fallback de portada), no un robots válido.
+  - Se confirma que los dos archivos nuevos funcionan en la preview de la rama, pero todavía no están publicados en producción ni en el Pages principal. No se cambió `main`.
+- La preview conserva `X-Robots-Tag: noindex`; el `robots.txt` válido no altera esa protección. Lighthouse SEO preview subió de 61 a 69 porque ya no falla la auditoría `robots-txt`; queda solo `is-crawlable` por el noindex intencional.
+- **Lighthouse run 43562174824, medianas de 3 corridas:** Performance 72/72, Accessibility 100/100, Best Practices 96/96, SEO 100/69, LCP simulado 13,80/12,63 s, CLS 0,090/0,079, TBT 0/0 ms, peso 4179/3667 KB.
+- **LCP observado en la traza Lighthouse:** producción 409/293/280 ms (mediana 293 ms); preview 455/291/305 ms (mediana 305 ms). `PerformanceObserver` separado: 364 ms / 320 ms. Se mantiene la distinción obligatoria entre LCP simulado (para scoring móvil/throttling) y LCP observado; el nodo sigue siendo el banner `image_20261106_124855.jpg`, `loading=eager`, `fetchpriority=high`.
+- **Best Practices 96:** en producción el mensaje exacto sigue siendo 404 a `https://losmoriartys-cmd.github.io/favicon.ico` (la corrección de `rel=icon` está en la rama, todavía no publicada); en preview son dos respuestas 503 de `/api/live`. No son errores de imágenes remotas.
+- **Estado operativo:** `/api/live` sigue sin 200 en Preview. Resend sigue sin prueba de envío real. Lector de pantalla NVDA/VoiceOver pendiente. La QA no se aprueba.
+- Artifact con reportes JSON, capturas, QA y cabeceras: [auditoria-ux-43562174824](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43562174824).
+
+
+### Valores individuales LCP — run 43562174824
+- GitHub Pages, Lighthouse simulado: **13,80 / 4,36 / 14,16 s**. LCP observado en las trazas: **409 / 293 / 280 ms**.
+- Preview, Lighthouse simulado: **12,76 / 11,67 / 12,63 s**. LCP observado en las trazas: **455 / 291 / 305 ms**.
+- Medianas: simulado 13,80 / 12,63 s; observado 293 / 305 ms. El informe de Lighthouse debe conservar ambos indicadores para no mezclar la proyección de throttling con el evento observado.
+
+
+### Nota de integridad de ramas
+Durante esta tanda, `main` avanzó de `b67079b8d6bbde268a967e60ef642987072c6c52` a `d380f8ff95fe60ac360d306cf1e8721ff8ba32bb` por un commit automático de `github-actions[bot]` (`Actualización automática de estadísticas multiplataforma`) que modificó únicamente `data.json` y `platform-stats.json`. No fue una escritura de esta auditoría. No se hicieron commits de `auditoria-ux` sobre `main`, no se fusionó el PR ni se desplegó producción.
+
+
+## Validación endpoint y auditoría de imágenes — run 43570146758 (14/11/2026)
+
+- **Ejecución integral SUCCESS:** [workflow #61 / run 43570146758](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43570146758), sobre el commit c15aa5aab34129c98978ff34c128aefa7434d845. Job único completado: 23 pasos, todos SUCCESS.
+- **Pruebas nuevas de /api/live: 15/15 OK** en desktop (5), tablet (5) y mobile (5). Cada respuesta observada fue HTTP 200 y JSON válido con source fallback, status unavailable y channels como array. Esto prueba el contrato de fallback de Preview; no prueba credenciales Twitch ni un flujo Helix en vivo.
+- **Smoke QA Preview: 58/58 OK** en 1440, 768 y 390 px (43 comprobaciones base + 15 validaciones del contrato /api/live). Sin errores JS ni scroll horizontal; incluye navegación por teclado, CTA y fallback del formulario.
+- **QA producción GitHub Pages: 10/10 OK.** Sin solicitudes /api/*, errores JavaScript ni errores de página. No se cambió ni desplegó producción.
+- **Lighthouse (medianas de 3 corridas por entorno):**
+
+| Métrica | GitHub Pages | Preview |
+|---|---:|---:|
+| Performance | 72 | 72 |
+| Accessibility | 100 | 100 |
+| Best Practices | 96 | 100 |
+| SEO | 100 | 69 |
+| LCP simulado | 15,35 s | 12,59 s |
+| CLS | 0,089 | 0,090 |
+| TBT | 2 ms | 0 ms |
+| Peso transferido | 4.179 KB | 3.667 KB |
+
+- **LCP observado por PerformanceObserver:** 392 ms en producción y 324 ms en Preview. No confundir estos eventos observados con el LCP simulado de Lighthouse bajo throttling, que es el valor utilizado para el score y permanece alto.
+- **Elemento LCP:** image_20261106_124855.jpg, 413.391 B de recurso (413.794 B transferidos en producción); imagen eager y con fetchpriority high. La imagen aparece como elemento LCP en ambos hosts.
+- **Recursos de imagen más pesados medidos por transferencia en producción:** legion_logo_final_hybrid.png 1.337.459 B; assets/heroes/rod3r1k_dark.webp 865.994 B; image_20261107_021355.jpg 514.918 B; stream4.jpg 475.532 B; image_20261106_124855.jpg 413.794 B; assets/carnet/DemuianCarnet.jpg 357.873 B.
+- **Diagnóstico no atribuible a imágenes:** Best Practices 96 en producción por 404 a /favicon.ico en la raíz del dominio GitHub Pages; la URL está fuera del subpath del proyecto y no se arregla cambiando solo el favicon del sitio. Preview conserva X-Robots-Tag noindex, intencional; SEO 69 no se considera regresión a corregir.
+- **Artefacto de evidencia:** [auditoria-ux-43570146758](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43570146758/artifacts/14104247361), con JSON/HTML de Lighthouse, diagnóstico, LCP, QA y capturas.
+- **Siguiente etapa:** generar candidatos WebP para los seis recursos pesados en una carpeta de reportes, sin reemplazar archivos fuente ni actualizar referencias. Cada candidato mantiene dimensiones y proporción exactas; se compara tamaño, PSNR y apariencia antes de decidir si se integra. No se aceptan cambios por tamaño solamente.
+- **Salvaguardas:** rama auditoria-ux; PR #46 permanece Draft y abierto, sin merge. main y producción no se modificaron en esta tanda.
+
+## 2026-11-14 — Auditoría #66 y aprobación visual de variantes WebP
+
+- **Ejecución:** [Auditoría #66](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43570884021), commit evaluado `39bcd928e95d1cfe499506d941541b9f1714e76d`. Estado terminal `success`; 1 job, 24/24 pasos completados, sin fallos ni pasos omitidos.
+- **Artefacto de evidencia:** [auditoria-ux-43570884021.zip](https://api.github.com/repos/losmoriartys-cmd/legion-multiversal/actions/artifacts/14104054134/zip), ID `14104054134`, SHA-256 `ccea76058c642bcb70f07cfd421c3537702595e812167df2461d06a4da8a961f`. Incluye `comparison.json`, originales y candidatos para comparación.
+- **Criterio:** no se redimensionó ninguna imagen. Las seis variantes mantienen exactamente ancho, alto y proporción de sus fuentes. Se inspeccionaron pares original/candidato; el logo transparente se comparó compuesto sobre tablero para no confundir RGB invisible con pérdida de transparencia.
+- **Resultados medidos:**
+
+| Imagen | Original | WebP | Ahorro | Calidad / geometría |
+|---|---:|---:|---:|---|
+| Emblema PNG | 1.336.538 B | 839.602 B | 37,18 % | Lossless; RGB visible y alfa sin diferencia; 1600×1600 |
+| Roderik | 865.372 B | 610.896 B | 29,41 % | PSNR 39,489 dB; 1280×1920 |
+| Orígenes | 514.266 B | 426.502 B | 17,07 % | PSNR 37,096 dB; 1312×1920 |
+| BarFender | 475.134 B | 373.466 B | 21,40 % | PSNR 37,703 dB; 2240×1120 |
+| Banner LCP | 413.391 B | 340.222 B | 17,70 % | PSNR 37,843 dB; 2128×1120 |
+| Carnet Demian | 357.320 B | 287.312 B | 19,59 % | PSNR 38,954 dB; 1280×1920 |
+
+- **Decisión:** las seis variantes pasan la revisión técnica y visual como candidatas de entrega. El ahorro agregado sobre estas seis fuentes es de 1.084.021 bytes (aprox. 26,9 % del peso combinado de las fuentes). Los originales no se sobrescriben.
+- **Implementación segura preparada:** el workflow ahora puede publicar copias WebP bajo `assets/optimized/` en `auditoria-ux`, conservando los originales y el artefacto de comparación. Esta publicación está limitada a la rama de auditoría; no afecta `main` ni GitHub Pages de producción. La actualización de referencias HTML se realizará después de verificar la publicación de los archivos.
+- **Pendiente de validación posterior:** comprobar el commit automático de variantes, cambiar solo referencias cuya ubicación y fallback estén confirmados, y ejecutar una nueva auditoría de Lighthouse/QA. Las cifras de ahorro son por archivo, no una promesa de mejora equivalente en Performance/LCP.
+
+
+## 2026-11-14 — Auditoría editorial y comercial del Roster
+
+- **Prioridad de producto acordada:** presentación comercial del Roster streamer y calidad editorial de las Bitácoras, manteniendo el lenguaje visual de cómic retro.
+- **Documento de estrategia:** [PROPUESTA_COMERCIAL_ROSTER.md](./PROPUESTA_COMERCIAL_ROSTER.md), commit `a45c18ef4a4176a97acf960c80575a59e20fc899`. Define arquitectura comercial, plantilla de expedientes individuales, distinción entre bitácoras y casos de colaboración, taxonomía de confianza de datos, dirección visual y criterios de aceptación.
+- **Hallazgo estructural:** existen ocho perfiles en `roster-data.json`; siete canales Twitch en seguimiento activo. PATO — ORATORIS está clasificado como colaborador/creador de video y debe mantenerse separado del roster de streamers.
+- **Frescura de Twitch Helix:** `data.json` registra actualización 13/11/2026 21:22:55 UTC, siete canales resueltos, cero canales muestreados y siete omitidos en esa ejecución. Los registros históricos permanecen, pero no se debe presentar esa última ejecución como una captura nueva de actividad.
+- **Fuentes no equivalentes:** Twitch Helix es muestreo propio; TwitchMetrics es fuente externa complementaria (captura 04/11/2026, dos perfiles); SullyGnome es historial externo (generado 03/11/2026, con registros parciales, pendientes y resúmenes aportados); YouTube de PATO tiene una lectura de API (13/11/2026: 56 suscriptores, 431 vistas, 6 videos). No sumar ni mezclar métricas entre fuentes/plataformas.
+- **Discrepancia que requiere tratamiento:** el desglose de categorías de HABITOS no concilia con el resumen de SullyGnome en horas vistas/horas emitidas. Se debe retener la visualización comercial del desglose hasta resolverla; conservar la nota de auditoría.
+- **Oportunidad editorial:** el expediente MORIARTYS tiene una bitácora interactiva de ocho páginas, pero la profundidad y presentación comercial no están estandarizadas para todos los creadores. Los clips y credenciales están repartidos entre `creator-records.json`, `platform-stats.json` y las páginas.
+- **Criterio de rediseño:** portada comercial colectiva breve; directorio de perfiles sin ranking; expediente comercial individual homogéneo; bitácora individual separada del expediente de una colaboración; metodología y fuentes accesibles sin dominar la lectura.
+- **Próxima implementación:** P0 integridad/frescura y normalización editorial; P1 plantilla individual y portfolio; P2 resumen colectivo; P3 bitácoras de actividad y casos; P4 QA responsive, accesibilidad y rendimiento.
+- **Salvaguardas:** todo el trabajo continúa en `auditoria-ux`; no se modifica `main`, no se fusiona PR ni se publica producción. No se inventan métricas, resultados comerciales, alianzas ni audiencias únicas.
+
+
+### Implementación inicial P0 — claridad de cobertura de muestras
+
+- **Cambio:** `app.js`, commit `70d7e8a5f8d2d6161c28b5253317d9067499bb3a`.
+- **Mejora:** el panel de impacto distingue canales resueltos por el colector de canales que efectivamente generaron una muestra nueva. El KPI ahora informa `muestras nuevas / canales esperados`, y el detalle explicita resueltos, muestreados y omitidos.
+- **Motivo:** evitar que una ejecución con siete canales resueltos, cero muestras nuevas y siete omitidos se interprete visualmente como cobertura estadística completa. La antigüedad de la captura sigue controlando la presentación del estado en vivo.
+- **Validación:** la validación de código para el commit previo de documentación pasó en los workflows #520 y #521. La validación del commit de código y la auditoría integral posteriores están pendientes de ejecución: [auditoría #73](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43573324140).
+
+## 2026-11-14 — Presentación comercial del roster y evidencia individual
+
+- **Prioridad editorial:** se prioriza el Roster como capítulo principal de presentación comercial de Legión Multiversal. La propuesta explica la oferta colectiva y conserva la identidad y el valor de cada creador, sin convertir el directorio en un ranking.
+- **Portada comercial colectiva:** se agregó una presentación media kit dentro del capítulo Roster, con cuatro líneas posibles de trabajo: activación colectiva, integración individual, contenido/demostración y campañas documentadas. El texto aclara que son formatos a conversar, no servicios contratados, disponibilidad garantizada ni promesas de alcance.
+- **Evidencia por expediente:** la función renderCommercialEvidence agrega métricas con fuente, período/captura y notas metodológicas a la ficha ejecutiva individual. Prioridad de fuente: TwitchMetrics para perfiles con registro externo disponible; YouTube Data API v3 para PATO — ORATORIS; SullyGnome para referencias históricas parciales o resúmenes aportados por el equipo. No se mezclan fuentes ni períodos.
+- **Criterios de publicación:** se excluyen las ganancias de seguidores de SullyGnome mientras su interpretación no esté confirmada; se identifica el promedio ponderado como derivado; se etiqueta explícitamente el resumen aportado por el equipo; el expediente de HABITOS mantiene sus cifras retenidas por la discrepancia ya documentada entre resumen y desglose. Los perfiles sin una base suficiente muestran un estado de integración pendiente, sin inventar valores ni sugerir que la falta de datos implica menor valor del creador.
+- **Diseño:** se incorporaron paneles de evidencia y una presentación colectiva con paleta azul noche, cian y dorado, jerarquía editorial de cómic retro y adaptación responsive. Se mantiene la navegación, los filtros y las cartas existentes.
+- **Archivos modificados:** app.js, index.html, styles.css. Commits de esta implementación: 5eb66fced1b66640add1b42734e388bf1d278d12 (evidencia estadística por creador), 32cb8a2a1ea9588ca75b4ff337bcc92fed916f3a (presentación comercial colectiva), 251262df9e9312bb3ce0dfb6206ef23b00da1da8 (estilos) y commit posterior de versión de caché de estilos.
+- **Pendiente de validación:** ejecutar el workflow de auditoría sobre el HEAD final y revisar errores JS, carga de datos, enlaces, responsive y accesibilidad de la nueva sección. No se declara la implementación aprobada hasta que esa corrida termine correctamente.
+- **Estado del repositorio:** trabajo limitado a auditoria-ux. PR #46 permanece Draft y sin fusionar; no se modificó main ni se publicó producción.
+- **Incidencia paralela del pipeline:** la auditoría #73 terminó con fallo únicamente en el paso de publicación de variantes WebP verificadas a la rama; los pasos anteriores del job finalizaron correctamente. No se asumió que las variantes optimizadas quedaron publicadas.
+- **Fortalezas individuales:** se amplió la ficha ejecutiva con un bloque editorial de fortalezas diferenciales para los ocho perfiles. Las descripciones se apoyan en los formatos y biografías ya documentados; los perfiles en desarrollo se identifican como tales y no reciben experiencia o especialidades inventadas. Commit: 1a7edfedd3fda00077797f8b9132a2b13dcb1390.
+- **Portafolio individual:** las fichas ahora muestran hasta tres clips o videos con enlaces validados por dominio y un bloque separado de colaboraciones/accesos registrados. Los registros de partner se distinguen de los accesos a keys; estos últimos no se presentan como patrocinios. PATO muestra muestras de YouTube; los perfiles sin enlaces cargados quedan identificados como pendientes. Commit: ab3c3035a6156ea30ae898b80dbb88d15e39af6c.
+## 2026-11-14 — Estandarización de bitácoras, evidencia y reconciliación de métricas
+
+- Se unificó la navegación de las ocho bitácoras individuales en una estructura común de cuatro páginas: identidad, rendimiento por fuente, trayectoria/muestras y propuesta comercial. Se retiró del enrutamiento activo la presentación con métricas hardcodeadas de MORIARTYS y otros expedientes; las cifras ahora se obtienen de los archivos de datos y sus ventanas declaradas.
+- Se completaron perfiles editoriales individuales para ROD3R1K, LADYMORIARTY, ARDIPII, AKUMA, DAVE — NEXUS, HABITOS y PATO — ORATORIS. Cada uno incluye enfoque, fortalezas, formatos y oportunidades potenciales; las posibilidades no se describen como campañas contratadas ni compromisos.
+- Se incorporó la evidencia estadística y portafolio a la ficha ejecutiva del Roster, incluyendo fuente, fecha, período y metodología. TwitchMetrics con captura 4 nov se etiqueta como histórico; el seguimiento Helix muestra la última muestra y la última consulta separadamente y aclara cuando el canal fue omitido por anti-duplicados. Una consulta resuelta no se confunde con una muestra nueva.
+- Se verificaron metadatos públicos de clips de LADYMORIARTY, ARDIPII, HABITOS y ROD3R1K. Se actualizaron títulos únicamente cuando Twitch devolvió un título concreto. Los clips sin metadatos recuperables quedan marcados para confirmación del creador, sin inventar títulos.
+- HABITOS queda con estado `partial_discrepancy`: resumen 469 horas vistas frente a 525 al sumar las diez categorías; Just Chatting repite las 469 horas del resumen; 121 h emitidas frente a 119 h por categorías; pico general 29 frente a 24 en el gráfico visible. Las métricas se retienen de la presentación comercial y de las tablas de categorías hasta recibir nueva exportación o aclaración de la fuente. Esto resuelve el criterio de publicación, no la contradicción del origen.
+- Se corrigió el workflow de auditoría: el paso de publicar variantes WebP solo corre en un evento push a la rama `auditoria-ux`, nunca desde un `pull_request` que expone la referencia `46/merge`. La falla de los runs #92 y #93 era el refspec de push, no el procesamiento ni la calidad de las variantes.
+- Archivos: `app.js`, `roster-data.json`, `creator-records.json`, `sullygnome-data.json`, `styles.css`, `index.html`, `.github/workflows/auditoria-rendimiento.yml`. Commits: `c9a3548077151474bd1fe937fdce021f42dae75b`, `9caf4f6a940e87e76cbc1759681509f772e5ab3f`, `b0ce4fbcc61ed17366ca3d06baac93addb715429`, `8f9c53d6fffd9be00aa4eb853e52a0a5bffedc62`, `b6f855aba3314c384cf4cf0ded8dcc1eb66d3e88`, `c2b1791ae3799d9817bce8205caa37fc9d533913`, `fd0414d0d98c0763563b42ae4d4a5e0c68226347` y commits de presentación asociados.
+- Pendiente: validar el HEAD final mediante workflow de código, auditoría responsive y QA; revisar la salida de las ocho bitácoras y los enlaces multimedia. No se fusionó ni publicó en producción.

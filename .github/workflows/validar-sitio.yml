@@ -10,6 +10,9 @@ on:
       - '*.json'
       - 'assets/**'
       - 'scripts/**'
+      - 'functions/**'
+      - '_headers'
+      - 'INFORMES.md'
       - '.github/workflows/validar-sitio.yml'
   pull_request:
     paths:
@@ -20,6 +23,8 @@ on:
       - '*.json'
       - 'assets/**'
       - 'scripts/**'
+      - 'functions/**'
+      - '_headers'
       - '.github/workflows/validar-sitio.yml'
   workflow_dispatch:
 
@@ -38,6 +43,10 @@ jobs:
           node-version: '22'
       - name: Comprobar sintaxis JavaScript
         run: node --check app.js
+      - name: Comprobar sintaxis de Pages Functions
+        run: |
+          node --input-type=module --check < functions/api/contact.js
+          node --input-type=module --check < functions/api/live.js
       - name: Validar archivos JSON
         run: |
           for file in ./*.json; do
@@ -46,3 +55,9 @@ jobs:
           done
       - name: Validar rutas, imágenes y enlaces declarados
         run: python scripts/validate_site.py
+      - name: Comprobar anclas semánticas y enlaces internos
+        run: python scripts/check_anchors.py
+      - name: Validar campos de formularios contra Pages Function
+        run: python scripts/check_form_fields.py
+      - name: Auditar accesibilidad estática
+        run: python scripts/audit_accessibility.py

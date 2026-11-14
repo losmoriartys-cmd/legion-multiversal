@@ -1,0 +1,187 @@
+name: Auditoría integral de imágenes y Lighthouse
+
+on:
+  push:
+    branches: [auditoria-ux]
+    paths:
+      - 'scripts/add_image_dimensions.py'
+      - 'scripts/optimize_images.py'
+      - 'scripts/lighthouse_runs.sh'
+      - 'scripts/summarize_lighthouse.py'
+      - 'scripts/qa_smoke.mjs'
+      - 'scripts/qa_production.mjs'
+      - 'robots.txt'
+      - 'sitemap.xml'
+      - 'app.js'
+      - 'styles.css'
+      - 'data.json'
+      - 'roster-data.json'
+      - 'functions/api/live.js'
+      - '.github/workflows/auditoria-rendimiento.yml'
+      - '*.html'
+      - 'assets/**'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/add_image_dimensions.py'
+      - 'scripts/optimize_images.py'
+      - 'scripts/lighthouse_runs.sh'
+      - 'scripts/summarize_lighthouse.py'
+      - 'scripts/qa_smoke.mjs'
+      - 'scripts/qa_production.mjs'
+      - 'robots.txt'
+      - 'sitemap.xml'
+      - 'app.js'
+      - 'styles.css'
+      - 'data.json'
+      - 'roster-data.json'
+      - 'functions/api/live.js'
+      - '.github/workflows/auditoria-rendimiento.yml'
+      - '*.html'
+      - 'assets/**'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: auditoria-rendimiento-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  auditoria:
+    name: Dimensiones reales, validación y Lighthouse
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Descargar rama de auditoría
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Instalar Pillow
+        run: python -m pip install --upgrade pip Pillow
+
+      - name: Paso 2 — contar imágenes sin modificar
+        run: python scripts/add_image_dimensions.py --check
+
+      - name: Paso 3 — aplicar dimensiones medidas en el checkout temporal
+        run: python scripts/add_image_dimensions.py
+
+      - name: Revisar diff completo y whitespace
+        run: |
+          mkdir -p reports/lighthouse
+          git diff --check
+          git diff -- > reports/lighthouse/image-dimensions.patch
+          git diff --stat
+          echo "--- DIFF COMPLETO DE DIMENSIONES ---"
+          cat reports/lighthouse/image-dimensions.patch
+
+      - name: Paso 4 — validar sitio después de aplicar dimensiones
+        run: python scripts/validate_site.py
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Instalar Chrome estable
+        id: chrome
+        uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: stable
+
+      - name: Exponer Chrome a Lighthouse
+        run: echo "CHROME_PATH=${{ steps.chrome.outputs.chrome-path }}" >> "$GITHUB_ENV"
+
+      - name: Comprobar HTTP, X-Robots-Tag y robots.txt de la preview
+        run: |
+          mkdir -p reports/lighthouse
+          curl --fail --location --silent --show-error --retry 3 \
+            --output /dev/null \
+            https://losmoriartys-cmd.github.io/legion-multiversal/
+          curl --fail --location --silent --show-error --retry 3 \
+            --output /dev/null \
+            https://auditoria-ux.legion-multiversal.pages.dev/
+          curl --silent --show-error --location --dump-header reports/lighthouse/preview-headers.txt \
+            --output /dev/null https://auditoria-ux.legion-multiversal.pages.dev/
+          echo "--- X-Robots-Tag ---"
+          grep -i '^x-robots-tag:' reports/lighthouse/preview-headers.txt || echo "X-Robots-Tag no presente"
+          curl --silent --show-error --location --dump-header reports/lighthouse/preview-robots-headers.txt \
+            --output reports/lighthouse/preview-robots.txt https://auditoria-ux.legion-multiversal.pages.dev/robots.txt
+          echo "--- robots.txt preview ---"
+          cat reports/lighthouse/preview-robots.txt
+          for target in \
+            "production|https://losmoriartys-cmd.github.io/legion-multiversal/robots.txt" \
+            "preview|https://auditoria-ux.legion-multiversal.pages.dev/robots.txt" \
+            "main-pages-dev|https://legion-multiversal.pages.dev/robots.txt"; do
+            name="${target%%|*}"
+            url="${target#*|}"
+            curl --silent --show-error --location \
+              --dump-header "reports/lighthouse/${name}-robots-headers.txt" \
+              --output "reports/lighthouse/${name}-robots.txt" \
+              --write-out "${name}: HTTP %{http_code} · Content-Type %{content_type} · URL %{url_effective}\n" "$url"
+          done
+          echo "--- Sitemap production ---"
+          curl --silent --show-error --location --write-out "HTTP %{http_code} · Content-Type %{content_type}\n" \
+            --output reports/lighthouse/sitemap-production.xml \
+            https://losmoriartys-cmd.github.io/legion-multiversal/sitemap.xml
+          echo "--- Sitemap preview ---"
+          curl --silent --show-error --location --write-out "HTTP %{http_code} · Content-Type %{content_type}\n" \
+            --output reports/lighthouse/sitemap-preview.xml \
+            https://auditoria-ux.legion-multiversal.pages.dev/sitemap.xml
+
+      - name: Pasos 5 y 6 — tres corridas Lighthouse por entorno y medianas
+        env:
+          RUNS: '3'
+        run: bash scripts/lighthouse_runs.sh
+
+      - name: Diagnosticar SEO, Best Practices, LCP y peso de imágenes
+        run: |
+          python scripts/lh_failures.py reports/lighthouse/github-pages/run1.report.json | tee reports/lighthouse/diagnostico-produccion.txt
+          python scripts/lh_failures.py reports/lighthouse/preview/run1.report.json | tee reports/lighthouse/diagnostico-preview.txt
+
+      - name: Generar variantes WebP de revisión sin tocar originales
+        run: python scripts/optimize_images.py
+      - name: Preparar Playwright para smoke QA
+        run: |
+          npm init -y
+          npm install --no-save playwright
+          npx playwright install --with-deps chromium
+
+      - name: Identificar elemento LCP en producción y preview
+        run: node scripts/lcp_probe.mjs
+
+      - name: Ejecutar smoke QA visual y funcional en preview
+        env:
+          QA_BASE: https://auditoria-ux.legion-multiversal.pages.dev/
+        run: node scripts/qa_smoke.mjs
+
+      - name: Verificar GitHub Pages producción sin Pages Functions
+        run: node scripts/qa_production.mjs
+
+      - name: Publicar reportes, variantes candidatas y capturas QA
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: auditoria-ux-${{ github.run_id }}
+          path: reports/
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Publicar variantes WebP verificadas en la rama de auditoría
+        if: success() && github.event_name == 'push' && github.ref == 'refs/heads/auditoria-ux'
+        run: |
+          mkdir -p assets/optimized
+          cp reports/image-optimization/*.webp assets/optimized/
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/optimized/*.webp
+          if git diff --cached --quiet; then
+            echo "No hay variantes nuevas para publicar."
+            exit 0
+          fi
+          git commit -m "Add visually reviewed optimized image variants"
+          git push origin "HEAD:${GITHUB_REF_NAME}"

@@ -1,8 +1,8 @@
 # Legión Multiversal — Proyecto web y automatizaciones
 
 Repositorio de trabajo compartido: [losmoriartys-cmd/legion-multiversal](https://github.com/losmoriartys-cmd/legion-multiversal)  
-Sitio publicado actualmente: [GitHub Pages](https://losmoriartys-cmd.github.io/legion-multiversal/)  
-Nueva publicación prevista: Cloudflare Pages (`https://legionmultiversal.pages.dev/`), pendiente de conectar la cuenta y verificar el primer despliegue. Guía: [`CLOUDFLARE_PAGES.md`](./CLOUDFLARE_PAGES.md).
+Sitio accesible en GitHub Pages: [losmoriartys-cmd.github.io/legion-multiversal](https://losmoriartys-cmd.github.io/legion-multiversal/)  
+Sitio accesible en Cloudflare Pages: [legion-multiversal.pages.dev](https://legion-multiversal.pages.dev/). La portada responde en ambos dominios y Cloudflare genera previews de los pull requests. La configuración exacta de la rama de producción y las variables de Pages Functions se mantiene como control operativo pendiente; ver [CLOUDFLARE_PAGES.md](./CLOUDFLARE_PAGES.md).
 
 > **Fuente única de verdad:** el contenido vigente del repositorio y su historial de commits. Las conversaciones sirven para acordar y explicar el trabajo, pero una modificación solo se considera compartida cuando está registrada en GitHub.
 
@@ -75,7 +75,11 @@ Cada colaborador debe:
 | `sullygnome-data.json` / `twitchmetrics-data.json` | Referencias históricas de analítica externa, separadas de las APIs propias. |
 | `INFORMES.md` | Bitácora vigente de intervenciones, validaciones y pendientes. |
 | `scripts/validate_site.py` | Validación estática de rutas, recursos y datos. |
-| `.github/workflows/validar-sitio.yml` | Validación automática de JavaScript, JSON, enlaces locales e imágenes. |
+| `scripts/check_anchors.py` | Comprobación de anclas semánticas, alias de capítulos y enlaces internos. |
+| `functions/api/contact.js` | Endpoint de contacto con Resend, honeypot y validación. |
+| `functions/api/live.js` | Endpoint de estado en vivo mediante Twitch Helix. |
+| `_headers` | Políticas de caché y robots para Cloudflare Pages. |
+| `.github/workflows/validar-sitio.yml` | Validación automática de JavaScript, Pages Functions, JSON, rutas y anclas. |
 | `CLOUDFLARE_PAGES.md` | Guía de preparación para una futura migración; no implica que esté desplegada. |
 | `BITACORA.md` | Archivo histórico anterior a este protocolo. Se conserva como antecedente; no duplicar allí los nuevos informes. |
 | `README.md` | Reglas de colaboración y guía de entrada al proyecto. |
@@ -126,6 +130,19 @@ En GitHub → Settings → Secrets and variables → Actions:
 - `KICK_CLIENT_ID` y `KICK_CLIENT_SECRET` (aplicación registrada en Kick Developer).
 
 Nunca guardar claves o tokens en JSON, código, informes o commits. Si una credencial no está configurada, el colector debe dejar constancia del estado pendiente en vez de inventar métricas.
+
+### Funciones de Cloudflare Pages: contacto y En Vivo
+
+Las rutas `functions/api/contact.js` y `functions/api/live.js` requieren Cloudflare Pages Functions. **No se ejecutan en GitHub Pages**: mientras GitHub Pages siga siendo la publicación activa, los formularios ofrecen fallback a `mailto:` y En Vivo utiliza `data.json` con la antigüedad de la captura.
+
+En Cloudflare Pages → Settings → Variables and Secrets → Production (y Preview si corresponde), configurar:
+
+- `RESEND_API_KEY` (secret): clave privada de Resend.
+- `RESEND_FROM` (variable): remitente validado en Resend; usar el formato admitido por la cuenta y el dominio verificado.
+- `CONTACT_TO` (opcional): destinatario; por defecto `losmoriartys@gmail.com`.
+- `TWITCH_CLIENT_ID` y `TWITCH_CLIENT_SECRET` (secrets): credenciales de aplicación Twitch para OAuth Client Credentials y Helix.
+
+No reutilizar automáticamente secretos de GitHub Actions ni incluirlos en el repositorio. Sin estas variables, la función de contacto devuelve un estado de configuración pendiente y el cliente habilita el fallback; la consulta Helix falla de forma controlada y el cliente recupera `data.json`. El archivo `_headers` también es una configuración específica de Cloudflare Pages.
 
 ### Alcance actual y límites
 

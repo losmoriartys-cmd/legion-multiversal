@@ -55,22 +55,25 @@
       "collaborations": [],
       "highlights": [
         {
-          "title": "Momento destacado 01",
+          "title": "Presentación de Clarita en sociedad",
           "platform": "twitch",
           "clip_id": "VainPluckyPrariedogBuddhaBar-MFzfVejHyMIbsWyS",
-          "source": "Enlace de clip proporcionado para el expediente por el equipo"
+          "source": "Enlace de clip proporcionado para el expediente por el equipo",
+          "title_source": "Título verificado en metadatos públicos de Twitch"
         },
         {
-          "title": "Momento destacado 02",
+          "title": "Le pegué a Harry Potter",
           "platform": "twitch",
           "clip_id": "ThankfulCogentCodMikeHogu-DUWGz_j_OIBmWYbQ",
-          "source": "Enlace de clip proporcionado para el expediente por el equipo"
+          "source": "Enlace de clip proporcionado para el expediente por el equipo",
+          "title_source": "Título verificado en metadatos públicos de Twitch"
         },
         {
-          "title": "Momento destacado 03",
+          "title": "No me dejan bailar",
           "platform": "twitch",
           "clip_id": "WittySecretiveAmazonWholeWheat-_YY-Mo8YtTK4nra7",
-          "source": "Enlace de clip proporcionado para el expediente por el equipo"
+          "source": "Enlace de clip proporcionado para el expediente por el equipo",
+          "title_source": "Título verificado en metadatos públicos de Twitch"
         }
       ]
     },
@@ -82,19 +85,22 @@
           "title": "Spicy Piliable Poultry Corgi Derp",
           "description": "Clip destacado compartido para el media kit.",
           "url": "https://www.twitch.tv/ther0d3r1k/clip/SpicyPiliablePoultryCorgiDerp-flAxKL1oWuPkWDWA",
-          "source": "Twitch · enlace aportado por el creador"
+          "source": "Twitch · enlace aportado por el creador",
+          "title_source": "Título verificado en metadatos públicos de Twitch"
         },
         {
-          "title": "Hilarious Ironic Soybean Chocolate Rain",
+          "title": "Ff se mueve la puerta",
           "description": "Clip destacado compartido para el media kit.",
           "url": "https://www.twitch.tv/ther0d3r1k/clip/HilariousIronicSoybeanChocolateRain",
-          "source": "Twitch · enlace aportado por el creador"
+          "source": "Twitch · enlace aportado por el creador",
+          "title_source": "Título verificado en metadatos públicos de Twitch"
         },
         {
-          "title": "Cooperative Popular Flamingo",
+          "title": "Nueva actualización de temporada · Rogue Company",
           "description": "Clip destacado compartido para el media kit.",
           "url": "https://www.twitch.tv/ther0d3r1k/clip/CooperativePopularFlamingoM4xHeh-3bJjuJyiLiZOEEaC",
-          "source": "Twitch · enlace aportado por el creador"
+          "source": "Twitch · enlace aportado por el creador",
+          "title_source": "Título verificado en metadatos públicos de Twitch"
         }
       ]
     },
@@ -103,36 +109,41 @@
       "collaborations": [],
       "highlights": [
         {
-          "title": "Momento destacado 01",
+          "title": "Título pendiente de recuperación",
           "description": "Clip destacado compartido para el expediente.",
           "source": "Twitch · enlace aportado por el creador",
           "platform": "twitch",
           "clip_id": "AbrasiveSilkyCockroachOhMyDog-ivUKinvojfXgOKOB",
-          "url": "https://www.twitch.tv/habitos_atomicos/clip/AbrasiveSilkyCockroachOhMyDog-ivUKinvojfXgOKOB"
+          "url": "https://www.twitch.tv/habitos_atomicos/clip/AbrasiveSilkyCockroachOhMyDog-ivUKinvojfXgOKOB",
+          "title_source": "Metadatos públicos no disponibles al consultar; confirmar con el creador.",
+          "editorial_status": "pending_creator_confirmation"
         },
         {
-          "title": "Momento destacado 02",
+          "title": "Te vengué PatoPeligroso",
           "description": "Clip destacado compartido para el expediente.",
           "source": "Twitch · enlace aportado por el creador",
           "platform": "twitch",
           "clip_id": "CharmingScaryPuffinOpieOP-zSj2FaBFzk1MCG1D",
-          "url": "https://www.twitch.tv/habitos_atomicos/clip/CharmingScaryPuffinOpieOP-zSj2FaBFzk1MCG1D"
+          "url": "https://www.twitch.tv/habitos_atomicos/clip/CharmingScaryPuffinOpieOP-zSj2FaBFzk1MCG1D",
+          "title_source": "Título verificado en metadatos públicos de Twitch"
         },
         {
-          "title": "Momento destacado 03",
+          "title": "Para un cachito",
           "description": "Clip destacado compartido para el expediente.",
           "source": "Twitch · enlace aportado por el creador",
           "platform": "twitch",
           "clip_id": "CrispyAffluentSpindleMau5-VxVG-mH4GeZfcisE",
-          "url": "https://www.twitch.tv/habitos_atomicos/clip/CrispyAffluentSpindleMau5-VxVG-mH4GeZfcisE"
+          "url": "https://www.twitch.tv/habitos_atomicos/clip/CrispyAffluentSpindleMau5-VxVG-mH4GeZfcisE",
+          "title_source": "Título verificado en metadatos públicos de Twitch"
         },
         {
-          "title": "Momento destacado 04",
+          "title": "El ojo que corría",
           "description": "Clip destacado compartido para el expediente.",
           "source": "Twitch · enlace aportado por el creador",
           "platform": "twitch",
           "clip_id": "AggressiveIronicChinchillaPipeHype-iL_UVWlsNhrVYtO9",
-          "url": "https://www.twitch.tv/habitos_atomicos/clip/AggressiveIronicChinchillaPipeHype-iL_UVWlsNhrVYtO9"
+          "url": "https://www.twitch.tv/habitos_atomicos/clip/AggressiveIronicChinchillaPipeHype-iL_UVWlsNhrVYtO9",
+          "title_source": "Título verificado en metadatos públicos de Twitch"
         }
       ]
     },
@@ -141,28 +152,33 @@
       "collaborations": [],
       "highlights": [
         {
-          "title": "Momento destacado 01",
+          "title": "Título pendiente de recuperación",
           "platform": "twitch",
           "clip_id": "WildUglyAdminBloodTrail-qmNfWZpxEFnIl8Oz",
-          "source": "Enlace de clip proporcionado por el creador; título editorial pendiente de confirmar"
+          "source": "Enlace de clip proporcionado por el creador; título editorial pendiente de confirmar",
+          "title_source": "Metadatos públicos no disponibles al consultar; confirmar con el creador.",
+          "editorial_status": "pending_creator_confirmation"
         },
         {
-          "title": "Momento destacado 02",
+          "title": "Soy un botcito genérico en Gears",
           "platform": "twitch",
           "clip_id": "ZealousSwissCrabBigBrother-j257lzQSeHhCSFJW",
-          "source": "Enlace de clip proporcionado por el creador; título editorial pendiente de confirmar"
+          "source": "Enlace de clip proporcionado por el creador; título editorial pendiente de confirmar",
+          "title_source": "Título verificado en metadatos públicos de Twitch"
         },
         {
-          "title": "Momento destacado 03",
+          "title": "Yo solía ser el… ese de hasta abajo",
           "platform": "twitch",
           "clip_id": "KawaiiProductiveWolfNerfRedBlaster-C9cqUAh7VFBdxZwj",
-          "source": "Enlace de clip proporcionado por el creador; título editorial pendiente de confirmar"
+          "source": "Enlace de clip proporcionado por el creador; título editorial pendiente de confirmar",
+          "title_source": "Título verificado en metadatos públicos de Twitch"
         },
         {
-          "title": "Momento destacado 04",
+          "title": "Fortnite me engañó",
           "platform": "twitch",
           "clip_id": "FrozenBlightedYakinikuPMSTwin-rfFhQXM-dJL95eCv",
-          "source": "Enlace de clip proporcionado por el creador; título editorial pendiente de confirmar"
+          "source": "Enlace de clip proporcionado por el creador; título editorial pendiente de confirmar",
+          "title_source": "Título verificado en metadatos públicos de Twitch"
         }
       ]
     },
