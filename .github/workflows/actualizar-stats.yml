@@ -59,6 +59,9 @@ jobs:
           KICK_CLIENT_SECRET: ${{ secrets.KICK_CLIENT_SECRET }}
         run: python update_platform_stats.py
 
+      - name: Validar cuentas multiplataforma publicadas
+        run: python scripts/validate_roster_data.py --check-platforms
+
       - name: Guardar historial actualizado
         run: |
           git config user.name "github-actions[bot]"
