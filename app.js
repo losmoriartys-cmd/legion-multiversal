@@ -330,7 +330,7 @@ function renderStatsPlatformDirectory(){
  host.innerHTML=out||'<p class="stats-note">No hay cuentas de otras plataformas configuradas.</p>';
 }
 function renderPlatformStats(hero){
- const key=creatorRecordKey(hero);
+ const key=platformStatsKey(hero);
  const profile=platformStatsData?.creators?.[key];
  if(!profile || !profile.platforms)return '';
  let out='';
@@ -363,6 +363,9 @@ function creatorRecordKey(hero){
  if(hero && hero.twitch)return hero.twitch.split('/').filter(Boolean).pop().toLowerCase();
  if(hero && hero.kick)return hero.kick.split('/').filter(Boolean).pop().toLowerCase();
  return '';
+}
+function platformStatsKey(hero) {
+ return hero?.id || hero?.slug || creatorRecordKey(hero);
 }
 function renderCreatorRecords(hero){
  const key=creatorRecordKey(hero);
@@ -1497,7 +1500,7 @@ function renderPatoOratorisComicPages(hero){
  const record=creatorRecordsData?.channels?.patoteexplica||{};
  const videos=Array.isArray(record.youtube_videos)?record.youtube_videos:[];
  const embeds=Array.isArray(record.featured_embeds)?record.featured_embeds:[];
- const youtubeProfile=platformStatsData?.creators?.patoteexplica?.platforms?.youtube||{};
+ const youtubeProfile=platformStatsData?.creators?.[platformStatsKey(hero)]?.platforms?.youtube||{};
  const youtubeMetrics=youtubeProfile.metrics||{};
  const youtubeVerified=youtubeProfile.status==='verified';
  const captureDate=platformStatsData?.updated_at?new Date(platformStatsData.updated_at).toLocaleString('es-AR',{dateStyle:'medium',timeStyle:'short'}):'fecha no disponible';
