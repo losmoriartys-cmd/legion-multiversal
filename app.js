@@ -1869,16 +1869,18 @@ function printHeroDossier(){
     const panes=Array.from(modal.querySelectorAll('.modal-tab-pane[role="tabpanel"]'));
     const previousHidden=panes.map(pane=>pane.hidden);
     panes.forEach(pane=>{pane.hidden=false;});
+    let cleanupTimer=null;
     const cleanup=()=>{
         panes.forEach((pane,index)=>{pane.hidden=previousHidden[index];});
         document.body.classList.remove('printing-roster-dossier');
         window.removeEventListener('afterprint',cleanup);
+        if(cleanupTimer!==null)window.clearTimeout(cleanupTimer);
     };
     document.body.classList.add('printing-roster-dossier');
     window.addEventListener('afterprint',cleanup);
     window.print();
-    // Algunos navegadores móviles omiten afterprint; la visibilidad normal vuelve al cerrar/abrir.
-    setTimeout(cleanup,30000);
+    // Respaldo para navegadores móviles que omiten afterprint.
+    cleanupTimer=window.setTimeout(cleanup,30000);
 }
 
         function closeModal() {
