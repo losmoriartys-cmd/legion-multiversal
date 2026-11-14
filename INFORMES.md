@@ -2803,3 +2803,33 @@ Se conserva el compromiso de avanzar una mejora por etapa, con validación y rev
 
 - El colector programado de GitHub Actions requiere `TWITCH_CLIENT_ID` y `TWITCH_CLIENT_SECRET` en los secretos de Actions. Las variables/secrets de Cloudflare Pages pertenecen a otro entorno y no se comparten automáticamente.
 - La PR no ha modificado credenciales ni ejecutado el colector desde la rama. Antes de integrar/activar la nueva versión, confirmar la presencia de ambos secretos en Settings → Secrets and variables → Actions. No incorporar valores en el repositorio.
+
+
+
+## 2026-11-14 — Segundo bloque Roster integral: clips públicos, integridad de histórico y fallback accesible
+
+Se siguió implementando en la rama única `feat/roster-integral-2026-11-14`, dentro del PR Draft #47. No se abrió PR paralela.
+
+### Implementado
+- **Captura de clips Twitch públicos:** nuevo `update_clips.py` basado en Twitch Helix Get Clips. Usa App Token; resuelve `broadcaster_id` desde las cuentas del modelo canónico; consulta los últimos 30 días; solicita hasta 100 resultados y guarda hasta 10 por canal, respetando orden descendente por visualizaciones. El muestreo se etiqueta como limitado, no exhaustivo ni editorial.
+- **Resiliencia:** una falla por canal conserva la última captura buena; un canal no resuelto cancela la captura global; frecuencia mínima interna de actualización de seis horas.
+- **Separación de contenido:** `clips-data.json` guarda solo clips automáticos públicos; `creator-records.json` mantiene los highlights/selecciones editoriales. La nueva sección aparece en la pestaña C de expedientes Twitch.
+- **Contratos y QA:** `schemas/clips-data.schema.json`, `scripts/validate_clips_data.py`, `tests/test_update_clips.py`.
+- **Fallback accesible:** `scripts/render_roster_noscript.py` genera/verifica el índice estático de perfiles a partir de `roster-data.json`. El bloque de `index.html` contiene los ocho integrantes, enlaces públicos y MORIARTYS como proyecto compartido de Demian y Ari.
+- **Histórico Twitch:** `schemas/twitch-snapshot.schema.json`, `scripts/validate_metric_history.py`, `tests/test_metric_history.py` validan cronología, tipos, estado offline, consistencia con agregados y ausencia de seguidores no verificados.
+- **Estados de frescura:** el código distingue capturas recientes/demoradas y errores de fuente en el directorio, estadísticas Twitch y métricas YouTube/Kick. Un valor vencido ya no se interpreta como viewers/estado actual.
+
+### Automatización y despliegue
+- `.github/workflows/actualizar-stats.yml` ejecuta el colector de clips solo al correr el trabajo autorizado contra `main`, requiere los secretos de Twitch existentes y persiste `clips-data.json` junto al resto de datos.
+- El workflow de validación comprueba modelo, fallback no-JS, clips, histórico, sintaxis, compilación de colectores, pruebas unitarias y rutas/assets.
+- [GitHub Actions run 43653732771](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43653732771): SUCCESS con las 17 etapas/acciones del job completadas.
+- [GitHub Actions run 43653781200](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43653781200): SUCCESS, incluyendo pruebas unitarias y controles de historial.
+- La preview Cloudflare confirmada de la tanda anterior corresponde al commit `45056e73a7da889326e4461eaf157d1580db4e58`: https://8ccef604.legion-multiversal.pages.dev. No presentar esta URL como preview del HEAD posterior hasta confirmar el check Cloudflare del HEAD actual.
+- El CI valida el código, pero no reemplaza pruebas manuales responsive, lector de pantalla ni revisión editorial.
+
+### Límites y pendientes explícitos
+- La primera consulta real de clips no se ejecutó desde la rama: el workflow de escritura permanece bloqueado a `main` para no alterar producción/datos desde un PR.
+- Antes de activar en producción, confirmar la presencia de `TWITCH_CLIENT_ID` y `TWITCH_CLIENT_SECRET` en Settings → Secrets and variables → Actions. No compartir ni copiar valores.
+- OAuth y analíticas privadas requieren autorización individual de cada creador. D1/backend y consola privada requieren provisionamiento y diseño de seguridad.
+- VOD completos, videoteca exhaustiva, pruebas visuales/funcionales humanas y cotejo de datos con paneles oficiales siguen pendientes.
+- PR #47 continúa Draft y abierto, dirigido a `main`; PR #46 permanece separado. No hubo merge, cambios a `main`, despliegue de producción ni modificación de credenciales.
