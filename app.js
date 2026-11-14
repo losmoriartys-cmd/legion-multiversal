@@ -1352,7 +1352,7 @@ function renderCommercialEvidence(hero, twitchLogin, youtubeLogin) {
 function renderCommercialPortfolio(hero, twitchLogin, youtubeLogin) {
     const safe = escapeStatsHtml;
     const record = creatorRecordsData?.channels?.[twitchLogin] || creatorRecordsData?.channels?.[youtubeLogin] || {};
-    const clips = Array.isArray(record.highlights) ? record.highlights.slice(0,3) : [];
+    const clips = Array.isArray(record.highlights) ? record.highlights.filter(item => item.editorial_status !== 'pending_creator_confirmation' && !/^momento destacado/i.test(String(item.title || '')) && !/^título pendiente/i.test(String(item.title || ''))).slice(0,3) : [];
     const platformCreator = Object.entries(platformStatsData?.creators || {}).find(([key,creator]) => key === youtubeLogin || (creator.platforms?.youtube?.handle || "").replace(/^@/,"").toLowerCase() === youtubeLogin);
     const youtube = platformCreator?.[1]?.platforms?.youtube;
     const videos = hero.creator_type === "video_creator" && Array.isArray(youtube?.recent_videos) ? youtube.recent_videos.slice(0,3) : [];
