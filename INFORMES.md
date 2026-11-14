@@ -2833,3 +2833,18 @@ Se siguió implementando en la rama única `feat/roster-integral-2026-11-14`, de
 - OAuth y analíticas privadas requieren autorización individual de cada creador. D1/backend y consola privada requieren provisionamiento y diseño de seguridad.
 - VOD completos, videoteca exhaustiva, pruebas visuales/funcionales humanas y cotejo de datos con paneles oficiales siguen pendientes.
 - PR #47 continúa Draft y abierto, dirigido a `main`; PR #46 permanece separado. No hubo merge, cambios a `main`, despliegue de producción ni modificación de credenciales.
+
+
+## 2026-11-14 — Tercer bloque Roster integral: nomenclatura, accesibilidad y salida imprimible
+
+- La UI ahora usa `display_name` de forma consistente en dashboard, mapa, alt text y botones accesibles, perfil individual, cómic genérico y título del modal. Los IDs/nombres técnicos siguen disponibles para plantillas internas.
+- El modal del expediente mantiene semántica de diálogo y tabs. Se completa el ciclo de fondo inerte: `main` y footer pasan a `inert`/`aria-hidden` al abrir y recuperan su estado al cerrar.
+- Se agregó **IMPRIMIR / GUARDAR PDF**: salida A4 que reúne las tres pestañas A/B/C del expediente actual. Usa la impresión nativa del navegador, no un generador PDF server-side. Saltos de página, gráficos y fondos quedan sujetos a QA del navegador y de salida PDF real.
+- Se creó `tests/test_roster_accessibility_contract.py` para evitar regresiones del contrato de diálogo, tabs/paneles, impresión, fondo inerte, display names, fallback sin JavaScript, clips y reintento.
+
+### Evidencia más reciente
+- [GitHub Actions run 43654434630](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43654434630): SUCCESS, 14 pasos funcionales completados.
+- [Cloudflare Preview del commit 03d0e88](https://21bc9fac.legion-multiversal.pages.dev), generado correctamente. Es preview de rama, no producción.
+- El CI no sustituye revisión de lectores de pantalla, navegación táctil, pruebas de impresión ni aprobación visual humana.
+
+No hubo merge, cambios en `main`, publicación de producción ni modificación de credenciales.
