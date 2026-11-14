@@ -243,23 +243,56 @@
 <section id="chapter-2" class="chapter-panel comic-page" data-editorial-number="3">
             <div class="chapter-tag">CAPÍTULO 03 · ROSTER</div>
             <h2 class="comic-title">LEGIÓN MULTIVERSAL — NUESTRO ROSTER</h2>
-            <div class="institute-banner"><div class="institute-stamp" aria-label="Emblema oficial de la Legión Multiversal"><img src="legion_logo_final_hybrid.png" alt="Emblema de Legión Multiversal" loading="lazy" decoding="async"><span>ARCHIVO DE LA LEGIÓN</span></div><div class="institute-banner-copy"><h3>UN LUGAR PARA CADA TALENTO EXTRAORDINARIO</h3><p>Una comunidad de creadores con identidades y especialidades diferentes. Cada integrante tiene un expediente propio y un lugar dentro de este universo compartido.</p></div></div>
-            <nav class="roster-product-nav" aria-label="Navegación entre Roster y Bitácora"><a href="./bitacora-preview.html">ABRIR BITÁCORA CENTRAL ↗</a><a href="./index.html#chapter-12">ARCHIVO DE COLABORACIONES ↗</a></nav>
+            <div class="institute-banner"><div class="institute-stamp" aria-label="Emblema oficial de la Legión Multiversal"><img src="legion_logo_final_hybrid.png" alt="Emblema de Legión Multiversal" loading="lazy" decoding="async"><span>ARCHIVO DE LA LEGIÓN</span></div><div class="institute-banner-copy"><h3>LAS PERSONAS DETRÁS DE LA LEGIÓN</h3><p>Una comunidad de creadores con identidades y especialidades diferentes. Cada integrante tiene un expediente propio y un lugar dentro de este universo compartido.</p></div></div>
             <div id="roster-home">
               <p class="roster-intro">Explorá las cartas de la Legión, filtrá por especialidad o plataforma y abrí cualquier expediente directamente. Cada creador conserva su identidad y su espacio propio.</p>
-              <div class="roster-tools" role="search" aria-label="Buscar y filtrar integrantes">
-                <label class="roster-search-field" for="roster-search"><span>BUSCAR EN EL ROSTER</span><input id="roster-search" type="search" placeholder="Nombre, alias o especialidad…" autocomplete="off"></label>
-                <label for="roster-role-filter"><span>FUNCIÓN</span><select id="roster-role-filter"><option value="all">Todas las funciones</option><option value="director">Dirección</option><option value="teacher">Profesores</option><option value="student">Estudiante</option><option value="collaborator">Colaboradores</option></select></label>
-                <label for="roster-platform-filter"><span>PLATAFORMA</span><select id="roster-platform-filter"><option value="all">Todas las plataformas</option><option value="twitch">Twitch</option><option value="youtube">YouTube</option><option value="instagram">Instagram</option></select></label>
-                <label for="roster-format-filter"><span>FORMATO</span><select id="roster-format-filter"><option value="all">Todos los formatos</option><option value="live_streamer">Creador en directo</option><option value="video_creator">Creador de video</option></select></label>
-                <label for="roster-area-filter"><span>ESPECIALIDAD</span><select id="roster-area-filter"><option value="all">Todas las especialidades</option></select></label>
-                <label for="roster-sort"><span>ORDENAR</span><select id="roster-sort"><option value="featured">Orden de la Legión</option><option value="name">Nombre A–Z</option><option value="number">Número de expediente</option></select></label>
-                <button id="roster-reset" type="button" class="roster-reset-button">LIMPIAR FILTROS</button>
-                <p id="roster-results" class="roster-results" aria-live="polite"></p>
+              <div class="roster-tools" role="search" aria-label="Buscar integrantes y aplicar filtros">
+                <label class="roster-search-field" for="roster-search"><span>BUSCAR EN EL ROSTER</span><input id="roster-search" type="search" placeholder="Nombre, alias, handle o especialidad…" autocomplete="off"></label>
+                <div class="roster-quick-filters">
+                  <fieldset class="roster-chip-set"><legend>VÍNCULO EN LA LEGIÓN</legend><div class="roster-chip-row">
+                    <button type="button" class="roster-quick-chip" data-roster-filter="role" data-value="all" aria-pressed="true">Todos</button>
+                    <button type="button" class="roster-quick-chip" data-roster-filter="role" data-value="director" aria-pressed="false">Dirección</button>
+                    <button type="button" class="roster-quick-chip" data-roster-filter="role" data-value="teacher" aria-pressed="false">Profesores</button>
+                    <button type="button" class="roster-quick-chip" data-roster-filter="role" data-value="student" aria-pressed="false">Estudiante</button>
+                    <button type="button" class="roster-quick-chip" data-roster-filter="role" data-value="collaborator" aria-pressed="false">Colaboradores</button>
+                  </div></fieldset>
+                  <fieldset class="roster-chip-set"><legend>PLATAFORMA</legend><div class="roster-chip-row">
+                    <button type="button" class="roster-quick-chip" data-roster-filter="platform" data-value="all" aria-pressed="true">Todas</button>
+                    <button type="button" class="roster-quick-chip" data-roster-filter="platform" data-value="twitch" aria-pressed="false">Twitch</button>
+                    <button type="button" class="roster-quick-chip" data-roster-filter="platform" data-value="youtube" aria-pressed="false">YouTube</button>
+                    <button type="button" class="roster-quick-chip" data-roster-filter="platform" data-value="instagram" aria-pressed="false">Instagram</button>
+                  </div></fieldset>
+                </div>
+                <details id="roster-advanced-filters" class="roster-advanced-filters">
+                  <summary id="roster-more-filters">MÁS FILTROS <span aria-hidden="true">＋</span></summary>
+                  <div class="roster-advanced-panel">
+                    <label for="roster-area-filter"><span>ESPECIALIDAD</span><select id="roster-area-filter"><option value="all">Todas las especialidades</option></select></label>
+                    <label for="roster-sort"><span>ORDENAR</span><select id="roster-sort"><option value="featured">Orden editorial</option><option value="name">Nombre A–Z</option></select></label>
+                    <button id="roster-filters-close" type="button" class="roster-filters-close">APLICAR Y CERRAR</button>
+                  </div>
+                </details>
+                <select id="roster-role-filter" hidden aria-hidden="true"><option value="all">Todos los vínculos</option><option value="director">Dirección</option><option value="teacher">Profesores</option><option value="student">Estudiante</option><option value="collaborator">Colaboradores</option></select>
+                <select id="roster-platform-filter" hidden aria-hidden="true"><option value="all">Todas las plataformas</option><option value="twitch">Twitch</option><option value="youtube">YouTube</option><option value="instagram">Instagram</option></select>
+                <div class="roster-toolbar-actions"><button id="roster-reset" type="button" class="roster-reset-button">LIMPIAR FILTROS</button><p id="roster-results" class="roster-results" aria-live="polite">Mostrando 8 de 8 integrantes</p></div>
                 <div id="roster-active-filters" class="roster-active-filters" aria-label="Filtros aplicados"></div>
               </div>
               <nav class="institute-counts roster-jump-nav" id="roster-counts" aria-label="Accesos directos a las áreas del roster"></nav>
-              <div id="roster-container"><!-- Retratos del roster --></div>
+              <div id="roster-container" aria-busy="true">
+                <div class="roster-skeleton-grid" aria-hidden="true">
+                  <div class="roster-skeleton-card"><span></span><i></i><b></b><em></em></div><div class="roster-skeleton-card"><span></span><i></i><b></b><em></em></div><div class="roster-skeleton-card"><span></span><i></i><b></b><em></em></div><div class="roster-skeleton-card"><span></span><i></i><b></b><em></em></div><div class="roster-skeleton-card"><span></span><i></i><b></b><em></em></div><div class="roster-skeleton-card"><span></span><i></i><b></b><em></em></div><div class="roster-skeleton-card"><span></span><i></i><b></b><em></em></div><div class="roster-skeleton-card"><span></span><i></i><b></b><em></em></div>
+                </div>
+              </div>
+              <noscript><section class="roster-noscript"><h3>INTEGRANTES DE LA LEGIÓN</h3><ul>
+                <li><a href="https://www.twitch.tv/losmoriartys">LOS MORIARTYS · Twitch · canal compartido de Demian y Ari</a></li>
+                <li><a href="https://www.twitch.tv/TheR0D3R1K">ROD3R1K · Twitch</a></li>
+                <li><a href="https://www.twitch.tv/ladymoriarty01">LADY MORIARTY · Twitch</a></li>
+                <li><a href="https://www.twitch.tv/ardipii">ARDIPII · Twitch</a></li>
+                <li><a href="https://www.twitch.tv/akumazoldyck">AKUMA · Twitch</a></li>
+                <li><a href="https://www.twitch.tv/daved0608">DAVE — NEXUS · Twitch</a></li>
+                <li><a href="https://www.youtube.com/@patoteexplica">PATO — ORATORIS · YouTube</a></li>
+                <li><a href="https://www.twitch.tv/habitos_atomicos">HABITOS · Twitch</a></li>
+              </ul></section></noscript>
+              <nav class="roster-product-nav" aria-label="Recursos relacionados del Roster"><a href="./bitacora-preview.html">ABRIR BITÁCORA CENTRAL ↗</a><a href="./index.html#chapter-12">ARCHIVO DE COLABORACIONES ↗</a></nav>
             </div>
             <section id="hero-profile-page" class="hero-profile-page" hidden aria-live="polite"></section>
         </section>
