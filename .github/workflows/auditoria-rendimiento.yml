@@ -41,7 +41,7 @@ on:
       - 'assets/**'
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: auditoria-rendimiento-${{ github.ref }}
@@ -170,3 +170,18 @@ jobs:
           path: reports/
           if-no-files-found: warn
           retention-days: 14
+
+      - name: Publicar variantes WebP verificadas en la rama de auditoría
+        if: success()
+        run: |
+          mkdir -p assets/optimized
+          cp reports/image-optimization/*.webp assets/optimized/
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/optimized/*.webp
+          if git diff --cached --quiet; then
+            echo "No hay variantes nuevas para publicar."
+            exit 0
+          fi
+          git commit -m "Add visually reviewed optimized image variants"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
