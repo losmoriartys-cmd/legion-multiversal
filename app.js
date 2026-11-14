@@ -1645,8 +1645,8 @@ function openHeroModal(index) {
     const isMoriartys=hero.name==='MORIARTYS';
     const isLady=hero.name==='LADYMORIARTY';
     document.getElementById('modal-hero-title').innerText = 'MEDIA KIT · ' + hero.name;
-    document.getElementById('modal-tab-navigation').hidden=true;
-    document.getElementById('modal-comic-navigation').hidden=false;
+    document.getElementById('modal-tab-navigation').hidden=false;
+    document.getElementById('modal-comic-navigation').hidden=true;
     modalContent.classList.add('comic-mode');
     let pages;
     if(isMoriartys){
@@ -1670,15 +1670,16 @@ function openHeroModal(index) {
         const sullyChannel=findSullyChannel(hero);
         pages=renderRosterComicPages(hero,index,channelStats,sullyChannel);
     }
-    document.getElementById('modal-profile-text').innerHTML=pages[0];
-    document.getElementById('modal-stats-text').innerHTML=pages[1];
-    document.getElementById('modal-log-text').innerHTML=pages[2];
-    document.getElementById('modal-extra-text').innerHTML=pages[3];
+    // A: identidad/contenido · B: audiencia, actividad y juegos · C: clips, hitos y colaboraciones.
+    document.getElementById('modal-profile-text').innerHTML=pages[0] || '';
+    document.getElementById('modal-stats-text').innerHTML=pages.slice(1, Math.max(2, pages.length - 1)).join('');
+    document.getElementById('modal-log-text').innerHTML=pages.slice(Math.max(2, pages.length - 1)).join('');
+    document.getElementById('modal-extra-text').innerHTML='';
     const fifth=document.getElementById('modal-lady-page-5');
     const sixth=document.getElementById('modal-lady-page-6');
-    if(fifth)fifth.innerHTML=pages[4]||'';
-    if(sixth)sixth.innerHTML=pages[5]||'';
-    window.currentComicTotal=pages.length;
+    if(fifth)fifth.innerHTML='';
+    if(sixth)sixth.innerHTML='';
+    window.currentComicTotal=3;
     window.currentModalCreatorKey = hero.id || hero.slug || hero.name;
     const platformLabels = { twitch:"TWITCH", youtube:"YOUTUBE", instagram:"INSTAGRAM", kick:"KICK" };
     const accounts = (hero.accounts || []).filter(account => platformLabels[account.platform] && account.url);
@@ -1709,7 +1710,7 @@ function openHeroModal(index) {
         if (Number.isInteger(saved) && saved >= 0 && saved < pages.length) rememberedPage = saved;
     } catch (error) { /* almacenamiento bloqueado: iniciar en la primera página */ }
     switchModalTab(rememberedPage, true);
-    updateComicPageControls(true);
+    updateComicPageControls(false);
     modal.querySelector('.close-modal-btn')?.focus();
 }
         function closeModal() {
@@ -1782,7 +1783,7 @@ function openHeroModal(index) {
                 const activePane=document.getElementById(`modal-pane-${tabIndex}`);
                 if(activePane){activePane.classList.remove('comic-page-arrival');void activePane.offsetWidth;activePane.classList.add('comic-page-arrival');}
             }
-            if(isComic)updateComicPageControls(true);
+            if(isComic)updateComicPageControls(false);
         }
 
         /* Identidad sonora: lounge jazz heroico, original y sintetizado en Web Audio.
