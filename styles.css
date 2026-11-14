@@ -4749,3 +4749,58 @@ main .chapter-panel :where(.chapter-cta, .executive-button, .comic-submit-btn,
   #modal-tab-navigation { padding:4px 2px 10px; }
   #modal-tab-navigation .modal-tab-btn { min-height:42px; }
 }
+
+
+/* Roster integral · estados de fuente y recuperación */
+#chapter-2 .roster-card-live-badge.is-stale {
+  border-color: rgba(164, 177, 194, .55);
+  background: rgba(31, 43, 58, .96);
+  color: #d5dfeb;
+  cursor: default;
+  box-shadow: 0 4px 12px rgba(0,0,0,.28);
+}
+#chapter-2 .roster-card-live-badge.is-stale:hover {
+  filter: none;
+  transform: none;
+}
+#chapter-2 .roster-load-error {
+  display: grid;
+  justify-items: start;
+  gap: 12px;
+  max-width: 680px;
+  margin: 24px auto;
+  padding: clamp(18px, 3vw, 28px);
+  border: 1px solid rgba(224, 171, 92, .55);
+  border-left: 5px solid #dba34c;
+  background: rgba(17, 26, 40, .96);
+  color: #eef4fa;
+}
+#chapter-2 .roster-load-error strong {
+  color: #f1c77c;
+  font-family: 'Bangers', cursive;
+  font-size: 1.45rem;
+  letter-spacing: .06em;
+}
+#chapter-2 .roster-load-error p {
+  max-width: 58ch;
+  line-height: 1.6;
+  color: #dce5ef;
+}
+#chapter-2 .roster-load-retry {
+  min-height: 42px;
+  padding: 10px 16px;
+  border: 2px solid #66c5df;
+  background: #12344a;
+  color: #f3fbff;
+  font-weight: 900;
+  letter-spacing: .06em;
+  cursor: pointer;
+}
+#chapter-2 .roster-load-retry:focus-visible {
+  outline: 3px solid #f3cd6b;
+  outline-offset: 3px;
+}
+#chapter-2 .roster-load-retry:disabled {
+  opacity: .6;
+  cursor: wait;
+}
