@@ -7,7 +7,7 @@
 - **Datos no alterados:** no se editaron manualmente `data.json` ni `platform-stats.json`. En la rama consultada ambos registran capturas casi simultáneas: Twitch `2026-11-13T21:22:55Z` y plataformas `2026-11-13T21:22:56Z`. La captura aportada muestra una versión/lectura distinta; la diferencia observada no justifica modificar timestamps históricos sin verificar el origen del colector.
 - **Pendiente de QA:** revisar en preview que las fechas se presenten en hora argentina en Estadísticas y expedientes, confirmar los estados de espectadores con un canal en directo y otro offline, y comprobar la composición responsive. La aprobación visual no se declara hasta esa revisión renderizada.
 - **Commits de código:** `5e7e721762cad40739e4ff8c1352596bfed80f4e` (timestamps de plataformas y estados de espectadores) y `66dfda6ddcc44bd1ccaf1e96af4cb3762847874a` (rotulación de actividad MORIARTYS). Rama: `auditoria-ux`.
-- **Validación automática:** pendiente de resultado del workflow disparado por los commits anteriores.
+- **Validación automática:** workflow [43553044233](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43553044233), ejecución 425, finalizó con **success** sobre el commit `66dfda6ddcc44bd1ccaf1e96af4cb3762847874a`. Pasaron sintaxis JavaScript, Pages Functions, JSON, rutas/recursos, anclas, formularios y auditoría estática de accesibilidad. El registro documental posterior no modifica código.
 - **Despliegue:** no se declara publicación ni cambio en producción. GitHub Pages continúa siendo producción; Cloudflare Pages se mantiene como entorno de preview.
 
 ---
