@@ -1333,31 +1333,43 @@ function renderCommercialQuickView(hero) {
     const youtubeLogin = hero.youtube ? (hero.youtube.split("/").filter(Boolean).pop().replace("@","").toLowerCase()) : "";
     const profileKey = twitchLogin || youtubeLogin;
     const tailoredProfiles = {
+        losmoriartys: {
+            strengths: ["Dupla anfitriona con química y dinámica compartida entre Demi y Ari","Formato cooperativo y participativo, con humor y situaciones espontáneas","Universo visual reconocible de videoclub retro que da continuidad al contenido"],
+            editorial: "Un canal compartido que convierte el gaming cooperativo, el humor y la cultura pop en una experiencia de comunidad con identidad propia.",
+            opportunities: ["Presentación y prueba de juegos en formato cooperativo","Activaciones participativas con la comunidad","Integraciones naturales dentro de directos compartidos","Experiencias especiales con otros creadores"]
+        },
         ther0d3r1k: {
+            strengths: ["Presencia expresiva y energía para sostener partidas compartidas","Versatilidad entre acción, competencia, terror y conversación","Potencial para retos, eventos y momentos de alto dinamismo"],
             editorial: "Gaming y entretenimiento en directo con una presencia expresiva, energía de equipo y variedad de experiencias competitivas, de acción, terror y conversación.",
             opportunities: ["Presentación y prueba de videojuegos de acción, competitivos o de terror","Integraciones de periféricos y accesorios durante su uso real","Retos, eventos y dinámicas con otros creadores","Clips y piezas breves de momentos destacados"]
         },
         ladymoriarty01: {
+            strengths: ["Espontaneidad e improvisación como sello de entretenimiento","Versatilidad entre gameplay chill, charla e IRL","Voz individual diferenciada del proyecto compartido Los Moriartys"],
             editorial: "Un canal individual de gaming, entretenimiento chill e IRL, con una identidad espontánea que combina gameplay, charla y experiencias fuera del juego.",
             opportunities: ["Presentación de videojuegos y experiencias de juego relajadas","Integraciones naturales en charlas o sesiones IRL","Dinámicas participativas y encuentros con la comunidad","Contenido breve a partir de momentos destacados"]
         },
         ardipii: {
+            strengths: ["Cercanía e interacción directa con la comunidad","Cruce de conversación y videojuegos en un formato flexible","Espacio para primeras impresiones y contenido explicado en vivo"],
             editorial: "Una propuesta de conversación, gaming y comunidad, con espacio para explicar, mostrar y conversar en directo de manera cercana.",
             opportunities: ["Presentación de juegos y primeras impresiones en directo","Integraciones de productos dentro de conversaciones pertinentes","Dinámicas participativas con la comunidad","Clips de momentos y conversaciones destacadas"]
         },
         akumazoldyck: {
+            strengths: ["Perfil de anfitrión que convoca encuentros y conversaciones","Combinación de gaming, charla y experiencias grupales","Afinidad natural con dinámicas comunitarias y partidas compartidas"],
             editorial: "Gaming, charlas y encuentros compartidos. Su propuesta combina experiencias de juego con el rol de anfitrión de una comunidad y eventos grupales.",
             opportunities: ["Presentación y prueba de videojuegos competitivos o de terror","Partidas especiales y eventos con otros creadores","Integraciones de productos gaming en contexto de uso","Dinámicas comunitarias y clips de una activación"]
         },
         daved0608: {
+            strengths: ["Nueva etapa abierta a construir una identidad editorial propia","Posibilidad de diseñar experiencias cooperativas y de descubrimiento desde el inicio","Perfil en desarrollo: las propuestas deben definirse junto a Dave"],
             editorial: "Un creador que inicia una nueva etapa de transmisiones. Su especialidad y sus líneas editoriales todavía están en definición; la propuesta debe construirse junto a Dave, sin atribuirle una trayectoria no documentada.",
             opportunities: ["Primeras impresiones y descubrimiento de videojuegos","Experiencias cooperativas y desafíos con la comunidad","Integraciones sencillas, acordadas con el creador","Registro de clips de la nueva etapa, cuando haya material disponible"]
         },
         habitos_atomicos: {
+            strengths: ["Cruce distintivo entre gaming, filosofía y desarrollo personal","Capacidad de abrir conversaciones y reflexiones dentro del entretenimiento","Territorio temático con potencial para contenidos con propósito"],
             editorial: "Gaming y conversación se cruzan con filosofía y desarrollo personal. El canal alterna entretenimiento con espacios para compartir ideas y reflexiones.",
             opportunities: ["Conversaciones temáticas vinculadas a ideas y hábitos cotidianos","Presentación de videojuegos y experiencias en directo","Dinámicas participativas que conecten juego y reflexión","Integraciones de productos pertinentes al contenido y a la audiencia"]
         },
         patoteexplica: {
+            strengths: ["Enfoque educativo y divulgativo, distinto de los perfiles de streaming","Contenidos de programación HTML y JavaScript","Puente entre tecnología, ciencia y comportamiento"],
             editorial: "Un perfil de creación audiovisual educativa y divulgación, con contenidos sobre programación HTML y JavaScript, ciencia y comportamiento. No realiza directos; su formato actual es YouTube.",
             opportunities: ["Videos educativos o explicativos","Presentación de herramientas y plataformas digitales","Integraciones editoriales de software o tecnología, sujetas a criterio de contenido","Piezas divulgativas patrocinadas con transparencia"]
         }
@@ -1384,6 +1396,8 @@ function renderCommercialQuickView(hero) {
     out += '<div class="commercial-quickview-head"><span class="profile-section-kicker">LECTURA RÁPIDA PARA MARCAS</span><strong>FICHA EJECUTIVA</strong></div>';
     out += '<div class="commercial-quickview-meta" role="group" aria-label="Resumen del rol institucional, tipo de creador y plataformas declaradas"><span>' + safe(roleLabels[hero.role] || "INTEGRANTE") + '</span><span>' + safe(typeLabel) + '</span><span>' + safe((hero.platforms || []).map(v=>v.toUpperCase()).join(" · ") || "PLATAFORMA POR CONFIRMAR") + '</span></div>';
     if (data.editorial) out += '<section class="commercial-quickview-editorial"><h4>ENFOQUE PARA MARCAS</h4><p>' + safe(data.editorial) + '</p></section>';
+    const strengths = Array.isArray(data.strengths) && data.strengths.length ? data.strengths : (tailoredProfiles[profileKey]?.strengths || []);
+    if (strengths.length) out += '<section class="commercial-quickview-strengths"><h4>FORTALEZA DIFERENCIAL</h4><ul>' + strengths.map(v => '<li>' + safe(v) + '</li>').join('') + '</ul></section>';
     out += '<div class="commercial-quickview-grid">';
     out += '<section><h4>TERRITORIOS DE CONTENIDO</h4>' + (areas.length ? '<ul>' + areas.map(v=>'<li>'+safe(v)+'</li>').join('') + '</ul>' : '<p>Especialidades pendientes de documentar.</p>') + '</section>';
     out += '<section><h4>FORMATOS A CONVERSAR</h4><ul>' + opportunities.map(v=>'<li>'+safe(v)+'</li>').join('') + '</ul><small>Son posibilidades sujetas a conversación, disponibilidad y aprobación del creador; no representan campañas contratadas.</small></section>';
