@@ -16,6 +16,7 @@ from urllib.parse import urlparse
 ROOT = Path(__file__).resolve().parents[1]
 ROSTER = ROOT / "roster-data.json"
 ACTIVITY = ROOT / "data.json"
+PLATFORM_STATS = ROOT / "platform-stats.json"
 SUPPORTED_PLATFORMS = {"twitch", "youtube", "instagram", "kick"}
 SCOPES = {"shared_project", "individual_creator"}
 MODES = {"public_app_token", "public_api_key", "public_client_credentials", "manual_link_only"}
@@ -134,15 +135,45 @@ def validate_activity(roster: dict, activity: dict) -> list[str]:
     return errors
 
 
+def validate_platform_stats(roster: dict, stats: dict) -> list[str]:
+    errors: list[str] = []
+    expected = {}
+    for hero in roster.get("heroes", []):
+        creator_id = hero.get("id") or hero.get("slug")
+        platforms = {
+            account.get("platform")
+            for account in hero.get("accounts", [])
+            if (account.get("collection") or {}).get("mode") in {"public_api_key", "public_client_credentials"}
+            and account.get("platform") in {"youtube", "kick"}
+        }
+        if creator_id and platforms:
+            expected[creator_id] = platforms
+
+    creators = stats.get("creators") or {}
+    for creator_id, platforms in expected.items():
+        record = creators.get(creator_id)
+        if not isinstance(record, dict):
+            errors.append("Falta el perfil multiplataforma {} en platform-stats.json.".format(creator_id))
+            continue
+        stored_platforms = record.get("platforms") or {}
+        for platform in platforms:
+            if platform not in stored_platforms:
+                errors.append("{}: falta la plataforma {} en platform-stats.json.".format(creator_id, platform))
+    return errors
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--check-activity", action="store_true", help="Contrasta todas las cuentas Twitch con data.json.")
+    parser.add_argument("--check-platforms", action="store_true", help="Contrasta las cuentas YouTube/Kick con platform-stats.json.")
     args = parser.parse_args()
     try:
         roster = read_json(ROSTER)
         errors = validate_roster(roster)
         if args.check_activity:
             errors.extend(validate_activity(roster, read_json(ACTIVITY)))
+        if args.check_platforms:
+            errors.extend(validate_platform_stats(roster, read_json(PLATFORM_STATS)))
     except (OSError, json.JSONDecodeError) as exc:
         print("ERROR: {}".format(exc), file=sys.stderr)
         return 2
@@ -155,6 +186,8 @@ def main() -> int:
     ))
     if args.check_activity:
         print("OK: las cuentas Twitch del Roster coinciden con data.json.")
+    if args.check_platforms:
+        print("OK: las cuentas YouTube/Kick del Roster coinciden con platform-stats.json.")
     return 0
 
 
