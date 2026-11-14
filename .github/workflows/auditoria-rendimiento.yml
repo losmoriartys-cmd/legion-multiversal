@@ -122,6 +122,9 @@ jobs:
           npm install --no-save playwright
           npx playwright install --with-deps chromium
 
+      - name: Identificar elemento LCP en producción y preview
+        run: node scripts/lcp_probe.mjs
+
       - name: Ejecutar smoke QA visual y funcional en preview
         env:
           QA_BASE: https://auditoria-ux.legion-multiversal.pages.dev/
