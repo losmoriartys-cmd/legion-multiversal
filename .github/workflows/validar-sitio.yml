@@ -12,6 +12,7 @@ on:
       - 'scripts/**'
       - 'functions/**'
       - '_headers'
+      - 'INFORMES.md'
       - '.github/workflows/validar-sitio.yml'
   pull_request:
     paths:
