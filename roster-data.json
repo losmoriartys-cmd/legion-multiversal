@@ -22,7 +22,6 @@
       "platforms": [
         "twitch"
       ],
-      "activity_status": "not_assessed",
       "img": "assets/heroes/image_20261103_160331-y-ahora-mezclando-el-nuevo-mio-y-el-marco-nuevo-co-pero-porque-quedo-pelado-xd (1).jpg",
       "twitch": "https://twitch.tv/losmoriartys",
       "bio": "Los Moriartys es el proyecto compartido de Demi y Ari: una dupla gamer y orgullosamente nerd que convierte cada directo en una visita a su videoclub retro. El canal combina videojuegos, cooperativo, humor y cultura pop. Su propuesta no se basa en la competencia profesional, sino en jugar, compartir y construir momentos con la comunidad.",
@@ -52,8 +51,6 @@
           "Identidad de videoclub retro reconocible que conecta gaming, cultura pop y comunidad"
         ]
       },
-      "powers": "Perfil de habilidades en construcción. Se completará con la descripción de personaje aprobada por el integrante.",
-      "stats": "Métricas en proceso de integración. Los datos se publicarán cuando estén conectados a una fuente verificable y acompañados de su período de medición.",
       "log": "Demi creó el proyecto Los Moriartys y lo desarrolla junto a Ari como canal compartido. La identidad del videoclub retro conecta videojuegos, cultura pop, humor y experiencias cooperativas; el recorrido se construye en directos y colaboraciones documentadas.",
       "imageSource": "assets/carnet/DemuianCarnet.jpg",
       "imageWidth": 1280,
@@ -78,13 +75,10 @@
       "platforms": [
         "twitch"
       ],
-      "activity_status": "not_assessed",
       "img": "assets/heroes/rod3r1k_dark.webp",
       "twitch": "https://twitch.tv/TheR0D3R1K",
       "bio": "ROD3R1K, conocido como «ElKrakenaso», lleva cada directo a la acción: partidas competitivas, juegos de terror y encuentros con otros creadores. Su recorrido dentro de la Legión comenzó en las primeras partidas junto a Demian y sigue ligado a las experiencias grupales. En su canal conviven desafío, reacciones y momentos divertidos.",
       "voice": "«¡Que se escuche hasta el último rincón! Si vamos a jugar, que cada partida deje una historia.»",
-      "powers": "Perfil de habilidades en construcción. Pendiente de confirmar con el integrante.",
-      "stats": "Métricas en proceso de integración. Los datos se publicarán cuando estén conectados a una fuente verificable y acompañados de su período de medición.",
       "log": "ARCHIVO DE ORIGEN: integrante de la primera etapa junto a Demian. Su recorrido está ligado a las partidas fundacionales de Marvel Rivals y al impulso de encuentros, eventos y experiencias compartidas. Su historia representa el paso de jugar entre amigos a construir una comunidad.",
       "imageSource": "assets/carnet/rod3r1k_dark-necesito-que-me-hagas-fotos-de-todos-ellos-pero-qu.jpg",
       "imageWidth": 1280,
@@ -130,13 +124,11 @@
       "platforms": [
         "twitch"
       ],
-      "activity_status": "not_assessed",
       "img": "assets/heroes/image_20261103_213640.jpg",
       "twitch": "https://twitch.tv/ladymoriarty01",
       "bio": "La Bruja no necesita seguir un guion: su magia está en cambiar el tono de cada encuentro. Puede convertir una partida tranquila en una situación imprevisible y hacer de una charla o una salida IRL una historia propia. LADYMORIARTY conserva una identidad independiente, espontánea y cercana; su regla es simple: venir a disfrutar y dejar que la aventura encuentre su forma.",
       "voice": "«¿Plan? Puede ser. ¿Improvisar? También. La magia está en no saber qué viene después.»",
       "powers": "Especialidad: entretenimiento chill, IRL y conexión con la comunidad.",
-      "stats": "Métricas en proceso de integración. Los datos se publicarán cuando estén conectados a una fuente verificable y acompañados de su período de medición.",
       "log": "ARCHIVO DE LA HECHICERA: opera con libertad entre gameplay relajado, IRL y momentos espontáneos. Su canal individual tiene voz y recorrido propios, distintos del proyecto compartido Los Moriartys. Su presencia aporta frescura, humor y cercanía.",
       "imageSource": "assets/carnet/LadyCarnet.jpg",
       "imageWidth": 1280,
@@ -181,12 +173,10 @@
       "platforms": [
         "twitch"
       ],
-      "activity_status": "not_assessed",
       "img": "assets/heroes/ardipii_dark.webp",
       "twitch": "https://twitch.tv/ardipii",
       "bio": "El Fantasma aparece sin hacer ruido y encuentra su lugar en cualquier escenario. Su guarida es una comunidad donde cada visitante puede saludar, activar una alerta, acomodarse con unas palomitas y compartir la misión. Su lema recuerda que el tiempo es el recurso más valioso: cada directo es una oportunidad para decidir qué hacer con él.",
       "voice": "«Pasen, pónganse cómodos. Siempre hay lugar para uno más en esta misión.»",
-      "stats": "Métricas en proceso de integración. Los datos se publicarán cuando estén conectados a una fuente verificable y acompañados de su período de medición.",
       "log": "ARCHIVO DE LA SOMBRA: transmite desde México y mantiene un vínculo cercano con su comunidad. Su sello combina interacción, humor y una mirada reflexiva sobre el tiempo y las decisiones; el juego funciona como punto de encuentro.",
       "imageSource": "assets/carnet/ardipii_dark-necesito-que-me-hagas-fotos-de-todos-ellos-pero-qu.jpg",
       "imageWidth": 1280,
@@ -232,12 +222,10 @@
       "platforms": [
         "twitch"
       ],
-      "activity_status": "not_assessed",
       "img": "assets/heroes/image_20261103_160331-podemos-humanizar-a-akuma-pero-que-mantenga-un-poc.jpg",
       "twitch": "https://twitch.tv/akumazoldyck",
       "bio": "El Infernal es una presencia constante: cuando cae la noche, el portal vuelve a abrirse. Entre juegos, conversaciones y amigos, AKUMA sostiene un punto de encuentro donde siempre puede aparecer una nueva historia. Su fuerza no está solamente en entrar en combate, sino en mantener encendida la reunión y darle lugar a quienes llegan.",
       "voice": "«El portal está abierto. Traigan una partida, una historia o simplemente ganas de quedarse.»",
-      "stats": "Métricas en proceso de integración. Los datos se publicarán cuando estén conectados a una fuente verificable y acompañados de su período de medición.",
       "log": "ARCHIVO DEL INFERNAL: veterano de las primeras misiones del equipo y anfitrión de encuentros frecuentes. Su territorio mezcla talk show, videojuegos y charlas con amigos; la constancia es parte central de su identidad.",
       "imageSource": "assets/carnet/Akuma_dark.jpg",
       "imageWidth": 1600,
@@ -273,22 +261,17 @@
       "rank": "ESTUDIANTE",
       "series": "1",
       "cardNumber": "048",
-      "areas": [
-        "Especialidad por definir"
-      ],
+      "areas": [],
       "schedule": "Sin horario fijo confirmado",
       "role": "student",
       "creator_type": "live_streamer",
       "platforms": [
         "twitch"
       ],
-      "activity_status": "not_assessed",
       "img": "assets/heroes/nexus_dark.webp",
       "twitch": "https://twitch.tv/daved0608",
       "bio": "Después de un período de pausa, Dave vuelve a conectar con la Legión y abre una nueva etapa como creador. NEXUS es su identidad dentro del universo narrativo del equipo; sus formatos y especialidades como creador todavía están en construcción y se ampliarán con información aportada por él. El expediente no le atribuye una trayectoria ni una frecuencia que aún no estén documentadas.",
       "voice": "«Conexión establecida. Estoy buscando el puente entre este mundo y el siguiente.»",
-      "powers": "Poderes y especialidad todavía sin definir. Se completarán cuando Dave aporte o apruebe su concepto de personaje.",
-      "stats": "Canal incorporado al sistema de estadísticas. Las métricas se mostrarán cuando la automatización publique datos verificables.",
       "log": "ARCHIVO DEL NEXO: tras un período de pausa, Dave regresa a las transmisiones y comienza una nueva etapa dentro de la Legión. Su rango institucional es ESTUDIANTE: representa su reincorporación y el comienzo de este nuevo recorrido, no una valoración de su experiencia. La agenda de sus directos todavía no tiene un horario fijo confirmado; los anuncios se comunicarán cuando cada transmisión esté programada. La biografía personal y las áreas de contenido podrán ampliarse con su propia voz y datos confirmados.",
       "imageSource": "assets/carnet/nexus_dark-necesito-que-me-hagas-fotos-de-todos-ellos-pero-qu.jpg",
       "imageWidth": 1280,
@@ -335,7 +318,6 @@
       "platforms": [
         "youtube"
       ],
-      "activity_status": "not_assessed",
       "img": "assets/heroes/oratoris_dark.webp",
       "twitch": "",
       "youtube": "https://www.youtube.com/@patoteexplica",
@@ -344,7 +326,6 @@
       "bio": "Patricio Santos crea contenido educativo en su canal Pato te explica, bajo la identidad ORATORIS. Su archivo público reúne una serie introductoria de HTML y JavaScript y una pieza de divulgación sobre dopamina, motivación y adicción. No tiene una frecuencia de publicación definida; comentó la posibilidad de retomar el proyecto durante 2027 con un enfoque renovado, todavía sin calendario confirmado.",
       "voice": "«Compartir conocimiento también es abrir caminos. Entender cómo funciona algo nos da herramientas para elegir mejor.»",
       "powers": "Comunicación y divulgación; enseñanza introductoria de programación; organización de ideas complejas en explicaciones accesibles. Las capacidades del personaje son una representación narrativa de su aporte como creador, no certificaciones profesionales.",
-      "stats": "YOUTUBE · referencia compartida por el equipo: 56 suscriptores, 6 videos y 430 visualizaciones. La fecha exacta de captura no fue indicada; estos valores se presentan como referencia histórica y no como métricas actuales verificadas. Twitch: no aplica.",
       "log": "ARCHIVO ORATORIS: colaborador y creador de Pato te explica. Su primera etapa pública incluye una serie introductoria de HTML y JavaScript y un video sobre dopamina, motivación y adicción. No tiene una frecuencia de publicación definida actualmente. Pato comentó que posiblemente retome el proyecto durante 2027 con un enfoque renovado e incorpore contenido gamer de manera gradual, como línea secundaria. Esta proyección todavía no constituye un calendario ni una programación confirmada.",
       "imageSource": "assets/carnet/oratoris_dark-necesito-que-me-hagas-fotos-de-todos-ellos-pero-qu.jpg",
       "imageWidth": 1280,
@@ -390,12 +371,10 @@
       "platforms": [
         "twitch"
       ],
-      "activity_status": "not_assessed",
       "img": "assets/heroes/habitos_dark.webp",
       "twitch": "https://twitch.tv/habitos_atomicos",
       "bio": "El Filósofo Atómico combina reflexión y acción. Puede detener la marcha para cuestionar una idea y, al instante siguiente, volver al juego con energía renovada. Su universo une gaming, filosofía y desarrollo personal: no se trata de tener todas las respuestas, sino de entrenar la mente, sostener buenos hábitos y seguir avanzando.",
       "voice": "«La mente también se entrena. Cuestioná, aprendé y volvé al juego con más herramientas.»",
-      "stats": "Métricas en proceso de integración. Los datos se publicarán cuando estén conectados a una fuente verificable y acompañados de su período de medición.",
       "log": "ARCHIVO DEL JUSTICIERO: impulsa conversaciones sobre hábitos, crecimiento y filosofía sin abandonar el entretenimiento. Su propuesta alterna partidas y reflexión, con una presencia orientada a motivar, compartir ideas y construir comunidad.",
       "imageSource": "assets/carnet/habitos_dark-necesito-que-me-hagas-fotos-de-todos-ellos-pero-qu.jpg",
       "imageWidth": 1280,
