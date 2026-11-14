@@ -89,10 +89,13 @@ async function loadRosterDirectory(){
   const slug=name=>String(name||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
   grid.innerHTML=heroes.map(hero=>{
    const image=hero.portrait||hero.img||'';
+   const dims=hero.imageSource===image&&hero.imageWidth&&hero.imageHeight
+    ? ' width="'+Number(hero.imageWidth)+'" height="'+Number(hero.imageHeight)+'"'
+    : '';
    const name=hero.name||'Integrante';
    const role=hero.rank||hero.role||'EXPEDIENTE';
    const code=hero.cardNumber?'N.º '+hero.cardNumber:'REGISTRO ACTIVO';
-   return '<a class="directory-card" href="./index.html#expediente-'+encodeURIComponent(slug(name))+'" aria-label="Abrir expediente de '+esc(name)+'"><img src="'+esc(image)+'" alt="" loading="lazy"><span><small>'+esc(code)+'</small><strong>'+esc(name)+'</strong><em>'+esc(hero.codename||role)+'</em></span></a>';
+   return '<a class="directory-card" href="./index.html#expediente-'+encodeURIComponent(slug(name))+'" aria-label="Abrir expediente de '+esc(name)+'"><img src="'+esc(image)+'" alt=""'+dims+' loading="lazy" decoding="async"><span><small>'+esc(code)+'</small><strong>'+esc(name)+'</strong><em>'+esc(hero.codename||role)+'</em></span></a>';
   }).join('');
   grid.dataset.loaded='true';
  }catch(error){
