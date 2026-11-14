@@ -716,6 +716,26 @@ async function loadLiveDirectory() {
 
     try {
         const data = await fetchJSON('/api/live', { timeout: 8000, retries: 1 });
+        // Una preview puede no tener secretos de Twitch configurados. La API
+        // responde con estado degradado (HTTP 200) y usamos la última captura
+        // estática sin presentar canales como online/offline actuales.
+        if (data.status === 'unavailable' || data.source !== 'twitch-helix') {
+            if (!instituteStatsData) await loadInstituteStats();
+            if (instituteStatsData) {
+                const logins = Array.isArray(instituteStatsData.active_channels)
+                    ? instituteStatsData.active_channels
+                    : Object.keys(instituteStatsData.channels || {});
+                const fallbackChannels = logins
+                    .map(login => instituteStatsData.channels?.[login])
+                    .filter(Boolean);
+                renderLiveDirectory(fallbackChannels, {
+                    source: 'data',
+                    updatedAt: instituteStatsData.updated_at,
+                    fallback: true
+                });
+            }
+            return;
+        }
         const channels = Array.isArray(data.channels) ? data.channels.map(channel => ({
             ...channel,
             current_game: channel.game_name ?? null,
