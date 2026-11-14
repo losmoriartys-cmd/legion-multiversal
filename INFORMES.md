@@ -2769,3 +2769,13 @@ Se conserva el compromiso de avanzar una mejora por etapa, con validación y rev
 - Se detectó un enlace dinámico del modal de perfiles (`#modal-twitch-btn`) con `target="_blank"` sin `rel`. Se agrega `rel="noopener noreferrer"` para aislar la nueva pestaña y evitar acceso a `window.opener`.
 - Alcance: `index.html`, `INFORMES.md`. Sin cambios de contenido, destinos ni comportamiento del enlace.
 - Integración: PR #45 fusionado mediante squash en `1eb236fdef67e5582488c2a3787401128060ba4e`. La validación automática post-merge finalizó correctamente (run 43378868338) y el build/deploy de GitHub Pages también (run 43378867510). La revisión de teclado y lector de pantalla sigue pendiente; no se declara auditoría accesible completa.
+
+## 2026-11-14 — Consolidación del Roster integral y Biblia de implementación
+
+- **Rama:** `feat/roster-integral-2026-11-14`, creada desde el `main` vigente.
+- **Alcance:** una única línea de producto para la experiencia pública del Roster, expedientes individuales, integración de actividad/datos multiplataforma y entregables comerciales.
+- **Documento rector:** se crea `BIBLIA_ROSTER_INTEGRAL.md` con criterios funcionales/visuales, arquitectura de datos, fases y checklist de aceptación; se enlaza desde `BIBLIA_EVOLUCION_LEGION_MULTIVERSAL.md`.
+- **Estado de PRs al inicio:** búsqueda de PR abiertos en el repositorio encontró únicamente el PR #46 (auditoría global de UX). No había PR de Roster abiertos para absorber. Los PR #12/#14/#36/#45 ya están integrados; el #46 se mantiene separado por su alcance transversal y pendientes propios.
+- **Composición de datos de partida:** `roster-data.json` contiene ocho expedientes; el seguimiento documentado distingue siete canales Twitch y ORATORIS como perfil YouTube. MORIARTYS se conserva como canal/proyecto compartido de Demian y Ari.
+- **Salvaguardas:** esta etapa no modifica `main`, no integra PRs, no altera producción ni cambia credenciales. El checklist no considera completada una tarea sin QA funcional, responsive y evidencia registrada.
+- **Siguiente bloque:** simplificación de la interfaz del directorio y jerarquía editorial; después identidad canónica, rutas de expediente, accesibilidad, fallback y conexión de estado EN VIVO.
