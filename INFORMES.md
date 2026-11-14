@@ -3049,8 +3049,9 @@ Se conserva el compromiso de avanzar una mejora por etapa, con validación y rev
 - Run [43561161022](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43561161022), reportes JSON individuales:
   - GitHub Pages: 13,93 s / 15,21 s / 15,02 s; mediana 15,02 s.
   - Preview: 11,60 s / 12,70 s / 12,82 s; mediana 12,70 s.
-- Las seis corridas repiten el LCP elevado. No se descarta como un valor aislado.
-- `scripts/lcp_probe.mjs` identificó en ambos hosts el banner `image_20261106_124855.jpg` (`IMG`, `loading=eager`, `fetchpriority=high`), con `PerformanceObserver` en 580 ms (producción) y 248 ms (preview). No es el emblema ni una imagen lazy. Hay una discrepancia entre ese evento de navegador y la auditoría LCP de Lighthouse que requiere aislar condiciones del runner/red antes de cambiar prioridades.
+- Las seis corridas repiten un LCP **simulado** elevado. El valor `audits.largest-contentful-paint` (11,60–15,21 s) no equivale al LCP observado en la traza. El objeto `audits.metrics.details.items[0]` contiene ambos: `largestContentfulPaint` (simulado) y `observedLargestContentfulPaint` (observado en navegador).
+- LCP observado en los seis reportes: GitHub Pages 435/239/257 ms (mediana 257 ms); preview 308/334/279 ms (mediana 308 ms). El `PerformanceObserver` independiente midió 580 ms y 248 ms respectivamente. No hay evidencia de un LCP real de 14 s en el navegador sin throttling.
+- El simulador de Lighthouse sí proyecta un escenario móvil lento: `lcpLoadDelay` 2,1–4,7 s y `lcpLoadDuration` 1,2–8,1 s. El nodo LCP es el banner `image_20261106_124855.jpg` (`IMG`, `loading=eager`, `fetchpriority=high`), de 413.391 B. El recurso se descubre en el documento inicial; no está lazy. El peso del banner y la competencia con otros recursos de alta prioridad pueden explicar parte de la proyección. No se cambia el atributo lazy ni la prioridad; la optimización de imágenes queda pendiente de aprobación y deberá medir ambos indicadores por separado.
 
 ### Best Practices: detalle real de errors-in-console
 - Producción: `errors-in-console` registra `GET https://losmoriartys-cmd.github.io/favicon.ico` con HTTP 404. En producción actual (main) falta el icono declarado. La rama `auditoria-ux` ya declara un favicon PNG existente en el `<head>`; la corrección aún no está en producción porque no se fusionó.
