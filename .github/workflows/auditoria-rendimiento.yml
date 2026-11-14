@@ -88,14 +88,23 @@ jobs:
       - name: Exponer Chrome a Lighthouse
         run: echo "CHROME_PATH=${{ steps.chrome.outputs.chrome-path }}" >> "$GITHUB_ENV"
 
-      - name: Comprobar que producción y preview responden por HTTP
+      - name: Comprobar HTTP, X-Robots-Tag y robots.txt de la preview
         run: |
+          mkdir -p reports/lighthouse
           curl --fail --location --silent --show-error --retry 3 \
             --output /dev/null \
             https://losmoriartys-cmd.github.io/legion-multiversal/
           curl --fail --location --silent --show-error --retry 3 \
             --output /dev/null \
             https://auditoria-ux.legion-multiversal.pages.dev/
+          curl --silent --show-error --location --dump-header reports/lighthouse/preview-headers.txt \
+            --output /dev/null https://auditoria-ux.legion-multiversal.pages.dev/
+          echo "--- X-Robots-Tag ---"
+          grep -i '^x-robots-tag:' reports/lighthouse/preview-headers.txt || echo "X-Robots-Tag no presente"
+          curl --silent --show-error --location --dump-header reports/lighthouse/preview-robots-headers.txt \
+            --output reports/lighthouse/preview-robots.txt https://auditoria-ux.legion-multiversal.pages.dev/robots.txt
+          echo "--- robots.txt preview ---"
+          cat reports/lighthouse/preview-robots.txt
 
       - name: Pasos 5 y 6 — tres corridas Lighthouse por entorno y medianas
         env:
