@@ -24,14 +24,31 @@ for category in ("seo", "best-practices"):
         value = audit.get("score")
         if value is not None and value < 1:
             print(f"  - {ref.get('id')} | {audit.get('title')} | score {value}")
+            if audit.get("displayValue"):
+                print("      detalle:", audit["displayValue"])
+            if audit.get("description"):
+                print("      descripción:", audit["description"])
+            for detail in audit.get("details", {}).get("items", [])[:5]:
+                print("      evidencia:", json.dumps(detail, ensure_ascii=False)[:1800])
 
-items = report.get("audits", {}).get("largest-contentful-paint-element", {}).get("details", {}).get("items", [])
+lcp_audit = report.get("audits", {}).get("largest-contentful-paint-element", {})
+lcp_details = lcp_audit.get("details", {})
+items = lcp_details.get("items", [])
+node = None
 if items:
-    node = items[0].get("items", [{}])[0].get("node", {})
+    first = items[0]
+    node = first.get("node")
+    if not node and first.get("items"):
+        node = first["items"][0].get("node")
+if node:
     print("LCP element:", node.get("snippet", "n/d"))
     print("LCP selector:", node.get("selector", "n/d"))
 else:
     print("LCP element: n/d")
+    if items:
+        print("LCP details:", json.dumps(items[0], ensure_ascii=False)[:2500])
+    else:
+        print("LCP audit:", json.dumps({k: lcp_audit.get(k) for k in ("score", "scoreDisplayMode", "numericValue", "displayValue", "description")}, ensure_ascii=False)[:2500])
 
 requests = report.get("audits", {}).get("network-requests", {}).get("details", {}).get("items", [])
 images = []
