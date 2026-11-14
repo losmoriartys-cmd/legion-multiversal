@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Legión Multiversal — normalized creator metrics",
+  "type": "object",
+  "required": ["schema_version", "generated_at", "source_files", "methodology", "creators"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "generated_at": {"type": "string", "format": "date-time"},
+    "source_files": {
+      "type": "object",
+      "required": ["identity", "twitch", "platforms", "clips"],
+      "properties": {
+        "identity": {"const": "roster-data.json"},
+        "twitch": {"const": "data.json"},
+        "platforms": {"const": "platform-stats.json"},
+        "clips": {"const": "clips-data.json"}
+      }
+    },
+    "methodology": {"type": "array", "items": {"type": "string"}},
+    "creators": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["display_name", "identity_scope", "represented_people", "accounts", "metrics", "content"],
+        "properties": {
+          "display_name": {"type": "string", "minLength": 1},
+          "identity_scope": {"enum": ["shared_project", "individual_creator"]},
+          "represented_people": {"type": "array", "items": {"type": "string"}},
+          "accounts": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["account_ref", "platform", "account_type", "handle", "url", "ownership", "account_status", "collection_mode", "restricted_metrics"],
+              "properties": {
+                "account_ref": {"type": "string"},
+                "platform": {"enum": ["twitch", "youtube", "kick", "instagram"]},
+                "account_type": {"enum": ["creator_channel", "social_profile"]},
+                "handle": {"type": "string"},
+                "login": {"type": ["string", "null"]},
+                "url": {"type": "string", "format": "uri"},
+                "ownership": {"enum": ["shared", "individual"]},
+                "account_status": {"type": "string"},
+                "collection_mode": {"type": "string"},
+                "collection_source": {"type": ["string", "null"]},
+                "restricted_metrics": {"type": "array", "items": {"type": "string"}}
+              }
+            }
+          },
+          "metrics": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["metric_id", "platform", "account_handle", "key", "label", "value", "unit", "captured_at", "period", "source", "method", "status", "visibility", "interpretation", "source_file"],
+              "properties": {
+                "metric_id": {"type": "string"},
+                "platform": {"enum": ["twitch", "youtube", "kick", "instagram"]},
+                "account_handle": {"type": "string"},
+                "key": {"type": "string"},
+                "label": {"type": "string"},
+                "value": {"type": ["number", "string", "boolean", "null"]},
+                "unit": {"type": "string"},
+                "captured_at": {"type": ["string", "null"], "format": "date-time"},
+                "period": {
+                  "type": "object",
+                  "required": ["kind", "from", "to"],
+                  "properties": {
+                    "kind": {"type": "string"},
+                    "from": {"type": ["string", "null"], "format": "date-time"},
+                    "to": {"type": ["string", "null"], "format": "date-time"}
+                  }
+                },
+                "source": {"type": "string"},
+                "method": {"type": "string"},
+                "status": {"enum": ["fresh", "delayed", "unavailable", "offline", "sampled", "estimated", "verified_public"]},
+                "visibility": {"enum": ["public", "authorized", "editorial"]},
+                "interpretation": {"type": "string"},
+                "source_file": {"enum": ["data.json", "platform-stats.json", "clips-data.json"]}
+              }
+            }
+          },
+          "content": {
+            "type": "object",
+            "required": ["twitch_clips_status", "twitch_clips_count"],
+            "properties": {
+              "twitch_clips_status": {"type": "string"},
+              "twitch_clips_captured_at": {"type": ["string", "null"], "format": "date-time"},
+              "twitch_clips_count": {"type": "integer", "minimum": 0}
+            }
+          }
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}
