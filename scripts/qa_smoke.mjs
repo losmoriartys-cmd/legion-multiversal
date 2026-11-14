@@ -42,6 +42,13 @@ for (const vp of VIEWPORTS) {
     check(`${tag}: sin scroll horizontal`, !overflow);
 
     if (hash === "") {
+      const mailtoCount = await page.locator('a[href^="mailto:"]').count();
+      check(`${tag}: CTA de contacto mailto disponible`, mailtoCount > 0, `enlaces: ${mailtoCount}`);
+      const formFallback = await page.locator('[data-contact-form] .contact-mailto-fallback').count();
+      check(`${tag}: respaldo mailto del formulario presente`, formFallback > 0);
+      await page.keyboard.press("Tab");
+      const keyboardFocus = await page.evaluate(() => document.activeElement && document.activeElement !== document.body && document.activeElement !== document.documentElement);
+      check(`${tag}: navegación por teclado mueve el foco`, keyboardFocus);
       const open = await page.evaluate(() => document.querySelector(".roster-filter-disclosure")?.open);
       check(`${tag}: details del roster ${vp.width >= 701 ? "abierto" : "cerrado"}`, open === (vp.width >= 701));
       await page.screenshot({ path: `reports/qa/${vp.name}.png`, fullPage: true });
