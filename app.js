@@ -226,7 +226,7 @@ function renderHelixDashboard(channel){
  const snaps=Array.isArray(channel.snapshots)?channel.snapshots.filter(v=>v&&v.sampled_at):[];
  const first=snaps.length?Date.parse(snaps[0].sampled_at):NaN;
  const last=snaps.length?Date.parse(snaps[snaps.length-1].sampled_at):NaN;
- const interval=Number(instituteStatsData?.sampling_interval_minutes||15);
+
  const expected=Number.isFinite(first)&&Number.isFinite(last)&&last>=first?Math.floor((last-first)/(interval*60000))+1:0;
  const coverage=expected?Math.min(100,snaps.length/expected*100):null;
  const gaps=snaps.slice(1).map((v,i)=>(Date.parse(v.sampled_at)-Date.parse(snaps[i].sampled_at))/60000).filter(v=>Number.isFinite(v)&&v>0).sort((a,b)=>a-b);
