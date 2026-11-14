@@ -3104,8 +3104,8 @@ Durante esta tanda, `main` avanzó de `b67079b8d6bbde268a967e60ef642987072c6c52`
 ## Validación endpoint y auditoría de imágenes — run 43570146758 (14/11/2026)
 
 - **Ejecución integral SUCCESS:** [workflow #61 / run 43570146758](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43570146758), sobre el commit c15aa5aab34129c98978ff34c128aefa7434d845. Job único completado: 23 pasos, todos SUCCESS.
-- **Pruebas nuevas de /api/live: 13/13 OK** en desktop (5), tablet (4) y mobile (4). Cada respuesta observada fue HTTP 200 y JSON válido con source fallback, status unavailable y channels como array. Esto prueba el contrato de fallback de Preview; no prueba credenciales Twitch ni un flujo Helix en vivo.
-- **Smoke QA Preview: 43/43 OK** en 1440, 768 y 390 px. Sin errores JS ni scroll horizontal; incluye navegación por teclado, CTA y fallback del formulario.
+- **Pruebas nuevas de /api/live: 15/15 OK** en desktop (5), tablet (5) y mobile (5). Cada respuesta observada fue HTTP 200 y JSON válido con source fallback, status unavailable y channels como array. Esto prueba el contrato de fallback de Preview; no prueba credenciales Twitch ni un flujo Helix en vivo.
+- **Smoke QA Preview: 58/58 OK** en 1440, 768 y 390 px (43 comprobaciones base + 15 validaciones del contrato /api/live). Sin errores JS ni scroll horizontal; incluye navegación por teclado, CTA y fallback del formulario.
 - **QA producción GitHub Pages: 10/10 OK.** Sin solicitudes /api/*, errores JavaScript ni errores de página. No se cambió ni desplegó producción.
 - **Lighthouse (medianas de 3 corridas por entorno):**
 
