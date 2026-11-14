@@ -580,6 +580,7 @@ async function loadInstituteStats(){
  }catch(e){
   body.innerHTML='<tr><td colspan="9">Estadísticas temporalmente no disponibles. '+escapeStatsHtml(e.message)+'</td></tr>';
   const summary=document.getElementById('stats-summary');if(summary)summary.innerHTML='<article class="impact-kpi"><strong>—</strong><span>DATOS NO DISPONIBLES</span><small>Volvé a consultar más tarde.</small></article>';
+  refreshRosterLiveIndicators();
  } finally {
   instituteStatsLoading=false;
  }
