@@ -9,10 +9,10 @@
 #   RUNS=5 bash scripts/lighthouse_runs.sh
 set -euo pipefail
 
-GH_URL="\${1:-https://losmoriartys-cmd.github.io/legion-multiversal/}"
-PREVIEW_URL="\${2:-https://auditoria-ux.legion-multiversal.pages.dev/}"
-RUNS="\${RUNS:-3}"
-OUT_DIR="\${OUT_DIR:-reports/lighthouse}"
+GH_URL="${1:-https://losmoriartys-cmd.github.io/legion-multiversal/}"
+PREVIEW_URL="${2:-https://auditoria-ux.legion-multiversal.pages.dev/}"
+RUNS="${RUNS:-3}"
+OUT_DIR="${OUT_DIR:-reports/lighthouse}"
 
 if ! [[ "$RUNS" =~ ^[1-9][0-9]*$ ]]; then
   echo "RUNS debe ser un entero positivo (recibido: $RUNS)." >&2
