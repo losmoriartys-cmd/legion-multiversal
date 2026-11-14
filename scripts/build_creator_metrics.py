@@ -175,10 +175,12 @@ def build(roster, twitch, platforms, clips, now=None):
                         ("videos_total", "Videos publicados", "videos", "Cantidad total de videos del canal."),
                     ]
                     for key, label, unit, meaning in definitions:
+                        value = source_metrics.get(key) if freshness != "unavailable" else None
+                        historical_meaning = meaning + (" Valor histórico de la última captura correcta; no se etiqueta como lectura actual." if freshness == "delayed" else "")
                         metrics.append(make_metric(
-                            platform, handle, key, label, source_metrics.get(key), unit,
+                            platform, handle, key, label, value, unit,
                             captured_at, period, source_name, "youtube_data_api_public",
-                            metric_status, meaning, "platform-stats.json",
+                            metric_status, historical_meaning, "platform-stats.json",
                         ))
                 elif platform == "kick":
                     kick_metrics = source_record.get("metrics") or {}
