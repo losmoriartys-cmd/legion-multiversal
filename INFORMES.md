@@ -1,3 +1,15 @@
+## 2026-11-14 — Protección temporal de Bitácora y herramienta QA local
+
+- **Decisión editorial recibida:** mantener la Bitácora como activo comercial indexable a futuro, pero no indexar la página con sufijo `-preview` mientras el piloto MORIARTYS no tenga QA visual y funcional aprobado.
+- **Implementado:** `bitacora-preview.html` ahora incluye `<meta name="robots" content="noindex, nofollow">`. Se mantiene el nombre actual; no se renombró el archivo ni se modificaron enlaces o canonical. El renombrado a `bitacora.html`, la actualización de enlaces/canonical y el redirect HTML quedan expresamente reservados para un PR independiente después de la aprobación de QA. Commit: `5f6e6756a7171cc2ea43c2ca51fd81dbe50637b2`.
+- **Herramienta local agregada:** `scripts/qa_smoke.mjs` implementa smoke tests Playwright en 1440×900, 768×1024 y 390×844 con hashes normal, inválido y anclas conocidas; captura errores JS, scroll horizontal, estado del disclosure y llamadas a `/api/*`. Genera capturas PNG y `reports/qa/resultado.json`. Commit: `61cbd896897198ef7c09e8db7fa7a6882d8295e7`.
+- **Diferencia por entorno:** en localhost el script exige cero llamadas a `/api/*`; en `*.pages.dev` registra las llamadas como INFO para revisión manual del fallback, en lugar de marcar como fallo el comportamiento esperado de preview sin secretos.
+- **Dependencias y ejecución:** el script no se incorporó al CI ni se agregó Playwright al manifiesto del proyecto; es una herramienta local opt-in. Ejecutar `npm i -D playwright`, `npx playwright install chromium`, levantar `python3 -m http.server 8080` y correr `node scripts/qa_smoke.mjs`. Para preview: `QA_BASE=https://auditoria-ux.legion-multiversal.pages.dev/ node scripts/qa_smoke.mjs`.
+- **Limitaciones:** no se ejecutó el navegador en esta sesión; no hay resultados, capturas ni aprobación visual. En preview se debe comprobar manualmente que las respuestas 503 de Functions activen el respaldo previsto. El script no verifica envío real de `mailto:`, accesibilidad con teclado/lector de pantalla ni jerarquía/contraste visual.
+- **Pendiente:** ejecutar local y preview; adjuntar `reports/qa/`; validar el fallback y el formulario manualmente; completar dimensiones de imágenes y Lighthouse (tres corridas por entorno); obtener CI del HEAD resultante. Mantener el PR #46 en Draft y sin fusionar hasta completar QA y recibir aprobación.
+ 
+---
+
 ## 2026-11-14 — Cierre de hallazgos críticos de navegación y roster
 
 - **Rama y límites:** trabajo realizado únicamente en `auditoria-ux`. `main` no fue modificada directamente, el PR #46 sigue sin fusionar y GitHub Pages continúa siendo producción.
