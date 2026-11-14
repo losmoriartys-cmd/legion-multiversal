@@ -825,7 +825,9 @@ async function loadInstituteStats(){
   const collectionComplete=collection.complete===true && expectedChannels>0 && resolvedChannels>=expectedChannels && accountedChannels.size>=expectedChannels;
   const freshness=getCaptureFreshness(data.updated_at,interval);
   const isFresh=freshness.fresh;
-  const statusLabel=!updatedValid?'FECHA NO DISPONIBLE':!isFresh?'DATOS CON DEMORA':collectionComplete?'CONSULTA COMPLETA':'CONSULTA PARCIAL';
+  const sampledCount=sampledChannels.length;
+  const samplingStatus=sampledCount>=expectedChannels?'MUESTREO COMPLETO':sampledCount>0?'MUESTREO PARCIAL':'SIN MUESTRAS NUEVAS';
+  const statusLabel=!updatedValid?'FECHA NO DISPONIBLE':!isFresh?'DATOS CON DEMORA':collectionComplete?(sampledCount>=expectedChannels?'MUESTREO COMPLETO':sampledCount>0?'CONSULTA RESUELTA · MUESTREO PARCIAL':'CONSULTA RESUELTA · SIN MUESTRAS NUEVAS'):'CONSULTA PARCIAL';
   const updatedNode=document.getElementById('stats-updated');
   if(updatedNode){
    updatedNode.textContent='Última actualización: '+updatedLabel+' · '+channels.length+' canales activos · '+statusLabel+' · intervalo objetivo: '+interval+' min.';
@@ -839,7 +841,7 @@ async function loadInstituteStats(){
   const observedCoverageLabel=observedCoverageDays===null?'todavía no hay un tramo de muestras calculable':formatArgentinaDateTime(new Date(firstObservedAt),{dateStyle:'medium'})+' — '+formatArgentinaDateTime(new Date(lastObservedAt),{dateStyle:'medium'})+' (aprox. '+fmt(observedCoverageDays,1)+' días)';
   if(samplingNote)samplingNote.textContent='La actividad de Twitch se obtiene de Twitch Helix mediante data.json. La cadencia objetivo del colector es de '+interval+' minutos y la ventana móvil configurada es de hasta '+fmt(data.window_days,0)+' días. Cobertura realmente observada: '+observedCoverageLabel+'. La continuidad depende de las ejecuciones y de la disponibilidad de la API; una ventana configurada no equivale a un período completo de datos.';
   const coverageNote=document.getElementById('stats-methodology-coverage');
-  if(coverageNote)coverageNote.textContent='En la última consulta se resolvieron '+resolvedChannels+' de '+expectedChannels+' canales esperados'+(skippedChannels.length?'; '+skippedChannels.length+' no generaron una muestra nueva en esta ejecución ('+skippedChannels.join(', ')+')':'')+'. Estado informado por el colector: '+(collectionComplete?'consulta completa':'consulta parcial o pendiente')+'. Una consulta completa significa que se resolvieron los canales, no que todos hayan añadido una muestra nueva. Los espectadores actuales reflejan la última lectura; promedios y picos son observaciones por muestreo, no analíticas oficiales de Twitch.';
+  if(coverageNote)coverageNote.textContent='En la última consulta se resolvieron '+resolvedChannels+' de '+expectedChannels+' canales esperados; '+sampledCount+' generaron una muestra nueva y '+skippedChannels.length+' quedaron omitidos'+(skippedChannels.length?' ('+skippedChannels.join(', ')+')':'')+'. Estado de resolución: '+(collectionComplete?'todos los canales contabilizados':'consulta parcial o pendiente')+' · estado de muestreo: '+samplingStatus.toLowerCase()+'. La resolución de un canal no implica que haya aportado una muestra nueva. Los espectadores actuales reflejan la última lectura; promedios y picos son observaciones por muestreo, no analíticas oficiales de Twitch.';
   document.getElementById('stats-summary').innerHTML=[
    [fmt(channels.length,0),'CANALES EN SEGUIMIENTO','Todos los canales Twitch registrados del roster'],
    [fmt(isFresh?liveCount:0,0),'EN DIRECTO EN ÚLTIMA LECTURA',isFresh?'Canales con transmisión en la captura reciente':'Estado de transmisión con datos demorados'],
@@ -847,7 +849,7 @@ async function loadInstituteStats(){
    [fmt(liveSamples,0),'MUESTRAS EN DIRECTO','Registros capturados mientras había transmisión'],
    [fmt(observedLiveHours,1)+' h','HORAS EN DIRECTO OBSERVADAS','Estimación entre muestras consecutivas; no duración oficial completa'],
    [interval+' MIN','FRECUENCIA OBJETIVO','Cadencia configurada del colector'],
-   [resolvedChannels+'/'+expectedChannels,'COBERTURA DE CANALES',collectionComplete?'Todos los canales esperados fueron contabilizados':'Revisar canales pendientes o no contabilizados']
+   [sampledCount+'/'+expectedChannels,'CANALES CON MUESTRA NUEVA',resolvedChannels+'/'+expectedChannels+' resueltos · '+skippedChannels.length+' omitidos en esta ejecución']
   ].map(([value,label,note])=>'<article class="impact-kpi"><strong>'+value+'</strong><span>'+label+'</span><small>'+note+'</small></article>').join('');
   const liveNav=document.querySelector('.nav-btn-live[data-chapter="10"]');
   if(liveNav){const showLive=isFresh&&liveCount>0;liveNav.classList.toggle('is-live',showLive);liveNav.textContent='09 EN VIVO'+(showLive?' · '+liveCount:'');liveNav.setAttribute('aria-label',showLive?liveCount+' canal(es) detectado(s) en directo en la última captura':'Consultar estado de transmisiones');}
