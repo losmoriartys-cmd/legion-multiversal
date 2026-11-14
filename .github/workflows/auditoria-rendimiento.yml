@@ -89,11 +89,27 @@ jobs:
           RUNS: '3'
         run: bash scripts/lighthouse_runs.sh
 
-      - name: Publicar reportes, resumen y diff para revisión
+      - name: Diagnosticar SEO, Best Practices, LCP y peso de imágenes
+        run: |
+          python scripts/lh_failures.py reports/lighthouse/github-pages/run1.report.json | tee reports/lighthouse/diagnostico-produccion.txt
+          python scripts/lh_failures.py reports/lighthouse/preview/run1.report.json | tee reports/lighthouse/diagnostico-preview.txt
+
+      - name: Preparar Playwright para smoke QA
+        run: |
+          npm init -y
+          npm install --no-save playwright
+          npx playwright install --with-deps chromium
+
+      - name: Ejecutar smoke QA visual y funcional en preview
+        env:
+          QA_BASE: https://auditoria-ux.legion-multiversal.pages.dev/
+        run: node scripts/qa_smoke.mjs
+
+      - name: Publicar reportes, resumen, diff y capturas QA
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: auditoria-ux-${{ github.run_id }}
-          path: reports/lighthouse/
+          path: reports/
           if-no-files-found: warn
           retention-days: 14
