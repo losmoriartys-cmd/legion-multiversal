@@ -22,10 +22,16 @@ const check = (label, ok, extra = "") => {
 for (const vp of VIEWPORTS) {
   for (const hash of HASHES) {
     const page = await browser.newPage({ viewport: { width: vp.width, height: vp.height } });
-    const errors = [], apiCalls = [], apiResponses = [];
+    const errors = [], apiCalls = [], apiResponses = [], apiResults = [];
     page.on("pageerror", (e) => errors.push(e.message));
     page.on("request", (r) => { if (r.url().includes("/api/")) apiCalls.push(r.url()); });
-    page.on("response", (r) => { if (r.url().includes("/api/")) apiResponses.push(`${r.status()} ${r.url()}`); });
+    page.on("response", async (r) => {
+      if (!r.url().includes("/api/")) return;
+      apiResponses.push(`${r.status()} ${r.url()}`);
+      let payload = null, parseError = "";
+      try { payload = await r.json(); } catch (error) { parseError = error.message; }
+      apiResults.push({ status: r.status(), payload, parseError, url: r.url() });
+    });
 
     await page.goto(BASE + hash, { waitUntil: "domcontentloaded", timeout: 45000 });
     // La app puede mantener consultas/intervalos activos; networkidle no es un
@@ -39,6 +45,17 @@ for (const vp of VIEWPORTS) {
     if (!/\.pages\.dev$/i.test(new URL(BASE).hostname)) {
       check(`${tag}: sin llamadas a /api/*`, apiCalls.length === 0, apiCalls.join(", "));
     } else {
+      const validLivePayload = (result) => {
+        const body = result.payload;
+        if (result.status !== 200 || !body || !Array.isArray(body.channels)) return false;
+        if (body.source === "fallback") {
+          return body.status === "unavailable" && body.updated_at === null;
+        }
+        return body.source === "twitch-helix" && typeof body.updated_at === "string" && !Number.isNaN(Date.parse(body.updated_at));
+      };
+      check(`${tag}: /api/live responde HTTP 200 con contrato válido`,
+        apiResults.length > 0 && apiResults.every(validLivePayload),
+        apiResults.map(result => `${result.status} ${result.url} · ${result.parseError || result.payload?.source || "JSON inválido"}`).join(" | "));
       console.log(`INFO ${tag}: ${apiCalls.length} llamadas a /api/* en preview · respuestas: ${apiResponses.join(" | ") || "pendientes"}`);
     }
 
