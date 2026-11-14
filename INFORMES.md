@@ -2798,3 +2798,8 @@ Se conserva el compromiso de avanzar una mejora por etapa, con validación y rev
 - **Caveat de métricas:** el período es el intervalo real con muestras, no una ventana completa de 30 días; los promedios/picos son muestreo propio, no CCV oficial ni espectadores únicos. Las horas vistas son estimación de intervalos, no watch time oficial. No se ha cotejado todavía contra el Creator Dashboard del titular ni se ejecutó una consulta directa a la API desde esta rama.
 - **Revisión humana pendiente:** inspección visual/funcional desktop, tablet y móvil; filtros/chips/bottom sheet; flip de cartas; modal y pestañas A/B/C; enlaces compartibles, navegación del navegador, teclado/lector de pantalla y destinos externos. También queda QA de imágenes, LCP/CLS y comprobación editorial de nombres canónicos.
 - **Producción:** no hubo merge, no se modificó `main`, no se cambiaron secretos ni se desplegó producción.
+
+### Requisito de credenciales del colector (no ejecutado desde esta PR)
+
+- El colector programado de GitHub Actions requiere `TWITCH_CLIENT_ID` y `TWITCH_CLIENT_SECRET` en los secretos de Actions. Las variables/secrets de Cloudflare Pages pertenecen a otro entorno y no se comparten automáticamente.
+- La PR no ha modificado credenciales ni ejecutado el colector desde la rama. Antes de integrar/activar la nueva versión, confirmar la presencia de ambos secretos en Settings → Secrets and variables → Actions. No incorporar valores en el repositorio.
