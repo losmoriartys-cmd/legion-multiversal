@@ -1,0 +1,153 @@
+#!/usr/bin/env python3
+"""Valida el modelo de identidad del Roster y su contrato con los archivos de métricas.
+
+No realiza llamadas de red ni modifica archivos. --check-activity contrasta el
+registro de cuentas Twitch con data.json después de una captura del colector.
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import re
+import sys
+from pathlib import Path
+from urllib.parse import urlparse
+
+ROOT = Path(__file__).resolve().parents[1]
+ROSTER = ROOT / "roster-data.json"
+ACTIVITY = ROOT / "data.json"
+SUPPORTED_PLATFORMS = {"twitch", "youtube", "instagram"}
+SCOPES = {"shared_project", "individual_creator"}
+MODES = {"public_app_token", "public_api_key", "manual_link_only"}
+
+
+def read_json(path: Path):
+    with path.open("r", encoding="utf-8") as handle:
+        return json.load(handle)
+
+
+def validate_roster(roster: dict) -> list[str]:
+    errors: list[str] = []
+    if roster.get("schema_version") != 2:
+        errors.append("roster-data.json debe usar schema_version=2.")
+    if roster.get("identity_model_version") != 1:
+        errors.append("identity_model_version debe ser 1.")
+    heroes = roster.get("heroes")
+    if not isinstance(heroes, list) or not heroes:
+        return errors + ["No hay integrantes en roster-data.json."]
+
+    ids, slugs, logins = set(), set(), set()
+    for index, hero in enumerate(heroes, 1):
+        label = str(hero.get("name") or "integrante {}".format(index))
+        for field in ("id", "slug", "display_name"):
+            value = hero.get(field)
+            if not isinstance(value, str) or not value.strip():
+                errors.append("{}: falta {}.".format(label, field))
+        for field, seen in (("id", ids), ("slug", slugs)):
+            value = hero.get(field)
+            if isinstance(value, str):
+                if not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", value):
+                    errors.append("{}: {} no es un identificador estable válido.".format(label, field))
+                if value in seen:
+                    errors.append("{} duplicado: {}.".format(field, value))
+                seen.add(value)
+
+        scope = hero.get("identity_scope")
+        if scope not in SCOPES:
+            errors.append("{}: identity_scope inválido.".format(label))
+        if scope == "shared_project" and not hero.get("represented_people"):
+            errors.append("{}: un proyecto compartido debe indicar represented_people.".format(label))
+
+        accounts = hero.get("accounts")
+        if not isinstance(accounts, list):
+            errors.append("{}: accounts debe ser una lista.".format(label))
+            continue
+        seen_platform_logins = set()
+        for account in accounts:
+            platform = account.get("platform")
+            handle = account.get("handle")
+            url = account.get("url")
+            if platform not in SUPPORTED_PLATFORMS:
+                errors.append("{}: plataforma no admitida {}.".format(label, platform))
+                continue
+            if not isinstance(handle, str) or not handle.strip():
+                errors.append("{}: handle vacío para {}.".format(label, platform))
+            parsed = urlparse(url or "")
+            expected_hosts = {
+                "twitch": {"twitch.tv", "www.twitch.tv"},
+                "youtube": {"youtube.com", "www.youtube.com"},
+                "instagram": {"instagram.com", "www.instagram.com"}
+            }[platform]
+            if parsed.scheme != "https" or parsed.hostname not in expected_hosts:
+                errors.append("{}: URL no válida para {}.".format(label, platform))
+            key = (platform, (account.get("login") or handle or "").lower())
+            if key in seen_platform_logins:
+                errors.append("{}: cuenta {} duplicada.".format(label, key[1]))
+            seen_platform_logins.add(key)
+            collection = account.get("collection") or {}
+            if collection.get("mode") not in MODES:
+                errors.append("{}: modo de recolección inválido para {}.".format(label, platform))
+            if not isinstance(account.get("public_metrics"), list):
+                errors.append("{}: public_metrics debe ser una lista.".format(label))
+            if not isinstance(account.get("restricted_metrics"), list):
+                errors.append("{}: restricted_metrics debe ser una lista.".format(label))
+            if platform == "twitch" and account.get("login"):
+                login = account["login"].lower()
+                if login in logins:
+                    errors.append("Login Twitch duplicado: {}.".format(login))
+                logins.add(login)
+                if collection.get("mode") != "public_app_token":
+                    errors.append("{}: Twitch debe usar public_app_token.".format(label))
+
+    return errors
+
+
+def validate_activity(roster: dict, activity: dict) -> list[str]:
+    errors: list[str] = []
+    registered = {
+        account["login"].lower()
+        for hero in roster["heroes"]
+        for account in hero.get("accounts", [])
+        if account.get("platform") == "twitch" and account.get("login")
+    }
+    active = set(activity.get("active_channels") or [])
+    missing_records = registered - set((activity.get("channels") or {}).keys())
+    if registered != active:
+        errors.append("Los logins Twitch del Roster no coinciden con data.json: roster={}, data.json={}.".format(sorted(registered), sorted(active)))
+    if missing_records:
+        errors.append("Faltan registros Twitch en data.json: {}.".format(sorted(missing_records)))
+    for login in registered:
+        channel = (activity.get("channels") or {}).get(login, {})
+        if not channel.get("updated_at"):
+            errors.append("{}: falta updated_at.".format(login))
+        if not isinstance(channel.get("snapshots"), list):
+            errors.append("{}: snapshots no es una lista.".format(login))
+    return errors
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--check-activity", action="store_true", help="Contrasta todas las cuentas Twitch con data.json.")
+    args = parser.parse_args()
+    try:
+        roster = read_json(ROSTER)
+        errors = validate_roster(roster)
+        if args.check_activity:
+            errors.extend(validate_activity(roster, read_json(ACTIVITY)))
+    except (OSError, json.JSONDecodeError) as exc:
+        print("ERROR: {}".format(exc), file=sys.stderr)
+        return 2
+    if errors:
+        for error in errors:
+            print("ERROR: " + error, file=sys.stderr)
+        return 1
+    print("OK: modelo de roster válido ({} integrantes, {} cuentas).".format(
+        len(roster["heroes"]), sum(len(h.get("accounts", [])) for h in roster["heroes"])
+    ))
+    if args.check_activity:
+        print("OK: las cuentas Twitch del Roster coinciden con data.json.")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
