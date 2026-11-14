@@ -578,6 +578,7 @@ No fusionar, publicar en producción, cambiar credenciales ni retirar datos/asse
 **Modelo y colectores**
 - `roster-data.json` schema v2: ocho expedientes; siete logins Twitch y ORATORIS/YouTube por separado. Los siete logins registrados coinciden con `data.json.active_channels` y la última captura informaba cobertura completa 7/7.
 - `update_stats.py` toma los logins del registro de roster, requiere `TWITCH_CLIENT_ID` y `TWITCH_CLIENT_SECRET` seguros y conserva el muestreo de 55 minutos/ventana móvil de hasta 30 días. No usa la clave hardcodeada anterior.
+- **Precondición antes de habilitar el colector tras un merge:** confirmar que `TWITCH_CLIENT_ID` y `TWITCH_CLIENT_SECRET` existan en Settings → Secrets and variables → Actions del repositorio. La variable que se configuró en Cloudflare Pages no se comparte automáticamente con GitHub Actions. No copiar valores a archivos ni a conversaciones.
 - `update_platform_stats.py` toma las cuentas del mismo registro. El ID de ORATORIS es ahora `pato-oratoris`; el antiguo `platform-registry.json` queda deprecado.
 - El sistema sigue limitado a datos públicos con App Token/API key. Analíticas privadas, OAuth individual, consola privada y almacenamiento histórico dedicado (por ejemplo D1) no están implementados aún.
 
