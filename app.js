@@ -285,27 +285,31 @@ function renderAutomaticTwitchClips(hero){
  const capturedLabel=captured&&!Number.isNaN(captured.getTime())?captured.toLocaleString('es-AR'):'sin captura exitosa';
  const method=safe(twitchClipsData?.selection?.methodology||'Muestra pública limitada por la API; no es una videoteca exhaustiva.');
  let out='<section class="comic-panel comic-panel-wide automatic-twitch-clips"><div class="comic-panel-heading"><span>↗</span><b>CLIPS PÚBLICOS DETECTADOS · TWITCH</b></div><p class="comic-panel-caption">Fuente: Twitch Helix Get Clips · ventana de '+safe(twitchClipsData?.window_days||30)+' días · última captura correcta: '+safe(capturedLabel)+'.</p>';
- if(!record||record.status==='awaiting_collection'){
-  out+='<p class="mission-empty">La consulta automática se habilitará cuando el colector de clips esté activo en el entorno principal y complete su primera captura. Los clips seleccionados manualmente siguen siendo independientes.</p>';
- }else if(record.status==='error'){
-  out+='<p class="mission-empty">No se pudo actualizar este canal en la última ejecución. '+(Array.isArray(record.clips)&&record.clips.length?'Se conserva la última captura correcta indicada arriba.':'Todavía no existe una captura correcta para mostrar.')+'</p>';
- }else if(!Array.isArray(record.clips)||!record.clips.length){
-  out+='<p class="mission-empty">La consulta no encontró clips públicos en la ventana informada. Esto no demuestra que el canal nunca haya publicado clips.</p>';
+ if(twitchClipsLoadError||!twitchClipsData){
+  out+='<p class="mission-empty">No se pudo leer el archivo de clips públicos en esta visita. Los clips editoriales del expediente siguen disponibles por separado.</p>';
+ }else if(!record||record.status==='awaiting_collection'){
+  out+='<p class="mission-empty">El registro está preparado, pero el colector todavía no completó su primera captura en el entorno principal.</p>';
  }else{
-  out+='<p class="comic-panel-caption">'+safe(record.displayed_count||record.clips.length)+' clips mostrados entre hasta '+safe(record.result_count||record.clips.length)+' resultados devueltos por Twitch. Orden de selección: visualizaciones descendentes; no es ranking editorial ni listado cronológico.</p><div class="automatic-twitch-clips-grid">';
-  record.clips.forEach((clip,index)=>{
-   const url=String(clip.url||'');
-   const validUrl=/^https:\/\/(?:www\.twitch\.tv|clips\.twitch\.tv)\//i.test(url);
-   const thumbnail=String(clip.thumbnail_url||'');
-   const validThumbnail=/^https:\/\//i.test(thumbnail);
-   out+='<article class="automatic-twitch-clip-card"><div class="automatic-twitch-clip-thumb">'+(validThumbnail?'<img src="'+safe(thumbnail)+'" alt="" loading="lazy" decoding="async" width="320" height="180">':'<span>CLIP TWITCH</span>')+'</div><div class="automatic-twitch-clip-copy"><small>CLIP PÚBLICO · '+String(index+1).padStart(2,'0')+'</small><h4>'+safe(clip.title||'Clip sin título')+'</h4><p>'+(clip.created_at?safe(statsDate(String(clip.created_at).slice(0,10))):'Fecha no disponible')+' · '+(clip.view_count===null||clip.view_count===undefined?'Visualizaciones no informadas':safe(statsNumber(clip.view_count,0))+' visualizaciones')+'</p>'+(validUrl?'<a href="'+safe(url)+'" target="_blank" rel="noopener noreferrer">VER CLIP EN TWITCH ↗</a>':'<span>ENLACE NO DISPONIBLE</span>')+'</div></article>';
-  });
-  out+='</div>';
+  if(record.status==='error'){
+   out+='<p class="mission-empty">Aviso: la última consulta de este canal falló. Se conserva y muestra la captura correcta anterior, cuando existe.</p>';
+  }
+  if(!Array.isArray(record.clips)||!record.clips.length){
+   out+='<p class="mission-empty">'+(record.status==='error'?'No existe una captura correcta previa para mostrar.':'La consulta no encontró clips públicos en la ventana informada. Esto no demuestra que el canal nunca haya publicado clips.')+'</p>';
+  }else{
+   out+='<p class="comic-panel-caption">'+safe(record.displayed_count||record.clips.length)+' clips mostrados entre hasta '+safe(record.result_count||record.clips.length)+' resultados devueltos por Twitch. Orden de selección: visualizaciones descendentes; no es ranking editorial ni listado cronológico.</p><div class="automatic-twitch-clips-grid">';
+   record.clips.forEach((clip,index)=>{
+    const url=String(clip.url||'');
+    const validUrl=/^https:\/\/(?:www\.twitch\.tv|clips\.twitch\.tv)\//i.test(url);
+    const thumbnail=String(clip.thumbnail_url||'');
+    const validThumbnail=/^https:\/\//i.test(thumbnail);
+    out+='<article class="automatic-twitch-clip-card"><div class="automatic-twitch-clip-thumb">'+(validThumbnail?'<img src="'+safe(thumbnail)+'" alt="" loading="lazy" decoding="async" width="320" height="180">':'<span>CLIP TWITCH</span>')+'</div><div class="automatic-twitch-clip-copy"><small>CLIP PÚBLICO · '+String(index+1).padStart(2,'0')+'</small><h4>'+safe(clip.title||'Clip sin título')+'</h4><p>'+(clip.created_at?safe(statsDate(String(clip.created_at).slice(0,10))):'Fecha no disponible')+' · '+(clip.view_count===null||clip.view_count===undefined?'Visualizaciones no informadas':safe(statsNumber(clip.view_count,0))+' visualizaciones')+'</p>'+(validUrl?'<a href="'+safe(url)+'" target="_blank" rel="noopener noreferrer">VER CLIP EN TWITCH ↗</a>':'<span>ENLACE NO DISPONIBLE</span>')+'</div></article>';
+   });
+   out+='</div>';
+  }
  }
  out+='<p class="comic-panel-caption">'+method+' La selección automática no reemplaza los clips destacados elegidos por cada creador.</p></section>';
  return out;
 }
-
 function renderMissionArchive(hero){
  const key=creatorRecordKey(hero),record=creatorRecordsData?.channels?.[key]||{};
  const groups=[['COLABORACIONES Y ACCESOS A JUEGOS','collaborations'],['HITOS Y TRAYECTORIA','milestones'],['CLIPS DESTACADOS','highlights']];
@@ -354,6 +358,7 @@ async function loadSullyGnomeData(){
 let creatorRecordsData = null;
 let platformStatsData = null;
 let twitchClipsData = null;
+let twitchClipsLoadError = false;
 async function loadTwitchClipsData(){
  try{
   const response=await fetch('clips-data.json',{cache:'no-store'});
@@ -361,8 +366,10 @@ async function loadTwitchClipsData(){
   const payload=await response.json();
   if(payload?.schema_version!==1||!payload.creators||typeof payload.creators!=='object')throw new Error('El archivo de clips no cumple el contrato esperado.');
   twitchClipsData=payload;
+  twitchClipsLoadError=false;
  }catch(error){
   twitchClipsData=null;
+  twitchClipsLoadError=true;
   console.warn('Twitch public clips unavailable:',error);
  }
 }
