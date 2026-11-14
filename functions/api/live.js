@@ -10,7 +10,9 @@ export async function onRequest({request,env}){
  const cacheKey=new Request(new URL("/api/live",request.url).toString(),{method:"GET"});
  const cache=typeof caches!=="undefined"?caches.default:null;
  if(cache){const cached=await cache.match(cacheKey);if(cached)return cached;}
- if(!env.TWITCH_CLIENT_ID||!env.TWITCH_CLIENT_SECRET)return json({error:"Faltan credenciales de Twitch Helix."},503,{"cache-control":"no-store"});
+ // Las previews no siempre tienen secretos configurados. Devolver un estado
+ // degradado legible evita convertir una limitación de entorno en un error HTTP.
+ if(!env.TWITCH_CLIENT_ID||!env.TWITCH_CLIENT_SECRET)return json({source:"fallback",status:"unavailable",reason:"credentials_missing",updated_at:null,cache_seconds:0,channels:[]},200,{"cache-control":"no-store"});
  try{
   const rosterResponse=await fetchWithTimeout(new URL("/roster-data.json",request.url));
   if(!rosterResponse.ok)throw new Error("No se pudo leer el roster.");
@@ -39,5 +41,9 @@ export async function onRequest({request,env}){
   const response=json({source:"twitch-helix",updated_at:new Date().toISOString(),cache_seconds:60,channels});
   if(cache)await cache.put(cacheKey,response.clone());
   return response;
- }catch(error){return json({error:error.message||"No se pudo consultar Twitch Helix."},502,{"cache-control":"no-store"});}
+ }catch(error){
+  // La interfaz conserva data.json como respaldo y no debe presentar un 5xx
+  // por una indisponibilidad transitoria de Twitch/credenciales.
+  return json({source:"fallback",status:"unavailable",reason:"upstream_unavailable",updated_at:null,cache_seconds:0,channels:[]},200,{"cache-control":"no-store"});
+ }
 }
