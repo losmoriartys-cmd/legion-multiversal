@@ -430,25 +430,25 @@ Los IDs numéricos históricos se conservan por compatibilidad; no renumerar los
 - [ ] Añadir vínculo a esta Biblia desde la Biblia maestra del proyecto e `INFORMES.md`.
 
 ### Fase 1 — UX del directorio
-- [ ] Simplificar filtros a búsqueda + chips de vínculo/plataforma + “Más filtros”.
-- [ ] Incorporar bottom sheet móvil accesible.
-- [ ] Añadir contador y estado vacío robusto.
-- [ ] Reemplazar el titular de cabecera.
-- [ ] Mover CTAs de Bitácora/Colaboraciones al final.
+- [~] Simplificar filtros a búsqueda + chips de vínculo/plataforma + “Más filtros” (implementado; QA visual pendiente).
+- [~] Incorporar bottom sheet móvil accesible (implementado; QA táctil/teclado pendiente).
+- [~] Añadir contador y estado vacío robusto (contador implementado; QA pendiente).
+- [~] Reemplazar el titular de cabecera (implementado; QA editorial pendiente).
+- [~] Mover CTAs de Bitácora/Colaboraciones al final (implementado; QA de orden pendiente).
 - [ ] Revisar orden editorial y textos.
 - [ ] QA responsive y teclado.
 
 ### Fase 2 — Identidad y datos editoriales
-- [ ] Definir `display_name`, slug, identity scope y handles por plataforma.
+- [~] Definir `display_name`, slug, identity scope y handles por plataforma (modelo inicial creado para ocho perfiles; validación editorial pendiente).
 - [ ] Validar nombres canónicos con el equipo.
-- [ ] Distinguir canal compartido MORIARTYS de canales individuales.
-- [ ] Hacer enlaces externos dinámicos por plataforma.
+- [x] Distinguir canal compartido MORIARTYS de canales individuales en el modelo (`shared_project`, Demian + Ari).
+- [~] Hacer enlaces externos dinámicos por plataforma en expedientes (pendiente terminar enlace múltiple en modal).
 - [ ] Uniformar nombres en Roster, Estadísticas, Bitácora, Alianzas y Colaboraciones.
 
 ### Fase 3 — Carga, SEO y fallback
-- [ ] Skeleton cards.
+- [~] Skeleton cards (implementados; no se completan hasta pasar pruebas de carga/JS deshabilitado).
 - [ ] Error/reintento y ausencia de datos diferenciados.
-- [ ] `noscript` con datos esenciales.
+- [~] `noscript` con datos esenciales (implementado; QA crawler pendiente).
 - [ ] Prueba de pre-render desde la fuente JSON y decisión según pipeline real de Pages.
 - [ ] Enlaces semánticos y metadatos sociales cuando corresponda.
 
@@ -462,8 +462,8 @@ Los IDs numéricos históricos se conservan por compatibilidad; no renumerar los
 - [ ] QA de teclado, pantalla táctil y lector de pantalla.
 
 ### Fase 5 — Integración en vivo y contenido
-- [ ] Reutilizar `data.json` en cada carta.
-- [ ] Badge EN VIVO con frescura y enlace.
+- [~] Reutilizar `data.json` en cartas (MORIARTYS piloto y estado EN VIVO; extensión/QA pendiente).
+- [~] Badge EN VIVO con frescura y enlace (implementado en cartas; QA del intervalo/fallo pendiente).
 - [ ] Categoría/juego actual cuando esté disponible.
 - [ ] Historial de transmisiones y juegos.
 - [ ] Biblioteca de clips y VOD por creador.
@@ -477,7 +477,7 @@ Los IDs numéricos históricos se conservan por compatibilidad; no renumerar los
 - [ ] Evaluar Kick/Instagram y plataformas adicionales.
 - [ ] Backend seguro y persistencia histórica.
 - [ ] Consola privada: estado de conectores, errores y cobertura.
-- [ ] Prueba piloto con un creador antes de extender a todos.
+- [~] Prueba piloto MORIARTYS conectada al muestreo Twitch; falta cotejar cifras con la fuente original y QA en preview.
 - [ ] Validar cifras con la fuente original y documentar límites.
 
 ### Fase 7 — Fichas comerciales
@@ -558,3 +558,12 @@ Antes de cada tarea:
 7. entregar al responsable los cambios, evidencia, pendientes y riesgos.
 
 No fusionar, publicar en producción, cambiar credenciales ni retirar datos/assets por el solo hecho de que una etapa técnica haya terminado. Si aparece un conflicto entre esta Biblia, un dato verificado nuevo y una decisión anterior, documentar el conflicto y pedir resolución antes de alterar la información pública.
+
+### Registro del primer bloque de implementación — 14/11/2026
+
+- **Rama única:** `feat/roster-integral-2026-11-14`; origen `main`. No se modificó ni integró `main`.
+- **Modelo:** `roster-data.json` pasa a schema v2 e incorpora ID/slug estable, display name, alcance de identidad y cuentas por plataforma para los ocho perfiles. MORIARTYS queda como proyecto compartido de Demian y Ari. Se añaden `schemas/roster-data.schema.json` y `scripts/validate_roster_data.py`.
+- **Colectores:** Twitch y plataformas ahora derivan las cuentas del modelo de roster; se elimina la lista estática de canales y el Client ID hardcodeado. La autenticación sigue siendo app token para endpoints públicos; no se habilita acceso a analíticas privadas. El workflow de métricas valida cobertura contra el roster.
+- **Piloto MORIARTYS:** el libro de cuatro páginas consume `data.json` y `creator-records.json`; se retiraron métricas históricas hardcodeadas y porcentajes geográficos no respaldados. Promedios/picos se identifican como muestreo propio y seguidores/demografía como no verificados.
+- **Directorio:** filtros simplificados, contador, búsqueda de handles, chips rápidos, panel avanzado responsive, titular actualizado, skeletons, `noscript`, badge EN VIVO dependiente de frescura y CTAs movidos al cierre.
+- **Estado:** implementación en curso. Aún no se ha ejecutado CI sobre un PR, no se ha cotejado el piloto con una cuenta/consulta externa real y no se realizó revisión visual manual. No marcar como completado hasta pasar esos controles.
