@@ -209,7 +209,7 @@ Objetivo: reducir fricción para un roster de ocho perfiles, sin perder capacida
 ### 5.3 Modal y foco
 
 - [x] Se conserva el modal existente del producto, sin duplicar una segunda capa `dialog`; la migración a `<dialog>` nativo no se justifica en esta iteración.
-- [~] Implementados atrapado de foco, Escape, cierre explícito y devolución al elemento disparador; el comportamiento de fondo/scroll y QA con lector de pantalla siguen pendientes.
+- [~] Implementados atrapado de foco, Escape, cierre explícito, devolución al disparador y fondo inerte con restauración de `inert`/`aria-hidden`. Verificar scroll y lectores de pantalla en QA humana.
 - [ ] Verificar bloqueo/restauración del scroll del documento mientras el modal está abierto.
 - [ ] Probar teclado y lector de pantalla con inspección humana.
 - [~] Se conserva y amplía el manejo de foco heredado de PR #12/#45; regresión manual pendiente.
@@ -371,7 +371,7 @@ La arquitectura se implementará después de un inventario de lo que ya existe, 
 - [ ] Colaboraciones y credenciales verificadas.
 - [ ] Oportunidades potenciales diferenciadas de acuerdos existentes.
 - [ ] Datos no disponibles claramente indicados.
-- [ ] Exportación a PDF o ficha imprimible, cuando la información esté validada.
+- [~] Acción de impresión/guardar PDF desde el expediente completo A/B/C con hoja A4; validar saltos, gráficos e imágenes en navegadores/impresoras reales.
 
 ### 10.2 Media Kit general
 
@@ -484,7 +484,7 @@ Los IDs numéricos históricos se conservan por compatibilidad; no renumerar los
 - [~] Expedientes individuales consumen fuentes y clips disponibles; pulido comercial, validación por titulares y exportación pendientes.
 - [~] Actividad y clips públicos/editoriales diferenciados; primera captura real y validación comercial por titular pendientes.
 - [ ] Media kit colectivo.
-- [ ] Exportación/impresión.
+- [~] Impresión/guardar PDF del expediente completo A/B/C implementado; exportación de media kit colectivo todavía pendiente.
 - [ ] Revisión editorial, legal y de permisos de uso de contenido.
 
 ### Fase 8 — Imágenes y rendimiento
@@ -497,7 +497,7 @@ Los IDs numéricos históricos se conservan por compatibilidad; no renumerar los
 
 ### Fase 9 — Cierre
 - [~] CI ejecuta sintaxis JS, JSON, modelo/cobertura, fallback no-JS, validadores de clips/histórico, compilación, smoke tests, suite unitaria y `validate_site.py`; QA humana pendiente.
-- [~] Pruebas unitarias de colectores/validadores incorporadas; tests de navegador/flujo interactivo del Roster pendientes.
+- [~] Pruebas unitarias de colectores/validadores y pruebas de contrato estático del diálogo, tabs, impresión, nombres, fallback y clips incorporadas; tests de navegador/flujo interactivo del Roster pendientes.
 - [ ] Pruebas responsive en escritorio, tablet y móvil.
 - [ ] Prueba manual de teclado y lector de pantalla.
 - [~] Validación estática de enlaces en CI; revisión funcional manual de deep links/back-forward pendiente.
@@ -633,3 +633,20 @@ No fusionar, publicar en producción, cambiar credenciales ni retirar datos/asse
 - VOD completos: no se sustituyen por el endpoint de clips.
 - Pruebas manuales de desktop/tablet/móvil, teclado, lector de pantalla, lector sin JS, focos/scroll del modal, encuadres y revisión editorial: todavía no realizadas por una persona.
 - No se fusionó, no se tocó `main`, no se desplegó producción ni se modificaron credenciales.
+
+
+### Registro del tercer bloque técnico — 14/11/2026 · salida imprimible y accesibilidad del expediente
+
+- Se unificó el nombre visible del perfil en el dashboard de rendimiento, mapa multiversal, etiquetas accesibles de tarjetas, alt text, página personal, cómic genérico y título del modal. Los `name` técnicos siguen intactos para resolver las plantillas internas; la interfaz utiliza `display_name`. Esto evita que MORIARTYS aparezca como “MORIARTYS” en algunos lugares cuando su nombre canónico público es **LOS MORIARTYS**, y aplica la forma “LADY MORIARTY” donde corresponde.
+- El modal mantiene `role="dialog"`, `aria-modal`, `aria-labelledby`, tabs/tabpanel y control de foco. Al abrirlo, el `main` y el footer se vuelven `inert` y `aria-hidden`; al cerrarlo se restaura el estado anterior. No se altera la navegación fuera del modal.
+- Se añadió la acción **IMPRIMIR / GUARDAR PDF**. Abre la impresión nativa del navegador, incluye las tres secciones del expediente (A/B/C) aunque solo una esté activa, y aplica una hoja A4. No es un PDF server-side ni garantiza idéntico resultado en todos los motores; saltos de página, fondos y miniaturas requieren QA real.
+- Se añadió `tests/test_roster_accessibility_contract.py`, que verifica el contrato de diálogo, correspondencia tabs/paneles, salida de impresión, inert del fondo, nombres canónicos, fallback sin JS, clips automáticos y control de reintento.
+
+**Evidencia de esta entrega**
+- HEAD con código funcional y pruebas: `03d0e888722a3df9a65539eefe872c2c6887b006`. El HEAD actual del PR puede ser posterior por cambios documentales.
+- GitHub Actions [run 43654434630](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43654434630): SUCCESS. 14 pasos funcionales completados, incluidos todos los validadores y la suite `python -m unittest discover -s tests -v`.
+- Cloudflare Pages para ese mismo commit: https://21bc9fac.legion-multiversal.pages.dev; preview de rama: https://feat-roster-integral-2026-11.legion-multiversal.pages.dev.
+- CI estático no equivale a revisión con NVDA/VoiceOver, teclado, dispositivos táctiles o impresión física/PDF. Esas comprobaciones humanas siguen pendientes.
+
+**Límites sin cambio**
+- No se hizo merge, no se tocó `main`, no se desplegó producción ni se modificaron credenciales. La primera captura real de clips sigue pendiente de la ejecución autorizada del workflow de `main`, con secretos de Twitch confirmados.
