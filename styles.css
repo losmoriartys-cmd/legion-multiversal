@@ -4528,3 +4528,5 @@ img { max-width: 100%; }
 .commercial-portfolio-collabs li>small,.commercial-portfolio-collabs>small{color:#aebdce;font-size:.68rem;line-height:1.5}
 .commercial-portfolio-collabs>small{display:block;margin-top:10px}
 @media(max-width:480px){.commercial-portfolio-collabs li{grid-template-columns:1fr}.commercial-portfolio-collabs li>span{grid-row:auto}}
+
+.mission-source-note{margin:9px 0;color:#9aa9b8;font-size:.68rem;line-height:1.55}.mission-card .mission-source-note{font-size:.63rem}.mission-card h5{overflow-wrap:anywhere}
