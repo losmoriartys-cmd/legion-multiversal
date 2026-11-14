@@ -1853,6 +1853,7 @@ function openHeroModal(index) {
     window.lastModalTrigger = document.activeElement;
     window.previousBodyOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
+    setModalBackgroundInert(true);
     modal.classList.add('active');
     let rememberedPage = 0;
     try {
@@ -1863,6 +1864,29 @@ function openHeroModal(index) {
     updateComicPageControls(false);
     modal.querySelector('.close-modal-btn')?.focus();
 }
+function setModalBackgroundInert(active){
+    const targets=[document.querySelector('main'),document.querySelector('.site-technical-footer')].filter(Boolean);
+    if(active){
+        if(window.previousModalBackgroundState)return;
+        window.previousModalBackgroundState=targets.map(element=>({
+            element,
+            inert:Boolean(element.inert),
+            ariaHidden:element.getAttribute('aria-hidden')
+        }));
+        targets.forEach(element=>{
+            element.inert=true;
+            element.setAttribute('aria-hidden','true');
+        });
+        return;
+    }
+    (window.previousModalBackgroundState||[]).forEach(state=>{
+        state.element.inert=state.inert;
+        if(state.ariaHidden===null)state.element.removeAttribute('aria-hidden');
+        else state.element.setAttribute('aria-hidden',state.ariaHidden);
+    });
+    window.previousModalBackgroundState=null;
+}
+
 function printHeroDossier(){
     const modal=document.getElementById('hero-modal');
     if(!modal||!modal.classList.contains('active'))return;
@@ -1887,6 +1911,7 @@ function printHeroDossier(){
             const modal = document.getElementById('hero-modal');
             if (!modal || !modal.classList.contains('active')) return;
             modal.classList.remove('active');
+            setModalBackgroundInert(false);
             document.body.style.overflow = window.previousBodyOverflow || '';
             const trigger = window.lastModalTrigger;
             window.lastModalTrigger = null;
