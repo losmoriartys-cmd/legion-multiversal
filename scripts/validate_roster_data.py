@@ -18,7 +18,7 @@ ROSTER = ROOT / "roster-data.json"
 ACTIVITY = ROOT / "data.json"
 SUPPORTED_PLATFORMS = {"twitch", "youtube", "instagram", "kick"}
 SCOPES = {"shared_project", "individual_creator"}
-MODES = {"public_app_token", "public_api_key", "manual_link_only"}
+MODES = {"public_app_token", "public_api_key", "public_client_credentials", "manual_link_only"}
 
 
 def read_json(path: Path):
