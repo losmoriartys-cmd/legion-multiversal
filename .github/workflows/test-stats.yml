@@ -10,6 +10,8 @@ on:
       - 'tests/**'
       - 'scripts/validate_clips_data.py'
       - 'scripts/validate_metric_history.py'
+      - 'scripts/build_creator_metrics.py'
+      - 'scripts/validate_creator_metrics.py'
       - '.github/workflows/test-stats.yml'
 
 permissions:
