@@ -89,7 +89,7 @@ def collect(now=None):
         if not broadcaster_id:
             message = "Twitch no devolvió broadcaster_id."
             errors.append(account["login"] + ": " + message)
-            creators[key] = {**old, "display_name": account["display_name"], "login": account["login"], "url": account["url"], "status": "error", "error": message}
+            creators[key] = {**old, "display_name": account["display_name"], "login": account["login"], "url": account["url"], "status": "error", "captured_at": old.get("captured_at"), "clips": old.get("clips") or [], "error": message}
             continue
         params = urlencode([
             ("broadcaster_id", broadcaster_id), ("started_at", start_iso),
@@ -113,7 +113,8 @@ def collect(now=None):
             errors.append(account["login"] + ": " + str(exc)[:180])
             creators[key] = {
                 **old, "display_name": account["display_name"], "login": account["login"],
-                "url": account["url"], "status": "error",
+                "url": account["url"], "status": "error", "captured_at": old.get("captured_at"),
+                "clips": old.get("clips") or [],
                 "error": "No se pudo actualizar esta cuenta; se conserva la última captura correcta.",
             }
     return {
