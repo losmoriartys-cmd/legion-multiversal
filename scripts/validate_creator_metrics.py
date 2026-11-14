@@ -99,8 +99,10 @@ def validate(registry, roster):
             for field in ("from", "to"):
                 if period.get(field) is not None and parse_time(period[field]) is None:
                     errors.append("{}: period.{} inválido en métrica {}.".format(creator_id, field, metric_id))
-            if metric.get("status") in {"delayed", "unavailable"} and metric.get("value") is not None:
-                errors.append("{}: una métrica demorada/no disponible no puede presentarse como valor actual.".format(creator_id))
+            if metric.get("status") == "unavailable" and metric.get("value") is not None:
+                errors.append("{}: una métrica no disponible no puede contener un valor.".format(creator_id))
+            if metric.get("status") == "delayed" and not metric.get("interpretation"):
+                errors.append("{}: una métrica demorada debe incluir interpretación temporal.".format(creator_id))
         content = record.get("content") or {}
         if not isinstance(content.get("twitch_clips_count", 0), int) or content.get("twitch_clips_count", 0) < 0:
             errors.append("{}: twitch_clips_count inválido.".format(creator_id))
