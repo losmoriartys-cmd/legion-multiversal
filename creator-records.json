@@ -32,21 +32,24 @@
           "source": "Twitch Clips",
           "url": "https://clips.twitch.tv/AgileAssiduousConsoleCeilingCat-N-95sSpINtTMo3wj",
           "platform": "twitch",
-          "clip_id": "AgileAssiduousConsoleCeilingCat-N-95sSpINtTMo3wj"
+          "clip_id": "AgileAssiduousConsoleCeilingCat-N-95sSpINtTMo3wj",
+          "title_source": "Título editorial aportado por el equipo"
         },
         {
           "title": "Ari modo tóxica",
           "source": "Twitch Clips",
           "url": "https://clips.twitch.tv/DelightfulSneakyMonkeyBleedPurple-gDdjWpKPkU5irwbo",
           "platform": "twitch",
-          "clip_id": "DelightfulSneakyMonkeyBleedPurple-gDdjWpKPkU5irwbo"
+          "clip_id": "DelightfulSneakyMonkeyBleedPurple-gDdjWpKPkU5irwbo",
+          "title_source": "Título editorial aportado por el equipo"
         },
         {
           "title": "El Demi casi muere del susto",
           "source": "Twitch Clips",
           "url": "https://clips.twitch.tv/GiantUninterestedTardigradeBrokeBack-PLdKJCgbad8xhKp-",
           "platform": "twitch",
-          "clip_id": "GiantUninterestedTardigradeBrokeBack-PLdKJCgbad8xhKp-"
+          "clip_id": "GiantUninterestedTardigradeBrokeBack-PLdKJCgbad8xhKp-",
+          "title_source": "Título editorial aportado por el equipo"
         }
       ]
     },
@@ -82,11 +85,12 @@
       "collaborations": [],
       "highlights": [
         {
-          "title": "Spicy Piliable Poultry Corgi Derp",
+          "title": "Título pendiente de confirmar",
           "description": "Clip destacado compartido para el media kit.",
           "url": "https://www.twitch.tv/ther0d3r1k/clip/SpicyPiliablePoultryCorgiDerp-flAxKL1oWuPkWDWA",
           "source": "Twitch · enlace aportado por el creador",
-          "title_source": "Título verificado en metadatos públicos de Twitch"
+          "title_source": "Twitch no devolvió metadatos públicos suficientes en esta consulta. Confirmar el título con el creador.",
+          "editorial_status": "pending_creator_confirmation"
         },
         {
           "title": "Ff se mueve la puerta",
@@ -109,13 +113,13 @@
       "collaborations": [],
       "highlights": [
         {
-          "title": "Título pendiente de recuperación",
+          "title": "Título pendiente de confirmar",
           "description": "Clip destacado compartido para el expediente.",
           "source": "Twitch · enlace aportado por el creador",
           "platform": "twitch",
           "clip_id": "AbrasiveSilkyCockroachOhMyDog-ivUKinvojfXgOKOB",
           "url": "https://www.twitch.tv/habitos_atomicos/clip/AbrasiveSilkyCockroachOhMyDog-ivUKinvojfXgOKOB",
-          "title_source": "Metadatos públicos no disponibles al consultar; confirmar con el creador.",
+          "title_source": "Twitch no devolvió metadatos públicos suficientes en esta consulta. Confirmar el título con el creador.",
           "editorial_status": "pending_creator_confirmation"
         },
         {
@@ -152,11 +156,11 @@
       "collaborations": [],
       "highlights": [
         {
-          "title": "Título pendiente de recuperación",
+          "title": "Título pendiente de confirmar",
           "platform": "twitch",
           "clip_id": "WildUglyAdminBloodTrail-qmNfWZpxEFnIl8Oz",
           "source": "Enlace de clip proporcionado por el creador; título editorial pendiente de confirmar",
-          "title_source": "Metadatos públicos no disponibles al consultar; confirmar con el creador.",
+          "title_source": "Twitch no devolvió metadatos públicos suficientes en esta consulta. Confirmar el título con el creador.",
           "editorial_status": "pending_creator_confirmation"
         },
         {
@@ -192,18 +196,22 @@
       "collaborations": [],
       "highlights": [
         {
-          "title": "Momento destacado 01",
+          "title": "Título pendiente de confirmar",
           "platform": "twitch",
           "clip_id": "InventiveTentativeCarabeefYee-oJMzI-Lt4xxRlJNt",
           "url": "https://clips.twitch.tv/InventiveTentativeCarabeefYee-oJMzI-Lt4xxRlJNt",
-          "source": "Twitch Clips · enlace proporcionado para el expediente por el creador"
+          "source": "Twitch Clips · enlace proporcionado para el expediente por el creador",
+          "editorial_status": "pending_creator_confirmation",
+          "title_source": "Twitch no devolvió metadatos públicos suficientes en esta consulta. Confirmar el título con el creador."
         },
         {
-          "title": "Momento destacado 02",
+          "title": "Título pendiente de confirmar",
           "platform": "twitch",
           "clip_id": "MotionlessCuteTigerLitFam-ZsZEyMq1lrkNq2dW",
           "url": "https://clips.twitch.tv/MotionlessCuteTigerLitFam-ZsZEyMq1lrkNq2dW",
-          "source": "Twitch Clips · enlace proporcionado para el expediente por el creador"
+          "source": "Twitch Clips · enlace proporcionado para el expediente por el creador",
+          "editorial_status": "pending_creator_confirmation",
+          "title_source": "Twitch no devolvió metadatos públicos suficientes en esta consulta. Confirmar el título con el creador."
         }
       ]
     },
