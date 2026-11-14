@@ -1671,9 +1671,23 @@ function openHeroModal(index) {
         pages=renderRosterComicPages(hero,index,channelStats,sullyChannel);
     }
     // A: identidad/contenido · B: audiencia, actividad y juegos · C: clips, hitos y colaboraciones.
-    document.getElementById('modal-profile-text').innerHTML=pages[0] || '';
-    document.getElementById('modal-stats-text').innerHTML=pages.slice(1, Math.max(2, pages.length - 1)).join('');
-    document.getElementById('modal-log-text').innerHTML=pages.slice(Math.max(2, pages.length - 1)).join('');
+    let profilePages, audiencePages, storyPages;
+    if (pages.length >= 6) {
+        profilePages = pages.slice(0, 2);
+        audiencePages = pages.slice(2, 4);
+        storyPages = pages.slice(4);
+    } else if (pages.length === 5) {
+        profilePages = pages.slice(0, 2);
+        audiencePages = pages.slice(2, 3);
+        storyPages = pages.slice(3);
+    } else {
+        profilePages = pages.slice(0, 1);
+        audiencePages = pages.slice(1, Math.max(2, pages.length - 1));
+        storyPages = pages.slice(Math.max(2, pages.length - 1));
+    }
+    document.getElementById('modal-profile-text').innerHTML=profilePages.join('');
+    document.getElementById('modal-stats-text').innerHTML=audiencePages.join('');
+    document.getElementById('modal-log-text').innerHTML=storyPages.join('');
     document.getElementById('modal-extra-text').innerHTML='';
     const fifth=document.getElementById('modal-lady-page-5');
     const sixth=document.getElementById('modal-lady-page-6');
