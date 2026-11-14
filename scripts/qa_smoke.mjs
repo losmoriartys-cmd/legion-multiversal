@@ -101,6 +101,47 @@ for (const vp of VIEWPORTS) {
     await page.close();
   }
 }
+
+const dossierPage = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
+const dossierErrors = [];
+dossierPage.on("pageerror", error => dossierErrors.push(error.message));
+const dossierNames = ["MORIARTYS","ROD3R1K","LADYMORIARTY","ARDIPII","AKUMA","DAVE — NEXUS","HABITOS","PATO — ORATORIS"];
+for (const name of dossierNames) {
+  const tag = "Bitácora individual · " + name;
+  try {
+    await dossierPage.goto(BASE + "#chapter-2", { waitUntil: "domcontentloaded", timeout: 45000 });
+    await dossierPage.waitForSelector(".roster-card-direct-profile", { timeout: 15000 });
+    const direct = dossierPage.getByRole("button", { name: "Abrir directamente el expediente de " + name });
+    if (!await direct.count()) {
+      check(tag + ": tarjeta disponible", false, "No se encontró el acceso directo del roster");
+      continue;
+    }
+    await direct.click();
+    await dossierPage.waitForSelector("#hero-profile-page:not([hidden])", { timeout: 10000 });
+    const openDossier = dossierPage.getByRole("button", { name: "ABRIR BITÁCORA COMPLETA" });
+    check(tag + ": acceso a bitácora estandarizada", await openDossier.count() > 0);
+    if (!await openDossier.count()) continue;
+    await openDossier.click();
+    await dossierPage.waitForFunction(() => document.getElementById("hero-modal")?.classList.contains("active"), null, { timeout: 10000 });
+    const profileText = await dossierPage.locator("#modal-profile-text").innerText();
+    const statsText = await dossierPage.locator("#modal-stats-text").innerText();
+    const historyText = await dossierPage.locator("#modal-log-text").innerText();
+    const commercialText = await dossierPage.locator("#modal-extra-text").innerText();
+    check(tag + ": identidad y portada", profileText.includes(name));
+    check(tag + ": página de estadísticas", statsText.includes("ARCHIVO DE RENDIMIENTO"));
+    check(tag + ": fortalezas y trayectoria", historyText.includes("FORTALEZAS DIFERENCIALES") && historyText.includes("MUESTRAS AUDIOVISUALES"));
+    check(tag + ": propuesta comercial", commercialText.includes("EL UNIVERSO COMERCIAL"));
+    await dossierPage.locator("#hero-modal .close-modal-btn").click();
+    await dossierPage.locator("#hero-profile-page [data-close-hero-profile]").click();
+  } catch (error) {
+    check(tag + ": navegación completa sin excepción", false, error.message);
+    if (await dossierPage.locator("#hero-modal.active").count()) await dossierPage.locator("#hero-modal .close-modal-btn").click().catch(() => {});
+    if (await dossierPage.locator("#hero-profile-page:not([hidden])").count()) await dossierPage.locator("#hero-profile-page [data-close-hero-profile]").click().catch(() => {});
+  }
+}
+check("Bitácoras individuales: sin errores JavaScript", dossierErrors.length === 0, dossierErrors.join(" | "));
+await dossierPage.close();
+
 await browser.close();
 const fails = results.filter((r) => !r.ok);
 fs.writeFileSync("reports/qa/resultado.json", JSON.stringify(results, null, 2));
