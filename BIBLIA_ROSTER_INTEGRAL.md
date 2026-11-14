@@ -126,64 +126,64 @@ El único PR abierto verificado al iniciar esta Biblia es el #46, **Auditoría U
 
 ### 4.1 Jerarquía de la cabecera
 
-- [ ] Sustituir el titular inflado “UN LUGAR PARA CADA TALENTO EXTRAORDINARIO”.
-- [ ] Usar una frase coherente con el manifiesto: propuesta inicial **“LAS PERSONAS DETRÁS DE LA LEGIÓN”**.
-- [ ] Mantener como bajada la idea de que cada integrante conserva identidad, voz, canal y especialidades propias.
-- [ ] Comprobar jerarquía tipográfica, anchura de lectura y contraste en escritorio y móvil.
+- [x] Sustituir el titular inflado por “LAS PERSONAS DETRÁS DE LA LEGIÓN” (implementado en la cabecera; QA editorial/responsive pendiente).
+- [x] Usar “LAS PERSONAS DETRÁS DE LA LEGIÓN”, coherente con el manifiesto.
+- [~] Mantener la identidad, voz, canales y especialidades propias de cada integrante en la introducción; revisar redacción final en QA editorial.
+- [ ] Comprobar jerarquía tipográfica, anchura de lectura y contraste en escritorio y móvil mediante revisión visual humana.
 
 ### 4.2 Filtros simplificados
 
 Objetivo: reducir fricción para un roster de ocho perfiles, sin perder capacidad de exploración.
 
-- [ ] Mantener la búsqueda por nombre, alias, handle y especialidad.
-- [ ] Mostrar chips rápidos de **Vínculo en la Legión** y **Plataforma**.
-- [ ] Renombrar “Función” como “Vínculo en la Legión” para distinguir Dirección, Profesor, Estudiante y Colaborador de las características de creación.
-- [ ] Eliminar el filtro “Formato” como control redundante cuando la plataforma/actividad ya describe el contexto; el formato podrá mostrarse en la ficha y utilizarse en búsqueda o filtros avanzados si una necesidad real lo justifica.
-- [ ] Mover especialidad y orden secundario detrás de **MÁS FILTROS**.
-- [ ] No mantener dos ordenamientos que producen prácticamente el mismo resultado. El orden editorial será el predeterminado; el orden alfabético puede quedar como alternativa. El orden por número solo se mantiene si demuestra utilidad.
-- [ ] Mostrar un contador inequívoco: “Mostrando X de Y integrantes”.
-- [ ] Mostrar filtros activos como chips removibles y una acción de limpieza.
-- [ ] Diseñar estado vacío con explicación y botón para limpiar filtros.
-- [ ] En móvil, abrir filtros avanzados en un bottom sheet o panel accesible, con cierre, foco y scroll correctos.
-- [ ] Mantener búsqueda, chips rápidos y contador siempre comprensibles.
-- [ ] No perder el estado de filtros al abrir/cerrar un expediente, salvo que el usuario decida restablecerlos.
+- [~] Mantener búsqueda por nombre, alias, handle y especialidad (implementada; QA de casos límite pendiente).
+- [x] Mostrar chips rápidos de **Vínculo en la Legión** y **Plataforma**.
+- [x] Renombrar “Función” como “Vínculo en la Legión” para distinguir Dirección, Profesor, Estudiante y Colaborador de las características de creación.
+- [x] Eliminar el filtro “Formato” como control redundante; los formatos se conservan en las fichas y en el texto de búsqueda.
+- [x] Mover especialidad y orden secundario detrás de **MÁS FILTROS**.
+- [x] Mantener orden editorial por defecto y orden alfabético como alternativa; no duplicar ordenamientos equivalentes.
+- [x] Mostrar contador “Mostrando X de Y integrantes”.
+- [x] Mostrar filtros activos como chips removibles y acción de limpieza.
+- [x] Diseñar estado vacío con explicación y botón para limpiar filtros.
+- [~] Abrir filtros avanzados en un panel móvil con cierre, Escape y gestión de foco implementados; QA táctil/teclado real pendiente.
+- [~] Mantener búsqueda, chips rápidos y contador; revisión visual de comprensión pendiente.
+- [~] Preservar filtros al abrir/cerrar expedientes; probar flujo completo y navegación de navegador en QA funcional.
 
 ### 4.3 Presentación de cartas
 
-- [ ] Conservar ilustraciones, ocho temas cromáticos y datos aprobados del trabajo anterior.
-- [ ] Conservar giro 3D, interacción directa con expediente y movimiento reducido.
-- [ ] Mantener nombres, número de expediente, vínculo y perfil de creación con una jerarquía legible.
-- [ ] Añadir insignia **EN VIVO** cuando el canal asociado tenga una transmisión confirmada y suficientemente reciente.
-- [ ] Hacer que la insignia lleve al canal o a la transmisión adecuada; no mostrar EN VIVO usando una captura vencida.
-- [ ] Mostrar plataforma(s) y handle(s) oficiales sin confundirlos con el nombre editorial.
-- [ ] Mostrar estado no disponible / sin datos verificados de forma explícita; no dejar huecos ambiguos.
-- [ ] Evitar repetir en la carta toda la información que ya aparece en la ficha ampliada.
+- [~] Conservar ilustraciones, ocho temas cromáticos y datos aprobados; QA de encuadres y contraste pendiente.
+- [~] Conservar giro 3D e interacción con expediente; el manejo de movimiento reducido está implementado y queda QA visual/táctil.
+- [~] Mantener nombre, expediente, vínculo y perfil de creación; revisar legibilidad en los tres viewports.
+- [x] Añadir insignia **EN VIVO** solo cuando el canal tenga transmisión confirmada y captura dentro del límite de frescura.
+- [x] Vincular la insignia al canal correcto y no mostrar EN VIVO con captura vencida; el estado vencido/no disponible queda explícito.
+- [~] Separar display name y handles por plataforma en el modelo; revisar la presentación visual en cartas y expedientes.
+- [~] Mostrar estados de carga, error, captura demorada y ausencia de datos en los módulos de datos; QA visual pendiente.
+- [~] Mantener tarjetas compactas y detalle ampliado en expedientes; revisar duplicaciones en QA editorial.
 
 ### 4.4 Orden de llamados a la acción
 
-- [ ] Retirar de la parte superior los accesos que compiten con el directorio.
-- [ ] Mover “Abrir Bitácora Central” y “Archivo de colaboraciones” debajo del roster como cierre del capítulo.
-- [ ] Conservar las conexiones cruzadas con Bitácora y Colaboraciones sin duplicar contenido.
-- [ ] Revisar que el cierre no desplace ni oculte las cartas.
+- [x] Retirar de la parte superior los accesos que compiten con el directorio.
+- [x] Mover “Abrir Bitácora Central” y “Archivo de colaboraciones” debajo del roster como cierre del capítulo.
+- [~] Conservar enlaces cruzados a Bitácora y Colaboraciones; comprobar destinos y no duplicación al QA.
+- [ ] Revisar visualmente que el cierre no desplace ni oculte las cartas en escritorio y móvil.
 
 ### 4.5 Identidad canónica y handles
 
-- [ ] Definir un `display_name` canónico para cada expediente.
-- [ ] Registrar handles por plataforma en campos separados.
-- [ ] Usar el mismo display name en cartas, expedientes, estadísticas, Bitácora, Colaboraciones y fichas comerciales.
-- [ ] Presentar el handle debajo del nombre, asociado a su plataforma.
-- [ ] Resolver ROD3R1K / TheR0D3R1K / Rod3rik con una convención única. Propuesta técnica: conservar el nombre editorial actual del roster como display name y mostrar el handle exacto que la plataforma devuelve. Requiere validación editorial antes de publicar.
-- [ ] MORIARTYS debe identificarse como proyecto/canal compartido de Demian y Ari. No convertir su expediente en una ficha individual de Demian ni absorber el canal individual de Ari.
-- [ ] Añadir un campo explícito de alcance de identidad, por ejemplo `identity_scope: "shared_project" | "individual_creator"`, y las personas representadas cuando aplique.
+- [~] Definir `display_name` canónico para ocho expedientes en `roster-data.json`; validación editorial final pendiente.
+- [x] Registrar handles/logins y URL por plataforma en campos separados dentro de cada cuenta.
+- [~] Usar IDs/display names canónicos como fuente del Roster y expedientes; quedan migraciones editoriales puntuales en fuentes históricas por homologar.
+- [~] Renderizar cuentas/plataformas con enlaces dinámicos en el expediente; presentación final en cartas requiere revisión visual.
+- [!] Convención propuesta: `ROD3R1K` como display name y `TheR0D3R1K` como handle exacto. La coherencia técnica está modelada; confirmación editorial final todavía pendiente.
+- [x] MORIARTYS está identificado como proyecto/canal compartido de Demian y Ari; no se absorben identidades individuales.
+- [x] Añadir `identity_scope` y `represented_people` cuando aplica al alcance compartido.
 
 ### 4.6 Enlaces a plataformas
 
-- [ ] Eliminar la dependencia de un CTA fijo “VISITAR CANAL DE TWITCH”.
-- [ ] Construir botones desde las cuentas disponibles de cada creador.
-- [ ] Permitir varios enlaces (Twitch, YouTube, Instagram y futuras plataformas) cuando estén registrados.
-- [ ] Etiquetar cada destino por plataforma y usar target/rel seguros cuando abra nueva pestaña.
-- [ ] No crear botones para cuentas no confirmadas.
-- [ ] Separar perfiles sociales, enlaces de apoyo (por ejemplo Cafecito) y cuentas de publicación.
+- [x] Eliminar la dependencia de un CTA fijo único a Twitch en el modal.
+- [x] Construir enlaces desde las cuentas registradas en cada perfil.
+- [x] Permitir múltiples enlaces por perfil para plataformas registradas; el render admite Twitch/YouTube/Instagram/Kick.
+- [x] Etiquetar destinos por plataforma y usar `target="_blank"`/`rel="noopener noreferrer"`.
+- [x] No crear enlaces a cuentas ausentes del registro canónico.
+- [~] Las cuentas de publicación y perfiles sociales están tipados por plataforma; enlaces de apoyo se mantienen como categoría futura separada.
 
 ---
 
@@ -191,51 +191,51 @@ Objetivo: reducir fricción para un roster de ocho perfiles, sin perder capacida
 
 ### 5.1 Enlace directo y navegación del navegador
 
-- [ ] Establecer slug estable por persona/proyecto, independiente del display name.
-- [ ] Permitir enlaces como `#roster/akuma`.
-- [ ] Abrir el capítulo Roster y el expediente correcto al entrar por URL.
-- [ ] Usar `history.pushState` al abrir/cambiar de expediente y una política coherente al cerrar.
-- [ ] Responder correctamente a atrás/adelante del navegador (`popstate`).
-- [ ] Mantener alias de compatibilidad para los hashes históricos que ya se hayan compartido.
-- [ ] No depender de índices de array como identificador permanente; usar el slug/ID estable.
+- [x] Establecer `slug`/ID estable por perfil, independiente del display name.
+- [x] Permitir enlaces semánticos `#roster/<slug>`.
+- [~] Abrir el capítulo y expediente al entrar por URL; falta validar manualmente los escenarios de carga lenta y perfiles inexistentes.
+- [~] Actualizar el historial de navegación al abrir/cambiar/cerrar expediente; QA de flujo completo pendiente.
+- [~] Manejar `popstate` y compatibilidad de hashes; probar Atrás/Adelante en navegador real.
+- [~] Mantener compatibilidad con hash histórico `#expediente-...`; auditar enlaces históricos adicionales pendiente.
+- [x] Usar IDs/slugs estables para identidad y rutas; los índices quedan solo para el orden visible y navegación transitoria.
 
 ### 5.2 Navegación entre integrantes
 
-- [ ] Añadir controles anterior/siguiente dentro del expediente.
-- [ ] Respetar el conjunto filtrado y el orden actual.
-- [ ] Actualizar título, contenido, hash y foco al cambiar de integrante sin cerrar/reabrir visualmente la experiencia.
-- [ ] Deshabilitar correctamente los extremos o documentar el comportamiento circular elegido.
+- [x] Añadir navegación anterior/siguiente dentro del conjunto filtrado.
+- [~] Resolver siguiente/anterior a partir del roster filtrado; QA funcional pendiente.
+- [~] Actualizar contenido, título/hash y foco en navegación del expediente; comprobar coherencia del historial en QA manual.
+- [~] Los extremos se resuelven con límites del conjunto filtrado; comprobar deshabilitado/indicadores en QA.
 
 ### 5.3 Modal y foco
 
-- [ ] Verificar si la vista de expediente debe seguir como página interna o migrar a un `dialog` modal; no duplicar capas innecesarias.
-- [ ] Si es modal: foco atrapado dentro, cierre con Escape, cierre explícito, fondo inerte y devolución del foco al control que lo abrió.
-- [ ] Gestionar scroll del documento mientras el modal está abierto.
-- [ ] Probar teclado y lector de pantalla.
-- [ ] No romper el manejo actual de foco ya incorporado por PR #12/#45.
+- [x] Se conserva el modal existente del producto, sin duplicar una segunda capa `dialog`; la migración a `<dialog>` nativo no se justifica en esta iteración.
+- [~] Implementados atrapado de foco, Escape, cierre explícito y devolución al elemento disparador; el comportamiento de fondo/scroll y QA con lector de pantalla siguen pendientes.
+- [ ] Verificar bloqueo/restauración del scroll del documento mientras el modal está abierto.
+- [ ] Probar teclado y lector de pantalla con inspección humana.
+- [~] Se conserva y amplía el manejo de foco heredado de PR #12/#45; regresión manual pendiente.
 
 ### 5.4 Tabs A/B/C
 
 - [~] Hacer que la navegación de tabs sea scrolleable en móvil sin cortar controles (A/B/C visibles en el modal; QA táctil pendiente).
 - [~] Exponer semántica `tablist`, `tab` y `tabpanel`, o controles equivalentes accesibles (roles, selección, foco y teclado implementados; lector de pantalla pendiente).
 - [~] Recordar la última pestaña elegida por expediente en el almacenamiento local (implementado; QA de persistencia pendiente).
-- [ ] Permitir navegación por teclado y foco visible.
-- [ ] En Audiencia, mostrar “SIN DATOS VERIFICADOS” cuando no existan datos aptos para mostrar.
-- [ ] Diferenciar carga, error, fuente no disponible y ausencia de datos.
+- [~] Navegación por flechas, Home/End y foco entre tabs implementados; validar visualmente foco visible.
+- [~] Los perfiles sin fuente utilizable muestran “SIN DATOS VERIFICADOS”; faltan pruebas de todos los estados/perfiles.
+- [~] Diferenciar carga, error, fuente demorada y ausencia de registros en módulos de Twitch, YouTube/Kick y clips; QA visual pendiente.
 
 ---
 
 ## 6. Contenido indexable y carga progresiva
 
-- [ ] Evitar que el capítulo quede vacío si JavaScript tarda, falla o está deshabilitado.
-- [ ] Añadir skeleton cards con dimensiones reservadas y una duración limitada al estado de carga real.
-- [ ] Añadir `noscript` con el listado básico de nombres, roles y enlaces públicos disponibles.
-- [ ] Evaluar pre-renderizado de cartas desde `roster-data.json` durante el build para que el HTML inicial incluya nombres y datos editoriales esenciales.
-- [ ] Mantener un solo origen de los datos: el pre-render debe generarse, no convertirse en otro catálogo manual.
-- [ ] Confirmar primero cómo GitHub Pages genera/publica el sitio antes de introducir un proceso de build que pueda alterar el despliegue.
-- [ ] Incluir fallback útil en caso de error de lectura de `roster-data.json`.
-- [ ] Exponer mensajes de error discretos, con opción de reintento cuando corresponda.
-- [ ] Comprobar SEO, Open Graph y previews compartidas para la página principal y los enlaces a expedientes, dentro de las limitaciones de una web estática.
+- [~] Skeleton durante carga real, lista estática sin JavaScript y fallback de error/reintento implementados; revisar comportamiento real de JS deshabilitado.
+- [~] Skeleton cards con estructura/dimensiones reservadas; medir CLS y duración en navegadores reales pendiente.
+- [~] `noscript` con los ocho perfiles, identidad compartida de MORIARTYS y enlaces públicos; queda validación con crawler/navegador sin JS.
+- [~] Se implementa un fallback estático sin JS generado y comprobado desde `roster-data.json`; el pre-render completo de tarjetas requiere confirmar pipeline/hosting de producción.
+- [x] El listado fallback se genera desde `roster-data.json` y CI verifica su sincronización.
+- [x] Se conserva la publicación estática actual sin incorporar un build que altere GitHub Pages.
+- [x] Incluir estado de error útil cuando falla la lectura de `roster-data.json`.
+- [x] Mostrar error accesible y botón funcional de reintento para la carga del Roster.
+- [~] Open Graph/Twitter Cards globales existentes; deep links a perfiles individuales no pueden generar metadata server-side distinta en la arquitectura estática actual. Validación de previews compartidas pendiente.
 
 ---
 
@@ -243,33 +243,33 @@ Objetivo: reducir fricción para un roster de ocho perfiles, sin perder capacida
 
 ### 7.1 Estado en directo en el Roster
 
-- [ ] Reutilizar el `data.json` y el estado ya recolectado; no crear una consulta paralela por carta.
-- [ ] Vincular cada perfil Twitch con su login canónico.
-- [ ] Mostrar EN VIVO solo con una respuesta positiva y dentro de la ventana de frescura definida.
-- [ ] Mostrar juego/categoría y título de transmisión cuando estén disponibles y sean correctos.
-- [ ] Mostrar “Estado no actualizado” o “Última captura…” si la fuente está atrasada.
-- [ ] Añadir enlace directo a la transmisión/canal.
-- [ ] Mantener el estado de perfiles YouTube/video sin etiquetarlos como offline de Twitch.
-- [ ] No presentar viewers actuales como audiencia histórica, promedio ni usuarios únicos.
+- [x] Reutilizar `data.json` como fuente del estado live; no se introduce consulta Twitch por carta.
+- [x] Vincular cada perfil a login canónico del registro de cuentas.
+- [x] Mostrar EN VIVO solo con estado positivo y captura fresca.
+- [~] Mostrar juego/categoría en tarjetas y expediente; título disponible en metadatos, falta exponerlo en todos los puntos de UI.
+- [x] Mostrar estados de demora/no disponibilidad y fecha de última captura; evitar presentar lecturas viejas como actuales.
+- [x] Añadir enlace directo al canal/transmisión cuando está live.
+- [x] YouTube/Kick se muestran por su fuente propia, sin aplicar etiqueta offline Twitch.
+- [x] Separar viewers de última lectura, promedio y pico muestreados; aclarar que no son usuarios únicos ni analítica oficial.
 
 ### 7.2 Historial de transmisiones y juegos
 
-- [ ] Definir qué histórico proviene de Twitch Helix, qué histórico proviene de fuentes externas y qué registros aporta el creador.
-- [ ] Registrar fecha, duración, categoría/juego y métricas disponibles por transmisión.
-- [ ] Registrar la ventana temporal y cobertura efectiva.
-- [ ] Evitar presentar una captura parcial como historial completo.
-- [ ] Construir distribuciones de juegos con denominadores claros (horas emitidas, transmisiones, horas vistas u otra unidad disponible).
-- [ ] Identificar cambios de categoría y transmisiones con categoría ausente.
+- [~] `data.json` identifica muestreo Helix; `creator-records.json` conserva registros editoriales; fuentes externas se muestran por separado. Falta homogeneizar metadatos en todas las fuentes.
+- [~] El registro de muestreo contiene fecha, stream_id, categoría y viewers; duración exacta por transmisión no está disponible de forma completa con esta API pública/cadencia.
+- [x] Registrar ventana, timestamps, muestras y cobertura efectiva; validador verifica coherencia de muestras y agregados.
+- [x] Etiquetar datos observados por muestreo y no como historial completo.
+- [~] Mostrar muestras live por juego/sesión y conservar unidad explícita; la distribución por horas solo se mostrará cuando exista duración fiable.
+- [~] Cambios de categoría quedan en snapshots; la categoría ausente se identifica como no informada. Falta una vista cronológica específica.
 
 ### 7.3 Clips, VOD y destacados
 
-- [ ] Conservar clips manuales aportados por creadores y su procedencia.
-- [ ] Diseñar captura automática de clips públicos autorizados/disponibles.
-- [ ] Guardar ID, URL, título, creador, plataforma, fecha, juego/categoría y visualizaciones cuando la API lo proporcione.
-- [ ] Distinguir clip automático de destacado seleccionado editorialmente.
-- [ ] Incorporar VOD/highlights disponibles y comprobar su accesibilidad.
-- [ ] Crear una videoteca por creador con enlaces que se puedan auditar.
-- [ ] No inventar miniaturas, títulos, visualizaciones ni URLs ausentes.
+- [x] Conservar clips manuales/editoriales en `creator-records.json` con enlaces y procedencia.
+- [~] Colector público `update_clips.py` implementado con Twitch Helix App Token; primera captura real queda pendiente de ejecutar desde main tras confirmar secretos de Actions.
+- [~] `clips-data.json` guarda ID, URL, título, creador, fecha, game_id, view_count y metadatos disponibles; la plataforma/fuente queda declarada en el esquema raíz.
+- [x] Clips automáticos se muestran en panel separado de highlights editoriales.
+- [ ] VOD y broadcasts completos siguen pendientes; el endpoint de clips no se considera sustituto del archivo VOD.
+- [~] Crear sección por creador con muestra limitada de clips auditables; videoteca exhaustiva/VOD sigue pendiente.
+- [x] Render de clips omite miniaturas y visualizaciones ausentes; valida el host de URLs y muestra estados sin inventar campos.
 
 ---
 
@@ -339,22 +339,22 @@ La arquitectura se implementará después de un inventario de lo que ya existe, 
 
 ### 9.2 Seguridad
 
-- [ ] Secretos solo en el entorno seguro del backend.
-- [ ] OAuth por creador para datos privados cuando corresponda.
-- [ ] No guardar tokens de creadores en `roster-data.json`, HTML, JS público ni logs.
-- [ ] Verificar permisos y scopes mínimos.
-- [ ] Rate limits, reintentos con backoff y manejo de cuota.
-- [ ] Validar payloads y normalizar datos.
-- [ ] Exponer únicamente datos públicos o autorizados.
-- [ ] Registrar errores sin volcar secretos o tokens.
+- [~] Credenciales se leen desde GitHub Actions Secrets en el colector programado de main; no se introducen secretos en front-end. La activación queda bloqueada a confirmación del administrador.
+- [!] OAuth por creador no implementado: requiere consentimiento, configuración de aplicación y scopes mínimos de cada titular.
+- [x] No se almacenan tokens de creadores en JSON/HTML/JS ni se imprimen tokens en logs del colector.
+- [~] El colector público usa App Token y endpoints públicos; scopes OAuth de analítica privada quedan bloqueados por consentimiento individual.
+- [~] El colector de clips limita frecuencia a una captura mínima cada 6 horas y preserva capturas previas por error; backoff formal y panel de cuota siguen pendientes.
+- [x] Validar/normalizar payloads de Twitch y clips; se añaden validadores del historial, registro y contratos JSON.
+- [x] Solo se presentan datos públicos y registros editoriales existentes; datos privados quedan fuera de esta etapa.
+- [x] Errores resumidos por cuenta sin incluir tokens ni secretos.
 
 ### 9.3 Automatización y frescura
 
-- [ ] Definir cadencias por fuente según límites/cuotas, no por una frecuencia arbitraria.
-- [ ] Evitar solicitudes superpuestas.
-- [ ] Registrar `captured_at`, éxito, error y cobertura.
-- [ ] Mostrar última actualización visible cuando afecte la interpretación.
-- [ ] No ocultar fallos: diferenciar dato antiguo, fuente caída y ausencia real de datos.
+- [~] Twitch histórico mantiene muestreo de 55 minutos; clips se actualizan con intervalo mínimo de 6 horas; revisar cuota real/API en entorno principal pendiente.
+- [x] El workflow programado utiliza grupo de concurrencia sin cancelación de ejecución en curso; colectores tienen límites internos de frecuencia.
+- [~] `data.json` y `clips-data.json` conservan timestamps, estado/cobertura y errores; ampliar la misma semántica a todas las fuentes multiplataforma pendiente.
+- [~] UI muestra última actualización/frescura para estadísticas y clips; QA visual pendiente.
+- [x] Diferenciar demora, error de fuente y registro vacío en módulos de Twitch y clips.
 
 ---
 
@@ -604,3 +604,32 @@ No fusionar, publicar en producción, cambiar credenciales ni retirar datos/asse
 - Preview de rama: https://feat-roster-integral-2026-11.legion-multiversal.pages.dev
 - **Pendiente de aceptación:** inspección humana en desktop/tablet/móvil; pruebas funcionales de filtros, bottom sheet, flip, deeplinks, Back/Forward, tabs, lector de pantalla y destinos externos; cotejo de cifras con el titular; revisión de imágenes y métricas visuales Lighthouse. No se declara aprobada la revisión visual.
 - No hubo merge ni despliegue de producción; `main` permanece intacta.
+
+
+
+### Registro del segundo bloque técnico — 14/11/2026 · clips públicos, integridad y accesibilidad
+
+**Cambios incorporados en la misma rama/PR #47**
+- `update_clips.py` consulta el endpoint público Twitch Helix Get Clips por `broadcaster_id`, usando App Token y la ventana móvil de 30 días. Solicita hasta 100 resultados por canal y conserva hasta 10 (ordenados por la API por visualizaciones). La documentación del dato aclara que es una muestra limitada de clips más vistos, no una videoteca exhaustiva ni una selección editorial.
+- `clips-data.json` inicializa los siete canales Twitch con estado `awaiting_collection`, sin insertar clips ficticios. Las capturas se separan por ID estable del creador, con fecha, cuenta, URL, título, creador, broadcaster, juego cuando la API lo proporciona, duración, visualizaciones y miniatura cuando existen.
+- Se conserva la última captura correcta de una cuenta si la consulta de ese canal falla. La actualización automática tiene un intervalo mínimo de seis horas y la validación falla de forma cerrada si Twitch no resuelve todas las cuentas.
+- `renderAutomaticTwitchClips()` agrega una sección de clips automáticos en la pestaña C de cada expediente Twitch. Los highlights elegidos por el equipo permanecen en el archivo editorial separado.
+- Se añadieron `schemas/clips-data.schema.json`, `scripts/validate_clips_data.py` y `tests/test_update_clips.py`; el workflow de métricas incluye el colector de clips y guarda `clips-data.json` junto con los otros datos en ejecuciones autorizadas sobre `main`.
+- `scripts/render_roster_noscript.py` mantiene el fallback estático del Roster a partir de `roster-data.json`. Los ocho perfiles, la identidad compartida de MORIARTYS y los enlaces públicos están entre marcadores que CI compara con la fuente canónica.
+- `schemas/twitch-snapshot.schema.json`, `scripts/validate_metric_history.py` y `tests/test_metric_history.py` incorporan contrato y controles de cronología, tipos, estados offline, agregados y valores restringidos.
+
+**Evidencia**
+- Último HEAD conocido: `3c89ddda0b85ffe94afe0b0603283714bc0fa8bb` (actualizar antes de comunicar si el repositorio avanzó).
+- GitHub Actions [run 43653732771](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43653732771): SUCCESS; incluye validador de historial Twitch, clips, fallback sin JS, tests de colectores, compilación y validación del sitio.
+- GitHub Actions [run 43653781200](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43653781200): SUCCESS para las pruebas unitarias y validaciones en el HEAD del validador de historial.
+- La validación del historial `data.json` existente pasó sin introducir ni modificar muestras. No se ejecutó el endpoint de clips desde esta rama.
+- La primera captura automática de clips sigue pendiente: el workflow que persiste datos está intencionalmente limitado a `main`; además, antes de activarlo hay que confirmar que los dos secretos Twitch están presentes en GitHub Actions.
+- Preview anterior a los dos validadores finales: https://8ccef604.legion-multiversal.pages.dev. Comprobar que Cloudflare haya generado una preview para el HEAD actual antes de compartirla como preview vigente.
+
+**Pendientes que continúan bloqueados o requieren QA**
+- OAuth individual de Twitch/YouTube para analíticas privadas: cada titular debe autorizar scopes; no se simula consentimiento.
+- Backend con persistencia D1 y consola privada: falta provisionar recursos y definir operación/autenticación; no se afirma que exista.
+- Primera captura real de clips, cuota y respuestas de Twitch/YouTube/Kick: requiere entorno principal y secretos confirmados por el administrador.
+- VOD completos: no se sustituyen por el endpoint de clips.
+- Pruebas manuales de desktop/tablet/móvil, teclado, lector de pantalla, lector sin JS, focos/scroll del modal, encuadres y revisión editorial: todavía no realizadas por una persona.
+- No se fusionó, no se tocó `main`, no se desplegó producción ni se modificaron credenciales.
