@@ -1040,7 +1040,7 @@ function bindRosterControls() {
     root.dataset.controlsBound = 'true';
     const areaSelect = document.getElementById('roster-area-filter');
     if (areaSelect && areaSelect.dataset.optionsReady !== 'true') {
-        const areas = [...new Set(heroesData.flatMap(hero => hero.areas || []))].sort((a,b) => a.localeCompare(b, 'es'));
+        const areas = [...new Set(heroesData.flatMap(hero => hero.areas || []).filter(Boolean))].sort((a,b) => a.localeCompare(b, 'es'));
         areas.forEach(area => {
             const option = document.createElement('option');
             option.value = area;
@@ -1048,6 +1048,23 @@ function bindRosterControls() {
             areaSelect.appendChild(option);
         });
         areaSelect.dataset.optionsReady = 'true';
+    }
+    const platformSelect = document.getElementById('roster-platform-filter');
+    if (platformSelect && platformSelect.dataset.optionsReady !== 'true') {
+        const labels = { twitch: 'Twitch', youtube: 'YouTube', instagram: 'Instagram', cafecito: 'Cafecito' };
+        const platforms = [...new Set(heroesData.flatMap(hero => [
+            ...(Array.isArray(hero.platforms) ? hero.platforms : []),
+            ...Object.keys(labels).filter(key => typeof hero[key] === 'string' && /^https:\/\//i.test(hero[key]))
+        ]))].sort((a,b) => a.localeCompare(b, 'es'));
+        [...platformSelect.options].slice(1).forEach(option => option.remove());
+        platforms.forEach(platform => {
+            const count = heroesData.filter(hero => (hero.platforms || []).includes(platform) || (typeof hero[platform] === 'string' && /^https:\/\//i.test(hero[platform]))).length;
+            const option = document.createElement('option');
+            option.value = platform;
+            option.textContent = (labels[platform] || platform) + ' · ' + count;
+            platformSelect.appendChild(option);
+        });
+        platformSelect.dataset.optionsReady = 'true';
     }
     ['roster-search','roster-role-filter','roster-platform-filter','roster-format-filter','roster-area-filter','roster-sort'].forEach(id => {
         const control = document.getElementById(id);
@@ -1615,7 +1632,7 @@ function renderLadyMoriartyComicPages(hero,sullyChannel){
  const clips=Array.isArray(record.highlights)?record.highlights:[];
  const page=(n,title,body,foot)=>'<article class="comic-book-sheet comic-interior-page"><header class="comic-interior-header"><span>LEGIÓN MULTIVERSAL</span><b>CAPÍTULO 0'+n+'</b><span>'+foot+'</span></header><div class="comic-page-title"><small>EXPEDIENTE LADYMORIARTY01 · PÁGINA 0'+(n+1)+'</small><h2>'+title+'</h2></div>'+(hero.voice?'<aside class="hero-voice voice-lady"><span>VOZ DE LA BRUJA</span><p>'+safe(hero.voice)+'</p></aside>':'')+body+'<footer class="comic-page-footer"><span>LADYMORIARTY01 · ARCHIVO INDIVIDUAL</span><b>0'+(n+1)+' / 06</b></footer></article>';
  const cover='<article class="comic-book-sheet comic-cover-sheet"><header class="comic-cover-masthead"><b>LEGIÓN MULTIVERSAL</b><span>EXPEDIENTE INDIVIDUAL · N.º '+safe(hero.cardNumber||'S/N')+'</span><span>MEDIA KIT</span></header><div class="comic-cover-art-frame"><span class="comic-cover-burst">EXPEDIENTE<br>CLASIFICADO</span><img class="comic-cover-art" src="'+safe(hero.img)+'" alt="Carta oficial de LADYMORIARTY01"></div><div class="comic-cover-copy"><div class="comic-cover-titleline"><span>PROTAGONISTA</span><h2>LADYMORIARTY01</h2><b>'+safe(hero.series||'01')+'</b></div><p class="comic-cover-subtitle">'+safe(hero.codename)+' · '+safe(hero.characterRole)+'</p><section class="comic-panel comic-cover-bio"><div class="comic-panel-heading"><span>01</span><b>IDENTIDAD SECRETA · PERFIL DE LA HEROÍNA</b></div><p>'+safe(hero.bio)+'</p><p class="comic-panel-caption">Canal individual LADYMORIARTY01: gameplay chill, IRL y contenido espontáneo. Lo importante es divertirnos y pasarla bien 💜</p></section><footer class="comic-cover-footer"><span>'+areas.map(safe).join(' · ')+'</span><b>¡ABRIR EXPEDIENTE!</b></footer></div></article>';
- const identityBody='<div class="comic-page-split"><section class="comic-panel"><div class="comic-panel-heading"><span>01</span><b>IDENTIDAD Y ESTILO</b></div><h3>'+safe(hero.codename)+' · '+safe(hero.characterRole)+'</h3><p>'+safe(hero.log)+'</p></section><section class="comic-panel"><div class="comic-panel-heading"><span>02</span><b>CAPACIDADES DEL PERSONAJE</b></div><h3>'+safe(hero.rank)+'</h3><p>'+safe(hero.powerSet)+'</p><p class="comic-panel-caption">'+safe(hero.powers)+'</p></section></div><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>03</span><b>UNIVERSOS Y FORMATOS</b></div><div class="comic-format-list">'+areas.map(v=>'<span>'+safe(v)+'</span>').join('')+'</div><p class="comic-panel-caption">La identidad narrativa de la carta representa al personaje; no es una certificación ni una métrica de rendimiento.</p></section>';
+ const identityBody='<div class="comic-page-split"><section class="comic-panel"><div class="comic-panel-heading"><span>01</span><b>IDENTIDAD Y ESTILO</b></div><h3>'+safe(hero.codename)+' · '+safe(hero.characterRole)+'</h3><p>'+safe(hero.log)+'</p></section><section class="comic-panel"><div class="comic-panel-heading"><span>02</span><b>CAPACIDADES DEL PERSONAJE</b></div><h3>'+safe(hero.rank)+'</h3><p>'+safe(hero.powerSet)+'</p>'+(hero.powers?'<p class="comic-panel-caption">'+safe(hero.powers)+'</p>':'')+'</section></div><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>03</span><b>UNIVERSOS Y FORMATOS</b></div><div class="comic-format-list">'+areas.map(v=>'<span>'+safe(v)+'</span>').join('')+'</div><p class="comic-panel-caption">La identidad narrativa de la carta representa al personaje; no es una certificación ni una métrica de rendimiento.</p></section>';
  const identityPage=page(1,'LA BRUJA: IDENTIDAD PROPIA',identityBody,'EL PERSONAJE');
  let metricCards='';
  [['Seguidores',metrics.followers,'total publicado'],['Nuevos seguidores','+'+(metrics.follower_change??'—'),'ventana consultada'],['Horas vistas',metrics.viewer_hours,'ventana consultada'],['Pico de espectadores',metrics.peak_viewers,'ventana consultada'],['Horas en directo',metrics.hours_live,'ventana consultada'],['Promedio',metrics.average_viewers,'ventana consultada']].forEach(v=>metricCards+='<article class="comic-metric"><span>'+v[0]+'</span><strong>'+safe(v[1])+'</strong><small>'+v[2]+'</small></article>');
