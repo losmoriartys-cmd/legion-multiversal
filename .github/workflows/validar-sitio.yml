@@ -64,6 +64,10 @@ jobs:
         run: python scripts/validate_clips_data.py
       - name: Validar historial y semántica de métricas Twitch
         run: python scripts/validate_metric_history.py
+      - name: Generar registro normalizado de métricas por creador
+        run: python scripts/build_creator_metrics.py
+      - name: Validar modelo normalizado multiplataforma
+        run: python scripts/validate_creator_metrics.py
       - name: Ejecutar pruebas unitarias de colectores
         run: python -m unittest discover -s tests -v
       - name: Comprobar el registro de canales para el colector de clips
