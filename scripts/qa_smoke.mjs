@@ -27,7 +27,10 @@ for (const vp of VIEWPORTS) {
     page.on("request", (r) => { if (r.url().includes("/api/")) apiCalls.push(r.url()); });
     page.on("response", (r) => { if (r.url().includes("/api/")) apiResponses.push(`${r.status()} ${r.url()}`); });
 
-    await page.goto(BASE + hash, { waitUntil: "networkidle" });
+    await page.goto(BASE + hash, { waitUntil: "domcontentloaded", timeout: 45000 });
+    // La app puede mantener consultas/intervalos activos; networkidle no es un
+    // criterio fiable de disponibilidad para esta página.
+    await page.waitForTimeout(1200);
     const tag = `${vp.name} ${hash || "(sin hash)"}`;
 
     check(`${tag}: sin errores de JS`, errors.length === 0, errors.join(" | "));
