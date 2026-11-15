@@ -1678,16 +1678,22 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
  text-decoration:none;
 }
 
-/* Contraste reforzado del dossier ROD3R1K: papel claro, tinta oscura y acentos legibles. */
-        .modal-content.comic-mode .rod3r1k-page{color:#172b43}
-        .modal-content.comic-mode .rod3r1k-page .comic-page-lead{color:#f5f7fb;background:#14243a}
-        .modal-content.comic-mode .rod3r1k-page .comic-panel-caption{color:#33465c}
-        .modal-content.comic-mode .rod3r1k-page .comic-games-table th{background:#14243a!important;color:#fff!important}
-        .modal-content.comic-mode .rod3r1k-page .comic-games-table td{color:#172b43!important;background:#f7efdd!important}
-        .modal-content.comic-mode .rod3r1k-page .comic-games-table td small{color:#46566b!important}
-        .modal-content.comic-mode .rod3r1k-page .comic-chart-row span,.modal-content.comic-mode .rod3r1k-page .comic-chart-row b{color:#172b43!important}
-
-
+/* SISTEMA ÚNICO DE BITÁCORAS · reglas compartidas para todos los expedientes */
+.modal-content.comic-mode .roster-dossier-page{color:#172b43}
+.modal-content.comic-mode .roster-dossier-page .comic-page-lead{color:#24384f;background:rgba(20,36,58,.07);border-left:4px solid #1687a8;padding:12px 14px}
+.modal-content.comic-mode .roster-dossier-page .comic-panel-caption{color:#40536a}
+.modal-content.comic-mode .roster-dossier-page .stats-table-wrap{width:100%;max-width:100%;overflow-x:auto;border:2px solid #17283d;margin-top:5px}
+.modal-content.comic-mode .roster-dossier-page .comic-games-table{width:100%;min-width:540px;border-collapse:collapse;background:#f7efdd;font-size:.76rem}
+.modal-content.comic-mode .roster-dossier-page .comic-games-table thead th{background:#14243a;color:#e6f7fb;text-transform:uppercase;text-align:left;padding:10px 8px}
+.modal-content.comic-mode .roster-dossier-page .comic-games-table tbody td,
+.modal-content.comic-mode .roster-dossier-page .comic-games-table tbody th{padding:9px 8px;border-top:1px solid #c9bda6;color:#172b43;background:#f7efdd}
+.modal-content.comic-mode .roster-dossier-page .comic-games-table tbody tr:nth-child(even) td,
+.modal-content.comic-mode .roster-dossier-page .comic-games-table tbody tr:nth-child(even) th{background:#e9dfc7}
+.modal-content.comic-mode .roster-dossier-page .comic-games-table small{color:#46566b}
+@media(max-width:700px){
+ .modal-content.comic-mode .roster-dossier-page .stats-table-wrap{margin-inline:-2px;width:calc(100% + 4px)}
+ .modal-content.comic-mode .roster-dossier-page .comic-games-table{font-size:.7rem}
+}
 /* SISTEMA VISUAL · MULTIVERSO CINEMATOGRÁFICO */
 :root {
     --lm-night: #080d18;
