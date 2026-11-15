@@ -7,6 +7,8 @@ on:
     paths:
       - 'scripts/**'
       - 'tests/**'
+      - 'app.js'
+      - 'roster-02-moriartys.html'
       - 'roster-data.json'
       - 'creator-records.json'
       - 'platform-stats.json'
@@ -19,6 +21,8 @@ on:
     paths:
       - 'update_stats.py'
       - 'update_clips.py'
+      - 'app.js'
+      - 'roster-02-moriartys.html'
       - 'tests/**'
       - 'scripts/validate_clips_data.py'
       - 'scripts/validate_metric_history.py'
