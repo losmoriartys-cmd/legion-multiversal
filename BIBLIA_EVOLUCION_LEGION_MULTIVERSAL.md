@@ -197,7 +197,7 @@ Cada punto se considera una tarea independiente. Al finalizar cada una:
 Portada ejecutiva → Roster → Estadísticas → Alianzas / formatos de integración → Caso BarFender y otros expedientes de Colaboraciones → Contacto. El acceso al expediente destacado debe seguir visible desde Inicio.
 
 ### Recorrido institucional y narrativo
-Inicio → Origen S3X-MEN → Roster → Estadísticas → Nuestros Valores → Comunidad → En Vivo → Alianzas → Colaboraciones. Arsenal y Reclutamiento quedan como recursos complementarios al final del recorrido, no como capítulos que interrumpan la presentación institucional.
+Inicio → Origen S3X-MEN → Nuestros Valores → Roster → Estadísticas → Comunidad → Alianzas → Colaboraciones. Arsenal, En Vivo y Reclutamiento se presentan como capítulos especiales complementarios, en ese orden, sin interrumpir el recorrido institucional.
 
 Ambos recorridos deben convivir y reforzarse. El recorrido comercial facilita la decisión de una marca; el narrativo explica por qué Legión Multiversal tiene una identidad y una comunidad propias.
 
@@ -238,22 +238,24 @@ Estados oficiales:
 ## 12. Arquitectura editorial aprobada · reorganización del 7 de noviembre de 2026
 
 ### Criterio
-Colaboraciones es una sección de evidencia y archivo de experiencias reales, no la primera explicación de quiénes somos. Se mantiene visible en el recorrido comercial mediante la navegación principal y el acceso destacado a BarFender desde Inicio, pero en el recorrido institucional aparece después de Origen, Roster, Estadísticas, Valores, Comunidad y Alianzas.
+Colaboraciones es una sección de evidencia y archivo de experiencias reales, no la primera explicación de quiénes somos. Se mantiene visible en el recorrido comercial mediante la navegación principal y el acceso destacado a BarFender desde Inicio. En el recorrido institucional aparece después de Origen, Valores, Roster, Estadísticas, Comunidad y Alianzas.
 
-### Orden de lectura de los paneles
+### Orden editorial vigente de los capítulos
 1. Inicio ejecutivo — `chapter-0`.
 2. Origen S3X-MEN — `chapter-1`.
-3. Roster — `chapter-2`.
-4. Estadísticas — `chapter-3`.
-5. Nuestros Valores — `chapter-11`.
+3. Valores — `chapter-11`.
+4. Roster — `chapter-2`.
+5. Estadísticas — `chapter-3`.
 6. Comunidad — `chapter-9`.
-7. En Vivo — `chapter-10`.
-8. Alianzas — `chapter-8`.
-9. Colaboraciones — `chapter-12`.
-10. Arsenal — `chapter-5`.
+7. Alianzas — `chapter-8`.
+8. Colaboraciones — `chapter-12`.
+9. Arsenal — `chapter-5`.
+10. En Vivo — `chapter-10`.
 11. Reclutamiento — `chapter-6`.
 
-Los identificadores técnicos y las referencias de navegación se conservan: no se renumeran los paneles ni se rompen enlaces existentes. La secuencia anterior es editorial; los IDs originales se mantienen por compatibilidad.
+Anexos complementarios: Campañas — `chapter-14`; Mapa Multiversal — `chapter-13`.
+
+**Regla de numeración:** el número editorial visible (00–10) no es el identificador técnico `chapter-N`. Los IDs históricos se conservan para no romper enlaces, deep links, scripts ni pruebas. La navegación principal sigue el recorrido 00–07; Arsenal, En Vivo y Reclutamiento se muestran en la navegación secundaria, en ese orden.
 
 ### Navegación
 - Principal: Inicio, Origen, Roster, Estadísticas, Valores, Comunidad, Alianzas, Colaboraciones.
