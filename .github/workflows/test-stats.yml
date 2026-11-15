@@ -14,6 +14,9 @@ on:
       - 'scripts/validate_creator_metrics.py'
       - 'scripts/check_creator_metrics_freshness.py'
       - 'platform-stats.json'
+      - 'creator-records.json'
+      - 'roster-data.json'
+      - 'scripts/check_identity_consistency.py'
       - 'data.json'
       - 'creator-metrics.json'
       - '.github/workflows/test-stats.yml'
@@ -33,6 +36,14 @@ jobs:
           python-version: '3.12'
       - name: Ejecutar pruebas del colector
         run: python -m unittest discover -s tests -v
+      - name: Probar identidad y conservación de registros
+        run: python scripts/check_identity_consistency.py --selftest
+      - name: Verificar claves y slugs del Roster
+        run: |
+          python scripts/check_identity_consistency.py --roster roster-data.json --records creator-records.json --platform platform-stats.json \
+            --alias losmoriartys=moriartys --alias ladymoriarty01=lady-moriarty --alias ther0d3r1k=rod3r1k \
+            --alias habitos_atomicos=habitos --alias ardipii=ardipii --alias akumazoldyck=akuma \
+            --alias daved0608=dave-nexus --alias patoteexplica=pato-oratoris
       - name: Probar unidad del control de frescura y procedencia
         run: python scripts/check_creator_metrics_freshness.py --selftest
       - name: Verificar el creator-metrics.json versionado contra sus fuentes
