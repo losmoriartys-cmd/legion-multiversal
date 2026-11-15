@@ -21,6 +21,10 @@ test('el directorio carga los ocho expedientes y cada modal puede abrirse', asyn
   for (const creator of creators) {
     const card = page.locator('.roster-collectible-card[data-creator-id="' + creator.id + '"]');
     await expect(card).toHaveCount(1);
+    await card.locator('.roster-card-direct-profile').click();
+    const dossier = page.locator('#hero-profile-page');
+    await expect(dossier).toBeVisible();
+    await expect(dossier).toContainText(creator.name);
     await page.evaluate(index => window.openHeroModal(index), creator.index);
     const modal = page.locator('#hero-modal');
     await expect(modal).toHaveClass(/active/);
@@ -28,6 +32,7 @@ test('el directorio carga los ocho expedientes y cada modal puede abrirse', asyn
     await expect(modal.locator('[role="tab"]')).toHaveCount(3);
     await page.keyboard.press('Escape');
     await expect(modal).not.toHaveClass(/active/);
+    await page.evaluate(() => closeHeroProfile());
   }
   expect(pageErrors).toEqual([]);
 });
