@@ -1773,9 +1773,9 @@ function normalizeRosterDossierPages(pages, hero) {
     const profileKey = escapeStatsHtml(hero.id || hero.slug || 'creator');
     return (Array.isArray(pages) ? pages : []).map((markup, index) => {
         if (typeof markup !== 'string') return markup;
-        return markup.replace(/<article\\b([^>]*\\bcomic-book-sheet\\b[^>]*)>/, (opening, attributes) => {
+        return markup.replace(/<article\b([^>]*\bcomic-book-sheet\b[^>]*)>/, (opening, attributes) => {
             const normalizedAttributes = attributes.replace(/class="([^"]*)"/, (match, classes) =>
-                'class="' + classes.split(/\\s+/).filter(Boolean).filter(name => name !== 'rod3r1k-page').concat('roster-dossier-page').filter((name, position, all) => all.indexOf(name) === position).join(' ') + '"'
+                'class="' + classes.split(/\s+/).filter(Boolean).filter(name => name !== 'rod3r1k-page').concat('roster-dossier-page').filter((name, position, all) => all.indexOf(name) === position).join(' ') + '"'
             );
             return '<article' + normalizedAttributes + ' data-dossier-profile="' + profileKey + '" data-dossier-page="' + (index + 1) + '>';
         });
