@@ -1,5 +1,6 @@
 """Static accessibility and interaction contracts for the Roster dossier."""
 from __future__ import annotations
+import re
 import unittest
 from html.parser import HTMLParser
 from pathlib import Path
@@ -13,6 +14,33 @@ class MarkupIndex(HTMLParser):
         self.nodes = []
     def handle_starttag(self, tag, attrs):
         self.nodes.append((tag, dict(attrs)))
+
+
+LEGACY_CREATOR_IDS = (
+    "losmoriartys",
+    "ladymoriarty01",
+    "ther0d3r1k",
+    "habitos_atomicos",
+    "akumazoldyck",
+    "daved0608",
+    "patoteexplica",
+)
+
+
+def find_legacy_creator_record_lookups(source: str) -> list[str]:
+    """Find legacy channel keys after creatorRecordsData.channels in dot or bracket form."""
+    matches = []
+    for legacy_id in LEGACY_CREATOR_IDS:
+        key = re.escape(legacy_id)
+        pattern = re.compile(
+            r"creatorRecordsData\\s*(?:\\?\\.\\s*)?"
+            r"(?:\\.\\s*channels|\\[\\s*['\\\"]channels['\\\"]\\s*\\])"
+            r"\\s*(?:\\?\\.\\s*)?"
+            r"(?:\\.\\s*" + key + r"|\\[\\s*['\\\"]" + key + r"['\\\"]\\s*\\])"
+        )
+        if pattern.search(source):
+            matches.append(legacy_id)
+    return matches
 
 
 class RosterAccessibilityContractTests(unittest.TestCase):
@@ -87,21 +115,30 @@ class RosterAccessibilityContractTests(unittest.TestCase):
 
     def test_creator_records_use_canonical_roster_ids(self):
         self.assertIn("function getCreatorRecord(hero)", self.js)
+        self.assertIn("return hero?.id || hero?.slug || ''; ", self.js) if False else None
         self.assertIn("return hero?.id || hero?.slug || '';", self.js)
-        legacy_record_lookups = (
-            "creatorRecordsData?.channels?.losmoriartys",
-            "creatorRecordsData?.channels?.ladymoriarty01",
-            "creatorRecordsData?.channels?.ther0d3r1k",
-            "creatorRecordsData?.channels?.habitos_atomicos",
-            "creatorRecordsData?.channels?.akumazoldyck",
-            "creatorRecordsData?.channels?.daved0608",
-            "creatorRecordsData?.channels?.patoteexplica",
-        )
-        for lookup in legacy_record_lookups:
-            self.assertNotIn(lookup, self.js)
+        self.assertEqual(find_legacy_creator_record_lookups(self.js), [])
         moriartys_page = (ROOT / "roster-02-moriartys.html").read_text(encoding="utf-8")
         self.assertIn("records.channels?.[hero.id]", moriartys_page)
-        self.assertNotIn("records.channels?.losmoriartys", moriartys_page)
+        self.assertEqual(find_legacy_creator_record_lookups(moriartys_page), [])
+
+    def test_legacy_lookup_detector_catches_dot_and_bracket_notation(self):
+        examples = (
+            "creatorRecordsData?.channels?.losmoriartys",
+            'creatorRecordsData["channels"]["ladymoriarty01"]',
+            "creatorRecordsData.channels['ther0d3r1k']",
+            'creatorRecordsData?.channels?.["habitos_atomicos"]',
+            "creatorRecordsData['channels']?.['akumazoldyck']",
+            "creatorRecordsData.channels.daved0608",
+            'creatorRecordsData?.["channels"]?.["patoteexplica"]',
+        )
+        for example in examples:
+            with self.subTest(example=example):
+                self.assertTrue(find_legacy_creator_record_lookups(example), example)
+        self.assertEqual(
+            find_legacy_creator_record_lookups("getCreatorRecord(hero)"),
+            [],
+        )
 
     def test_roster_error_has_a_real_retry_control(self):
         self.assertIn("function renderRosterLoadError(error)", self.js)
