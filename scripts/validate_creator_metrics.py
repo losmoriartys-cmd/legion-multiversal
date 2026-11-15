@@ -26,8 +26,17 @@ def parse_time(value):
 
 def validate(registry, roster):
     errors = []
-    if registry.get("schema_version") != 1:
-        errors.append("creator-metrics.json debe usar schema_version=1.")
+    if registry.get("schema_version") != 2:
+        errors.append("creator-metrics.json debe usar schema_version=2.")
+    snapshot = registry.get("source_snapshot")
+    required_sources = ("data.json", "platform-stats.json")
+    if not isinstance(snapshot, dict):
+        errors.append("source_snapshot debe ser un objeto.")
+    else:
+        for source_name in required_sources:
+            entry = snapshot.get(source_name)
+            if not isinstance(entry, dict) or parse_time(entry.get("updated_at")) is None:
+                errors.append("{}: source_snapshot.updated_at debe ser ISO-8601 con zona horaria.".format(source_name))
     if parse_time(registry.get("generated_at")) is None:
         errors.append("generated_at debe ser ISO-8601 con zona horaria.")
     creators = registry.get("creators")
