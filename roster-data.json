@@ -238,7 +238,10 @@
           "notes": "El promedio y el pico son observaciones del muestreo propio, no analíticas oficiales ni el historial completo de transmisiones."
         }
       ],
-      "links": []
+      "links": [],
+      "legacy_slugs": [
+        "ladymoriarty"
+      ]
     },
     {
       "name": "ARDIPII",
