@@ -11,6 +11,7 @@ on:
       - 'scripts/check_anchors.py'
       - 'scripts/summarize_lighthouse.py'
       - 'scripts/lh_failures.py'
+      - 'scripts/validate_github_pages_seo.py'
       - 'scripts/lighthouse_runs.sh'
       - '.github/workflows/auditoria-qa-portable.yml'
       - '*.html'
@@ -35,7 +36,6 @@ jobs:
       - name: Compilar herramientas
         run: |
           python -m py_compile scripts/add_image_dimensions.py scripts/audit_accessibility.py scripts/check_anchors.py scripts/summarize_lighthouse.py scripts/lh_failures.py scripts/validate_github_pages_seo.py
-      - 'scripts/validate_github_pages_seo.py'
           bash -n scripts/lighthouse_runs.sh
       - name: Validar rutas, imágenes y enlaces del sitio
         run: python scripts/validate_site.py
