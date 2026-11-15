@@ -13,17 +13,17 @@
     "daved0608"
   ],
   "collection": {
-    "started_at": "2026-11-15T04:29:08Z",
+    "started_at": "2026-11-15T05:26:22Z",
     "expected_channels": 7,
     "resolved_channels": 7,
     "sampled_channels": [
+      "akumazoldyck",
+      "daved0608",
       "losmoriartys",
       "ladymoriarty01",
       "ther0d3r1k",
       "habitos_atomicos",
-      "ardipii",
-      "akumazoldyck",
-      "daved0608"
+      "ardipii"
     ],
     "skipped_channels": [],
     "complete": true
@@ -33,7 +33,7 @@
     "elgabii090"
   ],
   "channel_registry_note": "Los canales archivados se conservan para consulta histórica y no se incluyen en los indicadores del roster activo.",
-  "updated_at": "2026-11-15T04:29:08Z",
+  "updated_at": "2026-11-15T05:26:22Z",
   "channels": {
     "ladymoriarty01": {
       "login": "ladymoriarty01",
@@ -48,9 +48,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-15T04:29:08Z",
+      "updated_at": "2026-11-15T05:26:22Z",
       "window": {
-        "samples_total": 277,
+        "samples_total": 278,
         "live_samples": 9,
         "streams_observed": 4,
         "average_viewers_sampled": 6.1,
@@ -2633,6 +2633,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-15T05:26:22Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -2644,14 +2653,14 @@
       "twitch_url": "https://twitch.tv/ther0d3r1k",
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
-      "live": true,
-      "current_viewers": 12,
-      "current_game": "Among Us",
-      "current_title": "🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
-      "stream_started_at": "2026-11-15T01:50:01Z",
-      "updated_at": "2026-11-15T04:29:08Z",
+      "live": false,
+      "current_viewers": null,
+      "current_game": null,
+      "current_title": null,
+      "stream_started_at": null,
+      "updated_at": "2026-11-15T05:26:22Z",
       "window": {
-        "samples_total": 277,
+        "samples_total": 278,
         "live_samples": 34,
         "streams_observed": 8,
         "average_viewers_sampled": 22.1,
@@ -5276,6 +5285,15 @@
           "title": "🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
           "stream_id": "319602689652",
           "started_at": "2026-11-15T01:50:01Z"
+        },
+        {
+          "sampled_at": "2026-11-15T05:26:22Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -5938,9 +5956,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-15T04:29:08Z",
+      "updated_at": "2026-11-15T05:26:22Z",
       "window": {
-        "samples_total": 277,
+        "samples_total": 278,
         "live_samples": 6,
         "streams_observed": 3,
         "average_viewers_sampled": 7.2,
@@ -8474,6 +8492,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-15T05:26:22Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -8485,14 +8512,14 @@
       "twitch_url": "https://twitch.tv/akumazoldyck",
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
-      "live": true,
-      "current_viewers": 3,
-      "current_game": "Fortnite",
-      "current_title": "sabadito sabadito de chupi con el team La legion multiversal",
-      "stream_started_at": "2026-11-15T01:02:38Z",
-      "updated_at": "2026-11-15T04:29:08Z",
+      "live": false,
+      "current_viewers": null,
+      "current_game": null,
+      "current_title": null,
+      "stream_started_at": null,
+      "updated_at": "2026-11-15T05:26:22Z",
       "window": {
-        "samples_total": 277,
+        "samples_total": 278,
         "live_samples": 23,
         "streams_observed": 10,
         "average_viewers_sampled": 6.3,
@@ -11096,6 +11123,15 @@
           "title": "sabadito sabadito de chupi con el team La legion multiversal",
           "stream_id": "321160291676",
           "started_at": "2026-11-15T01:02:38Z"
+        },
+        {
+          "sampled_at": "2026-11-15T05:26:22Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -11112,9 +11148,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-15T04:29:08Z",
+      "updated_at": "2026-11-15T05:26:22Z",
       "window": {
-        "samples_total": 277,
+        "samples_total": 278,
         "live_samples": 12,
         "streams_observed": 7,
         "average_viewers_sampled": 1.9,
@@ -13690,6 +13726,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-15T05:26:22Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -14322,19 +14367,19 @@
       "current_game": "Just Chatting",
       "current_title": "es mi primer dia",
       "stream_started_at": "2026-11-14T15:14:20Z",
-      "updated_at": "2026-11-15T04:29:08Z",
+      "updated_at": "2026-11-15T05:26:22Z",
       "window": {
-        "samples_total": 277,
-        "live_samples": 62,
+        "samples_total": 278,
+        "live_samples": 63,
         "streams_observed": 12,
-        "average_viewers_sampled": 5.3,
+        "average_viewers_sampled": 5.2,
         "peak_viewers_sampled": 45,
-        "observed_live_hours": 42.26,
-        "estimated_hours_watched": 209.88,
+        "observed_live_hours": 43.18,
+        "estimated_hours_watched": 210.8,
         "game_breakdown": [
           {
             "name": "Just Chatting",
-            "live_samples": 38,
+            "live_samples": 39,
             "streams_observed": 9,
             "average_viewers_sampled": 4.2,
             "peak_viewers_sampled": 22
@@ -14434,9 +14479,9 @@
           },
           {
             "date": "2026-11-15",
-            "live_samples": 4,
+            "live_samples": 5,
             "streams_observed": 1,
-            "average_viewers_sampled": 2.2,
+            "average_viewers_sampled": 2.0,
             "peak_viewers_sampled": 3
           }
         ],
@@ -16935,6 +16980,15 @@
           "title": "es mi primer dia",
           "stream_id": "319445801206",
           "started_at": "2026-11-14T15:14:20Z"
+        },
+        {
+          "sampled_at": "2026-11-15T05:26:22Z",
+          "is_live": true,
+          "viewer_count": 1,
+          "game_name": "Just Chatting",
+          "title": "es mi primer dia",
+          "stream_id": "319445801206",
+          "started_at": "2026-11-14T15:14:20Z"
         }
       ]
     },
@@ -16946,14 +17000,14 @@
       "twitch_url": "https://twitch.tv/losmoriartys",
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
-      "live": true,
-      "current_viewers": 8,
-      "current_game": "Fortnite",
-      "current_title": "[Legion Multiversal]  Chupistream + Among Us con la muchachada + Charlita",
-      "stream_started_at": "2026-11-15T00:55:40Z",
-      "updated_at": "2026-11-15T04:29:08Z",
+      "live": false,
+      "current_viewers": null,
+      "current_game": null,
+      "current_title": null,
+      "stream_started_at": null,
+      "updated_at": "2026-11-15T05:26:22Z",
       "window": {
-        "samples_total": 277,
+        "samples_total": 278,
         "live_samples": 15,
         "streams_observed": 7,
         "average_viewers_sampled": 16.2,
@@ -19550,6 +19604,15 @@
           "title": "[Legion Multiversal]  Chupistream + Among Us con la muchachada + Charlita",
           "stream_id": "319451224950",
           "started_at": "2026-11-15T00:55:40Z"
+        },
+        {
+          "sampled_at": "2026-11-15T05:26:22Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     }
