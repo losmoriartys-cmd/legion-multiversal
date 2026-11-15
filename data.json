@@ -13,17 +13,17 @@
     "daved0608"
   ],
   "collection": {
-    "started_at": "2026-11-15T01:30:03Z",
+    "started_at": "2026-11-15T02:26:46Z",
     "expected_channels": 7,
     "resolved_channels": 7,
     "sampled_channels": [
-      "ther0d3r1k",
-      "habitos_atomicos",
-      "ardipii",
       "akumazoldyck",
       "daved0608",
       "losmoriartys",
-      "ladymoriarty01"
+      "ladymoriarty01",
+      "ther0d3r1k",
+      "habitos_atomicos",
+      "ardipii"
     ],
     "skipped_channels": [],
     "complete": true
@@ -33,7 +33,7 @@
     "elgabii090"
   ],
   "channel_registry_note": "Los canales archivados se conservan para consulta histórica y no se incluyen en los indicadores del roster activo.",
-  "updated_at": "2026-11-15T01:30:03Z",
+  "updated_at": "2026-11-15T02:26:46Z",
   "channels": {
     "ladymoriarty01": {
       "login": "ladymoriarty01",
@@ -48,9 +48,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-15T01:30:03Z",
+      "updated_at": "2026-11-15T02:26:46Z",
       "window": {
-        "samples_total": 274,
+        "samples_total": 275,
         "live_samples": 9,
         "streams_observed": 4,
         "average_viewers_sampled": 6.1,
@@ -2606,6 +2606,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-15T02:26:46Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -2617,17 +2626,17 @@
       "twitch_url": "https://twitch.tv/ther0d3r1k",
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
-      "live": false,
-      "current_viewers": null,
-      "current_game": null,
-      "current_title": null,
-      "stream_started_at": null,
-      "updated_at": "2026-11-15T01:30:03Z",
+      "live": true,
+      "current_viewers": 9,
+      "current_game": "Just Chatting",
+      "current_title": "🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
+      "stream_started_at": "2026-11-15T01:50:01Z",
+      "updated_at": "2026-11-15T02:26:46Z",
       "window": {
-        "samples_total": 274,
-        "live_samples": 31,
-        "streams_observed": 7,
-        "average_viewers_sampled": 22.7,
+        "samples_total": 275,
+        "live_samples": 32,
+        "streams_observed": 8,
+        "average_viewers_sampled": 22.3,
         "peak_viewers_sampled": 46,
         "observed_live_hours": 18.97,
         "estimated_hours_watched": 411.99,
@@ -2648,9 +2657,9 @@
           },
           {
             "name": "Just Chatting",
-            "live_samples": 5,
-            "streams_observed": 4,
-            "average_viewers_sampled": 13.6,
+            "live_samples": 6,
+            "streams_observed": 5,
+            "average_viewers_sampled": 12.8,
             "peak_viewers_sampled": 30
           },
           {
@@ -2738,6 +2747,13 @@
             "streams_observed": 1,
             "average_viewers_sampled": 9.0,
             "peak_viewers_sampled": 16
+          },
+          {
+            "date": "2026-11-15",
+            "live_samples": 1,
+            "streams_observed": 1,
+            "average_viewers_sampled": 9.0,
+            "peak_viewers_sampled": 9
           }
         ],
         "method": "Muestreo propio con cadencia observada cercana a 55 minutos, variable por la programación de GitHub Actions; horas estimadas solo entre muestras consecutivas del mismo directo cuando el intervalo no supera 110 minutos. Categorías y evolución diaria se calculan sobre las muestras observadas."
@@ -5208,6 +5224,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-15T02:26:46Z",
+          "is_live": true,
+          "viewer_count": 9,
+          "game_name": "Just Chatting",
+          "title": "🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
+          "stream_id": "319602689652",
+          "started_at": "2026-11-15T01:50:01Z"
         }
       ]
     },
@@ -5870,9 +5895,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-15T01:30:03Z",
+      "updated_at": "2026-11-15T02:26:46Z",
       "window": {
-        "samples_total": 274,
+        "samples_total": 275,
         "live_samples": 6,
         "streams_observed": 3,
         "average_viewers_sampled": 7.2,
@@ -8379,6 +8404,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-15T02:26:46Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -8391,25 +8425,25 @@
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
       "live": true,
-      "current_viewers": 4,
+      "current_viewers": 8,
       "current_game": "Fortnite",
       "current_title": "sabadito sabadito de chupi con el team La legion multiversal",
       "stream_started_at": "2026-11-15T01:02:38Z",
-      "updated_at": "2026-11-15T01:30:03Z",
+      "updated_at": "2026-11-15T02:26:46Z",
       "window": {
-        "samples_total": 274,
-        "live_samples": 20,
+        "samples_total": 275,
+        "live_samples": 21,
         "streams_observed": 10,
         "average_viewers_sampled": 6.7,
         "peak_viewers_sampled": 17,
-        "observed_live_hours": 7.99,
-        "estimated_hours_watched": 50.17,
+        "observed_live_hours": 8.9,
+        "estimated_hours_watched": 57.5,
         "game_breakdown": [
           {
             "name": "Fortnite",
-            "live_samples": 12,
+            "live_samples": 13,
             "streams_observed": 7,
-            "average_viewers_sampled": 4.9,
+            "average_viewers_sampled": 5.2,
             "peak_viewers_sampled": 17
           },
           {
@@ -8500,10 +8534,10 @@
           },
           {
             "date": "2026-11-15",
-            "live_samples": 1,
+            "live_samples": 2,
             "streams_observed": 1,
-            "average_viewers_sampled": 4.0,
-            "peak_viewers_sampled": 4
+            "average_viewers_sampled": 6.0,
+            "peak_viewers_sampled": 8
           }
         ],
         "method": "Muestreo propio con cadencia observada cercana a 55 minutos, variable por la programación de GitHub Actions; horas estimadas solo entre muestras consecutivas del mismo directo cuando el intervalo no supera 110 minutos. Categorías y evolución diaria se calculan sobre las muestras observadas."
@@ -10974,6 +11008,15 @@
           "title": "sabadito sabadito de chupi con el team La legion multiversal",
           "stream_id": "321160291676",
           "started_at": "2026-11-15T01:02:38Z"
+        },
+        {
+          "sampled_at": "2026-11-15T02:26:46Z",
+          "is_live": true,
+          "viewer_count": 8,
+          "game_name": "Fortnite",
+          "title": "sabadito sabadito de chupi con el team La legion multiversal",
+          "stream_id": "321160291676",
+          "started_at": "2026-11-15T01:02:38Z"
         }
       ]
     },
@@ -10990,9 +11033,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-15T01:30:03Z",
+      "updated_at": "2026-11-15T02:26:46Z",
       "window": {
-        "samples_total": 274,
+        "samples_total": 275,
         "live_samples": 12,
         "streams_observed": 7,
         "average_viewers_sampled": 1.9,
@@ -13541,6 +13584,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-15T02:26:46Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -14169,23 +14221,23 @@
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
       "live": true,
-      "current_viewers": 2,
+      "current_viewers": 3,
       "current_game": "Just Chatting",
       "current_title": "es mi primer dia",
       "stream_started_at": "2026-11-14T15:14:20Z",
-      "updated_at": "2026-11-15T01:30:03Z",
+      "updated_at": "2026-11-15T02:26:46Z",
       "window": {
-        "samples_total": 274,
-        "live_samples": 59,
+        "samples_total": 275,
+        "live_samples": 60,
         "streams_observed": 12,
-        "average_viewers_sampled": 5.5,
+        "average_viewers_sampled": 5.4,
         "peak_viewers_sampled": 45,
-        "observed_live_hours": 39.51,
-        "estimated_hours_watched": 203.46,
+        "observed_live_hours": 40.43,
+        "estimated_hours_watched": 206.21,
         "game_breakdown": [
           {
             "name": "Just Chatting",
-            "live_samples": 35,
+            "live_samples": 36,
             "streams_observed": 9,
             "average_viewers_sampled": 4.4,
             "peak_viewers_sampled": 22
@@ -14285,10 +14337,10 @@
           },
           {
             "date": "2026-11-15",
-            "live_samples": 1,
+            "live_samples": 2,
             "streams_observed": 1,
-            "average_viewers_sampled": 2.0,
-            "peak_viewers_sampled": 2
+            "average_viewers_sampled": 2.5,
+            "peak_viewers_sampled": 3
           }
         ],
         "method": "Muestreo propio con cadencia observada cercana a 55 minutos, variable por la programación de GitHub Actions; horas estimadas solo entre muestras consecutivas del mismo directo cuando el intervalo no supera 110 minutos. Categorías y evolución diaria se calculan sobre las muestras observadas."
@@ -16759,6 +16811,15 @@
           "title": "es mi primer dia",
           "stream_id": "319445801206",
           "started_at": "2026-11-14T15:14:20Z"
+        },
+        {
+          "sampled_at": "2026-11-15T02:26:46Z",
+          "is_live": true,
+          "viewer_count": 3,
+          "game_name": "Just Chatting",
+          "title": "es mi primer dia",
+          "stream_id": "319445801206",
+          "started_at": "2026-11-14T15:14:20Z"
         }
       ]
     },
@@ -16771,19 +16832,19 @@
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
       "live": true,
-      "current_viewers": 28,
+      "current_viewers": 8,
       "current_game": "Fortnite",
       "current_title": "[Legion Multiversal]  Chupistream + Among Us con la muchachada + Charlita",
       "stream_started_at": "2026-11-15T00:55:40Z",
-      "updated_at": "2026-11-15T01:30:03Z",
+      "updated_at": "2026-11-15T02:26:46Z",
       "window": {
-        "samples_total": 274,
-        "live_samples": 12,
+        "samples_total": 275,
+        "live_samples": 13,
         "streams_observed": 7,
-        "average_viewers_sampled": 18.5,
+        "average_viewers_sampled": 17.7,
         "peak_viewers_sampled": 31,
-        "observed_live_hours": 3.59,
-        "estimated_hours_watched": 73.79,
+        "observed_live_hours": 4.5,
+        "estimated_hours_watched": 81.12,
         "game_breakdown": [
           {
             "name": "Just Chatting",
@@ -16793,18 +16854,18 @@
             "peak_viewers_sampled": 29
           },
           {
+            "name": "Fortnite",
+            "live_samples": 4,
+            "streams_observed": 3,
+            "average_viewers_sampled": 16.0,
+            "peak_viewers_sampled": 28
+          },
+          {
             "name": "Barfender",
             "live_samples": 3,
             "streams_observed": 1,
             "average_viewers_sampled": 19.0,
             "peak_viewers_sampled": 31
-          },
-          {
-            "name": "Fortnite",
-            "live_samples": 3,
-            "streams_observed": 3,
-            "average_viewers_sampled": 18.7,
-            "peak_viewers_sampled": 28
           },
           {
             "name": "Clive Barker's Hellraiser: Revival",
@@ -16873,9 +16934,9 @@
           },
           {
             "date": "2026-11-15",
-            "live_samples": 1,
+            "live_samples": 2,
             "streams_observed": 1,
-            "average_viewers_sampled": 28.0,
+            "average_viewers_sampled": 18.0,
             "peak_viewers_sampled": 28
           }
         ],
@@ -19343,6 +19404,15 @@
           "sampled_at": "2026-11-15T01:30:03Z",
           "is_live": true,
           "viewer_count": 28,
+          "game_name": "Fortnite",
+          "title": "[Legion Multiversal]  Chupistream + Among Us con la muchachada + Charlita",
+          "stream_id": "319451224950",
+          "started_at": "2026-11-15T00:55:40Z"
+        },
+        {
+          "sampled_at": "2026-11-15T02:26:46Z",
+          "is_live": true,
+          "viewer_count": 8,
           "game_name": "Fortnite",
           "title": "[Legion Multiversal]  Chupistream + Among Us con la muchachada + Charlita",
           "stream_id": "319451224950",
