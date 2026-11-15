@@ -75,6 +75,9 @@ class NormalizedCreatorMetricsTests(unittest.TestCase):
     def test_builds_one_creator_with_platform_scoped_metrics_and_separate_units(self):
         result = build(self.roster, self.twitch, self.platforms, self.clips, self.now)
         creator = result["creators"]["demo"]
+        self.assertEqual(result["schema_version"], 2)
+        self.assertEqual(result["source_snapshot"]["data.json"]["updated_at"], self.twitch.get("updated_at"))
+        self.assertEqual(result["source_snapshot"]["platform-stats.json"]["updated_at"], self.platforms.get("updated_at"))
         self.assertEqual(creator["display_name"], "DEMO PROJECT")
         self.assertEqual(creator["identity_scope"], "shared_project")
         self.assertEqual(len(creator["accounts"]), 2)
