@@ -1,6 +1,18 @@
 name: Validar colector de estadísticas
 
 on:
+  push:
+    branches:
+      - 'feat/roster-integral-2026-11-14'
+    paths:
+      - 'scripts/**'
+      - 'tests/**'
+      - 'roster-data.json'
+      - 'creator-records.json'
+      - 'platform-stats.json'
+      - 'data.json'
+      - 'creator-metrics.json'
+      - '.github/workflows/test-stats.yml'
   pull_request:
     branches:
       - main
