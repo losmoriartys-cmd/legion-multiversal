@@ -2,6 +2,7 @@ const { test, expect } = require('@playwright/test');
 
 test('el índice de Bitácora enlaza con los capítulos reales del sitio', async ({ page }) => {
   await page.goto('/bitacora-preview.html');
+  await expect(page.locator('.archive-nav a').nth(1)).toHaveText('CAPÍTULO 07 · COLABORACIONES');
   await page.locator('#next').click();
 
   const entries = await page.locator('.index-list a').evaluateAll(links =>
