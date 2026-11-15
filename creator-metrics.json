@@ -1,11 +1,19 @@
 {
-  "schema_version": 1,
-  "generated_at": "2026-11-14T23:47:16Z",
+  "schema_version": 2,
+  "generated_at": "2026-11-15T16:53:42Z",
   "source_files": {
     "identity": "roster-data.json",
     "twitch": "data.json",
     "platforms": "platform-stats.json",
     "clips": "clips-data.json"
+  },
+  "source_snapshot": {
+    "data.json": {
+      "updated_at": "2026-11-15T16:24:11Z"
+    },
+    "platform-stats.json": {
+      "updated_at": "2026-11-15T16:24:12Z"
+    }
   },
   "methodology": [
     "Registro normalizado derivado de archivos de fuente; no reemplaza las capturas originales.",
@@ -50,17 +58,17 @@
           "account_handle": "losmoriartys",
           "key": "live_status",
           "label": "Estado de transmisión",
-          "value": null,
+          "value": "offline",
           "unit": "status",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "public_helix_snapshot",
-          "status": "delayed",
+          "status": "fresh",
           "visibility": "public",
           "interpretation": "Estado observado en la última consulta pública; un estado vencido queda oculto.",
           "source_file": "data.json"
@@ -73,15 +81,15 @@
           "label": "Espectadores en la última captura",
           "value": null,
           "unit": "viewers",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "public_helix_snapshot",
-          "status": "delayed",
+          "status": "offline",
           "visibility": "public",
           "interpretation": "Lectura puntual de stream en vivo; no equivale a espectadores únicos ni promedio.",
           "source_file": "data.json"
@@ -92,13 +100,13 @@
           "account_handle": "losmoriartys",
           "key": "samples_total",
           "label": "Muestras históricas",
-          "value": 271,
+          "value": 288,
           "unit": "samples",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -113,13 +121,13 @@
           "account_handle": "losmoriartys",
           "key": "live_samples",
           "label": "Muestras en directo",
-          "value": 11,
+          "value": 15,
           "unit": "samples",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -134,13 +142,13 @@
           "account_handle": "losmoriartys",
           "key": "streams_observed",
           "label": "Sesiones observadas",
-          "value": 6,
+          "value": 7,
           "unit": "streams",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -155,13 +163,13 @@
           "account_handle": "losmoriartys",
           "key": "average_viewers_sampled",
           "label": "Promedio de viewers muestreado",
-          "value": 17.6,
+          "value": 16.2,
           "unit": "viewers_sampled_avg",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -178,11 +186,11 @@
           "label": "Pico observado",
           "value": 31,
           "unit": "viewers_sampled_peak",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -197,13 +205,13 @@
           "account_handle": "losmoriartys",
           "key": "observed_live_hours",
           "label": "Horas en directo observadas",
-          "value": 3.59,
+          "value": 6.34,
           "unit": "hours_observed",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -218,13 +226,13 @@
           "account_handle": "losmoriartys",
           "key": "estimated_hours_watched",
           "label": "Horas vistas estimadas",
-          "value": 73.79,
+          "value": 93.04,
           "unit": "hours_estimated",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -272,17 +280,17 @@
           "account_handle": "TheR0D3R1K",
           "key": "live_status",
           "label": "Estado de transmisión",
-          "value": null,
+          "value": "offline",
           "unit": "status",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "public_helix_snapshot",
-          "status": "delayed",
+          "status": "fresh",
           "visibility": "public",
           "interpretation": "Estado observado en la última consulta pública; un estado vencido queda oculto.",
           "source_file": "data.json"
@@ -295,15 +303,15 @@
           "label": "Espectadores en la última captura",
           "value": null,
           "unit": "viewers",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "public_helix_snapshot",
-          "status": "delayed",
+          "status": "offline",
           "visibility": "public",
           "interpretation": "Lectura puntual de stream en vivo; no equivale a espectadores únicos ni promedio.",
           "source_file": "data.json"
@@ -314,13 +322,13 @@
           "account_handle": "TheR0D3R1K",
           "key": "samples_total",
           "label": "Muestras históricas",
-          "value": 271,
+          "value": 288,
           "unit": "samples",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -335,13 +343,13 @@
           "account_handle": "TheR0D3R1K",
           "key": "live_samples",
           "label": "Muestras en directo",
-          "value": 31,
+          "value": 34,
           "unit": "samples",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -356,13 +364,13 @@
           "account_handle": "TheR0D3R1K",
           "key": "streams_observed",
           "label": "Sesiones observadas",
-          "value": 7,
+          "value": 8,
           "unit": "streams",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -377,13 +385,13 @@
           "account_handle": "TheR0D3R1K",
           "key": "average_viewers_sampled",
           "label": "Promedio de viewers muestreado",
-          "value": 22.7,
+          "value": 22.1,
           "unit": "viewers_sampled_avg",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -400,11 +408,11 @@
           "label": "Pico observado",
           "value": 46,
           "unit": "viewers_sampled_peak",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -419,13 +427,13 @@
           "account_handle": "TheR0D3R1K",
           "key": "observed_live_hours",
           "label": "Horas en directo observadas",
-          "value": 18.97,
+          "value": 20.8,
           "unit": "hours_observed",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -440,13 +448,13 @@
           "account_handle": "TheR0D3R1K",
           "key": "estimated_hours_watched",
           "label": "Horas vistas estimadas",
-          "value": 411.99,
+          "value": 447.74,
           "unit": "hours_estimated",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -494,17 +502,17 @@
           "account_handle": "ladymoriarty01",
           "key": "live_status",
           "label": "Estado de transmisión",
-          "value": null,
+          "value": "offline",
           "unit": "status",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "public_helix_snapshot",
-          "status": "delayed",
+          "status": "fresh",
           "visibility": "public",
           "interpretation": "Estado observado en la última consulta pública; un estado vencido queda oculto.",
           "source_file": "data.json"
@@ -517,15 +525,15 @@
           "label": "Espectadores en la última captura",
           "value": null,
           "unit": "viewers",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "public_helix_snapshot",
-          "status": "delayed",
+          "status": "offline",
           "visibility": "public",
           "interpretation": "Lectura puntual de stream en vivo; no equivale a espectadores únicos ni promedio.",
           "source_file": "data.json"
@@ -536,13 +544,13 @@
           "account_handle": "ladymoriarty01",
           "key": "samples_total",
           "label": "Muestras históricas",
-          "value": 271,
+          "value": 288,
           "unit": "samples",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -559,11 +567,11 @@
           "label": "Muestras en directo",
           "value": 9,
           "unit": "samples",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -580,11 +588,11 @@
           "label": "Sesiones observadas",
           "value": 4,
           "unit": "streams",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -601,11 +609,11 @@
           "label": "Promedio de viewers muestreado",
           "value": 6.1,
           "unit": "viewers_sampled_avg",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -622,11 +630,11 @@
           "label": "Pico observado",
           "value": 15,
           "unit": "viewers_sampled_peak",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -643,11 +651,11 @@
           "label": "Horas en directo observadas",
           "value": 3.07,
           "unit": "hours_observed",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -664,11 +672,11 @@
           "label": "Horas vistas estimadas",
           "value": 19.29,
           "unit": "hours_estimated",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -716,17 +724,17 @@
           "account_handle": "ardipii",
           "key": "live_status",
           "label": "Estado de transmisión",
-          "value": null,
+          "value": "offline",
           "unit": "status",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "public_helix_snapshot",
-          "status": "delayed",
+          "status": "fresh",
           "visibility": "public",
           "interpretation": "Estado observado en la última consulta pública; un estado vencido queda oculto.",
           "source_file": "data.json"
@@ -739,15 +747,15 @@
           "label": "Espectadores en la última captura",
           "value": null,
           "unit": "viewers",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "public_helix_snapshot",
-          "status": "delayed",
+          "status": "offline",
           "visibility": "public",
           "interpretation": "Lectura puntual de stream en vivo; no equivale a espectadores únicos ni promedio.",
           "source_file": "data.json"
@@ -758,13 +766,13 @@
           "account_handle": "ardipii",
           "key": "samples_total",
           "label": "Muestras históricas",
-          "value": 271,
+          "value": 288,
           "unit": "samples",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -781,11 +789,11 @@
           "label": "Muestras en directo",
           "value": 6,
           "unit": "samples",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -802,11 +810,11 @@
           "label": "Sesiones observadas",
           "value": 3,
           "unit": "streams",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -823,11 +831,11 @@
           "label": "Promedio de viewers muestreado",
           "value": 7.2,
           "unit": "viewers_sampled_avg",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -844,11 +852,11 @@
           "label": "Pico observado",
           "value": 14,
           "unit": "viewers_sampled_peak",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -865,11 +873,11 @@
           "label": "Horas en directo observadas",
           "value": 1.66,
           "unit": "hours_observed",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -886,11 +894,11 @@
           "label": "Horas vistas estimadas",
           "value": 17.23,
           "unit": "hours_estimated",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -938,17 +946,17 @@
           "account_handle": "akumazoldyck",
           "key": "live_status",
           "label": "Estado de transmisión",
-          "value": null,
+          "value": "offline",
           "unit": "status",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "public_helix_snapshot",
-          "status": "delayed",
+          "status": "fresh",
           "visibility": "public",
           "interpretation": "Estado observado en la última consulta pública; un estado vencido queda oculto.",
           "source_file": "data.json"
@@ -961,15 +969,15 @@
           "label": "Espectadores en la última captura",
           "value": null,
           "unit": "viewers",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "public_helix_snapshot",
-          "status": "delayed",
+          "status": "offline",
           "visibility": "public",
           "interpretation": "Lectura puntual de stream en vivo; no equivale a espectadores únicos ni promedio.",
           "source_file": "data.json"
@@ -980,13 +988,13 @@
           "account_handle": "akumazoldyck",
           "key": "samples_total",
           "label": "Muestras históricas",
-          "value": 271,
+          "value": 288,
           "unit": "samples",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -1001,13 +1009,13 @@
           "account_handle": "akumazoldyck",
           "key": "live_samples",
           "label": "Muestras en directo",
-          "value": 19,
+          "value": 23,
           "unit": "samples",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -1022,13 +1030,13 @@
           "account_handle": "akumazoldyck",
           "key": "streams_observed",
           "label": "Sesiones observadas",
-          "value": 9,
+          "value": 10,
           "unit": "streams",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -1043,13 +1051,13 @@
           "account_handle": "akumazoldyck",
           "key": "average_viewers_sampled",
           "label": "Promedio de viewers muestreado",
-          "value": 6.8,
+          "value": 6.3,
           "unit": "viewers_sampled_avg",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -1066,11 +1074,11 @@
           "label": "Pico observado",
           "value": 17,
           "unit": "viewers_sampled_peak",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -1085,13 +1093,13 @@
           "account_handle": "akumazoldyck",
           "key": "observed_live_hours",
           "label": "Horas en directo observadas",
-          "value": 7.99,
+          "value": 10.74,
           "unit": "hours_observed",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -1106,13 +1114,13 @@
           "account_handle": "akumazoldyck",
           "key": "estimated_hours_watched",
           "label": "Horas vistas estimadas",
-          "value": 50.17,
+          "value": 62.09,
           "unit": "hours_estimated",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -1160,17 +1168,17 @@
           "account_handle": "daved0608",
           "key": "live_status",
           "label": "Estado de transmisión",
-          "value": null,
+          "value": "offline",
           "unit": "status",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "public_helix_snapshot",
-          "status": "delayed",
+          "status": "fresh",
           "visibility": "public",
           "interpretation": "Estado observado en la última consulta pública; un estado vencido queda oculto.",
           "source_file": "data.json"
@@ -1183,15 +1191,15 @@
           "label": "Espectadores en la última captura",
           "value": null,
           "unit": "viewers",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "public_helix_snapshot",
-          "status": "delayed",
+          "status": "offline",
           "visibility": "public",
           "interpretation": "Lectura puntual de stream en vivo; no equivale a espectadores únicos ni promedio.",
           "source_file": "data.json"
@@ -1202,13 +1210,13 @@
           "account_handle": "daved0608",
           "key": "samples_total",
           "label": "Muestras históricas",
-          "value": 271,
+          "value": 288,
           "unit": "samples",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -1225,11 +1233,11 @@
           "label": "Muestras en directo",
           "value": 12,
           "unit": "samples",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -1246,11 +1254,11 @@
           "label": "Sesiones observadas",
           "value": 7,
           "unit": "streams",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -1267,11 +1275,11 @@
           "label": "Promedio de viewers muestreado",
           "value": 1.9,
           "unit": "viewers_sampled_avg",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -1288,11 +1296,11 @@
           "label": "Pico observado",
           "value": 5,
           "unit": "viewers_sampled_peak",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -1309,11 +1317,11 @@
           "label": "Horas en directo observadas",
           "value": 3.55,
           "unit": "hours_observed",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -1330,11 +1338,11 @@
           "label": "Horas vistas estimadas",
           "value": 7.22,
           "unit": "hours_estimated",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -1403,11 +1411,11 @@
           "label": "Suscriptores públicos",
           "value": 56,
           "unit": "subscribers",
-          "captured_at": "2026-11-14T20:56:28Z",
+          "captured_at": "2026-11-15T16:24:12Z",
           "period": {
             "kind": "cumulative",
             "from": null,
-            "to": "2026-11-14T20:56:28Z"
+            "to": "2026-11-15T16:24:12Z"
           },
           "source": "YouTube Data API v3",
           "method": "youtube_data_api_public",
@@ -1424,11 +1432,11 @@
           "label": "Visualizaciones acumuladas",
           "value": 431,
           "unit": "views",
-          "captured_at": "2026-11-14T20:56:28Z",
+          "captured_at": "2026-11-15T16:24:12Z",
           "period": {
             "kind": "cumulative",
             "from": null,
-            "to": "2026-11-14T20:56:28Z"
+            "to": "2026-11-15T16:24:12Z"
           },
           "source": "YouTube Data API v3",
           "method": "youtube_data_api_public",
@@ -1445,11 +1453,11 @@
           "label": "Videos publicados",
           "value": 6,
           "unit": "videos",
-          "captured_at": "2026-11-14T20:56:28Z",
+          "captured_at": "2026-11-15T16:24:12Z",
           "period": {
             "kind": "cumulative",
             "from": null,
-            "to": "2026-11-14T20:56:28Z"
+            "to": "2026-11-15T16:24:12Z"
           },
           "source": "YouTube Data API v3",
           "method": "youtube_data_api_public",
@@ -1461,7 +1469,6 @@
       ],
       "content": {
         "twitch_clips_status": "not_collected",
-        "twitch_clips_captured_at": null,
         "twitch_clips_count": 0
       }
     },
@@ -1497,17 +1504,17 @@
           "account_handle": "habitos_atomicos",
           "key": "live_status",
           "label": "Estado de transmisión",
-          "value": null,
+          "value": "offline",
           "unit": "status",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "public_helix_snapshot",
-          "status": "delayed",
+          "status": "fresh",
           "visibility": "public",
           "interpretation": "Estado observado en la última consulta pública; un estado vencido queda oculto.",
           "source_file": "data.json"
@@ -1520,15 +1527,15 @@
           "label": "Espectadores en la última captura",
           "value": null,
           "unit": "viewers",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "public_helix_snapshot",
-          "status": "delayed",
+          "status": "offline",
           "visibility": "public",
           "interpretation": "Lectura puntual de stream en vivo; no equivale a espectadores únicos ni promedio.",
           "source_file": "data.json"
@@ -1539,13 +1546,13 @@
           "account_handle": "habitos_atomicos",
           "key": "samples_total",
           "label": "Muestras históricas",
-          "value": 271,
+          "value": 288,
           "unit": "samples",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -1560,13 +1567,13 @@
           "account_handle": "habitos_atomicos",
           "key": "live_samples",
           "label": "Muestras en directo",
-          "value": 56,
+          "value": 63,
           "unit": "samples",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -1583,11 +1590,11 @@
           "label": "Sesiones observadas",
           "value": 12,
           "unit": "streams",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -1602,13 +1609,13 @@
           "account_handle": "habitos_atomicos",
           "key": "average_viewers_sampled",
           "label": "Promedio de viewers muestreado",
-          "value": 5.7,
+          "value": 5.2,
           "unit": "viewers_sampled_avg",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -1625,11 +1632,11 @@
           "label": "Pico observado",
           "value": 45,
           "unit": "viewers_sampled_peak",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -1644,13 +1651,13 @@
           "account_handle": "habitos_atomicos",
           "key": "observed_live_hours",
           "label": "Horas en directo observadas",
-          "value": 37.68,
+          "value": 43.18,
           "unit": "hours_observed",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -1665,13 +1672,13 @@
           "account_handle": "habitos_atomicos",
           "key": "estimated_hours_watched",
           "label": "Horas vistas estimadas",
-          "value": 201.63,
+          "value": 210.8,
           "unit": "hours_estimated",
-          "captured_at": "2026-11-14T20:56:27Z",
+          "captured_at": "2026-11-15T16:24:11Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-14T20:56:27Z"
+            "to": "2026-11-15T15:39:39Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
