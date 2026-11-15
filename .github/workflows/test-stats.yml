@@ -12,6 +12,7 @@ on:
       - 'scripts/validate_metric_history.py'
       - 'scripts/build_creator_metrics.py'
       - 'scripts/validate_creator_metrics.py'
+      - 'scripts/check_creator_metrics_freshness.py'
       - '.github/workflows/test-stats.yml'
 
 permissions:
@@ -31,6 +32,10 @@ jobs:
         run: python -m unittest discover -s tests -v
       - name: Generar registro normalizado de métricas
         run: python scripts/build_creator_metrics.py
+      - name: Probar control de frescura y procedencia
+        run: |
+          python scripts/check_creator_metrics_freshness.py --selftest
+          python scripts/check_creator_metrics_freshness.py --metrics creator-metrics.json:generated_at --source data.json:updated_at --source platform-stats.json:updated_at --tolerance 300 --provenance source_snapshot
       - name: Validar registro normalizado
         run: python scripts/validate_creator_metrics.py
       - name: Publicar artefacto de métricas generado
