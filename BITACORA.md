@@ -128,3 +128,41 @@ Al finalizar cada cambio, registrar: archivos tocados; qué se modificó y por q
   - Las estadísticas históricas ampliadas deben seguir incorporándose solo cuando estén verificadas.
 - **Commit de la maqueta:** `aa258406308a17b7993249bed584a215edb7d5cd`.
 - **Despliegue:** GitHub Pages completado con éxito (workflow run `41989248368`).
+
+
+## 2026-11-15 — QA integral del Roster y reconciliación de la Bitácora
+
+- **Rama / PR:** `feat/roster-integral-2026-11-14`, PR #47 (Draft, abierto). Sin merge ni cambios en `main`.
+- **Archivos modificados:**
+  - `creator-records.json`, `app.js`
+  - `scripts/check_identity_consistency.py`
+  - `tests/test_roster_accessibility_contract.py`
+  - `tests/baselines/approved-editorial-updates.json`
+  - `package.json`, `playwright.config.js`
+  - `tests/browser/roster.spec.js`, `tests/browser/bitacora.spec.js`
+  - `.github/workflows/validar-sitio.yml`, `.github/workflows/test-stats.yml`
+  - `bitacora-preview.html`
+- **Cambios realizados — Roster:**
+  - Se sustituyeron los tres títulos automáticos de clips de ROD3R1K por los títulos confirmados: «NO VOY A DECIR NADA xd», «Ff se mueve la puerta» y «Nueva actualización de temporada · Rogue Company», tanto en el registro editorial como en el cómic.
+  - Se amplió el detector de accesos legacy para cubrir notación por punto, optional chaining y corchetes; se añadieron casos negativos que demuestran que detecta esas variantes.
+  - La aprobación de los tres títulos quedó registrada como una excepción editorial exacta. La línea base histórica previa a la migración no se regeneró ni se sobrescribió.
+  - Playwright ahora abre los ocho perfiles y los ocho modales, comprueba sus tres pestañas y verifica que los dos hashes de Lady Moriarty resuelven al mismo expediente.
+  - La prueba de navegador detectó y permitió corregir un error real de inicialización en `renderAkumaComicPages()`: `streamBody` se utilizaba antes de declararse.
+- **Cambios realizados — Bitácora:**
+  - Se alineó el índice del libro con la numeración y los destinos reales de Inicio, Origen, Valores, Roster, Estadísticas, Comunidad, Alianzas, Colaboraciones, Archivo de campañas, Arsenal, En Vivo, Reclutamiento y Mapa Multiversal.
+  - Se corrigieron las etiquetas editoriales de los capítulos.
+  - El directorio ahora presenta `display_name` y construye enlaces con `slug`/`id` canónicos, en vez de derivarlos del nombre técnico.
+  - El índice se distribuye en dos columnas para mantener legibilidad con la navegación ampliada.
+- **Validaciones:**
+  - 33 pruebas unitarias: OK.
+  - 15 pruebas de identidad: OK.
+  - Playwright: 4 pruebas de navegador aprobadas (ocho expedientes, ocho modales, ambos hashes de Lady, índice y directorio de Bitácora).
+  - Validadores de clips, rutas, imágenes y enlaces: OK.
+  - [Workflow de validación completo](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43700075996): SUCCESS en SHA `3b20530f45ba56b9a0bd9bb6ffd69448a89631e2`.
+  - [Workflow de estadísticas](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43700075988): los controles de identidad/conservación pasan; falla únicamente el control de frescura/procedencia de `creator-metrics.json` (1413 s de diferencia y falta `source_snapshot`). Se deja deliberadamente pendiente para el último cambio, después de sincronizar con el `main` más reciente.
+- **Pendientes / riesgos:**
+  - Revisar visualmente la Bitácora en escritorio y móvil.
+  - Sincronizar la rama con el último `main` antes de regenerar `creator-metrics.json`; hacerlo como último cambio y repetir CI.
+  - PR #47 sigue Draft. No se modificaron secretos, credenciales ni producción; no se ejecutó un despliegue de producción.
+- **Commit de código validado:** `3b20530f45ba56b9a0bd9bb6ffd69448a89631e2`.
+- **Despliegue:** no realizado; la validación corresponde a CI/preview, no a producción.
