@@ -84,6 +84,10 @@ def build(roster, twitch, platforms, clips, now=None):
             "platforms": "platform-stats.json",
             "clips": "clips-data.json",
         },
+        "source_snapshot": {
+            "data.json": {"updated_at": twitch.get("updated_at")},
+            "platform-stats.json": {"updated_at": platforms.get("updated_at")},
+        },
         "methodology": [
             "Registro normalizado derivado de archivos de fuente; no reemplaza las capturas originales.",
             "No sumar ni comparar directamente métricas con unidades o períodos diferentes.",
