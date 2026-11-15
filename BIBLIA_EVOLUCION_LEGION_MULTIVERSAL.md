@@ -258,7 +258,7 @@ Anexos complementarios: Campañas — `chapter-14`; Mapa Multiversal — `chapte
 **Regla de numeración:** el número editorial visible (00–10) no es el identificador técnico `chapter-N`. Los IDs históricos se conservan para no romper enlaces, deep links, scripts ni pruebas. La navegación principal sigue el recorrido 00–07; Arsenal, En Vivo y Reclutamiento se muestran en la navegación secundaria, en ese orden.
 
 ### Navegación
-- Principal: Inicio, Origen, Roster, Estadísticas, Valores, Comunidad, Alianzas, Colaboraciones.
+- Principal: Inicio, Origen, Valores, Roster, Estadísticas, Comunidad, Alianzas, Colaboraciones.
 - Otras secciones: En Vivo, Arsenal, Reclutamiento.
 - El capítulo 12 permanece en la navegación principal y como destino del expediente destacado BarFender en Inicio.
 - Arsenal y Reclutamiento son herramientas para integrantes y aspirantes; no deben competir con el recorrido institucional ni convertirse en nuevas áreas comerciales.
