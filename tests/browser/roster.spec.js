@@ -34,17 +34,24 @@ test('el directorio carga los ocho expedientes y cada modal puede abrirse', asyn
 
 test('las dos rutas históricas de Lady Moriarty abren el mismo expediente', async ({ page }) => {
   const pageErrors = [];
-  page.on('pageerror', error => pageErrors.push(error.message));
+  const legacyPage = await page.context().newPage();
+  const canonicalPage = await page.context().newPage();
+  for (const target of [legacyPage, canonicalPage]) {
+    target.on('pageerror', error => pageErrors.push(error.message));
+    target.on('console', message => { if (message.type() === 'error') pageErrors.push(message.text()); });
+  }
 
-  await page.goto('/#expediente-ladymoriarty');
-  await expect(page.locator('#hero-profile-page')).toBeVisible();
-  const legacyText = await page.locator('#hero-profile-page').innerText();
-  await expect(page.locator('#hero-profile-page')).toContainText('LADY MORIARTY');
+  await legacyPage.goto('/#expediente-ladymoriarty');
+  await expect(legacyPage.locator('#hero-profile-page')).toBeVisible();
+  const legacyText = await legacyPage.locator('#hero-profile-page').innerText();
+  await expect(legacyPage.locator('#hero-profile-page')).toContainText('LADY MORIARTY');
 
-  await page.goto('/#expediente-lady-moriarty');
-  await expect(page.locator('#hero-profile-page')).toBeVisible();
-  const canonicalText = await page.locator('#hero-profile-page').innerText();
-  await expect(page.locator('#hero-profile-page')).toContainText('LADY MORIARTY');
+  await canonicalPage.goto('/#expediente-lady-moriarty');
+  await expect(canonicalPage.locator('#hero-profile-page')).toBeVisible();
+  const canonicalText = await canonicalPage.locator('#hero-profile-page').innerText();
+  await expect(canonicalPage.locator('#hero-profile-page')).toContainText('LADY MORIARTY');
   expect(canonicalText).toBe(legacyText);
   expect(pageErrors).toEqual([]);
+  await legacyPage.close();
+  await canonicalPage.close();
 });
