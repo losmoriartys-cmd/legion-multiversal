@@ -1327,6 +1327,7 @@ function navigateHeroProfile(direction) {
 function findHeroIndexBySlug(slug) {
     const normalized = String(slug || '').toLocaleLowerCase('es');
     return heroesData.findIndex(hero => getHeroRosterSlug(hero) === normalized
+        || (Array.isArray(hero.legacy_slugs) && hero.legacy_slugs.some(value => String(value).toLocaleLowerCase('es') === normalized))
         || hero.name.toLocaleLowerCase('es').replace(/[^a-z0-9]+/g,'-') === normalized);
 }
 function openHeroFromRoute(slug, normalizeHistory = false) {
