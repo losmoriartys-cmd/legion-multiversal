@@ -85,6 +85,24 @@ class RosterAccessibilityContractTests(unittest.TestCase):
         self.assertIn("CLIPS PÚBLICOS DETECTADOS", self.js)
         self.assertIn("La selección automática no reemplaza", self.js)
 
+    def test_creator_records_use_canonical_roster_ids(self):
+        self.assertIn("function getCreatorRecord(hero)", self.js)
+        self.assertIn("return hero?.id || hero?.slug || '';", self.js)
+        legacy_record_lookups = (
+            "creatorRecordsData?.channels?.losmoriartys",
+            "creatorRecordsData?.channels?.ladymoriarty01",
+            "creatorRecordsData?.channels?.ther0d3r1k",
+            "creatorRecordsData?.channels?.habitos_atomicos",
+            "creatorRecordsData?.channels?.akumazoldyck",
+            "creatorRecordsData?.channels?.daved0608",
+            "creatorRecordsData?.channels?.patoteexplica",
+        )
+        for lookup in legacy_record_lookups:
+            self.assertNotIn(lookup, self.js)
+        moriartys_page = (ROOT / "roster-02-moriartys.html").read_text(encoding="utf-8")
+        self.assertIn("records.channels?.[hero.id]", moriartys_page)
+        self.assertNotIn("records.channels?.losmoriartys", moriartys_page)
+
     def test_roster_error_has_a_real_retry_control(self):
         self.assertIn("function renderRosterLoadError(error)", self.js)
         self.assertIn("roster-load-retry", self.js)
