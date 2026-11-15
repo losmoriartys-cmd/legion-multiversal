@@ -42,5 +42,11 @@ jobs:
         run: python scripts/check_anchors.py
       - name: Auditar accesibilidad estática
         run: python scripts/audit_accessibility.py
-      - name: Verificar dimensiones de imágenes sin modificar HTML
+      - name: Verificar dimensiones existentes sin modificar HTML
         run: python scripts/add_image_dimensions.py --check
+      - name: Preparar diff de dimensiones para revisión (checkout efímero)
+        run: |
+          python scripts/add_image_dimensions.py index.html bitacora-preview.html comic-moriartys.html
+          git diff --check
+          git diff --stat -- index.html bitacora-preview.html comic-moriartys.html
+          git diff -- index.html bitacora-preview.html comic-moriartys.html
