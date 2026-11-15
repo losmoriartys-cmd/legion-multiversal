@@ -76,7 +76,7 @@ def build(roster, twitch, platforms, clips, now=None):
     now = (now or datetime.now(timezone.utc)).astimezone(timezone.utc).replace(microsecond=0)
     generated = iso(now)
     registry = {
-        "schema_version": 1,
+        "schema_version": 2,
         "generated_at": generated,
         "source_files": {
             "identity": "roster-data.json",
