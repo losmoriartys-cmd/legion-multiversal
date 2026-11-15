@@ -13,6 +13,9 @@ on:
       - 'scripts/build_creator_metrics.py'
       - 'scripts/validate_creator_metrics.py'
       - 'scripts/check_creator_metrics_freshness.py'
+      - 'platform-stats.json'
+      - 'data.json'
+      - 'creator-metrics.json'
       - '.github/workflows/test-stats.yml'
 
 permissions:
@@ -30,12 +33,12 @@ jobs:
           python-version: '3.12'
       - name: Ejecutar pruebas del colector
         run: python -m unittest discover -s tests -v
+      - name: Probar unidad del control de frescura y procedencia
+        run: python scripts/check_creator_metrics_freshness.py --selftest
+      - name: Verificar el creator-metrics.json versionado contra sus fuentes
+        run: python scripts/check_creator_metrics_freshness.py --metrics creator-metrics.json:generated_at --source data.json:updated_at --source platform-stats.json:updated_at --tolerance 300 --provenance source_snapshot
       - name: Generar registro normalizado de métricas
         run: python scripts/build_creator_metrics.py
-      - name: Probar control de frescura y procedencia
-        run: |
-          python scripts/check_creator_metrics_freshness.py --selftest
-          python scripts/check_creator_metrics_freshness.py --metrics creator-metrics.json:generated_at --source data.json:updated_at --source platform-stats.json:updated_at --tolerance 300 --provenance source_snapshot
       - name: Validar registro normalizado
         run: python scripts/validate_creator_metrics.py
       - name: Publicar artefacto de métricas generado
