@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Twitch public sampled snapshot",
+  "type": "object",
+  "required": ["sampled_at", "is_live", "viewer_count", "game_name", "title", "stream_id", "started_at"],
+  "properties": {
+    "sampled_at": {"type": "string", "format": "date-time"},
+    "is_live": {"type": "boolean"},
+    "viewer_count": {"type": ["integer", "null"], "minimum": 0},
+    "game_name": {"type": ["string", "null"]},
+    "title": {"type": ["string", "null"]},
+    "stream_id": {"type": ["string", "null"]},
+    "started_at": {"type": ["string", "null"], "format": "date-time"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"is_live": {"const": false}}},
+      "then": {"properties": {"viewer_count": {"type": "null"}}}
+    }
+  ],
+  "additionalProperties": false
+}

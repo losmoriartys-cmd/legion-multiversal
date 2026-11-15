@@ -242,24 +242,59 @@
 
 <section id="chapter-2" class="chapter-panel comic-page" data-editorial-number="3">
             <div class="chapter-tag">CAPÍTULO 03 · ROSTER</div>
-            <h2 class="comic-title">LEGIÓN MULTIVERSAL — NUESTRO ROSTER</h2>
-            <div class="institute-banner"><div class="institute-stamp" aria-label="Emblema oficial de la Legión Multiversal"><img src="legion_logo_final_hybrid.png" alt="Emblema de Legión Multiversal" loading="lazy" decoding="async"><span>ARCHIVO DE LA LEGIÓN</span></div><div class="institute-banner-copy"><h3>UN LUGAR PARA CADA TALENTO EXTRAORDINARIO</h3><p>Una comunidad de creadores con identidades y especialidades diferentes. Cada integrante tiene un expediente propio y un lugar dentro de este universo compartido.</p></div></div>
-            <nav class="roster-product-nav" aria-label="Navegación entre Roster y Bitácora"><a href="./bitacora-preview.html">ABRIR BITÁCORA CENTRAL ↗</a><a href="./index.html#chapter-12">ARCHIVO DE COLABORACIONES ↗</a></nav>
+            <h2 id="roster" class="comic-title">LEGIÓN MULTIVERSAL — NUESTRO ROSTER</h2>
+            <div class="institute-banner"><div class="institute-stamp" aria-label="Emblema oficial de la Legión Multiversal"><img src="legion_logo_final_hybrid.png" alt="Emblema de Legión Multiversal" loading="lazy" decoding="async"><span>ARCHIVO DE LA LEGIÓN</span></div><div class="institute-banner-copy"><h3>LAS PERSONAS DETRÁS DE LA LEGIÓN</h3><p>Una comunidad de creadores con identidades y especialidades diferentes. Cada integrante tiene un expediente propio y un lugar dentro de este universo compartido.</p></div></div>
             <div id="roster-home">
               <p class="roster-intro">Explorá las cartas de la Legión, filtrá por especialidad o plataforma y abrí cualquier expediente directamente. Cada creador conserva su identidad y su espacio propio.</p>
-              <div class="roster-tools" role="search" aria-label="Buscar y filtrar integrantes">
-                <label class="roster-search-field" for="roster-search"><span>BUSCAR EN EL ROSTER</span><input id="roster-search" type="search" placeholder="Nombre, alias o especialidad…" autocomplete="off"></label>
-                <label for="roster-role-filter"><span>FUNCIÓN</span><select id="roster-role-filter"><option value="all">Todas las funciones</option><option value="director">Dirección</option><option value="teacher">Profesores</option><option value="student">Estudiante</option><option value="collaborator">Colaboradores</option></select></label>
-                <label for="roster-platform-filter"><span>PLATAFORMA</span><select id="roster-platform-filter"><option value="all">Todas las plataformas</option><option value="twitch">Twitch</option><option value="youtube">YouTube</option><option value="instagram">Instagram</option></select></label>
-                <label for="roster-format-filter"><span>FORMATO</span><select id="roster-format-filter"><option value="all">Todos los formatos</option><option value="live_streamer">Creador en directo</option><option value="video_creator">Creador de video</option></select></label>
-                <label for="roster-area-filter"><span>ESPECIALIDAD</span><select id="roster-area-filter"><option value="all">Todas las especialidades</option></select></label>
-                <label for="roster-sort"><span>ORDENAR</span><select id="roster-sort"><option value="featured">Orden de la Legión</option><option value="name">Nombre A–Z</option><option value="number">Número de expediente</option></select></label>
-                <button id="roster-reset" type="button" class="roster-reset-button">LIMPIAR FILTROS</button>
-                <p id="roster-results" class="roster-results" aria-live="polite"></p>
+              <div class="roster-tools" role="search" aria-label="Buscar integrantes y aplicar filtros">
+                <label class="roster-search-field" for="roster-search"><span>BUSCAR EN EL ROSTER</span><input id="roster-search" type="search" placeholder="Nombre, alias, handle o especialidad…" autocomplete="off"></label>
+                <div class="roster-quick-filters">
+                  <fieldset class="roster-chip-set"><legend>VÍNCULO EN LA LEGIÓN</legend><div class="roster-chip-row">
+                    <button type="button" class="roster-quick-chip" data-roster-filter="role" data-value="all" aria-pressed="true">Todos</button>
+                    <button type="button" class="roster-quick-chip" data-roster-filter="role" data-value="director" aria-pressed="false">Dirección</button>
+                    <button type="button" class="roster-quick-chip" data-roster-filter="role" data-value="teacher" aria-pressed="false">Profesores</button>
+                    <button type="button" class="roster-quick-chip" data-roster-filter="role" data-value="student" aria-pressed="false">Estudiante</button>
+                    <button type="button" class="roster-quick-chip" data-roster-filter="role" data-value="collaborator" aria-pressed="false">Colaboradores</button>
+                  </div></fieldset>
+                  <fieldset class="roster-chip-set"><legend>PLATAFORMA</legend><div class="roster-chip-row">
+                    <button type="button" class="roster-quick-chip" data-roster-filter="platform" data-value="all" aria-pressed="true">Todas</button>
+                    <button type="button" class="roster-quick-chip" data-roster-filter="platform" data-value="twitch" aria-pressed="false">Twitch</button>
+                    <button type="button" class="roster-quick-chip" data-roster-filter="platform" data-value="youtube" aria-pressed="false">YouTube</button>
+                    <button type="button" class="roster-quick-chip" data-roster-filter="platform" data-value="instagram" aria-pressed="false">Instagram</button>
+                  </div></fieldset>
+                </div>
+                <details id="roster-advanced-filters" class="roster-advanced-filters">
+                  <summary id="roster-more-filters">MÁS FILTROS <span aria-hidden="true">＋</span></summary>
+                  <div class="roster-advanced-panel">
+                    <label for="roster-area-filter"><span>ESPECIALIDAD</span><select id="roster-area-filter"><option value="all">Todas las especialidades</option></select></label>
+                    <label for="roster-sort"><span>ORDENAR</span><select id="roster-sort"><option value="featured">Orden editorial</option><option value="name">Nombre A–Z</option></select></label>
+                    <button id="roster-filters-close" type="button" class="roster-filters-close">APLICAR Y CERRAR</button>
+                  </div>
+                </details>
+                <select id="roster-role-filter" hidden aria-hidden="true"><option value="all">Todos los vínculos</option><option value="director">Dirección</option><option value="teacher">Profesores</option><option value="student">Estudiante</option><option value="collaborator">Colaboradores</option></select>
+                <select id="roster-platform-filter" hidden aria-hidden="true"><option value="all">Todas las plataformas</option><option value="twitch">Twitch</option><option value="youtube">YouTube</option><option value="instagram">Instagram</option></select>
+                <div class="roster-toolbar-actions"><button id="roster-reset" type="button" class="roster-reset-button">LIMPIAR FILTROS</button><p id="roster-results" class="roster-results" aria-live="polite">Mostrando 8 de 8 integrantes</p></div>
                 <div id="roster-active-filters" class="roster-active-filters" aria-label="Filtros aplicados"></div>
               </div>
               <nav class="institute-counts roster-jump-nav" id="roster-counts" aria-label="Accesos directos a las áreas del roster"></nav>
-              <div id="roster-container"><!-- Retratos del roster --></div>
+              <div id="roster-container" aria-busy="true">
+                <div class="roster-skeleton-grid" aria-hidden="true">
+                  <div class="roster-skeleton-card"><span></span><i></i><b></b><em></em></div><div class="roster-skeleton-card"><span></span><i></i><b></b><em></em></div><div class="roster-skeleton-card"><span></span><i></i><b></b><em></em></div><div class="roster-skeleton-card"><span></span><i></i><b></b><em></em></div><div class="roster-skeleton-card"><span></span><i></i><b></b><em></em></div><div class="roster-skeleton-card"><span></span><i></i><b></b><em></em></div><div class="roster-skeleton-card"><span></span><i></i><b></b><em></em></div><div class="roster-skeleton-card"><span></span><i></i><b></b><em></em></div>
+                </div>
+              </div>
+              <noscript><style>#chapter-2 .roster-skeleton-grid{display:none!important}</style><section class="roster-noscript"><h3>INTEGRANTES DE LA LEGIÓN</h3><!-- ROSTER_NOSCRIPT_LINKS:START -->
+<ul>
+                <li><strong>LOS MORIARTYS</strong> · proyecto compartido de Demian y Ari · <a href="https://twitch.tv/losmoriartys" target="_blank" rel="noopener noreferrer">TWITCH</a></li>
+                <li><strong>ROD3R1K</strong> · <a href="https://twitch.tv/TheR0D3R1K" target="_blank" rel="noopener noreferrer">TWITCH</a></li>
+                <li><strong>LADY MORIARTY</strong> · <a href="https://twitch.tv/ladymoriarty01" target="_blank" rel="noopener noreferrer">TWITCH</a></li>
+                <li><strong>ARDIPII</strong> · <a href="https://twitch.tv/ardipii" target="_blank" rel="noopener noreferrer">TWITCH</a></li>
+                <li><strong>AKUMA</strong> · <a href="https://twitch.tv/akumazoldyck" target="_blank" rel="noopener noreferrer">TWITCH</a></li>
+                <li><strong>DAVE — NEXUS</strong> · <a href="https://twitch.tv/daved0608" target="_blank" rel="noopener noreferrer">TWITCH</a></li>
+                <li><strong>PATO — ORATORIS</strong> · <a href="https://www.youtube.com/@patoteexplica" target="_blank" rel="noopener noreferrer">YOUTUBE</a> · <a href="https://www.instagram.com/patoteexplica/" target="_blank" rel="noopener noreferrer">INSTAGRAM</a></li>
+                <li><strong>HABITOS</strong> · <a href="https://twitch.tv/habitos_atomicos" target="_blank" rel="noopener noreferrer">TWITCH</a></li>
+              </ul>
+<!-- ROSTER_NOSCRIPT_LINKS:END --></section></noscript>
+              <nav class="roster-product-nav" aria-label="Recursos relacionados del Roster"><a href="./bitacora-preview.html">ABRIR BITÁCORA CENTRAL ↗</a><a href="./index.html#chapter-12">ARCHIVO DE COLABORACIONES ↗</a></nav>
             </div>
             <section id="hero-profile-page" class="hero-profile-page" hidden aria-live="polite"></section>
         </section>
@@ -989,10 +1024,14 @@
                 <button class="close-modal-btn" type="button" aria-label="Cerrar expediente" onclick="closeModal()">X</button>
             </div>
             <div class="modal-body">
-                <div class="modal-tabs" id="modal-tab-navigation">
-                    <button class="modal-tab-btn active" onclick="switchModalTab(0)">A · PERFIL Y CONTENIDO</button>
-                    <button class="modal-tab-btn" onclick="switchModalTab(1)">B · AUDIENCIA Y ESTADÍSTICAS</button>
-                    <button class="modal-tab-btn" onclick="switchModalTab(2)">C · TRAYECTORIA Y COLABORACIONES</button>
+                <div class="modal-tabs" id="modal-tab-navigation" role="tablist" aria-label="Secciones del expediente">
+                    <button id="modal-tab-a" role="tab" aria-controls="modal-pane-0" aria-selected="true" tabindex="0" class="modal-tab-btn active" onclick="switchModalTab(0)">A · PERFIL Y CONTENIDO</button>
+                    <button id="modal-tab-b" role="tab" aria-controls="modal-pane-1" aria-selected="false" tabindex="-1" class="modal-tab-btn" onclick="switchModalTab(1)">B · AUDIENCIA Y ESTADÍSTICAS</button>
+                    <button id="modal-tab-c" role="tab" aria-controls="modal-pane-2" aria-selected="false" tabindex="-1" class="modal-tab-btn" onclick="switchModalTab(2)">C · TRAYECTORIA Y COLABORACIONES</button>
+                </div>
+                <div class="modal-actions-toolbar">
+                    <span>ARCHIVO PARA PRESENTACIÓN</span>
+                    <button id="modal-print-btn" type="button" onclick="printHeroDossier()">IMPRIMIR / GUARDAR PDF ↗</button>
                 </div>
                 <div class="comic-page-navigation" id="modal-comic-navigation" hidden>
                     <button type="button" class="comic-page-arrow" id="comic-page-prev" aria-label="Página anterior">← ANTERIOR</button>
@@ -1000,15 +1039,15 @@
                     <button type="button" class="comic-page-arrow" id="comic-page-next" aria-label="Página siguiente">SIGUIENTE →</button>
                 </div>
 
-                <div class="modal-tab-pane active" id="modal-pane-0">
+                <div role="tabpanel" aria-labelledby="modal-tab-a" tabindex="0" class="modal-tab-pane active" id="modal-pane-0">
                     <h3>QUIÉNES SOMOS Y QUÉ OFRECEMOS</h3>
                     <div id="modal-profile-text" class="profile-overview-host"></div>
                 </div>
-                <div class="modal-tab-pane" id="modal-pane-1">
+                <div role="tabpanel" aria-labelledby="modal-tab-b" tabindex="0" class="modal-tab-pane" id="modal-pane-1">
                     <h3>COMUNIDAD, ALCANCE Y ACTIVIDAD</h3>
                     <div id="modal-stats-text" class="stats-dashboard-host"></div>
                 </div>
-                <div class="modal-tab-pane" id="modal-pane-2">
+                <div role="tabpanel" aria-labelledby="modal-tab-c" tabindex="0" class="modal-tab-pane" id="modal-pane-2">
                     <h3>TRAYECTORIA, CONTENIDOS DESTACADOS Y CONTACTO</h3>
                     <div id="modal-log-text" class="dossier-log-host"></div>
                 </div>
@@ -1020,11 +1059,12 @@
                 <div class="modal-tab-pane" id="modal-pane-5"><div id="modal-lady-page-6" class="dossier-log-host"></div></div>
 
                 <a id="modal-twitch-btn" href="#" target="_blank" rel="noopener noreferrer" class="twitch-link-btn">⚡ VISITAR CANAL DE TWITCH</a>
+                <div id="modal-platform-links" class="modal-platform-links" aria-label="Plataformas del creador" hidden></div>
             </div>
         </div>
     </div>
 
-    <script src="./app.js?v=20261113-performance-refresh-1"></script>
+    <script src="./app.js?v=20261114-roster-integral-print-1"></script>
     <script src="./navigation-fix.js" defer></script>
 </body>
 </html>

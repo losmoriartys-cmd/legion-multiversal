@@ -1,7 +1,7 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "updated_at": "2026-11-06",
-  "description": "Datos editoriales y de presentación del roster. Mantener cuentas y métricas verificadas en sus archivos de plataforma; no duplicarlas aquí.",
+  "description": "Fuente editorial y de identidad del roster. Cada creador/canal tiene ID y slug estables, scope de identidad y cuentas asociadas. Las métricas viven en sus archivos de datos por plataforma; no duplicarlas aquí.",
   "heroes": [
     {
       "name": "MORIARTYS",
@@ -49,7 +49,54 @@
       },
       "powers": "Perfil de habilidades en construcción. Se completará con la descripción de personaje aprobada por el integrante.",
       "stats": "Métricas en proceso de integración. Los datos se publicarán cuando estén conectados a una fuente verificable y acompañados de su período de medición.",
-      "log": "Fundadores de la iniciativa Turno Noche. Pioneros en colaboraciones cruzadas LATAM y organización de directos en conjunto."
+      "log": "Fundadores de la iniciativa Turno Noche. Pioneros en colaboraciones cruzadas LATAM y organización de directos en conjunto.",
+      "id": "moriartys",
+      "slug": "moriartys",
+      "display_name": "LOS MORIARTYS",
+      "identity_scope": "shared_project",
+      "represented_people": [
+        "Demian",
+        "Ari"
+      ],
+      "accounts": [
+        {
+          "platform": "twitch",
+          "account_type": "creator_channel",
+          "handle": "losmoriartys",
+          "login": "losmoriartys",
+          "url": "https://twitch.tv/losmoriartys",
+          "ownership": "shared",
+          "status": "registered",
+          "collection": {
+            "mode": "public_app_token",
+            "collector": "update_stats.py",
+            "source": "Twitch Helix API",
+            "output_file": "data.json"
+          },
+          "public_metrics": [
+            "live_status",
+            "current_viewers",
+            "current_game",
+            "current_title",
+            "stream_started_at",
+            "sampled_history",
+            "observed_streams",
+            "sampled_average_viewers",
+            "sampled_peak_viewers",
+            "observed_live_hours",
+            "game_sample_breakdown"
+          ],
+          "restricted_metrics": [
+            "followers_total",
+            "unique_viewers",
+            "watch_time_official",
+            "creator_dashboard_analytics",
+            "revenue"
+          ],
+          "notes": "El promedio y el pico son observaciones del muestreo propio, no analíticas oficiales ni el historial completo de transmisiones."
+        }
+      ],
+      "links": []
     },
     {
       "name": "ROD3R1K",
@@ -77,7 +124,50 @@
       "voice": "«¡Que se escuche hasta el último rincón! Si vamos a jugar, que cada partida deje una historia.»",
       "powers": "Perfil de habilidades en construcción. Pendiente de confirmar con el integrante.",
       "stats": "Métricas en proceso de integración. Los datos se publicarán cuando estén conectados a una fuente verificable y acompañados de su período de medición.",
-      "log": "ARCHIVO DE ORIGEN: integrante de la primera etapa junto a Demian. Su recorrido está ligado a las partidas fundacionales de Marvel Rivals y al impulso de encuentros, eventos y experiencias compartidas. Su historia representa el paso de jugar entre amigos a construir una comunidad."
+      "log": "ARCHIVO DE ORIGEN: integrante de la primera etapa junto a Demian. Su recorrido está ligado a las partidas fundacionales de Marvel Rivals y al impulso de encuentros, eventos y experiencias compartidas. Su historia representa el paso de jugar entre amigos a construir una comunidad.",
+      "id": "rod3r1k",
+      "slug": "rod3r1k",
+      "display_name": "ROD3R1K",
+      "identity_scope": "individual_creator",
+      "accounts": [
+        {
+          "platform": "twitch",
+          "account_type": "creator_channel",
+          "handle": "TheR0D3R1K",
+          "login": "ther0d3r1k",
+          "url": "https://twitch.tv/TheR0D3R1K",
+          "ownership": "individual",
+          "status": "registered",
+          "collection": {
+            "mode": "public_app_token",
+            "collector": "update_stats.py",
+            "source": "Twitch Helix API",
+            "output_file": "data.json"
+          },
+          "public_metrics": [
+            "live_status",
+            "current_viewers",
+            "current_game",
+            "current_title",
+            "stream_started_at",
+            "sampled_history",
+            "observed_streams",
+            "sampled_average_viewers",
+            "sampled_peak_viewers",
+            "observed_live_hours",
+            "game_sample_breakdown"
+          ],
+          "restricted_metrics": [
+            "followers_total",
+            "unique_viewers",
+            "watch_time_official",
+            "creator_dashboard_analytics",
+            "revenue"
+          ],
+          "notes": "El promedio y el pico son observaciones del muestreo propio, no analíticas oficiales ni el historial completo de transmisiones."
+        }
+      ],
+      "links": []
     },
     {
       "name": "LADYMORIARTY",
@@ -105,7 +195,53 @@
       "voice": "«¿Plan? Puede ser. ¿Improvisar? También. La magia está en no saber qué viene después.»",
       "powers": "Especialidad: entretenimiento chill, IRL y conexión con la comunidad.",
       "stats": "Métricas en proceso de integración. Los datos se publicarán cuando estén conectados a una fuente verificable y acompañados de su período de medición.",
-      "log": "ARCHIVO DE LA HECHICERA: opera con libertad entre gameplay relajado, IRL y momentos espontáneos. Su canal individual tiene voz y recorrido propios, distintos del proyecto compartido Los Moriartys. Su presencia aporta frescura, humor y cercanía."
+      "log": "ARCHIVO DE LA HECHICERA: opera con libertad entre gameplay relajado, IRL y momentos espontáneos. Su canal individual tiene voz y recorrido propios, distintos del proyecto compartido Los Moriartys. Su presencia aporta frescura, humor y cercanía.",
+      "id": "lady-moriarty",
+      "slug": "lady-moriarty",
+      "display_name": "LADY MORIARTY",
+      "identity_scope": "individual_creator",
+      "accounts": [
+        {
+          "platform": "twitch",
+          "account_type": "creator_channel",
+          "handle": "ladymoriarty01",
+          "login": "ladymoriarty01",
+          "url": "https://twitch.tv/ladymoriarty01",
+          "ownership": "individual",
+          "status": "registered",
+          "collection": {
+            "mode": "public_app_token",
+            "collector": "update_stats.py",
+            "source": "Twitch Helix API",
+            "output_file": "data.json"
+          },
+          "public_metrics": [
+            "live_status",
+            "current_viewers",
+            "current_game",
+            "current_title",
+            "stream_started_at",
+            "sampled_history",
+            "observed_streams",
+            "sampled_average_viewers",
+            "sampled_peak_viewers",
+            "observed_live_hours",
+            "game_sample_breakdown"
+          ],
+          "restricted_metrics": [
+            "followers_total",
+            "unique_viewers",
+            "watch_time_official",
+            "creator_dashboard_analytics",
+            "revenue"
+          ],
+          "notes": "El promedio y el pico son observaciones del muestreo propio, no analíticas oficiales ni el historial completo de transmisiones."
+        }
+      ],
+      "links": [],
+      "legacy_slugs": [
+        "ladymoriarty"
+      ]
     },
     {
       "name": "ARDIPII",
@@ -131,7 +267,50 @@
       "bio": "El Fantasma aparece sin hacer ruido y encuentra su lugar en cualquier escenario. Su guarida es una comunidad donde cada visitante puede saludar, activar una alerta, acomodarse con unas palomitas y compartir la misión. Su lema recuerda que el tiempo es el recurso más valioso: cada directo es una oportunidad para decidir qué hacer con él.",
       "voice": "«Pasen, pónganse cómodos. Siempre hay lugar para uno más en esta misión.»",
       "stats": "Métricas en proceso de integración. Los datos se publicarán cuando estén conectados a una fuente verificable y acompañados de su período de medición.",
-      "log": "ARCHIVO DE LA SOMBRA: mantiene un vínculo directo con su comunidad y transmite desde México con una presencia constante. Su sello combina cercanía, interacción y una mirada reflexiva sobre el tiempo y las decisiones."
+      "log": "ARCHIVO DE LA SOMBRA: mantiene un vínculo directo con su comunidad y transmite desde México con una presencia constante. Su sello combina cercanía, interacción y una mirada reflexiva sobre el tiempo y las decisiones.",
+      "id": "ardipii",
+      "slug": "ardipii",
+      "display_name": "ARDIPII",
+      "identity_scope": "individual_creator",
+      "accounts": [
+        {
+          "platform": "twitch",
+          "account_type": "creator_channel",
+          "handle": "ardipii",
+          "login": "ardipii",
+          "url": "https://twitch.tv/ardipii",
+          "ownership": "individual",
+          "status": "registered",
+          "collection": {
+            "mode": "public_app_token",
+            "collector": "update_stats.py",
+            "source": "Twitch Helix API",
+            "output_file": "data.json"
+          },
+          "public_metrics": [
+            "live_status",
+            "current_viewers",
+            "current_game",
+            "current_title",
+            "stream_started_at",
+            "sampled_history",
+            "observed_streams",
+            "sampled_average_viewers",
+            "sampled_peak_viewers",
+            "observed_live_hours",
+            "game_sample_breakdown"
+          ],
+          "restricted_metrics": [
+            "followers_total",
+            "unique_viewers",
+            "watch_time_official",
+            "creator_dashboard_analytics",
+            "revenue"
+          ],
+          "notes": "El promedio y el pico son observaciones del muestreo propio, no analíticas oficiales ni el historial completo de transmisiones."
+        }
+      ],
+      "links": []
     },
     {
       "name": "AKUMA",
@@ -158,7 +337,50 @@
       "bio": "El Infernal es una presencia constante: cuando cae la noche, el portal vuelve a abrirse. Entre juegos, conversaciones y amigos, AKUMA sostiene un punto de encuentro donde siempre puede aparecer una nueva historia. Su fuerza no está solamente en entrar en combate, sino en mantener encendida la reunión y darle lugar a quienes llegan.",
       "voice": "«El portal está abierto. Traigan una partida, una historia o simplemente ganas de quedarse.»",
       "stats": "Métricas en proceso de integración. Los datos se publicarán cuando estén conectados a una fuente verificable y acompañados de su período de medición.",
-      "log": "ARCHIVO DEL INFERNAL: veterano de las primeras misiones del equipo y anfitrión de encuentros frecuentes. Su territorio mezcla talk show, videojuegos y charlas con amigos; la constancia es parte central de su identidad."
+      "log": "ARCHIVO DEL INFERNAL: veterano de las primeras misiones del equipo y anfitrión de encuentros frecuentes. Su territorio mezcla talk show, videojuegos y charlas con amigos; la constancia es parte central de su identidad.",
+      "id": "akuma",
+      "slug": "akuma",
+      "display_name": "AKUMA",
+      "identity_scope": "individual_creator",
+      "accounts": [
+        {
+          "platform": "twitch",
+          "account_type": "creator_channel",
+          "handle": "akumazoldyck",
+          "login": "akumazoldyck",
+          "url": "https://twitch.tv/akumazoldyck",
+          "ownership": "individual",
+          "status": "registered",
+          "collection": {
+            "mode": "public_app_token",
+            "collector": "update_stats.py",
+            "source": "Twitch Helix API",
+            "output_file": "data.json"
+          },
+          "public_metrics": [
+            "live_status",
+            "current_viewers",
+            "current_game",
+            "current_title",
+            "stream_started_at",
+            "sampled_history",
+            "observed_streams",
+            "sampled_average_viewers",
+            "sampled_peak_viewers",
+            "observed_live_hours",
+            "game_sample_breakdown"
+          ],
+          "restricted_metrics": [
+            "followers_total",
+            "unique_viewers",
+            "watch_time_official",
+            "creator_dashboard_analytics",
+            "revenue"
+          ],
+          "notes": "El promedio y el pico son observaciones del muestreo propio, no analíticas oficiales ni el historial completo de transmisiones."
+        }
+      ],
+      "links": []
     },
     {
       "name": "DAVE — NEXUS",
@@ -185,7 +407,50 @@
       "voice": "«Conexión establecida. Estoy buscando el puente entre este mundo y el siguiente.»",
       "powers": "Poderes y especialidad todavía sin definir. Se completarán cuando Dave aporte o apruebe su concepto de personaje.",
       "stats": "Canal incorporado al sistema de estadísticas. Las métricas se mostrarán cuando la automatización publique datos verificables.",
-      "log": "ARCHIVO DEL NEXO: tras un período de pausa, Dave regresa a las transmisiones y comienza una nueva etapa dentro de la Legión. Su rango institucional es ESTUDIANTE: representa su reincorporación y el comienzo de este nuevo recorrido, no una valoración de su experiencia. La agenda de sus directos todavía no tiene un horario fijo confirmado; los anuncios se comunicarán cuando cada transmisión esté programada. La biografía personal y las áreas de contenido podrán ampliarse con su propia voz y datos confirmados."
+      "log": "ARCHIVO DEL NEXO: tras un período de pausa, Dave regresa a las transmisiones y comienza una nueva etapa dentro de la Legión. Su rango institucional es ESTUDIANTE: representa su reincorporación y el comienzo de este nuevo recorrido, no una valoración de su experiencia. La agenda de sus directos todavía no tiene un horario fijo confirmado; los anuncios se comunicarán cuando cada transmisión esté programada. La biografía personal y las áreas de contenido podrán ampliarse con su propia voz y datos confirmados.",
+      "id": "dave-nexus",
+      "slug": "dave-nexus",
+      "display_name": "DAVE — NEXUS",
+      "identity_scope": "individual_creator",
+      "accounts": [
+        {
+          "platform": "twitch",
+          "account_type": "creator_channel",
+          "handle": "daved0608",
+          "login": "daved0608",
+          "url": "https://twitch.tv/daved0608",
+          "ownership": "individual",
+          "status": "registered",
+          "collection": {
+            "mode": "public_app_token",
+            "collector": "update_stats.py",
+            "source": "Twitch Helix API",
+            "output_file": "data.json"
+          },
+          "public_metrics": [
+            "live_status",
+            "current_viewers",
+            "current_game",
+            "current_title",
+            "stream_started_at",
+            "sampled_history",
+            "observed_streams",
+            "sampled_average_viewers",
+            "sampled_peak_viewers",
+            "observed_live_hours",
+            "game_sample_breakdown"
+          ],
+          "restricted_metrics": [
+            "followers_total",
+            "unique_viewers",
+            "watch_time_official",
+            "creator_dashboard_analytics",
+            "revenue"
+          ],
+          "notes": "El promedio y el pico son observaciones del muestreo propio, no analíticas oficiales ni el historial completo de transmisiones."
+        }
+      ],
+      "links": []
     },
     {
       "name": "PATO — ORATORIS",
@@ -217,7 +482,77 @@
       "voice": "«Compartir conocimiento también es abrir caminos. Entender cómo funciona algo nos da herramientas para elegir mejor.»",
       "powers": "Comunicación y divulgación; enseñanza introductoria de programación; organización de ideas complejas en explicaciones accesibles. Las capacidades del personaje son una representación narrativa de su aporte como creador, no certificaciones profesionales.",
       "stats": "YOUTUBE · referencia compartida por el equipo: 56 suscriptores, 6 videos y 430 visualizaciones. La fecha exacta de captura no fue indicada; estos valores se presentan como referencia histórica y no como métricas actuales verificadas. Twitch: no aplica.",
-      "log": "ARCHIVO ORATORIS: colaborador y creador de Pato te explica. Su primera etapa pública incluye una serie introductoria de HTML y JavaScript y un video sobre dopamina, motivación y adicción. No tiene una frecuencia de publicación definida actualmente. Pato comentó que posiblemente retome el proyecto durante 2027 con un enfoque renovado e incorpore contenido gamer de manera gradual, como línea secundaria. Esta proyección todavía no constituye un calendario ni una programación confirmada."
+      "log": "ARCHIVO ORATORIS: colaborador y creador de Pato te explica. Su primera etapa pública incluye una serie introductoria de HTML y JavaScript y un video sobre dopamina, motivación y adicción. No tiene una frecuencia de publicación definida actualmente. Pato comentó que posiblemente retome el proyecto durante 2027 con un enfoque renovado e incorpore contenido gamer de manera gradual, como línea secundaria. Esta proyección todavía no constituye un calendario ni una programación confirmada.",
+      "id": "pato-oratoris",
+      "slug": "pato-oratoris",
+      "display_name": "PATO — ORATORIS",
+      "identity_scope": "individual_creator",
+      "accounts": [
+        {
+          "platform": "youtube",
+          "account_type": "creator_channel",
+          "handle": "@patoteexplica",
+          "login": "patoteexplica",
+          "url": "https://www.youtube.com/@patoteexplica",
+          "ownership": "individual",
+          "status": "registered",
+          "collection": {
+            "mode": "public_api_key",
+            "collector": "update_platform_stats.py",
+            "source": "YouTube Data API v3",
+            "output_file": "platform-stats.json"
+          },
+          "public_metrics": [
+            "subscribers",
+            "total_views",
+            "videos_total",
+            "recent_video_metadata",
+            "public_video_views",
+            "public_likes_if_available",
+            "public_comments_if_available"
+          ],
+          "restricted_metrics": [
+            "watch_time",
+            "unique_viewers",
+            "audience_demographics",
+            "revenue",
+            "private_analytics"
+          ],
+          "notes": "Las métricas públicas no incluyen analítica privada del canal; suscriptores pueden estar redondeados por YouTube."
+        },
+        {
+          "platform": "instagram",
+          "account_type": "social_profile",
+          "handle": "patoteexplica",
+          "login": "patoteexplica",
+          "url": "https://www.instagram.com/patoteexplica/",
+          "ownership": "individual",
+          "status": "registered",
+          "collection": {
+            "mode": "manual_link_only",
+            "collector": null,
+            "source": "Enlace aportado por el equipo",
+            "output_file": null
+          },
+          "public_metrics": [],
+          "restricted_metrics": [
+            "followers",
+            "reach",
+            "impressions",
+            "demographics",
+            "insights"
+          ],
+          "notes": "No hay colector automatizado configurado en esta etapa."
+        }
+      ],
+      "links": [
+        {
+          "type": "support",
+          "platform": "cafecito",
+          "url": "https://cafecito.app/patosanto",
+          "label": "Cafecito"
+        }
+      ]
     },
     {
       "name": "HABITOS",
@@ -244,7 +579,51 @@
       "bio": "El Filósofo Atómico combina reflexión y acción. Puede detener la marcha para cuestionar una idea y, al instante siguiente, volver al juego con energía renovada. Su universo une gaming, filosofía y desarrollo personal: no se trata de tener todas las respuestas, sino de entrenar la mente, sostener buenos hábitos y seguir avanzando.",
       "voice": "«La mente también se entrena. Cuestioná, aprendé y volvé al juego con más herramientas.»",
       "stats": "Métricas en proceso de integración. Los datos se publicarán cuando estén conectados a una fuente verificable y acompañados de su período de medición.",
-      "log": "ARCHIVO DEL JUSTICIERO: impulsa conversaciones sobre hábitos, crecimiento y filosofía sin abandonar el entretenimiento. Su propuesta alterna partidas y reflexión, con una presencia orientada a motivar, compartir ideas y construir comunidad."
+      "log": "ARCHIVO DEL JUSTICIERO: impulsa conversaciones sobre hábitos, crecimiento y filosofía sin abandonar el entretenimiento. Su propuesta alterna partidas y reflexión, con una presencia orientada a motivar, compartir ideas y construir comunidad.",
+      "id": "habitos",
+      "slug": "habitos",
+      "display_name": "HABITOS",
+      "identity_scope": "individual_creator",
+      "accounts": [
+        {
+          "platform": "twitch",
+          "account_type": "creator_channel",
+          "handle": "habitos_atomicos",
+          "login": "habitos_atomicos",
+          "url": "https://twitch.tv/habitos_atomicos",
+          "ownership": "individual",
+          "status": "registered",
+          "collection": {
+            "mode": "public_app_token",
+            "collector": "update_stats.py",
+            "source": "Twitch Helix API",
+            "output_file": "data.json"
+          },
+          "public_metrics": [
+            "live_status",
+            "current_viewers",
+            "current_game",
+            "current_title",
+            "stream_started_at",
+            "sampled_history",
+            "observed_streams",
+            "sampled_average_viewers",
+            "sampled_peak_viewers",
+            "observed_live_hours",
+            "game_sample_breakdown"
+          ],
+          "restricted_metrics": [
+            "followers_total",
+            "unique_viewers",
+            "watch_time_official",
+            "creator_dashboard_analytics",
+            "revenue"
+          ],
+          "notes": "El promedio y el pico son observaciones del muestreo propio, no analíticas oficiales ni el historial completo de transmisiones."
+        }
+      ],
+      "links": []
     }
-  ]
+  ],
+  "identity_model_version": 1
 }

@@ -7,7 +7,11 @@ on:
     paths:
       - 'update_stats.py'
       - 'update_platform_stats.py'
-      - 'platform-registry.json'
+      - 'update_clips.py'
+      - 'scripts/build_creator_metrics.py'
+      - 'scripts/validate_creator_metrics.py'
+      - 'roster-data.json'
+      - 'scripts/validate_roster_data.py'
       - '.github/workflows/actualizar-stats.yml'
   schedule:
     - cron: '7,22,37,52 * * * *'
@@ -48,6 +52,18 @@ jobs:
         run: |
           python -c "import json; from pathlib import Path; d=json.loads(Path('data.json').read_text(encoding='utf-8')); e=set(d.get('active_channels', [])); c=d.get('collection', {}); covered=set(c.get('sampled_channels', [])) | set(c.get('skipped_channels', [])); missing=[x for x in e if x not in d.get('channels', {}) or not d['channels'][x].get('updated_at')]; assert c.get('complete') and covered == e and not missing, 'Recolección Twitch incompleta: ' + ', '.join(missing); print('Verificación OK: {} canales; {} muestras nuevas; {} omitidas por anti-duplicados.'.format(len(e), len(c.get('sampled_channels', [])), len(c.get('skipped_channels', []))))"
 
+      - name: Validar registro de cuentas y cobertura Twitch
+        run: python scripts/validate_roster_data.py --check-activity
+
+      - name: Consultar clips públicos de Twitch
+        env:
+          TWITCH_CLIENT_ID: ${{ secrets.TWITCH_CLIENT_ID }}
+          TWITCH_CLIENT_SECRET: ${{ secrets.TWITCH_CLIENT_SECRET }}
+        run: python update_clips.py
+
+      - name: Validar archivo de clips públicos
+        run: python scripts/validate_clips_data.py
+
       - name: Consultar YouTube y Kick
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
@@ -55,16 +71,25 @@ jobs:
           KICK_CLIENT_SECRET: ${{ secrets.KICK_CLIENT_SECRET }}
         run: python update_platform_stats.py
 
+      - name: Validar cuentas multiplataforma publicadas
+        run: python scripts/validate_roster_data.py --check-platforms
+
+      - name: Generar registro normalizado de métricas por creador
+        run: python scripts/build_creator_metrics.py
+
+      - name: Validar registro normalizado de métricas
+        run: python scripts/validate_creator_metrics.py
+
       - name: Guardar historial actualizado
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data.json platform-stats.json
+          git add data.json platform-stats.json clips-data.json creator-metrics.json
           if git diff --cached --quiet; then
             echo "No hay cambios de estadísticas para guardar."
             exit 0
           fi
-          git commit -m "📊 Actualización automática de estadísticas multiplataforma"
+          git commit -m "📊 Actualización automática de métricas y clips públicos"
           for attempt in 1 2 3; do
             if git push origin HEAD:main; then
               exit 0

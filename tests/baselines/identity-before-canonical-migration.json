@@ -1,0 +1,131 @@
+{
+  "_meta": {
+    "note": "Pre-migración; SHA de referencia: 11f56fce5c52a284325e8016d5590d9ee223bf21"
+  },
+  "creator_records": {
+    "moriartys": {
+      "milestones": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "collaborations": {
+        "count": 4,
+        "sha256": "cf1d90b2c46e54dc19ae059c796e4f956875afc90a511f3531a452afd04b74c8"
+      },
+      "highlights": {
+        "count": 3,
+        "sha256": "00c1b9eac23e2dcd51f957b722c34414f093b2f537ad46cafdcce64feb04ca76"
+      }
+    },
+    "lady-moriarty": {
+      "milestones": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "collaborations": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "highlights": {
+        "count": 3,
+        "sha256": "89a57647e7c2265af12f56d7fd0e41cba46660626efdda3917f8f6930067d5c9"
+      }
+    },
+    "rod3r1k": {
+      "milestones": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "collaborations": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "highlights": {
+        "count": 3,
+        "sha256": "ccc4a622eacf319c9fb4c02bad29d9b9fc1e564c1597bd938c8524e11024a3c3"
+      }
+    },
+    "habitos": {
+      "milestones": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "collaborations": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "highlights": {
+        "count": 4,
+        "sha256": "1e49238f30fd8965a4cf118376f39c73e1996b3affef4a0f047c39bc40dc1808"
+      }
+    },
+    "ardipii": {
+      "milestones": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "collaborations": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "highlights": {
+        "count": 4,
+        "sha256": "98b6de273e80ea86393708b7ef58918627f0294d2a9eed5ac8be4b0809fb78be"
+      }
+    },
+    "akuma": {
+      "milestones": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "collaborations": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "highlights": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      }
+    },
+    "dave-nexus": {
+      "milestones": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "collaborations": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "highlights": {
+        "count": 2,
+        "sha256": "02075a66574944b74951e674e263cba09a429aa861097dd1f2229d39ac8d4811"
+      }
+    },
+    "pato-oratoris": {
+      "milestones": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "collaborations": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "highlights": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "youtube_videos": {
+        "count": 6,
+        "sha256": "0e6339f3fbabf1693ab067185e96f773bdd481eeb0fa6f00ab4260413a8087f4"
+      },
+      "featured_embeds": {
+        "count": 2,
+        "sha256": "ded728973c7e1a27adabe1a2959542feebebe421e4fba535c0f0a9639b2f6971"
+      },
+      "profile_notes": {
+        "sha256": "1cd2a10e6ec8485f5914553bbb6649cbfeb7940c13838176225aeebba690eab7"
+      }
+    }
+  },
+  "platform_stats": {}
+}

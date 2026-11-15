@@ -3,6 +3,9 @@
 
 Este documento conserva las decisiones, objetivos, prioridades y límites acordados para la siguiente etapa de mejora de la web de **Legión Multiversal**. Es la referencia de continuidad del proyecto: antes de proponer o ejecutar cambios futuros, consultar esta hoja de ruta y actualizarla cuando se aprueben nuevas decisiones.
 
+
+> **Plan específico del Roster:** las decisiones, fases técnicas y checklist verificable de evolución del directorio y los expedientes están centralizados en [`BIBLIA_ROSTER_INTEGRAL.md`](./BIBLIA_ROSTER_INTEGRAL.md). Esta hoja maestra conserva la visión global; la Biblia del Roster desarrolla su implementación sin duplicar decisiones.
+
 ## 1. Visión y objetivo
 
 Convertir la web en un espacio que funcione simultáneamente como:
@@ -19,7 +22,7 @@ No convertir la web en una plantilla corporativa genérica ni reducirla a un lis
 - Implementar el cambio aprobado, revisar código, enlaces, navegación, responsive y posibles regresiones.
 - No avanzar a la siguiente tarea hasta comprobar la anterior y comunicar el resultado.
 - Registrar cambios relevantes en `INFORMES.md`.
-- Publicar los cambios aprobados directamente en la rama `main`, siguiendo el flujo de trabajo acordado.
+- Concentrar los cambios de cada producto en una PR revisable. Integrar en `main` solo después de CI, revisión funcional/visual y autorización explícita; evitar PR pequeñas paralelas para una misma entrega.
 - No inventar estadísticas, fechas, fuentes, porcentajes geográficos, resultados comerciales, patrocinios, ventas ni ROI.
 - Diferenciar siempre datos medidos, datos aportados por creadores, estimaciones y datos no disponibles.
 - Conservar la historia, los nombres, las contribuciones y el contexto de los integrantes. No reescribir acontecimientos históricos sin evidencia o aprobación.

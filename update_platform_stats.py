@@ -1,8 +1,26 @@
 import json, os, urllib.parse, urllib.request
 from datetime import datetime, timezone
 
-REGISTRY="platform-registry.json"
+ROSTER="roster-data.json"
 OUTPUT="platform-stats.json"
+
+def load_creator_accounts():
+    """Usa las cuentas del roster como registro; no mantiene una segunda lista manual."""
+    with open(ROSTER, encoding="utf-8") as handle:
+        roster = json.load(handle)
+    creators = {}
+    for hero in roster.get("heroes", []):
+        accounts = [
+            account for account in hero.get("accounts", [])
+            if account.get("platform") in {"youtube", "kick"}
+            and (account.get("collection") or {}).get("mode") in {"public_api_key", "public_client_credentials"}
+        ]
+        if accounts:
+            creators[hero.get("id") or hero.get("slug")] = {
+                "display_name": hero.get("display_name") or hero.get("name"),
+                "accounts": accounts
+            }
+    return creators
 YT="https://www.googleapis.com/youtube/v3"
 KICK="https://api.kick.com/public/v1"
 
@@ -43,10 +61,10 @@ def kick(slug,token):
     return {"platform":"kick","handle":slug,"url":"https://kick.com/"+slug,"display_name":c.get("slug",slug),"description":c.get("channel_description"),"thumbnail_url":stream.get("thumbnail"),"metrics":{"live":bool(stream.get("is_live")),"current_viewers":stream.get("viewer_count") if stream.get("is_live") else None,"category":category.get("name"),"stream_title":c.get("stream_title"),"stream_started_at":stream.get("start_time") if stream.get("is_live") else None},"source":"Kick Developer Public API","status":"verified","methodology":"Estado y audiencia actual según la API pública; no equivale a analítica histórica."}
 
 def main():
-    with open(REGISTRY,encoding="utf-8") as f: registry=json.load(f)
+    registry_creators = load_creator_accounts()
     captured=now(); result={"schema_version":1,"updated_at":captured,"methodology":"Las métricas se conservan por creador y plataforma. No sumar ni comparar directamente unidades de plataformas distintas.","creators":{},"collection_status":{}}
     ykey=os.getenv("YOUTUBE_API_KEY"); cid=os.getenv("KICK_CLIENT_ID"); secret=os.getenv("KICK_CLIENT_SECRET"); token=None
-    for key,creator in registry.get("creators",{}).items():
+    for key,creator in registry_creators.items():
         item={"display_name":creator.get("display_name",key),"platforms":{}}
         for account in creator.get("accounts",[]):
             platform=account.get("platform"); handle=account.get("handle")

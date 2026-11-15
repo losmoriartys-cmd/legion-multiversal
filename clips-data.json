@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "source": "Twitch Helix Get Clips",
+  "captured_at": null,
+  "window_days": 30,
+  "selection": {
+    "max_results_requested_per_channel": 100,
+    "max_results_displayed_per_channel": 10,
+    "ordering": "API: descending view_count",
+    "methodology": "Clips públicos del broadcaster durante los últimos 30 días. Se solicitan hasta 100 resultados ordenados por visualizaciones según Twitch Helix y se muestran hasta 10. Muestra limitada; no es inventario exhaustivo ni selección editorial."
+  },
+  "collection": {
+    "expected_channels": 7,
+    "successful_channels": 0,
+    "failed_channels": 0,
+    "complete": false,
+    "errors": []
+  },
+  "creators": {
+    "moriartys": {
+      "display_name": "LOS MORIARTYS",
+      "login": "losmoriartys",
+      "url": "https://twitch.tv/losmoriartys",
+      "status": "awaiting_collection",
+      "captured_at": null,
+      "clips": []
+    },
+    "rod3r1k": {
+      "display_name": "ROD3R1K",
+      "login": "ther0d3r1k",
+      "url": "https://twitch.tv/TheR0D3R1K",
+      "status": "awaiting_collection",
+      "captured_at": null,
+      "clips": []
+    },
+    "lady-moriarty": {
+      "display_name": "LADY MORIARTY",
+      "login": "ladymoriarty01",
+      "url": "https://twitch.tv/ladymoriarty01",
+      "status": "awaiting_collection",
+      "captured_at": null,
+      "clips": []
+    },
+    "ardipii": {
+      "display_name": "ARDIPII",
+      "login": "ardipii",
+      "url": "https://twitch.tv/ardipii",
+      "status": "awaiting_collection",
+      "captured_at": null,
+      "clips": []
+    },
+    "akuma": {
+      "display_name": "AKUMA",
+      "login": "akumazoldyck",
+      "url": "https://twitch.tv/akumazoldyck",
+      "status": "awaiting_collection",
+      "captured_at": null,
+      "clips": []
+    },
+    "dave-nexus": {
+      "display_name": "DAVE — NEXUS",
+      "login": "daved0608",
+      "url": "https://twitch.tv/daved0608",
+      "status": "awaiting_collection",
+      "captured_at": null,
+      "clips": []
+    },
+    "habitos": {
+      "display_name": "HABITOS",
+      "login": "habitos_atomicos",
+      "url": "https://twitch.tv/habitos_atomicos",
+      "status": "awaiting_collection",
+      "captured_at": null,
+      "clips": []
+    }
+  }
+}

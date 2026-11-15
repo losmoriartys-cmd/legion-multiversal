@@ -138,7 +138,7 @@ button,a{font:inherit}.shell{width:min(1440px,100%);margin:auto;padding:22px cla
  async function load(){try{
   const [roster,records,activity]=await Promise.all(['roster-data.json','creator-records.json','data.json'].map(path=>fetch(path,{cache:'no-store'}).then(r=>{if(!r.ok)throw Error(path+' '+r.status);return r.json()})));
   const hero=roster.heroes.find(h=>h.name==='MORIARTYS');if(!hero)throw Error('No se encontró MORIARTYS');
-  const media=hero.mediaProfile||{},record=records.channels?.losmoriartys||{},channel=activity.channels?.losmoriartys||{},w=channel.window||{};
+  const media=hero.mediaProfile||{},record=records.channels?.[hero.id]||{},channel=activity.channels?.losmoriartys||{},w=channel.window||{};
   $('cover-image').src=hero.img||hero.portrait;$('cover-image').alt='Ilustración de portada '+hero.name;
   $('bio').textContent=hero.bio||'';$('demi').textContent=media.demi||'';$('ari').textContent=media.ari||'';$('editorial').textContent=media.editorial||'';$('voice').textContent=hero.voice||'';
   $('formats').textContent=(media.formats||hero.areas||[]).join(' · ');
