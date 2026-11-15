@@ -166,3 +166,21 @@ Al finalizar cada cambio, registrar: archivos tocados; qué se modificó y por q
   - PR #47 sigue Draft. No se modificaron secretos, credenciales ni producción; no se ejecutó un despliegue de producción.
 - **Commit de código validado:** `3b20530f45ba56b9a0bd9bb6ffd69448a89631e2`.
 - **Despliegue:** no realizado; la validación corresponde a CI/preview, no a producción.
+
+
+## 2026-11-15 — Bitácora Multiversal revisada, ampliada e integrada
+
+- **Rama / PR:** `feat/roster-integral-2026-11-14`, PR #47 abierto y Draft. HEAD validado: `32fee04a6200673724e197954e583349575252d8`.
+- **Archivo principal:** `bitacora-preview.html`.
+- **Revisión y correcciones:**
+  - El libro tenía un índice de 13 destinos, pero el recorrido narrativo desarrollaba solo una parte de los capítulos. Se restituyó el índice como primer folio y se amplió el libro a 15 folios navegables: índice general y 14 entradas editoriales, incluyendo el caso BarFender.
+  - Se incorporaron folios para Inicio, Origen, Valores, Roster, Estadísticas, Comunidad, Alianzas, Colaboraciones, BarFender, Archivo de campañas, Arsenal, En Vivo, Reclutamiento y Mapa Multiversal.
+  - La numeración se alineó con los IDs reales del sitio principal. El Archivo de campañas figura como anexo, no como capítulo 08.5.
+  - El contador de páginas ahora se calcula desde la cantidad real de folios y muestra 00 / 15 en portada.
+  - Se corrigió un problema de lectura móvil: la segunda página del pliego estaba oculta en pantallas pequeñas. Ahora las dos hojas se muestran apiladas; el índice pasa a una columna.
+  - El directorio conserva los ocho integrantes, sus nombres públicos y sus slugs/IDs canónicos desde `roster-data.json`, sin mantener una segunda copia editorial de esos datos.
+  - El error de carga del directorio ahora queda registrado en consola, en vez de ocultarse silenciosamente.
+- **Pruebas agregadas / ampliadas:** `tests/browser/bitacora.spec.js` comprueba destinos del índice, los ocho nombres y slugs del directorio, los 15 folios, el final del recorrido y la visibilidad de ambas hojas en móvil. El workflow de validación ahora se activa también cuando cambia `bitacora-preview.html`.
+- **CI en el SHA indicado:** [workflow de validación SUCCESS](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43700512037). 33 pruebas unitarias y 5 pruebas Playwright aprobadas; los validadores de Roster, clips, rutas, imágenes y enlaces finalizaron correctamente.
+- **Pendiente deliberado:** `creator-metrics.json` no se regeneró. Se mantiene como último cambio, después de sincronizar la rama con el `main` más reciente, y requiere su propio ciclo de validación.
+- **Integridad / publicación:** PR #47 sigue Draft; no hubo merge, no se modificó `main`, no se desplegó producción y no se tocaron credenciales.
