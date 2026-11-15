@@ -105,7 +105,7 @@ test('el libro recorre los quince folios y mantiene las dos páginas visibles en
   await mobile.locator('#next').click();
   await expect(mobile.locator('.leaf')).toHaveCount(2);
   await expect(mobile.locator('.leaf').nth(1)).toBeVisible();
-  await expect(mobile.locator('.index-list')).toHaveCSS('columns', '1');
+  await expect(mobile.locator('.index-list')).toHaveCSS('column-count', '1');
   await desktop.close();
   await mobile.close();
 });
