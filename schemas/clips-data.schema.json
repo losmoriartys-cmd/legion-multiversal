@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Legión Multiversal Twitch Clips Data",
+  "type": "object",
+  "required": ["schema_version", "source", "window_days", "selection", "collection", "creators"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "source": {"const": "Twitch Helix Get Clips"},
+    "captured_at": {"type": ["string", "null"], "format": "date-time"},
+    "window_days": {"const": 30},
+    "selection": {
+      "type": "object",
+      "required": ["max_results_requested_per_channel", "max_results_displayed_per_channel", "ordering", "methodology"],
+      "properties": {
+        "max_results_requested_per_channel": {"const": 100},
+        "max_results_displayed_per_channel": {"const": 10},
+        "ordering": {"type": "string"},
+        "methodology": {"type": "string"}
+      },
+      "additionalProperties": true
+    },
+    "collection": {
+      "type": "object",
+      "required": ["expected_channels", "successful_channels", "failed_channels", "complete", "errors"],
+      "properties": {
+        "expected_channels": {"type": "integer", "minimum": 0},
+        "successful_channels": {"type": "integer", "minimum": 0},
+        "failed_channels": {"type": "integer", "minimum": 0},
+        "complete": {"type": "boolean"},
+        "errors": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": true
+    },
+    "creators": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["display_name", "login", "url", "status", "clips"],
+        "properties": {
+          "display_name": {"type": "string"},
+          "login": {"type": "string"},
+          "url": {"type": "string", "format": "uri"},
+          "broadcaster_id": {"type": "string"},
+          "status": {"enum": ["awaiting_collection", "ok", "empty", "error"]},
+          "captured_at": {"type": ["string", "null"], "format": "date-time"},
+          "period": {"type": "object"},
+          "clips": {
+            "type": "array",
+            "maxItems": 10,
+            "items": {
+              "type": "object",
+              "required": ["id", "url", "title"],
+              "properties": {
+                "id": {"type": "string"},
+                "url": {"type": "string", "format": "uri"},
+                "title": {"type": "string"},
+                "view_count": {"type": ["integer", "null"], "minimum": 0},
+                "created_at": {"type": ["string", "null"], "format": "date-time"}
+              },
+              "additionalProperties": true
+            }
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}

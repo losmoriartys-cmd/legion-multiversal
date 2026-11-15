@@ -4,13 +4,34 @@ import urllib.parse
 import urllib.request
 from datetime import datetime, timedelta, timezone
 
-CLIENT_ID = os.environ.get("TWITCH_CLIENT_ID") or "ec7tx8ufdef9v9b13dtde93g1zbts9"
+CLIENT_ID = os.environ.get("TWITCH_CLIENT_ID")
 CLIENT_SECRET = os.environ.get("TWITCH_CLIENT_SECRET")
-CHANNELS = [
-    "losmoriartys", "ladymoriarty01", "ther0d3r1k",
-    "habitos_atomicos", "ardipii", "akumazoldyck", "daved0608"
-]
+ROSTER_FILE = "roster-data.json"
 WINDOW_DAYS = 30
+
+def load_active_channels():
+    """Lee los canales Twitch desde el modelo de identidad; evita una lista duplicada."""
+    with open(ROSTER_FILE, "r", encoding="utf-8") as handle:
+        roster = json.load(handle)
+    logins = []
+    for hero in roster.get("heroes", []):
+        accounts = hero.get("accounts") or []
+        twitch_accounts = [a for a in accounts if a.get("platform") == "twitch" and a.get("account_type") == "creator_channel"]
+        if not twitch_accounts and hero.get("twitch"):
+            legacy_login = urllib.parse.urlparse(hero["twitch"]).path.strip("/").split("/")[0].lower()
+            if legacy_login:
+                logins.append(legacy_login)
+        for account in twitch_accounts:
+            login = str(account.get("login") or "").strip().lower()
+            url = urllib.parse.urlparse(str(account.get("url") or ""))
+            if not login or url.scheme != "https" or url.hostname not in {"twitch.tv", "www.twitch.tv"}:
+                raise RuntimeError("Cuenta Twitch inválida en roster-data.json para {}.".format(hero.get("id") or hero.get("name")))
+            logins.append(login)
+    if not logins:
+        raise RuntimeError("No hay canales Twitch registrados en roster-data.json.")
+    if len(logins) != len(set(logins)):
+        raise RuntimeError("Hay logins Twitch duplicados en roster-data.json.")
+    return sorted(logins)
 SAMPLE_INTERVAL_MINUTES = 55
 DATA_FILE = "data.json"
 
@@ -22,6 +43,8 @@ def request_json(url, headers=None, data=None):
 
 
 def get_token():
+    if not CLIENT_ID:
+        raise RuntimeError("Falta la variable TWITCH_CLIENT_ID en el entorno seguro del colector.")
     if not CLIENT_SECRET:
         raise RuntimeError("Falta el secreto TWITCH_CLIENT_SECRET en GitHub Actions.")
     form = urllib.parse.urlencode({
@@ -133,15 +156,16 @@ def summarize(snapshots, now):
 def main():
     now = datetime.now(timezone.utc).replace(microsecond=0)
     now_iso = now.isoformat().replace("+00:00", "Z")
+    channels = load_active_channels()
     token = get_token()
-    users = helix_get("users", token, [("login", name) for name in CHANNELS])
-    streams = helix_get("streams", token, [("user_login", name) for name in CHANNELS])
+    users = helix_get("users", token, [("login", name) for name in channels])
+    streams = helix_get("streams", token, [("user_login", name) for name in channels])
     streams_by_login = {s["user_login"].lower(): s for s in streams}
     resolved = {u["login"].lower() for u in users}
-    missing = sorted(set(CHANNELS) - resolved)
+    missing = sorted(set(channels) - resolved)
     if missing:
         raise RuntimeError("Twitch Helix no devolvió todos los canales esperados; no se publican datos parciales: " + ", ".join(missing))
-    if len(resolved) != len(CHANNELS):
+    if len(resolved) != len(channels):
         raise RuntimeError("La respuesta de Twitch contiene canales duplicados o inesperados; se cancela la publicación.")
     old = load_data()
     channel_data = old.get("channels", {})
@@ -199,23 +223,26 @@ def main():
         "source": "Twitch Helix API",
         "window_days": WINDOW_DAYS,
         "sampling_interval_minutes": SAMPLE_INTERVAL_MINUTES,
-        "active_channels": CHANNELS,
+        "active_channels": channels,
         "collection": {
             "started_at": now_iso,
-            "expected_channels": len(CHANNELS),
+            "expected_channels": len(channels),
             "resolved_channels": len(resolved),
             "sampled_channels": sampled_channels,
             "skipped_channels": skipped_channels,
-            "complete": len(resolved) == len(CHANNELS) and len(sampled_channels) + len(skipped_channels) == len(CHANNELS)
+            "complete": len(resolved) == len(channels) and len(sampled_channels) + len(skipped_channels) == len(channels),
+            "registry_source": ROSTER_FILE,
+            "authentication": "Twitch app access token; public Helix endpoints only",
+            "private_analytics_access": False
         },
-        "archived_channels": [login for login in channel_data if login not in CHANNELS],
+        "archived_channels": [login for login in channel_data if login not in channels],
         "channel_registry_note": "Los canales archivados se conservan para consulta histórica y no se incluyen en los indicadores del roster activo.",
         "updated_at": now_iso,
         "channels": channel_data
     }
     with open(DATA_FILE, "w", encoding="utf-8") as f:
         json.dump(output, f, ensure_ascii=False, indent=2)
-    print("Datos Twitch actualizados para {} canales.".format(len(users)))
+    print("Datos Twitch actualizados para {} canales: {}.".format(len(users), ", ".join(channels)))
 
 
 if __name__ == "__main__":

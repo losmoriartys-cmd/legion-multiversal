@@ -1,12 +1,40 @@
 name: Validar colector de estadísticas
 
 on:
+  push:
+    branches:
+      - 'feat/roster-integral-2026-11-14'
+    paths:
+      - 'scripts/**'
+      - 'tests/**'
+      - 'app.js'
+      - 'roster-02-moriartys.html'
+      - 'roster-data.json'
+      - 'creator-records.json'
+      - 'platform-stats.json'
+      - 'data.json'
+      - 'creator-metrics.json'
+      - '.github/workflows/test-stats.yml'
   pull_request:
     branches:
       - main
     paths:
       - 'update_stats.py'
+      - 'update_clips.py'
+      - 'app.js'
+      - 'roster-02-moriartys.html'
       - 'tests/**'
+      - 'scripts/validate_clips_data.py'
+      - 'scripts/validate_metric_history.py'
+      - 'scripts/build_creator_metrics.py'
+      - 'scripts/validate_creator_metrics.py'
+      - 'scripts/check_creator_metrics_freshness.py'
+      - 'platform-stats.json'
+      - 'creator-records.json'
+      - 'roster-data.json'
+      - 'scripts/check_identity_consistency.py'
+      - 'data.json'
+      - 'creator-metrics.json'
       - '.github/workflows/test-stats.yml'
 
 permissions:
@@ -24,3 +52,28 @@ jobs:
           python-version: '3.12'
       - name: Ejecutar pruebas del colector
         run: python -m unittest discover -s tests -v
+      - name: Probar identidad y conservación de registros
+        run: python scripts/check_identity_consistency.py --selftest
+      - name: Verificar claves y slugs del Roster
+        run: |
+          python scripts/check_identity_consistency.py --roster roster-data.json --records creator-records.json --platform platform-stats.json \
+            --baseline tests/baselines/identity-before-canonical-migration.json --approved-editorial tests/baselines/approved-editorial-updates.json --strict --skip-platform
+      - name: Verificar conservación contra línea base versionada
+        run: |
+          test -s tests/baselines/identity-before-canonical-migration.json
+          grep -q "11f56fce5c52a284325e8016d5590d9ee223bf21" tests/baselines/identity-before-canonical-migration.json
+      - name: Probar unidad del control de frescura y procedencia
+        run: python scripts/check_creator_metrics_freshness.py --selftest
+      - name: Verificar el creator-metrics.json versionado contra sus fuentes
+        run: python scripts/check_creator_metrics_freshness.py --metrics creator-metrics.json:generated_at --source data.json:updated_at --source platform-stats.json:updated_at --tolerance 300 --provenance source_snapshot
+      - name: Generar registro normalizado de métricas
+        run: python scripts/build_creator_metrics.py
+      - name: Validar registro normalizado
+        run: python scripts/validate_creator_metrics.py
+      - name: Publicar artefacto de métricas generado
+        uses: actions/upload-artifact@v4
+        with:
+          name: creator-metrics-${{ github.sha }}
+          path: creator-metrics.json
+          if-no-files-found: error
+          retention-days: 7

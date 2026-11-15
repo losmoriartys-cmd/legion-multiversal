@@ -8,7 +8,44 @@ async function loadRosterData() {
     if (!payload || !Array.isArray(payload.heroes) || payload.heroes.length === 0) {
         throw new Error('roster-data.json no contiene integrantes válidos.');
     }
+    const identifiers = new Set();
+    for (const hero of payload.heroes) {
+        const identifier = hero && (hero.id || hero.slug);
+        if (!identifier || identifiers.has(identifier)) {
+            throw new Error('roster-data.json contiene un integrante sin identificador o con ID duplicado.');
+        }
+        identifiers.add(identifier);
+    }
     heroesData = payload.heroes;
+    return payload;
+}
+
+function renderRosterLoadError(error) {
+    const host = document.getElementById('roster-container');
+    if (!host) return;
+    console.error('No se pudo inicializar el roster:', error);
+    host.setAttribute('aria-busy', 'false');
+    host.innerHTML = '<section class="roster-load-error" role="alert" aria-live="assertive"><strong>EL ARCHIVO NO PUDO CARGARSE</strong><p>La información del Roster no está disponible en este momento. No significa que los expedientes se hayan perdido.</p><button class="roster-load-retry" type="button">REINTENTAR CARGA</button></section>';
+    const retry = host.querySelector('.roster-load-retry');
+    retry?.addEventListener('click', async () => {
+        if (!retry) return;
+        retry.disabled = true;
+        retry.textContent = 'VOLVIENDO A INTENTAR…';
+        host.setAttribute('aria-busy', 'true');
+        try {
+            await loadRosterData();
+            renderRoster();
+            renderMultiverseMap();
+            restoreHeroProfileFromHash();
+        } catch (retryError) {
+            retry.disabled = false;
+            retry.textContent = 'REINTENTAR CARGA';
+            host.setAttribute('aria-busy', 'false');
+            const message = host.querySelector('p');
+            if (message) message.textContent = 'Todavía no se pudo leer la fuente de datos. Revisá la conexión y volvé a intentar. Los detalles técnicos quedaron registrados en la consola.';
+            console.error('Reintento de carga del roster fallido:', retryError);
+        }
+    });
 }
 
 
@@ -176,13 +213,20 @@ function renderLosMoriartysHelixPilot(channel){
 }
 function renderHelixDashboard(channel){
  if(channel && channel.login==='losmoriartys')return renderLosMoriartysHelixPilot(channel);
- if(!channel)return '<div class="stats-empty"><strong>Seguimiento propio</strong>Esperando la primera sincronización de Twitch Helix para este canal.</div>';
+ if(!channel)return '<div class="stats-empty"><strong>SIN DATOS VERIFICADOS</strong>El canal está registrado, pero todavía no existe una captura utilizable de Twitch Helix para este perfil.</div>';
  const w=channel.window||{};
- const live=channel.live;
+ const capturedAt=channel.updated_at||instituteStatsData?.updated_at||null;
+ const capturedDate=capturedAt?new Date(capturedAt):null;
+ const ageMinutes=capturedDate&&!Number.isNaN(capturedDate.getTime())?(Date.now()-capturedDate.getTime())/60000:Infinity;
+ const interval=Number(instituteStatsData?.sampling_interval_minutes)||55;
+ const fresh=ageMinutes>=-5&&ageMinutes<=Math.max(interval*2.5,120);
+ const live=Boolean(fresh&&channel.live);
+ const statusLabel=!Number.isFinite(ageMinutes)?'FECHA NO DISPONIBLE':!fresh?'DATOS DEMORADOS':live?'● EN DIRECTO':'OFFLINE · CAPTURA RECIENTE';
+ const statusClass=!fresh?'partial':live?'verified':'pending';
  const snaps=Array.isArray(channel.snapshots)?channel.snapshots.filter(v=>v&&v.sampled_at):[];
  const first=snaps.length?Date.parse(snaps[0].sampled_at):NaN;
  const last=snaps.length?Date.parse(snaps[snaps.length-1].sampled_at):NaN;
- const interval=Number(instituteStatsData?.sampling_interval_minutes||15);
+
  const expected=Number.isFinite(first)&&Number.isFinite(last)&&last>=first?Math.floor((last-first)/(interval*60000))+1:0;
  const coverage=expected?Math.min(100,snaps.length/expected*100):null;
  const gaps=snaps.slice(1).map((v,i)=>(Date.parse(v.sampled_at)-Date.parse(snaps[i].sampled_at))/60000).filter(v=>Number.isFinite(v)&&v>0).sort((a,b)=>a-b);
@@ -191,12 +235,12 @@ function renderHelixDashboard(channel){
  const quality=coverage===null?'SIN COBERTURA CALCULABLE':coverage>=80?'COBERTURA ADECUADA':coverage>=50?'COBERTURA PARCIAL':'MUESTRA INSUFICIENTE';
  const qualityClass=coverage===null?'pending':coverage>=80?'verified':coverage>=50?'partial':'pending';
  const periodLabel=Number.isFinite(first)&&Number.isFinite(last)?new Date(first).toLocaleString('es-AR')+' — '+new Date(last).toLocaleString('es-AR'):'Fechas no disponibles';
- let out='<section class="stats-section"><div class="stats-source-head"><div><strong>TWITCH HELIX · SEGUIMIENTO PROPIO</strong><br><small>Observaciones periódicas de Legión Multiversal · no equivalen al panel analítico oficial</small></div><span class="stats-status '+(live?'partial':'pending')+'">'+(live?'EN DIRECTO':'OFFLINE')+'</span></div>';
+ let out='<section class="stats-section"><div class="stats-source-head"><div><strong>TWITCH HELIX · SEGUIMIENTO PROPIO</strong><br><small>Observaciones periódicas de Legión Multiversal · no equivalen al panel analítico oficial</small></div><span class="stats-status '+statusClass+'">'+statusLabel+'</span></div>';
  out+='<div class="stats-source-head"><div><strong>CALIDAD DE LA MUESTRA</strong><br><small>'+quality+' · objetivo de recolección: cada '+interval+' minutos</small></div><span class="stats-status '+qualityClass+'">'+(coverage===null?'SIN DATOS':statsNumber(coverage,1)+'%')+'</span></div>';
  out+='<p class="stats-section-intro">Período realmente observado: '+escapeStatsHtml(periodLabel)+'. Registros: '+statsNumber(snaps.length,0)+' de '+statsNumber(expected,0)+' esperados en ese intervalo. Separación mediana: '+(medianGap===null?'—':statsNumber(medianGap,1)+' min')+'; mayor intervalo sin muestra: '+(maxGap===null?'—':statsNumber(maxGap,1)+' min')+'. Esta cobertura describe el tramo observado, no los 30 días configurados.</p>';
  out+='<div class="stats-kpis">';
- [['Espectadores ahora',channel.current_viewers,'lectura actual'],['Seguidores',channel.followers_total,'no disponible vía Helix público'],['Muestras',w.samples_total,'registros capturados'],['Promedio muestreado',w.average_viewers_sampled,'solo muestras en directo'],['Pico observado',w.peak_viewers_sampled,'no es pico oficial'],['Horas vistas estimadas',w.estimated_hours_watched,'solo intervalos consecutivos válidos']].forEach(k=>out+='<div class="stats-kpi"><span>'+k[0]+'</span><strong>'+statsNumber(k[1],1)+'</strong><em>'+k[2]+'</em></div>');
- out+='</div><p class="stats-muted">Categoría actual: '+escapeStatsHtml(channel.current_game||'No disponible')+' · Última sincronización: '+(channel.updated_at?new Date(channel.updated_at).toLocaleString('es-AR'):'Pendiente')+'</p>';
+ [['Espectadores ahora',fresh?channel.current_viewers:null,fresh?'lectura reciente':'dato oculto: captura demorada'],['Seguidores',channel.followers_total,'no disponible vía Helix público'],['Muestras',w.samples_total,'registros capturados'],['Promedio muestreado',w.average_viewers_sampled,'solo muestras en directo'],['Pico observado',w.peak_viewers_sampled,'no es pico oficial'],['Horas vistas estimadas',w.estimated_hours_watched,'solo intervalos consecutivos válidos']].forEach(k=>out+='<div class="stats-kpi"><span>'+k[0]+'</span><strong>'+(k[1]===null||k[1]===undefined?'SIN DATOS VERIFICADOS':statsNumber(k[1],1))+'</strong><em>'+k[2]+'</em></div>');
+ out+='</div><p class="stats-muted">Categoría en la última captura: '+escapeStatsHtml(channel.current_game||'No disponible')+' · Última sincronización: '+(capturedDate&&!Number.isNaN(capturedDate.getTime())?capturedDate.toLocaleString('es-AR'):'Pendiente')+(fresh?'':' · No se interpreta como estado actual porque la captura superó la ventana de frescura.')+'</p>';
  out+=renderStatsBars('ACTIVIDAD DIARIA OBSERVADA',(w.daily_activity||[]).slice(-10),v=>statsDate(v.date),v=>v.live_samples,'muestras en directo',10);
  out+=renderStatsBars('CATEGORÍAS MÁS OBSERVADAS',w.game_breakdown||[],v=>v.name,v=>v.live_samples,'muestras por categoría',5);
  const sessions=new Map();
@@ -216,9 +260,11 @@ function renderHelixDashboard(channel){
  out+='<div class="stats-note">Las horas y picos de esta sección son observaciones/estimaciones propias del muestreo. No sustituyen las métricas oficiales del panel de creador de Twitch ni reconstruyen directos anteriores al inicio de la recolección.</div></section>';
  return out;
 }
+function getHeroDisplayName(hero){ return hero?.display_name || hero?.name || 'Integrante'; }
+
 function renderStatsDashboard(hero,helix,sully){
  let out='<div class="stats-dashboard">';
- out+='<div class="stats-source-head"><div><strong>ARCHIVO DE RENDIMIENTO · '+escapeStatsHtml(hero.name)+'</strong><br><small>Ficha individual · cada fuente conserva su propio período y metodología</small></div></div>';
+ out+='<div class="stats-source-head"><div><strong>ARCHIVO DE RENDIMIENTO · '+escapeStatsHtml(getHeroDisplayName(hero))+'</strong><br><small>Ficha individual · cada fuente conserva su propio período y metodología</small></div></div>';
  if(hero.youtube && !hero.twitch && !hero.kick){
   out+=renderPlatformStats(hero);
  }else if(!hero.twitch && hero.kick){
@@ -231,8 +277,43 @@ function renderStatsDashboard(hero,helix,sully){
  }
  out+='</div>';return out;
 }
+function renderAutomaticTwitchClips(hero){
+ const account=(hero?.accounts||[]).find(item=>item.platform==='twitch'&&item.account_type==='creator_channel');
+ if(!account)return '';
+ const creatorId=hero.id||hero.slug;
+ const record=twitchClipsData?.creators?.[creatorId];
+ const safe=escapeStatsHtml;
+ const captured=record?.captured_at?new Date(record.captured_at):null;
+ const capturedLabel=captured&&!Number.isNaN(captured.getTime())?captured.toLocaleString('es-AR'):'sin captura exitosa';
+ const method=safe(twitchClipsData?.selection?.methodology||'Muestra pública limitada por la API; no es una videoteca exhaustiva.');
+ let out='<section class="comic-panel comic-panel-wide automatic-twitch-clips"><div class="comic-panel-heading"><span>↗</span><b>CLIPS PÚBLICOS DETECTADOS · TWITCH</b></div><p class="comic-panel-caption">Fuente: Twitch Helix Get Clips · ventana de '+safe(twitchClipsData?.window_days||30)+' días · última captura correcta: '+safe(capturedLabel)+'.</p>';
+ if(twitchClipsLoadError||!twitchClipsData){
+  out+='<p class="mission-empty">No se pudo leer el archivo de clips públicos en esta visita. Los clips editoriales del expediente siguen disponibles por separado.</p>';
+ }else if(!record||record.status==='awaiting_collection'){
+  out+='<p class="mission-empty">El registro está preparado, pero el colector todavía no completó su primera captura en el entorno principal.</p>';
+ }else{
+  if(record.status==='error'){
+   out+='<p class="mission-empty">Aviso: la última consulta de este canal falló. Se conserva y muestra la captura correcta anterior, cuando existe.</p>';
+  }
+  if(!Array.isArray(record.clips)||!record.clips.length){
+   out+='<p class="mission-empty">'+(record.status==='error'?'No existe una captura correcta previa para mostrar.':'La consulta no encontró clips públicos en la ventana informada. Esto no demuestra que el canal nunca haya publicado clips.')+'</p>';
+  }else{
+   out+='<p class="comic-panel-caption">'+safe(record.displayed_count||record.clips.length)+' clips mostrados entre hasta '+safe(record.result_count||record.clips.length)+' resultados devueltos por Twitch. Orden de selección: visualizaciones descendentes; no es ranking editorial ni listado cronológico.</p><div class="automatic-twitch-clips-grid">';
+   record.clips.forEach((clip,index)=>{
+    const url=String(clip.url||'');
+    const validUrl=/^https:\/\/(?:www\.twitch\.tv|clips\.twitch\.tv)\//i.test(url);
+    const thumbnail=String(clip.thumbnail_url||'');
+    const validThumbnail=/^https:\/\//i.test(thumbnail);
+    out+='<article class="automatic-twitch-clip-card"><div class="automatic-twitch-clip-thumb">'+(validThumbnail?'<img src="'+safe(thumbnail)+'" alt="" loading="lazy" decoding="async" width="320" height="180">':'<span>CLIP TWITCH</span>')+'</div><div class="automatic-twitch-clip-copy"><small>CLIP PÚBLICO · '+String(index+1).padStart(2,'0')+'</small><h4>'+safe(clip.title||'Clip sin título')+'</h4><p>'+(clip.created_at?safe(statsDate(String(clip.created_at).slice(0,10))):'Fecha no disponible')+' · '+(clip.view_count===null||clip.view_count===undefined?'Visualizaciones no informadas':safe(statsNumber(clip.view_count,0))+' visualizaciones')+'</p>'+(validUrl?'<a href="'+safe(url)+'" target="_blank" rel="noopener noreferrer">VER CLIP EN TWITCH ↗</a>':'<span>ENLACE NO DISPONIBLE</span>')+'</div></article>';
+   });
+   out+='</div>';
+  }
+ }
+ out+='<p class="comic-panel-caption">'+method+' La selección automática no reemplaza los clips destacados elegidos por cada creador.</p></section>';
+ return out;
+}
 function renderMissionArchive(hero){
- const key=creatorRecordKey(hero),record=creatorRecordsData?.channels?.[key]||{};
+ const record=getCreatorRecord(hero);
  const groups=[['COLABORACIONES Y ACCESOS A JUEGOS','collaborations'],['HITOS Y TRAYECTORIA','milestones'],['CLIPS DESTACADOS','highlights']];
  let out='<div class="mission-archive"><div class="mission-hero-card"><span class="eyebrow">TRAYECTORIA · MEDIA KIT</span><p>'+escapeStatsHtml(hero.log||'Trayectoria y colaboraciones del creador.')+'</p></div>';
  groups.forEach(([label,field])=>{
@@ -278,6 +359,22 @@ async function loadSullyGnomeData(){
 
 let creatorRecordsData = null;
 let platformStatsData = null;
+let twitchClipsData = null;
+let twitchClipsLoadError = false;
+async function loadTwitchClipsData(){
+ try{
+  const response=await fetch('clips-data.json',{cache:'no-store'});
+  if(!response.ok)throw new Error('No se pudo leer clips-data.json');
+  const payload=await response.json();
+  if(payload?.schema_version!==1||!payload.creators||typeof payload.creators!=='object')throw new Error('El archivo de clips no cumple el contrato esperado.');
+  twitchClipsData=payload;
+  twitchClipsLoadError=false;
+ }catch(error){
+  twitchClipsData=null;
+  twitchClipsLoadError=true;
+  console.warn('Twitch public clips unavailable:',error);
+ }
+}
 async function loadPlatformStatsData(){
  try{
   const res=await fetch('platform-stats.json',{cache:'no-store'});
@@ -330,27 +427,33 @@ function renderStatsPlatformDirectory(){
  host.innerHTML=out||'<p class="stats-note">No hay cuentas de otras plataformas configuradas.</p>';
 }
 function renderPlatformStats(hero){
- const key=creatorRecordKey(hero);
+ const key=platformStatsKey(hero);
  const profile=platformStatsData?.creators?.[key];
  if(!profile || !profile.platforms)return '';
+ const captureDate=platformStatsData.updated_at?new Date(platformStatsData.updated_at):null;
+ const captureAge=captureDate&&!Number.isNaN(captureDate.getTime())?(Date.now()-captureDate.getTime())/60000:Infinity;
+ const sourceFresh=captureAge>=-5&&captureAge<=120;
+ const captureLabel=captureDate&&!Number.isNaN(captureDate.getTime())?captureDate.toLocaleString('es-AR'):'fecha no disponible';
  let out='';
  Object.entries(profile.platforms).forEach(([platform,p])=>{
   const title=platform==='youtube'?'YOUTUBE · DATOS PÚBLICOS DEL CANAL':platform==='kick'?'KICK · ACTIVIDAD DEL CANAL':platform.toUpperCase();
-  const status=p.status==='verified'?'FUENTE OFICIAL':p.status==='credentials_required'?'CONFIGURACIÓN PENDIENTE':p.status==='error'?'ERROR DE CONSULTA':'REFERENCIA';
-  out+='<section class="stats-section"><div class="stats-source-head"><div><strong>'+title+'</strong><br><small>Cuenta vinculada: '+escapeStatsHtml(p.handle||'—')+'</small></div><span class="stats-status '+(p.status==='verified'?'verified':'pending')+'">'+status+'</span></div>';
+  const verified=p.status==='verified';
+  const status=verified?(sourceFresh?'FUENTE OFICIAL':'FUENTE OFICIAL · CAPTURA DEMORADA'):p.status==='credentials_required'?'CONFIGURACIÓN PENDIENTE':p.status==='error'?'ERROR DE CONSULTA':'REFERENCIA';
+  const statusClass=verified?(sourceFresh?'verified':'partial'):'pending';
+  out+='<section class="stats-section"><div class="stats-source-head"><div><strong>'+title+'</strong><br><small>Cuenta vinculada: '+escapeStatsHtml(p.handle||'—')+'</small></div><span class="stats-status '+statusClass+'">'+status+'</span></div>';
   if(p.status!=='verified'){
    out+='<div class="stats-empty"><strong>Datos automáticos todavía no disponibles</strong>'+escapeStatsHtml(p.note||'La cuenta está registrada, pero falta completar su configuración.')+'</div>';
   }else if(platform==='youtube'){
    const m=p.metrics||{};
-   out+='<p class="stats-section-intro">Captura: '+escapeStatsHtml(platformStatsData.updated_at||'fecha no disponible')+' · fuente: YouTube Data API v3. No se mezcla con estadísticas de streaming.</p><div class="pilot-lifetime-grid tm-metrics-grid">';
+   out+='<p class="stats-section-intro">Captura: '+escapeStatsHtml(captureLabel)+' · fuente: YouTube Data API v3. '+(sourceFresh?'Lectura dentro de la ventana de actualización esperada.':'La captura tiene más de dos horas o no tiene fecha; se conserva como referencia histórica, no como estado actual.')+' No se mezcla con estadísticas de streaming.</p><div class="pilot-lifetime-grid tm-metrics-grid">';
    [['Suscriptores',m.subscribers],['Visualizaciones totales',m.total_views],['Videos publicados',m.videos_total]].forEach(v=>out+='<div class="pilot-metric"><span>'+v[0]+'</span><strong>'+statsNumber(v[1],0)+'</strong><small>Acumulado del canal</small></div>');
    out+='</div>';
    const videos=Array.isArray(p.recent_videos)?p.recent_videos:[];
    if(videos.length){out+='<div class="stats-table-wrap"><table class="stats-table"><thead><tr><th>Video reciente</th><th>Publicado</th><th>Vistas</th></tr></thead><tbody>';videos.forEach(v=>out+='<tr><td><a class="stats-link" href="'+escapeStatsHtml(v.url)+'" target="_blank" rel="noopener">'+escapeStatsHtml(v.title)+'</a></td><td>'+escapeStatsHtml(v.published_at?v.published_at.slice(0,10):'—')+'</td><td class="num">'+statsNumber(v.views,0)+'</td></tr>');out+='</tbody></table></div>';}
   }else if(platform==='kick'){
    const m=p.metrics||{};
-   out+='<p class="stats-section-intro">Captura: '+escapeStatsHtml(platformStatsData.updated_at||'fecha no disponible')+' · fuente: Kick Developer Public API. La API permite consultar estado y audiencia actual; no equivale a historial completo.</p><div class="pilot-lifetime-grid tm-metrics-grid">';
-   [['Estado',m.live?'En directo':'Offline'],['Espectadores actuales',m.current_viewers],['Categoría',m.category],['Título',m.stream_title]].forEach(v=>out+='<div class="pilot-metric"><span>'+v[0]+'</span><strong>'+statsNumber(v[1],0)+'</strong><small>Última lectura</small></div>');
+   out+='<p class="stats-section-intro">Captura: '+escapeStatsHtml(captureLabel)+' · fuente: Kick Developer Public API. La API permite consultar estado y audiencia actual; no equivale a historial completo. '+(sourceFresh?'':'La lectura está demorada y no se presenta como estado actual.')+'</p><div class="pilot-lifetime-grid tm-metrics-grid">';
+   [['Estado',sourceFresh?(m.live?'En directo':'Offline'):'SIN DATOS VERIFICADOS'],['Espectadores actuales',sourceFresh?m.current_viewers:null],['Categoría',m.category],['Título',m.stream_title]].forEach(v=>out+='<div class="pilot-metric"><span>'+v[0]+'</span><strong>'+(v[1]===null||v[1]===undefined?'SIN DATOS VERIFICADOS':escapeStatsHtml(v[1]))+'</strong><small>Última lectura</small></div>');
    out+='</div>';
   }
   if(p.url)out+='<p class="stats-note">Fuente: <a class="stats-link" href="'+escapeStatsHtml(p.url)+'" target="_blank" rel="noopener">abrir canal en '+platform.toUpperCase()+' ↗</a>. '+escapeStatsHtml(p.methodology||'Cada métrica conserva su propia metodología.')+'</p>';
@@ -359,14 +462,17 @@ function renderPlatformStats(hero){
  return out;
 }
 function creatorRecordKey(hero){
- if(hero && hero.youtube)return 'patoteexplica';
- if(hero && hero.twitch)return hero.twitch.split('/').filter(Boolean).pop().toLowerCase();
- if(hero && hero.kick)return hero.kick.split('/').filter(Boolean).pop().toLowerCase();
- return '';
+ return hero?.id || hero?.slug || '';
+}
+function getCreatorRecord(hero){
+ const key=creatorRecordKey(hero);
+ return creatorRecordsData?.channels?.[key] || {};
+}
+function platformStatsKey(hero) {
+ return hero?.id || hero?.slug || creatorRecordKey(hero);
 }
 function renderCreatorRecords(hero){
- const key=creatorRecordKey(hero);
- const record=creatorRecordsData?.channels?.[key];
+ const record=getCreatorRecord(hero);
  const lines=['TRAYECTORIA REAL DEL CREADOR · REGISTROS VERIFICADOS'];
  const groups=[
   ['HITOS','milestones'],
@@ -576,9 +682,13 @@ async function loadInstituteStats(){
   if(highlights)highlights.innerHTML='<div class="impact-highlight-copy"><span>LECTURA DEL PERÍODO</span><strong>'+fmt(totalSamples,0)+' muestras de actividad registradas</strong><p>La cifra reúne consultas realizadas a los '+channels.length+' canales Twitch activos; '+liveCount+' detectados en directo en la última consulta. No equivale a espectadores ni a horas vistas.</p></div>'+(topGames.length?'<div class="impact-game-list"><span>CATEGORÍAS CON MÁS MUESTRAS EN DIRECTO</span>'+topGames.map(([name,count])=>'<div><b>'+escapeStatsHtml(name)+'</b><span>'+fmt(count,0)+' muestras</span></div>').join('')+'</div>':'<div class="impact-game-list"><span>CATEGORÍAS</span><p>Aún no hay suficientes muestras para mostrar un resumen.</p></div>');
   body.innerHTML=channels.map(c=>{const samples=Array.isArray(c.snapshots)?c.snapshots.filter(s=>s?.sampled_at):[];const first=samples.length?Date.parse(samples[0].sampled_at):NaN;const last=samples.length?Date.parse(samples[samples.length-1].sampled_at):NaN;const expected=Number.isFinite(first)&&Number.isFinite(last)&&last>=first?Math.floor((last-first)/(Number(data.sampling_interval_minutes||15)*60000))+1:0;const coverage=expected?Math.min(100,(samples.length/expected)*100):null;const coverageLabel=coverage===null?'Insuficiente':coverage.toLocaleString('es-AR',{maximumFractionDigits:1})+'% ('+samples.length+'/'+expected+')';return '<tr><td>'+escapeStatsHtml(c.display_name)+'</td><td>'+(c.live?'EN DIRECTO':'OFFLINE')+'</td><td>'+fmt(c.current_viewers,0)+'</td><td>'+escapeStatsHtml(fmt(c.current_game))+'</td><td>'+fmt(c.window?.average_viewers_sampled)+'</td><td>'+fmt(c.window?.peak_viewers_sampled,0)+'</td><td>'+fmt(c.window?.observed_live_hours)+'</td><td>'+fmt(c.window?.samples_total,0)+'</td><td>'+coverageLabel+'</td></tr>';}).join('');
   renderLiveDirectory(channels);
+  refreshRosterLiveIndicators();
  }catch(e){
   body.innerHTML='<tr><td colspan="9">Estadísticas temporalmente no disponibles. '+escapeStatsHtml(e.message)+'</td></tr>';
-  const summary=document.getElementById('stats-summary');if(summary)summary.innerHTML='<article class="impact-kpi"><strong>—</strong><span>DATOS NO DISPONIBLES</span><small>Volvé a consultar más tarde.</small></article>';
+  const summary=document.getElementById('stats-summary');if(summary)summary.innerHTML='<article class="impact-kpi"><strong>—</strong><span>DATOS NO DISPONIBLES</span><small>La fuente de actividad no respondió. No se interpreta el último estado conocido como actual.</small></article>';
+  const updatedNode=document.getElementById('stats-updated');if(updatedNode){updatedNode.textContent='No se pudo consultar data.json. El estado en directo queda sin confirmar hasta la próxima carga exitosa.';updatedNode.dataset.status='error';}
+  const channelGrid=document.getElementById('stats-channel-grid');if(channelGrid)channelGrid.innerHTML='<p class="stats-note" role="status">Estado de canales no disponible: no se pudo leer la fuente de actividad. Los datos anteriores no se presentan como actuales.</p>';
+  refreshRosterLiveIndicators();
  } finally {
   instituteStatsLoading=false;
  }
@@ -626,7 +736,7 @@ function recordLegionProgress(type, value) {
 function renderMultiverseMap() {
     const host = document.getElementById('multiverse-map');
     if (!host || !heroesData.length) return;
-    const makeNode = (hero, index) => '<button type="button" class="multiverse-node" onclick="openMappedHero(' + index + ')" aria-label="Abrir expediente de ' + escapeStatsHtml(hero.name) + '"><span class="multiverse-node-number">N.º ' + escapeStatsHtml(hero.cardNumber || 'S/N') + '</span><strong>' + escapeStatsHtml(hero.name) + '</strong><span class="multiverse-node-role">' + escapeStatsHtml(hero.codename || hero.characterRole || hero.rank || 'Integrante de la Legión') + '</span><span class="multiverse-node-areas">' + (hero.areas || []).slice(0,3).map(area => '<i>' + escapeStatsHtml(area) + '</i>').join('') + '</span><em>ABRIR EXPEDIENTE ↗</em></button>';
+    const makeNode = (hero, index) => '<button type="button" class="multiverse-node" onclick="openMappedHero(' + index + ')" aria-label="Abrir expediente de ' + escapeStatsHtml(getHeroDisplayName(hero)) + '"><span class="multiverse-node-number">N.º ' + escapeStatsHtml(hero.cardNumber || 'S/N') + '</span><strong>' + escapeStatsHtml(getHeroDisplayName(hero)) + '</strong><span class="multiverse-node-role">' + escapeStatsHtml(hero.codename || hero.characterRole || hero.rank || 'Integrante de la Legión') + '</span><span class="multiverse-node-areas">' + (hero.areas || []).slice(0,3).map(area => '<i>' + escapeStatsHtml(area) + '</i>').join('') + '</span><em>ABRIR EXPEDIENTE ↗</em></button>';
     const top = heroesData.slice(0,4).map(makeNode).join('');
     const bottom = heroesData.slice(4).map((hero,index) => makeNode(hero,index+4)).join('');
     host.innerHTML = '<div class="multiverse-map-canvas"><svg class="multiverse-connections" viewBox="0 0 1000 620" preserveAspectRatio="none" aria-hidden="true">' + [125,375,625,875].map(x => '<line x1="500" y1="310" x2="' + x + '" y2="105"></line><line x1="500" y1="310" x2="' + x + '" y2="515"></line>').join('') + '</svg><div class="multiverse-node-row">' + top + '</div><div class="multiverse-core"><span>LM</span><strong>NEXUS CENTRAL</strong><small>' + heroesData.length + ' UNIVERSOS CONECTADOS</small></div><div class="multiverse-node-row">' + bottom + '</div></div>';
@@ -676,21 +786,20 @@ function getRosterFilteredEntries() {
     const search = (document.getElementById('roster-search')?.value || '').trim().toLocaleLowerCase('es');
     const role = document.getElementById('roster-role-filter')?.value || 'all';
     const platform = document.getElementById('roster-platform-filter')?.value || 'all';
-    const format = document.getElementById('roster-format-filter')?.value || 'all';
     const area = document.getElementById('roster-area-filter')?.value || 'all';
     const sort = document.getElementById('roster-sort')?.value || 'featured';
     const entries = heroesData.map((hero, index) => ({ hero, index })).filter(({hero}) => {
-        const haystack = [hero.name, hero.codename, hero.characterRole, hero.rank, hero.bio, hero.voice, hero.log, ...(hero.areas || []), ...(hero.platforms || []), ...(hero.mediaProfile?.formats || []), ...(hero.mediaProfile?.opportunities || [])].join(' ').toLocaleLowerCase('es');
+        const accountTerms = (hero.accounts || []).flatMap(account => [account.handle, account.login, account.platform]);
+        const haystack = [hero.name, hero.display_name, hero.slug, hero.codename, hero.characterRole, hero.rank, hero.bio, hero.voice, hero.log, ...(hero.areas || []), ...(hero.platforms || []), ...(hero.mediaProfile?.formats || []), ...(hero.mediaProfile?.opportunities || []), ...accountTerms].join(' ').toLocaleLowerCase('es');
         return (!search || haystack.includes(search))
             && (role === 'all' || hero.role === role)
-            && (platform === 'all' || (hero.platforms || []).includes(platform) || Boolean(hero[platform]))
-            && (format === 'all' || hero.creator_type === format)
+            && (platform === 'all' || (hero.platforms || []).includes(platform) || (hero.accounts || []).some(account => account.platform === platform))
             && (area === 'all' || (hero.areas || []).includes(area));
     });
-    if (sort === 'name') entries.sort((a,b) => a.hero.name.localeCompare(b.hero.name, 'es'));
-    if (sort === 'number') entries.sort((a,b) => String(a.hero.cardNumber || '999999').localeCompare(String(b.hero.cardNumber || '999999'), 'es', {numeric:true}));
+    if (sort === 'name') entries.sort((a,b) => (a.hero.display_name || a.hero.name).localeCompare(b.hero.display_name || b.hero.name, 'es'));
     return entries;
 }
+
 function bindRosterControls() {
     const root = document.getElementById('roster-home');
     if (!root || root.dataset.controlsBound === 'true') return;
@@ -706,11 +815,19 @@ function bindRosterControls() {
         });
         areaSelect.dataset.optionsReady = 'true';
     }
-    ['roster-search','roster-role-filter','roster-platform-filter','roster-format-filter','roster-area-filter','roster-sort'].forEach(id => {
+    ['roster-search','roster-role-filter','roster-platform-filter','roster-area-filter','roster-sort'].forEach(id => {
         const control = document.getElementById(id);
         if (control) control.addEventListener(control.tagName === 'INPUT' ? 'input' : 'change', renderRoster);
     });
     root.addEventListener('click', event => {
+        const quickFilter = event.target.closest('[data-roster-filter]');
+        if (quickFilter) {
+            const type = quickFilter.getAttribute('data-roster-filter');
+            const value = quickFilter.getAttribute('data-value') || 'all';
+            const control = document.getElementById(type === 'role' ? 'roster-role-filter' : type === 'platform' ? 'roster-platform-filter' : '');
+            if (control) { control.value = value; renderRoster(); }
+            return;
+        }
         if (event.target.closest('[data-reset-roster-empty]')) {
             document.getElementById('roster-reset')?.click();
             return;
@@ -719,7 +836,7 @@ function bindRosterControls() {
         if (!clearButton) return;
         const id = clearButton.getAttribute('data-remove-roster-filter');
         if (id === 'all') {
-            ['roster-search','roster-role-filter','roster-platform-filter','roster-format-filter','roster-area-filter'].forEach(filterId => {
+            ['roster-search','roster-role-filter','roster-platform-filter','roster-area-filter'].forEach(filterId => {
                 const field = document.getElementById(filterId);
                 if (field) field.value = filterId === 'roster-search' ? '' : 'all';
             });
@@ -732,17 +849,45 @@ function bindRosterControls() {
         renderRoster();
         if (id === 'roster-search') control.focus();
     });
+    document.getElementById('roster-filters-close')?.addEventListener('click', () => {
+        const details = document.getElementById('roster-advanced-filters');
+        if (details) details.open = false;
+        document.getElementById('roster-more-filters')?.focus();
+    });
+    document.addEventListener('keydown', event => {
+        const details = document.getElementById('roster-advanced-filters');
+        if (!details?.open) return;
+        if (event.key === 'Escape') {
+            event.preventDefault();
+            details.open = false;
+            document.getElementById('roster-more-filters')?.focus();
+            return;
+        }
+        if (event.key !== 'Tab') return;
+        const focusable = Array.from(details.querySelectorAll('summary, button:not([disabled]), select:not([disabled]), input:not([disabled]), a[href]'))
+            .filter(element => element.offsetParent !== null);
+        if (!focusable.length) return;
+        const first = focusable[0], last = focusable[focusable.length - 1];
+        if (event.shiftKey && (document.activeElement === first || !details.contains(document.activeElement))) {
+            event.preventDefault(); last.focus();
+        } else if (!event.shiftKey && (document.activeElement === last || !details.contains(document.activeElement))) {
+            event.preventDefault(); first.focus();
+        }
+    });
     document.getElementById('roster-reset')?.addEventListener('click', () => {
-        ['roster-search','roster-role-filter','roster-platform-filter','roster-format-filter','roster-area-filter'].forEach(id => {
+        ['roster-search','roster-role-filter','roster-platform-filter','roster-area-filter'].forEach(id => {
             const control = document.getElementById(id);
             if (control) control.value = id === 'roster-search' ? '' : 'all';
         });
         const sort = document.getElementById('roster-sort');
         if (sort) sort.value = 'featured';
+        const details = document.getElementById('roster-advanced-filters');
+        if (details) details.open = false;
         renderRoster();
         document.getElementById('roster-search')?.focus();
     });
 }
+
 function setRosterCardFace(card, flipped) {
     const front = card.querySelector('.roster-card-front');
     const back = card.querySelector('.roster-card-back');
@@ -760,14 +905,18 @@ function updateRosterFilterSummary() {
     if (!host) return;
     const fields = [
         ['roster-search', 'Búsqueda', value => '«' + value + '»'],
-        ['roster-role-filter', 'Función', value => document.querySelector('#roster-role-filter option:checked')?.textContent || value],
+        ['roster-role-filter', 'Vínculo', value => document.querySelector('#roster-role-filter option:checked')?.textContent || value],
         ['roster-platform-filter', 'Plataforma', value => value.toUpperCase()],
-        ['roster-format-filter', 'Formato', value => document.querySelector('#roster-format-filter option:checked')?.textContent || value],
         ['roster-area-filter', 'Especialidad', value => value]
     ];
     const active = fields.filter(([id]) => {
         const value = document.getElementById(id)?.value;
         return value && value !== 'all';
+    });
+    document.querySelectorAll('[data-roster-filter]').forEach(button => {
+        const type = button.getAttribute('data-roster-filter');
+        const control = document.getElementById(type === 'role' ? 'roster-role-filter' : 'roster-platform-filter');
+        button.setAttribute('aria-pressed', String(Boolean(control && control.value === button.getAttribute('data-value'))));
     });
     host.innerHTML = active.length
         ? '<span class="roster-filter-caption">FILTROS ACTIVOS</span>' + active.map(([id,label,format]) => {
@@ -776,14 +925,68 @@ function updateRosterFilterSummary() {
         }).join('') + '<button type="button" class="roster-filter-clear-inline" data-remove-roster-filter="all">LIMPIAR</button>'
         : '<span class="roster-filter-caption">MOSTRANDO EL ARCHIVO COMPLETO</span>';
 }
+
+function getRosterLiveState(hero) {
+    if (!hero || !instituteStatsData) return null;
+    const account = (hero.accounts || []).find(item => item.platform === 'twitch' && item.account_type === 'creator_channel');
+    const login = (account?.login || (hero.twitch ? hero.twitch.split('/').filter(Boolean).pop() : '') || '').toLowerCase();
+    if (!login) return null;
+    const channel = instituteStatsData.channels?.[login];
+    if (!channel) return null;
+    const updated = new Date(instituteStatsData.updated_at || channel.updated_at || '');
+    const ageMinutes = (Date.now() - updated.getTime()) / 60000;
+    const interval = Number(instituteStatsData.sampling_interval_minutes) || 55;
+    const fresh = Number.isFinite(ageMinutes) && ageMinutes >= -5 && ageMinutes <= Math.max(interval * 2.5, 120);
+    return { login, channel, fresh, updatedAt: instituteStatsData.updated_at || channel.updated_at || null, ageMinutes, url: account?.url || hero.twitch || ('https://twitch.tv/' + login) };
+}
+function refreshRosterLiveIndicators() {
+    document.querySelectorAll('.roster-collectible-card[data-creator-id]').forEach(card => {
+        const hero = heroesData.find(item => (item.id || item.slug || item.name) === card.dataset.creatorId);
+        const badge = card.querySelector('.roster-card-live-badge');
+        if (!badge) return;
+        const trackedOnTwitch = Boolean(hero && ((hero.accounts || []).some(item => item.platform === 'twitch' && item.account_type === 'creator_channel') || hero.twitch));
+        if (!trackedOnTwitch) {
+            badge.hidden = true;
+            badge.removeAttribute('href');
+            badge.tabIndex = -1;
+            badge.classList.remove('is-stale');
+            return;
+        }
+        const state = getRosterLiveState(hero);
+        const isLive = Boolean(state && state.fresh && state.channel.live);
+        const isStale = Boolean(state && !state.fresh);
+        const unavailable = !state;
+        badge.hidden = !isLive && !isStale && !unavailable;
+        badge.classList.toggle('is-stale', !isLive);
+        if (isLive) {
+            const game = state.channel.current_game ? ' · ' + state.channel.current_game : '';
+            badge.href = state.url;
+            badge.tabIndex = 0;
+            badge.removeAttribute('aria-disabled');
+            badge.textContent = '● EN VIVO' + game;
+            badge.title = state.channel.current_title || 'Abrir transmisión en directo';
+            badge.setAttribute('aria-label', 'Abrir transmisión en directo de ' + (hero.display_name || hero.name) + (state.channel.current_game ? ' jugando ' + state.channel.current_game : ''));
+        } else {
+            badge.removeAttribute('href');
+            badge.tabIndex = -1;
+            badge.setAttribute('aria-disabled', 'true');
+            const captured = state?.updatedAt ? new Date(state.updatedAt).toLocaleString('es-AR') : '';
+            badge.textContent = unavailable ? 'ESTADO NO DISPONIBLE' : 'ESTADO SIN ACTUALIZAR';
+            badge.title = captured ? 'Última captura disponible: ' + captured : 'No hay una captura disponible para esta cuenta.';
+            badge.setAttribute('aria-label', badge.textContent + ' para ' + (hero.display_name || hero.name));
+        }
+    });
+}
+
 function renderRoster() {
     const container = document.getElementById('roster-container');
     if (!container) return;
     container.innerHTML = '';
+    container.setAttribute('aria-busy', 'false');
     bindRosterControls();
     const filteredEntries = getRosterFilteredEntries();
     const results = document.getElementById('roster-results');
-    if (results) results.textContent = filteredEntries.length + (filteredEntries.length === 1 ? ' integrante encontrado' : ' integrantes encontrados') + ' de ' + heroesData.length + ' en el archivo';
+    if (results) results.textContent = 'Mostrando ' + filteredEntries.length + ' de ' + heroesData.length + ' integrantes';
     updateRosterFilterSummary();
     const groups = [
         { key: 'director', title: 'DIRECCIÓN', desc: 'Quienes impulsan la visión compartida y coordinan el rumbo de la Legión.' },
@@ -823,6 +1026,7 @@ function renderRoster() {
             card.className = 'roster-collectible-card';
             const collectibleTheme = collectibleThemes[hero.name] || { theme: 'legion-standard', mark: 'LEGIÓN' };
             card.dataset.cardTheme = collectibleTheme.theme;
+            card.dataset.creatorId = hero.id || hero.slug || hero.name;
             card.dataset.editionMark = collectibleTheme.mark;
             card.style.setProperty('--card-tilt-x', '0deg');
             card.style.setProperty('--card-tilt-y', '0deg');
@@ -835,13 +1039,15 @@ function renderRoster() {
             const roleLabels = { director: 'DIRECCIÓN', teacher: 'PROFESOR', student: 'ESTUDIANTE', collaborator: 'COLABORADOR' };
             const legionRole = roleLabels[hero.role] || 'INTEGRANTE';
             const identity = hero.codename || hero.characterRole || classification;
-            const safeName = escapeStatsHtml(hero.name);
+            const safeName = escapeStatsHtml(hero.display_name || hero.name);
             const safeNumber = escapeStatsHtml(cardNumber);
             const safeClassification = escapeStatsHtml(classification);
             const safeIdentity = escapeStatsHtml(identity);
             const safeRole = escapeStatsHtml(legionRole);
             const safeBio = escapeStatsHtml(hero.bio || 'Presentación personal pendiente de completar.');
             const safeType = escapeStatsHtml(creatorTypeLabel);
+            const primaryAccount = (hero.accounts || []).find(account => account.account_type === 'creator_channel') || null;
+            const safeHandle = escapeStatsHtml(primaryAccount?.handle ? '@' + primaryAccount.handle : '');
 
             const shell = document.createElement('div');
             shell.className = 'roster-card-3d-shell';
@@ -851,12 +1057,12 @@ function renderRoster() {
             const front = document.createElement('button');
             front.type = 'button';
             front.className = 'roster-card-face roster-card-front';
-            front.setAttribute('aria-label', 'Girar carta de ' + hero.name + ' para ver el reverso');
+            front.setAttribute('aria-label', 'Girar carta de ' + getHeroDisplayName(hero) + ' para ver el reverso');
             const portrait = document.createElement('div');
             portrait.className = 'roster-card-portrait';
             const image = document.createElement('img');
             image.src = hero.portrait || hero.img;
-            image.alt = 'Retrato tipo carnet de ' + hero.name;
+            image.alt = 'Retrato tipo carnet de ' + getHeroDisplayName(hero);
             image.loading = 'lazy';
             image.onerror = () => { portrait.classList.add('portrait-missing'); portrait.textContent = 'RETRATO NO DISPONIBLE'; };
             portrait.appendChild(image);
@@ -871,7 +1077,7 @@ function renderRoster() {
             frontName.innerHTML = '<strong>' + safeName + '</strong><small>' + safeClassification + '</small><em>' + safeIdentity + '</em>';
             const frontMeta = document.createElement('span');
             frontMeta.className = 'roster-card-front-meta';
-            frontMeta.innerHTML = '<b>' + safeRole + '</b><small>' + safeType + ' · SERIE ' + escapeStatsHtml(hero.series || '01') + '</small>';
+            frontMeta.innerHTML = '<b>' + safeRole + '</b><small>' + safeType + (safeHandle ? ' · ' + safeHandle : '') + ' · SERIE ' + escapeStatsHtml(hero.series || '01') + '</small>';
             const flipHint = document.createElement('span');
             flipHint.className = 'roster-card-flip-hint';
             flipHint.textContent = 'GIRAR ↻';
@@ -882,7 +1088,7 @@ function renderRoster() {
             const heroArt = document.createElement('img');
             heroArt.className = 'roster-card-back-art';
             heroArt.src = hero.img || hero.portrait;
-            heroArt.alt = 'Ilustración completa de ' + hero.name;
+            heroArt.alt = 'Ilustración completa de ' + getHeroDisplayName(hero);
             heroArt.loading = 'lazy';
             heroArt.onerror = () => { heroArt.hidden = true; back.classList.add('back-art-missing'); };
             const backShade = document.createElement('span');
@@ -901,7 +1107,7 @@ function renderRoster() {
             openLog.type = 'button';
             openLog.className = 'roster-card-open-log';
             openLog.textContent = 'ABRIR BITÁCORA';
-            openLog.setAttribute('aria-label', 'Abrir bitácora personal de ' + hero.name);
+            openLog.setAttribute('aria-label', 'Abrir bitácora personal de ' + getHeroDisplayName(hero));
             openLog.addEventListener('click', (event) => { event.stopPropagation(); openHeroProfile(index, card); });
             const flipBack = document.createElement('button');
             flipBack.type = 'button';
@@ -925,11 +1131,18 @@ function renderRoster() {
             shell.appendChild(inner);
             card.appendChild(shell);
             setRosterCardFace(card, false);
+            const liveBadge = document.createElement('a');
+            liveBadge.className = 'roster-card-live-badge';
+            liveBadge.hidden = true;
+            liveBadge.target = '_blank';
+            liveBadge.rel = 'noopener noreferrer';
+            liveBadge.addEventListener('click', event => event.stopPropagation());
+            card.appendChild(liveBadge);
             const directProfile = document.createElement('button');
             directProfile.type = 'button';
             directProfile.className = 'roster-card-direct-profile';
             directProfile.textContent = 'ABRIR EXPEDIENTE ↗';
-            directProfile.setAttribute('aria-label', 'Abrir directamente el expediente de ' + hero.name);
+            directProfile.setAttribute('aria-label', 'Abrir directamente el expediente de ' + getHeroDisplayName(hero));
             directProfile.addEventListener('click', () => openHeroProfile(index, directProfile));
             card.appendChild(directProfile);
 
@@ -995,7 +1208,7 @@ function renderCommercialQuickView(hero) {
         }
     };
     const data = hero.mediaProfile || tailoredProfiles[profileKey] || {};
-    const record = creatorRecordsData?.channels?.[twitchLogin] || creatorRecordsData?.channels?.[youtubeLogin] || {};
+    const record = getCreatorRecord(hero);
     const typeLabel = hero.creator_type === "video_creator" ? "CREADOR DE VIDEO" : hero.creator_type === "live_streamer" ? "CREADOR EN DIRECTO" : "FORMATO POR CONFIRMAR";
     const roleLabels = {director:"DIRECCIÓN",teacher:"PROFESOR",student:"ESTUDIANTE",collaborator:"COLABORADOR"};
     const platformLinks = [];
@@ -1039,7 +1252,43 @@ function renderCommercialQuickView(hero) {
     out += '</section>';
     return out;
 }
-function openHeroProfile(index, triggerElement = document.activeElement) {
+function renderCreatorPlatformLinks(hero) {
+    const labels = { twitch: 'TWITCH', youtube: 'YOUTUBE', instagram: 'INSTAGRAM' };
+    const accounts = Array.isArray(hero.accounts) ? hero.accounts : [];
+    const links = accounts.filter(account => labels[account.platform] && account.url);
+    if (!links.length) {
+        [['twitch','TWITCH'],['youtube','YOUTUBE'],['instagram','INSTAGRAM']].forEach(([key]) => {
+            if (hero[key]) links.push({ platform:key, url:hero[key] });
+        });
+    }
+    return links.map(account => '<a class="btn-link" href="' + escapeStatsHtml(account.url) + '" target="_blank" rel="noopener noreferrer">' + labels[account.platform] + ' ↗</a>').join('');
+}
+
+function getHeroRosterSlug(hero) {
+    return String(hero?.slug || hero?.id || hero?.name || '')
+        .toLocaleLowerCase('es')
+        .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+        .replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+}
+function setHeroProfileRoute(hero, mode = 'push') {
+    const slug = getHeroRosterSlug(hero);
+    if (!slug || mode === 'none') return;
+    const route = '#roster/' + encodeURIComponent(slug);
+    if (mode === 'replace') {
+        history.replaceState({ ...(history.state || {}), lmRosterProfile: true }, '', route);
+        return;
+    }
+    if (!history.state?.lmRosterBase) {
+        history.pushState({ lmRosterBase: true }, '', '#roster');
+    }
+    history.pushState({ lmRosterProfile: true }, '', route);
+}
+function showRosterChapter() {
+    const chapter = document.getElementById('chapter-2');
+    if (!chapter) return;
+    if (!chapter.classList.contains('active')) switchChapter(2);
+}
+function openHeroProfile(index, triggerElement = document.activeElement, options = {}) {
     const hero = heroesData[index];
     if (!hero) return;
     recordLegionProgress('profile', hero.cardNumber || hero.name);
@@ -1050,19 +1299,21 @@ function openHeroProfile(index, triggerElement = document.activeElement) {
     window.lastHeroProfileTrigger = triggerElement instanceof HTMLElement ? triggerElement : window.lastHeroProfileTrigger || null;
     window.currentHeroProfileIndex = index;
     const profileArt = hero.img || hero.portrait || '';
-    const profileArtAlt = 'Ilustración oficial de ' + hero.name + ' para su expediente individual';
+    const profileArtAlt = 'Ilustración oficial de ' + getHeroDisplayName(hero) + ' para su expediente individual';
     const filteredProfiles = getRosterFilteredEntries();
     const profilePosition = filteredProfiles.findIndex(entry => entry.index === index);
     const previousDisabled = profilePosition <= 0;
     const nextDisabled = profilePosition < 0 || profilePosition >= filteredProfiles.length - 1;
-    const profileActions = hero.name === 'MORIARTYS'
-        ? '<a class="twitch-link-btn" href="./roster-02-moriartys.html">ABRIR ARCHIVO PERSONAL ↗</a>' + (channel ? '<a class="btn-link" href="' + escapeStatsHtml(channel) + '" target="_blank" rel="noopener">VISITAR CANAL ↗</a>' : '') + '<button class="hero-profile-back" type="button" onclick="closeHeroProfile()">VOLVER AL ROSTER</button>'
-        : '<button class="twitch-link-btn" type="button" onclick="openHeroModal(' + index + ')">ABRIR BITÁCORA COMPLETA</button>' + (channel ? '<a class="btn-link" href="' + escapeStatsHtml(channel) + '" target="_blank" rel="noopener">VISITAR CANAL ↗</a>' : '') + '<button class="hero-profile-back" type="button" onclick="closeHeroProfile()">VOLVER AL ROSTER</button>';
+    const profileActions = (hero.name === 'MORIARTYS'
+        ? '<a class="twitch-link-btn" href="./roster-02-moriartys.html">ABRIR ARCHIVO PERSONAL ↗</a>'
+        : '<button class="twitch-link-btn" type="button" onclick="openHeroModal(' + index + ')">ABRIR BITÁCORA COMPLETA</button>')
+        + renderCreatorPlatformLinks(hero)
+        + '<button class="hero-profile-back" type="button" onclick="closeHeroProfile()">VOLVER AL ROSTER</button>';
     const profilePager = '<nav class="hero-profile-pager" aria-label="Navegación entre expedientes"><button type="button" onclick="navigateHeroProfile(-1)"' + (previousDisabled ? ' disabled' : '') + '>← ANTERIOR</button><span>EXPEDIENTE ' + (profilePosition >= 0 ? profilePosition + 1 : '—') + ' / ' + filteredProfiles.length + '</span><button type="button" onclick="navigateHeroProfile(1)"' + (nextDisabled ? ' disabled' : '') + '>SIGUIENTE →</button></nav>';
-    page.innerHTML = '<div class="hero-profile-layout hero-profile-gateway"><div class="hero-profile-art-wrap"><div class="hero-profile-art-frame"><span class="hero-profile-art-stamp">LEGIÓN<br>MULTIVERSAL</span>' + (profileArt ? '<img class="hero-profile-art" src="' + escapeStatsHtml(profileArt) + '" alt="' + escapeStatsHtml(profileArtAlt) + '" loading="eager" onerror="this.closest(\'.hero-profile-art-frame\').classList.add(\'art-unavailable\');this.remove();">' : '<div class="hero-profile-art-fallback">ILUSTRACIÓN NO DISPONIBLE</div>') + '<span class="hero-profile-art-caption">EXPEDIENTE N.º ' + escapeStatsHtml(hero.cardNumber || 'S/N') + '</span></div></div><div class="hero-profile-copy"><span class="stats-status">EXPEDIENTE INDIVIDUAL · ' + escapeStatsHtml(hero.rank || 'CLASIFICACIÓN PENDIENTE') + '</span><p class="profile-section-kicker">ARCHIVO PERSONAL · ' + escapeStatsHtml(hero.cardNumber ? 'N.º ' + hero.cardNumber : 'REGISTRO DE LA LEGIÓN') + '</p><h3 id="hero-profile-title" tabindex="-1">' + escapeStatsHtml(hero.name) + '</h3><p>' + escapeStatsHtml(hero.bio || 'Presentación personal pendiente de completar.') + '</p><div class="hero-profile-actions">' + profileActions + '</div></div></div>' + renderCommercialQuickView(hero);
+    page.innerHTML = '<div class="hero-profile-layout hero-profile-gateway"><div class="hero-profile-art-wrap"><div class="hero-profile-art-frame"><span class="hero-profile-art-stamp">LEGIÓN<br>MULTIVERSAL</span>' + (profileArt ? '<img class="hero-profile-art" src="' + escapeStatsHtml(profileArt) + '" alt="' + escapeStatsHtml(profileArtAlt) + '" loading="eager" onerror="this.closest(\'.hero-profile-art-frame\').classList.add(\'art-unavailable\');this.remove();">' : '<div class="hero-profile-art-fallback">ILUSTRACIÓN NO DISPONIBLE</div>') + '<span class="hero-profile-art-caption">EXPEDIENTE N.º ' + escapeStatsHtml(hero.cardNumber || 'S/N') + '</span></div></div><div class="hero-profile-copy"><span class="stats-status">EXPEDIENTE INDIVIDUAL · ' + escapeStatsHtml(hero.rank || 'CLASIFICACIÓN PENDIENTE') + '</span><p class="profile-section-kicker">ARCHIVO PERSONAL · ' + escapeStatsHtml(hero.cardNumber ? 'N.º ' + hero.cardNumber : 'REGISTRO DE LA LEGIÓN') + '</p><h3 id="hero-profile-title" tabindex="-1">' + escapeStatsHtml(getHeroDisplayName(hero)) + '</h3><p>' + escapeStatsHtml(hero.bio || 'Presentación personal pendiente de completar.') + '</p><div class="hero-profile-actions">' + profileActions + '</div></div></div>' + renderCommercialQuickView(hero);
     home.hidden = true;
     page.hidden = false;
-    history.replaceState(null, '', '#expediente-' + encodeURIComponent(hero.name.toLowerCase().replace(/[^a-z0-9]+/g,'-')));
+    setHeroProfileRoute(hero, options.historyMode || 'push');
     page.scrollIntoView({behavior:'smooth',block:'start'});
     requestAnimationFrame(() => document.getElementById('hero-profile-title')?.focus({preventScroll:true}));
 }
@@ -1071,19 +1322,64 @@ function navigateHeroProfile(direction) {
     const currentPosition = entries.findIndex(entry => entry.index === window.currentHeroProfileIndex);
     const nextEntry = entries[currentPosition + Number(direction)];
     if (!nextEntry) return;
-    openHeroProfile(nextEntry.index, window.lastHeroProfileTrigger || document.activeElement);
+    openHeroProfile(nextEntry.index, window.lastHeroProfileTrigger || document.activeElement, { historyMode: 'replace' });
+}
+function findHeroIndexBySlug(slug) {
+    const normalized = String(slug || '').toLocaleLowerCase('es');
+    return heroesData.findIndex(hero => getHeroRosterSlug(hero) === normalized
+        || (Array.isArray(hero.legacy_slugs) && hero.legacy_slugs.some(value => String(value).toLocaleLowerCase('es') === normalized))
+        || hero.name.toLocaleLowerCase('es').replace(/[^a-z0-9]+/g,'-') === normalized);
+}
+function openHeroFromRoute(slug, normalizeHistory = false) {
+    const index = findHeroIndexBySlug(slug);
+    if (index < 0) return false;
+    showRosterChapter();
+    const hero = heroesData[index];
+    if (normalizeHistory) {
+        history.replaceState({ lmRosterBase: true }, '', '#roster');
+        history.pushState({ lmRosterProfile: true }, '', '#roster/' + encodeURIComponent(getHeroRosterSlug(hero)));
+    }
+    openHeroProfile(index, null, { historyMode: 'none' });
+    return true;
 }
 function restoreHeroProfileFromHash() {
-    const slug = decodeURIComponent((location.hash || '').replace(/^#expediente-/, ''));
-    if (!slug || slug === location.hash.replace(/^#/, '')) return;
-    const index = heroesData.findIndex(hero => hero.name.toLowerCase().replace(/[^a-z0-9]+/g,'-') === slug);
-    if (index >= 0) {
-        const chapter = document.getElementById('chapter-2');
-        document.querySelectorAll('.chapter-panel').forEach(panel => panel.classList.remove('active'));
-        chapter?.classList.add('active');
-        openHeroProfile(index);
+    const hash = location.hash || '';
+    if (hash === '#roster') {
+        showRosterChapter();
+        return;
+    }
+    let slug = '';
+    let legacy = false;
+    if (hash.startsWith('#roster/')) {
+        slug = decodeURIComponent(hash.slice('#roster/'.length));
+    } else if (hash.startsWith('#expediente-')) {
+        slug = decodeURIComponent(hash.slice('#expediente-'.length));
+        legacy = true;
+    }
+    if (!slug) return;
+    if (!openHeroFromRoute(slug, legacy || !history.state?.lmRosterProfile)) {
+        history.replaceState({ lmRosterBase: true }, '', '#roster');
+        showRosterChapter();
     }
 }
+window.addEventListener('popstate', () => {
+    const hash = location.hash || '';
+    if (hash === '#roster') {
+        if (window.currentHeroProfileIndex !== null && window.currentHeroProfileIndex !== undefined) {
+            closeHeroProfile({ fromHistory: true });
+        }
+        showRosterChapter();
+        return;
+    }
+    if (hash.startsWith('#roster/')) {
+        const slug = decodeURIComponent(hash.slice('#roster/'.length));
+        openHeroFromRoute(slug, false);
+        return;
+    }
+    if (window.currentHeroProfileIndex !== null && window.currentHeroProfileIndex !== undefined) {
+        closeHeroProfile({ fromHistory: true });
+    }
+});
 document.addEventListener('keydown', function(event) {
     if (event.key !== 'Escape') return;
     const modal = document.getElementById('hero-modal');
@@ -1094,12 +1390,18 @@ document.addEventListener('keydown', function(event) {
         closeHeroProfile();
     }
 });
-function closeHeroProfile() {
+function closeHeroProfile(options = {}) {
+    if (!options.fromHistory && history.state?.lmRosterProfile) {
+        history.back();
+        return;
+    }
     const home = document.getElementById('roster-home');
     const page = document.getElementById('hero-profile-page');
     if (page) page.hidden = true;
     if (home) home.hidden = false;
-    history.replaceState(null, '', '#chapter-2');
+    if (!options.fromHistory && location.hash.startsWith('#roster/')) {
+        history.replaceState({ lmRosterBase: true }, '', '#roster');
+    }
     document.getElementById('chapter-2')?.scrollIntoView({behavior:'smooth',block:'start'});
     const trigger = window.lastHeroProfileTrigger;
     window.lastHeroProfileTrigger = null;
@@ -1152,7 +1454,7 @@ function renderLadyMoriartyComicPages(hero,sullyChannel){
  const metrics=profile.metrics||{};
  const period=profile.period_label||'Período no indicado';
  const games=Array.isArray(sullyChannel?.game_performance)?sullyChannel.game_performance:[];
- const record=creatorRecordsData?.channels?.ladymoriarty01||{};
+ const record=getCreatorRecord(hero);
  const clips=Array.isArray(record.highlights)?record.highlights:[];
  const page=(n,title,body,foot)=>'<article class="comic-book-sheet comic-interior-page"><header class="comic-interior-header"><span>LEGIÓN MULTIVERSAL</span><b>CAPÍTULO 0'+n+'</b><span>'+foot+'</span></header><div class="comic-page-title"><small>EXPEDIENTE LADYMORIARTY01 · PÁGINA 0'+(n+1)+'</small><h2>'+title+'</h2></div>'+(hero.voice?'<aside class="hero-voice voice-lady"><span>VOZ DE LA BRUJA</span><p>'+safe(hero.voice)+'</p></aside>':'')+body+'<footer class="comic-page-footer"><span>LADYMORIARTY01 · ARCHIVO INDIVIDUAL</span><b>0'+(n+1)+' / 06</b></footer></article>';
  const cover='<article class="comic-book-sheet comic-cover-sheet"><header class="comic-cover-masthead"><b>LEGIÓN MULTIVERSAL</b><span>EXPEDIENTE INDIVIDUAL · N.º '+safe(hero.cardNumber||'S/N')+'</span><span>MEDIA KIT</span></header><div class="comic-cover-art-frame"><span class="comic-cover-burst">EXPEDIENTE<br>CLASIFICADO</span><img class="comic-cover-art" src="'+safe(hero.img)+'" alt="Carta oficial de LADYMORIARTY01"></div><div class="comic-cover-copy"><div class="comic-cover-titleline"><span>PROTAGONISTA</span><h2>LADYMORIARTY01</h2><b>'+safe(hero.series||'01')+'</b></div><p class="comic-cover-subtitle">'+safe(hero.codename)+' · '+safe(hero.characterRole)+'</p><section class="comic-panel comic-cover-bio"><div class="comic-panel-heading"><span>01</span><b>IDENTIDAD SECRETA · PERFIL DE LA HEROÍNA</b></div><p>'+safe(hero.bio)+'</p><p class="comic-panel-caption">Canal individual LADYMORIARTY01: gameplay chill, IRL y contenido espontáneo. Lo importante es divertirnos y pasarla bien 💜</p></section><footer class="comic-cover-footer"><span>'+areas.map(safe).join(' · ')+'</span><b>¡ABRIR EXPEDIENTE!</b></footer></div></article>';
@@ -1182,7 +1484,7 @@ function renderLadyMoriartyComicPages(hero,sullyChannel){
 function renderHabitosComicPages(hero,sullyChannel){
  const safe=v=>escapeStatsHtml(v===null||v===undefined?'':String(v));
  const areas=Array.isArray(hero.areas)?hero.areas:[];
- const record=creatorRecordsData?.channels?.habitos_atomicos||{};
+ const record=getCreatorRecord(hero);
  const clips=Array.isArray(record.highlights)?record.highlights:[];
  const summary=sullyChannel?.summary||{};
  const games=Array.isArray(sullyChannel?.game_breakdown)?sullyChannel.game_breakdown:[];
@@ -1236,9 +1538,9 @@ function renderAkumaComicPages(hero,sullyChannel){
  const statsPage=page(2,'LA FUERZA DE CADA ENCUENTRO',statsBody,'LA AUDIENCIA');
  const gameRows=games.map(g=>'<tr><th>'+safe(g[0])+'</th><td>'+safe(g[1])+' de '+safe(streams.length)+'</td></tr>').join('');
  const gamesBody='<p class="comic-page-lead">La variedad es parte del repertorio del Infernal: desde el competitivo hasta las charlas y las experiencias de terror. En los últimos 30 días, Clive Barker’s Hellraiser: Revival fue la categoría con más tiempo en directo (11 h), mientras que Echoes in Darkness registró el mayor promedio (13 espectadores).</p><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>01</span><b>JUEGOS Y CATEGORÍAS REGISTRADOS</b></div><div class="stats-table-wrap"><table class="comic-games-table"><thead><tr><th>Juego / categoría</th><th>Transmisiones donde aparece</th></tr></thead><tbody>'+gameRows+'</tbody></table></div><p class="comic-panel-caption">Otros títulos destacados: Gears of War: E-Day (3 h 15 min). El detalle por juego se limita a los datos que el resumen de SullyGnome muestra; no se extrapolan cifras para categorías sin métricas.</p></section><div class="comic-page-split"><section class="comic-panel"><div class="comic-panel-heading"><span>02</span><b>COMPETENCIA Y ACCIÓN</b></div><p>Fortnite aporta el costado competitivo, mientras que Can ’Em All y Rogue Legacy suman experiencias de acción y desafío.</p></section><section class="comic-panel"><div class="comic-panel-heading"><span>03</span><b>CHARLAS Y JUEGO SOCIAL</b></div><p>Just Chatting y Among Us muestran espacio para la conversación, la interacción y las partidas compartidas.</p></section></div>';
- const gamesPage=page(3,'UN REPERTORIO Y SU BITÁCORA',gamesBody+streamBody,'MISIONES Y BITÁCORA');
  const streamRows=streams.map(st=>'<tr><th>'+safe(statsDate(st.date))+'<small>'+safe(st.start_time)+'–'+safe(st.end_time)+'</small></th><td>'+safe(statsDuration(st))+'</td><td>'+safe(st.hours_watched)+'</td><td>'+safe(st.average_viewers)+'</td><td>'+safe(st.peak_viewers)+'</td><td>'+safe(st.followers_gain)+'</td></tr>').join('');
  const streamBody='<p class="comic-page-lead">Diez transmisiones visibles dentro del resumen de 30 días, de un total de 22 emisiones registradas. Los horarios se mantienen tal como aparecen en la fuente; no se les asigna una zona horaria que no esté especificada.</p><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>01</span><b>BITÁCORA DE TRANSMISIONES</b></div><div class="stats-table-wrap"><table class="comic-games-table"><thead><tr><th>Fecha / horario</th><th>Duración</th><th>Horas vistas</th><th>Prom.</th><th>Pico</th><th>Seguidores</th></tr></thead><tbody>'+streamRows+'</tbody></table></div><p class="comic-panel-caption">Fuente: SullyGnome · diez filas visibles de 22 transmisiones · 24 oct–5 nov 2026. La suma de esta tabla parcial no reemplaza el total agregado de 34 seguidores del período.</p></section>';
+ const gamesPage=page(3,'UN REPERTORIO Y SU BITÁCORA',gamesBody+streamBody,'MISIONES Y BITÁCORA');
  const streamPage=page(4,'DIEZ MISIONES, UN MISMO PORTAL',streamBody,'BITÁCORA');
  const eventBody='<p class="comic-page-lead">Una misión compartida demuestra otra dimensión del canal: la capacidad de integrarse a una experiencia coordinada con otros creadores y construir una transmisión colectiva.</p><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>01</span><b>EXPEDIENTE DE CAMPAÑA · BARFENDER</b></div><div class="comic-metric-grid"><article class="comic-metric"><span>FECHA</span><strong>05 NOV</strong><small>2026</small></article><article class="comic-metric"><span>CREADORES EN MULTISTREAM</span><strong>04</strong><small>Transmisiones simultáneas coordinadas</small></article><article class="comic-metric"><span>PICO CONJUNTO INFORMADO</span><strong>98</strong><small>Audiencia combinada · no individual</small></article></div><p>AKUMA participó junto a Los Moriartys, Roderik y Lady Moriarty en una sesión conjunta de BarFender. La acción reunió cuatro canales en una misma experiencia y dejó un registro de colaboración grupal.</p><p class="comic-panel-caption">El pico de 98 corresponde al conjunto informado para la activación. No debe atribuirse como audiencia individual de AKUMA ni sumarse a sus métricas personales.</p></section><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>02</span><b>LO QUE DEMUESTRA ESTA MISIÓN</b></div><div class="comic-format-list"><span>Multistream coordinado</span><span>Juego compartido</span><span>Interacción entre comunidades</span><span>Activación grupal</span></div><p class="comic-panel-caption">El archivo audiovisual específico de AKUMA queda pendiente de incorporar cuando estén disponibles clips seleccionados por el creador.</p></section>';
  const eventPage=page(4,'CUANDO CUATRO PORTALES SE ABREN A LA VEZ',eventBody,'MISIONES COMPARTIDAS');
@@ -1253,7 +1555,7 @@ function renderArdipiiComicPages(hero,sullyChannel){
  const areas=Array.isArray(hero.areas)?hero.areas:[];
  const summary=sullyChannel?.summary||{};
  const streams=Array.isArray(sullyChannel?.streams)?sullyChannel.streams:[];
- const record=creatorRecordsData?.channels?.ardipii||{};
+ const record=getCreatorRecord(hero);
  const clips=Array.isArray(record.highlights)?record.highlights:[];
  const games=['GTA 6','Gears E-Day','Fortnite','Minecraft','Roblox','Dead by Daylight','Rocket League','Call of Duty','Clash of Clans','Pokémon Unite'];
  const page=(n,title,body,foot)=>'<article class="comic-book-sheet comic-interior-page"><header class="comic-interior-header"><span>LEGIÓN MULTIVERSAL</span><b>CAPÍTULO 0'+n+'</b><span>'+foot+'</span></header><div class="comic-page-title"><small>EXPEDIENTE ARDIPII · PÁGINA 0'+(n+1)+'</small><h2>'+title+'</h2></div>'+(hero.voice?'<aside class="hero-voice voice-ardipii"><span>VOZ DEL FANTASMA</span><p>'+safe(hero.voice)+'</p></aside>':'')+body+'<footer class="comic-page-footer"><span>ARDIPII · ARCHIVO INDIVIDUAL</span><b>0'+(n+1)+' / 06</b></footer></article>';
@@ -1280,7 +1582,7 @@ function renderDaveNexusComicPages(hero,sullyChannel){
  const safe=escapeStatsHtml;
  const summary=sullyChannel?.annual_summary_2026||{};
  const streams=Array.isArray(sullyChannel?.streams)?sullyChannel.streams:[];
- const record=creatorRecordsData?.channels?.daved0608||{};
+ const record=getCreatorRecord(hero);
  const clips=Array.isArray(record.highlights)?record.highlights:[];
  const games=[
   ['Backrooms: Escape Together',1],
@@ -1323,10 +1625,10 @@ function renderDaveNexusComicPages(hero,sullyChannel){
 
 function renderPatoOratorisComicPages(hero){
  const safe=escapeStatsHtml;
- const record=creatorRecordsData?.channels?.patoteexplica||{};
+ const record=getCreatorRecord(hero);
  const videos=Array.isArray(record.youtube_videos)?record.youtube_videos:[];
  const embeds=Array.isArray(record.featured_embeds)?record.featured_embeds:[];
- const youtubeProfile=platformStatsData?.creators?.patoteexplica?.platforms?.youtube||{};
+ const youtubeProfile=platformStatsData?.creators?.[platformStatsKey(hero)]?.platforms?.youtube||{};
  const youtubeMetrics=youtubeProfile.metrics||{};
  const youtubeVerified=youtubeProfile.status==='verified';
  const captureDate=platformStatsData?.updated_at?new Date(platformStatsData.updated_at).toLocaleString('es-AR',{dateStyle:'medium',timeStyle:'short'}):'fecha no disponible';
@@ -1358,9 +1660,10 @@ function renderRosterComicPages(hero,index,channelStats,sullyChannel){
  const identity=hero.codename||'IDENTIDAD EN ARCHIVO';
  const role=hero.characterRole||hero.rank||'INTEGRANTE DE LA LEGIÓN';
  const areas=Array.isArray(hero.areas)?hero.areas:[];
+ const displayName=getHeroDisplayName(hero);
  const voiceStyle=({MORIARTYS:'voice-moriartys',ROD3R1K:'voice-rod3r1k',LADYMORIARTY:'voice-lady',ARDIPII:'voice-ardipii',AKUMA:'voice-akuma','DAVE — NEXUS':'voice-nexus','PATO — ORATORIS':'voice-oratoris',HABITOS:'voice-habitos'})[hero.name]||'voice-default';
- const page=(chapter,title,body,foot)=>'<article class="comic-book-sheet comic-interior-page"><header class="comic-interior-header"><span>LEGIÓN MULTIVERSAL</span><b>CAPÍTULO '+chapter+'</b><span>'+foot+'</span></header><div class="comic-page-title"><small>EXPEDIENTE '+safe(hero.name)+' · PÁGINA 0'+chapter+'</small><h2>'+title+'</h2></div>'+(hero.voice?'<aside class="hero-voice '+voiceStyle+'"><span>VOZ DEL HÉROE</span><p>“'+safe(hero.voice)+'”</p></aside>':'')+body+'<footer class="comic-page-footer"><span>'+safe(hero.name)+' · ARCHIVO INDIVIDUAL</span><b>0'+chapter+' / 04</b></footer></article>';
- const cover='<article class="comic-book-sheet comic-cover-sheet"><header class="comic-cover-masthead"><b>LEGIÓN MULTIVERSAL</b><span>EXPEDIENTE INDIVIDUAL · N.º '+safe(hero.cardNumber||'S/N')+'</span><span>MEDIA KIT</span></header><div class="comic-cover-art-frame"><span class="comic-cover-burst">EXPEDIENTE<br>CLASIFICADO</span><img class="comic-cover-art" src="'+safe(hero.img)+'" alt="Carta oficial de '+safe(hero.name)+'"></div><div class="comic-cover-copy"><div class="comic-cover-titleline"><span>PROTAGONISTA</span><h2>'+safe(hero.name)+'</h2><b>'+safe(hero.series||'01')+'</b></div><p class="comic-cover-subtitle">'+safe(identity)+' · '+safe(role)+'</p><section class="comic-panel comic-cover-bio"><div class="comic-panel-heading"><span>01</span><b>IDENTIDAD SECRETA · PERFIL DEL HÉROE</b></div><p>'+safe(hero.bio||'Presentación individual pendiente de confirmación.')+'</p><p class="comic-panel-caption">Expediente individual. Los datos no disponibles se identifican como pendientes de verificación.</p></section>'+(hero.voice?'<aside class="hero-voice '+voiceStyle+'"><span>SU VOZ EN LA LEGIÓN</span><p>“'+safe(hero.voice)+'”</p></aside>':'')+'<footer class="comic-cover-footer"><span>'+areas.map(safe).join(' · ')+'</span><b>¡ABRIR EXPEDIENTE!</b></footer></div></article>';
+ const page=(chapter,title,body,foot)=>'<article class="comic-book-sheet comic-interior-page"><header class="comic-interior-header"><span>LEGIÓN MULTIVERSAL</span><b>CAPÍTULO '+chapter+'</b><span>'+foot+'</span></header><div class="comic-page-title"><small>EXPEDIENTE '+safe(displayName)+' · PÁGINA 0'+chapter+'</small><h2>'+title+'</h2></div>'+(hero.voice?'<aside class="hero-voice '+voiceStyle+'"><span>VOZ DEL HÉROE</span><p>“'+safe(hero.voice)+'”</p></aside>':'')+body+'<footer class="comic-page-footer"><span>'+safe(displayName)+' · ARCHIVO INDIVIDUAL</span><b>0'+chapter+' / 04</b></footer></article>';
+ const cover='<article class="comic-book-sheet comic-cover-sheet"><header class="comic-cover-masthead"><b>LEGIÓN MULTIVERSAL</b><span>EXPEDIENTE INDIVIDUAL · N.º '+safe(hero.cardNumber||'S/N')+'</span><span>MEDIA KIT</span></header><div class="comic-cover-art-frame"><span class="comic-cover-burst">EXPEDIENTE<br>CLASIFICADO</span><img class="comic-cover-art" src="'+safe(hero.img)+'" alt="Carta oficial de '+safe(displayName)+'"></div><div class="comic-cover-copy"><div class="comic-cover-titleline"><span>PROTAGONISTA</span><h2>'+safe(displayName)+'</h2><b>'+safe(hero.series||'01')+'</b></div><p class="comic-cover-subtitle">'+safe(identity)+' · '+safe(role)+'</p><section class="comic-panel comic-cover-bio"><div class="comic-panel-heading"><span>01</span><b>IDENTIDAD SECRETA · PERFIL DEL HÉROE</b></div><p>'+safe(hero.bio||'Presentación individual pendiente de confirmación.')+'</p><p class="comic-panel-caption">Expediente individual. Los datos no disponibles se identifican como pendientes de verificación.</p></section>'+(hero.voice?'<aside class="hero-voice '+voiceStyle+'"><span>SU VOZ EN LA LEGIÓN</span><p>“'+safe(hero.voice)+'”</p></aside>':'')+'<footer class="comic-cover-footer"><span>'+areas.map(safe).join(' · ')+'</span><b>¡ABRIR EXPEDIENTE!</b></footer></div></article>';
  const statsBody='<section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>01</span><b>ACTIVIDAD Y ALCANCE</b></div><p class="comic-panel-caption">Las métricas se muestran según la disponibilidad de fuentes para este canal. Las ventanas, fechas y fuentes se conservan en cada bloque; los datos ausentes no se estiman.</p>'+renderStatsDashboard(hero,channelStats,sullyChannel)+'</section>';
  const stats=page('01','EL PODER DE LA AUDIENCIA',statsBody,'LA COMUNIDAD');
  const powerBody='<div class="comic-page-split"><section class="comic-panel"><div class="comic-panel-heading"><span>01</span><b>CAPACIDADES REGISTRADAS</b></div><h3>'+safe(identity)+'</h3><p>'+safe(hero.powers||hero.powerSet||'Descripción de habilidades pendiente de confirmar con el integrante.')+'</p><p class="comic-panel-caption">Los elementos narrativos de la carta identifican al personaje dentro de la Legión; no representan certificaciones ni métricas de rendimiento.</p></section><section class="comic-panel"><div class="comic-panel-heading"><span>02</span><b>ESPECIALIDADES Y UNIVERSOS</b></div><div class="comic-format-list">'+(areas.length?areas.map(v=>'<span>'+safe(v)+'</span>').join(''):'<span>Especialidades pendientes de confirmar</span>')+'</div></section></div><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>03</span><b>BITÁCORA DE MISIONES</b></div>'+renderMissionArchive(hero)+'</section>';
@@ -1400,9 +1703,9 @@ function renderRod3r1kComicPages(hero){
   ['24 oct 2026','5 h 05 min',142,28,55,3]
  ];
  const clips=[
-  ['Spicy Piliable Poultry Corgi Derp','SpicyPiliablePoultryCorgiDerp-flAxKL1oWuPkWDWA','Momentos divertidos y espontáneos'],
-  ['Hilarious Ironic Soybean Chocolate Rain','HilariousIronicSoybeanChocolateRain','Una escena destacada del canal'],
-  ['Cooperative Popular Flamingo','CooperativePopularFlamingoM4xHeh-3bJjuJyiLiZOEEaC','Partidas y complicidad en directo']
+  ['NO VOY A DECIR NADA xd','SpicyPiliablePoultryCorgiDerp-flAxKL1oWuPkWDWA','Clip destacado de ROD3R1K'],
+  ['Ff se mueve la puerta','HilariousIronicSoybeanChocolateRain','Clip destacado de ROD3R1K'],
+  ['Nueva actualización de temporada · Rogue Company','CooperativePopularFlamingoM4xHeh-3bJjuJyiLiZOEEaC','Clip de Rogue Company']
  ];
  const esc=escapeStatsHtml;
  const cover='<article class="comic-book-sheet comic-cover-sheet"><header class="comic-cover-masthead"><b>LEGIÓN MULTIVERSAL</b><span>EXPEDIENTE INDIVIDUAL · N.º '+esc(hero.cardNumber||'008')+'</span><span>MEDIA KIT</span></header><div class="comic-cover-art-frame"><span class="comic-cover-burst">EL EXPEDIENTE<br>DEL FUERTE</span><img class="comic-cover-art" src="'+esc(hero.img)+'" alt="Carta oficial de ROD3R1K"></div><div class="comic-cover-copy"><div class="comic-cover-titleline"><span>PROTAGONISTA</span><h2>ROD3R1K</h2><b>008</b></div><p class="comic-cover-subtitle">EL FUERTE · INGENIERO SÓNICO</p><section class="comic-panel comic-cover-bio"><div class="comic-panel-heading"><span>01</span><b>IDENTIDAD SECRETA · BIOGRAFÍA DEL CREADOR</b></div><p>Bienvenidos al canal. Me llamo Roderik, mejor conocido como «ElKrakenaso». Encontrarás momentos divertidos y épicos. ¡Acompañame en las partidas y divertite!</p></section><aside class="hero-voice voice-rod3r1k"><span>SU LEMA EN LA LEGIÓN</span><p>«¡Que se escuche hasta el último rincón! Si vamos a jugar, que cada partida deje una historia.»</p></aside><footer class="comic-cover-footer"><span>GAMING · EVENTOS · COMUNIDAD</span><b>¡ABRIR EXPEDIENTE!</b></footer></div></article>';
@@ -1418,41 +1721,54 @@ function renderRod3r1kComicPages(hero){
  return [cover,identityPage,stats,gamesPage,clipsPage,commercialPage];
 }
 
-function renderMoriartysComicPages(hero){
- const games=[
-  {name:'Minecraft',air:'3 h',avg:34,followers:7,perHour:2},
-  {name:'Marvel Rivals',air:'2 h',avg:33,followers:3,perHour:2},
-  {name:'Supercar Collection Together',air:'2 h',avg:31,followers:null,perHour:null},
-  {name:'Fortnite',air:'4 h',avg:27,followers:5,perHour:1},
-  {name:'Enshrouded',air:'4 h',avg:26,followers:5,perHour:1}
+function renderMoriartysComicPages(hero) {
+ const safe = escapeStatsHtml;
+ const channel = findChannelStats(hero);
+ const windowStats = channel?.window || {};
+ const snapshots = Array.isArray(channel?.snapshots) ? channel.snapshots : [];
+ const games = Array.isArray(windowStats.game_breakdown) ? windowStats.game_breakdown : [];
+ const days = Array.isArray(windowStats.daily_activity) ? windowStats.daily_activity : [];
+ const record = getCreatorRecord(hero);
+ const clips = Array.isArray(record.highlights) ? record.highlights : [];
+ const collaborations = Array.isArray(record.collaborations) ? record.collaborations : [];
+ const formats = Array.isArray(hero.mediaProfile?.formats) ? hero.mediaProfile.formats : (hero.areas || []);
+ const updated = new Date(instituteStatsData?.updated_at || channel?.updated_at || '');
+ const ageMinutes = (Date.now() - updated.getTime()) / 60000;
+ const interval = Number(instituteStatsData?.sampling_interval_minutes) || 55;
+ const fresh = Number.isFinite(ageMinutes) && ageMinutes >= -5 && ageMinutes <= Math.max(interval * 2.5, 120);
+ const isLive = Boolean(fresh && channel?.live);
+ const updatedLabel = Number.isFinite(updated.getTime()) ? updated.toLocaleString('es-AR') : 'fecha no disponible';
+ const firstSample = snapshots[0]?.sampled_at ? new Date(snapshots[0].sampled_at) : null;
+ const lastSample = snapshots.length && snapshots[snapshots.length - 1]?.sampled_at ? new Date(snapshots[snapshots.length - 1].sampled_at) : null;
+ const period = firstSample && lastSample ? firstSample.toLocaleDateString('es-AR') + ' — ' + lastSample.toLocaleDateString('es-AR') : 'Período todavía sin muestras suficientes';
+ const displayName = hero.display_name || 'LOS MORIARTYS';
+ const missing = 'SIN DATOS VERIFICADOS';
+ const metricValue = value => value === null || value === undefined ? missing : statsNumber(value);
+ const metrics = [
+  ['MUESTRAS REGISTRADAS', metricValue(windowStats.samples_total), 'ventana configurada de hasta 30 días'],
+  ['MUESTRAS EN DIRECTO', metricValue(windowStats.live_samples), 'capturas realizadas durante una transmisión'],
+  ['DIRECTOS DETECTADOS', metricValue(windowStats.streams_observed), 'sesiones vistas por el colector'],
+  ['PROMEDIO OBSERVADO', metricValue(windowStats.average_viewers_sampled), 'promedio de espectadores en las muestras live'],
+  ['PICO CAPTURADO', metricValue(windowStats.peak_viewers_sampled), 'máximo registrado en una muestra'],
+  ['HORAS EN DIRECTO OBSERVADAS', windowStats.observed_live_hours === null || windowStats.observed_live_hours === undefined ? missing : statsNumber(windowStats.observed_live_hours) + ' h', 'tiempo entre muestras consecutivas del mismo directo']
  ];
- const clips=[
-  {title:'Música del Rincón del Nerd hecha por Demi',id:'AgileAssiduousConsoleCeilingCat-N-95sSpINtTMo3wj',note:'Creatividad y sello propio del canal'},
-  {title:'Ari modo tóxica',id:'DelightfulSneakyMonkeyBleedPurple-gDdjWpKPkU5irwbo',note:'Humor y complicidad en directo'},
-  {title:'El Demi casi muere del susto',id:'GiantUninterestedTardigradeBrokeBack-PLdKJCgbad8xhKp-',note:'Reacciones espontáneas y entretenimiento'}
- ];
- const geography=[
-  ['México','31%','31'],['Argentina','23%','23'],['Colombia','8%','8'],['Perú','7%','7'],['Chile','7%','7'],['Estados Unidos','5%','5'],['Uruguay','4%','4'],['Ecuador','3%','3'],['España','3%','3'],['Bolivia','2%','2'],['República Dominicana','1%','1'],['Costa Rica','1%','1'],['Venezuela','1%','1'],['Nicaragua','1%','1'],['Panamá','<1%','1']
- ];
- const maxAvg=Math.max(...games.map(g=>g.avg));
- const cover='<article class="comic-book-sheet comic-cover-sheet"><header class="comic-cover-masthead"><b>LEGIÓN MULTIVERSAL</b><span>EDICIÓN ESPECIAL · N.º 001</span><span>MEDIA KIT</span></header><div class="comic-cover-art-frame"><span class="comic-cover-burst">EL EXPEDIENTE<br>DEL HÉROE</span><img class="comic-cover-art" src="'+escapeStatsHtml(hero.img)+'" alt="Carta de superhéroe de MORIARTY"></div><div class="comic-cover-copy"><div class="comic-cover-titleline"><span>PROTAGONISTA</span><h2>MORIARTY</h2><b>001</b></div><p class="comic-cover-subtitle">CREADOR DE LEGIÓN MULTIVERSAL</p><section class="comic-panel comic-cover-bio"><div class="comic-panel-heading"><span>01</span><b>IDENTIDAD SECRETA · BIOGRAFÍA DEL CANAL</b></div><p>Bienvenido al videoclub 📼 Somos Demi y Ari - Los Moriartys. Pareja gamer y orgullosos nerds. Acá no hay pro-players, hay partidas que salen mal y terminan mejor. Simuladores de tienda, coop caótico, pelis y cómics. LUN/MIE 20HS | VIE 21HS ARG</p><p class="comic-panel-caption">Horario habitual declarado por los creadores · canal compartido.</p></section><section class="comic-epic-code"><span>CÓDIGO DE CREADOR · EPIC GAMES</span><strong>LosMoriartys</strong><p>Apoyá al canal usando nuestro código de creador en Epic Games.</p></section><footer class="comic-cover-footer"><span>UNA HISTORIA DE JUEGOS, HUMOR Y CULTURA GEEK</span><b>¡COMIENZA LA AVENTURA!</b></footer></div></article>';
- const metrics=[['Seguidores','1.145','TOTAL DEL CANAL'],['Media de espectadores','26','CCV · ÚLTIMOS 30 DÍAS'],['Pico de espectadores','101','MÁXIMO HISTÓRICO · 7 OCT 2026'],['Horas vistas','860 h','ÚLTIMOS 30 DÍAS'],['Nuevos seguidores','+49','ÚLTIMOS 30 DÍAS'],['Horas emitidas','32 h 15 min','ÚLTIMOS 30 DÍAS']];
- const metricsPage='<article class="comic-book-sheet comic-interior-page"><header class="comic-interior-header"><span>LEGIÓN MULTIVERSAL</span><b>CAPÍTULO 01</b><span>LA COMUNIDAD</span></header><div class="comic-page-title"><small>EXPEDIENTE MORIARTY · PÁGINA 02</small><h2>EL PODER DE LA AUDIENCIA</h2></div><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>01</span><b>SEÑALES DE ACTIVIDAD</b></div><p class="comic-panel-caption">Métricas del canal compartido Los Moriartys (Demi + Ari), no métricas personales de MORIARTY. Rendimiento de los últimos 30 días consultado el 5 nov 2026 en <a href="https://streamscharts.com/channels/losmoriartys" target="_blank" rel="noopener">Streams Charts ↗</a>.</p><div class="comic-metric-grid">'+metrics.map((v,i)=>'<article class="comic-metric comic-metric-v'+(i+1)+'"><span>'+v[0]+'</span><strong>'+v[1]+'</strong><small>'+v[2]+'</small></article>').join('')+'</div></section><div class="comic-page-split"><section class="comic-panel"><div class="comic-panel-heading"><span>02</span><b>ALCANCE INTERNACIONAL</b></div><h3>2.695 VISTAS</h3><p class="comic-panel-caption">Informe aportado: 2.695 vistas. Período no especificado; son vistas, no espectadores únicos. Se mantiene como referencia histórica hasta recibir una actualización verificable.</p><div class="comic-geo-grid">'+geography.map(v=>'<div class="comic-geo-row"><span>'+v[0]+'</span><div class="comic-geo-track"><i style="width:'+v[2]+'%"></i></div><b>'+v[1]+'</b></div>').join('')+'</div></section><aside class="comic-speech-bubble"><span>¿QUIÉN ESTÁ DEL OTRO LADO?</span><p>Por observación directa del creador, la comunidad parece concentrarse principalmente entre los <b>25 y 40 años</b>. Es una estimación cualitativa, no una medición demográfica oficial ni un dato de analítica de Twitch.</p></aside></div><footer class="comic-page-footer"><span>LA COMUNIDAD ES PARTE DE LA HISTORIA</span><b>02 / 04</b></footer></article>';
- let gameCharts='<section class="comic-panel"><div class="comic-panel-heading"><span>01</span><b>QUIÉN ACOMPAÑA CADA AVENTURA</b></div><h3>AUDIENCIA MEDIA POR JUEGO</h3>';
- games.slice().sort((a,b)=>b.avg-a.avg).forEach(g=>gameCharts+='<div class="comic-chart-row"><span>'+g.name+'</span><div class="comic-chart-track"><i style="width:'+Math.round(g.avg/maxAvg*100)+'%"></i></div><b>'+g.avg+'</b></div>');
- gameCharts+='</section><section class="comic-panel"><div class="comic-panel-heading"><span>02</span><b>NUEVOS ALIADOS</b></div><h3>SEGUIDORES POR HORA EMITIDA</h3>';
- games.filter(g=>g.perHour!==null).slice().sort((a,b)=>b.perHour-a.perHour||b.followers-a.followers).forEach(g=>gameCharts+='<div class="comic-chart-row"><span>'+g.name+'</span><div class="comic-chart-track growth"><i style="width:'+Math.round(g.perHour/2*100)+'%"></i></div><b>'+g.perHour+'/h</b></div>');
- gameCharts+='</section>';
- let table='<section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>03</span><b>REGISTRO DE MISIONES</b></div><div class="stats-table-wrap"><table class="comic-games-table"><thead><tr><th>Juego</th><th>Horas emitidas</th><th>Media espectadores</th><th>Seguidores ganados</th><th>Por hora</th></tr></thead><tbody>';
- games.forEach(g=>table+='<tr><td>'+g.name+'</td><td>'+g.air+'</td><td>'+g.avg+'</td><td>'+(g.followers===null?'—':'+'+g.followers)+'</td><td>'+(g.perHour===null?'—':g.perHour+'/h')+'</td></tr>');
- table+='</tbody></table></div></section>';
- const gamesPage='<article class="comic-book-sheet comic-interior-page"><header class="comic-interior-header"><span>LEGIÓN MULTIVERSAL</span><b>CAPÍTULO 02</b><span>LAS MISIONES</span></header><div class="comic-page-title"><small>EXPEDIENTE MORIARTY · PÁGINA 03</small><h2>UN HÉROE, MUCHOS UNIVERSOS</h2></div><p class="comic-page-lead">Cada juego abre una historia distinta: construcción, acción, aventura, simulación y caos cooperativo. La variedad permite conectar con comunidades y propuestas diferentes. Las cifras por juego son una selección aportada por el creador; su período exacto no está identificado y no debe confundirse con las métricas generales de los últimos 30 días.</p><div class="comic-game-layout">'+gameCharts+'</div>'+table+'<aside class="comic-impact-box"><b>LECTURA PARA MARCAS</b><p>Minecraft presenta la mayor media de espectadores de esta selección (34), seguido de Marvel Rivals (33) y Supercar Collection Together (31). Minecraft y Marvel Rivals registran el mayor ritmo de captación disponible: 2 seguidores por hora emitida.</p></aside><footer class="comic-page-footer"><span>CADA DIRECTO, UNA NUEVA MISIÓN</span><b>03 / 04</b></footer></article>';
- const clipsPanel=clips.map((c,i)=>'<article class="comic-panel comic-clip-card"><div class="comic-panel-heading"><span>0'+(i+1)+'</span><b>ESCENA DESTACADA</b></div><div class="comic-clip-preview">'+renderTwitchClipPreview(c.id,c.title)+'</div><h3>'+c.title+'</h3><p>'+c.note+'</p><a href="https://clips.twitch.tv/'+c.id+'" target="_blank" rel="noopener">VER CLIP COMPLETO ↗</a></article>').join('');
- const clipsPage='<article class="comic-book-sheet comic-interior-page"><header class="comic-interior-header"><span>LEGIÓN MULTIVERSAL</span><b>CAPÍTULO 03</b><span>EL ESPECTÁCULO</span></header><div class="comic-page-title"><small>EXPEDIENTE MORIARTY · PÁGINA 04</small><h2>ASÍ SE VIVE EL CANAL</h2></div><p class="comic-page-lead">La personalidad también cuenta una historia. Estos momentos muestran el humor, la complicidad y las reacciones que forman parte de la experiencia.</p><div class="comic-clips-grid">'+clipsPanel+'</div><div class="comic-page-split"><section class="comic-panel"><div class="comic-panel-heading"><span>04</span><b>FORMATOS DE COLABORACIÓN</b></div><div class="comic-format-list"><span>Presentación y prueba de videojuegos</span><span>Integraciones naturales en directo</span><span>Retos y dinámicas participativas</span><span>Contenido cooperativo</span><span>Clips y piezas destacadas</span><span>Activaciones con otros creadores</span></div></section><section class="comic-panel comic-partner-panel"><div class="comic-panel-heading"><span>05</span><b>ALIANZAS Y CONEXIONES</b></div><p><b>Partners:</b> Enshrouded · Cinderia.</p><p><b>Plataformas de acceso a juegos:</b> Lurkit y Keymailer.</p></section></div><section class="comic-final-cta"><span>¿PREPARADOS PARA EL PRÓXIMO NÚMERO?</span><h3>HAGAMOS QUE TU MARCA FORME PARTE DE LA HISTORIA.</h3><p>Presentaciones de producto, propuestas comerciales y colaboraciones:</p><a href="mailto:losmoriartys@gmail.com">losmoriartys@gmail.com</a></section><footer class="comic-page-footer"><span>CONTINUARÁ…</span><b>04 / 04</b></footer></article>';
+ const cover = '<article class="comic-book-sheet comic-cover-sheet"><header class="comic-cover-masthead"><b>LEGIÓN MULTIVERSAL</b><span>PROYECTO COMPARTIDO · N.º ' + safe(hero.cardNumber || '047') + '</span><span>MEDIA KIT</span></header><div class="comic-cover-art-frame"><span class="comic-cover-burst">EXPEDIENTE<br>DEL CANAL</span><img class="comic-cover-art" src="' + safe(hero.img || hero.portrait) + '" alt="Ilustración del expediente de ' + safe(displayName) + '"></div><div class="comic-cover-copy"><div class="comic-cover-titleline"><span>PROYECTO COMPARTIDO</span><h2>' + safe(displayName) + '</h2><b>' + safe(hero.cardNumber || '047') + '</b></div><p class="comic-cover-subtitle">DEMIAN + ARI · DOS IDENTIDADES, UN CANAL COMPARTIDO</p><section class="comic-panel comic-cover-bio"><div class="comic-panel-heading"><span>01</span><b>EL PROYECTO</b></div><p>' + safe(hero.bio) + '</p><p class="comic-panel-caption">' + safe(hero.mediaProfile?.project || 'Canal compartido de Demian y Ari.') + '</p></section><section class="comic-epic-code"><span>CÓDIGO DE CREADOR · EPIC GAMES</span><strong>LosMoriartys</strong><p>Código de creador del canal compartido.</p></section><footer class="comic-cover-footer"><span>GAMING · HUMOR · CULTURA POP · COOPERATIVO</span><b>UNA HISTORIA COMPARTIDA</b></footer></div></article>';
+ const metricCards = metrics.map((item,index) => '<article class="comic-metric comic-metric-v' + (index + 1) + '"><span>' + item[0] + '</span><strong>' + safe(item[1]) + '</strong><small>' + item[2] + '</small></article>').join('');
+ const liveSummary = isLive
+  ? '<span class="stats-status verified">● EN VIVO</span><strong>' + safe(channel.current_game || 'Categoría no informada') + '</strong><span>' + (channel.current_viewers === null || channel.current_viewers === undefined ? 'Espectadores no disponibles' : statsNumber(channel.current_viewers,0) + ' espectadores en la última captura') + '</span>'
+  : '<span class="stats-status pending">' + (channel?.live && !fresh ? 'CAPTURA DEMORADA' : 'SIN TRANSMISIÓN EN LA ÚLTIMA CAPTURA') + '</span><span>Última consulta del colector: ' + safe(updatedLabel) + '</span>';
+ const metricsPage = '<article class="comic-book-sheet comic-interior-page"><header class="comic-interior-header"><span>LEGIÓN MULTIVERSAL</span><b>CAPÍTULO 01</b><span>LA COMUNIDAD</span></header><div class="comic-page-title"><small>EXPEDIENTE ' + safe(displayName) + ' · PÁGINA 02</small><h2>EL PODER DE LA COMUNIDAD</h2></div><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>01</span><b>ACTIVIDAD DEL CANAL COMPARTIDO</b></div><p class="comic-panel-caption">Fuente: Twitch Helix mediante muestreo propio · actualización ' + safe(updatedLabel) + ' · muestras visibles: ' + safe(period) + '. El canal pertenece a Demian y Ari en conjunto; no son estadísticas personales individuales.</p><div class="comic-live-summary">' + liveSummary + '</div><div class="comic-metric-grid">' + metricCards + '</div><p class="comic-panel-caption">Promedio y pico calculados sobre espectadores capturados durante muestras en directo. No son CCV oficial, usuarios únicos ni analíticas privadas del Creator Dashboard. Seguidores, ingresos y datos demográficos: ' + missing.toLowerCase() + '.</p></section><div class="comic-page-split"><section class="comic-panel"><div class="comic-panel-heading"><span>02</span><b>COBERTURA Y METODOLOGÍA</b></div><h3>' + safe(windowStats.samples_total ?? missing) + ' MUESTRAS</h3><p>El colector busca una muestra aproximadamente cada ' + safe(interval) + ' minutos. La ventana conserva hasta 30 días de registros; no reconstruye directos que ocurrieron antes de iniciar el muestreo ni sesiones entre capturas.</p><p class="comic-panel-caption">Horas vistas estimadas: ' + (windowStats.estimated_hours_watched === null || windowStats.estimated_hours_watched === undefined ? missing : statsNumber(windowStats.estimated_hours_watched) + ' h') + '. Estimación calculada únicamente entre dos muestras consecutivas del mismo directo con intervalo admisible; no equivale a horas vistas oficiales.</p></section><section class="comic-panel"><div class="comic-panel-heading"><span>03</span><b>AUDIENCIA GEOGRÁFICA</b></div><h3>' + missing + '</h3><p>No se dispone de una fuente de analítica demográfica autorizada y verificable para publicar distribución por países o edades. No se infiere la audiencia a partir del país de los creadores.</p></section></div><footer class="comic-page-footer"><span>LA COMUNIDAD ES PARTE DE LA HISTORIA</span><b>02 / 04</b></footer></article>';
+ const gameBars = renderStatsBars('JUEGOS / CATEGORÍAS POR MUESTRAS EN DIRECTO', games, game => game.name, game => game.live_samples, 'Muestras observadas · no son horas jugadas', 10);
+ const gameRows = games.length ? games.map(game => '<tr><th>' + safe(game.name) + '</th><td>' + safe(game.live_samples) + '</td><td>' + safe(game.streams_observed) + '</td><td>' + safe(metricValue(game.average_viewers_sampled)) + '</td><td>' + safe(metricValue(game.peak_viewers_sampled)) + '</td></tr>').join('') : '<tr><td colspan="5">' + missing + '</td></tr>';
+ const dailyRows = days.slice(-7).map(day => '<tr><th>' + safe(day.date) + '</th><td>' + safe(day.streams_observed) + '</td><td>' + safe(day.live_samples) + '</td><td>' + safe(metricValue(day.peak_viewers_sampled)) + '</td></tr>').join('');
+ const gamesPage = '<article class="comic-book-sheet comic-interior-page"><header class="comic-interior-header"><span>LEGIÓN MULTIVERSAL</span><b>CAPÍTULO 02</b><span>LAS MISIONES</span></header><div class="comic-page-title"><small>EXPEDIENTE ' + safe(displayName) + ' · PÁGINA 03</small><h2>UN CANAL, MUCHOS UNIVERSOS</h2></div><p class="comic-page-lead">Las categorías se ordenan por cantidad de muestras observadas mientras el canal estaba en directo. Esto permite describir señales de actividad, pero no medir horas jugadas ni establecer por sí solo el rendimiento comercial de cada juego.</p>' + (gameBars || '<section class="comic-panel"><h3>' + missing + '</h3><p>Todavía no hay suficientes muestras en directo para elaborar un desglose.</p></section>') + '<section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>02</span><b>REGISTRO DE CATEGORÍAS</b></div><div class="stats-table-wrap"><table class="comic-games-table"><thead><tr><th>Juego / categoría</th><th>Muestras</th><th>Directos detectados</th><th>Promedio muestreado</th><th>Pico capturado</th></tr></thead><tbody>' + gameRows + '</tbody></table></div></section><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>03</span><b>ACTIVIDAD POR DÍA · ÚLTIMOS 7 DÍAS CON REGISTRO</b></div>' + (dailyRows ? '<div class="stats-table-wrap"><table class="comic-games-table"><thead><tr><th>Fecha UTC</th><th>Directos detectados</th><th>Muestras live</th><th>Pico capturado</th></tr></thead><tbody>' + dailyRows + '</tbody></table></div>' : '<p>' + missing + '</p>') + '</section><footer class="comic-page-footer"><span>CADA DIRECTO, UNA NUEVA MISIÓN</span><b>03 / 04</b></footer></article>';
+ const clipsPanel = clips.length ? clips.map((clip,index) => '<article class="comic-panel comic-clip-card"><div class="comic-panel-heading"><span>0' + (index + 1) + '</span><b>ESCENA DESTACADA</b></div><div class="comic-clip-preview">' + renderTwitchClipPreview(clip.clip_id,clip.title,clip.url) + '</div><h3>' + safe(clip.title || ('Momento destacado ' + (index + 1))) + '</h3><p>' + safe(clip.description || clip.source || 'Clip registrado en el expediente del canal compartido.') + '</p><a href="' + safe(clip.url || ('https://clips.twitch.tv/' + encodeURIComponent(clip.clip_id || ''))) + '" target="_blank" rel="noopener noreferrer">VER CLIP COMPLETO ↗</a></article>').join('') : '<p>' + missing + ': todavía no hay clips registrados para este expediente.</p>';
+ const partnerList = collaborations.length ? '<ul class="profile-detail-list">' + collaborations.map(item => '<li><b>' + safe(item.title) + '</b> ' + safe(item.description || '') + '</li>').join('') + '</ul>' : '<p>No hay colaboraciones confirmadas registradas en el archivo de este canal.</p>';
+ const clipsPage = '<article class="comic-book-sheet comic-interior-page"><header class="comic-interior-header"><span>LEGIÓN MULTIVERSAL</span><b>CAPÍTULO 03</b><span>EL ESPECTÁCULO</span></header><div class="comic-page-title"><small>EXPEDIENTE ' + safe(displayName) + ' · PÁGINA 04</small><h2>ASÍ SE VIVE EL CANAL</h2></div><p class="comic-page-lead">Los clips documentados son momentos seleccionados para mostrar la personalidad y el contenido del proyecto compartido. No se incorporan títulos, visualizaciones ni resultados que no estén registrados.</p><div class="comic-clips-grid">' + clipsPanel + '</div><div class="comic-page-split"><section class="comic-panel"><div class="comic-panel-heading"><span>04</span><b>FORMATOS PARA MARCAS</b></div><div class="comic-format-list">' + formats.map(item => '<span>' + safe(item) + '</span>').join('') + '</div><p class="comic-panel-caption">Formatos potenciales, sujetos a conversación y disponibilidad; no implican campañas contratadas.</p></section><section class="comic-panel comic-partner-panel"><div class="comic-panel-heading"><span>05</span><b>ALIANZAS Y CONEXIONES</b></div>' + partnerList + '</section></div><section class="comic-final-cta"><span>¿PREPARADOS PARA EL PRÓXIMO NÚMERO?</span><h3>HAGAMOS QUE TU MARCA FORME PARTE DE LA HISTORIA.</h3><p>Presentaciones de producto, propuestas comerciales y colaboraciones:</p><a href="mailto:losmoriartys@gmail.com">losmoriartys@gmail.com</a></section><footer class="comic-page-footer"><span>CONTINUARÁ…</span><b>04 / 04</b></footer></article>';
  return [cover,metricsPage,gamesPage,clipsPage];
 }
-document.getElementById('comic-page-prev')?.addEventListener('click',()=>switchModalTab((window.currentModalPage||0)-1));
-document.getElementById('comic-page-next')?.addEventListener('click',()=>switchModalTab((window.currentModalPage||0)+1));
+
+
 function openHeroModal(index) {
     const hero = heroesData[index];
     if (!hero) return;
@@ -1460,9 +1776,9 @@ function openHeroModal(index) {
     const modalContent=modal.querySelector('.modal-content');
     const isMoriartys=hero.name==='MORIARTYS';
     const isLady=hero.name==='LADYMORIARTY';
-    document.getElementById('modal-hero-title').innerText = 'MEDIA KIT · ' + hero.name;
-    document.getElementById('modal-tab-navigation').hidden=true;
-    document.getElementById('modal-comic-navigation').hidden=false;
+    document.getElementById('modal-hero-title').innerText = 'MEDIA KIT · ' + getHeroDisplayName(hero);
+    document.getElementById('modal-tab-navigation').hidden=false;
+    document.getElementById('modal-comic-navigation').hidden=true;
     modalContent.classList.add('comic-mode');
     let pages;
     if(isMoriartys){
@@ -1486,29 +1802,117 @@ function openHeroModal(index) {
         const sullyChannel=findSullyChannel(hero);
         pages=renderRosterComicPages(hero,index,channelStats,sullyChannel);
     }
-    document.getElementById('modal-profile-text').innerHTML=pages[0];
-    document.getElementById('modal-stats-text').innerHTML=pages[1];
-    document.getElementById('modal-log-text').innerHTML=pages[2];
-    document.getElementById('modal-extra-text').innerHTML=pages[3];
+    // A: identidad/contenido · B: audiencia, actividad y juegos · C: clips, hitos y colaboraciones.
+    let profilePages, audiencePages, storyPages;
+    if (pages.length >= 6) {
+        profilePages = pages.slice(0, 2);
+        audiencePages = pages.slice(2, 4);
+        storyPages = pages.slice(4);
+    } else if (pages.length === 5) {
+        profilePages = pages.slice(0, 2);
+        audiencePages = pages.slice(2, 3);
+        storyPages = pages.slice(3);
+    } else {
+        profilePages = pages.slice(0, 1);
+        audiencePages = pages.slice(1, Math.max(2, pages.length - 1));
+        storyPages = pages.slice(Math.max(2, pages.length - 1));
+    }
+    const automaticClipsSection=renderAutomaticTwitchClips(hero);
+    if(automaticClipsSection&&storyPages.length){
+        const lastStoryIndex=storyPages.length-1;
+        storyPages[lastStoryIndex]=storyPages[lastStoryIndex].replace(/<\/article>\s*$/,automaticClipsSection+'</article>');
+    }
+    document.getElementById('modal-profile-text').innerHTML=profilePages.join('');
+    document.getElementById('modal-stats-text').innerHTML=audiencePages.join('');
+    document.getElementById('modal-log-text').innerHTML=storyPages.join('');
+    document.getElementById('modal-extra-text').innerHTML='';
     const fifth=document.getElementById('modal-lady-page-5');
     const sixth=document.getElementById('modal-lady-page-6');
-    if(fifth)fifth.innerHTML=pages[4]||'';
-    if(sixth)sixth.innerHTML=pages[5]||'';
-    window.currentComicTotal=pages.length;
-    document.getElementById('modal-twitch-btn').href = hero.youtube || hero.twitch || "#";
-    document.getElementById('modal-twitch-btn').textContent = hero.youtube ? "VISITAR CANAL DE YOUTUBE" : "VISITAR CANAL";
+    if(fifth)fifth.innerHTML='';
+    if(sixth)sixth.innerHTML='';
+    window.currentComicTotal=3;
+    window.currentModalCreatorKey = hero.id || hero.slug || hero.name;
+    const platformLabels = { twitch:"TWITCH", youtube:"YOUTUBE", instagram:"INSTAGRAM", kick:"KICK" };
+    const accounts = (hero.accounts || []).filter(account => platformLabels[account.platform] && account.url);
+    const modalLink = document.getElementById('modal-twitch-btn');
+    const modalLinks = document.getElementById('modal-platform-links');
+    if (accounts.length > 1 && modalLinks) {
+        modalLink.hidden = true;
+        modalLinks.hidden = false;
+        modalLinks.innerHTML = accounts.map(account =>
+            '<a class="twitch-link-btn" href="' + escapeStatsHtml(account.url) + '" target="_blank" rel="noopener noreferrer">VISITAR ' + platformLabels[account.platform] + ' ↗</a>'
+        ).join('');
+    } else {
+        if (modalLinks) { modalLinks.hidden = true; modalLinks.innerHTML = ''; }
+        const primary = accounts[0];
+        const destination = primary?.url || hero.youtube || hero.twitch || "#";
+        const platform = primary?.platform || (hero.youtube ? "youtube" : hero.twitch ? "twitch" : "");
+        modalLink.href = destination;
+        modalLink.textContent = platform === "youtube" ? "VISITAR CANAL DE YOUTUBE" : platform === "twitch" ? "VISITAR CANAL DE TWITCH" : platform ? "VISITAR " + platform.toUpperCase() : "PLATAFORMA NO DISPONIBLE";
+        modalLink.hidden = !platform;
+    }
     window.lastModalTrigger = document.activeElement;
     window.previousBodyOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
+    setModalBackgroundInert(true);
     modal.classList.add('active');
-    switchModalTab(0, true);
-    updateComicPageControls(true);
+    let rememberedPage = 0;
+    try {
+        const saved = Number(localStorage.getItem('legion-roster-modal-page:' + window.currentModalCreatorKey));
+        if (Number.isInteger(saved) && saved >= 0 && saved < pages.length) rememberedPage = saved;
+    } catch (error) { /* almacenamiento bloqueado: iniciar en la primera página */ }
+    switchModalTab(rememberedPage, true);
+    updateComicPageControls(false);
     modal.querySelector('.close-modal-btn')?.focus();
 }
+function setModalBackgroundInert(active){
+    const targets=[document.querySelector('main'),document.querySelector('.site-technical-footer')].filter(Boolean);
+    if(active){
+        if(window.previousModalBackgroundState)return;
+        window.previousModalBackgroundState=targets.map(element=>({
+            element,
+            inert:Boolean(element.inert),
+            ariaHidden:element.getAttribute('aria-hidden')
+        }));
+        targets.forEach(element=>{
+            element.inert=true;
+            element.setAttribute('aria-hidden','true');
+        });
+        return;
+    }
+    (window.previousModalBackgroundState||[]).forEach(state=>{
+        state.element.inert=state.inert;
+        if(state.ariaHidden===null)state.element.removeAttribute('aria-hidden');
+        else state.element.setAttribute('aria-hidden',state.ariaHidden);
+    });
+    window.previousModalBackgroundState=null;
+}
+
+function printHeroDossier(){
+    const modal=document.getElementById('hero-modal');
+    if(!modal||!modal.classList.contains('active'))return;
+    const panes=Array.from(modal.querySelectorAll('.modal-tab-pane[role="tabpanel"]'));
+    const previousHidden=panes.map(pane=>pane.hidden);
+    panes.forEach(pane=>{pane.hidden=false;});
+    let cleanupTimer=null;
+    const cleanup=()=>{
+        panes.forEach((pane,index)=>{pane.hidden=previousHidden[index];});
+        document.body.classList.remove('printing-roster-dossier');
+        window.removeEventListener('afterprint',cleanup);
+        if(cleanupTimer!==null)window.clearTimeout(cleanupTimer);
+    };
+    document.body.classList.add('printing-roster-dossier');
+    window.addEventListener('afterprint',cleanup);
+    window.print();
+    // Respaldo para navegadores móviles que omiten afterprint.
+    cleanupTimer=window.setTimeout(cleanup,30000);
+}
+
         function closeModal() {
             const modal = document.getElementById('hero-modal');
             if (!modal || !modal.classList.contains('active')) return;
             modal.classList.remove('active');
+            setModalBackgroundInert(false);
             document.body.style.overflow = window.previousBodyOverflow || '';
             const trigger = window.lastModalTrigger;
             window.lastModalTrigger = null;
@@ -1541,6 +1945,16 @@ function openHeroModal(index) {
             }
         });
 
+        document.getElementById('modal-tab-navigation')?.addEventListener('keydown', event => {
+            const tabs = Array.from(document.querySelectorAll('#modal-tab-navigation [role="tab"]'));
+            const active = tabs.indexOf(document.activeElement);
+            if (active < 0 || !['ArrowLeft','ArrowRight','Home','End'].includes(event.key)) return;
+            event.preventDefault();
+            const next = event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1
+                : (active + (event.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
+            tabs[next]?.focus();
+            tabs[next]?.click();
+        });
         function switchModalTab(tabIndex, silent = false) {
             const isComic=document.querySelector('.modal-content')?.classList.contains('comic-mode');
             const maxPage=isComic?(window.currentComicTotal||4):3;
@@ -1549,16 +1963,23 @@ function openHeroModal(index) {
             for(let t=0;t<6;t++){
                 const pane=document.getElementById(`modal-pane-${t}`);
                 const btn=document.querySelectorAll('.modal-tab-btn')[t];
-                if(pane)pane.classList.toggle('active',t===tabIndex);
-                if(btn)btn.classList.toggle('active',t===tabIndex);
+                if(pane){pane.classList.toggle('active',t===tabIndex);pane.hidden=t!==tabIndex;}
+                if(btn){
+                    btn.classList.toggle('active',t===tabIndex);
+                    btn.setAttribute('aria-selected',String(t===tabIndex));
+                    btn.tabIndex=t===tabIndex?0:-1;
+                }
             }
             window.currentModalPage=tabIndex;
+            if(!silent&&window.currentModalCreatorKey){
+                try { localStorage.setItem('legion-roster-modal-page:' + window.currentModalCreatorKey, String(tabIndex)); } catch (error) { /* sin persistencia */ }
+            }
             if(!silent&&previousIndex!==tabIndex)playPageTurnCue();
             if(isComic&&!silent&&previousIndex!==tabIndex){
                 const activePane=document.getElementById(`modal-pane-${tabIndex}`);
                 if(activePane){activePane.classList.remove('comic-page-arrival');void activePane.offsetWidth;activePane.classList.add('comic-page-arrival');}
             }
-            if(isComic)updateComicPageControls(true);
+            if(isComic)updateComicPageControls(false);
         }
 
         /* Identidad sonora: lounge jazz heroico, original y sintetizado en Web Audio.
@@ -1710,6 +2131,17 @@ function openHeroModal(index) {
         function switchChapter(chapterNum) {
             const panel=document.getElementById(`chapter-${chapterNum}`);
             if(!panel)return;
+            if (Number(chapterNum) !== 2 && window.currentHeroProfileIndex !== null && window.currentHeroProfileIndex !== undefined) {
+                const profilePage = document.getElementById('hero-profile-page');
+                const rosterHome = document.getElementById('roster-home');
+                if (profilePage) profilePage.hidden = true;
+                if (rosterHome) rosterHome.hidden = false;
+                window.lastHeroProfileTrigger = null;
+                window.currentHeroProfileIndex = null;
+            }
+            if (Number(chapterNum) !== 2 && location.hash.startsWith('#roster/')) {
+                history.replaceState(null, '', '#chapter-' + chapterNum);
+            }
             const current=document.querySelector('.chapter-panel.active');
             if(current===panel)return;
             const transition=document.getElementById('chapter-transition');
@@ -1741,7 +2173,6 @@ function openHeroModal(index) {
         }
 
         const rosterContainer = document.getElementById('roster-container');
-        if (rosterContainer) rosterContainer.innerHTML = '<p class="roster-loading">CARGANDO EXPEDIENTES DE LA LEGIÓN…</p>';
 
         window.onload = async function() {
         const initialChapter = document.querySelector('.chapter-panel.active');
@@ -1753,7 +2184,7 @@ function openHeroModal(index) {
             restoreHeroProfileFromHash();
         } catch (error) {
             console.error('No se pudo inicializar el roster:', error);
-            if (rosterContainer) rosterContainer.innerHTML = '<p class="roster-load-error">No se pudieron cargar los expedientes. Volvé a intentarlo más tarde.</p>';
+            renderRosterLoadError(error);
         }
         await Promise.all([
             loadSullyGnomeData(),
@@ -1762,6 +2193,7 @@ function openHeroModal(index) {
             loadPartnerMetrics(),
             loadCreatorRecords(),
             loadPlatformStatsData(),
+            loadTwitchClipsData(),
             loadLegionNews(),
             loadCommunityPlaybook()
         ]);

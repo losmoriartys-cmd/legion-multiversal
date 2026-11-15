@@ -1,20 +1,6 @@
 {
-  "schema_version": 1,
-  "description": "Registro extensible de cuentas por creador y plataforma. Solo incorporar handles confirmados por el propio creador.",
-  "creators": {
-    "patoteexplica": {
-      "display_name": "PATO — ORATORIS",
-      "accounts": [
-        {
-          "platform": "youtube",
-          "handle": "@patoteexplica",
-          "url": "https://www.youtube.com/@patoteexplica",
-          "verified_by": "Enlace ya registrado en el expediente del proyecto."
-        }
-      ]
-    }
-  },
-  "onboarding_template": {
-    "note": "Para sumar un candidato, agregar una clave estable en creators y cuentas con platform=kick o youtube. No necesita tener Twitch."
-  }
+  "schema_version": 0,
+  "status": "deprecated",
+  "replaced_by": "roster-data.json",
+  "note": "Este archivo ya no es fuente de cuentas. Las identidades y cuentas por plataforma se mantienen en roster-data.json. El colector update_platform_stats.py lee directamente ese registro."
 }

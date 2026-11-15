@@ -1,0 +1,176 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://legion-multiversal.pages.dev/schemas/roster-data.schema.json",
+  "title": "Legión Multiversal — Roster data",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "identity_model_version",
+    "heroes"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 2
+    },
+    "identity_model_version": {
+      "const": 1
+    },
+    "heroes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "slug",
+          "name",
+          "display_name",
+          "identity_scope",
+          "role",
+          "creator_type",
+          "accounts"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+          },
+          "slug": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "display_name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "identity_scope": {
+            "enum": [
+              "shared_project",
+              "individual_creator"
+            ]
+          },
+          "represented_people": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "accounts": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "platform",
+                "account_type",
+                "handle",
+                "url",
+                "ownership",
+                "status",
+                "collection",
+                "public_metrics",
+                "restricted_metrics"
+              ],
+              "properties": {
+                "platform": {
+                  "enum": [
+                    "twitch",
+                    "youtube",
+                    "instagram",
+                    "kick"
+                  ]
+                },
+                "account_type": {
+                  "enum": [
+                    "creator_channel",
+                    "social_profile"
+                  ]
+                },
+                "handle": {
+                  "type": "string"
+                },
+                "login": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "url": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "ownership": {
+                  "enum": [
+                    "shared",
+                    "individual"
+                  ]
+                },
+                "status": {
+                  "enum": [
+                    "registered",
+                    "confirmed",
+                    "needs_review"
+                  ]
+                },
+                "collection": {
+                  "type": "object",
+                  "required": [
+                    "mode",
+                    "source",
+                    "output_file"
+                  ],
+                  "properties": {
+                    "mode": {
+                      "enum": [
+                        "public_app_token",
+                        "public_api_key",
+                        "public_client_credentials",
+                        "manual_link_only"
+                      ]
+                    },
+                    "collector": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "source": {
+                      "type": "string"
+                    },
+                    "output_file": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  }
+                },
+                "public_metrics": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "restricted_metrics": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "notes": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "links": {
+            "type": "array"
+          }
+        }
+      }
+    }
+  }
+}

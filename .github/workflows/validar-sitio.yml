@@ -4,22 +4,31 @@ on:
   push:
     paths:
       - 'app.js'
+      - 'playwright.config.js'
       - 'index.html'
+      - 'bitacora-preview.html'
       - 'styles.css'
       - '*.css'
       - '*.json'
       - 'assets/**'
       - 'scripts/**'
+      - 'schemas/**'
+      - 'tests/**'
+      - 'update_clips.py'
       - '.github/workflows/validar-sitio.yml'
   pull_request:
     paths:
       - 'app.js'
       - 'index.html'
+      - 'bitacora-preview.html'
       - 'styles.css'
       - '*.css'
       - '*.json'
       - 'assets/**'
       - 'scripts/**'
+      - 'schemas/**'
+      - 'tests/**'
+      - 'update_clips.py'
       - '.github/workflows/validar-sitio.yml'
   workflow_dispatch:
 
@@ -28,7 +37,7 @@ permissions:
 
 jobs:
   validar:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Descargar repositorio
         uses: actions/checkout@v4
@@ -40,9 +49,39 @@ jobs:
         run: node --check app.js
       - name: Validar archivos JSON
         run: |
-          for file in ./*.json; do
+          for file in ./*.json schemas/*.json; do
+            [ -f "$file" ] || continue
             echo "Validando $file"
             python -m json.tool "$file" > /dev/null
           done
+      - name: Validar modelo del roster y cobertura Twitch
+        run: python scripts/validate_roster_data.py --check-activity --check-platforms
+      - name: Comprobar índice accesible sin JavaScript
+        run: python scripts/render_roster_noscript.py --check
+      - name: Compilar colectores Python
+        run: python -m py_compile update_stats.py update_platform_stats.py update_clips.py scripts/validate_roster_data.py scripts/validate_clips_data.py scripts/render_roster_noscript.py scripts/validate_metric_history.py scripts/build_creator_metrics.py scripts/validate_creator_metrics.py
+      - name: Probar lectura de cuentas por los colectores
+        run: |
+          python -c "import update_stats; channels=update_stats.load_active_channels(); assert len(channels)==7 and 'losmoriartys' in channels; print('OK: colector Twitch lee {} canales'.format(len(channels)))"
+          python -c "import update_platform_stats; creators=update_platform_stats.load_creator_accounts(); assert 'pato-oratoris' in creators and 'youtube' in [a['platform'] for a in creators['pato-oratoris']['accounts']]; print('OK: colector multiplataforma lee {} perfiles'.format(len(creators)))"
+      - name: Validar registro de clips públicos
+        run: python scripts/validate_clips_data.py
+      - name: Validar historial y semántica de métricas Twitch
+        run: python scripts/validate_metric_history.py
+      - name: Generar registro normalizado de métricas por creador
+        run: python scripts/build_creator_metrics.py
+      - name: Validar modelo normalizado multiplataforma
+        run: python scripts/validate_creator_metrics.py
+      - name: Ejecutar pruebas unitarias de colectores
+        run: python -m unittest discover -s tests -v
+      - name: Instalar dependencias de pruebas de navegador
+        run: npm install
+      - name: Instalar Chromium para Playwright
+        run: npx playwright install --with-deps chromium
+      - name: Probar expedientes, Bitácora, modales y hashes históricos
+        run: npm run test:e2e
+      - name: Comprobar el registro de canales para el colector de clips
+        run: |
+          python -c "import update_clips; accounts=update_clips.load_roster_accounts(); assert len(accounts)==7 and any(a['creator_id']=='moriartys' for a in accounts); print('OK: colector de clips lee {} canales Twitch'.format(len(accounts)))"
       - name: Validar rutas, imágenes y enlaces declarados
         run: python scripts/validate_site.py
