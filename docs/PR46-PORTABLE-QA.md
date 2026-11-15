@@ -18,6 +18,7 @@ No integrar la rama histórica `auditoria-ux` completa. Se recuperan solo herram
 - `scripts/check_anchors.py`: verificación de anclas HTML locales.
 - `scripts/summarize_lighthouse.py`: medianas únicamente desde reportes JSON reales.
 - `scripts/lh_failures.py`: diagnóstico de auditorías Lighthouse, LCP e imágenes pesadas.
+- `scripts/validate_github_pages_seo.py`: valida canonical, robots, sitemap, URLs públicas y exclusión de previews.
 - `scripts/lighthouse_runs.sh`: GitHub Pages es el destino por defecto; el preview es opcional y explícito.
 
 ## SEO y publicación
@@ -37,6 +38,13 @@ No se recuperan `functions/api/*`, `_headers`, workflows que requieran permisos 
 El PR #51 ejecuta:
 1. Validación de código y datos del sitio vigente.
 2. Pruebas unitarias y E2E existentes.
-3. Workflow QA portable: compilación, shellcheck sintáctico, validador de sitio, anclas, accesibilidad y dimensiones en modo no destructivo.
+3. Workflow QA portable: compilación, shellcheck sintáctico, validador de sitio, anclas, accesibilidad, SEO de GitHub Pages y dimensiones en modo no destructivo.
 
 No se aplican automáticamente dimensiones ni optimizaciones de imágenes. Cualquier modificación visual posterior requiere diff y validación independiente.
+
+### Resultado medido de imágenes
+
+- Total inspeccionado en las tres páginas: 46 etiquetas `img`.
+- 23 imágenes locales recibieron dimensiones intrínsecas medidas.
+- 23 imágenes remotas o dinámicas quedaron sin modificar deliberadamente.
+- 0 discrepancias entre dimensiones declaradas y archivos locales medidos.
