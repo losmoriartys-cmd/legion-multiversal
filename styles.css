@@ -5040,3 +5040,119 @@ main .chapter-panel :where(.chapter-cta, .executive-button, .comic-submit-btn,
     text-decoration: underline !important;
   }
 }
+
+
+/* BITÁCORAS · acabado editorial común: lectura clara, ritmo y tablas consistentes */
+.modal-content.comic-mode .roster-dossier-page{
+    box-sizing:border-box;
+    color:#172b43;
+    line-height:1.55;
+    letter-spacing:.005em;
+}
+.modal-content.comic-mode .roster-dossier-page :where(p,li,dd){
+    line-height:1.6;
+}
+.modal-content.comic-mode .roster-dossier-page .comic-page-title{
+    color:#132943;
+    line-height:1.08;
+    letter-spacing:.025em;
+    text-wrap:balance;
+}
+.modal-content.comic-mode .roster-dossier-page .comic-page-lead{
+    margin:12px 0 18px;
+    padding:13px 16px;
+    border-left:4px solid #1687a8;
+    border-radius:0 8px 8px 0;
+    background:#e8f0f2;
+    color:#24384f;
+    font-size:clamp(.9rem,1.4vw,1rem);
+    line-height:1.65;
+}
+.modal-content.comic-mode .roster-dossier-page .comic-panel-caption{
+    color:#40536a;
+    line-height:1.55;
+}
+.modal-content.comic-mode .roster-dossier-page .stats-table-wrap{
+    width:100%;
+    max-width:100%;
+    margin:12px 0 18px;
+    overflow-x:auto;
+    overscroll-behavior-inline:contain;
+    border:1px solid #b9c5cc;
+    border-radius:9px;
+    background:#f7efdd;
+    box-shadow:0 5px 14px rgba(16,35,55,.09);
+    scrollbar-width:thin;
+}
+.modal-content.comic-mode .roster-dossier-page .comic-games-table{
+    width:100%;
+    min-width:540px;
+    border:0;
+    border-collapse:separate;
+    border-spacing:0;
+    background:#f7efdd;
+    color:#172b43;
+    font-size:.82rem;
+    line-height:1.45;
+}
+.modal-content.comic-mode .roster-dossier-page .comic-games-table thead th{
+    padding:12px 11px;
+    background:#14243a;
+    color:#f4f8fb;
+    font-size:.72rem;
+    font-weight:800;
+    letter-spacing:.055em;
+    line-height:1.35;
+    text-align:left;
+    text-transform:uppercase;
+    vertical-align:middle;
+}
+.modal-content.comic-mode .roster-dossier-page .comic-games-table tbody td,
+.modal-content.comic-mode .roster-dossier-page .comic-games-table tbody th{
+    padding:11px;
+    border-top:1px solid #d4c9b5;
+    color:#172b43;
+    background:#fffaf0;
+    text-align:left;
+    vertical-align:top;
+}
+.modal-content.comic-mode .roster-dossier-page .comic-games-table tbody tr:nth-child(even) td,
+.modal-content.comic-mode .roster-dossier-page .comic-games-table tbody tr:nth-child(even) th{
+    background:#f0e8d8;
+}
+.modal-content.comic-mode .roster-dossier-page .comic-games-table tbody tr:hover td,
+.modal-content.comic-mode .roster-dossier-page .comic-games-table tbody tr:hover th{
+    background:#e3f0f2;
+}
+.modal-content.comic-mode .roster-dossier-page .comic-games-table small{
+    color:#46566b;
+    line-height:1.45;
+}
+.modal-content.comic-mode .roster-dossier-page :where(a,button):focus-visible{
+    outline:3px solid #087f9d;
+    outline-offset:3px;
+}
+@media(max-width:700px){
+    .modal-content.comic-mode .roster-dossier-page .comic-page-lead{
+        padding:11px 13px;
+        margin:10px 0 15px;
+    }
+    .modal-content.comic-mode .roster-dossier-page .stats-table-wrap{
+        margin:10px 0 16px;
+    }
+    .modal-content.comic-mode .roster-dossier-page .comic-games-table{
+        min-width:500px;
+        font-size:.78rem;
+    }
+    .modal-content.comic-mode .roster-dossier-page .comic-games-table thead th,
+    .modal-content.comic-mode .roster-dossier-page .comic-games-table tbody td,
+    .modal-content.comic-mode .roster-dossier-page .comic-games-table tbody th{
+        padding:10px 9px;
+    }
+}
+@media(prefers-reduced-motion:no-preference){
+    .modal-content.comic-mode .roster-dossier-page .comic-games-table tbody tr{
+        transition:background-color .16s ease;
+    }
+}
+
