@@ -14,28 +14,35 @@ class AuditParser(HTMLParser):
         super().__init__()
         self.path = path
         self.ids, self.labels, self.controls = [], set(), []
+        self.label_depth = 0
         self.images = self.images_without_dimensions = 0
     def handle_starttag(self, tag, attrs):
         a = dict(attrs)
         if a.get("id"): self.ids.append(a["id"])
-        if tag == "label" and a.get("for"): self.labels.add(a["for"])
+        if tag == "label":
+            if a.get("for"): self.labels.add(a["for"])
+            self.label_depth += 1
         if tag == "img":
             self.images += 1
             if "alt" not in a: ERRORS.append(f"{self.path.name}: img sin atributo alt ({a.get('src','sin src')})")
             if not (a.get("width") and a.get("height")): self.images_without_dimensions += 1
         if tag == "iframe" and not a.get("title", "").strip():
             ERRORS.append(f"{self.path.name}: iframe sin title")
-        if tag in ("input", "select", "textarea") and a.get("type") != "hidden":
+        if tag in ("input", "select", "textarea") and a.get("type") != "hidden" and "hidden" not in a and a.get("aria-hidden") != "true":
             # Honeypot de anti-spam: oculto intencionalmente del árbol accesible
             # y del orden de tabulación. No confundir con controles de usuario.
             if a.get("name") in {"website", "contact_hp"} and a.get("tabindex") == "-1":
                 return
-            if not (a.get("aria-label") or a.get("aria-labelledby")):
+            if not (a.get("aria-label") or a.get("aria-labelledby")) and self.label_depth == 0:
                 self.controls.append((a.get("id"), tag))
         if tag == "a" and a.get("target") == "_blank":
             rel = set((a.get("rel") or "").lower().split())
             if not {"noopener", "noreferrer"}.issubset(rel):
                 ERRORS.append(f"{self.path.name}: target=_blank sin noopener noreferrer ({a.get('href','')})")
+
+    def handle_endtag(self, tag):
+        if tag == "label" and self.label_depth:
+            self.label_depth -= 1
 
 pages = [ROOT / name for name in PAGES if (ROOT / name).is_file()]
 total_images = no_dimensions = 0
