@@ -1,0 +1,43 @@
+name: Auditoría QA portable para GitHub Pages
+
+on:
+  pull_request:
+    paths:
+      - 'scripts/add_image_dimensions.py'
+      - 'scripts/audit_accessibility.py'
+      - 'scripts/check_anchors.py'
+      - 'scripts/summarize_lighthouse.py'
+      - 'scripts/lh_failures.py'
+      - 'scripts/lighthouse_runs.sh'
+      - '.github/workflows/auditoria-qa-portable.yml'
+      - '*.html'
+      - '*.css'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  qa-portable:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Instalar Pillow
+        run: python -m pip install --disable-pip-version-check Pillow
+      - name: Compilar herramientas
+        run: |
+          python -m py_compile scripts/add_image_dimensions.py scripts/audit_accessibility.py scripts/check_anchors.py scripts/summarize_lighthouse.py scripts/lh_failures.py
+          bash -n scripts/lighthouse_runs.sh
+      - name: Validar rutas, imágenes y enlaces del sitio
+        run: python scripts/validate_site.py
+      - name: Verificar anclas internas
+        run: python scripts/check_anchors.py
+      - name: Auditar accesibilidad estática
+        run: python scripts/audit_accessibility.py
+      - name: Verificar dimensiones de imágenes sin modificar HTML
+        run: python scripts/add_image_dimensions.py --check
