@@ -33,10 +33,8 @@ def find_legacy_creator_record_lookups(source: str) -> list[str]:
     for legacy_id in LEGACY_CREATOR_IDS:
         key = re.escape(legacy_id)
         pattern = re.compile(
-            r"creatorRecordsData\s*(?:\?\.\s*)?"
-            r"(?:\.\s*channels|\[\s*['\"]channels['\"]\s*\])"
-            r"\s*(?:\?\.\s*)?"
-            r"(?:\.\s*" + key + r"|\[\s*['\"]" + key + r"['\"]\s*\])"
+            r"creatorRecordsData\s*(?:(?:\?\.\s*|\.\s*)channels|\[\s*['\"]channels['\"]\s*\])"
+            r"\s*(?:(?:\?\.\s*|\.\s*)" + key + r"|(?:\?\.\s*)?\[\s*['\"]" + key + r"['\"]\s*\])"
         )
         if pattern.search(source):
             matches.append(legacy_id)
