@@ -1,6 +1,9 @@
 name: Auditoría QA portable para GitHub Pages
 
 on:
+  push:
+    branches:
+      - integration/pr46-portable-qa
   pull_request:
     paths:
       - 'scripts/add_image_dimensions.py'
