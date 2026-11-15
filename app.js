@@ -1703,9 +1703,9 @@ function renderRod3r1kComicPages(hero){
   ['24 oct 2026','5 h 05 min',142,28,55,3]
  ];
  const clips=[
-  ['Spicy Piliable Poultry Corgi Derp','SpicyPiliablePoultryCorgiDerp-flAxKL1oWuPkWDWA','Momentos divertidos y espontáneos'],
-  ['Hilarious Ironic Soybean Chocolate Rain','HilariousIronicSoybeanChocolateRain','Una escena destacada del canal'],
-  ['Cooperative Popular Flamingo','CooperativePopularFlamingoM4xHeh-3bJjuJyiLiZOEEaC','Partidas y complicidad en directo']
+  ['NO VOY A DECIR NADA xd','SpicyPiliablePoultryCorgiDerp-flAxKL1oWuPkWDWA','Clip destacado de ROD3R1K'],
+  ['Ff se mueve la puerta','HilariousIronicSoybeanChocolateRain','Clip destacado de ROD3R1K'],
+  ['Nueva actualización de temporada · Rogue Company','CooperativePopularFlamingoM4xHeh-3bJjuJyiLiZOEEaC','Clip de Rogue Company']
  ];
  const esc=escapeStatsHtml;
  const cover='<article class="comic-book-sheet comic-cover-sheet"><header class="comic-cover-masthead"><b>LEGIÓN MULTIVERSAL</b><span>EXPEDIENTE INDIVIDUAL · N.º '+esc(hero.cardNumber||'008')+'</span><span>MEDIA KIT</span></header><div class="comic-cover-art-frame"><span class="comic-cover-burst">EL EXPEDIENTE<br>DEL FUERTE</span><img class="comic-cover-art" src="'+esc(hero.img)+'" alt="Carta oficial de ROD3R1K"></div><div class="comic-cover-copy"><div class="comic-cover-titleline"><span>PROTAGONISTA</span><h2>ROD3R1K</h2><b>008</b></div><p class="comic-cover-subtitle">EL FUERTE · INGENIERO SÓNICO</p><section class="comic-panel comic-cover-bio"><div class="comic-panel-heading"><span>01</span><b>IDENTIDAD SECRETA · BIOGRAFÍA DEL CREADOR</b></div><p>Bienvenidos al canal. Me llamo Roderik, mejor conocido como «ElKrakenaso». Encontrarás momentos divertidos y épicos. ¡Acompañame en las partidas y divertite!</p></section><aside class="hero-voice voice-rod3r1k"><span>SU LEMA EN LA LEGIÓN</span><p>«¡Que se escuche hasta el último rincón! Si vamos a jugar, que cada partida deje una historia.»</p></aside><footer class="comic-cover-footer"><span>GAMING · EVENTOS · COMUNIDAD</span><b>¡ABRIR EXPEDIENTE!</b></footer></div></article>';
