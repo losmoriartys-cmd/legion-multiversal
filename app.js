@@ -1774,9 +1774,10 @@ function normalizeRosterDossierPages(pages, hero) {
     return (Array.isArray(pages) ? pages : []).map((markup, index) => {
         if (typeof markup !== 'string') return markup;
         return markup.replace(/<article\\b([^>]*\\bcomic-book-sheet\\b[^>]*)>/, (opening, attributes) => {
-            const normalizedAttributes = attributes.replace(/\\s+roster-dossier-page\\b/g, '');
-            return '<article' + normalizedAttributes + ' roster-dossier-page"'.replace(' roster-dossier-page"', ' roster-dossier-page') +
-                ' data-dossier-profile="' + profileKey + '" data-dossier-page="' + (index + 1) + '>';
+            const normalizedAttributes = attributes.replace(/class="([^"]*)"/, (match, classes) =>
+                'class="' + classes.split(/\\s+/).filter(Boolean).filter(name => name !== 'rod3r1k-page').concat('roster-dossier-page').filter((name, position, all) => all.indexOf(name) === position).join(' ') + '"'
+            );
+            return '<article' + normalizedAttributes + ' data-dossier-profile="' + profileKey + '" data-dossier-page="' + (index + 1) + '>';
         });
     });
 }
