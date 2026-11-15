@@ -32,6 +32,25 @@ class ValuesChapterContractTests(unittest.TestCase):
         self.assertTrue({"6", "8", "9"}.issubset(targets))
         self.assertTrue({"6", "8", "9"}.issubset(chapter_ids))
 
+    def test_editorial_chapter_order_is_documented_without_renumbering_ids(self):
+        bible = (ROOT / "BIBLIA_EVOLUCION_LEGION_MULTIVERSAL.md").read_text(encoding="utf-8")
+        expected = (
+            "Inicio ejecutivo — `chapter-0`",
+            "Origen S3X-MEN — `chapter-1`",
+            "Valores — `chapter-11`",
+            "Roster — `chapter-2`",
+            "Estadísticas — `chapter-3`",
+            "Comunidad — `chapter-9`",
+            "Alianzas — `chapter-8`",
+            "Colaboraciones — `chapter-12`",
+            "Arsenal — `chapter-5`",
+            "En Vivo — `chapter-10`",
+            "Reclutamiento — `chapter-6`",
+        )
+        positions = [bible.index(item) for item in expected]
+        self.assertEqual(positions, sorted(positions))
+        self.assertIn("el número editorial visible", bible)
+
     def test_practice_block_has_responsive_and_reduced_motion_rules(self):
         css = (ROOT / "styles.css").read_text(encoding="utf-8")
         for rule in ("@media(max-width:850px)", "@media(max-width:600px)", "@media(prefers-reduced-motion:reduce)"):
