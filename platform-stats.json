@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-14T20:56:28Z",
-  "methodology": "Las métricas se conservan por creador y plataforma. No sumar ni comparar directamente unidades de plataformas distintas. Los registros de identidad y cuentas proceden de roster-data.json; las claves de creators usan el ID estable del expediente.",
+  "updated_at": "2026-11-15T00:10:49Z",
+  "methodology": "Las métricas se conservan por creador y plataforma. No sumar ni comparar directamente unidades de plataformas distintas. Las claves de creators corresponden al ID estable de roster-data.json.",
   "creators": {
     "pato-oratoris": {
       "display_name": "PATO — ORATORIS",
@@ -83,6 +83,6 @@
   "collection_status": {
     "youtube": "enabled",
     "kick": "awaiting_secrets",
-    "captured_at": "2026-11-14T20:56:28Z"
+    "captured_at": "2026-11-15T00:10:49Z"
   }
 }
