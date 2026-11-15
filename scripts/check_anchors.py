@@ -54,7 +54,7 @@ index = ROOT / "index.html"
 if index.resolve() in documents:
     source = index.read_text(encoding="utf-8")
     import re
-    chapter_refs = set(re.findall(r'data-chapter=["'](\\d+)["']', source))
+    chapter_refs = set(re.findall(r"""data-chapter=["'](\d+)["']""", source))
     chapter_ids = documents[index.resolve()].ids
     missing = sorted(value for value in chapter_refs if f"chapter-{value}" not in chapter_ids)
     if "chapter-0" not in chapter_ids:
