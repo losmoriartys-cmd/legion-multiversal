@@ -33,15 +33,14 @@ def find_legacy_creator_record_lookups(source: str) -> list[str]:
     for legacy_id in LEGACY_CREATOR_IDS:
         key = re.escape(legacy_id)
         pattern = re.compile(
-            r"creatorRecordsData\\s*(?:\\?\\.\\s*)?"
-            r"(?:\\.\\s*channels|\\[\\s*['\\\"]channels['\\\"]\\s*\\])"
-            r"\\s*(?:\\?\\.\\s*)?"
-            r"(?:\\.\\s*" + key + r"|\\[\\s*['\\\"]" + key + r"['\\\"]\\s*\\])"
+            r"creatorRecordsData\s*(?:\?\.\s*)?"
+            r"(?:\.\s*channels|\[\s*['\"]channels['\"]\s*\])"
+            r"\s*(?:\?\.\s*)?"
+            r"(?:\.\s*" + key + r"|\[\s*['\"]" + key + r"['\"]\s*\])"
         )
         if pattern.search(source):
             matches.append(legacy_id)
     return matches
-
 
 class RosterAccessibilityContractTests(unittest.TestCase):
     @classmethod
@@ -115,7 +114,6 @@ class RosterAccessibilityContractTests(unittest.TestCase):
 
     def test_creator_records_use_canonical_roster_ids(self):
         self.assertIn("function getCreatorRecord(hero)", self.js)
-        self.assertIn("return hero?.id || hero?.slug || ''; ", self.js) if False else None
         self.assertIn("return hero?.id || hero?.slug || '';", self.js)
         self.assertEqual(find_legacy_creator_record_lookups(self.js), [])
         moriartys_page = (ROOT / "roster-02-moriartys.html").read_text(encoding="utf-8")
