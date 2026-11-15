@@ -18,7 +18,7 @@ test('el directorio carga los ocho expedientes y cada modal puede abrirse', asyn
   await expect(page.locator('.roster-collectible-card')).toHaveCount(8);
 
   for (const creator of creators) {
-    const card = page.locator('.roster-collectible-card').filter({ has: page.locator('[data-creator-id="' + creator.id + '"]') });
+    const card = page.locator('.roster-collectible-card[data-creator-id="' + creator.id + '"]');
     await expect(card).toHaveCount(1);
     await page.evaluate(index => window.openHeroModal(index), creator.index);
     const modal = page.locator('#hero-modal');
