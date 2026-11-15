@@ -6,6 +6,7 @@ on:
       - 'app.js'
       - 'playwright.config.js'
       - 'index.html'
+      - 'bitacora-preview.html'
       - 'styles.css'
       - '*.css'
       - '*.json'
@@ -19,6 +20,7 @@ on:
     paths:
       - 'app.js'
       - 'index.html'
+      - 'bitacora-preview.html'
       - 'styles.css'
       - '*.css'
       - '*.json'
@@ -76,7 +78,7 @@ jobs:
         run: npm install
       - name: Instalar Chromium para Playwright
         run: npx playwright install --with-deps chromium
-      - name: Probar expedientes, modales y hashes históricos
+      - name: Probar expedientes, Bitácora, modales y hashes históricos
         run: npm run test:e2e
       - name: Comprobar el registro de canales para el colector de clips
         run: |
