@@ -13,7 +13,7 @@
     "daved0608"
   ],
   "collection": {
-    "started_at": "2026-11-15T07:41:09Z",
+    "started_at": "2026-11-15T08:33:35Z",
     "expected_channels": 7,
     "resolved_channels": 7,
     "sampled_channels": [
@@ -33,7 +33,7 @@
     "elgabii090"
   ],
   "channel_registry_note": "Los canales archivados se conservan para consulta histórica y no se incluyen en los indicadores del roster activo.",
-  "updated_at": "2026-11-15T07:41:09Z",
+  "updated_at": "2026-11-15T08:33:35Z",
   "channels": {
     "ladymoriarty01": {
       "login": "ladymoriarty01",
@@ -48,9 +48,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-15T07:41:09Z",
+      "updated_at": "2026-11-15T08:33:35Z",
       "window": {
-        "samples_total": 280,
+        "samples_total": 281,
         "live_samples": 9,
         "streams_observed": 4,
         "average_viewers_sampled": 6.1,
@@ -2660,6 +2660,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-15T08:33:35Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -2676,9 +2685,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-15T07:41:09Z",
+      "updated_at": "2026-11-15T08:33:35Z",
       "window": {
-        "samples_total": 280,
+        "samples_total": 281,
         "live_samples": 34,
         "streams_observed": 8,
         "average_viewers_sampled": 22.1,
@@ -5330,6 +5339,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-15T08:33:35Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -5992,9 +6010,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-15T07:41:09Z",
+      "updated_at": "2026-11-15T08:33:35Z",
       "window": {
-        "samples_total": 280,
+        "samples_total": 281,
         "live_samples": 6,
         "streams_observed": 3,
         "average_viewers_sampled": 7.2,
@@ -8555,6 +8573,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-15T08:33:35Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -8571,9 +8598,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-15T07:41:09Z",
+      "updated_at": "2026-11-15T08:33:35Z",
       "window": {
-        "samples_total": 280,
+        "samples_total": 281,
         "live_samples": 23,
         "streams_observed": 10,
         "average_viewers_sampled": 6.3,
@@ -11204,6 +11231,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-15T08:33:35Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -11220,9 +11256,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-15T07:41:09Z",
+      "updated_at": "2026-11-15T08:33:35Z",
       "window": {
-        "samples_total": 280,
+        "samples_total": 281,
         "live_samples": 12,
         "streams_observed": 7,
         "average_viewers_sampled": 1.9,
@@ -13825,6 +13861,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-15T08:33:35Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -14457,9 +14502,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-15T07:41:09Z",
+      "updated_at": "2026-11-15T08:33:35Z",
       "window": {
-        "samples_total": 280,
+        "samples_total": 281,
         "live_samples": 63,
         "streams_observed": 12,
         "average_viewers_sampled": 5.2,
@@ -17097,6 +17142,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-15T08:33:35Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -17113,9 +17167,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "updated_at": "2026-11-15T07:41:09Z",
+      "updated_at": "2026-11-15T08:33:35Z",
       "window": {
-        "samples_total": 280,
+        "samples_total": 281,
         "live_samples": 15,
         "streams_observed": 7,
         "average_viewers_sampled": 16.2,
@@ -19733,6 +19787,15 @@
         },
         {
           "sampled_at": "2026-11-15T07:41:09Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-15T08:33:35Z",
           "is_live": false,
           "viewer_count": null,
           "game_name": null,
