@@ -13,7 +13,7 @@ No integrar la rama histórica `auditoria-ux` completa. Se recuperan solo herram
 
 ## Herramientas recuperadas
 
-- `scripts/add_image_dimensions.py`: medición real de imágenes con Pillow; la raíz del repositorio se resuelve desde la ubicación del script y `--check` no escribe.
+- `scripts/add_image_dimensions.py`: medición real de imágenes con Pillow; la raíz del repositorio se resuelve desde la ubicación del script y `--check` no escribe. Se aplicaron 23 pares `width/height` medidos a imágenes locales en `index.html`, `bitacora-preview.html` y `comic-moriartys.html`; el diff fue generado por CI y revisado antes de incorporarlo. Remotas y fuentes dinámicas quedaron intactas.
 - `scripts/audit_accessibility.py`: controles estáticos de etiquetas, IDs, iframes, enlaces externos, foco visible y movimiento reducido.
 - `scripts/check_anchors.py`: verificación de anclas HTML locales.
 - `scripts/summarize_lighthouse.py`: medianas únicamente desde reportes JSON reales.
