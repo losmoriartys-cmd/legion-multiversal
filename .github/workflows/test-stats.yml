@@ -56,14 +56,11 @@ jobs:
             --alias losmoriartys=moriartys --alias ladymoriarty01=lady-moriarty --alias ther0d3r1k=rod3r1k \
             --alias habitos_atomicos=habitos --alias ardipii=ardipii --alias akumazoldyck=akuma \
             --alias daved0608=dave-nexus --alias patoteexplica=pato-oratoris \
-            --snapshot-out "$RUNNER_TEMP/identity-baseline.json"
-      - name: Guardar instantánea previa a la migración
-        uses: actions/upload-artifact@v4
-        with:
-          name: identity-baseline-${{ github.sha }}
-          path: ${{ runner.temp }}/identity-baseline.json
-          if-no-files-found: error
-          retention-days: 30
+            --baseline tests/baselines/identity-before-canonical-migration.json --skip-platform
+      - name: Verificar conservación contra línea base versionada
+        run: |
+          test -s tests/baselines/identity-before-canonical-migration.json
+          grep -q "11f56fce5c52a284325e8016d5590d9ee223bf21" tests/baselines/identity-before-canonical-migration.json
       - name: Probar unidad del control de frescura y procedencia
         run: python scripts/check_creator_metrics_freshness.py --selftest
       - name: Verificar el creator-metrics.json versionado contra sus fuentes
