@@ -313,7 +313,7 @@ function renderAutomaticTwitchClips(hero){
  return out;
 }
 function renderMissionArchive(hero){
- const key=creatorRecordKey(hero),record=creatorRecordsData?.channels?.[key]||{};
+ const record=getCreatorRecord(hero);
  const groups=[['COLABORACIONES Y ACCESOS A JUEGOS','collaborations'],['HITOS Y TRAYECTORIA','milestones'],['CLIPS DESTACADOS','highlights']];
  let out='<div class="mission-archive"><div class="mission-hero-card"><span class="eyebrow">TRAYECTORIA · MEDIA KIT</span><p>'+escapeStatsHtml(hero.log||'Trayectoria y colaboraciones del creador.')+'</p></div>';
  groups.forEach(([label,field])=>{
@@ -462,17 +462,17 @@ function renderPlatformStats(hero){
  return out;
 }
 function creatorRecordKey(hero){
- if(hero && hero.youtube)return 'patoteexplica';
- if(hero && hero.twitch)return hero.twitch.split('/').filter(Boolean).pop().toLowerCase();
- if(hero && hero.kick)return hero.kick.split('/').filter(Boolean).pop().toLowerCase();
- return '';
+ return hero?.id || hero?.slug || '';
+}
+function getCreatorRecord(hero){
+ const key=creatorRecordKey(hero);
+ return creatorRecordsData?.channels?.[key] || {};
 }
 function platformStatsKey(hero) {
  return hero?.id || hero?.slug || creatorRecordKey(hero);
 }
 function renderCreatorRecords(hero){
- const key=creatorRecordKey(hero);
- const record=creatorRecordsData?.channels?.[key];
+ const record=getCreatorRecord(hero);
  const lines=['TRAYECTORIA REAL DEL CREADOR · REGISTROS VERIFICADOS'];
  const groups=[
   ['HITOS','milestones'],
@@ -1208,7 +1208,7 @@ function renderCommercialQuickView(hero) {
         }
     };
     const data = hero.mediaProfile || tailoredProfiles[profileKey] || {};
-    const record = creatorRecordsData?.channels?.[twitchLogin] || creatorRecordsData?.channels?.[youtubeLogin] || {};
+    const record = getCreatorRecord(hero);
     const typeLabel = hero.creator_type === "video_creator" ? "CREADOR DE VIDEO" : hero.creator_type === "live_streamer" ? "CREADOR EN DIRECTO" : "FORMATO POR CONFIRMAR";
     const roleLabels = {director:"DIRECCIÓN",teacher:"PROFESOR",student:"ESTUDIANTE",collaborator:"COLABORADOR"};
     const platformLinks = [];
@@ -1454,7 +1454,7 @@ function renderLadyMoriartyComicPages(hero,sullyChannel){
  const metrics=profile.metrics||{};
  const period=profile.period_label||'Período no indicado';
  const games=Array.isArray(sullyChannel?.game_performance)?sullyChannel.game_performance:[];
- const record=creatorRecordsData?.channels?.ladymoriarty01||{};
+ const record=getCreatorRecord(hero);
  const clips=Array.isArray(record.highlights)?record.highlights:[];
  const page=(n,title,body,foot)=>'<article class="comic-book-sheet comic-interior-page"><header class="comic-interior-header"><span>LEGIÓN MULTIVERSAL</span><b>CAPÍTULO 0'+n+'</b><span>'+foot+'</span></header><div class="comic-page-title"><small>EXPEDIENTE LADYMORIARTY01 · PÁGINA 0'+(n+1)+'</small><h2>'+title+'</h2></div>'+(hero.voice?'<aside class="hero-voice voice-lady"><span>VOZ DE LA BRUJA</span><p>'+safe(hero.voice)+'</p></aside>':'')+body+'<footer class="comic-page-footer"><span>LADYMORIARTY01 · ARCHIVO INDIVIDUAL</span><b>0'+(n+1)+' / 06</b></footer></article>';
  const cover='<article class="comic-book-sheet comic-cover-sheet"><header class="comic-cover-masthead"><b>LEGIÓN MULTIVERSAL</b><span>EXPEDIENTE INDIVIDUAL · N.º '+safe(hero.cardNumber||'S/N')+'</span><span>MEDIA KIT</span></header><div class="comic-cover-art-frame"><span class="comic-cover-burst">EXPEDIENTE<br>CLASIFICADO</span><img class="comic-cover-art" src="'+safe(hero.img)+'" alt="Carta oficial de LADYMORIARTY01"></div><div class="comic-cover-copy"><div class="comic-cover-titleline"><span>PROTAGONISTA</span><h2>LADYMORIARTY01</h2><b>'+safe(hero.series||'01')+'</b></div><p class="comic-cover-subtitle">'+safe(hero.codename)+' · '+safe(hero.characterRole)+'</p><section class="comic-panel comic-cover-bio"><div class="comic-panel-heading"><span>01</span><b>IDENTIDAD SECRETA · PERFIL DE LA HEROÍNA</b></div><p>'+safe(hero.bio)+'</p><p class="comic-panel-caption">Canal individual LADYMORIARTY01: gameplay chill, IRL y contenido espontáneo. Lo importante es divertirnos y pasarla bien 💜</p></section><footer class="comic-cover-footer"><span>'+areas.map(safe).join(' · ')+'</span><b>¡ABRIR EXPEDIENTE!</b></footer></div></article>';
@@ -1484,7 +1484,7 @@ function renderLadyMoriartyComicPages(hero,sullyChannel){
 function renderHabitosComicPages(hero,sullyChannel){
  const safe=v=>escapeStatsHtml(v===null||v===undefined?'':String(v));
  const areas=Array.isArray(hero.areas)?hero.areas:[];
- const record=creatorRecordsData?.channels?.habitos_atomicos||{};
+ const record=getCreatorRecord(hero);
  const clips=Array.isArray(record.highlights)?record.highlights:[];
  const summary=sullyChannel?.summary||{};
  const games=Array.isArray(sullyChannel?.game_breakdown)?sullyChannel.game_breakdown:[];
@@ -1555,7 +1555,7 @@ function renderArdipiiComicPages(hero,sullyChannel){
  const areas=Array.isArray(hero.areas)?hero.areas:[];
  const summary=sullyChannel?.summary||{};
  const streams=Array.isArray(sullyChannel?.streams)?sullyChannel.streams:[];
- const record=creatorRecordsData?.channels?.ardipii||{};
+ const record=getCreatorRecord(hero);
  const clips=Array.isArray(record.highlights)?record.highlights:[];
  const games=['GTA 6','Gears E-Day','Fortnite','Minecraft','Roblox','Dead by Daylight','Rocket League','Call of Duty','Clash of Clans','Pokémon Unite'];
  const page=(n,title,body,foot)=>'<article class="comic-book-sheet comic-interior-page"><header class="comic-interior-header"><span>LEGIÓN MULTIVERSAL</span><b>CAPÍTULO 0'+n+'</b><span>'+foot+'</span></header><div class="comic-page-title"><small>EXPEDIENTE ARDIPII · PÁGINA 0'+(n+1)+'</small><h2>'+title+'</h2></div>'+(hero.voice?'<aside class="hero-voice voice-ardipii"><span>VOZ DEL FANTASMA</span><p>'+safe(hero.voice)+'</p></aside>':'')+body+'<footer class="comic-page-footer"><span>ARDIPII · ARCHIVO INDIVIDUAL</span><b>0'+(n+1)+' / 06</b></footer></article>';
@@ -1582,7 +1582,7 @@ function renderDaveNexusComicPages(hero,sullyChannel){
  const safe=escapeStatsHtml;
  const summary=sullyChannel?.annual_summary_2026||{};
  const streams=Array.isArray(sullyChannel?.streams)?sullyChannel.streams:[];
- const record=creatorRecordsData?.channels?.daved0608||{};
+ const record=getCreatorRecord(hero);
  const clips=Array.isArray(record.highlights)?record.highlights:[];
  const games=[
   ['Backrooms: Escape Together',1],
@@ -1625,7 +1625,7 @@ function renderDaveNexusComicPages(hero,sullyChannel){
 
 function renderPatoOratorisComicPages(hero){
  const safe=escapeStatsHtml;
- const record=creatorRecordsData?.channels?.patoteexplica||{};
+ const record=getCreatorRecord(hero);
  const videos=Array.isArray(record.youtube_videos)?record.youtube_videos:[];
  const embeds=Array.isArray(record.featured_embeds)?record.featured_embeds:[];
  const youtubeProfile=platformStatsData?.creators?.[platformStatsKey(hero)]?.platforms?.youtube||{};
@@ -1728,7 +1728,7 @@ function renderMoriartysComicPages(hero) {
  const snapshots = Array.isArray(channel?.snapshots) ? channel.snapshots : [];
  const games = Array.isArray(windowStats.game_breakdown) ? windowStats.game_breakdown : [];
  const days = Array.isArray(windowStats.daily_activity) ? windowStats.daily_activity : [];
- const record = creatorRecordsData?.channels?.losmoriartys || {};
+ const record = getCreatorRecord(hero);
  const clips = Array.isArray(record.highlights) ? record.highlights : [];
  const collaborations = Array.isArray(record.collaborations) ? record.collaborations : [];
  const formats = Array.isArray(hero.mediaProfile?.formats) ? hero.mediaProfile.formats : (hero.areas || []);
