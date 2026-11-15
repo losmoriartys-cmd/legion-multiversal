@@ -16,6 +16,7 @@ test('el directorio carga los ocho expedientes y cada modal puede abrirse', asyn
   page.on('pageerror', error => pageErrors.push(error.message));
   page.on('console', message => { if (message.type() === 'error') pageErrors.push(message.text()); });
   await page.goto('/');
+  await page.evaluate(() => switchChapter(2));
   await expect(page.locator('.roster-collectible-card')).toHaveCount(8);
 
   for (const creator of creators) {
