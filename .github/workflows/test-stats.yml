@@ -29,3 +29,14 @@ jobs:
           python-version: '3.12'
       - name: Ejecutar pruebas del colector
         run: python -m unittest discover -s tests -v
+      - name: Generar registro normalizado de métricas
+        run: python scripts/build_creator_metrics.py
+      - name: Validar registro normalizado
+        run: python scripts/validate_creator_metrics.py
+      - name: Publicar artefacto de métricas generado
+        uses: actions/upload-artifact@v4
+        with:
+          name: creator-metrics-${{ github.sha }}
+          path: creator-metrics.json
+          if-no-files-found: error
+          retention-days: 7
