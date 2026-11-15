@@ -2859,3 +2859,14 @@ No hubo merge, cambios en `main`, publicación de producción ni modificación d
 - **CI:** [validación de sitio SUCCESS](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43700075996). El workflow de estadísticas mantiene un único bloqueo conocido: `creator-metrics.json` está 1413 s detrás de `platform-stats.json` y carece de `source_snapshot`. No se regeneró todavía.
 - **Próximo orden:** revisar visualmente Bitácora en desktop/móvil; sincronizar la rama con el último `main`; regenerar `creator-metrics.json` como último cambio y repetir CI.
 - **Integridad:** sin merge, sin cambios en `main`, sin despliegue de producción y sin modificación de credenciales.
+
+
+## 2026-11-15 — Implementación y QA de Bitácora Multiversal
+
+- **Rama / PR:** `feat/roster-integral-2026-11-14`, PR #47 Draft, abierto. HEAD `32fee04a6200673724e197954e583349575252d8`.
+- **Implementación:** `bitacora-preview.html` ampliado a 15 folios (índice + 14 folios editoriales). Se incorporaron todas las secciones vigentes: Inicio, Origen, Valores, Roster, Estadísticas, Comunidad, Alianzas, Colaboraciones, BarFender, campañas, Arsenal, En Vivo, Reclutamiento y Mapa Multiversal.
+- **Correcciones UX:** IDs y numeración alineados al sitio; contador de folios dinámico; anexo de campañas separado de los capítulos; ambas hojas visibles y apiladas en móvil; índice de una columna en pantallas pequeñas.
+- **Datos:** directorio de ocho perfiles sigue conectado a `roster-data.json` y usa identificadores canónicos.
+- **Automatización:** Playwright ahora cubre destinos del índice, roster del directorio, recorrido completo de 15 folios y diseño móvil. `.github/workflows/validar-sitio.yml` incluye `bitacora-preview.html` en sus filtros de ejecución.
+- **Resultado:** [CI de sitio SUCCESS](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43700512037); 33 pruebas unitarias y 5 pruebas Playwright aprobadas. Validación estática de 8 perfiles y 37 referencias locales superada.
+- **No realizado:** no se regeneró `creator-metrics.json`, no se sincronizó aún con el último `main`, no hubo merge ni despliegue de producción. La regeneración de métricas permanece como último cambio posterior a la sincronización.
