@@ -2848,3 +2848,14 @@ Se siguió implementando en la rama única `feat/roster-integral-2026-11-14`, de
 - El CI no sustituye revisión de lectores de pantalla, navegación táctil, pruebas de impresión ni aprobación visual humana.
 
 No hubo merge, cambios en `main`, publicación de producción ni modificación de credenciales.
+
+## 2026-11-15 — Informe de avance: Roster verificado y Bitácora reconciliada
+
+- **Rama:** `feat/roster-integral-2026-11-14`; PR #47 continúa Draft y abierto contra `main`.
+- **HEAD de código validado:** `3b20530f45ba56b9a0bd9bb6ffd69448a89631e2`.
+- **Roster:** títulos reales de los tres clips de ROD3R1K corregidos; detección de alias reforzada con pruebas por punto/corchetes; excepción editorial explícita sin alterar la línea base; error de orden de inicialización en el expediente AKUMA corregido.
+- **QA:** 33 pruebas unitarias y 15 pruebas de identidad aprobadas. Playwright completó 4 pruebas: ocho páginas de expediente, ocho modales y sus pestañas, ambos hashes de Lady Moriarty, índice de Bitácora y directorio canónico de ocho integrantes. Validadores de assets, clips y rutas: SUCCESS.
+- **Bitácora:** el índice ya apunta a los IDs reales de los capítulos; la numeración editorial quedó alineada con la estructura vigente. El directorio usa nombres públicos y slugs/IDs canónicos.
+- **CI:** [validación de sitio SUCCESS](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43700075996). El workflow de estadísticas mantiene un único bloqueo conocido: `creator-metrics.json` está 1413 s detrás de `platform-stats.json` y carece de `source_snapshot`. No se regeneró todavía.
+- **Próximo orden:** revisar visualmente Bitácora en desktop/móvil; sincronizar la rama con el último `main`; regenerar `creator-metrics.json` como último cambio y repetir CI.
+- **Integridad:** sin merge, sin cambios en `main`, sin despliegue de producción y sin modificación de credenciales.
