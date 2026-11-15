@@ -36,6 +36,7 @@ class NormalizedCreatorMetricsTests(unittest.TestCase):
             ]
         }
         self.twitch = {
+            "updated_at": "2026-11-14T21:30:00Z",
             "channels": {
                 "demo": {
                     "login": "demo", "live": True, "current_viewers": 7,
