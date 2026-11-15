@@ -50,12 +50,17 @@ for source, parser in documents.items():
         if fragment not in documents[target].ids:
             errors.append(f"{source.name}: ancla #{fragment} no encontrada en {target.name}")
 
-required = {"inicio","origen","valores","roster","estadisticas","comunidad","alianzas","colaboraciones","arsenal","en-vivo","reclutamiento"}
 index = ROOT / "index.html"
 if index.resolve() in documents:
-    missing = sorted(required - documents[index.resolve()].ids)
+    source = index.read_text(encoding="utf-8")
+    import re
+    chapter_refs = set(re.findall(r'data-chapter=["'](\\d+)["']', source))
+    chapter_ids = documents[index.resolve()].ids
+    missing = sorted(value for value in chapter_refs if f"chapter-{value}" not in chapter_ids)
+    if "chapter-0" not in chapter_ids:
+        missing.append("0 (portada)")
     if missing:
-        errors.append("index.html: faltan anclas semánticas: " + ", ".join(missing))
+        errors.append("index.html: botones de capítulo sin panel correspondiente: " + ", ".join(missing))
 print(f"Anclas locales comprobadas: {checked}")
 if errors:
     print("ERRORES DE ANCLAS:")
