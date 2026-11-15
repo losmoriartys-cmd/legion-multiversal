@@ -1,3 +1,16 @@
+## 2026-11-15 — Continuidad editorial y QA permanente · Valores y Comunidad
+
+- **Base observada de `main`:** `b789ec01d0b9f94a8ac1f208fc30fc50ee48e0a9`, commit automático de actualización de métricas y clips. Los cambios editoriales se mantienen separados de los archivos de datos.
+- **Capítulo 02 · Valores — PR #54:** rama `feat/chapter-values-main-2026-11-15`. Se conservan los seis valores existentes y se añade el bloque “Del manifiesto a la práctica” (acuerdos previos, respeto y autoría durante la colaboración, transparencia posterior). Se explicita la participación voluntaria, se refuerza la semántica accesible y se agrega acceso al capítulo Comunidad.
+- **Documentación:** se alinea esta Biblia con el orden editorial vigente: Inicio, Origen, Valores, Roster, Estadísticas, Comunidad, Alianzas y Colaboraciones; luego Arsenal, En Vivo y Reclutamiento. Se documenta que los números editoriales visibles no equivalen a los IDs técnicos `chapter-N`, que se conservan por compatibilidad.
+- **QA de Valores:** auditoría portable run #33 y colector de estadísticas run #77 completados con SUCCESS. La validación general run #795 seguía en ejecución al registrar esta entrada. Cloudflare Pages confirmó despliegue exitoso de la vista previa para el commit `b971d04`; no es producción.
+- **Capítulo 05 · Comunidad — PR #52:** rama `feat/chapter-community-2026-11-15`. Se agregan acuerdos de identidad individual, actividades confirmadas y participación voluntaria, con diseño responsive y prueba de contrato. Las tres ejecuciones asociadas (#28, #73 y #782) finalizaron con SUCCESS; Cloudflare Pages confirmó el preview `a117dde3.legion-multiversal.pages.dev`.
+- **Orden de integración:** Valores (#54) debe integrarse antes que Comunidad (#52), conforme al orden editorial aprobado. Ambas PR permanecen Draft hasta revisión visual y funcional. PR #53 se cerró como supersedido por #54 para evitar una integración apilada fuera de orden; su trabajo fue recreado desde la línea base de `main`.
+- **Preservación:** no se modificaron credenciales, secretos, configuración de producción, roster-data ni archivos de métricas. No se fusionó ninguna PR ni se publicó a producción.
+- **Pendiente:** completar la validación general/E2E más reciente, revisar los previews en escritorio y móvil, y después integrar por separado con SHA y CI registrados.
+
+---
+
 ## 2026-11-12 — MORIARTYS: Bitácora integral en formato Archivo Central
 
 - **Objetivo:** unificar toda la información disponible del streamer MORIARTYS en un único expediente-libro. ARCHIVO CENTRAL deja de ser una sección aislada y pasa a ser la mecánica de lectura de la Bitácora completa.
