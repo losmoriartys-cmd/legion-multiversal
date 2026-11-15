@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Legión Multiversal — normalized creator metrics",
   "type": "object",
-  "required": ["schema_version", "generated_at", "source_files", "methodology", "creators"],
+  "required": ["schema_version", "generated_at", "source_files", "source_snapshot", "methodology", "creators"],
   "properties": {
     "schema_version": {"const": 1},
     "generated_at": {"type": "string", "format": "date-time"},
@@ -15,6 +15,15 @@
         "platforms": {"const": "platform-stats.json"},
         "clips": {"const": "clips-data.json"}
       }
+    },
+    "source_snapshot": {
+      "type": "object",
+      "required": ["data.json", "platform-stats.json"],
+      "properties": {
+        "data.json": {"type": "object", "required": ["updated_at"], "properties": {"updated_at": {"type": ["string", "null"], "format": "date-time"}}},
+        "platform-stats.json": {"type": "object", "required": ["updated_at"], "properties": {"updated_at": {"type": ["string", "null"], "format": "date-time"}}}
+      },
+      "additionalProperties": false
     },
     "methodology": {"type": "array", "items": {"type": "string"}},
     "creators": {
