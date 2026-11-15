@@ -117,7 +117,7 @@ def snapshot(records, platform, ids, aliases=None, note=None):
     return snap
 
 
-def compare(baseline, current, include_platform=True):
+def compare(baseline, current, include_platform=True, approved_editorial=None):
     problems = []
     for hid, fields in baseline.get('creator_records', {}).items():
         cur = current['creator_records'].get(hid)
@@ -130,7 +130,13 @@ def compare(baseline, current, include_platform=True):
             elif 'count' in meta and c.get('count') != meta['count']:
                 problems.append(f'creator-records "{hid}.{f}": {meta["count"]} -> {c.get("count")} elementos')
             elif c.get('sha256') != meta['sha256']:
-                problems.append(f'creator-records "{hid}.{f}": el contenido cambió')
+                approved_items = ((approved_editorial or {}).get('creator_records', {})
+                                  .get(hid, {}).get(f))
+                approved = (isinstance(approved_items, list)
+                            and len(approved_items) == meta.get('count')
+                            and _list_hash(approved_items) == c.get('sha256'))
+                if not approved:
+                    problems.append(f'creator-records "{hid}.{f}": el contenido cambió y no coincide con una actualización editorial aprobada')
     for hid, meta in (baseline.get('platform_stats', {}).items() if include_platform else []):
         cur = current['platform_stats'].get(hid)
         if cur is None:
@@ -217,6 +223,22 @@ class Tests(unittest.TestCase):
         p = compare(base, snapshot(edited, PLAT_OLD, ['pato-oratoris'], {}))
         self.assertTrue(any('el contenido cambió' in m for m in p))
 
+    def test_aprobacion_editorial_es_exacta_y_no_cambia_el_baseline(self):
+        base = self._snap(REC_OLD)
+        videos = [dict(x) for x in VIDEOS]
+        videos[0]['title'] = 'Título corregido y aprobado'
+        migrated = {'channels': {'pato-oratoris': {
+            'milestones': [], 'highlights': [], 'youtube_videos': videos
+        }}}
+        current = snapshot(migrated, PLAT_OLD, ['pato-oratoris'], {})
+        approved = {'creator_records': {'pato-oratoris': {'youtube_videos': videos}}}
+        self.assertEqual(compare(base, current, approved_editorial=approved), [])
+        altered = [dict(x) for x in videos]
+        altered[1]['title'] = 'Cambio no aprobado'
+        bad_approval = {'creator_records': {'pato-oratoris': {'youtube_videos': altered}}}
+        self.assertTrue(compare(base, current, approved_editorial=bad_approval))
+        self.assertEqual(base['_meta']['note'], '')
+
     def test_perder_el_registro_completo(self):
         base = self._snap(REC_OLD)
         self.assertTrue(any('se perdió el registro' in m for m in
@@ -257,6 +279,7 @@ def main():
     ap.add_argument('--alias', action='append', default=[], help='clave_vieja=hero.id')
     ap.add_argument('--strict', action='store_true')
     ap.add_argument('--snapshot-out'); ap.add_argument('--baseline')
+    ap.add_argument('--approved-editorial', help='JSON con listas editoriales exactas aprobadas; no modifica el baseline histórico')
     ap.add_argument('--note', help='texto libre para la instantánea (p. ej. SHA previo a la migración)')
     ap.add_argument('--skip-platform', action='store_true',
                     help='no comparar platform-stats (sus conteos cambian con cada captura)')
@@ -278,8 +301,9 @@ def main():
                       ensure_ascii=False, indent=2)
             print(f'Instantánea guardada en {a.snapshot_out}')
         if a.baseline:
+            approved = _load(a.approved_editorial) if a.approved_editorial else None
             problems += compare(_load(a.baseline), snapshot(records, platform, ids, aliases),
-                                include_platform=not a.skip_platform)
+                                include_platform=not a.skip_platform, approved_editorial=approved)
     except (RuntimeError, ValueError) as e:
         print('ERROR:', e); sys.exit(2)
     for w in warnings: print('AVISO:', w)
