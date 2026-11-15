@@ -21,11 +21,15 @@ Uso:
   # antes de migrar
   python3 check_identity_consistency.py --roster roster-data.json \
       --records creator-records.json --platform platform-stats.json \
-      --alias patoteexplica=pato-oratoris --snapshot-out base.json
+      --alias patoteexplica=pato-oratoris --snapshot-out base.json \\
+      --note "<SHA previo a la migración>"
   # después de migrar
   python3 check_identity_consistency.py --roster roster-data.json \
       --records creator-records.json --platform platform-stats.json \
-      --baseline base.json --strict
+      --baseline base.json --strict --skip-platform
+IMPORTANTE: la instantánea base se toma UNA sola vez ANTES de migrar y se
+versiona en el repositorio. No regenerarla en cada corrida de CI.
+--skip-platform omite los conteos variables de platform-stats.json.
 Pruebas: python3 check_identity_consistency.py --selftest
 Salida: 0 OK · 1 falla de datos · 2 error de lectura/configuración.
 """
@@ -93,8 +97,8 @@ def check_identity(roster, records, platform, aliases=None, strict=False):
     return problems, warnings
 
 
-def snapshot(records, platform, ids, aliases=None):
-    aliases, snap = aliases or {}, {'creator_records': {}, 'platform_stats': {}}
+def snapshot(records, platform, ids, aliases=None, note=None):
+    aliases, snap = aliases or {}, {'_meta': {'note': note or ''}, 'creator_records': {}, 'platform_stats': {}}
     if records is not None:
         mapping, _, _ = resolve_keys(list((records.get('channels') or {}).keys()), set(ids), aliases)
         for k, hid in mapping.items():
@@ -113,7 +117,7 @@ def snapshot(records, platform, ids, aliases=None):
     return snap
 
 
-def compare(baseline, current):
+def compare(baseline, current, include_platform=True):
     problems = []
     for hid, fields in baseline.get('creator_records', {}).items():
         cur = current['creator_records'].get(hid)
@@ -127,7 +131,7 @@ def compare(baseline, current):
                 problems.append(f'creator-records "{hid}.{f}": {meta["count"]} -> {c.get("count")} elementos')
             elif c.get('sha256') != meta['sha256']:
                 problems.append(f'creator-records "{hid}.{f}": el contenido cambió')
-    for hid, meta in baseline.get('platform_stats', {}).items():
+    for hid, meta in (baseline.get('platform_stats', {}).items() if include_platform else []):
         cur = current['platform_stats'].get(hid)
         if cur is None:
             problems.append(f'platform-stats: se perdió "{hid}"'); continue
@@ -218,6 +222,19 @@ class Tests(unittest.TestCase):
         self.assertTrue(any('se perdió el registro' in m for m in
                             compare(base, snapshot({'channels': {}}, PLAT_OLD, ['pato-oratoris'], {}))))
 
+
+    def test_skip_platform_ignora_conteos_que_cambian_legitimamente(self):
+        base = self._snap(REC_OLD)
+        plat2 = {'creators': {'pato-oratoris': {'platforms': {'youtube': {'recent_videos': VIDEOS[:2]}}}}}
+        cur = snapshot(REC_OLD, plat2, ['pato-oratoris'], self.A)
+        self.assertTrue(compare(base, cur))
+        self.assertEqual(compare(base, cur, include_platform=False), [])
+
+    def test_meta_no_afecta_la_comparacion(self):
+        base = snapshot(REC_OLD, PLAT_OLD, ['pato-oratoris'], self.A, note='SHA previo')
+        self.assertEqual(base['_meta']['note'], 'SHA previo')
+        self.assertEqual(compare(base, snapshot(REC_OLD, PLAT_OLD, ['pato-oratoris'], self.A)), [])
+
     def test_platform_stats_cuenta_listas(self):
         base = self._snap(REC_OLD)
         plat2 = {'creators': {'pato-oratoris': {'platforms': {'youtube': {'recent_videos': VIDEOS[:2]}}}}}
@@ -240,6 +257,9 @@ def main():
     ap.add_argument('--alias', action='append', default=[], help='clave_vieja=hero.id')
     ap.add_argument('--strict', action='store_true')
     ap.add_argument('--snapshot-out'); ap.add_argument('--baseline')
+    ap.add_argument('--note', help='texto libre para la instantánea (p. ej. SHA previo a la migración)')
+    ap.add_argument('--skip-platform', action='store_true',
+                    help='no comparar platform-stats (sus conteos cambian con cada captura)')
     ap.add_argument('--selftest', action='store_true')
     a = ap.parse_args()
     if a.selftest:
@@ -254,11 +274,12 @@ def main():
         problems, warnings = check_identity(roster, records, platform, aliases, a.strict)
         ids = [h.get('id') for h in roster.get('heroes', []) if h.get('id')]
         if a.snapshot_out:
-            json.dump(snapshot(records, platform, ids, aliases), open(a.snapshot_out, 'w', encoding='utf-8'),
+            json.dump(snapshot(records, platform, ids, aliases, a.note), open(a.snapshot_out, 'w', encoding='utf-8'),
                       ensure_ascii=False, indent=2)
             print(f'Instantánea guardada en {a.snapshot_out}')
         if a.baseline:
-            problems += compare(_load(a.baseline), snapshot(records, platform, ids, aliases))
+            problems += compare(_load(a.baseline), snapshot(records, platform, ids, aliases),
+                                include_platform=not a.skip_platform)
     except (RuntimeError, ValueError) as e:
         print('ERROR:', e); sys.exit(2)
     for w in warnings: print('AVISO:', w)
