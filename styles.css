@@ -5155,3 +5155,19 @@ main .chapter-panel :where(.chapter-cta, .executive-button, .comic-submit-btn,
         transition:background-color .16s ease;
     }
 }
+
+
+/* VALORES · traducir el manifiesto en prácticas observables */
+.manifesto-practice{margin:34px 0;padding:clamp(22px,4vw,38px);background:linear-gradient(145deg,rgba(18,29,47,.97),rgba(9,13,23,.98));border:1px solid rgba(134,223,240,.27);box-shadow:0 16px 36px rgba(0,0,0,.2)}
+.manifesto-practice-heading{max-width:850px;margin-bottom:22px}
+.manifesto-practice-heading>span,.manifesto-practice-grid article>span{color:#86dff0;font-size:.66rem;font-weight:900;letter-spacing:.15em}
+.manifesto-practice-heading h3{margin:10px 0;color:#f2d69a;font:clamp(1.9rem,4vw,2.8rem)/1 'Bangers',cursive;letter-spacing:.035em}
+.manifesto-practice-heading p{max-width:760px;color:#d1dbe8;line-height:1.7}
+.manifesto-practice-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.manifesto-practice-grid article{min-width:0;padding:20px;background:rgba(5,10,19,.68);border-top:2px solid rgba(213,167,255,.72)}
+.manifesto-practice-grid h4{margin:10px 0;color:#fff;font:1.55rem/1 'Bangers',cursive;letter-spacing:.035em}
+.manifesto-practice-grid p{margin:0;color:#c5d1df;font-size:.88rem;line-height:1.68}
+.manifesto-practice-footnote{margin:16px 0 0;padding:14px 16px;background:rgba(134,223,240,.07);border-left:3px solid #86dff0;color:#e1eaf3;font-size:.88rem;line-height:1.65}
+@media(max-width:850px){.manifesto-practice-grid{grid-template-columns:1fr 1fr}.manifesto-practice-grid article:last-child{grid-column:1/-1}}
+@media(max-width:600px){.manifesto-practice{padding:18px 14px}.manifesto-practice-grid{grid-template-columns:1fr}.manifesto-practice-grid article:last-child{grid-column:auto}}
+@media(prefers-reduced-motion:reduce){.manifesto-practice *{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
