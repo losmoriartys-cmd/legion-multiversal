@@ -9,19 +9,19 @@ test('el índice de Bitácora enlaza con los capítulos reales del sitio', async
   );
   expect(entries).toHaveLength(13);
   expect(entries.map(entry => entry.href)).toEqual([
-    'index.html#chapter-0',
-    'index.html#chapter-1',
-    'index.html#chapter-11',
-    'index.html#chapter-2',
-    'index.html#chapter-3',
-    'index.html#chapter-9',
-    'index.html#chapter-8',
-    'index.html#chapter-12',
-    'index.html#chapter-14',
-    'index.html#chapter-5',
-    'index.html#chapter-10',
-    'index.html#chapter-6',
-    'index.html#chapter-13'
+    './index.html#chapter-0',
+    './index.html#chapter-1',
+    './index.html#chapter-11',
+    './index.html#chapter-2',
+    './index.html#chapter-3',
+    './index.html#chapter-9',
+    './index.html#chapter-8',
+    './index.html#chapter-12',
+    './index.html#chapter-14',
+    './index.html#chapter-5',
+    './index.html#chapter-10',
+    './index.html#chapter-6',
+    './index.html#chapter-13'
   ]);
 
   const targetChecks = await page.evaluate(async hrefs => {
