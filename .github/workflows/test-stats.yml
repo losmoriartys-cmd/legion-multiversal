@@ -57,7 +57,7 @@ jobs:
       - name: Verificar claves y slugs del Roster
         run: |
           python scripts/check_identity_consistency.py --roster roster-data.json --records creator-records.json --platform platform-stats.json \
-            --baseline tests/baselines/identity-before-canonical-migration.json --strict --skip-platform
+            --baseline tests/baselines/identity-before-canonical-migration.json --approved-editorial tests/baselines/approved-editorial-updates.json --strict --skip-platform
       - name: Verificar conservación contra línea base versionada
         run: |
           test -s tests/baselines/identity-before-canonical-migration.json
