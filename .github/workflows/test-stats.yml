@@ -53,10 +53,7 @@ jobs:
       - name: Verificar claves y slugs del Roster
         run: |
           python scripts/check_identity_consistency.py --roster roster-data.json --records creator-records.json --platform platform-stats.json \
-            --alias losmoriartys=moriartys --alias ladymoriarty01=lady-moriarty --alias ther0d3r1k=rod3r1k \
-            --alias habitos_atomicos=habitos --alias ardipii=ardipii --alias akumazoldyck=akuma \
-            --alias daved0608=dave-nexus --alias patoteexplica=pato-oratoris \
-            --baseline tests/baselines/identity-before-canonical-migration.json --skip-platform
+            --baseline tests/baselines/identity-before-canonical-migration.json --strict --skip-platform
       - name: Verificar conservación contra línea base versionada
         run: |
           test -s tests/baselines/identity-before-canonical-migration.json
