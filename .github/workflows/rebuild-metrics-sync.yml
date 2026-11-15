@@ -1,4 +1,4 @@
-name: Rebuild creator metrics (temporary sync helper)
+name: Rebuild creator metrics (temporary sync helper · regenerate after sync)
 on:
   push:
     branches:
