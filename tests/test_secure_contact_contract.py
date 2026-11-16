@@ -26,7 +26,7 @@ class SecureContactContractTests(unittest.TestCase):
         self.assertIn("siteverify", self.endpoint)
         self.assertIn("RESEND_API_KEY", self.endpoint)
         self.assertIn("api.resend.com/emails", self.endpoint)
-        self.assertIn('status: 503', self.endpoint)
+        self.assertIn('}, 503)', self.endpoint)
         self.assertIn("No se registró como enviado", self.endpoint)
 
     def test_browser_confirms_only_successful_server_response(self):
