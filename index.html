@@ -43,8 +43,9 @@
       h1,h2,h3,h4,.comic-title,.chapter-tag,.nav-btn{font-family:'Bangers',cursive;letter-spacing:.045em}
       p,li,label,input,textarea,select,button,small{font-family:'Roboto Condensed',sans-serif}
       header{background:var(--panel-bg);border-bottom:3px solid var(--border-color);padding:8px clamp(12px,2.4vw,30px);display:flex;flex-direction:column;gap:8px;box-shadow:0 6px 0 var(--border-color);position:sticky;top:0;z-index:100}
-      .header-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
-      .logo-container{display:flex;align-items:center;gap:15px}
+      .header-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:nowrap;gap:8px}
+      .logo-container{display:flex;align-items:center;gap:15px;flex:1;min-width:0}
+      .title-group{min-width:0}
       .header-brand-emblem{display:block;width:54px;height:54px;flex:0 0 54px;object-fit:contain;filter:drop-shadow(4px 4px 0 #000) drop-shadow(0 0 9px rgba(0,210,255,.18))}
       .title-group h1{font:clamp(1.45rem,2.3vw,2rem)/1 'Bangers',cursive;letter-spacing:2px;color:var(--yellow-accent);text-shadow:3px 3px 0 var(--border-color)}
       .title-group p{font-size:.68rem;font-weight:700;color:#a0aec0;letter-spacing:1px}
@@ -63,6 +64,8 @@
       .executive-hero{position:relative;display:block;min-height:clamp(440px,58vw,640px);overflow:hidden;padding:clamp(24px,4vw,52px);border:1px solid rgba(128,190,220,.24);background:#08111e;isolation:isolate}
       .executive-hero-art{position:absolute;inset:0;margin:0;padding:0;border:0;box-shadow:none;transform:none;z-index:-2;opacity:.34}
       .executive-hero-art img{display:block;width:100%;height:100%;max-height:none;object-fit:cover;object-position:center 24%;filter:saturate(.72)}
+      #chapter-0 .executive-hero-art.executive-hero-banner{position:absolute;inset:0;width:auto;max-width:none;height:auto;margin:0;padding:0;border:0;box-shadow:none;transform:none;z-index:-2;opacity:.34}
+      #chapter-0 .executive-hero-art.executive-hero-banner img{display:block;width:100%;height:100%;max-height:none;aspect-ratio:auto;object-fit:cover;object-position:center 24%;filter:saturate(.72)}
       .executive-hero:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(5,10,18,.96),rgba(5,10,18,.72) 58%,rgba(5,10,18,.25)),linear-gradient(0deg,rgba(5,10,18,.45),transparent 60%)}
       .executive-hero-copy{position:relative;z-index:1;max-width:760px;min-height:0;display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
       .executive-kicker{display:block;color:#8ddff2;font:.72rem 'Special Elite',cursive;letter-spacing:.12em;line-height:1.5}
@@ -78,7 +81,7 @@
       .skip-to-content{position:absolute;left:14px;top:-80px;z-index:10000;padding:11px 15px;background:#f4d98d;color:#101722;border:2px solid #101722;font-weight:900;text-decoration:none}
       .skip-to-content:focus{top:12px}
       @media(max-width:900px){header{position:sticky;top:0;padding:7px 12px}.header-brand-emblem{width:46px;height:46px;flex-basis:46px}.title-group h1{font-size:1.55rem}header .primary-navigation{justify-content:flex-start;overflow-x:auto;padding:2px 1px 5px;scrollbar-width:thin}header .primary-navigation .nav-btn{flex:0 0 auto}}
-      @media(max-width:600px){header{gap:5px}.header-top{align-items:center}.header-brand-emblem{width:40px;height:40px;flex-basis:40px}.title-group h1{font-size:1.3rem;letter-spacing:1px}.title-group p{font-size:.56rem;letter-spacing:.04em}.sound-toggle{padding:5px 7px;font-size:.7rem}header .primary-navigation{gap:5px}header .primary-navigation .nav-btn{padding:7px 9px;font-size:.72rem}.executive-home{padding:54px 12px 20px}.executive-hero{min-height:0;padding:14px 14px 18px}.executive-hero-copy{min-height:0;max-width:none}.executive-hero h2{max-width:18ch;font-size:clamp(1.9rem,8.3vw,2.35rem);line-height:1.05;margin-bottom:8px}.executive-lead{margin-bottom:8px;font-size:.88rem;line-height:1.34}.executive-proofline{gap:5px 8px;font-size:.64rem}.executive-hero-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin-top:14px}.executive-hero-actions .executive-button{width:100%;min-width:0;min-height:44px;padding:8px 6px;gap:5px;justify-content:center;white-space:nowrap;font-size:.92rem}.executive-hero-art img{object-position:center 24%}}
+      @media(max-width:600px){header{gap:5px}.header-top{align-items:center;flex-wrap:nowrap}.title-group h1{font-size:clamp(1.05rem,4.6vw,1.3rem);letter-spacing:1px;white-space:nowrap}.header-brand-emblem{width:40px;height:40px;flex-basis:40px}.title-group p{font-size:.56rem;letter-spacing:.04em}.sound-toggle{flex:0 0 auto;padding:5px 7px;font-size:.7rem}header .primary-navigation{gap:5px;min-height:42px}header .primary-navigation .nav-btn{padding:7px 9px;font-size:.72rem}.executive-home{padding:54px 12px 20px}.executive-hero{min-height:0;padding:14px 14px 18px}.executive-hero-copy{min-height:0;max-width:none}.executive-hero h2{max-width:18ch;font-size:clamp(1.9rem,8.3vw,2.35rem);line-height:1.05;margin-bottom:8px}.executive-lead{margin-bottom:8px;font-size:.88rem;line-height:1.34}.executive-proofline{gap:5px 8px;font-size:.64rem}.executive-hero-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin-top:14px}.executive-hero-actions .executive-button{width:100%;min-width:0;min-height:44px;padding:8px 6px;gap:5px;justify-content:center;white-space:nowrap;font-size:.92rem}}
       @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
     </style>
     <link rel="stylesheet" href="./chapter-8.css?v=20261116-portrait-framing-1" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="./chapter-8.css?v=20261116-portrait-framing-1"></noscript>
