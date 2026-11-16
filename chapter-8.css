@@ -254,3 +254,36 @@
     .chapter-8-alliance .alliance-market-grid,
     .chapter-8-alliance .alliance-market-reading { grid-template-columns: 1fr; }
 }
+
+/* Encuadre de credencial: TheR0d3R1K, sin cortar el rostro. */
+#chapter-8 .alliance-person-card {
+  grid-template-columns: minmax(0, 240px) minmax(0, 1fr);
+}
+#chapter-8 .alliance-person-avatar {
+  width: 100%;
+  max-width: 240px;
+  aspect-ratio: 4 / 5;
+  max-height: 300px;
+  object-fit: cover;
+  object-position: center 18%;
+  border-radius: 10px;
+  display: block;
+}
+@media (max-width: 760px) {
+  #chapter-8 .alliance-person-card {
+    grid-template-columns: minmax(0, 200px) minmax(0, 1fr);
+  }
+  #chapter-8 .alliance-person-avatar {
+    max-width: 200px;
+    max-height: 250px;
+    margin: 0 auto 1rem;
+  }
+}
+@media (max-width: 480px) {
+  #chapter-8 .alliance-person-card {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  #chapter-8 .alliance-person-avatar {
+    justify-self: center;
+  }
+}
