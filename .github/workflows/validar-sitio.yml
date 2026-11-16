@@ -41,6 +41,8 @@ jobs:
     steps:
       - name: Descargar repositorio
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Configurar Node.js
         uses: actions/setup-node@v4
         with:
@@ -62,8 +64,16 @@ jobs:
         run: python -m pip install --disable-pip-version-check Pillow
       - name: Auditar dimensiones intrínsecas de imágenes HTML
         run: python scripts/add_image_dimensions.py --check --measure-remotes index.html
+      - name: Auditar referencias de imágenes en main y snapshots históricos
+        run: |
+          mkdir -p reports/image-audit
+          git worktree add --detach /tmp/image-audit-b8fd4ae b8fd4ae
+          git worktree add --detach /tmp/image-audit-0d578a0 0d578a02cfe9ab775ad4623096a93d2d33641fd8
+          python scripts/audit_image_references.py --root /tmp/image-audit-b8fd4ae --output reports/image-audit/b8fd4ae.md
+          python scripts/audit_image_references.py --root /tmp/image-audit-0d578a0 --output reports/image-audit/0d578a0.md
+          python scripts/audit_image_references.py --root . --output reports/image-audit/main.md
       - name: Compilar colectores Python
-        run: python -m py_compile update_stats.py update_platform_stats.py update_clips.py scripts/validate_roster_data.py scripts/validate_clips_data.py scripts/render_roster_noscript.py scripts/validate_metric_history.py scripts/build_creator_metrics.py scripts/validate_creator_metrics.py scripts/audit_and_optimize_images.py scripts/add_image_dimensions.py scripts/summarize_lighthouse.py scripts/lh_failures.py
+        run: python -m py_compile scripts/audit_image_references.py update_stats.py update_platform_stats.py update_clips.py scripts/validate_roster_data.py scripts/validate_clips_data.py scripts/render_roster_noscript.py scripts/validate_metric_history.py scripts/build_creator_metrics.py scripts/validate_creator_metrics.py scripts/audit_and_optimize_images.py scripts/add_image_dimensions.py scripts/summarize_lighthouse.py scripts/lh_failures.py
       - name: Ejecutar pruebas unitarias Python del repositorio
         run: python -m unittest discover -s tests -p 'test_*.py' -v
       - name: Probar lectura de cuentas por los colectores
@@ -89,3 +99,11 @@ jobs:
           python -c "import update_clips; accounts=update_clips.load_roster_accounts(); assert len(accounts)==7 and any(a['creator_id']=='moriartys' for a in accounts); print('OK: colector de clips lee {} canales Twitch'.format(len(accounts)))"
       - name: Validar rutas, imágenes y enlaces declarados
         run: python scripts/validate_site.py
+      - name: Publicar auditorías de referencias de imágenes
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: image-reference-audit-${{ github.sha }}
+          path: reports/image-audit/
+          if-no-files-found: warn
+          retention-days: 30
