@@ -3046,3 +3046,14 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - GitHub Pages: workflow de build y deploy **SUCCESS** para el mismo HEAD.
 - La URL de preview de Cloudflare fue emitida por el proveedor. La inspección visual manual de esa URL no pudo realizarse desde el navegador de revisión disponible; no se declara QA visual manual.
 - Pull requests abiertos: **0**. Sin nuevas ramas ni cambios de credenciales, secretos o fuentes de estadísticas.
+
+
+## 2026-11-16 — Evidencia de cuenta Epic aportada para LOS MORIARTYS
+
+- El titular transcribió desde Epic Games la sección **«Información de la cuenta de creador»**, incluyendo el Creator ID `dc2236199d3c4fc88932c290ad87be97` y el código `losmoriartys`.
+- Ambos valores coinciden con el registro canónico del proyecto (`LOSMORIARTYS` se normaliza en mayúsculas para presentación; se conserva el valor transcrito de Epic en la evidencia).
+- `creator-programs.json` registra la procedencia, fecha de aporte, método de obtención y resultado de la comparación. El estado de MORIARTYS se distingue del de ROD3R1K: **«ASOCIACIÓN COINCIDENTE · INFORMACIÓN DE CUENTA APORTADA»**.
+- La ficha explica que es una transcripción textual aportada por el titular, no una consulta automática ni una revalidación técnica en vivo de Epic. Se conserva `account_portal_revalidated: false`; no se afirma acceso a sesiones privadas, vigencia operativa ni estadísticas del programa.
+- `app.js` muestra el estado y la nota probatoria por creador desde el registro central. La misma tarjeta se reutiliza en Alianzas y en el expediente individual de MORIARTYS. El código de ROD3R1K conserva su estado previo.
+- Se amplió `tests/test_epic_creator_programs.py` para comprobar coincidencia de Creator ID/código, procedencia, distinción de estado y ausencia de falsa verificación automática.
+- Validación y despliegue de este addendum: pendientes de ejecución para el commit resultante.
