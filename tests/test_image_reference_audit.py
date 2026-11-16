@@ -23,6 +23,21 @@ class ImageReferenceAuditTests(unittest.TestCase):
             self.assertEqual(results["assets/history.webp"]["classification"], "docs/tooling")
             self.assertEqual(results["assets/orphan.avif"]["classification"], "orphan")
 
+    def test_generated_audit_reports_do_not_create_false_references(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = pathlib.Path(temporary)
+            (root / "assets").mkdir()
+            (root / "assets" / "orphan.jpg").write_bytes(b"orphan")
+            reports = root / "reports" / "image-audit"
+            reports.mkdir(parents=True)
+            (reports / "previous.md").write_text(
+                "La imagen assets/orphan.jpg no tiene referencias activas.",
+                encoding="utf-8",
+            )
+            results = audit(root)
+            self.assertEqual(len(results), 1)
+            self.assertEqual(results[0]["classification"], "orphan")
+
     def test_bare_duplicate_basename_is_not_counted_as_a_reference(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = pathlib.Path(temporary)

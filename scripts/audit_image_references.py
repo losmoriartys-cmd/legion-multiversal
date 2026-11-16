@@ -13,7 +13,7 @@ TEXT_GROUPS = {
     "docs": {".md", ".txt", ".xml"},
     "tooling": {".py", ".sh", ".yml", ".yaml", ".toml"},
 }
-IGNORED_DIRS = {".git", "node_modules", ".venv", "venv", "__pycache__", ".pytest_cache", ".mypy_cache", ".ruff_cache"}
+IGNORED_DIRS = {".git", "node_modules", ".venv", "venv", "__pycache__", ".pytest_cache", ".mypy_cache", ".ruff_cache", "reports"}
 
 def ignored(path: Path) -> bool:
     return any(part in IGNORED_DIRS for part in path.parts)
