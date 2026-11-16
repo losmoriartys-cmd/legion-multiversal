@@ -198,44 +198,44 @@
       "youtube_videos": [
         {
           "title": "Dopamina, motivación y adicción: Qué es y cómo funciona",
-          "views": 47,
-          "age": "hace 1 año",
-          "source": "Listado del canal compartido por el equipo"
+          "views": 48,
+          "age": "publicado 2025-05-01",
+          "source": "YouTube Data API v3"
         },
         {
           "title": "Uniendo Javascript y HTML. Curso HTML + Javascript (5/5)",
           "views": 75,
-          "age": "hace 1 año",
+          "age": "publicado 2025-01-09",
           "series": "Curso HTML + Javascript",
-          "source": "Listado del canal compartido por el equipo"
+          "source": "YouTube Data API v3"
         },
         {
           "title": "Javascript Mapping y Filtering. Curso HTML + Javascript (4/5)",
           "views": 58,
-          "age": "hace 1 año",
+          "age": "publicado 2025-01-09",
           "series": "Curso HTML + Javascript",
-          "source": "Listado del canal compartido por el equipo"
+          "source": "YouTube Data API v3"
         },
         {
           "title": "Javascript segunda clase. Curso HTML + Javascript (3/5)",
           "views": 50,
-          "age": "hace 1 año",
+          "age": "publicado 2025-01-09",
           "series": "Curso HTML + Javascript",
-          "source": "Listado del canal compartido por el equipo"
+          "source": "YouTube Data API v3"
         },
         {
           "title": "Tu primera clase de Javascript. Curso HTML + Javascript (2/5)",
           "views": 43,
-          "age": "hace 1 año",
+          "age": "publicado 2025-01-09",
           "series": "Curso HTML + Javascript",
-          "source": "Listado del canal compartido por el equipo"
+          "source": "YouTube Data API v3"
         },
         {
           "title": "Tu primera página HTML en menos de una hora. Curso HTML + Javascript (1/5)",
           "views": 157,
-          "age": "hace 1 año",
+          "age": "publicado 2025-01-09",
           "series": "Curso HTML + Javascript",
-          "source": "Listado del canal compartido por el equipo"
+          "source": "YouTube Data API v3"
         }
       ],
       "featured_embeds": [
@@ -257,13 +257,15 @@
           "Programación: HTML y JavaScript",
           "Dopamina, motivación y adicción"
         ],
-        "future_direction": "Posible regreso durante 2027 con un enfoque renovado; incorporación gradual de temática gamer como línea complementaria, no principal.",
+        "future_direction": "Posible regreso durante 2027 con un enfoque renovado; incorporación gradual de temática gamer como línea complementaria, no principal. Proyección conversada, no calendario confirmado.",
         "schedule": "Sin frecuencia de publicación definida.",
         "platform_metrics": {
           "subscribers": 56,
           "videos": 6,
-          "views": 430,
-          "source": "Datos compartidos por el equipo; fecha exacta de captura no indicada."
+          "views": 431,
+          "source": "YouTube Data API v3",
+          "captured_at": "2026-11-16T03:37:22Z",
+          "note": "Valores públicos acumulados; la captura más reciente es la fuente canónica. No son métricas privadas ni una proyección."
         }
       }
     }
