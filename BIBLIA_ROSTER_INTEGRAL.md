@@ -685,3 +685,18 @@ La experiencia principal del Roster deja de organizar la exploración alrededor 
 La inspección estática confirmó ocho perfiles canónicos, selector y panel presentes, navegación de teclado, uso de la fuente live existente, reutilización del progreso, comparador sin métricas inventadas y ausencia del botón de simulación del prototipo. El branch se sincronizó con el último commit de `main`; los cuatro archivos de datos (`data.json`, `clips-data.json`, `creator-metrics.json` y `platform-stats.json`) tienen el mismo blob SHA en ambas ramas.
 
 No hay todavía CI asociado a esta tanda ni QA visual real en navegador. Antes de integrar a `main) se requieren validación JS/HTML/CSS, carga de los ocho retratos, pruebas de interacción desktop/móvil, Back/Forward de expedientes, accesibilidad y revisión visual. Producción permanece intacta.
+
+
+### Cierre de validación automática — selector de personajes
+
+- Commit de código validado: `8e8dea53e31a82ff9360e6f73a3b98db0f84dc07`.
+- GitHub Actions [run 43794534542](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43794534542): **SUCCESS**.
+- `node --check app.js`: SUCCESS.
+- JSON, modelo del roster, cobertura de cuentas Twitch, fallback sin JavaScript, colectores, clips, historial y métricas normalizadas: SUCCESS.
+- Suite Python: **47 pruebas aprobadas**.
+- Playwright: **5 pruebas aprobadas**, incluyendo selector con ocho integrantes, apertura de cada expediente, modales, Bitácora y rutas históricas.
+- Validador del sitio: **8 perfiles** y **40 referencias locales** comprobadas; SUCCESS.
+- La primera ejecución falló por una expectativa obsoleta en un test del expediente compartido; se actualizó el contrato de prueba y la ejecución final quedó verde. No se ocultó ni se dejó pendiente ese fallo.
+- QA manual visual en distintos dispositivos y lector de pantalla continúa siendo una revisión posterior; CI no sustituye esa inspección.
+
+La rama continúa aislada de producción. No se creó PR ni se fusionó a `main`.
