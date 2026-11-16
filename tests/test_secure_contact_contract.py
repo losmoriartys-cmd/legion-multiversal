@@ -60,6 +60,8 @@ class SecureContactContractTests(unittest.TestCase):
         self.assertIn("followers_total", self.media_kit)
         self.assertIn("País e idioma de la audiencia: sin datos propios verificables.", self.media_kit)
         self.assertIn("sin sumar audiencias", self.media_kit)
+        self.assertEqual(self.media_kit.count("ABRIR EXPEDIENTE INDIVIDUAL"), 2)
+        self.assertIn("channel-kit-dossier-link", self.media_kit)
 
 
 if __name__ == "__main__":
