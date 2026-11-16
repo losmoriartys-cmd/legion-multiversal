@@ -1,0 +1,125 @@
+/* Legión Multiversal · Roster visual fixes
+   Capa correctiva aislada. Mantiene el arte existente y reduce efectos que compiten
+   con la lectura. Validación visual real pendiente en navegadores. */
+
+/* Contraste del título editorial y del banner institucional. */
+#chapter-2 > .comic-title,
+#chapter-2 .comic-title {
+  display: block;
+  padding: 0;
+  background: none;
+  border: 0;
+  box-shadow: none;
+  transform: none;
+  color: #f3e4c2;
+  text-shadow: 0 3px 0 rgba(0,0,0,.6), 0 0 26px rgba(88,184,219,.16);
+}
+#chapter-2 .institute-banner {
+  background: linear-gradient(145deg,rgba(23,38,59,.96),rgba(8,15,27,.97));
+  color: #dce8f2;
+}
+#chapter-2 .institute-banner h3 { color:#f3e4c2; }
+#chapter-2 .institute-banner p { color:#c5d2e2; }
+
+/* Fondo sobrio: el contenido y los retratos tienen prioridad visual. */
+#chapter-2.comic-page {
+  border: 1px solid rgba(125,164,198,.2);
+  background-color: #0b1321 !important;
+  background-image:
+    radial-gradient(ellipse at 50% 0%,rgba(74,134,185,.11),transparent 42rem),
+    linear-gradient(180deg,#0b1321,#080d18 72%) !important;
+  background-size: auto !important;
+}
+#chapter-2.comic-page::before,
+#chapter-2.comic-page::after {
+  content: none !important;
+  animation: none !important;
+}
+
+/* Evita que el fill-mode de entrada retenga el transform y apague el tilt. */
+#chapter-2 #roster-container .roster-collectible-card {
+  animation-fill-mode: backwards;
+}
+#chapter-2 .roster-card-holo {
+  animation: none !important;
+}
+
+/* Grilla fluida y márgenes útiles en pantallas pequeñas. */
+#chapter-2 .roster-grid {
+  grid-template-columns: repeat(auto-fit,minmax(min(100%,250px),1fr));
+  justify-items: center;
+  gap: clamp(16px,2.4vw,30px);
+}
+@media (max-width:640px) {
+  #chapter-2 { padding:64px 14px 24px; }
+}
+
+/* Tipografía relativa al ancho real de cada carta (5:7). */
+@supports (container-type:inline-size) {
+  #chapter-2 .roster-card-3d-shell { container-type:inline-size; }
+  #chapter-2 .roster-card-front-header {
+    top:5.5cqw; left:6.2cqw; right:6.2cqw;
+    font-size:clamp(10px,3.4cqw,12px);
+  }
+  #chapter-2 .roster-card-front-header b { font-size:clamp(10px,3.2cqw,11.5px); }
+  #chapter-2 .roster-card-portrait { inset:17cqw 6.2cqw 40cqw; }
+  #chapter-2 .roster-card-front-name {
+    left:6cqw; right:6cqw; bottom:17.5cqw; min-height:18.5cqw;
+  }
+  #chapter-2 .roster-card-front-name strong { font-size:clamp(15px,7cqw,22px); }
+  #chapter-2 .roster-card-front-name small { font-size:clamp(10px,3.4cqw,12px); }
+  #chapter-2 .roster-card-front-name em { font-size:clamp(10px,3.3cqw,11.5px); }
+  #chapter-2 .roster-card-front-meta { left:6cqw; right:26cqw; bottom:5cqw; }
+  #chapter-2 .roster-card-front-meta b,
+  #chapter-2 .roster-card-front-meta small { font-size:clamp(10px,3.2cqw,11.5px); }
+  #chapter-2 .roster-card-flip-hint {
+    right:5cqw; bottom:4.6cqw; font-size:clamp(10px,3cqw,11px);
+  }
+  #chapter-2 .roster-card-back-content { padding:5cqw 5.4cqw 4.8cqw; }
+  #chapter-2 .roster-card-back-top { font-size:clamp(10px,3.3cqw,12px); }
+  #chapter-2 .roster-card-back-identity h4 { font-size:clamp(15px,6.2cqw,19px); }
+  #chapter-2 .roster-card-back-identity small { font-size:clamp(10px,3.2cqw,11px); }
+  #chapter-2 .roster-card-back-identity p { font-size:clamp(11px,3.8cqw,13px); }
+  #chapter-2 .roster-card-facts dt { font-size:clamp(10px,3.1cqw,11px); }
+  #chapter-2 .roster-card-facts dd { font-size:clamp(11px,3.7cqw,13px); }
+  #chapter-2 .roster-card-back-bio {
+    font-size:clamp(11px,3.7cqw,12.5px);
+    -webkit-line-clamp:3;
+  }
+  #chapter-2 .roster-card-back-actions button {
+    font-size:clamp(10.5px,3.3cqw,12px);
+    min-height:40px;
+  }
+  @container (max-width:230px) {
+    .roster-card-front-name em,
+    .roster-card-front-meta small,
+    .roster-card-back-bio { display:none; }
+  }
+}
+
+/* Safari iOS: evita zoom automático al enfocar formularios del capítulo. */
+@media (max-width:760px) {
+  .recruitment-contact-form input,
+  .recruitment-contact-form select,
+  .recruitment-contact-form textarea,
+  .form-group input,
+  .form-group select,
+  .form-group textarea { font-size:16px; }
+}
+
+/* No reproducir la entrada completa cuando se reconstruye la grilla. */
+#chapter-2 #roster-container.is-rerender .roster-collectible-card {
+  animation:none !important;
+}
+
+/* Reduce tilt/foil y conserva una respuesta clara de foco. */
+@media (prefers-reduced-motion:reduce) {
+  #chapter-2 .roster-collectible-card,
+  #chapter-2 .roster-card-3d-inner,
+  #chapter-2 .roster-card-face,
+  #chapter-2 .roster-card-holo {
+    transition-duration:.01ms !important;
+    animation:none !important;
+  }
+  #chapter-2 .roster-collectible-card { transform:none !important; }
+}
