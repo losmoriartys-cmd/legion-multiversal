@@ -90,7 +90,7 @@ jobs:
           assert 'styles.css?v=20261116-commercial-portfolio-1" media="print" onload="this.media=\'all\'"' in html, "La hoja global no está diferida."
           assert '<noscript><link rel="stylesheet" href="./styles.css?v=20261116-commercial-portfolio-1"></noscript>' in html, "Falta fallback de CSS global sin JavaScript."
           critical = html.split('<style id="critical-home-styles">', 1)[1].split('</style>', 1)[0]
-          for selector in ("header{", "main{", ".chapter-panel{", ".executive-hero{", ".executive-hero-art img{", ".executive-button{", "#chapter-0.chapter-panel.active{", "#chapter-0.chapter-panel.active .chapter-tag{"):
+          for selector in ("header{", ".header-top{", "main{", ".chapter-panel{", ".executive-hero{", ".executive-hero-art img{", "#chapter-0 .executive-hero-art.executive-hero-banner{", "#chapter-0 .executive-hero-art.executive-hero-banner img{", ".executive-button{", "#chapter-0.chapter-panel.active{", "#chapter-0.chapter-panel.active .chapter-tag{"):
               assert selector in critical, f"Falta estilo crítico: {selector}"
           print("OK: Hero responsive, preload adaptable, CSS crítico inline y fallback noscript verificados.")
           PY
