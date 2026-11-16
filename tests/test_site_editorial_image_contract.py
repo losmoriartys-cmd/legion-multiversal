@@ -60,6 +60,9 @@ class SiteEditorialImageContract(unittest.TestCase):
 
 
 class CommercialPortfolioContractTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.html = (ROOT / "index.html").read_text(encoding="utf-8")
     def test_roster_has_thematic_audience_fit_for_all_eight_profiles(self):
         import json
         roster = json.loads((ROOT / "roster-data.json").read_text(encoding="utf-8"))
