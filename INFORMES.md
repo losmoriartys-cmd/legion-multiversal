@@ -3057,3 +3057,5 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - `app.js` muestra el estado y la nota probatoria por creador desde el registro central. La misma tarjeta se reutiliza en Alianzas y en el expediente individual de MORIARTYS. El código de ROD3R1K conserva su estado previo.
 - Se amplió `tests/test_epic_creator_programs.py` para comprobar coincidencia de Creator ID/código, procedencia, distinción de estado y ausencia de falsa verificación automática.
 - Validación y despliegue de este addendum: pendientes de ejecución para el commit resultante.
+
+- **Corrección de QA:** la primera ejecución del contrato extendido (run `43805709988`) encontró una aserción sensible a mayúsculas en el texto de evidencia, no una discrepancia de datos ni un fallo de implementación. Se ajustó la expectativa al texto exacto; la nueva ejecución queda pendiente.
