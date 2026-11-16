@@ -16,7 +16,7 @@ class ConversionNavigationContractTests(unittest.TestCase):
                                ("PARA MARCAS", "8"), ("UNITE", "6"), ("ORIGEN", "1")):
             self.assertIn(f'data-chapter="{chapter}"', nav)
             self.assertIn(label, nav)
-        self.assertEqual(nav.count('class="nav-btn"'), 5)
+        self.assertEqual(nav.count('data-chapter='), 5)
         self.assertNotIn("secondary-navigation", self.html)
 
     def test_home_hero_routes_to_live_and_brands(self):
