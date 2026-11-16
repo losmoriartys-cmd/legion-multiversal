@@ -3122,3 +3122,4 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **Playwright:** se actualizó el selector de la prueba de primera pantalla para comprobar el nuevo CTA «MIRAR EN VIVO» en escritorio y móvil, en lugar del texto anterior.
 - **Archivo de campañas:** se retiró del HTML público el anexo con solicitudes, accesos y fechas operativas. No se simula privacidad mediante un modal o URL no enlazada; su publicación interna queda pendiente de autenticación real en servidor.
 - **Primera pantalla:** Playwright detectó que los CTAs quedaban por debajo del viewport en escritorio y móvil. Se redujo la altura mínima del hero y su espaciado responsive para que el titular y las dos rutas principales entren en el primer pantallazo.
+- **Contrato editorial:** se ajustó la prueba del archivo operativo para verificar que el anexo y sus fechas no estén publicados, y que el sitio comunique la necesidad de autenticación real para reabrirlo a creadores.

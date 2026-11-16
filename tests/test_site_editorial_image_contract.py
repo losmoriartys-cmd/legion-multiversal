@@ -45,7 +45,8 @@ class SiteEditorialImageContract(unittest.TestCase):
 
     def test_recruitment_and_campaign_archive_disclaimers_are_explicit(self):
         self.assertIn("requiere una decisión compartida", self.html)
-        self.assertIn("no confundir una postulación con una aprobación", self.html)
+        self.assertNotIn('id="chapter-14"', self.html)
+        self.assertIn("autenticación real", self.html)
 
     def test_editorial_chapter_labels_and_numbers_are_present(self):
         expected = {
