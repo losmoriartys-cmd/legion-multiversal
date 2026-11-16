@@ -3118,3 +3118,4 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **Validación:** se incorpora un contrato estático de fase 2 y se disparan los workflows automáticos al integrar. La inspección visual manual de producción queda pendiente.
 
 - **Ajuste de contrato de pruebas:** se actualizaron las expectativas de navegación para reconocer el nuevo cajón flotante en lugar de exigir el antiguo bloque de estado en portada. Las pruebas de accesibilidad del modal ahora aíslan sus tres pestañas y no confunden los nuevos controles de Alianzas/Reclutamiento con las pestañas del expediente.
+- **Media Kit por canal:** se añade la categoría principal de los últimos diez días según muestras observadas. La señal de chat 91/80 se muestra únicamente en la ficha de Los Moriartys como evidencia del VOD completo de BarFender; no se extrapola a los demás canales ni se presenta como tasa deduplicada.

@@ -52,6 +52,19 @@
           const recentDaily = daily.slice(-10);
           const dailyMax = Math.max(1, ...recentDaily.map((item) => Number(item.average_viewers_sampled) || 0));
           const liveSamples = recentDaily.reduce((sum, item) => sum + (Number(item.live_samples) || 0), 0);
+          const gameBreakdown = activityData.channels?.[login]?.window?.game_breakdown || [];
+          const primaryCategory = gameBreakdown.slice().sort((a, b) =>
+            (Number(b.live_samples) || 0) - (Number(a.live_samples) || 0)
+          )[0];
+          const categoryMetric = makeMetric(
+            "Categoría principal (10 días)",
+            primaryCategory?.name || "Sin datos",
+            primaryCategory ? number(primaryCategory.live_samples) + " muestras en directo" : "Sin categoría verificable"
+          );
+          const chatContextMetric = login === "losmoriartys"
+            ? makeMetric("Actividad de chat · BarFender", "91 / 80", "Usuarios activos en chat / espectadores únicos · VOD completo")
+            : "";
+
           const sparkline = recentDaily.length
             ? '<div class="channel-kit-sparkline" role="img" aria-label="Promedio diario de espectadores observado durante ' + recentDaily.length + ' días registrados">' +
               recentDaily.map((item) => {
@@ -70,9 +83,10 @@
             makeMetric("Promedio observado", number(avg?.value), "Muestras públicas") +
             makeMetric("Pico observado", number(peak?.value), "Muestras públicas") +
             makeMetric("Directos detectados", number(streams?.value), "En la ventana observada") +
+            categoryMetric + chatContextMetric +
             '</div>' + sparkline + '<p class="channel-kit-meta">Fuente: ' + escapeHtml(source) + ' · Período: ' +
             escapeHtml(date(period.from)) + ' – ' + escapeHtml(date(period.to)) + ' · Captura: ' +
-            escapeHtml(date(captured)) + '</p><p class="channel-kit-meta">País e idioma de la audiencia: sin datos propios verificables.</p><p class="channel-kit-dossier-link"><a href="../#roster/' + encodeURIComponent(id) + '">ABRIR EXPEDIENTE INDIVIDUAL / IMPRIMIR PDF ↗</a></p></article>'
+            escapeHtml(date(captured)) + '</p><p class="channel-kit-meta">La categoría principal se ordena por muestras en directo dentro de la ventana disponible. La actividad de chat solo se publica cuando existe un registro de evento/VOD con su alcance identificado; no se extrapola a otros canales.</p><p class="channel-kit-meta">País e idioma de la audiencia: sin datos propios verificables.</p><p class="channel-kit-dossier-link><a href="../#roster/' + encodeURIComponent(id) + '">ABRIR EXPEDIENTE INDIVIDUAL / IMPRIMIR PDF ↗</a></p></article>'
           );
         }
 
