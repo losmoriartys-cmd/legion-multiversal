@@ -11,7 +11,7 @@ test.beforeEach(async ({ context }) => {
 
 async function assertHomeActionsFit(page, viewportHeight) {
   const title = page.locator('.executive-hero-copy h2');
-  const primary = page.getByRole('button', { name: /VER QUIÉN ESTÁ EN VIVO/i });
+  const primary = page.getByRole('button', { name: /MIRAR EN VIVO/i });
   const secondary = page.getByRole('link', { name: /SOY UNA MARCA/i });
   await expect(title).toBeVisible();
   await expect(primary).toBeVisible();
