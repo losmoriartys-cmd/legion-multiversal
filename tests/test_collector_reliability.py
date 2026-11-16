@@ -51,6 +51,15 @@ class HttpRetryContractTests(unittest.TestCase):
         self.assertEqual(call.call_count, 3)
 
 
+    def test_twitch_status_success_is_distinct_from_new_snapshot_completion(self):
+        flags = update_stats.collection_flags(
+            ["a", "b", "c"], ["a", "b", "c"], [], ["a", "b", "c"]
+        )
+        self.assertTrue(flags["status_complete"])
+        self.assertTrue(flags["coverage_complete"])
+        self.assertFalse(flags["complete"])
+        self.assertFalse(flags["sampling_complete"])
+
 class IncrementalHistoryTests(unittest.TestCase):
     def test_history_deduplicates_same_utc_hour(self):
         record = {"metrics": {"subscribers": 56}, "history": []}

@@ -180,6 +180,19 @@ def summarize(snapshots, now):
     }
 
 
+def collection_flags(expected_channels, resolved_channels, sampled_channels, skipped_channels):
+    expected = set(expected_channels)
+    resolved = set(resolved_channels)
+    sampled = set(sampled_channels)
+    skipped = set(skipped_channels)
+    return {
+        "complete": bool(expected) and expected == resolved and expected == sampled,
+        "status_complete": bool(expected) and expected == resolved,
+        "sampling_complete": bool(expected) and expected == sampled,
+        "coverage_complete": bool(expected) and expected == (sampled | skipped)
+    }
+
+
 def main():
     now = datetime.now(timezone.utc).replace(microsecond=0)
     now_iso = now.isoformat().replace("+00:00", "Z")
@@ -262,9 +275,7 @@ def main():
             "resolved_channels": len(resolved),
             "sampled_channels": sampled_channels,
             "skipped_channels": skipped_channels,
-            "complete": len(resolved) == len(channels) and len(sampled_channels) + len(skipped_channels) == len(channels),
-            "status_complete": len(resolved) == len(channels),
-            "sampling_complete": len(sampled_channels) == len(channels),
+            **collection_flags(channels, resolved, sampled_channels, skipped_channels),
             "registry_source": ROSTER_FILE,
             "authentication": "Twitch app access token; public Helix endpoints only",
             "private_analytics_access": False
