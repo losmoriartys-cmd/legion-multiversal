@@ -11,18 +11,23 @@ const creators = [
   { id: 'habitos', name: 'HABITOS', index: 7 }
 ];
 
-test('el directorio carga los ocho expedientes y cada modal puede abrirse', async ({ page }) => {
+test('el selector presenta los ocho integrantes y permite abrir cada expediente', async ({ page }) => {
   const pageErrors = [];
   page.on('pageerror', error => pageErrors.push(error.message));
   page.on('console', message => { if (message.type() === 'error') pageErrors.push(message.text()); });
   await page.goto('/');
   await page.evaluate(() => switchChapter(2));
-  await expect(page.locator('.roster-collectible-card')).toHaveCount(8);
+  const tiles = page.locator('.roster-selector-tile');
+  await expect(tiles).toHaveCount(8);
 
   for (const creator of creators) {
-    const card = page.locator('.roster-collectible-card[data-creator-id="' + creator.id + '"]');
-    await expect(card).toHaveCount(1);
-    await card.locator('.roster-card-direct-profile').click();
+    const tile = page.locator('.roster-selector-tile[data-roster-select="' + creator.index + '"]');
+    await expect(tile).toHaveCount(1);
+    await tile.click();
+    const selectorPanel = page.locator('#roster-selector-panel');
+    await expect(selectorPanel).toContainText(creator.name);
+    await page.locator('#roster-selector-open-profile').click();
+
     const dossier = page.locator('#hero-profile-page');
     await expect(dossier).toBeVisible();
     await expect(dossier).toContainText(creator.name);
@@ -30,10 +35,11 @@ test('el directorio carga los ocho expedientes y cada modal puede abrirse', asyn
     const modal = page.locator('#hero-modal');
     await expect(modal).toHaveClass(/active/);
     await expect(modal.locator('#modal-hero-title')).toContainText(creator.name);
-    await expect(modal.locator('[role="tab"]')).toHaveCount(3);
+    await expect(modal.locator('#modal-tab-navigation [role="tab"]')).toHaveCount(3);
     await page.keyboard.press('Escape');
     await expect(modal).not.toHaveClass(/active/);
     await page.evaluate(() => closeHeroProfile());
+    await expect(page.locator('#roster-selector')).toBeVisible();
   }
   expect(pageErrors).toEqual([]);
 });
