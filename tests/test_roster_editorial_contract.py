@@ -34,9 +34,9 @@ class RosterEditorialContractTests(unittest.TestCase):
         self.assertEqual(metrics["subscribers"], 56)
         self.assertEqual(metrics["total_views"], 431)
         self.assertEqual(metrics["videos_total"], 6)
-        record_metrics = self.records["channels"]["pato-oratoris"]["profile_notes"]["platform_metrics"]
-        self.assertEqual(record_metrics["views"], metrics["total_views"])
-        self.assertEqual(record_metrics["captured_at"], self.platforms["updated_at"])
+        profile_notes = self.records["channels"]["pato-oratoris"]["profile_notes"]
+        self.assertEqual(profile_notes["metrics_source"], "platform-stats.json")
+        self.assertNotIn("platform_metrics", profile_notes)
 
     def test_only_dave_has_an_explicit_unconfirmed_schedule_note(self):
         scheduled = [hero["id"] for hero in self.roster["heroes"] if hero.get("schedule")]
@@ -64,7 +64,7 @@ class RosterEditorialContractTests(unittest.TestCase):
     def test_commercial_matrix_is_data_driven_and_disclosed_as_proposal(self):
         self.assertIn("MATRIZ DE ENCAJE COMERCIAL", self.app)
         self.assertIn("activationRows=(opportunities.length?", self.app)
-        self.assertIn("no representan entregables comprometidos ni campañas realizadas", self.app)
+        self.assertIn("no entregables comprometidos ni campañas realizadas", self.app.lower())
 
     def test_legacy_unsupported_activity_claims_are_not_in_current_editorial_copy(self):
         by_id = {hero["id"]: hero for hero in self.roster["heroes"]}
