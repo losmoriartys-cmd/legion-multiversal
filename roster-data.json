@@ -43,9 +43,9 @@
         ],
         "disclaimer": "Formatos potenciales para conversar; no representan campañas contratadas ni alianzas vigentes.",
         "contact": "losmoriartys@gmail.com",
-        "audience_fit": "Afinidad temática: gaming cooperativo, humor, cultura pop y experiencias compartidas en dupla. No implica cifras ni segmentación demográfica."
+        "audience_fit": "Afinidad temática: gaming cooperativo, humor, cultura pop y experiencias compartidas en dupla."
       },
-      "powers": "Perfil de habilidades en construcción. Se completará con la descripción de personaje aprobada por el integrante.",
+      "powers": "Especialidad: conducción en dupla, partidas cooperativas, humor espontáneo y comunidad.",
       "stats": "Métricas en proceso de integración. Los datos se publicarán cuando estén conectados a una fuente verificable y acompañados de su período de medición.",
       "log": "La bitácora institucional registra la iniciativa Turno Noche y experiencias compartidas entre creadores. Las fechas, el alcance y los resultados de esas colaboraciones se documentarán por separado antes de presentarlos como credenciales comerciales.",
       "id": "moriartys",
@@ -94,7 +94,9 @@
           "notes": "El promedio y el pico son observaciones del muestreo propio, no analíticas oficiales ni el historial completo de transmisiones."
         }
       ],
-      "links": []
+      "links": [],
+      "tagline": "Dupla gamer y videoclub retro: cooperativo, humor y cultura pop.",
+      "role_label": "DIRECCIÓN"
     },
     {
       "name": "ROD3R1K",
@@ -120,7 +122,7 @@
       "twitch": "https://twitch.tv/TheR0D3R1K",
       "bio": "Bienvenidos al canal. Me llamo Roderik, mejor conocido como «ElKrakenaso». Encontrarás momentos divertidos y épicos. ¡Acompañame en las partidas y divertite!",
       "voice": "«¡Que se escuche hasta el último rincón! Si vamos a jugar, que cada partida deje una historia.»",
-      "powers": "Perfil de habilidades en construcción. Pendiente de confirmar con el integrante.",
+      "powers": "Especialidad: acción competitiva, eventos grupales y momentos épicos en directo.",
       "stats": "Métricas en proceso de integración. Los datos se publicarán cuando estén conectados a una fuente verificable y acompañados de su período de medición.",
       "log": "ARCHIVO DE ORIGEN: integrante de la primera etapa junto a Demian. Su recorrido está ligado a las partidas fundacionales de Marvel Rivals y al impulso de encuentros, eventos y experiencias compartidas. Su historia representa el paso de jugar entre amigos a construir una comunidad.",
       "id": "rod3r1k",
@@ -181,8 +183,10 @@
           "Selección de clips para piezas breves"
         ],
         "disclaimer": "Propuestas potenciales sujetas a disponibilidad, conversación y aprobación del creador; no implican campañas contratadas.",
-        "audience_fit": "Afinidad temática: videojuegos de acción, eventos, partidas compartidas y momentos destacados. No implica cifras ni segmentación demográfica."
-      }
+        "audience_fit": "Afinidad temática: videojuegos de acción, eventos, partidas compartidas y momentos destacados."
+      },
+      "tagline": "Gaming de acción, eventos grupales y momentos épicos en directo.",
+      "role_label": "DIRECCIÓN"
     },
     {
       "name": "LADYMORIARTY",
@@ -272,8 +276,10 @@
           "Piezas breves basadas en momentos destacados"
         ],
         "disclaimer": "Formatos potenciales, no campañas realizadas ni alianzas confirmadas.",
-        "audience_fit": "Afinidad temática: gameplay relajado, charlas espontáneas, entretenimiento e IRL. No implica cifras ni segmentación demográfica."
-      }
+        "audience_fit": "Afinidad temática: gameplay relajado, charlas espontáneas, entretenimiento e IRL."
+      },
+      "tagline": "Gameplay chill, IRL y conexión espontánea con la comunidad.",
+      "role_label": "CREADORA"
     },
     {
       "name": "ARDIPII",
@@ -357,8 +363,11 @@
           "Clips de momentos o conversaciones destacados"
         ],
         "disclaimer": "Propuestas potenciales sujetas a confirmación de disponibilidad y aprobación del creador.",
-        "audience_fit": "Afinidad temática: gaming, conversación e interacción con la comunidad. No implica cifras ni segmentación demográfica."
-      }
+        "audience_fit": "Afinidad temática: gaming, conversación e interacción con la comunidad."
+      },
+      "tagline": "Gaming cooperativo, cercanía con el chat e interacción en directo.",
+      "role_label": "CREADOR",
+      "powers": "Especialidad: gaming cooperativo, cercanía con el chat e interacción en directo."
     },
     {
       "name": "AKUMA",
@@ -444,8 +453,10 @@
           "Dinámicas participativas y clips de una activación"
         ],
         "disclaimer": "Posibilidades de colaboración, no campañas contratadas ni calendario de activaciones confirmado.",
-        "audience_fit": "Afinidad temática: videojuegos, conversación y experiencias compartidas. No implica cifras ni segmentación demográfica."
-      }
+        "audience_fit": "Afinidad temática: videojuegos, conversación y experiencias compartidas."
+      },
+      "tagline": "Gaming, charlas y encuentros para compartir nuevas experiencias.",
+      "role_label": "DOCENTE"
     },
     {
       "name": "DAVE — NEXUS",
@@ -530,8 +541,10 @@
           "Registro de clips cuando haya material disponible"
         ],
         "disclaimer": "Propuestas exploratorias. La especialidad, el calendario y la disponibilidad comercial requieren confirmación de Dave.",
-        "audience_fit": "Afinidad temática en definición: descubrimiento de videojuegos y experiencias cooperativas. Se actualizará con Dave; No implica cifras ni segmentación demográfica."
-      }
+        "audience_fit": "Afinidad temática en definición: descubrimiento de videojuegos y experiencias cooperativas."
+      },
+      "tagline": "Una nueva etapa gamer entre exploración, acción y cooperativo.",
+      "role_label": "ESTUDIANTE"
     },
     {
       "name": "PATO — ORATORIS",
@@ -649,8 +662,10 @@
           "Piezas divulgativas patrocinadas con transparencia"
         ],
         "disclaimer": "Formatos potenciales sujetos a la reactivación del canal, disponibilidad y aprobación editorial del creador.",
-        "audience_fit": "Afinidad temática: programación introductoria, herramientas digitales y divulgación sobre ciencia y comportamiento. No implica cifras ni segmentación demográfica."
-      }
+        "audience_fit": "Afinidad temática: programación introductoria, herramientas digitales y divulgación sobre ciencia y comportamiento."
+      },
+      "tagline": "Programación y divulgación explicadas con claridad y cercanía.",
+      "role_label": "COLABORADOR"
     },
     {
       "name": "HABITOS",
@@ -736,8 +751,11 @@
           "Integraciones de productos pertinentes al contenido"
         ],
         "disclaimer": "Posibilidades de colaboración sujetas a encaje editorial y aprobación del creador.",
-        "audience_fit": "Afinidad temática: videojuegos, reflexión, hábitos cotidianos y desarrollo personal. No implica cifras ni segmentación demográfica."
-      }
+        "audience_fit": "Afinidad temática: videojuegos, reflexión, hábitos cotidianos y desarrollo personal."
+      },
+      "tagline": "Gaming, filosofía cotidiana y conversaciones sobre hábitos.",
+      "role_label": "COLABORADOR",
+      "powers": "Especialidad: gaming reflexivo, filosofía cotidiana y desarrollo de hábitos."
     }
   ],
   "identity_model_version": 1
