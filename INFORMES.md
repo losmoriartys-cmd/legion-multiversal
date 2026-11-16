@@ -3260,3 +3260,33 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **Conservación:** el PNG permanece versionado sin cambios; no se eliminó el original ni se cambió su nombre.
 - **Commits:** automatización `8b412bb`; generación y migración del asset `2e32cd7`.
 - **Validación pendiente:** CI, Lighthouse y despliegue correspondientes al SHA final deben terminar antes de declarar cerrada la intervención. La comparación visual final del emblema en producción también queda pendiente de inspección de navegador.
+
+## 2026-11-16 — Variante responsive del emblema, fuentes y verificación de producción
+
+### Emblema responsive
+- Se generó `legion_logo_final_hybrid-512.webp` desde el PNG original, con redimensionado LANCZOS y codificación WebP lossless.
+- Tamaños medidos: PNG original 1.336.538 bytes; WebP maestro 894.642 bytes; derivado 512 × 512 de 141.360 bytes. La variante usada en pantalla pesa 84,2 % menos que el maestro y conserva transparencia.
+- Se actualizaron las tres etiquetas de imagen de `index.html` y la imagen de `comic-moriartys.html` para usar `srcset`, `sizes="112px"` y dimensiones intrínsecas 512 × 512. El maestro de 1600 × 1600 queda disponible como candidato de alta densidad y para JSON-LD. El PNG original se conserva.
+- El validador de imágenes detectó inicialmente atributos HTML 1600 × 1600 asociados al recurso 512 × 512. Se corrigieron a 512 × 512 y se incorporó una aserción para evitar regresiones.
+
+### Fuentes y CSS no crítico
+- Se conservaron Bangers, Roboto Condensed variable, Special Elite y Permanent Marker. Se añadieron preload de los tres archivos WOFF2 efectivamente usados en la primera pantalla y se pasó la hoja de Google Fonts a carga no bloqueante, manteniendo `display=optional` y fallback `noscript`.
+- Se difirieron `chapter-8.css`, `roster-fixes.css`, `roster-selector.css` y `editorial-subpages.css` mediante `media="print"` + activación al terminar la carga, con fallback `noscript`. Las hojas que definen el primer viewport siguen siendo bloqueantes.
+- La auditoría Lighthouse redujo el ahorro estimado por recursos bloqueantes de 700 ms a 280 ms. Aún quedan 300 ms estimados en `styles.css` y aproximadamente 58 KiB de reglas no usadas en la portada; no se considera terminada la optimización de CSS.
+
+### Resultados Lighthouse en producción
+- SHA medido: `88c0e0da97d186cae3eade778875f436de75a385`.
+- Workflow: `43951372454` — seis corridas reales, tres móviles y tres de escritorio; finalizó correctamente.
+- Medianas: Performance 86 móvil / 99 escritorio; LCP 4,10 s móvil / 0,96 s escritorio; CLS 0,000 en ambos; TBT 6 ms móvil / 0 ms escritorio; peso transferido aproximado 597 KB por perfil.
+- La portada pasó de 1.332 KB a 597 KB de transferencia total entre las corridas comparables anteriores, principalmente por la variante responsive del emblema. La LCP móvil sigue por encima del objetivo; el Hero `image_20261106_124855.webp` (168.830 bytes de recurso) es ahora la imagen más pesada de la primera carga y queda como siguiente candidato.
+- La variación de LCP escritorio entre corridas impide atribuir una mejora uniforme al cambio de carga CSS; se registra el resultado medido, sin afirmar causalidad.
+
+### Contacto en producción
+- El endpoint `/api/contact` respondió al GET de configuración y el POST de control sin token fue rechazado con HTTP 503. Según el contrato documentado, esto indica que la configuración de producción aún está incompleta; el formulario no debe anunciar recepción ni intentar enviar.
+- No se envió ningún correo de prueba. Para habilitar la entrega faltan variables en Cloudflare Pages Production: `RESEND_API_KEY`, `TURNSTILE_SECRET_KEY`, `TURNSTILE_SITE_KEY`, `CONTACT_TO` y `CONTACT_FROM`. Las dos claves secretas deben configurarse como Secret; no deben compartirse ni subirse al repositorio.
+- La prueba automática confirma que el endpoint no acepta una solicitud sin token; no sustituye una prueba real de Turnstile + Resend una vez configuradas las variables.
+
+### Validación
+- `Validar código y datos del sitio`: workflow `43951372459`, éxito; incluye comprobación de dimensiones, contrato WebP, referencias, pruebas Python y Playwright.
+- `Lighthouse · producción Cloudflare Pages`: workflow `43951372454`, éxito; comprobó el SHA en Cloudflare, tipo MIME WebP del Hero y ambos emblemas, y endpoint de contacto.
+- Cloudflare Pages publicó el SHA medido correctamente. No se abrió ningún PR.
