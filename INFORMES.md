@@ -2913,3 +2913,17 @@ Se adoptó el prototipo como dirección oficial y se comenzó a implementar en l
 - QA de navegador/Playwright, imágenes, responsive real, lectores de pantalla, rutas Back/Forward y validación automatizada del sitio: **pendientes**.
 
 No se integra a `main` ni se publica en producción hasta completar esas verificaciones.
+
+
+## Cierre CI — selector de personajes
+
+- Código probado: `8e8dea53e31a82ff9360e6f73a3b98db0f84dc07`.
+- [GitHub Actions run 43794534542](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43794534542): **SUCCESS**.
+- JavaScript: `node --check app.js` SUCCESS.
+- Suite Python: **47/47**.
+- Playwright: **5/5**. El nuevo recorrido del Roster confirmó los ocho botones, selección individual y apertura de cada expediente/modal.
+- `validate_site.py`: ocho perfiles y 40 referencias locales verificadas.
+- Una primera ejecución había fallado por una aserción obsoleta en el test del expediente MORIARTYS; se actualizó para validar el resolver compartido. La ejecución posterior pasó completa.
+- No se abrió PR, no se fusionó a `main), no se desplegó producción y no se modificaron credenciales.
+- Pendiente exclusivamente: QA visual/manual en desktop, tablet y móvil, además de lector de pantalla y aprobación editorial.
+
