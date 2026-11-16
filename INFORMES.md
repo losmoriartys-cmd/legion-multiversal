@@ -3073,3 +3073,5 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **Reclutamiento:** se explicita que la incorporación requiere evaluación y decisión compartida; no es automática.
 - **Navegación:** se mantienen los IDs técnicos chapter-* para no romper enlaces ni botones. Los números editoriales visibles se conservan según el orden aprobado (00 Inicio; 01 Origen; 02 Valores; 03 Roster; 04 Estadísticas; 05 Comunidad; 06 Alianzas; 07 Colaboraciones; 08 Arsenal; 09 En Vivo; 10 Reclutamiento; anexos/extra fuera de la secuencia principal).
 - **Pendiente de QA:** no se declara inspección visual manual de producción en esta integración. La verificación debe incluir escritorio y móvil, especialmente Origen, Inicio, Comunidad y el expediente BarFender.
+
+- **Precisión BarFender:** se reemplazó también la referencia residual a «juego de la campaña» por «juego de la experiencia» y se acotó la nota de espectadores compartidos a la sesión colaborativa documentada.

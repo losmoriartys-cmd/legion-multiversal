@@ -32,6 +32,7 @@ class SiteEditorialImageContract(unittest.TestCase):
         self.assertIn("EXPERIENCIA<br><strong>001</strong>", self.html)
         self.assertIn("no se presenta como patrocinio ni como campaña remunerada", self.html)
         self.assertNotIn("EXPEDIENTE COMERCIAL · N.º 001", self.html)
+        self.assertNotIn("EL JUEGO DE LA CAMPAÑA", self.html)
 
     def test_recruitment_and_campaign_archive_disclaimers_are_explicit(self):
         self.assertIn("requiere una decisión compartida", self.html)
