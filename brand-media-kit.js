@@ -88,7 +88,7 @@
             makeMetric("Visualizaciones", number(m.total_views), "Acumuladas") +
             makeMetric("Videos", number(m.videos_total), "Publicados") +
             '</div><p class="channel-kit-meta">Fuente: ' + escapeHtml(record.source || "YouTube Data API v3") +
-            ' · Captura: ' + escapeHtml(date(platformData.updated_at)) + '</p><p class="channel-kit-meta">País e idioma de la audiencia: sin datos propios verificables.</p></article>'
+            ' · Captura: ' + escapeHtml(date(platformData.updated_at)) + '</p><p class="channel-kit-meta">País e idioma de la audiencia: sin datos propios verificables.</p><p class="channel-kit-dossier-link"><a href="../#roster/' + encodeURIComponent(id) + '">ABRIR EXPEDIENTE INDIVIDUAL / IMPRIMIR PDF ↗</a></p></article>'
           );
         }
       });
