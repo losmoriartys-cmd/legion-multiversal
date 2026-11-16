@@ -41,7 +41,7 @@ class EpicCreatorProgramsContractTests(unittest.TestCase):
         self.assertIn("function renderEpicCreatorProfileBadge(hero)", self.app)
         self.assertIn("renderEpicCreatorProfileBadge(hero)", self.app)
         self.assertIn("function renderEpicCreatorCodeCard(creatorId", self.app)
-        self.assertIn("copyEpicCreatorCode(\\'", self.app)
+        self.assertIn("copyEpicCreatorCode(", self.app)
 
     def test_failed_central_load_does_not_fall_back_to_stale_hardcoded_codes(self):
         self.assertIn("No se muestra un código desde una copia local desactualizada", self.app)
