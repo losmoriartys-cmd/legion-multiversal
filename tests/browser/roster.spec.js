@@ -68,13 +68,15 @@ test('las dos rutas históricas de Lady Moriarty abren el mismo expediente', asy
 
   await legacyPage.goto('/#expediente-ladymoriarty');
   await expect(legacyPage.locator('#hero-profile-page')).toBeVisible();
-  const legacyText = await legacyPage.locator('#hero-profile-page').innerText();
   await expect(legacyPage.locator('#hero-profile-page')).toContainText('LADY MORIARTY');
+  await expect(legacyPage.locator('#hero-profile-page')).toContainText('3 clips destacados registrados');
+  const legacyText = await legacyPage.locator('#hero-profile-page').innerText();
 
   await canonicalPage.goto('/#expediente-lady-moriarty');
   await expect(canonicalPage.locator('#hero-profile-page')).toBeVisible();
-  const canonicalText = await canonicalPage.locator('#hero-profile-page').innerText();
   await expect(canonicalPage.locator('#hero-profile-page')).toContainText('LADY MORIARTY');
+  await expect(canonicalPage.locator('#hero-profile-page')).toContainText('3 clips destacados registrados');
+  const canonicalText = await canonicalPage.locator('#hero-profile-page').innerText();
   expect(canonicalText).toBe(legacyText);
   expect(pageErrors).toEqual([]);
   await legacyPage.close();
