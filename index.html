@@ -29,6 +29,7 @@
     <link rel="stylesheet" href="./chapter-8.css">
     <link rel="stylesheet" href="./roster-fixes.css?v=20261116-roster-visual-1">
     <link rel="stylesheet" href="./roster-selector.css?v=20261116-selector-2">
+    <link rel="stylesheet" href="./conversion-overhaul.css?v=20261116-1">
 </head>
 <body>
     <div id="chapter-transition" aria-hidden="true" data-title="LEGIÓN MULTIVERSAL"></div>
@@ -45,27 +46,12 @@
             </div>
             <button id="sound-toggle" class="sound-toggle" type="button" aria-pressed="false" onclick="toggleArcadeSound()" title="Activar o silenciar la identidad sonora">♫ SONIDO: OFF</button>
         </div>
-        <div class="navigation-group-label">EXPLORAR EL ARCHIVO</div>
-        <nav class="primary-navigation" aria-label="Capítulos principales">
-            <button class="nav-btn active" data-chapter="0" aria-current="page" onclick="switchChapter(0)">00 INICIO</button>
-            <button class="nav-btn" data-chapter="1" onclick="switchChapter(1)">01 ORIGEN</button>
-            <button class="nav-btn" data-chapter="11" onclick="switchChapter(11)">02 VALORES</button>
-            <button class="nav-btn" data-chapter="2" onclick="switchChapter(2)">03 ROSTER</button>
-            <button class="nav-btn" data-chapter="3" onclick="switchChapter(3)">04 ESTADÍSTICAS</button>
-            <button class="nav-btn" data-chapter="9" onclick="switchChapter(9)">05 COMUNIDAD</button>
-            <button class="nav-btn" data-chapter="8" onclick="switchChapter(8)">06 ALIANZAS</button>
-            <button class="nav-btn" data-chapter="12" onclick="switchChapter(12)">07 COLABORACIONES</button>
-        </nav>
-        <nav class="secondary-navigation" aria-label="Capítulos especiales y extras">
-            <div class="secondary-navigation-heading"><span>CAPÍTULOS ESPECIALES</span><small>EXTRAS Y TRANSMISIONES</small></div>
-            <div class="secondary-navigation-links">
-                <button class="nav-btn nav-btn-secondary" data-chapter="5" onclick="switchChapter(5)">08 ARSENAL</button>
-                
-                <button class="nav-btn nav-btn-secondary nav-btn-live" data-chapter="10" onclick="switchChapter(10)">09 EN VIVO</button>
-                <button class="nav-btn nav-btn-secondary" data-chapter="6" onclick="switchChapter(6)">10 RECLUTAMIENTO</button>
-                <button class="nav-btn nav-btn-secondary" data-chapter="14" onclick="switchChapter(14)">ANEXO · CAMPAÑAS</button>
-                <button class="nav-btn nav-btn-secondary" data-chapter="13" onclick="switchChapter(13)">EXTRA · MAPA MULTIVERSAL</button>
-            </div>
+        <nav class="primary-navigation" aria-label="Recorridos principales">
+            <button class="nav-btn" data-chapter="10" onclick="switchChapter(10)">MIRAR <span aria-hidden="true">●</span></button>
+            <button class="nav-btn" data-chapter="12" onclick="switchChapter(12)">EXPERIENCIAS</button>
+            <button class="nav-btn" data-chapter="8" onclick="switchChapter(8)">PARA MARCAS</button>
+            <button class="nav-btn" data-chapter="6" onclick="switchChapter(6)">UNITE</button>
+            <button class="nav-btn" data-chapter="1" onclick="switchChapter(1)">ORIGEN</button>
         </nav>
     </header>
 
@@ -85,8 +71,8 @@
                     <p class="executive-lead">Una comunidad de ocho creadores con identidades, canales y comunidades propias. Compartimos gaming, entretenimiento, conocimiento y nuevas experiencias; cada integrante conserva su voz y autonomía.</p>
                     <p class="executive-proofline"><span>PROPUESTAS A MEDIDA</span><span>MÉTRICAS CON FUENTE</span><span>ALCANCE ACORDADO</span></p>
                     <div class="executive-hero-actions">
-                        <a class="executive-button executive-button-primary" href="mailto:losmoriartys@gmail.com?subject=Propuesta%20comercial%20-%20Legi%C3%B3n%20Multiversal&amp;body=Hola%2C%20quiero%20acercar%20una%20propuesta%20a%20Legi%C3%B3n%20Multiversal.%0A%0AOrganizaci%C3%B3n%20o%20marca%3A%0AJuego%20o%20proyecto%3A%0AObjetivo%20de%20la%20propuesta%3A%0AFechas%3A%0APlataformas%20y%20entregables%3A%0APresupuesto%20o%20modalidad%20(si%20aplica)%3A%0A%0AGracias.">PROPONER UNA COLABORACIÓN <span aria-hidden="true">↗</span></a>
-                        <button class="executive-button" type="button" onclick="switchChapter(8)">VER CREDENCIALES Y FORMATOS <span aria-hidden="true">↗</span></button>
+                        <button class="executive-button executive-button-primary" type="button" onclick="switchChapter(10)">VER QUIÉN ESTÁ EN VIVO <span aria-hidden="true">↗</span></button>
+                        <button class="executive-button" type="button" onclick="switchChapter(8)">SOY UNA MARCA <span aria-hidden="true">↗</span></button>
                     </div>
                 </div>
                 <span class="executive-hero-index" aria-hidden="true">LM / 001</span>
@@ -167,11 +153,7 @@
                 <button class="executive-text-link" type="button" onclick="switchChapter(8)">CONSULTAR CREDENCIALES, FORMATOS Y CONDICIONES ↗</button>
             </section>
 
-            <section class="executive-origin" aria-labelledby="executive-origin-title">
-                <div class="executive-origin-art"><img src="image_20261112_151833-volver-a-ropa-humana-con-guios-geek-8090-para-todo-ahora-con-estos-mismos-pers.jpg" alt="Integrantes de Legión Multiversal en ropa cotidiana dentro de una sala gamer retro con guiños a la cultura geek de los años 80 y 90" loading="lazy" width="2048" height="1152"></div>
-                <div><span class="executive-kicker">05 / NUESTRO PUNTO DE PARTIDA</span><h3 id="executive-origin-title">DE S3X-MEN A LEGIÓN MULTIVERSAL.</h3><p>No borramos nuestro pasado: lo reconocemos como el comienzo de una historia que continúa creciendo.</p><button class="executive-button" type="button" onclick="switchChapter(1)">EXPLORAR EL CAPÍTULO DE ORIGEN <span aria-hidden="true">↗</span></button></div>
-            </section>
-
+            <!-- La historia S3X-MEN se conserva exclusivamente en el capítulo Origen. -->
             <section class="executive-contact" aria-labelledby="executive-contact-title">
                 <span class="executive-kicker">06 / CONTACTO Y NUEVAS OPORTUNIDADES</span>
                 <h3 id="executive-contact-title">TU PRÓXIMA IDEA PUEDE EMPEZAR ACÁ.</h3>

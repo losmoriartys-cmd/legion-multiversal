@@ -1,0 +1,88 @@
+/* Optimización de conversión · 16/11/2026
+   Reduce la altura de navegación y prioriza el primer CTA sin alterar la identidad editorial. */
+header {
+  padding: 8px clamp(12px, 2.4vw, 30px);
+  gap: 8px;
+  border-bottom-width: 3px;
+}
+.header-top { gap: 8px; }
+.header-brand-emblem { width: 54px; height: 54px; flex-basis: 54px; }
+.title-group h1 { font-size: clamp(1.45rem, 2.3vw, 2rem); line-height: 1; }
+.title-group p { font-size: .68rem; }
+header .primary-navigation {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: clamp(4px, .8vw, 10px);
+}
+header .primary-navigation .nav-btn {
+  padding: 8px 12px;
+  font-size: clamp(.72rem, .9vw, .88rem);
+  white-space: nowrap;
+}
+header .primary-navigation .nav-btn[data-chapter="10"] span {
+  color: #ff5264;
+  font-size: .72em;
+  margin-left: .25em;
+}
+.secondary-navigation, .navigation-group-label { display: none !important; }
+.executive-home { padding-top: clamp(12px, 2vw, 24px); }
+.executive-hero {
+  grid-template-columns: minmax(0, 1.02fr) minmax(0, .98fr);
+  gap: clamp(16px, 2.5vw, 36px);
+  padding-top: 4px;
+  padding-bottom: clamp(16px, 2.5vw, 28px);
+}
+.executive-hero-art { min-width: 0; }
+.executive-hero-banner img {
+  display: block;
+  width: 100%;
+  max-height: min(52vh, 480px);
+  object-fit: contain;
+  object-position: center;
+}
+.executive-hero-copy { min-width: 0; }
+.executive-emblem { width: clamp(58px, 6vw, 84px); margin: 8px 0; }
+.executive-hero h2 {
+  font-size: clamp(2.15rem, 4.1vw, 4.25rem);
+  line-height: .98;
+  margin-bottom: 12px;
+}
+.executive-lead { max-width: 56ch; font-size: clamp(.94rem, 1.15vw, 1.08rem); line-height: 1.55; }
+.executive-proofline { gap: 7px 12px; flex-wrap: wrap; }
+.executive-hero-actions { gap: 10px; flex-wrap: wrap; }
+.executive-hero-actions .executive-button { min-height: 46px; }
+@media (max-width: 900px) {
+  header { position: sticky; top: 0; padding: 7px 12px; }
+  .header-brand-emblem { width: 46px; height: 46px; flex-basis: 46px; }
+  .title-group h1 { font-size: 1.55rem; }
+  header .primary-navigation { justify-content: flex-start; overflow-x: auto; padding: 2px 1px 5px; scrollbar-width: thin; }
+  header .primary-navigation .nav-btn { flex: 0 0 auto; }
+  .executive-hero { grid-template-columns: minmax(0, 1fr); }
+  .executive-hero-copy { order: -1; }
+  .executive-hero-banner img { max-height: 34vh; }
+  .executive-emblem { display: none; }
+  .executive-hero h2 { font-size: clamp(2.3rem, 7vw, 3.7rem); }
+}
+@media (max-width: 600px) {
+  header { gap: 5px; }
+  .header-top { align-items: center; }
+  .header-brand-emblem { width: 40px; height: 40px; flex-basis: 40px; }
+  .title-group h1 { font-size: 1.3rem; letter-spacing: 1px; }
+  .title-group p { font-size: .56rem; letter-spacing: .04em; }
+  .sound-toggle { padding: 5px 7px; font-size: .7rem; }
+  header .primary-navigation { gap: 5px; }
+  header .primary-navigation .nav-btn { padding: 7px 9px; font-size: .72rem; }
+  .executive-home { padding: 14px 12px 24px; }
+  .executive-hero { gap: 12px; }
+  .executive-hero h2 { font-size: clamp(2.05rem, 10vw, 3rem); }
+  .executive-lead { font-size: .94rem; }
+  .executive-hero-banner img { max-height: 25vh; }
+  .executive-hero-actions { display: grid; grid-template-columns: 1fr; }
+  .executive-hero-actions .executive-button { width: 100%; justify-content: center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  header .primary-navigation .nav-btn,
+  .executive-hero-actions .executive-button { transition: none !important; }
+}
