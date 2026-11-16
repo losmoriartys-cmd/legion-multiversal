@@ -1041,6 +1041,16 @@ function refreshRosterLiveIndicators() {
 }
 
 
+const heroAccentColors = {
+    'moriartys': '#e8b94e',
+    'rod3r1k': '#ef554d',
+    'lady-moriarty': '#c78cff',
+    'ardipii': '#55c7b5',
+    'akuma': '#f07842',
+    'dave-nexus': '#62a8ff',
+    'pato-oratoris': '#e7d58b',
+    'habitos': '#9bd36b'
+};
 let selectedRosterCreatorId = null;
 function renderRosterSelector() {
     const host = document.getElementById('roster-selector');
@@ -1107,14 +1117,14 @@ function renderRosterSelector() {
     host.innerHTML = '<div class="roster-selector-heading"><div><span class="roster-selector-kicker">ARCHIVO CENTRAL · SELECCIÓN DE PERSONAJES</span><h2>ELEGÍ A TU CREADOR</h2><p>Ocho integrantes. Ocho identidades. Una misma Legión.</p></div><div class="roster-selector-actions">' + liveSummary + '<button type="button" class="roster-selector-surprise" id="roster-selector-surprise">SORPRENDEME ↗</button></div></div>' +
         '<div class="roster-selector-progress"><span id="roster-selector-progress-text" aria-live="polite">CONOCISTE ' + known + ' DE ' + heroesData.length + '</span><div class="roster-selector-progress-track" role="progressbar" aria-label="Integrantes conocidos" aria-valuemin="0" aria-valuemax="' + heroesData.length + '" aria-valuenow="' + known + '"><i style="width:' + (known / heroesData.length * 100) + '%"></i></div></div>' +
         '<div class="roster-selector-rail" role="tablist" aria-label="Elegí uno de los ocho integrantes">' + tiles + '</div>' +
-        '<section class="roster-selector-panel" id="roster-selector-panel" data-roster-role="' + safe(selected.role || 'member') + '" role="tabpanel" aria-labelledby="roster-tab-' + safe(selected.id || selected.slug) + '" tabindex="0">' +
+        '<section class="roster-selector-panel" id="roster-selector-panel" data-creator-id="' + safe(selected.id || selected.slug) + '" data-roster-role="' + safe(selected.role || 'member') + '" style="--hero-accent:' + (heroAccentColors[selected.id || selected.slug] || '#00d2ff') + '" role="tabpanel" aria-labelledby="roster-tab-' + safe(selected.id || selected.slug) + '" tabindex="0">' +
         '<div class="roster-selector-art"><span class="roster-selector-art-kicker">LEGIÓN MULTIVERSAL · ARCHIVO DE PERSONAJES</span>' + (selected.img || selected.portrait ? '<img src="' + safe(selected.img || selected.portrait) + '" alt="Ilustración de ' + safe(getHeroDisplayName(selected)) + '" loading="eager" decoding="async">' : '<span>RETRATO PENDIENTE</span>') + '<span class="roster-selector-art-number">EXP. ' + safe(selected.cardNumber || 'S/N') + '</span></div>' +
         '<div class="roster-selector-copy"><span class="roster-selector-identity">' + safe(identity) + ' · ' + safe(creatorType) + '</span>' + (selected.role_label ? '<span class="roster-selector-role-label">' + safe(selected.role_label) + '</span>' : '') + '<h3>' + safe(getHeroDisplayName(selected)) + '</h3>' + (selected.tagline ? '<p class="roster-selector-tagline">' + safe(selected.tagline) + '</p>' : '') + '<p class="roster-selector-real-identity">' + safe(selected.identity_scope === 'shared_project' ? 'Proyecto compartido de ' + (selected.represented_people || []).join(' y ') : selected.identity_scope === 'individual_creator' ? 'Creador/a individual' : 'Integrante de Legión Multiversal') + '</p>' +
         '<div class="roster-selector-tags">' + tags + '</div><p class="roster-selector-ideal"><strong>IDEAL SI TE GUSTA:</strong> ' + safe(idealText) + '</p>' +
         '<p class="roster-selector-description">' + safe(intro) + '</p>' + quote +
         '<div class="roster-selector-meta">' + liveLabel + '<span>PLATAFORMA · ' + safe(platformName) + '</span><span>HORARIO · ' + scheduleLabel + '</span></div>' +
         '<div class="roster-selector-cta"><button type="button" class="roster-selector-primary" id="roster-selector-open-profile">ABRIR EXPEDIENTE ↗</button>' + (platformUrl ? '<a class="roster-selector-platform" href="' + safe(platformUrl) + '" target="_blank" rel="noopener noreferrer">VER EN ' + safe(platformName) + ' ↗</a>' : '') + '</div></div></section>' +
-        '<details class="roster-selector-comparator"><summary>PARA MARCAS · COMPARADOR DE PERFILES</summary><div class="roster-selector-table-wrap"><table><thead><tr><th>CREADOR</th><th>PLATAFORMA</th><th>ESPECIALIDADES</th><th>HORARIO / FRECUENCIA</th><th>MÉTRICAS COMPARABLES</th></tr></thead><tbody>' + compareRows + '</tbody></table></div><p>Las métricas se publicarán cuando exista una ventana, fuente y metodología comparables para los ocho perfiles. No se mezclan datos de plataformas ni períodos diferentes.</p></details><p class="roster-selector-disclaimer">La afinidad temática describe el contenido público y los formatos observados; no implica cifras ni segmentación demográfica.</p>';
+        '<details class="roster-selector-comparator"><summary>PARA MARCAS · COMPARADOR DE PERFILES</summary><div class="roster-selector-table-wrap"><table><thead><tr><th>CREADOR</th><th>PLATAFORMA</th><th>ESPECIALIDADES</th><th>HORARIO / FRECUENCIA</th><th>MÉTRICAS COMPARABLES</th></tr></thead><tbody>' + compareRows + '</tbody></table></div><p>Las métricas se publicarán cuando exista una ventana, fuente y metodología comparables para los ocho perfiles. No se mezclan datos de plataformas ni períodos diferentes.</p></details><details class="roster-selector-method"><summary>CRITERIO DE DATOS</summary><p class="roster-selector-disclaimer">La afinidad temática describe el contenido público y los formatos observados; no implica cifras ni segmentación demográfica. Las métricas solo se comparan cuando comparten fuente, ventana y método.</p></details>';
     host.querySelector('.roster-selector-rail')?.addEventListener('keydown', event => {
         const buttons = Array.from(host.querySelectorAll('[data-roster-select]'));
         const current = buttons.indexOf(document.activeElement);
@@ -1163,7 +1173,12 @@ function selectRosterCreator(index, moveFocus) {
     try { history.replaceState({ ...(history.state || {}), lmRosterSelection: true }, '', '#roster/' + encodeURIComponent(getHeroRosterSlug(hero))); } catch (error) { /* selección disponible aunque el historial esté restringido */ }
     recordLegionProgress('profile', hero.cardNumber || hero.name);
     renderRosterSelector();
-    if (moveFocus) document.getElementById('roster-tab-' + selectedRosterCreatorId)?.focus();
+    if (moveFocus) document.getElementById('roster-tab-' + selectedRosterCreatorId)?.focus({ preventScroll: true });
+    if (window.matchMedia('(max-width: 900px)').matches) {
+        const panel = document.getElementById('roster-selector-panel');
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        panel?.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'nearest' });
+    }
 }
 
 function renderRoster() {

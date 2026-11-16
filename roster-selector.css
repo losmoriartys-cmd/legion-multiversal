@@ -123,3 +123,83 @@
     font-weight: 800;
     letter-spacing: .1em;
 }
+
+
+/* Roster: jerarquía tipográfica, acento dinámico y metodología plegada. */
+#chapter-2 .roster-selector {
+    font-family: 'Roboto', 'Inter', 'Arial', sans-serif;
+    font-variant-numeric: tabular-nums;
+}
+#chapter-2 .roster-selector-heading h2,
+#chapter-2 .roster-selector-comparator summary,
+#chapter-2 .roster-selector-method summary {
+    font-family: 'Roboto Condensed', 'Arial Narrow', sans-serif;
+    font-weight: 800;
+    letter-spacing: .08em;
+}
+#chapter-2 .roster-selector-panel {
+    position: relative;
+    border-left-color: var(--hero-accent, var(--selector-cyan));
+    background:
+        radial-gradient(ellipse at 12% 16%, color-mix(in srgb, var(--hero-accent, #00d2ff) 19%, transparent), transparent 48%),
+        linear-gradient(145deg,#15233a,#121824);
+    transition: border-color .25s ease, background .25s ease;
+}
+#chapter-2 .roster-selector-art {
+    overflow: visible;
+    isolation: isolate;
+    border-color: color-mix(in srgb, var(--hero-accent, #00d2ff) 58%, transparent);
+    background:
+        radial-gradient(ellipse at 50% 42%, color-mix(in srgb, var(--hero-accent, #00d2ff) 32%, #0a111d), #0a111d 72%);
+    box-shadow: 0 16px 38px color-mix(in srgb, var(--hero-accent, #00d2ff) 20%, transparent);
+}
+#chapter-2 .roster-selector-art img {
+    position: relative;
+    z-index: 1;
+    border-radius: 8px;
+    filter: drop-shadow(0 10px 22px color-mix(in srgb, var(--hero-accent, #00d2ff) 22%, transparent));
+}
+#chapter-2 .roster-selector-identity,
+#chapter-2 .roster-selector-tags span {
+    color: var(--hero-accent, var(--selector-cyan));
+}
+#chapter-2 .roster-selector-tags span {
+    border-color: color-mix(in srgb, var(--hero-accent, #00d2ff) 42%, transparent);
+}
+#chapter-2 .roster-selector-ideal {
+    border-left-color: var(--hero-accent, var(--selector-gold));
+}
+#chapter-2 .roster-selector-method {
+    margin-top: 12px;
+    color: var(--selector-muted);
+    font-size: .78rem;
+}
+#chapter-2 .roster-selector-method summary {
+    width: fit-content;
+    color: var(--selector-muted);
+    cursor: pointer;
+    font-size: .72rem;
+}
+#chapter-2 .roster-selector-method[open] {
+    padding: 10px 12px;
+    border-left: 2px solid var(--hero-accent, var(--selector-cyan));
+    background: rgba(5,12,22,.48);
+}
+#chapter-2 .roster-selector-method .roster-selector-disclaimer {
+    margin: 8px 0 0;
+    padding: 0;
+    border: 0;
+    font-size: .75rem;
+}
+#chapter-2 .roster-selector-table-wrap th,
+#chapter-2 .roster-selector-table-wrap td,
+#chapter-2 .roster-selector-meta,
+#chapter-2 .roster-selector-progress {
+    font-variant-numeric: tabular-nums;
+}
+@media(max-width:900px) {
+    #chapter-2 .roster-selector-panel { scroll-margin-block: 16px; }
+}
+@media(prefers-reduced-motion:reduce) {
+    #chapter-2 .roster-selector-panel { transition: none; }
+}
