@@ -85,7 +85,13 @@ jobs:
           assert all(f"image_20261106_124855-{width}.webp {width}w" in html for width in widths), "Falta un candidato en srcset."
           assert 'imagesrcset=' in html and 'imagesizes=' in html, "El preload no negocia imágenes responsive."
           assert 'fetchpriority="high"' in html, "El Hero perdió fetchpriority high."
-          print("OK: Hero WebP responsive 640/960/1280/1536 y preload adaptable verificados.")
+          assert '<style id="critical-home-styles">' in html, "Falta CSS crítico inline para la primera pantalla."
+          assert 'styles.css?v=20261116-commercial-portfolio-1" media="print" onload="this.media=\'all\'"' in html, "La hoja global no está diferida."
+          assert '<noscript><link rel="stylesheet" href="./styles.css?v=20261116-commercial-portfolio-1"></noscript>' in html, "Falta fallback de CSS global sin JavaScript."
+          critical = html.split('<style id="critical-home-styles">', 1)[1].split('</style>', 1)[0]
+          for selector in ("header{", "main{", ".chapter-panel{", ".executive-hero{", ".executive-hero-art img{", ".executive-button{"):
+              assert selector in critical, f"Falta estilo crítico: {selector}"
+          print("OK: Hero responsive, preload adaptable, CSS crítico inline y fallback noscript verificados.")
           PY
       - name: Verificar contrato del emblema WebP lossless
         run: |
