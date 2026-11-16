@@ -67,6 +67,15 @@ class ConversionNavigationContractTests(unittest.TestCase):
         self.assertIn("executive-case-summary", self.html)
         self.assertIn("BarFenderLos4.jpg", self.html)
 
+    def test_collaboration_archive_uses_four_neutral_clip_titles(self):
+        clips = self.html.split('<section class="campaign-clips">', 1)[1].split("</section>", 1)[0]
+        self.assertEqual(clips.count('class="clip-feature-card"'), 4)
+        self.assertIn("REACCIÓN INESPERADA", clips)
+        self.assertIn("BARFENDER: UNA PARTIDA ENTRE CUATRO", clips)
+        self.assertNotIn("OJO OJO OJO VOMITA", clips)
+        self.assertNotIn("TE VOY A PEGAR, BOLUDO", clips)
+        self.assertEqual(clips.count('target="_blank"'), 4)
+
 
 if __name__ == "__main__":
     unittest.main()
