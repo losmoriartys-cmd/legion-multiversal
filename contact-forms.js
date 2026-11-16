@@ -1,6 +1,7 @@
 (() => {
   const forms = Array.from(document.querySelectorAll("form[data-contact-type]"));
   if (!forms.length) return;
+  forms.forEach((form) => { const button = form.querySelector('button[type="submit"]'); if (button) button.disabled = true; });
 
   const statusFor = (form) => form.querySelector("[data-contact-status]");
   const submitFor = (form) => form.querySelector('button[type="submit"]');
@@ -43,13 +44,16 @@
       forms.forEach((form) => {
         const host = form.querySelector("[data-turnstile]");
         if (!host) return;
-        window.turnstile.render(host, {
+        const widgetId = window.turnstile.render(host, {
           sitekey: config.turnstileSiteKey,
           theme: "dark",
           callback: () => setStatus(form, "Verificación completada. Ya podés enviar el formulario.", "success"),
           "expired-callback": () => setStatus(form, "La verificación venció. Completala nuevamente.", "warning"),
           "error-callback": () => setStatus(form, "No se pudo cargar la verificación anti-spam. Recargá la página.", "error")
         });
+        form.dataset.turnstileWidget = String(widgetId);
+        const button = submitFor(form);
+        if (button) button.disabled = false;
       });
     })
     .catch(() => {
@@ -59,6 +63,20 @@
         if (button) button.disabled = true;
       });
     });
+
+  document.addEventListener("click", (event) => {
+    const link = event.target.closest('a[href="#brand-proposal"]');
+    if (!link) return;
+    event.preventDefault();
+    if (typeof window.switchChapter === "function") window.switchChapter(6);
+    window.setTimeout(() => document.getElementById("brand-proposal")?.scrollIntoView({ behavior: "smooth", block: "start" }), 80);
+  });
+  if (window.location.hash === "#brand-proposal") {
+    window.setTimeout(() => {
+      if (typeof window.switchChapter === "function") window.switchChapter(6);
+      document.getElementById("brand-proposal")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 150);
+  }
 
   forms.forEach((form) => {
     form.addEventListener("submit", async (event) => {
