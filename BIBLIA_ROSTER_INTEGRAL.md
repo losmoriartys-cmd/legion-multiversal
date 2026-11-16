@@ -2,7 +2,8 @@
 ## Experiencia editorial, perfiles de creadores, datos multiplataforma y presentación comercial
 **Versión:** 1.0 · 14 de noviembre de 2026  
 **Proyecto:** Legión Multiversal  
-**Rama de implementación:** `feat/roster-integral-2026-11-14`  
+**Rama de implementación histórica:** `feat/roster-integral-2026-11-14`  
+**Rama de integración vigente:** `integration/roster-unification-2026-11-16`  
 **Estado general:** Plan aprobado para implementación progresiva
 
 ---
@@ -101,7 +102,7 @@ MORIARTYS representa el proyecto compartido de Demian y Ari, no un canal individ
 - PR #45: endurecimiento del enlace externo del modal.
 - Estos cambios están integrados en `main` y se deben extender, no duplicar ni reemplazar sin motivo.
 
-El único PR abierto verificado al iniciar esta Biblia es el #46, **Auditoría UX integral**. Tiene alcance transversal (robustez, formularios, estadísticas, accesibilidad, SEO y rendimiento), no es un PR exclusivo del Roster y conserva pendientes propios. Se mantiene separado; no se fusiona ni se cierra como parte del Roster sin una revisión específica. No se identificaron PR de Roster abiertos para absorber. Los cambios nuevos del Roster deben avanzar en esta única rama y en un único PR integral.
+Los PR #46 (Auditoría UX integral), #47, #52 y #54 están cerrados sin merge. No hay PR abiertos al iniciar esta etapa. Por decisión del proyecto, el trabajo integrable avanza en una sola rama de integración sin abrir PR adicionales. No se integra a `main` ni se publica producción hasta completar pruebas y revisión funcional/visual; las ramas cerradas se conservan como fuente para recuperar cambios aprobados, no como evidencia de integración.
 
 ---
 
