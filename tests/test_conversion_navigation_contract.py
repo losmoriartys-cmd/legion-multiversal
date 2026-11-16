@@ -54,6 +54,14 @@ class ConversionNavigationContractTests(unittest.TestCase):
         self.assertNotIn("<iframe", self.html)
         self.assertIn('id="live-player"', self.html)
 
+    def test_home_credential_strip_uses_verified_claims(self):
+        self.assertIn('class="executive-credential-strip"', self.html)
+        self.assertIn("TWITCH PARTNER", self.html)
+        self.assertIn("PARTNER CREATOR", self.html)
+        self.assertIn("8 CAMPAÑAS", self.html)
+        self.assertIn("1 EXPERIENCIA MULTICANAL", self.html)
+        self.assertIn(".executive-credential-strip", self.css)
+
 
 if __name__ == "__main__":
     unittest.main()
