@@ -14,7 +14,7 @@ import os
 import sys
 import tempfile
 from collections import Counter
-from pathlib import Path, PurePosixPath
+from pathlib import Path
 from urllib.parse import quote
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -109,6 +109,7 @@ def atomic_write(path: Path, content: bytes) -> None:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--dry-run", action="store_true", help="Fuerza simulación; es el modo predeterminado.")
     parser.add_argument("--apply", action="store_true", help="Escribe WebP y actualiza referencias.")
     parser.add_argument(
         "--delete-originals", action="store_true",
@@ -122,6 +123,8 @@ def main() -> int:
 
     if args.delete_originals and not args.apply:
         parser.error("--delete-originals requiere --apply")
+    if args.dry_run and args.apply:
+        parser.error("--dry-run y --apply son opciones incompatibles")
     if args.max_width < 1 or not 1 <= args.quality <= 100:
         parser.error("--max-width debe ser positivo y --quality estar entre 1 y 100")
     if args.min_saving_percent < 0 or args.min_size_kb < 0:
@@ -208,6 +211,10 @@ def main() -> int:
                 # El nombre desnudo solo es seguro cuando es único en el repositorio.
                 if basename_counts[source.name] == 1:
                     pairs[source.name] = target.name
+                # También contempla rutas URL-encoded detectadas durante el escaneo.
+                for old in refs_by_file[text_path]:
+                    if old.endswith(source.name):
+                        pairs[old] = old[:-len(source.name)] + target.name
                 for old, new in pairs.items():
                     if old and old in corpus[text_path]:
                         updates.setdefault(text_path, corpus[text_path])
