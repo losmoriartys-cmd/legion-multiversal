@@ -1000,9 +1000,10 @@ function renderRosterSelector() {
     const areas = (selected.areas || []).filter(value => value && value !== 'Especialidad por definir');
     const schedule = selected.schedule || selected.mediaProfile?.schedule || '';
     const creatorType = selected.creator_type === 'video_creator' ? 'CREADOR DE VIDEO' : selected.creator_type === 'live_streamer' ? 'CREADOR EN DIRECTO' : 'FORMATO POR CONFIRMAR';
+    const hasFreshActivity = liveStates.some(item => item.state?.fresh);
     const liveSummary = freshLive.length
         ? '<span class="roster-selector-live-count">● ' + freshLive.length + ' EN VIVO AHORA</span>'
-        : '<span class="roster-selector-live-count is-quiet">' + (instituteStatsData ? 'SIN DIRECTOS DETECTADOS EN LA ÚLTIMA CAPTURA' : 'ESTADO DE DIRECTOS NO DISPONIBLE') + '</span>';
+        : '<span class="roster-selector-live-count is-quiet">' + (hasFreshActivity ? 'SIN DIRECTOS DETECTADOS EN LA ÚLTIMA CAPTURA' : 'ESTADO DE DIRECTOS NO DISPONIBLE / DATOS DEMORADOS') + '</span>';
     const tiles = heroesData.map((hero, index) => {
         const account = primaryAccount(hero);
         const state = liveState(hero);
@@ -1044,6 +1045,16 @@ function renderRosterSelector() {
         '<div class="roster-selector-meta">' + liveLabel + '<span>PLATAFORMA · ' + safe(platformName) + '</span><span>HORARIO · ' + scheduleLabel + '</span></div>' +
         '<div class="roster-selector-cta"><button type="button" class="roster-selector-primary" id="roster-selector-open-profile">ABRIR EXPEDIENTE ↗</button>' + (platformUrl ? '<a class="roster-selector-platform" href="' + safe(platformUrl) + '" target="_blank" rel="noopener noreferrer">VER EN ' + safe(platformName) + ' ↗</a>' : '') + '</div></div></section>' +
         '<details class="roster-selector-comparator"><summary>PARA MARCAS · COMPARADOR DE PERFILES</summary><div class="roster-selector-table-wrap"><table><thead><tr><th>CREADOR</th><th>PLATAFORMA</th><th>ESPECIALIDADES</th><th>HORARIO / FRECUENCIA</th><th>MÉTRICAS COMPARABLES</th></tr></thead><tbody>' + compareRows + '</tbody></table></div><p>Las métricas se publicarán cuando exista una ventana, fuente y metodología comparables para los ocho perfiles. No se mezclan datos de plataformas ni períodos diferentes.</p></details>';
+    host.querySelector('.roster-selector-rail')?.addEventListener('keydown', event => {
+        const buttons = Array.from(host.querySelectorAll('[data-roster-select]'));
+        const current = buttons.indexOf(document.activeElement);
+        let next = null;
+        if (event.key === 'ArrowRight' || event.key === 'ArrowDown') next = (Math.max(0,current) + 1) % buttons.length;
+        if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') next = (Math.max(0,current) - 1 + buttons.length) % buttons.length;
+        if (event.key === 'Home') next = 0;
+        if (event.key === 'End') next = buttons.length - 1;
+        if (next !== null && buttons[next]) { event.preventDefault(); selectRosterCreator(next, true); }
+    });
     host.querySelectorAll('[data-roster-select]').forEach(button => {
         button.addEventListener('click', () => selectRosterCreator(Number(button.dataset.rosterSelect), false));
     });
