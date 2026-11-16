@@ -83,3 +83,22 @@
 #chapter-2 .roster-selector-load-error strong { color:#ffabb3; letter-spacing:.08em; }
 #chapter-2 .roster-selector-load-error p { color:#d9c4ca; }
 #chapter-2 .roster-selector-description { display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:5; overflow:hidden; }
+
+/* En móvil, las ocho fichas se presentan como una grilla visible de dos columnas;
+   se evita el carrusel horizontal que ocultaba integrantes fuera de pantalla. */
+@media(max-width:640px) {
+ #chapter-2 .roster-selector-rail {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+  overflow:visible;
+  scroll-snap-type:none;
+  padding:0;
+ }
+ #chapter-2 .roster-selector-tile {
+  flex:initial;
+  width:100%;
+  min-width:0;
+  aspect-ratio:5/7;
+ }
+}
