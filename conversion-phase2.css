@@ -17,3 +17,5 @@
 @media(max-width:900px){.executive-directory-grid{grid-template-columns:1fr}.arsenal-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.mission-progress-trigger{margin-left:4px}}
 @media(max-width:600px){.executive-hero{min-height:520px;padding:24px 18px}.executive-hero-copy{min-height:430px}.executive-hero:after{background:linear-gradient(90deg,rgba(5,10,18,.94),rgba(5,10,18,.7)),linear-gradient(0deg,rgba(5,10,18,.5),transparent)}.executive-directory-grid,.arsenal-grid{grid-template-columns:1fr}.alliance-market-benchmark{padding:14px}.live-player-drawer{right:8px;bottom:8px;width:calc(100vw - 16px);max-height:86vh;padding:12px}.live-player-drawer .live-player{aspect-ratio:16/9}.mission-progress-trigger{font-size:.62rem;padding:6px 8px}}
 @media(prefers-reduced-motion:reduce){.live-player-drawer{transition:none}.live-player-drawer.is-open{transform:none}}
+
+.arsenal-internal-note{margin:18px 0;padding:15px 18px;border-left:3px solid #d6b46c;background:rgba(214,180,108,.08);color:#d6deea;line-height:1.55}.arsenal-internal-note b{display:block;margin-bottom:5px;color:#f1d18a;font-size:.75rem;letter-spacing:.08em}

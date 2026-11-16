@@ -13,6 +13,10 @@ class ConversionPhase2Contract(unittest.TestCase):
   self.assertIn("BENCHMARK DE INDUSTRIA",self.html);self.assertIn("TIEMPO DE EJECUCIÓN",self.html);self.assertIn("selectAllianceModelTab",self.js)
  def test_barfender_continuity_and_clip_metadata(self):
   self.assertIn("SESIÓN 02 · 10 NOV 2026",self.html);self.assertIn("DURACIÓN NO REGISTRADA",self.html);self.assertIn("JUGADO POR LA LEGIÓN",self.html);self.assertIn("91 usuarios activos en chat",self.html)
+ def test_public_arsenal_does_not_expose_campaign_access_tables(self):
+  self.assertNotIn('id="chapter-14"',self.html)
+  self.assertNotIn("ABRIR ARCHIVO DE CAMPAÑAS Y ACCESOS",self.html)
+  self.assertIn("autenticación real",self.html)
  def test_arsenal_filters_and_recruitment_tabs(self):
   self.assertIn("filterArsenal",self.js);self.assertIn("setRecruitmentMode",self.js);self.assertIn('data-arsenal-filter="horror"',self.html)
  def test_mission_progress_is_discoverable(self):
