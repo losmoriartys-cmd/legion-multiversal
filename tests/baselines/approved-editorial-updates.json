@@ -22,6 +22,62 @@
           "source": "Twitch · enlace aportado por el creador"
         }
       ]
+    },
+    "pato-oratoris": {
+      "youtube_videos": [
+        {
+          "title": "Dopamina, motivación y adicción: Qué es y cómo funciona",
+          "views": 48,
+          "age": "publicado 2025-05-01",
+          "source": "YouTube Data API v3"
+        },
+        {
+          "title": "Uniendo Javascript y HTML. Curso HTML + Javascript (5/5)",
+          "views": 75,
+          "age": "publicado 2025-01-09",
+          "series": "Curso HTML + Javascript",
+          "source": "YouTube Data API v3"
+        },
+        {
+          "title": "Javascript Mapping y Filtering. Curso HTML + Javascript (4/5)",
+          "views": 58,
+          "age": "publicado 2025-01-09",
+          "series": "Curso HTML + Javascript",
+          "source": "YouTube Data API v3"
+        },
+        {
+          "title": "Javascript segunda clase. Curso HTML + Javascript (3/5)",
+          "views": 50,
+          "age": "publicado 2025-01-09",
+          "series": "Curso HTML + Javascript",
+          "source": "YouTube Data API v3"
+        },
+        {
+          "title": "Tu primera clase de Javascript. Curso HTML + Javascript (2/5)",
+          "views": 43,
+          "age": "publicado 2025-01-09",
+          "series": "Curso HTML + Javascript",
+          "source": "YouTube Data API v3"
+        },
+        {
+          "title": "Tu primera página HTML en menos de una hora. Curso HTML + Javascript (1/5)",
+          "views": 157,
+          "age": "publicado 2025-01-09",
+          "series": "Curso HTML + Javascript",
+          "source": "YouTube Data API v3"
+        }
+      ],
+      "profile_notes": {
+        "role": "Colaborador",
+        "content_focus": [
+          "Educación y divulgación",
+          "Programación: HTML y JavaScript",
+          "Dopamina, motivación y adicción"
+        ],
+        "future_direction": "Posible regreso durante 2027 con un enfoque renovado; incorporación gradual de temática gamer como línea complementaria, no principal. Proyección conversada, no calendario confirmado.",
+        "schedule": "Sin frecuencia de publicación definida.",
+        "metrics_source": "platform-stats.json"
+      }
     }
   }
 }
