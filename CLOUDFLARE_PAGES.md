@@ -8,7 +8,7 @@
 
 - El dominio `legion-multiversal.pages.dev` es el destino público utilizado en la auditoría de producto entregada al equipo y se adopta como dominio canónico en `index.html`, Open Graph, Twitter Card, sitemap y robots.txt.
 - GitHub Pages continúa publicando desde `main` como despliegue secundario. El último despliegue verificado antes de esta actualización corresponde a `6e083bf8568e054bdffd8c861a17b609af1f8082` y finalizó correctamente.
-- El estado y la configuración del proyecto de Cloudflare Pages no pueden verificarse desde los workflows de GitHub consultados. No se afirma que las Pages Functions estén activas ni que el proyecto de Cloudflare despliegue automáticamente cada commit.
+- La configuración y los secretos de Cloudflare Pages no son legibles desde la conexión GitHub disponible. El workflow Lighthouse se ha orientado a `https://legion-multiversal.pages.dev/` y espera el marcador `lm-source-revision` antes de medir; esto comprueba el contenido servido, pero no sustituye la verificación autenticada del deployment SHA en el panel/API de Cloudflare.
 - Las claves de Twitch, YouTube y Kick permanecen en GitHub Actions; los JSON publicados contienen resultados públicos, no credenciales.
 
 ## Formularios y funciones de servidor

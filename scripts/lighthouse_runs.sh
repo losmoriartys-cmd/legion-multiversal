@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
-# Run Lighthouse repeatedly against production GitHub Pages and an optional preview.
+# Run Lighthouse repeatedly against the configured production URL and an optional preview.
 # Reports are written locally; this script never deploys or modifies either site.
 #
 # Requirements: Node.js/npm, Chrome or Chromium, Python 3.
 # Usage:
 #   bash scripts/lighthouse_runs.sh
-#   bash scripts/lighthouse_runs.sh <url_github_pages> [url_preview]
+#   bash scripts/lighthouse_runs.sh <url_produccion> [url_preview]
 #   RUNS=5 bash scripts/lighthouse_runs.sh
 set -euo pipefail
 
-GH_URL="${1:-https://losmoriartys-cmd.github.io/legion-multiversal/}"
+PRODUCTION_URL="${1:-https://legion-multiversal.pages.dev/}"
 PREVIEW_URL="${2:-}"
 RUNS="${RUNS:-3}"
 OUT_DIR="${OUT_DIR:-reports/lighthouse}"
@@ -47,8 +47,8 @@ run_environment() {
 }
 
 # Lighthouse usa móvil por defecto; escritorio se mide con el preset oficial desktop.
-run_environment "github-pages-mobile" "$GH_URL" "mobile"
-run_environment "github-pages-desktop" "$GH_URL" "desktop"
+run_environment "production-mobile" "$PRODUCTION_URL" "mobile"
+run_environment "production-desktop" "$PRODUCTION_URL" "desktop"
 if [[ -n "$PREVIEW_URL" ]]; then
   run_environment "preview-mobile" "$PREVIEW_URL" "mobile"
   run_environment "preview-desktop" "$PREVIEW_URL" "desktop"

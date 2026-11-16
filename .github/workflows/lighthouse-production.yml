@@ -1,4 +1,4 @@
-name: Lighthouse · producción GitHub Pages
+name: Lighthouse · producción Cloudflare Pages
 
 on:
   push:
@@ -15,7 +15,6 @@ on:
 
 permissions:
   contents: read
-  pages: read
 
 concurrency:
   group: lighthouse-production
@@ -37,41 +36,41 @@ jobs:
         uses: browser-actions/setup-chrome@v1
         with:
           chrome-version: stable
-      - name: Esperar a que GitHub Pages publique este commit
+      - name: Esperar publicación de la revisión de producción en Cloudflare Pages
         env:
-          GH_TOKEN: ${{ github.token }}
-          EXPECTED_SHA: ${{ github.sha }}
+          PRODUCTION_URL: https://legion-multiversal.pages.dev/
+          EXPECTED_SOURCE_REVISION: cbb329b3512a4b0bc9acd6663061926f2808afb6
         run: |
+          set -euo pipefail
           for attempt in $(seq 1 40); do
-            response="$(gh api "repos/${GITHUB_REPOSITORY}/pages/builds/latest" 2>/dev/null || true)"
-            status="$(printf '%s' "$response" | jq -r '.status // empty')"
-            deployed_sha="$(printf '%s' "$response" | jq -r '.commit // empty')"
-            echo "Intento $attempt/40 · Pages: ${status:-sin estado} · commit: ${deployed_sha:-sin SHA}"
-            if [[ "$status" == "built" && "$deployed_sha" == "$EXPECTED_SHA" ]]; then
-              echo "GitHub Pages publicó el SHA esperado."
+            html="$(curl --location --fail --silent --show-error "$PRODUCTION_URL" || true)"
+            if [[ -n "$html" ]] && grep -Fq "name=\"lm-source-revision\" content=\"$EXPECTED_SOURCE_REVISION\"" <<< "$html" \
+              && grep -Fq "https://legion-multiversal.pages.dev/" <<< "$html"; then
+              echo "Cloudflare Pages sirve la revisión de contenido esperada y el dominio canónico correcto."
               exit 0
             fi
+            echo "Intento $attempt/40 · esperando que Cloudflare Pages publique la revisión $EXPECTED_SOURCE_REVISION."
             sleep 15
           done
-          echo "GitHub Pages no confirmó el deployment del SHA $EXPECTED_SHA."
+          echo "Cloudflare Pages no confirmó la revisión esperada en $PRODUCTION_URL."
           exit 1
       - name: Ejecutar Lighthouse móvil y escritorio (3 corridas por perfil)
         env:
           CHROME_PATH: ${{ steps.chrome.outputs.chrome-path }}
           RUNS: '3'
           OUT_DIR: reports/lighthouse
-        run: bash scripts/lighthouse_runs.sh "https://losmoriartys-cmd.github.io/legion-multiversal/"
+        run: bash scripts/lighthouse_runs.sh "https://legion-multiversal.pages.dev/"
       - name: Diagnosticar la primera corrida móvil
         if: always()
         run: |
-          if [[ -f reports/lighthouse/github-pages-mobile/run1.report.json ]]; then
-            python3 scripts/lh_failures.py reports/lighthouse/github-pages-mobile/run1.report.json
+          if [[ -f reports/lighthouse/production-mobile/run1.report.json ]]; then
+            python3 scripts/lh_failures.py reports/lighthouse/production-mobile/run1.report.json
           fi
       - name: Publicar informes Lighthouse
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: lighthouse-production-${{ github.sha }}
+          name: lighthouse-cloudflare-production-${{ github.sha }}
           path: reports/lighthouse/
           if-no-files-found: warn
           retention-days: 30
