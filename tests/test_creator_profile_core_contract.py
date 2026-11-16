@@ -32,6 +32,12 @@ class SharedCreatorProfileContractTests(unittest.TestCase):
         self.assertIn("LegionCreatorProfiles.load({files:['activity']})", app)
         self.assertIn("LegionCreatorProfiles.load({files:['clips']})", app)
 
+
+    def test_partial_data_loads_do_not_require_roster_file(self):
+        source = (ROOT / "creator-profile-core.js").read_text(encoding="utf-8")
+        self.assertIn("if (requested.includes('roster'))", source)
+        self.assertIn("roster: selected.roster || null", source)
+
     def test_metric_comparison_requires_same_period_and_provenance(self):
         source = (ROOT / "creator-profile-core.js").read_text(encoding="utf-8")
         for contract in ("left.key === right.key", "left.platform === right.platform",
