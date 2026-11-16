@@ -8,7 +8,7 @@ class ConversionPhase2Contract(unittest.TestCase):
   home=self.html.split('id="chapter-0"',1)[1].split('id="chapter-1"',1)[0]
   self.assertIn("MIRAR EN VIVO",home);self.assertEqual(home.count('class="executive-directory-card"'),3);self.assertNotIn('class="home-live-strip"',home)
  def test_floating_live_drawer(self):
-  self.assertIn('class="live-player-drawer"',self.html);self.assertIn("openLiveDrawer()",self.js);self.assertIn("closeLiveDrawer()",self.js)
+  self.assertIn('live-player-drawer',self.html);self.assertIn("openLiveDrawer()",self.js);self.assertIn("closeLiveDrawer()",self.js)
  def test_market_benchmark_and_activation_tabs(self):
   self.assertIn("BENCHMARK DE INDUSTRIA",self.html);self.assertIn("TIEMPO DE EJECUCIÓN",self.html);self.assertIn("selectAllianceModelTab",self.js)
  def test_barfender_continuity_and_clip_metadata(self):

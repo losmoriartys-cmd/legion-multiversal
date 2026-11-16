@@ -21,14 +21,16 @@ class ConversionNavigationContractTests(unittest.TestCase):
 
     def test_home_hero_routes_to_live_and_brands(self):
         hero = self.html.split('<div class="executive-hero-actions">', 1)[1].split("</div>", 1)[0]
-        self.assertIn('switchChapter(10)', hero)
+        self.assertIn('openLiveDrawer()', hero)
         self.assertIn('href="./marcas/"', hero)
         self.assertNotIn("mailto:", hero)
 
-    def test_home_live_strip_uses_public_capture_and_no_fake_schedule(self):
-        self.assertIn('id="home-live-status"', self.html)
-        self.assertIn('id="home-live-updated"', self.html)
-        self.assertIn("homeLiveStatus.textContent", (ROOT / "app.js").read_text(encoding="utf-8"))
+    def test_home_live_status_is_served_by_the_floating_drawer(self):
+        self.assertNotIn('id="home-live-status"', self.html)
+        app = (ROOT / "app.js").read_text(encoding="utf-8")
+        self.assertIn("function renderLiveDirectory(channels)", app)
+        self.assertIn("async function openLiveDrawer()", app)
+        self.assertIn("La última captura está demorada", app)
         self.assertIn("home-live-strip", self.css)
 
     def test_previous_name_is_not_in_homepage_teaser(self):
@@ -40,10 +42,11 @@ class ConversionNavigationContractTests(unittest.TestCase):
                      "@media (prefers-reduced-motion: reduce)"):
             self.assertIn(rule, self.css)
 
-    def test_home_fallback_offers_follow_link_only_when_no_fresh_live_channel(self):
-        self.assertIn('id="home-follow-link"', self.html)
+    def test_live_drawer_fallback_never_labels_stale_capture_as_live(self):
         app = (ROOT / "app.js").read_text(encoding="utf-8")
-        self.assertIn("homeFollowLink.hidden=isFresh&&liveCount>0", app)
+        self.assertIn("const fresh=Boolean(updated", app)
+        self.assertIn("La última captura está demorada", app)
+        self.assertIn("No se detectan canales en directo en la última captura", app)
 
     def test_non_home_editorial_cover_is_lazy_loaded(self):
         self.assertIn('image_20261107_021355.jpg?v=20261112', self.html)

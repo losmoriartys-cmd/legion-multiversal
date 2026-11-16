@@ -54,7 +54,7 @@ class RosterCharacterSelectorContractTests(unittest.TestCase):
         mount = self.html.index('id="roster-selector"')
         self.assertGreater(mount, home)
         self.assertIn("roster-selector.css", self.html)
-        self.assertIn("app.js?v=20261116-roster-mobile-3", self.html)
+        self.assertIn("app.js?v=20261116-conversion-phase2-1", self.html)
 
     def test_comparator_does_not_publish_non_comparable_metrics(self):
         self.assertIn("MÉTRICAS COMPARABLES", self.app)

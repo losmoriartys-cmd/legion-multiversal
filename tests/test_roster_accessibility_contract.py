@@ -64,8 +64,8 @@ class RosterAccessibilityContractTests(unittest.TestCase):
         self.assertIn(attrs.get("aria-labelledby"), self.by_id)
 
     def test_three_tabs_reference_three_tabpanels(self):
-        tabs = [attrs for _, attrs in self.nodes if attrs.get("role") == "tab"]
-        panels = [attrs for _, attrs in self.nodes if attrs.get("role") == "tabpanel"]
+        tabs = [attrs for _, attrs in self.nodes if attrs.get("role") == "tab" and (attrs.get("id") or "").startswith("modal-tab-")]
+        panels = [attrs for _, attrs in self.nodes if attrs.get("role") == "tabpanel" and (attrs.get("id") or "").startswith("modal-pane-")]
         self.assertEqual(len(tabs), 3)
         self.assertEqual(len(panels), 3)
         tab_ids = {attrs.get("id") for attrs in tabs}

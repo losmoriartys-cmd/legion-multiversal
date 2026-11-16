@@ -3116,3 +3116,5 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **Mapa Multiversal:** indicador persistente de misiones completadas en la cabecera, conectado al progreso local existente.
 - **Seguridad:** no se presenta un modal o una ruta oculta como autenticación real. Para restringir efectivamente el archivo operativo de campañas hace falta control de acceso en servidor.
 - **Validación:** se incorpora un contrato estático de fase 2 y se disparan los workflows automáticos al integrar. La inspección visual manual de producción queda pendiente.
+
+- **Ajuste de contrato de pruebas:** se actualizaron las expectativas de navegación para reconocer el nuevo cajón flotante en lugar de exigir el antiguo bloque de estado en portada. Las pruebas de accesibilidad del modal ahora aíslan sus tres pestañas y no confunden los nuevos controles de Alianzas/Reclutamiento con las pestañas del expediente.
