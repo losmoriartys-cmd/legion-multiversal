@@ -3104,3 +3104,15 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 
 
 - **Informe de optimización (16/11/2026):** se registra el bloque de navegación, credenciales, formularios Cloudflare Pages/Resend, carga de datos por capítulo, media kit por canal con tendencias de diez días y enlaces a expedientes imprimibles, curaduría de clips, consolidación visual de BarFender y documentación de Cloudflare Web Analytics en `INFORME_OPTIMIZACION_2026-11-16.md`. El informe distingue implementaciones incorporadas de verificaciones pendientes; no atribuye CI, entrega de correo, Lighthouse ni deployment sin evidencia.
+
+## 2026-11-16 — Fase 2 de optimización de conversión y experiencia
+
+- **Inicio:** hero único con ilustración grupal de fondo, propuesta de valor directa y dos caminos principales. Se retira el bloque redundante de estado público y se reduce el recorrido guiado a tres tarjetas con una acción principal.
+- **En Vivo:** el reproductor se traslada fuera de los paneles de capítulos a un cajón flotante, accesible desde el hero y cerrable sin saltar al final del documento. La frescura de Twitch Helix sigue siendo condición para mostrar un canal como actual.
+- **Alianzas:** contexto LATAM dentro de un bloque neutro rotulado «Benchmark de industria». Los tres escenarios pasan a pestañas comparables y declaran que el tiempo se acuerda según calendario y alcance, sin prometer plazos estándar.
+- **BarFender:** la segunda sesión del 10/11/2026 se presenta como continuidad del Expediente 001. Se añaden avatar y duración no registrada en las cuatro portadas; no se inventan duraciones. Se contextualizan 91 usuarios activos en chat frente a 80 espectadores únicos del VOD completo de Los Moriartys, sin atribuirlos exclusivamente al tramo de juego.
+- **Arsenal:** filtros por género y tarjeta de BarFender con insignia «Jugado por la Legión» y enlace al Expediente 001.
+- **Reclutamiento:** formularios en pestañas excluyentes, con formulario comercial visible por defecto.
+- **Mapa Multiversal:** indicador persistente de misiones completadas en la cabecera, conectado al progreso local existente.
+- **Seguridad:** no se presenta un modal o una ruta oculta como autenticación real. Para restringir efectivamente el archivo operativo de campañas hace falta control de acceso en servidor.
+- **Validación:** se incorpora un contrato estático de fase 2 y se disparan los workflows automáticos al integrar. La inspección visual manual de producción queda pendiente.

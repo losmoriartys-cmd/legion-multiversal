@@ -624,6 +624,64 @@ function renderLiveDirectory(channels){
  }
  host.innerHTML=refreshNote+live.map(c=>'<article class="live-channel-card"><span class="stats-status partial">● EN DIRECTO</span><strong>'+escapeStatsHtml(c.display_name)+'</strong><small>'+escapeStatsHtml(c.current_game||'Categoría no informada')+' · '+(c.current_viewers===null?'Espectadores no disponibles':statsNumber(c.current_viewers,0)+' espectadores')+'</small><button type="button" onclick="selectLiveChannel(\''+escapeStatsHtml(c.login)+'\',\''+escapeStatsHtml(c.display_name)+'\')">VER TRANSMISIÓN</button></article>').join('');
 }
+
+function closeLiveDrawer(){
+ const wrap=document.getElementById('live-player-wrap'),player=document.getElementById('live-player');
+ if(player)player.innerHTML='';
+ if(wrap){wrap.hidden=true;wrap.classList.remove('is-open');}
+ document.body.classList.remove('live-drawer-open');
+}
+async function openLiveDrawer(){
+ const wrap=document.getElementById('live-player-wrap'),player=document.getElementById('live-player'),message=document.getElementById('live-player-message');
+ if(!wrap)return;
+ wrap.hidden=false;wrap.classList.add('is-open');document.body.classList.add('live-drawer-open');
+ if(message)message.textContent='Consultando el último estado público de los canales…';
+ if(player)player.innerHTML='';
+ await loadInstituteStats();
+ const data=instituteStatsData||{};
+ const channels=(data.active_channels||Object.keys(data.channels||{})).map(login=>data.channels?.[login]).filter(Boolean);
+ const updated=data.updated_at?new Date(data.updated_at):null,interval=Number(data.sampling_interval_minutes)||55;
+ const age=updated?(Date.now()-updated.getTime())/60000:Infinity;
+ const fresh=Boolean(updated&&!Number.isNaN(updated.getTime())&&age>=-5&&age<=Math.max(interval*2.5,120));
+ const live=channels.find(channel=>channel.live);
+ if(fresh&&live){selectLiveChannel(live.login,live.display_name||live.login);return;}
+ const title=document.getElementById('live-player-title');
+ if(title)title.textContent='CENTRAL EN VIVO';
+ if(message)message.textContent=!fresh?'La última captura está demorada. No podemos confirmar qué canal transmite ahora.':'No se detectan canales en directo en la última captura. Consultá el directorio completo.';
+ const link=document.getElementById('live-open-channel');
+ if(link){link.href='#chapter-10';link.textContent='ABRIR DIRECTORIO DE CANALES ↗';link.onclick=()=>{closeLiveDrawer();switchChapter(10);};}
+}
+function openMultiverseMap(){switchChapter(13);}
+function updateMissionHeader(){
+ const count=document.getElementById('mission-progress-count'),trigger=document.getElementById('mission-progress-trigger');
+ if(!count||!communityPlaybook)return;
+ const missions=communityPlaybook.missions||[],state=readLegionProgress();
+ const progressFor=key=>key==='profiles'?state.profiles.length:key==='chapters'?state.chapters.length:key==='bitacora'?Number(state.bitacora):key==='live'?Number(state.live):0;
+ const complete=missions.filter(m=>{const target=m.target==='roster_total'?Math.max(1,heroesData.length):Math.max(1,Number(m.target)||1);return progressFor(m.progress_key)>=target;}).length;
+ count.textContent=complete+'/'+missions.length;
+ if(trigger)trigger.setAttribute('aria-label','Abrir Mapa Multiversal: '+complete+' de '+missions.length+' misiones completadas');
+}
+function selectAllianceModelTab(key){
+ ['individual','multichannel','platform'].forEach(id=>{
+  const panel=document.getElementById('alliance-model-'+id),tab=document.getElementById('alliance-tab-'+id),active=id===key;
+  if(panel)panel.hidden=!active;
+  if(tab){tab.setAttribute('aria-selected',String(active));tab.tabIndex=active?0:-1;}
+ });
+}
+function setRecruitmentMode(mode){
+ const creator=document.getElementById('creator-application'),brand=document.getElementById('brand-proposal');
+ const creatorTab=document.getElementById('recruitment-tab-creator'),brandTab=document.getElementById('recruitment-tab-brand');
+ const showCreator=mode==='creator';
+ if(creator)creator.hidden=!showCreator;
+ if(brand)brand.hidden=showCreator;
+ if(creatorTab)creatorTab.setAttribute('aria-selected',String(showCreator));
+ if(brandTab)brandTab.setAttribute('aria-selected',String(!showCreator));
+}
+function filterArsenal(filter){
+ document.querySelectorAll('.arsenal-card[data-genre]').forEach(card=>{card.hidden=filter!=='all'&&card.dataset.genre!==filter;});
+ document.querySelectorAll('[data-arsenal-filter]').forEach(button=>{const active=button.dataset.arsenalFilter===filter;button.classList.toggle('is-active',active);button.setAttribute('aria-pressed',String(active));});
+}
+
 function selectLiveChannel(login,displayName){
  const wrap=document.getElementById('live-player-wrap'),player=document.getElementById('live-player'),title=document.getElementById('live-player-title'),link=document.getElementById('live-open-channel');
  if(!wrap||!player)return;
@@ -633,8 +691,7 @@ function selectLiveChannel(login,displayName){
  title.textContent='EN VIVO · '+displayName;
  link.href='https://twitch.tv/'+safeLogin;
  player.innerHTML='<iframe src="https://player.twitch.tv/?channel='+encodeURIComponent(safeLogin)+'&parent='+encodeURIComponent(parent)+'&autoplay=false&muted=true" allowfullscreen="true" scrolling="no" title="Transmisión de '+escapeStatsHtml(displayName)+' en Twitch"></iframe>';
- wrap.hidden=false;
- wrap.scrollIntoView({behavior:'smooth',block:'start'});
+ wrap.hidden=false;wrap.classList.add('is-open');const message=document.getElementById('live-player-message');if(message)message.textContent='Transmisión seleccionada · '+displayName;document.body.classList.add('live-drawer-open');link.onclick=null;
 }
 let legionNewsData = null;
 async function loadLegionNews() {
@@ -833,6 +890,7 @@ function renderCommunityProgress() {
         const complete = value >= target;
         return '<article class="community-mission' + (complete ? ' is-complete' : '') + '"><div class="community-mission-top"><span>' + escapeStatsHtml(mission.category || 'MISIÓN') + '</span><b>' + (complete ? 'COMPLETADA' : 'EN CURSO') + '</b></div><h4>' + escapeStatsHtml(mission.title) + '</h4><p>' + escapeStatsHtml(mission.description) + '</p><div class="community-progress-track" role="progressbar" aria-label="' + escapeStatsHtml(mission.title) + '" aria-valuemin="0" aria-valuemax="' + target + '" aria-valuenow="' + Math.min(value,target) + '"><i style="width:' + percent.toFixed(1) + '%"></i></div><small>' + Math.min(value,target) + ' / ' + target + ' · ' + escapeStatsHtml(mission.progress_label || 'progreso') + '</small></article>';
     }).join('');
+    updateMissionHeader();
     const achievementsHost = document.getElementById('community-achievements');
     if (achievementsHost) achievementsHost.innerHTML = (communityPlaybook.achievements || []).map(achievement => {
         const achievementTarget = achievement.target === 'roster_total' ? Math.max(1, heroesData.length) : Number(achievement.target || 1);
@@ -2254,8 +2312,9 @@ function printHeroDossier(){
         const initialNumber = initialChapter ? Number(initialChapter.id.replace('chapter-','')) : 0;
         if (initialChapter) renderChapterPager(initialNumber);
 
-        // Carga inicial mínima: el estado de transmisiones alimenta la portada.
+        // Carga inicial mínima: estado de transmisiones y progreso de misiones.
         loadChapterResources(initialNumber);
+        loadResourceOnce('community-playbook', loadCommunityPlaybook);
         if (location.hash.startsWith('#roster/') || location.hash.startsWith('#expediente-')) loadChapterResources(2);
 
         if (initialChapter) recordLegionProgress('chapter', String(initialNumber));
