@@ -132,9 +132,13 @@ def compare(baseline, current, include_platform=True, approved_editorial=None):
             elif c.get('sha256') != meta['sha256']:
                 approved_items = ((approved_editorial or {}).get('creator_records', {})
                                   .get(hid, {}).get(f))
-                approved = (isinstance(approved_items, list)
-                            and len(approved_items) == meta.get('count')
-                            and _list_hash(approved_items) == c.get('sha256'))
+                approved = (
+                    (isinstance(approved_items, list)
+                     and len(approved_items) == meta.get('count')
+                     and _list_hash(approved_items) == c.get('sha256'))
+                    or (isinstance(approved_items, dict)
+                        and _h(approved_items) == c.get('sha256'))
+                )
                 if not approved:
                     problems.append(f'creator-records "{hid}.{f}": el contenido cambió y no coincide con una actualización editorial aprobada')
     for hid, meta in (baseline.get('platform_stats', {}).items() if include_platform else []):
@@ -238,6 +242,25 @@ class Tests(unittest.TestCase):
         bad_approval = {'creator_records': {'pato-oratoris': {'youtube_videos': altered}}}
         self.assertTrue(compare(base, current, approved_editorial=bad_approval))
         self.assertEqual(base['_meta']['note'], '')
+
+    def test_aprobacion_editorial_de_objeto_es_exacta(self):
+        base = self._snap(REC_OLD)
+        notes = {
+            'role': 'Colaborador',
+            'content_focus': ['Educación y divulgación', 'Programación: HTML y JavaScript'],
+            'schedule': 'Sin frecuencia de publicación definida.',
+        }
+        migrated = {'channels': {'pato-oratoris': {
+            'milestones': [], 'highlights': [], 'youtube_videos': VIDEOS,
+            'profile_notes': notes,
+        }}}
+        current = snapshot(migrated, PLAT_OLD, ['pato-oratoris'], {})
+        approved = {'creator_records': {'pato-oratoris': {'profile_notes': notes}}}
+        self.assertEqual(compare(base, current, approved_editorial=approved), [])
+        altered = dict(notes)
+        altered['role'] = 'Otro'
+        bad_approval = {'creator_records': {'pato-oratoris': {'profile_notes': altered}}}
+        self.assertTrue(compare(base, current, approved_editorial=bad_approval))
 
     def test_perder_el_registro_completo(self):
         base = self._snap(REC_OLD)
