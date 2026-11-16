@@ -2,6 +2,9 @@ import json
 import os
 import urllib.parse
 import urllib.request
+import urllib.error
+import time
+from email.utils import parsedate_to_datetime
 from datetime import datetime, timedelta, timezone
 
 CLIENT_ID = os.environ.get("TWITCH_CLIENT_ID")
@@ -38,8 +41,32 @@ DATA_FILE = "data.json"
 
 def request_json(url, headers=None, data=None):
     req = urllib.request.Request(url, headers=headers or {}, data=data)
-    with urllib.request.urlopen(req, timeout=30) as response:
-        return json.loads(response.read().decode("utf-8"))
+    retryable = {429, 500, 502, 503, 504}
+    delays = (2, 4)
+    for attempt in range(3):
+        try:
+            with urllib.request.urlopen(req, timeout=30) as response:
+                return json.loads(response.read().decode("utf-8"))
+        except urllib.error.HTTPError as exc:
+            if exc.code in {400, 401, 403} or exc.code not in retryable or attempt == 2:
+                raise
+            retry_after = exc.headers.get("Retry-After")
+            delay = delays[attempt]
+            if retry_after:
+                try:
+                    delay = max(0, min(30, int(retry_after)))
+                except ValueError:
+                    try:
+                        target = parsedate_to_datetime(retry_after)
+                        delay = max(0, min(30, (target - datetime.now(timezone.utc)).total_seconds()))
+                    except (TypeError, ValueError, OverflowError):
+                        pass
+            time.sleep(min(30, delay))
+        except urllib.error.URLError:
+            if attempt == 2:
+                raise
+            time.sleep(delays[attempt])
+    raise RuntimeError("La solicitud HTTP agotó los reintentos.")
 
 
 def get_token():
@@ -200,6 +227,9 @@ def main():
             s for s in snapshots
             if datetime.fromisoformat(s["sampled_at"]) >= cutoff
         ]
+        last_snapshot_at = max(valid_times).isoformat().replace("+00:00", "Z") if valid_times else None
+        if should_sample:
+            last_snapshot_at = now_iso
         channel_data[login] = {
             "login": login,
             "display_name": user.get("display_name", login),
@@ -213,6 +243,8 @@ def main():
             "current_game": stream.get("game_name") if stream else None,
             "current_title": stream.get("title") if stream else None,
             "stream_started_at": stream.get("started_at") if stream else None,
+            "last_status_at": now_iso,
+            "last_snapshot_at": last_snapshot_at,
             "updated_at": now_iso,
             "window": summarize(snapshots, now),
             "snapshots": snapshots
@@ -231,6 +263,8 @@ def main():
             "sampled_channels": sampled_channels,
             "skipped_channels": skipped_channels,
             "complete": len(resolved) == len(channels) and len(sampled_channels) + len(skipped_channels) == len(channels),
+            "status_complete": len(resolved) == len(channels),
+            "sampling_complete": len(sampled_channels) == len(channels),
             "registry_source": ROSTER_FILE,
             "authentication": "Twitch app access token; public Helix endpoints only",
             "private_analytics_access": False
@@ -246,4 +280,8 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except Exception as exc:
+        print("ERROR: captura Twitch no publicada: {}".format(exc), file=__import__("sys").stderr)
+        raise SystemExit(1)

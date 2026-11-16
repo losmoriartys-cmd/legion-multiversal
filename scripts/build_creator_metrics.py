@@ -165,7 +165,7 @@ def build(roster, twitch, platforms, clips, now=None):
             elif platform in {"youtube", "kick"}:
                 creator_platform = (platform_creators.get(creator_id) or {}).get("platforms") or {}
                 source_record = creator_platform.get(platform) or {}
-                captured_at = platforms.get("updated_at")
+                captured_at = source_record.get("captured_at") or platforms.get("updated_at")
                 freshness = capture_status(platform, captured_at, now)
                 base_status = source_record.get("status")
                 metric_status = "verified_public" if base_status == "verified" and freshness == "fresh" else freshness if base_status == "verified" else "unavailable"

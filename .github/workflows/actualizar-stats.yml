@@ -42,6 +42,9 @@ jobs:
       - name: Sincronizar main antes de recolectar
         run: git pull --rebase origin main
 
+      - name: Ejecutar pruebas unitarias de colectores
+        run: python -m unittest discover -s tests -p 'test_*.py'
+
       - name: Consultar Twitch y guardar muestras
         env:
           TWITCH_CLIENT_ID: ${{ secrets.TWITCH_CLIENT_ID }}

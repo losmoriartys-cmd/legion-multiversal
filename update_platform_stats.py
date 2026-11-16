@@ -28,9 +28,33 @@ def now():
     return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00","Z")
 
 def request(url, headers=None, data=None):
-    req=urllib.request.Request(url,headers=headers or {},data=data)
-    with urllib.request.urlopen(req,timeout=30) as r:
-        return json.loads(r.read().decode("utf-8"))
+    req = urllib.request.Request(url, headers=headers or {}, data=data)
+    retryable = {429, 500, 502, 503, 504}
+    delays = (2, 4)
+    for attempt in range(3):
+        try:
+            with urllib.request.urlopen(req, timeout=30) as response:
+                return json.loads(response.read().decode("utf-8"))
+        except urllib.error.HTTPError as exc:
+            if exc.code in {400, 401, 403} or exc.code not in retryable or attempt == 2:
+                raise
+            retry_after = exc.headers.get("Retry-After")
+            delay = delays[attempt]
+            if retry_after:
+                try:
+                    delay = max(0, min(30, int(retry_after)))
+                except ValueError:
+                    try:
+                        target = parsedate_to_datetime(retry_after)
+                        delay = max(0, min(30, (target - datetime.now(timezone.utc)).total_seconds()))
+                    except (TypeError, ValueError, OverflowError):
+                        pass
+            time.sleep(min(30, delay))
+        except urllib.error.URLError:
+            if attempt == 2:
+                raise
+            time.sleep(delays[attempt])
+    raise RuntimeError("La solicitud HTTP agotó los reintentos.")
 
 def url(base,path,params):
     return base+"/"+path+"?"+urllib.parse.urlencode(params,doseq=True)
@@ -49,6 +73,21 @@ def youtube(handle,key):
             videos=[{"video_id":v.get("id"),"title":v.get("snippet",{}).get("title"),"published_at":v.get("snippet",{}).get("publishedAt"),"views":int(v.get("statistics",{}).get("viewCount",0)),"likes":int(v["statistics"]["likeCount"]) if "likeCount" in v.get("statistics",{}) else None,"comments":int(v["statistics"]["commentCount"]) if "commentCount" in v.get("statistics",{}) else None,"url":"https://www.youtube.com/watch?v="+v.get("id","")} for v in rows]
     return {"platform":"youtube","handle":handle,"url":"https://www.youtube.com/"+(handle if handle.startswith("@") else "@"+handle),"display_name":sn.get("title"),"thumbnail_url":(sn.get("thumbnails",{}).get("high") or sn.get("thumbnails",{}).get("default") or {}).get("url"),"metrics":{"subscribers":int(st["subscriberCount"]) if "subscriberCount" in st else None,"total_views":int(st["viewCount"]) if "viewCount" in st else None,"videos_total":int(st["videoCount"]) if "videoCount" in st else None},"recent_videos":videos,"source":"YouTube Data API v3","status":"verified","methodology":"Datos públicos acumulados del canal y hasta 10 videos recientes. El contador de suscriptores puede estar redondeado por YouTube."}
 
+def append_history(record, captured_at):
+    """Conserva una observación por hora UTC y limita la retención a 90 registros."""
+    history = record.get("history")
+    if not isinstance(history, list):
+        history = []
+    hour = captured_at[:13]
+    if not history or str(history[-1].get("captured_at", ""))[:13] != hour:
+        history.append({
+            "captured_at": captured_at,
+            "metrics": record.get("metrics") or {}
+        })
+    record["history"] = history[-90:]
+    return record
+
+
 def kick_token(cid,secret):
     form=urllib.parse.urlencode({"grant_type":"client_credentials","client_id":cid,"client_secret":secret}).encode()
     return request("https://id.kick.com/oauth/token",{"Content-Type":"application/x-www-form-urlencoded"},form)["access_token"]
@@ -62,27 +101,96 @@ def kick(slug,token):
 
 def main():
     registry_creators = load_creator_accounts()
-    captured=now(); result={"schema_version":1,"updated_at":captured,"methodology":"Las métricas se conservan por creador y plataforma. No sumar ni comparar directamente unidades de plataformas distintas.","creators":{},"collection_status":{}}
-    ykey=os.getenv("YOUTUBE_API_KEY"); cid=os.getenv("KICK_CLIENT_ID"); secret=os.getenv("KICK_CLIENT_SECRET"); token=None
-    for key,creator in registry_creators.items():
-        item={"display_name":creator.get("display_name",key),"platforms":{}}
-        for account in creator.get("accounts",[]):
-            platform=account.get("platform"); handle=account.get("handle")
-            if not platform or not handle: continue
+    captured = now()
+    old = {}
+    if os.path.exists(OUTPUT):
+        try:
+            with open(OUTPUT, encoding="utf-8") as handle:
+                old = json.load(handle)
+        except (OSError, json.JSONDecodeError):
+            old = {}
+    old_creators = old.get("creators") or {}
+    result = {
+        "schema_version": 1,
+        "updated_at": old.get("updated_at"),
+        "methodology": old.get("methodology", "Las métricas se conservan por creador y plataforma. No sumar ni comparar directamente unidades de plataformas distintas."),
+        "creators": {},
+        "collection_status": {}
+    }
+    ykey = os.getenv("YOUTUBE_API_KEY")
+    cid = os.getenv("KICK_CLIENT_ID")
+    secret = os.getenv("KICK_CLIENT_SECRET")
+    token = None
+    successful = 0
+    failures = 0
+    for key, creator in registry_creators.items():
+        item = {
+            "display_name": creator.get("display_name", key),
+            "platforms": {}
+        }
+        old_platforms = (old_creators.get(key) or {}).get("platforms") or {}
+        for account in creator.get("accounts", []):
+            platform = account.get("platform")
+            handle = account.get("handle")
+            if not platform or not handle:
+                continue
             try:
-                if platform=="youtube":
-                    if not ykey: raise EnvironmentError("Falta el secreto YOUTUBE_API_KEY.")
-                    item["platforms"][platform]=youtube(handle,ykey)
-                elif platform=="kick":
-                    if not (cid and secret): raise EnvironmentError("Faltan KICK_CLIENT_ID y KICK_CLIENT_SECRET.")
-                    if token is None: token=kick_token(cid,secret)
-                    item["platforms"][platform]=kick(handle,token)
-                else: raise ValueError("No hay colector para esta plataforma.")
-            except Exception as e:
-                item["platforms"][platform]={"platform":platform,"handle":handle,"url":account.get("url"),"status":"credentials_required" if isinstance(e,EnvironmentError) else "error","source":"YouTube Data API v3" if platform=="youtube" else "Kick Developer Public API","note":str(e)[:250]}
-        result["creators"][key]=item
-    result["collection_status"]={"youtube":"enabled" if ykey else "awaiting_secret","kick":"enabled" if cid and secret else "awaiting_secrets","captured_at":captured}
-    with open(OUTPUT,"w",encoding="utf-8") as f: json.dump(result,f,ensure_ascii=False,indent=2)
-    print("Colector multiplaforma: {} perfiles procesados.".format(len(result["creators"])))
-
-if __name__=="__main__": main()
+                if platform == "youtube":
+                    if not ykey:
+                        raise EnvironmentError("Falta el secreto YOUTUBE_API_KEY.")
+                    record = youtube(handle, ykey)
+                elif platform == "kick":
+                    if not (cid and secret):
+                        raise EnvironmentError("Faltan KICK_CLIENT_ID y KICK_CLIENT_SECRET.")
+                    if token is None:
+                        token = kick_token(cid, secret)
+                    record = kick(handle, token)
+                else:
+                    raise ValueError("No hay colector para esta plataforma.")
+                record["captured_at"] = captured
+                record = append_history(record, captured)
+                item["platforms"][platform] = record
+                successful += 1
+            except Exception as exc:
+                failures += 1
+                previous = old_platforms.get(platform)
+                if isinstance(previous, dict):
+                    record = dict(previous)
+                else:
+                    record = {
+                        "platform": platform,
+                        "handle": handle,
+                        "url": account.get("url"),
+                        "source": "YouTube Data API v3" if platform == "youtube" else "Kick Developer Public API"
+                    }
+                record["status"] = "credentials_required" if isinstance(exc, EnvironmentError) else "error"
+                record["note"] = str(exc)[:250]
+                record["last_error_at"] = captured
+                if isinstance(record.get("history"), list):
+                    record["history"] = record["history"][-90:]
+                item["platforms"][platform] = record
+        result["creators"][key] = item
+    if successful:
+        result["updated_at"] = captured
+    result["collection_status"] = {
+        "youtube": "enabled" if ykey else "awaiting_secret",
+        "kick": "enabled" if cid and secret else "awaiting_secrets",
+        "captured_at": captured,
+        "successful_accounts": successful,
+        "failed_accounts": failures,
+        "complete": failures == 0
+    }
+    with open(OUTPUT, "w", encoding="utf-8") as handle:
+        json.dump(result, handle, ensure_ascii=False, indent=2)
+        handle.write("\n")
+    print("Colector multiplataforma: {} perfiles procesados; {} cuentas correctas; {} con error.".format(
+        len(result["creators"]), successful, failures
+    ))
+    if failures:
+        raise SystemExit(1)
+if __name__ == "__main__":
+    try:
+        main()
+    except Exception as exc:
+        print("ERROR: captura multiplataforma no publicada: {}".format(exc), file=__import__("sys").stderr)
+        raise SystemExit(1)
