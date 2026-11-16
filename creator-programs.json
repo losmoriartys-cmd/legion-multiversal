@@ -2,8 +2,8 @@
   "schema_version": 1,
   "program": "Epic Games Support-A-Creator",
   "display_policy": {
-    "status_label": "CÓDIGO REGISTRADO · EVIDENCIA DE CUENTA APORTADA",
-    "explanation": "El titular aportó el texto de la sección «Información de la cuenta de creador» de Epic. La coincidencia del Creator ID y el código se registra como evidencia declarada por el titular; el sitio no consulta sesiones privadas ni certifica automáticamente la vigencia operativa del código."
+    "status_label": "CÓDIGO REGISTRADO · ACTIVACIÓN NO REVALIDADA EN PORTAL",
+    "explanation": "El estado se informa por creador y distingue el registro administrativo, la evidencia de cuenta aportada por el titular y la verificación autenticada en Epic. La web pública no consulta sesiones privadas ni certifica en tiempo real la vigencia operativa de cada código."
   },
   "official_links": {
     "account": "https://www.epicgames.com/account",
@@ -40,7 +40,8 @@
       "recorded_at": "2026-11-12",
       "account_portal_revalidated": false,
       "evidence": "Registro de administración del proyecto en INFORMES.md y confirmación aportada por el titular.",
-      "roster_profile_id": "rod3r1k"
+      "roster_profile_id": "rod3r1k",
+      "display_status": "CÓDIGO REGISTRADO · ACTIVACIÓN NO REVALIDADA EN PORTAL"
     }
   }
 }
