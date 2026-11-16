@@ -3023,3 +3023,26 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - El commit posterior de `index.html` cambia únicamente versiones de caché. Su validación quedó iniciada en [run 43800796948](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43800796948).
 - **Despliegue:** la ejecución de Pages para el HEAD más reciente quedó en cola [run 43800796732](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43800796732). Hasta confirmar su conclusión no se declara el despliegue de producción ni la inspección visual pública final.
 - Pull requests abiertos: **0**. Sin nuevas ramas ni PR; las correcciones se integraron directamente en `main`.
+
+
+## 2026-11-16 — Códigos Epic centralizados para Alianzas y Roster
+
+### Implementación integrada directamente en `main`
+- Se creó `creator-programs.json` como fuente única de los códigos de Epic Games Support-A-Creator:
+  - **LOSMORIARTYS** — canal compartido de Demian + Ari; se conserva el Creator ID `dc2236199d3c4fc88932c290ad87be97`.
+  - **TheR0d3R1k** — código individual de ROD3R1K.
+- El registro separa la constancia administrativa del proyecto de la verificación autenticada en Epic. Ambos códigos figuran en el registro del equipo/titular con fecha documental 2026-11-12; el portal no fue revalidado durante esta implementación. La interfaz muestra explícitamente **«CÓDIGO REGISTRADO · ACTIVACIÓN NO REVALIDADA EN PORTAL»**.
+- La página de Alianzas ya no mantiene copias manuales de los códigos: ambos bloques se renderizan desde el JSON central, con propietario, código, ID cuando corresponde, fecha/evidencia del registro, botón de copia y enlaces a Cuenta Epic y Creator Dashboard.
+- Los expedientes individuales de MORIARTYS y ROD3R1K reutilizan el mismo renderer y la misma fuente de datos. Se retiró también el código hardcodeado del expediente legado de MORIARTYS.
+- El cargador valida los dos registros y, si el JSON central no está disponible o no cumple el contrato, muestra un aviso en lugar de recurrir a códigos locales potencialmente desactualizados.
+- Se añadió CSS responsive y estados accesibles para la copia del código. Se actualizó el cache-busting de `app.js` y `styles.css`.
+- **Límite de automatización:** no se incorporó scraping ni se simula una API privada de Epic. La web actualiza automáticamente la presentación al cambiar el registro central; la activación vigente debe confirmarse desde la cuenta autenticada del titular.
+
+### Pruebas y correcciones
+- Nuevo contrato `tests/test_epic_creator_programs.py`: propietarios y alcances, ambos códigos, fecha/evidencia, no confundir registro con verificación live, mounts dinámicos de Alianzas y reutilización en perfiles.
+- La primera validación detectó una aserción antigua que exigía el cache-buster previo `app.js?v=20261116-roster-selector-2`. Se corrigió el test para que valide el recurso versionado vigente; no se omitió ni se marcó como aprobada aquella ejecución fallida.
+- [GitHub Actions run 43804393316](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43804393316), HEAD `e54221cfa6b2d768a18801c72fd566f85772b633`: **SUCCESS**. Sintaxis JavaScript y JSON correctas; **67/67 pruebas unitarias** y **6/6 pruebas Playwright** aprobadas; colector de clips y validación de rutas/imágenes/enlaces completados.
+- [Cloudflare Pages](https://3c3e084c.legion-multiversal.pages.dev): despliegue **SUCCESS** para el mismo HEAD.
+- GitHub Pages: workflow de build y deploy **SUCCESS** para el mismo HEAD.
+- La URL de preview de Cloudflare fue emitida por el proveedor. La inspección visual manual de esa URL no pudo realizarse desde el navegador de revisión disponible; no se declara QA visual manual.
+- Pull requests abiertos: **0**. Sin nuevas ramas ni cambios de credenciales, secretos o fuentes de estadísticas.
