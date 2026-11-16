@@ -2977,4 +2977,4 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - Trabajo sobre `integration/roster-unification-2026-11-16`, partiendo del HEAD `08fd306629ae268a95a3fa60be7f12c0cc1ecefd`.
 - No se crea PR ni se modifican credenciales, métricas, canales o imágenes.
 - La URL pública no pudo recuperarse con el navegador de consulta; por eso no se declara una inspección visual manual de producción. La revisión visual final debe realizarse sobre la ejecución real del sitio en escritorio, tablet y móvil.
-- Validación automatizada pendiente de CI antes de integrar a `main`.
+- Los cuatro commits se integraron por fast-forward en `main` (HEAD `17a4a9733d84af70e62a81ffa43bf46a4cf46cef`); la rama de integración y `main` quedaron idénticas. La ejecución de CI y el despliegue deben confirmarse por separado; no se declaran aprobados en este registro.
