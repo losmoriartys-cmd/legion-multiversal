@@ -1,5 +1,6 @@
         // Fuente de verdad del roster: editar role para cambiar jerarquía; completar powers y log con datos confirmados.
         let heroesData = [];
+let epicCreatorPrograms = null;
 
 async function loadRosterData() {
     const response = await fetch('./roster-data.json', { cache: 'no-store' });
@@ -61,6 +62,56 @@ function findSullyChannel(hero){
 function escapeStatsHtml(value){
  return String(value===null||value===undefined?'—':value).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
 }
+
+function renderEpicCreatorCodeCard(creatorId,variant='alliance'){
+ const creator=epicCreatorPrograms?.creators?.[creatorId];
+ if(!creator)return '<p class="epic-code-unavailable" role="status">Código pendiente de cargar desde el registro central.</p>';
+ const safe=escapeStatsHtml;
+ const status=safe(epicCreatorPrograms.display_policy?.status_label||'REGISTRO DEL PROYECTO · ACTIVACIÓN NO REVALIDADA');
+ const id=creator.creator_id?'<span><b>ID DE CREADOR</b> '+safe(creator.creator_id)+'</span>':'';
+ const owner=safe(creator.owner), code=safe(creator.code);
+ const note=safe(creator.evidence||'Registro interno del proyecto.');
+ const links=epicCreatorPrograms.official_links||{};
+ return '<article class="epic-code-record epic-code-record-'+variant+'"><div class="epic-code-record-head"><span class="alliance-stamp alliance-stamp-platform">EPIC GAMES · SUPPORT-A-CREATOR</span><span class="epic-code-state">'+status+'</span></div><p class="epic-code-owner">'+owner+'</p><strong class="epic-code-value">'+code+'</strong><div class="alliance-code-meta"><span><b>CÓDIGO</b> '+code+'</span>'+id+'</div><div class="epic-code-actions"><button type="button" class="epic-code-copy" onclick="copyEpicCreatorCode(\''+safe(creatorId)+'\')">COPIAR CÓDIGO</button><a href="'+safe(links.account||'https://www.epicgames.com/account')+'" target="_blank" rel="noopener noreferrer">VER CUENTA EPIC ↗</a><a href="'+safe(links.dashboard||'https://sac.epicgames.com/dashboard/insights')+'" target="_blank" rel="noopener noreferrer">PANEL DEL CREADOR ↗</a></div><small class="epic-code-evidence">'+note+' Registro: '+safe(creator.recorded_at||'fecha no indicada')+'. La actividad actual debe comprobarse en la cuenta autenticada.</small><span class="epic-code-copy-status" id="epic-code-copy-status-'+safe(creatorId)+'" role="status" aria-live="polite"></span></article>';
+}
+function renderEpicCreatorPrograms(){
+ const collective=document.getElementById('epic-creator-programs-collective');
+ const individual=document.getElementById('epic-creator-programs-rod3r1k');
+ if(collective)collective.innerHTML=renderEpicCreatorCodeCard('moriartys','collective');
+ if(individual)individual.innerHTML=renderEpicCreatorCodeCard('rod3r1k','individual');
+}
+async function loadEpicCreatorPrograms(){
+ try{
+  const response=await fetch('./creator-programs.json',{cache:'no-store'});
+  if(!response.ok)throw new Error('No se pudo cargar creator-programs.json ('+response.status+').');
+  const payload=await response.json();
+  for(const id of ['moriartys','rod3r1k']){
+   const creator=payload?.creators?.[id];
+   if(!creator||!creator.code||!creator.owner||creator.account_portal_revalidated!==false)throw new Error('Registro Epic incompleto o con estado de verificación ambiguo: '+id);
+  }
+  epicCreatorPrograms=payload;
+  renderEpicCreatorPrograms();
+  return payload;
+ }catch(error){
+  console.error('No se pudo cargar el registro de códigos Epic:',error);
+  const message='<p class="epic-code-unavailable" role="status">No se pudo consultar el registro central. No se muestra un código desde una copia local desactualizada.</p>';
+  ['epic-creator-programs-collective','epic-creator-programs-rod3r1k'].forEach(id=>{const host=document.getElementById(id);if(host)host.innerHTML=message;});
+  return null;
+ }
+}
+async function copyEpicCreatorCode(creatorId){
+ const code=epicCreatorPrograms?.creators?.[creatorId]?.code;
+ const status=document.getElementById('epic-code-copy-status-'+creatorId);
+ if(!code||!navigator.clipboard?.writeText){if(status)status.textContent='No fue posible copiar automáticamente. Seleccioná el código.';return;}
+ try{await navigator.clipboard.writeText(code);if(status)status.textContent='Código copiado.';}
+ catch(error){if(status)status.textContent='No fue posible copiar automáticamente. Seleccioná el código.';console.warn('Clipboard Epic code copy failed:',error);}
+}
+function renderEpicCreatorProfileBadge(hero){
+ const creatorId=hero?.id==='moriartys'?'moriartys':hero?.id==='rod3r1k'?'rod3r1k':null;
+ if(!creatorId||!epicCreatorPrograms?.creators?.[creatorId])return '';
+ return renderEpicCreatorCodeCard(creatorId,'profile');
+}
+
 function renderTwitchClipPreview(clipId,title,destination){
  const id=String(clipId||'').trim();
  if(!id)return '<div class="twitch-clip-preview-empty">CLIP PENDIENTE DE ENLACE</div>';
@@ -1600,7 +1651,7 @@ function renderRosterComicPages(hero,index,channelStats,sullyChannel){
  const displayName=getHeroDisplayName(hero);
  const voiceStyle=({MORIARTYS:'voice-moriartys',ROD3R1K:'voice-rod3r1k',LADYMORIARTY:'voice-lady',ARDIPII:'voice-ardipii',AKUMA:'voice-akuma','DAVE — NEXUS':'voice-nexus','PATO — ORATORIS':'voice-oratoris',HABITOS:'voice-habitos'})[hero.name]||'voice-default';
  const page=(chapter,title,body,foot)=>'<article class="comic-book-sheet comic-interior-page"><header class="comic-interior-header"><span>LEGIÓN MULTIVERSAL</span><b>CAPÍTULO '+chapter+'</b><span>'+foot+'</span></header><div class="comic-page-title"><small>EXPEDIENTE '+safe(displayName)+' · PÁGINA 0'+chapter+'</small><h2>'+title+'</h2></div>'+(hero.voice?'<aside class="hero-voice '+voiceStyle+'"><span>VOZ DEL HÉROE</span><p>“'+safe(hero.voice)+'”</p></aside>':'')+body+'<footer class="comic-page-footer"><span>'+safe(displayName)+' · ARCHIVO INDIVIDUAL</span><b>0'+chapter+' / 04</b></footer></article>';
- const cover='<article class="comic-book-sheet comic-cover-sheet"><header class="comic-cover-masthead"><b>LEGIÓN MULTIVERSAL</b><span>EXPEDIENTE INDIVIDUAL · N.º '+safe(hero.cardNumber||'S/N')+'</span><span>MEDIA KIT</span></header><div class="comic-cover-art-frame"><span class="comic-cover-burst">EXPEDIENTE<br>CLASIFICADO</span><img class="comic-cover-art" src="'+safe(hero.img)+'" alt="Carta oficial de '+safe(displayName)+'"></div><div class="comic-cover-copy"><div class="comic-cover-titleline"><span>PROTAGONISTA</span><h2>'+safe(displayName)+'</h2><b>'+safe(hero.series||'01')+'</b></div><p class="comic-cover-subtitle">'+safe(identity)+' · '+safe(role)+'</p><section class="comic-panel comic-cover-bio"><div class="comic-panel-heading"><span>01</span><b>IDENTIDAD SECRETA · PERFIL DEL HÉROE</b></div><p>'+safe(hero.bio||'Presentación individual pendiente de confirmación.')+'</p><p class="comic-panel-caption">Expediente individual. Los datos no disponibles se identifican como pendientes de verificación.</p></section>'+(hero.voice?'<aside class="hero-voice '+voiceStyle+'"><span>SU VOZ EN LA LEGIÓN</span><p>“'+safe(hero.voice)+'”</p></aside>':'')+'<footer class="comic-cover-footer"><span>'+areas.map(safe).join(' · ')+'</span><b>¡ABRIR EXPEDIENTE!</b></footer></div></article>';
+ const cover='<article class="comic-book-sheet comic-cover-sheet"><header class="comic-cover-masthead"><b>LEGIÓN MULTIVERSAL</b><span>EXPEDIENTE INDIVIDUAL · N.º '+safe(hero.cardNumber||'S/N')+'</span><span>MEDIA KIT</span></header><div class="comic-cover-art-frame"><span class="comic-cover-burst">EXPEDIENTE<br>CLASIFICADO</span><img class="comic-cover-art" src="'+safe(hero.img)+'" alt="Carta oficial de '+safe(displayName)+'"></div><div class="comic-cover-copy"><div class="comic-cover-titleline"><span>PROTAGONISTA</span><h2>'+safe(displayName)+'</h2><b>'+safe(hero.series||'01')+'</b></div><p class="comic-cover-subtitle">'+safe(identity)+' · '+safe(role)+'</p><section class="comic-panel comic-cover-bio"><div class="comic-panel-heading"><span>01</span><b>IDENTIDAD SECRETA · PERFIL DEL HÉROE</b></div><p>'+safe(hero.bio||'Presentación individual pendiente de confirmación.')+'</p><p class="comic-panel-caption">Expediente individual. Los datos no disponibles se identifican como pendientes de verificación.</p></section>'+renderEpicCreatorProfileBadge(hero)+(hero.voice?'<aside class="hero-voice '+voiceStyle+'"><span>SU VOZ EN LA LEGIÓN</span><p>“'+safe(hero.voice)+'”</p></aside>':'')+'<footer class="comic-cover-footer"><span>'+areas.map(safe).join(' · ')+'</span><b>¡ABRIR EXPEDIENTE!</b></footer></div></article>';
  const statsBody='<section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>01</span><b>ACTIVIDAD Y ALCANCE</b></div><p class="comic-panel-caption">Las métricas se muestran según la disponibilidad de fuentes para este canal. Las ventanas, fechas y fuentes se conservan en cada bloque; los datos ausentes no se estiman.</p>'+renderStatsDashboard(hero,channelStats,sullyChannel)+'</section>';
  const stats=page('01','EL PODER DE LA AUDIENCIA',statsBody,'LA COMUNIDAD');
  const powerBody='<div class="comic-page-split"><section class="comic-panel"><div class="comic-panel-heading"><span>01</span><b>CAPACIDADES REGISTRADAS</b></div><h3>'+safe(identity)+'</h3><p>'+safe(hero.powers||hero.powerSet||'Descripción de habilidades pendiente de confirmar con el integrante.')+'</p><p class="comic-panel-caption">Los elementos narrativos de la carta identifican al personaje dentro de la Legión; no representan certificaciones ni métricas de rendimiento.</p></section><section class="comic-panel"><div class="comic-panel-heading"><span>02</span><b>ESPECIALIDADES Y UNIVERSOS</b></div><div class="comic-format-list">'+(areas.length?areas.map(v=>'<span>'+safe(v)+'</span>').join(''):'<span>Especialidades pendientes de confirmar</span>')+'</div></section></div><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>03</span><b>BITÁCORA DE MISIONES</b></div>'+renderMissionArchive(hero)+'</section>';
@@ -2114,6 +2165,7 @@ function printHeroDossier(){
         window.onload = async function() {
         const initialChapter = document.querySelector('.chapter-panel.active');
         if (initialChapter) renderChapterPager(Number(initialChapter.id.replace('chapter-','')));
+        await loadEpicCreatorPrograms();
         try {
             await loadRosterData();
             renderRoster();
