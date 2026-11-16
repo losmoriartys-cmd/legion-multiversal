@@ -2178,8 +2178,8 @@ function printHeroDossier(){
 
             // Noticias y playbook se descargan al abrir Comunidad.
             if (Number(chapterNum) === 9) {
+                jobs.push(ensureRosterResources().then(() => loadResourceOnce('community-playbook', loadCommunityPlaybook)));
                 add('legion-news', loadLegionNews);
-                add('community-playbook', loadCommunityPlaybook);
             }
 
             return Promise.allSettled(jobs);
@@ -2242,7 +2242,9 @@ function printHeroDossier(){
         if (location.hash.startsWith('#roster/')) loadChapterResources(2);
 
         if (initialChapter) recordLegionProgress('chapter', String(initialNumber));
-        window.setInterval(() => { loadInstituteStats(); }, 15 * 60 * 1000);
+        window.setInterval(() => {
+            if (document.querySelector('#chapter-0.active, #chapter-3.active, #chapter-10.active')) loadInstituteStats();
+        }, 15 * 60 * 1000);
         // El resto de las fuentes se consulta al entrar en Estadísticas o Roster.
         window.setInterval(() => {
             if (document.getElementById('chapter-3')?.classList.contains('active') ||
