@@ -111,3 +111,14 @@ header .primary-navigation .nav-btn[data-chapter="10"] span {
 }
 
 header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:center; text-decoration:none; }
+
+
+/* Formularios con entrega real y verificación anti-spam. */
+.contact-honeypot { position:absolute!important; width:1px!important; height:1px!important; overflow:hidden!important; clip-path:inset(50%)!important; white-space:nowrap!important; }
+.contact-verification { min-height:66px; margin:14px 0 8px; }
+.contact-form-status { min-height:1.5em; margin:8px 0 14px; padding:10px 12px; border-left:3px solid #66dff3; background:rgba(102,223,243,.07); color:#dce9f4; font-size:.92rem; line-height:1.45; }
+.contact-form-status[data-state="success"] { border-color:#67d69b; color:#baf2d1; }
+.contact-form-status[data-state="warning"] { border-color:#ffdf4d; color:#ffedaa; }
+.contact-form-status[data-state="error"] { border-color:#ff6677; color:#ffc1c8; }
+.recruitment-contact-form button:disabled { opacity:.55; cursor:not-allowed; filter:grayscale(.25); }
+#brand-proposal { scroll-margin-top:130px; }
