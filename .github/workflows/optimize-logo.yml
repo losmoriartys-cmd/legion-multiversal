@@ -40,6 +40,18 @@ jobs:
           if git diff --cached --quiet; then
             echo "No hay cambios para publicar."
           else
-            git commit -m "perf(brand): serve lossless WebP emblem"
-            git push origin HEAD:main
+            git commit -m "perf(brand): serve responsive WebP emblem variants"
+            for attempt in 1 2 3; do
+              git fetch origin main
+              git rebase origin/main
+              if git push origin HEAD:main; then
+                echo "Variantes del emblema publicadas en main."
+                break
+              fi
+              if [ "$attempt" -eq 3 ]; then
+                echo "No se pudo publicar el emblema después de 3 intentos." >&2
+                exit 1
+              fi
+              sleep 2
+            done
           fi
