@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-11-06",
+  "updated_at": "2026-11-16",
   "description": "Fuente editorial y de identidad del roster. Cada creador/canal tiene ID y slug estables, scope de identidad y cuentas asociadas. Las métricas viven en sus archivos de datos por plataforma; no duplicarlas aquí.",
   "heroes": [
     {
@@ -28,28 +28,25 @@
       "bio": "Los Moriartys es el proyecto compartido de Demi y Ari: una dupla gamer y orgullosamente nerd que convierte cada directo en una visita a su videoclub retro. El canal combina videojuegos, cooperativo, humor y cultura pop. Su propuesta no se basa en la competencia profesional, sino en jugar, compartir y construir momentos con la comunidad.",
       "voice": "«Acá jugamos en equipo, nos reímos de lo que sale mal y hacemos que cada visita al videoclub sea una aventura.»",
       "mediaProfile": {
-        "project": "Proyecto compartido de Demi y Ari. El expediente representa al canal conjunto, no a una identidad individual.",
-        "demi": "Demi es cofundador y coanfitrión de Los Moriartys. Su identidad individual se presenta dentro del proyecto compartido, sin atribuirle automáticamente el canal individual de Ari.",
-        "ari": "Ari es cofundadora y coanfitriona de Los Moriartys. También desarrolla su canal individual LADYMORIARTY01, con contenidos y trayectoria propios.",
+        "editorial": "Proyecto compartido de Demi y Ari. Su diferencial es una dupla gamer con identidad de videoclub retro, cooperativo, humor y cultura pop. La ficha representa al canal conjunto, no suma ni atribuye resultados individuales.",
         "formats": [
           "Directos compartidos",
           "Videojuegos y partidas cooperativas",
           "Humor y situaciones espontáneas",
           "Cultura pop, cine, cómics y conversación"
         ],
-        "editorial": "Entretenimiento cercano y participativo: la experiencia compartida importa tanto como el resultado de la partida. La identidad de videoclub retro aporta continuidad y un mundo reconocible al canal.",
         "opportunities": [
-          "Integraciones naturales de productos o servicios durante directos",
+          "Presentación y prueba de videojuegos en dupla",
+          "Integraciones naturales durante directos compartidos",
           "Dinámicas participativas con la comunidad",
-          "Presentación o prueba de juegos y experiencias",
-          "Colaboraciones con otros creadores y proyectos afines"
+          "Piezas breves que aprovechen la química y el humor de ambos anfitriones"
         ],
-        "contact": "losmoriartys@gmail.com",
-        "disclaimer": "Estos son formatos potenciales de colaboración, no campañas contratadas ni alianzas vigentes."
+        "disclaimer": "Formatos potenciales para conversar; no representan campañas contratadas ni alianzas vigentes.",
+        "contact": "losmoriartys@gmail.com"
       },
       "powers": "Perfil de habilidades en construcción. Se completará con la descripción de personaje aprobada por el integrante.",
       "stats": "Métricas en proceso de integración. Los datos se publicarán cuando estén conectados a una fuente verificable y acompañados de su período de medición.",
-      "log": "Fundadores de la iniciativa Turno Noche. Pioneros en colaboraciones cruzadas LATAM y organización de directos en conjunto.",
+      "log": "La bitácora institucional registra la iniciativa Turno Noche y experiencias compartidas entre creadores. Las fechas, el alcance y los resultados de esas colaboraciones se documentarán por separado antes de presentarlos como credenciales comerciales.",
       "id": "moriartys",
       "slug": "moriartys",
       "display_name": "LOS MORIARTYS",
@@ -167,7 +164,23 @@
           "notes": "El promedio y el pico son observaciones del muestreo propio, no analíticas oficiales ni el historial completo de transmisiones."
         }
       ],
-      "links": []
+      "links": [],
+      "mediaProfile": {
+        "editorial": "Gaming y entretenimiento en directo, con una identidad expresiva y afinidad por experiencias de juego, acción, eventos y partidas compartidas. Los clips registrados permiten mostrar ejemplos concretos del tono del canal.",
+        "formats": [
+          "Directos de videojuegos",
+          "Partidas y experiencias compartidas",
+          "Momentos destacados y clips",
+          "Eventos y colaboraciones con otros creadores"
+        ],
+        "opportunities": [
+          "Presentación y prueba de videojuegos pertinentes a su contenido",
+          "Integraciones de periféricos o accesorios en contexto de uso real",
+          "Retos y dinámicas con otros creadores",
+          "Selección de clips para piezas breves"
+        ],
+        "disclaimer": "Propuestas potenciales sujetas a disponibilidad, conversación y aprobación del creador; no implican campañas contratadas."
+      }
     },
     {
       "name": "LADYMORIARTY",
@@ -241,7 +254,23 @@
       "links": [],
       "legacy_slugs": [
         "ladymoriarty"
-      ]
+      ],
+      "mediaProfile": {
+        "editorial": "Canal individual con gameplay chill, IRL y contenido espontáneo. Mantiene una identidad propia, diferenciada del proyecto compartido Los Moriartys.",
+        "formats": [
+          "Gameplay relajado",
+          "Charlas y momentos espontáneos",
+          "Contenido IRL",
+          "Clips de situaciones destacadas"
+        ],
+        "opportunities": [
+          "Presentación de juegos y experiencias relajadas",
+          "Integraciones naturales en sesiones de charla o IRL",
+          "Dinámicas participativas con la comunidad",
+          "Piezas breves basadas en momentos destacados"
+        ],
+        "disclaimer": "Formatos potenciales, no campañas realizadas ni alianzas confirmadas."
+      }
     },
     {
       "name": "ARDIPII",
@@ -267,7 +296,7 @@
       "bio": "El Fantasma aparece sin hacer ruido y encuentra su lugar en cualquier escenario. Su guarida es una comunidad donde cada visitante puede saludar, activar una alerta, acomodarse con unas palomitas y compartir la misión. Su lema recuerda que el tiempo es el recurso más valioso: cada directo es una oportunidad para decidir qué hacer con él.",
       "voice": "«Pasen, pónganse cómodos. Siempre hay lugar para uno más en esta misión.»",
       "stats": "Métricas en proceso de integración. Los datos se publicarán cuando estén conectados a una fuente verificable y acompañados de su período de medición.",
-      "log": "ARCHIVO DE LA SOMBRA: mantiene un vínculo directo con su comunidad y transmite desde México con una presencia constante. Su sello combina cercanía, interacción y una mirada reflexiva sobre el tiempo y las decisiones.",
+      "log": "ARCHIVO DE LA SOMBRA: su perfil combina gaming, interacción y una invitación a compartir las transmisiones. La frecuencia, los horarios y los datos de trayectoria se publicarán únicamente cuando exista confirmación vigente.",
       "id": "ardipii",
       "slug": "ardipii",
       "display_name": "ARDIPII",
@@ -310,7 +339,22 @@
           "notes": "El promedio y el pico son observaciones del muestreo propio, no analíticas oficiales ni el historial completo de transmisiones."
         }
       ],
-      "links": []
+      "links": [],
+      "mediaProfile": {
+        "editorial": "Perfil orientado al gaming y la comunidad, con un tono cercano y una invitación a participar de las transmisiones. No se publica un horario fijo ni una frecuencia hasta contar con confirmación vigente.",
+        "formats": [
+          "Directos de videojuegos",
+          "Interacción con la comunidad",
+          "Conversación durante las transmisiones"
+        ],
+        "opportunities": [
+          "Presentación de juegos y primeras impresiones",
+          "Integraciones de productos pertinentes al contenido",
+          "Dinámicas participativas con la comunidad",
+          "Clips de momentos o conversaciones destacados"
+        ],
+        "disclaimer": "Propuestas potenciales sujetas a confirmación de disponibilidad y aprobación del creador."
+      }
     },
     {
       "name": "AKUMA",
@@ -334,10 +378,10 @@
       "activity_status": "not_assessed",
       "img": "assets/heroes/image_20261103_160331-podemos-humanizar-a-akuma-pero-que-mantenga-un-poc.jpg",
       "twitch": "https://twitch.tv/akumazoldyck",
-      "bio": "El Infernal es una presencia constante: cuando cae la noche, el portal vuelve a abrirse. Entre juegos, conversaciones y amigos, AKUMA sostiene un punto de encuentro donde siempre puede aparecer una nueva historia. Su fuerza no está solamente en entrar en combate, sino en mantener encendida la reunión y darle lugar a quienes llegan.",
+      "bio": "El Infernal abre un punto de encuentro entre videojuegos, conversaciones y amigos. Su propuesta combina partidas y charla: el valor está en el intercambio y en las historias que surgen cuando la comunidad se reúne.",
       "voice": "«El portal está abierto. Traigan una partida, una historia o simplemente ganas de quedarse.»",
       "stats": "Métricas en proceso de integración. Los datos se publicarán cuando estén conectados a una fuente verificable y acompañados de su período de medición.",
-      "log": "ARCHIVO DEL INFERNAL: veterano de las primeras misiones del equipo y anfitrión de encuentros frecuentes. Su territorio mezcla talk show, videojuegos y charlas con amigos; la constancia es parte central de su identidad.",
+      "log": "ARCHIVO DEL INFERNAL: su territorio reúne videojuegos, charlas y encuentros con amigos. La frecuencia de transmisión y cualquier resultado de audiencia se mantienen fuera de la presentación hasta contar con una fuente y un período confirmados.",
       "id": "akuma",
       "slug": "akuma",
       "display_name": "AKUMA",
@@ -380,7 +424,23 @@
           "notes": "El promedio y el pico son observaciones del muestreo propio, no analíticas oficiales ni el historial completo de transmisiones."
         }
       ],
-      "links": []
+      "links": [],
+      "mediaProfile": {
+        "editorial": "Gaming, charlas y comunidad. Su perfil puede combinar partidas con conversación y encuentros grupales, sin atribuirle una frecuencia fija ni resultados de audiencia que no estén verificados.",
+        "formats": [
+          "Directos de videojuegos",
+          "Charlas y conversación",
+          "Partidas con otros creadores",
+          "Encuentros comunitarios cuando estén programados"
+        ],
+        "opportunities": [
+          "Presentación y prueba de videojuegos",
+          "Conversaciones temáticas vinculadas a productos pertinentes",
+          "Partidas especiales con otros creadores",
+          "Dinámicas participativas y clips de una activación"
+        ],
+        "disclaimer": "Posibilidades de colaboración, no campañas contratadas ni calendario de activaciones confirmado."
+      }
     },
     {
       "name": "DAVE — NEXUS",
@@ -407,7 +467,7 @@
       "voice": "«Conexión establecida. Estoy buscando el puente entre este mundo y el siguiente.»",
       "powers": "Poderes y especialidad todavía sin definir. Se completarán cuando Dave aporte o apruebe su concepto de personaje.",
       "stats": "Canal incorporado al sistema de estadísticas. Las métricas se mostrarán cuando la automatización publique datos verificables.",
-      "log": "ARCHIVO DEL NEXO: tras un período de pausa, Dave regresa a las transmisiones y comienza una nueva etapa dentro de la Legión. Su rango institucional es ESTUDIANTE: representa su reincorporación y el comienzo de este nuevo recorrido, no una valoración de su experiencia. La agenda de sus directos todavía no tiene un horario fijo confirmado; los anuncios se comunicarán cuando cada transmisión esté programada. La biografía personal y las áreas de contenido podrán ampliarse con su propia voz y datos confirmados.",
+      "log": "ARCHIVO DEL NEXO: tras un período de pausa, Dave inicia una nueva etapa dentro de la Legión. Su rango institucional ESTUDIANTE representa su reincorporación y el comienzo de este recorrido, no una valoración de su experiencia. La agenda, la biografía y las áreas de contenido se ampliarán con información confirmada por el creador.",
       "id": "dave-nexus",
       "slug": "dave-nexus",
       "display_name": "DAVE — NEXUS",
@@ -450,7 +510,22 @@
           "notes": "El promedio y el pico son observaciones del muestreo propio, no analíticas oficiales ni el historial completo de transmisiones."
         }
       ],
-      "links": []
+      "links": [],
+      "mediaProfile": {
+        "editorial": "Creador en una nueva etapa de transmisiones. La especialidad y las líneas de contenido están en definición; la propuesta debe construirse con Dave y actualizarse cuando confirme su enfoque.",
+        "formats": [
+          "Descubrimiento de videojuegos",
+          "Experiencias cooperativas",
+          "Nuevos formatos por definir junto al creador"
+        ],
+        "opportunities": [
+          "Primeras impresiones de videojuegos",
+          "Experiencias cooperativas y desafíos",
+          "Integraciones sencillas acordadas con el creador",
+          "Registro de clips cuando haya material disponible"
+        ],
+        "disclaimer": "Propuestas exploratorias. La especialidad, el calendario y la disponibilidad comercial requieren confirmación de Dave."
+      }
     },
     {
       "name": "PATO — ORATORIS",
@@ -481,8 +556,8 @@
       "bio": "ORATORIS es el perfil de Patricio Santos, colaborador de la Legión y creador de contenido educativo. Su canal reúne enseñanzas de programación con HTML y JavaScript y divulgación sobre temas como dopamina, motivación y adicción. Tras una primera etapa de publicaciones, proyecta retomar el canal durante 2027 con un enfoque renovado. La temática gamer podría incorporarse gradualmente como una línea complementaria, sin desplazar el eje de conocimiento y educación.",
       "voice": "«Compartir conocimiento también es abrir caminos. Entender cómo funciona algo nos da herramientas para elegir mejor.»",
       "powers": "Comunicación y divulgación; enseñanza introductoria de programación; organización de ideas complejas en explicaciones accesibles. Las capacidades del personaje son una representación narrativa de su aporte como creador, no certificaciones profesionales.",
-      "stats": "YOUTUBE · referencia compartida por el equipo: 56 suscriptores, 6 videos y 430 visualizaciones. La fecha exacta de captura no fue indicada; estos valores se presentan como referencia histórica y no como métricas actuales verificadas. Twitch: no aplica.",
-      "log": "ARCHIVO ORATORIS: colaborador y creador de Pato te explica. Su primera etapa pública incluye una serie introductoria de HTML y JavaScript y un video sobre dopamina, motivación y adicción. No tiene una frecuencia de publicación definida actualmente. Pato comentó que posiblemente retome el proyecto durante 2027 con un enfoque renovado e incorpore contenido gamer de manera gradual, como línea secundaria. Esta proyección todavía no constituye un calendario ni una programación confirmada.",
+      "stats": "Métricas públicas de YouTube consultadas desde platform-stats.json. No se utilizan cifras de Twitch ni analítica privada.",
+      "log": "ARCHIVO ORATORIS: colaborador y creador de Pato te explica. Su primera etapa pública incluye una serie introductoria de HTML y JavaScript y una pieza sobre dopamina, motivación y adicción. No tiene una frecuencia de publicación definida; el posible regreso durante 2027 es una proyección conversada, no un calendario confirmado.",
       "id": "pato-oratoris",
       "slug": "pato-oratoris",
       "display_name": "PATO — ORATORIS",
@@ -552,7 +627,23 @@
           "url": "https://cafecito.app/patosanto",
           "label": "Cafecito"
         }
-      ]
+      ],
+      "mediaProfile": {
+        "editorial": "Creador de contenido educativo en YouTube. Su archivo público reúne una serie introductoria de HTML y JavaScript y una pieza de divulgación sobre dopamina, motivación y adicción. No se presenta como streamer ni se anuncia una frecuencia de publicación.",
+        "formats": [
+          "Videos educativos de programación",
+          "Tutoriales introductorios de HTML y JavaScript",
+          "Divulgación sobre ciencia y comportamiento",
+          "Piezas explicativas y audiovisuales"
+        ],
+        "opportunities": [
+          "Videos educativos o explicativos",
+          "Presentación de herramientas y plataformas digitales",
+          "Integraciones editoriales de software o tecnología",
+          "Piezas divulgativas patrocinadas con transparencia"
+        ],
+        "disclaimer": "Formatos potenciales sujetos a la reactivación del canal, disponibilidad y aprobación editorial del creador."
+      }
     },
     {
       "name": "HABITOS",
@@ -622,7 +713,23 @@
           "notes": "El promedio y el pico son observaciones del muestreo propio, no analíticas oficiales ni el historial completo de transmisiones."
         }
       ],
-      "links": []
+      "links": [],
+      "mediaProfile": {
+        "editorial": "Gaming y conversación se cruzan con filosofía y desarrollo personal. El canal ofrece un espacio para compartir partidas, ideas y reflexiones; las métricas de actividad se muestran con su período y método, sin convertirlas en promesas de alcance.",
+        "formats": [
+          "Directos de videojuegos",
+          "Conversaciones y reflexión",
+          "Contenidos sobre hábitos y desarrollo personal",
+          "Clips de momentos destacados"
+        ],
+        "opportunities": [
+          "Conversaciones temáticas vinculadas a hábitos cotidianos",
+          "Presentación de videojuegos y experiencias en directo",
+          "Dinámicas participativas que conecten juego y reflexión",
+          "Integraciones de productos pertinentes al contenido"
+        ],
+        "disclaimer": "Posibilidades de colaboración sujetas a encaje editorial y aprobación del creador."
+      }
     }
   ],
   "identity_model_version": 1
