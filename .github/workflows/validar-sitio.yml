@@ -59,7 +59,7 @@ jobs:
       - name: Comprobar índice accesible sin JavaScript
         run: python scripts/render_roster_noscript.py --check
       - name: Compilar colectores Python
-        run: python -m py_compile update_stats.py update_platform_stats.py update_clips.py scripts/validate_roster_data.py scripts/validate_clips_data.py scripts/render_roster_noscript.py scripts/validate_metric_history.py scripts/build_creator_metrics.py scripts/validate_creator_metrics.py
+        run: python -m py_compile update_stats.py update_platform_stats.py update_clips.py scripts/validate_roster_data.py scripts/validate_clips_data.py scripts/render_roster_noscript.py scripts/validate_metric_history.py scripts/build_creator_metrics.py scripts/validate_creator_metrics.py scripts/audit_and_optimize_images.py
       - name: Probar lectura de cuentas por los colectores
         run: |
           python -c "import update_stats; channels=update_stats.load_active_channels(); assert len(channels)==7 and 'losmoriartys' in channels; print('OK: colector Twitch lee {} canales'.format(len(channels)))"
