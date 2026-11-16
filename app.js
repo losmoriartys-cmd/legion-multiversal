@@ -714,8 +714,13 @@ async function loadInstituteStats(){
    [interval+' MIN','FRECUENCIA OBJETIVO','Cadencia configurada del colector'],
    [resolvedChannels+'/'+expectedChannels,'COBERTURA DE CANALES',collectionComplete?'Todos los canales esperados fueron contabilizados':'Revisar canales pendientes o no contabilizados']
   ].map(([value,label,note])=>'<article class="impact-kpi"><strong>'+value+'</strong><span>'+label+'</span><small>'+note+'</small></article>').join('');
+  const homeLiveStatus=document.getElementById('home-live-status');
+  const homeLiveUpdated=document.getElementById('home-live-updated');
+  const liveChannels=channels.filter(c=>c.live);
+  if(homeLiveStatus)homeLiveStatus.textContent=!isFresh?'Estado temporalmente demorado':liveCount?liveCount+' canal(es) detectado(s) en directo: '+liveChannels.map(c=>c.display_name||c.login).join(', '):'No se detectan canales en directo en la última captura.';
+  if(homeLiveUpdated)homeLiveUpdated.textContent='Última captura: '+updatedLabel+' · '+channels.length+' canales Twitch consultados · cadencia objetivo '+interval+' min. No es una conexión en tiempo real.';
   const liveNav=document.querySelector('.nav-btn-live[data-chapter="10"]');
-  if(liveNav){const showLive=isFresh&&liveCount>0;liveNav.classList.toggle('is-live',showLive);liveNav.textContent='09 EN VIVO'+(showLive?' · '+liveCount:'');liveNav.setAttribute('aria-label',showLive?liveCount+' canal(es) detectado(s) en directo en la última captura':'Consultar estado de transmisiones');}
+  if(liveNav){const showLive=isFresh&&liveCount>0;liveNav.classList.toggle('is-live',showLive);liveNav.innerHTML='MIRAR <span aria-hidden="true">'+(showLive?'● '+liveCount:'●')+'</span>';liveNav.setAttribute('aria-label',showLive?liveCount+' canal(es) detectado(s) en directo en la última captura':'Consultar estado de transmisiones; '+(isFresh?'sin canales en directo en la última captura':'última captura demorada'));}
   const channelGrid=document.getElementById('stats-channel-grid');
   if(channelGrid){
    const orderedChannels=channels.slice().sort((a,b)=>Number(Boolean(b.live))-Number(Boolean(a.live))||String(a.display_name||a.login).localeCompare(String(b.display_name||b.login),'es'));
