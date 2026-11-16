@@ -21,6 +21,10 @@ on:
     branches:
       - main
     paths:
+      - 'update_*.py'
+      - 'scripts/**'
+      - 'tests/**'
+      - 'clips-data.json'
       - 'update_stats.py'
       - 'update_clips.py'
       - 'app.js'
