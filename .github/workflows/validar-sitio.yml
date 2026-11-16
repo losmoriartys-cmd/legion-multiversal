@@ -87,6 +87,8 @@ jobs:
           assert 'imagesrcset=' in html and 'imagesizes=' in html, "El preload no negocia imágenes responsive."
           assert 'fetchpriority="high"' in html, "El Hero perdió fetchpriority high."
           assert '<style id="critical-home-styles">' in html, "Falta CSS crítico inline para la primera pantalla."
+          assert '<style id="conversion-overhaul-inline">' in html and '<style id="conversion-phase2-inline">' in html, "Faltan los estilos de conversión inline."
+          assert 'href="./conversion-overhaul.css' not in html and 'href="./conversion-phase2.css' not in html, "Quedaron hojas de conversión bloqueantes externas."
           preload_head = html.split('<link href="https://fonts.googleapis.com/css2?', 1)[0]
           assert 'bangers/v25/' in preload_head and 'robotocondensed/v31/' in preload_head, "Faltan fuentes de primera pantalla."
           assert 'specialelite/v20/' not in preload_head, "Special Elite no debe competir con las fuentes críticas."
