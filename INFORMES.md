@@ -3010,3 +3010,16 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - El workflow de validación del sitio para el HEAD de esta entrega `229c943edf1d574bdf8f64211b6b470e5cc64b7b` quedó iniciado: [run 43800539141](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43800539141).
 - El despliegue de GitHub Pages para el mismo HEAD quedó iniciado: [run 43800539343](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43800539343).
 - La revisión visual manual en producción, tablet/móvil y lector de pantalla no se declara completada por el solo hecho de pasar CI; queda sujeta a inspección real una vez finalizado el despliegue.
+
+
+### Addendum — cierre de QA editorial y corrección responsive (16/11/2026)
+
+- **Corrección de caché:** `index.html` — commit `21aa83ca9dc41703b0049f59c2d8403807f799b5`. Se actualizaron las versiones de consulta de `roster-selector.css` y `app.js` para que el navegador solicite los archivos editoriales nuevos y no reutilice recursos cacheados con la misma URL.
+- **Corrección móvil:** `roster-selector.css` — commit `86346d11e5c0b7f38d0231a2df98061c6a5bb6f1`. La hoja específica del selector estaba sobrescribiendo el diseño de grilla y convertía las ocho fichas en una cinta horizontal en móvil. Se corrigió a una grilla real de dos columnas, con los ocho integrantes visibles sin desplazamiento horizontal.
+- **Fuente canónica de PATO:** `creator-records.json` — commit `c5fa8bc2a40dee057e124f72751bc5d772395621`. Se retiró el duplicado de métricas acumuladas del archivo editorial; el único origen numérico es ahora `platform-stats.json`, actualizado por YouTube Data API.
+- **Pruebas de contrato:** `tests/test_roster_editorial_contract.py` — commit `21dde6822871546fd2b9f1c0b92ee0070172a070`. Se cubren los ocho perfiles, la matriz comercial, la fuente multiplataforma, la ausencia de horarios no confirmados y la ruta única de Bitácoras.
+- **CI de código y datos:** [run 43800641984](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43800641984), HEAD `86346d11e5c0b7f38d0231a2df98061c6a5bb6f1`: **SUCCESS**. Sintaxis JS, JSON, modelo de roster, colectores, historial/métricas, pruebas unitarias (**62/62**) y Playwright (**6/6**) completados. La prueba móvil confirmó dos columnas y ausencia de overflow horizontal.
+- Las ejecuciones previas que fallaron detectaron dos problemas reales de QA: una expectativa incorrecta en el test de métricas duplicadas y el override de CSS que mantenía el carrusel móvil. Ambos se corrigieron antes del run SUCCESS; no se ocultaron ni se contabilizaron como aprobados.
+- El commit posterior de `index.html` cambia únicamente versiones de caché. Su validación quedó iniciada en [run 43800796948](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43800796948).
+- **Despliegue:** la ejecución de Pages para el HEAD más reciente quedó en cola [run 43800796732](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43800796732). Hasta confirmar su conclusión no se declara el despliegue de producción ni la inspección visual pública final.
+- Pull requests abiertos: **0**. Sin nuevas ramas ni PR; las correcciones se integraron directamente en `main`.
