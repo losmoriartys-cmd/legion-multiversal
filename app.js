@@ -1113,6 +1113,17 @@ let selectedRosterCreatorId = null;
 function renderRosterSelector() {
     const host = document.getElementById('roster-selector');
     if (!host || !Array.isArray(heroesData) || !heroesData.length) return;
+    const comparatorWasOpen = Boolean(host.querySelector('.roster-selector-comparator')?.open);
+    const methodWasOpen = Boolean(host.querySelector('.roster-selector-method')?.open);
+    if (!selectedRosterCreatorId) {
+        const match = (location.hash || '').match(/^#roster\?hero=([^&]+)/i);
+        if (match && match[1]) {
+            let requested = match[1];
+            try { requested = decodeURIComponent(requested); } catch (error) { /* conservar valor literal */ }
+            const found = heroesData.find(hero => getHeroRosterSlug(hero) === requested.toLowerCase() || String(hero.id || hero.slug) === requested);
+            if (found) selectedRosterCreatorId = found.id || found.slug;
+        }
+    }
     const selected = heroesData.find(hero => (hero.id || hero.slug) === selectedRosterCreatorId) || heroesData[0];
     selectedRosterCreatorId = selected.id || selected.slug;
     const liveStates = heroesData.map(hero => ({ hero, state: getRosterLiveState(hero) }));
@@ -1128,6 +1139,9 @@ function renderRosterSelector() {
     const platform = primaryAccount(selected);
     const platformUrl = platform?.url || selected.twitch || selected.youtube || '';
     const platformName = accountLabel(platform);
+    const primaryCta = selectedLive && platformUrl
+        ? '<a class="roster-selector-primary is-live-cta" href="' + safe(platformUrl) + '" target="_blank" rel="noopener noreferrer">● VER STREAM EN VIVO ↗</a><button type="button" class="roster-selector-platform" id="roster-selector-open-profile">ABRIR EXPEDIENTE ↗</button>'
+        : '<button type="button" class="roster-selector-primary" id="roster-selector-open-profile">ABRIR EXPEDIENTE ↗</button>' + (platformUrl ? '<a class="roster-selector-platform" href="' + safe(platformUrl) + '" target="_blank" rel="noopener noreferrer">VER EN ' + safe(platformName) + ' ↗</a>' : '');
     const areas = (selected.areas || []).filter(value => value && value !== 'Especialidad por definir');
     const schedule = selected.schedule || selected.mediaProfile?.schedule || '';
     const creatorType = selected.creator_type === 'video_creator' ? 'CREADOR DE VIDEO' : selected.creator_type === 'live_streamer' ? 'CREADOR EN DIRECTO' : 'FORMATO POR CONFIRMAR';
@@ -1181,8 +1195,8 @@ function renderRosterSelector() {
         '<div class="roster-selector-tags">' + tags + '</div><p class="roster-selector-ideal"><strong>IDEAL SI TE GUSTA:</strong> ' + safe(idealText) + '</p>' +
         '<p class="roster-selector-description">' + safe(intro) + '</p>' + quote +
         '<div class="roster-selector-meta">' + liveLabel + '<span>PLATAFORMA · ' + safe(platformName) + '</span><span>HORARIO · ' + scheduleLabel + '</span></div>' +
-        '<div class="roster-selector-cta"><button type="button" class="roster-selector-primary" id="roster-selector-open-profile">ABRIR EXPEDIENTE ↗</button>' + (platformUrl ? '<a class="roster-selector-platform" href="' + safe(platformUrl) + '" target="_blank" rel="noopener noreferrer">VER EN ' + safe(platformName) + ' ↗</a>' : '') + '</div></div></section>' +
-        '<details class="roster-selector-comparator"><summary>PARA MARCAS · COMPARADOR DE PERFILES</summary><div class="roster-selector-table-wrap"><table><thead><tr><th>CREADOR</th><th>PLATAFORMA</th><th>ESPECIALIDADES</th><th>HORARIO / FRECUENCIA</th><th>MÉTRICAS COMPARABLES</th></tr></thead><tbody>' + compareRows + '</tbody></table></div><p>Las métricas se publicarán cuando exista una ventana, fuente y metodología comparables para los ocho perfiles. No se mezclan datos de plataformas ni períodos diferentes.</p></details><details class="roster-selector-method"><summary>CRITERIO DE DATOS</summary><p class="roster-selector-disclaimer">La afinidad temática describe el contenido público y los formatos observados; no implica cifras ni segmentación demográfica. Las métricas solo se comparan cuando comparten fuente, ventana y método.</p></details>';
+        '<div class="roster-selector-cta">' + primaryCta + '</div></div></section>' +
+        '<details class="roster-selector-comparator"' + (comparatorWasOpen ? ' open' : '') + '><summary>PARA MARCAS · COMPARADOR DE PERFILES</summary><div class="roster-selector-table-wrap"><table><thead><tr><th>CREADOR</th><th>PLATAFORMA</th><th>ESPECIALIDADES</th><th>HORARIO / FRECUENCIA</th><th>MÉTRICAS COMPARABLES</th></tr></thead><tbody>' + compareRows + '</tbody></table></div><p>Las métricas se publicarán cuando exista una ventana, fuente y metodología comparables para los ocho perfiles. No se mezclan datos de plataformas ni períodos diferentes.</p></details><details class="roster-selector-method"' + (methodWasOpen ? ' open' : '') + '><summary>CRITERIO DE DATOS</summary><p class="roster-selector-disclaimer">La afinidad temática describe el contenido público y los formatos observados; no implica cifras ni segmentación demográfica. Las métricas solo se comparan cuando comparten fuente, ventana y método.</p></details>';
     host.querySelector('.roster-selector-rail')?.addEventListener('keydown', event => {
         const buttons = Array.from(host.querySelectorAll('[data-roster-select]'));
         const current = buttons.indexOf(document.activeElement);
@@ -1228,7 +1242,7 @@ function selectRosterCreator(index, moveFocus) {
     const hero = heroesData[index];
     if (!hero) return;
     selectedRosterCreatorId = hero.id || hero.slug;
-    try { history.replaceState({ ...(history.state || {}), lmRosterSelection: true }, '', '#roster/' + encodeURIComponent(getHeroRosterSlug(hero))); } catch (error) { /* selección disponible aunque el historial esté restringido */ }
+    try { history.replaceState({ ...(history.state || {}), lmRosterSelection: true }, '', '#roster?hero=' + encodeURIComponent(getHeroRosterSlug(hero))); } catch (error) { /* selección disponible aunque el historial esté restringido */ }
     recordLegionProgress('profile', hero.cardNumber || hero.name);
     renderRosterSelector();
     if (moveFocus) document.getElementById('roster-tab-' + selectedRosterCreatorId)?.focus({ preventScroll: true });
@@ -1359,7 +1373,7 @@ function setHeroProfileRoute(hero, mode = 'push') {
 function showRosterChapter() {
     const chapter = document.getElementById('chapter-2');
     if (!chapter) return;
-    if (!chapter.classList.contains('active')) switchChapter(2);
+    if (!chapter.classList.contains('active')) switchChapter(2, { skipHistory: true });
 }
 function openHeroProfile(index, triggerElement = document.activeElement, options = {}) {
     const hero = heroesData[index];
@@ -1415,18 +1429,25 @@ function openHeroFromRoute(slug, normalizeHistory = false) {
 }
 function restoreHeroProfileFromHash() {
     const hash = location.hash || '';
-    if (hash === '#roster') {
+    if (hash === '#roster' || hash.startsWith('#roster?')) {
         showRosterChapter();
+        if (hash.startsWith('#roster?')) {
+            const match = hash.match(/^#roster\\?hero=([^&]+)/i);
+            if (match && match[1]) {
+                let slug = match[1];
+                try { slug = decodeURIComponent(slug); } catch (error) { /* conservar valor literal */ }
+                const hero = heroesData.find(item => getHeroRosterSlug(item) === slug.toLowerCase() || String(item.id || item.slug) === slug);
+                if (hero) selectedRosterCreatorId = hero.id || hero.slug;
+            }
+        }
+        renderRosterSelector();
         return;
     }
-    let slug = '';
-    let legacy = false;
-    if (hash.startsWith('#roster/')) {
-        slug = decodeURIComponent(hash.slice('#roster/'.length));
-    } else if (hash.startsWith('#expediente-')) {
-        slug = decodeURIComponent(hash.slice('#expediente-'.length));
-        legacy = true;
-    }
+    let slug = '', legacy = false;
+    try {
+        if (hash.startsWith('#roster/')) slug = decodeURIComponent(hash.slice('#roster/'.length));
+        else if (hash.startsWith('#expediente-')) { slug = decodeURIComponent(hash.slice('#expediente-'.length)); legacy = true; }
+    } catch (error) { slug = ''; }
     if (!slug) return;
     if (!openHeroFromRoute(slug, legacy || !history.state?.lmRosterProfile)) {
         history.replaceState({ lmRosterBase: true }, '', '#roster');
@@ -1435,21 +1456,33 @@ function restoreHeroProfileFromHash() {
 }
 window.addEventListener('popstate', () => {
     const hash = location.hash || '';
-    if (hash === '#roster') {
-        if (window.currentHeroProfileIndex !== null && window.currentHeroProfileIndex !== undefined) {
-            closeHeroProfile({ fromHistory: true });
-        }
+    if (hash === '#roster' || hash.startsWith('#roster?')) {
+        if (window.currentHeroProfileIndex !== null && window.currentHeroProfileIndex !== undefined) closeHeroProfile({ fromHistory: true });
         showRosterChapter();
+        if (hash.startsWith('#roster?')) {
+            const match = hash.match(/^#roster\\?hero=([^&]+)/i);
+            if (match && match[1]) {
+                let slug = match[1];
+                try { slug = decodeURIComponent(slug); } catch (error) { /* conservar valor literal */ }
+                const hero = heroesData.find(item => getHeroRosterSlug(item) === slug.toLowerCase() || String(item.id || item.slug) === slug);
+                if (hero) selectedRosterCreatorId = hero.id || hero.slug;
+            }
+        }
+        renderRosterSelector();
         return;
     }
     if (hash.startsWith('#roster/')) {
-        const slug = decodeURIComponent(hash.slice('#roster/'.length));
-        openHeroFromRoute(slug, false);
+        let slug = '';
+        try { slug = decodeURIComponent(hash.slice('#roster/'.length)); } catch (error) { /* ruta inválida */ }
+        if (slug) openHeroFromRoute(slug, false);
         return;
     }
-    if (window.currentHeroProfileIndex !== null && window.currentHeroProfileIndex !== undefined) {
-        closeHeroProfile({ fromHistory: true });
-    }
+    if (hash.startsWith('#expediente-')) { restoreHeroProfileFromHash(); return; }
+    if (window.currentHeroProfileIndex !== null && window.currentHeroProfileIndex !== undefined) closeHeroProfile({ fromHistory: true });
+    if (hash.startsWith('#chapter-')) {
+        const num = Number(hash.slice('#chapter-'.length));
+        if (Number.isFinite(num)) switchChapter(num, { skipHistory: true });
+    } else if (!hash || hash === '#') switchChapter(0, { skipHistory: true });
 });
 document.addEventListener('keydown', function(event) {
     if (event.key !== 'Escape') return;
@@ -1518,214 +1551,6 @@ function updateComicPageControls(enabled){
  if(prev)prev.disabled=page===0;
  if(next)next.disabled=page===total-1;
 }
-function renderLadyMoriartyComicPages(hero,sullyChannel){
- const safe=v=>escapeStatsHtml(v===null||v===undefined?'':String(v));
- const areas=Array.isArray(hero.areas)?hero.areas:[];
- const profile=twitchMetricsData?.channels?.ladymoriarty01||{};
- const metrics=profile.metrics||{};
- const period=profile.period_label||'Período no indicado';
- const games=Array.isArray(sullyChannel?.game_performance)?sullyChannel.game_performance:[];
- const record=getCreatorRecord(hero);
- const clips=Array.isArray(record.highlights)?record.highlights:[];
- const page=(n,title,body,foot)=>'<article class="comic-book-sheet comic-interior-page"><header class="comic-interior-header"><span>LEGIÓN MULTIVERSAL</span><b>CAPÍTULO 0'+n+'</b><span>'+foot+'</span></header><div class="comic-page-title"><small>EXPEDIENTE LADYMORIARTY01 · PÁGINA 0'+(n+1)+'</small><h2>'+title+'</h2></div>'+(hero.voice?'<aside class="hero-voice voice-lady"><span>VOZ DE LA BRUJA</span><p>'+safe(hero.voice)+'</p></aside>':'')+body+'<footer class="comic-page-footer"><span>LADYMORIARTY01 · ARCHIVO INDIVIDUAL</span><b>0'+(n+1)+' / 06</b></footer></article>';
- const cover='<article class="comic-book-sheet comic-cover-sheet"><header class="comic-cover-masthead"><b>LEGIÓN MULTIVERSAL</b><span>EXPEDIENTE INDIVIDUAL · N.º '+safe(hero.cardNumber||'S/N')+'</span><span>MEDIA KIT</span></header><div class="comic-cover-art-frame"><span class="comic-cover-burst">EXPEDIENTE<br>CLASIFICADO</span><img class="comic-cover-art" src="'+safe(hero.img)+'" alt="Carta oficial de LADYMORIARTY01"></div><div class="comic-cover-copy"><div class="comic-cover-titleline"><span>PROTAGONISTA</span><h2>LADYMORIARTY01</h2><b>'+safe(hero.series||'01')+'</b></div><p class="comic-cover-subtitle">'+safe(hero.codename)+' · '+safe(hero.characterRole)+'</p><section class="comic-panel comic-cover-bio"><div class="comic-panel-heading"><span>01</span><b>IDENTIDAD SECRETA · PERFIL DE LA HEROÍNA</b></div><p>'+safe(hero.bio)+'</p><p class="comic-panel-caption">Canal individual LADYMORIARTY01: gameplay chill, IRL y contenido espontáneo. Lo importante es divertirnos y pasarla bien 💜</p></section><footer class="comic-cover-footer"><span>'+areas.map(safe).join(' · ')+'</span><b>¡ABRIR EXPEDIENTE!</b></footer></div></article>';
- const identityBody='<div class="comic-page-split"><section class="comic-panel"><div class="comic-panel-heading"><span>01</span><b>IDENTIDAD Y ESTILO</b></div><h3>'+safe(hero.codename)+' · '+safe(hero.characterRole)+'</h3><p>'+safe(hero.log)+'</p></section><section class="comic-panel"><div class="comic-panel-heading"><span>02</span><b>CAPACIDADES DEL PERSONAJE</b></div><h3>'+safe(hero.rank)+'</h3><p>'+safe(hero.powerSet)+'</p><p class="comic-panel-caption">'+safe(hero.powers)+'</p></section></div><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>03</span><b>UNIVERSOS Y FORMATOS</b></div><div class="comic-format-list">'+areas.map(v=>'<span>'+safe(v)+'</span>').join('')+'</div><p class="comic-panel-caption">La identidad narrativa de la carta representa al personaje; no es una certificación ni una métrica de rendimiento.</p></section>';
- const identityPage=page(1,'LA BRUJA: IDENTIDAD PROPIA',identityBody,'EL PERSONAJE');
- let metricCards='';
- [['Seguidores',metrics.followers,'total publicado'],['Nuevos seguidores','+'+(metrics.follower_change??'—'),'ventana consultada'],['Horas vistas',metrics.viewer_hours,'ventana consultada'],['Pico de espectadores',metrics.peak_viewers,'ventana consultada'],['Horas en directo',metrics.hours_live,'ventana consultada'],['Promedio',metrics.average_viewers,'ventana consultada']].forEach(v=>metricCards+='<article class="comic-metric"><span>'+v[0]+'</span><strong>'+safe(v[1])+'</strong><small>'+v[2]+'</small></article>');
- const statsBody='<section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>01</span><b>SEÑALES DE AUDIENCIA</b></div><p class="comic-panel-caption">TwitchMetrics · '+safe(period)+' · consulta 4 nov 2026. Esta fuente externa registra una muestra pública limitada; no debe interpretarse como el historial completo del canal.</p><div class="comic-metric-grid">'+metricCards+'</div></section><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>02</span><b>ALCANCE OBSERVADO</b></div><p>En la ventana consultada se informan 59 horas vistas, un pico de 33 espectadores y una variación de +17 seguidores. El promedio publicado fue de 19 espectadores.</p><p class="comic-panel-caption">Los indicadores pertenecen exclusivamente a LADYMORIARTY01. No se suman ni se comparan con las estadísticas de MORIARTYS.</p><a href="'+safe(profile.source_url||'https://www.twitchmetrics.net/c/710295249-ladymoriarty01')+'" target="_blank" rel="noopener">CONSULTAR FUENTE TWITCHMETRICS ↗</a></section>';
- const statsPage=page(2,'EL PODER DE SU COMUNIDAD',statsBody,'LA AUDIENCIA');
- let gameRows='';
- games.forEach(g=>gameRows+='<tr><th>'+safe(g.name)+'</th><td>'+safe(g.stream_time_hours)+' h</td><td>'+safe(g.stream_time_share)+'</td><td>'+safe(g.watch_time_hours)+' h</td><td>'+safe(g.watch_time_share)+'</td><td>'+safe(g.average_viewers)+'</td><td>'+safe(g.peak_viewers)+'</td></tr>');
- const gamesBody='<p class="comic-page-lead">Seis juegos registrados en la tabla de SullyGnome para la ventana de los últimos 30 días. Las horas emitidas se reproducen tal como aparecen en la fuente, incluso cuando figuran redondeadas a cero.</p><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>01</span><b>REGISTRO DE UNIVERSOS</b></div><div class="stats-table-wrap"><table class="comic-games-table"><thead><tr><th>Juego</th><th>Emitidas</th><th>% tiempo</th><th>Vistas</th><th>% vistas</th><th>Media</th><th>Pico</th></tr></thead><tbody>'+gameRows+'</tbody></table></div><p class="comic-panel-caption">Fuente: <a href="https://sullygnome.com/channel/ladymoriarty01/games" target="_blank" rel="noopener">SullyGnome · juegos ↗</a>. Período: últimos 30 días. Las cifras y porcentajes corresponden a las columnas de la tabla consultada.</p></section><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>02</span><b>LECTURA DESTACADA</b></div><p>Aniimo lidera esta selección en horas vistas (28 h), promedio (23) y pico (33). Assassin’s Creed Odyssey registra 26 horas vistas y un promedio de 17 espectadores.</p></section>';
- const gamesPage=page(3,'CADA JUEGO, UNA NUEVA HISTORIA',gamesBody,'LAS MISIONES');
- let clipsHtml='';
- clips.forEach((c,i)=>{
-  clipsHtml+='<article class="comic-panel comic-clip-card"><div class="comic-panel-heading"><span>0'+(i+1)+'</span><b>MOMENTO DESTACADO</b></div><div class="comic-clip-preview">'+renderTwitchClipPreview(c.clip_id,c.title,c.url)+'</div><h3>'+safe(c.title||('Momento destacado 0'+(i+1)))+'</h3><a href="https://clips.twitch.tv/'+encodeURIComponent(c.clip_id||'')+'" target="_blank" rel="noopener">VER CLIP COMPLETO ↗</a></article>';
- });
- const clipsBody='<p class="comic-page-lead">Una selección de momentos del canal. Los títulos se mantienen neutrales mientras no haya una descripción editorial confirmada.</p><div class="comic-clips-grid">'+(clipsHtml||'<p>Clips pendientes de incorporar.</p>')+'</div>';
- const clipsPage=page(4,'MOMENTOS FUERA DEL GUIÓN',clipsBody,'EL ESPECTÁCULO');
- const collabs=Array.isArray(record.collaborations)?record.collaborations:[];
- const milestones=Array.isArray(record.milestones)?record.milestones:[];
- const collabBody='<div class="comic-page-split"><section class="comic-panel"><div class="comic-panel-heading"><span>01</span><b>COLABORACIONES CONFIRMADAS</b></div>'+(collabs.length?'<ul class="profile-detail-list">'+collabs.map(c=>'<li><b>'+safe(c.title)+'</b> '+safe(c.description||'')+'</li>').join('')+'</ul>':'<p>Sin colaboraciones comerciales confirmadas cargadas en el expediente individual.</p>')+'</section><section class="comic-panel"><div class="comic-panel-heading"><span>02</span><b>HITOS Y TRAYECTORIA</b></div>'+(milestones.length?'<ul class="profile-detail-list">'+milestones.map(m=>'<li>'+safe(m.title)+' '+safe(m.description||'')+'</li>').join('')+'</ul>':'<p>Registro histórico pendiente de documentación verificable.</p>')+'</section></div><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>03</span><b>FORMATOS PARA EXPLORAR</b></div><div class="comic-format-list"><span>Gaming y presentación de videojuegos</span><span>Entretenimiento y conversación</span><span>Experiencias IRL</span><span>Clips y momentos destacados</span></div><p class="comic-panel-caption">Líneas potenciales de colaboración, no campañas contratadas ni alianzas vigentes. Contacto comercial pendiente de confirmar.</p></section><section class="comic-final-cta"><span>PRÓXIMO NÚMERO · NUEVAS HISTORIAS</span><h3>QUE TU MARCA ENTRE EN EL UNIVERSO DE LA BRUJA.</h3><p>Propuestas sujetas a conversación y aprobación de LADYMORIARTY01.</p></section><section class="lady-contact-panel"><span>CONTACTO COMERCIAL · LEGIÓN MULTIVERSAL</span><p>Para propuestas, campañas y consultas de colaboración:</p><a href="mailto:losmoriartys@gmail.com">losmoriartys@gmail.com</a></section>';
- const collabPage=page(5,'EL UNIVERSO DE LAS COLABORACIONES',collabBody,'NUEVAS ALIANZAS');
- return [cover,identityPage,statsPage,gamesPage,clipsPage,collabPage];
-}
-
-function renderHabitosComicPages(hero,sullyChannel){
- const safe=v=>escapeStatsHtml(v===null||v===undefined?'':String(v));
- const areas=Array.isArray(hero.areas)?hero.areas:[];
- const record=getCreatorRecord(hero);
- const clips=Array.isArray(record.highlights)?record.highlights:[];
- const summary=sullyChannel?.summary||{};
- const games=Array.isArray(sullyChannel?.game_breakdown)?sullyChannel.game_breakdown:[];
- const period=sullyChannel?.period?.label||'7 oct — 6 nov 2026';
- const gamePeriod=sullyChannel?.game_breakdown_period||'Últimos 30 días';
- const page=(n,title,body,foot)=>'<article class="comic-book-sheet comic-interior-page"><header class="comic-interior-header"><span>LEGIÓN MULTIVERSAL</span><b>CAPÍTULO 0'+n+'</b><span>'+foot+'</span></header><div class="comic-page-title"><small>EXPEDIENTE HÁBITOS ATÓMICOS · PÁGINA 0'+(n+1)+'</small><h2>'+title+'</h2></div>'+(hero.voice?'<aside class="hero-voice voice-habitos"><span>VOZ DEL FILÓSOFO ATÓMICO</span><p>'+safe(hero.voice)+'</p></aside>':'')+body+'<footer class="comic-page-footer"><span>HÁBITOS ATÓMICOS · ARCHIVO INDIVIDUAL</span><b>0'+(n+1)+' / 06</b></footer></article>';
- const cover='<article class="comic-book-sheet comic-cover-sheet"><header class="comic-cover-masthead"><b>LEGIÓN MULTIVERSAL</b><span>EXPEDIENTE INDIVIDUAL · N.º '+safe(hero.cardNumber||'007')+'</span><span>MEDIA KIT</span></header><div class="comic-cover-art-frame"><span class="comic-cover-burst">EXPEDIENTE<br>CLASIFICADO</span><img class="comic-cover-art" src="'+safe(hero.img)+'" alt="Carta oficial de HÁBITOS ATÓMICOS"></div><div class="comic-cover-copy"><div class="comic-cover-titleline"><span>PROTAGONISTA</span><h2>HÁBITOS ATÓMICOS</h2><b>'+safe(hero.series||'03')+'</b></div><p class="comic-cover-subtitle">EL FILÓSOFO JUSTICIERO · FILÓSOFO ATÓMICO</p><section class="comic-panel comic-cover-bio"><div class="comic-panel-heading"><span>01</span><b>IDENTIDAD SECRETA · PERFIL DEL CREADOR</b></div><p>'+safe(hero.bio)+'</p><p class="comic-panel-caption">Gaming, filosofía y desarrollo personal: conversación, ideas y entretenimiento en un mismo espacio.</p></section><aside class="hero-voice voice-habitos"><span>SU PRINCIPIO EN LA LEGIÓN</span><p>'+safe(hero.voice)+'</p></aside><footer class="comic-cover-footer"><span>'+areas.map(safe).join(' · ')+'</span><b>¡ABRIR EXPEDIENTE!</b></footer></div></article>';
- const identityBody='<p class="comic-page-lead">No todo héroe necesita levantar la voz para dejar una marca. El Filósofo Atómico convierte el directo en un espacio para pensar, compartir experiencias y volver al juego con una perspectiva distinta.</p><div class="comic-page-split"><section class="comic-panel"><div class="comic-panel-heading"><span>01</span><b>IDENTIDAD Y PROPÓSITO</b></div><h3>EL FILÓSOFO JUSTICIERO</h3><p>'+safe(hero.log)+'</p><p>Su eje no es prometer respuestas definitivas, sino abrir conversaciones, poner ideas a prueba y acompañar a la comunidad en el proceso de aprender y avanzar.</p></section><section class="comic-panel"><div class="comic-panel-heading"><span>02</span><b>CAPACIDADES DEL PERSONAJE</b></div><h3>'+safe(hero.characterRole)+'</h3><p>'+safe(hero.powerSet)+'</p><p class="comic-panel-caption">Poderes y rangos pertenecen al universo narrativo de Legión Multiversal; no son certificaciones ni indicadores de rendimiento.</p></section></div><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>03</span><b>LOS TRES PILARES</b></div><div class="comic-format-list">'+areas.map(v=>'<span>'+safe(v)+'</span>').join('')+'</div><p class="comic-panel-caption">La filosofía y el desarrollo personal dan identidad a la conversación; el gaming aporta variedad, situaciones espontáneas y un punto de encuentro.</p></section>';
- const identityPage=page(1,'LA MENTE TAMBIÉN ES UN CAMPO DE BATALLA',identityBody,'EL PERSONAJE');
- const metricCards=[
-  ['TRANSMISIONES',summary.streams_count,'en el período'],
-  ['HORAS EMITIDAS',summary.airtime_hours+' h','en el período'],
-  ['HORAS VISTAS',summary.hours_watched,'según resumen general'],
-  ['PROMEDIO',summary.average_viewers_duration_weighted,'espectadores'],
-  ['PICO MÁXIMO',summary.peak_viewers,'espectadores · fecha por confirmar'],
-  ['SEGUIDORES GANADOS','+'+summary.followers_gain_reported,'en el período']
- ];
- const statsBody='<p class="comic-page-lead">Un corte de actividad de 30 días para entender el ritmo del canal. Los datos se presentan con su período y fuente, sin convertir una muestra parcial en una promesa de resultados.</p><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>01</span><b>INDICADORES DEL PERÍODO</b></div><p class="comic-panel-caption">SullyGnome · '+safe(period)+' · resumen compartido por el creador.</p><div class="comic-metric-grid">'+metricCards.map(v=>'<article class="comic-metric"><span>'+v[0]+'</span><strong>'+safe(v[1])+'</strong><small>'+safe(v[2])+'</small></article>').join('')+'</div></section><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>02</span><b>LECTURA DE LA ACTIVIDAD</b></div><p>El período informa 26 transmisiones, 121 horas emitidas y 469 horas vistas. El promedio general fue de 3 espectadores y se reportan 27 seguidores ganados.</p><p class="comic-panel-caption">El resumen general registra un máximo de 29 espectadores, pero el gráfico compartido señala un pico de 24 durante una transmisión marcada como Unlisted el 21 de octubre a las 21:00. Se conserva el máximo agregado de 29 sin atribuirle una fecha hasta aclarar la diferencia. La captura del historial contiene diez filas visibles de las 26 transmisiones del período.</p><p class="comic-panel-caption">La cifra «Seguidores ganan rango» de SullyGnome se excluye porque representa una posición/rango del sitio y no el total de seguidores del canal.</p></section>';
- const statsPage=page(2,'UNA COMUNIDAD QUE CRECE CON CADA CHARLA',statsBody,'LA AUDIENCIA');
- const gameRows=games.map(g=>'<tr><th>'+safe(g.name)+'</th><td>'+safe(g.stream_hours)+' h</td><td>'+safe(g.stream_share_pct)+'%</td><td>'+safe(g.hours_watched)+' h</td><td>'+safe(g.watch_share_pct)+'%</td><td>'+safe(g.average_viewers)+'</td><td>'+safe(g.peak_viewers)+'</td></tr>').join('');
- const gameBody='<p class="comic-page-lead">El desglose de los últimos 30 días muestra una identidad conversacional muy marcada: Just Chatting concentra el 83,5% del tiempo emitido y el 88,4% de las horas vistas informadas en esa categoría.</p><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>01</span><b>JUEGOS Y CATEGORÍAS</b></div><div class="stats-table-wrap"><table class="comic-games-table"><thead><tr><th>Categoría</th><th>Emitidas</th><th>% tiempo</th><th>Vistas</th><th>% vistas</th><th>Media</th><th>Pico</th></tr></thead><tbody>'+gameRows+'</tbody></table></div><p class="comic-panel-caption">Fuente: desglose de categorías compartido desde SullyGnome para '+safe(gamePeriod)+'. La tabla muestra diez categorías.</p></section><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>02</span><b>EL DATO QUE DEFINE SU PROPUESTA</b></div><div class="comic-metric-grid"><article class="comic-metric"><span>JUST CHATTING · TIEMPO EMITIDO</span><strong>83,5%</strong><small>104 horas según el desglose de categorías</small></article><article class="comic-metric"><span>JUST CHATTING · HORAS VISTAS</span><strong>88,4%</strong><small>469 horas según la fila de la categoría</small></article></div><p class="comic-panel-caption">Nota de consistencia: el resumen general del canal informa 469 horas vistas en total, pero la fila Just Chatting también informa 469 horas vistas (88,4% del total). Además, las diez categorías visibles suman 525 horas vistas y 119 horas emitidas, frente a 121 horas emitidas en el resumen general. Las cifras se muestran tal como fueron compartidas por SullyGnome; la diferencia queda señalada y no se corrige mediante estimaciones.</p></section>';
- const gamesPage=page(3,'EL UNIVERSO DONDE LA CONVERSACIÓN ES PROTAGONISTA',gameBody,'LAS MISIONES');
- const clipsBody='<p class="comic-page-lead">Cuatro escenas seleccionadas por el creador. Los enlaces ya están incorporados al expediente; los títulos editoriales se definirán en una revisión posterior, al analizar el contenido de cada clip.</p><div class="comic-clips-grid">'+(clips.length?clips.map((c,i)=>'<article class="comic-panel comic-clip-card"><div class="comic-panel-heading"><span>0'+(i+1)+'</span><b>ESCENA DESTACADA</b></div><div class="comic-clip-preview">'+renderTwitchClipPreview(c.clip_id,c.title,c.url)+'</div><h3>'+safe(c.title||('Momento destacado 0'+(i+1)))+'</h3><a href="'+safe(c.url||('https://clips.twitch.tv/'+(c.clip_id||'')))+'" target="_blank" rel="noopener">VER CLIP COMPLETO ↗</a></article>').join(''):'<p>Clips pendientes de incorporar.</p>')+'</div><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>05</span><b>EL TONO DEL CANAL</b></div><p>La selección audiovisual acompaña una propuesta basada en la conversación, la cercanía y el entretenimiento espontáneo. Los clips permiten mostrar momentos concretos sin reducir el canal a una tabla de estadísticas.</p></section>';
- const clipsPage=page(4,'IDEAS, REACCIONES Y MOMENTOS REALES',clipsBody,'EL ESPECTÁCULO');
- const commercialBody='<p class="comic-page-lead">Una propuesta de colaboración que parte de lo que el canal ya hace: conversar, compartir experiencias y descubrir juegos con su comunidad. Las siguientes opciones son formatos posibles, no campañas contratadas ni alianzas vigentes.</p><div class="comic-page-split"><section class="comic-panel"><div class="comic-panel-heading"><span>01</span><b>FORMATOS POSIBLES</b></div><ul class="profile-detail-list"><li>Presentación y prueba de videojuegos en directo.</li><li>Conversaciones temáticas vinculadas a hábitos, aprendizaje y bienestar cotidiano, sin promesas profesionales.</li><li>Integraciones de productos o servicios que tengan relación genuina con la audiencia.</li><li>Dinámicas participativas y desafíos con la comunidad.</li><li>Selección de clips para amplificar momentos de una activación.</li></ul></section><section class="comic-panel"><div class="comic-panel-heading"><span>02</span><b>VALOR PARA UNA MARCA</b></div><p>El peso de Solo charlando en la actividad observada ofrece un contexto favorable para propuestas que necesiten explicación, intercambio y demostración, más allá de una mención rápida.</p><p>El gaming suma un entorno natural para probar experiencias y generar situaciones compartidas.</p><p class="comic-panel-caption">Toda acción debe acordarse con el creador y adaptarse a su estilo. No se garantizan visualizaciones, conversiones ni resultados comerciales.</p></section></div><section class="comic-final-cta"><span>PRÓXIMO NÚMERO · CONVERSEMOS</span><h3>UNA BUENA IDEA MERECE UNA CONVERSACIÓN.</h3><p>Para conocer el canal y acercar una propuesta:</p><a href="'+safe(hero.twitch)+'" target="_blank" rel="noopener">TWITCH · HABITOS_ATOMICOS ↗</a></section>';
- const commercialPage=page(5,'UNA ALIANZA QUE EMPIEZA CON UNA IDEA',commercialBody,'COLABORACIONES');
- return [cover,identityPage,statsPage,gamesPage,clipsPage,commercialPage];
-}
-
-
-
-function renderAkumaComicPages(hero,sullyChannel){
- const safe=v=>escapeStatsHtml(v===null||v===undefined?'—':String(v));
- const areas=Array.isArray(hero.areas)?hero.areas:[];
- const summary=sullyChannel?.summary||{};
- const overview=sullyChannel?.last_30_days||{};
- const streams=Array.isArray(sullyChannel?.recent_streams_30d)?sullyChannel.recent_streams_30d:(Array.isArray(sullyChannel?.streams)?sullyChannel.streams:[]);
- const period=sullyChannel?.period||{};
- const periodLabel=period.start_date&&period.end_date?statsDate(period.start_date)+' — '+statsDate(period.end_date):'Período sin confirmar';
- const gamesCount={};
- streams.forEach(st=>(Array.isArray(st.games)?st.games:[]).forEach(g=>gamesCount[g]=(gamesCount[g]||0)+1));
- const games=Object.entries(gamesCount).sort((a,b)=>b[1]-a[1]);
- const page=(n,title,body,foot)=>'<article class="comic-book-sheet comic-interior-page"><header class="comic-interior-header"><span>LEGIÓN MULTIVERSAL</span><b>CAPÍTULO 0'+n+'</b><span>'+foot+'</span></header><div class="comic-page-title"><small>EXPEDIENTE EL INFERNAL · PÁGINA 0'+(n+1)+'</small><h2>'+title+'</h2></div>'+(hero.voice?'<aside class="hero-voice voice-akuma"><span>VOZ DEL INFERNAL</span><p>'+safe(hero.voice)+'</p></aside>':'')+body+'<footer class="comic-page-footer"><span>AKUMA · ARCHIVO INDIVIDUAL</span><b>0'+(n+1)+' / 06</b></footer></article>';
- const cover='<article class="comic-book-sheet comic-cover-sheet"><header class="comic-cover-masthead"><b>LEGIÓN MULTIVERSAL</b><span>EXPEDIENTE INDIVIDUAL · N.º '+safe(hero.cardNumber||'024')+'</span><span>MEDIA KIT</span></header><div class="comic-cover-art-frame"><span class="comic-cover-burst">EXPEDIENTE<br>CLASIFICADO</span><img class="comic-cover-art" src="'+safe(hero.img)+'" alt="Carta oficial de AKUMA"></div><div class="comic-cover-copy"><div class="comic-cover-titleline"><span>PROTAGONISTA</span><h2>AKUMA</h2><b>'+safe(hero.series||'03')+'</b></div><p class="comic-cover-subtitle">EL INFERNAL · TANQUE DEMONÍACO</p><section class="comic-panel comic-cover-bio"><div class="comic-panel-heading"><span>01</span><b>IDENTIDAD SECRETA · PERFIL DEL CREADOR</b></div><p>Apasionado por los videojuegos y de espíritu competitivo, AKUMA combina partidas intensas con humor y conversaciones abiertas. Su canal es un punto de encuentro para quienes disfrutan tanto del desafío como de compartir el momento.</p><p class="comic-panel-caption">Gaming competitivo, juegos de terror y comunidad en directo.</p></section><aside class="hero-voice voice-akuma"><span>SU PRINCIPIO EN LA LEGIÓN</span><p>'+safe(hero.voice)+'</p></aside><footer class="comic-cover-footer"><span>'+areas.map(safe).join(' · ')+'</span><b>¡ABRIR EXPEDIENTE!</b></footer></div></article>';
- const identityBody='<p class="comic-page-lead">Cuando cae la noche, el portal vuelve a abrirse. Del otro lado esperan partidas competitivas, sustos inesperados y una comunidad que sabe que la diversión también forma parte de la misión.</p><div class="comic-page-split"><section class="comic-panel"><div class="comic-panel-heading"><span>01</span><b>IDENTIDAD Y PROPÓSITO</b></div><h3>'+safe(hero.codename)+'</h3><p>'+safe(hero.bio)+'</p><p>Su propuesta combina intensidad y cercanía: competir, reírse de lo que sale mal y convertir cada directo en una reunión compartida.</p></section><section class="comic-panel"><div class="comic-panel-heading"><span>02</span><b>CAPACIDADES DEL PERSONAJE</b></div><h3>'+safe(hero.characterRole)+'</h3><p>'+safe(hero.powerSet)+'</p><p class="comic-panel-caption">Poderes y rangos pertenecen al universo narrativo de Legión Multiversal; no son certificaciones ni indicadores de rendimiento.</p></section></div><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>03</span><b>TERRENOS DE COMBATE</b></div><div class="comic-format-list">'+areas.map(v=>'<span>'+safe(v)+'</span>').join('')+'</div><p class="comic-panel-caption">El perfil público destaca los videojuegos competitivos y de terror, con espacio para charlas y encuentros con la comunidad.</p></section><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>04</span><b>HORARIO DE APERTURA DEL PORTAL</b></div><div class="comic-metric-grid"><article class="comic-metric"><span>FRECUENCIA PUBLICADA</span><strong>DIARIA</strong><small>Según la descripción pública del canal</small></article><article class="comic-metric"><span>HORARIO</span><strong>19:00</strong><small>Hora de México · huso horario local del creador</small></article></div></section>';
- const identityPage=page(1,'EL PORTAL SE ABRE CADA NOCHE',identityBody,'EL PERSONAJE');
- const metrics=[['SEGUIDORES TOTALES',overview.followers_total,'en el canal'],['DIRECTOS REGISTRADOS',overview.streams_count,'en los últimos 30 días'],['TIEMPO EN DIRECTO',overview.airtime_hours+' h','43 horas acumuladas'],['HORAS VISTAS',overview.hours_watched,'en los últimos 30 días'],['PROMEDIO DE ESPECTADORES',overview.average_viewers,'promedio de los últimos 30 días'],['PICO DE ESPECTADORES',overview.peak_viewers,'máximo el 24 de octubre']];
- const metricCards=metrics.map(v=>'<article class="comic-metric"><span>'+safe(v[0])+'</span><strong>'+safe(v[1])+'</strong><small>'+safe(v[2])+'</small></article>').join('');
- const growthBody='<section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>03</span><b>CRECIMIENTO FRENTE A LOS 30 DÍAS ANTERIORES</b></div><div class="stats-table-wrap"><table class="comic-games-table"><thead><tr><th>Indicador</th><th>Variación</th><th>Cambio</th></tr></thead><tbody><tr><th>Promedio de espectadores</th><td>+2</td><td>+100,0%</td></tr><tr><th>Horas vistas</th><td>+135 h</td><td>+245,5%</td></tr><tr><th>Seguidores ganados</th><td>+32</td><td>+1.600%</td></tr><tr><th>Pico de espectadores</th><td>+33</td><td>+412,5%</td></tr><tr><th>Horas transmitidas</th><td>+23 h</td><td>+115,0%</td></tr><tr><th>Transmisiones</th><td>+7</td><td>+46,7%</td></tr></tbody></table></div><p class="comic-panel-caption">Comparación publicada por SullyGnome respecto de los 30 días anteriores.</p></section>';
- const statsBody='<p class="comic-page-lead">Resumen de SullyGnome para los últimos 30 días ('+safe(periodLabel)+'). Los indicadores agregados corresponden a 22 directos; la bitácora posterior muestra solo las diez transmisiones visibles en el detalle compartido.</p><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>01</span><b>INDICADORES DEL EXPEDIENTE</b></div><div class="comic-metric-grid">'+metricCards+'</div><p class="comic-panel-caption">Fuente: SullyGnome · historial de transmisiones aportado por el creador. Estado: '+safe(overview.account_status)+' · Idioma: '+safe(overview.language)+' · Canal creado: '+safe(overview.created_date)+' · Contenido maduro: '+safe(overview.mature_content?'Sí':'No')+'.</p></section><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>02</span><b>LECTURA DEL RENDIMIENTO</b></div><p>En el período, AKUMA acumuló 43 horas de emisión y 190 horas vistas. El pico de 41 espectadores se registró el 24 de octubre de 2026 a las 18:55, durante Rogue Legacy.</p><p>El canal sumó 34 seguidores durante el período y registra 142 seguidores totales. La duración media publicada por transmisión es de 1 h 59 min.</p></section>'+growthBody;
- const statsPage=page(2,'LA FUERZA DE CADA ENCUENTRO',statsBody,'LA AUDIENCIA');
- const gameRows=games.map(g=>'<tr><th>'+safe(g[0])+'</th><td>'+safe(g[1])+' de '+safe(streams.length)+'</td></tr>').join('');
- const gamesBody='<p class="comic-page-lead">La variedad es parte del repertorio del Infernal: desde el competitivo hasta las charlas y las experiencias de terror. En los últimos 30 días, Clive Barker’s Hellraiser: Revival fue la categoría con más tiempo en directo (11 h), mientras que Echoes in Darkness registró el mayor promedio (13 espectadores).</p><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>01</span><b>JUEGOS Y CATEGORÍAS REGISTRADOS</b></div><div class="stats-table-wrap"><table class="comic-games-table"><thead><tr><th>Juego / categoría</th><th>Transmisiones donde aparece</th></tr></thead><tbody>'+gameRows+'</tbody></table></div><p class="comic-panel-caption">Otros títulos destacados: Gears of War: E-Day (3 h 15 min). El detalle por juego se limita a los datos que el resumen de SullyGnome muestra; no se extrapolan cifras para categorías sin métricas.</p></section><div class="comic-page-split"><section class="comic-panel"><div class="comic-panel-heading"><span>02</span><b>COMPETENCIA Y ACCIÓN</b></div><p>Fortnite aporta el costado competitivo, mientras que Can ’Em All y Rogue Legacy suman experiencias de acción y desafío.</p></section><section class="comic-panel"><div class="comic-panel-heading"><span>03</span><b>CHARLAS Y JUEGO SOCIAL</b></div><p>Just Chatting y Among Us muestran espacio para la conversación, la interacción y las partidas compartidas.</p></section></div>';
- const streamRows=streams.map(st=>'<tr><th>'+safe(statsDate(st.date))+'<small>'+safe(st.start_time)+'–'+safe(st.end_time)+'</small></th><td>'+safe(statsDuration(st))+'</td><td>'+safe(st.hours_watched)+'</td><td>'+safe(st.average_viewers)+'</td><td>'+safe(st.peak_viewers)+'</td><td>'+safe(st.followers_gain)+'</td></tr>').join('');
- const streamBody='<p class="comic-page-lead">Diez transmisiones visibles dentro del resumen de 30 días, de un total de 22 emisiones registradas. Los horarios se mantienen tal como aparecen en la fuente; no se les asigna una zona horaria que no esté especificada.</p><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>01</span><b>BITÁCORA DE TRANSMISIONES</b></div><div class="stats-table-wrap"><table class="comic-games-table"><thead><tr><th>Fecha / horario</th><th>Duración</th><th>Horas vistas</th><th>Prom.</th><th>Pico</th><th>Seguidores</th></tr></thead><tbody>'+streamRows+'</tbody></table></div><p class="comic-panel-caption">Fuente: SullyGnome · diez filas visibles de 22 transmisiones · 24 oct–5 nov 2026. La suma de esta tabla parcial no reemplaza el total agregado de 34 seguidores del período.</p></section>';
- const gamesPage=page(3,'UN REPERTORIO Y SU BITÁCORA',gamesBody+streamBody,'MISIONES Y BITÁCORA');
- const streamPage=page(4,'DIEZ MISIONES, UN MISMO PORTAL',streamBody,'BITÁCORA');
- const eventBody='<p class="comic-page-lead">Una misión compartida demuestra otra dimensión del canal: la capacidad de integrarse a una experiencia coordinada con otros creadores y construir una transmisión colectiva.</p><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>01</span><b>EXPEDIENTE DE CAMPAÑA · BARFENDER</b></div><div class="comic-metric-grid"><article class="comic-metric"><span>FECHA</span><strong>05 NOV</strong><small>2026</small></article><article class="comic-metric"><span>CREADORES EN MULTISTREAM</span><strong>04</strong><small>Transmisiones simultáneas coordinadas</small></article><article class="comic-metric"><span>PICO CONJUNTO INFORMADO</span><strong>98</strong><small>Audiencia combinada · no individual</small></article></div><p>AKUMA participó junto a Los Moriartys, Roderik y Lady Moriarty en una sesión conjunta de BarFender. La acción reunió cuatro canales en una misma experiencia y dejó un registro de colaboración grupal.</p><p class="comic-panel-caption">El pico de 98 corresponde al conjunto informado para la activación. No debe atribuirse como audiencia individual de AKUMA ni sumarse a sus métricas personales.</p></section><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>02</span><b>LO QUE DEMUESTRA ESTA MISIÓN</b></div><div class="comic-format-list"><span>Multistream coordinado</span><span>Juego compartido</span><span>Interacción entre comunidades</span><span>Activación grupal</span></div><p class="comic-panel-caption">El archivo audiovisual específico de AKUMA queda pendiente de incorporar cuando estén disponibles clips seleccionados por el creador.</p></section>';
- const eventPage=page(4,'CUANDO CUATRO PORTALES SE ABREN A LA VEZ',eventBody,'MISIONES COMPARTIDAS');
- const commercialBody='<p class="comic-page-lead">AKUMA puede aportar una presencia competitiva, espontánea y cercana a campañas que busquen mostrar un videojuego en acción y compartir la experiencia con una comunidad. Cada propuesta debe respetar su estilo y acordarse con el creador.</p><div class="comic-page-split"><section class="comic-panel"><div class="comic-panel-heading"><span>01</span><b>FORMATOS POSIBLES</b></div><ul class="profile-detail-list"><li>Presentación y prueba de videojuegos competitivos o de terror.</li><li>Desafíos, partidas especiales y dinámicas con la comunidad.</li><li>Integraciones de periféricos y accesorios gaming durante el uso real.</li><li>Sesiones multistream y eventos con otros creadores.</li><li>Clips y piezas breves para amplificar momentos de una activación.</li></ul></section><section class="comic-panel"><div class="comic-panel-heading"><span>02</span><b>VALOR PARA UNA MARCA</b></div><p>La combinación de juego competitivo, humor y conversación permite presentar productos en contexto, mostrar mecánicas y generar momentos compartidos. La experiencia grupal de BarFender aporta un antecedente concreto de participación en una activación coordinada.</p><p class="comic-panel-caption">La campaña mencionada fue grupal. No se atribuyen a AKUMA resultados individuales no medidos ni se garantizan visualizaciones, conversiones o ventas.</p></section></div><section class="comic-final-cta"><span>PRÓXIMO NÚMERO · NUEVAS ALIANZAS</span><h3>EL PRÓXIMO DESAFÍO PUEDE SER CON TU MARCA.</h3><p>Conocé el canal y acercá tu propuesta:</p><a href="'+safe(hero.twitch)+'" target="_blank" rel="noopener">TWITCH · AKUMAZOLDYCK ↗</a></section>';
- const commercialPage=page(5,'UNA ALIANZA CON ESPÍRITU COMPETITIVO',commercialBody,'COLABORACIONES');
- return [cover,identityPage,statsPage,gamesPage,eventPage,commercialPage];
-}
-
-
-function renderArdipiiComicPages(hero,sullyChannel){
- const safe=v=>escapeStatsHtml(v===null||v===undefined?'':String(v));
- const areas=Array.isArray(hero.areas)?hero.areas:[];
- const summary=sullyChannel?.summary||{};
- const streams=Array.isArray(sullyChannel?.streams)?sullyChannel.streams:[];
- const record=getCreatorRecord(hero);
- const clips=Array.isArray(record.highlights)?record.highlights:[];
- const games=['GTA 6','Gears E-Day','Fortnite','Minecraft','Roblox','Dead by Daylight','Rocket League','Call of Duty','Clash of Clans','Pokémon Unite'];
- const page=(n,title,body,foot)=>'<article class="comic-book-sheet comic-interior-page"><header class="comic-interior-header"><span>LEGIÓN MULTIVERSAL</span><b>CAPÍTULO 0'+n+'</b><span>'+foot+'</span></header><div class="comic-page-title"><small>EXPEDIENTE ARDIPII · PÁGINA 0'+(n+1)+'</small><h2>'+title+'</h2></div>'+(hero.voice?'<aside class="hero-voice voice-ardipii"><span>VOZ DEL FANTASMA</span><p>'+safe(hero.voice)+'</p></aside>':'')+body+'<footer class="comic-page-footer"><span>ARDIPII · ARCHIVO INDIVIDUAL</span><b>0'+(n+1)+' / 06</b></footer></article>';
- const cover='<article class="comic-book-sheet comic-cover-sheet"><header class="comic-cover-masthead"><b>LEGIÓN MULTIVERSAL</b><span>EXPEDIENTE INDIVIDUAL · N.º '+safe(hero.cardNumber||'037')+'</span><span>MEDIA KIT</span></header><div class="comic-cover-art-frame"><span class="comic-cover-burst">EXPEDIENTE<br>CLASIFICADO</span><img class="comic-cover-art" src="'+safe(hero.img)+'" alt="Carta oficial de ARDIPII"></div><div class="comic-cover-copy"><div class="comic-cover-titleline"><span>PROTAGONISTA</span><h2>ARDIPII</h2><b>'+safe(hero.series||'03')+'</b></div><p class="comic-cover-subtitle">'+safe(hero.codename)+' · '+safe(hero.characterRole)+'</p><section class="comic-panel comic-cover-bio"><div class="comic-panel-heading"><span>01</span><b>IDENTIDAD SECRETA · PERFIL DEL PROFESOR</b></div><p>'+safe(hero.bio)+'</p><p class="comic-panel-caption">Docente de la Legión · Canal individual de Twitch · México.</p></section><footer class="comic-cover-footer"><span>'+areas.map(safe).join(' · ')+'</span><b>¡ABRIR EXPEDIENTE!</b></footer></div></article>';
- const identityBody='<div class="comic-page-split"><section class="comic-panel"><div class="comic-panel-heading"><span>01</span><b>IDENTIDAD Y PROPÓSITO</b></div><h3>'+safe(hero.codename)+' · '+safe(hero.characterRole)+'</h3><p>'+safe(hero.log)+'</p><p>Su lugar en la Legión es el de Docente: una presencia que recibe a la comunidad y abre espacio para compartir cada misión.</p></section><section class="comic-panel"><div class="comic-panel-heading"><span>02</span><b>CAPACIDADES DEL PERSONAJE</b></div><h3>'+safe(hero.rank)+'</h3><p>'+safe(hero.powerSet)+'</p><p class="comic-panel-caption">Los poderes y rangos pertenecen al universo narrativo de Legión Multiversal; no son certificaciones ni indicadores de rendimiento.</p></section></div><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>03</span><b>UNIVERSOS Y FORMATOS</b></div><div class="comic-format-list">'+areas.map(v=>'<span>'+safe(v)+'</span>').join('')+'</div><p class="comic-panel-caption">Rango institucional: Docente. Identidad narrativa: El Fantasma, Guardián Espectral.</p></section><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>04</span><b>HORARIO HABITUAL</b></div><div class="comic-metric-grid"><article class="comic-metric"><span>DÍAS</span><strong>MARTES · JUEVES</strong><small>Frecuencia informada</small></article><article class="comic-metric"><span>HORA</span><strong>20:00</strong><small>Hora de México (MX)</small></article></div></section>';
- const identityPage=page(1,'EL FANTASMA: BIENVENIDOS A LA GUARIDA',identityBody,'EL PERSONAJE');
- const metricCards=[['TRANSMISIONES',summary.streams_count,'en los últimos 30 días'],['HORAS EMITIDAS',summary.airtime_hours+' h','tiempo total en directo'],['HORAS VISTAS',summary.hours_watched,'acumuladas en el período'],['PROMEDIO',summary.average_viewers_duration_weighted,'espectadores promedio'],['PICO MÁXIMO',summary.peak_viewers,'máximo de espectadores'],['NUEVOS SEGUIDORES','+'+summary.followers_gain_reported,'ganados en el período']];
- const statsBody='<p class="comic-page-lead">Una fotografía de actividad del canal durante los últimos 30 días. Las cifras se presentan como resumen del período y no como resultados garantizados para futuras campañas.</p><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>01</span><b>INDICADORES DEL PERÍODO</b></div><p class="comic-panel-caption">SullyGnome · 6 oct — 5 nov 2026 · resumen de 30 días compartido por el creador.</p><div class="comic-metric-grid">'+metricCards.map(v=>'<article class="comic-metric"><span>'+safe(v[0])+'</span><strong>'+safe(v[1])+'</strong><small>'+safe(v[2])+'</small></article>').join('')+'</div></section><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>02</span><b>LECTURA DE AUDIENCIA</b></div><p>En el período se registraron 8 transmisiones y 121 horas vistas. El promedio fue de 11 espectadores, con un máximo de 31. El canal sumó 83 seguidores durante la ventana consultada.</p><p class="comic-panel-caption">Los indicadores corresponden exclusivamente al canal ARDIPII. Fuente: resumen de SullyGnome facilitado para este expediente.</p></section>';
- const statsPage=page(2,'EL PODER DE UNA COMUNIDAD PRESENTE',statsBody,'LA AUDIENCIA');
- const gameRows=games.map((g,i)=>'<tr><th>'+(i+1)+'. '+safe(g)+'</th><td>Selección compartida</td></tr>').join('');
- const streamRows=streams.map(st=>'<tr><th>'+safe(st.date)+'</th><td>'+safe(st.duration_minutes)+' min</td><td>'+safe(st.average_viewers)+'</td><td>'+safe(st.peak_viewers)+'</td><td>'+safe(st.hours_watched)+'</td><td>'+safe(st.category)+'</td></tr>').join('');
- const gamesBody='<p class="comic-page-lead">El repertorio de juegos compartido para el perfil reúne títulos de acción, aventura, construcción, competencia y experiencias sociales.</p><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>01</span><b>TOP 10 · UNIVERSOS DEL CANAL</b></div><div class="stats-table-wrap"><table class="comic-games-table"><thead><tr><th>Selección</th><th>Referencia</th></tr></thead><tbody>'+gameRows+'</tbody></table></div><p class="comic-panel-caption">Listado de juegos proporcionado por el creador; no representa un ranking de rendimiento calculado por SullyGnome.</p></section><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>02</span><b>BITÁCORA DE TRANSMISIONES · MUESTRA DEL PERÍODO</b></div><div class="stats-table-wrap"><table class="comic-games-table"><thead><tr><th>Fecha</th><th>Duración</th><th>Media</th><th>Pico</th><th>Horas vistas</th><th>Categoría</th></tr></thead><tbody>'+streamRows+'</tbody></table></div><p class="comic-panel-caption">Ocho transmisiones del 6 oct al 5 nov de 2026. Se excluyó la fila del 6 nov porque queda fuera de la ventana del resumen de 30 días.</p></section>';
- const gamesPage=page(3,'CADA DIRECTO, UNA NUEVA MISIÓN',gamesBody,'JUEGOS Y BITÁCORA');
- const clipsBody='<p class="comic-page-lead">Cuatro momentos seleccionados del canal. Los títulos se mantienen neutrales hasta contar con una descripción confirmada de cada escena.</p><div class="comic-clips-grid">'+(clips.length?clips.map((c,i)=>'<article class="comic-panel comic-clip-card"><div class="comic-panel-heading"><span>0'+(i+1)+'</span><b>MOMENTO DESTACADO</b></div><div class="comic-clip-preview">'+renderTwitchClipPreview(c.clip_id,c.title,c.url)+'</div><h3>'+safe(c.title||('Momento destacado 0'+(i+1)))+'</h3><a href="https://clips.twitch.tv/'+encodeURIComponent(c.clip_id||'')+'" target="_blank" rel="noopener">VER CLIP COMPLETO ↗</a></article>').join(''):'<p>Clips pendientes de incorporar.</p>')+'</div>';
- const clipsPage=page(4,'MOMENTOS FUERA DEL GUIÓN',clipsBody,'EL ESPECTÁCULO');
- const commercialBody='<p class="comic-page-lead">La propuesta de ARDIPII combina conversación, cercanía y entretenimiento. Su actividad reciente muestra una presencia principalmente en la categoría Just Chatting, con una aparición registrada en Gears of War: E-Day.</p><div class="comic-page-split"><section class="comic-panel"><div class="comic-panel-heading"><span>01</span><b>FORMATOS POSIBLES</b></div><ul class="profile-detail-list"><li>Presentaciones y conversaciones sobre videojuegos.</li><li>Integraciones de productos o servicios dentro de una charla en directo.</li><li>Dinámicas participativas con la comunidad.</li><li>Contenido de gaming y experiencias compartidas.</li><li>Selección de clips para amplificar momentos de una activación.</li></ul></section><section class="comic-panel"><div class="comic-panel-heading"><span>02</span><b>VALOR PARA UNA MARCA</b></div><p>El formato conversacional puede ofrecer espacio para explicar, presentar y responder preguntas en contexto. La comunidad y la interacción forman parte del tono del canal.</p><p class="comic-panel-caption">Son posibilidades de colaboración, no campañas contratadas ni alianzas vigentes. No se garantizan visualizaciones, conversiones ni resultados comerciales.</p></section></div><section class="comic-final-cta"><span>PRÓXIMO NÚMERO · NUEVAS ALIANZAS</span><h3>UNA NUEVA MISIÓN PUEDE EMPEZAR CON TU MARCA.</h3><p>Conocé el canal y acercá tu propuesta:</p><a href="https://twitch.tv/ardipii" target="_blank" rel="noopener">TWITCH · ARDIPII ↗</a></section><section class="lady-contact-panel"><span>CONTACTO COMERCIAL · LEGIÓN MULTIVERSAL</span><p>Para propuestas y consultas de colaboración:</p><a href="mailto:losmoriartys@gmail.com">losmoriartys@gmail.com</a></section>';
- const commercialPage=page(5,'EL UNIVERSO DE LAS COLABORACIONES',commercialBody,'NUEVAS ALIANZAS');
- return [cover,identityPage,statsPage,gamesPage,clipsPage,commercialPage];
-}
-
-
-
-function renderDaveNexusComicPages(hero,sullyChannel){
- const safe=escapeStatsHtml;
- const summary=sullyChannel?.annual_summary_2026||{};
- const streams=Array.isArray(sullyChannel?.streams)?sullyChannel.streams:[];
- const record=getCreatorRecord(hero);
- const clips=Array.isArray(record.highlights)?record.highlights:[];
- const games=[
-  ['Backrooms: Escape Together',1],
-  ['Marvel Rivals',5],
-  ['Bombanana',1],
-  ['Warhammer 40,000: Space Marine II',2],
-  ['For Honor',4],
-  ['Monster Hunter: World',2],
-  ['Dark Souls Remastered',2],
-  ['Project Zomboid',1]
- ];
- const page=(n,title,body,foot)=>'<article class="comic-book-sheet comic-interior-page nexus-page"><header class="comic-interior-header"><span>LEGIÓN MULTIVERSAL</span><b>CAPÍTULO 0'+n+'</b><span>'+foot+'</span></header><div class="comic-page-title"><small>EXPEDIENTE NEXUS · PÁGINA 0'+(n+1)+'</small><h2>'+title+'</h2></div>'+(hero.voice?'<aside class="hero-voice voice-nexus"><span>VOZ DEL NEXO</span><p>'+safe(hero.voice)+'</p></aside>':'')+body+'<footer class="comic-page-footer"><span>DAVE — NEXUS · ARCHIVO INDIVIDUAL</span><b>0'+(n+1)+' / 07</b></footer></article>';
- const cover='<article class="comic-book-sheet comic-cover-sheet nexus-page"><header class="comic-cover-masthead"><b>LEGIÓN MULTIVERSAL</b><span>EXPEDIENTE INDIVIDUAL · N.º '+safe(hero.cardNumber||'048')+'</span><span>MEDIA KIT</span></header><div class="comic-cover-art-frame"><span class="comic-cover-burst">EXPEDIENTE<br>CLASIFICADO</span><img class="comic-cover-art" src="'+safe(hero.img)+'" alt="Carta oficial de DAVE — NEXUS"></div><div class="comic-cover-copy"><div class="comic-cover-titleline"><span>PROTAGONISTA</span><h2>DAVE</h2><b>NEXUS</b></div><p class="comic-cover-subtitle">EL NEXO · GUARDIÁN TECNOLÓGICO</p><section class="comic-panel comic-cover-bio"><div class="comic-panel-heading"><span>01</span><b>IDENTIDAD SECRETA · EXPEDIENTE DEL CREADOR</b></div><p>'+safe(hero.bio)+'</p><p class="comic-panel-caption">Gaming · exploración · acción · experiencias cooperativas y de aventura, según las categorías registradas en las transmisiones compartidas.</p></section><aside class="hero-voice voice-nexus"><span>SU PRINCIPIO EN LA LEGIÓN</span><p>'+safe(hero.voice)+'</p></aside><footer class="comic-cover-footer"><span>TWITCH · DAVED0608</span><b>¡ABRIR EXPEDIENTE!</b></footer></div></article>';
- const identityBody='<p class="comic-page-lead">En la Legión, NEXUS representa el punto de conexión entre sistemas, señales y mundos. Su identidad visual y narrativa ya están definidas; esta ficha separa ese universo creativo de los datos reales del canal.</p><div class="comic-page-split"><section class="comic-panel"><div class="comic-panel-heading"><span>01</span><b>IDENTIDAD Y PROPÓSITO</b></div><h3>'+safe(hero.codename)+' · '+safe(hero.characterRole)+'</h3><p>'+safe(hero.log)+'</p><p>Tras un tiempo de pausa, Dave vuelve a las transmisiones para iniciar una nueva etapa. El rango institucional <strong>ESTUDIANTE</strong> representa esta reincorporación y el comienzo de su nuevo recorrido dentro de la Legión; no define su experiencia previa ni su valor como creador.</p><p><strong>HORARIO HABITUAL:</strong> '+safe(hero.schedule||'Sin horario fijo confirmado')+'.</p></section><section class="comic-panel"><div class="comic-panel-heading"><span>02</span><b>CAPACIDADES DEL PERSONAJE</b></div><h3>'+safe(hero.rank)+'</h3><p>'+safe(hero.powerSet)+'</p><p class="comic-panel-caption">Poderes y rango pertenecen al universo narrativo de Legión Multiversal; no son certificaciones ni indicadores de rendimiento.</p></section></div><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>03</span><b>ÁREAS OBSERVADAS EN DIRECTO</b></div><div class="comic-format-list"><span>Gaming</span><span>Acción y combate</span><span>Exploración</span><span>Supervivencia</span><span>Experiencias cooperativas</span></div><p class="comic-panel-caption">Áreas inferidas únicamente de los juegos que aparecen en la muestra de transmisiones; no sustituyen una descripción personal del canal.</p></section><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>04</span><b>SEÑAL DE TRANSMISIÓN</b></div><p>Canal individual de Twitch: <a href="'+safe(hero.twitch)+'" target="_blank" rel="noopener">twitch.tv/daved0608 ↗</a></p><p class="comic-panel-caption">Horario: sin frecuencia fija confirmada.</p></section>';
- const identityPage=page(1,'NEXUS: CONEXIONES ENTRE MUNDOS',identityBody,'EL PERSONAJE');
- const metrics=[
-  ['TRANSMISIONES',summary.streams,'2026 · acumulado informado'],
-  ['HORAS EMITIDAS',summary.hours_streamed+' h','2026 · acumulado informado'],
-  ['HORAS VISTAS',summary.hours_watched,'2026 · acumulado informado'],
-  ['PROMEDIO',summary.average_viewers,'espectadores promedio'],
-  ['PICO MÁXIMO',summary.peak_viewers,'máximo anual informado'],
-  ['SEGUIDORES GANADOS','+'+summary.followers_gained,'2026 · acumulado informado']
- ];
- const metricCards=metrics.map(v=>'<article class="comic-metric"><span>'+safe(v[0])+'</span><strong>'+safe(v[1])+'</strong><small>'+safe(v[2])+'</small></article>').join('');
- const statsBody='<p class="comic-page-lead">Resumen anual 2026 de SullyGnome, según los datos compartidos para este expediente. Es un acumulado del año y no una ventana de últimos 30 días.</p><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>01</span><b>INDICADORES DEL AÑO</b></div><p class="comic-panel-caption">SullyGnome · 1 ene — 3 nov 2026 · resumen anual facilitado por el creador.</p><div class="comic-metric-grid">'+metricCards+'</div></section><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>02</span><b>EVOLUCIÓN INTERANUAL</b></div><div class="stats-table-wrap"><table class="comic-games-table"><thead><tr><th>Indicador</th><th>Variación frente a 2025</th></tr></thead><tbody><tr><th>Horas vistas</th><td>+725,0%</td></tr><tr><th>Seguidores ganados</th><td>+400,0%</td></tr><tr><th>Pico de espectadores</th><td>+80,0%</td></tr><tr><th>Horas emitidas</th><td>+423,1%</td></tr><tr><th>Transmisiones</th><td>+350,0%</td></tr></tbody></table></div><p class="comic-panel-caption">Porcentajes copiados del comparativo anual publicado en SullyGnome. No se recalcularon a partir de las diez filas visibles.</p></section>';
- const statsPage=page(2,'UNA SEÑAL QUE SIGUE CRECIENDO',statsBody,'LA AUDIENCIA');
- const streamRows=streams.map(st=>'<tr><th>'+safe(statsDate(st.date))+' · '+safe(st.start_time||'—')+'</th><td>'+safe(statsDuration(st))+'</td><td>'+safe(st.hours_watched)+'</td><td>'+safe(st.average_viewers)+'</td><td>'+safe(st.peak_viewers)+'</td><td>'+safe(st.followers_gained)+'</td><td>'+safe(st.followers_per_hour)+'</td><td>'+safe((st.games||[]).join(' · '))+'</td></tr>').join('');
- const logBody='<p class="comic-page-lead">Diez transmisiones visibles dentro del historial anual compartido. La muestra no equivale al total de 45 directos del resumen 2026.</p><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>01</span><b>BITÁCORA DE TRANSMISIONES</b></div><div class="stats-table-wrap"><table class="comic-games-table"><thead><tr><th>Inicio</th><th>Duración</th><th>H. vistas</th><th>Media</th><th>Pico</th><th>Seguidores</th><th>Seg./h</th><th>Juegos registrados</th></tr></thead><tbody>'+streamRows+'</tbody></table></div><p class="comic-panel-caption">Se conservan los valores por fila tal como aparecen en la tabla aportada. Las columnas «Seguidores» y «Seg./h» son las etiquetas de la fuente; no se suman para reemplazar el resumen anual.</p></section><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>02</span><b>LECTURA DE LA MUESTRA</b></div><p>Las diez filas visibles reúnen 35 horas aproximadas de emisión. La tabla es una selección del historial; el resumen anual informa 68 horas emitidas y 45 transmisiones en total.</p><p class="comic-panel-caption">Los datos de la muestra y el resumen anual se mantienen separados para evitar que una selección parcial se presente como historial completo.</p></section>';
- const logPage=page(3,'CADA SESIÓN DEJA UNA HUELLA',logBody,'BITÁCORA');
- const gameRows=games.map(g=>'<tr><th>'+safe(g[0])+'</th><td>'+safe(g[1])+' de 10 registros</td></tr>').join('');
- const gamesBody='<p class="comic-page-lead">La bitácora muestra un repertorio variado: acción de héroes, combate, supervivencia, exploración y experiencias cooperativas.</p><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>01</span><b>UNIVERSOS REGISTRADOS</b></div><div class="stats-table-wrap"><table class="comic-games-table"><thead><tr><th>Juego / categoría</th><th>Filas donde aparece</th></tr></thead><tbody>'+gameRows+'</tbody></table></div><p class="comic-panel-caption">Conteo de apariciones en las diez transmisiones visibles, no ranking de popularidad ni distribución anual completa.</p></section><div class="comic-page-split"><section class="comic-panel"><div class="comic-panel-heading"><span>02</span><b>ACCIÓN Y COMBATE</b></div><p>Marvel Rivals, For Honor y Warhammer 40,000: Space Marine II.</p></section><section class="comic-panel"><div class="comic-panel-heading"><span>03</span><b>EXPLORACIÓN Y SUPERVIVENCIA</b></div><p>Backrooms: Escape Together, Monster Hunter: World, Dark Souls Remastered y Project Zomboid.</p></section></div><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>04</span><b>VARIEDAD EN EL REPERTORIO</b></div><p>Bombanana también aparece en una transmisión compartida. La selección permite presentar un canal que alterna experiencias y no se limita a una sola franquicia.</p></section>';
- const gamesPage=page(4,'UN NEXO ENTRE DISTINTOS UNIVERSOS',gamesBody,'LOS JUEGOS');
- const clipsBody='<p class="comic-page-lead">Dos momentos destacados aportados para el expediente. Cada portada abre el clip original en Twitch.</p><div class="comic-clips-grid">'+(clips.length?clips.map((c,i)=>'<article class="comic-panel comic-clip-card"><div class="comic-panel-heading"><span>0'+(i+1)+'</span><b>ARCHIVO AUDIOVISUAL</b></div><div class="comic-clip-preview">'+renderTwitchClipPreview(c.clip_id,c.title,c.url)+'</div><h3>'+safe(c.title||('Momento destacado 0'+(i+1)))+'</h3><a href="https://clips.twitch.tv/'+encodeURIComponent(c.clip_id||'')+'" target="_blank" rel="noopener">VER CLIP COMPLETO ↗</a></article>').join(''):'<p>Clips pendientes de incorporar.</p>')+'</div>';
- const clipsPage=page(5,'DOS MOMENTOS, DOS PORTALES',clipsBody,'CLIPS');
- const commercialBody='<p class="comic-page-lead">NEXUS puede presentarse a marcas desde una propuesta flexible de gaming, descubrimiento de títulos y experiencias compartidas. La ficha no registra patrocinios ni acuerdos comerciales confirmados para este canal.</p><div class="comic-page-split"><section class="comic-panel"><div class="comic-panel-heading"><span>01</span><b>FORMATOS POSIBLES</b></div><div class="comic-format-list"><span>Presentación y primeras impresiones de videojuegos</span><span>Integraciones naturales durante partidas</span><span>Retos y dinámicas con la comunidad</span><span>Clips y momentos audiovisuales</span><span>Experiencias cooperativas y de exploración</span></div></section><section class="comic-panel"><div class="comic-panel-heading"><span>02</span><b>VALOR DE LA PROPUESTA</b></div><p>Variedad de categorías registradas y una identidad visual reconocible dentro de Legión Multiversal. Las propuestas se pueden adaptar al juego, producto o dinámica que la marca quiera presentar.</p><p class="comic-panel-caption">Son formatos potenciales para conversar; no se presentan como campañas realizadas ni resultados garantizados.</p></section></div><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>03</span><b>CONTACTO Y CANAL</b></div><p><a href="'+safe(hero.twitch)+'" target="_blank" rel="noopener">TWITCH · DAVED0608 ↗</a></p><p class="comic-panel-caption">Contacto comercial directo pendiente de confirmar. No se publica un correo no proporcionado.</p></section>';
- const commercialPage=page(6,'EL PRÓXIMO MUNDO PUEDE SER UNA ALIANZA',commercialBody,'COLABORACIONES');
- return [cover,identityPage,statsPage,logPage,gamesPage,clipsPage,commercialPage];
-}
-
-
-function renderPatoOratorisComicPages(hero){
- const safe=escapeStatsHtml;
- const record=getCreatorRecord(hero);
- const videos=Array.isArray(record.youtube_videos)?record.youtube_videos:[];
- const embeds=Array.isArray(record.featured_embeds)?record.featured_embeds:[];
- const youtubeProfile=platformStatsData?.creators?.[platformStatsKey(hero)]?.platforms?.youtube||{};
- const youtubeMetrics=youtubeProfile.metrics||{};
- const youtubeVerified=youtubeProfile.status==='verified';
- const captureDate=platformStatsData?.updated_at?new Date(platformStatsData.updated_at).toLocaleString('es-AR',{dateStyle:'medium',timeStyle:'short'}):'fecha no disponible';
- const statsLead=youtubeVerified?'Métricas públicas acumuladas del canal, obtenidas mediante la API oficial de YouTube. La fecha indica la última sincronización registrada; no son métricas de Twitch ni espectadores en directo.':'Referencia histórica del canal compartida por el equipo. La fecha de captura no está disponible y los valores no deben interpretarse como actuales.';
- const statsSource=youtubeVerified?'Fuente: YouTube Data API v3 · última sincronización: '+captureDate+'.':'Fuente: información compartida por el equipo a partir de la página del canal. Fecha de captura no especificada.';
- const page=(n,title,body,foot)=>'<article class="comic-book-sheet comic-interior-page oratoris-page"><header class="comic-interior-header"><span>LEGIÓN MULTIVERSAL</span><b>CAPÍTULO 03</b><span>'+foot+'</span></header><div class="comic-page-title"><small>EXPEDIENTE ORATORIS · PÁGINA 0'+(n+1)+'</small><h2>'+title+'</h2></div>'+(hero.voice?'<aside class="hero-voice voice-oratoris"><span>VOZ DE ORATORIS</span><p>'+safe(hero.voice)+'</p></aside>':'')+body+'<footer class="comic-page-footer"><span>PATO — ORATORIS · ARCHIVO INDIVIDUAL</span><b>0'+(n+1)+' / 06</b></footer></article>';
- const cover='<article class="comic-book-sheet comic-cover-sheet oratoris-page"><header class="comic-cover-masthead"><b>LEGIÓN MULTIVERSAL</b><span>EXPEDIENTE INDIVIDUAL · N.º '+safe(hero.cardNumber||'039')+'</span><span>MEDIA KIT</span></header><div class="comic-cover-art-frame"><span class="comic-cover-burst">EXPEDIENTE<br>CLASIFICADO</span><img class="comic-cover-art" src="'+safe(hero.img)+'" alt="Carta oficial de PATO — ORATORIS"></div><div class="comic-cover-copy"><div class="comic-cover-titleline"><span>COLABORADOR</span><h2>PATO</h2><b>ORATORIS</b></div><p class="comic-cover-subtitle">EL ORADOR · COMUNICADOR DEL CONOCIMIENTO</p><section class="comic-panel comic-cover-bio"><div class="comic-panel-heading"><span>01</span><b>IDENTIDAD · CREADOR AUDIOVISUAL</b></div><p>'+safe(hero.bio)+'</p><p class="comic-panel-caption">YouTube · Educación · Programación · Divulgación</p></section><aside class="hero-voice voice-oratoris"><span>SU PRINCIPIO EN LA LEGIÓN</span><p>'+safe(hero.voice)+'</p></aside><footer class="comic-cover-footer"><span>YOUTUBE · @PATOTEEXPLICA</span><b>¡ABRIR EXPEDIENTE!</b></footer></div></article>';
- const identityBody='<p class="comic-page-lead">ORATORIS representa la capacidad de convertir ideas y conocimientos en herramientas que otras personas puedan comprender y aplicar. Su lugar en la Legión es el de colaborador: una voz educativa y audiovisual, distinta de los perfiles dedicados a transmitir en directo.</p><div class="comic-page-split"><section class="comic-panel"><div class="comic-panel-heading"><span>01</span><b>IDENTIDAD Y PROPÓSITO</b></div><h3>'+safe(hero.codename)+' · '+safe(hero.characterRole)+'</h3><p>'+safe(hero.log)+'</p><p class="comic-panel-caption">COLABORADOR · CREADOR DE CONTENIDO PARA YOUTUBE.</p></section><section class="comic-panel"><div class="comic-panel-heading"><span>02</span><b>CAPACIDADES DEL PERSONAJE</b></div><h3>'+safe(hero.rank)+'</h3><p>'+safe(hero.powerSet)+'</p><p class="comic-panel-caption">La carta y sus poderes pertenecen al universo narrativo de la Legión; no son títulos ni certificaciones profesionales.</p></section></div><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>03</span><b>ÁREAS DE CONOCIMIENTO</b></div><div class="comic-format-list">'+(hero.areas||[]).map(v=>'<span>'+safe(v)+'</span>').join('')+'</div><p class="comic-panel-caption">La cultura gamer se considera una posible línea futura y complementaria, no el eje actual del canal.</p></section><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>04</span><b>PLATAFORMAS DEL CREADOR</b></div><p><a href="'+safe(hero.youtube)+'" target="_blank" rel="noopener">YOUTUBE · PATOTEEXPLICA ↗</a></p><p><a href="'+safe(hero.instagram)+'" target="_blank" rel="noopener">INSTAGRAM · PATOTEEXPLICA ↗</a></p><p><a href="'+safe(hero.cafecito)+'" target="_blank" rel="noopener">CAFECITO · PATOSANTO ↗</a></p><p class="comic-panel-caption">No se registra canal de Twitch para este expediente; las métricas de streaming no aplican.</p></section>';
- const identityPage=page(1,'LA VOZ QUE CONVIERTE IDEAS EN HERRAMIENTAS',identityBody,'IDENTIDAD');
- const metricCards=[['SUSCRIPTORES',youtubeMetrics.subscribers,youtubeVerified?'acumulado del canal':'referencia compartida'],['VIDEOS',youtubeMetrics.videos_total,youtubeVerified?'publicaciones del canal':'publicaciones informadas'],['VISUALIZACIONES',youtubeMetrics.total_views,youtubeVerified?'acumulado del canal':'acumulado informado']];
- const metricHtml=metricCards.map(v=>'<article class="comic-metric"><span>'+safe(v[0])+'</span><strong>'+safe(v[1])+'</strong><small>'+safe(v[2])+'</small></article>').join('');
- const statsBody='<p class="comic-page-lead">'+safe(statsLead)+'</p><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>01</span><b>'+(youtubeVerified?'DATOS PÚBLICOS DEL CANAL':'REFERENCIA DEL CANAL')+'</b></div><div class="comic-metric-grid">'+metricHtml+'</div><p class="comic-panel-caption">'+safe(statsSource)+'</p><p><a href="'+safe(youtubeProfile.url||hero.youtube)+'" target="_blank" rel="noopener">CONSULTAR CANAL EN YOUTUBE ↗</a></p></section><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>02</span><b>LECTURA CORRECTA DE LOS DATOS</b></div><p>Estas cifras describen el tamaño acumulado del canal. No representan espectadores en directo, horas emitidas ni actividad de Twitch.</p><p class="comic-panel-caption">'+(youtubeVerified?'Los contadores pueden cambiar entre sincronizaciones. La captura no constituye una proyección de crecimiento ni una garantía de resultados.':'Las métricas se actualizarán cuando exista una nueva captura verificable.')+'</p></section>';
- const statsPage=page(2,'EL PUNTO DE PARTIDA DEL CANAL',statsBody,'ALCANCE');
- const videoRows=videos.map((v,i)=>'<tr><th>0'+(i+1)+'</th><td>'+safe(v.title)+'</td><td>'+safe(v.views)+'</td><td>'+safe(v.series||'—')+'</td></tr>').join('');
- const archiveBody='<p class="comic-page-lead">Las seis publicaciones compartidas muestran dos líneas concretas: una serie didáctica de iniciación a HTML y JavaScript y una pieza de divulgación sobre dopamina, motivación y adicción.</p><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>01</span><b>ARCHIVO DE PRODUCCIONES</b></div><div class="stats-table-wrap"><table class="comic-games-table"><thead><tr><th>N.º</th><th>Video</th><th>Vistas informadas</th><th>Serie</th></tr></thead><tbody>'+videoRows+'</tbody></table></div><p class="comic-panel-caption">Títulos, visualizaciones y orden transcritos del listado compartido por el equipo. La antigüedad indicada para las publicaciones es aproximada: hace un año.</p></section><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>02</span><b>DOS FORMAS DE ENSEÑAR</b></div><div class="comic-page-split"><div><h3>TECNOLOGÍA</h3><p>Una secuencia de cinco clases introductorias que avanza desde la primera página HTML hasta la integración de JavaScript.</p></div><div><h3>DIVULGACIÓN</h3><p>Una explicación dedicada a dopamina, motivación y adicción, ampliando el canal más allá de los tutoriales de programación.</p></div></div></section>';
- let archivePage=page(3,'LO QUE YA CONSTRUYÓ',archiveBody,'PRODUCCIONES');
- const embedHtml=embeds.map((v,i)=>'<article class="comic-panel comic-clip-card"><div class="comic-panel-heading"><span>0'+(i+1)+'</span><b>VIDEO COMPARTIDO</b></div><div class="comic-clip-preview"><iframe src="https://www.youtube.com/embed/'+encodeURIComponent(v.video_id)+'" title="Video de Pato — ORATORIS" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><a href="https://www.youtube.com/watch?v='+encodeURIComponent(v.video_id)+'" target="_blank" rel="noopener">ABRIR EN YOUTUBE ↗</a><p class="comic-panel-caption">Título: '+safe(v.title||'Pendiente de identificar')+'.</p></article>').join('');
-
- archivePage=archivePage.replace('</article>','<section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>02</span><b>VIDEOS DESTACADOS</b></div><div class="comic-clips-grid">'+(embedHtml||'<p>Videos destacados pendientes de incorporar.</p>')+'</div></section></article>');
- const futureBody='<p class="comic-page-lead">El proyecto no tiene actualmente una frecuencia de publicación definida. Pato comentó que posiblemente retome el canal durante 2027 con un enfoque renovado.</p><div class="comic-page-split"><section class="comic-panel"><div class="comic-panel-heading"><span>01</span><b>BASE EDITORIAL</b></div><div class="comic-format-list"><span>Educación y divulgación</span><span>Programación y herramientas digitales</span><span>Comportamiento, motivación y hábitos</span></div><p class="comic-panel-caption">Líneas que sí aparecen en las publicaciones ya compartidas.</p></section><section class="comic-panel"><div class="comic-panel-heading"><span>02</span><b>POSIBLE EXPANSIÓN</b></div><div class="comic-format-list"><span>Videojuegos y cultura gamer</span><span>Contenido vinculado al universo de la Legión</span></div><p class="comic-panel-caption">Ideas mencionadas como posibilidades futuras. No son una programación confirmada ni el fuerte actual del canal.</p></section></div><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>03</span><b>ESTADO DEL PROYECTO</b></div><p><strong>PRÓXIMA ETAPA:</strong> posible regreso en 2027.</p><p><strong>FRECUENCIA:</strong> sin calendario definido.</p><p><strong>ENFOQUE:</strong> por renovar junto con el creador.</p><p class="comic-panel-caption">El expediente podrá actualizarse cuando Pato confirme sus nuevos formatos, ritmo de publicación y prioridades editoriales.</p></section>';
- const futurePage=page(4,'UNA NUEVA ETAPA EN PREPARACIÓN',futureBody,'PROYECCIÓN');
- const commercialBody='<p class="comic-page-lead">La propuesta comercial de ORATORIS debe construirse alrededor de la comunicación de ideas, la educación y la creación de piezas audiovisuales. Los siguientes formatos son posibilidades para conversar, no servicios contratados ni campañas realizadas.</p><div class="comic-page-split"><section class="comic-panel"><div class="comic-panel-heading"><span>01</span><b>FORMATOS POTENCIALES</b></div><div class="comic-format-list"><span>Videos educativos o explicativos</span><span>Presentación de herramientas y plataformas digitales</span><span>Integraciones de producto dentro de contenidos pertinentes</span><span>Contenido divulgativo patrocinado, sujeto a criterio editorial</span><span>Colaboraciones audiovisuales con otros integrantes</span></div></section><section class="comic-panel"><div class="comic-panel-heading"><span>02</span><b>ENCAJE DE MARCA</b></div><p>Proyectos de tecnología, educación, software, herramientas digitales y divulgación podrían tener afinidad con las líneas ya exploradas por el canal.</p><p class="comic-panel-caption">La temática gamer podría abrir oportunidades adicionales en el futuro, una vez que esa línea exista y esté desarrollada.</p></section></div><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>03</span><b>CONTACTO Y PRESENCIA</b></div><p><a href="'+safe(hero.youtube)+'" target="_blank" rel="noopener">YOUTUBE · @PATOTEEXPLICA ↗</a></p><p><a href="'+safe(hero.instagram)+'" target="_blank" rel="noopener">INSTAGRAM · @PATOTEEXPLICA ↗</a></p><p><a href="'+safe(hero.cafecito)+'" target="_blank" rel="noopener">CAFECITO · PATOSANTO ↗</a></p><p class="comic-panel-caption">Contacto comercial directo y condiciones de colaboración pendientes de confirmar con Pato.</p></section>';
- const commercialPage=page(5,'CONOCIMIENTO QUE PUEDE CONECTAR CON MARCAS',commercialBody,'COLABORACIONES');
- return [cover,identityPage,statsPage,archivePage,futurePage,commercialPage];
-}
-
 function renderRosterComicPages(hero,index,channelStats,sullyChannel){
  const safe=v=>escapeStatsHtml(v||'');
  const identity=hero.codename||'IDENTIDAD EN ARCHIVO';
@@ -1748,99 +1573,6 @@ function renderRosterComicPages(hero,index,channelStats,sullyChannel){
  const commercial=page('03','EL UNIVERSO COMERCIAL',commercialBody,'COLABORACIONES');
  return [cover,stats,missions,commercial];
 }
-
-function renderRod3r1kComicPages(hero){
- const games=[
-  ['Fortnite',28,'28,9%',596,'26,5%',18,51],
-  ['Just Chatting',24,'25,1%',509,'22,6%',16,50],
-  ['Alien: Isolation',9,'10,1%',295,'13,1%',34,48],
-  ["Clive Barker's Hellraiser: Revival",8,'8,8%',257,'11,4%',24,66],
-  ['Rogue Company',8,'8,8%',185,'8,3%',19,48],
-  ['Luto',7,'7,2%',173,'7,7%',27,46],
-  ['Counter-Strike',3,'3,6%',99,'4,4%',26,41],
-  ['Among Us',2,'2,6%',18,'0,8%',7,11],
-  ['BarFender',2,'2,3%',50,'2,2%',19,37],
-  ['Dead by Daylight',2,'2,1%',48,'2,2%',24,33],
-  ['Marvel Rivals',0,'0,5%',17,'0,8%',34,39]
- ];
- const streams=[
-  ['05 nov 2026','3 h 49 min',72,19,52,0],
-  ['04 nov 2026','4 h 04 min',69,17,38,3],
-  ['03 nov 2026','3 h 18 min',69,21,46,2],
-  ['02 nov 2026','3 h 35 min',93,26,51,-1],
-  ['31 oct 2026','7 h 49 min',117,15,35,2],
-  ['29 oct 2026','3 h 35 min',50,14,25,1],
-  ['28 oct 2026','4 h 06 min',82,20,44,3],
-  ['27 oct 2026','3 h 21 min',56,17,44,4],
-  ['26 oct 2026','4 h 06 min',94,23,47,5],
-  ['24 oct 2026','5 h 05 min',142,28,55,3]
- ];
- const clips=[
-  ['NO VOY A DECIR NADA xd','SpicyPiliablePoultryCorgiDerp-flAxKL1oWuPkWDWA','Clip destacado de ROD3R1K'],
-  ['Ff se mueve la puerta','HilariousIronicSoybeanChocolateRain','Clip destacado de ROD3R1K'],
-  ['Nueva actualización de temporada · Rogue Company','CooperativePopularFlamingoM4xHeh-3bJjuJyiLiZOEEaC','Clip de Rogue Company']
- ];
- const esc=escapeStatsHtml;
- const cover='<article class="comic-book-sheet comic-cover-sheet"><header class="comic-cover-masthead"><b>LEGIÓN MULTIVERSAL</b><span>EXPEDIENTE INDIVIDUAL · N.º '+esc(hero.cardNumber||'008')+'</span><span>MEDIA KIT</span></header><div class="comic-cover-art-frame"><span class="comic-cover-burst">EL EXPEDIENTE<br>DEL FUERTE</span><img class="comic-cover-art" src="'+esc(hero.img)+'" alt="Carta oficial de ROD3R1K"></div><div class="comic-cover-copy"><div class="comic-cover-titleline"><span>PROTAGONISTA</span><h2>ROD3R1K</h2><b>008</b></div><p class="comic-cover-subtitle">EL FUERTE · INGENIERO SÓNICO</p><section class="comic-panel comic-cover-bio"><div class="comic-panel-heading"><span>01</span><b>IDENTIDAD SECRETA · BIOGRAFÍA DEL CREADOR</b></div><p>Bienvenidos al canal. Me llamo Roderik, mejor conocido como «ElKrakenaso». Encontrarás momentos divertidos y épicos. ¡Acompañame en las partidas y divertite!</p></section><aside class="hero-voice voice-rod3r1k"><span>SU LEMA EN LA LEGIÓN</span><p>«¡Que se escuche hasta el último rincón! Si vamos a jugar, que cada partida deje una historia.»</p></aside><footer class="comic-cover-footer"><span>GAMING · EVENTOS · COMUNIDAD</span><b>¡ABRIR EXPEDIENTE!</b></footer></div></article>';
- const identityPage='<article class="comic-book-sheet comic-interior-page"><header class="comic-interior-header"><span>LEGIÓN MULTIVERSAL</span><b>CAPÍTULO 01</b><span>EL PERSONAJE</span></header><div class="comic-page-title"><small>EXPEDIENTE ROD3R1K · PÁGINA 02</small><h2>EL FUERTE: UNA HISTORIA DE EQUIPO</h2></div><p class="comic-page-lead">Antes de las estadísticas y los clips está la persona detrás del personaje: Roderik, conocido como «ElKrakenaso», y una forma de jugar donde la energía, el espectáculo y el espíritu de equipo son parte de cada misión.</p><div class="comic-page-split"><section class="comic-panel"><div class="comic-panel-heading"><span>01</span><b>IDENTIDAD EN LA LEGIÓN</b></div><h3>EL FUERTE</h3><p>Fundador de las primeras misiones. Su presencia aporta intensidad, humor y empuje a las aventuras compartidas: convierte una partida en un acontecimiento y al equipo en parte de la historia.</p></section><section class="comic-panel"><div class="comic-panel-heading"><span>02</span><b>SELLO DEL PERSONAJE</b></div><h3>INGENIERO SÓNICO</h3><p>Una identidad narrativa construida alrededor de la energía, el espectáculo y la fuerza del grupo.</p><p class="comic-panel-caption">El nombre, el rol y las capacidades pertenecen al universo creativo de Legión Multiversal; no son credenciales ni indicadores de rendimiento.</p></section></div><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>03</span><b>SU LEMA EN LA LEGIÓN</b></div><blockquote>«¡Que se escuche hasta el último rincón! Si vamos a jugar, que cada partida deje una historia.»</blockquote></section><footer class="comic-page-footer"><span>EL PERSONAJE DETRÁS DE CADA MISIÓN</span><b>02 / 06</b></footer></article>';
- const totalHours=(2568/60).toFixed(1).replace('.',',')+' h';
- const stats='<article class="comic-book-sheet comic-interior-page"><header class="comic-interior-header"><span>LEGIÓN MULTIVERSAL</span><b>CAPÍTULO 02</b><span>LA COMUNIDAD</span></header><div class="comic-page-title"><small>EXPEDIENTE ROD3R1K · PÁGINA 03</small><h2>EL PODER DE LA AUDIENCIA</h2></div><p class="comic-page-lead">Actividad reciente registrada en las diez transmisiones compartidas, del 24 de octubre al 5 de noviembre de 2026. Los resultados describen esta muestra, no el historial completo del canal.</p><div class="comic-metric-grid"><article class="comic-metric"><span>HORAS EN DIRECTO</span><strong>'+totalHours+'</strong><small>10 transmisiones · suma de duraciones</small></article><article class="comic-metric"><span>HORAS VISTAS</span><strong>844</strong><small>Acumulado de la muestra</small></article><article class="comic-metric"><span>PICO DE ESPECTADORES</span><strong>55</strong><small>Máximo de estas 10 transmisiones</small></article><article class="comic-metric"><span>SEGUIDORES NETOS</span><strong>+22</strong><small>Suma reportada en la muestra</small></article><article class="comic-metric"><span>MEDIA PONDERADA</span><strong>19,8</strong><small>Estimación ponderada por duración de cada directo</small></article><article class="comic-metric"><span>TRANSMISIONES</span><strong>10</strong><small>24 oct – 5 nov 2026</small></article></div><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>02</span><b>ÚLTIMAS TRANSMISIONES</b></div><p class="comic-panel-caption">Valores por directo: horas vistas, espectadores promedio y pico, y seguidores ganados. El orden es cronológico inverso.</p><div class="stats-table-wrap"><table class="comic-games-table"><thead><tr><th>Fecha</th><th>Duración</th><th>Horas vistas</th><th>Media</th><th>Pico</th><th>Seguidores</th></tr></thead><tbody>'+streams.map(x=>'<tr><td>'+x[0]+'</td><td>'+x[1]+'</td><td>'+x[2]+'</td><td>'+x[3]+'</td><td>'+x[4]+'</td><td>'+(x[5]>0?'+':'')+x[5]+'</td></tr>').join('')+'</tbody></table></div></section><p class="comic-panel-caption">Fuente: tabla de transmisiones compartida para este expediente. El promedio ponderado se calcula a partir de la duración y los espectadores promedio de cada sesión; no equivale a un promedio histórico de Twitch.</p><footer class="comic-page-footer"><span>LA COMUNIDAD ES PARTE DE LA HISTORIA</span><b>03 / 06</b></footer></article>';
- const maxHours=Math.max(...games.map(g=>g[1]));
- const gameRows=games.map(g=>'<tr><td>'+g[0]+'</td><td>'+g[1]+' h <small>('+g[2]+')</small></td><td>'+g[3]+' h <small>('+g[4]+')</small></td><td>'+g[5]+'</td><td>'+g[6]+'</td></tr>').join('');
- const gamesPage='<article class="comic-book-sheet comic-interior-page"><header class="comic-interior-header"><span>LEGIÓN MULTIVERSAL</span><b>CAPÍTULO 03</b><span>LAS MISIONES</span></header><div class="comic-page-title"><small>EXPEDIENTE ROD3R1K · PÁGINA 04</small><h2>UN HÉROE, MUCHOS UNIVERSOS</h2></div><p class="comic-page-lead">De la acción competitiva a los juegos de terror y las charlas en directo: un recorrido variado por los mundos que forman parte del canal.</p><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>01</span><b>JUEGOS Y RENDIMIENTO</b></div><p class="comic-panel-caption">Horas de emisión y horas vistas con participación porcentual, espectadores promedio y pico. Se conserva el redondeo de la fuente.</p><div class="stats-table-wrap"><table class="comic-games-table"><thead><tr><th>Juego</th><th>Emisión</th><th>Horas vistas</th><th>Media</th><th>Pico</th></tr></thead><tbody>'+gameRows+'</tbody></table></div></section><div class="comic-page-split"><section class="comic-panel"><div class="comic-panel-heading"><span>02</span><b>MAYOR AUDIENCIA MEDIA</b></div>'+games.slice().sort((a,b)=>b[5]-a[5]).slice(0,5).map(g=>'<div class="comic-chart-row"><span>'+g[0]+'</span><div class="comic-chart-track"><i style="width:'+Math.round(g[5]/34*100)+'%"></i></div><b>'+g[5]+'</b></div>').join('')+'</section><section class="comic-panel"><div class="comic-panel-heading"><span>03</span><b>MAYOR PICO REGISTRADO</b></div>'+games.slice().sort((a,b)=>b[6]-a[6]).slice(0,5).map(g=>'<div class="comic-chart-row"><span>'+g[0]+'</span><div class="comic-chart-track"><i style="width:'+Math.round(g[6]/66*100)+'%"></i></div><b>'+g[6]+'</b></div>').join('')+'</section></div><p class="comic-panel-caption">Nota: el valor de 0 h para Marvel Rivals se conserva tal como aparece en la tabla original, aunque registra 0,5% del tiempo de emisión; puede deberse al redondeo.</p><footer class="comic-page-footer"><span>CADA DIRECTO, UNA NUEVA MISIÓN</span><b>04 / 06</b></footer></article>';
- const clipCards=clips.map((c,i)=>'<article class="comic-panel comic-clip-card"><div class="comic-panel-heading"><span>0'+(i+1)+'</span><b>ESCENA DESTACADA</b></div><div class="comic-clip-preview">'+renderTwitchClipPreview(c[1],c[0])+'</div><h3>'+c[0]+'</h3><p>'+c[2]+'</p><a href="https://clips.twitch.tv/'+encodeURIComponent(c[1])+'" target="_blank" rel="noopener">VER CLIP COMPLETO ↗</a></article>').join('');
- const clipsPage='<article class="comic-book-sheet comic-interior-page"><header class="comic-interior-header"><span>LEGIÓN MULTIVERSAL</span><b>CAPÍTULO 04</b><span>EL ESPECTÁCULO</span></header><div class="comic-page-title"><small>EXPEDIENTE ROD3R1K · PÁGINA 05</small><h2>MOMENTOS QUE HACEN HISTORIA</h2></div><p class="comic-page-lead">Una selección de clips para conocer el humor, la energía y los momentos épicos que aparecen en sus partidas.</p><div class="comic-clips-grid">'+clipCards+'</div><footer class="comic-page-footer"><span>CONTINUARÁ…</span><b>05 / 06</b></footer></article>';
- const commercialPage='<article class="comic-book-sheet comic-interior-page"><header class="comic-interior-header"><span>LEGIÓN MULTIVERSAL</span><b>CAPÍTULO 05</b><span>COLABORACIONES</span></header><div class="comic-page-title"><small>EXPEDIENTE ROD3R1K · PÁGINA 06</small><h2>UNA ALIANZA CON FUERZA PROPIA</h2></div><p class="comic-page-lead">Una propuesta comercial construida desde su identidad: gaming, entretenimiento, energía en directo y experiencias compartidas con la comunidad.</p><div class="comic-page-split"><section class="comic-panel"><div class="comic-panel-heading"><span>01</span><b>FORMATOS DE COLABORACIÓN</b></div><div class="comic-format-list"><span>Presentación y prueba de videojuegos</span><span>Integraciones naturales durante directos</span><span>Retos y dinámicas con la comunidad</span><span>Contenido de gaming y entretenimiento</span><span>Clips y piezas audiovisuales</span></div></section><section class="comic-panel"><div class="comic-panel-heading"><span>02</span><b>VALOR QUE APORTA</b></div><p>Una presencia expresiva y enérgica, con afinidad por experiencias competitivas, terror, acción y juegos compartidos. La propuesta permite integrar marcas de manera orgánica en partidas y contenidos.</p><p class="comic-panel-caption">Las propuestas son posibilidades a conversar; no representan campañas ni alianzas confirmadas.</p></section></div><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>03</span><b>SU LUGAR EN LA LEGIÓN</b></div><p>Integrante de la primera etapa junto a Demian. Su recorrido está ligado a las partidas fundacionales y al impulso de encuentros y experiencias compartidas.</p></section><section class="comic-final-cta"><span>PRÓXIMO NÚMERO · NUEVAS COLABORACIONES</span><h3>HAGAMOS QUE TU MARCA FORME PARTE DE LA HISTORIA.</h3><p>Contacto y propuestas comerciales:</p><a href="mailto:losmoriartys@gmail.com">losmoriartys@gmail.com</a></section><footer class="comic-page-footer"><span>EL SIGUIENTE CAPÍTULO PUEDE SER CON TU MARCA</span><b>06 / 06</b></footer></article>';
- return [cover,identityPage,stats,gamesPage,clipsPage,commercialPage];
-}
-
-function renderMoriartysComicPages(hero) {
- const safe = escapeStatsHtml;
- const channel = findChannelStats(hero);
- const windowStats = channel?.window || {};
- const snapshots = Array.isArray(channel?.snapshots) ? channel.snapshots : [];
- const games = Array.isArray(windowStats.game_breakdown) ? windowStats.game_breakdown : [];
- const days = Array.isArray(windowStats.daily_activity) ? windowStats.daily_activity : [];
- const record = getCreatorRecord(hero);
- const clips = Array.isArray(record.highlights) ? record.highlights : [];
- const collaborations = Array.isArray(record.collaborations) ? record.collaborations : [];
- const formats = Array.isArray(hero.mediaProfile?.formats) ? hero.mediaProfile.formats : (hero.areas || []);
- const updated = new Date(instituteStatsData?.updated_at || channel?.updated_at || '');
- const ageMinutes = (Date.now() - updated.getTime()) / 60000;
- const interval = Number(instituteStatsData?.sampling_interval_minutes) || 55;
- const fresh = Number.isFinite(ageMinutes) && ageMinutes >= -5 && ageMinutes <= Math.max(interval * 2.5, 120);
- const isLive = Boolean(fresh && channel?.live);
- const updatedLabel = Number.isFinite(updated.getTime()) ? updated.toLocaleString('es-AR') : 'fecha no disponible';
- const firstSample = snapshots[0]?.sampled_at ? new Date(snapshots[0].sampled_at) : null;
- const lastSample = snapshots.length && snapshots[snapshots.length - 1]?.sampled_at ? new Date(snapshots[snapshots.length - 1].sampled_at) : null;
- const period = firstSample && lastSample ? firstSample.toLocaleDateString('es-AR') + ' — ' + lastSample.toLocaleDateString('es-AR') : 'Período todavía sin muestras suficientes';
- const displayName = hero.display_name || 'LOS MORIARTYS';
- const missing = 'SIN DATOS VERIFICADOS';
- const metricValue = value => value === null || value === undefined ? missing : statsNumber(value);
- const metrics = [
-  ['MUESTRAS REGISTRADAS', metricValue(windowStats.samples_total), 'ventana configurada de hasta 30 días'],
-  ['MUESTRAS EN DIRECTO', metricValue(windowStats.live_samples), 'capturas realizadas durante una transmisión'],
-  ['DIRECTOS DETECTADOS', metricValue(windowStats.streams_observed), 'sesiones vistas por el colector'],
-  ['PROMEDIO OBSERVADO', metricValue(windowStats.average_viewers_sampled), 'promedio de espectadores en las muestras live'],
-  ['PICO CAPTURADO', metricValue(windowStats.peak_viewers_sampled), 'máximo registrado en una muestra'],
-  ['HORAS EN DIRECTO OBSERVADAS', windowStats.observed_live_hours === null || windowStats.observed_live_hours === undefined ? missing : statsNumber(windowStats.observed_live_hours) + ' h', 'tiempo entre muestras consecutivas del mismo directo']
- ];
- const cover = '<article class="comic-book-sheet comic-cover-sheet"><header class="comic-cover-masthead"><b>LEGIÓN MULTIVERSAL</b><span>PROYECTO COMPARTIDO · N.º ' + safe(hero.cardNumber || '047') + '</span><span>MEDIA KIT</span></header><div class="comic-cover-art-frame"><span class="comic-cover-burst">EXPEDIENTE<br>DEL CANAL</span><img class="comic-cover-art" src="' + safe(hero.img || hero.portrait) + '" alt="Ilustración del expediente de ' + safe(displayName) + '"></div><div class="comic-cover-copy"><div class="comic-cover-titleline"><span>PROYECTO COMPARTIDO</span><h2>' + safe(displayName) + '</h2><b>' + safe(hero.cardNumber || '047') + '</b></div><p class="comic-cover-subtitle">DEMIAN + ARI · DOS IDENTIDADES, UN CANAL COMPARTIDO</p><section class="comic-panel comic-cover-bio"><div class="comic-panel-heading"><span>01</span><b>EL PROYECTO</b></div><p>' + safe(hero.bio) + '</p><p class="comic-panel-caption">' + safe(hero.mediaProfile?.project || 'Canal compartido de Demian y Ari.') + '</p></section>'+renderEpicCreatorProfileBadge(hero)+'<footer class="comic-cover-footer"><span>GAMING · HUMOR · CULTURA POP · COOPERATIVO</span><b>UNA HISTORIA COMPARTIDA</b></footer></div></article>';
- const metricCards = metrics.map((item,index) => '<article class="comic-metric comic-metric-v' + (index + 1) + '"><span>' + item[0] + '</span><strong>' + safe(item[1]) + '</strong><small>' + item[2] + '</small></article>').join('');
- const liveSummary = isLive
-  ? '<span class="stats-status verified">● EN VIVO</span><strong>' + safe(channel.current_game || 'Categoría no informada') + '</strong><span>' + (channel.current_viewers === null || channel.current_viewers === undefined ? 'Espectadores no disponibles' : statsNumber(channel.current_viewers,0) + ' espectadores en la última captura') + '</span>'
-  : '<span class="stats-status pending">' + (channel?.live && !fresh ? 'CAPTURA DEMORADA' : 'SIN TRANSMISIÓN EN LA ÚLTIMA CAPTURA') + '</span><span>Última consulta del colector: ' + safe(updatedLabel) + '</span>';
- const metricsPage = '<article class="comic-book-sheet comic-interior-page"><header class="comic-interior-header"><span>LEGIÓN MULTIVERSAL</span><b>CAPÍTULO 01</b><span>LA COMUNIDAD</span></header><div class="comic-page-title"><small>EXPEDIENTE ' + safe(displayName) + ' · PÁGINA 02</small><h2>EL PODER DE LA COMUNIDAD</h2></div><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>01</span><b>ACTIVIDAD DEL CANAL COMPARTIDO</b></div><p class="comic-panel-caption">Fuente: Twitch Helix mediante muestreo propio · actualización ' + safe(updatedLabel) + ' · muestras visibles: ' + safe(period) + '. El canal pertenece a Demian y Ari en conjunto; no son estadísticas personales individuales.</p><div class="comic-live-summary">' + liveSummary + '</div><div class="comic-metric-grid">' + metricCards + '</div><p class="comic-panel-caption">Promedio y pico calculados sobre espectadores capturados durante muestras en directo. No son CCV oficial, usuarios únicos ni analíticas privadas del Creator Dashboard. Seguidores, ingresos y datos demográficos: ' + missing.toLowerCase() + '.</p></section><div class="comic-page-split"><section class="comic-panel"><div class="comic-panel-heading"><span>02</span><b>COBERTURA Y METODOLOGÍA</b></div><h3>' + safe(windowStats.samples_total ?? missing) + ' MUESTRAS</h3><p>El colector busca una muestra aproximadamente cada ' + safe(interval) + ' minutos. La ventana conserva hasta 30 días de registros; no reconstruye directos que ocurrieron antes de iniciar el muestreo ni sesiones entre capturas.</p><p class="comic-panel-caption">Horas vistas estimadas: ' + (windowStats.estimated_hours_watched === null || windowStats.estimated_hours_watched === undefined ? missing : statsNumber(windowStats.estimated_hours_watched) + ' h') + '. Estimación calculada únicamente entre dos muestras consecutivas del mismo directo con intervalo admisible; no equivale a horas vistas oficiales.</p></section><section class="comic-panel"><div class="comic-panel-heading"><span>03</span><b>AUDIENCIA GEOGRÁFICA</b></div><h3>' + missing + '</h3><p>No se dispone de una fuente de analítica demográfica autorizada y verificable para publicar distribución por países o edades. No se infiere la audiencia a partir del país de los creadores.</p></section></div><footer class="comic-page-footer"><span>LA COMUNIDAD ES PARTE DE LA HISTORIA</span><b>02 / 04</b></footer></article>';
- const gameBars = renderStatsBars('JUEGOS / CATEGORÍAS POR MUESTRAS EN DIRECTO', games, game => game.name, game => game.live_samples, 'Muestras observadas · no son horas jugadas', 10);
- const gameRows = games.length ? games.map(game => '<tr><th>' + safe(game.name) + '</th><td>' + safe(game.live_samples) + '</td><td>' + safe(game.streams_observed) + '</td><td>' + safe(metricValue(game.average_viewers_sampled)) + '</td><td>' + safe(metricValue(game.peak_viewers_sampled)) + '</td></tr>').join('') : '<tr><td colspan="5">' + missing + '</td></tr>';
- const dailyRows = days.slice(-7).map(day => '<tr><th>' + safe(day.date) + '</th><td>' + safe(day.streams_observed) + '</td><td>' + safe(day.live_samples) + '</td><td>' + safe(metricValue(day.peak_viewers_sampled)) + '</td></tr>').join('');
- const gamesPage = '<article class="comic-book-sheet comic-interior-page"><header class="comic-interior-header"><span>LEGIÓN MULTIVERSAL</span><b>CAPÍTULO 02</b><span>LAS MISIONES</span></header><div class="comic-page-title"><small>EXPEDIENTE ' + safe(displayName) + ' · PÁGINA 03</small><h2>UN CANAL, MUCHOS UNIVERSOS</h2></div><p class="comic-page-lead">Las categorías se ordenan por cantidad de muestras observadas mientras el canal estaba en directo. Esto permite describir señales de actividad, pero no medir horas jugadas ni establecer por sí solo el rendimiento comercial de cada juego.</p>' + (gameBars || '<section class="comic-panel"><h3>' + missing + '</h3><p>Todavía no hay suficientes muestras en directo para elaborar un desglose.</p></section>') + '<section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>02</span><b>REGISTRO DE CATEGORÍAS</b></div><div class="stats-table-wrap"><table class="comic-games-table"><thead><tr><th>Juego / categoría</th><th>Muestras</th><th>Directos detectados</th><th>Promedio muestreado</th><th>Pico capturado</th></tr></thead><tbody>' + gameRows + '</tbody></table></div></section><section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>03</span><b>ACTIVIDAD POR DÍA · ÚLTIMOS 7 DÍAS CON REGISTRO</b></div>' + (dailyRows ? '<div class="stats-table-wrap"><table class="comic-games-table"><thead><tr><th>Fecha UTC</th><th>Directos detectados</th><th>Muestras live</th><th>Pico capturado</th></tr></thead><tbody>' + dailyRows + '</tbody></table></div>' : '<p>' + missing + '</p>') + '</section><footer class="comic-page-footer"><span>CADA DIRECTO, UNA NUEVA MISIÓN</span><b>03 / 04</b></footer></article>';
- const clipsPanel = clips.length ? clips.map((clip,index) => '<article class="comic-panel comic-clip-card"><div class="comic-panel-heading"><span>0' + (index + 1) + '</span><b>ESCENA DESTACADA</b></div><div class="comic-clip-preview">' + renderTwitchClipPreview(clip.clip_id,clip.title,clip.url) + '</div><h3>' + safe(clip.title || ('Momento destacado ' + (index + 1))) + '</h3><p>' + safe(clip.description || clip.source || 'Clip registrado en el expediente del canal compartido.') + '</p><a href="' + safe(clip.url || ('https://clips.twitch.tv/' + encodeURIComponent(clip.clip_id || ''))) + '" target="_blank" rel="noopener noreferrer">VER CLIP COMPLETO ↗</a></article>').join('') : '<p>' + missing + ': todavía no hay clips registrados para este expediente.</p>';
- const partnerList = collaborations.length ? '<ul class="profile-detail-list">' + collaborations.map(item => '<li><b>' + safe(item.title) + '</b> ' + safe(item.description || '') + '</li>').join('') + '</ul>' : '<p>No hay colaboraciones confirmadas registradas en el archivo de este canal.</p>';
- const clipsPage = '<article class="comic-book-sheet comic-interior-page"><header class="comic-interior-header"><span>LEGIÓN MULTIVERSAL</span><b>CAPÍTULO 03</b><span>EL ESPECTÁCULO</span></header><div class="comic-page-title"><small>EXPEDIENTE ' + safe(displayName) + ' · PÁGINA 04</small><h2>ASÍ SE VIVE EL CANAL</h2></div><p class="comic-page-lead">Los clips documentados son momentos seleccionados para mostrar la personalidad y el contenido del proyecto compartido. No se incorporan títulos, visualizaciones ni resultados que no estén registrados.</p><div class="comic-clips-grid">' + clipsPanel + '</div><div class="comic-page-split"><section class="comic-panel"><div class="comic-panel-heading"><span>04</span><b>FORMATOS PARA MARCAS</b></div><div class="comic-format-list">' + formats.map(item => '<span>' + safe(item) + '</span>').join('') + '</div><p class="comic-panel-caption">Formatos potenciales, sujetos a conversación y disponibilidad; no implican campañas contratadas.</p></section><section class="comic-panel comic-partner-panel"><div class="comic-panel-heading"><span>05</span><b>ALIANZAS Y CONEXIONES</b></div>' + partnerList + '</section></div><section class="comic-final-cta"><span>¿PREPARADOS PARA EL PRÓXIMO NÚMERO?</span><h3>HAGAMOS QUE TU MARCA FORME PARTE DE LA HISTORIA.</h3><p>Presentaciones de producto, propuestas comerciales y colaboraciones:</p><a href="mailto:losmoriartys@gmail.com">losmoriartys@gmail.com</a></section><footer class="comic-page-footer"><span>CONTINUARÁ…</span><b>04 / 04</b></footer></article>';
- return [cover,metricsPage,gamesPage,clipsPage];
-}
-
 
 function normalizeRosterDossierPages(pages, hero) {
     const profileKey = escapeStatsHtml(hero.id || hero.slug || 'creator');
@@ -2027,7 +1759,8 @@ function printHeroDossier(){
             tabs[next]?.click();
         });
         function switchModalTab(tabIndex, silent = false) {
-            const isComic=document.querySelector('.modal-content')?.classList.contains('comic-mode');
+            const modalContent = document.querySelector('.modal-content');
+            const isComic = modalContent?.classList.contains('comic-mode');
             const maxPage=isComic?(window.currentComicTotal||4):3;
             const previousIndex=window.currentModalPage??0;
             tabIndex=Math.max(0,Math.min(maxPage-1,Number(tabIndex)||0));
@@ -2042,6 +1775,7 @@ function printHeroDossier(){
                 }
             }
             window.currentModalPage=tabIndex;
+            if (modalContent) modalContent.scrollTop = 0;
             if(!silent&&window.currentModalCreatorKey){
                 try { localStorage.setItem('legion-roster-modal-page:' + window.currentModalCreatorKey, String(tabIndex)); } catch (error) { /* sin persistencia */ }
             }
@@ -2260,9 +1994,9 @@ function printHeroDossier(){
             return Promise.allSettled(jobs);
         }
 
-        function switchChapter(chapterNum) {
-            const panel=document.getElementById(`chapter-${chapterNum}`);
-            if(!panel)return;
+        function switchChapter(chapterNum, options = {}) {
+            const panel = document.getElementById('chapter-' + chapterNum);
+            if (!panel) return;
             loadChapterResources(Number(chapterNum));
             if (Number(chapterNum) !== 2 && window.currentHeroProfileIndex !== null && window.currentHeroProfileIndex !== undefined) {
                 const profilePage = document.getElementById('hero-profile-page');
@@ -2272,60 +2006,60 @@ function printHeroDossier(){
                 window.lastHeroProfileTrigger = null;
                 window.currentHeroProfileIndex = null;
             }
-            if (Number(chapterNum) !== 2 && location.hash.startsWith('#roster/')) {
-                history.replaceState(null, '', '#chapter-' + chapterNum);
-            }
-            const current=document.querySelector('.chapter-panel.active');
-            if(current===panel)return;
-            const transition=document.getElementById('chapter-transition');
-            const chapterName=(document.querySelector(`.nav-btn[data-chapter="${chapterNum}"]`)||{}).textContent||panel.querySelector("h2")?.textContent||"NUEVO EXPEDIENTE";
-            const readableChapterName=chapterName.replace(/\s+/g,' ').trim();
-            document.title=Number(chapterNum)===0?'LEGIÓN MULTIVERSAL | Diferentes mundos. Una misma Legión.':`${readableChapterName} | LEGIÓN MULTIVERSAL`;
-            const announcement=document.getElementById('chapter-announcement');
-            if(announcement)announcement.textContent=`Sección ${readableChapterName} abierta.`;
-            if(transition){
-                transition.setAttribute('data-title',chapterName.trim());
-                transition.classList.remove('play');
-                if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-                    void transition.offsetWidth;
-                    transition.classList.add('play');
+            if (!options.skipHistory) {
+                const targetHash = Number(chapterNum) === 0 ? '#' : (Number(chapterNum) === 2 ? '#roster' : '#chapter-' + chapterNum);
+                if (location.hash !== targetHash) {
+                    try { history.pushState({ lmChapter: Number(chapterNum) }, '', targetHash); } catch (error) { /* historial restringido */ }
                 }
             }
+            const current = document.querySelector('.chapter-panel.active');
+            if (current === panel) return;
+            const transition = document.getElementById('chapter-transition');
+            const chapterName = (document.querySelector('.nav-btn[data-chapter="' + chapterNum + '"]') || {}).textContent || panel.querySelector('h2')?.textContent || 'NUEVO EXPEDIENTE';
+            const readableChapterName = chapterName.replace(/\\s+/g, ' ').trim();
+            document.title = Number(chapterNum) === 0 ? 'LEGIÓN MULTIVERSAL | Diferentes mundos. Una misma Legión.' : readableChapterName + ' | LEGIÓN MULTIVERSAL';
+            const announcement = document.getElementById('chapter-announcement');
+            if (announcement) announcement.textContent = 'Sección ' + readableChapterName + ' abierta.';
+            if (transition) {
+                transition.setAttribute('data-title', chapterName.trim());
+                transition.classList.remove('play');
+                if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) { void transition.offsetWidth; transition.classList.add('play'); }
+            }
             document.querySelectorAll('.chapter-panel').forEach(p => p.classList.remove('active'));
-            document.querySelectorAll('.nav-btn[data-chapter]').forEach(b => {
-                const isCurrent = Number(b.dataset.chapter) === Number(chapterNum);
-                b.classList.toggle('active', isCurrent);
-                if (isCurrent) b.setAttribute('aria-current', 'page');
-                else b.removeAttribute('aria-current');
+            document.querySelectorAll('.nav-btn[data-chapter]').forEach(button => {
+                const isCurrent = Number(button.dataset.chapter) === Number(chapterNum);
+                button.classList.toggle('active', isCurrent);
+                if (isCurrent) button.setAttribute('aria-current', 'page');
+                else button.removeAttribute('aria-current');
             });
             panel.classList.add('active');
             recordLegionProgress('chapter', String(chapterNum));
             renderChapterPager(chapterNum);
             playChapterCue();
-            window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth' });
+            window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
         }
-
         const rosterContainer = document.getElementById('roster-container');
-
-        window.onload = function() {
-        const initialChapter = document.querySelector('.chapter-panel.active');
-        const initialNumber = initialChapter ? Number(initialChapter.id.replace('chapter-','')) : 0;
-        if (initialChapter) renderChapterPager(initialNumber);
-
-        // Carga inicial mínima: estado de transmisiones y progreso de misiones.
-        loadChapterResources(initialNumber);
-        loadResourceOnce('community-playbook', loadCommunityPlaybook);
-        if (location.hash.startsWith('#roster/') || location.hash.startsWith('#expediente-')) loadChapterResources(2);
-
-        if (initialChapter) recordLegionProgress('chapter', String(initialNumber));
-        window.setInterval(() => {
-            if (document.querySelector('#chapter-0.active, #chapter-3.active, #chapter-10.active')) loadInstituteStats();
-        }, 15 * 60 * 1000);
-        // El resto de las fuentes se consulta al entrar en Estadísticas o Roster.
-        window.setInterval(() => {
-            if (document.getElementById('chapter-3')?.classList.contains('active') ||
-                document.getElementById('chapter-2')?.classList.contains('active')) {
-                loadPlatformStatsData();
+        function initializeLegionApp() {
+            const hash = location.hash || '';
+            if (hash.startsWith('#chapter-')) {
+                const num = Number(hash.slice('#chapter-'.length));
+                if (Number.isFinite(num) && document.getElementById('chapter-' + num)) switchChapter(num, { skipHistory: true });
+            } else if (hash === '#roster' || hash.startsWith('#roster?') || hash.startsWith('#roster/') || hash.startsWith('#expediente-')) {
+                switchChapter(2, { skipHistory: true });
             }
-        }, 15 * 60 * 1000);
-        };
+            const initialChapter = document.querySelector('.chapter-panel.active');
+            const initialNumber = initialChapter ? Number(initialChapter.id.replace('chapter-', '')) : 0;
+            if (initialChapter) renderChapterPager(initialNumber);
+            loadChapterResources(initialNumber);
+            loadResourceOnce('community-playbook', loadCommunityPlaybook);
+            if (hash.startsWith('#roster') || hash.startsWith('#expediente-')) loadChapterResources(2);
+            if (initialChapter) recordLegionProgress('chapter', String(initialNumber));
+            window.setInterval(() => {
+                if (document.querySelector('#chapter-0.active, #chapter-2.active, #chapter-3.active, #chapter-10.active')) loadInstituteStats();
+            }, 60 * 1000);
+            window.setInterval(() => {
+                if (document.getElementById('chapter-3')?.classList.contains('active') || document.getElementById('chapter-2')?.classList.contains('active')) loadPlatformStatsData();
+            }, 15 * 60 * 1000);
+        }
+        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initializeLegionApp, { once: true });
+        else initializeLegionApp();
