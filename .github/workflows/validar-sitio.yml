@@ -88,6 +88,7 @@ jobs:
               assert "legion_logo_final_hybrid.webp" in content, f"Falta el maestro WebP en {page}."
               assert "legion_logo_final_hybrid-512.webp" in content, f"Falta el derivado responsive en {page}."
               assert "srcset=" in content, f"Falta srcset en {page}."
+              assert 'width="512" height="512"' in content, f"Las dimensiones intrínsecas no coinciden en {page}."
               assert "legion_logo_final_hybrid.png" not in content, f"Quedó referencia PNG en {page}."
           print(f"OK: maestro {output.stat().st_size:,} bytes; responsive {responsive.stat().st_size:,} bytes; PNG {source.stat().st_size:,} bytes.")
           print("OK: 1600x1600 + 512x512, canales alfa y srcset verificados.")
