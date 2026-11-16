@@ -1608,7 +1608,9 @@ function renderRosterComicPages(hero,index,channelStats,sullyChannel){
  const profile=hero.mediaProfile||{};
  const formats=profile.formats||areas;
  const opportunities=profile.opportunities||[];
- const commercialBody='<div class="comic-page-split"><section class="comic-panel"><div class="comic-panel-heading"><span>01</span><b>CONTENIDO Y FORMATOS</b></div><p>'+safe(profile.editorial||'La propuesta editorial se construye a partir de las áreas y contenidos públicos del creador.')+'</p><div class="comic-format-list">'+(formats.length?formats.map(v=>'<span>'+safe(v)+'</span>').join(''):'<span>Formatos por confirmar</span>')+'</div></section><section class="comic-panel"><div class="comic-panel-heading"><span>02</span><b>OPORTUNIDADES DE COLABORACIÓN</b></div>'+(opportunities.length?'<ul class="profile-detail-list">'+opportunities.map(v=>'<li>'+safe(v)+'</li>').join('')+'</ul>':'<p>Se pueden evaluar presentaciones de producto, pruebas de videojuegos, integraciones y acciones con comunidad, siempre sujetas a conversación y aprobación del creador.</p>')+'<p class="comic-panel-caption">'+safe(profile.disclaimer||'Propuestas potenciales; no implican campañas contratadas ni alianzas vigentes.')+'</p></section></div><section class="comic-final-cta"><span>PRÓXIMO NÚMERO · NUEVAS COLABORACIONES</span><h3>HAGAMOS QUE TU MARCA FORME PARTE DE LA HISTORIA.</h3><p>Contacto y propuestas comerciales:</p>'+(profile.contact?'<a href="mailto:'+safe(profile.contact)+'">'+safe(profile.contact)+'</a>':'<p>Canal de contacto pendiente de confirmar con el creador.</p>')+'</section>';
+ const activationRows=(opportunities.length?opportunities:['Presentación de contenido y producto pertinente']).map((item,i)=>'<tr><td>'+safe(formats.length?formats[i%formats.length]:'Territorio por confirmar')+'</td><td>'+safe(item)+'</td><td>Idea a evaluar con el creador</td></tr>').join('');
+ const activationTable='<section class="comic-panel comic-panel-wide"><div class="comic-panel-heading"><span>00</span><b>MATRIZ DE ENCAJE COMERCIAL</b></div><p class="comic-panel-caption">Una lectura práctica de cómo podría conectarse cada territorio con una activación. Son ideas para evaluar, no entregables comprometidos ni campañas realizadas.</p><div class="stats-table-wrap"><table class="comic-games-table"><thead><tr><th>TERRITORIO</th><th>FORMATO / ACTIVACIÓN POSIBLE</th><th>ESTADO</th></tr></thead><tbody>'+activationRows+'</tbody></table></div></section>';
+ const commercialBody=activationTable+'<div class="comic-page-split"><section class="comic-panel"><div class="comic-panel-heading"><span>01</span><b>CONTENIDO Y FORMATOS</b></div><p>'+safe(profile.editorial||'La propuesta editorial se construye a partir de las áreas y contenidos públicos del creador.')+'</p><div class="comic-format-list">'+(formats.length?formats.map(v=>'<span>'+safe(v)+'</span>').join(''):'<span>Formatos por confirmar</span>')+'</div></section><section class="comic-panel"><div class="comic-panel-heading"><span>02</span><b>OPORTUNIDADES DE COLABORACIÓN</b></div>'+(opportunities.length?'<ul class="profile-detail-list">'+opportunities.map(v=>'<li>'+safe(v)+'</li>').join('')+'</ul>':'<p>Se pueden evaluar presentaciones de producto, pruebas de videojuegos, integraciones y acciones con comunidad, siempre sujetas a conversación y aprobación del creador.</p>')+'<p class="comic-panel-caption">'+safe(profile.disclaimer||'Propuestas potenciales; no implican campañas contratadas ni alianzas vigentes.')+'</p></section></div><section class="comic-final-cta"><span>PRÓXIMO NÚMERO · NUEVAS COLABORACIONES</span><h3>HAGAMOS QUE TU MARCA FORME PARTE DE LA HISTORIA.</h3><p>Contacto y propuestas comerciales:</p>'+(profile.contact?'<a href="mailto:'+safe(profile.contact)+'">'+safe(profile.contact)+'</a>':'<p>Canal de contacto pendiente de confirmar con el creador.</p>')+'</section>';
  const commercial=page('03','EL UNIVERSO COMERCIAL',commercialBody,'COLABORACIONES');
  return [cover,stats,missions,commercial];
 }
@@ -1731,27 +1733,11 @@ function openHeroModal(index) {
     document.getElementById('modal-comic-navigation').hidden=true;
     modalContent.classList.add('comic-mode');
     let pages;
-    if(isMoriartys){
-        pages=renderMoriartysComicPages(hero);
-    }else if(isLady){
-        pages=renderLadyMoriartyComicPages(hero,findSullyChannel(hero));
-    }else if(hero.name==='ROD3R1K'){
-        pages=renderRod3r1kComicPages(hero);
-    }else if(hero.name==='HABITOS'){
-        pages=renderHabitosComicPages(hero,findSullyChannel(hero));
-    }else if(hero.name==='AKUMA'){
-        pages=renderAkumaComicPages(hero,findSullyChannel(hero));
-    }else if(hero.name==='ARDIPII'){
-        pages=renderArdipiiComicPages(hero,findSullyChannel(hero));
-    }else if(hero.name==='DAVE — NEXUS'){
-        pages=renderDaveNexusComicPages(hero,findSullyChannel(hero));
-    }else if(hero.name==='PATO — ORATORIS'){
-        pages=renderPatoOratorisComicPages(hero);
-    }else{
-        const channelStats=findChannelStats(hero);
-        const sullyChannel=findSullyChannel(hero);
-        pages=renderRosterComicPages(hero,index,channelStats,sullyChannel);
-    }
+    const channelStats=findChannelStats(hero);
+    const sullyChannel=findSullyChannel(hero);
+    // Los ocho expedientes comparten el mismo renderer y las mismas fuentes dinámicas.
+    // Se evita activar bitácoras históricas con métricas, horarios o textos duplicados.
+    pages=renderRosterComicPages(hero,index,channelStats,sullyChannel);
     pages = normalizeRosterDossierPages(pages, hero);
     // A: identidad/contenido · B: audiencia, actividad y juegos · C: clips, hitos y colaboraciones.
     let profilePages, audiencePages, storyPages;
