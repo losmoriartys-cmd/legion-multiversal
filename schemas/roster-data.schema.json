@@ -168,6 +168,21 @@
           },
           "links": {
             "type": "array"
+          },
+          "tagline": {
+            "type": "string",
+            "maxLength": 80,
+            "description": "Frase editorial breve para la tarjeta principal."
+          },
+          "role_label": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Etiqueta pública de función; no reemplaza el rol técnico usado por los filtros."
+          },
+          "powers": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Descripción pública de especialidades narrativas o creativas."
           }
         }
       }
