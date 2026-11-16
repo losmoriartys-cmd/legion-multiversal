@@ -9,6 +9,7 @@ SOURCE = ROOT / "image_20261106_124855.jpg"
 OUTPUT = ROOT / "image_20261106_124855.webp"
 HTML = ROOT / "index.html"
 MAX_BYTES = 180 * 1024
+MAX_WIDTH = 1600
 
 if not SOURCE.is_file() or not HTML.is_file():
     raise SystemExit("Falta la imagen original o index.html; no se modifica el sitio.")
@@ -16,8 +17,11 @@ if not SOURCE.is_file() or not HTML.is_file():
 with Image.open(SOURCE) as opened:
     image = ImageOps.exif_transpose(opened).convert("RGB")
     original_size = SOURCE.stat().st_size
+    if image.width > MAX_WIDTH:
+        new_height = round(image.height * MAX_WIDTH / image.width)
+        image = image.resize((MAX_WIDTH, new_height), Image.Resampling.LANCZOS)
     selected_quality = None
-    for quality in (86, 84, 82, 80, 78, 76, 74, 72, 70, 68):
+    for quality in (86, 84, 82, 80, 78, 76, 74, 72, 70):
         image.save(OUTPUT, "WEBP", quality=quality, method=6, optimize=True)
         if OUTPUT.stat().st_size <= MAX_BYTES:
             selected_quality = quality
@@ -25,7 +29,7 @@ with Image.open(SOURCE) as opened:
 
 if selected_quality is None:
     OUTPUT.unlink(missing_ok=True)
-    raise SystemExit(f"No se alcanzó el límite de {MAX_BYTES} bytes sin bajar de calidad 68.")
+    raise SystemExit(f"No se alcanzó el límite de {MAX_BYTES} bytes sin bajar de calidad 70.")
 
 html = HTML.read_text(encoding="utf-8")
 old_src = 'src="image_20261106_124855.jpg"'
@@ -50,12 +54,12 @@ if preload not in html:
     html = html.replace(anchor, anchor + "\n    " + preload, 1)
 
 # El marcador anterior estaba anclado a un SHA previo. La identidad del despliegue
-# se verificará con el check run Cloudflare Pages asociado al SHA de cada workflow.
+# se verifica mediante el check Cloudflare Pages asociado al SHA de cada workflow.
 html = re.sub(r'^\s*<meta name="lm-source-revision"[^>]*>\s*\n', '', html, flags=re.MULTILINE)
 
-# La imagen es un recurso principal del Hero: declarar carga eager de forma explícita.
+# Declarar eager en el elemento img real, no en el figure que lo contiene.
 html = re.sub(
-    r'(<img\b[^>]*class="executive-hero-banner"[^>]*)(>)',
+    r'(<img\b[^>]*\bsrc="image_20261106_124855\.webp"[^>]*)(>)',
     lambda m: m.group(1) if 'loading=' in m.group(1) else m.group(1) + ' loading="eager"' + m.group(2),
     html,
     count=1,
