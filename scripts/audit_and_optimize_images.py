@@ -114,6 +114,10 @@ def replacement_pairs(
     encoded_old = quote(source.name, safe="._-")
     encoded_new = quote(target.name, safe="._-")
     for observed in observed_variants:
+        # A bare filename is ambiguous when multiple assets share that basename.
+        if observed == source.name or observed == encoded_old:
+            if not basename_is_unique:
+                continue
         if observed.endswith(source.name):
             pairs[observed] = observed[:-len(source.name)] + target.name
         elif observed.endswith(encoded_old):
