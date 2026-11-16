@@ -45,9 +45,11 @@ class RosterEditorialContractTests(unittest.TestCase):
         unconfirmed = [
             hero["id"]
             for hero in self.roster["heroes"]
-            if hero.get("schedule", "").startswith("Sin horario fijo confirmado")
+            if hero.get("schedule", "").startswith("Sin directos programados por ahora")
         ]
         self.assertEqual(unconfirmed, ["dave-nexus"])
+        dave = next(hero for hero in self.roster["heroes"] if hero["id"] == "dave-nexus")
+        self.assertIn("publica contenido en Twitch", dave["schedule"])
 
     def test_all_eight_dossiers_use_the_same_live_renderer(self):
         dispatch = self.app.split("let pages;", 1)[1].split("pages = normalizeRosterDossierPages", 1)[0]

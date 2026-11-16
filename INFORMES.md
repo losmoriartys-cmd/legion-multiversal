@@ -3173,3 +3173,15 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **Validación:** workflow [43868526885](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43868526885) completó **121 pruebas Python**, **9 pruebas Playwright** y la auditoría estática; Pages deployment [43868525902](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43868525902) finalizó correctamente. El primer intento del contrato de dimensiones falló por un escape incorrecto en la expresión regular del test; se corrigió y la corrida final quedó verde.
 - **Archivos principales:** `index.html`, `scripts/add_image_dimensions.py`, `scripts/audit_image_references.py`, `scripts/lighthouse_runs.sh`, `tests/test_image_reference_audit.py`, `.github/workflows/validar-sitio.yml`, `.github/workflows/lighthouse-production.yml` y contratos de pruebas.
 - **Código de referencia antes de este registro:** `7aad0a82257828771e1f7eb4ff92bde77115d1cd`. Este registro se añade sin reescribir las secciones históricas ni modificar el documento de optimización editado por otro colaborador.
+
+
+## 2026-11-16 — Roster: horarios declarados e indicadores automáticos por plataforma
+
+- **Horarios:** se conservan los horarios declarados por LOS MORIARTYS, ROD3R1K, AKUMA, ARDIPII, LADY MORIARTY, HABITOS y PATO — ORATORIS. Dave queda descrito como creador que publica contenido en Twitch y no tiene directos programados por ahora; las siete sesiones detectadas corresponden a transmisiones reales, pero no se interpretan como frecuencia habitual.
+- **Comparador del Roster:** se reemplaza «Métricas comparables: No disponible» por indicadores nativos de cada plataforma. Twitch muestra sesiones detectadas, promedio y pico entre muestras, cantidad de observaciones en directo y período real; YouTube muestra suscriptores, visualizaciones y videos acumulados mediante YouTube Data API v3.
+- **Metodología:** se aclara que los indicadores de YouTube y Twitch no se suman ni se ordenan en un ranking común. La ventana configurada de 30 días no se presenta como cobertura completa cuando las muestras reales abarcan menos tiempo.
+- **Expedientes:** todos los perfiles Twitch utilizan el mismo renderizador Helix para exponer sesiones detectadas, muestras en directo, promedio observado, pico observado, horas emitidas observadas y horas vistas estimadas. Se agrega una advertencia cuando hay menos de 20 muestras en directo, diferenciando continuidad de captura y representatividad de audiencia.
+- **Actualización:** el comparador se vuelve a renderizar cuando termina la carga de métricas de plataforma, además de la actualización de Twitch Helix.
+- **Archivos:** app.js, roster-data.json, roster-selector.css, index.html, tests/test_roster_selector_contract.py, tests/test_roster_editorial_contract.py, INFORMES.md.
+- **Validaciones:** contratos Python, Playwright móvil/escritorio y verificación de publicación quedan a ejecutar tras integrar.
+- **Pendientes:** aumentar la cobertura temporal de la muestra Twitch; confirmar si se habilitan fuentes adicionales para otros perfiles; no inferir frecuencia habitual a partir de sesiones aisladas.

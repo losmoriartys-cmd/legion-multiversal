@@ -57,10 +57,15 @@ class RosterCharacterSelectorContractTests(unittest.TestCase):
         self.assertIn("roster-selector.css", self.html)
         self.assertIn("app.js?v=20261116-roster-routing-2", self.html)
 
-    def test_comparator_does_not_publish_non_comparable_metrics(self):
-        self.assertIn("MÉTRICAS COMPARABLES", self.app)
-        self.assertIn('class="roster-selector-na">No disponible</td>', self.app)
-        self.assertIn("metodología comparables para los ocho perfiles", self.app)
+    def test_comparator_publishes_native_metrics_without_cross_platform_ranking(self):
+        self.assertIn("INDICADORES POR PLATAFORMA", self.app)
+        self.assertIn("renderRosterMetricSummary(hero)", self.app)
+        self.assertIn("Twitch Helix", self.app)
+        self.assertIn("YouTube Data API v3", self.app)
+        self.assertIn("no se suman ni se comparan unidades distintas", self.app)
+        self.assertIn("muestra reducida", self.app)
+        loader = self.app[self.app.index("async function loadPlatformStatsData"):self.app.index("function renderStatsPlatformDirectory")]
+        self.assertIn("renderRosterSelector();", loader)
 
     def test_selection_and_dossier_routes_are_distinct_and_restorable(self):
         self.assertIn("#roster?hero=", self.app)

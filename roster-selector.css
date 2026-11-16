@@ -213,3 +213,11 @@
 #chapter-2 .roster-selector-primary.is-live-cta:hover {
   background: #e6394a;
 }
+
+
+/* Roster · indicadores de métricas por fuente y período */
+#chapter-2 .roster-selector-metric{min-width:260px;max-width:420px;color:#dce8f1;vertical-align:top}
+#chapter-2 .roster-metric-primary{display:block;color:#f2dfb5;font-size:.72rem;font-weight:900;line-height:1.55}
+#chapter-2 .roster-selector-metric small{display:block;margin-top:5px;color:#9fb4c8;font-size:.64rem;line-height:1.5}
+#chapter-2 .roster-selector-na{color:#9fb4c8}
+@media(max-width:640px){#chapter-2 .roster-selector-metric{min-width:240px}}

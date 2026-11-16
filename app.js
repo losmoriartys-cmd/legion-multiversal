@@ -268,7 +268,6 @@ function renderLosMoriartysHelixPilot(channel){
  return out;
 }
 function renderHelixDashboard(channel){
- if(channel && channel.login==='losmoriartys')return renderLosMoriartysHelixPilot(channel);
  if(!channel)return '<div class="stats-empty"><strong>SIN DATOS VERIFICADOS</strong>El canal está registrado, pero todavía no existe una captura utilizable de Twitch Helix para este perfil.</div>';
  const w=channel.window||{};
  const capturedAt=channel.updated_at||instituteStatsData?.updated_at||null;
@@ -295,8 +294,10 @@ function renderHelixDashboard(channel){
  out+='<div class="stats-source-head"><div><strong>CALIDAD DE LA MUESTRA</strong><br><small>'+quality+' · objetivo de recolección: cada '+interval+' minutos</small></div><span class="stats-status '+qualityClass+'">'+(coverage===null?'SIN DATOS':statsNumber(coverage,1)+'%')+'</span></div>';
  out+='<p class="stats-section-intro">Período realmente observado: '+escapeStatsHtml(periodLabel)+'. Registros: '+statsNumber(snaps.length,0)+' de '+statsNumber(expected,0)+' esperados en ese intervalo. Separación mediana: '+(medianGap===null?'—':statsNumber(medianGap,1)+' min')+'; mayor intervalo sin muestra: '+(maxGap===null?'—':statsNumber(maxGap,1)+' min')+'. Esta cobertura describe el tramo observado, no los 30 días configurados.</p>';
  out+='<div class="stats-kpis">';
- [['Espectadores ahora',fresh?channel.current_viewers:null,fresh?'lectura reciente':'dato oculto: captura demorada'],['Seguidores',channel.followers_total,'no disponible vía Helix público'],['Muestras',w.samples_total,'registros capturados'],['Promedio muestreado',w.average_viewers_sampled,'solo muestras en directo'],['Pico observado',w.peak_viewers_sampled,'no es pico oficial'],['Horas vistas estimadas',w.estimated_hours_watched,'solo intervalos consecutivos válidos']].forEach(k=>out+='<div class="stats-kpi"><span>'+k[0]+'</span><strong>'+(k[1]===null||k[1]===undefined?'SIN DATOS VERIFICADOS':statsNumber(k[1],1))+'</strong><em>'+k[2]+'</em></div>');
+ [['Espectadores ahora',fresh?channel.current_viewers:null,fresh?'lectura reciente':'dato oculto: captura demorada'],['Seguidores',channel.followers_total,'no disponible vía Helix público'],['Directos detectados',w.streams_observed,'sesiones observadas; no historial completo'],['Muestras en directo',w.live_samples,'observaciones con canal en vivo'],['Promedio muestreado',w.average_viewers_sampled,'espectadores concurrentes observados'],['Pico observado',w.peak_viewers_sampled,'pico entre muestras; no oficial'],['Horas en directo observadas',w.observed_live_hours,'estimación entre muestras válidas'],['Horas vistas estimadas',w.estimated_hours_watched,'estimación; no analítica oficial']].forEach(k=>out+='<div class="stats-kpi"><span>'+k[0]+'</span><strong>'+(k[1]===null||k[1]===undefined?'SIN DATOS VERIFICADOS':statsNumber(k[1],1))+'</strong><em>'+k[2]+'</em></div>');
  out+='</div><p class="stats-muted">Categoría en la última captura: '+escapeStatsHtml(channel.current_game||'No disponible')+' · Última sincronización: '+(capturedDate&&!Number.isNaN(capturedDate.getTime())?capturedDate.toLocaleString('es-AR'):'Pendiente')+(fresh?'':' · No se interpreta como estado actual porque la captura superó la ventana de frescura.')+'</p>';
+ const liveSamples=Number(w.live_samples)||0;
+ out+=liveSamples<20?'<div class="stats-note">Muestra de directos todavía reducida ('+statsNumber(liveSamples,0)+' observaciones en vivo). Los promedios y picos se muestran como señales descriptivas del tramo observado, no como rendimiento habitual ni garantía de audiencia.</div>':'<div class="stats-note">Las métricas de audiencia son observaciones del muestreo y no analíticas oficiales. El promedio se calcula solo sobre muestras en directo; el pico es el máximo observado entre esas muestras.</div>';
  out+=renderStatsBars('ACTIVIDAD DIARIA OBSERVADA',(w.daily_activity||[]).slice(-10),v=>statsDate(v.date),v=>v.live_samples,'muestras en directo',10);
  out+=renderStatsBars('CATEGORÍAS MÁS OBSERVADAS',w.game_breakdown||[],v=>v.name,v=>v.live_samples,'muestras por categoría',5);
  const sessions=new Map();
@@ -435,10 +436,12 @@ async function loadPlatformStatsData(){
   const bundle=await window.LegionCreatorProfiles.load({files:['platforms']});
   platformStatsData=bundle.platforms;
   renderStatsPlatformDirectory();
+  renderRosterSelector();
  }catch(e){
   console.warn('Platform statistics unavailable:',e);
   const host=document.getElementById('stats-platform-grid');
   if(host)host.innerHTML='<p class="stats-note">Las estadísticas de otras plataformas no están disponibles en esta consulta. Volvé a intentarlo más tarde.</p>';
+  renderRosterSelector();
  }
 }
 function renderStatsPlatformDirectory(){
@@ -1110,6 +1113,38 @@ const heroAccentColors = {
     'habitos': '#9bd36b'
 };
 let selectedRosterCreatorId = null;
+function renderRosterMetricSummary(hero) {
+    const account = (hero.accounts || []).find(item => item.account_type === 'creator_channel') || (hero.accounts || [])[0];
+    if (!account) return '<span class="roster-metric-primary">Cuenta no vinculada</span><small>Sin fuente de métricas registrada.</small>';
+    if (account.platform === 'twitch') {
+        const login = String(account.login || (account.url || '').split('/').filter(Boolean).pop() || '').toLowerCase();
+        const channel = instituteStatsData?.channels?.[login];
+        if (!channel) return '<span class="roster-metric-primary">Seguimiento pendiente</span><small>Twitch Helix · todavía no hay una captura disponible para esta cuenta.</small>';
+        const window = channel.window || {};
+        const samples = Array.isArray(channel.snapshots) ? channel.snapshots.filter(item => item && item.sampled_at) : [];
+        const first = samples[0]?.sampled_at;
+        const last = samples[samples.length - 1]?.sampled_at;
+        const period = first && last ? statsDate(first.slice(0, 10)) + '–' + statsDate(last.slice(0, 10)) : 'período no disponible';
+        const streams = Number(window.streams_observed) || 0;
+        const liveSamples = Number(window.live_samples) || 0;
+        const primary = streams
+            ? statsNumber(streams, 0) + ' directos detectados · prom. ' + statsNumber(window.average_viewers_sampled, 1) + ' · pico ' + statsNumber(window.peak_viewers_sampled, 0)
+            : 'Sin directos detectados en el tramo observado';
+        const sampleLabel = liveSamples < 20 ? 'muestra reducida' : 'muestra en seguimiento';
+        return '<span class="roster-metric-primary">' + escapeStatsHtml(primary) + '</span><small>Twitch Helix · ' + statsNumber(liveSamples, 0) + ' muestras en directo · ' + escapeStatsHtml(period) + ' · ' + sampleLabel + '</small>';
+    }
+    if (account.platform === 'youtube') {
+        const key = hero.id || hero.slug || '';
+        const platform = platformStatsData?.creators?.[key]?.platforms?.youtube;
+        if (!platform || platform.status !== 'verified') return '<span class="roster-metric-primary">Datos pendientes</span><small>YouTube Data API v3 · cuenta registrada, sin lectura verificada.</small>';
+        const metrics = platform.metrics || {};
+        const capture = platformStatsData.updated_at ? new Date(platformStatsData.updated_at) : null;
+        const date = capture && !Number.isNaN(capture.getTime()) ? capture.toLocaleDateString('es-AR') : 'fecha no disponible';
+        return '<span class="roster-metric-primary">' + statsNumber(metrics.subscribers, 0) + ' suscriptores · ' + statsNumber(metrics.total_views, 0) + ' visualizaciones · ' + statsNumber(metrics.videos_total, 0) + ' videos</span><small>YouTube Data API v3 · acumulados del canal · captura ' + escapeStatsHtml(date) + '</small>';
+    }
+    return '<span class="roster-metric-primary">Fuente registrada</span><small>' + escapeStatsHtml(String(account.platform).toUpperCase()) + ' · métricas específicas pendientes.</small>';
+}
+
 function renderRosterSelector() {
     const host = document.getElementById('roster-selector');
     if (!host || !Array.isArray(heroesData) || !heroesData.length) return;
@@ -1184,7 +1219,7 @@ function renderRosterSelector() {
         const account = primaryAccount(hero);
         const rowAreas = (hero.areas || []).filter(value => value && value !== 'Especialidad por definir');
         const rowSchedule = hero.schedule || hero.mediaProfile?.schedule || 'Por confirmar';
-        return '<tr><th scope="row">' + safe(getHeroDisplayName(hero)) + '</th><td>' + safe(accountLabel(account)) + '</td><td>' + safe(rowAreas.length ? rowAreas.join(' · ') : 'Por definir') + '</td><td>' + safe(rowSchedule) + '</td><td class="roster-selector-na">No disponible</td></tr>';
+        return '<tr><th scope="row">' + safe(getHeroDisplayName(hero)) + '</th><td>' + safe(accountLabel(account)) + '</td><td>' + safe(rowAreas.length ? rowAreas.join(' · ') : 'Por definir') + '</td><td>' + safe(rowSchedule) + '</td><td class="roster-selector-metric">' + renderRosterMetricSummary(hero) + '</td></tr>';
     }).join('');
     host.innerHTML = '<div class="roster-selector-heading"><div><span class="roster-selector-kicker">ARCHIVO CENTRAL · SELECCIÓN DE PERSONAJES</span><h2>ELEGÍ A TU CREADOR</h2><p>Ocho integrantes. Ocho identidades. Una misma Legión.</p></div><div class="roster-selector-actions">' + liveSummary + '<button type="button" class="roster-selector-surprise" id="roster-selector-surprise">SORPRENDEME ↗</button></div></div>' +
         '<div class="roster-selector-progress"><span id="roster-selector-progress-text" aria-live="polite">CONOCISTE ' + known + ' DE ' + heroesData.length + '</span><div class="roster-selector-progress-track" role="progressbar" aria-label="Integrantes conocidos" aria-valuemin="0" aria-valuemax="' + heroesData.length + '" aria-valuenow="' + known + '"><i style="width:' + (known / heroesData.length * 100) + '%"></i></div></div>' +
@@ -1196,7 +1231,7 @@ function renderRosterSelector() {
         '<p class="roster-selector-description">' + safe(intro) + '</p>' + quote +
         '<div class="roster-selector-meta">' + liveLabel + '<span>PLATAFORMA · ' + safe(platformName) + '</span><span>HORARIO · ' + scheduleLabel + '</span></div>' +
         '<div class="roster-selector-cta">' + primaryCta + '</div></div></section>' +
-        '<details class="roster-selector-comparator"' + (comparatorWasOpen ? ' open' : '') + '><summary>PARA MARCAS · COMPARADOR DE PERFILES</summary><div class="roster-selector-table-wrap"><table><thead><tr><th>CREADOR</th><th>PLATAFORMA</th><th>ESPECIALIDADES</th><th>HORARIO / FRECUENCIA</th><th>MÉTRICAS COMPARABLES</th></tr></thead><tbody>' + compareRows + '</tbody></table></div><p>Las métricas se publicarán cuando exista una ventana, fuente y metodología comparables para los ocho perfiles. No se mezclan datos de plataformas ni períodos diferentes.</p></details><details class="roster-selector-method"' + (methodWasOpen ? ' open' : '') + '><summary>CRITERIO DE DATOS</summary><p class="roster-selector-disclaimer">La afinidad temática describe el contenido público y los formatos observados; no implica cifras ni segmentación demográfica. Las métricas solo se comparan cuando comparten fuente, ventana y método.</p></details>';
+        '<details class="roster-selector-comparator"' + (comparatorWasOpen ? ' open' : '') + '><summary>PARA MARCAS · COMPARADOR DE PERFILES</summary><div class="roster-selector-table-wrap"><table><thead><tr><th>CREADOR</th><th>PLATAFORMA</th><th>ESPECIALIDADES</th><th>HORARIO / FRECUENCIA</th><th>INDICADORES POR PLATAFORMA</th></tr></thead><tbody>' + compareRows + '</tbody></table></div><p>Los perfiles de Twitch comparten fuente Helix y se muestran con su período real, sesiones detectadas y muestras en directo. YouTube presenta contadores acumulados del canal. Son indicadores propios de cada plataforma: no se suman ni se comparan unidades distintas. Una ventana configurada de 30 días no implica 30 días completos de observaciones.</p></details><details class="roster-selector-method"' + (methodWasOpen ? ' open' : '') + '><summary>CRITERIO DE DATOS</summary><p class="roster-selector-disclaimer">La afinidad temática describe el contenido público y los formatos observados; no implica cifras ni segmentación demográfica. Twitch Helix aporta observaciones periódicas, no analítica oficial ni historial completo. YouTube Data API aporta contadores públicos acumulados. Cada indicador conserva su fuente, período y unidad; no se construye un ranking entre plataformas.</p></details>';
     host.querySelector('.roster-selector-rail')?.addEventListener('keydown', event => {
         const buttons = Array.from(host.querySelectorAll('[data-roster-select]'));
         const current = buttons.indexOf(document.activeElement);
