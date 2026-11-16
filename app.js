@@ -363,9 +363,8 @@ let twitchClipsData = null;
 let twitchClipsLoadError = false;
 async function loadTwitchClipsData(){
  try{
-  const response=await fetch('clips-data.json',{cache:'no-store'});
-  if(!response.ok)throw new Error('No se pudo leer clips-data.json');
-  const payload=await response.json();
+  const bundle=await window.LegionCreatorProfiles.load({files:['clips']});
+  const payload=bundle.clips;
   if(payload?.schema_version!==1||!payload.creators||typeof payload.creators!=='object')throw new Error('El archivo de clips no cumple el contrato esperado.');
   twitchClipsData=payload;
   twitchClipsLoadError=false;
@@ -377,9 +376,8 @@ async function loadTwitchClipsData(){
 }
 async function loadPlatformStatsData(){
  try{
-  const res=await fetch('platform-stats.json',{cache:'no-store'});
-  if(!res.ok)throw new Error('No se pudo leer platform-stats.json');
-  platformStatsData=await res.json();
+  const bundle=await window.LegionCreatorProfiles.load({files:['platforms']});
+  platformStatsData=bundle.platforms;
   renderStatsPlatformDirectory();
  }catch(e){
   console.warn('Platform statistics unavailable:',e);
@@ -496,9 +494,8 @@ function renderCreatorRecords(hero){
 }
 async function loadCreatorRecords(){
  try{
-  const res=await fetch('creator-records.json',{cache:'no-store'});
-  if(!res.ok)throw new Error('No se pudo leer creator-records.json');
-  creatorRecordsData=await res.json();
+  const bundle=await window.LegionCreatorProfiles.load({files:['records','metrics']});
+  creatorRecordsData=bundle.records;
  }catch(e){console.warn('Creator records unavailable:',e);}
 }
 let instituteStatsData = null;
@@ -622,8 +619,8 @@ async function loadInstituteStats(){
  instituteStatsLoading=true;
  const fmt=(v,d=1)=>v===null||v===undefined?'—':(typeof v==='number'?v.toLocaleString('es-AR',{maximumFractionDigits:d}):v);
  try{
-  const res=await fetch('data.json',{cache:'no-store'}); if(!res.ok)throw new Error('No se pudo leer data.json');
-  const data=await res.json(); instituteStatsData=data;
+  const bundle=await window.LegionCreatorProfiles.load({files:['activity']});
+  const data=bundle.activity; instituteStatsData=data;
   const activeLogins=Array.isArray(data.active_channels)?data.active_channels:Object.keys(data.channels||{});
   const channels=activeLogins.map(login=>data.channels?.[login]).filter(Boolean);
   const liveCount=channels.filter(c=>c.live).length;
