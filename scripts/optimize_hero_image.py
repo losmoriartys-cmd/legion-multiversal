@@ -3,7 +3,6 @@
 from pathlib import Path
 from PIL import Image, ImageOps
 import re
-import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "image_20261106_124855.jpg"
@@ -33,8 +32,8 @@ old_src = 'src="image_20261106_124855.jpg"'
 new_src = 'src="image_20261106_124855.webp"'
 if old_src in html:
     html, replacements = re.subn(
-        r'(<img\\b[^>]*\\bsrc=")image_20261106_124855\\.jpg(")',
-        r'\\1image_20261106_124855.webp\\2',
+        r'(<img\b[^>]*\bsrc=")image_20261106_124855\.jpg(")',
+        r'\1image_20261106_124855.webp\2',
         html,
         count=1,
     )
@@ -48,15 +47,15 @@ if preload not in html:
     anchor = '    <meta name="theme-color" content="#0b0f19">'
     if anchor not in html:
         raise SystemExit("No se encontró el punto seguro para insertar el preload en <head>.")
-    html = html.replace(anchor, anchor + "\\n    " + preload, 1)
+    html = html.replace(anchor, anchor + "\n    " + preload, 1)
 
 # El marcador anterior estaba anclado a un SHA previo. La identidad del despliegue
 # se verificará con el check run Cloudflare Pages asociado al SHA de cada workflow.
-html = re.sub(r'^\\s*<meta name="lm-source-revision"[^>]*>\\s*\\n', '', html, flags=re.MULTILINE)
+html = re.sub(r'^\s*<meta name="lm-source-revision"[^>]*>\s*\n', '', html, flags=re.MULTILINE)
 
 # La imagen es un recurso principal del Hero: declarar carga eager de forma explícita.
 html = re.sub(
-    r'(<img\\b[^>]*class="executive-hero-banner"[^>]*)(>)',
+    r'(<img\b[^>]*class="executive-hero-banner"[^>]*)(>)',
     lambda m: m.group(1) if 'loading=' in m.group(1) else m.group(1) + ' loading="eager"' + m.group(2),
     html,
     count=1,
