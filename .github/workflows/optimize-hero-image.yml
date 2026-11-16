@@ -9,6 +9,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
   group: optimize-hero-image-main
@@ -32,6 +33,8 @@ jobs:
       - name: Convertir y actualizar referencia del Hero
         run: python scripts/optimize_hero_image.py
       - name: Publicar el WebP en main
+        env:
+          GH_TOKEN: \${{ github.token }}
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
@@ -43,6 +46,8 @@ jobs:
             git commit -m "perf(home): serve optimized WebP hero image"
             git push origin HEAD:main
           fi
+          gh workflow run lighthouse-production.yml --ref main
+          gh workflow run validar-sitio.yml --ref main
       - name: Conservar el WebP generado como evidencia
         if: always()
         uses: actions/upload-artifact@v4
