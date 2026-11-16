@@ -78,17 +78,17 @@ def build_responsive(image: Image.Image, has_alpha: bool) -> bytes:
 
 def update_img_tags(content: str) -> tuple[str, int]:
     count = 0
-    tag_pattern = re.compile(r"<img\\b[^>]*>", re.IGNORECASE)
+    tag_pattern = re.compile(r"<img\b[^>]*>", re.IGNORECASE)
 
     def replace_tag(match: re.Match[str]) -> str:
         nonlocal count
         tag = match.group(0)
-        src_match = re.search(r"\\bsrc=(['\"])([^'\"]+)\\1", tag, re.IGNORECASE)
+        src_match = re.search(r"\bsrc=(['\"])([^'\"]+)\1", tag, re.IGNORECASE)
         if not src_match or src_match.group(2) != MASTER.name:
             return tag
         quote = src_match.group(1)
         tag = tag[:src_match.start(2)] + RESPONSIVE.name + tag[src_match.end(2):]
-        if not re.search(r"\\bsrcset=", tag, re.IGNORECASE):
+        if not re.search(r"\bsrcset=", tag, re.IGNORECASE):
             addition = (
                 f' srcset="{RESPONSIVE.name} 512w, {MASTER.name} 1600w"'
                 ' sizes="112px"'
@@ -128,6 +128,8 @@ def main() -> None:
     if not any(path == index for path, _ in pages):
         raise SystemExit("No se encontró el emblema maestro en index.html.")
 
+    # Escribir y verificar el derivado antes de modificar cualquier referencia.
+    atomic_write(RESPONSIVE, responsive_data)
     changed = []
     for path, content in pages:
         updated, count = update_img_tags(content)
@@ -140,8 +142,6 @@ def main() -> None:
 
     if not changed:
         raise SystemExit("No se encontraron etiquetas img que usen el WebP maestro como src.")
-
-    atomic_write(RESPONSIVE, responsive_data)
     with Image.open(RESPONSIVE) as check:
         check.load()
         if check.format != "WEBP" or check.size != RESPONSIVE_SIZE:
