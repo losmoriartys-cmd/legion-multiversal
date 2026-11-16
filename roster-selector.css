@@ -90,3 +90,22 @@
  #chapter-2 .roster-selector-panel { padding:16px; }
  #chapter-2 .roster-selector-art { max-width:100%; }
 }
+
+
+/* Editorial hierarchy for creator taglines and shared audience note. */
+#chapter-2 .roster-selector-tagline {
+    margin: .35rem 0 .8rem;
+    max-width: 58ch;
+    color: var(--accent-gold, #e7c66a);
+    font-size: clamp(.95rem, 1.15vw, 1.08rem);
+    line-height: 1.5;
+    font-weight: 600;
+}
+#chapter-2 .roster-selector-disclaimer {
+    margin: .9rem 0 0;
+    padding: .65rem .85rem;
+    border-left: 2px solid rgba(231, 198, 106, .65);
+    color: var(--text-muted, #a9a9b3);
+    font-size: .78rem;
+    line-height: 1.55;
+}
