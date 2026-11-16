@@ -3241,3 +3241,13 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **Alcance:** solo afecta la credencial individual de Alianzas; no cambia el archivo de imagen ni las demás tarjetas.
 - **Validación:** inspección del HTML/CSS de `main` y verificación de selectores y breakpoints por código. No se declara todavía una inspección visual real en navegador ni un resultado de despliegue hasta que finalicen sus workflows.
 - **Archivos:** `chapter-8.css`, `index.html`, `INFORMES.md`.
+
+## 2026-11-16 — Auditoría del emblema y optimización de carga tipográfica
+
+- **Emblema auditado:** `legion_logo_final_hybrid.png` pesa 1.336.538 bytes y se declara con dimensiones de 1600 × 1600 en el HTML. Se encontraron tres referencias de uso: encabezado, portada ejecutiva y una sección editorial diferida; el JSON-LD de Organization también lo publica como logo.
+- **Protección del asset:** no se reemplaza ni se renombra el PNG en esta intervención. La conversión a WebP requiere procesar el binario original y comparar transparencia, bordes y calidad a escala real. El acceso GitHub disponible para esta sesión permite editar archivos de texto, pero no descargar el blob binario al entorno de procesamiento; por eso no se simula una conversión ni se cambia ninguna URL a un archivo inexistente. Queda pendiente ejecutar la conversión con un entorno que tenga acceso binario y validar visualmente el resultado antes de migrar las cuatro referencias.
+- **Tipografía:** se eliminaron tres declaraciones de `Montserrat` que no estaba incluida en la URL de Google Fonts y se alinearon con `Roboto Condensed`, que ya es la tipografía de texto definida por el diseño.
+- **Descarga de fuentes:** se cambió la solicitud de seis pesos estáticos de Roboto Condensed (`400;500;600;700;800;900`) por el eje variable `400..900`. Se conservan Bangers, Permanent Marker y Special Elite, junto con `display=optional` y los preconnect existentes.
+- **Archivos:** `styles.css`, `index.html`.
+- **Commits:** `6732223` (tipografía CSS) y `49a3993` (Google Fonts variable).
+- **Validación pendiente:** el cambio requiere CI y Lighthouse contra producción para cuantificar transferencia y LCP; no se atribuye una mejora de rendimiento hasta contar con mediciones comparables. La optimización binaria del emblema sigue pendiente, no cerrada.
