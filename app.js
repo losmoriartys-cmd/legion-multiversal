@@ -24,6 +24,8 @@ function renderRosterLoadError(error) {
     const host = document.getElementById('roster-container');
     if (!host) return;
     console.error('No se pudo inicializar el roster:', error);
+    const selectorHost = document.getElementById('roster-selector');
+    if (selectorHost) selectorHost.innerHTML = '<section class="roster-selector-load-error" role="alert"><strong>NO SE PUDO CARGAR EL ROSTER</strong><p>Los ocho perfiles siguen en el archivo. Revisá la conexión e intentá cargar nuevamente.</p></section>';
     host.setAttribute('aria-busy', 'false');
     host.innerHTML = '<section class="roster-load-error" role="alert" aria-live="assertive"><strong>EL ARCHIVO NO PUDO CARGARSE</strong><p>La información del Roster no está disponible en este momento. No significa que los expedientes se hayan perdido.</p><button class="roster-load-retry" type="button">REINTENTAR CARGA</button></section>';
     const retry = host.querySelector('.roster-load-retry');
@@ -1036,7 +1038,7 @@ function renderRosterSelector() {
         return '<tr><th scope="row">' + safe(getHeroDisplayName(hero)) + '</th><td>' + safe(accountLabel(account)) + '</td><td>' + safe(rowAreas.length ? rowAreas.join(' · ') : 'Por definir') + '</td><td>' + safe(rowSchedule) + '</td><td class="roster-selector-na">No disponible</td></tr>';
     }).join('');
     host.innerHTML = '<div class="roster-selector-heading"><div><span class="roster-selector-kicker">ARCHIVO CENTRAL · SELECCIÓN DE PERSONAJES</span><h2>ELEGÍ A TU CREADOR</h2><p>Ocho integrantes. Ocho identidades. Una misma Legión.</p></div><div class="roster-selector-actions">' + liveSummary + '<button type="button" class="roster-selector-surprise" id="roster-selector-surprise">SORPRENDEME ↗</button></div></div>' +
-        '<div class="roster-selector-progress"><span id="roster-selector-progress-text">CONOCISTE ' + known + ' DE ' + heroesData.length + '</span><div class="roster-selector-progress-track" role="progressbar" aria-label="Integrantes conocidos" aria-valuemin="0" aria-valuemax="' + heroesData.length + '" aria-valuenow="' + known + '"><i style="width:' + (known / heroesData.length * 100) + '%"></i></div></div>' +
+        '<div class="roster-selector-progress"><span id="roster-selector-progress-text" aria-live="polite">CONOCISTE ' + known + ' DE ' + heroesData.length + '</span><div class="roster-selector-progress-track" role="progressbar" aria-label="Integrantes conocidos" aria-valuemin="0" aria-valuemax="' + heroesData.length + '" aria-valuenow="' + known + '"><i style="width:' + (known / heroesData.length * 100) + '%"></i></div></div>' +
         '<div class="roster-selector-rail" role="tablist" aria-label="Elegí uno de los ocho integrantes">' + tiles + '</div>' +
         '<section class="roster-selector-panel" id="roster-selector-panel" role="tabpanel" aria-labelledby="roster-tab-' + safe(selected.id || selected.slug) + '" tabindex="0">' +
         '<div class="roster-selector-art">' + (selected.img || selected.portrait ? '<img src="' + safe(selected.img || selected.portrait) + '" alt="Ilustración de ' + safe(getHeroDisplayName(selected)) + '" loading="eager" decoding="async">' : '<span>RETRATO PENDIENTE</span>') + '<span class="roster-selector-art-number">EXP. ' + safe(selected.cardNumber || 'S/N') + '</span></div>' +
@@ -1057,7 +1059,7 @@ function renderRosterSelector() {
         if (next !== null && buttons[next]) { event.preventDefault(); selectRosterCreator(next, true); }
     });
     host.querySelectorAll('[data-roster-select]').forEach(button => {
-        button.addEventListener('click', () => selectRosterCreator(Number(button.dataset.rosterSelect), false));
+        button.addEventListener('click', () => selectRosterCreator(Number(button.dataset.rosterSelect), true));
     });
     host.querySelector('#roster-selector-surprise')?.addEventListener('click', () => {
         const candidates = heroesData.map((hero,index) => index).filter(index => (heroesData[index].id || heroesData[index].slug) !== selectedRosterCreatorId);
@@ -1076,8 +1078,6 @@ function selectRosterCreator(index, moveFocus) {
     recordLegionProgress('profile', hero.cardNumber || hero.name);
     renderRosterSelector();
     if (moveFocus) document.getElementById('roster-tab-' + selectedRosterCreatorId)?.focus();
-    const text = document.getElementById('roster-selector-progress-text');
-    if (text) text.setAttribute('aria-live', 'polite');
 }
 
 function renderRoster() {
