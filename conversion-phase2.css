@@ -112,3 +112,36 @@
     min-height: 64px;
   }
 }
+
+
+/* Portada desktop: compactar el bloque editorial para que titular y CTA
+   entren en el primer viewport de 1440x900 sin ocultar contenido ni tocar arte. */
+@media (min-width: 901px) {
+  #chapter-0.executive-home {
+    padding-top: 10px;
+  }
+  #chapter-0 .executive-hero {
+    min-height: clamp(380px, 46vh, 430px);
+    padding: 18px clamp(24px, 3vw, 40px);
+  }
+  #chapter-0 .executive-hero h2 {
+    max-width: 16ch;
+    font-size: clamp(2.8rem, 4.3vw, 4.25rem);
+    line-height: .98;
+    margin-bottom: 8px;
+  }
+  #chapter-0 .executive-lead {
+    max-width: 58ch;
+    font-size: clamp(.94rem, 1.05vw, 1.02rem);
+    line-height: 1.35;
+    margin-bottom: 8px;
+  }
+  #chapter-0 .executive-proofline {
+    gap: 5px 10px;
+    margin: 8px 0;
+    font-size: .68rem;
+  }
+  #chapter-0 .executive-hero-actions {
+    margin-top: 10px;
+  }
+}
