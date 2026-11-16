@@ -5269,3 +5269,24 @@ main .chapter-panel :where(.chapter-cta, .executive-button, .comic-submit-btn,
 @media(max-width:900px){#chapter-2 .roster-selector-rail{grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}#chapter-2 .roster-selector-panel{grid-template-columns:minmax(190px,.7fr) minmax(0,1.3fr);gap:20px}}
 @media(max-width:640px){#chapter-2 .roster-selector-heading{align-items:flex-start;flex-direction:column}#chapter-2 .roster-selector-actions{justify-content:flex-start}#chapter-2 .roster-selector-rail{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}#chapter-2 .roster-selector-tile-top{font-size:.48rem}#chapter-2 .roster-selector-tile-info{padding:30px 9px 9px}#chapter-2 .roster-selector-tile-name{font-size:1.02rem}#chapter-2 .roster-selector-tile-cue{font-size:.48rem}#chapter-2 .roster-selector-panel{grid-template-columns:minmax(0,1fr)}#chapter-2 .roster-selector-art{min-height:240px;max-height:420px}#chapter-2 .roster-selector-art img{max-height:350px}#chapter-2 .hero-profile-gateway{grid-template-columns:minmax(0,1fr)}#chapter-2 .hero-profile-art-wrap{max-width:min(78%,340px)}#chapter-2 .hero-profile-copy{text-align:center}#chapter-2 .hero-profile-actions{justify-content:center}#chapter-2 .hero-profile-pager{flex-wrap:wrap}}
 @media(prefers-reduced-motion:reduce){#chapter-2 .roster-selector-tile,#chapter-2 .roster-selector-tile *,#chapter-2 .roster-selector-progress-track i,#chapter-2 .hero-profile-art-frame{transition:none!important;animation:none!important}#chapter-2 .roster-selector-tile{transform:none!important}#chapter-2 .roster-selector-tile::after{display:none}}
+
+
+/* EPIC GAMES · credenciales centralizadas, estado y acciones accesibles */
+.epic-code-mount{margin:22px 0}
+.epic-code-record{position:relative;display:flex;flex-direction:column;gap:12px;min-width:0;padding:clamp(16px,2vw,24px);overflow:hidden;border:1px solid rgba(134,223,240,.34);border-left:5px solid #e5bd64;background:linear-gradient(135deg,rgba(19,37,57,.98),rgba(7,15,27,.98));box-shadow:0 12px 30px rgba(0,0,0,.22);color:#f4f7fb}
+.epic-code-record-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.epic-code-state{color:#ffdf9b;font-size:.62rem;font-weight:900;letter-spacing:.08em;line-height:1.5}
+.epic-code-owner{margin:0;color:#b9c9d9;font-size:.8rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.epic-code-value{display:block;color:#fff;font:clamp(2.2rem,5vw,3.6rem)/.98 'Bangers',cursive;letter-spacing:.07em;overflow-wrap:anywhere;text-shadow:2px 3px 0 rgba(0,0,0,.25)}
+.epic-code-record .alliance-code-meta{margin:0}
+.epic-code-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.epic-code-actions a,.epic-code-copy{display:inline-flex;min-height:40px;align-items:center;justify-content:center;padding:9px 12px;border:1px solid rgba(134,223,240,.35);background:rgba(9,20,34,.8);color:#a8e9f5;font-size:.68rem;font-weight:900;letter-spacing:.06em;text-decoration:none;cursor:pointer}
+.epic-code-copy{border-color:rgba(229,189,100,.6);background:linear-gradient(110deg,#e5bd64,#f1d99c);color:#18283a}
+.epic-code-actions a:hover,.epic-code-actions a:focus-visible,.epic-code-copy:hover,.epic-code-copy:focus-visible{outline:2px solid #fff;outline-offset:3px}
+.epic-code-evidence{display:block;color:#aebfd0;font-size:.7rem;line-height:1.55}
+.epic-code-copy-status{min-height:1em;color:#9ce7c4;font-size:.72rem;font-weight:800}
+.epic-code-unavailable{padding:14px;border:1px dashed rgba(255,211,107,.4);color:#ffdf9b;font-size:.8rem;line-height:1.5}
+.epic-code-record-profile{margin:16px 0;padding:14px 16px}
+.epic-code-record-profile .epic-code-value{font-size:clamp(2rem,5vw,3rem)}
+.modal-content.comic-mode .epic-code-record-profile{background:linear-gradient(120deg,#14263d,#203b59);border:3px solid #0b1728;box-shadow:5px 5px 0 #0b1728}
+@media(max-width:640px){.epic-code-actions{align-items:stretch;flex-direction:column}.epic-code-actions a,.epic-code-copy{width:100%}.epic-code-record-head{align-items:flex-start;flex-direction:column}.epic-code-record{padding:15px 13px}}
