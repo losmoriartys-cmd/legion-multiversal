@@ -2927,3 +2927,34 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - No se abrió PR, no se fusionó a `main), no se desplegó producción y no se modificaron credenciales.
 - Pendiente exclusivamente: QA visual/manual en desktop, tablet y móvil, además de lector de pantalla y aprobación editorial.
 
+## 2026-11-16 — Auditoría de ramas, rescate editorial y unificación efectiva de Bitácoras
+
+### Auditoría del repositorio
+- Se compararon las **58 ramas no-main** contra el HEAD de `main` (`55dca8179a7aec187645f3dfa0fb63bfe8cb4ded`).
+- Resultado de referencias: **49 ramas divergentes con commits exclusivos**, **8 ramas únicamente atrasadas** y **1 rama idéntica a main**. No significa que existan 49 tareas activas: gran parte corresponde a trabajo ya integrado mediante otros PR, prototipos reemplazados o ramas antiguas.
+- Pull requests abiertos al momento de la auditoría: **0**. No se creó ningún PR.
+- Las ramas de mapas/misiones, centro de novedades, Arsenal, BarFender, Origen, expedientes y herramientas QA contienen rutas/funcionalidades que ya están presentes en main o fueron reemplazadas por integraciones posteriores; no se importaron ramas completas.
+- `auditoria-ux` conserva utilidades de QA/performance y recursos optimizados que no están en main, pero también configuración `_headers` y Pages Functions específicas de Cloudflare, además de scripts con supuestos de formularios/rutas que no coinciden con el hosting actual de GitHub Pages. Se clasifican como material para revisión selectiva, no como integración directa. Las imágenes optimizadas no se adoptan sin medición y comparación visual.
+
+### Recuperación de mejoras de Valores y Comunidad
+- Se revisaron las ramas `feat/chapter-community-2026-11-15` y `feat/chapter-values-main-2026-11-15` (PR #52 y #54 cerrados sin merge).
+- Se rescataron de forma selectiva los principios comunitarios: identidad propia de cada canal, actividades comunicadas solo cuando están confirmadas y participación voluntaria.
+- Se añadió al manifiesto de Valores una traducción operativa en tres momentos: acuerdos claros antes, respeto y autoría durante, transparencia y aprendizaje después.
+- Se incorporaron semántica accesible, estilos responsive/reduced-motion y contratos de prueba. No se copiaron las ramas antiguas completas ni sus versiones desfasadas del sitio.
+
+### Causa de la divergencia visual de MORIARTYS
+- PR #49 (`feat/roster-bitacoras-unificadas-2026-11-15`) se cerró sin merge. La rama contenía normalización de folios y estilos genéricos, pero **no eliminaba la excepción de navegación** en `openHeroProfile()`: MORIARTYS seguía enlazando a `roster-02-moriartys.html`, mientras los otros siete perfiles abrían el lector compartido mediante `openHeroModal(index)`.
+- El lector compartido ya contaba con `renderMoriartysComicPages()` y `normalizeRosterDossierPages()`; el desvío estaba en la acción del perfil, que evitaba ese lector y abría el libro autónomo.
+- Corrección: los ocho perfiles usan ahora el mismo botón y punto de entrada `ABRIR BITÁCORA COMPLETA`, que abre `openHeroModal(index)`. MORIARTYS conserva sus contenidos/datos particulares, pero comparte el contenedor, navegación, tabs y normalización editorial del Roster.
+- `roster-02-moriartys.html` se conserva como archivo legado accesible por URL directa; deja de ser la ruta principal del perfil activo. No se borró contenido histórico.
+- No se adoptaron los cambios de datos de la rama #49: su snapshot mostraba `sampled_channels: []` y todos los canales como omitidos, aunque el lote figuraba completo. Se preservaron los datos actuales de main.
+
+### Validación de la integración
+- Rama de integración única: `integration/roster-unification-2026-11-16`.
+- HEAD probado: `28008f32ee16b85a9c3e74c16beff0f6b1f9f109`.
+- [GitHub Actions run 43797428680](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43797428680): **SUCCESS**.
+- Suite Python: **56/56** pruebas aprobadas, incluyendo los contratos nuevos de Valores y Comunidad.
+- Playwright: **5/5** pruebas aprobadas; el recorrido de los ocho integrantes ahora pulsa el CTA real de cada perfil y comprueba que todos abren el mismo modal/lector.
+- Sintaxis JavaScript, JSON, modelo de roster, cobertura Twitch, colectores, métricas, clips, historial, rutas, imágenes y enlaces: **SUCCESS**.
+- Este registro no altera credenciales ni fuentes de estadísticas. No se abrió PR.
+
