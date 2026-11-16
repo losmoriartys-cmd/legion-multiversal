@@ -1,4 +1,5 @@
 import pathlib
+import re
 import unittest
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
@@ -36,17 +37,25 @@ class SiteEditorialImageContract(unittest.TestCase):
         self.assertIn("requiere una decisión compartida", self.html)
         self.assertIn("no confundir una postulación con una aprobación", self.html)
 
-    def test_editorial_sequence_is_preserved(self):
-        expected = [
-            "CAPÍTULO 00 · INICIO", "CAPÍTULO 01 · ORIGEN",
-            "CAPÍTULO 02 · VALORES", "CAPÍTULO 04 · ESTADÍSTICAS",
-            "CAPÍTULO 05 · COMUNIDAD", "CAPÍTULO 06 · ALIANZAS",
-            "CAPÍTULO 07 · COLABORACIONES", "CAPÍTULO 08 · ARSENAL",
-            "CAPÍTULO 09 · EN VIVO", "CAPÍTULO 10 · RECLUTAMIENTO",
-        ]
-        positions = [self.html.index(label) for label in expected]
-        self.assertEqual(positions, sorted(positions))
-
+    def test_editorial_chapter_labels_and_numbers_are_present(self):
+        expected = {
+            "CAPÍTULO 00 · INICIO": 'data-editorial-number="0"',
+            "CAPÍTULO 01 · ORIGEN": 'data-editorial-number="1"',
+            "CAPÍTULO 02 · VALORES": 'data-editorial-number="2"',
+            "CAPÍTULO 04 · ESTADÍSTICAS": 'data-editorial-number="4"',
+            "CAPÍTULO 05 · COMUNIDAD": 'data-editorial-number="5"',
+            "CAPÍTULO 06 · ALIANZAS": 'data-editorial-number="6"',
+            "CAPÍTULO 07 · COLABORACIONES": 'data-editorial-number="7"',
+            "CAPÍTULO 08 · ARSENAL": 'data-editorial-number="8"',
+            "CAPÍTULO 09 · EN VIVO": 'data-editorial-number="9"',
+            "CAPÍTULO 10 · RECLUTAMIENTO": 'data-editorial-number="10"',
+        }
+        for label, number in expected.items():
+            self.assertIn(label, self.html)
+            position = self.html.index(label)
+            opening = self.html.rfind("<section", 0, position)
+            self.assertGreaterEqual(opening, 0)
+            self.assertIn(number, self.html[opening:position])
 
 if __name__ == "__main__":
     unittest.main()
