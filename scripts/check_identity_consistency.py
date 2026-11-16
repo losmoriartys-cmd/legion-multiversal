@@ -245,6 +245,9 @@ class Tests(unittest.TestCase):
 
     def test_aprobacion_editorial_de_objeto_es_exacta(self):
         base = self._snap(REC_OLD)
+        base['creator_records']['pato-oratoris']['profile_notes'] = {
+            'sha256': _h({'role': 'Colaborador', 'content_focus': ['Programación']})
+        }
         notes = {
             'role': 'Colaborador',
             'content_focus': ['Educación y divulgación', 'Programación: HTML y JavaScript'],
