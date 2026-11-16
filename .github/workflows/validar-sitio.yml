@@ -102,25 +102,29 @@ jobs:
           source = Path("legion_logo_final_hybrid.png")
           output = Path("legion_logo_final_hybrid.webp")
           responsive = Path("legion_logo_final_hybrid-512.webp")
-          assert source.is_file() and output.is_file() and responsive.is_file(), "Falta un asset del emblema."
-          with Image.open(source) as original, Image.open(output) as optimized, Image.open(responsive) as small:
-              assert optimized.format == small.format == "WEBP", "Los emblemas optimizados no son WebP."
+          compact = Path("legion_logo_final_hybrid-256.webp")
+          assert source.is_file() and output.is_file() and responsive.is_file() and compact.is_file(), "Falta un asset del emblema."
+          with Image.open(source) as original, Image.open(output) as optimized, Image.open(responsive) as medium, Image.open(compact) as small:
+              assert optimized.format == medium.format == small.format == "WEBP", "Los emblemas optimizados no son WebP."
               assert optimized.size == original.size == (1600, 1600), "Cambió la dimensión del maestro."
-              assert small.size == (512, 512), "El derivado responsive no mide 512x512."
-              assert "A" in optimized.getbands() and "A" in small.getbands(), "Se perdió transparencia."
-              optimized.load()
-              small.load()
+              assert medium.size == (512, 512), "El derivado medio no mide 512x512."
+              assert small.size == (256, 256), "El derivado compacto no mide 256x256."
+              assert all("A" in image.getbands() for image in (optimized, medium, small)), "Se perdió transparencia."
+              for image in (optimized, medium, small):
+                  image.load()
           assert output.stat().st_size < source.stat().st_size, "El maestro WebP no reduce el peso."
-          assert responsive.stat().st_size < output.stat().st_size, "El derivado responsive no reduce el peso."
+          assert responsive.stat().st_size < output.stat().st_size, "El derivado de 512px no reduce el peso."
+          assert compact.stat().st_size < responsive.stat().st_size, "El derivado de 256px no reduce el peso."
           for page in (Path("index.html"), Path("comic-moriartys.html")):
               content = page.read_text(encoding="utf-8")
               assert "legion_logo_final_hybrid.webp" in content, f"Falta el maestro WebP en {page}."
-              assert "legion_logo_final_hybrid-512.webp" in content, f"Falta el derivado responsive en {page}."
-              assert "srcset=" in content, f"Falta srcset en {page}."
-              assert 'width="512" height="512"' in content, f"Las dimensiones intrínsecas no coinciden en {page}."
+              assert "legion_logo_final_hybrid-512.webp" in content, f"Falta el derivado de 512px en {page}."
+              assert "legion_logo_final_hybrid-256.webp" in content, f"Falta el derivado de 256px en {page}."
+              assert "srcset=" in content and "sizes=" in content, f"Falta srcset/sizes en {page}."
+              assert 'width="256" height="256"' in content, f"Las dimensiones intrínsecas no coinciden en {page}."
               assert "legion_logo_final_hybrid.png" not in content, f"Quedó referencia PNG en {page}."
-          print(f"OK: maestro {output.stat().st_size:,} bytes; responsive {responsive.stat().st_size:,} bytes; PNG {source.stat().st_size:,} bytes.")
-          print("OK: 1600x1600 + 512x512, canales alfa y srcset verificados.")
+          print(f"OK: maestro {output.stat().st_size:,} bytes; 512px {responsive.stat().st_size:,} bytes; 256px {compact.stat().st_size:,} bytes; PNG {source.stat().st_size:,} bytes.")
+          print("OK: 1600x1600 + 512x512 + 256x256, canales alfa y srcset verificados.")
           PY
       - name: Auditar referencias de imágenes en main y snapshots históricos
         run: |
