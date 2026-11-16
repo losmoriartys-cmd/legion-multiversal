@@ -84,16 +84,22 @@ def update_img_tags(content: str) -> tuple[str, int]:
         nonlocal count
         tag = match.group(0)
         src_match = re.search(r"\bsrc=(['\"])([^'\"]+)\1", tag, re.IGNORECASE)
-        if not src_match or src_match.group(2) != MASTER.name:
+        if not src_match or src_match.group(2) not in {MASTER.name, RESPONSIVE.name}:
             return tag
-        quote = src_match.group(1)
-        tag = tag[:src_match.start(2)] + RESPONSIVE.name + tag[src_match.end(2):]
+        if src_match.group(2) == MASTER.name:
+            tag = tag[:src_match.start(2)] + RESPONSIVE.name + tag[src_match.end(2):]
         if not re.search(r"\bsrcset=", tag, re.IGNORECASE):
             addition = (
                 f' srcset="{RESPONSIVE.name} 512w, {MASTER.name} 1600w"'
                 ' sizes="112px"'
             )
             tag = tag[:-1] + addition + ">"
+        for attribute in ("width", "height"):
+            dimension = re.compile(rf"\b{attribute}=(['\"])\d+\1", re.IGNORECASE)
+            if dimension.search(tag):
+                tag = dimension.sub(f'{attribute}="512"', tag, count=1)
+            else:
+                tag = tag[:-1] + f' {attribute}="512">'
         count += 1
         return tag
 
@@ -140,8 +146,8 @@ def main() -> None:
                 raise SystemExit(f"Falló la verificación de srcset en {path.relative_to(ROOT)}")
             changed.append((path.relative_to(ROOT).as_posix(), count))
 
-    if not changed:
-        raise SystemExit("No se encontraron etiquetas img que usen el WebP maestro como src.")
+    if not any(RESPONSIVE.name in path.read_text(encoding="utf-8") for path, _ in pages):
+        raise SystemExit("No se encontraron etiquetas img del emblema en las páginas runtime.")
     with Image.open(RESPONSIVE) as check:
         check.load()
         if check.format != "WEBP" or check.size != RESPONSIVE_SIZE:
