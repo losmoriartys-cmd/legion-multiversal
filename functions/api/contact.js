@@ -42,7 +42,7 @@ export async function onRequest({ request, env }) {
   }
 
   const origin = request.headers.get("origin");
-  if (origin && origin !== url.origin) return json({ error: "Origen no permitido." }, 403);
+  if (origin !== url.origin) return json({ error: "Origen no permitido." }, 403);
 
   const declaredLength = Number(request.headers.get("content-length") || 0);
   if (declaredLength > MAX_BODY_BYTES) return json({ error: "El mensaje supera el tamaño permitido." }, 413);
