@@ -70,3 +70,26 @@ test('las dos rutas históricas de Lady Moriarty abren el mismo expediente', asy
   await legacyPage.close();
   await canonicalPage.close();
 });
+
+test('las ocho cartas comparten el sistema visual maestro y responden en móvil', async ({ page }) => {
+  await page.goto('/');
+  await page.evaluate(() => switchChapter(2));
+  const tiles = page.locator('.roster-selector-tile');
+  await expect(tiles).toHaveCount(8);
+  await expect(page.locator('.roster-selector-panel')).toHaveAttribute('data-roster-role', /.+/);
+  for (const creator of creators) {
+    const tile = page.locator('.roster-selector-tile[data-creator-id="' + creator.id + '"]');
+    await expect(tile).toHaveCount(1);
+    await expect(tile.locator('.roster-selector-tile-frame')).toBeVisible();
+    await expect(tile.locator('.roster-selector-tile-top')).toContainText('EXP.');
+    await expect(tile.locator('.roster-selector-tile-name')).toBeVisible();
+  }
+  const desktopColumns = await tiles.first().evaluate(el => getComputedStyle(el.parentElement).gridTemplateColumns.split(' ').length);
+  expect(desktopColumns).toBeGreaterThanOrEqual(3);
+  await page.setViewportSize({ width: 390, height: 844 });
+  const mobileColumns = await tiles.first().evaluate(el => getComputedStyle(el.parentElement).gridTemplateColumns.split(' ').length);
+  expect(mobileColumns).toBe(2);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth)).toBe(false);
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await expect(tiles.first()).toBeVisible();
+});
