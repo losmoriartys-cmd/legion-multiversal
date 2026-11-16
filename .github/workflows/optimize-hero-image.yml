@@ -41,7 +41,19 @@ jobs:
             echo "La imagen ya está optimizada; no hay cambios que publicar."
           else
             git commit -m "perf(home): serve optimized WebP hero image"
-            git push origin HEAD:main
+            for attempt in 1 2 3; do
+              git fetch origin main
+              git rebase origin/main
+              if git push origin HEAD:main; then
+                echo "Hero responsive publicado en main."
+                break
+              fi
+              if [ "$attempt" -eq 3 ]; then
+                echo "No se pudo publicar el Hero después de 3 intentos." >&2
+                exit 1
+              fi
+              sleep 2
+            done
           fi
       - name: Conservar el WebP generado como evidencia
         if: always()
