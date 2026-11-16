@@ -2958,3 +2958,23 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - Sintaxis JavaScript, JSON, modelo de roster, cobertura Twitch, colectores, métricas, clips, historial, rutas, imágenes y enlaces: **SUCCESS**.
 - Este registro no altera credenciales ni fuentes de estadísticas. No se abrió PR.
 
+
+## 2026-11-16 — Sistema visual maestro del Roster (primera implementación)
+
+### Auditoría de la implementación existente
+- El renderer activo construía ocho botones-tab, pero el tratamiento 3D avanzado se aplicaba parcialmente a una clase heredada de MORIARTYS y existían estilos de cartas coleccionables sin renderer activo. La diferencia era estructural: no había un único componente visual aplicado a las ocho fichas.
+- El acceso a Bitácoras ya estaba unificado en `openHeroModal(index)`; esta intervención conserva ese contrato y no toca fuentes de estadísticas ni assets originales.
+
+### Cambios
+- Se aplicó un sistema visual único a las ocho cartas: formato coleccionable, número de expediente, identidad/codename, estado en vivo solo cuando existe una captura fresca, acabado holográfico, barrido de luz y tilt 3D con puntero.
+- Se conserva la ilustración completa mediante `object-fit: contain`; no se reemplazan assets.
+- Se reconstruyó el panel del integrante seleccionado con jerarquía editorial, marco de archivo, ilustración protagonista, especialidades, identidad, formato, estado y accesos.
+- Se extendió el lenguaje visual al gateway del expediente y su navegación anterior/siguiente.
+- El tilt se limita a puntero fino/ratón y se desactiva con `prefers-reduced-motion`. En móvil se usa grilla de dos columnas y panel de una columna.
+- Se añadieron pruebas Playwright para las ocho cartas, atributos, jerarquía, distribución móvil y ausencia de overflow horizontal.
+
+### Alcance y estado
+- Trabajo sobre `integration/roster-unification-2026-11-16`, partiendo del HEAD `08fd306629ae268a95a3fa60be7f12c0cc1ecefd`.
+- No se crea PR ni se modifican credenciales, métricas, canales o imágenes.
+- La URL pública no pudo recuperarse con el navegador de consulta; por eso no se declara una inspección visual manual de producción. La revisión visual final debe realizarse sobre la ejecución real del sitio en escritorio, tablet y móvil.
+- Validación automatizada pendiente de CI antes de integrar a `main`.
