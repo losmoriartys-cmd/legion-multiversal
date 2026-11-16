@@ -115,7 +115,8 @@ class RosterAccessibilityContractTests(unittest.TestCase):
         self.assertIn("return hero?.id || hero?.slug || '';", self.js)
         self.assertEqual(find_legacy_creator_record_lookups(self.js), [])
         moriartys_page = (ROOT / "roster-02-moriartys.html").read_text(encoding="utf-8")
-        self.assertIn("records.channels?.[hero.id]", moriartys_page)
+        self.assertIn("bundle.getCreator(hero)", moriartys_page)
+        self.assertIn("record=profile.records", moriartys_page)
         self.assertEqual(find_legacy_creator_record_lookups(moriartys_page), [])
 
     def test_legacy_lookup_detector_catches_dot_and_bracket_notation(self):
