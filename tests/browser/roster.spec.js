@@ -31,7 +31,10 @@ test('el selector presenta los ocho integrantes y permite abrir cada expediente'
     const dossier = page.locator('#hero-profile-page');
     await expect(dossier).toBeVisible();
     await expect(dossier).toContainText(creator.name);
-    await page.evaluate(index => window.openHeroModal(index), creator.index);
+    const dossierAction = dossier.locator('.hero-profile-actions .twitch-link-btn').first();
+    await expect(dossierAction).toHaveText('ABRIR BITÁCORA COMPLETA');
+    await expect(dossier.locator('a[href="./roster-02-moriartys.html"]')).toHaveCount(0);
+    await dossierAction.click();
     const modal = page.locator('#hero-modal');
     await expect(modal).toHaveClass(/active/);
     await expect(modal.locator('#modal-hero-title')).toContainText(creator.name);
