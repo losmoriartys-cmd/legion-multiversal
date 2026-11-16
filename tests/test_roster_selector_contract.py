@@ -39,7 +39,9 @@ class RosterCharacterSelectorContractTests(unittest.TestCase):
         for key in ("ArrowRight", "ArrowLeft", "event.key === 'Home'", "event.key === 'End'"):
             self.assertIn(key, self.app)
         self.assertIn("@media(max-width:900px)", self.css)
-        self.assertIn("scroll-snap-type:x mandatory", self.css)
+        self.assertIn("@media(max-width:640px)", self.css)
+        self.assertIn("grid-template-columns:repeat(2,minmax(0,1fr))", self.css)
+        self.assertNotIn("scroll-snap-type:x mandatory", self.css)
 
     def test_selector_mount_and_assets_are_loaded(self):
         home = self.html.index('<div id="roster-home">')
