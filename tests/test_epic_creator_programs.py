@@ -27,7 +27,20 @@ class EpicCreatorProgramsContractTests(unittest.TestCase):
             self.assertEqual(creator["record_status"], "confirmed_in_project_administration_record")
             self.assertFalse(creator["account_portal_revalidated"])
             self.assertTrue(creator["recorded_at"])
-        self.assertIn("NO REVALIDADA", self.programs["display_policy"]["status_label"])
+        self.assertIn("EVIDENCIA DE CUENTA APORTADA", self.programs["display_policy"]["status_label"])
+
+
+    def test_moriartys_account_details_match_is_recorded_with_provenance(self):
+        creator = self.programs["creators"]["moriartys"]
+        evidence = creator["account_details_evidence"]
+        self.assertEqual(creator["record_status"], "creator_reported_account_details_match")
+        self.assertEqual(evidence["creator_id"], "dc2236199d3c4fc88932c290ad87be97")
+        self.assertEqual(evidence["creator_code"], "losmoriartys")
+        self.assertTrue(evidence["match_with_project_record"])
+        self.assertEqual(evidence["method"], "Transcripción textual aportada por el titular en la conversación")
+        self.assertFalse(creator["account_portal_revalidated"])
+        self.assertIn("ASOCIACIÓN COINCIDENTE", creator["display_status"])
+        self.assertIn("no representa una consulta automática", creator["verification_note"])
 
     def test_alliance_codes_are_rendered_from_central_mounts(self):
         self.assertIn('id="epic-creator-programs-collective"', self.index)
@@ -35,6 +48,8 @@ class EpicCreatorProgramsContractTests(unittest.TestCase):
         self.assertNotIn("dc2236199d3c4fc88932c290ad87be97", self.index)
         self.assertNotIn("TheR0d3R1k</strong>", self.index)
         self.assertIn("renderEpicCreatorPrograms()", self.app)
+        self.assertIn("creator.display_status||epicCreatorPrograms.display_policy", self.app)
+        self.assertIn("creator.verification_note", self.app)
         self.assertIn("fetch('./creator-programs.json'", self.app)
 
     def test_roster_profiles_use_the_same_central_code_renderer(self):
