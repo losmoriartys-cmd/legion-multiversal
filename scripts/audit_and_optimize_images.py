@@ -90,6 +90,37 @@ def reference_variants(image_path: Path, text_path: Path) -> set[str]:
     return {value for value in variants if value and value != "."}
 
 
+def replacement_pairs(
+    source: Path,
+    target: Path,
+    text_path: Path,
+    observed_variants: set[str],
+    basename_is_unique: bool,
+) -> dict[str, str]:
+    """Build exact replacements, including URL-encoded path components."""
+    old_relative = source.relative_to(ROOT).as_posix()
+    new_relative = target.relative_to(ROOT).as_posix()
+    old_local = os.path.relpath(source, text_path.parent).replace(os.sep, "/")
+    new_local = os.path.relpath(target, text_path.parent).replace(os.sep, "/")
+    pairs = {
+        old_relative: new_relative,
+        "./" + old_relative: "./" + new_relative,
+        old_local: new_local,
+        "./" + old_local: "./" + new_local,
+    }
+    if basename_is_unique:
+        pairs[source.name] = target.name
+
+    encoded_old = quote(source.name, safe="._-")
+    encoded_new = quote(target.name, safe="._-")
+    for observed in observed_variants:
+        if observed.endswith(source.name):
+            pairs[observed] = observed[:-len(source.name)] + target.name
+        elif observed.endswith(encoded_old):
+            pairs[observed] = observed[:-len(encoded_old)] + encoded_new
+    return pairs
+
+
 def atomic_write(path: Path, content: bytes) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     fd, temp_name = tempfile.mkstemp(prefix=f".{path.name}.", suffix=".tmp", dir=path.parent)
@@ -198,23 +229,13 @@ def main() -> int:
         updates = {}
         for source, target, refs_by_file in completed:
             for text_path, variants in refs_by_file.items():
-                old_relative = source.relative_to(ROOT).as_posix()
-                new_relative = target.relative_to(ROOT).as_posix()
-                old_relative_local = os.path.relpath(source, text_path.parent).replace(os.sep, "/")
-                new_relative_local = os.path.relpath(target, text_path.parent).replace(os.sep, "/")
-                pairs = {
-                    old_relative: new_relative,
-                    "./" + old_relative: "./" + new_relative,
-                    old_relative_local: new_relative_local,
-                    "./" + old_relative_local: "./" + new_relative_local,
-                }
-                # El nombre desnudo solo es seguro cuando es único en el repositorio.
-                if basename_counts[source.name] == 1:
-                    pairs[source.name] = target.name
-                # También contempla rutas URL-encoded detectadas durante el escaneo.
-                for old in refs_by_file[text_path]:
-                    if old.endswith(source.name):
-                        pairs[old] = old[:-len(source.name)] + target.name
+                pairs = replacement_pairs(
+                    source,
+                    target,
+                    text_path,
+                    variants,
+                    basename_counts[source.name] == 1,
+                )
                 for old, new in pairs.items():
                     if old and old in corpus[text_path]:
                         updates.setdefault(text_path, corpus[text_path])
