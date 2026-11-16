@@ -76,6 +76,22 @@ class ConversionNavigationContractTests(unittest.TestCase):
         self.assertNotIn("TE VOY A PEGAR, BOLUDO", clips)
         self.assertEqual(clips.count('target="_blank"'), 4)
 
+    def test_heavy_data_loads_are_deferred_until_relevant_chapters(self):
+        app = (ROOT / "app.js").read_text(encoding="utf-8")
+        onload = app.split("window.onload = function()", 1)[1]
+        self.assertIn("loadChapterResources(initialNumber)", onload)
+        self.assertNotIn("await loadEpicCreatorPrograms()", onload)
+        self.assertNotIn("await loadRosterData()", onload)
+        self.assertNotIn("loadTwitchClipsData()", onload)
+        self.assertIn("if (Number(chapterNum) === 8)", app)
+        self.assertIn("if (Number(chapterNum) === 9)", app)
+        self.assertIn("loadResourceOnce('twitch-clips', loadTwitchClipsData)", app)
+
+    def test_background_data_refresh_runs_only_on_relevant_chapters(self):
+        app = (ROOT / "app.js").read_text(encoding="utf-8")
+        self.assertIn("querySelector('#chapter-0.active, #chapter-3.active, #chapter-10.active')", app)
+        self.assertIn("document.getElementById('chapter-2')?.classList.contains('active')", app)
+
 
 if __name__ == "__main__":
     unittest.main()
