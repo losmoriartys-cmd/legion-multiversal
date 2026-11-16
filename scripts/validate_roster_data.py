@@ -117,8 +117,12 @@ def validate_activity(roster: dict, activity: dict) -> list[str]:
     if registered != active:
         errors.append("Los logins Twitch del Roster no coinciden con data.json: roster={}, data.json={}.".format(sorted(registered), sorted(active)))
     collection = activity.get("collection") or {}
-    if collection.get("complete") is not True:
-        errors.append("data.json no informa una recolección Twitch completa.")
+    if collection.get("status_complete") is not True:
+        errors.append("data.json no informa consultas Helix válidas para todos los canales.")
+    if collection.get("coverage_complete") is not True:
+        errors.append("data.json no contabiliza todos los canales muestreados u omitidos por cadencia.")
+    if collection.get("complete") != collection.get("sampling_complete"):
+        errors.append("data.json presenta estados inconsistentes entre complete y sampling_complete.")
     if int(collection.get("expected_channels") or 0) != len(registered):
         errors.append("data.json.expected_channels no coincide con el registro.")
     covered = set(collection.get("sampled_channels") or []) | set(collection.get("skipped_channels") or [])
@@ -128,8 +132,8 @@ def validate_activity(roster: dict, activity: dict) -> list[str]:
         errors.append("Faltan registros Twitch en data.json: {}.".format(sorted(missing_records)))
     for login in registered:
         channel = (activity.get("channels") or {}).get(login, {})
-        if not channel.get("updated_at"):
-            errors.append("{}: falta updated_at.".format(login))
+        if not channel.get("updated_at") or not channel.get("last_status_at"):
+            errors.append("{}: falta updated_at/last_status_at de la consulta Helix.".format(login))
         if not isinstance(channel.get("snapshots"), list):
             errors.append("{}: snapshots no es una lista.".format(login))
     return errors

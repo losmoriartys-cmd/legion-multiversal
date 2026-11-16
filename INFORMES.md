@@ -3214,3 +3214,6 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 
 
 - **Ajuste de verificación del workflow:** la primera ejecución sobre el contrato refinado todavía ejecutó una aserción antigua que exigía \`complete=true\` incluso cuando todos los canales estaban correctamente omitidos por la cadencia de 45 minutos. Se reemplaza por las aserciones independientes \`status_complete\`, \`coverage_complete\` y consistencia entre \`complete\` y \`sampling_complete\`. La suite de 129 pruebas ya pasó en esa revisión; se repite la validación del workflow tras este ajuste.
+
+
+- **Compatibilidad del validador del Roster:** el validador histórico \`scripts/validate_roster_data.py --check-activity\` todavía exigía \`collection.complete=true\`. Se actualiza para exigir \`status_complete\`, \`coverage_complete\`, consistencia de \`complete/sampling_complete\` y timestamp \`last_status_at\`. Se agregan pruebas de aceptación de una consulta válida sin snapshot nuevo y rechazo de una captura sin estado Helix completo.

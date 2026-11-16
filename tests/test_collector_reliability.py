@@ -9,6 +9,7 @@ from unittest.mock import patch
 import update_stats
 import update_platform_stats
 from scripts.build_creator_metrics import build
+from scripts.validate_roster_data import validate_activity
 
 
 def http_error(code, headers=None):
@@ -50,6 +51,48 @@ class HttpRetryContractTests(unittest.TestCase):
                     update_stats.request_json("https://example.test")
         self.assertEqual(call.call_count, 3)
 
+
+    def test_roster_validator_accepts_fresh_status_without_new_snapshot(self):
+        roster = {"heroes": [{"accounts": [{"platform": "twitch", "login": "channel-a"}]}]}
+        activity = {
+            "active_channels": ["channel-a"],
+            "collection": {
+                "expected_channels": 1,
+                "complete": False,
+                "status_complete": True,
+                "sampling_complete": False,
+                "coverage_complete": True,
+                "sampled_channels": [],
+                "skipped_channels": ["channel-a"]
+            },
+            "channels": {"channel-a": {
+                "updated_at": "2026-11-16T15:00:00Z",
+                "last_status_at": "2026-11-16T15:00:00Z",
+                "snapshots": []
+            }}
+        }
+        self.assertEqual(validate_activity(roster, activity), [])
+
+    def test_roster_validator_rejects_missing_helix_status_completeness(self):
+        roster = {"heroes": [{"accounts": [{"platform": "twitch", "login": "channel-a"}]}]}
+        activity = {
+            "active_channels": ["channel-a"],
+            "collection": {
+                "expected_channels": 1,
+                "complete": False,
+                "status_complete": False,
+                "sampling_complete": False,
+                "coverage_complete": True,
+                "sampled_channels": [],
+                "skipped_channels": ["channel-a"]
+            },
+            "channels": {"channel-a": {
+                "updated_at": "2026-11-16T15:00:00Z",
+                "last_status_at": "2026-11-16T15:00:00Z",
+                "snapshots": []
+            }}
+        }
+        self.assertTrue(validate_activity(roster, activity))
 
     def test_twitch_status_success_is_distinct_from_new_snapshot_completion(self):
         flags = update_stats.collection_flags(
