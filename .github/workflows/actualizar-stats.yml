@@ -53,7 +53,7 @@ jobs:
 
       - name: Verificar muestras Twitch completas
         run: |
-          python -c "import json; from pathlib import Path; d=json.loads(Path('data.json').read_text(encoding='utf-8')); e=set(d.get('active_channels', [])); c=d.get('collection', {}); covered=set(c.get('sampled_channels', [])) | set(c.get('skipped_channels', [])); missing=[x for x in e if x not in d.get('channels', {}) or not d['channels'][x].get('updated_at')]; assert c.get('complete') and covered == e and not missing, 'Recolección Twitch incompleta: ' + ', '.join(missing); print('Verificación OK: {} canales; {} muestras nuevas; {} omitidas por anti-duplicados.'.format(len(e), len(c.get('sampled_channels', [])), len(c.get('skipped_channels', []))))"
+          python -c "import json; from pathlib import Path; d=json.loads(Path('data.json').read_text(encoding='utf-8')); e=set(d.get('active_channels', [])); c=d.get('collection', {}); covered=set(c.get('sampled_channels', [])) | set(c.get('skipped_channels', [])); missing=[x for x in e if x not in d.get('channels', {}) or not d['channels'][x].get('last_status_at') or not d['channels'][x].get('updated_at')]; assert c.get('status_complete') and c.get('coverage_complete') and covered == e and not missing and d.get('updated_at'), 'Consulta Twitch incompleta o sin estado válido: ' + ', '.join(missing); assert c.get('complete') == c.get('sampling_complete'), 'Estado complete inconsistente'; print('Verificación OK: {} estados Helix; {} snapshots nuevos; {} canales omitidos por ventana de 45 minutos.'.format(len(e), len(c.get('sampled_channels', [])), len(c.get('skipped_channels', []))))"
 
       - name: Validar registro de cuentas y cobertura Twitch
         run: python scripts/validate_roster_data.py --check-activity
