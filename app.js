@@ -978,6 +978,9 @@ function refreshRosterLiveIndicators() {
 function renderRoster() {
     const container = document.getElementById('roster-container');
     if (!container) return;
+    const isRepeatRender = container.dataset.hasRendered === 'true';
+    container.classList.toggle('is-rerender', isRepeatRender);
+    container.dataset.hasRendered = 'true';
     container.innerHTML = '';
     container.setAttribute('aria-busy', 'false');
     bindRosterControls();
