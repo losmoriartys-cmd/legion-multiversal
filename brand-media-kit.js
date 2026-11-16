@@ -72,7 +72,7 @@
             makeMetric("Directos detectados", number(streams?.value), "En la ventana observada") +
             '</div>' + sparkline + '<p class="channel-kit-meta">Fuente: ' + escapeHtml(source) + ' · Período: ' +
             escapeHtml(date(period.from)) + ' – ' + escapeHtml(date(period.to)) + ' · Captura: ' +
-            escapeHtml(date(captured)) + '</p><p class="channel-kit-meta">País e idioma de la audiencia: sin datos propios verificables.</p></article>'
+            escapeHtml(date(captured)) + '</p><p class="channel-kit-meta">País e idioma de la audiencia: sin datos propios verificables.</p><p class="channel-kit-dossier-link"><a href="../#roster/' + encodeURIComponent(id) + '">ABRIR EXPEDIENTE INDIVIDUAL / IMPRIMIR PDF ↗</a></p></article>'
           );
         }
 
