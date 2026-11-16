@@ -11,6 +11,7 @@ class SecureContactContractTests(unittest.TestCase):
         cls.script = (ROOT / "contact-forms.js").read_text(encoding="utf-8")
         cls.endpoint = (ROOT / "functions" / "api" / "contact.js").read_text(encoding="utf-8")
         cls.brands = (ROOT / "marcas" / "index.html").read_text(encoding="utf-8")
+        cls.media_kit = (ROOT / "brand-media-kit.js").read_text(encoding="utf-8")
 
     def test_both_public_forms_use_the_secure_endpoint(self):
         self.assertIn('data-contact-type="creator"', self.html)

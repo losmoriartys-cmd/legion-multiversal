@@ -87,6 +87,12 @@ class ConversionNavigationContractTests(unittest.TestCase):
         self.assertIn("if (Number(chapterNum) === 9)", app)
         self.assertIn("loadResourceOnce('twitch-clips', loadTwitchClipsData)", app)
 
+    def test_alliance_points_to_the_single_full_experience_dossier(self):
+        alliance = self.html.split('id="alliance-cases"', 1)[1].split('id="alliance-transparency"', 1)[0]
+        self.assertIn("VER EXPEDIENTES DE COLABORACIÓN", alliance)
+        self.assertNotIn("alliance-case-facts", alliance)
+        self.assertNotIn("BARFENDER", alliance)
+
     def test_background_data_refresh_runs_only_on_relevant_chapters(self):
         app = (ROOT / "app.js").read_text(encoding="utf-8")
         self.assertIn("querySelector('#chapter-0.active, #chapter-3.active, #chapter-10.active')", app)
