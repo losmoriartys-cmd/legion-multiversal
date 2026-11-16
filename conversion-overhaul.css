@@ -122,3 +122,7 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
 .contact-form-status[data-state="error"] { border-color:#ff6677; color:#ffc1c8; }
 .recruitment-contact-form button:disabled { opacity:.55; cursor:not-allowed; filter:grayscale(.25); }
 #brand-proposal { scroll-margin-top:130px; }
+
+.home-follow-link { display:inline-flex; width:max-content; max-width:100%; align-items:center; gap:6px; margin-top:5px; color:#66dff3; font-weight:900; font-size:.82rem; letter-spacing:.06em; text-decoration:none; text-underline-offset:4px; }
+.home-follow-link:hover,.home-follow-link:focus-visible { color:#ffdf4d; text-decoration:underline; }
+.home-follow-link[hidden] { display:none; }
