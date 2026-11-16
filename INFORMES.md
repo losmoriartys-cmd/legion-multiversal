@@ -2978,3 +2978,35 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - No se crea PR ni se modifican credenciales, métricas, canales o imágenes.
 - La URL pública no pudo recuperarse con el navegador de consulta; por eso no se declara una inspección visual manual de producción. La revisión visual final debe realizarse sobre la ejecución real del sitio en escritorio, tablet y móvil.
 - Los cuatro commits se integraron por fast-forward en `main` (HEAD `17a4a9733d84af70e62a81ffa43bf46a4cf46cef`); la rama de integración y `main` quedaron idénticas. La ejecución de CI y el despliegue deben confirmarse por separado; no se declaran aprobados en este registro.
+
+
+## 2026-11-16 — Revisión editorial integral de los ocho expedientes y Bitácoras
+
+### Cambios integrados directamente en `main`
+- `roster-data.json` — commit `8d91018eab50d216033702cdb9e3cebb1104fead`: se actualizaron las ocho propuestas editoriales/comerciales con territorios, formatos y oportunidades de colaboración diferenciados. Todas las oportunidades quedan expresamente descritas como propuestas, no como campañas realizadas.
+- `app.js` — commit `d4b64457fea767d6076c6203d79399b85039705f`: los ocho expedientes pasan por `renderRosterComicPages()` y comparten la misma estructura, fuentes de métricas y navegación. Se desactivaron como rutas de presentación las Bitácoras históricas específicas que contenían cifras/tablas fijas y textos divergentes. Se agregó la **Matriz de encaje comercial** (territorio, formato/activación posible y estado) generada desde `mediaProfile`.
+- `creator-records.json` — commit `f4ea5d0f8a35375afa4f163584f6e0613911aed8`: se reconciliaron las referencias de PATO — ORATORIS con la captura de YouTube del 16/11/2026.
+- `tests/test_roster_editorial_contract.py` — commit `229c943edf1d574bdf8f64211b6b470e5cc64b7b`: nuevas pruebas de los ocho contratos editoriales, separación de plataformas, cifras de Pato, ausencia de horarios no confirmados y renderer compartido.
+
+### Correcciones editoriales y de integridad
+- **LOS MORIARTYS:** se conserva como proyecto compartido de Demi y Ari. Se eliminó una afirmación de liderazgo/pionerismo regional que no tenía evidencia suficiente en el expediente. No se atribuyen al canal conjunto métricas individuales.
+- **ROD3R1K:** se preservan su identidad y los clips con títulos aportados/confirmados; la presentación comercial se centra en gaming, entretenimiento, eventos y contenido compartido. No se promociona una credencial de Partner ni código de creador como vigente sin revalidación.
+- **LADY MORIARTY:** se refuerza su canal individual y su diferencia respecto del proyecto compartido. Las antiguas cifras de TwitchMetrics y tablas históricas dejan de ser la Bitácora activa.
+- **ARDIPII:** se retiraron de la presentación las afirmaciones de transmisión desde México y presencia constante, que no estaban respaldadas por una fuente vigente. No se publica horario fijo.
+- **AKUMA:** se retiraron las afirmaciones de constancia/frecuencia no verificadas. BarFender u otros picos colectivos no se atribuyen a su canal individual.
+- **DAVE — NEXUS:** se conserva su nueva etapa y el rango ESTUDIANTE como categoría narrativa/institucional, no como evaluación de experiencia. Sigue indicado que no tiene horario fijo confirmado.
+- **PATO — ORATORIS:** se mantiene como colaborador y creador de video/YouTube, no como streamer de Twitch. Se reconcilió el total de visualizaciones de 430 a **431**; se conservan **56 suscriptores** y **6 videos**, con captura `2026-11-16T03:37:22Z`. El posible regreso en 2027 continúa descrito como proyección, no calendario.
+- **HABITOS:** se conserva la propuesta de gaming, filosofía y desarrollo personal. La Bitácora activa deja de depender de porcentajes y conclusiones históricas hardcodeadas; los datos automáticos y externos mantienen sus períodos y metodologías separados.
+
+### Tablas incorporadas y lectura comercial
+- Cada expediente incluye una matriz **Territorio → Formato/activación posible → Estado**, que traduce las áreas del creador en ideas concretas para marcas sin prometer entregables.
+- La página de actividad utiliza los bloques estadísticos disponibles por plataforma: Twitch Helix y muestreo propio para siete canales Twitch; YouTube Data API para ORATORIS.
+- No se comparan ni suman métricas de Twitch y YouTube. Los promedios/picos muestreados no se presentan como CCV oficial; horas vistas estimadas no se presentan como watch time oficial; seguidores de Twitch, ingresos, demografía y analítica privada no se inventan.
+- Las fuentes externas SullyGnome/TwitchMetrics se mantienen como referencias separadas, con su período/estado; los resúmenes aportados por el equipo no se convierten en datos oficiales.
+- Se preservaron las ilustraciones y assets existentes. No se modificaron credenciales ni secretos.
+
+### Verificación
+- Pull requests abiertos al registrar este bloque: **0**. No se abrió ningún PR; los cambios se escribieron directamente en `main`.
+- El workflow de validación del sitio para el HEAD de esta entrega `229c943edf1d574bdf8f64211b6b470e5cc64b7b` quedó iniciado: [run 43800539141](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43800539141).
+- El despliegue de GitHub Pages para el mismo HEAD quedó iniciado: [run 43800539343](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43800539343).
+- La revisión visual manual en producción, tablet/móvil y lector de pantalla no se declara completada por el solo hecho de pasar CI; queda sujeta a inspección real una vez finalizado el despliegue.
