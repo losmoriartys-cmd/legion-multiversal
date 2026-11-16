@@ -1,3 +1,16 @@
+## 2026-11-16 — Inicio: estado de transmisiones visible en portada
+
+- **Base:** `main` tras la validación del colector y el despliegue del SHA `72caa55f86257cf789ba85f6f010b6c2a286777c`.
+- **Objetivo:** aplicar una prioridad concreta del plan de optimización: que el visitante pueda conocer el estado de los canales sin tener que abrir primero la central EN VIVO.
+- **Archivos modificados:** `index.html`; `tests/test_site_editorial_image_contract.py`; `tests/test_conversion_navigation_contract.py`; `tests/test_conversion_phase2_contract.py`.
+- **Implementado:** nueva franja accesible de estado de transmisiones debajo de las credenciales de portada. Reutiliza los identificadores que `app.js` ya actualiza con la última captura pública (`home-live-status`, `home-live-updated`) y muestra el acceso a Twitch cuando no hay un directo confirmado o la captura está demorada. El reproductor continúa cargándose solo al solicitarlo.
+- **Pruebas:** se añadieron pruebas de presencia y vínculo con la lógica existente. La primera ejecución detectó dos contratos antiguos que exigían que la franja no existiera; se actualizaron para exigir el nuevo comportamiento, sin retirar las comprobaciones del drawer ni de datos demorados.
+- **Validación al registrar:** el workflow del colector para `6896a1430e8a6ed9dcd7b0777c751aa69f0bfd3f` finalizó SUCCESS. En el workflow general del mismo SHA, las etapas previas a Playwright —incluidas las 117 pruebas unitarias— finalizaron correctamente; la instalación de Chromium y las pruebas de navegador seguían en curso. El despliegue Pages también estaba pendiente.
+- **Pendientes:** confirmar el resultado final de Playwright y Pages; inspección visual en escritorio y móvil. No se habilita ni se declara operativo el envío real de formularios hasta resolver la discrepancia documental entre GitHub Pages como producción y Cloudflare Pages como entorno que puede ejecutar `functions/api/contact.js`, y verificar las variables de entorno del servicio.
+- **Commits:** `16cee63f2c911e3c0d8eb67bb9238ca9f638552e` (franja de portada), `2c79de6e94b88a57ca1e6ea330a2a1f26b65e0c0` (prueba inicial), `721f6bf2bbf0787287001a0fc90e46d55ee6db50` y `6896a1430e8a6ed9dcd7b0777c751aa69f0bfd3f` (contratos de regresión actualizados).
+
+---
+
 ## 2026-11-16 — Reconciliación sin PR abiertos · base común del Roster
 
 - **Decisión operativa:** se cierra la acumulación de PR. #47 ya estaba cerrado sin merge; #52 y #54 se cerraron sin merge. #46 también está cerrado sin merge. No quedan PR abiertos en esta tanda. No se afirma que los cambios de esas ramas estén integrados.
