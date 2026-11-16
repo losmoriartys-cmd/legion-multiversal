@@ -1,3 +1,16 @@
+## 2026-11-16 — Roster: horarios habituales por creador
+
+- **Base:** `main` en `d0ee9384a4c2c2c036b5b174158a58a713d1945c`.
+- **Objetivo:** mostrar en el roster el horario habitual de cada creador, según indicó el titular, en lugar de «Por confirmar».
+- **Archivos modificados:** `roster-data.json` (campo `schedule` en los ocho perfiles).
+- **Implementado:** horarios cargados como texto declarado por el titular, en hora Argentina. Son horarios habituales, no datos medidos. Dave y Pato se dejaron sin horario fijo: Dave sube a Twitch sin horario confirmado; Pato publica en YouTube sin directos.
+- **Validaciones y resultados:** `scripts/validate_roster_data.py` → OK (8 integrantes, 9 cuentas). `scripts/validate_site.py` → validación estática superada (8 perfiles revisados, 46 referencias locales comprobadas).
+- **Pendientes / riesgos:** no hay métricas comparables. La columna «Métricas comparables» sigue en «No disponible» para los ocho perfiles hasta fijar una ventana y una fuente comunes. Falta confirmar la lista completa de canales de `data.json`. Pendiente de verificación visual en escritorio y móvil del roster tras el despliegue de Pages.
+- **Commit:** pendiente de hash al momento de escribir esta entrada.
+- **Despliegue:** pendiente de verificación.
+
+---
+
 ## 2026-11-16 — Inicio: estado de transmisiones visible en portada
 
 - **Base:** `main` tras la validación del colector y el despliegue del SHA `72caa55f86257cf789ba85f6f010b6c2a286777c`.

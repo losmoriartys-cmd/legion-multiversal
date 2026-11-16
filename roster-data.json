@@ -96,7 +96,8 @@
       ],
       "links": [],
       "tagline": "Dupla gamer y videoclub retro: cooperativo, humor y cultura pop.",
-      "role_label": "DIRECCIÓN"
+      "role_label": "DIRECCIÓN",
+      "schedule": "Lunes y miércoles 20:00 · viernes 21:00 (hora Argentina)"
     },
     {
       "name": "ROD3R1K",
@@ -186,7 +187,8 @@
         "audience_fit": "Afinidad temática: videojuegos de acción, eventos, partidas compartidas y momentos destacados."
       },
       "tagline": "Gaming de acción, eventos grupales y momentos épicos en directo.",
-      "role_label": "DIRECCIÓN"
+      "role_label": "DIRECCIÓN",
+      "schedule": "Lunes a viernes 20:00 (hora Argentina)"
     },
     {
       "name": "LADYMORIARTY",
@@ -279,7 +281,8 @@
         "audience_fit": "Afinidad temática: gameplay relajado, charlas espontáneas, entretenimiento e IRL."
       },
       "tagline": "Gameplay chill, IRL y conexión espontánea con la comunidad.",
-      "role_label": "CREADORA"
+      "role_label": "CREADORA",
+      "schedule": "1 a 2 veces por semana, sin horario fijo; mayormente 19:00–20:00 (hora Argentina)"
     },
     {
       "name": "ARDIPII",
@@ -367,7 +370,8 @@
       },
       "tagline": "Gaming cooperativo, cercanía con el chat e interacción en directo.",
       "role_label": "CREADOR",
-      "powers": "Especialidad: gaming cooperativo, cercanía con el chat e interacción en directo."
+      "powers": "Especialidad: gaming cooperativo, cercanía con el chat e interacción en directo.",
+      "schedule": "Martes y jueves 23:00 (hora Argentina)"
     },
     {
       "name": "AKUMA",
@@ -457,7 +461,8 @@
       },
       "tagline": "Gaming, charlas y encuentros para compartir nuevas experiencias.",
       "role_label": "DOCENTE",
-      "powers": "Especialidad: gaming, charlas y partidas compartidas con la comunidad; su rol docente aporta una dimensión de acompañamiento y aprendizaje."
+      "powers": "Especialidad: gaming, charlas y partidas compartidas con la comunidad; su rol docente aporta una dimensión de acompañamiento y aprendizaje.",
+      "schedule": "Lunes a viernes 21:00 (hora Argentina)"
     },
     {
       "name": "DAVE — NEXUS",
@@ -471,7 +476,7 @@
       "areas": [
         "Especialidad por definir"
       ],
-      "schedule": "Sin horario fijo confirmado",
+      "schedule": "Sin horario fijo confirmado; por ahora sube contenido a Twitch",
       "role": "student",
       "creator_type": "live_streamer",
       "platforms": [
@@ -666,7 +671,8 @@
         "audience_fit": "Afinidad temática: programación introductoria, herramientas digitales y divulgación sobre ciencia y comportamiento."
       },
       "tagline": "Programación y divulgación explicadas con claridad y cercanía.",
-      "role_label": "COLABORADOR"
+      "role_label": "COLABORADOR",
+      "schedule": "Sin directos; publica contenido en su canal de YouTube"
     },
     {
       "name": "HABITOS",
@@ -756,7 +762,8 @@
       },
       "tagline": "Gaming, filosofía cotidiana y conversaciones sobre hábitos.",
       "role_label": "COLABORADOR",
-      "powers": "Especialidad: gaming reflexivo, filosofía cotidiana y desarrollo de hábitos."
+      "powers": "Especialidad: gaming reflexivo, filosofía cotidiana y desarrollo de hábitos.",
+      "schedule": "Lunes a sábado, por la mañana y por la tarde"
     }
   ],
   "identity_model_version": 1
