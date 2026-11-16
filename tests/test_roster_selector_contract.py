@@ -42,6 +42,12 @@ class RosterCharacterSelectorContractTests(unittest.TestCase):
         self.assertIn("@media(max-width:640px)", self.css)
         self.assertIn("grid-template-columns:repeat(2,minmax(0,1fr))", self.css)
         self.assertNotIn("scroll-snap-type:x mandatory", self.css)
+        self.assertIn("panel?.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'nearest' })", self.app)
+        self.assertIn("focus({ preventScroll: true })", self.app)
+        self.assertIn("const heroAccentColors = {", self.app)
+        for hero_id in ("moriartys", "rod3r1k", "lady-moriarty", "ardipii", "akuma", "dave-nexus", "pato-oratoris", "habitos"):
+            self.assertIn("'" + hero_id + "':", self.app)
+        self.assertIn('class="roster-selector-method"><summary>CRITERIO DE DATOS</summary>', self.app)
 
     def test_selector_mount_and_assets_are_loaded(self):
         home = self.html.index('<div id="roster-home">')
