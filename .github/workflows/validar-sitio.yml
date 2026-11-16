@@ -65,6 +65,28 @@ jobs:
         run: python -m pip install --disable-pip-version-check Pillow
       - name: Auditar dimensiones intrínsecas de imágenes HTML
         run: python scripts/add_image_dimensions.py --check --measure-remotes index.html
+      - name: Verificar candidatos responsive del Hero y preload adaptable
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          import re
+
+          html = Path("index.html").read_text(encoding="utf-8")
+          widths = (640, 960, 1280)
+          for width in widths:
+              path = Path(f"image_20261106_124855-{width}.webp")
+              assert path.is_file(), f"Falta el candidato responsive {path.name}."
+              with Image.open(path) as image:
+                  image.load()
+                  assert image.format == "WEBP", f"{path.name} no es WebP."
+                  assert image.width == width, f"{path.name} no tiene el ancho esperado."
+          assert 'src="image_20261106_124855-960.webp"' in html, "El Hero no usa el candidato responsive como fallback."
+          assert all(f"image_20261106_124855-{width}.webp {width}w" in html for width in widths), "Falta un candidato en srcset."
+          assert 'imagesrcset=' in html and 'imagesizes=' in html, "El preload no negocia imágenes responsive."
+          assert 'fetchpriority="high"' in html, "El Hero perdió fetchpriority high."
+          print("OK: Hero WebP responsive 640/960/1280/1536 y preload adaptable verificados.")
+          PY
       - name: Verificar contrato del emblema WebP lossless
         run: |
           python - <<'PY'
@@ -102,7 +124,7 @@ jobs:
           python scripts/audit_image_references.py --root /tmp/image-audit-0d578a0 --output reports/image-audit/0d578a0.md
           python scripts/audit_image_references.py --root . --output reports/image-audit/main.md
       - name: Compilar colectores Python
-        run: python -m py_compile scripts/audit_image_references.py update_stats.py update_platform_stats.py update_clips.py scripts/validate_roster_data.py scripts/validate_clips_data.py scripts/render_roster_noscript.py scripts/validate_metric_history.py scripts/build_creator_metrics.py scripts/validate_creator_metrics.py scripts/audit_and_optimize_images.py scripts/optimize_logo.py scripts/add_image_dimensions.py scripts/summarize_lighthouse.py scripts/lh_failures.py
+        run: python -m py_compile scripts/audit_image_references.py update_stats.py update_platform_stats.py update_clips.py scripts/validate_roster_data.py scripts/validate_clips_data.py scripts/render_roster_noscript.py scripts/validate_metric_history.py scripts/build_creator_metrics.py scripts/validate_creator_metrics.py scripts/audit_and_optimize_images.py scripts/optimize_logo.py scripts/optimize_hero_image.py scripts/add_image_dimensions.py scripts/summarize_lighthouse.py scripts/lh_failures.py
       - name: Ejecutar pruebas unitarias Python del repositorio
         run: python -m unittest discover -s tests -p 'test_*.py' -v
       - name: Probar lectura de cuentas por los colectores
