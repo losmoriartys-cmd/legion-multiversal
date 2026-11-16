@@ -2883,3 +2883,33 @@ No hubo merge, cambios en `main`, publicación de producción ni modificación d
 - **Automatización:** Playwright ahora cubre destinos del índice, roster del directorio, recorrido completo de 15 folios y diseño móvil. `.github/workflows/validar-sitio.yml` incluye `bitacora-preview.html` en sus filtros de ejecución.
 - **Resultado:** [CI de sitio SUCCESS](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43700512037); 33 pruebas unitarias y 5 pruebas Playwright aprobadas. Validación estática de 8 perfiles y 37 referencias locales superada.
 - **No realizado:** no se regeneró `creator-metrics.json`, no se sincronizó aún con el último `main`, no hubo merge ni despliegue de producción. La regeneración de métricas permanece como último cambio posterior a la sincronización.
+
+
+## Implementación — nueva dirección oficial del Roster: selector de personajes
+
+Se adoptó el prototipo como dirección oficial y se comenzó a implementar en la rama única `integration/roster-unification-2026-11-16`, sin abrir PR.
+
+### Cambios realizados
+- Se incorporó el selector principal con ocho integrantes, retratos existentes, panel individual, especialidades, plataforma, horarios solo cuando están confirmados, botón «Sorprendeme» y progreso de exploración.
+- El selector reutiliza `roster-data.json`, `getRosterLiveState()`, `recordLegionProgress()` y `openHeroProfile()`. No se agregó otra fuente de perfiles ni un segundo sistema de estadísticas.
+- El estado EN VIVO depende de la captura existente y de su frescura. No se incorporó la simulación del prototipo.
+- El comparador comercial queda plegado al final y deja las métricas como «No disponible» hasta que sean comparables entre los ocho perfiles.
+- Se reemplazó el renderizador activo de las antiguas cartas agrupadas; el contenido de filtros y la grilla anterior dejan de ser la experiencia visible.
+- Se agregaron navegación por flechas, Inicio/Fin, foco restaurado tras seleccionar, soporte responsive, reduced motion y estado de error de carga.
+- Se conservan los expedientes actuales y sus rutas `#roster/<slug>`.
+
+### Sincronización e integridad
+- La rama se sincronizó con el último commit de `main` mediante un merge commit sin cambiar el árbol de archivos del trabajo de integración.
+- Se comprobó que `data.json`, `clips-data.json`, `creator-metrics.json` y `platform-stats.json` tienen el mismo blob SHA en `main` y en la rama.
+- PR abiertos: **0**.
+- Diferencia actual previa a este registro: rama adelantada respecto de `main`, sin commits pendientes de incorporar desde `main`.
+- No se modificaron secretos, credenciales, workflows de producción ni archivos de despliegue.
+
+### Resultado de verificación
+- Inspección estática: **8 perfiles canónicos** detectados.
+- Selector, panel, CTA de expediente, comparador, teclado, progreso compartido y estado live existente: referencias presentes.
+- Botón de simulación del prototipo: ausente.
+- Estado de CI de los commits nuevos: **sin checks reportados**; la consulta de workflows asociados a PR no devolvió ejecuciones.
+- QA de navegador/Playwright, imágenes, responsive real, lectores de pantalla, rutas Back/Forward y validación automatizada del sitio: **pendientes**.
+
+No se integra a `main` ni se publica en producción hasta completar esas verificaciones.
