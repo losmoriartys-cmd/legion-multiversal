@@ -21,8 +21,10 @@
 #chapter-2 .roster-selector-progress-track { flex:1; height:7px; overflow:hidden; border-radius:9px; background:#1c2a3d; }
 #chapter-2 .roster-selector-progress-track i { display:block; height:100%; background:linear-gradient(90deg,var(--selector-cyan),var(--selector-gold)); transition:width .25s ease; }
 #chapter-2 .roster-selector-rail { display:grid; grid-template-columns:repeat(8,minmax(0,1fr)); gap:10px; margin:0 0 22px; }
-#chapter-2 .roster-selector-tile { min-width:0; position:relative; display:flex; flex-direction:column; justify-content:flex-end; align-items:stretch; aspect-ratio:3/4; overflow:hidden; padding:0; border:2px solid rgba(137,174,205,.35); border-radius:9px; background:linear-gradient(160deg,#203650,#0a111d 78%); color:var(--selector-ink); cursor:pointer; text-align:center; transition:border-color .16s,transform .16s,box-shadow .16s; }
-#chapter-2 .roster-selector-tile img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 24%; opacity:.84; }
+#chapter-2 .roster-selector-tile { min-width:0; position:relative; display:flex; flex-direction:column; justify-content:flex-end; align-items:stretch; aspect-ratio:4/5; overflow:hidden; padding:0; border:2px solid rgba(137,174,205,.35); border-radius:9px; background:linear-gradient(160deg,#203650,#0a111d 78%); color:var(--selector-ink); cursor:pointer; text-align:center; transition:border-color .16s,transform .16s,box-shadow .16s; }
+#chapter-2 .roster-selector-tile img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 24%; opacity:.84; transition:filter .2s ease,transform .25s ease; }
+#chapter-2 .roster-selector-tile:not(.is-selected) img { filter:saturate(.75) brightness(.85); }
+#chapter-2 .roster-selector-tile:hover img,#chapter-2 .roster-selector-tile.is-selected img { filter:saturate(1.1) brightness(1); transform:scale(1.03); }
 #chapter-2 .roster-selector-tile::after { content:""; position:absolute; inset:35% 0 0; background:linear-gradient(transparent,rgba(3,8,15,.94)); pointer-events:none; }
 #chapter-2 .roster-selector-tile:hover { transform:translateY(-2px); border-color:var(--selector-cyan); }
 #chapter-2 .roster-selector-tile.is-selected { border-color:var(--selector-gold); box-shadow:0 0 0 2px rgba(255,222,0,.22),0 8px 24px rgba(0,0,0,.32); }
@@ -40,9 +42,9 @@
 #chapter-2 .roster-selector-real-identity { margin:5px 0 12px; color:var(--selector-muted); font-size:.9rem; }
 #chapter-2 .roster-selector-tags { display:flex; flex-wrap:wrap; gap:7px; margin:10px 0; }
 #chapter-2 .roster-selector-tags span { border:1px solid rgba(153,190,220,.28); border-radius:999px; padding:4px 11px; color:#dce8f2; font-size:.8rem; }
-#chapter-2 .roster-selector-ideal { margin:12px 0; color:#dce8f2; }
-#chapter-2 .roster-selector-ideal strong { color:var(--selector-gold); font-size:.72rem; letter-spacing:.08em; }
-#chapter-2 .roster-selector-description { color:#dbe6f2; line-height:1.6; }
+#chapter-2 .roster-selector-ideal { margin:14px 0; padding:10px 14px; border:1px solid rgba(255,222,0,.25); border-left:3px solid var(--selector-gold); border-radius:6px; background:rgba(255,222,0,.05); color:#f0f4f8; font-size:.92rem; line-height:1.45; }
+#chapter-2 .roster-selector-ideal strong { display:block; margin-bottom:3px; color:var(--selector-gold); font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; }
+#chapter-2 .roster-selector-description { color:#dbe6f2; line-height:1.65; font-size:.96rem; max-width:65ch; }
 #chapter-2 .roster-selector-copy blockquote { margin:14px 0; padding:9px 14px; border-left:3px solid var(--selector-cyan); color:#d1deea; font-style:italic; }
 #chapter-2 .roster-selector-meta { display:flex; flex-wrap:wrap; gap:8px 16px; margin:16px 0; color:var(--selector-muted); font-size:.78rem; font-weight:800; }
 #chapter-2 .roster-selector-status.is-live { color:#ff8d98; }
@@ -60,45 +62,31 @@
 #chapter-2 .roster-selector-comparator p { color:var(--selector-muted); font-size:.82rem; }
 #chapter-2 .roster-selector-loading { color:var(--selector-muted); }
 #chapter-2 .roster-selector button:focus-visible { outline:3px solid var(--selector-cyan); outline-offset:3px; }
-@media(max-width:900px) {
- #chapter-2 .roster-selector-rail { display:flex; overflow-x:auto; scroll-snap-type:x mandatory; padding:0 2px 8px; }
- #chapter-2 .roster-selector-tile { flex:0 0 112px; scroll-snap-align:start; }
- #chapter-2 .roster-selector-panel { grid-template-columns:1fr; }
- #chapter-2 .roster-selector-art { max-width:260px; min-height:280px; }
- #chapter-2 .roster-selector-art img { min-height:280px; }
-}
-@media(max-width:600px) {
- #chapter-2 .roster-selector-heading { align-items:flex-start; flex-direction:column; }
- #chapter-2 .roster-selector-actions { justify-content:flex-start; }
- #chapter-2 .roster-selector-progress { align-items:flex-start; flex-direction:column; gap:7px; }
- #chapter-2 .roster-selector-progress-track { width:100%; flex:auto; }
- #chapter-2 .roster-selector-tile { flex-basis:100px; }
- #chapter-2 .roster-selector-panel { padding:14px; }
- #chapter-2 .roster-selector-art { max-width:100%; }
-}
 @media(prefers-reduced-motion:reduce) {
  #chapter-2 .roster-selector * { scroll-behavior:auto !important; transition:none !important; }
 }
 #chapter-2 .roster-selector-load-error { padding:20px; border:1px solid rgba(255,145,155,.4); border-radius:8px; background:#241722; color:#f4dce0; }
 #chapter-2 .roster-selector-load-error strong { color:#ffabb3; letter-spacing:.08em; }
 #chapter-2 .roster-selector-load-error p { color:#d9c4ca; }
-#chapter-2 .roster-selector-description { display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:5; overflow:hidden; }
 
-/* En móvil, las ocho fichas se presentan como una grilla visible de dos columnas;
-   se evita el carrusel horizontal que ocultaba integrantes fuera de pantalla. */
+/* Tablet y laptops compactas: ocho perfiles visibles en una grilla 4x2. */
+@media(max-width:1080px) {
+ #chapter-2 .roster-selector-rail { grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; }
+ #chapter-2 .roster-selector-tile { aspect-ratio:1/1; }
+}
+@media(max-width:900px) {
+ #chapter-2 .roster-selector-panel { grid-template-columns:1fr; }
+ #chapter-2 .roster-selector-art { max-width:280px; min-height:280px; }
+ #chapter-2 .roster-selector-art img { min-height:280px; }
+}
+/* Móvil: grilla visible de dos columnas, sin carrusel horizontal. */
 @media(max-width:640px) {
- #chapter-2 .roster-selector-rail {
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:12px;
-  overflow:visible;
-  scroll-snap-type:none;
-  padding:0;
- }
- #chapter-2 .roster-selector-tile {
-  flex:initial;
-  width:100%;
-  min-width:0;
-  aspect-ratio:5/7;
- }
+ #chapter-2 .roster-selector-heading { align-items:flex-start; flex-direction:column; }
+ #chapter-2 .roster-selector-actions { justify-content:flex-start; }
+ #chapter-2 .roster-selector-progress { align-items:flex-start; flex-direction:column; gap:7px; }
+ #chapter-2 .roster-selector-progress-track { width:100%; flex:auto; }
+ #chapter-2 .roster-selector-rail { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+ #chapter-2 .roster-selector-tile { aspect-ratio:4/5; }
+ #chapter-2 .roster-selector-panel { padding:16px; }
+ #chapter-2 .roster-selector-art { max-width:100%; }
 }
