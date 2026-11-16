@@ -22,7 +22,7 @@ class ConversionNavigationContractTests(unittest.TestCase):
     def test_home_hero_routes_to_live_and_brands(self):
         hero = self.html.split('<div class="executive-hero-actions">', 1)[1].split("</div>", 1)[0]
         self.assertIn('switchChapter(10)', hero)
-        self.assertIn('switchChapter(8)', hero)
+        self.assertIn('href="./marcas/"', hero)
         self.assertNotIn("mailto:", hero)
 
     def test_home_live_strip_uses_public_capture_and_no_fake_schedule(self):

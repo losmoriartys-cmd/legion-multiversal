@@ -109,3 +109,5 @@ header .primary-navigation .nav-btn[data-chapter="10"] span {
 @media(prefers-reduced-motion:reduce) {
  .nav-btn-live.is-live span { animation:none; }
 }
+
+header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:center; text-decoration:none; }

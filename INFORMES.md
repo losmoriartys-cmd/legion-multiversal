@@ -3084,3 +3084,16 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - Los ocho perfiles del Roster incorporan afinidad temática cualitativa, sin atribuir cifras ni demografía no medidas. El renderer presenta esa afinidad junto con la identidad y los formatos.
 - Comunidad incorpora criterios de expansión gradual, basados en valores, aporte creativo y participación voluntaria.
 - Se actualizan cache-busters y contratos automatizados. Integración directa a main, sin PR. CI, Pages y QA visual quedan sujetos a confirmación posterior.
+
+
+## 2026-11-16 — Optimización de conversión y páginas de apoyo
+
+- **Navegación:** se simplifica el menú principal a cinco recorridos: Mirar, Experiencias, Para marcas, Unite y Origen. El resto de capítulos permanece accesible desde los recorridos y la navegación interna.
+- **Portada:** el CTA principal lleva a En Vivo y el secundario a la nueva ficha de presentación para marcas. Se elimina de Inicio la mención promocional al nombre histórico S3X-MEN; su historia queda dentro de Origen.
+- **Estado de transmisiones:** se incorpora un resumen en portada conectado a la última captura pública de Twitch. Informa nombres/cantidad solo si la captura está vigente; muestra demora cuando corresponde y no inventa horarios.
+- **Identidad del roster:** la portada distingue seis perfiles integrantes y dos perfiles colaboradores. El canal Los Moriartys se conserva como proyecto compartido, sin contarlo como dos canales.
+- **Páginas nuevas:** `/marcas/` incluye una ficha institucional imprimible/guardable como PDF; `/recursos/` aloja la guía de Keymailer y Lurkit; `/metodologia/` documenta fuentes, ventanas, muestreo y limitaciones.
+- **SEO:** se alinean canonical, Open Graph, Twitter Card, sitemap y robots.txt con `https://legion-multiversal.pages.dev/`; se agrega favicon SVG y JSON-LD de Organization.
+- **Cloudflare:** la documentación distingue el dominio canónico elegido del estado de despliegue, que debe confirmarse en la cuenta Cloudflare. GitHub Pages sigue teniendo un despliegue secundario verificado.
+- **Alcance no cerrado:** no se implementó un formulario falso. El envío real requiere confirmar Cloudflare Pages Functions y configurar proveedor de correo, secretos y anti-spam. Analítica propia también requiere un proveedor/ID y definición de privacidad. No se atribuye una integración inexistente.
+- **Validación:** CI se ejecuta sobre el SHA de integración; se agregan pruebas de contrato para navegación, páginas y metadatos. El resultado final debe registrarse después de que terminen los workflows.
