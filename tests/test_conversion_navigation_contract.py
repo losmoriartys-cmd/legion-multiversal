@@ -18,7 +18,7 @@ class ConversionNavigationContractTests(unittest.TestCase):
             self.assertIn(f'data-chapter="{chapter}"', nav)
             self.assertIn(label, nav)
         self.assertEqual(nav.count('data-chapter='), 5)
-        markup_without_styles = re.sub(r"<style\\b[^>]*>.*?</style>", "", self.html, flags=re.IGNORECASE | re.DOTALL)
+        markup_without_styles = re.sub(r"<style\b[^>]*>.*?</style>", "", self.html, flags=re.IGNORECASE | re.DOTALL)
         self.assertNotIn("secondary-navigation", markup_without_styles)
 
     def test_home_hero_routes_to_live_and_brands(self):
