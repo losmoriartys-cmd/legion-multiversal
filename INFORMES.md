@@ -3075,3 +3075,12 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **Pendiente de QA:** no se declara inspección visual manual de producción en esta integración. La verificación debe incluir escritorio y móvil, especialmente Origen, Inicio, Comunidad y el expediente BarFender.
 
 - **Precisión BarFender:** se reemplazó también la referencia residual a «juego de la campaña» por «juego de la experiencia» y se acotó la nota de espectadores compartidos a la sesión colaborativa documentada.
+
+
+## 2026-11-16 — Portfolio comercial vivo
+
+- BarFender pasa a «Experiencia 001», no campaña. La ficha de Alianzas incorpora participantes, objetivo, contenido, resultados documentables y aprendizaje; se aclara que el acceso facilitado por Keymailer no fue patrocinio remunerado y no se atribuyen ventas ni ROI.
+- Los formatos comerciales se organizan como individual, cooperativo y multiplataforma, sin prometer paquetes ni entregables.
+- Los ocho perfiles del Roster incorporan afinidad temática cualitativa, sin atribuir cifras ni demografía no medidas. El renderer presenta esa afinidad junto con la identidad y los formatos.
+- Comunidad incorpora criterios de expansión gradual, basados en valores, aporte creativo y participación voluntaria.
+- Se actualizan cache-busters y contratos automatizados. Integración directa a main, sin PR. CI, Pages y QA visual quedan sujetos a confirmación posterior.

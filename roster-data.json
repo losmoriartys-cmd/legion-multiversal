@@ -42,7 +42,8 @@
           "Piezas breves que aprovechen la química y el humor de ambos anfitriones"
         ],
         "disclaimer": "Formatos potenciales para conversar; no representan campañas contratadas ni alianzas vigentes.",
-        "contact": "losmoriartys@gmail.com"
+        "contact": "losmoriartys@gmail.com",
+        "audience_fit": "Afinidad temática: gaming cooperativo, humor, cultura pop y experiencias compartidas en dupla. No implica cifras ni segmentación demográfica."
       },
       "powers": "Perfil de habilidades en construcción. Se completará con la descripción de personaje aprobada por el integrante.",
       "stats": "Métricas en proceso de integración. Los datos se publicarán cuando estén conectados a una fuente verificable y acompañados de su período de medición.",
@@ -179,7 +180,8 @@
           "Retos y dinámicas con otros creadores",
           "Selección de clips para piezas breves"
         ],
-        "disclaimer": "Propuestas potenciales sujetas a disponibilidad, conversación y aprobación del creador; no implican campañas contratadas."
+        "disclaimer": "Propuestas potenciales sujetas a disponibilidad, conversación y aprobación del creador; no implican campañas contratadas.",
+        "audience_fit": "Afinidad temática: videojuegos de acción, eventos, partidas compartidas y momentos destacados. No implica cifras ni segmentación demográfica."
       }
     },
     {
@@ -269,7 +271,8 @@
           "Dinámicas participativas con la comunidad",
           "Piezas breves basadas en momentos destacados"
         ],
-        "disclaimer": "Formatos potenciales, no campañas realizadas ni alianzas confirmadas."
+        "disclaimer": "Formatos potenciales, no campañas realizadas ni alianzas confirmadas.",
+        "audience_fit": "Afinidad temática: gameplay relajado, charlas espontáneas, entretenimiento e IRL. No implica cifras ni segmentación demográfica."
       }
     },
     {
@@ -353,7 +356,8 @@
           "Dinámicas participativas con la comunidad",
           "Clips de momentos o conversaciones destacados"
         ],
-        "disclaimer": "Propuestas potenciales sujetas a confirmación de disponibilidad y aprobación del creador."
+        "disclaimer": "Propuestas potenciales sujetas a confirmación de disponibilidad y aprobación del creador.",
+        "audience_fit": "Afinidad temática: gaming, conversación e interacción con la comunidad. No implica cifras ni segmentación demográfica."
       }
     },
     {
@@ -439,7 +443,8 @@
           "Partidas especiales con otros creadores",
           "Dinámicas participativas y clips de una activación"
         ],
-        "disclaimer": "Posibilidades de colaboración, no campañas contratadas ni calendario de activaciones confirmado."
+        "disclaimer": "Posibilidades de colaboración, no campañas contratadas ni calendario de activaciones confirmado.",
+        "audience_fit": "Afinidad temática: videojuegos, conversación y experiencias compartidas. No implica cifras ni segmentación demográfica."
       }
     },
     {
@@ -524,7 +529,8 @@
           "Integraciones sencillas acordadas con el creador",
           "Registro de clips cuando haya material disponible"
         ],
-        "disclaimer": "Propuestas exploratorias. La especialidad, el calendario y la disponibilidad comercial requieren confirmación de Dave."
+        "disclaimer": "Propuestas exploratorias. La especialidad, el calendario y la disponibilidad comercial requieren confirmación de Dave.",
+        "audience_fit": "Afinidad temática en definición: descubrimiento de videojuegos y experiencias cooperativas. Se actualizará con Dave; no implica cifras ni segmentación demográfica."
       }
     },
     {
@@ -642,7 +648,8 @@
           "Integraciones editoriales de software o tecnología",
           "Piezas divulgativas patrocinadas con transparencia"
         ],
-        "disclaimer": "Formatos potenciales sujetos a la reactivación del canal, disponibilidad y aprobación editorial del creador."
+        "disclaimer": "Formatos potenciales sujetos a la reactivación del canal, disponibilidad y aprobación editorial del creador.",
+        "audience_fit": "Afinidad temática: programación introductoria, herramientas digitales y divulgación sobre ciencia y comportamiento. No implica cifras ni segmentación demográfica."
       }
     },
     {
@@ -728,7 +735,8 @@
           "Dinámicas participativas que conecten juego y reflexión",
           "Integraciones de productos pertinentes al contenido"
         ],
-        "disclaimer": "Posibilidades de colaboración sujetas a encaje editorial y aprobación del creador."
+        "disclaimer": "Posibilidades de colaboración sujetas a encaje editorial y aprobación del creador.",
+        "audience_fit": "Afinidad temática: videojuegos, reflexión, hábitos cotidianos y desarrollo personal. No implica cifras ni segmentación demográfica."
       }
     }
   ],

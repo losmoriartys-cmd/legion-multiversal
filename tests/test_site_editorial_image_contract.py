@@ -58,5 +58,24 @@ class SiteEditorialImageContract(unittest.TestCase):
             self.assertGreaterEqual(opening, 0)
             self.assertIn(number, self.html[opening:position])
 
+
+class CommercialPortfolioContractTests(unittest.TestCase):
+    def test_roster_has_thematic_audience_fit_for_all_eight_profiles(self):
+        import json
+        roster = json.loads((ROOT / "roster-data.json").read_text(encoding="utf-8"))
+        self.assertEqual(len(roster["heroes"]), 8)
+        for hero in roster["heroes"]:
+            self.assertIn("No implica", hero["mediaProfile"]["audience_fit"])
+
+    def test_barfender_case_has_participants_objective_content_results_and_learning(self):
+        for term in ("PARTICIPANTES", "OBJETIVO DE LA EXPERIENCIA", "CONTENIDO REGISTRADO", "RESULTADO DOCUMENTABLE", "APRENDIZAJE"):
+            self.assertIn(term, self.html)
+        self.assertIn("EXPERIENCIA 001 · 4 CREADORES · 4 CANALES", self.html)
+        self.assertNotIn("CAMPAÑA 001 · 4 CREADORES · 4 CANALES", self.html)
+
+    def test_three_modular_formats_and_community_growth_are_present(self):
+        for term in ("FORMATO 01 · INDIVIDUAL", "FORMATO 02 · COOPERATIVO", "FORMATO 03 · MULTIPLATAFORMA", "NO SUMAMOS NOMBRES. CONSTRUIMOS VÍNCULOS."):
+            self.assertIn(term, self.html)
+
 if __name__ == "__main__":
     unittest.main()
