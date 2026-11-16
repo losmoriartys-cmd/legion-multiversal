@@ -874,7 +874,7 @@
             <h3 id="creator-application-title">TU EXPEDIENTE DE INGRESO</h3>
             <p>Contanos quién sos, dónde creás contenido y qué te gustaría construir con la Legión. No hace falta preparar un informe de estadísticas para el primer contacto.</p>
         </div>
-        <form class="comic-form recruitment-contact-form" data-contact-type="creator">
+        <form class="comic-form recruitment-contact-form" data-contact-type="creator" method="post" action="/api/contact">
             <div class="recruitment-fields-grid">
                 <div class="form-group"><label for="creator-name">Nombre o alias *</label><input id="creator-name" name="Nombre o alias" type="text" required placeholder="¿Cómo te conocemos?"></div>
                 <div class="form-group"><label for="creator-country">País / zona horaria</label><input id="creator-country" name="País y zona horaria" type="text" placeholder="Ej. Argentina · GMT-3"></div>
@@ -896,7 +896,7 @@
             <h3 id="brand-proposal-title">CONTANOS QUÉ TENÉS EN MENTE</h3>
             <p>Compartí la información inicial del proyecto. Podemos evaluar propuestas para la Legión en conjunto o para creadores individuales, según el objetivo y el encaje.</p>
         </div>
-        <form class="comic-form recruitment-contact-form" data-contact-type="brand">
+        <form class="comic-form recruitment-contact-form" data-contact-type="brand" method="post" action="/api/contact">
             <div class="recruitment-fields-grid">
                 <div class="form-group"><label for="brand-company">Empresa, estudio o marca *</label><input id="brand-company" name="Empresa o marca" type="text" required placeholder="Nombre de la organización"></div>
                 <div class="form-group"><label for="brand-contact">Persona de contacto *</label><input id="brand-contact" name="Persona de contacto" type="text" required placeholder="Nombre y cargo"></div>
