@@ -62,6 +62,11 @@ class ConversionNavigationContractTests(unittest.TestCase):
         self.assertIn("1 EXPERIENCIA MULTICANAL", self.html)
         self.assertIn(".executive-credential-strip", self.css)
 
+    def test_bar_fender_home_teaser_does_not_repeat_the_case_photo(self):
+        self.assertNotIn("stream4.jpg", self.html)
+        self.assertIn("executive-case-summary", self.html)
+        self.assertIn("BarFenderLos4.jpg", self.html)
+
 
 if __name__ == "__main__":
     unittest.main()
