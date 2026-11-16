@@ -5,15 +5,17 @@ on:
     branches:
       - main
     paths:
+      - 'update_*.py'
       - 'scripts/**'
       - 'tests/**'
-      - 'app.js'
-      - 'roster-02-moriartys.html'
+      - 'data.json'
+      - 'platform-stats.json'
+      - 'clips-data.json'
       - 'roster-data.json'
       - 'creator-records.json'
-      - 'platform-stats.json'
-      - 'data.json'
       - 'creator-metrics.json'
+      - 'app.js'
+      - 'roster-02-moriartys.html'
       - '.github/workflows/test-stats.yml'
   pull_request:
     branches:
