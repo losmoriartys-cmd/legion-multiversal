@@ -3101,3 +3101,6 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **Corrección de QA (16/11/2026):** el primer workflow de las páginas nuevas detectó dos contratos de prueba desactualizados (CTA convertido en enlace y URL Open Graph sin actualizar en todas las apariciones) y una clase de pruebas duplicada. Se corrigen los selectores y se aplica el dominio canónico a todas las referencias OG/Twitter; no se modifica el contenido de métricas por este ajuste.
 
 - **Ajuste del validador estático:** `scripts/validate_site.py` ahora resuelve enlaces limpios a directorios hacia su `index.html`, sin obligar a exponer `/index.html` en las URLs. La validación previa encontró este límite del validador, no archivos faltantes: las tres páginas existen como directorios con índice.
+
+
+- **Informe de optimización (16/11/2026):** se registra el bloque de navegación, credenciales, formularios Cloudflare Pages/Resend, carga de datos por capítulo, media kit por canal, curaduría de clips y consolidación visual de BarFender en `INFORME_OPTIMIZACION_2026-11-16.md`. El informe distingue implementaciones incorporadas de verificaciones pendientes; no atribuye CI, entrega de correo, Lighthouse ni deployment sin evidencia.
