@@ -3,7 +3,7 @@ name: Validar colector de estadísticas
 on:
   push:
     branches:
-      - 'feat/roster-integral-2026-11-14'
+      - main
     paths:
       - 'scripts/**'
       - 'tests/**'
