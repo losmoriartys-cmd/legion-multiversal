@@ -9,6 +9,7 @@ test('el índice de Bitácora enlaza con los capítulos reales del sitio', async
     links.map(link => ({ label: link.textContent.trim(), href: link.getAttribute('href') }))
   );
   expect(entries).toHaveLength(12);
+  expect(entries.some(entry => entry.href.includes('chapter-14'))).toBe(false);
   expect(entries.map(entry => entry.href)).toEqual([
     './index.html#chapter-0',
     './index.html#chapter-1',
