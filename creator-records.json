@@ -259,14 +259,7 @@
         ],
         "future_direction": "Posible regreso durante 2027 con un enfoque renovado; incorporación gradual de temática gamer como línea complementaria, no principal. Proyección conversada, no calendario confirmado.",
         "schedule": "Sin frecuencia de publicación definida.",
-        "platform_metrics": {
-          "subscribers": 56,
-          "videos": 6,
-          "views": 431,
-          "source": "YouTube Data API v3",
-          "captured_at": "2026-11-16T03:37:22Z",
-          "note": "Valores públicos acumulados; la captura más reciente es la fuente canónica. No son métricas privadas ni una proyección."
-        }
+        "metrics_source": "platform-stats.json"
       }
     }
   }
