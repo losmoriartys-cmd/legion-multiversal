@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
-"""Create a transparent, lossless WebP copy of the official Legion emblem.
+"""Create a lossless responsive WebP set for the official Legion emblem.
 
-The PNG is retained as the source of truth. Runtime references are switched
-only after the WebP has been written and verified to be smaller.
+The 1600px master remains available for structured metadata and high-density
+screens. Small on-page emblems use a 512px derivative through srcset.
 """
 from __future__ import annotations
 
 import io
 import os
+import re
 import tempfile
 from pathlib import Path
 
@@ -15,9 +16,11 @@ from PIL import Image, ImageOps
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "legion_logo_final_hybrid.png"
-OUTPUT = ROOT / "legion_logo_final_hybrid.webp"
-RUNTIME_EXTENSIONS = {".html", ".htm", ".css", ".js", ".mjs", ".json", ".svg", ".xml"}
-MIN_SAVING_PERCENT = 10.0
+MASTER = ROOT / "legion_logo_final_hybrid.webp"
+RESPONSIVE = ROOT / "legion_logo_final_hybrid-512.webp"
+RUNTIME_EXTENSIONS = {".html", ".htm"}
+EXPECTED_SIZE = (1600, 1600)
+RESPONSIVE_SIZE = (512, 512)
 
 
 def atomic_write(path: Path, content: bytes) -> None:
@@ -36,87 +39,127 @@ def atomic_write(path: Path, content: bytes) -> None:
         raise
 
 
-def runtime_references() -> list[tuple[Path, str]]:
-    references = []
-    for path in ROOT.rglob("*"):
-        if not path.is_file() or path.suffix.lower() not in RUNTIME_EXTENSIONS:
-            continue
-        if any(part in {".git", "node_modules", ".venv", "venv", "__pycache__"} for part in path.parts):
-            continue
-        try:
-            content = path.read_text(encoding="utf-8")
-        except (OSError, UnicodeDecodeError):
-            continue
-        if SOURCE.name in content:
-            references.append((path, content))
-    return references
+def open_source():
+    opened = Image.open(SOURCE)
+    image = ImageOps.exif_transpose(opened)
+    has_alpha = (
+        "A" in image.getbands()
+        or (image.mode == "P" and "transparency" in image.info)
+    )
+    return image.convert("RGBA" if has_alpha else "RGB"), has_alpha
+
+
+def verify_master(has_alpha: bool) -> bytes:
+    if not MASTER.is_file():
+        raise SystemExit(f"Falta el WebP maestro: {MASTER.name}")
+    with Image.open(MASTER) as image:
+        image.load()
+        if image.format != "WEBP" or image.size != EXPECTED_SIZE:
+            raise SystemExit("El WebP maestro no conserva formato o dimensiones.")
+        if has_alpha and "A" not in image.getbands():
+            raise SystemExit("El WebP maestro perdió el canal alfa.")
+    return MASTER.read_bytes()
+
+
+def build_responsive(image: Image.Image, has_alpha: bool) -> bytes:
+    small = image.copy()
+    small.thumbnail(RESPONSIVE_SIZE, Image.Resampling.LANCZOS)
+    if small.size != RESPONSIVE_SIZE:
+        raise SystemExit(f"Dimensiones inesperadas para el derivado: {small.size}")
+    buffer = io.BytesIO()
+    small.save(buffer, format="WEBP", lossless=True, method=6, exact=True)
+    data = buffer.getvalue()
+    if has_alpha:
+        with Image.open(io.BytesIO(data)) as check:
+            if "A" not in check.getbands():
+                raise SystemExit("El derivado responsive perdió el canal alfa.")
+    return data
+
+
+def update_img_tags(content: str) -> tuple[str, int]:
+    count = 0
+    tag_pattern = re.compile(r"<img\\b[^>]*>", re.IGNORECASE)
+
+    def replace_tag(match: re.Match[str]) -> str:
+        nonlocal count
+        tag = match.group(0)
+        src_match = re.search(r"\\bsrc=(['\"])([^'\"]+)\\1", tag, re.IGNORECASE)
+        if not src_match or src_match.group(2) != MASTER.name:
+            return tag
+        quote = src_match.group(1)
+        tag = tag[:src_match.start(2)] + RESPONSIVE.name + tag[src_match.end(2):]
+        if not re.search(r"\\bsrcset=", tag, re.IGNORECASE):
+            addition = (
+                f' srcset="{RESPONSIVE.name} 512w, {MASTER.name} 1600w"'
+                ' sizes="112px"'
+            )
+            tag = tag[:-1] + addition + ">"
+        count += 1
+        return tag
+
+    return tag_pattern.sub(replace_tag, content), count
 
 
 def main() -> None:
     if not SOURCE.is_file():
-        raise SystemExit(f"No se encuentra el PNG original: {SOURCE}")
-    if OUTPUT.exists():
-        raise SystemExit(f"El destino ya existe; no se sobrescribe: {OUTPUT}")
+        raise SystemExit(f"No se encuentra el PNG original: {SOURCE.name}")
+    image, has_alpha = open_source()
+    if image.size != EXPECTED_SIZE:
+        raise SystemExit(f"Dimensiones originales inesperadas: {image.size}")
+    master_data = verify_master(has_alpha)
+    responsive_data = build_responsive(image, has_alpha)
 
-    original_size = SOURCE.stat().st_size
-    with Image.open(SOURCE) as opened:
-        image = ImageOps.exif_transpose(opened)
-        has_alpha = (
-            "A" in image.getbands()
-            or (image.mode == "P" and "transparency" in image.info)
-        )
-        image = image.convert("RGBA" if has_alpha else "RGB")
-        original_dimensions = image.size
-        buffer = io.BytesIO()
-        # Lossless encoding preserves sharp edges, colors and alpha for a logo.
-        image.save(buffer, format="WEBP", lossless=True, method=6, exact=True)
-        webp_data = buffer.getvalue()
+    if len(responsive_data) >= len(master_data):
+        raise SystemExit("El derivado de 512px no reduce el peso respecto del maestro.")
 
-    webp_size = len(webp_data)
-    saving = (original_size - webp_size) * 100 / original_size
-    if webp_size >= original_size or saving < MIN_SAVING_PERCENT:
-        raise SystemExit(
-            f"WebP lossless insuficiente: {original_size:,} -> {webp_size:,} bytes "
-            f"({saving:.1f}% de ahorro; mínimo {MIN_SAVING_PERCENT:.0f}%). "
-            "No se modifica ninguna referencia."
-        )
+    pages = []
+    for path in ROOT.rglob("*"):
+        if path.is_file() and path.suffix.lower() in RUNTIME_EXTENSIONS:
+            if any(part in {".git", "node_modules", ".venv", "venv", "__pycache__"} for part in path.parts):
+                continue
+            try:
+                content = path.read_text(encoding="utf-8")
+            except (OSError, UnicodeDecodeError):
+                continue
+            if MASTER.name in content:
+                pages.append((path, content))
 
-    refs = runtime_references()
-    if not refs:
-        raise SystemExit("No se encontraron referencias runtime al PNG; no se cambia el sitio.")
-    expected = ROOT / "index.html"
-    if not any(path == expected for path, _ in refs):
-        raise SystemExit("No se encontró la referencia principal en index.html.")
-
-    atomic_write(OUTPUT, webp_data)
-    with Image.open(OUTPUT) as check:
-        check.load()
-        if check.format != "WEBP" or check.size != original_dimensions:
-            OUTPUT.unlink(missing_ok=True)
-            raise SystemExit("La verificación del WebP falló: formato o dimensiones distintos.")
-        if has_alpha and "A" not in check.getbands():
-            OUTPUT.unlink(missing_ok=True)
-            raise SystemExit("La verificación del WebP falló: se perdió el canal alfa.")
-    if OUTPUT.stat().st_size != webp_size:
-        OUTPUT.unlink(missing_ok=True)
-        raise SystemExit("La verificación de tamaño del WebP falló.")
+    index = ROOT / "index.html"
+    if not any(path == index for path, _ in pages):
+        raise SystemExit("No se encontró el emblema maestro en index.html.")
 
     changed = []
-    for path, content in refs:
-        updated = content.replace(SOURCE.name, OUTPUT.name)
-        if updated != content:
+    for path, content in pages:
+        updated, count = update_img_tags(content)
+        if count:
             atomic_write(path, updated.encode("utf-8"))
-            if OUTPUT.name not in path.read_text(encoding="utf-8"):
-                raise SystemExit(f"No se pudo verificar la referencia en {path.relative_to(ROOT)}")
-            changed.append(path.relative_to(ROOT).as_posix())
+            verified = path.read_text(encoding="utf-8")
+            if RESPONSIVE.name not in verified or MASTER.name not in verified:
+                raise SystemExit(f"Falló la verificación de srcset en {path.relative_to(ROOT)}")
+            changed.append((path.relative_to(ROOT).as_posix(), count))
 
-    print(f"Origen conservado: {SOURCE.name} ({original_size:,} bytes)")
-    print(f"WebP lossless: {OUTPUT.name} ({webp_size:,} bytes; ahorro {saving:.1f}%)")
-    print(f"Dimensiones conservadas: {original_dimensions[0]}x{original_dimensions[1]}")
+    if not changed:
+        raise SystemExit("No se encontraron etiquetas img que usen el WebP maestro como src.")
+
+    atomic_write(RESPONSIVE, responsive_data)
+    with Image.open(RESPONSIVE) as check:
+        check.load()
+        if check.format != "WEBP" or check.size != RESPONSIVE_SIZE:
+            RESPONSIVE.unlink(missing_ok=True)
+            raise SystemExit("Falló la verificación del WebP responsive.")
+        if has_alpha and "A" not in check.getbands():
+            RESPONSIVE.unlink(missing_ok=True)
+            raise SystemExit("El WebP responsive perdió transparencia.")
+
+    original_size = SOURCE.stat().st_size
+    print(f"PNG original conservado: {original_size:,} bytes")
+    print(f"WebP maestro lossless: {len(master_data):,} bytes (1600x1600)")
+    print(f"WebP responsive lossless: {len(responsive_data):,} bytes (512x512)")
+    print(f"Reducción adicional del recurso visual: {(1 - len(responsive_data) / len(master_data)) * 100:.1f}%")
     print(f"Transparencia conservada: {'sí' if has_alpha else 'no había canal alfa'}")
-    print("Referencias runtime actualizadas:")
-    for path in changed:
-        print(f" - {path}")
+    print("Etiquetas img migradas a srcset:")
+    for path, count in changed:
+        print(f" - {path}: {count}")
 
 
 if __name__ == "__main__":
