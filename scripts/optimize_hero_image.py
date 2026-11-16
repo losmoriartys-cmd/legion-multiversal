@@ -10,9 +10,9 @@ OUTPUT = ROOT / "image_20261106_124855.webp"
 HTML = ROOT / "index.html"
 MAX_BYTES = 165 * 1024
 MAX_WIDTH = 1536
-RESPONSIVE_WIDTHS = (640, 960, 1280)
+RESPONSIVE_WIDTHS = (480, 640, 960, 1280)
 RESPONSIVE_QUALITIES = (82, 80, 78, 76, 74, 72)
-SIZES = "(max-width: 640px) calc(100vw - 100px), (max-width: 900px) calc(100vw - 80px), 1200px"
+SIZES = "(max-width: 640px) calc(100vw - 64px), (max-width: 900px) calc(100vw - 80px), 1200px"
 
 if not SOURCE.is_file() or not HTML.is_file():
     raise SystemExit("Falta la imagen original o index.html; no se modifica el sitio.")
