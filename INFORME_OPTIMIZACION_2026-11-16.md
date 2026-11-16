@@ -82,3 +82,5 @@
 
 - La carga diferida del Roster también se activa para los hashes históricos `#expediente-*`, además de las rutas canónicas `#roster/*`. Se preservan enlaces compartidos antes de la optimización de carga.
 - Los tests Playwright simulan la respuesta de configuración ausente de `/api/contact` porque el servidor estático local no ejecuta Cloudflare Pages Functions. La prueba no envía datos ni simula un envío exitoso; la integración real se valida en Cloudflare.
+
+- **Rutas históricas del Roster:** se corrige la carrera entre `roster-data.json` y `creator-records.json`. La restauración del perfil espera a que ambos recursos estén listos; las pruebas ahora esperan la evidencia editorial cargada antes de comparar las rutas históricas.
