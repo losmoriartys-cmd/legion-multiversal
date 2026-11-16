@@ -88,7 +88,7 @@ class ConversionNavigationContractTests(unittest.TestCase):
         self.assertIn("loadResourceOnce('twitch-clips', loadTwitchClipsData)", app)
 
     def test_alliance_points_to_the_single_full_experience_dossier(self):
-        alliance = self.html.split('id="alliance-cases"', 1)[1].split('id="alliance-transparency"', 1)[0]
+        alliance = self.html.split('<article class="alliance-case-card alliance-case-index">', 1)[1].split("</article>", 1)[0]
         self.assertIn("VER EXPEDIENTES DE COLABORACIÓN", alliance)
         self.assertNotIn("alliance-case-facts", alliance)
         self.assertNotIn("BARFENDER", alliance)

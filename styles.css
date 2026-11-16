@@ -5349,3 +5349,10 @@ main .chapter-panel :where(.chapter-cta, .executive-button, .comic-submit-btn,
 
 /* Portfolio comercial vivo */
 .alliance-case-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:18px 0;padding:0}.alliance-case-facts>div{padding:12px 14px;background:rgba(5,12,22,.62);border:1px solid rgba(141,223,242,.16);min-width:0}.alliance-case-facts dt{margin-bottom:5px;color:#e8ca82;font-size:.66rem;font-weight:900;letter-spacing:.1em}.alliance-case-facts dd{margin:0;color:#c4d0df;font-size:.86rem;line-height:1.55}.belonging-growth{margin:30px 0;padding:clamp(18px,3vw,30px);border:1px solid rgba(141,223,242,.22);background:linear-gradient(135deg,rgba(16,31,48,.88),rgba(7,13,23,.92))}.belonging-growth h3{margin:8px 0 12px;color:#f3d98e;font:clamp(1.8rem,4vw,2.8rem)/1.05 "Bangers",cursive;letter-spacing:.04em}.belonging-growth p,.belonging-growth li{color:#c4d0df;line-height:1.65}.belonging-growth ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 22px;padding-left:20px}@media(max-width:650px){.alliance-case-facts,.belonging-growth ul{grid-template-columns:1fr}}
+
+.campaign-case-index { margin:22px 0 10px; color:#66dff3; font-size:.82rem; font-weight:900; letter-spacing:.12em; }
+.campaign-case-facts { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; margin:14px 0 18px; }
+.campaign-case-facts>div { min-width:0; padding:13px; border:1px solid rgba(102,223,243,.2); background:rgba(10,20,33,.72); }
+.campaign-case-facts dt { margin-bottom:6px; color:#ffdf4d; font-size:.75rem; font-weight:900; letter-spacing:.1em; }
+.campaign-case-facts dd { margin:0; color:#c6d2df; font-size:.92rem; line-height:1.5; }
+@media(max-width:680px) { .campaign-case-facts { grid-template-columns:1fr; } }

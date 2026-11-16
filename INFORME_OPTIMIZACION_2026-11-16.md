@@ -67,3 +67,10 @@
 5. Revisar el diseño en 375 px y 1440×900, incluyendo el media kit imprimible.
 6. Activar Cloudflare Web Analytics según `docs/analytics-deployment.md` y publicar el aviso de medición/privacidad antes de habilitarlo.
 
+
+
+## Consolidación del expediente BarFender · 16/11/2026
+
+- Alianzas ahora contiene una tarjeta índice genérica y enlaza al único expediente completo de Colaboraciones; ya no repite participantes, métricas, VOD ni descargos de BarFender.
+- El expediente principal conserva explícitamente participantes, objetivo, contenido registrado, resultados documentables y aprendizaje. Aclara que las métricas del VOD de Los Moriartys corresponden a la transmisión completa y que no se atribuyen ventas, conversiones ni ROI.
+- El acceso mediante Keymailer y la ausencia de patrocinio/campaña remunerada se aclaran una sola vez en el expediente, además del bloque general de transparencia.
