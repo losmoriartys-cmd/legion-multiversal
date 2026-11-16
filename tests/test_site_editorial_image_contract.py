@@ -36,6 +36,19 @@ class SiteEditorialImageContract(unittest.TestCase):
         self.assertIn('src="image_20261107_021355.jpg', self.html)
         self.assertIn(".origin-editorial-cover img", self.css)
 
+    def test_home_exposes_live_status_updated_from_public_capture(self):
+        for marker in (
+            'class="home-live-strip"',
+            'id="home-live-status"',
+            'id="home-live-updated"',
+            'id="home-follow-link"',
+            'onclick="openLiveDrawer()"',
+        ):
+            self.assertIn(marker, self.html)
+        self.assertIn("home-live-status", (ROOT / "app.js").read_text(encoding="utf-8"))
+        self.assertIn("home-live-updated", (ROOT / "app.js").read_text(encoding="utf-8"))
+        self.assertIn("home-follow-link", (ROOT / "app.js").read_text(encoding="utf-8"))
+
     def test_barfender_is_documented_as_collaboration_not_paid_campaign(self):
         self.assertIn("CASO COLABORATIVO DOCUMENTADO · N.º 001", self.html)
         self.assertIn("EXPERIENCIA<br><strong>001</strong>", self.html)
