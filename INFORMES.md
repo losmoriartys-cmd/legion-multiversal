@@ -3123,3 +3123,5 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **Archivo de campañas:** se retiró del HTML público el anexo con solicitudes, accesos y fechas operativas. No se simula privacidad mediante un modal o URL no enlazada; su publicación interna queda pendiente de autenticación real en servidor.
 - **Primera pantalla:** Playwright detectó que los CTAs quedaban por debajo del viewport en escritorio y móvil. Se redujo la altura mínima del hero y su espaciado responsive para que el titular y las dos rutas principales entren en el primer pantallazo.
 - **Contrato editorial:** se ajustó la prueba del archivo operativo para verificar que el anexo y sus fechas no estén publicados, y que el sitio comunique la necesidad de autenticación real para reabrirlo a creadores.
+- **Bitácora:** se retiró también el folio público «Anexo · Campañas y Accesos» y se actualizó el índice a 14 folios, evitando que el archivo eliminado siga apareciendo en el libro.
+- **Ajuste de viewport:** se redujo el padding vertical del hero de escritorio tras detectar un desborde de 2,9 px en la prueba de primera pantalla.

@@ -8,7 +8,7 @@ test('el índice de Bitácora enlaza con los capítulos reales del sitio', async
   const entries = await page.locator('.index-list a').evaluateAll(links =>
     links.map(link => ({ label: link.textContent.trim(), href: link.getAttribute('href') }))
   );
-  expect(entries).toHaveLength(13);
+  expect(entries).toHaveLength(12);
   expect(entries.map(entry => entry.href)).toEqual([
     './index.html#chapter-0',
     './index.html#chapter-1',
@@ -18,7 +18,6 @@ test('el índice de Bitácora enlaza con los capítulos reales del sitio', async
     './index.html#chapter-9',
     './index.html#chapter-8',
     './index.html#chapter-12',
-    './index.html#chapter-14',
     './index.html#chapter-5',
     './index.html#chapter-10',
     './index.html#chapter-6',
@@ -83,7 +82,6 @@ test('el libro recorre los quince folios y mantiene las dos páginas visibles en
     'CAPÍTULO 06 · ALIANZAS',
     'CAPÍTULO 07 · COLABORACIONES',
     'EXPEDIENTE 001 · BARFENDER',
-    'ANEXO · CAMPAÑAS Y ACCESOS',
     'CAPÍTULO 08 · ARSENAL',
     'CAPÍTULO 09 · EN VIVO',
     'CAPÍTULO 10 · RECLUTAMIENTO',
@@ -96,7 +94,7 @@ test('el libro recorre los quince folios y mantiene las dos páginas visibles en
     if (index < expectedTags.length - 1) await desktop.locator('#next').click();
   }
   expect(seen).toEqual(expectedTags);
-  await expect(desktop.locator('#page-number')).toContainText('/ 15');
+  await expect(desktop.locator('#page-number')).toContainText('/ 14');
   await expect(desktop.locator('#next')).toBeDisabled();
   expect(errors).toEqual([]);
 

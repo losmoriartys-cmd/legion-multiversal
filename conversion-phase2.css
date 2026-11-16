@@ -1,5 +1,5 @@
 /* Fase 2 · conversión, accesibilidad y jerarquía de contenidos */
-.executive-hero{position:relative;display:block;min-height:clamp(440px,58vw,640px);overflow:hidden;padding:clamp(34px,6vw,76px);border:1px solid rgba(128,190,220,.24);background:#08111e;isolation:isolate}
+.executive-hero{position:relative;display:block;min-height:clamp(440px,58vw,640px);overflow:hidden;padding:clamp(24px,4vw,52px);border:1px solid rgba(128,190,220,.24);background:#08111e;isolation:isolate}
 .executive-hero-art{position:absolute;inset:0;margin:0;padding:0;border:0;box-shadow:none;transform:none;z-index:-2;opacity:.34}
 .executive-hero-art img{width:100%;height:100%;max-height:none;object-fit:cover;object-position:center 38%;filter:saturate(.72)}
 .executive-hero:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(5,10,18,.96),rgba(5,10,18,.72) 58%,rgba(5,10,18,.25)),linear-gradient(0deg,rgba(5,10,18,.45),transparent 60%)}
