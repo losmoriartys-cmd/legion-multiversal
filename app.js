@@ -1013,10 +1013,13 @@ function renderRosterSelector() {
         const isLive = Boolean(state?.fresh && state.channel?.live);
         const isSelected = (hero.id || hero.slug) === selectedRosterCreatorId;
         const image = hero.portrait || hero.img || '';
-        return '<button type="button" class="roster-selector-tile' + (isSelected ? ' is-selected' : '') + '" role="tab" id="roster-tab-' + safe(hero.id || hero.slug) + '" aria-selected="' + isSelected + '" aria-controls="roster-selector-panel" tabindex="' + (isSelected ? '0' : '-1') + '" data-roster-select="' + index + '" aria-label="Conocer a ' + safe(getHeroDisplayName(hero)) + '">' +
+        return '<button type="button" class="roster-selector-tile' + (isSelected ? ' is-selected' : '') + '" role="tab" id="roster-tab-' + safe(hero.id || hero.slug) + '" aria-selected="' + isSelected + '" aria-controls="roster-selector-panel" tabindex="' + (isSelected ? '0' : '-1') + '" data-roster-select="' + index + '" data-creator-id="' + safe(hero.id || hero.slug) + '" data-roster-role="' + safe(hero.role || 'member') + '" aria-label="Conocer a ' + safe(getHeroDisplayName(hero)) + ', expediente ' + safe(hero.cardNumber || String(index + 1).padStart(3, '0')) + '">' +
+            '<span class="roster-selector-tile-frame">' +
             (image ? '<img src="' + safe(image) + '" alt="" loading="' + (index < 4 ? 'eager' : 'lazy') + '" decoding="async">' : '<span class="roster-selector-no-portrait" aria-hidden="true">' + safe((hero.display_name || hero.name || '?').slice(0,1)) + '</span>') +
-            (isLive ? '<span class="roster-selector-tile-live">EN VIVO</span>' : '') +
-            '<span class="roster-selector-tile-name">' + safe(getHeroDisplayName(hero)) + '</span><span class="roster-selector-tile-role">' + safe(hero.codename || tileType) + '</span></button>';
+            '<span class="roster-selector-tile-top"><span>ARCHIVO LM</span><span>EXP. ' + safe(hero.cardNumber || String(index + 1).padStart(3, '0')) + '</span></span>' +
+            (isLive ? '<span class="roster-selector-tile-live">● EN VIVO</span>' : '') +
+            '<span class="roster-selector-tile-info"><span class="roster-selector-tile-role">' + safe(hero.codename || tileType) + '</span><span class="roster-selector-tile-name">' + safe(getHeroDisplayName(hero)) + '</span><span class="roster-selector-tile-cue">ABRIR EXPEDIENTE ↗</span></span>' +
+            '</span></button>';
     }).join('');
     const tags = areas.length ? areas.slice(0,3).map(area => '<span>' + safe(area) + '</span>').join('') : '<span>Especialidad por definir</span>';
     const liveLabel = selected.creator_type === 'video_creator'
@@ -1043,8 +1046,8 @@ function renderRosterSelector() {
     host.innerHTML = '<div class="roster-selector-heading"><div><span class="roster-selector-kicker">ARCHIVO CENTRAL · SELECCIÓN DE PERSONAJES</span><h2>ELEGÍ A TU CREADOR</h2><p>Ocho integrantes. Ocho identidades. Una misma Legión.</p></div><div class="roster-selector-actions">' + liveSummary + '<button type="button" class="roster-selector-surprise" id="roster-selector-surprise">SORPRENDEME ↗</button></div></div>' +
         '<div class="roster-selector-progress"><span id="roster-selector-progress-text" aria-live="polite">CONOCISTE ' + known + ' DE ' + heroesData.length + '</span><div class="roster-selector-progress-track" role="progressbar" aria-label="Integrantes conocidos" aria-valuemin="0" aria-valuemax="' + heroesData.length + '" aria-valuenow="' + known + '"><i style="width:' + (known / heroesData.length * 100) + '%"></i></div></div>' +
         '<div class="roster-selector-rail" role="tablist" aria-label="Elegí uno de los ocho integrantes">' + tiles + '</div>' +
-        '<section class="roster-selector-panel" id="roster-selector-panel" role="tabpanel" aria-labelledby="roster-tab-' + safe(selected.id || selected.slug) + '" tabindex="0">' +
-        '<div class="roster-selector-art">' + (selected.img || selected.portrait ? '<img src="' + safe(selected.img || selected.portrait) + '" alt="Ilustración de ' + safe(getHeroDisplayName(selected)) + '" loading="eager" decoding="async">' : '<span>RETRATO PENDIENTE</span>') + '<span class="roster-selector-art-number">EXP. ' + safe(selected.cardNumber || 'S/N') + '</span></div>' +
+        '<section class="roster-selector-panel" id="roster-selector-panel" data-roster-role="' + safe(selected.role || 'member') + '" role="tabpanel" aria-labelledby="roster-tab-' + safe(selected.id || selected.slug) + '" tabindex="0">' +
+        '<div class="roster-selector-art"><span class="roster-selector-art-kicker">LEGIÓN MULTIVERSAL · ARCHIVO DE PERSONAJES</span>' + (selected.img || selected.portrait ? '<img src="' + safe(selected.img || selected.portrait) + '" alt="Ilustración de ' + safe(getHeroDisplayName(selected)) + '" loading="eager" decoding="async">' : '<span>RETRATO PENDIENTE</span>') + '<span class="roster-selector-art-number">EXP. ' + safe(selected.cardNumber || 'S/N') + '</span></div>' +
         '<div class="roster-selector-copy"><span class="roster-selector-identity">' + safe(identity) + ' · ' + safe(creatorType) + '</span><h3>' + safe(getHeroDisplayName(selected)) + '</h3><p class="roster-selector-real-identity">' + safe(selected.identity_scope === 'shared_project' ? 'Proyecto compartido de ' + (selected.represented_people || []).join(' y ') : selected.identity_scope === 'individual_creator' ? 'Creador/a individual' : 'Integrante de Legión Multiversal') + '</p>' +
         '<div class="roster-selector-tags">' + tags + '</div><p class="roster-selector-ideal"><strong>IDEAL SI TE GUSTA:</strong> ' + safe(idealText) + '</p>' +
         '<p class="roster-selector-description">' + safe(intro) + '</p>' + quote +
@@ -1063,6 +1066,24 @@ function renderRosterSelector() {
     });
     host.querySelectorAll('[data-roster-select]').forEach(button => {
         button.addEventListener('click', () => selectRosterCreator(Number(button.dataset.rosterSelect), true));
+        button.addEventListener('pointermove', event => {
+            if (event.pointerType !== 'mouse' || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            const rect = button.getBoundingClientRect();
+            const x = (event.clientX - rect.left) / Math.max(rect.width, 1);
+            const y = (event.clientY - rect.top) / Math.max(rect.height, 1);
+            button.style.setProperty('--card-tilt-x', ((.5 - y) * 7).toFixed(2) + 'deg');
+            button.style.setProperty('--card-tilt-y', ((x - .5) * 9).toFixed(2) + 'deg');
+            button.style.setProperty('--card-shine-x', (x * 100).toFixed(1) + '%');
+            button.style.setProperty('--card-shine-y', (y * 100).toFixed(1) + '%');
+            button.classList.add('is-tilting');
+        });
+        button.addEventListener('pointerleave', () => {
+            button.style.setProperty('--card-tilt-x', '0deg');
+            button.style.setProperty('--card-tilt-y', '0deg');
+            button.style.setProperty('--card-shine-x', '50%');
+            button.style.setProperty('--card-shine-y', '50%');
+            button.classList.remove('is-tilting');
+        });
     });
     host.querySelector('#roster-selector-surprise')?.addEventListener('click', () => {
         const candidates = heroesData.map((hero,index) => index).filter(index => (heroesData[index].id || heroesData[index].slug) !== selectedRosterCreatorId);
