@@ -79,3 +79,7 @@
 @media(prefers-reduced-motion:reduce) {
  #chapter-2 .roster-selector * { scroll-behavior:auto !important; transition:none !important; }
 }
+#chapter-2 .roster-selector-load-error { padding:20px; border:1px solid rgba(255,145,155,.4); border-radius:8px; background:#241722; color:#f4dce0; }
+#chapter-2 .roster-selector-load-error strong { color:#ffabb3; letter-spacing:.08em; }
+#chapter-2 .roster-selector-load-error p { color:#d9c4ca; }
+#chapter-2 .roster-selector-description { display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:5; overflow:hidden; }
