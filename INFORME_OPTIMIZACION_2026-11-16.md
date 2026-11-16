@@ -74,3 +74,5 @@
 - Alianzas ahora contiene una tarjeta índice genérica y enlaza al único expediente completo de Colaboraciones; ya no repite participantes, métricas, VOD ni descargos de BarFender.
 - El expediente principal conserva explícitamente participantes, objetivo, contenido registrado, resultados documentables y aprendizaje. Aclara que las métricas del VOD de Los Moriartys corresponden a la transmisión completa y que no se atribuyen ventas, conversiones ni ROI.
 - El acceso mediante Keymailer y la ausencia de patrocinio/campaña remunerada se aclaran una sola vez en el expediente, además del bloque general de transparencia.
+
+- **Ajuste de contrato CI:** la carga de clips usa el helper `add(key, loader)`, que delega en `loadResourceOnce`; la prueba ahora verifica esa llamada real en lugar de exigir una invocación directa inexistente. No cambia el comportamiento de carga.
