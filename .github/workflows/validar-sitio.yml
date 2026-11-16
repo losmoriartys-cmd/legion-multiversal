@@ -82,6 +82,7 @@ jobs:
                   assert image.format == "WEBP", f"{path.name} no es WebP."
                   assert image.width == width, f"{path.name} no tiene el ancho esperado."
           assert 'src="image_20261106_124855-960.webp"' in html, "El Hero no usa el candidato responsive como fallback."
+          assert 'width="960" height="505"' in html, "Las dimensiones intrínsecas no coinciden con el fallback del Hero."
           assert all(f"image_20261106_124855-{width}.webp {width}w" in html for width in widths), "Falta un candidato en srcset."
           assert 'imagesrcset=' in html and 'imagesizes=' in html, "El preload no negocia imágenes responsive."
           assert 'fetchpriority="high"' in html, "El Hero perdió fetchpriority high."
