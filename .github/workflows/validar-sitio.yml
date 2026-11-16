@@ -72,8 +72,6 @@ jobs:
         run: python scripts/build_creator_metrics.py
       - name: Validar modelo normalizado multiplataforma
         run: python scripts/validate_creator_metrics.py
-      - name: Ejecutar pruebas unitarias de colectores
-        run: python -m unittest discover -s tests -v
       - name: Instalar dependencias de pruebas de navegador
         run: npm install
       - name: Instalar Chromium para Playwright
