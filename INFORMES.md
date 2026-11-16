@@ -6,8 +6,8 @@
 - **Implementado:** horarios cargados como texto declarado por el titular, en hora Argentina. Son horarios habituales, no datos medidos. Dave y Pato se dejaron sin horario fijo: Dave sube a Twitch sin horario confirmado; Pato publica en YouTube sin directos.
 - **Validaciones y resultados:** `scripts/validate_roster_data.py` → OK (8 integrantes, 9 cuentas). `scripts/validate_site.py` → validación estática superada (8 perfiles revisados, 46 referencias locales comprobadas).
 - **Pendientes / riesgos:** no hay métricas comparables. La columna «Métricas comparables» sigue en «No disponible» para los ocho perfiles hasta fijar una ventana y una fuente comunes. Falta confirmar la lista completa de canales de `data.json`. Pendiente de verificación visual en escritorio y móvil del roster tras el despliegue de Pages.
-- **Commit:** pendiente de hash al momento de escribir esta entrada.
-- **Despliegue:** pendiente de verificación.
+- **Commit:** `2af9551` (carga de horarios). El test `test_only_dave_has_an_explicit_unconfirmed_schedule_note` falló en CI porque codificaba la decisión anterior; se actualizó para exigir horario en los ocho perfiles y que Dave sea el único sin horario fijo confirmado (commit de corrección en esta misma entrada).
+- **Despliegue:** `pages build and deployment` en progreso sobre `2af9551`; pendiente de verificación visual del roster.
 
 ---
 

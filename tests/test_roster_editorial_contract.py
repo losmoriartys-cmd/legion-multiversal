@@ -39,12 +39,15 @@ class RosterEditorialContractTests(unittest.TestCase):
         self.assertNotIn("platform_metrics", profile_notes)
 
     def test_only_dave_has_an_explicit_unconfirmed_schedule_note(self):
-        scheduled = [hero["id"] for hero in self.roster["heroes"] if hero.get("schedule")]
-        self.assertEqual(scheduled, ["dave-nexus"])
-        self.assertEqual(
-            next(hero for hero in self.roster["heroes"] if hero["id"] == "dave-nexus")["schedule"],
-            "Sin horario fijo confirmado",
-        )
+        # Horarios declarados por el titular para los ocho perfiles; solo Dave queda sin horario fijo confirmado.
+        self.assertEqual(len(self.roster["heroes"]), 8)
+        self.assertTrue(all(hero.get("schedule") for hero in self.roster["heroes"]))
+        unconfirmed = [
+            hero["id"]
+            for hero in self.roster["heroes"]
+            if hero.get("schedule", "").startswith("Sin horario fijo confirmado")
+        ]
+        self.assertEqual(unconfirmed, ["dave-nexus"])
 
     def test_all_eight_dossiers_use_the_same_live_renderer(self):
         dispatch = self.app.split("let pages;", 1)[1].split("pages = normalizeRosterDossierPages", 1)[0]
