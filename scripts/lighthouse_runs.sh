@@ -25,23 +25,32 @@ for command in npx python3; do
   }
 done
 
-mkdir -p "$OUT_DIR/github-pages" "$OUT_DIR/preview"
+mkdir -p "$OUT_DIR"
 
 run_environment() {
-  local name="$1" url="$2" i
+  local name="$1" url="$2" preset="$3" i
+  local -a preset_args=()
+  if [[ "$preset" == "desktop" ]]; then
+    preset_args+=(--preset=desktop)
+  fi
+  mkdir -p "$OUT_DIR/$name"
   for ((i = 1; i <= RUNS; i++)); do
     echo ">>> Corrida $i/$RUNS · $name · $url"
     npx --yes lighthouse "$url" \
       --quiet \
       --chrome-flags="--headless=new --no-sandbox" \
       --only-categories=performance,accessibility,best-practices,seo \
+      "${preset_args[@]}" \
       --output=json --output=html \
       --output-path="$OUT_DIR/$name/run$i"
   done
 }
 
-run_environment "github-pages" "$GH_URL"
+# Lighthouse usa móvil por defecto; escritorio se mide con el preset oficial desktop.
+run_environment "github-pages-mobile" "$GH_URL" "mobile"
+run_environment "github-pages-desktop" "$GH_URL" "desktop"
 if [[ -n "$PREVIEW_URL" ]]; then
-  run_environment "preview" "$PREVIEW_URL"
+  run_environment "preview-mobile" "$PREVIEW_URL" "mobile"
+  run_environment "preview-desktop" "$PREVIEW_URL" "desktop"
 fi
 python3 "$(dirname "$0")/summarize_lighthouse.py" "$OUT_DIR"

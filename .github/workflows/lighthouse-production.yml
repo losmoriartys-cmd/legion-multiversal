@@ -1,0 +1,77 @@
+name: Lighthouse · producción GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - '*.html'
+      - '*.css'
+      - 'assets/**'
+      - 'scripts/lighthouse_runs.sh'
+      - 'scripts/summarize_lighthouse.py'
+      - '.github/workflows/lighthouse-production.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: read
+
+concurrency:
+  group: lighthouse-production
+  cancel-in-progress: false
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Instalar Chrome
+        id: chrome
+        uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: stable
+      - name: Esperar a que GitHub Pages publique este commit
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EXPECTED_SHA: ${{ github.sha }}
+        run: |
+          for attempt in $(seq 1 40); do
+            response="$(gh api "repos/${GITHUB_REPOSITORY}/pages/builds/latest" 2>/dev/null || true)"
+            status="$(printf '%s' "$response" | jq -r '.status // empty')"
+            deployed_sha="$(printf '%s' "$response" | jq -r '.commit // empty')"
+            echo "Intento $attempt/40 · Pages: ${status:-sin estado} · commit: ${deployed_sha:-sin SHA}"
+            if [[ "$status" == "built" && "$deployed_sha" == "$EXPECTED_SHA" ]]; then
+              echo "GitHub Pages publicó el SHA esperado."
+              exit 0
+            fi
+            sleep 15
+          done
+          echo "GitHub Pages no confirmó el deployment del SHA $EXPECTED_SHA."
+          exit 1
+      - name: Ejecutar Lighthouse móvil y escritorio (3 corridas por perfil)
+        env:
+          CHROME_PATH: ${{ steps.chrome.outputs.chrome-path }}
+          RUNS: '3'
+          OUT_DIR: reports/lighthouse
+        run: bash scripts/lighthouse_runs.sh "https://losmoriartys-cmd.github.io/legion-multiversal/"
+      - name: Diagnosticar la primera corrida móvil
+        if: always()
+        run: |
+          if [[ -f reports/lighthouse/github-pages-mobile/run1.report.json ]]; then
+            python3 scripts/lh_failures.py reports/lighthouse/github-pages-mobile/run1.report.json
+          fi
+      - name: Publicar informes Lighthouse
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-production-${{ github.sha }}
+          path: reports/lighthouse/
+          if-no-files-found: warn
+          retention-days: 30

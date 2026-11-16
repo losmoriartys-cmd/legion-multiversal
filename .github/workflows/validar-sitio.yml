@@ -58,8 +58,12 @@ jobs:
         run: python scripts/validate_roster_data.py --check-activity --check-platforms
       - name: Comprobar índice accesible sin JavaScript
         run: python scripts/render_roster_noscript.py --check
+      - name: Instalar Pillow para medir imágenes
+        run: python -m pip install --disable-pip-version-check Pillow
+      - name: Auditar dimensiones intrínsecas de imágenes HTML
+        run: python scripts/add_image_dimensions.py --check --measure-remotes index.html
       - name: Compilar colectores Python
-        run: python -m py_compile update_stats.py update_platform_stats.py update_clips.py scripts/validate_roster_data.py scripts/validate_clips_data.py scripts/render_roster_noscript.py scripts/validate_metric_history.py scripts/build_creator_metrics.py scripts/validate_creator_metrics.py scripts/audit_and_optimize_images.py
+        run: python -m py_compile update_stats.py update_platform_stats.py update_clips.py scripts/validate_roster_data.py scripts/validate_clips_data.py scripts/render_roster_noscript.py scripts/validate_metric_history.py scripts/build_creator_metrics.py scripts/validate_creator_metrics.py scripts/audit_and_optimize_images.py scripts/add_image_dimensions.py scripts/summarize_lighthouse.py scripts/lh_failures.py
       - name: Ejecutar pruebas unitarias Python del repositorio
         run: python -m unittest discover -s tests -p 'test_*.py' -v
       - name: Probar lectura de cuentas por los colectores
