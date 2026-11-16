@@ -2029,9 +2029,38 @@ function printHeroDossier(){
             return Promise.allSettled(jobs);
         }
 
+        let lmGlobalChapterStylesPromise = null;
+        function ensureGlobalChapterStyles() {
+            const link = document.getElementById('lm-global-chapter-styles');
+            if (!link || link.dataset.loaded === 'true' || link.dataset.failed === 'true') return Promise.resolve();
+            if (lmGlobalChapterStylesPromise) return lmGlobalChapterStylesPromise;
+            lmGlobalChapterStylesPromise = new Promise(resolve => {
+                link.addEventListener('load', () => {
+                    link.dataset.loaded = 'true';
+                    resolve();
+                }, { once: true });
+                link.addEventListener('error', () => {
+                    link.dataset.failed = 'true';
+                    resolve();
+                }, { once: true });
+                link.href = link.dataset.href;
+            });
+            return lmGlobalChapterStylesPromise;
+        }
+
+        // El CSS global solo se solicita cuando el visitante abandona la primera pantalla.
+        window.addEventListener('scroll', () => { void ensureGlobalChapterStyles(); }, { once: true, passive: true });
+        document.addEventListener('pointerdown', () => { void ensureGlobalChapterStyles(); }, { once: true, passive: true, capture: true });
+        document.addEventListener('keydown', () => { void ensureGlobalChapterStyles(); }, { once: true, capture: true });
+
         function switchChapter(chapterNum, options = {}) {
             const panel = document.getElementById('chapter-' + chapterNum);
             if (!panel) return;
+            const globalStylesLink = document.getElementById('lm-global-chapter-styles');
+            if (Number(chapterNum) !== 0 && globalStylesLink && globalStylesLink.dataset.loaded !== 'true' && globalStylesLink.dataset.failed !== 'true') {
+                ensureGlobalChapterStyles().then(() => switchChapter(chapterNum, options));
+                return;
+            }
             loadChapterResources(Number(chapterNum));
             if (Number(chapterNum) !== 2 && window.currentHeroProfileIndex !== null && window.currentHeroProfileIndex !== undefined) {
                 const profilePage = document.getElementById('hero-profile-page');

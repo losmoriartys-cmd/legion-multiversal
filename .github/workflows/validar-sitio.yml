@@ -93,7 +93,7 @@ jobs:
           preload_head = html.split('<link href="https://fonts.googleapis.com/css2?', 1)[0]
           assert 'bangers/v25/' in preload_head and 'robotocondensed/v31/' in preload_head, "Faltan fuentes de primera pantalla."
           assert 'specialelite/v20/' not in preload_head, "Special Elite no debe competir con las fuentes críticas."
-          assert 'styles.css?v=20261116-commercial-portfolio-1" media="print" onload="const sheet=this;const apply=()=>requestAnimationFrame' in html, "La hoja global no espera al primer load."
+          assert '<link rel="stylesheet" id="lm-global-chapter-styles" data-href="./styles.css?v=20261116-commercial-portfolio-1">' in html, "La hoja global de capítulos no está diferida bajo demanda."
           assert '<noscript><link rel="stylesheet" href="./styles.css?v=20261116-commercial-portfolio-1"></noscript>' in html, "Falta fallback de CSS global sin JavaScript."
           critical = html.split('<style id="critical-home-styles">', 1)[1].split('</style>', 1)[0]
           for selector in ("header{", ".header-top{", "main{", ".chapter-panel{", ".executive-hero{", ".executive-hero-art img{", "#chapter-0 .executive-hero-art.executive-hero-banner{", "#chapter-0 .executive-hero-art.executive-hero-banner img{", ".executive-button{", "#chapter-0.chapter-panel.active{", "#chapter-0.chapter-panel.active .chapter-tag{"):

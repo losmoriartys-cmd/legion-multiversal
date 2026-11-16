@@ -44,3 +44,24 @@ test('las páginas de marcas, recursos y metodología abren con un H1 visible', 
     await expect(page.locator('h1')).toBeVisible();
   }
 });
+
+test('el CSS global de capítulos se solicita al navegar, no al abrir la portada', async ({ page }) => {
+  const stylesheetRequests = [];
+  page.on('request', request => {
+    if (request.url().includes('/styles.css?v=20261116-commercial-portfolio-1')) {
+      stylesheetRequests.push(request.url());
+    }
+  });
+
+  await page.goto('/');
+  await expect(page.locator('#chapter-0')).toHaveClass(/active/);
+  expect(stylesheetRequests).toHaveLength(0);
+
+  const stylesheetResponse = page.waitForResponse(response =>
+    response.url().includes('/styles.css?v=20261116-commercial-portfolio-1') && response.ok()
+  );
+  await page.locator('.primary-navigation [data-chapter="1"]').click();
+  await stylesheetResponse;
+  await expect(page.locator('#chapter-1')).toHaveClass(/active/);
+  expect(stylesheetRequests).toHaveLength(1);
+});
