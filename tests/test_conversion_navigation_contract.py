@@ -81,12 +81,13 @@ class ConversionNavigationContractTests(unittest.TestCase):
 
     def test_heavy_data_loads_are_deferred_until_relevant_chapters(self):
         app = (ROOT / "app.js").read_text(encoding="utf-8")
-        onload = app.split("window.onload = function()", 1)[1]
-        self.assertIn("loadChapterResources(initialNumber)", onload)
-        self.assertIn("location.hash.startsWith('#expediente-')", app)
-        self.assertNotIn("await loadEpicCreatorPrograms()", onload)
-        self.assertNotIn("await loadRosterData()", onload)
-        self.assertNotIn("loadTwitchClipsData()", onload)
+        initialization = app.split("function initializeLegionApp()", 1)[1]
+        self.assertIn("loadChapterResources(initialNumber)", initialization)
+        self.assertIn("hash.startsWith('#expediente-')", app)
+        self.assertNotIn("await loadEpicCreatorPrograms()", initialization)
+        self.assertNotIn("await loadRosterData()", initialization)
+        self.assertNotIn("loadTwitchClipsData()", initialization)
+        self.assertIn("DOMContentLoaded", app)
         self.assertIn("if (Number(chapterNum) === 8)", app)
         self.assertIn("if (Number(chapterNum) === 9)", app)
         self.assertIn("add('twitch-clips', loadTwitchClipsData)", app)
@@ -100,7 +101,8 @@ class ConversionNavigationContractTests(unittest.TestCase):
 
     def test_background_data_refresh_runs_only_on_relevant_chapters(self):
         app = (ROOT / "app.js").read_text(encoding="utf-8")
-        self.assertIn("querySelector('#chapter-0.active, #chapter-3.active, #chapter-10.active')", app)
+        self.assertIn("querySelector('#chapter-0.active, #chapter-2.active, #chapter-3.active, #chapter-10.active')", app)
+        self.assertIn("60 * 1000", app)
         self.assertIn("document.getElementById('chapter-2')?.classList.contains('active')", app)
 
 
