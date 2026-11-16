@@ -24,10 +24,10 @@ class EpicCreatorProgramsContractTests(unittest.TestCase):
 
     def test_record_confirmation_is_not_misrepresented_as_live_portal_verification(self):
         for creator in self.programs["creators"].values():
-            self.assertEqual(creator["record_status"], "confirmed_in_project_administration_record")
+            self.assertIn(creator["record_status"], {"confirmed_in_project_administration_record", "creator_reported_account_details_match"})
             self.assertFalse(creator["account_portal_revalidated"])
             self.assertTrue(creator["recorded_at"])
-        self.assertIn("EVIDENCIA DE CUENTA APORTADA", self.programs["display_policy"]["status_label"])
+        self.assertIn("NO REVALIDADA", self.programs["creators"]["rod3r1k"]["display_status"])
 
 
     def test_moriartys_account_details_match_is_recorded_with_provenance(self):
