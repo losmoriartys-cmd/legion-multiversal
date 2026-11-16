@@ -1,3 +1,16 @@
+## 2026-11-16 — Reconciliación sin PR abiertos · base común del Roster
+
+- **Decisión operativa:** se cierra la acumulación de PR. #47 ya estaba cerrado sin merge; #52 y #54 se cerraron sin merge. #46 también está cerrado sin merge. No quedan PR abiertos en esta tanda. No se afirma que los cambios de esas ramas estén integrados.
+- **Base:** `main` en `e9be6d204b04c14fe992fca7d370418e7af79c6d`. Se creó una única rama de trabajo, `integration/roster-unification-2026-11-16`, directamente desde esa base; comparación actual: 6 commits ahead, 0 behind.
+- **Recuperación de Valores y Comunidad:** se preservan como trabajo fuente en los PR cerrados; sus cambios no se copiaron a `main`. Se evita un cherry-pick ciego porque las ramas originales divergieron de la base actual.
+- **Arquitectura Roster:** se añadió `creator-profile-core.js` como contrato compartido para cargar roster, registros, métricas normalizadas, plataformas, actividad y clips; resolver el expediente por ID canónico; y comprobar comparabilidad por métrica, plataforma, unidad, período, frescura y visibilidad pública.
+- **Integración inicial:** `index.html` carga el núcleo compartido antes de `app.js`; los cargadores de `app.js` para registros, estadísticas de plataforma, actividad y clips consumen el contrato común. `roster-02-moriartys.html` usa el mismo cargador y resuelve MORIARTYS desde el registro canónico.
+- **Prueba añadida:** `tests/test_creator_profile_core_contract.py` cubre presencia del contrato, orden de carga, consumo de ambas vistas y reglas de comparabilidad. **Pendiente de ejecución:** no hay ejecución CI asociada a esta rama en el último control; las ejecuciones SUCCESS de PR #52/#54 corresponden a otros SHA y no validan esta integración.
+- **Salvaguardas:** no se modificaron `roster-data.json`, `creator-records.json`, `creator-metrics.json`, `data.json`, `platform-stats.json`, secretos ni credenciales. No se fusionó a `main` ni se publicó producción.
+- **Siguiente:** completar la migración del render de métricas del modal y del expediente independiente al mismo modelo normalizado; unificar la presentación del expediente de los ocho perfiles; ejecutar pruebas automatizadas y QA visual escritorio/móvil/iOS antes de cualquier integración a `main`.
+
+---
+
 ## 2026-11-12 — MORIARTYS: Bitácora integral en formato Archivo Central
 
 - **Objetivo:** unificar toda la información disponible del streamer MORIARTYS en un único expediente-libro. ARCHIVO CENTRAL deja de ser una sección aislada y pasa a ser la mecánica de lectura de la Bitácora completa.
