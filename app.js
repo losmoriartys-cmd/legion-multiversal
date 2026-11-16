@@ -37,6 +37,7 @@ function renderRosterLoadError(error) {
         host.setAttribute('aria-busy', 'true');
         try {
             await loadRosterData();
+            await loadResourceOnce('creator-records', loadCreatorRecords);
             renderRoster();
             renderMultiverseMap();
             restoreHeroProfileFromHash();
@@ -2142,6 +2143,7 @@ function printHeroDossier(){
             return loadResourceOnce('roster', async () => {
                 try {
                     await loadRosterData();
+                    await loadResourceOnce('creator-records', loadCreatorRecords);
                     renderRoster();
                     renderMultiverseMap();
                     restoreHeroProfileFromHash();
