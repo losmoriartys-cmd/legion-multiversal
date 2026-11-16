@@ -1,6 +1,7 @@
 import io
 import json
 import unittest
+from pathlib import Path
 import urllib.error
 from datetime import datetime, timezone
 from email.message import Message
@@ -51,6 +52,12 @@ class HttpRetryContractTests(unittest.TestCase):
                     update_stats.request_json("https://example.test")
         self.assertEqual(call.call_count, 3)
 
+
+    def test_committed_twitch_source_satisfies_status_freshness_contract(self):
+        root = Path(__file__).resolve().parents[1]
+        roster = json.loads((root / "roster-data.json").read_text(encoding="utf-8"))
+        activity = json.loads((root / "data.json").read_text(encoding="utf-8"))
+        self.assertEqual(validate_activity(roster, activity), [])
 
     def test_roster_validator_accepts_fresh_status_without_new_snapshot(self):
         roster = {"heroes": [{"accounts": [{"platform": "twitch", "login": "channel-a"}]}]}

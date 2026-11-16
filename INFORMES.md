@@ -3217,3 +3217,9 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 
 
 - **Compatibilidad del validador del Roster:** el validador histórico \`scripts/validate_roster_data.py --check-activity\` todavía exigía \`collection.complete=true\`. Se actualiza para exigir \`status_complete\`, \`coverage_complete\`, consistencia de \`complete/sampling_complete\` y timestamp \`last_status_at\`. Se agregan pruebas de aceptación de una consulta válida sin snapshot nuevo y rechazo de una captura sin estado Helix completo.
+
+
+- **Captura de producción de datos:** el workflow [43902145415](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43902145415) finalizó SUCCESS. La captura consultó correctamente los siete canales: \`status_complete=true\`, \`coverage_complete=true\`, \`complete=false\`, \`sampling_complete=false\`, con 0 snapshots nuevos y 7 omitidos correctamente por la ventana de 45 minutos. El \`last_status_at\` de los siete perfiles se renovó; \`last_snapshot_at\` permaneció en la última muestra histórica real.
+- **Historial YouTube:** la ejecución verificó una cuenta correcta, cero errores y agregó la primera entrada histórica de Pato — Oratoris (56 suscriptores, 431 vistas, 6 videos). Retención y deduplicación quedaron cubiertas por pruebas unitarias.
+- **Validación del colector:** [43902144817](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43902144817) finalizó SUCCESS, incluida la suite Python, generación del registro normalizado y \`validate_creator_metrics.py\`.
+- **Integración del sitio:** la primera ejecución general [43902145403](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43902145403) leyó el \`data.json\` anterior a la captura nueva porque ambos workflows se ejecutaron en paralelo. Se incorpora una prueba de integración sobre los archivos versionados para volver a validar el contrato con el dataset ya actualizado.
