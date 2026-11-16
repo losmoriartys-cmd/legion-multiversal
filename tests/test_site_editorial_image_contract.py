@@ -23,6 +23,15 @@ class SiteEditorialImageContract(unittest.TestCase):
         self.assertIn("aspect-ratio: auto;", self.css)
         self.assertIn("object-fit: contain;", self.css)
 
+    def test_bitacora_and_comic_previews_use_clean_moriartys_cover_asset(self):
+        expected = "assets/heroes/moriartys_dark.jpg"
+        for relative in ("bitacora-preview.html", "comic-moriartys.html"):
+            content = (ROOT / relative).read_text(encoding="utf-8")
+            self.assertIn(expected, content)
+            self.assertNotIn("image_20261103_160331-y-ahora", content)
+            self.assertNotIn("%20(1).jpg", content)
+        self.assertTrue((ROOT / expected).is_file())
+
     def test_origin_comic_cover_remains_vertical_and_uncropped(self):
         self.assertIn('src="image_20261107_021355.jpg', self.html)
         self.assertIn(".origin-editorial-cover img", self.css)
