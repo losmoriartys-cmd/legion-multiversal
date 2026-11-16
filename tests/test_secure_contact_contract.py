@@ -46,6 +46,15 @@ class SecureContactContractTests(unittest.TestCase):
         self.assertIn("origin !== url.origin", self.endpoint)
         self.assertIn('origin !== url.origin', self.endpoint)
 
+    def test_brand_media_kit_reads_channel_metrics_without_aggregating_platforms(self):
+        self.assertIn('id="creator-media-kit"', self.brands)
+        self.assertIn("creator-metrics.json", self.media_kit)
+        self.assertIn("platform-stats.json", self.media_kit)
+        self.assertIn("average_viewers_sampled", self.media_kit)
+        self.assertIn("followers_total", self.media_kit)
+        self.assertIn("País e idioma de la audiencia: sin datos propios verificables.", self.media_kit)
+        self.assertIn("sin sumar audiencias", self.media_kit)
+
 
 if __name__ == "__main__":
     unittest.main()
