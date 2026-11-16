@@ -12,6 +12,8 @@ on:
       - 'scripts/lighthouse_runs.sh'
       - 'scripts/summarize_lighthouse.py'
       - '.github/workflows/lighthouse-production.yml'
+      - '.github/workflows/validar-sitio.yml'
+      - 'scripts/optimize_logo.py'
   workflow_dispatch:
 
 permissions:
