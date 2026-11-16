@@ -5290,3 +5290,58 @@ main .chapter-panel :where(.chapter-cta, .executive-button, .comic-submit-btn,
 .epic-code-record-profile .epic-code-value{font-size:clamp(2rem,5vw,3rem)}
 .modal-content.comic-mode .epic-code-record-profile{background:linear-gradient(120deg,#14263d,#203b59);border:3px solid #0b1728;box-shadow:5px 5px 0 #0b1728}
 @media(max-width:640px){.epic-code-actions{align-items:stretch;flex-direction:column}.epic-code-actions a,.epic-code-copy{width:100%}.epic-code-record-head{align-items:flex-start;flex-direction:column}.epic-code-record{padding:15px 13px}}
+
+
+/* 2026-11-16 · Política editorial de imágenes: preservar proporciones y contenido.
+   Las fotografías y artes panorámicos no deben convertirse en recortes verticales
+   al pasar a móvil; las portadas verticales conservan su formato original. */
+.executive-hero-banner img,
+.origin-editorial-founders img,
+.origin-editorial-current img,
+.executive-case-art img,
+.belonging-hero > img,
+.collaboration-chapter .campaign-wide-art img,
+.collaboration-chapter .campaign-editorial-art img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 560px;
+    aspect-ratio: auto;
+    object-fit: contain;
+    object-position: center;
+    background: #05080d;
+}
+.executive-hero-banner img,
+.origin-editorial-founders img,
+.origin-editorial-current img,
+.executive-case-art img,
+.belonging-hero > img,
+.collaboration-chapter .campaign-wide-art img { max-width: 100%; }
+.origin-editorial-founders img { border-radius: 9px; }
+.origin-editorial-cover img {
+    width: 100%;
+    height: auto;
+    max-height: 720px;
+    aspect-ratio: auto;
+    object-fit: contain;
+}
+@media (max-width: 850px) {
+    .origin-editorial-founders { max-width: 100%; }
+    .origin-editorial-founders img { aspect-ratio: auto; }
+}
+@media (max-width: 600px) {
+    .executive-hero-banner img,
+    .origin-editorial-founders img,
+    .origin-editorial-current img,
+    .executive-case-art img,
+    .belonging-hero > img,
+    .collaboration-chapter .campaign-wide-art img,
+    .collaboration-chapter .campaign-editorial-art img {
+        width: 100%;
+        height: auto;
+        max-height: none;
+        aspect-ratio: auto;
+        object-fit: contain;
+    }
+    .origin-editorial-cover { max-width: min(100%, 560px); }
+}

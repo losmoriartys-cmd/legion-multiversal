@@ -3059,3 +3059,17 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - Validación y despliegue de este addendum: pendientes de ejecución para el commit resultante.
 
 - **Corrección de QA:** la primera ejecución del contrato extendido (run `43805709988`) encontró una aserción sensible a mayúsculas en el texto de evidencia, no una discrepancia de datos ni un fallo de implementación. Se ajustó la expectativa al texto exacto; la nueva ejecución queda pendiente.
+
+
+## 2026-11-16 — Coherencia editorial, alcance y política de imágenes
+
+- **Objetivo:** alinear el sitio con la identidad real de Legión Multiversal: comunidad de ocho integrantes con canales y comunidades propias, colaboración voluntaria y propuestas individuales o grupales según alcance acordado.
+- **Imágenes:** se añadió una política transversal para conservar proporciones y encuadres. Las fotografías panorámicas de Inicio, Origen, Comunidad y BarFender dejan de forzarse a relaciones de aspecto más verticales; las portadas de cómic mantienen su formato vertical y se muestran completas. Se corrigió el cache-buster de styles.css.
+- **Origen:** se conserva la portada vertical como pieza editorial, sin tratarla como banner horizontal.
+- **Estadísticas:** el texto ahora explicita que los indicadores dependen de plataforma, período, captura y cobertura; ausencia de datos no significa actividad cero.
+- **Alianzas:** se aclara que las capacidades individuales o grupales se proponen caso por caso y dependen de participantes, objetivos y recursos acordados. Las credenciales continúan atribuidas a quien corresponde.
+- **BarFender:** se renombra como caso colaborativo documentado / experiencia 001. Se elimina el lenguaje que podía sugerir patrocinio o campaña comercial contratada sin evidencia; se conserva como demostración de coordinación entre cuatro creadores, canales y comunidades.
+- **Campañas y accesos:** el anexo distingue oportunidad, solicitud, acceso aprobado y campaña efectivamente realizada.
+- **Reclutamiento:** se explicita que la incorporación requiere evaluación y decisión compartida; no es automática.
+- **Navegación:** se mantienen los IDs técnicos chapter-* para no romper enlaces ni botones. Los números editoriales visibles se conservan según el orden aprobado (00 Inicio; 01 Origen; 02 Valores; 03 Roster; 04 Estadísticas; 05 Comunidad; 06 Alianzas; 07 Colaboraciones; 08 Arsenal; 09 En Vivo; 10 Reclutamiento; anexos/extra fuera de la secuencia principal).
+- **Pendiente de QA:** no se declara inspección visual manual de producción en esta integración. La verificación debe incluir escritorio y móvil, especialmente Origen, Inicio, Comunidad y el expediente BarFender.
