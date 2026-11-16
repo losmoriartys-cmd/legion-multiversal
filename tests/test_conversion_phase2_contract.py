@@ -6,7 +6,8 @@ class ConversionPhase2Contract(unittest.TestCase):
   cls.html=(ROOT/"index.html").read_text(encoding="utf-8");cls.js=(ROOT/"app.js").read_text(encoding="utf-8");cls.css=(ROOT/"conversion-phase2.css").read_text(encoding="utf-8")
  def test_home_and_three_guided_paths(self):
   home=self.html.split('id="chapter-0"',1)[1].split('id="chapter-1"',1)[0]
-  self.assertIn("MIRAR EN VIVO",home);self.assertEqual(home.count('class="executive-directory-card"'),3);self.assertNotIn('class="home-live-strip"',home)
+  self.assertIn("MIRAR EN VIVO",home);self.assertEqual(home.count('class="executive-directory-card"'),3);self.assertIn('class="home-live-strip"',home)
+  self.assertIn('id="home-live-status"',home);self.assertIn('id="home-live-updated"',home)
  def test_floating_live_drawer(self):
   self.assertIn('live-player-drawer',self.html);self.assertIn("openLiveDrawer()",self.js);self.assertIn("closeLiveDrawer()",self.js)
  def test_market_benchmark_and_activation_tabs(self):
