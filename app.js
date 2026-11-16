@@ -2125,9 +2125,70 @@ function printHeroDossier(){
             pager.append(prevButton,indexButton,nextButton);
         }
 
+        const chapterResourcePromises = new Map();
+
+        function loadResourceOnce(key, loader) {
+            if (!chapterResourcePromises.has(key)) {
+                const pending = Promise.resolve().then(loader).catch(error => {
+                    chapterResourcePromises.delete(key);
+                    throw error;
+                });
+                chapterResourcePromises.set(key, pending);
+            }
+            return chapterResourcePromises.get(key);
+        }
+
+        function ensureRosterResources() {
+            return loadResourceOnce('roster', async () => {
+                try {
+                    await loadRosterData();
+                    renderRoster();
+                    renderMultiverseMap();
+                    restoreHeroProfileFromHash();
+                } catch (error) {
+                    renderRosterLoadError(error);
+                    throw error;
+                }
+            });
+        }
+
+        function loadChapterResources(chapterNum) {
+            const jobs = [];
+            const add = (key, loader) => jobs.push(loadResourceOnce(key, loader));
+
+            // Inicio y central EN VIVO: solo necesitan el estado público resumido.
+            if ([0, 3, 10].includes(Number(chapterNum))) add('institute-stats', loadInstituteStats);
+
+            // Roster, estadísticas y mapa comparten las fuentes de perfiles y métricas.
+            if ([2, 3, 13].includes(Number(chapterNum))) {
+                jobs.push(ensureRosterResources());
+                add('sullygnome', loadSullyGnomeData);
+                add('twitch-metrics', loadTwitchMetricsData);
+                add('creator-records', loadCreatorRecords);
+                add('platform-stats', loadPlatformStatsData);
+                add('twitch-clips', loadTwitchClipsData);
+            }
+
+            // Las credenciales externas solo se consultan al entrar en Alianzas.
+            if (Number(chapterNum) === 8) {
+                add('epic-programs', loadEpicCreatorPrograms);
+                add('partner-metrics', loadPartnerMetrics);
+                add('platform-stats', loadPlatformStatsData);
+            }
+
+            // Noticias y playbook se descargan al abrir Comunidad.
+            if (Number(chapterNum) === 9) {
+                add('legion-news', loadLegionNews);
+                add('community-playbook', loadCommunityPlaybook);
+            }
+
+            return Promise.allSettled(jobs);
+        }
+
         function switchChapter(chapterNum) {
             const panel=document.getElementById(`chapter-${chapterNum}`);
             if(!panel)return;
+            loadChapterResources(Number(chapterNum));
             if (Number(chapterNum) !== 2 && window.currentHeroProfileIndex !== null && window.currentHeroProfileIndex !== undefined) {
                 const profilePage = document.getElementById('hero-profile-page');
                 const rosterHome = document.getElementById('roster-home');
@@ -2171,31 +2232,22 @@ function printHeroDossier(){
 
         const rosterContainer = document.getElementById('roster-container');
 
-        window.onload = async function() {
+        window.onload = function() {
         const initialChapter = document.querySelector('.chapter-panel.active');
-        if (initialChapter) renderChapterPager(Number(initialChapter.id.replace('chapter-','')));
-        await loadEpicCreatorPrograms();
-        try {
-            await loadRosterData();
-            renderRoster();
-            renderMultiverseMap();
-            restoreHeroProfileFromHash();
-        } catch (error) {
-            console.error('No se pudo inicializar el roster:', error);
-            renderRosterLoadError(error);
-        }
-        await Promise.all([
-            loadSullyGnomeData(),
-            loadTwitchMetricsData(),
-            loadInstituteStats(),
-            loadPartnerMetrics(),
-            loadCreatorRecords(),
-            loadPlatformStatsData(),
-            loadTwitchClipsData(),
-            loadLegionNews(),
-            loadCommunityPlaybook()
-        ]);
-        if (initialChapter) recordLegionProgress('chapter', String(initialChapter.id.replace('chapter-','')));
+        const initialNumber = initialChapter ? Number(initialChapter.id.replace('chapter-','')) : 0;
+        if (initialChapter) renderChapterPager(initialNumber);
+
+        // Carga inicial mínima: el estado de transmisiones alimenta la portada.
+        loadChapterResources(initialNumber);
+        if (location.hash.startsWith('#roster/')) loadChapterResources(2);
+
+        if (initialChapter) recordLegionProgress('chapter', String(initialNumber));
         window.setInterval(() => { loadInstituteStats(); }, 15 * 60 * 1000);
-        window.setInterval(() => { loadPlatformStatsData(); }, 15 * 60 * 1000);
+        // El resto de las fuentes se consulta al entrar en Estadísticas o Roster.
+        window.setInterval(() => {
+            if (document.getElementById('chapter-3')?.classList.contains('active') ||
+                document.getElementById('chapter-2')?.classList.contains('active')) {
+                loadPlatformStatsData();
+            }
+        }, 15 * 60 * 1000);
         };
