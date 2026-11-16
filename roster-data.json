@@ -23,7 +23,7 @@
         "twitch"
       ],
       "activity_status": "not_assessed",
-      "img": "assets/heroes/image_20261103_160331-y-ahora-mezclando-el-nuevo-mio-y-el-marco-nuevo-co-pero-porque-quedo-pelado-xd (1).jpg",
+      "img": "assets/heroes/moriartys_dark.jpg",
       "twitch": "https://twitch.tv/losmoriartys",
       "bio": "Los Moriartys es el proyecto compartido de Demi y Ari: una dupla gamer y orgullosamente nerd que convierte cada directo en una visita a su videoclub retro. El canal combina videojuegos, cooperativo, humor y cultura pop. Su propuesta no se basa en la competencia profesional, sino en jugar, compartir y construir momentos con la comunidad.",
       "voice": "«Acá jugamos en equipo, nos reímos de lo que sale mal y hacemos que cada visita al videoclub sea una aventura.»",
@@ -100,7 +100,7 @@
     },
     {
       "name": "ROD3R1K",
-      "portrait": "assets/carnet/rod3r1k_dark-necesito-que-me-hagas-fotos-de-todos-ellos-pero-qu.jpg",
+      "portrait": "assets/carnet/rod3r1k.jpg",
       "codename": "EL FUERTE",
       "characterRole": "INGENIERO SÓNICO",
       "powerSet": "Onda sónica · Fotografía táctica · Resonancia",
@@ -208,7 +208,7 @@
         "twitch"
       ],
       "activity_status": "not_assessed",
-      "img": "assets/heroes/image_20261103_213640.jpg",
+      "img": "assets/heroes/ladymoriarty_dark.jpg",
       "twitch": "https://twitch.tv/ladymoriarty01",
       "bio": "La Bruja no necesita seguir un guion: su magia está en cambiar el tono de cada encuentro. Puede convertir una partida tranquila en una situación imprevisible y hacer de una charla o una salida IRL una historia propia. LADYMORIARTY conserva una identidad independiente, espontánea y cercana; su regla es simple: venir a disfrutar y dejar que la aventura encuentre su forma.",
       "voice": "«¿Plan? Puede ser. ¿Improvisar? También. La magia está en no saber qué viene después.»",
@@ -283,7 +283,7 @@
     },
     {
       "name": "ARDIPII",
-      "portrait": "assets/carnet/ardipii_dark-necesito-que-me-hagas-fotos-de-todos-ellos-pero-qu.jpg",
+      "portrait": "assets/carnet/ardipii.jpg",
       "codename": "EL FANTASMA",
       "characterRole": "GUARDIÁN ESPECTRAL",
       "powerSet": "Fase espectral · Intangibilidad · Llama ectoplásmica",
@@ -389,7 +389,7 @@
         "twitch"
       ],
       "activity_status": "not_assessed",
-      "img": "assets/heroes/image_20261103_160331-podemos-humanizar-a-akuma-pero-que-mantenga-un-poc.jpg",
+      "img": "assets/heroes/akuma_dark.jpg",
       "twitch": "https://twitch.tv/akumazoldyck",
       "bio": "El Infernal abre un punto de encuentro entre videojuegos, conversaciones y amigos. Su propuesta combina partidas y charla: el valor está en el intercambio y en las historias que surgen cuando la comunidad se reúne.",
       "voice": "«El portal está abierto. Traigan una partida, una historia o simplemente ganas de quedarse.»",
@@ -461,7 +461,7 @@
     },
     {
       "name": "DAVE — NEXUS",
-      "portrait": "assets/carnet/nexus_dark-necesito-que-me-hagas-fotos-de-todos-ellos-pero-qu.jpg",
+      "portrait": "assets/carnet/nexus.jpg",
       "codename": "EL NEXO",
       "characterRole": "GUARDIÁN TECNOLÓGICO",
       "powerSet": "Manipulación tecnológica · Campo psiónico · Runas",
@@ -549,7 +549,7 @@
     },
     {
       "name": "PATO — ORATORIS",
-      "portrait": "assets/carnet/oratoris_dark-necesito-que-me-hagas-fotos-de-todos-ellos-pero-qu.jpg",
+      "portrait": "assets/carnet/oratoris.jpg",
       "codename": "EL ORADOR",
       "characterRole": "COMUNICADOR DEL CONOCIMIENTO",
       "powerSet": "Claridad · Pensamiento crítico · Transmisión de conocimiento",
@@ -670,7 +670,7 @@
     },
     {
       "name": "HABITOS",
-      "portrait": "assets/carnet/habitos_dark-necesito-que-me-hagas-fotos-de-todos-ellos-pero-qu.jpg",
+      "portrait": "assets/carnet/habitos.jpg",
       "codename": "FILÓSOFO JUSTICIERO",
       "characterRole": "FILÓSOFO ATÓMICO",
       "powerSet": "Rayo atómico · Física atómica · Combate cuerpo a cuerpo",
