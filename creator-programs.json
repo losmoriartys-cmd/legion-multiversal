@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "program": "Epic Games Support-A-Creator",
+  "display_policy": {
+    "status_label": "CÓDIGO REGISTRADO · ACTIVACIÓN NO REVALIDADA EN PORTAL",
+    "explanation": "La información identifica códigos registrados por el equipo/titular. La web pública no consulta sesiones privadas ni certifica en tiempo real que cada código siga activo."
+  },
+  "official_links": {
+    "account": "https://www.epicgames.com/account",
+    "dashboard": "https://sac.epicgames.com/dashboard/insights",
+    "program": "https://www.epicgames.com/site/en-US/affiliate-program"
+  },
+  "creators": {
+    "moriartys": {
+      "owner": "Los Moriartys (Demian + Ari)",
+      "code": "LOSMORIARTYS",
+      "scope": "shared_project",
+      "creator_id": "dc2236199d3c4fc88932c290ad87be97",
+      "record_status": "confirmed_in_project_administration_record",
+      "recorded_at": "2026-11-12",
+      "account_portal_revalidated": false,
+      "evidence": "Registro de administración del proyecto en INFORMES.md y confirmación aportada por el equipo.",
+      "roster_profile_id": "moriartys"
+    },
+    "rod3r1k": {
+      "owner": "TheR0d3R1K",
+      "code": "TheR0d3R1k",
+      "scope": "individual_creator",
+      "record_status": "confirmed_in_project_administration_record",
+      "recorded_at": "2026-11-12",
+      "account_portal_revalidated": false,
+      "evidence": "Registro de administración del proyecto en INFORMES.md y confirmación aportada por el titular.",
+      "roster_profile_id": "rod3r1k"
+    }
+  }
+}
