@@ -1,5 +1,15 @@
 const { test, expect } = require('@playwright/test');
 
+test.beforeEach(async ({ context }) => {
+  // El servidor estático de pruebas no ejecuta Cloudflare Pages Functions.
+  // Se simula la respuesta segura de configuración ausente; nunca se envía un formulario real.
+  await context.route('**/api/contact', route => route.fulfill({
+    status: 200,
+    contentType: 'application/json',
+    body: JSON.stringify({ configured: false, turnstileSiteKey: null })
+  }));
+});
+
 const creators = [
   { id: 'moriartys', name: 'LOS MORIARTYS', index: 0 },
   { id: 'rod3r1k', name: 'ROD3R1K', index: 1 },

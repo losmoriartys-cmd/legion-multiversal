@@ -80,6 +80,7 @@ class ConversionNavigationContractTests(unittest.TestCase):
         app = (ROOT / "app.js").read_text(encoding="utf-8")
         onload = app.split("window.onload = function()", 1)[1]
         self.assertIn("loadChapterResources(initialNumber)", onload)
+        self.assertIn("location.hash.startsWith('#expediente-')", app)
         self.assertNotIn("await loadEpicCreatorPrograms()", onload)
         self.assertNotIn("await loadRosterData()", onload)
         self.assertNotIn("loadTwitchClipsData()", onload)

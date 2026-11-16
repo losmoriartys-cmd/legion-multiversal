@@ -2239,7 +2239,7 @@ function printHeroDossier(){
 
         // Carga inicial mínima: el estado de transmisiones alimenta la portada.
         loadChapterResources(initialNumber);
-        if (location.hash.startsWith('#roster/')) loadChapterResources(2);
+        if (location.hash.startsWith('#roster/') || location.hash.startsWith('#expediente-')) loadChapterResources(2);
 
         if (initialChapter) recordLegionProgress('chapter', String(initialNumber));
         window.setInterval(() => {

@@ -76,3 +76,9 @@
 - El acceso mediante Keymailer y la ausencia de patrocinio/campaña remunerada se aclaran una sola vez en el expediente, además del bloque general de transparencia.
 
 - **Ajuste de contrato CI:** la carga de clips usa el helper `add(key, loader)`, que delega en `loadResourceOnce`; la prueba ahora verifica esa llamada real en lugar de exigir una invocación directa inexistente. No cambia el comportamiento de carga.
+
+
+## QA de rutas históricas y entorno Playwright · 16/11/2026
+
+- La carga diferida del Roster también se activa para los hashes históricos `#expediente-*`, además de las rutas canónicas `#roster/*`. Se preservan enlaces compartidos antes de la optimización de carga.
+- Los tests Playwright simulan la respuesta de configuración ausente de `/api/contact` porque el servidor estático local no ejecuta Cloudflare Pages Functions. La prueba no envía datos ni simula un envío exitoso; la integración real se valida en Cloudflare.
