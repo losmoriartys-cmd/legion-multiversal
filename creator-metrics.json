@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-16T05:27:15Z",
+  "generated_at": "2026-11-16T05:28:54Z",
   "source_files": {
     "identity": "roster-data.json",
     "twitch": "data.json",
@@ -9,10 +9,10 @@
   },
   "source_snapshot": {
     "data.json": {
-      "updated_at": "2026-11-16T05:27:14Z"
+      "updated_at": "2026-11-16T05:28:53Z"
     },
     "platform-stats.json": {
-      "updated_at": "2026-11-16T05:27:15Z"
+      "updated_at": "2026-11-16T05:28:54Z"
     }
   },
   "methodology": [
@@ -60,7 +60,7 @@
           "label": "Estado de transmisión",
           "value": "offline",
           "unit": "status",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -81,7 +81,7 @@
           "label": "Espectadores en la última captura",
           "value": null,
           "unit": "viewers",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -102,7 +102,7 @@
           "label": "Muestras históricas",
           "value": 298,
           "unit": "samples",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -123,7 +123,7 @@
           "label": "Muestras en directo",
           "value": 15,
           "unit": "samples",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -144,7 +144,7 @@
           "label": "Sesiones observadas",
           "value": 7,
           "unit": "streams",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -165,7 +165,7 @@
           "label": "Promedio de viewers muestreado",
           "value": 16.2,
           "unit": "viewers_sampled_avg",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -186,7 +186,7 @@
           "label": "Pico observado",
           "value": 31,
           "unit": "viewers_sampled_peak",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -207,7 +207,7 @@
           "label": "Horas en directo observadas",
           "value": 6.34,
           "unit": "hours_observed",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -228,7 +228,7 @@
           "label": "Horas vistas estimadas",
           "value": 93.04,
           "unit": "hours_estimated",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -282,7 +282,7 @@
           "label": "Estado de transmisión",
           "value": "offline",
           "unit": "status",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -303,7 +303,7 @@
           "label": "Espectadores en la última captura",
           "value": null,
           "unit": "viewers",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -324,7 +324,7 @@
           "label": "Muestras históricas",
           "value": 298,
           "unit": "samples",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -345,7 +345,7 @@
           "label": "Muestras en directo",
           "value": 34,
           "unit": "samples",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -366,7 +366,7 @@
           "label": "Sesiones observadas",
           "value": 8,
           "unit": "streams",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -387,7 +387,7 @@
           "label": "Promedio de viewers muestreado",
           "value": 22.1,
           "unit": "viewers_sampled_avg",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -408,7 +408,7 @@
           "label": "Pico observado",
           "value": 46,
           "unit": "viewers_sampled_peak",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -429,7 +429,7 @@
           "label": "Horas en directo observadas",
           "value": 20.8,
           "unit": "hours_observed",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -450,7 +450,7 @@
           "label": "Horas vistas estimadas",
           "value": 447.74,
           "unit": "hours_estimated",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -504,7 +504,7 @@
           "label": "Estado de transmisión",
           "value": "offline",
           "unit": "status",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -525,7 +525,7 @@
           "label": "Espectadores en la última captura",
           "value": null,
           "unit": "viewers",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -546,7 +546,7 @@
           "label": "Muestras históricas",
           "value": 298,
           "unit": "samples",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -567,7 +567,7 @@
           "label": "Muestras en directo",
           "value": 9,
           "unit": "samples",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -588,7 +588,7 @@
           "label": "Sesiones observadas",
           "value": 4,
           "unit": "streams",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -609,7 +609,7 @@
           "label": "Promedio de viewers muestreado",
           "value": 6.1,
           "unit": "viewers_sampled_avg",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -630,7 +630,7 @@
           "label": "Pico observado",
           "value": 15,
           "unit": "viewers_sampled_peak",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -651,7 +651,7 @@
           "label": "Horas en directo observadas",
           "value": 3.07,
           "unit": "hours_observed",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -672,7 +672,7 @@
           "label": "Horas vistas estimadas",
           "value": 19.29,
           "unit": "hours_estimated",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -726,7 +726,7 @@
           "label": "Estado de transmisión",
           "value": "offline",
           "unit": "status",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -747,7 +747,7 @@
           "label": "Espectadores en la última captura",
           "value": null,
           "unit": "viewers",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -768,7 +768,7 @@
           "label": "Muestras históricas",
           "value": 298,
           "unit": "samples",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -789,7 +789,7 @@
           "label": "Muestras en directo",
           "value": 6,
           "unit": "samples",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -810,7 +810,7 @@
           "label": "Sesiones observadas",
           "value": 3,
           "unit": "streams",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -831,7 +831,7 @@
           "label": "Promedio de viewers muestreado",
           "value": 7.2,
           "unit": "viewers_sampled_avg",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -852,7 +852,7 @@
           "label": "Pico observado",
           "value": 14,
           "unit": "viewers_sampled_peak",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -873,7 +873,7 @@
           "label": "Horas en directo observadas",
           "value": 1.66,
           "unit": "hours_observed",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -894,7 +894,7 @@
           "label": "Horas vistas estimadas",
           "value": 17.23,
           "unit": "hours_estimated",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -948,7 +948,7 @@
           "label": "Estado de transmisión",
           "value": "offline",
           "unit": "status",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -969,7 +969,7 @@
           "label": "Espectadores en la última captura",
           "value": null,
           "unit": "viewers",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -990,7 +990,7 @@
           "label": "Muestras históricas",
           "value": 298,
           "unit": "samples",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -1011,7 +1011,7 @@
           "label": "Muestras en directo",
           "value": 23,
           "unit": "samples",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -1032,7 +1032,7 @@
           "label": "Sesiones observadas",
           "value": 10,
           "unit": "streams",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -1053,7 +1053,7 @@
           "label": "Promedio de viewers muestreado",
           "value": 6.3,
           "unit": "viewers_sampled_avg",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -1074,7 +1074,7 @@
           "label": "Pico observado",
           "value": 17,
           "unit": "viewers_sampled_peak",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -1095,7 +1095,7 @@
           "label": "Horas en directo observadas",
           "value": 10.74,
           "unit": "hours_observed",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -1116,7 +1116,7 @@
           "label": "Horas vistas estimadas",
           "value": 62.09,
           "unit": "hours_estimated",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -1170,7 +1170,7 @@
           "label": "Estado de transmisión",
           "value": "offline",
           "unit": "status",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -1191,7 +1191,7 @@
           "label": "Espectadores en la última captura",
           "value": null,
           "unit": "viewers",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -1212,7 +1212,7 @@
           "label": "Muestras históricas",
           "value": 298,
           "unit": "samples",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -1233,7 +1233,7 @@
           "label": "Muestras en directo",
           "value": 12,
           "unit": "samples",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -1254,7 +1254,7 @@
           "label": "Sesiones observadas",
           "value": 7,
           "unit": "streams",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -1275,7 +1275,7 @@
           "label": "Promedio de viewers muestreado",
           "value": 1.9,
           "unit": "viewers_sampled_avg",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -1296,7 +1296,7 @@
           "label": "Pico observado",
           "value": 5,
           "unit": "viewers_sampled_peak",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -1317,7 +1317,7 @@
           "label": "Horas en directo observadas",
           "value": 3.55,
           "unit": "hours_observed",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -1338,7 +1338,7 @@
           "label": "Horas vistas estimadas",
           "value": 7.22,
           "unit": "hours_estimated",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -1411,11 +1411,11 @@
           "label": "Suscriptores públicos",
           "value": 56,
           "unit": "subscribers",
-          "captured_at": "2026-11-16T05:27:15Z",
+          "captured_at": "2026-11-16T05:28:54Z",
           "period": {
             "kind": "cumulative",
             "from": null,
-            "to": "2026-11-16T05:27:15Z"
+            "to": "2026-11-16T05:28:54Z"
           },
           "source": "YouTube Data API v3",
           "method": "youtube_data_api_public",
@@ -1432,11 +1432,11 @@
           "label": "Visualizaciones acumuladas",
           "value": 431,
           "unit": "views",
-          "captured_at": "2026-11-16T05:27:15Z",
+          "captured_at": "2026-11-16T05:28:54Z",
           "period": {
             "kind": "cumulative",
             "from": null,
-            "to": "2026-11-16T05:27:15Z"
+            "to": "2026-11-16T05:28:54Z"
           },
           "source": "YouTube Data API v3",
           "method": "youtube_data_api_public",
@@ -1453,11 +1453,11 @@
           "label": "Videos publicados",
           "value": 6,
           "unit": "videos",
-          "captured_at": "2026-11-16T05:27:15Z",
+          "captured_at": "2026-11-16T05:28:54Z",
           "period": {
             "kind": "cumulative",
             "from": null,
-            "to": "2026-11-16T05:27:15Z"
+            "to": "2026-11-16T05:28:54Z"
           },
           "source": "YouTube Data API v3",
           "method": "youtube_data_api_public",
@@ -1507,7 +1507,7 @@
           "label": "Estado de transmisión",
           "value": "offline",
           "unit": "status",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -1528,7 +1528,7 @@
           "label": "Espectadores en la última captura",
           "value": null,
           "unit": "viewers",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -1549,7 +1549,7 @@
           "label": "Muestras históricas",
           "value": 298,
           "unit": "samples",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -1570,7 +1570,7 @@
           "label": "Muestras en directo",
           "value": 64,
           "unit": "samples",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -1591,7 +1591,7 @@
           "label": "Sesiones observadas",
           "value": 13,
           "unit": "streams",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -1612,7 +1612,7 @@
           "label": "Promedio de viewers muestreado",
           "value": 5.2,
           "unit": "viewers_sampled_avg",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -1633,7 +1633,7 @@
           "label": "Pico observado",
           "value": 45,
           "unit": "viewers_sampled_peak",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -1654,7 +1654,7 @@
           "label": "Horas en directo observadas",
           "value": 43.18,
           "unit": "hours_observed",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -1675,7 +1675,7 @@
           "label": "Horas vistas estimadas",
           "value": 210.8,
           "unit": "hours_estimated",
-          "captured_at": "2026-11-16T05:27:14Z",
+          "captured_at": "2026-11-16T05:28:53Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
