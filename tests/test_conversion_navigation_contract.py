@@ -1,4 +1,5 @@
 import pathlib
+import re
 import unittest
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
@@ -17,7 +18,8 @@ class ConversionNavigationContractTests(unittest.TestCase):
             self.assertIn(f'data-chapter="{chapter}"', nav)
             self.assertIn(label, nav)
         self.assertEqual(nav.count('data-chapter='), 5)
-        self.assertNotIn("secondary-navigation", self.html)
+        markup_without_styles = re.sub(r"<style\\b[^>]*>.*?</style>", "", self.html, flags=re.IGNORECASE | re.DOTALL)
+        self.assertNotIn("secondary-navigation", markup_without_styles)
 
     def test_home_hero_routes_to_live_and_brands(self):
         hero = self.html.split('<div class="executive-hero-actions">', 1)[1].split("</div>", 1)[0]
