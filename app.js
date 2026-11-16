@@ -1007,13 +1007,14 @@ function renderRosterSelector() {
     const tiles = heroesData.map((hero, index) => {
         const account = primaryAccount(hero);
         const state = liveState(hero);
+        const tileType = hero.creator_type === 'video_creator' ? 'CREADOR DE VIDEO' : hero.creator_type === 'live_streamer' ? 'CREADOR EN DIRECTO' : 'FORMATO POR CONFIRMAR';
         const isLive = Boolean(state?.fresh && state.channel?.live);
         const isSelected = (hero.id || hero.slug) === selectedRosterCreatorId;
         const image = hero.portrait || hero.img || '';
         return '<button type="button" class="roster-selector-tile' + (isSelected ? ' is-selected' : '') + '" role="tab" id="roster-tab-' + safe(hero.id || hero.slug) + '" aria-selected="' + isSelected + '" aria-controls="roster-selector-panel" tabindex="' + (isSelected ? '0' : '-1') + '" data-roster-select="' + index + '" aria-label="Conocer a ' + safe(getHeroDisplayName(hero)) + '">' +
             (image ? '<img src="' + safe(image) + '" alt="" loading="' + (index < 4 ? 'eager' : 'lazy') + '" decoding="async">' : '<span class="roster-selector-no-portrait" aria-hidden="true">' + safe((hero.display_name || hero.name || '?').slice(0,1)) + '</span>') +
             (isLive ? '<span class="roster-selector-tile-live">EN VIVO</span>' : '') +
-            '<span class="roster-selector-tile-name">' + safe(getHeroDisplayName(hero)) + '</span><span class="roster-selector-tile-role">' + safe(hero.codename || creatorType) + '</span></button>';
+            '<span class="roster-selector-tile-name">' + safe(getHeroDisplayName(hero)) + '</span><span class="roster-selector-tile-role">' + safe(hero.codename || tileType) + '</span></button>';
     }).join('');
     const tags = areas.length ? areas.slice(0,3).map(area => '<span>' + safe(area) + '</span>').join('') : '<span>Especialidad por definir</span>';
     const liveLabel = selectedLive
@@ -1082,6 +1083,9 @@ function selectRosterCreator(index, moveFocus) {
 function renderRoster() {
     const container = document.getElementById('roster-container');
     if (!container) return;
+    container.setAttribute('aria-busy', 'false');
+    renderRosterSelector();
+    return;
     const isRepeatRender = container.dataset.hasRendered === 'true';
     container.classList.toggle('is-rerender', isRepeatRender);
     container.dataset.hasRendered = 'true';
