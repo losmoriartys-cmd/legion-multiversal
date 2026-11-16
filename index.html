@@ -47,7 +47,7 @@
             <button id="sound-toggle" class="sound-toggle" type="button" aria-pressed="false" onclick="toggleArcadeSound()" title="Activar o silenciar la identidad sonora">♫ SONIDO: OFF</button>
         </div>
         <nav class="primary-navigation" aria-label="Recorridos principales">
-            <button class="nav-btn" data-chapter="10" onclick="switchChapter(10)">MIRAR <span aria-hidden="true">●</span></button>
+            <button class="nav-btn nav-btn-live" data-chapter="10" onclick="switchChapter(10)">MIRAR <span aria-hidden="true">●</span></button>
             <button class="nav-btn" data-chapter="12" onclick="switchChapter(12)">EXPERIENCIAS</button>
             <button class="nav-btn" data-chapter="8" onclick="switchChapter(8)">PARA MARCAS</button>
             <button class="nav-btn" data-chapter="6" onclick="switchChapter(6)">UNITE</button>
@@ -68,7 +68,7 @@
                     <p class="executive-kicker">ARCHIVO CENTRAL · PRESENTACIÓN INSTITUCIONAL</p>
                     <img class="executive-emblem" src="legion_logo_final_hybrid.png" alt="Emblema oficial de Legión Multiversal" decoding="async" width="1600" height="1600">
                     <h2 id="home-title">DIFERENTES MUNDOS.<br><span>UNA MISMA LEGIÓN.</span></h2>
-                    <p class="executive-lead">Una comunidad de ocho creadores con identidades, canales y comunidades propias. Compartimos gaming, entretenimiento, conocimiento y nuevas experiencias; cada integrante conserva su voz y autonomía.</p>
+                    <p class="executive-lead">Una comunidad con seis perfiles integrantes y dos perfiles colaboradores, cada uno con identidad, canal y comunidad propios. Compartimos gaming, entretenimiento, conocimiento y nuevas experiencias; cada perfil conserva su voz y autonomía.</p>
                     <p class="executive-proofline"><span>PROPUESTAS A MEDIDA</span><span>MÉTRICAS CON FUENTE</span><span>ALCANCE ACORDADO</span></p>
                     <div class="executive-hero-actions">
                         <button class="executive-button executive-button-primary" type="button" onclick="switchChapter(10)">VER QUIÉN ESTÁ EN VIVO <span aria-hidden="true">↗</span></button>
@@ -77,6 +77,15 @@
                 </div>
                 <span class="executive-hero-index" aria-hidden="true">LM / 001</span>
             </div>
+
+            <section class="home-live-strip" aria-label="Estado de transmisiones">
+                <div class="home-live-copy">
+                    <span class="executive-kicker">CENTRAL DE TRANSMISIONES · ESTADO PÚBLICO</span>
+                    <strong id="home-live-status" role="status" aria-live="polite">Consultá quién está transmitiendo ahora.</strong>
+                    <small id="home-live-updated">El estado se informa según la última captura pública disponible.</small>
+                </div>
+                <button class="executive-button executive-button-primary" type="button" onclick="switchChapter(10)">ABRIR EN VIVO <span aria-hidden="true">↗</span></button>
+            </section>
 
             <section class="executive-directory" aria-labelledby="executive-directory-title">
                 <div class="executive-section-heading">
