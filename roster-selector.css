@@ -109,3 +109,17 @@
     font-size: .78rem;
     line-height: 1.55;
 }
+
+
+#chapter-2 .roster-selector-role-label {
+    display: inline-flex;
+    width: fit-content;
+    margin: .35rem 0 .1rem;
+    padding: .22rem .55rem;
+    border: 1px solid rgba(231, 198, 106, .42);
+    border-radius: 2px;
+    color: var(--accent-gold, #e7c66a);
+    font-size: .68rem;
+    font-weight: 800;
+    letter-spacing: .1em;
+}
