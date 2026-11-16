@@ -32,9 +32,17 @@ def check_local_reference(value, origin):
     except ValueError:
         ERRORS.append(f"{origin}: ruta fuera del repositorio: {value}")
         return
+    # Las rutas limpias de sitios estáticos pueden apuntar a directorios con index.html.
+    if target.is_dir():
+        target = (target / "index.html").resolve()
     if not target.is_file():
         ERRORS.append(f"{origin}: no existe {value}")
     else:
+        try:
+            target.relative_to(ROOT.resolve())
+        except ValueError:
+            ERRORS.append(f"{origin}: ruta fuera del repositorio: {value}")
+            return
         CHECKED.add(str(target.relative_to(ROOT.resolve())))
 
 

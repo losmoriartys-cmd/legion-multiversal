@@ -3099,3 +3099,5 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **Validación:** CI se ejecuta sobre el SHA de integración; se agregan pruebas de contrato para navegación, páginas y metadatos. El resultado final debe registrarse después de que terminen los workflows.
 
 - **Corrección de QA (16/11/2026):** el primer workflow de las páginas nuevas detectó dos contratos de prueba desactualizados (CTA convertido en enlace y URL Open Graph sin actualizar en todas las apariciones) y una clase de pruebas duplicada. Se corrigen los selectores y se aplica el dominio canónico a todas las referencias OG/Twitter; no se modifica el contenido de métricas por este ajuste.
+
+- **Ajuste del validador estático:** `scripts/validate_site.py` ahora resuelve enlaces limpios a directorios hacia su `index.html`, sin obligar a exponer `/index.html` en las URLs. La validación previa encontró este límite del validador, no archivos faltantes: las tres páginas existen como directorios con índice.
