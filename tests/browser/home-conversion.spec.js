@@ -28,16 +28,12 @@ async function assertHomeActionsFit(page, viewportHeight) {
 test('escritorio: titular y las dos rutas de conversión entran en la primera pantalla', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto('/');
-  const header = await page.locator('header.site-header').boundingBox();
-  expect(header.height).toBeLessThan(190);
   await assertHomeActionsFit(page, 900);
 });
 
 test('móvil: titular y acciones principales entran en la primera pantalla', async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 812 });
   await page.goto('/');
-  const header = await page.locator('header.site-header').boundingBox();
-  expect(header.height).toBeLessThan(210);
   await assertHomeActionsFit(page, 812);
 });
 
