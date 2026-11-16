@@ -11,6 +11,7 @@ on:
       - '*.webp'
       - 'scripts/lighthouse_runs.sh'
       - 'scripts/summarize_lighthouse.py'
+      - '.github/workflows/lighthouse-production.yml'
   workflow_dispatch:
 
 permissions:
