@@ -18,12 +18,15 @@ class SecureContactContractTests(unittest.TestCase):
         self.assertEqual(self.html.count('data-contact-status'), 2)
         self.assertEqual(self.html.count('data-turnstile'), 2)
         self.assertNotIn("onsubmit=", self.html)
+        self.assertEqual(self.html.count('method="post" action="/api/contact"'), 2)
         self.assertNotIn("mailto:", self.html)
 
     def test_submission_requires_turnstile_and_server_delivery(self):
         self.assertIn("TURNSTILE_SECRET_KEY", self.endpoint)
         self.assertIn("TURNSTILE_SITE_KEY", self.endpoint)
         self.assertIn("siteverify", self.endpoint)
+        self.assertIn("application/json", self.endpoint)
+        self.assertIn(" }, 415)", self.endpoint)
         self.assertIn("RESEND_API_KEY", self.endpoint)
         self.assertIn("api.resend.com/emails", self.endpoint)
         self.assertIn('}, 503)', self.endpoint)
