@@ -11,6 +11,7 @@ on:
       - '*.css'
       - '*.json'
       - 'assets/**'
+      - '*.webp'
       - 'scripts/**'
       - 'schemas/**'
       - 'tests/**'
@@ -64,6 +65,27 @@ jobs:
         run: python -m pip install --disable-pip-version-check Pillow
       - name: Auditar dimensiones intrínsecas de imágenes HTML
         run: python scripts/add_image_dimensions.py --check --measure-remotes index.html
+      - name: Verificar contrato del emblema WebP lossless
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          source = Path("legion_logo_final_hybrid.png")
+          output = Path("legion_logo_final_hybrid.webp")
+          assert source.is_file() and output.is_file(), "Falta el original PNG o el WebP."
+          with Image.open(source) as original, Image.open(output) as optimized:
+              assert optimized.format == "WEBP", "El emblema optimizado no es WebP."
+              assert optimized.size == original.size == (1600, 1600), "Cambió la dimensión del emblema."
+              assert "A" in optimized.getbands(), "El WebP perdió transparencia."
+              optimized.load()
+          assert output.stat().st_size < source.stat().st_size, "El WebP no reduce el peso."
+          for page in (Path("index.html"), Path("comic-moriartys.html")):
+              content = page.read_text(encoding="utf-8")
+              assert "legion_logo_final_hybrid.webp" in content, f"Falta WebP en {page}."
+              assert "legion_logo_final_hybrid.png" not in content, f"Quedó referencia PNG en {page}."
+          print(f"OK: WebP {output.stat().st_size:,} bytes; PNG original {source.stat().st_size:,} bytes.")
+          print("OK: 1600x1600, canal alfa y referencias runtime verificadas.")
+          PY
       - name: Auditar referencias de imágenes en main y snapshots históricos
         run: |
           mkdir -p reports/image-audit
@@ -73,7 +95,7 @@ jobs:
           python scripts/audit_image_references.py --root /tmp/image-audit-0d578a0 --output reports/image-audit/0d578a0.md
           python scripts/audit_image_references.py --root . --output reports/image-audit/main.md
       - name: Compilar colectores Python
-        run: python -m py_compile scripts/audit_image_references.py update_stats.py update_platform_stats.py update_clips.py scripts/validate_roster_data.py scripts/validate_clips_data.py scripts/render_roster_noscript.py scripts/validate_metric_history.py scripts/build_creator_metrics.py scripts/validate_creator_metrics.py scripts/audit_and_optimize_images.py scripts/add_image_dimensions.py scripts/summarize_lighthouse.py scripts/lh_failures.py
+        run: python -m py_compile scripts/audit_image_references.py update_stats.py update_platform_stats.py update_clips.py scripts/validate_roster_data.py scripts/validate_clips_data.py scripts/render_roster_noscript.py scripts/validate_metric_history.py scripts/build_creator_metrics.py scripts/validate_creator_metrics.py scripts/audit_and_optimize_images.py scripts/optimize_logo.py scripts/add_image_dimensions.py scripts/summarize_lighthouse.py scripts/lh_failures.py
       - name: Ejecutar pruebas unitarias Python del repositorio
         run: python -m unittest discover -s tests -p 'test_*.py' -v
       - name: Probar lectura de cuentas por los colectores
