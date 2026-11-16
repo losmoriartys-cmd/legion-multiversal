@@ -59,6 +59,10 @@ with Image.open(SOURCE) as opened:
                 raise SystemExit(f"Verificación fallida del candidato {width}px.")
         responsive_outputs.append((width, height, target, selected, target.stat().st_size))
 
+fallback_width, fallback_height = next(
+    (width, height) for width, height, *_ in responsive_outputs if width == 960
+)
+
 html = HTML.read_text(encoding="utf-8")
 old_src = "image_20261106_124855.jpg"
 new_src = "image_20261106_124855.webp"
@@ -100,8 +104,8 @@ tag = line.rstrip("\r\n").rstrip()
 if not tag.endswith(">"):
     tag += ">"
 tag = re.sub(r'\bsrc="[^"]+"', 'src="image_20261106_124855-960.webp"', tag, count=1)
-tag = re.sub(r'\bwidth="\d+"', f'width="{image.width}"', tag, count=1)
-tag = re.sub(r'\bheight="\d+"', f'height="{image.height}"', tag, count=1)
+tag = re.sub(r'\bwidth="\d+"', f'width="{fallback_width}"', tag, count=1)
+tag = re.sub(r'\bheight="\d+"', f'height="{fallback_height}"', tag, count=1)
 tag = re.sub(r'\bsrcset="[^"]+"', f'srcset="{srcset}"', tag, count=1)
 if 'srcset=' not in tag:
     tag = tag[:-1] + f' srcset="{srcset}">'
@@ -116,6 +120,7 @@ HTML.write_text(html, encoding="utf-8")
 
 new_size = OUTPUT.stat().st_size
 print(f"Hero WebP maestro: {new_size:,} bytes; calidad={selected_quality}; dimensiones={image.width}x{image.height}")
+print(f"Dimensiones intrínsecas HTML (fallback): {fallback_width}x{fallback_height}")
 print(f"Original: {original_size:,} bytes; ahorro: {(1 - new_size / original_size) * 100:.1f}%")
 for width, height, path, quality, size in responsive_outputs:
     print(f"Hero responsive {width}w: {size:,} bytes; calidad={quality}; dimensiones={width}x{height}")
