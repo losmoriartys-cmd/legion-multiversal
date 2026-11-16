@@ -25,8 +25,10 @@ class ConversionNavigationContractTests(unittest.TestCase):
         self.assertIn('href="./marcas/"', hero)
         self.assertNotIn("mailto:", hero)
 
-    def test_home_live_status_is_served_by_the_floating_drawer(self):
-        self.assertNotIn('id="home-live-status"', self.html)
+    def test_home_live_status_is_visible_and_backed_by_the_live_drawer(self):
+        self.assertIn('id="home-live-status"', self.html)
+        self.assertIn('id="home-live-updated"', self.html)
+        self.assertIn('id="home-follow-link"', self.html)
         app = (ROOT / "app.js").read_text(encoding="utf-8")
         self.assertIn("function renderLiveDirectory(channels)", app)
         self.assertIn("async function openLiveDrawer()", app)
