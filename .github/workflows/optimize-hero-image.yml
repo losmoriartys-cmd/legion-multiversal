@@ -1,0 +1,53 @@
+name: Optimizar imagen principal del Hero
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/optimize_hero_image.py'
+      - '.github/workflows/optimize-hero-image.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: optimize-hero-image-main
+  cancel-in-progress: false
+
+jobs:
+  optimize:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Descargar main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Instalar Pillow
+        run: python -m pip install --disable-pip-version-check Pillow
+      - name: Convertir y actualizar referencia del Hero
+        run: python scripts/optimize_hero_image.py
+      - name: Publicar el WebP en main
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add image_20261106_124855.webp index.html
+          if git diff --cached --quiet; then
+            echo "La imagen ya está optimizada; no hay cambios que publicar."
+          else
+            git commit -m "perf(home): serve optimized WebP hero image"
+            git push origin HEAD:main
+          fi
+      - name: Conservar el WebP generado como evidencia
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hero-webp-optimization
+          path: image_20261106_124855.webp
+          if-no-files-found: warn
+          retention-days: 14

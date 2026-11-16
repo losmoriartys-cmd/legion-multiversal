@@ -8,13 +8,14 @@ on:
       - '*.html'
       - '*.css'
       - 'assets/**'
+      - '*.webp'
       - 'scripts/lighthouse_runs.sh'
       - 'scripts/summarize_lighthouse.py'
-      - '.github/workflows/lighthouse-production.yml'
   workflow_dispatch:
 
 permissions:
   contents: read
+  checks: read
 
 concurrency:
   group: lighthouse-production
@@ -36,24 +37,46 @@ jobs:
         uses: browser-actions/setup-chrome@v1
         with:
           chrome-version: stable
-      - name: Esperar publicación de la revisión de producción en Cloudflare Pages
+      - name: Confirmar que Cloudflare publicó este SHA en producción
         env:
           PRODUCTION_URL: https://legion-multiversal.pages.dev/
-          EXPECTED_SOURCE_REVISION: cbb329b3512a4b0bc9acd6663061926f2808afb6
+          EXPECTED_SHA: ${{ github.sha }}
+          GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
+          short_sha="${EXPECTED_SHA:0:7}"
           for attempt in $(seq 1 40); do
-            html="$(curl --location --fail --silent --show-error "$PRODUCTION_URL" || true)"
-            if [[ -n "$html" ]] && grep -Fq "name=\"lm-source-revision\" content=\"$EXPECTED_SOURCE_REVISION\"" <<< "$html" \
-              && grep -Fq "https://legion-multiversal.pages.dev/" <<< "$html"; then
-              echo "Cloudflare Pages sirve la revisión de contenido esperada y el dominio canónico correcto."
-              exit 0
+            curl --fail --silent --show-error \
+              -H "Accept: application/vnd.github+json" \
+              -H "Authorization: Bearer $GH_TOKEN" \
+              "https://api.github.com/repos/$GITHUB_REPOSITORY/commits/$EXPECTED_SHA/check-runs" \
+              -o /tmp/check-runs.json
+            if python - "$short_sha" <<'PY'
+          import json, sys
+          short_sha = sys.argv[1]
+          data = json.load(open("/tmp/check-runs.json", encoding="utf-8"))
+          for check in data.get("check_runs", []):
+              if check.get("name") != "Cloudflare Pages":
+                  continue
+              summary = check.get("output", {}).get("summary", "")
+              if check.get("status") == "completed" and check.get("conclusion") == "success" and short_sha in summary:
+                  print(f"Cloudflare Pages confirmó el SHA {short_sha}.")
+                  raise SystemExit(0)
+          raise SystemExit(1)
+          PY
+            then
+              break
             fi
-            echo "Intento $attempt/40 · esperando que Cloudflare Pages publique la revisión $EXPECTED_SOURCE_REVISION."
+            echo "Intento $attempt/40 · esperando el check Cloudflare Pages para $short_sha."
             sleep 15
           done
-          echo "Cloudflare Pages no confirmó la revisión esperada en $PRODUCTION_URL."
-          exit 1
+          html="$(curl --location --fail --silent --show-error "$PRODUCTION_URL")"
+          grep -Fq 'https://legion-multiversal.pages.dev/' <<< "$html"
+          headers="$(curl --location --fail --silent --show-error -I "${PRODUCTION_URL}image_20261106_124855.webp")"
+          grep -Eiq '^content-type: image/webp' <<< "$headers"
+          echo "Dominio canónico y recurso WebP de producción confirmados para $EXPECTED_SHA."
+          echo "SHA medido: $EXPECTED_SHA" >> "$GITHUB_STEP_SUMMARY"
+          echo "URL medida: $PRODUCTION_URL" >> "$GITHUB_STEP_SUMMARY"
       - name: Ejecutar Lighthouse móvil y escritorio (3 corridas por perfil)
         env:
           CHROME_PATH: ${{ steps.chrome.outputs.chrome-path }}
