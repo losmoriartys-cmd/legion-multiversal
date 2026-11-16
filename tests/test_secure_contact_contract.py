@@ -43,6 +43,7 @@ class SecureContactContractTests(unittest.TestCase):
         self.assertIn("MAX_BODY_BYTES", self.endpoint)
         self.assertIn("MAX_FIELD_LENGTH", self.endpoint)
         self.assertIn("payload.website", self.endpoint)
+        self.assertIn("origin !== url.origin", self.endpoint)
         self.assertIn('origin !== url.origin', self.endpoint)
 
 
