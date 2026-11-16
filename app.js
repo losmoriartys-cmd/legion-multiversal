@@ -719,6 +719,8 @@ async function loadInstituteStats(){
   const liveChannels=channels.filter(c=>c.live);
   if(homeLiveStatus)homeLiveStatus.textContent=!isFresh?'Estado temporalmente demorado':liveCount?liveCount+' canal(es) detectado(s) en directo: '+liveChannels.map(c=>c.display_name||c.login).join(', '):'No se detectan canales en directo en la última captura.';
   if(homeLiveUpdated)homeLiveUpdated.textContent='Última captura: '+updatedLabel+' · '+channels.length+' canales Twitch consultados · cadencia objetivo '+interval+' min. No es una conexión en tiempo real.';
+  const homeFollowLink=document.getElementById('home-follow-link');
+  if(homeFollowLink)homeFollowLink.hidden=isFresh&&liveCount>0;
   const liveNav=document.querySelector('.nav-btn-live[data-chapter="10"]');
   if(liveNav){const showLive=isFresh&&liveCount>0;liveNav.classList.toggle('is-live',showLive);liveNav.innerHTML='MIRAR <span aria-hidden="true">'+(showLive?'● '+liveCount:'●')+'</span>';liveNav.setAttribute('aria-label',showLive?liveCount+' canal(es) detectado(s) en directo en la última captura':'Consultar estado de transmisiones; '+(isFresh?'sin canales en directo en la última captura':'última captura demorada'));}
   const channelGrid=document.getElementById('stats-channel-grid');
