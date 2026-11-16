@@ -79,3 +79,9 @@ a{color:var(--cyan);text-underline-offset:3px}
 .channel-kit-sparkline span { display:block; flex:1 1 0; min-width:3px; border-radius:2px 2px 0 0; background:linear-gradient(180deg,#ffdf4d,#66dff3); }
 .channel-kit-sparkline-label { margin:4px 0 10px; color:var(--muted); font-size:.76rem; line-height:1.4; }
 @media print { .channel-kit-sparkline { height:30px; } }
+
+
+.channel-kit-dossier-link { margin:12px 0 0; font-size:.78rem; font-weight:900; letter-spacing:.04em; }
+.channel-kit-dossier-link a { color:var(--cyan); text-decoration:underline; text-underline-offset:3px; }
+.channel-kit-dossier-link a:hover,.channel-kit-dossier-link a:focus-visible { color:var(--gold); }
+@media print { .channel-kit-section { display:none!important; } }
