@@ -74,9 +74,40 @@ jobs:
           grep -Fq 'https://legion-multiversal.pages.dev/' <<< "$html"
           headers="$(curl --location --fail --silent --show-error -I "${PRODUCTION_URL}image_20261106_124855.webp")"
           grep -Eiq '^content-type: image/webp' <<< "$headers"
-          echo "Dominio canónico y recurso WebP de producción confirmados para $EXPECTED_SHA."
+          logo_headers="$(curl --location --fail --silent --show-error -I "${PRODUCTION_URL}legion_logo_final_hybrid.webp")"
+          grep -Eiq '^content-type: image/webp' <<< "$logo_headers"
+          echo "Dominio canónico, Hero WebP y emblema WebP de producción confirmados para $EXPECTED_SHA."
           echo "SHA medido: $EXPECTED_SHA" >> "$GITHUB_STEP_SUMMARY"
           echo "URL medida: $PRODUCTION_URL" >> "$GITHUB_STEP_SUMMARY"
+      - name: Comprobar endpoint seguro de contacto en producción
+        env:
+          PRODUCTION_URL: https://legion-multiversal.pages.dev
+        run: |
+          set -euo pipefail
+          config="$(curl --location --fail --silent --show-error -H 'Accept: application/json' "$PRODUCTION_URL/api/contact")"
+          python - "$config" >> "$GITHUB_STEP_SUMMARY" <<'PY'
+          import json, sys
+          config = json.loads(sys.argv[1])
+          if not isinstance(config.get("configured"), bool):
+              raise SystemExit("GET /api/contact no devolvió el contrato de configuración esperado.")
+          if config["configured"] and not config.get("turnstileSiteKey"):
+              raise SystemExit("El endpoint indica configured=true pero no publica la Site Key.")
+          print("## Contacto en producción")
+          print(f"- Endpoint GET: disponible")
+          print(f"- Configuración completa: {'sí' if config['configured'] else 'no'}")
+          print(f"- Site Key pública disponible: {'sí' if bool(config.get('turnstileSiteKey')) else 'no'}")
+          PY
+          status="$(curl --location --silent --show-error -o /tmp/contact-probe.json -w '%{http_code}' \
+            -X POST \
+            -H "Origin: $PRODUCTION_URL" \
+            -H 'Content-Type: application/json' \
+            -H 'Accept: application/json' \
+            --data '{"type":"brand","fields":{},"turnstileToken":""}' \
+            "$PRODUCTION_URL/api/contact")"
+          case "$status" in
+            400|503) echo "POST de control rechazado correctamente sin token (HTTP $status)." ;;
+            *) cat /tmp/contact-probe.json; echo "Respuesta inesperada del endpoint de contacto: HTTP $status."; exit 1 ;;
+          esac
       - name: Ejecutar Lighthouse móvil y escritorio (3 corridas por perfil)
         env:
           CHROME_PATH: ${{ steps.chrome.outputs.chrome-path }}
