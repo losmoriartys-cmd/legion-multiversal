@@ -32,6 +32,13 @@ class SiteEditorialImageContract(unittest.TestCase):
             self.assertNotIn("%20(1).jpg", content)
         self.assertTrue((ROOT / expected).is_file())
 
+    def test_all_static_images_declare_verified_intrinsic_dimensions(self):
+        images = re.findall(r"<img\\b[^>]*>", self.html, flags=re.IGNORECASE)
+        self.assertEqual(len(images), 37)
+        for image in images:
+            self.assertRegex(image, r'\\bwidth="[1-9][0-9]*"')
+            self.assertRegex(image, r'\\bheight="[1-9][0-9]*"')
+
     def test_origin_comic_cover_remains_vertical_and_uncropped(self):
         self.assertIn('src="image_20261107_021355.jpg', self.html)
         self.assertIn(".origin-editorial-cover img", self.css)
