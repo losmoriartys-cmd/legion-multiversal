@@ -45,3 +45,31 @@ a{color:var(--cyan);text-underline-offset:3px}
  .media-kit .media-stat{font-size:19pt}
  .subpage-foot{margin-top:8mm;padding-top:4mm;font-size:8pt}
 }
+
+
+.channel-kit-section { margin-top:clamp(28px,5vw,54px); padding-top:22px; border-top:1px solid var(--line); }
+.channel-kit-section>h2 { margin:0 0 8px; color:var(--gold); font-size:clamp(1.5rem,3vw,2.1rem); line-height:1.05; }
+.channel-kit-section>p { max-width:780px; color:var(--muted); }
+.channel-kit-grid-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; margin-top:18px; }
+.channel-kit-card { min-width:0; padding:17px; border:1px solid var(--line); border-left:3px solid var(--cyan); border-radius:8px; background:linear-gradient(145deg,var(--panel2),var(--panel)); break-inside:avoid; }
+.channel-kit-card>header { display:grid; gap:3px; margin-bottom:12px; }
+.channel-kit-card>header span { color:var(--cyan); font-size:.7rem; font-weight:800; letter-spacing:.12em; }
+.channel-kit-card>header h3 { margin:2px 0 0; color:var(--gold); font-size:1.25rem; }
+.channel-kit-card>header a { width:max-content; max-width:100%; overflow-wrap:anywhere; font-size:.9rem; }
+.channel-kit-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; }
+.channel-kit-metric { min-width:0; padding:10px; border:1px solid rgba(102,223,243,.16); background:rgba(4,11,19,.28); }
+.channel-kit-metric span,.channel-kit-metric small { display:block; color:var(--muted); font-size:.75rem; line-height:1.35; }
+.channel-kit-metric strong { display:block; margin:3px 0; color:var(--ink); font-size:1.35rem; line-height:1.15; overflow-wrap:anywhere; }
+.channel-kit-meta,.channel-kit-disclaimer,.channel-kit-updated { color:var(--muted); font-size:.82rem; line-height:1.45; }
+.channel-kit-meta { margin:10px 0 0; }
+.channel-kit-disclaimer { margin:18px 0 0; padding:12px; border-left:3px solid var(--gold); background:rgba(255,223,77,.06); }
+.channel-kit-updated { margin-top:8px; }
+@media(max-width:680px) { .channel-kit-grid-list { grid-template-columns:1fr; } }
+@media print {
+ .channel-kit-section { margin-top:8mm; padding-top:4mm; }
+ .channel-kit-grid-list { grid-template-columns:repeat(2,minmax(0,1fr)); gap:6px; }
+ .channel-kit-card { padding:8px; }
+ .channel-kit-metric { padding:6px; }
+ .channel-kit-metric strong { font-size:13pt; }
+ .channel-kit-meta,.channel-kit-disclaimer,.channel-kit-updated { font-size:7.5pt; }
+}
