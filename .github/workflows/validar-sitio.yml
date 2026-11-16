@@ -73,7 +73,7 @@ jobs:
           import re
 
           html = Path("index.html").read_text(encoding="utf-8")
-          widths = (640, 960, 1280)
+          widths = (480, 640, 960, 1280)
           for width in widths:
               path = Path(f"image_20261106_124855-{width}.webp")
               assert path.is_file(), f"Falta el candidato responsive {path.name}."
@@ -85,6 +85,7 @@ jobs:
           assert 'width="960" height="505"' in html, "Las dimensiones intrínsecas no coinciden con el fallback del Hero."
           assert all(f"image_20261106_124855-{width}.webp {width}w" in html for width in widths), "Falta un candidato en srcset."
           assert 'imagesrcset=' in html and 'imagesizes=' in html, "El preload no negocia imágenes responsive."
+          assert 'calc(100vw - 64px)' in html, "El sizes móvil no refleja el ancho útil del Hero."
           assert 'fetchpriority="high"' in html, "El Hero perdió fetchpriority high."
           assert '<style id="critical-home-styles">' in html, "Falta CSS crítico inline para la primera pantalla."
           assert '<style id="conversion-overhaul-inline">' in html and '<style id="conversion-phase2-inline">' in html, "Faltan los estilos de conversión inline."
