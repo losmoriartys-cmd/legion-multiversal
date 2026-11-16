@@ -138,9 +138,10 @@ button,a{font:inherit}.shell{width:min(1440px,100%);margin:auto;padding:22px cla
  const fmt=(v,d=1)=>typeof v==='number'?v.toLocaleString('es-AR',{maximumFractionDigits:d}):v??'—';
  const addLink=(parent,label,url)=>{const a=node('a','',label);a.href=url;a.target='_blank';a.rel='noopener noreferrer';parent.append(a)};
  async function load(){try{
-  const [roster,records,activity]=await Promise.all(['roster-data.json','creator-records.json','data.json'].map(path=>fetch(path,{cache:'no-store'}).then(r=>{if(!r.ok)throw Error(path+' '+r.status);return r.json()})));
-  const hero=roster.heroes.find(h=>h.name==='MORIARTYS');if(!hero)throw Error('No se encontró MORIARTYS');
-  const media=hero.mediaProfile||{},record=records.channels?.[hero.id]||{},channel=activity.channels?.losmoriartys||{},w=channel.window||{};
+  const bundle=await window.LegionCreatorProfiles.load({files:['roster','records','metrics','platforms','activity','clips']});
+  const hero=bundle.roster.heroes.find(h=>h.id==='moriartys'||h.name==='MORIARTYS');if(!hero)throw Error('No se encontró MORIARTYS');
+  const profile=bundle.getCreator(hero);if(!profile)throw Error('No se pudo resolver el expediente compartido');
+  const media=hero.mediaProfile||{},record=profile.records,channel=profile.activity||{},w=channel.window||{};
   $('cover-image').src=hero.img||hero.portrait;$('cover-image').alt='Ilustración de portada '+hero.name;
   $('bio').textContent=hero.bio||'';$('demi').textContent=media.demi||'';$('ari').textContent=media.ari||'';$('editorial').textContent=media.editorial||'';$('voice').textContent=hero.voice||'';
   $('formats').textContent=(media.formats||hero.areas||[]).join(' · ');
@@ -166,7 +167,7 @@ button,a{font:inherit}.shell{width:min(1440px,100%);margin:auto;padding:22px cla
   $('commercial-summary').textContent='Propuesta editorial: integrar el producto o servicio de una marca en una partida compartida, una dinámica con la comunidad o una presentación conversada. Cada acción se adapta al contenido y se identifica con transparencia; los formatos son posibilidades, no campañas ya contratadas.';
   if(media.contact){$('contact').href='mailto:'+media.contact+'?subject='+encodeURIComponent('Propuesta de colaboración · Los Moriartys');$('contact').textContent='Contacto comercial · '+media.contact+' ↗'}
   if(hero.twitch){$('twitch').href=hero.twitch;$('twitch').textContent=hero.twitch.replace(/^https?:\/\//,'')+' ↗'}
-  $('status').textContent='Fuentes cargadas · actividad actualizada: '+stamp+'.';
+  $('status').textContent='Fuentes compartidas cargadas · métricas normalizadas: '+(profile.generatedAt||'sin fecha')+' · actividad observada: '+stamp+'.';
  }catch(err){console.error(err);$('status').textContent='No se pudieron cargar todas las fuentes. Se ocultan las cifras no verificadas.';$('stats').replaceChildren(node('div','method','Datos de actividad no disponibles.'));$('daily').replaceChildren(node('p','smallnote','Registro diario no disponible.'));$('games').replaceChildren(node('p','smallnote','Registros de juegos no disponibles.'));$('collabs').replaceChildren(node('p','smallnote','Registros de colaboración no disponibles.'));$('clips').replaceChildren(node('p','smallnote','Clips no disponibles.'))}}
  setSpread(-1);load();
  window.addEventListener('resize',()=>{if(current>=0)setSpread(current,mobile()?Math.min(currentLeaf,total-1):undefined)});
