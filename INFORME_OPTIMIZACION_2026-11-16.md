@@ -2,7 +2,7 @@
 
 **Fecha:** 16/11/2026  
 **Rama:** `main`  
-**Último SHA de implementación antes de este informe:** `a4e73777f4dd4e2fd6746abc82b99052db9aa688`  
+**SHA de referencia del corte funcional:** `ef7cd5603bbee758303a17b67dbc1509c558a86f`  
 **PR abiertas al corte:** 0
 
 ## 1. Cambios incorporados
@@ -15,7 +15,7 @@
 
 ### Contacto
 - Se creó `functions/api/contact.js` para Cloudflare Pages Functions.
-- Los formularios de incorporación y propuesta comercial dejaron de usar `mailto:`.
+- Los formularios de incorporación y propuesta comercial dejaron de usar `mailto:` y usan `method=post` para evitar que una visita sin JavaScript envíe campos por query string.
 - El endpoint valida origen, tamaño, campos obligatorios, honeypot y desafío Turnstile.
 - La entrega usa Resend desde el servidor. No se guardan credenciales en el repositorio ni se informa éxito si Resend no acepta el mensaje.
 - Se documentaron las variables necesarias en `docs/contact-deployment.md`.
@@ -35,7 +35,9 @@
 - El archivo audiovisual se redujo de ocho a cuatro clips seleccionados, con títulos editoriales neutrales y enlaces a los originales de Twitch. Los datos fuente originales no se alteraron.
 
 ### Media kit por canal
-- `/marcas/` ahora presenta fichas individuales generadas desde `creator-metrics.json` y `platform-stats.json`.
+- `/marcas/` ahora presenta fichas individuales generadas desde `creator-metrics.json`, `platform-stats.json` y `data.json`.
+- Cada canal Twitch incluye una sparkline de hasta diez días con cobertura visible; cada tarjeta abre el expediente individual, desde donde se puede imprimir/guardar el PDF.
+- El botón de impresión institucional conserva la ficha general de una página; las fichas por canal quedan fuera de esa impresión y se imprimen desde cada expediente.
 - Se muestran promedios y picos observados, directos detectados o métricas oficiales de YouTube cuando existen.
 - Seguidores, país e idioma se muestran como no disponibles cuando no existe una fuente propia verificable.
 - Las audiencias de plataformas distintas no se suman.
@@ -54,14 +56,14 @@
 - La consulta de estado combinado del SHA no devolvió checks y la consulta de workflows asociada al commit no devolvió ejecuciones visibles. Esto no equivale a CI exitoso.
 - No se pudo verificar visualmente el deployment de producción desde esta sesión. El canonical actual apunta a `https://legion-multiversal.pages.dev/`, pero el despliegue efectivo y el dominio público deben comprobarse en Cloudflare Pages.
 - No se ejecutó Lighthouse sobre producción. La carga diferida reduce trabajo inicial esperado, pero no se atribuye una mejora medida de LCP ni un nuevo peso total sin medición.
-- No se configuró analítica propia: requiere elegir proveedor, crear identificador, definir privacidad y desplegar la configuración. No se inventó un ID.
+- No se configuró analítica propia: se documentó la activación de Cloudflare Web Analytics y sus criterios de privacidad en `docs/analytics-deployment.md`. Falta crear el beacon desde la cuenta Cloudflare y verificar eventos reales. No se inventó un ID.
 - No se agregó un enlace de Discord porque no se encontró un destino comunitario confirmado.
 
 ## 4. Próximas verificaciones obligatorias
-1. Ejecutar CI completo sobre el SHA final y corregir cualquier fallo antes de cerrar el bloque.
+1. Ejecutar CI completo sobre el SHA final y corregir cualquier fallo antes de cerrar el bloque. En el corte `ef7cd56`, la consulta no devolvió checks ni ejecuciones visibles; eso no equivale a CI exitoso.
 2. Configurar variables de Cloudflare y Resend; enviar y recibir pruebas reales de ambos formularios.
 3. Verificar la publicación de producción en el dominio elegido.
 4. Ejecutar Lighthouse móvil y escritorio en producción, registrar LCP/INP/CLS y peso transferido.
 5. Revisar el diseño en 375 px y 1440×900, incluyendo el media kit imprimible.
-6. Definir proveedor de analítica propia y consentimiento/aviso de privacidad antes de activarlo.
+6. Activar Cloudflare Web Analytics según `docs/analytics-deployment.md` y publicar el aviso de medición/privacidad antes de habilitarlo.
 
