@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://losmoriartys-cmd.github.io/legion-multiversal/sitemap.xml
+Sitemap: https://legion-multiversal.pages.dev/sitemap.xml
