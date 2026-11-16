@@ -1432,7 +1432,7 @@ function restoreHeroProfileFromHash() {
     if (hash === '#roster' || hash.startsWith('#roster?')) {
         showRosterChapter();
         if (hash.startsWith('#roster?')) {
-            const match = hash.match(/^#roster\\?hero=([^&]+)/i);
+            const match = hash.match(/^#roster\?hero=([^&]+)/i);
             if (match && match[1]) {
                 let slug = match[1];
                 try { slug = decodeURIComponent(slug); } catch (error) { /* conservar valor literal */ }
@@ -1460,7 +1460,7 @@ window.addEventListener('popstate', () => {
         if (window.currentHeroProfileIndex !== null && window.currentHeroProfileIndex !== undefined) closeHeroProfile({ fromHistory: true });
         showRosterChapter();
         if (hash.startsWith('#roster?')) {
-            const match = hash.match(/^#roster\\?hero=([^&]+)/i);
+            const match = hash.match(/^#roster\?hero=([^&]+)/i);
             if (match && match[1]) {
                 let slug = match[1];
                 try { slug = decodeURIComponent(slug); } catch (error) { /* conservar valor literal */ }
@@ -2016,7 +2016,7 @@ function printHeroDossier(){
             if (current === panel) return;
             const transition = document.getElementById('chapter-transition');
             const chapterName = (document.querySelector('.nav-btn[data-chapter="' + chapterNum + '"]') || {}).textContent || panel.querySelector('h2')?.textContent || 'NUEVO EXPEDIENTE';
-            const readableChapterName = chapterName.replace(/\\s+/g, ' ').trim();
+            const readableChapterName = chapterName.replace(/\s+/g, ' ').trim();
             document.title = Number(chapterNum) === 0 ? 'LEGIÓN MULTIVERSAL | Diferentes mundos. Una misma Legión.' : readableChapterName + ' | LEGIÓN MULTIVERSAL';
             const announcement = document.getElementById('chapter-announcement');
             if (announcement) announcement.textContent = 'Sección ' + readableChapterName + ' abierta.';

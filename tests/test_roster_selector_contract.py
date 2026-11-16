@@ -47,23 +47,44 @@ class RosterCharacterSelectorContractTests(unittest.TestCase):
         self.assertIn("const heroAccentColors = {", self.app)
         for hero_id in ("moriartys", "rod3r1k", "lady-moriarty", "ardipii", "akuma", "dave-nexus", "pato-oratoris", "habitos"):
             self.assertIn("'" + hero_id + "':", self.app)
-        self.assertIn('class="roster-selector-method"><summary>CRITERIO DE DATOS</summary>', self.app)
+        self.assertIn('class="roster-selector-method"', self.app)
+        self.assertIn('methodWasOpen', self.app)
 
     def test_selector_mount_and_assets_are_loaded(self):
         home = self.html.index('<div id="roster-home">')
         mount = self.html.index('id="roster-selector"')
         self.assertGreater(mount, home)
         self.assertIn("roster-selector.css", self.html)
-        self.assertIn("app.js?v=20261116-conversion-phase2-1", self.html)
+        self.assertIn("app.js?v=20261116-roster-routing-2", self.html)
 
     def test_comparator_does_not_publish_non_comparable_metrics(self):
         self.assertIn("MÉTRICAS COMPARABLES", self.app)
         self.assertIn('class="roster-selector-na">No disponible</td>', self.app)
         self.assertIn("metodología comparables para los ocho perfiles", self.app)
 
+    def test_selection_and_dossier_routes_are_distinct_and_restorable(self):
+        self.assertIn("#roster?hero=", self.app)
+        self.assertIn("hash.startsWith('#roster?')", self.app)
+        self.assertIn("hash.startsWith('#roster/')", self.app)
+        self.assertIn("comparatorWasOpen", self.app)
+        self.assertIn("methodWasOpen", self.app)
+        self.assertIn("const primaryCta = selectedLive && platformUrl", self.app)
+        self.assertIn("roster-selector-primary is-live-cta", self.app)
+
+    def test_modal_tabs_reset_scroll_and_dead_comic_renderers_are_removed(self):
+        self.assertIn("modalContent.scrollTop = 0", self.app)
+        for name in ("renderLadyMoriartyComicPages", "renderHabitosComicPages", "renderAkumaComicPages", "renderArdipiiComicPages", "renderDaveNexusComicPages", "renderPatoOratorisComicPages", "renderRod3r1kComicPages", "renderMoriartysComicPages"):
+            self.assertNotIn(name, self.app)
+
     def test_demo_live_simulation_is_not_in_production_selector(self):
         self.assertNotIn("simular directo", self.app)
         self.assertNotIn("new Set(['akuma','ardipii'])", self.app)
+
+    def test_global_navigation_uses_domcontentloaded_and_sixty_second_activity_refresh(self):
+        self.assertIn("document.addEventListener('DOMContentLoaded', initializeLegionApp", self.app)
+        self.assertNotIn("window.onload", self.app)
+        self.assertIn("60 * 1000", self.app)
+        self.assertIn("options.skipHistory", self.app)
 
     def test_legacy_filters_and_grid_are_not_the_visible_entry_point(self):
         self.assertIn("#chapter-2 .roster-tools", self.css)

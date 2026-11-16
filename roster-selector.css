@@ -203,3 +203,13 @@
 @media(prefers-reduced-motion:reduce) {
     #chapter-2 .roster-selector-panel { transition: none; }
 }
+
+#chapter-2 .roster-selector-primary.is-live-cta {
+  background: #d92d3e;
+  border-color: #ff6b78;
+  color: #ffffff;
+  box-shadow: 0 0 16px rgba(217, 45, 62, 0.45);
+}
+#chapter-2 .roster-selector-primary.is-live-cta:hover {
+  background: #e6394a;
+}
