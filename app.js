@@ -680,12 +680,14 @@ async function loadInstituteStats(){
   body.innerHTML=channels.map(c=>{const samples=Array.isArray(c.snapshots)?c.snapshots.filter(s=>s?.sampled_at):[];const first=samples.length?Date.parse(samples[0].sampled_at):NaN;const last=samples.length?Date.parse(samples[samples.length-1].sampled_at):NaN;const expected=Number.isFinite(first)&&Number.isFinite(last)&&last>=first?Math.floor((last-first)/(Number(data.sampling_interval_minutes||15)*60000))+1:0;const coverage=expected?Math.min(100,(samples.length/expected)*100):null;const coverageLabel=coverage===null?'Insuficiente':coverage.toLocaleString('es-AR',{maximumFractionDigits:1})+'% ('+samples.length+'/'+expected+')';return '<tr><td>'+escapeStatsHtml(c.display_name)+'</td><td>'+(c.live?'EN DIRECTO':'OFFLINE')+'</td><td>'+fmt(c.current_viewers,0)+'</td><td>'+escapeStatsHtml(fmt(c.current_game))+'</td><td>'+fmt(c.window?.average_viewers_sampled)+'</td><td>'+fmt(c.window?.peak_viewers_sampled,0)+'</td><td>'+fmt(c.window?.observed_live_hours)+'</td><td>'+fmt(c.window?.samples_total,0)+'</td><td>'+coverageLabel+'</td></tr>';}).join('');
   renderLiveDirectory(channels);
   refreshRosterLiveIndicators();
+  renderRosterSelector();
  }catch(e){
   body.innerHTML='<tr><td colspan="9">Estadísticas temporalmente no disponibles. '+escapeStatsHtml(e.message)+'</td></tr>';
   const summary=document.getElementById('stats-summary');if(summary)summary.innerHTML='<article class="impact-kpi"><strong>—</strong><span>DATOS NO DISPONIBLES</span><small>La fuente de actividad no respondió. No se interpreta el último estado conocido como actual.</small></article>';
   const updatedNode=document.getElementById('stats-updated');if(updatedNode){updatedNode.textContent='No se pudo consultar data.json. El estado en directo queda sin confirmar hasta la próxima carga exitosa.';updatedNode.dataset.status='error';}
   const channelGrid=document.getElementById('stats-channel-grid');if(channelGrid)channelGrid.innerHTML='<p class="stats-note" role="status">Estado de canales no disponible: no se pudo leer la fuente de actividad. Los datos anteriores no se presentan como actuales.</p>';
   refreshRosterLiveIndicators();
+  renderRosterSelector();
  } finally {
   instituteStatsLoading=false;
  }
@@ -975,6 +977,97 @@ function refreshRosterLiveIndicators() {
     });
 }
 
+
+let selectedRosterCreatorId = null;
+function renderRosterSelector() {
+    const host = document.getElementById('roster-selector');
+    if (!host || !Array.isArray(heroesData) || !heroesData.length) return;
+    const selected = heroesData.find(hero => (hero.id || hero.slug) === selectedRosterCreatorId) || heroesData[0];
+    selectedRosterCreatorId = selected.id || selected.slug;
+    const liveStates = heroesData.map(hero => ({ hero, state: getRosterLiveState(hero) }));
+    const freshLive = liveStates.filter(item => item.state?.fresh && item.state.channel?.live);
+    const progress = readLegionProgress();
+    const known = heroesData.filter(hero => progress.profiles.includes(String(hero.cardNumber || hero.name))).length;
+    const safe = escapeStatsHtml;
+    const primaryAccount = hero => (hero.accounts || []).find(account => account.account_type === 'creator_channel') || (hero.accounts || [])[0] || null;
+    const accountLabel = account => account ? String(account.platform || 'plataforma').toUpperCase() : 'PLATAFORMA POR CONFIRMAR';
+    const liveState = hero => getRosterLiveState(hero);
+    const selectedState = liveState(selected);
+    const selectedLive = Boolean(selectedState?.fresh && selectedState.channel?.live);
+    const platform = primaryAccount(selected);
+    const platformUrl = platform?.url || selected.twitch || selected.youtube || '';
+    const platformName = accountLabel(platform);
+    const areas = (selected.areas || []).filter(value => value && value !== 'Especialidad por definir');
+    const schedule = selected.schedule || selected.mediaProfile?.schedule || '';
+    const creatorType = selected.creator_type === 'video_creator' ? 'CREADOR DE VIDEO' : selected.creator_type === 'live_streamer' ? 'CREADOR EN DIRECTO' : 'FORMATO POR CONFIRMAR';
+    const liveSummary = freshLive.length
+        ? '<span class="roster-selector-live-count">● ' + freshLive.length + ' EN VIVO AHORA</span>'
+        : '<span class="roster-selector-live-count is-quiet">' + (instituteStatsData ? 'SIN DIRECTOS DETECTADOS EN LA ÚLTIMA CAPTURA' : 'ESTADO DE DIRECTOS NO DISPONIBLE') + '</span>';
+    const tiles = heroesData.map((hero, index) => {
+        const account = primaryAccount(hero);
+        const state = liveState(hero);
+        const isLive = Boolean(state?.fresh && state.channel?.live);
+        const isSelected = (hero.id || hero.slug) === selectedRosterCreatorId;
+        const image = hero.portrait || hero.img || '';
+        return '<button type="button" class="roster-selector-tile' + (isSelected ? ' is-selected' : '') + '" role="tab" id="roster-tab-' + safe(hero.id || hero.slug) + '" aria-selected="' + isSelected + '" aria-controls="roster-selector-panel" tabindex="' + (isSelected ? '0' : '-1') + '" data-roster-select="' + index + '" aria-label="Conocer a ' + safe(getHeroDisplayName(hero)) + '">' +
+            (image ? '<img src="' + safe(image) + '" alt="" loading="' + (index < 4 ? 'eager' : 'lazy') + '" decoding="async">' : '<span class="roster-selector-no-portrait" aria-hidden="true">' + safe((hero.display_name || hero.name || '?').slice(0,1)) + '</span>') +
+            (isLive ? '<span class="roster-selector-tile-live">EN VIVO</span>' : '') +
+            '<span class="roster-selector-tile-name">' + safe(getHeroDisplayName(hero)) + '</span><span class="roster-selector-tile-role">' + safe(hero.codename || creatorType) + '</span></button>';
+    }).join('');
+    const tags = areas.length ? areas.slice(0,3).map(area => '<span>' + safe(area) + '</span>').join('') : '<span>Especialidad por definir</span>';
+    const liveLabel = selectedLive
+        ? '<span class="roster-selector-status is-live">● EN VIVO' + (selectedState.channel.current_game ? ' · ' + safe(selectedState.channel.current_game) : '') + '</span>'
+        : selectedState?.fresh
+            ? '<span class="roster-selector-status">OFFLINE · ÚLTIMA CAPTURA ACTUALIZADA</span>'
+            : '<span class="roster-selector-status is-unknown">ESTADO NO DISPONIBLE</span>';
+    const scheduleLabel = schedule
+        ? safe(schedule)
+        : selected.creator_type === 'video_creator' ? 'Frecuencia de publicación por confirmar' : 'Horario por confirmar';
+    const identity = selected.codename || selected.characterRole || 'Identidad en desarrollo';
+    const intro = selected.mediaProfile?.editorial || selected.bio || 'Presentación personal en desarrollo.';
+    const quote = selected.voice ? '<blockquote>' + safe(selected.voice) + '</blockquote>' : '';
+    const profileIndex = heroesData.indexOf(selected);
+    const compareRows = heroesData.map(hero => {
+        const account = primaryAccount(hero);
+        const rowAreas = (hero.areas || []).filter(value => value && value !== 'Especialidad por definir');
+        const rowSchedule = hero.schedule || hero.mediaProfile?.schedule || 'Por confirmar';
+        return '<tr><th scope="row">' + safe(getHeroDisplayName(hero)) + '</th><td>' + safe(accountLabel(account)) + '</td><td>' + safe(rowAreas.length ? rowAreas.join(' · ') : 'Por definir') + '</td><td>' + safe(rowSchedule) + '</td><td class="roster-selector-na">No disponible</td></tr>';
+    }).join('');
+    host.innerHTML = '<div class="roster-selector-heading"><div><span class="roster-selector-kicker">ARCHIVO CENTRAL · SELECCIÓN DE PERSONAJES</span><h2>ELEGÍ A TU CREADOR</h2><p>Ocho integrantes. Ocho identidades. Una misma Legión.</p></div><div class="roster-selector-actions">' + liveSummary + '<button type="button" class="roster-selector-surprise" id="roster-selector-surprise">SORPRENDEME ↗</button></div></div>' +
+        '<div class="roster-selector-progress"><span id="roster-selector-progress-text">CONOCISTE ' + known + ' DE ' + heroesData.length + '</span><div class="roster-selector-progress-track" role="progressbar" aria-label="Integrantes conocidos" aria-valuemin="0" aria-valuemax="' + heroesData.length + '" aria-valuenow="' + known + '"><i style="width:' + (known / heroesData.length * 100) + '%"></i></div></div>' +
+        '<div class="roster-selector-rail" role="tablist" aria-label="Elegí uno de los ocho integrantes">' + tiles + '</div>' +
+        '<section class="roster-selector-panel" id="roster-selector-panel" role="tabpanel" aria-labelledby="roster-tab-' + safe(selected.id || selected.slug) + '" tabindex="0">' +
+        '<div class="roster-selector-art">' + (selected.img || selected.portrait ? '<img src="' + safe(selected.img || selected.portrait) + '" alt="Ilustración de ' + safe(getHeroDisplayName(selected)) + '" loading="eager" decoding="async">' : '<span>RETRATO PENDIENTE</span>') + '<span class="roster-selector-art-number">EXP. ' + safe(selected.cardNumber || 'S/N') + '</span></div>' +
+        '<div class="roster-selector-copy"><span class="roster-selector-identity">' + safe(identity) + ' · ' + safe(creatorType) + '</span><h3>' + safe(getHeroDisplayName(selected)) + '</h3><p class="roster-selector-real-identity">' + safe(selected.identity_scope === 'shared_project' ? 'Proyecto compartido de ' + (selected.represented_people || []).join(' y ') : selected.identity_scope === 'individual_creator' ? 'Creador/a individual' : 'Integrante de Legión Multiversal') + '</p>' +
+        '<div class="roster-selector-tags">' + tags + '</div><p class="roster-selector-ideal"><strong>IDEAL SI TE GUSTA:</strong> ' + safe(areas.length ? areas.join(' · ') : 'Conocer nuevas propuestas y creadores') + '</p>' +
+        '<p class="roster-selector-description">' + safe(intro) + '</p>' + quote +
+        '<div class="roster-selector-meta">' + liveLabel + '<span>PLATAFORMA · ' + safe(platformName) + '</span><span>HORARIO · ' + scheduleLabel + '</span></div>' +
+        '<div class="roster-selector-cta"><button type="button" class="roster-selector-primary" id="roster-selector-open-profile">ABRIR EXPEDIENTE ↗</button>' + (platformUrl ? '<a class="roster-selector-platform" href="' + safe(platformUrl) + '" target="_blank" rel="noopener noreferrer">VER EN ' + safe(platformName) + ' ↗</a>' : '') + '</div></div></section>' +
+        '<details class="roster-selector-comparator"><summary>PARA MARCAS · COMPARADOR DE PERFILES</summary><div class="roster-selector-table-wrap"><table><thead><tr><th>CREADOR</th><th>PLATAFORMA</th><th>ESPECIALIDADES</th><th>HORARIO / FRECUENCIA</th><th>MÉTRICAS COMPARABLES</th></tr></thead><tbody>' + compareRows + '</tbody></table></div><p>Las métricas se publicarán cuando exista una ventana, fuente y metodología comparables para los ocho perfiles. No se mezclan datos de plataformas ni períodos diferentes.</p></details>';
+    host.querySelectorAll('[data-roster-select]').forEach(button => {
+        button.addEventListener('click', () => selectRosterCreator(Number(button.dataset.rosterSelect), false));
+    });
+    host.querySelector('#roster-selector-surprise')?.addEventListener('click', () => {
+        const candidates = heroesData.map((hero,index) => index).filter(index => (heroesData[index].id || heroesData[index].slug) !== selectedRosterCreatorId);
+        const next = candidates[Math.floor(Math.random() * candidates.length)];
+        selectRosterCreator(next, true);
+    });
+    host.querySelector('#roster-selector-open-profile')?.addEventListener('click', event => openHeroProfile(profileIndex, event.currentTarget));
+    host.querySelectorAll('.roster-selector-tile img').forEach(image => image.addEventListener('error', () => {
+        image.replaceWith(Object.assign(document.createElement('span'), { className: 'roster-selector-no-portrait', textContent: 'RETRATO' }));
+    }, { once: true }));
+}
+function selectRosterCreator(index, moveFocus) {
+    const hero = heroesData[index];
+    if (!hero) return;
+    selectedRosterCreatorId = hero.id || hero.slug;
+    recordLegionProgress('profile', hero.cardNumber || hero.name);
+    renderRosterSelector();
+    if (moveFocus) document.getElementById('roster-tab-' + selectedRosterCreatorId)?.focus();
+    const text = document.getElementById('roster-selector-progress-text');
+    if (text) text.setAttribute('aria-live', 'polite');
+}
+
 function renderRoster() {
     const container = document.getElementById('roster-container');
     if (!container) return;
@@ -1171,6 +1264,7 @@ function renderRoster() {
         container.appendChild(section);
     });
     if (!filteredEntries.length) container.innerHTML = '<section class="roster-empty-state" role="status"><span class="roster-empty-kicker">ARCHIVO SIN COINCIDENCIAS</span><h3>NO ENCONTRAMOS ESE EXPEDIENTE.</h3><p>Probá con otro nombre, una especialidad diferente o quitá los filtros activos para volver a explorar toda la Legión.</p><button type="button" class="roster-empty-reset" data-reset-roster-empty>RESTABLECER BÚSQUEDA</button></section>';
+    renderRosterSelector();
 }
 function renderCommercialQuickView(hero) {
     const safe = escapeStatsHtml;
