@@ -3231,3 +3231,13 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **Estado final comprobado en los archivos versionados:** siete canales Twitch resueltos y con estado Helix actualizado; \`collection.complete=false\`, \`status_complete=true\`, \`coverage_complete=true\`, \`sampling_complete=false\` cuando los siete canales se omiten correctamente por la ventana de 45 minutos. El \`last_snapshot_at\` permanece en \`2026-11-16T15:19:07Z\`, sin falsear la antigüedad de las muestras.
 - **YouTube:** captura pública correcta de Pato — Oratoris en \`2026-11-16T15:57:48Z\`; 56 suscriptores, 431 visualizaciones y 6 videos. El historial conserva la primera entrada y el colector ya queda preparado para deduplicar por hora UTC y retener 90 observaciones.
 - **Incidencias de CI durante la intervención:** las primeras corridas detectaron, y se corrigieron antes del cierre, un import faltante en el colector multiplataforma, dos contratos de validación que todavía interpretaban \`complete\` como frescura de estado y una verificación de workflow que exigía un snapshot nuevo en cada cron. La corrida integral final quedó verde.
+
+
+## 2026-11-16 — Encuadre de credencial individual de TheR0d3R1K
+
+- **Objetivo:** evitar que el retrato vertical de la credencial individual pierda el rostro o desborde la tarjeta en escritorio y móvil.
+- **Diagnóstico:** el HTML real utiliza `#chapter-8 .alliance-person-card` y `.alliance-person-avatar`; los selectores sugeridos inicialmente (`.alliance-individual-media`, `.credential-portrait`) no existen. La imagen es `assets/heroes/rod3r1k_dark.webp`, con proporción intrínseca 2:3.
+- **Implementación:** se ajustó la columna de imagen a un máximo de 240 px en escritorio y 200 px en móvil; se fijó el recorte 4:5 con `object-fit: cover` y `object-position: center 18%`, conservando el foco en la zona superior. En pantallas de hasta 480 px la imagen queda centrada sobre el texto. Se versionó la URL de `chapter-8.css` para evitar servir reglas antiguas desde caché.
+- **Alcance:** solo afecta la credencial individual de Alianzas; no cambia el archivo de imagen ni las demás tarjetas.
+- **Validación:** inspección del HTML/CSS de `main` y verificación de selectores y breakpoints por código. No se declara todavía una inspección visual real en navegador ni un resultado de despliegue hasta que finalicen sus workflows.
+- **Archivos:** `chapter-8.css`, `index.html`, `INFORMES.md`.
