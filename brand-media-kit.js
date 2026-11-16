@@ -29,8 +29,12 @@
     fetch("../platform-stats.json", { cache: "no-store" }).then((response) => {
       if (!response.ok) throw new Error("platform-stats");
       return response.json();
+    }),
+    fetch("../data.json", { cache: "no-store" }).then((response) => {
+      if (!response.ok) throw new Error("activity");
+      return response.json();
     })
-  ]).then(([creatorData, platformData]) => {
+  ]).then(([creatorData, platformData, activityData]) => {
     const cards = [];
     Object.entries(creatorData.creators || {}).forEach(([id, creator]) => {
       (creator.accounts || []).forEach((account) => {
@@ -43,6 +47,19 @@
           const period = avg?.period || peak?.period || streams?.period || {};
           const captured = avg?.captured_at || peak?.captured_at || creatorData.generated_at;
           const source = avg?.source || peak?.source || "Twitch Helix Public API";
+          const login = String(account.handle || "").toLowerCase();
+          const daily = activityData.channels?.[login]?.window?.daily_activity || [];
+          const recentDaily = daily.slice(-10);
+          const dailyMax = Math.max(1, ...recentDaily.map((item) => Number(item.average_viewers_sampled) || 0));
+          const liveSamples = recentDaily.reduce((sum, item) => sum + (Number(item.live_samples) || 0), 0);
+          const sparkline = recentDaily.length
+            ? '<div class="channel-kit-sparkline" role="img" aria-label="Promedio diario de espectadores observado durante ' + recentDaily.length + ' días registrados">' +
+              recentDaily.map((item) => {
+                const value = Number(item.average_viewers_sampled) || 0;
+                const height = Math.max(4, Math.min(100, value / dailyMax * 100));
+                return '<span title="' + escapeHtml(date(item.date)) + ': ' + escapeHtml(number(value)) + ' promedio observado" style="height:' + height.toFixed(1) + '%"></span>';
+              }).join("") + '</div><p class="channel-kit-sparkline-label">Promedio diario observado · ' + recentDaily.length + ' días con registro · ' + number(liveSamples) + ' muestras en directo.</p>'
+            : '<p class="channel-kit-sparkline-label">Serie diaria: sin datos disponibles en esta captura.</p>';
           const usable = [avg, peak, streams].some((item) => item && item.value !== null && item.status !== "unavailable");
           if (!usable) return;
           cards.push(
@@ -53,7 +70,7 @@
             makeMetric("Promedio observado", number(avg?.value), "Muestras públicas") +
             makeMetric("Pico observado", number(peak?.value), "Muestras públicas") +
             makeMetric("Directos detectados", number(streams?.value), "En la ventana observada") +
-            '</div><p class="channel-kit-meta">Fuente: ' + escapeHtml(source) + ' · Período: ' +
+            '</div>' + sparkline + '<p class="channel-kit-meta">Fuente: ' + escapeHtml(source) + ' · Período: ' +
             escapeHtml(date(period.from)) + ' – ' + escapeHtml(date(period.to)) + ' · Captura: ' +
             escapeHtml(date(captured)) + '</p><p class="channel-kit-meta">País e idioma de la audiencia: sin datos propios verificables.</p></article>'
           );
