@@ -651,3 +651,37 @@ No fusionar, publicar en producción, cambiar credenciales ni retirar datos/asse
 
 **Límites sin cambio**
 - No se hizo merge, no se tocó `main`, no se desplegó producción ni se modificaron credenciales. La primera captura real de clips sigue pendiente de la ejecución autorizada del workflow de `main`, con secretos de Twitch confirmados.
+
+## Dirección oficial vigente — Roster como selector de personajes
+
+La experiencia principal del Roster deja de organizar la exploración alrededor de rangos institucionales y filtros. La entrada pública debe funcionar como una **pantalla de selección de personajes**: primero aparecen los ocho integrantes; después, la ficha del seleccionado; al final, el comparador comercial.
+
+### Contrato de experiencia
+- Los ocho integrantes aparecen desde el primer viewport, sin separar Dirección, Profesores, Estudiante y Colaboradores.
+- Cada integrante tiene retrato, nombre público, identidad narrativa, especialidades, plataforma principal, estado de actividad cuando la fuente es reciente y horario/frecuencia solo cuando está confirmado.
+- La línea «Ideal si te gusta» se construye desde las áreas editoriales ya registradas. No se inventan intereses, horarios, idiomas, disponibilidad ni métricas.
+- La selección funciona con ratón, teclado (flechas, Inicio y Fin) y carrusel horizontal en móvil.
+- «Sorprendeme» selecciona otro integrante; el progreso de exploración reutiliza el estado local ya existente y el sistema de misiones del Mapa Multiversal.
+- «Abrir expediente» reutiliza el expediente individual actual y sus rutas canónicas `#roster/<slug>`; no crea un segundo sistema de perfiles.
+- El comparador comercial queda al final. Las métricas permanecen como «No disponible» hasta disponer de una ventana, fuente y metodología comparables para los ocho perfiles.
+- Los ocho perfiles reciben el mismo nivel de presentación inicial, independientemente de su volumen de estadísticas o clips.
+
+### Fuentes y límites
+- `roster-data.json` sigue siendo la fuente canónica de identidad, retratos, slugs, plataformas y especialidades.
+- El estado EN VIVO reutiliza `getRosterLiveState()` y `data.json`; solo se presenta como directo si la captura está dentro del umbral de frescura ya definido.
+- Los expedientes completos siguen usando el núcleo compartido y los archivos existentes de actividad, registros, métricas, plataformas y clips. No se crea una segunda capa de estadísticas.
+- Los horarios se muestran únicamente desde campos editoriales confirmados. Cuando faltan, se indica «Horario por confirmar» o «Frecuencia de publicación por confirmar».
+- El comparador no calcula promedios cruzados ni combina Twitch, YouTube u otras plataformas.
+
+### Implementación en la rama única
+- `app.js`: nuevo selector alimentado por `heroesData`; se retiró el renderizador de la grilla antigua como vista activa. El selector reutiliza progreso, estado live y apertura del expediente existentes.
+- `index.html`: punto de montaje dentro de `#roster-home` y actualización de la versión de caché del script.
+- `roster-selector.css`: retratos, panel de personaje, rail responsive, comparador y estados de carga/error.
+- `roster-fixes.css`: se conserva como capa correctiva visual previa.
+- No se alteró `roster-data.json` ni se duplicaron archivos de estadísticas.
+- No se abrió PR, no se fusionó a `main` y no se desplegó producción.
+
+### Verificación pendiente
+La inspección estática confirmó ocho perfiles canónicos, selector y panel presentes, navegación de teclado, uso de la fuente live existente, reutilización del progreso, comparador sin métricas inventadas y ausencia del botón de simulación del prototipo. El branch se sincronizó con el último commit de `main`; los cuatro archivos de datos (`data.json`, `clips-data.json`, `creator-metrics.json` y `platform-stats.json`) tienen el mismo blob SHA en ambas ramas.
+
+No hay todavía CI asociado a esta tanda ni QA visual real en navegador. Antes de integrar a `main) se requieren validación JS/HTML/CSS, carga de los ocho retratos, pruebas de interacción desktop/móvil, Back/Forward de expedientes, accesibilidad y revisión visual. Producción permanece intacta.
