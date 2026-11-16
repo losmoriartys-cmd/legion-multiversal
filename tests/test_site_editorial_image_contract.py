@@ -68,7 +68,8 @@ class CommercialPortfolioContractTests(unittest.TestCase):
         roster = json.loads((ROOT / "roster-data.json").read_text(encoding="utf-8"))
         self.assertEqual(len(roster["heroes"]), 8)
         for hero in roster["heroes"]:
-            self.assertIn("No implica", hero["mediaProfile"]["audience_fit"])
+            self.assertIn("Afinidad temática:", hero["mediaProfile"]["audience_fit"])
+        self.assertIn("No implica, por sí sola", self.html)
 
     def test_barfender_case_has_participants_objective_content_results_and_learning(self):
         for term in ("PARTICIPANTES", "OBJETIVO DE LA EXPERIENCIA", "CONTENIDO REGISTRADO", "RESULTADO DOCUMENTABLE", "APRENDIZAJE"):
