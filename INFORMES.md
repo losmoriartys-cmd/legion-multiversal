@@ -3251,3 +3251,12 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **Archivos:** `styles.css`, `index.html`.
 - **Commits:** `6732223` (tipografía CSS) y `49a3993` (Google Fonts variable).
 - **Validación pendiente:** el cambio requiere CI y Lighthouse contra producción para cuantificar transferencia y LCP; no se atribuye una mejora de rendimiento hasta contar con mediciones comparables. La optimización binaria del emblema sigue pendiente, no cerrada.
+
+## 2026-11-16 — Conversión lossless del emblema oficial
+
+- **Automatización:** se incorporaron `scripts/optimize_logo.py` y `.github/workflows/optimize-logo.yml`. El workflow procesa el PNG original en GitHub Actions con Pillow, conserva el canal alfa y las dimensiones, verifica el WebP y actualiza únicamente referencias runtime; el original se mantiene.
+- **Resultado medido:** `legion_logo_final_hybrid.png` = 1.336.538 bytes; `legion_logo_final_hybrid.webp` = 894.642 bytes. Reducción exacta: 441.896 bytes (33,1 %). Dimensiones conservadas: 1600 × 1600. El log del workflow confirma transparencia preservada y codificación WebP lossless.
+- **Referencias migradas:** cuatro apariciones de `index.html` (incluido JSON-LD Organization y tres elementos de imagen) y una de `comic-moriartys.html`. La verificación posterior confirmó cero referencias PNG en ambos archivos y cinco referencias WebP.
+- **Conservación:** el PNG permanece versionado sin cambios; no se eliminó el original ni se cambió su nombre.
+- **Commits:** automatización `8b412bb`; generación y migración del asset `2e32cd7`.
+- **Validación pendiente:** CI, Lighthouse y despliegue correspondientes al SHA final deben terminar antes de declarar cerrada la intervención. La comparación visual final del emblema en producción también queda pendiente de inspección de navegador.
