@@ -85,17 +85,19 @@
       if (!FILES[key]) throw new Error('Fuente de perfil desconocida: ' + key);
       selected[key] = await readJson(FILES[key]);
     }));
-    if (!selected.roster || !Array.isArray(selected.roster.heroes)) {
-      throw new Error('roster-data.json no contiene una lista válida de expedientes.');
+    if (requested.includes('roster')) {
+      if (!selected.roster || !Array.isArray(selected.roster.heroes)) {
+        throw new Error('roster-data.json no contiene una lista válida de expedientes.');
+      }
+      const ids = new Set();
+      selected.roster.heroes.forEach(hero => {
+        const key = creatorKey(hero);
+        if (!key || ids.has(key)) throw new Error('El Roster contiene un ID vacío o duplicado: ' + key);
+        ids.add(key);
+      });
     }
-    const ids = new Set();
-    selected.roster.heroes.forEach(hero => {
-      const key = creatorKey(hero);
-      if (!key || ids.has(key)) throw new Error('El Roster contiene un ID vacío o duplicado: ' + key);
-      ids.add(key);
-    });
     return Object.freeze({
-      roster: selected.roster,
+      roster: selected.roster || null,
       records: selected.records || { channels: {} },
       metrics: selected.metrics || { creators: {} },
       platforms: selected.platforms || { creators: {} },
