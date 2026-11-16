@@ -55,7 +55,7 @@ class RosterCharacterSelectorContractTests(unittest.TestCase):
         mount = self.html.index('id="roster-selector"')
         self.assertGreater(mount, home)
         self.assertIn("roster-selector.css", self.html)
-        self.assertIn("app.js?v=20261116-roster-routing-2", self.html)
+        self.assertIn("app.js?v=20261116-roster-metrics-1", self.html)
 
     def test_comparator_publishes_native_metrics_without_cross_platform_ranking(self):
         self.assertIn("INDICADORES POR PLATAFORMA", self.app)

@@ -3185,3 +3185,11 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **Archivos:** app.js, roster-data.json, roster-selector.css, index.html, tests/test_roster_selector_contract.py, tests/test_roster_editorial_contract.py, INFORMES.md.
 - **Validaciones:** contratos Python, Playwright móvil/escritorio y verificación de publicación quedan a ejecutar tras integrar.
 - **Pendientes:** aumentar la cobertura temporal de la muestra Twitch; confirmar si se habilitan fuentes adicionales para otros perfiles; no inferir frecuencia habitual a partir de sesiones aisladas.
+
+
+## 2026-11-16 — Ajuste de contrato de caché del Roster
+
+- **Corrección:** el primer ciclo de CI encontró una única expectativa obsoleta en tests/test_roster_selector_contract.py: el contrato todavía exigía el query-string anterior de app.js después de actualizar la versión de caché para publicar el nuevo comparador. Se actualiza la aserción al identificador vigente.
+- **Alcance:** no cambia la lógica de producto ni los datos de los creadores; solo alinea el test automatizado con la versión real de index.html.
+- **Validación previa:** sintaxis JavaScript, JSON, modelo del roster, cobertura Twitch y fallback sin JavaScript pasaron. La suite Python se detuvo por esa aserción de caché.
+- **Próximo control:** repetir CI, Playwright y Lighthouse sobre el SHA publicado.
