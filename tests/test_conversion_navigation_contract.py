@@ -40,6 +40,20 @@ class ConversionNavigationContractTests(unittest.TestCase):
                      "@media (prefers-reduced-motion: reduce)"):
             self.assertIn(rule, self.css)
 
+    def test_home_fallback_offers_follow_link_only_when_no_fresh_live_channel(self):
+        self.assertIn('id="home-follow-link"', self.html)
+        app = (ROOT / "app.js").read_text(encoding="utf-8")
+        self.assertIn("homeFollowLink.hidden=isFresh&&liveCount>0", app)
+
+    def test_non_home_editorial_cover_is_lazy_loaded(self):
+        self.assertIn('image_20261107_021355.jpg?v=20261112', self.html)
+        cover = self.html.split('image_20261107_021355.jpg?v=20261112', 1)[1][:260]
+        self.assertIn('loading="lazy"', cover)
+
+    def test_live_player_is_not_preloaded_in_initial_document(self):
+        self.assertNotIn("<iframe", self.html)
+        self.assertIn('id="live-player"', self.html)
+
 
 if __name__ == "__main__":
     unittest.main()
