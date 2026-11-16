@@ -40,7 +40,7 @@ class EpicCreatorProgramsContractTests(unittest.TestCase):
         self.assertEqual(evidence["method"], "Transcripción textual aportada por el titular en la conversación")
         self.assertFalse(creator["account_portal_revalidated"])
         self.assertIn("ASOCIACIÓN COINCIDENTE", creator["display_status"])
-        self.assertIn("no representa una consulta automática", creator["verification_note"])
+        self.assertIn("No representa una consulta automática", creator["verification_note"])
 
     def test_alliance_codes_are_rendered_from_central_mounts(self):
         self.assertIn('id="epic-creator-programs-collective"', self.index)
