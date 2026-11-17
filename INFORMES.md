@@ -3331,7 +3331,8 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **Responsive:** navegación móvil de cinco destinos en dos filas; cartas en dos columnas; se añadió una comprobación explícita de overflow horizontal en el expediente móvil.
 - **Bitácora y Comunidad:** la misión se registra al abrir la pestaña Bitácora del expediente individual. El índice externo quedó fuera del recorrido y sin enlaces desde la página principal.
 - **Revisión visual:** escritorio 4×2 y móvil 2×4; ilustraciones originales y métricas visibles; expediente con carnet, enlaces sociales y cinco pestañas. La captura de Playwright limpia la transición animada y fuerza la carga de las ocho ilustraciones para revisar el conjunto.
-- **Validación final:** `python-tests`, `qa-portable`, Cloudflare Pages y `validar` están en SUCCESS para el HEAD `37644de`. La suite incluye los ocho expedientes, cinco pestañas, navegación Atrás/Adelante, responsive, ausencia de overflow horizontal y límites internos de la grilla de métricas.
+- **Validación final:** `python-tests`, `qa-portable`, Cloudflare Pages y `validar` están en SUCCESS para el HEAD `d2714bf`. La suite incluye los ocho expedientes, cinco pestañas, navegación Atrás/Adelante, responsive, ausencia de overflow horizontal y límites internos de la grilla de métricas.
+- **Sincronización:** se integró el último commit de `main` que actualizaba `creator-metrics.json`, `data.json` y `platform-stats.json`; la rama quedó al día (`behind 0`).
 - **Salvaguarda:** cambios confinados a la rama de trabajo; no se modificó `main`, no se fusionó ni se publicó producción.
 
 
