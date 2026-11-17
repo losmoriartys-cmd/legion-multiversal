@@ -64,13 +64,19 @@ class RosterComicCardsContractTests(unittest.TestCase):
         self.assertNotIn("ABRIR BITÁCORA COMPLETA", tabs)
         self.assertIn("brandHtml", tabs)
 
-    def test_roster_is_chapter_one_and_first_in_primary_navigation(self):
+    def test_roster_is_chapter_two_after_origin_without_intermediate_selector(self):
         nav = self.html[self.html.index('<nav class="primary-navigation"'):self.html.index('</nav>', self.html.index('<nav class="primary-navigation"'))]
-        self.assertLess(nav.index('data-chapter="2"'), nav.index('data-chapter="1"'))
+        self.assertLess(nav.index('data-chapter="1"'), nav.index('data-chapter="2"'))
+        self.assertIn('>ORIGEN</button>', nav)
         self.assertIn('>ROSTER</button>', nav)
-        self.assertIn('CAPÍTULO 01 · ROSTER', self.html)
-        self.assertIn('CAPÍTULO 02 · ORIGEN', self.html)
-        self.assertIn('CAPÍTULO 03 · VALORES', self.html)
+        self.assertIn('CAPÍTULO 01 · ORIGEN', self.html)
+        self.assertIn('CAPÍTULO 02 · ROSTER', self.html)
+        self.assertIn('CAPÍTULO 03 · ESTADÍSTICAS', self.html)
+        self.assertIn('PILAR COMPLEMENTARIO · VALORES', self.html)
+        self.assertIn('PILAR COMPLEMENTARIO · COMUNIDAD', self.html)
+        self.assertIn('PILAR COMPLEMENTARIO · ALIANZAS', self.html)
+        for chapter in ('11','9','8'):
+            self.assertRegex(self.html, rf'<section[^>]*id="chapter-{chapter}"[^>]*data-pager="false"')
 
     def test_comic_styles_are_responsive_and_respect_reduced_motion(self):
         self.assertIn(".comic-roster-grid", self.css)
