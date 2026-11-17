@@ -25,6 +25,7 @@ class ConversionNavigationContractTests(unittest.TestCase):
         self.assertIn('onclick="switchChapter(11)"', self.html)
         self.assertIn('onclick="switchChapter(9)"', self.html)
         self.assertIn('onclick="switchChapter(8)"', self.html)
+        self.assertIn('onclick="switchChapter(12)"', self.html)
         markup_without_styles = re.sub(r"<style\b[^>]*>.*?</style>", "", self.html, flags=re.IGNORECASE | re.DOTALL)
         self.assertNotIn("secondary-navigation", markup_without_styles)
 
