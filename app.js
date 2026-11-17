@@ -1166,7 +1166,7 @@ function renderRosterSelector() {
         const followerLabel = followerValue == null ? '—' : statsNumber(followerValue,0);
         const averageLabel = average == null ? '—' : statsNumber(average,1);
         const platformName = String(account?.platform || 'CANAL').toUpperCase();
-        const game = state?.channel?.current_game || (hero.areas || [])[0] || platformName;
+        const game = state?.channel?.current_game || (hero.creator_type === 'video_creator' ? 'CONTENIDO EDUCATIVO' : 'JUEGOS POR DOCUMENTAR');
         const specialties = (hero.areas || []).filter(Boolean).slice(0,3);
         const identity = hero.codename || hero.characterRole || 'INTEGRANTE DE LA LEGIÓN';
         const activityBadge = isLive ? 'EN VIVO AHORA' : activeThisWeek ? 'ACTIVO ESTA SEMANA' : 'ACTIVIDAD NO CONFIRMADA';
@@ -1178,7 +1178,7 @@ function renderRosterSelector() {
           '</span>' +
           '<span class="comic-roster-card-data"><span class="comic-roster-badges"><b class="comic-roster-frequency">RITMO: EN SEGUIMIENTO</b><b class="comic-roster-activity">' + safe(activityBadge) + '</b></span>' +
             '<span class="comic-roster-last-live">ÚLTIMA ACTIVIDAD OBSERVADA: ' + safe(lastLiveDate) + '</span>' +
-            '<span class="comic-roster-stat"><span>Seguidores</span><b>' + safe(followerLabel) + '</b></span>' +
+            '<span class="comic-roster-stat"><span>' + (account?.platform === 'youtube' ? 'Suscriptores' : 'Seguidores') + '</span><b>' + safe(followerLabel) + '</b></span>' +
             '<span class="comic-roster-stat"><span>Media de viewers</span><b class="comic-roster-stat-purple">' + safe(averageLabel) + '</b></span>' +
             '<span class="comic-roster-games">' + (specialties.length ? specialties.map(item => '<i>' + safe(item) + '</i>').join('') : '<i>Especialidad en desarrollo</i>') + '</span>' +
             '<span class="comic-roster-card-footer"><small>' + safe(hero.role_label || platformName) + '</small><strong>VER PERFIL →</strong></span></span>' +
