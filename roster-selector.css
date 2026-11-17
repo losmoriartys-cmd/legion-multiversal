@@ -459,3 +459,16 @@
  #chapter-2 .comic-profile-main .hero-profile-status-grid { grid-template-columns:1fr; }
 }
 @media(prefers-reduced-motion:reduce) { #chapter-2 .comic-roster-photo img { transition:none; } }
+
+/* Ajustes de proporción: las tarjetas crecen con su contenido y mantienen dos columnas en móvil. */
+#chapter-2 .comic-roster-card { width:100%; height:100%; aspect-ratio:auto; justify-content:flex-start; align-items:stretch; }
+#chapter-2 .comic-roster-photo img { position:relative; }
+@media(max-width:420px) {
+ #chapter-2 .comic-roster-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:9px; }
+ #chapter-2 .comic-roster-photo { height:clamp(150px,43vw,205px); }
+ #chapter-2 .comic-roster-card-data { padding:8px; gap:6px; }
+ #chapter-2 .comic-roster-badges b { font-size:.53rem; padding:4px 5px; }
+ #chapter-2 .comic-roster-last-live { font-size:.55rem; }
+ #chapter-2 .comic-roster-stat { font-size:.68rem; }
+ #chapter-2 .comic-roster-games i { font-size:.54rem; }
+}
