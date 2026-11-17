@@ -112,6 +112,12 @@ test('las cartas se organizan en cuatro columnas de escritorio y dos en móvil',
   await waitForChapterTransition(page);
   const cards = page.locator('.comic-roster-card');
   await expect(cards).toHaveCount(8);
+  const cardImages = cards.locator('.comic-roster-photo img');
+  await cardImages.evaluateAll(async images => {
+    images.forEach(image => { image.loading = 'eager'; });
+    await Promise.all(images.map(image => image.decode().catch(() => null)));
+  });
+  await expect.poll(() => cardImages.evaluateAll(images => images.every(image => image.complete && image.naturalWidth > 0))).toBe(true);
   const desktopColumns = await cards.first().evaluate(el => getComputedStyle(el.parentElement).gridTemplateColumns.split(' ').length);
   expect(desktopColumns).toBe(4);
   await page.screenshot({ path: 'test-results/roster-desktop.png', fullPage: true });
@@ -140,6 +146,7 @@ test('Atrás y Adelante restauran el roster y el expediente correcto', async ({ 
   await expect(page).toHaveURL(/#roster\/lady-moriarty$/);
   await expect(page.locator('#hero-profile-page')).toBeVisible();
   await expect(page.locator('#hero-profile-page')).toContainText('LADY MORIARTY');
+  await page.addStyleTag({ content: 'header { position: static !important; }' });
   await page.screenshot({ path: 'test-results/bitacora-lady-desktop.png', fullPage: true });
   await page.setViewportSize({ width: 390, height: 844 });
   await page.screenshot({ path: 'test-results/bitacora-lady-mobile.png', fullPage: true });
