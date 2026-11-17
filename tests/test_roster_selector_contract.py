@@ -51,7 +51,7 @@ class RosterComicCardsContractTests(unittest.TestCase):
         end = self.app.index("\nfunction selectRosterCreator", start)
         renderer = self.app[start:end]
         self.assertIn("hero.img ?", renderer)
-        self.assertIn("alt=\\"Ilustración de ", renderer)
+        self.assertIn('alt="Ilustración de ', renderer)
         self.assertIn("hero.portrait ?", renderer)
         self.assertIn("const portrait = hero.portrait || hero.img || ''", self.app)
 
