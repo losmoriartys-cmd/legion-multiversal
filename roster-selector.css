@@ -545,3 +545,13 @@
 @media(prefers-reduced-motion:reduce) {
   .collaboration-foundation-link { transition:none; }
 }
+
+/* El archivo de colaboraciones conserva participantes como texto; las fotos individuales viven en el Roster. */
+#chapter-12 .campaign-agent {
+  min-height:58px;
+  padding:12px 12px;
+  border-left:2px solid rgba(98,217,232,.58);
+  background:rgba(16,31,49,.42);
+}
+#chapter-12 .campaign-agent > div { display:grid; gap:4px; }
+#chapter-12 .campaign-agent img { display:none !important; }
