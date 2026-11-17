@@ -94,6 +94,7 @@ test('Origen aparece antes que Roster y la navegación principal contiene cinco 
   await expect(nav.locator('[data-chapter]')).toHaveCount(5);
   await expect(nav.locator('[data-chapter="1"]')).toHaveText('ORIGEN');
   await expect(nav.locator('[data-chapter="2"]')).toHaveText('ROSTER');
+  await expect(nav.locator('[data-chapter="10"]')).toContainText('EN VIVO');
   const originBox = await nav.locator('[data-chapter="1"]').boundingBox();
   const rosterBox = await nav.locator('[data-chapter="2"]').boundingBox();
   expect(originBox.x).toBeLessThan(rosterBox.x);
@@ -108,6 +109,10 @@ test('las cartas se organizan en cuatro columnas de escritorio y dos en móvil',
   expect(desktopColumns).toBe(4);
   await page.screenshot({ path: 'test-results/roster-desktop.png', fullPage: true });
   await page.setViewportSize({ width: 390, height: 844 });
+  const mobileNav = page.locator('.primary-navigation [data-chapter]');
+  await expect(mobileNav).toHaveCount(5);
+  const mobileNavRights = await mobileNav.evaluateAll(nodes => nodes.map(node => node.getBoundingClientRect().right));
+  expect(mobileNavRights.every(right => right <= 390)).toBe(true);
   const mobileColumns = await cards.first().evaluate(el => getComputedStyle(el.parentElement).gridTemplateColumns.split(' ').length);
   expect(mobileColumns).toBe(2);
   expect(await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth)).toBe(false);
