@@ -68,6 +68,16 @@ class SiteEditorialImageContract(unittest.TestCase):
         self.assertNotIn('id="chapter-14"', self.html)
         self.assertIn("autenticación real", self.html)
 
+
+    def test_collaboration_archive_does_not_duplicate_roster_portraits_or_bitacora_index(self):
+        chapter = self.html.split('<section id="chapter-12"', 1)[1].split('</section>', 1)[0]
+        self.assertNotIn('bitacora-preview.html', chapter)
+        self.assertNotIn('assets/carnet/', chapter)
+        self.assertNotIn('assets/ladymoriarty.jpg', chapter)
+        self.assertNotIn('assets/rod3r1k.jpg', chapter)
+        self.assertNotIn('assets/akuma.jpg', chapter)
+        self.assertIn('BarFenderLos4.jpg', chapter)
+
     def test_editorial_chapter_labels_and_numbers_are_present(self):
         expected = {
             "CAPÍTULO 00 · INICIO": 'data-editorial-number="0"',
