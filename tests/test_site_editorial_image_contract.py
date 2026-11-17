@@ -34,7 +34,7 @@ class SiteEditorialImageContract(unittest.TestCase):
 
     def test_all_static_images_declare_verified_intrinsic_dimensions(self):
         images = re.findall(r"<img\b[^>]*>", self.html, flags=re.IGNORECASE)
-        self.assertEqual(len(images), 37)
+        self.assertEqual(len(images), 31)
         for image in images:
             self.assertRegex(image, r'\bwidth="[1-9][0-9]*"')
             self.assertRegex(image, r'\bheight="[1-9][0-9]*"')
@@ -68,18 +68,27 @@ class SiteEditorialImageContract(unittest.TestCase):
         self.assertNotIn('id="chapter-14"', self.html)
         self.assertIn("autenticación real", self.html)
 
+
+    def test_collaboration_archive_does_not_duplicate_roster_portraits_or_bitacora_index(self):
+        start = self.html.index('<section id="chapter-12"')
+        end = self.html.index('\n</section>', start)
+        chapter = self.html[start:end]
+        self.assertNotIn('bitacora-preview.html', chapter)
+        self.assertNotIn('assets/carnet/', chapter)
+        self.assertNotIn('assets/ladymoriarty.jpg', chapter)
+        self.assertNotIn('assets/rod3r1k.jpg', chapter)
+        self.assertNotIn('assets/akuma.jpg', chapter)
+        self.assertIn('BarFenderLos4.jpg', chapter)
+        self.assertEqual(self.html.count('image_20261107_184951-si-que-tenga-referencias-y-el-titutlo-del-juego-ba.jpg'), 1)
+
     def test_editorial_chapter_labels_and_numbers_are_present(self):
         expected = {
             "CAPÍTULO 00 · INICIO": 'data-editorial-number="0"',
             "CAPÍTULO 01 · ORIGEN": 'data-editorial-number="1"',
-            "CAPÍTULO 02 · VALORES": 'data-editorial-number="2"',
-            "CAPÍTULO 04 · ESTADÍSTICAS": 'data-editorial-number="4"',
-            "CAPÍTULO 05 · COMUNIDAD": 'data-editorial-number="5"',
-            "CAPÍTULO 06 · ALIANZAS": 'data-editorial-number="6"',
-            "CAPÍTULO 07 · COLABORACIONES": 'data-editorial-number="7"',
-            "CAPÍTULO 08 · ARSENAL": 'data-editorial-number="8"',
-            "CAPÍTULO 09 · EN VIVO": 'data-editorial-number="9"',
-            "CAPÍTULO 10 · RECLUTAMIENTO": 'data-editorial-number="10"',
+            "CAPÍTULO 02 · ROSTER": 'data-editorial-number="2"',
+            "CAPÍTULO 03 · ESTADÍSTICAS": 'data-editorial-number="3"',
+            "CAPÍTULO 04 · EN VIVO": 'data-editorial-number="4"',
+            "CAPÍTULO 05 · COLABORÁ CON NOSOTROS": 'data-editorial-number="5"',
         }
         for label, number in expected.items():
             self.assertIn(label, self.html)

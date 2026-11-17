@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-11-16",
+  "updated_at": "2026-11-17",
   "description": "Fuente editorial y de identidad del roster. Cada creador/canal tiene ID y slug estables, scope de identidad y cuentas asociadas. Las métricas viven en sus archivos de datos por plataforma; no duplicarlas aquí.",
   "heroes": [
     {
@@ -23,7 +23,7 @@
         "twitch"
       ],
       "activity_status": "not_assessed",
-      "img": "assets/heroes/moriartys_dark.jpg",
+      "img": "Cyberpunk_Cyborg_Portrait-hay-muchas-que-dejaron-de-ser-animadas-la-idea-es.jpg",
       "twitch": "https://twitch.tv/losmoriartys",
       "bio": "Los Moriartys es el proyecto compartido de Demi y Ari: una dupla gamer y orgullosamente nerd que convierte cada directo en una visita a su videoclub retro. El canal combina videojuegos, cooperativo, humor y cultura pop. Su propuesta no se basa en la competencia profesional, sino en jugar, compartir y construir momentos con la comunidad.",
       "voice": "«Acá jugamos en equipo, nos reímos de lo que sale mal y hacemos que cada visita al videoclub sea una aventura.»",
@@ -119,7 +119,7 @@
         "twitch"
       ],
       "activity_status": "not_assessed",
-      "img": "assets/heroes/rod3r1k_dark.webp",
+      "img": "Superhero_Camera_Portrait-hay-muchas-que-dejaron-de-ser-animadas-la-idea-es.jpg",
       "twitch": "https://twitch.tv/TheR0D3R1K",
       "bio": "Bienvenidos al canal. Me llamo Roderik, mejor conocido como «ElKrakenaso». Encontrarás momentos divertidos y épicos. ¡Acompañame en las partidas y divertite!",
       "voice": "«¡Que se escuche hasta el último rincón! Si vamos a jugar, que cada partida deje una historia.»",
@@ -210,7 +210,7 @@
         "twitch"
       ],
       "activity_status": "not_assessed",
-      "img": "assets/heroes/ladymoriarty_dark.jpg",
+      "img": "Red_Haired_Mystic_Witch-hay-muchas-que-dejaron-de-ser-animadas-la-idea-es.jpg",
       "twitch": "https://twitch.tv/ladymoriarty01",
       "bio": "La Bruja no necesita seguir un guion: su magia está en cambiar el tono de cada encuentro. Puede convertir una partida tranquila en una situación imprevisible y hacer de una charla o una salida IRL una historia propia. LADYMORIARTY conserva una identidad independiente, espontánea y cercana; su regla es simple: venir a disfrutar y dejar que la aventura encuentre su forma.",
       "voice": "«¿Plan? Puede ser. ¿Improvisar? También. La magia está en no saber qué viene después.»",
@@ -303,7 +303,7 @@
         "twitch"
       ],
       "activity_status": "not_assessed",
-      "img": "assets/heroes/ardipii_dark.webp",
+      "img": "Hooded_Atomic_Figure-hay-muchas-que-dejaron-de-ser-animadas-la-idea-es.jpg",
       "twitch": "https://twitch.tv/ardipii",
       "bio": "El Fantasma aparece sin hacer ruido y encuentra su lugar en cualquier escenario. Su guarida es una comunidad donde cada visitante puede saludar, activar una alerta, acomodarse con unas palomitas y compartir la misión. Su lema recuerda que el tiempo es el recurso más valioso: cada directo es una oportunidad para decidir qué hacer con él.",
       "voice": "«Pasen, pónganse cómodos. Siempre hay lugar para uno más en esta misión.»",
@@ -393,7 +393,7 @@
         "twitch"
       ],
       "activity_status": "not_assessed",
-      "img": "assets/heroes/akuma_dark.jpg",
+      "img": "image_20261117_045605.jpg",
       "twitch": "https://twitch.tv/akumazoldyck",
       "bio": "El Infernal abre un punto de encuentro entre videojuegos, conversaciones y amigos. Su propuesta combina partidas y charla: el valor está en el intercambio y en las historias que surgen cuando la comunidad se reúne.",
       "voice": "«El portal está abierto. Traigan una partida, una historia o simplemente ganas de quedarse.»",
@@ -483,7 +483,7 @@
         "twitch"
       ],
       "activity_status": "not_assessed",
-      "img": "assets/heroes/nexus_dark.webp",
+      "img": "Purple_Cyberpunk_Warrior-hay-muchas-que-dejaron-de-ser-animadas-la-idea-es.jpg",
       "twitch": "https://twitch.tv/daved0608",
       "bio": "Después de un tiempo fuera de la actividad, NEXUS vuelve a conectar con la Legión e inicia una nueva etapa como creador. Su expediente lo presenta como un nodo entre sistemas, señales y voluntades: una presencia vinculada a la tecnología y a los símbolos que permiten abrir caminos entre mundos. Su historia personal y su especialidad se completarán con información aportada por Dave, sin atribuirle una trayectoria que todavía no está documentada.",
       "voice": "«Conexión establecida. Estoy buscando el puente entre este mundo y el siguiente.»",
@@ -573,7 +573,7 @@
         "youtube"
       ],
       "activity_status": "not_assessed",
-      "img": "assets/heroes/oratoris_dark.webp",
+      "img": "Bald_Man_In_Gold_Armor-hay-muchas-que-dejaron-de-ser-animadas-la-idea-es.jpg",
       "twitch": "",
       "youtube": "https://www.youtube.com/@patoteexplica",
       "instagram": "https://www.instagram.com/patoteexplica/",
@@ -694,7 +694,7 @@
         "twitch"
       ],
       "activity_status": "not_assessed",
-      "img": "assets/heroes/habitos_dark.webp",
+      "img": "Sci_Fi_Superhero_Portrait-hay-muchas-que-dejaron-de-ser-animadas-la-idea-es.jpg",
       "twitch": "https://twitch.tv/habitos_atomicos",
       "bio": "El Filósofo Atómico combina reflexión y acción. Puede detener la marcha para cuestionar una idea y, al instante siguiente, volver al juego con energía renovada. Su universo une gaming, filosofía y desarrollo personal: no se trata de tener todas las respuestas, sino de entrenar la mente, sostener buenos hábitos y seguir avanzando.",
       "voice": "«La mente también se entrena. Cuestioná, aprendé y volvé al juego con más herramientas.»",

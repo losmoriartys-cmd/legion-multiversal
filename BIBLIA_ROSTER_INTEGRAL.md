@@ -700,3 +700,31 @@ No hay todavía CI asociado a esta tanda ni QA visual real en navegador. Antes d
 - QA manual visual en distintos dispositivos y lector de pantalla continúa siendo una revisión posterior; CI no sustituye esa inspección.
 
 La rama continúa aislada de producción. No se creó PR ni se fusionó a `main`.
+
+
+## 2026-11-17 — Decisión aprobada: Roster como Capítulo 01 y Bitácora directa
+
+- El Roster es el primer capítulo de contenido y queda inmediatamente accesible desde la navegación principal. Orden editorial: 00 Inicio, 01 Roster, 02 Origen, 03 Valores; se mantienen los IDs técnicos de los paneles para compatibilidad.
+- El directorio presenta simultáneamente las ocho cartas en una grilla única. Se elimina el selector de personaje con panel de vista previa como paso intermedio.
+- Cada carta incluye retrato existente, alias/identidad, juego o especialidad disponible, ritmo de seguimiento, actividad observada, seguidores/suscriptores y media de viewers cuando exista una fuente válida, y acceso directo a Bitácora.
+- El clic abre la Bitácora del integrante en composición 35/65: fotografía fija, nombre y alias, frase, enlaces y contenido con pestañas Perfil, Estadísticas, Juegos y Ritmo, Clips y Bitácora.
+- La Bitácora es el destino final; no debe ofrecer un segundo botón que abra otra ficha/modal. Los registros históricos y la propuesta editorial quedan dentro de la pestaña Bitácora.
+- No se copian valores de ejemplo del prompt (seguidores, viewers, juegos o estados) a los perfiles reales. Los campos ausentes se muestran como no disponibles; la actividad semanal solo se afirma cuando existe una muestra en vivo dentro de los últimos siete días.
+- No se muestra calendario ni horario fijo en las cartas. El dato de horario puede permanecer en la fuente interna pero no es parte de esta presentación.
+- La edición persistente del perfil requiere una superficie administrativa autenticada y escritura segura sobre la fuente; no se simula un botón público que no pueda guardar.
+
+
+## 14. Reorganización del recorrido público — 17 de noviembre de 2026
+
+El recorrido principal aprobado pasa a ser: **Inicio → Origen → Roster → Estadísticas → En Vivo → Colaborá con nosotros**. La navegación primaria contiene únicamente esos cinco capítulos después de Inicio. El Roster debe mostrar los ocho integrantes a la vez y cada carta abre su expediente completo; no debe existir una pantalla intermedia de selección.
+
+Valores, Comunidad y Alianzas se conservan como pilares complementarios accesibles desde el capítulo Colaborá con nosotros, sin duplicar sus contenidos ni interrumpir el paginador principal. Valores conserva el manifiesto; Comunidad conserva las misiones y logros basados en community-playbook.json; Alianzas conserva credenciales verificables y formatos potenciales de colaboración. Ninguno de esos formatos debe presentarse como campaña contratada, patrocinio remunerado o resultado garantizado.
+
+Colaboraciones, Arsenal y Mapa Multiversal quedan como recursos complementarios, fuera del recorrido principal. No se eliminan sus archivos ni sus registros. Cualquier contenido que se recupere debe conservar una única fuente de verdad para personas, fotografías, perfiles y métricas.
+
+La rama de trabajo no se considera terminada hasta ejecutar pruebas Python y Playwright, revisar escritorio y móvil, verificar los ocho expedientes, pestañas, historial Atrás/Adelante, retorno desde los pilares complementarios y enlaces. No publicar ni fusionar a main sin aprobación explícita.
+
+
+### Separación de ilustraciones y retratos — 17 de noviembre de 2026
+
+Las cartas públicas conservan la ilustración de personaje desde `hero.img`; el expediente individual usa el retrato aprobado desde `hero.portrait`. El mapeo de los ocho retratos está fijado por contrato y no debe permutarse. El archivo de colaboraciones no repite retratos individuales ya presentados en el Roster; los casos mantienen únicamente sus imágenes grupales/editoriales propias.

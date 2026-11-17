@@ -145,7 +145,7 @@ jobs:
       - name: Compilar colectores Python
         run: python -m py_compile scripts/audit_image_references.py update_stats.py update_platform_stats.py update_clips.py scripts/validate_roster_data.py scripts/validate_clips_data.py scripts/render_roster_noscript.py scripts/validate_metric_history.py scripts/build_creator_metrics.py scripts/validate_creator_metrics.py scripts/audit_and_optimize_images.py scripts/optimize_logo.py scripts/optimize_hero_image.py scripts/add_image_dimensions.py scripts/summarize_lighthouse.py scripts/lh_failures.py
       - name: Ejecutar pruebas unitarias Python del repositorio
-        run: python -m unittest discover -s tests -p 'test_*.py' -v
+        run: python -m unittest discover -s tests -v
       - name: Probar lectura de cuentas por los colectores
         run: |
           python -c "import update_stats; channels=update_stats.load_active_channels(); assert len(channels)==7 and 'losmoriartys' in channels; print('OK: colector Twitch lee {} canales'.format(len(channels)))"
@@ -162,8 +162,16 @@ jobs:
         run: npm install
       - name: Instalar Chromium para Playwright
         run: npx playwright install --with-deps chromium
-      - name: Probar expedientes, Bitácora, modales y hashes históricos
+      - name: Probar expedientes, Bitácora, cinco pestañas, responsive e historial
         run: npm run test:e2e
+      - name: Publicar capturas de revisión visual de Playwright
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: roster-visual-review-${{ github.sha }}
+          path: test-results/
+          if-no-files-found: warn
+          retention-days: 14
       - name: Comprobar el registro de canales para el colector de clips
         run: |
           python -c "import update_clips; accounts=update_clips.load_roster_accounts(); assert len(accounts)==7 and any(a['creator_id']=='moriartys' for a in accounts); print('OK: colector de clips lee {} canales Twitch'.format(len(accounts)))"

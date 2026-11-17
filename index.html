@@ -85,7 +85,7 @@
     </style>
     <link rel="stylesheet" href="./chapter-8.css?v=20261116-portrait-framing-1" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="./chapter-8.css?v=20261116-portrait-framing-1"></noscript>
     <link rel="stylesheet" href="./roster-fixes.css?v=20261116-roster-visual-1" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="./roster-fixes.css?v=20261116-roster-visual-1"></noscript>
-    <link rel="stylesheet" href="./roster-selector.css?v=20261116-roster-metrics-1" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="./roster-selector.css?v=20261116-roster-metrics-1"></noscript>
+    <link rel="stylesheet" href="./roster-selector.css?v=20261117-mobile-profile-grid-1" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="./roster-selector.css?v=20261117-comic-cards-1"></noscript>
     <style id="conversion-overhaul-inline">
 /* Optimización de conversión · 16/11/2026
    Reduce la altura de navegación y prioriza el primer CTA sin alterar la identidad editorial. */
@@ -412,12 +412,12 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
             </div>
             <button id="sound-toggle" class="sound-toggle" type="button" aria-pressed="false" onclick="toggleArcadeSound()" title="Activar o silenciar la identidad sonora">♫ SONIDO: OFF</button>
         </div>
-        <nav class="primary-navigation" aria-label="Recorridos principales">
-            <button class="nav-btn nav-btn-live" data-chapter="10" onclick="switchChapter(10)">MIRAR <span aria-hidden="true">●</span></button>
-            <button class="nav-btn" data-chapter="12" onclick="switchChapter(12)">EXPERIENCIAS</button>
-            <a class="nav-btn" data-chapter="8" href="./marcas/">PARA MARCAS</a>
-            <button class="nav-btn" data-chapter="6" onclick="switchChapter(6)">UNITE</button>
+        <nav class="primary-navigation" aria-label="Recorrido principal de la Legión">
             <button class="nav-btn" data-chapter="1" onclick="switchChapter(1)">ORIGEN</button>
+            <button class="nav-btn nav-btn-roster" data-chapter="2" onclick="switchChapter(2)">ROSTER</button>
+            <button class="nav-btn" data-chapter="3" onclick="switchChapter(3)">ESTADÍSTICAS</button>
+            <button class="nav-btn nav-btn-live" data-chapter="10" onclick="switchChapter(10)">EN VIVO <span aria-hidden="true">●</span></button>
+            <button class="nav-btn" data-chapter="6" onclick="switchChapter(6)">COLABORÁ</button>
         </nav>
 <button id="mission-progress-trigger" class="mission-progress-trigger" type="button" onclick="openMultiverseMap()" aria-label="Abrir Mapa Multiversal y consultar misiones">MISIONES <strong id="mission-progress-count">0/0</strong></button>
     </header>
@@ -578,50 +578,18 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
  </section>
 </section>
 
-<section id="chapter-2" class="chapter-panel comic-page" data-editorial-number="3">
-            <div class="chapter-tag">CAPÍTULO 03 · ROSTER</div>
+<section id="chapter-2" class="chapter-panel comic-page" data-editorial-number="2">
+            <div class="chapter-tag">CAPÍTULO 02 · ROSTER</div>
+            <span id="roster" class="roster-anchor" aria-hidden="true"></span>
             
-            <h2 id="roster" class="comic-title">LEGIÓN MULTIVERSAL — NUESTRO ROSTER</h2>
-            <div class="institute-banner"><div class="institute-stamp" aria-label="Emblema oficial de la Legión Multiversal"><img src="legion_logo_final_hybrid-256.webp" alt="Emblema de Legión Multiversal" loading="lazy" decoding="async" width="256" height="256" srcset="legion_logo_final_hybrid-256.webp 256w, legion_logo_final_hybrid-512.webp 512w, legion_logo_final_hybrid.webp 1600w" sizes="112px"><span>ARCHIVO DE LA LEGIÓN</span></div><div class="institute-banner-copy"><h3>LAS PERSONAS DETRÁS DE LA LEGIÓN</h3><p>Ocho integrantes, ocho identidades creativas y un universo compartido. Cada persona conserva su canal, su especialidad y su expediente propio dentro de la Legión.</p></div></div>
+            
+            
             <div id="roster-home">
               <div id="roster-selector" class="roster-selector" aria-live="polite"><p class="roster-selector-loading">CARGANDO LOS OCHO EXPEDIENTES…</p></div>
-              <p class="roster-intro">Explorá las cartas de la Legión, filtrá por especialidad o plataforma y abrí cualquier expediente directamente. Cada creador conserva su identidad y su espacio propio.</p>
-              <div class="roster-tools" role="search" aria-label="Buscar integrantes y aplicar filtros">
-                <label class="roster-search-field" for="roster-search"><span>BUSCAR EN EL ROSTER</span><input id="roster-search" type="search" placeholder="Nombre, alias, handle o especialidad…" autocomplete="off"></label>
-                <div class="roster-quick-filters">
-                  <fieldset class="roster-chip-set"><legend>VÍNCULO EN LA LEGIÓN</legend><div class="roster-chip-row">
-                    <button type="button" class="roster-quick-chip" data-roster-filter="role" data-value="all" aria-pressed="true">Todos</button>
-                    <button type="button" class="roster-quick-chip" data-roster-filter="role" data-value="director" aria-pressed="false">Dirección</button>
-                    <button type="button" class="roster-quick-chip" data-roster-filter="role" data-value="teacher" aria-pressed="false">Profesores</button>
-                    <button type="button" class="roster-quick-chip" data-roster-filter="role" data-value="student" aria-pressed="false">Estudiante</button>
-                    <button type="button" class="roster-quick-chip" data-roster-filter="role" data-value="collaborator" aria-pressed="false">Colaboradores</button>
-                  </div></fieldset>
-                  <fieldset class="roster-chip-set"><legend>PLATAFORMA</legend><div class="roster-chip-row">
-                    <button type="button" class="roster-quick-chip" data-roster-filter="platform" data-value="all" aria-pressed="true">Todas</button>
-                    <button type="button" class="roster-quick-chip" data-roster-filter="platform" data-value="twitch" aria-pressed="false">Twitch</button>
-                    <button type="button" class="roster-quick-chip" data-roster-filter="platform" data-value="youtube" aria-pressed="false">YouTube</button>
-                    <button type="button" class="roster-quick-chip" data-roster-filter="platform" data-value="instagram" aria-pressed="false">Instagram</button>
-                  </div></fieldset>
-                </div>
-                <details id="roster-advanced-filters" class="roster-advanced-filters">
-                  <summary id="roster-more-filters">MÁS FILTROS <span aria-hidden="true">＋</span></summary>
-                  <div class="roster-advanced-panel">
-                    <label for="roster-area-filter"><span>ESPECIALIDAD</span><select id="roster-area-filter"><option value="all">Todas las especialidades</option></select></label>
-                    <label for="roster-sort"><span>ORDENAR</span><select id="roster-sort"><option value="featured">Orden editorial</option><option value="name">Nombre A–Z</option></select></label>
-                    <button id="roster-filters-close" type="button" class="roster-filters-close">APLICAR Y CERRAR</button>
-                  </div>
-                </details>
-                <select id="roster-role-filter" hidden aria-hidden="true"><option value="all">Todos los vínculos</option><option value="director">Dirección</option><option value="teacher">Profesores</option><option value="student">Estudiante</option><option value="collaborator">Colaboradores</option></select>
-                <select id="roster-platform-filter" hidden aria-hidden="true"><option value="all">Todas las plataformas</option><option value="twitch">Twitch</option><option value="youtube">YouTube</option><option value="instagram">Instagram</option></select>
-                <div class="roster-toolbar-actions"><button id="roster-reset" type="button" class="roster-reset-button">LIMPIAR FILTROS</button><p id="roster-results" class="roster-results" aria-live="polite">Mostrando 8 de 8 integrantes</p></div>
-                <div id="roster-active-filters" class="roster-active-filters" aria-label="Filtros aplicados"></div>
-              </div>
-              <nav class="institute-counts roster-jump-nav" id="roster-counts" aria-label="Accesos directos a las áreas del roster"></nav>
-              <div id="roster-container" aria-busy="true">
-                <div class="roster-skeleton-grid" aria-hidden="true">
-                  <div class="roster-skeleton-card"><span></span><i></i><b></b><em></em></div><div class="roster-skeleton-card"><span></span><i></i><b></b><em></em></div><div class="roster-skeleton-card"><span></span><i></i><b></b><em></em></div><div class="roster-skeleton-card"><span></span><i></i><b></b><em></em></div><div class="roster-skeleton-card"><span></span><i></i><b></b><em></em></div><div class="roster-skeleton-card"><span></span><i></i><b></b><em></em></div><div class="roster-skeleton-card"><span></span><i></i><b></b><em></em></div><div class="roster-skeleton-card"><span></span><i></i><b></b><em></em></div>
-                </div>
-              </div>
+              
+              
+              
+              
               <noscript><style>#chapter-2 .roster-skeleton-grid{display:none!important}</style><section class="roster-noscript"><h3>INTEGRANTES DE LA LEGIÓN</h3><!-- ROSTER_NOSCRIPT_LINKS:START -->
 <ul>
                 <li><strong>LOS MORIARTYS</strong> · proyecto compartido de Demian y Ari · <a href="https://twitch.tv/losmoriartys" target="_blank" rel="noopener noreferrer">TWITCH</a></li>
@@ -634,13 +602,13 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
                 <li><strong>HABITOS</strong> · <a href="https://twitch.tv/habitos_atomicos" target="_blank" rel="noopener noreferrer">TWITCH</a></li>
               </ul>
 <!-- ROSTER_NOSCRIPT_LINKS:END --></section></noscript>
-              <nav class="roster-product-nav" aria-label="Recursos relacionados del Roster"><a href="./bitacora-preview.html">ABRIR BITÁCORA CENTRAL ↗</a><a href="./index.html#chapter-12">ARCHIVO DE COLABORACIONES ↗</a></nav>
+              
             </div>
-            <section id="hero-profile-page" class="hero-profile-page" hidden aria-live="polite"></section>
+            <section id="hero-profile-page" class="hero-profile-page roster-selector-panel" hidden aria-hidden="true" aria-live="polite"></section>
         </section>
 
-<section id="chapter-3" class="chapter-panel comic-page impact-chapter" data-editorial-number="4">
- <div class="chapter-tag">CAPÍTULO 04 · ESTADÍSTICAS</div>
+<section id="chapter-3" class="chapter-panel comic-page impact-chapter" data-editorial-number="3">
+ <div class="chapter-tag">CAPÍTULO 03 · ESTADÍSTICAS</div>
  <header class="impact-hero">
   <div class="impact-hero-copy">
    <span class="impact-kicker">LEGIÓN MULTIVERSAL · ACTIVIDAD Y ALCANCE</span>
@@ -679,8 +647,9 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
   <div class="stats-table-wrap"><table class="stats-table"><thead><tr><th>Canal</th><th>Estado</th><th>Espectadores actuales</th><th>Categoría</th><th>Promedio observado</th><th>Pico observado</th><th>Horas observadas</th><th>Muestras</th><th>Cobertura del intervalo muestreado</th></tr></thead><tbody id="stats-table-body"><tr><td colspan="9">Cargando estadísticas…</td></tr></tbody></table></div>
  </details>
 </section>
-<section id="chapter-11" class="chapter-panel comic-page manifesto-chapter" data-editorial-number="2">
- <div class="chapter-tag">CAPÍTULO 02 · VALORES</div>
+<section id="chapter-11" class="chapter-panel comic-page manifesto-chapter" data-editorial-number="3" data-pager="false">
+ <div class="chapter-tag">PILAR COMPLEMENTARIO · VALORES</div>
+    <button type="button" class="supplementary-return" onclick="switchChapter(6)">← VOLVER A COLABORÁ CON NOSOTROS</button>
  <header class="manifesto-hero" aria-labelledby="manifesto-title"><span class="manifesto-kicker">LEGIÓN MULTIVERSAL · MANIFIESTO</span><h2 id="manifesto-title">NO BUSCAMOS QUE<br>TODOS SEAN IGUALES.<br><em>BUSCAMOS QUE CADA UNO<br>TENGA UN LUGAR.</em></h2><p>Una Legión no se construye sumando nombres. Se construye cuando personas distintas eligen avanzar juntas.</p></header>
  <section class="manifesto-origin"><span>LO QUE NOS UNE</span><h3>CADA INTEGRANTE TIENE SU PROPIO UNIVERSO.</h3><p>Su voz, su humor, sus intereses, sus tiempos y su manera de crear. No queremos borrar esas diferencias: queremos que convivan. Legión Multiversal es un espacio para compartir videojuegos, entretenimiento, ideas y proyectos sin tener que dejar de ser quien sos.</p></section>
  <div class="manifesto-values-grid" role="list" aria-label="Seis valores de Legión Multiversal">
@@ -703,8 +672,9 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
  <section class="manifesto-promise"><span>LO QUE PROMETEMOS</span><h3>UN ESPACIO PARA PROPONER, APRENDER, COMPARTIR Y CREAR.</h3><p>No prometemos fama, contratos ni crecimiento automático. Ofrecemos una cultura de colaboración, respeto y trabajo compartido, donde cada persona pueda aportar desde su propio lugar.</p></section>
  <section class="manifesto-invitation"><div><span>¿TE IDENTIFICÁS CON ESTA FORMA DE HACER LAS COSAS?</span><h3>ENTONCES HAY UNA CONVERSACIÓN QUE PODEMOS EMPEZAR.</h3></div><div class="chapter-actions"><button class="chapter-cta" type="button" onclick="switchChapter(6)">QUIERO FORMAR PARTE <span>↗</span></button><button class="chapter-cta" type="button" onclick="switchChapter(8)">QUIERO COLABORAR CON LA LEGIÓN <span>↗</span></button></div></section>
 </section>
-<section id="chapter-9" class="chapter-panel comic-page belonging-chapter" data-editorial-number="5">
- <div class="chapter-tag">CAPÍTULO 05 · COMUNIDAD</div>
+<section id="chapter-9" class="chapter-panel comic-page belonging-chapter" data-editorial-number="5" data-pager="false">
+ <div class="chapter-tag">PILAR COMPLEMENTARIO · COMUNIDAD</div>
+    <button type="button" class="supplementary-return" onclick="switchChapter(6)">← VOLVER A COLABORÁ CON NOSOTROS</button>
  <header class="belonging-hero">
   <img src="image_20261112_151833.jpg" alt="Integrantes de Legión Multiversal reunidos alrededor de una mesa en una sala gamer retro, compartiendo una sesión y una conversación" loading="lazy" width="2048" height="1152">
   <div class="belonging-hero-shade"></div>
@@ -727,8 +697,8 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
  </section>
  <div class="belonging-bottom"><p>Una comunidad crece cuando hay lugar para nuevas voces.</p><button class="chapter-cta" type="button" onclick="switchChapter(11)">CONOCÉ LO QUE NOS IDENTIFICA ↗</button></div>
 </section>
-<section id="chapter-10" class="chapter-panel comic-page live-chapter" data-editorial-number="9">
- <div class="chapter-tag">CAPÍTULO 09 · EN VIVO</div>
+<section id="chapter-10" class="chapter-panel comic-page live-chapter" data-editorial-number="4">
+ <div class="chapter-tag">CAPÍTULO 04 · EN VIVO</div>
  <h2 class="comic-title">LEGIÓN MULTIVERSAL · EN VIVO</h2>
  <div class="premium-panel live-intro"><div class="premium-kicker"><span class="live-pulse"></span> CENTRAL DE TRANSMISIONES</div><h3>Consultá quién está en directo</h3><p>El directorio muestra el último estado registrado de cada canal. Si la captura está demorada, lo indica antes de ofrecer una transmisión. Cuando haya integrantes en directo, vas a poder elegir un canal y verlo desde esta página.</p></div>
  <div id="live-directory" class="live-directory"><p class="stats-note">Consultando el estado de los canales…</p></div>
@@ -736,9 +706,10 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
  
 </section>
 
-<section id="chapter-8" class="chapter-panel comic-page chapter-8-alliance" aria-labelledby="alliance-title" data-editorial-number="6">
+<section id="chapter-8" class="chapter-panel comic-page chapter-8-alliance" aria-labelledby="alliance-title" data-editorial-number="6" data-pager="false">
  <header class="alliance-hero">
-  <div class="chapter-tag">CAPÍTULO 06 · ALIANZAS</div>
+  <div class="chapter-tag">PILAR COMPLEMENTARIO · ALIANZAS</div>
+    <button type="button" class="supplementary-return" onclick="switchChapter(6)">← VOLVER A COLABORÁ CON NOSOTROS</button>
   <p class="alliance-eyebrow">LEGIÓN MULTIVERSAL · CREDENCIALES Y OPORTUNIDADES</p>
   <h2 id="alliance-title" class="comic-title">ALIANZAS Y OPORTUNIDADES</h2>
   <p class="alliance-lead">Creadores independientes. Credenciales atribuidas. Propuestas construidas en conjunto.</p>
@@ -824,9 +795,9 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
  <section class="alliance-contact" id="alliance-contact" aria-labelledby="alliance-contact-title"><span class="alliance-index">08 / CONTACTO COMERCIAL</span><h3 id="alliance-contact-title">HABLEMOS DE UNA COLABORACIÓN</h3><p>Desarrolladores, publishers, agencias y marcas pueden acercar propuestas de campañas, cobertura, accesos anticipados o activaciones con la comunidad.</p><p>Para evaluar una propuesta, compartí la marca o juego, objetivos, fechas, plataformas, entregables esperados y presupuesto disponible.</p><a class="alliance-contact-link" href="#brand-proposal">losmoriartys@gmail.com ↗</a></section>
 </section>
 
-<section id="chapter-12" class="chapter-panel comic-page collaboration-chapter" data-editorial-number="7">
+<section id="chapter-12" class="chapter-panel comic-page collaboration-chapter" data-editorial-number="7" data-pager="false">
  <div class="chapter-tag">CAPÍTULO 07 · COLABORACIONES</div>
- <div class="bitacora-launch"><div><span>ARCHIVO CENTRAL · EDICIÓN INTERACTIVA</span><strong>BITÁCORA MULTIVERSAL</strong><small>Un mismo universo editorial para perfiles, trayectorias y experiencias compartidas.</small></div><a href="./bitacora-preview.html">ABRIR BITÁCORA ↗</a><a href="./index.html#chapter-2">EXPLORAR ROSTER ↗</a></div>
+    <button type="button" class="supplementary-return" onclick="switchChapter(6)">← VOLVER A COLABORÁ CON NOSOTROS</button>
  <div class="collab-cover">
   <div class="collab-cover-copy">
    <span class="collab-kicker">ARCHIVO CENTRAL · LEGIÓN MULTIVERSAL</span>
@@ -861,10 +832,10 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
     
    </article>
    <aside class="campaign-roster"><span class="collab-kicker">EQUIPO DESPLEGADO</span>
-    <div class="campaign-agent"><img src="assets/carnet/DemuianCarnet.jpg" alt="" loading="lazy" width="1280" height="1920"><div><strong>DEMIAN</strong><small>LOS MORIARTYS · CANAL CONJUNTO</small></div></div>
-    <div class="campaign-agent"><img class="campaign-agent-lady" src="assets/ladymoriarty.jpg" alt="Retrato de Lady Moriarty" loading="lazy" width="1344" height="1792"><div><strong>LADY MORIARTY</strong><small>LADYMORIARTY01 · CANAL INDIVIDUAL</small></div></div>
-    <div class="campaign-agent"><img src="assets/rod3r1k.jpg" alt="" loading="lazy" width="1344" height="1792"><div><strong>ROD3RIK</strong><small>THER0D3R1K · CANAL INDIVIDUAL</small></div></div>
-    <div class="campaign-agent"><img src="assets/akuma.jpg" alt="" loading="lazy" width="1344" height="1792"><div><strong>AKUMA</strong><small>AKUMAZOLDYCK · CANAL INDIVIDUAL</small></div></div>
+    <div class="campaign-agent"><div><strong>DEMIAN</strong><small>LOS MORIARTYS · CANAL CONJUNTO</small></div></div>
+    <div class="campaign-agent"><div><strong>LADY MORIARTY</strong><small>LADYMORIARTY01 · CANAL INDIVIDUAL</small></div></div>
+    <div class="campaign-agent"><div><strong>ROD3RIK</strong><small>THER0D3R1K · CANAL INDIVIDUAL</small></div></div>
+    <div class="campaign-agent"><div><strong>AKUMA</strong><small>AKUMAZOLDYCK · CANAL INDIVIDUAL</small></div></div>
    </aside>
   </div>
   <div class="campaign-case-index"><strong>EXPERIENCIA 001 · 4 CREADORES · 4 CANALES</strong></div>
@@ -961,8 +932,9 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
  <div class="collab-contact"><span>¿REPRESENTÁS UN ESTUDIO, PUBLISHER, AGENCIA O MARCA?</span><p>Podemos conversar sobre experiencias multicanal, contenido cooperativo y activaciones con creadores.</p><a href="#brand-proposal">CONTACTAR A LA LEGIÓN ↗</a></div>
 </section>
 
-<section id="chapter-5" class="chapter-panel comic-page" data-editorial-number="8">
+<section id="chapter-5" class="chapter-panel comic-page" data-editorial-number="8" data-pager="false">
 <div class="chapter-tag">CAPÍTULO 08 · ARSENAL</div>
+    <button type="button" class="supplementary-return" onclick="switchChapter(6)">← VOLVER A COLABORÁ CON NOSOTROS</button>
 <h2 class="comic-title">ARSENAL MULTIVERSAL</h2>
 <div class="premium-panel arsenal-intro">
 <div class="premium-kicker">DIEZ JUEGOS · UNA MISMA ESCUADRA</div>
@@ -1057,7 +1029,7 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
 <p><b>Modo:</b> supervivencia con multijugador cooperativo.</p>
 <a href="https://store.steampowered.com/app/242760/" target="_blank" rel="noopener noreferrer">Ver en Steam ↗</a>
 </article>
-<article class="premium-card arsenal-card arsenal-played-card" data-genre="party"><img class="arsenal-cover" src="image_20261107_184951-si-que-tenga-referencias-y-el-titutlo-del-juego-ba.jpg" alt="Ilustración editorial de BarFender" loading="lazy" decoding="async" width="2048" height="1152"><div class="arsenal-played-stamp">✓ JUGADO POR LA LEGIÓN</div><div class="premium-kicker">Cooperativo · humor · simulación</div><h3>11. BarFender</h3><p>Experiencia cooperativa realizada por cuatro creadores y documentada en el Expediente 001, con una segunda sesión de seguimiento.</p><a href="#barfender-expediente" onclick="switchChapter(12)">VER EXPEDIENTE 001 ↗</a><a href="https://store.steampowered.com/app/4159680/Barfender_COOP_Bar_Simulator/" target="_blank" rel="noopener noreferrer">Ver en Steam ↗</a></article></div>
+<article class="premium-card arsenal-card arsenal-played-card" data-genre="party"><div class="arsenal-cover arsenal-cover-placeholder" role="img" aria-label="BarFender, simulador cooperativo de bar">BARFENDER</div><div class="arsenal-played-stamp">✓ JUGADO POR LA LEGIÓN</div><div class="premium-kicker">Cooperativo · humor · simulación</div><h3>11. BarFender</h3><p>Experiencia cooperativa realizada por cuatro creadores y documentada en el Expediente 001, con una segunda sesión de seguimiento.</p><a href="#barfender-expediente" onclick="switchChapter(12)">VER EXPEDIENTE 001 ↗</a><a href="https://store.steampowered.com/app/4159680/Barfender_COOP_Bar_Simulator/" target="_blank" rel="noopener noreferrer">Ver en Steam ↗</a></article></div>
 <div class="premium-panel" style="margin-top:22px">
 <div class="premium-kicker">Guía para organizar las sesiones</div>
 <h3>Primero la experiencia; después, la plataforma</h3>
@@ -1068,15 +1040,34 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
 
 </section>
 
-<section id="chapter-6" class="chapter-panel comic-page recruitment-chapter" data-editorial-number="10">
-    <div class="chapter-tag">CAPÍTULO 10 · RECLUTAMIENTO</div>
-    <h2 class="comic-title">RECLUTAR · CONECTAR · CRECER</h2>
+<section id="chapter-6" class="chapter-panel comic-page recruitment-chapter" data-editorial-number="5">
+    <div class="chapter-tag">CAPÍTULO 05 · COLABORÁ CON NOSOTROS</div>
+    <h2 class="comic-title">COLABORAR · CONECTAR · CRECER</h2>
     <div class="premium-panel recruitment-intro">
         <div class="premium-kicker">LEGIÓN MULTIVERSAL · NUEVOS CONTACTOS</div>
         <h3>DOS CAMINOS. UNA MISMA LEGIÓN.</h3>
         <p>Este espacio tiene dos recorridos: creadores que quieren presentar su perfil para una posible incorporación al roster, y estudios, publishers o marcas que quieren explorar una colaboración. Cada propuesta se evalúa según su encaje, disponibilidad y alcance real.</p>
     </div>
 
+<section class="collaboration-foundations" aria-labelledby="collaboration-foundations-title">
+    <div class="premium-kicker">LO QUE NOS UNE · CÓMO PARTICIPAR</div>
+    <h3 id="collaboration-foundations-title">TRES PILARES DE LA LEGIÓN</h3>
+    <div class="collaboration-foundations-grid">
+        <button type="button" class="collaboration-foundation-link" onclick="switchChapter(11)">
+            <strong>VALORES</strong><span>Un manifiesto sobre identidad, respeto y crecimiento compartido.</span><em>LEER EL MANIFIESTO ↗</em>
+        </button>
+        <button type="button" class="collaboration-foundation-link" onclick="switchChapter(9)">
+            <strong>COMUNIDAD</strong><span>Misiones, logros y formas de participar en el universo de la Legión.</span><em>EXPLORAR LA COMUNIDAD ↗</em>
+        </button>
+        <button type="button" class="collaboration-foundation-link" onclick="switchChapter(8)">
+            <strong>ALIANZAS</strong><span>Credenciales reales y formatos posibles para crear experiencias en conjunto.</span><em>CONOCER LAS ALIANZAS ↗</em>
+        </button>
+    </div>
+    <button type="button" class="collaboration-case-link" onclick="switchChapter(12)">
+        <span>ARCHIVO DE EXPERIENCIAS · BARFENDER Y PRÓXIMOS CASOS</span>
+        <strong>VER CASOS DOCUMENTADOS ↗</strong>
+    </button>
+</section>
 <div class="recruitment-tabs" role="tablist" aria-label="Elegí el tipo de contacto"><button type="button" role="tab" id="recruitment-tab-brand" aria-controls="brand-proposal" aria-selected="true" onclick="setRecruitmentMode('brand')">SOY MARCA / ESTUDIO / AGENCIA</button><button type="button" role="tab" id="recruitment-tab-creator" aria-controls="creator-application" aria-selected="false" onclick="setRecruitmentMode('creator')">SOY CREADOR Y QUIERO SUMARME</button></div>
     <section class="recruitment-form-section" id="creator-application" hidden aria-labelledby="creator-application-title">
         <div class="recruitment-form-heading">
@@ -1125,8 +1116,9 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
 
         <!-- Recursos de Lurkit y Keymailer: material operativo retirado de la navegación pública. -->
 
-        <section id="chapter-13" class="chapter-panel comic-page multiverse-chapter" aria-labelledby="multiverse-title" data-editorial-number="11">
+        <section id="chapter-13" class="chapter-panel comic-page multiverse-chapter" aria-labelledby="multiverse-title" data-editorial-number="11" data-pager="false">
  <div class="chapter-tag">EXTRA · MAPA MULTIVERSAL</div>
+    <button type="button" class="supplementary-return" onclick="switchChapter(0)">← VOLVER AL INICIO</button>
  <header class="multiverse-hero">
   <span class="multiverse-kicker">ARCHIVO CENTRAL · CONEXIONES ENTRE UNIVERSOS</span>
   <h2 id="multiverse-title" class="comic-title">UN MAPA. MUCHOS UNIVERSOS.<br><em>UNA MISMA LEGIÓN.</em></h2>
@@ -1200,7 +1192,7 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
     </div>
 
     <script src="./creator-profile-core.js?v=20261116-unified-1"></script>
-    <script src="./app.js?v=20261116-roster-metrics-1"></script>
+    <script src="./app.js?v=20261117-bitacora-progress-1"></script>
     <script src="./contact-forms.js?v=20261116-1" defer></script>
     <script src="./navigation-fix.js" defer></script>
 </body>

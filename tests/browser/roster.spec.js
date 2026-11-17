@@ -1,8 +1,6 @@
 const { test, expect } = require('@playwright/test');
 
 test.beforeEach(async ({ context }) => {
-  // El servidor estático de pruebas no ejecuta Cloudflare Pages Functions.
-  // Se simula la respuesta segura de configuración ausente; nunca se envía un formulario real.
   await context.route('**/api/contact', route => route.fulfill({
     status: 200,
     contentType: 'application/json',
@@ -21,103 +19,164 @@ const creators = [
   { id: 'habitos', name: 'HABITOS', index: 7 }
 ];
 
-test('el selector presenta los ocho integrantes y permite abrir cada expediente', async ({ page }) => {
+test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bitácora', async ({ page }) => {
+  test.setTimeout(60000);
   const pageErrors = [];
   page.on('pageerror', error => pageErrors.push(error.message));
   page.on('console', message => { if (message.type() === 'error') pageErrors.push(message.text()); });
   await page.goto('/');
   await page.evaluate(() => switchChapter(2));
-  const tiles = page.locator('.roster-selector-tile');
-  await expect(tiles).toHaveCount(8);
+  await expect(page.locator('#chapter-2')).toHaveClass(/active/);
+  await page.locator('#chapter-transition').evaluate(el => el.classList.remove('play'));
+  const cards = page.locator('.comic-roster-card');
+  await expect(page.locator('#roster-container')).toHaveCount(0);
+  await expect(cards).toHaveCount(8);
+  const profilePanel = page.locator('#hero-profile-page.roster-selector-panel');
+  await expect(profilePanel).toHaveCount(1);
+  await expect(profilePanel).toBeHidden();
 
   for (const creator of creators) {
-    const tile = page.locator('.roster-selector-tile[data-roster-select="' + creator.index + '"]');
-    await expect(tile).toHaveCount(1);
-    await expect(tile.locator('.roster-selector-card-metrics')).toBeVisible();
-    await expect(tile).toContainText('VER PERFIL');
-    await tile.click();
+    const card = page.locator('.comic-roster-card[data-creator-id="' + creator.id + '"]');
+    await expect(card).toHaveCount(1);
+    await expect(card).toContainText('VER PERFIL');
+    await expect(card.locator('.comic-roster-stat')).toHaveCount(2);
+    await card.click();
 
     const dossier = page.locator('#hero-profile-page');
     await expect(dossier).toBeVisible();
+    await expect(profilePanel).toHaveClass(/is-active/);
+    await expect(dossier.locator('#profile-tab-perfil .commercial-quickview')).toBeVisible();
+    await expect(page.locator('#roster-home')).toBeHidden();
     await expect(dossier).toContainText(creator.name);
     const profileTabs = dossier.locator('[role="tab"][data-profile-tab]');
-    await expect(profileTabs).toHaveCount(6);
-    await profileTabs.filter({ hasText: 'ESTADÍSTICAS' }).click();
-    await expect(dossier.locator('#profile-tab-estadisticas')).toBeVisible();
-    await profileTabs.filter({ hasText: 'PERFIL' }).click();
-    await expect(dossier.locator('#profile-tab-perfil')).toBeVisible();
-    await expect(dossier.locator('.hero-profile-sidebar')).toBeVisible();
-    await expect(dossier.locator('.hero-profile-reference-layout')).toBeVisible();
-    await expect(dossier.locator('.hero-profile-id-image img')).toBeVisible();
+    await expect(profileTabs).toHaveCount(5);
+
+    const cardImage = card.locator('.comic-roster-photo img');
+    await expect.poll(() => cardImage.evaluate(img => img.naturalWidth)).toBeGreaterThan(0);
+    const cardImageStyle = await cardImage.evaluate(img => ({ fit: getComputedStyle(img).objectFit, position: getComputedStyle(img).objectPosition }));
+    expect(cardImageStyle.fit).toBe('cover');
+    expect(cardImageStyle.position).toContain('0%');
+
+    const dossierImage = dossier.locator('.hero-profile-id-image img');
+    await expect(dossierImage).toBeVisible();
+    await expect.poll(() => dossierImage.evaluate(img => img.naturalWidth)).toBeGreaterThan(0);
+    const dossierImageStyle = await dossierImage.evaluate(img => ({ fit: getComputedStyle(img).objectFit, position: getComputedStyle(img).objectPosition }));
+    expect(dossierImageStyle.fit).toBe('cover');
+    expect(dossierImageStyle.position).toContain('0%');
     await expect(dossier.locator('.hero-profile-sidebar-quote')).toBeVisible();
-    await expect(dossier.locator('.hero-profile-poster')).toBeVisible();
     await expect(dossier.locator('.hero-profile-socials')).toBeVisible();
-    await profileTabs.filter({ hasText: 'CLIPS' }).click();
-    await expect(dossier.locator('#profile-tab-clips')).toBeVisible();
-    await profileTabs.filter({ hasText: 'BITÁCORA' }).click();
-    const dossierAction = dossier.locator('#profile-tab-bitacora .twitch-link-btn').first();
-    await expect(dossierAction).toHaveText('ABRIR BITÁCORA COMPLETA');
-    await expect(dossier.locator('a[href="./roster-02-moriartys.html"]')).toHaveCount(0);
-    await dossierAction.click();
-    const modal = page.locator('#hero-modal');
-    await expect(modal).toHaveClass(/active/);
-    await expect(modal.locator('#modal-hero-title')).toContainText(creator.name);
-    await expect(modal.locator('#modal-tab-navigation [role="tab"]')).toHaveCount(3);
-    await page.keyboard.press('Escape');
-    await expect(modal).not.toHaveClass(/active/);
+    await expect(dossier.locator('.hero-profile-poster')).toHaveCount(0);
+
+    if (creator.id === 'moriartys') {
+      for (const [label, panel] of [
+        ['PERFIL', 'perfil'],
+        ['ESTADÍSTICAS', 'estadisticas'],
+        ['JUEGOS Y RITMO', 'juegos'],
+        ['CLIPS', 'clips'],
+        ['BITÁCORA', 'bitacora']
+      ]) {
+        await profileTabs.filter({ hasText: label }).click();
+        await expect(dossier.locator('#profile-tab-' + panel)).toBeVisible();
+        if (panel === 'estadisticas') {
+          await expect(dossier.locator('#profile-tab-estadisticas .hero-profile-metric-scale').first()).toBeVisible();
+        }
+        if (panel === 'bitacora') {
+          await expect(dossier.locator('#profile-tab-bitacora .commercial-quickview')).toHaveCount(0);
+        }
+        await expect(profileTabs.filter({ hasText: label })).toHaveAttribute('aria-selected', 'true');
+      }
+      await profileTabs.filter({ hasText: 'PERFIL' }).focus();
+      await page.keyboard.press('End');
+      await expect(profileTabs.filter({ hasText: 'BITÁCORA' })).toBeFocused();
+      await page.keyboard.press('Home');
+      await expect(profileTabs.filter({ hasText: 'PERFIL' })).toBeFocused();
+      await profileTabs.filter({ hasText: 'PERFIL' }).click();
+      await expect(dossier.locator('#profile-tab-bitacora')).toContainText('TRAYECTORIA Y COLABORACIONES DOCUMENTADAS');
+    }
+
+    await expect(page.locator('#hero-modal')).not.toHaveClass(/active/);
     await page.evaluate(() => closeHeroProfile());
     await expect(page.locator('#roster-selector')).toBeVisible();
+    await expect(profilePanel).toBeHidden();
+    await expect(profilePanel).not.toHaveClass(/is-active/);
   }
   expect(pageErrors).toEqual([]);
 });
 
-test('las dos rutas históricas de Lady Moriarty abren el mismo expediente', async ({ page }) => {
-  const pageErrors = [];
-  const legacyPage = await page.context().newPage();
-  const canonicalPage = await page.context().newPage();
-  for (const target of [legacyPage, canonicalPage]) {
-    target.on('pageerror', error => pageErrors.push(error.message));
-    target.on('console', message => { if (message.type() === 'error') pageErrors.push(message.text()); });
-  }
-
-  await legacyPage.goto('/#expediente-ladymoriarty');
-  await expect(legacyPage.locator('#hero-profile-page')).toBeVisible();
-  await expect(legacyPage.locator('#hero-profile-page')).toContainText('LADY MORIARTY');
-  await expect(legacyPage.locator('#hero-profile-page .hero-profile-sidebar')).toBeVisible();
-  await expect(legacyPage.locator('#hero-profile-page [data-profile-tab="clips"]')).toHaveCount(1);
-  const legacyText = await legacyPage.locator('#hero-profile-page').innerText();
-
-  await canonicalPage.goto('/#expediente-lady-moriarty');
-  await expect(canonicalPage.locator('#hero-profile-page')).toBeVisible();
-  await expect(canonicalPage.locator('#hero-profile-page')).toContainText('LADY MORIARTY');
-  await expect(canonicalPage.locator('#hero-profile-page .hero-profile-sidebar')).toBeVisible();
-  await expect(canonicalPage.locator('#hero-profile-page [data-profile-tab="clips"]')).toHaveCount(1);
-  const canonicalText = await canonicalPage.locator('#hero-profile-page').innerText();
-  expect(canonicalText).toBe(legacyText);
-  expect(pageErrors).toEqual([]);
-  await legacyPage.close();
-  await canonicalPage.close();
+test('Origen aparece antes que Roster y la navegación principal contiene cinco destinos', async ({ page }) => {
+  await page.goto('/');
+  const nav = page.locator('.primary-navigation');
+  await expect(nav.locator('[data-chapter]')).toHaveCount(5);
+  await expect(nav.locator('[data-chapter="1"]')).toHaveText('ORIGEN');
+  await expect(nav.locator('[data-chapter="2"]')).toHaveText('ROSTER');
+  await expect(nav.locator('[data-chapter="10"]')).toContainText('EN VIVO');
+  const originBox = await nav.locator('[data-chapter="1"]').boundingBox();
+  const rosterBox = await nav.locator('[data-chapter="2"]').boundingBox();
+  expect(originBox.x).toBeLessThan(rosterBox.x);
 });
 
-test('las ocho cartas comparten el sistema visual maestro y responden en móvil', async ({ page }) => {
+test('las cartas se organizan en cuatro columnas de escritorio y dos en móvil', async ({ page }) => {
   await page.goto('/');
   await page.evaluate(() => switchChapter(2));
-  const tiles = page.locator('.roster-selector-tile');
-  await expect(tiles).toHaveCount(8);
-  await expect(page.locator('.roster-selector-panel')).toHaveAttribute('data-roster-role', /.+/);
-  for (const creator of creators) {
-    const tile = page.locator('.roster-selector-tile[data-creator-id="' + creator.id + '"]');
-    await expect(tile).toHaveCount(1);
-    await expect(tile.locator('.roster-selector-tile-frame')).toBeVisible();
-    await expect(tile.locator('.roster-selector-tile-top')).toContainText('EXP.');
-    await expect(tile.locator('.roster-selector-tile-name')).toBeVisible();
-  }
-  const desktopColumns = await tiles.first().evaluate(el => getComputedStyle(el.parentElement).gridTemplateColumns.split(' ').length);
-  expect(desktopColumns).toBeGreaterThanOrEqual(3);
+  await expect(page.locator('#chapter-2')).toHaveClass(/active/);
+  await page.locator('#chapter-transition').evaluate(el => el.classList.remove('play'));
+  const cards = page.locator('.comic-roster-card');
+  await expect(cards).toHaveCount(8);
+  await cards.locator('.comic-roster-photo img').evaluateAll(images => Promise.all(images.map(img => {
+    img.loading = 'eager';
+    return img.decode().catch(() => null);
+  })));
+  await expect.poll(() => cards.locator('.comic-roster-photo img').evaluateAll(images => images.every(img => img.naturalWidth > 0))).toBe(true);
+  const desktopColumns = await cards.first().evaluate(el => getComputedStyle(el.parentElement).gridTemplateColumns.split(' ').length);
+  expect(desktopColumns).toBe(4);
+  await page.screenshot({ path: 'test-results/roster-desktop.png', fullPage: true });
   await page.setViewportSize({ width: 390, height: 844 });
-  const mobileColumns = await tiles.first().evaluate(el => getComputedStyle(el.parentElement).gridTemplateColumns.split(' ').length);
+  const mobileNav = page.locator('.primary-navigation [data-chapter]');
+  await expect(mobileNav).toHaveCount(5);
+  const mobileNavRights = await mobileNav.evaluateAll(nodes => nodes.map(node => node.getBoundingClientRect().right));
+  expect(mobileNavRights.every(right => right <= 390)).toBe(true);
+  const mobileColumns = await cards.first().evaluate(el => getComputedStyle(el.parentElement).gridTemplateColumns.split(' ').length);
   expect(mobileColumns).toBe(2);
   expect(await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth)).toBe(false);
+  await page.screenshot({ path: 'test-results/roster-mobile.png', fullPage: true });
   await page.emulateMedia({ reducedMotion: 'reduce' });
-  await expect(tiles.first()).toBeVisible();
+  await expect(cards.first()).toBeVisible();
+});
+
+test('Atrás y Adelante restauran el roster y el expediente correcto', async ({ page }) => {
+  await page.goto('/');
+  await page.evaluate(() => switchChapter(2));
+  await expect(page.locator('#chapter-2')).toHaveClass(/active/);
+  await page.locator('#chapter-transition').evaluate(el => el.classList.remove('play'));
+  await page.locator('.comic-roster-card[data-creator-id="lady-moriarty"]').click();
+  await expect(page).toHaveURL(/#roster\/lady-moriarty$/);
+  await expect(page.locator('#hero-profile-page')).toBeVisible();
+  await expect(page.locator('#roster-home')).toBeHidden();
+  await page.goBack();
+  await expect(page).toHaveURL(/#roster$/);
+  await expect(page.locator('#roster-home')).toBeVisible();
+  await expect(page.locator('#hero-profile-page')).toBeHidden();
+  await page.goForward();
+  await expect(page).toHaveURL(/#roster\/lady-moriarty$/);
+  await expect(page.locator('#hero-profile-page')).toBeVisible();
+  await expect(page.locator('#roster-home')).toBeHidden();
+  await expect(page.locator('#hero-profile-page')).toContainText('LADY MORIARTY');
+  await page.screenshot({ path: 'test-results/bitacora-lady-desktop.png', fullPage: true });
+  await page.setViewportSize({ width: 390, height: 844 });
+  const mobileWidths = await page.evaluate(() => ({
+    viewport: window.innerWidth,
+    document: document.documentElement.scrollWidth,
+    body: document.body.scrollWidth
+  }));
+  expect(mobileWidths.document).toBeLessThanOrEqual(mobileWidths.viewport);
+  expect(mobileWidths.body).toBeLessThanOrEqual(mobileWidths.viewport);
+  const metricBounds = await page.locator('.hero-profile-metric-grid').first().evaluate(grid => {
+    const bounds = grid.getBoundingClientRect();
+    return [...grid.children].map(item => {
+      const rect = item.getBoundingClientRect();
+      return rect.left >= bounds.left - 1 && rect.right <= bounds.right + 1;
+    });
+  });
+  expect(metricBounds.every(Boolean)).toBe(true);
+  await page.screenshot({ path: 'test-results/bitacora-lady-mobile.png', fullPage: true });
 });

@@ -1,3 +1,16 @@
+## 2026-11-17 — Roster 01: cartas simultáneas y Bitácora directa
+
+- **Base:** `main` en `de6252c5b19d65628321a53d07fb036c0bd9a547`; rama nueva `feat/roster-comic-cards-chapter-01-2026-11-17`, creada desde el HEAD vigente de main para evitar integrar la rama histórica divergente.
+- **Jerarquía editorial:** Roster pasa a Capítulo 01 y queda primero en la navegación principal; Origen pasa a 02 y Valores a 03. Los IDs técnicos de los paneles se conservan.
+- **Directorio:** el selector de un personaje con panel de previsualización se sustituye por una grilla simultánea de las ocho cartas. Cada frente usa retrato existente, alias/identidad, juego o especialidad, badges de seguimiento/actividad, métricas verificables y CTA directo.
+- **Bitácora:** el clic abre directamente la ficha 35/65. La columna izquierda conserva fotografía, nombre, alias, frase y redes; la derecha presenta breadcrumb, estado, pestañas y contenido. La pestaña Bitácora contiene los registros y la propuesta editorial, sin abrir un segundo modal.
+- **Integridad:** no se incorporan cifras de ejemplo del prompt como si fueran datos reales. Seguidores Twitch no disponibles permanecen como «—»; suscriptores YouTube se muestran solo con estado verificado; media de viewers proviene del muestreo. «Activo esta semana» depende de una muestra en vivo de los últimos siete días.
+- **Pendiente de QA:** validar JavaScript/HTML, las ocho cartas, rutas e historial, pestañas, accesibilidad, escritorio y móvil. No se declara desplegado ni publicado.
+- **Pendiente funcional:** edición persistente autenticada; no se agrega un botón de edición sin backend seguro.
+- **Siguiente:** ejecutar suite unitaria y Playwright en la preview de esta rama y corregir cualquier regresión antes de integrar a main.
+
+---
+
 ## 2026-11-16 — Roster: horarios habituales por creador
 
 - **Base:** `main` en `d0ee9384a4c2c2c036b5b174158a58a713d1945c`.
@@ -3290,3 +3303,65 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - `Validar código y datos del sitio`: workflow `43951372459`, éxito; incluye comprobación de dimensiones, contrato WebP, referencias, pruebas Python y Playwright.
 - `Lighthouse · producción Cloudflare Pages`: workflow `43951372454`, éxito; comprobó el SHA en Cloudflare, tipo MIME WebP del Hero y ambos emblemas, y endpoint de contacto.
 - Cloudflare Pages publicó el SHA medido correctamente. No se abrió ningún PR.
+
+## 2026-11-17 — QA ampliado del Roster cómic · Capítulo 01
+
+- **Rama:** `feat/roster-comic-cards-chapter-01-2026-11-17`.
+- **Sincronización:** se incorporó el commit de métricas más reciente de `main` (`4261020`) y se dejó la rama sin commits pendientes de integrar desde `main` (21 commits adelante, 0 detrás). Se preservaron las capturas actualizadas de `data.json`, `platform-stats.json` y `creator-metrics.json`.
+- **Cobertura Playwright ampliada:** el recorrido verifica los ocho expedientes, las cinco pestañas (Perfil, Estadísticas, Juegos y Ritmo, Clips y Bitácora), la carga de los retratos, el encuadre superior, el layout responsive y la navegación del historial Atrás/Adelante.
+- **Evidencia visual automatizable:** el workflow `validar-sitio.yml` guarda capturas de escritorio y móvil del directorio y de la Bitácora de LADY MORIARTY en el artefacto `roster-visual-review-<sha>`.
+- **Encuadre:** se cambió `object-position` de 18 % a alineación superior para priorizar frente, cabello y sombreros en las tarjetas y en la imagen de la Bitácora. Se añadieron aserciones Playwright sobre carga natural de imagen, `object-fit` y `object-position`.
+- **Auditoría de assets:** los ocho archivos de `portrait` referenciados en `roster-data.json` existen y se pudieron abrir. Las imágenes de credencial son retratos ilustrados de busto/medio cuerpo, no fotografías de cuerpo completo. Los assets alternativos revisados de LADY MORIARTY y ROD3R1K son láminas de personaje con tipografía y marco editorial incorporados; no equivalen a retratos limpios para reemplazarlos sin rediseñar el encuadre.
+- **Comprobación estática realizada en esta sesión:** 10/10 contratos equivalentes verificados sobre fuentes actuales; sintaxis de `app.js` y `tests/browser/roster.spec.js` correcta. Los ocho archivos de retrato resuelven en GitHub.
+- **Pruebas ejecutadas:** no se declara todavía resultado de `python -m unittest discover` ni de `npm run test:e2e`. El entorno de esta sesión no dispone de checkout local, intérprete conectado al repositorio ni navegador Playwright; la conexión GitHub disponible tampoco expone el disparo manual ni la lectura de ejecuciones de push. El workflow queda preparado para ejecutar ambos conjuntos y publicar capturas, pero se requiere leer el resultado real de Actions antes de marcar QA como aprobado.
+- **Revisión visual:** pendiente inspección de las capturas renderizadas en navegador. La revisión de los archivos fuente confirma que las caras están completas en origen; no sustituye la verificación del recorte real en escritorio y móvil.
+- **Pendiente editorial:** para cumplir literalmente el requisito de foto a cuerpo completo hacen falta ocho retratos limpios de cuerpo entero. No se inventaron ni se generaron reemplazos.
+- **Último commit de QA:** `4a639b2` (merge de main y actualización del historial de la rama). Los cambios de pruebas y encuadre están incluidos en el HEAD anterior a ese merge.
+
+
+## 2026-11-17 — Recorrido principal simplificado y pilares complementarios
+
+- **Orden público acordado:** Inicio → Origen → Roster → Estadísticas → En Vivo → Colaborá con nosotros. La navegación principal queda reducida a cinco destinos después de Inicio, en ese orden.
+- **Roster:** se mantiene como capítulo propio; la implementación de esta rama presenta las ocho cartas en una grilla simultánea y abre el expediente individual desde cada carta. Se conservan los IDs técnicos y la fuente canónica de perfiles.
+- **Valores, Comunidad y Alianzas:** se conservan como pilares complementarios accesibles desde Colaborá con nosotros, fuera del paginador principal para no interrumpir el recorrido. Cada pilar conserva su contenido fuente y ofrece retorno al capítulo de colaboración.
+- **Criterio editorial:** Valores se presenta como manifiesto; Comunidad mantiene misiones/logros alimentados por community-playbook.json; Alianzas conserva credenciales y formatos potenciales, sin presentarlos como campañas contratadas ni prometer resultados.
+- **Otros archivos:** Colaboraciones, Arsenal y Mapa Multiversal quedan fuera del recorrido principal y conservan acceso contextual/retorno; no se duplican perfiles ni fotografías.
+- **Cambios realizados en esta rama:** `index.html`, `app.js`, `roster-data.json`, `community-playbook.json`, `roster-selector.css`, validadores y contratos Python/Playwright.
+- **Roster único:** se retiró la grilla heredada; queda una sola grilla de ocho cartas. Se conserva el ancla `#roster`; el expediente oculta el directorio y lo reemplaza, evitando que ambos aparezcan juntos.
+- **Responsive:** navegación móvil de cinco destinos en dos filas; cartas en dos columnas; se añadió una comprobación explícita de overflow horizontal en el expediente móvil.
+- **Bitácora y Comunidad:** la misión se registra al abrir la pestaña Bitácora del expediente individual. El índice externo quedó fuera del recorrido y sin enlaces desde la página principal.
+- **Revisión visual:** escritorio 4×2 y móvil 2×4; ilustraciones originales y métricas visibles; expediente con carnet, enlaces sociales y cinco pestañas. La captura de Playwright limpia la transición animada y fuerza la carga de las ocho ilustraciones para revisar el conjunto.
+- **Validación final:** `python-tests`, `qa-portable`, Cloudflare Pages y `validar` están en SUCCESS para el HEAD `d2714bf`. La suite incluye los ocho expedientes, cinco pestañas, navegación Atrás/Adelante, responsive, ausencia de overflow horizontal y límites internos de la grilla de métricas.
+- **Sincronización:** se integró el último commit de `main` que actualizaba `creator-metrics.json`, `data.json` y `platform-stats.json`; la rama quedó al día (`behind 0`).
+- **Salvaguarda:** cambios confinados a la rama de trabajo; no se modificó `main`, no se fusionó ni se publicó producción.
+
+
+### Ajuste de identidad visual y no duplicación — 17/11/2026
+
+- Se respeta la separación entre **arte de personaje** y **retrato de expediente**: las cartas usan `hero.img` (ilustración original); la ficha individual usa `hero.portrait` (imagen de carnet aprobada).
+- Se aplicó el mapeo confirmado por el usuario a los ocho expedientes: Moriartys → Cyberpunk Cyborg Portrait; ROD3R1K → Superhero Camera Portrait; Lady → Red Haired Mystic Witch; Ardipii → Hooded Atomic Figure; Akuma → `image_20261117_045605.jpg`; Dave → Purple Cyberpunk Warrior; Pato → Bald Man in Gold Armor; Hábitos → Sci Fi Superhero Portrait.
+- Los ocho assets ya existían en el commit de `main` incorporado como segundo padre de la rama; no se generaron ni duplicaron archivos binarios.
+- Se eliminó el bloque de acceso a la Bitácora externa desde Colaboraciones y se reemplazaron los cuatro retratos individuales del caso BarFender por una lista textual de participantes. Se conserva la imagen grupal específica del caso.
+- Se añadieron contratos para comprobar el mapeo exacto, la separación arte/retrato y la ausencia de retratos repetidos en el archivo colaborativo.
+- **Cierre de revisión visual:** se corrigió que el CSS mantuviera visible el Roster al abrir un expediente; las reglas `[hidden]` aseguran que el expediente sustituya la grilla. También se ajustó la grilla de métricas móviles para que no recorte la segunda columna. Las capturas finales confirman escritorio 4×2, móvil 2×4 y expediente individual sin el directorio detrás.
+
+### Activación del expediente comercial y métricas comparativas — 17/11/2026
+
+- Se eliminó la regla CSS que ocultaba globalmente el panel, la metodología y la comparativa del Roster.
+- El expediente canónico (#hero-profile-page) ahora usa la clase roster-selector-panel; JS activa y desactiva .is-active junto con el atributo hidden. El directorio y el expediente siguen siendo mutuamente excluyentes.
+- Se mantienen app.js y roster-data.json como motor y fuente de verdad existentes. No se agregó un segundo roster-engine.js ni un streamers.json paralelo: duplicarían los ocho perfiles y podrían introducir métricas de ejemplo no verificadas.
+- La ficha ejecutiva existente se conserva dentro de Perfil. La pestaña Estadísticas añade barras comparativas relativas para métricas con datos disponibles en más de un integrante; las barras no se presentan como ranking ni como métricas oficiales.
+- Se conservan vacíos como “no disponible” cuando no hay dato. No se incorporan los números de ejemplo de Oratoris/Hábitos del fragmento proporcionado.
+- Pendiente: CI/Playwright de este commit y revisión visual real de escritorio/móvil.
+
+### Cierre QA del expediente comercial — 17/11/2026
+
+- **Commit funcional probado:** 30f4a0ebbac56c0b969492735789fb62cbce9855.
+- **GitHub Actions:** `validar` SUCCESS; incluye `node --check app.js`, validación de datos y suite Python.
+- **Python:** SUCCESS.
+- **Playwright:** SUCCESS. Se recorrieron los ocho expedientes; el panel inicia oculto, activa `.is-active` al abrir y se desactiva al volver. Se comprobaron la ficha comercial en Perfil, las barras de métricas en Estadísticas, las cinco pestañas, los retratos, las rutas y el historial.
+- **Responsive:** Playwright generó capturas de escritorio y móvil, verificó grilla 4×2/2×4 y ausencia de overflow horizontal.
+- **Cloudflare Pages preview:** deploy SUCCESS para el commit `30f4a0e`; URL: https://5c03b6e3.legion-multiversal.pages.dev.
+- **Artefacto visual:** `roster-visual-review-5530031615ea30d52fe3fc6f1b3b4c98cbba5eb1` (capturas automatizadas disponibles en Actions). Las capturas se generaron; no se declara una inspección manual de píxel a píxel.
+- **Producción:** sin cambios. PR #63 sigue Draft y sin merge.
+- **Integración pendiente:** la rama de la PR está 9 commits detrás de `main`; antes de integrar hay que sincronizarla y repetir CI sobre el HEAD resultante.
