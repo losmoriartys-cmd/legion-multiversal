@@ -118,10 +118,10 @@ class RosterComicCardsContractTests(unittest.TestCase):
         start = self.app.index("function renderHeroProfileTabs")
         end = self.app.index("\nfunction activateHeroProfileTab", start)
         tabs = self.app[start:end]
-        self.assertIn("id=\"profile-tab-perfil\" role=\"tabpanel\">'+overview+brandHtml", tabs)
-        self.assertIn("id=\"profile-tab-bitacora\" role=\"tabpanel\" hidden><h4>TRAYECTORIA Y COLABORACIONES DOCUMENTADAS</h4>'+logHtml+'</section>'", tabs)
+        self.assertIn('''id="profile-tab-perfil" role="tabpanel">'+overview+brandHtml''', tabs)
+        self.assertIn('''id="profile-tab-bitacora" role="tabpanel" hidden><h4>TRAYECTORIA Y COLABORACIONES DOCUMENTADAS</h4>'+logHtml+'</section>''', tabs)
         self.assertNotIn("'+logHtml+brandHtml+'</section>'", tabs)
-        self.assertNotIn("ESTADÍSTICAS DEL CANAL</h4><div class=\"hero-profile-metric-grid\"'+metricHtml", tabs)
+        self.assertNotIn('''ESTADÍSTICAS DEL CANAL</h4><div class="hero-profile-metric-grid"'+metricHtml''', tabs)
 
     def test_only_one_roster_directory_remains_in_the_chapter(self):
         self.assertIn('id="roster-selector"', self.html)
