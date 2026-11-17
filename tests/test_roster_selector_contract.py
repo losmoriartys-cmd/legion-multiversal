@@ -48,7 +48,7 @@ class RosterComicCardsContractTests(unittest.TestCase):
 
     def test_cards_keep_character_art_separate_from_dossier_portraits(self):
         start = self.app.index("function renderRosterSelector()")
-        end = self.app.index("\\nfunction selectRosterCreator", start)
+        end = self.app.index("\nfunction selectRosterCreator", start)
         renderer = self.app[start:end]
         self.assertIn("hero.img ?", renderer)
         self.assertIn("alt=\\"Ilustración de ", renderer)
