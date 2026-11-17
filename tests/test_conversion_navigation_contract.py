@@ -11,13 +11,20 @@ class ConversionNavigationContractTests(unittest.TestCase):
         cls.html = (ROOT / "index.html").read_text(encoding="utf-8")
         cls.css = (ROOT / "conversion-overhaul.css").read_text(encoding="utf-8")
 
-    def test_primary_navigation_has_six_audience_routes(self):
+    def test_primary_navigation_has_five_ordered_routes(self):
         nav = self.html.split('<nav class="primary-navigation"', 1)[1].split("</nav>", 1)[0]
-        for label, chapter in (("ROSTER", "2"), ("ORIGEN", "1"), ("MIRAR", "10"),
-                               ("EXPERIENCIAS", "12"), ("PARA MARCAS", "8"), ("UNITE", "6")):
+        expected = (("ORIGEN", "1"), ("ROSTER", "2"), ("ESTADÍSTICAS", "3"),
+                    ("EN VIVO", "10"), ("COLABORÁ", "6"))
+        self.assertEqual(nav.count('data-chapter='), 5)
+        positions = []
+        for label, chapter in expected:
             self.assertIn(f'data-chapter="{chapter}"', nav)
             self.assertIn(label, nav)
-        self.assertEqual(nav.count('data-chapter='), 6)
+            positions.append(nav.index(f'data-chapter="{chapter}"'))
+        self.assertEqual(positions, sorted(positions))
+        self.assertIn('onclick="switchChapter(11)"', self.html)
+        self.assertIn('onclick="switchChapter(9)"', self.html)
+        self.assertIn('onclick="switchChapter(8)"', self.html)
         markup_without_styles = re.sub(r"<style\b[^>]*>.*?</style>", "", self.html, flags=re.IGNORECASE | re.DOTALL)
         self.assertNotIn("secondary-navigation", markup_without_styles)
 
