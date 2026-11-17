@@ -2978,3 +2978,12 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - No se crea PR ni se modifican credenciales, métricas, canales o imágenes.
 - La URL pública no pudo recuperarse con el navegador de consulta; por eso no se declara una inspección visual manual de producción. La revisión visual final debe realizarse sobre la ejecución real del sitio en escritorio, tablet y móvil.
 - Los cuatro commits se integraron por fast-forward en `main` (HEAD `17a4a9733d84af70e62a81ffa43bf46a4cf46cef`); la rama de integración y `main` quedaron idénticas. La ejecución de CI y el despliegue deben confirmarse por separado; no se declaran aprobados en este registro.
+
+## 17 nov 2026 · Evolución visual del Roster (implementación en integración)
+
+- Tarjetas editoriales verticales con retrato, identidad, estado de transmisión y dos indicadores compactos debajo.
+- El acceso desde cada tarjeta abre directamente el expediente individual; se elimina el panel de selección redundante como paso intermedio.
+- El expediente individual incorpora portada con retrato, redes, estado de actividad y seis solapas: Perfil, Estadísticas, Juegos y ritmo, Clips, Bitácora e Interés para marcas.
+- Las cifras del perfil se leen desde las fuentes existentes. Los campos no disponibles se muestran como no disponibles; las medias se identifican como muestrales y se conserva la metodología.
+- Se mantienen los ocho expedientes y sus identificadores, rutas y navegación Atrás/Adelante. No se crea un segundo catálogo.
+- Estado: implementación inicial en integration/roster-unification-2026-11-16; pendiente ejecutar suites Python/Playwright y QA visual antes de integrar en main.
