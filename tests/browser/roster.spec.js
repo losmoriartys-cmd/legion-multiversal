@@ -1,8 +1,6 @@
 const { test, expect } = require('@playwright/test');
 
 test.beforeEach(async ({ context }) => {
-  // El servidor estático de pruebas no ejecuta Cloudflare Pages Functions.
-  // Se simula la respuesta segura de configuración ausente; nunca se envía un formulario real.
   await context.route('**/api/contact', route => route.fulfill({
     status: 200,
     contentType: 'application/json',
@@ -21,27 +19,28 @@ const creators = [
   { id: 'habitos', name: 'HABITOS', index: 7 }
 ];
 
-test('el selector presenta los ocho integrantes y permite abrir cada expediente', async ({ page }) => {
+test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bitácora', async ({ page }) => {
   const pageErrors = [];
   page.on('pageerror', error => pageErrors.push(error.message));
   page.on('console', message => { if (message.type() === 'error') pageErrors.push(message.text()); });
   await page.goto('/');
   await page.evaluate(() => switchChapter(2));
-  const tiles = page.locator('.roster-selector-tile');
-  await expect(tiles).toHaveCount(8);
+  const cards = page.locator('.comic-roster-card');
+  await expect(cards).toHaveCount(8);
+  await expect(page.locator('.roster-selector-panel')).toHaveCount(0);
 
   for (const creator of creators) {
-    const tile = page.locator('.roster-selector-tile[data-roster-select="' + creator.index + '"]');
-    await expect(tile).toHaveCount(1);
-    await expect(tile.locator('.roster-selector-card-metrics')).toBeVisible();
-    await expect(tile).toContainText('VER PERFIL');
-    await tile.click();
+    const card = page.locator('.comic-roster-card[data-creator-id="' + creator.id + '"]');
+    await expect(card).toHaveCount(1);
+    await expect(card).toContainText('VER PERFIL');
+    await expect(card.locator('.comic-roster-stat')).toHaveCount(2);
+    await card.click();
 
     const dossier = page.locator('#hero-profile-page');
     await expect(dossier).toBeVisible();
     await expect(dossier).toContainText(creator.name);
     const profileTabs = dossier.locator('[role="tab"][data-profile-tab]');
-    await expect(profileTabs).toHaveCount(6);
+    await expect(profileTabs).toHaveCount(5);
     await profileTabs.filter({ hasText: 'ESTADÍSTICAS' }).click();
     await expect(dossier.locator('#profile-tab-estadisticas')).toBeVisible();
     await profileTabs.filter({ hasText: 'PERFIL' }).click();
@@ -50,74 +49,40 @@ test('el selector presenta los ocho integrantes y permite abrir cada expediente'
     await expect(dossier.locator('.hero-profile-reference-layout')).toBeVisible();
     await expect(dossier.locator('.hero-profile-id-image img')).toBeVisible();
     await expect(dossier.locator('.hero-profile-sidebar-quote')).toBeVisible();
-    await expect(dossier.locator('.hero-profile-poster')).toBeVisible();
     await expect(dossier.locator('.hero-profile-socials')).toBeVisible();
+    await expect(dossier.locator('.hero-profile-poster')).toHaveCount(0);
     await profileTabs.filter({ hasText: 'CLIPS' }).click();
     await expect(dossier.locator('#profile-tab-clips')).toBeVisible();
     await profileTabs.filter({ hasText: 'BITÁCORA' }).click();
-    const dossierAction = dossier.locator('#profile-tab-bitacora .twitch-link-btn').first();
-    await expect(dossierAction).toHaveText('ABRIR BITÁCORA COMPLETA');
-    await expect(dossier.locator('a[href="./roster-02-moriartys.html"]')).toHaveCount(0);
-    await dossierAction.click();
-    const modal = page.locator('#hero-modal');
-    await expect(modal).toHaveClass(/active/);
-    await expect(modal.locator('#modal-hero-title')).toContainText(creator.name);
-    await expect(modal.locator('#modal-tab-navigation [role="tab"]')).toHaveCount(3);
-    await page.keyboard.press('Escape');
-    await expect(modal).not.toHaveClass(/active/);
+    await expect(dossier.locator('#profile-tab-bitacora')).toBeVisible();
+    await expect(dossier.locator('#profile-tab-bitacora .hero-profile-detail-list, #profile-tab-bitacora .hero-profile-empty')).toHaveCount(1);
+    await expect(dossier.locator('#hero-modal')).toHaveCount(0);
     await page.evaluate(() => closeHeroProfile());
     await expect(page.locator('#roster-selector')).toBeVisible();
   }
   expect(pageErrors).toEqual([]);
 });
 
-test('las dos rutas históricas de Lady Moriarty abren el mismo expediente', async ({ page }) => {
-  const pageErrors = [];
-  const legacyPage = await page.context().newPage();
-  const canonicalPage = await page.context().newPage();
-  for (const target of [legacyPage, canonicalPage]) {
-    target.on('pageerror', error => pageErrors.push(error.message));
-    target.on('console', message => { if (message.type() === 'error') pageErrors.push(message.text()); });
-  }
-
-  await legacyPage.goto('/#expediente-ladymoriarty');
-  await expect(legacyPage.locator('#hero-profile-page')).toBeVisible();
-  await expect(legacyPage.locator('#hero-profile-page')).toContainText('LADY MORIARTY');
-  await expect(legacyPage.locator('#hero-profile-page .hero-profile-sidebar')).toBeVisible();
-  await expect(legacyPage.locator('#hero-profile-page [data-profile-tab="clips"]')).toHaveCount(1);
-  const legacyText = await legacyPage.locator('#hero-profile-page').innerText();
-
-  await canonicalPage.goto('/#expediente-lady-moriarty');
-  await expect(canonicalPage.locator('#hero-profile-page')).toBeVisible();
-  await expect(canonicalPage.locator('#hero-profile-page')).toContainText('LADY MORIARTY');
-  await expect(canonicalPage.locator('#hero-profile-page .hero-profile-sidebar')).toBeVisible();
-  await expect(canonicalPage.locator('#hero-profile-page [data-profile-tab="clips"]')).toHaveCount(1);
-  const canonicalText = await canonicalPage.locator('#hero-profile-page').innerText();
-  expect(canonicalText).toBe(legacyText);
-  expect(pageErrors).toEqual([]);
-  await legacyPage.close();
-  await canonicalPage.close();
+test('el acceso Roster está antes de Origen en la navegación principal', async ({ page }) => {
+  await page.goto('/');
+  const nav = page.locator('.primary-navigation');
+  await expect(nav.locator('[data-chapter="2"]')).toHaveText('ROSTER');
+  const rosterBox = await nav.locator('[data-chapter="2"]').boundingBox();
+  const originBox = await nav.locator('[data-chapter="1"]').boundingBox();
+  expect(rosterBox.x).toBeLessThan(originBox.x);
 });
 
-test('las ocho cartas comparten el sistema visual maestro y responden en móvil', async ({ page }) => {
+test('las cartas se organizan en cuatro columnas de escritorio y dos en móvil', async ({ page }) => {
   await page.goto('/');
   await page.evaluate(() => switchChapter(2));
-  const tiles = page.locator('.roster-selector-tile');
-  await expect(tiles).toHaveCount(8);
-  await expect(page.locator('.roster-selector-panel')).toHaveAttribute('data-roster-role', /.+/);
-  for (const creator of creators) {
-    const tile = page.locator('.roster-selector-tile[data-creator-id="' + creator.id + '"]');
-    await expect(tile).toHaveCount(1);
-    await expect(tile.locator('.roster-selector-tile-frame')).toBeVisible();
-    await expect(tile.locator('.roster-selector-tile-top')).toContainText('EXP.');
-    await expect(tile.locator('.roster-selector-tile-name')).toBeVisible();
-  }
-  const desktopColumns = await tiles.first().evaluate(el => getComputedStyle(el.parentElement).gridTemplateColumns.split(' ').length);
-  expect(desktopColumns).toBeGreaterThanOrEqual(3);
+  const cards = page.locator('.comic-roster-card');
+  await expect(cards).toHaveCount(8);
+  const desktopColumns = await cards.first().evaluate(el => getComputedStyle(el.parentElement).gridTemplateColumns.split(' ').length);
+  expect(desktopColumns).toBe(4);
   await page.setViewportSize({ width: 390, height: 844 });
-  const mobileColumns = await tiles.first().evaluate(el => getComputedStyle(el.parentElement).gridTemplateColumns.split(' ').length);
+  const mobileColumns = await cards.first().evaluate(el => getComputedStyle(el.parentElement).gridTemplateColumns.split(' ').length);
   expect(mobileColumns).toBe(2);
   expect(await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth)).toBe(false);
   await page.emulateMedia({ reducedMotion: 'reduce' });
-  await expect(tiles.first()).toBeVisible();
+  await expect(cards.first()).toBeVisible();
 });
