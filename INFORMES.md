@@ -3353,3 +3353,15 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - La ficha ejecutiva existente se conserva dentro de Perfil. La pestaña Estadísticas añade barras comparativas relativas para métricas con datos disponibles en más de un integrante; las barras no se presentan como ranking ni como métricas oficiales.
 - Se conservan vacíos como “no disponible” cuando no hay dato. No se incorporan los números de ejemplo de Oratoris/Hábitos del fragmento proporcionado.
 - Pendiente: CI/Playwright de este commit y revisión visual real de escritorio/móvil.
+
+### Cierre QA del expediente comercial — 17/11/2026
+
+- **Commit funcional probado:** 30f4a0ebbac56c0b969492735789fb62cbce9855.
+- **GitHub Actions:** `validar` SUCCESS; incluye `node --check app.js`, validación de datos y suite Python.
+- **Python:** SUCCESS.
+- **Playwright:** SUCCESS. Se recorrieron los ocho expedientes; el panel inicia oculto, activa `.is-active` al abrir y se desactiva al volver. Se comprobaron la ficha comercial en Perfil, las barras de métricas en Estadísticas, las cinco pestañas, los retratos, las rutas y el historial.
+- **Responsive:** Playwright generó capturas de escritorio y móvil, verificó grilla 4×2/2×4 y ausencia de overflow horizontal.
+- **Cloudflare Pages preview:** deploy SUCCESS para el commit `30f4a0e`; URL: https://5c03b6e3.legion-multiversal.pages.dev.
+- **Artefacto visual:** `roster-visual-review-5530031615ea30d52fe3fc6f1b3b4c98cbba5eb1` (capturas automatizadas disponibles en Actions). Las capturas se generaron; no se declara una inspección manual de píxel a píxel.
+- **Producción:** sin cambios. PR #63 sigue Draft y sin merge.
+- **Integración pendiente:** la rama de la PR está 9 commits detrás de `main`; antes de integrar hay que sincronizarla y repetir CI sobre el HEAD resultante.
