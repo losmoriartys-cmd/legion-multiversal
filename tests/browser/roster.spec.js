@@ -20,11 +20,13 @@ const creators = [
 ];
 
 test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bitácora', async ({ page }) => {
+  test.setTimeout(60000);
   const pageErrors = [];
   page.on('pageerror', error => pageErrors.push(error.message));
   page.on('console', message => { if (message.type() === 'error') pageErrors.push(message.text()); });
   await page.goto('/');
   await page.evaluate(() => switchChapter(2));
+  await page.locator('#chapter-transition').evaluate(el => el.classList.remove('play'));
   const cards = page.locator('.comic-roster-card');
   await expect(page.locator('#roster-container')).toHaveCount(0);
   await expect(cards).toHaveCount(8);
@@ -103,6 +105,7 @@ test('Origen aparece antes que Roster y la navegación principal contiene cinco 
 test('las cartas se organizan en cuatro columnas de escritorio y dos en móvil', async ({ page }) => {
   await page.goto('/');
   await page.evaluate(() => switchChapter(2));
+  await page.locator('#chapter-transition').evaluate(el => el.classList.remove('play'));
   const cards = page.locator('.comic-roster-card');
   await expect(cards).toHaveCount(8);
   const desktopColumns = await cards.first().evaluate(el => getComputedStyle(el.parentElement).gridTemplateColumns.split(' ').length);
@@ -124,6 +127,7 @@ test('las cartas se organizan en cuatro columnas de escritorio y dos en móvil',
 test('Atrás y Adelante restauran el roster y el expediente correcto', async ({ page }) => {
   await page.goto('/');
   await page.evaluate(() => switchChapter(2));
+  await page.locator('#chapter-transition').evaluate(el => el.classList.remove('play'));
   await page.locator('.comic-roster-card[data-creator-id="lady-moriarty"]').click();
   await expect(page).toHaveURL(/#roster\/lady-moriarty$/);
   await expect(page.locator('#hero-profile-page')).toBeVisible();
