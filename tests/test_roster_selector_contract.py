@@ -97,6 +97,12 @@ class RosterComicCardsContractTests(unittest.TestCase):
         self.assertIn("pestaña Bitácora", mission["description"])
         self.assertIn("expedientes", achievement["title"].lower())
 
+    def test_dossier_visibility_rules_replace_roster_instead_of_appending_below(self):
+        css = (ROOT / "roster-selector.css").read_text(encoding="utf-8")
+        self.assertIn("#chapter-2 #roster-home[hidden]", css)
+        self.assertIn("#chapter-2 #hero-profile-page[hidden]", css)
+        self.assertIn("display:none !important", css)
+
     def test_only_one_roster_directory_remains_in_the_chapter(self):
         self.assertIn('id="roster-selector"', self.html)
         self.assertIn('id="roster"', self.html)
