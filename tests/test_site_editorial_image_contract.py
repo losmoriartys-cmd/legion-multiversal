@@ -34,7 +34,7 @@ class SiteEditorialImageContract(unittest.TestCase):
 
     def test_all_static_images_declare_verified_intrinsic_dimensions(self):
         images = re.findall(r"<img\b[^>]*>", self.html, flags=re.IGNORECASE)
-        self.assertEqual(len(images), 37)
+        self.assertEqual(len(images), 33)
         for image in images:
             self.assertRegex(image, r'\bwidth="[1-9][0-9]*"')
             self.assertRegex(image, r'\bheight="[1-9][0-9]*"')
@@ -70,7 +70,9 @@ class SiteEditorialImageContract(unittest.TestCase):
 
 
     def test_collaboration_archive_does_not_duplicate_roster_portraits_or_bitacora_index(self):
-        chapter = self.html.split('<section id="chapter-12"', 1)[1].split('</section>', 1)[0]
+        start = self.html.index('<section id="chapter-12"')
+        end = self.html.index('\n</section>', start)
+        chapter = self.html[start:end]
         self.assertNotIn('bitacora-preview.html', chapter)
         self.assertNotIn('assets/carnet/', chapter)
         self.assertNotIn('assets/ladymoriarty.jpg', chapter)
