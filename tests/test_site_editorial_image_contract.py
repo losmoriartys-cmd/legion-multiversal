@@ -34,7 +34,7 @@ class SiteEditorialImageContract(unittest.TestCase):
 
     def test_all_static_images_declare_verified_intrinsic_dimensions(self):
         images = re.findall(r"<img\b[^>]*>", self.html, flags=re.IGNORECASE)
-        self.assertEqual(len(images), 32)
+        self.assertEqual(len(images), 31)
         for image in images:
             self.assertRegex(image, r'\bwidth="[1-9][0-9]*"')
             self.assertRegex(image, r'\bheight="[1-9][0-9]*"')
