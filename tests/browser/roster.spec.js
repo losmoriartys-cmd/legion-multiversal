@@ -42,6 +42,7 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
 
     const dossier = page.locator('#hero-profile-page');
     await expect(dossier).toBeVisible();
+    await expect(page.locator('#roster-home')).toBeHidden();
     await expect(dossier).toContainText(creator.name);
     const profileTabs = dossier.locator('[role="tab"][data-profile-tab]');
     await expect(profileTabs).toHaveCount(5);
