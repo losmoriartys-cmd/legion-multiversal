@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-17T17:47:15Z",
+  "updated_at": "2026-11-17T18:37:51Z",
   "methodology": "Las métricas se conservan por creador y plataforma. No sumar ni comparar directamente unidades de plataformas distintas.",
   "creators": {
     "pato-oratoris": {
@@ -76,10 +76,10 @@
           "source": "YouTube Data API v3",
           "status": "verified",
           "methodology": "Datos públicos acumulados del canal y hasta 10 videos recientes. El contador de suscriptores puede estar redondeado por YouTube.",
-          "captured_at": "2026-11-17T17:47:15Z",
+          "captured_at": "2026-11-17T18:37:51Z",
           "history": [
             {
-              "captured_at": "2026-11-17T17:47:15Z",
+              "captured_at": "2026-11-17T18:37:51Z",
               "metrics": {
                 "subscribers": 56,
                 "total_views": 431,
@@ -94,7 +94,7 @@
   "collection_status": {
     "youtube": "enabled",
     "kick": "awaiting_secrets",
-    "captured_at": "2026-11-17T17:47:15Z",
+    "captured_at": "2026-11-17T18:37:51Z",
     "successful_accounts": 1,
     "failed_accounts": 0,
     "complete": true
