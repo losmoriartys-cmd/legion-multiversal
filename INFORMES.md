@@ -1,3 +1,16 @@
+## 2026-11-17 — Roster 01: cartas simultáneas y Bitácora directa
+
+- **Base de trabajo:** rama `integration/roster-unification-2026-11-16`; se conserva la separación respecto de `main` y producción.
+- **Decisión aplicada:** Roster pasa a Capítulo 01 después de Inicio; Origen queda como Capítulo 02 y Valores como Capítulo 03. Se mantienen los IDs técnicos de los capítulos para compatibilidad de hashes y navegación existente.
+- **Directorio:** se reemplaza la selección de un personaje con una ficha ampliada por una grilla simultánea de las ocho cartas. Cada frente incluye fotografía existente, identidad, plataforma/juego o especialidad, estado verificable, ritmo declarado, seguidores/media cuando existen y acceso directo al perfil.
+- **Bitácora:** la acción de una carta abre directamente el expediente con columna de identidad (35%) y contenido (65%), fotografía, estado, frase, redes, resumen y pestañas ya conectadas a datos del creador.
+- **Integridad de datos:** no se copian los números ilustrativos del ejemplo de Lady Carnet a LADYMORIARTY ni a otros perfiles. Los campos sin fuente se muestran como no disponibles.
+- **Pendiente de QA:** ejecutar pruebas JavaScript/HTML, validar hashes Atrás/Adelante, verificar las ocho cartas y la Bitácora en escritorio/móvil, y revisar contraste/encuadres de cada fotografía. No se declara desplegado ni publicado en producción.
+- **Pendiente funcional separado:** edición persistente de perfiles requiere autenticación y una API de escritura segura; no se añade un botón de edición que no pueda guardar en la fuente.
+- **Siguiente:** pruebas automatizadas y revisión visual de la preview de esta rama antes de cualquier integración a `main`.
+
+---
+
 ## 2026-11-16 — Reconciliación sin PR abiertos · base común del Roster
 
 - **Decisión operativa:** se cierra la acumulación de PR. #47 ya estaba cerrado sin merge; #52 y #54 se cerraron sin merge. #46 también está cerrado sin merge. No quedan PR abiertos en esta tanda. No se afirma que los cambios de esas ramas estén integrados.
