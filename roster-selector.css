@@ -574,3 +574,19 @@
 .collaboration-case-link strong { color:var(--yellow-accent,#ffde00); font:1.15rem 'Bangers',cursive; letter-spacing:.06em; }
 .collaboration-case-link:hover { border-color:var(--yellow-accent,#ffde00); background:rgba(55,44,20,.68); }
 @media(max-width:640px) { .collaboration-case-link { flex-direction:column; align-items:flex-start; } }
+
+#chapter-5 .arsenal-cover-placeholder {
+  display:grid;
+  place-items:center;
+  aspect-ratio:16/9;
+  min-height:150px;
+  padding:18px;
+  background:
+    radial-gradient(circle at 72% 30%,rgba(255,222,0,.22),transparent 30%),
+    linear-gradient(145deg,#321b16,#101a29 68%,#07101c);
+  border:1px solid rgba(255,222,0,.4);
+  color:#ffe17a;
+  font:clamp(2rem,5vw,3.4rem) 'Bangers',cursive;
+  letter-spacing:.12em;
+  text-shadow:4px 4px 0 #000;
+}
