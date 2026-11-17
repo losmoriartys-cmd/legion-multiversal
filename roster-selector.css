@@ -104,3 +104,97 @@
 #chapter-2 .roster-selector-tile:hover{transform:translateY(-3px);border-color:#c99b2d}
 @media(max-width:900px){#chapter-2 .roster-selector-rail{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}#chapter-2 .roster-selector-tile{flex:initial}}
 @media(max-width:520px){#chapter-2 .roster-selector-rail{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}#chapter-2 .roster-selector-tile-name{font-size:1.35rem}#chapter-2 .roster-selector-card-metrics{padding:6px 8px 8px;gap:5px}#chapter-2 .roster-selector-tile-info{padding:8px 8px 3px}#chapter-2 .roster-selector-tile-cue{margin:0 8px 8px;padding:7px 5px;font-size:.9rem}}
+
+
+/* ROSTER 01 · tarjetas completas en una sola vista, sin selector intermedio. */
+#chapter-2 > .comic-title,
+#chapter-2 .institute-banner,
+#chapter-2 .roster-intro,
+#chapter-2 .roster-tools,
+#chapter-2 #roster-counts,
+#chapter-2 #roster-container,
+#chapter-2 .roster-product-nav { display:none !important; }
+#chapter-2 #roster-home { display:block; }
+#chapter-2 .roster-selector { max-width:none; }
+#chapter-2 .comic-roster-heading { margin:0 0 22px; color:#fff8d6; }
+#chapter-2 .comic-roster-heading > span { color:#ffd500; font-size:.72rem; font-weight:900; letter-spacing:.16em; }
+#chapter-2 .comic-roster-heading h2 { margin:5px 0; font:clamp(2.2rem,4.5vw,3.8rem)/1 'Bangers',Impact,sans-serif; color:#fff8d6; text-shadow:3px 3px #000; }
+#chapter-2 .comic-roster-heading p { color:#d3d9e2; }
+#chapter-2 .comic-roster-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:clamp(12px,1.7vw,22px); align-items:stretch; }
+#chapter-2 .comic-roster-card { min-width:0; background:#fff8d6; border:3px solid #080808; box-shadow:7px 7px 0 #000; color:#111; }
+#chapter-2 .comic-roster-card-open { display:flex; width:100%; height:100%; min-width:0; flex-direction:column; padding:0; border:0; background:transparent; color:inherit; text-align:left; cursor:pointer; }
+#chapter-2 .comic-roster-photo { position:relative; display:block; height:clamp(190px,22vw,285px); overflow:hidden; background:#171717; }
+#chapter-2 .comic-roster-photo img { display:block; width:100%; height:100%; object-fit:cover; object-position:center 20%; }
+#chapter-2 .comic-roster-photo-shade { position:absolute; inset:35% 0 0; background:linear-gradient(transparent,rgba(0,0,0,.9)); }
+#chapter-2 .comic-roster-photo-copy { position:absolute; z-index:2; left:12px; right:10px; bottom:10px; display:flex; flex-direction:column; gap:2px; color:white; text-shadow:2px 2px #000; }
+#chapter-2 .comic-roster-photo-copy small { color:#ffd500; font-size:.66rem; font-weight:900; letter-spacing:.12em; }
+#chapter-2 .comic-roster-photo-copy strong { font:clamp(1.65rem,2.4vw,2.45rem)/.98 'Bangers',Impact,sans-serif; letter-spacing:.025em; -webkit-text-stroke:.7px #000; text-shadow:2px 2px 0 #000,-1px -1px 0 #000; }
+#chapter-2 .comic-roster-photo-copy em { font-style:normal; font-size:.78rem; font-weight:800; }
+#chapter-2 .comic-card-badge { position:absolute; z-index:3; top:9px; left:9px; padding:5px 8px; border:2px solid #080808; background:#ffd500; color:#111; font-size:.62rem; font-weight:900; }
+#chapter-2 .comic-card-badge-live { background:#d71932; color:#fff; }
+#chapter-2 .comic-card-badge-neutral { background:#fff8d6; color:#111; }
+#chapter-2 .comic-roster-card-data { display:flex; flex:1; flex-direction:column; gap:9px; padding:11px; }
+#chapter-2 .comic-roster-badges { display:flex; flex-wrap:wrap; gap:6px; }
+#chapter-2 .comic-roster-badges b { padding:5px 7px; border:2px solid #111; font-size:.59rem; line-height:1.2; font-weight:900; }
+#chapter-2 .comic-roster-frequency { background:#ffd500; color:#111; }
+#chapter-2 .comic-roster-activity { background:#fff; color:#111; }
+#chapter-2 .comic-roster-last-live { padding:5px 7px; background:#1e4bff; color:#fff; border:2px solid #111; font-size:.65rem; font-weight:900; }
+#chapter-2 .comic-roster-stat { display:flex; justify-content:space-between; gap:8px; padding:5px 0; border-bottom:1px solid rgba(0,0,0,.2); font-size:.78rem; }
+#chapter-2 .comic-roster-stat b { font-weight:900; }
+#chapter-2 .comic-roster-stat-purple { color:#6a1bff; }
+#chapter-2 .comic-roster-games { display:flex; flex-wrap:wrap; gap:5px; }
+#chapter-2 .comic-roster-games i { padding:4px 6px; border:1.5px solid #111; background:#fff; font-size:.6rem; font-style:normal; font-weight:800; }
+#chapter-2 .comic-roster-card-footer { display:flex; justify-content:space-between; align-items:center; gap:8px; margin-top:auto; padding-top:7px; }
+#chapter-2 .comic-roster-card-footer small { color:#333; font-size:.58rem; font-weight:800; }
+#chapter-2 .comic-roster-card-footer strong { padding:8px 10px; background:#080808; color:#fff; font-size:.7rem; font-weight:900; }
+#chapter-2 .comic-roster-card-open:focus-visible { outline:4px solid #1e4bff; outline-offset:4px; }
+#chapter-2 .comic-roster-card-open:hover .comic-roster-photo img { transform:scale(1.035); }
+#chapter-2 .comic-roster-photo img { transition:transform .25s ease; }
+@media(max-width:1050px) { #chapter-2 .comic-roster-grid { grid-template-columns:repeat(3,minmax(0,1fr)); } }
+@media(max-width:720px) { #chapter-2 .comic-roster-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; } #chapter-2 .comic-roster-photo { height:clamp(170px,42vw,250px); } }
+@media(max-width:420px) { #chapter-2 .comic-roster-grid { grid-template-columns:1fr; } #chapter-2 .comic-roster-photo { height:270px; } }
+
+/* Bitácora individual · composición fija 35/65 en escritorio y apilada en móvil. */
+#chapter-2 .comic-profile-layout { display:grid; grid-template-columns:minmax(260px,35%) minmax(0,65%); gap:0; border:3px solid #080808; background:#fff8d6; color:#111; box-shadow:9px 9px 0 #000; }
+#chapter-2 .comic-profile-identity { min-width:0; padding:14px; border-right:3px solid #080808; background:#fff8d6; }
+#chapter-2 .comic-profile-photo { position:relative; min-height:460px; overflow:hidden; border:3px solid #080808; background:#181818; }
+#chapter-2 .comic-profile-photo > img { display:block; width:100%; height:100%; min-height:460px; object-fit:cover; object-position:center 18%; }
+#chapter-2 .comic-profile-photo-title { position:absolute; inset:auto 0 0; display:flex; flex-direction:column; gap:4px; padding:50px 12px 12px; background:linear-gradient(transparent,rgba(0,0,0,.94)); color:#fff; }
+#chapter-2 .comic-profile-photo-title h2 { margin:0; color:#fff; font:clamp(2.1rem,3.2vw,3.4rem)/.92 'Bangers',Impact,sans-serif; -webkit-text-stroke:1px #000; text-shadow:3px 3px #000; }
+#chapter-2 .comic-profile-photo-title span { color:#ffd500; font-weight:900; font-size:.78rem; letter-spacing:.08em; }
+#chapter-2 .comic-profile-photo-title small { color:#fff; font-weight:800; }
+#chapter-2 .comic-profile-live { position:absolute; z-index:3; top:10px; left:10px; padding:6px 8px; border:2px solid #080808; background:#d71932; color:#fff; font-size:.68rem; font-weight:900; }
+#chapter-2 .comic-profile-live-quiet { background:#fff8d6; color:#111; }
+#chapter-2 .comic-profile-quote,#chapter-2 .comic-profile-summary blockquote { margin:12px 0; padding:12px; border:3px solid #080808; background:#fff; color:#111; box-shadow:4px 4px 0 #000; }
+#chapter-2 .comic-profile-quote small,#chapter-2 .comic-profile-summary blockquote small { display:block; margin-bottom:7px; color:#d71932; font-size:.65rem; font-weight:900; }
+#chapter-2 .comic-profile-quote strong,#chapter-2 .comic-profile-summary blockquote strong { display:block; font:clamp(1.15rem,1.8vw,1.65rem)/1.1 'Bangers',Impact,sans-serif; letter-spacing:.02em; }
+#chapter-2 .comic-profile-links h3 { margin:14px 0 8px; color:#111; font:1.15rem 'Bangers',Impact,sans-serif; }
+#chapter-2 .comic-profile-links a { display:inline-flex; margin:4px 4px 0 0; padding:10px 12px; border:2px solid #111; background:#6a1bff; color:#fff; font-weight:900; text-decoration:none; }
+#chapter-2 .comic-profile-content { min-width:0; padding:16px; }
+#chapter-2 .comic-profile-topline { display:flex; justify-content:space-between; gap:12px; align-items:center; margin-bottom:12px; color:#d71932; font-size:.68rem; font-weight:900; }
+#chapter-2 .comic-profile-topline b { padding:6px 8px; border:2px solid #111; background:#ffd500; color:#111; text-align:right; }
+#chapter-2 .comic-profile-summary { margin-top:14px; }
+#chapter-2 .comic-profile-summary > p { color:#171717; line-height:1.55; }
+#chapter-2 .comic-profile-facts { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; margin-top:12px; }
+#chapter-2 .comic-profile-facts > div { display:flex; flex-direction:column; gap:5px; min-width:0; padding:10px; border:2px solid #111; background:#ffd500; }
+#chapter-2 .comic-profile-facts > div:nth-child(2) { background:#fff; }
+#chapter-2 .comic-profile-facts > div:nth-child(3) { background:#1e4bff; color:#fff; }
+#chapter-2 .comic-profile-facts small { font-size:.6rem; font-weight:900; }
+#chapter-2 .comic-profile-facts b { font-size:.8rem; overflow-wrap:anywhere; }
+#chapter-2 .comic-profile-content .hero-profile-tabs-wrap { margin-top:14px; }
+#chapter-2 .comic-profile-content .hero-profile-tabs { display:flex; gap:4px; overflow-x:auto; border-bottom:3px solid #111; }
+#chapter-2 .comic-profile-content .hero-profile-tab { flex:0 0 auto; padding:9px 11px; border:2px solid #111; border-bottom:0; background:#fff; color:#111; font-size:.7rem; font-weight:900; }
+#chapter-2 .comic-profile-content .hero-profile-tab.is-active { background:#080808; color:#ffd500; }
+#chapter-2 .comic-profile-content .hero-profile-tab-panel { padding:14px 0; color:#111; }
+#chapter-2 .comic-profile-content .hero-profile-tab-panel h4 { color:#111; }
+#chapter-2 .comic-profile-content .hero-profile-pager { margin-top:12px; }
+#chapter-2 .comic-profile-page { color:#111; }
+@media(max-width:800px) {
+ #chapter-2 .comic-profile-layout { grid-template-columns:1fr; }
+ #chapter-2 .comic-profile-identity { border-right:0; border-bottom:3px solid #080808; }
+ #chapter-2 .comic-profile-photo { min-height:390px; max-height:620px; }
+ #chapter-2 .comic-profile-photo > img { min-height:390px; max-height:620px; }
+ #chapter-2 .comic-profile-facts { grid-template-columns:1fr; }
+ #chapter-2 .comic-profile-topline { align-items:flex-start; flex-direction:column; }
+}
+@media(prefers-reduced-motion:reduce) { #chapter-2 .comic-roster-photo img { transition:none; } }
