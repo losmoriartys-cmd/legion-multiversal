@@ -236,7 +236,12 @@
 #chapter-2 .roster-selector-card-metrics small{display:block;font-size:.58rem;color:#71664f}
 #chapter-2 .roster-selector-tile-cue{display:block;margin:0 11px 11px;padding:8px 10px;background:#101722;color:#f8e9bf;text-align:center;font:1rem 'Bangers',Impact,sans-serif}
 #chapter-2 .roster-selector-tile-live{top:9px;left:auto;right:9px;border:1px solid #080d18;border-radius:0;padding:5px 8px;background:#c92836;box-shadow:2px 2px 0 #080d18}
-#chapter-2 .roster-selector-panel,#chapter-2 .roster-selector-progress,#chapter-2 .roster-selector-comparator,#chapter-2 .roster-selector-method{display:none!important}
+/* El expediente se controla desde JS con [hidden] e .is-active. */
+#chapter-2 .roster-selector-panel{display:none}
+#chapter-2 .roster-selector-panel.is-active{display:block!important}
+#chapter-2 .roster-selector-comparator,
+#chapter-2 .roster-selector-method{display:block}
+#chapter-2 .roster-selector-progress{display:block}
 @media(max-width:900px){#chapter-2 .roster-selector-rail{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}}
 @media(max-width:520px){#chapter-2 .roster-selector-rail{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}#chapter-2 .roster-selector-tile-name{font-size:1.35rem}#chapter-2 .roster-selector-card-metrics{padding:6px 8px 8px}#chapter-2 .roster-selector-tile-info{padding:8px 8px 3px}#chapter-2 .roster-selector-tile-cue{margin:0 8px 8px;padding:7px 5px;font-size:.9rem}}
 
@@ -654,4 +659,25 @@
     overflow-wrap:anywhere;
     word-break:break-word;
   }
+}
+
+
+/* Ficha comercial · barras comparativas transparentes, solo con datos verificables. */
+#chapter-2 .hero-profile-metric-scale{
+ display:block;height:7px;margin:10px 0 5px;overflow:hidden;
+ border:1px solid rgba(132,183,209,.34);border-radius:999px;
+ background:rgba(5,12,22,.78);
+}
+#chapter-2 .hero-profile-metric-scale span{
+ display:block;height:100%;border-radius:inherit;
+ background:linear-gradient(90deg,#00d2ff,#e7c66a);
+}
+#chapter-2 .hero-profile-metric-scale-note{
+ display:block;margin-top:4px;color:var(--selector-muted);
+ font-size:.64rem;line-height:1.4;
+}
+#chapter-2 .roster-selector-panel[hidden]{display:none!important}
+#chapter-2 .roster-selector-panel.is-active:not([hidden]){display:block!important}
+@media(prefers-reduced-motion:reduce){
+ #chapter-2 .hero-profile-metric-scale span{transition:none!important}
 }
