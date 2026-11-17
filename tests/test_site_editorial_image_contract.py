@@ -34,7 +34,7 @@ class SiteEditorialImageContract(unittest.TestCase):
 
     def test_all_static_images_declare_verified_intrinsic_dimensions(self):
         images = re.findall(r"<img\b[^>]*>", self.html, flags=re.IGNORECASE)
-        self.assertEqual(len(images), 33)
+        self.assertEqual(len(images), 32)
         for image in images:
             self.assertRegex(image, r'\bwidth="[1-9][0-9]*"')
             self.assertRegex(image, r'\bheight="[1-9][0-9]*"')
@@ -79,6 +79,7 @@ class SiteEditorialImageContract(unittest.TestCase):
         self.assertNotIn('assets/rod3r1k.jpg', chapter)
         self.assertNotIn('assets/akuma.jpg', chapter)
         self.assertIn('BarFenderLos4.jpg', chapter)
+        self.assertEqual(self.html.count('image_20261107_184951-si-que-tenga-referencias-y-el-titutlo-del-juego-ba.jpg'), 1)
 
     def test_editorial_chapter_labels_and_numbers_are_present(self):
         expected = {
