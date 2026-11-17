@@ -472,3 +472,5 @@
  #chapter-2 .comic-roster-stat { font-size:.68rem; }
  #chapter-2 .comic-roster-games i { font-size:.54rem; }
 }
+
+#chapter-2 .comic-profile-channel-cta { display:inline-flex; align-items:center; padding:7px 9px; border:2px solid #111; background:#ffd500; color:#111; font-size:.65rem; font-weight:900; text-decoration:none; }
