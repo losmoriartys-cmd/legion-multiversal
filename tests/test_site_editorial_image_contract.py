@@ -71,8 +71,8 @@ class SiteEditorialImageContract(unittest.TestCase):
     def test_editorial_chapter_labels_and_numbers_are_present(self):
         expected = {
             "CAPÍTULO 00 · INICIO": 'data-editorial-number="0"',
-            "CAPÍTULO 01 · ORIGEN": 'data-editorial-number="1"',
-            "CAPÍTULO 02 · VALORES": 'data-editorial-number="2"',
+            "CAPÍTULO 02 · ORIGEN": 'data-editorial-number="2"',
+            "CAPÍTULO 03 · VALORES": 'data-editorial-number="3"',
             "CAPÍTULO 04 · ESTADÍSTICAS": 'data-editorial-number="4"',
             "CAPÍTULO 05 · COMUNIDAD": 'data-editorial-number="5"',
             "CAPÍTULO 06 · ALIANZAS": 'data-editorial-number="6"',
