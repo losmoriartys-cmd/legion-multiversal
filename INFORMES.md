@@ -3326,9 +3326,13 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **Valores, Comunidad y Alianzas:** se conservan como pilares complementarios accesibles desde Colaborá con nosotros, fuera del paginador principal para no interrumpir el recorrido. Cada pilar conserva su contenido fuente y ofrece retorno al capítulo de colaboración.
 - **Criterio editorial:** Valores se presenta como manifiesto; Comunidad mantiene misiones/logros alimentados por community-playbook.json; Alianzas conserva credenciales y formatos potenciales, sin presentarlos como campañas contratadas ni prometer resultados.
 - **Otros archivos:** Colaboraciones, Arsenal y Mapa Multiversal quedan fuera del recorrido principal y conservan acceso contextual/retorno; no se duplican perfiles ni fotografías.
-- **Cambios realizados en esta rama:** index.html, roster-selector.css y contratos Python/Playwright para reflejar el nuevo orden.
-- **Pendiente de verificación:** ejecutar unittest y Playwright; validar escritorio/móvil, navegación Atrás/Adelante, acceso a los tres pilares, enlaces y ausencia de desbordamiento. No se declara aprobado visualmente ni desplegado.
-- **Salvaguarda:** cambios confinados a la rama de trabajo; no se modificó main, no se fusionó ni se publicó producción.
+- **Cambios realizados en esta rama:** `index.html`, `app.js`, `roster-data.json`, `community-playbook.json`, `roster-selector.css`, validadores y contratos Python/Playwright.
+- **Roster único:** se retiró la grilla heredada; queda una sola grilla de ocho cartas. Se conserva el ancla `#roster`; el expediente oculta el directorio y lo reemplaza, evitando que ambos aparezcan juntos.
+- **Responsive:** navegación móvil de cinco destinos en dos filas; cartas en dos columnas; se añadió una comprobación explícita de overflow horizontal en el expediente móvil.
+- **Bitácora y Comunidad:** la misión se registra al abrir la pestaña Bitácora del expediente individual. El índice externo quedó fuera del recorrido y sin enlaces desde la página principal.
+- **Revisión visual:** escritorio 4×2 y móvil 2×4; ilustraciones originales y métricas visibles; expediente con carnet, enlaces sociales y cinco pestañas. La captura de Playwright limpia la transición animada y fuerza la carga de las ocho ilustraciones para revisar el conjunto.
+- **Validación:** `python-tests`, `qa-portable` y despliegue de preview Cloudflare están en SUCCESS para el HEAD `02580bc`. La suite completa Python + Playwright pasó en `64a1416`; está corriendo una repetición con el último contrato de overflow móvil y captura de imágenes.
+- **Salvaguarda:** cambios confinados a la rama de trabajo; no se modificó `main`, no se fusionó ni se publicó producción.
 
 
 ### Ajuste de identidad visual y no duplicación — 17/11/2026
@@ -3338,4 +3342,4 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - Los ocho assets ya existían en el commit de `main` incorporado como segundo padre de la rama; no se generaron ni duplicaron archivos binarios.
 - Se eliminó el bloque de acceso a la Bitácora externa desde Colaboraciones y se reemplazaron los cuatro retratos individuales del caso BarFender por una lista textual de participantes. Se conserva la imagen grupal específica del caso.
 - Se añadieron contratos para comprobar el mapeo exacto, la separación arte/retrato y la ausencia de retratos repetidos en el archivo colaborativo.
-- **Pendiente:** validar el nuevo HEAD con Actions y revisar las capturas del navegador antes de considerar cerrado el QA visual.
+- **Cierre de revisión visual:** se detectó y corrigió que el CSS mantenía visible el Roster al abrir un expediente; las reglas `[hidden]` ahora aseguran que el expediente sustituya la grilla. Se validó en capturas de escritorio y móvil.
