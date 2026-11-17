@@ -1014,7 +1014,9 @@ function renderRosterSelector() {
         const isSelected = (hero.id || hero.slug) === selectedRosterCreatorId;
         const image = hero.portrait || hero.img || '';
         const windowStats = state?.channel?.window || {};
-        const followerLabel = state?.channel?.followers_total == null ? '—' : Number(state.channel.followers_total).toLocaleString('es-AR');
+        const socialMetrics = platformStatsData?.creators?.[platformStatsKey(hero)]?.platforms || {};
+        const followerValue = state?.channel?.followers_total ?? socialMetrics.youtube?.metrics?.subscribers;
+        const followerLabel = followerValue == null ? '—' : Number(followerValue).toLocaleString('es-AR');
         const averageLabel = windowStats.average_viewers_sampled == null ? '—' : Number(windowStats.average_viewers_sampled).toLocaleString('es-AR',{maximumFractionDigits:1});
         return '<button type="button" class="roster-selector-tile' + (isSelected ? ' is-selected' : '') + '" data-roster-select="' + index + '" data-creator-id="' + safe(hero.id || hero.slug) + '" data-roster-role="' + safe(hero.role || 'member') + '" aria-label="Conocer a ' + safe(getHeroDisplayName(hero)) + ', expediente ' + safe(hero.cardNumber || String(index + 1).padStart(3, '0')) + '">' +
             '<span class="roster-selector-tile-frame">' +
@@ -1234,6 +1236,9 @@ function showRosterChapter() {
 function renderHeroProfileTabs(hero) {
  const safe=escapeStatsHtml,record=getCreatorRecord(hero),channel=findChannelStats(hero),win=channel?.window||{};
  const metrics=[['SEGUIDORES',channel?.followers_total],['PROMEDIO MUESTRAL',win.average_viewers_sampled],['PICO MUESTRAL',win.peak_viewers_sampled],['HORAS OBSERVADAS',win.observed_live_hours]];
+ const socialMetrics=platformStatsData?.creators?.[platformStatsKey(hero)]?.platforms||{};
+ const followerValue=channel?.followers_total??socialMetrics.youtube?.metrics?.subscribers;
+ metrics[0][1]=followerValue;
  const metricHtml=metrics.map(([label,value])=>'<article class="hero-profile-metric"><small>'+safe(label)+'</small><strong>'+(value==null?'—':safe(typeof value==='number'?value.toLocaleString('es-AR',{maximumFractionDigits:1}):value))+'</strong></article>').join('');
  const games=findSullyChannel(hero)?.game_performance||[];
  const gameHtml=games.length?'<ul class="hero-profile-detail-list">'+games.slice(0,10).map(g=>'<li><strong>'+safe(g.name||'Categoría')+'</strong><span>'+safe(g.stream_time_hours??g.stream_hours??'—')+' h emitidas</span></li>').join('')+'</ul>':'<p class="hero-profile-empty">Todavía no hay un desglose de juegos verificable para este perfil.</p>';
@@ -1280,6 +1285,10 @@ function openHeroProfile(index, triggerElement = document.activeElement, options
         + '<button class="hero-profile-back" type="button" onclick="closeHeroProfile()">VOLVER AL ROSTER</button>';
     const profilePager = '<nav class="hero-profile-pager" aria-label="Navegación entre expedientes"><button type="button" onclick="navigateHeroProfile(-1)"' + (previousDisabled ? ' disabled' : '') + '>← ANTERIOR</button><span>EXPEDIENTE ' + (profilePosition >= 0 ? profilePosition + 1 : '—') + ' / ' + filteredProfiles.length + '</span><button type="button" onclick="navigateHeroProfile(1)"' + (nextDisabled ? ' disabled' : '') + '>SIGUIENTE →</button></nav>';
     const liveState=getRosterLiveState(hero);
+    const socialMetrics=platformStatsData?.creators?.[platformStatsKey(hero)]?.platforms||{};
+    const topFollowers=liveState?.channel?.followers_total??socialMetrics.youtube?.metrics?.subscribers;
+    const topAverage=liveState?.channel?.window?.average_viewers_sampled;
+    const topMetrics='<div class="hero-profile-top-metrics"><span><small>'+(socialMetrics.youtube?.metrics?.subscribers!=null?'SUSCRIPTORES':'SEGUIDORES')+'</small><b>'+(topFollowers==null?'—':escapeStatsHtml(Number(topFollowers).toLocaleString('es-AR')))+'</b></span><span><small>MEDIA MUESTRAL</small><b>'+(topAverage==null?'—':escapeStatsHtml(Number(topAverage).toLocaleString('es-AR',{maximumFractionDigits:1})))+'</b></span><span><small>PICO MUESTRAL</small><b>'+(liveState?.channel?.window?.peak_viewers_sampled==null?'—':escapeStatsHtml(liveState.channel.window.peak_viewers_sampled))+'</b></span></div>';
     const liveBadge=liveState?.fresh&&liveState.channel?.live?'<span class="hero-profile-live is-live">● EN VIVO · '+escapeStatsHtml(liveState.channel.current_viewers??'EN DIRECTO')+'</span>':liveState?.fresh?'<span class="hero-profile-live">OFFLINE · CAPTURA ACTUALIZADA</span>':'<span class="hero-profile-live is-unknown">ESTADO NO DISPONIBLE</span>';
     page.innerHTML = '<div class="hero-profile-layout hero-profile-gateway"><div class="hero-profile-art-wrap"><div class="hero-profile-art-frame"><span class="hero-profile-art-stamp">LEGIÓN<br>MULTIVERSAL</span>' + (profileArt ? '<img class="hero-profile-art" src="' + escapeStatsHtml(profileArt) + '" alt="' + escapeStatsHtml(profileArtAlt) + '" loading="eager" onerror="this.closest(\'.hero-profile-art-frame\').classList.add(\'art-unavailable\');this.remove();">' : '<div class="hero-profile-art-fallback">ILUSTRACIÓN NO DISPONIBLE</div>') + '<span class="hero-profile-art-caption">EXPEDIENTE N.º ' + escapeStatsHtml(hero.cardNumber || 'S/N') + '</span></div></div><div class="hero-profile-copy"><span class="stats-status">EXPEDIENTE INDIVIDUAL · ' + escapeStatsHtml(hero.rank || 'CLASIFICACIÓN PENDIENTE') + '</span><p class="profile-section-kicker">ARCHIVO PERSONAL · ' + escapeStatsHtml(hero.cardNumber ? 'N.º ' + hero.cardNumber : 'REGISTRO DE LA LEGIÓN') + '</p><h3 id="hero-profile-title" tabindex="-1">' + escapeStatsHtml(getHeroDisplayName(hero)) + '</h3><p>' + escapeStatsHtml(hero.bio || 'Presentación personal pendiente de completar.') + '</p><div class="hero-profile-live-row">' + liveBadge + '</div><div class="hero-profile-actions">' + renderCreatorPlatformLinks(hero) + profileActions + '</div></div></div>' + renderHeroProfileTabs(hero) + profilePager;
     page.querySelectorAll('[data-profile-tab]').forEach(button=>button.addEventListener('click',()=>activateHeroProfileTab(button)));
