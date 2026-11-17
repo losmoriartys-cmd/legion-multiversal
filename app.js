@@ -984,120 +984,44 @@ let selectedRosterCreatorId = null;
 function renderRosterSelector() {
     const host = document.getElementById('roster-selector');
     if (!host || !Array.isArray(heroesData) || !heroesData.length) return;
-    const selected = heroesData.find(hero => (hero.id || hero.slug) === selectedRosterCreatorId) || heroesData[0];
-    selectedRosterCreatorId = selected.id || selected.slug;
-    const liveStates = heroesData.map(hero => ({ hero, state: getRosterLiveState(hero) }));
-    const freshLive = liveStates.filter(item => item.state?.fresh && item.state.channel?.live);
-    const progress = readLegionProgress();
-    const known = heroesData.filter(hero => progress.profiles.includes(String(hero.cardNumber || hero.name))).length;
     const safe = escapeStatsHtml;
     const primaryAccount = hero => (hero.accounts || []).find(account => account.account_type === 'creator_channel') || (hero.accounts || [])[0] || null;
-    const accountLabel = account => account ? String(account.platform || 'plataforma').toUpperCase() : 'PLATAFORMA POR CONFIRMAR';
-    const liveState = hero => getRosterLiveState(hero);
-    const selectedState = liveState(selected);
-    const selectedLive = Boolean(selectedState?.fresh && selectedState.channel?.live);
-    const platform = primaryAccount(selected);
-    const platformUrl = platform?.url || selected.twitch || selected.youtube || '';
-    const platformName = accountLabel(platform);
-    const areas = (selected.areas || []).filter(value => value && value !== 'Especialidad por definir');
-    const schedule = selected.schedule || selected.mediaProfile?.schedule || '';
-    const creatorType = selected.creator_type === 'video_creator' ? 'CREADOR DE VIDEO' : selected.creator_type === 'live_streamer' ? 'CREADOR EN DIRECTO' : 'FORMATO POR CONFIRMAR';
-    const hasFreshActivity = liveStates.some(item => item.state?.fresh);
-    const liveSummary = freshLive.length
-        ? '<span class="roster-selector-live-count">● ' + freshLive.length + ' EN VIVO AHORA</span>'
-        : '<span class="roster-selector-live-count is-quiet">' + (hasFreshActivity ? 'SIN DIRECTOS DETECTADOS EN LA ÚLTIMA CAPTURA' : 'ESTADO DE DIRECTOS NO DISPONIBLE / DATOS DEMORADOS') + '</span>';
-    const tiles = heroesData.map((hero, index) => {
-        const account = primaryAccount(hero);
-        const state = liveState(hero);
-        const tileType = hero.creator_type === 'video_creator' ? 'CREADOR DE VIDEO' : hero.creator_type === 'live_streamer' ? 'CREADOR EN DIRECTO' : 'FORMATO POR CONFIRMAR';
+    const cards = heroesData.map((hero, index) => {
+        const state = getRosterLiveState(hero);
         const isLive = Boolean(state?.fresh && state.channel?.live);
-        const isSelected = (hero.id || hero.slug) === selectedRosterCreatorId;
+        const account = primaryAccount(hero);
         const image = hero.portrait || hero.img || '';
         const windowStats = state?.channel?.window || {};
-        const socialMetrics = platformStatsData?.creators?.[platformStatsKey(hero)]?.platforms || {};
-        const followerValue = state?.channel?.followers_total ?? socialMetrics.youtube?.metrics?.subscribers;
-        const followerLabel = followerValue == null ? '—' : Number(followerValue).toLocaleString('es-AR');
-        const averageLabel = windowStats.average_viewers_sampled == null ? '—' : Number(windowStats.average_viewers_sampled).toLocaleString('es-AR',{maximumFractionDigits:1});
-        return '<button type="button" class="roster-selector-tile' + (isSelected ? ' is-selected' : '') + '" data-roster-select="' + index + '" data-creator-id="' + safe(hero.id || hero.slug) + '" data-roster-role="' + safe(hero.role || 'member') + '" aria-label="Conocer a ' + safe(getHeroDisplayName(hero)) + ', expediente ' + safe(hero.cardNumber || String(index + 1).padStart(3, '0')) + '">' +
-            '<span class="roster-selector-tile-frame">' +
-            (image ? '<img src="' + safe(image) + '" alt="" loading="' + (index < 4 ? 'eager' : 'lazy') + '" decoding="async">' : '<span class="roster-selector-no-portrait" aria-hidden="true">' + safe((hero.display_name || hero.name || '?').slice(0,1)) + '</span>') +
-            '<span class="roster-selector-tile-top"><span>ARCHIVO LM</span><span>EXP. ' + safe(hero.cardNumber || String(index + 1).padStart(3, '0')) + '</span></span>' +
-            (isLive ? '<span class="roster-selector-tile-live">● EN VIVO</span>' : '') +
-            '<span class="roster-selector-tile-info"><span class="roster-selector-tile-role">' + safe(hero.codename || tileType) + '</span><span class="roster-selector-tile-name">' + safe(getHeroDisplayName(hero)) + '</span></span>' + '<span class="roster-selector-card-metrics"><span><small>SEGUIDORES</small><b>' + safe(followerLabel) + '</b></span><span><small>MEDIA MUESTRAL</small><b>' + safe(averageLabel) + '</b></span></span><span class="roster-selector-tile-cue">VER PERFIL ↗</span>' +
-            '</span></button>';
+        const social = platformStatsData?.creators?.[platformStatsKey(hero)]?.platforms || {};
+        const followers = state?.channel?.followers_total ?? social.youtube?.metrics?.subscribers ?? null;
+        const average = windowStats.average_viewers_sampled ?? null;
+        const followerLabel = followers == null ? 'NO DISPONIBLE' : Number(followers).toLocaleString('es-AR');
+        const averageLabel = average == null ? 'NO DISPONIBLE' : Number(average).toLocaleString('es-AR',{maximumFractionDigits:1});
+        const frequency = hero.schedule || hero.mediaProfile?.schedule || (hero.creator_type === 'video_creator' ? 'Publicaciones' : 'Sin frecuencia confirmada');
+        const platform = account?.platform ? String(account.platform).toUpperCase() : 'CANAL';
+        const games = (hero.areas || []).filter(Boolean).slice(0,3);
+        const status = isLive ? 'EN VIVO AHORA' : state?.fresh ? 'CAPTURA ACTUALIZADA' : 'ESTADO NO DISPONIBLE';
+        const badge = isLive ? '<span class="comic-card-badge comic-card-badge-live">● EN VIVO</span>' : '<span class="comic-card-badge comic-card-badge-neutral">' + safe(status) + '</span>';
+        return '<article class="comic-roster-card" data-creator-id="' + safe(hero.id || hero.slug) + '">' +
+            '<button type="button" class="comic-roster-card-open" data-roster-select="' + index + '" aria-label="Abrir bitácora de ' + safe(getHeroDisplayName(hero)) + '">' +
+              '<span class="comic-roster-photo">' +
+                (image ? '<img src="' + safe(image) + '" alt="Retrato de ' + safe(getHeroDisplayName(hero)) + '" loading="' + (index < 4 ? 'eager' : 'lazy') + '" decoding="async">' : '<span class="comic-roster-photo-fallback">RETRATO PENDIENTE</span>') +
+                '<span class="comic-roster-photo-shade"></span><span class="comic-roster-photo-copy"><small>' + safe(hero.codename || hero.characterRole || 'INTEGRANTE DE LA LEGIÓN') + '</small><strong>' + safe(getHeroDisplayName(hero)) + '</strong><em>🎮 ' + safe(games[0] || platform) + '</em></span>' + badge +
+              '</span>' +
+              '<span class="comic-roster-card-data"><span class="comic-roster-badges"><b class="comic-roster-frequency">RITMO: ' + safe(frequency.toUpperCase()) + '</b><b class="comic-roster-activity">' + safe(isLive ? 'ACTIVO EN VIVO' : status) + '</b></span>' +
+                '<span class="comic-roster-last-live">' + safe(platform) + (state?.channel?.current_game ? ' · ' + safe(state.channel.current_game) : '') + '</span>' +
+                '<span class="comic-roster-stat"><span>Seguidores</span><b>' + safe(followerLabel) + '</b></span>' +
+                '<span class="comic-roster-stat"><span>Media de viewers</span><b class="comic-roster-stat-purple">' + safe(averageLabel) + '</b></span>' +
+                '<span class="comic-roster-games">' + (games.length ? games.map(game => '<i>' + safe(game) + '</i>').join('') : '<i>Especialidad en desarrollo</i>') + '</span>' +
+                '<span class="comic-roster-card-footer"><small>' + safe(hero.role_label || 'INTEGRANTE') + '</small><strong>VER PERFIL →</strong></span></span>' +
+            '</button></article>';
     }).join('');
-    const tags = areas.length ? areas.slice(0,3).map(area => '<span>' + safe(area) + '</span>').join('') : '<span>Especialidad por definir</span>';
-    const liveLabel = selected.creator_type === 'video_creator'
-        ? '<span class="roster-selector-status">FORMATO DE CONTENIDO EN VIDEO</span>'
-        : selectedLive
-            ? '<span class="roster-selector-status is-live">● EN VIVO' + (selectedState.channel.current_game ? ' · ' + safe(selectedState.channel.current_game) : '') + '</span>'
-            : selectedState?.fresh
-                ? '<span class="roster-selector-status">OFFLINE · ÚLTIMA CAPTURA ACTUALIZADA</span>'
-                : '<span class="roster-selector-status is-unknown">ESTADO NO DISPONIBLE</span>';
-    const scheduleLabel = schedule
-        ? safe(schedule)
-        : selected.creator_type === 'video_creator' ? 'Frecuencia de publicación por confirmar' : 'Horario por confirmar';
-    const identity = selected.codename || selected.characterRole || 'Identidad en desarrollo';
-    const intro = selected.mediaProfile?.editorial || selected.bio || 'Presentación personal en desarrollo.';
-    const idealText = areas.length ? areas.join(' · ') : selected.id === 'dave-nexus' ? 'Conocer su nueva etapa como creador' : 'Especialidad en desarrollo';
-    const quote = selected.voice ? '<blockquote>' + safe(selected.voice) + '</blockquote>' : '';
-    const profileIndex = heroesData.indexOf(selected);
-    const compareRows = heroesData.map(hero => {
-        const account = primaryAccount(hero);
-        const rowAreas = (hero.areas || []).filter(value => value && value !== 'Especialidad por definir');
-        const rowSchedule = hero.schedule || hero.mediaProfile?.schedule || 'Por confirmar';
-        return '<tr><th scope="row">' + safe(getHeroDisplayName(hero)) + '</th><td>' + safe(accountLabel(account)) + '</td><td>' + safe(rowAreas.length ? rowAreas.join(' · ') : 'Por definir') + '</td><td>' + safe(rowSchedule) + '</td><td class="roster-selector-na">No disponible</td></tr>';
-    }).join('');
-    host.innerHTML = '<div class="roster-selector-heading"><div><span class="roster-selector-kicker">ARCHIVO CENTRAL · SELECCIÓN DE PERSONAJES</span><h2>CONOCÉ AL ROSTER</h2><p>Ocho integrantes. Ocho identidades. Una misma Legión.</p></div><div class="roster-selector-actions">' + liveSummary + '<button type="button" class="roster-selector-surprise" id="roster-selector-surprise">SORPRENDEME ↗</button></div></div>' +
-        '<div class="roster-selector-progress"><span id="roster-selector-progress-text" aria-live="polite">CONOCISTE ' + known + ' DE ' + heroesData.length + '</span><div class="roster-selector-progress-track" role="progressbar" aria-label="Integrantes conocidos" aria-valuemin="0" aria-valuemax="' + heroesData.length + '" aria-valuenow="' + known + '"><i style="width:' + (known / heroesData.length * 100) + '%"></i></div></div>' +
-        '<div class="roster-selector-rail" role="list" aria-label="Integrantes de Legión Multiversal">' + tiles + '</div>' +
-        '<section class="roster-selector-panel" id="roster-selector-panel" data-roster-role="' + safe(selected.role || 'member') + '" role="tabpanel" aria-labelledby="roster-tab-' + safe(selected.id || selected.slug) + '" tabindex="0">' +
-        '<div class="roster-selector-art"><span class="roster-selector-art-kicker">LEGIÓN MULTIVERSAL · ARCHIVO DE PERSONAJES</span>' + (selected.img || selected.portrait ? '<img src="' + safe(selected.img || selected.portrait) + '" alt="Ilustración de ' + safe(getHeroDisplayName(selected)) + '" loading="eager" decoding="async">' : '<span>RETRATO PENDIENTE</span>') + '<span class="roster-selector-art-number">EXP. ' + safe(selected.cardNumber || 'S/N') + '</span></div>' +
-        '<div class="roster-selector-copy"><span class="roster-selector-identity">' + safe(identity) + ' · ' + safe(creatorType) + '</span><h3>' + safe(getHeroDisplayName(selected)) + '</h3><p class="roster-selector-real-identity">' + safe(selected.identity_scope === 'shared_project' ? 'Proyecto compartido de ' + (selected.represented_people || []).join(' y ') : selected.identity_scope === 'individual_creator' ? 'Creador/a individual' : 'Integrante de Legión Multiversal') + '</p>' +
-        '<div class="roster-selector-tags">' + tags + '</div><p class="roster-selector-ideal"><strong>IDEAL SI TE GUSTA:</strong> ' + safe(idealText) + '</p>' +
-        '<p class="roster-selector-description">' + safe(intro) + '</p>' + quote +
-        '<div class="roster-selector-meta">' + liveLabel + '<span>PLATAFORMA · ' + safe(platformName) + '</span><span>HORARIO · ' + scheduleLabel + '</span></div>' +
-        '<div class="roster-selector-cta"><button type="button" class="roster-selector-primary" id="roster-selector-open-profile">ABRIR EXPEDIENTE ↗</button>' + (platformUrl ? '<a class="roster-selector-platform" href="' + safe(platformUrl) + '" target="_blank" rel="noopener noreferrer">VER EN ' + safe(platformName) + ' ↗</a>' : '') + '</div></div></section>' +
-        '<details class="roster-selector-comparator"><summary>PARA MARCAS · COMPARADOR DE PERFILES</summary><div class="roster-selector-table-wrap"><table><thead><tr><th>CREADOR</th><th>PLATAFORMA</th><th>ESPECIALIDADES</th><th>HORARIO / FRECUENCIA</th><th>MÉTRICAS COMPARABLES</th></tr></thead><tbody>' + compareRows + '</tbody></table></div><p>Las métricas se publicarán cuando exista una ventana, fuente y metodología comparables para los ocho perfiles. No se mezclan datos de plataformas ni períodos diferentes.</p></details>';
-    host.querySelector('.roster-selector-rail')?.addEventListener('keydown', event => {
-        const buttons = Array.from(host.querySelectorAll('[data-roster-select]'));
-        const current = buttons.indexOf(document.activeElement);
-        let next = null;
-        if (event.key === 'ArrowRight' || event.key === 'ArrowDown') next = (Math.max(0,current) + 1) % buttons.length;
-        if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') next = (Math.max(0,current) - 1 + buttons.length) % buttons.length;
-        if (event.key === 'Home') next = 0;
-        if (event.key === 'End') next = buttons.length - 1;
-        if (next !== null && buttons[next]) { event.preventDefault(); buttons[next].focus(); }
-    });
+    host.innerHTML = '<div class="comic-roster-heading"><span>ARCHIVO CENTRAL · CAPÍTULO 01</span><h2>LAS PERSONAS DETRÁS DE LA LEGIÓN</h2><p>Ocho identidades. Una misma Legión. Cada expediente empieza acá.</p></div><div class="comic-roster-grid" role="list" aria-label="Integrantes de Legión Multiversal">' + cards + '</div>';
     host.querySelectorAll('[data-roster-select]').forEach(button => {
-        button.addEventListener('click', () => openHeroProfile(Number(button.dataset.rosterSelect), button));
-        button.addEventListener('pointermove', event => {
-            if (event.pointerType !== 'mouse' || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-            const rect = button.getBoundingClientRect();
-            const x = (event.clientX - rect.left) / Math.max(rect.width, 1);
-            const y = (event.clientY - rect.top) / Math.max(rect.height, 1);
-            button.style.setProperty('--card-tilt-x', ((.5 - y) * 7).toFixed(2) + 'deg');
-            button.style.setProperty('--card-tilt-y', ((x - .5) * 9).toFixed(2) + 'deg');
-            button.style.setProperty('--card-shine-x', (x * 100).toFixed(1) + '%');
-            button.style.setProperty('--card-shine-y', (y * 100).toFixed(1) + '%');
-            button.classList.add('is-tilting');
-        });
-        button.addEventListener('pointerleave', () => {
-            button.style.setProperty('--card-tilt-x', '0deg');
-            button.style.setProperty('--card-tilt-y', '0deg');
-            button.style.setProperty('--card-shine-x', '50%');
-            button.style.setProperty('--card-shine-y', '50%');
-            button.classList.remove('is-tilting');
-        });
+        button.addEventListener('click', event => openHeroProfile(Number(button.dataset.rosterSelect), event.currentTarget));
     });
-    host.querySelector('#roster-selector-surprise')?.addEventListener('click', () => {
-        const candidates = heroesData.map((hero,index) => index).filter(index => (heroesData[index].id || heroesData[index].slug) !== selectedRosterCreatorId);
-        const next = candidates[Math.floor(Math.random() * candidates.length)];
-        selectRosterCreator(next, true);
-    });
-    host.querySelector('#roster-selector-open-profile')?.addEventListener('click', event => openHeroProfile(profileIndex, event.currentTarget));
-    host.querySelectorAll('.roster-selector-tile img').forEach(image => image.addEventListener('error', () => {
-        image.replaceWith(Object.assign(document.createElement('span'), { className: 'roster-selector-no-portrait', textContent: 'RETRATO' }));
+    host.querySelectorAll('.comic-roster-card img').forEach(image => image.addEventListener('error', () => {
+        image.replaceWith(Object.assign(document.createElement('span'), { className: 'comic-roster-photo-fallback', textContent: 'RETRATO NO DISPONIBLE' }));
     }, { once: true }));
 }
 function selectRosterCreator(index, moveFocus) {
@@ -1271,33 +1195,56 @@ function openHeroProfile(index, triggerElement = document.activeElement, options
     const home = document.getElementById('roster-home');
     const page = document.getElementById('hero-profile-page');
     if (!home || !page) return;
-    const channel = hero.youtube || hero.twitch || '';
     window.lastHeroProfileTrigger = triggerElement instanceof HTMLElement ? triggerElement : window.lastHeroProfileTrigger || null;
     window.currentHeroProfileIndex = index;
-    const profileArt = hero.img || hero.portrait || '';
-    const profileArtAlt = 'Ilustración oficial de ' + getHeroDisplayName(hero) + ' para su expediente individual';
+    const profileArt = hero.portrait || hero.img || '';
+    const profileArtAlt = 'Fotografía de ' + getHeroDisplayName(hero);
     const filteredProfiles = getRosterFilteredEntries();
     const profilePosition = filteredProfiles.findIndex(entry => entry.index === index);
     const previousDisabled = profilePosition <= 0;
     const nextDisabled = profilePosition < 0 || profilePosition >= filteredProfiles.length - 1;
-    const profileActions = '<button class="twitch-link-btn" type="button" onclick="openHeroModal(' + index + ')">ABRIR BITÁCORA COMPLETA</button>'
-        + renderCreatorPlatformLinks(hero)
-        + '<button class="hero-profile-back" type="button" onclick="closeHeroProfile()">VOLVER AL ROSTER</button>';
-    const profilePager = '<nav class="hero-profile-pager" aria-label="Navegación entre expedientes"><button type="button" onclick="navigateHeroProfile(-1)"' + (previousDisabled ? ' disabled' : '') + '>← ANTERIOR</button><span>EXPEDIENTE ' + (profilePosition >= 0 ? profilePosition + 1 : '—') + ' / ' + filteredProfiles.length + '</span><button type="button" onclick="navigateHeroProfile(1)"' + (nextDisabled ? ' disabled' : '') + '>SIGUIENTE →</button></nav>';
-    const liveState=getRosterLiveState(hero);
-    const socialMetrics=platformStatsData?.creators?.[platformStatsKey(hero)]?.platforms||{};
-    const topFollowers=liveState?.channel?.followers_total??socialMetrics.youtube?.metrics?.subscribers;
-    const topAverage=liveState?.channel?.window?.average_viewers_sampled;
-    const topMetrics='<div class="hero-profile-top-metrics"><span><small>'+(socialMetrics.youtube?.metrics?.subscribers!=null?'SUSCRIPTORES':'SEGUIDORES')+'</small><b>'+(topFollowers==null?'—':escapeStatsHtml(Number(topFollowers).toLocaleString('es-AR')))+'</b></span><span><small>MEDIA MUESTRAL</small><b>'+(topAverage==null?'—':escapeStatsHtml(Number(topAverage).toLocaleString('es-AR',{maximumFractionDigits:1})))+'</b></span><span><small>PICO MUESTRAL</small><b>'+(liveState?.channel?.window?.peak_viewers_sampled==null?'—':escapeStatsHtml(liveState.channel.window.peak_viewers_sampled))+'</b></span></div>';
-    const liveBadge=liveState?.fresh&&liveState.channel?.live?'<span class="hero-profile-live is-live">● EN VIVO · '+escapeStatsHtml(liveState.channel.current_viewers??'EN DIRECTO')+'</span>':liveState?.fresh?'<span class="hero-profile-live">OFFLINE · CAPTURA ACTUALIZADA</span>':'<span class="hero-profile-live is-unknown">ESTADO NO DISPONIBLE</span>';
-    page.innerHTML = '<div class="hero-profile-layout hero-profile-gateway"><div class="hero-profile-art-wrap"><div class="hero-profile-art-frame"><span class="hero-profile-art-stamp">LEGIÓN<br>MULTIVERSAL</span>' + (profileArt ? '<img class="hero-profile-art" src="' + escapeStatsHtml(profileArt) + '" alt="' + escapeStatsHtml(profileArtAlt) + '" loading="eager" onerror="this.closest(\'.hero-profile-art-frame\').classList.add(\'art-unavailable\');this.remove();">' : '<div class="hero-profile-art-fallback">ILUSTRACIÓN NO DISPONIBLE</div>') + '<span class="hero-profile-art-caption">EXPEDIENTE N.º ' + escapeStatsHtml(hero.cardNumber || 'S/N') + '</span></div></div><div class="hero-profile-copy"><span class="stats-status">EXPEDIENTE INDIVIDUAL · ' + escapeStatsHtml(hero.rank || 'CLASIFICACIÓN PENDIENTE') + '</span><p class="profile-section-kicker">ARCHIVO PERSONAL · ' + escapeStatsHtml(hero.cardNumber ? 'N.º ' + hero.cardNumber : 'REGISTRO DE LA LEGIÓN') + '</p><h3 id="hero-profile-title" tabindex="-1">' + escapeStatsHtml(getHeroDisplayName(hero)) + '</h3><p>' + escapeStatsHtml(hero.bio || 'Presentación personal pendiente de completar.') + '</p><div class="hero-profile-live-row">' + liveBadge + '</div><div class="hero-profile-actions">' + renderCreatorPlatformLinks(hero) + profileActions + '</div></div></div>' + renderHeroProfileTabs(hero) + profilePager;
+    const liveState = getRosterLiveState(hero);
+    const isLive = Boolean(liveState?.fresh && liveState.channel?.live);
+    const liveBadge = isLive
+        ? '<span class="comic-profile-live">● EN VIVO · ' + escapeStatsHtml(liveState.channel.current_viewers ?? 'EN DIRECTO') + ' VIENDO</span>'
+        : '<span class="comic-profile-live comic-profile-live-quiet">' + (liveState?.fresh ? '● ÚLTIMA CAPTURA ACTUALIZADA' : '● ESTADO DEL CANAL NO DISPONIBLE') + '</span>';
+    const accountLinks = renderCreatorPlatformLinks(hero);
+    const phrase = hero.voice || 'Cada integrante aporta una voz propia a la historia de la Legión.';
+    const description = hero.mediaProfile?.editorial || hero.bio || 'Presentación personal pendiente de completar.';
+    const rhythm = hero.schedule || hero.mediaProfile?.schedule || 'Sin frecuencia confirmada';
+    const platform = ((hero.accounts || []).find(account => account.account_type === 'creator_channel') || {}).platform || (hero.platforms || [])[0] || 'Canal';
+    const pager = '<nav class="hero-profile-pager comic-profile-pager" aria-label="Navegación entre expedientes"><button type="button" onclick="navigateHeroProfile(-1)"' + (previousDisabled ? ' disabled' : '') + '>← ANTERIOR</button><span>EXPEDIENTE ' + (profilePosition >= 0 ? profilePosition + 1 : '—') + ' / ' + filteredProfiles.length + '</span><button type="button" onclick="navigateHeroProfile(1)"' + (nextDisabled ? ' disabled' : '') + '>SIGUIENTE →</button></nav>';
+    page.innerHTML = '<div class="comic-profile-layout">' +
+      '<aside class="comic-profile-identity">' +
+        '<div class="comic-profile-photo">' + liveBadge + (profileArt ? '<img src="' + escapeStatsHtml(profileArt) + '" alt="' + escapeStatsHtml(profileArtAlt) + '" loading="eager" onerror="this.closest(\'.comic-profile-photo\').classList.add(\'is-unavailable\');this.remove();">' : '<div class="hero-profile-art-fallback">RETRATO NO DISPONIBLE</div>') +
+          '<div class="comic-profile-photo-title"><h2>' + escapeStatsHtml(getHeroDisplayName(hero)) + '</h2><span>' + escapeStatsHtml(hero.codename || hero.characterRole || 'INTEGRANTE DE LA LEGIÓN') + '</span><small>' + escapeStatsHtml((hero.areas || []).slice(0,3).join(' / ') || platform) + '</small></div></div>' +
+        '<blockquote class="comic-profile-quote"><small>' + escapeStatsHtml(getHeroDisplayName(hero)) + ' DICE:</small><strong>' + escapeStatsHtml(phrase.replace(/[«»]/g,'')) + '</strong></blockquote>' +
+        '<section class="comic-profile-links"><h3>ENLACES DEL CANAL</h3>' + (accountLinks || '<p>Enlaces de canal pendientes de registrar.</p>') + '</section>' +
+      '</aside>' +
+      '<section class="comic-profile-content">' +
+        '<div class="comic-profile-topline"><span>LEGIÓN › ROSTER › ' + escapeStatsHtml(getHeroDisplayName(hero)) + '</span><b>' + escapeStatsHtml(rhythm.toUpperCase()) + ' · ' + (isLive ? 'EN VIVO' : 'ESTADO ACTUALIZADO') + '</b></div>' +
+        renderHeroProfileTabs(hero) +
+        '<div class="comic-profile-summary"><blockquote><small>GLOBO DE DIÁLOGO</small><strong>' + escapeStatsHtml(phrase.replace(/[«»]/g,'')) + '</strong></blockquote><p>' + escapeStatsHtml(description) + '</p>' +
+          '<div class="comic-profile-facts"><div><small>FRECUENCIA</small><b>' + escapeStatsHtml(rhythm) + '</b></div><div><small>ÚLTIMO VIVO</small><b>' + (liveState?.channel?.stream_started_at ? escapeStatsHtml(statsDate(String(liveState.channel.stream_started_at).slice(0,10))) : (liveState?.fresh && liveState.channel?.live ? 'En vivo ahora' : 'Sin dato confirmado')) + '</b></div><div><small>ESTADO DEL CANAL</small><b>' + escapeStatsHtml(isLive ? 'En vivo' : liveState?.fresh ? 'Captura actualizada' : 'No disponible') + '</b></div></div>' +
+        '</div>' + pager +
+      '</section></div>';
     page.querySelectorAll('[data-profile-tab]').forEach(button=>button.addEventListener('click',()=>activateHeroProfileTab(button)));
-    page.querySelector('.hero-profile-tabs')?.addEventListener('keydown',event=>{if(!['ArrowRight','ArrowLeft','Home','End'].includes(event.key))return;const buttons=Array.from(page.querySelectorAll('[data-profile-tab]'));const current=buttons.indexOf(document.activeElement);let next=current;if(event.key==='ArrowRight')next=(current+1)%buttons.length;if(event.key==='ArrowLeft')next=(current-1+buttons.length)%buttons.length;if(event.key==='Home')next=0;if(event.key==='End')next=buttons.length-1;event.preventDefault();buttons[next]?.focus();if(buttons[next])activateHeroProfileTab(buttons[next]);});
+    page.querySelector('.hero-profile-tabs')?.addEventListener('keydown',event=>{
+        if(!['ArrowRight','ArrowLeft','Home','End'].includes(event.key))return;
+        const buttons=Array.from(page.querySelectorAll('[data-profile-tab]'));
+        const current=buttons.indexOf(document.activeElement);
+        let next=current;
+        if(event.key==='ArrowRight')next=(current+1)%buttons.length;
+        if(event.key==='ArrowLeft')next=(current-1+buttons.length)%buttons.length;
+        if(event.key==='Home')next=0;
+        if(event.key==='End')next=buttons.length-1;
+        event.preventDefault();buttons[next]?.focus();if(buttons[next])activateHeroProfileTab(buttons[next]);
+    });
     home.hidden = true;
     page.hidden = false;
     setHeroProfileRoute(hero, options.historyMode || 'push');
     page.scrollIntoView({behavior:'smooth',block:'start'});
-    requestAnimationFrame(() => document.getElementById('hero-profile-title')?.focus({preventScroll:true}));
+    requestAnimationFrame(() => page.querySelector('.comic-profile-content [role="tab"]')?.focus({preventScroll:true}));
 }
 function navigateHeroProfile(direction) {
     const entries = getRosterFilteredEntries();
