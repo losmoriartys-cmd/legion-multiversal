@@ -85,7 +85,7 @@
     </style>
     <link rel="stylesheet" href="./chapter-8.css?v=20261116-portrait-framing-1" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="./chapter-8.css?v=20261116-portrait-framing-1"></noscript>
     <link rel="stylesheet" href="./roster-fixes.css?v=20261116-roster-visual-1" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="./roster-fixes.css?v=20261116-roster-visual-1"></noscript>
-    <link rel="stylesheet" href="./roster-selector.css?v=20261116-roster-metrics-1" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="./roster-selector.css?v=20261116-roster-metrics-1"></noscript>
+    <link rel="stylesheet" href="./roster-selector.css?v=20261117-comic-cards-1" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="./roster-selector.css?v=20261117-comic-cards-1"></noscript>
     <style id="conversion-overhaul-inline">
 /* Optimización de conversión · 16/11/2026
    Reduce la altura de navegación y prioriza el primer CTA sin alterar la identidad editorial. */
@@ -413,11 +413,12 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
             <button id="sound-toggle" class="sound-toggle" type="button" aria-pressed="false" onclick="toggleArcadeSound()" title="Activar o silenciar la identidad sonora">♫ SONIDO: OFF</button>
         </div>
         <nav class="primary-navigation" aria-label="Recorridos principales">
+            <button class="nav-btn nav-btn-roster" data-chapter="2" onclick="switchChapter(2)">ROSTER</button>
+            <button class="nav-btn" data-chapter="1" onclick="switchChapter(1)">ORIGEN</button>
             <button class="nav-btn nav-btn-live" data-chapter="10" onclick="switchChapter(10)">MIRAR <span aria-hidden="true">●</span></button>
             <button class="nav-btn" data-chapter="12" onclick="switchChapter(12)">EXPERIENCIAS</button>
             <a class="nav-btn" data-chapter="8" href="./marcas/">PARA MARCAS</a>
             <button class="nav-btn" data-chapter="6" onclick="switchChapter(6)">UNITE</button>
-            <button class="nav-btn" data-chapter="1" onclick="switchChapter(1)">ORIGEN</button>
         </nav>
 <button id="mission-progress-trigger" class="mission-progress-trigger" type="button" onclick="openMultiverseMap()" aria-label="Abrir Mapa Multiversal y consultar misiones">MISIONES <strong id="mission-progress-count">0/0</strong></button>
     </header>
@@ -516,8 +517,8 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
             </section>
         </section>
 
-<section id="chapter-1" class="chapter-panel chapter-one origin-editorial" data-editorial-number="1" aria-labelledby="origin-title">
- <div class="chapter-tag">CAPÍTULO 01 · ORIGEN</div>
+<section id="chapter-1" class="chapter-panel chapter-one origin-editorial" data-editorial-number="2" aria-labelledby="origin-title">
+ <div class="chapter-tag">CAPÍTULO 02 · ORIGEN</div>
  <header class="origin-editorial-hero">
   <div class="origin-editorial-copy">
    <span class="origin-editorial-kicker">ARCHIVO CENTRAL · PRIMERA ETAPA</span>
@@ -578,14 +579,14 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
  </section>
 </section>
 
-<section id="chapter-2" class="chapter-panel comic-page" data-editorial-number="3">
-            <div class="chapter-tag">CAPÍTULO 03 · ROSTER</div>
+<section id="chapter-2" class="chapter-panel comic-page" data-editorial-number="1">
+            <div class="chapter-tag">CAPÍTULO 01 · ROSTER</div>
             
             <h2 id="roster" class="comic-title">LEGIÓN MULTIVERSAL — NUESTRO ROSTER</h2>
             <div class="institute-banner"><div class="institute-stamp" aria-label="Emblema oficial de la Legión Multiversal"><img src="legion_logo_final_hybrid-256.webp" alt="Emblema de Legión Multiversal" loading="lazy" decoding="async" width="256" height="256" srcset="legion_logo_final_hybrid-256.webp 256w, legion_logo_final_hybrid-512.webp 512w, legion_logo_final_hybrid.webp 1600w" sizes="112px"><span>ARCHIVO DE LA LEGIÓN</span></div><div class="institute-banner-copy"><h3>LAS PERSONAS DETRÁS DE LA LEGIÓN</h3><p>Ocho integrantes, ocho identidades creativas y un universo compartido. Cada persona conserva su canal, su especialidad y su expediente propio dentro de la Legión.</p></div></div>
             <div id="roster-home">
               <div id="roster-selector" class="roster-selector" aria-live="polite"><p class="roster-selector-loading">CARGANDO LOS OCHO EXPEDIENTES…</p></div>
-              <p class="roster-intro">Explorá las cartas de la Legión, filtrá por especialidad o plataforma y abrí cualquier expediente directamente. Cada creador conserva su identidad y su espacio propio.</p>
+              <p class="roster-intro">Las ocho cartas están visibles al mismo tiempo. Seleccioná una para abrir directamente su Bitácora individual.</p>
               <div class="roster-tools" role="search" aria-label="Buscar integrantes y aplicar filtros">
                 <label class="roster-search-field" for="roster-search"><span>BUSCAR EN EL ROSTER</span><input id="roster-search" type="search" placeholder="Nombre, alias, handle o especialidad…" autocomplete="off"></label>
                 <div class="roster-quick-filters">
@@ -679,8 +680,8 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
   <div class="stats-table-wrap"><table class="stats-table"><thead><tr><th>Canal</th><th>Estado</th><th>Espectadores actuales</th><th>Categoría</th><th>Promedio observado</th><th>Pico observado</th><th>Horas observadas</th><th>Muestras</th><th>Cobertura del intervalo muestreado</th></tr></thead><tbody id="stats-table-body"><tr><td colspan="9">Cargando estadísticas…</td></tr></tbody></table></div>
  </details>
 </section>
-<section id="chapter-11" class="chapter-panel comic-page manifesto-chapter" data-editorial-number="2">
- <div class="chapter-tag">CAPÍTULO 02 · VALORES</div>
+<section id="chapter-11" class="chapter-panel comic-page manifesto-chapter" data-editorial-number="3">
+ <div class="chapter-tag">CAPÍTULO 03 · VALORES</div>
  <header class="manifesto-hero" aria-labelledby="manifesto-title"><span class="manifesto-kicker">LEGIÓN MULTIVERSAL · MANIFIESTO</span><h2 id="manifesto-title">NO BUSCAMOS QUE<br>TODOS SEAN IGUALES.<br><em>BUSCAMOS QUE CADA UNO<br>TENGA UN LUGAR.</em></h2><p>Una Legión no se construye sumando nombres. Se construye cuando personas distintas eligen avanzar juntas.</p></header>
  <section class="manifesto-origin"><span>LO QUE NOS UNE</span><h3>CADA INTEGRANTE TIENE SU PROPIO UNIVERSO.</h3><p>Su voz, su humor, sus intereses, sus tiempos y su manera de crear. No queremos borrar esas diferencias: queremos que convivan. Legión Multiversal es un espacio para compartir videojuegos, entretenimiento, ideas y proyectos sin tener que dejar de ser quien sos.</p></section>
  <div class="manifesto-values-grid" role="list" aria-label="Seis valores de Legión Multiversal">
