@@ -700,3 +700,13 @@ No hay todavía CI asociado a esta tanda ni QA visual real en navegador. Antes d
 - QA manual visual en distintos dispositivos y lector de pantalla continúa siendo una revisión posterior; CI no sustituye esa inspección.
 
 La rama continúa aislada de producción. No se creó PR ni se fusionó a `main`.
+
+
+## 2026-11-17 — Decisión editorial: Roster como capítulo 01 y acceso directo
+
+- El Roster pasa a ser el primer capítulo de contenido, inmediatamente después de Inicio: 01 Roster, 02 Origen, 03 Valores. Se conservan los IDs técnicos de los paneles para no romper rutas ni enlaces.
+- El capítulo Roster presenta todas las cartas simultáneamente en una única grilla; se elimina el selector de personaje con panel de vista previa como paso intermedio.
+- Cada carta reúne retrato, alias/identidad, métricas disponibles, frecuencia/estado y acceso directo a su Bitácora.
+- Al hacer clic se abre directamente la Bitácora individual en composición 35/65, con retrato fijo, enlaces, frase, descripción, datos de actividad y pestañas.
+- No se inventan cifras ni estados de actividad. Cuando seguidores, media o último directo no tienen fuente verificable, se informa su indisponibilidad.
+- La edición persistente de perfiles queda fuera de esta entrega visual: requiere una superficie administrativa autenticada y escritura segura sobre la fuente de datos; no se simula un botón de edición público.
