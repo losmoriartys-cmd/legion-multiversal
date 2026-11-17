@@ -55,10 +55,43 @@ class RosterComicCardsContractTests(unittest.TestCase):
         start = self.app.index("function renderRosterSelector()")
         end = self.app.index("\nfunction selectRosterCreator", start)
         renderer = self.app[start:end]
-        self.assertIn("hero.img ?", renderer)
-        self.assertIn('alt="Ilustración de ', renderer)
         self.assertIn("hero.portrait ?", renderer)
+        self.assertIn('alt="Fotografía carnet de ', renderer)
+        self.assertIn("hero.portrait", renderer)
+        self.assertNotIn("hero.img ?", renderer)
         self.assertIn("const portrait = hero.portrait || hero.img || ''", self.app)
+        self.assertIn("const characterArt = hero.fullbody || hero.img", self.app)
+        self.assertIn("hero-profile-character-art", self.app)
+
+    def test_each_dossier_has_a_distinct_full_body_character_asset(self):
+        expected_fullbody = {
+            "moriartys": "Cyberpunk_Cyborg_Portrait-hay-muchas-que-dejaron-de-ser-animadas-la-idea-es.jpg",
+            "rod3r1k": "Superhero_Camera_Portrait-hay-muchas-que-dejaron-de-ser-animadas-la-idea-es.jpg",
+            "lady-moriarty": "Red_Haired_Mystic_Witch-hay-muchas-que-dejaron-de-ser-animadas-la-idea-es.jpg",
+            "ardipii": "Hooded_Atomic_Figure-hay-muchas-que-dejaron-de-ser-animadas-la-idea-es.jpg",
+            "akuma": "image_20261117_045605.jpg",
+            "dave-nexus": "Purple_Cyberpunk_Warrior-hay-muchas-que-dejaron-de-ser-animadas-la-idea-es.jpg",
+            "pato-oratoris": "Bald_Man_In_Gold_Armor-hay-muchas-que-dejaron-de-ser-animadas-la-idea-es.jpg",
+            "habitos": "Sci_Fi_Superhero_Portrait-hay-muchas-que-dejaron-de-ser-animadas-la-idea-es.jpg",
+        }
+        expected_cards = {
+            "moriartys": "assets/heroes/moriartys_dark.jpg",
+            "rod3r1k": "assets/heroes/rod3r1k_dark.webp",
+            "lady-moriarty": "assets/heroes/ladymoriarty_dark.jpg",
+            "ardipii": "assets/heroes/ardipii_dark.webp",
+            "akuma": "assets/heroes/akuma_dark.jpg",
+            "dave-nexus": "assets/heroes/nexus_dark.webp",
+            "pato-oratoris": "assets/heroes/oratoris_dark.webp",
+            "habitos": "assets/heroes/habitos_dark.webp",
+        }
+        heroes = {hero["id"]: hero for hero in self.roster["heroes"]}
+        self.assertEqual({hero_id: hero["fullbody"] for hero_id, hero in heroes.items()}, expected_fullbody)
+        self.assertEqual({hero_id: hero["character_card"] for hero_id, hero in heroes.items()}, expected_cards)
+        for asset in [*expected_fullbody.values(), *expected_cards.values()]:
+            self.assertTrue((ROOT / asset).is_file())
+        self.assertIn("hero.fullbody || hero.img", self.app)
+        self.assertIn("hero.character_card", self.app)
+        self.assertIn("VER CARTA DEL PERSONAJE", self.app)
 
     def test_cards_use_real_metrics_and_no_fixed_schedule(self):
         start = self.app.index("function renderRosterSelector()")

@@ -52,10 +52,12 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
     await expect(profileTabs).toHaveCount(5);
 
     const cardImage = card.locator('.comic-roster-photo img');
+    await expect(cardImage).toHaveAttribute('alt', /Fotografía carnet/);
+    expect(await cardImage.getAttribute('src')).toContain('assets/carnet/');
     await expect.poll(() => cardImage.evaluate(img => img.naturalWidth)).toBeGreaterThan(0);
     const cardImageStyle = await cardImage.evaluate(img => ({ fit: getComputedStyle(img).objectFit, position: getComputedStyle(img).objectPosition }));
     expect(cardImageStyle.fit).toBe('cover');
-    expect(cardImageStyle.position).toContain('0%');
+    expect(cardImageStyle.position).toContain('18%');
 
     const dossierImage = dossier.locator('.hero-profile-id-image img');
     await expect(dossierImage).toBeVisible();
@@ -63,6 +65,18 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
     const dossierImageStyle = await dossierImage.evaluate(img => ({ fit: getComputedStyle(img).objectFit, position: getComputedStyle(img).objectPosition }));
     expect(dossierImageStyle.fit).toBe('cover');
     expect(dossierImageStyle.position).toContain('0%');
+    const characterArt = dossier.locator('.hero-profile-character-art img');
+    await expect(characterArt).toBeVisible();
+    expect(await characterArt.getAttribute('src')).not.toContain('assets/heroes/');
+    await expect(characterArt).toHaveAttribute('alt', /Ilustración de cuerpo entero/);
+    await expect.poll(() => characterArt.evaluate(img => img.naturalWidth)).toBeGreaterThan(0);
+    const characterCard = dossier.locator('.hero-profile-character-card');
+    await expect(characterCard).toBeVisible();
+    await expect(characterCard.locator('img')).toHaveCount(1);
+    await expect(characterCard).not.toHaveAttribute('open', '');
+    await characterCard.locator('summary').click();
+    await expect(characterCard).toHaveAttribute('open', '');
+    await expect.poll(() => characterCard.locator('img').evaluate(img => img.naturalWidth)).toBeGreaterThan(0);
     await expect(dossier.locator('.hero-profile-sidebar-quote')).toBeVisible();
     await expect(dossier.locator('.hero-profile-socials')).toBeVisible();
     await expect(dossier.locator('.hero-profile-poster')).toHaveCount(0);

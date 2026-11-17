@@ -97,7 +97,9 @@
       "links": [],
       "tagline": "Dupla gamer y videoclub retro: cooperativo, humor y cultura pop.",
       "role_label": "DIRECCIÓN",
-      "schedule": "Lunes y miércoles 20:00 · viernes 21:00 (hora Argentina)"
+      "schedule": "Lunes y miércoles 20:00 · viernes 21:00 (hora Argentina)",
+      "fullbody": "Cyberpunk_Cyborg_Portrait-hay-muchas-que-dejaron-de-ser-animadas-la-idea-es.jpg",
+      "character_card": "assets/heroes/moriartys_dark.jpg"
     },
     {
       "name": "ROD3R1K",
@@ -188,7 +190,9 @@
       },
       "tagline": "Gaming de acción, eventos grupales y momentos épicos en directo.",
       "role_label": "DIRECCIÓN",
-      "schedule": "Lunes a viernes 20:00 (hora Argentina)"
+      "schedule": "Lunes a viernes 20:00 (hora Argentina)",
+      "fullbody": "Superhero_Camera_Portrait-hay-muchas-que-dejaron-de-ser-animadas-la-idea-es.jpg",
+      "character_card": "assets/heroes/rod3r1k_dark.webp"
     },
     {
       "name": "LADYMORIARTY",
@@ -282,7 +286,9 @@
       },
       "tagline": "Gameplay chill, IRL y conexión espontánea con la comunidad.",
       "role_label": "CREADORA",
-      "schedule": "1 a 2 veces por semana, sin horario fijo; mayormente 19:00–20:00 (hora Argentina)"
+      "schedule": "1 a 2 veces por semana, sin horario fijo; mayormente 19:00–20:00 (hora Argentina)",
+      "fullbody": "Red_Haired_Mystic_Witch-hay-muchas-que-dejaron-de-ser-animadas-la-idea-es.jpg",
+      "character_card": "assets/heroes/ladymoriarty_dark.jpg"
     },
     {
       "name": "ARDIPII",
@@ -371,7 +377,9 @@
       "tagline": "Gaming cooperativo, cercanía con el chat e interacción en directo.",
       "role_label": "CREADOR",
       "powers": "Especialidad: gaming cooperativo, cercanía con el chat e interacción en directo.",
-      "schedule": "Martes y jueves 23:00 (hora Argentina)"
+      "schedule": "Martes y jueves 23:00 (hora Argentina)",
+      "fullbody": "Hooded_Atomic_Figure-hay-muchas-que-dejaron-de-ser-animadas-la-idea-es.jpg",
+      "character_card": "assets/heroes/ardipii_dark.webp"
     },
     {
       "name": "AKUMA",
@@ -462,7 +470,9 @@
       "tagline": "Gaming, charlas y encuentros para compartir nuevas experiencias.",
       "role_label": "DOCENTE",
       "powers": "Especialidad: gaming, charlas y partidas compartidas con la comunidad; su rol docente aporta una dimensión de acompañamiento y aprendizaje.",
-      "schedule": "Lunes a viernes 21:00 (hora Argentina)"
+      "schedule": "Lunes a viernes 21:00 (hora Argentina)",
+      "fullbody": "image_20261117_045605.jpg",
+      "character_card": "assets/heroes/akuma_dark.jpg"
     },
     {
       "name": "DAVE — NEXUS",
@@ -550,7 +560,9 @@
         "audience_fit": "Afinidad temática en definición: descubrimiento de videojuegos y experiencias cooperativas."
       },
       "tagline": "Una nueva etapa gamer entre exploración, acción y cooperativo.",
-      "role_label": "ESTUDIANTE"
+      "role_label": "ESTUDIANTE",
+      "fullbody": "Purple_Cyberpunk_Warrior-hay-muchas-que-dejaron-de-ser-animadas-la-idea-es.jpg",
+      "character_card": "assets/heroes/nexus_dark.webp"
     },
     {
       "name": "PATO — ORATORIS",
@@ -672,7 +684,9 @@
       },
       "tagline": "Programación y divulgación explicadas con claridad y cercanía.",
       "role_label": "COLABORADOR",
-      "schedule": "Sin directos; publica contenido en su canal de YouTube"
+      "schedule": "Sin directos; publica contenido en su canal de YouTube",
+      "fullbody": "Bald_Man_In_Gold_Armor-hay-muchas-que-dejaron-de-ser-animadas-la-idea-es.jpg",
+      "character_card": "assets/heroes/oratoris_dark.webp"
     },
     {
       "name": "HABITOS",
@@ -763,7 +777,9 @@
       "tagline": "Gaming, filosofía cotidiana y conversaciones sobre hábitos.",
       "role_label": "COLABORADOR",
       "powers": "Especialidad: gaming reflexivo, filosofía cotidiana y desarrollo de hábitos.",
-      "schedule": "Lunes a sábado, por la mañana y por la tarde"
+      "schedule": "Lunes a sábado, por la mañana y por la tarde",
+      "fullbody": "Sci_Fi_Superhero_Portrait-hay-muchas-que-dejaron-de-ser-animadas-la-idea-es.jpg",
+      "character_card": "assets/heroes/habitos_dark.webp"
     }
   ],
   "identity_model_version": 1
