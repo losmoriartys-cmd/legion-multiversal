@@ -88,6 +88,15 @@ class RosterComicCardsContractTests(unittest.TestCase):
         self.assertNotIn("ABRIR BITÁCORA COMPLETA", tabs)
         self.assertIn("brandHtml", tabs)
 
+    def test_community_bitacora_mission_tracks_the_individual_dossier_tab(self):
+        self.assertIn("button.dataset.profileTab==='bitacora'", self.app)
+        playbook = json.loads((ROOT / "community-playbook.json").read_text(encoding="utf-8"))
+        mission = next(item for item in playbook["missions"] if item["id"] == "bitacora")
+        achievement = next(item for item in playbook["achievements"] if item["id"] == "cronista")
+        self.assertIn("expediente", mission["title"].lower())
+        self.assertIn("pestaña Bitácora", mission["description"])
+        self.assertIn("expedientes", achievement["title"].lower())
+
     def test_only_one_roster_directory_remains_in_the_chapter(self):
         self.assertIn('id="roster-selector"', self.html)
         self.assertIn('id="roster"', self.html)
