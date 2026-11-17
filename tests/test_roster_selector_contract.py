@@ -62,6 +62,22 @@ class RosterCharacterSelectorContractTests(unittest.TestCase):
         self.assertIn("#chapter-2 #roster-container", self.css)
         self.assertIn("prefers-reduced-motion:reduce", self.css)
 
+    def test_roster_cards_show_verified_metrics_and_open_profiles_directly(self):
+        selector = self.app[self.app.index("function renderRosterSelector()"):self.app.index("function selectRosterCreator(")]
+        self.assertIn("roster-selector-card-metrics", selector)
+        self.assertIn("average_viewers_sampled", selector)
+        self.assertIn("openHeroProfile(Number(button.dataset.rosterSelect), button)", selector)
+        self.assertIn("CONOCÉ AL ROSTER", selector)
+
+    def test_profile_gateway_has_accessible_tabs_and_provenance_aware_metrics(self):
+        self.assertIn("function renderHeroProfileTabs(hero)", self.app)
+        self.assertIn("data-profile-tab", self.app)
+        self.assertIn("aria-selected", self.app)
+        self.assertIn("average_viewers_sampled", self.app)
+        self.assertIn("JUEGOS Y RITMO", self.app)
+        self.assertIn("INTERÉS PARA MARCAS", self.app)
+
+
 
 if __name__ == "__main__":
     unittest.main()
