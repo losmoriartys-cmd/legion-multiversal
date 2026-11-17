@@ -20,8 +20,8 @@ class RosterComicCardsContractTests(unittest.TestCase):
         self.assertEqual(len({hero["slug"] for hero in heroes}), 8)
         self.assertIn("roster-data.json", self.app)
 
-    def test_each_dossier_uses_the_user_approved_portrait_mapping(self):
-        expected = {
+    def test_each_card_uses_approved_art_and_keeps_identity_portraits(self):
+        expected_art = {
             "moriartys": "Cyberpunk_Cyborg_Portrait-hay-muchas-que-dejaron-de-ser-animadas-la-idea-es.jpg",
             "rod3r1k": "Superhero_Camera_Portrait-hay-muchas-que-dejaron-de-ser-animadas-la-idea-es.jpg",
             "lady-moriarty": "Red_Haired_Mystic_Witch-hay-muchas-que-dejaron-de-ser-animadas-la-idea-es.jpg",
@@ -31,9 +31,14 @@ class RosterComicCardsContractTests(unittest.TestCase):
             "pato-oratoris": "Bald_Man_In_Gold_Armor-hay-muchas-que-dejaron-de-ser-animadas-la-idea-es.jpg",
             "habitos": "Sci_Fi_Superhero_Portrait-hay-muchas-que-dejaron-de-ser-animadas-la-idea-es.jpg",
         }
-        self.assertEqual({hero["id"]: hero["portrait"] for hero in self.roster["heroes"]}, expected)
-        for portrait in expected.values():
-            self.assertTrue((ROOT / portrait).is_file())
+        heroes = {hero["id"]: hero for hero in self.roster["heroes"]}
+        self.assertEqual({hero_id: hero["img"] for hero_id, hero in heroes.items()}, expected_art)
+        for hero in heroes.values():
+            self.assertTrue(hero["portrait"].startswith("assets/carnet/"))
+            self.assertNotEqual(hero["portrait"], hero["img"])
+            self.assertTrue((ROOT / hero["portrait"]).is_file())
+        for artwork in expected_art.values():
+            self.assertTrue((ROOT / artwork).is_file())
 
     def test_roster_renders_all_cards_without_a_selected_profile_gate(self):
         start = self.app.index("function renderRosterSelector()")
