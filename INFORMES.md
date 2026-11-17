@@ -3331,7 +3331,7 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **Responsive:** navegación móvil de cinco destinos en dos filas; cartas en dos columnas; se añadió una comprobación explícita de overflow horizontal en el expediente móvil.
 - **Bitácora y Comunidad:** la misión se registra al abrir la pestaña Bitácora del expediente individual. El índice externo quedó fuera del recorrido y sin enlaces desde la página principal.
 - **Revisión visual:** escritorio 4×2 y móvil 2×4; ilustraciones originales y métricas visibles; expediente con carnet, enlaces sociales y cinco pestañas. La captura de Playwright limpia la transición animada y fuerza la carga de las ocho ilustraciones para revisar el conjunto.
-- **Validación:** `python-tests`, `qa-portable` y despliegue de preview Cloudflare están en SUCCESS para el HEAD `02580bc`. La suite completa Python + Playwright pasó en `64a1416`; está corriendo una repetición con el último contrato de overflow móvil y captura de imágenes.
+- **Validación final:** `python-tests`, `qa-portable`, Cloudflare Pages y `validar` están en SUCCESS para el HEAD `37644de`. La suite incluye los ocho expedientes, cinco pestañas, navegación Atrás/Adelante, responsive, ausencia de overflow horizontal y límites internos de la grilla de métricas.
 - **Salvaguarda:** cambios confinados a la rama de trabajo; no se modificó `main`, no se fusionó ni se publicó producción.
 
 
@@ -3342,4 +3342,4 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - Los ocho assets ya existían en el commit de `main` incorporado como segundo padre de la rama; no se generaron ni duplicaron archivos binarios.
 - Se eliminó el bloque de acceso a la Bitácora externa desde Colaboraciones y se reemplazaron los cuatro retratos individuales del caso BarFender por una lista textual de participantes. Se conserva la imagen grupal específica del caso.
 - Se añadieron contratos para comprobar el mapeo exacto, la separación arte/retrato y la ausencia de retratos repetidos en el archivo colaborativo.
-- **Cierre de revisión visual:** se detectó y corrigió que el CSS mantenía visible el Roster al abrir un expediente; las reglas `[hidden]` ahora aseguran que el expediente sustituya la grilla. Se validó en capturas de escritorio y móvil.
+- **Cierre de revisión visual:** se corrigió que el CSS mantuviera visible el Roster al abrir un expediente; las reglas `[hidden]` aseguran que el expediente sustituya la grilla. También se ajustó la grilla de métricas móviles para que no recorte la segunda columna. Las capturas finales confirman escritorio 4×2, móvil 2×4 y expediente individual sin el directorio detrás.
