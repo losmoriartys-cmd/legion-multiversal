@@ -55,8 +55,8 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
     await expect(dossier.locator('#profile-tab-clips')).toBeVisible();
     await profileTabs.filter({ hasText: 'BITÁCORA' }).click();
     await expect(dossier.locator('#profile-tab-bitacora')).toBeVisible();
-    await expect(dossier.locator('#profile-tab-bitacora .hero-profile-detail-list, #profile-tab-bitacora .hero-profile-empty')).toHaveCount(1);
-    await expect(dossier.locator('#hero-modal')).toHaveCount(0);
+    await expect(dossier.locator('#profile-tab-bitacora h4')).toContainText('TRAYECTORIA Y COLABORACIONES DOCUMENTADAS');
+    await expect(page.locator('#hero-modal')).not.toHaveClass(/active/);
     await page.evaluate(() => closeHeroProfile());
     await expect(page.locator('#roster-selector')).toBeVisible();
   }
