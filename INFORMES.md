@@ -3317,3 +3317,15 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **Revisión visual:** pendiente inspección de las capturas renderizadas en navegador. La revisión de los archivos fuente confirma que las caras están completas en origen; no sustituye la verificación del recorte real en escritorio y móvil.
 - **Pendiente editorial:** para cumplir literalmente el requisito de foto a cuerpo completo hacen falta ocho retratos limpios de cuerpo entero. No se inventaron ni se generaron reemplazos.
 - **Último commit de QA:** `4a639b2` (merge de main y actualización del historial de la rama). Los cambios de pruebas y encuadre están incluidos en el HEAD anterior a ese merge.
+
+
+## 2026-11-17 — Recorrido principal simplificado y pilares complementarios
+
+- **Orden público acordado:** Inicio → Origen → Roster → Estadísticas → En Vivo → Colaborá con nosotros. La navegación principal queda reducida a cinco destinos después de Inicio, en ese orden.
+- **Roster:** se mantiene como capítulo propio; la implementación de esta rama presenta las ocho cartas en una grilla simultánea y abre el expediente individual desde cada carta. Se conservan los IDs técnicos y la fuente canónica de perfiles.
+- **Valores, Comunidad y Alianzas:** se conservan como pilares complementarios accesibles desde Colaborá con nosotros, fuera del paginador principal para no interrumpir el recorrido. Cada pilar conserva su contenido fuente y ofrece retorno al capítulo de colaboración.
+- **Criterio editorial:** Valores se presenta como manifiesto; Comunidad mantiene misiones/logros alimentados por community-playbook.json; Alianzas conserva credenciales y formatos potenciales, sin presentarlos como campañas contratadas ni prometer resultados.
+- **Otros archivos:** Colaboraciones, Arsenal y Mapa Multiversal quedan fuera del recorrido principal y conservan acceso contextual/retorno; no se duplican perfiles ni fotografías.
+- **Cambios realizados en esta rama:** index.html, roster-selector.css y contratos Python/Playwright para reflejar el nuevo orden.
+- **Pendiente de verificación:** ejecutar unittest y Playwright; validar escritorio/móvil, navegación Atrás/Adelante, acceso a los tres pilares, enlaces y ausencia de desbordamiento. No se declara aprobado visualmente ni desplegado.
+- **Salvaguarda:** cambios confinados a la rama de trabajo; no se modificó main, no se fusionó ni se publicó producción.
