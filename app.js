@@ -1169,7 +1169,7 @@ function renderRosterSelector() {
         const liveBadge = isLive ? '<span class="roster-selector-tile-live">● EN VIVO</span>' : '';
         return '<button type="button" class="roster-selector-tile comic-roster-card" data-roster-select="' + index + '" data-creator-id="' + safe(hero.id || hero.slug) + '" data-roster-role="' + safe(hero.role || 'member') + '" aria-label="Abrir Bitácora de ' + safe(getHeroDisplayName(hero)) + '">' +
           '<span class="comic-roster-photo">' +
-            (hero.img ? '<img src="' + safe(hero.img) + '" alt="Ilustración de ' + safe(getHeroDisplayName(hero)) + '" loading="' + (index < 4 ? 'eager' : 'lazy') + '" decoding="async">' : hero.portrait ? '<img src="' + safe(hero.portrait) + '" alt="Retrato de ' + safe(getHeroDisplayName(hero)) + '" loading="lazy" decoding="async">' : '<span class="roster-selector-no-portrait">' + safe((hero.display_name || hero.name || '?').slice(0,1)) + '</span>') +
+            (hero.portrait ? '<img src="' + safe(hero.portrait) + '" alt="Fotografía carnet de ' + safe(getHeroDisplayName(hero)) + '" loading="' + (index < 4 ? 'eager' : 'lazy') + '" decoding="async">' : '<span class="roster-selector-no-portrait">' + safe((hero.display_name || hero.name || '?').slice(0,1)) + '</span>') +
             '<span class="comic-roster-photo-shade"></span><span class="comic-roster-photo-copy"><small>' + safe(identity) + '</small><strong>' + safe(getHeroDisplayName(hero)) + '</strong><em>🎮 ' + safe(game) + '</em></span>' + liveBadge +
           '</span>' +
           '<span class="comic-roster-card-data"><span class="comic-roster-badges"><b class="comic-roster-frequency">RITMO: EN SEGUIMIENTO</b><b class="comic-roster-activity">' + safe(activityBadge) + '</b></span>' +
@@ -1397,8 +1397,11 @@ function openHeroProfile(index, triggerElement = document.activeElement, options
         '<section class="hero-profile-sidebar-quote comic-profile-quote"><small>' + escapeStatsHtml(getHeroDisplayName(hero)) + ' DICE:</small><blockquote>' + escapeStatsHtml(hero.voice || 'Frase personal pendiente de completar.') + '</blockquote><p>Frase de identidad del canal.</p></section>' +
         '<section class="hero-profile-socials comic-profile-socials"><small>ENLACES DEL CANAL</small><div>' + (socials || '<p>Redes sociales pendientes de vincular.</p>') + '</div></section>' +
         '<button class="hero-profile-back comic-profile-back" type="button" onclick="closeHeroProfile()">← VOLVER AL ROSTER</button></aside>';
+    const characterArt = hero.img
+        ? '<figure class="hero-profile-character-art"><img src="' + escapeStatsHtml(hero.img) + '" alt="Ilustración del personaje de ' + escapeStatsHtml(getHeroDisplayName(hero)) + '" loading="eager" decoding="async"><figcaption>REPRESENTACIÓN DEL PERSONAJE · ' + escapeStatsHtml(hero.codename || hero.characterRole || 'ARCHIVO VISUAL') + '</figcaption></figure>'
+        : '';
     page.innerHTML = '<div class="hero-profile-reference-layout comic-profile-layout">' + leftRail +
-        '<main class="hero-profile-main comic-profile-main">' + topLine + renderHeroProfileTabs(hero) + '</main></div>';
+        '<main class="hero-profile-main comic-profile-main">' + topLine + characterArt + renderHeroProfileTabs(hero) + '</main></div>';
     page.querySelectorAll('[data-profile-tab]').forEach(button => button.addEventListener('click', () => activateHeroProfileTab(button)));
     page.querySelector('.hero-profile-tabs')?.addEventListener('keydown', event => {
         if (!['ArrowRight','ArrowLeft','Home','End'].includes(event.key)) return;
