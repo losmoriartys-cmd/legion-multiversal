@@ -474,3 +474,74 @@
 }
 
 #chapter-2 .comic-profile-channel-cta { display:inline-flex; align-items:center; padding:7px 9px; border:2px solid #111; background:#ffd500; color:#111; font-size:.65rem; font-weight:900; text-decoration:none; }
+
+/* Recorrido principal de cinco capítulos y accesos a los pilares complementarios. */
+.collaboration-foundations {
+  margin: clamp(22px,3vw,34px) 0;
+  padding: clamp(16px,2.5vw,26px);
+  border: 1px solid rgba(98,217,232,.28);
+  border-left: 4px solid var(--lm-cyan,#62d9e8);
+  background: linear-gradient(135deg,rgba(16,31,49,.94),rgba(9,17,29,.96));
+}
+.collaboration-foundations > h3 {
+  margin: 5px 0 14px;
+  color: var(--yellow-accent,#ffde00);
+  font: clamp(1.45rem,2.4vw,2rem) 'Bangers',cursive;
+  letter-spacing:.05em;
+}
+.collaboration-foundations-grid {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+}
+.collaboration-foundation-link {
+  display:flex;
+  min-width:0;
+  min-height:142px;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:9px;
+  padding:15px;
+  border:1px solid rgba(153,190,220,.28);
+  background:#111d2d;
+  color:#eaf2f8;
+  text-align:left;
+  cursor:pointer;
+  transition:border-color .18s ease,transform .18s ease,background .18s ease;
+}
+.collaboration-foundation-link strong {
+  color:var(--lm-cyan,#62d9e8);
+  font:1.35rem 'Bangers',cursive;
+  letter-spacing:.06em;
+}
+.collaboration-foundation-link span { color:#c3d0df; font-size:.92rem; line-height:1.45; }
+.collaboration-foundation-link em {
+  margin-top:auto;
+  color:var(--yellow-accent,#ffde00);
+  font-style:normal;
+  font-size:.72rem;
+  font-weight:900;
+  letter-spacing:.06em;
+}
+.collaboration-foundation-link:hover { border-color:var(--lm-cyan,#62d9e8); background:#162840; transform:translateY(-2px); }
+.collaboration-foundation-link:focus-visible,.supplementary-return:focus-visible { outline:3px solid #8beaff; outline-offset:3px; }
+.supplementary-return {
+  display:inline-flex;
+  align-items:center;
+  min-height:40px;
+  margin:12px 0 20px;
+  padding:8px 12px;
+  border:1px solid rgba(98,217,232,.48);
+  background:#102238;
+  color:#bfeef5;
+  font:900 .76rem 'Roboto Condensed',sans-serif;
+  letter-spacing:.06em;
+  cursor:pointer;
+}
+@media(max-width:700px) {
+  .collaboration-foundations-grid { grid-template-columns:1fr; }
+  .collaboration-foundation-link { min-height:0; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .collaboration-foundation-link { transition:none; }
+}
