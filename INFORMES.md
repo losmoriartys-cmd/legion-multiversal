@@ -2987,5 +2987,8 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - El expediente individual incorpora portada con retrato, enlaces sociales, estado de actividad y métricas principales visibles, además de seis solapas: Perfil, Estadísticas, Juegos y ritmo, Clips, Bitácora e Interés para marcas.
 - Los indicadores se leen desde las fuentes existentes: actividad Twitch observada y métricas públicas por plataforma. Los campos no disponibles se muestran como —; medias y picos se identifican como muestrales. No se agregan datos de plataformas distintas.
 - Se conservan los ocho expedientes, identificadores, enlaces semánticos y navegación Atrás/Adelante. No se crea un segundo catálogo ni se introducen cifras editoriales ficticias.
-- Se añadieron pruebas de contrato para las tarjetas y solapas. La sintaxis JavaScript del bundle fue comprobada; la ejecución de las suites Python/Playwright y la revisión visual real quedan pendientes porque esta conexión no ofrece ejecución de Actions ni navegador.
-- Estado: commits en integration/roster-unification-2026-11-16; no se modificó main, no se abrió PR y no se publicó producción.
+- Se añadieron pruebas de contrato y se actualizó la prueba Playwright para la apertura directa desde las tarjetas y navegación por solapas.
+- CI `Validar código y datos del sitio`: ejecución `44034091988` completada con éxito; seis pruebas Playwright pasaron, incluidas las ocho cartas, apertura de expedientes, navegación por solapas, rutas históricas y responsive móvil. La validación de rutas, imágenes y enlaces también finalizó correctamente.
+- La primera corrida detectó una prueba desactualizada que esperaba el botón del selector anterior; se actualizó el test al nuevo flujo y la corrida siguiente pasó.
+- QA visual manual en navegador real y revisión de capturas de escritorio/móvil todavía pendientes. No se declara producción verificada.
+- Estado: cambios guardados en integration/roster-unification-2026-11-16; main no se modificó, no se abrió PR y no se publicó producción.
