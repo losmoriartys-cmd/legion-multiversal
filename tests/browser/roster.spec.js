@@ -46,7 +46,16 @@ test('el selector presenta los ocho integrantes y permite abrir cada expediente'
     await expect(dossier.locator('#profile-tab-estadisticas')).toBeVisible();
     await profileTabs.filter({ hasText: 'PERFIL' }).click();
     await expect(dossier.locator('#profile-tab-perfil')).toBeVisible();
-    const dossierAction = dossier.locator('.hero-profile-actions .twitch-link-btn').first();
+    await expect(dossier.locator('.hero-profile-sidebar')).toBeVisible();
+    await expect(dossier.locator('.hero-profile-reference-layout')).toBeVisible();
+    await expect(dossier.locator('.hero-profile-id-image img')).toBeVisible();
+    await expect(dossier.locator('.hero-profile-sidebar-quote')).toBeVisible();
+    await expect(dossier.locator('.hero-profile-poster')).toBeVisible();
+    await expect(dossier.locator('.hero-profile-socials')).toBeVisible();
+    await profileTabs.filter({ hasText: 'CLIPS' }).click();
+    await expect(dossier.locator('#profile-tab-clips')).toBeVisible();
+    await profileTabs.filter({ hasText: 'BITÁCORA' }).click();
+    const dossierAction = dossier.locator('#profile-tab-bitacora .twitch-link-btn').first();
     await expect(dossierAction).toHaveText('ABRIR BITÁCORA COMPLETA');
     await expect(dossier.locator('a[href="./roster-02-moriartys.html"]')).toHaveCount(0);
     await dossierAction.click();
@@ -74,13 +83,15 @@ test('las dos rutas históricas de Lady Moriarty abren el mismo expediente', asy
   await legacyPage.goto('/#expediente-ladymoriarty');
   await expect(legacyPage.locator('#hero-profile-page')).toBeVisible();
   await expect(legacyPage.locator('#hero-profile-page')).toContainText('LADY MORIARTY');
-  await expect(legacyPage.locator('#hero-profile-page')).toContainText('3 clips destacados registrados');
+  await expect(legacyPage.locator('#hero-profile-page .hero-profile-sidebar')).toBeVisible();
+  await expect(legacyPage.locator('#hero-profile-page [data-profile-tab="clips"]')).toHaveCount(1);
   const legacyText = await legacyPage.locator('#hero-profile-page').innerText();
 
   await canonicalPage.goto('/#expediente-lady-moriarty');
   await expect(canonicalPage.locator('#hero-profile-page')).toBeVisible();
   await expect(canonicalPage.locator('#hero-profile-page')).toContainText('LADY MORIARTY');
-  await expect(canonicalPage.locator('#hero-profile-page')).toContainText('3 clips destacados registrados');
+  await expect(canonicalPage.locator('#hero-profile-page .hero-profile-sidebar')).toBeVisible();
+  await expect(canonicalPage.locator('#hero-profile-page [data-profile-tab="clips"]')).toHaveCount(1);
   const canonicalText = await canonicalPage.locator('#hero-profile-page').innerText();
   expect(canonicalText).toBe(legacyText);
   expect(pageErrors).toEqual([]);
