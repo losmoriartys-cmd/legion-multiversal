@@ -10,6 +10,9 @@ PUBLIC = {
     "index.html": BASE,
     "comic-moriartys.html": BASE + "comic-moriartys.html",
     "roster-02-moriartys.html": BASE + "roster-02-moriartys.html",
+    "marcas/index.html": BASE + "marcas/",
+    "recursos/index.html": BASE + "recursos/",
+    "metodologia/index.html": BASE + "metodologia/",
 }
 PREVIEWS = ("bitacora-preview.html", "instituto-preview.html")
 errors = []
@@ -35,7 +38,7 @@ try:
         errors.append(f"sitemap.xml: URLs inesperadas; recibidas {sorted(locations)}")
 except (ET.ParseError, OSError) as exc:
     errors.append(f"sitemap.xml: XML inválido o ilegible ({exc})")
-for page in ("index.html", "README.md", "robots.txt", "sitemap.xml"):
+for page in (*PUBLIC.keys(), "README.md", "robots.txt", "sitemap.xml"):
     source = (ROOT / page).read_text(encoding="utf-8")
     if "pages.dev" in source:
         errors.append(f"{page}: referencia de Cloudflare Pages en metadata/documentación de producción")
