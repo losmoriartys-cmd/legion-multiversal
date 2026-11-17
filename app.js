@@ -1398,7 +1398,7 @@ function openHeroProfile(index, triggerElement = document.activeElement, options
         '<section class="hero-profile-socials comic-profile-socials"><small>ENLACES DEL CANAL</small><div>' + (socials || '<p>Redes sociales pendientes de vincular.</p>') + '</div></section>' +
         '<button class="hero-profile-back comic-profile-back" type="button" onclick="closeHeroProfile()">← VOLVER AL ROSTER</button></aside>';
     const characterArt = hero.fullbody || hero.img
-        ? '<figure class="hero-profile-character-art"><img src="' + escapeStatsHtml(hero.fullbody || hero.img) + '" alt="Ilustración de cuerpo entero de  + escapeStatsHtml(getHeroDisplayName(hero)) + '" loading="eager" decoding="async"><figcaption>REPRESENTACIÓN DEL PERSONAJE · ' + escapeStatsHtml(hero.codename || hero.characterRole || 'ARCHIVO VISUAL') + '</figcaption></figure>'
+        ? '<figure class="hero-profile-character-art"><img src="' + escapeStatsHtml(hero.fullbody || hero.img) + '" alt="Ilustración de cuerpo entero de ' + escapeStatsHtml(getHeroDisplayName(hero)) + '" loading="eager" decoding="async"><figcaption>REPRESENTACIÓN DEL PERSONAJE · ' + escapeStatsHtml(hero.codename || hero.characterRole || 'ARCHIVO VISUAL') + '</figcaption></figure>'
         : '';
     page.innerHTML = '<div class="hero-profile-reference-layout comic-profile-layout">' + leftRail +
         '<main class="hero-profile-main comic-profile-main">' + topLine + characterArt + renderHeroProfileTabs(hero) + '</main></div>';
