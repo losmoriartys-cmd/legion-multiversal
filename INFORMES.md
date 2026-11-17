@@ -3329,3 +3329,13 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **Cambios realizados en esta rama:** index.html, roster-selector.css y contratos Python/Playwright para reflejar el nuevo orden.
 - **Pendiente de verificación:** ejecutar unittest y Playwright; validar escritorio/móvil, navegación Atrás/Adelante, acceso a los tres pilares, enlaces y ausencia de desbordamiento. No se declara aprobado visualmente ni desplegado.
 - **Salvaguarda:** cambios confinados a la rama de trabajo; no se modificó main, no se fusionó ni se publicó producción.
+
+
+### Ajuste de identidad visual y no duplicación — 17/11/2026
+
+- Se respeta la separación entre **arte de personaje** y **retrato de expediente**: las cartas usan `hero.img` (ilustración original); la ficha individual usa `hero.portrait` (imagen de carnet aprobada).
+- Se aplicó el mapeo confirmado por el usuario a los ocho expedientes: Moriartys → Cyberpunk Cyborg Portrait; ROD3R1K → Superhero Camera Portrait; Lady → Red Haired Mystic Witch; Ardipii → Hooded Atomic Figure; Akuma → `image_20261117_045605.jpg`; Dave → Purple Cyberpunk Warrior; Pato → Bald Man in Gold Armor; Hábitos → Sci Fi Superhero Portrait.
+- Los ocho assets ya existían en el commit de `main` incorporado como segundo padre de la rama; no se generaron ni duplicaron archivos binarios.
+- Se eliminó el bloque de acceso a la Bitácora externa desde Colaboraciones y se reemplazaron los cuatro retratos individuales del caso BarFender por una lista textual de participantes. Se conserva la imagen grupal específica del caso.
+- Se añadieron contratos para comprobar el mapeo exacto, la separación arte/retrato y la ausencia de retratos repetidos en el archivo colaborativo.
+- **Pendiente:** validar el nuevo HEAD con Actions y revisar las capturas del navegador antes de considerar cerrado el QA visual.
