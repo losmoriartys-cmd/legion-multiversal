@@ -146,6 +146,10 @@ test('Atrás y Adelante restauran el roster y el expediente correcto', async ({ 
   await expect(page).toHaveURL(/#roster\/lady-moriarty$/);
   await expect(page.locator('#hero-profile-page')).toBeVisible();
   await expect(page.locator('#hero-profile-page')).toContainText('LADY MORIARTY');
+  const profilePortrait = page.locator('#hero-profile-page .hero-profile-id-image img');
+  await expect(profilePortrait).toHaveCount(1);
+  await expect.poll(() => profilePortrait.evaluate(image => image.complete && image.naturalWidth > 0)).toBe(true);
+  await profilePortrait.evaluate(image => image.decode());
   await page.addStyleTag({ content: 'header { position: static !important; }' });
   await page.screenshot({ path: 'test-results/bitacora-lady-desktop.png', fullPage: true });
   await page.setViewportSize({ width: 390, height: 844 });
