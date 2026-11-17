@@ -55,10 +55,13 @@ class RosterComicCardsContractTests(unittest.TestCase):
         start = self.app.index("function renderRosterSelector()")
         end = self.app.index("\nfunction selectRosterCreator", start)
         renderer = self.app[start:end]
-        self.assertIn("hero.img ?", renderer)
-        self.assertIn('alt="Ilustración de ', renderer)
         self.assertIn("hero.portrait ?", renderer)
+        self.assertIn('alt="Fotografía carnet de ', renderer)
+        self.assertIn("hero.portrait", renderer)
+        self.assertNotIn("hero.img ?", renderer)
         self.assertIn("const portrait = hero.portrait || hero.img || ''", self.app)
+        self.assertIn("const characterArt = hero.img", self.app)
+        self.assertIn("hero-profile-character-art", self.app)
 
     def test_cards_use_real_metrics_and_no_fixed_schedule(self):
         start = self.app.index("function renderRosterSelector()")
