@@ -22,7 +22,7 @@ class PublicSubpagesContractTests(unittest.TestCase):
 
     def test_root_metadata_and_footer_use_selected_public_domain(self):
         html = (ROOT / "index.html").read_text(encoding="utf-8")
-        self.assertIn('rel="canonical" href="https://legion-multiversal.pages.dev/"', html)
-        self.assertIn('property="og:url" content="https://legion-multiversal.pages.dev/"', html)
+        self.assertIn('rel="canonical" href="https://losmoriartys-cmd.github.io/legion-multiversal/"', html)
+        self.assertIn('property="og:url" content="https://losmoriartys-cmd.github.io/legion-multiversal/"', html)
         self.assertIn('href="./metodologia/"', html)
         self.assertIn('href="./recursos/"', html)
