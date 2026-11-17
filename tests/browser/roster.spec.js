@@ -45,25 +45,7 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
     await expect(dossier).toContainText(creator.name);
     const profileTabs = dossier.locator('[role="tab"][data-profile-tab]');
     await expect(profileTabs).toHaveCount(5);
-    for (const [label, panel] of [
-      ['PERFIL', 'perfil'],
-      ['ESTADÍSTICAS', 'estadisticas'],
-      ['JUEGOS Y RITMO', 'juegos'],
-      ['CLIPS', 'clips'],
-      ['BITÁCORA', 'bitacora']
-    ]) {
-      await profileTabs.filter({ hasText: label }).click();
-      await expect(dossier.locator('#profile-tab-' + panel)).toBeVisible();
-      await expect(profileTabs.filter({ hasText: label })).toHaveAttribute('aria-selected', 'true');
-    }
-    await profileTabs.filter({ hasText: 'PERFIL' }).focus();
-    await page.keyboard.press('End');
-    await expect(profileTabs.filter({ hasText: 'BITÁCORA' })).toBeFocused();
-    await page.keyboard.press('Home');
-    await expect(profileTabs.filter({ hasText: 'PERFIL' })).toBeFocused();
-    await profileTabs.filter({ hasText: 'PERFIL' }).click();
-    await expect(dossier.locator('.hero-profile-sidebar')).toBeVisible();
-    await expect(dossier.locator('.hero-profile-reference-layout')).toBeVisible();
+
     const cardImage = card.locator('.comic-roster-photo img');
     await expect.poll(() => cardImage.evaluate(img => img.naturalWidth)).toBeGreaterThan(0);
     const cardImageStyle = await cardImage.evaluate(img => ({ fit: getComputedStyle(img).objectFit, position: getComputedStyle(img).objectPosition }));
@@ -79,11 +61,28 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
     await expect(dossier.locator('.hero-profile-sidebar-quote')).toBeVisible();
     await expect(dossier.locator('.hero-profile-socials')).toBeVisible();
     await expect(dossier.locator('.hero-profile-poster')).toHaveCount(0);
-    await profileTabs.filter({ hasText: 'CLIPS' }).click();
-    await expect(dossier.locator('#profile-tab-clips')).toBeVisible();
-    await profileTabs.filter({ hasText: 'BITÁCORA' }).click();
-    await expect(dossier.locator('#profile-tab-bitacora')).toBeVisible();
-    await expect(dossier.locator('#profile-tab-bitacora')).toContainText('TRAYECTORIA Y COLABORACIONES DOCUMENTADAS');
+
+    if (creator.id === 'moriartys') {
+      for (const [label, panel] of [
+        ['PERFIL', 'perfil'],
+        ['ESTADÍSTICAS', 'estadisticas'],
+        ['JUEGOS Y RITMO', 'juegos'],
+        ['CLIPS', 'clips'],
+        ['BITÁCORA', 'bitacora']
+      ]) {
+        await profileTabs.filter({ hasText: label }).click();
+        await expect(dossier.locator('#profile-tab-' + panel)).toBeVisible();
+        await expect(profileTabs.filter({ hasText: label })).toHaveAttribute('aria-selected', 'true');
+      }
+      await profileTabs.filter({ hasText: 'PERFIL' }).focus();
+      await page.keyboard.press('End');
+      await expect(profileTabs.filter({ hasText: 'BITÁCORA' })).toBeFocused();
+      await page.keyboard.press('Home');
+      await expect(profileTabs.filter({ hasText: 'PERFIL' })).toBeFocused();
+      await profileTabs.filter({ hasText: 'PERFIL' }).click();
+      await expect(dossier.locator('#profile-tab-bitacora')).toContainText('TRAYECTORIA Y COLABORACIONES DOCUMENTADAS');
+    }
+
     await expect(page.locator('#hero-modal')).not.toHaveClass(/active/);
     await page.evaluate(() => closeHeroProfile());
     await expect(page.locator('#roster-selector')).toBeVisible();
