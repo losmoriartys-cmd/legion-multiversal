@@ -20,6 +20,21 @@ class RosterComicCardsContractTests(unittest.TestCase):
         self.assertEqual(len({hero["slug"] for hero in heroes}), 8)
         self.assertIn("roster-data.json", self.app)
 
+    def test_each_dossier_uses_the_user_approved_portrait_mapping(self):
+        expected = {
+            "moriartys": "Cyberpunk_Cyborg_Portrait-hay-muchas-que-dejaron-de-ser-animadas-la-idea-es.jpg",
+            "rod3r1k": "Superhero_Camera_Portrait-hay-muchas-que-dejaron-de-ser-animadas-la-idea-es.jpg",
+            "lady-moriarty": "Red_Haired_Mystic_Witch-hay-muchas-que-dejaron-de-ser-animadas-la-idea-es.jpg",
+            "ardipii": "Hooded_Atomic_Figure-hay-muchas-que-dejaron-de-ser-animadas-la-idea-es.jpg",
+            "akuma": "image_20261117_045605.jpg",
+            "dave-nexus": "Purple_Cyberpunk_Warrior-hay-muchas-que-dejaron-de-ser-animadas-la-idea-es.jpg",
+            "pato-oratoris": "Bald_Man_In_Gold_Armor-hay-muchas-que-dejaron-de-ser-animadas-la-idea-es.jpg",
+            "habitos": "Sci_Fi_Superhero_Portrait-hay-muchas-que-dejaron-de-ser-animadas-la-idea-es.jpg",
+        }
+        self.assertEqual({hero["id"]: hero["portrait"] for hero in self.roster["heroes"]}, expected)
+        for portrait in expected.values():
+            self.assertTrue((ROOT / portrait).is_file())
+
     def test_roster_renders_all_cards_without_a_selected_profile_gate(self):
         start = self.app.index("function renderRosterSelector()")
         end = self.app.index("\nfunction selectRosterCreator", start)
