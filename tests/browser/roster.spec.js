@@ -139,6 +139,7 @@ test('Atrás y Adelante restauran el roster y el expediente correcto', async ({ 
   await page.locator('.comic-roster-card[data-creator-id="lady-moriarty"]').click();
   await expect(page).toHaveURL(/#roster\/lady-moriarty$/);
   await expect(page.locator('#hero-profile-page')).toBeVisible();
+  await expect(page.locator('#roster-home')).toBeHidden();
   await page.goBack();
   await expect(page).toHaveURL(/#roster$/);
   await expect(page.locator('#roster-home')).toBeVisible();
@@ -146,8 +147,16 @@ test('Atrás y Adelante restauran el roster y el expediente correcto', async ({ 
   await page.goForward();
   await expect(page).toHaveURL(/#roster\/lady-moriarty$/);
   await expect(page.locator('#hero-profile-page')).toBeVisible();
+  await expect(page.locator('#roster-home')).toBeHidden();
   await expect(page.locator('#hero-profile-page')).toContainText('LADY MORIARTY');
   await page.screenshot({ path: 'test-results/bitacora-lady-desktop.png', fullPage: true });
   await page.setViewportSize({ width: 390, height: 844 });
+  const mobileWidths = await page.evaluate(() => ({
+    viewport: window.innerWidth,
+    document: document.documentElement.scrollWidth,
+    body: document.body.scrollWidth
+  }));
+  expect(mobileWidths.document).toBeLessThanOrEqual(mobileWidths.viewport);
+  expect(mobileWidths.body).toBeLessThanOrEqual(mobileWidths.viewport);
   await page.screenshot({ path: 'test-results/bitacora-lady-mobile.png', fullPage: true });
 });
