@@ -158,5 +158,13 @@ test('Atrás y Adelante restauran el roster y el expediente correcto', async ({ 
   }));
   expect(mobileWidths.document).toBeLessThanOrEqual(mobileWidths.viewport);
   expect(mobileWidths.body).toBeLessThanOrEqual(mobileWidths.viewport);
+  const metricBounds = await page.locator('.hero-profile-metric-grid').first().evaluate(grid => {
+    const bounds = grid.getBoundingClientRect();
+    return [...grid.children].map(item => {
+      const rect = item.getBoundingClientRect();
+      return rect.left >= bounds.left - 1 && rect.right <= bounds.right + 1;
+    });
+  });
+  expect(metricBounds.every(Boolean)).toBe(true);
   await page.screenshot({ path: 'test-results/bitacora-lady-mobile.png', fullPage: true });
 });
