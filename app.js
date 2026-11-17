@@ -1398,10 +1398,16 @@ function openHeroProfile(index, triggerElement = document.activeElement, options
         '<section class="hero-profile-socials comic-profile-socials"><small>ENLACES DEL CANAL</small><div>' + (socials || '<p>Redes sociales pendientes de vincular.</p>') + '</div></section>' +
         '<button class="hero-profile-back comic-profile-back" type="button" onclick="closeHeroProfile()">← VOLVER AL ROSTER</button></aside>';
     const characterArt = hero.fullbody || hero.img
-        ? '<figure class="hero-profile-character-art"><img src="' + escapeStatsHtml(hero.fullbody || hero.img) + '" alt="Ilustración de cuerpo entero de ' + escapeStatsHtml(getHeroDisplayName(hero)) + '" loading="eager" decoding="async"><figcaption>REPRESENTACIÓN DEL PERSONAJE · ' + escapeStatsHtml(hero.codename || hero.characterRole || 'ARCHIVO VISUAL') + '</figcaption></figure>'
+        ? '<figure class="hero-profile-character-art"><img src="' + escapeStatsHtml(hero.fullbody || hero.img) + '" alt="Ilustración de cuerpo entero de ' + escapeStatsHtml(getHeroDisplayName(hero)) + '" loading="eager" decoding="async"><figcaption>PERSONAJE · ' + escapeStatsHtml(hero.codename || hero.characterRole || 'ARCHIVO VISUAL') + '</figcaption></figure>'
+        : '';
+    const characterCard = hero.character_card
+        ? '<details class="hero-profile-character-card"><summary>VER CARTA DEL PERSONAJE</summary><img src="' + escapeStatsHtml(hero.character_card) + '" alt="Carta ilustrada de ' + escapeStatsHtml(getHeroDisplayName(hero)) + '" loading="lazy" decoding="async"></details>'
+        : '';
+    const characterVisuals = characterArt || characterCard
+        ? '<section class="hero-profile-visuals" aria-label="Identidad visual del personaje">' + characterArt + characterCard + '</section>'
         : '';
     page.innerHTML = '<div class="hero-profile-reference-layout comic-profile-layout">' + leftRail +
-        '<main class="hero-profile-main comic-profile-main">' + topLine + characterArt + renderHeroProfileTabs(hero) + '</main></div>';
+        '<main class="hero-profile-main comic-profile-main">' + topLine + characterVisuals + renderHeroProfileTabs(hero) + '</main></div>';
     page.querySelectorAll('[data-profile-tab]').forEach(button => button.addEventListener('click', () => activateHeroProfileTab(button)));
     page.querySelector('.hero-profile-tabs')?.addEventListener('keydown', event => {
         if (!['ArrowRight','ArrowLeft','Home','End'].includes(event.key)) return;
