@@ -1158,8 +1158,24 @@ function renderRosterSelector() {
         const win = state?.channel?.window || channel?.window || {};
         const average = win.average_viewers_sampled;
         const yt = platformStatsData?.creators?.[platformStatsKey(hero)]?.platforms?.youtube;
-        const followerValue = yt?.status === 'verified' ? yt.metrics?.subscribers : null;
-        const followerLabel = followerValue == null ? '—' : statsNumber(followerValue,0);
+        let followerValue = null;
+        let audienceLabel = account?.platform === 'youtube' ? 'SUSCRIPTORES · YOUTUBE' : 'SEGUIDORES · TWITCH';
+        let audienceSource = 'No hay una cifra pública verificada para esta cuenta.';
+        if (account?.platform === 'youtube' && yt?.status === 'verified' && yt.metrics?.subscribers != null) {
+            followerValue = yt.metrics.subscribers;
+            const captured = platformStatsData?.updated_at ? new Date(platformStatsData.updated_at) : null;
+            const date = captured && !Number.isNaN(captured.getTime()) ? captured.toLocaleDateString('es-AR') : 'fecha no disponible';
+            audienceSource = 'YouTube Data API · captura ' + date;
+        } else if (account?.platform === 'twitch') {
+            const login = String(account.login || (account.url || '').split('/').filter(Boolean).pop() || '').toLowerCase();
+            const twitchProfile = twitchMetricsData?.channels?.[login];
+            const reportedFollowers = twitchProfile?.metrics?.followers;
+            if (reportedFollowers != null && Number.isFinite(Number(reportedFollowers))) {
+                followerValue = Number(reportedFollowers);
+                audienceSource = 'TwitchMetrics · período ' + String(twitchProfile.period_label || 'informado por la fuente');
+            }
+        }
+        const followerLabel = followerValue == null ? 'EN ACTUALIZACIÓN' : statsNumber(followerValue,0);
         const averageLabel = average == null ? '—' : statsNumber(average,1);
         const platformName = String(account?.platform || 'CANAL').toUpperCase();
         const game = state?.channel?.current_game || (hero.creator_type === 'video_creator' ? 'CONTENIDO EDUCATIVO' : 'JUEGOS POR DOCUMENTAR');
@@ -1174,7 +1190,7 @@ function renderRosterSelector() {
           '</span>' +
           '<span class="comic-roster-card-data"><span class="comic-roster-badges"><b class="comic-roster-frequency">RITMO: EN SEGUIMIENTO</b><b class="comic-roster-activity">' + safe(activityBadge) + '</b></span>' +
             '<span class="comic-roster-last-live">ÚLTIMA ACTIVIDAD OBSERVADA: ' + safe(lastLiveDate) + '</span>' +
-            '<span class="comic-roster-stat"><span>' + (account?.platform === 'youtube' ? 'Suscriptores' : 'Seguidores') + '</span><b>' + safe(followerLabel) + '</b></span>' +
+            '<span class="comic-roster-stat comic-roster-stat-audience"><span>' + safe(audienceLabel) + '</span><b>' + safe(followerLabel) + '</b><small>' + safe(audienceSource) + '</small></span>' +
             '<span class="comic-roster-stat"><span>Media de viewers</span><b class="comic-roster-stat-purple">' + safe(averageLabel) + '</b></span>' +
             '<span class="comic-roster-games">' + (specialties.length ? specialties.map(item => '<i>' + safe(item) + '</i>').join('') : '<i>Especialidad en desarrollo</i>') + '</span>' +
             '<span class="comic-roster-card-footer"><small>' + safe(hero.role_label || platformName) + '</small><strong>VER PERFIL →</strong></span></span>' +
