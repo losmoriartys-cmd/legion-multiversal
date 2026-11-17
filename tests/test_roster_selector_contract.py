@@ -63,6 +63,23 @@ class RosterComicCardsContractTests(unittest.TestCase):
         self.assertIn("const characterArt = hero.img", self.app)
         self.assertIn("hero-profile-character-art", self.app)
 
+    def test_each_dossier_has_a_distinct_full_body_character_asset(self):
+        expected_fullbody = {
+            "moriartys": "assets/heroes/moriartys_dark.jpg",
+            "rod3r1k": "assets/heroes/rod3r1k_dark.webp",
+            "lady-moriarty": "assets/heroes/ladymoriarty_dark.jpg",
+            "ardipii": "assets/heroes/ardipii_dark.webp",
+            "akuma": "assets/heroes/akuma_dark.jpg",
+            "dave-nexus": "assets/heroes/nexus_dark.webp",
+            "pato-oratoris": "assets/heroes/oratoris_dark.webp",
+            "habitos": "assets/heroes/habitos_dark.webp",
+        }
+        heroes = {hero["id"]: hero for hero in self.roster["heroes"]}
+        self.assertEqual({hero_id: hero["fullbody"] for hero_id, hero in heroes.items()}, expected_fullbody)
+        for asset in expected_fullbody.values():
+            self.assertTrue((ROOT / asset).is_file())
+        self.assertIn("hero.fullbody || hero.img", self.app)
+
     def test_cards_use_real_metrics_and_no_fixed_schedule(self):
         start = self.app.index("function renderRosterSelector()")
         end = self.app.index("\nfunction selectRosterCreator", start)
