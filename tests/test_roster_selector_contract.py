@@ -31,6 +31,15 @@ class RosterComicCardsContractTests(unittest.TestCase):
         self.assertNotIn("roster-selector-rail", renderer)
         self.assertIn("openHeroProfile(Number(button.dataset.rosterSelect)", renderer)
 
+    def test_cards_keep_character_art_separate_from_dossier_portraits(self):
+        start = self.app.index("function renderRosterSelector()")
+        end = self.app.index("\\nfunction selectRosterCreator", start)
+        renderer = self.app[start:end]
+        self.assertIn("hero.img ?", renderer)
+        self.assertIn("alt=\\"Ilustración de ", renderer)
+        self.assertIn("hero.portrait ?", renderer)
+        self.assertIn("const portrait = hero.portrait || hero.img || ''", self.app)
+
     def test_cards_use_real_metrics_and_no_fixed_schedule(self):
         start = self.app.index("function renderRosterSelector()")
         end = self.app.index("\nfunction selectRosterCreator", start)
