@@ -716,3 +716,59 @@
     #chapter-2 .hero-profile-character-art { padding: 8px; margin-bottom: 14px; }
     #chapter-2 .hero-profile-character-art img { max-height: 58vh; }
 }
+
+
+/* El arte de cuerpo entero es la imagen protagonista; la carta queda como recurso opcional. */
+#chapter-2 .hero-profile-visuals {
+    display: grid;
+    gap: 12px;
+    margin: 0 0 20px;
+}
+#chapter-2 .hero-profile-character-art {
+    margin: 0;
+    padding: 12px;
+    border: 2px solid #080d18;
+    background: #f7f0dc;
+    box-shadow: 6px 6px 0 #03070d;
+}
+#chapter-2 .hero-profile-character-art img {
+    display: block;
+    width: 100%;
+    max-height: min(76vh, 820px);
+    object-fit: contain;
+    object-position: center top;
+    background: #101722;
+}
+#chapter-2 .hero-profile-character-art figcaption {
+    margin-top: 8px;
+    color: #71551a;
+    font: 900 .72rem/1.4 'Roboto Condensed', sans-serif;
+    letter-spacing: .12em;
+    text-align: center;
+}
+#chapter-2 .hero-profile-character-card {
+    justify-self: end;
+    width: min(100%, 260px);
+    border: 1px solid #b99b53;
+    background: #f7f0dc;
+    color: #171717;
+}
+#chapter-2 .hero-profile-character-card summary {
+    padding: 9px 12px;
+    color: #71551a;
+    cursor: pointer;
+    font: 900 .72rem/1.4 'Roboto Condensed', sans-serif;
+    letter-spacing: .1em;
+}
+#chapter-2 .hero-profile-character-card img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 440px;
+    object-fit: contain;
+}
+@media (max-width: 640px) {
+    #chapter-2 .hero-profile-character-art { padding: 8px; }
+    #chapter-2 .hero-profile-character-art img { max-height: 62vh; }
+    #chapter-2 .hero-profile-character-card { justify-self: center; width: min(100%, 230px); }
+}
