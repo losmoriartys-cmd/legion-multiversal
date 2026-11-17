@@ -813,3 +813,23 @@
     #chapter-2 .comic-roster-stat-audience > b { font-size:.92rem; }
     #chapter-2 .comic-roster-stat-audience > small { font-size:.5rem; }
 }
+
+
+/* Ajuste de lectura: las etiquetas de audiencia no deben fragmentarse letra por letra. */
+#chapter-2 .comic-roster-stat-audience {
+    grid-template-columns:minmax(0,1fr);
+    min-width:0;
+}
+#chapter-2 .comic-roster-stat-audience > span,
+#chapter-2 .comic-roster-stat-audience > b {
+    min-width:0;
+    max-width:100%;
+    text-align:left;
+    word-break:normal;
+    overflow-wrap:break-word;
+    hyphens:none;
+}
+#chapter-2 .comic-roster-stat-audience > b {
+    font-size:clamp(.82rem,1.15vw,1.12rem);
+    line-height:1.15;
+}
