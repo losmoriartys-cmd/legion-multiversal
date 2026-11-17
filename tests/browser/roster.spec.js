@@ -33,14 +33,19 @@ test('el selector presenta los ocho integrantes y permite abrir cada expediente'
   for (const creator of creators) {
     const tile = page.locator('.roster-selector-tile[data-roster-select="' + creator.index + '"]');
     await expect(tile).toHaveCount(1);
+    await expect(tile.locator('.roster-selector-card-metrics')).toBeVisible();
+    await expect(tile).toContainText('VER PERFIL');
     await tile.click();
-    const selectorPanel = page.locator('#roster-selector-panel');
-    await expect(selectorPanel).toContainText(creator.name);
-    await page.locator('#roster-selector-open-profile').click();
 
     const dossier = page.locator('#hero-profile-page');
     await expect(dossier).toBeVisible();
     await expect(dossier).toContainText(creator.name);
+    const profileTabs = dossier.locator('[role="tab"][data-profile-tab]');
+    await expect(profileTabs).toHaveCount(6);
+    await profileTabs.filter({ hasText: 'ESTADÍSTICAS' }).click();
+    await expect(dossier.locator('#profile-tab-estadisticas')).toBeVisible();
+    await profileTabs.filter({ hasText: 'PERFIL' }).click();
+    await expect(dossier.locator('#profile-tab-perfil')).toBeVisible();
     const dossierAction = dossier.locator('.hero-profile-actions .twitch-link-btn').first();
     await expect(dossierAction).toHaveText('ABRIR BITÁCORA COMPLETA');
     await expect(dossier.locator('a[href="./roster-02-moriartys.html"]')).toHaveCount(0);
