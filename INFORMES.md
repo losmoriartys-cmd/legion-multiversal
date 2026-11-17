@@ -3303,3 +3303,17 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - `Validar código y datos del sitio`: workflow `43951372459`, éxito; incluye comprobación de dimensiones, contrato WebP, referencias, pruebas Python y Playwright.
 - `Lighthouse · producción Cloudflare Pages`: workflow `43951372454`, éxito; comprobó el SHA en Cloudflare, tipo MIME WebP del Hero y ambos emblemas, y endpoint de contacto.
 - Cloudflare Pages publicó el SHA medido correctamente. No se abrió ningún PR.
+
+## 2026-11-17 — QA ampliado del Roster cómic · Capítulo 01
+
+- **Rama:** `feat/roster-comic-cards-chapter-01-2026-11-17`.
+- **Sincronización:** se incorporó el commit de métricas más reciente de `main` (`4261020`) y se dejó la rama sin commits pendientes de integrar desde `main` (21 commits adelante, 0 detrás). Se preservaron las capturas actualizadas de `data.json`, `platform-stats.json` y `creator-metrics.json`.
+- **Cobertura Playwright ampliada:** el recorrido verifica los ocho expedientes, las cinco pestañas (Perfil, Estadísticas, Juegos y Ritmo, Clips y Bitácora), la carga de los retratos, el encuadre superior, el layout responsive y la navegación del historial Atrás/Adelante.
+- **Evidencia visual automatizable:** el workflow `validar-sitio.yml` guarda capturas de escritorio y móvil del directorio y de la Bitácora de LADY MORIARTY en el artefacto `roster-visual-review-<sha>`.
+- **Encuadre:** se cambió `object-position` de 18 % a alineación superior para priorizar frente, cabello y sombreros en las tarjetas y en la imagen de la Bitácora. Se añadieron aserciones Playwright sobre carga natural de imagen, `object-fit` y `object-position`.
+- **Auditoría de assets:** los ocho archivos de `portrait` referenciados en `roster-data.json` existen y se pudieron abrir. Las imágenes de credencial son retratos ilustrados de busto/medio cuerpo, no fotografías de cuerpo completo. Los assets alternativos `assets/heroes/*` son láminas de personaje con tipografía y marco editorial incorporados; no equivalen a retratos limpios para reemplazarlos sin rediseñar el encuadre.
+- **Comprobación estática realizada en esta sesión:** 10/10 contratos equivalentes verificados sobre fuentes actuales; sintaxis de `app.js` y `tests/browser/roster.spec.js` correcta. Los ocho archivos de retrato resuelven en GitHub.
+- **Pruebas ejecutadas:** no se declara todavía resultado de `python -m unittest discover` ni de `npm run test:e2e`. El entorno de esta sesión no dispone de checkout local, intérprete conectado al repositorio ni navegador Playwright; la conexión GitHub disponible tampoco expone el disparo manual ni la lectura de ejecuciones de push. El workflow queda preparado para ejecutar ambos conjuntos y publicar capturas, pero se requiere leer el resultado real de Actions antes de marcar QA como aprobado.
+- **Revisión visual:** pendiente inspección de las capturas renderizadas en navegador. La revisión de los archivos fuente confirma que las caras están completas en origen; no sustituye la verificación del recorte real en escritorio y móvil.
+- **Pendiente editorial:** para cumplir literalmente el requisito de foto a cuerpo completo hacen falta ocho retratos limpios de cuerpo entero. No se inventaron ni se generaron reemplazos.
+- **Último commit de QA:** `4a639b2` (merge de main y actualización del historial de la rama). Los cambios de pruebas y encuadre están incluidos en el HEAD anterior a ese merge.
