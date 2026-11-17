@@ -613,3 +613,5 @@
     font-size:clamp(.64rem,2.1vw,.78rem);
   }
 }
+
+.roster-anchor { display:block; position:relative; scroll-margin-top:110px; }
