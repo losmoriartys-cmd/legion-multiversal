@@ -625,3 +625,33 @@
 #chapter-2 #hero-profile-page:not([hidden]) {
   display:block;
 }
+
+/* La ficha móvil no debe recortar la segunda columna de métricas. */
+@media(max-width:600px) {
+  #chapter-2 #hero-profile-page,
+  #chapter-2 .hero-profile-reference-layout,
+  #chapter-2 .hero-profile-main,
+  #chapter-2 .hero-profile-tab-panel,
+  #chapter-2 .hero-profile-metric-grid {
+    width:100%;
+    max-width:100%;
+    min-width:0;
+    box-sizing:border-box;
+  }
+  #chapter-2 .hero-profile-metric-grid {
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+  #chapter-2 .hero-profile-metric-grid > * {
+    min-width:0;
+    max-width:100%;
+    overflow-wrap:anywhere;
+    box-sizing:border-box;
+  }
+  #chapter-2 .hero-profile-metric-grid small,
+  #chapter-2 .hero-profile-metric-grid strong,
+  #chapter-2 .hero-profile-metric-grid span {
+    max-width:100%;
+    overflow-wrap:anywhere;
+    word-break:break-word;
+  }
+}
