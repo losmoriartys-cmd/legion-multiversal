@@ -67,7 +67,8 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
     expect(dossierImageStyle.position).toContain('0%');
     const characterArt = dossier.locator('.hero-profile-character-art img');
     await expect(characterArt).toBeVisible();
-    await expect(characterArt).toHaveAttribute('alt', /Ilustración del personaje/);
+    expect(await characterArt.getAttribute('src')).toContain('assets/heroes/');
+    await expect(characterArt).toHaveAttribute('alt', /Ilustración de cuerpo entero/);
     await expect.poll(() => characterArt.evaluate(img => img.naturalWidth)).toBeGreaterThan(0);
     await expect(dossier.locator('.hero-profile-sidebar-quote')).toBeVisible();
     await expect(dossier.locator('.hero-profile-socials')).toBeVisible();
