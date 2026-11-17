@@ -31,7 +31,9 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
   const cards = page.locator('.comic-roster-card');
   await expect(page.locator('#roster-container')).toHaveCount(0);
   await expect(cards).toHaveCount(8);
-  await expect(page.locator('.roster-selector-panel')).toHaveCount(0);
+  const profilePanel = page.locator('#hero-profile-page.roster-selector-panel');
+  await expect(profilePanel).toHaveCount(1);
+  await expect(profilePanel).toBeHidden();
 
   for (const creator of creators) {
     const card = page.locator('.comic-roster-card[data-creator-id="' + creator.id + '"]');
@@ -42,6 +44,8 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
 
     const dossier = page.locator('#hero-profile-page');
     await expect(dossier).toBeVisible();
+    await expect(profilePanel).toHaveClass(/is-active/);
+    await expect(dossier.locator('#profile-tab-perfil .commercial-quickview')).toBeVisible();
     await expect(page.locator('#roster-home')).toBeHidden();
     await expect(dossier).toContainText(creator.name);
     const profileTabs = dossier.locator('[role="tab"][data-profile-tab]');
@@ -73,6 +77,12 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
       ]) {
         await profileTabs.filter({ hasText: label }).click();
         await expect(dossier.locator('#profile-tab-' + panel)).toBeVisible();
+        if (panel === 'estadisticas') {
+          await expect(dossier.locator('#profile-tab-estadisticas .hero-profile-metric-scale').first()).toBeVisible();
+        }
+        if (panel === 'bitacora') {
+          await expect(dossier.locator('#profile-tab-bitacora .commercial-quickview')).toHaveCount(0);
+        }
         await expect(profileTabs.filter({ hasText: label })).toHaveAttribute('aria-selected', 'true');
       }
       await profileTabs.filter({ hasText: 'PERFIL' }).focus();
@@ -87,6 +97,8 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
     await expect(page.locator('#hero-modal')).not.toHaveClass(/active/);
     await page.evaluate(() => closeHeroProfile());
     await expect(page.locator('#roster-selector')).toBeVisible();
+    await expect(profilePanel).toBeHidden();
+    await expect(profilePanel).not.toHaveClass(/is-active/);
   }
   expect(pageErrors).toEqual([]);
 });
