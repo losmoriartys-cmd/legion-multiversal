@@ -88,6 +88,13 @@ class RosterComicCardsContractTests(unittest.TestCase):
         self.assertNotIn("ABRIR BITÁCORA COMPLETA", tabs)
         self.assertIn("brandHtml", tabs)
 
+    def test_only_one_roster_directory_remains_in_the_chapter(self):
+        self.assertIn('id="roster-selector"', self.html)
+        self.assertNotIn('id="roster-container"', self.html)
+        self.assertNotIn('class="roster-tools"', self.html)
+        self.assertNotIn('class="roster-product-nav"', self.html)
+        self.assertIn("ARCHIVO CENTRAL · CAPÍTULO 02", self.app)
+
     def test_roster_is_chapter_two_after_origin_without_intermediate_selector(self):
         nav = self.html[self.html.index('<nav class="primary-navigation"'):self.html.index('</nav>', self.html.index('<nav class="primary-navigation"'))]
         self.assertLess(nav.index('data-chapter="1"'), nav.index('data-chapter="2"'))
