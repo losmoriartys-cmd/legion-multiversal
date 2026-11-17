@@ -13,17 +13,17 @@
     "ther0d3r1k"
   ],
   "collection": {
-    "started_at": "2026-11-17T01:02:42Z",
+    "started_at": "2026-11-17T02:14:48Z",
     "expected_channels": 7,
     "resolved_channels": 7,
     "sampled_channels": [
-      "akumazoldyck",
       "ardipii",
       "daved0608",
       "habitos_atomicos",
       "ladymoriarty01",
       "losmoriartys",
-      "ther0d3r1k"
+      "ther0d3r1k",
+      "akumazoldyck"
     ],
     "skipped_channels": [],
     "complete": true,
@@ -39,7 +39,7 @@
     "elgabii090"
   ],
   "channel_registry_note": "Los canales archivados se conservan para consulta histórica y no se incluyen en los indicadores del roster activo.",
-  "updated_at": "2026-11-17T01:02:42Z",
+  "updated_at": "2026-11-17T02:14:48Z",
   "channels": {
     "ladymoriarty01": {
       "login": "ladymoriarty01",
@@ -49,16 +49,16 @@
       "twitch_url": "https://twitch.tv/ladymoriarty01",
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
-      "live": true,
-      "current_viewers": 4,
-      "current_game": "Bloody Cleanup TOGHETER",
-      "current_title": "[Publi] Charla de Divas y jueguito #bloodycleanup #keymailer",
-      "stream_started_at": "2026-11-16T21:58:54Z",
-      "last_status_at": "2026-11-17T01:02:42Z",
-      "last_snapshot_at": "2026-11-17T01:02:42Z",
-      "updated_at": "2026-11-17T01:02:42Z",
+      "live": false,
+      "current_viewers": null,
+      "current_game": null,
+      "current_title": null,
+      "stream_started_at": null,
+      "last_status_at": "2026-11-17T02:14:48Z",
+      "last_snapshot_at": "2026-11-17T02:14:48Z",
+      "updated_at": "2026-11-17T02:14:48Z",
       "window": {
-        "samples_total": 312,
+        "samples_total": 313,
         "live_samples": 12,
         "streams_observed": 5,
         "average_viewers_sampled": 6.1,
@@ -2977,6 +2977,15 @@
           "title": "[Publi] Charla de Divas y jueguito #bloodycleanup #keymailer",
           "stream_id": "319552797045",
           "started_at": "2026-11-16T21:58:54Z"
+        },
+        {
+          "sampled_at": "2026-11-17T02:14:48Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -2988,16 +2997,16 @@
       "twitch_url": "https://twitch.tv/ther0d3r1k",
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
-      "live": true,
-      "current_viewers": 50,
-      "current_game": "ROB RUN",
-      "current_title": "SE VIENE UN JUEGASOO!  🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
-      "stream_started_at": "2026-11-16T22:54:41Z",
-      "last_status_at": "2026-11-17T01:02:42Z",
-      "last_snapshot_at": "2026-11-17T01:02:42Z",
-      "updated_at": "2026-11-17T01:02:42Z",
+      "live": false,
+      "current_viewers": null,
+      "current_game": null,
+      "current_title": null,
+      "stream_started_at": null,
+      "last_status_at": "2026-11-17T02:14:48Z",
+      "last_snapshot_at": "2026-11-17T02:14:48Z",
+      "updated_at": "2026-11-17T02:14:48Z",
       "window": {
-        "samples_total": 312,
+        "samples_total": 313,
         "live_samples": 36,
         "streams_observed": 9,
         "average_viewers_sampled": 23.0,
@@ -5958,6 +5967,15 @@
           "title": "SE VIENE UN JUEGASOO!  🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
           "stream_id": "321185397084",
           "started_at": "2026-11-16T22:54:41Z"
+        },
+        {
+          "sampled_at": "2026-11-17T02:14:48Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -6620,11 +6638,11 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "last_status_at": "2026-11-17T01:02:42Z",
-      "last_snapshot_at": "2026-11-17T01:02:42Z",
-      "updated_at": "2026-11-17T01:02:42Z",
+      "last_status_at": "2026-11-17T02:14:48Z",
+      "last_snapshot_at": "2026-11-17T02:14:48Z",
+      "updated_at": "2026-11-17T02:14:48Z",
       "window": {
-        "samples_total": 312,
+        "samples_total": 313,
         "live_samples": 6,
         "streams_observed": 3,
         "average_viewers_sampled": 7.2,
@@ -9473,6 +9491,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-17T02:14:48Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -9484,16 +9511,16 @@
       "twitch_url": "https://twitch.tv/akumazoldyck",
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
-      "live": true,
-      "current_viewers": 13,
-      "current_game": "Playable Archive",
-      "current_title": "jueguito de mello y luego vemos",
-      "stream_started_at": "2026-11-16T23:55:12Z",
-      "last_status_at": "2026-11-17T01:02:42Z",
-      "last_snapshot_at": "2026-11-17T01:02:42Z",
-      "updated_at": "2026-11-17T01:02:42Z",
+      "live": false,
+      "current_viewers": null,
+      "current_game": null,
+      "current_title": null,
+      "stream_started_at": null,
+      "last_status_at": "2026-11-17T02:14:48Z",
+      "last_snapshot_at": "2026-11-17T02:14:48Z",
+      "updated_at": "2026-11-17T02:14:48Z",
       "window": {
-        "samples_total": 312,
+        "samples_total": 313,
         "live_samples": 24,
         "streams_observed": 11,
         "average_viewers_sampled": 6.6,
@@ -12426,6 +12453,15 @@
           "title": "jueguito de mello y luego vemos",
           "stream_id": "321414777056",
           "started_at": "2026-11-16T23:55:12Z"
+        },
+        {
+          "sampled_at": "2026-11-17T02:14:48Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -12438,27 +12474,27 @@
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
       "live": true,
-      "current_viewers": 3,
+      "current_viewers": 1,
       "current_game": "Fortnite",
       "current_title": "Fortniete con amigos, en busca del token",
       "stream_started_at": "2026-11-17T00:47:27Z",
-      "last_status_at": "2026-11-17T01:02:42Z",
-      "last_snapshot_at": "2026-11-17T01:02:42Z",
-      "updated_at": "2026-11-17T01:02:42Z",
+      "last_status_at": "2026-11-17T02:14:48Z",
+      "last_snapshot_at": "2026-11-17T02:14:48Z",
+      "updated_at": "2026-11-17T02:14:48Z",
       "window": {
-        "samples_total": 312,
-        "live_samples": 13,
+        "samples_total": 313,
+        "live_samples": 14,
         "streams_observed": 8,
-        "average_viewers_sampled": 2.0,
+        "average_viewers_sampled": 1.9,
         "peak_viewers_sampled": 5,
-        "observed_live_hours": 3.55,
-        "estimated_hours_watched": 7.22,
+        "observed_live_hours": 4.47,
+        "estimated_hours_watched": 8.14,
         "game_breakdown": [
           {
             "name": "Fortnite",
-            "live_samples": 9,
+            "live_samples": 10,
             "streams_observed": 6,
-            "average_viewers_sampled": 1.7,
+            "average_viewers_sampled": 1.6,
             "peak_viewers_sampled": 3
           },
           {
@@ -12528,9 +12564,9 @@
           },
           {
             "date": "2026-11-17",
-            "live_samples": 1,
+            "live_samples": 2,
             "streams_observed": 1,
-            "average_viewers_sampled": 3.0,
+            "average_viewers_sampled": 2.0,
             "peak_viewers_sampled": 3
           }
         ],
@@ -15344,6 +15380,15 @@
           "title": "Fortniete con amigos, en busca del token",
           "stream_id": "322448229723",
           "started_at": "2026-11-17T00:47:27Z"
+        },
+        {
+          "sampled_at": "2026-11-17T02:14:48Z",
+          "is_live": true,
+          "viewer_count": 1,
+          "game_name": "Fortnite",
+          "title": "Fortniete con amigos, en busca del token",
+          "stream_id": "322448229723",
+          "started_at": "2026-11-17T00:47:27Z"
         }
       ]
     },
@@ -15976,11 +16021,11 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "last_status_at": "2026-11-17T01:02:42Z",
-      "last_snapshot_at": "2026-11-17T01:02:42Z",
-      "updated_at": "2026-11-17T01:02:42Z",
+      "last_status_at": "2026-11-17T02:14:48Z",
+      "last_snapshot_at": "2026-11-17T02:14:48Z",
+      "updated_at": "2026-11-17T02:14:48Z",
       "window": {
-        "samples_total": 312,
+        "samples_total": 313,
         "live_samples": 67,
         "streams_observed": 14,
         "average_viewers_sampled": 5.0,
@@ -18913,6 +18958,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-17T02:14:48Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -18924,16 +18978,16 @@
       "twitch_url": "https://twitch.tv/losmoriartys",
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
-      "live": true,
-      "current_viewers": 7,
-      "current_game": "Bloody Cleanup TOGHETER",
-      "current_title": "[Rincon del Nerd] Doble Publi + Limpieza de crimenes con @ladymoriarty01 - #BloodyCleanupTogether y BusTerminalSimulator:Prologue",
-      "stream_started_at": "2026-11-16T22:55:23Z",
-      "last_status_at": "2026-11-17T01:02:42Z",
-      "last_snapshot_at": "2026-11-17T01:02:42Z",
-      "updated_at": "2026-11-17T01:02:42Z",
+      "live": false,
+      "current_viewers": null,
+      "current_game": null,
+      "current_title": null,
+      "stream_started_at": null,
+      "last_status_at": "2026-11-17T02:14:48Z",
+      "last_snapshot_at": "2026-11-17T02:14:48Z",
+      "updated_at": "2026-11-17T02:14:48Z",
       "window": {
-        "samples_total": 312,
+        "samples_total": 313,
         "live_samples": 17,
         "streams_observed": 8,
         "average_viewers_sampled": 16.5,
@@ -21873,6 +21927,15 @@
           "title": "[Rincon del Nerd] Doble Publi + Limpieza de crimenes con @ladymoriarty01 - #BloodyCleanupTogether y BusTerminalSimulator:Prologue",
           "stream_id": "319553496821",
           "started_at": "2026-11-16T22:55:23Z"
+        },
+        {
+          "sampled_at": "2026-11-17T02:14:48Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     }
