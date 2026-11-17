@@ -5300,3 +5300,11 @@ main .chapter-panel :where(.chapter-cta, .executive-button, .comic-submit-btn,
 .hero-profile-content-item a{color:#155b73;font-size:.72rem;font-weight:900}
 @media(max-width:800px){.hero-profile-gateway{grid-template-columns:1fr}.hero-profile-art-frame{max-width:440px;margin:0 auto}.hero-profile-art{min-height:0;max-height:520px;aspect-ratio:4/5}.hero-profile-metric-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:480px){.hero-profile-copy{padding:14px}.hero-profile-tab{padding:8px 11px}.hero-profile-tab-panel{padding:12px}.hero-profile-content-item,.hero-profile-detail-list li{align-items:flex-start;flex-direction:column}}
+
+.hero-profile-gateway .hero-profile-copy{max-width:none;margin:0;text-align:left;align-items:stretch}
+.hero-profile-gateway .hero-profile-actions{justify-content:flex-start}
+.hero-profile-top-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:4px 0}
+.hero-profile-top-metrics span{display:flex;flex-direction:column;gap:3px;padding:9px;background:#fffaf0;border:1px solid #d0c3a8;min-width:0}
+.hero-profile-top-metrics small{font-size:.58rem;font-weight:900;letter-spacing:.07em;color:#776b55}
+.hero-profile-top-metrics b{font:1.35rem 'Bangers',Impact,sans-serif;color:#18202a;font-variant-numeric:tabular-nums}
+@media(max-width:480px){.hero-profile-top-metrics{gap:5px}.hero-profile-top-metrics span{padding:7px 5px}.hero-profile-top-metrics b{font-size:1.15rem}}
