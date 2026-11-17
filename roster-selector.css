@@ -681,3 +681,38 @@
 @media(prefers-reduced-motion:reduce){
  #chapter-2 .hero-profile-metric-scale span{transition:none!important}
 }
+
+
+/* Jerarquía visual Roster: carnet en las ocho tarjetas; arte del personaje dentro del expediente. */
+#chapter-2 .comic-roster-photo img {
+    object-fit: cover;
+    object-position: center 18%;
+}
+#chapter-2 .hero-profile-character-art {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+    margin: 0 0 20px;
+    padding: 12px;
+    border: 2px solid #080d18;
+    background: #f7f0dc;
+    box-shadow: 6px 6px 0 #03070d;
+}
+#chapter-2 .hero-profile-character-art img {
+    display: block;
+    width: 100%;
+    max-height: min(72vh, 760px);
+    object-fit: contain;
+    object-position: center top;
+    background: #101722;
+}
+#chapter-2 .hero-profile-character-art figcaption {
+    color: #71551a;
+    font: 900 .72rem/1.4 'Roboto Condensed', sans-serif;
+    letter-spacing: .12em;
+    text-align: center;
+}
+@media (max-width: 640px) {
+    #chapter-2 .hero-profile-character-art { padding: 8px; margin-bottom: 14px; }
+    #chapter-2 .hero-profile-character-art img { max-height: 58vh; }
+}
