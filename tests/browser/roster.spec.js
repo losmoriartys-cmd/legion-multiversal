@@ -26,6 +26,7 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
   await page.goto('/');
   await page.evaluate(() => switchChapter(2));
   const cards = page.locator('.comic-roster-card');
+  await expect(page.locator('#roster-container')).toHaveCount(0);
   await expect(cards).toHaveCount(8);
   await expect(page.locator('.roster-selector-panel')).toHaveCount(0);
 
