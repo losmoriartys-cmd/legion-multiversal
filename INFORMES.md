@@ -1,3 +1,16 @@
+## 2026-11-17 — Roster 01: cartas simultáneas y Bitácora directa
+
+- **Base:** `main` en `de6252c5b19d65628321a53d07fb036c0bd9a547`; rama nueva `feat/roster-comic-cards-chapter-01-2026-11-17`, creada desde el HEAD vigente de main para evitar integrar la rama histórica divergente.
+- **Jerarquía editorial:** Roster pasa a Capítulo 01 y queda primero en la navegación principal; Origen pasa a 02 y Valores a 03. Los IDs técnicos de los paneles se conservan.
+- **Directorio:** el selector de un personaje con panel de previsualización se sustituye por una grilla simultánea de las ocho cartas. Cada frente usa retrato existente, alias/identidad, juego o especialidad, badges de seguimiento/actividad, métricas verificables y CTA directo.
+- **Bitácora:** el clic abre directamente la ficha 35/65. La columna izquierda conserva fotografía, nombre, alias, frase y redes; la derecha presenta breadcrumb, estado, pestañas y contenido. La pestaña Bitácora contiene los registros y la propuesta editorial, sin abrir un segundo modal.
+- **Integridad:** no se incorporan cifras de ejemplo del prompt como si fueran datos reales. Seguidores Twitch no disponibles permanecen como «—»; suscriptores YouTube se muestran solo con estado verificado; media de viewers proviene del muestreo. «Activo esta semana» depende de una muestra en vivo de los últimos siete días.
+- **Pendiente de QA:** validar JavaScript/HTML, las ocho cartas, rutas e historial, pestañas, accesibilidad, escritorio y móvil. No se declara desplegado ni publicado.
+- **Pendiente funcional:** edición persistente autenticada; no se agrega un botón de edición sin backend seguro.
+- **Siguiente:** ejecutar suite unitaria y Playwright en la preview de esta rama y corregir cualquier regresión antes de integrar a main.
+
+---
+
 ## 2026-11-16 — Roster: horarios habituales por creador
 
 - **Base:** `main` en `d0ee9384a4c2c2c036b5b174158a58a713d1945c`.
