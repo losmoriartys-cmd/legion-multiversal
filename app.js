@@ -1326,9 +1326,28 @@ function renderHeroProfileTabs(hero) {
  snapshots.filter(s=>s?.is_live&&s.game_name).forEach(s=>gamesMap.set(s.game_name,(gamesMap.get(s.game_name)||0)+1));
  const games=Array.from(gamesMap.entries()).sort((a,b)=>b[1]-a[1]).slice(0,8);
  const gameHtml=games.length?'<div class="hero-profile-game-grid">'+games.map(([name,count])=>'<article><strong>'+safe(name)+'</strong><span>'+safe(count)+' muestras observadas</span></article>').join('')+'</div>':'<p class="hero-profile-empty">Todavía no hay categorías de juego suficientes en las capturas disponibles.</p>';
- const metrics=[['DIRECTOS OBSERVADOS',win.streams_observed,'sesiones'],['PROMEDIO DE ESPECTADORES',win.average_viewers_sampled,'promedio muestreado'],['PICO OBSERVADO',win.peak_viewers_sampled,'máxima lectura'],['HORAS EN DIRECTO',win.observed_live_hours,'horas observadas']];
- if(yt?.status==='verified'&&yt.metrics?.subscribers!=null)metrics.unshift(['SUSCRIPTORES',yt.metrics.subscribers,'YouTube · dato público']);
- const metricHtml=metrics.map(([label,value,note])=>'<article class="hero-profile-metric"><small>'+safe(label)+'</small><strong>'+(value==null?'—':safe(typeof value==='number'?value.toLocaleString('es-AR',{maximumFractionDigits:1}):value))+'</strong><span>'+safe(note)+'</span></article>').join('');
+ const metricDefinitions=[
+  {label:'DIRECTOS OBSERVADOS',value:win.streams_observed,note:'sesiones',key:'streams_observed'},
+  {label:'PROMEDIO DE ESPECTADORES',value:win.average_viewers_sampled,note:'promedio muestreado',key:'average_viewers_sampled'},
+  {label:'PICO OBSERVADO',value:win.peak_viewers_sampled,note:'máxima lectura',key:'peak_viewers_sampled'},
+  {label:'HORAS EN DIRECTO',value:win.observed_live_hours,note:'horas observadas',key:'observed_live_hours'}
+ ];
+ if(yt?.status==='verified'&&yt.metrics?.subscribers!=null)metricDefinitions.unshift({label:'SUSCRIPTORES',value:yt.metrics.subscribers,note:'YouTube · dato público',key:'youtube_subscribers'});
+ const metricPeerValues=key=>heroesData.map(peer=>{
+  if(key==='youtube_subscribers'){
+   const data=platformStatsData?.creators?.[platformStatsKey(peer)]?.platforms?.youtube;
+   return data?.status==='verified'?Number(data.metrics?.subscribers):null;
+  }
+  const peerWindow=findChannelStats(peer)?.window||{};
+  return Number(peerWindow[key]);
+ }).filter(value=>Number.isFinite(value)&&value>=0);
+ const metricHtml=metricDefinitions.map(({label,value,note,key})=>{
+  const numericValue=Number(value),peers=metricPeerValues(key),maxValue=peers.length>1?Math.max(...peers):0;
+  const showBar=value!=null&&Number.isFinite(numericValue)&&peers.length>1&&maxValue>0;
+  const percentage=showBar?Math.max(0,Math.min(100,(numericValue/maxValue)*100)):0;
+  const bar=showBar?'<div class="hero-profile-metric-scale" role="meter" aria-label="'+safe(label)+' en comparación con los perfiles que tienen este dato" aria-valuemin="0" aria-valuemax="'+safe(maxValue)+'" aria-valuenow="'+safe(numericValue)+'"><span style="width:'+percentage.toFixed(1)+'%"></span></div><small class="hero-profile-metric-scale-note">Escala relativa entre integrantes con dato disponible; no es un ranking ni una métrica de plataforma.</small>':'';
+  return '<article class="hero-profile-metric"><small>'+safe(label)+'</small><strong>'+(value==null?'—':safe(typeof value==='number'?value.toLocaleString('es-AR',{maximumFractionDigits:1}):value))+'</strong><span>'+safe(note)+'</span>'+bar+'</article>';
+ }).join('');
  const period=win.period_start&&win.period_end?statsDate(String(win.period_start).slice(0,10))+' – '+statsDate(String(win.period_end).slice(0,10)):'ventana disponible de muestreo';
  const lastLive=[...snapshots].reverse().find(s=>s?.is_live&&s.sampled_at)?.sampled_at;
  const lastLiveLabel=lastLive?new Date(lastLive).toLocaleString('es-AR',{dateStyle:'medium',timeStyle:'short'}):'Sin directo detectado en la ventana';
@@ -1395,6 +1414,8 @@ function openHeroProfile(index, triggerElement = document.activeElement, options
     });
     home.hidden = true;
     page.hidden = false;
+    page.classList.add('is-active');
+    page.setAttribute('aria-hidden', 'false');
     setHeroProfileRoute(hero, options.historyMode || 'push');
     page.scrollIntoView({behavior:'smooth',block:'start'});
     requestAnimationFrame(() => page.querySelector('[data-profile-tab]')?.focus({preventScroll:true}));
@@ -1498,7 +1519,11 @@ function closeHeroProfile(options = {}) {
     }
     const home = document.getElementById('roster-home');
     const page = document.getElementById('hero-profile-page');
-    if (page) page.hidden = true;
+    if (page) {
+        page.hidden = true;
+        page.classList.remove('is-active');
+        page.setAttribute('aria-hidden', 'true');
+    }
     if (home) home.hidden = false;
     if (!options.fromHistory && location.hash.startsWith('#roster/')) {
         history.replaceState({ lmRosterBase: true }, '', '#roster');
