@@ -87,13 +87,15 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
   expect(pageErrors).toEqual([]);
 });
 
-test('el acceso Roster está antes de Origen en la navegación principal', async ({ page }) => {
+test('Origen aparece antes que Roster y la navegación principal contiene cinco destinos', async ({ page }) => {
   await page.goto('/');
   const nav = page.locator('.primary-navigation');
+  await expect(nav.locator('[data-chapter]')).toHaveCount(5);
+  await expect(nav.locator('[data-chapter="1"]')).toHaveText('ORIGEN');
   await expect(nav.locator('[data-chapter="2"]')).toHaveText('ROSTER');
-  const rosterBox = await nav.locator('[data-chapter="2"]').boundingBox();
   const originBox = await nav.locator('[data-chapter="1"]').boundingBox();
-  expect(rosterBox.x).toBeLessThan(originBox.x);
+  const rosterBox = await nav.locator('[data-chapter="2"]').boundingBox();
+  expect(originBox.x).toBeLessThan(rosterBox.x);
 });
 
 test('las cartas se organizan en cuatro columnas de escritorio y dos en móvil', async ({ page }) => {
