@@ -1197,7 +1197,7 @@ function renderCommercialQuickView(hero) {
     return out;
 }
 function renderCreatorPlatformLinks(hero) {
-    const labels = { twitch: 'TWITCH', youtube: 'YOUTUBE', instagram: 'INSTAGRAM' };
+    const labels = { twitch: 'TWITCH', youtube: 'YOUTUBE', instagram: 'INSTAGRAM', tiktok: 'TIKTOK', kick: 'KICK', discord: 'DISCORD', twitter: 'X / TWITTER', x: 'X' };
     const accounts = Array.isArray(hero.accounts) ? hero.accounts : [];
     const links = accounts.filter(account => labels[account.platform] && account.url);
     if (!links.length) {
