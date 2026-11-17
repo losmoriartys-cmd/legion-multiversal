@@ -783,7 +783,7 @@ async function loadInstituteStats(){
   const homeFollowLink=document.getElementById('home-follow-link');
   if(homeFollowLink)homeFollowLink.hidden=isFresh&&liveCount>0;
   const liveNav=document.querySelector('.nav-btn-live[data-chapter="10"]');
-  if(liveNav){const showLive=isFresh&&liveCount>0;liveNav.classList.toggle('is-live',showLive);liveNav.innerHTML='MIRAR <span aria-hidden="true">'+(showLive?'● '+liveCount:'●')+'</span>';liveNav.setAttribute('aria-label',showLive?liveCount+' canal(es) detectado(s) en directo en la última captura':'Consultar estado de transmisiones; '+(isFresh?'sin canales en directo en la última captura':'última captura demorada'));}
+  if(liveNav){const showLive=isFresh&&liveCount>0;liveNav.classList.toggle('is-live',showLive);liveNav.innerHTML='EN VIVO <span aria-hidden="true">'+(showLive?'● '+liveCount:'●')+'</span>';liveNav.setAttribute('aria-label',showLive?liveCount+' canal(es) detectado(s) en directo en la última captura':'Consultar estado de transmisiones; '+(isFresh?'sin canales en directo en la última captura':'última captura demorada'));}
   const channelGrid=document.getElementById('stats-channel-grid');
   if(channelGrid){
    const orderedChannels=channels.slice().sort((a,b)=>Number(Boolean(b.live))-Number(Boolean(a.live))||String(a.display_name||a.login).localeCompare(String(b.display_name||b.login),'es'));
