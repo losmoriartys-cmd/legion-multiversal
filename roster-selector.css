@@ -258,7 +258,7 @@
 #chapter-2 .comic-roster-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:clamp(12px,1.7vw,22px); align-items:stretch; }
 #chapter-2 .comic-roster-card { display:flex; min-width:0; flex-direction:column; padding:0; overflow:hidden; border:3px solid #080808; border-radius:0; background:#fff8d6; color:#111; text-align:left; box-shadow:7px 7px 0 #000; cursor:pointer; }
 #chapter-2 .comic-roster-photo { position:relative; display:block; height:clamp(190px,22vw,285px); overflow:hidden; background:#171717; }
-#chapter-2 .comic-roster-photo img { display:block; width:100%; height:100%; object-fit:cover; object-position:center 18%; transition:transform .25s ease; }
+#chapter-2 .comic-roster-photo img { display:block; width:100%; height:100%; object-fit:cover; object-position:center top; transition:transform .25s ease; }
 #chapter-2 .comic-roster-card:hover .comic-roster-photo img { transform:scale(1.035); }
 #chapter-2 .comic-roster-photo-shade { position:absolute; inset:35% 0 0; background:linear-gradient(transparent,rgba(0,0,0,.92)); pointer-events:none; }
 #chapter-2 .comic-roster-photo-copy { position:absolute; z-index:2; left:12px; right:10px; bottom:10px; display:flex; flex-direction:column; gap:2px; color:#fff; text-shadow:2px 2px #000; }
@@ -292,7 +292,7 @@
 #chapter-2 .comic-profile-sidebar { position:sticky; top:12px; align-self:start; min-width:0; padding:14px; border-right:3px solid #080808; background:#fff8d6; }
 #chapter-2 .hero-profile-id-card { overflow:hidden; border:3px solid #080808; border-radius:0; background:#171717; }
 #chapter-2 .hero-profile-id-image { position:relative; min-height:450px; overflow:hidden; }
-#chapter-2 .hero-profile-id-image > img { display:block; width:100%; height:450px; object-fit:cover; object-position:center 18%; }
+#chapter-2 .hero-profile-id-image > img { display:block; width:100%; height:450px; object-fit:cover; object-position:center top; }
 #chapter-2 .hero-profile-id-name { position:absolute; inset:auto 0 0; display:flex; flex-direction:column; gap:4px; padding:55px 12px 12px; background:linear-gradient(transparent,rgba(0,0,0,.94)); color:#fff; }
 #chapter-2 .hero-profile-id-name small { color:#ffd500; font-size:.72rem; font-weight:900; letter-spacing:.1em; }
 #chapter-2 .hero-profile-id-name strong { color:#fff; font:clamp(2rem,3vw,3.1rem)/.92 'Bangers',Impact,sans-serif; -webkit-text-stroke:1px #000; text-shadow:3px 3px #000; }
@@ -368,7 +368,7 @@
 #chapter-2 .comic-roster-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:clamp(12px,1.7vw,22px); align-items:stretch; }
 #chapter-2 .comic-roster-card { display:flex; min-width:0; flex-direction:column; padding:0; overflow:hidden; border:3px solid #080808; border-radius:0; background:#fff8d6; color:#111; text-align:left; box-shadow:7px 7px 0 #000; cursor:pointer; }
 #chapter-2 .comic-roster-photo { position:relative; display:block; height:clamp(190px,22vw,285px); overflow:hidden; background:#171717; }
-#chapter-2 .comic-roster-photo img { display:block; width:100%; height:100%; object-fit:cover; object-position:center 18%; transition:transform .25s ease; }
+#chapter-2 .comic-roster-photo img { display:block; width:100%; height:100%; object-fit:cover; object-position:center top; transition:transform .25s ease; }
 #chapter-2 .comic-roster-card:hover .comic-roster-photo img { transform:scale(1.035); }
 #chapter-2 .comic-roster-photo-shade { position:absolute; inset:35% 0 0; background:linear-gradient(transparent,rgba(0,0,0,.92)); pointer-events:none; }
 #chapter-2 .comic-roster-photo-copy { position:absolute; z-index:2; left:12px; right:10px; bottom:10px; display:flex; flex-direction:column; gap:2px; color:#fff; text-shadow:2px 2px #000; }
@@ -402,7 +402,7 @@
 #chapter-2 .comic-profile-sidebar { position:sticky; top:12px; align-self:start; min-width:0; padding:14px; border-right:3px solid #080808; background:#fff8d6; }
 #chapter-2 .hero-profile-id-card { overflow:hidden; border:3px solid #080808; border-radius:0; background:#171717; }
 #chapter-2 .hero-profile-id-image { position:relative; min-height:450px; overflow:hidden; }
-#chapter-2 .hero-profile-id-image > img { display:block; width:100%; height:450px; object-fit:cover; object-position:center 18%; }
+#chapter-2 .hero-profile-id-image > img { display:block; width:100%; height:450px; object-fit:cover; object-position:center top; }
 #chapter-2 .hero-profile-id-name { position:absolute; inset:auto 0 0; display:flex; flex-direction:column; gap:4px; padding:55px 12px 12px; background:linear-gradient(transparent,rgba(0,0,0,.94)); color:#fff; }
 #chapter-2 .hero-profile-id-name small { color:#ffd500; font-size:.72rem; font-weight:900; letter-spacing:.1em; }
 #chapter-2 .hero-profile-id-name strong { color:#fff; font:clamp(2rem,3vw,3.1rem)/.92 'Bangers',Impact,sans-serif; -webkit-text-stroke:1px #000; text-shadow:3px 3px #000; }
