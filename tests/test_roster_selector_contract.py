@@ -101,7 +101,20 @@ class RosterComicCardsContractTests(unittest.TestCase):
         css = (ROOT / "roster-selector.css").read_text(encoding="utf-8")
         self.assertIn("#chapter-2 #roster-home[hidden]", css)
         self.assertIn("#chapter-2 #hero-profile-page[hidden]", css)
-        self.assertIn("display:none !important", css)
+        self.assertIn("#chapter-2 .roster-selector-panel.is-active{display:block!important}", css)
+        self.assertNotIn(".roster-selector-panel,#chapter-2 .roster-selector-progress,#chapter-2 .roster-selector-comparator,#chapter-2 .roster-selector-method{display:none!important}", css)
+        self.assertIn("page.classList.add('is-active')", self.app)
+        self.assertIn("page.classList.remove('is-active')", self.app)
+
+    def test_commercial_dossier_shows_auditable_relative_performance_bars(self):
+        self.assertIn("function renderCommercialQuickView(hero)", self.app)
+        self.assertIn("renderCommercialQuickView(hero)", self.app)
+        self.assertIn("hero-profile-metric-scale", self.app)
+        self.assertIn("metricPeerValues", self.app)
+        self.assertIn("no es un ranking ni una métrica de plataforma", self.app)
+        self.assertIn("average_viewers_sampled", self.app)
+        self.assertIn("peak_viewers_sampled", self.app)
+        self.assertIn("observed_live_hours", self.app)
 
     def test_only_one_roster_directory_remains_in_the_chapter(self):
         self.assertIn('id="roster-selector"', self.html)
