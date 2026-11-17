@@ -110,6 +110,11 @@ test('las cartas se organizan en cuatro columnas de escritorio y dos en móvil',
   await page.locator('#chapter-transition').evaluate(el => el.classList.remove('play'));
   const cards = page.locator('.comic-roster-card');
   await expect(cards).toHaveCount(8);
+  await cards.locator('.comic-roster-photo img').evaluateAll(images => Promise.all(images.map(img => {
+    img.loading = 'eager';
+    return img.decode().catch(() => null);
+  })));
+  await expect.poll(() => cards.locator('.comic-roster-photo img').evaluateAll(images => images.every(img => img.naturalWidth > 0))).toBe(true);
   const desktopColumns = await cards.first().evaluate(el => getComputedStyle(el.parentElement).gridTemplateColumns.split(' ').length);
   expect(desktopColumns).toBe(4);
   await page.screenshot({ path: 'test-results/roster-desktop.png', fullPage: true });
