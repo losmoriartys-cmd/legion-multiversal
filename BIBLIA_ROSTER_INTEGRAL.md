@@ -723,3 +723,8 @@ Valores, Comunidad y Alianzas se conservan como pilares complementarios accesibl
 Colaboraciones, Arsenal y Mapa Multiversal quedan como recursos complementarios, fuera del recorrido principal. No se eliminan sus archivos ni sus registros. Cualquier contenido que se recupere debe conservar una única fuente de verdad para personas, fotografías, perfiles y métricas.
 
 La rama de trabajo no se considera terminada hasta ejecutar pruebas Python y Playwright, revisar escritorio y móvil, verificar los ocho expedientes, pestañas, historial Atrás/Adelante, retorno desde los pilares complementarios y enlaces. No publicar ni fusionar a main sin aprobación explícita.
+
+
+### Separación de ilustraciones y retratos — 17 de noviembre de 2026
+
+Las cartas públicas conservan la ilustración de personaje desde `hero.img`; el expediente individual usa el retrato aprobado desde `hero.portrait`. El mapeo de los ocho retratos está fijado por contrato y no debe permutarse. El archivo de colaboraciones no repite retratos individuales ya presentados en el Roster; los casos mantienen únicamente sus imágenes grupales/editoriales propias.
