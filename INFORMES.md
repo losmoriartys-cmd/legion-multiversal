@@ -3344,3 +3344,12 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - Se eliminó el bloque de acceso a la Bitácora externa desde Colaboraciones y se reemplazaron los cuatro retratos individuales del caso BarFender por una lista textual de participantes. Se conserva la imagen grupal específica del caso.
 - Se añadieron contratos para comprobar el mapeo exacto, la separación arte/retrato y la ausencia de retratos repetidos en el archivo colaborativo.
 - **Cierre de revisión visual:** se corrigió que el CSS mantuviera visible el Roster al abrir un expediente; las reglas `[hidden]` aseguran que el expediente sustituya la grilla. También se ajustó la grilla de métricas móviles para que no recorte la segunda columna. Las capturas finales confirman escritorio 4×2, móvil 2×4 y expediente individual sin el directorio detrás.
+
+### Activación del expediente comercial y métricas comparativas — 17/11/2026
+
+- Se eliminó la regla CSS que ocultaba globalmente el panel, la metodología y la comparativa del Roster.
+- El expediente canónico (#hero-profile-page) ahora usa la clase roster-selector-panel; JS activa y desactiva .is-active junto con el atributo hidden. El directorio y el expediente siguen siendo mutuamente excluyentes.
+- Se mantienen app.js y roster-data.json como motor y fuente de verdad existentes. No se agregó un segundo roster-engine.js ni un streamers.json paralelo: duplicarían los ocho perfiles y podrían introducir métricas de ejemplo no verificadas.
+- La ficha ejecutiva existente se conserva dentro de Perfil. La pestaña Estadísticas añade barras comparativas relativas para métricas con datos disponibles en más de un integrante; las barras no se presentan como ranking ni como métricas oficiales.
+- Se conservan vacíos como “no disponible” cuando no hay dato. No se incorporan los números de ejemplo de Oratoris/Hábitos del fragmento proporcionado.
+- Pendiente: CI/Playwright de este commit y revisión visual real de escritorio/móvil.
