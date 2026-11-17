@@ -555,3 +555,22 @@
 }
 #chapter-12 .campaign-agent > div { display:grid; gap:4px; }
 #chapter-12 .campaign-agent img { display:none !important; }
+
+.collaboration-case-link {
+  display:flex;
+  width:100%;
+  justify-content:space-between;
+  align-items:center;
+  gap:14px;
+  margin-top:14px;
+  padding:14px 16px;
+  border:1px solid rgba(255,222,0,.42);
+  background:rgba(34,30,20,.56);
+  color:#f2e8bd;
+  text-align:left;
+  cursor:pointer;
+}
+.collaboration-case-link span { font-size:.72rem; font-weight:800; letter-spacing:.08em; }
+.collaboration-case-link strong { color:var(--yellow-accent,#ffde00); font:1.15rem 'Bangers',cursive; letter-spacing:.06em; }
+.collaboration-case-link:hover { border-color:var(--yellow-accent,#ffde00); background:rgba(55,44,20,.68); }
+@media(max-width:640px) { .collaboration-case-link { flex-direction:column; align-items:flex-start; } }
