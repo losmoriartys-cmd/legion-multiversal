@@ -5,7 +5,7 @@
   "heroes": [
     {
       "name": "MORIARTYS",
-      "portrait": "assets/carnet/DemuianCarnet.jpg",
+      "portrait": "Cyberpunk_Cyborg_Portrait-hay-muchas-que-dejaron-de-ser-animadas-la-idea-es.jpg",
       "codename": "EL ESTRATEGA",
       "characterRole": "ESTRATEGA CIBERNÉTICO",
       "powerSet": "Guerra cibernética · Hackeo táctico · Control de drones",
@@ -101,7 +101,7 @@
     },
     {
       "name": "ROD3R1K",
-      "portrait": "assets/carnet/rod3r1k.jpg",
+      "portrait": "Superhero_Camera_Portrait-hay-muchas-que-dejaron-de-ser-animadas-la-idea-es.jpg",
       "codename": "EL FUERTE",
       "characterRole": "INGENIERO SÓNICO",
       "powerSet": "Onda sónica · Fotografía táctica · Resonancia",
@@ -192,7 +192,7 @@
     },
     {
       "name": "LADYMORIARTY",
-      "portrait": "assets/carnet/LadyCarnet.jpg",
+      "portrait": "Red_Haired_Mystic_Witch-hay-muchas-que-dejaron-de-ser-animadas-la-idea-es.jpg",
       "codename": "LA BRUJA",
       "characterRole": "BRUJA CAÓTICA",
       "powerSet": "Magia caótica · Hechizos · Distorsión de la realidad",
@@ -286,7 +286,7 @@
     },
     {
       "name": "ARDIPII",
-      "portrait": "assets/carnet/ardipii.jpg",
+      "portrait": "Hooded_Atomic_Figure-hay-muchas-que-dejaron-de-ser-animadas-la-idea-es.jpg",
       "codename": "EL FANTASMA",
       "characterRole": "GUARDIÁN ESPECTRAL",
       "powerSet": "Fase espectral · Intangibilidad · Llama ectoplásmica",
@@ -375,7 +375,7 @@
     },
     {
       "name": "AKUMA",
-      "portrait": "assets/carnet/Akuma_dark.jpg",
+      "portrait": "image_20261117_045605.jpg",
       "codename": "EL INFERNAL",
       "characterRole": "TANQUE DEMONÍACO",
       "powerSet": "Llama infernal · Vuelo · Fuerza abismal",
@@ -466,7 +466,7 @@
     },
     {
       "name": "DAVE — NEXUS",
-      "portrait": "assets/carnet/nexus.jpg",
+      "portrait": "Purple_Cyberpunk_Warrior-hay-muchas-que-dejaron-de-ser-animadas-la-idea-es.jpg",
       "codename": "EL NEXO",
       "characterRole": "GUARDIÁN TECNOLÓGICO",
       "powerSet": "Manipulación tecnológica · Campo psiónico · Runas",
@@ -554,7 +554,7 @@
     },
     {
       "name": "PATO — ORATORIS",
-      "portrait": "assets/carnet/oratoris.jpg",
+      "portrait": "Bald_Man_In_Gold_Armor-hay-muchas-que-dejaron-de-ser-animadas-la-idea-es.jpg",
       "codename": "EL ORADOR",
       "characterRole": "COMUNICADOR DEL CONOCIMIENTO",
       "powerSet": "Claridad · Pensamiento crítico · Transmisión de conocimiento",
@@ -676,7 +676,7 @@
     },
     {
       "name": "HABITOS",
-      "portrait": "assets/carnet/habitos.jpg",
+      "portrait": "Sci_Fi_Superhero_Portrait-hay-muchas-que-dejaron-de-ser-animadas-la-idea-es.jpg",
       "codename": "FILÓSOFO JUSTICIERO",
       "characterRole": "FILÓSOFO ATÓMICO",
       "powerSet": "Rayo atómico · Física atómica · Combate cuerpo a cuerpo",
