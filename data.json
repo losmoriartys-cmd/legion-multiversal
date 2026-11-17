@@ -13,18 +13,18 @@
     "ther0d3r1k"
   ],
   "collection": {
-    "started_at": "2026-11-17T18:43:42Z",
+    "started_at": "2026-11-17T18:55:38Z",
     "expected_channels": 7,
     "resolved_channels": 7,
     "sampled_channels": [],
     "skipped_channels": [
-      "akumazoldyck",
       "ardipii",
       "daved0608",
       "habitos_atomicos",
       "ladymoriarty01",
       "losmoriartys",
-      "ther0d3r1k"
+      "ther0d3r1k",
+      "akumazoldyck"
     ],
     "complete": false,
     "status_complete": true,
@@ -39,7 +39,7 @@
     "elgabii090"
   ],
   "channel_registry_note": "Los canales archivados se conservan para consulta histórica y no se incluyen en los indicadores del roster activo.",
-  "updated_at": "2026-11-17T18:43:42Z",
+  "updated_at": "2026-11-17T18:55:38Z",
   "channels": {
     "ladymoriarty01": {
       "login": "ladymoriarty01",
@@ -54,9 +54,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "last_status_at": "2026-11-17T18:43:42Z",
+      "last_status_at": "2026-11-17T18:55:38Z",
       "last_snapshot_at": "2026-11-17T18:37:50Z",
-      "updated_at": "2026-11-17T18:43:42Z",
+      "updated_at": "2026-11-17T18:55:38Z",
       "window": {
         "samples_total": 329,
         "live_samples": 12,
@@ -3146,9 +3146,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "last_status_at": "2026-11-17T18:43:42Z",
+      "last_status_at": "2026-11-17T18:55:38Z",
       "last_snapshot_at": "2026-11-17T18:37:50Z",
-      "updated_at": "2026-11-17T18:43:42Z",
+      "updated_at": "2026-11-17T18:55:38Z",
       "window": {
         "samples_total": 329,
         "live_samples": 36,
@@ -6926,9 +6926,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "last_status_at": "2026-11-17T18:43:42Z",
+      "last_status_at": "2026-11-17T18:55:38Z",
       "last_snapshot_at": "2026-11-17T18:37:50Z",
-      "updated_at": "2026-11-17T18:43:42Z",
+      "updated_at": "2026-11-17T18:55:38Z",
       "window": {
         "samples_total": 329,
         "live_samples": 6,
@@ -9948,9 +9948,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "last_status_at": "2026-11-17T18:43:42Z",
+      "last_status_at": "2026-11-17T18:55:38Z",
       "last_snapshot_at": "2026-11-17T18:37:50Z",
-      "updated_at": "2026-11-17T18:43:42Z",
+      "updated_at": "2026-11-17T18:55:38Z",
       "window": {
         "samples_total": 329,
         "live_samples": 24,
@@ -13054,9 +13054,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "last_status_at": "2026-11-17T18:43:42Z",
+      "last_status_at": "2026-11-17T18:55:38Z",
       "last_snapshot_at": "2026-11-17T18:37:50Z",
-      "updated_at": "2026-11-17T18:43:42Z",
+      "updated_at": "2026-11-17T18:55:38Z",
       "window": {
         "samples_total": 329,
         "live_samples": 14,
@@ -16737,13 +16737,13 @@
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
       "live": true,
-      "current_viewers": 4,
+      "current_viewers": 2,
       "current_game": "Just Chatting",
       "current_title": "es mi primer dia",
       "stream_started_at": "2026-11-17T18:20:23Z",
-      "last_status_at": "2026-11-17T18:43:42Z",
+      "last_status_at": "2026-11-17T18:55:38Z",
       "last_snapshot_at": "2026-11-17T18:37:50Z",
-      "updated_at": "2026-11-17T18:43:42Z",
+      "updated_at": "2026-11-17T18:55:38Z",
       "window": {
         "samples_total": 329,
         "live_samples": 68,
@@ -19854,9 +19854,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "last_status_at": "2026-11-17T18:43:42Z",
+      "last_status_at": "2026-11-17T18:55:38Z",
       "last_snapshot_at": "2026-11-17T18:37:50Z",
-      "updated_at": "2026-11-17T18:43:42Z",
+      "updated_at": "2026-11-17T18:55:38Z",
       "window": {
         "samples_total": 329,
         "live_samples": 17,
