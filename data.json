@@ -13,17 +13,17 @@
     "ther0d3r1k"
   ],
   "collection": {
-    "started_at": "2026-11-17T22:30:24Z",
+    "started_at": "2026-11-17T23:25:31Z",
     "expected_channels": 7,
     "resolved_channels": 7,
     "sampled_channels": [
-      "ardipii",
       "daved0608",
       "habitos_atomicos",
       "ladymoriarty01",
       "losmoriartys",
       "ther0d3r1k",
-      "akumazoldyck"
+      "akumazoldyck",
+      "ardipii"
     ],
     "skipped_channels": [],
     "complete": true,
@@ -39,7 +39,7 @@
     "elgabii090"
   ],
   "channel_registry_note": "Los canales archivados se conservan para consulta histórica y no se incluyen en los indicadores del roster activo.",
-  "updated_at": "2026-11-17T22:30:24Z",
+  "updated_at": "2026-11-17T23:25:31Z",
   "channels": {
     "ladymoriarty01": {
       "login": "ladymoriarty01",
@@ -49,16 +49,16 @@
       "twitch_url": "https://twitch.tv/ladymoriarty01",
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
-      "live": true,
-      "current_viewers": 13,
-      "current_game": "Fortnite",
-      "current_title": "[Fornite] Con el Pesado del Demi @losmoriartys",
-      "stream_started_at": "2026-11-17T22:05:25Z",
-      "last_status_at": "2026-11-17T22:30:24Z",
-      "last_snapshot_at": "2026-11-17T22:30:24Z",
-      "updated_at": "2026-11-17T22:30:24Z",
+      "live": false,
+      "current_viewers": null,
+      "current_game": null,
+      "current_title": null,
+      "stream_started_at": null,
+      "last_status_at": "2026-11-17T23:25:31Z",
+      "last_snapshot_at": "2026-11-17T23:25:31Z",
+      "updated_at": "2026-11-17T23:25:31Z",
       "window": {
-        "samples_total": 333,
+        "samples_total": 334,
         "live_samples": 13,
         "streams_observed": 6,
         "average_viewers_sampled": 6.6,
@@ -3166,6 +3166,15 @@
           "title": "[Fornite] Con el Pesado del Demi @losmoriartys",
           "stream_id": "319475448694",
           "started_at": "2026-11-17T22:05:25Z"
+        },
+        {
+          "sampled_at": "2026-11-17T23:25:31Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -3177,19 +3186,19 @@
       "twitch_url": "https://twitch.tv/ther0d3r1k",
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
-      "live": false,
-      "current_viewers": null,
-      "current_game": null,
-      "current_title": null,
-      "stream_started_at": null,
-      "last_status_at": "2026-11-17T22:30:24Z",
-      "last_snapshot_at": "2026-11-17T22:30:24Z",
-      "updated_at": "2026-11-17T22:30:24Z",
+      "live": true,
+      "current_viewers": 34,
+      "current_game": "DUST: Origins",
+      "current_title": "SE VIENE UN JUEGASOO!  #DUSTOrigins 🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
+      "stream_started_at": "2026-11-17T22:55:07Z",
+      "last_status_at": "2026-11-17T23:25:31Z",
+      "last_snapshot_at": "2026-11-17T23:25:31Z",
+      "updated_at": "2026-11-17T23:25:31Z",
       "window": {
-        "samples_total": 333,
-        "live_samples": 36,
-        "streams_observed": 9,
-        "average_viewers_sampled": 23.0,
+        "samples_total": 334,
+        "live_samples": 37,
+        "streams_observed": 10,
+        "average_viewers_sampled": 23.3,
         "peak_viewers_sampled": 50,
         "observed_live_hours": 21.72,
         "estimated_hours_watched": 493.58,
@@ -3242,6 +3251,13 @@
             "streams_observed": 1,
             "average_viewers_sampled": 50.0,
             "peak_viewers_sampled": 50
+          },
+          {
+            "name": "DUST: Origins",
+            "live_samples": 1,
+            "streams_observed": 1,
+            "average_viewers_sampled": 34.0,
+            "peak_viewers_sampled": 34
           }
         ],
         "daily_activity": [
@@ -3331,9 +3347,9 @@
           },
           {
             "date": "2026-11-17",
-            "live_samples": 1,
-            "streams_observed": 1,
-            "average_viewers_sampled": 50.0,
+            "live_samples": 2,
+            "streams_observed": 2,
+            "average_viewers_sampled": 42.0,
             "peak_viewers_sampled": 50
           }
         ],
@@ -6336,6 +6352,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-17T23:25:31Z",
+          "is_live": true,
+          "viewer_count": 34,
+          "game_name": "DUST: Origins",
+          "title": "SE VIENE UN JUEGASOO!  #DUSTOrigins 🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
+          "stream_id": "321134476254",
+          "started_at": "2026-11-17T22:55:07Z"
         }
       ]
     },
@@ -6998,11 +7023,11 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "last_status_at": "2026-11-17T22:30:24Z",
-      "last_snapshot_at": "2026-11-17T22:30:24Z",
-      "updated_at": "2026-11-17T22:30:24Z",
+      "last_status_at": "2026-11-17T23:25:31Z",
+      "last_snapshot_at": "2026-11-17T23:25:31Z",
+      "updated_at": "2026-11-17T23:25:31Z",
       "window": {
-        "samples_total": 333,
+        "samples_total": 334,
         "live_samples": 6,
         "streams_observed": 3,
         "average_viewers_sampled": 7.2,
@@ -10040,6 +10065,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-17T23:25:31Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -10056,11 +10090,11 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "last_status_at": "2026-11-17T22:30:24Z",
-      "last_snapshot_at": "2026-11-17T22:30:24Z",
-      "updated_at": "2026-11-17T22:30:24Z",
+      "last_status_at": "2026-11-17T23:25:31Z",
+      "last_snapshot_at": "2026-11-17T23:25:31Z",
+      "updated_at": "2026-11-17T23:25:31Z",
       "window": {
-        "samples_total": 333,
+        "samples_total": 334,
         "live_samples": 24,
         "streams_observed": 11,
         "average_viewers_sampled": 6.6,
@@ -13182,6 +13216,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-17T23:25:31Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -13198,11 +13241,11 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "last_status_at": "2026-11-17T22:30:24Z",
-      "last_snapshot_at": "2026-11-17T22:30:24Z",
-      "updated_at": "2026-11-17T22:30:24Z",
+      "last_status_at": "2026-11-17T23:25:31Z",
+      "last_snapshot_at": "2026-11-17T23:25:31Z",
+      "updated_at": "2026-11-17T23:25:31Z",
       "window": {
-        "samples_total": 333,
+        "samples_total": 334,
         "live_samples": 14,
         "streams_observed": 8,
         "average_viewers_sampled": 1.9,
@@ -16289,6 +16332,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-17T23:25:31Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -16921,11 +16973,11 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "last_status_at": "2026-11-17T22:30:24Z",
-      "last_snapshot_at": "2026-11-17T22:30:24Z",
-      "updated_at": "2026-11-17T22:30:24Z",
+      "last_status_at": "2026-11-17T23:25:31Z",
+      "last_snapshot_at": "2026-11-17T23:25:31Z",
+      "updated_at": "2026-11-17T23:25:31Z",
       "window": {
-        "samples_total": 333,
+        "samples_total": 334,
         "live_samples": 70,
         "streams_observed": 15,
         "average_viewers_sampled": 4.8,
@@ -20054,6 +20106,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-17T23:25:31Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -20070,11 +20131,11 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "last_status_at": "2026-11-17T22:30:24Z",
-      "last_snapshot_at": "2026-11-17T22:30:24Z",
-      "updated_at": "2026-11-17T22:30:24Z",
+      "last_status_at": "2026-11-17T23:25:31Z",
+      "last_snapshot_at": "2026-11-17T23:25:31Z",
+      "updated_at": "2026-11-17T23:25:31Z",
       "window": {
-        "samples_total": 333,
+        "samples_total": 334,
         "live_samples": 17,
         "streams_observed": 8,
         "average_viewers_sampled": 16.5,
@@ -23197,6 +23258,15 @@
         },
         {
           "sampled_at": "2026-11-17T22:30:24Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-17T23:25:31Z",
           "is_live": false,
           "viewer_count": null,
           "game_name": null,
