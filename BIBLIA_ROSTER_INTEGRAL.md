@@ -712,3 +712,14 @@ La rama continúa aislada de producción. No se creó PR ni se fusionó a `main`
 - No se copian valores de ejemplo del prompt (seguidores, viewers, juegos o estados) a los perfiles reales. Los campos ausentes se muestran como no disponibles; la actividad semanal solo se afirma cuando existe una muestra en vivo dentro de los últimos siete días.
 - No se muestra calendario ni horario fijo en las cartas. El dato de horario puede permanecer en la fuente interna pero no es parte de esta presentación.
 - La edición persistente del perfil requiere una superficie administrativa autenticada y escritura segura sobre la fuente; no se simula un botón público que no pueda guardar.
+
+
+## 14. Reorganización del recorrido público — 17 de noviembre de 2026
+
+El recorrido principal aprobado pasa a ser: **Inicio → Origen → Roster → Estadísticas → En Vivo → Colaborá con nosotros**. La navegación primaria contiene únicamente esos cinco capítulos después de Inicio. El Roster debe mostrar los ocho integrantes a la vez y cada carta abre su expediente completo; no debe existir una pantalla intermedia de selección.
+
+Valores, Comunidad y Alianzas se conservan como pilares complementarios accesibles desde el capítulo Colaborá con nosotros, sin duplicar sus contenidos ni interrumpir el paginador principal. Valores conserva el manifiesto; Comunidad conserva las misiones y logros basados en community-playbook.json; Alianzas conserva credenciales verificables y formatos potenciales de colaboración. Ninguno de esos formatos debe presentarse como campaña contratada, patrocinio remunerado o resultado garantizado.
+
+Colaboraciones, Arsenal y Mapa Multiversal quedan como recursos complementarios, fuera del recorrido principal. No se eliminan sus archivos ni sus registros. Cualquier contenido que se recupere debe conservar una única fuente de verdad para personas, fotografías, perfiles y métricas.
+
+La rama de trabajo no se considera terminada hasta ejecutar pruebas Python y Playwright, revisar escritorio y móvil, verificar los ocho expedientes, pestañas, historial Atrás/Adelante, retorno desde los pilares complementarios y enlaces. No publicar ni fusionar a main sin aprobación explícita.
