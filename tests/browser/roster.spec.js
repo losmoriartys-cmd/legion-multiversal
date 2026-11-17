@@ -106,6 +106,7 @@ test('el acceso Roster está antes de Origen en la navegación principal', async
 });
 
 test('las cartas se organizan en cuatro columnas de escritorio y dos en móvil', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto('/');
   await page.evaluate(() => switchChapter(2));
   await waitForChapterTransition(page);
@@ -119,11 +120,11 @@ test('las cartas se organizan en cuatro columnas de escritorio y dos en móvil',
   expect(mobileColumns).toBe(2);
   expect(await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth)).toBe(false);
   await page.screenshot({ path: 'test-results/roster-mobile.png', fullPage: true });
-  await page.emulateMedia({ reducedMotion: 'reduce' });
   await expect(cards.first()).toBeVisible();
 });
 
 test('Atrás y Adelante restauran el roster y el expediente correcto', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto('/');
   await page.evaluate(() => switchChapter(2));
   await waitForChapterTransition(page);
