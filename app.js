@@ -1339,7 +1339,8 @@ function renderHeroProfileTabs(hero) {
    return data?.status==='verified'?Number(data.metrics?.subscribers):null;
   }
   const peerWindow=findChannelStats(peer)?.window||{};
-  return Number(peerWindow[key]);
+  const rawValue=peerWindow[key];
+  return rawValue==null?null:Number(rawValue);
  }).filter(value=>Number.isFinite(value)&&value>=0);
  const metricHtml=metricDefinitions.map(({label,value,note,key})=>{
   const numericValue=Number(value),peers=metricPeerValues(key),maxValue=peers.length>1?Math.max(...peers):0;
@@ -2052,7 +2053,11 @@ function printHeroDossier(){
             if (Number(chapterNum) !== 2 && window.currentHeroProfileIndex !== null && window.currentHeroProfileIndex !== undefined) {
                 const profilePage = document.getElementById('hero-profile-page');
                 const rosterHome = document.getElementById('roster-home');
-                if (profilePage) profilePage.hidden = true;
+                if (profilePage) {
+                    profilePage.hidden = true;
+                    profilePage.classList.remove('is-active');
+                    profilePage.setAttribute('aria-hidden', 'true');
+                }
                 if (rosterHome) rosterHome.hidden = false;
                 window.lastHeroProfileTrigger = null;
                 window.currentHeroProfileIndex = null;
