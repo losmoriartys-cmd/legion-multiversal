@@ -1159,7 +1159,7 @@ function renderRosterSelector() {
         const average = win.average_viewers_sampled;
         const yt = platformStatsData?.creators?.[platformStatsKey(hero)]?.platforms?.youtube;
         let followerValue = null;
-        let audienceLabel = account?.platform === 'youtube' ? 'SUSCRIPTORES · YOUTUBE' : 'SEGUIDORES · TWITCH';
+        let audienceLabel = account?.platform === 'youtube' ? 'Suscriptores · YouTube' : 'Seguidores · Twitch';
         let audienceSource = 'No hay una cifra pública verificada para esta cuenta.';
         if (account?.platform === 'youtube' && yt?.status === 'verified' && yt.metrics?.subscribers != null) {
             followerValue = yt.metrics.subscribers;
