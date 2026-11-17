@@ -615,3 +615,13 @@
 }
 
 .roster-anchor { display:block; position:relative; scroll-margin-top:110px; }
+
+/* El expediente reemplaza al directorio: nunca deben mostrarse ambos a la vez. */
+#chapter-2 #roster-home[hidden],
+#chapter-2 #hero-profile-page[hidden] {
+  display:none !important;
+}
+#chapter-2 #roster-home:not([hidden]),
+#chapter-2 #hero-profile-page:not([hidden]) {
+  display:block;
+}
