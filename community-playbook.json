@@ -22,11 +22,11 @@
     {
       "id": "bitacora",
       "category": "ARCHIVO",
-      "title": "Consultá la Bitácora Central",
-      "description": "Abrí la Bitácora para conocer el registro compartido y sus conexiones con los expedientes.",
+      "title": "Consultá la Bitácora de un expediente",
+      "description": "Abrí el expediente de un integrante y consultá su pestaña Bitácora para conocer su trayectoria y colaboraciones documentadas.",
       "progress_key": "bitacora",
       "target": 1,
-      "progress_label": "archivo consultado"
+      "progress_label": "bitácora consultada"
     },
     {
       "id": "envivo",
@@ -69,8 +69,8 @@
     },
     {
       "id": "cronista",
-      "title": "Cronista del archivo",
-      "description": "Consultaste la Bitácora Central.",
+      "title": "Cronista de expedientes",
+      "description": "Consultaste la pestaña Bitácora de un integrante.",
       "progress_key": "bitacora",
       "target": 1
     },
