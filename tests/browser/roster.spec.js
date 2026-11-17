@@ -52,6 +52,8 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
     await expect(profileTabs).toHaveCount(5);
 
     const cardImage = card.locator('.comic-roster-photo img');
+    await expect(cardImage).toHaveAttribute('alt', /Fotografía carnet/);
+    expect(await cardImage.getAttribute('src')).toContain('assets/carnet/');
     await expect.poll(() => cardImage.evaluate(img => img.naturalWidth)).toBeGreaterThan(0);
     const cardImageStyle = await cardImage.evaluate(img => ({ fit: getComputedStyle(img).objectFit, position: getComputedStyle(img).objectPosition }));
     expect(cardImageStyle.fit).toBe('cover');
@@ -63,6 +65,10 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
     const dossierImageStyle = await dossierImage.evaluate(img => ({ fit: getComputedStyle(img).objectFit, position: getComputedStyle(img).objectPosition }));
     expect(dossierImageStyle.fit).toBe('cover');
     expect(dossierImageStyle.position).toContain('0%');
+    const characterArt = dossier.locator('.hero-profile-character-art img');
+    await expect(characterArt).toBeVisible();
+    await expect(characterArt).toHaveAttribute('alt', /Ilustración del personaje/);
+    await expect.poll(() => characterArt.evaluate(img => img.naturalWidth)).toBeGreaterThan(0);
     await expect(dossier.locator('.hero-profile-sidebar-quote')).toBeVisible();
     await expect(dossier.locator('.hero-profile-socials')).toBeVisible();
     await expect(dossier.locator('.hero-profile-poster')).toHaveCount(0);
