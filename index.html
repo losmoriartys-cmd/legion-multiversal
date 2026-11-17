@@ -412,13 +412,12 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
             </div>
             <button id="sound-toggle" class="sound-toggle" type="button" aria-pressed="false" onclick="toggleArcadeSound()" title="Activar o silenciar la identidad sonora">♫ SONIDO: OFF</button>
         </div>
-        <nav class="primary-navigation" aria-label="Recorridos principales">
-            <button class="nav-btn nav-btn-roster" data-chapter="2" onclick="switchChapter(2)">ROSTER</button>
+        <nav class="primary-navigation" aria-label="Recorrido principal de la Legión">
             <button class="nav-btn" data-chapter="1" onclick="switchChapter(1)">ORIGEN</button>
-            <button class="nav-btn nav-btn-live" data-chapter="10" onclick="switchChapter(10)">MIRAR <span aria-hidden="true">●</span></button>
-            <button class="nav-btn" data-chapter="12" onclick="switchChapter(12)">EXPERIENCIAS</button>
-            <a class="nav-btn" data-chapter="8" href="./marcas/">PARA MARCAS</a>
-            <button class="nav-btn" data-chapter="6" onclick="switchChapter(6)">UNITE</button>
+            <button class="nav-btn nav-btn-roster" data-chapter="2" onclick="switchChapter(2)">ROSTER</button>
+            <button class="nav-btn" data-chapter="3" onclick="switchChapter(3)">ESTADÍSTICAS</button>
+            <button class="nav-btn nav-btn-live" data-chapter="10" onclick="switchChapter(10)">EN VIVO <span aria-hidden="true">●</span></button>
+            <button class="nav-btn" data-chapter="6" onclick="switchChapter(6)">COLABORÁ</button>
         </nav>
 <button id="mission-progress-trigger" class="mission-progress-trigger" type="button" onclick="openMultiverseMap()" aria-label="Abrir Mapa Multiversal y consultar misiones">MISIONES <strong id="mission-progress-count">0/0</strong></button>
     </header>
@@ -517,8 +516,8 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
             </section>
         </section>
 
-<section id="chapter-1" class="chapter-panel chapter-one origin-editorial" data-editorial-number="2" aria-labelledby="origin-title">
- <div class="chapter-tag">CAPÍTULO 01 · ORIGEN</div>
+<section id="chapter-1" class="chapter-panel chapter-one origin-editorial" data-editorial-number="1" aria-labelledby="origin-title">
+ <div class="chapter-tag">undefined</div>
  <header class="origin-editorial-hero">
   <div class="origin-editorial-copy">
    <span class="origin-editorial-kicker">ARCHIVO CENTRAL · PRIMERA ETAPA</span>
@@ -579,8 +578,8 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
  </section>
 </section>
 
-<section id="chapter-2" class="chapter-panel comic-page" data-editorial-number="1">
-            <div class="chapter-tag">CAPÍTULO 03 · ROSTER</div>
+<section id="chapter-2" class="chapter-panel comic-page" data-editorial-number="2">
+            <div class="chapter-tag">undefined</div>
             
             <h2 id="roster" class="comic-title">LEGIÓN MULTIVERSAL — NUESTRO ROSTER</h2>
             <div class="institute-banner"><div class="institute-stamp" aria-label="Emblema oficial de la Legión Multiversal"><img src="legion_logo_final_hybrid-256.webp" alt="Emblema de Legión Multiversal" loading="lazy" decoding="async" width="256" height="256" srcset="legion_logo_final_hybrid-256.webp 256w, legion_logo_final_hybrid-512.webp 512w, legion_logo_final_hybrid.webp 1600w" sizes="112px"><span>ARCHIVO DE LA LEGIÓN</span></div><div class="institute-banner-copy"><h3>LAS PERSONAS DETRÁS DE LA LEGIÓN</h3><p>Ocho integrantes, ocho identidades creativas y un universo compartido. Cada persona conserva su canal, su especialidad y su expediente propio dentro de la Legión.</p></div></div>
@@ -640,8 +639,8 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
             <section id="hero-profile-page" class="hero-profile-page" hidden aria-live="polite"></section>
         </section>
 
-<section id="chapter-3" class="chapter-panel comic-page impact-chapter" data-editorial-number="4">
- <div class="chapter-tag">CAPÍTULO 04 · ESTADÍSTICAS</div>
+<section id="chapter-3" class="chapter-panel comic-page impact-chapter" data-editorial-number="3">
+ <div class="chapter-tag">undefined</div>
  <header class="impact-hero">
   <div class="impact-hero-copy">
    <span class="impact-kicker">LEGIÓN MULTIVERSAL · ACTIVIDAD Y ALCANCE</span>
@@ -680,8 +679,9 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
   <div class="stats-table-wrap"><table class="stats-table"><thead><tr><th>Canal</th><th>Estado</th><th>Espectadores actuales</th><th>Categoría</th><th>Promedio observado</th><th>Pico observado</th><th>Horas observadas</th><th>Muestras</th><th>Cobertura del intervalo muestreado</th></tr></thead><tbody id="stats-table-body"><tr><td colspan="9">Cargando estadísticas…</td></tr></tbody></table></div>
  </details>
 </section>
-<section id="chapter-11" class="chapter-panel comic-page manifesto-chapter" data-editorial-number="3">
+<section id="chapter-11" class="chapter-panel comic-page manifesto-chapter" data-editorial-number="3" data-pager="false">
  <div class="chapter-tag">CAPÍTULO 02 · VALORES</div>
+    <button type="button" class="supplementary-return" onclick="switchChapter(6)">← VOLVER A COLABORÁ CON NOSOTROS</button>
  <header class="manifesto-hero" aria-labelledby="manifesto-title"><span class="manifesto-kicker">LEGIÓN MULTIVERSAL · MANIFIESTO</span><h2 id="manifesto-title">NO BUSCAMOS QUE<br>TODOS SEAN IGUALES.<br><em>BUSCAMOS QUE CADA UNO<br>TENGA UN LUGAR.</em></h2><p>Una Legión no se construye sumando nombres. Se construye cuando personas distintas eligen avanzar juntas.</p></header>
  <section class="manifesto-origin"><span>LO QUE NOS UNE</span><h3>CADA INTEGRANTE TIENE SU PROPIO UNIVERSO.</h3><p>Su voz, su humor, sus intereses, sus tiempos y su manera de crear. No queremos borrar esas diferencias: queremos que convivan. Legión Multiversal es un espacio para compartir videojuegos, entretenimiento, ideas y proyectos sin tener que dejar de ser quien sos.</p></section>
  <div class="manifesto-values-grid" role="list" aria-label="Seis valores de Legión Multiversal">
@@ -704,8 +704,9 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
  <section class="manifesto-promise"><span>LO QUE PROMETEMOS</span><h3>UN ESPACIO PARA PROPONER, APRENDER, COMPARTIR Y CREAR.</h3><p>No prometemos fama, contratos ni crecimiento automático. Ofrecemos una cultura de colaboración, respeto y trabajo compartido, donde cada persona pueda aportar desde su propio lugar.</p></section>
  <section class="manifesto-invitation"><div><span>¿TE IDENTIFICÁS CON ESTA FORMA DE HACER LAS COSAS?</span><h3>ENTONCES HAY UNA CONVERSACIÓN QUE PODEMOS EMPEZAR.</h3></div><div class="chapter-actions"><button class="chapter-cta" type="button" onclick="switchChapter(6)">QUIERO FORMAR PARTE <span>↗</span></button><button class="chapter-cta" type="button" onclick="switchChapter(8)">QUIERO COLABORAR CON LA LEGIÓN <span>↗</span></button></div></section>
 </section>
-<section id="chapter-9" class="chapter-panel comic-page belonging-chapter" data-editorial-number="5">
+<section id="chapter-9" class="chapter-panel comic-page belonging-chapter" data-editorial-number="5" data-pager="false">
  <div class="chapter-tag">CAPÍTULO 05 · COMUNIDAD</div>
+    <button type="button" class="supplementary-return" onclick="switchChapter(6)">← VOLVER A COLABORÁ CON NOSOTROS</button>
  <header class="belonging-hero">
   <img src="image_20261112_151833.jpg" alt="Integrantes de Legión Multiversal reunidos alrededor de una mesa en una sala gamer retro, compartiendo una sesión y una conversación" loading="lazy" width="2048" height="1152">
   <div class="belonging-hero-shade"></div>
@@ -728,8 +729,8 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
  </section>
  <div class="belonging-bottom"><p>Una comunidad crece cuando hay lugar para nuevas voces.</p><button class="chapter-cta" type="button" onclick="switchChapter(11)">CONOCÉ LO QUE NOS IDENTIFICA ↗</button></div>
 </section>
-<section id="chapter-10" class="chapter-panel comic-page live-chapter" data-editorial-number="9">
- <div class="chapter-tag">CAPÍTULO 09 · EN VIVO</div>
+<section id="chapter-10" class="chapter-panel comic-page live-chapter" data-editorial-number="4">
+ <div class="chapter-tag">undefined</div>
  <h2 class="comic-title">LEGIÓN MULTIVERSAL · EN VIVO</h2>
  <div class="premium-panel live-intro"><div class="premium-kicker"><span class="live-pulse"></span> CENTRAL DE TRANSMISIONES</div><h3>Consultá quién está en directo</h3><p>El directorio muestra el último estado registrado de cada canal. Si la captura está demorada, lo indica antes de ofrecer una transmisión. Cuando haya integrantes en directo, vas a poder elegir un canal y verlo desde esta página.</p></div>
  <div id="live-directory" class="live-directory"><p class="stats-note">Consultando el estado de los canales…</p></div>
@@ -737,9 +738,10 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
  
 </section>
 
-<section id="chapter-8" class="chapter-panel comic-page chapter-8-alliance" aria-labelledby="alliance-title" data-editorial-number="6">
+<section id="chapter-8" class="chapter-panel comic-page chapter-8-alliance" aria-labelledby="alliance-title" data-editorial-number="6" data-pager="false">
  <header class="alliance-hero">
   <div class="chapter-tag">CAPÍTULO 06 · ALIANZAS</div>
+    <button type="button" class="supplementary-return" onclick="switchChapter(6)">← VOLVER A COLABORÁ CON NOSOTROS</button>
   <p class="alliance-eyebrow">LEGIÓN MULTIVERSAL · CREDENCIALES Y OPORTUNIDADES</p>
   <h2 id="alliance-title" class="comic-title">ALIANZAS Y OPORTUNIDADES</h2>
   <p class="alliance-lead">Creadores independientes. Credenciales atribuidas. Propuestas construidas en conjunto.</p>
@@ -1069,15 +1071,30 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
 
 </section>
 
-<section id="chapter-6" class="chapter-panel comic-page recruitment-chapter" data-editorial-number="10">
-    <div class="chapter-tag">CAPÍTULO 10 · RECLUTAMIENTO</div>
-    <h2 class="comic-title">RECLUTAR · CONECTAR · CRECER</h2>
+<section id="chapter-6" class="chapter-panel comic-page recruitment-chapter" data-editorial-number="5">
+    <div class="chapter-tag">undefined</div>
+    <h2 class="comic-title">COLABORAR · CONECTAR · CRECER</h2>
     <div class="premium-panel recruitment-intro">
         <div class="premium-kicker">LEGIÓN MULTIVERSAL · NUEVOS CONTACTOS</div>
         <h3>DOS CAMINOS. UNA MISMA LEGIÓN.</h3>
         <p>Este espacio tiene dos recorridos: creadores que quieren presentar su perfil para una posible incorporación al roster, y estudios, publishers o marcas que quieren explorar una colaboración. Cada propuesta se evalúa según su encaje, disponibilidad y alcance real.</p>
     </div>
 
+<section class="collaboration-foundations" aria-labelledby="collaboration-foundations-title">
+    <div class="premium-kicker">LO QUE NOS UNE · CÓMO PARTICIPAR</div>
+    <h3 id="collaboration-foundations-title">TRES PILARES DE LA LEGIÓN</h3>
+    <div class="collaboration-foundations-grid">
+        <button type="button" class="collaboration-foundation-link" onclick="switchChapter(11)">
+            <strong>VALORES</strong><span>Un manifiesto sobre identidad, respeto y crecimiento compartido.</span><em>LEER EL MANIFIESTO ↗</em>
+        </button>
+        <button type="button" class="collaboration-foundation-link" onclick="switchChapter(9)">
+            <strong>COMUNIDAD</strong><span>Misiones, logros y formas de participar en el universo de la Legión.</span><em>EXPLORAR LA COMUNIDAD ↗</em>
+        </button>
+        <button type="button" class="collaboration-foundation-link" onclick="switchChapter(8)">
+            <strong>ALIANZAS</strong><span>Credenciales reales y formatos posibles para crear experiencias en conjunto.</span><em>CONOCER LAS ALIANZAS ↗</em>
+        </button>
+    </div>
+</section>
 <div class="recruitment-tabs" role="tablist" aria-label="Elegí el tipo de contacto"><button type="button" role="tab" id="recruitment-tab-brand" aria-controls="brand-proposal" aria-selected="true" onclick="setRecruitmentMode('brand')">SOY MARCA / ESTUDIO / AGENCIA</button><button type="button" role="tab" id="recruitment-tab-creator" aria-controls="creator-application" aria-selected="false" onclick="setRecruitmentMode('creator')">SOY CREADOR Y QUIERO SUMARME</button></div>
     <section class="recruitment-form-section" id="creator-application" hidden aria-labelledby="creator-application-title">
         <div class="recruitment-form-heading">
