@@ -700,3 +700,15 @@ No hay todavía CI asociado a esta tanda ni QA visual real en navegador. Antes d
 - QA manual visual en distintos dispositivos y lector de pantalla continúa siendo una revisión posterior; CI no sustituye esa inspección.
 
 La rama continúa aislada de producción. No se creó PR ni se fusionó a `main`.
+
+
+## 2026-11-17 — Decisión aprobada: Roster como Capítulo 01 y Bitácora directa
+
+- El Roster es el primer capítulo de contenido y queda inmediatamente accesible desde la navegación principal. Orden editorial: 00 Inicio, 01 Roster, 02 Origen, 03 Valores; se mantienen los IDs técnicos de los paneles para compatibilidad.
+- El directorio presenta simultáneamente las ocho cartas en una grilla única. Se elimina el selector de personaje con panel de vista previa como paso intermedio.
+- Cada carta incluye retrato existente, alias/identidad, juego o especialidad disponible, ritmo de seguimiento, actividad observada, seguidores/suscriptores y media de viewers cuando exista una fuente válida, y acceso directo a Bitácora.
+- El clic abre la Bitácora del integrante en composición 35/65: fotografía fija, nombre y alias, frase, enlaces y contenido con pestañas Perfil, Estadísticas, Juegos y Ritmo, Clips y Bitácora.
+- La Bitácora es el destino final; no debe ofrecer un segundo botón que abra otra ficha/modal. Los registros históricos y la propuesta editorial quedan dentro de la pestaña Bitácora.
+- No se copian valores de ejemplo del prompt (seguidores, viewers, juegos o estados) a los perfiles reales. Los campos ausentes se muestran como no disponibles; la actividad semanal solo se afirma cuando existe una muestra en vivo dentro de los últimos siete días.
+- No se muestra calendario ni horario fijo en las cartas. El dato de horario puede permanecer en la fuente interna pero no es parte de esta presentación.
+- La edición persistente del perfil requiere una superficie administrativa autenticada y escritura segura sobre la fuente; no se simula un botón público que no pueda guardar.
