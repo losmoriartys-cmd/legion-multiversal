@@ -1148,145 +1148,54 @@ function renderRosterMetricSummary(hero) {
 function renderRosterSelector() {
     const host = document.getElementById('roster-selector');
     if (!host || !Array.isArray(heroesData) || !heroesData.length) return;
-    const comparatorWasOpen = Boolean(host.querySelector('.roster-selector-comparator')?.open);
-    const methodWasOpen = Boolean(host.querySelector('.roster-selector-method')?.open);
-    if (!selectedRosterCreatorId) {
-        const match = (location.hash || '').match(/^#roster\?hero=([^&]+)/i);
-        if (match && match[1]) {
-            let requested = match[1];
-            try { requested = decodeURIComponent(requested); } catch (error) { /* conservar valor literal */ }
-            const found = heroesData.find(hero => getHeroRosterSlug(hero) === requested.toLowerCase() || String(hero.id || hero.slug) === requested);
-            if (found) selectedRosterCreatorId = found.id || found.slug;
-        }
-    }
-    const selected = heroesData.find(hero => (hero.id || hero.slug) === selectedRosterCreatorId) || heroesData[0];
-    selectedRosterCreatorId = selected.id || selected.slug;
-    const liveStates = heroesData.map(hero => ({ hero, state: getRosterLiveState(hero) }));
-    const freshLive = liveStates.filter(item => item.state?.fresh && item.state.channel?.live);
-    const progress = readLegionProgress();
-    const known = heroesData.filter(hero => progress.profiles.includes(String(hero.cardNumber || hero.name))).length;
     const safe = escapeStatsHtml;
     const primaryAccount = hero => (hero.accounts || []).find(account => account.account_type === 'creator_channel') || (hero.accounts || [])[0] || null;
-    const accountLabel = account => account ? String(account.platform || 'plataforma').toUpperCase() : 'PLATAFORMA POR CONFIRMAR';
-    const liveState = hero => getRosterLiveState(hero);
-    const selectedState = liveState(selected);
-    const selectedLive = Boolean(selectedState?.fresh && selectedState.channel?.live);
-    const platform = primaryAccount(selected);
-    const platformUrl = platform?.url || selected.twitch || selected.youtube || '';
-    const platformName = accountLabel(platform);
-    const primaryCta = selectedLive && platformUrl
-        ? '<a class="roster-selector-primary is-live-cta" href="' + safe(platformUrl) + '" target="_blank" rel="noopener noreferrer">● VER STREAM EN VIVO ↗</a><button type="button" class="roster-selector-platform" id="roster-selector-open-profile">ABRIR EXPEDIENTE ↗</button>'
-        : '<button type="button" class="roster-selector-primary" id="roster-selector-open-profile">ABRIR EXPEDIENTE ↗</button>' + (platformUrl ? '<a class="roster-selector-platform" href="' + safe(platformUrl) + '" target="_blank" rel="noopener noreferrer">VER EN ' + safe(platformName) + ' ↗</a>' : '');
-    const areas = (selected.areas || []).filter(value => value && value !== 'Especialidad por definir');
-    const schedule = selected.schedule || selected.mediaProfile?.schedule || '';
-    const creatorType = selected.creator_type === 'video_creator' ? 'CREADOR DE VIDEO' : selected.creator_type === 'live_streamer' ? 'CREADOR EN DIRECTO' : 'FORMATO POR CONFIRMAR';
-    const hasFreshActivity = liveStates.some(item => item.state?.fresh);
-    const liveSummary = freshLive.length
-        ? '<span class="roster-selector-live-count">● ' + freshLive.length + ' EN VIVO AHORA</span>'
-        : '<span class="roster-selector-live-count is-quiet">' + (hasFreshActivity ? 'SIN DIRECTOS DETECTADOS EN LA ÚLTIMA CAPTURA' : 'ESTADO DE DIRECTOS NO DISPONIBLE / DATOS DEMORADOS') + '</span>';
-    const tiles = heroesData.map((hero, index) => {
+    const cards = heroesData.map((hero, index) => {
         const account = primaryAccount(hero);
-        const state = liveState(hero);
-        const tileType = hero.creator_type === 'video_creator' ? 'CREADOR DE VIDEO' : hero.creator_type === 'live_streamer' ? 'CREADOR EN DIRECTO' : 'FORMATO POR CONFIRMAR';
+        const state = getRosterLiveState(hero);
         const isLive = Boolean(state?.fresh && state.channel?.live);
-        const isSelected = (hero.id || hero.slug) === selectedRosterCreatorId;
-        const image = hero.portrait || hero.img || '';
-        const metric = renderRosterMetricSummary(hero);
-        return '<button type="button" class="roster-selector-tile' + (isSelected ? ' is-selected' : '') + '" data-roster-select="' + index + '" data-creator-id="' + safe(hero.id || hero.slug) + '" data-roster-role="' + safe(hero.role || 'member') + '" aria-label="Conocer a ' + safe(getHeroDisplayName(hero)) + ', expediente ' + safe(hero.cardNumber || String(index + 1).padStart(3, '0')) + '">' +
-            '<span class="roster-selector-tile-frame">' +
-            (image ? '<img src="' + safe(image) + '" alt="" loading="' + (index < 4 ? 'eager' : 'lazy') + '" decoding="async">' : '<span class="roster-selector-no-portrait" aria-hidden="true">' + safe((hero.display_name || hero.name || '?').slice(0,1)) + '</span>') +
-            '<span class="roster-selector-tile-top"><span>ARCHIVO LM</span><span>EXP. ' + safe(hero.cardNumber || String(index + 1).padStart(3, '0')) + '</span></span>' +
-            (isLive ? '<span class="roster-selector-tile-live">● EN VIVO</span>' : '') +
-            '<span class="roster-selector-tile-info"><span class="roster-selector-tile-role">' + safe(hero.codename || tileType) + '</span><span class="roster-selector-tile-name">' + safe(getHeroDisplayName(hero)) + '</span></span><span class="roster-selector-card-metrics">' + metric + '</span><span class="roster-selector-tile-cue">VER PERFIL ↗</span>' +
-            '</span></button>';
+        const channel = findChannelStats(hero);
+        const snapshots = Array.isArray(channel?.snapshots) ? channel.snapshots : [];
+        const lastLive = [...snapshots].reverse().find(sample => sample?.is_live && sample.sampled_at)?.sampled_at || null;
+        const lastLiveDate = lastLive ? new Date(lastLive).toLocaleDateString('es-AR',{day:'2-digit',month:'2-digit'}) : 'SIN REGISTRO';
+        const activeThisWeek = lastLive && Number.isFinite(Date.parse(lastLive)) && (Date.now() - Date.parse(lastLive)) <= 7 * 24 * 60 * 60 * 1000;
+        const win = state?.channel?.window || channel?.window || {};
+        const average = win.average_viewers_sampled;
+        const yt = platformStatsData?.creators?.[platformStatsKey(hero)]?.platforms?.youtube;
+        const followerValue = yt?.status === 'verified' ? yt.metrics?.subscribers : null;
+        const followerLabel = followerValue == null ? '—' : statsNumber(followerValue,0);
+        const averageLabel = average == null ? '—' : statsNumber(average,1);
+        const platformName = String(account?.platform || 'CANAL').toUpperCase();
+        const game = state?.channel?.current_game || (hero.areas || [])[0] || platformName;
+        const specialties = (hero.areas || []).filter(Boolean).slice(0,3);
+        const identity = hero.codename || hero.characterRole || 'INTEGRANTE DE LA LEGIÓN';
+        const activityBadge = isLive ? 'EN VIVO AHORA' : activeThisWeek ? 'ACTIVO ESTA SEMANA' : 'ACTIVIDAD NO CONFIRMADA';
+        const liveBadge = isLive ? '<span class="roster-selector-tile-live">● EN VIVO</span>' : '';
+        return '<button type="button" class="roster-selector-tile comic-roster-card" data-roster-select="' + index + '" data-creator-id="' + safe(hero.id || hero.slug) + '" data-roster-role="' + safe(hero.role || 'member') + '" aria-label="Abrir Bitácora de ' + safe(getHeroDisplayName(hero)) + '">' +
+          '<span class="comic-roster-photo">' +
+            (hero.portrait ? '<img src="' + safe(hero.portrait) + '" alt="Fotografía de ' + safe(getHeroDisplayName(hero)) + '" loading="' + (index < 4 ? 'eager' : 'lazy') + '" decoding="async">' : hero.img ? '<img src="' + safe(hero.img) + '" alt="Retrato de ' + safe(getHeroDisplayName(hero)) + '" loading="lazy" decoding="async">' : '<span class="roster-selector-no-portrait">' + safe((hero.display_name || hero.name || '?').slice(0,1)) + '</span>') +
+            '<span class="comic-roster-photo-shade"></span><span class="comic-roster-photo-copy"><small>' + safe(identity) + '</small><strong>' + safe(getHeroDisplayName(hero)) + '</strong><em>🎮 ' + safe(game) + '</em></span>' + liveBadge +
+          '</span>' +
+          '<span class="comic-roster-card-data"><span class="comic-roster-badges"><b class="comic-roster-frequency">RITMO: EN SEGUIMIENTO</b><b class="comic-roster-activity">' + safe(activityBadge) + '</b></span>' +
+            '<span class="comic-roster-last-live">ÚLTIMA ACTIVIDAD OBSERVADA: ' + safe(lastLiveDate) + '</span>' +
+            '<span class="comic-roster-stat"><span>Seguidores</span><b>' + safe(followerLabel) + '</b></span>' +
+            '<span class="comic-roster-stat"><span>Media de viewers</span><b class="comic-roster-stat-purple">' + safe(averageLabel) + '</b></span>' +
+            '<span class="comic-roster-games">' + (specialties.length ? specialties.map(item => '<i>' + safe(item) + '</i>').join('') : '<i>Especialidad en desarrollo</i>') + '</span>' +
+            '<span class="comic-roster-card-footer"><small>' + safe(hero.role_label || platformName) + '</small><strong>VER PERFIL →</strong></span></span>' +
+        '</button>';
     }).join('');
-    const tags = areas.length ? areas.slice(0,3).map(area => '<span>' + safe(area) + '</span>').join('') : '<span>Especialidad por definir</span>';
-    const liveLabel = selected.creator_type === 'video_creator'
-        ? '<span class="roster-selector-status">FORMATO DE CONTENIDO EN VIDEO</span>'
-        : selectedLive
-            ? '<span class="roster-selector-status is-live">● EN VIVO' + (selectedState.channel.current_game ? ' · ' + safe(selectedState.channel.current_game) : '') + '</span>'
-            : selectedState?.fresh
-                ? '<span class="roster-selector-status">OFFLINE · ÚLTIMA CAPTURA ACTUALIZADA</span>'
-                : '<span class="roster-selector-status is-unknown">ESTADO NO DISPONIBLE</span>';
-    const scheduleLabel = schedule
-        ? safe(schedule)
-        : selected.creator_type === 'video_creator' ? 'Frecuencia de publicación por confirmar' : 'Horario por confirmar';
-    const identity = selected.codename || selected.characterRole || 'Identidad en desarrollo';
-    const intro = selected.mediaProfile?.editorial || selected.bio || 'Presentación personal en desarrollo.';
-    const idealText = areas.length ? areas.join(' · ') : selected.id === 'dave-nexus' ? 'Conocer su nueva etapa como creador' : 'Especialidad en desarrollo';
-    const quote = selected.voice ? '<blockquote>' + safe(selected.voice) + '</blockquote>' : '';
-    const profileIndex = heroesData.indexOf(selected);
-    const compareRows = heroesData.map(hero => {
-        const account = primaryAccount(hero);
-        const rowAreas = (hero.areas || []).filter(value => value && value !== 'Especialidad por definir');
-        const rowSchedule = hero.schedule || hero.mediaProfile?.schedule || 'Por confirmar';
-        return '<tr><th scope="row">' + safe(getHeroDisplayName(hero)) + '</th><td>' + safe(accountLabel(account)) + '</td><td>' + safe(rowAreas.length ? rowAreas.join(' · ') : 'Por definir') + '</td><td>' + safe(rowSchedule) + '</td><td class="roster-selector-metric">' + renderRosterMetricSummary(hero) + '</td></tr>';
-    }).join('');
-    host.innerHTML = '<div class="roster-selector-heading"><div><span class="roster-selector-kicker">ARCHIVO CENTRAL · SELECCIÓN DE PERSONAJES</span><h2>ELEGÍ A TU CREADOR</h2><p>Ocho integrantes. Ocho identidades. Una misma Legión.</p></div><div class="roster-selector-actions">' + liveSummary + '<button type="button" class="roster-selector-surprise" id="roster-selector-surprise">SORPRENDEME ↗</button></div></div>' +
-        '<div class="roster-selector-progress"><span id="roster-selector-progress-text" aria-live="polite">CONOCISTE ' + known + ' DE ' + heroesData.length + '</span><div class="roster-selector-progress-track" role="progressbar" aria-label="Integrantes conocidos" aria-valuemin="0" aria-valuemax="' + heroesData.length + '" aria-valuenow="' + known + '"><i style="width:' + (known / heroesData.length * 100) + '%"></i></div></div>' +
-        '<div class="roster-selector-rail" role="list" aria-label="Integrantes de Legión Multiversal">' + tiles + '</div>' +
-        '<section class="roster-selector-panel" id="roster-selector-panel" data-creator-id="' + safe(selected.id || selected.slug) + '" data-roster-role="' + safe(selected.role || 'member') + '" style="--hero-accent:' + (heroAccentColors[selected.id || selected.slug] || '#00d2ff') + '" role="tabpanel" aria-labelledby="roster-tab-' + safe(selected.id || selected.slug) + '" tabindex="0">' +
-        '<div class="roster-selector-art"><span class="roster-selector-art-kicker">LEGIÓN MULTIVERSAL · ARCHIVO DE PERSONAJES</span>' + (selected.img || selected.portrait ? '<img src="' + safe(selected.img || selected.portrait) + '" alt="Ilustración de ' + safe(getHeroDisplayName(selected)) + '" loading="eager" decoding="async">' : '<span>RETRATO PENDIENTE</span>') + '<span class="roster-selector-art-number">EXP. ' + safe(selected.cardNumber || 'S/N') + '</span></div>' +
-        '<div class="roster-selector-copy"><span class="roster-selector-identity">' + safe(identity) + ' · ' + safe(creatorType) + '</span>' + (selected.role_label ? '<span class="roster-selector-role-label">' + safe(selected.role_label) + '</span>' : '') + '<h3>' + safe(getHeroDisplayName(selected)) + '</h3>' + (selected.tagline ? '<p class="roster-selector-tagline">' + safe(selected.tagline) + '</p>' : '') + '<p class="roster-selector-real-identity">' + safe(selected.identity_scope === 'shared_project' ? 'Proyecto compartido de ' + (selected.represented_people || []).join(' y ') : selected.identity_scope === 'individual_creator' ? 'Creador/a individual' : 'Integrante de Legión Multiversal') + '</p>' +
-        '<div class="roster-selector-tags">' + tags + '</div><p class="roster-selector-ideal"><strong>IDEAL SI TE GUSTA:</strong> ' + safe(idealText) + '</p>' +
-        '<p class="roster-selector-description">' + safe(intro) + '</p>' + quote +
-        '<div class="roster-selector-meta">' + liveLabel + '<span>PLATAFORMA · ' + safe(platformName) + '</span><span>HORARIO · ' + scheduleLabel + '</span></div>' +
-        '<div class="roster-selector-cta">' + primaryCta + '</div></div></section>' +
-        '<details class="roster-selector-comparator"' + (comparatorWasOpen ? ' open' : '') + '><summary>PARA MARCAS · COMPARADOR DE PERFILES</summary><div class="roster-selector-table-wrap"><table><thead><tr><th>CREADOR</th><th>PLATAFORMA</th><th>ESPECIALIDADES</th><th>HORARIO / FRECUENCIA</th><th>INDICADORES POR PLATAFORMA</th></tr></thead><tbody>' + compareRows + '</tbody></table></div><p>Los perfiles de Twitch comparten fuente Helix y se muestran con su período real, sesiones detectadas y muestras en directo. YouTube presenta contadores acumulados del canal. Son indicadores propios de cada plataforma: no se suman ni se comparan unidades distintas. Una ventana configurada de 30 días no implica 30 días completos de observaciones.</p></details><details class="roster-selector-method"' + (methodWasOpen ? ' open' : '') + '><summary>CRITERIO DE DATOS</summary><p class="roster-selector-disclaimer">La afinidad temática describe el contenido público y los formatos observados; no implica cifras ni segmentación demográfica. Twitch Helix aporta observaciones periódicas, no analítica oficial ni historial completo. YouTube Data API aporta contadores públicos acumulados. Cada indicador conserva su fuente, período y unidad; no se construye un ranking entre plataformas.</p></details>';
-    host.querySelector('.roster-selector-rail')?.addEventListener('keydown', event => {
-        const buttons = Array.from(host.querySelectorAll('[data-roster-select]'));
-        const current = buttons.indexOf(document.activeElement);
-        let next = null;
-        if (event.key === 'ArrowRight' || event.key === 'ArrowDown') next = (Math.max(0,current) + 1) % buttons.length;
-        if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') next = (Math.max(0,current) - 1 + buttons.length) % buttons.length;
-        if (event.key === 'Home') next = 0;
-        if (event.key === 'End') next = buttons.length - 1;
-        if (next !== null && buttons[next]) { event.preventDefault(); buttons[next].focus(); }
-    });
+    host.innerHTML = '<div class="comic-roster-heading"><span>ARCHIVO CENTRAL · CAPÍTULO 01</span><h2>LAS PERSONAS DETRÁS DE LA LEGIÓN</h2><p>Ocho identidades. Una misma Legión. Cada carta abre directamente su Bitácora.</p></div><div class="comic-roster-grid" role="list" aria-label="Los ocho integrantes de Legión Multiversal">' + cards + '</div>';
     host.querySelectorAll('[data-roster-select]').forEach(button => {
         button.addEventListener('click', event => openHeroProfile(Number(button.dataset.rosterSelect), event.currentTarget));
-        button.addEventListener('pointermove', event => {
-            if (event.pointerType !== 'mouse' || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-            const rect = button.getBoundingClientRect();
-            const x = (event.clientX - rect.left) / Math.max(rect.width, 1);
-            const y = (event.clientY - rect.top) / Math.max(rect.height, 1);
-            button.style.setProperty('--card-tilt-x', ((.5 - y) * 7).toFixed(2) + 'deg');
-            button.style.setProperty('--card-tilt-y', ((x - .5) * 9).toFixed(2) + 'deg');
-            button.style.setProperty('--card-shine-x', (x * 100).toFixed(1) + '%');
-            button.style.setProperty('--card-shine-y', (y * 100).toFixed(1) + '%');
-            button.classList.add('is-tilting');
-        });
-        button.addEventListener('pointerleave', () => {
-            button.style.setProperty('--card-tilt-x', '0deg');
-            button.style.setProperty('--card-tilt-y', '0deg');
-            button.style.setProperty('--card-shine-x', '50%');
-            button.style.setProperty('--card-shine-y', '50%');
-            button.classList.remove('is-tilting');
-        });
     });
-    host.querySelector('#roster-selector-surprise')?.addEventListener('click', () => {
-        const candidates = heroesData.map((hero,index) => index).filter(index => (heroesData[index].id || heroesData[index].slug) !== selectedRosterCreatorId);
-        const next = candidates[Math.floor(Math.random() * candidates.length)];
-        selectRosterCreator(next, true);
-    });
-    host.querySelector('#roster-selector-open-profile')?.addEventListener('click', event => openHeroProfile(profileIndex, event.currentTarget));
-    host.querySelectorAll('.roster-selector-tile img').forEach(image => image.addEventListener('error', () => {
-        image.replaceWith(Object.assign(document.createElement('span'), { className: 'roster-selector-no-portrait', textContent: 'RETRATO' }));
+    host.querySelectorAll('.comic-roster-photo img').forEach(image => image.addEventListener('error', () => {
+        image.replaceWith(Object.assign(document.createElement('span'), { className: 'roster-selector-no-portrait', textContent: 'RETRATO NO DISPONIBLE' }));
     }, { once: true }));
 }
 function selectRosterCreator(index, moveFocus) {
     const hero = heroesData[index];
     if (!hero) return;
-    selectedRosterCreatorId = hero.id || hero.slug;
-    try { history.replaceState({ ...(history.state || {}), lmRosterSelection: true }, '', '#roster?hero=' + encodeURIComponent(getHeroRosterSlug(hero))); } catch (error) { /* selección disponible aunque el historial esté restringido */ }
-    recordLegionProgress('profile', hero.cardNumber || hero.name);
-    renderRosterSelector();
-    if (moveFocus) document.getElementById('roster-tab-' + selectedRosterCreatorId)?.focus({ preventScroll: true });
-    if (window.matchMedia('(max-width: 900px)').matches) {
-        const panel = document.getElementById('roster-selector-panel');
-        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        panel?.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'nearest' });
-    }
+    openHeroProfile(index, document.querySelector('[data-roster-select="' + index + '"]'));
 }
 
 function renderRoster() {
@@ -1435,8 +1344,8 @@ function renderHeroProfileTabs(hero) {
  const logHtml=entries.length?'<ul class="hero-profile-detail-list">'+entries.map(x=>'<li><strong>'+safe(x.title||'Registro')+'</strong><span>'+safe(x.description||'')+(x.url?' · <a href="'+safe(x.url)+'" target="_blank" rel="noopener noreferrer">Fuente ↗</a>':'')+'</span></li>').join('')+'</ul>':'<p class="hero-profile-empty">La bitácora individual todavía no tiene hitos o colaboraciones documentados.</p>';
  const editorial=hero.mediaProfile||{},formats=editorial.formats||hero.areas||[];
  const brandHtml='<div class="hero-profile-brand"><h4>PROPUESTA EDITORIAL</h4><p>'+safe(editorial.editorial||hero.bio||'Descripción comercial pendiente de completar.')+'</p><h4>FORMATOS Y ESPECIALIDADES</h4>'+(formats.length?'<ul class="hero-profile-detail-list">'+formats.map(x=>'<li><strong>'+safe(x)+'</strong></li>').join('')+'</ul>':'<p class="hero-profile-empty">Especialidades pendientes de confirmar.</p>')+'<h4>OPORTUNIDADES DE COLABORACIÓN</h4>'+(editorial.opportunities?.length?'<ul class="hero-profile-detail-list">'+editorial.opportunities.map(x=>'<li><strong>'+safe(x)+'</strong></li>').join('')+'</ul>':'<p class="hero-profile-empty">Propuesta comercial pendiente de desarrollar.</p>')+'<p class="hero-profile-method">'+safe(editorial.disclaimer||'Las oportunidades son propuestas, no campañas contratadas.')+'</p>'+renderCommercialQuickView(hero)+'</div>';
- const tabs=[['perfil','PERFIL'],['estadisticas','ESTADÍSTICAS'],['juegos','JUEGOS Y RITMO'],['clips','CLIPS'],['bitacora','BITÁCORA'],['marcas','INTERÉS PARA MARCAS']];
- const panels=['<section class="hero-profile-tab-panel is-active" id="profile-tab-perfil" role="tabpanel">'+overview+'</section>','<section class="hero-profile-tab-panel" id="profile-tab-estadisticas" role="tabpanel" hidden><h4>RENDIMIENTO OBSERVADO</h4><div class="hero-profile-metric-grid">'+metricHtml+'</div><div class="hero-profile-period"><strong>PERÍODO</strong><span>'+safe(period)+'</span></div><p class="hero-profile-method">Fuente: capturas públicas de Twitch Helix y/o YouTube Data API, según las cuentas vinculadas. Las métricas muestreadas describen observaciones disponibles, no el rendimiento total del canal. No se muestran datos privados de audiencia, ingresos ni watch time oficial.</p></section>','<section class="hero-profile-tab-panel" id="profile-tab-juegos" role="tabpanel" hidden><h4>JUEGOS PRINCIPALES OBSERVADOS</h4>'+gameHtml+'<p class="hero-profile-method">Ordenados por cantidad de muestras en directo con categoría identificada. No representan horas jugadas ni un ranking completo del canal.</p><div class="hero-profile-period"><strong>RITMO</strong><span>'+safe(hero.schedule||hero.mediaProfile?.schedule||'Frecuencia y horario por confirmar')+'</span></div></section>','<section class="hero-profile-tab-panel" id="profile-tab-clips" role="tabpanel" hidden><h4>CLIPS PÚBLICOS · ÚLTIMOS 30 DÍAS</h4>'+clipsHtml+'</section>','<section class="hero-profile-tab-panel" id="profile-tab-bitacora" role="tabpanel" hidden><h4>TRAYECTORIA Y COLABORACIONES DOCUMENTADAS</h4>'+logHtml+'<button class="twitch-link-btn" type="button" onclick="openHeroModal('+heroesData.indexOf(hero)+')">ABRIR BITÁCORA COMPLETA</button></section>','<section class="hero-profile-tab-panel" id="profile-tab-marcas" role="tabpanel" hidden>'+brandHtml+'</section>'].join('');
+ const tabs=[['perfil','PERFIL'],['estadisticas','ESTADÍSTICAS'],['juegos','JUEGOS Y RITMO'],['clips','CLIPS'],['bitacora','BITÁCORA']];
+ const panels=['<section class="hero-profile-tab-panel is-active" id="profile-tab-perfil" role="tabpanel">'+overview+'</section>','<section class="hero-profile-tab-panel" id="profile-tab-estadisticas" role="tabpanel" hidden><h4>RENDIMIENTO OBSERVADO</h4><div class="hero-profile-metric-grid">'+metricHtml+'</div><div class="hero-profile-period"><strong>PERÍODO</strong><span>'+safe(period)+'</span></div><p class="hero-profile-method">Fuente: capturas públicas de Twitch Helix y/o YouTube Data API, según las cuentas vinculadas. Las métricas muestreadas describen observaciones disponibles, no el rendimiento total del canal. No se muestran datos privados de audiencia, ingresos ni watch time oficial.</p></section>','<section class="hero-profile-tab-panel" id="profile-tab-juegos" role="tabpanel" hidden><h4>JUEGOS PRINCIPALES OBSERVADOS</h4>'+gameHtml+'<p class="hero-profile-method">Ordenados por cantidad de muestras en directo con categoría identificada. No representan horas jugadas ni un ranking completo del canal.</p><div class="hero-profile-period"><strong>RITMO</strong><span>'+safe(hero.schedule||hero.mediaProfile?.schedule||'Frecuencia y horario por confirmar')+'</span></div></section>','<section class="hero-profile-tab-panel" id="profile-tab-clips" role="tabpanel" hidden><h4>CLIPS PÚBLICOS · ÚLTIMOS 30 DÍAS</h4>'+clipsHtml+'</section>','<section class="hero-profile-tab-panel" id="profile-tab-bitacora" role="tabpanel" hidden><h4>TRAYECTORIA Y COLABORACIONES DOCUMENTADAS</h4>'+logHtml+brandHtml+'</section>'].join('');
  return '<div class="hero-profile-tabs-wrap"><div class="hero-profile-tabs" role="tablist" aria-label="Secciones del perfil">'+tabs.map(([id,label],i)=>'<button type="button" class="hero-profile-tab'+(i===0?' is-active':'')+'" role="tab" aria-selected="'+(i===0?'true':'false')+'" aria-controls="profile-tab-'+id+'" tabindex="'+(i===0?'0':'-1')+'" data-profile-tab="'+id+'">'+label+'</button>').join('')+'</div>'+panels+'</div>';
 }
 function activateHeroProfileTab(button){const wrap=button.closest('.hero-profile-tabs-wrap');if(!wrap)return;wrap.querySelectorAll('[data-profile-tab]').forEach(tab=>{const active=tab===button;tab.classList.toggle('is-active',active);tab.setAttribute('aria-selected',active?'true':'false');tab.tabIndex=active?0:-1;});wrap.querySelectorAll('.hero-profile-tab-panel').forEach(panel=>{const active=panel.id==='profile-tab-'+button.dataset.profileTab;panel.hidden=!active;panel.classList.toggle('is-active',active);});}
@@ -1448,34 +1357,48 @@ function openHeroProfile(index, triggerElement = document.activeElement, options
     const home = document.getElementById('roster-home');
     const page = document.getElementById('hero-profile-page');
     if (!home || !page) return;
-    const channel = hero.youtube || hero.twitch || '';
     window.lastHeroProfileTrigger = triggerElement instanceof HTMLElement ? triggerElement : window.lastHeroProfileTrigger || null;
     window.currentHeroProfileIndex = index;
-    const profileArt = hero.img || hero.portrait || '';
-    const profileArtAlt = 'Ilustración oficial de ' + getHeroDisplayName(hero) + ' para su expediente individual';
     const filteredProfiles = getRosterFilteredEntries();
     const profilePosition = filteredProfiles.findIndex(entry => entry.index === index);
     const previousDisabled = profilePosition <= 0;
     const nextDisabled = profilePosition < 0 || profilePosition >= filteredProfiles.length - 1;
-    const profileActions = '<button class="twitch-link-btn" type="button" onclick="openHeroModal(' + index + ')">ABRIR BITÁCORA COMPLETA</button>'
-        + renderCreatorPlatformLinks(hero)
-        + '<button class="hero-profile-back" type="button" onclick="closeHeroProfile()">VOLVER AL ROSTER</button>';
-    const profilePager = '<nav class="hero-profile-pager" aria-label="Navegación entre expedientes"><button type="button" onclick="navigateHeroProfile(-1)"' + (previousDisabled ? ' disabled' : '') + '>← ANTERIOR</button><span>EXPEDIENTE ' + (profilePosition >= 0 ? profilePosition + 1 : '—') + ' / ' + filteredProfiles.length + '</span><button type="button" onclick="navigateHeroProfile(1)"' + (nextDisabled ? ' disabled' : '') + '>SIGUIENTE →</button></nav>';
-    const liveState=getRosterLiveState(hero);
-    const liveBadge=liveState?.fresh&&liveState.channel?.live?'<span class="hero-profile-live is-live">● EN VIVO · '+escapeStatsHtml(liveState.channel.current_viewers??'EN DIRECTO')+'</span>':liveState?.fresh?'<span class="hero-profile-live">OFFLINE · CAPTURA ACTUALIZADA</span>':'<span class="hero-profile-live is-unknown">ESTADO NO DISPONIBLE</span>';
-    const portrait=hero.portrait||hero.img||'';
-    const poster=hero.img||hero.portrait||'';
-    const socials=renderCreatorPlatformLinks(hero);
-    const leftRail='<aside class="hero-profile-sidebar"><div class="hero-profile-id-card"><div class="hero-profile-id-image">'+(portrait?'<img src="'+escapeStatsHtml(portrait)+'" alt="'+escapeStatsHtml(profileArtAlt)+'" loading="eager">':'<div class="hero-profile-art-fallback">RETRATO NO DISPONIBLE</div>')+'<span class="hero-profile-id-live">'+liveBadge+'</span><div class="hero-profile-id-name"><small>'+escapeStatsHtml(hero.codename||hero.role_label||'INTEGRANTE DE LA LEGIÓN')+'</small><strong>'+escapeStatsHtml(getHeroDisplayName(hero))+'</strong><span>'+escapeStatsHtml((hero.areas||[]).slice(0,3).join(' · ')||hero.characterRole||'Creador de contenido')+'</span></div></div></div><section class="hero-profile-sidebar-quote"><small>'+escapeStatsHtml(getHeroDisplayName(hero))+' DICE:</small><blockquote>'+escapeStatsHtml(hero.voice||'Frase personal pendiente de completar.')+'</blockquote><p>Identidad y voz del integrante.</p></section><section class="hero-profile-poster"><small>☆ PÓSTER VINTAGE · ARCHIVO</small>'+(poster?'<a href="'+escapeStatsHtml(poster)+'" target="_blank" rel="noopener noreferrer"><img src="'+escapeStatsHtml(poster)+'" alt="Póster de archivo de '+escapeStatsHtml(getHeroDisplayName(hero))+'" loading="lazy"><span>VER PÓSTER COMPLETO ↗</span></a>':'<p>Póster pendiente de incorporar.</p>')+'</section><section class="hero-profile-socials"><small>ENLACES DEL CANAL</small><div>'+(socials||'<p>Redes sociales pendientes de vincular.</p>')+'</div></section></aside>';
-    page.innerHTML = '<div class="hero-profile-reference-layout">'+leftRail+'<main class="hero-profile-main"><div class="hero-profile-reference-head"><div><span class="stats-status">PERFIL DE CANAL · DATOS DE '+(hero.creator_type==='video_creator'?'VIDEO':'STREAMING')+'</span><p class="profile-section-kicker">ARCHIVO LM · EXP. '+escapeStatsHtml(hero.cardNumber||'S/N')+'</p><h3 id="hero-profile-title" tabindex="-1">'+escapeStatsHtml(getHeroDisplayName(hero))+'</h3></div><div class="hero-profile-top-nav">'+profilePager+'</div></div>'+renderHeroProfileTabs(hero)+'</main></div>';
-    page.querySelectorAll('[data-profile-tab]').forEach(button=>button.addEventListener('click',()=>activateHeroProfileTab(button)));
-    page.querySelector('.hero-profile-tabs')?.addEventListener('keydown',event=>{if(!['ArrowRight','ArrowLeft','Home','End'].includes(event.key))return;const buttons=Array.from(page.querySelectorAll('[data-profile-tab]'));const current=buttons.indexOf(document.activeElement);let next=current;if(event.key==='ArrowRight')next=(current+1)%buttons.length;if(event.key==='ArrowLeft')next=(current-1+buttons.length)%buttons.length;if(event.key==='Home')next=0;if(event.key==='End')next=buttons.length-1;event.preventDefault();buttons[next]?.focus();if(buttons[next])activateHeroProfileTab(buttons[next]);});
-
+    const liveState = getRosterLiveState(hero);
+    const isLive = Boolean(liveState?.fresh && liveState.channel?.live);
+    const liveBadge = isLive
+        ? '<span class="hero-profile-live is-live">● EN VIVO · ' + escapeStatsHtml(liveState.channel.current_viewers ?? 'EN DIRECTO') + ' VIENDO</span>'
+        : '<span class="hero-profile-live is-unknown">' + (liveState?.fresh ? '● CAPTURA ACTUALIZADA' : '● ESTADO NO DISPONIBLE') + '</span>';
+    const portrait = hero.portrait || hero.img || '';
+    const socials = renderCreatorPlatformLinks(hero);
+    const rhythm = 'EN SEGUIMIENTO';
+    const topLine = '<div class="hero-profile-reference-head comic-profile-head"><div class="comic-profile-breadcrumb">LEGIÓN › ROSTER › ' + escapeStatsHtml(getHeroDisplayName(hero)) + '</div><div class="comic-profile-head-right"><span class="comic-profile-rhythm">RITMO: ' + rhythm + '</span>' + liveBadge + '</div><div class="hero-profile-top-nav"><nav class="hero-profile-pager" aria-label="Navegación entre expedientes"><button type="button" onclick="navigateHeroProfile(-1)"' + (previousDisabled ? ' disabled' : '') + '>← ANTERIOR</button><span>EXPEDIENTE ' + (profilePosition >= 0 ? profilePosition + 1 : '—') + ' / ' + filteredProfiles.length + '</span><button type="button" onclick="navigateHeroProfile(1)"' + (nextDisabled ? ' disabled' : '') + '>SIGUIENTE →</button></nav></div></div>';
+    const leftRail = '<aside class="hero-profile-sidebar comic-profile-sidebar"><div class="hero-profile-id-card"><div class="hero-profile-id-image">' +
+        (portrait ? '<img src="' + escapeStatsHtml(portrait) + '" alt="Fotografía de ' + escapeStatsHtml(getHeroDisplayName(hero)) + '" loading="eager" decoding="async">' : '<div class="hero-profile-art-fallback">RETRATO NO DISPONIBLE</div>') +
+        '<span class="hero-profile-id-live">' + liveBadge + '</span><div class="hero-profile-id-name"><small>' + escapeStatsHtml(hero.codename || hero.role_label || 'INTEGRANTE DE LA LEGIÓN') + '</small><strong>' + escapeStatsHtml(getHeroDisplayName(hero)) + '</strong><span>' + escapeStatsHtml((hero.areas || []).slice(0,3).join(' · ') || hero.characterRole || 'Creador de contenido') + '</span></div></div></div>' +
+        '<section class="hero-profile-sidebar-quote comic-profile-quote"><small>' + escapeStatsHtml(getHeroDisplayName(hero)) + ' DICE:</small><blockquote>' + escapeStatsHtml(hero.voice || 'Frase personal pendiente de completar.') + '</blockquote><p>Frase de identidad del canal.</p></section>' +
+        '<section class="hero-profile-socials comic-profile-socials"><small>ENLACES DEL CANAL</small><div>' + (socials || '<p>Redes sociales pendientes de vincular.</p>') + '</div></section>' +
+        '<button class="hero-profile-back comic-profile-back" type="button" onclick="closeHeroProfile()">← VOLVER AL ROSTER</button></aside>';
+    page.innerHTML = '<div class="hero-profile-reference-layout comic-profile-layout">' + leftRail +
+        '<main class="hero-profile-main comic-profile-main">' + topLine + renderHeroProfileTabs(hero) + '</main></div>';
+    page.querySelectorAll('[data-profile-tab]').forEach(button => button.addEventListener('click', () => activateHeroProfileTab(button)));
+    page.querySelector('.hero-profile-tabs')?.addEventListener('keydown', event => {
+        if (!['ArrowRight','ArrowLeft','Home','End'].includes(event.key)) return;
+        const buttons = Array.from(page.querySelectorAll('[data-profile-tab]'));
+        const current = buttons.indexOf(document.activeElement);
+        let next = current;
+        if (event.key === 'ArrowRight') next = (current + 1) % buttons.length;
+        if (event.key === 'ArrowLeft') next = (current - 1 + buttons.length) % buttons.length;
+        if (event.key === 'Home') next = 0;
+        if (event.key === 'End') next = buttons.length - 1;
+        event.preventDefault();
+        buttons[next]?.focus();
+        if (buttons[next]) activateHeroProfileTab(buttons[next]);
+    });
     home.hidden = true;
     page.hidden = false;
     setHeroProfileRoute(hero, options.historyMode || 'push');
     page.scrollIntoView({behavior:'smooth',block:'start'});
-    requestAnimationFrame(() => document.getElementById('hero-profile-title')?.focus({preventScroll:true}));
+    requestAnimationFrame(() => page.querySelector('[data-profile-tab]')?.focus({preventScroll:true}));
 }
 function navigateHeroProfile(direction) {
     const entries = getRosterFilteredEntries();
