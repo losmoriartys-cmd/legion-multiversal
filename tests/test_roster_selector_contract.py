@@ -90,6 +90,7 @@ class RosterComicCardsContractTests(unittest.TestCase):
 
     def test_only_one_roster_directory_remains_in_the_chapter(self):
         self.assertIn('id="roster-selector"', self.html)
+        self.assertIn('id="roster"', self.html)
         self.assertNotIn('id="roster-container"', self.html)
         self.assertNotIn('class="roster-tools"', self.html)
         self.assertNotIn('class="roster-product-nav"', self.html)
