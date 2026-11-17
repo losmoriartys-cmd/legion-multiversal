@@ -103,6 +103,8 @@ class RosterComicCardsContractTests(unittest.TestCase):
         self.assertIn("7 * 24 * 60 * 60 * 1000", renderer)
         self.assertNotIn("hero.schedule", renderer)
         self.assertIn("Seguidores", renderer)
+        self.assertIn("twitchMetricsData?.channels?.[login]", renderer)
+        self.assertIn("TwitchMetrics", renderer)
         self.assertIn("Media de viewers", renderer)
 
     def test_profile_opens_directly_as_a_35_65_bitacora(self):
@@ -192,7 +194,7 @@ class RosterComicCardsContractTests(unittest.TestCase):
 
     def test_selector_mount_and_assets_are_loaded(self):
         self.assertIn('id="roster-selector"', self.html)
-        self.assertIn("roster-selector.css?v=20261117-comic-cards-1", self.html)
+        self.assertIn("roster-selector.css?v=20261117-audience-cards-1", self.html)
         self.assertIn("function renderRosterSelector()", self.app)
 
     def test_global_navigation_and_legacy_routes_remain_supported(self):

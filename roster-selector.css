@@ -772,3 +772,64 @@
     #chapter-2 .hero-profile-character-art img { max-height: 62vh; }
     #chapter-2 .hero-profile-character-card { justify-self: center; width: min(100%, 230px); }
 }
+
+
+/* Roster · audiencia pública destacada en el frente de cada carta. */
+#chapter-2 .comic-roster-stat-audience {
+    display:grid;
+    grid-template-columns:1fr auto;
+    align-items:center;
+    gap:3px 10px;
+    padding:8px 9px;
+    border:2px solid #111;
+    border-left:6px solid #d71932;
+    background:#fff;
+}
+#chapter-2 .comic-roster-stat-audience > span {
+    color:#5a2020;
+    font-size:.66rem;
+    font-weight:900;
+    letter-spacing:.045em;
+}
+#chapter-2 .comic-roster-stat-audience > b {
+    color:#111;
+    font-size:clamp(1rem,1.5vw,1.25rem);
+    font-weight:1000;
+    font-variant-numeric:tabular-nums;
+    text-align:right;
+}
+#chapter-2 .comic-roster-stat-audience > small {
+    grid-column:1/-1;
+    color:#625b50;
+    font-size:.55rem;
+    line-height:1.35;
+}
+#chapter-2 .comic-roster-stat-audience > b:where(:not(:empty)) {
+    overflow-wrap:anywhere;
+}
+@media(max-width:520px) {
+    #chapter-2 .comic-roster-stat-audience { padding:7px; gap:3px 6px; }
+    #chapter-2 .comic-roster-stat-audience > span { font-size:.58rem; }
+    #chapter-2 .comic-roster-stat-audience > b { font-size:.92rem; }
+    #chapter-2 .comic-roster-stat-audience > small { font-size:.5rem; }
+}
+
+
+/* Ajuste de lectura: las etiquetas de audiencia no deben fragmentarse letra por letra. */
+#chapter-2 .comic-roster-stat-audience {
+    grid-template-columns:minmax(0,1fr);
+    min-width:0;
+}
+#chapter-2 .comic-roster-stat-audience > span,
+#chapter-2 .comic-roster-stat-audience > b {
+    min-width:0;
+    max-width:100%;
+    text-align:left;
+    word-break:normal;
+    overflow-wrap:break-word;
+    hyphens:none;
+}
+#chapter-2 .comic-roster-stat-audience > b {
+    font-size:clamp(.82rem,1.15vw,1.12rem);
+    line-height:1.15;
+}
