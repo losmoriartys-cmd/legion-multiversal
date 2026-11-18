@@ -5646,3 +5646,33 @@ main .chapter-panel :where(.chapter-cta, .executive-button, .comic-submit-btn,
 @media(prefers-reduced-motion:reduce){
   #hero-profile-page .hero-profile-id-live .hero-profile-live.is-live{animation:none}
 }
+
+/* BITÁCORA / ROSTER · limpieza visual, redes y Epic */
+#hero-profile-page .hero-profile-visuals,
+#hero-profile-page .hero-profile-character-art,
+#hero-profile-page .hero-profile-character-card{display:none!important}
+#hero-profile-page .hero-profile-socials .btn-link{
+ display:inline-flex;align-items:center;justify-content:center;min-height:44px;
+ padding:10px 12px;background:#fff;border:3px solid #111;color:#111;
+ box-shadow:4px 4px 0 #111;border-radius:0;text-decoration:none;
+ font:900 .78rem 'Roboto Condensed',sans-serif;letter-spacing:.04em;
+}
+#hero-profile-page .hero-profile-socials .btn-link:hover,
+#hero-profile-page .hero-profile-socials .btn-link:focus-visible{background:#1e4bff;color:#fff;outline:3px solid #111;outline-offset:2px}
+#hero-profile-page .hero-profile-integrated-games{margin-top:8px;padding:14px;background:#fff;border:3px solid #111;box-shadow:4px 4px 0 #111}
+#hero-profile-page .hero-profile-integrated-games h4{margin:0 0 10px;font:900 1.65rem 'Bangers',Impact,sans-serif;letter-spacing:.04em;color:#111}
+#hero-profile-page .hero-profile-integrated-games .hero-profile-game-grid{margin:0}
+#hero-profile-page .hero-profile-epic-codes{margin-top:16px;padding:14px;background:#fff;border:3px solid #111;box-shadow:5px 5px 0 #111;color:#111}
+#hero-profile-page .hero-profile-epic-codes>h4{margin:0 0 12px;font:900 1.6rem 'Bangers',Impact,sans-serif;color:#111}
+#hero-profile-page .hero-profile-epic-codes .epic-code-record{background:#fff8d6;border:3px solid #111;border-left:8px solid #ffd500;box-shadow:5px 5px 0 #111;color:#111}
+#hero-profile-page .hero-profile-epic-codes .epic-code-owner{color:#111}
+#hero-profile-page .hero-profile-epic-codes .epic-code-value{color:#111;text-shadow:2px 2px 0 #ffd500}
+#hero-profile-page .hero-profile-epic-codes .epic-code-state{color:#111}
+#hero-profile-page .hero-profile-epic-codes .epic-code-evidence{color:#3c382f}
+#hero-profile-page .hero-profile-epic-codes .epic-code-actions a{background:#1e4bff;color:#fff;border:3px solid #111;box-shadow:3px 3px 0 #111}
+#hero-profile-page .hero-profile-epic-codes .epic-code-copy{background:#ffd500;color:#111;border:3px solid #111;box-shadow:3px 3px 0 #111}
+@media(max-width:520px){
+ #hero-profile-page .hero-profile-integrated-games{padding:10px}
+ #hero-profile-page .hero-profile-epic-codes{padding:10px}
+ #hero-profile-page .hero-profile-epic-codes .epic-code-value{font-size:2rem}
+}
