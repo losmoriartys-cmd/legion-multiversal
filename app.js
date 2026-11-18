@@ -1258,6 +1258,26 @@ function renderRosterSelector() {
         image.replaceWith(Object.assign(document.createElement('span'), { className: 'roster-selector-no-portrait', textContent: 'RETRATO NO DISPONIBLE' }));
     }, { once: true }));
 }
+
+function refreshRosterMetricsViews(){
+ renderRosterSelector();
+ const index=window.currentHeroProfileIndex;
+ if(index===null||index===undefined)return;
+ const hero=heroesData[index],page=document.getElementById('hero-profile-page');
+ if(!hero||!page||page.hidden)return;
+ const channel=findChannelStats(hero),sully=findSullyChannel(hero);
+ const profile=page.querySelector('#profile-tab-perfil .hero-profile-overview');
+ if(profile){
+  const games=getMostPlayedGames(hero,channel,sully),markup=games.length?'<section class="hero-profile-integrated-games"><h4>JUEGOS Y RITMO</h4><div class="hero-profile-game-grid">'+games.map(name=>'<article><strong>'+escapeStatsHtml(name)+'</strong></article>').join('')+'</div></section>':'';
+  const current=profile.querySelector('.hero-profile-integrated-games');
+  if(current)current.outerHTML=markup;
+  else if(markup)profile.insertAdjacentHTML('beforeend',markup);
+ }
+ const stats=page.querySelector('#profile-tab-estadisticas'),dashboard=renderStatsDashboard(hero,channel,sully),currentStats=stats?.querySelector('.stats-dashboard');
+ if(currentStats)currentStats.outerHTML=dashboard;
+ else if(stats)stats.insertAdjacentHTML('beforeend',dashboard);
+}
+
 function selectRosterCreator(index, moveFocus) {
     const hero = heroesData[index];
     if (!hero) return;
@@ -2094,7 +2114,10 @@ function printHeroDossier(){
                 add('legion-news', loadLegionNews);
             }
 
-            return Promise.allSettled(jobs);
+            return Promise.allSettled(jobs).then(results => {
+                if ([2, 3, 13].includes(Number(chapterNum)) && Array.isArray(heroesData) && heroesData.length) refreshRosterMetricsViews();
+                return results;
+            });
         }
 
         let lmGlobalChapterStylesPromise = null;
