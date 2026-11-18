@@ -37,6 +37,51 @@ def validate_roster(roster: dict) -> list[str]:
     if not isinstance(heroes, list) or not heroes:
         return errors + ["No hay integrantes en roster-data.json."]
 
+    registry = roster.get("name_registry")
+    if not isinstance(registry, dict):
+        errors.append("roster-data.json debe incluir name_registry con nombres canónicos.")
+        registry = {}
+    expected_registry_ids = {hero.get("id") for hero in heroes if hero.get("id")}
+    if set(registry) != expected_registry_ids:
+        errors.append("name_registry debe contener exactamente una entrada por cada integrante del roster.")
+
+    def normalize_name(value: str) -> str:
+        import unicodedata
+        return re.sub(r"[^a-z0-9]", "", unicodedata.normalize("NFKD", str(value or "")).encode("ascii", "ignore").decode("ascii").lower())
+
+    alias_owners = {}
+    for index, hero in enumerate(heroes, 1):
+        identity = registry.get(hero.get("id")) or {}
+        if not identity:
+            errors.append("{}: falta la identidad canónica en name_registry.".format(hero.get("name") or index))
+            continue
+        if identity.get("display_name") != hero.get("display_name"):
+            errors.append("{}: display_name no coincide con name_registry.".format(hero.get("name") or index))
+        if identity.get("character_alias") != hero.get("codename"):
+            errors.append("{}: character_alias no coincide con codename.".format(hero.get("name") or index))
+        accounts = hero.get("accounts") or []
+        account = next((item for item in accounts if item.get("platform") == identity.get("platform")), None)
+        if not account:
+            errors.append("{}: platform de name_registry no coincide con una cuenta registrada.".format(hero.get("name") or index))
+        elif normalize_name(identity.get("username")) not in {
+            normalize_name(account.get("handle")), normalize_name(account.get("login"))
+        }:
+            errors.append("{}: username no coincide con el handle registrado.".format(hero.get("name") or index))
+        aliases = [
+            identity.get("display_name"), identity.get("username"), identity.get("character_alias"),
+            *(identity.get("variants") or [])
+        ]
+        for person in identity.get("represented_people") or []:
+            aliases.extend([person.get("display_name"), *(person.get("variants") or [])])
+        for alias in aliases:
+            token = normalize_name(alias)
+            if not token:
+                continue
+            owner = alias_owners.get(token)
+            if owner and owner != hero.get("id"):
+                errors.append("Alias canónico ambiguo entre {} y {}: {}.".format(owner, hero.get("id"), alias))
+            alias_owners[token] = hero.get("id")
+
     ids, slugs, logins = set(), set(), set()
     for index, hero in enumerate(heroes, 1):
         label = str(hero.get("name") or "integrante {}".format(index))

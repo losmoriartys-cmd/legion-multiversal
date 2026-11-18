@@ -11,6 +11,8 @@ class ValuesChapterContractTests(unittest.TestCase):
         self.assertEqual(HTML.count('id="chapter-11"'), 1)
         self.assertIn('aria-labelledby="manifesto-title"', HTML)
         self.assertIn('id="manifesto-title"', HTML)
+        self.assertIn('data-editorial-number="2"', HTML)
+        self.assertIn("CAPÍTULO 02 · QUIÉNES SOMOS", HTML)
 
     def test_six_values_are_preserved(self):
         section = re.search(r'<section id="chapter-11"(.*?)<section id="chapter-9"', HTML, re.S)

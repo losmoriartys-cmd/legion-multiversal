@@ -782,5 +782,99 @@
       "character_card": "assets/heroes/habitos_dark.webp"
     }
   ],
-  "identity_model_version": 1
+  "identity_model_version": 1,
+  "name_registry": {
+    "moriartys": {
+      "display_name": "LOS MORIARTYS",
+      "platform": "twitch",
+      "username": "losmoriartys",
+      "character_alias": "EL ESTRATEGA",
+      "variants": [
+        "MORIARTYS",
+        "LOS MORIARTYS"
+      ],
+      "represented_people": [
+        {
+          "display_name": "Demian",
+          "variants": [
+            "Demi"
+          ]
+        },
+        {
+          "display_name": "Ari",
+          "variants": []
+        }
+      ]
+    },
+    "rod3r1k": {
+      "display_name": "ROD3R1K",
+      "platform": "twitch",
+      "username": "TheR0D3R1K",
+      "character_alias": "EL FUERTE",
+      "variants": [
+        "ROD3RIK",
+        "TheR0d3R1k"
+      ]
+    },
+    "lady-moriarty": {
+      "display_name": "LADY MORIARTY",
+      "platform": "twitch",
+      "username": "ladymoriarty01",
+      "character_alias": "LA BRUJA",
+      "variants": [
+        "LADYMORIARTY",
+        "LADYMORIARTY01"
+      ]
+    },
+    "ardipii": {
+      "display_name": "ARDIPII",
+      "platform": "twitch",
+      "username": "ardipii",
+      "character_alias": "EL FANTASMA",
+      "variants": [
+        "Ardipi",
+        "ARDIPI"
+      ]
+    },
+    "akuma": {
+      "display_name": "AKUMA",
+      "platform": "twitch",
+      "username": "akumazoldyck",
+      "character_alias": "EL INFERNAL",
+      "variants": [
+        "Akuma Zoldyck"
+      ]
+    },
+    "dave-nexus": {
+      "display_name": "DAVE — NEXUS",
+      "platform": "twitch",
+      "username": "daved0608",
+      "character_alias": "EL NEXO",
+      "variants": [
+        "Dave",
+        "DAVE NEXUS"
+      ]
+    },
+    "pato-oratoris": {
+      "display_name": "PATO — ORATORIS",
+      "platform": "youtube",
+      "username": "@patoteexplica",
+      "character_alias": "EL ORADOR",
+      "variants": [
+        "Patoexpone",
+        "Pato",
+        "PATOTEEXPLICA"
+      ]
+    },
+    "habitos": {
+      "display_name": "HABITOS",
+      "platform": "twitch",
+      "username": "habitos_atomicos",
+      "character_alias": "FILÓSOFO JUSTICIERO",
+      "variants": [
+        "Mismo Habitos",
+        "Hábitos Atómicos"
+      ]
+    }
+  }
 }

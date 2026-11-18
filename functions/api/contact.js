@@ -114,7 +114,7 @@ export async function onRequest({ request, env }) {
     return json({ error: "Completá todos los campos obligatorios." }, 400);
   }
 
-  const replyTo = type === "brand" ? fields["Correo de contacto"] : "";
+  const replyTo = fields["Correo de contacto"] || "";
   if (replyTo && !validEmail(replyTo)) return json({ error: "El correo de contacto no parece válido." }, 400);
 
   const subject = type === "creator"

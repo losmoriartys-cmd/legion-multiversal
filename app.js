@@ -1,5 +1,6 @@
         // Fuente de verdad del roster: editar role para cambiar jerarquía; completar powers y log con datos confirmados.
         let heroesData = [];
+let creatorNameRegistry = {};
 let epicCreatorPrograms = null;
 
 async function loadRosterData() {
@@ -18,6 +19,7 @@ async function loadRosterData() {
         identifiers.add(identifier);
     }
     heroesData = payload.heroes;
+    creatorNameRegistry = payload.name_registry || {};
     return payload;
 }
 
@@ -317,7 +319,26 @@ function renderHelixDashboard(channel){
  out+='<div class="stats-note">Las horas y picos de esta sección son observaciones/estimaciones propias del muestreo. No sustituyen las métricas oficiales del panel de creador de Twitch ni reconstruyen directos anteriores al inicio de la recolección.</div></section>';
  return out;
 }
-function getHeroDisplayName(hero){ return hero?.display_name || hero?.name || 'Integrante'; }
+function normalizeCreatorNameToken(value) {
+    return String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('es').replace(/[^a-z0-9]/g, '');
+}
+function getCanonicalCreatorName(value) {
+    const token = normalizeCreatorNameToken(value);
+    if (!token) return value || '';
+    for (const identity of Object.values(creatorNameRegistry || {})) {
+        const candidates = [identity.display_name, identity.username, identity.character_alias, ...(identity.variants || [])];
+        if (candidates.some(candidate => normalizeCreatorNameToken(candidate) === token)) return identity.display_name;
+        for (const person of identity.represented_people || []) {
+            const personNames = [person.display_name, ...(person.variants || [])];
+            if (personNames.some(candidate => normalizeCreatorNameToken(candidate) === token)) return person.display_name;
+        }
+    }
+    return value;
+}
+function getHeroDisplayName(hero) {
+    const identity = creatorNameRegistry[hero?.id || hero?.slug];
+    return identity?.display_name || hero?.display_name || hero?.name || 'Integrante';
+}
 
 function renderStatsDashboard(hero,helix,sully){
  let out='<div class="stats-dashboard">';
@@ -662,7 +683,7 @@ function updateMissionHeader(){
  const progressFor=key=>key==='profiles'?state.profiles.length:key==='chapters'?state.chapters.length:key==='bitacora'?Number(state.bitacora):key==='live'?Number(state.live):0;
  const complete=missions.filter(m=>{const target=m.target==='roster_total'?Math.max(1,heroesData.length):Math.max(1,Number(m.target)||1);return progressFor(m.progress_key)>=target;}).length;
  count.textContent=complete+'/'+missions.length;
- if(trigger)trigger.setAttribute('aria-label','Abrir Mapa Multiversal: '+complete+' de '+missions.length+' misiones completadas');
+ if(trigger){trigger.setAttribute('aria-label','Abrir Mapa Multiversal: '+complete+' de '+missions.length+' misiones completadas');trigger.hidden=missions.length===0;}
 }
 function selectAllianceModelTab(key){
  ['individual','multichannel','platform'].forEach(id=>{
@@ -1196,7 +1217,7 @@ function renderRosterSelector() {
             '<span class="comic-roster-card-footer"><small>' + safe(hero.role_label || platformName) + '</small><strong>VER PERFIL →</strong></span></span>' +
         '</button>';
     }).join('');
-    host.innerHTML = '<div class="comic-roster-heading"><span>ARCHIVO CENTRAL · CAPÍTULO 02</span><h2>LAS PERSONAS DETRÁS DE LA LEGIÓN</h2><p>Ocho identidades. Una misma Legión. Cada carta abre directamente su Bitácora.</p></div><div class="comic-roster-grid" role="list" aria-label="Los ocho integrantes de Legión Multiversal">' + cards + '</div>';
+    host.innerHTML = '<div class="comic-roster-heading"><span>ARCHIVO CENTRAL · CAPÍTULO 03</span><h2>LAS PERSONAS DETRÁS DE LA LEGIÓN</h2><p>Ocho identidades. Una misma Legión. Cada carta abre directamente su Bitácora.</p></div><div class="comic-roster-grid" role="list" aria-label="Los ocho integrantes de Legión Multiversal">' + cards + '</div>';
     host.querySelectorAll('[data-roster-select]').forEach(button => {
         button.addEventListener('click', event => openHeroProfile(Number(button.dataset.rosterSelect), event.currentTarget));
     });
@@ -2144,3 +2165,5 @@ function printHeroDossier(){
         }
         if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initializeLegionApp, { once: true });
         else initializeLegionApp();
+
+window.getCanonicalCreatorName = getCanonicalCreatorName;

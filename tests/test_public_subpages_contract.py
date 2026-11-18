@@ -25,4 +25,15 @@ class PublicSubpagesContractTests(unittest.TestCase):
         self.assertIn('rel="canonical" href="https://legion-multiversal.pages.dev/"', html)
         self.assertIn('property="og:url" content="https://legion-multiversal.pages.dev/"', html)
         self.assertIn('href="./metodologia/"', html)
-        self.assertIn('href="./recursos/"', html)
+        self.assertNotIn('href="./recursos/"', html)
+        self.assertIn('name="robots" content="noindex,nofollow"', (ROOT / "recursos" / "index.html").read_text(encoding="utf-8"))
+
+    def test_brand_update_date_comes_from_latest_public_data_capture(self):
+        html = (ROOT / "marcas" / "index.html").read_text(encoding="utf-8")
+        script = (ROOT / "brand-media-kit.js").read_text(encoding="utf-8")
+        self.assertIn('id="brand-updated-at"', html)
+        self.assertNotIn("Actualizada 16/11/2026", html)
+        self.assertIn("creatorData.generated_at", script)
+        self.assertIn("platformData.updated_at", script)
+        self.assertIn("activityData.updated_at", script)
+        self.assertIn("Math.max(...updateTimes)", script)

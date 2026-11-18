@@ -1,25 +1,92 @@
-import pathlib, unittest
-ROOT=pathlib.Path(__file__).resolve().parents[1]
+import pathlib
+import unittest
+
+ROOT = pathlib.Path(__file__).resolve().parents[1]
+
+
 class ConversionPhase2Contract(unittest.TestCase):
- @classmethod
- def setUpClass(cls):
-  cls.html=(ROOT/"index.html").read_text(encoding="utf-8");cls.js=(ROOT/"app.js").read_text(encoding="utf-8");cls.css=(ROOT/"conversion-phase2.css").read_text(encoding="utf-8")
- def test_home_and_three_guided_paths(self):
-  home=self.html.split('id="chapter-0"',1)[1].split('id="chapter-1"',1)[0]
-  self.assertIn("MIRAR EN VIVO",home);self.assertEqual(home.count('class="executive-directory-card"'),3);self.assertIn('class="home-live-strip"',home)
-  self.assertIn('id="home-live-status"',home);self.assertIn('id="home-live-updated"',home)
- def test_floating_live_drawer(self):
-  self.assertIn('live-player-drawer',self.html);self.assertIn("openLiveDrawer()",self.js);self.assertIn("closeLiveDrawer()",self.js)
- def test_market_benchmark_and_activation_tabs(self):
-  self.assertIn("BENCHMARK DE INDUSTRIA",self.html);self.assertIn("TIEMPO DE EJECUCIÓN",self.html);self.assertIn("selectAllianceModelTab",self.js)
- def test_barfender_continuity_and_clip_metadata(self):
-  self.assertIn("SESIÓN 02 · 10 NOV 2026",self.html);self.assertIn("DURACIÓN NO REGISTRADA",self.html);self.assertIn("JUGADO POR LA LEGIÓN",self.html);self.assertIn("91 usuarios activos en chat",self.html)
- def test_public_arsenal_does_not_expose_campaign_access_tables(self):
-  self.assertNotIn('id="chapter-14"',self.html)
-  self.assertNotIn("ABRIR ARCHIVO DE CAMPAÑAS Y ACCESOS",self.html)
-  self.assertIn("autenticación real",self.html)
- def test_arsenal_filters_and_recruitment_tabs(self):
-  self.assertIn("filterArsenal",self.js);self.assertIn("setRecruitmentMode",self.js);self.assertIn('data-arsenal-filter="horror"',self.html)
- def test_mission_progress_is_discoverable(self):
-  self.assertIn("mission-progress-trigger",self.html);self.assertIn("updateMissionHeader",self.js)
-if __name__=="__main__":unittest.main()
+    @classmethod
+    def setUpClass(cls):
+        cls.html = (ROOT / "index.html").read_text(encoding="utf-8")
+        cls.js = (ROOT / "app.js").read_text(encoding="utf-8")
+        cls.css = (ROOT / "conversion-phase2.css").read_text(encoding="utf-8")
+
+    def test_home_and_three_guided_paths(self):
+        home = self.html.split('id="chapter-0"', 1)[1].split('id="chapter-1"', 1)[0]
+        self.assertIn("CONOCÉ A LOS CREADORES", home)
+        self.assertIn("SOY MARCA", home)
+        self.assertIn("QUIERO SUMARME", home)
+        self.assertEqual(home.count('class="executive-directory-card"'), 3)
+        self.assertIn('class="home-live-strip"', home)
+        self.assertIn('id="home-live-status"', home)
+        self.assertIn('id="home-live-updated"', home)
+
+    def test_floating_live_drawer(self):
+        self.assertIn('live-player-drawer', self.html)
+        self.assertIn("openLiveDrawer()", self.js)
+        self.assertIn("closeLiveDrawer()", self.js)
+
+    def test_market_benchmark_and_activation_tabs(self):
+        self.assertIn("BENCHMARK DE INDUSTRIA", self.html)
+        self.assertIn("TIEMPO DE EJECUCIÓN", self.html)
+        self.assertIn("selectAllianceModelTab", self.js)
+
+    def test_barfender_continuity_and_clip_metadata(self):
+        self.assertIn("SESIÓN 02 · 10 NOV 2026", self.html)
+        self.assertNotIn("DURACIÓN NO REGISTRADA", self.html)
+        self.assertIn("JUGADO POR LA LEGIÓN", self.html)
+        self.assertIn("91 usuarios activos en chat", self.html)
+
+    def test_public_arsenal_does_not_expose_campaign_access_tables(self):
+        arsenal = self.html.split('id="chapter-5"', 1)[1].split('id="chapter-6"', 1)[0]
+        self.assertNotIn('id="chapter-14"', self.html)
+        self.assertNotIn("ABRIR ARCHIVO DE CAMPAÑAS Y ACCESOS", self.html)
+        self.assertNotIn("arsenal-internal-note", arsenal)
+        self.assertNotIn("autenticación real", arsenal)
+
+    def test_arsenal_filters_and_recruitment_tabs(self):
+        self.assertIn("filterArsenal", self.js)
+        self.assertIn("setRecruitmentMode", self.js)
+        self.assertIn('data-arsenal-filter="horror"', self.html)
+
+    def test_mission_progress_is_discoverable(self):
+        self.assertIn("mission-progress-trigger", self.html)
+        self.assertIn("updateMissionHeader", self.js)
+
+    def test_arsenal_count_matches_all_eleven_listed_games(self):
+        arsenal = self.html.split('id="chapter-5"', 1)[1].split('id="chapter-6"', 1)[0]
+        self.assertIn("ONCE JUEGOS", arsenal)
+        self.assertIn("11 JUEGOS PARA JUGAR EN EQUIPO", arsenal)
+        self.assertIn("11. BarFender", arsenal)
+        self.assertNotIn("El historial de campañas y accesos se retiró", arsenal)
+
+    def test_barfender_vod_durations_are_not_added_as_watch_time(self):
+        self.assertIn("3 VOD DE ~1 H 14 MIN", self.html)
+        self.assertNotIn("3 H 43 MIN 35 S", self.html)
+        self.assertIn("Muestra insuficiente para publicar promedio o pico", self.html)
+        self.assertNotIn("Promedio observado: 10,5", self.html)
+
+    def test_featured_clips_use_verified_titles_and_thumbnails(self):
+        clips = self.html.split('<section class="campaign-clips">', 1)[1].split("</section>", 1)[0]
+        self.assertEqual(clips.count('class="clip-feature-card"'), 4)
+        self.assertEqual(clips.count('class="clip-preview-image"'), 4)
+        for title in (
+            "UN SUSTO QUE TERMINA EN VÓMITO",
+            "SE BOXEAN EN NUESTRO BAR",
+            "BUSCAN EMPLEADO PARA EL BAR",
+            "LE PEGA A HARRY POTTER",
+        ):
+            self.assertIn(title, clips)
+
+
+if __name__ == "__main__":
+    unittest.main()
+
+    def test_barfender_summary_card_has_four_metrics_and_collapsed_reading(self):
+        case = self.html.split('<div class="campaign-case-index">', 1)[1].split('<section class="campaign-vods">', 1)[0]
+        self.assertEqual(case.count("<article><strong>"), 4)
+        self.assertIn('<details class="barfender-reading">', case)
+        self.assertIn("CÓMO LEER ESTOS DATOS", case)
+        self.assertNotIn('class="campaign-metrics"', case)
+        self.assertNotIn('class="campaign-impact"', case)
+

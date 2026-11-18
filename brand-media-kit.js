@@ -33,10 +33,25 @@
     fetch("../data.json", { cache: "no-store" }).then((response) => {
       if (!response.ok) throw new Error("activity");
       return response.json();
+    }),
+    fetch("../roster-data.json", { cache: "no-store" }).then((response) => {
+      if (!response.ok) throw new Error("roster");
+      return response.json();
     })
-  ]).then(([creatorData, platformData, activityData]) => {
+  ]).then(([creatorData, platformData, activityData, rosterData]) => {
+    const updateTimes = [creatorData.generated_at, platformData.updated_at, activityData.updated_at]
+      .map((value) => Date.parse(value || ""))
+      .filter((value) => Number.isFinite(value));
+    const latestUpdate = updateTimes.length ? new Date(Math.max(...updateTimes)) : null;
+    const updatedLabel = document.getElementById("brand-updated-at");
+    if (updatedLabel) {
+      updatedLabel.textContent = latestUpdate
+        ? "Ficha institucional · Última captura de datos " + latestUpdate.toLocaleDateString("es-AR", { day: "2-digit", month: "2-digit", year: "numeric", timeZone: "UTC" })
+        : "Ficha institucional · Datos de fuentes públicas";
+    }
     const cards = [];
     Object.entries(creatorData.creators || {}).forEach(([id, creator]) => {
+      const canonicalName = rosterData.name_registry?.[id]?.display_name || creator.display_name;
       (creator.accounts || []).forEach((account) => {
         if (account.platform === "twitch") {
           const metrics = creator.metrics || [];
@@ -77,7 +92,7 @@
           if (!usable) return;
           cards.push(
             '<article class="channel-kit-card"><header><span>TWITCH · CANAL INDIVIDUAL</span><h3>' +
-            escapeHtml(creator.display_name) + '</h3><a href="' + escapeHtml(account.url) +
+            escapeHtml(canonicalName) + '</h3><a href="' + escapeHtml(account.url) +
             '" target="_blank" rel="noopener noreferrer">@' + escapeHtml(account.handle) + ' ↗</a></header><div class="channel-kit-grid">' +
             makeMetric("Seguidores", number(followers?.value)) +
             makeMetric("Promedio observado", number(avg?.value), "Muestras públicas") +
@@ -96,7 +111,7 @@
           const m = record.metrics || {};
           cards.push(
             '<article class="channel-kit-card"><header><span>YOUTUBE · CANAL INDIVIDUAL</span><h3>' +
-            escapeHtml(creator.display_name) + '</h3><a href="' + escapeHtml(account.url) +
+            escapeHtml(canonicalName) + '</h3><a href="' + escapeHtml(account.url) +
             '" target="_blank" rel="noopener noreferrer">' + escapeHtml(account.handle) + ' ↗</a></header><div class="channel-kit-grid">' +
             makeMetric("Suscriptores", number(m.subscribers), "El contador puede estar redondeado") +
             makeMetric("Visualizaciones", number(m.total_views), "Acumuladas") +
