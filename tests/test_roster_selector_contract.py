@@ -62,7 +62,7 @@ class RosterComicCardsContractTests(unittest.TestCase):
         self.assertIn("const portrait = hero.portrait || hero.img || ''", self.app)
         self.assertNotIn("const characterArt = hero.fullbody || hero.img", self.app)
         self.assertNotIn("hero-profile-character-art", self.app)
-        self.assertNotIn("hero-profile-character-card", self.app)
+        self.assertIn("hero-profile-character-card-link", self.app)
 
     def test_each_dossier_has_a_distinct_full_body_character_asset(self):
         expected_fullbody = {
