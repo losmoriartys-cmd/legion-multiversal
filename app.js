@@ -1234,6 +1234,9 @@ function renderRosterSelector() {
         const average = win.average_viewers_sampled;
         const audience=getCreatorAudienceMetric(hero);
         const audienceHtml=audience?'<span class="comic-roster-stat comic-roster-stat-audience"><span>'+safe(audience.label)+'</span><b>'+safe(statsNumber(audience.value,0))+'</b><small>'+safe(audience.source+(audience.period?' · '+audience.period:''))+'</small></span>':'';
+        const twitchAccount=(hero.accounts||[]).find(item=>item.platform==='twitch'&&item.account_type==='creator_channel');
+        const twitchLogin=String(twitchAccount?.login||(twitchAccount?.url||'').split('/').filter(Boolean).pop()||'').replace(/^@/,'').toLowerCase();
+        const liveCounterHtml=twitchLogin?'<a class="comic-roster-live-counter" href="https://livecounts.nl/twitch-realtime/?u='+encodeURIComponent(twitchLogin)+'" target="_blank" rel="noopener noreferrer" aria-label="Abrir contador en vivo de seguidores de '+safe(getHeroDisplayName(hero))+'">SEGUIDORES EN VIVO ↗</a>':'';
         const averageHtml=average==null?'':'<span class="comic-roster-stat"><span>Media de viewers</span><b class="comic-roster-stat-purple">'+safe(statsNumber(average,1))+'</b></span>';
         const platformName=String(account?.platform||'CANAL').toUpperCase();
         const games=getMostPlayedGames(hero,channel,findSullyChannel(hero));
@@ -1249,7 +1252,7 @@ function renderRosterSelector() {
           '</span>' +
           '<span class="comic-roster-card-data"><span class="comic-roster-badges"><b class="comic-roster-frequency">RITMO: EN SEGUIMIENTO</b><b class="comic-roster-activity">' + safe(activityBadge) + '</b></span>' +
             (lastLive ? '<span class="comic-roster-last-live">ÚLTIMA ACTIVIDAD OBSERVADA: ' + safe(lastLiveDate) + '</span>' : '') +
-            audienceHtml + averageHtml +
+            audienceHtml + liveCounterHtml + averageHtml +
             '<span class="comic-roster-games">' + (specialties.length ? specialties.map(item => '<i>' + safe(item) + '</i>').join('') : '<i>Especialidad en desarrollo</i>') + '</span>' +
             '<span class="comic-roster-card-footer"><small>' + safe(hero.role_label || platformName) + '</small><strong>VER PERFIL →</strong></span></span>' +
         '</button>';
