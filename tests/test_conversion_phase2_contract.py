@@ -90,3 +90,11 @@ if __name__ == "__main__":
         self.assertNotIn('class="campaign-metrics"', case)
         self.assertNotIn('class="campaign-impact"', case)
 
+    def test_initial_loading_states_use_skeletons_without_copy(self):
+        self.assertNotIn("Actualizando indicadores", self.html)
+        self.assertNotIn("Cargando canales registrados", self.html)
+        self.assertNotIn("Cargando cuentas multiplataforma", self.html)
+        self.assertNotIn("Comprobando el canal seguro de envío", self.html)
+        self.assertIn('id="stats-updated" class="stats-note" hidden', self.html)
+        self.assertIn('class="loading-skeleton-grid"', self.html)
+        self.assertIn("updatedNode.hidden=false", self.js)
