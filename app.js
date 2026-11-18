@@ -346,7 +346,7 @@ function getHeroDisplayName(hero) {
 
 function renderStatsExecutiveSource(title,period,metrics,note,sourceUrl){
  const safe=escapeStatsHtml;
- const cards=(Array.isArray(metrics)?metrics:[]).filter(item=>item.value!==null&&item.value!==undefined&&item.value!==''&&!(typeof item.value==='number'&&!Number.isFinite(item.value))).slice(0,6);
+ const cards=(Array.isArray(metrics)?metrics:[]).filter(item=>item.value!==null&&item.value!==undefined&&item.value!==''&&!(typeof item.value==='number'&&!Number.isFinite(item.value))).slice(0,4);
  if(!cards.length)return '';
  return '<article class="stats-executive-source"><div class="stats-executive-source-head"><strong>'+safe(title)+'</strong><span>'+safe(period||'Período no informado')+'</span></div><div class="stats-executive-metrics">'+cards.map(item=>'<div><strong>'+safe(item.value)+'</strong><span>'+safe(item.label)+'</span></div>').join('')+'</div>'+(note?'<p class="stats-executive-note">'+safe(note)+'</p>':'')+(sourceUrl?'<a class="stats-link stats-executive-source-link" href="'+safe(sourceUrl)+'" target="_blank" rel="noopener noreferrer">CONSULTAR FUENTE ↗</a>':'')+'</article>';
 }
@@ -1205,12 +1205,15 @@ function getCreatorAudienceMetric(hero){
  return null;
 }
 function getMostPlayedGames(hero,channel,sullyChannel){
+ // Solo el historial acumulado permite afirmar cuáles son los juegos más jugados.
+ // Las capturas Helix recientes describen actividad observada, no un ranking histórico.
  const isGame=name=>Boolean(name)&&!['just chatting','categoría no informada'].includes(String(name).trim().toLocaleLowerCase('es-AR'));
  const historical=Array.isArray(sullyChannel?.game_breakdown)?sullyChannel.game_breakdown:[];
- const ranked=historical.filter(item=>isGame(item?.name)&&Number.isFinite(Number(item.stream_hours))&&Number(item.stream_hours)>0).sort((a,b)=>Number(b.stream_hours)-Number(a.stream_hours)).map(item=>item.name);
- if(ranked.length)return [...new Set(ranked)].slice(0,6);
- const observed=Array.isArray(channel?.window?.game_breakdown)?channel.window.game_breakdown:[];
- return [...new Set(observed.filter(item=>isGame(item?.name)&&Number(item.streams_observed)>0).sort((a,b)=>Number(b.streams_observed)-Number(a.streams_observed)||Number(b.live_samples)-Number(a.live_samples)).map(item=>item.name))].slice(0,6);
+ const ranked=historical
+  .filter(item=>isGame(item?.name)&&Number.isFinite(Number(item.stream_hours))&&Number(item.stream_hours)>0)
+  .sort((a,b)=>Number(b.stream_hours)-Number(a.stream_hours))
+  .map(item=>String(item.name).trim());
+ return [...new Set(ranked)].slice(0,6);
 }
 
 function renderRosterSelector() {
@@ -1231,6 +1234,9 @@ function renderRosterSelector() {
         const average = win.average_viewers_sampled;
         const audience=getCreatorAudienceMetric(hero);
         const audienceHtml=audience?'<span class="comic-roster-stat comic-roster-stat-audience"><span>'+safe(audience.label)+'</span><b>'+safe(statsNumber(audience.value,0))+'</b><small>'+safe(audience.source+(audience.period?' · '+audience.period:''))+'</small></span>':'';
+        const twitchAccount=(hero.accounts||[]).find(item=>item.platform==='twitch'&&item.account_type==='creator_channel');
+        const twitchLogin=String(twitchAccount?.login||(twitchAccount?.url||'').split('/').filter(Boolean).pop()||'').replace(/^@/,'').toLowerCase();
+        const liveCounterHtml=twitchLogin?'<a class="comic-roster-live-counter" href="https://livecounts.nl/twitch-realtime/?u='+encodeURIComponent(twitchLogin)+'" target="_blank" rel="noopener noreferrer" aria-label="Abrir contador en vivo de seguidores de '+safe(getHeroDisplayName(hero))+'">SEGUIDORES EN VIVO ↗</a>':'';
         const averageHtml=average==null?'':'<span class="comic-roster-stat"><span>Media de viewers</span><b class="comic-roster-stat-purple">'+safe(statsNumber(average,1))+'</b></span>';
         const platformName=String(account?.platform||'CANAL').toUpperCase();
         const games=getMostPlayedGames(hero,channel,findSullyChannel(hero));
@@ -1246,7 +1252,7 @@ function renderRosterSelector() {
           '</span>' +
           '<span class="comic-roster-card-data"><span class="comic-roster-badges"><b class="comic-roster-frequency">RITMO: EN SEGUIMIENTO</b><b class="comic-roster-activity">' + safe(activityBadge) + '</b></span>' +
             (lastLive ? '<span class="comic-roster-last-live">ÚLTIMA ACTIVIDAD OBSERVADA: ' + safe(lastLiveDate) + '</span>' : '') +
-            audienceHtml + averageHtml +
+            audienceHtml + liveCounterHtml + averageHtml +
             '<span class="comic-roster-games">' + (specialties.length ? specialties.map(item => '<i>' + safe(item) + '</i>').join('') : '<i>Especialidad en desarrollo</i>') + '</span>' +
             '<span class="comic-roster-card-footer"><small>' + safe(hero.role_label || platformName) + '</small><strong>VER PERFIL →</strong></span></span>' +
         '</button>';

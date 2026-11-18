@@ -57,8 +57,10 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
     if (['pato-oratoris','ardipii'].includes(creator.id)) await expect(dossier.locator('#profile-tab-perfil .hero-profile-integrated-games')).toHaveCount(0);
     else {
       const gamesSection = dossier.locator('#profile-tab-perfil .hero-profile-integrated-games');
-      await expect(gamesSection).toBeVisible();
-      await expect(gamesSection).not.toContainText(/muestras|observaciones|Just Chatting/i);
+      if (await gamesSection.count()) {
+        await expect(gamesSection).toBeVisible();
+        await expect(gamesSection).not.toContainText(/muestras|observaciones|Just Chatting/i);
+      }
     }
     await expect(dossier.locator('#profile-tab-perfil .hero-profile-brand')).toHaveCount(0);
     await expect(page.locator('#roster-home')).toBeHidden();
@@ -95,8 +97,10 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
     if (['pato-oratoris','ardipii'].includes(creator.id)) await expect(dossier.locator('#profile-tab-perfil .hero-profile-integrated-games')).toHaveCount(0);
     else {
       const gamesSection = dossier.locator('#profile-tab-perfil .hero-profile-integrated-games');
-      await expect(gamesSection).toBeVisible();
-      await expect(gamesSection).not.toContainText(/muestras|observaciones/i);
+      if (await gamesSection.count()) {
+        await expect(gamesSection).toBeVisible();
+        await expect(gamesSection).not.toContainText(/muestras|observaciones|Just Chatting/i);
+      }
     }
     await expect(dossier.locator('#profile-tab-perfil .hero-profile-brand')).toHaveCount(0);
     await profileTabs.filter({ hasText: 'CLIPS' }).click();
@@ -110,7 +114,9 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
     await expect(statsPanel.locator('.stats-source-details')).toHaveCount(0);
     for (let sourceIndex = 0; sourceIndex < await sources.count(); sourceIndex++) {
       const source = sources.nth(sourceIndex);
-      expect(await source.locator('.stats-executive-metrics > div').count()).toBeGreaterThan(0);
+      const metricCount = await source.locator('.stats-executive-metrics > div').count();
+      expect(metricCount).toBeGreaterThan(0);
+      expect(metricCount).toBeLessThanOrEqual(4);
       await expect(source).not.toContainText(/Sin métricas verificadas|Sin captura|Sin registro|No hay datos públicos cargados/i);
     }
     await profileTabs.filter({ hasText: 'BITÁCORA' }).click();
@@ -257,4 +263,98 @@ test('Atrás y Adelante restauran el roster y el expediente correcto', async ({ 
   expect(statsBounds).not.toBeNull();
   expect(statsBounds.x + statsBounds.width).toBeLessThanOrEqual(390 + 1);
   await page.screenshot({ path: 'test-results/bitacora-lady-mobile.png', fullPage: false });
+});
+
+
+test('JUEGOS Y RITMO no convierte observaciones recientes en ranking histórico', async ({ page }) => {
+  await page.goto('/');
+  const recentOnly = await page.evaluate(() => getMostPlayedGames(
+    {},
+    { window: { game_breakdown: [
+      { name: 'Marvel Rivals', streams_observed: 12, live_samples: 80 },
+      { name: 'Fortnite', streams_observed: 8, live_samples: 45 },
+      { name: 'Just Chatting', streams_observed: 20, live_samples: 120 }
+    ] } },
+    null
+  ));
+  expect(recentOnly).toEqual([]);
+
+  const historical = await page.evaluate(() => getMostPlayedGames({}, null, {
+    game_breakdown: [
+      { name: 'Fortnite', stream_hours: 24 },
+      { name: 'Marvel Rivals', stream_hours: 48 },
+      { name: 'Just Chatting', stream_hours: 100 },
+      { name: 'Valorant', stream_hours: 0 }
+    ]
+  }));
+  expect(historical).toEqual(['Marvel Rivals', 'Fortnite']);
+});
+
+test('Pato conserva YouTube como fuente propia, sin mezclarlo con métricas Twitch', async ({ page }) => {
+  await page.goto('/');
+  await page.evaluate(() => switchChapter(2));
+  await page.locator('#chapter-transition').evaluate(el => el.classList.remove('play'));
+  await page.locator('.comic-roster-card[data-creator-id="pato-oratoris"]').click();
+  const stats = page.locator('#profile-tab-estadisticas .stats-dashboard');
+  await page.locator('[data-profile-tab="estadisticas"]').click();
+  await expect(stats).toContainText('YOUTUBE');
+  await expect(stats).not.toContainText('TWITCH · SEGUIMIENTO PÚBLICO');
+  await expect(stats).not.toContainText('SULLYGNOME');
+});
+
+test('cada canal Twitch ofrece acceso al contador público en vivo y YouTube permanece separado', async ({ page }) => {
+  await page.goto('/');
+  await page.evaluate(() => switchChapter(2));
+  await page.locator('#chapter-transition').evaluate(el => el.classList.remove('play'));
+  const twitchCreators = [
+    ['moriartys', 'losmoriartys'],
+    ['rod3r1k', 'ther0d3r1k'],
+    ['lady-moriarty', 'ladymoriarty01'],
+    ['ardipii', 'ardipii'],
+    ['akuma', 'akumazoldyck'],
+    ['dave-nexus', 'daved0608'],
+    ['habitos', 'habitos_atomicos']
+  ];
+  for (const [id, login] of twitchCreators) {
+    const link = page.locator('.comic-roster-card[data-creator-id="' + id + '"] .comic-roster-live-counter');
+    await expect(link).toHaveAttribute('href', 'https://livecounts.nl/twitch-realtime/?u=' + login);
+    await expect(link).toContainText('SEGUIDORES EN VIVO');
+  }
+  const pato = page.locator('.comic-roster-card[data-creator-id="pato-oratoris"]');
+  await expect(pato.locator('.comic-roster-live-counter')).toHaveCount(0);
+  await expect(pato.locator('.comic-roster-stat-audience')).toContainText('YouTube');
+});
+
+
+test('los ocho expedientes tienen capturas visuales desktop y móvil', async ({ page }) => {
+  test.setTimeout(120000);
+  const viewports = [
+    { name: 'desktop', width: 1440, height: 1000 },
+    { name: 'mobile', width: 390, height: 844 }
+  ];
+  for (const viewport of viewports) {
+    await page.setViewportSize({ width: viewport.width, height: viewport.height });
+    await page.goto('/');
+    await page.evaluate(() => switchChapter(2));
+    await page.locator('#chapter-transition').evaluate(el => el.classList.remove('play'));
+    await expect(page.locator('.comic-roster-card')).toHaveCount(8);
+    for (const creator of creators) {
+      const card = page.locator('.comic-roster-card[data-creator-id="' + creator.id + '"]');
+      await card.click();
+      const dossier = page.locator('#hero-profile-page');
+      await expect(dossier).toBeVisible();
+      await expect(dossier).toContainText(creator.name);
+      await expect(dossier.locator('.hero-profile-id-image img')).toBeVisible();
+      await expect.poll(() => dossier.locator('.hero-profile-id-image img').evaluate(img => img.naturalWidth)).toBeGreaterThan(0);
+      await page.locator('[data-profile-tab="bitacora"]').click();
+      await expect(dossier.locator('#profile-tab-bitacora')).toBeVisible();
+      await expect(dossier.locator('#profile-tab-bitacora .hero-profile-brand')).toBeVisible();
+      await page.screenshot({
+        path: 'test-results/expediente-' + creator.id + '-' + viewport.name + '.png',
+        fullPage: true
+      });
+      await page.evaluate(() => closeHeroProfile());
+      await expect(page.locator('#roster-home')).toBeVisible();
+    }
+  }
 });
