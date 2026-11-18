@@ -73,6 +73,26 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
     await expect(dossier.locator('.hero-profile-socials')).toBeVisible();
     await expect(dossier.locator('.hero-profile-poster')).toHaveCount(0);
 
+    // Validate chapters and their actual content for every roster member.
+    await profileTabs.filter({ hasText: 'PERFIL' }).click();
+    await expect(dossier.locator('#profile-tab-perfil .hero-profile-integrated-games')).toBeVisible();
+    await expect(dossier.locator('#profile-tab-perfil .hero-profile-brand')).toHaveCount(0);
+    await profileTabs.filter({ hasText: 'CLIPS' }).click();
+    expect(await dossier.locator('#profile-tab-clips .hero-profile-clip').count()).toBeLessThanOrEqual(4);
+    await profileTabs.filter({ hasText: 'ESTADÍSTICAS' }).click();
+    await expect(dossier.locator('#profile-tab-estadisticas .stats-dashboard')).toBeVisible();
+    await profileTabs.filter({ hasText: 'BITÁCORA' }).click();
+    await expect(dossier.locator('#profile-tab-bitacora .hero-profile-brand')).toBeVisible();
+    await expect(dossier.locator('#profile-tab-bitacora')).not.toContainText(/MUESTRAS/i);
+    await expect(dossier.locator('#profile-tab-bitacora')).toContainText('BITÁCORA');
+    await expect(dossier.locator('.hero-profile-character-card-link button')).toHaveText(/VER CARTA COMPLETA/);
+    if (['lady-moriarty','rod3r1k','akuma','habitos'].includes(creator.id)) {
+      await expect(dossier.locator('#profile-tab-bitacora .hero-profile-platform-access-links a')).toHaveCount(2);
+    }
+    if (['moriartys','rod3r1k'].includes(creator.id)) {
+      await expect(dossier.locator('#profile-tab-bitacora .hero-profile-epic-codes')).toBeVisible();
+    }
+
     if (creator.id === 'moriartys') {
       for (const [label, panel] of [
         ['PERFIL', 'perfil'],
@@ -82,13 +102,6 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
       ]) {
         await profileTabs.filter({ hasText: label }).click();
         await expect(dossier.locator('#profile-tab-' + panel)).toBeVisible();
-        if (panel === 'estadisticas') {
-          await expect(dossier.locator('#profile-tab-estadisticas .stats-dashboard')).toBeVisible();
-        }
-        if (panel === 'bitacora') {
-          await expect(dossier.locator('#profile-tab-bitacora .hero-profile-brand')).toBeVisible();
-          await expect(dossier.locator('#profile-tab-bitacora')).not.toContainText('MATERIAL DE MUESTRA');
-        }
         await expect(profileTabs.filter({ hasText: label })).toHaveAttribute('aria-selected', 'true');
       }
       await profileTabs.filter({ hasText: 'PERFIL' }).focus();
@@ -96,9 +109,6 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
       await expect(profileTabs.filter({ hasText: 'BITÁCORA' })).toBeFocused();
       await page.keyboard.press('Home');
       await expect(profileTabs.filter({ hasText: 'PERFIL' })).toBeFocused();
-      await profileTabs.filter({ hasText: 'PERFIL' }).click();
-      await expect(dossier.locator('#profile-tab-bitacora')).toContainText('BITÁCORA · TRAYECTORIA Y COLABORACIONES');
-      expect(await dossier.locator('#profile-tab-clips .hero-profile-clip').count()).toBeLessThanOrEqual(4);
     }
 
     await expect(page.locator('#hero-modal')).not.toHaveClass(/active/);
