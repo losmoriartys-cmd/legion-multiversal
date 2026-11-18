@@ -134,3 +134,15 @@ Nunca guardar claves o tokens en JSON, código, informes o commits. Si una crede
 - Twitch Helix: actividad pública observada. Las analíticas privadas e históricas del Creator Dashboard requieren autorización del creador o datos aportados por él.
 - SullyGnome y TwitchMetrics siguen como referencias históricas separadas; no se mezclan con APIs oficiales.
 
+
+
+## 10. Regla de cierre e implementación en producción
+
+La guía operativa obligatoria está en [PLAN_CIERRE_IMPLEMENTACION_PRODUCCION.md](./PLAN_CIERRE_IMPLEMENTACION_PRODUCCION.md). Contiene el checklist maestro por frentes y los criterios de aceptación.
+
+- **No acumular Pull Requests abiertos.** No usar PR como backlog ni como sustituto de implementación.
+- Los cambios se prueban antes de integrarse. Si pasan los controles y cumplen la directiva, se integran en `main` tan pronto como sea seguro; si requieren PR por protección/revisión, debe ser de vida corta y cerrarse mediante merge o descarte documentado.
+- Un cambio en una rama, PR, commit o preview no está terminado.
+- Solo marcar como **IMPLEMENTADO Y VERIFICADO EN PRODUCCIÓN** cuando esté integrado en `main`, el despliegue haya finalizado correctamente, el SHA publicado coincida con el esperado y la funcionalidad se haya comprobado en el sitio público.
+- Actualizar el checklist maestro y `INFORMES.md` con pruebas, resultados, commit, workflow, SHA y verificación real.
+- Trabajar un frente por vez. No iniciar otro para ocultar pendientes del anterior.
