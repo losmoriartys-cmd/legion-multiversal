@@ -55,3 +55,17 @@
 .alliance-info-link { display: inline-flex; align-items: center; justify-content: center; min-width: 1.3em; min-height: 1.3em; color: #8beaff; font-weight: 900; text-decoration: none; }
 .alliance-info-link:focus-visible { outline: 2px solid #8beaff; outline-offset: 3px; }
 @media (max-width: 760px) { .barfender-summary-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; } .barfender-summary-grid article { padding: 12px; } }
+
+.loading-skeleton { display: block; width: 100%; height: 11px; border-radius: 999px; background: linear-gradient(90deg, rgba(111, 139, 166, .12) 20%, rgba(139, 234, 255, .22) 50%, rgba(111, 139, 166, .12) 80%); background-size: 220% 100%; animation: lm-skeleton-shimmer 1.6s ease-in-out infinite; }
+.loading-skeleton-line { height: 14px; max-width: 340px; }
+.loading-skeleton-short { width: 56%; }
+.loading-skeleton-circle { width: 52px; height: 52px; border-radius: 50%; }
+.loading-skeleton-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; width: 100%; }
+.loading-skeleton-card { display: grid; align-content: start; gap: 11px; min-height: 118px; padding: 14px; border: 1px solid rgba(139, 174, 202, .16); border-radius: 12px; background: rgba(12, 22, 36, .56); }
+.roster-skeleton-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+.roster-skeleton-card { display: grid; align-content: start; justify-items: start; gap: 12px; min-height: 250px; padding: 16px; border: 1px solid rgba(139, 174, 202, .2); border-radius: 14px; background: rgba(12, 22, 36, .72); }
+.roster-skeleton-card .loading-skeleton { max-width: 100%; }
+.loading-skeleton-row td { padding: 16px !important; }
+@keyframes lm-skeleton-shimmer { 0% { background-position: 100% 0; } 100% { background-position: -120% 0; } }
+@media (max-width: 760px) { .loading-skeleton-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .roster-skeleton-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .roster-skeleton-card { min-height: 190px; padding: 12px; } }
+@media (prefers-reduced-motion: reduce) { .loading-skeleton { animation: none; background: rgba(139, 174, 202, .2); } }

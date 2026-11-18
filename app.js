@@ -782,6 +782,7 @@ async function loadInstituteStats(){
   const updatedNode=document.getElementById('stats-updated');
   if(updatedNode){
    updatedNode.textContent='Última actualización: '+updatedLabel+' · '+channels.length+' canales activos · '+statusLabel+' · intervalo objetivo: '+interval+' min.';
+   updatedNode.hidden=false;
    updatedNode.dataset.status=!updatedValid||!isFresh?'stale':collectionComplete?'complete':'partial';
   }
   const samplingNote=document.getElementById('stats-methodology-sampling');
