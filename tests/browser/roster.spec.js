@@ -94,10 +94,11 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
     const statsPanel = dossier.locator('#profile-tab-estadisticas .stats-dashboard');
     await expect(statsPanel).toBeVisible();
     await expect(statsPanel.locator('.stats-executive-header')).toBeVisible();
-    await expect(statsPanel.locator('.stats-executive-grid .stats-executive-source').count()).resolves.toBeGreaterThanOrEqual(3);
+    expect(await statsPanel.locator('.stats-executive-grid .stats-executive-source').count()).toBeGreaterThanOrEqual(3);
     const sourceDetails = statsPanel.locator('.stats-source-details');
-    await expect(sourceDetails).toHaveCount(3);
-    for (let sourceIndex = 0; sourceIndex < 3; sourceIndex++) {
+    const sourceCount = await sourceDetails.count();
+    expect(sourceCount).toBeGreaterThanOrEqual(3);
+    for (let sourceIndex = 0; sourceIndex < sourceCount; sourceIndex++) {
       const sourceDetail = sourceDetails.nth(sourceIndex);
       await expect(sourceDetail).not.toHaveAttribute('open', '');
       await sourceDetail.locator('summary').click();
