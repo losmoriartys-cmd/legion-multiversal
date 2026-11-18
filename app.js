@@ -1309,7 +1309,7 @@ function renderCreatorPlatformLinks(hero) {
             if (hero[key]) links.push({ platform:key, url:hero[key] });
         });
     }
-    const uniqueLinks=links.filter((account,index)=>links.findIndex(candidate=>candidate.platform===account.platform&&candidate.url===account.url)===index;
+    const uniqueLinks=links.filter((account,index)=>links.findIndex(candidate=>candidate.platform===account.platform&&candidate.url===account.url)===index);
     return uniqueLinks.map(account => '<a class="btn-link" href="' + escapeStatsHtml(account.url) + '" target="_blank" rel="noopener noreferrer">' + labels[account.platform] + ' ↗</a>').join('');
 }
 
