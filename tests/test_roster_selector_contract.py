@@ -237,3 +237,12 @@ if __name__ == "__main__":
         self.assertIn("creatorNameRegistry = payload.name_registry || {}", app)
         self.assertIn("function getCanonicalCreatorName(value)", app)
         self.assertIn('rosterData.name_registry?.[id]?.display_name', media_kit)
+
+    def test_roster_initial_state_is_skeleton_with_descriptive_noscript_fallback(self):
+        self.assertNotIn("CARGANDO LOS OCHO EXPEDIENTES", self.html)
+        self.assertIn('class="roster-skeleton-grid"', self.html)
+        fallback = self.html.split("<!-- ROSTER_NOSCRIPT_LINKS:START -->", 1)[1].split("<!-- ROSTER_NOSCRIPT_LINKS:END -->", 1)[0]
+        for label in ("DIRECCIÓN", "CREADORA", "CREADOR", "DOCENTE", "ESTUDIANTE", "COLABORADOR"):
+            self.assertIn(label, fallback)
+        self.assertIn("Nuevo integrante en etapa de formación", fallback)
+        self.assertIn("Divulgación, programación y charlas motivacionales", fallback)
