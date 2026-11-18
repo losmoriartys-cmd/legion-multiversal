@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "source": "Twitch Helix Get Clips",
-  "captured_at": "2026-11-18T00:22:30Z",
+  "captured_at": "2026-11-18T07:10:38Z",
   "window_days": 30,
   "selection": {
     "max_results_requested_per_channel": 100,
@@ -23,10 +23,10 @@
       "broadcaster_id": "400527534",
       "url": "https://twitch.tv/losmoriartys",
       "status": "ok",
-      "captured_at": "2026-11-18T00:22:30Z",
+      "captured_at": "2026-11-18T07:10:38Z",
       "period": {
-        "from": "2026-10-19T00:22:30Z",
-        "to": "2026-11-18T00:22:30Z",
+        "from": "2026-10-19T07:10:38Z",
+        "to": "2026-11-18T07:10:38Z",
         "days": 30
       },
       "clips": [
@@ -210,10 +210,10 @@
       "broadcaster_id": "518856416",
       "url": "https://twitch.tv/TheR0D3R1K",
       "status": "ok",
-      "captured_at": "2026-11-18T00:22:30Z",
+      "captured_at": "2026-11-18T07:10:38Z",
       "period": {
-        "from": "2026-10-19T00:22:30Z",
-        "to": "2026-11-18T00:22:30Z",
+        "from": "2026-10-19T07:10:38Z",
+        "to": "2026-11-18T07:10:38Z",
         "days": 30
       },
       "clips": [
@@ -337,23 +337,6 @@
           "is_featured": false
         },
         {
-          "id": "CovertUglyPartridgeThisIsSparta-9Nsjgw57SYeCOJx1",
-          "url": "https://www.twitch.tv/ther0d3r1k/clip/CovertUglyPartridgeThisIsSparta-9Nsjgw57SYeCOJx1",
-          "embed_url": "https://clips.twitch.tv/embed?clip=CovertUglyPartridgeThisIsSparta-9Nsjgw57SYeCOJx1",
-          "title": "whyyy",
-          "creator_name": "TheR0D3R1K",
-          "broadcaster_name": "TheR0D3R1K",
-          "created_at": "2026-10-29T23:22:59Z",
-          "view_count": 8,
-          "game_id": "509658",
-          "language": "es",
-          "duration": 30,
-          "thumbnail_url": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/e445d5c8-bd44-476a-b839-c914306650ce/landscape/thumb/thumb-0000000000-480x272.jpg",
-          "video_id": "2914347462",
-          "vod_offset": 1640,
-          "is_featured": false
-        },
-        {
           "id": "SuperHedonisticWorm4Head-nqaykHJ_zvKEkcc4",
           "url": "https://www.twitch.tv/ther0d3r1k/clip/SuperHedonisticWorm4Head-nqaykHJ_zvKEkcc4",
           "embed_url": "https://clips.twitch.tv/embed?clip=SuperHedonisticWorm4Head-nqaykHJ_zvKEkcc4",
@@ -368,6 +351,23 @@
           "thumbnail_url": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/962c960f-ee79-4d1b-a87d-fdeb18f3ba20/landscape/thumb/thumb-0000000000-480x272.jpg",
           "video_id": "2928037755",
           "vod_offset": 2834,
+          "is_featured": false
+        },
+        {
+          "id": "CovertUglyPartridgeThisIsSparta-9Nsjgw57SYeCOJx1",
+          "url": "https://www.twitch.tv/ther0d3r1k/clip/CovertUglyPartridgeThisIsSparta-9Nsjgw57SYeCOJx1",
+          "embed_url": "https://clips.twitch.tv/embed?clip=CovertUglyPartridgeThisIsSparta-9Nsjgw57SYeCOJx1",
+          "title": "whyyy",
+          "creator_name": "TheR0D3R1K",
+          "broadcaster_name": "TheR0D3R1K",
+          "created_at": "2026-10-29T23:22:59Z",
+          "view_count": 8,
+          "game_id": "509658",
+          "language": "es",
+          "duration": 30,
+          "thumbnail_url": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/e445d5c8-bd44-476a-b839-c914306650ce/landscape/thumb/thumb-0000000000-480x272.jpg",
+          "video_id": "2914347462",
+          "vod_offset": 1640,
           "is_featured": false
         },
         {
@@ -388,7 +388,7 @@
           "is_featured": false
         }
       ],
-      "result_count": 32,
+      "result_count": 33,
       "displayed_count": 10
     },
     "lady-moriarty": {
@@ -397,10 +397,10 @@
       "broadcaster_id": "710295249",
       "url": "https://twitch.tv/ladymoriarty01",
       "status": "ok",
-      "captured_at": "2026-11-18T00:22:30Z",
+      "captured_at": "2026-11-18T07:10:38Z",
       "period": {
-        "from": "2026-10-19T00:22:30Z",
-        "to": "2026-11-18T00:22:30Z",
+        "from": "2026-10-19T07:10:38Z",
+        "to": "2026-11-18T07:10:38Z",
         "days": 30
       },
       "clips": [
@@ -490,23 +490,6 @@
           "is_featured": false
         },
         {
-          "id": "AgileFunnyBasenjiAllenHuhu-rWzjTxOrdpx8dDjF",
-          "url": "https://www.twitch.tv/ladymoriarty01/clip/AgileFunnyBasenjiAllenHuhu-rWzjTxOrdpx8dDjF",
-          "embed_url": "https://clips.twitch.tv/embed?clip=AgileFunnyBasenjiAllenHuhu-rWzjTxOrdpx8dDjF",
-          "title": "Donde estan los lenteees?",
-          "creator_name": "ArDipii",
-          "broadcaster_name": "LadyMoriarty01",
-          "created_at": "2026-11-16T22:50:02Z",
-          "view_count": 3,
-          "game_id": "1441208453",
-          "language": "es",
-          "duration": 40,
-          "thumbnail_url": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/20e377d6-ce95-4c26-889c-0d11ecf76517/landscape/thumb/thumb-0000000000-480x272.jpg",
-          "video_id": "2930861114",
-          "vod_offset": 3048,
-          "is_featured": false
-        },
-        {
           "id": "ZanyAnnoyingHamburgerMau5-pubDlcALftl3KEy6",
           "url": "https://www.twitch.tv/ladymoriarty01/clip/ZanyAnnoyingHamburgerMau5-pubDlcALftl3KEy6",
           "embed_url": "https://clips.twitch.tv/embed?clip=ZanyAnnoyingHamburgerMau5-pubDlcALftl3KEy6",
@@ -521,6 +504,23 @@
           "thumbnail_url": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/cc0bf1b0-d60e-4a32-933b-e941c4d909ea/landscape/thumb/thumb-0000000000-480x272.jpg",
           "video_id": "2920628556",
           "vod_offset": 2020,
+          "is_featured": false
+        },
+        {
+          "id": "AgileFunnyBasenjiAllenHuhu-rWzjTxOrdpx8dDjF",
+          "url": "https://www.twitch.tv/ladymoriarty01/clip/AgileFunnyBasenjiAllenHuhu-rWzjTxOrdpx8dDjF",
+          "embed_url": "https://clips.twitch.tv/embed?clip=AgileFunnyBasenjiAllenHuhu-rWzjTxOrdpx8dDjF",
+          "title": "Donde estan los lenteees?",
+          "creator_name": "ArDipii",
+          "broadcaster_name": "LadyMoriarty01",
+          "created_at": "2026-11-16T22:50:02Z",
+          "view_count": 3,
+          "game_id": "1441208453",
+          "language": "es",
+          "duration": 40,
+          "thumbnail_url": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/20e377d6-ce95-4c26-889c-0d11ecf76517/landscape/thumb/thumb-0000000000-480x272.jpg",
+          "video_id": "2930861114",
+          "vod_offset": 3048,
           "is_featured": false
         },
         {
@@ -584,10 +584,10 @@
       "broadcaster_id": "775254958",
       "url": "https://twitch.tv/ardipii",
       "status": "ok",
-      "captured_at": "2026-11-18T00:22:30Z",
+      "captured_at": "2026-11-18T07:10:38Z",
       "period": {
-        "from": "2026-10-19T00:22:30Z",
-        "to": "2026-11-18T00:22:30Z",
+        "from": "2026-10-19T07:10:38Z",
+        "to": "2026-11-18T07:10:38Z",
         "days": 30
       },
       "clips": [
@@ -626,23 +626,6 @@
           "is_featured": false
         },
         {
-          "id": "AthleticRefinedCourgetteTebowing-aKuRXAzQkDTL_opX",
-          "url": "https://www.twitch.tv/ardipii/clip/AthleticRefinedCourgetteTebowing-aKuRXAzQkDTL_opX",
-          "embed_url": "https://clips.twitch.tv/embed?clip=AthleticRefinedCourgetteTebowing-aKuRXAzQkDTL_opX",
-          "title": "Cuenta regresiva para el GTA 6",
-          "creator_name": "ArDipii",
-          "broadcaster_name": "ArDipii",
-          "created_at": "2026-11-06T19:32:55Z",
-          "view_count": 4,
-          "game_id": "509658",
-          "language": "es",
-          "duration": 24.7,
-          "thumbnail_url": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/1155358d-e938-49c8-b716-9f4ae7f511e8/landscape/thumb/thumb-0000000000-480x272.jpg",
-          "video_id": null,
-          "vod_offset": null,
-          "is_featured": false
-        },
-        {
           "id": "FrozenBlightedYakinikuPMSTwin-rfFhQXM-dJL95eCv",
           "url": "https://www.twitch.tv/ardipii/clip/FrozenBlightedYakinikuPMSTwin-rfFhQXM-dJL95eCv",
           "embed_url": "https://clips.twitch.tv/embed?clip=FrozenBlightedYakinikuPMSTwin-rfFhQXM-dJL95eCv",
@@ -660,52 +643,86 @@
           "is_featured": false
         },
         {
-          "id": "ZealousSwissCrabBigBrother-j257lzQSeHhCSFJW",
-          "url": "https://www.twitch.tv/ardipii/clip/ZealousSwissCrabBigBrother-j257lzQSeHhCSFJW",
-          "embed_url": "https://clips.twitch.tv/embed?clip=ZealousSwissCrabBigBrother-j257lzQSeHhCSFJW",
-          "title": "Soy un botcito generico en gears",
+          "id": "AthleticRefinedCourgetteTebowing-aKuRXAzQkDTL_opX",
+          "url": "https://www.twitch.tv/ardipii/clip/AthleticRefinedCourgetteTebowing-aKuRXAzQkDTL_opX",
+          "embed_url": "https://clips.twitch.tv/embed?clip=AthleticRefinedCourgetteTebowing-aKuRXAzQkDTL_opX",
+          "title": "Cuenta regresiva para el GTA 6",
           "creator_name": "ArDipii",
           "broadcaster_name": "ArDipii",
-          "created_at": "2026-11-04T19:18:26Z",
-          "view_count": 3,
+          "created_at": "2026-11-06T19:32:55Z",
+          "view_count": 4,
           "game_id": "509658",
           "language": "es",
-          "duration": 32.5,
-          "thumbnail_url": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/81f496b0-c38c-415d-8e1c-ff767ed1026a/landscape/thumb/thumb-0000000000-480x272.jpg",
+          "duration": 24.7,
+          "thumbnail_url": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/1155358d-e938-49c8-b716-9f4ae7f511e8/landscape/thumb/thumb-0000000000-480x272.jpg",
           "video_id": null,
           "vod_offset": null,
           "is_featured": false
         },
         {
-          "id": "BloodyCrunchyKuduAsianGlow-U6LzzlAXzBzgaDfZ",
-          "url": "https://www.twitch.tv/ardipii/clip/BloodyCrunchyKuduAsianGlow-U6LzzlAXzBzgaDfZ",
-          "embed_url": "https://clips.twitch.tv/embed?clip=BloodyCrunchyKuduAsianGlow-U6LzzlAXzBzgaDfZ",
-          "title": "Tips para clips shorts reels para tu contenido",
+          "id": "SquareFriendlyPterodactylPraiseIt-XweAEPm5sKBkdRaS",
+          "url": "https://www.twitch.tv/ardipii/clip/SquareFriendlyPterodactylPraiseIt-XweAEPm5sKBkdRaS",
+          "embed_url": "https://clips.twitch.tv/embed?clip=SquareFriendlyPterodactylPraiseIt-XweAEPm5sKBkdRaS",
+          "title": "Tenemos 346 seguidores, dia 2 de 30 jugando al streamer!",
           "creator_name": "ArDipii",
           "broadcaster_name": "ArDipii",
-          "created_at": "2026-11-04T19:38:00Z",
+          "created_at": "2026-10-23T02:48:53Z",
           "view_count": 3,
           "game_id": "509658",
           "language": "es",
-          "duration": 33.9,
-          "thumbnail_url": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/b1c17720-4bf4-4115-b89d-f4d23f805e2e/landscape/thumb/thumb-0000000000-480x272.jpg",
+          "duration": 30,
+          "thumbnail_url": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/e5b7e1f7-67f7-4631-aa4b-05b3a4039dd6/landscape/thumb/thumb-0000000000-480x272.jpg",
           "video_id": null,
           "vod_offset": null,
           "is_featured": false
         },
         {
-          "id": "ExcitedDeadGazelleThisIsSparta-39JLCVBXa0zgydMR",
-          "url": "https://www.twitch.tv/ardipii/clip/ExcitedDeadGazelleThisIsSparta-39JLCVBXa0zgydMR",
-          "embed_url": "https://clips.twitch.tv/embed?clip=ExcitedDeadGazelleThisIsSparta-39JLCVBXa0zgydMR",
-          "title": "Tip para programar contenido tiktok",
+          "id": "CogentFairNeanderthalMikeHogu-27NQ1fOWg-a_RzGa",
+          "url": "https://www.twitch.tv/ardipii/clip/CogentFairNeanderthalMikeHogu-27NQ1fOWg-a_RzGa",
+          "embed_url": "https://clips.twitch.tv/embed?clip=CogentFairNeanderthalMikeHogu-27NQ1fOWg-a_RzGa",
+          "title": "Tara907 Carrea el canal",
           "creator_name": "ArDipii",
           "broadcaster_name": "ArDipii",
-          "created_at": "2026-11-02T22:22:30Z",
+          "created_at": "2026-10-30T18:08:05Z",
           "view_count": 3,
           "game_id": "509658",
           "language": "es",
-          "duration": 59.3,
-          "thumbnail_url": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/7ad64df6-296a-4d05-8ecc-1b65f48b2ced/landscape/thumb/thumb-0000000000-480x272.jpg",
+          "duration": 60,
+          "thumbnail_url": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/ee2987a3-0825-4c41-97ed-e0fa757bfa79/landscape/thumb/thumb-0000000000-480x272.jpg",
+          "video_id": null,
+          "vod_offset": null,
+          "is_featured": false
+        },
+        {
+          "id": "AmericanMagnificentElkHotPokket-3DgLwYdfknAqFeQM",
+          "url": "https://www.twitch.tv/ardipii/clip/AmericanMagnificentElkHotPokket-3DgLwYdfknAqFeQM",
+          "embed_url": "https://clips.twitch.tv/embed?clip=AmericanMagnificentElkHotPokket-3DgLwYdfknAqFeQM",
+          "title": "Tutorial instagram contenido",
+          "creator_name": "ArDipii",
+          "broadcaster_name": "ArDipii",
+          "created_at": "2026-11-02T22:15:36Z",
+          "view_count": 3,
+          "game_id": "509658",
+          "language": "es",
+          "duration": 59.2,
+          "thumbnail_url": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/6b904b90-827a-42dd-ab41-7f0fef4cae3f/landscape/thumb/thumb-0000000000-480x272.jpg",
+          "video_id": null,
+          "vod_offset": null,
+          "is_featured": false
+        },
+        {
+          "id": "FuriousOutstandingShallotTBTacoRight-aZ-qf7-A9JLtobdU",
+          "url": "https://www.twitch.tv/ardipii/clip/FuriousOutstandingShallotTBTacoRight-aZ-qf7-A9JLtobdU",
+          "embed_url": "https://clips.twitch.tv/embed?clip=FuriousOutstandingShallotTBTacoRight-aZ-qf7-A9JLtobdU",
+          "title": "Tip contenido programado",
+          "creator_name": "ArDipii",
+          "broadcaster_name": "ArDipii",
+          "created_at": "2026-11-02T22:17:49Z",
+          "view_count": 3,
+          "game_id": "509658",
+          "language": "es",
+          "duration": 56.9,
+          "thumbnail_url": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/cd1bb46c-e9f3-47ff-99b2-31e79d5e8180/landscape/thumb/thumb-0000000000-480x272.jpg",
           "video_id": null,
           "vod_offset": null,
           "is_featured": false
@@ -728,41 +745,24 @@
           "is_featured": false
         },
         {
-          "id": "EndearingBreakableDootRlyTho-JVrFs9GGCXYhKtW6",
-          "url": "https://www.twitch.tv/ardipii/clip/EndearingBreakableDootRlyTho-JVrFs9GGCXYhKtW6",
-          "embed_url": "https://clips.twitch.tv/embed?clip=EndearingBreakableDootRlyTho-JVrFs9GGCXYhKtW6",
-          "title": "Hasta siempre komanchee",
+          "id": "ExcitedDeadGazelleThisIsSparta-39JLCVBXa0zgydMR",
+          "url": "https://www.twitch.tv/ardipii/clip/ExcitedDeadGazelleThisIsSparta-39JLCVBXa0zgydMR",
+          "embed_url": "https://clips.twitch.tv/embed?clip=ExcitedDeadGazelleThisIsSparta-39JLCVBXa0zgydMR",
+          "title": "Tip para programar contenido tiktok",
           "creator_name": "ArDipii",
           "broadcaster_name": "ArDipii",
-          "created_at": "2026-11-02T21:56:03Z",
+          "created_at": "2026-11-02T22:22:30Z",
           "view_count": 3,
           "game_id": "509658",
           "language": "es",
-          "duration": 54.2,
-          "thumbnail_url": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/acb43872-9f68-4948-8709-339b583859c1/landscape/thumb/thumb-0000000000-480x272.jpg",
-          "video_id": null,
-          "vod_offset": null,
-          "is_featured": false
-        },
-        {
-          "id": "ObedientSmoggyElkPipeHype-fHcdBkwWiZ5uPxea",
-          "url": "https://www.twitch.tv/ardipii/clip/ObedientSmoggyElkPipeHype-fHcdBkwWiZ5uPxea",
-          "embed_url": "https://clips.twitch.tv/embed?clip=ObedientSmoggyElkPipeHype-fHcdBkwWiZ5uPxea",
-          "title": "clip golpee a policiaa",
-          "creator_name": "ArDipii",
-          "broadcaster_name": "ArDipii",
-          "created_at": "2026-11-02T21:48:03Z",
-          "view_count": 3,
-          "game_id": "509658",
-          "language": "es",
-          "duration": 31.5,
-          "thumbnail_url": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/a1692674-01a6-4aa8-b1d9-bedbf2418dcb/landscape/thumb/thumb-0000000000-480x272.jpg",
+          "duration": 59.3,
+          "thumbnail_url": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/7ad64df6-296a-4d05-8ecc-1b65f48b2ced/landscape/thumb/thumb-0000000000-480x272.jpg",
           "video_id": null,
           "vod_offset": null,
           "is_featured": false
         }
       ],
-      "result_count": 92,
+      "result_count": 91,
       "displayed_count": 10
     },
     "akuma": {
@@ -771,10 +771,10 @@
       "broadcaster_id": "163416844",
       "url": "https://twitch.tv/akumazoldyck",
       "status": "ok",
-      "captured_at": "2026-11-18T00:22:30Z",
+      "captured_at": "2026-11-18T07:10:38Z",
       "period": {
-        "from": "2026-10-19T00:22:30Z",
-        "to": "2026-11-18T00:22:30Z",
+        "from": "2026-10-19T07:10:38Z",
+        "to": "2026-11-18T07:10:38Z",
         "days": 30
       },
       "clips": [
@@ -839,10 +839,10 @@
       "broadcaster_id": "240834527",
       "url": "https://twitch.tv/daved0608",
       "status": "empty",
-      "captured_at": "2026-11-18T00:22:30Z",
+      "captured_at": "2026-11-18T07:10:38Z",
       "period": {
-        "from": "2026-10-19T00:22:30Z",
-        "to": "2026-11-18T00:22:30Z",
+        "from": "2026-10-19T07:10:38Z",
+        "to": "2026-11-18T07:10:38Z",
         "days": 30
       },
       "clips": [],
@@ -855,10 +855,10 @@
       "broadcaster_id": "1357467619",
       "url": "https://twitch.tv/habitos_atomicos",
       "status": "ok",
-      "captured_at": "2026-11-18T00:22:30Z",
+      "captured_at": "2026-11-18T07:10:38Z",
       "period": {
-        "from": "2026-10-19T00:22:30Z",
-        "to": "2026-11-18T00:22:30Z",
+        "from": "2026-10-19T07:10:38Z",
+        "to": "2026-11-18T07:10:38Z",
         "days": 30
       },
       "clips": [
@@ -982,23 +982,6 @@
           "is_featured": false
         },
         {
-          "id": "RoughFrozenKuduImGlitch-LyhiheC-BEFMR7Rk",
-          "url": "https://www.twitch.tv/habitos_atomicos/clip/RoughFrozenKuduImGlitch-LyhiheC-BEFMR7Rk",
-          "embed_url": "https://clips.twitch.tv/embed?clip=RoughFrozenKuduImGlitch-LyhiheC-BEFMR7Rk",
-          "title": "yo, ya llegue",
-          "creator_name": "habitos_atomicos",
-          "broadcaster_name": "habitos_atomicos",
-          "created_at": "2026-10-24T13:25:48Z",
-          "view_count": 4,
-          "game_id": "509658",
-          "language": "es",
-          "duration": 60,
-          "thumbnail_url": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/0069427e-524d-466b-a809-e55479632f2e/landscape/thumb/thumb-0000000000-480x272.jpg",
-          "video_id": null,
-          "vod_offset": null,
-          "is_featured": false
-        },
-        {
           "id": "TriumphantDeafEggnogBrokeBack-2uWi2hjjNfRHWeK1",
           "url": "https://www.twitch.tv/habitos_atomicos/clip/TriumphantDeafEggnogBrokeBack-2uWi2hjjNfRHWeK1",
           "embed_url": "https://clips.twitch.tv/embed?clip=TriumphantDeafEggnogBrokeBack-2uWi2hjjNfRHWeK1",
@@ -1031,9 +1014,26 @@
           "video_id": null,
           "vod_offset": null,
           "is_featured": false
+        },
+        {
+          "id": "AliveDeafSalsifyDerp-Xc7V3N5hpvNV1p6F",
+          "url": "https://www.twitch.tv/habitos_atomicos/clip/AliveDeafSalsifyDerp-Xc7V3N5hpvNV1p6F",
+          "embed_url": "https://clips.twitch.tv/embed?clip=AliveDeafSalsifyDerp-Xc7V3N5hpvNV1p6F",
+          "title": "la elastica que tiro aimar uff",
+          "creator_name": "habitos_atomicos",
+          "broadcaster_name": "habitos_atomicos",
+          "created_at": "2026-10-25T09:58:47Z",
+          "view_count": 4,
+          "game_id": "509658",
+          "language": "es",
+          "duration": 60,
+          "thumbnail_url": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/b0153bbe-16a8-4409-a340-da529bda7687/landscape/thumb/thumb-0000000000-480x272.jpg",
+          "video_id": null,
+          "vod_offset": null,
+          "is_featured": false
         }
       ],
-      "result_count": 58,
+      "result_count": 57,
       "displayed_count": 10
     }
   }
