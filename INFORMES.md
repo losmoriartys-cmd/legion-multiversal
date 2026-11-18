@@ -3420,3 +3420,10 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - Se actualizó el test estático para exigir la distinción «MÁS JUGADO» vs. «JUEGO RECIENTE».
 - Playwright amplió el flujo: probar cada capítulo para los ocho perfiles, máximo 4 clips, ausencia de texto «MUESTRAS», accesos a keys para cuatro integrantes, Epic codes en dos, y probar el botón de carta abriendo/cerrando modal.
 - **Verificación pendiente:** aún no hay ejecución de CI retornada para HEAD; no se declara aprobado el test ni se comprobó en browser la visualización de juego histórico. La carga de datos SullyGnome y la actualización de cartas tras el fetch requieren revisar el timing del render.
+
+
+## 2026-11-18 — Corrección de fallos detectados en CI de tests
+
+- La ejecución inicial de la nueva cobertura falló por dos problemas del propio test: la frase de aceptación no coincidía exactamente con la directiva y el delimitador de función buscaba una secuencia escapada en vez de un salto de línea. Se ajustó la cadena de criterio.
+- La segunda ejecución detectó un error de sintaxis en el tuple de strings del test de directiva (comilla doble accidental). Se reparó en el commit `b2437c8`.
+- **Estado de revalidación:** el commit `b2437c8b1c17fc7003dbdb3beb7baf41f7f60fa6` tiene el workflow de validación en cola; no se declara aprobado hasta que finalice.
