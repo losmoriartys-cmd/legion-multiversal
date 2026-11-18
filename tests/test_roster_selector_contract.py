@@ -91,10 +91,12 @@ class RosterComicCardsContractTests(unittest.TestCase):
         self.assertEqual({hero_id: hero["character_card"] for hero_id, hero in heroes.items()}, expected_cards)
         for asset in [*expected_fullbody.values(), *expected_cards.values()]:
             self.assertTrue((ROOT / asset).is_file())
-        # Asset references remain in the roster data, not in the dossier renderer.
+        # Full-body and character-card assets stay out of the main dossier canvas.
         self.assertNotIn("hero.fullbody || hero.img", self.app)
-        self.assertNotIn("hero.character_card", self.app)
+        self.assertNotIn("hero-profile-character-art", self.app)
+        self.assertIn("(hero.character_card ? '<section class=\"hero-profile-character-card-link\"", self.app)
         self.assertIn("VER CARTA COMPLETA", self.app)
+        self.assertIn("openHeroModal(' + index + ')", self.app)
 
     def test_cards_use_real_metrics_and_no_fixed_schedule(self):
         start = self.app.index("function renderRosterSelector()")
