@@ -148,3 +148,10 @@ La pestaña Estadísticas de los ocho expedientes debe utilizar exactamente la m
 - La arquitectura de estadísticas es común a los ocho perfiles, pero cada fuente se renderiza solo cuando contiene al menos una métrica útil. Se eliminan tarjetas vacías, fuentes sin captura, estados de error y paneles técnicos sin datos. Cada tarjeta conserva fuente y período, y las métricas de fuentes distintas nunca se suman.
 - La vista ejecutiva prioriza datos legibles y útiles; no publica conteos de muestras ni indicadores de cobertura como si fueran resultados de audiencia.
 - Criterio de aceptación: Playwright abre los ocho expedientes y verifica ausencia total de arte de cuerpo entero, una sola frase por perfil, juegos sin texto de muestras, ausencia de tarjetas estadísticas vacías y presencia de las cifras públicas verificadas en las cartas correspondientes.
+
+
+## 12. Aceptación adicional — ranking, audiencia y panel ejecutivo
+- «Juegos y ritmo» solo puede ordenar juegos a partir de un desglose histórico acumulado con horas positivas. Las muestras recientes de Twitch Helix no se pueden reutilizar como ranking histórico. Si no hay historial, el bloque se omite.
+- El panel ejecutivo muestra como máximo cuatro indicadores con valor por fuente. No se rellenan posiciones con valores vacíos, guiones ni textos de estado.
+- Las métricas de YouTube (suscriptores, vistas y videos) permanecen en su fuente y plataforma; no se mezclan con seguidores, viewers ni períodos de Twitch.
+- Los seguidores de Twitch que se presenten como actuales deben provenir de un contador dinámico identificado como tal, con fuente externa visible y sin convertir cifras históricas en valores «en vivo».
