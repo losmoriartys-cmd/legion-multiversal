@@ -73,6 +73,12 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
     expect(dossierImageStyle.position).toContain('0%');
     // El expediente no repite full-body ni carta: el carnet identifica al streamer.
     await expect(dossier.locator('.hero-profile-character-art')).toHaveCount(0);
+    const internalArt = dossier.locator('#profile-tab-perfil .hero-profile-internal-art img');
+    await expect(internalArt).toBeVisible();
+    await expect.poll(() => internalArt.evaluate(img => img.naturalWidth)).toBeGreaterThan(0);
+    const artBox = await internalArt.boundingBox();
+    expect(artBox.width).toBeLessThanOrEqual(220);
+    expect(artBox.height).toBeLessThanOrEqual(230);
     await expect(dossier.locator('.hero-profile-character-card-link button')).toBeVisible();
     await expect(dossier.locator('.hero-profile-sidebar-quote')).toBeVisible();
     await expect(dossier.locator('.hero-profile-socials')).toBeVisible();
@@ -88,6 +94,7 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
     await expect(dossier.locator('#profile-tab-estadisticas .stats-dashboard')).toBeVisible();
     await profileTabs.filter({ hasText: 'BITÁCORA' }).click();
     await expect(dossier.locator('#profile-tab-bitacora .hero-profile-brand')).toBeVisible();
+    await expect(dossier.locator('#profile-tab-bitacora .hero-profile-internal-art')).toHaveCount(0);
     await expect(dossier.locator('#profile-tab-bitacora')).not.toContainText(/MUESTRAS/i);
     await expect(dossier.locator('#profile-tab-bitacora')).toContainText('BITÁCORA');
     await expect(dossier.locator('.hero-profile-character-card-link button')).toHaveText(/VER CARTA COMPLETA/);
