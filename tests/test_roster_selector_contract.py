@@ -178,6 +178,8 @@ class RosterComicCardsContractTests(unittest.TestCase):
         self.assertIn("Object.entries(platformProfile.platforms)", renderer)
         self.assertNotIn("if(p.status!=='verified')return;", renderer)
         self.assertIn("renderStatsExecutiveSource(title,state,[]", renderer)
+        self.assertIn("sourcePeriod", renderer)
+        self.assertIn("statsDate(String(w.period_start)", renderer)
         self.assertIn("renderStatsSourceDetails('TWITCH HELIX'", renderer)
         self.assertIn("renderStatsSourceDetails('SULLYGNOME'", renderer)
         self.assertIn("renderStatsSourceDetails('TWITCHMETRICS'", renderer)
