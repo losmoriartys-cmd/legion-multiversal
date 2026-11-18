@@ -45,7 +45,7 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
     const dossier = page.locator('#hero-profile-page');
     await expect(dossier).toBeVisible();
     await expect.poll(async () => {
-      const header = await page.locator('header').boundingBox();
+      const header = await page.locator('body > header').boundingBox();
       const profileHead = await dossier.locator('.comic-profile-head').boundingBox();
       return header && profileHead ? profileHead.y >= header.y + header.height - 1 : false;
     }).toBe(true);
