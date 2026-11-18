@@ -246,3 +246,12 @@ if __name__ == "__main__":
             self.assertIn(label, fallback)
         self.assertIn("Nuevo integrante en etapa de formación", fallback)
         self.assertIn("Divulgación, programación y charlas motivacionales", fallback)
+
+    def test_profile_modal_uses_individual_language_and_editorial_tabs(self):
+        self.assertIn("EXPEDIENTE INDIVIDUAL", self.html)
+        self.assertIn("QUIÉN ES Y QUÉ OFRECE", self.html)
+        self.assertNotIn("EXPEDIENTE DE HÉROE", self.html)
+        self.assertNotIn("QUIÉNES SOMOS Y QUÉ OFRECEMOS", self.html)
+        self.assertIn('>PERFIL Y CONTENIDO</button>', self.html)
+        self.assertIn('>AUDIENCIA Y ESTADÍSTICAS</button>', self.html)
+        self.assertIn('>TRAYECTORIA Y COLABORACIONES</button>', self.html)

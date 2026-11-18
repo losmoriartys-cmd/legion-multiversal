@@ -1139,18 +1139,18 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
 </main>
 <footer class="site-technical-footer"><span>LEGIÓN MULTIVERSAL · DIFERENTES MUNDOS. UNA MISMA LEGIÓN.</span><nav aria-label="Información complementaria"><a href="./metodologia/">Metodología</a><a href="./marcas/">Para marcas</a></nav><a href="https://github.com/losmoriartys-cmd/legion-multiversal/issues/new?title=Reporte%20t%C3%A9cnico" target="_blank" rel="noopener noreferrer">Reportar un problema técnico ↗</a></footer>
 
-    <!-- VENTANA MODAL / EXPEDIENTE INDIVIDUAL (PÁGINAS A, B, C) -->
+    <!-- VENTANA MODAL / EXPEDIENTE INDIVIDUAL -->
     <div class="modal-overlay" id="hero-modal" role="dialog" aria-modal="true" aria-labelledby="modal-hero-title" onclick="if(event.target === this) closeModal();">
         <div class="modal-content" tabindex="-1">
             <div class="modal-header">
-                <h2 id="modal-hero-title">EXPEDIENTE DE HÉROE</h2>
+                <h2 id="modal-hero-title">EXPEDIENTE INDIVIDUAL</h2>
                 <button class="close-modal-btn" type="button" aria-label="Cerrar expediente" onclick="closeModal()">X</button>
             </div>
             <div class="modal-body">
                 <div class="modal-tabs" id="modal-tab-navigation" role="tablist" aria-label="Secciones del expediente">
-                    <button id="modal-tab-a" role="tab" aria-controls="modal-pane-0" aria-selected="true" tabindex="0" class="modal-tab-btn active" onclick="switchModalTab(0)">A · PERFIL Y CONTENIDO</button>
-                    <button id="modal-tab-b" role="tab" aria-controls="modal-pane-1" aria-selected="false" tabindex="-1" class="modal-tab-btn" onclick="switchModalTab(1)">B · AUDIENCIA Y ESTADÍSTICAS</button>
-                    <button id="modal-tab-c" role="tab" aria-controls="modal-pane-2" aria-selected="false" tabindex="-1" class="modal-tab-btn" onclick="switchModalTab(2)">C · TRAYECTORIA Y COLABORACIONES</button>
+                    <button id="modal-tab-a" role="tab" aria-controls="modal-pane-0" aria-selected="true" tabindex="0" class="modal-tab-btn active" onclick="switchModalTab(0)">PERFIL Y CONTENIDO</button>
+                    <button id="modal-tab-b" role="tab" aria-controls="modal-pane-1" aria-selected="false" tabindex="-1" class="modal-tab-btn" onclick="switchModalTab(1)">AUDIENCIA Y ESTADÍSTICAS</button>
+                    <button id="modal-tab-c" role="tab" aria-controls="modal-pane-2" aria-selected="false" tabindex="-1" class="modal-tab-btn" onclick="switchModalTab(2)">TRAYECTORIA Y COLABORACIONES</button>
                 </div>
                 <div class="modal-actions-toolbar">
                     <span>ARCHIVO PARA PRESENTACIÓN</span>
@@ -1163,7 +1163,7 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
                 </div>
 
                 <div role="tabpanel" aria-labelledby="modal-tab-a" tabindex="0" class="modal-tab-pane active" id="modal-pane-0">
-                    <h3>QUIÉNES SOMOS Y QUÉ OFRECEMOS</h3>
+                    <h3>QUIÉN ES Y QUÉ OFRECE</h3>
                     <div id="modal-profile-text" class="profile-overview-host"></div>
                 </div>
                 <div role="tabpanel" aria-labelledby="modal-tab-b" tabindex="0" class="modal-tab-pane" id="modal-pane-1">
