@@ -63,6 +63,7 @@ class RosterComicCardsContractTests(unittest.TestCase):
         self.assertIn("const portrait = hero.portrait || hero.img || ''", self.app)
         self.assertNotIn("const characterArt = hero.fullbody || hero.img", self.app)
         self.assertNotIn("hero-profile-character-art", self.app)
+        self.assertNotIn("hero-profile-internal-art", self.app)
         self.assertIn("hero-profile-character-card-link", self.app)
 
     def test_each_dossier_has_a_distinct_full_body_character_asset(self):
@@ -103,13 +104,17 @@ class RosterComicCardsContractTests(unittest.TestCase):
         end = self.app.index("\nfunction selectRosterCreator", start)
         renderer = self.app[start:end]
         self.assertIn("average_viewers_sampled", renderer)
-        self.assertIn("status === 'verified'", renderer)
+        self.assertIn("getCreatorAudienceMetric(hero)", renderer)
+        audience = self.app.split("function getCreatorAudienceMetric", 1)[1].split("function getMostPlayedGames", 1)[0]
+        self.assertIn("platform?.status==='verified'", audience)
+        self.assertIn("twitchMetricsData?.channels?.[login]", audience)
+        self.assertIn("TwitchMetrics", audience)
+        self.assertIn("SullyGnome", audience)
+        self.assertNotIn("EN ACTUALIZACIÓN", renderer)
         self.assertIn("ACTIVO ESTA SEMANA", renderer)
         self.assertIn("7 * 24 * 60 * 60 * 1000", renderer)
         self.assertNotIn("hero.schedule", renderer)
-        self.assertIn("Seguidores", renderer)
-        self.assertIn("twitchMetricsData?.channels?.[login]", renderer)
-        self.assertIn("TwitchMetrics", renderer)
+        self.assertIn("Seguidores", audience)
         self.assertIn("Media de viewers", renderer)
 
     def test_profile_opens_directly_as_a_35_65_bitacora(self):
@@ -157,8 +162,10 @@ class RosterComicCardsContractTests(unittest.TestCase):
         self.assertIn("renderStatsDashboard(hero,channel,sullyChannel)", self.app)
         self.assertIn("clips.slice(0,4)", self.app)
         self.assertIn("MÁS JUGADO · ", self.app)
-        self.assertIn("JUEGO RECIENTE · ", self.app)
-        self.assertIn("no es un ranking ni una métrica de plataforma", self.app)
+        self.assertIn("getMostPlayedGames(hero,channel,sullyChannel)", self.app)
+        self.assertIn("JUEGOS Y RITMO", self.app)
+        self.assertNotIn("JUEGO RECIENTE · ", self.app)
+        self.assertNotIn("observaciones recientes", self.app)
         self.assertIn("average_viewers_sampled", self.app)
         self.assertIn("peak_viewers_sampled", self.app)
         self.assertIn("observed_live_hours", self.app)
@@ -176,15 +183,14 @@ class RosterComicCardsContractTests(unittest.TestCase):
         end = self.app.index("\nfunction renderAutomaticTwitchClips", start)
         renderer = self.app[start:end]
         self.assertIn("Object.entries(platformProfile.platforms)", renderer)
-        self.assertNotIn("if(p.status!=='verified')return;", renderer)
-        self.assertIn("renderStatsExecutiveSource(title,state,[]", renderer)
-        self.assertIn("sourcePeriod", renderer)
-        self.assertIn("statsDate(String(w.period_start)", renderer)
-        self.assertIn("renderStatsSourceDetails('TWITCH HELIX'", renderer)
-        self.assertIn("renderStatsSourceDetails('SULLYGNOME'", renderer)
-        self.assertIn("renderStatsSourceDetails('TWITCHMETRICS'", renderer)
-        self.assertIn("Object.keys(platformProfile?.platforms||{}).forEach(platform=>", renderer)
-        self.assertIn("renderStatsSourceDetails(title,description,detail)", renderer)
+        self.assertIn("if(p.status!=='verified')return;", renderer)
+        self.assertIn("sources.push(card)", renderer)
+        self.assertIn("if(!cards.length)return '';", self.app)
+        self.assertIn("item.value===null", self.app)
+        self.assertNotIn("renderStatsSourceDetails('TWITCH HELIX'", renderer)
+        self.assertNotIn("renderStatsSourceDetails('SULLYGNOME'", renderer)
+        self.assertNotIn("renderStatsSourceDetails('TWITCHMETRICS'", renderer)
+        self.assertIn("stats-executive-empty", renderer)
         self.assertIn("function renderPlatformStats(hero,onlyPlatform=null)", self.app)
 
     def test_only_one_roster_directory_remains_in_the_chapter(self):
