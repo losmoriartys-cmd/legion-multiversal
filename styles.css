@@ -5458,3 +5458,234 @@ main .chapter-panel :where(.chapter-cta, .executive-button, .comic-submit-btn,
 @media(max-width:800px){.hero-profile-reference-layout{grid-template-columns:minmax(190px,34%) minmax(0,1fr);gap:12px}.hero-profile-metric-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero-profile-status-grid{grid-template-columns:1fr}.hero-profile-status-grid article{min-height:0}}
 @media(max-width:600px){.hero-profile-reference-layout{grid-template-columns:1fr}.hero-profile-sidebar{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start}.hero-profile-id-card{grid-column:1/-1}.hero-profile-id-image{min-height:0;aspect-ratio:4/3}.hero-profile-sidebar-quote{border-right:1px solid #111}.hero-profile-poster{border-right:1px solid #111}.hero-profile-socials{grid-column:1/-1}.hero-profile-reference-head{align-items:flex-start;flex-direction:column}.hero-profile-top-nav{width:100%}.hero-profile-top-nav .hero-profile-pager{justify-content:space-between}.hero-profile-status-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.hero-profile-clips-grid{grid-template-columns:1fr}}
 @media(max-width:420px){.hero-profile-status-grid{grid-template-columns:1fr}.hero-profile-metric-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero-profile-detail-list li{flex-direction:column}.hero-profile-detail-list li span{text-align:left}}
+
+
+/* ==========================================================
+   EXPEDIENTE COMIC · referencia 35/65 aprobada
+   Sobrescribe reglas históricas duplicadas del perfil.
+   ========================================================== */
+#hero-profile-page.is-active{
+  height:100vh;height:100dvh;max-height:100dvh;overflow:hidden;
+  background:#fff8d6;color:#111;
+}
+#hero-profile-page .hero-profile-reference-layout{
+  display:grid;grid-template-columns:minmax(0,35%) minmax(0,65%);
+  gap:0;width:100%;max-width:none;height:100%;min-height:0;
+  margin:0;padding:0;background:#fff8d6;align-items:stretch;
+}
+#hero-profile-page .hero-profile-sidebar{
+  position:sticky;top:0;align-self:stretch;height:100%;min-height:0;
+  overflow-y:auto;overscroll-behavior:contain;
+  background:#fff8d6;color:#111;border:3px solid #111;
+  box-shadow:6px 6px 0 #111;border-radius:0;
+}
+#hero-profile-page .hero-profile-id-card{background:#111;border-bottom:3px solid #111}
+#hero-profile-page .hero-profile-id-image{
+  height:58vh;height:58dvh;min-height:390px;max-height:760px;
+  aspect-ratio:auto;position:relative;overflow:hidden;background:#111;
+}
+#hero-profile-page .hero-profile-id-image>img{
+  object-fit:cover;object-position:var(--portrait-focus,center 14%);
+}
+#hero-profile-page .hero-profile-id-live{top:12px;left:12px}
+#hero-profile-page .hero-profile-id-live .hero-profile-live{
+  border:2px solid #111;border-radius:0;padding:6px 9px;
+  background:#111;color:#fff;font:900 .72rem 'Roboto Condensed',sans-serif;
+  box-shadow:3px 3px 0 #111;
+}
+#hero-profile-page .hero-profile-id-live .hero-profile-live.is-live{
+  background:#e62e2e;color:#fff;animation:comicLivePulse 1.25s steps(2,end) infinite;
+}
+@keyframes comicLivePulse{50%{filter:brightness(1.35)}}
+#hero-profile-page .hero-profile-id-name{
+  inset:auto 0 0;padding:54px 16px 16px;
+  background:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.25) 28%,rgba(0,0,0,.88) 100%);
+}
+#hero-profile-page .hero-profile-id-name small{
+  color:#d9a400;font-size:.82rem;letter-spacing:2px;text-transform:uppercase;
+}
+#hero-profile-page .hero-profile-id-name strong{
+  color:#fff;font:clamp(2.6rem,4.1vw,3.5rem)/.95 'Bangers',Impact,sans-serif;
+  letter-spacing:-1px;text-shadow:2px 2px 0 #111,-1px -1px 0 #111;
+}
+#hero-profile-page .hero-profile-id-name span{
+  color:#fff;font:700 .88rem 'Roboto Condensed',sans-serif;text-transform:uppercase;
+}
+#hero-profile-page .hero-profile-sidebar-quote,
+#hero-profile-page .hero-profile-poster,
+#hero-profile-page .hero-profile-socials{padding:14px;border-bottom:3px solid #111}
+#hero-profile-page .hero-profile-sidebar-quote>small,
+#hero-profile-page .hero-profile-poster>small,
+#hero-profile-page .hero-profile-socials>small{
+  color:#111;font:900 .78rem 'Roboto Condensed',sans-serif;letter-spacing:1.5px;
+}
+#hero-profile-page .hero-profile-sidebar-quote blockquote{
+  padding:12px;background:#fff;border:3px solid #111;border-radius:0;
+  box-shadow:6px 6px 0 #111;color:#111;font:1.25rem/1.12 'Bangers',Impact,sans-serif;
+}
+#hero-profile-page .hero-profile-socials>div{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+#hero-profile-page .hero-profile-socials .btn-link{
+  min-height:40px;border:3px solid #111;border-radius:0;
+  box-shadow:4px 4px 0 #111;background:#ffd500;color:#111;
+  font:900 .78rem 'Roboto Condensed',sans-serif;
+}
+#hero-profile-page .hero-profile-main{
+  height:100%;min-height:0;overflow-y:auto;overscroll-behavior:contain;
+  padding:clamp(14px,2vw,28px);background:#fff8d6;color:#111;
+}
+#hero-profile-page .hero-profile-reference-head{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  margin:0 0 12px;padding:0 0 12px;border-bottom:3px solid #111;
+}
+#hero-profile-page .comic-profile-breadcrumb{
+  padding:0;border:0;background:transparent;color:#111;cursor:pointer;
+  text-align:left;font:900 .78rem 'Roboto Condensed',sans-serif;letter-spacing:.06em;
+}
+#hero-profile-page .comic-profile-breadcrumb:hover{text-decoration:underline;text-underline-offset:3px}
+#hero-profile-page .comic-profile-head-right{display:flex;align-items:center;justify-content:flex-end;gap:8px;flex-wrap:wrap}
+#hero-profile-page .comic-profile-rhythm,
+#hero-profile-page .hero-profile-live{
+  display:inline-flex;align-items:center;padding:7px 9px;border:2px solid #111;
+  border-radius:0;background:#ffd500;color:#111;box-shadow:3px 3px 0 #111;
+  font:900 .68rem 'Roboto Condensed',sans-serif;
+}
+#hero-profile-page .hero-profile-tabs-wrap{margin:0;padding:0;border:0}
+#hero-profile-page .hero-profile-tabs{
+  display:flex;flex-wrap:nowrap;gap:6px;overflow:hidden;
+  padding:8px 0 12px;border-bottom:3px solid #111;
+}
+#hero-profile-page .hero-profile-tab{
+  flex:1 1 0;min-width:0;min-height:42px;padding:7px 5px;
+  border:3px solid #111;border-radius:0;background:#fff;color:#111;
+  box-shadow:4px 4px 0 #111;font:1rem 'Bangers',Impact,sans-serif;
+  letter-spacing:.04em;white-space:normal;
+}
+#hero-profile-page .hero-profile-tab.is-active,
+#hero-profile-page .hero-profile-tab[aria-selected=true]{
+  background:#ffd500;color:#111;box-shadow:4px 4px 0 #111;
+}
+#hero-profile-page .hero-profile-tab-panel{
+  margin-top:14px;padding:clamp(14px,2vw,22px);
+  border:3px solid #111;border-radius:0;background:#fff8d6;color:#111;
+  box-shadow:6px 6px 0 #111;
+}
+#hero-profile-page .hero-profile-quote,
+#hero-profile-page .hero-profile-status-grid article,
+#hero-profile-page .hero-profile-period,
+#hero-profile-page .hero-profile-game-grid article,
+#hero-profile-page .hero-profile-clip,
+#hero-profile-page .hero-profile-detail-list li,
+#hero-profile-page .hero-profile-metric{
+  border:3px solid #111;border-radius:0;box-shadow:4px 4px 0 #111;
+}
+#hero-profile-page .hero-profile-quote{background:#fff;border-radius:0}
+#hero-profile-page .hero-profile-status-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+#hero-profile-page .hero-profile-status-grid article{background:#ffd500;color:#111}
+#hero-profile-page .hero-profile-status-grid article:nth-child(2){background:#fff}
+#hero-profile-page .hero-profile-status-grid article:nth-child(3){background:#1e4bff;color:#fff}
+#hero-profile-page .hero-profile-bio{color:#111;font:400 1rem/1.5 'Roboto Condensed',sans-serif}
+#hero-profile-page .hero-profile-overview h4,
+#hero-profile-page .hero-profile-tab-panel>h4,
+#hero-profile-page .hero-profile-brand h4,
+#hero-profile-page .comic-profile-ratings h4{
+  color:#111;font:900 1.8rem 'Bangers',Impact,sans-serif;letter-spacing:.04em;
+}
+#hero-profile-page .comic-profile-actions{display:flex;gap:10px;flex-wrap:wrap}
+#hero-profile-page .comic-profile-action{
+  display:inline-flex;align-items:center;justify-content:center;min-height:44px;
+  padding:10px 16px;border:3px solid #111;border-radius:0;
+  background:#1e4bff;color:#fff;box-shadow:6px 6px 0 #111;
+  text-decoration:none;font:900 .9rem 'Roboto Condensed',sans-serif;
+}
+#hero-profile-page .comic-profile-action:hover{background:#7b2fff}
+#hero-profile-page .comic-profile-ratings{
+  margin-top:4px;padding:16px;background:#fff;border:3px solid #111;
+  box-shadow:6px 6px 0 #111;
+}
+#hero-profile-page .comic-profile-rating{margin:12px 0}
+#hero-profile-page .comic-profile-rating>div:first-child{
+  display:flex;justify-content:space-between;gap:12px;margin-bottom:5px;
+  color:#111;font:900 .85rem 'Roboto Condensed',sans-serif;
+}
+#hero-profile-page .comic-profile-rating-track{
+  height:15px;overflow:hidden;border:2px solid #111;background:#fff;border-radius:0;
+}
+#hero-profile-page .comic-profile-rating-track span{
+  display:block;height:100%;background:#7b2fff;border-right:2px solid #111;
+}
+#hero-profile-page .comic-profile-ratings>p{
+  margin:12px 0 0;color:#514a3e;font:400 .78rem/1.45 'Roboto Condensed',sans-serif;
+}
+#hero-profile-page .hero-profile-method,
+#hero-profile-page .hero-profile-empty{color:#514a3e;font:400 .82rem/1.5 'Roboto Condensed',sans-serif}
+#hero-profile-page .hero-profile-pager,
+#hero-profile-page .hero-profile-top-nav{display:none!important}
+@media(max-width:800px){
+  #hero-profile-page.is-active{height:auto;max-height:none;overflow:visible}
+  #hero-profile-page .hero-profile-reference-layout{
+    display:flex;flex-direction:column;height:auto;min-height:0;gap:0;
+  }
+  #hero-profile-page .hero-profile-sidebar{
+    position:relative;top:auto;width:100%;height:auto;overflow:visible;
+    display:flex;flex-direction:column;
+  }
+  #hero-profile-page .hero-profile-id-image{height:58vh;height:58dvh;min-height:340px;max-height:560px}
+  #hero-profile-page .hero-profile-main{height:auto;overflow:visible;padding:16px}
+  #hero-profile-page .hero-profile-tabs{gap:4px}
+  #hero-profile-page .hero-profile-tab{font-size:.78rem;padding:7px 3px;min-height:44px}
+  #hero-profile-page .hero-profile-status-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media(max-width:520px){
+  #hero-profile-page .hero-profile-reference-head{align-items:flex-start;flex-direction:column}
+  #hero-profile-page .comic-profile-head-right{justify-content:flex-start}
+  #hero-profile-page .hero-profile-tab{font-size:.68rem;letter-spacing:0}
+  #hero-profile-page .hero-profile-status-grid{grid-template-columns:1fr}
+  #hero-profile-page .hero-profile-metric-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #hero-profile-page .hero-profile-clips-grid{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){
+  #hero-profile-page .hero-profile-id-live .hero-profile-live.is-live{animation:none}
+}
+
+/* BITÁCORA / ROSTER · limpieza visual, redes y Epic */
+#hero-profile-page .hero-profile-visuals,
+#hero-profile-page .hero-profile-character-art,
+#hero-profile-page .hero-profile-character-card{display:none!important}
+#hero-profile-page .hero-profile-socials .btn-link{
+ display:inline-flex;align-items:center;justify-content:center;min-height:44px;
+ padding:10px 12px;background:#fff;border:3px solid #111;color:#111;
+ box-shadow:4px 4px 0 #111;border-radius:0;text-decoration:none;
+ font:900 .78rem 'Roboto Condensed',sans-serif;letter-spacing:.04em;
+}
+#hero-profile-page .hero-profile-socials .btn-link:hover,
+#hero-profile-page .hero-profile-socials .btn-link:focus-visible{background:#1e4bff;color:#fff;outline:3px solid #111;outline-offset:2px}
+#hero-profile-page .hero-profile-integrated-games{margin-top:8px;padding:14px;background:#fff;border:3px solid #111;box-shadow:4px 4px 0 #111}
+#hero-profile-page .hero-profile-integrated-games h4{margin:0 0 10px;font:900 1.65rem 'Bangers',Impact,sans-serif;letter-spacing:.04em;color:#111}
+#hero-profile-page .hero-profile-integrated-games .hero-profile-game-grid{margin:0}
+#hero-profile-page .hero-profile-epic-codes{margin-top:16px;padding:14px;background:#fff;border:3px solid #111;box-shadow:5px 5px 0 #111;color:#111}
+#hero-profile-page .hero-profile-epic-codes>h4{margin:0 0 12px;font:900 1.6rem 'Bangers',Impact,sans-serif;color:#111}
+#hero-profile-page .hero-profile-epic-codes .epic-code-record{background:#fff8d6;border:3px solid #111;border-left:8px solid #ffd500;box-shadow:5px 5px 0 #111;color:#111}
+#hero-profile-page .hero-profile-epic-codes .epic-code-owner{color:#111}
+#hero-profile-page .hero-profile-epic-codes .epic-code-value{color:#111;text-shadow:2px 2px 0 #ffd500}
+#hero-profile-page .hero-profile-epic-codes .epic-code-state{color:#111}
+#hero-profile-page .hero-profile-epic-codes .epic-code-evidence{color:#3c382f}
+#hero-profile-page .hero-profile-epic-codes .epic-code-actions a{background:#1e4bff;color:#fff;border:3px solid #111;box-shadow:3px 3px 0 #111}
+#hero-profile-page .hero-profile-epic-codes .epic-code-copy{background:#ffd500;color:#111;border:3px solid #111;box-shadow:3px 3px 0 #111}
+@media(max-width:520px){
+ #hero-profile-page .hero-profile-integrated-games{padding:10px}
+ #hero-profile-page .hero-profile-epic-codes{padding:10px}
+ #hero-profile-page .hero-profile-epic-codes .epic-code-value{font-size:2rem}
+}
+
+/* Expediente: acciones laterales y accesos de campaña de keys */
+#hero-profile-page .hero-profile-character-card-link{margin:8px 0;padding:10px;background:#fff6d5;border:2px solid #111;box-shadow:3px 3px 0 #111}
+#hero-profile-page .hero-profile-character-card-link small{display:block;margin:0 0 8px;color:#b71c2b;font:900 .72rem 'Roboto Condensed',sans-serif;letter-spacing:.06em}
+#hero-profile-page .hero-profile-character-card-link button{width:100%;min-height:44px;padding:10px 12px;background:#ffd500;border:3px solid #111;box-shadow:3px 3px 0 #111;color:#111;font:900 .85rem 'Roboto Condensed',sans-serif;cursor:pointer}
+#hero-profile-page .hero-profile-character-card-link button:hover,#hero-profile-page .hero-profile-character-card-link button:focus-visible{background:#1e4bff;color:#fff;outline:3px solid #111;outline-offset:2px}
+#hero-profile-page .hero-profile-detail-list li small{display:block;margin-top:7px;color:#6b5b25;font:700 .68rem 'Roboto Condensed',sans-serif;letter-spacing:.04em}
+
+/* Retrato de cuerpo entero: recurso interno, compacto y nunca dominante */
+#hero-profile-page .hero-profile-internal-art{margin:14px 0 18px;width:min(100%,210px);max-width:210px;padding:8px;background:#fff8d6;border:3px solid #111;box-shadow:4px 4px 0 #111}
+#hero-profile-page .hero-profile-internal-art img{display:block;width:100%;height:230px;max-height:230px;object-fit:contain;object-position:center;background:#101c2c}
+#hero-profile-page .hero-profile-internal-art figcaption{padding:6px 2px 0;color:#514a3e;font:900 .66rem 'Roboto Condensed',sans-serif;letter-spacing:.07em;text-align:center}
+@media(max-width:520px){#hero-profile-page .hero-profile-internal-art{width:min(100%,165px);max-width:165px}#hero-profile-page .hero-profile-internal-art img{height:190px;max-height:190px}}
