@@ -230,6 +230,8 @@ class RosterComicCardsContractTests(unittest.TestCase):
         for source_renderer in ("renderHelixDashboard", "renderSullyStats", "renderTwitchMetricsStats", "renderPlatformStats"):
             self.assertIn(source_renderer, self.app)
         self.assertIn("clips.slice(0,4)", tabs)
+        self.assertNotIn("muestras observadas", self.app.lower())
+        self.assertIn("CAPTURAS EN DIRECTO", self.app)
         self.assertIn("hero-profile-character-card-link", self.app)
         self.assertIn("const uniqueLinks=links.filter", self.app)
         for profile_id in ("lady-moriarty", "rod3r1k", "akuma", "habitos"):
