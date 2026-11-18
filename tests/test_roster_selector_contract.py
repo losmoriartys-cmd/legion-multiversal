@@ -186,7 +186,7 @@ class RosterComicCardsContractTests(unittest.TestCase):
         self.assertIn("if(p.status!=='verified')return;", renderer)
         self.assertIn("sources.push(card)", renderer)
         self.assertIn("if(!cards.length)return '';", self.app)
-        self.assertIn("item.value===null", self.app)
+        self.assertIn("item.value!==null", self.app)
         self.assertNotIn("renderStatsSourceDetails('TWITCH HELIX'", renderer)
         self.assertNotIn("renderStatsSourceDetails('SULLYGNOME'", renderer)
         self.assertNotIn("renderStatsSourceDetails('TWITCHMETRICS'", renderer)
