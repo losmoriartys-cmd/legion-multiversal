@@ -44,6 +44,11 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
 
     const dossier = page.locator('#hero-profile-page');
     await expect(dossier).toBeVisible();
+    await expect.poll(async () => {
+      const header = await page.locator('header').boundingBox();
+      const profileHead = await dossier.locator('.comic-profile-head').boundingBox();
+      return header && profileHead ? profileHead.y >= header.y + header.height - 1 : false;
+    }).toBe(true);
     await expect(profilePanel).toHaveClass(/is-active/);
     await expect(dossier.locator('#profile-tab-perfil .hero-profile-integrated-games')).toBeVisible();
     await expect(dossier.locator('#profile-tab-perfil .hero-profile-brand')).toHaveCount(0);
@@ -185,6 +190,8 @@ test('Atrás y Adelante restauran el roster y el expediente correcto', async ({ 
   await expect(page.locator('#hero-profile-page')).toBeVisible();
   await expect(page.locator('#roster-home')).toBeHidden();
   await expect(page.locator('#hero-profile-page')).toContainText('LADY MORIARTY');
+  await page.locator('[data-profile-tab="bitacora"]').click();
+  await expect(page.locator('#profile-tab-bitacora .hero-profile-brand')).toBeVisible();
   await page.screenshot({ path: 'test-results/bitacora-lady-desktop.png', fullPage: false });
   await page.setViewportSize({ width: 390, height: 844 });
   const mobileWidths = await page.evaluate(() => ({
