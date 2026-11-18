@@ -1338,7 +1338,7 @@ function showRosterChapter() {
 }
 
 function renderHeroProfileTabs(hero) {
- const safe=escapeStatsHtml,record=getCreatorRecord(hero),channel=findChannelStats(hero),win=channel?.window||{},live=getRosterLiveState(hero);
+ const safe=escapeStatsHtml,record=getCreatorRecord(hero),channel=findChannelStats(hero),sullyChannel=findSullyChannel(hero),win=channel?.window||{},live=getRosterLiveState(hero);
  const yt=platformStatsData?.creators?.[platformStatsKey(hero)]?.platforms?.youtube;
  const clips=twitchClipsData?.creators?.[creatorRecordKey(hero)]?.clips||[];
  const snapshots=Array.isArray(channel?.snapshots)?channel.snapshots:[];
