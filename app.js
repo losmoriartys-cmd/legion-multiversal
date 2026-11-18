@@ -344,20 +344,82 @@ function getHeroDisplayName(hero) {
     return identity?.display_name || hero?.display_name || hero?.name || 'Integrante';
 }
 
+function renderStatsExecutiveSource(title,period,metrics,note){
+ const safe=escapeStatsHtml;
+ const cards=metrics.filter(item=>item.value!==null&&item.value!==undefined).slice(0,4);
+ return '<article class="stats-executive-source"><div class="stats-executive-source-head"><strong>'+safe(title)+'</strong><span>'+safe(period||'Período no informado')+'</span></div><div class="stats-executive-metrics">'+(cards.length?cards.map(item=>'<div><strong>'+safe(item.value)+'</strong><span>'+safe(item.label)+'</span></div>').join(''):'<p class="stats-executive-empty">Sin métricas verificadas para mostrar.</p>')+'</div>'+(note?'<p class="stats-executive-note">'+safe(note)+'</p>':'')+'</article>';
+}
+function renderStatsSourceDetails(title,description,content){
+ return '<details class="stats-source-details"><summary><span><strong>'+escapeStatsHtml(title)+'</strong><small>'+escapeStatsHtml(description)+'</small></span><b>VER DETALLE <i aria-hidden="true">＋</i></b></summary><div class="stats-source-details-body">'+content+'</div></details>';
+}
 function renderStatsDashboard(hero,helix,sully){
- let out='<div class="stats-dashboard">';
- out+='<div class="stats-source-head"><div><strong>ARCHIVO DE RENDIMIENTO · '+escapeStatsHtml(getHeroDisplayName(hero))+'</strong><br><small>Ficha individual · cada fuente conserva su propio período y metodología</small></div></div>';
- if(hero.youtube && !hero.twitch && !hero.kick){
-  out+=renderPlatformStats(hero);
- }else if(!hero.twitch && hero.kick){
-  out+=renderPlatformStats(hero);
+ const safe=escapeStatsHtml;
+ const tmProfile=helix?.login?twitchMetricsData?.channels?.[helix.login]:null;
+ const tm=tmProfile?.metrics||{};
+ const sullySummary=sully?.annual_summary_2026||sully?.summary||{};
+ const platformProfile=platformStatsData?.creators?.[platformStatsKey(hero)];
+ let out='<div class="stats-dashboard stats-dashboard-editorial">';
+ out+='<header class="stats-executive-header"><div><span>ARCHIVO DE RENDIMIENTO</span><h4>'+safe(getHeroDisplayName(hero))+'</h4><p>Resumen de actividad y alcance. Cada fuente mantiene sus cifras, período y metodología por separado.</p></div><span class="stats-executive-stamp">FUENTES<br>INDEPENDIENTES</span></header>';
+ out+='<div class="stats-executive-grid">';
+ if(helix){
+  const w=helix.window||{};
+  const samples=Array.isArray(helix.snapshots)?helix.snapshots.filter(x=>x?.sampled_at):[];
+  const interval=Number(instituteStatsData?.sampling_interval_minutes)||55;
+  const first=samples.length?Date.parse(samples[0].sampled_at):NaN,last=samples.length?Date.parse(samples[samples.length-1].sampled_at):NaN;
+  const expected=Number.isFinite(first)&&Number.isFinite(last)&&last>=first?Math.floor((last-first)/(interval*60000))+1:0;
+  const coverage=expected?Math.min(100,samples.length/expected*100):null;
+  out+=renderStatsExecutiveSource('TWITCH HELIX · SEGUIMIENTO PROPIO','Muestra observada',[
+   {label:'Directos detectados',value:w.streams_observed==null?null:statsNumber(w.streams_observed,0)},
+   {label:'Promedio muestreado',value:w.average_viewers_sampled==null?null:statsNumber(w.average_viewers_sampled,1)},
+   {label:'Pico observado',value:w.peak_viewers_sampled==null?null:statsNumber(w.peak_viewers_sampled,0)},
+   {label:'Cobertura',value:coverage===null?null:statsNumber(coverage,1)+'%'}
+  ],'Observaciones propias; no equivalen a analítica oficial de Twitch.');
  }else{
-  out+=renderHelixDashboard(helix);
-  out+=renderSullyStats(sully);
-  out+=renderTwitchMetricsStats(helix);
-  out+=renderPlatformStats(hero);
+  out+=renderStatsExecutiveSource('TWITCH HELIX · SEGUIMIENTO PROPIO','Sin captura',[],'No hay una muestra utilizable para este perfil.');
  }
- out+='</div>';return out;
+ if(sully){
+  const metrics=sully.annual_summary_2026||sully.summary||{};
+  const period=sully.period?.start_date&&sully.period?.end_date?statsDate(sully.period.start_date)+' — '+statsDate(sully.period.end_date):sully.annual_summary_2026?'Acumulado 2026':'Historial disponible';
+  out+=renderStatsExecutiveSource('SULLYGNOME · HISTORIAL',period,[
+   {label:'Transmisiones',value:metrics.streams??metrics.streams_count??null},
+   {label:'Horas vistas',value:metrics.hours_watched??null},
+   {label:'Promedio',value:metrics.average_viewers??metrics.average_viewers_duration_weighted??null},
+   {label:'Pico',value:metrics.peak_viewers??null}
+  ],'Fuente histórica externa; no se combina con otras mediciones.');
+ }else{
+  out+=renderStatsExecutiveSource('SULLYGNOME · HISTORIAL','Sin registro',[],'No hay un historial disponible para este perfil.');
+ }
+ if(tmProfile){
+  out+=renderStatsExecutiveSource('TWITCHMETRICS · ANALÍTICA PÚBLICA',tmProfile.period_label||'Ventana consultada',[
+   {label:'Seguidores',value:tm.followers??null},
+   {label:'Horas vistas',value:tm.viewer_hours==null?null:statsNumber(tm.viewer_hours,0)+' h'},
+   {label:'Promedio',value:tm.average_viewers??null},
+   {label:'Pico',value:tm.peak_viewers??null}
+  ],'Registro externo parcial; su cobertura puede excluir directos de menor audiencia.');
+ }else{
+  out+=renderStatsExecutiveSource('TWITCHMETRICS · ANALÍTICA PÚBLICA','Sin registro',[],'No hay datos públicos cargados para esta cuenta.');
+ }
+ if(platformProfile?.platforms){
+  Object.entries(platformProfile.platforms).forEach(([platform,p])=>{
+   if(p.status!=='verified')return;
+   const m=p.metrics||{};
+   const metrics=platform==='youtube'?[{label:'Suscriptores',value:m.subscribers},{label:'Visualizaciones',value:m.total_views},{label:'Videos',value:m.videos_total}]:platform==='kick'?[{label:'Estado',value:m.live?'EN DIRECTO':'OFFLINE'},{label:'Espectadores',value:m.current_viewers},{label:'Categoría',value:m.category}]:[];
+   out+=renderStatsExecutiveSource(platform.toUpperCase()+' · FUENTE VINCULADA',platformStatsData?.updated_at||'Captura sin fecha',metrics,'Datos de plataforma independientes de las métricas de Twitch.');
+  });
+ }
+ out+='</div>';
+ out+='<div class="stats-detail-intro"><strong>CONSULTA DETALLADA</strong><span>Desplegá únicamente la fuente que necesitás revisar. Los registros completos permanecen disponibles sin ocupar toda la pantalla.</span></div>';
+ if(helix)out+=renderStatsSourceDetails('TWITCH HELIX','Muestreo propio · cobertura, actividad, categorías y sesiones',renderHelixDashboard(helix));
+ else out+=renderStatsSourceDetails('TWITCH HELIX','Seguimiento propio · sin captura disponible',renderHelixDashboard(null));
+ if(sully)out+=renderStatsSourceDetails('SULLYGNOME','Historial externo · transmisiones y desglose por juegos',renderSullyStats(sully));
+ else out+=renderStatsSourceDetails('SULLYGNOME','Historial externo · sin registro',renderSullyStats(null));
+ if(tmProfile)out+=renderStatsSourceDetails('TWITCHMETRICS','Analítica pública complementaria · muestra parcial',renderTwitchMetricsStats(helix));
+ else out+=renderStatsSourceDetails('TWITCHMETRICS','Fuente complementaria · sin registro para esta cuenta', '<div class="stats-empty"><strong>Sin datos cargados</strong>No hay un registro de TwitchMetrics disponible para esta cuenta.</div>');
+ const platformHtml=renderPlatformStats(hero);
+ if(platformHtml)out+=renderStatsSourceDetails('OTRAS PLATAFORMAS','Datos independientes de YouTube, Kick u otras cuentas vinculadas',platformHtml);
+ out+='<p class="stats-methodology-footer">Las fuentes no se suman entre sí. Cada indicador conserva su período, origen y método de captura. Los datos ausentes se muestran como no disponibles, nunca como cero.</p>';
+ out+='</div>';
+ return out;
 }
 function renderAutomaticTwitchClips(hero){
  const account=(hero?.accounts||[]).find(item=>item.platform==='twitch'&&item.account_type==='creator_channel');
