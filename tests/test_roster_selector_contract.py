@@ -220,7 +220,7 @@ class RosterComicCardsContractTests(unittest.TestCase):
 
     def test_profile_chapters_follow_directiva_without_duplicates(self):
         start = self.app.index("function renderHeroProfileTabs")
-        end = self.app.index("\\nfunction activateHeroProfileTab", start)
+        end = self.app.index("\nfunction activateHeroProfileTab", start)
         tabs = self.app[start:end]
         profile = tabs[tabs.index('id="profile-tab-perfil"'):tabs.index('id="profile-tab-estadisticas"')]
         bitacora = tabs[tabs.index('id="profile-tab-bitacora"'):]
