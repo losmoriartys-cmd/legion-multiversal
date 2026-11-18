@@ -1189,20 +1189,14 @@ function renderRosterMetricSummary(hero) {
 
 function getCreatorAudienceMetric(hero){
  const account=(hero?.accounts||[]).find(item=>item.account_type==='creator_channel')||(hero?.accounts||[])[0]||null;
- if(!account)return null;
- if(account.platform==='youtube'){
-  const platform=platformStatsData?.creators?.[platformStatsKey(hero)]?.platforms?.youtube,value=platform?.metrics?.subscribers,captured=platformStatsData?.updated_at?new Date(platformStatsData.updated_at):null;
-  const capturedLabel=captured&&!Number.isNaN(captured.getTime())?captured.toLocaleDateString('es-AR'):null;
-  return platform?.status==='verified'&&value!==null&&value!==undefined&&Number.isFinite(Number(value))?{value:Number(value),label:'Suscriptores · YouTube',source:'YouTube Data API',period:capturedLabel}:null;
- }
- if(account.platform==='twitch'){
-  const login=String(account.login||(account.url||'').split('/').filter(Boolean).pop()||'').replace(/^@/,'').toLowerCase();
-  const profile=twitchMetricsData?.channels?.[login],followers=profile?.metrics?.followers;
-  if(followers!==null&&followers!==undefined&&Number.isFinite(Number(followers)))return {value:Number(followers),label:'Seguidores · Twitch',source:'TwitchMetrics',period:profile.period_label||profile.period||null};
-  const sully=findSullyChannel(hero),total=sully?.summary?.followers_total??sully?.annual_summary_2026?.followers_total;
-  if(total!==null&&total!==undefined&&Number.isFinite(Number(total)))return {value:Number(total),label:'Seguidores · Twitch',source:'SullyGnome',period:sully.period?.start_date&&sully.period?.end_date?statsDate(sully.period.start_date)+' — '+statsDate(sully.period.end_date):'Período informado por la fuente'};
- }
- return null;
+ if(!account||account.platform!=='youtube')return null;
+ const platform=platformStatsData?.creators?.[platformStatsKey(hero)]?.platforms?.youtube;
+ const value=platform?.metrics?.subscribers;
+ const captured=platformStatsData?.updated_at?new Date(platformStatsData.updated_at):null;
+ const capturedLabel=captured&&!Number.isNaN(captured.getTime())?captured.toLocaleDateString('es-AR'):null;
+ return platform?.status==='verified'&&value!==null&&value!==undefined&&Number.isFinite(Number(value))
+  ?{value:Number(value),label:'Suscriptores · YouTube',source:'YouTube Data API',period:capturedLabel}
+  :null;
 }
 function getMostPlayedGames(hero,channel,sullyChannel){
  // Solo el historial acumulado permite afirmar cuáles son los juegos más jugados.
@@ -1236,7 +1230,7 @@ function renderRosterSelector() {
         const audienceHtml=audience?'<span class="comic-roster-stat comic-roster-stat-audience"><span>'+safe(audience.label)+'</span><b>'+safe(statsNumber(audience.value,0))+'</b><small>'+safe(audience.source+(audience.period?' · '+audience.period:''))+'</small></span>':'';
         const twitchAccount=(hero.accounts||[]).find(item=>item.platform==='twitch'&&item.account_type==='creator_channel');
         const twitchLogin=String(twitchAccount?.login||(twitchAccount?.url||'').split('/').filter(Boolean).pop()||'').replace(/^@/,'').toLowerCase();
-        const liveCounterHtml=twitchLogin?'<a class="comic-roster-live-counter" href="https://livecounts.nl/twitch-realtime/?u='+encodeURIComponent(twitchLogin)+'" target="_blank" rel="noopener noreferrer" aria-label="Abrir contador en vivo de seguidores de '+safe(getHeroDisplayName(hero))+'">SEGUIDORES EN VIVO ↗</a>':'';
+        const liveCounterHtml=twitchLogin?'<div class="comic-roster-live-counter-wrap"><iframe class="comic-roster-live-counter" src="https://livecounts.nl/twitch-realtime/embed/?u='+encodeURIComponent(twitchLogin)+'" title="Seguidores en vivo de '+safe(getHeroDisplayName(hero))+'" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe><a class="comic-roster-live-counter-link" href="https://livecounts.nl/twitch-realtime/?u='+encodeURIComponent(twitchLogin)+'" target="_blank" rel="noopener noreferrer">ABRIR CONTADOR ↗</a></div>':'';
         const averageHtml=average==null?'':'<span class="comic-roster-stat"><span>Media de viewers</span><b class="comic-roster-stat-purple">'+safe(statsNumber(average,1))+'</b></span>';
         const platformName=String(account?.platform||'CANAL').toUpperCase();
         const games=getMostPlayedGames(hero,channel,findSullyChannel(hero));
