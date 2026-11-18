@@ -1182,7 +1182,7 @@ function renderRosterSelector() {
         const followerLabel = followerValue == null ? 'EN ACTUALIZACIÓN' : statsNumber(followerValue,0);
         const averageLabel = average == null ? '—' : statsNumber(average,1);
         const platformName = String(account?.platform || 'CANAL').toUpperCase();
-        const game = state?.channel?.current_game || (hero.creator_type === 'video_creator' ? 'CONTENIDO EDUCATIVO' : 'JUEGOS POR DOCUMENTAR');
+        const historicalGames=findSullyChannel(hero)?.game_breakdown||[]; const mostPlayed=historicalGames.filter(item=>item&&item.name&&Number.isFinite(Number(item.stream_hours))).sort((a,b)=>Number(b.stream_hours)-Number(a.stream_hours))[0]; const recentGame=state?.channel?.current_game||channel?.window?.current_game||''; const game=mostPlayed?.name?'MÁS JUGADO · '+mostPlayed.name:recentGame?'JUEGO RECIENTE · '+recentGame:(hero.creator_type==='video_creator'?'CONTENIDO EDUCATIVO':'JUEGO POR DOCUMENTAR');
         const specialties = (hero.areas || []).filter(Boolean).slice(0,3);
         const identity = hero.codename || hero.characterRole || 'INTEGRANTE DE LA LEGIÓN';
         const activityBadge = isLive ? 'EN VIVO AHORA' : activeThisWeek ? 'ACTIVO ESTA SEMANA' : 'ACTIVIDAD NO CONFIRMADA';
