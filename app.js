@@ -364,11 +364,15 @@ function renderStatsDashboard(hero,helix,sully){
  if(helix){
   const w=helix.window||{};
   const samples=Array.isArray(helix.snapshots)?helix.snapshots.filter(x=>x?.sampled_at):[];
+  const sampleDates=samples.map(x=>String(x.sampled_at).slice(0,10)).filter(x=>/^\d{4}-\d{2}-\d{2}$/.test(x)).sort();
+  const sourcePeriod=w.period_start&&w.period_end
+   ?statsDate(String(w.period_start).slice(0,10))+' — '+statsDate(String(w.period_end).slice(0,10))
+   :sampleDates.length?statsDate(sampleDates[0])+' — '+statsDate(sampleDates[sampleDates.length-1]):'Sin captura disponible';
   const interval=Number(instituteStatsData?.sampling_interval_minutes)||55;
   const first=samples.length?Date.parse(samples[0].sampled_at):NaN,last=samples.length?Date.parse(samples[samples.length-1].sampled_at):NaN;
   const expected=Number.isFinite(first)&&Number.isFinite(last)&&last>=first?Math.floor((last-first)/(interval*60000))+1:0;
   const coverage=expected?Math.min(100,samples.length/expected*100):null;
-  out+=renderStatsExecutiveSource('TWITCH HELIX · SEGUIMIENTO PROPIO','Muestra observada',[
+  out+=renderStatsExecutiveSource('TWITCH HELIX · SEGUIMIENTO PROPIO',sourcePeriod,[
    {label:'Directos detectados',value:w.streams_observed==null?null:statsNumber(w.streams_observed,0)},
    {label:'Promedio muestreado',value:w.average_viewers_sampled==null?null:statsNumber(w.average_viewers_sampled,1)},
    {label:'Pico observado',value:w.peak_viewers_sampled==null?null:statsNumber(w.peak_viewers_sampled,0)},
