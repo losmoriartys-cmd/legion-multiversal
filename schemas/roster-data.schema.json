@@ -200,7 +200,8 @@
           "platform",
           "username",
           "character_alias",
-          "variants"
+          "variants",
+          "short_description"
         ],
         "properties": {
           "display_name": {
@@ -249,6 +250,10 @@
                 }
               }
             }
+          },
+          "short_description": {
+            "type": "string",
+            "minLength": 12
           }
         }
       }

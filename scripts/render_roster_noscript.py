@@ -24,12 +24,11 @@ def generated_list(roster: dict) -> str:
     heroes = roster.get("heroes") or []
     rows = []
     for hero in heroes:
-        name = html.escape(str(hero.get("display_name") or hero.get("name") or "Integrante"), quote=True)
-        identity = ""
-        if hero.get("identity_scope") == "shared_project":
-            people = [str(person) for person in hero.get("represented_people") or [] if str(person).strip()]
-            if people:
-                identity = " · proyecto compartido de " + html.escape(" y ".join(people), quote=True)
+        registry = roster.get("name_registry") or {}
+        canonical = registry.get(str(hero.get("id") or ""), {})
+        name = html.escape(str(canonical.get("display_name") or hero.get("display_name") or hero.get("name") or "Integrante"), quote=True)
+        role = html.escape(str(hero.get("role_label") or "CREADOR"), quote=True)
+        description = html.escape(str(canonical.get("short_description") or "Integrante del roster de Legión Multiversal."), quote=True)
         links = []
         for account in hero.get("accounts") or []:
             platform = str(account.get("platform") or "").lower()
@@ -39,7 +38,7 @@ def generated_list(roster: dict) -> str:
                 continue
             links.append('<a href="' + html.escape(url, quote=True) + '" target="_blank" rel="noopener noreferrer">' + html.escape(platform.upper()) + '</a>')
         suffix = " · ".join(links) if links else "plataformas públicas pendientes de confirmar"
-        rows.append("                <li><strong>" + name + "</strong>" + identity + " · " + suffix + "</li>")
+        rows.append("                <li><strong>" + name + "</strong> · <b>" + role + "</b> · " + description + " · " + suffix + "</li>")
     return "<ul>\n" + "\n".join(rows) + "\n              </ul>"
 
 

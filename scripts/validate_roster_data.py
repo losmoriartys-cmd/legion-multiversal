@@ -59,6 +59,8 @@ def validate_roster(roster: dict) -> list[str]:
             errors.append("{}: display_name no coincide con name_registry.".format(hero.get("name") or index))
         if identity.get("character_alias") != hero.get("codename"):
             errors.append("{}: character_alias no coincide con codename.".format(hero.get("name") or index))
+        if not str(identity.get("short_description") or "").strip():
+            errors.append("{}: falta short_description en name_registry.".format(hero.get("name") or index))
         accounts = hero.get("accounts") or []
         account = next((item for item in accounts if item.get("platform") == identity.get("platform")), None)
         if not account:

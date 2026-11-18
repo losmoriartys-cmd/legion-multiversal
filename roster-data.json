@@ -804,7 +804,8 @@
           "display_name": "Ari",
           "variants": []
         }
-      ]
+      ],
+      "short_description": "Proyecto compartido de Demian y Ari; streaming cooperativo y gaming en comunidad."
     },
     "rod3r1k": {
       "display_name": "ROD3R1K",
@@ -814,7 +815,8 @@
       "variants": [
         "ROD3RIK",
         "TheR0d3R1k"
-      ]
+      ],
+      "short_description": "Creador de contenido en Twitch y director de la Legión."
     },
     "lady-moriarty": {
       "display_name": "LADY MORIARTY",
@@ -824,7 +826,8 @@
       "variants": [
         "LADYMORIARTY",
         "LADYMORIARTY01"
-      ]
+      ],
+      "short_description": "Creadora de contenido en directo; videojuegos, terror y experiencias cooperativas."
     },
     "ardipii": {
       "display_name": "ARDIPII",
@@ -834,7 +837,8 @@
       "variants": [
         "Ardipi",
         "ARDIPI"
-      ]
+      ],
+      "short_description": "Creador de contenido en directo e integrante del roster."
     },
     "akuma": {
       "display_name": "AKUMA",
@@ -843,7 +847,8 @@
       "character_alias": "EL INFERNAL",
       "variants": [
         "Akuma Zoldyck"
-      ]
+      ],
+      "short_description": "Docente y creador; acompaña a nuevos integrantes y participa en sesiones de gaming."
     },
     "dave-nexus": {
       "display_name": "DAVE — NEXUS",
@@ -853,7 +858,8 @@
       "variants": [
         "Dave",
         "DAVE NEXUS"
-      ]
+      ],
+      "short_description": "Estudiante y nuevo integrante en etapa de formación."
     },
     "pato-oratoris": {
       "display_name": "PATO — ORATORIS",
@@ -864,7 +870,8 @@
         "Patoexpone",
         "Pato",
         "PATOTEEXPLICA"
-      ]
+      ],
+      "short_description": "Colaborador de YouTube; divulgación, programación y charlas motivacionales."
     },
     "habitos": {
       "display_name": "HABITOS",
@@ -874,7 +881,8 @@
       "variants": [
         "Mismo Habitos",
         "Hábitos Atómicos"
-      ]
+      ],
+      "short_description": "Colaborador; reflexión, filosofía, motivación y videojuegos."
     }
   }
 }
