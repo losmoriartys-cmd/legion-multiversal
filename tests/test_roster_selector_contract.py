@@ -93,7 +93,7 @@ class RosterComicCardsContractTests(unittest.TestCase):
         # Asset references remain in the roster data, not in the dossier renderer.
         self.assertNotIn("hero.fullbody || hero.img", self.app)
         self.assertNotIn("hero.character_card", self.app)
-        self.assertNotIn("VER CARTA DEL PERSONAJE", self.app)
+        self.assertIn("VER CARTA COMPLETA", self.app)
 
     def test_cards_use_real_metrics_and_no_fixed_schedule(self):
         start = self.app.index("function renderRosterSelector()")
@@ -150,9 +150,9 @@ class RosterComicCardsContractTests(unittest.TestCase):
 
     def test_commercial_dossier_shows_auditable_relative_performance_bars(self):
         self.assertIn("function renderCommercialQuickView(hero)", self.app)
-        self.assertIn("renderCommercialQuickView(hero)", self.app)
-        self.assertIn("hero-profile-metric-scale", self.app)
-        self.assertIn("metricPeerValues", self.app)
+        self.assertNotIn("renderCommercialQuickView(hero)", self.app.split("function renderHeroProfileTabs", 1)[1].split("function activateHeroProfileTab", 1)[0])
+        self.assertIn("renderStatsDashboard(hero,channel,sullyChannel)", self.app)
+        self.assertIn("clips.slice(0,4)", self.app)
         self.assertIn("no es un ranking ni una métrica de plataforma", self.app)
         self.assertIn("average_viewers_sampled", self.app)
         self.assertIn("peak_viewers_sampled", self.app)
@@ -160,11 +160,11 @@ class RosterComicCardsContractTests(unittest.TestCase):
         start = self.app.index("function renderHeroProfileTabs")
         end = self.app.index("\nfunction activateHeroProfileTab", start)
         tabs = self.app[start:end]
-        self.assertIn('''id="profile-tab-perfil" role="tabpanel">'+overview+brandHtml''', tabs)
+        self.assertIn('''id="profile-tab-perfil" role="tabpanel">'+overview''', tabs)
         self.assertIn("hero-profile-epic-codes", tabs)
         self.assertIn("renderEpicCreatorCodeCard", tabs)
-        self.assertNotIn("'+logHtml+brandHtml+'</section>'", tabs)
-        self.assertNotIn('''ESTADÍSTICAS DEL CANAL</h4><div class="hero-profile-metric-grid"'+metricHtml''', tabs)
+        self.assertIn("'+logHtml+brandHtml+((hero.id", tabs)
+        self.assertNotIn('''id="profile-tab-perfil" role="tabpanel">'+overview+brandHtml''', tabs)
 
     def test_only_one_roster_directory_remains_in_the_chapter(self):
         self.assertIn('id="roster-selector"', self.html)
