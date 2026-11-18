@@ -185,6 +185,7 @@ class RosterComicCardsContractTests(unittest.TestCase):
         self.assertIn("Object.entries(platformProfile.platforms)", renderer)
         self.assertIn("if(p.status!=='verified')return;", renderer)
         self.assertIn("sources.push(card)", renderer)
+        self.assertIn("followers_total", renderer)
         self.assertIn("if(!cards.length)return '';", self.app)
         self.assertIn("item.value!==null", self.app)
         self.assertNotIn("renderStatsSourceDetails('TWITCH HELIX'", renderer)
