@@ -127,20 +127,24 @@ def compare(baseline, current, include_platform=True, approved_editorial=None):
             c = cur.get(f)
             if c is None:
                 problems.append(f'creator-records "{hid}": se perdió el campo "{f}"')
-            elif 'count' in meta and c.get('count') != meta['count']:
-                problems.append(f'creator-records "{hid}.{f}": {meta["count"]} -> {c.get("count")} elementos')
-            elif c.get('sha256') != meta['sha256']:
+                continue
+            count_changed = 'count' in meta and c.get('count') != meta['count']
+            content_changed = c.get('sha256') != meta['sha256']
+            if count_changed or content_changed:
                 approved_items = ((approved_editorial or {}).get('creator_records', {})
                                   .get(hid, {}).get(f))
                 approved = (
                     (isinstance(approved_items, list)
-                     and len(approved_items) == meta.get('count')
+                     and len(approved_items) == c.get('count')
                      and _list_hash(approved_items) == c.get('sha256'))
                     or (isinstance(approved_items, dict)
                         and _h(approved_items) == c.get('sha256'))
                 )
                 if not approved:
-                    problems.append(f'creator-records "{hid}.{f}": el contenido cambió y no coincide con una actualización editorial aprobada')
+                    if count_changed:
+                        problems.append(f'creator-records "{hid}.{f}": {meta["count"]} -> {c.get("count")} elementos')
+                    else:
+                        problems.append(f'creator-records "{hid}.{f}": el contenido cambió y no coincide con una actualización editorial aprobada')
     for hid, meta in (baseline.get('platform_stats', {}).items() if include_platform else []):
         cur = current['platform_stats'].get(hid)
         if cur is None:
@@ -226,6 +230,21 @@ class Tests(unittest.TestCase):
         edited = {'channels': {'pato-oratoris': {'milestones': [], 'highlights': [], 'youtube_videos': v}}}
         p = compare(base, snapshot(edited, PLAT_OLD, ['pato-oratoris'], {}))
         self.assertTrue(any('el contenido cambió' in m for m in p))
+
+    def test_approved_editorial_list_additions_allow_count_change_exactly(self):
+        base = {'creator_records': {'pato-oratoris': {
+            'collaborations': {'count': 0, 'sha256': _list_hash([])}
+        }}, 'platform_stats': {}}
+        items = [
+            {'title': 'Acceso a keys · Lurkit', 'url': 'https://www.lurkit.com/'},
+            {'title': 'Acceso a keys · Keymailer', 'url': 'https://www.keymailer.co/'}
+        ]
+        current = {'creator_records': {'pato-oratoris': {
+            'collaborations': {'count': 2, 'sha256': _list_hash(items)}
+        }}, 'platform_stats': {}}
+        approved = {'creator_records': {'pato-oratoris': {'collaborations': items}}}
+        self.assertEqual(compare(base, current, approved_editorial=approved), [])
+        self.assertTrue(any('0 -> 2 elementos' in problem for problem in compare(base, current)))
 
     def test_aprobacion_editorial_es_exacta_y_no_cambia_el_baseline(self):
         base = self._snap(REC_OLD)
