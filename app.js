@@ -363,7 +363,7 @@ function renderStatsDashboard(hero,helix,sully){
  }
  if(sully){
   const m=sully.annual_summary_2026||sully.summary||{},period=sully.period?.start_date&&sully.period?.end_date?statsDate(sully.period.start_date)+' — '+statsDate(sully.period.end_date):sully.annual_summary_2026?'Acumulado 2026':'Historial disponible';
-  const metrics=[{label:'Transmisiones',value:m.streams??m.streams_count??null},{label:'Horas transmitidas',value:m.hours_streamed??m.airtime_hours??(m.airtime_minutes!=null?statsNumber(m.airtime_minutes/60,1)+' h':null)},{label:'Horas vistas',value:m.hours_watched??null},{label:'Promedio de espectadores',value:m.average_viewers??m.average_viewers_duration_weighted??null},{label:'Pico de espectadores',value:m.peak_viewers??null},{label:'Seguidores ganados',value:m.followers_gained??m.followers_gain_reported??null}];
+  const metrics=[{label:'Transmisiones',value:m.streams??m.streams_count??null},{label:'Horas transmitidas',value:m.hours_streamed??m.airtime_hours??(m.airtime_minutes!=null?statsNumber(m.airtime_minutes/60,1)+' h':null)},{label:'Horas vistas',value:m.hours_watched??null},{label:'Promedio de espectadores',value:m.average_viewers??m.average_viewers_duration_weighted??null},{label:'Pico de espectadores',value:m.peak_viewers??null},{label:'Seguidores',value:m.followers_total??null},{label:'Seguidores ganados',value:m.followers_gained??m.followers_gain_reported??null}];
   const card=renderStatsExecutiveSource('SULLYGNOME · HISTORIAL',period,metrics,'Historial externo del canal; se mantiene separado de otras fuentes.',sully.source_url||null);if(card)sources.push(card);
  }
  if(tmProfile){
