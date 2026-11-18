@@ -13,17 +13,17 @@
     "ther0d3r1k"
   ],
   "collection": {
-    "started_at": "2026-11-18T22:25:13Z",
+    "started_at": "2026-11-18T23:25:12Z",
     "expected_channels": 7,
     "resolved_channels": 7,
     "sampled_channels": [
-      "habitos_atomicos",
       "ladymoriarty01",
       "losmoriartys",
       "ther0d3r1k",
       "akumazoldyck",
       "ardipii",
-      "daved0608"
+      "daved0608",
+      "habitos_atomicos"
     ],
     "skipped_channels": [],
     "complete": true,
@@ -39,7 +39,7 @@
     "elgabii090"
   ],
   "channel_registry_note": "Los canales archivados se conservan para consulta histórica y no se incluyen en los indicadores del roster activo.",
-  "updated_at": "2026-11-18T22:25:13Z",
+  "updated_at": "2026-11-18T23:25:12Z",
   "channels": {
     "ladymoriarty01": {
       "login": "ladymoriarty01",
@@ -54,11 +54,11 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "last_status_at": "2026-11-18T22:25:13Z",
-      "last_snapshot_at": "2026-11-18T22:25:13Z",
-      "updated_at": "2026-11-18T22:25:13Z",
+      "last_status_at": "2026-11-18T23:25:12Z",
+      "last_snapshot_at": "2026-11-18T23:25:12Z",
+      "updated_at": "2026-11-18T23:25:12Z",
       "window": {
-        "samples_total": 356,
+        "samples_total": 357,
         "live_samples": 13,
         "streams_observed": 6,
         "average_viewers_sampled": 6.6,
@@ -3373,6 +3373,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-18T23:25:12Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -3384,19 +3393,19 @@
       "twitch_url": "https://twitch.tv/ther0d3r1k",
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
-      "live": false,
-      "current_viewers": null,
-      "current_game": null,
-      "current_title": null,
-      "stream_started_at": null,
-      "last_status_at": "2026-11-18T22:25:13Z",
-      "last_snapshot_at": "2026-11-18T22:25:13Z",
-      "updated_at": "2026-11-18T22:25:13Z",
+      "live": true,
+      "current_viewers": 18,
+      "current_game": "Apex Legends",
+      "current_title": "SE VIENE UN JUEGASOO!   🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
+      "stream_started_at": "2026-11-18T22:53:08Z",
+      "last_status_at": "2026-11-18T23:25:12Z",
+      "last_snapshot_at": "2026-11-18T23:25:12Z",
+      "updated_at": "2026-11-18T23:25:12Z",
       "window": {
-        "samples_total": 356,
-        "live_samples": 39,
-        "streams_observed": 10,
-        "average_viewers_sampled": 23.7,
+        "samples_total": 357,
+        "live_samples": 40,
+        "streams_observed": 11,
+        "average_viewers_sampled": 23.5,
         "peak_viewers_sampled": 51,
         "observed_live_hours": 23.55,
         "estimated_hours_watched": 549.49,
@@ -3410,9 +3419,9 @@
           },
           {
             "name": "Apex Legends",
-            "live_samples": 9,
-            "streams_observed": 5,
-            "average_viewers_sampled": 23.9,
+            "live_samples": 10,
+            "streams_observed": 6,
+            "average_viewers_sampled": 23.3,
             "peak_viewers_sampled": 43
           },
           {
@@ -3552,9 +3561,9 @@
           },
           {
             "date": "2026-11-18",
-            "live_samples": 2,
-            "streams_observed": 1,
-            "average_viewers_sampled": 30.5,
+            "live_samples": 3,
+            "streams_observed": 2,
+            "average_viewers_sampled": 26.3,
             "peak_viewers_sampled": 51
           }
         ],
@@ -6764,6 +6773,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-18T23:25:12Z",
+          "is_live": true,
+          "viewer_count": 18,
+          "game_name": "Apex Legends",
+          "title": "SE VIENE UN JUEGASOO!   🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
+          "stream_id": "319643979252",
+          "started_at": "2026-11-18T22:53:08Z"
         }
       ]
     },
@@ -7426,11 +7444,11 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "last_status_at": "2026-11-18T22:25:13Z",
-      "last_snapshot_at": "2026-11-18T22:25:13Z",
-      "updated_at": "2026-11-18T22:25:13Z",
+      "last_status_at": "2026-11-18T23:25:12Z",
+      "last_snapshot_at": "2026-11-18T23:25:12Z",
+      "updated_at": "2026-11-18T23:25:12Z",
       "window": {
-        "samples_total": 356,
+        "samples_total": 357,
         "live_samples": 6,
         "streams_observed": 3,
         "average_viewers_sampled": 7.2,
@@ -10675,6 +10693,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-18T23:25:12Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -10691,11 +10718,11 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "last_status_at": "2026-11-18T22:25:13Z",
-      "last_snapshot_at": "2026-11-18T22:25:13Z",
-      "updated_at": "2026-11-18T22:25:13Z",
+      "last_status_at": "2026-11-18T23:25:12Z",
+      "last_snapshot_at": "2026-11-18T23:25:12Z",
+      "updated_at": "2026-11-18T23:25:12Z",
       "window": {
-        "samples_total": 356,
+        "samples_total": 357,
         "live_samples": 26,
         "streams_observed": 13,
         "average_viewers_sampled": 6.7,
@@ -14038,6 +14065,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-18T23:25:12Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -14054,11 +14090,11 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "last_status_at": "2026-11-18T22:25:13Z",
-      "last_snapshot_at": "2026-11-18T22:25:13Z",
-      "updated_at": "2026-11-18T22:25:13Z",
+      "last_status_at": "2026-11-18T23:25:12Z",
+      "last_snapshot_at": "2026-11-18T23:25:12Z",
+      "updated_at": "2026-11-18T23:25:12Z",
       "window": {
-        "samples_total": 356,
+        "samples_total": 357,
         "live_samples": 15,
         "streams_observed": 9,
         "average_viewers_sampled": 1.9,
@@ -17359,6 +17395,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-18T23:25:12Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -17991,11 +18036,11 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "last_status_at": "2026-11-18T22:25:13Z",
-      "last_snapshot_at": "2026-11-18T22:25:13Z",
-      "updated_at": "2026-11-18T22:25:13Z",
+      "last_status_at": "2026-11-18T23:25:12Z",
+      "last_snapshot_at": "2026-11-18T23:25:12Z",
+      "updated_at": "2026-11-18T23:25:12Z",
       "window": {
-        "samples_total": 356,
+        "samples_total": 357,
         "live_samples": 72,
         "streams_observed": 17,
         "average_viewers_sampled": 4.7,
@@ -21338,6 +21383,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-18T23:25:12Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -21349,19 +21403,19 @@
       "twitch_url": "https://twitch.tv/losmoriartys",
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
-      "live": false,
-      "current_viewers": null,
-      "current_game": null,
-      "current_title": null,
-      "stream_started_at": null,
-      "last_status_at": "2026-11-18T22:25:13Z",
-      "last_snapshot_at": "2026-11-18T22:25:13Z",
-      "updated_at": "2026-11-18T22:25:13Z",
+      "live": true,
+      "current_viewers": 18,
+      "current_game": "Gun Restoration Shop Simulator",
+      "current_title": "[Publi] Hoy hacemos Tienda de #GunRestoration ShopSimulator",
+      "stream_started_at": "2026-11-18T22:58:09Z",
+      "last_status_at": "2026-11-18T23:25:12Z",
+      "last_snapshot_at": "2026-11-18T23:25:12Z",
+      "updated_at": "2026-11-18T23:25:12Z",
       "window": {
-        "samples_total": 356,
-        "live_samples": 17,
-        "streams_observed": 8,
-        "average_viewers_sampled": 16.5,
+        "samples_total": 357,
+        "live_samples": 18,
+        "streams_observed": 9,
+        "average_viewers_sampled": 16.6,
         "peak_viewers_sampled": 31,
         "observed_live_hours": 7.25,
         "estimated_hours_watched": 99.46,
@@ -21407,6 +21461,13 @@
             "streams_observed": 1,
             "average_viewers_sampled": 7.0,
             "peak_viewers_sampled": 7
+          },
+          {
+            "name": "Gun Restoration Shop Simulator",
+            "live_samples": 1,
+            "streams_observed": 1,
+            "average_viewers_sampled": 18.0,
+            "peak_viewers_sampled": 18
           }
         ],
         "daily_activity": [
@@ -21486,6 +21547,13 @@
             "streams_observed": 1,
             "average_viewers_sampled": 7.0,
             "peak_viewers_sampled": 7
+          },
+          {
+            "date": "2026-11-18",
+            "live_samples": 1,
+            "streams_observed": 1,
+            "average_viewers_sampled": 18.0,
+            "peak_viewers_sampled": 18
           }
         ],
         "method": "Muestreo propio con cadencia observada cercana a 55 minutos, variable por la programación de GitHub Actions; horas estimadas solo entre muestras consecutivas del mismo directo cuando el intervalo no supera 110 minutos. Categorías y evolución diaria se calculan sobre las muestras observadas."
@@ -24694,6 +24762,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-18T23:25:12Z",
+          "is_live": true,
+          "viewer_count": 18,
+          "game_name": "Gun Restoration Shop Simulator",
+          "title": "[Publi] Hoy hacemos Tienda de #GunRestoration ShopSimulator",
+          "stream_id": "319488527734",
+          "started_at": "2026-11-18T22:58:09Z"
         }
       ]
     }
