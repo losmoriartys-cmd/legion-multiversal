@@ -215,7 +215,7 @@ class RosterComicCardsContractTests(unittest.TestCase):
 
     def test_approved_dossier_directive_is_kept_in_repository(self):
         directive = (ROOT / "DIRECTIVA_ROSTER_EXPEDIENTES.md").read_text(encoding="utf-8")
-        for criterion in ("Pato / Oratoris", "máximo **4 clips**", "Bitácora", "Lurkit", "Keymailer", "MÁS JUGADO", "cabecera global"):
+        for criterion in ("Pato / Oratoris", "4 clips por streamer"", "Bitácora", "Lurkit", "Keymailer", "MÁS JUGADO", "cabecera global"):
             self.assertIn(criterion, directive)
 
     def test_profile_chapters_follow_directiva_without_duplicates(self):
