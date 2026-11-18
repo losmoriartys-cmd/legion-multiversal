@@ -231,8 +231,8 @@ class RosterComicCardsContractTests(unittest.TestCase):
         self.assertIn("clips.slice(0,4)", tabs)
         self.assertIn("hero-profile-character-card-link", self.app)
         self.assertIn("const uniqueLinks=links.filter", self.app)
-        self.assertIn("LURKIT", bitacora)
-        self.assertIn("KEYMAILER", bitacora)
+        self.assertIn("LURKIT", self.app)
+        self.assertIn("KEYMAILER", self.app)
         self.assertIn("hero-profile-epic-codes", bitacora)
         self.assertNotIn("renderCommercialQuickView(hero)", bitacora)
 
