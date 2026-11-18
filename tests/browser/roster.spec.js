@@ -39,7 +39,10 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
     const card = page.locator('.comic-roster-card[data-creator-id="' + creator.id + '"]');
     await expect(card).toHaveCount(1);
     await expect(card).toContainText('VER PERFIL');
-    await expect(card.locator('.comic-roster-stat')).toHaveCount(2);
+    const expectedAudience = {'rod3r1k':'5.188','lady-moriarty':'180','akuma':'142','pato-oratoris':'56'};
+    if (expectedAudience[creator.id]) await expect(card.locator('.comic-roster-stat-audience b')).toHaveText(expectedAudience[creator.id]);
+    else await expect(card.locator('.comic-roster-stat-audience')).toHaveCount(0);
+
     await card.click();
 
     const dossier = page.locator('#hero-profile-page');
@@ -50,7 +53,12 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
       return header && profileHead ? profileHead.y >= header.y + header.height - 1 : false;
     }).toBe(true);
     await expect(profilePanel).toHaveClass(/is-active/);
-    await expect(dossier.locator('#profile-tab-perfil .hero-profile-integrated-games')).toBeVisible();
+    if (creator.id === 'pato-oratoris') await expect(dossier.locator('#profile-tab-perfil .hero-profile-integrated-games')).toHaveCount(0);
+    else {
+      const gamesSection = dossier.locator('#profile-tab-perfil .hero-profile-integrated-games');
+      await expect(gamesSection).toBeVisible();
+      await expect(gamesSection).not.toContainText(/muestras|observaciones/i);
+    }
     await expect(dossier.locator('#profile-tab-perfil .hero-profile-brand')).toHaveCount(0);
     await expect(page.locator('#roster-home')).toBeHidden();
     await expect(dossier).toContainText(creator.name);
@@ -73,12 +81,9 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
     expect(dossierImageStyle.position).toContain('0%');
     // El expediente no repite full-body ni carta: el carnet identifica al streamer.
     await expect(dossier.locator('.hero-profile-character-art')).toHaveCount(0);
-    const internalArt = dossier.locator('#profile-tab-perfil .hero-profile-internal-art img');
-    await expect(internalArt).toBeVisible();
-    await expect.poll(() => internalArt.evaluate(img => img.naturalWidth)).toBeGreaterThan(0);
-    const artBox = await internalArt.boundingBox();
-    expect(artBox.width).toBeLessThanOrEqual(220);
-    expect(artBox.height).toBeLessThanOrEqual(230);
+    await expect(dossier.locator('.hero-profile-internal-art')).toHaveCount(0);
+    await expect(dossier.locator('.hero-profile-quote')).toHaveCount(0);
+    await expect(dossier.locator('.hero-profile-sidebar-quote')).toHaveCount(1);
     await expect(dossier.locator('.hero-profile-character-card-link button')).toBeVisible();
     await expect(dossier.locator('.hero-profile-sidebar-quote')).toBeVisible();
     await expect(dossier.locator('.hero-profile-socials')).toBeVisible();
@@ -94,18 +99,13 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
     const statsPanel = dossier.locator('#profile-tab-estadisticas .stats-dashboard');
     await expect(statsPanel).toBeVisible();
     await expect(statsPanel.locator('.stats-executive-header')).toBeVisible();
-    expect(await statsPanel.locator('.stats-executive-grid .stats-executive-source').count()).toBeGreaterThanOrEqual(3);
-    const sourceDetails = statsPanel.locator('.stats-source-details');
-    const sourceCount = await sourceDetails.count();
-    expect(sourceCount).toBeGreaterThanOrEqual(3);
-    for (let sourceIndex = 0; sourceIndex < sourceCount; sourceIndex++) {
-      const sourceDetail = sourceDetails.nth(sourceIndex);
-      await expect(sourceDetail).not.toHaveAttribute('open', '');
-      await sourceDetail.locator('summary').click();
-      await expect(sourceDetail).toHaveAttribute('open', '');
-      await expect(sourceDetail.locator('.stats-source-details-body')).toBeVisible();
-      await sourceDetail.locator('summary').click();
-      await expect(sourceDetail).not.toHaveAttribute('open', '');
+    const sources = statsPanel.locator('.stats-executive-grid .stats-executive-source');
+    expect(await sources.count()).toBeGreaterThanOrEqual(1);
+    await expect(statsPanel.locator('.stats-source-details')).toHaveCount(0);
+    for (let sourceIndex = 0; sourceIndex < await sources.count(); sourceIndex++) {
+      const source = sources.nth(sourceIndex);
+      expect(await source.locator('.stats-executive-metrics > div').count()).toBeGreaterThan(0);
+      await expect(source).not.toContainText(/Sin métricas verificadas|Sin captura|Sin registro|No hay datos públicos cargados/i);
     }
     await profileTabs.filter({ hasText: 'BITÁCORA' }).click();
     await expect(dossier.locator('#profile-tab-bitacora .hero-profile-brand')).toBeVisible();
