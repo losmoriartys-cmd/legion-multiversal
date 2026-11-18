@@ -301,3 +301,26 @@ test('Pato conserva YouTube como fuente propia, sin mezclarlo con métricas Twit
   await expect(stats).not.toContainText('TWITCH · SEGUIMIENTO PÚBLICO');
   await expect(stats).not.toContainText('SULLYGNOME');
 });
+
+test('cada canal Twitch ofrece acceso al contador público en vivo y YouTube permanece separado', async ({ page }) => {
+  await page.goto('/');
+  await page.evaluate(() => switchChapter(2));
+  await page.locator('#chapter-transition').evaluate(el => el.classList.remove('play'));
+  const twitchCreators = [
+    ['moriartys', 'losmoriartys'],
+    ['rod3r1k', 'ther0d3r1k'],
+    ['lady-moriarty', 'ladymoriarty01'],
+    ['ardipii', 'ardipii'],
+    ['akuma', 'akumazoldyck'],
+    ['dave-nexus', 'daved0608'],
+    ['habitos', 'habitos_atomicos']
+  ];
+  for (const [id, login] of twitchCreators) {
+    const link = page.locator('.comic-roster-card[data-creator-id="' + id + '"] .comic-roster-live-counter');
+    await expect(link).toHaveAttribute('href', 'https://livecounts.nl/twitch-realtime/?u=' + login);
+    await expect(link).toContainText('SEGUIDORES EN VIVO');
+  }
+  const pato = page.locator('.comic-roster-card[data-creator-id="pato-oratoris"]');
+  await expect(pato.locator('.comic-roster-live-counter')).toHaveCount(0);
+  await expect(pato.locator('.comic-roster-stat-audience')).toContainText('YouTube');
+});
