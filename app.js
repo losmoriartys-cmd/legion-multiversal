@@ -2022,6 +2022,9 @@ function printHeroDossier(){
                 add('twitch-clips', loadTwitchClipsData);
             }
 
+            // El expediente de Bitácora incluye códigos Epic; cargar el registro central al abrir el Roster.
+            if (Number(chapterNum) === 2) add('epic-programs', loadEpicCreatorPrograms);
+
             // Las credenciales externas solo se consultan al entrar en Alianzas.
             if (Number(chapterNum) === 8) {
                 add('epic-programs', loadEpicCreatorPrograms);
