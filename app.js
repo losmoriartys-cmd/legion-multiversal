@@ -1191,8 +1191,9 @@ function getCreatorAudienceMetric(hero){
  const account=(hero?.accounts||[]).find(item=>item.account_type==='creator_channel')||(hero?.accounts||[])[0]||null;
  if(!account)return null;
  if(account.platform==='youtube'){
-  const platform=platformStatsData?.creators?.[platformStatsKey(hero)]?.platforms?.youtube,value=platform?.metrics?.subscribers;
-  return platform?.status==='verified'&&value!==null&&value!==undefined&&Number.isFinite(Number(value))?{value:Number(value),label:'Suscriptores · YouTube',source:'YouTube Data API',period:platformStatsData?.updated_at||null}:null;
+  const platform=platformStatsData?.creators?.[platformStatsKey(hero)]?.platforms?.youtube,value=platform?.metrics?.subscribers,captured=platformStatsData?.updated_at?new Date(platformStatsData.updated_at):null;
+  const capturedLabel=captured&&!Number.isNaN(captured.getTime())?captured.toLocaleDateString('es-AR'):null;
+  return platform?.status==='verified'&&value!==null&&value!==undefined&&Number.isFinite(Number(value))?{value:Number(value),label:'Suscriptores · YouTube',source:'YouTube Data API',period:capturedLabel}:null;
  }
  if(account.platform==='twitch'){
   const login=String(account.login||(account.url||'').split('/').filter(Boolean).pop()||'').replace(/^@/,'').toLowerCase();
