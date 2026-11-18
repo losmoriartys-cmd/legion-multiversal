@@ -91,7 +91,12 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
 
     // Validate chapters and their actual content for every roster member.
     await profileTabs.filter({ hasText: 'PERFIL' }).click();
-    await expect(dossier.locator('#profile-tab-perfil .hero-profile-integrated-games')).toBeVisible();
+    if (creator.id === 'pato-oratoris') await expect(dossier.locator('#profile-tab-perfil .hero-profile-integrated-games')).toHaveCount(0);
+    else {
+      const gamesSection = dossier.locator('#profile-tab-perfil .hero-profile-integrated-games');
+      await expect(gamesSection).toBeVisible();
+      await expect(gamesSection).not.toContainText(/muestras|observaciones/i);
+    }
     await expect(dossier.locator('#profile-tab-perfil .hero-profile-brand')).toHaveCount(0);
     await profileTabs.filter({ hasText: 'CLIPS' }).click();
     expect(await dossier.locator('#profile-tab-clips .hero-profile-clip').count()).toBeLessThanOrEqual(4);
@@ -125,6 +130,8 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
       await dossier.locator('.hero-profile-character-card-link button').click();
       await expect(page.locator('#hero-modal')).toHaveClass(/active/);
       await expect(page.locator('#hero-modal .modal-content')).toHaveClass(/comic-mode/);
+      await expect(page.locator('#hero-modal .hero-profile-internal-art')).toHaveCount(0);
+      await expect(page.locator('#hero-modal .hero-voice')).toHaveCount(1);
       await page.locator('#hero-modal .close-modal-btn').click();
       await expect(page.locator('#hero-modal')).not.toHaveClass(/active/);
       for (const [label, panel] of [
