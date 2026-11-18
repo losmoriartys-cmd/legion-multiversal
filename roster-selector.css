@@ -834,7 +834,9 @@
     line-height:1.15;
 }
 
-/* Acceso a contador externo en vivo; no se presenta como métrica histórica almacenada. */
-.comic-roster-live-counter{display:inline-flex;align-items:center;gap:.35rem;margin:.25rem 0 .4rem;color:#8ee8ff;font-size:.68rem;font-weight:800;letter-spacing:.055em;text-decoration:none;border-bottom:1px solid rgba(142,232,255,.45);width:max-content;max-width:100%}
-.comic-roster-live-counter:hover,.comic-roster-live-counter:focus-visible{color:#fff;border-color:currentColor;text-decoration:underline;text-underline-offset:3px}
-.comic-roster-live-counter:focus-visible{outline:2px solid #8ee8ff;outline-offset:3px}
+/* Contador numérico en vivo embebido; los históricos no se muestran como actuales. */
+.comic-roster-live-counter-wrap{display:grid;gap:.12rem;width:100%;max-width:100%;margin:.22rem 0 .35rem;min-width:0}
+iframe.comic-roster-live-counter{display:block;width:100%;height:54px;border:0;border-radius:3px;background:transparent;overflow:hidden}
+.comic-roster-live-counter-link{width:max-content;max-width:100%;color:#8ee8ff;font-size:.58rem;font-weight:800;letter-spacing:.05em;text-decoration:none}
+.comic-roster-live-counter-link:hover,.comic-roster-live-counter-link:focus-visible{color:#fff;text-decoration:underline;text-underline-offset:3px}
+.comic-roster-live-counter-link:focus-visible{outline:2px solid #8ee8ff;outline-offset:3px}
