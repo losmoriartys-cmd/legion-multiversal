@@ -53,7 +53,7 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
       return header && profileHead ? profileHead.y >= header.y + header.height - 1 : false;
     }).toBe(true);
     await expect(profilePanel).toHaveClass(/is-active/);
-    if (creator.id === 'pato-oratoris') await expect(dossier.locator('#profile-tab-perfil .hero-profile-integrated-games')).toHaveCount(0);
+    if (['pato-oratoris','ardipii'].includes(creator.id)) await expect(dossier.locator('#profile-tab-perfil .hero-profile-integrated-games')).toHaveCount(0);
     else {
       const gamesSection = dossier.locator('#profile-tab-perfil .hero-profile-integrated-games');
       await expect(gamesSection).toBeVisible();
@@ -91,7 +91,7 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
 
     // Validate chapters and their actual content for every roster member.
     await profileTabs.filter({ hasText: 'PERFIL' }).click();
-    if (creator.id === 'pato-oratoris') await expect(dossier.locator('#profile-tab-perfil .hero-profile-integrated-games')).toHaveCount(0);
+    if (['pato-oratoris','ardipii'].includes(creator.id)) await expect(dossier.locator('#profile-tab-perfil .hero-profile-integrated-games')).toHaveCount(0);
     else {
       const gamesSection = dossier.locator('#profile-tab-perfil .hero-profile-integrated-games');
       await expect(gamesSection).toBeVisible();
