@@ -1234,7 +1234,7 @@ function renderRosterSelector() {
         const averageHtml=average==null?'':'<span class="comic-roster-stat"><span>Media de viewers</span><b class="comic-roster-stat-purple">'+safe(statsNumber(average,1))+'</b></span>';
         const platformName=String(account?.platform||'CANAL').toUpperCase();
         const games=getMostPlayedGames(hero,channel,findSullyChannel(hero));
-        const game=games.length?'MÁS JUGADO · '+games[0]:(hero.creator_type==='video_creator'?'CONTENIDO EDUCATIVO':'JUEGOS POR DOCUMENTAR');
+        const gameLabel=games.length?'<em>🎮 MÁS JUGADO · '+safe(games[0])+'</em>':hero.creator_type==='video_creator'?'<em>CONTENIDO EDUCATIVO</em>':'';
         const specialties = (hero.areas || []).filter(Boolean).slice(0,3);
         const identity = hero.codename || hero.characterRole || 'INTEGRANTE DE LA LEGIÓN';
         const activityBadge = isLive ? 'EN VIVO AHORA' : activeThisWeek ? 'ACTIVO ESTA SEMANA' : 'ACTIVIDAD NO CONFIRMADA';
@@ -1242,7 +1242,7 @@ function renderRosterSelector() {
         return '<button type="button" class="roster-selector-tile comic-roster-card" data-roster-select="' + index + '" data-creator-id="' + safe(hero.id || hero.slug) + '" data-roster-role="' + safe(hero.role || 'member') + '" aria-label="Abrir Bitácora de ' + safe(getHeroDisplayName(hero)) + '">' +
           '<span class="comic-roster-photo">' +
             (hero.portrait ? '<img src="' + safe(hero.portrait) + '" alt="Fotografía carnet de ' + safe(getHeroDisplayName(hero)) + '" loading="' + (index < 4 ? 'eager' : 'lazy') + '" decoding="async">' : '<span class="roster-selector-no-portrait">' + safe((hero.display_name || hero.name || '?').slice(0,1)) + '</span>') +
-            '<span class="comic-roster-photo-shade"></span><span class="comic-roster-photo-copy"><small>' + safe(identity) + '</small><strong>' + safe(getHeroDisplayName(hero)) + '</strong><em>🎮 ' + safe(game) + '</em></span>' + liveBadge +
+            '<span class="comic-roster-photo-shade"></span><span class="comic-roster-photo-copy"><small>' + safe(identity) + '</small><strong>' + safe(getHeroDisplayName(hero)) + '</strong>' + gameLabel + '</span>' + liveBadge +
           '</span>' +
           '<span class="comic-roster-card-data"><span class="comic-roster-badges"><b class="comic-roster-frequency">RITMO: EN SEGUIMIENTO</b><b class="comic-roster-activity">' + safe(activityBadge) + '</b></span>' +
             (lastLive ? '<span class="comic-roster-last-live">ÚLTIMA ACTIVIDAD OBSERVADA: ' + safe(lastLiveDate) + '</span>' : '') +
