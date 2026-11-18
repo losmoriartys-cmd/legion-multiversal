@@ -94,6 +94,11 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
     }
 
     if (creator.id === 'moriartys') {
+      await dossier.locator('.hero-profile-character-card-link button').click();
+      await expect(page.locator('#hero-modal')).toHaveClass(/active/);
+      await expect(page.locator('#hero-modal .comic-mode')).toBeVisible().catch(() => {});
+      await page.locator('#hero-modal .close-modal-btn').click();
+      await expect(page.locator('#hero-modal')).not.toHaveClass(/active/);
       for (const [label, panel] of [
         ['PERFIL', 'perfil'],
         ['ESTADÍSTICAS', 'estadisticas'],
