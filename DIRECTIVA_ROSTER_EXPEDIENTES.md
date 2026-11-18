@@ -108,3 +108,33 @@ No considerar la implementación terminada por tests verdes solamente. Revisar l
 
 ## 12. Regla de cambios
 Esta directiva solo puede modificarse con aprobación explícita del usuario. Si una limitación técnica impide cumplir un punto, reportarla, explicar alternativas y pedir decisión; no sustituir silenciosamente el criterio.
+
+
+## 13. Estadísticas — arquitectura ejecutiva común aprobada el 18 de noviembre de 2026
+
+La pestaña Estadísticas de los ocho expedientes debe utilizar exactamente la misma arquitectura editorial y de interacción. No se admite resolver el problema solamente para ROD3R1K ni dejar perfiles con una estructura visual distinta.
+
+### Vista inicial
+- Encabezado compacto «Archivo de rendimiento» con nombre del creador y una explicación breve.
+- Panel ejecutivo con tarjetas de fuentes independientes: Twitch Helix, SullyGnome, TwitchMetrics y otras plataformas vinculadas cuando existan datos.
+- Cada tarjeta muestra un máximo de cuatro indicadores relevantes, el período/ventana y una nota metodológica breve.
+- No sumar ni promediar datos de fuentes diferentes. No comparar cifras incompatibles como si compartieran metodología.
+- Si una fuente no tiene datos, conservar su espacio/estado de forma discreta y explícita; no inventar valores ni sustituir ausencias por cero.
+- Priorizar métricas comprensibles para marcas: seguidores/suscriptores cuando estén verificados, promedio, pico, horas vistas, actividad y crecimiento, siempre con su fuente y período.
+
+### Consulta detallada
+- Cada fuente se presenta en un panel desplegable independiente, cerrado inicialmente.
+- Twitch Helix conserva cobertura, frecuencia, actividad diaria, categorías, sesiones detectadas y notas sobre muestreo/estimaciones dentro de su detalle.
+- SullyGnome conserva el período, resumen, desglose por categorías y registro de transmisiones dentro de su detalle.
+- TwitchMetrics conserva su ventana, limitaciones de cobertura, indicadores y transmisiones visibles dentro de su detalle.
+- YouTube, Kick u otras plataformas conservan sus métricas y metodología en un detalle separado.
+- La apertura de un panel no debe expandir automáticamente los demás.
+- El resumen inicial no debe repetir tablas completas, listas extensas de sesiones ni notas metodológicas largas.
+
+### Consistencia y aceptación
+- La misma función/plantilla debe renderizar los ocho expedientes; solo varían datos, fuentes y estados disponibles.
+- La vista inicial debe ser breve, escaneable y usable en escritorio y móvil.
+- Verificar los ocho perfiles: resumen, fuentes ausentes, apertura/cierre de cada detalle, tablas con scroll contenido y ausencia de desbordamiento horizontal.
+- La metodología y las limitaciones no se eliminan: se trasladan al detalle correspondiente.
+- La arquitectura no autoriza modificar los datos originales, los períodos, las fuentes ni los estados de verificación.
+- Registrar evidencia de pruebas y revisión visual antes de considerar el capítulo aprobado.
