@@ -138,3 +138,13 @@ La pestaña Estadísticas de los ocho expedientes debe utilizar exactamente la m
 - La metodología y las limitaciones no se eliminan: se trasladan al detalle correspondiente.
 - La arquitectura no autoriza modificar los datos originales, los períodos, las fuentes ni los estados de verificación.
 - Registrar evidencia de pruebas y revisión visual antes de considerar el capítulo aprobado.
+
+## 14. Correcciones de presentación del Roster y estadísticas — 18 de noviembre de 2026
+
+- No se renderizan fotografías de cuerpo entero en ningún expediente del Roster. La identificación usa la foto carnet; las cartas de personaje se abren solo como recurso opcional.
+- La frase/voz individual aparece una sola vez por expediente visible. No se repite en cada página, panel o bloque de resumen.
+- El bloque **JUEGOS Y RITMO** muestra únicamente nombres de juegos ordenados por tiempo de transmisión histórico cuando existe desglose SullyGnome; si no existe, utiliza el orden de sesiones detectadas en la ventana pública de Twitch. No publica cantidades de muestras, cobertura ni texto metodológico dentro del bloque. Si no hay juegos verificables, se omite.
+- Los indicadores de seguidores/suscriptores se muestran en el frente de cada carta del Roster cuando existe una cifra pública verificable: TwitchMetrics, SullyGnome (total, nunca ganancia de seguidores) o YouTube Data API. Se omite el indicador si ninguna fuente entrega un total válido; nunca se reemplaza por cero, “en actualización” ni un valor estimado.
+- La arquitectura de estadísticas es común a los ocho perfiles, pero cada fuente se renderiza solo cuando contiene al menos una métrica útil. Se eliminan tarjetas vacías, fuentes sin captura, estados de error y paneles técnicos sin datos. Cada tarjeta conserva fuente y período, y las métricas de fuentes distintas nunca se suman.
+- La vista ejecutiva prioriza datos legibles y útiles; no publica conteos de muestras ni indicadores de cobertura como si fueran resultados de audiencia.
+- Criterio de aceptación: Playwright abre los ocho expedientes y verifica ausencia total de arte de cuerpo entero, una sola frase por perfil, juegos sin texto de muestras, ausencia de tarjetas estadísticas vacías y presencia de las cifras públicas verificadas en las cartas correspondientes.
