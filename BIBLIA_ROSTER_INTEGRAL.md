@@ -728,3 +728,12 @@ La rama de trabajo no se considera terminada hasta ejecutar pruebas Python y Pla
 ### Separación de ilustraciones y retratos — 17 de noviembre de 2026
 
 Las cartas públicas conservan la ilustración de personaje desde `hero.img`; el expediente individual usa el retrato aprobado desde `hero.portrait`. El mapeo de los ocho retratos está fijado por contrato y no debe permutarse. El archivo de colaboraciones no repite retratos individuales ya presentados en el Roster; los casos mantienen únicamente sus imágenes grupales/editoriales propias.
+
+
+---
+
+## Directiva de diseño obligatoria aprobada el 18 de noviembre de 2026
+
+La estructura visual y funcional acordada en `DIRECTIVA_ROSTER_EXPEDIENTES.md` es criterio **obligatorio**, no opcional. Antes de trabajar sobre expedientes, leer esa directiva; contiene referencia Pato/Oratoris, layout izquierda/derecha, cabecera exterior, tabs arriba, reglas de full-body y carta, redes, Perfil/Juegos, estadísticas, clips máximo 4, Bitácora sin duplicación ni «Muestras», Epic/Lurkit/Keymailer, y checklist de aceptación para los ocho perfiles.
+
+
