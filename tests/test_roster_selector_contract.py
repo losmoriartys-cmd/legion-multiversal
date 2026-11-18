@@ -255,3 +255,8 @@ if __name__ == "__main__":
         self.assertIn('>PERFIL Y CONTENIDO</button>', self.html)
         self.assertIn('>AUDIENCIA Y ESTADÍSTICAS</button>', self.html)
         self.assertIn('>TRAYECTORIA Y COLABORACIONES</button>', self.html)
+
+    def test_bitacora_is_linked_from_roster_and_collaborations(self):
+        self.assertEqual(self.html.count('href="./bitacora-preview.html"'), 2)
+        self.assertIn("ABRIR BITÁCORA GENERAL (VISTA PREVIA)", self.html)
+        self.assertIn("EXPLORAR BITÁCORA GENERAL (VISTA PREVIA)", self.html)

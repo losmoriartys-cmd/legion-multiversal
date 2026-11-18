@@ -69,3 +69,7 @@
 @keyframes lm-skeleton-shimmer { 0% { background-position: 100% 0; } 100% { background-position: -120% 0; } }
 @media (max-width: 760px) { .loading-skeleton-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .roster-skeleton-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .roster-skeleton-card { min-height: 190px; padding: 12px; } }
 @media (prefers-reduced-motion: reduce) { .loading-skeleton { animation: none; background: rgba(139, 174, 202, .2); } }
+
+.roster-bitacora-link, .collab-bitacora-link { display: inline-flex; align-items: center; gap: 8px; margin: 12px 0 18px; padding: 10px 14px; border: 1px solid rgba(139, 234, 255, .45); background: rgba(9, 22, 36, .72); color: #8beaff; font-size: .78rem; font-weight: 900; letter-spacing: .07em; text-decoration: none; }
+.roster-bitacora-link:hover, .collab-bitacora-link:hover { border-color: #f2d37b; color: #f2d37b; }
+.roster-bitacora-link:focus-visible, .collab-bitacora-link:focus-visible { outline: 2px solid #8beaff; outline-offset: 3px; }
