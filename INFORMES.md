@@ -3411,3 +3411,12 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - Se ajustó `renderCreatorPlatformLinks` para deduplicar botones de plataforma por URL y tipo, evitando duplicaciones si una cuenta está repetida en `accounts` y `links`.
 - `app.js` aún conserva helpers editoriales antiguos sin uso por esta pestaña (scorecard/quick-view). Se revisarán/limpiarán después de validar el flujo, para no borrar funciones usadas en otras partes.
 - **QA todavía pendiente:** no hay resultado de CI en los runs consultados para el SHA actual. Los cambios son una primera fase y deben someterse a tests y revisión visual antes de afirmar que cumplen.
+
+
+## 2026-11-18 — Tercer bloque: juego histórico destacado y social dedup
+
+- `renderCreatorPlatformLinks` elimina duplicados de botón por plataforma + URL, conservando únicamente enlaces reales del registro.
+- Las cartas del Roster ahora intentan mostrar **MÁS JUGADO** a partir del `game_breakdown` de SullyGnome ordenado por `stream_hours` cuando existe evidencia. Si no hay desglose histórico, se marca **JUEGO RECIENTE** (categoría observada) o **JUEGO POR DOCUMENTAR**; no se infiere ranking a partir de una captura reciente.
+- Se actualizó el test estático para exigir la distinción «MÁS JUGADO» vs. «JUEGO RECIENTE».
+- Playwright amplió el flujo: probar cada capítulo para los ocho perfiles, máximo 4 clips, ausencia de texto «MUESTRAS», accesos a keys para cuatro integrantes, Epic codes en dos, y probar el botón de carta abriendo/cerrando modal.
+- **Verificación pendiente:** aún no hay ejecución de CI retornada para HEAD; no se declara aprobado el test ni se comprobó en browser la visualización de juego histórico. La carga de datos SullyGnome y la actualización de cartas tras el fetch requieren revisar el timing del render.
