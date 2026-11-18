@@ -12,6 +12,7 @@ class RosterComicCardsContractTests(unittest.TestCase):
         cls.html = (ROOT / "index.html").read_text(encoding="utf-8")
         cls.css = (ROOT / "roster-selector.css").read_text(encoding="utf-8")
         cls.roster = json.loads((ROOT / "roster-data.json").read_text(encoding="utf-8"))
+        cls.creator_records = json.loads((ROOT / "creator-records.json").read_text(encoding="utf-8"))
 
     def test_all_eight_canonical_profiles_remain_the_source(self):
         heroes = self.roster["heroes"]
@@ -231,8 +232,11 @@ class RosterComicCardsContractTests(unittest.TestCase):
         self.assertIn("clips.slice(0,4)", tabs)
         self.assertIn("hero-profile-character-card-link", self.app)
         self.assertIn("const uniqueLinks=links.filter", self.app)
-        self.assertIn("LURKIT", self.app)
-        self.assertIn("KEYMAILER", self.app)
+        for profile_id in ("lady-moriarty", "rod3r1k", "akuma", "habitos"):
+            collaborations = self.creator_records["channels"][profile_id]["collaborations"]
+            titles = {item["title"] for item in collaborations}
+            self.assertIn("Acceso a keys · Lurkit", titles)
+            self.assertIn("Acceso a keys · Keymailer", titles)
         self.assertIn("hero-profile-epic-codes", bitacora)
         self.assertNotIn("renderCommercialQuickView(hero)", bitacora)
 
