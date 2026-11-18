@@ -127,20 +127,24 @@ def compare(baseline, current, include_platform=True, approved_editorial=None):
             c = cur.get(f)
             if c is None:
                 problems.append(f'creator-records "{hid}": se perdió el campo "{f}"')
-            elif 'count' in meta and c.get('count') != meta['count']:
-                problems.append(f'creator-records "{hid}.{f}": {meta["count"]} -> {c.get("count")} elementos')
-            elif c.get('sha256') != meta['sha256']:
+                continue
+            count_changed = 'count' in meta and c.get('count') != meta['count']
+            content_changed = c.get('sha256') != meta['sha256']
+            if count_changed or content_changed:
                 approved_items = ((approved_editorial or {}).get('creator_records', {})
                                   .get(hid, {}).get(f))
                 approved = (
                     (isinstance(approved_items, list)
-                     and len(approved_items) == meta.get('count')
+                     and len(approved_items) == c.get('count')
                      and _list_hash(approved_items) == c.get('sha256'))
                     or (isinstance(approved_items, dict)
                         and _h(approved_items) == c.get('sha256'))
                 )
                 if not approved:
-                    problems.append(f'creator-records "{hid}.{f}": el contenido cambió y no coincide con una actualización editorial aprobada')
+                    if count_changed:
+                        problems.append(f'creator-records "{hid}.{f}": {meta["count"]} -> {c.get("count")} elementos')
+                    else:
+                        problems.append(f'creator-records "{hid}.{f}": el contenido cambió y no coincide con una actualización editorial aprobada')
     for hid, meta in (baseline.get('platform_stats', {}).items() if include_platform else []):
         cur = current['platform_stats'].get(hid)
         if cur is None:
