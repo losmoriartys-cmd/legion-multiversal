@@ -3383,3 +3383,12 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
   - «Juegos y ritmo» se muestra con conteo de muestras por categoría, no horas acumuladas ni ranking histórico. No denominar «más jugados» sin evidencia.
 - **Próxima fase de trabajo:** revisar fuentes de datos y CSS de layout; implementar en pequeños commits, actualizar pruebas unitarias/E2E y no marcar aceptación hasta revisar los ocho expedientes en preview desktop/móvil.
 - **Estado de validación visual:** no realizada en esta entrada. No declarar conformidad visual.
+
+
+## 2026-11-18 — Primera corrección funcional sobre directiva de expediente
+
+- **Commit:** `3e79b4baff381ceeac113fa64f166e2d52b2835b`.
+- **`app.js` (cambios parciales):** Clips reducidos de 10 a 4 en el panel; Perfil simplificado para eliminar la ficha comercial repetida y la barra editorial de poderes; «Juegos y ritmo» permanece integrado, con aclaración de que las observaciones recientes no representan ranking de más jugados; contenido editorial/formats/oportunidades trasladado a Bitácora como una sola sección; añadido panel de accesos Lurkit/Keymailer para Lady Moriarty, ROD3R1K, Akuma y Hábitos, etiquetado como acceso y sin sugerir campaña activa; añadido botón de acceso a carta de personaje debajo del retrato en sidebar.
+- **Pendiente de verificar:** enlace funcional del botón de carta y destino modal; la distribución del layout/cabecera con CSS; si el panel de accesos está bien rotulado para los cuatro perfiles y los enlaces son los correctos; Epic code render; estadística expandida; eliminación total de «Muestras» y duplicaciones; foto full-body no dominante; tests Python/Playwright actualizados y revisión visual de los ocho perfiles.
+- **CI:** al consultar Actions asociado al SHA actual `3e79b4baff381ceeac113fa64f166e2d52b2835b`, todavía no se devolvieron runs. No se declara sintaxis/test/preview visual aprobado en esta entrada.
+- **Estado:** trabajo parcial; PR Draft #66; sin merge ni producción.
