@@ -775,7 +775,7 @@ async function loadInstituteStats(){
    [fmt(channels.length,0),'CANALES EN SEGUIMIENTO','Todos los canales Twitch registrados del roster'],
    [fmt(isFresh?liveCount:0,0),'EN DIRECTO EN ÚLTIMA LECTURA',isFresh?'Canales con transmisión en la captura reciente':'Estado de transmisión con datos demorados'],
    [fmt(observedStreams,0),'DIRECTOS DETECTADOS','Sesiones observadas en la ventana disponible'],
-   [fmt(liveSamples,0),'MUESTRAS EN DIRECTO','Registros capturados mientras había transmisión'],
+   [fmt(liveSamples,0),'CAPTURAS EN DIRECTO','Registros capturados mientras había transmisión'],
    [interval+' MIN','FRECUENCIA OBJETIVO','Cadencia configurada del colector'],
    [resolvedChannels+'/'+expectedChannels,'COBERTURA DE CANALES',collectionComplete?'Todos los canales esperados fueron contabilizados':'Revisar canales pendientes o no contabilizados']
   ].map(([value,label,note])=>'<article class="impact-kpi"><strong>'+value+'</strong><span>'+label+'</span><small>'+note+'</small></article>').join('');
@@ -1346,7 +1346,7 @@ function renderHeroProfileTabs(hero) {
  const gamesMap=new Map();
  snapshots.filter(s=>s?.is_live&&s.game_name).forEach(s=>gamesMap.set(s.game_name,(gamesMap.get(s.game_name)||0)+1));
  const games=Array.from(gamesMap.entries()).sort((a,b)=>b[1]-a[1]).slice(0,8);
- const gameHtml=games.length?'<div class="hero-profile-game-grid">'+games.map(([name,count])=>'<article><strong>'+safe(name)+'</strong><span>'+safe(count)+' muestras observadas</span></article>').join('')+'</div>':'<p class="hero-profile-empty">Todavía no hay categorías de juego suficientes en las capturas disponibles.</p>';
+ const gameHtml=games.length?'<div class="hero-profile-game-grid">'+games.map(([name,count])=>'<article><strong>'+safe(name)+'</strong><span>'+safe(count)+' observaciones recientes</span></article>').join('')+'</div>':'<p class="hero-profile-empty">Todavía no hay categorías de juego suficientes en las capturas disponibles.</p>';
  const metricDefinitions=[
   {label:'DIRECTOS OBSERVADOS',value:win.streams_observed,note:'sesiones',key:'streams_observed'},
   {label:'PROMEDIO DE ESPECTADORES',value:win.average_viewers_sampled,note:'promedio muestreado',key:'average_viewers_sampled'},
