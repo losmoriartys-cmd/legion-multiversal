@@ -49,7 +49,7 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
     await expect(page.locator('#roster-home')).toBeHidden();
     await expect(dossier).toContainText(creator.name);
     const profileTabs = dossier.locator('[role="tab"][data-profile-tab]');
-    await expect(profileTabs).toHaveCount(5);
+    await expect(profileTabs).toHaveCount(4);
 
     const cardImage = card.locator('.comic-roster-photo img');
     await expect(cardImage).toHaveAttribute('alt', /Fotografía carnet/);
@@ -65,18 +65,9 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
     const dossierImageStyle = await dossierImage.evaluate(img => ({ fit: getComputedStyle(img).objectFit, position: getComputedStyle(img).objectPosition }));
     expect(dossierImageStyle.fit).toBe('cover');
     expect(dossierImageStyle.position).toContain('0%');
-    const characterArt = dossier.locator('.hero-profile-character-art img');
-    await expect(characterArt).toBeVisible();
-    expect(await characterArt.getAttribute('src')).not.toContain('assets/heroes/');
-    await expect(characterArt).toHaveAttribute('alt', /Ilustración de cuerpo entero/);
-    await expect.poll(() => characterArt.evaluate(img => img.naturalWidth)).toBeGreaterThan(0);
-    const characterCard = dossier.locator('.hero-profile-character-card');
-    await expect(characterCard).toBeVisible();
-    await expect(characterCard.locator('img')).toHaveCount(1);
-    await expect(characterCard).not.toHaveAttribute('open', '');
-    await characterCard.locator('summary').click();
-    await expect(characterCard).toHaveAttribute('open', '');
-    await expect.poll(() => characterCard.locator('img').evaluate(img => img.naturalWidth)).toBeGreaterThan(0);
+    // El expediente no repite full-body ni carta: el carnet identifica al streamer.
+    await expect(dossier.locator('.hero-profile-character-art')).toHaveCount(0);
+    await expect(dossier.locator('.hero-profile-character-card')).toHaveCount(0);
     await expect(dossier.locator('.hero-profile-sidebar-quote')).toBeVisible();
     await expect(dossier.locator('.hero-profile-socials')).toBeVisible();
     await expect(dossier.locator('.hero-profile-poster')).toHaveCount(0);
@@ -85,7 +76,6 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
       for (const [label, panel] of [
         ['PERFIL', 'perfil'],
         ['ESTADÍSTICAS', 'estadisticas'],
-        ['JUEGOS Y RITMO', 'juegos'],
         ['CLIPS', 'clips'],
         ['BITÁCORA', 'bitacora']
       ]) {
