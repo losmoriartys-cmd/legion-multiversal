@@ -107,14 +107,16 @@ class RosterComicCardsContractTests(unittest.TestCase):
         self.assertIn("getCreatorAudienceMetric(hero)", renderer)
         audience = self.app.split("function getCreatorAudienceMetric", 1)[1].split("function getMostPlayedGames", 1)[0]
         self.assertIn("platform?.status==='verified'", audience)
-        self.assertIn("twitchMetricsData?.channels?.[login]", audience)
-        self.assertIn("TwitchMetrics", audience)
-        self.assertIn("SullyGnome", audience)
+        self.assertIn("platformStatsData?.creators?.[platformStatsKey(hero)]?.platforms?.youtube", audience)
+        self.assertIn("YouTube Data API", audience)
+        self.assertNotIn("TwitchMetrics", audience)
+        self.assertNotIn("SullyGnome", audience)
+        self.assertNotIn("twitchMetricsData", audience)
         self.assertNotIn("EN ACTUALIZACIÓN", renderer)
         self.assertIn("ACTIVO ESTA SEMANA", renderer)
         self.assertIn("7 * 24 * 60 * 60 * 1000", renderer)
         self.assertNotIn("hero.schedule", renderer)
-        self.assertIn("Seguidores", audience)
+        self.assertNotIn("Seguidores · Twitch", audience)
         self.assertIn("Media de viewers", renderer)
 
     def test_profile_opens_directly_as_a_35_65_bitacora(self):
