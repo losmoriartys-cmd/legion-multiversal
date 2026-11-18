@@ -39,6 +39,7 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
     const card = page.locator('.comic-roster-card[data-creator-id="' + creator.id + '"]');
     await expect(card).toHaveCount(1);
     await expect(card).toContainText('VER PERFIL');
+    await expect(card).not.toContainText(/Just Chatting/i);
     const expectedAudience = {'rod3r1k':'5.188','lady-moriarty':'180','akuma':'142','pato-oratoris':'56'};
     if (expectedAudience[creator.id]) await expect(card.locator('.comic-roster-stat-audience b')).toHaveText(expectedAudience[creator.id]);
     else await expect(card.locator('.comic-roster-stat-audience')).toHaveCount(0);
@@ -57,7 +58,7 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
     else {
       const gamesSection = dossier.locator('#profile-tab-perfil .hero-profile-integrated-games');
       await expect(gamesSection).toBeVisible();
-      await expect(gamesSection).not.toContainText(/muestras|observaciones/i);
+      await expect(gamesSection).not.toContainText(/muestras|observaciones|Just Chatting/i);
     }
     await expect(dossier.locator('#profile-tab-perfil .hero-profile-brand')).toHaveCount(0);
     await expect(page.locator('#roster-home')).toBeHidden();
