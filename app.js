@@ -421,8 +421,12 @@ function renderStatsDashboard(hero,helix,sully){
  else out+=renderStatsSourceDetails('SULLYGNOME','Historial externo · sin registro',renderSullyStats(null));
  if(tmProfile)out+=renderStatsSourceDetails('TWITCHMETRICS','Analítica pública complementaria · muestra parcial',renderTwitchMetricsStats(helix));
  else out+=renderStatsSourceDetails('TWITCHMETRICS','Fuente complementaria · sin registro para esta cuenta', '<div class="stats-empty"><strong>Sin datos cargados</strong>No hay un registro de TwitchMetrics disponible para esta cuenta.</div>');
- const platformHtml=renderPlatformStats(hero);
- if(platformHtml)out+=renderStatsSourceDetails('OTRAS PLATAFORMAS','Datos independientes de YouTube, Kick u otras cuentas vinculadas',platformHtml);
+ Object.keys(platformProfile?.platforms||{}).forEach(platform=>{
+  const title=platform.toUpperCase()+' · FUENTE VINCULADA';
+  const description=platform==='youtube'?'YouTube · métricas y publicaciones del canal':platform==='kick'?'Kick · estado y actividad del canal':'Datos y metodología de '+platform;
+  const detail=renderPlatformStats(hero,platform);
+  if(detail)out+=renderStatsSourceDetails(title,description,detail);
+ });
  out+='<p class="stats-methodology-footer">Las fuentes no se suman entre sí. Cada indicador conserva su período, origen y método de captura. Los datos ausentes se muestran como no disponibles, nunca como cero.</p>';
  out+='</div>';
  return out;
@@ -576,7 +580,7 @@ function renderStatsPlatformDirectory(){
  });
  host.innerHTML=out||'<p class="stats-note">No hay cuentas de otras plataformas configuradas.</p>';
 }
-function renderPlatformStats(hero){
+function renderPlatformStats(hero,onlyPlatform=null){
  const key=platformStatsKey(hero);
  const profile=platformStatsData?.creators?.[key];
  if(!profile || !profile.platforms)return '';
@@ -586,6 +590,7 @@ function renderPlatformStats(hero){
  const captureLabel=captureDate&&!Number.isNaN(captureDate.getTime())?captureDate.toLocaleString('es-AR'):'fecha no disponible';
  let out='';
  Object.entries(profile.platforms).forEach(([platform,p])=>{
+  if(onlyPlatform&&platform!==onlyPlatform)return;
   const title=platform==='youtube'?'YOUTUBE · DATOS PÚBLICOS DEL CANAL':platform==='kick'?'KICK · ACTIVIDAD DEL CANAL':platform.toUpperCase();
   const verified=p.status==='verified';
   const status=verified?(sourceFresh?'FUENTE OFICIAL':'FUENTE OFICIAL · CAPTURA DEMORADA'):p.status==='credentials_required'?'CONFIGURACIÓN PENDIENTE':p.status==='error'?'ERROR DE CONSULTA':'REFERENCIA';
