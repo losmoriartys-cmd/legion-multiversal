@@ -3365,3 +3365,21 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **Artefacto visual:** `roster-visual-review-5530031615ea30d52fe3fc6f1b3b4c98cbba5eb1` (capturas automatizadas disponibles en Actions). Las capturas se generaron; no se declara una inspección manual de píxel a píxel.
 - **Producción:** sin cambios. PR #63 sigue Draft y sin merge.
 - **Integración pendiente:** la rama de la PR está 9 commits detrás de `main`; antes de integrar hay que sincronizarla y repetir CI sobre el HEAD resultante.
+
+
+## 2026-11-18 — Directiva obligatoria de expedientes Roster
+
+- **Solicitud del usuario:** respetar la referencia visual de Pato / Oratoris como plantilla de expediente tipo superhéroe/streamer. La distribución, no solo los colores, es criterio estricto.
+- **Documentación añadida:** `DIRECTIVA_ROSTER_EXPEDIENTES.md`; enlazada en `BIBLIA_ROSTER_INTEGRAL.md`.
+- **PR de trabajo:** #66 `Roster: expediente según referencia Pato y directiva aprobada`, Draft, rama `feat/expediente-comic-layout-reference`. No merge, no producción.
+- **Auditoría del renderer actual (app.js):**
+  - Cabecera de ruta/ritmo/estado/canal se genera dentro del main del expediente, separado de tabs; debe ajustarse a la cabecera exterior clara de referencia y comprobar responsive.
+  - En PERFIL se concatenan globo de diálogo, bio, frecuencia/último vivo/estado, CTA, «Juegos y ritmo», nota de método, ficha editorial comercial, oportunidades y barras «Stats de streamer». El perfil contiene demasiados bloques y duplica Bitácora.
+  - La Bitácora actual solo concatena milestones/collaborations, y añade Epic para Moriartys/ROD3R1K. Debe enriquecerse y consolidarse con accesos Lurkit/Keymailer documentados.
+  - Los clips se renderizan con `clips.slice(0,10)`; criterio aprobado ahora es máximo 4 por streamer en vista principal.
+  - La foto de cuerpo entero/card no se encuentra como literal en el renderer de expediente, pero el layout/CSS y las fuentes pueden estar haciendo que arte o imagen ocupe el panel. Se debe localizar por selector y datos, y verificar la preview visual antes de concluir.
+  - El acceso a carta de personaje no se encuentra en la sidebar de `openHeroProfile`; incorporarlo debajo del retrato con destino funcional.
+  - Estadísticas actuales usan métricas de ventana, YouTube subscribers condicional y muestreo de snapshots; ampliar dashboard con otras fuentes existentes, historiales y cobertura, sin inventar datos.
+  - «Juegos y ritmo» se muestra con conteo de muestras por categoría, no horas acumuladas ni ranking histórico. No denominar «más jugados» sin evidencia.
+- **Próxima fase de trabajo:** revisar fuentes de datos y CSS de layout; implementar en pequeños commits, actualizar pruebas unitarias/E2E y no marcar aceptación hasta revisar los ocho expedientes en preview desktop/móvil.
+- **Estado de validación visual:** no realizada en esta entrada. No declarar conformidad visual.
