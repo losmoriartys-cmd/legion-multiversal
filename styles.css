@@ -5729,3 +5729,14 @@ main .chapter-panel :where(.chapter-cta, .executive-button, .comic-submit-btn,
 .stats-methodology-footer{margin:2px 0 0;padding:10px 12px;border-left:3px solid #647d9a;background:#0b1320;color:#9eacc0;font-size:.72rem;line-height:1.5}
 @media(max-width:720px){.stats-executive-grid{grid-template-columns:1fr}.stats-executive-header{align-items:flex-start}.stats-executive-stamp{font-size:.54rem;padding:7px}.stats-executive-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.stats-source-details-body{padding:9px}.stats-source-details>summary{padding:12px}}
 @media(prefers-reduced-motion:reduce){.stats-source-details *{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
+
+/* Ajustes finales de legibilidad del panel de estadísticas en móvil */
+.hero-profile-tab-panel>h4{max-width:100%;overflow-wrap:anywhere;word-break:normal;line-height:1.1}
+#profile-tab-estadisticas>h4{font-size:clamp(1.05rem,4.5vw,1.35rem);letter-spacing:.04em}
+.stats-executive-header,.stats-executive-header>div{min-width:0;width:100%}
+.stats-executive-header h4{color:#ffde00!important;font-size:clamp(1.3rem,4.5vw,2.1rem);line-height:1.08;overflow-wrap:anywhere;word-break:normal}
+@media(max-width:520px){
+ #profile-tab-estadisticas>h4{font-size:1.12rem}
+ .stats-executive-header h4{font-size:1.55rem}
+}
