@@ -177,7 +177,6 @@ test('Atrás y Adelante restauran el roster y el expediente correcto', async ({ 
   }));
   expect(mobileWidths.document).toBeLessThanOrEqual(mobileWidths.viewport);
   expect(mobileWidths.body).toBeLessThanOrEqual(mobileWidths.viewport);
-  await page.locator('#profile-tab-estadisticas').getByRole('tab').click().catch(() => {});
   const statsTab = page.locator('[data-profile-tab="estadisticas"]');
   await statsTab.click();
   await expect(page.locator('#profile-tab-estadisticas .stats-dashboard')).toBeVisible();
