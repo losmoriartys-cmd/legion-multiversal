@@ -40,7 +40,7 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
     await expect(card).toHaveCount(1);
     await expect(card).toContainText('VER PERFIL');
     await expect(card).not.toContainText(/Just Chatting|JUEGOS POR DOCUMENTAR/i);
-    const expectedAudience = {'rod3r1k':'5.188','lady-moriarty':'180','akuma':'142','pato-oratoris':'56'};
+    const expectedAudience = {'pato-oratoris':'56'};
     if (expectedAudience[creator.id]) await expect(card.locator('.comic-roster-stat-audience b')).toHaveText(expectedAudience[creator.id]);
     else await expect(card.locator('.comic-roster-stat-audience')).toHaveCount(0);
 
@@ -302,7 +302,7 @@ test('Pato conserva YouTube como fuente propia, sin mezclarlo con métricas Twit
   await expect(stats).not.toContainText('SULLYGNOME');
 });
 
-test('cada canal Twitch ofrece acceso al contador público en vivo y YouTube permanece separado', async ({ page }) => {
+test('los canales Twitch enlazan al contador público y Pato conserva YouTube separado', async ({ page }) => {
   await page.goto('/');
   await page.evaluate(() => switchChapter(2));
   await page.locator('#chapter-transition').evaluate(el => el.classList.remove('play'));
@@ -316,18 +316,19 @@ test('cada canal Twitch ofrece acceso al contador público en vivo y YouTube per
     ['habitos', 'habitos_atomicos']
   ];
   for (const [id, login] of twitchCreators) {
-    const counter = page.locator('.comic-roster-card[data-creator-id="' + id + '"] iframe.comic-roster-live-counter');
-    await expect(counter).toHaveAttribute('src', 'https://livecounts.nl/twitch-realtime/embed/?u=' + login);
-    await expect(counter).toHaveAttribute('title', /Seguidores en vivo/);
+    const card = page.locator('.comic-roster-card[data-creator-id="' + id + '"]');
+    await expect(card.locator('iframe.comic-roster-live-counter')).toHaveCount(0);
+    const counterLink = card.locator('.comic-roster-live-counter-link');
+    await expect(counterLink).toHaveAttribute('href', 'https://livecounts.nl/twitch-realtime/?u=' + login);
+    await expect(counterLink).toContainText('SEGUIDORES EN TWITCH');
+    await expect(counterLink).toHaveAttribute('target', '_blank');
+    await expect(counterLink).toHaveAttribute('rel', /noopener/);
   }
-  const firstEmbed = page.frameLocator('.comic-roster-card[data-creator-id="moriartys"] iframe.comic-roster-live-counter');
-  await expect(firstEmbed.locator('body')).toContainText(/Followers/i, { timeout: 20000 });
-  await expect(firstEmbed.locator('body')).toContainText(/\\d/);
   const pato = page.locator('.comic-roster-card[data-creator-id="pato-oratoris"]');
-  await expect(pato.locator('iframe.comic-roster-live-counter')).toHaveCount(0);
+  await expect(pato.locator('.comic-roster-live-counter-link')).toHaveCount(0);
   await expect(pato.locator('.comic-roster-stat-audience')).toContainText('YouTube');
+  await expect(pato.locator('.comic-roster-stat-audience b')).toHaveText('56');
 });
-
 
 test('los ocho expedientes tienen capturas visuales desktop y móvil', async ({ page }) => {
   test.setTimeout(120000);
@@ -347,6 +348,8 @@ test('los ocho expedientes tienen capturas visuales desktop y móvil', async ({ 
       const dossier = page.locator('#hero-profile-page');
       await expect(dossier).toBeVisible();
       await expect(dossier).toContainText(creator.name);
+      await page.locator('[data-profile-tab="perfil"]').click();
+      await expect(dossier.locator('#profile-tab-perfil')).toBeVisible();
       await expect(dossier.locator('.hero-profile-id-image img')).toBeVisible();
       await expect.poll(() => dossier.locator('.hero-profile-id-image img').evaluate(img => img.naturalWidth)).toBeGreaterThan(0);
       await page.locator('[data-profile-tab="bitacora"]').click();
