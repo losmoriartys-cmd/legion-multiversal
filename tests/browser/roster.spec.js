@@ -98,7 +98,7 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
       await expect(profileTabs.filter({ hasText: 'PERFIL' })).toBeFocused();
       await profileTabs.filter({ hasText: 'PERFIL' }).click();
       await expect(dossier.locator('#profile-tab-bitacora')).toContainText('BITÁCORA · TRAYECTORIA Y COLABORACIONES');
-      await expect(dossier.locator('#profile-tab-clips .hero-profile-clip')).toHaveCount({ max: 4 });
+      expect(await dossier.locator('#profile-tab-clips .hero-profile-clip').count()).toBeLessThanOrEqual(4);
     }
 
     await expect(page.locator('#hero-modal')).not.toHaveClass(/active/);
@@ -177,13 +177,12 @@ test('Atrás y Adelante restauran el roster y el expediente correcto', async ({ 
   }));
   expect(mobileWidths.document).toBeLessThanOrEqual(mobileWidths.viewport);
   expect(mobileWidths.body).toBeLessThanOrEqual(mobileWidths.viewport);
-  const metricBounds = await page.locator('.hero-profile-metric-grid').first().evaluate(grid => {
-    const bounds = grid.getBoundingClientRect();
-    return [...grid.children].map(item => {
-      const rect = item.getBoundingClientRect();
-      return rect.left >= bounds.left - 1 && rect.right <= bounds.right + 1;
-    });
-  });
-  expect(metricBounds.every(Boolean)).toBe(true);
+  await page.locator('#profile-tab-estadisticas').getByRole('tab').click().catch(() => {});
+  const statsTab = page.locator('[data-profile-tab="estadisticas"]');
+  await statsTab.click();
+  await expect(page.locator('#profile-tab-estadisticas .stats-dashboard')).toBeVisible();
+  const statsBounds = await page.locator('#profile-tab-estadisticas .stats-dashboard').boundingBox();
+  expect(statsBounds).not.toBeNull();
+  expect(statsBounds.x + statsBounds.width).toBeLessThanOrEqual(390 + 1);
   await page.screenshot({ path: 'test-results/bitacora-lady-mobile.png', fullPage: true });
 });
