@@ -5689,3 +5689,43 @@ main .chapter-panel :where(.chapter-cta, .executive-button, .comic-submit-btn,
 #hero-profile-page .hero-profile-internal-art img{display:block;width:100%;height:230px;max-height:230px;object-fit:contain;object-position:center;background:#101c2c}
 #hero-profile-page .hero-profile-internal-art figcaption{padding:6px 2px 0;color:#514a3e;font:900 .66rem 'Roboto Condensed',sans-serif;letter-spacing:.07em;text-align:center}
 @media(max-width:520px){#hero-profile-page .hero-profile-internal-art{width:min(100%,165px);max-width:165px}#hero-profile-page .hero-profile-internal-art img{height:190px;max-height:190px}}
+
+
+/* ESTADÍSTICAS · panel ejecutivo compacto compartido por los ocho expedientes */
+.stats-dashboard-editorial{gap:14px}
+.stats-executive-header{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:clamp(16px,2.5vw,24px);background:linear-gradient(115deg,#172438 0%,#0b111c 76%);border:1px solid #34445c;border-left:5px solid var(--yellow-accent)}
+.stats-executive-header>div>span,.stats-detail-intro strong{display:block;color:#00d2ff;font-size:.65rem;font-weight:900;letter-spacing:.16em}
+.stats-executive-header h4{margin:4px 0;color:#ffde00;font:clamp(1.8rem,3vw,2.5rem) 'Bangers',cursive;letter-spacing:.04em}
+.stats-executive-header p{margin:0;color:#c2cede;font-size:.82rem;line-height:1.5;max-width:680px}
+.stats-executive-stamp{flex:0 0 auto;padding:9px 12px;border:1px solid rgba(0,210,255,.45);color:#8de7fa;font-size:.62rem;font-weight:900;letter-spacing:.1em;text-align:center;line-height:1.5;transform:rotate(2deg)}
+.stats-executive-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.stats-executive-source{min-width:0;padding:13px;background:#101a29;border:1px solid #304158;border-top:3px solid #00aeca}
+.stats-executive-source-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:5px 12px;align-items:baseline;margin-bottom:10px}
+.stats-executive-source-head strong{color:#ffde00;font:1.15rem 'Bangers',cursive;letter-spacing:.04em}
+.stats-executive-source-head>span{color:#8799b1;font-size:.64rem}
+.stats-executive-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.stats-executive-metrics>div{min-width:0;padding:8px 7px;background:#080e18;border:1px solid #29384d}
+.stats-executive-metrics>div strong{display:block;color:#fff;font:1.35rem 'Bangers',cursive;overflow-wrap:anywhere}
+.stats-executive-metrics>div span{display:block;color:#98a8bc;font-size:.58rem;line-height:1.3;text-transform:uppercase}
+.stats-executive-empty{grid-column:1/-1;margin:0;color:#9aa9bf;font-size:.75rem}
+.stats-executive-note{margin:9px 0 0;color:#8999ae;font-size:.68rem;line-height:1.45}
+.stats-detail-intro{display:flex;flex-wrap:wrap;align-items:baseline;gap:5px 12px;padding:12px 0 2px;border-bottom:1px solid #34445c}
+.stats-detail-intro strong{color:#ffde00}
+.stats-detail-intro span{color:#9aa9bf;font-size:.75rem}
+.stats-source-details{background:#0d1522;border:1px solid #34445c;min-width:0}
+.stats-source-details>summary{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 15px;cursor:pointer;list-style:none}
+.stats-source-details>summary::-webkit-details-marker{display:none}
+.stats-source-details>summary>span{display:grid;gap:3px;min-width:0}
+.stats-source-details>summary strong{color:#f4f6fa;font:1.2rem 'Bangers',cursive;letter-spacing:.04em}
+.stats-source-details>summary small{color:#92a2b8;font-size:.7rem;line-height:1.4}
+.stats-source-details>summary>b{flex:0 0 auto;color:#00d2ff;font-size:.62rem;letter-spacing:.08em}
+.stats-source-details>summary>b i{font-style:normal;font-size:.9rem;margin-left:4px}
+.stats-source-details[open]>summary{background:#172438;border-bottom:1px solid #34445c}
+.stats-source-details[open]>summary>b i{display:inline-block;transform:rotate(45deg)}
+.stats-source-details-body{padding:12px;min-width:0}
+.stats-source-details-body>.stats-section{padding:0;border:0;background:transparent}
+.stats-source-details-body>.stats-section>.stats-source-head:first-child{display:none}
+.stats-source-details-body>.stats-section>.stats-source-head:nth-child(2){margin-bottom:10px}
+.stats-methodology-footer{margin:2px 0 0;padding:10px 12px;border-left:3px solid #647d9a;background:#0b1320;color:#9eacc0;font-size:.72rem;line-height:1.5}
+@media(max-width:720px){.stats-executive-grid{grid-template-columns:1fr}.stats-executive-header{align-items:flex-start}.stats-executive-stamp{font-size:.54rem;padding:7px}.stats-executive-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.stats-source-details-body{padding:9px}.stats-source-details>summary{padding:12px}}
+@media(prefers-reduced-motion:reduce){.stats-source-details *{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
