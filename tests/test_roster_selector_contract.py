@@ -181,6 +181,9 @@ class RosterComicCardsContractTests(unittest.TestCase):
         self.assertIn("renderStatsSourceDetails('TWITCH HELIX'", renderer)
         self.assertIn("renderStatsSourceDetails('SULLYGNOME'", renderer)
         self.assertIn("renderStatsSourceDetails('TWITCHMETRICS'", renderer)
+        self.assertIn("Object.keys(platformProfile?.platforms||{}).forEach(platform=>", renderer)
+        self.assertIn("renderStatsSourceDetails(title,description,detail)", renderer)
+        self.assertIn("function renderPlatformStats(hero,onlyPlatform=null)", self.app)
 
     def test_only_one_roster_directory_remains_in_the_chapter(self):
         self.assertIn('id="roster-selector"', self.html)
