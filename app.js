@@ -1444,7 +1444,10 @@ function openHeroProfile(index, triggerElement = document.activeElement, options
     page.classList.add('is-active');
     page.setAttribute('aria-hidden', 'false');
     setHeroProfileRoute(hero, options.historyMode || 'push');
-    page.scrollIntoView({behavior:'smooth',block:'start'});
+    const profileTop=page.getBoundingClientRect().top+window.scrollY;
+    const stickyHeader=document.querySelector('header');
+    const stickyHeaderHeight=stickyHeader?.getBoundingClientRect().height||0;
+    window.scrollTo({top:Math.max(0,profileTop-stickyHeaderHeight-12),behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
     requestAnimationFrame(() => page.querySelector('[data-profile-tab]')?.focus({preventScroll:true}));
 }
 function navigateHeroProfile(direction) {
