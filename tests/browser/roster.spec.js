@@ -320,6 +320,9 @@ test('cada canal Twitch ofrece acceso al contador público en vivo y YouTube per
     await expect(counter).toHaveAttribute('src', 'https://livecounts.nl/twitch-realtime/embed/?u=' + login);
     await expect(counter).toHaveAttribute('title', /Seguidores en vivo/);
   }
+  const firstEmbed = page.frameLocator('.comic-roster-card[data-creator-id="moriartys"] iframe.comic-roster-live-counter');
+  await expect(firstEmbed.locator('body')).toContainText(/Followers/i, { timeout: 20000 });
+  await expect(firstEmbed.locator('body')).toContainText(/\\d/);
   const pato = page.locator('.comic-roster-card[data-creator-id="pato-oratoris"]');
   await expect(pato.locator('iframe.comic-roster-live-counter')).toHaveCount(0);
   await expect(pato.locator('.comic-roster-stat-audience')).toContainText('YouTube');
