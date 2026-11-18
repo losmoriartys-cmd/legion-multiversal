@@ -99,7 +99,8 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
     await expect(dossier.locator('#profile-tab-bitacora')).toContainText('BITÁCORA');
     await expect(dossier.locator('.hero-profile-character-card-link button')).toHaveText(/VER CARTA COMPLETA/);
     if (['lady-moriarty','rod3r1k','akuma','habitos'].includes(creator.id)) {
-      await expect(dossier.locator('#profile-tab-bitacora .hero-profile-platform-access-links a')).toHaveCount(2);
+      await expect(dossier.locator('#profile-tab-bitacora a[href*="lurkit.com"]')).toHaveCount(1);
+      await expect(dossier.locator('#profile-tab-bitacora a[href*="keymailer.co"]')).toHaveCount(1);
     }
     if (['moriartys','rod3r1k'].includes(creator.id)) {
       await expect(dossier.locator('#profile-tab-bitacora .hero-profile-epic-codes')).toBeVisible();
