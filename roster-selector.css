@@ -833,3 +833,8 @@
     font-size:clamp(.82rem,1.15vw,1.12rem);
     line-height:1.15;
 }
+
+/* Acceso a contador externo en vivo; no se presenta como métrica histórica almacenada. */
+.comic-roster-live-counter{display:inline-flex;align-items:center;gap:.35rem;margin:.25rem 0 .4rem;color:#8ee8ff;font-size:.68rem;font-weight:800;letter-spacing:.055em;text-decoration:none;border-bottom:1px solid rgba(142,232,255,.45);width:max-content;max-width:100%}
+.comic-roster-live-counter:hover,.comic-roster-live-counter:focus-visible{color:#fff;border-color:currentColor;text-decoration:underline;text-underline-offset:3px}
+.comic-roster-live-counter:focus-visible{outline:2px solid #8ee8ff;outline-offset:3px}
