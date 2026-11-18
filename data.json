@@ -13,17 +13,17 @@
     "ther0d3r1k"
   ],
   "collection": {
-    "started_at": "2026-11-18T01:53:23Z",
+    "started_at": "2026-11-18T02:51:54Z",
     "expected_channels": 7,
     "resolved_channels": 7,
     "sampled_channels": [
-      "akumazoldyck",
-      "ardipii",
-      "daved0608",
       "habitos_atomicos",
       "ladymoriarty01",
       "losmoriartys",
-      "ther0d3r1k"
+      "ther0d3r1k",
+      "akumazoldyck",
+      "ardipii",
+      "daved0608"
     ],
     "skipped_channels": [],
     "complete": true,
@@ -39,7 +39,7 @@
     "elgabii090"
   ],
   "channel_registry_note": "Los canales archivados se conservan para consulta histórica y no se incluyen en los indicadores del roster activo.",
-  "updated_at": "2026-11-18T01:53:23Z",
+  "updated_at": "2026-11-18T02:51:54Z",
   "channels": {
     "ladymoriarty01": {
       "login": "ladymoriarty01",
@@ -54,11 +54,11 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "last_status_at": "2026-11-18T01:53:23Z",
-      "last_snapshot_at": "2026-11-18T01:53:23Z",
-      "updated_at": "2026-11-18T01:53:23Z",
+      "last_status_at": "2026-11-18T02:51:54Z",
+      "last_snapshot_at": "2026-11-18T02:51:54Z",
+      "updated_at": "2026-11-18T02:51:54Z",
       "window": {
-        "samples_total": 336,
+        "samples_total": 337,
         "live_samples": 13,
         "streams_observed": 6,
         "average_viewers_sampled": 6.6,
@@ -3193,6 +3193,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-18T02:51:54Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -3204,16 +3213,16 @@
       "twitch_url": "https://twitch.tv/ther0d3r1k",
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
-      "live": true,
-      "current_viewers": 10,
-      "current_game": "Fortnite",
-      "current_title": "SE VIENE UN JUEGASOO!   🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
-      "stream_started_at": "2026-11-17T22:55:07Z",
-      "last_status_at": "2026-11-18T01:53:23Z",
-      "last_snapshot_at": "2026-11-18T01:53:23Z",
-      "updated_at": "2026-11-18T01:53:23Z",
+      "live": false,
+      "current_viewers": null,
+      "current_game": null,
+      "current_title": null,
+      "stream_started_at": null,
+      "last_status_at": "2026-11-18T02:51:54Z",
+      "last_snapshot_at": "2026-11-18T02:51:54Z",
+      "updated_at": "2026-11-18T02:51:54Z",
       "window": {
-        "samples_total": 336,
+        "samples_total": 337,
         "live_samples": 39,
         "streams_observed": 10,
         "average_viewers_sampled": 23.7,
@@ -6404,6 +6413,15 @@
           "title": "SE VIENE UN JUEGASOO!   🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
           "stream_id": "321134476254",
           "started_at": "2026-11-17T22:55:07Z"
+        },
+        {
+          "sampled_at": "2026-11-18T02:51:54Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -7066,11 +7084,11 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "last_status_at": "2026-11-18T01:53:23Z",
-      "last_snapshot_at": "2026-11-18T01:53:23Z",
-      "updated_at": "2026-11-18T01:53:23Z",
+      "last_status_at": "2026-11-18T02:51:54Z",
+      "last_snapshot_at": "2026-11-18T02:51:54Z",
+      "updated_at": "2026-11-18T02:51:54Z",
       "window": {
-        "samples_total": 336,
+        "samples_total": 337,
         "live_samples": 6,
         "streams_observed": 3,
         "average_viewers_sampled": 7.2,
@@ -10135,6 +10153,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-18T02:51:54Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -10146,16 +10173,16 @@
       "twitch_url": "https://twitch.tv/akumazoldyck",
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
-      "live": true,
-      "current_viewers": 10,
-      "current_game": "Fortnite",
-      "current_title": "fortinaiti",
-      "stream_started_at": "2026-11-18T01:43:22Z",
-      "last_status_at": "2026-11-18T01:53:23Z",
-      "last_snapshot_at": "2026-11-18T01:53:23Z",
-      "updated_at": "2026-11-18T01:53:23Z",
+      "live": false,
+      "current_viewers": null,
+      "current_game": null,
+      "current_title": null,
+      "stream_started_at": null,
+      "last_status_at": "2026-11-18T02:51:54Z",
+      "last_snapshot_at": "2026-11-18T02:51:54Z",
+      "updated_at": "2026-11-18T02:51:54Z",
       "window": {
-        "samples_total": 336,
+        "samples_total": 337,
         "live_samples": 26,
         "streams_observed": 13,
         "average_viewers_sampled": 6.7,
@@ -13318,6 +13345,15 @@
           "title": "fortinaiti",
           "stream_id": "322280239065",
           "started_at": "2026-11-18T01:43:22Z"
+        },
+        {
+          "sampled_at": "2026-11-18T02:51:54Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -13329,16 +13365,16 @@
       "twitch_url": "https://twitch.tv/daved0608",
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
-      "live": true,
-      "current_viewers": 1,
-      "current_game": "Fortnite",
-      "current_title": "Fortniete con amigos, en busca del token",
-      "stream_started_at": "2026-11-18T01:35:54Z",
-      "last_status_at": "2026-11-18T01:53:23Z",
-      "last_snapshot_at": "2026-11-18T01:53:23Z",
-      "updated_at": "2026-11-18T01:53:23Z",
+      "live": false,
+      "current_viewers": null,
+      "current_game": null,
+      "current_title": null,
+      "stream_started_at": null,
+      "last_status_at": "2026-11-18T02:51:54Z",
+      "last_snapshot_at": "2026-11-18T02:51:54Z",
+      "updated_at": "2026-11-18T02:51:54Z",
       "window": {
-        "samples_total": 336,
+        "samples_total": 337,
         "live_samples": 15,
         "streams_observed": 9,
         "average_viewers_sampled": 1.9,
@@ -16459,6 +16495,15 @@
           "title": "Fortniete con amigos, en busca del token",
           "stream_id": "322327389146",
           "started_at": "2026-11-18T01:35:54Z"
+        },
+        {
+          "sampled_at": "2026-11-18T02:51:54Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -17091,11 +17136,11 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "last_status_at": "2026-11-18T01:53:23Z",
-      "last_snapshot_at": "2026-11-18T01:53:23Z",
-      "updated_at": "2026-11-18T01:53:23Z",
+      "last_status_at": "2026-11-18T02:51:54Z",
+      "last_snapshot_at": "2026-11-18T02:51:54Z",
+      "updated_at": "2026-11-18T02:51:54Z",
       "window": {
-        "samples_total": 336,
+        "samples_total": 337,
         "live_samples": 70,
         "streams_observed": 15,
         "average_viewers_sampled": 4.8,
@@ -20251,6 +20296,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-18T02:51:54Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -20267,11 +20321,11 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "last_status_at": "2026-11-18T01:53:23Z",
-      "last_snapshot_at": "2026-11-18T01:53:23Z",
-      "updated_at": "2026-11-18T01:53:23Z",
+      "last_status_at": "2026-11-18T02:51:54Z",
+      "last_snapshot_at": "2026-11-18T02:51:54Z",
+      "updated_at": "2026-11-18T02:51:54Z",
       "window": {
-        "samples_total": 336,
+        "samples_total": 337,
         "live_samples": 17,
         "streams_observed": 8,
         "average_viewers_sampled": 16.5,
@@ -23421,6 +23475,15 @@
         },
         {
           "sampled_at": "2026-11-18T01:53:23Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-18T02:51:54Z",
           "is_live": false,
           "viewer_count": null,
           "game_name": null,
