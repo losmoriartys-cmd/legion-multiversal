@@ -1204,11 +1204,12 @@ function getCreatorAudienceMetric(hero){
  return null;
 }
 function getMostPlayedGames(hero,channel,sullyChannel){
+ const isGame=name=>Boolean(name)&&!['just chatting','categoría no informada'].includes(String(name).trim().toLocaleLowerCase('es-AR'));
  const historical=Array.isArray(sullyChannel?.game_breakdown)?sullyChannel.game_breakdown:[];
- const ranked=historical.filter(item=>item?.name&&Number.isFinite(Number(item.stream_hours))&&Number(item.stream_hours)>0).sort((a,b)=>Number(b.stream_hours)-Number(a.stream_hours)).map(item=>item.name);
+ const ranked=historical.filter(item=>isGame(item?.name)&&Number.isFinite(Number(item.stream_hours))&&Number(item.stream_hours)>0).sort((a,b)=>Number(b.stream_hours)-Number(a.stream_hours)).map(item=>item.name);
  if(ranked.length)return [...new Set(ranked)].slice(0,6);
  const observed=Array.isArray(channel?.window?.game_breakdown)?channel.window.game_breakdown:[];
- return [...new Set(observed.filter(item=>item?.name&&item.name!=='Categoría no informada'&&Number(item.streams_observed)>0).sort((a,b)=>Number(b.streams_observed)-Number(a.streams_observed)||Number(b.live_samples)-Number(a.live_samples)).map(item=>item.name))].slice(0,6);
+ return [...new Set(observed.filter(item=>isGame(item?.name)&&Number(item.streams_observed)>0).sort((a,b)=>Number(b.streams_observed)-Number(a.streams_observed)||Number(b.live_samples)-Number(a.live_samples)).map(item=>item.name))].slice(0,6);
 }
 
 function renderRosterSelector() {
