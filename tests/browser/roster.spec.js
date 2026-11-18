@@ -316,12 +316,12 @@ test('cada canal Twitch ofrece acceso al contador público en vivo y YouTube per
     ['habitos', 'habitos_atomicos']
   ];
   for (const [id, login] of twitchCreators) {
-    const link = page.locator('.comic-roster-card[data-creator-id="' + id + '"] .comic-roster-live-counter');
-    await expect(link).toHaveAttribute('href', 'https://livecounts.nl/twitch-realtime/?u=' + login);
-    await expect(link).toContainText('SEGUIDORES EN VIVO');
+    const counter = page.locator('.comic-roster-card[data-creator-id="' + id + '"] iframe.comic-roster-live-counter');
+    await expect(counter).toHaveAttribute('src', 'https://livecounts.nl/twitch-realtime/embed/?u=' + login);
+    await expect(counter).toHaveAttribute('title', /Seguidores en vivo/);
   }
   const pato = page.locator('.comic-roster-card[data-creator-id="pato-oratoris"]');
-  await expect(pato.locator('.comic-roster-live-counter')).toHaveCount(0);
+  await expect(pato.locator('iframe.comic-roster-live-counter')).toHaveCount(0);
   await expect(pato.locator('.comic-roster-stat-audience')).toContainText('YouTube');
 });
 
