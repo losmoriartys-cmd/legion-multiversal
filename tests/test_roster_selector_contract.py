@@ -60,8 +60,9 @@ class RosterComicCardsContractTests(unittest.TestCase):
         self.assertIn("hero.portrait", renderer)
         self.assertNotIn("hero.img ?", renderer)
         self.assertIn("const portrait = hero.portrait || hero.img || ''", self.app)
-        self.assertIn("const characterArt = hero.fullbody || hero.img", self.app)
-        self.assertIn("hero-profile-character-art", self.app)
+        self.assertNotIn("const characterArt = hero.fullbody || hero.img", self.app)
+        self.assertNotIn("hero-profile-character-art", self.app)
+        self.assertNotIn("hero-profile-character-card", self.app)
 
     def test_each_dossier_has_a_distinct_full_body_character_asset(self):
         expected_fullbody = {
@@ -89,9 +90,10 @@ class RosterComicCardsContractTests(unittest.TestCase):
         self.assertEqual({hero_id: hero["character_card"] for hero_id, hero in heroes.items()}, expected_cards)
         for asset in [*expected_fullbody.values(), *expected_cards.values()]:
             self.assertTrue((ROOT / asset).is_file())
-        self.assertIn("hero.fullbody || hero.img", self.app)
-        self.assertIn("hero.character_card", self.app)
-        self.assertIn("VER CARTA DEL PERSONAJE", self.app)
+        # Asset references remain in the roster data, not in the dossier renderer.
+        self.assertNotIn("hero.fullbody || hero.img", self.app)
+        self.assertNotIn("hero.character_card", self.app)
+        self.assertNotIn("VER CARTA DEL PERSONAJE", self.app)
 
     def test_cards_use_real_metrics_and_no_fixed_schedule(self):
         start = self.app.index("function renderRosterSelector()")
@@ -159,7 +161,8 @@ class RosterComicCardsContractTests(unittest.TestCase):
         end = self.app.index("\nfunction activateHeroProfileTab", start)
         tabs = self.app[start:end]
         self.assertIn('''id="profile-tab-perfil" role="tabpanel">'+overview+brandHtml''', tabs)
-        self.assertIn('''id="profile-tab-bitacora" role="tabpanel" hidden><h4>TRAYECTORIA Y COLABORACIONES DOCUMENTADAS</h4>'+logHtml+'</section>''', tabs)
+        self.assertIn("hero-profile-epic-codes", tabs)
+        self.assertIn("renderEpicCreatorCodeCard", tabs)
         self.assertNotIn("'+logHtml+brandHtml+'</section>'", tabs)
         self.assertNotIn('''ESTADÍSTICAS DEL CANAL</h4><div class="hero-profile-metric-grid"'+metricHtml''', tabs)
 
