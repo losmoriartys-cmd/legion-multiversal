@@ -231,6 +231,21 @@ class Tests(unittest.TestCase):
         p = compare(base, snapshot(edited, PLAT_OLD, ['pato-oratoris'], {}))
         self.assertTrue(any('el contenido cambió' in m for m in p))
 
+    def test_approved_editorial_list_additions_allow_count_change_exactly(self):
+        base = {'creator_records': {'pato-oratoris': {
+            'collaborations': {'count': 0, 'sha256': _list_hash([])}
+        }}, 'platform_stats': {}}
+        items = [
+            {'title': 'Acceso a keys · Lurkit', 'url': 'https://www.lurkit.com/'},
+            {'title': 'Acceso a keys · Keymailer', 'url': 'https://www.keymailer.co/'}
+        ]
+        current = {'creator_records': {'pato-oratoris': {
+            'collaborations': {'count': 2, 'sha256': _list_hash(items)}
+        }}, 'platform_stats': {}}
+        approved = {'creator_records': {'pato-oratoris': {'collaborations': items}}}
+        self.assertEqual(compare(base, current, approved_editorial=approved), [])
+        self.assertTrue(any('0 -> 2 elementos' in problem for problem in compare(base, current)))
+
     def test_aprobacion_editorial_es_exacta_y_no_cambia_el_baseline(self):
         base = self._snap(REC_OLD)
         videos = [dict(x) for x in VIDEOS]
