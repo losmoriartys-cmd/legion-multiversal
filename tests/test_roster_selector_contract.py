@@ -213,5 +213,29 @@ class RosterComicCardsContractTests(unittest.TestCase):
         self.assertNotIn("new Set(['akuma','ardipii'])", self.app)
 
 
+    def test_approved_dossier_directive_is_kept_in_repository(self):
+        directive = (ROOT / "DIRECTIVA_ROSTER_EXPEDIENTES.md").read_text(encoding="utf-8")
+        for criterion in ("Pato / Oratoris", "máximo **4 clips**", "Bitácora", "Lurkit", "Keymailer", "MÁS JUGADO", "cabecera global"):
+            self.assertIn(criterion, directive)
+
+    def test_profile_chapters_follow_directiva_without_duplicates(self):
+        start = self.app.index("function renderHeroProfileTabs")
+        end = self.app.index("\\nfunction activateHeroProfileTab", start)
+        tabs = self.app[start:end]
+        profile = tabs[tabs.index('id="profile-tab-perfil"'):tabs.index('id="profile-tab-estadisticas"')]
+        bitacora = tabs[tabs.index('id="profile-tab-bitacora"'):]
+        self.assertNotIn("brandHtml", profile)
+        self.assertIn("renderStatsDashboard(hero,channel,sullyChannel)", tabs)
+        for source_renderer in ("renderHelixDashboard", "renderSullyStats", "renderTwitchMetricsStats", "renderPlatformStats"):
+            self.assertIn(source_renderer, self.app)
+        self.assertIn("clips.slice(0,4)", tabs)
+        self.assertIn("hero-profile-character-card-link", self.app)
+        self.assertIn("const uniqueLinks=links.filter", self.app)
+        self.assertIn("LURKIT", bitacora)
+        self.assertIn("KEYMAILER", bitacora)
+        self.assertIn("hero-profile-epic-codes", bitacora)
+        self.assertNotIn("renderCommercialQuickView(hero)", bitacora)
+
+
 if __name__ == "__main__":
     unittest.main()
