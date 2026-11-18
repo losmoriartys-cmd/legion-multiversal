@@ -401,10 +401,16 @@ function renderStatsDashboard(hero,helix,sully){
  }
  if(platformProfile?.platforms){
   Object.entries(platformProfile.platforms).forEach(([platform,p])=>{
-   if(p.status!=='verified')return;
+   const title=platform.toUpperCase()+' · FUENTE VINCULADA';
+   const period=platformStatsData?.updated_at||'Captura sin fecha';
+   if(p.status!=='verified'){
+    const state=p.status==='credentials_required'?'Configuración pendiente':p.status==='error'?'Error de consulta':p.status==='awaiting_collection'?'Sin captura':'No verificado';
+    out+=renderStatsExecutiveSource(title,state,[],p.note||'La cuenta está vinculada, pero no hay una lectura verificable para mostrar.');
+    return;
+   }
    const m=p.metrics||{};
-   const metrics=platform==='youtube'?[{label:'Suscriptores',value:m.subscribers},{label:'Visualizaciones',value:m.total_views},{label:'Videos',value:m.videos_total}]:platform==='kick'?[{label:'Estado',value:m.live?'EN DIRECTO':'OFFLINE'},{label:'Espectadores',value:m.current_viewers},{label:'Categoría',value:m.category}]:[];
-   out+=renderStatsExecutiveSource(platform.toUpperCase()+' · FUENTE VINCULADA',platformStatsData?.updated_at||'Captura sin fecha',metrics,'Datos de plataforma independientes de las métricas de Twitch.');
+   const metrics=platform==='youtube'?[{label:'Suscriptores',value:m.subscribers},{label:'Visualizaciones',value:m.total_views},{label:'Videos',value:m.videos_total}]:platform==='kick'?[{label:'Estado',value:m.live===true?'EN DIRECTO':m.live===false?'OFFLINE':null},{label:'Espectadores',value:m.current_viewers},{label:'Categoría',value:m.category}]:[];
+   out+=renderStatsExecutiveSource(title,period,metrics,'Datos de plataforma independientes de las métricas de Twitch.');
   });
  }
  out+='</div>';
