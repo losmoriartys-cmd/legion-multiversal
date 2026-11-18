@@ -21,6 +21,20 @@
           "url": "https://www.twitch.tv/ther0d3r1k/clip/CooperativePopularFlamingoM4xHeh-3bJjuJyiLiZOEEaC",
           "source": "Twitch · enlace aportado por el creador"
         }
+      ],
+      "collaborations": [
+        {
+          "title": "Acceso a keys · Lurkit",
+          "description": "Acceso a la plataforma de campañas y claves para juegos. No implica una campaña, remuneración o patrocinio activo.",
+          "url": "https://www.lurkit.com/",
+          "source": "Confirmación del usuario · 18/11/2026"
+        },
+        {
+          "title": "Acceso a keys · Keymailer",
+          "description": "Acceso a la plataforma de campañas y claves para juegos. No implica una campaña, remuneración o patrocinio activo.",
+          "url": "https://www.keymailer.co/",
+          "source": "Confirmación del usuario · 18/11/2026"
+        }
       ]
     },
     "pato-oratoris": {
@@ -78,6 +92,54 @@
         "schedule": "Sin frecuencia de publicación definida.",
         "metrics_source": "platform-stats.json"
       }
+    },
+    "lady-moriarty": {
+      "collaborations": [
+        {
+          "title": "Acceso a keys · Lurkit",
+          "description": "Acceso a la plataforma de campañas y claves para juegos. No implica una campaña, remuneración o patrocinio activo.",
+          "url": "https://www.lurkit.com/",
+          "source": "Confirmación del usuario · 18/11/2026"
+        },
+        {
+          "title": "Acceso a keys · Keymailer",
+          "description": "Acceso a la plataforma de campañas y claves para juegos. No implica una campaña, remuneración o patrocinio activo.",
+          "url": "https://www.keymailer.co/",
+          "source": "Confirmación del usuario · 18/11/2026"
+        }
+      ]
+    },
+    "akuma": {
+      "collaborations": [
+        {
+          "title": "Acceso a keys · Lurkit",
+          "description": "Acceso a la plataforma de campañas y claves para juegos. No implica una campaña, remuneración o patrocinio activo.",
+          "url": "https://www.lurkit.com/",
+          "source": "Confirmación del usuario · 18/11/2026"
+        },
+        {
+          "title": "Acceso a keys · Keymailer",
+          "description": "Acceso a la plataforma de campañas y claves para juegos. No implica una campaña, remuneración o patrocinio activo.",
+          "url": "https://www.keymailer.co/",
+          "source": "Confirmación del usuario · 18/11/2026"
+        }
+      ]
+    },
+    "habitos": {
+      "collaborations": [
+        {
+          "title": "Acceso a keys · Lurkit",
+          "description": "Acceso a la plataforma de campañas y claves para juegos. No implica una campaña, remuneración o patrocinio activo.",
+          "url": "https://www.lurkit.com/",
+          "source": "Confirmación del usuario · 18/11/2026"
+        },
+        {
+          "title": "Acceso a keys · Keymailer",
+          "description": "Acceso a la plataforma de campañas y claves para juegos. No implica una campaña, remuneración o patrocinio activo.",
+          "url": "https://www.keymailer.co/",
+          "source": "Confirmación del usuario · 18/11/2026"
+        }
+      ]
     }
   }
 }
