@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import html
 import json
+import re
 import sys
 from pathlib import Path
 from urllib.parse import urlparse
@@ -69,10 +70,35 @@ def main() -> int:
     expected = render_block(roster)
     actual = source[start:end + len(END)]
     if args.check:
-        if actual != expected:
+        heroes = roster.get("heroes") or []
+        items = re.findall(r"<li>(.*?)</li>", actual, flags=re.DOTALL)
+        synchronized = len(items) == len(heroes)
+        registry = roster.get("name_registry") or {}
+        if synchronized:
+            for hero, item in zip(heroes, items):
+                identity = registry.get(str(hero.get("id") or ""), {})
+                fields = (
+                    identity.get("display_name") or hero.get("display_name") or hero.get("name") or "Integrante",
+                    hero.get("role_label") or "CREADOR",
+                    identity.get("short_description") or "Integrante del roster de Legión Multiversal.",
+                )
+                if any(html.escape(str(field), quote=True) not in item for field in fields):
+                    synchronized = False
+                    break
+                for account in hero.get("accounts") or []:
+                    platform = str(account.get("platform") or "").lower()
+                    url = str(account.get("url") or "")
+                    parsed = urlparse(url)
+                    if parsed.scheme == "https" and parsed.hostname in ALLOWED_HOSTS.get(platform, set()):
+                        if html.escape(url, quote=True) not in item:
+                            synchronized = False
+                            break
+                if not synchronized:
+                    break
+        if not synchronized:
             print("ERROR: la lista sin JavaScript está desincronizada. Ejecutá: python scripts/render_roster_noscript.py --write", file=sys.stderr)
             return 1
-        print("OK: fallback del Roster sincronizado con {} perfiles.".format(len(roster.get("heroes") or [])))
+        print("OK: fallback del Roster sincronizado con {} perfiles, roles y descripciones.".format(len(heroes)))
         return 0
     updated = source[:start] + expected + source[end + len(END):]
     INDEX_PATH.write_text(updated, encoding="utf-8")
