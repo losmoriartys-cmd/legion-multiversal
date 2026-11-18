@@ -171,6 +171,17 @@ class RosterComicCardsContractTests(unittest.TestCase):
         self.assertIn("'+logHtml+brandHtml+((hero.id", tabs)
         self.assertNotIn('''id="profile-tab-perfil" role="tabpanel">'+overview+brandHtml''', tabs)
 
+    def test_stats_dashboard_preserves_missing_sources_without_inventing_values(self):
+        start = self.app.index("function renderStatsDashboard(")
+        end = self.app.index("\nfunction renderAutomaticTwitchClips", start)
+        renderer = self.app[start:end]
+        self.assertIn("Object.entries(platformProfile.platforms)", renderer)
+        self.assertNotIn("if(p.status!=='verified')return;", renderer)
+        self.assertIn("renderStatsExecutiveSource(title,state,[]", renderer)
+        self.assertIn("renderStatsSourceDetails('TWITCH HELIX'", renderer)
+        self.assertIn("renderStatsSourceDetails('SULLYGNOME'", renderer)
+        self.assertIn("renderStatsSourceDetails('TWITCHMETRICS'", renderer)
+
     def test_only_one_roster_directory_remains_in_the_chapter(self):
         self.assertIn('id="roster-selector"', self.html)
         self.assertIn('id="roster"', self.html)
