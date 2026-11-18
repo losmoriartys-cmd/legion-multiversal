@@ -13,17 +13,17 @@
     "ther0d3r1k"
   ],
   "collection": {
-    "started_at": "2026-11-18T00:22:29Z",
+    "started_at": "2026-11-18T01:53:23Z",
     "expected_channels": 7,
     "resolved_channels": 7,
     "sampled_channels": [
+      "akumazoldyck",
       "ardipii",
       "daved0608",
       "habitos_atomicos",
       "ladymoriarty01",
       "losmoriartys",
-      "ther0d3r1k",
-      "akumazoldyck"
+      "ther0d3r1k"
     ],
     "skipped_channels": [],
     "complete": true,
@@ -39,7 +39,7 @@
     "elgabii090"
   ],
   "channel_registry_note": "Los canales archivados se conservan para consulta histórica y no se incluyen en los indicadores del roster activo.",
-  "updated_at": "2026-11-18T00:22:29Z",
+  "updated_at": "2026-11-18T01:53:23Z",
   "channels": {
     "ladymoriarty01": {
       "login": "ladymoriarty01",
@@ -54,11 +54,11 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "last_status_at": "2026-11-18T00:22:29Z",
-      "last_snapshot_at": "2026-11-18T00:22:29Z",
-      "updated_at": "2026-11-18T00:22:29Z",
+      "last_status_at": "2026-11-18T01:53:23Z",
+      "last_snapshot_at": "2026-11-18T01:53:23Z",
+      "updated_at": "2026-11-18T01:53:23Z",
       "window": {
-        "samples_total": 335,
+        "samples_total": 336,
         "live_samples": 13,
         "streams_observed": 6,
         "average_viewers_sampled": 6.6,
@@ -3184,6 +3184,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-18T01:53:23Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -3196,27 +3205,27 @@
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
       "live": true,
-      "current_viewers": 51,
-      "current_game": "DUST: Origins",
-      "current_title": "SE VIENE UN JUEGASOO!  #DUSTOrigins 🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
+      "current_viewers": 10,
+      "current_game": "Fortnite",
+      "current_title": "SE VIENE UN JUEGASOO!   🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
       "stream_started_at": "2026-11-17T22:55:07Z",
-      "last_status_at": "2026-11-18T00:22:29Z",
-      "last_snapshot_at": "2026-11-18T00:22:29Z",
-      "updated_at": "2026-11-18T00:22:29Z",
+      "last_status_at": "2026-11-18T01:53:23Z",
+      "last_snapshot_at": "2026-11-18T01:53:23Z",
+      "updated_at": "2026-11-18T01:53:23Z",
       "window": {
-        "samples_total": 335,
-        "live_samples": 38,
+        "samples_total": 336,
+        "live_samples": 39,
         "streams_observed": 10,
-        "average_viewers_sampled": 24.0,
+        "average_viewers_sampled": 23.7,
         "peak_viewers_sampled": 51,
-        "observed_live_hours": 22.63,
-        "estimated_hours_watched": 540.33,
+        "observed_live_hours": 23.55,
+        "estimated_hours_watched": 549.49,
         "game_breakdown": [
           {
             "name": "Fortnite",
-            "live_samples": 9,
-            "streams_observed": 4,
-            "average_viewers_sampled": 23.3,
+            "live_samples": 10,
+            "streams_observed": 5,
+            "average_viewers_sampled": 22.0,
             "peak_viewers_sampled": 46
           },
           {
@@ -3363,9 +3372,9 @@
           },
           {
             "date": "2026-11-18",
-            "live_samples": 1,
+            "live_samples": 2,
             "streams_observed": 1,
-            "average_viewers_sampled": 51.0,
+            "average_viewers_sampled": 30.5,
             "peak_viewers_sampled": 51
           }
         ],
@@ -6386,6 +6395,15 @@
           "title": "SE VIENE UN JUEGASOO!  #DUSTOrigins 🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
           "stream_id": "321134476254",
           "started_at": "2026-11-17T22:55:07Z"
+        },
+        {
+          "sampled_at": "2026-11-18T01:53:23Z",
+          "is_live": true,
+          "viewer_count": 10,
+          "game_name": "Fortnite",
+          "title": "SE VIENE UN JUEGASOO!   🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
+          "stream_id": "321134476254",
+          "started_at": "2026-11-17T22:55:07Z"
         }
       ]
     },
@@ -7048,11 +7066,11 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "last_status_at": "2026-11-18T00:22:29Z",
-      "last_snapshot_at": "2026-11-18T00:22:29Z",
-      "updated_at": "2026-11-18T00:22:29Z",
+      "last_status_at": "2026-11-18T01:53:23Z",
+      "last_snapshot_at": "2026-11-18T01:53:23Z",
+      "updated_at": "2026-11-18T01:53:23Z",
       "window": {
-        "samples_total": 335,
+        "samples_total": 336,
         "live_samples": 6,
         "streams_observed": 3,
         "average_viewers_sampled": 7.2,
@@ -10108,6 +10126,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-18T01:53:23Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -10120,27 +10147,27 @@
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
       "live": true,
-      "current_viewers": 4,
-      "current_game": "DUST: Origins",
-      "current_title": "dust origins",
-      "stream_started_at": "2026-11-18T00:00:35Z",
-      "last_status_at": "2026-11-18T00:22:29Z",
-      "last_snapshot_at": "2026-11-18T00:22:29Z",
-      "updated_at": "2026-11-18T00:22:29Z",
+      "current_viewers": 10,
+      "current_game": "Fortnite",
+      "current_title": "fortinaiti",
+      "stream_started_at": "2026-11-18T01:43:22Z",
+      "last_status_at": "2026-11-18T01:53:23Z",
+      "last_snapshot_at": "2026-11-18T01:53:23Z",
+      "updated_at": "2026-11-18T01:53:23Z",
       "window": {
-        "samples_total": 335,
-        "live_samples": 25,
-        "streams_observed": 12,
-        "average_viewers_sampled": 6.5,
+        "samples_total": 336,
+        "live_samples": 26,
+        "streams_observed": 13,
+        "average_viewers_sampled": 6.7,
         "peak_viewers_sampled": 17,
         "observed_live_hours": 10.74,
         "estimated_hours_watched": 62.09,
         "game_breakdown": [
           {
             "name": "Fortnite",
-            "live_samples": 15,
-            "streams_observed": 7,
-            "average_viewers_sampled": 4.8,
+            "live_samples": 16,
+            "streams_observed": 8,
+            "average_viewers_sampled": 5.1,
             "peak_viewers_sampled": 17
           },
           {
@@ -10259,10 +10286,10 @@
           },
           {
             "date": "2026-11-18",
-            "live_samples": 1,
-            "streams_observed": 1,
-            "average_viewers_sampled": 4.0,
-            "peak_viewers_sampled": 4
+            "live_samples": 2,
+            "streams_observed": 2,
+            "average_viewers_sampled": 7.0,
+            "peak_viewers_sampled": 10
           }
         ],
         "method": "Muestreo propio con cadencia observada cercana a 55 minutos, variable por la programación de GitHub Actions; horas estimadas solo entre muestras consecutivas del mismo directo cuando el intervalo no supera 110 minutos. Categorías y evolución diaria se calculan sobre las muestras observadas."
@@ -13282,6 +13309,15 @@
           "title": "dust origins",
           "stream_id": "321199727196",
           "started_at": "2026-11-18T00:00:35Z"
+        },
+        {
+          "sampled_at": "2026-11-18T01:53:23Z",
+          "is_live": true,
+          "viewer_count": 10,
+          "game_name": "Fortnite",
+          "title": "fortinaiti",
+          "stream_id": "322280239065",
+          "started_at": "2026-11-18T01:43:22Z"
         }
       ]
     },
@@ -13293,18 +13329,18 @@
       "twitch_url": "https://twitch.tv/daved0608",
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
-      "live": false,
-      "current_viewers": null,
-      "current_game": null,
-      "current_title": null,
-      "stream_started_at": null,
-      "last_status_at": "2026-11-18T00:22:29Z",
-      "last_snapshot_at": "2026-11-18T00:22:29Z",
-      "updated_at": "2026-11-18T00:22:29Z",
+      "live": true,
+      "current_viewers": 1,
+      "current_game": "Fortnite",
+      "current_title": "Fortniete con amigos, en busca del token",
+      "stream_started_at": "2026-11-18T01:35:54Z",
+      "last_status_at": "2026-11-18T01:53:23Z",
+      "last_snapshot_at": "2026-11-18T01:53:23Z",
+      "updated_at": "2026-11-18T01:53:23Z",
       "window": {
-        "samples_total": 335,
-        "live_samples": 14,
-        "streams_observed": 8,
+        "samples_total": 336,
+        "live_samples": 15,
+        "streams_observed": 9,
         "average_viewers_sampled": 1.9,
         "peak_viewers_sampled": 5,
         "observed_live_hours": 4.47,
@@ -13312,9 +13348,9 @@
         "game_breakdown": [
           {
             "name": "Fortnite",
-            "live_samples": 10,
-            "streams_observed": 6,
-            "average_viewers_sampled": 1.6,
+            "live_samples": 11,
+            "streams_observed": 7,
+            "average_viewers_sampled": 1.5,
             "peak_viewers_sampled": 3
           },
           {
@@ -13388,6 +13424,13 @@
             "streams_observed": 1,
             "average_viewers_sampled": 2.0,
             "peak_viewers_sampled": 3
+          },
+          {
+            "date": "2026-11-18",
+            "live_samples": 1,
+            "streams_observed": 1,
+            "average_viewers_sampled": 1.0,
+            "peak_viewers_sampled": 1
           }
         ],
         "method": "Muestreo propio con cadencia observada cercana a 55 minutos, variable por la programación de GitHub Actions; horas estimadas solo entre muestras consecutivas del mismo directo cuando el intervalo no supera 110 minutos. Categorías y evolución diaria se calculan sobre las muestras observadas."
@@ -16407,6 +16450,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-18T01:53:23Z",
+          "is_live": true,
+          "viewer_count": 1,
+          "game_name": "Fortnite",
+          "title": "Fortniete con amigos, en busca del token",
+          "stream_id": "322327389146",
+          "started_at": "2026-11-18T01:35:54Z"
         }
       ]
     },
@@ -17039,11 +17091,11 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "last_status_at": "2026-11-18T00:22:29Z",
-      "last_snapshot_at": "2026-11-18T00:22:29Z",
-      "updated_at": "2026-11-18T00:22:29Z",
+      "last_status_at": "2026-11-18T01:53:23Z",
+      "last_snapshot_at": "2026-11-18T01:53:23Z",
+      "updated_at": "2026-11-18T01:53:23Z",
       "window": {
-        "samples_total": 335,
+        "samples_total": 336,
         "live_samples": 70,
         "streams_observed": 15,
         "average_viewers_sampled": 4.8,
@@ -20190,6 +20242,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-18T01:53:23Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -20206,11 +20267,11 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "last_status_at": "2026-11-18T00:22:29Z",
-      "last_snapshot_at": "2026-11-18T00:22:29Z",
-      "updated_at": "2026-11-18T00:22:29Z",
+      "last_status_at": "2026-11-18T01:53:23Z",
+      "last_snapshot_at": "2026-11-18T01:53:23Z",
+      "updated_at": "2026-11-18T01:53:23Z",
       "window": {
-        "samples_total": 335,
+        "samples_total": 336,
         "live_samples": 17,
         "streams_observed": 8,
         "average_viewers_sampled": 16.5,
@@ -23351,6 +23412,15 @@
         },
         {
           "sampled_at": "2026-11-18T00:22:29Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-18T01:53:23Z",
           "is_live": false,
           "viewer_count": null,
           "game_name": null,
