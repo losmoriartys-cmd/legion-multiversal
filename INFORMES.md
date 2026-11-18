@@ -3365,3 +3365,17 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **Artefacto visual:** `roster-visual-review-5530031615ea30d52fe3fc6f1b3b4c98cbba5eb1` (capturas automatizadas disponibles en Actions). Las capturas se generaron; no se declara una inspección manual de píxel a píxel.
 - **Producción:** sin cambios. PR #63 sigue Draft y sin merge.
 - **Integración pendiente:** la rama de la PR está 9 commits detrás de `main`; antes de integrar hay que sincronizarla y repetir CI sobre el HEAD resultante.
+
+
+---
+
+## 2026-11-18 — Regla de implementación real y checklist maestro de producción
+
+- **Motivo:** el usuario solicita conservar una guía detallada y avanzar tachando únicamente lo que esté realmente implementado, probado e integrado en producción. Reitera como regla no negociable que no se acumulen PR abiertos.
+- **Archivos creados/modificados:** `PLAN_CIERRE_IMPLEMENTACION_PRODUCCION.md` (nuevo checklist maestro); `README.md` (protocolo obligatorio actualizado); `INFORMES.md` (este registro).
+- **Contenido registrado:** tres caminos de entrada; navegación y numeración editorial 00–10; registro canónico de ocho integrantes; Roster y expedientes; BarFender y transparencia; metodología y estadísticas; formularios; capítulo EN VIVO/Legión TV; QA, responsive, accesibilidad y verificación de producción.
+- **Regla de aceptación:** una tarea solo se considera terminada cuando está integrada en `main`, pasó las pruebas aplicables, el despliegue de producción fue exitoso, el SHA publicado fue comprobado y la función se revisó en el sitio público. PR, rama, commit, preview o código sin verificar no cuentan como terminado.
+- **Política PR:** no acumular PR abiertos. Integrar cambios probados en cuanto sea seguro; si un PR es necesario por protección/revisión, mantenerlo de vida corta y cerrarlo mediante merge o descarte documentado. Nunca declarar un PR cerrado sin merge como implementación.
+- **Commits de documentación en main:** `856e7be4dbbb62991d2250ffe90c7e475964e8a8` (guía maestra); `bcd670b25df6802431bfcbe15a9c6c2064cb5d91` (README/protocolo).
+- **Estado funcional:** esta intervención registra la guía y las reglas; **no implementa todavía** los cambios funcionales de los frentes A–H. Permanecen pendientes de auditoría, ejecución, pruebas e integración.
+- **Siguiente paso obligatorio:** auditar HEAD actual de `main`, PR #67 y PR #66; reconciliar su contenido con las directivas vigentes; completar y probar el frente institucional antes de avanzar al siguiente.
