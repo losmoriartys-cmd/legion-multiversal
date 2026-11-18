@@ -3392,3 +3392,14 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **Pendiente de verificar:** enlace funcional del botón de carta y destino modal; la distribución del layout/cabecera con CSS; si el panel de accesos está bien rotulado para los cuatro perfiles y los enlaces son los correctos; Epic code render; estadística expandida; eliminación total de «Muestras» y duplicaciones; foto full-body no dominante; tests Python/Playwright actualizados y revisión visual de los ocho perfiles.
 - **CI:** al consultar Actions asociado al SHA actual `3e79b4baff381ceeac113fa64f166e2d52b2835b`, todavía no se devolvieron runs. No se declara sintaxis/test/preview visual aprobado en esta entrada.
 - **Estado:** trabajo parcial; PR Draft #66; sin merge ni producción.
+
+
+## 2026-11-18 — Segundo bloque: estadísticas, estilos y pruebas ajustadas al criterio
+
+- **`app.js`:** la pestaña Estadísticas deja de usar solo el grid de cuatro métricas y reutiliza `renderStatsDashboard(hero, channel, sullyChannel)`, que incorpora las fuentes existentes Helix, SullyGnome, TwitchMetrics y estadísticas por plataforma cuando están disponibles. Se añadió la resolución de `sullyChannel` al renderer.
+- **`styles.css`:** estilos específicos para el botón de carta en sidebar y tarjetas de acceso a Lurkit/Keymailer, con foco visible y estados hover.
+- **`tests/test_roster_selector_contract.py`:** assertions ajustadas al Perfil simplificado, accesos a carta, panel de fuentes y clips limitados.
+- **`tests/browser/roster.spec.js`:** la cobertura pasa a verificar Perfil, Estadísticas, Clips y Bitácora para los ocho perfiles; valida límite 4, contenido editorial único, ausencia de «MUESTRAS», accesos Lurkit/Keymailer en los cuatro perfiles y Epic en los dos perfiles pertinentes. Se mantiene la prueba de teclado y navegación.
+- **Commits funcionales:** `3e79b4b`, `3e18faa`, `8d7c297`, `1ea7cf3`, `0ab6301`, `e424818`, `48585c2` (la documentación de directiva e informes también está versionada en la misma rama).
+- **Validación:** aún no hay runs de Actions devueltos para el HEAD consultado `48585c2bb38c46444224bb420c0150dda3d31e2e`. No se declara que las pruebas pasen ni que el render visual sea correcto.
+- **Pendientes bloqueantes:** validar sintaxis y CI; revisar funcionamiento del botón «Ver carta»; comprobar cabecera/capítulos en CSS; auditoría exhaustiva de secciones «Muestras» en todos los datos; comprobar estadísticas disponibles y diferenciación de juego reciente vs. más jugado; validar códigos Epic y sociales; inspección de ocho perfiles en preview de escritorio/móvil.
