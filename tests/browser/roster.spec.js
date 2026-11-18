@@ -91,7 +91,21 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
     await profileTabs.filter({ hasText: 'CLIPS' }).click();
     expect(await dossier.locator('#profile-tab-clips .hero-profile-clip').count()).toBeLessThanOrEqual(4);
     await profileTabs.filter({ hasText: 'ESTADÍSTICAS' }).click();
-    await expect(dossier.locator('#profile-tab-estadisticas .stats-dashboard')).toBeVisible();
+    const statsPanel = dossier.locator('#profile-tab-estadisticas .stats-dashboard');
+    await expect(statsPanel).toBeVisible();
+    await expect(statsPanel.locator('.stats-executive-header')).toBeVisible();
+    await expect(statsPanel.locator('.stats-executive-grid .stats-executive-source').count()).resolves.toBeGreaterThanOrEqual(3);
+    const sourceDetails = statsPanel.locator('.stats-source-details');
+    await expect(sourceDetails).toHaveCount(3);
+    for (let sourceIndex = 0; sourceIndex < 3; sourceIndex++) {
+      const sourceDetail = sourceDetails.nth(sourceIndex);
+      await expect(sourceDetail).not.toHaveAttribute('open', '');
+      await sourceDetail.locator('summary').click();
+      await expect(sourceDetail).toHaveAttribute('open', '');
+      await expect(sourceDetail.locator('.stats-source-details-body')).toBeVisible();
+      await sourceDetail.locator('summary').click();
+      await expect(sourceDetail).not.toHaveAttribute('open', '');
+    }
     await profileTabs.filter({ hasText: 'BITÁCORA' }).click();
     await expect(dossier.locator('#profile-tab-bitacora .hero-profile-brand')).toBeVisible();
     await expect(dossier.locator('#profile-tab-bitacora .hero-profile-internal-art')).toHaveCount(0);
