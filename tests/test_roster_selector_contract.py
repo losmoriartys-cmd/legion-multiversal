@@ -12,6 +12,7 @@ class RosterComicCardsContractTests(unittest.TestCase):
         cls.html = (ROOT / "index.html").read_text(encoding="utf-8")
         cls.css = (ROOT / "roster-selector.css").read_text(encoding="utf-8")
         cls.roster = json.loads((ROOT / "roster-data.json").read_text(encoding="utf-8"))
+        cls.creator_records = json.loads((ROOT / "creator-records.json").read_text(encoding="utf-8"))
 
     def test_all_eight_canonical_profiles_remain_the_source(self):
         heroes = self.roster["heroes"]
@@ -60,8 +61,9 @@ class RosterComicCardsContractTests(unittest.TestCase):
         self.assertIn("hero.portrait", renderer)
         self.assertNotIn("hero.img ?", renderer)
         self.assertIn("const portrait = hero.portrait || hero.img || ''", self.app)
-        self.assertIn("const characterArt = hero.fullbody || hero.img", self.app)
-        self.assertIn("hero-profile-character-art", self.app)
+        self.assertNotIn("const characterArt = hero.fullbody || hero.img", self.app)
+        self.assertNotIn("hero-profile-character-art", self.app)
+        self.assertIn("hero-profile-character-card-link", self.app)
 
     def test_each_dossier_has_a_distinct_full_body_character_asset(self):
         expected_fullbody = {
@@ -89,9 +91,10 @@ class RosterComicCardsContractTests(unittest.TestCase):
         self.assertEqual({hero_id: hero["character_card"] for hero_id, hero in heroes.items()}, expected_cards)
         for asset in [*expected_fullbody.values(), *expected_cards.values()]:
             self.assertTrue((ROOT / asset).is_file())
-        self.assertIn("hero.fullbody || hero.img", self.app)
-        self.assertIn("hero.character_card", self.app)
-        self.assertIn("VER CARTA DEL PERSONAJE", self.app)
+        # Asset references remain in the roster data, not in the dossier renderer.
+        self.assertNotIn("hero.fullbody || hero.img", self.app)
+        self.assertNotIn("hero.character_card", self.app)
+        self.assertIn("VER CARTA COMPLETA", self.app)
 
     def test_cards_use_real_metrics_and_no_fixed_schedule(self):
         start = self.app.index("function renderRosterSelector()")
@@ -146,11 +149,13 @@ class RosterComicCardsContractTests(unittest.TestCase):
         self.assertIn("page.classList.add('is-active')", self.app)
         self.assertIn("page.classList.remove('is-active')", self.app)
 
-    def test_commercial_dossier_shows_auditable_relative_performance_bars(self):
+    def test_dossier_stats_use_source_dashboard_and_clips_are_limited(self):
         self.assertIn("function renderCommercialQuickView(hero)", self.app)
-        self.assertIn("renderCommercialQuickView(hero)", self.app)
-        self.assertIn("hero-profile-metric-scale", self.app)
-        self.assertIn("metricPeerValues", self.app)
+        self.assertNotIn("renderCommercialQuickView(hero)", self.app.split("function renderHeroProfileTabs", 1)[1].split("function activateHeroProfileTab", 1)[0])
+        self.assertIn("renderStatsDashboard(hero,channel,sullyChannel)", self.app)
+        self.assertIn("clips.slice(0,4)", self.app)
+        self.assertIn("MÁS JUGADO · ", self.app)
+        self.assertIn("JUEGO RECIENTE · ", self.app)
         self.assertIn("no es un ranking ni una métrica de plataforma", self.app)
         self.assertIn("average_viewers_sampled", self.app)
         self.assertIn("peak_viewers_sampled", self.app)
@@ -158,10 +163,11 @@ class RosterComicCardsContractTests(unittest.TestCase):
         start = self.app.index("function renderHeroProfileTabs")
         end = self.app.index("\nfunction activateHeroProfileTab", start)
         tabs = self.app[start:end]
-        self.assertIn('''id="profile-tab-perfil" role="tabpanel">'+overview+brandHtml''', tabs)
-        self.assertIn('''id="profile-tab-bitacora" role="tabpanel" hidden><h4>TRAYECTORIA Y COLABORACIONES DOCUMENTADAS</h4>'+logHtml+'</section>''', tabs)
-        self.assertNotIn("'+logHtml+brandHtml+'</section>'", tabs)
-        self.assertNotIn('''ESTADÍSTICAS DEL CANAL</h4><div class="hero-profile-metric-grid"'+metricHtml''', tabs)
+        self.assertIn('''id="profile-tab-perfil" role="tabpanel">'+overview''', tabs)
+        self.assertIn("hero-profile-epic-codes", tabs)
+        self.assertIn("renderEpicCreatorCodeCard", tabs)
+        self.assertIn("'+logHtml+brandHtml+((hero.id", tabs)
+        self.assertNotIn('''id="profile-tab-perfil" role="tabpanel">'+overview+brandHtml''', tabs)
 
     def test_only_one_roster_directory_remains_in_the_chapter(self):
         self.assertIn('id="roster-selector"', self.html)
@@ -211,6 +217,36 @@ class RosterComicCardsContractTests(unittest.TestCase):
     def test_no_demo_live_simulation_is_introduced(self):
         self.assertNotIn("simular directo", self.app)
         self.assertNotIn("new Set(['akuma','ardipii'])", self.app)
+
+
+    def test_approved_dossier_directive_is_kept_in_repository(self):
+        directive = (ROOT / "DIRECTIVA_ROSTER_EXPEDIENTES.md").read_text(encoding="utf-8")
+        for criterion in ("Pato / Oratoris", "4 clips por streamer", "Bitácora", "Lurkit", "Keymailer", "mejor juego", "cabecera global"):
+            self.assertIn(criterion, directive)
+
+    def test_profile_chapters_follow_directiva_without_duplicates(self):
+        start = self.app.index("function renderHeroProfileTabs")
+        end = self.app.index("\nfunction activateHeroProfileTab", start)
+        tabs = self.app[start:end]
+        profile = tabs[tabs.index('id="profile-tab-perfil"'):tabs.index('id="profile-tab-estadisticas"')]
+        bitacora = tabs[tabs.index('id="profile-tab-bitacora"'):]
+        self.assertNotIn("brandHtml", profile)
+        self.assertIn("renderStatsDashboard(hero,channel,sullyChannel)", tabs)
+        for source_renderer in ("renderHelixDashboard", "renderSullyStats", "renderTwitchMetricsStats", "renderPlatformStats"):
+            self.assertIn(source_renderer, self.app)
+        self.assertIn("clips.slice(0,4)", tabs)
+        self.assertNotIn("muestras observadas", tabs.lower())
+        self.assertIn("CAPTURAS EN DIRECTO", self.app)
+        self.assertIn("hero-profile-character-card-link", self.app)
+        self.assertIn("const uniqueLinks=links.filter", self.app)
+        for profile_id in ("lady-moriarty", "rod3r1k", "akuma", "habitos"):
+            collaborations = self.creator_records["channels"][profile_id]["collaborations"]
+            titles = {item["title"] for item in collaborations}
+            self.assertIn("Acceso a keys · Lurkit", titles)
+            self.assertIn("Acceso a keys · Keymailer", titles)
+        self.assertIn("hero-profile-epic-codes", bitacora)
+        self.assertNotIn("renderCommercialQuickView(hero)", bitacora)
+
 
 
 if __name__ == "__main__":
