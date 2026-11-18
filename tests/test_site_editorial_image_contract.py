@@ -70,11 +70,12 @@ class SiteEditorialImageContract(unittest.TestCase):
         self.assertNotIn("El historial de campañas y accesos se retiró", self.html)
 
 
-    def test_collaboration_archive_does_not_duplicate_roster_portraits_or_bitacora_index(self):
+    def test_collaboration_archive_avoids_roster_portraits_and_links_bitacora(self):
         start = self.html.index('<section id="chapter-12"')
         end = self.html.index('\n</section>', start)
         chapter = self.html[start:end]
-        self.assertNotIn('bitacora-preview.html', chapter)
+        self.assertEqual(chapter.count('href="./bitacora-preview.html"'), 1)
+        self.assertEqual(self.html.count('href="./bitacora-preview.html"'), 2)
         self.assertNotIn('assets/carnet/', chapter)
         self.assertNotIn('assets/ladymoriarty.jpg', chapter)
         self.assertNotIn('assets/rod3r1k.jpg', chapter)
