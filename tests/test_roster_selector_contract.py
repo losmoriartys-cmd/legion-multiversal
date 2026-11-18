@@ -234,8 +234,10 @@ class RosterComicCardsContractTests(unittest.TestCase):
         self.assertIn('id="roster-selector"', self.html)
         self.assertIn("roster-selector.css?v=20261118-livecounts-counter-1", self.html)
         self.assertNotIn("followers_total", self.app[self.app.find("function getCreatorAudienceMetric"):self.app.find("function getMostPlayedGames")])
-        self.assertIn("twitch-realtime/embed/?u=", self.app)
-        self.assertIn("iframe.comic-roster-live-counter", self.css)
+        self.assertIn("twitch-realtime/?u=", self.app)
+        self.assertIn("comic-roster-live-counter-link", self.app)
+        self.assertNotIn("twitch-realtime/embed/?u=", self.app)
+        self.assertNotIn("iframe.comic-roster-live-counter", self.css)
         self.assertNotIn("roster-selector.css?v=20261117-audience-cards-1", self.html)
         self.assertIn("function renderRosterSelector()", self.app)
 
