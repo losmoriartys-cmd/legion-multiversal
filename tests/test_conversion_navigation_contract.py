@@ -11,17 +11,24 @@ class ConversionNavigationContractTests(unittest.TestCase):
         cls.html = (ROOT / "index.html").read_text(encoding="utf-8")
         cls.css = (ROOT / "conversion-overhaul.css").read_text(encoding="utf-8")
 
-    def test_primary_navigation_has_five_ordered_routes(self):
+    def test_primary_navigation_separates_brands_and_creator_recruitment(self):
         nav = self.html.split('<nav class="primary-navigation"', 1)[1].split("</nav>", 1)[0]
-        expected = (("ORIGEN", "1"), ("ROSTER", "2"), ("ESTADÍSTICAS", "3"),
-                    ("EN VIVO", "10"), ("COLABORÁ", "6"))
-        self.assertEqual(nav.count('data-chapter='), 5)
+        expected = (
+            ("ORIGEN", "1"), ("QUIÉNES SOMOS", "11"), ("ROSTER", "2"),
+            ("ESTADÍSTICAS", "3"), ("COMUNIDAD", "9"), ("ALIANZAS", "8"),
+            ("COLABORACIONES", "12"), ("ARSENAL", "5"), ("EN VIVO", "10"),
+            ("SUMATE", "6"),
+        )
+        self.assertEqual(nav.count('data-chapter='), 10)
         positions = []
         for label, chapter in expected:
             self.assertIn(f'data-chapter="{chapter}"', nav)
             self.assertIn(label, nav)
             positions.append(nav.index(f'data-chapter="{chapter}"'))
         self.assertEqual(positions, sorted(positions))
+        self.assertIn('href="./marcas/"', nav)
+        self.assertIn("PARA MARCAS", nav)
+        self.assertIn("setRecruitmentMode('creator')", nav)
         self.assertIn('onclick="switchChapter(11)"', self.html)
         self.assertIn('onclick="switchChapter(9)"', self.html)
         self.assertIn('onclick="switchChapter(8)"', self.html)
@@ -29,10 +36,14 @@ class ConversionNavigationContractTests(unittest.TestCase):
         markup_without_styles = re.sub(r"<style\b[^>]*>.*?</style>", "", self.html, flags=re.IGNORECASE | re.DOTALL)
         self.assertNotIn("secondary-navigation", markup_without_styles)
 
-    def test_home_hero_routes_to_live_and_brands(self):
-        hero = self.html.split('<div class="executive-hero-actions">', 1)[1].split("</div>", 1)[0]
-        self.assertIn('openLiveDrawer()', hero)
+    def test_home_hero_has_three_distinct_audience_paths(self):
+        hero = self.html.split('<div class="executive-hero-actions"', 1)[1].split("</div>", 1)[0]
+        self.assertIn("CONOCÉ A LOS CREADORES", hero)
         self.assertIn('href="./marcas/"', hero)
+        self.assertIn("SOY MARCA", hero)
+        self.assertIn("QUIERO SUMARME", hero)
+        self.assertIn("setRecruitmentMode('creator')", hero)
+        self.assertNotIn("openLiveDrawer()", hero)
         self.assertNotIn("mailto:", hero)
 
     def test_home_live_status_is_visible_and_backed_by_the_live_drawer(self):
@@ -85,8 +96,8 @@ class ConversionNavigationContractTests(unittest.TestCase):
     def test_collaboration_archive_uses_four_neutral_clip_titles(self):
         clips = self.html.split('<section class="campaign-clips">', 1)[1].split("</section>", 1)[0]
         self.assertEqual(clips.count('class="clip-feature-card"'), 4)
-        self.assertIn("REACCIÓN INESPERADA", clips)
-        self.assertIn("BARFENDER: UNA PARTIDA ENTRE CUATRO", clips)
+        self.assertIn("UN SUSTO QUE TERMINA EN VÓMITO", clips)
+        self.assertIn("SE BOXEAN EN NUESTRO BAR", clips)
         self.assertNotIn("OJO OJO OJO VOMITA", clips)
         self.assertNotIn("TE VOY A PEGAR, BOLUDO", clips)
         self.assertEqual(clips.count('target="_blank"'), 4)
@@ -117,6 +128,12 @@ class ConversionNavigationContractTests(unittest.TestCase):
         self.assertIn("60 * 1000", app)
         self.assertIn("document.getElementById('chapter-2')?.classList.contains('active')", app)
 
+
+    def test_internal_navigation_uses_right_arrow(self):
+        internal_buttons = re.findall(r'<button\b[^>]*onclick="[^"]*"[^>]*>.*?</button>', self.html, flags=re.DOTALL)
+        internal_links = re.findall(r'<a\b[^>]*href="(?:#|\.\.?/|/)[^"]*"[^>]*>.*?</a>', self.html, flags=re.DOTALL)
+        self.assertFalse(any("↗" in tag for tag in internal_buttons))
+        self.assertFalse(any("↗" in tag for tag in internal_links))
 
 if __name__ == "__main__":
     unittest.main()

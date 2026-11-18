@@ -11,13 +11,15 @@ test.beforeEach(async ({ context }) => {
 
 async function assertHomeActionsFit(page, viewportHeight) {
   const title = page.locator('.executive-hero-copy h2');
-  const primary = page.getByRole('button', { name: /MIRAR EN VIVO/i });
-  const secondary = page.getByRole('link', { name: /SOY UNA MARCA/i });
+  const creators = page.getByRole('button', { name: /CONOCÉ A LOS CREADORES/i });
+  const brands = page.getByRole('link', { name: /SOY MARCA/i });
+  const recruitment = page.getByRole('button', { name: /QUIERO SUMARME/i });
   await expect(title).toBeVisible();
-  await expect(primary).toBeVisible();
-  await expect(secondary).toBeVisible();
+  await expect(creators).toBeVisible();
+  await expect(brands).toBeVisible();
+  await expect(recruitment).toBeVisible();
 
-  for (const locator of [title, primary, secondary]) {
+  for (const locator of [title, creators, brands, recruitment]) {
     const bounds = await locator.boundingBox();
     expect(bounds).not.toBeNull();
     expect(bounds.y).toBeGreaterThanOrEqual(0);
@@ -31,7 +33,7 @@ test('escritorio: titular y las dos rutas de conversión entran en la primera pa
   await assertHomeActionsFit(page, 900);
 });
 
-test('móvil: titular y acciones principales entran en la primera pantalla', async ({ page }) => {
+test('móvil: titular y los tres accesos diferenciados entran en la primera pantalla', async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 812 });
   await page.goto('/');
   await assertHomeActionsFit(page, 812);

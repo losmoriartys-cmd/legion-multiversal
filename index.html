@@ -396,6 +396,7 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
       "description": "Comunidad de creadores que conecta videojuegos, entretenimiento, conocimiento y experiencias colaborativas."
     }
     </script>
+    <link rel="stylesheet" href="./public-audience-paths.css?v=20261118-1">
 </head>
 <body>
     <div id="chapter-transition" aria-hidden="true" data-title="LEGIÓN MULTIVERSAL"></div>
@@ -414,12 +415,18 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
         </div>
         <nav class="primary-navigation" aria-label="Recorrido principal de la Legión">
             <button class="nav-btn" data-chapter="1" onclick="switchChapter(1)">ORIGEN</button>
+            <button class="nav-btn" data-chapter="11" onclick="switchChapter(11)">QUIÉNES SOMOS</button>
             <button class="nav-btn nav-btn-roster" data-chapter="2" onclick="switchChapter(2)">ROSTER</button>
             <button class="nav-btn" data-chapter="3" onclick="switchChapter(3)">ESTADÍSTICAS</button>
+            <button class="nav-btn" data-chapter="9" onclick="switchChapter(9)">COMUNIDAD</button>
+            <button class="nav-btn" data-chapter="8" onclick="switchChapter(8)">ALIANZAS</button>
+            <button class="nav-btn" data-chapter="12" onclick="switchChapter(12)">COLABORACIONES</button>
+            <button class="nav-btn" data-chapter="5" onclick="switchChapter(5)">ARSENAL</button>
             <button class="nav-btn nav-btn-live" data-chapter="10" onclick="switchChapter(10)">EN VIVO <span aria-hidden="true">●</span></button>
-            <button class="nav-btn" data-chapter="6" onclick="switchChapter(6)">COLABORÁ</button>
+            <a class="nav-btn" href="./marcas/">PARA MARCAS <span aria-hidden="true">→</span></a>
+            <button class="nav-btn" data-chapter="6" onclick="switchChapter(6);setRecruitmentMode('creator')">SUMATE</button>
         </nav>
-<button id="mission-progress-trigger" class="mission-progress-trigger" type="button" onclick="openMultiverseMap()" aria-label="Abrir Mapa Multiversal y consultar misiones">MISIONES <strong id="mission-progress-count">0/0</strong></button>
+<button id="mission-progress-trigger" class="mission-progress-trigger" type="button" onclick="openMultiverseMap()" aria-label="Abrir Mapa Multiversal y consultar misiones" hidden>MISIONES <strong id="mission-progress-count">0/8</strong></button>
     </header>
 
     <main id="main-content" tabindex="-1">
@@ -437,9 +444,10 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
                     <h2 id="home-title">JUGAMOS, CREAMOS<br><span>Y CONECTAMOS UNIVERSOS.</span></h2>
                     <p class="executive-lead">Una comunidad de creadores independientes que convierte videojuegos, entretenimiento y cultura pop en experiencias compartidas. Cada voz conserva su identidad; juntos abrimos nuevos universos.</p>
                     <p class="executive-proofline"><span>PROPUESTAS A MEDIDA</span><span>MÉTRICAS CON FUENTE</span><span>ALCANCE ACORDADO</span></p>
-                    <div class="executive-hero-actions">
-                        <button class="executive-button executive-button-primary" type="button" onclick="openLiveDrawer()">MIRAR EN VIVO <span aria-hidden="true">↗</span></button>
-                        <a class="executive-button" href="./marcas/">SOY UNA MARCA <span aria-hidden="true">↗</span></a>
+                    <div class="executive-hero-actions" aria-label="Elegí cómo entrar a Legión Multiversal">
+                        <button class="executive-button executive-button-primary" type="button" onclick="switchChapter(2)">CONOCÉ A LOS CREADORES <span aria-hidden="true">→</span></button>
+                        <a class="executive-button" href="./marcas/">SOY MARCA <span aria-hidden="true">→</span></a>
+                        <button class="executive-button" type="button" onclick="switchChapter(6);setRecruitmentMode('creator')">QUIERO SUMARME <span aria-hidden="true">→</span></button>
                     </div>
                 </div>
                 <span class="executive-hero-index" aria-hidden="true">LM / 001</span>
@@ -459,7 +467,7 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
                     <small id="home-live-updated">El estado se actualiza con los datos públicos del colector; no es una conexión en tiempo real.</small>
                     <a id="home-follow-link" class="home-follow-link" href="https://twitch.tv/losmoriartys" target="_blank" rel="noopener noreferrer" hidden>SEGUÍ A LOS MORIARTYS EN TWITCH ↗</a>
                 </div>
-                <button class="executive-button executive-button-primary" type="button" onclick="openLiveDrawer()">ABRIR CENTRAL EN VIVO ↗</button>
+                <button class="executive-button executive-button-primary" type="button" onclick="openLiveDrawer()">ABRIR CENTRAL EN VIVO →</button>
             </section>
 <section class="executive-directory" aria-labelledby="executive-directory-title">
                 <div class="executive-section-heading">
@@ -468,9 +476,9 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
                     <p>Tres caminos para conocer quiénes somos, descubrir lo que hacemos y encontrar tu forma de participar.</p>
                 </div>
                 <div class="executive-directory-grid">
- <article class="executive-directory-card"><span class="executive-directory-index">01 · CONOCÉ</span><h4>PERSONAS, HISTORIA Y VALORES</h4><p>Descubrí cómo nació la Legión y quiénes construyen este universo.</p><button type="button" onclick="switchChapter(1)">CONOCER LA LEGIÓN ↗</button></article>
- <article class="executive-directory-card"><span class="executive-directory-index">02 · MIRÁ</span><h4>JUEGOS Y EXPERIENCIAS REALES</h4><p>Entrá a los directos y conocé colaboraciones que ya sucedieron.</p><button type="button" onclick="switchChapter(12)">VER EXPERIENCIAS ↗</button></article>
- <article class="executive-directory-card"><span class="executive-directory-index">03 · CONECTÁ</span><h4>PROPUESTAS Y OPORTUNIDADES</h4><p>Conocé nuestras credenciales y acercá una idea para trabajar juntos.</p><button type="button" onclick="switchChapter(8)">PROPUESTAS PARA MARCAS ↗</button></article>
+ <article class="executive-directory-card"><span class="executive-directory-index">01 · CONOCÉ</span><h4>PERSONAS, HISTORIA Y VALORES</h4><p>Descubrí cómo nació la Legión y quiénes construyen este universo.</p><button type="button" onclick="switchChapter(1)">CONOCER LA LEGIÓN →</button></article>
+ <article class="executive-directory-card"><span class="executive-directory-index">02 · MIRÁ</span><h4>JUEGOS Y EXPERIENCIAS REALES</h4><p>Entrá a los directos y conocé colaboraciones que ya sucedieron.</p><button type="button" onclick="switchChapter(12)">VER EXPERIENCIAS →</button></article>
+ <article class="executive-directory-card"><span class="executive-directory-index">03 · CONECTÁ</span><h4>PROPUESTAS Y OPORTUNIDADES</h4><p>Conocé nuestras credenciales y acercá una idea para trabajar juntos.</p><button type="button" onclick="switchChapter(8)">PROPUESTAS PARA MARCAS →</button></article>
 </div>
 </section>
 
@@ -480,7 +488,7 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
                     <h3 id="featured-case-title">BARFENDER</h3>
                     <p class="executive-case-deck">Cuatro creadores. Cuatro canales. Una misma partida.</p>
                     <p>Una experiencia colaborativa realizada por cuatro creadores y transmitida desde sus canales de Twitch. El expediente completo reúne participantes, registros audiovisuales, métricas y aprendizajes con sus fuentes.</p>
-                    <button class="executive-button executive-button-primary" type="button" onclick="switchChapter(12)">ABRIR EXPEDIENTE 001 <span aria-hidden="true">↗</span></button>
+                    <button class="executive-button executive-button-primary" type="button" onclick="switchChapter(12)">ABRIR EXPEDIENTE 001 <span aria-hidden="true">→</span></button>
                 </div>
                 <div class="executive-case-art executive-case-summary" role="img" aria-label="Expediente 001: BarFender, experiencia colaborativa de cuatro creadores y cuatro canales"><span>EXPEDIENTE DOCUMENTADO</span><strong>001</strong><b>BARFENDER</b><small>4 CREADORES · 4 CANALES</small><span class="executive-case-summary-note">EL CASO COMPLETO, SUS FUENTES Y REGISTROS ESTÁN EN EXPERIENCIAS.</span></div>
             </section>
@@ -488,7 +496,7 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
             <section class="executive-community" aria-labelledby="executive-community-title">
                 <div><span class="executive-kicker">03 / LAS PERSONAS DETRÁS DEL PROYECTO</span><h3 id="executive-community-title">NO SOMOS SOLAMENTE CANALES.</h3></div>
                 <p>Somos personas con recorridos, intereses y talentos diferentes que eligieron compartir partidas, ideas y proyectos. La Legión existe porque cada identidad aporta algo propio a una comunidad común.</p>
-                <button class="executive-text-link" type="button" onclick="switchChapter(9)">CONOCER NUESTRA COMUNIDAD ↗</button>
+                <button class="executive-text-link" type="button" onclick="switchChapter(9)">CONOCER NUESTRA COMUNIDAD →</button>
             </section>
 
             <section class="executive-offers" aria-labelledby="executive-offers-title">
@@ -500,11 +508,11 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
                     <article><span>04</span><h4>ACTIVACIONES COMUNITARIAS</h4><p>Dinámicas participativas alineadas con cada comunidad y campaña.</p></article>
                 </div>
                 <div class="executive-audience-ctas" aria-label="Contacto según el tipo de propuesta">
-                    <a href="#brand-proposal" class="executive-audience-link"><span>PARA ESTUDIOS Y PUBLISHERS</span><strong>Presentar un juego o campaña ↗</strong></a>
-                    <a href="#brand-proposal" class="executive-audience-link"><span>PARA AGENCIAS Y MARCAS</span><strong>Diseñar una activación ↗</strong></a>
-                    <a href="#brand-proposal" class="executive-audience-link"><span>PARA CREADORES Y COMUNIDADES</span><strong>Proponer una experiencia ↗</strong></a>
+                    <a href="#brand-proposal" class="executive-audience-link"><span>PARA ESTUDIOS Y PUBLISHERS</span><strong>Presentar un juego o campaña →</strong></a>
+                    <a href="#brand-proposal" class="executive-audience-link"><span>PARA AGENCIAS Y MARCAS</span><strong>Diseñar una activación →</strong></a>
+                    <a href="#brand-proposal" class="executive-audience-link"><span>PARA CREADORES Y COMUNIDADES</span><strong>Proponer una experiencia →</strong></a>
                 </div>
-                <button class="executive-text-link" type="button" onclick="switchChapter(8)">CONSULTAR CREDENCIALES, FORMATOS Y CONDICIONES ↗</button>
+                <button class="executive-text-link" type="button" onclick="switchChapter(8)">CONSULTAR CREDENCIALES, FORMATOS Y CONDICIONES →</button>
             </section>
 
             <!-- La historia S3X-MEN se conserva exclusivamente en el capítulo Origen. -->
@@ -512,7 +520,7 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
                 <span class="executive-kicker">06 / CONTACTO Y NUEVAS OPORTUNIDADES</span>
                 <h3 id="executive-contact-title">TU PRÓXIMA IDEA PUEDE EMPEZAR ACÁ.</h3>
                 <p>Contanos qué querés lograr, qué fechas manejás y qué tipo de experiencia imaginás. Revisamos cada propuesta y definimos participantes, entregables y condiciones antes de confirmar cualquier acción.</p>
-                <a class="executive-contact-link" href="#brand-proposal">INICIAR UNA CONVERSACIÓN ↗</a>
+                <a class="executive-contact-link" href="#brand-proposal">INICIAR UNA CONVERSACIÓN →</a>
             </section>
         </section>
 
@@ -536,7 +544,7 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
   <div class="origin-editorial-heading"><span>01 / LA PRIMERA ETAPA</span><h3 id="origin-first-title">DOS AMIGOS.<br><em>UN UNIVERSO POR DESCUBRIR.</em></h3><p>La Legión no nació con una estructura cerrada. Fue tomando forma a medida que compartíamos partidas y se sumaban nuevas personas.</p></div>
   <div class="origin-editorial-timeline">
    <article class="origin-editorial-step">
-    <span class="origin-editorial-stepno">01</span><div><span class="origin-editorial-label">MARVEL RIVALS · EL COMIENZO</span><h4>UNA IDEA ENTRE PARTIDAS</h4><p>Demian y ROD3R1K empezaron a compartir partidas de Marvel Rivals y a imaginar un proyecto propio. Al principio fueron dos amigos con una idea en común; después se incorporó Akuma como tercer integrante y, más adelante, llegó Ardipi como cuarto miembro. Con ellos quedó conformada la primera formación de S3X-MEN.</p></div>
+    <span class="origin-editorial-stepno">01</span><div><span class="origin-editorial-label">MARVEL RIVALS · EL COMIENZO</span><h4>UNA IDEA ENTRE PARTIDAS</h4><p>Demian y ROD3R1K empezaron a compartir partidas de Marvel Rivals y a imaginar un proyecto propio. Al principio fueron dos amigos con una idea en común; después se incorporó Akuma como tercer integrante y, más adelante, llegó ARDIPII como cuarto miembro. Con ellos quedó conformada la primera formación de S3X-MEN.</p></div>
    </article>
    <article class="origin-editorial-step">
     <span class="origin-editorial-stepno">02</span><div><span class="origin-editorial-label">FORTNITE · NUEVAS EXPERIENCIAS</span><h4>OTROS MUNDOS, NUEVAS PARTIDAS</h4><p>Fortnite fue una de las experiencias que atravesaron el recorrido del proyecto. Cada juego abrió nuevas formas de encontrarnos, compartir y seguir construyendo una identidad común.</p></div>
@@ -545,7 +553,7 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
     <span class="origin-editorial-stepno">03</span><div><span class="origin-editorial-label">MÁS ALLÁ DEL JUEGO · NUEVAS POSIBILIDADES</span><h4>UNA IDEA QUE EMPEZÓ A CRECER</h4><p>Con el tiempo, la idea dejó de limitarse a jugar juntos: empezó a abrir espacios para compartir contenido, conectar creadores y sumar experiencias de aprendizaje y colaboración.</p></div>
    </article>
    <article class="origin-editorial-step">
-    <span class="origin-editorial-stepno">04</span><div><span class="origin-editorial-label">INCORPORACIONES POSTERIORES</span><h4>CADA PERSONA, UNA IDENTIDAD PROPIA</h4><p>Más adelante se incorporó Lady Moriarty, y Dave llegó como estudiante. También se sumaron Habitos (canal Habitos_Atomicos) y Patoexpone como colaboradores, no como integrantes de la formación: Habitos aporta desde la filosofía, los hábitos y la conversación; Patoexpone, desde la programación, la divulgación y los contenidos educativos. Cada participación encontró su propio lugar dentro del proyecto.</p></div>
+    <span class="origin-editorial-stepno">04</span><div><span class="origin-editorial-label">INCORPORACIONES POSTERIORES</span><h4>CADA PERSONA, UNA IDENTIDAD PROPIA</h4><p>Más adelante se incorporó Lady Moriarty, y Dave llegó como estudiante. También se sumaron Habitos (canal Habitos_Atomicos) y PATO — ORATORIS como colaboradores, no como integrantes de la formación: Habitos aporta desde la filosofía, los hábitos y la conversación; PATO — ORATORIS, desde la programación, la divulgación y los contenidos educativos. Cada participación encontró su propio lugar dentro del proyecto.</p></div>
    </article>
   </div>
  </section>
@@ -572,34 +580,35 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
   </figure>
   <div class="origin-editorial-cta">
    <p>El origen explica de dónde venimos. El Roster muestra quiénes somos hoy.</p>
-   <button class="chapter-cta" type="button" onclick="switchChapter(2)">CONOCER EL ROSTER ↗</button>
-   <button class="chapter-cta chapter-cta-secondary" type="button" onclick="switchChapter(12)">DESCUBRIR NUESTRAS COLABORACIONES ↗</button>
+   <button class="chapter-cta" type="button" onclick="switchChapter(2)">CONOCER EL ROSTER →</button>
+   <button class="chapter-cta chapter-cta-secondary" type="button" onclick="switchChapter(12)">DESCUBRIR NUESTRAS COLABORACIONES →</button>
   </div>
  </section>
 </section>
 
-<section id="chapter-2" class="chapter-panel comic-page" data-editorial-number="2">
-            <div class="chapter-tag">CAPÍTULO 02 · ROSTER</div>
+<section id="chapter-2" class="chapter-panel comic-page" data-editorial-number="3">
+            <div class="chapter-tag">CAPÍTULO 03 · ROSTER</div>
             <span id="roster" class="roster-anchor" aria-hidden="true"></span>
             
             
             
+            <a class="roster-bitacora-link" href="./bitacora-preview.html">ABRIR BITÁCORA GENERAL (VISTA PREVIA) →</a>
             <div id="roster-home">
-              <div id="roster-selector" class="roster-selector" aria-live="polite"><p class="roster-selector-loading">CARGANDO LOS OCHO EXPEDIENTES…</p></div>
+              <div id="roster-selector" class="roster-selector" aria-live="polite"><div class="roster-skeleton-grid" aria-hidden="true"><div class="roster-skeleton-card"><span class="loading-skeleton loading-skeleton-circle"></span><span class="loading-skeleton"></span><span class="loading-skeleton loading-skeleton-short"></span><span class="loading-skeleton"></span></div><div class="roster-skeleton-card"><span class="loading-skeleton loading-skeleton-circle"></span><span class="loading-skeleton"></span><span class="loading-skeleton loading-skeleton-short"></span><span class="loading-skeleton"></span></div><div class="roster-skeleton-card"><span class="loading-skeleton loading-skeleton-circle"></span><span class="loading-skeleton"></span><span class="loading-skeleton loading-skeleton-short"></span><span class="loading-skeleton"></span></div><div class="roster-skeleton-card"><span class="loading-skeleton loading-skeleton-circle"></span><span class="loading-skeleton"></span><span class="loading-skeleton loading-skeleton-short"></span><span class="loading-skeleton"></span></div><div class="roster-skeleton-card"><span class="loading-skeleton loading-skeleton-circle"></span><span class="loading-skeleton"></span><span class="loading-skeleton loading-skeleton-short"></span><span class="loading-skeleton"></span></div><div class="roster-skeleton-card"><span class="loading-skeleton loading-skeleton-circle"></span><span class="loading-skeleton"></span><span class="loading-skeleton loading-skeleton-short"></span><span class="loading-skeleton"></span></div><div class="roster-skeleton-card"><span class="loading-skeleton loading-skeleton-circle"></span><span class="loading-skeleton"></span><span class="loading-skeleton loading-skeleton-short"></span><span class="loading-skeleton"></span></div><div class="roster-skeleton-card"><span class="loading-skeleton loading-skeleton-circle"></span><span class="loading-skeleton"></span><span class="loading-skeleton loading-skeleton-short"></span><span class="loading-skeleton"></span></div></div></div>
               
               
               
               
               <noscript><style>#chapter-2 .roster-skeleton-grid{display:none!important}</style><section class="roster-noscript"><h3>INTEGRANTES DE LA LEGIÓN</h3><!-- ROSTER_NOSCRIPT_LINKS:START -->
 <ul>
-                <li><strong>LOS MORIARTYS</strong> · proyecto compartido de Demian y Ari · <a href="https://twitch.tv/losmoriartys" target="_blank" rel="noopener noreferrer">TWITCH</a></li>
-                <li><strong>ROD3R1K</strong> · <a href="https://twitch.tv/TheR0D3R1K" target="_blank" rel="noopener noreferrer">TWITCH</a></li>
-                <li><strong>LADY MORIARTY</strong> · <a href="https://twitch.tv/ladymoriarty01" target="_blank" rel="noopener noreferrer">TWITCH</a></li>
-                <li><strong>ARDIPII</strong> · <a href="https://twitch.tv/ardipii" target="_blank" rel="noopener noreferrer">TWITCH</a></li>
-                <li><strong>AKUMA</strong> · <a href="https://twitch.tv/akumazoldyck" target="_blank" rel="noopener noreferrer">TWITCH</a></li>
-                <li><strong>DAVE — NEXUS</strong> · <a href="https://twitch.tv/daved0608" target="_blank" rel="noopener noreferrer">TWITCH</a></li>
-                <li><strong>PATO — ORATORIS</strong> · <a href="https://www.youtube.com/@patoteexplica" target="_blank" rel="noopener noreferrer">YOUTUBE</a> · <a href="https://www.instagram.com/patoteexplica/" target="_blank" rel="noopener noreferrer">INSTAGRAM</a></li>
-                <li><strong>HABITOS</strong> · <a href="https://twitch.tv/habitos_atomicos" target="_blank" rel="noopener noreferrer">TWITCH</a></li>
+                <li><strong>LOS MORIARTYS</strong> · <b>DIRECCIÓN</b> · Proyecto compartido de Demian y Ari; streaming cooperativo y gaming en comunidad. · <a href="https://twitch.tv/losmoriartys" target="_blank" rel="noopener noreferrer">TWITCH</a></li>
+                <li><strong>ROD3R1K</strong> · <b>DIRECCIÓN</b> · Creador de contenido en Twitch y director de la Legión. · <a href="https://twitch.tv/TheR0D3R1K" target="_blank" rel="noopener noreferrer">TWITCH</a></li>
+                <li><strong>LADY MORIARTY</strong> · <b>CREADORA</b> · Creadora de contenido en directo; videojuegos, terror y experiencias cooperativas. · <a href="https://twitch.tv/ladymoriarty01" target="_blank" rel="noopener noreferrer">TWITCH</a></li>
+                <li><strong>ARDIPII</strong> · <b>CREADOR</b> · Creador de contenido en directo e integrante del roster. · <a href="https://twitch.tv/ardipii" target="_blank" rel="noopener noreferrer">TWITCH</a></li>
+                <li><strong>AKUMA</strong> · <b>DOCENTE</b> · Docente y creador; acompaña a nuevos integrantes y participa en sesiones de gaming. · <a href="https://twitch.tv/akumazoldyck" target="_blank" rel="noopener noreferrer">TWITCH</a></li>
+                <li><strong>DAVE — NEXUS</strong> · <b>ESTUDIANTE</b> · Estudiante y nuevo integrante en etapa de formación. · <a href="https://twitch.tv/daved0608" target="_blank" rel="noopener noreferrer">TWITCH</a></li>
+                <li><strong>PATO — ORATORIS</strong> · <b>COLABORADOR</b> · Colaborador de YouTube; divulgación, programación y charlas motivacionales. · <a href="https://www.youtube.com/@patoteexplica" target="_blank" rel="noopener noreferrer">YOUTUBE</a> · <a href="https://www.instagram.com/patoteexplica/" target="_blank" rel="noopener noreferrer">INSTAGRAM</a></li>
+                <li><strong>HABITOS</strong> · <b>COLABORADOR</b> · Colaborador; reflexión, filosofía, motivación y videojuegos. · <a href="https://twitch.tv/habitos_atomicos" target="_blank" rel="noopener noreferrer">TWITCH</a></li>
               </ul>
 <!-- ROSTER_NOSCRIPT_LINKS:END --></section></noscript>
               
@@ -607,8 +616,8 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
             <section id="hero-profile-page" class="hero-profile-page roster-selector-panel" hidden aria-hidden="true" aria-live="polite"></section>
         </section>
 
-<section id="chapter-3" class="chapter-panel comic-page impact-chapter" data-editorial-number="3">
- <div class="chapter-tag">CAPÍTULO 03 · ESTADÍSTICAS</div>
+<section id="chapter-3" class="chapter-panel comic-page impact-chapter" data-editorial-number="4">
+ <div class="chapter-tag">CAPÍTULO 04 · ESTADÍSTICAS</div>
  <header class="impact-hero">
   <div class="impact-hero-copy">
    <span class="impact-kicker">LEGIÓN MULTIVERSAL · ACTIVIDAD Y ALCANCE</span>
@@ -620,21 +629,21 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
  </header>
  <section class="impact-live-board" aria-labelledby="impact-live-title">
   <div class="impact-section-heading"><span>01 / ACTIVIDAD OBSERVADA</span><h3 id="impact-live-title">LA LEGIÓN EN MOVIMIENTO</h3><p>Indicadores construidos a partir de capturas públicas registradas. Cada dato debe leerse junto con su plataforma, período, fecha de captura y cobertura; una ausencia de datos no equivale a actividad cero.</p></div>
-  <div id="stats-updated" class="stats-note">Actualizando indicadores…</div>
+  <div id="stats-updated" class="stats-note" hidden><span class="loading-skeleton loading-skeleton-line" aria-hidden="true"></span></div>
   <div id="stats-summary" class="impact-kpi-grid"><article class="impact-kpi"><strong>7</strong><span>CANALES TWITCH EN SEGUIMIENTO</span><small>7 canales Twitch del roster activo. Oratoris se informa por separado desde YouTube.</small></article></div>
   <div class="stats-channel-heading"><h4>ESTADO DE CADA CANAL</h4><p>Una ficha por canal del roster, con estado actual y métricas observadas. Estar offline no significa que el canal esté fuera del seguimiento.</p></div>
-  <div id="stats-channel-grid" class="stats-channel-grid" aria-live="polite"><p class="stats-note">Cargando canales registrados…</p></div>
+  <div id="stats-channel-grid" class="stats-channel-grid" aria-live="polite"><div class="loading-skeleton-grid" aria-hidden="true"><div class="loading-skeleton-card"><span class="loading-skeleton loading-skeleton-short"></span><span class="loading-skeleton"></span><span class="loading-skeleton"></span></div><div class="loading-skeleton-card"><span class="loading-skeleton loading-skeleton-short"></span><span class="loading-skeleton"></span><span class="loading-skeleton"></span></div><div class="loading-skeleton-card"><span class="loading-skeleton loading-skeleton-short"></span><span class="loading-skeleton"></span><span class="loading-skeleton"></span></div><div class="loading-skeleton-card"><span class="loading-skeleton loading-skeleton-short"></span><span class="loading-skeleton"></span><span class="loading-skeleton"></span></div><div class="loading-skeleton-card"><span class="loading-skeleton loading-skeleton-short"></span><span class="loading-skeleton"></span><span class="loading-skeleton"></span></div><div class="loading-skeleton-card"><span class="loading-skeleton loading-skeleton-short"></span><span class="loading-skeleton"></span><span class="loading-skeleton"></span></div></div></div>
   <div class="stats-channel-heading stats-platform-heading"><h4>OTRAS PLATAFORMAS DEL ROSTER</h4><p>Datos públicos por creador y plataforma. Cada unidad conserva su fuente y metodología; no se suma a espectadores ni a métricas de Twitch.</p></div>
-  <div id="stats-platform-grid" class="stats-platform-grid" aria-live="polite"><p class="stats-note">Cargando cuentas multiplataforma…</p></div>
+  <div id="stats-platform-grid" class="stats-platform-grid" aria-live="polite"><div class="loading-skeleton-grid" aria-hidden="true"><div class="loading-skeleton-card"><span class="loading-skeleton loading-skeleton-short"></span><span class="loading-skeleton"></span><span class="loading-skeleton"></span></div><div class="loading-skeleton-card"><span class="loading-skeleton loading-skeleton-short"></span><span class="loading-skeleton"></span><span class="loading-skeleton"></span></div><div class="loading-skeleton-card"><span class="loading-skeleton loading-skeleton-short"></span><span class="loading-skeleton"></span><span class="loading-skeleton"></span></div><div class="loading-skeleton-card"><span class="loading-skeleton loading-skeleton-short"></span><span class="loading-skeleton"></span><span class="loading-skeleton"></span></div></div></div>
   <div id="stats-highlights" class="impact-highlights" aria-live="polite"></div>
  </section>
  <section class="legion-news-section" aria-labelledby="legion-news-title">
   <div class="impact-section-heading"><span>02 / NOVEDADES DEL ARCHIVO</span><h3 id="legion-news-title">LO QUE SE MUEVE EN LA LEGIÓN</h3><p>Actualizaciones verificadas del proyecto y del trabajo compartido. Cada entrada conserva su fecha y una fuente para consultar el detalle.</p></div>
-  <div id="legion-news-feed" class="legion-news-feed" aria-live="polite"><p class="stats-note">Cargando novedades del archivo…</p></div>
+  <div id="legion-news-feed" class="legion-news-feed" aria-live="polite"><div class="loading-skeleton-grid" aria-hidden="true"><div class="loading-skeleton-card"><span class="loading-skeleton loading-skeleton-short"></span><span class="loading-skeleton"></span><span class="loading-skeleton"></span></div><div class="loading-skeleton-card"><span class="loading-skeleton loading-skeleton-short"></span><span class="loading-skeleton"></span><span class="loading-skeleton"></span></div><div class="loading-skeleton-card"><span class="loading-skeleton loading-skeleton-short"></span><span class="loading-skeleton"></span><span class="loading-skeleton"></span></div></div></div>
  </section>
  <section class="impact-story-grid">
-  <article class="impact-story-card"><span class="impact-story-index">02 / EXPERIENCIAS</span><h3>NO SOLO CONTAMOS CANALES. DOCUMENTAMOS LO QUE HACEMOS JUNTOS.</h3><p>Las colaboraciones reúnen creadores y comunidades alrededor de una misma experiencia. Cada expediente conserva participantes, transmisiones, clips y métricas con su contexto.</p><button class="chapter-cta" type="button" onclick="switchChapter(12)">VER EXPEDIENTES DE COLABORACIÓN ↗</button></article>
-  <article class="impact-story-card impact-story-accent"><span class="impact-story-index">03 / OPORTUNIDADES</span><h3>UN EQUIPO, DISTINTOS PERFILES Y FORMATOS.</h3><p>Una marca puede conocer el canal compartido, evaluar perfiles individuales o explorar una acción multicanal. La propuesta se define según el objetivo, la disponibilidad y los datos verificables.</p><button class="chapter-cta" type="button" onclick="switchChapter(8)">CONOCER NUESTRAS ALIANZAS ↗</button></article>
+  <article class="impact-story-card"><span class="impact-story-index">02 / EXPERIENCIAS</span><h3>NO SOLO CONTAMOS CANALES. DOCUMENTAMOS LO QUE HACEMOS JUNTOS.</h3><p>Las colaboraciones reúnen creadores y comunidades alrededor de una misma experiencia. Cada expediente conserva participantes, transmisiones, clips y métricas con su contexto.</p><button class="chapter-cta" type="button" onclick="switchChapter(12)">VER EXPEDIENTES DE COLABORACIÓN →</button></article>
+  <article class="impact-story-card impact-story-accent"><span class="impact-story-index">03 / OPORTUNIDADES</span><h3>UN EQUIPO, DISTINTOS PERFILES Y FORMATOS.</h3><p>Una marca puede conocer el canal compartido, evaluar perfiles individuales o explorar una acción multicanal. La propuesta se define según el objetivo, la disponibilidad y los datos verificables.</p><button class="chapter-cta" type="button" onclick="switchChapter(8)">CONOCER NUESTRAS ALIANZAS →</button></article>
  </section>
  <details class="stats-methodology">
   <summary>Fuentes, metodología y alcance de los datos</summary>
@@ -644,13 +653,13 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
  </details>
  <details class="stats-methodology">
   <summary>Ver detalle técnico por canal</summary>
-  <div class="stats-table-wrap"><table class="stats-table"><thead><tr><th>Canal</th><th>Estado</th><th>Espectadores actuales</th><th>Categoría</th><th>Promedio observado</th><th>Pico observado</th><th>Horas observadas</th><th>Muestras</th><th>Cobertura del intervalo muestreado</th></tr></thead><tbody id="stats-table-body"><tr><td colspan="9">Cargando estadísticas…</td></tr></tbody></table></div>
+  <div class="stats-table-wrap"><table class="stats-table"><thead><tr><th>Canal</th><th>Estado</th><th>Espectadores actuales</th><th>Categoría</th><th>Promedio observado</th><th>Pico observado</th><th>Horas observadas</th><th>Muestras</th><th>Cobertura del intervalo muestreado</th></tr></thead><tbody id="stats-table-body"><tr class="loading-skeleton-row" aria-hidden="true"><td colspan="9"><span class="loading-skeleton loading-skeleton-line"></span></td></tr></tbody></table></div>
  </details>
 </section>
-<section id="chapter-11" class="chapter-panel comic-page manifesto-chapter" data-editorial-number="3" data-pager="false">
- <div class="chapter-tag">PILAR COMPLEMENTARIO · VALORES</div>
-    <button type="button" class="supplementary-return" onclick="switchChapter(6)">← VOLVER A COLABORÁ CON NOSOTROS</button>
- <header class="manifesto-hero" aria-labelledby="manifesto-title"><span class="manifesto-kicker">LEGIÓN MULTIVERSAL · MANIFIESTO</span><h2 id="manifesto-title">NO BUSCAMOS QUE<br>TODOS SEAN IGUALES.<br><em>BUSCAMOS QUE CADA UNO<br>TENGA UN LUGAR.</em></h2><p>Una Legión no se construye sumando nombres. Se construye cuando personas distintas eligen avanzar juntas.</p></header>
+<section id="chapter-11" class="chapter-panel comic-page manifesto-chapter" data-editorial-number="2" data-pager="false">
+ <div class="chapter-tag">CAPÍTULO 02 · QUIÉNES SOMOS</div>
+    <button type="button" class="supplementary-return" onclick="switchChapter(0)">← VOLVER AL INICIO</button>
+ <header class="manifesto-hero" aria-labelledby="manifesto-title"><span class="manifesto-kicker">QUIÉNES SOMOS · NUESTROS VALORES</span><h2 id="manifesto-title">NO BUSCAMOS QUE<br>TODOS SEAN IGUALES.<br><em>BUSCAMOS QUE CADA UNO<br>TENGA UN LUGAR.</em></h2><p>Una Legión no se construye sumando nombres. Se construye cuando personas distintas eligen avanzar juntas.</p></header>
  <section class="manifesto-origin"><span>LO QUE NOS UNE</span><h3>CADA INTEGRANTE TIENE SU PROPIO UNIVERSO.</h3><p>Su voz, su humor, sus intereses, sus tiempos y su manera de crear. No queremos borrar esas diferencias: queremos que convivan. Legión Multiversal es un espacio para compartir videojuegos, entretenimiento, ideas y proyectos sin tener que dejar de ser quien sos.</p></section>
  <div class="manifesto-values-grid" role="list" aria-label="Seis valores de Legión Multiversal">
   <article role="listitem"><b>01</b><h3>IDENTIDAD PROPIA</h3><p>No pedimos que copies un molde. Valoramos las ideas, el estilo y la personalidad que cada integrante trae consigo.</p></article>
@@ -670,11 +679,11 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
   <p class="manifesto-practice-footnote">La participación es voluntaria. Cada integrante puede proponer, aceptar, ajustar o rechazar una actividad sin perder su lugar ni su identidad.</p>
  </section>
  <section class="manifesto-promise"><span>LO QUE PROMETEMOS</span><h3>UN ESPACIO PARA PROPONER, APRENDER, COMPARTIR Y CREAR.</h3><p>No prometemos fama, contratos ni crecimiento automático. Ofrecemos una cultura de colaboración, respeto y trabajo compartido, donde cada persona pueda aportar desde su propio lugar.</p></section>
- <section class="manifesto-invitation"><div><span>¿TE IDENTIFICÁS CON ESTA FORMA DE HACER LAS COSAS?</span><h3>ENTONCES HAY UNA CONVERSACIÓN QUE PODEMOS EMPEZAR.</h3></div><div class="chapter-actions"><button class="chapter-cta" type="button" onclick="switchChapter(6)">QUIERO FORMAR PARTE <span>↗</span></button><button class="chapter-cta" type="button" onclick="switchChapter(8)">QUIERO COLABORAR CON LA LEGIÓN <span>↗</span></button></div></section>
+ <section class="manifesto-invitation"><div><span>¿TE IDENTIFICÁS CON ESTA FORMA DE HACER LAS COSAS?</span><h3>ENTONCES HAY UNA CONVERSACIÓN QUE PODEMOS EMPEZAR.</h3></div><div class="chapter-actions"><button class="chapter-cta" type="button" onclick="switchChapter(6)">QUIERO FORMAR PARTE <span>→</span></button><button class="chapter-cta" type="button" onclick="switchChapter(8)">QUIERO COLABORAR CON LA LEGIÓN <span>→</span></button></div></section>
 </section>
 <section id="chapter-9" class="chapter-panel comic-page belonging-chapter" data-editorial-number="5" data-pager="false">
- <div class="chapter-tag">PILAR COMPLEMENTARIO · COMUNIDAD</div>
-    <button type="button" class="supplementary-return" onclick="switchChapter(6)">← VOLVER A COLABORÁ CON NOSOTROS</button>
+ <div class="chapter-tag">CAPÍTULO 05 · COMUNIDAD</div>
+    <button type="button" class="supplementary-return" onclick="switchChapter(0)">← VOLVER AL INICIO</button>
  <header class="belonging-hero">
   <img src="image_20261112_151833.jpg" alt="Integrantes de Legión Multiversal reunidos alrededor de una mesa en una sala gamer retro, compartiendo una sesión y una conversación" loading="lazy" width="2048" height="1152">
   <div class="belonging-hero-shade"></div>
@@ -682,9 +691,9 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
  </header>
  <section class="belonging-intro" aria-labelledby="belonging-intro-title"><span class="belonging-index">01 / UNA COMUNIDAD ABIERTA</span><h3 id="belonging-intro-title">NO TENÉS QUE SER ESPECTADOR PARA SENTIRTE PARTE.</h3><p>Podés llegar para descubrir un canal, quedarte por una partida, proponer una idea o encontrar personas con quienes crear algo nuevo. La Legión se construye con participación real, no con una lista de nombres.</p></section><section class="belonging-growth" aria-labelledby="belonging-growth-title"><span class="belonging-index">02 / CRECER CON IDENTIDAD</span><h3 id="belonging-growth-title">NO SUMAMOS NOMBRES. CONSTRUIMOS VÍNCULOS.</h3><p>Las nuevas incorporaciones y colaboraciones se evalúan por afinidad con los valores, aporte creativo, disponibilidad conversada y respeto por la autonomía de cada canal. La expansión es gradual: primero conocemos a las personas, después probamos una experiencia y finalmente documentamos lo que aprendimos.</p><ul><li>Identidad y voz propias, sin exigir uniformidad.</li><li>Participación voluntaria y expectativas claras.</li><li>Compatibilidad de formatos y objetivos antes de anunciar una colaboración.</li><li>Revisión de resultados y aprendizajes antes de repetir o ampliar una iniciativa.</li></ul></section>
  <div class="belonging-path-grid">
-  <article class="belonging-path-card"><span>01 · DESCUBRIR</span><h3>CONOCÉ NUESTROS UNIVERSOS</h3><p>Explorá quiénes somos, qué juega cada integrante y qué propuestas conviven dentro del roster. Cada creador mantiene su canal y su personalidad.</p><button class="chapter-cta" type="button" onclick="switchChapter(2)">EXPLORAR EL ROSTER ↗</button></article>
-  <article class="belonging-path-card"><span>02 · PARTICIPAR</span><h3>ENTRÁ EN LA CONVERSACIÓN</h3><p>Acompañá los directos, compartí ideas, sugerí juegos y sumate a los encuentros cuando se anuncien. Las actividades se comunican cuando están confirmadas.</p><button class="chapter-cta" type="button" onclick="switchChapter(10)">VER QUIÉN ESTÁ EN VIVO ↗</button></article>
-  <article class="belonging-path-card belonging-path-featured"><span>03 · PERTENECER</span><h3>¿TE GUSTARÍA CONSTRUIR CON NOSOTROS?</h3><p>Si creás contenido y te interesa colaborar, conocé cómo presentar tu perfil. No necesitás copiar el estilo de nadie: queremos conocer tu propia voz y lo que podrías aportar.</p><button class="chapter-cta" type="button" onclick="switchChapter(6)">QUIERO UNIRME A LA LEGIÓN ↗</button></article>
+  <article class="belonging-path-card"><span>01 · DESCUBRIR</span><h3>CONOCÉ NUESTROS UNIVERSOS</h3><p>Explorá quiénes somos, qué juega cada integrante y qué propuestas conviven dentro del roster. Cada creador mantiene su canal y su personalidad.</p><button class="chapter-cta" type="button" onclick="switchChapter(2)">EXPLORAR EL ROSTER →</button></article>
+  <article class="belonging-path-card"><span>02 · PARTICIPAR</span><h3>ENTRÁ EN LA CONVERSACIÓN</h3><p>Acompañá los directos, compartí ideas, sugerí juegos y sumate a los encuentros cuando se anuncien. Las actividades se comunican cuando están confirmadas.</p><button class="chapter-cta" type="button" onclick="switchChapter(10)">VER QUIÉN ESTÁ EN VIVO →</button></article>
+  <article class="belonging-path-card belonging-path-featured"><span>03 · PERTENECER</span><h3>¿TE GUSTARÍA CONSTRUIR CON NOSOTROS?</h3><p>Si creás contenido y te interesa colaborar, conocé cómo presentar tu perfil. No necesitás copiar el estilo de nadie: queremos conocer tu propia voz y lo que podrías aportar.</p><button class="chapter-cta" type="button" onclick="switchChapter(6)">QUIERO UNIRME A LA LEGIÓN →</button></article>
  </div>
  <section class="belonging-community-principles" aria-labelledby="belonging-principles-title">
   <div class="belonging-principles-heading"><span class="belonging-index">02 / CÓMO CONVIVIMOS</span><h3 id="belonging-principles-title">DISTINTOS CANALES.<br><em>UNA EXPERIENCIA COMPARTIDA.</em></h3><p>La comunidad no exige que todos creen igual ni que estén disponibles al mismo tiempo. La participación se construye respetando la identidad y los tiempos de cada persona.</p></div>
@@ -693,12 +702,12 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
    <article><span>02</span><h4>LAS ACTIVIDADES SE CONFIRMAN</h4><p>Los encuentros se comunican cuando existen detalles definidos. Una idea o una posibilidad no se presenta como evento, fecha o convocatoria confirmada.</p></article>
    <article><span>03</span><h4>PARTICIPAR ES VOLUNTARIO</h4><p>Podés acompañar, proponer o sumarte según tus ganas y disponibilidad. Cada experiencia se coordina con quienes deciden participar.</p></article>
   </div>
-  <div class="belonging-community-archive"><div><span>HISTORIAS QUE YA COMPARTIMOS</span><strong>UNA EXPERIENCIA, DISTINTAS PERSPECTIVAS.</strong><p>Conocé cómo una partida puede convertirse en una colaboración documentada entre canales y comunidades.</p></div><button class="chapter-cta" type="button" onclick="switchChapter(12)">EXPLORAR COLABORACIONES ↗</button></div>
+  <div class="belonging-community-archive"><div><span>HISTORIAS QUE YA COMPARTIMOS</span><strong>UNA EXPERIENCIA, DISTINTAS PERSPECTIVAS.</strong><p>Conocé cómo una partida puede convertirse en una colaboración documentada entre canales y comunidades.</p></div><button class="chapter-cta" type="button" onclick="switchChapter(12)">EXPLORAR COLABORACIONES →</button></div>
  </section>
- <div class="belonging-bottom"><p>Una comunidad crece cuando hay lugar para nuevas voces.</p><button class="chapter-cta" type="button" onclick="switchChapter(11)">CONOCÉ LO QUE NOS IDENTIFICA ↗</button></div>
+ <div class="belonging-bottom"><p>Una comunidad crece cuando hay lugar para nuevas voces.</p><button class="chapter-cta" type="button" onclick="switchChapter(11)">CONOCÉ LO QUE NOS IDENTIFICA →</button></div>
 </section>
-<section id="chapter-10" class="chapter-panel comic-page live-chapter" data-editorial-number="4">
- <div class="chapter-tag">CAPÍTULO 04 · EN VIVO</div>
+<section id="chapter-10" class="chapter-panel comic-page live-chapter" data-editorial-number="9">
+ <div class="chapter-tag">CAPÍTULO 09 · EN VIVO</div>
  <h2 class="comic-title">LEGIÓN MULTIVERSAL · EN VIVO</h2>
  <div class="premium-panel live-intro"><div class="premium-kicker"><span class="live-pulse"></span> CENTRAL DE TRANSMISIONES</div><h3>Consultá quién está en directo</h3><p>El directorio muestra el último estado registrado de cada canal. Si la captura está demorada, lo indica antes de ofrecer una transmisión. Cuando haya integrantes en directo, vas a poder elegir un canal y verlo desde esta página.</p></div>
  <div id="live-directory" class="live-directory"><p class="stats-note">Consultando el estado de los canales…</p></div>
@@ -708,8 +717,8 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
 
 <section id="chapter-8" class="chapter-panel comic-page chapter-8-alliance" aria-labelledby="alliance-title" data-editorial-number="6" data-pager="false">
  <header class="alliance-hero">
-  <div class="chapter-tag">PILAR COMPLEMENTARIO · ALIANZAS</div>
-    <button type="button" class="supplementary-return" onclick="switchChapter(6)">← VOLVER A COLABORÁ CON NOSOTROS</button>
+  <div class="chapter-tag">CAPÍTULO 06 · ALIANZAS</div>
+    <button type="button" class="supplementary-return" onclick="switchChapter(0)">← VOLVER AL INICIO</button>
   <p class="alliance-eyebrow">LEGIÓN MULTIVERSAL · CREDENCIALES Y OPORTUNIDADES</p>
   <h2 id="alliance-title" class="comic-title">ALIANZAS Y OPORTUNIDADES</h2>
   <p class="alliance-lead">Creadores independientes. Credenciales atribuidas. Propuestas construidas en conjunto.</p>
@@ -722,26 +731,26 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
   <div class="alliance-section-heading"><span class="alliance-index">01 / CANAL COMPARTIDO</span><h3 id="alliance-collective-title">CREDENCIALES COLECTIVAS</h3><p>Reconocimientos vinculados al proyecto y al canal compartido de Los Moriartys.</p></div>
   <article class="alliance-credential alliance-credential-featured">
    <div class="alliance-credential-top"><span class="alliance-stamp alliance-stamp-platform">PLATAFORMA · LURKIT</span><span class="alliance-status alliance-status-confirmed">PARTNER CREATOR</span></div>
-   <div class="alliance-credential-body"><div class="alliance-brand-mark" aria-hidden="true">LM<span>×</span>LURKIT</div><div class="alliance-credential-copy"><h4>LOS MORIARTYS</h4><p>Los Moriartys figura como Partner Creator de Cinderia y Enshrouded dentro de Lurkit. Esta participación corresponde al canal compartido y constituye una credencial dentro del ecosistema creator.</p><div class="alliance-game-tags" aria-label="Programas asociados"><span>CINDERIA</span><span>ENSHROUDED</span></div><p class="alliance-fineprint">Información confirmada por el equipo. No implica, por sí sola, un patrocinio económico ni una campaña remunerada.</p></div></div>
+   <div class="alliance-credential-body"><div class="alliance-brand-mark" aria-hidden="true">LM<span>×</span>LURKIT</div><div class="alliance-credential-copy"><h4>LOS MORIARTYS</h4><p>Los Moriartys figura como Partner Creator de Cinderia y Enshrouded dentro de Lurkit. Esta participación corresponde al canal compartido y constituye una credencial dentro del ecosistema creator.</p><div class="alliance-game-tags" aria-label="Programas asociados"><span>CINDERIA</span><span>ENSHROUDED</span></div><a class="alliance-info-link" href="#alliance-transparency-title" onclick="switchChapter(8)" aria-label="Consultar transparencia">ⓘ</a></div></div>
   </article>
-  <div id="epic-creator-programs-collective" class="epic-code-mount" aria-live="polite"><p class="epic-code-unavailable">Cargando registro central de códigos Epic…</p></div>
+  <div id="epic-creator-programs-collective" class="epic-code-mount" aria-live="polite"><span class="loading-skeleton loading-skeleton-line" aria-hidden="true"></span></div>
  </section>
  <section class="alliance-section" id="alliance-individual" aria-labelledby="alliance-individual-title">
   <div class="alliance-section-heading"><span class="alliance-index">02 / TRAYECTORIAS PERSONALES</span><h3 id="alliance-individual-title">CREDENCIALES INDIVIDUALES</h3><p>Las acreditaciones personales pertenecen a cada creador y a su canal. No se atribuyen automáticamente a toda la Legión.</p></div>
-  <article class="alliance-person-card"><img class="alliance-person-avatar" src="assets/heroes/rod3r1k_dark.webp" alt="Identidad visual de TheR0d3R1k" loading="lazy" width="1280" height="1920"><div class="alliance-person-main">
-   <div class="alliance-person-heading"><div><span class="alliance-stamp alliance-stamp-personal">CREDENCIAL INDIVIDUAL</span><h4>TheR0d3R1k</h4></div><span class="alliance-status alliance-status-confirmed">TWITCH PARTNER</span></div>
-   <p>Reconocimiento correspondiente a su canal individual de Twitch.</p><div class="alliance-person-links"><a href="https://www.twitch.tv/TheR0d3R1k" target="_blank" rel="noopener noreferrer">VISITAR CANAL DE TWITCH ↗</a></div>
-   <div id="epic-creator-programs-rod3r1k" class="epic-code-mount" aria-live="polite"><p class="epic-code-unavailable">Cargando registro central de códigos Epic…</p></div>
+  <article class="alliance-person-card"><img class="alliance-person-avatar" src="assets/heroes/rod3r1k_dark.webp" alt="Identidad visual de ROD3R1K" loading="lazy" width="1280" height="1920"><div class="alliance-person-main">
+   <div class="alliance-person-heading"><div><span class="alliance-stamp alliance-stamp-personal">CREDENCIAL INDIVIDUAL</span><h4>ROD3R1K</h4></div><span class="alliance-status alliance-status-confirmed">TWITCH PARTNER</span></div>
+   <p>Reconocimiento correspondiente a su canal individual de Twitch.</p><div class="alliance-person-links"><a href="https://www.twitch.tv/ROD3R1K" target="_blank" rel="noopener noreferrer">VISITAR CANAL DE TWITCH ↗</a></div>
+   <div id="epic-creator-programs-rod3r1k" class="epic-code-mount" aria-live="polite"><span class="loading-skeleton loading-skeleton-line" aria-hidden="true"></span></div>
   </div></article>
  </section>
  <section class="alliance-section" id="alliance-platforms" aria-labelledby="alliance-platforms-title">
   <div class="alliance-section-heading"><span class="alliance-index">03 / ECOSISTEMA CREATOR</span><h3 id="alliance-platforms-title">PLATAFORMAS Y HERRAMIENTAS</h3><p>Servicios que pueden facilitar el descubrimiento de oportunidades, la gestión de solicitudes o la participación en programas.</p></div>
   <div class="alliance-platform-grid">
-   <article class="alliance-platform-card"><span class="alliance-platform-symbol" aria-hidden="true">L</span><h4>LURKIT</h4><p>Programas para creadores, campañas y oportunidades vinculadas a videojuegos. La participación en una plataforma no equivale a un patrocinio de esa plataforma.</p><a href="https://www.lurkit.gg/" target="_blank" rel="noopener noreferrer">SITIO OFICIAL ↗</a></article>
+   <article class="alliance-platform-card"><span class="alliance-platform-symbol" aria-hidden="true">L</span><h4>LURKIT</h4><p>Programas para creadores, campañas y oportunidades vinculadas a videojuegos. <a class="alliance-info-link" href="#alliance-transparency-title" onclick="switchChapter(8)" aria-label="Consultar transparencia">ⓘ</a></p><a href="https://www.lurkit.gg/" target="_blank" rel="noopener noreferrer">SITIO OFICIAL ↗</a></article>
    <article class="alliance-platform-card"><span class="alliance-platform-symbol" aria-hidden="true">K</span><h4>KEYMAILER</h4><p>Herramienta del ecosistema creator para descubrir campañas y gestionar solicitudes de acceso a juegos.</p><a href="https://www.keymailer.co/" target="_blank" rel="noopener noreferrer">SITIO OFICIAL ↗</a></article>
-   <article class="alliance-platform-card"><span class="alliance-platform-symbol" aria-hidden="true">E</span><h4>EPIC GAMES</h4><p>Programa Support-A-Creator y códigos de creador. Los códigos identifican a sus titulares; no acreditan un patrocinio económico.</p><a href="https://www.epicgames.com/site/en-US/affiliate-program" target="_blank" rel="noopener noreferrer">INFORMACIÓN DEL PROGRAMA ↗</a></article>
+   <article class="alliance-platform-card"><span class="alliance-platform-symbol" aria-hidden="true">E</span><h4>EPIC GAMES</h4><p>Programa Support-A-Creator y códigos de creador. Los códigos identifican a sus titulares. <a class="alliance-info-link" href="#alliance-transparency-title" onclick="switchChapter(8)" aria-label="Consultar transparencia">ⓘ</a></p><a href="https://www.epicgames.com/site/en-US/affiliate-program" target="_blank" rel="noopener noreferrer">INFORMACIÓN DEL PROGRAMA ↗</a></article>
   </div>
-  <p class="alliance-note">La utilización de estas herramientas no implica una alianza comercial con sus propietarios. Cada campaña, acceso o beneficio se comunica de acuerdo con sus condiciones reales.</p>
+  <p class="alliance-note"><a class="alliance-info-link" href="#alliance-transparency-title" onclick="switchChapter(8)">ⓘ Consultar criterio de transparencia</a></p>
  </section>
 
  <section class="alliance-section alliance-market-section" id="alliance-market" aria-labelledby="alliance-market-title">
@@ -789,21 +798,22 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
  </section>
  <section class="alliance-section alliance-case-section" id="alliance-cases" aria-labelledby="alliance-cases-title">
   <div class="alliance-section-heading"><span class="alliance-index">06 / ARCHIVO DE EXPERIENCIAS</span><h3 id="alliance-cases-title">LAS EXPERIENCIAS TAMBIÉN HABLAN</h3><p>Las credenciales muestran trayectorias. Los expedientes documentan cómo trabajamos en equipo.</p></div>
-  <article class="alliance-case-card alliance-case-index"><div class="alliance-case-art" aria-hidden="true"><span>ARCHIVO DE EXPERIENCIAS</span><strong>CASOS</strong><small>PARTIDAS · EVENTOS · PROYECTOS</small></div><div class="alliance-case-copy"><span class="alliance-stamp alliance-stamp-case">ARCHIVO DE EXPERIENCIAS</span><h4>PARTIDAS, EVENTOS Y PROYECTOS COMPARTIDOS</h4><p>Los casos con participantes, registros audiovisuales, métricas y aprendizajes se desarrollan en Colaboraciones, con un expediente principal por experiencia.</p><button class="chapter-cta" type="button" onclick="switchChapter(12)">VER EXPEDIENTES DE COLABORACIÓN ↗</button></div></article>
+  <article class="alliance-case-card alliance-case-index"><div class="alliance-case-art" aria-hidden="true"><span>ARCHIVO DE EXPERIENCIAS</span><strong>CASOS</strong><small>PARTIDAS · EVENTOS · PROYECTOS</small></div><div class="alliance-case-copy"><span class="alliance-stamp alliance-stamp-case">ARCHIVO DE EXPERIENCIAS</span><h4>PARTIDAS, EVENTOS Y PROYECTOS COMPARTIDOS</h4><p>Los casos con participantes, registros audiovisuales, métricas y aprendizajes se desarrollan en Colaboraciones, con un expediente principal por experiencia.</p><button class="chapter-cta" type="button" onclick="switchChapter(12)">VER EXPEDIENTES DE COLABORACIÓN →</button></div></article>
  </section>
- <section class="alliance-section alliance-transparency" aria-labelledby="alliance-transparency-title"><span class="alliance-index">07 / CRITERIO EDITORIAL</span><h3 id="alliance-transparency-title">TRANSPARENCIA Y ALCANCE</h3><p>Las acreditaciones publicadas identifican programas, plataformas o reconocimientos de cada creador. No representan automáticamente patrocinios económicos, contratos, pagos ni campañas comerciales.</p><p>Las oportunidades se evalúan individualmente. Sus entregables, condiciones, compensaciones y fechas se acuerdan con cada marca o publisher antes de su ejecución.</p></section>
- <section class="alliance-contact" id="alliance-contact" aria-labelledby="alliance-contact-title"><span class="alliance-index">08 / CONTACTO COMERCIAL</span><h3 id="alliance-contact-title">HABLEMOS DE UNA COLABORACIÓN</h3><p>Desarrolladores, publishers, agencias y marcas pueden acercar propuestas de campañas, cobertura, accesos anticipados o activaciones con la comunidad.</p><p>Para evaluar una propuesta, compartí la marca o juego, objetivos, fechas, plataformas, entregables esperados y presupuesto disponible.</p><a class="alliance-contact-link" href="#brand-proposal">losmoriartys@gmail.com ↗</a></section>
+ <section class="alliance-section alliance-transparency" aria-labelledby="alliance-transparency-title"><span class="alliance-index">07 / CRITERIO EDITORIAL</span><h3 id="alliance-transparency-title">TRANSPARENCIA Y ALCANCE</h3><p>Las credenciales identifican programas, plataformas o accesos; no equivalen por sí mismos a patrocinios económicos, contratos ni pagos. La participación en un programa o plataforma no equivale a una alianza comercial. No implica, por sí sola, patrocinio, pago ni contrato. El acceso a BarFender fue facilitado mediante Keymailer y no se presenta como patrocinio ni como campaña remunerada. Toda colaboración comercial se informa por separado cuando está documentada y acordada.</p></section>
+ <section class="alliance-contact" id="alliance-contact" aria-labelledby="alliance-contact-title"><span class="alliance-index">08 / CONTACTO COMERCIAL</span><h3 id="alliance-contact-title">HABLEMOS DE UNA COLABORACIÓN</h3><p>Desarrolladores, publishers, agencias y marcas pueden acercar propuestas de campañas, cobertura, accesos anticipados o activaciones con la comunidad.</p><p>Para evaluar una propuesta, compartí la marca o juego, objetivos, fechas, plataformas, entregables esperados y presupuesto disponible.</p><a class="alliance-contact-link" href="#brand-proposal">losmoriartys@gmail.com →</a></section>
 </section>
 
 <section id="chapter-12" class="chapter-panel comic-page collaboration-chapter" data-editorial-number="7" data-pager="false">
  <div class="chapter-tag">CAPÍTULO 07 · COLABORACIONES</div>
-    <button type="button" class="supplementary-return" onclick="switchChapter(6)">← VOLVER A COLABORÁ CON NOSOTROS</button>
+    <button type="button" class="supplementary-return" onclick="switchChapter(0)">← VOLVER AL INICIO</button>
  <div class="collab-cover">
   <div class="collab-cover-copy">
    <span class="collab-kicker">ARCHIVO CENTRAL · LEGIÓN MULTIVERSAL</span>
    <h2>CUANDO LOS UNIVERSOS<br><span>SE ENCUENTRAN.</span></h2>
    <p>Las colaboraciones son parte de nuestra historia. Este archivo registra partidas compartidas, directos simultáneos, eventos y proyectos en los que los integrantes de la Legión unen sus comunidades para crear algo en común.</p>
    <div class="collab-cover-stamp">BITÁCORA VIVA · CAMPAÑAS Y ENCUENTROS</div>
+   <a class="collab-bitacora-link" href="./bitacora-preview.html">EXPLORAR BITÁCORA GENERAL (VISTA PREVIA) →</a>
   </div>
   <figure class="collab-cover-art"><img src="image_20261107_184728.jpg" alt="Ilustración editorial de los integrantes de la Legión alrededor de una mesa holográfica de planificación" loading="lazy" width="2048" height="1152"><figcaption>LEGIÓN MULTIVERSAL · ENCUENTRO Y COORDINACIÓN ENTRE UNIVERSOS</figcaption></figure>
  </div>
@@ -824,8 +834,8 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
   <div class="barfender-game-profile"><div><span class="collab-kicker">EL JUEGO DE LA EXPERIENCIA</span><p>Un caótico simulador cooperativo de bar para 1–4 jugadores: servir copas, limpiar desastres, detener peleas y mantener el local en pie mientras la noche se descontrola. Los jugadores preparan el bar, atienden a la multitud e intentan sobrevivir al turno.</p></div><dl><div><dt>LANZAMIENTO</dt><dd>12 OCT 2026</dd></div><div><dt>DESARROLLADOR</dt><dd>Proto Division</dd></div><div><dt>EDITOR</dt><dd>Rock Paper Publisher</dd></div><div><dt>RESEÑAS EN STEAM</dt><dd>Muy positivas · 330 reseñas <small>(corte 07/11/2026)</small></dd></div></dl></div>
   <div class="campaign-summary-grid">
    <article class="campaign-summary-copy"><span class="collab-kicker">LA EXPERIENCIA</span><h4>UNA SESIÓN, CUATRO PUNTOS DE VISTA.</h4>
-    <figure class="campaign-editorial-art campaign-four-views"><img src="BarFenderLos4.jpg" alt="Los cuatro creadores reunidos para la sesión cooperativa de BarFender" loading="lazy" width="2048" height="1152"><figcaption>UNA SESIÓN · CUATRO PUNTOS DE VISTA · DEMIAN, LADY MORIARTY, ROD3RIK Y AKUMA.</figcaption></figure>
-    <p>El 5 de noviembre de 2026, <strong>Demian, Lady Moriarty, Rod3rik y Akuma</strong> se reunieron para jugar BarFender y colaborar en directo desde sus propios canales de Twitch. La actividad compartida se extendió durante aproximadamente una hora y media.</p>
+    <figure class="campaign-editorial-art campaign-four-views"><img src="BarFenderLos4.jpg" alt="Los cuatro creadores reunidos para la sesión cooperativa de BarFender" loading="lazy" width="2048" height="1152"><figcaption>UNA SESIÓN · CUATRO PUNTOS DE VISTA · DEMIAN, LADY MORIARTY, ROD3R1K Y AKUMA.</figcaption></figure>
+    <p>El 5 de noviembre de 2026, <strong>Demian, Lady Moriarty, ROD3R1K y Akuma</strong> se reunieron para jugar BarFender y colaborar en directo desde sus propios canales de Twitch. La actividad compartida se extendió durante aproximadamente una hora y media.</p>
     <p>La propuesta permitió mostrar una misma experiencia desde cuatro comunidades y estilos de transmisión, generar interacción entre creadores y conservar momentos destacados para seguir difundiendo la actividad después del directo.</p>
     <p class="campaign-credit"><b>Juego:</b> BarFender<br><b>Publisher:</b> Rock Paper Publisher<br><b>Desarrollador:</b> Proto Division<br><b>Acceso al juego:</b> facilitado mediante Keymailer.</p>
     <figure class="campaign-editorial-art"><img src="image_20261107_184546.jpg" alt="Ilustración editorial de los héroes de Legión Multiversal reunidos frente a distintos portales" loading="lazy" width="2048" height="1152"><figcaption>IDENTIDAD VISUAL DE LA LEGIÓN · ILUSTRACIÓN EDITORIAL DEL UNIVERSO COMPARTIDO.</figcaption></figure>
@@ -834,70 +844,72 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
    <aside class="campaign-roster"><span class="collab-kicker">EQUIPO DESPLEGADO</span>
     <div class="campaign-agent"><div><strong>DEMIAN</strong><small>LOS MORIARTYS · CANAL CONJUNTO</small></div></div>
     <div class="campaign-agent"><div><strong>LADY MORIARTY</strong><small>LADYMORIARTY01 · CANAL INDIVIDUAL</small></div></div>
-    <div class="campaign-agent"><div><strong>ROD3RIK</strong><small>THER0D3R1K · CANAL INDIVIDUAL</small></div></div>
+    <div class="campaign-agent"><div><strong>ROD3R1K</strong><small>TheR0D3R1K · CANAL INDIVIDUAL</small></div></div>
     <div class="campaign-agent"><div><strong>AKUMA</strong><small>AKUMAZOLDYCK · CANAL INDIVIDUAL</small></div></div>
    </aside>
   </div>
   <div class="campaign-case-index"><strong>EXPERIENCIA 001 · 4 CREADORES · 4 CANALES</strong></div>
-  <dl class="campaign-case-facts">
-   <div><dt>PARTICIPANTES</dt><dd>Demian (Los Moriartys), Lady Moriarty, ROD3R1K y Akuma. Los Moriartys se presenta como canal compartido; los otros tres son canales individuales.</dd></div>
-   <div><dt>OBJETIVO DE LA EXPERIENCIA</dt><dd>Compartir una sesión cooperativa y mostrar una misma partida desde cuatro comunidades independientes, sin prometer alcance agregado ni resultados comerciales.</dd></div>
-   <div><dt>CONTENIDO REGISTRADO</dt><dd>Cuatro canales en simultáneo, aproximadamente 90 minutos de actividad colaborativa, tres VOD públicos localizados y ocho clips identificados en el archivo de origen. Cuatro clips se seleccionan para esta ficha.</dd></div>
-   <div><dt>RESULTADO DOCUMENTABLE</dt><dd>Una experiencia multicanal con registros audiovisuales. Las métricas de audiencia que siguen corresponden al VOD completo de Los Moriartys, no exclusivamente al tramo de BarFender. No se atribuyen ventas, conversiones ni ROI.</dd></div>
-   <div><dt>APRENDIZAJE</dt><dd>Conservar los VOD de todos los participantes, registrar enlaces y fechas de cada canal y mantener separadas las métricas individuales antes de comunicar cualquier alcance conjunto.</dd></div>
-  </dl>
-  <p class="campaign-footnote">El acceso al juego fue facilitado mediante Keymailer; no se presenta como patrocinio ni como campaña remunerada.</p>
-  <div class="campaign-metrics">
-   <article><strong>4</strong><span>CANALES EN SIMULTÁNEO</span></article><article><strong>~1 H 30 MIN</strong><span>ACTIVIDAD COLABORATIVA</span></article><article><strong>8</strong><span>CLIPS IDENTIFICADOS</span></article><article><strong>98</strong><span>ESPECTADORES COMPARTIDOS ÚNICOS*</span></article>
+  <div class="barfender-summary-grid" aria-label="Resumen de la experiencia BarFender">
+   <article><strong>4</strong><span>CREADORES</span></article>
+   <article><strong>4</strong><span>CANALES EN SIMULTÁNEO</span></article>
+   <article><strong>3</strong><span>VOD PÚBLICOS</span></article>
+   <article><strong>~1 H 14 MIN</strong><span>DURACIÓN APROXIMADA DE CADA VOD</span></article>
   </div>
-  <p class="campaign-footnote">* Los 98 espectadores compartidos únicos corresponden al panel Twitch Shared Viewership del canal Los Moriartys. No representan una deduplicación global de la audiencia de los cuatro canales ni deben sumarse a los espectadores únicos individuales.</p>
-  <section class="campaign-impact">
-   <div class="campaign-subhead"><span class="collab-kicker">02 / MÉTRICAS Y ALCANCE</span><h4>EL DIRECTO DE LOS MORIARTYS</h4><p>Datos del VOD completo del 5/11/2026. Estas métricas corresponden a toda la transmisión, no exclusivamente al tramo de BarFender.</p></div>
-   <div class="campaign-stat-grid">
-    <div><strong>25</strong><span>ESPECTADORES PROMEDIO</span></div><div><strong>40</strong><span>PICO MÁXIMO · CANAL LOS MORIARTYS</span></div><div><strong>80</strong><span>ESPECTADORES ÚNICOS</span></div><div><strong>91</strong><span>USUARIOS EN CHAT</span></div><div><strong>154</strong><span>VISTAS EN DIRECTO</span></div><div><strong>+2</strong><span>NUEVOS SEGUIDORES</span></div><div><strong>1</strong><span>NUEVA SUSCRIPCIÓN</span></div><div><strong>2 H 27 MIN</strong><span>DURACIÓN DEL VOD · 2:27:20</span></div>
+  <details class="barfender-reading">
+   <summary>CÓMO LEER ESTOS DATOS</summary>
+   <div class="barfender-reading-body">
+    <div><strong>PARTICIPANTES</strong><p>Demian (proyecto compartido Los Moriartys), Lady Moriarty, ROD3R1K y Akuma. Los otros tres participantes transmitieron desde canales individuales.</p></div>
+    <div><strong>OBJETIVO DE LA EXPERIENCIA</strong><p>Compartir una sesión cooperativa y mostrar una misma partida desde cuatro comunidades independientes, sin prometer alcance agregado ni resultados comerciales.</p></div>
+    <div><strong>CONTENIDO REGISTRADO</strong><p>La actividad colaborativa duró aproximadamente 90 minutos. El archivo de origen identificó ocho clips; cuatro se seleccionan en esta ficha.</p></div>
+    <div><strong>RESULTADO DOCUMENTABLE</strong><p>Una experiencia multicanal con registros audiovisuales. No se atribuyen ventas, conversiones ni ROI.</p></div>
+    <div><strong>APRENDIZAJE</strong><p>Conservar los VOD de todos los participantes y mantener separadas las métricas individuales antes de comunicar cualquier alcance conjunto.</p></div>
+    <div><strong>CONTEXTO DEL VOD DE LOS MORIARTYS</strong><p>El VOD completo registró 25 espectadores promedio, pico de 40, 80 espectadores únicos, 91 usuarios activos en chat, 154 vistas, dos nuevos seguidores y una suscripción, durante 2 h 27 min. Son métricas de toda esa transmisión, no exclusivamente del tramo BarFender ni de la audiencia conjunta de cuatro canales.</p></div>
+    <p>El acceso al juego fue facilitado mediante Keymailer. Consultá el <a href="#alliance-transparency-title" onclick="switchChapter(8)">criterio de transparencia ⓘ</a>.</p>
    </div>
-  <p class="campaign-engagement-note"><b>Señal de participación del VOD:</b> 91 usuarios activos en chat frente a 80 espectadores únicos en la transmisión completa. El contenido principal fue la experiencia cooperativa BarFender. Es una señal de actividad de chat del canal Los Moriartys; no representa una tasa deduplicada entre los cuatro canales ni una medición exclusiva del tramo de juego.</p>
-   <p class="campaign-footnote">Fuente: estadísticas del directo de Los Moriartys y panel Twitch Shared Viewership. El VOD completo tuvo una duración de 2:27:20. El indicador de 98 espectadores compartidos únicos se conserva como dato independiente del panel y no equivale a espectadores únicos deduplicados de toda la sesión colaborativa.</p>
-  </section>
+  </details>
   <section class="campaign-vods">
    <div class="campaign-subhead"><span class="collab-kicker">03 / REGISTROS DE TRANSMISIÓN</span><h4>LA ACTIVIDAD, DESDE CADA CANAL</h4><p>Se localizaron tres VOD públicos. Akuma participó en simultáneo, pero no se localizó un VOD público para incorporar al archivo.</p></div>
    <div class="vod-grid">
     <a href="https://www.twitch.tv/videos/2919716450" target="_blank" rel="noopener noreferrer"><span>VOD 01 · LOS MORIARTYS</span><strong>1:15:36</strong><small>ABRIR TRANSMISIÓN ↗</small></a>
     <a href="https://www.twitch.tv/videos/2919755971" target="_blank" rel="noopener noreferrer"><span>VOD 02 · LADY MORIARTY01</span><strong>1:13:58</strong><small>ABRIR TRANSMISIÓN ↗</small></a>
-    <a href="https://www.twitch.tv/videos/2919719142" target="_blank" rel="noopener noreferrer"><span>VOD 03 · THER0D3R1K</span><strong>1:14:01</strong><small>ABRIR TRANSMISIÓN ↗</small></a>
+    <a href="https://www.twitch.tv/videos/2919719142" target="_blank" rel="noopener noreferrer"><span>VOD 03 · TheR0D3R1K</span><strong>1:14:01</strong><small>ABRIR TRANSMISIÓN ↗</small></a>
    </div>
-   <div class="vod-total"><strong>3 H 43 MIN 35 S</strong><span>TIEMPO EFECTIVO SUMADO EN LOS TRES VOD DOCUMENTADOS · NO REPRESENTA HORAS VISTAS.</span></div>
+   <div class="vod-total"><strong>3 VOD DE ~1 H 14 MIN</strong><span>DURACIÓN INDIVIDUAL APROXIMADA · LOS VOD SON TRES TRANSMISIONES SIMULTÁNEAS, NO TIEMPO ACUMULADO.</span></div>
   </section>
   <section class="campaign-clips">
-   <div class="campaign-subhead"><span class="collab-kicker">04 / ARCHIVO AUDIOVISUAL</span><h4>CUATRO MOMENTOS PARA VOLVER A LA NOCHE</h4><p>Una selección editorial breve de cuatro canales. Las portadas usan títulos neutrales para presentar el contenido; cada enlace abre el clip original en Twitch. Los títulos originales permanecen en los registros de origen.</p></div>
+   <div class="campaign-subhead"><span class="collab-kicker">04 / ARCHIVO AUDIOVISUAL</span><h4>CUATRO MOMENTOS PARA VOLVER A LA NOCHE</h4><p>Una selección de momentos concretos de la sesión: cada miniatura abre el clip original en Twitch.</p></div>
    <div class="clip-channel-grid">
     <article class="clip-feature-card">
-     <div class="clip-card-source"><img src="https://static-cdn.jtvnw.net/jtv_user_pictures/1db2e1df-454f-4728-9bc8-84258fab8934-profile_image-300x300.png" alt="" loading="lazy" width="300" height="300"><span class="clip-card-channel">THER0D3R1K · MOMENTO DESTACADO</span></div>
-     <h5>REACCIÓN INESPERADA</h5>
-     <a class="clip-preview-card" href="https://www.twitch.tv/ther0d3r1k/clip/GlamorousEndearingFloofSMOrc-ZKBHBFFPQ09GjHyJ" target="_blank" rel="noopener noreferrer" aria-label="Abrir momento destacado de TheR0D3R1K en Twitch">
-      <span class="clip-overlay-creator"><img src="https://static-cdn.jtvnw.net/jtv_user_pictures/1db2e1df-454f-4728-9bc8-84258fab8934-profile_image-300x300.png" alt="" loading="lazy" width="300" height="300"><span>DURACIÓN NO REGISTRADA</span></span><span class="clip-preview-topline">LEGIÓN MULTIVERSAL <i>ARCHIVO 01</i></span><span class="clip-preview-play" aria-hidden="true">▶</span><span class="clip-preview-bottomline">REGISTRO ORIGINAL <b>VER EN TWITCH ↗</b></span>
+     <div class="clip-card-source"><img src="https://static-cdn.jtvnw.net/jtv_user_pictures/ce75dbf8-4471-4884-890e-a4acb80b1838-profile_image-300x300.png" alt="" loading="lazy" width="300" height="300"><span class="clip-card-channel">LOS MORIARTYS · 5/11/2026</span></div>
+     <h5>UN SUSTO QUE TERMINA EN VÓMITO</h5>
+     <a class="clip-preview-card" href="https://www.twitch.tv/losmoriartys/clip/ImportantExuberantSoybeanCopyThis-_YjtRbUlzhf1SFEY" target="_blank" rel="noopener noreferrer" aria-label="Ver el clip de Los Moriartys: un susto que termina en vómito">
+      <img class="clip-preview-image" src="https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/0127e1fa-d05d-409e-bba6-9c4477f24e8c/landscape/thumb/thumb-0000000000-480x272.jpg" alt="Miniatura original del clip de Los Moriartys" loading="lazy" decoding="async" width="480" height="272">
+      <span class="clip-overlay-creator"><img src="https://static-cdn.jtvnw.net/jtv_user_pictures/ce75dbf8-4471-4884-890e-a4acb80b1838-profile_image-300x300.png" alt="" loading="lazy" width="300" height="300"><span>11 S</span></span><span class="clip-preview-play" aria-hidden="true">▶</span>
      </a>
     </article>
     <article class="clip-feature-card">
-     <div class="clip-card-source"><img src="https://static-cdn.jtvnw.net/jtv_user_pictures/ce75dbf8-4471-4884-890e-a4acb80b1838-profile_image-300x300.png" alt="" loading="lazy" width="300" height="300"><span class="clip-card-channel">LOS MORIARTYS · EXPERIENCIA COOPERATIVA</span></div>
-     <h5>BARFENDER: UNA PARTIDA ENTRE CUATRO</h5>
-     <p class="clip-context">Demian, Lady Moriarty, TheR0D3R1K y Akuma · 5/11/2026</p>
-     <a class="clip-preview-card" href="https://clips.twitch.tv/AssiduousMildSkirretWoofer-IWeZeQsl3J_cFI_x" target="_blank" rel="noopener noreferrer" aria-label="Abrir clip de BarFender de Los Moriartys en Twitch">
-      <span class="clip-overlay-creator"><img src="https://static-cdn.jtvnw.net/jtv_user_pictures/ce75dbf8-4471-4884-890e-a4acb80b1838-profile_image-300x300.png" alt="" loading="lazy" width="300" height="300"><span>DURACIÓN NO REGISTRADA</span></span><span class="clip-preview-topline">LEGIÓN MULTIVERSAL <i>ARCHIVO 02</i></span><span class="clip-preview-play" aria-hidden="true">▶</span><span class="clip-preview-bottomline">REGISTRO ORIGINAL <b>VER EN TWITCH ↗</b></span>
+     <div class="clip-card-source"><img src="https://static-cdn.jtvnw.net/jtv_user_pictures/ce75dbf8-4471-4884-890e-a4acb80b1838-profile_image-300x300.png" alt="" loading="lazy" width="300" height="300"><span class="clip-card-channel">LOS MORIARTYS · 5/11/2026</span></div>
+     <h5>SE BOXEAN EN NUESTRO BAR</h5>
+     <p class="clip-context">Demian, Lady Moriarty, TheR0D3R1K y Akuma · BarFender</p>
+     <a class="clip-preview-card" href="https://www.twitch.tv/losmoriartys/clip/AssiduousMildSkirretWoofer-IWeZeQsl3J_cFI_x" target="_blank" rel="noopener noreferrer" aria-label="Ver el clip de BarFender: se boxean en nuestro bar">
+      <img class="clip-preview-image" src="https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/c939400d-d8af-4b3e-bae6-0744e40b0744/landscape/thumb/thumb-0000000000-480x272.jpg" alt="Miniatura original del clip de BarFender de Los Moriartys" loading="lazy" decoding="async" width="480" height="272">
+      <span class="clip-overlay-creator"><img src="https://static-cdn.jtvnw.net/jtv_user_pictures/ce75dbf8-4471-4884-890e-a4acb80b1838-profile_image-300x300.png" alt="" loading="lazy" width="300" height="300"><span>51 S</span></span><span class="clip-preview-play" aria-hidden="true">▶</span>
      </a>
     </article>
     <article class="clip-feature-card">
-     <div class="clip-card-source"><img src="https://static-cdn.jtvnw.net/jtv_user_pictures/960db8a3-a588-4829-8b26-5b4ed95db93a-profile_image-300x300.png" alt="" loading="lazy" width="300" height="300"><span class="clip-card-channel">AKUMA · MOMENTO DESTACADO</span></div>
-     <h5>UN SUSTO EN PLENA AVENTURA</h5>
-     <a class="clip-preview-card" href="https://www.twitch.tv/akumazoldyck/clip/EvilHomelyReubenStrawBeary-p1XE4WyQwFpOIgHj" target="_blank" rel="noopener noreferrer" aria-label="Abrir momento destacado de Akuma en Twitch">
-      <span class="clip-overlay-creator"><img src="https://static-cdn.jtvnw.net/jtv_user_pictures/960db8a3-a588-4829-8b26-5b4ed95db93a-profile_image-300x300.png" alt="" loading="lazy" width="300" height="300"><span>DURACIÓN NO REGISTRADA</span></span><span class="clip-preview-topline">LEGIÓN MULTIVERSAL <i>ARCHIVO 03</i></span><span class="clip-preview-play" aria-hidden="true">▶</span><span class="clip-preview-bottomline">REGISTRO ORIGINAL <b>VER EN TWITCH ↗</b></span>
+     <div class="clip-card-source"><img src="https://static-cdn.jtvnw.net/jtv_user_pictures/1db2e1df-454f-4728-9bc8-84258fab8934-profile_image-300x300.png" alt="" loading="lazy" width="300" height="300"><span class="clip-card-channel">ROD3R1K · 5/11/2026</span></div>
+     <h5>BUSCAN EMPLEADO PARA EL BAR</h5>
+     <a class="clip-preview-card" href="https://www.twitch.tv/ther0d3r1k/clip/SuccessfulEsteemedJellyfishKappaWealth-BmNdj5Xculcpr4tI" target="_blank" rel="noopener noreferrer" aria-label="Ver el clip de ROD3R1K: buscan empleado para el bar">
+      <img class="clip-preview-image" src="https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/ae428b12-bde6-4961-967a-db8aa564075d/landscape/thumb/thumb-0000000000-480x272.jpg" alt="Miniatura original del clip de ROD3R1K" loading="lazy" decoding="async" width="480" height="272">
+      <span class="clip-overlay-creator"><img src="https://static-cdn.jtvnw.net/jtv_user_pictures/1db2e1df-454f-4728-9bc8-84258fab8934-profile_image-300x300.png" alt="" loading="lazy" width="300" height="300"><span>31 S</span></span><span class="clip-preview-play" aria-hidden="true">▶</span>
      </a>
     </article>
     <article class="clip-feature-card">
-     <div class="clip-card-source"><img src="https://static-cdn.jtvnw.net/jtv_user_pictures/1729ff07-94b4-4b9f-a03e-a10142f3a658-profile_image-300x300.jpeg" alt="" loading="lazy" width="300" height="300"><span class="clip-card-channel">LADY MORIARTY01 · MOMENTO DESTACADO</span></div>
-     <h5>UN MOMENTO DE DIVERSIÓN</h5>
-     <a class="clip-preview-card" href="https://www.twitch.tv/ladymoriarty01/clip/WittySecretiveAmazonWholeWheat-_YY-Mo8YtTK4nra7" target="_blank" rel="noopener noreferrer" aria-label="Abrir momento destacado de Lady Moriarty en Twitch">
-      <span class="clip-overlay-creator"><img src="https://static-cdn.jtvnw.net/jtv_user_pictures/1729ff07-94b4-4b9f-a03e-a10142f3a658-profile_image-300x300.jpeg" alt="" loading="lazy" width="300" height="300"><span>DURACIÓN NO REGISTRADA</span></span><span class="clip-preview-topline">LEGIÓN MULTIVERSAL <i>ARCHIVO 04</i></span><span class="clip-preview-play" aria-hidden="true">▶</span><span class="clip-preview-bottomline">REGISTRO ORIGINAL <b>VER EN TWITCH ↗</b></span>
+     <div class="clip-card-source"><img src="https://static-cdn.jtvnw.net/jtv_user_pictures/1729ff07-94b4-4b9f-a03e-a10142f3a658-profile_image-300x300.jpeg" alt="" loading="lazy" width="300" height="300"><span class="clip-card-channel">LADY MORIARTY · 5/11/2026</span></div>
+     <h5>LE PEGA A HARRY POTTER</h5>
+     <a class="clip-preview-card" href="https://www.twitch.tv/ladymoriarty01/clip/ThankfulCogentCodMikeHogu-DUWGz_j_OIBmWYbQ" target="_blank" rel="noopener noreferrer" aria-label="Ver el clip de Lady Moriarty: le pega a Harry Potter">
+      <img class="clip-preview-image" src="https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/0e1058e9-b1c6-462d-9e9a-ad83e8697b6e/landscape/thumb/thumb-0000000000-480x272.jpg" alt="Miniatura original del clip de Lady Moriarty" loading="lazy" decoding="async" width="480" height="272">
+      <span class="clip-overlay-creator"><img src="https://static-cdn.jtvnw.net/jtv_user_pictures/1729ff07-94b4-4b9f-a03e-a10142f3a658-profile_image-300x300.jpeg" alt="" loading="lazy" width="300" height="300"><span>46 S</span></span><span class="clip-preview-play" aria-hidden="true">▶</span>
      </a>
     </article>
    </div>
@@ -910,7 +922,7 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
     <article><h5>CONTINUIDAD DESPUÉS DEL DIRECTO</h5><p>Los VOD y los ocho clips identificados permiten conservar y prolongar la vida del contenido.</p></article>
     <article><h5>COMUNIDADES CONECTADAS</h5><p>La actividad ofrece un ejemplo concreto de colaboración entre creadores sin borrar la identidad de cada canal.</p></article>
    </div>
-   <p class="campaign-transparency"><b>Transparencia:</b> esta ficha documenta una sesión colaborativa con acceso al juego facilitado mediante Keymailer. No se presenta como patrocinio remunerado ni se atribuyen ventas, conversiones o ROI. Las métricas se muestran con su fuente y alcance; los 98 espectadores compartidos únicos no son una cifra global deduplicada de los cuatro canales.</p>
+   
   </section>
  </section>
  <section class="collab-log-section" aria-labelledby="collab-log-title">
@@ -922,30 +934,30 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
     <a href="https://www.twitch.tv/TheR0D3R1K" target="_blank" rel="noopener noreferrer"><strong>TheR0D3R1K</strong><span>Canal Twitch ↗</span></a>
    </div>
    <div class="collab-log-metrics">
-    <div><span>AKUMA · MUESTRAS</span><strong>2</strong><small>Promedio observado: 10,5</small><small>Pico observado: 16</small></div>
+    <div><span>AKUMA · MUESTRAS</span><strong>2</strong><small>Muestra insuficiente para publicar promedio o pico.</small></div>
     <div><span>TheR0D3R1K · MUESTRAS</span><strong>4</strong><small>Promedio observado: 26,3</small><small>Pico observado: 33</small></div>
    </div>
    <p class="campaign-transparency"><b>Metodología:</b> registros de Twitch Helix capturados el 10/11/2026. Se muestran promedios y picos de las muestras disponibles, no espectadores únicos, promedio oficial del directo, horas vistas ni alcance conjunto. La captura no sustituye los VOD; sus enlaces podrán añadirse cuando estén disponibles.</p>
   </article>
  </section>
  <section class="collab-next"><div><span class="collab-kicker">EL ARCHIVO SIGUE ABIERTO</span><h3>CADA COLABORACIÓN<br><span>SUMA UNA NUEVA HISTORIA.</span></h3><p>La próxima bitácora podrá documentar otro juego, evento, encuentro, directo conjunto o proyecto comunitario. Cada experiencia tendrá su propio expediente y conservará el registro de quienes la hicieron posible.</p></div><div class="collab-next-stamp">PRÓXIMO<br><strong>EXPEDIENTE</strong><br>003 · PENDIENTE</div></section>
- <div class="collab-contact"><span>¿REPRESENTÁS UN ESTUDIO, PUBLISHER, AGENCIA O MARCA?</span><p>Podemos conversar sobre experiencias multicanal, contenido cooperativo y activaciones con creadores.</p><a href="#brand-proposal">CONTACTAR A LA LEGIÓN ↗</a></div>
+ <div class="collab-contact"><span>¿REPRESENTÁS UN ESTUDIO, PUBLISHER, AGENCIA O MARCA?</span><p>Podemos conversar sobre experiencias multicanal, contenido cooperativo y activaciones con creadores.</p><a href="#brand-proposal">CONTACTAR A LA LEGIÓN →</a></div>
 </section>
 
 <section id="chapter-5" class="chapter-panel comic-page" data-editorial-number="8" data-pager="false">
 <div class="chapter-tag">CAPÍTULO 08 · ARSENAL</div>
-    <button type="button" class="supplementary-return" onclick="switchChapter(6)">← VOLVER A COLABORÁ CON NOSOTROS</button>
+    <button type="button" class="supplementary-return" onclick="switchChapter(0)">← VOLVER AL INICIO</button>
 <h2 class="comic-title">ARSENAL MULTIVERSAL</h2>
 <div class="premium-panel arsenal-intro">
-<div class="premium-kicker">DIEZ JUEGOS · UNA MISMA ESCUADRA</div>
+<div class="premium-kicker">ONCE JUEGOS · UNA MISMA ESCUADRA</div>
 <h3>Distintos mundos. Nuevas formas de jugar juntos.</h3>
 <p>Este es el repertorio de experiencias que proponemos para reunir al roster y a la comunidad: competir, cooperar, improvisar y crear momentos que valga la pena recordar.</p>
 <p>La selección combina fiesta, deducción social, terror, supervivencia y construcción. No es un ranking ni una lista cerrada: es un punto de partida para nuestras próximas sesiones.</p>
 </div>
-<div class="arsenal-internal-note"><b>ARCHIVO OPERATIVO DE CREADORES</b><p>El historial de campañas y accesos se retiró del recorrido público. Su acceso se restablecerá únicamente cuando exista autenticación real para integrantes y colaboradores.</p></div>
+
 <div class="arsenal-selection-heading">
 <div class="premium-kicker">SELECCIÓN DE LA LEGIÓN</div>
-<h3>10 JUEGOS PARA JUGAR EN EQUIPO</h3>
+<h3>11 JUEGOS PARA JUGAR EN EQUIPO</h3>
 <p>Cada juego abre una dinámica distinta. Elegí una portada para conocer la propuesta y consultar su tienda oficial.</p>
 </div>
 <div class="arsenal-filter-bar" role="group" aria-label="Filtrar juegos por género"><button type="button" class="is-active" data-arsenal-filter="all" aria-pressed="true" onclick="filterArsenal('all')">TODOS</button><button type="button" data-arsenal-filter="party" aria-pressed="false" onclick="filterArsenal('party')">FIESTA / HUMOR</button><button type="button" data-arsenal-filter="horror" aria-pressed="false" onclick="filterArsenal('horror')">TERROR CO-OP</button><button type="button" data-arsenal-filter="social" aria-pressed="false" onclick="filterArsenal('social')">DEDUCCIÓN SOCIAL</button></div><div class="premium-grid arsenal-grid">
@@ -1029,7 +1041,7 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
 <p><b>Modo:</b> supervivencia con multijugador cooperativo.</p>
 <a href="https://store.steampowered.com/app/242760/" target="_blank" rel="noopener noreferrer">Ver en Steam ↗</a>
 </article>
-<article class="premium-card arsenal-card arsenal-played-card" data-genre="party"><div class="arsenal-cover arsenal-cover-placeholder" role="img" aria-label="BarFender, simulador cooperativo de bar">BARFENDER</div><div class="arsenal-played-stamp">✓ JUGADO POR LA LEGIÓN</div><div class="premium-kicker">Cooperativo · humor · simulación</div><h3>11. BarFender</h3><p>Experiencia cooperativa realizada por cuatro creadores y documentada en el Expediente 001, con una segunda sesión de seguimiento.</p><a href="#barfender-expediente" onclick="switchChapter(12)">VER EXPEDIENTE 001 ↗</a><a href="https://store.steampowered.com/app/4159680/Barfender_COOP_Bar_Simulator/" target="_blank" rel="noopener noreferrer">Ver en Steam ↗</a></article></div>
+<article class="premium-card arsenal-card arsenal-played-card" data-genre="party"><div class="arsenal-cover arsenal-cover-placeholder" role="img" aria-label="BarFender, simulador cooperativo de bar">BARFENDER</div><div class="arsenal-played-stamp">✓ JUGADO POR LA LEGIÓN</div><div class="premium-kicker">Cooperativo · humor · simulación</div><h3>11. BarFender</h3><p>Experiencia cooperativa realizada por cuatro creadores y documentada en el Expediente 001, con una segunda sesión de seguimiento.</p><a href="#barfender-expediente" onclick="switchChapter(12)">VER EXPEDIENTE 001 →</a><a href="https://store.steampowered.com/app/4159680/Barfender_COOP_Bar_Simulator/" target="_blank" rel="noopener noreferrer">Ver en Steam ↗</a></article></div>
 <div class="premium-panel" style="margin-top:22px">
 <div class="premium-kicker">Guía para organizar las sesiones</div>
 <h3>Primero la experiencia; después, la plataforma</h3>
@@ -1040,34 +1052,16 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
 
 </section>
 
-<section id="chapter-6" class="chapter-panel comic-page recruitment-chapter" data-editorial-number="5">
-    <div class="chapter-tag">CAPÍTULO 05 · COLABORÁ CON NOSOTROS</div>
-    <h2 class="comic-title">COLABORAR · CONECTAR · CRECER</h2>
+<section id="chapter-6" class="chapter-panel comic-page recruitment-chapter" data-editorial-number="10">
+    <div class="chapter-tag">CAPÍTULO 10 · RECLUTAMIENTO</div>
+    <h2 class="comic-title">SUMATE A LA LEGIÓN</h2>
     <div class="premium-panel recruitment-intro">
         <div class="premium-kicker">LEGIÓN MULTIVERSAL · NUEVOS CONTACTOS</div>
-        <h3>DOS CAMINOS. UNA MISMA LEGIÓN.</h3>
-        <p>Este espacio tiene dos recorridos: creadores que quieren presentar su perfil para una posible incorporación al roster, y estudios, publishers o marcas que quieren explorar una colaboración. Cada propuesta se evalúa según su encaje, disponibilidad y alcance real.</p>
+        <h3>UN LUGAR PARA CREADORES QUE QUIEREN CRECER EN EQUIPO.</h3>
+        <p>Presentá tu perfil para que podamos evaluar una posible incorporación al roster. Si representás un estudio, publisher o marca, ingresá por el recorrido independiente «Para marcas». Cada propuesta se evalúa según su encaje, disponibilidad y alcance real.</p>
     </div>
 
-<section class="collaboration-foundations" aria-labelledby="collaboration-foundations-title">
-    <div class="premium-kicker">LO QUE NOS UNE · CÓMO PARTICIPAR</div>
-    <h3 id="collaboration-foundations-title">TRES PILARES DE LA LEGIÓN</h3>
-    <div class="collaboration-foundations-grid">
-        <button type="button" class="collaboration-foundation-link" onclick="switchChapter(11)">
-            <strong>VALORES</strong><span>Un manifiesto sobre identidad, respeto y crecimiento compartido.</span><em>LEER EL MANIFIESTO ↗</em>
-        </button>
-        <button type="button" class="collaboration-foundation-link" onclick="switchChapter(9)">
-            <strong>COMUNIDAD</strong><span>Misiones, logros y formas de participar en el universo de la Legión.</span><em>EXPLORAR LA COMUNIDAD ↗</em>
-        </button>
-        <button type="button" class="collaboration-foundation-link" onclick="switchChapter(8)">
-            <strong>ALIANZAS</strong><span>Credenciales reales y formatos posibles para crear experiencias en conjunto.</span><em>CONOCER LAS ALIANZAS ↗</em>
-        </button>
-    </div>
-    <button type="button" class="collaboration-case-link" onclick="switchChapter(12)">
-        <span>ARCHIVO DE EXPERIENCIAS · BARFENDER Y PRÓXIMOS CASOS</span>
-        <strong>VER CASOS DOCUMENTADOS ↗</strong>
-    </button>
-</section>
+
 <div class="recruitment-tabs" role="tablist" aria-label="Elegí el tipo de contacto"><button type="button" role="tab" id="recruitment-tab-brand" aria-controls="brand-proposal" aria-selected="true" onclick="setRecruitmentMode('brand')">SOY MARCA / ESTUDIO / AGENCIA</button><button type="button" role="tab" id="recruitment-tab-creator" aria-controls="creator-application" aria-selected="false" onclick="setRecruitmentMode('creator')">SOY CREADOR Y QUIERO SUMARME</button></div>
     <section class="recruitment-form-section" id="creator-application" hidden aria-labelledby="creator-application-title">
         <div class="recruitment-form-heading">
@@ -1078,6 +1072,7 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
         <form class="comic-form recruitment-contact-form" data-contact-type="creator" method="post" action="/api/contact">
             <div class="recruitment-fields-grid">
                 <div class="form-group"><label for="creator-name">Nombre o alias *</label><input id="creator-name" name="Nombre o alias" type="text" required placeholder="¿Cómo te conocemos?"></div>
+                <div class="form-group"><label for="creator-email">Correo de contacto (opcional)</label><input id="creator-email" name="Correo de contacto" type="email" placeholder="nombre@correo.com"></div>
                 <div class="form-group"><label for="creator-country">País / zona horaria</label><input id="creator-country" name="País y zona horaria" type="text" placeholder="Ej. Argentina · GMT-3"></div>
                 <div class="form-group"><label for="creator-channel">Canal principal *</label><input id="creator-channel" name="Canal principal" type="url" required placeholder="https://twitch.tv/..."></div>
                 <div class="form-group"><label for="creator-other-links">Otras redes o canales</label><input id="creator-other-links" name="Otras redes" type="text" placeholder="YouTube, TikTok, Instagram..."></div>
@@ -1087,7 +1082,8 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
             <div class="form-group"><label for="creator-motivation">¿Por qué te gustaría sumarte? *</label><textarea id="creator-motivation" name="Motivación" rows="4" required placeholder="Contanos qué buscás y qué te gustaría aportar."></textarea></div>
             <div class="form-group"><label for="creator-collaboration">¿Qué tipo de actividades te interesan?</label><textarea id="creator-collaboration" name="Ideas de colaboración" rows="3" placeholder="Partidas grupales, eventos, proyectos, campañas..."></textarea></div>
             <p class="stats-note">La incorporación se evalúa de forma individual y requiere una decisión compartida. La pertenencia al roster no garantiza claves, patrocinios, ingresos, campañas ni crecimiento de audiencia.</p>
-            <div class="contact-honeypot" aria-hidden="true"><label>Dejar vacío<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div><div class="contact-verification" data-turnstile></div><p class="contact-form-status" data-contact-status role="status" aria-live="polite">Comprobando el canal seguro de envío…</p><button type="submit" class="comic-submit-btn">ENVIAR MI PRESENTACIÓN</button>
+            <p class="contact-privacy-note">Si compartís tu correo, lo usaremos para responder tu presentación y coordinar el seguimiento; no se publica en el sitio. Plazo estimado de respuesta: hasta 5 días hábiles.</p>
+            <div class="contact-honeypot" aria-hidden="true"><label>Dejar vacío<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div><div class="contact-verification" data-turnstile></div><p class="contact-form-status" data-contact-status role="status" aria-live="polite" hidden></p><button type="submit" class="comic-submit-btn">ENVIAR MI PRESENTACIÓN</button>
         </form>
     </section>
 
@@ -1108,7 +1104,8 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
                 <div class="form-group"><label for="brand-budget">Presupuesto orientativo (opcional)</label><input id="brand-budget" name="Presupuesto orientativo" type="text" placeholder="Si ya está definido"></div>
             </div>
             <div class="form-group"><label for="brand-details">Descripción y objetivos de la propuesta *</label><textarea id="brand-details" name="Descripción y objetivos" rows="5" required placeholder="¿Qué necesitan, qué esperan y qué tipo de colaboración imaginan?"></textarea></div>
-            <div class="contact-honeypot" aria-hidden="true"><label>Dejar vacío<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div><div class="contact-verification" data-turnstile></div><p class="contact-form-status" data-contact-status role="status" aria-live="polite">Comprobando el canal seguro de envío…</p><button type="submit" class="comic-submit-btn">ENVIAR PROPUESTA COMERCIAL</button>
+            <p class="contact-privacy-note">Usaremos tu correo para responder esta consulta y coordinar el seguimiento; no se publica en el sitio. Plazo estimado de respuesta: hasta 5 días hábiles.</p>
+            <div class="contact-honeypot" aria-hidden="true"><label>Dejar vacío<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div><div class="contact-verification" data-turnstile></div><p class="contact-form-status" data-contact-status role="status" aria-live="polite" hidden></p><button type="submit" class="comic-submit-btn">ENVIAR PROPUESTA COMERCIAL</button>
         </form>
     </section>
     <p class="recruitment-contact-note">El formulario transmite tu presentación mediante un canal seguro con verificación anti-spam. Solo se confirma el envío cuando el servidor recibe el mensaje correctamente.</p>
@@ -1126,39 +1123,39 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
  </header>
  <section class="multiverse-map-section" aria-labelledby="multiverse-map-title">
   <div class="multiverse-section-heading"><span>01 / CONSTELACIÓN DEL ROSTER</span><h3 id="multiverse-map-title">CARTOGRAFÍA MULTIVERSAL</h3><p>Seleccioná un nodo para abrir el expediente individual. El mapa se construye desde el roster canónico.</p></div>
-  <div id="multiverse-map" class="multiverse-map"><p class="stats-note">Cargando mapa de integrantes…</p></div>
+  <div id="multiverse-map" class="multiverse-map"><div class="loading-skeleton-grid" aria-hidden="true"><div class="loading-skeleton-card"><span class="loading-skeleton loading-skeleton-short"></span><span class="loading-skeleton"></span><span class="loading-skeleton"></span></div><div class="loading-skeleton-card"><span class="loading-skeleton loading-skeleton-short"></span><span class="loading-skeleton"></span><span class="loading-skeleton"></span></div><div class="loading-skeleton-card"><span class="loading-skeleton loading-skeleton-short"></span><span class="loading-skeleton"></span><span class="loading-skeleton"></span></div><div class="loading-skeleton-card"><span class="loading-skeleton loading-skeleton-short"></span><span class="loading-skeleton"></span><span class="loading-skeleton"></span></div><div class="loading-skeleton-card"><span class="loading-skeleton loading-skeleton-short"></span><span class="loading-skeleton"></span><span class="loading-skeleton"></span></div><div class="loading-skeleton-card"><span class="loading-skeleton loading-skeleton-short"></span><span class="loading-skeleton"></span><span class="loading-skeleton"></span></div><div class="loading-skeleton-card"><span class="loading-skeleton loading-skeleton-short"></span><span class="loading-skeleton"></span><span class="loading-skeleton"></span></div><div class="loading-skeleton-card"><span class="loading-skeleton loading-skeleton-short"></span><span class="loading-skeleton"></span><span class="loading-skeleton"></span></div></div></div>
  </section>
  <section class="multiverse-progress-section" aria-labelledby="multiverse-progress-title">
   <div class="multiverse-section-heading"><span>02 / RECORRIDO DE EXPLORACIÓN</span><h3 id="multiverse-progress-title">TUS MISIONES</h3><p>Pequeños recorridos para descubrir el archivo, sus integrantes y las actividades de la comunidad.</p></div>
-  <div id="community-missions" class="community-missions"><p class="stats-note">Cargando misiones…</p></div>
+  <div id="community-missions" class="community-missions"><div class="loading-skeleton-grid" aria-hidden="true"><div class="loading-skeleton-card"><span class="loading-skeleton loading-skeleton-short"></span><span class="loading-skeleton"></span><span class="loading-skeleton"></span></div><div class="loading-skeleton-card"><span class="loading-skeleton loading-skeleton-short"></span><span class="loading-skeleton"></span><span class="loading-skeleton"></span></div><div class="loading-skeleton-card"><span class="loading-skeleton loading-skeleton-short"></span><span class="loading-skeleton"></span><span class="loading-skeleton"></span></div></div></div>
  </section>
  <section class="multiverse-achievements-section" aria-labelledby="multiverse-achievements-title">
   <div class="multiverse-section-heading"><span>03 / DISTINCIONES</span><h3 id="multiverse-achievements-title">INSIGNIAS DE EXPLORACIÓN</h3><p>Se desbloquean al recorrer el sitio. Son logros de navegación personales, no premios oficiales de plataformas.</p></div>
-  <div id="community-achievements" class="community-achievements"><p class="stats-note">Cargando insignias…</p></div>
+  <div id="community-achievements" class="community-achievements"><div class="loading-skeleton-grid" aria-hidden="true"><div class="loading-skeleton-card"><span class="loading-skeleton loading-skeleton-short"></span><span class="loading-skeleton"></span><span class="loading-skeleton"></span></div><div class="loading-skeleton-card"><span class="loading-skeleton loading-skeleton-short"></span><span class="loading-skeleton"></span><span class="loading-skeleton"></span></div><div class="loading-skeleton-card"><span class="loading-skeleton loading-skeleton-short"></span><span class="loading-skeleton"></span><span class="loading-skeleton"></span></div><div class="loading-skeleton-card"><span class="loading-skeleton loading-skeleton-short"></span><span class="loading-skeleton"></span><span class="loading-skeleton"></span></div></div></div>
   <p class="community-progress-note">Tu progreso se guarda únicamente en este navegador. No se sincroniza entre dispositivos ni se comparte con otros integrantes. Si el navegador bloquea el almacenamiento local, el avance se conserva solo mientras la página permanezca abierta.</p>
  </section>
 </section>
 
 <aside id="live-player-wrap" class="live-player-wrap live-player-drawer" role="dialog" aria-modal="false" aria-labelledby="live-player-title" hidden><div class="live-player-heading"><h3 id="live-player-title">CENTRAL EN VIVO</h3><div class="live-player-actions"><a id="live-open-channel" href="https://twitch.tv/losmoriartys" target="_blank" rel="noopener noreferrer">Abrir canal ↗</a><button type="button" class="live-drawer-close" onclick="closeLiveDrawer()" aria-label="Cerrar reproductor en vivo">×</button></div></div><div id="live-player-message" class="live-player-message" role="status">Consultando transmisiones disponibles…</div><div id="live-player" class="live-player"></div></aside>
 </main>
-<footer class="site-technical-footer"><span>LEGIÓN MULTIVERSAL · DIFERENTES MUNDOS. UNA MISMA LEGIÓN.</span><nav aria-label="Información complementaria"><a href="./metodologia/">Metodología</a><a href="./recursos/">Recursos</a><a href="./marcas/">Para marcas</a></nav><a href="https://github.com/losmoriartys-cmd/legion-multiversal/issues/new?title=Reporte%20t%C3%A9cnico" target="_blank" rel="noopener noreferrer">Reportar un problema técnico ↗</a></footer>
+<footer class="site-technical-footer"><span>LEGIÓN MULTIVERSAL · DIFERENTES MUNDOS. UNA MISMA LEGIÓN.</span><nav aria-label="Información complementaria"><a href="./metodologia/">Metodología</a><a href="./marcas/">Para marcas</a></nav><a href="https://github.com/losmoriartys-cmd/legion-multiversal/issues/new?title=Reporte%20t%C3%A9cnico" target="_blank" rel="noopener noreferrer">Reportar un problema técnico ↗</a></footer>
 
-    <!-- VENTANA MODAL / EXPEDIENTE INDIVIDUAL (PÁGINAS A, B, C) -->
+    <!-- VENTANA MODAL / EXPEDIENTE INDIVIDUAL -->
     <div class="modal-overlay" id="hero-modal" role="dialog" aria-modal="true" aria-labelledby="modal-hero-title" onclick="if(event.target === this) closeModal();">
         <div class="modal-content" tabindex="-1">
             <div class="modal-header">
-                <h2 id="modal-hero-title">EXPEDIENTE DE HÉROE</h2>
+                <h2 id="modal-hero-title">EXPEDIENTE INDIVIDUAL</h2>
                 <button class="close-modal-btn" type="button" aria-label="Cerrar expediente" onclick="closeModal()">X</button>
             </div>
             <div class="modal-body">
                 <div class="modal-tabs" id="modal-tab-navigation" role="tablist" aria-label="Secciones del expediente">
-                    <button id="modal-tab-a" role="tab" aria-controls="modal-pane-0" aria-selected="true" tabindex="0" class="modal-tab-btn active" onclick="switchModalTab(0)">A · PERFIL Y CONTENIDO</button>
-                    <button id="modal-tab-b" role="tab" aria-controls="modal-pane-1" aria-selected="false" tabindex="-1" class="modal-tab-btn" onclick="switchModalTab(1)">B · AUDIENCIA Y ESTADÍSTICAS</button>
-                    <button id="modal-tab-c" role="tab" aria-controls="modal-pane-2" aria-selected="false" tabindex="-1" class="modal-tab-btn" onclick="switchModalTab(2)">C · TRAYECTORIA Y COLABORACIONES</button>
+                    <button id="modal-tab-a" role="tab" aria-controls="modal-pane-0" aria-selected="true" tabindex="0" class="modal-tab-btn active" onclick="switchModalTab(0)">PERFIL Y CONTENIDO</button>
+                    <button id="modal-tab-b" role="tab" aria-controls="modal-pane-1" aria-selected="false" tabindex="-1" class="modal-tab-btn" onclick="switchModalTab(1)">AUDIENCIA Y ESTADÍSTICAS</button>
+                    <button id="modal-tab-c" role="tab" aria-controls="modal-pane-2" aria-selected="false" tabindex="-1" class="modal-tab-btn" onclick="switchModalTab(2)">TRAYECTORIA Y COLABORACIONES</button>
                 </div>
                 <div class="modal-actions-toolbar">
                     <span>ARCHIVO PARA PRESENTACIÓN</span>
-                    <button id="modal-print-btn" type="button" onclick="printHeroDossier()">IMPRIMIR / GUARDAR PDF ↗</button>
+                    <button id="modal-print-btn" type="button" onclick="printHeroDossier()">IMPRIMIR / GUARDAR PDF →</button>
                 </div>
                 <div class="comic-page-navigation" id="modal-comic-navigation" hidden>
                     <button type="button" class="comic-page-arrow" id="comic-page-prev" aria-label="Página anterior">← ANTERIOR</button>
@@ -1167,7 +1164,7 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
                 </div>
 
                 <div role="tabpanel" aria-labelledby="modal-tab-a" tabindex="0" class="modal-tab-pane active" id="modal-pane-0">
-                    <h3>QUIÉNES SOMOS Y QUÉ OFRECEMOS</h3>
+                    <h3>QUIÉN ES Y QUÉ OFRECE</h3>
                     <div id="modal-profile-text" class="profile-overview-host"></div>
                 </div>
                 <div role="tabpanel" aria-labelledby="modal-tab-b" tabindex="0" class="modal-tab-pane" id="modal-pane-1">

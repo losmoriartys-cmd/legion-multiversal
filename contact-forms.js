@@ -10,6 +10,7 @@
     if (!node) return;
     node.textContent = message;
     node.dataset.state = state;
+    node.hidden = false;
   };
 
   let turnstileReady;

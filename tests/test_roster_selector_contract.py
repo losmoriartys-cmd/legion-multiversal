@@ -169,19 +169,24 @@ class RosterComicCardsContractTests(unittest.TestCase):
         self.assertNotIn('id="roster-container"', self.html)
         self.assertNotIn('class="roster-tools"', self.html)
         self.assertNotIn('class="roster-product-nav"', self.html)
-        self.assertIn("ARCHIVO CENTRAL · CAPÍTULO 02", self.app)
+        self.assertIn("ARCHIVO CENTRAL · CAPÍTULO 03", self.app)
 
-    def test_roster_is_chapter_two_after_origin_without_intermediate_selector(self):
+    def test_roster_is_chapter_three_after_who_we_are(self):
         nav = self.html[self.html.index('<nav class="primary-navigation"'):self.html.index('</nav>', self.html.index('<nav class="primary-navigation"'))]
-        self.assertLess(nav.index('data-chapter="1"'), nav.index('data-chapter="2"'))
+        self.assertLess(nav.index('data-chapter="11"'), nav.index('data-chapter="2"'))
+        self.assertLess(nav.index('data-chapter="1"'), nav.index('data-chapter="11"'))
         self.assertIn('>ORIGEN</button>', nav)
+        self.assertIn('>QUIÉNES SOMOS</button>', nav)
         self.assertIn('>ROSTER</button>', nav)
-        self.assertIn('CAPÍTULO 01 · ORIGEN', self.html)
-        self.assertIn('CAPÍTULO 02 · ROSTER', self.html)
-        self.assertIn('CAPÍTULO 03 · ESTADÍSTICAS', self.html)
-        self.assertIn('PILAR COMPLEMENTARIO · VALORES', self.html)
-        self.assertIn('PILAR COMPLEMENTARIO · COMUNIDAD', self.html)
-        self.assertIn('PILAR COMPLEMENTARIO · ALIANZAS', self.html)
+        for label in (
+            'CAPÍTULO 01 · ORIGEN', 'CAPÍTULO 02 · QUIÉNES SOMOS',
+            'CAPÍTULO 03 · ROSTER', 'CAPÍTULO 04 · ESTADÍSTICAS',
+            'CAPÍTULO 05 · COMUNIDAD', 'CAPÍTULO 06 · ALIANZAS',
+            'CAPÍTULO 07 · COLABORACIONES', 'CAPÍTULO 08 · ARSENAL',
+            'CAPÍTULO 09 · EN VIVO', 'CAPÍTULO 10 · RECLUTAMIENTO',
+        ):
+            self.assertIn(label, self.html)
+        self.assertNotIn('PILAR COMPLEMENTARIO', self.html)
         for chapter in ('11','9','8'):
             self.assertRegex(self.html, rf'<section[^>]*id="chapter-{chapter}"[^>]*data-pager="false"')
 
@@ -210,3 +215,48 @@ class RosterComicCardsContractTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+    def test_canonical_name_registry_covers_all_eight_profiles(self):
+        import json
+        roster = json.loads((ROOT / "roster-data.json").read_text(encoding="utf-8"))
+        registry = roster["name_registry"]
+        self.assertEqual(len(registry), 8)
+        expected = {
+            "rod3r1k": ("ROD3R1K", "TheR0D3R1K", "EL FUERTE", "ROD3RIK"),
+            "lady-moriarty": ("LADY MORIARTY", "ladymoriarty01", "LA BRUJA", "LADYMORIARTY"),
+            "ardipii": ("ARDIPII", "ardipii", "EL FANTASMA", "Ardipi"),
+            "pato-oratoris": ("PATO — ORATORIS", "@patoteexplica", "EL ORADOR", "Patoexpone"),
+            "moriartys": ("LOS MORIARTYS", "losmoriartys", "EL ESTRATEGA", "LOS MORIARTYS"),
+        }
+        for creator_id, values in expected.items():
+            identity = registry[creator_id]
+            self.assertEqual((identity["display_name"], identity["username"], identity["character_alias"]), values[:3])
+            self.assertIn(values[3], identity["variants"])
+        app = (ROOT / "app.js").read_text(encoding="utf-8")
+        media_kit = (ROOT / "brand-media-kit.js").read_text(encoding="utf-8")
+        self.assertIn("creatorNameRegistry = payload.name_registry || {}", app)
+        self.assertIn("function getCanonicalCreatorName(value)", app)
+        self.assertIn('rosterData.name_registry?.[id]?.display_name', media_kit)
+
+    def test_roster_initial_state_is_skeleton_with_descriptive_noscript_fallback(self):
+        self.assertNotIn("CARGANDO LOS OCHO EXPEDIENTES", self.html)
+        self.assertIn('class="roster-skeleton-grid"', self.html)
+        fallback = self.html.split("<!-- ROSTER_NOSCRIPT_LINKS:START -->", 1)[1].split("<!-- ROSTER_NOSCRIPT_LINKS:END -->", 1)[0]
+        for label in ("DIRECCIÓN", "CREADORA", "CREADOR", "DOCENTE", "ESTUDIANTE", "COLABORADOR"):
+            self.assertIn(label, fallback)
+        self.assertIn("Nuevo integrante en etapa de formación", fallback)
+        self.assertIn("Divulgación, programación y charlas motivacionales", fallback)
+
+    def test_profile_modal_uses_individual_language_and_editorial_tabs(self):
+        self.assertIn("EXPEDIENTE INDIVIDUAL", self.html)
+        self.assertIn("QUIÉN ES Y QUÉ OFRECE", self.html)
+        self.assertNotIn("EXPEDIENTE DE HÉROE", self.html)
+        self.assertNotIn("QUIÉNES SOMOS Y QUÉ OFRECEMOS", self.html)
+        self.assertIn('>PERFIL Y CONTENIDO</button>', self.html)
+        self.assertIn('>AUDIENCIA Y ESTADÍSTICAS</button>', self.html)
+        self.assertIn('>TRAYECTORIA Y COLABORACIONES</button>', self.html)
+
+    def test_bitacora_is_linked_from_roster_and_collaborations(self):
+        self.assertEqual(self.html.count('href="./bitacora-preview.html"'), 2)
+        self.assertIn("ABRIR BITÁCORA GENERAL (VISTA PREVIA)", self.html)
+        self.assertIn("EXPLORAR BITÁCORA GENERAL (VISTA PREVIA)", self.html)

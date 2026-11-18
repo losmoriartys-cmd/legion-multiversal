@@ -782,5 +782,107 @@
       "character_card": "assets/heroes/habitos_dark.webp"
     }
   ],
-  "identity_model_version": 1
+  "identity_model_version": 1,
+  "name_registry": {
+    "moriartys": {
+      "display_name": "LOS MORIARTYS",
+      "platform": "twitch",
+      "username": "losmoriartys",
+      "character_alias": "EL ESTRATEGA",
+      "variants": [
+        "MORIARTYS",
+        "LOS MORIARTYS"
+      ],
+      "represented_people": [
+        {
+          "display_name": "Demian",
+          "variants": [
+            "Demi"
+          ]
+        },
+        {
+          "display_name": "Ari",
+          "variants": []
+        }
+      ],
+      "short_description": "Proyecto compartido de Demian y Ari; streaming cooperativo y gaming en comunidad."
+    },
+    "rod3r1k": {
+      "display_name": "ROD3R1K",
+      "platform": "twitch",
+      "username": "TheR0D3R1K",
+      "character_alias": "EL FUERTE",
+      "variants": [
+        "ROD3RIK",
+        "TheR0d3R1k"
+      ],
+      "short_description": "Creador de contenido en Twitch y director de la Legión."
+    },
+    "lady-moriarty": {
+      "display_name": "LADY MORIARTY",
+      "platform": "twitch",
+      "username": "ladymoriarty01",
+      "character_alias": "LA BRUJA",
+      "variants": [
+        "LADYMORIARTY",
+        "LADYMORIARTY01"
+      ],
+      "short_description": "Creadora de contenido en directo; videojuegos, terror y experiencias cooperativas."
+    },
+    "ardipii": {
+      "display_name": "ARDIPII",
+      "platform": "twitch",
+      "username": "ardipii",
+      "character_alias": "EL FANTASMA",
+      "variants": [
+        "Ardipi",
+        "ARDIPI"
+      ],
+      "short_description": "Creador de contenido en directo e integrante del roster."
+    },
+    "akuma": {
+      "display_name": "AKUMA",
+      "platform": "twitch",
+      "username": "akumazoldyck",
+      "character_alias": "EL INFERNAL",
+      "variants": [
+        "Akuma Zoldyck"
+      ],
+      "short_description": "Docente y creador; acompaña a nuevos integrantes y participa en sesiones de gaming."
+    },
+    "dave-nexus": {
+      "display_name": "DAVE — NEXUS",
+      "platform": "twitch",
+      "username": "daved0608",
+      "character_alias": "EL NEXO",
+      "variants": [
+        "Dave",
+        "DAVE NEXUS"
+      ],
+      "short_description": "Estudiante y nuevo integrante en etapa de formación."
+    },
+    "pato-oratoris": {
+      "display_name": "PATO — ORATORIS",
+      "platform": "youtube",
+      "username": "@patoteexplica",
+      "character_alias": "EL ORADOR",
+      "variants": [
+        "Patoexpone",
+        "Pato",
+        "PATOTEEXPLICA"
+      ],
+      "short_description": "Colaborador de YouTube; divulgación, programación y charlas motivacionales."
+    },
+    "habitos": {
+      "display_name": "HABITOS",
+      "platform": "twitch",
+      "username": "habitos_atomicos",
+      "character_alias": "FILÓSOFO JUSTICIERO",
+      "variants": [
+        "Mismo Habitos",
+        "Hábitos Atómicos"
+      ],
+      "short_description": "Colaborador; reflexión, filosofía, motivación y videojuegos."
+    }
+  }
 }

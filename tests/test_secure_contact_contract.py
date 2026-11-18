@@ -21,6 +21,9 @@ class SecureContactContractTests(unittest.TestCase):
         self.assertNotIn("onsubmit=", self.html)
         self.assertEqual(self.html.count('method="post" action="/api/contact"'), 2)
         self.assertNotIn("mailto:", self.html)
+        self.assertIn('id="creator-email"', self.html)
+        self.assertEqual(self.html.count("Plazo estimado de respuesta: hasta 5 días hábiles."), 2)
+        self.assertEqual(self.html.count("no se publica en el sitio"), 2)
 
     def test_submission_requires_turnstile_and_server_delivery(self):
         self.assertIn("TURNSTILE_SECRET_KEY", self.endpoint)
@@ -32,10 +35,12 @@ class SecureContactContractTests(unittest.TestCase):
         self.assertIn("api.resend.com/emails", self.endpoint)
         self.assertIn('}, 503)', self.endpoint)
         self.assertIn("No se registró como enviado", self.endpoint)
+        self.assertIn('const replyTo = fields["Correo de contacto"] || "";', self.endpoint)
 
     def test_browser_confirms_only_successful_server_response(self):
         self.assertIn('if (!response.ok || !result.ok)', self.script)
         self.assertIn('setStatus(form, result.message', self.script)
+        self.assertIn("node.hidden = false", self.script)
         self.assertIn('setStatus(form, error.message', self.script)
         self.assertIn('form.dataset.turnstileWidget', self.script)
 
