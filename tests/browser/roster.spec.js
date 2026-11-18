@@ -173,6 +173,8 @@ test('Atrás y Adelante restauran el roster y el expediente correcto', async ({ 
   await page.locator('.comic-roster-card[data-creator-id="lady-moriarty"]').click();
   await expect(page).toHaveURL(/#roster\/lady-moriarty$/);
   await expect(page.locator('#hero-profile-page')).toBeVisible();
+  await expect(page.locator('#hero-profile-page .comic-profile-head')).toBeVisible();
+  await expect(page.locator('#hero-profile-page .hero-profile-tabs')).toBeVisible();
   await expect(page.locator('#roster-home')).toBeHidden();
   await page.goBack();
   await expect(page).toHaveURL(/#roster$/);
@@ -183,7 +185,7 @@ test('Atrás y Adelante restauran el roster y el expediente correcto', async ({ 
   await expect(page.locator('#hero-profile-page')).toBeVisible();
   await expect(page.locator('#roster-home')).toBeHidden();
   await expect(page.locator('#hero-profile-page')).toContainText('LADY MORIARTY');
-  await page.screenshot({ path: 'test-results/bitacora-lady-desktop.png', fullPage: true });
+  await page.screenshot({ path: 'test-results/bitacora-lady-desktop.png', fullPage: false });
   await page.setViewportSize({ width: 390, height: 844 });
   const mobileWidths = await page.evaluate(() => ({
     viewport: window.innerWidth,
@@ -198,5 +200,5 @@ test('Atrás y Adelante restauran el roster y el expediente correcto', async ({ 
   const statsBounds = await page.locator('#profile-tab-estadisticas .stats-dashboard').boundingBox();
   expect(statsBounds).not.toBeNull();
   expect(statsBounds.x + statsBounds.width).toBeLessThanOrEqual(390 + 1);
-  await page.screenshot({ path: 'test-results/bitacora-lady-mobile.png', fullPage: true });
+  await page.screenshot({ path: 'test-results/bitacora-lady-mobile.png', fullPage: false });
 });
