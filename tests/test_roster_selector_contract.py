@@ -148,11 +148,13 @@ class RosterComicCardsContractTests(unittest.TestCase):
         self.assertIn("page.classList.add('is-active')", self.app)
         self.assertIn("page.classList.remove('is-active')", self.app)
 
-    def test_commercial_dossier_shows_auditable_relative_performance_bars(self):
+    def test_dossier_stats_use_source_dashboard_and_clips_are_limited(self):
         self.assertIn("function renderCommercialQuickView(hero)", self.app)
         self.assertNotIn("renderCommercialQuickView(hero)", self.app.split("function renderHeroProfileTabs", 1)[1].split("function activateHeroProfileTab", 1)[0])
         self.assertIn("renderStatsDashboard(hero,channel,sullyChannel)", self.app)
         self.assertIn("clips.slice(0,4)", self.app)
+        self.assertIn("MÁS JUGADO · ", self.app)
+        self.assertIn("JUEGO RECIENTE · ", self.app)
         self.assertIn("no es un ranking ni una métrica de plataforma", self.app)
         self.assertIn("average_viewers_sampled", self.app)
         self.assertIn("peak_viewers_sampled", self.app)
