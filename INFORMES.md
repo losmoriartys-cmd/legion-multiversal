@@ -3403,3 +3403,11 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **Commits funcionales:** `3e79b4b`, `3e18faa`, `8d7c297`, `1ea7cf3`, `0ab6301`, `e424818`, `48585c2` (la documentación de directiva e informes también está versionada en la misma rama).
 - **Validación:** aún no hay runs de Actions devueltos para el HEAD consultado `48585c2bb38c46444224bb420c0150dda3d31e2e`. No se declara que las pruebas pasen ni que el render visual sea correcto.
 - **Pendientes bloqueantes:** validar sintaxis y CI; revisar funcionamiento del botón «Ver carta»; comprobar cabecera/capítulos en CSS; auditoría exhaustiva de secciones «Muestras» en todos los datos; comprobar estadísticas disponibles y diferenciación de juego reciente vs. más jugado; validar códigos Epic y sociales; inspección de ocho perfiles en preview de escritorio/móvil.
+
+
+## 2026-11-18 — Revisión de cobertura de datos sociales y directiva
+
+- La fuente `roster-data.json` confirma ocho IDs y los retratos/carta separados. En los perfiles actuales, siete perfiles tienen solamente Twitch en cuentas; ORATORIS dispone de YouTube, Instagram y Cafecito. No se fabricaron redes sociales para los perfiles sin URLs registradas.
+- Se ajustó `renderCreatorPlatformLinks` para deduplicar botones de plataforma por URL y tipo, evitando duplicaciones si una cuenta está repetida en `accounts` y `links`.
+- `app.js` aún conserva helpers editoriales antiguos sin uso por esta pestaña (scorecard/quick-view). Se revisarán/limpiarán después de validar el flujo, para no borrar funciones usadas en otras partes.
+- **QA todavía pendiente:** no hay resultado de CI en los runs consultados para el SHA actual. Los cambios son una primera fase y deben someterse a tests y revisión visual antes de afirmar que cumplen.
