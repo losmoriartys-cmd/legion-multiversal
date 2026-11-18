@@ -346,7 +346,7 @@ function getHeroDisplayName(hero) {
 
 function renderStatsExecutiveSource(title,period,metrics,note,sourceUrl){
  const safe=escapeStatsHtml;
- const cards=(Array.isArray(metrics)?metrics:[]).filter(item=>item.value!==null&&item.value!==undefined&&item.value!==''&&!(typeof item.value==='number'&&!Number.isFinite(item.value))).slice(0,6);
+ const cards=(Array.isArray(metrics)?metrics:[]).filter(item=>item.value!==null&&item.value!==undefined&&item.value!==''&&!(typeof item.value==='number'&&!Number.isFinite(item.value))).slice(0,4);
  if(!cards.length)return '';
  return '<article class="stats-executive-source"><div class="stats-executive-source-head"><strong>'+safe(title)+'</strong><span>'+safe(period||'Período no informado')+'</span></div><div class="stats-executive-metrics">'+cards.map(item=>'<div><strong>'+safe(item.value)+'</strong><span>'+safe(item.label)+'</span></div>').join('')+'</div>'+(note?'<p class="stats-executive-note">'+safe(note)+'</p>':'')+(sourceUrl?'<a class="stats-link stats-executive-source-link" href="'+safe(sourceUrl)+'" target="_blank" rel="noopener noreferrer">CONSULTAR FUENTE ↗</a>':'')+'</article>';
 }
@@ -1205,12 +1205,15 @@ function getCreatorAudienceMetric(hero){
  return null;
 }
 function getMostPlayedGames(hero,channel,sullyChannel){
+ // Solo el historial acumulado permite afirmar cuáles son los juegos más jugados.
+ // Las capturas Helix recientes describen actividad observada, no un ranking histórico.
  const isGame=name=>Boolean(name)&&!['just chatting','categoría no informada'].includes(String(name).trim().toLocaleLowerCase('es-AR'));
  const historical=Array.isArray(sullyChannel?.game_breakdown)?sullyChannel.game_breakdown:[];
- const ranked=historical.filter(item=>isGame(item?.name)&&Number.isFinite(Number(item.stream_hours))&&Number(item.stream_hours)>0).sort((a,b)=>Number(b.stream_hours)-Number(a.stream_hours)).map(item=>item.name);
- if(ranked.length)return [...new Set(ranked)].slice(0,6);
- const observed=Array.isArray(channel?.window?.game_breakdown)?channel.window.game_breakdown:[];
- return [...new Set(observed.filter(item=>isGame(item?.name)&&Number(item.streams_observed)>0).sort((a,b)=>Number(b.streams_observed)-Number(a.streams_observed)||Number(b.live_samples)-Number(a.live_samples)).map(item=>item.name))].slice(0,6);
+ const ranked=historical
+  .filter(item=>isGame(item?.name)&&Number.isFinite(Number(item.stream_hours))&&Number(item.stream_hours)>0)
+  .sort((a,b)=>Number(b.stream_hours)-Number(a.stream_hours))
+  .map(item=>String(item.name).trim());
+ return [...new Set(ranked)].slice(0,6);
 }
 
 function renderRosterSelector() {
