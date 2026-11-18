@@ -117,16 +117,20 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
   expect(pageErrors).toEqual([]);
 });
 
-test('Origen aparece antes que Roster y la navegación principal contiene cinco destinos', async ({ page }) => {
+test('la navegación editorial ofrece diez capítulos y separa marcas de creadores', async ({ page }) => {
   await page.goto('/');
   const nav = page.locator('.primary-navigation');
-  await expect(nav.locator('[data-chapter]')).toHaveCount(5);
-  await expect(nav.locator('[data-chapter="1"]')).toHaveText('ORIGEN');
-  await expect(nav.locator('[data-chapter="2"]')).toHaveText('ROSTER');
-  await expect(nav.locator('[data-chapter="10"]')).toContainText('EN VIVO');
-  const originBox = await nav.locator('[data-chapter="1"]').boundingBox();
-  const rosterBox = await nav.locator('[data-chapter="2"]').boundingBox();
-  expect(originBox.x).toBeLessThan(rosterBox.x);
+  await expect(nav.locator('[data-chapter]')).toHaveCount(10);
+  const chapterOrder = ['1', '11', '2', '3', '9', '8', '12', '5', '10', '6'];
+  const positions = [];
+  for (const chapter of chapterOrder) {
+    const item = nav.locator('[data-chapter="' + chapter + '"]');
+    await expect(item).toBeVisible();
+    positions.push((await item.boundingBox()).x);
+  }
+  expect(positions).toEqual([...positions].sort((a, b) => a - b));
+  await expect(nav.getByRole('link', { name: /PARA MARCAS/i })).toHaveAttribute('href', './marcas/');
+  await expect(nav.locator('[data-chapter="6"]')).toHaveText('SUMATE');
 });
 
 test('las cartas se organizan en cuatro columnas de escritorio y dos en móvil', async ({ page }) => {
@@ -146,9 +150,22 @@ test('las cartas se organizan en cuatro columnas de escritorio y dos en móvil',
   await page.screenshot({ path: 'test-results/roster-desktop.png', fullPage: true });
   await page.setViewportSize({ width: 390, height: 844 });
   const mobileNav = page.locator('.primary-navigation [data-chapter]');
-  await expect(mobileNav).toHaveCount(5);
-  const mobileNavRights = await mobileNav.evaluateAll(nodes => nodes.map(node => node.getBoundingClientRect().right));
-  expect(mobileNavRights.every(right => right <= 390)).toBe(true);
+  const navigation = page.locator('.primary-navigation');
+  await expect(mobileNav).toHaveCount(10);
+  const navigationSize = await navigation.evaluate(el => ({
+    overflowX: getComputedStyle(el).overflowX,
+    clientWidth: el.clientWidth,
+    scrollWidth: el.scrollWidth
+  }));
+  expect(['auto', 'scroll']).toContain(navigationSize.overflowX);
+  expect(navigationSize.scrollWidth).toBeGreaterThan(navigationSize.clientWidth);
+  await navigation.evaluate(el => { el.scrollLeft = el.scrollWidth; });
+  const finalItem = mobileNav.last();
+  await expect(finalItem).toBeVisible();
+  const navBounds = await navigation.boundingBox();
+  const finalBounds = await finalItem.boundingBox();
+  expect(finalBounds.x).toBeGreaterThanOrEqual(navBounds.x - 1);
+  expect(finalBounds.x + finalBounds.width).toBeLessThanOrEqual(navBounds.x + navBounds.width + 1);
   const mobileColumns = await cards.first().evaluate(el => getComputedStyle(el.parentElement).gridTemplateColumns.split(' ').length);
   expect(mobileColumns).toBe(2);
   expect(await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth)).toBe(false);
