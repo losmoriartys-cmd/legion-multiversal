@@ -131,7 +131,7 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
       await expect(page.locator('#hero-modal')).toHaveClass(/active/);
       await expect(page.locator('#hero-modal .modal-content')).toHaveClass(/comic-mode/);
       await expect(page.locator('#hero-modal .hero-profile-internal-art')).toHaveCount(0);
-      await expect(page.locator('#hero-modal .hero-voice')).toHaveCount(1);
+      await expect(page.locator('#hero-modal .hero-voice')).toHaveCount(0);
       await page.locator('#hero-modal .close-modal-btn').click();
       await expect(page.locator('#hero-modal')).not.toHaveClass(/active/);
       for (const [label, panel] of [
