@@ -57,8 +57,10 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
     if (['pato-oratoris','ardipii'].includes(creator.id)) await expect(dossier.locator('#profile-tab-perfil .hero-profile-integrated-games')).toHaveCount(0);
     else {
       const gamesSection = dossier.locator('#profile-tab-perfil .hero-profile-integrated-games');
-      await expect(gamesSection).toBeVisible();
-      await expect(gamesSection).not.toContainText(/muestras|observaciones|Just Chatting/i);
+      if (await gamesSection.count()) {
+        await expect(gamesSection).toBeVisible();
+        await expect(gamesSection).not.toContainText(/muestras|observaciones|Just Chatting/i);
+      }
     }
     await expect(dossier.locator('#profile-tab-perfil .hero-profile-brand')).toHaveCount(0);
     await expect(page.locator('#roster-home')).toBeHidden();
@@ -95,8 +97,10 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
     if (['pato-oratoris','ardipii'].includes(creator.id)) await expect(dossier.locator('#profile-tab-perfil .hero-profile-integrated-games')).toHaveCount(0);
     else {
       const gamesSection = dossier.locator('#profile-tab-perfil .hero-profile-integrated-games');
-      await expect(gamesSection).toBeVisible();
-      await expect(gamesSection).not.toContainText(/muestras|observaciones/i);
+      if (await gamesSection.count()) {
+        await expect(gamesSection).toBeVisible();
+        await expect(gamesSection).not.toContainText(/muestras|observaciones|Just Chatting/i);
+      }
     }
     await expect(dossier.locator('#profile-tab-perfil .hero-profile-brand')).toHaveCount(0);
     await profileTabs.filter({ hasText: 'CLIPS' }).click();
@@ -110,7 +114,9 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
     await expect(statsPanel.locator('.stats-source-details')).toHaveCount(0);
     for (let sourceIndex = 0; sourceIndex < await sources.count(); sourceIndex++) {
       const source = sources.nth(sourceIndex);
-      expect(await source.locator('.stats-executive-metrics > div').count()).toBeGreaterThan(0);
+      const metricCount = await source.locator('.stats-executive-metrics > div').count();
+      expect(metricCount).toBeGreaterThan(0);
+      expect(metricCount).toBeLessThanOrEqual(4);
       await expect(source).not.toContainText(/Sin métricas verificadas|Sin captura|Sin registro|No hay datos públicos cargados/i);
     }
     await profileTabs.filter({ hasText: 'BITÁCORA' }).click();
@@ -257,4 +263,41 @@ test('Atrás y Adelante restauran el roster y el expediente correcto', async ({ 
   expect(statsBounds).not.toBeNull();
   expect(statsBounds.x + statsBounds.width).toBeLessThanOrEqual(390 + 1);
   await page.screenshot({ path: 'test-results/bitacora-lady-mobile.png', fullPage: false });
+});
+
+
+test('JUEGOS Y RITMO no convierte observaciones recientes en ranking histórico', async ({ page }) => {
+  await page.goto('/');
+  const recentOnly = await page.evaluate(() => getMostPlayedGames(
+    {},
+    { window: { game_breakdown: [
+      { name: 'Marvel Rivals', streams_observed: 12, live_samples: 80 },
+      { name: 'Fortnite', streams_observed: 8, live_samples: 45 },
+      { name: 'Just Chatting', streams_observed: 20, live_samples: 120 }
+    ] } },
+    null
+  ));
+  expect(recentOnly).toEqual([]);
+
+  const historical = await page.evaluate(() => getMostPlayedGames({}, null, {
+    game_breakdown: [
+      { name: 'Fortnite', stream_hours: 24 },
+      { name: 'Marvel Rivals', stream_hours: 48 },
+      { name: 'Just Chatting', stream_hours: 100 },
+      { name: 'Valorant', stream_hours: 0 }
+    ]
+  }));
+  expect(historical).toEqual(['Marvel Rivals', 'Fortnite']);
+});
+
+test('Pato conserva YouTube como fuente propia, sin mezclarlo con métricas Twitch', async ({ page }) => {
+  await page.goto('/');
+  await page.evaluate(() => switchChapter(2));
+  await page.locator('#chapter-transition').evaluate(el => el.classList.remove('play'));
+  await page.locator('.comic-roster-card[data-creator-id="pato-oratoris"]').click();
+  const stats = page.locator('#profile-tab-estadisticas .stats-dashboard');
+  await page.locator('[data-profile-tab="estadisticas"]').click();
+  await expect(stats).toContainText('YOUTUBE');
+  await expect(stats).not.toContainText('TWITCH · SEGUIMIENTO PÚBLICO');
+  await expect(stats).not.toContainText('SULLYGNOME');
 });
