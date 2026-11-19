@@ -883,3 +883,27 @@
   #chapter-2 .comic-roster-brand-slots .comic-roster-stat { grid-template-columns:minmax(0,1fr); gap:2px; }
   #chapter-2 .comic-roster-brand-slots .comic-roster-stat > b { text-align:left; }
 }
+
+/* Roster comercial · la carta comunica propuesta y canales, no jerarquía interna. */
+#chapter-2 .comic-roster-card-tagline {
+  color:#3f4650; font-size:.7rem; line-height:1.35; font-weight:650;
+  min-height:2.7em; display:-webkit-box; -webkit-box-orient:vertical;
+  -webkit-line-clamp:2; overflow:hidden;
+}
+#chapter-2 .comic-roster-social-badges {
+  display:flex; flex-wrap:wrap; align-items:center; gap:6px; min-height:30px;
+}
+#chapter-2 .comic-roster-social-badges .soc-icon {
+  display:inline-grid; place-items:center; width:27px; height:27px;
+  border:2px solid #111; background:#111; color:#fff;
+  font-size:.58rem; font-weight:1000; line-height:1;
+}
+#chapter-2 .comic-roster-social-badges .soc-icon-twitch { background:#6a1bff; }
+#chapter-2 .comic-roster-social-badges .soc-icon-youtube { background:#e11d2e; }
+#chapter-2 .comic-roster-social-badges .soc-icon-instagram { background:linear-gradient(45deg,#f9a825,#e1306c 55%,#833ab4); }
+#chapter-2 .comic-roster-social-badges .soc-icon-tiktok { background:#0b0b0b; }
+#chapter-2 .comic-roster-social-badges .soc-icon-facebook { background:#1877f2; }
+#chapter-2 .comic-roster-social-badges .soc-icon-cafecito { background:#b23a52; }
+#chapter-2 .comic-roster-social-badges .soc-icon-link_hub { background:#b58b38; color:#111; }
+#chapter-2 .comic-roster-card-footer { justify-content:flex-end; }
+#chapter-2 .comic-roster-card-footer strong { margin-left:auto; }
