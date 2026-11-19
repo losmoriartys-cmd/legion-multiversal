@@ -1485,7 +1485,9 @@ function renderRosterSelector() {
             (lastActivityDate ? '<span class="comic-roster-last-live">ÚLTIMO DIRECTO OBSERVADO: ' + safe(lastActivityDate) + '</span>' : '') +
             renderRosterBrandSlots(hero, brandContext) +
             '<span class="comic-roster-games">' + (specialties.length ? specialties.map(item => '<i>' + safe(item) + '</i>').join('') : '<i>Especialidad por confirmar</i>') + '</span>' +
-            '<span class="comic-roster-card-footer"><small>' + safe(hero.role_label || platformName) + '</small><strong>VER PERFIL →</strong></span></span>' +
+            (hero.tagline ? '<span class="comic-roster-card-tagline">' + safe(hero.tagline) + '</span>' : '') +
+            (window.LMSocial?.renderSocialIcons ? window.LMSocial.renderSocialIcons(hero) : '') +
+            '<span class="comic-roster-card-footer"><strong>VER PERFIL →</strong></span></span>' +
         '</button>';
     }).join('');
     host.innerHTML = '<div class="comic-roster-heading"><span>ARCHIVO CENTRAL · CAPÍTULO 03</span><h2>LAS PERSONAS DETRÁS DE LA LEGIÓN</h2><p>Ocho identidades. Una misma Legión. Cada carta abre directamente su expediente.</p></div><div class="comic-roster-grid" role="list" aria-label="Los ocho integrantes de Legión Multiversal">' + cards + '</div>';
