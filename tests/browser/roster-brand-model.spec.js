@@ -46,7 +46,7 @@ test('las ocho fichas publican solo enlaces sociales confirmados y válidos', as
     'ardipii': ['Twitch', 'YouTube', 'Instagram', 'TikTok'],
     'akuma': ['Twitch', 'YouTube', 'Instagram', 'TikTok'],
     'dave-nexus': ['Twitch'],
-    'pato-oratoris': ['YouTube', 'Instagram'],
+    'pato-oratoris': ['YouTube', 'Instagram', 'Cafecito'],
     'habitos': ['Twitch', 'Instagram', 'TikTok', 'Facebook']
   };
   for (const [id, labels] of Object.entries(expected)) {
