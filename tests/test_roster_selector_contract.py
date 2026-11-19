@@ -99,27 +99,58 @@ class RosterComicCardsContractTests(unittest.TestCase):
         self.assertIn("VER CARTA COMPLETA", self.app)
         self.assertIn("openHeroModal(' + index + ')", self.app)
 
-    def test_cards_use_real_metrics_and_no_fixed_schedule(self):
+    def test_cards_use_the_shared_objective_brand_model_and_fixed_three_slots(self):
         start = self.app.index("function renderRosterSelector()")
-        end = self.app.index("\nfunction selectRosterCreator", start)
+        end = self.app.index("\\nfunction selectRosterCreator", start)
         renderer = self.app[start:end]
-        self.assertIn("average_viewers_sampled", renderer)
-        self.assertIn("getCreatorAudienceMetric(hero)", renderer)
+        context = self.app.split("function getRosterBrandContext", 1)[1].split("function renderRosterBrandSlots", 1)[0]
+        self.assertIn("getRosterBrandContext(hero, channel, account)", renderer)
+        self.assertIn("renderRosterBrandSlots(hero, brandContext)", renderer)
+        self.assertIn("window.LMBrand.cardSlots", self.app)
+        self.assertIn("window.LMBrand.computeRhythm", self.app)
+        self.assertIn("getNormalizedCreatorMetric(hero, 'average_viewers_sampled', 'twitch')", context)
+        self.assertIn("getCreatorAudienceMetric(hero)", context)
+        self.assertIn("last_published", context)
+        self.assertIn("comic-roster-stat-audience", self.app)
+        self.assertIn("comic-roster-stat-average", self.app)
+        self.assertIn("comic-roster-stat-activity", self.app)
         audience = self.app.split("function getCreatorAudienceMetric", 1)[1].split("function getMostPlayedGames", 1)[0]
         self.assertIn("platform?.status==='verified'", audience)
         self.assertIn("twitchMetricsData?.channels?.[login]", audience)
         self.assertIn("TwitchMetrics", audience)
         self.assertIn("SullyGnome", audience)
-        self.assertNotIn("EN ACTUALIZACIÓN", renderer)
+        self.assertIn("asOf:", audience)
+        self.assertNotIn("RITMO: EN SEGUIMIENTO", renderer)
         self.assertIn("getNormalizedLiveStatus(hero)", renderer)
         self.assertNotIn("getRosterLiveState(hero)", renderer)
-        self.assertIn("getNormalizedCreatorMetric(hero,'average_viewers_sampled','twitch')", renderer)
-        self.assertIn("normalizedMetricValue(averageMetric,1", renderer)
-        self.assertNotIn("ACTIVO ESTA SEMANA", renderer)
-        self.assertNotIn("7 * 24 * 60 * 60 * 1000", renderer)
         self.assertNotIn("hero.schedule", renderer)
         self.assertIn("Seguidores", audience)
-        self.assertIn("Media de viewers", renderer)
+        self.assertIn("SIN DATOS SUFICIENTES", self.brand_model)
+        self.assertIn("MIN_SAMPLES = 20", self.brand_model)
+        self.assertIn("MIN_SPAN_DAYS = 14", self.brand_model)
+        self.assertIn("WINDOW_DAYS = 28", self.brand_model)
+
+    def test_confirmed_social_accounts_are_added_without_guessing_or_cross_domain_links(self):
+        heroes = {hero["id"]: hero for hero in self.roster["heroes"]}
+        project_socials = {
+            "youtube": "https://www.youtube.com/@LosMoriartys",
+            "tiktok": "https://www.tiktok.com/@losmoriartys",
+            "instagram": "https://www.instagram.com/losmoriartys/",
+        }
+        self.assertEqual(heroes["moriartys"]["socials"], project_socials)
+        self.assertEqual(heroes["lady-moriarty"]["socials"], project_socials)
+        self.assertEqual(heroes["ardipii"]["socials"]["instagram"], "https://www.instagram.com/_ardipii_/")
+        self.assertEqual(heroes["ardipii"]["socials"]["tiktok"], "https://www.tiktok.com/@ardipii")
+        self.assertEqual(heroes["ardipii"]["socials"]["youtube"], "https://www.youtube.com/@ArDiPi")
+        self.assertEqual(heroes["akuma"]["socials"]["instagram"], "https://www.instagram.com/akuma.zoldyck/")
+        self.assertEqual(heroes["akuma"]["socials"]["youtube"], "https://youtube.com/@akuma.zoldyck")
+        self.assertEqual(heroes["akuma"]["socials"]["tiktok"], "https://www.tiktok.com/@akumazoldyck")
+        self.assertEqual(set(heroes["habitos"]["socials"]), {"instagram", "facebook", "tiktok"})
+        self.assertEqual(heroes["rod3r1k"]["links"][0], {"platform": "link_hub", "url": "https://beacons.ai/ther0d3r1k"})
+        self.assertIn("url.protocol !== 'https:'", self.social_links)
+        self.assertIn("host.endsWith('.' + domain)", self.social_links)
+        self.assertIn("TODOS MIS ENLACES", self.social_links)
+        self.assertIn("facebook", self.social_links)
 
     def test_profile_opens_directly_as_a_35_65_bitacora(self):
         start = self.app.index("function openHeroProfile(")
@@ -137,10 +168,12 @@ class RosterComicCardsContractTests(unittest.TestCase):
         start = self.app.index("function renderHeroProfileTabs")
         end = self.app.index("\nfunction activateHeroProfileTab", start)
         tabs = self.app[start:end]
-        self.assertIn("['bitacora','BITÁCORA']", tabs)
+        self.assertIn("['bitacora','TRAYECTORIA']", tabs)
         self.assertNotIn("['marcas','INTERÉS PARA MARCAS']", tabs)
         self.assertNotIn("ABRIR BITÁCORA COMPLETA", tabs)
-        self.assertIn("brandHtml", tabs)
+        self.assertIn("renderHeroBrandSummary(hero)", self.app)
+        self.assertIn("hero-profile-brand-summary", self.app)
+        self.assertIn("Proponer una colaboración", self.app)
 
     def test_community_bitacora_mission_tracks_the_individual_dossier_tab(self):
         self.assertIn("button.dataset.profileTab==='bitacora'", self.app)
@@ -267,7 +300,8 @@ class RosterComicCardsContractTests(unittest.TestCase):
         self.assertNotIn("muestras observadas", tabs.lower())
         self.assertIn("CAPTURAS EN DIRECTO", self.app)
         self.assertIn("hero-profile-character-card-link", self.app)
-        self.assertIn("const uniqueLinks=links.filter", self.app)
+        self.assertIn("window.LMSocial?.renderSocialButtons(hero)", self.app)
+        self.assertIn("const uniqueLinks=links.filter", self.social_links)
         for profile_id in ("lady-moriarty", "rod3r1k", "akuma", "habitos"):
             collaborations = self.creator_records["channels"][profile_id]["collaborations"]
             titles = {item["title"] for item in collaborations}
