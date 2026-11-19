@@ -1,7 +1,19 @@
 import json
 import re
 import unittest
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
+
+from scripts.build_creator_metrics import (
+    FRESHNESS_MINUTES as BUILDER_FRESHNESS_MINUTES,
+    build,
+    capture_status as builder_capture_status,
+)
+from scripts.validate_creator_metrics import (
+    FRESHNESS_MINUTES as VALIDATOR_FRESHNESS_MINUTES,
+    capture_status as validator_capture_status,
+    validate,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -36,6 +48,8 @@ class NormalizedCreatorMetricsContractTests(unittest.TestCase):
         cls.roster = json.loads((ROOT / "roster-data.json").read_text(encoding="utf-8"))
         cls.metrics = json.loads((ROOT / "creator-metrics.json").read_text(encoding="utf-8"))
         cls.platform_stats = json.loads((ROOT / "platform-stats.json").read_text(encoding="utf-8"))
+        cls.twitch = json.loads((ROOT / "data.json").read_text(encoding="utf-8"))
+        cls.clips = json.loads((ROOT / "clips-data.json").read_text(encoding="utf-8"))
         cls.app = (ROOT / "app.js").read_text(encoding="utf-8")
         cls.workflow = (ROOT / ".github/workflows/actualizar-stats.yml").read_text(encoding="utf-8")
         cls.heroes = {hero["id"]: hero for hero in cls.roster["heroes"]}
@@ -103,13 +117,58 @@ class NormalizedCreatorMetricsContractTests(unittest.TestCase):
         self.assertIn("creatorProfileBundle.getCreator(hero)", self.app)
         self.assertIn("window.LegionCreatorProfiles?.findMetric(profile,metricKey,selectedPlatform)", self.app)
         self.assertIn("captured_at", self.app)
-        self.assertIn("twitch: 120", self.app)
+        freshness_match = re.search(
+            r"NORMALIZED_METRIC_FRESHNESS_MINUTES = Object\\.freeze\\(\\{\\s*twitch:\\s*(\\d+),\\s*youtube:\\s*(\\d+),\\s*kick:\\s*(\\d+)\\s*\\}\\)",
+            self.app,
+        )
+        self.assertIsNotNone(freshness_match)
+        self.assertEqual(tuple(map(int, freshness_match.groups())), (120, 120, 120))
+        expected_policy = {"twitch": 120, "youtube": 120, "kick": 120}
+        self.assertEqual(BUILDER_FRESHNESS_MINUTES, expected_policy)
+        self.assertEqual(VALIDATOR_FRESHNESS_MINUTES, expected_policy)
         self.assertIn("function renderRosterMetricSummary(hero)", self.app)
         self.assertIn("renderRosterMetricSummary(hero)", self.app)
         self.assertIn("getNormalizedLiveStatus(hero)", self.app)
         self.assertIn("average_viewers_sampled", self.app)
         self.assertIn("peak_viewers_sampled", self.app)
         self.assertIn("observed_live_hours", self.app)
+
+
+    def test_freshness_boundaries_are_deterministic_for_every_platform(self):
+        now = datetime(2026, 11, 19, 12, 0, tzinfo=timezone.utc)
+        exact_boundary = (now - timedelta(minutes=120)).isoformat()
+        one_second_old = (now - timedelta(minutes=120, seconds=1)).isoformat()
+        exact_clock_skew = (now + timedelta(minutes=5)).isoformat()
+        excessive_clock_skew = (now + timedelta(minutes=5, seconds=1)).isoformat()
+        for platform in ("twitch", "youtube", "kick"):
+            for classifier in (builder_capture_status, validator_capture_status):
+                self.assertEqual(classifier(platform, exact_boundary, now), "fresh")
+                self.assertEqual(classifier(platform, one_second_old, now), "delayed")
+                self.assertEqual(classifier(platform, exact_clock_skew, now), "fresh")
+                self.assertEqual(classifier(platform, excessive_clock_skew, now), "unavailable")
+
+    def test_checked_in_generated_registry_has_deterministic_freshness(self):
+        self.assertEqual(validate(self.metrics, self.roster), [])
+
+    def test_builder_uses_source_capture_times_and_validates_generated_registry(self):
+        reference_now = datetime.fromisoformat(self.metrics["generated_at"].replace("Z", "+00:00"))
+        generated = build(
+            self.roster,
+            self.twitch,
+            self.platform_stats,
+            self.clips,
+            now=reference_now,
+        )
+        self.assertEqual(validate(generated, self.roster, reference_now), [])
+
+        channel = self.twitch["channels"]["losmoriartys"]
+        metrics = {
+            metric["key"]: metric
+            for metric in generated["creators"]["moriartys"]["metrics"]
+        }
+        self.assertEqual(metrics["live_status"]["captured_at"], channel["last_status_at"])
+        self.assertEqual(metrics["average_viewers_sampled"]["captured_at"], channel["last_snapshot_at"])
+        self.assertEqual(metrics["peak_viewers_sampled"]["captured_at"], channel["last_snapshot_at"])
 
     def test_workflow_cadence_is_15_minutes_and_sample_window_remains_independent(self):
         workflow = re.search(r"cron:\s*'([^']+)'", self.workflow)
