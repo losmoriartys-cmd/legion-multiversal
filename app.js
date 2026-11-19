@@ -1613,7 +1613,7 @@ function renderCommercialQuickView(hero) {
     return out;
 }
 function renderCreatorPlatformLinks(hero) {
-    if (window.LMSocial?.renderSocialButtons) return window.LMSocial.renderSocialButtons(hero);
+    if (window.LMSocial?.renderSocialButtons) return window.LMSocial?.renderSocialButtons(hero) || '';
     return '';
 }
 
