@@ -311,7 +311,9 @@ class RosterComicCardsContractTests(unittest.TestCase):
         self.assertIn("hero-profile-character-card-link", self.app)
         self.assertIn("window.LMSocial?.renderSocialButtons(hero)", self.app)
         self.assertIn("href=\"#brand-proposal\"", self.app)
-        self.assertIn("const uniqueLinks=links.filter", self.social_links)
+        self.assertIn("const found = new Map()", self.social_links)
+        self.assertIn("found.has(platform)", self.social_links)
+        self.assertIn("ORDER.filter(platform => found.has(platform))", self.social_links)
         for profile_id in ("lady-moriarty", "rod3r1k", "akuma", "habitos"):
             collaborations = self.creator_records["channels"][profile_id]["collaborations"]
             titles = {item["title"] for item in collaborations}
