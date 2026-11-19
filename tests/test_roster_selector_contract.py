@@ -108,6 +108,9 @@ class RosterComicCardsContractTests(unittest.TestCase):
         context = self.app.split("function getRosterBrandContext", 1)[1].split("function renderRosterBrandSlots", 1)[0]
         self.assertIn("getRosterBrandContext(hero, channel, account)", renderer)
         self.assertIn("renderRosterBrandSlots(hero, brandContext)", renderer)
+        self.assertIn("renderSocialIcons(hero)", renderer)
+        self.assertIn("hero.tagline", renderer)
+        self.assertNotIn("hero.role_label || platformName", renderer)
         self.assertIn("window.LMBrand.cardSlots", self.app)
         self.assertIn("window.LMBrand.computeRhythm", self.app)
         self.assertIn("getNormalizedCreatorMetric(hero, 'average_viewers_sampled', 'twitch')", context)
