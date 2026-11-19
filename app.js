@@ -723,7 +723,19 @@ function getNormalizedCreatorMetric(hero, metricKey, platform, now=Date.now()){
  if(!Number.isFinite(capturedMs))return normalizedMetricMissing(hero,metricKey,selectedPlatform,'capture_timestamp_missing');
  const ageMinutes=(Number(now)-capturedMs)/60000;
  const freshnessLimit=NORMALIZED_METRIC_FRESHNESS_MINUTES[selectedPlatform]||120;
- const fresh=Number.isFinite(ageMinutes)&&ageMinutes>=-NORMALIZED_METRIC_CLOCK_SKEW_MINUTES&&ageMinutes<=freshnessLimit;
+ const withinWindow=Number.isFinite(ageMinutes)&&ageMinutes>=-NORMALIZED_METRIC_CLOCK_SKEW_MINUTES&&ageMinutes<=freshnessLimit;
+ if(!withinWindow){
+  return Object.freeze({
+   creatorId:profile.key,platform:selectedPlatform,key:metric.key,value:metric.value,
+   unit:metric.unit||null,accountHandle:metric.account_handle,capturedAt,ageMinutes,
+   fresh:false,state:'stale',sourceStatus:metric.status||null,source:metric.source||null,
+   visibility:metric.visibility||null,period:metric.period||null,reason:'capture_expired'
+  });
+ }
+ const acceptedStatuses=metricKey==='live_status'?['fresh']:['sampled','estimated','verified_public','fresh','live','offline'];
+ if(metric.visibility!=='public'||!acceptedStatuses.includes(metric.status)){
+  return normalizedMetricMissing(hero,metricKey,selectedPlatform,'source_not_public_or_unavailable');
+ }
  return Object.freeze({
   creatorId:profile.key,
   platform:selectedPlatform,
@@ -733,13 +745,13 @@ function getNormalizedCreatorMetric(hero, metricKey, platform, now=Date.now()){
   accountHandle:metric.account_handle,
   capturedAt,
   ageMinutes,
-  fresh,
-  state:fresh?'available':'stale',
+  fresh:true,
+  state:'available',
   sourceStatus:metric.status||null,
   source:metric.source||null,
   visibility:metric.visibility||null,
   period:metric.period||null,
-  reason:fresh?null:'capture_expired'
+  reason:null
  });
 }
 
@@ -769,7 +781,7 @@ function normalizedMetricCaptureLabel(metric){
  return Number.isNaN(date.getTime())?'fecha no disponible':date.toLocaleString('es-AR');
 }
 
-function renderRosterMetricSummary(hero){
+function renderNormalizedMetricSummary(hero){
  const account=(hero?.accounts||[]).find(item=>item.account_type==='creator_channel')||(hero?.accounts||[])[0]||null;
  if(!account)return '<div class="hero-profile-metric-grid hero-profile-normalized-summary"><article class="hero-profile-metric"><small>FUENTE</small><strong>SIN DATOS</strong><span>Cuenta no vinculada</span></article></div>';
  if(account.platform==='twitch'){
@@ -1352,40 +1364,9 @@ const heroAccentColors = {
     'habitos': '#9bd36b'
 };
 let selectedRosterCreatorId = null;
-function renderNormalizedMetricSummary(hero){
- const account=(hero?.accounts||[]).find(item=>item.account_type==='creator_channel')||(hero?.accounts||[])[0]||null;
- if(!account)return '<div class="hero-profile-metric-grid hero-profile-normalized-summary"><article class="hero-profile-metric"><small>FUENTE</small><strong>SIN DATOS</strong><span>Cuenta no vinculada</span></article></div>';
- if(account.platform==='twitch'){
-  const live=getNormalizedLiveStatus(hero);
-  const average=getNormalizedCreatorMetric(hero,'average_viewers_sampled','twitch');
-  const peak=getNormalizedCreatorMetric(hero,'peak_viewers_sampled','twitch');
-  const hours=getNormalizedCreatorMetric(hero,'observed_live_hours','twitch');
-  const capture=normalizedMetricCaptureLabel(live.metric);
-  const cards=[
-   '<article class="hero-profile-metric"><small>ESTADO DEL CANAL</small><strong>'+escapeStatsHtml(live.label)+'</strong><span>Twitch Helix · '+escapeStatsHtml(capture)+'</span></article>',
-   '<article class="hero-profile-metric"><small>PROMEDIO DE ESPECTADORES</small><strong>'+escapeStatsHtml(normalizedMetricValue(average,1))+'</strong><span>Promedio muestreado · viewers</span></article>',
-   '<article class="hero-profile-metric"><small>PICO OBSERVADO</small><strong>'+escapeStatsHtml(normalizedMetricValue(peak,0))+'</strong><span>Mayor lectura puntual · viewers</span></article>',
-   '<article class="hero-profile-metric"><small>HORAS EN DIRECTO</small><strong>'+escapeStatsHtml(normalizedMetricValue(hours,2,' h'))+'</strong><span>Horas observadas por muestreo</span></article>'
-  ];
-  return '<div class="hero-profile-metric-grid hero-profile-normalized-summary" aria-label="Resumen normalizado de Twitch">'+cards.join('')+'</div>';
- }
- if(account.platform==='youtube'){
-  const subscribers=getNormalizedCreatorMetric(hero,'subscribers','youtube');
-  const views=getNormalizedCreatorMetric(hero,'total_views','youtube');
-  const videos=getNormalizedCreatorMetric(hero,'videos_total','youtube');
-  const cards=[
-   '<article class="hero-profile-metric"><small>SUSCRIPTORES</small><strong>'+escapeStatsHtml(normalizedMetricValue(subscribers,0))+'</strong><span>YouTube Data API v3 · acumulado público</span></article>',
-   '<article class="hero-profile-metric"><small>VISUALIZACIONES</small><strong>'+escapeStatsHtml(normalizedMetricValue(views,0))+'</strong><span>Vistas acumuladas · YouTube</span></article>',
-   '<article class="hero-profile-metric"><small>VIDEOS PUBLICADOS</small><strong>'+escapeStatsHtml(normalizedMetricValue(videos,0))+'</strong><span>Publicaciones del canal</span></article>'
-  ];
-  return '<div class="hero-profile-metric-grid hero-profile-normalized-summary" aria-label="Resumen normalizado de YouTube">'+cards.join('')+'</div>';
- }
- return '<div class="hero-profile-metric-grid hero-profile-normalized-summary"><article class="hero-profile-metric"><small>'+escapeStatsHtml(String(account.platform).toUpperCase())+'</small><strong>SIN DATOS</strong><span>Fuente registrada sin métricas normalizadas disponibles</span></article></div>';
+function renderRosterMetricSummary(hero){
+ return renderNormalizedMetricSummary(hero);
 }
-function renderRosterMetricSummary(hero) {
-    return renderNormalizedMetricSummary(hero);
-}
-
 
 function getCreatorAudienceMetric(hero){
  const account=(hero?.accounts||[]).find(item=>item.account_type==='creator_channel')||(hero?.accounts||[])[0]||null;
