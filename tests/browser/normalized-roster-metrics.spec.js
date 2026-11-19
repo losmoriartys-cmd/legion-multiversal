@@ -93,6 +93,21 @@ async function openRosterWithFixture(page) {
     creatorMetricsData && creatorMetricsData.schema_version === 2);
 }
 
+async function openRosterWithRealMetrics(page) {
+  await page.route('**/api/contact', route => route.fulfill({
+    status: 200,
+    contentType: 'application/json',
+    body: JSON.stringify({ configured: false, turnstileSiteKey: null })
+  }));
+  // Do not intercept creator-metrics.json: exercise the artifact generated from source datasets.
+  await page.goto('/');
+  await page.evaluate(() => switchChapter(2));
+  await expect(page.locator('.comic-roster-card')).toHaveCount(8);
+  await page.waitForFunction(() => typeof getNormalizedCreatorMetric === 'function' &&
+    creatorMetricsData && creatorMetricsData.schema_version === 2 &&
+    creatorMetricsData.generated_at && Object.keys(creatorMetricsData.creators || {}).length === 8);
+}
+
 test.describe('Auditoría de métricas normalizadas del Roster', () => {
   test('resuelve cada ID canónico con su propia cuenta, sin métricas cruzadas', async ({ page }) => {
     await openRosterWithFixture(page);
@@ -234,8 +249,8 @@ test.describe('Auditoría de métricas normalizadas del Roster', () => {
 
     await card.click();
     await expect(page.locator('#hero-profile-page .hero-profile-live')).toHaveText([
-      'EN DIRECTO',
-      'EN DIRECTO'
+      /EN DIRECTO.*19 VIENDO/,
+      /EN DIRECTO.*19 VIENDO/
     ]);
     await expect(page.locator('#profile-tab-perfil .hero-profile-normalized-summary')).toContainText('PROMEDIO DE ESPECTADORES');
     await expect(page.locator('#profile-tab-perfil .hero-profile-normalized-summary')).toContainText('PICO OBSERVADO');
@@ -245,4 +260,56 @@ test.describe('Auditoría de métricas normalizadas del Roster', () => {
     await expect(twitchSource).toContainText('10');
     await expect(twitchSource).toContainText('20');
   });
+
+
+  test('el registro generado real mantiene estados coherentes con su timestamp y el resolutor', async ({ page }) => {
+    await openRosterWithRealMetrics(page);
+    const result = await page.evaluate(() => {
+      const registry = creatorMetricsData;
+      const referenceNow = Date.parse(registry.generated_at);
+      const currentStatuses = new Set(['fresh', 'offline', 'sampled', 'estimated', 'verified_public']);
+      const errors = [];
+      let metricCount = 0;
+
+      Object.entries(registry.creators).forEach(([creatorId, creator]) => {
+        const hero = heroesData.find(item => item.id === creatorId);
+        if (!hero) {
+          errors.push(creatorId + ': no existe en roster-data.json');
+          return;
+        }
+        (creator.metrics || []).forEach(metric => {
+          metricCount += 1;
+          const captured = Date.parse(metric.captured_at || '');
+          const ageMinutes = (referenceNow - captured) / 60000;
+          const captureIsFresh = Number.isFinite(captured) && ageMinutes >= -5 && ageMinutes <= 120;
+          if (currentStatuses.has(metric.status) && !captureIsFresh) {
+            errors.push(creatorId + '/' + metric.key + ': estado actual con captura fuera de 120 minutos');
+          }
+          if (metric.status === 'delayed' && (!Number.isFinite(captured) || ageMinutes <= 120)) {
+            errors.push(creatorId + '/' + metric.key + ': delayed sin captura vencida');
+          }
+          if (metric.value !== null) {
+            const resolved = getNormalizedCreatorMetric(hero, metric.key, metric.platform, referenceNow);
+            if (currentStatuses.has(metric.status) && resolved.state !== 'available') {
+              errors.push(creatorId + '/' + metric.key + ': el resolutor no reconoce una métrica actual');
+            }
+            if (metric.status === 'delayed' && resolved.state !== 'stale') {
+              errors.push(creatorId + '/' + metric.key + ': el resolutor no reconoce una métrica vencida');
+            }
+          }
+        });
+      });
+      return {
+        creatorCount: Object.keys(registry.creators).length,
+        metricCount,
+        generatedAt: registry.generated_at,
+        errors
+      };
+    });
+
+    expect(result.creatorCount).toBe(8);
+    expect(result.metricCount).toBeGreaterThan(0);
+    expect(result.errors).toEqual([]);
+  });
+
 });
