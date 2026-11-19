@@ -354,28 +354,78 @@ function renderStatsSourceDetails(title,description,content){
  return '<details class="stats-source-details"><summary><span><strong>'+escapeStatsHtml(title)+'</strong><small>'+escapeStatsHtml(description)+'</small></span><b>VER DETALLE <i aria-hidden="true">＋</i></b></summary><div class="stats-source-details-body">'+content+'</div></details>';
 }
 function renderStatsDashboard(hero,helix,sully){
- const safe=escapeStatsHtml,tmProfile=helix?.login?twitchMetricsData?.channels?.[helix.login]:null,tm=tmProfile?.metrics||{},platformProfile=platformStatsData?.creators?.[platformStatsKey(hero)],sources=[];
- if(helix?.window){
-  const w=helix.window,samples=Array.isArray(helix.snapshots)?helix.snapshots.filter(x=>x?.sampled_at):[],dates=samples.map(x=>String(x.sampled_at).slice(0,10)).filter(x=>/^\d{4}-\d{2}-\d{2}$/.test(x)).sort();
-  const period=w.period_start&&w.period_end?statsDate(String(w.period_start).slice(0,10))+' — '+statsDate(String(w.period_end).slice(0,10)):dates.length?statsDate(dates[0])+' — '+statsDate(dates[dates.length-1]):'Ventana reciente';
-  const metrics=[{label:'Directos detectados',value:w.streams_observed==null?null:statsNumber(w.streams_observed,0)},{label:'Promedio de espectadores',value:w.average_viewers_sampled==null?null:statsNumber(w.average_viewers_sampled,1)},{label:'Pico observado',value:w.peak_viewers_sampled==null?null:statsNumber(w.peak_viewers_sampled,0)},{label:'Horas en directo',value:w.observed_live_hours==null?null:statsNumber(w.observed_live_hours,1)+' h'}];
-  const card=renderStatsExecutiveSource('TWITCH · SEGUIMIENTO PÚBLICO',period,metrics,'Lecturas observadas del canal; no equivalen a analítica privada de Twitch.','https://www.twitch.tv/'+safe(helix.login));if(card)sources.push(card);
+ const safe=escapeStatsHtml,sources=[];
+ const twitchAccount=(hero?.accounts||[]).find(item=>item?.platform==='twitch'&&item.account_type==='creator_channel');
+ const youtubeAccount=(hero?.accounts||[]).find(item=>item?.platform==='youtube'&&item.account_type==='creator_channel');
+ const captureLabel=metrics=>{
+  const dates=(metrics||[]).map(item=>item?.capturedAt).filter(Boolean).sort();
+  return dates.length?normalizedMetricCaptureLabel({capturedAt:dates[dates.length-1]}):'captura no disponible';
+ };
+ const periodLabel=metrics=>{
+  const period=(metrics||[]).map(item=>item?.period).find(value=>value?.from&&value?.to);
+  return period?statsDate(String(period.from).slice(0,10))+' — '+statsDate(String(period.to).slice(0,10)):'Ventana observada';
+ };
+
+ if(twitchAccount){
+  const definitions=[
+   {key:'streams_observed',label:'Directos detectados',digits:0},
+   {key:'average_viewers_sampled',label:'Promedio de espectadores',digits:1},
+   {key:'peak_viewers_sampled',label:'Pico observado',digits:0},
+   {key:'observed_live_hours',label:'Horas en directo',digits:2,suffix:' h'}
+  ];
+  const resolved=definitions.map(definition=>({
+   definition,
+   metric:getNormalizedCreatorMetric(hero,definition.key,'twitch')
+  }));
+  const metrics=resolved.map(({definition,metric})=>({
+   label:definition.label,
+   value:metric?.state==='available'?statsNumber(metric.value,definition.digits)+(definition.suffix||''):null
+  }));
+  const status=getNormalizedLiveStatus(hero);
+  const note='Estado del canal: '+status.label+'. Fuente Twitch Helix; promedio y pico son observaciones muestreadas, no analítica privada ni CCV oficial. Captura: '+captureLabel(resolved.map(item=>item.metric))+'.';
+  const card=renderStatsExecutiveSource('TWITCH · MÉTRICAS NORMALIZADAS',periodLabel(resolved.map(item=>item.metric)),metrics,note,twitchAccount.url||hero.twitch||null);
+  if(card)sources.push(card);
  }
+
  if(sully){
   const m=sully.annual_summary_2026||sully.summary||{},period=sully.period?.start_date&&sully.period?.end_date?statsDate(sully.period.start_date)+' — '+statsDate(sully.period.end_date):sully.annual_summary_2026?'Acumulado 2026':'Historial disponible';
   const metrics=[{label:'Transmisiones',value:m.streams??m.streams_count??null},{label:'Horas transmitidas',value:m.hours_streamed??m.airtime_hours??(m.airtime_minutes!=null?statsNumber(m.airtime_minutes/60,1)+' h':null)},{label:'Horas vistas',value:m.hours_watched??null},{label:'Promedio de espectadores',value:m.average_viewers??m.average_viewers_duration_weighted??null},{label:'Pico de espectadores',value:m.peak_viewers??null},{label:'Seguidores',value:m.followers_total??null},{label:'Seguidores ganados',value:m.followers_gained??m.followers_gain_reported??null}];
   const card=renderStatsExecutiveSource('SULLYGNOME · HISTORIAL',period,metrics,'Historial externo del canal; se mantiene separado de otras fuentes.',sully.source_url||null);if(card)sources.push(card);
  }
+
+ const tmProfile=helix?.login?twitchMetricsData?.channels?.[helix.login]:null,tm=tmProfile?.metrics||{};
  if(tmProfile){
   const metrics=[{label:'Seguidores',value:tm.followers??null},{label:'Horas vistas',value:tm.viewer_hours==null?null:statsNumber(tm.viewer_hours,0)+' h'},{label:'Promedio de espectadores',value:tm.average_viewers??null},{label:'Pico de espectadores',value:tm.peak_viewers??null}];
-  const card=renderStatsExecutiveSource('TWITCHMETRICS · ANALÍTICA PÚBLICA',tmProfile.period_label||tmProfile.period||'Ventana consultada',metrics,'Datos públicos publicados por TwitchMetrics.',tmProfile.source_url||null);if(card)sources.push(card);
+  const card=renderStatsExecutiveSource('TWITCHMETRICS · ANALÍTICA PÚBLICA',tmProfile.period_label||tmProfile.period||'Ventana consultada',metrics,'Datos públicos publicados por TwitchMetrics; fuente independiente del muestreo Helix.',tmProfile.source_url||null);if(card)sources.push(card);
  }
+
+ if(youtubeAccount){
+  const definitions=[
+   {key:'subscribers',label:'Suscriptores',digits:0},
+   {key:'total_views',label:'Visualizaciones',digits:0},
+   {key:'videos_total',label:'Videos publicados',digits:0}
+  ];
+  const resolved=definitions.map(definition=>({
+   definition,
+   metric:getNormalizedCreatorMetric(hero,definition.key,'youtube')
+  }));
+  const metrics=resolved.map(({definition,metric})=>({
+   label:definition.label,
+   value:metric?.state==='available'?statsNumber(metric.value,definition.digits):null
+  }));
+  const note='Fuente YouTube Data API v3. Los contadores son acumulados públicos; suscriptores pueden estar redondeados. Captura: '+captureLabel(resolved.map(item=>item.metric))+'.';
+  const card=renderStatsExecutiveSource('YOUTUBE · CANAL VINCULADO',periodLabel(resolved.map(item=>item.metric)),metrics,note,youtubeAccount.url||hero.youtube||null);
+  if(card)sources.push(card);
+ }
+
+ const platformProfile=platformStatsData?.creators?.[platformStatsKey(hero)];
  if(platformProfile?.platforms)Object.entries(platformProfile.platforms).forEach(([platform,p])=>{
+  if(platform==='youtube')return;
   if(p.status!=='verified')return;
-  const m=p.metrics||{},metrics=platform==='youtube'?[{label:'Suscriptores',value:m.subscribers},{label:'Visualizaciones',value:m.total_views},{label:'Videos publicados',value:m.videos_total}]:platform==='kick'?[{label:'Estado',value:m.live===true?'EN DIRECTO':m.live===false?'OFFLINE':null},{label:'Espectadores actuales',value:m.current_viewers}]:[];
+  const m=p.metrics||{},metrics=platform==='kick'?[{label:'Estado',value:m.live===true?'EN DIRECTO':m.live===false?'OFFLINE':null},{label:'Espectadores actuales',value:m.current_viewers}]:[];
   const card=renderStatsExecutiveSource(platform.toUpperCase()+' · CANAL VINCULADO',platformStatsData?.updated_at||'Captura disponible',metrics,'Datos públicos de '+platform.toUpperCase()+'.',p.url||null);if(card)sources.push(card);
  });
- return '<div class="stats-dashboard stats-dashboard-editorial"><header class="stats-executive-header"><div><span>RENDIMIENTO DEL CANAL</span><h4>'+safe(getHeroDisplayName(hero))+'</h4><p>Indicadores disponibles, con su fuente y período. Cada plataforma se presenta por separado.</p></div></header><div class="stats-executive-grid">'+(sources.length?sources.join(''):'<p class="stats-executive-empty">Todavía no hay métricas públicas verificadas para mostrar.</p>')+'</div></div>';
+ return '<div class="stats-dashboard stats-dashboard-editorial"><header class="stats-executive-header"><div><span>RENDIMIENTO DEL CANAL</span><h4>'+safe(getHeroDisplayName(hero))+'</h4><p>Indicadores disponibles, con su fuente, período y frescura. Cada plataforma se presenta por separado.</p></div></header><div class="stats-executive-grid">'+(sources.length?sources.join(''):'<p class="stats-executive-empty">Todavía no hay métricas públicas verificadas para mostrar.</p>')+'</div></div>';
 }
 function renderAutomaticTwitchClips(hero){
  const account=(hero?.accounts||[]).find(item=>item.platform==='twitch'&&item.account_type==='creator_channel');
@@ -458,6 +508,8 @@ async function loadSullyGnomeData(){
 }
 
 let creatorRecordsData = null;
+let creatorMetricsData = null;
+let creatorProfileBundle = null;
 let platformStatsData = null;
 let twitchClipsData = null;
 let twitchClipsLoadError = false;
@@ -598,8 +650,154 @@ function renderCreatorRecords(hero){
 async function loadCreatorRecords(){
  try{
   const bundle=await window.LegionCreatorProfiles.load({files:['records','metrics']});
+  creatorProfileBundle=bundle;
   creatorRecordsData=bundle.records;
- }catch(e){console.warn('Creator records unavailable:',e);}
+  creatorMetricsData=bundle.metrics;
+  return bundle;
+ }catch(e){
+  creatorProfileBundle=null;
+  creatorRecordsData=null;
+  creatorMetricsData=null;
+  console.warn('Creator records and normalized metrics unavailable:',e);
+  return null;
+ }
+}
+
+// El workflow de métricas corre cada 15 minutos (cron 7,22,37,52).
+// Twitch actualiza el estado Helix en cada ejecución; el muestreo histórico agrega
+// una nueva observación aproximadamente cada 45–55 minutos. Dos horas toleran
+// ocho ciclos programados y demoras moderadas de cola sin presentar datos viejos como actuales.
+const NORMALIZED_METRIC_FRESHNESS_MINUTES = Object.freeze({
+ twitch: 120,
+ youtube: 120,
+ kick: 120
+});
+const NORMALIZED_METRIC_CLOCK_SKEW_MINUTES = 5;
+
+function normalizedMetricMissing(hero, metricKey, platform, reason){
+ return Object.freeze({
+  creatorId:hero?.id||hero?.slug||null,
+  platform:platform||null,
+  key:metricKey,
+  value:null,
+  unit:null,
+  accountHandle:null,
+  capturedAt:null,
+  fresh:false,
+  state:'missing',
+  reason
+ });
+}
+
+function normalizeMetricAccountHandle(value){
+ return String(value||'').trim().replace(/^@/,'').toLowerCase();
+}
+
+function getNormalizedCreatorMetric(hero, metricKey, platform, now=Date.now()){
+ const creatorId=hero?.id||hero?.slug||'';
+ if(!hero||!creatorId||!creatorMetricsData||!creatorProfileBundle?.getCreator){
+  return normalizedMetricMissing(hero,metricKey,platform,'bundle_unavailable');
+ }
+ const profile=creatorProfileBundle.getCreator(hero);
+ if(!profile)return normalizedMetricMissing(hero,metricKey,platform,'creator_unresolved');
+ const selectedPlatform=platform||profile.accounts?.find(account=>account?.account_type==='creator_channel')?.platform||null;
+ if(!selectedPlatform)return normalizedMetricMissing(hero,metricKey,platform,'platform_unavailable');
+ const metric=window.LegionCreatorProfiles?.findMetric(profile,metricKey,selectedPlatform)||null;
+ if(!metric)return normalizedMetricMissing(hero,metricKey,selectedPlatform,'metric_missing');
+
+ const account=(profile.accounts||[]).find(item=>item?.platform===selectedPlatform&&item.account_type==='creator_channel')||
+  (profile.accounts||[]).find(item=>item?.platform===selectedPlatform)||null;
+ const expectedHandles=[account?.handle,account?.login].map(normalizeMetricAccountHandle).filter(Boolean);
+ const actualHandle=normalizeMetricAccountHandle(metric.account_handle);
+ if(!account||!actualHandle||!expectedHandles.includes(actualHandle)){
+  return normalizedMetricMissing(hero,metricKey,selectedPlatform,'account_mismatch');
+ }
+
+ const valuePresent=metricKey==='live_status'
+  ? ['live','offline'].includes(metric.value)
+  : typeof metric.value==='number'&&Number.isFinite(metric.value);
+ if(!valuePresent)return normalizedMetricMissing(hero,metricKey,selectedPlatform,'value_missing');
+
+ const capturedAt=metric.captured_at||null;
+ const capturedMs=capturedAt?Date.parse(capturedAt):NaN;
+ if(!Number.isFinite(capturedMs))return normalizedMetricMissing(hero,metricKey,selectedPlatform,'capture_timestamp_missing');
+ const ageMinutes=(Number(now)-capturedMs)/60000;
+ const freshnessLimit=NORMALIZED_METRIC_FRESHNESS_MINUTES[selectedPlatform]||120;
+ const fresh=Number.isFinite(ageMinutes)&&ageMinutes>=-NORMALIZED_METRIC_CLOCK_SKEW_MINUTES&&ageMinutes<=freshnessLimit;
+ return Object.freeze({
+  creatorId:profile.key,
+  platform:selectedPlatform,
+  key:metric.key,
+  value:metric.value,
+  unit:metric.unit||null,
+  accountHandle:metric.account_handle,
+  capturedAt,
+  ageMinutes,
+  fresh,
+  state:fresh?'available':'stale',
+  sourceStatus:metric.status||null,
+  source:metric.source||null,
+  visibility:metric.visibility||null,
+  period:metric.period||null,
+  reason:fresh?null:'capture_expired'
+ });
+}
+
+function getNormalizedLiveStatus(hero,now=Date.now()){
+ const twitchAccount=(hero?.accounts||[]).find(item=>item?.platform==='twitch'&&item.account_type==='creator_channel');
+ if(!twitchAccount&&!hero?.twitch){
+  const youtubeAccount=(hero?.accounts||[]).some(item=>item?.platform==='youtube'&&item.account_type==='creator_channel')||Boolean(hero?.youtube);
+  return {state:'not_applicable',label:youtubeAccount?'YOUTUBE · ESTADO NO APLICA':'SIN DATOS',metric:null};
+ }
+ const metric=getNormalizedCreatorMetric(hero,'live_status','twitch',now);
+ if(metric.state==='stale')return {state:'stale',label:'ESTADO SIN ACTUALIZAR',metric};
+ if(metric.state==='missing')return {state:'missing',label:'SIN DATOS',metric};
+ if(metric.value==='live')return {state:'live',label:'EN DIRECTO',metric};
+ if(metric.value==='offline')return {state:'offline',label:'OFFLINE',metric};
+ return {state:'missing',label:'SIN DATOS',metric};
+}
+
+function normalizedMetricValue(metric,digits=1,suffix=''){
+ if(!metric||metric.state==='missing')return 'SIN DATOS';
+ if(metric.state==='stale')return 'ESTADO SIN ACTUALIZAR';
+ return statsNumber(metric.value,digits)+(suffix||'');
+}
+
+function normalizedMetricCaptureLabel(metric){
+ if(!metric?.capturedAt)return 'sin captura';
+ const date=new Date(metric.capturedAt);
+ return Number.isNaN(date.getTime())?'fecha no disponible':date.toLocaleString('es-AR');
+}
+
+function renderRosterMetricSummary(hero){
+ const account=(hero?.accounts||[]).find(item=>item.account_type==='creator_channel')||(hero?.accounts||[])[0]||null;
+ if(!account)return '<div class="hero-profile-metric-grid hero-profile-normalized-summary"><article class="hero-profile-metric"><small>FUENTE</small><strong>SIN DATOS</strong><span>Cuenta no vinculada</span></article></div>';
+ if(account.platform==='twitch'){
+  const live=getNormalizedLiveStatus(hero);
+  const average=getNormalizedCreatorMetric(hero,'average_viewers_sampled','twitch');
+  const peak=getNormalizedCreatorMetric(hero,'peak_viewers_sampled','twitch');
+  const hours=getNormalizedCreatorMetric(hero,'observed_live_hours','twitch');
+  const capture=normalizedMetricCaptureLabel(live.metric);
+  const cards=[
+   '<article class="hero-profile-metric"><small>ESTADO DEL CANAL</small><strong>'+escapeStatsHtml(live.label)+'</strong><span>Twitch Helix · '+escapeStatsHtml(capture)+'</span></article>',
+   '<article class="hero-profile-metric"><small>PROMEDIO DE ESPECTADORES</small><strong>'+escapeStatsHtml(normalizedMetricValue(average,1))+'</strong><span>Promedio muestreado · viewers</span></article>',
+   '<article class="hero-profile-metric"><small>PICO OBSERVADO</small><strong>'+escapeStatsHtml(normalizedMetricValue(peak,0))+'</strong><span>Mayor lectura puntual · viewers</span></article>',
+   '<article class="hero-profile-metric"><small>HORAS EN DIRECTO</small><strong>'+escapeStatsHtml(normalizedMetricValue(hours,2,' h'))+'</strong><span>Horas observadas por muestreo</span></article>'
+  ];
+  return '<div class="hero-profile-metric-grid hero-profile-normalized-summary" aria-label="Resumen normalizado de Twitch">'+cards.join('')+'</div>';
+ }
+ if(account.platform==='youtube'){
+  const subscribers=getNormalizedCreatorMetric(hero,'subscribers','youtube');
+  const views=getNormalizedCreatorMetric(hero,'total_views','youtube');
+  const videos=getNormalizedCreatorMetric(hero,'videos_total','youtube');
+  const cards=[
+   '<article class="hero-profile-metric"><small>SUSCRIPTORES</small><strong>'+escapeStatsHtml(normalizedMetricValue(subscribers,0))+'</strong><span>YouTube Data API v3 · acumulado público</span></article>',
+   '<article class="hero-profile-metric"><small>VISUALIZACIONES</small><strong>'+escapeStatsHtml(normalizedMetricValue(views,0))+'</strong><span>Vistas acumuladas · YouTube</span></article>',
+   '<article class="hero-profile-metric"><small>VIDEOS PUBLICADOS</small><strong>'+escapeStatsHtml(normalizedMetricValue(videos,0))+'</strong><span>Publicaciones del canal</span></article>'
+  ];
+  return '<div class="hero-profile-metric-grid hero-profile-normalized-summary" aria-label="Resumen normalizado de YouTube">'+cards.join('')+'</div>';
+ }
+ return '<div class="hero-profile-metric-grid hero-profile-normalized-summary"><article class="hero-profile-metric"><small>'+escapeStatsHtml(String(account.platform).toUpperCase())+'</small><strong>SIN DATOS</strong><span>Fuente registrada sin métricas normalizadas disponibles</span></article></div>';
 }
 let instituteStatsData = null;
 function findChannelStats(hero){
@@ -1154,36 +1352,38 @@ const heroAccentColors = {
     'habitos': '#9bd36b'
 };
 let selectedRosterCreatorId = null;
+function renderNormalizedMetricSummary(hero){
+ const account=(hero?.accounts||[]).find(item=>item.account_type==='creator_channel')||(hero?.accounts||[])[0]||null;
+ if(!account)return '<div class="hero-profile-metric-grid hero-profile-normalized-summary"><article class="hero-profile-metric"><small>FUENTE</small><strong>SIN DATOS</strong><span>Cuenta no vinculada</span></article></div>';
+ if(account.platform==='twitch'){
+  const live=getNormalizedLiveStatus(hero);
+  const average=getNormalizedCreatorMetric(hero,'average_viewers_sampled','twitch');
+  const peak=getNormalizedCreatorMetric(hero,'peak_viewers_sampled','twitch');
+  const hours=getNormalizedCreatorMetric(hero,'observed_live_hours','twitch');
+  const capture=normalizedMetricCaptureLabel(live.metric);
+  const cards=[
+   '<article class="hero-profile-metric"><small>ESTADO DEL CANAL</small><strong>'+escapeStatsHtml(live.label)+'</strong><span>Twitch Helix · '+escapeStatsHtml(capture)+'</span></article>',
+   '<article class="hero-profile-metric"><small>PROMEDIO DE ESPECTADORES</small><strong>'+escapeStatsHtml(normalizedMetricValue(average,1))+'</strong><span>Promedio muestreado · viewers</span></article>',
+   '<article class="hero-profile-metric"><small>PICO OBSERVADO</small><strong>'+escapeStatsHtml(normalizedMetricValue(peak,0))+'</strong><span>Mayor lectura puntual · viewers</span></article>',
+   '<article class="hero-profile-metric"><small>HORAS EN DIRECTO</small><strong>'+escapeStatsHtml(normalizedMetricValue(hours,2,' h'))+'</strong><span>Horas observadas por muestreo</span></article>'
+  ];
+  return '<div class="hero-profile-metric-grid hero-profile-normalized-summary" aria-label="Resumen normalizado de Twitch">'+cards.join('')+'</div>';
+ }
+ if(account.platform==='youtube'){
+  const subscribers=getNormalizedCreatorMetric(hero,'subscribers','youtube');
+  const views=getNormalizedCreatorMetric(hero,'total_views','youtube');
+  const videos=getNormalizedCreatorMetric(hero,'videos_total','youtube');
+  const cards=[
+   '<article class="hero-profile-metric"><small>SUSCRIPTORES</small><strong>'+escapeStatsHtml(normalizedMetricValue(subscribers,0))+'</strong><span>YouTube Data API v3 · acumulado público</span></article>',
+   '<article class="hero-profile-metric"><small>VISUALIZACIONES</small><strong>'+escapeStatsHtml(normalizedMetricValue(views,0))+'</strong><span>Vistas acumuladas · YouTube</span></article>',
+   '<article class="hero-profile-metric"><small>VIDEOS PUBLICADOS</small><strong>'+escapeStatsHtml(normalizedMetricValue(videos,0))+'</strong><span>Publicaciones del canal</span></article>'
+  ];
+  return '<div class="hero-profile-metric-grid hero-profile-normalized-summary" aria-label="Resumen normalizado de YouTube">'+cards.join('')+'</div>';
+ }
+ return '<div class="hero-profile-metric-grid hero-profile-normalized-summary"><article class="hero-profile-metric"><small>'+escapeStatsHtml(String(account.platform).toUpperCase())+'</small><strong>SIN DATOS</strong><span>Fuente registrada sin métricas normalizadas disponibles</span></article></div>';
+}
 function renderRosterMetricSummary(hero) {
-    const account = (hero.accounts || []).find(item => item.account_type === 'creator_channel') || (hero.accounts || [])[0];
-    if (!account) return '<span class="roster-metric-primary">Cuenta no vinculada</span><small>Sin fuente de métricas registrada.</small>';
-    if (account.platform === 'twitch') {
-        const login = String(account.login || (account.url || '').split('/').filter(Boolean).pop() || '').toLowerCase();
-        const channel = instituteStatsData?.channels?.[login];
-        if (!channel) return '<span class="roster-metric-primary">Seguimiento pendiente</span><small>Twitch Helix · todavía no hay una captura disponible para esta cuenta.</small>';
-        const window = channel.window || {};
-        const samples = Array.isArray(channel.snapshots) ? channel.snapshots.filter(item => item && item.sampled_at) : [];
-        const first = samples[0]?.sampled_at;
-        const last = samples[samples.length - 1]?.sampled_at;
-        const period = first && last ? statsDate(first.slice(0, 10)) + '–' + statsDate(last.slice(0, 10)) : 'período no disponible';
-        const streams = Number(window.streams_observed) || 0;
-        const liveSamples = Number(window.live_samples) || 0;
-        const primary = streams
-            ? statsNumber(streams, 0) + ' directos detectados · prom. ' + statsNumber(window.average_viewers_sampled, 1) + ' · pico ' + statsNumber(window.peak_viewers_sampled, 0)
-            : 'Sin directos detectados en el tramo observado';
-        const sampleLabel = liveSamples < 20 ? 'muestra reducida' : 'muestra en seguimiento';
-        return '<span class="roster-metric-primary">' + escapeStatsHtml(primary) + '</span><small>Twitch Helix · ' + statsNumber(liveSamples, 0) + ' muestras en directo · ' + escapeStatsHtml(period) + ' · ' + sampleLabel + '</small>';
-    }
-    if (account.platform === 'youtube') {
-        const key = hero.id || hero.slug || '';
-        const platform = platformStatsData?.creators?.[key]?.platforms?.youtube;
-        if (!platform || platform.status !== 'verified') return '<span class="roster-metric-primary">Datos pendientes</span><small>YouTube Data API v3 · cuenta registrada, sin lectura verificada.</small>';
-        const metrics = platform.metrics || {};
-        const capture = platformStatsData.updated_at ? new Date(platformStatsData.updated_at) : null;
-        const date = capture && !Number.isNaN(capture.getTime()) ? capture.toLocaleDateString('es-AR') : 'fecha no disponible';
-        return '<span class="roster-metric-primary">' + statsNumber(metrics.subscribers, 0) + ' suscriptores · ' + statsNumber(metrics.total_views, 0) + ' visualizaciones · ' + statsNumber(metrics.videos_total, 0) + ' videos</span><small>YouTube Data API v3 · acumulados del canal · captura ' + escapeStatsHtml(date) + '</small>';
-    }
-    return '<span class="roster-metric-primary">Fuente registrada</span><small>' + escapeStatsHtml(String(account.platform).toUpperCase()) + ' · métricas específicas pendientes.</small>';
+    return renderNormalizedMetricSummary(hero);
 }
 
 
@@ -1221,24 +1421,26 @@ function renderRosterSelector() {
     const cards = heroesData.map((hero, index) => {
         const account = primaryAccount(hero);
         const state = getRosterLiveState(hero);
-        const isLive = Boolean(state?.fresh && state.channel?.live);
+        const liveStatus = getNormalizedLiveStatus(hero);
+        const isLive = liveStatus.state === 'live';
         const channel = findChannelStats(hero);
         const snapshots = Array.isArray(channel?.snapshots) ? channel.snapshots : [];
         const lastLive = [...snapshots].reverse().find(sample => sample?.is_live && sample.sampled_at)?.sampled_at || null;
         const lastLiveDate = lastLive ? new Date(lastLive).toLocaleDateString('es-AR',{day:'2-digit',month:'2-digit'}) : 'SIN REGISTRO';
         const activeThisWeek = lastLive && Number.isFinite(Date.parse(lastLive)) && (Date.now() - Date.parse(lastLive)) <= 7 * 24 * 60 * 60 * 1000;
-        const win = state?.channel?.window || channel?.window || {};
-        const average = win.average_viewers_sampled;
+        const averageMetric = account?.platform === 'twitch' ? getNormalizedCreatorMetric(hero,'average_viewers_sampled','twitch') : null;
+        const average = averageMetric?.state === 'available' ? averageMetric.value : null;
         const audience=getCreatorAudienceMetric(hero);
         const audienceHtml=audience?'<span class="comic-roster-stat comic-roster-stat-audience"><span>'+safe(audience.label)+'</span><b>'+safe(statsNumber(audience.value,0))+'</b><small>'+safe(audience.source+(audience.period?' · '+audience.period:''))+'</small></span>':'';
-        const averageHtml=average==null?'':'<span class="comic-roster-stat"><span>Media de viewers</span><b class="comic-roster-stat-purple">'+safe(statsNumber(average,1))+'</b></span>';
+        const averageText = normalizedMetricValue(averageMetric,1);
+        const averageHtml = account?.platform === 'twitch' ? '<span class="comic-roster-stat comic-roster-stat-average"><span>Media de viewers</span><b class="comic-roster-stat-purple">'+safe(averageText)+'</b></span>' : '';
         const platformName=String(account?.platform||'CANAL').toUpperCase();
         const games=getMostPlayedGames(hero,channel,findSullyChannel(hero));
         const gameLabel=games.length?'<em>🎮 MÁS JUGADO · '+safe(games[0])+'</em>':hero.creator_type==='video_creator'?'<em>CONTENIDO EDUCATIVO</em>':'';
         const specialties = (hero.areas || []).filter(Boolean).slice(0,3);
         const identity = hero.codename || hero.characterRole || 'INTEGRANTE DE LA LEGIÓN';
-        const activityBadge = isLive ? 'EN VIVO AHORA' : activeThisWeek ? 'ACTIVO ESTA SEMANA' : 'ACTIVIDAD NO CONFIRMADA';
-        const liveBadge = isLive ? '<span class="roster-selector-tile-live">● EN VIVO</span>' : '';
+        const activityBadge = liveStatus.state === 'not_applicable' ? 'CONTENIDO · YOUTUBE' : liveStatus.label;
+        const liveBadge = isLive ? '<span class="roster-selector-tile-live">● EN DIRECTO</span>' : '';
         return '<button type="button" class="roster-selector-tile comic-roster-card" data-roster-select="' + index + '" data-creator-id="' + safe(hero.id || hero.slug) + '" data-roster-role="' + safe(hero.role || 'member') + '" aria-label="Abrir Bitácora de ' + safe(getHeroDisplayName(hero)) + '">' +
           '<span class="comic-roster-photo">' +
             (hero.portrait ? '<img src="' + safe(hero.portrait) + '" alt="Fotografía carnet de ' + safe(getHeroDisplayName(hero)) + '" loading="' + (index < 4 ? 'eager' : 'lazy') + '" decoding="async">' : '<span class="roster-selector-no-portrait">' + safe((hero.display_name || hero.name || '?').slice(0,1)) + '</span>') +
@@ -1410,7 +1612,7 @@ function showRosterChapter() {
 }
 
 function renderHeroProfileTabs(hero) {
- const safe=escapeStatsHtml,record=getCreatorRecord(hero),channel=findChannelStats(hero),sullyChannel=findSullyChannel(hero),win=channel?.window||{},live=getRosterLiveState(hero);
+ const safe=escapeStatsHtml,record=getCreatorRecord(hero),channel=findChannelStats(hero),sullyChannel=findSullyChannel(hero),win=channel?.window||{},liveStatus=getNormalizedLiveStatus(hero);
  const yt=platformStatsData?.creators?.[platformStatsKey(hero)]?.platforms?.youtube;
  const clips=twitchClipsData?.creators?.[creatorRecordKey(hero)]?.clips||[];
  const snapshots=Array.isArray(channel?.snapshots)?channel.snapshots:[];
@@ -1441,15 +1643,15 @@ function renderHeroProfileTabs(hero) {
  }).join('');
  const period=win.period_start&&win.period_end?statsDate(String(win.period_start).slice(0,10))+' – '+statsDate(String(win.period_end).slice(0,10)):'ventana disponible de muestreo';
  const lastLive=[...snapshots].reverse().find(s=>s?.is_live&&s.sampled_at)?.sampled_at;
- const lastLiveLabel=lastLive?new Date(lastLive).toLocaleString('es-AR',{dateStyle:'medium',timeStyle:'short'}):'Sin directo detectado en la ventana';
- const liveLabel=live?.fresh&&live.channel?.live?'● EN VIVO':live?.fresh?'OFFLINE · CAPTURA ACTUALIZADA':'ESTADO NO DISPONIBLE';
+ const lastLiveLabel=hero.accounts?.some(item=>item.platform==='twitch'&&item.account_type==='creator_channel')?(lastLive?new Date(lastLive).toLocaleString('es-AR',{dateStyle:'medium',timeStyle:'short'}):'Sin directo detectado en la ventana'):'No aplica · cuenta YouTube';
+ const liveLabel=liveStatus.label;
  const freq=win.streams_observed!=null?statsNumber(win.streams_observed,0)+' directos detectados':'Sin frecuencia cuantificable';
  const profileRatings=hero.mediaProfile?.ratings||hero.mediaProfile?.scorecard||hero.scorecard||{};
  const ratingDefinitions=[['CONSTANCIA','constancia'],['CARISMA','carisma'],['GAMEPLAY','gameplay'],['COMUNIDAD','comunidad'],['HYPE','hype']];
  const ratingHtml=ratingDefinitions.map(([label,key])=>{const raw=profileRatings[key]??profileRatings[label]??null;const value=raw==null?null:Number(raw);const valid=Number.isFinite(value)&&value>=0&&value<=100;return '<div class="comic-profile-rating"><div><strong>'+label+'</strong><b>'+(valid?Math.round(value):'—')+'</b></div><div class="comic-profile-rating-track" role="meter" aria-label="'+label+'" aria-valuemin="0" aria-valuemax="100"'+(valid?' aria-valuenow="'+Math.round(value)+'"':'')+'><span style="width:'+(valid?Math.round(value):0)+'%"></span></div></div>';}).join('');
  const accountForAction=(hero.accounts||[]).find(item=>item.account_type==='creator_channel')||(hero.accounts||[])[0]||null;
  const profileChannelUrl=accountForAction?.url||hero.twitch||hero.youtube||'';
- const overview='<div class="hero-profile-overview"><p class="hero-profile-bio">'+safe(hero.bio||'Presentación personal pendiente de completar.')+'</p>'+gameHtml+'</div>'
+ const overview='<div class="hero-profile-overview"><p class="hero-profile-bio">'+safe(hero.bio||'Presentación personal pendiente de completar.')+'</p>'+gameHtml+'<section class="hero-profile-normalized-section"><h4>RESUMEN DE MÉTRICAS</h4>'+renderRosterMetricSummary(hero)+'</section></div>'
  const clipsHtml=clips.length?'<div class="hero-profile-clips-grid">'+clips.slice(0,4).map(clip=>'<article class="hero-profile-clip">'+(clip.thumbnail_url?'<a href="'+safe(clip.url)+'" target="_blank" rel="noopener noreferrer"><img src="'+safe(clip.thumbnail_url)+'" alt="" loading="lazy"></a>':'')+'<div><strong>'+safe(clip.title||'Clip destacado')+'</strong><small>'+safe(statsNumber(clip.view_count,0))+' visualizaciones · '+safe(clip.creator_name||'Creador')+'</small><a href="'+safe(clip.url)+'" target="_blank" rel="noopener noreferrer">VER CLIP ↗</a></div></article>').join('')+'</div>':'<p class="hero-profile-empty">'+(twitchClipsLoadError?'No se pudo cargar la captura de clips.':'Todavía no hay clips públicos disponibles para este canal en la ventana consultada.')+'</p>';
  const entries=[...(record.milestones||[]),...(record.collaborations||[])];
  const logHtml=entries.length?'<ul class="hero-profile-detail-list">'+entries.map(x=>'<li><strong>'+safe(x.title||'Registro')+'</strong><span>'+safe(x.description||'')+(x.url?' · <a href="'+safe(x.url)+'" target="_blank" rel="noopener noreferrer">'+(String(x.title||'').toLowerCase().includes('acceso a keys')?'ABRIR PLATAFORMA ↗':'Fuente ↗')+'</a>':'')+(x.source?'<small>FUENTE · '+safe(x.source)+'</small>':'')+'</span></li>').join('')+'</ul>':'<p class="hero-profile-empty">La bitácora individual todavía no tiene hitos o colaboraciones documentados.</p>';
@@ -1474,11 +1676,11 @@ function openHeroProfile(index, triggerElement = document.activeElement, options
     const profilePosition = filteredProfiles.findIndex(entry => entry.index === index);
     const previousDisabled = profilePosition <= 0;
     const nextDisabled = profilePosition < 0 || profilePosition >= filteredProfiles.length - 1;
-    const liveState = getRosterLiveState(hero);
-    const isLive = Boolean(liveState?.fresh && liveState.channel?.live);
-    const liveBadge = isLive
-        ? '<span class="hero-profile-live is-live">● EN VIVO · ' + escapeStatsHtml(liveState.channel.current_viewers ?? 'EN DIRECTO') + ' VIENDO</span>'
-        : '<span class="hero-profile-live is-unknown">' + (liveState?.fresh ? '● CAPTURA ACTUALIZADA' : '● ESTADO NO DISPONIBLE') + '</span>';
+    const liveStatus = getNormalizedLiveStatus(hero);
+    const isLive = liveStatus.state === 'live';
+    const currentViewers = isLive ? getNormalizedCreatorMetric(hero,'current_viewers','twitch') : null;
+    const liveViewersLabel = currentViewers?.state === 'available' ? ' · ' + escapeStatsHtml(currentViewers.value) + ' VIENDO' : '';
+    const liveBadge = '<span class="hero-profile-live ' + (isLive ? 'is-live' : 'is-unknown') + '">' + (isLive ? '● EN DIRECTO' + liveViewersLabel : escapeStatsHtml(liveStatus.label)) + '</span>';
     const portrait = hero.portrait || hero.img || '';
     const socials = renderCreatorPlatformLinks(hero);
     const rhythm = 'EN SEGUIMIENTO';
