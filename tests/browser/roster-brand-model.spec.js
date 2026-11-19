@@ -69,6 +69,28 @@ test('cada tarjeta muestra las tres filas comparables y el estado de ritmo no es
   }
 });
 
+test('las tarjetas priorizan el tagline y muestran solo insignias de redes, sin rangos internos', async ({ page }) => {
+  await page.goto('/');
+  await page.evaluate(() => switchChapter(2));
+  const expectedCounts = {
+    moriartys: 4,
+    rod3r1k: 2,
+    'lady-moriarty': 4,
+    ardipii: 4,
+    akuma: 4,
+    'dave-nexus': 1,
+    'pato-oratoris': 3,
+    habitos: 4
+  };
+  for (const [id, count] of Object.entries(expectedCounts)) {
+    const card = page.locator('.comic-roster-card[data-creator-id="' + id + '"]');
+    await expect(card.locator('.comic-roster-social-badges .soc-icon')).toHaveCount(count);
+    await expect(card.locator('.comic-roster-card-tagline')).not.toBeEmpty();
+    await expect(card).not.toContainText('DIRECCIÓN');
+    await expect(card.locator('a')).toHaveCount(0);
+  }
+});
+
 test('la propuesta individual precarga el perfil en el formulario comercial seguro', async ({ page }) => {
   await page.goto('/');
   await page.evaluate(() => {
