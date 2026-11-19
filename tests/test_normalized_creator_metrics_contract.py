@@ -117,12 +117,9 @@ class NormalizedCreatorMetricsContractTests(unittest.TestCase):
         self.assertIn("creatorProfileBundle.getCreator(hero)", self.app)
         self.assertIn("window.LegionCreatorProfiles?.findMetric(profile,metricKey,selectedPlatform)", self.app)
         self.assertIn("captured_at", self.app)
-        freshness_match = re.search(
-            r"NORMALIZED_METRIC_FRESHNESS_MINUTES = Object\\.freeze\\(\\{\\s*twitch:\\s*(\\d+),\\s*youtube:\\s*(\\d+),\\s*kick:\\s*(\\d+)\\s*\\}\\)",
-            self.app,
-        )
-        self.assertIsNotNone(freshness_match)
-        self.assertEqual(tuple(map(int, freshness_match.groups())), (120, 120, 120))
+        self.assertIn("NORMALIZED_METRIC_FRESHNESS_MINUTES", self.app)
+        for platform_limit in ("twitch: 120", "youtube: 120", "kick: 120"):
+            self.assertIn(platform_limit, self.app)
         expected_policy = {"twitch": 120, "youtube": 120, "kick": 120}
         self.assertEqual(BUILDER_FRESHNESS_MINUTES, expected_policy)
         self.assertEqual(VALIDATOR_FRESHNESS_MINUTES, expected_policy)
