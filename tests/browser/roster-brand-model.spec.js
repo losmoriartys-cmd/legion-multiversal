@@ -53,7 +53,7 @@ test('las ocho fichas publican solo enlaces sociales confirmados y válidos', as
     await page.locator('.comic-roster-card[data-creator-id="' + id + '"]').click();
     const links = page.locator('#hero-profile-page .social-links a');
     await expect(links).toHaveCount(labels.length);
-    for (const label of labels) await expect(links).toContainText(label.toUpperCase());
+    for (const label of labels) await expect(links.filter({ hasText: label.toUpperCase() })).toHaveCount(1);
     if (id === 'rod3r1k') await expect(links.filter({ hasText: 'TODOS MIS ENLACES' })).toHaveAttribute('href', 'https://beacons.ai/ther0d3r1k');
     if (id === 'habitos') await expect(links.filter({ hasText: 'FACEBOOK' })).toHaveAttribute('href', /^https:\/\/www\.facebook\.com\//);
     await page.evaluate(() => closeHeroProfile());
