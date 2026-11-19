@@ -41,8 +41,9 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
     await expect(card).toContainText('VER PERFIL');
     await expect(card).not.toContainText(/Just Chatting|JUEGOS POR DOCUMENTAR/i);
     const expectedAudience = {'rod3r1k':'5.188','lady-moriarty':'180','akuma':'142','pato-oratoris':'56'};
+    await expect(card.locator('.comic-roster-stat')).toHaveCount(3);
     if (expectedAudience[creator.id]) await expect(card.locator('.comic-roster-stat-audience b')).toHaveText(expectedAudience[creator.id]);
-    else await expect(card.locator('.comic-roster-stat-audience')).toHaveCount(0);
+    else await expect(card.locator('.comic-roster-stat-audience b')).toHaveText('No informado');
 
     await card.click();
 
@@ -65,6 +66,8 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
       if (await gamesSection.count()) await expect(gamesSection).not.toContainText(/muestras|observaciones|Just Chatting/i);
     }
     await expect(dossier.locator('#profile-tab-perfil .hero-profile-brand')).toHaveCount(0);
+    await expect(dossier.locator('#profile-tab-perfil .hero-profile-brand-summary')).toBeVisible();
+    await expect(dossier.locator('#profile-tab-perfil .hero-profile-brand-slots article')).toHaveCount(3);
     await expect(page.locator('#roster-home')).toBeHidden();
     await expect(dossier).toContainText(creator.name);
     const profileTabs = dossier.locator('[role="tab"][data-profile-tab]');
@@ -106,6 +109,8 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
       if (await gamesSection.count()) await expect(gamesSection).not.toContainText(/muestras|observaciones|Just Chatting/i);
     }
     await expect(dossier.locator('#profile-tab-perfil .hero-profile-brand')).toHaveCount(0);
+    await expect(dossier.locator('#profile-tab-perfil .hero-profile-brand-summary')).toBeVisible();
+    await expect(dossier.locator('#profile-tab-perfil .hero-profile-brand-slots article')).toHaveCount(3);
     await profileTabs.filter({ hasText: 'CLIPS' }).click();
     expect(await dossier.locator('#profile-tab-clips .hero-profile-clip').count()).toBeLessThanOrEqual(4);
     await profileTabs.filter({ hasText: 'ESTADÍSTICAS' }).click();
@@ -120,11 +125,11 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
       expect(await source.locator('.stats-executive-metrics > div').count()).toBeGreaterThan(0);
       await expect(source).not.toContainText(/Sin métricas verificadas|Sin captura|Sin registro|No hay datos públicos cargados/i);
     }
-    await profileTabs.filter({ hasText: 'BITÁCORA' }).click();
+    await profileTabs.filter({ hasText: 'TRAYECTORIA' }).click();
     await expect(dossier.locator('#profile-tab-bitacora .hero-profile-brand')).toBeVisible();
     await expect(dossier.locator('#profile-tab-bitacora .hero-profile-internal-art')).toHaveCount(0);
     await expect(dossier.locator('#profile-tab-bitacora')).not.toContainText(/MUESTRAS/i);
-    await expect(dossier.locator('#profile-tab-bitacora')).toContainText('BITÁCORA');
+    await expect(dossier.locator('#profile-tab-bitacora')).toContainText('TRAYECTORIA');
     await expect(dossier.locator('.hero-profile-character-card-link button')).toHaveText(/VER CARTA COMPLETA/);
     if (['lady-moriarty','rod3r1k','akuma','habitos'].includes(creator.id)) {
       await expect(dossier.locator('#profile-tab-bitacora a[href*="lurkit.com"]')).toHaveCount(1);
@@ -146,7 +151,7 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
         ['PERFIL', 'perfil'],
         ['ESTADÍSTICAS', 'estadisticas'],
         ['CLIPS', 'clips'],
-        ['BITÁCORA', 'bitacora']
+        ['TRAYECTORIA', 'bitacora']
       ]) {
         await profileTabs.filter({ hasText: label }).click();
         await expect(dossier.locator('#profile-tab-' + panel)).toBeVisible();
@@ -154,7 +159,7 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
       }
       await profileTabs.filter({ hasText: 'PERFIL' }).focus();
       await page.keyboard.press('End');
-      await expect(profileTabs.filter({ hasText: 'BITÁCORA' })).toBeFocused();
+      await expect(profileTabs.filter({ hasText: 'TRAYECTORIA' })).toBeFocused();
       await page.keyboard.press('Home');
       await expect(profileTabs.filter({ hasText: 'PERFIL' })).toBeFocused();
     }

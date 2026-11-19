@@ -240,8 +240,12 @@ test.describe('Auditoría de métricas normalizadas del Roster', () => {
       'YOUTUBE · ESTADO NO APLICA',
       'YOUTUBE · ESTADO NO APLICA'
     ]);
-    await expect(page.locator('#profile-tab-perfil .hero-profile-normalized-summary')).toContainText('56');
-    await expect(page.locator('#profile-tab-perfil .hero-profile-normalized-summary')).toContainText('431');
+    const brandSummary = page.locator('#profile-tab-perfil .hero-profile-brand-summary');
+    await expect(brandSummary).toBeVisible();
+    await expect(brandSummary.locator('.hero-profile-brand-slots article')).toHaveCount(3);
+    await expect(brandSummary).toContainText('56');
+    await expect(brandSummary).toContainText('6');
+    await expect(brandSummary).toContainText('01/05/2025');
     await page.locator('[data-profile-tab="estadisticas"]').click();
     await expect(page.locator('#profile-tab-estadisticas .stats-executive-source')).toContainText('YOUTUBE · CANAL VINCULADO');
     await expect(page.locator('#profile-tab-estadisticas .stats-executive-source')).toContainText('56');
@@ -252,15 +256,18 @@ test.describe('Auditoría de métricas normalizadas del Roster', () => {
     const card = page.locator('.comic-roster-card[data-creator-id="moriartys"]');
     await expect(card.locator('.comic-roster-activity')).toHaveText('EN DIRECTO');
     await expect(card.locator('.roster-selector-tile-live')).toContainText('EN DIRECTO');
-    await expect(card.locator('.comic-roster-stat-average b')).toHaveText('10 espectadores');
+    await expect(card.locator('.comic-roster-stat-average b')).toHaveText('10');
 
     await card.click();
     await expect(page.locator('#hero-profile-page .hero-profile-live')).toHaveText([
       /EN DIRECTO.*19 VIENDO/,
       /EN DIRECTO.*19 VIENDO/
     ]);
-    await expect(page.locator('#profile-tab-perfil .hero-profile-normalized-summary')).toContainText('PROMEDIO DE ESPECTADORES');
-    await expect(page.locator('#profile-tab-perfil .hero-profile-normalized-summary')).toContainText('PICO OBSERVADO');
+    const brandSummary = page.locator('#profile-tab-perfil .hero-profile-brand-summary');
+    await expect(brandSummary).toBeVisible();
+    await expect(brandSummary.locator('.hero-profile-brand-slots article')).toHaveCount(3);
+    await expect(brandSummary).toContainText('Media de viewers');
+    await expect(brandSummary).toContainText('10');
     await page.locator('[data-profile-tab="estadisticas"]').click();
     const twitchSource = page.locator('#profile-tab-estadisticas .stats-executive-source').filter({ hasText: 'TWITCH · MÉTRICAS NORMALIZADAS' });
     await expect(twitchSource).toBeVisible();

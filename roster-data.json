@@ -99,7 +99,12 @@
       "role_label": "DIRECCIÓN",
       "schedule": "Lunes y miércoles 20:00 · viernes 21:00 (hora Argentina)",
       "fullbody": "Cyberpunk_Cyborg_Portrait-hay-muchas-que-dejaron-de-ser-animadas-la-idea-es.jpg",
-      "character_card": "assets/heroes/moriartys_dark.jpg"
+      "character_card": "assets/heroes/moriartys_dark.jpg",
+      "socials": {
+        "youtube": "https://www.youtube.com/@LosMoriartys",
+        "tiktok": "https://www.tiktok.com/@losmoriartys",
+        "instagram": "https://www.instagram.com/losmoriartys/"
+      }
     },
     {
       "name": "ROD3R1K",
@@ -170,7 +175,12 @@
           "notes": "El promedio y el pico son observaciones del muestreo propio, no analíticas oficiales ni el historial completo de transmisiones."
         }
       ],
-      "links": [],
+      "links": [
+        {
+          "platform": "link_hub",
+          "url": "https://beacons.ai/ther0d3r1k"
+        }
+      ],
       "mediaProfile": {
         "editorial": "Gaming y entretenimiento en directo, con una identidad expresiva y afinidad por experiencias de juego, acción, eventos y partidas compartidas. Los clips registrados permiten mostrar ejemplos concretos del tono del canal.",
         "formats": [
@@ -288,7 +298,12 @@
       "role_label": "CREADORA",
       "schedule": "1 a 2 veces por semana, sin horario fijo; mayormente 19:00–20:00 (hora Argentina)",
       "fullbody": "Red_Haired_Mystic_Witch-hay-muchas-que-dejaron-de-ser-animadas-la-idea-es.jpg",
-      "character_card": "assets/heroes/ladymoriarty_dark.jpg"
+      "character_card": "assets/heroes/ladymoriarty_dark.jpg",
+      "socials": {
+        "youtube": "https://www.youtube.com/@LosMoriartys",
+        "tiktok": "https://www.tiktok.com/@losmoriartys",
+        "instagram": "https://www.instagram.com/losmoriartys/"
+      }
     },
     {
       "name": "ARDIPII",
@@ -379,7 +394,12 @@
       "powers": "Especialidad: gaming cooperativo, cercanía con el chat e interacción en directo.",
       "schedule": "Martes y jueves 23:00 (hora Argentina)",
       "fullbody": "Hooded_Atomic_Figure-hay-muchas-que-dejaron-de-ser-animadas-la-idea-es.jpg",
-      "character_card": "assets/heroes/ardipii_dark.webp"
+      "character_card": "assets/heroes/ardipii_dark.webp",
+      "socials": {
+        "instagram": "https://www.instagram.com/_ardipii_/",
+        "tiktok": "https://www.tiktok.com/@ardipii",
+        "youtube": "https://www.youtube.com/@ArDiPi"
+      }
     },
     {
       "name": "AKUMA",
@@ -472,7 +492,12 @@
       "powers": "Especialidad: gaming, charlas y partidas compartidas con la comunidad; su rol docente aporta una dimensión de acompañamiento y aprendizaje.",
       "schedule": "Lunes a viernes 21:00 (hora Argentina)",
       "fullbody": "image_20261117_045605.jpg",
-      "character_card": "assets/heroes/akuma_dark.jpg"
+      "character_card": "assets/heroes/akuma_dark.jpg",
+      "socials": {
+        "instagram": "https://www.instagram.com/akuma.zoldyck/",
+        "youtube": "https://youtube.com/@akuma.zoldyck",
+        "tiktok": "https://www.tiktok.com/@akumazoldyck"
+      }
     },
     {
       "name": "DAVE — NEXUS",
@@ -779,7 +804,12 @@
       "powers": "Especialidad: gaming reflexivo, filosofía cotidiana y desarrollo de hábitos.",
       "schedule": "Lunes a sábado, por la mañana y por la tarde",
       "fullbody": "Sci_Fi_Superhero_Portrait-hay-muchas-que-dejaron-de-ser-animadas-la-idea-es.jpg",
-      "character_card": "assets/heroes/habitos_dark.webp"
+      "character_card": "assets/heroes/habitos_dark.webp",
+      "socials": {
+        "instagram": "https://www.instagram.com/masee_gaitan/",
+        "facebook": "https://www.facebook.com/share/1DZQcdu34M/",
+        "tiktok": "https://www.tiktok.com/@twitch..habitos_atomicos"
+      }
     }
   ],
   "identity_model_version": 1,

@@ -532,6 +532,7 @@ async function loadPlatformStatsData(){
   platformStatsData=bundle.platforms;
   renderStatsPlatformDirectory();
   renderRosterSelector();
+  refreshRosterMetricsViews();
  }catch(e){
   console.warn('Platform statistics unavailable:',e);
   const host=document.getElementById('stats-platform-grid');
@@ -1373,16 +1374,23 @@ function getCreatorAudienceMetric(hero){
  const account=(hero?.accounts||[]).find(item=>item.account_type==='creator_channel')||(hero?.accounts||[])[0]||null;
  if(!account)return null;
  if(account.platform==='youtube'){
-  const platform=platformStatsData?.creators?.[platformStatsKey(hero)]?.platforms?.youtube,value=platform?.metrics?.subscribers,captured=platformStatsData?.updated_at?new Date(platformStatsData.updated_at):null;
+  const platform=platformStatsData?.creators?.[platformStatsKey(hero)]?.platforms?.youtube,value=platform?.metrics?.subscribers;
+  const capturedAt=platform?.captured_at||platformStatsData?.updated_at||null;
+  const captured=capturedAt?new Date(capturedAt):null;
   const capturedLabel=captured&&!Number.isNaN(captured.getTime())?captured.toLocaleDateString('es-AR'):null;
-  return platform?.status==='verified'&&value!==null&&value!==undefined&&Number.isFinite(Number(value))?{value:Number(value),label:'Suscriptores · YouTube',source:'YouTube Data API',period:capturedLabel}:null;
+  return platform?.status==='verified'&&value!==null&&value!==undefined&&Number.isFinite(Number(value))
+   ?{value:Number(value),label:'Suscriptores · YouTube',source:'YouTube Data API v3',period:capturedLabel,asOf:capturedAt,kind:'verified_public'}:null;
  }
  if(account.platform==='twitch'){
   const login=String(account.login||(account.url||'').split('/').filter(Boolean).pop()||'').replace(/^@/,'').toLowerCase();
   const profile=twitchMetricsData?.channels?.[login],followers=profile?.metrics?.followers;
-  if(followers!==null&&followers!==undefined&&Number.isFinite(Number(followers)))return {value:Number(followers),label:'Seguidores · Twitch',source:'TwitchMetrics',period:profile.period_label||profile.period||null};
+  if(followers!==null&&followers!==undefined&&Number.isFinite(Number(followers)))
+   return {value:Number(followers),label:'Seguidores · Twitch',source:'TwitchMetrics',period:profile.period_label||profile.period||null,asOf:twitchMetricsData?.captured_at||null,kind:'third_party_reference'};
   const sully=findSullyChannel(hero),total=sully?.summary?.followers_total??sully?.annual_summary_2026?.followers_total;
-  if(total!==null&&total!==undefined&&Number.isFinite(Number(total)))return {value:Number(total),label:'Seguidores · Twitch',source:'SullyGnome',period:sully.period?.start_date&&sully.period?.end_date?statsDate(sully.period.start_date)+' — '+statsDate(sully.period.end_date):'Período informado por la fuente'};
+  if(total!==null&&total!==undefined&&Number.isFinite(Number(total))){
+   const asOf=sully.period?.end_date||null;
+   return {value:Number(total),label:'Seguidores · Twitch',source:'SullyGnome',period:sully.period?.start_date&&sully.period?.end_date?statsDate(sully.period.start_date)+' — '+statsDate(sully.period.end_date):'Período informado por la fuente',asOf,kind:'third_party_reference'};
+  }
  }
  return null;
 }
@@ -1395,6 +1403,55 @@ function getMostPlayedGames(hero,channel,sullyChannel){
  return [...new Set(observed.filter(item=>isGame(item?.name)&&Number(item.streams_observed)>0).sort((a,b)=>Number(b.streams_observed)-Number(a.streams_observed)||Number(b.live_samples)-Number(a.live_samples)).map(item=>item.name))].slice(0,6);
 }
 
+function getRosterBrandContext(hero, channel, account) {
+    const audience = getCreatorAudienceMetric(hero);
+    const declaredFollowers = Array.isArray(hero?.audience?.followers) ? hero.audience.followers : [];
+    const platform = account?.platform || null;
+    const followerEntries = declaredFollowers.length ? declaredFollowers : (audience ? [{
+        platform, count: audience.value, source: audience.source, as_of: audience.asOf || null, kind: audience.kind || 'reference'
+    }] : []);
+    const averageMetric = platform === 'twitch'
+        ? getNormalizedCreatorMetric(hero, 'average_viewers_sampled', 'twitch')
+        : null;
+    const youtube = platform === 'youtube'
+        ? platformStatsData?.creators?.[platformStatsKey(hero)]?.platforms?.youtube
+        : null;
+    const videosMetric = platform === 'youtube'
+        ? getNormalizedCreatorMetric(hero, 'videos_total', 'youtube')
+        : null;
+    const latestVideo = (Array.isArray(youtube?.recent_videos) ? youtube.recent_videos : [])
+        .filter(video => video && video.published_at && Number.isFinite(Date.parse(video.published_at)))
+        .sort((a, b) => Date.parse(b.published_at) - Date.parse(a.published_at))[0] || null;
+    const formatDate = value => {
+        if (!value || !Number.isFinite(Date.parse(value))) return null;
+        return new Date(value).toLocaleDateString('es-AR', { day: '2-digit', month: '2-digit', year: 'numeric', timeZone: 'UTC' });
+    };
+    return {
+        followers: followerEntries,
+        average: averageMetric?.state === 'available' ? averageMetric.value : null,
+        channel,
+        yt: {
+            videos_total: videosMetric?.state === 'available' ? videosMetric.value : null,
+            videos_source: videosMetric?.source || 'YouTube Data API v3',
+            last_published: latestVideo ? formatDate(latestVideo.published_at) : null
+        },
+        rhythm: platform === 'twitch' && window.LMBrand
+            ? window.LMBrand.computeRhythm(channel)
+            : null,
+        lastActivity: platform === 'twitch' && window.LMBrand
+            ? window.LMBrand.lastActivity(channel)
+            : null
+    };
+}
+function renderRosterBrandSlots(hero, context) {
+    if (!window.LMBrand?.cardSlots) return '';
+    const slots = window.LMBrand.cardSlots(hero, context);
+    return '<span class="comic-roster-brand-slots" aria-label="Datos comparables del canal">' +
+        slots.map(([label, value, detail], index) =>
+            '<span class="comic-roster-stat ' + (index === 0 ? 'comic-roster-stat-audience' : index === 1 ? 'comic-roster-stat-average' : 'comic-roster-stat-activity') + '"><span>' + escapeStatsHtml(label) + '</span><b>' + escapeStatsHtml(value) +
+            '</b><small>' + escapeStatsHtml(detail || '') + '</small></span>'
+        ).join('') + '</span>';
+}
 function renderRosterSelector() {
     const host = document.getElementById('roster-selector');
     if (!host || !Array.isArray(heroesData) || !heroesData.length) return;
@@ -1405,34 +1462,35 @@ function renderRosterSelector() {
         const liveStatus = getNormalizedLiveStatus(hero);
         const isLive = liveStatus.state === 'live';
         const channel = findChannelStats(hero);
-        const snapshots = Array.isArray(channel?.snapshots) ? channel.snapshots : [];
-        const lastLive = [...snapshots].reverse().find(sample => sample?.is_live && sample.sampled_at)?.sampled_at || null;
-        const lastLiveDate = lastLive ? new Date(lastLive).toLocaleDateString('es-AR',{day:'2-digit',month:'2-digit'}) : 'SIN REGISTRO';
-        const averageMetric = account?.platform === 'twitch' ? getNormalizedCreatorMetric(hero,'average_viewers_sampled','twitch') : null;
-        const audience=getCreatorAudienceMetric(hero);
-        const audienceHtml=audience?'<span class="comic-roster-stat comic-roster-stat-audience"><span>'+safe(audience.label)+'</span><b>'+safe(statsNumber(audience.value,0))+'</b><small>'+safe(audience.source+(audience.period?' · '+audience.period:''))+'</small></span>':'';
-        const averageText = normalizedMetricValue(averageMetric,1,' espectadores');
-        const averageHtml = account?.platform === 'twitch' ? '<span class="comic-roster-stat comic-roster-stat-average"><span>Media de viewers</span><b class="comic-roster-stat-purple">'+safe(averageText)+'</b></span>' : '';
-        const platformName=String(account?.platform||'CANAL').toUpperCase();
-        const games=getMostPlayedGames(hero,channel,findSullyChannel(hero));
-        const gameLabel=games.length?'<em>🎮 MÁS JUGADO · '+safe(games[0])+'</em>':hero.creator_type==='video_creator'?'<em>CONTENIDO EDUCATIVO</em>':'';
-        const specialties = (hero.areas || []).filter(Boolean).slice(0,3);
+        const brandContext = getRosterBrandContext(hero, channel, account);
+        const isVideo = account?.platform === 'youtube' || hero.creator_type === 'video_creator';
+        const rhythmLabel = isVideo ? 'RITMO: NO APLICA' : 'RITMO: ' + (brandContext.rhythm?.label || 'SIN DATOS SUFICIENTES');
+        const lastActivityDate = brandContext.lastActivity?.date
+            ? new Date(brandContext.lastActivity.date + 'T00:00:00Z').toLocaleDateString('es-AR', { day: '2-digit', month: '2-digit', timeZone: 'UTC' })
+            : null;
+        const platformName = String(account?.platform || 'CANAL').toUpperCase();
+        const typeLabel = isVideo ? 'CREADOR DE VIDEO' : hero.creator_type === 'live_streamer' ? 'CREADOR EN DIRECTO' : 'FORMATO POR CONFIRMAR';
+        const games = getMostPlayedGames(hero, channel, findSullyChannel(hero));
+        const gameLabel = games.length ? '<em>🎮 MÁS JUGADO · ' + safe(games[0]) + '</em>' : isVideo ? '<em>CONTENIDO EDUCATIVO</em>' : '';
+        const specialties = (hero.areas || []).filter(Boolean).slice(0, 3);
         const identity = hero.codename || hero.characterRole || 'INTEGRANTE DE LA LEGIÓN';
         const activityBadge = liveStatus.state === 'not_applicable' ? 'CONTENIDO · YOUTUBE' : liveStatus.label;
         const liveBadge = isLive ? '<span class="roster-selector-tile-live">● EN DIRECTO</span>' : '';
-        return '<button type="button" class="roster-selector-tile comic-roster-card" data-roster-select="' + index + '" data-creator-id="' + safe(hero.id || hero.slug) + '" data-roster-role="' + safe(hero.role || 'member') + '" aria-label="Abrir Bitácora de ' + safe(getHeroDisplayName(hero)) + '">' +
+        return '<button type="button" class="roster-selector-tile comic-roster-card" data-roster-select="' + index + '" data-creator-id="' + safe(hero.id || hero.slug) + '" data-roster-role="' + safe(hero.role || 'member') + '" aria-label="Abrir expediente de ' + safe(getHeroDisplayName(hero)) + '">' +
           '<span class="comic-roster-photo">' +
-            (hero.portrait ? '<img src="' + safe(hero.portrait) + '" alt="Fotografía carnet de ' + safe(getHeroDisplayName(hero)) + '" loading="' + (index < 4 ? 'eager' : 'lazy') + '" decoding="async">' : '<span class="roster-selector-no-portrait">' + safe((hero.display_name || hero.name || '?').slice(0,1)) + '</span>') +
+            (hero.portrait ? '<img src="' + safe(hero.portrait) + '" alt="Fotografía carnet de ' + safe(getHeroDisplayName(hero)) + '" loading="' + (index < 4 ? 'eager' : 'lazy') + '" decoding="async">' : '<span class="roster-selector-no-portrait">' + safe((hero.display_name || hero.name || '?').slice(0, 1)) + '</span>') +
             '<span class="comic-roster-photo-shade"></span><span class="comic-roster-photo-copy"><small>' + safe(identity) + '</small><strong>' + safe(getHeroDisplayName(hero)) + '</strong>' + gameLabel + '</span>' + liveBadge +
           '</span>' +
-          '<span class="comic-roster-card-data"><span class="comic-roster-badges"><b class="comic-roster-frequency">RITMO: EN SEGUIMIENTO</b><b class="comic-roster-activity">' + safe(activityBadge) + '</b></span>' +
-            (lastLive ? '<span class="comic-roster-last-live">ÚLTIMA ACTIVIDAD OBSERVADA: ' + safe(lastLiveDate) + '</span>' : '') +
-            audienceHtml + averageHtml +
-            '<span class="comic-roster-games">' + (specialties.length ? specialties.map(item => '<i>' + safe(item) + '</i>').join('') : '<i>Especialidad en desarrollo</i>') + '</span>' +
-            '<span class="comic-roster-card-footer"><small>' + safe(hero.role_label || platformName) + '</small><strong>VER PERFIL →</strong></span></span>' +
+          '<span class="comic-roster-card-data"><span class="comic-roster-badges"><b class="comic-roster-frequency">' + safe(rhythmLabel) + '</b><b class="comic-roster-activity">' + safe(activityBadge) + '</b><b class="comic-roster-type">' + safe(typeLabel) + '</b></span>' +
+            (lastActivityDate ? '<span class="comic-roster-last-live">ÚLTIMO DIRECTO OBSERVADO: ' + safe(lastActivityDate) + '</span>' : '') +
+            renderRosterBrandSlots(hero, brandContext) +
+            '<span class="comic-roster-games">' + (specialties.length ? specialties.map(item => '<i>' + safe(item) + '</i>').join('') : '<i>Especialidad por confirmar</i>') + '</span>' +
+            (hero.tagline ? '<span class="comic-roster-card-tagline">' + safe(hero.tagline) + '</span>' : '') +
+            (window.LMSocial?.renderSocialIcons ? window.LMSocial.renderSocialIcons(hero) : '') +
+            '<span class="comic-roster-card-footer"><strong>VER PERFIL →</strong></span></span>' +
         '</button>';
     }).join('');
-    host.innerHTML = '<div class="comic-roster-heading"><span>ARCHIVO CENTRAL · CAPÍTULO 03</span><h2>LAS PERSONAS DETRÁS DE LA LEGIÓN</h2><p>Ocho identidades. Una misma Legión. Cada carta abre directamente su Bitácora.</p></div><div class="comic-roster-grid" role="list" aria-label="Los ocho integrantes de Legión Multiversal">' + cards + '</div>';
+    host.innerHTML = '<div class="comic-roster-heading"><span>ARCHIVO CENTRAL · CAPÍTULO 03</span><h2>LAS PERSONAS DETRÁS DE LA LEGIÓN</h2><p>Ocho identidades. Una misma Legión. Cada carta abre directamente su expediente.</p></div><div class="comic-roster-grid" role="list" aria-label="Los ocho integrantes de Legión Multiversal">' + cards + '</div>';
     host.querySelectorAll('[data-roster-select]').forEach(button => {
         button.addEventListener('click', event => openHeroProfile(Number(button.dataset.rosterSelect), event.currentTarget));
     });
@@ -1450,6 +1508,10 @@ function refreshRosterMetricsViews(){
  const channel=findChannelStats(hero),sully=findSullyChannel(hero);
  const profile=page.querySelector('#profile-tab-perfil .hero-profile-overview');
  if(profile){
+  const brand=profile.querySelector('.hero-profile-brand-summary');
+  const brandMarkup=renderHeroBrandSummary(hero);
+  if(brand)brand.outerHTML=brandMarkup;
+  else profile.insertAdjacentHTML('beforeend',brandMarkup);
   const games=getMostPlayedGames(hero,channel,sully),markup=games.length?'<section class="hero-profile-integrated-games"><h4>JUEGOS Y RITMO</h4><div class="hero-profile-game-grid">'+games.map(name=>'<article><strong>'+escapeStatsHtml(name)+'</strong></article>').join('')+'</div></section>':'';
   const current=profile.querySelector('.hero-profile-integrated-games');
   if(current)current.outerHTML=markup;
@@ -1553,16 +1615,8 @@ function renderCommercialQuickView(hero) {
     return out;
 }
 function renderCreatorPlatformLinks(hero) {
-    const labels = { twitch: 'TWITCH', youtube: 'YOUTUBE', instagram: 'INSTAGRAM', tiktok: 'TIKTOK', discord: 'DISCORD', kick: 'KICK', x: 'X', twitter: 'X', facebook: 'FACEBOOK', cafecito: 'CAFECITO' };
-    const accounts = Array.isArray(hero.accounts) ? hero.accounts : [];
-    const links = accounts.filter(account => labels[account.platform] && account.url).concat((hero.links||[]).filter(link=>labels[link.platform]&&link.url).map(link=>({platform:link.platform,url:link.url})));
-    if (!links.length) {
-        [['twitch','TWITCH'],['youtube','YOUTUBE'],['instagram','INSTAGRAM']].forEach(([key]) => {
-            if (hero[key]) links.push({ platform:key, url:hero[key] });
-        });
-    }
-    const uniqueLinks=links.filter((account,index)=>links.findIndex(candidate=>candidate.platform===account.platform&&candidate.url===account.url)===index);
-    return uniqueLinks.map(account => '<a class="btn-link" href="' + escapeStatsHtml(account.url) + '" target="_blank" rel="noopener noreferrer">' + labels[account.platform] + ' ↗</a>').join('');
+    if (window.LMSocial?.renderSocialButtons) return window.LMSocial?.renderSocialButtons(hero) || '';
+    return '';
 }
 
 function getHeroRosterSlug(hero) {
@@ -1590,6 +1644,36 @@ function showRosterChapter() {
     if (!chapter.classList.contains('active')) switchChapter(2, { skipHistory: true });
 }
 
+function renderHeroBrandSummary(hero) {
+ const safe=escapeStatsHtml;
+ const account=(hero?.accounts||[]).find(item=>item.account_type==='creator_channel')||(hero?.accounts||[])[0]||null;
+ const channel=findChannelStats(hero);
+ const context=getRosterBrandContext(hero,channel,account);
+ const slots=window.LMBrand?.cardSlots?window.LMBrand.cardSlots(hero,context):[];
+ const isVideo=account?.platform==='youtube'||hero?.creator_type==='video_creator';
+ const typeLabel=isVideo?'Creador de video':hero?.creator_type==='live_streamer'?'Creador en directo':'Formato por confirmar';
+ const rhythm=context.rhythm?.label||(isVideo?'No aplica':'Sin datos suficientes');
+ const activity=context.lastActivity?.date?new Date(context.lastActivity.date+'T00:00:00Z').toLocaleDateString('es-AR',{day:'2-digit',month:'2-digit',year:'numeric',timeZone:'UTC'}):'Sin actividad observada';
+ const metadata=[
+  ['FORMATO',typeLabel],
+  ['PLATAFORMA',String(account?.platform||'No informada').toUpperCase()],
+  ['RITMO',rhythm],
+  ['ÚLTIMA ACTIVIDAD',isVideo?(context.yt.last_published||'Sin fecha pública'):activity]
+ ];
+ if(hero.schedule)metadata.push(['HORARIO DECLARADO',hero.schedule]);
+ if(hero.language)metadata.push(['IDIOMA',hero.language]);
+ if(hero.country)metadata.push(['PAÍS',hero.country]);
+ if(hero.availability)metadata.push(['DISPONIBILIDAD',hero.availability]);
+ if(hero.content_notes)metadata.push(['NOTAS DE CONTENIDO',hero.content_notes]);
+ const audienceFit=hero.mediaProfile?.audience_fit?'<p class="hero-profile-audience-fit"><strong>ENCAJE DE AUDIENCIA</strong>'+safe(hero.mediaProfile.audience_fit)+'</p>':'';
+ const creatorName=getHeroDisplayName(hero);
+ const contactCta='<a class="hero-profile-collab-cta" href="#brand-proposal" data-creator-proposal="'+safe(creatorName)+'">PROPONER UNA COLABORACIÓN CON '+safe(creatorName)+' ↗</a>';
+ return '<section class="hero-profile-brand-summary" aria-label="Ficha ejecutiva para marcas"><div class="hero-profile-brand-summary-head"><small>FICHA PARA MARCAS</small><h4>DATOS COMPARABLES DEL CANAL</h4></div>'+
+  '<div class="hero-profile-brand-slots">'+slots.map(([label,value,detail])=>'<article><small>'+safe(label)+'</small><strong>'+safe(value)+'</strong><span>'+safe(detail||'')+'</span></article>').join('')+'</div>'+
+  '<dl class="hero-profile-brand-meta">'+metadata.map(([label,value])=>'<div><dt>'+safe(label)+'</dt><dd>'+safe(value)+'</dd></div>').join('')+'</dl>'+
+  audienceFit+contactCta+
+  '<p class="hero-profile-brand-method">Las referencias de seguidores conservan su fuente y fecha. La media de espectadores y el ritmo se calculan sobre capturas propias; los días activos detectados son un piso, porque el muestreo puede no registrar directos breves.</p></section>';
+}
 function renderHeroProfileTabs(hero) {
  const safe=escapeStatsHtml,record=getCreatorRecord(hero),channel=findChannelStats(hero),sullyChannel=findSullyChannel(hero);
  const clips=twitchClipsData?.creators?.[creatorRecordKey(hero)]?.clips||[];
@@ -1601,14 +1685,14 @@ function renderHeroProfileTabs(hero) {
  const ratingHtml=ratingDefinitions.map(([label,key])=>{const raw=profileRatings[key]??profileRatings[label]??null;const value=raw==null?null:Number(raw);const valid=Number.isFinite(value)&&value>=0&&value<=100;return '<div class="comic-profile-rating"><div><strong>'+label+'</strong><b>'+(valid?Math.round(value):'—')+'</b></div><div class="comic-profile-rating-track" role="meter" aria-label="'+label+'" aria-valuemin="0" aria-valuemax="100"'+(valid?' aria-valuenow="'+Math.round(value)+'"':'')+'><span style="width:'+(valid?Math.round(value):0)+'%"></span></div></div>';}).join('');
  const accountForAction=(hero.accounts||[]).find(item=>item.account_type==='creator_channel')||(hero.accounts||[])[0]||null;
  const profileChannelUrl=accountForAction?.url||hero.twitch||hero.youtube||'';
- const overview='<div class="hero-profile-overview"><p class="hero-profile-bio">'+safe(hero.bio||'Presentación personal pendiente de completar.')+'</p>'+gameHtml+'<section class="hero-profile-normalized-section"><h4>RESUMEN DE MÉTRICAS</h4>'+renderRosterMetricSummary(hero)+'</section></div>'
+ const overview='<div class="hero-profile-overview"><p class="hero-profile-bio">'+safe(hero.bio||'Presentación personal pendiente de completar.')+'</p>'+renderHeroBrandSummary(hero)+gameHtml+'</div>'
  const clipsHtml=clips.length?'<div class="hero-profile-clips-grid">'+clips.slice(0,4).map(clip=>'<article class="hero-profile-clip">'+(clip.thumbnail_url?'<a href="'+safe(clip.url)+'" target="_blank" rel="noopener noreferrer"><img src="'+safe(clip.thumbnail_url)+'" alt="" loading="lazy"></a>':'')+'<div><strong>'+safe(clip.title||'Clip destacado')+'</strong><small>'+safe(statsNumber(clip.view_count,0))+' visualizaciones · '+safe(clip.creator_name||'Creador')+'</small><a href="'+safe(clip.url)+'" target="_blank" rel="noopener noreferrer">VER CLIP ↗</a></div></article>').join('')+'</div>':'<p class="hero-profile-empty">'+(twitchClipsLoadError?'No se pudo cargar la captura de clips.':'Todavía no hay clips públicos disponibles para este canal en la ventana consultada.')+'</p>';
  const entries=[...(record.milestones||[]),...(record.collaborations||[])];
  const logHtml=entries.length?'<ul class="hero-profile-detail-list">'+entries.map(x=>'<li><strong>'+safe(x.title||'Registro')+'</strong><span>'+safe(x.description||'')+(x.url?' · <a href="'+safe(x.url)+'" target="_blank" rel="noopener noreferrer">'+(String(x.title||'').toLowerCase().includes('acceso a keys')?'ABRIR PLATAFORMA ↗':'Fuente ↗')+'</a>':'')+(x.source?'<small>FUENTE · '+safe(x.source)+'</small>':'')+'</span></li>').join('')+'</ul>':'<p class="hero-profile-empty">La bitácora individual todavía no tiene hitos o colaboraciones documentados.</p>';
  const editorial=hero.mediaProfile||{},formats=editorial.formats||hero.areas||[];
  const brandHtml='<div class="hero-profile-brand"><h4>IDENTIDAD Y PROPUESTA EDITORIAL</h4><p>'+safe(editorial.editorial||hero.bio||'Descripción comercial pendiente de completar.')+'</p><h4>TERRITORIOS Y ESPECIALIDADES</h4>'+(formats.length?'<ul class="hero-profile-detail-list">'+formats.map(x=>'<li><strong>'+safe(x)+'</strong></li>').join('')+'</ul>':'<p class="hero-profile-empty">Especialidades pendientes de confirmar.</p>')+'<h4>FORMATOS Y OPORTUNIDADES</h4>'+(editorial.opportunities?.length?'<ul class="hero-profile-detail-list">'+editorial.opportunities.map(x=>'<li><strong>'+safe(x)+'</strong></li>').join('')+'</ul>':'<p class="hero-profile-empty">Formatos por conversar con el creador.</p>')+'<p class="hero-profile-method">'+safe(editorial.disclaimer||'Oportunidades potenciales; no campañas contratadas.')+'</p>'+'</div>';
- const tabs=[['perfil','PERFIL'],['estadisticas','ESTADÍSTICAS'],['clips','CLIPS'],['bitacora','BITÁCORA']];
- const panels=['<section class="hero-profile-tab-panel is-active" id="profile-tab-perfil" role="tabpanel">'+overview+'</section>','<section class="hero-profile-tab-panel" id="profile-tab-estadisticas" role="tabpanel" hidden><h4>ESTADÍSTICAS · RENDIMIENTO</h4>'+renderStatsDashboard(hero,channel,sullyChannel)+'</section>','<section class="hero-profile-tab-panel" id="profile-tab-clips" role="tabpanel" hidden><h4>CLIPS DESTACADOS · MÁXIMO 4</h4>'+clipsHtml+'</section>','<section class="hero-profile-tab-panel" id="profile-tab-bitacora" role="tabpanel" hidden><h4>BITÁCORA · TRAYECTORIA Y COLABORACIONES</h4>'+logHtml+brandHtml+((hero.id==='moriartys'||hero.id==='rod3r1k')?'<section class="hero-profile-epic-codes"><h4>CÓDIGO DE CREADOR · EPIC GAMES</h4><div data-epic-profile-code="'+hero.id+'">'+renderEpicCreatorCodeCard(hero.id==='moriartys'?'moriartys':'rod3r1k','roster-profile')+'</div></section>':'')+'</section>'].join('');
+ const tabs=[['perfil','PERFIL'],['estadisticas','ESTADÍSTICAS'],['clips','CLIPS'],['bitacora','TRAYECTORIA']];
+ const panels=['<section class="hero-profile-tab-panel is-active" id="profile-tab-perfil" role="tabpanel">'+overview+'</section>','<section class="hero-profile-tab-panel" id="profile-tab-estadisticas" role="tabpanel" hidden><h4>ESTADÍSTICAS · RENDIMIENTO</h4>'+renderStatsDashboard(hero,channel,sullyChannel)+'</section>','<section class="hero-profile-tab-panel" id="profile-tab-clips" role="tabpanel" hidden><h4>CLIPS DESTACADOS · MÁXIMO 4</h4>'+clipsHtml+'</section>','<section class="hero-profile-tab-panel" id="profile-tab-bitacora" role="tabpanel" hidden><h4>TRAYECTORIA · HITOS Y COLABORACIONES</h4>'+logHtml+brandHtml+((hero.id==='moriartys'||hero.id==='rod3r1k')?'<section class="hero-profile-epic-codes"><h4>CÓDIGO DE CREADOR · EPIC GAMES</h4><div data-epic-profile-code="'+hero.id+'">'+renderEpicCreatorCodeCard(hero.id==='moriartys'?'moriartys':'rod3r1k','roster-profile')+'</div></section>':'')+'</section>'].join('');
  return '<div class="hero-profile-tabs-wrap"><div class="hero-profile-tabs" role="tablist" aria-label="Secciones del perfil">'+tabs.map(([id,label],i)=>'<button type="button" class="hero-profile-tab'+(i===0?' is-active':'')+'" role="tab" aria-selected="'+(i===0?'true':'false')+'" aria-controls="profile-tab-'+id+'" tabindex="'+(i===0?'0':'-1')+'" data-profile-tab="'+id+'">'+label+'</button>').join('')+'</div>'+panels+'</div>';
 }
 function activateHeroProfileTab(button){const wrap=button.closest('.hero-profile-tabs-wrap');if(!wrap)return;if(button.dataset.profileTab==='bitacora')recordLegionProgress('bitacora');wrap.querySelectorAll('[data-profile-tab]').forEach(tab=>{const active=tab===button;tab.classList.toggle('is-active',active);tab.setAttribute('aria-selected',active?'true':'false');tab.tabIndex=active?0:-1;});wrap.querySelectorAll('.hero-profile-tab-panel').forEach(panel=>{const active=panel.id==='profile-tab-'+button.dataset.profileTab;panel.hidden=!active;panel.classList.toggle('is-active',active);});}
@@ -1633,7 +1717,12 @@ function openHeroProfile(index, triggerElement = document.activeElement, options
     const liveBadge = '<span class="hero-profile-live ' + (isLive ? 'is-live' : 'is-unknown') + '">' + (isLive ? '● EN DIRECTO' + liveViewersLabel : escapeStatsHtml(liveStatus.label)) + '</span>';
     const portrait = hero.portrait || hero.img || '';
     const socials = renderCreatorPlatformLinks(hero);
-    const rhythm = 'EN SEGUIMIENTO';
+    const profileAccount = (hero.accounts || []).find(item => item.account_type === 'creator_channel') || (hero.accounts || [])[0] || null;
+    const profileChannel = findChannelStats(hero);
+    const profileRhythm = profileAccount?.platform === 'twitch' && window.LMBrand
+        ? window.LMBrand.computeRhythm(profileChannel).label
+        : profileAccount?.platform === 'youtube' ? 'NO APLICA · VIDEO' : 'SIN DATOS SUFICIENTES';
+    const rhythm = profileRhythm;
     const account = (hero.accounts || []).find(item => item.account_type === 'creator_channel') || (hero.accounts || [])[0] || null;
     const channelUrl = account?.url || hero.twitch || hero.youtube || '';
     const channelCta = channelUrl ? '<a class="comic-profile-channel-cta" href="' + escapeStatsHtml(channelUrl) + '" target="_blank" rel="noopener noreferrer">' + (isLive ? '● VER CANAL EN VIVO ↗' : 'VER CANAL ↗') + '</a>' : '';
@@ -2239,7 +2328,7 @@ function printHeroDossier(){
             const add = (key, loader) => jobs.push(loadResourceOnce(key, loader));
 
             // Inicio y central EN VIVO: solo necesitan el estado público resumido.
-            if ([0, 3, 10].includes(Number(chapterNum))) add('institute-stats', loadInstituteStats);
+            if ([0, 2, 3, 10].includes(Number(chapterNum))) add('institute-stats', loadInstituteStats);
 
             // Roster, estadísticas y mapa comparten las fuentes de perfiles y métricas.
             if ([2, 3, 13].includes(Number(chapterNum))) {

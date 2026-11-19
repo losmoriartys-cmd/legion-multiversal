@@ -68,9 +68,18 @@
   document.addEventListener("click", (event) => {
     const link = event.target.closest('a[href="#brand-proposal"]');
     if (!link) return;
+    const creatorName = link.dataset.creatorProposal || "";
     event.preventDefault();
     if (typeof window.switchChapter === "function") window.switchChapter(6);
-    window.setTimeout(() => document.getElementById("brand-proposal")?.scrollIntoView({ behavior: "smooth", block: "start" }), 80);
+    if (typeof window.setRecruitmentMode === "function") window.setRecruitmentMode("brand");
+    window.setTimeout(() => {
+      const details = document.getElementById("brand-details");
+      if (creatorName && details && !details.value.trim()) {
+        details.value = "Perfil de interés: " + creatorName + "\n\n";
+      }
+      document.getElementById("brand-proposal")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      if (creatorName && details) details.focus({ preventScroll: true });
+    }, 80);
   });
   if (window.location.hash === "#brand-proposal") {
     window.setTimeout(() => {

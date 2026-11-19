@@ -1,0 +1,29 @@
+/* Legión Multiversal · botones sociales accesibles, lenguaje gráfico de cómic. */
+#chapter-2 .social-links { display:flex; flex-wrap:wrap; gap:8px; }
+#chapter-2 .social-links .soc {
+  display:inline-flex; align-items:center; gap:8px; min-height:42px; padding:7px 11px;
+  border:2px solid #111; border-radius:0; background:#fff; color:#111;
+  box-shadow:3px 3px 0 #111; font:900 .72rem/1 'Roboto Condensed',sans-serif;
+  letter-spacing:.04em; text-decoration:none; transition:transform .12s,box-shadow .12s;
+}
+#chapter-2 .social-links .soc:hover { transform:translate(-1px,-1px); box-shadow:4px 4px 0 #111; }
+#chapter-2 .social-links .soc:focus-visible { outline:4px solid #1e4bff; outline-offset:3px; }
+#chapter-2 .social-links .soc-ic {
+  display:grid; place-items:center; flex:0 0 25px; width:25px; height:25px;
+  border:2px solid #111; background:#111; color:#fff; font-size:.62rem;
+}
+#chapter-2 .social-links .soc-twitch .soc-ic { background:#6a1bff; }
+#chapter-2 .social-links .soc-youtube .soc-ic { background:#e11d2e; }
+#chapter-2 .social-links .soc-instagram .soc-ic { background:linear-gradient(45deg,#f9a825,#e1306c 55%,#833ab4); }
+#chapter-2 .social-links .soc-tiktok .soc-ic { background:#0b0b0b; }
+#chapter-2 .social-links .soc-facebook .soc-ic { background:#1877f2; }
+#chapter-2 .social-links .soc-link_hub .soc-ic { background:#b58b38; color:#111; }
+@media(max-width:760px) {
+  #chapter-2 .hero-profile-reference-layout.comic-profile-layout { grid-template-columns:minmax(0,1fr); }
+  #chapter-2 .comic-profile-sidebar { position:static; border-right:0; border-bottom:3px solid #080808; }
+  #chapter-2 .hero-profile-id-image { min-height:0; }
+  #chapter-2 .hero-profile-id-image > img { height:auto; max-height:560px; aspect-ratio:4/5; object-fit:cover; object-position:center 18%; }
+}
+@media(prefers-reduced-motion:reduce) {
+  #chapter-2 .social-links .soc { transition:none; }
+}

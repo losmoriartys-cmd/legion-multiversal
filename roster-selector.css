@@ -833,3 +833,77 @@
     font-size:clamp(.82rem,1.15vw,1.12rem);
     line-height:1.15;
 }
+
+/* Roster · tres filas fijas y comparables para cualquier plataforma. */
+#chapter-2 .comic-roster-brand-slots { display:grid; gap:0; min-width:0; }
+#chapter-2 .comic-roster-brand-slots .comic-roster-stat {
+  display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:baseline;
+  gap:3px 10px; min-width:0; min-height:48px; padding:7px 8px;
+  border:1px solid rgba(0,0,0,.2); border-bottom:0; background:#fff; color:#171717;
+}
+#chapter-2 .comic-roster-brand-slots .comic-roster-stat:last-child { border-bottom:1px solid rgba(0,0,0,.2); }
+#chapter-2 .comic-roster-brand-slots .comic-roster-stat > span {
+  font-size:.66rem; font-weight:900; line-height:1.2; overflow-wrap:anywhere;
+}
+#chapter-2 .comic-roster-brand-slots .comic-roster-stat > b {
+  font-size:.9rem; font-weight:1000; text-align:right; font-variant-numeric:tabular-nums;
+}
+#chapter-2 .comic-roster-brand-slots .comic-roster-stat > small {
+  grid-column:1/-1; color:#625b50; font-size:.56rem; line-height:1.25; overflow-wrap:anywhere;
+}
+#chapter-2 .comic-roster-type { background:#d9e9f4; color:#122438; }
+#chapter-2 .comic-roster-frequency { max-width:100%; overflow-wrap:anywhere; }
+#chapter-2 .comic-roster-last-live { background:#1e4bff; }
+#chapter-2 .hero-profile-brand-summary {
+  margin:16px 0 20px; padding:14px; border:2px solid #111; background:#fffdf5; color:#171717;
+  box-shadow:4px 4px 0 #111;
+}
+#chapter-2 .hero-profile-brand-summary-head small { color:#7c5b1b; font-size:.65rem; font-weight:900; letter-spacing:.12em; }
+#chapter-2 .hero-profile-brand-summary-head h4 { margin:4px 0 10px; color:#111; font:1.4rem 'Bangers',Impact,sans-serif; letter-spacing:.05em; }
+#chapter-2 .hero-profile-brand-slots { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; }
+#chapter-2 .hero-profile-brand-slots article { display:flex; flex-direction:column; gap:5px; min-width:0; padding:10px; border:1px solid #b5aa95; background:#fff; }
+#chapter-2 .hero-profile-brand-slots small { color:#725b2d; font-size:.62rem; font-weight:900; }
+#chapter-2 .hero-profile-brand-slots strong { color:#111; font-size:1.16rem; line-height:1.1; overflow-wrap:anywhere; }
+#chapter-2 .hero-profile-brand-slots span { color:#5d5a52; font-size:.66rem; line-height:1.35; overflow-wrap:anywhere; }
+#chapter-2 .hero-profile-brand-meta { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px 12px; margin-top:12px; }
+#chapter-2 .hero-profile-brand-meta div { padding-top:7px; border-top:1px solid #d1c6b1; min-width:0; }
+#chapter-2 .hero-profile-brand-meta dt { color:#765c25; font-size:.62rem; font-weight:900; letter-spacing:.04em; }
+#chapter-2 .hero-profile-brand-meta dd { color:#171717; font-size:.78rem; line-height:1.4; overflow-wrap:anywhere; }
+#chapter-2 .hero-profile-audience-fit { margin-top:12px; color:#28251f; font-size:.82rem; line-height:1.5; }
+#chapter-2 .hero-profile-audience-fit strong { display:block; margin-bottom:4px; color:#765c25; font-size:.64rem; letter-spacing:.08em; }
+#chapter-2 .hero-profile-collab-cta { display:inline-flex; justify-content:center; margin-top:14px; padding:11px 14px; border:2px solid #111; background:#d71932; color:#fff; box-shadow:3px 3px 0 #111; font-size:.75rem; font-weight:900; text-decoration:none; }
+#chapter-2 .hero-profile-brand-method { margin-top:12px; color:#696358; font-size:.66rem; line-height:1.45; }
+@media(max-width:760px) {
+  #chapter-2 .hero-profile-brand-slots { grid-template-columns:1fr; }
+  #chapter-2 .hero-profile-brand-meta { grid-template-columns:1fr; }
+  #chapter-2 .comic-profile-head { grid-template-columns:minmax(0,1fr); }
+  #chapter-2 .comic-profile-head-right { justify-content:flex-start; }
+}
+@media(max-width:420px) {
+  #chapter-2 .comic-roster-brand-slots .comic-roster-stat { grid-template-columns:minmax(0,1fr); gap:2px; }
+  #chapter-2 .comic-roster-brand-slots .comic-roster-stat > b { text-align:left; }
+}
+
+/* Roster comercial · la carta comunica propuesta y canales, no jerarquía interna. */
+#chapter-2 .comic-roster-card-tagline {
+  color:#3f4650; font-size:.7rem; line-height:1.35; font-weight:650;
+  min-height:2.7em; display:-webkit-box; -webkit-box-orient:vertical;
+  -webkit-line-clamp:2; overflow:hidden;
+}
+#chapter-2 .comic-roster-social-badges {
+  display:flex; flex-wrap:wrap; align-items:center; gap:6px; min-height:30px;
+}
+#chapter-2 .comic-roster-social-badges .soc-icon {
+  display:inline-grid; place-items:center; width:27px; height:27px;
+  border:2px solid #111; background:#111; color:#fff;
+  font-size:.58rem; font-weight:1000; line-height:1;
+}
+#chapter-2 .comic-roster-social-badges .soc-icon-twitch { background:#6a1bff; }
+#chapter-2 .comic-roster-social-badges .soc-icon-youtube { background:#e11d2e; }
+#chapter-2 .comic-roster-social-badges .soc-icon-instagram { background:linear-gradient(45deg,#f9a825,#e1306c 55%,#833ab4); }
+#chapter-2 .comic-roster-social-badges .soc-icon-tiktok { background:#0b0b0b; }
+#chapter-2 .comic-roster-social-badges .soc-icon-facebook { background:#1877f2; }
+#chapter-2 .comic-roster-social-badges .soc-icon-cafecito { background:#b23a52; }
+#chapter-2 .comic-roster-social-badges .soc-icon-link_hub { background:#b58b38; color:#111; }
+#chapter-2 .comic-roster-card-footer { justify-content:flex-end; }
+#chapter-2 .comic-roster-card-footer strong { margin-left:auto; }

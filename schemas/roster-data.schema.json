@@ -168,7 +168,8 @@
             }
           },
           "links": {
-            "type": "array"
+            "type": "array",
+            "description": "Enlaces complementarios y agregadores de perfiles (por ejemplo, Beacons con platform=link_hub); no sustituye las redes sociales directas."
           },
           "tagline": {
             "type": "string",
@@ -184,6 +185,38 @@
             "type": "string",
             "minLength": 1,
             "description": "Descripción pública de especialidades narrativas o creativas."
+          },
+          "socials": {
+            "type": "object",
+            "description": "Perfiles sociales confirmados y directos. Beacons u otros hubs agregadores se registran en links, no aquí.",
+            "properties": {
+              "twitch": {
+                "type": "string",
+                "format": "uri",
+                "pattern": "^https://(www[.])?twitch[.]tv/"
+              },
+              "youtube": {
+                "type": "string",
+                "format": "uri",
+                "pattern": "^https://((www[.])?youtube[.]com|youtu[.]be)/"
+              },
+              "instagram": {
+                "type": "string",
+                "format": "uri",
+                "pattern": "^https://(www[.])?instagram[.]com/"
+              },
+              "tiktok": {
+                "type": "string",
+                "format": "uri",
+                "pattern": "^https://(www[.])?tiktok[.]com/"
+              },
+              "facebook": {
+                "type": "string",
+                "format": "uri",
+                "pattern": "^https://(www[.])?facebook[.]com/"
+              }
+            },
+            "additionalProperties": false
           }
         }
       }
