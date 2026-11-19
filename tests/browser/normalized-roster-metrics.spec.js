@@ -263,8 +263,11 @@ test.describe('Auditoría de métricas normalizadas del Roster', () => {
       /EN DIRECTO.*19 VIENDO/,
       /EN DIRECTO.*19 VIENDO/
     ]);
-    await expect(page.locator('#profile-tab-perfil .hero-profile-normalized-summary')).toContainText('PROMEDIO DE ESPECTADORES');
-    await expect(page.locator('#profile-tab-perfil .hero-profile-normalized-summary')).toContainText('PICO OBSERVADO');
+    const brandSummary = page.locator('#profile-tab-perfil .hero-profile-brand-summary');
+    await expect(brandSummary).toBeVisible();
+    await expect(brandSummary.locator('.hero-profile-brand-slots article')).toHaveCount(3);
+    await expect(brandSummary).toContainText('Media de viewers');
+    await expect(brandSummary).toContainText('10');
     await page.locator('[data-profile-tab="estadisticas"]').click();
     const twitchSource = page.locator('#profile-tab-estadisticas .stats-executive-source').filter({ hasText: 'TWITCH · MÉTRICAS NORMALIZADAS' });
     await expect(twitchSource).toBeVisible();
