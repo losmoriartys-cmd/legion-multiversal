@@ -1447,8 +1447,8 @@ function renderRosterBrandSlots(hero, context) {
     if (!window.LMBrand?.cardSlots) return '';
     const slots = window.LMBrand.cardSlots(hero, context);
     return '<span class="comic-roster-brand-slots" aria-label="Datos comparables del canal">' +
-        slots.map(([label, value, detail]) =>
-            '<span class="comic-roster-stat"><span>' + escapeStatsHtml(label) + '</span><b>' + escapeStatsHtml(value) +
+        slots.map(([label, value, detail], index) =>
+            '<span class="comic-roster-stat ' + (index === 0 ? 'comic-roster-stat-audience' : index === 1 ? 'comic-roster-stat-average' : 'comic-roster-stat-activity') + '"><span>' + escapeStatsHtml(label) + '</span><b>' + escapeStatsHtml(value) +
             '</b><small>' + escapeStatsHtml(detail || '') + '</small></span>'
         ).join('') + '</span>';
 }
