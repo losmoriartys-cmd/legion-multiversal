@@ -271,7 +271,10 @@ class RosterComicCardsContractTests(unittest.TestCase):
 
     def test_selector_mount_and_assets_are_loaded(self):
         self.assertIn('id="roster-selector"', self.html)
-        self.assertIn("roster-selector.css?v=20261117-audience-cards-1", self.html)
+        self.assertIn("roster-selector.css?v=20261119-brand-consistency-1", self.html)
+        self.assertIn("social-links.css?v=20261119-social-links-1", self.html)
+        self.assertIn("roster-brand-model.js?v=20261119-brand-model-1", self.html)
+        self.assertIn("social-links.js?v=20261119-social-links-1", self.html)
         self.assertIn("function renderRosterSelector()", self.app)
 
     def test_global_navigation_and_legacy_routes_remain_supported(self):
