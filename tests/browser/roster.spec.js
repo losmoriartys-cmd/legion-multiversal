@@ -56,6 +56,7 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
     await expect(dossier).toContainText(creator.name);
     const profileTabs = dossier.locator('[role="tab"][data-profile-tab]');
     await expect(profileTabs).toHaveCount(4);
+    await expect(profileTabs.filter({ hasText: /JUEGOS Y RITMO/i })).toHaveCount(0);
 
     const cardImage = card.locator('.comic-roster-photo img');
     await expect(cardImage).toHaveAttribute('alt', /Fotografía carnet/);
@@ -73,15 +74,23 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
     expect(dossierImageStyle.position).toContain('0%');
     // El expediente no repite full-body ni carta: el carnet identifica al streamer.
     await expect(dossier.locator('.hero-profile-character-art')).toHaveCount(0);
-    const internalArt = dossier.locator('#profile-tab-perfil .hero-profile-internal-art img');
-    await expect(internalArt).toBeVisible();
-    await expect.poll(() => internalArt.evaluate(img => img.naturalWidth)).toBeGreaterThan(0);
-    const artBox = await internalArt.boundingBox();
-    expect(artBox.width).toBeLessThanOrEqual(220);
-    expect(artBox.height).toBeLessThanOrEqual(230);
+    await expect(dossier.locator('.hero-profile-internal-art')).toHaveCount(0);
     await expect(dossier.locator('.hero-profile-character-card-link button')).toBeVisible();
     await expect(dossier.locator('.hero-profile-sidebar-quote')).toBeVisible();
     await expect(dossier.locator('.hero-profile-socials')).toBeVisible();
+    const expectedSocialLinks = await page.evaluate(id => {
+      const hero = heroesData.find(item => item.id === id);
+      const labels = { twitch:'TWITCH', youtube:'YOUTUBE', instagram:'INSTAGRAM', tiktok:'TIKTOK', discord:'DISCORD', kick:'KICK', x:'X', twitter:'X', facebook:'FACEBOOK', cafecito:'CAFECITO' };
+      const accounts = Array.isArray(hero?.accounts) ? hero.accounts : [];
+      const links = accounts.filter(item => labels[item.platform] && item.url)
+        .concat((hero?.links || []).filter(item => labels[item.platform] && item.url));
+      return links.filter((item,index) => links.findIndex(candidate => candidate.platform === item.platform && candidate.url === item.url) === index)
+        .map(item => ({ platform: labels[item.platform], url: item.url }));
+    }, creator.id);
+    const actualSocialLinks = await dossier.locator('.hero-profile-socials .btn-link').evaluateAll(anchors =>
+      anchors.map(anchor => ({ platform: anchor.textContent.replace(/\\s*↗\\s*$/, '').trim(), url: anchor.href }))
+    );
+    expect(actualSocialLinks).toEqual(expectedSocialLinks);
     await expect(dossier.locator('.hero-profile-poster')).toHaveCount(0);
 
     // Validate chapters and their actual content for every roster member.
@@ -104,6 +113,9 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
     }
     if (['moriartys','rod3r1k'].includes(creator.id)) {
       await expect(dossier.locator('#profile-tab-bitacora .hero-profile-epic-codes')).toBeVisible();
+      await expect(dossier.locator('#profile-tab-bitacora .hero-profile-epic-codes')).toContainText(
+        creator.id === 'moriartys' ? 'LOSMORIARTYS' : 'TheR0d3R1k'
+      );
     }
 
     if (creator.id === 'moriartys') {
@@ -130,6 +142,27 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
     }
 
     await expect(page.locator('#hero-modal')).not.toHaveClass(/active/);
+    await page.setViewportSize({ width: 390, height: 844 });
+    const mobileDossier = await dossier.evaluate(element => {
+      const layout = element.querySelector('.hero-profile-reference-layout');
+      const portrait = element.querySelector('.hero-profile-id-image img');
+      const bounds = portrait?.getBoundingClientRect();
+      return {
+        documentWidth: document.documentElement.scrollWidth,
+        bodyWidth: document.body.scrollWidth,
+        columns: layout ? getComputedStyle(layout).gridTemplateColumns.split(' ').length : 0,
+        portraitVisible: Boolean(bounds && bounds.width > 0 && bounds.height > 0),
+        portraitLeft: bounds?.left ?? -1,
+        portraitRight: bounds?.right ?? Infinity
+      };
+    });
+    expect(mobileDossier.documentWidth).toBeLessThanOrEqual(390);
+    expect(mobileDossier.bodyWidth).toBeLessThanOrEqual(390);
+    expect(mobileDossier.columns).toBe(1);
+    expect(mobileDossier.portraitVisible).toBe(true);
+    expect(mobileDossier.portraitLeft).toBeGreaterThanOrEqual(0);
+    expect(mobileDossier.portraitRight).toBeLessThanOrEqual(391);
+    await page.setViewportSize({ width: 1280, height: 900 });
     await page.evaluate(() => closeHeroProfile());
     await expect(page.locator('#roster-selector')).toBeVisible();
     await expect(profilePanel).toBeHidden();
