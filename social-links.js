@@ -9,9 +9,10 @@
     instagram: { label: 'Instagram', mono: 'IG', hosts: ['instagram.com'] },
     tiktok: { label: 'TikTok', mono: 'TT', hosts: ['tiktok.com'] },
     facebook: { label: 'Facebook', mono: 'FB', hosts: ['facebook.com'] },
+    cafecito: { label: 'Cafecito', mono: 'CF', hosts: ['cafecito.app'] },
     link_hub: { label: 'Todos mis enlaces', mono: '↗', hosts: ['beacons.ai'] }
   };
-  const ORDER = ['twitch', 'youtube', 'instagram', 'tiktok', 'facebook', 'link_hub'];
+  const ORDER = ['twitch', 'youtube', 'instagram', 'tiktok', 'facebook', 'cafecito', 'link_hub'];
 
   function escapeHtml(value) {
     return String(value ?? '').replace(/[&<>"']/g, character => ({
@@ -51,7 +52,7 @@
     for (const link of (Array.isArray(hero?.links) ? hero.links : [])) {
       add(link?.platform, link?.url);
     }
-    for (const platform of ['twitch', 'youtube', 'instagram', 'tiktok', 'facebook']) {
+    for (const platform of ['twitch', 'youtube', 'instagram', 'tiktok', 'facebook', 'cafecito']) {
       add(platform, hero?.[platform]);
     }
 
