@@ -101,7 +101,7 @@ class RosterComicCardsContractTests(unittest.TestCase):
 
     def test_cards_use_the_shared_objective_brand_model_and_fixed_three_slots(self):
         start = self.app.index("function renderRosterSelector()")
-        end = self.app.index("\\nfunction selectRosterCreator", start)
+        end = self.app.index("\nfunction selectRosterCreator", start)
         renderer = self.app[start:end]
         context = self.app.split("function getRosterBrandContext", 1)[1].split("function renderRosterBrandSlots", 1)[0]
         self.assertIn("getRosterBrandContext(hero, channel, account)", renderer)
@@ -151,6 +151,7 @@ class RosterComicCardsContractTests(unittest.TestCase):
         self.assertIn("host.endsWith('.' + domain)", self.social_links)
         self.assertIn("TODOS MIS ENLACES", self.social_links)
         self.assertIn("facebook", self.social_links)
+        self.assertIn("cafecito", self.social_links)
 
     def test_profile_opens_directly_as_a_35_65_bitacora(self):
         start = self.app.index("function openHeroProfile(")
@@ -173,7 +174,10 @@ class RosterComicCardsContractTests(unittest.TestCase):
         self.assertNotIn("ABRIR BITÁCORA COMPLETA", tabs)
         self.assertIn("renderHeroBrandSummary(hero)", self.app)
         self.assertIn("hero-profile-brand-summary", self.app)
-        self.assertIn("Proponer una colaboración", self.app)
+        self.assertIn("data-creator-proposal", self.app)
+        contact_forms = (ROOT / "contact-forms.js").read_text(encoding="utf-8")
+        self.assertIn("Perfil de interés:", contact_forms)
+        self.assertIn("PROPONER UNA COLABORACIÓN", self.app)
 
     def test_community_bitacora_mission_tracks_the_individual_dossier_tab(self):
         self.assertIn("button.dataset.profileTab==='bitacora'", self.app)
@@ -301,6 +305,7 @@ class RosterComicCardsContractTests(unittest.TestCase):
         self.assertIn("CAPTURAS EN DIRECTO", self.app)
         self.assertIn("hero-profile-character-card-link", self.app)
         self.assertIn("window.LMSocial?.renderSocialButtons(hero)", self.app)
+        self.assertIn("href=\"#brand-proposal\"", self.app)
         self.assertIn("const uniqueLinks=links.filter", self.social_links)
         for profile_id in ("lady-moriarty", "rod3r1k", "akuma", "habitos"):
             collaborations = self.creator_records["channels"][profile_id]["collaborations"]
