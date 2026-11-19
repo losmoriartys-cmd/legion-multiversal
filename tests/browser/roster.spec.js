@@ -54,11 +54,15 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
       return header && profileHead ? profileHead.y >= header.y + header.height - 1 : false;
     }).toBe(true);
     await expect(profilePanel).toHaveClass(/is-active/);
-    if (['pato-oratoris','ardipii'].includes(creator.id)) await expect(dossier.locator('#profile-tab-perfil .hero-profile-integrated-games')).toHaveCount(0);
-    else {
+    if (creator.id === 'pato-oratoris') {
+      // Pato es un creador de YouTube: no debe heredar categorías ni juegos de Twitch.
+      await expect(dossier.locator('#profile-tab-perfil .hero-profile-integrated-games')).toHaveCount(0);
+    } else {
       const gamesSection = dossier.locator('#profile-tab-perfil .hero-profile-integrated-games');
-      await expect(gamesSection).toBeVisible();
-      await expect(gamesSection).not.toContainText(/muestras|observaciones|Just Chatting/i);
+      // En ArDipii la sección es data-driven: puede no existir o mostrar juegos válidos si
+      // aparecen en las fuentes. No se debe fijar su ausencia como regla del perfil.
+      if (creator.id !== 'ardipii') await expect(gamesSection).toBeVisible();
+      if (await gamesSection.count()) await expect(gamesSection).not.toContainText(/muestras|observaciones|Just Chatting/i);
     }
     await expect(dossier.locator('#profile-tab-perfil .hero-profile-brand')).toHaveCount(0);
     await expect(page.locator('#roster-home')).toBeHidden();
@@ -92,11 +96,14 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
 
     // Validate chapters and their actual content for every roster member.
     await profileTabs.filter({ hasText: 'PERFIL' }).click();
-    if (['pato-oratoris','ardipii'].includes(creator.id)) await expect(dossier.locator('#profile-tab-perfil .hero-profile-integrated-games')).toHaveCount(0);
-    else {
+    if (creator.id === 'pato-oratoris') {
+      // El canal de Pato es YouTube; no corresponde mostrar juegos de Twitch.
+      await expect(dossier.locator('#profile-tab-perfil .hero-profile-integrated-games')).toHaveCount(0);
+    } else {
       const gamesSection = dossier.locator('#profile-tab-perfil .hero-profile-integrated-games');
-      await expect(gamesSection).toBeVisible();
-      await expect(gamesSection).not.toContainText(/muestras|observaciones/i);
+      // La presencia de juegos de ArDipii depende de datos observados, no de una excepción fija.
+      if (creator.id !== 'ardipii') await expect(gamesSection).toBeVisible();
+      if (await gamesSection.count()) await expect(gamesSection).not.toContainText(/muestras|observaciones|Just Chatting/i);
     }
     await expect(dossier.locator('#profile-tab-perfil .hero-profile-brand')).toHaveCount(0);
     await profileTabs.filter({ hasText: 'CLIPS' }).click();
