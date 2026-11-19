@@ -164,7 +164,7 @@ def build(roster, twitch, platforms, clips, now=None):
                     if value is None and key in {"samples_total", "live_samples", "streams_observed"} and not channel:
                         continue
                     if key == "live_status":
-                        value = ("live" if channel.get("live") else "offline") if freshness != "unavailable" else None
+                        value = ("live" if channel.get("live") else "offline") if freshness == "fresh" else None
                     elif key == "current_viewers":
                         value = channel.get("current_viewers") if freshness == "fresh" and channel.get("live") else None
                     elif freshness == "unavailable":
