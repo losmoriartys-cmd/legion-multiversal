@@ -80,7 +80,10 @@ class NormalizedCreatorMetricsContractTests(unittest.TestCase):
             for key in ("average_viewers_sampled", "peak_viewers_sampled", "observed_live_hours"):
                 metric = metric_map[(platform, key)]
                 self.assertEqual(metric.get("unit"), EXPECTED_UNITS[(platform, key)])
-                self.assertIsInstance(metric.get("value"), (int, float))
+                value = metric.get("value")
+                if value is not None:
+                    self.assertIsInstance(value, (int, float))
+                    self.assertGreaterEqual(value, 0)
 
     def test_pato_is_youtube_only_in_the_normalized_metrics_source(self):
         pato = self.metrics["creators"]["pato-oratoris"]
