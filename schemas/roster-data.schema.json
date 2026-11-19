@@ -193,27 +193,27 @@
               "twitch": {
                 "type": "string",
                 "format": "uri",
-                "pattern": "^https://(?:www\\\\.)?twitch\\\\.tv/"
+                "pattern": "^https://(www[.])?twitch[.]tv/"
               },
               "youtube": {
                 "type": "string",
                 "format": "uri",
-                "pattern": "^https://(?:(?:www\\\\.)?youtube\\\\.com|youtu\\\\.be)/"
+                "pattern": "^https://((www[.])?youtube[.]com|youtu[.]be)/"
               },
               "instagram": {
                 "type": "string",
                 "format": "uri",
-                "pattern": "^https://(?:www\\\\.)?instagram\\\\.com/"
+                "pattern": "^https://(www[.])?instagram[.]com/"
               },
               "tiktok": {
                 "type": "string",
                 "format": "uri",
-                "pattern": "^https://(?:www\\\\.)?tiktok\\\\.com/"
+                "pattern": "^https://(www[.])?tiktok[.]com/"
               },
               "facebook": {
                 "type": "string",
                 "format": "uri",
-                "pattern": "^https://(?:www\\\\.)?facebook\\\\.com/"
+                "pattern": "^https://(www[.])?facebook[.]com/"
               }
             },
             "additionalProperties": false
