@@ -158,6 +158,11 @@ test.describe('Auditoría de métricas normalizadas del Roster', () => {
 
       const stale = getNormalizedLiveStatus(hero, oneSecondLate);
 
+      const originalCapturedAt = metric.captured_at;
+      metric.captured_at = new Date(atBoundary + 6 * 60 * 1000).toISOString();
+      const future = getNormalizedLiveStatus(hero, atBoundary);
+      metric.captured_at = originalCapturedAt;
+
       metric.value = null;
       const missingValue = getNormalizedLiveStatus(hero, atBoundary);
 
@@ -169,6 +174,7 @@ test.describe('Auditoría de métricas normalizadas del Roster', () => {
         live: { state: live.state, label: live.label, fresh: live.metric?.fresh },
         offline: { state: offline.state, label: offline.label, fresh: offline.metric?.fresh },
         stale: { state: stale.state, label: stale.label, fresh: stale.metric?.fresh },
+        future: { state: future.state, label: future.label },
         missingValue: { state: missingValue.state, label: missingValue.label },
         missingMetric: { state: missingMetric.state, label: missingMetric.label }
       };
@@ -177,6 +183,7 @@ test.describe('Auditoría de métricas normalizadas del Roster', () => {
     expect(states.live).toEqual({ state: 'live', label: 'EN DIRECTO', fresh: true });
     expect(states.offline).toEqual({ state: 'offline', label: 'OFFLINE', fresh: true });
     expect(states.stale).toEqual({ state: 'stale', label: 'ESTADO SIN ACTUALIZAR', fresh: false });
+    expect(states.future).toEqual({ state: 'missing', label: 'SIN DATOS' });
     expect(states.missingValue).toEqual({ state: 'missing', label: 'SIN DATOS' });
     expect(states.missingMetric).toEqual({ state: 'missing', label: 'SIN DATOS' });
   });
