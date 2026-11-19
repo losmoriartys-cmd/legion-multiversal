@@ -28,7 +28,6 @@ def generated_list(roster: dict) -> str:
         registry = roster.get("name_registry") or {}
         canonical = registry.get(str(hero.get("id") or ""), {})
         name = html.escape(str(canonical.get("display_name") or hero.get("display_name") or hero.get("name") or "Integrante"), quote=True)
-        role = html.escape(str(hero.get("role_label") or "CREADOR"), quote=True)
         description = html.escape(str(canonical.get("short_description") or "Integrante del roster de Legión Multiversal."), quote=True)
         links = []
         for account in hero.get("accounts") or []:
@@ -39,7 +38,7 @@ def generated_list(roster: dict) -> str:
                 continue
             links.append('<a href="' + html.escape(url, quote=True) + '" target="_blank" rel="noopener noreferrer">' + html.escape(platform.upper()) + '</a>')
         suffix = " · ".join(links) if links else "plataformas públicas pendientes de confirmar"
-        rows.append("                <li><strong>" + name + "</strong> · <b>" + role + "</b> · " + description + " · " + suffix + "</li>")
+        rows.append("                <li><strong>" + name + "</strong> · " + description + " · " + suffix + "</li>")
     return "<ul>\n" + "\n".join(rows) + "\n              </ul>"
 
 
@@ -79,7 +78,6 @@ def main() -> int:
                 identity = registry.get(str(hero.get("id") or ""), {})
                 fields = (
                     identity.get("display_name") or hero.get("display_name") or hero.get("name") or "Integrante",
-                    hero.get("role_label") or "CREADOR",
                     identity.get("short_description") or "Integrante del roster de Legión Multiversal.",
                 )
                 if any(html.escape(str(field), quote=True) not in item for field in fields):

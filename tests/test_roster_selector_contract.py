@@ -369,10 +369,11 @@ if __name__ == "__main__":
         self.assertNotIn("CARGANDO LOS OCHO EXPEDIENTES", self.html)
         self.assertIn('class="roster-skeleton-grid"', self.html)
         fallback = self.html.split("<!-- ROSTER_NOSCRIPT_LINKS:START -->", 1)[1].split("<!-- ROSTER_NOSCRIPT_LINKS:END -->", 1)[0]
-        for label in ("DIRECCIÓN", "CREADORA", "CREADOR", "DOCENTE", "ESTUDIANTE", "COLABORADOR"):
-            self.assertIn(label, fallback)
-        self.assertIn("Nuevo integrante en etapa de formación", fallback)
-        self.assertIn("Divulgación, programación y charlas motivacionales", fallback)
+        for label in ("DIRECCIÓN", "DOCENTE", "ESTUDIANTE", "COLABORADOR", "IRL"):
+            self.assertNotIn(label, fallback)
+        self.assertIn("just chatting y juegos retro", fallback)
+        self.assertIn("nueva etapa", fallback)
+        self.assertIn("divulgación, programación y charlas motivacionales", fallback)
 
     def test_profile_modal_uses_individual_language_and_editorial_tabs(self):
         self.assertIn("EXPEDIENTE INDIVIDUAL", self.html)
