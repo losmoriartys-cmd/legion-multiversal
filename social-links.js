@@ -60,6 +60,16 @@
       .map(platform => ({ platform, label: PLATFORMS[platform].label, mono: PLATFORMS[platform].mono, url: found.get(platform) }));
   }
 
+  function renderSocialIcons(hero) {
+    const links = collect(hero);
+    if (!links.length) return '';
+    const name = escapeHtml(hero?.display_name || hero?.name || 'integrante');
+    return '<span class="comic-roster-social-badges" role="group" aria-label="Redes de ' + name + '">' +
+      links.map(link => '<span class="soc-icon soc-icon-' + link.platform + '" role="img" title="' +
+        escapeHtml(link.label) + '" aria-label="' + escapeHtml(link.label) + '">' +
+        escapeHtml(link.mono) + '</span>').join('') + '</span>';
+  }
+
   function renderSocialButtons(hero) {
     const links = collect(hero);
     if (!links.length) return '';
@@ -72,7 +82,7 @@
     }).join('') + '</nav>';
   }
 
-  const api = { collect, validUrl, renderSocialButtons };
+  const api = { collect, validUrl, renderSocialButtons, renderSocialIcons };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else root.LMSocial = api;
 })(typeof window !== 'undefined' ? window : globalThis);
