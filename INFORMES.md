@@ -1,3 +1,16 @@
+## 2026-11-19 — Roster: correcciones sin rangos ni IRL en Lady
+
+- **Base:** `main` en `5f4b7d0`; rama `roster/correcciones-sin-rangos`.
+- **Objetivo:** primera tanda de mejoras del Roster tras los PR 70 y 71: que ninguna ficha muestre jerarquías y que los textos reflejen lo que cada creador confirmó.
+- **Rangos:** se eliminan `rank` y `role_label` de las ocho fichas y de `schemas/roster-data.schema.json`. `role` se conserva solo como campo técnico (valor único `member`) porque el esquema lo exige; no se muestra. El resumen del perfil dice «INTEGRANTE DE LA LEGIÓN» y el fallback sin JavaScript ya no incluye DIRECCIÓN, DOCENTE, ESTUDIANTE ni COLABORADOR (`scripts/render_roster_noscript.py`, `index.html`).
+- **Textos corregidos (confirmados por Demian el 18/11):** Lady Moriarty es just chatting y juegos retro, sin IRL; Akuma es terror, fisicoculturismo y charlas sobre salud y alimentación, sin rol docente; Ardipii es just chatting y estrenos, con GTA VI; Dave retoma el ritmo tras pocos directos este año; Los Moriartys suma El Rincón del Nerd como área. Se retira de Dave la frase sobre «rango institucional».
+- **Estadísticas del perfil:** los valores ya no se parten por la mitad («sesion es», «espect adores») y las horas se formatean con un decimal (16,2 en vez de 16.1667). Cambio en `roster-selector.css` y en `renderStatsExecutiveSource` de `app.js`.
+- **Ajuste tras correr Playwright localmente:** las cartas no deben mostrar «Just Chatting» como categoría (contrato de `roster.spec.js`), por lo que las áreas y el tagline de Lady y Ardipii dicen «Charla(s) en directo / en vivo». Dos pruebas (`roster.spec.js:22`, `roster-brand-model.spec.js:38`) fallan igual en `main` sin cambios en el entorno de trabajo por recursos externos bloqueados; no son regresiones de este PR.
+- **Pruebas:** `tests/test_roster_selector_contract.py` pasa a comprobar la ausencia de rangos e IRL en el fallback. Validadores Python y 163 pruebas pasan en local; `node --check app.js` sin errores. Las pruebas de navegador (Playwright) no se pudieron ejecutar en el entorno de trabajo y quedan para el CI del PR.
+- **Pendiente (siguientes PR):** estadísticas en el frente de la carta, leyenda EN VIVO con espectadores, pestañas Perfil/Directos/Clips/Bitácora/Para marcas, bitácora como línea de tiempo, unificar paleta, «6 + 2» → 8 en marcas, textos de Habitos y Pato, y expedientes BarFender con tiempos de cada POV (faltan duraciones de los VOD).
+
+---
+
 ## 2026-11-18 — Auditoría de experiencia pública: primera intervención
 
 - **Base:** `main` en `823ad5930e41feb14c2e04f7f12a9f7b9ac8c0bf`; rama `feat/public-experience-audit-2026-11-18`.

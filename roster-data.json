@@ -9,15 +9,14 @@
       "codename": "EL ESTRATEGA",
       "characterRole": "ESTRATEGA CIBERNÉTICO",
       "powerSet": "Guerra cibernética · Hackeo táctico · Control de drones",
-      "rank": "DIRECTOR",
       "series": "1",
       "cardNumber": "047",
       "areas": [
-        "Gaming",
-        "Entretenimiento",
+        "Cooperativo",
+        "Rincón del Nerd",
         "Comunidad"
       ],
-      "role": "director",
+      "role": "member",
       "creator_type": "live_streamer",
       "platforms": [
         "twitch"
@@ -96,7 +95,6 @@
       ],
       "links": [],
       "tagline": "Dupla gamer y videoclub retro: cooperativo, humor y cultura pop.",
-      "role_label": "DIRECCIÓN",
       "schedule": "Lunes y miércoles 20:00 · viernes 21:00 (hora Argentina)",
       "fullbody": "Cyberpunk_Cyborg_Portrait-hay-muchas-que-dejaron-de-ser-animadas-la-idea-es.jpg",
       "character_card": "assets/heroes/moriartys_dark.jpg",
@@ -112,7 +110,6 @@
       "codename": "EL FUERTE",
       "characterRole": "INGENIERO SÓNICO",
       "powerSet": "Onda sónica · Fotografía táctica · Resonancia",
-      "rank": "OPERADOR",
       "series": "3",
       "cardNumber": "008",
       "areas": [
@@ -120,7 +117,7 @@
         "Eventos",
         "Comunidad"
       ],
-      "role": "director",
+      "role": "member",
       "creator_type": "live_streamer",
       "platforms": [
         "twitch"
@@ -199,7 +196,6 @@
         "audience_fit": "Afinidad temática: videojuegos de acción, eventos, partidas compartidas y momentos destacados."
       },
       "tagline": "Gaming de acción, eventos grupales y momentos épicos en directo.",
-      "role_label": "DIRECCIÓN",
       "schedule": "Lunes a viernes 20:00 (hora Argentina)",
       "fullbody": "Superhero_Camera_Portrait-hay-muchas-que-dejaron-de-ser-animadas-la-idea-es.jpg",
       "character_card": "assets/heroes/rod3r1k_dark.webp"
@@ -210,15 +206,14 @@
       "codename": "LA BRUJA",
       "characterRole": "BRUJA CAÓTICA",
       "powerSet": "Magia caótica · Hechizos · Distorsión de la realidad",
-      "rank": "HECHICERA",
       "series": "3",
       "cardNumber": "025",
       "areas": [
-        "Gaming",
-        "Entretenimiento",
-        "IRL"
+        "Charlas en directo",
+        "Juegos retro",
+        "Comunidad"
       ],
-      "role": "teacher",
+      "role": "member",
       "creator_type": "live_streamer",
       "platforms": [
         "twitch"
@@ -226,11 +221,11 @@
       "activity_status": "not_assessed",
       "img": "Red_Haired_Mystic_Witch-hay-muchas-que-dejaron-de-ser-animadas-la-idea-es.jpg",
       "twitch": "https://twitch.tv/ladymoriarty01",
-      "bio": "La Bruja no necesita seguir un guion: su magia está en cambiar el tono de cada encuentro. Puede convertir una partida tranquila en una situación imprevisible y hacer de una charla o una salida IRL una historia propia. LADYMORIARTY conserva una identidad independiente, espontánea y cercana; su regla es simple: venir a disfrutar y dejar que la aventura encuentre su forma.",
+      "bio": "La Bruja no necesita seguir un guion: su magia está en cambiar el tono de cada encuentro. Puede convertir una partida tranquila en una situación imprevisible y hacer de una charla tranquila una historia propia. LADYMORIARTY conserva una identidad independiente, espontánea y cercana; su regla es simple: venir a disfrutar y dejar que la aventura encuentre su forma.",
       "voice": "«¿Plan? Puede ser. ¿Improvisar? También. La magia está en no saber qué viene después.»",
-      "powers": "Especialidad: entretenimiento chill, IRL y conexión con la comunidad.",
+      "powers": "Especialidad: just chatting, juegos retro y conexión con la comunidad.",
       "stats": "Métricas en proceso de integración. Los datos se publicarán cuando estén conectados a una fuente verificable y acompañados de su período de medición.",
-      "log": "ARCHIVO DE LA HECHICERA: opera con libertad entre gameplay relajado, IRL y momentos espontáneos. Su canal individual tiene voz y recorrido propios, distintos del proyecto compartido Los Moriartys. Su presencia aporta frescura, humor y cercanía.",
+      "log": "ARCHIVO DE LA HECHICERA: opera con libertad entre just chatting, juegos retro y momentos espontáneos. Su canal individual tiene voz y recorrido propios, distintos del proyecto compartido Los Moriartys. Su presencia aporta frescura, humor y cercanía.",
       "id": "lady-moriarty",
       "slug": "lady-moriarty",
       "display_name": "LADY MORIARTY",
@@ -278,24 +273,23 @@
         "ladymoriarty"
       ],
       "mediaProfile": {
-        "editorial": "Canal individual con gameplay chill, IRL y contenido espontáneo. Mantiene una identidad propia, diferenciada del proyecto compartido Los Moriartys.",
+        "editorial": "Canal individual de just chatting y juegos retro, con charla tranquila y espontaneidad. Mantiene una identidad propia, diferenciada del proyecto compartido Los Moriartys.",
         "formats": [
-          "Gameplay relajado",
+          "Just chatting",
+          "Juegos retro",
           "Charlas y momentos espontáneos",
-          "Contenido IRL",
           "Clips de situaciones destacadas"
         ],
         "opportunities": [
-          "Presentación de juegos y experiencias relajadas",
-          "Integraciones naturales en sesiones de charla o IRL",
+          "Presentación de juegos clásicos y experiencias nostálgicas",
+          "Integraciones naturales en sesiones de charla",
           "Dinámicas participativas con la comunidad",
           "Piezas breves basadas en momentos destacados"
         ],
         "disclaimer": "Formatos potenciales, no campañas realizadas ni alianzas confirmadas.",
-        "audience_fit": "Afinidad temática: gameplay relajado, charlas espontáneas, entretenimiento e IRL."
+        "audience_fit": "Afinidad temática: just chatting, juegos retro, nostalgia y charla cercana."
       },
-      "tagline": "Gameplay chill, IRL y conexión espontánea con la comunidad.",
-      "role_label": "CREADORA",
+      "tagline": "Charla tranquila y juegos retro, con mucha cercanía.",
       "schedule": "1 a 2 veces por semana, sin horario fijo; mayormente 19:00–20:00 (hora Argentina)",
       "fullbody": "Red_Haired_Mystic_Witch-hay-muchas-que-dejaron-de-ser-animadas-la-idea-es.jpg",
       "character_card": "assets/heroes/ladymoriarty_dark.jpg",
@@ -311,14 +305,14 @@
       "codename": "EL FANTASMA",
       "characterRole": "GUARDIÁN ESPECTRAL",
       "powerSet": "Fase espectral · Intangibilidad · Llama ectoplásmica",
-      "rank": "SOMBRA",
       "series": "3",
       "cardNumber": "037",
       "areas": [
-        "Gaming",
+        "Charlas en directo",
+        "Estrenos",
         "Comunidad"
       ],
-      "role": "teacher",
+      "role": "member",
       "creator_type": "live_streamer",
       "platforms": [
         "twitch"
@@ -374,11 +368,11 @@
       ],
       "links": [],
       "mediaProfile": {
-        "editorial": "Perfil orientado al gaming y la comunidad, con un tono cercano y una invitación a participar de las transmisiones. No se publica un horario fijo ni una frecuencia hasta contar con confirmación vigente.",
+        "editorial": "Perfil de just chatting y estrenos, con un tono cercano y una invitación a participar de las transmisiones. Cubrirá GTA VI en sus directos. No se publica una frecuencia hasta contar con confirmación vigente.",
         "formats": [
-          "Directos de videojuegos",
-          "Interacción con la comunidad",
-          "Conversación durante las transmisiones"
+          "Just chatting en directo",
+          "Cobertura de estrenos",
+          "Interacción con la comunidad"
         ],
         "opportunities": [
           "Presentación de juegos y primeras impresiones",
@@ -387,11 +381,10 @@
           "Clips de momentos o conversaciones destacados"
         ],
         "disclaimer": "Propuestas potenciales sujetas a confirmación de disponibilidad y aprobación del creador.",
-        "audience_fit": "Afinidad temática: gaming, conversación e interacción con la comunidad."
+        "audience_fit": "Afinidad temática: conversación en vivo, estrenos e interacción con la comunidad."
       },
-      "tagline": "Gaming cooperativo, cercanía con el chat e interacción en directo.",
-      "role_label": "CREADOR",
-      "powers": "Especialidad: gaming cooperativo, cercanía con el chat e interacción en directo.",
+      "tagline": "Charla en vivo y estrenos: un chat donde siempre hay lugar para uno más.",
+      "powers": "Especialidad: just chatting, cercanía con el chat y estrenos; cubrirá GTA VI en sus directos.",
       "schedule": "Martes y jueves 23:00 (hora Argentina)",
       "fullbody": "Hooded_Atomic_Figure-hay-muchas-que-dejaron-de-ser-animadas-la-idea-es.jpg",
       "character_card": "assets/heroes/ardipii_dark.webp",
@@ -407,15 +400,14 @@
       "codename": "EL INFERNAL",
       "characterRole": "TANQUE DEMONÍACO",
       "powerSet": "Llama infernal · Vuelo · Fuerza abismal",
-      "rank": "DOCENTE",
       "series": "3",
       "cardNumber": "024",
       "areas": [
-        "Gaming",
-        "Charlas",
+        "Terror",
+        "Fitness y salud",
         "Comunidad"
       ],
-      "role": "teacher",
+      "role": "member",
       "creator_type": "live_streamer",
       "platforms": [
         "twitch"
@@ -423,10 +415,10 @@
       "activity_status": "not_assessed",
       "img": "image_20261117_045605.jpg",
       "twitch": "https://twitch.tv/akumazoldyck",
-      "bio": "El Infernal abre un punto de encuentro entre videojuegos, conversaciones y amigos. Su propuesta combina partidas y charla: el valor está en el intercambio y en las historias que surgen cuando la comunidad se reúne.",
+      "bio": "El Infernal abre un punto de encuentro entre terror, fisicoculturismo y conversaciones sobre salud y alimentación. Su propuesta combina partidas y charla: el valor está en el intercambio y en las historias que surgen cuando la comunidad se reúne.",
       "voice": "«El portal está abierto. Traigan una partida, una historia o simplemente ganas de quedarse.»",
       "stats": "Métricas en proceso de integración. Los datos se publicarán cuando estén conectados a una fuente verificable y acompañados de su período de medición.",
-      "log": "ARCHIVO DEL INFERNAL: su territorio reúne videojuegos, charlas y encuentros con amigos. La frecuencia de transmisión y cualquier resultado de audiencia se mantienen fuera de la presentación hasta contar con una fuente y un período confirmados.",
+      "log": "ARCHIVO DEL INFERNAL: su territorio reúne terror, fitness, salud y encuentros con amigos. La frecuencia de transmisión y cualquier resultado de audiencia se mantienen fuera de la presentación hasta contar con una fuente y un período confirmados.",
       "id": "akuma",
       "slug": "akuma",
       "display_name": "AKUMA",
@@ -471,10 +463,10 @@
       ],
       "links": [],
       "mediaProfile": {
-        "editorial": "Gaming, charlas y comunidad. Su perfil puede combinar partidas con conversación y encuentros grupales, sin atribuirle una frecuencia fija ni resultados de audiencia que no estén verificados.",
+        "editorial": "Terror, fitness y charlas sobre salud y alimentación. Combina partidas con conversación y encuentros grupales, sin atribuirle resultados de audiencia que no estén verificados.",
         "formats": [
-          "Directos de videojuegos",
-          "Charlas y conversación",
+          "Directos de terror",
+          "Charlas sobre salud y alimentación",
           "Partidas con otros creadores",
           "Encuentros comunitarios cuando estén programados"
         ],
@@ -485,11 +477,10 @@
           "Dinámicas participativas y clips de una activación"
         ],
         "disclaimer": "Posibilidades de colaboración, no campañas contratadas ni calendario de activaciones confirmado.",
-        "audience_fit": "Afinidad temática: videojuegos, conversación y experiencias compartidas."
+        "audience_fit": "Afinidad temática: terror, fitness, salud y alimentación, y experiencias compartidas."
       },
-      "tagline": "Gaming, charlas y encuentros para compartir nuevas experiencias.",
-      "role_label": "DOCENTE",
-      "powers": "Especialidad: gaming, charlas y partidas compartidas con la comunidad; su rol docente aporta una dimensión de acompañamiento y aprendizaje.",
+      "tagline": "Terror, fitness y charlas sobre salud y alimentación.",
+      "powers": "Especialidad: terror, fisicoculturismo y charlas sobre salud y alimentación mientras juega.",
       "schedule": "Lunes a viernes 21:00 (hora Argentina)",
       "fullbody": "image_20261117_045605.jpg",
       "character_card": "assets/heroes/akuma_dark.jpg",
@@ -505,14 +496,14 @@
       "codename": "EL NEXO",
       "characterRole": "GUARDIÁN TECNOLÓGICO",
       "powerSet": "Manipulación tecnológica · Campo psiónico · Runas",
-      "rank": "ESTUDIANTE",
       "series": "1",
       "cardNumber": "048",
       "areas": [
-        "Especialidad por definir"
+        "Exploración de juegos",
+        "Cooperativo"
       ],
       "schedule": "Sin directos programados por ahora; publica contenido en Twitch",
-      "role": "student",
+      "role": "member",
       "creator_type": "live_streamer",
       "platforms": [
         "twitch"
@@ -524,7 +515,7 @@
       "voice": "«Conexión establecida. Estoy buscando el puente entre este mundo y el siguiente.»",
       "powers": "Poderes y especialidad todavía sin definir. Se completarán cuando Dave aporte o apruebe su concepto de personaje.",
       "stats": "Canal incorporado al sistema de estadísticas. Las métricas se mostrarán cuando la automatización publique datos verificables.",
-      "log": "ARCHIVO DEL NEXO: tras un período de pausa, Dave inicia una nueva etapa dentro de la Legión. Su rango institucional ESTUDIANTE representa su reincorporación y el comienzo de este recorrido, no una valoración de su experiencia. La agenda, la biografía y las áreas de contenido se ampliarán con información confirmada por el creador.",
+      "log": "ARCHIVO DEL NEXO: tras un período de pausa, Dave inicia una nueva etapa dentro de la Legión. La agenda, la biografía y las áreas de contenido se ampliarán con información confirmada por el creador.",
       "id": "dave-nexus",
       "slug": "dave-nexus",
       "display_name": "DAVE — NEXUS",
@@ -584,8 +575,7 @@
         "disclaimer": "Propuestas exploratorias. La especialidad, el calendario y la disponibilidad comercial requieren confirmación de Dave.",
         "audience_fit": "Afinidad temática en definición: descubrimiento de videojuegos y experiencias cooperativas."
       },
-      "tagline": "Una nueva etapa gamer entre exploración, acción y cooperativo.",
-      "role_label": "ESTUDIANTE",
+      "tagline": "Una nueva etapa: retomando el ritmo de los directos y explorando juegos cooperativos.",
       "fullbody": "Purple_Cyberpunk_Warrior-hay-muchas-que-dejaron-de-ser-animadas-la-idea-es.jpg",
       "character_card": "assets/heroes/nexus_dark.webp"
     },
@@ -595,7 +585,6 @@
       "codename": "EL ORADOR",
       "characterRole": "COMUNICADOR DEL CONOCIMIENTO",
       "powerSet": "Claridad · Pensamiento crítico · Transmisión de conocimiento",
-      "rank": "COLABORADOR",
       "series": "3",
       "cardNumber": "039",
       "areas": [
@@ -604,7 +593,7 @@
         "Educación y habilidades para la vida",
         "Cultura gamer · línea futura"
       ],
-      "role": "collaborator",
+      "role": "member",
       "creator_type": "video_creator",
       "platforms": [
         "youtube"
@@ -708,7 +697,6 @@
         "audience_fit": "Afinidad temática: programación introductoria, herramientas digitales y divulgación sobre ciencia y comportamiento."
       },
       "tagline": "Programación y divulgación explicadas con claridad y cercanía.",
-      "role_label": "COLABORADOR",
       "schedule": "Sin directos; publica contenido en su canal de YouTube",
       "fullbody": "Bald_Man_In_Gold_Armor-hay-muchas-que-dejaron-de-ser-animadas-la-idea-es.jpg",
       "character_card": "assets/heroes/oratoris_dark.webp"
@@ -719,7 +707,6 @@
       "codename": "FILÓSOFO JUSTICIERO",
       "characterRole": "FILÓSOFO ATÓMICO",
       "powerSet": "Rayo atómico · Física atómica · Combate cuerpo a cuerpo",
-      "rank": "JUSTICIERO",
       "series": "3",
       "cardNumber": "007",
       "areas": [
@@ -727,7 +714,7 @@
         "Filosofía",
         "Desarrollo personal"
       ],
-      "role": "collaborator",
+      "role": "member",
       "creator_type": "live_streamer",
       "platforms": [
         "twitch"
@@ -800,7 +787,6 @@
         "audience_fit": "Afinidad temática: videojuegos, reflexión, hábitos cotidianos y desarrollo personal."
       },
       "tagline": "Gaming, filosofía cotidiana y conversaciones sobre hábitos.",
-      "role_label": "COLABORADOR",
       "powers": "Especialidad: gaming reflexivo, filosofía cotidiana y desarrollo de hábitos.",
       "schedule": "Lunes a sábado, por la mañana y por la tarde",
       "fullbody": "Sci_Fi_Superhero_Portrait-hay-muchas-que-dejaron-de-ser-animadas-la-idea-es.jpg",
@@ -846,7 +832,7 @@
         "ROD3RIK",
         "TheR0d3R1k"
       ],
-      "short_description": "Creador de contenido en Twitch y director de la Legión."
+      "short_description": "Creador de contenido en Twitch; acción, eventos y partidas grupales en directo."
     },
     "lady-moriarty": {
       "display_name": "LADY MORIARTY",
@@ -857,7 +843,7 @@
         "LADYMORIARTY",
         "LADYMORIARTY01"
       ],
-      "short_description": "Creadora de contenido en directo; videojuegos, terror y experiencias cooperativas."
+      "short_description": "Creadora de contenido en directo; just chatting y juegos retro."
     },
     "ardipii": {
       "display_name": "ARDIPII",
@@ -868,7 +854,7 @@
         "Ardipi",
         "ARDIPI"
       ],
-      "short_description": "Creador de contenido en directo e integrante del roster."
+      "short_description": "Creador de contenido en directo; just chatting y estrenos, con GTA VI en camino."
     },
     "akuma": {
       "display_name": "AKUMA",
@@ -878,7 +864,7 @@
       "variants": [
         "Akuma Zoldyck"
       ],
-      "short_description": "Docente y creador; acompaña a nuevos integrantes y participa en sesiones de gaming."
+      "short_description": "Creador de contenido en directo; terror, fitness y charlas sobre salud y alimentación."
     },
     "dave-nexus": {
       "display_name": "DAVE — NEXUS",
@@ -889,7 +875,7 @@
         "Dave",
         "DAVE NEXUS"
       ],
-      "short_description": "Estudiante y nuevo integrante en etapa de formación."
+      "short_description": "Creador en una nueva etapa: vuelve de a poco a los directos y explora juegos cooperativos."
     },
     "pato-oratoris": {
       "display_name": "PATO — ORATORIS",
@@ -901,7 +887,7 @@
         "Pato",
         "PATOTEEXPLICA"
       ],
-      "short_description": "Colaborador de YouTube; divulgación, programación y charlas motivacionales."
+      "short_description": "Creador de YouTube; divulgación, programación y charlas motivacionales."
     },
     "habitos": {
       "display_name": "HABITOS",
@@ -912,7 +898,7 @@
         "Mismo Habitos",
         "Hábitos Atómicos"
       ],
-      "short_description": "Colaborador; reflexión, filosofía, motivación y videojuegos."
+      "short_description": "Creador en Twitch; filosofía, hábitos y videojuegos."
     }
   }
 }
