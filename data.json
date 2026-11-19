@@ -13,7 +13,7 @@
     "ther0d3r1k"
   ],
   "collection": {
-    "started_at": "2026-11-18T23:25:12Z",
+    "started_at": "2026-11-19T00:24:18Z",
     "expected_channels": 7,
     "resolved_channels": 7,
     "sampled_channels": [
@@ -39,7 +39,7 @@
     "elgabii090"
   ],
   "channel_registry_note": "Los canales archivados se conservan para consulta histórica y no se incluyen en los indicadores del roster activo.",
-  "updated_at": "2026-11-18T23:25:12Z",
+  "updated_at": "2026-11-19T00:24:18Z",
   "channels": {
     "ladymoriarty01": {
       "login": "ladymoriarty01",
@@ -54,11 +54,11 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "last_status_at": "2026-11-18T23:25:12Z",
-      "last_snapshot_at": "2026-11-18T23:25:12Z",
-      "updated_at": "2026-11-18T23:25:12Z",
+      "last_status_at": "2026-11-19T00:24:18Z",
+      "last_snapshot_at": "2026-11-19T00:24:18Z",
+      "updated_at": "2026-11-19T00:24:18Z",
       "window": {
-        "samples_total": 357,
+        "samples_total": 358,
         "live_samples": 13,
         "streams_observed": 6,
         "average_viewers_sampled": 6.6,
@@ -3382,6 +3382,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-19T00:24:18Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -3394,35 +3403,35 @@
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
       "live": true,
-      "current_viewers": 18,
+      "current_viewers": 36,
       "current_game": "Apex Legends",
       "current_title": "SE VIENE UN JUEGASOO!   🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
       "stream_started_at": "2026-11-18T22:53:08Z",
-      "last_status_at": "2026-11-18T23:25:12Z",
-      "last_snapshot_at": "2026-11-18T23:25:12Z",
-      "updated_at": "2026-11-18T23:25:12Z",
+      "last_status_at": "2026-11-19T00:24:18Z",
+      "last_snapshot_at": "2026-11-19T00:24:18Z",
+      "updated_at": "2026-11-19T00:24:18Z",
       "window": {
-        "samples_total": 357,
-        "live_samples": 40,
+        "samples_total": 358,
+        "live_samples": 41,
         "streams_observed": 11,
-        "average_viewers_sampled": 23.5,
+        "average_viewers_sampled": 23.8,
         "peak_viewers_sampled": 51,
-        "observed_live_hours": 23.55,
-        "estimated_hours_watched": 549.49,
+        "observed_live_hours": 24.47,
+        "estimated_hours_watched": 582.49,
         "game_breakdown": [
+          {
+            "name": "Apex Legends",
+            "live_samples": 11,
+            "streams_observed": 6,
+            "average_viewers_sampled": 24.5,
+            "peak_viewers_sampled": 43
+          },
           {
             "name": "Fortnite",
             "live_samples": 10,
             "streams_observed": 5,
             "average_viewers_sampled": 22.0,
             "peak_viewers_sampled": 46
-          },
-          {
-            "name": "Apex Legends",
-            "live_samples": 10,
-            "streams_observed": 6,
-            "average_viewers_sampled": 23.3,
-            "peak_viewers_sampled": 43
           },
           {
             "name": "Just Chatting",
@@ -3565,6 +3574,13 @@
             "streams_observed": 2,
             "average_viewers_sampled": 26.3,
             "peak_viewers_sampled": 51
+          },
+          {
+            "date": "2026-11-19",
+            "live_samples": 1,
+            "streams_observed": 1,
+            "average_viewers_sampled": 36.0,
+            "peak_viewers_sampled": 36
           }
         ],
         "method": "Muestreo propio con cadencia observada cercana a 55 minutos, variable por la programación de GitHub Actions; horas estimadas solo entre muestras consecutivas del mismo directo cuando el intervalo no supera 110 minutos. Categorías y evolución diaria se calculan sobre las muestras observadas."
@@ -6782,6 +6798,15 @@
           "title": "SE VIENE UN JUEGASOO!   🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
           "stream_id": "319643979252",
           "started_at": "2026-11-18T22:53:08Z"
+        },
+        {
+          "sampled_at": "2026-11-19T00:24:18Z",
+          "is_live": true,
+          "viewer_count": 36,
+          "game_name": "Apex Legends",
+          "title": "SE VIENE UN JUEGASOO!   🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
+          "stream_id": "319643979252",
+          "started_at": "2026-11-18T22:53:08Z"
         }
       ]
     },
@@ -7444,11 +7469,11 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "last_status_at": "2026-11-18T23:25:12Z",
-      "last_snapshot_at": "2026-11-18T23:25:12Z",
-      "updated_at": "2026-11-18T23:25:12Z",
+      "last_status_at": "2026-11-19T00:24:18Z",
+      "last_snapshot_at": "2026-11-19T00:24:18Z",
+      "updated_at": "2026-11-19T00:24:18Z",
       "window": {
-        "samples_total": 357,
+        "samples_total": 358,
         "live_samples": 6,
         "streams_observed": 3,
         "average_viewers_sampled": 7.2,
@@ -10702,6 +10727,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-19T00:24:18Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -10713,19 +10747,19 @@
       "twitch_url": "https://twitch.tv/akumazoldyck",
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
-      "live": false,
-      "current_viewers": null,
-      "current_game": null,
-      "current_title": null,
-      "stream_started_at": null,
-      "last_status_at": "2026-11-18T23:25:12Z",
-      "last_snapshot_at": "2026-11-18T23:25:12Z",
-      "updated_at": "2026-11-18T23:25:12Z",
+      "live": true,
+      "current_viewers": 2,
+      "current_game": "Just Chatting",
+      "current_title": "wolas viejos bllos",
+      "stream_started_at": "2026-11-19T00:09:15Z",
+      "last_status_at": "2026-11-19T00:24:18Z",
+      "last_snapshot_at": "2026-11-19T00:24:18Z",
+      "updated_at": "2026-11-19T00:24:18Z",
       "window": {
-        "samples_total": 357,
-        "live_samples": 26,
-        "streams_observed": 13,
-        "average_viewers_sampled": 6.7,
+        "samples_total": 358,
+        "live_samples": 27,
+        "streams_observed": 14,
+        "average_viewers_sampled": 6.5,
         "peak_viewers_sampled": 17,
         "observed_live_hours": 10.74,
         "estimated_hours_watched": 62.09,
@@ -10778,6 +10812,13 @@
             "streams_observed": 1,
             "average_viewers_sampled": 4.0,
             "peak_viewers_sampled": 4
+          },
+          {
+            "name": "Just Chatting",
+            "live_samples": 1,
+            "streams_observed": 1,
+            "average_viewers_sampled": 2.0,
+            "peak_viewers_sampled": 2
           }
         ],
         "daily_activity": [
@@ -10857,6 +10898,13 @@
             "streams_observed": 2,
             "average_viewers_sampled": 7.0,
             "peak_viewers_sampled": 10
+          },
+          {
+            "date": "2026-11-19",
+            "live_samples": 1,
+            "streams_observed": 1,
+            "average_viewers_sampled": 2.0,
+            "peak_viewers_sampled": 2
           }
         ],
         "method": "Muestreo propio con cadencia observada cercana a 55 minutos, variable por la programación de GitHub Actions; horas estimadas solo entre muestras consecutivas del mismo directo cuando el intervalo no supera 110 minutos. Categorías y evolución diaria se calculan sobre las muestras observadas."
@@ -14074,6 +14122,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-19T00:24:18Z",
+          "is_live": true,
+          "viewer_count": 2,
+          "game_name": "Just Chatting",
+          "title": "wolas viejos bllos",
+          "stream_id": "321449636960",
+          "started_at": "2026-11-19T00:09:15Z"
         }
       ]
     },
@@ -14090,11 +14147,11 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "last_status_at": "2026-11-18T23:25:12Z",
-      "last_snapshot_at": "2026-11-18T23:25:12Z",
-      "updated_at": "2026-11-18T23:25:12Z",
+      "last_status_at": "2026-11-19T00:24:18Z",
+      "last_snapshot_at": "2026-11-19T00:24:18Z",
+      "updated_at": "2026-11-19T00:24:18Z",
       "window": {
-        "samples_total": 357,
+        "samples_total": 358,
         "live_samples": 15,
         "streams_observed": 9,
         "average_viewers_sampled": 1.9,
@@ -17404,6 +17461,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-19T00:24:18Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -18036,11 +18102,11 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "last_status_at": "2026-11-18T23:25:12Z",
-      "last_snapshot_at": "2026-11-18T23:25:12Z",
-      "updated_at": "2026-11-18T23:25:12Z",
+      "last_status_at": "2026-11-19T00:24:18Z",
+      "last_snapshot_at": "2026-11-19T00:24:18Z",
+      "updated_at": "2026-11-19T00:24:18Z",
       "window": {
-        "samples_total": 357,
+        "samples_total": 358,
         "live_samples": 72,
         "streams_observed": 17,
         "average_viewers_sampled": 4.7,
@@ -21392,6 +21458,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-19T00:24:18Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -21404,21 +21479,21 @@
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
       "live": true,
-      "current_viewers": 18,
+      "current_viewers": 11,
       "current_game": "Gun Restoration Shop Simulator",
       "current_title": "[Publi] Hoy hacemos Tienda de #GunRestoration ShopSimulator",
       "stream_started_at": "2026-11-18T22:58:09Z",
-      "last_status_at": "2026-11-18T23:25:12Z",
-      "last_snapshot_at": "2026-11-18T23:25:12Z",
-      "updated_at": "2026-11-18T23:25:12Z",
+      "last_status_at": "2026-11-19T00:24:18Z",
+      "last_snapshot_at": "2026-11-19T00:24:18Z",
+      "updated_at": "2026-11-19T00:24:18Z",
       "window": {
-        "samples_total": 357,
-        "live_samples": 18,
+        "samples_total": 358,
+        "live_samples": 19,
         "streams_observed": 9,
-        "average_viewers_sampled": 16.6,
+        "average_viewers_sampled": 16.3,
         "peak_viewers_sampled": 31,
-        "observed_live_hours": 7.25,
-        "estimated_hours_watched": 99.46,
+        "observed_live_hours": 8.17,
+        "estimated_hours_watched": 109.54,
         "game_breakdown": [
           {
             "name": "Fortnite",
@@ -21449,6 +21524,13 @@
             "peak_viewers_sampled": 25
           },
           {
+            "name": "Gun Restoration Shop Simulator",
+            "live_samples": 2,
+            "streams_observed": 1,
+            "average_viewers_sampled": 14.5,
+            "peak_viewers_sampled": 18
+          },
+          {
             "name": "Categoría no informada",
             "live_samples": 1,
             "streams_observed": 1,
@@ -21461,13 +21543,6 @@
             "streams_observed": 1,
             "average_viewers_sampled": 7.0,
             "peak_viewers_sampled": 7
-          },
-          {
-            "name": "Gun Restoration Shop Simulator",
-            "live_samples": 1,
-            "streams_observed": 1,
-            "average_viewers_sampled": 18.0,
-            "peak_viewers_sampled": 18
           }
         ],
         "daily_activity": [
@@ -21554,6 +21629,13 @@
             "streams_observed": 1,
             "average_viewers_sampled": 18.0,
             "peak_viewers_sampled": 18
+          },
+          {
+            "date": "2026-11-19",
+            "live_samples": 1,
+            "streams_observed": 1,
+            "average_viewers_sampled": 11.0,
+            "peak_viewers_sampled": 11
           }
         ],
         "method": "Muestreo propio con cadencia observada cercana a 55 minutos, variable por la programación de GitHub Actions; horas estimadas solo entre muestras consecutivas del mismo directo cuando el intervalo no supera 110 minutos. Categorías y evolución diaria se calculan sobre las muestras observadas."
@@ -24767,6 +24849,15 @@
           "sampled_at": "2026-11-18T23:25:12Z",
           "is_live": true,
           "viewer_count": 18,
+          "game_name": "Gun Restoration Shop Simulator",
+          "title": "[Publi] Hoy hacemos Tienda de #GunRestoration ShopSimulator",
+          "stream_id": "319488527734",
+          "started_at": "2026-11-18T22:58:09Z"
+        },
+        {
+          "sampled_at": "2026-11-19T00:24:18Z",
+          "is_live": true,
+          "viewer_count": 11,
           "game_name": "Gun Restoration Shop Simulator",
           "title": "[Publi] Hoy hacemos Tienda de #GunRestoration ShopSimulator",
           "stream_id": "319488527734",
