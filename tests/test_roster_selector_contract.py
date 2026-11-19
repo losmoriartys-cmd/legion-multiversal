@@ -9,6 +9,8 @@ class RosterComicCardsContractTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.app = (ROOT / "app.js").read_text(encoding="utf-8")
+        cls.brand_model = (ROOT / "roster-brand-model.js").read_text(encoding="utf-8")
+        cls.social_links = (ROOT / "social-links.js").read_text(encoding="utf-8")
         cls.html = (ROOT / "index.html").read_text(encoding="utf-8")
         cls.css = (ROOT / "roster-selector.css").read_text(encoding="utf-8")
         cls.roster = json.loads((ROOT / "roster-data.json").read_text(encoding="utf-8"))
