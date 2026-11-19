@@ -277,6 +277,7 @@ class RosterComicCardsContractTests(unittest.TestCase):
         self.assertIn("social-links.css?v=20261119-social-links-1", self.html)
         self.assertIn("roster-brand-model.js?v=20261119-brand-model-1", self.html)
         self.assertIn("social-links.js?v=20261119-social-links-1", self.html)
+        self.assertIn("contact-forms.js?v=20261119-brand-proposal-1", self.html)
         self.assertIn("function renderRosterSelector()", self.app)
 
     def test_global_navigation_and_legacy_routes_remain_supported(self):
