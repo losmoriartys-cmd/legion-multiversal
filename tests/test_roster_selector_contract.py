@@ -141,6 +141,9 @@ class RosterComicCardsContractTests(unittest.TestCase):
         socials = properties["socials"]
         self.assertFalse(socials["additionalProperties"])
         self.assertEqual(set(socials["properties"]), {"twitch", "youtube", "instagram", "tiktok", "facebook"})
+        for hero in self.roster["heroes"]:
+            for platform, url in hero.get("socials", {}).items():
+                self.assertRegex(url, socials["properties"][platform]["pattern"])
         self.assertIn("Beacons", properties["links"]["description"])
         self.assertIn("link_hub", self.roster["heroes"][1]["links"][0]["platform"])
 
