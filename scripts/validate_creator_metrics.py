@@ -10,12 +10,13 @@ OUTPUT = ROOT / "creator-metrics.json"
 ROSTER = ROOT / "roster-data.json"
 ALLOWED_STATUS = {"fresh", "delayed", "unavailable", "offline", "sampled", "estimated", "verified_public"}
 ALLOWED_VISIBILITY = {"public", "authorized", "editorial"}
+FRESHNESS_MINUTES = {"twitch": 120, "youtube": 120, "kick": 120}
+CLOCK_SKEW_MINUTES = 5
+CURRENT_STATUSES = {"fresh", "offline", "sampled", "estimated", "verified_public"}
 
 
 def parse_time(value):
-    if value is None:
-        return None
-    if not isinstance(value, str):
+    if value is None or not isinstance(value, str):
         return None
     try:
         dt = datetime.fromisoformat(value.replace("Z", "+00:00"))
@@ -24,7 +25,19 @@ def parse_time(value):
     return dt if dt.tzinfo else None
 
 
-def validate(registry, roster):
+def capture_status(platform, captured_at, now):
+    captured = parse_time(captured_at)
+    if captured is None or now is None or now.tzinfo is None:
+        return "unavailable"
+    age_minutes = (now - captured).total_seconds() / 60
+    if age_minutes < -CLOCK_SKEW_MINUTES:
+        return "unavailable"
+    if age_minutes > FRESHNESS_MINUTES.get(platform, 120):
+        return "delayed"
+    return "fresh"
+
+
+def validate(registry, roster, now=None):
     errors = []
     if registry.get("schema_version") != 2:
         errors.append("creator-metrics.json debe usar schema_version=2.")
@@ -37,8 +50,12 @@ def validate(registry, roster):
             entry = snapshot.get(source_name)
             if not isinstance(entry, dict) or parse_time(entry.get("updated_at")) is None:
                 errors.append("{}: source_snapshot.updated_at debe ser ISO-8601 con zona horaria.".format(source_name))
-    if parse_time(registry.get("generated_at")) is None:
+    generated_at = parse_time(registry.get("generated_at"))
+    if generated_at is None:
         errors.append("generated_at debe ser ISO-8601 con zona horaria.")
+    reference_now = parse_time(now) if isinstance(now, str) else (now or generated_at)
+    if reference_now is None or reference_now.tzinfo is None:
+        errors.append("No se puede comprobar la frescura sin un reloj de referencia con zona horaria.")
     creators = registry.get("creators")
     if not isinstance(creators, dict):
         return errors + ["creators debe ser un objeto."]
@@ -102,8 +119,22 @@ def validate(registry, roster):
             if not isinstance(metric.get("unit"), str) or not metric["unit"].strip():
                 errors.append("{}: unidad vacía en métrica {}.".format(creator_id, metric_id))
             captured = metric.get("captured_at")
-            if captured is not None and parse_time(captured) is None:
+            captured_time = parse_time(captured)
+            if captured is not None and captured_time is None:
                 errors.append("{}: captured_at inválido en métrica {}.".format(creator_id, metric_id))
+            if reference_now is not None:
+                freshness = capture_status(metric.get("platform"), captured, reference_now)
+                status = metric.get("status")
+                if status in CURRENT_STATUSES and freshness != "fresh":
+                    errors.append(
+                        "{}: métrica {} marcada como {} pero su captura está {} respecto de generated_at."
+                        .format(creator_id, metric_id, status, freshness)
+                    )
+                elif status == "delayed" and freshness != "delayed":
+                    errors.append(
+                        "{}: métrica {} marcada como delayed pero su captura está {} respecto de generated_at."
+                        .format(creator_id, metric_id, freshness)
+                    )
             period = metric.get("period") or {}
             for field in ("from", "to"):
                 if period.get(field) is not None and parse_time(period[field]) is None:

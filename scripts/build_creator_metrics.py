@@ -11,7 +11,7 @@ TWITCH_FILE = ROOT / "data.json"
 PLATFORM_FILE = ROOT / "platform-stats.json"
 CLIPS_FILE = ROOT / "clips-data.json"
 OUTPUT_FILE = ROOT / "creator-metrics.json"
-FRESHNESS_MINUTES = {"twitch": 120, "kick": 120, "youtube": 10080}
+FRESHNESS_MINUTES = {"twitch": 120, "youtube": 120, "kick": 120}
 
 
 def parse_time(value):
@@ -130,18 +130,24 @@ def build(roster, twitch, platforms, clips, now=None):
                 channel = twitch_channels.get(login) or {}
                 snapshots = channel.get("snapshots") or []
                 window = channel.get("window") or {}
-                captured_at = channel.get("updated_at") or (snapshots[-1].get("sampled_at") if snapshots else None)
-                freshness = capture_status("twitch", captured_at, now)
-                latest = snapshots[-1] if snapshots else {}
+
+                # El estado Helix se consulta en cada workflow; las métricas históricas
+                # solo se actualizan cuando el colector agrega un nuevo snapshot.
+                status_captured_at = channel.get("last_status_at") or channel.get("updated_at")
+                sample_captured_at = channel.get("last_snapshot_at") or (
+                    snapshots[-1].get("sampled_at") if snapshots else None
+                )
+                status_freshness = capture_status("twitch", status_captured_at, now)
+                sample_freshness = capture_status("twitch", sample_captured_at, now)
                 period = source_period(
                     snapshots[0].get("sampled_at") if snapshots else None,
-                    snapshots[-1].get("sampled_at") if snapshots else captured_at,
+                    snapshots[-1].get("sampled_at") if snapshots else sample_captured_at,
                     "sampled_window",
                 )
                 metric_source = "Twitch Helix Public API"
-                for key, label, value, unit, meaning in [
-                    ("live_status", "Estado de transmisión", channel.get("live") if freshness == "fresh" else None, "status", "Estado observado en la última consulta pública; un estado vencido queda oculto."),
-                    ("current_viewers", "Espectadores en la última captura", channel.get("current_viewers") if freshness == "fresh" and channel.get("live") else None, "viewers", "Lectura puntual de stream en vivo; no equivale a espectadores únicos ni promedio."),
+                definitions = [
+                    ("live_status", "Estado de transmisión", None, "status", "Estado observado en la última consulta pública; un estado vencido queda oculto."),
+                    ("current_viewers", "Espectadores en la última captura", None, "viewers", "Lectura puntual de stream en vivo; no equivale a espectadores únicos ni promedio."),
                     ("samples_total", "Muestras históricas", window.get("samples_total"), "samples", "Cantidad de observaciones almacenadas en el período efectivo."),
                     ("live_samples", "Muestras en directo", window.get("live_samples"), "samples", "Observaciones que encontraron el canal en directo."),
                     ("streams_observed", "Sesiones observadas", window.get("streams_observed"), "streams", "Sesiones distinguibles mediante stream_id dentro del muestreo."),
@@ -149,17 +155,32 @@ def build(roster, twitch, platforms, clips, now=None):
                     ("peak_viewers_sampled", "Pico observado", window.get("peak_viewers_sampled"), "viewers_sampled_peak", "Mayor lectura puntual registrada; no es pico oficial de Twitch."),
                     ("observed_live_hours", "Horas en directo observadas", window.get("observed_live_hours"), "hours_observed", "Duración aproximada de intervalos consecutivos admisibles del mismo directo."),
                     ("estimated_hours_watched", "Horas vistas estimadas", window.get("estimated_hours_watched"), "hours_estimated", "Estimación entre muestras consecutivas; no es watch time oficial."),
-                ]:
+                ]
+                for key, label, value, unit, meaning in definitions:
+                    is_status_metric = key in {"live_status", "current_viewers"}
+                    metric_captured_at = status_captured_at if is_status_metric else sample_captured_at
+                    freshness = status_freshness if is_status_metric else sample_freshness
+
                     if value is None and key in {"samples_total", "live_samples", "streams_observed"} and not channel:
                         continue
-                    status = freshness if key in {"live_status", "current_viewers"} else ("estimated" if key == "estimated_hours_watched" else "sampled")
-                    if key == "live_status" and freshness == "fresh":
-                        value = "live" if channel.get("live") else "offline"
-                    if key == "current_viewers" and freshness == "fresh" and not channel.get("live"):
-                        status = "offline"
+                    if key == "live_status":
+                        value = ("live" if channel.get("live") else "offline") if freshness == "fresh" else None
+                    elif key == "current_viewers":
+                        value = channel.get("current_viewers") if freshness == "fresh" and channel.get("live") else None
+                    elif freshness == "unavailable":
+                        value = None
+
+                    if is_status_metric:
+                        status = freshness
+                        if key == "current_viewers" and freshness == "fresh" and not channel.get("live"):
+                            status = "offline"
+                    else:
+                        source_status = "estimated" if key == "estimated_hours_watched" else "sampled"
+                        status = source_status if freshness == "fresh" else freshness
+
                     metrics.append(make_metric(
-                        "twitch", handle, key, label, value, unit, captured_at, period,
-                        metric_source, "public_helix_snapshot" if key in {"live_status", "current_viewers"} else "55_minute_public_sampling",
+                        "twitch", handle, key, label, value, unit, metric_captured_at, period,
+                        metric_source, "public_helix_snapshot" if is_status_metric else "55_minute_public_sampling",
                         status, meaning, "data.json",
                     ))
             elif platform in {"youtube", "kick"}:
