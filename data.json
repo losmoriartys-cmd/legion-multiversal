@@ -13,7 +13,7 @@
     "ther0d3r1k"
   ],
   "collection": {
-    "started_at": "2026-11-19T00:24:18Z",
+    "started_at": "2026-11-19T01:51:25Z",
     "expected_channels": 7,
     "resolved_channels": 7,
     "sampled_channels": [
@@ -39,7 +39,7 @@
     "elgabii090"
   ],
   "channel_registry_note": "Los canales archivados se conservan para consulta histórica y no se incluyen en los indicadores del roster activo.",
-  "updated_at": "2026-11-19T00:24:18Z",
+  "updated_at": "2026-11-19T01:51:25Z",
   "channels": {
     "ladymoriarty01": {
       "login": "ladymoriarty01",
@@ -54,11 +54,11 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "last_status_at": "2026-11-19T00:24:18Z",
-      "last_snapshot_at": "2026-11-19T00:24:18Z",
-      "updated_at": "2026-11-19T00:24:18Z",
+      "last_status_at": "2026-11-19T01:51:25Z",
+      "last_snapshot_at": "2026-11-19T01:51:25Z",
+      "updated_at": "2026-11-19T01:51:25Z",
       "window": {
-        "samples_total": 358,
+        "samples_total": 359,
         "live_samples": 13,
         "streams_observed": 6,
         "average_viewers_sampled": 6.6,
@@ -3391,6 +3391,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-19T01:51:25Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -3403,27 +3412,27 @@
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
       "live": true,
-      "current_viewers": 36,
+      "current_viewers": 7,
       "current_game": "Apex Legends",
       "current_title": "SE VIENE UN JUEGASOO!   🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
       "stream_started_at": "2026-11-18T22:53:08Z",
-      "last_status_at": "2026-11-19T00:24:18Z",
-      "last_snapshot_at": "2026-11-19T00:24:18Z",
-      "updated_at": "2026-11-19T00:24:18Z",
+      "last_status_at": "2026-11-19T01:51:25Z",
+      "last_snapshot_at": "2026-11-19T01:51:25Z",
+      "updated_at": "2026-11-19T01:51:25Z",
       "window": {
-        "samples_total": 358,
-        "live_samples": 41,
+        "samples_total": 359,
+        "live_samples": 42,
         "streams_observed": 11,
-        "average_viewers_sampled": 23.8,
+        "average_viewers_sampled": 23.4,
         "peak_viewers_sampled": 51,
-        "observed_live_hours": 24.47,
-        "estimated_hours_watched": 582.49,
+        "observed_live_hours": 25.38,
+        "estimated_hours_watched": 588.91,
         "game_breakdown": [
           {
             "name": "Apex Legends",
-            "live_samples": 11,
+            "live_samples": 12,
             "streams_observed": 6,
-            "average_viewers_sampled": 24.5,
+            "average_viewers_sampled": 23.0,
             "peak_viewers_sampled": 43
           },
           {
@@ -3577,9 +3586,9 @@
           },
           {
             "date": "2026-11-19",
-            "live_samples": 1,
+            "live_samples": 2,
             "streams_observed": 1,
-            "average_viewers_sampled": 36.0,
+            "average_viewers_sampled": 21.5,
             "peak_viewers_sampled": 36
           }
         ],
@@ -6807,6 +6816,15 @@
           "title": "SE VIENE UN JUEGASOO!   🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
           "stream_id": "319643979252",
           "started_at": "2026-11-18T22:53:08Z"
+        },
+        {
+          "sampled_at": "2026-11-19T01:51:25Z",
+          "is_live": true,
+          "viewer_count": 7,
+          "game_name": "Apex Legends",
+          "title": "SE VIENE UN JUEGASOO!   🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
+          "stream_id": "319643979252",
+          "started_at": "2026-11-18T22:53:08Z"
         }
       ]
     },
@@ -7469,11 +7487,11 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "last_status_at": "2026-11-19T00:24:18Z",
-      "last_snapshot_at": "2026-11-19T00:24:18Z",
-      "updated_at": "2026-11-19T00:24:18Z",
+      "last_status_at": "2026-11-19T01:51:25Z",
+      "last_snapshot_at": "2026-11-19T01:51:25Z",
+      "updated_at": "2026-11-19T01:51:25Z",
       "window": {
-        "samples_total": 358,
+        "samples_total": 359,
         "live_samples": 6,
         "streams_observed": 3,
         "average_viewers_sampled": 7.2,
@@ -10736,6 +10754,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-19T01:51:25Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -10748,21 +10775,21 @@
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
       "live": true,
-      "current_viewers": 2,
-      "current_game": "Just Chatting",
+      "current_viewers": 10,
+      "current_game": "Apex Legends",
       "current_title": "wolas viejos bllos",
       "stream_started_at": "2026-11-19T00:09:15Z",
-      "last_status_at": "2026-11-19T00:24:18Z",
-      "last_snapshot_at": "2026-11-19T00:24:18Z",
-      "updated_at": "2026-11-19T00:24:18Z",
+      "last_status_at": "2026-11-19T01:51:25Z",
+      "last_snapshot_at": "2026-11-19T01:51:25Z",
+      "updated_at": "2026-11-19T01:51:25Z",
       "window": {
-        "samples_total": 358,
-        "live_samples": 27,
+        "samples_total": 359,
+        "live_samples": 28,
         "streams_observed": 14,
-        "average_viewers_sampled": 6.5,
+        "average_viewers_sampled": 6.6,
         "peak_viewers_sampled": 17,
-        "observed_live_hours": 10.74,
-        "estimated_hours_watched": 62.09,
+        "observed_live_hours": 11.65,
+        "estimated_hours_watched": 71.25,
         "game_breakdown": [
           {
             "name": "Fortnite",
@@ -10819,6 +10846,13 @@
             "streams_observed": 1,
             "average_viewers_sampled": 2.0,
             "peak_viewers_sampled": 2
+          },
+          {
+            "name": "Apex Legends",
+            "live_samples": 1,
+            "streams_observed": 1,
+            "average_viewers_sampled": 10.0,
+            "peak_viewers_sampled": 10
           }
         ],
         "daily_activity": [
@@ -10901,10 +10935,10 @@
           },
           {
             "date": "2026-11-19",
-            "live_samples": 1,
+            "live_samples": 2,
             "streams_observed": 1,
-            "average_viewers_sampled": 2.0,
-            "peak_viewers_sampled": 2
+            "average_viewers_sampled": 6.0,
+            "peak_viewers_sampled": 10
           }
         ],
         "method": "Muestreo propio con cadencia observada cercana a 55 minutos, variable por la programación de GitHub Actions; horas estimadas solo entre muestras consecutivas del mismo directo cuando el intervalo no supera 110 minutos. Categorías y evolución diaria se calculan sobre las muestras observadas."
@@ -14131,6 +14165,15 @@
           "title": "wolas viejos bllos",
           "stream_id": "321449636960",
           "started_at": "2026-11-19T00:09:15Z"
+        },
+        {
+          "sampled_at": "2026-11-19T01:51:25Z",
+          "is_live": true,
+          "viewer_count": 10,
+          "game_name": "Apex Legends",
+          "title": "wolas viejos bllos",
+          "stream_id": "321449636960",
+          "started_at": "2026-11-19T00:09:15Z"
         }
       ]
     },
@@ -14147,11 +14190,11 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "last_status_at": "2026-11-19T00:24:18Z",
-      "last_snapshot_at": "2026-11-19T00:24:18Z",
-      "updated_at": "2026-11-19T00:24:18Z",
+      "last_status_at": "2026-11-19T01:51:25Z",
+      "last_snapshot_at": "2026-11-19T01:51:25Z",
+      "updated_at": "2026-11-19T01:51:25Z",
       "window": {
-        "samples_total": 358,
+        "samples_total": 359,
         "live_samples": 15,
         "streams_observed": 9,
         "average_viewers_sampled": 1.9,
@@ -17470,6 +17513,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-19T01:51:25Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -18102,11 +18154,11 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "last_status_at": "2026-11-19T00:24:18Z",
-      "last_snapshot_at": "2026-11-19T00:24:18Z",
-      "updated_at": "2026-11-19T00:24:18Z",
+      "last_status_at": "2026-11-19T01:51:25Z",
+      "last_snapshot_at": "2026-11-19T01:51:25Z",
+      "updated_at": "2026-11-19T01:51:25Z",
       "window": {
-        "samples_total": 358,
+        "samples_total": 359,
         "live_samples": 72,
         "streams_observed": 17,
         "average_viewers_sampled": 4.7,
@@ -21467,6 +21519,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-19T01:51:25Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -21478,16 +21539,16 @@
       "twitch_url": "https://twitch.tv/losmoriartys",
       "followers_total": null,
       "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
-      "live": true,
-      "current_viewers": 11,
-      "current_game": "Gun Restoration Shop Simulator",
-      "current_title": "[Publi] Hoy hacemos Tienda de #GunRestoration ShopSimulator",
-      "stream_started_at": "2026-11-18T22:58:09Z",
-      "last_status_at": "2026-11-19T00:24:18Z",
-      "last_snapshot_at": "2026-11-19T00:24:18Z",
-      "updated_at": "2026-11-19T00:24:18Z",
+      "live": false,
+      "current_viewers": null,
+      "current_game": null,
+      "current_title": null,
+      "stream_started_at": null,
+      "last_status_at": "2026-11-19T01:51:25Z",
+      "last_snapshot_at": "2026-11-19T01:51:25Z",
+      "updated_at": "2026-11-19T01:51:25Z",
       "window": {
-        "samples_total": 358,
+        "samples_total": 359,
         "live_samples": 19,
         "streams_observed": 9,
         "average_viewers_sampled": 16.3,
@@ -24862,6 +24923,15 @@
           "title": "[Publi] Hoy hacemos Tienda de #GunRestoration ShopSimulator",
           "stream_id": "319488527734",
           "started_at": "2026-11-18T22:58:09Z"
+        },
+        {
+          "sampled_at": "2026-11-19T01:51:25Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     }
