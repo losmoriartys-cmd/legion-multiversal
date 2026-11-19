@@ -14,6 +14,7 @@ class RosterComicCardsContractTests(unittest.TestCase):
         cls.html = (ROOT / "index.html").read_text(encoding="utf-8")
         cls.css = (ROOT / "roster-selector.css").read_text(encoding="utf-8")
         cls.roster = json.loads((ROOT / "roster-data.json").read_text(encoding="utf-8"))
+        cls.roster_schema = json.loads((ROOT / "schemas/roster-data.schema.json").read_text(encoding="utf-8"))
         cls.creator_records = json.loads((ROOT / "creator-records.json").read_text(encoding="utf-8"))
 
     def test_all_eight_canonical_profiles_remain_the_source(self):
@@ -134,6 +135,14 @@ class RosterComicCardsContractTests(unittest.TestCase):
         self.assertIn("MIN_SAMPLES = 20", self.brand_model)
         self.assertIn("MIN_SPAN_DAYS = 14", self.brand_model)
         self.assertIn("WINDOW_DAYS = 28", self.brand_model)
+
+    def test_roster_schema_declares_confirmed_social_platforms(self):
+        properties = self.roster_schema["properties"]["heroes"]["items"]["properties"]
+        socials = properties["socials"]
+        self.assertFalse(socials["additionalProperties"])
+        self.assertEqual(set(socials["properties"]), {"twitch", "youtube", "instagram", "tiktok", "facebook"})
+        self.assertIn("Beacons", properties["links"]["description"])
+        self.assertIn("link_hub", self.roster["heroes"][1]["links"][0]["platform"])
 
     def test_confirmed_social_accounts_are_added_without_guessing_or_cross_domain_links(self):
         heroes = {hero["id"]: hero for hero in self.roster["heroes"]}
