@@ -71,12 +71,18 @@ test('cada tarjeta muestra las tres filas comparables y el estado de ritmo no es
 
 test('la propuesta individual precarga el perfil en el formulario comercial seguro', async ({ page }) => {
   await page.goto('/');
-  await page.evaluate(() => switchChapter(2));
+  await page.evaluate(() => {
+    switchChapter(6);
+    setRecruitmentMode('creator');
+    switchChapter(2);
+  });
   await page.locator('.comic-roster-card[data-creator-id="moriartys"]').click();
   const cta = page.locator('#hero-profile-page .hero-profile-collab-cta');
   await expect(cta).toHaveAttribute('href', '#brand-proposal');
   await cta.click();
   const details = page.locator('#brand-details');
+  await expect(page.locator('#brand-proposal')).toBeVisible();
+  await expect(page.locator('#creator-application')).toBeHidden();
   await expect(details).toHaveValue(/^Perfil de interés: LOS MORIARTYS/);
   await expect(page.locator('#chapter-6')).toHaveClass(/active/);
 });
