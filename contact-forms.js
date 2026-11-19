@@ -71,6 +71,7 @@
     const creatorName = link.dataset.creatorProposal || "";
     event.preventDefault();
     if (typeof window.switchChapter === "function") window.switchChapter(6);
+    if (typeof window.setRecruitmentMode === "function") window.setRecruitmentMode("brand");
     window.setTimeout(() => {
       const details = document.getElementById("brand-details");
       if (creatorName && details && !details.value.trim()) {
