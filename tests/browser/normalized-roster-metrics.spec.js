@@ -214,7 +214,10 @@ test.describe('Auditoría de métricas normalizadas del Roster', () => {
     const patoCard = page.locator('.comic-roster-card[data-creator-id="pato-oratoris"]');
     await expect(patoCard.locator('.comic-roster-activity')).toHaveText('CONTENIDO · YOUTUBE');
     await patoCard.click();
-    await expect(page.locator('#hero-profile-page .hero-profile-live')).toContainText('YOUTUBE · ESTADO NO APLICA');
+    await expect(page.locator('#hero-profile-page .hero-profile-live')).toHaveText([
+      'YOUTUBE · ESTADO NO APLICA',
+      'YOUTUBE · ESTADO NO APLICA'
+    ]);
     await expect(page.locator('#profile-tab-perfil .hero-profile-normalized-summary')).toContainText('56');
     await expect(page.locator('#profile-tab-perfil .hero-profile-normalized-summary')).toContainText('431');
     await page.locator('[data-profile-tab="estadisticas"]').click();
@@ -227,10 +230,13 @@ test.describe('Auditoría de métricas normalizadas del Roster', () => {
     const card = page.locator('.comic-roster-card[data-creator-id="moriartys"]');
     await expect(card.locator('.comic-roster-activity')).toHaveText('EN DIRECTO');
     await expect(card.locator('.roster-selector-tile-live')).toContainText('EN DIRECTO');
-    await expect(card.locator('.comic-roster-stat-average b')).toHaveText('10');
+    await expect(card.locator('.comic-roster-stat-average b')).toHaveText('10 espectadores');
 
     await card.click();
-    await expect(page.locator('#hero-profile-page .hero-profile-live')).toContainText('EN DIRECTO');
+    await expect(page.locator('#hero-profile-page .hero-profile-live')).toHaveText([
+      'EN DIRECTO',
+      'EN DIRECTO'
+    ]);
     await expect(page.locator('#profile-tab-perfil .hero-profile-normalized-summary')).toContainText('PROMEDIO DE ESPECTADORES');
     await expect(page.locator('#profile-tab-perfil .hero-profile-normalized-summary')).toContainText('PICO OBSERVADO');
     await page.locator('[data-profile-tab="estadisticas"]').click();
