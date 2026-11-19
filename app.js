@@ -713,18 +713,15 @@ function getNormalizedCreatorMetric(hero, metricKey, platform, now=Date.now()){
   return normalizedMetricMissing(hero,metricKey,selectedPlatform,'account_mismatch');
  }
 
- const valuePresent=metricKey==='live_status'
-  ? ['live','offline'].includes(metric.value)
-  : typeof metric.value==='number'&&Number.isFinite(metric.value);
- if(!valuePresent)return normalizedMetricMissing(hero,metricKey,selectedPlatform,'value_missing');
-
  const capturedAt=metric.captured_at||null;
  const capturedMs=capturedAt?Date.parse(capturedAt):NaN;
  if(!Number.isFinite(capturedMs))return normalizedMetricMissing(hero,metricKey,selectedPlatform,'capture_timestamp_missing');
  const ageMinutes=(Number(now)-capturedMs)/60000;
  const freshnessLimit=NORMALIZED_METRIC_FRESHNESS_MINUTES[selectedPlatform]||120;
- const withinWindow=Number.isFinite(ageMinutes)&&ageMinutes>=-NORMALIZED_METRIC_CLOCK_SKEW_MINUTES&&ageMinutes<=freshnessLimit;
- if(!withinWindow){
+ if(!Number.isFinite(ageMinutes)||ageMinutes < -NORMALIZED_METRIC_CLOCK_SKEW_MINUTES){
+  return normalizedMetricMissing(hero,metricKey,selectedPlatform,'capture_timestamp_in_future');
+ }
+ if(ageMinutes>freshnessLimit){
   return Object.freeze({
    creatorId:profile.key,platform:selectedPlatform,key:metric.key,value:metric.value,
    unit:metric.unit||null,accountHandle:metric.account_handle,capturedAt,ageMinutes,
@@ -732,6 +729,10 @@ function getNormalizedCreatorMetric(hero, metricKey, platform, now=Date.now()){
    visibility:metric.visibility||null,period:metric.period||null,reason:'capture_expired'
   });
  }
+ const valuePresent=metricKey==='live_status'
+  ? ['live','offline'].includes(metric.value)
+  : typeof metric.value==='number'&&Number.isFinite(metric.value);
+ if(!valuePresent)return normalizedMetricMissing(hero,metricKey,selectedPlatform,'value_missing');
  const acceptedStatuses=metricKey==='live_status'?['fresh']:['sampled','estimated','verified_public','fresh','live','offline'];
  if(metric.visibility!=='public'||!acceptedStatuses.includes(metric.status)){
   return normalizedMetricMissing(hero,metricKey,selectedPlatform,'source_not_public_or_unavailable');
