@@ -3412,3 +3412,12 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - Se agregaron pruebas Playwright para aislamiento de ocho IDs, frontera exacta de 120 minutos, nulos/ausentes, claves/unidades y YouTube de Pato; y pruebas Python para la integridad del esquema y la cadencia del workflow.
 - Se actualizó la referencia de caché de `app.js` en `index.html`.
 - Salvaguardas: PR #66 y PR #69 permanecen sin cambios; no se realizó merge ni despliegue de producción. La suite Playwright queda pendiente de ejecución en el runner hasta disparar el workflow de validación.
+
+
+### Seguimiento de CI · 2026-11-19
+
+- Primera ejecución de validación encontró que un test estático heredado todavía exigía el estado derivado «ACTIVO ESTA SEMANA» y el umbral de siete días. Se actualizó el contrato de prueba para exigir el estado normalizado y evitar reintroducir esa heurística.
+- Segunda ejecución: workflow de colector **SUCCESS** (run 44475424490); QA portable **SUCCESS** (run 44475424481).
+- En el workflow de sitio (run 44475424533), sintaxis JS, JSON, roster, assets, compilación de colectores, pruebas unitarias del repositorio (**158 tests**) y validación/generación normalizada completaron **SUCCESS**.
+- A la última consulta, el runner seguía en «Instalar Chromium para Playwright»; Playwright aún no había comenzado. No declarar aprobado el navegador hasta que termine esa etapa y se revisen sus resultados/capturas.
+- PR #70 permanece abierto en Draft, sin merge. PR #66 y #69 siguen abiertos en Draft y sin modificación. Sin despliegues.
