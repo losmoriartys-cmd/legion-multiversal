@@ -3427,3 +3427,18 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - La ejecución inicial de la nueva cobertura falló por dos problemas del propio test: la frase de aceptación no coincidía exactamente con la directiva y el delimitador de función buscaba una secuencia escapada en vez de un salto de línea. Se ajustó la cadena de criterio.
 - La segunda ejecución detectó un error de sintaxis en el tuple de strings del test de directiva (comilla doble accidental). Se reparó en el commit `b2437c8`.
 - **Estado de revalidación:** el commit `b2437c8b1c17fc7003dbdb3beb7baf41f7f60fa6` tiene el workflow de validación en cola; no se declara aprobado hasta que finalice.
+
+## 2026-11-19 — Auditoría de aceptación y endurecimiento del PR #66
+
+- **PR:** [#66](https://github.com/losmoriartys-cmd/legion-multiversal/pull/66), Draft, sin merge.
+- **SHA inspeccionado antes de este registro:** `bae18790c5b10e72a1c9b4d3c943987e5d9766bd`.
+- **Corrección funcional:** se retiró del renderer del expediente toda referencia a `hero.fullbody` y `.hero-profile-internal-art`. Los ocho retratos carnet siguen identificando cada perfil. La carta de personaje conserva su acceso separado desde la sidebar; el arte de las cartas del roster no se inserta en Bitácora.
+- **Bitácora:** el renderer combina hitos/colaboraciones y la ficha editorial; la sección no contiene encabezados ni registros llamados «Muestras». La búsqueda estática sobre el contenido de `creator-records.json` no encontró esa etiqueta.
+- **Redes:** el renderer produce botones desde `hero.accounts` y `hero.links`, deduplica por plataforma/URL y no fabrica cuentas. Los siete perfiles Twitch muestran solo la cuenta Twitch registrada; Pato dispone de YouTube, Instagram y Cafecito según `roster-data.json`.
+- **Epic:** `creator-programs.json` registra `LOSMORIARTYS` y `TheR0d3R1k`. La interfaz conserva la distinción de estado: la cuenta de Moriartys coincide con información aportada por el titular, sin revalidación técnica en vivo; la activación de ROD3R1K no está revalidada en portal.
+- **Pruebas ampliadas en `tests/browser/roster.spec.js`:** ausencia de arte full-body en el expediente, enlaces sociales comparados con los datos reales, texto exacto de ambos códigos Epic y comprobación responsive móvil para los ocho perfiles. Se mantienen cuatro pestañas y ausencia de una pestaña separada «Juegos y ritmo».
+- **Validaciones locales disponibles:** parseo sintáctico JavaScript con el motor V8 y parseo JSON de roster, registros y códigos Epic: correctos.
+- **CI/GitHub Actions:** la consulta del SHA `bae18790c5b10e72a1c9b4d3c943987e5d9766bd` no devolvió ejecuciones asociadas y el estado combinado no devolvió checks. No se declara ejecutada ni aprobada la suite Python ni Playwright.
+- **Preview:** Cloudflare reportó despliegue correcto del preview para `bae1879`; URL de rama: https://feat-expediente-comic-layout.legion-multiversal.pages.dev. La herramienta de navegador disponible no pudo abrir ese host, por lo que no se declara inspección visual humana.
+- **Divergencia:** `main` actual `4a1e12e2daa9be97c806beb203fa8ffbd89fb0a2`; la rama tiene 59 commits exclusivos y está 104 commits detrás. GitHub informa `mergeable=false`. No se sincronizó la rama ni se modificó `main`.
+- **Pendiente para cierre:** obtener ejecuciones terminales de QA Python y Playwright sobre el HEAD actualizado, inspeccionar las capturas y revisar visualmente los ocho expedientes en escritorio/móvil; después, sincronizar la rama con `main` y repetir la validación antes de cualquier integración. Producción permanece intacta.
