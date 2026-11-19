@@ -1506,6 +1506,10 @@ function refreshRosterMetricsViews(){
  const channel=findChannelStats(hero),sully=findSullyChannel(hero);
  const profile=page.querySelector('#profile-tab-perfil .hero-profile-overview');
  if(profile){
+  const brand=profile.querySelector('.hero-profile-brand-summary');
+  const brandMarkup=renderHeroBrandSummary(hero);
+  if(brand)brand.outerHTML=brandMarkup;
+  else profile.insertAdjacentHTML('beforeend',brandMarkup);
   const games=getMostPlayedGames(hero,channel,sully),markup=games.length?'<section class="hero-profile-integrated-games"><h4>JUEGOS Y RITMO</h4><div class="hero-profile-game-grid">'+games.map(name=>'<article><strong>'+escapeStatsHtml(name)+'</strong></article>').join('')+'</div></section>':'';
   const current=profile.querySelector('.hero-profile-integrated-games');
   if(current)current.outerHTML=markup;
@@ -1660,9 +1664,8 @@ function renderHeroBrandSummary(hero) {
  if(hero.availability)metadata.push(['DISPONIBILIDAD',hero.availability]);
  if(hero.content_notes)metadata.push(['NOTAS DE CONTENIDO',hero.content_notes]);
  const audienceFit=hero.mediaProfile?.audience_fit?'<p class="hero-profile-audience-fit"><strong>ENCAJE DE AUDIENCIA</strong>'+safe(hero.mediaProfile.audience_fit)+'</p>':'';
- const contact=String(hero.mediaProfile?.contact||'').trim();
- const contactCta=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact)
-  ?'<a class="hero-profile-collab-cta" href="mailto:'+safe(contact)+'?subject='+encodeURIComponent('Propuesta de colaboración · '+getHeroDisplayName(hero))+'">PROPONER UNA COLABORACIÓN CON '+safe(getHeroDisplayName(hero))+' ↗</a>':'';
+ const creatorName=getHeroDisplayName(hero);
+ const contactCta='<a class="hero-profile-collab-cta" href="#brand-proposal" data-creator-proposal="'+safe(creatorName)+'">PROPONER UNA COLABORACIÓN CON '+safe(creatorName)+' ↗</a>';
  return '<section class="hero-profile-brand-summary" aria-label="Ficha ejecutiva para marcas"><div class="hero-profile-brand-summary-head"><small>FICHA PARA MARCAS</small><h4>DATOS COMPARABLES DEL CANAL</h4></div>'+
   '<div class="hero-profile-brand-slots">'+slots.map(([label,value,detail])=>'<article><small>'+safe(label)+'</small><strong>'+safe(value)+'</strong><span>'+safe(detail||'')+'</span></article>').join('')+'</div>'+
   '<dl class="hero-profile-brand-meta">'+metadata.map(([label,value])=>'<div><dt>'+safe(label)+'</dt><dd>'+safe(value)+'</dd></div>').join('')+'</dl>'+
@@ -2323,7 +2326,7 @@ function printHeroDossier(){
             const add = (key, loader) => jobs.push(loadResourceOnce(key, loader));
 
             // Inicio y central EN VIVO: solo necesitan el estado público resumido.
-            if ([0, 3, 10].includes(Number(chapterNum))) add('institute-stats', loadInstituteStats);
+            if ([0, 2, 3, 10].includes(Number(chapterNum))) add('institute-stats', loadInstituteStats);
 
             // Roster, estadísticas y mapa comparten las fuentes de perfiles y métricas.
             if ([2, 3, 13].includes(Number(chapterNum))) {
