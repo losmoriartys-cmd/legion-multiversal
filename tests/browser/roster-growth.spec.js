@@ -43,13 +43,32 @@ test('cada Bitácora tiene capítulos separados de Recorrido y Crecimiento', asy
     await expect(growthPanel).toBeVisible();
     await expect(growthPanel.locator('.hero-growth-chapter')).toBeVisible();
     await expect(growthPanel.locator('.hero-growth-heading')).toContainText('CRECIMIENTO');
-    await expect(growthPanel.locator('.hero-growth-method')).toContainText('no se estiman');
+    await expect(growthPanel.locator('.hero-growth-method')).toContainText('no se suman audiencias');
+    await expect(growthPanel.locator('.hero-growth-periods')).toBeVisible();
+    const periods = growthPanel.locator('[data-growth-window]');
+    await expect(periods).toHaveCount(3);
+    for (const period of ['7d', '30d', '90d']) {
+      const tab = growthPanel.locator('[data-growth-window="' + period + '"]');
+      await tab.click();
+      await expect(tab).toHaveAttribute('aria-selected', 'true');
+      await expect(growthPanel.locator('[data-growth-panel="' + period + '"]')).toBeVisible();
+      await expect(growthPanel.locator('[data-growth-panel="' + period + '"] .hero-growth-coverage')).toBeVisible();
+    }
+
+    await expect(growthPanel.locator('.hero-growth-content')).toBeVisible();
+    await expect(growthPanel.locator('.hero-growth-collaborations')).toBeVisible();
+    await expect(growthPanel.locator('.hero-growth-audience')).toContainText('No hay datos privados autorizados');
     if (creatorId === 'pato-oratoris') {
       await expect(growthPanel).toContainText('SUSCRIPTORES');
-      await expect(growthPanel).toContainText('YOUTUBE');
+      await expect(growthPanel).toContainText('YOUTUBE DATA API');
+      await expect(growthPanel.locator('.hero-growth-content')).toContainText('YOUTUBE');
     } else {
       await expect(growthPanel).toContainText('TWITCH');
       await expect(growthPanel).toContainText('SEGUIDORES ACTUALES');
+    }
+    if (creatorId === 'rod3r1k' || creatorId === 'akuma') {
+      await expect(growthPanel.locator('.hero-growth-collaborations')).toContainText('Expediente 002 · BarFender');
+      await expect(growthPanel.locator('.hero-growth-collaborations')).toContainText('DATO APORTADO POR EL CREADOR');
     }
 
     await recorrido.click();
