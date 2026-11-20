@@ -42,6 +42,23 @@ class PublicAudiencePathsContractTests(unittest.TestCase):
         self.assertIn("@media (max-width: 760px)", self.css)
         self.assertIn("@media (prefers-reduced-motion: reduce)", self.css)
 
+    def test_home_three_entry_paths_have_distinct_destinations(self):
+        home = self.home.split('id="chapter-0"', 1)[1].split('id="chapter-1"', 1)[0]
+        self.assertIn('onclick="switchChapter(2)"', home)
+        self.assertIn('href="./marcas/"', home)
+        self.assertIn("setRecruitmentMode('creator')", home)
+        self.assertIn('onclick="switchChapter(6)', home)
+
+    def test_barfender_case_separates_session_estimate_from_public_vod_lengths(self):
+        case = self.home.split('id="chapter-12"', 1)[1]
+        self.assertIn("aproximadamente 90 minutos", case)
+        self.assertIn("1 h 14 min cada uno", case)
+        self.assertIn("no una medición de duración total ni una suma de tiempo", case)
+        self.assertIn("VOD 01 · LOS MORIARTYS", case)
+        self.assertIn("VOD 02 · LADY MORIARTY01", case)
+        self.assertIn("VOD 03 · TheR0D3R1K", case)
+        self.assertIn("no se localizó un VOD público", case)
+
 
 if __name__ == "__main__":
     unittest.main()
