@@ -148,6 +148,7 @@ def build(roster, twitch, platforms, clips, now=None):
                 definitions = [
                     ("live_status", "Estado de transmisión", None, "status", "Estado observado en la última consulta pública; un estado vencido queda oculto."),
                     ("current_viewers", "Espectadores en la última captura", None, "viewers", "Lectura puntual de stream en vivo; no equivale a espectadores únicos ni promedio."),
+                    ("followers_total", "Seguidores totales", channel.get("followers_total"), "followers", "Total público del canal informado por Twitch Helix; no incluye identidades ni fechas de seguimiento."),
                     ("samples_total", "Muestras históricas", window.get("samples_total"), "samples", "Cantidad de observaciones almacenadas en el período efectivo."),
                     ("live_samples", "Muestras en directo", window.get("live_samples"), "samples", "Observaciones que encontraron el canal en directo."),
                     ("streams_observed", "Sesiones observadas", window.get("streams_observed"), "streams", "Sesiones distinguibles mediante stream_id dentro del muestreo."),
@@ -158,30 +159,41 @@ def build(roster, twitch, platforms, clips, now=None):
                 ]
                 for key, label, value, unit, meaning in definitions:
                     is_status_metric = key in {"live_status", "current_viewers"}
-                    metric_captured_at = status_captured_at if is_status_metric else sample_captured_at
-                    freshness = status_freshness if is_status_metric else sample_freshness
-
-                    if value is None and key in {"samples_total", "live_samples", "streams_observed"} and not channel:
-                        continue
-                    if key == "live_status":
-                        value = ("live" if channel.get("live") else "offline") if freshness == "fresh" else None
-                    elif key == "current_viewers":
-                        value = channel.get("current_viewers") if freshness == "fresh" and channel.get("live") else None
-                    elif freshness == "unavailable":
-                        value = None
-
-                    if is_status_metric:
+                    is_follower_metric = key == "followers_total"
+                    if is_follower_metric:
+                        metric_captured_at = channel.get("followers_captured_at")
+                        freshness = capture_status("twitch", metric_captured_at, now)
+                        if freshness == "unavailable" or value is None:
+                            value = None
+                            freshness = "unavailable"
                         status = freshness
-                        if key == "current_viewers" and freshness == "fresh" and not channel.get("live"):
-                            status = "offline"
+                        method = "public_helix_follower_total_only"
                     else:
-                        source_status = "estimated" if key == "estimated_hours_watched" else "sampled"
-                        status = source_status if freshness == "fresh" else freshness
+                        metric_captured_at = status_captured_at if is_status_metric else sample_captured_at
+                        freshness = status_freshness if is_status_metric else sample_freshness
+                        if value is None and key in {"samples_total", "live_samples", "streams_observed"} and not channel:
+                            continue
+                        if key == "live_status":
+                            value = ("live" if channel.get("live") else "offline") if freshness == "fresh" else None
+                        elif key == "current_viewers":
+                            value = channel.get("current_viewers") if freshness == "fresh" and channel.get("live") else None
+                        elif freshness == "unavailable":
+                            value = None
 
+                        if is_status_metric:
+                            status = freshness
+                            if key == "current_viewers" and freshness == "fresh" and not channel.get("live"):
+                                status = "offline"
+                        else:
+                            source_status = "estimated" if key == "estimated_hours_watched" else "sampled"
+                            status = source_status if freshness == "fresh" else freshness
+                        method = "public_helix_snapshot" if is_status_metric else "55_minute_public_sampling"
+
+                    metric_period = source_period(metric_captured_at, metric_captured_at, "point_in_time") if is_follower_metric and metric_captured_at else period
                     metrics.append(make_metric(
-                        "twitch", handle, key, label, value, unit, metric_captured_at, period,
-                        metric_source, "public_helix_snapshot" if is_status_metric else "55_minute_public_sampling",
-                        status, meaning, "data.json",
+                        "twitch", handle, key, label, value, unit, metric_captured_at, metric_period,
+                        metric_source if not is_follower_metric else (channel.get("followers_source") or metric_source),
+                        method, status, meaning, "data.json",
                     ))
             elif platform in {"youtube", "kick"}:
                 creator_platform = (platform_creators.get(creator_id) or {}).get("platforms") or {}

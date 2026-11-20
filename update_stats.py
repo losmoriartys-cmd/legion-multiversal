@@ -95,6 +95,95 @@ def helix_get(path, token, params):
     ).get("data", [])
 
 
+FOLLOWERS_TOKEN_FILE = "twitch-followers-refresh-token.enc"
+
+
+def _followers_fernet():
+    """Cifrado autenticado para persistir el refresh token rotativo sin publicarlo en claro."""
+    key = os.environ.get("TWITCH_FOLLOWERS_TOKEN_KEY", "").strip()
+    if not key:
+        raise RuntimeError("Falta TWITCH_FOLLOWERS_TOKEN_KEY para cifrar el token OAuth rotativo.")
+    try:
+        from cryptography.fernet import Fernet
+    except ImportError as exc:
+        raise RuntimeError("Falta la dependencia cryptography para proteger el token OAuth.") from exc
+    return Fernet(key.encode("ascii"))
+
+
+def get_followers_user_token(now=None):
+    """Obtiene un token de usuario sin scopes: permite consultar solo el total público."""
+    now = now or datetime.now(timezone.utc)
+    fernet = None
+    state = None
+    if os.path.exists(FOLLOWERS_TOKEN_FILE):
+        fernet = _followers_fernet()
+        try:
+            encrypted = open(FOLLOWERS_TOKEN_FILE, "rb").read()
+            state = json.loads(fernet.decrypt(encrypted).decode("utf-8"))
+        except Exception as exc:
+            raise RuntimeError("No se pudo descifrar el estado OAuth de seguidores; no se reemplazó.") from exc
+    else:
+        initial_refresh = os.environ.get("TWITCH_FOLLOWERS_REFRESH_TOKEN", "").strip()
+        if not initial_refresh:
+            return None
+        state = {"refresh_token": initial_refresh}
+
+    expires_at = state.get("expires_at")
+    if state.get("access_token") and expires_at:
+        try:
+            expiry = datetime.fromisoformat(expires_at.replace("Z", "+00:00"))
+            if expiry.tzinfo and (expiry - now).total_seconds() > 300:
+                return state["access_token"]
+        except (TypeError, ValueError):
+            pass
+
+    if fernet is None:
+        fernet = _followers_fernet()
+    if not CLIENT_ID or not CLIENT_SECRET:
+        raise RuntimeError("Faltan TWITCH_CLIENT_ID/TWITCH_CLIENT_SECRET para renovar el acceso de solo lectura.")
+    refresh_token = state.get("refresh_token")
+    if not refresh_token:
+        raise RuntimeError("El estado OAuth cifrado no contiene refresh_token.")
+    form = urllib.parse.urlencode({
+        "client_id": CLIENT_ID,
+        "client_secret": CLIENT_SECRET,
+        "grant_type": "refresh_token",
+        "refresh_token": refresh_token,
+    }).encode("utf-8")
+    result = request_json(
+        "https://id.twitch.tv/oauth2/token",
+        {"Content-Type": "application/x-www-form-urlencoded"},
+        form,
+    )
+    new_refresh = result.get("refresh_token")
+    access_token = result.get("access_token")
+    expires_in = result.get("expires_in")
+    if not new_refresh or not access_token or not isinstance(expires_in, int):
+        raise RuntimeError("Twitch no devolvió un juego completo de tokens OAuth renovados.")
+    next_state = {
+        "access_token": access_token,
+        "refresh_token": new_refresh,
+        "expires_at": (now + timedelta(seconds=expires_in)).isoformat().replace("+00:00", "Z"),
+    }
+    encrypted_state = fernet.encrypt(json.dumps(next_state, separators=(",", ":")).encode("utf-8"))
+    with open(FOLLOWERS_TOKEN_FILE, "wb") as handle:
+        handle.write(encrypted_state)
+    return access_token
+
+
+def get_channel_followers_total(broadcaster_id, user_token):
+    """Consulta exclusivamente total; ignora deliberadamente la lista de identidades."""
+    query = urllib.parse.urlencode({"broadcaster_id": str(broadcaster_id)})
+    result = request_json(
+        "https://api.twitch.tv/helix/channels/followers?" + query,
+        {"Client-ID": CLIENT_ID, "Authorization": "Bearer " + user_token},
+    )
+    total = result.get("total")
+    if isinstance(total, bool) or not isinstance(total, int) or total < 0:
+        raise RuntimeError("Twitch no devolvió un total de seguidores numérico.")
+    return total
+
+
 def load_data():
     if not os.path.exists(DATA_FILE):
         return {"schema_version": 2, "window_days": WINDOW_DAYS, "channels": {}}
@@ -209,6 +298,13 @@ def main():
         raise RuntimeError("La respuesta de Twitch contiene canales duplicados o inesperados; se cancela la publicación.")
     old = load_data()
     channel_data = old.get("channels", {})
+    try:
+        followers_user_token = get_followers_user_token(now)
+        followers_token_error = None
+    except Exception as exc:
+        followers_user_token = None
+        followers_token_error = str(exc)
+        print("AVISO: no se pudo preparar la consulta del total de seguidores: {}".format(exc))
 
     sampled_channels = []
     skipped_channels = []
@@ -243,14 +339,49 @@ def main():
         last_snapshot_at = max(valid_times).isoformat().replace("+00:00", "Z") if valid_times else None
         if should_sample:
             last_snapshot_at = now_iso
+        previous_followers = previous.get("followers_total")
+        followers_total = previous_followers
+        followers_captured_at = previous.get("followers_captured_at")
+        followers_source = previous.get("followers_source")
+        followers_history = list(previous.get("followers_history") or [])
+        if followers_user_token:
+            try:
+                followers_total = get_channel_followers_total(user["id"], followers_user_token)
+                followers_captured_at = now_iso
+                followers_source = "Twitch Helix Get Channel Followers · total público"
+                followers_note = "Total público consultado con OAuth de usuario sin scopes; no se solicitaron permisos de moderación ni se guardó la lista de seguidores."
+                followers_status = "fresh"
+                today = now_iso[:10]
+                daily_point = {"date": today, "captured_at": now_iso, "followers_total": followers_total}
+                followers_history = [point for point in followers_history if point.get("date") != today]
+                followers_history.append(daily_point)
+                followers_history.sort(key=lambda point: point.get("date") or "")
+                history_cutoff = (now - timedelta(days=365)).date().isoformat()
+                followers_history = [point for point in followers_history if point.get("date", "") >= history_cutoff]
+            except Exception as exc:
+                followers_note = "No se pudo actualizar el contador en esta ejecución; se conserva la última captura y su fecha. Detalle: {}".format(exc)
+                followers_status = "delayed" if previous_followers is not None else "unavailable"
+                print("AVISO: seguidores de {} sin actualización: {}".format(login, exc))
+        else:
+            followers_note = (
+                "Pendiente de configurar OAuth de usuario de solo lectura. No requiere moderador ni acceso a identidades."
+                if not followers_token_error else
+                "Autorización de solo lectura todavía no disponible: " + followers_token_error
+            )
+            followers_status = "delayed" if previous_followers is not None else "awaiting_authorization"
+
         channel_data[login] = {
             "login": login,
             "display_name": user.get("display_name", login),
             "description": user.get("description", ""),
             "profile_image_url": user.get("profile_image_url"),
             "twitch_url": "https://twitch.tv/" + login,
-            "followers_total": None,
-            "followers_note": "No incluido: requiere autorización de usuario/moderador en Twitch.",
+            "followers_total": followers_total,
+            "followers_captured_at": followers_captured_at,
+            "followers_source": followers_source,
+            "followers_status": followers_status,
+            "followers_note": followers_note,
+            "followers_history": followers_history,
             "live": bool(stream),
             "current_viewers": stream.get("viewer_count") if stream else None,
             "current_game": stream.get("game_name") if stream else None,
@@ -277,7 +408,9 @@ def main():
             "skipped_channels": skipped_channels,
             **collection_flags(channels, resolved, sampled_channels, skipped_channels),
             "registry_source": ROSTER_FILE,
-            "authentication": "Twitch app access token; public Helix endpoints only",
+            "authentication": "Twitch app access token for public channel/stream data; optional user access token without scopes for public follower totals only",
+            "followers_total_only": bool(followers_user_token),
+            "followers_list_access": False,
             "private_analytics_access": False
         },
         "archived_channels": [login for login in channel_data if login not in channels],

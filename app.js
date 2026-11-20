@@ -368,6 +368,7 @@ function renderStatsDashboard(hero,helix,sully){
 
  if(twitchAccount){
   const definitions=[
+   {key:'followers_total',label:'Seguidores actuales',digits:0,suffix:' seguidores'},
    {key:'streams_observed',label:'Directos detectados',digits:0,suffix:' sesiones'},
    {key:'average_viewers_sampled',label:'Promedio de espectadores',digits:1,suffix:' espectadores'},
    {key:'peak_viewers_sampled',label:'Pico observado',digits:0,suffix:' espectadores'},
@@ -1744,6 +1745,111 @@ function renderHeroTimeline(hero,record){
   return '<li class="hero-timeline-item is-'+type+'"><span class="hero-timeline-dot" aria-hidden="true"></span><div class="hero-timeline-card"><small>'+HERO_TIMELINE_LABELS[type]+(date?' · '+safe(date):'')+'</small><strong>'+safe(item.title)+'</strong>'+(item.text?'<p>'+safe(item.text)+'</p>':'')+(item.url?'<a href="'+safe(item.url)+'" target="_blank" rel="noopener noreferrer">'+linkLabel+'</a>':'')+(item.source?'<em>Fuente: '+safe(item.source)+'</em>':'')+'</div></li>';
  }).join('')+'</ol>';
 }
+function renderHeroGrowthTrend(points,title,unit,sourceLabel){
+ const safe=escapeStatsHtml;
+ const rows=(Array.isArray(points)?points:[]).map(point=>({
+  date:point.date||String(point.captured_at||'').slice(0,10),
+  value:Number(point.value)
+ })).filter(point=>point.date&&Number.isFinite(point.value)).sort((a,b)=>a.date.localeCompare(b.date)).slice(-12);
+ if(!rows.length)return '<p class="hero-growth-empty">Todavía no hay capturas históricas para construir una tendencia.</p>';
+ if(rows.length===1)return '<div class="hero-growth-trend"><div class="hero-growth-trend-head"><strong>'+safe(title)+'</strong><span>PRIMERA CAPTURA · '+safe(statsDate(rows[0].date))+'</span></div><p>La serie comenzó con '+safe(statsNumber(rows[0].value,0))+' '+safe(unit)+'. La variación aparecerá cuando exista otra captura de un día distinto.</p><small>Fuente: '+safe(sourceLabel)+'</small></div>';
+ const first=rows[0],last=rows[rows.length-1],delta=last.value-first.value;
+ const percent=first.value!==0?(delta/first.value)*100:null;
+ const max=Math.max(...rows.map(point=>point.value),1);
+ const sign=delta>0?'+':'';
+ const bars=rows.map(point=>{
+  const h=Math.max(5,Math.round(point.value/max*64));
+  return '<div class="hero-growth-bar-item" title="'+safe(statsDate(point.date))+': '+safe(statsNumber(point.value,0))+' '+safe(unit)+'"><span style="height:'+h+'px" aria-label="'+safe(statsDate(point.date))+': '+safe(statsNumber(point.value,0))+'"></span><small>'+safe(point.date.slice(5).replace('-','/'))+'</small></div>';
+ }).join('');
+ return '<section class="hero-growth-trend"><div class="hero-growth-trend-head"><strong>'+safe(title)+'</strong><span>'+safe(rows.length)+' CAPTURAS</span></div><div class="hero-growth-trend-result"><b class="'+(delta<0?'is-negative':'is-positive')+'">'+safe(sign+statsNumber(delta,0))+'</b><span>variación desde '+safe(statsDate(first.date))+' hasta '+safe(statsDate(last.date))+(percent===null?'':' · '+safe(sign+statsNumber(percent,1))+'%')+'</span></div><div class="hero-growth-bars" role="img" aria-label="'+safe(title)+'; evolución desde '+safe(statsDate(first.date))+' hasta '+safe(statsDate(last.date))+'">'+bars+'</div><small>Fuente: '+safe(sourceLabel)+' · valores diarios, una captura por fecha</small></section>';
+}
+function renderHeroGrowthChapter(hero,channel,sully){
+ const safe=escapeStatsHtml,account=(hero?.accounts||[]).find(item=>item?.account_type==='creator_channel')||(hero?.accounts||[])[0]||null;
+ const cards=[];
+ let trend='';
+ if(account?.platform==='twitch'){
+  const followers=getNormalizedCreatorMetric(hero,'followers_total','twitch');
+  if(followers.state==='available'){
+   cards.push({label:'SEGUIDORES ACTUALES',value:statsNumber(followers.value,0),note:'Twitch · captura '+normalizedMetricCaptureLabel(followers)});
+  }else if(followers.state==='stale'){
+   cards.push({label:'ÚLTIMA CIFRA REGISTRADA',value:statsNumber(followers.value,0),note:'No vigente · última captura '+normalizedMetricCaptureLabel(followers)});
+  }else{
+   cards.push({label:'SEGUIDORES ACTUALES',value:'PENDIENTE',note:'Se activa al conectar OAuth de solo lectura; no requiere moderador.'});
+  }
+  const points=(channel?.followers_history||[]).map(point=>({date:point.date,captured_at:point.captured_at,value:point.followers_total}));
+  trend=renderHeroGrowthTrend(points,'EVOLUCIÓN DE SEGUIDORES EN TWITCH','seguidores','Twitch Helix · total público');
+ }else if(account?.platform==='youtube'){
+  const definitions=[
+   ['subscribers','SUSCRIPTORES',0],
+   ['total_views','VISUALIZACIONES ACUMULADAS',0],
+   ['videos_total','VIDEOS PUBLICADOS',0]
+  ];
+  definitions.forEach(([key,label,digits])=>{
+   const metric=getNormalizedCreatorMetric(hero,key,'youtube');
+   cards.push({label,value:metric.state==='available'?statsNumber(metric.value,digits):metric.state==='stale'?statsNumber(metric.value,digits)+' · HISTÓRICO':'PENDIENTE',note:metric.state==='available'?'YouTube · captura '+normalizedMetricCaptureLabel(metric):'No hay una captura pública vigente.'});
+  });
+  const platform=platformStatsData?.creators?.[creatorRecordKey(hero)]?.platforms?.youtube;
+  const points=(platform?.history||[]).map(point=>({captured_at:point.captured_at,value:point.metrics?.subscribers}));
+  trend=renderHeroGrowthTrend(points,'EVOLUCIÓN DE SUSCRIPTORES EN YOUTUBE','suscriptores','YouTube Data API v3');
+ }else{
+  cards.push({label:'AUDIENCIA',value:'SIN CUENTA DE CREADOR',note:'No hay una plataforma principal vinculada a este expediente.'});
+ }
+ const summary=sully?.annual_summary_2026||sully?.summary||{};
+ const externalStatus=sully?.status||'pending';
+ const period=sully?.period?.start_date&&sully?.period?.end_date
+  ?statsDate(sully.period.start_date)+' — '+statsDate(sully.period.end_date)
+  :sully?.period?.label||'Período no informado';
+ const isYoutube=account?.platform==='youtube';
+ const sourceLabel=isYoutube
+  ?'CAPTURAS PROPIAS · YOUTUBE DATA API'
+  :externalStatus==='user_supplied_summary'||externalStatus==='user_supplied_annual_summary'
+   ?'RESUMEN APORTADO · SIN VERIFICACIÓN INDEPENDIENTE'
+   :externalStatus==='partial'?'REGISTRO PARCIAL · FUENTE EXTERNA'
+   :'SIN HISTORIAL DISPONIBLE';
+ const externalMetrics=[
+  ['SEGUIDORES GANADOS',summary.followers_gained??summary.followers_gain_reported,'en el período'],
+  ['DIRECTOS',summary.streams??summary.streams_count,'sesiones'],
+  ['HORAS TRANSMITIDAS',summary.hours_streamed??summary.airtime_hours??(summary.airtime_minutes!=null?summary.airtime_minutes/60:null),'horas'],
+  ['HORAS VISTAS',summary.hours_watched,'horas'],
+  ['PROMEDIO DE AUDIENCIA',summary.average_viewers??summary.average_viewers_duration_weighted,'espectadores'],
+  ['PICO DE AUDIENCIA',summary.peak_viewers,'espectadores'],
+  ['SEGUIDORES REGISTRADOS',summary.followers_total,'según la fuente en ese período']
+ ].filter(item=>item[1]!==null&&item[1]!==undefined&&Number.isFinite(Number(item[1])));
+ externalMetrics.forEach(([label,value,unit])=>cards.push({label,value:statsNumber(Number(value),Number.isInteger(Number(value))?0:1)+(unit==='horas'?' h':unit==='sesiones'?'':' '+unit),note:'SullyGnome · '+period}));
+ const start=sully?.period?.start_date,end=sully?.period?.end_date,streams=summary.streams??summary.streams_count;
+ if(start&&end&&Number.isFinite(Number(streams))){
+  const spanDays=Math.max(1,Math.round((Date.parse(end+'T00:00:00Z')-Date.parse(start+'T00:00:00Z'))/86400000)+1);
+  cards.push({label:'RITMO DE EMISIÓN',value:statsNumber(Number(streams)*7/spanDays,1)+' directos / semana',note:'Cálculo propio sobre '+spanDays+' días del período '+period+'.'});
+ }
+ const cardHtml=cards.map(item=>'<article class="hero-growth-card"><small>'+safe(item.label)+'</small><strong>'+safe(item.value)+'</strong><span>'+safe(item.note)+'</span></article>').join('');
+ const externalNote=externalStatus==='pending'
+  ?'No hay un registro histórico suficiente para este canal en SullyGnome. No se completan huecos con estimaciones.'
+  :externalStatus==='user_supplied_summary'||externalStatus==='user_supplied_annual_summary'
+   ?'Este bloque reproduce un resumen aportado al proyecto. No debe interpretarse como una consulta automatizada ni como dato verificado independientemente.'
+   :'Referencia histórica de SullyGnome. La cobertura puede ser parcial y el período no equivale a una lectura actual.';
+ const sourceTitle=isYoutube?'YOUTUBE DATA API · HISTORIAL PROPIO':'SULLYGNOME · REFERENCIA HISTÓRICA';
+ const sourceNote=isYoutube
+  ?'Las capturas propias de suscriptores, visualizaciones y videos comienzan con la activación del registro. No se importan períodos anteriores sin evidencia.'
+  :externalNote;
+ const sourceUrl=isYoutube?account?.url:sully?.source_url;
+ return '<section class="hero-growth-chapter" aria-label="Capítulo Crecimiento"><header class="hero-growth-heading"><div><small>BITÁCORA · CAPÍTULO 02</small><h4>CRECIMIENTO</h4><p>Trayectoria de audiencia, constancia de emisión y evolución pública del canal.</p></div><span class="hero-growth-stamp">'+safe(account?.platform==='youtube'?'YOUTUBE':'TWITCH')+'</span></header><div class="hero-growth-grid">'+cardHtml+'</div>'+trend+'<section class="hero-growth-source"><div><strong>'+safe(sourceTitle)+'</strong><span>'+safe(sourceLabel)+' · '+safe(period)+'</span></div><p>'+safe(sourceNote)+'</p>'+(sourceUrl?'<a href="'+safe(sourceUrl)+'" target="_blank" rel="noopener noreferrer">CONSULTAR FUENTE ORIGINAL ↗</a>':'')+'</section><p class="hero-growth-method">Metodología: los totales de Twitch se capturan desde Helix y se archivan una vez por día. Las variaciones propias se calculan entre capturas guardadas por Legión. SullyGnome se conserva como fuente externa separada; períodos y métricas no se suman entre sí. Los datos ausentes no se estiman.</p></section>';
+}
+function activateHeroBitacoraView(button){
+ const wrap=button.closest('.hero-bitacora-chapters');
+ if(!wrap)return;
+ wrap.querySelectorAll('[data-bitacora-view]').forEach(tab=>{
+  const active=tab===button;
+  tab.classList.toggle('is-active',active);
+  tab.setAttribute('aria-selected',active?'true':'false');
+  tab.tabIndex=active?0:-1;
+ });
+ wrap.querySelectorAll('[data-bitacora-panel]').forEach(panel=>{
+  const active=panel.dataset.bitacoraPanel===button.dataset.bitacoraView;
+  panel.hidden=!active;
+  panel.classList.toggle('is-active',active);
+ });
+}
+
 function renderHeroProfileTabs(hero) {
  const safe=escapeStatsHtml,record=getCreatorRecord(hero),channel=findChannelStats(hero),sullyChannel=findSullyChannel(hero);
  const clips=twitchClipsData?.creators?.[creatorRecordKey(hero)]?.clips||[];
@@ -1758,10 +1864,11 @@ function renderHeroProfileTabs(hero) {
  const overview='<div class="hero-profile-overview"><p class="hero-profile-bio">'+safe(hero.bio||'Presentación personal pendiente de completar.')+'</p>'+gameHtml+'</div>'
  const clipsHtml=clips.length?'<div class="hero-profile-clips-grid">'+clips.slice(0,4).map(clip=>'<article class="hero-profile-clip">'+(clip.thumbnail_url?'<a href="'+safe(clip.url)+'" target="_blank" rel="noopener noreferrer"><img src="'+safe(clip.thumbnail_url)+'" alt="" loading="lazy"></a>':'')+'<div><strong>'+safe(clip.title||'Clip destacado')+'</strong><small>'+safe(statsNumber(clip.view_count,0))+' visualizaciones · '+safe(clip.creator_name||'Creador')+'</small><a href="'+safe(clip.url)+'" target="_blank" rel="noopener noreferrer">VER CLIP ↗</a></div></article>').join('')+'</div>':'<p class="hero-profile-empty">'+(twitchClipsLoadError?'No se pudo cargar la captura de clips.':'Todavía no hay clips públicos disponibles para este canal en la ventana consultada.')+'</p>';
  const logHtml=renderHeroTimeline(hero,record);
+ const growthHtml=renderHeroGrowthChapter(hero,channel,sullyChannel);
  const editorial=hero.mediaProfile||{},formats=editorial.formats||hero.areas||[];
  const brandHtml='<div class="hero-profile-brand"><h4>IDENTIDAD Y PROPUESTA EDITORIAL</h4><p>'+safe(editorial.editorial||hero.bio||'Descripción comercial pendiente de completar.')+'</p><h4>TERRITORIOS Y ESPECIALIDADES</h4>'+(formats.length?'<ul class="hero-profile-detail-list">'+formats.map(x=>'<li><strong>'+safe(x)+'</strong></li>').join('')+'</ul>':'<p class="hero-profile-empty">Especialidades pendientes de confirmar.</p>')+'<h4>FORMATOS Y OPORTUNIDADES</h4>'+(editorial.opportunities?.length?'<ul class="hero-profile-detail-list">'+editorial.opportunities.map(x=>'<li><strong>'+safe(x)+'</strong></li>').join('')+'</ul>':'<p class="hero-profile-empty">Formatos por conversar con el creador.</p>')+'<p class="hero-profile-method">'+safe(editorial.disclaimer||'Oportunidades potenciales; no campañas contratadas.')+'</p>'+'</div>';
  const tabs=[['perfil','PERFIL'],['estadisticas','ESTADÍSTICAS'],['clips','CLIPS'],['bitacora','BITÁCORA'],['marcas','PARA MARCAS']];
- const panels=['<section class="hero-profile-tab-panel is-active" id="profile-tab-perfil" role="tabpanel">'+overview+'</section>','<section class="hero-profile-tab-panel" id="profile-tab-estadisticas" role="tabpanel" hidden><h4>ESTADÍSTICAS · RENDIMIENTO</h4>'+renderStatsDashboard(hero,channel,sullyChannel)+'</section>','<section class="hero-profile-tab-panel" id="profile-tab-clips" role="tabpanel" hidden><h4>CLIPS DESTACADOS · MÁXIMO 4</h4>'+clipsHtml+'</section>','<section class="hero-profile-tab-panel" id="profile-tab-bitacora" role="tabpanel" hidden><h4>BITÁCORA · SU RECORRIDO EN LA LEGIÓN</h4>'+logHtml+'</section>','<section class="hero-profile-tab-panel" id="profile-tab-marcas" role="tabpanel" hidden><h4>PARA MARCAS · DATOS Y PROPUESTA</h4>'+renderHeroBrandSummary(hero)+brandHtml+((hero.id==='moriartys'||hero.id==='rod3r1k')?'<section class="hero-profile-epic-codes"><h4>CÓDIGO DE CREADOR · EPIC GAMES</h4><div data-epic-profile-code="'+hero.id+'">'+renderEpicCreatorCodeCard(hero.id==='moriartys'?'moriartys':'rod3r1k','roster-profile')+'</div></section>':'')+'</section>'].join('');
+ const panels=['<section class="hero-profile-tab-panel is-active" id="profile-tab-perfil" role="tabpanel">'+overview+'</section>','<section class="hero-profile-tab-panel" id="profile-tab-estadisticas" role="tabpanel" hidden><h4>ESTADÍSTICAS · RENDIMIENTO</h4>'+renderStatsDashboard(hero,channel,sullyChannel)+'</section>','<section class="hero-profile-tab-panel" id="profile-tab-clips" role="tabpanel" hidden><h4>CLIPS DESTACADOS · MÁXIMO 4</h4>'+clipsHtml+'</section>','<section class="hero-profile-tab-panel" id="profile-tab-bitacora" role="tabpanel" hidden><h4>BITÁCORA · SU RECORRIDO EN LA LEGIÓN</h4><div class="hero-bitacora-chapters"><div class="hero-bitacora-subtabs" role="tablist" aria-label="Capítulos de la Bitácora"><button type="button" class="hero-bitacora-subtab is-active" role="tab" aria-selected="true" aria-controls="bitacora-panel-recorrido" data-bitacora-view="recorrido" onclick="activateHeroBitacoraView(this)">RECORRIDO</button><button type="button" class="hero-bitacora-subtab" role="tab" aria-selected="false" aria-controls="bitacora-panel-crecimiento" tabindex="-1" data-bitacora-view="crecimiento" onclick="activateHeroBitacoraView(this)">CRECIMIENTO</button></div><div id="bitacora-panel-recorrido" data-bitacora-panel="recorrido" class="hero-bitacora-subpanel is-active">'+logHtml+'</div><div id="bitacora-panel-crecimiento" data-bitacora-panel="crecimiento" class="hero-bitacora-subpanel" hidden>'+growthHtml+'</div></div></section>','<section class="hero-profile-tab-panel" id="profile-tab-marcas" role="tabpanel" hidden><h4>PARA MARCAS · DATOS Y PROPUESTA</h4>'+renderHeroBrandSummary(hero)+brandHtml+((hero.id==='moriartys'||hero.id==='rod3r1k')?'<section class="hero-profile-epic-codes"><h4>CÓDIGO DE CREADOR · EPIC GAMES</h4><div data-epic-profile-code="'+hero.id+'">'+renderEpicCreatorCodeCard(hero.id==='moriartys'?'moriartys':'rod3r1k','roster-profile')+'</div></section>':'')+'</section>'].join('');
  return '<div class="hero-profile-tabs-wrap"><div class="hero-profile-tabs" role="tablist" aria-label="Secciones del perfil">'+tabs.map(([id,label],i)=>'<button type="button" class="hero-profile-tab'+(i===0?' is-active':'')+'" role="tab" aria-selected="'+(i===0?'true':'false')+'" aria-controls="profile-tab-'+id+'" tabindex="'+(i===0?'0':'-1')+'" data-profile-tab="'+id+'">'+label+'</button>').join('')+'</div>'+panels+'</div>';
 }
 function activateHeroProfileTab(button){const wrap=button.closest('.hero-profile-tabs-wrap');if(!wrap)return;if(button.dataset.profileTab==='bitacora')recordLegionProgress('bitacora');wrap.querySelectorAll('[data-profile-tab]').forEach(tab=>{const active=tab===button;tab.classList.toggle('is-active',active);tab.setAttribute('aria-selected',active?'true':'false');tab.tabIndex=active?0:-1;});wrap.querySelectorAll('.hero-profile-tab-panel').forEach(panel=>{const active=panel.id==='profile-tab-'+button.dataset.profileTab;panel.hidden=!active;panel.classList.toggle('is-active',active);});}

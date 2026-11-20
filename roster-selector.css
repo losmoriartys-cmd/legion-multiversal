@@ -1068,3 +1068,57 @@
 #chapter-2 #profile-tab-marcas .hero-profile-brand {
   padding: 14px 18px 16px;
 }
+
+/* BITÁCORA · Capítulo Crecimiento: dossier comercial legible y separado del recorrido. */
+#chapter-2 .hero-bitacora-chapters { min-width:0; }
+#chapter-2 .hero-bitacora-subtabs { display:flex; gap:6px; margin:12px 0 16px; border-bottom:3px solid #111; }
+#chapter-2 .hero-bitacora-subtab { padding:9px 14px; border:2px solid #111; border-bottom:0; border-radius:0; background:#fff; color:#111; font-size:.68rem; font-weight:950; letter-spacing:.07em; }
+#chapter-2 .hero-bitacora-subtab.is-active { background:#111; color:#ffd500; }
+#chapter-2 .hero-bitacora-subpanel { min-width:0; }
+#chapter-2 .hero-growth-chapter { display:grid; gap:14px; min-width:0; color:#111; }
+#chapter-2 .hero-growth-heading { display:flex; justify-content:space-between; align-items:center; gap:12px; padding:14px; border:3px solid #111; background:#ffd500; box-shadow:5px 5px 0 #111; }
+#chapter-2 .hero-growth-heading small { display:block; margin-bottom:3px; color:#d71932; font-size:.62rem; font-weight:950; letter-spacing:.1em; }
+#chapter-2 .hero-growth-heading h4 { margin:0; color:#111; font:clamp(1.6rem,3vw,2.4rem)/.95 'Bangers',Impact,sans-serif; }
+#chapter-2 .hero-growth-heading p { margin:6px 0 0; color:#222; font-size:.76rem; }
+#chapter-2 .hero-growth-stamp { flex:0 0 auto; padding:7px 9px; border:2px solid #111; background:#fff; color:#111; font-size:.65rem; font-weight:950; }
+#chapter-2 .hero-growth-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; }
+#chapter-2 .hero-growth-card { display:flex; min-width:0; flex-direction:column; gap:6px; padding:11px; border:2px solid #111; background:#fff; box-shadow:3px 3px 0 #111; }
+#chapter-2 .hero-growth-card:nth-child(3n+2) { background:#f4efff; }
+#chapter-2 .hero-growth-card small { color:#5a27d5; font-size:.59rem; font-weight:950; letter-spacing:.055em; }
+#chapter-2 .hero-growth-card strong { color:#111; font-size:clamp(1rem,2vw,1.45rem); line-height:1.05; overflow-wrap:anywhere; }
+#chapter-2 .hero-growth-card span { color:#555; font-size:.65rem; line-height:1.4; }
+#chapter-2 .hero-growth-trend { padding:12px; border:2px solid #111; background:#fff; }
+#chapter-2 .hero-growth-trend-head { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:8px; }
+#chapter-2 .hero-growth-trend-head strong { color:#111; font-size:.73rem; font-weight:950; }
+#chapter-2 .hero-growth-trend-head span { padding:4px 6px; background:#111; color:#ffd500; font-size:.58rem; font-weight:900; }
+#chapter-2 .hero-growth-trend-result { display:flex; flex-wrap:wrap; align-items:baseline; gap:9px; margin:12px 0 8px; }
+#chapter-2 .hero-growth-trend-result b { font-size:1.55rem; }
+#chapter-2 .hero-growth-trend-result b.is-positive { color:#187647; }
+#chapter-2 .hero-growth-trend-result b.is-negative { color:#b42332; }
+#chapter-2 .hero-growth-trend-result span { color:#555; font-size:.68rem; }
+#chapter-2 .hero-growth-bars { display:flex; align-items:flex-end; gap:5px; min-height:91px; padding:8px 4px 0; border-bottom:2px solid #111; }
+#chapter-2 .hero-growth-bar-item { display:flex; flex:1 1 0; min-width:0; flex-direction:column; align-items:center; justify-content:flex-end; gap:4px; height:82px; }
+#chapter-2 .hero-growth-bar-item span { display:block; width:min(100%,24px); min-height:5px; border:1px solid #111; background:linear-gradient(180deg,#6a1bff,#d71932); }
+#chapter-2 .hero-growth-bar-item small { color:#555; font-size:.53rem; white-space:nowrap; }
+#chapter-2 .hero-growth-trend > small { display:block; margin-top:8px; color:#666; font-size:.62rem; }
+#chapter-2 .hero-growth-empty { padding:12px; border:2px dashed #888; background:#fff; color:#555; font-size:.72rem; }
+#chapter-2 .hero-growth-source { padding:12px; border:2px solid #111; background:#f4efff; }
+#chapter-2 .hero-growth-source > div { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:6px; }
+#chapter-2 .hero-growth-source strong { color:#111; font-size:.7rem; font-weight:950; }
+#chapter-2 .hero-growth-source span { color:#5b3aa8; font-size:.61rem; font-weight:900; }
+#chapter-2 .hero-growth-source p { margin:8px 0; color:#444; font-size:.69rem; line-height:1.45; }
+#chapter-2 .hero-growth-source a { color:#4e20b8; font-size:.66rem; font-weight:950; text-decoration:underline; }
+#chapter-2 .hero-growth-method { margin:0; padding:10px; border-left:4px solid #d71932; background:#fff; color:#555; font-size:.65rem; line-height:1.5; }
+@media(max-width:820px) {
+ #chapter-2 .hero-growth-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+ #chapter-2 .hero-growth-heading { align-items:flex-start; }
+}
+@media(max-width:480px) {
+ #chapter-2 .hero-bitacora-subtab { flex:1 1 50%; padding:10px 6px; }
+ #chapter-2 .hero-growth-grid { grid-template-columns:1fr; }
+ #chapter-2 .hero-growth-heading { padding:10px; }
+ #chapter-2 .hero-growth-stamp { font-size:.56rem; }
+}
+@media(prefers-reduced-motion:reduce) {
+ #chapter-2 .hero-growth-bar-item span { transition:none; animation:none; }
+}
