@@ -56,6 +56,7 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
     await expect(dossier).toContainText(creator.name);
     const profileTabs = dossier.locator('[role="tab"][data-profile-tab]');
     await expect(profileTabs).toHaveCount(4);
+    await page.screenshot({ path: 'test-results/profile-' + creator.id + '-desktop.png', fullPage: true });
     await expect(profileTabs.filter({ hasText: /JUEGOS Y RITMO/i })).toHaveCount(0);
 
     const cardImage = card.locator('.comic-roster-photo img');
@@ -146,20 +147,36 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
     const mobileDossier = await dossier.evaluate(element => {
       const layout = element.querySelector('.hero-profile-reference-layout');
       const portrait = element.querySelector('.hero-profile-id-image img');
+      const parent = portrait?.parentElement;
+      const card = parent?.parentElement;
       const bounds = portrait?.getBoundingClientRect();
+      const parentBounds = parent?.getBoundingClientRect();
+      const cardBounds = card?.getBoundingClientRect();
+      const style = portrait ? getComputedStyle(portrait) : null;
+      const parentStyle = parent ? getComputedStyle(parent) : null;
       return {
         documentWidth: document.documentElement.scrollWidth,
         bodyWidth: document.body.scrollWidth,
         columns: layout ? getComputedStyle(layout).gridTemplateColumns.split(' ').length : 0,
         portraitVisible: Boolean(bounds && bounds.width > 0 && bounds.height > 0),
+        portraitBox: bounds ? {x:bounds.x,y:bounds.y,width:bounds.width,height:bounds.height} : null,
+        portraitNaturalWidth: portrait?.naturalWidth ?? 0,
+        portraitComplete: portrait?.complete ?? false,
+        portraitStyle: style ? {display:style.display,visibility:style.visibility,width:style.width,height:style.height,position:style.position,opacity:style.opacity} : null,
+        parentBox: parentBounds ? {x:parentBounds.x,y:parentBounds.y,width:parentBounds.width,height:parentBounds.height} : null,
+        parentStyle: parentStyle ? {display:parentStyle.display,width:parentStyle.width,height:parentStyle.height,minHeight:parentStyle.minHeight,position:parentStyle.position} : null,
+        cardBox: cardBounds ? {x:cardBounds.x,y:cardBounds.y,width:cardBounds.width,height:cardBounds.height} : null,
         portraitLeft: bounds?.left ?? -1,
-        portraitRight: bounds?.right ?? Infinity
+        portraitRight: bounds?.right ?? Infinity,
+        scrollY: window.scrollY
       };
     });
+    await profileTabs.filter({ hasText: 'PERFIL' }).click();
+    await page.screenshot({ path: 'test-results/profile-' + creator.id + '-mobile.png', fullPage: true });
     expect(mobileDossier.documentWidth).toBeLessThanOrEqual(390);
     expect(mobileDossier.bodyWidth).toBeLessThanOrEqual(390);
     expect(mobileDossier.columns).toBe(1);
-    expect(mobileDossier.portraitVisible).toBe(true);
+    expect(mobileDossier.portraitVisible, JSON.stringify(mobileDossier)).toBe(true);
     expect(mobileDossier.portraitLeft).toBeGreaterThanOrEqual(0);
     expect(mobileDossier.portraitRight).toBeLessThanOrEqual(391);
     await page.setViewportSize({ width: 1280, height: 900 });
