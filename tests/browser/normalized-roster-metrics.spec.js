@@ -257,6 +257,9 @@ test.describe('Auditoría de métricas normalizadas del Roster', () => {
     await expect(card.locator('.comic-roster-activity')).toHaveText('EN DIRECTO');
     await expect(card.locator('.roster-selector-tile-live')).toContainText('EN DIRECTO');
     await expect(card.locator('.comic-roster-stat-average b')).toHaveText('10');
+    await expect(card.locator('.comic-roster-brand-slots')).toContainText('Horas en directo');
+    await expect(card.locator('.comic-roster-brand-slots')).toContainText('Directos detectados');
+    await expect(card.locator('.comic-roster-brand-slots')).not.toContainText('Seguidores');
 
     await card.click();
     await expect(page.locator('#hero-profile-page .hero-profile-live')).toHaveText([
