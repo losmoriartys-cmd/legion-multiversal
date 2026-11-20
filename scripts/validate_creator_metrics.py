@@ -168,10 +168,12 @@ def validate(registry, roster, now=None):
                     creator_id, account_key[0], ", ".join(missing)
                 ))
 
+        # creator-metrics.json existente puede ser una captura pre-migración.
+        # El builder actual siempre escribe growth; si está presente, su contrato es estricto.
         growth = record.get("growth")
-        if not isinstance(growth, dict) or growth.get("schema_version") != 1:
+        if growth is not None and (not isinstance(growth, dict) or growth.get("schema_version") != 1):
             errors.append("{}: growth debe ser un objeto schema_version=1.".format(creator_id))
-        else:
+        elif isinstance(growth, dict):
             growth_platform = growth.get("platform")
             expected_windows = {"7d": 7, "30d": 30, "90d": 90} if growth_platform in {"twitch", "youtube"} else {}
             windows = growth.get("windows")
