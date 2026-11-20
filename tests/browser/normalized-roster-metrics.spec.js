@@ -258,6 +258,9 @@ test.describe('Auditoría de métricas normalizadas del Roster', () => {
     await expect(card.locator('.comic-roster-activity')).toHaveText('EN DIRECTO');
     await expect(card.locator('.roster-selector-tile-live')).toContainText('EN DIRECTO');
     await expect(card.locator('.comic-roster-stat-average b')).toHaveText('10');
+    await expect(card.locator('.comic-roster-brand-slots')).toContainText('Horas en directo');
+    await expect(card.locator('.comic-roster-brand-slots')).toContainText('Directos detectados');
+    await expect(card.locator('.comic-roster-brand-slots')).not.toContainText('Seguidores');
 
     await card.click();
     await expect(page.locator('#hero-profile-page .hero-profile-live')).toHaveText([
@@ -326,6 +329,18 @@ test.describe('Auditoría de métricas normalizadas del Roster', () => {
     expect(result.creatorCount).toBe(8);
     expect(result.metricCount).toBeGreaterThan(0);
     expect(result.errors).toEqual([]);
+
+    const requiredByPlatform = {
+      twitch: ['average_viewers_sampled', 'peak_viewers_sampled', 'observed_live_hours', 'streams_observed'],
+      youtube: ['subscribers', 'total_views', 'videos_total']
+    };
+    const coverage = await page.evaluate(required => Object.entries(creatorMetricsData.creators).map(([id, creator]) => {
+      const platform = creator.accounts.find(account => account.account_type === 'creator_channel')?.platform;
+      const keys = new Set((creator.metrics || []).filter(metric => metric.platform === platform && metric.value !== null).map(metric => metric.key));
+      return { id, platform, missing: (required[platform] || []).filter(key => !keys.has(key)) };
+    }), requiredByPlatform);
+    expect(coverage).toHaveLength(8);
+    coverage.forEach(profile => expect(profile.missing, profile.id + ' debe tener sus métricas comerciales').toEqual([]));
   });
 
 });
