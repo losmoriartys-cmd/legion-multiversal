@@ -120,6 +120,7 @@ class RosterComicCardsContractTests(unittest.TestCase):
         self.assertIn("metric('total_views')", context)
         self.assertIn("metric('videos_total')", context)
         self.assertNotIn("getCreatorAudienceMetric(hero)", context)
+        self.assertNotIn("getCreatorAudienceMetric", self.app)
         self.assertIn("normalizedMetricValue", slots)
         self.assertIn("normalizedMetricSlotDetail", slots)
         self.assertIn("comic-roster-stat-average", self.app)
