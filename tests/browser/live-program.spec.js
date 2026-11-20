@@ -109,5 +109,5 @@ test('la cola de clips puede tomar el escenario aunque haya un directo activo', 
   await clip.click();
   await expect(page.locator('.lp-screen-title')).toHaveText(title);
   await page.locator('[data-lp="play"]').click();
-  await expect(page.locator('iframe.lp-embed')).toHaveAttribute('src', /clips\\.twitch\\.tv\\/embed\\?clip=/);
+  await expect(page.locator('iframe.lp-embed')).toHaveAttribute('src', /clips\.twitch\.tv\/embed\?clip=/);
 });
