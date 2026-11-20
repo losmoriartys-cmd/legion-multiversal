@@ -41,6 +41,9 @@ class NormalizedCreatorMetricsTests(unittest.TestCase):
                 "demo": {
                     "login": "demo", "live": True, "current_viewers": 7,
                     "updated_at": "2026-11-14T21:30:00Z",
+                    "followers_total": 123,
+                    "followers_captured_at": "2026-11-14T21:20:00Z",
+                    "followers_source": "Twitch Helix Get Channel Followers · total público",
                     "snapshots": [
                         {"sampled_at": "2026-11-14T20:30:00Z"},
                         {"sampled_at": "2026-11-14T21:30:00Z"},
@@ -85,6 +88,9 @@ class NormalizedCreatorMetricsTests(unittest.TestCase):
         values = {(m["platform"], m["key"]): m for m in creator["metrics"]}
         self.assertEqual(values[("twitch", "current_viewers")]["value"], 7)
         self.assertEqual(values[("twitch", "current_viewers")]["unit"], "viewers")
+        self.assertEqual(values[("twitch", "followers_total")]["value"], 123)
+        self.assertEqual(values[("twitch", "followers_total")]["status"], "fresh")
+        self.assertEqual(values[("twitch", "followers_total")]["method"], "public_helix_follower_total_only")
         self.assertEqual(values[("twitch", "average_viewers_sampled")]["unit"], "viewers_sampled_avg")
         self.assertEqual(values[("youtube", "subscribers")]["value"], 55)
         self.assertEqual(values[("youtube", "subscribers")]["unit"], "subscribers")
@@ -99,6 +105,22 @@ class NormalizedCreatorMetricsTests(unittest.TestCase):
         self.assertEqual(values[("twitch", "current_viewers")]["status"], "delayed")
         self.assertIsNone(values[("twitch", "current_viewers")]["value"])
         self.assertEqual(values[("twitch", "average_viewers_sampled")]["status"], "sampled")
+
+    def test_follower_count_becomes_historical_when_capture_expires(self):
+        self.twitch["channels"]["demo"]["followers_captured_at"] = "2026-11-14T18:00:00Z"
+        result = build(self.roster, self.twitch, self.platforms, self.clips, self.now)
+        metric = next(m for m in result["creators"]["demo"]["metrics"] if m["platform"] == "twitch" and m["key"] == "followers_total")
+        self.assertEqual(metric["status"], "delayed")
+        self.assertEqual(metric["value"], 123)
+        self.assertEqual(metric["captured_at"], "2026-11-14T18:00:00Z")
+
+    def test_missing_follower_total_has_explicit_unavailable_metric(self):
+        self.twitch["channels"]["demo"]["followers_total"] = None
+        self.twitch["channels"]["demo"]["followers_captured_at"] = None
+        result = build(self.roster, self.twitch, self.platforms, self.clips, self.now)
+        metric = next(m for m in result["creators"]["demo"]["metrics"] if m["platform"] == "twitch" and m["key"] == "followers_total")
+        self.assertEqual(metric["status"], "unavailable")
+        self.assertIsNone(metric["value"])
 
     def test_old_public_youtube_metrics_are_preserved_as_delayed_history(self):
         self.platforms["updated_at"] = "2026-11-01T21:00:00Z"
