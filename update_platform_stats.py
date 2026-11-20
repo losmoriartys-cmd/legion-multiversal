@@ -1,6 +1,6 @@
 import json, os, urllib.parse, urllib.request, urllib.error, time
 from email.utils import parsedate_to_datetime
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 
 ROSTER="roster-data.json"
 OUTPUT="platform-stats.json"
@@ -92,7 +92,7 @@ def append_history(record, captured_at):
         "captured_at": captured_at,
         "metrics": record.get("metrics") or {}
     })
-    cutoff = (datetime.fromisoformat(captured_at.replace("Z", "+00:00")).date() - __import__("datetime").timedelta(days=HISTORY_DAYS)).isoformat()
+    cutoff = (datetime.fromisoformat(captured_at.replace("Z", "+00:00")).date() - timedelta(days=HISTORY_DAYS)).isoformat()
     history = [item for item in history if item.get("captured_at", "")[:10] >= cutoff]
     history.sort(key=lambda item: item.get("captured_at") or "")
     record["history"] = history
@@ -107,7 +107,7 @@ def append_video_history(videos, previous_videos, captured_at):
         if isinstance(item, dict) and item.get("video_id")
     }
     today = captured_at[:10]
-    cutoff = (datetime.fromisoformat(captured_at.replace("Z", "+00:00")).date() - __import__("datetime").timedelta(days=HISTORY_DAYS)).isoformat()
+    cutoff = (datetime.fromisoformat(captured_at.replace("Z", "+00:00")).date() - timedelta(days=HISTORY_DAYS)).isoformat()
     for video in videos or []:
         prior = previous_by_id.get(str(video.get("video_id"))) or {}
         history = list(prior.get("view_history") or [])
