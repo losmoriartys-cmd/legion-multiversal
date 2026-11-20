@@ -83,18 +83,24 @@ def append_history(record, captured_at):
     if not isinstance(history, list):
         history = []
     today = captured_at[:10]
-    history = [
-        item for item in history
-        if isinstance(item, dict) and isinstance(item.get("captured_at"), str)
-        and item.get("captured_at", "")[:10] != today
-    ]
-    history.append({
+    cutoff = (datetime.fromisoformat(captured_at.replace("Z", "+00:00")).date() - timedelta(days=HISTORY_DAYS)).isoformat()
+    # Migra históricos horarios anteriores a una sola observación por día,
+    # conservando la última lectura disponible de cada fecha.
+    daily = {}
+    for item in history:
+        if not isinstance(item, dict):
+            continue
+        timestamp = item.get("captured_at")
+        if not isinstance(timestamp, str) or len(timestamp) < 10 or timestamp[:10] < cutoff or timestamp[:10] >= today:
+            continue
+        day = timestamp[:10]
+        if day not in daily or timestamp > daily[day].get("captured_at", ""):
+            daily[day] = item
+    daily[today] = {
         "captured_at": captured_at,
         "metrics": record.get("metrics") or {}
-    })
-    cutoff = (datetime.fromisoformat(captured_at.replace("Z", "+00:00")).date() - timedelta(days=HISTORY_DAYS)).isoformat()
-    history = [item for item in history if item.get("captured_at", "")[:10] >= cutoff]
-    history.sort(key=lambda item: item.get("captured_at") or "")
+    }
+    history = sorted(daily.values(), key=lambda item: item.get("captured_at") or "")
     record["history"] = history
     return record
 
