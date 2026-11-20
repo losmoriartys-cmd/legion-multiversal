@@ -26,6 +26,7 @@ def iso(value: datetime) -> str:
 def _coverage(sampled_dates: set[str], start: datetime, end: datetime, days: int) -> dict:
     observed = len(sampled_dates)
     pct = round(min(100.0, observed / max(1, days) * 100), 1)
+    latest = max((at for at in sampled_dates), default=None) if False else None
     return {
         "sampled_days": observed,
         "expected_days": days,
@@ -64,6 +65,7 @@ def _summarize_twitch(snapshots: list[dict], start: datetime, end: datetime, day
             observed_minutes += min(gap, 55)
 
     coverage = _coverage(sampled_dates, start, end, days)
+    coverage["last_observed_at"] = iso(selected[-1][0]) if selected else None
     return {
         "coverage": coverage,
         "metrics": {
@@ -132,6 +134,8 @@ def _summarize_youtube(history: list[dict], start: datetime, end: datetime, days
         "videos_published": _series_change(history, "videos_total", start, end),
     }
     coverage["capture_count"] = sum(1 for at in timestamps if start < at <= end)
+    latest = max((at for at in timestamps if start < at <= end), default=None)
+    coverage["last_observed_at"] = iso(latest) if latest else None
     return {"coverage": coverage, "metrics": metrics}
 
 
@@ -173,6 +177,11 @@ def build_windows(platform: str, history: list[dict], now: datetime, follower_hi
             )
             current["metrics"]["followers_total"] = current_follower[1] if current_follower else None
             current["metrics"]["followers_captured_at"] = iso(current_follower[0]) if current_follower else None
+            follower_age_minutes = ((end - current_follower[0]).total_seconds() / 60) if current_follower else None
+            current["metrics"]["followers_status"] = (
+                "fresh" if follower_age_minutes is not None and -5 <= follower_age_minutes <= 120 else
+                "stale" if current_follower else "awaiting_authorization"
+            )
             previous["metrics"]["followers"] = _series_change(
                 follower_history or [], "followers_total", previous_start, previous_end
             )
