@@ -1,3 +1,14 @@
+## 2026-11-20 — EN VIVO: la página pasa a ser la de la maqueta aprobada
+
+- **Base:** `main` con el PR #76 integrado.
+- **Motivo:** la versión publicada en #76 difería mucho de la maqueta aprobada (portada oscura con retrato, cola «A continuación» con miniaturas de los integrantes, estado superior, canales y horarios con retrato). Se reemplaza por la implementación de la maqueta.
+- **Comportamiento:** si alguien transmite, la portada muestra a esa persona (nombre real, título, categoría y espectadores tomados de `data.json`); si hay varios, se elige entre ellos. Si nadie transmite, aparece «Nadie transmite ahora», el próximo directo declarado, el momento destacado y la cola de clips que avanza al siguiente.
+- **Títulos:** los clips conservan el título tal cual lo subió cada streamer, sin reescritura.
+- **Reproducción:** dentro de la página al pulsar «Ver momento»/«Mirar acá» (Twitch clip/directo, YouTube); siempre hay enlace de respaldo a Twitch o YouTube. No hay autoplay hasta que la persona lo pide.
+- **Datos:** solo fuentes existentes (`data.json`, `clips-data.json`, `platform-stats.json`, `roster-data.json`); no se inventan métricas.
+- **Archivos:** `live-program.js` y `live-program.css` (reemplazan/ajustan lo de #76), `index.html`, `app.js`, `styles.css` (CSS de #76 eliminado), `tests/browser/live-program.spec.js`.
+- **Validación:** `node --check`, validadores del Roster y `validate_site.py` en verde; 187 pruebas Python; las 2 pruebas Playwright de EN VIVO pasan. Los reproductores de Twitch/YouTube no se pudieron probar desde el entorno de desarrollo (sin salida a esos dominios): confirmar en la preview.
+
 ## 2026-11-20 — EN VIVO: central automática y programación interactiva
 
 - **Base:** rama principal en `5cbc9f8`; rama `feat/en-vivo-programa-interactivo`, posterior a la integración del PR #73 (`9647ab2`).

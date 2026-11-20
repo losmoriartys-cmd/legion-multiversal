@@ -887,8 +887,15 @@ function formatMetric(value,digits=2){
  if(value===null||value===undefined)return 'Pendiente de verificación';
  return typeof value==='number'?value.toLocaleString('es-AR',{maximumFractionDigits:digits}):value;
 }
+function renderLiveProgram(){
+ const host=document.getElementById('live-directory');
+ if(!host||!window.LMLiveProgram)return false;
+ window.LMLiveProgram.render(host,{heroes:Array.isArray(heroesData)?heroesData:[],activity:instituteStatsData,clips:twitchClipsData,platform:platformStatsData,nameOf:getHeroDisplayName,liveStateOf:getRosterLiveState,goChapter:n=>switchChapter(n)});
+ return true;
+}
 function renderLiveDirectory(channels){
  const host=document.getElementById('live-directory');if(!host)return;
+ if(host.classList.contains('live-program')&&renderLiveProgram())return;
  const detectedLive=(channels||[]).filter(c=>c.live);
  const offline=(channels||[]).filter(c=>!c.live);
  const updated=instituteStatsData?.updated_at?new Date(instituteStatsData.updated_at):null;
@@ -2587,6 +2594,13 @@ function printHeroDossier(){
                 add('twitch-clips', loadTwitchClipsData);
             }
 
+            // EN VIVO: perfiles, clips públicos y videos de YouTube alimentan la programación.
+            if (Number(chapterNum) === 10) {
+                jobs.push(ensureRosterResources());
+                add('platform-stats', loadPlatformStatsData);
+                add('twitch-clips', loadTwitchClipsData);
+            }
+
             // El expediente incluye códigos Epic; cargar el registro al entrar en el Roster.
             if (Number(chapterNum) === 2) add('epic-programs', loadEpicCreatorPrograms);
 
@@ -2605,6 +2619,7 @@ function printHeroDossier(){
 
             return Promise.allSettled(jobs).then(results => {
                 if ([2, 3, 13].includes(Number(chapterNum)) && Array.isArray(heroesData) && heroesData.length) refreshRosterMetricsViews();
+                if (Number(chapterNum) === 10) renderLiveProgram();
                 return results;
             });
         }
