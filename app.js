@@ -1785,6 +1785,8 @@ function renderGrowthWindowPanel(windowData,key,platform){
   numberCard('DIRECTOS / SEMANA',growthDisplayNumber(metrics.streams_per_week,2),'Ritmo calculado sobre '+windowData.days+' días');
   numberCard('DÍAS ACTIVOS',growthDisplayNumber(metrics.active_days,0)+' / '+windowData.days,'Días UTC con al menos una muestra en directo');
   numberCard('HORAS OBSERVADAS',growthDisplayNumber(metrics.observed_live_hours,1)+' h','Intervalos observados del mismo stream; no son horas oficiales del VOD');
+  numberCard('HORAS OBSERVADAS / SEMANA',growthDisplayNumber(metrics.observed_hours_per_week,2)+' h','Promedio semanal estimado desde los intervalos observados');
+  numberCard('SEMANAS ACTIVAS',growthDisplayNumber(metrics.active_weeks,0)+' / '+Math.ceil(windowData.days/7),'Semanas calendario con al menos una muestra en directo');
   numberCard('PROMEDIO MUESTREADO',metrics.average_viewers_sampled===null?'SIN DATOS':growthDisplayNumber(metrics.average_viewers_sampled,1),'Muestras públicas de espectadores; no es CCV oficial');
   numberCard('PICO MUESTREADO',metrics.peak_viewers_sampled===null?'SIN DATOS':growthDisplayNumber(metrics.peak_viewers_sampled,0),'Mayor lectura puntual guardada por el colector');
  }else if(platform==='youtube'){
@@ -1793,9 +1795,13 @@ function renderGrowthWindowPanel(windowData,key,platform){
   numberCard('SUSCRIPTORES GANADOS',value(subs),'Diferencia de capturas públicas diarias');
   numberCard('VISUALIZACIONES GANADAS',value(views),'Variación acumulada del canal en el período');
   numberCard('VIDEOS PUBLICADOS',value(videos),'Diferencia de contador del canal');
+  numberCard('RITMO DE PUBLICACIÓN',videos.status==='available'?growthDisplayNumber(videos.change*7/windowData.days,2)+' videos / semana':'BASE PENDIENTE','Frecuencia calculada sobre '+windowData.days+' días');
  }
  const cardsHtml=cards.map(item=>'<article class="hero-growth-card"><small>'+safe(item.label)+'</small><strong>'+safe(item.value)+'</strong><span>'+safe(item.note)+'</span></article>').join('');
- const coverageText='COBERTURA · '+safe(coverage.sampled_days??0)+' / '+safe(coverage.expected_days??windowData.days)+' días muestreados · '+safe(growthDisplayNumber(coverage.coverage_pct,1))+'%';
+ const periodLabel=windowData?.period?.from&&windowData?.period?.to
+  ?statsDate(String(windowData.period.from).slice(0,10))+' — '+statsDate(String(windowData.period.to).slice(0,10))
+  :'período no informado';
+ const coverageText='PERÍODO · '+safe(periodLabel)+' · COBERTURA · '+safe(coverage.sampled_days??0)+' / '+safe(coverage.expected_days??windowData.days)+' días · '+safe(growthDisplayNumber(coverage.coverage_pct,1))+'%';
  const coverageNote=coverage.status==='sufficient'
   ?'Cobertura suficiente para comparar con el período previo.'
   :'Cobertura parcial: los datos disponibles se muestran, pero no se comparan como si fueran una ventana completa.';
@@ -1846,7 +1852,11 @@ function renderHeroGrowthChapter(hero,channel,sully){
  const windowPanels=Object.entries(windows).map(([key,value])=>renderGrowthWindowPanel(value,key,platform).replace('data-growth-panel="'+key+'"','id="growth-window-'+key+'" data-growth-panel="'+key+'"')).join('');
  const coverageHtml=Object.keys(windows).length?'<section class="hero-growth-periods"><div class="hero-growth-period-head"><div><strong>EVOLUCIÓN Y CONSISTENCIA</strong><span>Período actual frente al anterior, cuando la cobertura lo permite</span></div><div class="hero-growth-window-tabs" role="tablist" aria-label="Seleccionar período de crecimiento">'+windowTabs+'</div></div>'+windowPanels+'</section>':'<p class="hero-growth-empty">La plataforma principal todavía no dispone de historial suficiente para construir ventanas comparables.</p>';
  const content= growth.content_performance||{};
- const contentHtml='<section class="hero-growth-content"><header><div><strong>RENDIMIENTO DEL CONTENIDO</strong><span>Contenido público destacado y crecimiento desde la primera captura propia</span></div><span class="hero-growth-source-stamp">'+safe(platform==='youtube'?'YOUTUBE DATA API':'TWITCH HELIX')+'</span></header>'+renderGrowthContentPerformance(content,platform)+'<small>'+safe(content.methodology||'Las visualizaciones históricas comienzan cuando el recolector registra la primera observación diaria.')+'</small></section>';
+ const contentCapture=content?.captured_at?normalizedMetricCaptureLabel({capturedAt:content.captured_at}):'captura no disponible';
+ const contentStatus=content?.status==='error'||content?.status==='unavailable'
+  ?'Última captura conservada; el recolector no pudo actualizar en el último intento.'
+  :'Captura de referencia: '+contentCapture+'.';
+ const contentHtml='<section class="hero-growth-content"><header><div><strong>RENDIMIENTO DEL CONTENIDO</strong><span>Contenido público destacado y crecimiento desde la primera captura propia</span></div><span class="hero-growth-source-stamp">'+safe(platform==='youtube'?'YOUTUBE DATA API':'TWITCH HELIX')+'</span></header>'+renderGrowthContentPerformance(content,platform)+'<small>'+safe(contentStatus)+' '+safe(content.methodology||'Las visualizaciones históricas comienzan cuando el recolector registra la primera observación diaria.')+'</small></section>';
  const collab=growth.collaborations||{};
  const collaborationHtml='<section class="hero-growth-collaborations"><header><div><strong>COLABORACIONES Y RESULTADOS</strong><span>Casos documentados, entregables y cifras individuales con su fuente</span></div></header>'+renderGrowthCollaborations(collab)+'</section>';
  const audienceHtml=renderGrowthAdvancedAudience(growth.advanced_audience);
