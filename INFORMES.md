@@ -3,8 +3,8 @@
 - **Objetivo:** evolucionar el Capítulo 04 a partir de la maqueta aprobada, conservando las fuentes y el motor de datos existente. Trabajo aislado en `feat/estadisticas-expediente-multicanal`; no se modifica `main` ni la rama del PR #78.
 - **Implementado en esta etapa:** filtros por estado (todos / en vivo / offline), orden por estado, promedio, pico, horas y nombre; fichas Twitch con avatar dinámico desde `data.json.profile_image_url`, cuatro métricas, barra promedio/pico, categorías observadas y horario declarado; tarjeta YouTube de Pato con avatar desde `platform-stats.json.thumbnail_url`; evolución diaria agregada desde `window.daily_activity`; grilla semanal alimentada por horarios de `roster-data.json`; KPI adicional de horas de audiencia estimadas, separado de horas emitidas observadas.
 - **Criterios de integridad:** no se inventan logos ni horarios; los datos declarados se distinguen de categorías observadas; YouTube no se compara ni suma con Twitch; horas de audiencia se rotulan como estimación y no como analítica oficial. La cobertura porcentual no se presenta sin denominador verificable.
-- **Archivos intervenidos:** `index.html`, `app.js`, `styles.css`, nuevo `tests/browser/statistics.spec.js`.
-- **Validación:** pendiente de ejecutar CI y revisión de navegador sobre la rama.
+- **Archivos intervenidos:** `index.html`, `app.js`, `styles.css`, `.github/workflows/validar-sitio.yml` (contrato de versión de CSS diferido), nuevo `tests/browser/statistics.spec.js`.
+- **Validación inicial:** la sintaxis JavaScript, los JSON, el modelo del roster y la cobertura Twitch pasaron. La primera corrida detectó que el workflow exigía el identificador anterior de caché CSS; se actualizó el contrato del workflow para coincidir con la nueva versión. Nueva corrida y Playwright pendientes.
 - **Estado:** PR independiente en preparación; no fusionado ni desplegado a producción.
 
 ## 2026-11-20 — EN VIVO: central automática y programación interactiva
