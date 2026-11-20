@@ -11,6 +11,7 @@ CLIENT_ID = os.environ.get("TWITCH_CLIENT_ID")
 CLIENT_SECRET = os.environ.get("TWITCH_CLIENT_SECRET")
 ROSTER_FILE = "roster-data.json"
 WINDOW_DAYS = 30
+HISTORY_DAYS = 180
 
 def load_active_channels():
     """Lee los canales Twitch desde el modelo de identidad; evita una lista duplicada."""
@@ -331,7 +332,9 @@ def main():
         else:
             skipped_channels.append(login)
         snapshots.sort(key=lambda item: item["sampled_at"])
-        cutoff = now - timedelta(days=WINDOW_DAYS)
+        # Conservamos seis meses para ventanas 7/30/90 días y su período anterior.
+        # El resumen legado "window" sigue limitado a 30 días.
+        cutoff = now - timedelta(days=HISTORY_DAYS)
         snapshots = [
             s for s in snapshots
             if datetime.fromisoformat(s["sampled_at"]) >= cutoff
@@ -398,6 +401,7 @@ def main():
         "schema_version": 2,
         "source": "Twitch Helix API",
         "window_days": WINDOW_DAYS,
+        "history_days": HISTORY_DAYS,
         "sampling_interval_minutes": SAMPLE_INTERVAL_MINUTES,
         "active_channels": channels,
         "collection": {
