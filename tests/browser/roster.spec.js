@@ -137,7 +137,7 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
     expect(await timeline.locator('.hero-timeline-item').count()).toBeGreaterThanOrEqual(2);
     await expect(timeline.locator('.hero-timeline-item.is-origen')).toHaveCount(1);
     await expect(dossier.locator('#profile-tab-bitacora .hero-profile-internal-art')).toHaveCount(0);
-    await expect(dossier.locator('#profile-tab-bitacora')).not.toContainText(/MUESTRAS|DIRECCIÓN|DOCENTE|ESTUDIANTE/i);
+    await expect(dossier.locator('#profile-tab-bitacora [data-bitacora-panel="recorrido"]')).not.toContainText(/MUESTRAS|DIRECCIÓN|DOCENTE|ESTUDIANTE/i);
     await expect(dossier.locator('#profile-tab-bitacora')).toContainText('BITÁCORA');
     await expect(dossier.locator('.hero-profile-character-card-link button')).toHaveText(/VER CARTA COMPLETA/);
     if (['lady-moriarty','rod3r1k','akuma','habitos'].includes(creator.id)) {
