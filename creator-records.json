@@ -122,6 +122,48 @@
           "url": "https://www.twitch.tv/ther0d3r1k/clip/CooperativePopularFlamingoM4xHeh-3bJjuJyiLiZOEEaC",
           "source": "Twitch · enlace aportado por el creador"
         }
+      ],
+      "collaboration_results": [
+        {
+          "case_id": "barfender-002",
+          "title": "Expediente 002 · BarFender",
+          "date": "2026-11-11",
+          "format": "Directo cooperativo · dos canales",
+          "participants": [
+            "rod3r1k",
+            "akuma"
+          ],
+          "source": "Panel de Twitch del creador · cifras aportadas al expediente",
+          "verification_status": "creator_reported",
+          "channel_scope": "rod3r1k",
+          "metrics": [
+            {
+              "key": "duration_minutes",
+              "label": "Duración del directo",
+              "value": 198,
+              "unit": "minutos"
+            },
+            {
+              "key": "average_viewers",
+              "label": "Promedio de espectadores",
+              "value": 33,
+              "unit": "espectadores"
+            },
+            {
+              "key": "peak_viewers",
+              "label": "Pico de espectadores",
+              "value": 53,
+              "unit": "espectadores"
+            },
+            {
+              "key": "distinct_chatters",
+              "label": "Personas distintas en el chat",
+              "value": 83,
+              "unit": "personas"
+            }
+          ],
+          "note": "Cifras del panel del canal para esta emisión individual. No son alcance único de la colaboración y no se suman con las del otro canal."
+        }
       ]
     },
     "habitos": {
@@ -221,7 +263,55 @@
           "source": "Confirmación del usuario · 18/11/2026"
         }
       ],
-      "highlights": []
+      "highlights": [],
+      "collaboration_results": [
+        {
+          "case_id": "barfender-002",
+          "title": "Expediente 002 · BarFender",
+          "date": "2026-11-11",
+          "format": "Directo cooperativo · dos canales",
+          "participants": [
+            "rod3r1k",
+            "akuma"
+          ],
+          "source": "Panel de Twitch del creador · cifras aportadas al expediente",
+          "verification_status": "creator_reported",
+          "channel_scope": "akuma",
+          "metrics": [
+            {
+              "key": "duration_minutes",
+              "label": "Duración del directo",
+              "value": 110,
+              "unit": "minutos"
+            },
+            {
+              "key": "average_viewers",
+              "label": "Promedio de espectadores",
+              "value": 10.7,
+              "unit": "espectadores"
+            },
+            {
+              "key": "peak_viewers",
+              "label": "Pico de espectadores",
+              "value": 21,
+              "unit": "espectadores"
+            },
+            {
+              "key": "distinct_chatters",
+              "label": "Personas distintas en el chat",
+              "value": 44,
+              "unit": "personas"
+            },
+            {
+              "key": "new_followers",
+              "label": "Seguidores nuevos",
+              "value": 6,
+              "unit": "seguidores"
+            }
+          ],
+          "note": "Cifras del panel del canal para esta emisión individual. No son alcance único de la colaboración y no se suman con las del otro canal."
+        }
+      ]
     },
     "dave-nexus": {
       "milestones": [],
