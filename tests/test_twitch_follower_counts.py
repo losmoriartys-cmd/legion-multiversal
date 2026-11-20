@@ -16,8 +16,9 @@ class TwitchFollowerCountTests(unittest.TestCase):
             self.assertEqual(update_stats.get_channel_followers_total("12345", "user-token"), 321)
         args, kwargs = request.call_args
         self.assertIn("/helix/channels/followers?broadcaster_id=12345", args[0])
-        self.assertEqual(kwargs["headers"]["Authorization"], "Bearer user-token")
-        self.assertEqual(set(kwargs["headers"]), {"Client-ID", "Authorization"})
+        headers = args[1] if len(args) > 1 else kwargs.get("headers", {})
+        self.assertEqual(headers["Authorization"], "Bearer user-token")
+        self.assertEqual(set(headers), {"Client-ID", "Authorization"})
 
     def test_follower_endpoint_rejects_missing_or_invalid_total(self):
         for payload in ({"data": []}, {"total": None}, {"total": -1}, {"total": True}):
