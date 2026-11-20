@@ -368,6 +368,7 @@ function renderStatsDashboard(hero,helix,sully){
 
  if(twitchAccount){
   const definitions=[
+   {key:'followers_total',label:'Seguidores actuales',digits:0,suffix:' seguidores'},
    {key:'streams_observed',label:'Directos detectados',digits:0,suffix:' sesiones'},
    {key:'average_viewers_sampled',label:'Promedio de espectadores',digits:1,suffix:' espectadores'},
    {key:'peak_viewers_sampled',label:'Pico observado',digits:0,suffix:' espectadores'},
@@ -1798,10 +1799,13 @@ function renderHeroGrowthChapter(hero,channel,sully){
  const period=sully?.period?.start_date&&sully?.period?.end_date
   ?statsDate(sully.period.start_date)+' — '+statsDate(sully.period.end_date)
   :sully?.period?.label||'Período no informado';
- const sourceLabel=externalStatus==='user_supplied_summary'||externalStatus==='user_supplied_annual_summary'
-  ?'RESUMEN APORTADO · SIN VERIFICACIÓN INDEPENDIENTE'
-  :externalStatus==='partial'?'REGISTRO PARCIAL · FUENTE EXTERNA'
-  :'SIN HISTORIAL DISPONIBLE';
+ const isYoutube=account?.platform==='youtube';
+ const sourceLabel=isYoutube
+  ?'CAPTURAS PROPIAS · YOUTUBE DATA API'
+  :externalStatus==='user_supplied_summary'||externalStatus==='user_supplied_annual_summary'
+   ?'RESUMEN APORTADO · SIN VERIFICACIÓN INDEPENDIENTE'
+   :externalStatus==='partial'?'REGISTRO PARCIAL · FUENTE EXTERNA'
+   :'SIN HISTORIAL DISPONIBLE';
  const externalMetrics=[
   ['SEGUIDORES GANADOS',summary.followers_gained??summary.followers_gain_reported,'en el período'],
   ['DIRECTOS',summary.streams??summary.streams_count,'sesiones'],
@@ -1823,7 +1827,12 @@ function renderHeroGrowthChapter(hero,channel,sully){
   :externalStatus==='user_supplied_summary'||externalStatus==='user_supplied_annual_summary'
    ?'Este bloque reproduce un resumen aportado al proyecto. No debe interpretarse como una consulta automatizada ni como dato verificado independientemente.'
    :'Referencia histórica de SullyGnome. La cobertura puede ser parcial y el período no equivale a una lectura actual.';
- return '<section class="hero-growth-chapter" aria-label="Capítulo Crecimiento"><header class="hero-growth-heading"><div><small>BITÁCORA · CAPÍTULO 02</small><h4>CRECIMIENTO</h4><p>Trayectoria de audiencia, constancia de emisión y evolución pública del canal.</p></div><span class="hero-growth-stamp">'+safe(account?.platform==='youtube'?'YOUTUBE':'TWITCH')+'</span></header><div class="hero-growth-grid">'+cardHtml+'</div>'+trend+'<section class="hero-growth-source"><div><strong>SULLYGNOME · REFERENCIA HISTÓRICA</strong><span>'+safe(sourceLabel)+' · '+safe(period)+'</span></div><p>'+safe(externalNote)+'</p>'+(sully?.source_url?'<a href="'+safe(sully.source_url)+'" target="_blank" rel="noopener noreferrer">CONSULTAR HISTORIAL ORIGINAL ↗</a>':'')+'</section><p class="hero-growth-method">Metodología: los totales de Twitch se capturan desde Helix y se archivan una vez por día. Las variaciones propias se calculan entre capturas guardadas por Legión. SullyGnome se conserva como fuente externa separada; períodos y métricas no se suman entre sí. Los datos ausentes no se estiman.</p></section>';
+ const sourceTitle=isYoutube?'YOUTUBE DATA API · HISTORIAL PROPIO':'SULLYGNOME · REFERENCIA HISTÓRICA';
+ const sourceNote=isYoutube
+  ?'Las capturas propias de suscriptores, visualizaciones y videos comienzan con la activación del registro. No se importan períodos anteriores sin evidencia.'
+  :externalNote;
+ const sourceUrl=isYoutube?account?.url:sully?.source_url;
+ return '<section class="hero-growth-chapter" aria-label="Capítulo Crecimiento"><header class="hero-growth-heading"><div><small>BITÁCORA · CAPÍTULO 02</small><h4>CRECIMIENTO</h4><p>Trayectoria de audiencia, constancia de emisión y evolución pública del canal.</p></div><span class="hero-growth-stamp">'+safe(account?.platform==='youtube'?'YOUTUBE':'TWITCH')+'</span></header><div class="hero-growth-grid">'+cardHtml+'</div>'+trend+'<section class="hero-growth-source"><div><strong>'+safe(sourceTitle)+'</strong><span>'+safe(sourceLabel)+' · '+safe(period)+'</span></div><p>'+safe(sourceNote)+'</p>'+(sourceUrl?'<a href="'+safe(sourceUrl)+'" target="_blank" rel="noopener noreferrer">CONSULTAR FUENTE ORIGINAL ↗</a>':'')+'</section><p class="hero-growth-method">Metodología: los totales de Twitch se capturan desde Helix y se archivan una vez por día. Las variaciones propias se calculan entre capturas guardadas por Legión. SullyGnome se conserva como fuente externa separada; períodos y métricas no se suman entre sí. Los datos ausentes no se estiman.</p></section>';
 }
 function activateHeroBitacoraView(button){
  const wrap=button.closest('.hero-bitacora-chapters');
