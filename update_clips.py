@@ -11,6 +11,7 @@ WINDOW_DAYS = 30
 MAX_RESULTS = 100
 DISPLAY_LIMIT = 10
 MIN_REFRESH_HOURS = 6
+HISTORY_DAYS = 180
 
 
 def iso_utc(value):
@@ -101,6 +102,28 @@ def collect(now=None):
             })
             raw = payload.get("data") or []
             clips = [clip for item in raw if (clip := normalize_clip(item))]
+            old_by_id = {
+                str(item.get("id")): item
+                for item in (old.get("clips") or [])
+                if isinstance(item, dict) and item.get("id")
+            }
+            history_cutoff = (now - timedelta(days=HISTORY_DAYS)).date().isoformat()
+            for clip in clips:
+                prior = old_by_id.get(clip["id"]) or {}
+                history = list(prior.get("view_history") or [])
+                view_count = clip.get("view_count")
+                if isinstance(view_count, int) and view_count >= 0:
+                    point = {"date": now.date().isoformat(), "captured_at": now_iso, "views": view_count}
+                    history = [item for item in history if item.get("date") != point["date"]]
+                    history.append(point)
+                history = [
+                    item for item in history
+                    if isinstance(item, dict) and isinstance(item.get("date"), str)
+                    and item["date"] >= history_cutoff
+                    and isinstance(item.get("views"), int) and item["views"] >= 0
+                ]
+                history.sort(key=lambda item: item["date"])
+                clip["view_history"] = history
             creators[key] = {
                 "display_name": account["display_name"], "login": account["login"],
                 "broadcaster_id": broadcaster_id, "url": account["url"],
@@ -124,7 +147,8 @@ def collect(now=None):
             "max_results_requested_per_channel": MAX_RESULTS,
             "max_results_displayed_per_channel": DISPLAY_LIMIT,
             "ordering": "API: descending view_count",
-            "methodology": "Clips públicos del broadcaster_id durante los últimos 30 días. Se solicitan hasta 100 resultados ordenados por visualizaciones según Twitch Helix y se muestran hasta 10. Muestra limitada; no es inventario exhaustivo ni selección editorial.",
+            "methodology": "Clips públicos del broadcaster_id durante los últimos 30 días. Se solicitan hasta 100 resultados ordenados por visualizaciones según Twitch Helix y se muestran hasta 10. Las visualizaciones por clip se capturan una vez por día durante hasta 180 días desde que el clip entra en la selección; el crecimiento se calcula solo desde la primera captura disponible. Muestra limitada; no es inventario exhaustivo ni selección editorial.",
+            "view_history_days": HISTORY_DAYS,
         },
         "collection": {
             "expected_channels": len(accounts),
