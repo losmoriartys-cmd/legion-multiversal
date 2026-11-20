@@ -1,5 +1,6 @@
 """Validate the public Twitch clips dataset against the canonical roster."""
 from __future__ import annotations
+from datetime import datetime
 import json
 import sys
 from pathlib import Path
@@ -61,8 +62,29 @@ def validate(clips, roster):
             if not isinstance(title, str) or not title.strip():
                 errors.append("{}: título de clip vacío.".format(creator_id))
             count = clip.get("view_count")
-            if count is not None and (not isinstance(count, int) or count < 0):
+            if count is not None and (not isinstance(count, int) or isinstance(count, bool) or count < 0):
                 errors.append("{}: view_count debe ser entero no negativo o null.".format(creator_id))
+            history = clip.get("view_history") or []
+            if not isinstance(history, list) or len(history) > 181:
+                errors.append("{}: view_history debe ser una lista de hasta 181 observaciones diarias.".format(creator_id))
+                continue
+            previous_day = None
+            for point in history:
+                if not isinstance(point, dict):
+                    errors.append("{}: punto view_history inválido.".format(creator_id))
+                    continue
+                day, captured_at, views = point.get("date"), point.get("captured_at"), point.get("views")
+                try:
+                    captured = datetime.fromisoformat(str(captured_at).replace("Z", "+00:00"))
+                except ValueError:
+                    captured = None
+                if not isinstance(day, str) or len(day) != 10 or captured is None or captured.tzinfo is None or captured.date().isoformat() != day:
+                    errors.append("{}: view_history requiere fecha UTC consistente con captured_at.".format(creator_id))
+                if previous_day is not None and day <= previous_day:
+                    errors.append("{}: view_history debe estar ordenado y sin fechas repetidas.".format(creator_id))
+                previous_day = day
+                if not isinstance(views, int) or isinstance(views, bool) or views < 0:
+                    errors.append("{}: view_history.views debe ser entero no negativo.".format(creator_id))
     collection = clips.get("collection") or {}
     if collection.get("expected_channels") != len(expected):
         errors.append("collection.expected_channels no coincide con roster.")
