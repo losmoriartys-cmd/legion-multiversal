@@ -65,23 +65,6 @@
           "is_featured": false
         },
         {
-          "id": "AdventurousFunnyWoodpeckerPanicVis-Z3Kqk0avHvCNS2BU",
-          "url": "https://www.twitch.tv/losmoriartys/clip/AdventurousFunnyWoodpeckerPanicVis-Z3Kqk0avHvCNS2BU",
-          "embed_url": "https://clips.twitch.tv/embed?clip=AdventurousFunnyWoodpeckerPanicVis-Z3Kqk0avHvCNS2BU",
-          "title": "Merecido fichaje Moriatyyy",
-          "creator_name": "ArDipii",
-          "broadcaster_name": "LosMoriartys",
-          "created_at": "2026-10-26T22:13:33Z",
-          "view_count": 13,
-          "game_id": "737987407",
-          "language": "es",
-          "duration": 52,
-          "thumbnail_url": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/9a3401ad-dcc6-4f28-b653-393434d14763/landscape/thumb/thumb-0000000000-480x272.jpg",
-          "video_id": null,
-          "vod_offset": null,
-          "is_featured": false
-        },
-        {
           "id": "AgileAssiduousConsoleCeilingCat-N-95sSpINtTMo3wj",
           "url": "https://www.twitch.tv/losmoriartys/clip/AgileAssiduousConsoleCeilingCat-N-95sSpINtTMo3wj",
           "embed_url": "https://clips.twitch.tv/embed?clip=AgileAssiduousConsoleCeilingCat-N-95sSpINtTMo3wj",
@@ -202,7 +185,7 @@
         }
       ],
       "result_count": 44,
-      "displayed_count": 10
+      "displayed_count": 9
     },
     "rod3r1k": {
       "display_name": "ROD3R1K",
