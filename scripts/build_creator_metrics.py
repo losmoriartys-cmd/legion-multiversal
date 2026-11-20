@@ -4,7 +4,10 @@ import argparse
 import json
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
-from scripts.growth_analytics import build_growth, build_shared_cases
+try:
+    from scripts.growth_analytics import build_growth, build_shared_cases
+except ModuleNotFoundError:  # ejecución directa desde scripts/build_creator_metrics.py
+    from growth_analytics import build_growth, build_shared_cases
 
 ROOT = Path(__file__).resolve().parents[1]
 ROSTER_FILE = ROOT / "roster-data.json"
