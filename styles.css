@@ -6156,3 +6156,8 @@ main .chapter-panel :where(.chapter-cta, .executive-button, .comic-submit-btn,
 .stats-week-note{grid-column:2/-1;color:#9aa9bf;font-size:.62rem;padding:3px 5px 9px}
 @media(max-width:600px){.stats-directory-controls{align-items:flex-start}.stats-sort-control{width:100%;justify-content:space-between}.stats-sort-control select{max-width:65%}.stats-channel-card.stats-dossier-card{padding:13px}}
 @media(prefers-reduced-motion:reduce){.stats-dossier-card,.stats-evolution-bar i{transition:none!important;animation:none!important}}
+
+.stats-dossier-card{opacity:0;transform:translateY(12px);transition:opacity .45s ease,transform .45s ease}
+.stats-dossier-card.is-revealed{opacity:1;transform:translateY(0)}
+.stats-average-track i{transition:width .95s cubic-bezier(.2,.8,.2,1)}
+@media(prefers-reduced-motion:reduce){.stats-dossier-card{opacity:1;transform:none;transition:none}.stats-average-track i{transition:none}}
