@@ -26,7 +26,6 @@ def iso(value: datetime) -> str:
 def _coverage(sampled_dates: set[str], start: datetime, end: datetime, days: int) -> dict:
     observed = len(sampled_dates)
     pct = round(min(100.0, observed / max(1, days) * 100), 1)
-    latest = max((at for at in sampled_dates), default=None) if False else None
     return {
         "sampled_days": observed,
         "expected_days": days,
