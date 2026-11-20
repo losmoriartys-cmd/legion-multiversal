@@ -61,6 +61,45 @@ def normalize_clip(raw):
     }
 
 
+def append_clip_view_history(clips, previous_clips, captured_at, history_days=HISTORY_DAYS):
+    """Attach one monotonic daily public view-count point to each currently listed clip."""
+    previous_by_id = {
+        str(item.get("id")): item
+        for item in (previous_clips or [])
+        if isinstance(item, dict) and item.get("id")
+    }
+    today = captured_at[:10]
+    capture_date = datetime.fromisoformat(captured_at.replace("Z", "+00:00")).date()
+    cutoff = (capture_date - timedelta(days=history_days)).isoformat()
+    for clip in clips or []:
+        prior = previous_by_id.get(str(clip.get("id"))) or {}
+        history_by_day = {}
+        for point in prior.get("view_history") or []:
+            if not isinstance(point, dict):
+                continue
+            day = point.get("date")
+            count = point.get("views")
+            recorded_at = point.get("captured_at")
+            if not isinstance(day, str) or day < cutoff or day >= today:
+                continue
+            if not isinstance(count, int) or isinstance(count, bool) or count < 0:
+                continue
+            if not isinstance(recorded_at, str):
+                continue
+            previous_point = history_by_day.get(day)
+            if previous_point is None or recorded_at > previous_point.get("captured_at", ""):
+                history_by_day[day] = {
+                    "date": day, "captured_at": recorded_at, "views": count
+                }
+        view_count = clip.get("view_count")
+        if isinstance(view_count, int) and not isinstance(view_count, bool) and view_count >= 0:
+            history_by_day[today] = {
+                "date": today, "captured_at": captured_at, "views": view_count
+            }
+        clip["view_history"] = [history_by_day[day] for day in sorted(history_by_day)]
+    return clips
+
+
 def read_previous():
     try:
         with OUTPUT.open("r", encoding="utf-8") as handle:
@@ -102,28 +141,7 @@ def collect(now=None):
             })
             raw = payload.get("data") or []
             clips = [clip for item in raw if (clip := normalize_clip(item))]
-            old_by_id = {
-                str(item.get("id")): item
-                for item in (old.get("clips") or [])
-                if isinstance(item, dict) and item.get("id")
-            }
-            history_cutoff = (now - timedelta(days=HISTORY_DAYS)).date().isoformat()
-            for clip in clips:
-                prior = old_by_id.get(clip["id"]) or {}
-                history = list(prior.get("view_history") or [])
-                view_count = clip.get("view_count")
-                if isinstance(view_count, int) and view_count >= 0:
-                    point = {"date": now.date().isoformat(), "captured_at": now_iso, "views": view_count}
-                    history = [item for item in history if item.get("date") != point["date"]]
-                    history.append(point)
-                history = [
-                    item for item in history
-                    if isinstance(item, dict) and isinstance(item.get("date"), str)
-                    and item["date"] >= history_cutoff
-                    and isinstance(item.get("views"), int) and item["views"] >= 0
-                ]
-                history.sort(key=lambda item: item["date"])
-                clip["view_history"] = history
+            clips = append_clip_view_history(clips, old.get("clips") or [], now_iso)
             creators[key] = {
                 "display_name": account["display_name"], "login": account["login"],
                 "broadcaster_id": broadcaster_id, "url": account["url"],
