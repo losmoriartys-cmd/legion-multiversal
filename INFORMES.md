@@ -3461,3 +3461,13 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - En el workflow de sitio (run 44475424533), sintaxis JS, JSON, roster, assets, compilación de colectores, pruebas unitarias del repositorio (**158 tests**) y validación/generación normalizada completaron **SUCCESS**.
 - A la última consulta, el runner seguía en «Instalar Chromium para Playwright»; Playwright aún no había comenzado. No declarar aprobado el navegador hasta que termine esa etapa y se revisen sus resultados/capturas.
 - PR #70 permanece abierto en Draft, sin merge. PR #66 y #69 siguen abiertos en Draft y sin modificación. Sin despliegues.
+
+
+## 2026-11-20 · Identidad visual editorial para EN VIVO (PR #76)
+
+- Se trasladó al capítulo EN VIVO el lenguaje visual de la maqueta compartida: paleta azul noche/amarillo/cian/rojo, titulares Bangers, jerarquía editorial, paneles con borde negro y sombras duras, tarjetas claras para el archivo, señalización de estado y composición responsive.
+- Alcance deliberadamente visual: se añadieron reglas CSS acotadas a `.live-chapter`; no se sustituyó ni duplicó el motor `live-program.js`, ni se alteraron las fuentes de datos o los contratos de reproducción.
+- Se preservan las señales reales derivadas del estado público capturado, selector cuando hay varios directos, carga del iframe solo por acción explícita, filtro de clips, títulos originales, VOD públicos disponibles, videos YouTube de Pato, horarios declarados, aviso de frescura y enlaces externos de respaldo.
+- La maqueta de referencia contiene controles de demostración y cifras de ejemplo (por ejemplo, 31 espectadores), junto con una lista parcial de clips y horarios escritos dentro del prototipo. Esos valores NO se trasladaron: el sitio continúa leyendo sus datos reales y no presenta muestras ficticias como información vigente.
+- Se conserva la rama aislada `feat/en-vivo-programa-interactivo` y el PR #76. **Sin merge, sin cambios en main y sin despliegue de producción.**
+- Validación pendiente sobre el nuevo HEAD: repetir CI/Playwright, revisar capturas de escritorio y móvil y comprobar la preview actualizada antes de aprobar.
