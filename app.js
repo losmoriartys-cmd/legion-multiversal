@@ -1045,8 +1045,24 @@ function statsRenderChannelDirectory(channels,isFresh){
   const status=live?'<span class="stats-status verified">● EN VIVO</span>':channel.live?'<span class="stats-status partial">ÚLTIMA CAPTURA DEMORADA</span>':'<span class="stats-status pending">OFFLINE · EN SEGUIMIENTO</span>';
   const gamesHtml=games.length?games.map(game=>'<span class="stats-game-tag">'+escapeStatsHtml(game.name)+' <small>'+Number(game.live_samples||0)+' muestras</small></span>').join(''):'<span class="stats-game-tag is-declared">Sin categorías observadas en la ventana</span>';
   const fmtMetric=(v,d=1)=>v===null||v===undefined?'—':statsNumber(v,d);
-  return '<article class="stats-channel-card stats-dossier-card '+(live?'is-live':'is-offline')+'" data-login="'+escapeStatsHtml(channel.login)+'"><div class="stats-dossier-head"><div class="stats-dossier-avatar">'+avatar+'</div><div class="stats-dossier-identity"><h5>'+escapeStatsHtml(name)+'</h5><a href="https://twitch.tv/'+encodeURIComponent(channel.login)+'" target="_blank" rel="noopener noreferrer">@'+escapeStatsHtml(channel.login)+' ↗</a><small>'+escapeStatsHtml(hero?.characterRole||hero?.tagline||'Canal Twitch del roster')+'</small></div><span class="stats-channel-platform">TWITCH</span></div><div class="stats-dossier-status">'+status+'<span>'+fmtMetric(channel.current_viewers,0)+' espectadores actuales</span></div><dl><div><dt>Promedio observado</dt><dd>'+fmtMetric(avg)+'</dd></div><div><dt>Pico observado</dt><dd>'+fmtMetric(peak,0)+'</dd></div><div><dt>Horas observadas</dt><dd>'+fmtMetric(w.observed_live_hours)+' h</dd></div><div><dt>Muestras</dt><dd>'+fmtMetric(w.samples_total,0)+'</dd></div></dl><div class="stats-average-peak"><span>PROMEDIO / PICO</span><b>'+(ratio===null?'s/d':Math.round(ratio)+'%')+'</b><div class="stats-average-track"><i style="width:'+(ratio===null?0:ratio)+'%"></i></div></div><div class="stats-dossier-games"><b>JUEGOS · OBSERVADOS</b><div>'+gamesHtml+'</div></div><p class="stats-dossier-schedule">HORARIO DECLARADO · '+escapeStatsHtml(schedule)+'</p></article>';
+  return '<article class="stats-channel-card stats-dossier-card '+(live?'is-live':'is-offline')+'" data-login="'+escapeStatsHtml(channel.login)+'"><div class="stats-dossier-head"><div class="stats-dossier-avatar">'+avatar+'</div><div class="stats-dossier-identity"><h5>'+escapeStatsHtml(name)+'</h5><a href="https://twitch.tv/'+encodeURIComponent(channel.login)+'" target="_blank" rel="noopener noreferrer">@'+escapeStatsHtml(channel.login)+' ↗</a><small>'+escapeStatsHtml(hero?.characterRole||hero?.tagline||'Canal Twitch del roster')+'</small></div><span class="stats-channel-platform">TWITCH</span></div><div class="stats-dossier-status">'+status+'<span>'+fmtMetric(channel.current_viewers,0)+' espectadores actuales</span></div><dl><div><dt>Promedio observado</dt><dd>'+fmtMetric(avg)+'</dd></div><div><dt>Pico observado</dt><dd>'+fmtMetric(peak,0)+'</dd></div><div><dt>Horas observadas</dt><dd>'+fmtMetric(w.observed_live_hours)+' h</dd></div><div><dt>Muestras</dt><dd>'+fmtMetric(w.samples_total,0)+'</dd></div></dl><div class="stats-average-peak"><span>PROMEDIO / PICO</span><b>'+(ratio===null?'s/d':Math.round(ratio)+'%')+'</b><div class="stats-average-track"><i data-stats-fill="'+(ratio===null?0:ratio)+'" style="width:0%"></i></div></div><div class="stats-dossier-games"><b>JUEGOS · OBSERVADOS</b><div>'+gamesHtml+'</div></div><p class="stats-dossier-schedule">HORARIO DECLARADO · '+escapeStatsHtml(schedule)+'</p></article>';
  }).join('')||'<p class="stats-note">No hay canales que coincidan con este filtro.</p>';
+ statsRevealDossierCards(host);
+}
+function statsRevealDossierCards(host){
+ const cards=[...host.querySelectorAll('.stats-dossier-card')];
+ const reveal=card=>{
+  card.classList.add('is-revealed');
+  card.querySelectorAll('[data-stats-fill]').forEach(fill=>{fill.style.width=fill.dataset.statsFill+'%';});
+ };
+ if(window.matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in window)){
+  cards.forEach(reveal);return;
+ }
+ const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{
+  if(!entry.isIntersecting)return;
+  reveal(entry.target);observer.unobserve(entry.target);
+ }),{threshold:.12});
+ cards.forEach(card=>observer.observe(card));
 }
 function statsRenderEvolution(channels){
  const host=document.getElementById('stats-evolution');if(!host)return;
