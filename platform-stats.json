@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-20T05:28:34Z",
+  "updated_at": "2026-11-20T06:01:07Z",
   "methodology": "Las métricas se conservan por creador y plataforma. No sumar ni comparar directamente unidades de plataformas distintas.",
   "creators": {
     "pato-oratoris": {
@@ -25,7 +25,16 @@
               "views": 48,
               "likes": 6,
               "comments": 1,
-              "url": "https://www.youtube.com/watch?v=iX9dw_fYHg8"
+              "url": "https://www.youtube.com/watch?v=iX9dw_fYHg8",
+              "view_history": [
+                {
+                  "date": "2026-11-20",
+                  "captured_at": "2026-11-20T06:01:07Z",
+                  "views": 48,
+                  "likes": 6,
+                  "comments": 1
+                }
+              ]
             },
             {
               "video_id": "kD6OQ59_RxQ",
@@ -34,7 +43,16 @@
               "views": 75,
               "likes": 11,
               "comments": 2,
-              "url": "https://www.youtube.com/watch?v=kD6OQ59_RxQ"
+              "url": "https://www.youtube.com/watch?v=kD6OQ59_RxQ",
+              "view_history": [
+                {
+                  "date": "2026-11-20",
+                  "captured_at": "2026-11-20T06:01:07Z",
+                  "views": 75,
+                  "likes": 11,
+                  "comments": 2
+                }
+              ]
             },
             {
               "video_id": "6iTtFtLYTXc",
@@ -43,7 +61,16 @@
               "views": 58,
               "likes": 10,
               "comments": 1,
-              "url": "https://www.youtube.com/watch?v=6iTtFtLYTXc"
+              "url": "https://www.youtube.com/watch?v=6iTtFtLYTXc",
+              "view_history": [
+                {
+                  "date": "2026-11-20",
+                  "captured_at": "2026-11-20T06:01:07Z",
+                  "views": 58,
+                  "likes": 10,
+                  "comments": 1
+                }
+              ]
             },
             {
               "video_id": "5Ky01F9RwP0",
@@ -52,7 +79,16 @@
               "views": 50,
               "likes": 12,
               "comments": 2,
-              "url": "https://www.youtube.com/watch?v=5Ky01F9RwP0"
+              "url": "https://www.youtube.com/watch?v=5Ky01F9RwP0",
+              "view_history": [
+                {
+                  "date": "2026-11-20",
+                  "captured_at": "2026-11-20T06:01:07Z",
+                  "views": 50,
+                  "likes": 12,
+                  "comments": 2
+                }
+              ]
             },
             {
               "video_id": "FT3OksHauPA",
@@ -61,7 +97,16 @@
               "views": 43,
               "likes": 9,
               "comments": 1,
-              "url": "https://www.youtube.com/watch?v=FT3OksHauPA"
+              "url": "https://www.youtube.com/watch?v=FT3OksHauPA",
+              "view_history": [
+                {
+                  "date": "2026-11-20",
+                  "captured_at": "2026-11-20T06:01:07Z",
+                  "views": 43,
+                  "likes": 9,
+                  "comments": 1
+                }
+              ]
             },
             {
               "video_id": "WmtAu_JU99M",
@@ -70,16 +115,25 @@
               "views": 157,
               "likes": 20,
               "comments": 6,
-              "url": "https://www.youtube.com/watch?v=WmtAu_JU99M"
+              "url": "https://www.youtube.com/watch?v=WmtAu_JU99M",
+              "view_history": [
+                {
+                  "date": "2026-11-20",
+                  "captured_at": "2026-11-20T06:01:07Z",
+                  "views": 157,
+                  "likes": 20,
+                  "comments": 6
+                }
+              ]
             }
           ],
           "source": "YouTube Data API v3",
           "status": "verified",
           "methodology": "Datos públicos acumulados del canal y hasta 10 videos recientes. El contador de suscriptores puede estar redondeado por YouTube.",
-          "captured_at": "2026-11-20T05:28:34Z",
+          "captured_at": "2026-11-20T06:01:07Z",
           "history": [
             {
-              "captured_at": "2026-11-20T05:28:34Z",
+              "captured_at": "2026-11-20T06:01:07Z",
               "metrics": {
                 "subscribers": 56,
                 "total_views": 431,
@@ -94,7 +148,7 @@
   "collection_status": {
     "youtube": "enabled",
     "kick": "awaiting_secrets",
-    "captured_at": "2026-11-20T05:28:34Z",
+    "captured_at": "2026-11-20T06:01:07Z",
     "successful_accounts": 1,
     "failed_accounts": 0,
     "complete": true
