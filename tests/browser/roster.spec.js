@@ -88,7 +88,7 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
         .map(item => ({ platform: labels[item.platform], url: item.url }));
     }, creator.id);
     const actualSocialLinks = await dossier.locator('.hero-profile-socials .btn-link').evaluateAll(anchors =>
-      anchors.map(anchor => ({ platform: anchor.textContent.replace(/\\s*↗\\s*$/, '').trim(), url: anchor.href }))
+      anchors.map(anchor => ({ platform: anchor.textContent.replace(/\s*↗\s*$/, '').trim(), url: anchor.href }))
     );
     expect(actualSocialLinks).toEqual(expectedSocialLinks);
     await expect(dossier.locator('.hero-profile-poster')).toHaveCount(0);
