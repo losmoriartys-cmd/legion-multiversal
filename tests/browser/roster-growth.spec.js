@@ -43,7 +43,7 @@ test('cada Bitácora tiene capítulos separados de Recorrido y Crecimiento', asy
     await expect(growthPanel).toBeVisible();
     await expect(growthPanel.locator('.hero-growth-chapter')).toBeVisible();
     await expect(growthPanel.locator('.hero-growth-heading')).toContainText('CRECIMIENTO');
-    await expect(growthPanel.locator('.hero-growth-method')).toContainText('no se suman audiencias');
+    await expect(growthPanel.locator('.hero-growth-method')).toContainText('No se suman audiencias');
     await expect(growthPanel.locator('.hero-growth-periods')).toBeVisible();
     const periods = growthPanel.locator('[data-growth-window]');
     await expect(periods).toHaveCount(3);
