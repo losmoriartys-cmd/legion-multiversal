@@ -96,7 +96,7 @@ test('BarFender y YouTube se reproducen dentro del escenario con respaldo extern
   await youtube.click();
   await page.locator('[data-lp="play"]').click();
   await expect(page.locator('iframe.lp-embed')).toHaveAttribute('src', new RegExp('youtube-nocookie\\.com/embed/' + youtubeId));
-  await expect(page.locator('a[href="' + youtubeUrl + '"]')).toBeVisible();
+  await expect(page.getByRole('link', { name: 'ABRIR EN YOUTUBE' })).toBeVisible();
 });
 
 
