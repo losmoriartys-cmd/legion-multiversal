@@ -2672,6 +2672,7 @@ function printHeroDossier(){
                     await loadRosterData();
                     await loadResourceOnce('creator-records', loadCreatorRecords);
                     renderRoster();
+                    renderStatsPlatformDirectory();
                     renderMultiverseMap();
                     restoreHeroProfileFromHash();
                 } catch (error) {
@@ -2686,11 +2687,15 @@ function printHeroDossier(){
             const add = (key, loader) => jobs.push(loadResourceOnce(key, loader));
 
             // Inicio y central EN VIVO: solo necesitan el estado público resumido.
-            if ([0, 2, 3, 10].includes(Number(chapterNum))) add('institute-stats', loadInstituteStats);
+            if ([0, 10].includes(Number(chapterNum))) add('institute-stats', loadInstituteStats);
 
             // Roster, estadísticas y mapa comparten las fuentes de perfiles y métricas.
             if ([2, 3, 13].includes(Number(chapterNum))) {
-                jobs.push(ensureRosterResources());
+                const rosterReady = ensureRosterResources();
+                jobs.push(rosterReady);
+                // Las fichas de Estadísticas necesitan identidad, roles y horarios del roster.
+                // Esperar a que se resuelva evita que la primera captura pinte fichas incompletas.
+                if ([2, 3].includes(Number(chapterNum))) jobs.push(rosterReady.then(() => loadInstituteStats()));
                 add('sullygnome', loadSullyGnomeData);
                 add('twitch-metrics', loadTwitchMetricsData);
                 add('creator-records', loadCreatorRecords);
