@@ -98,3 +98,16 @@ test('BarFender y YouTube se reproducen dentro del escenario con respaldo extern
   await expect(page.locator('iframe.lp-embed')).toHaveAttribute('src', new RegExp('youtube-nocookie\\.com/embed/' + youtubeId));
   await expect(page.locator('a[href="' + youtubeUrl + '"]')).toBeVisible();
 });
+
+
+test('la cola de clips puede tomar el escenario aunque haya un directo activo', async ({ page }) => {
+  await openLiveChapter(page, true);
+  await expect(page.locator('.lp-status')).toContainText('EN DIRECTO AHORA');
+  const clip = page.locator('.lp-q').first();
+  await expect(clip).toBeVisible();
+  const title = await clip.locator('.lp-q-title').textContent();
+  await clip.click();
+  await expect(page.locator('.lp-screen-title')).toHaveText(title);
+  await page.locator('[data-lp="play"]').click();
+  await expect(page.locator('iframe.lp-embed')).toHaveAttribute('src', /clips\\.twitch\\.tv\\/embed\\?clip=/);
+});
