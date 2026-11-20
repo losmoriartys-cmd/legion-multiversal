@@ -561,7 +561,9 @@ function renderStatsPlatformDirectory(){
    const verified=p.status==='verified';
    const label=platform==='youtube'?'YOUTUBE':platform==='kick'?'KICK':platform.toUpperCase();
    const status=verified?'FUENTE OFICIAL':p.status==='credentials_required'?'CONFIGURACIÓN PENDIENTE':p.status==='error'?'ERROR DE CONSULTA':'REFERENCIA';
-   out+='<article class="stats-platform-card"><div class="stats-platform-card-top"><span>'+escapeStatsHtml(label)+'</span><span class="stats-status '+(verified?'verified':'pending')+'">'+status+'</span></div><h5>'+escapeStatsHtml(creator.display_name||key)+'</h5><p class="stats-platform-handle">'+escapeStatsHtml(p.handle||'Cuenta registrada')+'</p>';
+   const thumbnail=p.thumbnail_url||'';
+   const avatar=thumbnail?'<img class="stats-platform-avatar" src="'+escapeStatsHtml(thumbnail)+'" alt="Logo de '+escapeStatsHtml(creator.display_name||key)+'" loading="lazy" referrerpolicy="no-referrer" onerror="this.hidden=true">':'';
+   out+='<article class="stats-platform-card"><div class="stats-platform-creator">'+avatar+'<div><h5>'+escapeStatsHtml(creator.display_name||key)+'</h5><p class="stats-platform-handle">'+escapeStatsHtml(p.handle||'Cuenta registrada')+'</p></div></div><div class="stats-platform-card-top"><span>'+escapeStatsHtml(label)+'</span><span class="stats-status '+(verified?'verified':'pending')+'">'+status+'</span></div><h5>'+escapeStatsHtml(creator.display_name||key)+'</h5><p class="stats-platform-handle">'+escapeStatsHtml(p.handle||'Cuenta registrada')+'</p>';
    if(!verified){
     out+='<p class="stats-platform-note">'+escapeStatsHtml(p.note||'La cuenta está registrada, pero todavía no hay una lectura pública disponible.')+'</p>';
    }else if(platform==='youtube'){
@@ -1007,6 +1009,102 @@ function renderLegionNews() {
     }).join('');
 }
 let instituteStatsLoading = false;
+let instituteStatsSnapshot = null;
+let statsDirectoryFilter = 'all';
+let statsDirectorySort = 'live';
+
+function statsCreatorForLogin(login){
+ const normalized=String(login||'').toLowerCase();
+ return heroesData.find(hero=>(hero.accounts||[]).some(account=>account.platform==='twitch'&&String(account.login||'').toLowerCase()===normalized))||null;
+}
+function statsCreatorSchedule(hero){
+ return String(hero?.schedule||'Sin horario declarado');
+}
+function statsRenderChannelDirectory(channels,isFresh){
+ const host=document.getElementById('stats-channel-grid');
+ if(!host)return;
+ let rows=channels.slice();
+ if(statsDirectoryFilter==='live')rows=rows.filter(channel=>channel.live&&isFresh);
+ if(statsDirectoryFilter==='offline')rows=rows.filter(channel=>!channel.live||!isFresh);
+ const metric=channel=>channel.window||{};
+ rows.sort((a,b)=>{
+  if(statsDirectorySort==='name')return String(a.display_name||a.login).localeCompare(String(b.display_name||b.login),'es');
+  if(statsDirectorySort==='average')return (metric(b).average_viewers_sampled??-1)-(metric(a).average_viewers_sampled??-1);
+  if(statsDirectorySort==='peak')return (metric(b).peak_viewers_sampled??-1)-(metric(a).peak_viewers_sampled??-1);
+  if(statsDirectorySort==='hours')return (metric(b).observed_live_hours??-1)-(metric(a).observed_live_hours??-1);
+  return Number(Boolean(b.live&&isFresh))-Number(Boolean(a.live&&isFresh))||String(a.display_name||a.login).localeCompare(String(b.display_name||b.login),'es');
+ });
+ host.innerHTML=rows.map(channel=>{
+  const w=metric(channel),hero=statsCreatorForLogin(channel.login),image=channel.profile_image_url||'',name=channel.display_name||channel.login;
+  const live=Boolean(channel.live&&isFresh),avg=w.average_viewers_sampled,peak=w.peak_viewers_sampled;
+  const ratio=typeof avg==='number'&&typeof peak==='number'&&peak>0?Math.max(0,Math.min(100,avg/peak*100)):null;
+  const games=Array.isArray(w.game_breakdown)?w.game_breakdown.slice().sort((a,b)=>(b.live_samples||0)-(a.live_samples||0)).slice(0,3):[];
+  const schedule=statsCreatorSchedule(hero);
+  const avatar=image?'<img src="'+escapeStatsHtml(image)+'" alt="Logo de '+escapeStatsHtml(name)+'" loading="lazy" referrerpolicy="no-referrer" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><span class="stats-avatar-fallback" hidden>'+escapeStatsHtml(String(name).slice(0,2).toUpperCase())+'</span>':'<span class="stats-avatar-fallback">'+escapeStatsHtml(String(name).slice(0,2).toUpperCase())+'</span>';
+  const status=live?'<span class="stats-status verified">● EN VIVO</span>':channel.live?'<span class="stats-status partial">ÚLTIMA CAPTURA DEMORADA</span>':'<span class="stats-status pending">OFFLINE · EN SEGUIMIENTO</span>';
+  const gamesHtml=games.length?games.map(game=>'<span class="stats-game-tag">'+escapeStatsHtml(game.name)+' <small>'+Number(game.live_samples||0)+' muestras</small></span>').join(''):'<span class="stats-game-tag is-declared">Sin categorías observadas en la ventana</span>';
+  const fmtMetric=(v,d=1)=>v===null||v===undefined?'—':statsNumber(v,d);
+  return '<article class="stats-channel-card stats-dossier-card '+(live?'is-live':'is-offline')+'" data-login="'+escapeStatsHtml(channel.login)+'"><div class="stats-dossier-head"><div class="stats-dossier-avatar">'+avatar+'</div><div class="stats-dossier-identity"><h5>'+escapeStatsHtml(name)+'</h5><a href="https://twitch.tv/'+encodeURIComponent(channel.login)+'" target="_blank" rel="noopener noreferrer">@'+escapeStatsHtml(channel.login)+' ↗</a><small>'+escapeStatsHtml(hero?.characterRole||hero?.tagline||'Canal Twitch del roster')+'</small></div><span class="stats-channel-platform">TWITCH</span></div><div class="stats-dossier-status">'+status+'<span>'+fmtMetric(channel.current_viewers,0)+' espectadores actuales</span></div><dl><div><dt>Promedio observado</dt><dd>'+fmtMetric(avg)+'</dd></div><div><dt>Pico observado</dt><dd>'+fmtMetric(peak,0)+'</dd></div><div><dt>Horas observadas</dt><dd>'+fmtMetric(w.observed_live_hours)+' h</dd></div><div><dt>Muestras</dt><dd>'+fmtMetric(w.samples_total,0)+'</dd></div></dl><div class="stats-average-peak"><span>PROMEDIO / PICO</span><b>'+(ratio===null?'s/d':Math.round(ratio)+'%')+'</b><div class="stats-average-track"><i style="width:'+(ratio===null?0:ratio)+'%"></i></div></div><div class="stats-dossier-games"><b>JUEGOS · OBSERVADOS</b><div>'+gamesHtml+'</div></div><p class="stats-dossier-schedule">HORARIO DECLARADO · '+escapeStatsHtml(schedule)+'</p></article>';
+ }).join('')||'<p class="stats-note">No hay canales que coincidan con este filtro.</p>';
+}
+function statsRenderEvolution(channels){
+ const host=document.getElementById('stats-evolution');if(!host)return;
+ const days=new Map();
+ channels.forEach(channel=>(channel.window?.daily_activity||[]).forEach(day=>{
+  if(!day?.date)return;
+  const current=days.get(day.date)||{date:day.date,streams:0,samples:0,avgWeighted:0,weight:0};
+  const streams=Number(day.streams_observed)||0,samples=Number(day.live_samples)||0,avg=Number(day.average_viewers_sampled);
+  current.streams+=streams;current.samples+=samples;
+  if(Number.isFinite(avg)&&samples>0){current.avgWeighted+=avg*samples;current.weight+=samples;}
+  days.set(day.date,current);
+ }));
+ const rows=[...days.values()].sort((a,b)=>a.date.localeCompare(b.date)).slice(-14);
+ if(!rows.length){host.innerHTML='<p class="stats-note">Todavía no hay suficientes registros diarios para construir la evolución.</p>';return;}
+ const max=Math.max(1,...rows.map(row=>row.streams));
+ host.innerHTML='<div class="stats-evolution-legend"><span><i></i> Transmisiones observadas</span><span><i></i> Muestras en directo</span></div><div class="stats-evolution-bars">'+rows.map(row=>{
+  const label=statsDate(row.date).slice(0,5),height=Math.max(row.streams?4:0,row.streams/max*100);
+  return '<div class="stats-evolution-day" title="'+escapeStatsHtml(statsDate(row.date))+': '+row.streams+' transmisiones, '+row.samples+' muestras en directo"><div class="stats-evolution-bar"><i style="height:'+height+'%"></i></div><b>'+row.streams+'</b><small>'+label+'</small><span>'+row.samples+' muestras</span></div>';
+ }).join('')+'</div><p class="stats-evolution-note">Total del tramo visible: '+rows.reduce((sum,row)=>sum+row.streams,0)+' transmisiones observadas y '+rows.reduce((sum,row)=>sum+row.samples,0)+' muestras en directo. Promedio ponderado de las muestras: '+(rows.reduce((sum,row)=>sum+row.avgWeighted,0)/Math.max(1,rows.reduce((sum,row)=>sum+row.weight,0))).toLocaleString('es-AR',{maximumFractionDigits:1})+' espectadores.</p>';
+}
+function statsRenderWeek(){
+ const host=document.getElementById('stats-week-grid');if(!host)return;
+ const days=['LUN','MAR','MIÉ','JUE','VIE','SÁB','DOM'];
+ const scheduleRows=heroesData.map(hero=>({hero,schedule:statsCreatorSchedule(hero)}));
+ const declared=[
+  {match:/lunes y miércoles 20:00/i,days:{0:'20:00',2:'20:00'}},
+  {match:/viernes 21:00/i,days:{4:'21:00'}},
+  {match:/lunes a viernes 20:00/i,days:{0:'20:00',1:'20:00',2:'20:00',3:'20:00',4:'20:00'}},
+  {match:/martes y jueves 23:00/i,days:{1:'23:00',3:'23:00'}},
+  {match:/lunes a viernes 21:00/i,days:{0:'21:00',1:'21:00',2:'21:00',3:'21:00',4:'21:00'}},
+  {match:/lunes a sábado/i,days:{0:'Mañana / tarde',1:'Mañana / tarde',2:'Mañana / tarde',3:'Mañana / tarde',4:'Mañana / tarde',5:'Mañana / tarde'}}
+ ];
+ const header='<div class="stats-week-name-head">INTEGRANTE</div>'+days.map(day=>'<div class="stats-week-day-head">'+day+'</div>').join('');
+ const rows=scheduleRows.map(({hero,schedule})=>{
+  const map={};declared.forEach(rule=>{if(rule.match.test(schedule))Object.assign(map,rule.days);});
+  const isVariable=/1 a 2 veces|sin horario fijo/i.test(schedule);
+  const isNoSchedule=/sin directos|sin directos programados/i.test(schedule);
+  return '<div class="stats-week-name">'+escapeStatsHtml(hero.display_name||hero.name)+'</div>'+days.map((day,index)=>{
+   const value=map[index];
+   if(value)return '<div class="stats-week-cell is-declared">'+escapeStatsHtml(value)+'</div>';
+   if(isVariable)return '<div class="stats-week-cell is-variable">Variable</div>';
+   if(isNoSchedule)return '<div class="stats-week-cell is-none">—</div>';
+   return '<div class="stats-week-cell is-none">—</div>';
+  }).join('')+(isVariable||isNoSchedule?'<div class="stats-week-note">'+escapeStatsHtml(schedule)+'</div>':'');
+ }).join('');
+ host.innerHTML='<div class="stats-week-table">'+header+rows+'</div><p class="stats-evolution-note">Los horarios son declaraciones del roster, no predicciones de disponibilidad ni registros de transmisiones realizadas.</p>';
+}
+document.addEventListener('click',event=>{
+ const button=event.target.closest('[data-stats-filter]');if(!button)return;
+ statsDirectoryFilter=button.dataset.statsFilter;
+ document.querySelectorAll('[data-stats-filter]').forEach(node=>{const active=node===button;node.classList.toggle('is-active',active);node.setAttribute('aria-pressed',String(active));});
+ if(instituteStatsSnapshot)statsRenderChannelDirectory(instituteStatsSnapshot.channels,instituteStatsSnapshot.isFresh);
+});
+document.addEventListener('change',event=>{
+ if(event.target?.id!=='stats-sort')return;
+ statsDirectorySort=event.target.value;
+ if(instituteStatsSnapshot)statsRenderChannelDirectory(instituteStatsSnapshot.channels,instituteStatsSnapshot.isFresh);
+});
+
 
 async function loadInstituteStats(){
  const body=document.getElementById('stats-table-body'); if(!body||instituteStatsLoading)return;
@@ -1052,7 +1150,8 @@ async function loadInstituteStats(){
    [fmt(observedStreams,0),'DIRECTOS DETECTADOS','Sesiones observadas en la ventana disponible'],
    [fmt(liveSamples,0),'CAPTURAS EN DIRECTO','Registros capturados mientras había transmisión'],
    [interval+' MIN','FRECUENCIA OBJETIVO','Cadencia configurada del colector'],
-   [resolvedChannels+'/'+expectedChannels,'COBERTURA DE CANALES',collectionComplete?'Todos los canales esperados fueron contabilizados':'Revisar canales pendientes o no contabilizados']
+   [resolvedChannels+'/'+expectedChannels,'COBERTURA DE CANALES',collectionComplete?'Todos los canales esperados fueron contabilizados':'Revisar canales pendientes o no contabilizados'],
+   [fmt(channels.reduce((n,c)=>n+(Number(c.window?.estimated_hours_watched)||0),0),1),'HORAS DE AUDIENCIA ESTIMADAS','Estimación propia entre muestras consecutivas; no es analítica oficial']
   ].map(([value,label,note])=>'<article class="impact-kpi"><strong>'+value+'</strong><span>'+label+'</span><small>'+note+'</small></article>').join('');
   const homeLiveStatus=document.getElementById('home-live-status');
   const homeLiveUpdated=document.getElementById('home-live-updated');
@@ -1063,17 +1162,10 @@ async function loadInstituteStats(){
   if(homeFollowLink)homeFollowLink.hidden=isFresh&&liveCount>0;
   const liveNav=document.querySelector('.nav-btn-live[data-chapter="10"]');
   if(liveNav){const showLive=isFresh&&liveCount>0;liveNav.classList.toggle('is-live',showLive);liveNav.innerHTML='EN VIVO <span aria-hidden="true">'+(showLive?'● '+liveCount:'●')+'</span>';liveNav.setAttribute('aria-label',showLive?liveCount+' canal(es) detectado(s) en directo en la última captura':'Consultar estado de transmisiones; '+(isFresh?'sin canales en directo en la última captura':'última captura demorada'));}
-  const channelGrid=document.getElementById('stats-channel-grid');
-  if(channelGrid){
-   const orderedChannels=channels.slice().sort((a,b)=>Number(Boolean(b.live))-Number(Boolean(a.live))||String(a.display_name||a.login).localeCompare(String(b.display_name||b.login),'es'));
-   channelGrid.innerHTML=orderedChannels.map(c=>{
-    const w=c.window||{};
-    const status=c.live&&isFresh?'<span class="stats-status verified">● EN DIRECTO</span>':c.live?'<span class="stats-status partial">ÚLTIMA LECTURA: EN DIRECTO</span>':'<span class="stats-status pending">OFFLINE · EN SEGUIMIENTO</span>';
-    const viewers=c.live&&c.current_viewers!==null&&c.current_viewers!==undefined?fmt(c.current_viewers,0):'—';
-    const metric=(value,suffix='')=>value===null||value===undefined?'—':fmt(value)+suffix;
-    return '<article class="stats-channel-card '+(c.live?'is-live':'is-offline')+'"><div class="stats-channel-card-top">'+status+'<span class="stats-channel-platform">TWITCH</span></div><h5>'+escapeStatsHtml(c.display_name||c.login)+'</h5><a href="https://twitch.tv/'+encodeURIComponent(c.login)+'" target="_blank" rel="noopener noreferrer">ABRIR CANAL ↗</a><div class="stats-channel-viewers"><strong>'+viewers+'</strong><span>ESPECTADORES ACTUALES</span></div><dl><div><dt>Promedio observado</dt><dd>'+metric(w.average_viewers_sampled)+'</dd></div><div><dt>Pico observado</dt><dd>'+metric(w.peak_viewers_sampled,' viewers')+'</dd></div><div><dt>Horas en directo observadas</dt><dd>'+metric(w.observed_live_hours,' h')+'</dd></div><div><dt>Directos detectados</dt><dd>'+metric(w.streams_observed)+'</dd></div></dl><small class="stats-channel-foot">Muestras registradas: '+metric(w.samples_total)+'</small></article>';
-   }).join('');
-  }
+  instituteStatsSnapshot={channels,isFresh};
+  statsRenderChannelDirectory(channels,isFresh);
+  statsRenderEvolution(channels);
+  statsRenderWeek();
   const games={};
   channels.forEach(c=>(c.window?.game_breakdown||[]).forEach(g=>{if(g?.name)games[g.name]=(games[g.name]||0)+(g.live_samples||0);}));
   const topGames=Object.entries(games).sort((a,b)=>b[1]-a[1]).slice(0,5);
