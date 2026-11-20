@@ -1,3 +1,17 @@
+## 2026-11-20 — EN VIVO: central automática y programación interactiva
+
+- **Base:** rama principal en `5cbc9f8`; rama `feat/en-vivo-programa-interactivo`, posterior a la integración del PR #73 (`9647ab2`).
+- **Objetivo:** reemplazar el directorio de canales offline por una experiencia editorial que siga activa aunque ningún integrante esté transmitiendo. El nombre de la persona en vivo nunca queda fijado en el diseño: se obtiene del estado público vigente de Twitch.
+- **En directo:** cuando la captura es reciente, la pantalla principal muestra el canal detectado, su título/categoría y espectadores disponibles. Si hay varias señales, el visitante puede elegir cuál cargar. El reproductor se inserta solo después de una acción explícita.
+- **Sin directos:** la central cambia a «Programación de la Legión»: clip destacado y cola filtrable por creador; tres VOD públicos de BarFender (Los Moriartys, Lady Moriarty y Rod3r1k); seis videos de Pato en YouTube; y horarios declarados del roster. Los horarios se presentan como referencias declaradas, no como compromisos confirmados.
+- **Fuentes existentes reutilizadas:** `clips-data.json` (44 clips públicos de siete creadores; títulos originales conservados), `roster-data.json` (horarios declarados y enlaces VOD de BarFender) y `platform-stats.json` (seis videos de YouTube de Pato). No se agregan clips, VODs, horarios ni métricas ficticias.
+- **Reproducción y fallback:** Twitch Clips, Twitch VODs, Twitch Live y YouTube se incrustan dentro del capítulo al pulsar reproducir. No se cargan iframes antes de esa acción ni se solicita autoplay. Cada pieza mantiene un enlace externo por si el navegador, la plataforma o el dominio impiden la reproducción embebida. El parámetro `parent` de Twitch usa el hostname real del sitio.
+- **Presentación:** diseño editorial oscuro con jerarquía de señal principal, «A continuación», archivo cooperativo y agenda. Se adapta a móvil y respeta `prefers-reduced-motion`.
+- **Archivos:** `index.html`, `live-program.js` (nuevo), `styles.css` y `tests/browser/live-program.spec.js` (nuevo).
+- **Validación:** se incorporaron pruebas Playwright para el estado sin directos (44 clips, filtro por creador, tres VOD y seis videos) y para el estado en vivo (nombre dinámico, espectadores y carga explícita del reproductor). **CI pendiente; no se declara todavía aprobado ni desplegado.**
+- **Pendiente de revisión:** confirmar visualmente escritorio y móvil en la preview de Cloudflare; comprobar que Twitch acepta el `parent` del dominio de producción y que el reproductor carga en el sitio publicado. Si el proveedor bloquea un embed, permanece disponible la salida al canal/video externo.
+
+---
 ## 2026-11-20 — Roster 2: datos en la carta, EN VIVO con espectadores, cinco pestañas y Bitácora en línea de tiempo
 
 - **Base:** `main` en `8318985`; rama `roster/carta-perfil-bitacora`, sobre el PR #72 ya integrado.
