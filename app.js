@@ -1065,6 +1065,17 @@ function statsRevealDossierCards(host){
  }),{threshold:.12});
  cards.forEach(card=>observer.observe(card));
 }
+function statsRenderComparison(channels){
+ const host=document.getElementById('stats-twitch-comparison');if(!host)return;
+ const rows=channels.map(channel=>({channel,avg:channel.window?.average_viewers_sampled,peak:channel.window?.peak_viewers_sampled}))
+  .filter(row=>typeof row.avg==='number'&&Number.isFinite(row.avg)&&typeof row.peak==='number'&&Number.isFinite(row.peak)&&row.peak>0);
+ if(!rows.length){host.innerHTML='<p class="stats-note">Todavía no hay promedios y picos comparables para mostrar.</p>';return;}
+ const max=Math.max(1,...rows.map(row=>row.peak));
+ host.innerHTML='<div class="stats-comparison-legend"><span><i class="is-average"></i> Promedio observado</span><span><i class="is-peak"></i> Pico observado</span></div>'+rows.sort((a,b)=>b.peak-a.peak).map(row=>{
+  const name=escapeStatsHtml(row.channel.display_name||row.channel.login),avgWidth=Math.max(0,Math.min(100,row.avg/max*100)),peakWidth=Math.max(0,Math.min(100,row.peak/max*100));
+  return '<div class="stats-comparison-row"><strong>'+name+'</strong><div class="stats-comparison-bars"><div class="stats-comparison-track"><i class="is-average" style="width:'+avgWidth+'%"></i></div><div class="stats-comparison-track"><i class="is-peak" style="width:'+peakWidth+'%"></i></div></div><span>'+statsNumber(row.avg,1)+' / '+statsNumber(row.peak,0)+'</span></div>';
+ }).join('')+'<p class="stats-evolution-note">Valores del muestreo propio en la ventana disponible. No son promedios oficiales de Twitch ni métricas de toda la vida del canal.</p>';
+}
 function statsRenderEvolution(channels){
  const host=document.getElementById('stats-evolution');if(!host)return;
  const days=new Map();
@@ -1206,6 +1217,7 @@ async function loadInstituteStats(){
   instituteStatsSnapshot={channels,isFresh};
   statsRenderChannelDirectory(channels,isFresh);
   statsRenderEvolution(channels);
+  statsRenderComparison(channels);
   statsRenderWeek();
   const games={};
   channels.forEach(c=>(c.window?.game_breakdown||[]).forEach(g=>{if(g?.name)games[g.name]=(games[g.name]||0)+(g.live_samples||0);}));
