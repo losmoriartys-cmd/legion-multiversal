@@ -6166,3 +6166,20 @@ main .chapter-panel :where(.chapter-cta, .executive-button, .comic-submit-btn,
 .stats-evolution-pair .stats-evolution-bar{height:100%;width:50%}
 .stats-evolution-pair .stats-evolution-bar.is-samples i{background:linear-gradient(180deg,#ff2bd6,#b51b92)}
 .stats-evolution-legend span:nth-child(2) i{background:#ff2bd6}
+
+.stats-comparison-section{margin-top:28px}
+.stats-twitch-comparison{padding:16px;background:#0b1320;border:1px solid #2b3a50}
+.stats-comparison-legend{display:flex;gap:16px;flex-wrap:wrap;color:#aebbd0;font-size:.68rem;margin-bottom:14px}
+.stats-comparison-legend span{display:flex;align-items:center;gap:7px}
+.stats-comparison-legend i{width:11px;height:8px;border-radius:2px;display:inline-block}
+.stats-comparison-legend .is-average{background:#00d9ef}
+.stats-comparison-legend .is-peak{background:#ff2bd6}
+.stats-comparison-row{display:grid;grid-template-columns:minmax(105px,150px) minmax(100px,1fr) 82px;gap:10px;align-items:center;margin:10px 0}
+.stats-comparison-row>strong{font-size:.68rem;color:#e6eef9;overflow-wrap:anywhere}
+.stats-comparison-bars{display:grid;gap:4px}
+.stats-comparison-track{height:7px;background:#24344a;border-radius:99px;overflow:hidden}
+.stats-comparison-track i{display:block;height:100%;border-radius:99px}
+.stats-comparison-track .is-average{background:#00d9ef}
+.stats-comparison-track .is-peak{background:#ff2bd6}
+.stats-comparison-row>span{text-align:right;color:#aebbd0;font-size:.65rem;font-variant-numeric:tabular-nums}
+@media(max-width:560px){.stats-comparison-row{grid-template-columns:90px minmax(80px,1fr) 68px;gap:6px}.stats-comparison-row>strong,.stats-comparison-row>span{font-size:.58rem}}
