@@ -40,10 +40,16 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
     await expect(card).toHaveCount(1);
     await expect(card).toContainText('VER PERFIL');
     await expect(card).not.toContainText(/Just Chatting|JUEGOS POR DOCUMENTAR/i);
-    const expectedAudience = {'rod3r1k':'5.188','lady-moriarty':'180','akuma':'142','pato-oratoris':'56'};
     await expect(card.locator('.comic-roster-stat')).toHaveCount(3);
-    if (expectedAudience[creator.id]) await expect(card.locator('.comic-roster-stat-audience b')).toHaveText(expectedAudience[creator.id]);
-    else await expect(card.locator('.comic-roster-stat-audience b')).toHaveText('No informado');
+    const expectedPrimaryMetric = await page.evaluate(creatorId => {
+      const hero = heroesData.find(item => item.id === creatorId);
+      const account = hero.accounts.find(item => item.account_type === 'creator_channel');
+      const metricKey = account.platform === 'youtube' ? 'subscribers' : 'average_viewers_sampled';
+      const metric = getNormalizedCreatorMetric(hero, metricKey, account.platform);
+      return normalizedMetricValue(metric, account.platform === 'youtube' ? 0 : 1);
+    }, creator.id);
+    await expect(card.locator('.comic-roster-stat-audience b')).toHaveText(expectedPrimaryMetric);
+    await expect(card.locator('.comic-roster-brand-slots')).not.toContainText('Seguidores');
 
     await card.click();
 
