@@ -30,8 +30,8 @@
     <link rel="preload" href="https://fonts.gstatic.com/s/robotocondensed/v31/ieVl2ZhZI2eCN5jzbjEETS9weq8-19K7DQk6YvM.woff2" as="font" type="font/woff2" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Permanent+Marker&family=Roboto+Condensed:wght@400..900&family=Special+Elite&display=optional" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Bangers&family=Permanent+Marker&family=Roboto+Condensed:wght@400..900&family=Special+Elite&display=optional" rel="stylesheet"></noscript>
-    <link rel="stylesheet" id="lm-global-chapter-styles" data-href="./styles.css?v=20261120-live-program-1">
-    <noscript><link rel="stylesheet" href="./styles.css?v=20261120-live-program-1"></noscript>
+    <link rel="stylesheet" id="lm-global-chapter-styles" data-href="./styles.css?v=20261120-stats-dossier-1">
+    <noscript><link rel="stylesheet" href="./styles.css?v=20261120-stats-dossier-1"></noscript>
     <!-- CSS crítico de inicio. La animación de entrada se reserva para la navegación entre capítulos; no retrasa el primer LCP. -->
     <style id="critical-home-styles">
       :root{--bg-color:#0b0f19;--panel-bg:#121824;--yellow-accent:#ffde00;--red-accent:#ff2a2a;--blue-accent:#00d2ff;--border-color:#000;--text-color:#f0f4f8;--card-bg:#1a202c;--lm-night:#080d18;--lm-panel:#101a2a;--lm-panel-raised:#15243a;--lm-ice:#c8e5f5;--lm-cyan:#62d9e8;--lm-violet:#a99bff;--lm-magenta:#d18acb;--lm-muted:#9eafc4;--lm-line:rgba(153,190,220,.24);--type-body-size:clamp(.98rem,.94rem + .16vw,1.06rem);--type-body-leading:1.68;--space-section:clamp(28px,4vw,48px);--space-content:clamp(14px,2vw,22px);--link-focus-ring:#8beaff}
@@ -633,11 +633,34 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
   <div class="impact-section-heading"><span>01 / ACTIVIDAD OBSERVADA</span><h3 id="impact-live-title">LA LEGIÓN EN MOVIMIENTO</h3><p>Indicadores construidos a partir de capturas públicas registradas. Cada dato debe leerse junto con su plataforma, período, fecha de captura y cobertura; una ausencia de datos no equivale a actividad cero.</p></div>
   <div id="stats-updated" class="stats-note" hidden><span class="loading-skeleton loading-skeleton-line" aria-hidden="true"></span></div>
   <div id="stats-summary" class="impact-kpi-grid"><article class="impact-kpi"><strong>7</strong><span>CANALES TWITCH EN SEGUIMIENTO</span><small>7 canales Twitch del roster activo. Oratoris se informa por separado desde YouTube.</small></article></div>
+  <div class="stats-directory-controls" role="group" aria-label="Filtrar y ordenar canales">
+   <div class="stats-filter-group" aria-label="Filtrar canales">
+    <button type="button" class="stats-filter is-active" data-stats-filter="all" aria-pressed="true">TODOS</button>
+    <button type="button" class="stats-filter" data-stats-filter="live" aria-pressed="false">EN VIVO</button>
+    <button type="button" class="stats-filter" data-stats-filter="offline" aria-pressed="false">OFFLINE</button>
+   </div>
+   <label class="stats-sort-control">ORDENAR
+    <select id="stats-sort"><option value="live">En vivo primero</option><option value="average">Promedio</option><option value="peak">Pico</option><option value="hours">Horas observadas</option><option value="name">Nombre</option></select>
+   </label>
+  </div>
   <div class="stats-channel-heading"><h4>ESTADO DE CADA CANAL</h4><p>Una ficha por canal del roster, con estado actual y métricas observadas. Estar offline no significa que el canal esté fuera del seguimiento.</p></div>
   <div id="stats-channel-grid" class="stats-channel-grid" aria-live="polite"><div class="loading-skeleton-grid" aria-hidden="true"><div class="loading-skeleton-card"><span class="loading-skeleton loading-skeleton-short"></span><span class="loading-skeleton"></span><span class="loading-skeleton"></span></div><div class="loading-skeleton-card"><span class="loading-skeleton loading-skeleton-short"></span><span class="loading-skeleton"></span><span class="loading-skeleton"></span></div><div class="loading-skeleton-card"><span class="loading-skeleton loading-skeleton-short"></span><span class="loading-skeleton"></span><span class="loading-skeleton"></span></div><div class="loading-skeleton-card"><span class="loading-skeleton loading-skeleton-short"></span><span class="loading-skeleton"></span><span class="loading-skeleton"></span></div><div class="loading-skeleton-card"><span class="loading-skeleton loading-skeleton-short"></span><span class="loading-skeleton"></span><span class="loading-skeleton"></span></div><div class="loading-skeleton-card"><span class="loading-skeleton loading-skeleton-short"></span><span class="loading-skeleton"></span><span class="loading-skeleton"></span></div></div></div>
   <div class="stats-channel-heading stats-platform-heading"><h4>OTRAS PLATAFORMAS DEL ROSTER</h4><p>Datos públicos por creador y plataforma. Cada unidad conserva su fuente y metodología; no se suma a espectadores ni a métricas de Twitch.</p></div>
   <div id="stats-platform-grid" class="stats-platform-grid" aria-live="polite"><div class="loading-skeleton-grid" aria-hidden="true"><div class="loading-skeleton-card"><span class="loading-skeleton loading-skeleton-short"></span><span class="loading-skeleton"></span><span class="loading-skeleton"></span></div><div class="loading-skeleton-card"><span class="loading-skeleton loading-skeleton-short"></span><span class="loading-skeleton"></span><span class="loading-skeleton"></span></div><div class="loading-skeleton-card"><span class="loading-skeleton loading-skeleton-short"></span><span class="loading-skeleton"></span><span class="loading-skeleton"></span></div><div class="loading-skeleton-card"><span class="loading-skeleton loading-skeleton-short"></span><span class="loading-skeleton"></span><span class="loading-skeleton"></span></div></div></div>
   <div id="stats-highlights" class="impact-highlights" aria-live="polite"></div>
+  <section class="stats-comparison-section" aria-labelledby="stats-comparison-title">
+   <div class="stats-channel-heading"><h4 id="stats-comparison-title">COMPARATIVA DE RENDIMIENTO · TWITCH</h4><p>Promedio y pico de espectadores observados por canal. La escala es interna y no compara Twitch con YouTube.</p></div>
+   <div id="stats-twitch-comparison" class="stats-twitch-comparison" aria-live="polite"><p class="stats-note">Esperando las métricas Twitch…</p></div>
+  </section>
+  <section class="stats-evolution-section" aria-labelledby="stats-evolution-title">
+   <div class="stats-channel-heading"><h4 id="stats-evolution-title">EVOLUCIÓN DE ACTIVIDAD</h4><p>Transmisiones y muestras en directo registradas por día. Los días sin barras no permiten concluir que no hubo actividad: solo que no hay sesiones observadas en el registro.</p></div>
+   <div id="stats-evolution" class="stats-evolution-chart" aria-live="polite"><p class="stats-note">Esperando el historial de actividad…</p></div>
+  </section>
+  <section class="stats-week-section" aria-labelledby="stats-week-title">
+   <div class="stats-channel-heading"><h4 id="stats-week-title">SEMANA DE LA LEGIÓN</h4><p>Disponibilidad declarada por cada creador, hora Argentina. Las celdas sin horario informado permanecen vacías.</p></div>
+   <div id="stats-week-grid" class="stats-week-grid" aria-live="polite"><p class="stats-note">Cargando horarios declarados…</p></div>
+  </section>
+
  </section>
  <section class="legion-news-section" aria-labelledby="legion-news-title">
   <div class="impact-section-heading"><span>02 / NOVEDADES DEL ARCHIVO</span><h3 id="legion-news-title">LO QUE SE MUEVE EN LA LEGIÓN</h3><p>Actualizaciones verificadas del proyecto y del trabajo compartido. Cada entrada conserva su fecha y una fuente para consultar el detalle.</p></div>
@@ -1194,7 +1217,7 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
     <script src="./roster-brand-model.js?v=20261119-brand-model-1"></script>
     <script src="./social-links.js?v=20261119-social-links-1"></script>
     <script src="./live-program.js?v=20261120-live-program-2"></script>
-    <script src="./app.js?v=20261120-growth-intelligence-1"></script>
+    <script src="./app.js?v=20261120-stats-dossier-1"></script>
     <script src="./contact-forms.js?v=20261119-brand-proposal-1" defer></script>
     <script src="./navigation-fix.js" defer></script>
 </body>
