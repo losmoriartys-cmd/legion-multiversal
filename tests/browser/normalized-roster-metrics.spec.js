@@ -341,6 +341,28 @@ test.describe('Auditoría de métricas normalizadas del Roster', () => {
     }), requiredByPlatform);
     expect(coverage).toHaveLength(8);
     coverage.forEach(profile => expect(profile.missing, profile.id + ' debe tener sus métricas comerciales').toEqual([]));
+
+    const renderedCards = await page.locator('.comic-roster-card').evaluateAll(cards => cards.map(card => ({
+      id: card.dataset.creatorId,
+      slots: Array.from(card.querySelectorAll('.comic-roster-stat')).map(slot => ({
+        label: slot.querySelector('span')?.textContent?.trim() || '',
+        value: slot.querySelector('b')?.textContent?.trim() || '',
+        detail: slot.querySelector('small')?.textContent?.trim() || ''
+      }))
+    })));
+    expect(renderedCards).toHaveLength(8);
+    renderedCards.forEach(card => {
+      expect(card.slots).toHaveLength(3);
+      card.slots.forEach(slot => {
+        expect(slot.value, card.id + '/' + slot.label).not.toMatch(/^(SIN DATOS|MÉTRICA DESACTUALIZADA|ESTADO SIN ACTUALIZADO)$/);
+        expect(slot.detail, card.id + '/' + slot.label).toContain('captura');
+      });
+    });
+    const patoCard = renderedCards.find(card => card.id === 'pato-oratoris');
+    expect(patoCard.slots.map(slot => slot.label)).toEqual(['Suscriptores', 'Visualizaciones', 'Videos publicados']);
+    renderedCards.filter(card => card.id !== 'pato-oratoris').forEach(card => {
+      expect(card.slots.map(slot => slot.label)).toEqual(['Media viewers', 'Horas en directo', 'Directos detectados']);
+    });
   });
 
 });
