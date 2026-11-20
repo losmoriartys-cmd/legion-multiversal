@@ -1776,6 +1776,9 @@ function renderGrowthWindowPanel(windowData,key,platform){
  const numberCard=(label,value,note)=>cards.push({label,value,note});
  if(platform==='twitch'){
   const follower=metrics.followers||{};
+  const currentFollowers=metrics.followers_total;
+  numberCard('SEGUIDORES ACTUALES',currentFollowers===null?'PENDIENTE':statsNumber(currentFollowers,0),
+   metrics.followers_captured_at?'Twitch Helix · captura '+normalizedMetricCaptureLabel({capturedAt:metrics.followers_captured_at}):'Esperando autorización OAuth de solo lectura');
   numberCard('SEGUIDORES GANADOS',follower.status==='available'?growthSigned(follower.change,0):follower.status==='baseline_pending'?'BASE PENDIENTE':'SIN DATOS',
    follower.status==='available'?(follower.basis==='since_first_capture'?'Desde primera captura propia · '+(follower.change_pct===null?'variación porcentual no disponible':growthSigned(follower.change_pct,1)+'%'):'Comparación de capturas públicas del período'): 'Hace falta una base de capturas diarias de seguidores');
   numberCard('DIRECTOS OBSERVADOS',growthDisplayNumber(metrics.streams_observed,0),'IDs de stream distintos detectados por Helix');
