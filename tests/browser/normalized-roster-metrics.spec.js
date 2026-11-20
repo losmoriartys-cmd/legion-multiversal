@@ -240,7 +240,8 @@ test.describe('Auditoría de métricas normalizadas del Roster', () => {
       'YOUTUBE · ESTADO NO APLICA',
       'YOUTUBE · ESTADO NO APLICA'
     ]);
-    const brandSummary = page.locator('#profile-tab-perfil .hero-profile-brand-summary');
+    await page.locator('[data-profile-tab="marcas"]').click();
+    const brandSummary = page.locator('#profile-tab-marcas .hero-profile-brand-summary');
     await expect(brandSummary).toBeVisible();
     await expect(brandSummary.locator('.hero-profile-brand-slots article')).toHaveCount(3);
     await expect(brandSummary).toContainText('56');
@@ -257,13 +258,17 @@ test.describe('Auditoría de métricas normalizadas del Roster', () => {
     await expect(card.locator('.comic-roster-activity')).toHaveText('EN DIRECTO');
     await expect(card.locator('.roster-selector-tile-live')).toContainText('EN DIRECTO');
     await expect(card.locator('.comic-roster-stat-average b')).toHaveText('10');
+    await expect(card.locator('.comic-roster-brand-slots')).toContainText('Horas en directo');
+    await expect(card.locator('.comic-roster-brand-slots')).toContainText('Directos detectados');
+    await expect(card.locator('.comic-roster-brand-slots')).not.toContainText('Seguidores');
 
     await card.click();
     await expect(page.locator('#hero-profile-page .hero-profile-live')).toHaveText([
       /EN DIRECTO.*19 VIENDO/,
       /EN DIRECTO.*19 VIENDO/
     ]);
-    const brandSummary = page.locator('#profile-tab-perfil .hero-profile-brand-summary');
+    await page.locator('[data-profile-tab="marcas"]').click();
+    const brandSummary = page.locator('#profile-tab-marcas .hero-profile-brand-summary');
     await expect(brandSummary).toBeVisible();
     await expect(brandSummary.locator('.hero-profile-brand-slots article')).toHaveCount(3);
     await expect(brandSummary).toContainText('Media de viewers');
@@ -324,6 +329,40 @@ test.describe('Auditoría de métricas normalizadas del Roster', () => {
     expect(result.creatorCount).toBe(8);
     expect(result.metricCount).toBeGreaterThan(0);
     expect(result.errors).toEqual([]);
+
+    const requiredByPlatform = {
+      twitch: ['average_viewers_sampled', 'peak_viewers_sampled', 'observed_live_hours', 'streams_observed'],
+      youtube: ['subscribers', 'total_views', 'videos_total']
+    };
+    const coverage = await page.evaluate(required => Object.entries(creatorMetricsData.creators).map(([id, creator]) => {
+      const platform = creator.accounts.find(account => account.account_type === 'creator_channel')?.platform;
+      const keys = new Set((creator.metrics || []).filter(metric => metric.platform === platform && metric.value !== null).map(metric => metric.key));
+      return { id, platform, missing: (required[platform] || []).filter(key => !keys.has(key)) };
+    }), requiredByPlatform);
+    expect(coverage).toHaveLength(8);
+    coverage.forEach(profile => expect(profile.missing, profile.id + ' debe tener sus métricas comerciales').toEqual([]));
+
+    const renderedCards = await page.locator('.comic-roster-card').evaluateAll(cards => cards.map(card => ({
+      id: card.dataset.creatorId,
+      slots: Array.from(card.querySelectorAll('.comic-roster-stat')).map(slot => ({
+        label: slot.querySelector('span')?.textContent?.trim() || '',
+        value: slot.querySelector('b')?.textContent?.trim() || '',
+        detail: slot.querySelector('small')?.textContent?.trim() || ''
+      }))
+    })));
+    expect(renderedCards).toHaveLength(8);
+    renderedCards.forEach(card => {
+      expect(card.slots).toHaveLength(3);
+      card.slots.forEach(slot => {
+        expect(slot.value, card.id + '/' + slot.label).not.toMatch(/^(SIN DATOS|MÉTRICA DESACTUALIZADA|ESTADO SIN ACTUALIZADO)$/);
+        expect(slot.detail, card.id + '/' + slot.label).toContain('captura');
+      });
+    });
+    const patoCard = renderedCards.find(card => card.id === 'pato-oratoris');
+    expect(patoCard.slots.map(slot => slot.label)).toEqual(['Suscriptores', 'Visualizaciones', 'Videos publicados']);
+    renderedCards.filter(card => card.id !== 'pato-oratoris').forEach(card => {
+      expect(card.slots.map(slot => slot.label)).toEqual(['Media de viewers', 'Horas en directo', 'Directos detectados']);
+    });
   });
 
 });

@@ -1,3 +1,16 @@
+## 2026-11-20 — Roster 2: datos en la carta, EN VIVO con espectadores, cinco pestañas y Bitácora en línea de tiempo
+
+- **Base:** `main` en `8318985`; rama `roster/carta-perfil-bitacora`, sobre el PR #72 ya integrado.
+- **Carta:** el frente suma las horas en directo observadas junto al último directo; la leyenda «EN DIRECTO» muestra los espectadores (`N VIENDO`, mismo formato que el perfil) y las cartas en vivo pasan al primer lugar de la grilla. Si no hay dato de espectadores, la leyenda no lo inventa.
+- **Perfil:** cinco pestañas: Perfil, Estadísticas, Clips, Bitácora y Para marcas. «Trayectoria» pasa a llamarse Bitácora; los datos comparables, el botón de propuesta de colaboración y el código Epic se mudan a Para marcas.
+- **Bitácora:** línea de tiempo (origen, su canal, expedientes, credenciales, lo que viene) alimentada por `bitacora` en `roster-data.json` (campo nuevo y opcional en el esquema) más las credenciales ya registradas en `creator-records.json`. Cada entrada con fecha o enlace declara su fuente. El Expediente 002 de Rod incluye las cifras de su panel de Twitch (transmisión completa del 11/11: 3 h 18 min, media 33, pico 53, 83 personas distintas en el chat); no son solo el tramo de BarFender y se aclara en el texto.
+- **Estadísticas:** sin cambios de datos; se mantiene la corrección de cortes de texto del PR #72.
+- **Pruebas:** se actualizaron `tests/test_roster_selector_contract.py` y los specs `roster`, `roster-brand-model` y `normalized-roster-metrics` a la nueva estructura. Local: validadores, 163 pruebas Python y la suite Playwright completa; los únicos fallos locales son errores de red del entorno (`ERR_TUNNEL_CONNECTION_FAILED`) al cargar recursos externos, que deberían estar verdes en el CI.
+- **Hallazgo:** las métricas de YouTube y Twitch vencen a los 120 minutos; con datos más viejos, Estadísticas de Pato queda sin fuentes y el test que usa datos reales falla. En producción las capturas se renuevan cada ~15 minutos.
+- **Pendiente:** hora de inicio y duración de cada VOD de BarFender para marcar el tramo de cada POV; VOD de Akuma y de la segunda noche de Rod; texto de «Lo que viene» de Akuma (Keymailer); paleta única del perfil; «6 + 2» → 8 en marcas; texto de Habitos y Pato; Origen y capítulos EN VIVO / COLABORA / PARA MARCAS.
+
+---
+
 ## 2026-11-19 — Roster: correcciones sin rangos ni IRL en Lady
 
 - **Base:** `main` en `5f4b7d0`; rama `roster/correcciones-sin-rangos`.
