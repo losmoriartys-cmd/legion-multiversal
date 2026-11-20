@@ -13,22 +13,22 @@
     "ther0d3r1k"
   ],
   "collection": {
-    "started_at": "2026-11-20T04:51:58Z",
+    "started_at": "2026-11-20T04:59:47Z",
     "expected_channels": 7,
     "resolved_channels": 7,
-    "sampled_channels": [
-      "habitos_atomicos",
-      "ladymoriarty01",
-      "losmoriartys",
+    "sampled_channels": [],
+    "skipped_channels": [
       "ther0d3r1k",
       "akumazoldyck",
       "ardipii",
-      "daved0608"
+      "daved0608",
+      "habitos_atomicos",
+      "ladymoriarty01",
+      "losmoriartys"
     ],
-    "skipped_channels": [],
-    "complete": true,
+    "complete": false,
     "status_complete": true,
-    "sampling_complete": true,
+    "sampling_complete": false,
     "coverage_complete": true,
     "registry_source": "roster-data.json",
     "authentication": "Twitch app access token; public Helix endpoints only",
@@ -39,7 +39,7 @@
     "elgabii090"
   ],
   "channel_registry_note": "Los canales archivados se conservan para consulta histórica y no se incluyen en los indicadores del roster activo.",
-  "updated_at": "2026-11-20T04:51:58Z",
+  "updated_at": "2026-11-20T04:59:47Z",
   "channels": {
     "ladymoriarty01": {
       "login": "ladymoriarty01",
@@ -54,9 +54,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "last_status_at": "2026-11-20T04:51:58Z",
+      "last_status_at": "2026-11-20T04:59:47Z",
       "last_snapshot_at": "2026-11-20T04:51:58Z",
-      "updated_at": "2026-11-20T04:51:58Z",
+      "updated_at": "2026-11-20T04:59:47Z",
       "window": {
         "samples_total": 385,
         "live_samples": 13,
@@ -3650,9 +3650,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "last_status_at": "2026-11-20T04:51:58Z",
+      "last_status_at": "2026-11-20T04:59:47Z",
       "last_snapshot_at": "2026-11-20T04:51:58Z",
-      "updated_at": "2026-11-20T04:51:58Z",
+      "updated_at": "2026-11-20T04:59:47Z",
       "window": {
         "samples_total": 385,
         "live_samples": 42,
@@ -7955,9 +7955,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "last_status_at": "2026-11-20T04:51:58Z",
+      "last_status_at": "2026-11-20T04:59:47Z",
       "last_snapshot_at": "2026-11-20T04:51:58Z",
-      "updated_at": "2026-11-20T04:51:58Z",
+      "updated_at": "2026-11-20T04:59:47Z",
       "window": {
         "samples_total": 385,
         "live_samples": 9,
@@ -11502,9 +11502,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "last_status_at": "2026-11-20T04:51:58Z",
+      "last_status_at": "2026-11-20T04:59:47Z",
       "last_snapshot_at": "2026-11-20T04:51:58Z",
-      "updated_at": "2026-11-20T04:51:58Z",
+      "updated_at": "2026-11-20T04:59:47Z",
       "window": {
         "samples_total": 385,
         "live_samples": 30,
@@ -15154,9 +15154,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "last_status_at": "2026-11-20T04:51:58Z",
+      "last_status_at": "2026-11-20T04:59:47Z",
       "last_snapshot_at": "2026-11-20T04:51:58Z",
-      "updated_at": "2026-11-20T04:51:58Z",
+      "updated_at": "2026-11-20T04:59:47Z",
       "window": {
         "samples_total": 385,
         "live_samples": 15,
@@ -19352,9 +19352,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "last_status_at": "2026-11-20T04:51:58Z",
+      "last_status_at": "2026-11-20T04:59:47Z",
       "last_snapshot_at": "2026-11-20T04:51:58Z",
-      "updated_at": "2026-11-20T04:51:58Z",
+      "updated_at": "2026-11-20T04:59:47Z",
       "window": {
         "samples_total": 385,
         "live_samples": 73,
@@ -22983,9 +22983,9 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "last_status_at": "2026-11-20T04:51:58Z",
+      "last_status_at": "2026-11-20T04:59:47Z",
       "last_snapshot_at": "2026-11-20T04:51:58Z",
-      "updated_at": "2026-11-20T04:51:58Z",
+      "updated_at": "2026-11-20T04:59:47Z",
       "window": {
         "samples_total": 385,
         "live_samples": 19,

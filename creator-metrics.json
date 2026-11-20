@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-20T04:52:01Z",
+  "generated_at": "2026-11-20T04:59:49Z",
   "source_files": {
     "identity": "roster-data.json",
     "twitch": "data.json",
@@ -9,10 +9,10 @@
   },
   "source_snapshot": {
     "data.json": {
-      "updated_at": "2026-11-20T04:51:58Z"
+      "updated_at": "2026-11-20T04:59:47Z"
     },
     "platform-stats.json": {
-      "updated_at": "2026-11-20T04:52:00Z"
+      "updated_at": "2026-11-20T04:59:48Z"
     }
   },
   "methodology": [
@@ -60,7 +60,7 @@
           "label": "Estado de transmisión",
           "value": "offline",
           "unit": "status",
-          "captured_at": "2026-11-20T04:51:58Z",
+          "captured_at": "2026-11-20T04:59:47Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -81,7 +81,7 @@
           "label": "Espectadores en la última captura",
           "value": null,
           "unit": "viewers",
-          "captured_at": "2026-11-20T04:51:58Z",
+          "captured_at": "2026-11-20T04:59:47Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -282,7 +282,7 @@
           "label": "Estado de transmisión",
           "value": "offline",
           "unit": "status",
-          "captured_at": "2026-11-20T04:51:58Z",
+          "captured_at": "2026-11-20T04:59:47Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -303,7 +303,7 @@
           "label": "Espectadores en la última captura",
           "value": null,
           "unit": "viewers",
-          "captured_at": "2026-11-20T04:51:58Z",
+          "captured_at": "2026-11-20T04:59:47Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -504,7 +504,7 @@
           "label": "Estado de transmisión",
           "value": "offline",
           "unit": "status",
-          "captured_at": "2026-11-20T04:51:58Z",
+          "captured_at": "2026-11-20T04:59:47Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -525,7 +525,7 @@
           "label": "Espectadores en la última captura",
           "value": null,
           "unit": "viewers",
-          "captured_at": "2026-11-20T04:51:58Z",
+          "captured_at": "2026-11-20T04:59:47Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -726,7 +726,7 @@
           "label": "Estado de transmisión",
           "value": "offline",
           "unit": "status",
-          "captured_at": "2026-11-20T04:51:58Z",
+          "captured_at": "2026-11-20T04:59:47Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -747,7 +747,7 @@
           "label": "Espectadores en la última captura",
           "value": null,
           "unit": "viewers",
-          "captured_at": "2026-11-20T04:51:58Z",
+          "captured_at": "2026-11-20T04:59:47Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -948,7 +948,7 @@
           "label": "Estado de transmisión",
           "value": "offline",
           "unit": "status",
-          "captured_at": "2026-11-20T04:51:58Z",
+          "captured_at": "2026-11-20T04:59:47Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -969,7 +969,7 @@
           "label": "Espectadores en la última captura",
           "value": null,
           "unit": "viewers",
-          "captured_at": "2026-11-20T04:51:58Z",
+          "captured_at": "2026-11-20T04:59:47Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -1170,7 +1170,7 @@
           "label": "Estado de transmisión",
           "value": "offline",
           "unit": "status",
-          "captured_at": "2026-11-20T04:51:58Z",
+          "captured_at": "2026-11-20T04:59:47Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -1191,7 +1191,7 @@
           "label": "Espectadores en la última captura",
           "value": null,
           "unit": "viewers",
-          "captured_at": "2026-11-20T04:51:58Z",
+          "captured_at": "2026-11-20T04:59:47Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -1411,11 +1411,11 @@
           "label": "Suscriptores públicos",
           "value": 56,
           "unit": "subscribers",
-          "captured_at": "2026-11-20T04:52:00Z",
+          "captured_at": "2026-11-20T04:59:48Z",
           "period": {
             "kind": "cumulative",
             "from": null,
-            "to": "2026-11-20T04:52:00Z"
+            "to": "2026-11-20T04:59:48Z"
           },
           "source": "YouTube Data API v3",
           "method": "youtube_data_api_public",
@@ -1432,11 +1432,11 @@
           "label": "Visualizaciones acumuladas",
           "value": 431,
           "unit": "views",
-          "captured_at": "2026-11-20T04:52:00Z",
+          "captured_at": "2026-11-20T04:59:48Z",
           "period": {
             "kind": "cumulative",
             "from": null,
-            "to": "2026-11-20T04:52:00Z"
+            "to": "2026-11-20T04:59:48Z"
           },
           "source": "YouTube Data API v3",
           "method": "youtube_data_api_public",
@@ -1453,11 +1453,11 @@
           "label": "Videos publicados",
           "value": 6,
           "unit": "videos",
-          "captured_at": "2026-11-20T04:52:00Z",
+          "captured_at": "2026-11-20T04:59:48Z",
           "period": {
             "kind": "cumulative",
             "from": null,
-            "to": "2026-11-20T04:52:00Z"
+            "to": "2026-11-20T04:59:48Z"
           },
           "source": "YouTube Data API v3",
           "method": "youtube_data_api_public",
@@ -1507,7 +1507,7 @@
           "label": "Estado de transmisión",
           "value": "offline",
           "unit": "status",
-          "captured_at": "2026-11-20T04:51:58Z",
+          "captured_at": "2026-11-20T04:59:47Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -1528,7 +1528,7 @@
           "label": "Espectadores en la última captura",
           "value": null,
           "unit": "viewers",
-          "captured_at": "2026-11-20T04:51:58Z",
+          "captured_at": "2026-11-20T04:59:47Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
