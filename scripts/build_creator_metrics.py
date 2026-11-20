@@ -163,8 +163,9 @@ def build(roster, twitch, platforms, clips, now=None):
                     if is_follower_metric:
                         metric_captured_at = channel.get("followers_captured_at")
                         freshness = capture_status("twitch", metric_captured_at, now)
-                        if freshness == "unavailable":
+                        if freshness == "unavailable" or value is None:
                             value = None
+                            freshness = "unavailable"
                         status = freshness
                         method = "public_helix_follower_total_only"
                     else:
