@@ -39,7 +39,7 @@ def _summarize_twitch(snapshots: list[dict], start: datetime, end: datetime, day
     selected = []
     for sample in snapshots:
         captured = parse_time(sample.get("sampled_at"))
-        if captured is not None and start <= captured <= end:
+        if captured is not None and start < captured <= end:
             selected.append((captured, sample))
     selected.sort(key=lambda row: row[0])
     sampled_dates = {captured.date().isoformat() for captured, _ in selected}
@@ -88,7 +88,7 @@ def _series_change(points: list[dict], value_key: str, start: datetime, end: dat
         if at is not None and isinstance(value, (int, float)) and not isinstance(value, bool):
             valid.append((at, float(value)))
     valid.sort(key=lambda row: row[0])
-    inside = [(at, value) for at, value in valid if start <= at <= end]
+    inside = [(at, value) for at, value in valid if start < at <= end]
     baseline = max((row for row in valid if row[0] <= start), default=None, key=lambda row: row[0])
     latest = max((row for row in valid if row[0] <= end), default=None, key=lambda row: row[0])
     basis = "period_boundary"
@@ -123,13 +123,13 @@ def _series_change(points: list[dict], value_key: str, start: datetime, end: dat
 
 def _summarize_youtube(history: list[dict], start: datetime, end: datetime, days: int) -> dict:
     timestamps = [parse_time(item.get("captured_at")) for item in history if parse_time(item.get("captured_at"))]
-    coverage = _coverage({at.date().isoformat() for at in timestamps if start <= at <= end}, start, end, days)
+    coverage = _coverage({at.date().isoformat() for at in timestamps if start < at <= end}, start, end, days)
     metrics = {
         "subscribers_gained": _series_change(history, "subscribers", start, end),
         "views_gained": _series_change(history, "total_views", start, end),
         "videos_published": _series_change(history, "videos_total", start, end),
     }
-    coverage["capture_count"] = sum(1 for at in timestamps if start <= at <= end)
+    coverage["capture_count"] = sum(1 for at in timestamps if start < at <= end)
     return {"coverage": coverage, "metrics": metrics}
 
 
@@ -158,6 +158,19 @@ def build_windows(platform: str, history: list[dict], now: datetime, follower_hi
             current["metrics"]["followers"] = _series_change(
                 follower_history or [], "followers_total", start, end
             )
+            valid_followers = [
+                (parse_time(point.get("captured_at")), point.get("followers_total"))
+                for point in (follower_history or [])
+                if parse_time(point.get("captured_at")) is not None
+                and isinstance(point.get("followers_total"), int)
+                and not isinstance(point.get("followers_total"), bool)
+            ]
+            current_follower = max(
+                (row for row in valid_followers if row[0] <= end),
+                default=None, key=lambda row: row[0],
+            )
+            current["metrics"]["followers_total"] = current_follower[1] if current_follower else None
+            current["metrics"]["followers_captured_at"] = iso(current_follower[0]) if current_follower else None
             previous["metrics"]["followers"] = _series_change(
                 follower_history or [], "followers_total", previous_start, previous_end
             )
