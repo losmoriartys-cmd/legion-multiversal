@@ -6161,3 +6161,8 @@ main .chapter-panel :where(.chapter-cta, .executive-button, .comic-submit-btn,
 .stats-dossier-card.is-revealed{opacity:1;transform:translateY(0)}
 .stats-average-track i{transition:width .95s cubic-bezier(.2,.8,.2,1)}
 @media(prefers-reduced-motion:reduce){.stats-dossier-card{opacity:1;transform:none;transition:none}.stats-average-track i{transition:none}}
+
+.stats-evolution-pair{height:104px;width:100%;display:flex;align-items:flex-end;gap:2px}
+.stats-evolution-pair .stats-evolution-bar{height:100%;width:50%}
+.stats-evolution-pair .stats-evolution-bar.is-samples i{background:linear-gradient(180deg,#ff2bd6,#b51b92)}
+.stats-evolution-legend span:nth-child(2) i{background:#ff2bd6}
