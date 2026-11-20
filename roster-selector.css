@@ -1063,3 +1063,8 @@
 #chapter-2 .comic-roster-brand-slots .comic-roster-stat { position: relative; }
 #chapter-2 .comic-roster-brand-slots .comic-roster-stat-activity > b { white-space: nowrap; }
 #chapter-2 .comic-roster-brand-slots .comic-roster-stat > span { overflow-wrap: normal; word-break: normal; hyphens: none; }
+
+/* Para marcas: el bloque editorial respira dentro de su marco */
+#chapter-2 #profile-tab-marcas .hero-profile-brand {
+  padding: 14px 18px 16px;
+}
