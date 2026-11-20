@@ -361,7 +361,7 @@ test.describe('Auditoría de métricas normalizadas del Roster', () => {
     const patoCard = renderedCards.find(card => card.id === 'pato-oratoris');
     expect(patoCard.slots.map(slot => slot.label)).toEqual(['Suscriptores', 'Visualizaciones', 'Videos publicados']);
     renderedCards.filter(card => card.id !== 'pato-oratoris').forEach(card => {
-      expect(card.slots.map(slot => slot.label)).toEqual(['Media viewers', 'Horas en directo', 'Directos detectados']);
+      expect(card.slots.map(slot => slot.label)).toEqual(['Media de viewers', 'Horas en directo', 'Directos detectados']);
     });
   });
 
