@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-20T04:59:49Z",
+  "generated_at": "2026-11-20T05:28:34Z",
   "source_files": {
     "identity": "roster-data.json",
     "twitch": "data.json",
@@ -9,10 +9,10 @@
   },
   "source_snapshot": {
     "data.json": {
-      "updated_at": "2026-11-20T04:59:47Z"
+      "updated_at": "2026-11-20T05:28:33Z"
     },
     "platform-stats.json": {
-      "updated_at": "2026-11-20T04:59:48Z"
+      "updated_at": "2026-11-20T05:28:34Z"
     }
   },
   "methodology": [
@@ -60,7 +60,7 @@
           "label": "Estado de transmisión",
           "value": "offline",
           "unit": "status",
-          "captured_at": "2026-11-20T04:59:47Z",
+          "captured_at": "2026-11-20T05:28:33Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -81,7 +81,7 @@
           "label": "Espectadores en la última captura",
           "value": null,
           "unit": "viewers",
-          "captured_at": "2026-11-20T04:59:47Z",
+          "captured_at": "2026-11-20T05:28:33Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -92,6 +92,27 @@
           "status": "offline",
           "visibility": "public",
           "interpretation": "Lectura puntual de stream en vivo; no equivale a espectadores únicos ni promedio.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:losmoriartys:followers_total",
+          "platform": "twitch",
+          "account_handle": "losmoriartys",
+          "key": "followers_total",
+          "label": "Seguidores totales",
+          "value": null,
+          "unit": "followers",
+          "captured_at": null,
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-20T04:51:58Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "public_helix_follower_total_only",
+          "status": "unavailable",
+          "visibility": "public",
+          "interpretation": "Total público del canal informado por Twitch Helix; no incluye identidades ni fechas de seguimiento.",
           "source_file": "data.json"
         },
         {
@@ -282,7 +303,7 @@
           "label": "Estado de transmisión",
           "value": "offline",
           "unit": "status",
-          "captured_at": "2026-11-20T04:59:47Z",
+          "captured_at": "2026-11-20T05:28:33Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -303,7 +324,7 @@
           "label": "Espectadores en la última captura",
           "value": null,
           "unit": "viewers",
-          "captured_at": "2026-11-20T04:59:47Z",
+          "captured_at": "2026-11-20T05:28:33Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -314,6 +335,27 @@
           "status": "offline",
           "visibility": "public",
           "interpretation": "Lectura puntual de stream en vivo; no equivale a espectadores únicos ni promedio.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:TheR0D3R1K:followers_total",
+          "platform": "twitch",
+          "account_handle": "TheR0D3R1K",
+          "key": "followers_total",
+          "label": "Seguidores totales",
+          "value": null,
+          "unit": "followers",
+          "captured_at": null,
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-20T04:51:58Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "public_helix_follower_total_only",
+          "status": "unavailable",
+          "visibility": "public",
+          "interpretation": "Total público del canal informado por Twitch Helix; no incluye identidades ni fechas de seguimiento.",
           "source_file": "data.json"
         },
         {
@@ -504,7 +546,7 @@
           "label": "Estado de transmisión",
           "value": "offline",
           "unit": "status",
-          "captured_at": "2026-11-20T04:59:47Z",
+          "captured_at": "2026-11-20T05:28:33Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -525,7 +567,7 @@
           "label": "Espectadores en la última captura",
           "value": null,
           "unit": "viewers",
-          "captured_at": "2026-11-20T04:59:47Z",
+          "captured_at": "2026-11-20T05:28:33Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -536,6 +578,27 @@
           "status": "offline",
           "visibility": "public",
           "interpretation": "Lectura puntual de stream en vivo; no equivale a espectadores únicos ni promedio.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:ladymoriarty01:followers_total",
+          "platform": "twitch",
+          "account_handle": "ladymoriarty01",
+          "key": "followers_total",
+          "label": "Seguidores totales",
+          "value": null,
+          "unit": "followers",
+          "captured_at": null,
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-20T04:51:58Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "public_helix_follower_total_only",
+          "status": "unavailable",
+          "visibility": "public",
+          "interpretation": "Total público del canal informado por Twitch Helix; no incluye identidades ni fechas de seguimiento.",
           "source_file": "data.json"
         },
         {
@@ -726,7 +789,7 @@
           "label": "Estado de transmisión",
           "value": "offline",
           "unit": "status",
-          "captured_at": "2026-11-20T04:59:47Z",
+          "captured_at": "2026-11-20T05:28:33Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -747,7 +810,7 @@
           "label": "Espectadores en la última captura",
           "value": null,
           "unit": "viewers",
-          "captured_at": "2026-11-20T04:59:47Z",
+          "captured_at": "2026-11-20T05:28:33Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -758,6 +821,27 @@
           "status": "offline",
           "visibility": "public",
           "interpretation": "Lectura puntual de stream en vivo; no equivale a espectadores únicos ni promedio.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:ardipii:followers_total",
+          "platform": "twitch",
+          "account_handle": "ardipii",
+          "key": "followers_total",
+          "label": "Seguidores totales",
+          "value": null,
+          "unit": "followers",
+          "captured_at": null,
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-20T04:51:58Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "public_helix_follower_total_only",
+          "status": "unavailable",
+          "visibility": "public",
+          "interpretation": "Total público del canal informado por Twitch Helix; no incluye identidades ni fechas de seguimiento.",
           "source_file": "data.json"
         },
         {
@@ -948,7 +1032,7 @@
           "label": "Estado de transmisión",
           "value": "offline",
           "unit": "status",
-          "captured_at": "2026-11-20T04:59:47Z",
+          "captured_at": "2026-11-20T05:28:33Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -969,7 +1053,7 @@
           "label": "Espectadores en la última captura",
           "value": null,
           "unit": "viewers",
-          "captured_at": "2026-11-20T04:59:47Z",
+          "captured_at": "2026-11-20T05:28:33Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -980,6 +1064,27 @@
           "status": "offline",
           "visibility": "public",
           "interpretation": "Lectura puntual de stream en vivo; no equivale a espectadores únicos ni promedio.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:akumazoldyck:followers_total",
+          "platform": "twitch",
+          "account_handle": "akumazoldyck",
+          "key": "followers_total",
+          "label": "Seguidores totales",
+          "value": null,
+          "unit": "followers",
+          "captured_at": null,
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-20T04:51:58Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "public_helix_follower_total_only",
+          "status": "unavailable",
+          "visibility": "public",
+          "interpretation": "Total público del canal informado por Twitch Helix; no incluye identidades ni fechas de seguimiento.",
           "source_file": "data.json"
         },
         {
@@ -1170,7 +1275,7 @@
           "label": "Estado de transmisión",
           "value": "offline",
           "unit": "status",
-          "captured_at": "2026-11-20T04:59:47Z",
+          "captured_at": "2026-11-20T05:28:33Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -1191,7 +1296,7 @@
           "label": "Espectadores en la última captura",
           "value": null,
           "unit": "viewers",
-          "captured_at": "2026-11-20T04:59:47Z",
+          "captured_at": "2026-11-20T05:28:33Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -1202,6 +1307,27 @@
           "status": "offline",
           "visibility": "public",
           "interpretation": "Lectura puntual de stream en vivo; no equivale a espectadores únicos ni promedio.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:daved0608:followers_total",
+          "platform": "twitch",
+          "account_handle": "daved0608",
+          "key": "followers_total",
+          "label": "Seguidores totales",
+          "value": null,
+          "unit": "followers",
+          "captured_at": null,
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-20T04:51:58Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "public_helix_follower_total_only",
+          "status": "unavailable",
+          "visibility": "public",
+          "interpretation": "Total público del canal informado por Twitch Helix; no incluye identidades ni fechas de seguimiento.",
           "source_file": "data.json"
         },
         {
@@ -1411,11 +1537,11 @@
           "label": "Suscriptores públicos",
           "value": 56,
           "unit": "subscribers",
-          "captured_at": "2026-11-20T04:59:48Z",
+          "captured_at": "2026-11-20T05:28:34Z",
           "period": {
             "kind": "cumulative",
             "from": null,
-            "to": "2026-11-20T04:59:48Z"
+            "to": "2026-11-20T05:28:34Z"
           },
           "source": "YouTube Data API v3",
           "method": "youtube_data_api_public",
@@ -1432,11 +1558,11 @@
           "label": "Visualizaciones acumuladas",
           "value": 431,
           "unit": "views",
-          "captured_at": "2026-11-20T04:59:48Z",
+          "captured_at": "2026-11-20T05:28:34Z",
           "period": {
             "kind": "cumulative",
             "from": null,
-            "to": "2026-11-20T04:59:48Z"
+            "to": "2026-11-20T05:28:34Z"
           },
           "source": "YouTube Data API v3",
           "method": "youtube_data_api_public",
@@ -1453,11 +1579,11 @@
           "label": "Videos publicados",
           "value": 6,
           "unit": "videos",
-          "captured_at": "2026-11-20T04:59:48Z",
+          "captured_at": "2026-11-20T05:28:34Z",
           "period": {
             "kind": "cumulative",
             "from": null,
-            "to": "2026-11-20T04:59:48Z"
+            "to": "2026-11-20T05:28:34Z"
           },
           "source": "YouTube Data API v3",
           "method": "youtube_data_api_public",
@@ -1507,7 +1633,7 @@
           "label": "Estado de transmisión",
           "value": "offline",
           "unit": "status",
-          "captured_at": "2026-11-20T04:59:47Z",
+          "captured_at": "2026-11-20T05:28:33Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -1528,7 +1654,7 @@
           "label": "Espectadores en la última captura",
           "value": null,
           "unit": "viewers",
-          "captured_at": "2026-11-20T04:59:47Z",
+          "captured_at": "2026-11-20T05:28:33Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -1539,6 +1665,27 @@
           "status": "offline",
           "visibility": "public",
           "interpretation": "Lectura puntual de stream en vivo; no equivale a espectadores únicos ni promedio.",
+          "source_file": "data.json"
+        },
+        {
+          "metric_id": "twitch:habitos_atomicos:followers_total",
+          "platform": "twitch",
+          "account_handle": "habitos_atomicos",
+          "key": "followers_total",
+          "label": "Seguidores totales",
+          "value": null,
+          "unit": "followers",
+          "captured_at": null,
+          "period": {
+            "kind": "sampled_window",
+            "from": "2026-11-03T17:47:50Z",
+            "to": "2026-11-20T04:51:58Z"
+          },
+          "source": "Twitch Helix Public API",
+          "method": "public_helix_follower_total_only",
+          "status": "unavailable",
+          "visibility": "public",
+          "interpretation": "Total público del canal informado por Twitch Helix; no incluye identidades ni fechas de seguimiento.",
           "source_file": "data.json"
         },
         {
