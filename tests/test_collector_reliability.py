@@ -111,24 +111,39 @@ class HttpRetryContractTests(unittest.TestCase):
         self.assertFalse(flags["sampling_complete"])
 
 class IncrementalHistoryTests(unittest.TestCase):
-    def test_history_deduplicates_same_utc_hour(self):
+    def test_history_deduplicates_same_utc_day(self):
         record = {"metrics": {"subscribers": 56}, "history": []}
         update_platform_stats.append_history(record, "2026-11-16T15:31:24Z")
         update_platform_stats.append_history(record, "2026-11-16T15:58:00Z")
         self.assertEqual(len(record["history"]), 1)
 
-    def test_history_appends_next_hour_and_keeps_latest_ninety(self):
+    def test_history_appends_next_day_and_keeps_181_daily_points(self):
         record = {"metrics": {"subscribers": 56}, "history": [
-            {"captured_at": "2026-11-01T00:00:00Z", "metrics": {}}
+            {"captured_at": "2026-11-15T00:00:00Z", "metrics": {}}
         ]}
         update_platform_stats.append_history(record, "2026-11-16T16:00:00Z")
         self.assertEqual(len(record["history"]), 2)
         record["history"] = [
-            {"captured_at": "2026-11-01T{:02d}:00:00Z".format(i % 24), "metrics": {}}
-            for i in range(100)
+            {"captured_at": (datetime(2026, 11, 20, tzinfo=timezone.utc) - __import__("datetime").timedelta(days=days)).isoformat().replace("+00:00", "Z"), "metrics": {}}
+            for days in range(200, 0, -1)
         ]
-        update_platform_stats.append_history(record, "2026-11-16T16:00:00Z")
-        self.assertEqual(len(record["history"]), 90)
+        update_platform_stats.append_history(record, "2026-11-20T16:00:00Z")
+        self.assertEqual(len(record["history"]), 181)
+
+    def test_youtube_video_view_history_is_daily_and_keeps_old_baseline(self):
+        current = [{"video_id": "v1", "views": 140, "likes": 12, "comments": 3}]
+        previous = [{"video_id": "v1", "view_history": [
+            {"date": "2026-11-19", "captured_at": "2026-11-19T10:00:00Z", "views": 120, "likes": 10, "comments": 2}
+        ]}]
+        result = update_platform_stats.append_video_history(current, previous, "2026-11-20T10:00:00Z")
+        self.assertEqual([point["views"] for point in result[0]["view_history"]], [120, 140])
+        same_day = update_platform_stats.append_video_history(
+            [{"video_id": "v1", "views": 145, "likes": 13, "comments": 4}],
+            result,
+            "2026-11-20T16:00:00Z",
+        )
+        self.assertEqual(len(same_day[0]["view_history"]), 2)
+        self.assertEqual(same_day[0]["view_history"][-1]["views"], 145)
 
     def test_creator_metrics_uses_account_capture_timestamp_not_global_attempt(self):
         now = datetime(2026, 11, 16, 16, 0, tzinfo=timezone.utc)
