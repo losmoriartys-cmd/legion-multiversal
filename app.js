@@ -561,9 +561,10 @@ function renderStatsPlatformDirectory(){
    const verified=p.status==='verified';
    const label=platform==='youtube'?'YOUTUBE':platform==='kick'?'KICK':platform.toUpperCase();
    const status=verified?'FUENTE OFICIAL':p.status==='credentials_required'?'CONFIGURACIÓN PENDIENTE':p.status==='error'?'ERROR DE CONSULTA':'REFERENCIA';
+   const linkedHero=heroesData.find(hero=>hero.id===key)||null;
    const thumbnail=p.thumbnail_url||'';
    const avatar=thumbnail?'<img class="stats-platform-avatar" src="'+escapeStatsHtml(thumbnail)+'" alt="Logo de '+escapeStatsHtml(creator.display_name||key)+'" loading="lazy" referrerpolicy="no-referrer" onerror="this.hidden=true">':'';
-   out+='<article class="stats-platform-card"><div class="stats-platform-creator">'+avatar+'<div><h5>'+escapeStatsHtml(creator.display_name||key)+'</h5><p class="stats-platform-handle">'+escapeStatsHtml(p.handle||'Cuenta registrada')+'</p></div></div><div class="stats-platform-card-top"><span>'+escapeStatsHtml(label)+'</span><span class="stats-status '+(verified?'verified':'pending')+'">'+status+'</span></div><h5>'+escapeStatsHtml(creator.display_name||key)+'</h5><p class="stats-platform-handle">'+escapeStatsHtml(p.handle||'Cuenta registrada')+'</p>';
+   out+='<article class="stats-platform-card"><div class="stats-platform-creator">'+avatar+'<div><h5>'+escapeStatsHtml(creator.display_name||key)+'</h5><p class="stats-platform-handle">'+escapeStatsHtml(p.handle||'Cuenta registrada')+'</p></div></div><div class="stats-platform-card-top"><span>'+escapeStatsHtml(label)+'</span><span class="stats-status '+(verified?'verified':'pending')+'">'+status+'</span></div>';
    if(!verified){
     out+='<p class="stats-platform-note">'+escapeStatsHtml(p.note||'La cuenta está registrada, pero todavía no hay una lectura pública disponible.')+'</p>';
    }else if(platform==='youtube'){
