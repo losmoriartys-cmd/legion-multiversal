@@ -86,9 +86,10 @@
     const host = document.getElementById('live-program-stage');
     if (!host || !item) return;
     selectedQueueItem = { item, mode };
-    const title = item.title || item.name || 'Contenido de la Legión';
+    const title = mode === 'live' ? (item.current_title || item.display_name || item.login || 'Canal en directo') : (item.title || item.name || 'Contenido de la Legión');
     const subtitle = mode === 'live'
       ? (Number.isFinite(Number(item.current_viewers)) ? Number(item.current_viewers).toLocaleString('es-AR') + ' espectadores' : 'Espectadores no disponibles')
+      : mode === 'live' ? ((item.current_game || 'Categoría no informada') + ' · ' + (Number.isFinite(Number(item.current_viewers)) ? Number(item.current_viewers).toLocaleString('es-AR') + ' espectadores' : 'Espectadores no disponibles'))
       : mode === 'clip' ? (item.creator_label + ' · ' + formatDate(item.created_at))
       : mode === 'vod' ? (item.creator + ' · ' + formatDate(item.date))
       : (item.creator + ' · ' + formatDate(item.published_at));
