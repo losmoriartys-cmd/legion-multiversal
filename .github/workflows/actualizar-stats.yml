@@ -10,6 +10,9 @@ on:
       - 'update_clips.py'
       - 'scripts/build_creator_metrics.py'
       - 'scripts/validate_creator_metrics.py'
+      - 'scripts/growth_analytics.py'
+      - 'scripts/validate_creator_records.py'
+      - 'creator-records.json'
       - 'roster-data.json'
       - 'scripts/validate_roster_data.py'
       - '.github/workflows/actualizar-stats.yml'
@@ -81,6 +84,9 @@ jobs:
 
       - name: Validar cuentas multiplataforma publicadas
         run: python scripts/validate_roster_data.py --check-platforms
+
+      - name: Validar evidencias de colaboraciones y permisos de audiencia
+        run: python scripts/validate_creator_records.py
 
       - name: Generar registro normalizado de métricas por creador
         run: python scripts/build_creator_metrics.py
