@@ -65,13 +65,13 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
       if (creator.id !== 'ardipii') await expect(gamesSection).toBeVisible();
       if (await gamesSection.count()) await expect(gamesSection).not.toContainText(/muestras|observaciones|Just Chatting/i);
     }
+    // Los datos para marcas viven en su propia pestaña, no dentro del Perfil.
     await expect(dossier.locator('#profile-tab-perfil .hero-profile-brand')).toHaveCount(0);
-    await expect(dossier.locator('#profile-tab-perfil .hero-profile-brand-summary')).toBeVisible();
-    await expect(dossier.locator('#profile-tab-perfil .hero-profile-brand-slots article')).toHaveCount(3);
+    await expect(dossier.locator('#profile-tab-perfil .hero-profile-brand-summary')).toHaveCount(0);
     await expect(page.locator('#roster-home')).toBeHidden();
     await expect(dossier).toContainText(creator.name);
     const profileTabs = dossier.locator('[role="tab"][data-profile-tab]');
-    await expect(profileTabs).toHaveCount(4);
+    await expect(profileTabs).toHaveCount(5);
 
     const cardImage = card.locator('.comic-roster-photo img');
     await expect(cardImage).toHaveAttribute('alt', /Fotografía carnet/);
@@ -108,9 +108,9 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
       if (creator.id !== 'ardipii') await expect(gamesSection).toBeVisible();
       if (await gamesSection.count()) await expect(gamesSection).not.toContainText(/muestras|observaciones|Just Chatting/i);
     }
+    // Los datos para marcas viven en su propia pestaña, no dentro del Perfil.
     await expect(dossier.locator('#profile-tab-perfil .hero-profile-brand')).toHaveCount(0);
-    await expect(dossier.locator('#profile-tab-perfil .hero-profile-brand-summary')).toBeVisible();
-    await expect(dossier.locator('#profile-tab-perfil .hero-profile-brand-slots article')).toHaveCount(3);
+    await expect(dossier.locator('#profile-tab-perfil .hero-profile-brand-summary')).toHaveCount(0);
     await profileTabs.filter({ hasText: 'CLIPS' }).click();
     expect(await dossier.locator('#profile-tab-clips .hero-profile-clip').count()).toBeLessThanOrEqual(4);
     await profileTabs.filter({ hasText: 'ESTADÍSTICAS' }).click();
@@ -125,18 +125,25 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
       expect(await source.locator('.stats-executive-metrics > div').count()).toBeGreaterThan(0);
       await expect(source).not.toContainText(/Sin métricas verificadas|Sin captura|Sin registro|No hay datos públicos cargados/i);
     }
-    await profileTabs.filter({ hasText: 'TRAYECTORIA' }).click();
-    await expect(dossier.locator('#profile-tab-bitacora .hero-profile-brand')).toBeVisible();
+    await profileTabs.filter({ hasText: 'BITÁCORA' }).click();
+    const timeline = dossier.locator('#profile-tab-bitacora .hero-timeline');
+    await expect(timeline).toBeVisible();
+    expect(await timeline.locator('.hero-timeline-item').count()).toBeGreaterThanOrEqual(2);
+    await expect(timeline.locator('.hero-timeline-item.is-origen')).toHaveCount(1);
     await expect(dossier.locator('#profile-tab-bitacora .hero-profile-internal-art')).toHaveCount(0);
-    await expect(dossier.locator('#profile-tab-bitacora')).not.toContainText(/MUESTRAS/i);
-    await expect(dossier.locator('#profile-tab-bitacora')).toContainText('TRAYECTORIA');
+    await expect(dossier.locator('#profile-tab-bitacora')).not.toContainText(/MUESTRAS|DIRECCIÓN|DOCENTE|ESTUDIANTE/i);
+    await expect(dossier.locator('#profile-tab-bitacora')).toContainText('BITÁCORA');
     await expect(dossier.locator('.hero-profile-character-card-link button')).toHaveText(/VER CARTA COMPLETA/);
     if (['lady-moriarty','rod3r1k','akuma','habitos'].includes(creator.id)) {
       await expect(dossier.locator('#profile-tab-bitacora a[href*="lurkit.com"]')).toHaveCount(1);
       await expect(dossier.locator('#profile-tab-bitacora a[href*="keymailer.co"]')).toHaveCount(1);
     }
+    await profileTabs.filter({ hasText: 'PARA MARCAS' }).click();
+    await expect(dossier.locator('#profile-tab-marcas .hero-profile-brand')).toBeVisible();
+    await expect(dossier.locator('#profile-tab-marcas .hero-profile-brand-summary')).toBeVisible();
+    await expect(dossier.locator('#profile-tab-marcas .hero-profile-brand-slots article')).toHaveCount(3);
     if (['moriartys','rod3r1k'].includes(creator.id)) {
-      await expect(dossier.locator('#profile-tab-bitacora .hero-profile-epic-codes')).toBeVisible();
+      await expect(dossier.locator('#profile-tab-marcas .hero-profile-epic-codes')).toBeVisible();
     }
 
     if (creator.id === 'moriartys') {
@@ -151,7 +158,8 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
         ['PERFIL', 'perfil'],
         ['ESTADÍSTICAS', 'estadisticas'],
         ['CLIPS', 'clips'],
-        ['TRAYECTORIA', 'bitacora']
+        ['BITÁCORA', 'bitacora'],
+        ['PARA MARCAS', 'marcas']
       ]) {
         await profileTabs.filter({ hasText: label }).click();
         await expect(dossier.locator('#profile-tab-' + panel)).toBeVisible();
@@ -159,7 +167,7 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
       }
       await profileTabs.filter({ hasText: 'PERFIL' }).focus();
       await page.keyboard.press('End');
-      await expect(profileTabs.filter({ hasText: 'TRAYECTORIA' })).toBeFocused();
+      await expect(profileTabs.filter({ hasText: 'PARA MARCAS' })).toBeFocused();
       await page.keyboard.press('Home');
       await expect(profileTabs.filter({ hasText: 'PERFIL' })).toBeFocused();
     }
@@ -252,7 +260,7 @@ test('Atrás y Adelante restauran el roster y el expediente correcto', async ({ 
   await expect(page.locator('#roster-home')).toBeHidden();
   await expect(page.locator('#hero-profile-page')).toContainText('LADY MORIARTY');
   await page.locator('[data-profile-tab="bitacora"]').click();
-  await expect(page.locator('#profile-tab-bitacora .hero-profile-brand')).toBeVisible();
+  await expect(page.locator('#profile-tab-bitacora .hero-timeline')).toBeVisible();
   await page.screenshot({ path: 'test-results/bitacora-lady-desktop.png', fullPage: false });
   await page.setViewportSize({ width: 390, height: 844 });
   const mobileWidths = await page.evaluate(() => ({

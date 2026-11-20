@@ -102,7 +102,32 @@
         "youtube": "https://www.youtube.com/@LosMoriartys",
         "tiktok": "https://www.tiktok.com/@losmoriartys",
         "instagram": "https://www.instagram.com/losmoriartys/"
-      }
+      },
+      "bitacora": [
+        {
+          "type": "origen",
+          "title": "Dónde empieza",
+          "text": "Una dupla gamer y orgullosamente nerd que convierte cada directo en una visita a su videoclub retro. Demian es además uno de los dos primeros de la Legión: empezó con Rod jugando Marvel Rivals e imaginando un proyecto propio."
+        },
+        {
+          "type": "canal",
+          "title": "El Rincón del Nerd",
+          "text": "Podcast semanal en el canal: noticias y cultura geek contadas por Demian (Marvel, DC Studios, libros, películas, series y sagas como Harry Potter). Los lunes a las 20 hs."
+        },
+        {
+          "type": "expediente",
+          "title": "Expediente 001 · BarFender",
+          "text": "Sesión cooperativa de cuatro canales: Los Moriartys, Rod3r1k, Lady Moriarty y Akuma. Cada canal publicó su propio punto de vista.",
+          "date": "2026-11-05",
+          "url": "https://www.twitch.tv/videos/2919716450",
+          "source": "VOD del canal"
+        },
+        {
+          "type": "proximo",
+          "title": "Lo que viene",
+          "text": "Expediente 003 de la serie de juegos cooperativos, todavía sin juego ni fecha."
+        }
+      ]
     },
     {
       "name": "ROD3R1K",
@@ -198,7 +223,29 @@
       "tagline": "Gaming de acción, eventos grupales y momentos épicos en directo.",
       "schedule": "Lunes a viernes 20:00 (hora Argentina)",
       "fullbody": "Superhero_Camera_Portrait-hay-muchas-que-dejaron-de-ser-animadas-la-idea-es.jpg",
-      "character_card": "assets/heroes/rod3r1k_dark.webp"
+      "character_card": "assets/heroes/rod3r1k_dark.webp",
+      "bitacora": [
+        {
+          "type": "origen",
+          "title": "Dónde empieza",
+          "text": "De los primeros de la Legión. Su recorrido está ligado a las partidas de Marvel Rivals con Demian y al impulso de encuentros y eventos: el paso de jugar entre amigos a armar una comunidad."
+        },
+        {
+          "type": "expediente",
+          "title": "Expediente 001 · BarFender",
+          "text": "Uno de los cuatro canales de la primera sesión.",
+          "date": "2026-11-05",
+          "url": "https://www.twitch.tv/videos/2919719142",
+          "source": "VOD del canal"
+        },
+        {
+          "type": "expediente",
+          "title": "Expediente 002 · BarFender",
+          "text": "Segunda noche del juego, junto a Akuma, desde los dos canales. Directo completo de ese día: 3 h 18 min, media de 33 y pico de 53 espectadores; 83 personas distintas en el chat (panel de Twitch del creador).",
+          "date": "2026-11-11",
+          "source": "Panel de Twitch del creador"
+        }
+      ]
     },
     {
       "name": "LADYMORIARTY",
@@ -297,7 +344,32 @@
         "youtube": "https://www.youtube.com/@LosMoriartys",
         "tiktok": "https://www.tiktok.com/@losmoriartys",
         "instagram": "https://www.instagram.com/losmoriartys/"
-      }
+      },
+      "bitacora": [
+        {
+          "type": "origen",
+          "title": "Dónde empieza",
+          "text": "Se sumó a la Legión después de la etapa inicial. Su canal tiene voz y recorrido propios, distintos del proyecto compartido Los Moriartys."
+        },
+        {
+          "type": "canal",
+          "title": "Su canal",
+          "text": "Charla tranquila, nostalgia y juegos de los de siempre, con espontaneidad y cercanía. Entre sus retro favoritos: Wonder Boy, Mario Bros 3 y Looney Tunes."
+        },
+        {
+          "type": "expediente",
+          "title": "Expediente 001 · BarFender",
+          "text": "Uno de los cuatro canales de la primera sesión.",
+          "date": "2026-11-05",
+          "url": "https://www.twitch.tv/videos/2919755971",
+          "source": "VOD del canal"
+        },
+        {
+          "type": "proximo",
+          "title": "Lo que viene",
+          "text": "Lo que queda de noviembre y diciembre trae Hogwarts Legacy, con la serie de Harry Potter de HBO Max de fondo."
+        }
+      ]
     },
     {
       "name": "ARDIPII",
@@ -392,7 +464,25 @@
         "instagram": "https://www.instagram.com/_ardipii_/",
         "tiktok": "https://www.tiktok.com/@ardipii",
         "youtube": "https://www.youtube.com/@ArDiPi"
-      }
+      },
+      "bitacora": [
+        {
+          "type": "origen",
+          "title": "Dónde empieza",
+          "text": "Cuarto integrante de la primera formación de la Legión, después de Demian, Rod y Akuma."
+        },
+        {
+          "type": "canal",
+          "title": "Su canal",
+          "text": "Un chat donde siempre hay lugar para uno más: te acomodás, saludás y te quedás un rato. Su fuerte es la charla en vivo."
+        },
+        {
+          "type": "proximo",
+          "title": "Lo que viene",
+          "text": "Ya tiene GTA VI y lo va a cubrir en sus directos. El primer directo con el juego es el jueves 19/11.",
+          "date": "2026-11-19"
+        }
+      ]
     },
     {
       "name": "AKUMA",
@@ -488,7 +578,37 @@
         "instagram": "https://www.instagram.com/akuma.zoldyck/",
         "youtube": "https://youtube.com/@akuma.zoldyck",
         "tiktok": "https://www.tiktok.com/@akumazoldyck"
-      }
+      },
+      "bitacora": [
+        {
+          "type": "origen",
+          "title": "Dónde empieza",
+          "text": "Tercer integrante de la primera formación de la Legión, después de Demian y Rod."
+        },
+        {
+          "type": "canal",
+          "title": "Su canal",
+          "text": "Le encanta el terror, hace fisicoculturismo y le gusta hablar de salud y alimentación mientras juega. Su espacio es un punto de encuentro donde lo importante es el intercambio y las historias que aparecen cuando la gente se junta."
+        },
+        {
+          "type": "expediente",
+          "title": "Expediente 001 · BarFender",
+          "text": "Uno de los cuatro canales de la primera sesión.",
+          "date": "2026-11-05"
+        },
+        {
+          "type": "expediente",
+          "title": "Expediente 002 · BarFender",
+          "text": "Segunda noche del juego, junto a Rod, desde los dos canales. Directo completo de ese día: 1 h 50 min, media de 10,7 y pico de 21 espectadores; 44 personas distintas y 6 seguidores nuevos (panel de Twitch del creador).",
+          "date": "2026-11-11",
+          "source": "Panel de Twitch del creador"
+        },
+        {
+          "type": "proximo",
+          "title": "Lo que viene",
+          "text": "Traerá juegos de Keymailer a sus directos."
+        }
+      ]
     },
     {
       "name": "DAVE — NEXUS",
@@ -577,7 +697,24 @@
       },
       "tagline": "Una nueva etapa: retomando el ritmo de los directos y explorando juegos cooperativos.",
       "fullbody": "Purple_Cyberpunk_Warrior-hay-muchas-que-dejaron-de-ser-animadas-la-idea-es.jpg",
-      "character_card": "assets/heroes/nexus_dark.webp"
+      "character_card": "assets/heroes/nexus_dark.webp",
+      "bitacora": [
+        {
+          "type": "origen",
+          "title": "Dónde empieza",
+          "text": "Vuelve a conectar con la Legión después de un tiempo fuera de la actividad y empieza una nueva etapa como creador."
+        },
+        {
+          "type": "canal",
+          "title": "Su canal",
+          "text": "Este año tuvo pocos directos y está retomando el ritmo de a poco. Una buena oportunidad para construir algo desde el principio, a su paso y junto a otros."
+        },
+        {
+          "type": "proximo",
+          "title": "Lo que viene",
+          "text": "Promete un 2027 más activo."
+        }
+      ]
     },
     {
       "name": "PATO — ORATORIS",
@@ -699,7 +836,25 @@
       "tagline": "Programación y divulgación explicadas con claridad y cercanía.",
       "schedule": "Sin directos; publica contenido en su canal de YouTube",
       "fullbody": "Bald_Man_In_Gold_Armor-hay-muchas-que-dejaron-de-ser-animadas-la-idea-es.jpg",
-      "character_card": "assets/heroes/oratoris_dark.webp"
+      "character_card": "assets/heroes/oratoris_dark.webp",
+      "bitacora": [
+        {
+          "type": "origen",
+          "title": "Dónde empieza",
+          "text": "Patricio Santos, creador del canal Pato te explica. Se sumó a la Legión con un enfoque distinto del resto: enseñar y divulgar con claridad y cercanía."
+        },
+        {
+          "type": "canal",
+          "title": "Su canal",
+          "text": "Serie introductoria Curso HTML + JavaScript (5 videos, enero de 2025) y una pieza sobre dopamina, motivación y adicción (mayo de 2025).",
+          "date": "2025-01"
+        },
+        {
+          "type": "proximo",
+          "title": "Lo que viene",
+          "text": "Piensa retomar el canal durante 2027 con un enfoque renovado y sumar de a poco la temática gamer como línea complementaria."
+        }
+      ]
     },
     {
       "name": "HABITOS",
@@ -795,7 +950,24 @@
         "instagram": "https://www.instagram.com/masee_gaitan/",
         "facebook": "https://www.facebook.com/share/1DZQcdu34M/",
         "tiktok": "https://www.tiktok.com/@twitch..habitos_atomicos"
-      }
+      },
+      "bitacora": [
+        {
+          "type": "origen",
+          "title": "Dónde empieza",
+          "text": "Se sumó a la Legión más adelante, con su canal Habitos_Atomicos. Su enfoque es distinto del resto: aporta desde la filosofía, los hábitos y la conversación."
+        },
+        {
+          "type": "canal",
+          "title": "Su canal",
+          "text": "Alterna partidas con reflexión: entrena la mente, sostiene buenos hábitos y vuelve al juego con energía."
+        },
+        {
+          "type": "proximo",
+          "title": "Lo que viene",
+          "text": "Simuladores de carrera, Fortnite y juegos cooperativos."
+        }
+      ]
     }
   ],
   "identity_model_version": 1,

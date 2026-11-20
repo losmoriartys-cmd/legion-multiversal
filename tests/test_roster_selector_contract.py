@@ -186,7 +186,9 @@ class RosterComicCardsContractTests(unittest.TestCase):
         start = self.app.index("function renderHeroProfileTabs")
         end = self.app.index("\nfunction activateHeroProfileTab", start)
         tabs = self.app[start:end]
-        self.assertIn("['bitacora','TRAYECTORIA']", tabs)
+        self.assertIn("['bitacora','BITÁCORA']", tabs)
+        self.assertIn("['marcas','PARA MARCAS']", tabs)
+        self.assertIn("renderHeroTimeline(hero,record)", tabs)
         self.assertNotIn("['marcas','INTERÉS PARA MARCAS']", tabs)
         self.assertNotIn("ABRIR BITÁCORA COMPLETA", tabs)
         self.assertIn("renderHeroBrandSummary(hero)", self.app)
@@ -233,7 +235,7 @@ class RosterComicCardsContractTests(unittest.TestCase):
         self.assertIn('''id="profile-tab-perfil" role="tabpanel">'+overview''', tabs)
         self.assertIn("hero-profile-epic-codes", tabs)
         self.assertIn("renderEpicCreatorCodeCard", tabs)
-        self.assertIn("'+logHtml+brandHtml+((hero.id", tabs)
+        self.assertIn("renderHeroBrandSummary(hero)+brandHtml+((hero.id", tabs)
         self.assertNotIn('''id="profile-tab-perfil" role="tabpanel">'+overview+brandHtml''', tabs)
 
     def test_stats_dashboard_preserves_missing_sources_without_inventing_values(self):
