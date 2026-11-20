@@ -1777,8 +1777,13 @@ function renderGrowthWindowPanel(windowData,key,platform){
  if(platform==='twitch'){
   const follower=metrics.followers||{};
   const currentFollowers=metrics.followers_total;
-  numberCard('SEGUIDORES ACTUALES',currentFollowers===null?'PENDIENTE':statsNumber(currentFollowers,0),
-   metrics.followers_captured_at?'Twitch Helix · captura '+normalizedMetricCaptureLabel({capturedAt:metrics.followers_captured_at}):'Esperando autorización OAuth de solo lectura');
+  const followerCurrentLabel=metrics.followers_status==='fresh'?'SEGUIDORES ACTUALES':currentFollowers!==null?'ÚLTIMA CIFRA REGISTRADA':'SEGUIDORES ACTUALES';
+  const followerCurrentNote=metrics.followers_status==='fresh'
+   ?'Twitch Helix · captura '+normalizedMetricCaptureLabel({capturedAt:metrics.followers_captured_at})
+   :currentFollowers!==null
+    ?'Dato histórico, no vigente · última captura '+normalizedMetricCaptureLabel({capturedAt:metrics.followers_captured_at})
+    :'Esperando autorización OAuth de solo lectura';
+  numberCard(followerCurrentLabel,currentFollowers===null?'PENDIENTE':statsNumber(currentFollowers,0),followerCurrentNote);
   numberCard('SEGUIDORES GANADOS',follower.status==='available'?growthSigned(follower.change,0):follower.status==='baseline_pending'?'BASE PENDIENTE':'SIN DATOS',
    follower.status==='available'?(follower.basis==='since_first_capture'?'Desde primera captura propia · '+(follower.change_pct===null?'variación porcentual no disponible':growthSigned(follower.change_pct,1)+'%'):'Comparación de capturas públicas del período'): 'Hace falta una base de capturas diarias de seguidores');
   numberCard('DIRECTOS OBSERVADOS',growthDisplayNumber(metrics.streams_observed,0),'IDs de stream distintos detectados por Helix');
@@ -1786,7 +1791,7 @@ function renderGrowthWindowPanel(windowData,key,platform){
   numberCard('DÍAS ACTIVOS',growthDisplayNumber(metrics.active_days,0)+' / '+windowData.days,'Días UTC con al menos una muestra en directo');
   numberCard('HORAS OBSERVADAS',growthDisplayNumber(metrics.observed_live_hours,1)+' h','Intervalos observados del mismo stream; no son horas oficiales del VOD');
   numberCard('HORAS OBSERVADAS / SEMANA',growthDisplayNumber(metrics.observed_hours_per_week,2)+' h','Promedio semanal estimado desde los intervalos observados');
-  numberCard('SEMANAS ACTIVAS',growthDisplayNumber(metrics.active_weeks,0)+' / '+Math.ceil(windowData.days/7),'Semanas calendario con al menos una muestra en directo');
+  numberCard('SEMANAS ACTIVAS',growthDisplayNumber(metrics.active_weeks,0)+' semanas','Semanas calendario con al menos una muestra en directo');
   numberCard('PROMEDIO MUESTREADO',metrics.average_viewers_sampled===null?'SIN DATOS':growthDisplayNumber(metrics.average_viewers_sampled,1),'Muestras públicas de espectadores; no es CCV oficial');
   numberCard('PICO MUESTREADO',metrics.peak_viewers_sampled===null?'SIN DATOS':growthDisplayNumber(metrics.peak_viewers_sampled,0),'Mayor lectura puntual guardada por el colector');
  }else if(platform==='youtube'){
@@ -1801,7 +1806,8 @@ function renderGrowthWindowPanel(windowData,key,platform){
  const periodLabel=windowData?.period?.from&&windowData?.period?.to
   ?statsDate(String(windowData.period.from).slice(0,10))+' — '+statsDate(String(windowData.period.to).slice(0,10))
   :'período no informado';
- const coverageText='PERÍODO · '+safe(periodLabel)+' · COBERTURA · '+safe(coverage.sampled_days??0)+' / '+safe(coverage.expected_days??windowData.days)+' días · '+safe(growthDisplayNumber(coverage.coverage_pct,1))+'%';
+ const lastObserved=coverage.last_observed_at?' · ÚLTIMA MUESTRA '+normalizedMetricCaptureLabel({capturedAt:coverage.last_observed_at}):' · SIN CAPTURAS EN EL PERÍODO';
+ const coverageText='PERÍODO · '+safe(periodLabel)+' · COBERTURA · '+safe(coverage.sampled_days??0)+' / '+safe(coverage.expected_days??windowData.days)+' días · '+safe(growthDisplayNumber(coverage.coverage_pct,1))+'%'+safe(lastObserved);
  const coverageNote=coverage.status==='sufficient'
   ?'Cobertura suficiente para comparar con el período previo.'
   :'Cobertura parcial: los datos disponibles se muestran, pero no se comparan como si fueran una ventana completa.';
