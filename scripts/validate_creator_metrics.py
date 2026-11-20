@@ -147,7 +147,7 @@ def validate(registry, roster, now=None):
         # Null values are allowed when the source genuinely has no observation, but the metric
         # must exist so the UI can explain the gap rather than silently omitting the profile.
         required_by_platform = {
-            "twitch": {"live_status", "streams_observed", "average_viewers_sampled", "peak_viewers_sampled", "observed_live_hours"},
+            "twitch": {"live_status", "followers_total", "streams_observed", "average_viewers_sampled", "peak_viewers_sampled", "observed_live_hours"},
             "youtube": {"subscribers", "total_views", "videos_total"},
             "kick": {"live_status", "current_viewers"},
         }
