@@ -1831,16 +1831,17 @@ function renderGrowthContentPerformance(content,platform){
 }
 function renderGrowthCollaborations(data){
  const safe=escapeStatsHtml,heroes=Array.isArray(heroesData)?heroesData:[];
- const cases=data?.shared_cases||[],results=data?.reported_results||[],relationships=data?.relationships||[];
+ const cases=data?.shared_cases||[],results=data?.reported_results||[];
  const name=id=>getHeroDisplayName(heroes.find(hero=>hero.id===id)||{name:id||'Integrante'});
  const caseHtml=cases.map(item=>'<article class="hero-growth-case"><div class="hero-growth-case-head"><strong>'+safe(item.title)+'</strong><span>'+safe(item.date?statsDate(item.date):'Fecha no informada')+'</span></div><p>Participantes: '+safe((item.participants||[]).map(name).join(' · '))+'</p><p>Entregables enlazados: '+safe(item.deliverables?.length||0)+' VOD</p><div>'+(item.deliverables||[]).map(link=>'<a href="'+safe(link.url)+'" target="_blank" rel="noopener noreferrer">'+safe(name(link.creator_id))+' · VER VOD ↗</a>').join('')+'</div><small>Fuente: '+safe(item.source||'Bitácora')+' · caso documentado; no representa alcance total.</small></article>').join('');
  const resultHtml=results.map(item=>{
   const evidence=item.verification_status==='creator_reported'?'DATO APORTADO POR EL CREADOR':item.verification_status==='platform_verified'?'FUENTE DE PLATAFORMA':'FUENTE PÚBLICA';
   return '<article class="hero-growth-case hero-growth-case-result"><div class="hero-growth-case-head"><strong>'+safe(item.title)+'</strong><span>'+safe(item.date?statsDate(item.date):'Fecha no informada')+'</span></div><span class="hero-growth-evidence">'+safe(evidence)+'</span><p>'+safe(item.format||'Colaboración documentada')+' · participantes: '+safe((item.participants||[]).map(name).join(' · '))+'</p><div class="hero-growth-result-grid">'+(item.metrics||[]).map(metric=>'<span><small>'+safe(metric.label)+'</small><b>'+safe(statsNumber(metric.value,Number.isInteger(metric.value)?0:1))+'</b><em>'+safe(metric.unit)+'</em></span>').join('')+'</div><small>Alcance del registro: '+safe(name(item.channel_scope))+' · fuente: '+safe(item.source)+'. No se suman audiencias entre canales.</small>'+(item.note?'<p>'+safe(item.note)+'</p>':'')+'</article>';
  }).join('');
- const relationHtml=relationships.map(item=>'<article class="hero-growth-relationship"><strong>'+safe(item.title)+'</strong><p>'+safe(item.description||'Vínculo registrado en el expediente.')+'</p><small>'+safe(item.source||'Fuente no especificada')+'</small>'+(item.url?'<a href="'+safe(item.url)+'" target="_blank" rel="noopener noreferrer">CONSULTAR ↗</a>':'')+'</article>').join('');
- if(!caseHtml&&!resultHtml&&!relationHtml)return '<p class="hero-growth-empty">Todavía no hay colaboraciones o resultados documentados en este expediente.</p>';
- return '<div class="hero-growth-collaboration-grid">'+caseHtml+resultHtml+'</div>'+(relationHtml?'<section class="hero-growth-relationships"><h5>VÍNCULOS Y ACCESOS REGISTRADOS</h5>'+relationHtml+'</section>':'');
+ if(!caseHtml&&!resultHtml)return '<p class="hero-growth-empty">Todavía no hay colaboraciones o resultados medibles documentados en este expediente.</p>';
+ // Los vínculos de partners y plataformas de acceso ya se muestran en Recorrido.
+ // Crecimiento conserva solo casos, entregables y resultados; evita duplicar esos enlaces.
+ return '<div class="hero-growth-collaboration-grid">'+caseHtml+resultHtml+'</div>';
 }
 function renderGrowthAdvancedAudience(report){
  const safe=escapeStatsHtml;
