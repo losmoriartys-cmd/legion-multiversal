@@ -61,7 +61,7 @@
       const youtube = (Array.isArray(pato?.recent_videos) ? pato.recent_videos : []).map(video => ({
         ...video, url: safeExternalUrl(video.url), creator: 'PATO — ORATORIS'
       })).filter(video => video.url && video.video_id);
-      assets = { clips: clipList, creators: Object.entries(creators).map(([id, creator]) => ({ id, name: creator.display_name || creator.login || id, count: (creator.clips || []).length })), vods, youtube };
+      assets = { clips: clipList, creators: Object.entries(creators).map(([id, creator]) => ({ id, name: creator.display_name || creator.login || id, count: (creator.clips || []).length })), vods, youtube, roster };
       return assets;
     }).catch(error => {
       assetsPromise = null;
@@ -153,7 +153,7 @@
     const creators = assets.creators.map(creator => '<option value="' + escapeHtml(creator.id) + '">' + escapeHtml(creator.name) + ' (' + creator.count + ')</option>').join('');
     const vodCards = assets.vods.map((vod, index) => '<button type="button" class="live-program-content-card" data-vod-index="' + index + '"><span class="live-program-card-art live-program-card-vod">BARFENDER</span><strong>' + escapeHtml(vod.creator) + '</strong><small>' + escapeHtml(vod.title) + ' · ' + formatDate(vod.date) + '</small><em>VER VOD ↗</em></button>').join('');
     const youtubeCards = assets.youtube.map((video, index) => '<button type="button" class="live-program-content-card" data-youtube-index="' + index + '"><span class="live-program-card-art live-program-card-youtube">ORATORIS</span><strong>' + escapeHtml(video.title) + '</strong><small>' + Number(video.views || 0).toLocaleString('es-AR') + ' vistas · ' + formatDate(video.published_at) + '</small><em>VER VIDEO ↗</em></button>').join('');
-    const schedules = (window.liveProgramRoster || []).map(hero => {
+    const schedules = (assets.roster || []).map(hero => {
       const twitch = (hero.accounts || []).find(account => account.platform === 'twitch' && account.account_type === 'creator_channel');
       const url = safeExternalUrl(twitch?.url || hero.twitch || hero.youtube);
       return '<article class="live-program-schedule-card"><span>' + escapeHtml(hero.display_name || hero.name || hero.id) + '</span><p>' + escapeHtml(hero.schedule || 'Horario no declarado') + '</p>' + (url ? '<a href="' + escapeHtml(url) + '" target="_blank" rel="noopener noreferrer">VISITAR CANAL ↗</a>' : '') + '</article>';
@@ -184,7 +184,7 @@
   function renderLiveProgram(channels) {
     const host = document.getElementById('live-directory');
     if (!host) return;
-    const data = window.instituteStatsData || {};
+    const data = typeof instituteStatsData !== 'undefined' && instituteStatsData ? instituteStatsData : {};
     const updated = data.updated_at ? new Date(data.updated_at) : null;
     const interval = Number(data.sampling_interval_minutes) || 55;
     const age = updated ? (Date.now() - updated.getTime()) / 60000 : Infinity;
@@ -193,16 +193,12 @@
     const live = fresh ? (channels || []).filter(channel => channel.live) : [];
     const stale = !fresh && (channels || []).some(channel => channel.live);
     if (!live.length) {
-      loadAssets().then(() => {
-        const rosterRequest = fetch('./roster-data.json', { cache: 'no-store' }).then(response => response.json());
-        return rosterRequest.then(roster => { window.liveProgramRoster = roster.heroes || []; renderOfflineProgram(channels || [], fresh, updatedLabel, interval); });
-      }).catch(error => {
+      loadAssets().then(() => { renderOfflineProgram(channels || [], fresh, updatedLabel, interval); }).catch(error => {
         host.innerHTML = '<div class="live-program-heading"><span>SEÑAL ABIERTA · LEGIÓN MULTIVERSAL</span><h3>PROGRAMACIÓN DE LA LEGIÓN</h3><p>El archivo de contenidos no está disponible temporalmente.</p></div><p class="live-program-empty">' + escapeHtml(error.message) + '</p>';
       });
       if (stale) host.setAttribute('data-stale-live', 'true'); else host.removeAttribute('data-stale-live');
       return;
     }
-    const roster = window.heroesData || [];
     const updatedNote = 'Última captura: ' + updatedLabel + ' · frecuencia objetivo: ' + interval + ' min. No es una conexión en tiempo real.';
     host.innerHTML = '<div class="live-program-statusline is-live"><span class="live-pulse"></span><strong>' + live.length + (live.length === 1 ? ' INTEGRANTE EN DIRECTO' : ' INTEGRANTES EN DIRECTO') + '</strong><small>' + escapeHtml(updatedNote) + '</small></div>' +
       '<div class="live-program-heading"><span>SEÑAL ABIERTA · LEGIÓN MULTIVERSAL</span><h3>ESTAMOS EN VIVO</h3><p>La pantalla principal cambia automáticamente según quién esté transmitiendo. Elegí una señal si hay más de una.</p></div>' +
