@@ -8,6 +8,15 @@ test('Estadísticas presenta siete canales Twitch y el expediente YouTube de Pat
   await page.evaluate(() => switchChapter(3));
   await expect(page.locator('#chapter-3')).toHaveClass(/active/);
 
+  const kpis = page.locator('#stats-summary .impact-kpi');
+  await expect(kpis).toHaveCount(7);
+  await expect(page.locator('#stats-summary')).toContainText('CANALES TWITCH');
+  await expect(page.locator('#stats-summary')).toContainText('CANALES YOUTUBE');
+  await expect(page.locator('#stats-summary')).toContainText('ESPECTADORES AHORA');
+  await expect(page.locator('#stats-summary')).toContainText('HORAS DE DIRECTO OBSERVADAS');
+  await expect(page.locator('#stats-summary')).toContainText('MUESTRAS REGISTRADAS');
+  await expect(page.locator('#stats-summary')).toContainText('HORAS DE AUDIENCIA ESTIMADAS');
+
   const twitchCards = page.locator('#stats-channel-grid .stats-dossier-card');
   await expect(twitchCards).toHaveCount(7, { timeout: 30000 });
   await expect(page.locator('#stats-platform-grid .stats-platform-card')).toHaveCount(1, { timeout: 30000 });
