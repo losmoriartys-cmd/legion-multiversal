@@ -9,7 +9,7 @@
   'use strict';
 
   const MAX_QUEUE = 12;
-  const state = { who: 'todos', clipId: null, watching: null, playing: false, sig: '' };
+  const state = { who: 'todos', clipId: null, watching: null, playing: false, archive: null, showingClip: false, sig: '' };
   let host = null;
   let lastCtx = null;
   let bound = false;
@@ -178,7 +178,7 @@
     const title = live ? 'MIENTRAS TANTO' : 'A CONTINUACIÓN';
     const count = model.pool.length + (model.pool.length === 1 ? ' momento' : ' momentos');
     const items = model.pool.map((item) => {
-      const selected = !live && model.current && item.clip.id === model.current.clip.id;
+      const selected = (!live || state.showingClip) && model.current && item.clip.id === model.current.clip.id;
       const meta = [esc(item.owner.name), fmtDuration(item.clip.duration), fmtDate(item.clip.created_at)].filter(Boolean).join(' · ');
       return '<li><button type="button" class="lp-q' + (selected ? ' is-current' : '') + '" data-lp="clip" data-id="' + esc(item.clip.id) + '"' + (selected ? ' aria-current="true"' : '') + '>' +
         thumb(item.clip.thumbnail_url, item.owner.img, 'lp-q-img') +
@@ -209,7 +209,7 @@
           const date = entry.date ? fmtDate(entry.date + 'T12:00:00') : '';
           const tag = esc(String(entry.title || '').toUpperCase()) + (date ? ' · ' + date : '');
           const inner = thumb(person.img, person.img, 'lp-card-img') + '<span class="lp-card-text"><span class="lp-card-tag">' + tag + '</span><span class="lp-card-title">' + esc(person.name) + '</span><span class="lp-card-note">' + (url ? 'VOD del canal con el recorrido de la noche.' : 'VOD público por sumar.') + '</span></span><span class="lp-card-cta">' + (url ? 'VER VOD ↗' : 'PRÓXIMAMENTE') + '</span>';
-          return url ? '<a class="lp-card" href="' + esc(url) + '" target="_blank" rel="noopener">' + inner + '</a>' : '<div class="lp-card is-pending">' + inner + '</div>';
+          return url ? '<button type="button" class="lp-card" data-lp="vod" data-url="' + esc(url) + '" data-title="' + esc(entry.title || person.name) + '" data-owner="' + esc(person.name) + '">' + inner + '</button>' : '<div class="lp-card is-pending">' + inner + '</div>'; 
         }).join('') + '</div></div>';
     }
     if (model.youtube.length) {
@@ -218,7 +218,7 @@
           const published = video.published_at ? new Date(video.published_at) : null;
           const when = published && !Number.isNaN(published.getTime()) ? published.toLocaleDateString('es-AR', { month: 'long', year: 'numeric' }) : '';
           const meta = [when, viewsLabel(video.views)].filter(Boolean).join(' · ');
-          return '<a class="lp-card is-dark" href="' + esc(safeUrl(video.url)) + '" target="_blank" rel="noopener">' + thumb(person.img, person.img, 'lp-card-img') + '<span class="lp-card-text"><span class="lp-card-tag is-cyan">VIDEO · YOUTUBE</span><span class="lp-card-title is-plain">' + esc(video.title) + '</span><span class="lp-card-note">' + esc(meta) + '</span></span></a>';
+          return '<button type="button" class="lp-card is-dark" data-lp="youtube" data-url="' + esc(safeUrl(video.url)) + '" data-title="' + esc(video.title) + '" data-owner="' + esc(person.name) + '">' + thumb(person.img, person.img, 'lp-card-img') + '<span class="lp-card-text"><span class="lp-card-tag is-cyan">VIDEO · YOUTUBE</span><span class="lp-card-title is-plain">' + esc(video.title) + '</span><span class="lp-card-note">' + esc(meta) + '</span></span><span class="lp-card-cta">REPRODUCIR ↗</span></button>';
         }).join('') + '</div></div>').join('');
     }
     return out ? '<section class="lp-rails" aria-label="Más para ver">' + out + '</section>' : '';
@@ -231,10 +231,42 @@
     return '<section class="lp-section" aria-label="Cuándo vuelven"><div class="lp-section-head is-stack"><h2>CUÁNDO VUELVEN</h2><p>Horarios declarados por cada creador. Pueden cambiar.</p></div><div class="lp-whens">' + items + '</div></section>';
   }
 
+  function videoId(url) {
+    try {
+      const parsed = new URL(url);
+      if (parsed.hostname.endsWith('youtu.be')) return parsed.pathname.split('/').filter(Boolean)[0] || '';
+      if (parsed.hostname.includes('youtube.com')) return parsed.searchParams.get('v') || parsed.pathname.split('/').filter(Boolean).pop() || '';
+    } catch (_) {}
+    return '';
+  }
+
+  function vodId(url) {
+    const match = String(url || '').match(/(?:videos\/(?:embed\?video=)?|video=)(v?\d+)/i);
+    return match ? match[1].replace(/^v/i, '') : '';
+  }
+
+  function archiveStage() {
+    const item = state.archive;
+    if (!item) return '';
+    const parent = parentHost();
+    let src = '';
+    if (item.type === 'youtube' && item.id) src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(item.id) + '?autoplay=1&rel=0';
+    if (item.type === 'vod' && item.id && parent) src = 'https://player.twitch.tv/?video=v' + encodeURIComponent(item.id) + '&parent=' + encodeURIComponent(parent) + '&autoplay=true';
+    const playable = Boolean(src);
+    const screen = state.playing && playable
+      ? '<iframe class="lp-embed" src="' + esc(src) + '" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen title="' + esc(item.title) + '"></iframe>'
+      : '<div class="lp-screen-shade"></div><div class="lp-screen-bottom"><span class="lp-eyebrow">' + esc(item.owner) + '</span><h2 class="lp-screen-title">' + esc(item.title) + '</h2></div>';
+    return '<div class="lp-screen">' + screen + '</div><div class="lp-controls">' +
+      (playable ? '<button type="button" class="lp-btn is-primary" data-lp="play">' + (state.playing ? '■ DETENER' : '▶ REPRODUCIR ACÁ') + '</button>' : '') +
+      '<a class="lp-btn" href="' + esc(item.url) + '" target="_blank" rel="noopener">ABRIR EN ' + (item.type === 'youtube' ? 'YOUTUBE' : 'TWITCH') + ' ↗</a>' +
+      '<button type="button" class="lp-btn is-ghost" data-lp="archive-back">VOLVER A LA PROGRAMACIÓN</button></div>' +
+      '<p class="lp-note">Reproducción integrada bajo acción explícita; si el proveedor bloquea el iframe, usá el enlace externo.</p>';
+  }
+
   function paint() {
     if (!host || !lastCtx) return;
     const model = buildModel(lastCtx);
-    const stage = model.liveList.length ? liveStage(model) : clipStage(model);
+    const stage = state.archive ? archiveStage() : (model.liveList.length && !state.showingClip ? liveStage(model) : clipStage(model));
     host.innerHTML =
       statusBanner(lastCtx, model) +
       '<section class="lp-stage" aria-label="Pantalla principal"><div class="lp-stage-main">' + stage + '</div>' + queueList(model) + '</section>' +
@@ -259,8 +291,19 @@
     if (action === 'play') { state.playing = !state.playing; paint(); }
     else if (action === 'prev') step(-1);
     else if (action === 'next') step(1);
-    else if (action === 'clip') { state.clipId = target.dataset.id; state.playing = false; paint(); }
+    else if (action === 'clip') { state.clipId = target.dataset.id; state.archive = null; state.showingClip = true; state.playing = false; paint(); }
+    else if (action === 'youtube' || action === 'vod') {
+      const url = safeUrl(target.dataset.url);
+      const id = action === 'youtube' ? videoId(url) : vodId(url);
+      state.archive = { type: action, id, url, title: target.dataset.title || '', owner: target.dataset.owner || '' };
+      state.showingClip = false;
+      state.playing = false;
+      paint();
+    }
+    else if (action === 'archive-back') { state.archive = null; state.showingClip = false; state.playing = false; paint(); }
     else if (action === 'who') {
+      state.archive = null;
+      state.showingClip = false;
       const id = target.dataset.id;
       const model = buildModel(lastCtx);
       const person = model.byId[id];
