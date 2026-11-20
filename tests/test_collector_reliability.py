@@ -117,6 +117,21 @@ class IncrementalHistoryTests(unittest.TestCase):
         update_platform_stats.append_history(record, "2026-11-16T15:58:00Z")
         self.assertEqual(len(record["history"]), 1)
 
+    def test_history_migrates_legacy_multiple_same_day_rows_to_latest_capture(self):
+        record = {"metrics": {"subscribers": 60}, "history": [
+            {"captured_at": "2026-11-19T08:00:00Z", "metrics": {"subscribers": 55}},
+            {"captured_at": "2026-11-19T16:00:00Z", "metrics": {"subscribers": 58}},
+            {"captured_at": "2026-11-20T06:00:00Z", "metrics": {"subscribers": 59}},
+        ]}
+        update_platform_stats.append_history(record, "2026-11-20T16:00:00Z")
+        by_day = {}
+        for item in record["history"]:
+            by_day.setdefault(item["captured_at"][:10], []).append(item)
+        self.assertEqual(len(by_day["2026-11-19"]), 1)
+        self.assertEqual(by_day["2026-11-19"][0]["metrics"]["subscribers"], 58)
+        self.assertEqual(len(by_day["2026-11-20"]), 1)
+        self.assertEqual(by_day["2026-11-20"][0]["metrics"]["subscribers"], 60)
+
     def test_history_appends_next_day_and_keeps_181_daily_points(self):
         record = {"metrics": {"subscribers": 56}, "history": [
             {"captured_at": "2026-11-15T00:00:00Z", "metrics": {}}
