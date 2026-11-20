@@ -143,6 +143,31 @@ def validate(registry, roster, now=None):
                 errors.append("{}: una métrica no disponible no puede contener un valor.".format(creator_id))
             if metric.get("status") == "delayed" and not metric.get("interpretation"):
                 errors.append("{}: una métrica demorada debe incluir interpretación temporal.".format(creator_id))
+        # Cada cuenta activa debe tener sus métricas centrales en el registro normalizado.
+        # Se valida la existencia del registro, no que cada valor sea siempre positivo:
+        # una cuenta puede estar offline o no tener actividad en la ventana observada.
+        required_by_platform = {
+            "twitch": {"live_status", "streams_observed", "average_viewers_sampled", "peak_viewers_sampled", "observed_live_hours"},
+            "youtube": {"subscribers", "total_views", "videos_total"},
+            "kick": {"live_status", "current_viewers"},
+        }
+        for platform, account in source["accounts"].items():
+            if account.get("account_type") != "creator_channel":
+                continue
+            required = required_by_platform.get(platform[0])
+            if not required:
+                continue
+            account_metrics = {
+                metric.get("key")
+                for metric in metrics
+                if (metric.get("platform"), metric.get("account_handle")) == platform
+            }
+            missing = sorted(required - account_metrics)
+            if missing:
+                errors.append("{}: faltan métricas normalizadas para {}: {}.".format(
+                    creator_id, platform[0], ", ".join(missing)
+                ))
+
         content = record.get("content") or {}
         if not isinstance(content.get("twitch_clips_count", 0), int) or content.get("twitch_clips_count", 0) < 0:
             errors.append("{}: twitch_clips_count inválido.".format(creator_id))
