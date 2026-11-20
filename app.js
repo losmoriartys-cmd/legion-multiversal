@@ -1167,8 +1167,8 @@ async function loadInstituteStats(){
    [resolvedChannels+'/'+expectedChannels,'COBERTURA DE CANALES',collectionComplete?'Todos los canales esperados fueron contabilizados':'Revisar canales pendientes o no contabilizados'],
    [fmt(channels.reduce((n,c)=>n+(Number(c.window?.estimated_hours_watched)||0),0),1),'HORAS DE AUDIENCIA ESTIMADAS','Estimación propia entre muestras consecutivas; no es analítica oficial']
   ].map(([value,label,note])=>{
-   const normalized=String(value).replace(/\\./g,'').replace(',','.');
-   const numeric=/^\\d+(?:\\.\\d+)?$/.test(normalized)?Number(normalized):null;
+   const normalized=String(value).replace(/\./g,'').replace(',','.');
+   const numeric=/^\d+(?:\.\d+)?$/.test(normalized)?Number(normalized):null;
    return '<article class="impact-kpi"><strong'+(numeric!==null?' data-stats-count="'+numeric+'"':'')+'>'+value+'</strong><span>'+label+'</span><small>'+note+'</small></article>';
   }).join('');
   statsAnimateCounters(document.getElementById('stats-summary'));
