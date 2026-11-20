@@ -85,6 +85,8 @@ def _series_change(points: list[dict], value_key: str, start: datetime, end: dat
     for point in points:
         at = parse_time(point.get("captured_at"))
         value = point.get(value_key)
+        if value is None and isinstance(point.get("metrics"), dict):
+            value = point["metrics"].get(value_key)
         if at is not None and isinstance(value, (int, float)) and not isinstance(value, bool):
             valid.append((at, float(value)))
     valid.sort(key=lambda row: row[0])
