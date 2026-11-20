@@ -188,8 +188,9 @@ def build(roster, twitch, platforms, clips, now=None):
                             status = source_status if freshness == "fresh" else freshness
                         method = "public_helix_snapshot" if is_status_metric else "55_minute_public_sampling"
 
+                    metric_period = source_period(metric_captured_at, metric_captured_at, "point_in_time") if is_follower_metric and metric_captured_at else period
                     metrics.append(make_metric(
-                        "twitch", handle, key, label, value, unit, metric_captured_at, period,
+                        "twitch", handle, key, label, value, unit, metric_captured_at, metric_period,
                         metric_source if not is_follower_metric else (channel.get("followers_source") or metric_source),
                         method, status, meaning, "data.json",
                     ))
