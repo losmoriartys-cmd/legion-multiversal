@@ -4,12 +4,14 @@ import argparse
 import json
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from scripts.growth_analytics import build_growth, build_shared_cases
 
 ROOT = Path(__file__).resolve().parents[1]
 ROSTER_FILE = ROOT / "roster-data.json"
 TWITCH_FILE = ROOT / "data.json"
 PLATFORM_FILE = ROOT / "platform-stats.json"
 CLIPS_FILE = ROOT / "clips-data.json"
+RECORDS_FILE = ROOT / "creator-records.json"
 OUTPUT_FILE = ROOT / "creator-metrics.json"
 FRESHNESS_MINUTES = {"twitch": 120, "youtube": 120, "kick": 120}
 
@@ -72,9 +74,11 @@ def read_json(path, default):
         return default
 
 
-def build(roster, twitch, platforms, clips, now=None):
+def build(roster, twitch, platforms, clips, now=None, records=None):
     now = (now or datetime.now(timezone.utc)).astimezone(timezone.utc).replace(microsecond=0)
     generated = iso(now)
+    records = records if isinstance(records, dict) else {"channels": {}}
+    shared_cases = build_shared_cases(roster)
     registry = {
         "schema_version": 2,
         "generated_at": generated,
@@ -83,6 +87,7 @@ def build(roster, twitch, platforms, clips, now=None):
             "twitch": "data.json",
             "platforms": "platform-stats.json",
             "clips": "clips-data.json",
+            "creator_records": "creator-records.json",
         },
         "source_snapshot": {
             "data.json": {"updated_at": twitch.get("updated_at")},
@@ -100,6 +105,7 @@ def build(roster, twitch, platforms, clips, now=None):
     twitch_channels = twitch.get("channels") or {}
     platform_creators = platforms.get("creators") or {}
     clip_creators = clips.get("creators") or {}
+    records["channels"] = records.get("channels") or {}
 
     for hero in roster.get("heroes") or []:
         creator_id = hero.get("id") or hero.get("slug")
@@ -238,12 +244,26 @@ def build(roster, twitch, platforms, clips, now=None):
                         "Lectura puntual; no equivale a espectadores únicos ni promedio.", "platform-stats.json",
                     ))
         creator_clips = clip_creators.get(creator_id) or {}
+        growth_account = next((
+            item for item in (hero.get("accounts") or [])
+            if item.get("account_type") == "creator_channel"
+        ), None)
+        growth_platform = growth_account.get("platform") if growth_account else None
+        growth_channel = twitch_channels.get(str((growth_account or {}).get("login") or "").lower()) or {}
+        growth_platform_record = (
+            ((platform_creators.get(creator_id) or {}).get("platforms") or {}).get(growth_platform) or {}
+        )
+        growth = build_growth(
+            creator_id, hero, growth_channel, growth_platform_record,
+            creator_clips, records, shared_cases, now,
+        )
         registry["creators"][creator_id] = {
             "display_name": hero.get("display_name") or hero.get("name") or creator_id,
             "identity_scope": hero.get("identity_scope"),
             "represented_people": hero.get("represented_people") or [],
             "accounts": accounts,
             "metrics": metrics,
+            "growth": growth,
             "content": {
                 "twitch_clips_status": creator_clips.get("status", "not_collected"),
                 "twitch_clips_captured_at": creator_clips.get("captured_at"),
@@ -261,7 +281,8 @@ def main():
     twitch = read_json(TWITCH_FILE, {})
     platforms = read_json(PLATFORM_FILE, {})
     clips = read_json(CLIPS_FILE, {})
-    result = build(roster, twitch, platforms, clips)
+    records = read_json(RECORDS_FILE, {"channels": {}})
+    result = build(roster, twitch, platforms, clips, records=records)
     if args.check:
         existing = read_json(OUTPUT_FILE, None)
         if existing != result:
