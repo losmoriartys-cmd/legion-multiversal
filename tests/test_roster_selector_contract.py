@@ -102,39 +102,40 @@ class RosterComicCardsContractTests(unittest.TestCase):
         self.assertIn("VER CARTA COMPLETA", self.app)
         self.assertIn("openHeroModal(' + index + ')", self.app)
 
-    def test_cards_use_the_shared_objective_brand_model_and_fixed_three_slots(self):
+    def test_cards_use_normalized_metrics_as_the_commercial_source_of_truth(self):
         start = self.app.index("function renderRosterSelector()")
-        end = self.app.index("\nfunction selectRosterCreator", start)
+        end = self.app.index("\\nfunction selectRosterCreator", start)
         renderer = self.app[start:end]
-        context = self.app.split("function getRosterBrandContext", 1)[1].split("function renderRosterBrandSlots", 1)[0]
+        context = self.app.split("function getRosterBrandContext", 1)[1].split("function normalizedMetricSlotDetail", 1)[0]
+        slots = self.app.split("function getRosterBrandSlots", 1)[1].split("function renderRosterBrandSlots", 1)[0]
         self.assertIn("getRosterBrandContext(hero, channel, account)", renderer)
         self.assertIn("renderRosterBrandSlots(hero, brandContext)", renderer)
         self.assertIn("renderSocialIcons(hero)", renderer)
         self.assertIn("hero.tagline", renderer)
         self.assertNotIn("hero.role_label || platformName", renderer)
-        self.assertIn("window.LMBrand.cardSlots", self.app)
-        self.assertIn("window.LMBrand.computeRhythm", self.app)
-        self.assertIn("getNormalizedCreatorMetric(hero, 'average_viewers_sampled', 'twitch')", context)
-        self.assertIn("getCreatorAudienceMetric(hero)", context)
-        self.assertIn("last_published", context)
-        self.assertIn("comic-roster-stat-audience", self.app)
+        self.assertIn("metric('average_viewers_sampled')", context)
+        self.assertIn("metric('observed_live_hours')", context)
+        self.assertIn("metric('streams_observed')", context)
+        self.assertIn("metric('subscribers')", context)
+        self.assertIn("metric('total_views')", context)
+        self.assertIn("metric('videos_total')", context)
+        self.assertNotIn("getCreatorAudienceMetric(hero)", context)
+        self.assertIn("normalizedMetricValue", slots)
+        self.assertIn("normalizedMetricSlotDetail", slots)
         self.assertIn("comic-roster-stat-average", self.app)
         self.assertIn("comic-roster-stat-activity", self.app)
-        audience = self.app.split("function getCreatorAudienceMetric", 1)[1].split("function getMostPlayedGames", 1)[0]
-        self.assertIn("platform?.status==='verified'", audience)
-        self.assertIn("twitchMetricsData?.channels?.[login]", audience)
-        self.assertIn("TwitchMetrics", audience)
-        self.assertIn("SullyGnome", audience)
-        self.assertIn("asOf:", audience)
+        self.assertNotIn("window.LMBrand.cardSlots", self.app)
+        self.assertIn("window.LMBrand.computeRhythm", self.app)
+        self.assertIn("last_published", context)
         self.assertNotIn("RITMO: EN SEGUIMIENTO", renderer)
         self.assertIn("getNormalizedLiveStatus(hero)", renderer)
         self.assertNotIn("getRosterLiveState(hero)", renderer)
         self.assertNotIn("hero.schedule", renderer)
-        self.assertIn("Seguidores", audience)
         self.assertIn("SIN DATOS SUFICIENTES", self.brand_model)
         self.assertIn("MIN_SAMPLES = 20", self.brand_model)
         self.assertIn("MIN_SPAN_DAYS = 14", self.brand_model)
         self.assertIn("WINDOW_DAYS = 28", self.brand_model)
+        self.assertIn("creator-metrics.json", (ROOT / "creator-profile-core.js").read_text(encoding="utf-8"))
 
     def test_roster_schema_declares_confirmed_social_platforms(self):
         properties = self.roster_schema["properties"]["heroes"]["items"]["properties"]
