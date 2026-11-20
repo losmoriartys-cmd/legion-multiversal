@@ -2,7 +2,7 @@
 from __future__ import annotations
 import json
 import sys
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -103,6 +103,10 @@ def validate_data(data):
             continue
         previous_time = None
         live_count = 0
+        window_days = data.get("window_days") if isinstance(data.get("window_days"), int) else 30
+        reference_time = parse_timestamp(data.get("updated_at"))
+        window_cutoff = reference_time - timedelta(days=window_days) if reference_time else None
+        recent_count = 0
         for index, snapshot in enumerate(snapshots):
             for issue in validate_snapshot(snapshot, previous_time):
                 errors.append("{}: snapshot {}: {}".format(login, index, issue))
@@ -110,13 +114,15 @@ def validate_data(data):
                 timestamp = parse_timestamp(snapshot.get("sampled_at"))
                 if timestamp is not None and (previous_time is None or timestamp > previous_time):
                     previous_time = timestamp
-                if snapshot.get("is_live") is True:
-                    live_count += 1
+                if timestamp is not None and (window_cutoff is None or timestamp >= window_cutoff):
+                    recent_count += 1
+                    if snapshot.get("is_live") is True:
+                        live_count += 1
         window = channel.get("window") or {}
-        if window.get("samples_total") != len(snapshots):
-            errors.append("{}: window.samples_total no coincide con snapshots".format(login))
+        if window.get("samples_total") != recent_count:
+            errors.append("{}: window.samples_total no coincide con las muestras de los últimos {} días".format(login, window_days))
         if window.get("live_samples") != live_count:
-            errors.append("{}: window.live_samples no coincide con las muestras live".format(login))
+            errors.append("{}: window.live_samples no coincide con las muestras live de los últimos {} días".format(login, window_days))
         for field in ("average_viewers_sampled", "peak_viewers_sampled", "observed_live_hours", "estimated_hours_watched"):
             value = window.get(field)
             if value is not None and (not isinstance(value, (int, float)) or isinstance(value, bool) or value < 0):
