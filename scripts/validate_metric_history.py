@@ -2,7 +2,7 @@
 from __future__ import annotations
 import json
 import sys
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -73,14 +73,40 @@ def validate_data(data):
         viewers = channel.get("current_viewers")
         if viewers is not None and (not isinstance(viewers, int) or isinstance(viewers, bool) or viewers < 0):
             errors.append("{}: current_viewers inválido".format(login))
-        if channel.get("followers_total") is not None:
-            errors.append("{}: followers_total requiere autorización/captura específica y no se acepta en este colector público".format(login))
+        followers_total = channel.get("followers_total")
+        followers_captured_at = channel.get("followers_captured_at")
+        if followers_total is not None:
+            if not isinstance(followers_total, int) or isinstance(followers_total, bool) or followers_total < 0:
+                errors.append("{}: followers_total debe ser entero no negativo o null".format(login))
+            if parse_timestamp(followers_captured_at) is None:
+                errors.append("{}: followers_total requiere followers_captured_at válido".format(login))
+        followers_history = channel.get("followers_history") or []
+        if not isinstance(followers_history, list):
+            errors.append("{}: followers_history debe ser una lista".format(login))
+        else:
+            previous_follower_date = None
+            for point in followers_history:
+                date_value = point.get("date") if isinstance(point, dict) else None
+                value = point.get("followers_total") if isinstance(point, dict) else None
+                captured = point.get("captured_at") if isinstance(point, dict) else None
+                if not isinstance(date_value, str) or parse_timestamp(captured) is None:
+                    errors.append("{}: punto de followers_history sin fecha/captura válida".format(login))
+                    continue
+                if previous_follower_date is not None and date_value <= previous_follower_date:
+                    errors.append("{}: followers_history debe estar ordenado y sin días repetidos".format(login))
+                previous_follower_date = date_value
+                if not isinstance(value, int) or isinstance(value, bool) or value < 0:
+                    errors.append("{}: followers_history contiene un contador inválido".format(login))
         snapshots = channel.get("snapshots")
         if not isinstance(snapshots, list):
             errors.append("{}: snapshots debe ser una lista".format(login))
             continue
         previous_time = None
         live_count = 0
+        window_days = data.get("window_days") if isinstance(data.get("window_days"), int) else 30
+        reference_time = parse_timestamp(data.get("updated_at"))
+        window_cutoff = reference_time - timedelta(days=window_days) if reference_time else None
+        recent_count = 0
         for index, snapshot in enumerate(snapshots):
             for issue in validate_snapshot(snapshot, previous_time):
                 errors.append("{}: snapshot {}: {}".format(login, index, issue))
@@ -88,13 +114,15 @@ def validate_data(data):
                 timestamp = parse_timestamp(snapshot.get("sampled_at"))
                 if timestamp is not None and (previous_time is None or timestamp > previous_time):
                     previous_time = timestamp
-                if snapshot.get("is_live") is True:
-                    live_count += 1
+                if timestamp is not None and (window_cutoff is None or timestamp >= window_cutoff):
+                    recent_count += 1
+                    if snapshot.get("is_live") is True:
+                        live_count += 1
         window = channel.get("window") or {}
-        if window.get("samples_total") != len(snapshots):
-            errors.append("{}: window.samples_total no coincide con snapshots".format(login))
+        if window.get("samples_total") != recent_count:
+            errors.append("{}: window.samples_total no coincide con las muestras de los últimos {} días".format(login, window_days))
         if window.get("live_samples") != live_count:
-            errors.append("{}: window.live_samples no coincide con las muestras live".format(login))
+            errors.append("{}: window.live_samples no coincide con las muestras live de los últimos {} días".format(login, window_days))
         for field in ("average_viewers_sampled", "peak_viewers_sampled", "observed_live_hours", "estimated_hours_watched"):
             value = window.get(field)
             if value is not None and (not isinstance(value, (int, float)) or isinstance(value, bool) or value < 0):

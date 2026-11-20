@@ -200,6 +200,25 @@ class RosterComicCardsContractTests(unittest.TestCase):
         self.assertIn("Perfil de interés:", contact_forms)
         self.assertIn("PROPONER UNA COLABORACIÓN", self.app)
 
+    def test_growth_chapter_exposes_periods_content_collaborations_and_consent(self):
+        self.assertIn("function renderGrowthWindowPanel", self.app)
+        self.assertIn("data-growth-window", self.app)
+        self.assertIn("data-growth-panel", self.app)
+        self.assertIn("function renderGrowthContentPerformance", self.app)
+        self.assertIn("function renderGrowthCollaborations", self.app)
+        self.assertIn("function renderGrowthAdvancedAudience", self.app)
+        self.assertIn("No hay datos privados autorizados para publicar", self.app)
+        self.assertIn("DATO APORTADO POR EL CREADOR", self.app)
+        self.assertIn("No se suman audiencias entre canales", self.app)
+        for selector in (
+            ".hero-growth-window-tabs",
+            ".hero-growth-comparison",
+            ".hero-growth-content-card",
+            ".hero-growth-case",
+            ".hero-growth-audience",
+        ):
+            self.assertIn(selector, self.css)
+
     def test_community_bitacora_mission_tracks_the_individual_dossier_tab(self):
         self.assertIn("button.dataset.profileTab==='bitacora'", self.app)
         playbook = json.loads((ROOT / "community-playbook.json").read_text(encoding="utf-8"))

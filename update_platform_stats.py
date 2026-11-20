@@ -1,6 +1,6 @@
 import json, os, urllib.parse, urllib.request, urllib.error, time
 from email.utils import parsedate_to_datetime
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 
 ROSTER="roster-data.json"
 OUTPUT="platform-stats.json"
@@ -74,19 +74,68 @@ def youtube(handle,key):
             videos=[{"video_id":v.get("id"),"title":v.get("snippet",{}).get("title"),"published_at":v.get("snippet",{}).get("publishedAt"),"views":int(v.get("statistics",{}).get("viewCount",0)),"likes":int(v["statistics"]["likeCount"]) if "likeCount" in v.get("statistics",{}) else None,"comments":int(v["statistics"]["commentCount"]) if "commentCount" in v.get("statistics",{}) else None,"url":"https://www.youtube.com/watch?v="+v.get("id","")} for v in rows]
     return {"platform":"youtube","handle":handle,"url":"https://www.youtube.com/"+(handle if handle.startswith("@") else "@"+handle),"display_name":sn.get("title"),"thumbnail_url":(sn.get("thumbnails",{}).get("high") or sn.get("thumbnails",{}).get("default") or {}).get("url"),"metrics":{"subscribers":int(st["subscriberCount"]) if "subscriberCount" in st else None,"total_views":int(st["viewCount"]) if "viewCount" in st else None,"videos_total":int(st["videoCount"]) if "videoCount" in st else None},"recent_videos":videos,"source":"YouTube Data API v3","status":"verified","methodology":"Datos públicos acumulados del canal y hasta 10 videos recientes. El contador de suscriptores puede estar redondeado por YouTube."}
 
+HISTORY_DAYS = 180
+
+
 def append_history(record, captured_at):
-    """Conserva una observación por hora UTC y limita la retención a 90 registros."""
+    """Conserva una observación diaria UTC para crecimiento a 7/30/90 y comparativas."""
     history = record.get("history")
     if not isinstance(history, list):
         history = []
-    hour = captured_at[:13]
-    if not history or str(history[-1].get("captured_at", ""))[:13] != hour:
-        history.append({
-            "captured_at": captured_at,
-            "metrics": record.get("metrics") or {}
-        })
-    record["history"] = history[-90:]
+    today = captured_at[:10]
+    cutoff = (datetime.fromisoformat(captured_at.replace("Z", "+00:00")).date() - timedelta(days=HISTORY_DAYS)).isoformat()
+    # Migra históricos horarios anteriores a una sola observación por día,
+    # conservando la última lectura disponible de cada fecha.
+    daily = {}
+    for item in history:
+        if not isinstance(item, dict):
+            continue
+        timestamp = item.get("captured_at")
+        if not isinstance(timestamp, str) or len(timestamp) < 10 or timestamp[:10] < cutoff or timestamp[:10] >= today:
+            continue
+        day = timestamp[:10]
+        if day not in daily or timestamp > daily[day].get("captured_at", ""):
+            daily[day] = item
+    daily[today] = {
+        "captured_at": captured_at,
+        "metrics": record.get("metrics") or {}
+    }
+    history = sorted(daily.values(), key=lambda item: item.get("captured_at") or "")
+    record["history"] = history
     return record
+
+
+def append_video_history(videos, previous_videos, captured_at):
+    """Añade una captura diaria de views/likes/comments por video de YouTube."""
+    previous_by_id = {
+        str(item.get("video_id")): item
+        for item in (previous_videos or [])
+        if isinstance(item, dict) and item.get("video_id")
+    }
+    today = captured_at[:10]
+    cutoff = (datetime.fromisoformat(captured_at.replace("Z", "+00:00")).date() - timedelta(days=HISTORY_DAYS)).isoformat()
+    for video in videos or []:
+        prior = previous_by_id.get(str(video.get("video_id"))) or {}
+        history = list(prior.get("view_history") or [])
+        point = {
+            "date": today,
+            "captured_at": captured_at,
+            "views": video.get("views"),
+            "likes": video.get("likes"),
+            "comments": video.get("comments"),
+        }
+        history = [item for item in history if item.get("date") != today]
+        if isinstance(point["views"], int) and point["views"] >= 0:
+            history.append(point)
+        history = [
+            item for item in history
+            if isinstance(item, dict) and isinstance(item.get("date"), str)
+            and item["date"] >= cutoff and isinstance(item.get("views"), int)
+            and item["views"] >= 0
+        ]
+        history.sort(key=lambda item: item["date"])
+        video["view_history"] = history
+    return videos
 
 
 def kick_token(cid,secret):
@@ -140,6 +189,11 @@ def main():
                     if not ykey:
                         raise EnvironmentError("Falta el secreto YOUTUBE_API_KEY.")
                     record = youtube(handle, ykey)
+                    record["recent_videos"] = append_video_history(
+                        record.get("recent_videos") or [],
+                        old_platforms.get("youtube", {}).get("recent_videos") or [],
+                        captured,
+                    )
                 elif platform == "kick":
                     if not (cid and secret):
                         raise EnvironmentError("Faltan KICK_CLIENT_ID y KICK_CLIENT_SECRET.")

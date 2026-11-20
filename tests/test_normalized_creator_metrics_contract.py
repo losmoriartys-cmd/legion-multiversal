@@ -80,7 +80,10 @@ class NormalizedCreatorMetricsContractTests(unittest.TestCase):
                     f"{creator_id} / {metric.get('key')}",
                 )
                 self.assertEqual(metric.get("visibility"), "public")
-                self.assertTrue(metric.get("captured_at"), f"{creator_id} / {metric.get('key')}")
+                if metric.get("status") == "unavailable":
+                    self.assertIsNone(metric.get("captured_at"), f"{creator_id} / {metric.get('key')}")
+                else:
+                    self.assertTrue(metric.get("captured_at"), f"{creator_id} / {metric.get('key')}")
 
     def test_twitch_metrics_keep_their_exact_keys_and_units(self):
         creators = self.metrics["creators"]

@@ -1763,76 +1763,147 @@ function renderHeroGrowthTrend(points,title,unit,sourceLabel){
  }).join('');
  return '<section class="hero-growth-trend"><div class="hero-growth-trend-head"><strong>'+safe(title)+'</strong><span>'+safe(rows.length)+' CAPTURAS</span></div><div class="hero-growth-trend-result"><b class="'+(delta<0?'is-negative':'is-positive')+'">'+safe(sign+statsNumber(delta,0))+'</b><span>variación desde '+safe(statsDate(first.date))+' hasta '+safe(statsDate(last.date))+(percent===null?'':' · '+safe(sign+statsNumber(percent,1))+'%')+'</span></div><div class="hero-growth-bars" role="img" aria-label="'+safe(title)+'; evolución desde '+safe(statsDate(first.date))+' hasta '+safe(statsDate(last.date))+'">'+bars+'</div><small>Fuente: '+safe(sourceLabel)+' · valores diarios, una captura por fecha</small></section>';
 }
+function growthDisplayNumber(value,digits=1){
+ return typeof value==='number'&&Number.isFinite(value)?statsNumber(value,digits):'—';
+}
+function growthSigned(value,digits=0){
+ if(typeof value!=='number'||!Number.isFinite(value))return '—';
+ return (value>0?'+':'')+statsNumber(value,digits);
+}
+function renderGrowthWindowPanel(windowData,key,platform){
+ const safe=escapeStatsHtml,metrics=windowData?.metrics||{},coverage=windowData?.coverage||{},comparison=windowData?.comparison||{};
+ const cards=[];
+ const numberCard=(label,value,note)=>cards.push({label,value,note});
+ if(platform==='twitch'){
+  const follower=metrics.followers||{};
+  const currentFollowers=metrics.followers_total;
+  const followerCurrentLabel=metrics.followers_status==='fresh'?'SEGUIDORES ACTUALES':currentFollowers!==null?'ÚLTIMA CIFRA REGISTRADA':'SEGUIDORES ACTUALES';
+  const followerCurrentNote=metrics.followers_status==='fresh'
+   ?'Twitch Helix · captura '+normalizedMetricCaptureLabel({capturedAt:metrics.followers_captured_at})
+   :currentFollowers!==null
+    ?'Dato histórico, no vigente · última captura '+normalizedMetricCaptureLabel({capturedAt:metrics.followers_captured_at})
+    :'Esperando autorización OAuth de solo lectura';
+  numberCard(followerCurrentLabel,currentFollowers===null?'PENDIENTE':statsNumber(currentFollowers,0),followerCurrentNote);
+  numberCard('SEGUIDORES GANADOS',follower.status==='available'?growthSigned(follower.change,0):follower.status==='baseline_pending'?'BASE PENDIENTE':'SIN DATOS',
+   follower.status==='available'?(follower.basis==='since_first_capture'?'Desde primera captura propia · '+(follower.change_pct===null?'variación porcentual no disponible':growthSigned(follower.change_pct,1)+'%'):'Comparación de capturas públicas del período'): 'Hace falta una base de capturas diarias de seguidores');
+  numberCard('DIRECTOS OBSERVADOS',growthDisplayNumber(metrics.streams_observed,0),'IDs de stream distintos detectados por Helix');
+  numberCard('DIRECTOS / SEMANA',growthDisplayNumber(metrics.streams_per_week,2),'Ritmo calculado sobre '+windowData.days+' días');
+  numberCard('DÍAS ACTIVOS',growthDisplayNumber(metrics.active_days,0)+' / '+windowData.days,'Días UTC con al menos una muestra en directo');
+  numberCard('HORAS OBSERVADAS',growthDisplayNumber(metrics.observed_live_hours,1)+' h','Intervalos observados del mismo stream; no son horas oficiales del VOD');
+  numberCard('HORAS OBSERVADAS / SEMANA',growthDisplayNumber(metrics.observed_hours_per_week,2)+' h','Promedio semanal estimado desde los intervalos observados');
+  numberCard('SEMANAS ACTIVAS',growthDisplayNumber(metrics.active_weeks,0)+' semanas','Semanas calendario con al menos una muestra en directo');
+  numberCard('PROMEDIO MUESTREADO',metrics.average_viewers_sampled===null?'SIN DATOS':growthDisplayNumber(metrics.average_viewers_sampled,1),'Muestras públicas de espectadores; no es CCV oficial');
+  numberCard('PICO MUESTREADO',metrics.peak_viewers_sampled===null?'SIN DATOS':growthDisplayNumber(metrics.peak_viewers_sampled,0),'Mayor lectura puntual guardada por el colector');
+ }else if(platform==='youtube'){
+  const subs=metrics.subscribers_gained||{},views=metrics.views_gained||{},videos=metrics.videos_published||{};
+  const value=item=>item.status==='available'?growthSigned(item.change,0):item.status==='baseline_pending'?'BASE PENDIENTE':'SIN DATOS';
+  numberCard('SUSCRIPTORES GANADOS',value(subs),'Diferencia de capturas públicas diarias');
+  numberCard('VISUALIZACIONES GANADAS',value(views),'Variación acumulada del canal en el período');
+  numberCard('VIDEOS PUBLICADOS',value(videos),'Diferencia de contador del canal');
+  numberCard('RITMO DE PUBLICACIÓN',videos.status==='available'?growthDisplayNumber(videos.change*7/windowData.days,2)+' videos / semana':'BASE PENDIENTE','Frecuencia calculada sobre '+windowData.days+' días');
+ }
+ const cardsHtml=cards.map(item=>'<article class="hero-growth-card"><small>'+safe(item.label)+'</small><strong>'+safe(item.value)+'</strong><span>'+safe(item.note)+'</span></article>').join('');
+ const periodLabel=windowData?.period?.from&&windowData?.period?.to
+  ?statsDate(String(windowData.period.from).slice(0,10))+' — '+statsDate(String(windowData.period.to).slice(0,10))
+  :'período no informado';
+ const lastObserved=coverage.last_observed_at?' · ÚLTIMA MUESTRA '+normalizedMetricCaptureLabel({capturedAt:coverage.last_observed_at}):' · SIN CAPTURAS EN EL PERÍODO';
+ const coverageText='PERÍODO · '+safe(periodLabel)+' · COBERTURA · '+safe(coverage.sampled_days??0)+' / '+safe(coverage.expected_days??windowData.days)+' días · '+safe(growthDisplayNumber(coverage.coverage_pct,1))+'%'+safe(lastObserved);
+ const coverageNote=coverage.status==='sufficient'
+  ?'Cobertura suficiente para comparar con el período previo.'
+  :'Cobertura parcial: los datos disponibles se muestran, pero no se comparan como si fueran una ventana completa.';
+ const comparisonHtml=comparison.status==='available'
+  ?'<div class="hero-growth-comparison"><strong>VS. LOS '+safe(windowData.days)+' DÍAS ANTERIORES</strong><div>'+Object.entries(comparison.metrics||{}).map(([metric,item])=>'<span><b>'+safe(metric==='streams_observed'?'Directos':metric==='active_days'?'Días activos':metric==='observed_live_hours'?'Horas observadas':metric==='average_viewers_sampled'?'Promedio muestreado':metric==='followers_gained'?'Seguidores ganados':metric==='subscribers_gained'?'Suscriptores':metric==='views_gained'?'Visualizaciones':'Videos')+'</b><strong>'+safe(growthSigned(item.change,metric==='average_viewers_sampled'?1:0))+'</strong></span>').join('')+'</div><small>Variación frente al período anterior de igual duración. Las unidades se mantienen por separado.</small></div>'
+  :'<p class="hero-growth-comparison-pending">Comparación anterior no disponible: '+safe(comparison.status==='insufficient_coverage'?'falta cobertura histórica suficiente en ambos períodos.':'faltan capturas de referencia.')+'</p>';
+ return '<section class="hero-growth-window-panel" data-growth-panel="'+safe(key)+'" '+(key==='30d'?'':'hidden')+'><div class="hero-growth-grid">'+cardsHtml+'</div><div class="hero-growth-coverage"><strong>'+coverageText+'</strong><span>'+safe(coverageNote)+'</span></div>'+comparisonHtml+'</section>';
+}
+function renderGrowthContentPerformance(content,platform){
+ const safe=escapeStatsHtml;
+ const items=platform==='youtube'?(content?.videos||[]):(content?.top_clips||[]);
+ if(!items.length)return '<p class="hero-growth-empty">Todavía no hay contenido con métricas públicas suficientes para destacar.</p>';
+ return '<div class="hero-growth-content-grid">'+items.slice(0,5).map(item=>{
+  const change=item.views_gained?.['30d'];
+  const changeLabel=change?.status==='available'?'+'+statsNumber(change.change,0)+' vistas desde '+(change.basis==='since_first_capture'?'la primera captura':'el inicio de la ventana'):change?.status==='baseline_pending'?'Evolución pendiente de una segunda captura':'Sin base histórica';
+  const extra=platform==='youtube'
+   ?'<small>Me gusta: '+safe(item.likes??'—')+' · Comentarios: '+safe(item.comments??'—')+' · Interacción pública: '+safe(item.public_interaction_rate_pct===null?'—':statsNumber(item.public_interaction_rate_pct,1)+'%')+'</small>'
+   :'';
+  return '<article class="hero-growth-content-card"><div><small>'+(platform==='youtube'?'YOUTUBE · VIDEO':'TWITCH · CLIP')+'</small><strong>'+safe(item.title||'Contenido destacado')+'</strong></div><b>'+safe(statsNumber(item.views,0))+' visualizaciones</b><span>'+safe(changeLabel)+'</span>'+extra+'<a href="'+safe(item.url)+'" target="_blank" rel="noopener noreferrer">VER CONTENIDO ↗</a></article>';
+ }).join('')+'</div>';
+}
+function renderGrowthCollaborations(data){
+ const safe=escapeStatsHtml,heroes=Array.isArray(heroesData)?heroesData:[];
+ const cases=data?.shared_cases||[],results=data?.reported_results||[];
+ const name=id=>getHeroDisplayName(heroes.find(hero=>hero.id===id)||{name:id||'Integrante'});
+ const caseHtml=cases.map(item=>'<article class="hero-growth-case"><div class="hero-growth-case-head"><strong>'+safe(item.title)+'</strong><span>'+safe(item.date?statsDate(item.date):'Fecha no informada')+'</span></div><p>Participantes: '+safe((item.participants||[]).map(name).join(' · '))+'</p><p>Entregables enlazados: '+safe(item.deliverables?.length||0)+' VOD</p><div>'+(item.deliverables||[]).map(link=>'<a href="'+safe(link.url)+'" target="_blank" rel="noopener noreferrer">'+safe(name(link.creator_id))+' · VER VOD ↗</a>').join('')+'</div><small>Fuente: '+safe(item.source||'Bitácora')+' · caso documentado; no representa alcance total.</small></article>').join('');
+ const resultHtml=results.map(item=>{
+  const evidence=item.verification_status==='creator_reported'?'DATO APORTADO POR EL CREADOR':item.verification_status==='platform_verified'?'FUENTE DE PLATAFORMA':'FUENTE PÚBLICA';
+  return '<article class="hero-growth-case hero-growth-case-result"><div class="hero-growth-case-head"><strong>'+safe(item.title)+'</strong><span>'+safe(item.date?statsDate(item.date):'Fecha no informada')+'</span></div><span class="hero-growth-evidence">'+safe(evidence)+'</span><p>'+safe(item.format||'Colaboración documentada')+' · participantes: '+safe((item.participants||[]).map(name).join(' · '))+'</p><div class="hero-growth-result-grid">'+(item.metrics||[]).map(metric=>'<span><small>'+safe(metric.label)+'</small><b>'+safe(statsNumber(metric.value,Number.isInteger(metric.value)?0:1))+'</b><em>'+safe(metric.unit)+'</em></span>').join('')+'</div><small>Alcance del registro: '+safe(name(item.channel_scope))+' · fuente: '+safe(item.source)+'. No se suman audiencias entre canales.</small>'+(item.note?'<p>'+safe(item.note)+'</p>':'')+'</article>';
+ }).join('');
+ if(!caseHtml&&!resultHtml)return '<p class="hero-growth-empty">Todavía no hay colaboraciones o resultados medibles documentados en este expediente.</p>';
+ // Los vínculos de partners y plataformas de acceso ya se muestran en Recorrido.
+ // Crecimiento conserva solo casos, entregables y resultados; evita duplicar esos enlaces.
+ return '<div class="hero-growth-collaboration-grid">'+caseHtml+resultHtml+'</div>';
+}
+function renderGrowthAdvancedAudience(report){
+ const safe=escapeStatsHtml;
+ if(report?.status!=='authorized_public_aggregate'){
+  return '<section class="hero-growth-audience"><strong>AUDIENCIA AVANZADA · INFORME DEL CREADOR</strong><p>No hay datos privados autorizados para publicar. Este apartado solo se completa con un informe agregado, su período y la autorización explícita del creador.</p><small>No se solicitan ni publican identidades, datos individuales ni segmentos con menos de cinco observaciones.</small></section>';
+ }
+ return '<section class="hero-growth-audience"><strong>AUDIENCIA AVANZADA · DATOS AGREGADOS AUTORIZADOS</strong><span>'+safe(report.source)+' · '+safe(report.captured_at?normalizedMetricCaptureLabel({capturedAt:report.captured_at}):'fecha no informada')+'</span><div class="hero-growth-result-grid">'+(report.metrics||[]).map(metric=>'<span><small>'+safe(metric.label)+'</small><b>'+safe(statsNumber(metric.value,Number.isInteger(metric.value)?0:1))+'</b><em>'+safe(metric.unit)+'</em></span>').join('')+'</div>'+(report.breakdowns?.length?'<div class="hero-growth-breakdowns">'+report.breakdowns.map(item=>'<span>'+safe(item.dimension==='age_range'?'Edad':item.dimension==='country'?'País':'Región')+': <b>'+safe(item.label)+'</b> · '+safe(statsNumber(item.share_pct,1))+'% ('+safe(item.sample_size)+' observaciones)</span>').join('')+'</div>':'')+'<small>'+safe(report.note)+'</small></section>';
+}
 function renderHeroGrowthChapter(hero,channel,sully){
  const safe=escapeStatsHtml,account=(hero?.accounts||[]).find(item=>item?.account_type==='creator_channel')||(hero?.accounts||[])[0]||null;
- const cards=[];
- let trend='';
- if(account?.platform==='twitch'){
-  const followers=getNormalizedCreatorMetric(hero,'followers_total','twitch');
-  if(followers.state==='available'){
-   cards.push({label:'SEGUIDORES ACTUALES',value:statsNumber(followers.value,0),note:'Twitch · captura '+normalizedMetricCaptureLabel(followers)});
-  }else if(followers.state==='stale'){
-   cards.push({label:'ÚLTIMA CIFRA REGISTRADA',value:statsNumber(followers.value,0),note:'No vigente · última captura '+normalizedMetricCaptureLabel(followers)});
-  }else{
-   cards.push({label:'SEGUIDORES ACTUALES',value:'PENDIENTE',note:'Se activa al conectar OAuth de solo lectura; no requiere moderador.'});
-  }
-  const points=(channel?.followers_history||[]).map(point=>({date:point.date,captured_at:point.captured_at,value:point.followers_total}));
-  trend=renderHeroGrowthTrend(points,'EVOLUCIÓN DE SEGUIDORES EN TWITCH','seguidores','Twitch Helix · total público');
- }else if(account?.platform==='youtube'){
-  const definitions=[
-   ['subscribers','SUSCRIPTORES',0],
-   ['total_views','VISUALIZACIONES ACUMULADAS',0],
-   ['videos_total','VIDEOS PUBLICADOS',0]
-  ];
-  definitions.forEach(([key,label,digits])=>{
-   const metric=getNormalizedCreatorMetric(hero,key,'youtube');
-   cards.push({label,value:metric.state==='available'?statsNumber(metric.value,digits):metric.state==='stale'?statsNumber(metric.value,digits)+' · HISTÓRICO':'PENDIENTE',note:metric.state==='available'?'YouTube · captura '+normalizedMetricCaptureLabel(metric):'No hay una captura pública vigente.'});
-  });
-  const platform=platformStatsData?.creators?.[creatorRecordKey(hero)]?.platforms?.youtube;
-  const points=(platform?.history||[]).map(point=>({captured_at:point.captured_at,value:point.metrics?.subscribers}));
-  trend=renderHeroGrowthTrend(points,'EVOLUCIÓN DE SUSCRIPTORES EN YOUTUBE','suscriptores','YouTube Data API v3');
- }else{
-  cards.push({label:'AUDIENCIA',value:'SIN CUENTA DE CREADOR',note:'No hay una plataforma principal vinculada a este expediente.'});
- }
+ const creator=creatorMetricsData?.creators?.[creatorRecordKey(hero)]||{};
+ const growth=creator.growth||{},windows=growth.windows||{},platform=account?.platform||growth.platform;
+ const selectedWindow=windows['30d'];
+ const windowTabs=['7d','30d','90d'].map(key=>'<button type="button" class="hero-growth-window-tab'+(key==='30d'?' is-active':'')+'" role="tab" aria-selected="'+(key==='30d'?'true':'false')+'" aria-controls="growth-window-'+key+'" data-growth-window="'+key+'" onclick="activateHeroGrowthWindow(this)">'+key.toUpperCase()+'</button>').join('');
+ const windowPanels=Object.entries(windows).map(([key,value])=>renderGrowthWindowPanel(value,key,platform).replace('data-growth-panel="'+key+'"','id="growth-window-'+key+'" data-growth-panel="'+key+'"')).join('');
+ const coverageHtml=Object.keys(windows).length?'<section class="hero-growth-periods"><div class="hero-growth-period-head"><div><strong>EVOLUCIÓN Y CONSISTENCIA</strong><span>Período actual frente al anterior, cuando la cobertura lo permite</span></div><div class="hero-growth-window-tabs" role="tablist" aria-label="Seleccionar período de crecimiento">'+windowTabs+'</div></div>'+windowPanels+'</section>':'<p class="hero-growth-empty">La plataforma principal todavía no dispone de historial suficiente para construir ventanas comparables.</p>';
+ const content= growth.content_performance||{};
+ const contentCapture=content?.captured_at?normalizedMetricCaptureLabel({capturedAt:content.captured_at}):'captura no disponible';
+ const contentStatus=content?.status==='error'||content?.status==='unavailable'
+  ?'Última captura conservada; el recolector no pudo actualizar en el último intento.'
+  :'Captura de referencia: '+contentCapture+'.';
+ const contentHtml='<section class="hero-growth-content"><header><div><strong>RENDIMIENTO DEL CONTENIDO</strong><span>Contenido público destacado y crecimiento desde la primera captura propia</span></div><span class="hero-growth-source-stamp">'+safe(platform==='youtube'?'YOUTUBE DATA API':'TWITCH HELIX')+'</span></header>'+renderGrowthContentPerformance(content,platform)+'<small>'+safe(contentStatus)+' '+safe(content.methodology||'Las visualizaciones históricas comienzan cuando el recolector registra la primera observación diaria.')+'</small></section>';
+ const collab=growth.collaborations||{};
+ const collaborationHtml='<section class="hero-growth-collaborations"><header><div><strong>COLABORACIONES Y RESULTADOS</strong><span>Casos documentados, entregables y cifras individuales con su fuente</span></div></header>'+renderGrowthCollaborations(collab)+'</section>';
+ const audienceHtml=renderGrowthAdvancedAudience(growth.advanced_audience);
  const summary=sully?.annual_summary_2026||sully?.summary||{};
  const externalStatus=sully?.status||'pending';
  const period=sully?.period?.start_date&&sully?.period?.end_date
   ?statsDate(sully.period.start_date)+' — '+statsDate(sully.period.end_date)
   :sully?.period?.label||'Período no informado';
- const isYoutube=account?.platform==='youtube';
- const sourceLabel=isYoutube
-  ?'CAPTURAS PROPIAS · YOUTUBE DATA API'
-  :externalStatus==='user_supplied_summary'||externalStatus==='user_supplied_annual_summary'
-   ?'RESUMEN APORTADO · SIN VERIFICACIÓN INDEPENDIENTE'
-   :externalStatus==='partial'?'REGISTRO PARCIAL · FUENTE EXTERNA'
-   :'SIN HISTORIAL DISPONIBLE';
  const externalMetrics=[
-  ['SEGUIDORES GANADOS',summary.followers_gained??summary.followers_gain_reported,'en el período'],
+  ['SEGUIDORES GANADOS',summary.followers_gained??summary.followers_gain_reported,'seguidores'],
   ['DIRECTOS',summary.streams??summary.streams_count,'sesiones'],
   ['HORAS TRANSMITIDAS',summary.hours_streamed??summary.airtime_hours??(summary.airtime_minutes!=null?summary.airtime_minutes/60:null),'horas'],
   ['HORAS VISTAS',summary.hours_watched,'horas'],
   ['PROMEDIO DE AUDIENCIA',summary.average_viewers??summary.average_viewers_duration_weighted,'espectadores'],
-  ['PICO DE AUDIENCIA',summary.peak_viewers,'espectadores'],
-  ['SEGUIDORES REGISTRADOS',summary.followers_total,'según la fuente en ese período']
+  ['PICO DE AUDIENCIA',summary.peak_viewers,'espectadores']
  ].filter(item=>item[1]!==null&&item[1]!==undefined&&Number.isFinite(Number(item[1])));
- externalMetrics.forEach(([label,value,unit])=>cards.push({label,value:statsNumber(Number(value),Number.isInteger(Number(value))?0:1)+(unit==='horas'?' h':unit==='sesiones'?'':' '+unit),note:'SullyGnome · '+period}));
- const start=sully?.period?.start_date,end=sully?.period?.end_date,streams=summary.streams??summary.streams_count;
- if(start&&end&&Number.isFinite(Number(streams))){
-  const spanDays=Math.max(1,Math.round((Date.parse(end+'T00:00:00Z')-Date.parse(start+'T00:00:00Z'))/86400000)+1);
-  cards.push({label:'RITMO DE EMISIÓN',value:statsNumber(Number(streams)*7/spanDays,1)+' directos / semana',note:'Cálculo propio sobre '+spanDays+' días del período '+period+'.'});
- }
- const cardHtml=cards.map(item=>'<article class="hero-growth-card"><small>'+safe(item.label)+'</small><strong>'+safe(item.value)+'</strong><span>'+safe(item.note)+'</span></article>').join('');
- const externalNote=externalStatus==='pending'
-  ?'No hay un registro histórico suficiente para este canal en SullyGnome. No se completan huecos con estimaciones.'
+ const sullyLabel=externalStatus==='user_supplied_summary'||externalStatus==='user_supplied_annual_summary'
+  ?'RESUMEN APORTADO · NO VERIFICADO POR API'
+  :externalStatus==='partial'?'REGISTRO PARCIAL · FUENTE EXTERNA':'SIN HISTORIAL DISPONIBLE';
+ const sullyNote=externalStatus==='pending'
+  ?'No hay un registro histórico suficiente para este canal en SullyGnome.'
   :externalStatus==='user_supplied_summary'||externalStatus==='user_supplied_annual_summary'
-   ?'Este bloque reproduce un resumen aportado al proyecto. No debe interpretarse como una consulta automatizada ni como dato verificado independientemente.'
-   :'Referencia histórica de SullyGnome. La cobertura puede ser parcial y el período no equivale a una lectura actual.';
- const sourceTitle=isYoutube?'YOUTUBE DATA API · HISTORIAL PROPIO':'SULLYGNOME · REFERENCIA HISTÓRICA';
- const sourceNote=isYoutube
-  ?'Las capturas propias de suscriptores, visualizaciones y videos comienzan con la activación del registro. No se importan períodos anteriores sin evidencia.'
-  :externalNote;
- const sourceUrl=isYoutube?account?.url:sully?.source_url;
- return '<section class="hero-growth-chapter" aria-label="Capítulo Crecimiento"><header class="hero-growth-heading"><div><small>BITÁCORA · CAPÍTULO 02</small><h4>CRECIMIENTO</h4><p>Trayectoria de audiencia, constancia de emisión y evolución pública del canal.</p></div><span class="hero-growth-stamp">'+safe(account?.platform==='youtube'?'YOUTUBE':'TWITCH')+'</span></header><div class="hero-growth-grid">'+cardHtml+'</div>'+trend+'<section class="hero-growth-source"><div><strong>'+safe(sourceTitle)+'</strong><span>'+safe(sourceLabel)+' · '+safe(period)+'</span></div><p>'+safe(sourceNote)+'</p>'+(sourceUrl?'<a href="'+safe(sourceUrl)+'" target="_blank" rel="noopener noreferrer">CONSULTAR FUENTE ORIGINAL ↗</a>':'')+'</section><p class="hero-growth-method">Metodología: los totales de Twitch se capturan desde Helix y se archivan una vez por día. Las variaciones propias se calculan entre capturas guardadas por Legión. SullyGnome se conserva como fuente externa separada; períodos y métricas no se suman entre sí. Los datos ausentes no se estiman.</p></section>';
+   ?'Resumen transcrito de información aportada. Se conserva separado de las capturas automáticas.'
+   :'Referencia histórica de SullyGnome. Su período y cobertura no representan una lectura actual ni se mezclan con las métricas propias.';
+ const sullyHtml=externalMetrics.length?'<section class="hero-growth-source"><div><strong>SULLYGNOME · HISTORIAL EXTERNO</strong><span>'+safe(sullyLabel)+' · '+safe(period)+'</span></div><div class="hero-growth-grid">'+externalMetrics.map(([label,value,unit])=>'<article class="hero-growth-card"><small>'+safe(label)+'</small><strong>'+safe(statsNumber(Number(value),Number.isInteger(Number(value))?0:1))+'</strong><span>'+safe(unit)+'</span></article>').join('')+'</div><p>'+safe(sullyNote)+'</p>'+(sully?.source_url?'<a href="'+safe(sully.source_url)+'" target="_blank" rel="noopener noreferrer">CONSULTAR FUENTE ORIGINAL ↗</a>':'')+'</section>'
+  :'<section class="hero-growth-source"><div><strong>SULLYGNOME · HISTORIAL EXTERNO</strong><span>'+safe(sullyLabel)+' · '+safe(period)+'</span></div><p>'+safe(sullyNote)+'</p>'+(sully?.source_url?'<a href="'+safe(sully.source_url)+'" target="_blank" rel="noopener noreferrer">CONSULTAR FUENTE ORIGINAL ↗</a>':'')+'</section>';
+ return '<section class="hero-growth-chapter" aria-label="Capítulo Crecimiento"><header class="hero-growth-heading"><div><small>BITÁCORA · CAPÍTULO 02</small><h4>CRECIMIENTO</h4><p>Audiencia, constancia, rendimiento del contenido y resultados colaborativos con trazabilidad.</p></div><span class="hero-growth-stamp">'+safe(platform==='youtube'?'YOUTUBE':platform==='twitch'?'TWITCH':'MULTIPLATAFORMA')+'</span></header>'+coverageHtml+contentHtml+collaborationHtml+audienceHtml+sullyHtml+'<p class="hero-growth-method">Metodología: las ventanas comparan períodos equivalentes de 7, 30 y 90 días y exigen al menos 65% de cobertura diaria en ambos tramos. Twitch usa muestras públicas de Helix; YouTube usa capturas públicas de Data API. Las estimaciones de observación no son analítica privada. Los reportes de panel se identifican como aportados por el creador. No se suman audiencias entre canales.</p></section>';
+}
+function activateHeroGrowthWindow(button){
+ const wrap=button.closest('.hero-growth-periods');
+ if(!wrap)return;
+ wrap.querySelectorAll('[data-growth-window]').forEach(tab=>{
+  const active=tab===button;
+  tab.classList.toggle('is-active',active);
+  tab.setAttribute('aria-selected',active?'true':'false');
+ });
+ wrap.querySelectorAll('[data-growth-panel]').forEach(panel=>{
+  const active=panel.dataset.growthPanel===button.dataset.growthWindow;
+  panel.hidden=!active;
+ });
 }
 function activateHeroBitacoraView(button){
  const wrap=button.closest('.hero-bitacora-chapters');
