@@ -1149,6 +1149,10 @@ async function loadInstituteStats(){
   const totalSamples=channels.reduce((n,c)=>n+(c.window?.samples_total||0),0);
   const observedStreams=channels.reduce((n,c)=>n+(c.window?.streams_observed||0),0);
   const liveSamples=channels.reduce((n,c)=>n+(c.window?.live_samples||0),0);
+  const currentViewers=channels.reduce((n,c)=>n+(c.live&&c.current_viewers!==null&&c.current_viewers!==undefined?Number(c.current_viewers)||0:0),0);
+  const observedHours=channels.reduce((n,c)=>n+(Number(c.window?.observed_live_hours)||0),0);
+  const estimatedAudienceHours=channels.reduce((n,c)=>n+(Number(c.window?.estimated_hours_watched)||0),0);
+  const youtubeChannels=heroesData.filter(hero=>(hero.accounts||[]).some(account=>account.platform==='youtube')).length;
   const interval=Number(data.sampling_interval_minutes)||15;
   const updated=data.updated_at?new Date(data.updated_at):null;
   const updatedValid=updated&&!Number.isNaN(updated.getTime());
@@ -1175,13 +1179,13 @@ async function loadInstituteStats(){
   const coverageNote=document.getElementById('stats-methodology-coverage');
   if(coverageNote)coverageNote.textContent='En la última captura se resolvieron '+resolvedChannels+' de '+expectedChannels+' canales esperados'+(skippedChannels.length?' y se omitieron '+skippedChannels.length+' ('+skippedChannels.join(', ')+')':'')+'. Estado informado por el colector: '+(collectionComplete?'completo':'parcial o pendiente')+'. Los espectadores actuales reflejan la última consulta; promedios y picos son valores observados por muestreo, no analíticas oficiales de Twitch.';
   document.getElementById('stats-summary').innerHTML=[
-   [fmt(channels.length,0),'CANALES EN SEGUIMIENTO','Todos los canales Twitch registrados del roster'],
-   [fmt(isFresh?liveCount:0,0),'EN DIRECTO EN ÚLTIMA LECTURA',isFresh?'Canales con transmisión en la captura reciente':'Estado de transmisión con datos demorados'],
-   [fmt(observedStreams,0),'DIRECTOS DETECTADOS','Sesiones observadas en la ventana disponible'],
-   [fmt(liveSamples,0),'CAPTURAS EN DIRECTO','Registros capturados mientras había transmisión'],
-   [interval+' MIN','FRECUENCIA OBJETIVO','Cadencia configurada del colector'],
-   [resolvedChannels+'/'+expectedChannels,'COBERTURA DE CANALES',collectionComplete?'Todos los canales esperados fueron contabilizados':'Revisar canales pendientes o no contabilizados'],
-   [fmt(channels.reduce((n,c)=>n+(Number(c.window?.estimated_hours_watched)||0),0),1),'HORAS DE AUDIENCIA ESTIMADAS','Estimación propia entre muestras consecutivas; no es analítica oficial']
+   [fmt(channels.length,0),'CANALES TWITCH','Canales registrados en el seguimiento del roster'],
+   [fmt(youtubeChannels,0),'CANALES YOUTUBE','Cuentas de YouTube registradas; sus métricas se muestran por separado'],
+   [isFresh?fmt(liveCount,0):'—','EN VIVO AHORA',isFresh?'Canales detectados en la última captura':'Estado de transmisión con datos demorados'],
+   [isFresh?fmt(currentViewers,0):'—','ESPECTADORES AHORA',isFresh?'Suma de espectadores de canales detectados en vivo':'No se informa como actual porque la captura está demorada'],
+   [fmt(observedHours,1),'HORAS DE DIRECTO OBSERVADAS','Tiempo de transmisión estimado entre muestras consecutivas'],
+   [fmt(totalSamples,0),'MUESTRAS REGISTRADAS','Consultas públicas acumuladas en la ventana disponible'],
+   [fmt(estimatedAudienceHours,1),'HORAS DE AUDIENCIA ESTIMADAS','Estimación propia entre muestras consecutivas; no es analítica oficial']
   ].map(([value,label,note])=>{
    const normalized=String(value).replace(/\./g,'').replace(',','.');
    const numeric=/^\d+(?:\.\d+)?$/.test(normalized)?Number(normalized):null;
