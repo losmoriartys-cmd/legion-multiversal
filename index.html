@@ -632,11 +632,30 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
   <div class="impact-section-heading"><span>01 / ACTIVIDAD OBSERVADA</span><h3 id="impact-live-title">LA LEGIÓN EN MOVIMIENTO</h3><p>Indicadores construidos a partir de capturas públicas registradas. Cada dato debe leerse junto con su plataforma, período, fecha de captura y cobertura; una ausencia de datos no equivale a actividad cero.</p></div>
   <div id="stats-updated" class="stats-note" hidden><span class="loading-skeleton loading-skeleton-line" aria-hidden="true"></span></div>
   <div id="stats-summary" class="impact-kpi-grid"><article class="impact-kpi"><strong>7</strong><span>CANALES TWITCH EN SEGUIMIENTO</span><small>7 canales Twitch del roster activo. Oratoris se informa por separado desde YouTube.</small></article></div>
+  <div class="stats-directory-controls" role="group" aria-label="Filtrar y ordenar canales">
+   <div class="stats-filter-group" aria-label="Filtrar canales">
+    <button type="button" class="stats-filter is-active" data-stats-filter="all" aria-pressed="true">TODOS</button>
+    <button type="button" class="stats-filter" data-stats-filter="live" aria-pressed="false">EN VIVO</button>
+    <button type="button" class="stats-filter" data-stats-filter="offline" aria-pressed="false">OFFLINE</button>
+   </div>
+   <label class="stats-sort-control">ORDENAR
+    <select id="stats-sort"><option value="live">En vivo primero</option><option value="average">Promedio</option><option value="peak">Pico</option><option value="hours">Horas observadas</option><option value="name">Nombre</option></select>
+   </label>
+  </div>
   <div class="stats-channel-heading"><h4>ESTADO DE CADA CANAL</h4><p>Una ficha por canal del roster, con estado actual y métricas observadas. Estar offline no significa que el canal esté fuera del seguimiento.</p></div>
   <div id="stats-channel-grid" class="stats-channel-grid" aria-live="polite"><div class="loading-skeleton-grid" aria-hidden="true"><div class="loading-skeleton-card"><span class="loading-skeleton loading-skeleton-short"></span><span class="loading-skeleton"></span><span class="loading-skeleton"></span></div><div class="loading-skeleton-card"><span class="loading-skeleton loading-skeleton-short"></span><span class="loading-skeleton"></span><span class="loading-skeleton"></span></div><div class="loading-skeleton-card"><span class="loading-skeleton loading-skeleton-short"></span><span class="loading-skeleton"></span><span class="loading-skeleton"></span></div><div class="loading-skeleton-card"><span class="loading-skeleton loading-skeleton-short"></span><span class="loading-skeleton"></span><span class="loading-skeleton"></span></div><div class="loading-skeleton-card"><span class="loading-skeleton loading-skeleton-short"></span><span class="loading-skeleton"></span><span class="loading-skeleton"></span></div><div class="loading-skeleton-card"><span class="loading-skeleton loading-skeleton-short"></span><span class="loading-skeleton"></span><span class="loading-skeleton"></span></div></div></div>
   <div class="stats-channel-heading stats-platform-heading"><h4>OTRAS PLATAFORMAS DEL ROSTER</h4><p>Datos públicos por creador y plataforma. Cada unidad conserva su fuente y metodología; no se suma a espectadores ni a métricas de Twitch.</p></div>
   <div id="stats-platform-grid" class="stats-platform-grid" aria-live="polite"><div class="loading-skeleton-grid" aria-hidden="true"><div class="loading-skeleton-card"><span class="loading-skeleton loading-skeleton-short"></span><span class="loading-skeleton"></span><span class="loading-skeleton"></span></div><div class="loading-skeleton-card"><span class="loading-skeleton loading-skeleton-short"></span><span class="loading-skeleton"></span><span class="loading-skeleton"></span></div><div class="loading-skeleton-card"><span class="loading-skeleton loading-skeleton-short"></span><span class="loading-skeleton"></span><span class="loading-skeleton"></span></div><div class="loading-skeleton-card"><span class="loading-skeleton loading-skeleton-short"></span><span class="loading-skeleton"></span><span class="loading-skeleton"></span></div></div></div>
   <div id="stats-highlights" class="impact-highlights" aria-live="polite"></div>
+  <section class="stats-evolution-section" aria-labelledby="stats-evolution-title">
+   <div class="stats-channel-heading"><h4 id="stats-evolution-title">EVOLUCIÓN DE ACTIVIDAD</h4><p>Transmisiones y muestras en directo registradas por día. Los días sin barras no permiten concluir que no hubo actividad: solo que no hay sesiones observadas en el registro.</p></div>
+   <div id="stats-evolution" class="stats-evolution-chart" aria-live="polite"><p class="stats-note">Esperando el historial de actividad…</p></div>
+  </section>
+  <section class="stats-week-section" aria-labelledby="stats-week-title">
+   <div class="stats-channel-heading"><h4 id="stats-week-title">SEMANA DE LA LEGIÓN</h4><p>Disponibilidad declarada por cada creador, hora Argentina. Las celdas sin horario informado permanecen vacías.</p></div>
+   <div id="stats-week-grid" class="stats-week-grid" aria-live="polite"><p class="stats-note">Cargando horarios declarados…</p></div>
+  </section>
+
  </section>
  <section class="legion-news-section" aria-labelledby="legion-news-title">
   <div class="impact-section-heading"><span>02 / NOVEDADES DEL ARCHIVO</span><h3 id="legion-news-title">LO QUE SE MUEVE EN LA LEGIÓN</h3><p>Actualizaciones verificadas del proyecto y del trabajo compartido. Cada entrada conserva su fecha y una fuente para consultar el detalle.</p></div>
