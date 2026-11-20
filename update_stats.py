@@ -343,6 +343,7 @@ def main():
         followers_total = previous_followers
         followers_captured_at = previous.get("followers_captured_at")
         followers_source = previous.get("followers_source")
+        followers_history = list(previous.get("followers_history") or [])
         if followers_user_token:
             try:
                 followers_total = get_channel_followers_total(user["id"], followers_user_token)
@@ -350,6 +351,13 @@ def main():
                 followers_source = "Twitch Helix Get Channel Followers · total público"
                 followers_note = "Total público consultado con OAuth de usuario sin scopes; no se solicitaron permisos de moderación ni se guardó la lista de seguidores."
                 followers_status = "fresh"
+                today = now_iso[:10]
+                daily_point = {"date": today, "captured_at": now_iso, "followers_total": followers_total}
+                followers_history = [point for point in followers_history if point.get("date") != today]
+                followers_history.append(daily_point)
+                followers_history.sort(key=lambda point: point.get("date") or "")
+                history_cutoff = (now - timedelta(days=365)).date().isoformat()
+                followers_history = [point for point in followers_history if point.get("date", "") >= history_cutoff]
             except Exception as exc:
                 followers_note = "No se pudo actualizar el contador en esta ejecución; se conserva la última captura y su fecha. Detalle: {}".format(exc)
                 followers_status = "delayed" if previous_followers is not None else "unavailable"
@@ -373,6 +381,7 @@ def main():
             "followers_source": followers_source,
             "followers_status": followers_status,
             "followers_note": followers_note,
+            "followers_history": followers_history,
             "live": bool(stream),
             "current_viewers": stream.get("viewer_count") if stream else None,
             "current_game": stream.get("game_name") if stream else None,
