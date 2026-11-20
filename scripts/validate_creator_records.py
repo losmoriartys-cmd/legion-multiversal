@@ -55,7 +55,8 @@ def validate(records, roster):
                         errors.append(prefix + " debe mantener el alcance del canal del expediente.")
                     if item.get("verification_status") not in ALLOWED_VERIFICATION:
                         errors.append(prefix + " tiene verification_status inválido.")
-                    if not parse_time(item.get("date") + "T00:00:00Z") if isinstance(item.get("date"), str) else True:
+                    date_value = item.get("date")
+                    if not isinstance(date_value, str) or len(date_value) != 10 or not parse_time(date_value + "T00:00:00Z"):
                         errors.append(prefix + " requiere date YYYY-MM-DD.")
                     participants = item.get("participants")
                     if not isinstance(participants, list) or not participants or not set(participants).issubset(expected_ids):
