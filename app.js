@@ -1010,6 +1010,7 @@ function renderLegionNews() {
     }).join('');
 }
 let instituteStatsLoading = false;
+let instituteStatsRefreshQueued = false;
 let instituteStatsSnapshot = null;
 let statsDirectoryFilter = 'all';
 let statsDirectorySort = 'live';
@@ -1137,7 +1138,8 @@ document.addEventListener('change',event=>{
 
 
 async function loadInstituteStats(){
- const body=document.getElementById('stats-table-body'); if(!body||instituteStatsLoading)return;
+ const body=document.getElementById('stats-table-body'); if(!body)return;
+ if(instituteStatsLoading){instituteStatsRefreshQueued=true;return;}
  instituteStatsLoading=true;
  const fmt=(v,d=1)=>v===null||v===undefined?'—':(typeof v==='number'?v.toLocaleString('es-AR',{maximumFractionDigits:d}):v);
  try{
@@ -1223,6 +1225,7 @@ async function loadInstituteStats(){
   renderRosterSelector();
  } finally {
   instituteStatsLoading=false;
+  if(instituteStatsRefreshQueued){instituteStatsRefreshQueued=false;loadInstituteStats();}
  }
 }
 
