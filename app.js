@@ -1391,30 +1391,6 @@ function renderRosterMetricSummary(hero){
  return renderNormalizedMetricSummary(hero);
 }
 
-function getCreatorAudienceMetric(hero){
- const account=(hero?.accounts||[]).find(item=>item.account_type==='creator_channel')||(hero?.accounts||[])[0]||null;
- if(!account)return null;
- if(account.platform==='youtube'){
-  const platform=platformStatsData?.creators?.[platformStatsKey(hero)]?.platforms?.youtube,value=platform?.metrics?.subscribers;
-  const capturedAt=platform?.captured_at||platformStatsData?.updated_at||null;
-  const captured=capturedAt?new Date(capturedAt):null;
-  const capturedLabel=captured&&!Number.isNaN(captured.getTime())?captured.toLocaleDateString('es-AR'):null;
-  return platform?.status==='verified'&&value!==null&&value!==undefined&&Number.isFinite(Number(value))
-   ?{value:Number(value),label:'Suscriptores · YouTube',source:'YouTube Data API v3',period:capturedLabel,asOf:capturedAt,kind:'verified_public'}:null;
- }
- if(account.platform==='twitch'){
-  const login=String(account.login||(account.url||'').split('/').filter(Boolean).pop()||'').replace(/^@/,'').toLowerCase();
-  const profile=twitchMetricsData?.channels?.[login],followers=profile?.metrics?.followers;
-  if(followers!==null&&followers!==undefined&&Number.isFinite(Number(followers)))
-   return {value:Number(followers),label:'Seguidores · Twitch',source:'TwitchMetrics',period:profile.period_label||profile.period||null,asOf:twitchMetricsData?.captured_at||null,kind:'third_party_reference'};
-  const sully=findSullyChannel(hero),total=sully?.summary?.followers_total??sully?.annual_summary_2026?.followers_total;
-  if(total!==null&&total!==undefined&&Number.isFinite(Number(total))){
-   const asOf=sully.period?.end_date||null;
-   return {value:Number(total),label:'Seguidores · Twitch',source:'SullyGnome',period:sully.period?.start_date&&sully.period?.end_date?statsDate(sully.period.start_date)+' — '+statsDate(sully.period.end_date):'Período informado por la fuente',asOf,kind:'third_party_reference'};
-  }
- }
- return null;
-}
 function getMostPlayedGames(hero,channel,sullyChannel){
  const isGame=name=>Boolean(name)&&!['just chatting','categoría no informada'].includes(String(name).trim().toLocaleLowerCase('es-AR'));
  const historical=Array.isArray(sullyChannel?.game_breakdown)?sullyChannel.game_breakdown:[];
