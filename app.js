@@ -1077,10 +1077,10 @@ function statsRenderEvolution(channels){
  }));
  const rows=[...days.values()].sort((a,b)=>a.date.localeCompare(b.date)).slice(-14);
  if(!rows.length){host.innerHTML='<p class="stats-note">Todavía no hay suficientes registros diarios para construir la evolución.</p>';return;}
- const max=Math.max(1,...rows.map(row=>row.streams));
+ const max=Math.max(1,...rows.flatMap(row=>[row.streams,row.samples]));
  host.innerHTML='<div class="stats-evolution-legend"><span><i></i> Transmisiones observadas</span><span><i></i> Muestras en directo</span></div><div class="stats-evolution-bars">'+rows.map(row=>{
-  const label=statsDate(row.date).slice(0,5),height=Math.max(row.streams?4:0,row.streams/max*100);
-  return '<div class="stats-evolution-day" title="'+escapeStatsHtml(statsDate(row.date))+': '+row.streams+' transmisiones, '+row.samples+' muestras en directo"><div class="stats-evolution-bar"><i style="height:'+height+'%"></i></div><b>'+row.streams+'</b><small>'+label+'</small><span>'+row.samples+' muestras</span></div>';
+  const label=statsDate(row.date).slice(0,5),streamHeight=row.streams?Math.max(3,row.streams/max*100):0,sampleHeight=row.samples?Math.max(3,row.samples/max*100):0;
+  return '<div class="stats-evolution-day" title="'+escapeStatsHtml(statsDate(row.date))+': '+row.streams+' transmisiones, '+row.samples+' muestras en directo"><div class="stats-evolution-pair"><div class="stats-evolution-bar"><i style="height:'+streamHeight+'%"></i></div><div class="stats-evolution-bar is-samples"><i style="height:'+sampleHeight+'%"></i></div></div><b>'+row.streams+'</b><small>'+label+'</small><span>'+row.samples+' muestras</span></div>';
  }).join('')+'</div><p class="stats-evolution-note">Total del tramo visible: '+rows.reduce((sum,row)=>sum+row.streams,0)+' transmisiones observadas y '+rows.reduce((sum,row)=>sum+row.samples,0)+' muestras en directo. Promedio ponderado de las muestras: '+(rows.reduce((sum,row)=>sum+row.avgWeighted,0)/Math.max(1,rows.reduce((sum,row)=>sum+row.weight,0))).toLocaleString('es-AR',{maximumFractionDigits:1})+' espectadores.</p>';
 }
 function statsRenderWeek(){
