@@ -209,7 +209,7 @@ class RosterComicCardsContractTests(unittest.TestCase):
         self.assertIn("function renderGrowthAdvancedAudience", self.app)
         self.assertIn("No hay datos privados autorizados para publicar", self.app)
         self.assertIn("DATO APORTADO POR EL CREADOR", self.app)
-        self.assertIn("No se suman espectadores, chatters ni audiencias entre canales", self.app)
+        self.assertIn("No se suman audiencias entre canales", self.app)
         for selector in (
             ".hero-growth-window-tabs",
             ".hero-growth-comparison",
