@@ -1469,7 +1469,7 @@ function getRosterBrandSlots(hero, context) {
     const account = (hero?.accounts || []).find(item => item.account_type === 'creator_channel') || (hero?.accounts || [])[0];
     if (account?.platform === 'twitch') {
         return [
-            ['Media viewers', normalizedMetricValue(metrics.average, 1), normalizedMetricSlotDetail(metrics.average)],
+            ['Media de viewers', normalizedMetricValue(metrics.average, 1), normalizedMetricSlotDetail(metrics.average)],
             ['Horas en directo', normalizedMetricValue(metrics.hours, 2, ' h'), normalizedMetricSlotDetail(metrics.hours)],
             ['Directos detectados', normalizedMetricValue(metrics.streams, 0), normalizedMetricSlotDetail(metrics.streams)]
         ];
