@@ -47,6 +47,8 @@ test('Estadísticas presenta siete canales Twitch y el expediente YouTube de Pat
   const sortedNames = await page.locator('#stats-channel-grid .stats-dossier-identity h5').allTextContents();
   expect(sortedNames).toEqual([...sortedNames].sort((a, b) => a.localeCompare(b, 'es')));
 
+  await expect(page.locator('#stats-twitch-comparison .stats-comparison-row')).toHaveCount(7);
+  await expect(page.locator('#stats-twitch-comparison')).toContainText('Pico observado');
   await expect(page.locator('#stats-evolution .stats-evolution-day').first()).toBeVisible();
   await expect(page.locator('#stats-week-grid .stats-week-name')).toHaveCount(8);
   await expect(page.locator('#stats-table-body tr')).toHaveCount(7);
