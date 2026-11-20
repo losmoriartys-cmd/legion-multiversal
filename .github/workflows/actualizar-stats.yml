@@ -92,7 +92,10 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data.json platform-stats.json clips-data.json creator-metrics.json twitch-followers-refresh-token.enc
+          git add data.json platform-stats.json clips-data.json creator-metrics.json
+          if [ -f twitch-followers-refresh-token.enc ]; then
+            git add twitch-followers-refresh-token.enc
+          fi
           if git diff --cached --quiet; then
             echo "No hay cambios de estadísticas para guardar."
             exit 0
