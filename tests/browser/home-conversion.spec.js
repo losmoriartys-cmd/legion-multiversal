@@ -50,7 +50,7 @@ test('las páginas de marcas, recursos y metodología abren con un H1 visible', 
 test('el CSS global de capítulos se solicita al navegar, no al abrir la portada', async ({ page }) => {
   const stylesheetRequests = [];
   page.on('request', request => {
-    if (request.url().includes('/styles.css?v=20261120-live-program-1')) {
+    if (request.url().includes('/styles.css?v=20261120-stats-dossier-1')) {
       stylesheetRequests.push(request.url());
     }
   });
@@ -60,7 +60,7 @@ test('el CSS global de capítulos se solicita al navegar, no al abrir la portada
   expect(stylesheetRequests).toHaveLength(0);
 
   const stylesheetResponse = page.waitForResponse(response =>
-    response.url().includes('/styles.css?v=20261120-live-program-1') && response.ok()
+    response.url().includes('/styles.css?v=20261120-stats-dossier-1') && response.ok()
   );
   await page.locator('.primary-navigation [data-chapter="1"]').click();
   await stylesheetResponse;
