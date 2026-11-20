@@ -343,13 +343,37 @@ def _authorized_audience_report(report: dict | None) -> dict:
             })
     if not metrics:
         return {"status": "invalid_evidence", "metrics": []}
+    breakdowns = []
+    for item in report.get("breakdowns") or []:
+        if not isinstance(item, dict):
+            continue
+        dimension = item.get("dimension")
+        label = item.get("label")
+        share = item.get("share_pct")
+        sample_size = item.get("sample_size")
+        # Solo publicar segmentos agregados con una base mínima; nunca perfiles individuales.
+        if dimension not in {"age_range", "region", "country"}:
+            continue
+        if not isinstance(label, str) or not label.strip():
+            continue
+        if not isinstance(share, (int, float)) or isinstance(share, bool) or not 0 <= share <= 100:
+            continue
+        if not isinstance(sample_size, int) or isinstance(sample_size, bool) or sample_size < 5:
+            continue
+        breakdowns.append({
+            "dimension": dimension,
+            "label": label,
+            "share_pct": round(float(share), 1),
+            "sample_size": sample_size,
+        })
     return {
         "status": "authorized_public_aggregate",
         "captured_at": report["captured_at"],
         "period": period,
         "source": report["source"],
         "metrics": metrics,
-        "note": "Datos agregados aportados por el creador y autorizados para publicación. No incluyen identidades ni datos individuales.",
+        "breakdowns": breakdowns,
+        "note": "Datos agregados aportados por el creador y autorizados para publicación. No incluyen identidades ni segmentos con menos de cinco observaciones.",
     }
 
 
