@@ -1094,6 +1094,19 @@ function statsRenderWeek(){
  }).join('');
  host.innerHTML='<div class="stats-week-table">'+header+rows+'</div><p class="stats-evolution-note">Los horarios son declaraciones del roster, no predicciones de disponibilidad ni registros de transmisiones realizadas.</p>';
 }
+function statsAnimateCounters(host){
+ if(!host||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+ host.querySelectorAll('[data-stats-count]').forEach(node=>{
+  const target=Number(node.dataset.statsCount);if(!Number.isFinite(target))return;
+  const decimals=Number.isInteger(target)?0:1,start=performance.now(),duration=850;
+  const tick=now=>{
+   const progress=Math.min(1,(now-start)/duration);
+   node.textContent=(target*(1-Math.pow(1-progress,3))).toLocaleString('es-AR',{maximumFractionDigits:decimals});
+   if(progress<1)requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+ });
+}
 document.addEventListener('click',event=>{
  const button=event.target.closest('[data-stats-filter]');if(!button)return;
  statsDirectoryFilter=button.dataset.statsFilter;
@@ -1153,7 +1166,12 @@ async function loadInstituteStats(){
    [interval+' MIN','FRECUENCIA OBJETIVO','Cadencia configurada del colector'],
    [resolvedChannels+'/'+expectedChannels,'COBERTURA DE CANALES',collectionComplete?'Todos los canales esperados fueron contabilizados':'Revisar canales pendientes o no contabilizados'],
    [fmt(channels.reduce((n,c)=>n+(Number(c.window?.estimated_hours_watched)||0),0),1),'HORAS DE AUDIENCIA ESTIMADAS','Estimación propia entre muestras consecutivas; no es analítica oficial']
-  ].map(([value,label,note])=>'<article class="impact-kpi"><strong>'+value+'</strong><span>'+label+'</span><small>'+note+'</small></article>').join('');
+  ].map(([value,label,note])=>{
+   const normalized=String(value).replace(/\\./g,'').replace(',','.');
+   const numeric=/^\\d+(?:\\.\\d+)?$/.test(normalized)?Number(normalized):null;
+   return '<article class="impact-kpi"><strong'+(numeric!==null?' data-stats-count="'+numeric+'"':'')+'>'+value+'</strong><span>'+label+'</span><small>'+note+'</small></article>';
+  }).join('');
+  statsAnimateCounters(document.getElementById('stats-summary'));
   const homeLiveStatus=document.getElementById('home-live-status');
   const homeLiveUpdated=document.getElementById('home-live-updated');
   const liveChannels=channels.filter(c=>c.live);
