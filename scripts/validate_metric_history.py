@@ -73,8 +73,30 @@ def validate_data(data):
         viewers = channel.get("current_viewers")
         if viewers is not None and (not isinstance(viewers, int) or isinstance(viewers, bool) or viewers < 0):
             errors.append("{}: current_viewers inválido".format(login))
-        if channel.get("followers_total") is not None:
-            errors.append("{}: followers_total requiere autorización/captura específica y no se acepta en este colector público".format(login))
+        followers_total = channel.get("followers_total")
+        followers_captured_at = channel.get("followers_captured_at")
+        if followers_total is not None:
+            if not isinstance(followers_total, int) or isinstance(followers_total, bool) or followers_total < 0:
+                errors.append("{}: followers_total debe ser entero no negativo o null".format(login))
+            if parse_timestamp(followers_captured_at) is None:
+                errors.append("{}: followers_total requiere followers_captured_at válido".format(login))
+        followers_history = channel.get("followers_history") or []
+        if not isinstance(followers_history, list):
+            errors.append("{}: followers_history debe ser una lista".format(login))
+        else:
+            previous_follower_date = None
+            for point in followers_history:
+                date_value = point.get("date") if isinstance(point, dict) else None
+                value = point.get("followers_total") if isinstance(point, dict) else None
+                captured = point.get("captured_at") if isinstance(point, dict) else None
+                if not isinstance(date_value, str) or parse_timestamp(captured) is None:
+                    errors.append("{}: punto de followers_history sin fecha/captura válida".format(login))
+                    continue
+                if previous_follower_date is not None and date_value <= previous_follower_date:
+                    errors.append("{}: followers_history debe estar ordenado y sin días repetidos".format(login))
+                previous_follower_date = date_value
+                if not isinstance(value, int) or isinstance(value, bool) or value < 0:
+                    errors.append("{}: followers_history contiene un contador inválido".format(login))
         snapshots = channel.get("snapshots")
         if not isinstance(snapshots, list):
             errors.append("{}: snapshots debe ser una lista".format(login))
