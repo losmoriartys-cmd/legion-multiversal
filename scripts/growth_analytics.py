@@ -24,7 +24,9 @@ def iso(value: datetime) -> str:
 
 
 def _coverage(sampled_dates: set[str], start: datetime, end: datetime, days: int) -> dict:
-    observed = len(sampled_dates)
+    # Una ventana de N días puede tocar N+1 fechas UTC por cruzar el límite
+    # intradía. La cobertura se limita al máximo de días del período solicitado.
+    observed = min(len(sampled_dates), days)
     pct = round(min(100.0, observed / max(1, days) * 100), 1)
     return {
         "sampled_days": observed,
