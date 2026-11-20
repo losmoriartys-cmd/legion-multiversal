@@ -104,7 +104,7 @@ class RosterComicCardsContractTests(unittest.TestCase):
 
     def test_cards_use_normalized_metrics_as_the_commercial_source_of_truth(self):
         start = self.app.index("function renderRosterSelector()")
-        end = self.app.index("\\nfunction selectRosterCreator", start)
+        end = self.app.index("\nfunction selectRosterCreator", start)
         renderer = self.app[start:end]
         context = self.app.split("function getRosterBrandContext", 1)[1].split("function normalizedMetricSlotDetail", 1)[0]
         slots = self.app.split("function getRosterBrandSlots", 1)[1].split("function renderRosterBrandSlots", 1)[0]
