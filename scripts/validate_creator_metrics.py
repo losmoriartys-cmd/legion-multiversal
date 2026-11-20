@@ -168,6 +168,62 @@ def validate(registry, roster, now=None):
                     creator_id, account_key[0], ", ".join(missing)
                 ))
 
+        growth = record.get("growth")
+        if not isinstance(growth, dict) or growth.get("schema_version") != 1:
+            errors.append("{}: growth debe ser un objeto schema_version=1.".format(creator_id))
+        else:
+            growth_platform = growth.get("platform")
+            expected_windows = {"7d": 7, "30d": 30, "90d": 90} if growth_platform in {"twitch", "youtube"} else {}
+            windows = growth.get("windows")
+            if not isinstance(windows, dict):
+                errors.append("{}: growth.windows debe ser un objeto.".format(creator_id))
+                windows = {}
+            for key, expected_days in expected_windows.items():
+                item = windows.get(key)
+                if not isinstance(item, dict) or item.get("days") != expected_days:
+                    errors.append("{}: falta la ventana growth.{}.".format(creator_id, key))
+                    continue
+                coverage = item.get("coverage") or {}
+                pct = coverage.get("coverage_pct")
+                if not isinstance(pct, (int, float)) or isinstance(pct, bool) or not 0 <= pct <= 100:
+                    errors.append("{}: growth.{}.coverage_pct fuera de rango.".format(creator_id, key))
+                    pct = 0
+                if coverage.get("status") not in {"sufficient", "partial"}:
+                    errors.append("{}: growth.{}.coverage.status inválido.".format(creator_id, key))
+                comparison = item.get("comparison") or {}
+                previous_pct = (comparison.get("previous_coverage") or {}).get("coverage_pct", 0)
+                if comparison.get("status") == "available" and (pct < 65 or not isinstance(previous_pct, (int, float)) or previous_pct < 65):
+                    errors.append("{}: growth.{} compara períodos sin cobertura mínima.".format(creator_id, key))
+            content_performance = growth.get("content_performance") or {}
+            for list_name in ("top_clips", "videos"):
+                rows = content_performance.get(list_name, [])
+                if not isinstance(rows, list) or len(rows) > 5:
+                    errors.append("{}: growth.content_performance.{} debe tener hasta cinco registros.".format(creator_id, list_name))
+                    continue
+                for row in rows:
+                    if not isinstance(row, dict) or not row.get("title") or not str(row.get("url") or "").startswith("https://"):
+                        errors.append("{}: growth.content_performance.{} contiene un enlace/título inválido.".format(creator_id, list_name))
+                        continue
+                    views = row.get("views")
+                    if views is not None and (not isinstance(views, int) or isinstance(views, bool) or views < 0):
+                        errors.append("{}: visualizaciones de contenido inválidas.".format(creator_id))
+                    changes = row.get("views_gained") or {}
+                    if set(changes) != {"7d", "30d", "90d"}:
+                        errors.append("{}: las variaciones de visualizaciones deben cubrir 7/30/90 días.".format(creator_id))
+            collaborations = growth.get("collaborations") or {}
+            if not isinstance(collaborations.get("shared_cases", []), list) or not isinstance(collaborations.get("reported_results", []), list):
+                errors.append("{}: estructura de colaboraciones inválida.".format(creator_id))
+            for result in collaborations.get("reported_results", []):
+                if result.get("channel_scope") != creator_id or result.get("verification_status") not in {"creator_reported", "public_source", "platform_verified"} or not result.get("source"):
+                    errors.append("{}: resultado colaborativo sin alcance, nivel de verificación o fuente.".format(creator_id))
+            audience = growth.get("advanced_audience") or {}
+            if audience.get("status") == "authorized_public_aggregate":
+                if not audience.get("source") or not audience.get("captured_at") or not audience.get("metrics"):
+                    errors.append("{}: audiencia avanzada autorizada sin evidencia suficiente.".format(creator_id))
+                for breakdown in audience.get("breakdowns") or []:
+                    if not isinstance(breakdown.get("sample_size"), int) or breakdown["sample_size"] < 5:
+                        errors.append("{}: desglose demográfico con base inferior a cinco observaciones.".format(creator_id))
+
         content = record.get("content") or {}
         if not isinstance(content.get("twitch_clips_count", 0), int) or content.get("twitch_clips_count", 0) < 0:
             errors.append("{}: twitch_clips_count inválido.".format(creator_id))
