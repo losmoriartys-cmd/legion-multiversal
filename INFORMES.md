@@ -3529,3 +3529,6 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **Archivos:** index.html, styles.css, nuevo manifesto-chapter.js, tests/test_values_chapter_contract.py, nuevo tests/browser/manifesto-chapter.spec.js e INFORMES.md.
 - **Límites:** no se modificó Capítulo 01, datos del Roster, métricas, colectores, Alianzas, Colaboraciones ni Arsenal.
 - **Validación:** contratos Python y Playwright incorporados; ejecución CI pendiente sobre el nuevo HEAD. No se declara aprobación visual, integración en main ni despliegue de producción hasta completar workflows y revisar capturas de escritorio/móvil.
+
+
+- **Corrección de QA:** el primer workflow detectó una regresión en el contrato global de navegación: una flecha diagonal en el enlace interno al Origen se interpretaba como indicación de enlace externo. Se reemplazó por flecha direccional interna. El fallo no afectó la lógica de pestañas ni los contratos específicos del Capítulo 02; se repiten los workflows sobre el HEAD corregido.
