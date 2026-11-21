@@ -1,3 +1,16 @@
+## 2026-11-21 — Capítulo 08 · Arsenal conectado al registro maestro
+
+- **Base:** rama de integración posterior al Capítulo 07, commit 6f937bb735b8f199a5ce12301205790e7df6edfe; rama feat/chapter-08-arsenal-registry.
+- **Objetivo:** sustituir el catálogo estático del Capítulo 08 por una vista dinámica del mismo games.json utilizado por Colaboraciones.
+- **Implementado:** 18 juegos únicos, filtros por texto, categoría, estado y mínimo de jugadores verificados; ruleta restringida al conjunto visible; contadores calculados; enlaces oficiales; portada registrada cuando existe y fallback tipográfico cuando falta.
+- **Estados:** 10 juegos con sesiones BIT; 7 por descubrir; BarFender como expediente comercial EXP-001 independiente.
+- **Normalización:** Escape the Backrooms sustituye el antiguo registro Backrooms: Escape Together y usa Steam App ID 1943950 del registro maestro.
+- **Navegación cruzada:** Arsenal enlaza a sesiones BIT; Colaboraciones enlaza a fichas del Arsenal mediante IDs canónicos.
+- **Responsive:** tres columnas en escritorio, dos en tablet y una en móvil; foco visible y movimiento reducido.
+- **QA:** contrato Python, Playwright para estados, filtros, jugadores, ruleta, Escape the Backrooms, navegación cruzada y cinco tamaños.
+- **Estado:** PR independiente y apilado sobre PR #87; CI pendiente.
+- **Alcance excluido:** no se fusiona esta rama ni la del PR #87.
+
 ## 2026-11-21 — Capítulo 07 · Colaboraciones conectado al registro maestro
 
 - **Base:** main después de integrar PR #86, commit 858a26c228fae64a34ff6fdbb1fa79896d30fa53; rama feat/chapter-07-collaborations-registry.

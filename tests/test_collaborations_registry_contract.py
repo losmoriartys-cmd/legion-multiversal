@@ -14,6 +14,7 @@ class CollaborationsRegistryContractTests(unittest.TestCase):
         self.assertIn('id="collab-games-registry"', HTML)
         self.assertIn('src="./games-registry.js?v=20261121-collab-registry-1"', HTML)
         self.assertIn("fetch('./games.json'", SCRIPT)
+        self.assertIn("./styles.css?v=20261121-arsenal-registry-1", HTML)
         self.assertIn("fetch('./roster-data.json'", SCRIPT)
         self.assertIn("fetch('./data.json'", SCRIPT)
 
