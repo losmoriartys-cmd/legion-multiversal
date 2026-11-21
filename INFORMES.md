@@ -33,30 +33,27 @@
 
 **Aceptación:** un dato se edita en un único lugar; el sitio, los colectores y las páginas generadas leen esa fuente; no quedan copias paralelas ni rutas rotas.
 
-#### Corte en implementación · BASE-01B — Roster canónico
+#### Corte integrado · BASE-01B — Roster canónico
 
-- [x] Reconciliar PR #81: cerrado como supersedido; la consolidación de pestañas ya está integrada por la evolución posterior del Roster (PR #83).
-
+- [x] Reconciliar PR #81: cerrado como supersedido; la consolidación de pestañas ya está integrada mediante PR #83.
 - [x] Migrar `roster-data.json` a `data/roster.json` conservando exactamente el blob original, los ocho IDs, slugs, cuentas, enlaces, horarios, imágenes y datos editoriales.
-
 - [x] Actualizar aplicación, cargador compartido, Bitácora pública, kit de medios, colectores, validadores, generador de métricas, tests y workflows.
+- [x] Retirar la ruta raíz; ningún consumidor operativo activo mantiene la dependencia de `roster-data.json`.
+- [x] Corregir la navegación cruzada BIT↔Arsenal: `switchChapter()` espera el fin de `chapterArrive` antes de desplazar el destino; Playwright exige visibilidad completa y conserva el clic real, sin `force` ni `dispatchEvent`.
+- [x] Sincronizar la rama con `main` preservando los snapshots públicos más recientes de `data.json` y `platform-stats.json`, y actualizar `creator-metrics.json` manteniendo `source_files.identity = data/roster.json`.
+- **Estado:** [PR #91](https://github.com/losmoriartys-cmd/legion-multiversal/pull/91) integrado en `main) el 21/11/2026 a las 23:37:27 UTC.
+- **Merge SHA:** `6b554acb17af6dae1ad89280576317ad4a8b83d7`. Verificado como HEAD de `main) inmediatamente después del merge.
+- **Integridad:** blob SHA de `data/roster.json` idéntico al original (`1228911b33d594473ef6e99d43f4b2934eb195a5)); ocho perfiles/IDs conservados y ruta antigua retirada.
+- **QA final del HEAD del PR `51affdb37eb067a3b0df04a2690edd3e0143386b`:** `validar` SUCCESS (incluye las 50 pruebas Playwright y auditoría de referencias de imágenes); Python tests SUCCESS; QA común de capítulos SUCCESS; QA portable SUCCESS; Cloudflare Pages preview SUCCESS.
+- **Incidencia resuelta:** el HEAD histórico `66d97a3` falló por inestabilidad del enlace durante `chapterArrive`; se corrigió esperando el fin de las animaciones y se verificó de nuevo en el HEAD final, con los dos sentidos de navegación funcionando.
+- **Post-merge:** los workflows de publicación Pages, validación de main, colectores y Lighthouse de producción se dispararon sobre el merge SHA. Su estado de despliegue se comprobará por separado; el merge por sí solo no se registra como publicación verificada.
 
-- [x] Retirar la ruta raíz; la búsqueda en consumidores operativos no deja referencias activas a `roster-data.json`.
-
-- [x] Corregir navegación cruzada BIT↔Arsenal esperando el fin de la animación `chapterArrive` antes de desplazar el enlace de destino. Playwright conserva el clic real y exige visibilidad completa (`ratio: 1`); no se usa `force` ni `dispatchEvent`.
-- **Estado:** [PR #91](https://github.com/losmoriartys-cmd/legion-multiversal/pull/91) abierto en borrador; navegación funcional comprobada. La integración queda condicionada al cierre verde de la última validación integral.
-- **Integridad:** blob SHA de `data/roster.json` idéntico al original (`1228911b33d594473ef6e99d43f4b2934eb195a5`); ocho IDs/slug conservados y ruta raíz retirada.
-- **CI del HEAD `66d97a3`:** `validar` FAILURE: 49 pruebas pasaron y falló el clic real del enlace Bitácora→Arsenal porque el panel seguía animándose y el enlace no alcanzaba estabilidad. Python tests, QA común, QA portable y preview Cloudflare Pages SUCCESS.
-- **Corrección verificada:** `switchChapter()` admite un callback `afterEnter` que espera las animaciones activas del panel; ambos registros desplazan el destino después de la entrada. La suite Playwright terminó SUCCESS en el HEAD `d9b832079af0d6d566e6d26b8baadd72338305e5`, con clics reales en las dos direcciones.
-- [x] **Sincronizar con `main`:** merge commit `a847da038a10ec67560d256ee8e02fad063e2822` incorporó los dos commits automáticos posteriores a la base del PR. La rama quedó al día (`ahead 15 / behind 0` en el HEAD de revisión `78bcff3`).
-- [x] Preservar las capturas más recientes de `data.json` y `platform-stats.json` (`2026-11-21T22:58:29Z`) y regenerar `creator-metrics.json` sobre esa captura, manteniendo `source_files.identity = data/roster.json` (`generated_at: 2026-11-21T22:58:30Z`).
-- **QA del HEAD `d9b8320`:** Python tests SUCCESS; QA común de capítulos SUCCESS; QA portable SUCCESS; preview Cloudflare Pages SUCCESS; Playwright de expedientes, Bitácora, pestañas, responsive e historial SUCCESS. `validar` continúa ejecutando la auditoría final de referencias de imágenes; su estado global aún no se marca como SUCCESS hasta que cierre el job.
-- **Último paso antes de integrar:** este commit documental actualizará la evidencia y disparará una nueva pasada de workflows en el HEAD resultante. Mantener el PR en borrador hasta que todos los checks de ese HEAD finalicen SUCCESS.
-- **HEAD con fallo documentado:** `66d97a35420ebb3bed6c0de878732a7836ac8385`.
+- **HEAD con fallo histórico documentado:** `66d97a35420ebb3bed6c0de878732a7836ac8385`.
 
 ### Próximo corte editorial · BarFender como colaboración de la Legión
 
 - [ ] Dejar de presentar BarFender como un caso comercial aislado y registrarlo con el mismo modelo editorial que las demás colaboraciones, tanto en Colaboraciones como en Arsenal.
+- [ ] Retirar la clasificación especial `EXP-001`/`commercial` del Arsenal al convertir sus hitos a sesiones BIT normales; no mantener una ficha comercial paralela.
 - [ ] Narrar el primer encuentro como **“Primera misión juntos como Legión”**: el grupo recibió las claves para jugar, sin insinuar patrocinio ni pago.
 - [ ] Incorporar la segunda etapa como la repetición/continuación con el juego completo y el mismo equipo, conectada con la primera misión.
 - [ ] Asociar los POV de Rod3R1k y Akuma a esa segunda etapa, verificando los VOD/enlaces concretos y evitando duplicar sesiones o contabilizar un POV como una sesión aparte.
