@@ -14,23 +14,31 @@ async function inspectHorizontalOverflow(panel) {
     const scrollRegions = Array.from(el.querySelectorAll('*')).filter(node => {
       const style = getComputedStyle(node);
       return /(auto|scroll)/.test(style.overflowX) && node.scrollWidth > node.clientWidth + 1;
-    }).map(node => ({
-      selector: node.id ? '#' + node.id : node.className && typeof node.className === 'string' ? '.' + node.className.trim().split(/\\s+/).join('.') : node.tagName.toLowerCase(),
-      clientWidth: node.clientWidth,
-      scrollWidth: node.scrollWidth
-    }));
+    }).map(node => {
+      const r = node.getBoundingClientRect();
+      return {
+        selector: node.id ? '#' + node.id : node.className && typeof node.className === 'string' ? '.' + node.className.trim().split(/\\s+/).join('.') : node.tagName.toLowerCase(),
+        clientWidth: node.clientWidth,
+        scrollWidth: node.scrollWidth,
+        left: Math.round(r.left),
+        right: Math.round(r.right),
+        contained: r.left >= rect.left - 1 && r.right <= rect.right + 1
+      };
+    });
     const offenders = Array.from(el.querySelectorAll('*')).map(node => {
       const r = node.getBoundingClientRect(), s = getComputedStyle(node);
-      return {tag:node.tagName,id:node.id,className:String(node.className||'').slice(0,120),text:(node.textContent||'').trim().slice(0,60),left:Math.round(r.left),right:Math.round(r.right),width:Math.round(r.width),display:s.display,visibility:s.visibility};
-    }).filter(x => x.display !== 'none' && x.visibility !== 'hidden' && (x.left < rect.left - 1 || x.right > rect.right + 1));
-    return {panel:el.id,scrollWidth:el.scrollWidth,clientWidth:el.clientWidth,documentWidth:document.documentElement.scrollWidth,viewportWidth:innerWidth,scrollRegions,offenders};
+      return {tag:node.tagName,id:node.id,className:String(node.className||'').slice(0,120),text:(node.textContent||'').trim().slice(0,60),left:Math.round(r.left),right:Math.round(r.right),width:Math.round(r.width),height:Math.round(r.height),display:s.display,visibility:s.visibility};
+    }).filter(x => x.width > 0 && x.height > 0 && x.display !== 'none' && x.visibility !== 'hidden' && (x.left < rect.left - 1 || x.right > rect.right + 1));
+    return {panel:el.id,panelScrollWidth:el.scrollWidth,panelClientWidth:el.clientWidth,documentWidth:document.documentElement.scrollWidth,viewportWidth:innerWidth,scrollRegions,offenders};
   });
 }
 async function assertChapterFitsViewport(panel) {
   const result = await inspectHorizontalOverflow(panel);
-  // Hasta 4 px internos pueden provenir del redondeo de borde/padding;
-  // el documento, en cambio, nunca puede exceder el viewport.
-  expect(result.scrollWidth, JSON.stringify(result,null,2)).toBeLessThanOrEqual(result.clientWidth + 4);
+  // El ancho interno de una tabla puede ser mayor que su wrapper: es scroll deliberado.
+  // Se valida que el wrapper permanezca dentro del capítulo y que ningún elemento
+  // visible escape del panel; el documento debe ajustarse estrictamente al viewport.
+  expect(result.scrollRegions.filter(region => !region.contained), JSON.stringify(result,null,2)).toEqual([]);
+  expect(result.offenders, JSON.stringify(result,null,2)).toEqual([]);
   expect(result.documentWidth, JSON.stringify(result,null,2)).toBeLessThanOrEqual(result.viewportWidth);
 }
 module.exports = {openChapter,inspectHorizontalOverflow,assertChapterFitsViewport};
