@@ -13,7 +13,7 @@ class RosterComicCardsContractTests(unittest.TestCase):
         cls.social_links = (ROOT / "social-links.js").read_text(encoding="utf-8")
         cls.html = (ROOT / "index.html").read_text(encoding="utf-8")
         cls.css = (ROOT / "roster-selector.css").read_text(encoding="utf-8")
-        cls.roster = json.loads((ROOT / "roster-data.json").read_text(encoding="utf-8"))
+        cls.roster = json.loads((ROOT / "data/roster.json").read_text(encoding="utf-8"))
         cls.roster_schema = json.loads((ROOT / "schemas/roster-data.schema.json").read_text(encoding="utf-8"))
         cls.creator_records = json.loads((ROOT / "creator-records.json").read_text(encoding="utf-8"))
 
@@ -22,7 +22,7 @@ class RosterComicCardsContractTests(unittest.TestCase):
         self.assertEqual(len(heroes), 8)
         self.assertEqual(len({hero["id"] for hero in heroes}), 8)
         self.assertEqual(len({hero["slug"] for hero in heroes}), 8)
-        self.assertIn("roster-data.json", self.app)
+        self.assertIn("data/roster.json", self.app)
 
     def test_each_card_uses_approved_art_and_keeps_identity_portraits(self):
         expected_art = {
@@ -373,7 +373,7 @@ if __name__ == "__main__":
 
     def test_canonical_name_registry_covers_all_eight_profiles(self):
         import json
-        roster = json.loads((ROOT / "roster-data.json").read_text(encoding="utf-8"))
+        roster = json.loads((ROOT / "data/roster.json").read_text(encoding="utf-8"))
         registry = roster["name_registry"]
         self.assertEqual(len(registry), 8)
         expected = {

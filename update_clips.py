@@ -18,7 +18,7 @@ def iso_utc(value):
     return value.astimezone(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
 
-def load_roster_accounts(path="roster-data.json"):
+def load_roster_accounts(path="data/roster.json"):
     with open(path, "r", encoding="utf-8") as handle:
         roster = json.load(handle)
     accounts = []
@@ -35,9 +35,9 @@ def load_roster_accounts(path="roster-data.json"):
                         "url": account.get("url") or "https://twitch.tv/" + login,
                     })
     if not accounts:
-        raise RuntimeError("No hay cuentas Twitch de creador en roster-data.json.")
+        raise RuntimeError("No hay cuentas Twitch de creador en data/roster.json.")
     if len({item["login"] for item in accounts}) != len(accounts):
-        raise RuntimeError("Hay logins Twitch duplicados en roster-data.json.")
+        raise RuntimeError("Hay logins Twitch duplicados en data/roster.json.")
     return accounts
 
 

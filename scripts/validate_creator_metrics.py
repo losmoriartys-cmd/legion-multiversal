@@ -7,7 +7,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "creator-metrics.json"
-ROSTER = ROOT / "roster-data.json"
+ROSTER = ROOT / "data/roster.json"
 ALLOWED_STATUS = {"fresh", "delayed", "unavailable", "offline", "sampled", "estimated", "verified_public"}
 ALLOWED_VISIBILITY = {"public", "authorized", "editorial"}
 FRESHNESS_MINUTES = {"twitch": 120, "youtube": 120, "kick": 120}
@@ -70,7 +70,7 @@ def validate(registry, roster, now=None):
             },
         }
     if set(creators) != set(expected):
-        errors.append("Los IDs de creator-metrics.json no coinciden con roster-data.json.")
+        errors.append("Los IDs de creator-metrics.json no coinciden con data/roster.json.")
     for creator_id, record in creators.items():
         source = expected.get(creator_id)
         if source is None or not isinstance(record, dict):
@@ -86,7 +86,7 @@ def validate(registry, roster, now=None):
         for account in accounts:
             key = (account.get("platform"), account.get("handle"))
             if key not in source["accounts"]:
-                errors.append("{}: cuenta fuera de roster-data.json: {}".format(creator_id, key))
+                errors.append("{}: cuenta fuera de data/roster.json: {}".format(creator_id, key))
             if key in actual_accounts:
                 errors.append("{}: cuenta duplicada: {}".format(creator_id, key))
             actual_accounts.add(key)

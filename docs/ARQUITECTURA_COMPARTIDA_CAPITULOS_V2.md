@@ -6,10 +6,10 @@
 
 ## 1. Decisiones de arquitectura
 
-1. `roster-data.json` es la única fuente editorial de identidad de creadores/canales. No crear un segundo roster ni copiar listas de integrantes en Estadísticas, En Vivo, Mapa Multiversal o Arsenal.
+1. `data/roster.json` es la única fuente editorial de identidad de creadores/canales. No crear un segundo roster ni copiar listas de integrantes en Estadísticas, En Vivo, Mapa Multiversal o Arsenal.
 2. `creator-profile-core.js` es la capa de resolución compartida. Debe seguir resolviendo roster, registros, métricas, plataformas, actividad y clips; cada consumidor solicita el bundle que necesita y utiliza `getCreator(hero)`.
 3. Los datos de identidad no son datos de rendimiento. Mantener separados:
-   - Identidad, roles, grupo, temas, horarios declarados, redes, ilustración y color: `roster-data.json`.
+   - Identidad, roles, grupo, temas, horarios declarados, redes, ilustración y color: `data/roster.json`.
    - Snapshots de actividad y estado Twitch: `data.json`.
    - Métricas por plataforma: `platform-stats.json`.
    - Métricas normalizadas con fuente, período, visibilidad y frescura: `creator-metrics.json`.
@@ -22,7 +22,7 @@
 
 ## 2. Contrato de identidad canónica
 
-Extender el modelo actual de `roster-data.json` sin cambiar IDs, slugs, cuentas o referencias existentes.
+Extender el modelo actual de `data/roster.json` sin cambiar IDs, slugs, cuentas o referencias existentes.
 
 Campos canónicos por perfil:
 - `id`, `slug`, `name`, `display_name`, `identity_scope`, `role`, `creator_type`.
@@ -154,4 +154,4 @@ Cada PR debe limitar su alcance, actualizar `INFORMES.md`, incluir pruebas autom
 
 ## 10. Archivos protegidos en esta fase
 
-No se modifican `index.html`, `app.js`, hojas de estilo globales, `roster-data.json`, colectores, snapshots ni datos de capítulos. Este PR agrega únicamente arquitectura documental para revisión. El Capítulo 01 queda expresamente fuera del alcance.
+No se modifican `index.html`, `app.js`, hojas de estilo globales, `data/roster.json`, colectores, snapshots ni datos de capítulos. Este PR agrega únicamente arquitectura documental para revisión. El Capítulo 01 queda expresamente fuera del alcance.

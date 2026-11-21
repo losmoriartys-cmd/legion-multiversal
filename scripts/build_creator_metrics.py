@@ -10,7 +10,7 @@ except ModuleNotFoundError:  # ejecución directa desde scripts/build_creator_me
     from growth_analytics import build_growth, build_shared_cases
 
 ROOT = Path(__file__).resolve().parents[1]
-ROSTER_FILE = ROOT / "roster-data.json"
+ROSTER_FILE = ROOT / "data/roster.json"
 TWITCH_FILE = ROOT / "data.json"
 PLATFORM_FILE = ROOT / "platform-stats.json"
 CLIPS_FILE = ROOT / "clips-data.json"
@@ -86,7 +86,7 @@ def build(roster, twitch, platforms, clips, now=None, records=None):
         "schema_version": 2,
         "generated_at": generated,
         "source_files": {
-            "identity": "roster-data.json",
+            "identity": "data/roster.json",
             "twitch": "data.json",
             "platforms": "platform-stats.json",
             "clips": "clips-data.json",

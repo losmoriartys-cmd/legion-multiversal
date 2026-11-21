@@ -77,35 +77,35 @@ else:
             check_local_reference(value, f"{css.name} url()")
 
 # Comprueba los recursos de imagen declarados por cada integrante.
-roster_path = ROOT / "roster-data.json"
+roster_path = ROOT / "data/roster.json"
 if roster_path.is_file():
     try:
         roster = json.loads(roster_path.read_text(encoding="utf-8"))
         heroes = roster.get("heroes") if isinstance(roster, dict) else None
         if not isinstance(heroes, list) or not heroes:
-            ERRORS.append("roster-data.json: falta el arreglo heroes o está vacío")
+            ERRORS.append("data/roster.json: falta el arreglo heroes o está vacío")
         else:
             names = set()
             for index, hero in enumerate(heroes, start=1):
                 if not isinstance(hero, dict) or not hero.get("name") or not hero.get("role"):
-                    ERRORS.append(f"roster-data.json: perfil {index} sin name/role")
+                    ERRORS.append(f"data/roster.json: perfil {index} sin name/role")
                     continue
                 if hero["name"] in names:
-                    ERRORS.append(f"roster-data.json: nombre duplicado {hero['name']}")
+                    ERRORS.append(f"data/roster.json: nombre duplicado {hero['name']}")
                 names.add(hero["name"])
                 for field in ("portrait", "img"):
                     if hero.get(field):
-                        check_local_reference(hero[field], f"roster-data.json {hero['name']} {field}")
+                        check_local_reference(hero[field], f"data/roster.json {hero['name']} {field}")
                     elif field == "portrait":
-                        ERRORS.append(f"roster-data.json {hero['name']}: falta portrait")
+                        ERRORS.append(f"data/roster.json {hero['name']}: falta portrait")
             print(f"Roster: {len(heroes)} perfiles revisados.")
     except (OSError, json.JSONDecodeError) as exc:
-        ERRORS.append(f"roster-data.json: {exc}")
+        ERRORS.append(f"data/roster.json: {exc}")
 else:
-    ERRORS.append("No existe roster-data.json")
+    ERRORS.append("No existe data/roster.json")
 
 # Verifica que las URL públicas guardadas en los JSON tengan formato http(s).
-for path in ROOT.glob("*.json"):
+for path in sorted([*ROOT.glob("*.json"), *ROOT.glob("data/*.json")]):
     try:
         data = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as exc:

@@ -10,7 +10,7 @@
       "type": "object",
       "required": ["identity", "twitch", "platforms", "clips"],
       "properties": {
-        "identity": {"const": "roster-data.json"},
+        "identity": {"const": "data/roster.json"},
         "twitch": {"const": "data.json"},
         "platforms": {"const": "platform-stats.json"},
         "clips": {"const": "clips-data.json"}

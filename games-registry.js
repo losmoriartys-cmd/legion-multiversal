@@ -157,11 +157,11 @@
     try {
       const results = await Promise.all([
         fetch('./data/games.json', { cache: 'no-store' }),
-        fetch('./roster-data.json', { cache: 'no-store' }),
+        fetch('./data/roster.json', { cache: 'no-store' }),
         fetch('./data.json', { cache: 'no-store' }).catch(function () { return null; })
       ]);
       if (!results[0].ok) throw new Error('No se pudo cargar games.json (' + results[0].status + ').');
-      if (!results[1].ok) throw new Error('No se pudo cargar roster-data.json (' + results[1].status + ').');
+      if (!results[1].ok) throw new Error('No se pudo cargar data/roster.json (' + results[1].status + ').');
       const registry = await results[0].json();
       const roster = await results[1].json();
       if (!registry || !Array.isArray(registry.juegos) || !Array.isArray(roster.heroes)) throw new Error('El registro maestro o el Roster no tiene la estructura esperada.');
@@ -198,15 +198,27 @@
   [searchInput, categorySelect, creatorSelect].forEach(function (control) {
     control.addEventListener(control === searchInput ? 'input' : 'change', render);
   });
+  function scrollToRegistryTarget(target) {
+    if (!target || !target.isConnected) return;
+    const rootScroller = document.documentElement;
+    const previousScrollBehavior = rootScroller.style.scrollBehavior;
+    rootScroller.style.scrollBehavior = 'auto';
+    target.scrollIntoView({ block: 'center', behavior: 'auto' });
+    window.requestAnimationFrame(function () { rootScroller.style.scrollBehavior = previousScrollBehavior; });
+  }
   grid.addEventListener('click', function (event) {
     const link = event.target.closest('[data-open-arsenal]');
     if (!link) return;
     event.preventDefault();
     const gameId = link.dataset.openArsenal;
-    if (typeof window.switchChapter === 'function') window.switchChapter(5);
-    window.requestAnimationFrame(function () {
-      document.getElementById('arsenal-game-' + gameId)?.scrollIntoView({ block: 'center', behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
-    });
+    const revealArsenal = function () {
+      scrollToRegistryTarget(document.getElementById('arsenal-game-' + gameId));
+    };
+    if (typeof window.switchChapter === 'function') {
+      window.switchChapter(5, { scrollBehavior: 'auto', afterEnter: revealArsenal });
+    } else {
+      revealArsenal();
+    }
   });
   window.gamesRegistryReady = loadRegistry();
 })();

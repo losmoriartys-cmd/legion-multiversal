@@ -1,4 +1,4 @@
-"""Keep the no-JavaScript Roster links synchronized with roster-data.json."""
+"""Keep the no-JavaScript Roster links synchronized with data/roster.json."""
 from __future__ import annotations
 import argparse
 import html
@@ -9,7 +9,7 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parents[1]
-ROSTER_PATH = ROOT / "roster-data.json"
+ROSTER_PATH = ROOT / "data/roster.json"
 INDEX_PATH = ROOT / "index.html"
 START = "<!-- ROSTER_NOSCRIPT_LINKS:START -->"
 END = "<!-- ROSTER_NOSCRIPT_LINKS:END -->"
@@ -49,7 +49,7 @@ def render_block(roster: dict) -> str:
 def main() -> int:
     parser = argparse.ArgumentParser()
     mode = parser.add_mutually_exclusive_group(required=True)
-    mode.add_argument("--check", action="store_true", help="comprobar que index.html coincide con roster-data.json")
+    mode.add_argument("--check", action="store_true", help="comprobar que index.html coincide con data/roster.json")
     mode.add_argument("--write", action="store_true", help="actualizar el bloque estático dentro de index.html")
     args = parser.parse_args()
     try:

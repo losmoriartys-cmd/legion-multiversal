@@ -11,7 +11,7 @@ class CreatorRecordsValidationTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.records = json.loads((ROOT / "creator-records.json").read_text(encoding="utf-8"))
-        cls.roster = json.loads((ROOT / "roster-data.json").read_text(encoding="utf-8"))
+        cls.roster = json.loads((ROOT / "data/roster.json").read_text(encoding="utf-8"))
 
     def test_committed_creator_records_have_valid_channel_scoped_evidence(self):
         self.assertEqual(validate(self.records, self.roster), [])

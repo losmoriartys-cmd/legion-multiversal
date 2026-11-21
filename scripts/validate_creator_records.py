@@ -32,7 +32,7 @@ def validate(records, roster):
     if not isinstance(channels, dict):
         return ["creator-records.json: channels debe ser un objeto."]
     if set(channels) != expected_ids:
-        errors.append("creator-records.json: los IDs de channels deben coincidir con roster-data.json.")
+        errors.append("creator-records.json: los IDs de channels deben coincidir con data/roster.json.")
 
     for creator_id, record in channels.items():
         if not isinstance(record, dict):
@@ -111,7 +111,7 @@ def validate(records, roster):
 def main():
     try:
         records = json.loads((ROOT / "creator-records.json").read_text(encoding="utf-8"))
-        roster = json.loads((ROOT / "roster-data.json").read_text(encoding="utf-8"))
+        roster = json.loads((ROOT / "data/roster.json").read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as exc:
         print("ERROR: {}".format(exc), file=sys.stderr)
         return 2

@@ -114,7 +114,7 @@ class CommercialPortfolioContractTests(unittest.TestCase):
         cls.html = (ROOT / "index.html").read_text(encoding="utf-8")
     def test_roster_has_thematic_audience_fit_for_all_eight_profiles(self):
         import json
-        roster = json.loads((ROOT / "roster-data.json").read_text(encoding="utf-8"))
+        roster = json.loads((ROOT / "data/roster.json").read_text(encoding="utf-8"))
         self.assertEqual(len(roster["heroes"]), 8)
         for hero in roster["heroes"]:
             self.assertTrue(hero["mediaProfile"]["audience_fit"].startswith("Afinidad temática"))

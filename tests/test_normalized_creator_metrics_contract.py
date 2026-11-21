@@ -45,7 +45,7 @@ def normalized_handle(value):
 class NormalizedCreatorMetricsContractTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.roster = json.loads((ROOT / "roster-data.json").read_text(encoding="utf-8"))
+        cls.roster = json.loads((ROOT / "data/roster.json").read_text(encoding="utf-8"))
         cls.metrics = json.loads((ROOT / "creator-metrics.json").read_text(encoding="utf-8"))
         cls.platform_stats = json.loads((ROOT / "platform-stats.json").read_text(encoding="utf-8"))
         cls.twitch = json.loads((ROOT / "data.json").read_text(encoding="utf-8"))

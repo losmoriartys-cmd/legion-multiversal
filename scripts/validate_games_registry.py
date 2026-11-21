@@ -11,7 +11,7 @@ from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parents[1]
 GAMES_FILE = ROOT / "data" / "games.json"
-ROSTER_FILE = ROOT / "roster-data.json"
+ROSTER_FILE = ROOT / "data/roster.json"
 ALLOWED_CATEGORIES = {
     "Fiesta y humor", "Terror cooperativo", "Deducción social", "Supervivencia",
     "Sandbox y construcción", "Simulación", "Retro y clásicos", "Cooperativo y aventura", "Competitivo",
@@ -55,7 +55,7 @@ def validate_registry(registry: dict, roster: dict) -> list[str]:
 
     heroes = roster.get("heroes") if isinstance(roster, dict) else None
     if not isinstance(heroes, list):
-        return errors + ["roster-data.json no contiene una lista heroes válida."]
+        return errors + ["data/roster.json no contiene una lista heroes válida."]
     roster_ids = {hero.get("id") for hero in heroes if isinstance(hero, dict) and hero.get("id")}
     twitch_ids = {
         hero.get("id")
@@ -247,7 +247,7 @@ def main() -> int:
     sessions = [session for game in games for session in game["sesiones"]]
     povs = [pov for session in sessions for pov in session["pov"]]
     print(f"OK: {len(games)} juegos únicos; {len(sessions)} sesiones BIT; {len(povs)} POV.")
-    print("OK: participantes y canales resuelven contra roster-data.json; fechas y jugadores no verificados se mantienen en null.")
+    print("OK: participantes y canales resuelven contra data/roster.json; fechas y jugadores no verificados se mantienen en null.")
     return 0
 
 

@@ -11,6 +11,7 @@ CSS = (ROOT / "styles.css").read_text(encoding="utf-8")
 
 
 class ArsenalRegistryContractTests(unittest.TestCase):
+    APP = (ROOT / "app.js").read_text(encoding="utf-8")
     def test_chapter_08_reads_the_shared_master_catalog(self):
         chapter = HTML.split('id="chapter-5"', 1)[1].split('id="chapter-6"', 1)[0]
         self.assertIn('id="arsenal-registry"', chapter)
@@ -54,6 +55,18 @@ class ArsenalRegistryContractTests(unittest.TestCase):
         self.assertIn("data-open-arsenal", COLLAB_SCRIPT)
         self.assertIn("data-open-bit", SCRIPT)
         self.assertIn("arsenal-game-", SCRIPT)
+        self.assertIn("afterEnter:revealBit", SCRIPT)
+        self.assertIn("session?.querySelector('[data-open-arsenal]')||session", SCRIPT)
+        self.assertIn("scrollToRegistryTarget(target)", SCRIPT)
+        self.assertIn("scrollIntoView({block:'center',behavior:'auto'})", SCRIPT)
+
+    def test_cross_chapter_navigation_uses_instant_scroll_without_racing_global_smooth_scroll(self):
+        self.assertIn("options.scrollBehavior === 'auto'", self.APP)
+        self.assertIn("rootScroller.style.scrollBehavior = 'auto'", self.APP)
+        self.assertIn("requestAnimationFrame(() => window.requestAnimationFrame", self.APP)
+        self.assertIn("Promise.allSettled(entranceAnimations.map(animation => animation.finished))", self.APP)
+        self.assertIn("afterEnter:revealBit", SCRIPT)
+        self.assertIn("afterEnter: revealArsenal", COLLAB_SCRIPT)
 
     def test_missing_cover_and_player_data_are_not_invented(self):
         self.assertIn("game.portada", SCRIPT)

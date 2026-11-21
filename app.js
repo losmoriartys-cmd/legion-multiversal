@@ -4,17 +4,17 @@ let creatorNameRegistry = {};
 let epicCreatorPrograms = null;
 
 async function loadRosterData() {
-    const response = await fetch('./roster-data.json', { cache: 'no-store' });
-    if (!response.ok) throw new Error('No se pudo cargar roster-data.json (' + response.status + ').');
+    const response = await fetch('./data/roster.json', { cache: 'no-store' });
+    if (!response.ok) throw new Error('No se pudo cargar data/roster.json (' + response.status + ').');
     const payload = await response.json();
     if (!payload || !Array.isArray(payload.heroes) || payload.heroes.length === 0) {
-        throw new Error('roster-data.json no contiene integrantes válidos.');
+        throw new Error('data/roster.json no contiene integrantes válidos.');
     }
     const identifiers = new Set();
     for (const hero of payload.heroes) {
         const identifier = hero && (hero.id || hero.slug);
         if (!identifier || identifiers.has(identifier)) {
-            throw new Error('roster-data.json contiene un integrante sin identificador o con ID duplicado.');
+            throw new Error('data/roster.json contiene un integrante sin identificador o con ID duplicado.');
         }
         identifiers.add(identifier);
     }
@@ -2831,7 +2831,12 @@ function printHeroDossier(){
                 }
             }
             const current = document.querySelector('.chapter-panel.active');
-            if (current === panel) return;
+            if (current === panel) {
+                if (typeof options.afterEnter === 'function') {
+                    window.requestAnimationFrame(() => options.afterEnter(panel));
+                }
+                return;
+            }
             const transition = document.getElementById('chapter-transition');
             const chapterName = (document.querySelector('.nav-btn[data-chapter="' + chapterNum + '"]') || {}).textContent || panel.querySelector('h2')?.textContent || 'NUEVO EXPEDIENTE';
             const readableChapterName = chapterName.replace(/\s+/g, ' ').trim();
@@ -2854,7 +2859,31 @@ function printHeroDossier(){
             recordLegionProgress('chapter', String(chapterNum));
             renderChapterPager(chapterNum);
             playChapterCue();
-            window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+            if (options.scrollBehavior === 'auto') {
+                // Los saltos entre registros no deben competir con el scroll suave global.
+                const rootScroller = document.documentElement;
+                const previousScrollBehavior = rootScroller.style.scrollBehavior;
+                rootScroller.style.scrollBehavior = 'auto';
+                window.scrollTo({ top: 0, behavior: 'auto' });
+                // Mantener el modo inmediato durante el siguiente frame (scrollIntoView del enlace destino).
+                window.requestAnimationFrame(() => window.requestAnimationFrame(() => {
+                    rootScroller.style.scrollBehavior = previousScrollBehavior;
+                }));
+            } else {
+                window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+            }
+            // Los enlaces entre registros esperan a que termine la animación de entrada del capítulo.
+            if (typeof options.afterEnter === 'function') {
+                const entranceAnimations = typeof panel.getAnimations === 'function'
+                    ? panel.getAnimations().filter(animation => animation.effect?.target === panel && animation.playState === 'running')
+                    : [];
+                const revealTarget = () => window.requestAnimationFrame(() => options.afterEnter(panel));
+                if (entranceAnimations.length) {
+                    Promise.allSettled(entranceAnimations.map(animation => animation.finished)).then(revealTarget);
+                } else {
+                    revealTarget();
+                }
+            }
         }
         const rosterContainer = document.getElementById('roster-container');
         function initializeLegionApp() {

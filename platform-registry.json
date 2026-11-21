@@ -1,6 +1,6 @@
 {
   "schema_version": 0,
   "status": "deprecated",
-  "replaced_by": "roster-data.json",
-  "note": "Este archivo ya no es fuente de cuentas. Las identidades y cuentas por plataforma se mantienen en roster-data.json. El colector update_platform_stats.py lee directamente ese registro."
+  "replaced_by": "data/roster.json",
+  "note": "Este archivo ya no es fuente de cuentas. Las identidades y cuentas por plataforma se mantienen en data/roster.json. El colector update_platform_stats.py lee directamente ese registro."
 }

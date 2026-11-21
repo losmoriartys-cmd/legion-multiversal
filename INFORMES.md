@@ -6,7 +6,7 @@
 ## Estado actual reutilizable · ya existe y no debe reconstruirse desde cero
 
 - [x] **Registro maestro de juegos:** games.json, schemas/games.schema.json y scripts/validate_games_registry.py; 18 juegos, 10 sesiones BIT y 11 POV. La Bitácora y el Arsenal consumen ese mismo origen.
-- [x] **Identidad del Roster:** roster-data.json, schemas/roster-data.schema.json y validaciones existentes; el selector público contempla ocho perfiles.
+- [~] **Identidad del Roster:** migración en curso hacia `data/roster.json`; se conservan `schemas/roster-data.schema.json`, los ocho perfiles y sus validaciones, sin cambios editoriales.
 - [x] **Infraestructura QA común:** Playwright verifica 12 IDs de capítulos y cinco anchos (1440, 1024, 768, 390 y 360 px), navegación y overflow.
 - [x] **Validación general y QA portable:** existen workflows para contratos Python, JSON, sintaxis, imágenes, accesibilidad estática, enlaces/anclas y publicación de evidencias.
 - [x] **Colector de clips públicos:** update_clips.py consulta Twitch Helix, conserva metadatos y una ventana de historial de vistas. Su extensión para clips por sesión, feeds y relación con VOD sigue pendiente.
@@ -21,19 +21,48 @@
 
 ### BASE-01 · Una sola fuente de datos organizada en data/
 
-#### Corte inicial en curso · BASE-01A — Registro maestro de juegos
-- [ ] Migrar el registro maestro desde `games.json` a `data/games.json` sin alterar sus 18 juegos, 10 sesiones BIT, 11 POV ni la referencia `EXP-001` de BarFender.
-- [ ] Actualizar consumidores del Arsenal y Colaboraciones, validador, contratos automatizados y filtros del workflow para leer la nueva ruta.
-- [ ] Ejecutar CI y comprobar que ningún consumidor activo siga dependiendo de la ruta antigua antes de integrar.
-- **Estado:** [PR #90](https://github.com/losmoriartys-cmd/legion-multiversal/pull/90) listo para revisión; equivalencia de datos y rutas de consumo verificadas.
-- **CI:** GitHub Actions SUCCESS en validación integral, Python tests y QA común Playwright; preview Cloudflare Pages SUCCESS (preview, no producción).
-- **SHA evaluado:** `875c509925d76ca515ad30bc59c4e63d7bc63c51`. Sin integración en `main`.
-- [ ] Diseñar y documentar la estructura canónica data/ para roster, juegos, horarios declarados, enlaces y referencias audiovisuales. Evitar duplicar campos cuando los horarios deban seguir formando parte del perfil del creador.
+#### Corte integrado · BASE-01A — Registro maestro de juegos
+- [x] Migrar `games.json` a `data/games.json`, conservando exactamente 18 juegos, 10 sesiones BIT, 11 POV y BarFender `EXP-001` (sin sesiones BIT).
+- [x] Actualizar Arsenal, Colaboraciones, validador, contratos de pruebas y workflow para consumir la ruta canónica.
+- [x] CI integral, Python tests y Playwright completados con SUCCESS; preview Cloudflare SUCCESS.
+- **Estado:** PR #90 integrado en `main` el 21/11/2026. Merge SHA: `d9dccc09ae7e850984b11d519989445808bb9a4d`.
+- [x] Diseñar y documentar la estructura canónica `data/` para Roster, juegos, horarios declarados, enlaces y referencias audiovisuales; los horarios se conservan dentro del perfil cuando son editoriales.
 - [ ] Migrar los datos existentes de forma controlada desde los JSON de raíz, manteniendo un único origen por entidad y actualizando consumidores, colectores, páginas, scripts y tests.
 - [ ] Conservar IDs canónicos estables para cada creador, juego, sesión BIT, expediente EXP, VOD y clip; no resolver relaciones por nombres visibles.
 - [ ] Definir compatibilidad de migración y retirar las rutas antiguas solo después de comprobar que ningún consumidor las utiliza.
 
 **Aceptación:** un dato se edita en un único lugar; el sitio, los colectores y las páginas generadas leen esa fuente; no quedan copias paralelas ni rutas rotas.
+
+#### Corte en implementación · BASE-01B — Roster canónico
+
+- [x] Reconciliar PR #81: cerrado como supersedido; la consolidación de pestañas ya está integrada por la evolución posterior del Roster (PR #83).
+
+- [x] Migrar `roster-data.json` a `data/roster.json` conservando exactamente el blob original, los ocho IDs, slugs, cuentas, enlaces, horarios, imágenes y datos editoriales.
+
+- [x] Actualizar aplicación, cargador compartido, Bitácora pública, kit de medios, colectores, validadores, generador de métricas, tests y workflows.
+
+- [x] Retirar la ruta raíz; la búsqueda en consumidores operativos no deja referencias activas a `roster-data.json`.
+
+- [x] Corregir navegación cruzada BIT↔Arsenal esperando el fin de la animación `chapterArrive` antes de desplazar el enlace de destino. Playwright conserva el clic real y exige visibilidad completa (`ratio: 1`); no se usa `force` ni `dispatchEvent`.
+- **Estado:** [PR #91](https://github.com/losmoriartys-cmd/legion-multiversal/pull/91) abierto en borrador; navegación funcional comprobada. La integración queda condicionada al cierre verde de la última validación integral.
+- **Integridad:** blob SHA de `data/roster.json` idéntico al original (`1228911b33d594473ef6e99d43f4b2934eb195a5`); ocho IDs/slug conservados y ruta raíz retirada.
+- **CI del HEAD `66d97a3`:** `validar` FAILURE: 49 pruebas pasaron y falló el clic real del enlace Bitácora→Arsenal porque el panel seguía animándose y el enlace no alcanzaba estabilidad. Python tests, QA común, QA portable y preview Cloudflare Pages SUCCESS.
+- **Corrección verificada:** `switchChapter()` admite un callback `afterEnter` que espera las animaciones activas del panel; ambos registros desplazan el destino después de la entrada. La suite Playwright terminó SUCCESS en el HEAD `d9b832079af0d6d566e6d26b8baadd72338305e5`, con clics reales en las dos direcciones.
+- [x] **Sincronizar con `main`:** merge commit `a847da038a10ec67560d256ee8e02fad063e2822` incorporó los dos commits automáticos posteriores a la base del PR. La rama quedó al día (`ahead 15 / behind 0` en el HEAD de revisión `78bcff3`).
+- [x] Preservar las capturas más recientes de `data.json` y `platform-stats.json` (`2026-11-21T22:58:29Z`) y regenerar `creator-metrics.json` sobre esa captura, manteniendo `source_files.identity = data/roster.json` (`generated_at: 2026-11-21T22:58:30Z`).
+- **QA del HEAD `d9b8320`:** Python tests SUCCESS; QA común de capítulos SUCCESS; QA portable SUCCESS; preview Cloudflare Pages SUCCESS; Playwright de expedientes, Bitácora, pestañas, responsive e historial SUCCESS. `validar` continúa ejecutando la auditoría final de referencias de imágenes; su estado global aún no se marca como SUCCESS hasta que cierre el job.
+- **Último paso antes de integrar:** este commit documental actualizará la evidencia y disparará una nueva pasada de workflows en el HEAD resultante. Mantener el PR en borrador hasta que todos los checks de ese HEAD finalicen SUCCESS.
+- **HEAD con fallo documentado:** `66d97a35420ebb3bed6c0de878732a7836ac8385`.
+
+### Próximo corte editorial · BarFender como colaboración de la Legión
+
+- [ ] Dejar de presentar BarFender como un caso comercial aislado y registrarlo con el mismo modelo editorial que las demás colaboraciones, tanto en Colaboraciones como en Arsenal.
+- [ ] Narrar el primer encuentro como **“Primera misión juntos como Legión”**: el grupo recibió las claves para jugar, sin insinuar patrocinio ni pago.
+- [ ] Incorporar la segunda etapa como la repetición/continuación con el juego completo y el mismo equipo, conectada con la primera misión.
+- [ ] Asociar los POV de Rod3R1k y Akuma a esa segunda etapa, verificando los VOD/enlaces concretos y evitando duplicar sesiones o contabilizar un POV como una sesión aparte.
+- [ ] Reutilizar `BarFenderLos4.jpg` como imagen de apoyo del registro grupal, sin convertirlo en una ficha comercial separada ni repetir la misma imagen innecesariamente.
+- **Criterio de publicación:** una sola ficha de juego en Arsenal y entradas de sesión en la Bitácora con IDs estables; primera misión y partida completa como hitos relacionados. Mantener los IDs y referencias actuales hasta tener verificados los datos de cada sesión.
+- **Alcance:** trabajo editorial independiente de BASE-01B; se abrirá un corte propio sobre el registro compartido de juegos/colaboraciones después de cerrar esta migración.
 
 ### BASE-02 · Esquemas y validación que bloqueen publicaciones inválidas
 - [ ] Completar esquemas JSON para todos los documentos de data/: roster, juegos, horarios, enlaces, sesiones, VOD y clips, con campos obligatorios, opcionales y reglas de null explícitas.

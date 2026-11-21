@@ -7,7 +7,7 @@ from scripts.validate_games_registry import validate_registry
 
 ROOT = Path(__file__).resolve().parents[1]
 GAMES = json.loads((ROOT / "data" / "games.json").read_text(encoding="utf-8"))
-ROSTER = json.loads((ROOT / "roster-data.json").read_text(encoding="utf-8"))
+ROSTER = json.loads((ROOT / "data/roster.json").read_text(encoding="utf-8"))
 
 
 class GamesRegistryTests(unittest.TestCase):

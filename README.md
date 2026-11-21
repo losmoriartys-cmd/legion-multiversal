@@ -64,7 +64,7 @@ Cada colaborador debe:
 | `styles.css` | Hoja de estilos externa. |
 | `app.js` | Lógica de presentación, navegación y expedientes. |
 | `navigation-fix.js` | Respaldo de navegación por capítulos. |
-| `roster-data.json` | Perfiles y datos editoriales de los ocho integrantes. |
+| `data/roster.json` | Perfiles y datos editoriales de los ocho integrantes. |
 | `data/games.json` | Registro maestro de juegos, sesiones BIT, POV y enlaces audiovisuales. |
 | `assets/` | Imágenes y recursos visuales. Confirmar siempre nombres y rutas reales. |
 | `data.json` | Seguimiento automático de actividad Twitch (Helix). No editar manualmente salvo corrección acordada. |
