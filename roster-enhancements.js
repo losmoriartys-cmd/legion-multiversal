@@ -177,7 +177,7 @@
       const liveBadge = badges.querySelector('.comic-roster-activity');
       if (liveBadge) {
         const status = typeof getNormalizedLiveStatus === 'function' ? getNormalizedLiveStatus(hero) : null;
-        const statusLabel = account?.platform === 'youtube' ? 'NO APLICA' : status?.state === 'live' ? 'EN VIVO' : status?.state === 'offline' ? 'OFFLINE' : 'SIN DATOS';
+        const statusLabel = account?.platform === 'youtube' ? 'CONTENIDO · YOUTUBE' : status?.state === 'live' ? 'EN VIVO' : status?.state === 'offline' ? 'OFFLINE' : 'SIN DATOS';
         liveBadge.textContent = statusLabel;
         liveBadge.classList.toggle('is-live', status?.state === 'live');
         liveBadge.classList.toggle('is-not-applicable', account?.platform === 'youtube');
