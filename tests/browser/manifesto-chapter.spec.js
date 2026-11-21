@@ -36,5 +36,14 @@ test('Quiénes somos se adapta a móvil y conserva controles con reduced motion'
   const chapter = page.locator('#chapter-11');
   await expect(chapter.locator('.manifesto-history-line li')).toHaveCount(4);
   await expect(chapter.getByRole('tab', { name: /DURANTE/ })).toBeVisible();
-  expect(await chapter.evaluate(el => el.scrollWidth > el.clientWidth)).toBe(false);
+  const overflow = await chapter.evaluate(el => {
+    const bounds = el.getBoundingClientRect();
+    const offenders = Array.from(el.querySelectorAll('*')).map(node => {
+      const rect = node.getBoundingClientRect();
+      return { tag: node.tagName, className: String(node.className || '').slice(0, 100),
+        left: Math.round(rect.left), right: Math.round(rect.right), width: Math.round(rect.width) };
+    }).filter(item => item.right > bounds.right + 1 || item.left < bounds.left - 1).slice(0, 12);
+    return { scrollWidth: el.scrollWidth, clientWidth: el.clientWidth, offenders };
+  });
+  expect(overflow.scrollWidth, JSON.stringify(overflow)).toBeLessThanOrEqual(overflow.clientWidth);
 });
