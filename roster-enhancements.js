@@ -145,7 +145,9 @@
   function decorateCard(card, hero, index) {
     const metrics = profileMetrics(hero);
     const { channel, account } = metrics;
-    const rhythm = rhythmFor(channel);
+    const rhythm = account?.platform === 'youtube'
+      ? { level: 'NO_APLICA', label: 'NO APLICA', bars: 0, sort: -1 }
+      : rhythmFor(channel);
     const activity = latestActivity(hero, channel);
     const photoCopy = card.querySelector('.comic-roster-photo-copy');
     if (photoCopy && !photoCopy.querySelector('.roster-v3-archetype')) {
@@ -161,8 +163,10 @@
       const liveBadge = badges.querySelector('.comic-roster-activity');
       if (liveBadge) {
         const status = typeof getNormalizedLiveStatus === 'function' ? getNormalizedLiveStatus(hero) : null;
-        liveBadge.textContent = status?.state === 'live' ? 'EN VIVO' : status?.state === 'offline' ? 'OFFLINE' : 'SIN DATOS';
+        const statusLabel = account?.platform === 'youtube' ? 'NO APLICA' : status?.state === 'live' ? 'EN VIVO' : status?.state === 'offline' ? 'OFFLINE' : 'SIN DATOS';
+        liveBadge.textContent = statusLabel;
         liveBadge.classList.toggle('is-live', status?.state === 'live');
+        liveBadge.classList.toggle('is-not-applicable', account?.platform === 'youtube');
       }
       const typeBadge = badges.querySelector('.comic-roster-type');
       if (typeBadge) typeBadge.textContent = account?.platform === 'twitch' ? 'CREADOR EN DIRECTO' : account?.platform === 'youtube' ? 'CREADOR DE VIDEO' : 'FORMATO POR CONFIRMAR';
