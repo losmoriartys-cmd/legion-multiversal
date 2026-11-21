@@ -99,7 +99,8 @@ test('la propuesta individual precarga el perfil en el formulario comercial segu
     switchChapter(2);
   });
   await page.locator('.comic-roster-card[data-creator-id="moriartys"]').click();
-  await page.locator('[data-profile-tab="marcas"]').click();
+  await page.locator('[data-profile-tab="bitacora"]').click();
+  await page.locator('[data-bitacora-view="marcas"]').click();
   const cta = page.locator('#hero-profile-page .hero-profile-collab-cta');
   await expect(cta).toHaveAttribute('href', '#brand-proposal');
   await cta.click();

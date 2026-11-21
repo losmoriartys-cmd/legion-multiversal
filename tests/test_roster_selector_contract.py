@@ -189,7 +189,12 @@ class RosterComicCardsContractTests(unittest.TestCase):
         end = self.app.index("\nfunction activateHeroProfileTab", start)
         tabs = self.app[start:end]
         self.assertIn("['bitacora','BITÁCORA']", tabs)
-        self.assertIn("['marcas','PARA MARCAS']", tabs)
+        self.assertIn('data-bitacora-view="marcas"', tabs)
+        self.assertIn(">PROPUESTA COMERCIAL</button>", tabs)
+        self.assertEqual(tabs.count("data-profile-tab="), 1)
+        bitacora = tabs[tabs.index('id="profile-tab-bitacora"'):]
+        self.assertIn('id="bitacora-panel-marcas"', bitacora)
+        self.assertIn("renderHeroBrandSummary(hero)", bitacora)
         self.assertIn("renderHeroTimeline(hero,record)", tabs)
         self.assertNotIn("['marcas','INTERÉS PARA MARCAS']", tabs)
         self.assertNotIn("ABRIR BITÁCORA COMPLETA", tabs)
