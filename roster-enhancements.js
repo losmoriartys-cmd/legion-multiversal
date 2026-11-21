@@ -168,6 +168,7 @@
       if (typeBadge) typeBadge.textContent = account?.platform === 'twitch' ? 'CREADOR EN DIRECTO' : account?.platform === 'youtube' ? 'CREADOR DE VIDEO' : 'FORMATO POR CONFIRMAR';
     }
     const oldSlots = card.querySelector('.comic-roster-brand-slots');
+    if (oldSlots) { oldSlots.setAttribute('aria-hidden', 'true'); oldSlots.classList.add('roster-v3-legacy-metrics'); }
     const newSlots = document.createElement('span');
     newSlots.className = 'roster-v3-metrics';
     newSlots.setAttribute('aria-label', 'Seguidores, media de viewers y días activos detectados');
@@ -214,6 +215,23 @@
     ].join(' ').toLocaleLowerCase('es');
     card.dataset.rosterThemes = (hero.areas || []).join('|');
     card.style.setProperty('--roster-card-index', String(index));
+    if (!card.dataset.rosterTiltReady) {
+      card.dataset.rosterTiltReady = 'true';
+      card.addEventListener('pointermove', event => {
+        if (event.pointerType !== 'mouse' || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        const bounds = card.getBoundingClientRect();
+        const x = (event.clientX - bounds.left) / Math.max(bounds.width, 1);
+        const y = (event.clientY - bounds.top) / Math.max(bounds.height, 1);
+        card.style.setProperty('--roster-tilt-x', ((.5 - y) * 2.4).toFixed(2) + 'deg');
+        card.style.setProperty('--roster-tilt-y', ((x - .5) * 2.8).toFixed(2) + 'deg');
+        card.classList.add('is-tilting');
+      });
+      card.addEventListener('pointerleave', () => {
+        card.style.setProperty('--roster-tilt-x', '0deg');
+        card.style.setProperty('--roster-tilt-y', '0deg');
+        card.classList.remove('is-tilting');
+      });
+    }
   }
 
   function buildKpis(host, heroes, cards) {
