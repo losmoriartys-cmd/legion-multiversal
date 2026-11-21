@@ -37,16 +37,17 @@
 
 - [x] Reconciliar PR #81: cerrado como supersedido; la consolidación de pestañas ya está integrada por la evolución posterior del Roster (PR #83).
 
-- [ ] Migrar `roster-data.json` a `data/roster.json` conservando los bytes originales, los ocho IDs, slugs, cuentas, enlaces, horarios, imágenes y datos editoriales.
+- [x] Migrar `roster-data.json` a `data/roster.json` conservando exactamente el blob original, los ocho IDs, slugs, cuentas, enlaces, horarios, imágenes y datos editoriales.
 
-- [ ] Actualizar aplicación, cargador compartido, Bitácora pública, kit de medios, colectores, validadores, generador de métricas, tests y workflows.
+- [x] Actualizar aplicación, cargador compartido, Bitácora pública, kit de medios, colectores, validadores, generador de métricas, tests y workflows.
 
-- [ ] Retirar la ruta raíz y comprobar que no quedan consumidores activos de `roster-data.json`.
+- [x] Retirar la ruta raíz; la búsqueda en consumidores operativos no deja referencias activas a `roster-data.json`.
 
-- **Estado:** [PR #91](https://github.com/losmoriartys-cmd/legion-multiversal/pull/91) abierto en borrador; migración de contenido y consumidores preparada, pendiente de integración en `main`.
-- **Integridad:** blob SHA de `data/roster.json` idéntico al original (`1228911b33d594473ef6e99d43f4b2934eb195a5`); ocho IDs/slug conservados y ruta raíz retirada en la rama.
-- **CI:** validación integral, Python tests, QA común, QA portable y preview Cloudflare Pages: todos SUCCESS.
-- **HEAD evaluado:** `513eb1b8a90aaf7b289267d4730758d223d230ea`. Sin integración en `main`.
+- [x] Corregir navegación cruzada BIT↔Arsenal: el enlace de destino queda centrado y visible; scroll global inmediato temporal para evitar competencia con `scroll-behavior:smooth`. Playwright verifica `toBeInViewport()` antes del clic real.
+- **Estado:** [PR #91](https://github.com/losmoriartys-cmd/legion-multiversal/pull/91) validado y listo para integración; todavía no fusionado.
+- **Integridad:** blob SHA de `data/roster.json` idéntico al original (`1228911b33d594473ef6e99d43f4b2934eb195a5`); ocho IDs/slug conservados y ruta raíz retirada.
+- **CI:** `validar` integral SUCCESS (dos ejecuciones); Python tests, QA común, QA portable y preview Cloudflare Pages: todos SUCCESS.
+- **HEAD evaluado:** `75a0b771af2c59e7f442cc524c9f9ae4afa79688`.
 
 ### BASE-02 · Esquemas y validación que bloqueen publicaciones inválidas
 - [ ] Completar esquemas JSON para todos los documentos de data/: roster, juegos, horarios, enlaces, sesiones, VOD y clips, con campos obligatorios, opcionales y reglas de null explícitas.
