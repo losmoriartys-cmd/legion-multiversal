@@ -3593,3 +3593,11 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **Portada `#chapter-0`:** el registro detectó 313 px frente a 310 px internos en el panel a 360 px, pero el documento midió exactamente 360 px y no se detectaron descendientes fuera del panel. Se admite un margen interno máximo de 4 px para redondeo de borde/padding, sin relajar la comprobación global.
 - **Selector ambiguo:** se reemplazó `page.locator('header')` (siete coincidencias) por `page.locator('body > header').first()`, que apunta al encabezado global.
 - **Pendiente de esta corrección:** repetir Playwright en los cinco viewports, revisar recorrido y errores JavaScript y registrar el resultado real. No declarar aprobación hasta que la nueva ejecución termine en verde.
+
+
+## 2026-11-21 — Segunda iteración Playwright PR #85
+
+- **Run:** 44938334249, SHA `ccf79e977b06d5af79729571b5811c8ec5afac1f`.
+- **Resultado:** la navegación completa pasó y el selector global quedó corregido. Los cinco recorridos responsive aún fallaron porque la aserción medía `scrollWidth` del panel, que incluye el ancho intrínseco de contenido desplazable anidado aunque el wrapper de tabla esté contenido y el documento no se desborde.
+- **Ajuste de criterio:** el QA ahora inspecciona las regiones con scroll horizontal, exige que sus cajas visibles estén dentro del panel, exige que ningún elemento visible escape del panel y mantiene estricta la condición `documentWidth <= viewportWidth`. No se relaja el límite global ni se oculta el scroll accesible de la tabla.
+- **Pendiente:** nueva ejecución completa; revisar posibles fallos de geometría o errores JavaScript que aparezcan.
