@@ -75,7 +75,10 @@
         };
       }
     }
-    const slot = window.LMBrand.followersSlot(entry ? [entry] : [], account.platform);
+    if (!entry || !text(entry.source) || !text(entry.as_of)) {
+      return { value: 'No informado', detail: 'No hay una fuente verificable con fecha de captura', available: false };
+    }
+    const slot = window.LMBrand.followersSlot([entry], account.platform);
     if (!slot || slot.text === 'No informado' || !slot.source || !slot.asOf) {
       return { value: 'No informado', detail: 'No hay una fuente verificable con fecha de captura', available: false };
     }
