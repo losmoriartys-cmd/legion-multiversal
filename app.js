@@ -380,10 +380,11 @@ function renderStatsDashboard(hero,helix,sully){
   }));
   const metrics=resolved.map(({definition,metric})=>({
    label:definition.label,
-   value:metric?.state==='available'?statsNumber(metric.value,definition.digits)+(definition.suffix||''):null
+   value:metric&&['available','stale'].includes(metric.state)&&metric.value!==null&&metric.value!==undefined?statsNumber(metric.value,definition.digits)+(definition.suffix||'')+(metric.state==='stale'?' · HISTÓRICO':''):null
   }));
   const status=getNormalizedLiveStatus(hero);
-  const note='Estado del canal: '+status.label+'. Fuente Twitch Helix; promedio y pico son observaciones muestreadas, no analítica privada ni CCV oficial. Captura: '+captureLabel(resolved.map(item=>item.metric))+'.';
+  const historical=resolved.some(item=>item.metric?.state==='stale');
+  const note='Estado del canal: '+status.label+'. Fuente Twitch Helix; promedio y pico son observaciones muestreadas, no analítica privada ni CCV oficial. '+(historical?'Los valores vencidos se conservan identificados como HISTÓRICOS; no representan el estado actual. ':'')+'Captura: '+captureLabel(resolved.map(item=>item.metric))+'.';
   const card=renderStatsExecutiveSource('TWITCH · MÉTRICAS NORMALIZADAS',periodLabel(resolved.map(item=>item.metric)),metrics,note,twitchAccount.url||hero.twitch||null);
   if(card)sources.push(card);
  }
@@ -412,9 +413,10 @@ function renderStatsDashboard(hero,helix,sully){
   }));
   const metrics=resolved.map(({definition,metric})=>({
    label:definition.label,
-   value:metric?.state==='available'?statsNumber(metric.value,definition.digits):null
+   value:metric&&['available','stale'].includes(metric.state)&&metric.value!==null&&metric.value!==undefined?statsNumber(metric.value,definition.digits)+(metric.state==='stale'?' · HISTÓRICO':''):null
   }));
-  const note='Fuente YouTube Data API v3. Los contadores son acumulados públicos; suscriptores pueden estar redondeados. Captura: '+captureLabel(resolved.map(item=>item.metric))+'.';
+  const historical=resolved.some(item=>item.metric?.state==='stale');
+  const note='Fuente YouTube Data API v3. Los contadores son acumulados públicos; suscriptores pueden estar redondeados. '+(historical?'Los valores vencidos se conservan identificados como HISTÓRICOS; no representan el estado actual. ':'')+'Captura: '+captureLabel(resolved.map(item=>item.metric))+'.';
   const card=renderStatsExecutiveSource('YOUTUBE · CANAL VINCULADO',periodLabel(resolved.map(item=>item.metric)),metrics,note,youtubeAccount.url||hero.youtube||null);
   if(card)sources.push(card);
  }
@@ -796,8 +798,10 @@ function getNormalizedLiveStatus(hero,now=Date.now()){
 
 function normalizedMetricValue(metric,digits=1,suffix=''){
  if(!metric||metric.state==='missing')return 'SIN DATOS';
- if(metric.state==='stale')return 'ESTADO SIN ACTUALIZAR';
- return statsNumber(metric.value,digits)+(suffix||'');
+ const valuePresent=metric.value!==null&&metric.value!==undefined&&Number.isFinite(Number(metric.value));
+ if(!valuePresent)return metric.state==='stale'?'DATO HISTÓRICO NO DISPONIBLE':'SIN DATOS';
+ const formatted=statsNumber(metric.value,digits)+(suffix||'');
+ return metric.state==='stale'?formatted+' · HISTÓRICO':formatted;
 }
 
 function normalizedMetricCaptureLabel(metric){
