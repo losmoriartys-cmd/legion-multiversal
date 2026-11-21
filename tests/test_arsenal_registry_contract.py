@@ -56,6 +56,7 @@ class ArsenalRegistryContractTests(unittest.TestCase):
         self.assertIn("data-open-bit", SCRIPT)
         self.assertIn("arsenal-game-", SCRIPT)
         self.assertIn("window.switchChapter(12,{scrollBehavior:'auto'})", SCRIPT)
+        self.assertIn("session?.querySelector('[data-open-arsenal]')||session", SCRIPT)
         self.assertIn("scrollIntoView({block:'center',behavior:'auto'})", SCRIPT)
 
     def test_cross_chapter_navigation_uses_instant_scroll_without_racing_global_smooth_scroll(self):

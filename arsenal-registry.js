@@ -157,7 +157,11 @@
     event.preventDefault();
     const bit=link.dataset.openBit;
     if(typeof window.switchChapter==='function')window.switchChapter(12,{scrollBehavior:'auto'});
-    window.requestAnimationFrame(()=>document.getElementById(bit)?.scrollIntoView({block:'center',behavior:'auto'}));
+    window.requestAnimationFrame(()=>{
+      const session=document.getElementById(bit);
+      const target=session?.querySelector('[data-open-arsenal]')||session;
+      target?.scrollIntoView({block:'center',behavior:'auto'});
+    });
   });
   grid.addEventListener('click',event=>{
     const link=event.target.closest('[data-open-commercial]');
