@@ -48,7 +48,9 @@
 - **Integridad:** blob SHA de `data/roster.json` idéntico al original (`1228911b33d594473ef6e99d43f4b2934eb195a5`); ocho IDs/slug conservados y ruta raíz retirada.
 - **CI del HEAD `66d97a3`:** `validar` FAILURE: 49 pruebas pasaron y falló el clic real del enlace Bitácora→Arsenal porque el panel seguía animándose y el enlace no alcanzaba estabilidad. Python tests, QA común, QA portable y preview Cloudflare Pages SUCCESS.
 - **Corrección en curso:** `switchChapter()` admite un callback `afterEnter` que espera las animaciones activas del panel; los dos registros desplazan el destino después de la entrada. Pendiente de verificar en la siguiente ejecución integral.
-- **Sincronización pendiente:** `main` avanzó dos commits automáticos de métricas tras la base del PR. Se incorporarán preservando los snapshots más recientes y la nueva ruta de identidad.
+- [x] **Sincronizar con `main`:** merge commit `a847da038a10ec67560d256ee8e02fad063e2822` incorporó los dos commits automáticos posteriores a la base del PR. La rama quedó al día (`ahead 15 / behind 0` en el HEAD de revisión `78bcff3`).
+- [x] Preservar las capturas más recientes de `data.json` y `platform-stats.json` (`2026-11-21T22:58:29Z`) y regenerar `creator-metrics.json` sobre esa captura, manteniendo `source_files.identity = data/roster.json` (`generated_at: 2026-11-21T22:58:30Z`).
+- **QA vigente · HEAD `78bcff3`:** Python tests SUCCESS, QA portable SUCCESS, preview Cloudflare Pages SUCCESS; QA común de capítulos y dos ejecuciones de `validar` siguen en progreso. La navegación BIT↔Arsenal todavía no se marca como corregida hasta que Playwright integral confirme el clic real.
 - **HEAD con fallo documentado:** `66d97a35420ebb3bed6c0de878732a7836ac8385`.
 
 ### Próximo corte editorial · BarFender como colaboración de la Legión
