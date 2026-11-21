@@ -6257,3 +6257,28 @@ main .chapter-panel :where(.chapter-cta, .executive-button, .comic-submit-btn,
     overflow-wrap: anywhere;
   }
 }
+
+/* QA responsive · la cabecera editorial ocupa el ancho disponible en móvil. */
+@media (max-width: 650px) {
+  #chapter-12.collaboration-chapter .collab-registry-heading {
+    align-items: stretch;
+  }
+  #chapter-12.collaboration-chapter .collab-registry-heading > div {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+  #chapter-12.collaboration-chapter .collab-registry-heading .collab-kicker {
+    display: block;
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+  #chapter-12.collaboration-chapter .collab-registry-heading h3,
+  #chapter-12.collaboration-chapter .collab-registry-heading p {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+}
