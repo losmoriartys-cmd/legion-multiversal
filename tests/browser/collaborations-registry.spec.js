@@ -87,7 +87,7 @@ test('Capítulo 07 no genera overflow horizontal en escritorio, tablet ni móvil
       };
     });
     expect(metrics.document,'document overflow at '+width+'px').toBeLessThanOrEqual(width);
-    expect(metrics.registryScroll-metrics.registryClient,'registry overflow at '+width+'px').toBeLessThanOrEqual(2);
+    expect(metrics.registryScroll-metrics.registryClient,'registry overflow at '+width+'px: '+JSON.stringify(metrics)).toBeLessThanOrEqual(2);
     if(width<=650) expect(metrics.columns,'mobile must use one column at '+width+'px').toBe(1);
   }
 });
