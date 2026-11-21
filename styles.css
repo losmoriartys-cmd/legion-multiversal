@@ -6079,3 +6079,26 @@ main .chapter-panel :where(.chapter-cta, .executive-button, .comic-submit-btn,
     max-width: 100%;
   }
 }
+
+
+@media (max-width: 600px) {
+  /* El total de VOD está fuera de la figura; se adapta como bloque propio. */
+  #chapter-12 .vod-total {
+    min-width: 0;
+    width: 100%;
+    max-width: 100%;
+  }
+  #chapter-12 .vod-total strong {
+    display: block;
+    max-width: 100%;
+    font-size: clamp(.85rem, 3.6vw, 1rem);
+    line-height: 1.2;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+  #chapter-12 .vod-total span {
+    display: block;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+}
