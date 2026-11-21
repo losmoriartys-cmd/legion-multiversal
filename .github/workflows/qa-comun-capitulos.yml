@@ -1,0 +1,44 @@
+name: QA común de capítulos
+on:
+  pull_request:
+    paths:
+      - 'index.html'
+      - '*.html'
+      - '*.css'
+      - '*.js'
+      - 'tests/browser/**'
+      - 'playwright.config.js'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.github/workflows/qa-comun-capitulos.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  qa-capitulos:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Instalar dependencias fijadas
+        run: npm ci
+      - name: Instalar Chromium de Playwright
+        run: npx playwright install --with-deps chromium
+      - name: Ejecutar QA común de capítulos
+        run: npx playwright test tests/browser/chapter-common-qa.spec.js --reporter=list
+      - name: Publicar resultados y evidencias
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: qa-comun-capitulos-${{ github.sha }}
+          path: |
+            test-results/
+            playwright-report/
+          if-no-files-found: warn
+          retention-days: 14
