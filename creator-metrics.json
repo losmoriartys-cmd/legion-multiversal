@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-21T16:06:24Z",
+  "generated_at": "2026-11-21T16:49:55Z",
   "source_files": {
     "identity": "roster-data.json",
     "twitch": "data.json",
@@ -10,10 +10,10 @@
   },
   "source_snapshot": {
     "data.json": {
-      "updated_at": "2026-11-21T16:06:23Z"
+      "updated_at": "2026-11-21T16:49:54Z"
     },
     "platform-stats.json": {
-      "updated_at": "2026-11-21T16:06:24Z"
+      "updated_at": "2026-11-21T16:49:55Z"
     }
   },
   "methodology": [
@@ -61,7 +61,7 @@
           "label": "Estado de transmisión",
           "value": "offline",
           "unit": "status",
-          "captured_at": "2026-11-21T16:06:23Z",
+          "captured_at": "2026-11-21T16:49:54Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -82,7 +82,7 @@
           "label": "Espectadores en la última captura",
           "value": null,
           "unit": "viewers",
-          "captured_at": "2026-11-21T16:06:23Z",
+          "captured_at": "2026-11-21T16:49:54Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -266,15 +266,15 @@
       ],
       "growth": {
         "schema_version": 1,
-        "generated_at": "2026-11-21T16:06:24Z",
+        "generated_at": "2026-11-21T16:49:55Z",
         "platform": "twitch",
         "history_days_required": 180,
         "windows": {
           "7d": {
             "days": 7,
             "period": {
-              "from": "2026-11-14T16:06:24Z",
-              "to": "2026-11-21T16:06:24Z"
+              "from": "2026-11-14T16:49:55Z",
+              "to": "2026-11-21T16:49:55Z"
             },
             "coverage": {
               "sampled_days": 7,
@@ -334,8 +334,8 @@
                 }
               },
               "previous_period": {
-                "from": "2026-11-07T16:06:24Z",
-                "to": "2026-11-14T16:06:24Z"
+                "from": "2026-11-07T16:49:55Z",
+                "to": "2026-11-14T16:49:55Z"
               },
               "previous_coverage": {
                 "sampled_days": 7,
@@ -343,15 +343,15 @@
                 "coverage_pct": 100.0,
                 "status": "sufficient",
                 "minimum_for_comparison_pct": 65.0,
-                "last_observed_at": "2026-11-14T15:37:47Z"
+                "last_observed_at": "2026-11-14T16:23:31Z"
               }
             }
           },
           "30d": {
             "days": 30,
             "period": {
-              "from": "2026-10-22T16:06:24Z",
-              "to": "2026-11-21T16:06:24Z"
+              "from": "2026-10-22T16:49:55Z",
+              "to": "2026-11-21T16:49:55Z"
             },
             "coverage": {
               "sampled_days": 19,
@@ -390,8 +390,8 @@
               "status": "insufficient_coverage",
               "metrics": {},
               "previous_period": {
-                "from": "2026-09-22T16:06:24Z",
-                "to": "2026-10-22T16:06:24Z"
+                "from": "2026-09-22T16:49:55Z",
+                "to": "2026-10-22T16:49:55Z"
               },
               "previous_coverage": {
                 "sampled_days": 0,
@@ -406,8 +406,8 @@
           "90d": {
             "days": 90,
             "period": {
-              "from": "2026-08-23T16:06:24Z",
-              "to": "2026-11-21T16:06:24Z"
+              "from": "2026-08-23T16:49:55Z",
+              "to": "2026-11-21T16:49:55Z"
             },
             "coverage": {
               "sampled_days": 19,
@@ -446,8 +446,8 @@
               "status": "insufficient_coverage",
               "metrics": {},
               "previous_period": {
-                "from": "2026-05-25T16:06:24Z",
-                "to": "2026-08-23T16:06:24Z"
+                "from": "2026-05-25T16:49:55Z",
+                "to": "2026-08-23T16:49:55Z"
               },
               "previous_coverage": {
                 "sampled_days": 0,
@@ -791,7 +791,7 @@
           "label": "Estado de transmisión",
           "value": "offline",
           "unit": "status",
-          "captured_at": "2026-11-21T16:06:23Z",
+          "captured_at": "2026-11-21T16:49:54Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -812,7 +812,7 @@
           "label": "Espectadores en la última captura",
           "value": null,
           "unit": "viewers",
-          "captured_at": "2026-11-21T16:06:23Z",
+          "captured_at": "2026-11-21T16:49:54Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -996,15 +996,15 @@
       ],
       "growth": {
         "schema_version": 1,
-        "generated_at": "2026-11-21T16:06:24Z",
+        "generated_at": "2026-11-21T16:49:55Z",
         "platform": "twitch",
         "history_days_required": 180,
         "windows": {
           "7d": {
             "days": 7,
             "period": {
-              "from": "2026-11-14T16:06:24Z",
-              "to": "2026-11-21T16:06:24Z"
+              "from": "2026-11-14T16:49:55Z",
+              "to": "2026-11-21T16:49:55Z"
             },
             "coverage": {
               "sampled_days": 7,
@@ -1064,8 +1064,8 @@
                 }
               },
               "previous_period": {
-                "from": "2026-11-07T16:06:24Z",
-                "to": "2026-11-14T16:06:24Z"
+                "from": "2026-11-07T16:49:55Z",
+                "to": "2026-11-14T16:49:55Z"
               },
               "previous_coverage": {
                 "sampled_days": 7,
@@ -1073,15 +1073,15 @@
                 "coverage_pct": 100.0,
                 "status": "sufficient",
                 "minimum_for_comparison_pct": 65.0,
-                "last_observed_at": "2026-11-14T15:37:47Z"
+                "last_observed_at": "2026-11-14T16:23:31Z"
               }
             }
           },
           "30d": {
             "days": 30,
             "period": {
-              "from": "2026-10-22T16:06:24Z",
-              "to": "2026-11-21T16:06:24Z"
+              "from": "2026-10-22T16:49:55Z",
+              "to": "2026-11-21T16:49:55Z"
             },
             "coverage": {
               "sampled_days": 19,
@@ -1120,8 +1120,8 @@
               "status": "insufficient_coverage",
               "metrics": {},
               "previous_period": {
-                "from": "2026-09-22T16:06:24Z",
-                "to": "2026-10-22T16:06:24Z"
+                "from": "2026-09-22T16:49:55Z",
+                "to": "2026-10-22T16:49:55Z"
               },
               "previous_coverage": {
                 "sampled_days": 0,
@@ -1136,8 +1136,8 @@
           "90d": {
             "days": 90,
             "period": {
-              "from": "2026-08-23T16:06:24Z",
-              "to": "2026-11-21T16:06:24Z"
+              "from": "2026-08-23T16:49:55Z",
+              "to": "2026-11-21T16:49:55Z"
             },
             "coverage": {
               "sampled_days": 19,
@@ -1176,8 +1176,8 @@
               "status": "insufficient_coverage",
               "metrics": {},
               "previous_period": {
-                "from": "2026-05-25T16:06:24Z",
-                "to": "2026-08-23T16:06:24Z"
+                "from": "2026-05-25T16:49:55Z",
+                "to": "2026-08-23T16:49:55Z"
               },
               "previous_coverage": {
                 "sampled_days": 0,
@@ -1565,7 +1565,7 @@
           "label": "Estado de transmisión",
           "value": "offline",
           "unit": "status",
-          "captured_at": "2026-11-21T16:06:23Z",
+          "captured_at": "2026-11-21T16:49:54Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -1586,7 +1586,7 @@
           "label": "Espectadores en la última captura",
           "value": null,
           "unit": "viewers",
-          "captured_at": "2026-11-21T16:06:23Z",
+          "captured_at": "2026-11-21T16:49:54Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -1770,15 +1770,15 @@
       ],
       "growth": {
         "schema_version": 1,
-        "generated_at": "2026-11-21T16:06:24Z",
+        "generated_at": "2026-11-21T16:49:55Z",
         "platform": "twitch",
         "history_days_required": 180,
         "windows": {
           "7d": {
             "days": 7,
             "period": {
-              "from": "2026-11-14T16:06:24Z",
-              "to": "2026-11-21T16:06:24Z"
+              "from": "2026-11-14T16:49:55Z",
+              "to": "2026-11-21T16:49:55Z"
             },
             "coverage": {
               "sampled_days": 7,
@@ -1838,8 +1838,8 @@
                 }
               },
               "previous_period": {
-                "from": "2026-11-07T16:06:24Z",
-                "to": "2026-11-14T16:06:24Z"
+                "from": "2026-11-07T16:49:55Z",
+                "to": "2026-11-14T16:49:55Z"
               },
               "previous_coverage": {
                 "sampled_days": 7,
@@ -1847,15 +1847,15 @@
                 "coverage_pct": 100.0,
                 "status": "sufficient",
                 "minimum_for_comparison_pct": 65.0,
-                "last_observed_at": "2026-11-14T15:37:47Z"
+                "last_observed_at": "2026-11-14T16:23:31Z"
               }
             }
           },
           "30d": {
             "days": 30,
             "period": {
-              "from": "2026-10-22T16:06:24Z",
-              "to": "2026-11-21T16:06:24Z"
+              "from": "2026-10-22T16:49:55Z",
+              "to": "2026-11-21T16:49:55Z"
             },
             "coverage": {
               "sampled_days": 19,
@@ -1894,8 +1894,8 @@
               "status": "insufficient_coverage",
               "metrics": {},
               "previous_period": {
-                "from": "2026-09-22T16:06:24Z",
-                "to": "2026-10-22T16:06:24Z"
+                "from": "2026-09-22T16:49:55Z",
+                "to": "2026-10-22T16:49:55Z"
               },
               "previous_coverage": {
                 "sampled_days": 0,
@@ -1910,8 +1910,8 @@
           "90d": {
             "days": 90,
             "period": {
-              "from": "2026-08-23T16:06:24Z",
-              "to": "2026-11-21T16:06:24Z"
+              "from": "2026-08-23T16:49:55Z",
+              "to": "2026-11-21T16:49:55Z"
             },
             "coverage": {
               "sampled_days": 19,
@@ -1950,8 +1950,8 @@
               "status": "insufficient_coverage",
               "metrics": {},
               "previous_period": {
-                "from": "2026-05-25T16:06:24Z",
-                "to": "2026-08-23T16:06:24Z"
+                "from": "2026-05-25T16:49:55Z",
+                "to": "2026-08-23T16:49:55Z"
               },
               "previous_coverage": {
                 "sampled_days": 0,
@@ -2287,7 +2287,7 @@
           "label": "Estado de transmisión",
           "value": "offline",
           "unit": "status",
-          "captured_at": "2026-11-21T16:06:23Z",
+          "captured_at": "2026-11-21T16:49:54Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -2308,7 +2308,7 @@
           "label": "Espectadores en la última captura",
           "value": null,
           "unit": "viewers",
-          "captured_at": "2026-11-21T16:06:23Z",
+          "captured_at": "2026-11-21T16:49:54Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -2492,15 +2492,15 @@
       ],
       "growth": {
         "schema_version": 1,
-        "generated_at": "2026-11-21T16:06:24Z",
+        "generated_at": "2026-11-21T16:49:55Z",
         "platform": "twitch",
         "history_days_required": 180,
         "windows": {
           "7d": {
             "days": 7,
             "period": {
-              "from": "2026-11-14T16:06:24Z",
-              "to": "2026-11-21T16:06:24Z"
+              "from": "2026-11-14T16:49:55Z",
+              "to": "2026-11-21T16:49:55Z"
             },
             "coverage": {
               "sampled_days": 7,
@@ -2560,8 +2560,8 @@
                 }
               },
               "previous_period": {
-                "from": "2026-11-07T16:06:24Z",
-                "to": "2026-11-14T16:06:24Z"
+                "from": "2026-11-07T16:49:55Z",
+                "to": "2026-11-14T16:49:55Z"
               },
               "previous_coverage": {
                 "sampled_days": 7,
@@ -2569,15 +2569,15 @@
                 "coverage_pct": 100.0,
                 "status": "sufficient",
                 "minimum_for_comparison_pct": 65.0,
-                "last_observed_at": "2026-11-14T15:37:47Z"
+                "last_observed_at": "2026-11-14T16:23:31Z"
               }
             }
           },
           "30d": {
             "days": 30,
             "period": {
-              "from": "2026-10-22T16:06:24Z",
-              "to": "2026-11-21T16:06:24Z"
+              "from": "2026-10-22T16:49:55Z",
+              "to": "2026-11-21T16:49:55Z"
             },
             "coverage": {
               "sampled_days": 19,
@@ -2616,8 +2616,8 @@
               "status": "insufficient_coverage",
               "metrics": {},
               "previous_period": {
-                "from": "2026-09-22T16:06:24Z",
-                "to": "2026-10-22T16:06:24Z"
+                "from": "2026-09-22T16:49:55Z",
+                "to": "2026-10-22T16:49:55Z"
               },
               "previous_coverage": {
                 "sampled_days": 0,
@@ -2632,8 +2632,8 @@
           "90d": {
             "days": 90,
             "period": {
-              "from": "2026-08-23T16:06:24Z",
-              "to": "2026-11-21T16:06:24Z"
+              "from": "2026-08-23T16:49:55Z",
+              "to": "2026-11-21T16:49:55Z"
             },
             "coverage": {
               "sampled_days": 19,
@@ -2672,8 +2672,8 @@
               "status": "insufficient_coverage",
               "metrics": {},
               "previous_period": {
-                "from": "2026-05-25T16:06:24Z",
-                "to": "2026-08-23T16:06:24Z"
+                "from": "2026-05-25T16:49:55Z",
+                "to": "2026-08-23T16:49:55Z"
               },
               "previous_coverage": {
                 "sampled_days": 0,
@@ -2966,7 +2966,7 @@
           "label": "Estado de transmisión",
           "value": "offline",
           "unit": "status",
-          "captured_at": "2026-11-21T16:06:23Z",
+          "captured_at": "2026-11-21T16:49:54Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -2987,7 +2987,7 @@
           "label": "Espectadores en la última captura",
           "value": null,
           "unit": "viewers",
-          "captured_at": "2026-11-21T16:06:23Z",
+          "captured_at": "2026-11-21T16:49:54Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -3171,15 +3171,15 @@
       ],
       "growth": {
         "schema_version": 1,
-        "generated_at": "2026-11-21T16:06:24Z",
+        "generated_at": "2026-11-21T16:49:55Z",
         "platform": "twitch",
         "history_days_required": 180,
         "windows": {
           "7d": {
             "days": 7,
             "period": {
-              "from": "2026-11-14T16:06:24Z",
-              "to": "2026-11-21T16:06:24Z"
+              "from": "2026-11-14T16:49:55Z",
+              "to": "2026-11-21T16:49:55Z"
             },
             "coverage": {
               "sampled_days": 7,
@@ -3239,8 +3239,8 @@
                 }
               },
               "previous_period": {
-                "from": "2026-11-07T16:06:24Z",
-                "to": "2026-11-14T16:06:24Z"
+                "from": "2026-11-07T16:49:55Z",
+                "to": "2026-11-14T16:49:55Z"
               },
               "previous_coverage": {
                 "sampled_days": 7,
@@ -3248,15 +3248,15 @@
                 "coverage_pct": 100.0,
                 "status": "sufficient",
                 "minimum_for_comparison_pct": 65.0,
-                "last_observed_at": "2026-11-14T15:37:47Z"
+                "last_observed_at": "2026-11-14T16:23:31Z"
               }
             }
           },
           "30d": {
             "days": 30,
             "period": {
-              "from": "2026-10-22T16:06:24Z",
-              "to": "2026-11-21T16:06:24Z"
+              "from": "2026-10-22T16:49:55Z",
+              "to": "2026-11-21T16:49:55Z"
             },
             "coverage": {
               "sampled_days": 19,
@@ -3295,8 +3295,8 @@
               "status": "insufficient_coverage",
               "metrics": {},
               "previous_period": {
-                "from": "2026-09-22T16:06:24Z",
-                "to": "2026-10-22T16:06:24Z"
+                "from": "2026-09-22T16:49:55Z",
+                "to": "2026-10-22T16:49:55Z"
               },
               "previous_coverage": {
                 "sampled_days": 0,
@@ -3311,8 +3311,8 @@
           "90d": {
             "days": 90,
             "period": {
-              "from": "2026-08-23T16:06:24Z",
-              "to": "2026-11-21T16:06:24Z"
+              "from": "2026-08-23T16:49:55Z",
+              "to": "2026-11-21T16:49:55Z"
             },
             "coverage": {
               "sampled_days": 19,
@@ -3351,8 +3351,8 @@
               "status": "insufficient_coverage",
               "metrics": {},
               "previous_period": {
-                "from": "2026-05-25T16:06:24Z",
-                "to": "2026-08-23T16:06:24Z"
+                "from": "2026-05-25T16:49:55Z",
+                "to": "2026-08-23T16:49:55Z"
               },
               "previous_coverage": {
                 "sampled_days": 0,
@@ -3702,7 +3702,7 @@
           "label": "Estado de transmisión",
           "value": "offline",
           "unit": "status",
-          "captured_at": "2026-11-21T16:06:23Z",
+          "captured_at": "2026-11-21T16:49:54Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -3723,7 +3723,7 @@
           "label": "Espectadores en la última captura",
           "value": null,
           "unit": "viewers",
-          "captured_at": "2026-11-21T16:06:23Z",
+          "captured_at": "2026-11-21T16:49:54Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -3907,15 +3907,15 @@
       ],
       "growth": {
         "schema_version": 1,
-        "generated_at": "2026-11-21T16:06:24Z",
+        "generated_at": "2026-11-21T16:49:55Z",
         "platform": "twitch",
         "history_days_required": 180,
         "windows": {
           "7d": {
             "days": 7,
             "period": {
-              "from": "2026-11-14T16:06:24Z",
-              "to": "2026-11-21T16:06:24Z"
+              "from": "2026-11-14T16:49:55Z",
+              "to": "2026-11-21T16:49:55Z"
             },
             "coverage": {
               "sampled_days": 7,
@@ -3975,8 +3975,8 @@
                 }
               },
               "previous_period": {
-                "from": "2026-11-07T16:06:24Z",
-                "to": "2026-11-14T16:06:24Z"
+                "from": "2026-11-07T16:49:55Z",
+                "to": "2026-11-14T16:49:55Z"
               },
               "previous_coverage": {
                 "sampled_days": 7,
@@ -3984,15 +3984,15 @@
                 "coverage_pct": 100.0,
                 "status": "sufficient",
                 "minimum_for_comparison_pct": 65.0,
-                "last_observed_at": "2026-11-14T15:37:47Z"
+                "last_observed_at": "2026-11-14T16:23:31Z"
               }
             }
           },
           "30d": {
             "days": 30,
             "period": {
-              "from": "2026-10-22T16:06:24Z",
-              "to": "2026-11-21T16:06:24Z"
+              "from": "2026-10-22T16:49:55Z",
+              "to": "2026-11-21T16:49:55Z"
             },
             "coverage": {
               "sampled_days": 19,
@@ -4031,8 +4031,8 @@
               "status": "insufficient_coverage",
               "metrics": {},
               "previous_period": {
-                "from": "2026-09-22T16:06:24Z",
-                "to": "2026-10-22T16:06:24Z"
+                "from": "2026-09-22T16:49:55Z",
+                "to": "2026-10-22T16:49:55Z"
               },
               "previous_coverage": {
                 "sampled_days": 0,
@@ -4047,8 +4047,8 @@
           "90d": {
             "days": 90,
             "period": {
-              "from": "2026-08-23T16:06:24Z",
-              "to": "2026-11-21T16:06:24Z"
+              "from": "2026-08-23T16:49:55Z",
+              "to": "2026-11-21T16:49:55Z"
             },
             "coverage": {
               "sampled_days": 19,
@@ -4087,8 +4087,8 @@
               "status": "insufficient_coverage",
               "metrics": {},
               "previous_period": {
-                "from": "2026-05-25T16:06:24Z",
-                "to": "2026-08-23T16:06:24Z"
+                "from": "2026-05-25T16:49:55Z",
+                "to": "2026-08-23T16:49:55Z"
               },
               "previous_coverage": {
                 "sampled_days": 0,
@@ -4179,11 +4179,11 @@
           "label": "Suscriptores públicos",
           "value": 56,
           "unit": "subscribers",
-          "captured_at": "2026-11-21T16:06:24Z",
+          "captured_at": "2026-11-21T16:49:55Z",
           "period": {
             "kind": "cumulative",
             "from": null,
-            "to": "2026-11-21T16:06:24Z"
+            "to": "2026-11-21T16:49:55Z"
           },
           "source": "YouTube Data API v3",
           "method": "youtube_data_api_public",
@@ -4200,11 +4200,11 @@
           "label": "Visualizaciones acumuladas",
           "value": 431,
           "unit": "views",
-          "captured_at": "2026-11-21T16:06:24Z",
+          "captured_at": "2026-11-21T16:49:55Z",
           "period": {
             "kind": "cumulative",
             "from": null,
-            "to": "2026-11-21T16:06:24Z"
+            "to": "2026-11-21T16:49:55Z"
           },
           "source": "YouTube Data API v3",
           "method": "youtube_data_api_public",
@@ -4221,11 +4221,11 @@
           "label": "Videos publicados",
           "value": 6,
           "unit": "videos",
-          "captured_at": "2026-11-21T16:06:24Z",
+          "captured_at": "2026-11-21T16:49:55Z",
           "period": {
             "kind": "cumulative",
             "from": null,
-            "to": "2026-11-21T16:06:24Z"
+            "to": "2026-11-21T16:49:55Z"
           },
           "source": "YouTube Data API v3",
           "method": "youtube_data_api_public",
@@ -4237,15 +4237,15 @@
       ],
       "growth": {
         "schema_version": 1,
-        "generated_at": "2026-11-21T16:06:24Z",
+        "generated_at": "2026-11-21T16:49:55Z",
         "platform": "youtube",
         "history_days_required": 180,
         "windows": {
           "7d": {
             "days": 7,
             "period": {
-              "from": "2026-11-14T16:06:24Z",
-              "to": "2026-11-21T16:06:24Z"
+              "from": "2026-11-14T16:49:55Z",
+              "to": "2026-11-21T16:49:55Z"
             },
             "coverage": {
               "sampled_days": 1,
@@ -4254,7 +4254,7 @@
               "status": "partial",
               "minimum_for_comparison_pct": 65.0,
               "capture_count": 1,
-              "last_observed_at": "2026-11-21T16:06:24Z"
+              "last_observed_at": "2026-11-21T16:49:55Z"
             },
             "metrics": {
               "subscribers_gained": {
@@ -4266,7 +4266,7 @@
                 "captures": 1,
                 "basis": "insufficient_captures",
                 "start_captured_at": null,
-                "end_captured_at": "2026-11-21T16:06:24Z"
+                "end_captured_at": "2026-11-21T16:49:55Z"
               },
               "views_gained": {
                 "status": "baseline_pending",
@@ -4277,7 +4277,7 @@
                 "captures": 1,
                 "basis": "insufficient_captures",
                 "start_captured_at": null,
-                "end_captured_at": "2026-11-21T16:06:24Z"
+                "end_captured_at": "2026-11-21T16:49:55Z"
               },
               "videos_published": {
                 "status": "baseline_pending",
@@ -4288,15 +4288,15 @@
                 "captures": 1,
                 "basis": "insufficient_captures",
                 "start_captured_at": null,
-                "end_captured_at": "2026-11-21T16:06:24Z"
+                "end_captured_at": "2026-11-21T16:49:55Z"
               }
             },
             "comparison": {
               "status": "insufficient_coverage",
               "metrics": {},
               "previous_period": {
-                "from": "2026-11-07T16:06:24Z",
-                "to": "2026-11-14T16:06:24Z"
+                "from": "2026-11-07T16:49:55Z",
+                "to": "2026-11-14T16:49:55Z"
               },
               "previous_coverage": {
                 "sampled_days": 0,
@@ -4312,8 +4312,8 @@
           "30d": {
             "days": 30,
             "period": {
-              "from": "2026-10-22T16:06:24Z",
-              "to": "2026-11-21T16:06:24Z"
+              "from": "2026-10-22T16:49:55Z",
+              "to": "2026-11-21T16:49:55Z"
             },
             "coverage": {
               "sampled_days": 1,
@@ -4322,7 +4322,7 @@
               "status": "partial",
               "minimum_for_comparison_pct": 65.0,
               "capture_count": 1,
-              "last_observed_at": "2026-11-21T16:06:24Z"
+              "last_observed_at": "2026-11-21T16:49:55Z"
             },
             "metrics": {
               "subscribers_gained": {
@@ -4334,7 +4334,7 @@
                 "captures": 1,
                 "basis": "insufficient_captures",
                 "start_captured_at": null,
-                "end_captured_at": "2026-11-21T16:06:24Z"
+                "end_captured_at": "2026-11-21T16:49:55Z"
               },
               "views_gained": {
                 "status": "baseline_pending",
@@ -4345,7 +4345,7 @@
                 "captures": 1,
                 "basis": "insufficient_captures",
                 "start_captured_at": null,
-                "end_captured_at": "2026-11-21T16:06:24Z"
+                "end_captured_at": "2026-11-21T16:49:55Z"
               },
               "videos_published": {
                 "status": "baseline_pending",
@@ -4356,15 +4356,15 @@
                 "captures": 1,
                 "basis": "insufficient_captures",
                 "start_captured_at": null,
-                "end_captured_at": "2026-11-21T16:06:24Z"
+                "end_captured_at": "2026-11-21T16:49:55Z"
               }
             },
             "comparison": {
               "status": "insufficient_coverage",
               "metrics": {},
               "previous_period": {
-                "from": "2026-09-22T16:06:24Z",
-                "to": "2026-10-22T16:06:24Z"
+                "from": "2026-09-22T16:49:55Z",
+                "to": "2026-10-22T16:49:55Z"
               },
               "previous_coverage": {
                 "sampled_days": 0,
@@ -4380,8 +4380,8 @@
           "90d": {
             "days": 90,
             "period": {
-              "from": "2026-08-23T16:06:24Z",
-              "to": "2026-11-21T16:06:24Z"
+              "from": "2026-08-23T16:49:55Z",
+              "to": "2026-11-21T16:49:55Z"
             },
             "coverage": {
               "sampled_days": 1,
@@ -4390,7 +4390,7 @@
               "status": "partial",
               "minimum_for_comparison_pct": 65.0,
               "capture_count": 1,
-              "last_observed_at": "2026-11-21T16:06:24Z"
+              "last_observed_at": "2026-11-21T16:49:55Z"
             },
             "metrics": {
               "subscribers_gained": {
@@ -4402,7 +4402,7 @@
                 "captures": 1,
                 "basis": "insufficient_captures",
                 "start_captured_at": null,
-                "end_captured_at": "2026-11-21T16:06:24Z"
+                "end_captured_at": "2026-11-21T16:49:55Z"
               },
               "views_gained": {
                 "status": "baseline_pending",
@@ -4413,7 +4413,7 @@
                 "captures": 1,
                 "basis": "insufficient_captures",
                 "start_captured_at": null,
-                "end_captured_at": "2026-11-21T16:06:24Z"
+                "end_captured_at": "2026-11-21T16:49:55Z"
               },
               "videos_published": {
                 "status": "baseline_pending",
@@ -4424,15 +4424,15 @@
                 "captures": 1,
                 "basis": "insufficient_captures",
                 "start_captured_at": null,
-                "end_captured_at": "2026-11-21T16:06:24Z"
+                "end_captured_at": "2026-11-21T16:49:55Z"
               }
             },
             "comparison": {
               "status": "insufficient_coverage",
               "metrics": {},
               "previous_period": {
-                "from": "2026-05-25T16:06:24Z",
-                "to": "2026-08-23T16:06:24Z"
+                "from": "2026-05-25T16:49:55Z",
+                "to": "2026-08-23T16:49:55Z"
               },
               "previous_coverage": {
                 "sampled_days": 0,
@@ -4448,7 +4448,7 @@
         },
         "content_performance": {
           "status": "verified_public",
-          "captured_at": "2026-11-21T16:06:24Z",
+          "captured_at": "2026-11-21T16:49:55Z",
           "source": "YouTube Data API v3",
           "methodology": "Hasta 10 videos recientes. La tasa pública de interacción se calcula como (me gusta + comentarios) / visualizaciones; no equivale al engagement privado de YouTube Studio. Las variaciones comienzan en la primera captura diaria propia.",
           "top_clips": [],
@@ -4472,7 +4472,7 @@
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T23:21:59Z",
-                  "end_captured_at": "2026-11-21T16:06:24Z"
+                  "end_captured_at": "2026-11-21T16:49:55Z"
                 },
                 "30d": {
                   "status": "available",
@@ -4483,7 +4483,7 @@
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T23:21:59Z",
-                  "end_captured_at": "2026-11-21T16:06:24Z"
+                  "end_captured_at": "2026-11-21T16:49:55Z"
                 },
                 "90d": {
                   "status": "available",
@@ -4494,10 +4494,10 @@
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T23:21:59Z",
-                  "end_captured_at": "2026-11-21T16:06:24Z"
+                  "end_captured_at": "2026-11-21T16:49:55Z"
                 }
               },
-              "captured_at": "2026-11-21T16:06:24Z",
+              "captured_at": "2026-11-21T16:49:55Z",
               "source": "YouTube Data API v3"
             },
             {
@@ -4519,7 +4519,7 @@
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T23:21:59Z",
-                  "end_captured_at": "2026-11-21T16:06:24Z"
+                  "end_captured_at": "2026-11-21T16:49:55Z"
                 },
                 "30d": {
                   "status": "available",
@@ -4530,7 +4530,7 @@
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T23:21:59Z",
-                  "end_captured_at": "2026-11-21T16:06:24Z"
+                  "end_captured_at": "2026-11-21T16:49:55Z"
                 },
                 "90d": {
                   "status": "available",
@@ -4541,10 +4541,10 @@
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T23:21:59Z",
-                  "end_captured_at": "2026-11-21T16:06:24Z"
+                  "end_captured_at": "2026-11-21T16:49:55Z"
                 }
               },
-              "captured_at": "2026-11-21T16:06:24Z",
+              "captured_at": "2026-11-21T16:49:55Z",
               "source": "YouTube Data API v3"
             },
             {
@@ -4566,7 +4566,7 @@
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T23:21:59Z",
-                  "end_captured_at": "2026-11-21T16:06:24Z"
+                  "end_captured_at": "2026-11-21T16:49:55Z"
                 },
                 "30d": {
                   "status": "available",
@@ -4577,7 +4577,7 @@
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T23:21:59Z",
-                  "end_captured_at": "2026-11-21T16:06:24Z"
+                  "end_captured_at": "2026-11-21T16:49:55Z"
                 },
                 "90d": {
                   "status": "available",
@@ -4588,10 +4588,10 @@
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T23:21:59Z",
-                  "end_captured_at": "2026-11-21T16:06:24Z"
+                  "end_captured_at": "2026-11-21T16:49:55Z"
                 }
               },
-              "captured_at": "2026-11-21T16:06:24Z",
+              "captured_at": "2026-11-21T16:49:55Z",
               "source": "YouTube Data API v3"
             },
             {
@@ -4613,7 +4613,7 @@
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T23:21:59Z",
-                  "end_captured_at": "2026-11-21T16:06:24Z"
+                  "end_captured_at": "2026-11-21T16:49:55Z"
                 },
                 "30d": {
                   "status": "available",
@@ -4624,7 +4624,7 @@
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T23:21:59Z",
-                  "end_captured_at": "2026-11-21T16:06:24Z"
+                  "end_captured_at": "2026-11-21T16:49:55Z"
                 },
                 "90d": {
                   "status": "available",
@@ -4635,10 +4635,10 @@
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T23:21:59Z",
-                  "end_captured_at": "2026-11-21T16:06:24Z"
+                  "end_captured_at": "2026-11-21T16:49:55Z"
                 }
               },
-              "captured_at": "2026-11-21T16:06:24Z",
+              "captured_at": "2026-11-21T16:49:55Z",
               "source": "YouTube Data API v3"
             },
             {
@@ -4660,7 +4660,7 @@
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T23:21:59Z",
-                  "end_captured_at": "2026-11-21T16:06:24Z"
+                  "end_captured_at": "2026-11-21T16:49:55Z"
                 },
                 "30d": {
                   "status": "available",
@@ -4671,7 +4671,7 @@
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T23:21:59Z",
-                  "end_captured_at": "2026-11-21T16:06:24Z"
+                  "end_captured_at": "2026-11-21T16:49:55Z"
                 },
                 "90d": {
                   "status": "available",
@@ -4682,10 +4682,10 @@
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T23:21:59Z",
-                  "end_captured_at": "2026-11-21T16:06:24Z"
+                  "end_captured_at": "2026-11-21T16:49:55Z"
                 }
               },
-              "captured_at": "2026-11-21T16:06:24Z",
+              "captured_at": "2026-11-21T16:49:55Z",
               "source": "YouTube Data API v3"
             }
           ]
@@ -4741,7 +4741,7 @@
           "label": "Estado de transmisión",
           "value": "offline",
           "unit": "status",
-          "captured_at": "2026-11-21T16:06:23Z",
+          "captured_at": "2026-11-21T16:49:54Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -4762,7 +4762,7 @@
           "label": "Espectadores en la última captura",
           "value": null,
           "unit": "viewers",
-          "captured_at": "2026-11-21T16:06:23Z",
+          "captured_at": "2026-11-21T16:49:54Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
@@ -4946,15 +4946,15 @@
       ],
       "growth": {
         "schema_version": 1,
-        "generated_at": "2026-11-21T16:06:24Z",
+        "generated_at": "2026-11-21T16:49:55Z",
         "platform": "twitch",
         "history_days_required": 180,
         "windows": {
           "7d": {
             "days": 7,
             "period": {
-              "from": "2026-11-14T16:06:24Z",
-              "to": "2026-11-21T16:06:24Z"
+              "from": "2026-11-14T16:49:55Z",
+              "to": "2026-11-21T16:49:55Z"
             },
             "coverage": {
               "sampled_days": 7,
@@ -4969,11 +4969,11 @@
               "active_days": 8,
               "active_weeks": 2,
               "streams_per_week": 11.0,
-              "observed_live_hours": 15.93,
-              "observed_hours_per_week": 15.93,
-              "average_viewers_sampled": 1.7,
+              "observed_live_hours": 15.09,
+              "observed_hours_per_week": 15.09,
+              "average_viewers_sampled": 1.6,
               "peak_viewers_sampled": 7,
-              "live_samples": 30,
+              "live_samples": 29,
               "followers": {
                 "status": "baseline_pending",
                 "value_start": null,
@@ -5003,19 +5003,19 @@
                   "change": 2
                 },
                 "observed_live_hours": {
-                  "current": 15.93,
-                  "previous": 26.7,
-                  "change": -10.77
+                  "current": 15.09,
+                  "previous": 27.46,
+                  "change": -12.37
                 },
                 "average_viewers_sampled": {
-                  "current": 1.7,
+                  "current": 1.6,
                   "previous": 6.9,
-                  "change": -5.2
+                  "change": -5.3
                 }
               },
               "previous_period": {
-                "from": "2026-11-07T16:06:24Z",
-                "to": "2026-11-14T16:06:24Z"
+                "from": "2026-11-07T16:49:55Z",
+                "to": "2026-11-14T16:49:55Z"
               },
               "previous_coverage": {
                 "sampled_days": 7,
@@ -5023,15 +5023,15 @@
                 "coverage_pct": 100.0,
                 "status": "sufficient",
                 "minimum_for_comparison_pct": 65.0,
-                "last_observed_at": "2026-11-14T15:37:47Z"
+                "last_observed_at": "2026-11-14T16:23:31Z"
               }
             }
           },
           "30d": {
             "days": 30,
             "period": {
-              "from": "2026-10-22T16:06:24Z",
-              "to": "2026-11-21T16:06:24Z"
+              "from": "2026-10-22T16:49:55Z",
+              "to": "2026-11-21T16:49:55Z"
             },
             "coverage": {
               "sampled_days": 19,
@@ -5070,8 +5070,8 @@
               "status": "insufficient_coverage",
               "metrics": {},
               "previous_period": {
-                "from": "2026-09-22T16:06:24Z",
-                "to": "2026-10-22T16:06:24Z"
+                "from": "2026-09-22T16:49:55Z",
+                "to": "2026-10-22T16:49:55Z"
               },
               "previous_coverage": {
                 "sampled_days": 0,
@@ -5086,8 +5086,8 @@
           "90d": {
             "days": 90,
             "period": {
-              "from": "2026-08-23T16:06:24Z",
-              "to": "2026-11-21T16:06:24Z"
+              "from": "2026-08-23T16:49:55Z",
+              "to": "2026-11-21T16:49:55Z"
             },
             "coverage": {
               "sampled_days": 19,
@@ -5126,8 +5126,8 @@
               "status": "insufficient_coverage",
               "metrics": {},
               "previous_period": {
-                "from": "2026-05-25T16:06:24Z",
-                "to": "2026-08-23T16:06:24Z"
+                "from": "2026-05-25T16:49:55Z",
+                "to": "2026-08-23T16:49:55Z"
               },
               "previous_coverage": {
                 "sampled_days": 0,
