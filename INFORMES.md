@@ -3633,3 +3633,6 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **Resultado general:** 37 pruebas Playwright pasaron; una falló. El test común, al ejecutarse junto con toda la suite, detectó un desbordamiento adicional en `#chapter-12` a 360 px dentro del expediente BarFender. El documento seguía midiendo 360 px, pero el bloque `.campaign-feature` y secciones descendientes excedían el ancho interior del panel.
 - **Corrección:** se limita el ancho de las secciones y del expediente BarFender al 100% del panel, se elimina el mínimo intrínseco y se permite que el encabezado del caso y su resumen se reorganicen en móvil.
 - **Importancia:** el QA aislado de 6/6 no reemplaza la ejecución conjunta. Se repetirá tanto el workflow común como la suite general para verificar que la corrección resista concurrencia y contexto integrado.
+
+
+- **Séptima iteración integrada:** la nueva traza aisló dos elementos internos del Capítulo 12 que todavía conservaban su ancho de escritorio a 360 px: el bloque de texto del encabezado de BarFender dentro de `.campaign-feature-head` y el cierre `.collab-next`. Se limita el primer bloque a una fila flexible al 100% y el cierre pasa a una columna con ancho mínimo cero. El documento no presenta overflow global.
