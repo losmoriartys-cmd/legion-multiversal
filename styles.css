@@ -6131,3 +6131,31 @@ main .chapter-panel :where(.chapter-cta, .executive-button, .comic-submit-btn,
     max-width: 100%;
   }
 }
+
+
+@media (max-width: 600px) {
+  #chapter-12 .campaign-feature-head > div:first-child {
+    flex: 1 1 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+  #chapter-12 .campaign-edition {
+    flex: 0 1 auto;
+    min-width: 0;
+    max-width: 100%;
+  }
+  #chapter-12 .collab-next {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+  #chapter-12 .collab-next > div:first-child,
+  #chapter-12 .collab-next-stamp {
+    min-width: 0;
+    width: 100%;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+}
