@@ -25,9 +25,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-          cache: npm
-      - name: Instalar dependencias fijadas
-        run: npm ci
+      - name: Instalar dependencias del proyecto
+        run: npm install
       - name: Instalar Chromium de Playwright
         run: npx playwright install --with-deps chromium
       - name: Ejecutar QA común de capítulos
