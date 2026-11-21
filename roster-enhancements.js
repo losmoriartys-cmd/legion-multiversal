@@ -177,7 +177,7 @@
       metricCard('Media de viewers', metrics.viewers.value, metrics.viewers.detail, metrics.viewers.available ? 'has-data' : 'is-empty'),
       metricCard('Días activos detectados', metrics.days.count === null ? 'No informado' : metrics.days.count + ' / 17', metrics.days.count === null ? 'Sin ventana diaria verificable' : 'Recuento en los últimos 17 días observados', metrics.days.count === null ? 'is-empty' : 'has-data')
     );
-    if (oldSlots) oldSlots.replaceWith(newSlots);
+    if (oldSlots) oldSlots.insertAdjacentElement('afterend', newSlots);
     else card.querySelector('.comic-roster-card-data')?.appendChild(newSlots);
 
     const daysMetric = newSlots.querySelector('.roster-v3-metric:last-child');
