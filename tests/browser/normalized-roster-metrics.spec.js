@@ -186,6 +186,20 @@ test.describe('Auditoría de métricas normalizadas del Roster', () => {
     expect(states.future).toEqual({ state: 'missing', label: 'SIN DATOS' });
     expect(states.missingValue).toEqual({ state: 'missing', label: 'SIN DATOS' });
     expect(states.missingMetric).toEqual({ state: 'missing', label: 'SIN DATOS' });
+    const historical = await page.evaluate(() => {
+      const hero = heroesData.find(item => item.id === 'moriartys');
+      const metric = creatorMetricsData.creators.moriartys.metrics.find(item => item.key === 'average_viewers_sampled');
+      metric.value = 12;
+      metric.captured_at = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+      const resolved = getNormalizedCreatorMetric(hero, 'average_viewers_sampled', 'twitch');
+      return { state: resolved.state, summary: normalizedMetricValue(resolved, 1), dashboard: renderStatsDashboard(hero, null, null) };
+    });
+    expect(historical.state).toBe('stale');
+    expect(historical.summary).toContain('12');
+    expect(historical.summary).toContain('HISTÓRICO');
+    expect(historical.dashboard).toContain('12');
+    expect(historical.dashboard).toContain('HISTÓRICO');
+    expect(historical.dashboard).toContain('no representan el estado actual');
   });
 
   test('usa claves y unidades estrictas para promedio, pico y horas observadas', async ({ page }) => {
@@ -240,8 +254,9 @@ test.describe('Auditoría de métricas normalizadas del Roster', () => {
       'YOUTUBE · ESTADO NO APLICA',
       'YOUTUBE · ESTADO NO APLICA'
     ]);
-    await page.locator('[data-profile-tab="marcas"]').click();
-    const brandSummary = page.locator('#profile-tab-marcas .hero-profile-brand-summary');
+    await page.locator('[data-profile-tab="bitacora"]').click();
+    await page.locator('[data-bitacora-view="marcas"]').click();
+    const brandSummary = page.locator('#bitacora-panel-marcas .hero-profile-brand-summary');
     await expect(brandSummary).toBeVisible();
     await expect(brandSummary.locator('.hero-profile-brand-slots article')).toHaveCount(3);
     await expect(brandSummary).toContainText('56');
@@ -255,7 +270,7 @@ test.describe('Auditoría de métricas normalizadas del Roster', () => {
   test('el selector y el expediente consumen el estado y el promedio normalizados', async ({ page }) => {
     await openRosterWithFixture(page);
     const card = page.locator('.comic-roster-card[data-creator-id="moriartys"]');
-    await expect(card.locator('.comic-roster-activity')).toHaveText('EN DIRECTO');
+    await expect(card.locator('.comic-roster-activity')).toHaveText('EN VIVO');
     await expect(card.locator('.roster-selector-tile-live')).toContainText('EN DIRECTO');
     await expect(card.locator('.comic-roster-stat-average b')).toHaveText('10');
     await expect(card.locator('.comic-roster-brand-slots')).toContainText('Horas en directo');
@@ -267,8 +282,9 @@ test.describe('Auditoría de métricas normalizadas del Roster', () => {
       /EN DIRECTO.*19 VIENDO/,
       /EN DIRECTO.*19 VIENDO/
     ]);
-    await page.locator('[data-profile-tab="marcas"]').click();
-    const brandSummary = page.locator('#profile-tab-marcas .hero-profile-brand-summary');
+    await page.locator('[data-profile-tab="bitacora"]').click();
+    await page.locator('[data-bitacora-view="marcas"]').click();
+    const brandSummary = page.locator('#bitacora-panel-marcas .hero-profile-brand-summary');
     await expect(brandSummary).toBeVisible();
     await expect(brandSummary.locator('.hero-profile-brand-slots article')).toHaveCount(3);
     await expect(brandSummary).toContainText('Media de viewers');
