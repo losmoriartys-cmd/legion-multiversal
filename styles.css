@@ -5971,3 +5971,10 @@ main .chapter-panel :where(.chapter-cta, .executive-button, .comic-submit-btn,
  .manifesto-chapter .manifesto-onboarding,
  .manifesto-chapter .manifesto-invitation{min-width:0;max-width:100%}
 }
+
+/* Accesibilidad: respetar reduced motion también en la transición del capítulo. */
+@media(prefers-reduced-motion:reduce){
+ .chapter-panel.active,
+ .chapter-panel.active .chapter-tag,
+ .chapter-panel.active .comic-title{animation:none!important;transform:none!important}
+}
