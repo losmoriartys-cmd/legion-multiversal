@@ -88,16 +88,19 @@
       available: true
     };
   }
-  function viewerMetric(channel, account) {
+  function viewerMetric(hero, channel, account) {
     if (account?.platform !== 'twitch') return { value: 'No aplica', detail: 'Canal de video · no corresponde comparar viewers de Twitch', available: false, sort: -1 };
-    const average = metricNumber(channel?.window?.average_viewers_sampled);
-    if (average === null || !window.LMBrand?.viewerBand) {
-      return { value: 'No informado', detail: 'Muestreo propio no disponible', available: false, sort: -1 };
+    const metric = typeof getNormalizedCreatorMetric === 'function'
+      ? getNormalizedCreatorMetric(hero, 'average_viewers_sampled', 'twitch')
+      : null;
+    const average = metricNumber(metric?.value);
+    if (average === null || !['available', 'stale'].includes(metric?.state) || !window.LMBrand?.viewerBand) {
+      return { value: 'No informado', detail: 'Muestreo propio no disponible o sin captura verificable', available: false, sort: -1 };
     }
     const band = window.LMBrand.viewerBand(average);
     return {
       value: band.band || 'No informado',
-      detail: 'Rango de audiencia · muestreo propio · ' + (Number(channel?.window?.samples_total) || 0).toLocaleString('es-AR') + ' muestras',
+      detail: 'Rango de audiencia · muestreo propio · ' + (Number(channel?.window?.samples_total) || 0).toLocaleString('es-AR') + ' muestras' + (metric.state === 'stale' ? ' · HISTÓRICO' : ''),
       available: true,
       sort: average
     };
@@ -107,7 +110,7 @@
     const account = primaryAccount(hero);
     const channel = channelFor(hero);
     const followers = followerMetric(hero, channel, account);
-    const viewers = viewerMetric(channel, account);
+    const viewers = viewerMetric(hero, channel, account);
     const days = activeDays17(channel);
     const hasData = followers.available || viewers.available || days.count !== null;
     return { account, channel, followers, viewers, days, hasData };
@@ -193,7 +196,7 @@
     newSlots.append(
       metricCard(account?.platform === 'youtube' ? 'Suscriptores' : 'Seguidores', metrics.followers.value, metrics.followers.detail, metrics.followers.available ? 'has-data' : 'is-empty'),
       metricCard('Media de viewers', metrics.viewers.value, metrics.viewers.detail, metrics.viewers.available ? 'has-data' : 'is-empty'),
-      metricCard('Días activos detectados', metrics.days.count === null ? 'No informado' : metrics.days.count + ' / 17', metrics.days.count === null ? 'Sin ventana diaria verificable' : 'Recuento en los últimos 17 días observados', metrics.days.count === null ? 'is-empty' : 'has-data')
+      metricCard('Días activos detectados', metrics.days.count === null ? 'No informado' : metrics.days.count + ' / 17', metrics.days.count === null ? 'Sin ventana diaria verificable' : '17 días hasta la última captura · ' + dateLabel(metrics.days.anchor), metrics.days.count === null ? 'is-empty' : 'has-data')
     );
     if (oldSlots) oldSlots.insertAdjacentElement('afterend', newSlots);
     else card.querySelector('.comic-roster-card-data')?.appendChild(newSlots);
