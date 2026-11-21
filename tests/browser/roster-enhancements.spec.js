@@ -29,7 +29,11 @@ test('Roster V3 conserva los ocho expedientes y separa Formación de Colaborador
     await expect(card.locator('.roster-v3-metric')).toHaveCount(3);
     const creatorId = await card.getAttribute('data-creator-id');
     if (creatorId !== 'pato-oratoris') await expect(card.locator('.roster-v3-day-strip i')).toHaveCount(17);
-    else await expect(card.locator('.roster-v3-metric:last-child')).toContainText('No informado');
+    else {
+      await expect(card.locator('.roster-v3-metric:last-child')).toContainText('No informado');
+      await expect(card.locator('.comic-roster-activity')).toHaveText('NO APLICA');
+      await expect(card.locator('.comic-roster-frequency')).toContainText('NO APLICA');
+    }
     await expect(card.locator('.comic-roster-last-live')).toContainText('ÚLTIMO DIRECTO OBSERVADO');
     await expect(card.locator('.roster-v3-rhythm-meter i')).toHaveCount(3);
     const bounds = await card.boundingBox();
