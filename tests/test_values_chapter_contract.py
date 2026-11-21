@@ -27,6 +27,21 @@ class ValuesChapterContractTests(unittest.TestCase):
         for phrase in ("ACUERDOS CLAROS", "RESPETO Y AUTORÍA", "TRANSPARENCIA Y APRENDIZAJE"):
             self.assertIn(phrase, HTML)
 
+    def test_history_and_onboarding_are_present_without_invented_dates(self):
+        section = re.search(r'<section id="chapter-11"(.*?)<section id="chapter-9"', HTML, re.S).group(1)
+        for phrase in ("S3X-MEN", "LEGIÓN MULTIVERSAL", "CONOCER", "PROBAR", "DOCUMENTAR",
+                       "LO QUE OFRECEMOS", "LO QUE NO PROMETEMOS", "participación es voluntaria"):
+            self.assertIn(phrase, section)
+        self.assertNotRegex(section, r"20\d{2}[-/]\d{1,2}")
+
+    def test_phase_tabs_have_accessible_relationships(self):
+        section = HTML.split('<section id="chapter-11"', 1)[1].split('<section id="chapter-9"', 1)[0]
+        for phase in ("before", "during", "after"):
+            self.assertIn('data-manifesto-tab="' + phase + '"', section)
+            self.assertIn('data-manifesto-panel="' + phase + '"', section)
+            self.assertIn('aria-controls="manifesto-panel-' + phase + '"', section)
+        self.assertIn("manifesto-chapter.js", HTML)
+
     def test_values_navigation_destinations_exist(self):
         targets = set(re.findall(r'onclick="switchChapter\((\d+)\)"', HTML))
         chapter_ids = set(re.findall(r'<section[^>]+id="chapter-(\d+)"', HTML))
@@ -38,6 +53,8 @@ class ValuesChapterContractTests(unittest.TestCase):
         for rule in ("@media(max-width:850px)", "@media(max-width:600px)", "@media(prefers-reduced-motion:reduce)"):
             self.assertIn(rule, css)
         self.assertIn(".manifesto-practice-grid", css)
+        self.assertIn(".manifesto-phase-tabs", css)
+        self.assertIn(".manifesto-history-line", css)
 
 
 if __name__ == "__main__":

@@ -3515,3 +3515,58 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **Pruebas:** workflow de sitio run 44871619904 SUCCESS; Playwright 30 passed, incluidos expedientes, pestañas, grupos, filtros, ordenamiento, responsive y límites de cifras. Tras sincronizar los tres archivos generados con main, el workflow de sitio run 44871883129 también terminó SUCCESS; QA portable run 44871883133 SUCCESS y colector run 44871883126 SUCCESS. La última mejora de frescura y fecha de ventana está siendo revalidada en el workflow 44872002975. Las capturas de revisión están en el artefacto de Playwright: https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/44871619904/artifacts/14694620166.
 - **Alcance:** se añadieron roster-enhancements.js y pruebas; se actualizó la carga en index.html y se ampliaron roster-selector.css y los contratos Playwright. No se cambiaron retratos ni imágenes. Los archivos generados creator-metrics.json, data.json y platform-stats.json se copiaron sin edición manual para igualar el snapshot de main.
 - **Estado de integración:** PR #83 sigue en Draft y sin merge. PR #81 no se modificó. main y producción permanecen intactos. La preview de Cloudflare debe comprobarse sobre el HEAD actual antes de pedir aprobación visual; no se declara un despliegue verificado a partir de las pruebas de GitHub Actions.
+
+
+## 2026-11-21 · Capítulo 02 · Quiénes somos: evolución del manifiesto (PR #84)
+
+- **Base:** main en ea40a8f635f6d01772b459ba66dd931212b1da6f; intervención sobre docs/shared-architecture-chapters-v2 para mantener arquitectura y primera implementación en una revisión.
+- **Auditoría previa:** el capítulo ya contenía seis valores, prácticas Antes/Durante/Después y una promesa general. Se preservó esa base; no se reemplazó por una página nueva ni se duplicó Comunidad o Roster.
+- **Historia:** se incorporó una línea editorial de cuatro hitos basada en la secuencia ya publicada en Capítulo 01: primera etapa S3X-MEN; expansión de experiencias; incorporación de nuevas voces; identidad pública Legión Multiversal. No se agregaron fechas.
+- **Valores:** se conservaron los seis valores y se añadió una aplicación concreta «En la práctica» a cada uno.
+- **Interacción:** Antes/Durante/Después pasó a pestañas accesibles con roles y estados ARIA, paneles asociados, navegación por flechas, Home y End, y contenido inicial disponible sin JavaScript.
+- **Compromisos:** se separaron «Lo que ofrecemos» y «Lo que no prometemos», explicitando que no se garantizan fama, contratos, ingresos, crecimiento, alcance ni oportunidades.
+- **Incorporación:** se agregó Conocer/Probar/Documentar y se reiteró la participación voluntaria, sin convertirlo en un proceso automático de selección.
+- **Archivos:** index.html, styles.css, nuevo manifesto-chapter.js, tests/test_values_chapter_contract.py, nuevo tests/browser/manifesto-chapter.spec.js e INFORMES.md.
+- **Límites:** no se modificó Capítulo 01, datos del Roster, métricas, colectores, Alianzas, Colaboraciones ni Arsenal.
+- **Validación:** contratos Python y Playwright incorporados; ejecución CI pendiente sobre el nuevo HEAD. No se declara aprobación visual, integración en main ni despliegue de producción hasta completar workflows y revisar capturas de escritorio/móvil.
+
+
+- **Corrección de QA:** el primer workflow detectó una regresión en el contrato global de navegación: una flecha diagonal en el enlace interno al Origen se interpretaba como indicación de enlace externo. Se reemplazó por flecha direccional interna. El fallo no afectó la lógica de pestañas ni los contratos específicos del Capítulo 02; se repiten los workflows sobre el HEAD corregido.
+
+- **Corrección móvil posterior a Playwright:** la primera ejecución completa encontró desbordamiento horizontal en el panel del Capítulo 02 a 390 px. Se añadió contención de ancho, min-width: 0, box-sizing: border-box y ajuste de texto en los descendientes, sin ocultar el overflow ni relajar la aserción. La prueba móvil original se conserva para verificar el resultado real.
+
+- **QA diagnóstico:** la prueba móvil mantiene la aserción de no desbordamiento y ahora adjunta los elementos cuyo rectángulo exceda el panel, para localizar con precisión cualquier overflow residual en la siguiente ejecución.
+
+
+## 2026-11-21 · PR #84 · segunda corrección responsive y diagnóstico
+
+- **Revalidación:** el workflow 44874913300 terminó con 31 pruebas Playwright aprobadas y 1 fallida. La única falla conserva la aserción estricta de overflow en móvil: scrollWidth 391 frente a clientWidth 340 a 390 px. QA portable y colector aprobaron.
+- **Corrección aplicada:** se ajustó el rótulo editorial superior del Capítulo 02 en móvil para que use los límites disponibles del panel, reduzca padding/tamaño tipográfico y permita salto de línea. No se ocultó el overflow ni se relajó la aserción.
+- **Diagnóstico de prueba:** Playwright ahora enumera todos los descendientes visibles que exceden el panel, excluyendo paneles ocultos y nodos sin dimensiones, para que un fallo posterior identifique el elemento responsable sin truncarlo por orden DOM.
+- **Commits:** f6199dc (CSS responsive) y 76c19f2 (diagnóstico Playwright).
+- **Estado:** pendiente de ejecutar nuevamente Playwright, QA portable y colector sobre el HEAD actualizado. PR #84 permanece abierto y sin merge; producción intacta.
+
+
+## 2026-11-21 · PR #84 · diagnóstico ampliado de overflow y reduced motion
+
+- Evidencia de la última ejecución: workflow 44876596005, job 136762540719. Resultado: 31/32 Playwright; QA portable y colector aprobaron. La prueba responsive conserva scrollWidth=391 y clientWidth=340 a viewport 390 px.
+- Hallazgo de diagnóstico: el test no encontró descendientes DOM visibles fuera del panel (visibleOffenders vacío). La medición actual todavía no identifica el origen; puede tratarse de un pseudo-elemento, una caja transformada o un desbordamiento generado fuera de los descendientes inspeccionados. No se atribuye la causa al rótulo superior sin evidencia.
+- Accesibilidad: se añadió una regla global para que las transiciones de panel, rótulo y título respeten prefers-reduced-motion: reduce.
+- Instrumentación: la prueba responsive ahora registra el rectángulo del panel, el ancho del documento y candidatos de pseudo-elementos ::before / ::after, manteniendo intacta la aserción estricta de overflow.
+- Commits: c5be87b (reduced motion) y 0776b2d (diagnóstico de pseudo-elementos).
+- Estado: pendiente de nueva ejecución sobre el HEAD actual. No se considera corregido ni aprobado hasta que el test pase y se revisen sus evidencias.
+
+
+### 2026-11-21 · Diagnóstico ampliado de overflow móvil · PR #84
+- La última ejecución del workflow `44877623901` confirmó 31/32 pruebas Playwright aprobadas y una falla en el ancho interno del Capítulo 02 (scrollWidth 391 px frente a clientWidth 340 px). El documento global permaneció en 390 px; no se considera resuelto el defecto.
+- La instrumentación anterior no detectó descendientes visibles ni pseudo-elementos desbordados. Se amplió el diagnóstico para inspeccionar también `::before`/`::after` del propio panel, métricas de cada hijo directo, padding, márgenes, transformaciones y overflow computado.
+- Commit: `8a3efc46934693eb5dc40185cb3c299fdf498d20` (`tests/browser/manifesto-chapter.spec.js`).
+- Pendiente: ejecutar de nuevo Playwright sobre este HEAD, identificar la fuente concreta del desbordamiento, corregirla sin ocultar overflow ni relajar la aserción y revisar evidencias visuales. PR #84 permanece abierto y sin fusionar.
+
+
+## 2026-11-21 · PR #84 · corrección de overflow del Capítulo 02
+
+- **HEAD validado:** 34deb7207a08e4a33fe05944d815dbc807f1b0b8. En el workflow 44878041315, Playwright ejecutó 32 pruebas: 31 pasaron y falló la prueba responsive de «Quiénes somos».
+- **Causa raíz identificada:** la regla global `.comic-page::before` usa `inset:-15%`. En el panel `#chapter-11` de 390 px, el pseudo-elemento se extendía 51 px por cada lado (442 px de ancho calculado), superando los 340 px del área interna. El contenido real y los controles no eran los causantes.
+- **Corrección aplicada en este commit:** dentro de `@media(max-width:600px)`, `#chapter-11.comic-page::before` pasa a `inset:0`. Se conserva el tramado y el movimiento editorial; solo se evita que la capa decorativa sobresalga del panel en móvil. No se añadió `overflow-x:hidden`, no se ocultó el defecto y no se relajó la aserción.
+- **Pendiente obligatorio:** ejecutar de nuevo Playwright y los workflows asociados sobre el nuevo HEAD; confirmar overflow cero y revisar capturas. El PR no está aprobado ni fusionado hasta que las pruebas estén verdes.
