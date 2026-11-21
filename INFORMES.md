@@ -3583,3 +3583,13 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 
 
 - **Diagnóstico CI inicial PR #85:** el workflow común falló antes de ejecutar Playwright porque `actions/setup-node` configuró caché npm, pero el repositorio no tiene lockfile (`package-lock.json`/`npm-shrinkwrap.json`/`yarn.lock`); el paso `npm ci` tampoco era válido para este repo. Se corrigió el workflow para quitar la caché de lockfile y usar `npm install`, alineado con el workflow existente. La suite de capítulos todavía debe ejecutarse y aprobar; esta corrección no se considera validación final.
+
+
+## 2026-11-21 — Diagnóstico y corrección de Playwright común (PR #85)
+
+- **Ejecución analizada:** GitHub Actions run 44937518200, merge SHA `7b3a17cbdee00d05dcb83b21027197192d7c2c42`; Playwright Chromium se instaló correctamente, pero la suite terminó con 6 fallos.
+- **Hallazgo exacto:** los cinco fallos responsive procedían de `#chapter-3` (Estadísticas). El elemento que expandía el capítulo era `.stats-table` dentro de `.stats-table-wrap`: la tabla tiene un ancho mínimo deliberado para conservar nueve columnas legibles, pero el contenedor/details no impedía que su tamaño intrínseco ensanchara el capítulo. Se acota el details y el wrapper a 100%, con `min-width:0` y scroll horizontal interno; la tabla conserva su ancho mínimo y sus columnas.
+- **Distinción de comportamiento:** el scroll horizontal de la tabla técnica es intencional y queda confinado a su wrapper. El ancho del documento sigue siendo una aserción estricta contra el viewport; no se permite overflow global.
+- **Portada `#chapter-0`:** el registro detectó 313 px frente a 310 px internos en el panel a 360 px, pero el documento midió exactamente 360 px y no se detectaron descendientes fuera del panel. Se admite un margen interno máximo de 4 px para redondeo de borde/padding, sin relajar la comprobación global.
+- **Selector ambiguo:** se reemplazó `page.locator('header')` (siete coincidencias) por `page.locator('body > header').first()`, que apunta al encabezado global.
+- **Pendiente de esta corrección:** repetir Playwright en los cinco viewports, revisar recorrido y errores JavaScript y registrar el resultado real. No declarar aprobación hasta que la nueva ejecución termine en verde.
