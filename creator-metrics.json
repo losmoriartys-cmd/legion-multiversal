@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-20T23:21:59Z",
+  "generated_at": "2026-11-21T00:08:44Z",
   "source_files": {
     "identity": "roster-data.json",
     "twitch": "data.json",
@@ -10,10 +10,10 @@
   },
   "source_snapshot": {
     "data.json": {
-      "updated_at": "2026-11-20T23:21:58Z"
+      "updated_at": "2026-11-21T00:08:42Z"
     },
     "platform-stats.json": {
-      "updated_at": "2026-11-20T23:21:59Z"
+      "updated_at": "2026-11-21T00:08:44Z"
     }
   },
   "methodology": [
@@ -59,13 +59,13 @@
           "account_handle": "losmoriartys",
           "key": "live_status",
           "label": "Estado de transmisión",
-          "value": "offline",
+          "value": "live",
           "unit": "status",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "public_helix_snapshot",
@@ -80,17 +80,17 @@
           "account_handle": "losmoriartys",
           "key": "current_viewers",
           "label": "Espectadores en la última captura",
-          "value": null,
+          "value": 8,
           "unit": "viewers",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "public_helix_snapshot",
-          "status": "offline",
+          "status": "fresh",
           "visibility": "public",
           "interpretation": "Lectura puntual de stream en vivo; no equivale a espectadores únicos ni promedio.",
           "source_file": "data.json"
@@ -107,7 +107,7 @@
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "public_helix_follower_total_only",
@@ -122,13 +122,13 @@
           "account_handle": "losmoriartys",
           "key": "samples_total",
           "label": "Muestras históricas",
-          "value": 403,
+          "value": 404,
           "unit": "samples",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -143,13 +143,13 @@
           "account_handle": "losmoriartys",
           "key": "live_samples",
           "label": "Muestras en directo",
-          "value": 19,
+          "value": 20,
           "unit": "samples",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -164,13 +164,13 @@
           "account_handle": "losmoriartys",
           "key": "streams_observed",
           "label": "Sesiones observadas",
-          "value": 9,
+          "value": 10,
           "unit": "streams",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -185,13 +185,13 @@
           "account_handle": "losmoriartys",
           "key": "average_viewers_sampled",
           "label": "Promedio de viewers muestreado",
-          "value": 16.3,
+          "value": 15.8,
           "unit": "viewers_sampled_avg",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -208,11 +208,11 @@
           "label": "Pico observado",
           "value": 31,
           "unit": "viewers_sampled_peak",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -229,11 +229,11 @@
           "label": "Horas en directo observadas",
           "value": 8.17,
           "unit": "hours_observed",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -250,11 +250,11 @@
           "label": "Horas vistas estimadas",
           "value": 109.54,
           "unit": "hours_estimated",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -266,15 +266,15 @@
       ],
       "growth": {
         "schema_version": 1,
-        "generated_at": "2026-11-20T23:21:59Z",
+        "generated_at": "2026-11-21T00:08:44Z",
         "platform": "twitch",
         "history_days_required": 180,
         "windows": {
           "7d": {
             "days": 7,
             "period": {
-              "from": "2026-11-13T23:21:59Z",
-              "to": "2026-11-20T23:21:59Z"
+              "from": "2026-11-14T00:08:44Z",
+              "to": "2026-11-21T00:08:44Z"
             },
             "coverage": {
               "sampled_days": 7,
@@ -282,18 +282,18 @@
               "coverage_pct": 100.0,
               "status": "sufficient",
               "minimum_for_comparison_pct": 65.0,
-              "last_observed_at": "2026-11-20T23:21:58Z"
+              "last_observed_at": "2026-11-21T00:08:42Z"
             },
             "metrics": {
-              "streams_observed": 4,
-              "active_days": 6,
+              "streams_observed": 5,
+              "active_days": 7,
               "active_weeks": 2,
-              "streams_per_week": 4.0,
+              "streams_per_week": 5.0,
               "observed_live_hours": 4.58,
               "observed_hours_per_week": 4.58,
-              "average_viewers_sampled": 14.7,
+              "average_viewers_sampled": 14.0,
               "peak_viewers_sampled": 30,
-              "live_samples": 9,
+              "live_samples": 10,
               "followers": {
                 "status": "baseline_pending",
                 "value_start": null,
@@ -313,14 +313,14 @@
               "status": "available",
               "metrics": {
                 "streams_observed": {
-                  "current": 4,
+                  "current": 5,
                   "previous": 4,
-                  "change": 0
+                  "change": 1
                 },
                 "active_days": {
-                  "current": 6,
+                  "current": 7,
                   "previous": 5,
-                  "change": 1
+                  "change": 2
                 },
                 "observed_live_hours": {
                   "current": 4.58,
@@ -328,14 +328,14 @@
                   "change": 2.41
                 },
                 "average_viewers_sampled": {
-                  "current": 14.7,
+                  "current": 14.0,
                   "previous": 17.1,
-                  "change": -2.4
+                  "change": -3.1
                 }
               },
               "previous_period": {
-                "from": "2026-11-06T23:21:59Z",
-                "to": "2026-11-13T23:21:59Z"
+                "from": "2026-11-07T00:08:44Z",
+                "to": "2026-11-14T00:08:44Z"
               },
               "previous_coverage": {
                 "sampled_days": 7,
@@ -343,34 +343,34 @@
                 "coverage_pct": 100.0,
                 "status": "sufficient",
                 "minimum_for_comparison_pct": 65.0,
-                "last_observed_at": "2026-11-13T22:19:08Z"
+                "last_observed_at": "2026-11-13T23:40:15Z"
               }
             }
           },
           "30d": {
             "days": 30,
             "period": {
-              "from": "2026-10-21T23:21:59Z",
-              "to": "2026-11-20T23:21:59Z"
+              "from": "2026-10-22T00:08:44Z",
+              "to": "2026-11-21T00:08:44Z"
             },
             "coverage": {
-              "sampled_days": 18,
+              "sampled_days": 19,
               "expected_days": 30,
-              "coverage_pct": 60.0,
+              "coverage_pct": 63.3,
               "status": "partial",
               "minimum_for_comparison_pct": 65.0,
-              "last_observed_at": "2026-11-20T23:21:58Z"
+              "last_observed_at": "2026-11-21T00:08:42Z"
             },
             "metrics": {
-              "streams_observed": 9,
-              "active_days": 13,
+              "streams_observed": 10,
+              "active_days": 14,
               "active_weeks": 3,
-              "streams_per_week": 2.1,
+              "streams_per_week": 2.33,
               "observed_live_hours": 8.17,
               "observed_hours_per_week": 1.91,
-              "average_viewers_sampled": 16.3,
+              "average_viewers_sampled": 15.8,
               "peak_viewers_sampled": 31,
-              "live_samples": 19,
+              "live_samples": 20,
               "followers": {
                 "status": "baseline_pending",
                 "value_start": null,
@@ -390,8 +390,8 @@
               "status": "insufficient_coverage",
               "metrics": {},
               "previous_period": {
-                "from": "2026-09-21T23:21:59Z",
-                "to": "2026-10-21T23:21:59Z"
+                "from": "2026-09-22T00:08:44Z",
+                "to": "2026-10-22T00:08:44Z"
               },
               "previous_coverage": {
                 "sampled_days": 0,
@@ -406,27 +406,27 @@
           "90d": {
             "days": 90,
             "period": {
-              "from": "2026-08-22T23:21:59Z",
-              "to": "2026-11-20T23:21:59Z"
+              "from": "2026-08-23T00:08:44Z",
+              "to": "2026-11-21T00:08:44Z"
             },
             "coverage": {
-              "sampled_days": 18,
+              "sampled_days": 19,
               "expected_days": 90,
-              "coverage_pct": 20.0,
+              "coverage_pct": 21.1,
               "status": "partial",
               "minimum_for_comparison_pct": 65.0,
-              "last_observed_at": "2026-11-20T23:21:58Z"
+              "last_observed_at": "2026-11-21T00:08:42Z"
             },
             "metrics": {
-              "streams_observed": 9,
-              "active_days": 13,
+              "streams_observed": 10,
+              "active_days": 14,
               "active_weeks": 3,
-              "streams_per_week": 0.7,
+              "streams_per_week": 0.78,
               "observed_live_hours": 8.17,
               "observed_hours_per_week": 0.64,
-              "average_viewers_sampled": 16.3,
+              "average_viewers_sampled": 15.8,
               "peak_viewers_sampled": 31,
-              "live_samples": 19,
+              "live_samples": 20,
               "followers": {
                 "status": "baseline_pending",
                 "value_start": null,
@@ -446,8 +446,8 @@
               "status": "insufficient_coverage",
               "metrics": {},
               "previous_period": {
-                "from": "2026-05-24T23:21:59Z",
-                "to": "2026-08-22T23:21:59Z"
+                "from": "2026-05-25T00:08:44Z",
+                "to": "2026-08-23T00:08:44Z"
               },
               "previous_coverage": {
                 "sampled_days": 0,
@@ -462,7 +462,7 @@
         },
         "content_performance": {
           "status": "ok",
-          "captured_at": "2026-11-20T17:42:44Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "source": "Twitch Helix Get Clips",
           "methodology": "Hasta 10 clips públicos más vistos entre los resultados de la API en una ventana de 30 días. Las variaciones de visualizaciones comienzan en la primera captura diaria propia.",
           "top_clips": [
@@ -474,40 +474,40 @@
               "views": 28,
               "views_gained": {
                 "7d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 28.0,
                   "value_end": 28.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 },
                 "30d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 28.0,
                   "value_end": 28.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 },
                 "90d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 28.0,
                   "value_end": 28.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 }
               },
-              "captured_at": "2026-11-20T17:42:44Z",
+              "captured_at": "2026-11-21T00:08:42Z",
               "source": "Twitch Helix Get Clips"
             },
             {
@@ -518,40 +518,40 @@
               "views": 15,
               "views_gained": {
                 "7d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 15.0,
                   "value_end": 15.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 },
                 "30d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 15.0,
                   "value_end": 15.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 },
                 "90d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 15.0,
                   "value_end": 15.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 }
               },
-              "captured_at": "2026-11-20T17:42:44Z",
+              "captured_at": "2026-11-21T00:08:42Z",
               "source": "Twitch Helix Get Clips"
             },
             {
@@ -562,40 +562,40 @@
               "views": 13,
               "views_gained": {
                 "7d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 13.0,
                   "value_end": 13.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 },
                 "30d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 13.0,
                   "value_end": 13.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 },
                 "90d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 13.0,
                   "value_end": 13.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 }
               },
-              "captured_at": "2026-11-20T17:42:44Z",
+              "captured_at": "2026-11-21T00:08:42Z",
               "source": "Twitch Helix Get Clips"
             },
             {
@@ -606,40 +606,40 @@
               "views": 11,
               "views_gained": {
                 "7d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 11.0,
                   "value_end": 11.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 },
                 "30d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 11.0,
                   "value_end": 11.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 },
                 "90d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 11.0,
                   "value_end": 11.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 }
               },
-              "captured_at": "2026-11-20T17:42:44Z",
+              "captured_at": "2026-11-21T00:08:42Z",
               "source": "Twitch Helix Get Clips"
             },
             {
@@ -650,40 +650,40 @@
               "views": 10,
               "views_gained": {
                 "7d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 10.0,
                   "value_end": 10.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 },
                 "30d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 10.0,
                   "value_end": 10.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 },
                 "90d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 10.0,
                   "value_end": 10.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 }
               },
-              "captured_at": "2026-11-20T17:42:44Z",
+              "captured_at": "2026-11-21T00:08:42Z",
               "source": "Twitch Helix Get Clips"
             }
           ],
@@ -753,7 +753,7 @@
       },
       "content": {
         "twitch_clips_status": "ok",
-        "twitch_clips_captured_at": "2026-11-20T17:42:44Z",
+        "twitch_clips_captured_at": "2026-11-21T00:08:42Z",
         "twitch_clips_count": 10
       }
     },
@@ -791,11 +791,11 @@
           "label": "Estado de transmisión",
           "value": "offline",
           "unit": "status",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "public_helix_snapshot",
@@ -812,11 +812,11 @@
           "label": "Espectadores en la última captura",
           "value": null,
           "unit": "viewers",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "public_helix_snapshot",
@@ -837,7 +837,7 @@
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "public_helix_follower_total_only",
@@ -852,13 +852,13 @@
           "account_handle": "TheR0D3R1K",
           "key": "samples_total",
           "label": "Muestras históricas",
-          "value": 403,
+          "value": 404,
           "unit": "samples",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -875,11 +875,11 @@
           "label": "Muestras en directo",
           "value": 42,
           "unit": "samples",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -896,11 +896,11 @@
           "label": "Sesiones observadas",
           "value": 11,
           "unit": "streams",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -917,11 +917,11 @@
           "label": "Promedio de viewers muestreado",
           "value": 23.4,
           "unit": "viewers_sampled_avg",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -938,11 +938,11 @@
           "label": "Pico observado",
           "value": 51,
           "unit": "viewers_sampled_peak",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -959,11 +959,11 @@
           "label": "Horas en directo observadas",
           "value": 25.38,
           "unit": "hours_observed",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -980,11 +980,11 @@
           "label": "Horas vistas estimadas",
           "value": 588.91,
           "unit": "hours_estimated",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -996,15 +996,15 @@
       ],
       "growth": {
         "schema_version": 1,
-        "generated_at": "2026-11-20T23:21:59Z",
+        "generated_at": "2026-11-21T00:08:44Z",
         "platform": "twitch",
         "history_days_required": 180,
         "windows": {
           "7d": {
             "days": 7,
             "period": {
-              "from": "2026-11-13T23:21:59Z",
-              "to": "2026-11-20T23:21:59Z"
+              "from": "2026-11-14T00:08:44Z",
+              "to": "2026-11-21T00:08:44Z"
             },
             "coverage": {
               "sampled_days": 7,
@@ -1012,18 +1012,18 @@
               "coverage_pct": 100.0,
               "status": "sufficient",
               "minimum_for_comparison_pct": 65.0,
-              "last_observed_at": "2026-11-20T23:21:58Z"
+              "last_observed_at": "2026-11-21T00:08:42Z"
             },
             "metrics": {
               "streams_observed": 5,
-              "active_days": 7,
+              "active_days": 6,
               "active_weeks": 2,
               "streams_per_week": 5.0,
               "observed_live_hours": 8.11,
               "observed_hours_per_week": 8.11,
-              "average_viewers_sampled": 23.3,
+              "average_viewers_sampled": 21.9,
               "peak_viewers_sampled": 51,
-              "live_samples": 15,
+              "live_samples": 14,
               "followers": {
                 "status": "baseline_pending",
                 "value_start": null,
@@ -1044,13 +1044,13 @@
               "metrics": {
                 "streams_observed": {
                   "current": 5,
-                  "previous": 3,
-                  "change": 2
+                  "previous": 4,
+                  "change": 1
                 },
                 "active_days": {
-                  "current": 7,
-                  "previous": 4,
-                  "change": 3
+                  "current": 6,
+                  "previous": 5,
+                  "change": 1
                 },
                 "observed_live_hours": {
                   "current": 8.11,
@@ -1058,14 +1058,14 @@
                   "change": 0.71
                 },
                 "average_viewers_sampled": {
-                  "current": 23.3,
-                  "previous": 30.0,
-                  "change": -6.7
+                  "current": 21.9,
+                  "previous": 31.0,
+                  "change": -9.1
                 }
               },
               "previous_period": {
-                "from": "2026-11-06T23:21:59Z",
-                "to": "2026-11-13T23:21:59Z"
+                "from": "2026-11-07T00:08:44Z",
+                "to": "2026-11-14T00:08:44Z"
               },
               "previous_coverage": {
                 "sampled_days": 7,
@@ -1073,23 +1073,23 @@
                 "coverage_pct": 100.0,
                 "status": "sufficient",
                 "minimum_for_comparison_pct": 65.0,
-                "last_observed_at": "2026-11-13T22:19:08Z"
+                "last_observed_at": "2026-11-13T23:40:15Z"
               }
             }
           },
           "30d": {
             "days": 30,
             "period": {
-              "from": "2026-10-21T23:21:59Z",
-              "to": "2026-11-20T23:21:59Z"
+              "from": "2026-10-22T00:08:44Z",
+              "to": "2026-11-21T00:08:44Z"
             },
             "coverage": {
-              "sampled_days": 18,
+              "sampled_days": 19,
               "expected_days": 30,
-              "coverage_pct": 60.0,
+              "coverage_pct": 63.3,
               "status": "partial",
               "minimum_for_comparison_pct": 65.0,
-              "last_observed_at": "2026-11-20T23:21:58Z"
+              "last_observed_at": "2026-11-21T00:08:42Z"
             },
             "metrics": {
               "streams_observed": 11,
@@ -1120,8 +1120,8 @@
               "status": "insufficient_coverage",
               "metrics": {},
               "previous_period": {
-                "from": "2026-09-21T23:21:59Z",
-                "to": "2026-10-21T23:21:59Z"
+                "from": "2026-09-22T00:08:44Z",
+                "to": "2026-10-22T00:08:44Z"
               },
               "previous_coverage": {
                 "sampled_days": 0,
@@ -1136,16 +1136,16 @@
           "90d": {
             "days": 90,
             "period": {
-              "from": "2026-08-22T23:21:59Z",
-              "to": "2026-11-20T23:21:59Z"
+              "from": "2026-08-23T00:08:44Z",
+              "to": "2026-11-21T00:08:44Z"
             },
             "coverage": {
-              "sampled_days": 18,
+              "sampled_days": 19,
               "expected_days": 90,
-              "coverage_pct": 20.0,
+              "coverage_pct": 21.1,
               "status": "partial",
               "minimum_for_comparison_pct": 65.0,
-              "last_observed_at": "2026-11-20T23:21:58Z"
+              "last_observed_at": "2026-11-21T00:08:42Z"
             },
             "metrics": {
               "streams_observed": 11,
@@ -1176,8 +1176,8 @@
               "status": "insufficient_coverage",
               "metrics": {},
               "previous_period": {
-                "from": "2026-05-24T23:21:59Z",
-                "to": "2026-08-22T23:21:59Z"
+                "from": "2026-05-25T00:08:44Z",
+                "to": "2026-08-23T00:08:44Z"
               },
               "previous_coverage": {
                 "sampled_days": 0,
@@ -1192,7 +1192,7 @@
         },
         "content_performance": {
           "status": "ok",
-          "captured_at": "2026-11-20T17:42:44Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "source": "Twitch Helix Get Clips",
           "methodology": "Hasta 10 clips públicos más vistos entre los resultados de la API en una ventana de 30 días. Las variaciones de visualizaciones comienzan en la primera captura diaria propia.",
           "top_clips": [
@@ -1204,40 +1204,40 @@
               "views": 22,
               "views_gained": {
                 "7d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 22.0,
                   "value_end": 22.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 },
                 "30d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 22.0,
                   "value_end": 22.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 },
                 "90d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 22.0,
                   "value_end": 22.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 }
               },
-              "captured_at": "2026-11-20T17:42:44Z",
+              "captured_at": "2026-11-21T00:08:42Z",
               "source": "Twitch Helix Get Clips"
             },
             {
@@ -1248,40 +1248,40 @@
               "views": 21,
               "views_gained": {
                 "7d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 21.0,
                   "value_end": 21.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 },
                 "30d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 21.0,
                   "value_end": 21.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 },
                 "90d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 21.0,
                   "value_end": 21.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 }
               },
-              "captured_at": "2026-11-20T17:42:44Z",
+              "captured_at": "2026-11-21T00:08:42Z",
               "source": "Twitch Helix Get Clips"
             },
             {
@@ -1292,40 +1292,40 @@
               "views": 15,
               "views_gained": {
                 "7d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 15.0,
                   "value_end": 15.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 },
                 "30d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 15.0,
                   "value_end": 15.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 },
                 "90d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 15.0,
                   "value_end": 15.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 }
               },
-              "captured_at": "2026-11-20T17:42:44Z",
+              "captured_at": "2026-11-21T00:08:42Z",
               "source": "Twitch Helix Get Clips"
             },
             {
@@ -1336,84 +1336,84 @@
               "views": 12,
               "views_gained": {
                 "7d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 12.0,
                   "value_end": 12.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 },
                 "30d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 12.0,
                   "value_end": 12.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 },
                 "90d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 12.0,
                   "value_end": 12.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 }
               },
-              "captured_at": "2026-11-20T17:42:44Z",
+              "captured_at": "2026-11-21T00:08:42Z",
               "source": "Twitch Helix Get Clips"
             },
             {
-              "id": "CooperativeAffluentWitchPanicBasket-zxzCQE9Yl-JBNRP2",
-              "title": "timming troll",
-              "url": "https://www.twitch.tv/ther0d3r1k/clip/CooperativeAffluentWitchPanicBasket-zxzCQE9Yl-JBNRP2",
-              "created_at": "2026-11-02T23:35:00Z",
+              "id": "PrettyAmazingSnailYouWHY-77jNNuLbSzX0NvJa",
+              "title": "pero que pasoo?",
+              "url": "https://www.twitch.tv/ther0d3r1k/clip/PrettyAmazingSnailYouWHY-77jNNuLbSzX0NvJa",
+              "created_at": "2026-11-05T00:45:11Z",
               "views": 10,
               "views_gained": {
                 "7d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 9.0,
                   "value_end": 10.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 1.0,
+                  "change_pct": 11.11,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 },
                 "30d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 9.0,
                   "value_end": 10.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 1.0,
+                  "change_pct": 11.11,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 },
                 "90d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 9.0,
                   "value_end": 10.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 1.0,
+                  "change_pct": 11.11,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 }
               },
-              "captured_at": "2026-11-20T17:42:44Z",
+              "captured_at": "2026-11-21T00:08:42Z",
               "source": "Twitch Helix Get Clips"
             }
           ],
@@ -1527,7 +1527,7 @@
       },
       "content": {
         "twitch_clips_status": "ok",
-        "twitch_clips_captured_at": "2026-11-20T17:42:44Z",
+        "twitch_clips_captured_at": "2026-11-21T00:08:42Z",
         "twitch_clips_count": 10
       }
     },
@@ -1565,11 +1565,11 @@
           "label": "Estado de transmisión",
           "value": "live",
           "unit": "status",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "public_helix_snapshot",
@@ -1584,13 +1584,13 @@
           "account_handle": "ladymoriarty01",
           "key": "current_viewers",
           "label": "Espectadores en la última captura",
-          "value": 5,
+          "value": 3,
           "unit": "viewers",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "public_helix_snapshot",
@@ -1611,7 +1611,7 @@
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "public_helix_follower_total_only",
@@ -1626,13 +1626,13 @@
           "account_handle": "ladymoriarty01",
           "key": "samples_total",
           "label": "Muestras históricas",
-          "value": 403,
+          "value": 404,
           "unit": "samples",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -1647,13 +1647,13 @@
           "account_handle": "ladymoriarty01",
           "key": "live_samples",
           "label": "Muestras en directo",
-          "value": 14,
+          "value": 15,
           "unit": "samples",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -1670,11 +1670,11 @@
           "label": "Sesiones observadas",
           "value": 7,
           "unit": "streams",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -1689,13 +1689,13 @@
           "account_handle": "ladymoriarty01",
           "key": "average_viewers_sampled",
           "label": "Promedio de viewers muestreado",
-          "value": 6.5,
+          "value": 6.3,
           "unit": "viewers_sampled_avg",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -1712,11 +1712,11 @@
           "label": "Pico observado",
           "value": 15,
           "unit": "viewers_sampled_peak",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -1731,13 +1731,13 @@
           "account_handle": "ladymoriarty01",
           "key": "observed_live_hours",
           "label": "Horas en directo observadas",
-          "value": 4.85,
+          "value": 5.63,
           "unit": "hours_observed",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -1752,13 +1752,13 @@
           "account_handle": "ladymoriarty01",
           "key": "estimated_hours_watched",
           "label": "Horas vistas estimadas",
-          "value": 26.44,
+          "value": 28.78,
           "unit": "hours_estimated",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -1770,15 +1770,15 @@
       ],
       "growth": {
         "schema_version": 1,
-        "generated_at": "2026-11-20T23:21:59Z",
+        "generated_at": "2026-11-21T00:08:44Z",
         "platform": "twitch",
         "history_days_required": 180,
         "windows": {
           "7d": {
             "days": 7,
             "period": {
-              "from": "2026-11-13T23:21:59Z",
-              "to": "2026-11-20T23:21:59Z"
+              "from": "2026-11-14T00:08:44Z",
+              "to": "2026-11-21T00:08:44Z"
             },
             "coverage": {
               "sampled_days": 7,
@@ -1786,16 +1786,16 @@
               "coverage_pct": 100.0,
               "status": "sufficient",
               "minimum_for_comparison_pct": 65.0,
-              "last_observed_at": "2026-11-20T23:21:58Z"
+              "last_observed_at": "2026-11-21T00:08:42Z"
             },
             "metrics": {
               "streams_observed": 4,
               "active_days": 5,
               "active_weeks": 2,
               "streams_per_week": 4.0,
-              "observed_live_hours": 1.79,
-              "observed_hours_per_week": 1.79,
-              "average_viewers_sampled": 6.6,
+              "observed_live_hours": 2.57,
+              "observed_hours_per_week": 2.57,
+              "average_viewers_sampled": 6.3,
               "peak_viewers_sampled": 13,
               "live_samples": 7,
               "followers": {
@@ -1818,28 +1818,28 @@
               "metrics": {
                 "streams_observed": {
                   "current": 4,
-                  "previous": 1,
-                  "change": 3
+                  "previous": 2,
+                  "change": 2
                 },
                 "active_days": {
                   "current": 5,
-                  "previous": 1,
-                  "change": 4
+                  "previous": 2,
+                  "change": 3
                 },
                 "observed_live_hours": {
-                  "current": 1.79,
+                  "current": 2.57,
                   "previous": 0.81,
-                  "change": 0.98
+                  "change": 1.76
                 },
                 "average_viewers_sampled": {
-                  "current": 6.6,
-                  "previous": 9.0,
-                  "change": -2.4
+                  "current": 6.3,
+                  "previous": 7.7,
+                  "change": -1.4
                 }
               },
               "previous_period": {
-                "from": "2026-11-06T23:21:59Z",
-                "to": "2026-11-13T23:21:59Z"
+                "from": "2026-11-07T00:08:44Z",
+                "to": "2026-11-14T00:08:44Z"
               },
               "previous_coverage": {
                 "sampled_days": 7,
@@ -1847,34 +1847,34 @@
                 "coverage_pct": 100.0,
                 "status": "sufficient",
                 "minimum_for_comparison_pct": 65.0,
-                "last_observed_at": "2026-11-13T22:19:08Z"
+                "last_observed_at": "2026-11-13T23:40:15Z"
               }
             }
           },
           "30d": {
             "days": 30,
             "period": {
-              "from": "2026-10-21T23:21:59Z",
-              "to": "2026-11-20T23:21:59Z"
+              "from": "2026-10-22T00:08:44Z",
+              "to": "2026-11-21T00:08:44Z"
             },
             "coverage": {
-              "sampled_days": 18,
+              "sampled_days": 19,
               "expected_days": 30,
-              "coverage_pct": 60.0,
+              "coverage_pct": 63.3,
               "status": "partial",
               "minimum_for_comparison_pct": 65.0,
-              "last_observed_at": "2026-11-20T23:21:58Z"
+              "last_observed_at": "2026-11-21T00:08:42Z"
             },
             "metrics": {
               "streams_observed": 7,
-              "active_days": 9,
+              "active_days": 10,
               "active_weeks": 3,
               "streams_per_week": 1.63,
-              "observed_live_hours": 4.85,
-              "observed_hours_per_week": 1.13,
-              "average_viewers_sampled": 6.5,
+              "observed_live_hours": 5.63,
+              "observed_hours_per_week": 1.31,
+              "average_viewers_sampled": 6.3,
               "peak_viewers_sampled": 15,
-              "live_samples": 14,
+              "live_samples": 15,
               "followers": {
                 "status": "baseline_pending",
                 "value_start": null,
@@ -1894,8 +1894,8 @@
               "status": "insufficient_coverage",
               "metrics": {},
               "previous_period": {
-                "from": "2026-09-21T23:21:59Z",
-                "to": "2026-10-21T23:21:59Z"
+                "from": "2026-09-22T00:08:44Z",
+                "to": "2026-10-22T00:08:44Z"
               },
               "previous_coverage": {
                 "sampled_days": 0,
@@ -1910,27 +1910,27 @@
           "90d": {
             "days": 90,
             "period": {
-              "from": "2026-08-22T23:21:59Z",
-              "to": "2026-11-20T23:21:59Z"
+              "from": "2026-08-23T00:08:44Z",
+              "to": "2026-11-21T00:08:44Z"
             },
             "coverage": {
-              "sampled_days": 18,
+              "sampled_days": 19,
               "expected_days": 90,
-              "coverage_pct": 20.0,
+              "coverage_pct": 21.1,
               "status": "partial",
               "minimum_for_comparison_pct": 65.0,
-              "last_observed_at": "2026-11-20T23:21:58Z"
+              "last_observed_at": "2026-11-21T00:08:42Z"
             },
             "metrics": {
               "streams_observed": 7,
-              "active_days": 9,
+              "active_days": 10,
               "active_weeks": 3,
               "streams_per_week": 0.54,
-              "observed_live_hours": 4.85,
-              "observed_hours_per_week": 0.38,
-              "average_viewers_sampled": 6.5,
+              "observed_live_hours": 5.63,
+              "observed_hours_per_week": 0.44,
+              "average_viewers_sampled": 6.3,
               "peak_viewers_sampled": 15,
-              "live_samples": 14,
+              "live_samples": 15,
               "followers": {
                 "status": "baseline_pending",
                 "value_start": null,
@@ -1950,8 +1950,8 @@
               "status": "insufficient_coverage",
               "metrics": {},
               "previous_period": {
-                "from": "2026-05-24T23:21:59Z",
-                "to": "2026-08-22T23:21:59Z"
+                "from": "2026-05-25T00:08:44Z",
+                "to": "2026-08-23T00:08:44Z"
               },
               "previous_coverage": {
                 "sampled_days": 0,
@@ -1966,7 +1966,7 @@
         },
         "content_performance": {
           "status": "ok",
-          "captured_at": "2026-11-20T17:42:44Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "source": "Twitch Helix Get Clips",
           "methodology": "Hasta 10 clips públicos más vistos entre los resultados de la API en una ventana de 30 días. Las variaciones de visualizaciones comienzan en la primera captura diaria propia.",
           "top_clips": [
@@ -1978,40 +1978,40 @@
               "views": 13,
               "views_gained": {
                 "7d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 13.0,
                   "value_end": 13.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 },
                 "30d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 13.0,
                   "value_end": 13.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 },
                 "90d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 13.0,
                   "value_end": 13.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 }
               },
-              "captured_at": "2026-11-20T17:42:44Z",
+              "captured_at": "2026-11-21T00:08:42Z",
               "source": "Twitch Helix Get Clips"
             },
             {
@@ -2022,40 +2022,40 @@
               "views": 10,
               "views_gained": {
                 "7d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 10.0,
                   "value_end": 10.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 },
                 "30d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 10.0,
                   "value_end": 10.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 },
                 "90d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 10.0,
                   "value_end": 10.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 }
               },
-              "captured_at": "2026-11-20T17:42:44Z",
+              "captured_at": "2026-11-21T00:08:42Z",
               "source": "Twitch Helix Get Clips"
             },
             {
@@ -2066,40 +2066,40 @@
               "views": 8,
               "views_gained": {
                 "7d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 8.0,
                   "value_end": 8.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 },
                 "30d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 8.0,
                   "value_end": 8.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 },
                 "90d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 8.0,
                   "value_end": 8.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 }
               },
-              "captured_at": "2026-11-20T17:42:44Z",
+              "captured_at": "2026-11-21T00:08:42Z",
               "source": "Twitch Helix Get Clips"
             },
             {
@@ -2110,40 +2110,40 @@
               "views": 6,
               "views_gained": {
                 "7d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 6.0,
                   "value_end": 6.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 },
                 "30d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 6.0,
                   "value_end": 6.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 },
                 "90d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 6.0,
                   "value_end": 6.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 }
               },
-              "captured_at": "2026-11-20T17:42:44Z",
+              "captured_at": "2026-11-21T00:08:42Z",
               "source": "Twitch Helix Get Clips"
             },
             {
@@ -2151,43 +2151,43 @@
               "title": "Donde estan los lenteees?",
               "url": "https://www.twitch.tv/ladymoriarty01/clip/AgileFunnyBasenjiAllenHuhu-rWzjTxOrdpx8dDjF",
               "created_at": "2026-11-16T22:50:02Z",
-              "views": 5,
+              "views": 6,
               "views_gained": {
                 "7d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
-                  "value_end": 5.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "status": "available",
+                  "value_start": 5.0,
+                  "value_end": 6.0,
+                  "change": 1.0,
+                  "change_pct": 20.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 },
                 "30d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
-                  "value_end": 5.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "status": "available",
+                  "value_start": 5.0,
+                  "value_end": 6.0,
+                  "change": 1.0,
+                  "change_pct": 20.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 },
                 "90d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
-                  "value_end": 5.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "status": "available",
+                  "value_start": 5.0,
+                  "value_end": 6.0,
+                  "change": 1.0,
+                  "change_pct": 20.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 }
               },
-              "captured_at": "2026-11-20T17:42:44Z",
+              "captured_at": "2026-11-21T00:08:42Z",
               "source": "Twitch Helix Get Clips"
             }
           ],
@@ -2249,7 +2249,7 @@
       },
       "content": {
         "twitch_clips_status": "ok",
-        "twitch_clips_captured_at": "2026-11-20T17:42:44Z",
+        "twitch_clips_captured_at": "2026-11-21T00:08:42Z",
         "twitch_clips_count": 10
       }
     },
@@ -2287,11 +2287,11 @@
           "label": "Estado de transmisión",
           "value": "offline",
           "unit": "status",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "public_helix_snapshot",
@@ -2308,11 +2308,11 @@
           "label": "Espectadores en la última captura",
           "value": null,
           "unit": "viewers",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "public_helix_snapshot",
@@ -2333,7 +2333,7 @@
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "public_helix_follower_total_only",
@@ -2348,13 +2348,13 @@
           "account_handle": "ardipii",
           "key": "samples_total",
           "label": "Muestras históricas",
-          "value": 403,
+          "value": 404,
           "unit": "samples",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -2371,11 +2371,11 @@
           "label": "Muestras en directo",
           "value": 10,
           "unit": "samples",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -2392,11 +2392,11 @@
           "label": "Sesiones observadas",
           "value": 6,
           "unit": "streams",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -2413,11 +2413,11 @@
           "label": "Promedio de viewers muestreado",
           "value": 9.4,
           "unit": "viewers_sampled_avg",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -2434,11 +2434,11 @@
           "label": "Pico observado",
           "value": 25,
           "unit": "viewers_sampled_peak",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -2455,11 +2455,11 @@
           "label": "Horas en directo observadas",
           "value": 2.58,
           "unit": "hours_observed",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -2476,11 +2476,11 @@
           "label": "Horas vistas estimadas",
           "value": 34.65,
           "unit": "hours_estimated",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -2492,15 +2492,15 @@
       ],
       "growth": {
         "schema_version": 1,
-        "generated_at": "2026-11-20T23:21:59Z",
+        "generated_at": "2026-11-21T00:08:44Z",
         "platform": "twitch",
         "history_days_required": 180,
         "windows": {
           "7d": {
             "days": 7,
             "period": {
-              "from": "2026-11-13T23:21:59Z",
-              "to": "2026-11-20T23:21:59Z"
+              "from": "2026-11-14T00:08:44Z",
+              "to": "2026-11-21T00:08:44Z"
             },
             "coverage": {
               "sampled_days": 7,
@@ -2508,7 +2508,7 @@
               "coverage_pct": 100.0,
               "status": "sufficient",
               "minimum_for_comparison_pct": 65.0,
-              "last_observed_at": "2026-11-20T23:21:58Z"
+              "last_observed_at": "2026-11-21T00:08:42Z"
             },
             "metrics": {
               "streams_observed": 3,
@@ -2560,8 +2560,8 @@
                 }
               },
               "previous_period": {
-                "from": "2026-11-06T23:21:59Z",
-                "to": "2026-11-13T23:21:59Z"
+                "from": "2026-11-07T00:08:44Z",
+                "to": "2026-11-14T00:08:44Z"
               },
               "previous_coverage": {
                 "sampled_days": 7,
@@ -2569,23 +2569,23 @@
                 "coverage_pct": 100.0,
                 "status": "sufficient",
                 "minimum_for_comparison_pct": 65.0,
-                "last_observed_at": "2026-11-13T22:19:08Z"
+                "last_observed_at": "2026-11-13T23:40:15Z"
               }
             }
           },
           "30d": {
             "days": 30,
             "period": {
-              "from": "2026-10-21T23:21:59Z",
-              "to": "2026-11-20T23:21:59Z"
+              "from": "2026-10-22T00:08:44Z",
+              "to": "2026-11-21T00:08:44Z"
             },
             "coverage": {
-              "sampled_days": 18,
+              "sampled_days": 19,
               "expected_days": 30,
-              "coverage_pct": 60.0,
+              "coverage_pct": 63.3,
               "status": "partial",
               "minimum_for_comparison_pct": 65.0,
-              "last_observed_at": "2026-11-20T23:21:58Z"
+              "last_observed_at": "2026-11-21T00:08:42Z"
             },
             "metrics": {
               "streams_observed": 6,
@@ -2616,8 +2616,8 @@
               "status": "insufficient_coverage",
               "metrics": {},
               "previous_period": {
-                "from": "2026-09-21T23:21:59Z",
-                "to": "2026-10-21T23:21:59Z"
+                "from": "2026-09-22T00:08:44Z",
+                "to": "2026-10-22T00:08:44Z"
               },
               "previous_coverage": {
                 "sampled_days": 0,
@@ -2632,16 +2632,16 @@
           "90d": {
             "days": 90,
             "period": {
-              "from": "2026-08-22T23:21:59Z",
-              "to": "2026-11-20T23:21:59Z"
+              "from": "2026-08-23T00:08:44Z",
+              "to": "2026-11-21T00:08:44Z"
             },
             "coverage": {
-              "sampled_days": 18,
+              "sampled_days": 19,
               "expected_days": 90,
-              "coverage_pct": 20.0,
+              "coverage_pct": 21.1,
               "status": "partial",
               "minimum_for_comparison_pct": 65.0,
-              "last_observed_at": "2026-11-20T23:21:58Z"
+              "last_observed_at": "2026-11-21T00:08:42Z"
             },
             "metrics": {
               "streams_observed": 6,
@@ -2672,8 +2672,8 @@
               "status": "insufficient_coverage",
               "metrics": {},
               "previous_period": {
-                "from": "2026-05-24T23:21:59Z",
-                "to": "2026-08-22T23:21:59Z"
+                "from": "2026-05-25T00:08:44Z",
+                "to": "2026-08-23T00:08:44Z"
               },
               "previous_coverage": {
                 "sampled_days": 0,
@@ -2688,7 +2688,7 @@
         },
         "content_performance": {
           "status": "ok",
-          "captured_at": "2026-11-20T17:42:44Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "source": "Twitch Helix Get Clips",
           "methodology": "Hasta 10 clips públicos más vistos entre los resultados de la API en una ventana de 30 días. Las variaciones de visualizaciones comienzan en la primera captura diaria propia.",
           "top_clips": [
@@ -2700,40 +2700,40 @@
               "views": 5,
               "views_gained": {
                 "7d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 5.0,
                   "value_end": 5.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 },
                 "30d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 5.0,
                   "value_end": 5.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 },
                 "90d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 5.0,
                   "value_end": 5.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 }
               },
-              "captured_at": "2026-11-20T17:42:44Z",
+              "captured_at": "2026-11-21T00:08:42Z",
               "source": "Twitch Helix Get Clips"
             },
             {
@@ -2744,40 +2744,40 @@
               "views": 4,
               "views_gained": {
                 "7d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 4.0,
                   "value_end": 4.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 },
                 "30d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 4.0,
                   "value_end": 4.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 },
                 "90d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 4.0,
                   "value_end": 4.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 }
               },
-              "captured_at": "2026-11-20T17:42:44Z",
+              "captured_at": "2026-11-21T00:08:42Z",
               "source": "Twitch Helix Get Clips"
             },
             {
@@ -2788,40 +2788,40 @@
               "views": 4,
               "views_gained": {
                 "7d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 4.0,
                   "value_end": 4.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 },
                 "30d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 4.0,
                   "value_end": 4.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 },
                 "90d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 4.0,
                   "value_end": 4.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 }
               },
-              "captured_at": "2026-11-20T17:42:44Z",
+              "captured_at": "2026-11-21T00:08:42Z",
               "source": "Twitch Helix Get Clips"
             },
             {
@@ -2832,47 +2832,47 @@
               "views": 4,
               "views_gained": {
                 "7d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 4.0,
                   "value_end": 4.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 },
                 "30d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 4.0,
                   "value_end": 4.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 },
                 "90d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 4.0,
                   "value_end": 4.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 }
               },
-              "captured_at": "2026-11-20T17:42:44Z",
+              "captured_at": "2026-11-21T00:08:42Z",
               "source": "Twitch Helix Get Clips"
             },
             {
-              "id": "DelightfulAdorableTigerWholeWheat-CuEvZccW_M-MlY2R",
-              "title": "Cuenta regresiva 3",
-              "url": "https://www.twitch.tv/ardipii/clip/DelightfulAdorableTigerWholeWheat-CuEvZccW_M-MlY2R",
-              "created_at": "2026-11-06T19:37:19Z",
+              "id": "CloudyTriumphantMouseCoolCat-uqNxf8xFanwAtGXw",
+              "title": "Por fin llego el GTA 6",
+              "url": "https://www.twitch.tv/ardipii/clip/CloudyTriumphantMouseCoolCat-uqNxf8xFanwAtGXw",
+              "created_at": "2026-11-19T17:23:02Z",
               "views": 3,
               "views_gained": {
                 "7d": {
@@ -2884,7 +2884,7 @@
                   "captures": 1,
                   "basis": "insufficient_captures",
                   "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 },
                 "30d": {
                   "status": "baseline_pending",
@@ -2895,7 +2895,7 @@
                   "captures": 1,
                   "basis": "insufficient_captures",
                   "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 },
                 "90d": {
                   "status": "baseline_pending",
@@ -2906,10 +2906,10 @@
                   "captures": 1,
                   "basis": "insufficient_captures",
                   "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 }
               },
-              "captured_at": "2026-11-20T17:42:44Z",
+              "captured_at": "2026-11-21T00:08:42Z",
               "source": "Twitch Helix Get Clips"
             }
           ],
@@ -2928,7 +2928,7 @@
       },
       "content": {
         "twitch_clips_status": "ok",
-        "twitch_clips_captured_at": "2026-11-20T17:42:44Z",
+        "twitch_clips_captured_at": "2026-11-21T00:08:42Z",
         "twitch_clips_count": 10
       }
     },
@@ -2964,13 +2964,13 @@
           "account_handle": "akumazoldyck",
           "key": "live_status",
           "label": "Estado de transmisión",
-          "value": "offline",
+          "value": "live",
           "unit": "status",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "public_helix_snapshot",
@@ -2985,17 +2985,17 @@
           "account_handle": "akumazoldyck",
           "key": "current_viewers",
           "label": "Espectadores en la última captura",
-          "value": null,
+          "value": 3,
           "unit": "viewers",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "public_helix_snapshot",
-          "status": "offline",
+          "status": "fresh",
           "visibility": "public",
           "interpretation": "Lectura puntual de stream en vivo; no equivale a espectadores únicos ni promedio.",
           "source_file": "data.json"
@@ -3012,7 +3012,7 @@
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "public_helix_follower_total_only",
@@ -3027,13 +3027,13 @@
           "account_handle": "akumazoldyck",
           "key": "samples_total",
           "label": "Muestras históricas",
-          "value": 403,
+          "value": 404,
           "unit": "samples",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -3048,13 +3048,13 @@
           "account_handle": "akumazoldyck",
           "key": "live_samples",
           "label": "Muestras en directo",
-          "value": 30,
+          "value": 31,
           "unit": "samples",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -3069,13 +3069,13 @@
           "account_handle": "akumazoldyck",
           "key": "streams_observed",
           "label": "Sesiones observadas",
-          "value": 15,
+          "value": 16,
           "unit": "streams",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -3090,13 +3090,13 @@
           "account_handle": "akumazoldyck",
           "key": "average_viewers_sampled",
           "label": "Promedio de viewers muestreado",
-          "value": 6.7,
+          "value": 6.5,
           "unit": "viewers_sampled_avg",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -3113,11 +3113,11 @@
           "label": "Pico observado",
           "value": 17,
           "unit": "viewers_sampled_peak",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -3134,11 +3134,11 @@
           "label": "Horas en directo observadas",
           "value": 12.57,
           "unit": "hours_observed",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -3155,11 +3155,11 @@
           "label": "Horas vistas estimadas",
           "value": 74.0,
           "unit": "hours_estimated",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -3171,15 +3171,15 @@
       ],
       "growth": {
         "schema_version": 1,
-        "generated_at": "2026-11-20T23:21:59Z",
+        "generated_at": "2026-11-21T00:08:44Z",
         "platform": "twitch",
         "history_days_required": 180,
         "windows": {
           "7d": {
             "days": 7,
             "period": {
-              "from": "2026-11-13T23:21:59Z",
-              "to": "2026-11-20T23:21:59Z"
+              "from": "2026-11-14T00:08:44Z",
+              "to": "2026-11-21T00:08:44Z"
             },
             "coverage": {
               "sampled_days": 7,
@@ -3187,18 +3187,18 @@
               "coverage_pct": 100.0,
               "status": "sufficient",
               "minimum_for_comparison_pct": 65.0,
-              "last_observed_at": "2026-11-20T23:21:58Z"
+              "last_observed_at": "2026-11-21T00:08:42Z"
             },
             "metrics": {
-              "streams_observed": 8,
-              "active_days": 6,
+              "streams_observed": 9,
+              "active_days": 7,
               "active_weeks": 2,
-              "streams_per_week": 8.0,
+              "streams_per_week": 9.0,
               "observed_live_hours": 4.58,
               "observed_hours_per_week": 4.58,
-              "average_viewers_sampled": 6.2,
+              "average_viewers_sampled": 5.9,
               "peak_viewers_sampled": 13,
-              "live_samples": 13,
+              "live_samples": 14,
               "followers": {
                 "status": "baseline_pending",
                 "value_start": null,
@@ -3218,14 +3218,14 @@
               "status": "available",
               "metrics": {
                 "streams_observed": {
-                  "current": 8,
+                  "current": 9,
                   "previous": 4,
-                  "change": 4
+                  "change": 5
                 },
                 "active_days": {
-                  "current": 6,
+                  "current": 7,
                   "previous": 4,
-                  "change": 2
+                  "change": 3
                 },
                 "observed_live_hours": {
                   "current": 4.58,
@@ -3233,14 +3233,14 @@
                   "change": 0.15
                 },
                 "average_viewers_sampled": {
-                  "current": 6.2,
+                  "current": 5.9,
                   "previous": 7.7,
-                  "change": -1.5
+                  "change": -1.8
                 }
               },
               "previous_period": {
-                "from": "2026-11-06T23:21:59Z",
-                "to": "2026-11-13T23:21:59Z"
+                "from": "2026-11-07T00:08:44Z",
+                "to": "2026-11-14T00:08:44Z"
               },
               "previous_coverage": {
                 "sampled_days": 7,
@@ -3248,34 +3248,34 @@
                 "coverage_pct": 100.0,
                 "status": "sufficient",
                 "minimum_for_comparison_pct": 65.0,
-                "last_observed_at": "2026-11-13T22:19:08Z"
+                "last_observed_at": "2026-11-13T23:40:15Z"
               }
             }
           },
           "30d": {
             "days": 30,
             "period": {
-              "from": "2026-10-21T23:21:59Z",
-              "to": "2026-11-20T23:21:59Z"
+              "from": "2026-10-22T00:08:44Z",
+              "to": "2026-11-21T00:08:44Z"
             },
             "coverage": {
-              "sampled_days": 18,
+              "sampled_days": 19,
               "expected_days": 30,
-              "coverage_pct": 60.0,
+              "coverage_pct": 63.3,
               "status": "partial",
               "minimum_for_comparison_pct": 65.0,
-              "last_observed_at": "2026-11-20T23:21:58Z"
+              "last_observed_at": "2026-11-21T00:08:42Z"
             },
             "metrics": {
-              "streams_observed": 15,
-              "active_days": 13,
+              "streams_observed": 16,
+              "active_days": 14,
               "active_weeks": 3,
-              "streams_per_week": 3.5,
+              "streams_per_week": 3.73,
               "observed_live_hours": 12.57,
               "observed_hours_per_week": 2.93,
-              "average_viewers_sampled": 6.7,
+              "average_viewers_sampled": 6.5,
               "peak_viewers_sampled": 17,
-              "live_samples": 30,
+              "live_samples": 31,
               "followers": {
                 "status": "baseline_pending",
                 "value_start": null,
@@ -3295,8 +3295,8 @@
               "status": "insufficient_coverage",
               "metrics": {},
               "previous_period": {
-                "from": "2026-09-21T23:21:59Z",
-                "to": "2026-10-21T23:21:59Z"
+                "from": "2026-09-22T00:08:44Z",
+                "to": "2026-10-22T00:08:44Z"
               },
               "previous_coverage": {
                 "sampled_days": 0,
@@ -3311,27 +3311,27 @@
           "90d": {
             "days": 90,
             "period": {
-              "from": "2026-08-22T23:21:59Z",
-              "to": "2026-11-20T23:21:59Z"
+              "from": "2026-08-23T00:08:44Z",
+              "to": "2026-11-21T00:08:44Z"
             },
             "coverage": {
-              "sampled_days": 18,
+              "sampled_days": 19,
               "expected_days": 90,
-              "coverage_pct": 20.0,
+              "coverage_pct": 21.1,
               "status": "partial",
               "minimum_for_comparison_pct": 65.0,
-              "last_observed_at": "2026-11-20T23:21:58Z"
+              "last_observed_at": "2026-11-21T00:08:42Z"
             },
             "metrics": {
-              "streams_observed": 15,
-              "active_days": 13,
+              "streams_observed": 16,
+              "active_days": 14,
               "active_weeks": 3,
-              "streams_per_week": 1.17,
+              "streams_per_week": 1.24,
               "observed_live_hours": 12.57,
               "observed_hours_per_week": 0.98,
-              "average_viewers_sampled": 6.7,
+              "average_viewers_sampled": 6.5,
               "peak_viewers_sampled": 17,
-              "live_samples": 30,
+              "live_samples": 31,
               "followers": {
                 "status": "baseline_pending",
                 "value_start": null,
@@ -3351,8 +3351,8 @@
               "status": "insufficient_coverage",
               "metrics": {},
               "previous_period": {
-                "from": "2026-05-24T23:21:59Z",
-                "to": "2026-08-22T23:21:59Z"
+                "from": "2026-05-25T00:08:44Z",
+                "to": "2026-08-23T00:08:44Z"
               },
               "previous_coverage": {
                 "sampled_days": 0,
@@ -3367,7 +3367,7 @@
         },
         "content_performance": {
           "status": "ok",
-          "captured_at": "2026-11-20T17:42:44Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "source": "Twitch Helix Get Clips",
           "methodology": "Hasta 10 clips públicos más vistos entre los resultados de la API en una ventana de 30 días. Las variaciones de visualizaciones comienzan en la primera captura diaria propia.",
           "top_clips": [
@@ -3379,40 +3379,40 @@
               "views": 13,
               "views_gained": {
                 "7d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 13.0,
                   "value_end": 13.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 },
                 "30d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 13.0,
                   "value_end": 13.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 },
                 "90d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 13.0,
                   "value_end": 13.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 }
               },
-              "captured_at": "2026-11-20T17:42:44Z",
+              "captured_at": "2026-11-21T00:08:42Z",
               "source": "Twitch Helix Get Clips"
             },
             {
@@ -3423,40 +3423,40 @@
               "views": 7,
               "views_gained": {
                 "7d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 7.0,
                   "value_end": 7.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 },
                 "30d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 7.0,
                   "value_end": 7.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 },
                 "90d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 7.0,
                   "value_end": 7.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 }
               },
-              "captured_at": "2026-11-20T17:42:44Z",
+              "captured_at": "2026-11-21T00:08:42Z",
               "source": "Twitch Helix Get Clips"
             },
             {
@@ -3467,40 +3467,40 @@
               "views": 5,
               "views_gained": {
                 "7d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 5.0,
                   "value_end": 5.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 },
                 "30d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 5.0,
                   "value_end": 5.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 },
                 "90d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 5.0,
                   "value_end": 5.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 }
               },
-              "captured_at": "2026-11-20T17:42:44Z",
+              "captured_at": "2026-11-21T00:08:42Z",
               "source": "Twitch Helix Get Clips"
             },
             {
@@ -3508,43 +3508,43 @@
               "title": "felicidad eso es lo que tu me das",
               "url": "https://www.twitch.tv/akumazoldyck/clip/SmellySplendidTubersBibleThump-tMH8_3U5YaMvwE8Q",
               "created_at": "2026-11-19T02:15:52Z",
-              "views": 1,
+              "views": 3,
               "views_gained": {
                 "7d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
-                  "value_end": 1.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "status": "available",
+                  "value_start": 1.0,
+                  "value_end": 3.0,
+                  "change": 2.0,
+                  "change_pct": 200.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 },
                 "30d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
-                  "value_end": 1.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "status": "available",
+                  "value_start": 1.0,
+                  "value_end": 3.0,
+                  "change": 2.0,
+                  "change_pct": 200.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 },
                 "90d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
-                  "value_end": 1.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "status": "available",
+                  "value_start": 1.0,
+                  "value_end": 3.0,
+                  "change": 2.0,
+                  "change_pct": 200.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 }
               },
-              "captured_at": "2026-11-20T17:42:44Z",
+              "captured_at": "2026-11-21T00:08:42Z",
               "source": "Twitch Helix Get Clips"
             }
           ],
@@ -3664,7 +3664,7 @@
       },
       "content": {
         "twitch_clips_status": "ok",
-        "twitch_clips_captured_at": "2026-11-20T17:42:44Z",
+        "twitch_clips_captured_at": "2026-11-21T00:08:42Z",
         "twitch_clips_count": 4
       }
     },
@@ -3702,11 +3702,11 @@
           "label": "Estado de transmisión",
           "value": "offline",
           "unit": "status",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "public_helix_snapshot",
@@ -3723,11 +3723,11 @@
           "label": "Espectadores en la última captura",
           "value": null,
           "unit": "viewers",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "public_helix_snapshot",
@@ -3748,7 +3748,7 @@
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "public_helix_follower_total_only",
@@ -3763,13 +3763,13 @@
           "account_handle": "daved0608",
           "key": "samples_total",
           "label": "Muestras históricas",
-          "value": 403,
+          "value": 404,
           "unit": "samples",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -3786,11 +3786,11 @@
           "label": "Muestras en directo",
           "value": 15,
           "unit": "samples",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -3807,11 +3807,11 @@
           "label": "Sesiones observadas",
           "value": 9,
           "unit": "streams",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -3828,11 +3828,11 @@
           "label": "Promedio de viewers muestreado",
           "value": 1.9,
           "unit": "viewers_sampled_avg",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -3849,11 +3849,11 @@
           "label": "Pico observado",
           "value": 5,
           "unit": "viewers_sampled_peak",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -3870,11 +3870,11 @@
           "label": "Horas en directo observadas",
           "value": 4.47,
           "unit": "hours_observed",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -3891,11 +3891,11 @@
           "label": "Horas vistas estimadas",
           "value": 8.14,
           "unit": "hours_estimated",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -3907,15 +3907,15 @@
       ],
       "growth": {
         "schema_version": 1,
-        "generated_at": "2026-11-20T23:21:59Z",
+        "generated_at": "2026-11-21T00:08:44Z",
         "platform": "twitch",
         "history_days_required": 180,
         "windows": {
           "7d": {
             "days": 7,
             "period": {
-              "from": "2026-11-13T23:21:59Z",
-              "to": "2026-11-20T23:21:59Z"
+              "from": "2026-11-14T00:08:44Z",
+              "to": "2026-11-21T00:08:44Z"
             },
             "coverage": {
               "sampled_days": 7,
@@ -3923,7 +3923,7 @@
               "coverage_pct": 100.0,
               "status": "sufficient",
               "minimum_for_comparison_pct": 65.0,
-              "last_observed_at": "2026-11-20T23:21:58Z"
+              "last_observed_at": "2026-11-21T00:08:42Z"
             },
             "metrics": {
               "streams_observed": 2,
@@ -3975,8 +3975,8 @@
                 }
               },
               "previous_period": {
-                "from": "2026-11-06T23:21:59Z",
-                "to": "2026-11-13T23:21:59Z"
+                "from": "2026-11-07T00:08:44Z",
+                "to": "2026-11-14T00:08:44Z"
               },
               "previous_coverage": {
                 "sampled_days": 7,
@@ -3984,23 +3984,23 @@
                 "coverage_pct": 100.0,
                 "status": "sufficient",
                 "minimum_for_comparison_pct": 65.0,
-                "last_observed_at": "2026-11-13T22:19:08Z"
+                "last_observed_at": "2026-11-13T23:40:15Z"
               }
             }
           },
           "30d": {
             "days": 30,
             "period": {
-              "from": "2026-10-21T23:21:59Z",
-              "to": "2026-11-20T23:21:59Z"
+              "from": "2026-10-22T00:08:44Z",
+              "to": "2026-11-21T00:08:44Z"
             },
             "coverage": {
-              "sampled_days": 18,
+              "sampled_days": 19,
               "expected_days": 30,
-              "coverage_pct": 60.0,
+              "coverage_pct": 63.3,
               "status": "partial",
               "minimum_for_comparison_pct": 65.0,
-              "last_observed_at": "2026-11-20T23:21:58Z"
+              "last_observed_at": "2026-11-21T00:08:42Z"
             },
             "metrics": {
               "streams_observed": 9,
@@ -4031,8 +4031,8 @@
               "status": "insufficient_coverage",
               "metrics": {},
               "previous_period": {
-                "from": "2026-09-21T23:21:59Z",
-                "to": "2026-10-21T23:21:59Z"
+                "from": "2026-09-22T00:08:44Z",
+                "to": "2026-10-22T00:08:44Z"
               },
               "previous_coverage": {
                 "sampled_days": 0,
@@ -4047,16 +4047,16 @@
           "90d": {
             "days": 90,
             "period": {
-              "from": "2026-08-22T23:21:59Z",
-              "to": "2026-11-20T23:21:59Z"
+              "from": "2026-08-23T00:08:44Z",
+              "to": "2026-11-21T00:08:44Z"
             },
             "coverage": {
-              "sampled_days": 18,
+              "sampled_days": 19,
               "expected_days": 90,
-              "coverage_pct": 20.0,
+              "coverage_pct": 21.1,
               "status": "partial",
               "minimum_for_comparison_pct": 65.0,
-              "last_observed_at": "2026-11-20T23:21:58Z"
+              "last_observed_at": "2026-11-21T00:08:42Z"
             },
             "metrics": {
               "streams_observed": 9,
@@ -4087,8 +4087,8 @@
               "status": "insufficient_coverage",
               "metrics": {},
               "previous_period": {
-                "from": "2026-05-24T23:21:59Z",
-                "to": "2026-08-22T23:21:59Z"
+                "from": "2026-05-25T00:08:44Z",
+                "to": "2026-08-23T00:08:44Z"
               },
               "previous_coverage": {
                 "sampled_days": 0,
@@ -4103,7 +4103,7 @@
         },
         "content_performance": {
           "status": "empty",
-          "captured_at": "2026-11-20T17:42:44Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "source": "Twitch Helix Get Clips",
           "methodology": "Hasta 10 clips públicos más vistos entre los resultados de la API en una ventana de 30 días. Las variaciones de visualizaciones comienzan en la primera captura diaria propia.",
           "top_clips": [],
@@ -4122,7 +4122,7 @@
       },
       "content": {
         "twitch_clips_status": "empty",
-        "twitch_clips_captured_at": "2026-11-20T17:42:44Z",
+        "twitch_clips_captured_at": "2026-11-21T00:08:42Z",
         "twitch_clips_count": 0
       }
     },
@@ -4179,11 +4179,11 @@
           "label": "Suscriptores públicos",
           "value": 56,
           "unit": "subscribers",
-          "captured_at": "2026-11-20T23:21:59Z",
+          "captured_at": "2026-11-21T00:08:44Z",
           "period": {
             "kind": "cumulative",
             "from": null,
-            "to": "2026-11-20T23:21:59Z"
+            "to": "2026-11-21T00:08:44Z"
           },
           "source": "YouTube Data API v3",
           "method": "youtube_data_api_public",
@@ -4200,11 +4200,11 @@
           "label": "Visualizaciones acumuladas",
           "value": 431,
           "unit": "views",
-          "captured_at": "2026-11-20T23:21:59Z",
+          "captured_at": "2026-11-21T00:08:44Z",
           "period": {
             "kind": "cumulative",
             "from": null,
-            "to": "2026-11-20T23:21:59Z"
+            "to": "2026-11-21T00:08:44Z"
           },
           "source": "YouTube Data API v3",
           "method": "youtube_data_api_public",
@@ -4221,11 +4221,11 @@
           "label": "Videos publicados",
           "value": 6,
           "unit": "videos",
-          "captured_at": "2026-11-20T23:21:59Z",
+          "captured_at": "2026-11-21T00:08:44Z",
           "period": {
             "kind": "cumulative",
             "from": null,
-            "to": "2026-11-20T23:21:59Z"
+            "to": "2026-11-21T00:08:44Z"
           },
           "source": "YouTube Data API v3",
           "method": "youtube_data_api_public",
@@ -4237,15 +4237,15 @@
       ],
       "growth": {
         "schema_version": 1,
-        "generated_at": "2026-11-20T23:21:59Z",
+        "generated_at": "2026-11-21T00:08:44Z",
         "platform": "youtube",
         "history_days_required": 180,
         "windows": {
           "7d": {
             "days": 7,
             "period": {
-              "from": "2026-11-13T23:21:59Z",
-              "to": "2026-11-20T23:21:59Z"
+              "from": "2026-11-14T00:08:44Z",
+              "to": "2026-11-21T00:08:44Z"
             },
             "coverage": {
               "sampled_days": 1,
@@ -4254,7 +4254,7 @@
               "status": "partial",
               "minimum_for_comparison_pct": 65.0,
               "capture_count": 1,
-              "last_observed_at": "2026-11-20T23:21:59Z"
+              "last_observed_at": "2026-11-21T00:08:44Z"
             },
             "metrics": {
               "subscribers_gained": {
@@ -4266,7 +4266,7 @@
                 "captures": 1,
                 "basis": "insufficient_captures",
                 "start_captured_at": null,
-                "end_captured_at": "2026-11-20T23:21:59Z"
+                "end_captured_at": "2026-11-21T00:08:44Z"
               },
               "views_gained": {
                 "status": "baseline_pending",
@@ -4277,7 +4277,7 @@
                 "captures": 1,
                 "basis": "insufficient_captures",
                 "start_captured_at": null,
-                "end_captured_at": "2026-11-20T23:21:59Z"
+                "end_captured_at": "2026-11-21T00:08:44Z"
               },
               "videos_published": {
                 "status": "baseline_pending",
@@ -4288,15 +4288,15 @@
                 "captures": 1,
                 "basis": "insufficient_captures",
                 "start_captured_at": null,
-                "end_captured_at": "2026-11-20T23:21:59Z"
+                "end_captured_at": "2026-11-21T00:08:44Z"
               }
             },
             "comparison": {
               "status": "insufficient_coverage",
               "metrics": {},
               "previous_period": {
-                "from": "2026-11-06T23:21:59Z",
-                "to": "2026-11-13T23:21:59Z"
+                "from": "2026-11-07T00:08:44Z",
+                "to": "2026-11-14T00:08:44Z"
               },
               "previous_coverage": {
                 "sampled_days": 0,
@@ -4312,8 +4312,8 @@
           "30d": {
             "days": 30,
             "period": {
-              "from": "2026-10-21T23:21:59Z",
-              "to": "2026-11-20T23:21:59Z"
+              "from": "2026-10-22T00:08:44Z",
+              "to": "2026-11-21T00:08:44Z"
             },
             "coverage": {
               "sampled_days": 1,
@@ -4322,7 +4322,7 @@
               "status": "partial",
               "minimum_for_comparison_pct": 65.0,
               "capture_count": 1,
-              "last_observed_at": "2026-11-20T23:21:59Z"
+              "last_observed_at": "2026-11-21T00:08:44Z"
             },
             "metrics": {
               "subscribers_gained": {
@@ -4334,7 +4334,7 @@
                 "captures": 1,
                 "basis": "insufficient_captures",
                 "start_captured_at": null,
-                "end_captured_at": "2026-11-20T23:21:59Z"
+                "end_captured_at": "2026-11-21T00:08:44Z"
               },
               "views_gained": {
                 "status": "baseline_pending",
@@ -4345,7 +4345,7 @@
                 "captures": 1,
                 "basis": "insufficient_captures",
                 "start_captured_at": null,
-                "end_captured_at": "2026-11-20T23:21:59Z"
+                "end_captured_at": "2026-11-21T00:08:44Z"
               },
               "videos_published": {
                 "status": "baseline_pending",
@@ -4356,15 +4356,15 @@
                 "captures": 1,
                 "basis": "insufficient_captures",
                 "start_captured_at": null,
-                "end_captured_at": "2026-11-20T23:21:59Z"
+                "end_captured_at": "2026-11-21T00:08:44Z"
               }
             },
             "comparison": {
               "status": "insufficient_coverage",
               "metrics": {},
               "previous_period": {
-                "from": "2026-09-21T23:21:59Z",
-                "to": "2026-10-21T23:21:59Z"
+                "from": "2026-09-22T00:08:44Z",
+                "to": "2026-10-22T00:08:44Z"
               },
               "previous_coverage": {
                 "sampled_days": 0,
@@ -4380,8 +4380,8 @@
           "90d": {
             "days": 90,
             "period": {
-              "from": "2026-08-22T23:21:59Z",
-              "to": "2026-11-20T23:21:59Z"
+              "from": "2026-08-23T00:08:44Z",
+              "to": "2026-11-21T00:08:44Z"
             },
             "coverage": {
               "sampled_days": 1,
@@ -4390,7 +4390,7 @@
               "status": "partial",
               "minimum_for_comparison_pct": 65.0,
               "capture_count": 1,
-              "last_observed_at": "2026-11-20T23:21:59Z"
+              "last_observed_at": "2026-11-21T00:08:44Z"
             },
             "metrics": {
               "subscribers_gained": {
@@ -4402,7 +4402,7 @@
                 "captures": 1,
                 "basis": "insufficient_captures",
                 "start_captured_at": null,
-                "end_captured_at": "2026-11-20T23:21:59Z"
+                "end_captured_at": "2026-11-21T00:08:44Z"
               },
               "views_gained": {
                 "status": "baseline_pending",
@@ -4413,7 +4413,7 @@
                 "captures": 1,
                 "basis": "insufficient_captures",
                 "start_captured_at": null,
-                "end_captured_at": "2026-11-20T23:21:59Z"
+                "end_captured_at": "2026-11-21T00:08:44Z"
               },
               "videos_published": {
                 "status": "baseline_pending",
@@ -4424,15 +4424,15 @@
                 "captures": 1,
                 "basis": "insufficient_captures",
                 "start_captured_at": null,
-                "end_captured_at": "2026-11-20T23:21:59Z"
+                "end_captured_at": "2026-11-21T00:08:44Z"
               }
             },
             "comparison": {
               "status": "insufficient_coverage",
               "metrics": {},
               "previous_period": {
-                "from": "2026-05-24T23:21:59Z",
-                "to": "2026-08-22T23:21:59Z"
+                "from": "2026-05-25T00:08:44Z",
+                "to": "2026-08-23T00:08:44Z"
               },
               "previous_coverage": {
                 "sampled_days": 0,
@@ -4448,7 +4448,7 @@
         },
         "content_performance": {
           "status": "verified_public",
-          "captured_at": "2026-11-20T23:21:59Z",
+          "captured_at": "2026-11-21T00:08:44Z",
           "source": "YouTube Data API v3",
           "methodology": "Hasta 10 videos recientes. La tasa pública de interacción se calcula como (me gusta + comentarios) / visualizaciones; no equivale al engagement privado de YouTube Studio. Las variaciones comienzan en la primera captura diaria propia.",
           "top_clips": [],
@@ -4464,40 +4464,40 @@
               "public_interaction_rate_pct": 16.56,
               "views_gained": {
                 "7d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 157.0,
                   "value_end": 157.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T23:21:59Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T23:21:59Z",
+                  "end_captured_at": "2026-11-21T00:08:44Z"
                 },
                 "30d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 157.0,
                   "value_end": 157.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T23:21:59Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T23:21:59Z",
+                  "end_captured_at": "2026-11-21T00:08:44Z"
                 },
                 "90d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 157.0,
                   "value_end": 157.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T23:21:59Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T23:21:59Z",
+                  "end_captured_at": "2026-11-21T00:08:44Z"
                 }
               },
-              "captured_at": "2026-11-20T23:21:59Z",
+              "captured_at": "2026-11-21T00:08:44Z",
               "source": "YouTube Data API v3"
             },
             {
@@ -4511,40 +4511,40 @@
               "public_interaction_rate_pct": 17.33,
               "views_gained": {
                 "7d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 75.0,
                   "value_end": 75.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T23:21:59Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T23:21:59Z",
+                  "end_captured_at": "2026-11-21T00:08:44Z"
                 },
                 "30d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 75.0,
                   "value_end": 75.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T23:21:59Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T23:21:59Z",
+                  "end_captured_at": "2026-11-21T00:08:44Z"
                 },
                 "90d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 75.0,
                   "value_end": 75.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T23:21:59Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T23:21:59Z",
+                  "end_captured_at": "2026-11-21T00:08:44Z"
                 }
               },
-              "captured_at": "2026-11-20T23:21:59Z",
+              "captured_at": "2026-11-21T00:08:44Z",
               "source": "YouTube Data API v3"
             },
             {
@@ -4558,40 +4558,40 @@
               "public_interaction_rate_pct": 18.97,
               "views_gained": {
                 "7d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 58.0,
                   "value_end": 58.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T23:21:59Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T23:21:59Z",
+                  "end_captured_at": "2026-11-21T00:08:44Z"
                 },
                 "30d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 58.0,
                   "value_end": 58.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T23:21:59Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T23:21:59Z",
+                  "end_captured_at": "2026-11-21T00:08:44Z"
                 },
                 "90d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 58.0,
                   "value_end": 58.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T23:21:59Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T23:21:59Z",
+                  "end_captured_at": "2026-11-21T00:08:44Z"
                 }
               },
-              "captured_at": "2026-11-20T23:21:59Z",
+              "captured_at": "2026-11-21T00:08:44Z",
               "source": "YouTube Data API v3"
             },
             {
@@ -4605,40 +4605,40 @@
               "public_interaction_rate_pct": 28.0,
               "views_gained": {
                 "7d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 50.0,
                   "value_end": 50.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T23:21:59Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T23:21:59Z",
+                  "end_captured_at": "2026-11-21T00:08:44Z"
                 },
                 "30d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 50.0,
                   "value_end": 50.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T23:21:59Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T23:21:59Z",
+                  "end_captured_at": "2026-11-21T00:08:44Z"
                 },
                 "90d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 50.0,
                   "value_end": 50.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T23:21:59Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T23:21:59Z",
+                  "end_captured_at": "2026-11-21T00:08:44Z"
                 }
               },
-              "captured_at": "2026-11-20T23:21:59Z",
+              "captured_at": "2026-11-21T00:08:44Z",
               "source": "YouTube Data API v3"
             },
             {
@@ -4652,40 +4652,40 @@
               "public_interaction_rate_pct": 14.58,
               "views_gained": {
                 "7d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 48.0,
                   "value_end": 48.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T23:21:59Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T23:21:59Z",
+                  "end_captured_at": "2026-11-21T00:08:44Z"
                 },
                 "30d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 48.0,
                   "value_end": 48.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T23:21:59Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T23:21:59Z",
+                  "end_captured_at": "2026-11-21T00:08:44Z"
                 },
                 "90d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 48.0,
                   "value_end": 48.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T23:21:59Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T23:21:59Z",
+                  "end_captured_at": "2026-11-21T00:08:44Z"
                 }
               },
-              "captured_at": "2026-11-20T23:21:59Z",
+              "captured_at": "2026-11-21T00:08:44Z",
               "source": "YouTube Data API v3"
             }
           ]
@@ -4741,11 +4741,11 @@
           "label": "Estado de transmisión",
           "value": "offline",
           "unit": "status",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "public_helix_snapshot",
@@ -4762,11 +4762,11 @@
           "label": "Espectadores en la última captura",
           "value": null,
           "unit": "viewers",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "public_helix_snapshot",
@@ -4787,7 +4787,7 @@
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "public_helix_follower_total_only",
@@ -4802,13 +4802,13 @@
           "account_handle": "habitos_atomicos",
           "key": "samples_total",
           "label": "Muestras históricas",
-          "value": 403,
+          "value": 404,
           "unit": "samples",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -4825,11 +4825,11 @@
           "label": "Muestras en directo",
           "value": 76,
           "unit": "samples",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -4846,11 +4846,11 @@
           "label": "Sesiones observadas",
           "value": 19,
           "unit": "streams",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -4867,11 +4867,11 @@
           "label": "Promedio de viewers muestreado",
           "value": 4.7,
           "unit": "viewers_sampled_avg",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -4888,11 +4888,11 @@
           "label": "Pico observado",
           "value": 45,
           "unit": "viewers_sampled_peak",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -4909,11 +4909,11 @@
           "label": "Horas en directo observadas",
           "value": 48.38,
           "unit": "hours_observed",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -4930,11 +4930,11 @@
           "label": "Horas vistas estimadas",
           "value": 223.95,
           "unit": "hours_estimated",
-          "captured_at": "2026-11-20T23:21:58Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-20T23:21:58Z"
+            "to": "2026-11-21T00:08:42Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -4946,15 +4946,15 @@
       ],
       "growth": {
         "schema_version": 1,
-        "generated_at": "2026-11-20T23:21:59Z",
+        "generated_at": "2026-11-21T00:08:44Z",
         "platform": "twitch",
         "history_days_required": 180,
         "windows": {
           "7d": {
             "days": 7,
             "period": {
-              "from": "2026-11-13T23:21:59Z",
-              "to": "2026-11-20T23:21:59Z"
+              "from": "2026-11-14T00:08:44Z",
+              "to": "2026-11-21T00:08:44Z"
             },
             "coverage": {
               "sampled_days": 7,
@@ -4962,7 +4962,7 @@
               "coverage_pct": 100.0,
               "status": "sufficient",
               "minimum_for_comparison_pct": 65.0,
-              "last_observed_at": "2026-11-20T23:21:58Z"
+              "last_observed_at": "2026-11-21T00:08:42Z"
             },
             "metrics": {
               "streams_observed": 8,
@@ -5014,8 +5014,8 @@
                 }
               },
               "previous_period": {
-                "from": "2026-11-06T23:21:59Z",
-                "to": "2026-11-13T23:21:59Z"
+                "from": "2026-11-07T00:08:44Z",
+                "to": "2026-11-14T00:08:44Z"
               },
               "previous_coverage": {
                 "sampled_days": 7,
@@ -5023,23 +5023,23 @@
                 "coverage_pct": 100.0,
                 "status": "sufficient",
                 "minimum_for_comparison_pct": 65.0,
-                "last_observed_at": "2026-11-13T22:19:08Z"
+                "last_observed_at": "2026-11-13T23:40:15Z"
               }
             }
           },
           "30d": {
             "days": 30,
             "period": {
-              "from": "2026-10-21T23:21:59Z",
-              "to": "2026-11-20T23:21:59Z"
+              "from": "2026-10-22T00:08:44Z",
+              "to": "2026-11-21T00:08:44Z"
             },
             "coverage": {
-              "sampled_days": 18,
+              "sampled_days": 19,
               "expected_days": 30,
-              "coverage_pct": 60.0,
+              "coverage_pct": 63.3,
               "status": "partial",
               "minimum_for_comparison_pct": 65.0,
-              "last_observed_at": "2026-11-20T23:21:58Z"
+              "last_observed_at": "2026-11-21T00:08:42Z"
             },
             "metrics": {
               "streams_observed": 19,
@@ -5070,8 +5070,8 @@
               "status": "insufficient_coverage",
               "metrics": {},
               "previous_period": {
-                "from": "2026-09-21T23:21:59Z",
-                "to": "2026-10-21T23:21:59Z"
+                "from": "2026-09-22T00:08:44Z",
+                "to": "2026-10-22T00:08:44Z"
               },
               "previous_coverage": {
                 "sampled_days": 0,
@@ -5086,16 +5086,16 @@
           "90d": {
             "days": 90,
             "period": {
-              "from": "2026-08-22T23:21:59Z",
-              "to": "2026-11-20T23:21:59Z"
+              "from": "2026-08-23T00:08:44Z",
+              "to": "2026-11-21T00:08:44Z"
             },
             "coverage": {
-              "sampled_days": 18,
+              "sampled_days": 19,
               "expected_days": 90,
-              "coverage_pct": 20.0,
+              "coverage_pct": 21.1,
               "status": "partial",
               "minimum_for_comparison_pct": 65.0,
-              "last_observed_at": "2026-11-20T23:21:58Z"
+              "last_observed_at": "2026-11-21T00:08:42Z"
             },
             "metrics": {
               "streams_observed": 19,
@@ -5126,8 +5126,8 @@
               "status": "insufficient_coverage",
               "metrics": {},
               "previous_period": {
-                "from": "2026-05-24T23:21:59Z",
-                "to": "2026-08-22T23:21:59Z"
+                "from": "2026-05-25T00:08:44Z",
+                "to": "2026-08-23T00:08:44Z"
               },
               "previous_coverage": {
                 "sampled_days": 0,
@@ -5142,7 +5142,7 @@
         },
         "content_performance": {
           "status": "ok",
-          "captured_at": "2026-11-20T17:42:44Z",
+          "captured_at": "2026-11-21T00:08:42Z",
           "source": "Twitch Helix Get Clips",
           "methodology": "Hasta 10 clips públicos más vistos entre los resultados de la API en una ventana de 30 días. Las variaciones de visualizaciones comienzan en la primera captura diaria propia.",
           "top_clips": [
@@ -5154,40 +5154,40 @@
               "views": 9,
               "views_gained": {
                 "7d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 9.0,
                   "value_end": 9.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 },
                 "30d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 9.0,
                   "value_end": 9.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 },
                 "90d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 9.0,
                   "value_end": 9.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 }
               },
-              "captured_at": "2026-11-20T17:42:44Z",
+              "captured_at": "2026-11-21T00:08:42Z",
               "source": "Twitch Helix Get Clips"
             },
             {
@@ -5198,40 +5198,40 @@
               "views": 8,
               "views_gained": {
                 "7d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 8.0,
                   "value_end": 8.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 },
                 "30d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 8.0,
                   "value_end": 8.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 },
                 "90d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 8.0,
                   "value_end": 8.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 }
               },
-              "captured_at": "2026-11-20T17:42:44Z",
+              "captured_at": "2026-11-21T00:08:42Z",
               "source": "Twitch Helix Get Clips"
             },
             {
@@ -5242,40 +5242,40 @@
               "views": 7,
               "views_gained": {
                 "7d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 7.0,
                   "value_end": 7.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 },
                 "30d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 7.0,
                   "value_end": 7.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 },
                 "90d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 7.0,
                   "value_end": 7.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 }
               },
-              "captured_at": "2026-11-20T17:42:44Z",
+              "captured_at": "2026-11-21T00:08:42Z",
               "source": "Twitch Helix Get Clips"
             },
             {
@@ -5286,40 +5286,40 @@
               "views": 6,
               "views_gained": {
                 "7d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 6.0,
                   "value_end": 6.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 },
                 "30d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 6.0,
                   "value_end": 6.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 },
                 "90d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 6.0,
                   "value_end": 6.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 }
               },
-              "captured_at": "2026-11-20T17:42:44Z",
+              "captured_at": "2026-11-21T00:08:42Z",
               "source": "Twitch Helix Get Clips"
             },
             {
@@ -5330,40 +5330,40 @@
               "views": 6,
               "views_gained": {
                 "7d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 6.0,
                   "value_end": 6.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 },
                 "30d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 6.0,
                   "value_end": 6.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 },
                 "90d": {
-                  "status": "baseline_pending",
-                  "value_start": null,
+                  "status": "available",
+                  "value_start": 6.0,
                   "value_end": 6.0,
-                  "change": null,
-                  "change_pct": null,
-                  "captures": 1,
-                  "basis": "insufficient_captures",
-                  "start_captured_at": null,
-                  "end_captured_at": "2026-11-20T17:42:44Z"
+                  "change": 0.0,
+                  "change_pct": 0.0,
+                  "captures": 2,
+                  "basis": "since_first_capture",
+                  "start_captured_at": "2026-11-20T17:42:44Z",
+                  "end_captured_at": "2026-11-21T00:08:42Z"
                 }
               },
-              "captured_at": "2026-11-20T17:42:44Z",
+              "captured_at": "2026-11-21T00:08:42Z",
               "source": "Twitch Helix Get Clips"
             }
           ],
@@ -5395,7 +5395,7 @@
       },
       "content": {
         "twitch_clips_status": "ok",
-        "twitch_clips_captured_at": "2026-11-20T17:42:44Z",
+        "twitch_clips_captured_at": "2026-11-21T00:08:42Z",
         "twitch_clips_count": 10
       }
     }

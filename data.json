@@ -14,7 +14,7 @@
     "ther0d3r1k"
   ],
   "collection": {
-    "started_at": "2026-11-20T23:21:58Z",
+    "started_at": "2026-11-21T00:08:42Z",
     "expected_channels": 7,
     "resolved_channels": 7,
     "sampled_channels": [
@@ -42,7 +42,7 @@
     "elgabii090"
   ],
   "channel_registry_note": "Los canales archivados se conservan para consulta histórica y no se incluyen en los indicadores del roster activo.",
-  "updated_at": "2026-11-20T23:21:58Z",
+  "updated_at": "2026-11-21T00:08:42Z",
   "channels": {
     "ladymoriarty01": {
       "login": "ladymoriarty01",
@@ -57,21 +57,21 @@
       "followers_note": "Pendiente de configurar OAuth de usuario de solo lectura. No requiere moderador ni acceso a identidades.",
       "followers_history": [],
       "live": true,
-      "current_viewers": 5,
+      "current_viewers": 3,
       "current_game": "Anime Shop Simulator ✨",
       "current_title": "[Anime Shop Simulator] Abrimos una tienda de Anime Con el Pesado del Demi @losmoriartys",
       "stream_started_at": "2026-11-20T23:00:37Z",
-      "last_status_at": "2026-11-20T23:21:58Z",
-      "last_snapshot_at": "2026-11-20T23:21:58Z",
-      "updated_at": "2026-11-20T23:21:58Z",
+      "last_status_at": "2026-11-21T00:08:42Z",
+      "last_snapshot_at": "2026-11-21T00:08:42Z",
+      "updated_at": "2026-11-21T00:08:42Z",
       "window": {
-        "samples_total": 403,
-        "live_samples": 14,
+        "samples_total": 404,
+        "live_samples": 15,
         "streams_observed": 7,
-        "average_viewers_sampled": 6.5,
+        "average_viewers_sampled": 6.3,
         "peak_viewers_sampled": 15,
-        "observed_live_hours": 4.85,
-        "estimated_hours_watched": 26.44,
+        "observed_live_hours": 5.63,
+        "estimated_hours_watched": 28.78,
         "game_breakdown": [
           {
             "name": "Once Human",
@@ -102,6 +102,13 @@
             "peak_viewers_sampled": 13
           },
           {
+            "name": "Anime Shop Simulator ✨",
+            "live_samples": 2,
+            "streams_observed": 1,
+            "average_viewers_sampled": 4.0,
+            "peak_viewers_sampled": 5
+          },
+          {
             "name": "Hogwarts Legacy",
             "live_samples": 1,
             "streams_observed": 1,
@@ -114,13 +121,6 @@
             "streams_observed": 1,
             "average_viewers_sampled": 4.0,
             "peak_viewers_sampled": 4
-          },
-          {
-            "name": "Anime Shop Simulator ✨",
-            "live_samples": 1,
-            "streams_observed": 1,
-            "average_viewers_sampled": 5.0,
-            "peak_viewers_sampled": 5
           }
         ],
         "daily_activity": [
@@ -186,6 +186,13 @@
             "streams_observed": 1,
             "average_viewers_sampled": 5.0,
             "peak_viewers_sampled": 5
+          },
+          {
+            "date": "2026-11-21",
+            "live_samples": 1,
+            "streams_observed": 1,
+            "average_viewers_sampled": 3.0,
+            "peak_viewers_sampled": 3
           }
         ],
         "method": "Muestreo propio con cadencia observada cercana a 55 minutos, variable por la programación de GitHub Actions; horas estimadas solo entre muestras consecutivas del mismo directo cuando el intervalo no supera 110 minutos. Categorías y evolución diaria se calculan sobre las muestras observadas."
@@ -3817,6 +3824,15 @@
           "title": "[Anime Shop Simulator] Abrimos una tienda de Anime Con el Pesado del Demi @losmoriartys",
           "stream_id": "319524279670",
           "started_at": "2026-11-20T23:00:37Z"
+        },
+        {
+          "sampled_at": "2026-11-21T00:08:42Z",
+          "is_live": true,
+          "viewer_count": 3,
+          "game_name": "Anime Shop Simulator ✨",
+          "title": "[Anime Shop Simulator] Abrimos una tienda de Anime Con el Pesado del Demi @losmoriartys",
+          "stream_id": "319524279670",
+          "started_at": "2026-11-20T23:00:37Z"
         }
       ]
     },
@@ -3837,11 +3853,11 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "last_status_at": "2026-11-20T23:21:58Z",
-      "last_snapshot_at": "2026-11-20T23:21:58Z",
-      "updated_at": "2026-11-20T23:21:58Z",
+      "last_status_at": "2026-11-21T00:08:42Z",
+      "last_snapshot_at": "2026-11-21T00:08:42Z",
+      "updated_at": "2026-11-21T00:08:42Z",
       "window": {
-        "samples_total": 403,
+        "samples_total": 404,
         "live_samples": 42,
         "streams_observed": 11,
         "average_viewers_sampled": 23.4,
@@ -7642,6 +7658,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-21T00:08:42Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -8308,11 +8333,11 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "last_status_at": "2026-11-20T23:21:58Z",
-      "last_snapshot_at": "2026-11-20T23:21:58Z",
-      "updated_at": "2026-11-20T23:21:58Z",
+      "last_status_at": "2026-11-21T00:08:42Z",
+      "last_snapshot_at": "2026-11-21T00:08:42Z",
+      "updated_at": "2026-11-21T00:08:42Z",
       "window": {
-        "samples_total": 403,
+        "samples_total": 404,
         "live_samples": 10,
         "streams_observed": 6,
         "average_viewers_sampled": 9.4,
@@ -12001,6 +12026,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-21T00:08:42Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -12016,19 +12050,19 @@
       "followers_status": "awaiting_authorization",
       "followers_note": "Pendiente de configurar OAuth de usuario de solo lectura. No requiere moderador ni acceso a identidades.",
       "followers_history": [],
-      "live": false,
-      "current_viewers": null,
-      "current_game": null,
-      "current_title": null,
-      "stream_started_at": null,
-      "last_status_at": "2026-11-20T23:21:58Z",
-      "last_snapshot_at": "2026-11-20T23:21:58Z",
-      "updated_at": "2026-11-20T23:21:58Z",
+      "live": true,
+      "current_viewers": 3,
+      "current_game": "The Transference",
+      "current_title": "#keymailer jueguito patrocinadoo vengan a mi viejones",
+      "stream_started_at": "2026-11-21T00:04:24Z",
+      "last_status_at": "2026-11-21T00:08:42Z",
+      "last_snapshot_at": "2026-11-21T00:08:42Z",
+      "updated_at": "2026-11-21T00:08:42Z",
       "window": {
-        "samples_total": 403,
-        "live_samples": 30,
-        "streams_observed": 15,
-        "average_viewers_sampled": 6.7,
+        "samples_total": 404,
+        "live_samples": 31,
+        "streams_observed": 16,
+        "average_viewers_sampled": 6.5,
         "peak_viewers_sampled": 17,
         "observed_live_hours": 12.57,
         "estimated_hours_watched": 74.0,
@@ -12095,6 +12129,13 @@
             "streams_observed": 1,
             "average_viewers_sampled": 10.0,
             "peak_viewers_sampled": 10
+          },
+          {
+            "name": "The Transference",
+            "live_samples": 1,
+            "streams_observed": 1,
+            "average_viewers_sampled": 3.0,
+            "peak_viewers_sampled": 3
           }
         ],
         "daily_activity": [
@@ -12188,6 +12229,13 @@
             "streams_observed": 1,
             "average_viewers_sampled": 7.5,
             "peak_viewers_sampled": 12
+          },
+          {
+            "date": "2026-11-21",
+            "live_samples": 1,
+            "streams_observed": 1,
+            "average_viewers_sampled": 3.0,
+            "peak_viewers_sampled": 3
           }
         ],
         "method": "Muestreo propio con cadencia observada cercana a 55 minutos, variable por la programación de GitHub Actions; horas estimadas solo entre muestras consecutivas del mismo directo cuando el intervalo no supera 110 minutos. Categorías y evolución diaria se calculan sobre las muestras observadas."
@@ -15819,6 +15867,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-21T00:08:42Z",
+          "is_live": true,
+          "viewer_count": 3,
+          "game_name": "The Transference",
+          "title": "#keymailer jueguito patrocinadoo vengan a mi viejones",
+          "stream_id": "322383958362",
+          "started_at": "2026-11-21T00:04:24Z"
         }
       ]
     },
@@ -15839,11 +15896,11 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "last_status_at": "2026-11-20T23:21:58Z",
-      "last_snapshot_at": "2026-11-20T23:21:58Z",
-      "updated_at": "2026-11-20T23:21:58Z",
+      "last_status_at": "2026-11-21T00:08:42Z",
+      "last_snapshot_at": "2026-11-21T00:08:42Z",
+      "updated_at": "2026-11-21T00:08:42Z",
       "window": {
-        "samples_total": 403,
+        "samples_total": 404,
         "live_samples": 15,
         "streams_observed": 9,
         "average_viewers_sampled": 1.9,
@@ -19567,6 +19624,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-21T00:08:42Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -20203,11 +20269,11 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "last_status_at": "2026-11-20T23:21:58Z",
-      "last_snapshot_at": "2026-11-20T23:21:58Z",
-      "updated_at": "2026-11-20T23:21:58Z",
+      "last_status_at": "2026-11-21T00:08:42Z",
+      "last_snapshot_at": "2026-11-21T00:08:42Z",
+      "updated_at": "2026-11-21T00:08:42Z",
       "window": {
-        "samples_total": 403,
+        "samples_total": 404,
         "live_samples": 76,
         "streams_observed": 19,
         "average_viewers_sampled": 4.7,
@@ -23987,6 +24053,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-21T00:08:42Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -24002,19 +24077,19 @@
       "followers_status": "awaiting_authorization",
       "followers_note": "Pendiente de configurar OAuth de usuario de solo lectura. No requiere moderador ni acceso a identidades.",
       "followers_history": [],
-      "live": false,
-      "current_viewers": null,
-      "current_game": null,
-      "current_title": null,
-      "stream_started_at": null,
-      "last_status_at": "2026-11-20T23:21:58Z",
-      "last_snapshot_at": "2026-11-20T23:21:58Z",
-      "updated_at": "2026-11-20T23:21:58Z",
+      "live": true,
+      "current_viewers": 8,
+      "current_game": "Anime Shop Simulator ✨",
+      "current_title": "[Cooperativo] Hoy hacemos Tienda de Anime con la pesadita de la @ladymoriarty01",
+      "stream_started_at": "2026-11-20T23:56:46Z",
+      "last_status_at": "2026-11-21T00:08:42Z",
+      "last_snapshot_at": "2026-11-21T00:08:42Z",
+      "updated_at": "2026-11-21T00:08:42Z",
       "window": {
-        "samples_total": 403,
-        "live_samples": 19,
-        "streams_observed": 9,
-        "average_viewers_sampled": 16.3,
+        "samples_total": 404,
+        "live_samples": 20,
+        "streams_observed": 10,
+        "average_viewers_sampled": 15.8,
         "peak_viewers_sampled": 31,
         "observed_live_hours": 8.17,
         "estimated_hours_watched": 109.54,
@@ -24067,6 +24142,13 @@
             "streams_observed": 1,
             "average_viewers_sampled": 7.0,
             "peak_viewers_sampled": 7
+          },
+          {
+            "name": "Anime Shop Simulator ✨",
+            "live_samples": 1,
+            "streams_observed": 1,
+            "average_viewers_sampled": 8.0,
+            "peak_viewers_sampled": 8
           }
         ],
         "daily_activity": [
@@ -24160,6 +24242,13 @@
             "streams_observed": 1,
             "average_viewers_sampled": 11.0,
             "peak_viewers_sampled": 11
+          },
+          {
+            "date": "2026-11-21",
+            "live_samples": 1,
+            "streams_observed": 1,
+            "average_viewers_sampled": 8.0,
+            "peak_viewers_sampled": 8
           }
         ],
         "method": "Muestreo propio con cadencia observada cercana a 55 minutos, variable por la programación de GitHub Actions; horas estimadas solo entre muestras consecutivas del mismo directo cuando el intervalo no supera 110 minutos. Categorías y evolución diaria se calculan sobre las muestras observadas."
@@ -27791,6 +27880,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-21T00:08:42Z",
+          "is_live": true,
+          "viewer_count": 8,
+          "game_name": "Anime Shop Simulator ✨",
+          "title": "[Cooperativo] Hoy hacemos Tienda de Anime con la pesadita de la @ladymoriarty01",
+          "stream_id": "319678574452",
+          "started_at": "2026-11-20T23:56:46Z"
         }
       ]
     }
