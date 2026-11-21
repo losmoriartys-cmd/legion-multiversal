@@ -186,6 +186,20 @@ test.describe('Auditoría de métricas normalizadas del Roster', () => {
     expect(states.future).toEqual({ state: 'missing', label: 'SIN DATOS' });
     expect(states.missingValue).toEqual({ state: 'missing', label: 'SIN DATOS' });
     expect(states.missingMetric).toEqual({ state: 'missing', label: 'SIN DATOS' });
+    const historical = await page.evaluate(() => {
+      const hero = heroesData.find(item => item.id === 'moriartys');
+      const metric = creatorMetricsData.creators.moriartys.metrics.find(item => item.key === 'average_viewers_sampled');
+      metric.value = 12;
+      metric.captured_at = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+      const resolved = getNormalizedCreatorMetric(hero, 'average_viewers_sampled', 'twitch');
+      return { state: resolved.state, summary: normalizedMetricValue(resolved, 1), dashboard: renderStatsDashboard(hero, null, null) };
+    });
+    expect(historical.state).toBe('stale');
+    expect(historical.summary).toContain('12');
+    expect(historical.summary).toContain('HISTÓRICO');
+    expect(historical.dashboard).toContain('12');
+    expect(historical.dashboard).toContain('HISTÓRICO');
+    expect(historical.dashboard).toContain('no representan el estado actual');
   });
 
   test('usa claves y unidades estrictas para promedio, pico y horas observadas', async ({ page }) => {
