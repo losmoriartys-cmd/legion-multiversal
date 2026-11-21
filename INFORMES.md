@@ -3515,3 +3515,17 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **Pruebas:** workflow de sitio run 44871619904 SUCCESS; Playwright 30 passed, incluidos expedientes, pestañas, grupos, filtros, ordenamiento, responsive y límites de cifras. Tras sincronizar los tres archivos generados con main, el workflow de sitio run 44871883129 también terminó SUCCESS; QA portable run 44871883133 SUCCESS y colector run 44871883126 SUCCESS. La última mejora de frescura y fecha de ventana está siendo revalidada en el workflow 44872002975. Las capturas de revisión están en el artefacto de Playwright: https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/44871619904/artifacts/14694620166.
 - **Alcance:** se añadieron roster-enhancements.js y pruebas; se actualizó la carga en index.html y se ampliaron roster-selector.css y los contratos Playwright. No se cambiaron retratos ni imágenes. Los archivos generados creator-metrics.json, data.json y platform-stats.json se copiaron sin edición manual para igualar el snapshot de main.
 - **Estado de integración:** PR #83 sigue en Draft y sin merge. PR #81 no se modificó. main y producción permanecen intactos. La preview de Cloudflare debe comprobarse sobre el HEAD actual antes de pedir aprobación visual; no se declara un despliegue verificado a partir de las pruebas de GitHub Actions.
+
+
+## 2026-11-21 · Capítulo 02 · Quiénes somos: evolución del manifiesto (PR #84)
+
+- **Base:** main en ea40a8f635f6d01772b459ba66dd931212b1da6f; intervención sobre docs/shared-architecture-chapters-v2 para mantener arquitectura y primera implementación en una revisión.
+- **Auditoría previa:** el capítulo ya contenía seis valores, prácticas Antes/Durante/Después y una promesa general. Se preservó esa base; no se reemplazó por una página nueva ni se duplicó Comunidad o Roster.
+- **Historia:** se incorporó una línea editorial de cuatro hitos basada en la secuencia ya publicada en Capítulo 01: primera etapa S3X-MEN; expansión de experiencias; incorporación de nuevas voces; identidad pública Legión Multiversal. No se agregaron fechas.
+- **Valores:** se conservaron los seis valores y se añadió una aplicación concreta «En la práctica» a cada uno.
+- **Interacción:** Antes/Durante/Después pasó a pestañas accesibles con roles y estados ARIA, paneles asociados, navegación por flechas, Home y End, y contenido inicial disponible sin JavaScript.
+- **Compromisos:** se separaron «Lo que ofrecemos» y «Lo que no prometemos», explicitando que no se garantizan fama, contratos, ingresos, crecimiento, alcance ni oportunidades.
+- **Incorporación:** se agregó Conocer/Probar/Documentar y se reiteró la participación voluntaria, sin convertirlo en un proceso automático de selección.
+- **Archivos:** index.html, styles.css, nuevo manifesto-chapter.js, tests/test_values_chapter_contract.py, nuevo tests/browser/manifesto-chapter.spec.js e INFORMES.md.
+- **Límites:** no se modificó Capítulo 01, datos del Roster, métricas, colectores, Alianzas, Colaboraciones ni Arsenal.
+- **Validación:** contratos Python y Playwright incorporados; ejecución CI pendiente sobre el nuevo HEAD. No se declara aprobación visual, integración en main ni despliegue de producción hasta completar workflows y revisar capturas de escritorio/móvil.
