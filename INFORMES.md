@@ -25,7 +25,9 @@
 - [ ] Migrar el registro maestro desde `games.json` a `data/games.json` sin alterar sus 18 juegos, 10 sesiones BIT, 11 POV ni la referencia `EXP-001` de BarFender.
 - [ ] Actualizar consumidores del Arsenal y Colaboraciones, validador, contratos automatizados y filtros del workflow para leer la nueva ruta.
 - [ ] Ejecutar CI y comprobar que ningún consumidor activo siga dependiendo de la ruta antigua antes de integrar.
-- **Estado:** [PR #90](https://github.com/losmoriartys-cmd/legion-multiversal/pull/90) abierto en borrador desde la rama `feat/base-01-canonical-games-data`; equivalencia de datos y rutas de consumo verificadas en la rama; CI y revisión del PR pendientes. No integrado en `main`.
+- **Estado:** [PR #90](https://github.com/losmoriartys-cmd/legion-multiversal/pull/90) listo para revisión; equivalencia de datos y rutas de consumo verificadas.
+- **CI:** GitHub Actions SUCCESS en validación integral, Python tests y QA común Playwright; preview Cloudflare Pages SUCCESS (preview, no producción).
+- **SHA evaluado:** `875c509925d76ca515ad30bc59c4e63d7bc63c51`. Sin integración en `main`.
 - [ ] Diseñar y documentar la estructura canónica data/ para roster, juegos, horarios declarados, enlaces y referencias audiovisuales. Evitar duplicar campos cuando los horarios deban seguir formando parte del perfil del creador.
 - [ ] Migrar los datos existentes de forma controlada desde los JSON de raíz, manteniendo un único origen por entidad y actualizando consumidores, colectores, páginas, scripts y tests.
 - [ ] Conservar IDs canónicos estables para cada creador, juego, sesión BIT, expediente EXP, VOD y clip; no resolver relaciones por nombres visibles.
