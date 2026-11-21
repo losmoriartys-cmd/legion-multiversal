@@ -43,7 +43,10 @@
 
 - [ ] Retirar la ruta raíz y comprobar que no quedan consumidores activos de `roster-data.json`.
 
-- **Estado:** implementación preparada en `feat/base-01b-roster-data`; PR y CI pendientes.
+- **Estado:** [PR #91](https://github.com/losmoriartys-cmd/legion-multiversal/pull/91) abierto en borrador; migración de contenido y consumidores preparada, pendiente de integración en `main`.
+- **Integridad:** blob SHA de `data/roster.json` idéntico al original (`1228911b33d594473ef6e99d43f4b2934eb195a5`); ocho IDs/slug conservados y ruta raíz retirada en la rama.
+- **CI:** validación integral, Python tests, QA común, QA portable y preview Cloudflare Pages: todos SUCCESS.
+- **HEAD evaluado:** `513eb1b8a90aaf7b289267d4730758d223d230ea`. Sin integración en `main`.
 
 ### BASE-02 · Esquemas y validación que bloqueen publicaciones inválidas
 - [ ] Completar esquemas JSON para todos los documentos de data/: roster, juegos, horarios, enlaces, sesiones, VOD y clips, con campos obligatorios, opcionales y reglas de null explícitas.

@@ -68,7 +68,7 @@ La consola privada no debe exponer secretos, tokens ni información no autorizad
 ### 2.1 Estructura y fuentes existentes
 
 La implementación actual de `main` ya cuenta con:
-- `data/roster.json`: fuente editorial canónica del directorio y de los perfiles (migración BASE-01B en curso en la rama `feat/base-01b-roster-data`);
+- `roster-data.json`: fuente editorial del directorio y de los perfiles;
 - `data.json`: estado/actividad observada de canales Twitch;
 - `platform-stats.json`: métricas públicas por creador y plataforma;
 - `creator-records.json`: clips, hitos, colaboraciones y material editorial;
