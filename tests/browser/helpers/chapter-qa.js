@@ -28,7 +28,7 @@ async function inspectHorizontalOverflow(panel) {
     const offenders = Array.from(el.querySelectorAll('*')).map(node => {
       const r = node.getBoundingClientRect(), s = getComputedStyle(node);
       return {tag:node.tagName,id:node.id,className:String(node.className||'').slice(0,120),text:(node.textContent||'').trim().slice(0,60),left:Math.round(r.left),right:Math.round(r.right),width:Math.round(r.width),height:Math.round(r.height),display:s.display,visibility:s.visibility};
-    }).filter(x => x.width > 0 && x.height > 0 && x.display !== 'none' && x.visibility !== 'hidden' && (x.left < rect.left - 1 || x.right > rect.right + 1));
+    }).filter(x => !x.insideScrollRegion && x.width > 0 && x.height > 0 && x.display !== 'none' && x.visibility !== 'hidden' && (x.left < rect.left - 1 || x.right > rect.right + 1));
     return {panel:el.id,panelScrollWidth:el.scrollWidth,panelClientWidth:el.clientWidth,documentWidth:document.documentElement.scrollWidth,viewportWidth:innerWidth,scrollRegions,offenders};
   });
 }
