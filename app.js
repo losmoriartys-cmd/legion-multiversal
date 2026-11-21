@@ -2854,8 +2854,19 @@ function printHeroDossier(){
             recordLegionProgress('chapter', String(chapterNum));
             renderChapterPager(chapterNum);
             playChapterCue();
-            const chapterScrollBehavior = options.scrollBehavior === 'auto' || window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
-            window.scrollTo({ top: 0, behavior: chapterScrollBehavior });
+            if (options.scrollBehavior === 'auto') {
+                // Los saltos entre registros no deben competir con el scroll suave global.
+                const rootScroller = document.documentElement;
+                const previousScrollBehavior = rootScroller.style.scrollBehavior;
+                rootScroller.style.scrollBehavior = 'auto';
+                window.scrollTo({ top: 0, behavior: 'auto' });
+                // Mantener el modo inmediato durante el siguiente frame (scrollIntoView del enlace destino).
+                window.requestAnimationFrame(() => window.requestAnimationFrame(() => {
+                    rootScroller.style.scrollBehavior = previousScrollBehavior;
+                }));
+            } else {
+                window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+            }
         }
         const rosterContainer = document.getElementById('roster-container');
         function initializeLegionApp() {
