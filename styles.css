@@ -5833,3 +5833,4 @@ main .chapter-panel :where(.chapter-cta, .executive-button, .comic-submit-btn,
 .stats-comparison-track .is-peak{background:#ff2bd6}
 .stats-comparison-row>span{text-align:right;color:#aebbd0;font-size:.65rem;font-variant-numeric:tabular-nums}
 @media(max-width:560px){.stats-comparison-row{grid-template-columns:90px minmax(80px,1fr) 68px;gap:6px}.stats-comparison-row>strong,.stats-comparison-row>span{font-size:.58rem}}
+
