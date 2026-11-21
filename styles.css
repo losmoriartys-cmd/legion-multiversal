@@ -5978,3 +5978,9 @@ main .chapter-panel :where(.chapter-cta, .executive-button, .comic-submit-btn,
  .chapter-panel.active .chapter-tag,
  .chapter-panel.active .comic-title{animation:none!important;transform:none!important}
 }
+
+
+/* Capítulo 02 · el tramado de página no debe exceder el panel en móvil. */
+@media(max-width:600px){
+ #chapter-11.comic-page::before{inset:0}
+}
