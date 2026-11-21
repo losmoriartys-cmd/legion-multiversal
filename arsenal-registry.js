@@ -151,24 +151,34 @@
   [search,stateFilter,categoryFilter,playersFilter].forEach(control=>control.addEventListener(control===search?'input':'change',render));
   rouletteButton.addEventListener('click',roulette);
   resetButton.addEventListener('click',reset);
+  function scrollToRegistryTarget(target){
+    if(!target||!target.isConnected)return;
+    const rootScroller=document.documentElement;
+    const previousScrollBehavior=rootScroller.style.scrollBehavior;
+    rootScroller.style.scrollBehavior='auto';
+    target.scrollIntoView({block:'center',behavior:'auto'});
+    window.requestAnimationFrame(()=>{rootScroller.style.scrollBehavior=previousScrollBehavior;});
+  }
   grid.addEventListener('click',event=>{
     const link=event.target.closest('[data-open-bit]');
     if(!link)return;
     event.preventDefault();
     const bit=link.dataset.openBit;
-    if(typeof window.switchChapter==='function')window.switchChapter(12,{scrollBehavior:'auto'});
-    window.requestAnimationFrame(()=>{
+    const revealBit=()=>{
       const session=document.getElementById(bit);
       const target=session?.querySelector('[data-open-arsenal]')||session;
-      target?.scrollIntoView({block:'center',behavior:'auto'});
-    });
+      scrollToRegistryTarget(target);
+    };
+    if(typeof window.switchChapter==='function')window.switchChapter(12,{scrollBehavior:'auto',afterEnter:revealBit});
+    else revealBit();
   });
   grid.addEventListener('click',event=>{
     const link=event.target.closest('[data-open-commercial]');
     if(!link)return;
     event.preventDefault();
-    if(typeof window.switchChapter==='function')window.switchChapter(12,{scrollBehavior:'auto'});
-    window.requestAnimationFrame(()=>document.getElementById('barfender-expediente')?.scrollIntoView({block:'center',behavior:'auto'}));
+    const revealCommercial=()=>scrollToRegistryTarget(document.getElementById('barfender-expediente'));
+    if(typeof window.switchChapter==='function')window.switchChapter(12,{scrollBehavior:'auto',afterEnter:revealCommercial});
+    else revealCommercial();
   });
   rouletteResult.addEventListener('click',event=>{
     const button=event.target.closest('[data-roulette-open]');
