@@ -6,7 +6,7 @@
 ## Estado actual reutilizable · ya existe y no debe reconstruirse desde cero
 
 - [x] **Registro maestro de juegos:** games.json, schemas/games.schema.json y scripts/validate_games_registry.py; 18 juegos, 10 sesiones BIT y 11 POV. La Bitácora y el Arsenal consumen ese mismo origen.
-- [x] **Identidad del Roster:** roster-data.json, schemas/roster-data.schema.json y validaciones existentes; el selector público contempla ocho perfiles.
+- [~] **Identidad del Roster:** migración en curso hacia `data/roster.json`; se conservan `schemas/roster-data.schema.json`, los ocho perfiles y sus validaciones, sin cambios editoriales.
 - [x] **Infraestructura QA común:** Playwright verifica 12 IDs de capítulos y cinco anchos (1440, 1024, 768, 390 y 360 px), navegación y overflow.
 - [x] **Validación general y QA portable:** existen workflows para contratos Python, JSON, sintaxis, imágenes, accesibilidad estática, enlaces/anclas y publicación de evidencias.
 - [x] **Colector de clips públicos:** update_clips.py consulta Twitch Helix, conserva metadatos y una ventana de historial de vistas. Su extensión para clips por sesión, feeds y relación con VOD sigue pendiente.
