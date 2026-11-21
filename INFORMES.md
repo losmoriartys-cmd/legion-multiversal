@@ -3570,3 +3570,13 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **Causa raíz identificada:** la regla global `.comic-page::before` usa `inset:-15%`. En el panel `#chapter-11` de 390 px, el pseudo-elemento se extendía 51 px por cada lado (442 px de ancho calculado), superando los 340 px del área interna. El contenido real y los controles no eran los causantes.
 - **Corrección aplicada en este commit:** dentro de `@media(max-width:600px)`, `#chapter-11.comic-page::before` pasa a `inset:0`. Se conserva el tramado y el movimiento editorial; solo se evita que la capa decorativa sobresalga del panel en móvil. No se añadió `overflow-x:hidden`, no se ocultó el defecto y no se relajó la aserción.
 - **Pendiente obligatorio:** ejecutar de nuevo Playwright y los workflows asociados sobre el nuevo HEAD; confirmar overflow cero y revisar capturas. El PR no está aprobado ni fusionado hasta que las pruebas estén verdes.
+
+
+## 2026-11-21 · Infraestructura QA común de capítulos (PR independiente)
+
+- **Base:** main después de integrar PR #84 (commit 6d4b99f61683e24888c176afcc5c9b1a67d44557).
+- **Objetivo:** centralizar un contrato responsive y de navegación para todos los capítulos, sin sustituir pruebas específicas.
+- **Cobertura inicial:** 12 IDs de capítulos (0, 1, 2, 3, 11, 9, 10, 8, 12, 5, 6, 13), cinco viewport (1440, 1024, 768, 390 y 360 px), switchChapter, overflow panel/documento, reduced motion, errores JS y navegación.
+- **Archivos:** tests/browser/helpers/chapter-qa.js, tests/browser/chapter-common-qa.spec.js, .github/workflows/qa-comun-capitulos.yml, docs/QA_COMUN_CAPITULOS.md.
+- **Validación:** PR recién abierto; CI y Playwright quedan pendientes. No se declara validado ni integrado.
+- **Límites:** esta primera suite no reemplaza QA semántico/WCAG completo, contratos de datos ni pruebas funcionales particulares. PASS, FAIL y BLOCKED se documentan; un entorno bloqueado no equivale a aprobado.
