@@ -207,3 +207,14 @@ Al finalizar cada cambio, registrar: archivos tocados; qué se modificó y por q
 - **Pruebas:** pendientes de CI en el PR de la rama.
 - **Pendiente:** conectar el Capítulo 08 · Arsenal al mismo origen y verificar que los enlaces entre ambos capítulos funcionen.
 - **Despliegue:** no aplica hasta la integración.
+
+
+## 2026-11-21 — Capítulo 08 · Arsenal conectado al registro compartido
+
+- **Archivos:** index.html, styles.css, arsenal-registry.js, tests/test_arsenal_registry_contract.py, tests/browser/arsenal-registry.spec.js, tests/browser/home-conversion.spec.js, tests/test_collaborations_registry_contract.py, games-registry.js, .github/workflows/validar-sitio.yml, INFORMES.md y BITACORA.md.
+- **Origen:** el catálogo lee los 18 registros de games.json; no replica juegos, categorías ni URLs.
+- **Experiencia:** filtros por búsqueda, categoría, estado y jugadores mínimos verificados; ruleta sobre resultados visibles; contadores calculados; enlaces a tienda y Bitácora.
+- **Estados:** 10 juegos con sesión BIT, 7 por descubrir y BarFender como expediente comercial EXP-001 independiente.
+- **Navegación cruzada:** las sesiones reciben anclas BIT estables; ambas secciones enlazan por IDs canónicos.
+- **Pruebas:** pendientes del CI del PR apilado.
+- **Despliegue:** no aplica hasta integrar PR #87 y PR #88.

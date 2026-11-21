@@ -83,7 +83,7 @@
     const dateLabel = session.fecha ? escapeHtml(session.fecha) : 'FECHA SIN VERIFICAR';
     const arsenalLink = '<a class="collab-arsenal-link" href="#arsenal-game-' + escapeHtml(game.id) + '" data-open-arsenal="' + escapeHtml(game.id) + '">VER FICHA EN ARSENAL →</a>';
     const storeLink = store ? '<a class="collab-store-link" href="' + escapeHtml(store) + '" target="_blank" rel="noopener noreferrer">FICHA OFICIAL ↗</a>' : '';
-    return '<article class="collab-session-card" data-collab-session="' + escapeHtml(session.bit) + '" data-game-id="' + escapeHtml(game.id) + '">' +
+    return '<article class="collab-session-card" id="' + escapeHtml(session.bit.toLowerCase()) + '" data-collab-session="' + escapeHtml(session.bit) + '" data-game-id="' + escapeHtml(game.id) + '">' +
       gameCover(game, session) + '<div class="collab-session-content">' +
       '<div class="collab-session-topline"><span class="collab-bit-id">' + escapeHtml(session.bit) + '</span><span class="collab-session-date">' + dateLabel + '</span></div>' +
       '<h4>' + escapeHtml(game.nombre) + '</h4><div class="collab-session-categories">' + categories + '</div>' +
@@ -197,6 +197,16 @@
   }
   [searchInput, categorySelect, creatorSelect].forEach(function (control) {
     control.addEventListener(control === searchInput ? 'input' : 'change', render);
+  });
+  grid.addEventListener('click', function (event) {
+    const link = event.target.closest('[data-open-arsenal]');
+    if (!link) return;
+    event.preventDefault();
+    const gameId = link.dataset.openArsenal;
+    if (typeof window.switchChapter === 'function') window.switchChapter(5);
+    window.requestAnimationFrame(function () {
+      document.getElementById('arsenal-game-' + gameId)?.scrollIntoView({ block: 'center', behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    });
   });
   window.gamesRegistryReady = loadRegistry();
 })();
