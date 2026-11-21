@@ -42,8 +42,15 @@ test('Quiénes somos se adapta a móvil y conserva controles con reduced motion'
       const rect = node.getBoundingClientRect();
       return { tag: node.tagName, className: String(node.className || '').slice(0, 100),
         left: Math.round(rect.left), right: Math.round(rect.right), width: Math.round(rect.width) };
-    }).filter(item => item.right > bounds.right + 1 || item.left < bounds.left - 1).slice(0, 12);
-    return { scrollWidth: el.scrollWidth, clientWidth: el.clientWidth, offenders };
+    }).filter(item => item.right > bounds.right + 1 || item.left < bounds.left - 1);
+    const visibleOffenders = Array.from(el.querySelectorAll('*')).filter(node => {
+      const style = getComputedStyle(node);
+      const rect = node.getBoundingClientRect();
+      return style.display !== 'none' && style.visibility !== 'hidden' && rect.width > 0 && rect.height > 0 &&
+        (rect.right > bounds.right + 1 || rect.left < bounds.left - 1);
+    }).map(node => ({tag:node.tagName,className:String(node.className||'').slice(0,100),
+      text:(node.textContent||'').trim().slice(0,90),rect:(()=>{const r=node.getBoundingClientRect();return {left:Math.round(r.left),right:Math.round(r.right),width:Math.round(r.width)}})()}));
+    return { scrollWidth: el.scrollWidth, clientWidth: el.clientWidth, offenders, visibleOffenders };
   });
   expect(overflow.scrollWidth, JSON.stringify(overflow)).toBeLessThanOrEqual(overflow.clientWidth);
 });
