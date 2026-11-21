@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-21T22:58:30Z",
+  "generated_at": "2026-11-21T23:37:49Z",
   "source_files": {
     "identity": "data/roster.json",
     "twitch": "data.json",
@@ -10,10 +10,10 @@
   },
   "source_snapshot": {
     "data.json": {
-      "updated_at": "2026-11-21T22:58:29Z"
+      "updated_at": "2026-11-21T23:37:48Z"
     },
     "platform-stats.json": {
-      "updated_at": "2026-11-21T22:58:29Z"
+      "updated_at": "2026-11-21T23:37:48Z"
     }
   },
   "methodology": [
@@ -61,11 +61,11 @@
           "label": "Estado de transmisión",
           "value": "offline",
           "unit": "status",
-          "captured_at": "2026-11-21T22:58:29Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "public_helix_snapshot",
@@ -82,11 +82,11 @@
           "label": "Espectadores en la última captura",
           "value": null,
           "unit": "viewers",
-          "captured_at": "2026-11-21T22:58:29Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "public_helix_snapshot",
@@ -107,7 +107,7 @@
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "public_helix_follower_total_only",
@@ -122,13 +122,13 @@
           "account_handle": "losmoriartys",
           "key": "samples_total",
           "label": "Muestras históricas",
-          "value": 426,
+          "value": 427,
           "unit": "samples",
-          "captured_at": "2026-11-21T22:14:57Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -145,11 +145,11 @@
           "label": "Muestras en directo",
           "value": 21,
           "unit": "samples",
-          "captured_at": "2026-11-21T22:14:57Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -166,11 +166,11 @@
           "label": "Sesiones observadas",
           "value": 10,
           "unit": "streams",
-          "captured_at": "2026-11-21T22:14:57Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -185,13 +185,13 @@
           "account_handle": "losmoriartys",
           "key": "average_viewers_sampled",
           "label": "Promedio de viewers muestreado",
-          "value": 16,
+          "value": 16.0,
           "unit": "viewers_sampled_avg",
-          "captured_at": "2026-11-21T22:14:57Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -208,11 +208,11 @@
           "label": "Pico observado",
           "value": 31,
           "unit": "viewers_sampled_peak",
-          "captured_at": "2026-11-21T22:14:57Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -229,11 +229,11 @@
           "label": "Horas en directo observadas",
           "value": 9.09,
           "unit": "hours_observed",
-          "captured_at": "2026-11-21T22:14:57Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -250,11 +250,11 @@
           "label": "Horas vistas estimadas",
           "value": 126.96,
           "unit": "hours_estimated",
-          "captured_at": "2026-11-21T22:14:57Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -266,29 +266,29 @@
       ],
       "growth": {
         "schema_version": 1,
-        "generated_at": "2026-11-21T22:58:30Z",
+        "generated_at": "2026-11-21T23:37:49Z",
         "platform": "twitch",
         "history_days_required": 180,
         "windows": {
           "7d": {
             "days": 7,
             "period": {
-              "from": "2026-11-14T22:58:30Z",
-              "to": "2026-11-21T22:58:30Z"
+              "from": "2026-11-14T23:37:49Z",
+              "to": "2026-11-21T23:37:49Z"
             },
             "coverage": {
               "sampled_days": 7,
               "expected_days": 7,
-              "coverage_pct": 100,
+              "coverage_pct": 100.0,
               "status": "sufficient",
-              "minimum_for_comparison_pct": 65,
-              "last_observed_at": "2026-11-21T22:14:57Z"
+              "minimum_for_comparison_pct": 65.0,
+              "last_observed_at": "2026-11-21T23:37:48Z"
             },
             "metrics": {
               "streams_observed": 4,
               "active_days": 6,
               "active_weeks": 2,
-              "streams_per_week": 4,
+              "streams_per_week": 4.0,
               "observed_live_hours": 5.5,
               "observed_hours_per_week": 5.5,
               "average_viewers_sampled": 14.2,
@@ -330,36 +330,36 @@
                 "average_viewers_sampled": {
                   "current": 14.2,
                   "previous": 16.2,
-                  "change": -2
+                  "change": -2.0
                 }
               },
               "previous_period": {
-                "from": "2026-11-07T22:58:30Z",
-                "to": "2026-11-14T22:58:30Z"
+                "from": "2026-11-07T23:37:49Z",
+                "to": "2026-11-14T23:37:49Z"
               },
               "previous_coverage": {
                 "sampled_days": 7,
                 "expected_days": 7,
-                "coverage_pct": 100,
+                "coverage_pct": 100.0,
                 "status": "sufficient",
-                "minimum_for_comparison_pct": 65,
-                "last_observed_at": "2026-11-14T22:21:11Z"
+                "minimum_for_comparison_pct": 65.0,
+                "last_observed_at": "2026-11-14T23:35:44Z"
               }
             }
           },
           "30d": {
             "days": 30,
             "period": {
-              "from": "2026-10-22T22:58:30Z",
-              "to": "2026-11-21T22:58:30Z"
+              "from": "2026-10-22T23:37:49Z",
+              "to": "2026-11-21T23:37:49Z"
             },
             "coverage": {
               "sampled_days": 19,
               "expected_days": 30,
               "coverage_pct": 63.3,
               "status": "partial",
-              "minimum_for_comparison_pct": 65,
-              "last_observed_at": "2026-11-21T22:14:57Z"
+              "minimum_for_comparison_pct": 65.0,
+              "last_observed_at": "2026-11-21T23:37:48Z"
             },
             "metrics": {
               "streams_observed": 10,
@@ -368,7 +368,7 @@
               "streams_per_week": 2.33,
               "observed_live_hours": 9.09,
               "observed_hours_per_week": 2.12,
-              "average_viewers_sampled": 16,
+              "average_viewers_sampled": 16.0,
               "peak_viewers_sampled": 31,
               "live_samples": 21,
               "followers": {
@@ -390,15 +390,15 @@
               "status": "insufficient_coverage",
               "metrics": {},
               "previous_period": {
-                "from": "2026-09-22T22:58:30Z",
-                "to": "2026-10-22T22:58:30Z"
+                "from": "2026-09-22T23:37:49Z",
+                "to": "2026-10-22T23:37:49Z"
               },
               "previous_coverage": {
                 "sampled_days": 0,
                 "expected_days": 30,
-                "coverage_pct": 0,
+                "coverage_pct": 0.0,
                 "status": "partial",
-                "minimum_for_comparison_pct": 65,
+                "minimum_for_comparison_pct": 65.0,
                 "last_observed_at": null
               }
             }
@@ -406,16 +406,16 @@
           "90d": {
             "days": 90,
             "period": {
-              "from": "2026-08-23T22:58:30Z",
-              "to": "2026-11-21T22:58:30Z"
+              "from": "2026-08-23T23:37:49Z",
+              "to": "2026-11-21T23:37:49Z"
             },
             "coverage": {
               "sampled_days": 19,
               "expected_days": 90,
               "coverage_pct": 21.1,
               "status": "partial",
-              "minimum_for_comparison_pct": 65,
-              "last_observed_at": "2026-11-21T22:14:57Z"
+              "minimum_for_comparison_pct": 65.0,
+              "last_observed_at": "2026-11-21T23:37:48Z"
             },
             "metrics": {
               "streams_observed": 10,
@@ -424,7 +424,7 @@
               "streams_per_week": 0.78,
               "observed_live_hours": 9.09,
               "observed_hours_per_week": 0.71,
-              "average_viewers_sampled": 16,
+              "average_viewers_sampled": 16.0,
               "peak_viewers_sampled": 31,
               "live_samples": 21,
               "followers": {
@@ -446,15 +446,15 @@
               "status": "insufficient_coverage",
               "metrics": {},
               "previous_period": {
-                "from": "2026-05-25T22:58:30Z",
-                "to": "2026-08-23T22:58:30Z"
+                "from": "2026-05-25T23:37:49Z",
+                "to": "2026-08-23T23:37:49Z"
               },
               "previous_coverage": {
                 "sampled_days": 0,
                 "expected_days": 90,
-                "coverage_pct": 0,
+                "coverage_pct": 0.0,
                 "status": "partial",
-                "minimum_for_comparison_pct": 65,
+                "minimum_for_comparison_pct": 65.0,
                 "last_observed_at": null
               }
             }
@@ -475,10 +475,10 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 28,
-                  "value_end": 28,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 28.0,
+                  "value_end": 28.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -486,10 +486,10 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 28,
-                  "value_end": 28,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 28.0,
+                  "value_end": 28.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -497,10 +497,10 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 28,
-                  "value_end": 28,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 28.0,
+                  "value_end": 28.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -519,10 +519,10 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 15,
-                  "value_end": 15,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 15.0,
+                  "value_end": 15.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -530,10 +530,10 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 15,
-                  "value_end": 15,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 15.0,
+                  "value_end": 15.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -541,10 +541,10 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 15,
-                  "value_end": 15,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 15.0,
+                  "value_end": 15.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -563,10 +563,10 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 13,
-                  "value_end": 13,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 13.0,
+                  "value_end": 13.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -574,10 +574,10 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 13,
-                  "value_end": 13,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 13.0,
+                  "value_end": 13.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -585,10 +585,10 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 13,
-                  "value_end": 13,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 13.0,
+                  "value_end": 13.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -607,10 +607,10 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 11,
-                  "value_end": 11,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 11.0,
+                  "value_end": 11.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -618,10 +618,10 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 11,
-                  "value_end": 11,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 11.0,
+                  "value_end": 11.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -629,10 +629,10 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 11,
-                  "value_end": 11,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 11.0,
+                  "value_end": 11.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -651,10 +651,10 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 10,
-                  "value_end": 10,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 10.0,
+                  "value_end": 10.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -662,10 +662,10 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 10,
-                  "value_end": 10,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 10.0,
+                  "value_end": 10.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -673,10 +673,10 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 10,
-                  "value_end": 10,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 10.0,
+                  "value_end": 10.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -791,11 +791,11 @@
           "label": "Estado de transmisión",
           "value": "offline",
           "unit": "status",
-          "captured_at": "2026-11-21T22:58:29Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "public_helix_snapshot",
@@ -812,11 +812,11 @@
           "label": "Espectadores en la última captura",
           "value": null,
           "unit": "viewers",
-          "captured_at": "2026-11-21T22:58:29Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "public_helix_snapshot",
@@ -837,7 +837,7 @@
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "public_helix_follower_total_only",
@@ -852,13 +852,13 @@
           "account_handle": "TheR0D3R1K",
           "key": "samples_total",
           "label": "Muestras históricas",
-          "value": 426,
+          "value": 427,
           "unit": "samples",
-          "captured_at": "2026-11-21T22:14:57Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -875,11 +875,11 @@
           "label": "Muestras en directo",
           "value": 42,
           "unit": "samples",
-          "captured_at": "2026-11-21T22:14:57Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -896,11 +896,11 @@
           "label": "Sesiones observadas",
           "value": 11,
           "unit": "streams",
-          "captured_at": "2026-11-21T22:14:57Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -917,11 +917,11 @@
           "label": "Promedio de viewers muestreado",
           "value": 23.4,
           "unit": "viewers_sampled_avg",
-          "captured_at": "2026-11-21T22:14:57Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -938,11 +938,11 @@
           "label": "Pico observado",
           "value": 51,
           "unit": "viewers_sampled_peak",
-          "captured_at": "2026-11-21T22:14:57Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -959,11 +959,11 @@
           "label": "Horas en directo observadas",
           "value": 25.38,
           "unit": "hours_observed",
-          "captured_at": "2026-11-21T22:14:57Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -980,11 +980,11 @@
           "label": "Horas vistas estimadas",
           "value": 588.91,
           "unit": "hours_estimated",
-          "captured_at": "2026-11-21T22:14:57Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -996,29 +996,29 @@
       ],
       "growth": {
         "schema_version": 1,
-        "generated_at": "2026-11-21T22:58:30Z",
+        "generated_at": "2026-11-21T23:37:49Z",
         "platform": "twitch",
         "history_days_required": 180,
         "windows": {
           "7d": {
             "days": 7,
             "period": {
-              "from": "2026-11-14T22:58:30Z",
-              "to": "2026-11-21T22:58:30Z"
+              "from": "2026-11-14T23:37:49Z",
+              "to": "2026-11-21T23:37:49Z"
             },
             "coverage": {
               "sampled_days": 7,
               "expected_days": 7,
-              "coverage_pct": 100,
+              "coverage_pct": 100.0,
               "status": "sufficient",
-              "minimum_for_comparison_pct": 65,
-              "last_observed_at": "2026-11-21T22:14:57Z"
+              "minimum_for_comparison_pct": 65.0,
+              "last_observed_at": "2026-11-21T23:37:48Z"
             },
             "metrics": {
               "streams_observed": 4,
               "active_days": 5,
               "active_weeks": 2,
-              "streams_per_week": 4,
+              "streams_per_week": 4.0,
               "observed_live_hours": 6.42,
               "observed_hours_per_week": 6.42,
               "average_viewers_sampled": 25.5,
@@ -1064,32 +1064,32 @@
                 }
               },
               "previous_period": {
-                "from": "2026-11-07T22:58:30Z",
-                "to": "2026-11-14T22:58:30Z"
+                "from": "2026-11-07T23:37:49Z",
+                "to": "2026-11-14T23:37:49Z"
               },
               "previous_coverage": {
                 "sampled_days": 7,
                 "expected_days": 7,
-                "coverage_pct": 100,
+                "coverage_pct": 100.0,
                 "status": "sufficient",
-                "minimum_for_comparison_pct": 65,
-                "last_observed_at": "2026-11-14T22:21:11Z"
+                "minimum_for_comparison_pct": 65.0,
+                "last_observed_at": "2026-11-14T23:35:44Z"
               }
             }
           },
           "30d": {
             "days": 30,
             "period": {
-              "from": "2026-10-22T22:58:30Z",
-              "to": "2026-11-21T22:58:30Z"
+              "from": "2026-10-22T23:37:49Z",
+              "to": "2026-11-21T23:37:49Z"
             },
             "coverage": {
               "sampled_days": 19,
               "expected_days": 30,
               "coverage_pct": 63.3,
               "status": "partial",
-              "minimum_for_comparison_pct": 65,
-              "last_observed_at": "2026-11-21T22:14:57Z"
+              "minimum_for_comparison_pct": 65.0,
+              "last_observed_at": "2026-11-21T23:37:48Z"
             },
             "metrics": {
               "streams_observed": 11,
@@ -1120,15 +1120,15 @@
               "status": "insufficient_coverage",
               "metrics": {},
               "previous_period": {
-                "from": "2026-09-22T22:58:30Z",
-                "to": "2026-10-22T22:58:30Z"
+                "from": "2026-09-22T23:37:49Z",
+                "to": "2026-10-22T23:37:49Z"
               },
               "previous_coverage": {
                 "sampled_days": 0,
                 "expected_days": 30,
-                "coverage_pct": 0,
+                "coverage_pct": 0.0,
                 "status": "partial",
-                "minimum_for_comparison_pct": 65,
+                "minimum_for_comparison_pct": 65.0,
                 "last_observed_at": null
               }
             }
@@ -1136,16 +1136,16 @@
           "90d": {
             "days": 90,
             "period": {
-              "from": "2026-08-23T22:58:30Z",
-              "to": "2026-11-21T22:58:30Z"
+              "from": "2026-08-23T23:37:49Z",
+              "to": "2026-11-21T23:37:49Z"
             },
             "coverage": {
               "sampled_days": 19,
               "expected_days": 90,
               "coverage_pct": 21.1,
               "status": "partial",
-              "minimum_for_comparison_pct": 65,
-              "last_observed_at": "2026-11-21T22:14:57Z"
+              "minimum_for_comparison_pct": 65.0,
+              "last_observed_at": "2026-11-21T23:37:48Z"
             },
             "metrics": {
               "streams_observed": 11,
@@ -1176,15 +1176,15 @@
               "status": "insufficient_coverage",
               "metrics": {},
               "previous_period": {
-                "from": "2026-05-25T22:58:30Z",
-                "to": "2026-08-23T22:58:30Z"
+                "from": "2026-05-25T23:37:49Z",
+                "to": "2026-08-23T23:37:49Z"
               },
               "previous_coverage": {
                 "sampled_days": 0,
                 "expected_days": 90,
-                "coverage_pct": 0,
+                "coverage_pct": 0.0,
                 "status": "partial",
-                "minimum_for_comparison_pct": 65,
+                "minimum_for_comparison_pct": 65.0,
                 "last_observed_at": null
               }
             }
@@ -1205,9 +1205,9 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 22,
-                  "value_end": 23,
-                  "change": 1,
+                  "value_start": 22.0,
+                  "value_end": 23.0,
+                  "change": 1.0,
                   "change_pct": 4.55,
                   "captures": 2,
                   "basis": "since_first_capture",
@@ -1216,9 +1216,9 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 22,
-                  "value_end": 23,
-                  "change": 1,
+                  "value_start": 22.0,
+                  "value_end": 23.0,
+                  "change": 1.0,
                   "change_pct": 4.55,
                   "captures": 2,
                   "basis": "since_first_capture",
@@ -1227,9 +1227,9 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 22,
-                  "value_end": 23,
-                  "change": 1,
+                  "value_start": 22.0,
+                  "value_end": 23.0,
+                  "change": 1.0,
                   "change_pct": 4.55,
                   "captures": 2,
                   "basis": "since_first_capture",
@@ -1249,10 +1249,10 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 21,
-                  "value_end": 21,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 21.0,
+                  "value_end": 21.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -1260,10 +1260,10 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 21,
-                  "value_end": 21,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 21.0,
+                  "value_end": 21.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -1271,10 +1271,10 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 21,
-                  "value_end": 21,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 21.0,
+                  "value_end": 21.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -1293,10 +1293,10 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 15,
-                  "value_end": 15,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 15.0,
+                  "value_end": 15.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -1304,10 +1304,10 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 15,
-                  "value_end": 15,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 15.0,
+                  "value_end": 15.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -1315,10 +1315,10 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 15,
-                  "value_end": 15,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 15.0,
+                  "value_end": 15.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -1337,10 +1337,10 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 12,
-                  "value_end": 12,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 12.0,
+                  "value_end": 12.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -1348,10 +1348,10 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 12,
-                  "value_end": 12,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 12.0,
+                  "value_end": 12.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -1359,10 +1359,10 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 12,
-                  "value_end": 12,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 12.0,
+                  "value_end": 12.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -1381,9 +1381,9 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 9,
-                  "value_end": 10,
-                  "change": 1,
+                  "value_start": 9.0,
+                  "value_end": 10.0,
+                  "change": 1.0,
                   "change_pct": 11.11,
                   "captures": 2,
                   "basis": "since_first_capture",
@@ -1392,9 +1392,9 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 9,
-                  "value_end": 10,
-                  "change": 1,
+                  "value_start": 9.0,
+                  "value_end": 10.0,
+                  "change": 1.0,
                   "change_pct": 11.11,
                   "captures": 2,
                   "basis": "since_first_capture",
@@ -1403,9 +1403,9 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 9,
-                  "value_end": 10,
-                  "change": 1,
+                  "value_start": 9.0,
+                  "value_end": 10.0,
+                  "change": 1.0,
                   "change_pct": 11.11,
                   "captures": 2,
                   "basis": "since_first_capture",
@@ -1565,11 +1565,11 @@
           "label": "Estado de transmisión",
           "value": "offline",
           "unit": "status",
-          "captured_at": "2026-11-21T22:58:29Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "public_helix_snapshot",
@@ -1586,11 +1586,11 @@
           "label": "Espectadores en la última captura",
           "value": null,
           "unit": "viewers",
-          "captured_at": "2026-11-21T22:58:29Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "public_helix_snapshot",
@@ -1611,7 +1611,7 @@
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "public_helix_follower_total_only",
@@ -1626,13 +1626,13 @@
           "account_handle": "ladymoriarty01",
           "key": "samples_total",
           "label": "Muestras históricas",
-          "value": 426,
+          "value": 427,
           "unit": "samples",
-          "captured_at": "2026-11-21T22:14:57Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -1649,11 +1649,11 @@
           "label": "Muestras en directo",
           "value": 15,
           "unit": "samples",
-          "captured_at": "2026-11-21T22:14:57Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -1670,11 +1670,11 @@
           "label": "Sesiones observadas",
           "value": 7,
           "unit": "streams",
-          "captured_at": "2026-11-21T22:14:57Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -1691,11 +1691,11 @@
           "label": "Promedio de viewers muestreado",
           "value": 6.3,
           "unit": "viewers_sampled_avg",
-          "captured_at": "2026-11-21T22:14:57Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -1712,11 +1712,11 @@
           "label": "Pico observado",
           "value": 15,
           "unit": "viewers_sampled_peak",
-          "captured_at": "2026-11-21T22:14:57Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -1733,11 +1733,11 @@
           "label": "Horas en directo observadas",
           "value": 5.63,
           "unit": "hours_observed",
-          "captured_at": "2026-11-21T22:14:57Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -1754,11 +1754,11 @@
           "label": "Horas vistas estimadas",
           "value": 28.78,
           "unit": "hours_estimated",
-          "captured_at": "2026-11-21T22:14:57Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -1770,29 +1770,29 @@
       ],
       "growth": {
         "schema_version": 1,
-        "generated_at": "2026-11-21T22:58:30Z",
+        "generated_at": "2026-11-21T23:37:49Z",
         "platform": "twitch",
         "history_days_required": 180,
         "windows": {
           "7d": {
             "days": 7,
             "period": {
-              "from": "2026-11-14T22:58:30Z",
-              "to": "2026-11-21T22:58:30Z"
+              "from": "2026-11-14T23:37:49Z",
+              "to": "2026-11-21T23:37:49Z"
             },
             "coverage": {
               "sampled_days": 7,
               "expected_days": 7,
-              "coverage_pct": 100,
+              "coverage_pct": 100.0,
               "status": "sufficient",
-              "minimum_for_comparison_pct": 65,
-              "last_observed_at": "2026-11-21T22:14:57Z"
+              "minimum_for_comparison_pct": 65.0,
+              "last_observed_at": "2026-11-21T23:37:48Z"
             },
             "metrics": {
               "streams_observed": 3,
               "active_days": 4,
               "active_weeks": 1,
-              "streams_per_week": 3,
+              "streams_per_week": 3.0,
               "observed_live_hours": 2.57,
               "observed_hours_per_week": 2.57,
               "average_viewers_sampled": 6.5,
@@ -1833,37 +1833,37 @@
                 },
                 "average_viewers_sampled": {
                   "current": 6.5,
-                  "previous": 7,
+                  "previous": 7.0,
                   "change": -0.5
                 }
               },
               "previous_period": {
-                "from": "2026-11-07T22:58:30Z",
-                "to": "2026-11-14T22:58:30Z"
+                "from": "2026-11-07T23:37:49Z",
+                "to": "2026-11-14T23:37:49Z"
               },
               "previous_coverage": {
                 "sampled_days": 7,
                 "expected_days": 7,
-                "coverage_pct": 100,
+                "coverage_pct": 100.0,
                 "status": "sufficient",
-                "minimum_for_comparison_pct": 65,
-                "last_observed_at": "2026-11-14T22:21:11Z"
+                "minimum_for_comparison_pct": 65.0,
+                "last_observed_at": "2026-11-14T23:35:44Z"
               }
             }
           },
           "30d": {
             "days": 30,
             "period": {
-              "from": "2026-10-22T22:58:30Z",
-              "to": "2026-11-21T22:58:30Z"
+              "from": "2026-10-22T23:37:49Z",
+              "to": "2026-11-21T23:37:49Z"
             },
             "coverage": {
               "sampled_days": 19,
               "expected_days": 30,
               "coverage_pct": 63.3,
               "status": "partial",
-              "minimum_for_comparison_pct": 65,
-              "last_observed_at": "2026-11-21T22:14:57Z"
+              "minimum_for_comparison_pct": 65.0,
+              "last_observed_at": "2026-11-21T23:37:48Z"
             },
             "metrics": {
               "streams_observed": 7,
@@ -1894,15 +1894,15 @@
               "status": "insufficient_coverage",
               "metrics": {},
               "previous_period": {
-                "from": "2026-09-22T22:58:30Z",
-                "to": "2026-10-22T22:58:30Z"
+                "from": "2026-09-22T23:37:49Z",
+                "to": "2026-10-22T23:37:49Z"
               },
               "previous_coverage": {
                 "sampled_days": 0,
                 "expected_days": 30,
-                "coverage_pct": 0,
+                "coverage_pct": 0.0,
                 "status": "partial",
-                "minimum_for_comparison_pct": 65,
+                "minimum_for_comparison_pct": 65.0,
                 "last_observed_at": null
               }
             }
@@ -1910,16 +1910,16 @@
           "90d": {
             "days": 90,
             "period": {
-              "from": "2026-08-23T22:58:30Z",
-              "to": "2026-11-21T22:58:30Z"
+              "from": "2026-08-23T23:37:49Z",
+              "to": "2026-11-21T23:37:49Z"
             },
             "coverage": {
               "sampled_days": 19,
               "expected_days": 90,
               "coverage_pct": 21.1,
               "status": "partial",
-              "minimum_for_comparison_pct": 65,
-              "last_observed_at": "2026-11-21T22:14:57Z"
+              "minimum_for_comparison_pct": 65.0,
+              "last_observed_at": "2026-11-21T23:37:48Z"
             },
             "metrics": {
               "streams_observed": 7,
@@ -1950,15 +1950,15 @@
               "status": "insufficient_coverage",
               "metrics": {},
               "previous_period": {
-                "from": "2026-05-25T22:58:30Z",
-                "to": "2026-08-23T22:58:30Z"
+                "from": "2026-05-25T23:37:49Z",
+                "to": "2026-08-23T23:37:49Z"
               },
               "previous_coverage": {
                 "sampled_days": 0,
                 "expected_days": 90,
-                "coverage_pct": 0,
+                "coverage_pct": 0.0,
                 "status": "partial",
-                "minimum_for_comparison_pct": 65,
+                "minimum_for_comparison_pct": 65.0,
                 "last_observed_at": null
               }
             }
@@ -1979,10 +1979,10 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 13,
-                  "value_end": 13,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 13.0,
+                  "value_end": 13.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -1990,10 +1990,10 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 13,
-                  "value_end": 13,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 13.0,
+                  "value_end": 13.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -2001,10 +2001,10 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 13,
-                  "value_end": 13,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 13.0,
+                  "value_end": 13.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -2023,10 +2023,10 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 10,
-                  "value_end": 12,
-                  "change": 2,
-                  "change_pct": 20,
+                  "value_start": 10.0,
+                  "value_end": 12.0,
+                  "change": 2.0,
+                  "change_pct": 20.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -2034,10 +2034,10 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 10,
-                  "value_end": 12,
-                  "change": 2,
-                  "change_pct": 20,
+                  "value_start": 10.0,
+                  "value_end": 12.0,
+                  "change": 2.0,
+                  "change_pct": 20.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -2045,10 +2045,10 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 10,
-                  "value_end": 12,
-                  "change": 2,
-                  "change_pct": 20,
+                  "value_start": 10.0,
+                  "value_end": 12.0,
+                  "change": 2.0,
+                  "change_pct": 20.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -2067,10 +2067,10 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 8,
-                  "value_end": 8,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 8.0,
+                  "value_end": 8.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -2078,10 +2078,10 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 8,
-                  "value_end": 8,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 8.0,
+                  "value_end": 8.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -2089,10 +2089,10 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 8,
-                  "value_end": 8,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 8.0,
+                  "value_end": 8.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -2111,10 +2111,10 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 5,
-                  "value_end": 6,
-                  "change": 1,
-                  "change_pct": 20,
+                  "value_start": 5.0,
+                  "value_end": 6.0,
+                  "change": 1.0,
+                  "change_pct": 20.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -2122,10 +2122,10 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 5,
-                  "value_end": 6,
-                  "change": 1,
-                  "change_pct": 20,
+                  "value_start": 5.0,
+                  "value_end": 6.0,
+                  "change": 1.0,
+                  "change_pct": 20.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -2133,10 +2133,10 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 5,
-                  "value_end": 6,
-                  "change": 1,
-                  "change_pct": 20,
+                  "value_start": 5.0,
+                  "value_end": 6.0,
+                  "change": 1.0,
+                  "change_pct": 20.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -2155,10 +2155,10 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 6,
-                  "value_end": 6,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 6.0,
+                  "value_end": 6.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -2166,10 +2166,10 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 6,
-                  "value_end": 6,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 6.0,
+                  "value_end": 6.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -2177,10 +2177,10 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 6,
-                  "value_end": 6,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 6.0,
+                  "value_end": 6.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -2287,11 +2287,11 @@
           "label": "Estado de transmisión",
           "value": "offline",
           "unit": "status",
-          "captured_at": "2026-11-21T22:58:29Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "public_helix_snapshot",
@@ -2308,11 +2308,11 @@
           "label": "Espectadores en la última captura",
           "value": null,
           "unit": "viewers",
-          "captured_at": "2026-11-21T22:58:29Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "public_helix_snapshot",
@@ -2333,7 +2333,7 @@
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "public_helix_follower_total_only",
@@ -2348,13 +2348,13 @@
           "account_handle": "ardipii",
           "key": "samples_total",
           "label": "Muestras históricas",
-          "value": 426,
+          "value": 427,
           "unit": "samples",
-          "captured_at": "2026-11-21T22:14:57Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -2371,11 +2371,11 @@
           "label": "Muestras en directo",
           "value": 10,
           "unit": "samples",
-          "captured_at": "2026-11-21T22:14:57Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -2392,11 +2392,11 @@
           "label": "Sesiones observadas",
           "value": 6,
           "unit": "streams",
-          "captured_at": "2026-11-21T22:14:57Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -2413,11 +2413,11 @@
           "label": "Promedio de viewers muestreado",
           "value": 9.4,
           "unit": "viewers_sampled_avg",
-          "captured_at": "2026-11-21T22:14:57Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -2434,11 +2434,11 @@
           "label": "Pico observado",
           "value": 25,
           "unit": "viewers_sampled_peak",
-          "captured_at": "2026-11-21T22:14:57Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -2455,11 +2455,11 @@
           "label": "Horas en directo observadas",
           "value": 2.58,
           "unit": "hours_observed",
-          "captured_at": "2026-11-21T22:14:57Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -2476,11 +2476,11 @@
           "label": "Horas vistas estimadas",
           "value": 34.65,
           "unit": "hours_estimated",
-          "captured_at": "2026-11-21T22:14:57Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -2492,29 +2492,29 @@
       ],
       "growth": {
         "schema_version": 1,
-        "generated_at": "2026-11-21T22:58:30Z",
+        "generated_at": "2026-11-21T23:37:49Z",
         "platform": "twitch",
         "history_days_required": 180,
         "windows": {
           "7d": {
             "days": 7,
             "period": {
-              "from": "2026-11-14T22:58:30Z",
-              "to": "2026-11-21T22:58:30Z"
+              "from": "2026-11-14T23:37:49Z",
+              "to": "2026-11-21T23:37:49Z"
             },
             "coverage": {
               "sampled_days": 7,
               "expected_days": 7,
-              "coverage_pct": 100,
+              "coverage_pct": 100.0,
               "status": "sufficient",
-              "minimum_for_comparison_pct": 65,
-              "last_observed_at": "2026-11-21T22:14:57Z"
+              "minimum_for_comparison_pct": 65.0,
+              "last_observed_at": "2026-11-21T23:37:48Z"
             },
             "metrics": {
               "streams_observed": 3,
               "active_days": 2,
               "active_weeks": 1,
-              "streams_per_week": 3,
+              "streams_per_week": 3.0,
               "observed_live_hours": 0.92,
               "observed_hours_per_week": 0.92,
               "average_viewers_sampled": 12.8,
@@ -2560,32 +2560,32 @@
                 }
               },
               "previous_period": {
-                "from": "2026-11-07T22:58:30Z",
-                "to": "2026-11-14T22:58:30Z"
+                "from": "2026-11-07T23:37:49Z",
+                "to": "2026-11-14T23:37:49Z"
               },
               "previous_coverage": {
                 "sampled_days": 7,
                 "expected_days": 7,
-                "coverage_pct": 100,
+                "coverage_pct": 100.0,
                 "status": "sufficient",
-                "minimum_for_comparison_pct": 65,
-                "last_observed_at": "2026-11-14T22:21:11Z"
+                "minimum_for_comparison_pct": 65.0,
+                "last_observed_at": "2026-11-14T23:35:44Z"
               }
             }
           },
           "30d": {
             "days": 30,
             "period": {
-              "from": "2026-10-22T22:58:30Z",
-              "to": "2026-11-21T22:58:30Z"
+              "from": "2026-10-22T23:37:49Z",
+              "to": "2026-11-21T23:37:49Z"
             },
             "coverage": {
               "sampled_days": 19,
               "expected_days": 30,
               "coverage_pct": 63.3,
               "status": "partial",
-              "minimum_for_comparison_pct": 65,
-              "last_observed_at": "2026-11-21T22:14:57Z"
+              "minimum_for_comparison_pct": 65.0,
+              "last_observed_at": "2026-11-21T23:37:48Z"
             },
             "metrics": {
               "streams_observed": 6,
@@ -2616,15 +2616,15 @@
               "status": "insufficient_coverage",
               "metrics": {},
               "previous_period": {
-                "from": "2026-09-22T22:58:30Z",
-                "to": "2026-10-22T22:58:30Z"
+                "from": "2026-09-22T23:37:49Z",
+                "to": "2026-10-22T23:37:49Z"
               },
               "previous_coverage": {
                 "sampled_days": 0,
                 "expected_days": 30,
-                "coverage_pct": 0,
+                "coverage_pct": 0.0,
                 "status": "partial",
-                "minimum_for_comparison_pct": 65,
+                "minimum_for_comparison_pct": 65.0,
                 "last_observed_at": null
               }
             }
@@ -2632,16 +2632,16 @@
           "90d": {
             "days": 90,
             "period": {
-              "from": "2026-08-23T22:58:30Z",
-              "to": "2026-11-21T22:58:30Z"
+              "from": "2026-08-23T23:37:49Z",
+              "to": "2026-11-21T23:37:49Z"
             },
             "coverage": {
               "sampled_days": 19,
               "expected_days": 90,
               "coverage_pct": 21.1,
               "status": "partial",
-              "minimum_for_comparison_pct": 65,
-              "last_observed_at": "2026-11-21T22:14:57Z"
+              "minimum_for_comparison_pct": 65.0,
+              "last_observed_at": "2026-11-21T23:37:48Z"
             },
             "metrics": {
               "streams_observed": 6,
@@ -2672,15 +2672,15 @@
               "status": "insufficient_coverage",
               "metrics": {},
               "previous_period": {
-                "from": "2026-05-25T22:58:30Z",
-                "to": "2026-08-23T22:58:30Z"
+                "from": "2026-05-25T23:37:49Z",
+                "to": "2026-08-23T23:37:49Z"
               },
               "previous_coverage": {
                 "sampled_days": 0,
                 "expected_days": 90,
-                "coverage_pct": 0,
+                "coverage_pct": 0.0,
                 "status": "partial",
-                "minimum_for_comparison_pct": 65,
+                "minimum_for_comparison_pct": 65.0,
                 "last_observed_at": null
               }
             }
@@ -2701,10 +2701,10 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 5,
-                  "value_end": 5,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 5.0,
+                  "value_end": 5.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -2712,10 +2712,10 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 5,
-                  "value_end": 5,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 5.0,
+                  "value_end": 5.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -2723,10 +2723,10 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 5,
-                  "value_end": 5,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 5.0,
+                  "value_end": 5.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -2745,10 +2745,10 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 4,
-                  "value_end": 4,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 4.0,
+                  "value_end": 4.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -2756,10 +2756,10 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 4,
-                  "value_end": 4,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 4.0,
+                  "value_end": 4.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -2767,10 +2767,10 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 4,
-                  "value_end": 4,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 4.0,
+                  "value_end": 4.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -2789,10 +2789,10 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 4,
-                  "value_end": 4,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 4.0,
+                  "value_end": 4.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -2800,10 +2800,10 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 4,
-                  "value_end": 4,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 4.0,
+                  "value_end": 4.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -2811,10 +2811,10 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 4,
-                  "value_end": 4,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 4.0,
+                  "value_end": 4.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -2833,10 +2833,10 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 4,
-                  "value_end": 4,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 4.0,
+                  "value_end": 4.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -2844,10 +2844,10 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 4,
-                  "value_end": 4,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 4.0,
+                  "value_end": 4.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -2855,10 +2855,10 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 4,
-                  "value_end": 4,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 4.0,
+                  "value_end": 4.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -2878,7 +2878,7 @@
                 "7d": {
                   "status": "baseline_pending",
                   "value_start": null,
-                  "value_end": 4,
+                  "value_end": 4.0,
                   "change": null,
                   "change_pct": null,
                   "captures": 1,
@@ -2889,7 +2889,7 @@
                 "30d": {
                   "status": "baseline_pending",
                   "value_start": null,
-                  "value_end": 4,
+                  "value_end": 4.0,
                   "change": null,
                   "change_pct": null,
                   "captures": 1,
@@ -2900,7 +2900,7 @@
                 "90d": {
                   "status": "baseline_pending",
                   "value_start": null,
-                  "value_end": 4,
+                  "value_end": 4.0,
                   "change": null,
                   "change_pct": null,
                   "captures": 1,
@@ -2966,11 +2966,11 @@
           "label": "Estado de transmisión",
           "value": "offline",
           "unit": "status",
-          "captured_at": "2026-11-21T22:58:29Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "public_helix_snapshot",
@@ -2987,11 +2987,11 @@
           "label": "Espectadores en la última captura",
           "value": null,
           "unit": "viewers",
-          "captured_at": "2026-11-21T22:58:29Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "public_helix_snapshot",
@@ -3012,7 +3012,7 @@
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "public_helix_follower_total_only",
@@ -3027,13 +3027,13 @@
           "account_handle": "akumazoldyck",
           "key": "samples_total",
           "label": "Muestras históricas",
-          "value": 426,
+          "value": 427,
           "unit": "samples",
-          "captured_at": "2026-11-21T22:14:57Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -3050,11 +3050,11 @@
           "label": "Muestras en directo",
           "value": 32,
           "unit": "samples",
-          "captured_at": "2026-11-21T22:14:57Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -3071,11 +3071,11 @@
           "label": "Sesiones observadas",
           "value": 16,
           "unit": "streams",
-          "captured_at": "2026-11-21T22:14:57Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -3092,11 +3092,11 @@
           "label": "Promedio de viewers muestreado",
           "value": 6.5,
           "unit": "viewers_sampled_avg",
-          "captured_at": "2026-11-21T22:14:57Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -3113,11 +3113,11 @@
           "label": "Pico observado",
           "value": 17,
           "unit": "viewers_sampled_peak",
-          "captured_at": "2026-11-21T22:14:57Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -3134,11 +3134,11 @@
           "label": "Horas en directo observadas",
           "value": 13.49,
           "unit": "hours_observed",
-          "captured_at": "2026-11-21T22:14:57Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -3155,11 +3155,11 @@
           "label": "Horas vistas estimadas",
           "value": 79.5,
           "unit": "hours_estimated",
-          "captured_at": "2026-11-21T22:14:57Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -3171,29 +3171,29 @@
       ],
       "growth": {
         "schema_version": 1,
-        "generated_at": "2026-11-21T22:58:30Z",
+        "generated_at": "2026-11-21T23:37:49Z",
         "platform": "twitch",
         "history_days_required": 180,
         "windows": {
           "7d": {
             "days": 7,
             "period": {
-              "from": "2026-11-14T22:58:30Z",
-              "to": "2026-11-21T22:58:30Z"
+              "from": "2026-11-14T23:37:49Z",
+              "to": "2026-11-21T23:37:49Z"
             },
             "coverage": {
               "sampled_days": 7,
               "expected_days": 7,
-              "coverage_pct": 100,
+              "coverage_pct": 100.0,
               "status": "sufficient",
-              "minimum_for_comparison_pct": 65,
-              "last_observed_at": "2026-11-21T22:14:57Z"
+              "minimum_for_comparison_pct": 65.0,
+              "last_observed_at": "2026-11-21T23:37:48Z"
             },
             "metrics": {
               "streams_observed": 7,
               "active_days": 6,
               "active_weeks": 2,
-              "streams_per_week": 7,
+              "streams_per_week": 7.0,
               "observed_live_hours": 5.5,
               "observed_hours_per_week": 5.5,
               "average_viewers_sampled": 6.2,
@@ -3239,32 +3239,32 @@
                 }
               },
               "previous_period": {
-                "from": "2026-11-07T22:58:30Z",
-                "to": "2026-11-14T22:58:30Z"
+                "from": "2026-11-07T23:37:49Z",
+                "to": "2026-11-14T23:37:49Z"
               },
               "previous_coverage": {
                 "sampled_days": 7,
                 "expected_days": 7,
-                "coverage_pct": 100,
+                "coverage_pct": 100.0,
                 "status": "sufficient",
-                "minimum_for_comparison_pct": 65,
-                "last_observed_at": "2026-11-14T22:21:11Z"
+                "minimum_for_comparison_pct": 65.0,
+                "last_observed_at": "2026-11-14T23:35:44Z"
               }
             }
           },
           "30d": {
             "days": 30,
             "period": {
-              "from": "2026-10-22T22:58:30Z",
-              "to": "2026-11-21T22:58:30Z"
+              "from": "2026-10-22T23:37:49Z",
+              "to": "2026-11-21T23:37:49Z"
             },
             "coverage": {
               "sampled_days": 19,
               "expected_days": 30,
               "coverage_pct": 63.3,
               "status": "partial",
-              "minimum_for_comparison_pct": 65,
-              "last_observed_at": "2026-11-21T22:14:57Z"
+              "minimum_for_comparison_pct": 65.0,
+              "last_observed_at": "2026-11-21T23:37:48Z"
             },
             "metrics": {
               "streams_observed": 16,
@@ -3295,15 +3295,15 @@
               "status": "insufficient_coverage",
               "metrics": {},
               "previous_period": {
-                "from": "2026-09-22T22:58:30Z",
-                "to": "2026-10-22T22:58:30Z"
+                "from": "2026-09-22T23:37:49Z",
+                "to": "2026-10-22T23:37:49Z"
               },
               "previous_coverage": {
                 "sampled_days": 0,
                 "expected_days": 30,
-                "coverage_pct": 0,
+                "coverage_pct": 0.0,
                 "status": "partial",
-                "minimum_for_comparison_pct": 65,
+                "minimum_for_comparison_pct": 65.0,
                 "last_observed_at": null
               }
             }
@@ -3311,16 +3311,16 @@
           "90d": {
             "days": 90,
             "period": {
-              "from": "2026-08-23T22:58:30Z",
-              "to": "2026-11-21T22:58:30Z"
+              "from": "2026-08-23T23:37:49Z",
+              "to": "2026-11-21T23:37:49Z"
             },
             "coverage": {
               "sampled_days": 19,
               "expected_days": 90,
               "coverage_pct": 21.1,
               "status": "partial",
-              "minimum_for_comparison_pct": 65,
-              "last_observed_at": "2026-11-21T22:14:57Z"
+              "minimum_for_comparison_pct": 65.0,
+              "last_observed_at": "2026-11-21T23:37:48Z"
             },
             "metrics": {
               "streams_observed": 16,
@@ -3351,15 +3351,15 @@
               "status": "insufficient_coverage",
               "metrics": {},
               "previous_period": {
-                "from": "2026-05-25T22:58:30Z",
-                "to": "2026-08-23T22:58:30Z"
+                "from": "2026-05-25T23:37:49Z",
+                "to": "2026-08-23T23:37:49Z"
               },
               "previous_coverage": {
                 "sampled_days": 0,
                 "expected_days": 90,
-                "coverage_pct": 0,
+                "coverage_pct": 0.0,
                 "status": "partial",
-                "minimum_for_comparison_pct": 65,
+                "minimum_for_comparison_pct": 65.0,
                 "last_observed_at": null
               }
             }
@@ -3380,10 +3380,10 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 13,
-                  "value_end": 13,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 13.0,
+                  "value_end": 13.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -3391,10 +3391,10 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 13,
-                  "value_end": 13,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 13.0,
+                  "value_end": 13.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -3402,10 +3402,10 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 13,
-                  "value_end": 13,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 13.0,
+                  "value_end": 13.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -3424,10 +3424,10 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 7,
-                  "value_end": 7,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 7.0,
+                  "value_end": 7.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -3435,10 +3435,10 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 7,
-                  "value_end": 7,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 7.0,
+                  "value_end": 7.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -3446,10 +3446,10 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 7,
-                  "value_end": 7,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 7.0,
+                  "value_end": 7.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -3468,10 +3468,10 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 5,
-                  "value_end": 5,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 5.0,
+                  "value_end": 5.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -3479,10 +3479,10 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 5,
-                  "value_end": 5,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 5.0,
+                  "value_end": 5.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -3490,10 +3490,10 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 5,
-                  "value_end": 5,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 5.0,
+                  "value_end": 5.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -3658,11 +3658,11 @@
           "label": "Estado de transmisión",
           "value": "offline",
           "unit": "status",
-          "captured_at": "2026-11-21T22:58:29Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "public_helix_snapshot",
@@ -3679,11 +3679,11 @@
           "label": "Espectadores en la última captura",
           "value": null,
           "unit": "viewers",
-          "captured_at": "2026-11-21T22:58:29Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "public_helix_snapshot",
@@ -3704,7 +3704,7 @@
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "public_helix_follower_total_only",
@@ -3719,13 +3719,13 @@
           "account_handle": "daved0608",
           "key": "samples_total",
           "label": "Muestras históricas",
-          "value": 426,
+          "value": 427,
           "unit": "samples",
-          "captured_at": "2026-11-21T22:14:57Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -3742,11 +3742,11 @@
           "label": "Muestras en directo",
           "value": 15,
           "unit": "samples",
-          "captured_at": "2026-11-21T22:14:57Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -3763,11 +3763,11 @@
           "label": "Sesiones observadas",
           "value": 9,
           "unit": "streams",
-          "captured_at": "2026-11-21T22:14:57Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -3784,11 +3784,11 @@
           "label": "Promedio de viewers muestreado",
           "value": 1.9,
           "unit": "viewers_sampled_avg",
-          "captured_at": "2026-11-21T22:14:57Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -3805,11 +3805,11 @@
           "label": "Pico observado",
           "value": 5,
           "unit": "viewers_sampled_peak",
-          "captured_at": "2026-11-21T22:14:57Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -3826,11 +3826,11 @@
           "label": "Horas en directo observadas",
           "value": 4.47,
           "unit": "hours_observed",
-          "captured_at": "2026-11-21T22:14:57Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -3847,11 +3847,11 @@
           "label": "Horas vistas estimadas",
           "value": 8.14,
           "unit": "hours_estimated",
-          "captured_at": "2026-11-21T22:14:57Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -3863,29 +3863,29 @@
       ],
       "growth": {
         "schema_version": 1,
-        "generated_at": "2026-11-21T22:58:30Z",
+        "generated_at": "2026-11-21T23:37:49Z",
         "platform": "twitch",
         "history_days_required": 180,
         "windows": {
           "7d": {
             "days": 7,
             "period": {
-              "from": "2026-11-14T22:58:30Z",
-              "to": "2026-11-21T22:58:30Z"
+              "from": "2026-11-14T23:37:49Z",
+              "to": "2026-11-21T23:37:49Z"
             },
             "coverage": {
               "sampled_days": 7,
               "expected_days": 7,
-              "coverage_pct": 100,
+              "coverage_pct": 100.0,
               "status": "sufficient",
-              "minimum_for_comparison_pct": 65,
-              "last_observed_at": "2026-11-21T22:14:57Z"
+              "minimum_for_comparison_pct": 65.0,
+              "last_observed_at": "2026-11-21T23:37:48Z"
             },
             "metrics": {
               "streams_observed": 2,
               "active_days": 2,
               "active_weeks": 1,
-              "streams_per_week": 2,
+              "streams_per_week": 2.0,
               "observed_live_hours": 0.92,
               "observed_hours_per_week": 0.92,
               "average_viewers_sampled": 1.7,
@@ -3922,7 +3922,7 @@
                 "observed_live_hours": {
                   "current": 0.92,
                   "previous": 0.92,
-                  "change": 0
+                  "change": 0.0
                 },
                 "average_viewers_sampled": {
                   "current": 1.7,
@@ -3931,32 +3931,32 @@
                 }
               },
               "previous_period": {
-                "from": "2026-11-07T22:58:30Z",
-                "to": "2026-11-14T22:58:30Z"
+                "from": "2026-11-07T23:37:49Z",
+                "to": "2026-11-14T23:37:49Z"
               },
               "previous_coverage": {
                 "sampled_days": 7,
                 "expected_days": 7,
-                "coverage_pct": 100,
+                "coverage_pct": 100.0,
                 "status": "sufficient",
-                "minimum_for_comparison_pct": 65,
-                "last_observed_at": "2026-11-14T22:21:11Z"
+                "minimum_for_comparison_pct": 65.0,
+                "last_observed_at": "2026-11-14T23:35:44Z"
               }
             }
           },
           "30d": {
             "days": 30,
             "period": {
-              "from": "2026-10-22T22:58:30Z",
-              "to": "2026-11-21T22:58:30Z"
+              "from": "2026-10-22T23:37:49Z",
+              "to": "2026-11-21T23:37:49Z"
             },
             "coverage": {
               "sampled_days": 19,
               "expected_days": 30,
               "coverage_pct": 63.3,
               "status": "partial",
-              "minimum_for_comparison_pct": 65,
-              "last_observed_at": "2026-11-21T22:14:57Z"
+              "minimum_for_comparison_pct": 65.0,
+              "last_observed_at": "2026-11-21T23:37:48Z"
             },
             "metrics": {
               "streams_observed": 9,
@@ -3987,15 +3987,15 @@
               "status": "insufficient_coverage",
               "metrics": {},
               "previous_period": {
-                "from": "2026-09-22T22:58:30Z",
-                "to": "2026-10-22T22:58:30Z"
+                "from": "2026-09-22T23:37:49Z",
+                "to": "2026-10-22T23:37:49Z"
               },
               "previous_coverage": {
                 "sampled_days": 0,
                 "expected_days": 30,
-                "coverage_pct": 0,
+                "coverage_pct": 0.0,
                 "status": "partial",
-                "minimum_for_comparison_pct": 65,
+                "minimum_for_comparison_pct": 65.0,
                 "last_observed_at": null
               }
             }
@@ -4003,16 +4003,16 @@
           "90d": {
             "days": 90,
             "period": {
-              "from": "2026-08-23T22:58:30Z",
-              "to": "2026-11-21T22:58:30Z"
+              "from": "2026-08-23T23:37:49Z",
+              "to": "2026-11-21T23:37:49Z"
             },
             "coverage": {
               "sampled_days": 19,
               "expected_days": 90,
               "coverage_pct": 21.1,
               "status": "partial",
-              "minimum_for_comparison_pct": 65,
-              "last_observed_at": "2026-11-21T22:14:57Z"
+              "minimum_for_comparison_pct": 65.0,
+              "last_observed_at": "2026-11-21T23:37:48Z"
             },
             "metrics": {
               "streams_observed": 9,
@@ -4043,15 +4043,15 @@
               "status": "insufficient_coverage",
               "metrics": {},
               "previous_period": {
-                "from": "2026-05-25T22:58:30Z",
-                "to": "2026-08-23T22:58:30Z"
+                "from": "2026-05-25T23:37:49Z",
+                "to": "2026-08-23T23:37:49Z"
               },
               "previous_coverage": {
                 "sampled_days": 0,
                 "expected_days": 90,
-                "coverage_pct": 0,
+                "coverage_pct": 0.0,
                 "status": "partial",
-                "minimum_for_comparison_pct": 65,
+                "minimum_for_comparison_pct": 65.0,
                 "last_observed_at": null
               }
             }
@@ -4135,11 +4135,11 @@
           "label": "Suscriptores públicos",
           "value": 56,
           "unit": "subscribers",
-          "captured_at": "2026-11-21T22:58:29Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "cumulative",
             "from": null,
-            "to": "2026-11-21T22:58:29Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "YouTube Data API v3",
           "method": "youtube_data_api_public",
@@ -4156,11 +4156,11 @@
           "label": "Visualizaciones acumuladas",
           "value": 431,
           "unit": "views",
-          "captured_at": "2026-11-21T22:58:29Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "cumulative",
             "from": null,
-            "to": "2026-11-21T22:58:29Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "YouTube Data API v3",
           "method": "youtube_data_api_public",
@@ -4177,11 +4177,11 @@
           "label": "Videos publicados",
           "value": 6,
           "unit": "videos",
-          "captured_at": "2026-11-21T22:58:29Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "cumulative",
             "from": null,
-            "to": "2026-11-21T22:58:29Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "YouTube Data API v3",
           "method": "youtube_data_api_public",
@@ -4193,73 +4193,73 @@
       ],
       "growth": {
         "schema_version": 1,
-        "generated_at": "2026-11-21T22:58:30Z",
+        "generated_at": "2026-11-21T23:37:49Z",
         "platform": "youtube",
         "history_days_required": 180,
         "windows": {
           "7d": {
             "days": 7,
             "period": {
-              "from": "2026-11-14T22:58:30Z",
-              "to": "2026-11-21T22:58:30Z"
+              "from": "2026-11-14T23:37:49Z",
+              "to": "2026-11-21T23:37:49Z"
             },
             "coverage": {
               "sampled_days": 1,
               "expected_days": 7,
               "coverage_pct": 14.3,
               "status": "partial",
-              "minimum_for_comparison_pct": 65,
+              "minimum_for_comparison_pct": 65.0,
               "capture_count": 1,
-              "last_observed_at": "2026-11-21T22:58:29Z"
+              "last_observed_at": "2026-11-21T23:37:48Z"
             },
             "metrics": {
               "subscribers_gained": {
                 "status": "baseline_pending",
                 "value_start": null,
-                "value_end": 56,
+                "value_end": 56.0,
                 "change": null,
                 "change_pct": null,
                 "captures": 1,
                 "basis": "insufficient_captures",
                 "start_captured_at": null,
-                "end_captured_at": "2026-11-21T22:58:29Z"
+                "end_captured_at": "2026-11-21T23:37:48Z"
               },
               "views_gained": {
                 "status": "baseline_pending",
                 "value_start": null,
-                "value_end": 431,
+                "value_end": 431.0,
                 "change": null,
                 "change_pct": null,
                 "captures": 1,
                 "basis": "insufficient_captures",
                 "start_captured_at": null,
-                "end_captured_at": "2026-11-21T22:58:29Z"
+                "end_captured_at": "2026-11-21T23:37:48Z"
               },
               "videos_published": {
                 "status": "baseline_pending",
                 "value_start": null,
-                "value_end": 6,
+                "value_end": 6.0,
                 "change": null,
                 "change_pct": null,
                 "captures": 1,
                 "basis": "insufficient_captures",
                 "start_captured_at": null,
-                "end_captured_at": "2026-11-21T22:58:29Z"
+                "end_captured_at": "2026-11-21T23:37:48Z"
               }
             },
             "comparison": {
               "status": "insufficient_coverage",
               "metrics": {},
               "previous_period": {
-                "from": "2026-11-07T22:58:30Z",
-                "to": "2026-11-14T22:58:30Z"
+                "from": "2026-11-07T23:37:49Z",
+                "to": "2026-11-14T23:37:49Z"
               },
               "previous_coverage": {
                 "sampled_days": 0,
                 "expected_days": 7,
-                "coverage_pct": 0,
+                "coverage_pct": 0.0,
                 "status": "partial",
-                "minimum_for_comparison_pct": 65,
+                "minimum_for_comparison_pct": 65.0,
                 "capture_count": 0,
                 "last_observed_at": null
               }
@@ -4268,66 +4268,66 @@
           "30d": {
             "days": 30,
             "period": {
-              "from": "2026-10-22T22:58:30Z",
-              "to": "2026-11-21T22:58:30Z"
+              "from": "2026-10-22T23:37:49Z",
+              "to": "2026-11-21T23:37:49Z"
             },
             "coverage": {
               "sampled_days": 1,
               "expected_days": 30,
               "coverage_pct": 3.3,
               "status": "partial",
-              "minimum_for_comparison_pct": 65,
+              "minimum_for_comparison_pct": 65.0,
               "capture_count": 1,
-              "last_observed_at": "2026-11-21T22:58:29Z"
+              "last_observed_at": "2026-11-21T23:37:48Z"
             },
             "metrics": {
               "subscribers_gained": {
                 "status": "baseline_pending",
                 "value_start": null,
-                "value_end": 56,
+                "value_end": 56.0,
                 "change": null,
                 "change_pct": null,
                 "captures": 1,
                 "basis": "insufficient_captures",
                 "start_captured_at": null,
-                "end_captured_at": "2026-11-21T22:58:29Z"
+                "end_captured_at": "2026-11-21T23:37:48Z"
               },
               "views_gained": {
                 "status": "baseline_pending",
                 "value_start": null,
-                "value_end": 431,
+                "value_end": 431.0,
                 "change": null,
                 "change_pct": null,
                 "captures": 1,
                 "basis": "insufficient_captures",
                 "start_captured_at": null,
-                "end_captured_at": "2026-11-21T22:58:29Z"
+                "end_captured_at": "2026-11-21T23:37:48Z"
               },
               "videos_published": {
                 "status": "baseline_pending",
                 "value_start": null,
-                "value_end": 6,
+                "value_end": 6.0,
                 "change": null,
                 "change_pct": null,
                 "captures": 1,
                 "basis": "insufficient_captures",
                 "start_captured_at": null,
-                "end_captured_at": "2026-11-21T22:58:29Z"
+                "end_captured_at": "2026-11-21T23:37:48Z"
               }
             },
             "comparison": {
               "status": "insufficient_coverage",
               "metrics": {},
               "previous_period": {
-                "from": "2026-09-22T22:58:30Z",
-                "to": "2026-10-22T22:58:30Z"
+                "from": "2026-09-22T23:37:49Z",
+                "to": "2026-10-22T23:37:49Z"
               },
               "previous_coverage": {
                 "sampled_days": 0,
                 "expected_days": 30,
-                "coverage_pct": 0,
+                "coverage_pct": 0.0,
                 "status": "partial",
-                "minimum_for_comparison_pct": 65,
+                "minimum_for_comparison_pct": 65.0,
                 "capture_count": 0,
                 "last_observed_at": null
               }
@@ -4336,66 +4336,66 @@
           "90d": {
             "days": 90,
             "period": {
-              "from": "2026-08-23T22:58:30Z",
-              "to": "2026-11-21T22:58:30Z"
+              "from": "2026-08-23T23:37:49Z",
+              "to": "2026-11-21T23:37:49Z"
             },
             "coverage": {
               "sampled_days": 1,
               "expected_days": 90,
               "coverage_pct": 1.1,
               "status": "partial",
-              "minimum_for_comparison_pct": 65,
+              "minimum_for_comparison_pct": 65.0,
               "capture_count": 1,
-              "last_observed_at": "2026-11-21T22:58:29Z"
+              "last_observed_at": "2026-11-21T23:37:48Z"
             },
             "metrics": {
               "subscribers_gained": {
                 "status": "baseline_pending",
                 "value_start": null,
-                "value_end": 56,
+                "value_end": 56.0,
                 "change": null,
                 "change_pct": null,
                 "captures": 1,
                 "basis": "insufficient_captures",
                 "start_captured_at": null,
-                "end_captured_at": "2026-11-21T22:58:29Z"
+                "end_captured_at": "2026-11-21T23:37:48Z"
               },
               "views_gained": {
                 "status": "baseline_pending",
                 "value_start": null,
-                "value_end": 431,
+                "value_end": 431.0,
                 "change": null,
                 "change_pct": null,
                 "captures": 1,
                 "basis": "insufficient_captures",
                 "start_captured_at": null,
-                "end_captured_at": "2026-11-21T22:58:29Z"
+                "end_captured_at": "2026-11-21T23:37:48Z"
               },
               "videos_published": {
                 "status": "baseline_pending",
                 "value_start": null,
-                "value_end": 6,
+                "value_end": 6.0,
                 "change": null,
                 "change_pct": null,
                 "captures": 1,
                 "basis": "insufficient_captures",
                 "start_captured_at": null,
-                "end_captured_at": "2026-11-21T22:58:29Z"
+                "end_captured_at": "2026-11-21T23:37:48Z"
               }
             },
             "comparison": {
               "status": "insufficient_coverage",
               "metrics": {},
               "previous_period": {
-                "from": "2026-05-25T22:58:30Z",
-                "to": "2026-08-23T22:58:30Z"
+                "from": "2026-05-25T23:37:49Z",
+                "to": "2026-08-23T23:37:49Z"
               },
               "previous_coverage": {
                 "sampled_days": 0,
                 "expected_days": 90,
-                "coverage_pct": 0,
+                "coverage_pct": 0.0,
                 "status": "partial",
-                "minimum_for_comparison_pct": 65,
+                "minimum_for_comparison_pct": 65.0,
                 "capture_count": 0,
                 "last_observed_at": null
               }
@@ -4404,7 +4404,7 @@
         },
         "content_performance": {
           "status": "verified_public",
-          "captured_at": "2026-11-21T22:58:29Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "source": "YouTube Data API v3",
           "methodology": "Hasta 10 videos recientes. La tasa pública de interacción se calcula como (me gusta + comentarios) / visualizaciones; no equivale al engagement privado de YouTube Studio. Las variaciones comienzan en la primera captura diaria propia.",
           "top_clips": [],
@@ -4421,39 +4421,39 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 157,
-                  "value_end": 157,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 157.0,
+                  "value_end": 157.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T23:21:59Z",
-                  "end_captured_at": "2026-11-21T22:58:29Z"
+                  "end_captured_at": "2026-11-21T23:37:48Z"
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 157,
-                  "value_end": 157,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 157.0,
+                  "value_end": 157.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T23:21:59Z",
-                  "end_captured_at": "2026-11-21T22:58:29Z"
+                  "end_captured_at": "2026-11-21T23:37:48Z"
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 157,
-                  "value_end": 157,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 157.0,
+                  "value_end": 157.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T23:21:59Z",
-                  "end_captured_at": "2026-11-21T22:58:29Z"
+                  "end_captured_at": "2026-11-21T23:37:48Z"
                 }
               },
-              "captured_at": "2026-11-21T22:58:29Z",
+              "captured_at": "2026-11-21T23:37:48Z",
               "source": "YouTube Data API v3"
             },
             {
@@ -4468,39 +4468,39 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 75,
-                  "value_end": 75,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 75.0,
+                  "value_end": 75.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T23:21:59Z",
-                  "end_captured_at": "2026-11-21T22:58:29Z"
+                  "end_captured_at": "2026-11-21T23:37:48Z"
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 75,
-                  "value_end": 75,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 75.0,
+                  "value_end": 75.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T23:21:59Z",
-                  "end_captured_at": "2026-11-21T22:58:29Z"
+                  "end_captured_at": "2026-11-21T23:37:48Z"
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 75,
-                  "value_end": 75,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 75.0,
+                  "value_end": 75.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T23:21:59Z",
-                  "end_captured_at": "2026-11-21T22:58:29Z"
+                  "end_captured_at": "2026-11-21T23:37:48Z"
                 }
               },
-              "captured_at": "2026-11-21T22:58:29Z",
+              "captured_at": "2026-11-21T23:37:48Z",
               "source": "YouTube Data API v3"
             },
             {
@@ -4515,39 +4515,39 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 58,
-                  "value_end": 58,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 58.0,
+                  "value_end": 58.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T23:21:59Z",
-                  "end_captured_at": "2026-11-21T22:58:29Z"
+                  "end_captured_at": "2026-11-21T23:37:48Z"
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 58,
-                  "value_end": 58,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 58.0,
+                  "value_end": 58.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T23:21:59Z",
-                  "end_captured_at": "2026-11-21T22:58:29Z"
+                  "end_captured_at": "2026-11-21T23:37:48Z"
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 58,
-                  "value_end": 58,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 58.0,
+                  "value_end": 58.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T23:21:59Z",
-                  "end_captured_at": "2026-11-21T22:58:29Z"
+                  "end_captured_at": "2026-11-21T23:37:48Z"
                 }
               },
-              "captured_at": "2026-11-21T22:58:29Z",
+              "captured_at": "2026-11-21T23:37:48Z",
               "source": "YouTube Data API v3"
             },
             {
@@ -4558,43 +4558,43 @@
               "views": 50,
               "likes": 12,
               "comments": 2,
-              "public_interaction_rate_pct": 28,
+              "public_interaction_rate_pct": 28.0,
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 50,
-                  "value_end": 50,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 50.0,
+                  "value_end": 50.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T23:21:59Z",
-                  "end_captured_at": "2026-11-21T22:58:29Z"
+                  "end_captured_at": "2026-11-21T23:37:48Z"
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 50,
-                  "value_end": 50,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 50.0,
+                  "value_end": 50.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T23:21:59Z",
-                  "end_captured_at": "2026-11-21T22:58:29Z"
+                  "end_captured_at": "2026-11-21T23:37:48Z"
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 50,
-                  "value_end": 50,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 50.0,
+                  "value_end": 50.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T23:21:59Z",
-                  "end_captured_at": "2026-11-21T22:58:29Z"
+                  "end_captured_at": "2026-11-21T23:37:48Z"
                 }
               },
-              "captured_at": "2026-11-21T22:58:29Z",
+              "captured_at": "2026-11-21T23:37:48Z",
               "source": "YouTube Data API v3"
             },
             {
@@ -4609,39 +4609,39 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 48,
-                  "value_end": 48,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 48.0,
+                  "value_end": 48.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T23:21:59Z",
-                  "end_captured_at": "2026-11-21T22:58:29Z"
+                  "end_captured_at": "2026-11-21T23:37:48Z"
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 48,
-                  "value_end": 48,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 48.0,
+                  "value_end": 48.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T23:21:59Z",
-                  "end_captured_at": "2026-11-21T22:58:29Z"
+                  "end_captured_at": "2026-11-21T23:37:48Z"
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 48,
-                  "value_end": 48,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 48.0,
+                  "value_end": 48.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T23:21:59Z",
-                  "end_captured_at": "2026-11-21T22:58:29Z"
+                  "end_captured_at": "2026-11-21T23:37:48Z"
                 }
               },
-              "captured_at": "2026-11-21T22:58:29Z",
+              "captured_at": "2026-11-21T23:37:48Z",
               "source": "YouTube Data API v3"
             }
           ]
@@ -4697,11 +4697,11 @@
           "label": "Estado de transmisión",
           "value": "offline",
           "unit": "status",
-          "captured_at": "2026-11-21T22:58:29Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "public_helix_snapshot",
@@ -4718,11 +4718,11 @@
           "label": "Espectadores en la última captura",
           "value": null,
           "unit": "viewers",
-          "captured_at": "2026-11-21T22:58:29Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "public_helix_snapshot",
@@ -4743,7 +4743,7 @@
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "public_helix_follower_total_only",
@@ -4758,13 +4758,13 @@
           "account_handle": "habitos_atomicos",
           "key": "samples_total",
           "label": "Muestras históricas",
-          "value": 426,
+          "value": 427,
           "unit": "samples",
-          "captured_at": "2026-11-21T22:14:57Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -4781,11 +4781,11 @@
           "label": "Muestras en directo",
           "value": 81,
           "unit": "samples",
-          "captured_at": "2026-11-21T22:14:57Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -4802,11 +4802,11 @@
           "label": "Sesiones observadas",
           "value": 22,
           "unit": "streams",
-          "captured_at": "2026-11-21T22:14:57Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -4823,11 +4823,11 @@
           "label": "Promedio de viewers muestreado",
           "value": 4.4,
           "unit": "viewers_sampled_avg",
-          "captured_at": "2026-11-21T22:14:57Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -4844,11 +4844,11 @@
           "label": "Pico observado",
           "value": 45,
           "unit": "viewers_sampled_peak",
-          "captured_at": "2026-11-21T22:14:57Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -4865,11 +4865,11 @@
           "label": "Horas en directo observadas",
           "value": 50.15,
           "unit": "hours_observed",
-          "captured_at": "2026-11-21T22:14:57Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -4886,11 +4886,11 @@
           "label": "Horas vistas estimadas",
           "value": 225.71,
           "unit": "hours_estimated",
-          "captured_at": "2026-11-21T22:14:57Z",
+          "captured_at": "2026-11-21T23:37:48Z",
           "period": {
             "kind": "sampled_window",
             "from": "2026-11-03T17:47:50Z",
-            "to": "2026-11-21T22:14:57Z"
+            "to": "2026-11-21T23:37:48Z"
           },
           "source": "Twitch Helix Public API",
           "method": "55_minute_public_sampling",
@@ -4902,34 +4902,34 @@
       ],
       "growth": {
         "schema_version": 1,
-        "generated_at": "2026-11-21T22:58:30Z",
+        "generated_at": "2026-11-21T23:37:49Z",
         "platform": "twitch",
         "history_days_required": 180,
         "windows": {
           "7d": {
             "days": 7,
             "period": {
-              "from": "2026-11-14T22:58:30Z",
-              "to": "2026-11-21T22:58:30Z"
+              "from": "2026-11-14T23:37:49Z",
+              "to": "2026-11-21T23:37:49Z"
             },
             "coverage": {
               "sampled_days": 7,
               "expected_days": 7,
-              "coverage_pct": 100,
+              "coverage_pct": 100.0,
               "status": "sufficient",
-              "minimum_for_comparison_pct": 65,
-              "last_observed_at": "2026-11-21T22:14:57Z"
+              "minimum_for_comparison_pct": 65.0,
+              "last_observed_at": "2026-11-21T23:37:48Z"
             },
             "metrics": {
               "streams_observed": 11,
-              "active_days": 8,
+              "active_days": 7,
               "active_weeks": 2,
-              "streams_per_week": 11,
+              "streams_per_week": 11.0,
               "observed_live_hours": 10.64,
               "observed_hours_per_week": 10.64,
               "average_viewers_sampled": 1.7,
               "peak_viewers_sampled": 7,
-              "live_samples": 24,
+              "live_samples": 23,
               "followers": {
                 "status": "baseline_pending",
                 "value_start": null,
@@ -4954,48 +4954,48 @@
                   "change": 3
                 },
                 "active_days": {
-                  "current": 8,
+                  "current": 7,
                   "previous": 6,
-                  "change": 2
+                  "change": 1
                 },
                 "observed_live_hours": {
                   "current": 10.64,
-                  "previous": 31.83,
-                  "change": -21.19
+                  "previous": 32.75,
+                  "change": -22.11
                 },
                 "average_viewers_sampled": {
                   "current": 1.7,
-                  "previous": 6.2,
-                  "change": -4.5
+                  "previous": 6.1,
+                  "change": -4.4
                 }
               },
               "previous_period": {
-                "from": "2026-11-07T22:58:30Z",
-                "to": "2026-11-14T22:58:30Z"
+                "from": "2026-11-07T23:37:49Z",
+                "to": "2026-11-14T23:37:49Z"
               },
               "previous_coverage": {
                 "sampled_days": 7,
                 "expected_days": 7,
-                "coverage_pct": 100,
+                "coverage_pct": 100.0,
                 "status": "sufficient",
-                "minimum_for_comparison_pct": 65,
-                "last_observed_at": "2026-11-14T22:21:11Z"
+                "minimum_for_comparison_pct": 65.0,
+                "last_observed_at": "2026-11-14T23:35:44Z"
               }
             }
           },
           "30d": {
             "days": 30,
             "period": {
-              "from": "2026-10-22T22:58:30Z",
-              "to": "2026-11-21T22:58:30Z"
+              "from": "2026-10-22T23:37:49Z",
+              "to": "2026-11-21T23:37:49Z"
             },
             "coverage": {
               "sampled_days": 19,
               "expected_days": 30,
               "coverage_pct": 63.3,
               "status": "partial",
-              "minimum_for_comparison_pct": 65,
-              "last_observed_at": "2026-11-21T22:14:57Z"
+              "minimum_for_comparison_pct": 65.0,
+              "last_observed_at": "2026-11-21T23:37:48Z"
             },
             "metrics": {
               "streams_observed": 22,
@@ -5026,15 +5026,15 @@
               "status": "insufficient_coverage",
               "metrics": {},
               "previous_period": {
-                "from": "2026-09-22T22:58:30Z",
-                "to": "2026-10-22T22:58:30Z"
+                "from": "2026-09-22T23:37:49Z",
+                "to": "2026-10-22T23:37:49Z"
               },
               "previous_coverage": {
                 "sampled_days": 0,
                 "expected_days": 30,
-                "coverage_pct": 0,
+                "coverage_pct": 0.0,
                 "status": "partial",
-                "minimum_for_comparison_pct": 65,
+                "minimum_for_comparison_pct": 65.0,
                 "last_observed_at": null
               }
             }
@@ -5042,16 +5042,16 @@
           "90d": {
             "days": 90,
             "period": {
-              "from": "2026-08-23T22:58:30Z",
-              "to": "2026-11-21T22:58:30Z"
+              "from": "2026-08-23T23:37:49Z",
+              "to": "2026-11-21T23:37:49Z"
             },
             "coverage": {
               "sampled_days": 19,
               "expected_days": 90,
               "coverage_pct": 21.1,
               "status": "partial",
-              "minimum_for_comparison_pct": 65,
-              "last_observed_at": "2026-11-21T22:14:57Z"
+              "minimum_for_comparison_pct": 65.0,
+              "last_observed_at": "2026-11-21T23:37:48Z"
             },
             "metrics": {
               "streams_observed": 22,
@@ -5082,15 +5082,15 @@
               "status": "insufficient_coverage",
               "metrics": {},
               "previous_period": {
-                "from": "2026-05-25T22:58:30Z",
-                "to": "2026-08-23T22:58:30Z"
+                "from": "2026-05-25T23:37:49Z",
+                "to": "2026-08-23T23:37:49Z"
               },
               "previous_coverage": {
                 "sampled_days": 0,
                 "expected_days": 90,
-                "coverage_pct": 0,
+                "coverage_pct": 0.0,
                 "status": "partial",
-                "minimum_for_comparison_pct": 65,
+                "minimum_for_comparison_pct": 65.0,
                 "last_observed_at": null
               }
             }
@@ -5111,10 +5111,10 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 9,
-                  "value_end": 9,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 9.0,
+                  "value_end": 9.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -5122,10 +5122,10 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 9,
-                  "value_end": 9,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 9.0,
+                  "value_end": 9.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -5133,10 +5133,10 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 9,
-                  "value_end": 9,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 9.0,
+                  "value_end": 9.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -5155,10 +5155,10 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 8,
-                  "value_end": 8,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 8.0,
+                  "value_end": 8.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -5166,10 +5166,10 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 8,
-                  "value_end": 8,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 8.0,
+                  "value_end": 8.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -5177,10 +5177,10 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 8,
-                  "value_end": 8,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 8.0,
+                  "value_end": 8.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -5199,10 +5199,10 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 7,
-                  "value_end": 7,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 7.0,
+                  "value_end": 7.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -5210,10 +5210,10 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 7,
-                  "value_end": 7,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 7.0,
+                  "value_end": 7.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -5221,10 +5221,10 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 7,
-                  "value_end": 7,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 7.0,
+                  "value_end": 7.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -5243,10 +5243,10 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 6,
-                  "value_end": 6,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 6.0,
+                  "value_end": 6.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -5254,10 +5254,10 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 6,
-                  "value_end": 6,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 6.0,
+                  "value_end": 6.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -5265,10 +5265,10 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 6,
-                  "value_end": 6,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 6.0,
+                  "value_end": 6.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -5287,10 +5287,10 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 6,
-                  "value_end": 6,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 6.0,
+                  "value_end": 6.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -5298,10 +5298,10 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 6,
-                  "value_end": 6,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 6.0,
+                  "value_end": 6.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -5309,10 +5309,10 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 6,
-                  "value_end": 6,
-                  "change": 0,
-                  "change_pct": 0,
+                  "value_start": 6.0,
+                  "value_end": 6.0,
+                  "change": 0.0,
+                  "change_pct": 0.0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
