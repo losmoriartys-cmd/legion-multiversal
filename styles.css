@@ -5948,6 +5948,12 @@ main .chapter-panel :where(.chapter-cta, .executive-button, .comic-submit-btn,
 @media(max-width:600px){.manifesto-phase-tabs{grid-template-columns:1fr}.manifesto-phase-tabs button{min-height:44px;text-align:left}.manifesto-offer{grid-template-columns:1fr}.manifesto-history{padding:14px}.manifesto-history-line li{padding:14px}}
 @media(prefers-reduced-motion:reduce){.manifesto-phase-tabs button{scroll-behavior:auto;transition:none!important}}
 
+
+/* El rótulo editorial superior debe respetar el ancho útil del panel en móvil. */
+@media(max-width:600px){
+ .manifesto-chapter > .chapter-tag{left:10px;right:10px;width:auto;max-width:none;padding:4px 10px;font-size:1rem;line-height:1.15;white-space:normal;overflow-wrap:anywhere;transform:none}
+}
+
 /* Ajuste de contención móvil del Capítulo 02 */
 .manifesto-chapter{box-sizing:border-box;width:100%;max-width:100%;min-width:0;overflow-wrap:anywhere}
 .manifesto-chapter *{box-sizing:border-box;min-width:0;max-width:100%}
