@@ -50,7 +50,21 @@ test('Quiénes somos se adapta a móvil y conserva controles con reduced motion'
         (rect.right > bounds.right + 1 || rect.left < bounds.left - 1);
     }).map(node => ({tag:node.tagName,className:String(node.className||'').slice(0,100),
       text:(node.textContent||'').trim().slice(0,90),rect:(()=>{const r=node.getBoundingClientRect();return {left:Math.round(r.left),right:Math.round(r.right),width:Math.round(r.width)}})()}));
-    return { scrollWidth: el.scrollWidth, clientWidth: el.clientWidth, offenders, visibleOffenders };
+    const pseudoOffenders = Array.from(el.querySelectorAll('*')).flatMap(node => ['::before','::after'].flatMap(pseudo => {
+      const style = getComputedStyle(node, pseudo);
+      if (style.content === 'none' || style.content === 'normal' || style.display === 'none' || style.visibility === 'hidden') return [];
+      const rect = node.getBoundingClientRect();
+      const left = parseFloat(style.left);
+      const right = parseFloat(style.right);
+      const width = parseFloat(style.width);
+      const position = style.position;
+      const estimatedLeft = position === 'absolute' || position === 'relative' ? rect.left + (Number.isFinite(left) ? left : 0) : rect.left;
+      const estimatedRight = Number.isFinite(width) ? estimatedLeft + width : rect.right - (Number.isFinite(right) ? right : 0);
+      return (estimatedLeft < bounds.left - 1 || estimatedRight > bounds.right + 1)
+        ? [{tag:node.tagName,className:String(node.className||'').slice(0,100),pseudo,content:style.content,position,left:style.left,right:style.right,width:style.width,estimatedLeft:Math.round(estimatedLeft),estimatedRight:Math.round(estimatedRight)}]
+        : [];
+    }));
+    return { scrollWidth: el.scrollWidth, clientWidth: el.clientWidth, panelRect:{left:Math.round(bounds.left),right:Math.round(bounds.right),width:Math.round(bounds.width)}, document:{scrollWidth:document.documentElement.scrollWidth,clientWidth:document.documentElement.clientWidth}, offenders, visibleOffenders, pseudoOffenders };
   });
   expect(overflow.scrollWidth, JSON.stringify(overflow)).toBeLessThanOrEqual(overflow.clientWidth);
 });
