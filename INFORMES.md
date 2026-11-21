@@ -3534,3 +3534,5 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **Corrección de QA:** el primer workflow detectó una regresión en el contrato global de navegación: una flecha diagonal en el enlace interno al Origen se interpretaba como indicación de enlace externo. Se reemplazó por flecha direccional interna. El fallo no afectó la lógica de pestañas ni los contratos específicos del Capítulo 02; se repiten los workflows sobre el HEAD corregido.
 
 - **Corrección móvil posterior a Playwright:** la primera ejecución completa encontró desbordamiento horizontal en el panel del Capítulo 02 a 390 px. Se añadió contención de ancho, min-width: 0, box-sizing: border-box y ajuste de texto en los descendientes, sin ocultar el overflow ni relajar la aserción. La prueba móvil original se conserva para verificar el resultado real.
+
+- **QA diagnóstico:** la prueba móvil mantiene la aserción de no desbordamiento y ahora adjunta los elementos cuyo rectángulo exceda el panel, para localizar con precisión cualquier overflow residual en la siguiente ejecución.
