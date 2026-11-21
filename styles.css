@@ -5907,3 +5907,43 @@ main .chapter-panel :where(.chapter-cta, .executive-button, .comic-submit-btn,
  #hero-profile-page .hero-profile-metric > span { font-size:.74rem; }
  .stats-dossier-card dd { font-size:clamp(1.05rem,4.5vw,1.35rem); }
 }
+
+
+/* CAPÍTULO 02 · manifiesto, historia y participación */
+.manifesto-section-heading{max-width:900px;margin:0 0 18px}
+.manifesto-section-heading>span,.manifesto-history-line>li>span,.manifesto-values-grid article>small strong,.manifesto-offer article>span{display:block;color:#86dff0;font-size:.66rem;font-weight:900;letter-spacing:.14em}
+.manifesto-section-heading h3{margin:8px 0;color:#f2d69a;font:clamp(1.8rem,4vw,2.8rem)/1 'Bangers',cursive}
+.manifesto-section-heading p{max-width:780px;color:#c8d5e3;line-height:1.65}
+.manifesto-history{margin:38px 0;padding:clamp(18px,3vw,30px);border:1px solid rgba(134,223,240,.28);background:linear-gradient(145deg,rgba(13,27,43,.94),rgba(8,13,24,.96))}
+.manifesto-history-line{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:20px 0;padding:0;list-style:none}
+.manifesto-history-line li{min-width:0;padding:18px;border-left:3px solid #d5a7ff;background:rgba(255,255,255,.035)}
+.manifesto-history-line h4{margin:9px 0;color:#f1d58c;font:1.55rem 'Bangers',cursive}
+.manifesto-history-line p{color:#c5d1df;font-size:.9rem;line-height:1.65}
+.manifesto-history-link{display:inline-flex;min-height:42px;align-items:center;color:#86dff0;font-size:.78rem;font-weight:900;letter-spacing:.06em;text-underline-offset:4px}
+.manifesto-values-grid article{display:flex;flex-direction:column;min-width:0}
+.manifesto-values-grid article h4{margin:10px 0;color:#f1d58c;font:1.55rem 'Bangers',cursive}
+.manifesto-values-grid article>small{display:block;margin-top:auto;padding-top:14px;color:#b8c8d8;font-size:.8rem;line-height:1.5}
+.manifesto-values-grid article>small strong{margin-bottom:4px;color:#86dff0;font-size:.59rem}
+.manifesto-phase-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:20px 0 10px}
+.manifesto-phase-tabs button{min-height:48px;padding:10px;border:1px solid rgba(134,223,240,.35);background:#101c2c;color:#dce8f4;font-weight:900;font-size:.75rem;letter-spacing:.04em;cursor:pointer}
+.manifesto-phase-tabs button[aria-selected="true"]{border-color:#d5a7ff;background:rgba(104,67,146,.28);color:#fff;box-shadow:inset 0 -3px #d5a7ff}
+.manifesto-phase-tabs button:focus-visible,.manifesto-history-link:focus-visible{outline:3px solid #ffdf4d;outline-offset:3px}
+.manifesto-phase-panel{min-height:140px;padding:clamp(18px,3vw,26px);border:1px solid rgba(213,167,255,.35);background:linear-gradient(135deg,rgba(32,28,52,.9),rgba(10,16,28,.95))}
+.manifesto-phase-panel[hidden]{display:none}
+.manifesto-phase-panel h4{margin:0 0 8px;color:#f1d58c;font:1.65rem 'Bangers',cursive}
+.manifesto-phase-panel p{max-width:850px;color:#d0d9e5;line-height:1.7}
+.manifesto-offer{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:30px 0}
+.manifesto-offer article{padding:clamp(18px,3vw,28px);border:1px solid rgba(134,223,240,.3);background:linear-gradient(145deg,#14273a,#0b111d)}
+.manifesto-offer article+article{border-color:rgba(255,117,132,.38);background:linear-gradient(145deg,#2a1c2b,#10121e)}
+.manifesto-offer article h3{margin:10px 0;color:#f1d58c;font:clamp(1.5rem,3vw,2.1rem)/1.05 'Bangers',cursive}
+.manifesto-offer article p{color:#c5d1df;line-height:1.65}
+.manifesto-offer article+article>span{color:#ff9eaa}
+.manifesto-onboarding{margin:34px 0}
+.manifesto-onboarding-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.manifesto-onboarding-grid article{min-width:0;padding:20px;border:1px solid rgba(213,167,255,.32);background:linear-gradient(145deg,#1c2035,#0d1422)}
+.manifesto-onboarding-grid article>b{color:#d5a7ff;font:2.2rem 'Bangers',cursive}
+.manifesto-onboarding-grid h4{margin:8px 0;color:#f1d58c;font:1.6rem 'Bangers',cursive}
+.manifesto-onboarding-grid p{color:#c5d1df;font-size:.9rem;line-height:1.65}
+@media(max-width:850px){.manifesto-history-line{grid-template-columns:1fr}.manifesto-onboarding-grid{grid-template-columns:1fr}}
+@media(max-width:600px){.manifesto-phase-tabs{grid-template-columns:1fr}.manifesto-phase-tabs button{min-height:44px;text-align:left}.manifesto-offer{grid-template-columns:1fr}.manifesto-history{padding:14px}.manifesto-history-line li{padding:14px}}
+@media(prefers-reduced-motion:reduce){.manifesto-phase-tabs button{scroll-behavior:auto;transition:none!important}}
