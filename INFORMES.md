@@ -3625,3 +3625,11 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 
 
 - **Sexta iteración:** Comunidad y Estadísticas ya superan los chequeos en mobile/mobile-small. Colaboraciones conserva un único desbordamiento: `.vod-total strong` («3 VOD DE ~1 H 14 MIN»), que está fuera de `.collab-cover-art`; por eso la regla anterior no lo alcanzaba. Se aplica la corrección al selector real `#chapter-12 .vod-total`, con ajuste de línea y ancho acotado.
+
+
+## 2026-11-21 — Validación integrada detecta caso adicional en 360 px
+
+- **Ejecución:** workflow general `Validar código y datos del sitio`, run 44939288024, sobre la revisión que ya había pasado el QA común aislado.
+- **Resultado general:** 37 pruebas Playwright pasaron; una falló. El test común, al ejecutarse junto con toda la suite, detectó un desbordamiento adicional en `#chapter-12` a 360 px dentro del expediente BarFender. El documento seguía midiendo 360 px, pero el bloque `.campaign-feature` y secciones descendientes excedían el ancho interior del panel.
+- **Corrección:** se limita el ancho de las secciones y del expediente BarFender al 100% del panel, se elimina el mínimo intrínseco y se permite que el encabezado del caso y su resumen se reorganicen en móvil.
+- **Importancia:** el QA aislado de 6/6 no reemplaza la ejecución conjunta. Se repetirá tanto el workflow común como la suite general para verificar que la corrección resista concurrencia y contexto integrado.
