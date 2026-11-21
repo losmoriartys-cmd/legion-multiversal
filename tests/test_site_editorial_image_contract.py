@@ -57,8 +57,9 @@ class SiteEditorialImageContract(unittest.TestCase):
         self.assertIn("home-follow-link", (ROOT / "app.js").read_text(encoding="utf-8"))
 
     def test_barfender_is_documented_as_collaboration_not_paid_campaign(self):
-        self.assertIn("CASO COLABORATIVO DOCUMENTADO · N.º 001", self.html)
+        self.assertIn("CASO COLABORATIVO DOCUMENTADO · N.º 001 · EXP-001", self.html)
         self.assertIn("EXPERIENCIA<br><strong>001</strong>", self.html)
+        self.assertIn("<small>EXP-001</small>", self.html)
         self.assertIn("no se presenta como patrocinio ni como campaña remunerada", self.html)
         self.assertNotIn("EXPEDIENTE COMERCIAL · N.º 001", self.html)
         self.assertNotIn("EL JUEGO DE LA CAMPAÑA", self.html)
@@ -74,8 +75,10 @@ class SiteEditorialImageContract(unittest.TestCase):
         start = self.html.index('<section id="chapter-12"')
         end = self.html.index('\n</section>', start)
         chapter = self.html[start:end]
-        self.assertEqual(chapter.count('href="./bitacora-preview.html"'), 1)
-        self.assertEqual(self.html.count('href="./bitacora-preview.html"'), 2)
+        self.assertEqual(chapter.count('href="#collab-games-registry"'), 1)
+        self.assertNotIn('href="./bitacora-preview.html"', chapter)
+        self.assertIn('id="collab-registry-grid"', chapter)
+        self.assertIn('data-collab-ready="false"', chapter)
         self.assertNotIn('assets/carnet/', chapter)
         self.assertNotIn('assets/ladymoriarty.jpg', chapter)
         self.assertNotIn('assets/rod3r1k.jpg', chapter)
