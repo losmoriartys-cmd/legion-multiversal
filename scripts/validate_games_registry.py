@@ -215,7 +215,7 @@ def validate_registry(registry: dict, roster: dict) -> list[str]:
                 if channel is not None and channel not in twitch_ids:
                     errors.append(f"{label} · {bit}: canal POV no es un integrante con cuenta Twitch: {channel}.")
                 url = pov.get("url")
-                if not is_https_url(url) or not re.fullmatch(r"https://(?:www\\.)?twitch\\.tv/videos/[0-9]+", url or ""):
+                if not is_https_url(url) or not re.fullmatch(r"https://(?:www\.)?twitch\.tv/videos/[0-9]+", url or ""):
                     errors.append(f"{label} · {bit}: URL POV no es un VOD Twitch limpio: {url}.")
                 elif url in seen_urls:
                     errors.append(f"{label} · {bit}: VOD duplicado dentro de la misma sesión.")
