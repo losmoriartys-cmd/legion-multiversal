@@ -6004,3 +6004,49 @@ main .chapter-panel :where(.chapter-cta, .executive-button, .comic-submit-btn,
   width: max-content;
   min-width: 700px;
 }
+
+
+/* QA responsive · correcciones reales detectadas en mobile (390/360 px). */
+@media (max-width: 600px) {
+  /* Capítulo 04 · la marca circular y las tarjetas deben respetar el ancho
+     disponible del grid, sin conservar mínimos intrínsecos de escritorio. */
+  #chapter-3 .impact-hero,
+  #chapter-3 .impact-hero-copy,
+  #chapter-3 .impact-story-grid,
+  #chapter-3 .impact-story-card {
+    min-width: 0;
+    max-width: 100%;
+  }
+  #chapter-3 .impact-story-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  #chapter-3 .impact-story-card {
+    width: 100%;
+  }
+  #chapter-3 .impact-hero-mark {
+    justify-self: start;
+    margin-inline: 0;
+  }
+
+  /* Capítulo 12 · Colaboraciones: el hero editorial pasa a una columna
+     y la figura no suma ancho por su rotación/sombra en pantallas estrechas. */
+  #chapter-12.collaboration-chapter .collab-cover {
+    grid-template-columns: minmax(0, 1fr);
+    min-width: 0;
+    padding: 18px;
+  }
+  #chapter-12.collaboration-chapter .collab-cover-copy,
+  #chapter-12.collaboration-chapter .collab-cover-art {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+  #chapter-12.collaboration-chapter .collab-cover-art {
+    transform: none;
+  }
+  #chapter-12.collaboration-chapter .collab-cover-art figcaption,
+  #chapter-12.collaboration-chapter .collab-cover-art strong {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+}
