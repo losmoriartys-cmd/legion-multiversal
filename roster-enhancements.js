@@ -186,7 +186,7 @@
       if (typeBadge) typeBadge.textContent = account?.platform === 'twitch' ? 'CREADOR EN DIRECTO' : account?.platform === 'youtube' ? 'CREADOR DE VIDEO' : 'FORMATO POR CONFIRMAR';
     }
     const oldSlots = card.querySelector('.comic-roster-brand-slots');
-    if (oldSlots) { oldSlots.setAttribute('aria-hidden', 'true'); oldSlots.classList.add('roster-v3-legacy-metrics'); }
+    if (oldSlots) { oldSlots.removeAttribute('aria-hidden'); oldSlots.classList.remove('roster-v3-legacy-metrics'); }
     const newSlots = document.createElement('span');
     newSlots.className = 'roster-v3-metrics';
     newSlots.setAttribute('aria-label', 'Seguidores, media de viewers y días activos detectados');
@@ -195,8 +195,16 @@
       metricCard('Media de viewers', metrics.viewers.value, metrics.viewers.detail, metrics.viewers.available ? 'has-data' : 'is-empty'),
       metricCard('Días activos detectados', metrics.days.count === null ? 'No informado' : metrics.days.count + ' / 17', metrics.days.count === null ? 'Sin ventana diaria verificable' : 'Recuento en los últimos 17 días observados', metrics.days.count === null ? 'is-empty' : 'has-data')
     );
-    if (oldSlots) oldSlots.insertAdjacentElement('afterend', newSlots);
-    else card.querySelector('.comic-roster-card-data')?.appendChild(newSlots);
+    if (oldSlots) {
+      const parent = oldSlots.parentNode;
+      const legacy = document.createElement('details');
+      legacy.className = 'roster-v3-extra-metrics';
+      const summary = document.createElement('summary');
+      summary.textContent = 'OTRAS MÉTRICAS DE ACTIVIDAD';
+      parent.insertBefore(newSlots, oldSlots);
+      legacy.append(summary, oldSlots);
+      parent.insertBefore(legacy, newSlots.nextSibling);
+    } else card.querySelector('.comic-roster-card-data')?.appendChild(newSlots);
 
     const daysMetric = newSlots.querySelector('.roster-v3-metric:last-child');
     if (daysMetric && metrics.days.count !== null) {
