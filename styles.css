@@ -5984,3 +5984,23 @@ main .chapter-panel :where(.chapter-cta, .executive-button, .comic-submit-btn,
 @media(max-width:600px){
  #chapter-11.comic-page::before{inset:0}
 }
+
+
+/* QA responsive · Estadísticas: el detalle técnico conserva scroll propio
+   sin ensanchar el capítulo ni el documento en resoluciones menores. */
+#chapter-3 .stats-methodology {
+  min-width: 0;
+  max-width: 100%;
+}
+#chapter-3 .stats-methodology .stats-table-wrap {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+}
+#chapter-3 .stats-methodology .stats-table {
+  width: max-content;
+  min-width: 700px;
+}
