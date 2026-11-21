@@ -64,7 +64,26 @@ test('Quiénes somos se adapta a móvil y conserva controles con reduced motion'
         ? [{tag:node.tagName,className:String(node.className||'').slice(0,100),pseudo,content:style.content,position,left:style.left,right:style.right,width:style.width,estimatedLeft:Math.round(estimatedLeft),estimatedRight:Math.round(estimatedRight)}]
         : [];
     }));
-    return { scrollWidth: el.scrollWidth, clientWidth: el.clientWidth, panelRect:{left:Math.round(bounds.left),right:Math.round(bounds.right),width:Math.round(bounds.width)}, document:{scrollWidth:document.documentElement.scrollWidth,clientWidth:document.documentElement.clientWidth}, offenders, visibleOffenders, pseudoOffenders };
+    const panelPseudos = ['::before','::after'].map(pseudo => {
+      const style = getComputedStyle(el, pseudo);
+      return {pseudo,content:style.content,display:style.display,position:style.position,
+        left:style.left,right:style.right,width:style.width,marginLeft:style.marginLeft,marginRight:style.marginRight,
+        transform:style.transform};
+    }).filter(item => item.content !== 'none' && item.content !== 'normal' && item.display !== 'none');
+    const directChildren = Array.from(el.children).map(node => {
+      const rect = node.getBoundingClientRect();
+      const style = getComputedStyle(node);
+      return {tag:node.tagName,className:String(node.className||'').slice(0,100),
+        scrollWidth:node.scrollWidth,clientWidth:node.clientWidth,
+        left:Math.round(rect.left),right:Math.round(rect.right),width:Math.round(rect.width),
+        marginLeft:style.marginLeft,marginRight:style.marginRight,paddingLeft:style.paddingLeft,paddingRight:style.paddingRight,
+        position:style.position,transform:style.transform,overflowX:style.overflowX};
+    });
+    return { scrollWidth: el.scrollWidth, clientWidth: el.clientWidth,
+      panelRect:{left:Math.round(bounds.left),right:Math.round(bounds.right),width:Math.round(bounds.width)},
+      panelPadding:{left:getComputedStyle(el).paddingLeft,right:getComputedStyle(el).paddingRight},
+      document:{scrollWidth:document.documentElement.scrollWidth,clientWidth:document.documentElement.clientWidth},
+      offenders,visibleOffenders,pseudoOffenders,panelPseudos,directChildren };
   });
   expect(overflow.scrollWidth, JSON.stringify(overflow)).toBeLessThanOrEqual(overflow.clientWidth);
 });
