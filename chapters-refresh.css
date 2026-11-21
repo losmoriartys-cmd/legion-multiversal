@@ -1,0 +1,72 @@
+/* Refresco de capítulos: Quiénes somos, Alianzas, Colaboraciones y Arsenal.
+   Se carga después de las hojas de cada capítulo y solo agrega bloques nuevos. */
+
+a.chapter-cta{display:inline-block;text-decoration:none;color:#080b10;text-align:center}
+
+/* ---------- Quiénes somos (capítulo 02) ---------- */
+#chapter-11 .manifesto-clarity,
+#chapter-11 .manifesto-people,
+#chapter-11 .manifesto-faq{margin:36px 0;min-width:0;box-sizing:border-box}
+.manifesto-clarity-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.manifesto-clarity-grid article{min-width:0;box-sizing:border-box;padding:22px;border:1px solid rgba(99,213,238,.4);background:linear-gradient(145deg,#12293a,#0a1522)}
+.manifesto-clarity-grid .manifesto-clarity-isnt{border-color:rgba(255,122,184,.4);background:linear-gradient(145deg,#2a1530,#10101e)}
+.manifesto-clarity-grid article>span{display:block;color:#63d5ee;font:1.8rem 'Bangers',cursive;letter-spacing:.05em}
+.manifesto-clarity-grid .manifesto-clarity-isnt>span{color:#ff8cc4}
+.manifesto-clarity-grid ul{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:11px}
+.manifesto-clarity-grid li{position:relative;padding-left:28px;color:#d6e0ec;line-height:1.55;overflow-wrap:anywhere}
+.manifesto-clarity-grid li::before{content:"✓";position:absolute;left:0;top:0;color:#63d5ee;font-weight:900}
+.manifesto-clarity-grid .manifesto-clarity-isnt li::before{content:"✕";color:#ff8cc4}
+
+.manifesto-people-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:0 0 14px}
+.manifesto-people-grid article{min-width:0;box-sizing:border-box;padding:16px;border:1px solid rgba(213,167,255,.32);background:linear-gradient(145deg,#1c2035,#0d1422)}
+.manifesto-people-grid h4{margin:0 0 6px;color:#f1d58c;font:1.35rem 'Bangers',cursive;letter-spacing:.04em;overflow-wrap:anywhere}
+.manifesto-people-grid p{margin:0;color:#c5d1df;font-size:.88rem;line-height:1.55}
+.manifesto-people-fallback{grid-column:1/-1;margin:0;color:#c5d1df;line-height:1.6}
+
+.manifesto-faq-list{display:grid;gap:10px;max-width:900px}
+.manifesto-faq-list details{min-width:0;border:1px solid rgba(134,223,240,.3);background:rgba(9,16,28,.9)}
+.manifesto-faq-list summary{display:flex;align-items:center;min-height:48px;padding:12px 16px;color:#f2d69a;font-weight:800;line-height:1.4;cursor:pointer;overflow-wrap:anywhere}
+.manifesto-faq-list summary:focus-visible{outline:3px solid #ffdf4d;outline-offset:2px}
+.manifesto-faq-list details[open] summary{color:#86dff0}
+.manifesto-faq-list details p{margin:0;padding:0 16px 16px;color:#c8d5e3;line-height:1.65}
+.manifesto-faq-list a{color:#86dff0;font-weight:800}
+.manifesto-invitation .chapter-actions{flex-wrap:wrap}
+
+/* ---------- Alianzas (capítulo 06) ---------- */
+.alliance-paths-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.alliance-path-card{display:flex;flex-direction:column;min-width:0;box-sizing:border-box;padding:20px;border:1px solid rgba(255,59,189,.28);background:linear-gradient(145deg,rgba(22,34,52,.96),rgba(9,14,26,.98))}
+.alliance-path-card h4{margin:12px 0 8px;color:#fff;font-size:1.08rem;letter-spacing:.05em;overflow-wrap:anywhere}
+.alliance-path-card p{margin:0 0 16px;color:#c9d3e0;line-height:1.58}
+.alliance-path-card .chapter-cta{margin-top:auto;font-size:1.1rem;padding:12px 16px;max-width:100%;box-sizing:border-box}
+.alliance-contact-alt{margin-top:14px;color:#c9d3e0;font-size:.9rem;overflow-wrap:anywhere}
+
+/* ---------- Colaboraciones (capítulo 07) ---------- */
+.collaboration-chapter .collab-how{margin:10px 0 40px;min-width:0}
+.collaboration-chapter .collab-how .section-heading h3{overflow-wrap:anywhere;min-width:0}
+.collaboration-chapter .collab-doors{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:20px 0 30px;min-width:0}
+.collaboration-chapter .collab-doors .collab-contact{margin:0;min-width:0;box-sizing:border-box}
+
+/* ---------- Arsenal (capítulo 08) ---------- */
+.arsenal-quick-picks{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px;min-width:0}
+.arsenal-quick-picks>span{flex:0 0 100%;color:#86dff0;font-size:.66rem;font-weight:900;letter-spacing:.14em}
+.arsenal-quick-picks button{min-height:44px;max-width:100%;padding:8px 14px;color:#e8eef6;background:rgba(9,16,28,.92);border:1px solid rgba(134,223,240,.4);font:inherit;font-size:.85rem;font-weight:800;cursor:pointer;overflow-wrap:anywhere}
+.arsenal-quick-picks button[aria-pressed="true"]{color:#101723;background:#e8cc7c;border-color:#e8cc7c}
+.arsenal-quick-picks button:focus-visible{outline:3px solid #ffdf4d;outline-offset:2px}
+.arsenal-legend{margin:14px 0 0;color:#b8c8d8;font-size:.85rem;line-height:1.6}
+.arsenal-legend b{color:#f2d69a}
+.arsenal-checklist{list-style:none;margin:14px 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.arsenal-checklist li{position:relative;min-width:0;padding:12px 14px 12px 40px;background:rgba(255,255,255,.045);border:1px solid rgba(220,174,96,.3);line-height:1.5;overflow-wrap:anywhere}
+.arsenal-checklist li::before{content:"✓";position:absolute;left:14px;top:12px;color:#63d5ee;font-weight:900}
+
+@media(max-width:850px){
+  .collaboration-chapter .collab-how .section-heading{grid-template-columns:minmax(0,1fr)}
+  .manifesto-people-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .alliance-paths-grid{grid-template-columns:1fr}
+  .collaboration-chapter .collab-doors{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .manifesto-clarity-grid{grid-template-columns:1fr}
+  .manifesto-people-grid{grid-template-columns:1fr}
+  .arsenal-checklist{grid-template-columns:1fr}
+  .manifesto-invitation .chapter-cta{width:100%;box-sizing:border-box}
+}
