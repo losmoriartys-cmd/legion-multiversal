@@ -3613,3 +3613,12 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **Capítulo 12 · Colaboraciones:** `.collab-cover-copy` y `.collab-cover-art` excedían el borde del panel; el sello/figcaption y la rotación de la figura contribuían al ancho. Se cambia el hero a una columna en móvil, se limita el ancho de copia/figura y se elimina la rotación solo en ese breakpoint.
 - **Capítulo 04 · Estadísticas:** a 360 px, `.impact-hero-mark` y las tarjetas `.impact-story-card` sobresalían del borde interno del capítulo. Se limita el ancho mínimo de los grids/tarjetas y se alinea la marca circular al inicio en móvil pequeño.
 - **Estado:** correcciones CSS aplicadas en esta rama. Nueva corrida pendiente; aún no se declara aprobación.
+
+
+## 2026-11-21 — Quinta iteración Playwright: desbordamientos de contenido en mobile
+
+- **Run:** 44938963667, SHA `1c9d29aab85daad7b6fb120e7d590f9ebaa1c110`.
+- **Resultado:** desktop-wide, desktop, tablet y navegación completa pasaron; fallaron mobile y mobile-small.
+- **Capítulo 12 · Colaboraciones:** quedaron dos nodos tipográficos fuera del ancho: el tramo «SE ENCUENTRAN.» del título y el rótulo «3 VOD DE ~1 H 14 MIN» dentro de la figura. Se habilita ajuste de línea y tamaño fluido para esos elementos.
+- **Capítulo 09 · Comunidad:** las tres tarjetas `.belonging-path-card` superaban el límite interno del panel en mobile-small. Se fuerza una única columna con ancho mínimo cero y tarjetas limitadas al ancho disponible.
+- **Estado:** correcciones aplicadas; falta repetir los cinco viewports y confirmar que no aparezcan otros desbordamientos.
