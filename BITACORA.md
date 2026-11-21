@@ -201,7 +201,7 @@ Al finalizar cada cambio, registrar: archivos tocados; qué se modificó y por q
 ## 2026-11-21 — Capítulo 07 · Bitácora dinámica de colaboraciones
 
 - **Archivos:** index.html, styles.css, games-registry.js, tests/test_collaborations_registry_contract.py, tests/browser/collaborations-registry.spec.js, .github/workflows/validar-sitio.yml, tests/browser/home-conversion.spec.js, INFORMES.md y BITACORA.md.
-- **Datos:** el capítulo lee games.json y roster-data.json; las imágenes de canales se obtienen de data.json cuando están disponibles y se respaldan con retratos del Roster. No duplica el registro.
+- **Datos:** el capítulo lee games.json y roster-data.json; las imágenes de canales se obtienen de data.json cuando están disponibles y se respaldan con iniciales, sin reutilizar retratos del Roster. No duplica el registro.
 - **Experiencia:** 10 sesiones BIT, 11 POV, participantes separados de canales POV; filtros por búsqueda, categoría y creador; enlaces directos a los VOD y al futuro ID de Arsenal.
 - **Casos especiales:** Among Us (cuatro participantes, dos POV); PEAK (canal POV no asignado); Escape the Backrooms (BIT-001 unificado); BarFender permanece como EXP-001 independiente sin contarse como BIT.
 - **Pruebas:** pendientes de CI en el PR de la rama.

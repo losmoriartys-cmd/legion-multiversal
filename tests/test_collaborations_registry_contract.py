@@ -57,7 +57,8 @@ class CollaborationsRegistryContractTests(unittest.TestCase):
 
     def test_cover_and_avatar_fallbacks_do_not_repeat_placeholder_art(self):
         self.assertIn("ARTE OFICIAL PENDIENTE", SCRIPT)
-        self.assertIn("safeRosterPortrait", SCRIPT)
+        self.assertNotIn("assets/carnet/", SCRIPT)
+        self.assertIn("collab-avatar-fallback", SCRIPT)
         self.assertIn("profile_image_url", SCRIPT)
         self.assertIn(".collab-game-cover-fallback", CSS)
         self.assertIn(".collab-avatar-wrap.no-pov", CSS)

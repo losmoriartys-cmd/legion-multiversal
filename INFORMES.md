@@ -2,7 +2,7 @@
 
 - **Base:** main después de integrar PR #86, commit 858a26c228fae64a34ff6fdbb1fa79896d30fa53; rama feat/chapter-07-collaborations-registry.
 - **Objetivo:** convertir el archivo de colaboraciones en una Bitácora de sesiones alimentada por games.json y por las identidades canónicas de roster-data.json.
-- **Implementado:** 10 sesiones BIT, 11 POV y filtros por texto, categoría y creador; resúmenes calculados; avatares de canal desde profile_image_url de data.json, con retrato canónico del Roster como respaldo; estados visuales diferenciados para participantes con y sin POV; enlaces de VOD limpios; puente al Arsenal por ID de juego.
+- **Implementado:** 10 sesiones BIT, 11 POV y filtros por texto, categoría y creador; resúmenes calculados; avatares de canal desde profile_image_url de data.json, con iniciales neutras como respaldo si el canal no publica avatar; estados visuales diferenciados para participantes con y sin POV; enlaces de VOD limpios; puente al Arsenal por ID de juego.
 - **Integridad:** Among Us conserva cuatro participantes y dos canales POV; PEAK conserva el canal propietario como desconocido; Escape the Backrooms contiene BIT-001 sin duplicado; BarFender permanece separado como expediente comercial EXP-001 y su contenido, VOD y clips históricos no se reemplazan.
 - **Fechas y arte:** las fechas siguen indicadas como no verificadas; los juegos sin portada oficial confirmada muestran una ficha tipográfica propia, no imágenes genéricas ni portadas repetidas.
 - **Accesibilidad / responsive:** etiquetas de filtros, anuncios de estado, nombres alternativos, foco visible, diseño de una columna en móvil y movimiento reducido.

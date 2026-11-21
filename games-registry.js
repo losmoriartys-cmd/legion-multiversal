@@ -34,9 +34,6 @@
       return url.href;
     } catch (error) { return ''; }
   }
-  function safeRosterPortrait(value) {
-    return typeof value === 'string' && value.startsWith('assets/') && !value.includes('..') ? value : '';
-  }
   function creatorName(id) {
     const creator = creators.get(id);
     return creator ? (creator.display_name || creator.name || id) : 'Canal por confirmar';
@@ -47,7 +44,7 @@
   }
   function avatarMarkup(id, creator, hasPov) {
     const login = creator ? creatorLogin(creator) : '';
-    const image = safeHttps(channelImages[login], 'jtvnw.net') || safeRosterPortrait(creator && (creator.portrait || creator.character_card));
+    const image = safeHttps(channelImages[login], 'jtvnw.net');
     const color = CREATOR_COLORS[id] || '#91a9bf';
     const fallback = escapeHtml(String(creatorName(id)).trim().split(/\s+/).slice(0, 2).map(function (part) { return part.charAt(0); }).join('').toUpperCase());
     return '<span class="collab-avatar-wrap ' + (hasPov ? 'has-pov' : 'no-pov') + '" style="--creator-color:' + color + '">' +
