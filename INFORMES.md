@@ -3555,3 +3555,10 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - Instrumentación: la prueba responsive ahora registra el rectángulo del panel, el ancho del documento y candidatos de pseudo-elementos ::before / ::after, manteniendo intacta la aserción estricta de overflow.
 - Commits: c5be87b (reduced motion) y 0776b2d (diagnóstico de pseudo-elementos).
 - Estado: pendiente de nueva ejecución sobre el HEAD actual. No se considera corregido ni aprobado hasta que el test pase y se revisen sus evidencias.
+
+
+### 2026-11-21 · Diagnóstico ampliado de overflow móvil · PR #84
+- La última ejecución del workflow `44877623901` confirmó 31/32 pruebas Playwright aprobadas y una falla en el ancho interno del Capítulo 02 (scrollWidth 391 px frente a clientWidth 340 px). El documento global permaneció en 390 px; no se considera resuelto el defecto.
+- La instrumentación anterior no detectó descendientes visibles ni pseudo-elementos desbordados. Se amplió el diagnóstico para inspeccionar también `::before`/`::after` del propio panel, métricas de cada hijo directo, padding, márgenes, transformaciones y overflow computado.
+- Commit: `8a3efc46934693eb5dc40185cb3c299fdf498d20` (`tests/browser/manifesto-chapter.spec.js`).
+- Pendiente: ejecutar de nuevo Playwright sobre este HEAD, identificar la fuente concreta del desbordamiento, corregirla sin ocultar overflow ni relajar la aserción y revisar evidencias visuales. PR #84 permanece abierto y sin fusionar.
