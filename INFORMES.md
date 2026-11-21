@@ -3536,3 +3536,12 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **Corrección móvil posterior a Playwright:** la primera ejecución completa encontró desbordamiento horizontal en el panel del Capítulo 02 a 390 px. Se añadió contención de ancho, min-width: 0, box-sizing: border-box y ajuste de texto en los descendientes, sin ocultar el overflow ni relajar la aserción. La prueba móvil original se conserva para verificar el resultado real.
 
 - **QA diagnóstico:** la prueba móvil mantiene la aserción de no desbordamiento y ahora adjunta los elementos cuyo rectángulo exceda el panel, para localizar con precisión cualquier overflow residual en la siguiente ejecución.
+
+
+## 2026-11-21 · PR #84 · segunda corrección responsive y diagnóstico
+
+- **Revalidación:** el workflow 44874913300 terminó con 31 pruebas Playwright aprobadas y 1 fallida. La única falla conserva la aserción estricta de overflow en móvil: scrollWidth 391 frente a clientWidth 340 a 390 px. QA portable y colector aprobaron.
+- **Corrección aplicada:** se ajustó el rótulo editorial superior del Capítulo 02 en móvil para que use los límites disponibles del panel, reduzca padding/tamaño tipográfico y permita salto de línea. No se ocultó el overflow ni se relajó la aserción.
+- **Diagnóstico de prueba:** Playwright ahora enumera todos los descendientes visibles que exceden el panel, excluyendo paneles ocultos y nodos sin dimensiones, para que un fallo posterior identifique el elemento responsable sin truncarlo por orden DOM.
+- **Commits:** f6199dc (CSS responsive) y 76c19f2 (diagnóstico Playwright).
+- **Estado:** pendiente de ejecutar nuevamente Playwright, QA portable y colector sobre el HEAD actualizado. PR #84 permanece abierto y sin merge; producción intacta.
