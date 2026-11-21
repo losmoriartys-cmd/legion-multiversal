@@ -22,6 +22,7 @@ on:
       - '.github/workflows/validar-sitio.yml'
   pull_request:
     paths:
+      - 'data/**'
       - 'app.js'
       - 'games-registry.js'
       - 'index.html'
