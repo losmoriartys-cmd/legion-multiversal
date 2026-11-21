@@ -198,15 +198,27 @@
   [searchInput, categorySelect, creatorSelect].forEach(function (control) {
     control.addEventListener(control === searchInput ? 'input' : 'change', render);
   });
+  function scrollToRegistryTarget(target) {
+    if (!target || !target.isConnected) return;
+    const rootScroller = document.documentElement;
+    const previousScrollBehavior = rootScroller.style.scrollBehavior;
+    rootScroller.style.scrollBehavior = 'auto';
+    target.scrollIntoView({ block: 'center', behavior: 'auto' });
+    window.requestAnimationFrame(function () { rootScroller.style.scrollBehavior = previousScrollBehavior; });
+  }
   grid.addEventListener('click', function (event) {
     const link = event.target.closest('[data-open-arsenal]');
     if (!link) return;
     event.preventDefault();
     const gameId = link.dataset.openArsenal;
-    if (typeof window.switchChapter === 'function') window.switchChapter(5, { scrollBehavior: 'auto' });
-    window.requestAnimationFrame(function () {
-      document.getElementById('arsenal-game-' + gameId)?.scrollIntoView({ block: 'center', behavior: 'auto' });
-    });
+    const revealArsenal = function () {
+      scrollToRegistryTarget(document.getElementById('arsenal-game-' + gameId));
+    };
+    if (typeof window.switchChapter === 'function') {
+      window.switchChapter(5, { scrollBehavior: 'auto', afterEnter: revealArsenal });
+    } else {
+      revealArsenal();
+    }
   });
   window.gamesRegistryReady = loadRegistry();
 })();
