@@ -254,8 +254,9 @@ test.describe('Auditoría de métricas normalizadas del Roster', () => {
       'YOUTUBE · ESTADO NO APLICA',
       'YOUTUBE · ESTADO NO APLICA'
     ]);
-    await page.locator('[data-profile-tab="marcas"]').click();
-    const brandSummary = page.locator('#profile-tab-marcas .hero-profile-brand-summary');
+    await page.locator('[data-profile-tab="bitacora"]').click();
+    await page.locator('[data-bitacora-view="marcas"]').click();
+    const brandSummary = page.locator('#bitacora-panel-marcas .hero-profile-brand-summary');
     await expect(brandSummary).toBeVisible();
     await expect(brandSummary.locator('.hero-profile-brand-slots article')).toHaveCount(3);
     await expect(brandSummary).toContainText('56');
@@ -281,8 +282,9 @@ test.describe('Auditoría de métricas normalizadas del Roster', () => {
       /EN DIRECTO.*19 VIENDO/,
       /EN DIRECTO.*19 VIENDO/
     ]);
-    await page.locator('[data-profile-tab="marcas"]').click();
-    const brandSummary = page.locator('#profile-tab-marcas .hero-profile-brand-summary');
+    await page.locator('[data-profile-tab="bitacora"]').click();
+    await page.locator('[data-bitacora-view="marcas"]').click();
+    const brandSummary = page.locator('#bitacora-panel-marcas .hero-profile-brand-summary');
     await expect(brandSummary).toBeVisible();
     await expect(brandSummary.locator('.hero-profile-brand-slots article')).toHaveCount(3);
     await expect(brandSummary).toContainText('Media de viewers');
