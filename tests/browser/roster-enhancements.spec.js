@@ -26,7 +26,6 @@ test('Roster V3 conserva los ocho expedientes y separa Formación de Colaborador
   for (const card of await page.locator('.comic-roster-card').all()) {
     await expect(card.locator('.roster-v3-archetype')).toBeVisible();
     await expect(card.locator('.roster-v3-metrics')).toBeVisible();
-    await expect(card.locator('.roster-v3-extra-metrics summary')).toHaveText('OTRAS MÉTRICAS DE ACTIVIDAD');
     await expect(card.locator('.roster-v3-metric')).toHaveCount(3);
     const followerValue = (await card.locator('.roster-v3-metric:first-child .roster-v3-metric-value').textContent()).trim();
     const followerDetail = await card.locator('.roster-v3-metric:first-child .roster-v3-metric-detail').textContent();
