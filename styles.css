@@ -6231,3 +6231,29 @@ main .chapter-panel :where(.chapter-cta, .executive-button, .comic-submit-btn,
 @media(max-width:650px){.collaboration-chapter .collab-registry-heading{flex-direction:column}.collaboration-chapter .collab-registry-stamp{align-self:flex-start}.collaboration-chapter .collab-registry-controls,.collaboration-chapter .collab-session-grid{grid-template-columns:minmax(0,1fr)}.collaboration-chapter .collab-filter-search{grid-column:auto}.collaboration-chapter .collab-pov-list{grid-template-columns:minmax(0,1fr)}.collaboration-chapter .collab-session-content{padding:14px}}
 @media(max-width:420px){.collaboration-chapter .collab-registry{padding:14px}.collaboration-chapter .collab-registry-summary{gap:6px}.collaboration-chapter .collab-registry-summary article{min-height:82px;padding:8px 5px}.collaboration-chapter .collab-registry-summary span{font-size:.55rem}.collaboration-chapter .collab-session-topline{align-items:flex-start}.collaboration-chapter .collab-participant{gap:6px;padding:5px 6px}.collaboration-chapter .collab-avatar-wrap{width:36px;height:36px;flex-basis:36px}}
 @media(prefers-reduced-motion:reduce){.collaboration-chapter .collab-session-actions a,.collaboration-chapter .collab-pov-link{transition:none}}
+
+
+/* QA responsive · el grid BIT se compacta en el ancho útil real del panel móvil. */
+@media (max-width: 650px) {
+  #chapter-12.collaboration-chapter .collab-registry,
+  #chapter-12.collaboration-chapter .collab-session-grid,
+  #chapter-12.collaboration-chapter .collab-session-card,
+  #chapter-12.collaboration-chapter .collab-game-cover,
+  #chapter-12.collaboration-chapter .collab-session-content {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+  #chapter-12.collaboration-chapter .collab-session-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+  #chapter-12.collaboration-chapter .collab-session-card,
+  #chapter-12.collaboration-chapter .collab-game-cover {
+    grid-column: 1 / -1;
+  }
+  #chapter-12.collaboration-chapter .collab-game-cover-fallback strong {
+    min-width: 0;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+}
