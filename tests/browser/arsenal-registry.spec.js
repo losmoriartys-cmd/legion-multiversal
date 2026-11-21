@@ -60,7 +60,7 @@ test('Arsenal y Bitácora se enlazan mediante IDs estables',async({page})=>{
   await expect(page.locator('#chapter-12')).toHaveClass(/active/);
   await expect(page.locator('#bit-001')).toBeVisible();
   const arsenalLink=page.locator('#bit-001 [data-open-arsenal="escape-the-backrooms"]');
-  await expect(arsenalLink).toBeInViewport();
+  await expect(arsenalLink).toBeInViewport({ratio:1});
   await arsenalLink.click();
   await expect(page.locator('#chapter-5')).toHaveClass(/active/);
   await expect(page.locator('#arsenal-game-escape-the-backrooms')).toBeVisible();
