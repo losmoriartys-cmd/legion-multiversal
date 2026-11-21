@@ -18,7 +18,7 @@ test('Capítulo 07 muestra las diez sesiones desde el registro maestro',async({p
 });
 
 test('Among Us distingue cuatro participantes de sus dos canales POV',async({page})=>{
-  const card=page.locator('[data-game-id="among-us"]');
+  const card=page.locator('#collab-registry-grid [data-game-id="among-us"]');
   await expect(card).toHaveCount(1);
   await expect(card.locator('[data-collab-participant]')).toHaveCount(4);
   await expect(card.locator('.collab-pov-link')).toHaveCount(2);
@@ -30,7 +30,7 @@ test('Among Us distingue cuatro participantes de sus dos canales POV',async({pag
 });
 
 test('PEAK conserva el propietario desconocido del POV y permite abrir su VOD',async({page})=>{
-  const card=page.locator('[data-game-id="peak"]');
+  const card=page.locator('#collab-registry-grid [data-game-id="peak"]');
   await expect(card).toHaveCount(1);
   const pov=card.locator('.collab-pov-link[data-pov-channel="unassigned"]');
   await expect(pov).toHaveCount(1);
