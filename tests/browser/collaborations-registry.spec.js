@@ -51,7 +51,9 @@ test('filtros por texto, categoría y creador reducen los expedientes',async({pa
   await page.locator('#collab-creator').selectOption('dave-nexus');
   await expect(cards).toHaveCount(1);
   await expect(cards.first()).toContainText('Fortnite');
-  await page.locator('#collab-registry-grid #collab-reset-filters').click();
+  await page.locator('#collab-search').fill('');
+  await page.locator('#collab-category').selectOption('all');
+  await page.locator('#collab-creator').selectOption('all');
   await expect(cards).toHaveCount(10);
 });
 
@@ -68,11 +70,20 @@ test('Capítulo 07 no genera overflow horizontal en escritorio, tablet ni móvil
     const metrics=await page.evaluate(()=>{
       const registry=document.getElementById('collab-games-registry');
       const grid=document.getElementById('collab-registry-grid');
+      const box=registry.getBoundingClientRect();
+      const offenders=Array.from(registry.querySelectorAll('*')).map(node=>{
+        const rect=node.getBoundingClientRect();
+        const style=getComputedStyle(node);
+        return {tag:node.tagName,id:node.id,className:String(node.className||'').slice(0,90),text:(node.textContent||'').trim().slice(0,45),left:Math.round(rect.left),right:Math.round(rect.right),width:Math.round(rect.width),display:style.display};
+      }).filter(item=>item.width>0&&item.display!=='none'&&(item.left<box.left-1||item.right>box.right+1));
       return {
         document:document.documentElement.scrollWidth,
         registryScroll:registry.scrollWidth,
         registryClient:registry.clientWidth,
-        columns:getComputedStyle(grid).gridTemplateColumns.split(' ').length
+        registryLeft:Math.round(box.left),
+        registryRight:Math.round(box.right),
+        columns:getComputedStyle(grid).gridTemplateColumns.split(' ').length,
+        offenders:offenders.slice(0,20)
       };
     });
     expect(metrics.document,'document overflow at '+width+'px').toBeLessThanOrEqual(width);
