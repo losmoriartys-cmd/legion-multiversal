@@ -4,7 +4,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 HTML = (ROOT / "index.html").read_text(encoding="utf-8")
-GAMES = json.loads((ROOT / "games.json").read_text(encoding="utf-8"))
+GAMES = json.loads((ROOT / "data" / "games.json").read_text(encoding="utf-8"))
 SCRIPT = (ROOT / "games-registry.js").read_text(encoding="utf-8")
 CSS = (ROOT / "styles.css").read_text(encoding="utf-8")
 
@@ -13,7 +13,7 @@ class CollaborationsRegistryContractTests(unittest.TestCase):
     def test_chapter_07_uses_the_shared_registry_and_roster_sources(self):
         self.assertIn('id="collab-games-registry"', HTML)
         self.assertIn('src="./games-registry.js?v=20261121-collab-registry-1"', HTML)
-        self.assertIn("fetch('./games.json'", SCRIPT)
+        self.assertIn("fetch('./data/games.json'", SCRIPT)
         self.assertIn("./styles.css?v=20261121-arsenal-registry-1", HTML)
         self.assertIn("fetch('./roster-data.json'", SCRIPT)
         self.assertIn("fetch('./data.json'", SCRIPT)

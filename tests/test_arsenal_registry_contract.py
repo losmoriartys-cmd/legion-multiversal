@@ -4,7 +4,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 HTML = (ROOT / "index.html").read_text(encoding="utf-8")
-GAMES = json.loads((ROOT / "games.json").read_text(encoding="utf-8"))
+GAMES = json.loads((ROOT / "data" / "games.json").read_text(encoding="utf-8"))
 SCRIPT = (ROOT / "arsenal-registry.js").read_text(encoding="utf-8")
 COLLAB_SCRIPT = (ROOT / "games-registry.js").read_text(encoding="utf-8")
 CSS = (ROOT / "styles.css").read_text(encoding="utf-8")
@@ -15,7 +15,7 @@ class ArsenalRegistryContractTests(unittest.TestCase):
         chapter = HTML.split('id="chapter-5"', 1)[1].split('id="chapter-6"', 1)[0]
         self.assertIn('id="arsenal-registry"', chapter)
         self.assertIn('src="./arsenal-registry.js?v=20261121-arsenal-registry-1"', HTML)
-        self.assertIn("fetch('./games.json'", SCRIPT)
+        self.assertIn("fetch('./data/games.json'", SCRIPT)
 
     def test_catalog_summary_matches_the_master_registry(self):
         sessions = [session for game in GAMES["juegos"] for session in game["sesiones"]]

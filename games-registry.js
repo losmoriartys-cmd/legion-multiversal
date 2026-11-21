@@ -156,7 +156,7 @@
     status.textContent = 'Conectando con el registro maestro de juegos…';
     try {
       const results = await Promise.all([
-        fetch('./games.json', { cache: 'no-store' }),
+        fetch('./data/games.json', { cache: 'no-store' }),
         fetch('./roster-data.json', { cache: 'no-store' }),
         fetch('./data.json', { cache: 'no-store' }).catch(function () { return null; })
       ]);

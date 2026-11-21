@@ -10,7 +10,7 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parents[1]
-GAMES_FILE = ROOT / "games.json"
+GAMES_FILE = ROOT / "data" / "games.json"
 ROSTER_FILE = ROOT / "roster-data.json"
 ALLOWED_CATEGORIES = {
     "Fiesta y humor", "Terror cooperativo", "Deducción social", "Supervivencia",
@@ -44,11 +44,11 @@ def normalized(value: str) -> str:
 def validate_registry(registry: dict, roster: dict) -> list[str]:
     errors: list[str] = []
     if not isinstance(registry, dict):
-        return ["games.json debe contener un objeto raíz."]
+        return ["data/games.json debe contener un objeto raíz."]
     if registry.get("version") != 1:
-        errors.append("games.json debe usar version=1.")
+        errors.append("data/games.json debe usar version=1.")
     if not isinstance(registry.get("nota"), str) or not registry["nota"].strip():
-        errors.append("games.json debe documentar el propósito del registro en nota.")
+        errors.append("data/games.json debe documentar el propósito del registro en nota.")
     games = registry.get("juegos")
     if not isinstance(games, list) or not games:
         return errors + ["juegos debe ser una lista no vacía."]

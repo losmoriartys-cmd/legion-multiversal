@@ -20,6 +20,12 @@
 ## P0 · Base de datos, validación y prevención de regresiones
 
 ### BASE-01 · Una sola fuente de datos organizada en data/
+
+#### Corte inicial en curso · BASE-01A — Registro maestro de juegos
+- [ ] Migrar el registro maestro desde `games.json` a `data/games.json` sin alterar sus 18 juegos, 10 sesiones BIT, 11 POV ni la referencia `EXP-001` de BarFender.
+- [ ] Actualizar consumidores del Arsenal y Colaboraciones, validador, contratos automatizados y filtros del workflow para leer la nueva ruta.
+- [ ] Ejecutar CI y comprobar que ningún consumidor activo siga dependiendo de la ruta antigua antes de integrar.
+- **Estado:** implementación preparada en la rama `feat/base-01-canonical-games-data`; pendiente PR, CI y revisión antes de marcar como integrada.
 - [ ] Diseñar y documentar la estructura canónica data/ para roster, juegos, horarios declarados, enlaces y referencias audiovisuales. Evitar duplicar campos cuando los horarios deban seguir formando parte del perfil del creador.
 - [ ] Migrar los datos existentes de forma controlada desde los JSON de raíz, manteniendo un único origen por entidad y actualizando consumidores, colectores, páginas, scripts y tests.
 - [ ] Conservar IDs canónicos estables para cada creador, juego, sesión BIT, expediente EXP, VOD y clip; no resolver relaciones por nombres visibles.

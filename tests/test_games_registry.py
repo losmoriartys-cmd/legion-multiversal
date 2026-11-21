@@ -6,7 +6,7 @@ from pathlib import Path
 from scripts.validate_games_registry import validate_registry
 
 ROOT = Path(__file__).resolve().parents[1]
-GAMES = json.loads((ROOT / "games.json").read_text(encoding="utf-8"))
+GAMES = json.loads((ROOT / "data" / "games.json").read_text(encoding="utf-8"))
 ROSTER = json.loads((ROOT / "roster-data.json").read_text(encoding="utf-8"))
 
 

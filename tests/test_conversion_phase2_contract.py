@@ -64,7 +64,7 @@ class ConversionPhase2Contract(unittest.TestCase):
 
     def test_arsenal_count_matches_the_shared_master_registry(self):
         arsenal = self.html.split('id="chapter-5"', 1)[1].split('id="chapter-6"', 1)[0]
-        registry = json.loads((ROOT / "games.json").read_text(encoding="utf-8"))
+        registry = json.loads((ROOT / "data" / "games.json").read_text(encoding="utf-8"))
         games = registry["juegos"]
         sessions = [session for game in games for session in game["sesiones"]]
         povs = [pov for session in sessions for pov in session["pov"]]

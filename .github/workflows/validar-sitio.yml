@@ -16,6 +16,7 @@ on:
       - '*.webp'
       - 'scripts/**'
       - 'schemas/**'
+      - 'data/**'
       - 'tests/**'
       - 'update_clips.py'
       - '.github/workflows/validar-sitio.yml'
@@ -58,7 +59,7 @@ jobs:
           node --check arsenal-registry.js
       - name: Validar archivos JSON
         run: |
-          for file in ./*.json schemas/*.json; do
+          for file in ./*.json data/*.json schemas/*.json; do
             [ -f "$file" ] || continue
             echo "Validando $file"
             python -m json.tool "$file" > /dev/null

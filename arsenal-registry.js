@@ -134,7 +134,7 @@
   async function load(){
     root.setAttribute('aria-busy','true');
     try{
-      const response=await fetch('./games.json',{cache:'no-store'});
+      const response=await fetch('./data/games.json',{cache:'no-store'});
       if(!response.ok)throw new Error('No se pudo cargar games.json ('+response.status+').');
       const payload=await response.json();
       if(!payload||!Array.isArray(payload.juegos)||!payload.juegos.length)throw new Error('games.json no contiene juegos.');
