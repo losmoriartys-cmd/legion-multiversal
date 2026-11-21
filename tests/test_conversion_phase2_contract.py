@@ -1,3 +1,4 @@
+import json
 import pathlib
 import unittest
 
@@ -34,7 +35,9 @@ class ConversionPhase2Contract(unittest.TestCase):
     def test_barfender_continuity_and_clip_metadata(self):
         self.assertIn("SESIÓN 02 · 10 NOV 2026", self.html)
         self.assertNotIn("DURACIÓN NO REGISTRADA", self.html)
-        self.assertIn("JUGADO POR LA LEGIÓN", self.html)
+        collaboration = self.html.split('id="chapter-12"', 1)[1].split('id="chapter-5"', 1)[0]
+        self.assertIn("CASO COLABORATIVO DOCUMENTADO · N.º 001", collaboration)
+        self.assertIn("EXP-001", collaboration)
         self.assertIn("91 usuarios activos en chat", self.html)
 
     def test_public_arsenal_does_not_expose_campaign_access_tables(self):
@@ -45,19 +48,33 @@ class ConversionPhase2Contract(unittest.TestCase):
         self.assertNotIn("autenticación real", arsenal)
 
     def test_arsenal_filters_and_recruitment_tabs(self):
-        self.assertIn("filterArsenal", self.js)
+        arsenal = self.html.split('id="chapter-5"', 1)[1].split('id="chapter-6"', 1)[0]
+        arsenal_js = (ROOT / "arsenal-registry.js").read_text(encoding="utf-8")
         self.assertIn("setRecruitmentMode", self.js)
-        self.assertIn('data-arsenal-filter="horror"', self.html)
+        self.assertIn('id="arsenal-search"', arsenal)
+        self.assertIn('id="arsenal-status-filter"', arsenal)
+        self.assertIn('id="arsenal-category-filter"', arsenal)
+        self.assertIn('id="arsenal-players-filter"', arsenal)
+        self.assertIn("function filtered()", arsenal_js)
+        self.assertIn("function stateOf(game)", arsenal_js)
 
     def test_mission_progress_is_discoverable(self):
         self.assertIn("mission-progress-trigger", self.html)
         self.assertIn("updateMissionHeader", self.js)
 
-    def test_arsenal_count_matches_all_eleven_listed_games(self):
+    def test_arsenal_count_matches_the_shared_master_registry(self):
         arsenal = self.html.split('id="chapter-5"', 1)[1].split('id="chapter-6"', 1)[0]
-        self.assertIn("ONCE JUEGOS", arsenal)
-        self.assertIn("11 JUEGOS PARA JUGAR EN EQUIPO", arsenal)
-        self.assertIn("11. BarFender", arsenal)
+        registry = json.loads((ROOT / "games.json").read_text(encoding="utf-8"))
+        games = registry["juegos"]
+        sessions = [session for game in games for session in game["sesiones"]]
+        povs = [pov for session in sessions for pov in session["pov"]]
+        self.assertIn("18 JUEGOS", arsenal)
+        self.assertIn('id="arsenal-grid"', arsenal)
+        self.assertIn('data-arsenal-ready="false"', arsenal)
+        self.assertEqual(len(games), 18)
+        self.assertEqual(len(sessions), 10)
+        self.assertEqual(len(povs), 11)
+        self.assertNotIn("11. BarFender", arsenal)
         self.assertNotIn("El historial de campañas y accesos se retiró", arsenal)
 
     def test_barfender_vod_durations_are_not_added_as_watch_time(self):
