@@ -270,7 +270,7 @@ test.describe('Auditoría de métricas normalizadas del Roster', () => {
   test('el selector y el expediente consumen el estado y el promedio normalizados', async ({ page }) => {
     await openRosterWithFixture(page);
     const card = page.locator('.comic-roster-card[data-creator-id="moriartys"]');
-    await expect(card.locator('.comic-roster-activity')).toHaveText('EN DIRECTO');
+    await expect(card.locator('.comic-roster-activity')).toHaveText('EN VIVO');
     await expect(card.locator('.roster-selector-tile-live')).toContainText('EN DIRECTO');
     await expect(card.locator('.comic-roster-stat-average b')).toHaveText('10');
     await expect(card.locator('.comic-roster-brand-slots')).toContainText('Horas en directo');
