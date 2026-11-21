@@ -5984,3 +5984,178 @@ main .chapter-panel :where(.chapter-cta, .executive-button, .comic-submit-btn,
 @media(max-width:600px){
  #chapter-11.comic-page::before{inset:0}
 }
+
+
+/* QA responsive · Estadísticas: el detalle técnico conserva scroll propio
+   sin ensanchar el capítulo ni el documento en resoluciones menores. */
+#chapter-3 .stats-methodology {
+  min-width: 0;
+  max-width: 100%;
+}
+#chapter-3 .stats-methodology .stats-table-wrap {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+}
+#chapter-3 .stats-methodology .stats-table {
+  width: max-content;
+  min-width: 700px;
+}
+
+
+/* QA responsive · correcciones reales detectadas en mobile (390/360 px). */
+@media (max-width: 600px) {
+  /* Capítulo 04 · la marca circular y las tarjetas deben respetar el ancho
+     disponible del grid, sin conservar mínimos intrínsecos de escritorio. */
+  #chapter-3 .impact-hero,
+  #chapter-3 .impact-hero-copy,
+  #chapter-3 .impact-story-grid,
+  #chapter-3 .impact-story-card {
+    min-width: 0;
+    max-width: 100%;
+  }
+  #chapter-3 .impact-story-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  #chapter-3 .impact-story-card {
+    width: 100%;
+  }
+  #chapter-3 .impact-hero-mark {
+    justify-self: start;
+    margin-inline: 0;
+  }
+
+  /* Capítulo 12 · Colaboraciones: el hero editorial pasa a una columna
+     y la figura no suma ancho por su rotación/sombra en pantallas estrechas. */
+  #chapter-12.collaboration-chapter .collab-cover {
+    grid-template-columns: minmax(0, 1fr);
+    min-width: 0;
+    padding: 18px;
+  }
+  #chapter-12.collaboration-chapter .collab-cover-copy,
+  #chapter-12.collaboration-chapter .collab-cover-art {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+  #chapter-12.collaboration-chapter .collab-cover-art {
+    transform: none;
+  }
+  #chapter-12.collaboration-chapter .collab-cover-art figcaption,
+  #chapter-12.collaboration-chapter .collab-cover-art strong {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+}
+
+
+/* QA responsive · segunda pasada mobile: títulos, sellos y tarjetas. */
+@media (max-width: 600px) {
+  #chapter-12.collaboration-chapter .collab-cover h2 span {
+    display: inline-block;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+  #chapter-12.collaboration-chapter .collab-cover-art strong {
+    display: block;
+    max-width: 100%;
+    font-size: clamp(.9rem, 3.8vw, 1.1rem);
+    line-height: 1.2;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+  #chapter-9 .belonging-path-grid {
+    width: 100%;
+    min-width: 0;
+    margin-inline: 0;
+    grid-template-columns: minmax(0, 1fr);
+  }
+  #chapter-9 .belonging-path-card {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+}
+
+
+@media (max-width: 600px) {
+  /* El total de VOD está fuera de la figura; se adapta como bloque propio. */
+  #chapter-12 .vod-total {
+    min-width: 0;
+    width: 100%;
+    max-width: 100%;
+  }
+  #chapter-12 .vod-total strong {
+    display: block;
+    max-width: 100%;
+    font-size: clamp(.85rem, 3.6vw, 1rem);
+    line-height: 1.2;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+  #chapter-12 .vod-total span {
+    display: block;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+}
+
+
+@media (max-width: 600px) {
+  /* El expediente BarFender y las secciones siguientes deben usar el ancho
+     real del panel; se eliminan mínimos intrínsecos de escritorio. */
+  #chapter-12 > section,
+  #chapter-12 .campaign-feature,
+  #chapter-12 .campaign-vods,
+  #chapter-12 .campaign-clips,
+  #chapter-12 .collab-intro {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    margin-inline: 0;
+    box-sizing: border-box;
+  }
+  #chapter-12 .campaign-feature-head {
+    flex-wrap: wrap;
+    min-width: 0;
+  }
+  #chapter-12 .campaign-summary-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  #chapter-12 .campaign-summary-copy,
+  #chapter-12 .campaign-roster {
+    min-width: 0;
+    max-width: 100%;
+  }
+}
+
+
+@media (max-width: 600px) {
+  #chapter-12 .campaign-feature-head > div:first-child {
+    flex: 1 1 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+  #chapter-12 .campaign-edition {
+    flex: 0 1 auto;
+    min-width: 0;
+    max-width: 100%;
+  }
+  #chapter-12 .collab-next {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+  #chapter-12 .collab-next > div:first-child,
+  #chapter-12 .collab-next-stamp {
+    min-width: 0;
+    width: 100%;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+}

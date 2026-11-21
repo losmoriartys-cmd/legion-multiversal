@@ -3570,3 +3570,69 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **Causa raíz identificada:** la regla global `.comic-page::before` usa `inset:-15%`. En el panel `#chapter-11` de 390 px, el pseudo-elemento se extendía 51 px por cada lado (442 px de ancho calculado), superando los 340 px del área interna. El contenido real y los controles no eran los causantes.
 - **Corrección aplicada en este commit:** dentro de `@media(max-width:600px)`, `#chapter-11.comic-page::before` pasa a `inset:0`. Se conserva el tramado y el movimiento editorial; solo se evita que la capa decorativa sobresalga del panel en móvil. No se añadió `overflow-x:hidden`, no se ocultó el defecto y no se relajó la aserción.
 - **Pendiente obligatorio:** ejecutar de nuevo Playwright y los workflows asociados sobre el nuevo HEAD; confirmar overflow cero y revisar capturas. El PR no está aprobado ni fusionado hasta que las pruebas estén verdes.
+
+
+## 2026-11-21 · Infraestructura QA común de capítulos (PR independiente)
+
+- **Base:** main después de integrar PR #84 (commit 6d4b99f61683e24888c176afcc5c9b1a67d44557).
+- **Objetivo:** centralizar un contrato responsive y de navegación para todos los capítulos, sin sustituir pruebas específicas.
+- **Cobertura inicial:** 12 IDs de capítulos (0, 1, 2, 3, 11, 9, 10, 8, 12, 5, 6, 13), cinco viewport (1440, 1024, 768, 390 y 360 px), switchChapter, overflow panel/documento, reduced motion, errores JS y navegación.
+- **Archivos:** tests/browser/helpers/chapter-qa.js, tests/browser/chapter-common-qa.spec.js, .github/workflows/qa-comun-capitulos.yml, docs/QA_COMUN_CAPITULOS.md.
+- **Validación:** PR recién abierto; CI y Playwright quedan pendientes. No se declara validado ni integrado.
+- **Límites:** esta primera suite no reemplaza QA semántico/WCAG completo, contratos de datos ni pruebas funcionales particulares. PASS, FAIL y BLOCKED se documentan; un entorno bloqueado no equivale a aprobado.
+
+
+- **Diagnóstico CI inicial PR #85:** el workflow común falló antes de ejecutar Playwright porque `actions/setup-node` configuró caché npm, pero el repositorio no tiene lockfile (`package-lock.json`/`npm-shrinkwrap.json`/`yarn.lock`); el paso `npm ci` tampoco era válido para este repo. Se corrigió el workflow para quitar la caché de lockfile y usar `npm install`, alineado con el workflow existente. La suite de capítulos todavía debe ejecutarse y aprobar; esta corrección no se considera validación final.
+
+
+## 2026-11-21 — Diagnóstico y corrección de Playwright común (PR #85)
+
+- **Ejecución analizada:** GitHub Actions run 44937518200, merge SHA `7b3a17cbdee00d05dcb83b21027197192d7c2c42`; Playwright Chromium se instaló correctamente, pero la suite terminó con 6 fallos.
+- **Hallazgo exacto:** los cinco fallos responsive procedían de `#chapter-3` (Estadísticas). El elemento que expandía el capítulo era `.stats-table` dentro de `.stats-table-wrap`: la tabla tiene un ancho mínimo deliberado para conservar nueve columnas legibles, pero el contenedor/details no impedía que su tamaño intrínseco ensanchara el capítulo. Se acota el details y el wrapper a 100%, con `min-width:0` y scroll horizontal interno; la tabla conserva su ancho mínimo y sus columnas.
+- **Distinción de comportamiento:** el scroll horizontal de la tabla técnica es intencional y queda confinado a su wrapper. El ancho del documento sigue siendo una aserción estricta contra el viewport; no se permite overflow global.
+- **Portada `#chapter-0`:** el registro detectó 313 px frente a 310 px internos en el panel a 360 px, pero el documento midió exactamente 360 px y no se detectaron descendientes fuera del panel. Se admite un margen interno máximo de 4 px para redondeo de borde/padding, sin relajar la comprobación global.
+- **Selector ambiguo:** se reemplazó `page.locator('header')` (siete coincidencias) por `page.locator('body > header').first()`, que apunta al encabezado global.
+- **Pendiente de esta corrección:** repetir Playwright en los cinco viewports, revisar recorrido y errores JavaScript y registrar el resultado real. No declarar aprobación hasta que la nueva ejecución termine en verde.
+
+
+## 2026-11-21 — Segunda iteración Playwright PR #85
+
+- **Run:** 44938334249, SHA `ccf79e977b06d5af79729571b5811c8ec5afac1f`.
+- **Resultado:** la navegación completa pasó y el selector global quedó corregido. Los cinco recorridos responsive aún fallaron porque la aserción medía `scrollWidth` del panel, que incluye el ancho intrínseco de contenido desplazable anidado aunque el wrapper de tabla esté contenido y el documento no se desborde.
+- **Ajuste de criterio:** el QA ahora inspecciona las regiones con scroll horizontal, exige que sus cajas visibles estén dentro del panel, exige que ningún elemento visible escape del panel y mantiene estricta la condición `documentWidth <= viewportWidth`. No se relaja el límite global ni se oculta el scroll accesible de la tabla.
+- **Pendiente:** nueva ejecución completa; revisar posibles fallos de geometría o errores JavaScript que aparezcan.
+
+
+- **Tercera iteración:** la tabla quedó efectivamente confinada: en desktop-wide su wrapper mide 1144 px y su contenido desplazable 1722 px, con el wrapper completamente dentro del capítulo; el documento conserva 1440 px. El inspector todavía clasificaba las celdas de la tabla como elementos desbordados aunque estaban dentro del scrollport intencional. Se corrige el diagnóstico para excluir del chequeo geométrico a los descendientes de regiones `overflow-x:auto/scroll`, manteniendo la validación de que el propio scrollport esté contenido y que el documento no exceda el viewport.
+
+
+## 2026-11-21 — Cuarta iteración Playwright: fallos reales en mobile
+
+- **Run:** 44938825695, SHA `36392194ad091a1124ce6f6c3c110d2c31315183`.
+- **Resultado:** 4 de 6 pruebas pasaron (desktop-wide, desktop, tablet y navegación general); fallaron mobile 390 y mobile-small 360.
+- **Capítulo 12 · Colaboraciones:** `.collab-cover-copy` y `.collab-cover-art` excedían el borde del panel; el sello/figcaption y la rotación de la figura contribuían al ancho. Se cambia el hero a una columna en móvil, se limita el ancho de copia/figura y se elimina la rotación solo en ese breakpoint.
+- **Capítulo 04 · Estadísticas:** a 360 px, `.impact-hero-mark` y las tarjetas `.impact-story-card` sobresalían del borde interno del capítulo. Se limita el ancho mínimo de los grids/tarjetas y se alinea la marca circular al inicio en móvil pequeño.
+- **Estado:** correcciones CSS aplicadas en esta rama. Nueva corrida pendiente; aún no se declara aprobación.
+
+
+## 2026-11-21 — Quinta iteración Playwright: desbordamientos de contenido en mobile
+
+- **Run:** 44938963667, SHA `1c9d29aab85daad7b6fb120e7d590f9ebaa1c110`.
+- **Resultado:** desktop-wide, desktop, tablet y navegación completa pasaron; fallaron mobile y mobile-small.
+- **Capítulo 12 · Colaboraciones:** quedaron dos nodos tipográficos fuera del ancho: el tramo «SE ENCUENTRAN.» del título y el rótulo «3 VOD DE ~1 H 14 MIN» dentro de la figura. Se habilita ajuste de línea y tamaño fluido para esos elementos.
+- **Capítulo 09 · Comunidad:** las tres tarjetas `.belonging-path-card` superaban el límite interno del panel en mobile-small. Se fuerza una única columna con ancho mínimo cero y tarjetas limitadas al ancho disponible.
+- **Estado:** correcciones aplicadas; falta repetir los cinco viewports y confirmar que no aparezcan otros desbordamientos.
+
+
+- **Sexta iteración:** Comunidad y Estadísticas ya superan los chequeos en mobile/mobile-small. Colaboraciones conserva un único desbordamiento: `.vod-total strong` («3 VOD DE ~1 H 14 MIN»), que está fuera de `.collab-cover-art`; por eso la regla anterior no lo alcanzaba. Se aplica la corrección al selector real `#chapter-12 .vod-total`, con ajuste de línea y ancho acotado.
+
+
+## 2026-11-21 — Validación integrada detecta caso adicional en 360 px
+
+- **Ejecución:** workflow general `Validar código y datos del sitio`, run 44939288024, sobre la revisión que ya había pasado el QA común aislado.
+- **Resultado general:** 37 pruebas Playwright pasaron; una falló. El test común, al ejecutarse junto con toda la suite, detectó un desbordamiento adicional en `#chapter-12` a 360 px dentro del expediente BarFender. El documento seguía midiendo 360 px, pero el bloque `.campaign-feature` y secciones descendientes excedían el ancho interior del panel.
+- **Corrección:** se limita el ancho de las secciones y del expediente BarFender al 100% del panel, se elimina el mínimo intrínseco y se permite que el encabezado del caso y su resumen se reorganicen en móvil.
+- **Importancia:** el QA aislado de 6/6 no reemplaza la ejecución conjunta. Se repetirá tanto el workflow común como la suite general para verificar que la corrección resista concurrencia y contexto integrado.
+
+
+- **Séptima iteración integrada:** la nueva traza aisló dos elementos internos del Capítulo 12 que todavía conservaban su ancho de escritorio a 360 px: el bloque de texto del encabezado de BarFender dentro de `.campaign-feature-head` y el cierre `.collab-next`. Se limita el primer bloque a una fila flexible al 100% y el cierre pasa a una columna con ancho mínimo cero. El documento no presenta overflow global.
