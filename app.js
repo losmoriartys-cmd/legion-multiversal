@@ -4,17 +4,17 @@ let creatorNameRegistry = {};
 let epicCreatorPrograms = null;
 
 async function loadRosterData() {
-    const response = await fetch('./roster-data.json', { cache: 'no-store' });
-    if (!response.ok) throw new Error('No se pudo cargar roster-data.json (' + response.status + ').');
+    const response = await fetch('./data/roster.json', { cache: 'no-store' });
+    if (!response.ok) throw new Error('No se pudo cargar data/roster.json (' + response.status + ').');
     const payload = await response.json();
     if (!payload || !Array.isArray(payload.heroes) || payload.heroes.length === 0) {
-        throw new Error('roster-data.json no contiene integrantes válidos.');
+        throw new Error('data/roster.json no contiene integrantes válidos.');
     }
     const identifiers = new Set();
     for (const hero of payload.heroes) {
         const identifier = hero && (hero.id || hero.slug);
         if (!identifier || identifiers.has(identifier)) {
-            throw new Error('roster-data.json contiene un integrante sin identificador o con ID duplicado.');
+            throw new Error('data/roster.json contiene un integrante sin identificador o con ID duplicado.');
         }
         identifiers.add(identifier);
     }

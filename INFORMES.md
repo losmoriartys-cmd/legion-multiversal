@@ -21,19 +21,29 @@
 
 ### BASE-01 · Una sola fuente de datos organizada en data/
 
-#### Corte inicial en curso · BASE-01A — Registro maestro de juegos
-- [ ] Migrar el registro maestro desde `games.json` a `data/games.json` sin alterar sus 18 juegos, 10 sesiones BIT, 11 POV ni la referencia `EXP-001` de BarFender.
-- [ ] Actualizar consumidores del Arsenal y Colaboraciones, validador, contratos automatizados y filtros del workflow para leer la nueva ruta.
-- [ ] Ejecutar CI y comprobar que ningún consumidor activo siga dependiendo de la ruta antigua antes de integrar.
-- **Estado:** [PR #90](https://github.com/losmoriartys-cmd/legion-multiversal/pull/90) listo para revisión; equivalencia de datos y rutas de consumo verificadas.
-- **CI:** GitHub Actions SUCCESS en validación integral, Python tests y QA común Playwright; preview Cloudflare Pages SUCCESS (preview, no producción).
-- **SHA evaluado:** `875c509925d76ca515ad30bc59c4e63d7bc63c51`. Sin integración en `main`.
-- [ ] Diseñar y documentar la estructura canónica data/ para roster, juegos, horarios declarados, enlaces y referencias audiovisuales. Evitar duplicar campos cuando los horarios deban seguir formando parte del perfil del creador.
+#### Corte integrado · BASE-01A — Registro maestro de juegos
+- [x] Migrar `games.json` a `data/games.json`, conservando exactamente 18 juegos, 10 sesiones BIT, 11 POV y BarFender `EXP-001` (sin sesiones BIT).
+- [x] Actualizar Arsenal, Colaboraciones, validador, contratos de pruebas y workflow para consumir la ruta canónica.
+- [x] CI integral, Python tests y Playwright completados con SUCCESS; preview Cloudflare SUCCESS.
+- **Estado:** PR #90 integrado en `main` el 21/11/2026. Merge SHA: `d9dccc09ae7e850984b11d519989445808bb9a4d`.
+- [x] Diseñar y documentar la estructura canónica `data/` para Roster, juegos, horarios declarados, enlaces y referencias audiovisuales; los horarios se conservan dentro del perfil cuando son editoriales.
 - [ ] Migrar los datos existentes de forma controlada desde los JSON de raíz, manteniendo un único origen por entidad y actualizando consumidores, colectores, páginas, scripts y tests.
 - [ ] Conservar IDs canónicos estables para cada creador, juego, sesión BIT, expediente EXP, VOD y clip; no resolver relaciones por nombres visibles.
 - [ ] Definir compatibilidad de migración y retirar las rutas antiguas solo después de comprobar que ningún consumidor las utiliza.
 
 **Aceptación:** un dato se edita en un único lugar; el sitio, los colectores y las páginas generadas leen esa fuente; no quedan copias paralelas ni rutas rotas.
+
+#### Corte en implementación · BASE-01B — Roster canónico
+
+- [x] Reconciliar PR #81: cerrado como supersedido; la consolidación de pestañas ya está integrada por la evolución posterior del Roster (PR #83).
+
+- [ ] Migrar `roster-data.json` a `data/roster.json` conservando los bytes originales, los ocho IDs, slugs, cuentas, enlaces, horarios, imágenes y datos editoriales.
+
+- [ ] Actualizar aplicación, cargador compartido, Bitácora pública, kit de medios, colectores, validadores, generador de métricas, tests y workflows.
+
+- [ ] Retirar la ruta raíz y comprobar que no quedan consumidores activos de `roster-data.json`.
+
+- **Estado:** implementación preparada en `feat/base-01b-roster-data`; PR y CI pendientes.
 
 ### BASE-02 · Esquemas y validación que bloqueen publicaciones inválidas
 - [ ] Completar esquemas JSON para todos los documentos de data/: roster, juegos, horarios, enlaces, sesiones, VOD y clips, con campos obligatorios, opcionales y reglas de null explícitas.

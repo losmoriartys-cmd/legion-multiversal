@@ -2,7 +2,7 @@ import json, os, urllib.parse, urllib.request, urllib.error, time
 from email.utils import parsedate_to_datetime
 from datetime import datetime, timezone, timedelta
 
-ROSTER="roster-data.json"
+ROSTER="data/roster.json"
 OUTPUT="platform-stats.json"
 
 def load_creator_accounts():

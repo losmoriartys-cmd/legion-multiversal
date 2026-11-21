@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "nota": "Registro maestro compartido por Arsenal (capítulo 08) y Colaboraciones (capítulo 07). Hay un único registro por juego. Participantes y canales usan los IDs canónicos de roster-data.json. Los datos no verificados permanecen en null.",
+  "nota": "Registro maestro compartido por Arsenal (capítulo 08) y Colaboraciones (capítulo 07). Hay un único registro por juego. Participantes y canales usan los IDs canónicos de data/roster.json. Los datos no verificados permanecen en null.",
   "juegos": [
     {
       "id": "mimic-party",

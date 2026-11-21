@@ -14,7 +14,7 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parents[1]
-ROSTER = ROOT / "roster-data.json"
+ROSTER = ROOT / "data/roster.json"
 ACTIVITY = ROOT / "data.json"
 PLATFORM_STATS = ROOT / "platform-stats.json"
 SUPPORTED_PLATFORMS = {"twitch", "youtube", "instagram", "kick"}
@@ -30,16 +30,16 @@ def read_json(path: Path):
 def validate_roster(roster: dict) -> list[str]:
     errors: list[str] = []
     if roster.get("schema_version") != 2:
-        errors.append("roster-data.json debe usar schema_version=2.")
+        errors.append("data/roster.json debe usar schema_version=2.")
     if roster.get("identity_model_version") != 1:
         errors.append("identity_model_version debe ser 1.")
     heroes = roster.get("heroes")
     if not isinstance(heroes, list) or not heroes:
-        return errors + ["No hay integrantes en roster-data.json."]
+        return errors + ["No hay integrantes en data/roster.json."]
 
     registry = roster.get("name_registry")
     if not isinstance(registry, dict):
-        errors.append("roster-data.json debe incluir name_registry con nombres canónicos.")
+        errors.append("data/roster.json debe incluir name_registry con nombres canónicos.")
         registry = {}
     expected_registry_ids = {hero.get("id") for hero in heroes if hero.get("id")}
     if set(registry) != expected_registry_ids:

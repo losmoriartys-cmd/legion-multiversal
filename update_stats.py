@@ -9,7 +9,7 @@ from datetime import datetime, timedelta, timezone
 
 CLIENT_ID = os.environ.get("TWITCH_CLIENT_ID")
 CLIENT_SECRET = os.environ.get("TWITCH_CLIENT_SECRET")
-ROSTER_FILE = "roster-data.json"
+ROSTER_FILE = "data/roster.json"
 WINDOW_DAYS = 30
 HISTORY_DAYS = 180
 
@@ -29,12 +29,12 @@ def load_active_channels():
             login = str(account.get("login") or "").strip().lower()
             url = urllib.parse.urlparse(str(account.get("url") or ""))
             if not login or url.scheme != "https" or url.hostname not in {"twitch.tv", "www.twitch.tv"}:
-                raise RuntimeError("Cuenta Twitch inválida en roster-data.json para {}.".format(hero.get("id") or hero.get("name")))
+                raise RuntimeError("Cuenta Twitch inválida en data/roster.json para {}.".format(hero.get("id") or hero.get("name")))
             logins.append(login)
     if not logins:
-        raise RuntimeError("No hay canales Twitch registrados en roster-data.json.")
+        raise RuntimeError("No hay canales Twitch registrados en data/roster.json.")
     if len(logins) != len(set(logins)):
-        raise RuntimeError("Hay logins Twitch duplicados en roster-data.json.")
+        raise RuntimeError("Hay logins Twitch duplicados en data/roster.json.")
     return sorted(logins)
 SAMPLE_INTERVAL_MINUTES = 55
 DATA_FILE = "data.json"

@@ -157,11 +157,11 @@
     try {
       const results = await Promise.all([
         fetch('./data/games.json', { cache: 'no-store' }),
-        fetch('./roster-data.json', { cache: 'no-store' }),
+        fetch('./data/roster.json', { cache: 'no-store' }),
         fetch('./data.json', { cache: 'no-store' }).catch(function () { return null; })
       ]);
       if (!results[0].ok) throw new Error('No se pudo cargar games.json (' + results[0].status + ').');
-      if (!results[1].ok) throw new Error('No se pudo cargar roster-data.json (' + results[1].status + ').');
+      if (!results[1].ok) throw new Error('No se pudo cargar data/roster.json (' + results[1].status + ').');
       const registry = await results[0].json();
       const roster = await results[1].json();
       if (!registry || !Array.isArray(registry.juegos) || !Array.isArray(roster.heroes)) throw new Error('El registro maestro o el Roster no tiene la estructura esperada.');

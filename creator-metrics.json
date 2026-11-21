@@ -2,7 +2,7 @@
   "schema_version": 2,
   "generated_at": "2026-11-21T21:24:20Z",
   "source_files": {
-    "identity": "roster-data.json",
+    "identity": "data/roster.json",
     "twitch": "data.json",
     "platforms": "platform-stats.json",
     "clips": "clips-data.json",

@@ -68,7 +68,7 @@ function makeMetricsFixture() {
   return {
     schema_version: 2,
     generated_at: CAPTURED_AT,
-    source_files: ['roster-data.json', 'data.json', 'platform-stats.json'],
+    source_files: ['data/roster.json', 'data.json', 'platform-stats.json'],
     source_snapshot: {},
     methodology: {},
     creators
@@ -309,7 +309,7 @@ test.describe('Auditoría de métricas normalizadas del Roster', () => {
       Object.entries(registry.creators).forEach(([creatorId, creator]) => {
         const hero = heroesData.find(item => item.id === creatorId);
         if (!hero) {
-          errors.push(creatorId + ': no existe en roster-data.json');
+          errors.push(creatorId + ': no existe en data/roster.json');
           return;
         }
         (creator.metrics || []).forEach(metric => {

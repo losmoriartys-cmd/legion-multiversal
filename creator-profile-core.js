@@ -5,7 +5,7 @@
   'use strict';
 
   const FILES = Object.freeze({
-    roster: './roster-data.json',
+    roster: './data/roster.json',
     records: './creator-records.json',
     metrics: './creator-metrics.json',
     platforms: './platform-stats.json',
@@ -87,7 +87,7 @@
     }));
     if (requested.includes('roster')) {
       if (!selected.roster || !Array.isArray(selected.roster.heroes)) {
-        throw new Error('roster-data.json no contiene una lista válida de expedientes.');
+        throw new Error('data/roster.json no contiene una lista válida de expedientes.');
       }
       const ids = new Set();
       selected.roster.heroes.forEach(hero => {

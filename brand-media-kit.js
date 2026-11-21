@@ -34,7 +34,7 @@
       if (!response.ok) throw new Error("activity");
       return response.json();
     }),
-    fetch("../roster-data.json", { cache: "no-store" }).then((response) => {
+    fetch("../data/roster.json", { cache: "no-store" }).then((response) => {
       if (!response.ok) throw new Error("roster");
       return response.json();
     })

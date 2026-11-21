@@ -8,7 +8,7 @@ from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parents[1]
 CLIPS = ROOT / "clips-data.json"
-ROSTER = ROOT / "roster-data.json"
+ROSTER = ROOT / "data/roster.json"
 VALID_STATUSES = {"awaiting_collection", "ok", "empty", "error"}
 
 
@@ -43,7 +43,7 @@ def validate(clips, roster):
             errors.append("{}: el expediente debe ser un objeto.".format(creator_id))
             continue
         if record.get("login", "").lower() != expected.get(creator_id):
-            errors.append("{}: login no coincide con roster-data.json.".format(creator_id))
+            errors.append("{}: login no coincide con data/roster.json.".format(creator_id))
         if record.get("status") not in VALID_STATUSES:
             errors.append("{}: estado de clips inválido.".format(creator_id))
         clips_list = record.get("clips")

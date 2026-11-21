@@ -6,9 +6,13 @@ Esta carpeta contiene las fuentes maestras de contenido estructurado. Cada entid
 
 - `games.json` (ruta anterior, retirada al integrar este corte) → **`data/games.json`**: catálogo de juegos, sesiones BIT, participantes, POV y enlaces de VOD. El esquema se mantiene en `schemas/games.schema.json`.
 
+## Fuentes canónicas migradas
+
+- **`data/games.json`**: catálogo de juegos, sesiones BIT, participantes, POV y enlaces audiovisuales.
+- **`data/roster.json`**: identidad canónica, ocho perfiles, cuentas por plataforma, enlaces y horarios declarados. La ruta raíz `roster-data.json` queda retirada.
+
 ## Siguientes cortes de BASE-01
 
-- `data/roster.json`: identidad canónica, perfiles, cuentas, enlaces y horarios declarados. La migración se hará después de reconciliar los consumidores compartidos con los PR de Roster que estén abiertos.
 - `data/clips.json`: índice editorial de clips y sus referencias canónicas.
 - Los archivos de métricas observadas y salidas de colectores seguirán separados de los datos editoriales: son capturas generadas, no una segunda fuente de identidad o de sesiones.
 

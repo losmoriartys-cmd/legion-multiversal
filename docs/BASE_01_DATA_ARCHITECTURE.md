@@ -22,7 +22,7 @@ Los resultados de colectores (Twitch, YouTube, Kick y métricas normalizadas) so
 ## Secuencia segura de migración
 
 1. **BASE-01A — Juegos:** mover `games.json` a `data/games.json`; actualizar Arsenal, Colaboraciones, validador, tests y CI. Conservar exactamente los 18 juegos, 10 sesiones BIT, 11 POV y EXP-001.
-2. **BASE-01B — Roster:** mover `roster-data.json` a `data/roster.json` después de integrar o reconciliar PR de Roster que toquen sus consumidores; actualizar sitio, colectores y contratos sin cambiar los ocho perfiles.
+2. **BASE-01B — Roster:** corte implementado en la rama `feat/base-01b-roster-data`: se mueve `roster-data.json` a `data/roster.json`; se actualizan sitio, colectores, validador, métricas, tests y workflows sin cambiar los ocho perfiles. Falta CI/revisión/merge.
 3. **BASE-01C — Clips y expedientes:** normalizar referencias de clips y los expedientes comerciales; mantener la separación BIT/EXP y evitar duplicar metadatos.
 4. **BASE-01D — Instantáneas:** revisar rutas de los datos generados y sus automatizaciones, sin convertir métricas observadas en datos editoriales canónicos.
 

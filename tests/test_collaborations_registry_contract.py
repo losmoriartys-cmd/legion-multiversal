@@ -15,7 +15,7 @@ class CollaborationsRegistryContractTests(unittest.TestCase):
         self.assertIn('src="./games-registry.js?v=20261121-collab-registry-1"', HTML)
         self.assertIn("fetch('./data/games.json'", SCRIPT)
         self.assertIn("./styles.css?v=20261121-arsenal-registry-1", HTML)
-        self.assertIn("fetch('./roster-data.json'", SCRIPT)
+        self.assertIn("fetch('./data/roster.json'", SCRIPT)
         self.assertIn("fetch('./data.json'", SCRIPT)
 
     def test_registry_controls_and_live_results_are_accessible(self):

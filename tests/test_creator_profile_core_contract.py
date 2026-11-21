@@ -23,7 +23,7 @@ class SharedCreatorProfileContractTests(unittest.TestCase):
         self.assertIn("creator-profile-core.js", html)
         self.assertIn("LegionCreatorProfiles.load", html)
         self.assertIn("bundle.getCreator(hero)", html)
-        self.assertNotIn("Promise.all(['roster-data.json','creator-records.json','data.json']", html)
+        self.assertNotIn("Promise.all(['data/roster.json','creator-records.json','data.json']", html)
 
     def test_main_roster_data_consumers_use_shared_loader(self):
         app = (ROOT / "app.js").read_text(encoding="utf-8")

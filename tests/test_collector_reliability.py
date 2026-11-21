@@ -55,7 +55,7 @@ class HttpRetryContractTests(unittest.TestCase):
 
     def test_committed_twitch_source_satisfies_status_freshness_contract(self):
         root = Path(__file__).resolve().parents[1]
-        roster = json.loads((root / "roster-data.json").read_text(encoding="utf-8"))
+        roster = json.loads((root / "data/roster.json").read_text(encoding="utf-8"))
         activity = json.loads((root / "data.json").read_text(encoding="utf-8"))
         self.assertEqual(validate_activity(roster, activity), [])
 
