@@ -59,6 +59,8 @@ jobs:
           done
       - name: Validar modelo del roster y cobertura Twitch
         run: python scripts/validate_roster_data.py --check-activity --check-platforms
+      - name: Validar registro maestro de juegos
+        run: python scripts/validate_games_registry.py
       - name: Comprobar índice accesible sin JavaScript
         run: python scripts/render_roster_noscript.py --check
       - name: Instalar Pillow para medir imágenes
@@ -143,7 +145,7 @@ jobs:
           python scripts/audit_image_references.py --root /tmp/image-audit-0d578a0 --output reports/image-audit/0d578a0.md
           python scripts/audit_image_references.py --root . --output reports/image-audit/main.md
       - name: Compilar colectores Python
-        run: python -m py_compile scripts/audit_image_references.py update_stats.py update_platform_stats.py update_clips.py scripts/validate_roster_data.py scripts/validate_clips_data.py scripts/render_roster_noscript.py scripts/validate_metric_history.py scripts/build_creator_metrics.py scripts/validate_creator_metrics.py scripts/growth_analytics.py scripts/validate_creator_records.py scripts/bootstrap_twitch_followers_oauth.py scripts/audit_and_optimize_images.py scripts/optimize_logo.py scripts/optimize_hero_image.py scripts/add_image_dimensions.py scripts/summarize_lighthouse.py scripts/lh_failures.py
+        run: python -m py_compile scripts/audit_image_references.py update_stats.py update_platform_stats.py update_clips.py scripts/validate_roster_data.py scripts/validate_games_registry.py scripts/validate_clips_data.py scripts/render_roster_noscript.py scripts/validate_metric_history.py scripts/build_creator_metrics.py scripts/validate_creator_metrics.py scripts/growth_analytics.py scripts/validate_creator_records.py scripts/bootstrap_twitch_followers_oauth.py scripts/audit_and_optimize_images.py scripts/optimize_logo.py scripts/optimize_hero_image.py scripts/add_image_dimensions.py scripts/summarize_lighthouse.py scripts/lh_failures.py
       - name: Ejecutar pruebas unitarias Python del repositorio
         run: python -m unittest discover -s tests -v
       - name: Probar lectura de cuentas por los colectores

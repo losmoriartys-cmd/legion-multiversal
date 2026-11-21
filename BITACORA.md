@@ -184,3 +184,15 @@ Al finalizar cada cambio, registrar: archivos tocados; qué se modificó y por q
 - **CI en el SHA indicado:** [workflow de validación SUCCESS](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/43700512037). 33 pruebas unitarias y 5 pruebas Playwright aprobadas; los validadores de Roster, clips, rutas, imágenes y enlaces finalizaron correctamente.
 - **Pendiente deliberado:** `creator-metrics.json` no se regeneró. Se mantiene como último cambio, después de sincronizar la rama con el `main` más reciente, y requiere su propio ciclo de validación.
 - **Integridad / publicación:** PR #47 sigue Draft; no hubo merge, no se modificó `main`, no se desplegó producción y no se tocaron credenciales.
+
+
+## 2026-11-21 — Registro maestro compartido de juegos · PR 1
+
+- **Archivos nuevos:** `games.json`, `schemas/games.schema.json`, `scripts/validate_games_registry.py`, `tests/test_games_registry.py`.
+- **Archivos actualizados:** `.github/workflows/validar-sitio.yml`, `INFORMES.md`, `BITACORA.md`.
+- **Cambios:** origen único con 18 juegos, 10 sesiones BIT y 11 POV; referencias canónicas al Roster; categorías controladas; plataforma, edición y modalidad separadas; fechas/jugadores/portadas no confirmados en `null`; BarFender separado como `EXP-001`.
+- **Criterios:** el participante no se confunde con el canal POV; Among Us registra cuatro participantes y dos POV; PEAK conserva canal POV sin asignar; Escape the Backrooms reúne la sesión BIT-001 en un solo registro.
+- **Validaciones locales:** 14 pruebas unitarias; validador manual; parseo JSON del catálogo y esquema; compilación Python.
+- **Pendiente:** validar CI del PR y, en PRs posteriores, conectar los capítulos 07 y 08 a este archivo. La tarjeta estática de Backrooms en Arsenal debe sincronizarse con el nuevo registro; no se tocó la interfaz en esta etapa.
+- **Commit:** rama de trabajo; pendiente de CI y revisión.
+- **Despliegue:** no aplica; PR independiente, no integrado.

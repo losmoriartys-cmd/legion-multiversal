@@ -1,3 +1,15 @@
+## 2026-11-21 — PR 1: registro maestro compartido de juegos (Capítulos 07 y 08)
+
+- **Base:** `main` en `6ee6fd3c2d800024f9875f4c1fa375979b264379`; rama `data/shared-games-registry`.
+- **Objetivo:** crear un único origen de datos para Arsenal y Colaboraciones, sin tocar todavía el HTML ni el diseño de esos capítulos.
+- **Implementado:** `games.json` con 18 juegos únicos; 10 sesiones BIT y 11 POV. IDs de participantes y canales enlazan con los IDs canónicos de `roster-data.json`.
+- **Normalización:** categorías controladas; plataformas, ediciones y modalidad en campos independientes; URLs de VOD de Twitch limpias; fechas y datos no verificados expresados con `null`; fuente obligatoria para los rangos de jugadores publicados.
+- **Casos especiales:** Among Us distingue sus cuatro participantes de los dos canales POV; PEAK mantiene el propietario del POV como desconocido; LEGO Batman conserva la nota de primer stream; BarFender queda fuera de las sesiones BIT como expediente comercial `EXP-001`.
+- **Escape the Backrooms:** se consolidan los dos registros de Bitácora bajo el título indicado por el equipo. El registro usa la ficha oficial de Steam App ID `1943950` y su rango de 1–4 jugadores. La tarjeta estática actual del Arsenal aún muestra el antiguo título/enlace de Steam App ID `2141730`; la sincronización de interfaz queda expresamente pendiente del PR del Capítulo 08 y no se modifica en este PR.
+- **Validación local:** validador del registro correcto; 14 pruebas unitarias aprobadas; JSON del catálogo y esquema parseados; script compilado con `py_compile`.
+- **CI:** pendiente de ejecutarse sobre el commit de esta rama.
+- **Alcance:** no cambia `index.html`, `app.js`, CSS ni el contenido visible de los capítulos. No se declara integrado ni desplegado.
+
 ## 2026-11-20 — EN VIVO: la página pasa a ser la de la maqueta aprobada
 
 - **Base:** `main` con el PR #76 integrado.
