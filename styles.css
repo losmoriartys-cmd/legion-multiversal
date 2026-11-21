@@ -5833,3 +5833,137 @@ main .chapter-panel :where(.chapter-cta, .executive-button, .comic-submit-btn,
 .stats-comparison-track .is-peak{background:#ff2bd6}
 .stats-comparison-row>span{text-align:right;color:#aebbd0;font-size:.65rem;font-variant-numeric:tabular-nums}
 @media(max-width:560px){.stats-comparison-row{grid-template-columns:90px minmax(80px,1fr) 68px;gap:6px}.stats-comparison-row>strong,.stats-comparison-row>span{font-size:.58rem}}
+
+
+/* ROSTER · ajuste de cifras y jerarquía tipográfica
+   Mantiene la composición aprobada; evita desbordes en fichas y estadísticas. */
+#hero-profile-page .hero-profile-metric-grid,
+#hero-profile-page .hero-profile-metric-grid > *,
+#hero-profile-page .hero-profile-metric {
+  min-width: 0;
+  max-width: 100%;
+}
+#hero-profile-page .hero-profile-metric {
+  padding: clamp(12px, 1.5vw, 18px);
+  overflow: hidden;
+}
+#hero-profile-page .hero-profile-metric > small {
+  display: block;
+  max-width: 100%;
+  color: #514a3e;
+  font: 800 .72rem/1.35 'Roboto Condensed', sans-serif;
+  letter-spacing: .055em;
+  overflow-wrap: anywhere;
+}
+#hero-profile-page .hero-profile-metric > strong {
+  display: block;
+  max-width: 100%;
+  margin: 7px 0 5px;
+  color: #111;
+  font: 800 clamp(1.35rem, 2.7vw, 2rem)/1.08 'Roboto Condensed', sans-serif;
+  letter-spacing: -.025em;
+  font-variant-numeric: tabular-nums lining-nums;
+  overflow-wrap: anywhere;
+  word-break: normal;
+  white-space: normal;
+}
+#hero-profile-page .hero-profile-metric > span {
+  display: block;
+  max-width: 100%;
+  color: #514a3e;
+  font: 500 .78rem/1.45 'Roboto Condensed', sans-serif;
+  overflow-wrap: anywhere;
+}
+#hero-profile-page .hero-profile-status-grid article {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-variant-numeric: tabular-nums;
+}
+#hero-profile-page .hero-profile-status-grid article strong,
+#hero-profile-page .hero-profile-status-grid article b {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  font-variant-numeric: tabular-nums;
+}
+#hero-profile-page .hero-profile-tab-panel > h4,
+#hero-profile-page .hero-profile-overview h4,
+#hero-profile-page .hero-profile-brand h4,
+#hero-profile-page .comic-profile-ratings h4 {
+  font-size: clamp(1.25rem, 2.2vw, 1.7rem);
+  line-height: 1.12;
+  letter-spacing: .025em;
+  overflow-wrap: anywhere;
+}
+#hero-profile-page .hero-profile-bio,
+#hero-profile-page .hero-profile-method,
+#hero-profile-page .hero-profile-empty,
+#hero-profile-page .hero-profile-detail-list li {
+  font-family: 'Roboto Condensed', sans-serif;
+  line-height: 1.55;
+}
+.stats-dossier-card,
+.stats-dossier-card dl > div {
+  min-width: 0;
+}
+.stats-dossier-card dl > div {
+  overflow: hidden;
+}
+.stats-dossier-card dt {
+  font: 700 .68rem/1.35 'Roboto Condensed', sans-serif;
+  letter-spacing: .025em;
+  overflow-wrap: anywhere;
+}
+.stats-dossier-card dd {
+  max-width: 100%;
+  font: 800 clamp(1.15rem, 2vw, 1.55rem)/1.12 'Roboto Condensed', sans-serif;
+  font-variant-numeric: tabular-nums lining-nums;
+  letter-spacing: -.02em;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+.stats-dossier-identity h5,
+.stats-platform-creator h5 {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 800;
+  letter-spacing: .015em;
+}
+.stats-dossier-status,
+.stats-dossier-schedule,
+.stats-dossier-identity small,
+.stats-dossier-identity a {
+  font-family: 'Roboto Condensed', sans-serif;
+  line-height: 1.45;
+}
+.stats-comparison-row > span {
+  min-width: 0;
+  font: 700 .72rem/1.25 'Roboto Condensed', sans-serif;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 800px) {
+  #hero-profile-page .hero-profile-metric-grid > * {
+    min-width: 0;
+  }
+  #hero-profile-page .hero-profile-metric > strong {
+    font-size: clamp(1.2rem, 4vw, 1.65rem);
+  }
+}
+@media (max-width: 520px) {
+  #hero-profile-page .hero-profile-metric {
+    padding: 11px;
+  }
+  #hero-profile-page .hero-profile-metric > small {
+    font-size: .68rem;
+    letter-spacing: .035em;
+  }
+  #hero-profile-page .hero-profile-metric > strong {
+    font-size: clamp(1.1rem, 5vw, 1.45rem);
+    line-height: 1.12;
+  }
+  #hero-profile-page .hero-profile-metric > span {
+    font-size: .74rem;
+  }
+  .stats-dossier-card dd {
+    font-size: clamp(1.05rem, 4.5vw, 1.35rem);
+  }
+}
