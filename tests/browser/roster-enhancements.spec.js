@@ -35,7 +35,7 @@ test('Roster V3 conserva los ocho expedientes y separa Formación de Colaborador
     if (creatorId !== 'pato-oratoris') await expect(card.locator('.roster-v3-day-strip i')).toHaveCount(17);
     else {
       await expect(card.locator('.roster-v3-metric:last-child')).toContainText('No informado');
-      await expect(card.locator('.comic-roster-activity')).toHaveText('NO APLICA');
+      await expect(card.locator('.comic-roster-activity')).toHaveText('CONTENIDO · YOUTUBE');
       await expect(card.locator('.comic-roster-frequency')).toContainText('NO APLICA');
     }
     await expect(card.locator('.comic-roster-last-live')).toContainText('ÚLTIMO DIRECTO OBSERVADO');
@@ -66,7 +66,7 @@ test('Roster V3 conserva los ocho expedientes y separa Formación de Colaborador
   await page.getByLabel('Filtrar por tema').selectOption('Terror');
   await expect(page.locator('.comic-roster-card:visible')).toHaveCount(1);
   await page.getByLabel('Filtrar por tema').selectOption('all');
-  await page.getByLabel('Ordenar perfiles').selectOption('days');
+  await page.getByLabel('Ordenar perfiles', { exact: true }).selectOption('days');
   await expect(page.locator('.comic-roster-card')).toHaveCount(8);
   expect(errors).toEqual([]);
 });
