@@ -3622,3 +3622,6 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **Capítulo 12 · Colaboraciones:** quedaron dos nodos tipográficos fuera del ancho: el tramo «SE ENCUENTRAN.» del título y el rótulo «3 VOD DE ~1 H 14 MIN» dentro de la figura. Se habilita ajuste de línea y tamaño fluido para esos elementos.
 - **Capítulo 09 · Comunidad:** las tres tarjetas `.belonging-path-card` superaban el límite interno del panel en mobile-small. Se fuerza una única columna con ancho mínimo cero y tarjetas limitadas al ancho disponible.
 - **Estado:** correcciones aplicadas; falta repetir los cinco viewports y confirmar que no aparezcan otros desbordamientos.
+
+
+- **Sexta iteración:** Comunidad y Estadísticas ya superan los chequeos en mobile/mobile-small. Colaboraciones conserva un único desbordamiento: `.vod-total strong` («3 VOD DE ~1 H 14 MIN»), que está fuera de `.collab-cover-art`; por eso la regla anterior no lo alcanzaba. Se aplica la corrección al selector real `#chapter-12 .vod-total`, con ajuste de línea y ancho acotado.
