@@ -2831,7 +2831,12 @@ function printHeroDossier(){
                 }
             }
             const current = document.querySelector('.chapter-panel.active');
-            if (current === panel) return;
+            if (current === panel) {
+                if (typeof options.afterEnter === 'function') {
+                    window.requestAnimationFrame(() => options.afterEnter(panel));
+                }
+                return;
+            }
             const transition = document.getElementById('chapter-transition');
             const chapterName = (document.querySelector('.nav-btn[data-chapter="' + chapterNum + '"]') || {}).textContent || panel.querySelector('h2')?.textContent || 'NUEVO EXPEDIENTE';
             const readableChapterName = chapterName.replace(/\s+/g, ' ').trim();
@@ -2866,6 +2871,18 @@ function printHeroDossier(){
                 }));
             } else {
                 window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+            }
+            // Los enlaces entre registros esperan a que termine la animación de entrada del capítulo.
+            if (typeof options.afterEnter === 'function') {
+                const entranceAnimations = typeof panel.getAnimations === 'function'
+                    ? panel.getAnimations().filter(animation => animation.effect?.target === panel && animation.playState === 'running')
+                    : [];
+                const revealTarget = () => window.requestAnimationFrame(() => options.afterEnter(panel));
+                if (entranceAnimations.length) {
+                    Promise.allSettled(entranceAnimations.map(animation => animation.finished)).then(revealTarget);
+                } else {
+                    revealTarget();
+                }
             }
         }
         const rosterContainer = document.getElementById('roster-container');
