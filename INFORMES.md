@@ -1,3 +1,276 @@
+# HOJA DE RUTA VIVA · EVOLUCIÓN Y PROTECCIÓN DE LEGIÓN MULTIVERSAL
+**Actualización:** 21/11/2026 · **Tablero de seguimiento:** esta hoja se mantiene al comienzo de INFORMES.md.
+
+> **Regla de cierre:** una tarea solo pasa a [x] cuando su implementación está integrada en main, sus pruebas aplicables terminan correctamente y se verifica el resultado publicado cuando corresponda. Un cambio en una rama, un preview o un workflow todavía en curso no cuenta como terminado. Cada cierre debe enlazar el PR, el SHA y la evidencia de validación.
+
+## Estado actual reutilizable · ya existe y no debe reconstruirse desde cero
+
+- [x] **Registro maestro de juegos:** games.json, schemas/games.schema.json y scripts/validate_games_registry.py; 18 juegos, 10 sesiones BIT y 11 POV. La Bitácora y el Arsenal consumen ese mismo origen.
+- [x] **Identidad del Roster:** roster-data.json, schemas/roster-data.schema.json y validaciones existentes; el selector público contempla ocho perfiles.
+- [x] **Infraestructura QA común:** Playwright verifica 12 IDs de capítulos y cinco anchos (1440, 1024, 768, 390 y 360 px), navegación y overflow.
+- [x] **Validación general y QA portable:** existen workflows para contratos Python, JSON, sintaxis, imágenes, accesibilidad estática, enlaces/anclas y publicación de evidencias.
+- [x] **Colector de clips públicos:** update_clips.py consulta Twitch Helix, conserva metadatos y una ventana de historial de vistas. Su extensión para clips por sesión, feeds y relación con VOD sigue pendiente.
+- [x] **Lighthouse de producción:** existe lighthouse-production.yml con mediciones móviles y escritorio y confirmación del SHA publicado. Falta convertir sus resultados en presupuestos/umbrales obligatorios para PR.
+- [x] **Capítulos 07 y 08:** PR #87 y PR #88 ya están integrados. Merge #87: bf9690463625948d912258a6e2a85972044b6755. Merge #88: 384b8298424a60bc7462fabc204772153e2ba8f1. El main observado después de la actualización automática es 8da7d1cb882fbbc8f47a04d84bdcbd387e0f0721.
+
+**Importante:** lo anterior describe componentes existentes. No significa que la migración a data/, el prerender, las pruebas visuales completas, la validación externa de cada VOD o los presupuestos Lighthouse ya estén terminados.
+
+---
+
+## P0 · Base de datos, validación y prevención de regresiones
+
+### BASE-01 · Una sola fuente de datos organizada en data/
+- [ ] Diseñar y documentar la estructura canónica data/ para roster, juegos, horarios declarados, enlaces y referencias audiovisuales. Evitar duplicar campos cuando los horarios deban seguir formando parte del perfil del creador.
+- [ ] Migrar los datos existentes de forma controlada desde los JSON de raíz, manteniendo un único origen por entidad y actualizando consumidores, colectores, páginas, scripts y tests.
+- [ ] Conservar IDs canónicos estables para cada creador, juego, sesión BIT, expediente EXP, VOD y clip; no resolver relaciones por nombres visibles.
+- [ ] Definir compatibilidad de migración y retirar las rutas antiguas solo después de comprobar que ningún consumidor las utiliza.
+
+**Aceptación:** un dato se edita en un único lugar; el sitio, los colectores y las páginas generadas leen esa fuente; no quedan copias paralelas ni rutas rotas.
+
+### BASE-02 · Esquemas y validación que bloqueen publicaciones inválidas
+- [ ] Completar esquemas JSON para todos los documentos de data/: roster, juegos, horarios, enlaces, sesiones, VOD y clips, con campos obligatorios, opcionales y reglas de null explícitas.
+- [ ] Validar en cada PR que se conserven los ocho perfiles del Roster y sus identidades/enlaces requeridos; una baja o cambio de perfil debe exigir una modificación explícita y revisada, no desaparecer silenciosamente.
+- [ ] Rechazar campos obligatorios vacíos, IDs duplicados, relaciones a perfiles inexistentes, prefijos BIT/EXP inválidos y enlaces mal formados.
+- [ ] Incorporar comprobación externa de URLs críticas, incluidos VOD y clips. Distinguir una baja confirmada (por ejemplo, 404/410 repetido) de límites de tasa, bloqueos o errores transitorios; no declarar un enlace caído solo por un timeout.
+- [ ] Hacer que un error de esquema o integridad impida el merge/publicación de la modificación afectada.
+
+**Aceptación:** cada cambio de datos pasa el esquema y los contratos; los datos inválidos bloquean el PR y el informe identifica archivo, campo e ID afectado.
+
+### BASE-03 · QA visual, funcional y de enlaces en cada cambio
+- [ ] Extender Playwright para generar capturas identificables de cada capítulo en desktop, tablet y móvil, además de conservar las pruebas funcionales y responsive comunes existentes.
+- [ ] Añadir revisión de cambios visuales con evidencia antes/después o comparación de capturas; no aceptar regresiones de tipografía, imágenes, proporciones o desbordamientos por el solo hecho de que el DOM siga cargando.
+- [ ] Verificar automáticamente la presencia de los ocho perfiles, enlaces internos, enlaces a juegos, VOD, clips y destinos externos declarados.
+- [ ] Mantener pruebas de filtros, navegación cruzada, estados vacíos, fallos de red, reintento y funcionamiento sin JavaScript donde aplique.
+- [ ] Incorporar presupuestos Lighthouse móviles y escritorio (rendimiento, accesibilidad, buenas prácticas y SEO) con umbrales acordados. El workflow de medición ya existe; falta definir los límites y hacer que las regresiones relevantes bloqueen el PR.
+- [ ] Publicar capturas, trazas y reportes como artefactos de cada ejecución para facilitar revisión.
+
+**Aceptación:** ningún PR que afecte capítulos o datos se integra con fallos funcionales, enlaces rotos confirmados, regresiones visuales no aprobadas o presupuesto de rendimiento incumplido.
+
+### BASE-04 · Revisión obligatoria de archivos clave
+- [ ] Incorporar .github/CODEOWNERS para data/, schemas/, colectores, workflows, generadores, navegación y archivos críticos del Roster.
+- [ ] Configurar la protección de main: cambios por PR, checks requeridos y aprobación de una persona mantenedora distinta del autor cuando la configuración del repositorio lo permita.
+- [ ] Documentar quién puede aprobar modificaciones de datos sensibles para la identidad pública y qué evidencia debe acompañar un cambio.
+
+**Aceptación:** las rutas protegidas no pueden integrarse con cambios directos sin revisión y checks; se comprueba la configuración efectiva, no solo la presencia del archivo CODEOWNERS.
+
+---
+
+## P0 · Contenido disponible sin depender de JavaScript
+
+### WEB-01 · Prerender de Bitácora y Arsenal
+- [ ] Generar en build el HTML inicial de las 10 sesiones BIT y las 18 fichas del Arsenal a partir de games.json y sus referencias canónicas.
+- [ ] Dejar filtros, búsqueda, matriz, ruleta y navegación como mejoras progresivas de JavaScript, sin usar el script como única vía para ver el contenido.
+- [ ] Mostrar el resumen inicial desde el HTML generado: 10 juegos · 11 POV · 5 creadores · 1 expediente comercial, con criterio de conteo documentado. El canal conjunto Los Moriartys no debe contarse como un creador individual adicional.
+- [ ] Reemplazar los indicadores «—» y «Conectando…» como contenido principal por datos prerenderizados; usar skeletons solo para operaciones que realmente estén cargando.
+- [ ] Mantener mensaje de error comprensible y botón «Reintentar» si la mejora dinámica falla, sin borrar el HTML disponible.
+- [ ] Añadir pruebas para HTML con JavaScript deshabilitado, lectura por bots/vistas previas, errores de carga y conciliación exacta entre HTML generado y fuente maestra.
+
+**Aceptación:** las sesiones y juegos aparecen en el HTML recibido antes de ejecutar JavaScript; no hay tarjetas vacías ni contadores «—» en el documento inicial.
+
+### WEB-02 · Retirar la vista previa de prueba del recorrido público
+- [ ] Quitar del Roster el botón «ABRIR BITÁCORA GENERAL (VISTA PREVIA)» que apunta a bitacora-preview.html.
+- [ ] Decidir si bitacora-preview.html se elimina del despliegue o se convierte en una página oficial terminada. Si deja de ser pública, retirar referencias, indexación y enlaces internos.
+- [ ] Buscar enlaces residuales a la página desde navegación, scripts, documentación y sitemap.
+
+**Aceptación:** el recorrido público no presenta una herramienta de prueba como funcionalidad oficial y no quedan enlaces huérfanos.
+
+---
+
+## P1 · Expediente BarFender · EXP-001
+
+### EXP-01 · Reorganizar el expediente en cinco pestañas
+- [ ] Dividir el contenido en **Resumen, Equipo, Registros, Clips y Datos y metodología**.
+- [ ] Mantener el contexto del juego y de la experiencia en Resumen; integrantes y canales en Equipo; VOD en Registros; destacados en Clips; fuentes, métricas y límites en Datos y metodología.
+- [ ] Conservar los materiales históricos existentes, sin reemplazar fotografías ni clips aprobados por duplicados.
+- [ ] Aplicar navegación por teclado, estados de pestaña accesibles, foco visible y adaptación móvil.
+
+### EXP-02 · Eliminar repeticiones y corregir numeración interna
+- [ ] Presentar desarrollador y editor una sola vez en una caja de datos del juego.
+- [ ] Mostrar el dato «3 VOD públicos» y sus duraciones en un único lugar; evitar repetir «3 VOD de ~1 h 14» en tres bloques.
+- [ ] Consolidar la mención a Keymailer en un único aviso de transparencia, con enlace al criterio general de Alianzas.
+- [ ] Reducir «Valor para marcas» a dos líneas y un enlace a Alianzas/Para marcas, sin duplicar la propuesta comercial.
+- [ ] Reiniciar la numeración dentro de EXP-001 con apartados A–E o rótulos propios del expediente; no continuar numeración como si fueran capítulos independientes.
+- [ ] Mantener separado el ID EXP-001 de los IDs de sesión BIT-###.
+
+**Aceptación:** cada dato factual o aclaración comercial se explica una vez; la jerarquía visual distingue capítulo, expediente y secciones internas.
+
+### EXP-03 · Colores de identidad en el expediente
+- [ ] Reutilizar las variables de color canónicas de cada creador en Equipo, botones de VOD y bordes/detalles de clips.
+- [ ] Mantener contraste suficiente y un indicador textual; el color nunca debe ser el único medio para distinguir a una persona o un estado.
+- [ ] No inventar una paleta ni cambiar las identidades cromáticas sin validar los perfiles del Roster.
+
+### EXP-04 · Ficha comercial imprimible de una página
+- [ ] Crear una vista de impresión de una página con credenciales, formatos, resumen de BarFender, datos respaldables y contacto.
+- [ ] Generar la ficha desde los mismos datos canónicos del sitio; incluir fecha de actualización y fuentes/metodología pertinentes.
+- [ ] Añadir «Imprimir / Guardar PDF», CSS de impresión y pruebas de paginado para evitar cortes, páginas en blanco o texto ilegible.
+- [ ] No duplicar manualmente métricas o credenciales en un archivo independiente que pueda quedar desactualizado.
+
+**Aceptación:** PDF de una página legible, actualizado desde datos del sitio y con información comercial verificable.
+
+### EXP-05 · Validación externa con autorización expresa
+- [ ] Solicitar a Proto Division y/o Rock Paper Publisher una devolución sobre la experiencia BarFender, indicando que su publicación será pública.
+- [ ] Obtener autorización expresa para citar el comentario, el nombre y el cargo de quien lo emita; conservar la autorización.
+- [ ] Si no hay respuesta o permiso, no publicar testimonio ni insinuar respaldo del estudio/publisher.
+
+**Aceptación:** testimonio publicado solo con fuente, atribución y permiso comprobables; la ausencia de respuesta no bloquea el resto del expediente.
+
+---
+
+## P1 · Credibilidad comercial y difusión internacional
+
+### COM-01 · Página «Para marcas» en inglés
+- [ ] Crear una versión en inglés con credenciales, formatos de colaboración, metodología/transparencia, caso BarFender y contacto.
+- [ ] Mantener exactamente el alcance de las afirmaciones de la versión española: no convertir accesos, programas o postulaciones en patrocinios ni alianzas pagas.
+- [ ] Añadir navegación ES/EN, URL propia, metadatos SEO y vista previa social.
+- [ ] Revisar terminología profesional para estudios, publishers y agencias internacionales.
+
+### COM-02 · PDF comercial descargable
+- [ ] Incorporar la ficha de una página definida en EXP-04 al recorrido «Para marcas».
+- [ ] Incluir credenciales, formatos posibles, caso BarFender, contacto y fecha de actualización.
+- [ ] Generar desde los mismos datos que HTML; probar versión en español e inglés cuando exista la traducción.
+
+### COM-03 · Transparencia comercial coherente
+- [ ] Mantener un único criterio editorial común a Alianzas, BarFender y PDF: programas, accesos, claves, patrocinios, compensación y campañas pagas son conceptos distintos.
+- [ ] Evitar repetir bloques largos de «Valor para marcas» dentro de cada expediente; usar resúmenes y enlaces al capítulo general.
+- [ ] Incluir la procedencia de Keymailer en el lugar adecuado sin presentarlo como patrocinio remunerado.
+
+---
+
+## P1 · URLs propias y contenido compartible
+
+### URL-01 · Páginas reales para perfiles, sesiones y expedientes
+- [ ] Crear una URL estable por creador, sesión BIT y expediente EXP, sin depender exclusivamente de un hash dentro de index.html.
+- [ ] Generar las páginas a partir de los mismos datos canónicos; mantener el recorrido de vuelta al sitio principal.
+- [ ] Añadir título, descripción, canonical, Open Graph y Twitter/X card con imagen de vista previa específica para cada recurso.
+- [ ] Generar y validar sitemap; probar enlaces directos, recarga, navegación y respuestas 404.
+- [ ] Mantener compatibles los enlaces antiguos de capítulos cuando sea necesario.
+
+**Aceptación:** al compartir una URL de creador, BIT o EXP en Discord, WhatsApp y X se obtiene una vista previa correcta y la ruta abre el recurso exacto.
+
+### URL-02 · Filtros compartibles y enlaces directos
+- [ ] Sincronizar categoría y creador seleccionados en la Bitácora con parámetros de URL; restaurar filtros al abrir o recargar un enlace compartido.
+- [ ] Crear enlace directo a cada sesión con su ID estable BIT y botón «Copiar enlace».
+- [ ] Mantener los filtros compatibles con búsqueda, vista de matriz y futura vista cronológica.
+- [ ] Probar copiar, pegar, recargar, navegación atrás/adelante y enlaces desde Arsenal.
+
+---
+
+## P1 · Metadatos VOD, fechas y continuidad audiovisual
+
+### VOD-01 · Colector de metadatos de Twitch Helix
+- [ ] Extender los colectores para consultar metadatos públicos de cada VOD registrado: fecha de creación/publicación, duración, tipo y estado de disponibilidad cuando la API lo devuelva.
+- [ ] Relacionar cada respuesta con el ID de VOD/POV y su sesión BIT; no emparejar por nombre o título libre.
+- [ ] Conservar un historial de capturas: si Twitch elimina un VOD, el registro histórico debe mantener la fecha, duración y último estado conocido.
+- [ ] Diferenciar público, privado/no disponible, no localizado, error temporal y no verificado. Nunca marcar una baja ante un timeout o rate limit aislado.
+- [ ] Validar permisos, límites de API y tratamiento de tokens; no publicar credenciales ni datos privados.
+
+### VOD-02 · Fechas verificadas y vista cronológica
+- [ ] Investigar las fuentes de fecha para cada sesión BIT y registrar fecha y fuente_fecha solo cuando exista evidencia verificable.
+- [ ] Mantener null/«Fecha sin verificar» para las sesiones sin fuente confirmada.
+- [ ] Añadir vista cronológica ordenada por fechas verificadas, además de la grilla actual.
+- [ ] No ordenar por fecha inferida ni inventar cronología a partir del orden de carga de JSON.
+
+**Situación inicial:** al revisar games.json el 21/11/2026, las 10 sesiones BIT tenían fecha y fuente_fecha sin verificar. La línea de tiempo depende de completar esa verificación.
+
+### VOD-03 · Clips por sesión y por creador
+- [ ] Relacionar uno o dos clips destacados con cada juego/sesión cuando se confirme su pertenencia.
+- [ ] Mostrar clips por POV/creador, conservando autoría, título original, fecha, duración y enlace de origen cuando estén disponibles.
+- [ ] Extender la selección pública actual de clips recientes por creador; respetar la ventana, límites y metodología ya declarados por el colector.
+- [ ] Añadir feed RSS o JSON de novedades del archivo y clips, generado desde datos verificables y sin rankings ni cifras fuera de contexto.
+
+---
+
+## P2 · Bitácora como producto visual e informativo
+
+### BIT-01 · Matriz de participación
+- [ ] Añadir una vista matriz con creadores en filas y juegos/sesiones en columnas.
+- [ ] Utilizar los colores canónicos de los perfiles y un símbolo ▶ cuando exista POV asociado; distinguir participación sin POV.
+- [ ] No convertir la matriz en un ranking ni confundir participación con emisión de un VOD.
+- [ ] En móvil, usar desplazamiento horizontal contenido dentro de la matriz, sin overflow del documento.
+
+### BIT-02 · Resumen, lectura y narrativa por sesión
+- [ ] Mostrar al comienzo el resumen estable de 10 juegos, 11 POV, 5 creadores y 1 expediente comercial, derivado del registro maestro en build.
+- [ ] Añadir una línea editorial por sesión: qué se jugó, quiénes participaron y qué momento vale la pena descubrir.
+- [ ] Completar nota con información aportada o respaldada por la fuente; si no hay contexto verificable, dejarlo vacío o marcarlo pendiente.
+- [ ] Evitar duplicar contadores o crear resúmenes manuales que se desincronicen.
+
+### BIT-03 · Navegación, fallos y accesibilidad
+- [ ] Aplicar estados de carga skeleton y errores con botón «Reintentar» a Bitácora, Arsenal y cualquier bloque que dependa de una solicitud.
+- [ ] Reemplazar estados ambiguos por mensajes que indiquen qué recurso no se pudo cargar y qué alternativa sigue disponible.
+- [ ] Añadir nombres accesibles a todos los enlaces informativos «ⓘ»; los iconos decorativos deben ocultarse a lectores de pantalla.
+- [ ] Asignar textos alternativos específicos a miniaturas de clips según juego, creador y momento; evitar alt genérico repetido.
+- [ ] Comprobar foco, navegación por teclado, contraste, estados de pestaña, reduced motion y anuncios de cambios.
+
+---
+
+## P2 · Inicio vivo, feeds y guía de contribución
+
+### LIFE-01 · «Latido» en Inicio
+- [ ] Mostrar el próximo horario declarado por los creadores, identificado expresamente como horario declarado y no como compromiso confirmado.
+- [ ] Mostrar el último directo observado a partir de la última captura vigente, indicando cuándo se consultaron los datos.
+- [ ] Añadir suscripción al calendario del roster, generada desde horarios declarados y con zona horaria explícita.
+- [ ] Si faltan datos o están vencidos, indicarlo sin inventar un horario ni afirmar que alguien transmitió.
+
+### LIFE-02 · Contenido que se renueva y feeds públicos
+- [ ] Mostrar clips recientes por creador a partir de clips-data.json, conservando autoría y fecha.
+- [ ] Publicar feed RSS y/o JSON de clips recientes y novedades de la Bitácora.
+- [ ] Incluir fecha de generación, fuente, ventana de captura y enlaces canónicos; evitar rankings o sumas de audiencias sin metodología.
+- [ ] Ofrecer fallback si Twitch no responde o si no hay clips nuevos.
+
+### LIFE-03 · Tráiler de presentación
+- [ ] Editar un tráiler de 30–45 segundos usando clips reales y autorizados de la Legión.
+- [ ] Silenciado por defecto, con portada estática y reproducción solo por acción explícita; sin autoplay.
+- [ ] Respetar prefers-reduced-motion y no iniciar animación/reproducción si el usuario solicitó menos movimiento.
+- [ ] Añadir subtítulos o textos de contexto y enlace alternativo al contenido.
+
+### LIFE-04 · Guía de estilo y contribución
+- [ ] Documentar colores de perfiles, tipografías, escalas, espaciado, tarjetas, botones, pestañas, estados y reglas responsive.
+- [ ] Explicar cómo añadir un juego, una sesión BIT, un POV, un clip y un expediente EXP, con ejemplos válidos y fuentes requeridas.
+- [ ] Documentar cómo ejecutar validadores, Playwright, QA común y Lighthouse antes de abrir un PR.
+- [ ] Definir reglas de naming, IDs, imágenes, accesibilidad, prefers-reduced-motion y registro de cambios.
+- [ ] Incluir la guía en el repositorio y enlazarla desde la contribución interna.
+
+---
+
+## P2 · Imágenes, terceros y rendimiento
+
+### IMG-01 · Optimización de imágenes propias de BarFender
+- [ ] Convertir BarFenderLos4.jpg y la ilustración principal a WebP con variantes de tamaño adecuadas.
+- [ ] Renombrar la ilustración principal con un nombre estable y editorial, por ejemplo barfender-exp001-hero.webp, sin fragmentos de instrucciones.
+- [ ] Actualizar HTML, CSS, pruebas, informes y referencias; conservar originales hasta terminar la auditoría de uso.
+- [ ] Definir dimensiones intrínsecas, srcset, sizes, lazy loading según posición y texto alternativo específico.
+
+### IMG-02 · Fallbacks y uso de imágenes de terceros
+- [ ] Revisar avatares Twitch externos y definir respaldo local permitido, con fallback visible cuando el canal cambie su imagen o la CDN falle.
+- [ ] Evitar copiar/redistribuir logos de creadores sin confirmar que el uso y almacenamiento local están permitidos.
+- [ ] Revisar el uso de portadas Steam con la política del publisher y/o permiso aplicable; conservar enlace a la ficha oficial y fallback tipográfico propio si no puede usarse la portada.
+- [ ] Añadir un estado de error robusto para portadas externas; una URL presente no garantiza que el recurso siga disponible.
+- [ ] Usar las imágenes y colores de perfil también en BarFender sin distorsionar la identidad de cada participante.
+
+### PERF-01 · Presupuestos de rendimiento
+- [ ] Definir límites medibles para peso de imágenes iniciales, CSS/JS crítico, LCP, CLS, INP y puntuaciones Lighthouse móviles/escritorio.
+- [ ] Comparar con la línea base actual de producción antes de fijar umbrales; no imponer un presupuesto arbitrario que genere falsos positivos.
+- [ ] Hacer que las regresiones críticas sean visibles y bloqueantes en PR; guardar informes históricos para seguir la evolución.
+
+---
+
+## Orden de ejecución acordado
+
+1. **Primero · prevenir roturas:** BASE-01 a BASE-04, WEB-01 y WEB-02. La migración de datos debe ser gradual, con pruebas antes de retirar rutas existentes.
+2. **Después · credibilidad comercial:** EXP-01 a EXP-04, COM-01 y COM-02. La validación externa EXP-05 depende de autorización expresa del estudio/publisher y no se fabrica.
+3. **Luego · crecimiento estructurado:** URL-01, URL-02, LIFE-01 y LIFE-04.
+4. **Luego · contenido y medición:** VOD-01 a VOD-03, BIT-01 a BIT-03 y LIFE-02.
+5. **Cuando estén listos los materiales:** LIFE-03 (tráiler real) e IMG-01/IMG-02; PERF-01 se trabaja en paralelo a la evolución visual.
+
+## Registro de cambios de estado
+
+- Cada PR debe indicar los IDs de tareas que cierra (por ejemplo BASE-02, WEB-01).
+- Al fusionar y validar, actualizar aquí la casilla a [x], añadir enlace al PR, SHA, workflows y evidencia de producción cuando aplique.
+- Si una tarea se divide, conservar el ID original como agrupador y crear sub-IDs para que no se pierda el historial.
+- Si una tarea queda bloqueada por una fuente, permiso externo o acceso a API, mantenerla [ ] y registrar el bloqueo; no marcarla como completada.
+
+---
+
 ## 2026-11-21 — Capítulo 08 · Arsenal conectado al registro maestro
 
 - **Base:** rama de integración posterior al Capítulo 07, commit 6f937bb735b8f199a5ce12301205790e7df6edfe; rama feat/chapter-08-arsenal-registry.
@@ -8,8 +281,8 @@
 - **Navegación cruzada:** Arsenal enlaza a sesiones BIT; Colaboraciones enlaza a fichas del Arsenal mediante IDs canónicos.
 - **Responsive:** tres columnas en escritorio, dos en tablet y una en móvil; foco visible y movimiento reducido.
 - **QA:** contrato Python, Playwright para estados, filtros, jugadores, ruleta, Escape the Backrooms, navegación cruzada y cinco tamaños.
-- **Estado:** PR independiente y apilado sobre PR #87; CI pendiente.
-- **Alcance excluido:** no se fusiona esta rama ni la del PR #87.
+- **Estado actualizado al 21/11/2026:** PR #88 integrado en main mediante el merge 384b8298424a60bc7462fabc204772153e2ba8f1. QA principal, Playwright, QA común, QA portable y Cloudflare Pages finalizaron en verde. La rama fue reconstruida sobre el main que ya contenía el Capítulo 07.
+- **Nota histórica:** al abrir esta entrada, la rama estaba apilada y pendiente de integración; esa dependencia quedó resuelta al fusionarse primero el PR #87 y luego el PR #88.
 
 ## 2026-11-21 — Capítulo 07 · Colaboraciones conectado al registro maestro
 
@@ -21,8 +294,8 @@
 - **Accesibilidad / responsive:** etiquetas de filtros, anuncios de estado, nombres alternativos, foco visible, diseño de una columna en móvil y movimiento reducido.
 - **QA agregado:** contrato Python del capítulo, Playwright de las diez sesiones, POV de Among Us y PEAK, filtros, enlaces al Arsenal y overflow en 1440/1024/768/390/360 px. La infraestructura QA común también se ejecuta sobre los doce capítulos.
 - **Cache CSS:** se actualiza la versión de styles.css y sus contratos CI para publicar el nuevo diseño sin conservar hojas cacheadas.
-- **Estado:** PR independiente; CI y revisión final pendientes.
-- **Alcance excluido:** Arsenal (Capítulo 08) aún conserva sus tarjetas estáticas; se conectará en un PR siguiente.
+- **Estado actualizado al 21/11/2026:** PR #87 integrado en main mediante el merge bf9690463625948d912258a6e2a85972044b6755. Los workflows de validación principal, Playwright, QA común, QA portable y colector finalizaron correctamente.
+- **Nota histórica:** al abrir esta entrada, Arsenal todavía no estaba conectado; esa tarea quedó completada posteriormente en el PR #88.
 
 ## 2026-11-21 — PR 1: registro maestro compartido de juegos (Capítulos 07 y 08)
 
