@@ -30,8 +30,8 @@
     <link rel="preload" href="https://fonts.gstatic.com/s/robotocondensed/v31/ieVl2ZhZI2eCN5jzbjEETS9weq8-19K7DQk6YvM.woff2" as="font" type="font/woff2" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Permanent+Marker&family=Roboto+Condensed:wght@400..900&family=Special+Elite&display=optional" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Bangers&family=Permanent+Marker&family=Roboto+Condensed:wght@400..900&family=Special+Elite&display=optional" rel="stylesheet"></noscript>
-    <link rel="stylesheet" id="lm-global-chapter-styles" data-href="./styles.css?v=20261120-stats-dossier-1">
-    <noscript><link rel="stylesheet" href="./styles.css?v=20261120-stats-dossier-1"></noscript>
+    <link rel="stylesheet" id="lm-global-chapter-styles" data-href="./styles.css?v=20261121-collab-registry-1">
+    <noscript><link rel="stylesheet" href="./styles.css?v=20261121-collab-registry-1"></noscript>
     <!-- CSS crítico de inicio. La animación de entrada se reserva para la navegación entre capítulos; no retrasa el primer LCP. -->
     <style id="critical-home-styles">
       :root{--bg-color:#0b0f19;--panel-bg:#121824;--yellow-accent:#ffde00;--red-accent:#ff2a2a;--blue-accent:#00d2ff;--border-color:#000;--text-color:#f0f4f8;--card-bg:#1a202c;--lm-night:#080d18;--lm-panel:#101a2a;--lm-panel-raised:#15243a;--lm-ice:#c8e5f5;--lm-cyan:#62d9e8;--lm-violet:#a99bff;--lm-magenta:#d18acb;--lm-muted:#9eafc4;--lm-line:rgba(153,190,220,.24);--type-body-size:clamp(.98rem,.94rem + .16vw,1.06rem);--type-body-leading:1.68;--space-section:clamp(28px,4vw,48px);--space-content:clamp(14px,2vw,22px);--link-focus-ring:#8beaff}
@@ -853,8 +853,8 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
    <span class="collab-kicker">ARCHIVO CENTRAL · LEGIÓN MULTIVERSAL</span>
    <h2>CUANDO LOS UNIVERSOS<br><span>SE ENCUENTRAN.</span></h2>
    <p>Las colaboraciones son parte de nuestra historia. Este archivo registra partidas compartidas, directos simultáneos, eventos y proyectos en los que los integrantes de la Legión unen sus comunidades para crear algo en común.</p>
-   <div class="collab-cover-stamp">BITÁCORA VIVA · CAMPAÑAS Y ENCUENTROS</div>
-   <a class="collab-bitacora-link" href="./bitacora-preview.html">EXPLORAR BITÁCORA GENERAL (VISTA PREVIA) →</a>
+   <div class="collab-cover-stamp">ARCHIVO BIT · SESIONES Y POV</div>
+   <a class="collab-bitacora-link" href="#collab-games-registry">EXPLORAR COLABORACIONES DOCUMENTADAS →</a>
   </div>
   <figure class="collab-cover-art"><img src="image_20261107_184728.jpg" alt="Ilustración editorial de los integrantes de la Legión alrededor de una mesa holográfica de planificación" loading="lazy" width="2048" height="1152"><figcaption>LEGIÓN MULTIVERSAL · ENCUENTRO Y COORDINACIÓN ENTRE UNIVERSOS</figcaption></figure>
  </div>
@@ -868,8 +868,27 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
    <article><strong>04</strong><h4>TRANSPARENCIA</h4><p>Métricas con fuente, período y alcance identificados.</p></article>
   </div>
  </section>
+ <section class="collab-registry" id="collab-games-registry" aria-labelledby="collab-registry-title" data-collab-ready="false">
+  <div class="collab-registry-heading">
+   <div><span class="collab-kicker">02 / BITÁCORA DE JUEGOS · REGISTRO MAESTRO</span><h3 id="collab-registry-title">PARTIDAS QUE SE CONVIRTIERON EN HISTORIAS.</h3><p>Un expediente por sesión. Los participantes muestran quién estuvo en la partida; los enlaces POV identifican desde qué canales se conserva el registro audiovisual. Una misma persona puede participar sin tener un VOD publicado.</p></div>
+   <span class="collab-registry-stamp">ARCHIVO<br><strong>BIT</strong><br>LEGIÓN MULTIVERSAL</span>
+  </div>
+  <div class="collab-registry-summary" id="collab-registry-summary" aria-label="Resumen de colaboraciones">
+   <article><strong>—</strong><span>SESIONES BIT</span></article><article><strong>—</strong><span>POV REGISTRADOS</span></article><article><strong>—</strong><span>INTEGRANTES PARTICIPANTES</span></article>
+  </div>
+  <div class="collab-registry-controls" aria-label="Filtros de colaboraciones">
+   <label class="collab-filter-search" for="collab-search"><span>BUSCAR JUEGO O CREADOR</span><input id="collab-search" type="search" placeholder="Ej. Among Us, Akuma, Fortnite…" autocomplete="off"></label>
+   <label for="collab-category"><span>CATEGORÍA</span><select id="collab-category"><option value="all">Todas las categorías</option></select></label>
+   <label for="collab-creator"><span>INTEGRANTE O CANAL POV</span><select id="collab-creator"><option value="all">Todos los creadores</option></select></label>
+  </div>
+  <p class="collab-registry-status" id="collab-registry-status" role="status" aria-live="polite">Conectando con el registro maestro de juegos…</p>
+  <div class="collab-session-grid" id="collab-registry-grid" aria-live="polite" aria-busy="true">
+   <article class="collab-registry-loading"><span class="collab-loading-mark">BIT</span><strong>ABRIENDO EL ARCHIVO</strong><p>Las sesiones se cargan desde el registro compartido de la Legión.</p></article>
+  </div>
+  <p class="collab-registry-footnote">Fechas y cantidades de jugadores solo se muestran cuando existe una fuente verificada. Los POV son enlaces a registros audiovisuales públicos; su disponibilidad depende de Twitch y del canal propietario.</p>
+ </section>
  <section class="campaign-feature" id="barfender-expediente">
-  <div class="campaign-feature-head"><div><span class="collab-kicker">CASO COLABORATIVO DOCUMENTADO · N.º 001</span><h3>BARFENDER</h3><p>Cuatro creadores. Cuatro canales. Una misma partida.</p></div><div class="campaign-edition">EXPERIENCIA<br><strong>001</strong><br>05 · 11 · 2026</div></div>
+  <div class="campaign-feature-head"><div><span class="collab-kicker">CASO COMERCIAL DOCUMENTADO · EXP-001</span><h3>BARFENDER</h3><p>Cuatro creadores. Cuatro canales. Una misma partida.</p></div><div class="campaign-edition">EXPEDIENTE COMERCIAL<br><strong>EXP-001</strong><br>05 · 11 · 2026</div></div>
   <figure class="campaign-wide-art"><img src="image_20261107_184951-si-que-tenga-referencias-y-el-titutlo-del-juego-ba.jpg" alt="Ilustración editorial de los creadores reunidos en el bar BarFender, con el título del juego integrado en la escena" loading="lazy" width="2048" height="1152"><figcaption>BARFENDER · ILUSTRACIÓN PRINCIPAL DEL CASO COLABORATIVO DOCUMENTADO N.º 001</figcaption></figure>
   <figure class="barfender-steam-art"><a href="https://store.steampowered.com/app/4159680/Barfender_COOP_Bar_Simulator/" target="_blank" rel="noopener noreferrer"><img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4159680/c1225b8fe18d0878c5be25b0081c801e50bb258e/header_alt_assets_8.jpg?t=1793628252" alt="Barfender, simulador cooperativo de bar para 1 a 4 jugadores" loading="lazy" width="460" height="215"></a><figcaption>BARFENDER · FICHA DEL JUEGO · <a href="https://store.steampowered.com/app/4159680/Barfender_COOP_Bar_Simulator/#app_reviews_hash" target="_blank" rel="noopener noreferrer">VER EN STEAM ↗</a></figcaption></figure>
   <div class="barfender-game-profile"><div><span class="collab-kicker">EL JUEGO DE LA EXPERIENCIA</span><p>Un caótico simulador cooperativo de bar para 1–4 jugadores: servir copas, limpiar desastres, detener peleas y mantener el local en pie mientras la noche se descontrola. Los jugadores preparan el bar, atienden a la multitud e intentan sobrevivir al turno.</p></div><dl><div><dt>LANZAMIENTO</dt><dd>12 OCT 2026</dd></div><div><dt>DESARROLLADOR</dt><dd>Proto Division</dd></div><div><dt>EDITOR</dt><dd>Rock Paper Publisher</dd></div><div><dt>RESEÑAS EN STEAM</dt><dd>Muy positivas · 330 reseñas <small>(corte 07/11/2026)</small></dd></div></dl></div>
@@ -889,7 +908,7 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
     <div class="campaign-agent"><div><strong>AKUMA</strong><small>AKUMAZOLDYCK · CANAL INDIVIDUAL</small></div></div>
    </aside>
   </div>
-  <div class="campaign-case-index"><strong>EXPERIENCIA 001 · 4 CREADORES · 4 CANALES</strong></div>
+  <div class="campaign-case-index"><strong>EXP-001 · 4 CREADORES · 4 CANALES</strong></div>
   <div class="barfender-summary-grid" aria-label="Resumen de la experiencia BarFender">
    <article><strong>4</strong><span>CREADORES</span></article>
    <article><strong>4</strong><span>CANALES EN SIMULTÁNEO</span></article>
@@ -967,7 +986,7 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
   </section>
  </section>
  <section class="collab-log-section" aria-labelledby="collab-log-title">
-  <div class="campaign-subhead"><span class="collab-kicker">CONTINUIDAD · EXPEDIENTE 001</span><h4 id="collab-log-title">UNA EXPERIENCIA QUE TUVO SEGUNDA SESIÓN.</h4><p>La bitácora conserva cada encuentro con su fecha, canales participantes y métricas observadas. Los datos de muestreo se distinguen de las analíticas oficiales y de los VOD.</p></div>
+  <div class="campaign-subhead"><span class="collab-kicker">CONTINUIDAD · EXP-001</span><h4 id="collab-log-title">UNA EXPERIENCIA QUE TUVO SEGUNDA SESIÓN.</h4><p>La bitácora conserva cada encuentro con su fecha, canales participantes y métricas observadas. Los datos de muestreo se distinguen de las analíticas oficiales y de los VOD.</p></div>
   <article class="collab-log-card">
    <div class="collab-log-card-head"><div><span class="collab-kicker">SESIÓN 02 · 10 NOV 2026</span><h5>BARFENDER · SEGUIMIENTO EN DOS CANALES</h5><p>Una nueva noche de Barfender emitida desde los canales de Akuma y TheR0D3R1K.</p></div><span class="collab-log-status">REGISTRO DE MUESTREO</span></div>
    <div class="collab-log-participants">
@@ -981,7 +1000,7 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
    <p class="campaign-transparency"><b>Metodología:</b> registros de Twitch Helix capturados el 10/11/2026. Se muestran promedios y picos de las muestras disponibles, no espectadores únicos, promedio oficial del directo, horas vistas ni alcance conjunto. La captura no sustituye los VOD; sus enlaces podrán añadirse cuando estén disponibles.</p>
   </article>
  </section>
- <section class="collab-next"><div><span class="collab-kicker">EL ARCHIVO SIGUE ABIERTO</span><h3>CADA COLABORACIÓN<br><span>SUMA UNA NUEVA HISTORIA.</span></h3><p>La próxima bitácora podrá documentar otro juego, evento, encuentro, directo conjunto o proyecto comunitario. Cada experiencia tendrá su propio expediente y conservará el registro de quienes la hicieron posible.</p></div><div class="collab-next-stamp">PRÓXIMO<br><strong>EXPEDIENTE</strong><br>003 · PENDIENTE</div></section>
+ <section class="collab-next"><div><span class="collab-kicker">EL ARCHIVO SIGUE ABIERTO</span><h3>CADA COLABORACIÓN<br><span>SUMA UNA NUEVA HISTORIA.</span></h3><p>La próxima bitácora podrá documentar otro juego, evento, encuentro, directo conjunto o proyecto comunitario. Cada experiencia tendrá su propio expediente y conservará el registro de quienes la hicieron posible.</p></div><div class="collab-next-stamp">PRÓXIMA<br><strong>COLABORACIÓN</strong><br>POR REGISTRAR</div></section>
  <div class="collab-contact"><span>¿REPRESENTÁS UN ESTUDIO, PUBLISHER, AGENCIA O MARCA?</span><p>Podemos conversar sobre experiencias multicanal, contenido cooperativo y activaciones con creadores.</p><a href="#brand-proposal">CONTACTAR A LA LEGIÓN →</a></div>
 </section>
 
@@ -1234,6 +1253,7 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
     <script src="./social-links.js?v=20261119-social-links-1"></script>
     <script src="./live-program.js?v=20261120-live-program-2"></script>
     <script src="./app.js?v=20261120-stats-dossier-1"></script>
+    <script src="./games-registry.js?v=20261121-collab-registry-1"></script>
     <script src="./roster-enhancements.js?v=20261121-roster-v3-1"></script>
     <script src="./contact-forms.js?v=20261119-brand-proposal-1" defer></script>
     <script src="./navigation-fix.js" defer></script>
