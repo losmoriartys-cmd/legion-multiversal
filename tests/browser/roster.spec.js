@@ -77,7 +77,7 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
     await expect(page.locator('#roster-home')).toBeHidden();
     await expect(dossier).toContainText(creator.name);
     const profileTabs = dossier.locator('[role="tab"][data-profile-tab]');
-    await expect(profileTabs).toHaveCount(5);
+    await expect(profileTabs).toHaveCount(4);
 
     const cardImage = card.locator('.comic-roster-photo img');
     await expect(cardImage).toHaveAttribute('alt', /Fotografía carnet/);
@@ -144,12 +144,13 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
       await expect(dossier.locator('#profile-tab-bitacora a[href*="lurkit.com"]')).toHaveCount(1);
       await expect(dossier.locator('#profile-tab-bitacora a[href*="keymailer.co"]')).toHaveCount(1);
     }
-    await profileTabs.filter({ hasText: 'PARA MARCAS' }).click();
-    await expect(dossier.locator('#profile-tab-marcas .hero-profile-brand')).toBeVisible();
-    await expect(dossier.locator('#profile-tab-marcas .hero-profile-brand-summary')).toBeVisible();
-    await expect(dossier.locator('#profile-tab-marcas .hero-profile-brand-slots article')).toHaveCount(3);
+    await profileTabs.filter({ hasText: 'BITÁCORA' }).click();
+    await dossier.locator('[data-bitacora-view="marcas"]').click();
+    await expect(dossier.locator('#bitacora-panel-marcas .hero-profile-brand')).toBeVisible();
+    await expect(dossier.locator('#bitacora-panel-marcas .hero-profile-brand-summary')).toBeVisible();
+    await expect(dossier.locator('#bitacora-panel-marcas .hero-profile-brand-slots article')).toHaveCount(3);
     if (['moriartys','rod3r1k'].includes(creator.id)) {
-      await expect(dossier.locator('#profile-tab-marcas .hero-profile-epic-codes')).toBeVisible();
+      await expect(dossier.locator('#bitacora-panel-marcas .hero-profile-epic-codes')).toBeVisible();
     }
 
     if (creator.id === 'moriartys') {
@@ -165,15 +166,20 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
         ['ESTADÍSTICAS', 'estadisticas'],
         ['CLIPS', 'clips'],
         ['BITÁCORA', 'bitacora'],
-        ['PARA MARCAS', 'marcas']
+        ['BITÁCORA', 'bitacora']
       ]) {
         await profileTabs.filter({ hasText: label }).click();
         await expect(dossier.locator('#profile-tab-' + panel)).toBeVisible();
+        if (panel === 'bitacora') {
+          await dossier.locator('[data-bitacora-view="marcas"]').click();
+          await expect(dossier.locator('#bitacora-panel-marcas')).toBeVisible();
+          await dossier.locator('[data-bitacora-view="recorrido"]').click();
+        }
         await expect(profileTabs.filter({ hasText: label })).toHaveAttribute('aria-selected', 'true');
       }
       await profileTabs.filter({ hasText: 'PERFIL' }).focus();
       await page.keyboard.press('End');
-      await expect(profileTabs.filter({ hasText: 'PARA MARCAS' })).toBeFocused();
+      await expect(profileTabs.filter({ hasText: 'BITÁCORA' })).toBeFocused();
       await page.keyboard.press('Home');
       await expect(profileTabs.filter({ hasText: 'PERFIL' })).toBeFocused();
     }
