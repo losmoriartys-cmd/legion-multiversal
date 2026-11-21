@@ -63,7 +63,7 @@
       return { value: 'No informado', detail: 'No hay una fuente verificable con fecha de captura', available: false };
     }
     if (account?.platform === 'youtube') {
-      const creator = window.platformStatsData?.creators?.[hero.id]?.platforms?.youtube;
+      const creator = platformStatsData?.creators?.[hero.id]?.platforms?.youtube;
       const count = metricNumber(creator?.metrics?.subscribers);
       const source = text(creator?.source);
       const captured = text(creator?.captured_at);
@@ -305,7 +305,7 @@
   }
 
   function applyFilters(host) {
-    const heroes = Array.isArray(window.heroesData) ? window.heroesData : [];
+    const heroes = Array.isArray(heroesData) ? heroesData : [];
     const grid = host.querySelector('.comic-roster-grid');
     if (!grid) return;
     const cards = [...grid.querySelectorAll('.comic-roster-card')];
@@ -342,7 +342,7 @@
 
   function enhance() {
     const host = document.getElementById('roster-selector');
-    const heroes = Array.isArray(window.heroesData) ? window.heroesData : [];
+    const heroes = Array.isArray(heroesData) ? heroesData : [];
     const grid = host?.querySelector('.comic-roster-grid');
     if (!host || !grid || !heroes.length) return;
     buildKpis(host, heroes);
