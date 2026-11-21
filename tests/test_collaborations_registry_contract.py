@@ -26,7 +26,8 @@ class CollaborationsRegistryContractTests(unittest.TestCase):
         self.assertIn("data-collab-session", SCRIPT)
         self.assertIn("data-collab-participant", SCRIPT)
         self.assertIn("data-pov-channel", SCRIPT)
-        self.assertIn("window.switchChapter(5, { scrollBehavior: 'auto' })", SCRIPT)
+        self.assertIn("afterEnter: revealArsenal", SCRIPT)
+        self.assertIn("scrollToRegistryTarget(target)", SCRIPT)
         self.assertIn("scrollIntoView({ block: 'center', behavior: 'auto' })", SCRIPT)
 
     def test_all_documented_sessions_come_from_one_master_catalog(self):
