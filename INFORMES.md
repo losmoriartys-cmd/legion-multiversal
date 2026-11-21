@@ -3604,3 +3604,12 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 
 
 - **Tercera iteración:** la tabla quedó efectivamente confinada: en desktop-wide su wrapper mide 1144 px y su contenido desplazable 1722 px, con el wrapper completamente dentro del capítulo; el documento conserva 1440 px. El inspector todavía clasificaba las celdas de la tabla como elementos desbordados aunque estaban dentro del scrollport intencional. Se corrige el diagnóstico para excluir del chequeo geométrico a los descendientes de regiones `overflow-x:auto/scroll`, manteniendo la validación de que el propio scrollport esté contenido y que el documento no exceda el viewport.
+
+
+## 2026-11-21 — Cuarta iteración Playwright: fallos reales en mobile
+
+- **Run:** 44938825695, SHA `36392194ad091a1124ce6f6c3c110d2c31315183`.
+- **Resultado:** 4 de 6 pruebas pasaron (desktop-wide, desktop, tablet y navegación general); fallaron mobile 390 y mobile-small 360.
+- **Capítulo 12 · Colaboraciones:** `.collab-cover-copy` y `.collab-cover-art` excedían el borde del panel; el sello/figcaption y la rotación de la figura contribuían al ancho. Se cambia el hero a una columna en móvil, se limita el ancho de copia/figura y se elimina la rotación solo en ese breakpoint.
+- **Capítulo 04 · Estadísticas:** a 360 px, `.impact-hero-mark` y las tarjetas `.impact-story-card` sobresalían del borde interno del capítulo. Se limita el ancho mínimo de los grids/tarjetas y se alinea la marca circular al inicio en móvil pequeño.
+- **Estado:** correcciones CSS aplicadas en esta rama. Nueva corrida pendiente; aún no se declara aprobación.
