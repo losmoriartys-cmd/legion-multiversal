@@ -6102,3 +6102,32 @@ main .chapter-panel :where(.chapter-cta, .executive-button, .comic-submit-btn,
     overflow-wrap: anywhere;
   }
 }
+
+
+@media (max-width: 600px) {
+  /* El expediente BarFender y las secciones siguientes deben usar el ancho
+     real del panel; se eliminan mínimos intrínsecos de escritorio. */
+  #chapter-12 > section,
+  #chapter-12 .campaign-feature,
+  #chapter-12 .campaign-vods,
+  #chapter-12 .campaign-clips,
+  #chapter-12 .collab-intro {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    margin-inline: 0;
+    box-sizing: border-box;
+  }
+  #chapter-12 .campaign-feature-head {
+    flex-wrap: wrap;
+    min-width: 0;
+  }
+  #chapter-12 .campaign-summary-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  #chapter-12 .campaign-summary-copy,
+  #chapter-12 .campaign-roster {
+    min-width: 0;
+    max-width: 100%;
+  }
+}
