@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://legion-multiversal.pages.dev/schemas/games.schema.json",
+  "title": "Legión Multiversal — Registro maestro de juegos",
+  "description": "Origen de datos compartido por los capítulos 07 · Colaboraciones y 08 · Arsenal.",
+  "type": "object",
+  "required": ["version", "nota", "juegos"],
+  "additionalProperties": false,
+  "properties": {
+    "version": {"const": 1},
+    "nota": {"type": "string", "minLength": 1},
+    "juegos": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/juego"}
+    }
+  },
+  "$defs": {
+    "urlHttps": {"type": "string", "format": "uri", "pattern": "^https://"},
+    "textoNullable": {"type": ["string", "null"]},
+    "textoArrayNullable": {
+      "oneOf": [
+        {"type": "null"},
+        {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true}
+      ]
+    },
+    "jugadores": {
+      "type": ["object", "null"],
+      "required": ["min", "max"],
+      "additionalProperties": false,
+      "properties": {
+        "min": {"type": "integer", "minimum": 1},
+        "max": {"type": "integer", "minimum": 1}
+      }
+    },
+    "pov": {
+      "type": "object",
+      "required": ["canal", "url"],
+      "additionalProperties": false,
+      "properties": {
+        "canal": {"type": ["string", "null"], "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+        "url": {"$ref": "#/$defs/urlHttps"}
+      }
+    },
+    "sesion": {
+      "type": "object",
+      "required": ["bit", "fecha", "fuente_fecha", "participantes", "pov", "nota"],
+      "additionalProperties": false,
+      "properties": {
+        "bit": {"type": "string", "pattern": "^BIT-[0-9]{3}$"},
+        "fecha": {"type": ["string", "null"], "format": "date"},
+        "fuente_fecha": {"type": ["string", "null"]},
+        "participantes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"}
+        },
+        "pov": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/pov"}},
+        "nota": {"type": ["string", "null"]}
+      }
+    },
+    "juego": {
+      "type": "object",
+      "required": [
+        "id", "nombre", "aliases", "categorias", "plataformas", "ediciones", "modalidad",
+        "descripcion", "jugadores", "fuente_jugadores", "tienda", "portada", "expediente_comercial", "sesiones"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+        "nombre": {"type": "string", "minLength": 1},
+        "aliases": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+        "categorias": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"enum": [
+            "Fiesta y humor", "Terror cooperativo", "Deducción social", "Supervivencia",
+            "Sandbox y construcción", "Simulación", "Retro y clásicos", "Cooperativo y aventura", "Competitivo"
+          ]}
+        },
+        "plataformas": {"$ref": "#/$defs/textoArrayNullable"},
+        "ediciones": {"$ref": "#/$defs/textoArrayNullable"},
+        "modalidad": {"$ref": "#/$defs/textoNullable"},
+        "descripcion": {"$ref": "#/$defs/textoNullable"},
+        "jugadores": {"$ref": "#/$defs/jugadores"},
+        "fuente_jugadores": {"type": ["string", "null"]},
+        "tienda": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/urlHttps"}]},
+        "portada": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/urlHttps"}]},
+        "expediente_comercial": {"type": ["string", "null"], "pattern": "^EXP-[0-9]{3}$"},
+        "sesiones": {"type": "array", "items": {"$ref": "#/$defs/sesion"}}
+      }
+    }
+  }
+}
