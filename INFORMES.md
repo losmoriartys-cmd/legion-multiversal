@@ -3545,3 +3545,13 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **Diagnóstico de prueba:** Playwright ahora enumera todos los descendientes visibles que exceden el panel, excluyendo paneles ocultos y nodos sin dimensiones, para que un fallo posterior identifique el elemento responsable sin truncarlo por orden DOM.
 - **Commits:** f6199dc (CSS responsive) y 76c19f2 (diagnóstico Playwright).
 - **Estado:** pendiente de ejecutar nuevamente Playwright, QA portable y colector sobre el HEAD actualizado. PR #84 permanece abierto y sin merge; producción intacta.
+
+
+## 2026-11-21 · PR #84 · diagnóstico ampliado de overflow y reduced motion
+
+- Evidencia de la última ejecución: workflow 44876596005, job 136762540719. Resultado: 31/32 Playwright; QA portable y colector aprobaron. La prueba responsive conserva scrollWidth=391 y clientWidth=340 a viewport 390 px.
+- Hallazgo de diagnóstico: el test no encontró descendientes DOM visibles fuera del panel (visibleOffenders vacío). La medición actual todavía no identifica el origen; puede tratarse de un pseudo-elemento, una caja transformada o un desbordamiento generado fuera de los descendientes inspeccionados. No se atribuye la causa al rótulo superior sin evidencia.
+- Accesibilidad: se añadió una regla global para que las transiciones de panel, rótulo y título respeten prefers-reduced-motion: reduce.
+- Instrumentación: la prueba responsive ahora registra el rectángulo del panel, el ancho del documento y candidatos de pseudo-elementos ::before / ::after, manteniendo intacta la aserción estricta de overflow.
+- Commits: c5be87b (reduced motion) y 0776b2d (diagnóstico de pseudo-elementos).
+- Estado: pendiente de nueva ejecución sobre el HEAD actual. No se considera corregido ni aprobado hasta que el test pase y se revisen sus evidencias.
