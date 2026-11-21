@@ -399,6 +399,7 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
     }
     </script>
     <link rel="stylesheet" href="./public-audience-paths.css?v=20261118-1">
+    <link rel="stylesheet" href="./chapters-refresh.css?v=20261121-chapters-refresh-1">
 </head>
 <body>
     <div id="chapter-transition" aria-hidden="true" data-title="LEGIÓN MULTIVERSAL"></div>
@@ -686,12 +687,35 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
  <button type="button" class="supplementary-return" onclick="switchChapter(0)">← VOLVER AL INICIO</button>
  <header class="manifesto-hero" aria-labelledby="manifesto-title"><span class="manifesto-kicker">QUIÉNES SOMOS · IDENTIDAD COMPARTIDA</span><h2 id="manifesto-title">NO BUSCAMOS QUE<br>TODOS SEAN IGUALES.<br><em>BUSCAMOS QUE CADA UNO<br>TENGA UN LUGAR.</em></h2><p>Una Legión no se construye sumando nombres. Se construye cuando personas distintas eligen avanzar juntas.</p></header>
  <section class="manifesto-origin" aria-labelledby="manifesto-origin-title"><span>LO QUE NOS UNE</span><h3 id="manifesto-origin-title">CADA INTEGRANTE TIENE SU PROPIO UNIVERSO.</h3><p>Su voz, su humor, sus intereses, sus tiempos y su manera de crear. No queremos borrar esas diferencias: queremos que convivan. Legión Multiversal es un espacio para compartir videojuegos, entretenimiento, ideas y proyectos sin tener que dejar de ser quien sos.</p></section>
+
+ <section class="manifesto-clarity" aria-labelledby="manifesto-clarity-title">
+  <div class="manifesto-section-heading"><span>PARA QUE NO QUEDEN DUDAS</span><h3 id="manifesto-clarity-title">ESTO ES. ESTO NO.</h3><p>Preferimos decirlo de entrada: así nos sentimos todos más cómodos.</p></div>
+  <div class="manifesto-clarity-grid">
+   <article class="manifesto-clarity-is"><span>ESTO ES</span><ul>
+    <li>Un grupo colaborativo donde cada persona suma a un fin común: hacer entre todos cosas que solos no haríamos.</li>
+    <li>Un lugar de iguales. Nadie está por encima de nadie, y cada canal conserva su identidad.</li>
+    <li>Compañerismo de verdad: alegrarnos por el logro del otro y dar una mano sin esperar nada a cambio.</li>
+    <li>Un espacio abierto a streamers chicos o grandes, marcas y desarrolladores que quieran construir con nosotros.</li>
+   </ul></article>
+   <article class="manifesto-clarity-isnt"><span>ESTO NO ES</span><ul>
+    <li>Un grupo de «apoyo» para intercambiar follows, vistas o likes.</li>
+    <li>Una escalera de rangos, cargos o jerarquías.</li>
+    <li>Un club cerrado que pide cierto número de seguidores para dejarte entrar.</li>
+    <li>Una promesa de fama, ingresos o crecimiento rápido.</li>
+   </ul></article>
+  </div>
+ </section>
+ <section class="manifesto-people" aria-labelledby="manifesto-people-title">
+  <div class="manifesto-section-heading"><span>LAS PERSONAS DE LA LEGIÓN</span><h3 id="manifesto-people-title">TODOS IGUALES. CADA UNO CON LO SUYO.</h3><p>Cada integrante tiene su canal, su estilo y su manera de aportar. Ninguno está por encima de otro.</p></div>
+  <div class="manifesto-people-grid" id="manifesto-people-grid" aria-live="polite"><p class="manifesto-people-fallback">Conocé a todas las personas de la Legión, con sus canales y estilos, en el Roster.</p></div>
+  <a class="manifesto-history-link" href="#chapter-2" onclick="switchChapter(2);return false;">CONOCER A TODOS EN EL ROSTER →</a>
+ </section>
  <section class="manifesto-history" aria-labelledby="manifesto-history-title">
   <div class="manifesto-section-heading"><span>DEL ARCHIVO A LA IDENTIDAD ACTUAL</span><h3 id="manifesto-history-title">UNA HISTORIA QUE CAMBIÓ DE NOMBRE, NO DE RAÍZ.</h3><p>Este recorrido resume hitos que ya están documentados en el capítulo Origen. No asigna fechas nuevas ni reemplaza el expediente histórico.</p></div>
   <ol class="manifesto-history-line">
    <li><span>01 · PRIMERA ETAPA</span><h4>S3X-MEN</h4><p>Demian y ROD3R1K comenzaron compartiendo partidas de Marvel Rivals e imaginando un proyecto propio. Akuma se incorporó como tercer integrante y ARDIPII como cuarto, formando la primera etapa del equipo.</p></li>
    <li><span>02 · NUEVOS MUNDOS</span><h4>JUGAR, COMPARTIR, CRECER</h4><p>Fortnite y otras experiencias ampliaron los encuentros. La idea empezó a abrirse más allá de una sola partida y a conectar personas, contenido y nuevas formas de colaboración.</p></li>
-   <li><span>03 · MÁS VOCES</span><h4>UNA COMUNIDAD DIVERSA</h4><p>Se incorporaron nuevas personas con recorridos propios. Lady Moriarty y Dave llegaron en etapas posteriores; Habitos y PATO — ORATORIS encontraron su lugar como colaboradores.</p></li>
+   <li><span>03 · MÁS VOCES</span><h4>UNA COMUNIDAD DIVERSA</h4><p>Se incorporaron nuevas personas con recorridos propios. Lady Moriarty y Dave llegaron en etapas posteriores. Habitos y PATO — ORATORIS se sumaron con canales de enfoque distinto —hábitos y filosofía cotidiana, programación y divulgación—; esa diferencia está en lo que cada canal cuenta, no en un rango.</p></li>
    <li><span>04 · IDENTIDAD PÚBLICA</span><h4>LEGIÓN MULTIVERSAL</h4><p>S3X-MEN permanece como archivo de origen. Legión Multiversal es la identidad pública que reúne gaming, entretenimiento, conocimiento, tecnología y desarrollo personal.</p></li>
   </ol><a class="manifesto-history-link" href="#chapter-1" onclick="switchChapter(1);return false;">VOLVER AL EXPEDIENTE HISTÓRICO COMPLETO →</a>
  </section>
@@ -719,7 +743,19 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
  <section class="manifesto-onboarding" aria-labelledby="manifesto-onboarding-title"><div class="manifesto-section-heading"><span>UN CAMINO SIMPLE · SIN PRESIONES</span><h3 id="manifesto-onboarding-title">CONOCER. PROBAR. DOCUMENTAR.</h3><p>La participación empieza con una conversación y crece según el interés y la disponibilidad de cada persona.</p></div>
   <div class="manifesto-onboarding-grid"><article><b>01</b><h4>CONOCER</h4><p>Nos presentamos, compartimos intereses y entendemos qué busca cada persona. No hace falta llegar con una propuesta cerrada.</p></article><article><b>02</b><h4>PROBAR</h4><p>Si hay ganas, coordinamos una experiencia pequeña y acordada. Se puede ajustar o decir que no antes de empezar.</p></article><article><b>03</b><h4>DOCUMENTAR</h4><p>Registramos qué hicimos, quién participó y qué aprendimos. Lo publicado debe respetar las fuentes y los permisos.</p></article></div>
   <p class="manifesto-practice-footnote">No es una obligación ni un proceso de selección automático. Cada participación es voluntaria y se acuerda entre las personas involucradas.</p></section>
- <section class="manifesto-invitation"><div><span>¿TE IDENTIFICÁS CON ESTA FORMA DE HACER LAS COSAS?</span><h3>ENTONCES HAY UNA CONVERSACIÓN QUE PODEMOS EMPEZAR.</h3></div><div class="chapter-actions"><button class="chapter-cta" type="button" onclick="switchChapter(6)">QUIERO FORMAR PARTE <span>→</span></button><button class="chapter-cta" type="button" onclick="switchChapter(8)">QUIERO COLABORAR CON LA LEGIÓN <span>→</span></button></div></section>
+
+ <section class="manifesto-faq" aria-labelledby="manifesto-faq-title">
+  <div class="manifesto-section-heading"><span>PREGUNTAS FRECUENTES</span><h3 id="manifesto-faq-title">LO QUE NOS PREGUNTAN (Y LO QUE QUIZÁS TE ESTÁS PREGUNTANDO).</h3></div>
+  <div class="manifesto-faq-list">
+   <details><summary>¿Tengo que tener una cantidad mínima de seguidores?</summary><p>No hay un número mágico. Pueden colaborar canales chicos y grandes. Lo que miramos es que compartas estos valores, tengas ganas de aportar y puedas coordinar tiempos. Cada caso se conversa.</p></details>
+   <details><summary>¿Tengo que cambiar mi estilo o mi comunidad?</summary><p>Al contrario: cada canal conserva su voz, su horario y a su gente. La idea es sumar, no uniformar.</p></details>
+   <details><summary>¿Hay rangos, cargos o jerarquías?</summary><p>No. Somos iguales. Algunos canales tienen un enfoque distinto (programación, hábitos, retro, terror…), pero eso habla de lo que cuentan, no de cuánto «pesan» dentro del grupo.</p></details>
+   <details><summary>¿Es un grupo de follow x follow?</summary><p>No. Queremos que la gente nos siga porque le gusta lo que hacemos, no por un intercambio. Lo que construimos juntos es contenido, experiencias y vínculos genuinos.</p></details>
+   <details><summary>Soy una marca, un estudio o desarrollo juegos. ¿Puedo colaborar?</summary><p>Sí. Hay un camino pensado para vos en <a href="#chapter-8" onclick="switchChapter(8);return false;">Alianzas</a>: podés ofrecer acceso a un juego, elegir a un creador o armar una experiencia con el grupo.</p></details>
+   <details><summary>¿Cómo sé quién está transmitiendo ahora?</summary><p>En <a href="#chapter-10" onclick="switchChapter(10);return false;">EN VIVO</a> te mostramos a quienes están en directo en este momento.</p></details>
+  </div>
+ </section>
+ <section class="manifesto-invitation"><div><span>¿TE IDENTIFICÁS CON ESTA FORMA DE HACER LAS COSAS?</span><h3>ENTONCES HAY UNA CONVERSACIÓN QUE PODEMOS EMPEZAR.</h3></div><div class="chapter-actions"><button class="chapter-cta" type="button" onclick="switchChapter(6);setRecruitmentMode('creator')">SOY CREADOR Y QUIERO SUMARME <span>→</span></button><a class="chapter-cta" href="#brand-proposal">SOY MARCA O DESARROLLADOR <span>→</span></a><button class="chapter-cta" type="button" onclick="switchChapter(10)">QUIERO VER UN DIRECTO <span>→</span></button></div></section>
 </section>
 
 <section id="chapter-9" class="chapter-panel comic-page belonging-chapter" data-editorial-number="5" data-pager="false">
@@ -762,12 +798,22 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
     <button type="button" class="supplementary-return" onclick="switchChapter(0)">← VOLVER AL INICIO</button>
   <p class="alliance-eyebrow">LEGIÓN MULTIVERSAL · CREDENCIALES Y OPORTUNIDADES</p>
   <h2 id="alliance-title" class="comic-title">ALIANZAS Y OPORTUNIDADES</h2>
-  <p class="alliance-lead">Creadores independientes. Credenciales atribuidas. Propuestas construidas en conjunto.</p>
-  <p class="alliance-intro">Legión Multiversal conecta creadores independientes con trayectorias, plataformas y comunidades diferentes. Podemos diseñar experiencias individuales o grupales junto a estudios, publishers, agencias y marcas, según los perfiles participantes, los objetivos y los recursos acordados para cada propuesta.</p>
+  <p class="alliance-lead">Creadores independientes, credenciales reales y propuestas armadas a medida.</p>
+  <p class="alliance-intro">Somos personas con canales distintos que eligieron trabajar juntas. Cuando un estudio, una marca o una plataforma se acerca, armamos la propuesta con quienes mejor encajan con el juego y con lo que se quiere lograr: a veces un solo creador, a veces varios y a veces toda la Legión. Acá encontrás qué credenciales tenemos, qué formatos podemos ofrecer y cómo empezar la conversación.</p>
   <nav class="alliance-quick-nav" aria-label="Secciones del expediente de alianzas">
-   <a href="#alliance-collective">Credenciales colectivas</a><a href="#alliance-individual">Credenciales individuales</a><a href="#alliance-platforms">Plataformas</a><a href="#alliance-market">Contexto LATAM</a><a href="#alliance-formats">Formatos</a><a href="#alliance-cases">Experiencias</a>
+   <a href="#alliance-paths">Cómo empezar</a><a href="#alliance-collective">Credenciales colectivas</a><a href="#alliance-individual">Credenciales individuales</a><a href="#alliance-platforms">Plataformas</a><a href="#alliance-market">Contexto LATAM</a><a href="#alliance-formats">Formatos</a><a href="#alliance-cases">Experiencias</a>
   </nav>
  </header>
+
+ <section class="alliance-section alliance-paths" id="alliance-paths" aria-labelledby="alliance-paths-title">
+  <div class="alliance-section-heading"><span class="alliance-index">00 / POR DÓNDE EMPEZAR</span><h3 id="alliance-paths-title">TRES FORMAS DE TRABAJAR CON NOSOTROS</h3><p>No hace falta tener el plan completo. Elegí el camino que más se parezca a lo que necesitás y lo vamos ajustando juntos.</p></div>
+  <div class="alliance-paths-grid">
+   <article class="alliance-path-card"><span class="alliance-format-number">A</span><h4>QUIERO QUE PRUEBEN MI JUEGO</h4><p>Si tenés un juego por salir o recién lanzado, podés ofrecernos acceso. Cada creador decide si encaja con su canal y su comunidad; no hace falta que lo jueguen todos.</p><a class="chapter-cta" href="#brand-proposal">OFRECER MI JUEGO →</a></article>
+   <article class="alliance-path-card"><span class="alliance-format-number">B</span><h4>BUSCO A UNA PERSONA EN PARTICULAR</h4><p>Si ya sabés qué voz querés, mirá el Roster: cada perfil tiene sus estadísticas públicas, sus juegos y una ficha para marcas. Después proponé una colaboración puntual con esa persona.</p><button class="chapter-cta" type="button" onclick="switchChapter(2)">VER EL ROSTER →</button></article>
+   <article class="alliance-path-card"><span class="alliance-format-number">C</span><h4>QUIERO UNA EXPERIENCIA CON EL GRUPO</h4><p>Cuando la idea necesita varias voces —una partida cooperativa, un evento, una semana temática— armamos una experiencia compartida. BarFender es un ejemplo real, con todo documentado.</p><button class="chapter-cta" type="button" onclick="switchChapter(12)">VER UN CASO REAL →</button></article>
+  </div>
+  <p class="alliance-note">En los tres casos se acuerda todo por escrito antes de empezar: quién participa, qué se muestra, cuándo y con qué condiciones.</p>
+ </section>
  <section class="alliance-section" id="alliance-collective" aria-labelledby="alliance-collective-title">
   <div class="alliance-section-heading"><span class="alliance-index">01 / CANAL COMPARTIDO</span><h3 id="alliance-collective-title">CREDENCIALES COLECTIVAS</h3><p>Reconocimientos vinculados al proyecto y al canal compartido de Los Moriartys.</p></div>
   <article class="alliance-credential alliance-credential-featured">
@@ -777,7 +823,7 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
   <div id="epic-creator-programs-collective" class="epic-code-mount" aria-live="polite"><span class="loading-skeleton loading-skeleton-line" aria-hidden="true"></span></div>
  </section>
  <section class="alliance-section" id="alliance-individual" aria-labelledby="alliance-individual-title">
-  <div class="alliance-section-heading"><span class="alliance-index">02 / TRAYECTORIAS PERSONALES</span><h3 id="alliance-individual-title">CREDENCIALES INDIVIDUALES</h3><p>Las acreditaciones personales pertenecen a cada creador y a su canal. No se atribuyen automáticamente a toda la Legión.</p></div>
+  <div class="alliance-section-heading"><span class="alliance-index">02 / TRAYECTORIAS PERSONALES</span><h3 id="alliance-individual-title">CREDENCIALES INDIVIDUALES</h3><p>Cada acreditación pertenece a la persona que la consiguió y a su canal; no se le atribuye a toda la Legión. Se suman nuevas cuando cada integrante las tiene confirmadas.</p></div>
   <article class="alliance-person-card"><img class="alliance-person-avatar" src="assets/heroes/rod3r1k_dark.webp" alt="Identidad visual de ROD3R1K" loading="lazy" width="1280" height="1920"><div class="alliance-person-main">
    <div class="alliance-person-heading"><div><span class="alliance-stamp alliance-stamp-personal">CREDENCIAL INDIVIDUAL</span><h4>ROD3R1K</h4></div><span class="alliance-status alliance-status-confirmed">TWITCH PARTNER</span></div>
    <p>Reconocimiento correspondiente a su canal individual de Twitch.</p><div class="alliance-person-links"><a href="https://www.twitch.tv/ROD3R1K" target="_blank" rel="noopener noreferrer">VISITAR CANAL DE TWITCH ↗</a></div>
@@ -841,8 +887,8 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
   <div class="alliance-section-heading"><span class="alliance-index">06 / ARCHIVO DE EXPERIENCIAS</span><h3 id="alliance-cases-title">LAS EXPERIENCIAS TAMBIÉN HABLAN</h3><p>Las credenciales muestran trayectorias. Los expedientes documentan cómo trabajamos en equipo.</p></div>
   <article class="alliance-case-card alliance-case-index"><div class="alliance-case-art" aria-hidden="true"><span>ARCHIVO DE EXPERIENCIAS</span><strong>CASOS</strong><small>PARTIDAS · EVENTOS · PROYECTOS</small></div><div class="alliance-case-copy"><span class="alliance-stamp alliance-stamp-case">ARCHIVO DE EXPERIENCIAS</span><h4>PARTIDAS, EVENTOS Y PROYECTOS COMPARTIDOS</h4><p>Los casos con participantes, registros audiovisuales, métricas y aprendizajes se desarrollan en Colaboraciones, con un expediente principal por experiencia.</p><button class="chapter-cta" type="button" onclick="switchChapter(12)">VER EXPEDIENTES DE COLABORACIÓN →</button></div></article>
  </section>
- <section class="alliance-section alliance-transparency" aria-labelledby="alliance-transparency-title"><span class="alliance-index">07 / CRITERIO EDITORIAL</span><h3 id="alliance-transparency-title">TRANSPARENCIA Y ALCANCE</h3><p>Las credenciales identifican programas, plataformas o accesos; no equivalen por sí mismos a patrocinios económicos, contratos ni pagos. La participación en un programa o plataforma no equivale a una alianza comercial. No implica, por sí sola, patrocinio, pago ni contrato. El acceso a BarFender fue facilitado mediante Keymailer y no se presenta como patrocinio ni como campaña remunerada. Toda colaboración comercial se informa por separado cuando está documentada y acordada.</p></section>
- <section class="alliance-contact" id="alliance-contact" aria-labelledby="alliance-contact-title"><span class="alliance-index">08 / CONTACTO COMERCIAL</span><h3 id="alliance-contact-title">HABLEMOS DE UNA COLABORACIÓN</h3><p>Desarrolladores, publishers, agencias y marcas pueden acercar propuestas de campañas, cobertura, accesos anticipados o activaciones con la comunidad.</p><p>Para evaluar una propuesta, compartí la marca o juego, objetivos, fechas, plataformas, entregables esperados y presupuesto disponible.</p><a class="alliance-contact-link" href="#brand-proposal">losmoriartys@gmail.com →</a></section>
+ <section class="alliance-section alliance-transparency" aria-labelledby="alliance-transparency-title"><span class="alliance-index">07 / CRITERIO EDITORIAL</span><h3 id="alliance-transparency-title">TRANSPARENCIA Y ALCANCE</h3><p>Una credencial identifica un programa, una plataforma o un acceso. No implica, por sí sola, patrocinio, pago ni contrato, y participar en un programa no equivale a una alianza comercial.</p><p>El acceso a BarFender fue facilitado mediante Keymailer y no se presenta como patrocinio ni como campaña remunerada.</p><p>Si alguna vez hay una colaboración comercial acordada, la contamos por separado y con todas las letras.</p></section>
+ <section class="alliance-contact" id="alliance-contact" aria-labelledby="alliance-contact-title"><span class="alliance-index">08 / CONTACTO COMERCIAL</span><h3 id="alliance-contact-title">HABLEMOS DE UNA COLABORACIÓN</h3><p>Si sos de un estudio, un publisher, una agencia o una marca, contanos qué tenés en mente. No hace falta una propuesta cerrada: con una idea alcanza para empezar a conversar.</p><p>Para poder responderte mejor, ayuda saber el juego o la marca, qué querés lograr, las fechas, las plataformas y, si ya lo tenés, el presupuesto disponible.</p><a class="alliance-contact-link" href="#brand-proposal">ENVIAR UNA PROPUESTA →</a><p class="alliance-contact-alt">Si preferís escribir directo: losmoriartys@gmail.com</p></section>
 </section>
 
 <section id="chapter-12" class="chapter-panel comic-page collaboration-chapter" data-editorial-number="7" data-pager="false">
@@ -852,7 +898,7 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
   <div class="collab-cover-copy">
    <span class="collab-kicker">ARCHIVO CENTRAL · LEGIÓN MULTIVERSAL</span>
    <h2>CUANDO LOS UNIVERSOS<br><span>SE ENCUENTRAN.</span></h2>
-   <p>Las colaboraciones son parte de nuestra historia. Este archivo registra partidas compartidas, directos simultáneos, eventos y proyectos en los que los integrantes de la Legión unen sus comunidades para crear algo en común.</p>
+   <p>Colaborar es lo que mejor hacemos. Acá guardamos las partidas compartidas, los directos simultáneos, los eventos y los proyectos en los que distintos integrantes de la Legión juntaron sus comunidades para hacer algo en común, con quién estuvo, dónde se puede ver y qué aprendimos.</p>
    <div class="collab-cover-stamp">ARCHIVO BIT · SESIONES Y POV</div>
    <a class="collab-bitacora-link" href="#collab-games-registry">EXPLORAR COLABORACIONES DOCUMENTADAS →</a>
   </div>
@@ -860,12 +906,23 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
  </div>
  <section class="collab-intro">
   <div class="section-kicker">01 / EL ARCHIVO</div>
-  <div class="section-heading"><h3>NO SON SOLO PARTIDAS.<br><span>SON EXPERIENCIAS CONSTRUIDAS EN EQUIPO.</span></h3><p>Cada expediente conserva participantes, objetivo, ejecución, contenido publicado, resultados respaldables y aprendizajes. Las cifras individuales y compartidas se presentan por separado para que cada dato tenga contexto. Una oportunidad o postulación no se convierte en caso de éxito hasta que la actividad se realiza y queda documentada.</p></div>
+  <div class="section-heading"><h3>NO SON SOLO PARTIDAS.<br><span>SON EXPERIENCIAS CONSTRUIDAS EN EQUIPO.</span></h3><p>Cada expediente cuenta quiénes participaron, qué buscábamos, cómo salió, qué quedó publicado y qué aprendimos. Las cifras de cada canal se muestran por separado, con su fuente, para que cada número se entienda en contexto. Y algo no es un caso hasta que realmente pasó y quedó registrado.</p></div>
   <div class="collab-principles">
    <article><strong>01</strong><h4>CREADORES</h4><p>Visibilidad para cada integrante y su canal.</p></article>
    <article><strong>02</strong><h4>CONTENIDO</h4><p>VOD, clips y momentos que prolongan la experiencia.</p></article>
    <article><strong>03</strong><h4>COMUNIDADES</h4><p>Distintas audiencias reunidas alrededor de una actividad común.</p></article>
    <article><strong>04</strong><h4>TRANSPARENCIA</h4><p>Métricas con fuente, período y alcance identificados.</p></article>
+  </div>
+ </section>
+
+ <section class="collab-how" aria-labelledby="collab-how-title">
+  <div class="section-kicker">CÓMO LO HACEMOS</div>
+  <div class="section-heading"><h3 id="collab-how-title">UNA COLABORACIÓN,<br><span>EN CUATRO PASOS.</span></h3><p>No hay una receta rígida, pero así suelen armarse nuestras experiencias. Sirve igual si la idea viene de adentro de la Legión, de otro creador o de una marca.</p></div>
+  <div class="collab-principles collab-how-steps" role="list">
+   <article role="listitem"><strong>01</strong><h4>LA IDEA</h4><p>Alguien propone: un juego, un evento, un desafío. No hace falta tenerlo todo resuelto.</p></article>
+   <article role="listitem"><strong>02</strong><h4>EL ACUERDO</h4><p>Quiénes participan, cuándo y qué se va a mostrar. Cada persona puede ajustar o decir que no.</p></article>
+   <article role="listitem"><strong>03</strong><h4>EL DIRECTO</h4><p>Cada canal transmite con su propia identidad y le habla a su propia comunidad.</p></article>
+   <article role="listitem"><strong>04</strong><h4>EL REGISTRO</h4><p>Guardamos VOD, clips y métricas con su fuente, para contar lo que pasó tal cual pasó.</p></article>
   </div>
  </section>
  <section class="collab-registry" id="collab-games-registry" aria-labelledby="collab-registry-title" data-collab-ready="false">
@@ -1001,7 +1058,10 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
   </article>
  </section>
  <section class="collab-next"><div><span class="collab-kicker">EL ARCHIVO SIGUE ABIERTO</span><h3>CADA COLABORACIÓN<br><span>SUMA UNA NUEVA HISTORIA.</span></h3><p>La próxima bitácora podrá documentar otro juego, evento, encuentro, directo conjunto o proyecto comunitario. Cada experiencia tendrá su propio expediente y conservará el registro de quienes la hicieron posible.</p></div><div class="collab-next-stamp">PRÓXIMA<br><strong>COLABORACIÓN</strong><br>POR REGISTRAR</div></section>
- <div class="collab-contact"><span>¿REPRESENTÁS UN ESTUDIO, PUBLISHER, AGENCIA O MARCA?</span><p>Podemos conversar sobre experiencias multicanal, contenido cooperativo y activaciones con creadores.</p><a href="#brand-proposal">CONTACTAR A LA LEGIÓN →</a></div>
+ <div class="collab-doors">
+  <div class="collab-contact collab-contact-creators"><span>¿SOS STREAMER O CREADOR DE CONTENIDO?</span><p>Chico o grande, si te gustan estas ideas, hay lugar para conversar. No pedimos follow x follow: buscamos construir de verdad.</p><a href="#chapter-6" onclick="switchChapter(6);setRecruitmentMode('creator');return false;">QUIERO COLABORAR →</a></div>
+  <div class="collab-contact"><span>¿REPRESENTÁS UN ESTUDIO, PUBLISHER, AGENCIA O MARCA?</span><p>Podemos conversar sobre experiencias multicanal, contenido cooperativo y activaciones con creadores.</p><a href="#brand-proposal">CONTACTAR A LA LEGIÓN →</a></div>
+ </div>
 </section>
 
 <section id="chapter-5" class="chapter-panel comic-page arsenal-chapter" data-editorial-number="8" data-pager="false">
@@ -1011,8 +1071,8 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
  <div class="premium-panel arsenal-intro">
   <div class="premium-kicker">18 JUEGOS · UN SOLO CATÁLOGO COMPARTIDO</div>
   <h3>Distintos mundos. Nuevas formas de jugar juntos.</h3>
-  <p>El Arsenal reúne el repertorio de experiencias de la Legión: juegos ya compartidos, títulos por descubrir y casos especiales. Cada ficha utiliza el mismo registro maestro que la Bitácora; no existen dos listados que haya que mantener por separado.</p>
-  <p>Buscá por categoría, nombre o disponibilidad de jugadores. La ruleta propone una misión entre los resultados que dejaste visibles.</p>
+  <p>Acá están los juegos que jugamos, los que queremos probar y los que ya dieron para una colaboración. Cada juego tiene una sola ficha, y es la misma que se usa en la Bitácora de Colaboraciones.</p>
+  <p>Elegí un atajo, buscá por nombre o filtrá por cantidad de jugadores. Y si no te decidís, la ruleta elige por vos.</p>
   <div class="arsenal-registry-summary" id="arsenal-registry-summary" aria-label="Resumen del catálogo">
    <article><strong>—</strong><span>JUEGOS ÚNICOS</span></article>
    <article><strong>—</strong><span>CON SESIÓN BIT</span></article>
@@ -1021,9 +1081,10 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
   </div>
  </div>
  <div class="arsenal-selection-heading">
-  <div class="premium-kicker">CATÁLOGO CENTRAL · GAMES.JSON</div>
+  <div class="premium-kicker">EL CATÁLOGO</div>
   <h3>BUSCÁ TU PRÓXIMA MISIÓN</h3>
-  <p>Las fichas con colaboración documentada enlazan a su sesión en la Bitácora. Los datos de jugadores, ediciones y plataformas se muestran únicamente cuando están registrados.</p>
+  <p>Si un juego ya se jugó en grupo, su ficha te lleva a esa sesión en Colaboraciones. Los datos de jugadores, ediciones y plataformas aparecen cuando están confirmados.</p>
+  <p class="arsenal-legend"><b>Cómo leer las fichas:</b> «con sesión BIT» es un juego que ya jugamos juntos y quedó registrado en la Bitácora; «por descubrir» es un juego en la lista para probar; «expediente comercial» es un caso documentado con todo su detalle (hoy, BarFender).</p>
  </div>
  <section class="arsenal-registry" id="arsenal-registry" aria-labelledby="arsenal-registry-title" data-arsenal-ready="false">
   <h4 id="arsenal-registry-title" class="arsenal-sr-only">Catálogo de juegos de la Legión Multiversal</h4>
@@ -1040,9 +1101,16 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
   </section>
   <div class="arsenal-registry-toolbar"><p id="arsenal-registry-status" role="status" aria-live="polite">Conectando con el catálogo maestro…</p><button type="button" id="arsenal-reset-filters">LIMPIAR FILTROS</button></div>
   <div class="premium-grid arsenal-grid" id="arsenal-grid" aria-live="polite" aria-busy="true"><article class="arsenal-loading-card"><strong>ABRIENDO EL ARSENAL</strong><p>Las fichas se cargan desde el registro compartido de la Legión.</p></article></div>
-  <p class="arsenal-registry-footnote">Las sesiones y los POV se cuentan por registro BIT, no por cantidad de tarjetas o canales. BarFender se identifica como expediente comercial EXP-001 y no se suma a la Bitácora. Los datos no confirmados permanecen pendientes de verificación.</p>
+  <p class="arsenal-registry-footnote">Las sesiones y los POV se cuentan por registro de la Bitácora, no por tarjetas ni por canales. BarFender es el expediente EXP-001 y se cuenta aparte. Lo que todavía no está confirmado queda marcado como pendiente.</p>
  </section>
- <div class="premium-panel arsenal-play-guide"><div class="premium-kicker">GUÍA PARA ORGANIZAR LAS SESIONES</div><h3>Primero la experiencia; después, la plataforma</h3><p>Antes de convocar al roster, confirmá que todos tengan la misma edición o una versión compatible. En Minecraft distinguí Java de Bedrock; en otros títulos, revisá los requisitos y el modo online en la ficha oficial vigente.</p><p>Una colaboración documentada no garantiza que el juego esté disponible en todos los canales o dispositivos. La compatibilidad se revisa para cada sesión.</p></div>
+ <div class="premium-panel arsenal-play-guide"><div class="premium-kicker">ANTES DE ARRANCAR LA NOCHE</div><h3>Primero la experiencia; después, la plataforma</h3>
+  <ul class="arsenal-checklist">
+   <li><b>Misma edición.</b> En Minecraft, confirmá si todos juegan Java o Bedrock.</li>
+   <li><b>Cuántos entran.</b> Mirá el máximo de jugadores de la ficha antes de convocar.</li>
+   <li><b>Quién tiene el juego.</b> Fijate en qué plataforma está y si alguien necesita una copia.</li>
+   <li><b>Modo online y voz.</b> Revisá los requisitos en la ficha oficial vigente.</li>
+  </ul>
+  <p>Que un juego figure como colaboración documentada no garantiza que esté disponible para todos: se revisa en cada sesión.</p></div><h3>Primero la experiencia; después, la plataforma</h3><p>Antes de convocar al roster, confirmá que todos tengan la misma edición o una versión compatible. En Minecraft distinguí Java de Bedrock; en otros títulos, revisá los requisitos y el modo online en la ficha oficial vigente.</p><p>Una colaboración documentada no garantiza que el juego esté disponible en todos los canales o dispositivos. La compatibilidad se revisa para cada sesión.</p></div>
 </section>
 
 <section id="chapter-6" class="chapter-panel comic-page recruitment-chapter" data-editorial-number="10">
@@ -1188,6 +1256,7 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
     <script src="./app.js?v=20261120-stats-dossier-1"></script>
     <script src="./games-registry.js?v=20261121-collab-registry-1"></script>
     <script src="./arsenal-registry.js?v=20261121-arsenal-registry-1"></script>
+    <script src="./chapters-refresh.js?v=20261121-chapters-refresh-1" defer></script>
     <script src="./roster-enhancements.js?v=20261121-roster-v3-1"></script>
     <script src="./contact-forms.js?v=20261119-brand-proposal-1" defer></script>
     <script src="./navigation-fix.js" defer></script>

@@ -3984,3 +3984,17 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 
 
 - **Séptima iteración integrada:** la nueva traza aisló dos elementos internos del Capítulo 12 que todavía conservaban su ancho de escritorio a 360 px: el bloque de texto del encabezado de BarFender dentro de `.campaign-feature-head` y el cierre `.collab-next`. Se limita el primer bloque a una fila flexible al 100% y el cierre pasa a una columna con ancho mínimo cero. El documento no presenta overflow global.
+
+
+## 2026-11-21 · Refresco de Quiénes somos, Alianzas, Colaboraciones y Arsenal
+
+- **Base:** main en bbaf2f22ea9f72766373d4384a0653e0c193643f; rama `mejora-capitulos-quienes-alianzas-colab-arsenal`.
+- **Criterio:** tono más humano y empático; integrantes iguales, sin rangos; grupo colaborativo con fin común, no de «apoyo» ni follow x follow; nada de patrocinios ni resultados no confirmados.
+- **Capítulo 02 · Quiénes somos:** se corrigió la palabra «colaboradores» del hito 03 (Habitos y PATO — ORATORIS se sumaron con canales de enfoque distinto, sin rango). Se añadieron «Esto es. Esto no.», «Las personas de la Legión» (se dibuja desde roster-data.json; con texto de respaldo sin JavaScript) y preguntas frecuentes accesibles (`details`). La invitación final ofrece tres caminos: creador, marca o desarrollador, ver un directo.
+- **Capítulo 06 · Alianzas:** nueva sección «Por dónde empezar» con tres caminos para marcas (ofrecer acceso a un juego, elegir a una persona del Roster, armar una experiencia con el grupo). Se reescribieron la introducción, el criterio de transparencia (sin repeticiones, conservando «No implica, por sí sola») y el cierre comercial. El enlace de contacto mostraba un correo pero abría el formulario: ahora el botón dice «Enviar una propuesta» y el correo se conserva como texto.
+- **Capítulo 07 · Colaboraciones:** introducción más clara, nueva sección «Una colaboración, en cuatro pasos» y dos puertas al final (creadores y marcas).
+- **Capítulo 08 · Arsenal:** se retiró el texto interno («GAMES.JSON», «no existen dos listados…»), se agregó una guía breve para leer las fichas, atajos por categoría (conectados al filtro existente, sin duplicar lógica) y la guía previa pasó a una lista corta de cuatro puntos.
+- **Archivos:** index.html, chapters-refresh.css (nuevo), chapters-refresh.js (nuevo) e INFORMES.md. No se tocaron datos, métricas, colectores, imágenes ni registros (`data/games.json`).
+- **Pendiente de confirmar con Demian (no publicado):** Sesión 02 de BarFender con los datos del panel oficial de Twitch (Rod y Akuma). Hay dos dudas: la fecha (el sitio dice 10/11; el panel de Rod, mié 11/11) y las cifras «compartidas» (96 únicos compartidos es menor que los 149 únicos de Rod, por lo que no puede ser una unión de audiencias). Hasta aclararlo, sigue el registro de muestreo existente.
+- **Validación local:** 221 pruebas Python y validadores estáticos (`validate_site`, `check_anchors`, `audit_accessibility`) aprobados; Playwright con Chrome local: 48 de 50 aprobadas. Las 2 que fallan (`bitacora` móvil y `roster` de ocho cartas) fallan igual sobre main sin estos cambios, por recursos externos bloqueados en el entorno de pruebas. Corregido durante la prueba: desborde móvil del título de la sección nueva de Colaboraciones.
+- **Estado:** pendiente CI en GitHub sobre la rama. No se declara integración en main ni producción hasta verificar los workflows y el despliegue.
