@@ -203,9 +203,9 @@
     if (!link) return;
     event.preventDefault();
     const gameId = link.dataset.openArsenal;
-    if (typeof window.switchChapter === 'function') window.switchChapter(5);
+    if (typeof window.switchChapter === 'function') window.switchChapter(5, { scrollBehavior: 'auto' });
     window.requestAnimationFrame(function () {
-      document.getElementById('arsenal-game-' + gameId)?.scrollIntoView({ block: 'center', behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+      document.getElementById('arsenal-game-' + gameId)?.scrollIntoView({ block: 'center', behavior: 'auto' });
     });
   });
   window.gamesRegistryReady = loadRegistry();

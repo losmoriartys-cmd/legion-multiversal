@@ -2854,7 +2854,8 @@ function printHeroDossier(){
             recordLegionProgress('chapter', String(chapterNum));
             renderChapterPager(chapterNum);
             playChapterCue();
-            window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+            const chapterScrollBehavior = options.scrollBehavior === 'auto' || window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+            window.scrollTo({ top: 0, behavior: chapterScrollBehavior });
         }
         const rosterContainer = document.getElementById('roster-container');
         function initializeLegionApp() {

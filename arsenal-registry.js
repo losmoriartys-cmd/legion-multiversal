@@ -156,15 +156,15 @@
     if(!link)return;
     event.preventDefault();
     const bit=link.dataset.openBit;
-    if(typeof window.switchChapter==='function')window.switchChapter(12);
-    window.requestAnimationFrame(()=>document.getElementById(bit)?.scrollIntoView({block:'center',behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'}));
+    if(typeof window.switchChapter==='function')window.switchChapter(12,{scrollBehavior:'auto'});
+    window.requestAnimationFrame(()=>document.getElementById(bit)?.scrollIntoView({block:'center',behavior:'auto'}));
   });
   grid.addEventListener('click',event=>{
     const link=event.target.closest('[data-open-commercial]');
     if(!link)return;
     event.preventDefault();
-    if(typeof window.switchChapter==='function')window.switchChapter(12);
-    window.requestAnimationFrame(()=>document.getElementById('barfender-expediente')?.scrollIntoView({block:'center',behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'}));
+    if(typeof window.switchChapter==='function')window.switchChapter(12,{scrollBehavior:'auto'});
+    window.requestAnimationFrame(()=>document.getElementById('barfender-expediente')?.scrollIntoView({block:'center',behavior:'auto'}));
   });
   rouletteResult.addEventListener('click',event=>{
     const button=event.target.closest('[data-roulette-open]');
