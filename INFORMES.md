@@ -3491,3 +3491,14 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - La maqueta de referencia contiene controles de demostración y cifras de ejemplo (por ejemplo, 31 espectadores), junto con una lista parcial de clips y horarios escritos dentro del prototipo. Esos valores NO se trasladaron: el sitio continúa leyendo sus datos reales y no presenta muestras ficticias como información vigente.
 - Se conserva la rama aislada `feat/en-vivo-programa-interactivo` y el PR #76. **Sin merge, sin cambios en main y sin despliegue de producción.**
 - Validación pendiente sobre el nuevo HEAD: repetir CI/Playwright, revisar capturas de escritorio y móvil y comprobar la preview actualizada antes de aprobar.
+
+
+## 2026-11-21 · Reparación del Roster y recuperación de cuatro pestañas (PR #83)
+
+- **Problema reproducido:** la primera preview correctiva se había generado desde `main`, que todavía conservaba cinco pestañas. Esa captura no cumplía la decisión aprobada y no se tomó como referencia válida.
+- **Corrección:** se incorporó en la rama correctiva el render aprobado del PR #81: Perfil, Estadísticas, Clips y Bitácora; «Propuesta Comercial» queda como subapartado de Bitácora junto a Recorrido y Crecimiento.
+- **Estadísticas:** las capturas vencidas conservan el valor numérico cuando existe, quedan rotuladas **HISTÓRICO** y mantienen fecha/fuente. El umbral de 120 minutos sigue gobernando la vigencia del estado en directo; no se publican cifras antiguas como actuales.
+- **QA automatizado:** workflow de sitio run 44869431405 **SUCCESS**, incluyendo sintaxis, JSON, auditorías, Python y Playwright Chromium (ocho expedientes, cuatro pestañas, Bitácora, responsive e historial). Workflow de colector run 44869431438 **SUCCESS**.
+- **Comparación visual:** se inspeccionaron las cuatro capturas de Playwright (Roster desktop/móvil y expediente Lady en Bitácora desktop/móvil) del artefacto `roster-visual-review-8d4374ecdb0ed8e3b8a87de8c2c76aa495dad562`. Comparadas píxel a píxel con las cuatro capturas del artefacto PR #81 `roster-visual-review-e5a55794e310787178da2db365573a78745aaf41`, las cuatro resultaron **idénticas**. Esto confirma que esta reparación no altera tipografías, proporciones, recortes ni distribución respecto de esa referencia visual.
+- **Preview Cloudflare:** commit `7e62fa54db1ae270fd27c931e1314e6c88afc499`; preview `https://bb13b82b.legion-multiversal.pages.dev`; branch preview `https://fix-roster-preserve-historic.legion-multiversal.pages.dev`.
+- **Estado:** PR #83 abierto en Draft, sin merge. PR #81 abierto y sin merge. Producción intacta. La inspección manual del usuario y su autorización siguen siendo necesarias antes de integrar.
