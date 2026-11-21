@@ -1,13 +1,13 @@
 (function () {
   'use strict';
 
-  // Quiénes somos: las personas de la Legión salen de roster-data.json (una sola fuente).
+  // Quiénes somos: las personas de la Legión salen de data/roster.json (una sola fuente).
   function renderPeople() {
     var grid = document.getElementById('manifesto-people-grid');
     if (!grid || typeof fetch !== 'function') return;
-    fetch('./roster-data.json', { cache: 'no-store' })
+    fetch('./data/roster.json', { cache: 'no-store' })
       .then(function (response) {
-        if (!response.ok) throw new Error('roster-data.json ' + response.status);
+        if (!response.ok) throw new Error('data/roster.json ' + response.status);
         return response.json();
       })
       .then(function (payload) {
