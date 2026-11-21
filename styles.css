@@ -5947,3 +5947,21 @@ main .chapter-panel :where(.chapter-cta, .executive-button, .comic-submit-btn,
 @media(max-width:850px){.manifesto-history-line{grid-template-columns:1fr}.manifesto-onboarding-grid{grid-template-columns:1fr}}
 @media(max-width:600px){.manifesto-phase-tabs{grid-template-columns:1fr}.manifesto-phase-tabs button{min-height:44px;text-align:left}.manifesto-offer{grid-template-columns:1fr}.manifesto-history{padding:14px}.manifesto-history-line li{padding:14px}}
 @media(prefers-reduced-motion:reduce){.manifesto-phase-tabs button{scroll-behavior:auto;transition:none!important}}
+
+/* Ajuste de contención móvil del Capítulo 02 */
+.manifesto-chapter{box-sizing:border-box;width:100%;max-width:100%;min-width:0;overflow-wrap:anywhere}
+.manifesto-chapter *{box-sizing:border-box;min-width:0;max-width:100%}
+.manifesto-chapter h2,.manifesto-chapter h3,.manifesto-chapter h4,
+.manifesto-chapter p,.manifesto-chapter a,.manifesto-chapter button,
+.manifesto-chapter span,.manifesto-chapter small{overflow-wrap:anywhere}
+.manifesto-chapter .manifesto-phase-tabs button{width:100%;white-space:normal}
+@media(max-width:600px){
+ .manifesto-chapter .manifesto-hero,
+ .manifesto-chapter .manifesto-origin,
+ .manifesto-chapter .manifesto-history,
+ .manifesto-chapter .manifesto-values,
+ .manifesto-chapter .manifesto-practice,
+ .manifesto-chapter .manifesto-offer,
+ .manifesto-chapter .manifesto-onboarding,
+ .manifesto-chapter .manifesto-invitation{min-width:0;max-width:100%}
+}
