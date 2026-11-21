@@ -3562,3 +3562,11 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - La instrumentación anterior no detectó descendientes visibles ni pseudo-elementos desbordados. Se amplió el diagnóstico para inspeccionar también `::before`/`::after` del propio panel, métricas de cada hijo directo, padding, márgenes, transformaciones y overflow computado.
 - Commit: `8a3efc46934693eb5dc40185cb3c299fdf498d20` (`tests/browser/manifesto-chapter.spec.js`).
 - Pendiente: ejecutar de nuevo Playwright sobre este HEAD, identificar la fuente concreta del desbordamiento, corregirla sin ocultar overflow ni relajar la aserción y revisar evidencias visuales. PR #84 permanece abierto y sin fusionar.
+
+
+## 2026-11-21 · PR #84 · corrección de overflow del Capítulo 02
+
+- **HEAD validado:** 34deb7207a08e4a33fe05944d815dbc807f1b0b8. En el workflow 44878041315, Playwright ejecutó 32 pruebas: 31 pasaron y falló la prueba responsive de «Quiénes somos».
+- **Causa raíz identificada:** la regla global `.comic-page::before` usa `inset:-15%`. En el panel `#chapter-11` de 390 px, el pseudo-elemento se extendía 51 px por cada lado (442 px de ancho calculado), superando los 340 px del área interna. El contenido real y los controles no eran los causantes.
+- **Corrección aplicada en este commit:** dentro de `@media(max-width:600px)`, `#chapter-11.comic-page::before` pasa a `inset:0`. Se conserva el tramado y el movimiento editorial; solo se evita que la capa decorativa sobresalga del panel en móvil. No se añadió `overflow-x:hidden`, no se ocultó el defecto y no se relajó la aserción.
+- **Pendiente obligatorio:** ejecutar de nuevo Playwright y los workflows asociados sobre el nuevo HEAD; confirmar overflow cero y revisar capturas. El PR no está aprobado ni fusionado hasta que las pruebas estén verdes.
