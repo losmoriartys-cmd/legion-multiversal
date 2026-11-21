@@ -6050,3 +6050,32 @@ main .chapter-panel :where(.chapter-cta, .executive-button, .comic-submit-btn,
     overflow-wrap: anywhere;
   }
 }
+
+
+/* QA responsive · segunda pasada mobile: títulos, sellos y tarjetas. */
+@media (max-width: 600px) {
+  #chapter-12.collaboration-chapter .collab-cover h2 span {
+    display: inline-block;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+  #chapter-12.collaboration-chapter .collab-cover-art strong {
+    display: block;
+    max-width: 100%;
+    font-size: clamp(.9rem, 3.8vw, 1.1rem);
+    line-height: 1.2;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+  #chapter-9 .belonging-path-grid {
+    width: 100%;
+    min-width: 0;
+    margin-inline: 0;
+    grid-template-columns: minmax(0, 1fr);
+  }
+  #chapter-9 .belonging-path-card {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+}
