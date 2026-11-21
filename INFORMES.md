@@ -46,7 +46,10 @@
 - **Integridad:** blob SHA de `data/roster.json` idéntico al original (`1228911b33d594473ef6e99d43f4b2934eb195a5)); ocho perfiles/IDs conservados y ruta antigua retirada.
 - **QA final del HEAD del PR `51affdb37eb067a3b0df04a2690edd3e0143386b`:** `validar` SUCCESS (incluye las 50 pruebas Playwright y auditoría de referencias de imágenes); Python tests SUCCESS; QA común de capítulos SUCCESS; QA portable SUCCESS; Cloudflare Pages preview SUCCESS.
 - **Incidencia resuelta:** el HEAD histórico `66d97a3` falló por inestabilidad del enlace durante `chapterArrive`; se corrigió esperando el fin de las animaciones y se verificó de nuevo en el HEAD final, con los dos sentidos de navegación funcionando.
-- **Post-merge:** los workflows de publicación Pages, validación de main, colectores y Lighthouse de producción se dispararon sobre el merge SHA. Su estado de despliegue se comprobará por separado; el merge por sí solo no se registra como publicación verificada.
+- [x] **Validación post-merge de `main`:** workflow `Validar código y datos del sitio` SUCCESS sobre el merge SHA `6b554acb17af6dae1ad89280576317ad4a8b83d7`, incluyendo Playwright, rutas, imágenes y auditoría de referencias.
+- [x] **Lighthouse de producción:** workflow `Lighthouse · producción Cloudflare Pages` SUCCESS sobre el merge SHA.
+- [x] **Despliegue de producción Cloudflare Pages:** build y deploy SUCCESS en el commit de `main` `4c79fca64f6c891b9a677a6eb8d1f62be9524873` (workflow `pages build and deployment`, run `44962817913`). La publicación del código integrado quedó verificada, no solo la preview.
+- [x] **Integridad tras la actualización automática posterior al merge:** `data/roster.json` conserva el blob SHA original y ocho perfiles; `creator-metrics.json` mantiene `source_files.identity = data/roster.json` con métricas generadas el `2026-11-21T23:38:54Z`.
 
 - **HEAD con fallo histórico documentado:** `66d97a35420ebb3bed6c0de878732a7836ac8385`.
 
