@@ -3580,3 +3580,6 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **Archivos:** tests/browser/helpers/chapter-qa.js, tests/browser/chapter-common-qa.spec.js, .github/workflows/qa-comun-capitulos.yml, docs/QA_COMUN_CAPITULOS.md.
 - **Validación:** PR recién abierto; CI y Playwright quedan pendientes. No se declara validado ni integrado.
 - **Límites:** esta primera suite no reemplaza QA semántico/WCAG completo, contratos de datos ni pruebas funcionales particulares. PASS, FAIL y BLOCKED se documentan; un entorno bloqueado no equivale a aprobado.
+
+
+- **Diagnóstico CI inicial PR #85:** el workflow común falló antes de ejecutar Playwright porque `actions/setup-node` configuró caché npm, pero el repositorio no tiene lockfile (`package-lock.json`/`npm-shrinkwrap.json`/`yarn.lock`); el paso `npm ci` tampoco era válido para este repo. Se corrigió el workflow para quitar la caché de lockfile y usar `npm install`, alineado con el workflow existente. La suite de capítulos todavía debe ejecutarse y aprobar; esta corrección no se considera validación final.
