@@ -43,14 +43,15 @@
 
 - [x] Retirar la ruta raíz; la búsqueda en consumidores operativos no deja referencias activas a `roster-data.json`.
 
-- [ ] Corregir navegación cruzada BIT↔Arsenal esperando el fin real de la animación `chapterArrive` antes de desplazar el enlace de destino. La prueba conserva el clic real de Playwright y exige visibilidad completa (`ratio: 1`) antes de pulsarlo.
-- **Estado:** [PR #91](https://github.com/losmoriartys-cmd/legion-multiversal/pull/91) abierto en borrador; NO listo para integrar hasta completar sincronización y QA del HEAD vigente.
+- [x] Corregir navegación cruzada BIT↔Arsenal esperando el fin de la animación `chapterArrive` antes de desplazar el enlace de destino. Playwright conserva el clic real y exige visibilidad completa (`ratio: 1`); no se usa `force` ni `dispatchEvent`.
+- **Estado:** [PR #91](https://github.com/losmoriartys-cmd/legion-multiversal/pull/91) abierto en borrador; navegación funcional comprobada. La integración queda condicionada al cierre verde de la última validación integral.
 - **Integridad:** blob SHA de `data/roster.json` idéntico al original (`1228911b33d594473ef6e99d43f4b2934eb195a5`); ocho IDs/slug conservados y ruta raíz retirada.
 - **CI del HEAD `66d97a3`:** `validar` FAILURE: 49 pruebas pasaron y falló el clic real del enlace Bitácora→Arsenal porque el panel seguía animándose y el enlace no alcanzaba estabilidad. Python tests, QA común, QA portable y preview Cloudflare Pages SUCCESS.
-- **Corrección en curso:** `switchChapter()` admite un callback `afterEnter` que espera las animaciones activas del panel; los dos registros desplazan el destino después de la entrada. Pendiente de verificar en la siguiente ejecución integral.
+- **Corrección verificada:** `switchChapter()` admite un callback `afterEnter` que espera las animaciones activas del panel; ambos registros desplazan el destino después de la entrada. La suite Playwright terminó SUCCESS en el HEAD `d9b832079af0d6d566e6d26b8baadd72338305e5`, con clics reales en las dos direcciones.
 - [x] **Sincronizar con `main`:** merge commit `a847da038a10ec67560d256ee8e02fad063e2822` incorporó los dos commits automáticos posteriores a la base del PR. La rama quedó al día (`ahead 15 / behind 0` en el HEAD de revisión `78bcff3`).
 - [x] Preservar las capturas más recientes de `data.json` y `platform-stats.json` (`2026-11-21T22:58:29Z`) y regenerar `creator-metrics.json` sobre esa captura, manteniendo `source_files.identity = data/roster.json` (`generated_at: 2026-11-21T22:58:30Z`).
-- **QA vigente · HEAD `78bcff3`:** Python tests SUCCESS, QA portable SUCCESS, preview Cloudflare Pages SUCCESS; QA común de capítulos y dos ejecuciones de `validar` siguen en progreso. La navegación BIT↔Arsenal todavía no se marca como corregida hasta que Playwright integral confirme el clic real.
+- **QA del HEAD `d9b8320`:** Python tests SUCCESS; QA común de capítulos SUCCESS; QA portable SUCCESS; preview Cloudflare Pages SUCCESS; Playwright de expedientes, Bitácora, pestañas, responsive e historial SUCCESS. `validar` continúa ejecutando la auditoría final de referencias de imágenes; su estado global aún no se marca como SUCCESS hasta que cierre el job.
+- **Último paso antes de integrar:** este commit documental actualizará la evidencia y disparará una nueva pasada de workflows en el HEAD resultante. Mantener el PR en borrador hasta que todos los checks de ese HEAD finalicen SUCCESS.
 - **HEAD con fallo documentado:** `66d97a35420ebb3bed6c0de878732a7836ac8385`.
 
 ### Próximo corte editorial · BarFender como colaboración de la Legión
