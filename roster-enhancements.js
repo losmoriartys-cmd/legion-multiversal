@@ -53,27 +53,38 @@
   }
 
   function followerMetric(hero, channel, account) {
-    if (account?.platform === 'twitch') {
-      const count = metricNumber(channel?.followers_total);
-      const source = text(channel?.followers_source);
-      const captured = text(channel?.followers_captured_at);
-      if (count !== null && source && captured) {
-        return { value: count.toLocaleString('es-AR'), detail: source + ' · ' + dateLabel(captured), available: true };
-      }
+    if (!account?.platform || !window.LMBrand?.followersSlot) {
       return { value: 'No informado', detail: 'No hay una fuente verificable con fecha de captura', available: false };
     }
-    if (account?.platform === 'youtube') {
+    let entry = null;
+    if (account.platform === 'twitch' && channel) {
+      entry = {
+        platform: 'twitch',
+        count: channel.followers_total,
+        source: channel.followers_source,
+        as_of: channel.followers_captured_at
+      };
+    } else if (account.platform === 'youtube') {
       const creator = platformStatsData?.creators?.[hero.id]?.platforms?.youtube;
-      const count = metricNumber(creator?.metrics?.subscribers);
-      const source = text(creator?.source);
-      const captured = text(creator?.captured_at);
-      if (count !== null && source && captured) {
-        return { value: count.toLocaleString('es-AR'), detail: source + ' · ' + dateLabel(captured), available: true };
+      if (creator?.status === 'verified') {
+        entry = {
+          platform: 'youtube',
+          count: creator.metrics?.subscribers,
+          source: creator.source,
+          as_of: creator.captured_at
+        };
       }
     }
-    return { value: 'No informado', detail: 'No hay una fuente verificable con fecha de captura', available: false };
+    const slot = window.LMBrand.followersSlot(entry ? [entry] : [], account.platform);
+    if (!slot || slot.text === 'No informado' || !slot.source || !slot.asOf) {
+      return { value: 'No informado', detail: 'No hay una fuente verificable con fecha de captura', available: false };
+    }
+    return {
+      value: slot.text,
+      detail: slot.source + ' · ' + dateLabel(slot.asOf) + (slot.stale ? ' · referencia histórica' : ''),
+      available: true
+    };
   }
-
   function viewerMetric(channel, account) {
     if (account?.platform !== 'twitch') return { value: 'No aplica', detail: 'Canal de video · no corresponde comparar viewers de Twitch', available: false, sort: -1 };
     const average = metricNumber(channel?.window?.average_viewers_sampled);
