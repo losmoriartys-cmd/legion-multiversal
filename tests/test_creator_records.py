@@ -44,6 +44,17 @@ class CreatorRecordsValidationTests(unittest.TestCase):
         errors = validate(value, self.roster)
         self.assertTrue(any("base mínima de cinco" in error for error in errors))
 
+    def test_creator_records_have_one_canonical_path_and_metrics_manifest(self):
+        canonical_path = ROOT / "data/creator-records.json"
+        legacy_path = ROOT / "creator-records.json"
+        metrics = json.loads((ROOT / "creator-metrics.json").read_text(encoding="utf-8"))
+        self.assertTrue(canonical_path.is_file())
+        self.assertFalse(legacy_path.exists())
+        self.assertEqual(
+            metrics["source_files"]["creator_records"],
+            "data/creator-records.json",
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
