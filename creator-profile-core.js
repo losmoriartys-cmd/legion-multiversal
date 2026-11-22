@@ -6,7 +6,7 @@
 
   const FILES = Object.freeze({
     roster: './data/roster.json',
-    records: './creator-records.json',
+    records: './data/creator-records.json',
     metrics: './creator-metrics.json',
     platforms: './platform-stats.json',
     activity: './data.json',

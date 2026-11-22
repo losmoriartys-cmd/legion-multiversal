@@ -72,7 +72,7 @@ Cada colaborador debe:
 | `platform-stats.json` | Datos automáticos de YouTube/Kick, separados por plataforma, fuente y captura. |
 | `update_stats.py` | Colector Twitch Helix. |
 | `update_platform_stats.py` | Colectores YouTube Data API v3 y Kick Developer Public API. |
-| `creator-records.json` | Registros editoriales y trayectoria documentada por creador. |
+| `data/creator-records.json` | Registros editoriales y trayectoria documentada por creador. |
 | `sullygnome-data.json` / `twitchmetrics-data.json` | Referencias históricas de analítica externa, separadas de las APIs propias. |
 | `INFORMES.md` | Bitácora vigente de intervenciones, validaciones y pendientes. |
 | `scripts/validate_site.py` | Validación estática de rutas, recursos y datos. |

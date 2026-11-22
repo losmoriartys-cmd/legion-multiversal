@@ -14,7 +14,7 @@ ROSTER_FILE = ROOT / "data/roster.json"
 TWITCH_FILE = ROOT / "data.json"
 PLATFORM_FILE = ROOT / "platform-stats.json"
 CLIPS_FILE = ROOT / "clips-data.json"
-RECORDS_FILE = ROOT / "creator-records.json"
+RECORDS_FILE = ROOT / "data/creator-records.json"
 OUTPUT_FILE = ROOT / "creator-metrics.json"
 FRESHNESS_MINUTES = {"twitch": 120, "youtube": 120, "kick": 120}
 
@@ -90,7 +90,7 @@ def build(roster, twitch, platforms, clips, now=None, records=None):
             "twitch": "data.json",
             "platforms": "platform-stats.json",
             "clips": "clips-data.json",
-            "creator_records": "creator-records.json",
+            "creator_records": "data/creator-records.json",
         },
         "source_snapshot": {
             "data.json": {"updated_at": twitch.get("updated_at")},

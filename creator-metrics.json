@@ -6,7 +6,7 @@
     "twitch": "data.json",
     "platforms": "platform-stats.json",
     "clips": "clips-data.json",
-    "creator_records": "creator-records.json"
+    "creator_records": "data/creator-records.json"
   },
   "source_snapshot": {
     "data.json": {

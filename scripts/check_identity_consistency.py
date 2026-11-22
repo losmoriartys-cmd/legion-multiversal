@@ -4,7 +4,7 @@ Identidad canónica (hero.id) y conservación de registros · Legión Multiversa
 
 Comprueba por ESTRUCTURA, no por búsqueda de texto:
   1. Cada héroe de data/roster.json tiene un id único y bien formado.
-  2. Cada clave de creator-records.json (channels) y platform-stats.json
+  2. Cada clave de data/creator-records.json (channels) y platform-stats.json
      (creators) se resuelve a UN hero.id (directo o por un alias declarado).
      Dos claves que resuelven al mismo id se reportan como identidad duplicada.
      Con --strict no se admite ningún alias.
@@ -20,12 +20,12 @@ Comprueba por ESTRUCTURA, no por búsqueda de texto:
 Uso:
   # antes de migrar
   python3 check_identity_consistency.py --roster data/roster.json \
-      --records creator-records.json --platform platform-stats.json \
+      --records data/creator-records.json --platform platform-stats.json \
       --alias patoteexplica=pato-oratoris --snapshot-out base.json \\
       --note "<SHA previo a la migración>"
   # después de migrar
   python3 check_identity_consistency.py --roster data/roster.json \
-      --records creator-records.json --platform platform-stats.json \
+      --records data/creator-records.json --platform platform-stats.json \
       --baseline base.json --strict --skip-platform
 IMPORTANTE: la instantánea base se toma UNA sola vez ANTES de migrar y se
 versiona en el repositorio. No regenerarla en cada corrida de CI.
@@ -86,7 +86,7 @@ def check_identity(roster, records, platform, aliases=None, strict=False):
         if old != hid and old not in (h.get('legacy_slugs') or []):
             problems.append(f'enlaces existentes: "#expediente-{old}" dejaría de resolver '
                             f'(id "{hid}"); agregá "{old}" a legacy_slugs')
-    for label, data, key in (('creator-records.json', records, 'channels'),
+    for label, data, key in (('data/creator-records.json', records, 'channels'),
                              ('platform-stats.json', platform, 'creators')):
         if data is None:
             continue
