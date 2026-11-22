@@ -4008,3 +4008,15 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **No se publicó** ningún dato que el panel no informe (por ejemplo, seguidores nuevos de TheR0D3R1K).
 - **Archivos:** index.html, chapters-refresh.css, tests/test_conversion_phase2_contract.py.
 - **Validación local:** 226 pruebas Python y validadores estáticos aprobados; revisión visual en escritorio y 390 px sin desborde.
+
+
+## 2026-11-22 · Fechas del archivo de colaboraciones (BIT-001 a BIT-010)
+
+- **Fuente:** consulta de solo lectura a Twitch Helix (`/videos`) de los 10 VOD del registro, mediante una rama temporal con las credenciales ya existentes del repositorio. La rama se eliminó y no se tocó main para la consulta.
+- **Fechas cargadas** (hora de Argentina; fuente: el propio enlace del VOD): BIT-008 Among Us 14/11/2026; BIT-005 Bloody Cleanup Together 16/11/2026; BIT-009 Fortnite 17/11/2026; BIT-010 PEAK 19/11/2026; BIT-006 Anime Shop Simulation 20/11/2026.
+- **Fechas NO cargadas:** BIT-001, 002, 003, 004 y 007. Sus VOD son de tipo *highlight*; Twitch informa la fecha de creación del highlight, no la del directo, por lo que no son verificables como fecha de sesión. Siguen en null y el sitio muestra «Fecha sin verificar».
+- **Corrección de datos:** el POV de BIT-009 (Fortnite) figuraba como Los Moriartys, pero el VOD 2931798215 pertenece al canal de TheR0D3R1K; ahora figura como rod3r1k. Pendiente de confirmar: si existe además un VOD propio de Los Moriartys para esa sesión.
+- **Confirmado por Demian:** el VOD de PEAK (BIT-010) es del canal de Akuma; LEGO Batman (BIT-004) fue el primer stream, en colaboración entre Los Moriartys y Lady Moriarty (nota actualizada).
+- **Interfaz:** las fechas se muestran como «14 NOV 2026» (`games-registry.js`, versión 20261122-collab-registry-2).
+- **Archivos:** data/games.json, games-registry.js, index.html, tests/test_games_registry.py, tests/test_collaborations_registry_contract.py, tests/browser/collaborations-registry.spec.js.
+- **Validación local:** 227 pruebas Python, validadores estáticos y de registro aprobados; Playwright (colaboraciones, arsenal, QA común, Quiénes somos) 20 de 20 aprobadas.

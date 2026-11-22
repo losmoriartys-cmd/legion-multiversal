@@ -42,11 +42,11 @@ class GamesRegistryTests(unittest.TestCase):
         self.assertEqual(set(session["participantes"]), {"akuma", "habitos", "lady-moriarty", "rod3r1k"})
         self.assertEqual([pov["canal"] for pov in session["pov"]], ["moriartys", "rod3r1k"])
 
-    def test_peak_keeps_unknown_pov_owner_unassigned(self):
+    def test_peak_pov_belongs_to_akuma(self):
         game = next(game for game in GAMES["juegos"] if game["id"] == "peak")
         session = game["sesiones"][0]
         self.assertEqual(set(session["participantes"]), {"akuma", "lady-moriarty"})
-        self.assertIsNone(session["pov"][0]["canal"])
+        self.assertEqual(session["pov"][0]["canal"], "akuma")
 
     def test_barfender_is_commercial_expedient_not_a_bit_session(self):
         game = next(game for game in GAMES["juegos"] if game["id"] == "barfender")
@@ -58,7 +58,18 @@ class GamesRegistryTests(unittest.TestCase):
         self.assertTrue(unknown_games)
         self.assertTrue(all(game["fuente_jugadores"] is None for game in unknown_games))
         sessions = [session for game in GAMES["juegos"] for session in game["sesiones"]]
-        self.assertTrue(all(session["fecha"] is None and session["fuente_fecha"] is None for session in sessions))
+        # Una fecha solo se carga con fuente verificable; sin fuente permanece en null.
+        self.assertTrue(all((session["fecha"] is None) == (session["fuente_fecha"] is None) for session in sessions))
+        # BIT-001/002/003/004/007 solo tienen VOD tipo highlight: Twitch informa la fecha de creación del highlight, no la del directo.
+        by_bit = {session["bit"]: session for session in sessions}
+        for bit in ("BIT-001", "BIT-002", "BIT-003", "BIT-004", "BIT-007"):
+            self.assertIsNone(by_bit[bit]["fecha"])
+        for bit in ("BIT-005", "BIT-006", "BIT-008", "BIT-009", "BIT-010"):
+            self.assertTrue(by_bit[bit]["fuente_fecha"].startswith("https://www.twitch.tv/videos/"))
+
+    def test_fortnite_pov_belongs_to_rod_channel(self):
+        game = next(game for game in GAMES["juegos"] if game["id"] == "fortnite")
+        self.assertEqual(game["sesiones"][0]["pov"][0]["canal"], "rod3r1k")
 
     def test_minecraft_separates_editions_from_platform_and_mode(self):
         game = next(game for game in GAMES["juegos"] if game["id"] == "minecraft")

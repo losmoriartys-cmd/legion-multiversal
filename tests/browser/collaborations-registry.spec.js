@@ -29,12 +29,12 @@ test('Among Us distingue cuatro participantes de sus dos canales POV',async({pag
   expect(participants).not.toContain('moriartys');
 });
 
-test('PEAK conserva el propietario desconocido del POV y permite abrir su VOD',async({page})=>{
+test('PEAK asigna su POV al canal de Akuma y permite abrir su VOD',async({page})=>{
   const card=page.locator('#collab-registry-grid [data-game-id="peak"]');
   await expect(card).toHaveCount(1);
-  const pov=card.locator('.collab-pov-link[data-pov-channel="unassigned"]');
+  const pov=card.locator('.collab-pov-link[data-pov-channel="akuma"]');
   await expect(pov).toHaveCount(1);
-  await expect(pov).toContainText('CANAL POR CONFIRMAR');
+  await expect(pov).not.toContainText('CANAL POR CONFIRMAR');
   await expect(pov).toHaveAttribute('href','https://www.twitch.tv/videos/2934341574');
 });
 

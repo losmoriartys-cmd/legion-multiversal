@@ -165,8 +165,8 @@
       "sesiones": [
         {
           "bit": "BIT-008",
-          "fecha": null,
-          "fuente_fecha": null,
+          "fecha": "2026-11-14",
+          "fuente_fecha": "https://www.twitch.tv/videos/2929150834",
           "participantes": ["akuma", "habitos", "lady-moriarty", "rod3r1k"],
           "pov": [
             {"canal": "moriartys", "url": "https://www.twitch.tv/videos/2929150834"},
@@ -254,7 +254,7 @@
           "fuente_fecha": null,
           "participantes": ["moriartys", "lady-moriarty"],
           "pov": [{"canal": "moriartys", "url": "https://www.twitch.tv/videos/2779537401"}],
-          "nota": "El primer stream del canal."
+          "nota": "Nuestro primer stream, en colaboración entre Los Moriartys y Lady Moriarty."
         }
       ]
     },
@@ -275,8 +275,8 @@
       "sesiones": [
         {
           "bit": "BIT-005",
-          "fecha": null,
-          "fuente_fecha": null,
+          "fecha": "2026-11-16",
+          "fuente_fecha": "https://www.twitch.tv/videos/2930904840",
           "participantes": ["moriartys", "lady-moriarty"],
           "pov": [{"canal": "moriartys", "url": "https://www.twitch.tv/videos/2930904840"}],
           "nota": null
@@ -300,8 +300,8 @@
       "sesiones": [
         {
           "bit": "BIT-006",
-          "fecha": null,
-          "fuente_fecha": null,
+          "fecha": "2026-11-20",
+          "fuente_fecha": "https://www.twitch.tv/videos/2935528439",
           "participantes": ["moriartys", "lady-moriarty"],
           "pov": [{"canal": "moriartys", "url": "https://www.twitch.tv/videos/2935528439"}],
           "nota": null
@@ -350,10 +350,10 @@
       "sesiones": [
         {
           "bit": "BIT-009",
-          "fecha": null,
-          "fuente_fecha": null,
+          "fecha": "2026-11-17",
+          "fuente_fecha": "https://www.twitch.tv/videos/2931798215",
           "participantes": ["rod3r1k", "akuma", "dave-nexus", "moriartys"],
-          "pov": [{"canal": "moriartys", "url": "https://www.twitch.tv/videos/2931798215"}],
+          "pov": [{"canal": "rod3r1k", "url": "https://www.twitch.tv/videos/2931798215"}],
           "nota": null
         }
       ]
@@ -375,11 +375,11 @@
       "sesiones": [
         {
           "bit": "BIT-010",
-          "fecha": null,
-          "fuente_fecha": null,
+          "fecha": "2026-11-19",
+          "fuente_fecha": "https://www.twitch.tv/videos/2934341574",
           "participantes": ["akuma", "lady-moriarty"],
-          "pov": [{"canal": null, "url": "https://www.twitch.tv/videos/2934341574"}],
-          "nota": "Colaboración cooperativa; el canal propietario del POV queda pendiente de confirmar."
+          "pov": [{"canal": "akuma", "url": "https://www.twitch.tv/videos/2934341574"}],
+          "nota": "Colaboración cooperativa vista desde el canal de Akuma."
         }
       ]
     }

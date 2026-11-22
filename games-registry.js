@@ -70,6 +70,13 @@
     if (!href) return '';
     return '<a class="collab-pov-link ' + (id ? '' : 'is-unassigned') + '" style="--creator-color:' + color + '" href="' + escapeHtml(href) + '" target="_blank" rel="noopener noreferrer" data-pov-channel="' + escapeHtml(id || 'unassigned') + '" aria-label="Abrir POV de ' + escapeHtml(name) + ' en Twitch"><span class="collab-pov-play" aria-hidden="true">▶</span><span><small>POV · ' + escapeHtml(name) + '</small><strong>ABRIR VOD ↗</strong></span></a>';
   }
+  var MONTHS_ES = ['ENE', 'FEB', 'MAR', 'ABR', 'MAY', 'JUN', 'JUL', 'AGO', 'SEP', 'OCT', 'NOV', 'DIC'];
+  function formatSessionDate(value) {
+    var match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(value));
+    if (!match) return String(value);
+    return Number(match[3]) + ' ' + MONTHS_ES[Number(match[2]) - 1] + ' ' + match[1];
+  }
+
   function renderSession(entry) {
     const game = entry.game;
     const session = entry.session;
@@ -80,7 +87,7 @@
     const players = game.jugadores ? '<span class="collab-game-meta-item">JUGADORES · ' + escapeHtml(game.jugadores.min) + '–' + escapeHtml(game.jugadores.max) + '</span>' : '';
     const store = safeHttps(game.tienda);
     const note = session.nota ? '<p class="collab-session-note">' + escapeHtml(session.nota) + '</p>' : '';
-    const dateLabel = session.fecha ? escapeHtml(session.fecha) : 'FECHA SIN VERIFICAR';
+    const dateLabel = session.fecha ? escapeHtml(formatSessionDate(session.fecha)) : 'FECHA SIN VERIFICAR';
     const arsenalLink = '<a class="collab-arsenal-link" href="#arsenal-game-' + escapeHtml(game.id) + '" data-open-arsenal="' + escapeHtml(game.id) + '">VER FICHA EN ARSENAL →</a>';
     const storeLink = store ? '<a class="collab-store-link" href="' + escapeHtml(store) + '" target="_blank" rel="noopener noreferrer">FICHA OFICIAL ↗</a>' : '';
     return '<article class="collab-session-card" id="' + escapeHtml(session.bit.toLowerCase()) + '" data-collab-session="' + escapeHtml(session.bit) + '" data-game-id="' + escapeHtml(game.id) + '">' +
