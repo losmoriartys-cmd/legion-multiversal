@@ -235,7 +235,7 @@
     },
     {
       "id": "lego-batman",
-      "nombre": "LEGO Batman",
+      "nombre": "LEGO Batman: Legacy of the Dark Knight",
       "aliases": [],
       "categorias": ["Cooperativo y aventura"],
       "plataformas": null,
@@ -245,7 +245,7 @@
       "jugadores": null,
       "fuente_jugadores": null,
       "tienda": null,
-      "portada": "https://static-cdn.jtvnw.net/ttv-boxart/19020_IGDB-285x380.jpg",
+      "portada": "https://static-cdn.jtvnw.net/ttv-boxart/1813168901_IGDB-285x380.jpg",
       "expediente_comercial": null,
       "sesiones": [
         {
@@ -285,7 +285,7 @@
     },
     {
       "id": "anime-shop-simulation",
-      "nombre": "Anime Shop Simulation",
+      "nombre": "Anime Shop Simulator",
       "aliases": [],
       "categorias": ["Simulación"],
       "plataformas": null,
@@ -295,7 +295,7 @@
       "jugadores": null,
       "fuente_jugadores": null,
       "tienda": null,
-      "portada": null,
+      "portada": "https://static-cdn.jtvnw.net/ttv-boxart/1623972535_IGDB-285x380.jpg",
       "expediente_comercial": null,
       "sesiones": [
         {
