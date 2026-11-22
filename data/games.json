@@ -46,7 +46,7 @@
       "jugadores": {"min": 1, "max": 4},
       "fuente_jugadores": "https://store.steampowered.com/app/1943950/",
       "tienda": "https://store.steampowered.com/app/1943950/",
-      "portada": null,
+      "portada": "https://static-cdn.jtvnw.net/ttv-boxart/2066107586_IGDB-285x380.jpg",
       "expediente_comercial": null,
       "sesiones": [
         {
@@ -220,7 +220,7 @@
       "jugadores": null,
       "fuente_jugadores": null,
       "tienda": null,
-      "portada": null,
+      "portada": "https://static-cdn.jtvnw.net/ttv-boxart/593597607_IGDB-285x380.jpg",
       "expediente_comercial": null,
       "sesiones": [
         {
@@ -245,7 +245,7 @@
       "jugadores": null,
       "fuente_jugadores": null,
       "tienda": null,
-      "portada": null,
+      "portada": "https://static-cdn.jtvnw.net/ttv-boxart/19020_IGDB-285x380.jpg",
       "expediente_comercial": null,
       "sesiones": [
         {
@@ -270,7 +270,7 @@
       "jugadores": null,
       "fuente_jugadores": null,
       "tienda": null,
-      "portada": null,
+      "portada": "https://static-cdn.jtvnw.net/ttv-boxart/285552062-285x380.jpg",
       "expediente_comercial": null,
       "sesiones": [
         {
@@ -320,7 +320,7 @@
       "jugadores": null,
       "fuente_jugadores": null,
       "tienda": null,
-      "portada": null,
+      "portada": "https://static-cdn.jtvnw.net/ttv-boxart/1080617691_IGDB-285x380.jpg",
       "expediente_comercial": null,
       "sesiones": [
         {
@@ -345,7 +345,7 @@
       "jugadores": null,
       "fuente_jugadores": null,
       "tienda": null,
-      "portada": null,
+      "portada": "https://static-cdn.jtvnw.net/ttv-boxart/33214-285x380.jpg",
       "expediente_comercial": null,
       "sesiones": [
         {
@@ -370,7 +370,7 @@
       "jugadores": null,
       "fuente_jugadores": null,
       "tienda": null,
-      "portada": null,
+      "portada": "https://static-cdn.jtvnw.net/ttv-boxart/1081998272_IGDB-285x380.jpg",
       "expediente_comercial": null,
       "sesiones": [
         {
