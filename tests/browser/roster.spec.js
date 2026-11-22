@@ -290,6 +290,7 @@ test('Atrás y Adelante restauran el roster y el expediente correcto', async ({ 
   const estadisticasTab = page.locator('[data-profile-tab="estadisticas"]');
   const bitacoraPanel = page.locator('#profile-tab-bitacora');
   const estadisticasPanel = page.locator('#profile-tab-estadisticas');
+  const dossier = page.locator('#hero-profile-page');
 
   // No confiar en el estado heredado de la navegación de escritorio:
   // forzar una transición real Perfil -> Bitácora en el viewport móvil.
