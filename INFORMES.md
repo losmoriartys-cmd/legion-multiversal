@@ -3998,3 +3998,13 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **Pendiente de confirmar con Demian (no publicado):** Sesión 02 de BarFender con los datos del panel oficial de Twitch (Rod y Akuma). Hay dos dudas: la fecha (el sitio dice 10/11; el panel de Rod, mié 11/11) y las cifras «compartidas» (96 únicos compartidos es menor que los 149 únicos de Rod, por lo que no puede ser una unión de audiencias). Hasta aclararlo, sigue el registro de muestreo existente.
 - **Validación local:** 221 pruebas Python y validadores estáticos (`validate_site`, `check_anchors`, `audit_accessibility`) aprobados; Playwright con Chrome local: 48 de 50 aprobadas. Las 2 que fallan (`bitacora` móvil y `roster` de ocho cartas) fallan igual sobre main sin estos cambios, por recursos externos bloqueados en el entorno de pruebas. Corregido durante la prueba: desborde móvil del título de la sección nueva de Colaboraciones.
 - **Estado:** pendiente CI en GitHub sobre la rama. No se declara integración en main ni producción hasta verificar los workflows y el despliegue.
+
+
+## 2026-11-22 · Sesión 02 de BarFender con datos del panel oficial de Twitch
+
+- **Confirmado por Demian:** la fecha es 11/11/2026 (el sitio decía 10/11 por un registro de muestreo anterior).
+- **Cambio:** la tarjeta «Sesión 02» de Colaboraciones reemplaza el registro de muestreo de Helix por las cifras del panel de Twitch de cada canal, sobre la transmisión completa. TheR0D3R1K: 3 h 18 min, promedio 33, pico 53, 149 únicos, 83 en el chat, 268 vistas, 3 suscripciones nuevas; el panel indica miércoles 11/11 de 18:55 a 22:13. Akuma: 1 h 50 min, promedio 10,7, pico 21, 44 únicos, 61 en el chat, 2 suscripciones y 6 seguidores nuevos.
+- **Cifras compartidas:** pico de 69 espectadores y 96 únicos compartidos, publicados como cifras que informa el panel de colaboración de Twitch, sin sumarlas ni definirlas más allá de eso. Demian entiende que los 96 son personas presentes en ambos chats a la vez; esa interpretación no está verificada contra Twitch, por lo que no se afirma en el sitio.
+- **No se publicó** ningún dato que el panel no informe (por ejemplo, seguidores nuevos de TheR0D3R1K).
+- **Archivos:** index.html, chapters-refresh.css, tests/test_conversion_phase2_contract.py.
+- **Validación local:** 226 pruebas Python y validadores estáticos aprobados; revisión visual en escritorio y 390 px sin desborde.

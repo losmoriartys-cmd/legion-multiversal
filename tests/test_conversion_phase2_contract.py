@@ -33,7 +33,7 @@ class ConversionPhase2Contract(unittest.TestCase):
         self.assertIn("selectAllianceModelTab", self.js)
 
     def test_barfender_continuity_and_clip_metadata(self):
-        self.assertIn("SESIÓN 02 · 10 NOV 2026", self.html)
+        self.assertIn("SESIÓN 02 · 11 NOV 2026", self.html)
         self.assertNotIn("DURACIÓN NO REGISTRADA", self.html)
         collaboration = self.html.split('id="chapter-12"', 1)[1].split('id="chapter-5"', 1)[0]
         self.assertIn("CASO COLABORATIVO DOCUMENTADO · N.º 001", collaboration)
@@ -80,7 +80,8 @@ class ConversionPhase2Contract(unittest.TestCase):
     def test_barfender_vod_durations_are_not_added_as_watch_time(self):
         self.assertIn("3 VOD DE ~1 H 14 MIN", self.html)
         self.assertNotIn("3 H 43 MIN 35 S", self.html)
-        self.assertIn("Muestra insuficiente para publicar promedio o pico", self.html)
+        self.assertIn("PANEL OFICIAL DE TWITCH", self.html)
+        self.assertIn("Promedio 10,7 · pico 21", self.html)
         self.assertNotIn("Promedio observado: 10,5", self.html)
 
     def test_featured_clips_use_verified_titles_and_thumbnails(self):

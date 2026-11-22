@@ -46,6 +46,8 @@ a.chapter-cta{display:inline-block;text-decoration:none;color:#080b10;text-align
 .collaboration-chapter .collab-doors{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:20px 0 30px;min-width:0}
 .collaboration-chapter .collab-doors .collab-contact{margin:0;min-width:0;box-sizing:border-box}
 
+.collab-log-metrics .collab-log-shared{grid-column:1/-1}
+
 /* ---------- Arsenal (capítulo 08) ---------- */
 .arsenal-quick-picks{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px;min-width:0}
 .arsenal-quick-picks>span{flex:0 0 100%;color:#86dff0;font-size:.66rem;font-weight:900;letter-spacing:.14em}
