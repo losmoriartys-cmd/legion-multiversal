@@ -104,6 +104,10 @@
                   "null"
                 ],
                 "format": "date"
+              },
+              "label": {
+                "type": "string",
+                "minLength": 1
               }
             },
             "additionalProperties": false
