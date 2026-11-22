@@ -6,7 +6,7 @@
     "twitch": "data.json",
     "platforms": "platform-stats.json",
     "clips": "clips-data.json",
-    "creator_records": "creator-records.json"
+    "creator_records": "data/creator-records.json"
   },
   "source_snapshot": {
     "data.json": {
@@ -185,7 +185,7 @@
           "account_handle": "losmoriartys",
           "key": "average_viewers_sampled",
           "label": "Promedio de viewers muestreado",
-          "value": 16.0,
+          "value": 16,
           "unit": "viewers_sampled_avg",
           "captured_at": "2026-11-22T02:39:16Z",
           "period": {
@@ -279,16 +279,16 @@
             "coverage": {
               "sampled_days": 7,
               "expected_days": 7,
-              "coverage_pct": 100.0,
+              "coverage_pct": 100,
               "status": "sufficient",
-              "minimum_for_comparison_pct": 65.0,
+              "minimum_for_comparison_pct": 65,
               "last_observed_at": "2026-11-22T02:39:16Z"
             },
             "metrics": {
               "streams_observed": 4,
               "active_days": 6,
               "active_weeks": 2,
-              "streams_per_week": 4.0,
+              "streams_per_week": 4,
               "observed_live_hours": 3.67,
               "observed_hours_per_week": 3.67,
               "average_viewers_sampled": 13.2,
@@ -340,9 +340,9 @@
               "previous_coverage": {
                 "sampled_days": 7,
                 "expected_days": 7,
-                "coverage_pct": 100.0,
+                "coverage_pct": 100,
                 "status": "sufficient",
-                "minimum_for_comparison_pct": 65.0,
+                "minimum_for_comparison_pct": 65,
                 "last_observed_at": "2026-11-15T02:26:46Z"
               }
             }
@@ -358,7 +358,7 @@
               "expected_days": 30,
               "coverage_pct": 66.7,
               "status": "sufficient",
-              "minimum_for_comparison_pct": 65.0,
+              "minimum_for_comparison_pct": 65,
               "last_observed_at": "2026-11-22T02:39:16Z"
             },
             "metrics": {
@@ -368,7 +368,7 @@
               "streams_per_week": 2.33,
               "observed_live_hours": 9.09,
               "observed_hours_per_week": 2.12,
-              "average_viewers_sampled": 16.0,
+              "average_viewers_sampled": 16,
               "peak_viewers_sampled": 31,
               "live_samples": 21,
               "followers": {
@@ -396,9 +396,9 @@
               "previous_coverage": {
                 "sampled_days": 0,
                 "expected_days": 30,
-                "coverage_pct": 0.0,
+                "coverage_pct": 0,
                 "status": "partial",
-                "minimum_for_comparison_pct": 65.0,
+                "minimum_for_comparison_pct": 65,
                 "last_observed_at": null
               }
             }
@@ -414,7 +414,7 @@
               "expected_days": 90,
               "coverage_pct": 22.2,
               "status": "partial",
-              "minimum_for_comparison_pct": 65.0,
+              "minimum_for_comparison_pct": 65,
               "last_observed_at": "2026-11-22T02:39:16Z"
             },
             "metrics": {
@@ -424,7 +424,7 @@
               "streams_per_week": 0.78,
               "observed_live_hours": 9.09,
               "observed_hours_per_week": 0.71,
-              "average_viewers_sampled": 16.0,
+              "average_viewers_sampled": 16,
               "peak_viewers_sampled": 31,
               "live_samples": 21,
               "followers": {
@@ -452,9 +452,9 @@
               "previous_coverage": {
                 "sampled_days": 0,
                 "expected_days": 90,
-                "coverage_pct": 0.0,
+                "coverage_pct": 0,
                 "status": "partial",
-                "minimum_for_comparison_pct": 65.0,
+                "minimum_for_comparison_pct": 65,
                 "last_observed_at": null
               }
             }
@@ -475,10 +475,10 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 28.0,
-                  "value_end": 28.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 28,
+                  "value_end": 28,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -486,10 +486,10 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 28.0,
-                  "value_end": 28.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 28,
+                  "value_end": 28,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -497,10 +497,10 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 28.0,
-                  "value_end": 28.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 28,
+                  "value_end": 28,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -519,10 +519,10 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 15.0,
-                  "value_end": 15.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 15,
+                  "value_end": 15,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -530,10 +530,10 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 15.0,
-                  "value_end": 15.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 15,
+                  "value_end": 15,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -541,10 +541,10 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 15.0,
-                  "value_end": 15.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 15,
+                  "value_end": 15,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -563,10 +563,10 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 13.0,
-                  "value_end": 13.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 13,
+                  "value_end": 13,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -574,10 +574,10 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 13.0,
-                  "value_end": 13.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 13,
+                  "value_end": 13,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -585,10 +585,10 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 13.0,
-                  "value_end": 13.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 13,
+                  "value_end": 13,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -607,10 +607,10 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 11.0,
-                  "value_end": 11.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 11,
+                  "value_end": 11,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -618,10 +618,10 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 11.0,
-                  "value_end": 11.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 11,
+                  "value_end": 11,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -629,10 +629,10 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 11.0,
-                  "value_end": 11.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 11,
+                  "value_end": 11,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -651,10 +651,10 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 10.0,
-                  "value_end": 10.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 10,
+                  "value_end": 10,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -662,10 +662,10 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 10.0,
-                  "value_end": 10.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 10,
+                  "value_end": 10,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -673,10 +673,10 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 10.0,
-                  "value_end": 10.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 10,
+                  "value_end": 10,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -1009,16 +1009,16 @@
             "coverage": {
               "sampled_days": 7,
               "expected_days": 7,
-              "coverage_pct": 100.0,
+              "coverage_pct": 100,
               "status": "sufficient",
-              "minimum_for_comparison_pct": 65.0,
+              "minimum_for_comparison_pct": 65,
               "last_observed_at": "2026-11-22T02:39:16Z"
             },
             "metrics": {
               "streams_observed": 5,
               "active_days": 6,
               "active_weeks": 2,
-              "streams_per_week": 5.0,
+              "streams_per_week": 5,
               "observed_live_hours": 7.28,
               "observed_hours_per_week": 7.28,
               "average_viewers_sampled": 26.3,
@@ -1070,9 +1070,9 @@
               "previous_coverage": {
                 "sampled_days": 7,
                 "expected_days": 7,
-                "coverage_pct": 100.0,
+                "coverage_pct": 100,
                 "status": "sufficient",
-                "minimum_for_comparison_pct": 65.0,
+                "minimum_for_comparison_pct": 65,
                 "last_observed_at": "2026-11-15T02:26:46Z"
               }
             }
@@ -1088,7 +1088,7 @@
               "expected_days": 30,
               "coverage_pct": 66.7,
               "status": "sufficient",
-              "minimum_for_comparison_pct": 65.0,
+              "minimum_for_comparison_pct": 65,
               "last_observed_at": "2026-11-22T02:39:16Z"
             },
             "metrics": {
@@ -1126,9 +1126,9 @@
               "previous_coverage": {
                 "sampled_days": 0,
                 "expected_days": 30,
-                "coverage_pct": 0.0,
+                "coverage_pct": 0,
                 "status": "partial",
-                "minimum_for_comparison_pct": 65.0,
+                "minimum_for_comparison_pct": 65,
                 "last_observed_at": null
               }
             }
@@ -1144,7 +1144,7 @@
               "expected_days": 90,
               "coverage_pct": 22.2,
               "status": "partial",
-              "minimum_for_comparison_pct": 65.0,
+              "minimum_for_comparison_pct": 65,
               "last_observed_at": "2026-11-22T02:39:16Z"
             },
             "metrics": {
@@ -1182,9 +1182,9 @@
               "previous_coverage": {
                 "sampled_days": 0,
                 "expected_days": 90,
-                "coverage_pct": 0.0,
+                "coverage_pct": 0,
                 "status": "partial",
-                "minimum_for_comparison_pct": 65.0,
+                "minimum_for_comparison_pct": 65,
                 "last_observed_at": null
               }
             }
@@ -1205,9 +1205,9 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 22.0,
-                  "value_end": 23.0,
-                  "change": 1.0,
+                  "value_start": 22,
+                  "value_end": 23,
+                  "change": 1,
                   "change_pct": 4.55,
                   "captures": 3,
                   "basis": "since_first_capture",
@@ -1216,9 +1216,9 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 22.0,
-                  "value_end": 23.0,
-                  "change": 1.0,
+                  "value_start": 22,
+                  "value_end": 23,
+                  "change": 1,
                   "change_pct": 4.55,
                   "captures": 3,
                   "basis": "since_first_capture",
@@ -1227,9 +1227,9 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 22.0,
-                  "value_end": 23.0,
-                  "change": 1.0,
+                  "value_start": 22,
+                  "value_end": 23,
+                  "change": 1,
                   "change_pct": 4.55,
                   "captures": 3,
                   "basis": "since_first_capture",
@@ -1249,10 +1249,10 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 21.0,
-                  "value_end": 21.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 21,
+                  "value_end": 21,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -1260,10 +1260,10 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 21.0,
-                  "value_end": 21.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 21,
+                  "value_end": 21,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -1271,10 +1271,10 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 21.0,
-                  "value_end": 21.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 21,
+                  "value_end": 21,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -1293,10 +1293,10 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 15.0,
-                  "value_end": 15.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 15,
+                  "value_end": 15,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -1304,10 +1304,10 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 15.0,
-                  "value_end": 15.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 15,
+                  "value_end": 15,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -1315,10 +1315,10 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 15.0,
-                  "value_end": 15.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 15,
+                  "value_end": 15,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -1337,10 +1337,10 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 12.0,
-                  "value_end": 12.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 12,
+                  "value_end": 12,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -1348,10 +1348,10 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 12.0,
-                  "value_end": 12.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 12,
+                  "value_end": 12,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -1359,10 +1359,10 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 12.0,
-                  "value_end": 12.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 12,
+                  "value_end": 12,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -1381,9 +1381,9 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 9.0,
-                  "value_end": 10.0,
-                  "change": 1.0,
+                  "value_start": 9,
+                  "value_end": 10,
+                  "change": 1,
                   "change_pct": 11.11,
                   "captures": 3,
                   "basis": "since_first_capture",
@@ -1392,9 +1392,9 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 9.0,
-                  "value_end": 10.0,
-                  "change": 1.0,
+                  "value_start": 9,
+                  "value_end": 10,
+                  "change": 1,
                   "change_pct": 11.11,
                   "captures": 3,
                   "basis": "since_first_capture",
@@ -1403,9 +1403,9 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 9.0,
-                  "value_end": 10.0,
-                  "change": 1.0,
+                  "value_start": 9,
+                  "value_end": 10,
+                  "change": 1,
                   "change_pct": 11.11,
                   "captures": 3,
                   "basis": "since_first_capture",
@@ -1783,16 +1783,16 @@
             "coverage": {
               "sampled_days": 7,
               "expected_days": 7,
-              "coverage_pct": 100.0,
+              "coverage_pct": 100,
               "status": "sufficient",
-              "minimum_for_comparison_pct": 65.0,
+              "minimum_for_comparison_pct": 65,
               "last_observed_at": "2026-11-22T02:39:16Z"
             },
             "metrics": {
               "streams_observed": 3,
               "active_days": 4,
               "active_weeks": 1,
-              "streams_per_week": 3.0,
+              "streams_per_week": 3,
               "observed_live_hours": 2.57,
               "observed_hours_per_week": 2.57,
               "average_viewers_sampled": 6.5,
@@ -1833,7 +1833,7 @@
                 },
                 "average_viewers_sampled": {
                   "current": 6.5,
-                  "previous": 7.0,
+                  "previous": 7,
                   "change": -0.5
                 }
               },
@@ -1844,9 +1844,9 @@
               "previous_coverage": {
                 "sampled_days": 7,
                 "expected_days": 7,
-                "coverage_pct": 100.0,
+                "coverage_pct": 100,
                 "status": "sufficient",
-                "minimum_for_comparison_pct": 65.0,
+                "minimum_for_comparison_pct": 65,
                 "last_observed_at": "2026-11-15T02:26:46Z"
               }
             }
@@ -1862,7 +1862,7 @@
               "expected_days": 30,
               "coverage_pct": 66.7,
               "status": "sufficient",
-              "minimum_for_comparison_pct": 65.0,
+              "minimum_for_comparison_pct": 65,
               "last_observed_at": "2026-11-22T02:39:16Z"
             },
             "metrics": {
@@ -1900,9 +1900,9 @@
               "previous_coverage": {
                 "sampled_days": 0,
                 "expected_days": 30,
-                "coverage_pct": 0.0,
+                "coverage_pct": 0,
                 "status": "partial",
-                "minimum_for_comparison_pct": 65.0,
+                "minimum_for_comparison_pct": 65,
                 "last_observed_at": null
               }
             }
@@ -1918,7 +1918,7 @@
               "expected_days": 90,
               "coverage_pct": 22.2,
               "status": "partial",
-              "minimum_for_comparison_pct": 65.0,
+              "minimum_for_comparison_pct": 65,
               "last_observed_at": "2026-11-22T02:39:16Z"
             },
             "metrics": {
@@ -1956,9 +1956,9 @@
               "previous_coverage": {
                 "sampled_days": 0,
                 "expected_days": 90,
-                "coverage_pct": 0.0,
+                "coverage_pct": 0,
                 "status": "partial",
-                "minimum_for_comparison_pct": 65.0,
+                "minimum_for_comparison_pct": 65,
                 "last_observed_at": null
               }
             }
@@ -1979,10 +1979,10 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 13.0,
-                  "value_end": 13.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 13,
+                  "value_end": 13,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -1990,10 +1990,10 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 13.0,
-                  "value_end": 13.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 13,
+                  "value_end": 13,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -2001,10 +2001,10 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 13.0,
-                  "value_end": 13.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 13,
+                  "value_end": 13,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -2023,10 +2023,10 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 10.0,
-                  "value_end": 12.0,
-                  "change": 2.0,
-                  "change_pct": 20.0,
+                  "value_start": 10,
+                  "value_end": 12,
+                  "change": 2,
+                  "change_pct": 20,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -2034,10 +2034,10 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 10.0,
-                  "value_end": 12.0,
-                  "change": 2.0,
-                  "change_pct": 20.0,
+                  "value_start": 10,
+                  "value_end": 12,
+                  "change": 2,
+                  "change_pct": 20,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -2045,10 +2045,10 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 10.0,
-                  "value_end": 12.0,
-                  "change": 2.0,
-                  "change_pct": 20.0,
+                  "value_start": 10,
+                  "value_end": 12,
+                  "change": 2,
+                  "change_pct": 20,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -2067,10 +2067,10 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 8.0,
-                  "value_end": 8.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 8,
+                  "value_end": 8,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -2078,10 +2078,10 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 8.0,
-                  "value_end": 8.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 8,
+                  "value_end": 8,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -2089,10 +2089,10 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 8.0,
-                  "value_end": 8.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 8,
+                  "value_end": 8,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -2111,10 +2111,10 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 5.0,
-                  "value_end": 6.0,
-                  "change": 1.0,
-                  "change_pct": 20.0,
+                  "value_start": 5,
+                  "value_end": 6,
+                  "change": 1,
+                  "change_pct": 20,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -2122,10 +2122,10 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 5.0,
-                  "value_end": 6.0,
-                  "change": 1.0,
-                  "change_pct": 20.0,
+                  "value_start": 5,
+                  "value_end": 6,
+                  "change": 1,
+                  "change_pct": 20,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -2133,10 +2133,10 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 5.0,
-                  "value_end": 6.0,
-                  "change": 1.0,
-                  "change_pct": 20.0,
+                  "value_start": 5,
+                  "value_end": 6,
+                  "change": 1,
+                  "change_pct": 20,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -2155,10 +2155,10 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 6.0,
-                  "value_end": 6.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 6,
+                  "value_end": 6,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -2166,10 +2166,10 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 6.0,
-                  "value_end": 6.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 6,
+                  "value_end": 6,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -2177,10 +2177,10 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 6.0,
-                  "value_end": 6.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 6,
+                  "value_end": 6,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -2505,16 +2505,16 @@
             "coverage": {
               "sampled_days": 7,
               "expected_days": 7,
-              "coverage_pct": 100.0,
+              "coverage_pct": 100,
               "status": "sufficient",
-              "minimum_for_comparison_pct": 65.0,
+              "minimum_for_comparison_pct": 65,
               "last_observed_at": "2026-11-22T02:39:16Z"
             },
             "metrics": {
               "streams_observed": 3,
               "active_days": 2,
               "active_weeks": 1,
-              "streams_per_week": 3.0,
+              "streams_per_week": 3,
               "observed_live_hours": 0.92,
               "observed_hours_per_week": 0.92,
               "average_viewers_sampled": 12.8,
@@ -2566,9 +2566,9 @@
               "previous_coverage": {
                 "sampled_days": 7,
                 "expected_days": 7,
-                "coverage_pct": 100.0,
+                "coverage_pct": 100,
                 "status": "sufficient",
-                "minimum_for_comparison_pct": 65.0,
+                "minimum_for_comparison_pct": 65,
                 "last_observed_at": "2026-11-15T02:26:46Z"
               }
             }
@@ -2584,7 +2584,7 @@
               "expected_days": 30,
               "coverage_pct": 66.7,
               "status": "sufficient",
-              "minimum_for_comparison_pct": 65.0,
+              "minimum_for_comparison_pct": 65,
               "last_observed_at": "2026-11-22T02:39:16Z"
             },
             "metrics": {
@@ -2622,9 +2622,9 @@
               "previous_coverage": {
                 "sampled_days": 0,
                 "expected_days": 30,
-                "coverage_pct": 0.0,
+                "coverage_pct": 0,
                 "status": "partial",
-                "minimum_for_comparison_pct": 65.0,
+                "minimum_for_comparison_pct": 65,
                 "last_observed_at": null
               }
             }
@@ -2640,7 +2640,7 @@
               "expected_days": 90,
               "coverage_pct": 22.2,
               "status": "partial",
-              "minimum_for_comparison_pct": 65.0,
+              "minimum_for_comparison_pct": 65,
               "last_observed_at": "2026-11-22T02:39:16Z"
             },
             "metrics": {
@@ -2678,9 +2678,9 @@
               "previous_coverage": {
                 "sampled_days": 0,
                 "expected_days": 90,
-                "coverage_pct": 0.0,
+                "coverage_pct": 0,
                 "status": "partial",
-                "minimum_for_comparison_pct": 65.0,
+                "minimum_for_comparison_pct": 65,
                 "last_observed_at": null
               }
             }
@@ -2701,10 +2701,10 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 5.0,
-                  "value_end": 5.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 5,
+                  "value_end": 5,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -2712,10 +2712,10 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 5.0,
-                  "value_end": 5.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 5,
+                  "value_end": 5,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -2723,10 +2723,10 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 5.0,
-                  "value_end": 5.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 5,
+                  "value_end": 5,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -2745,10 +2745,10 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 4.0,
-                  "value_end": 4.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 4,
+                  "value_end": 4,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-21T19:11:45Z",
@@ -2756,10 +2756,10 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 4.0,
-                  "value_end": 4.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 4,
+                  "value_end": 4,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-21T19:11:45Z",
@@ -2767,10 +2767,10 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 4.0,
-                  "value_end": 4.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 4,
+                  "value_end": 4,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 2,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-21T19:11:45Z",
@@ -2789,10 +2789,10 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 4.0,
-                  "value_end": 4.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 4,
+                  "value_end": 4,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -2800,10 +2800,10 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 4.0,
-                  "value_end": 4.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 4,
+                  "value_end": 4,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -2811,10 +2811,10 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 4.0,
-                  "value_end": 4.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 4,
+                  "value_end": 4,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -2833,10 +2833,10 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 4.0,
-                  "value_end": 4.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 4,
+                  "value_end": 4,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -2844,10 +2844,10 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 4.0,
-                  "value_end": 4.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 4,
+                  "value_end": 4,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -2855,10 +2855,10 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 4.0,
-                  "value_end": 4.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 4,
+                  "value_end": 4,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -2877,10 +2877,10 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 4.0,
-                  "value_end": 4.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 4,
+                  "value_end": 4,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -2888,10 +2888,10 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 4.0,
-                  "value_end": 4.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 4,
+                  "value_end": 4,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -2899,10 +2899,10 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 4.0,
-                  "value_end": 4.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 4,
+                  "value_end": 4,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -3184,16 +3184,16 @@
             "coverage": {
               "sampled_days": 7,
               "expected_days": 7,
-              "coverage_pct": 100.0,
+              "coverage_pct": 100,
               "status": "sufficient",
-              "minimum_for_comparison_pct": 65.0,
+              "minimum_for_comparison_pct": 65,
               "last_observed_at": "2026-11-22T02:39:16Z"
             },
             "metrics": {
               "streams_observed": 8,
               "active_days": 7,
               "active_weeks": 2,
-              "streams_per_week": 8.0,
+              "streams_per_week": 8,
               "observed_live_hours": 4.53,
               "observed_hours_per_week": 4.53,
               "average_viewers_sampled": 7.2,
@@ -3245,9 +3245,9 @@
               "previous_coverage": {
                 "sampled_days": 7,
                 "expected_days": 7,
-                "coverage_pct": 100.0,
+                "coverage_pct": 100,
                 "status": "sufficient",
-                "minimum_for_comparison_pct": 65.0,
+                "minimum_for_comparison_pct": 65,
                 "last_observed_at": "2026-11-15T02:26:46Z"
               }
             }
@@ -3263,7 +3263,7 @@
               "expected_days": 30,
               "coverage_pct": 66.7,
               "status": "sufficient",
-              "minimum_for_comparison_pct": 65.0,
+              "minimum_for_comparison_pct": 65,
               "last_observed_at": "2026-11-22T02:39:16Z"
             },
             "metrics": {
@@ -3301,9 +3301,9 @@
               "previous_coverage": {
                 "sampled_days": 0,
                 "expected_days": 30,
-                "coverage_pct": 0.0,
+                "coverage_pct": 0,
                 "status": "partial",
-                "minimum_for_comparison_pct": 65.0,
+                "minimum_for_comparison_pct": 65,
                 "last_observed_at": null
               }
             }
@@ -3319,7 +3319,7 @@
               "expected_days": 90,
               "coverage_pct": 22.2,
               "status": "partial",
-              "minimum_for_comparison_pct": 65.0,
+              "minimum_for_comparison_pct": 65,
               "last_observed_at": "2026-11-22T02:39:16Z"
             },
             "metrics": {
@@ -3357,9 +3357,9 @@
               "previous_coverage": {
                 "sampled_days": 0,
                 "expected_days": 90,
-                "coverage_pct": 0.0,
+                "coverage_pct": 0,
                 "status": "partial",
-                "minimum_for_comparison_pct": 65.0,
+                "minimum_for_comparison_pct": 65,
                 "last_observed_at": null
               }
             }
@@ -3380,9 +3380,9 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 13.0,
-                  "value_end": 14.0,
-                  "change": 1.0,
+                  "value_start": 13,
+                  "value_end": 14,
+                  "change": 1,
                   "change_pct": 7.69,
                   "captures": 3,
                   "basis": "since_first_capture",
@@ -3391,9 +3391,9 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 13.0,
-                  "value_end": 14.0,
-                  "change": 1.0,
+                  "value_start": 13,
+                  "value_end": 14,
+                  "change": 1,
                   "change_pct": 7.69,
                   "captures": 3,
                   "basis": "since_first_capture",
@@ -3402,9 +3402,9 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 13.0,
-                  "value_end": 14.0,
-                  "change": 1.0,
+                  "value_start": 13,
+                  "value_end": 14,
+                  "change": 1,
                   "change_pct": 7.69,
                   "captures": 3,
                   "basis": "since_first_capture",
@@ -3424,10 +3424,10 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 7.0,
-                  "value_end": 7.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 7,
+                  "value_end": 7,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -3435,10 +3435,10 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 7.0,
-                  "value_end": 7.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 7,
+                  "value_end": 7,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -3446,10 +3446,10 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 7.0,
-                  "value_end": 7.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 7,
+                  "value_end": 7,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -3468,10 +3468,10 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 5.0,
-                  "value_end": 5.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 5,
+                  "value_end": 5,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -3479,10 +3479,10 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 5.0,
-                  "value_end": 5.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 5,
+                  "value_end": 5,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -3490,10 +3490,10 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 5.0,
-                  "value_end": 5.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 5,
+                  "value_end": 5,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -3876,16 +3876,16 @@
             "coverage": {
               "sampled_days": 7,
               "expected_days": 7,
-              "coverage_pct": 100.0,
+              "coverage_pct": 100,
               "status": "sufficient",
-              "minimum_for_comparison_pct": 65.0,
+              "minimum_for_comparison_pct": 65,
               "last_observed_at": "2026-11-22T02:39:16Z"
             },
             "metrics": {
               "streams_observed": 3,
               "active_days": 3,
               "active_weeks": 1,
-              "streams_per_week": 3.0,
+              "streams_per_week": 3,
               "observed_live_hours": 0.92,
               "observed_hours_per_week": 0.92,
               "average_viewers_sampled": 1.8,
@@ -3921,7 +3921,7 @@
                 },
                 "observed_live_hours": {
                   "current": 0.92,
-                  "previous": 0.0,
+                  "previous": 0,
                   "change": 0.92
                 },
                 "average_viewers_sampled": {
@@ -3937,9 +3937,9 @@
               "previous_coverage": {
                 "sampled_days": 7,
                 "expected_days": 7,
-                "coverage_pct": 100.0,
+                "coverage_pct": 100,
                 "status": "sufficient",
-                "minimum_for_comparison_pct": 65.0,
+                "minimum_for_comparison_pct": 65,
                 "last_observed_at": "2026-11-15T02:26:46Z"
               }
             }
@@ -3955,7 +3955,7 @@
               "expected_days": 30,
               "coverage_pct": 66.7,
               "status": "sufficient",
-              "minimum_for_comparison_pct": 65.0,
+              "minimum_for_comparison_pct": 65,
               "last_observed_at": "2026-11-22T02:39:16Z"
             },
             "metrics": {
@@ -3993,9 +3993,9 @@
               "previous_coverage": {
                 "sampled_days": 0,
                 "expected_days": 30,
-                "coverage_pct": 0.0,
+                "coverage_pct": 0,
                 "status": "partial",
-                "minimum_for_comparison_pct": 65.0,
+                "minimum_for_comparison_pct": 65,
                 "last_observed_at": null
               }
             }
@@ -4011,7 +4011,7 @@
               "expected_days": 90,
               "coverage_pct": 22.2,
               "status": "partial",
-              "minimum_for_comparison_pct": 65.0,
+              "minimum_for_comparison_pct": 65,
               "last_observed_at": "2026-11-22T02:39:16Z"
             },
             "metrics": {
@@ -4049,9 +4049,9 @@
               "previous_coverage": {
                 "sampled_days": 0,
                 "expected_days": 90,
-                "coverage_pct": 0.0,
+                "coverage_pct": 0,
                 "status": "partial",
-                "minimum_for_comparison_pct": 65.0,
+                "minimum_for_comparison_pct": 65,
                 "last_observed_at": null
               }
             }
@@ -4208,7 +4208,7 @@
               "expected_days": 7,
               "coverage_pct": 14.3,
               "status": "partial",
-              "minimum_for_comparison_pct": 65.0,
+              "minimum_for_comparison_pct": 65,
               "capture_count": 1,
               "last_observed_at": "2026-11-22T02:39:17Z"
             },
@@ -4216,7 +4216,7 @@
               "subscribers_gained": {
                 "status": "baseline_pending",
                 "value_start": null,
-                "value_end": 56.0,
+                "value_end": 56,
                 "change": null,
                 "change_pct": null,
                 "captures": 1,
@@ -4227,7 +4227,7 @@
               "views_gained": {
                 "status": "baseline_pending",
                 "value_start": null,
-                "value_end": 431.0,
+                "value_end": 431,
                 "change": null,
                 "change_pct": null,
                 "captures": 1,
@@ -4238,7 +4238,7 @@
               "videos_published": {
                 "status": "baseline_pending",
                 "value_start": null,
-                "value_end": 6.0,
+                "value_end": 6,
                 "change": null,
                 "change_pct": null,
                 "captures": 1,
@@ -4257,9 +4257,9 @@
               "previous_coverage": {
                 "sampled_days": 0,
                 "expected_days": 7,
-                "coverage_pct": 0.0,
+                "coverage_pct": 0,
                 "status": "partial",
-                "minimum_for_comparison_pct": 65.0,
+                "minimum_for_comparison_pct": 65,
                 "capture_count": 0,
                 "last_observed_at": null
               }
@@ -4276,7 +4276,7 @@
               "expected_days": 30,
               "coverage_pct": 3.3,
               "status": "partial",
-              "minimum_for_comparison_pct": 65.0,
+              "minimum_for_comparison_pct": 65,
               "capture_count": 1,
               "last_observed_at": "2026-11-22T02:39:17Z"
             },
@@ -4284,7 +4284,7 @@
               "subscribers_gained": {
                 "status": "baseline_pending",
                 "value_start": null,
-                "value_end": 56.0,
+                "value_end": 56,
                 "change": null,
                 "change_pct": null,
                 "captures": 1,
@@ -4295,7 +4295,7 @@
               "views_gained": {
                 "status": "baseline_pending",
                 "value_start": null,
-                "value_end": 431.0,
+                "value_end": 431,
                 "change": null,
                 "change_pct": null,
                 "captures": 1,
@@ -4306,7 +4306,7 @@
               "videos_published": {
                 "status": "baseline_pending",
                 "value_start": null,
-                "value_end": 6.0,
+                "value_end": 6,
                 "change": null,
                 "change_pct": null,
                 "captures": 1,
@@ -4325,9 +4325,9 @@
               "previous_coverage": {
                 "sampled_days": 0,
                 "expected_days": 30,
-                "coverage_pct": 0.0,
+                "coverage_pct": 0,
                 "status": "partial",
-                "minimum_for_comparison_pct": 65.0,
+                "minimum_for_comparison_pct": 65,
                 "capture_count": 0,
                 "last_observed_at": null
               }
@@ -4344,7 +4344,7 @@
               "expected_days": 90,
               "coverage_pct": 1.1,
               "status": "partial",
-              "minimum_for_comparison_pct": 65.0,
+              "minimum_for_comparison_pct": 65,
               "capture_count": 1,
               "last_observed_at": "2026-11-22T02:39:17Z"
             },
@@ -4352,7 +4352,7 @@
               "subscribers_gained": {
                 "status": "baseline_pending",
                 "value_start": null,
-                "value_end": 56.0,
+                "value_end": 56,
                 "change": null,
                 "change_pct": null,
                 "captures": 1,
@@ -4363,7 +4363,7 @@
               "views_gained": {
                 "status": "baseline_pending",
                 "value_start": null,
-                "value_end": 431.0,
+                "value_end": 431,
                 "change": null,
                 "change_pct": null,
                 "captures": 1,
@@ -4374,7 +4374,7 @@
               "videos_published": {
                 "status": "baseline_pending",
                 "value_start": null,
-                "value_end": 6.0,
+                "value_end": 6,
                 "change": null,
                 "change_pct": null,
                 "captures": 1,
@@ -4393,9 +4393,9 @@
               "previous_coverage": {
                 "sampled_days": 0,
                 "expected_days": 90,
-                "coverage_pct": 0.0,
+                "coverage_pct": 0,
                 "status": "partial",
-                "minimum_for_comparison_pct": 65.0,
+                "minimum_for_comparison_pct": 65,
                 "capture_count": 0,
                 "last_observed_at": null
               }
@@ -4421,10 +4421,10 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 157.0,
-                  "value_end": 157.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 157,
+                  "value_end": 157,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T23:21:59Z",
@@ -4432,10 +4432,10 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 157.0,
-                  "value_end": 157.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 157,
+                  "value_end": 157,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T23:21:59Z",
@@ -4443,10 +4443,10 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 157.0,
-                  "value_end": 157.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 157,
+                  "value_end": 157,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T23:21:59Z",
@@ -4468,10 +4468,10 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 75.0,
-                  "value_end": 75.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 75,
+                  "value_end": 75,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T23:21:59Z",
@@ -4479,10 +4479,10 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 75.0,
-                  "value_end": 75.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 75,
+                  "value_end": 75,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T23:21:59Z",
@@ -4490,10 +4490,10 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 75.0,
-                  "value_end": 75.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 75,
+                  "value_end": 75,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T23:21:59Z",
@@ -4515,10 +4515,10 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 58.0,
-                  "value_end": 58.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 58,
+                  "value_end": 58,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T23:21:59Z",
@@ -4526,10 +4526,10 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 58.0,
-                  "value_end": 58.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 58,
+                  "value_end": 58,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T23:21:59Z",
@@ -4537,10 +4537,10 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 58.0,
-                  "value_end": 58.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 58,
+                  "value_end": 58,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T23:21:59Z",
@@ -4558,14 +4558,14 @@
               "views": 50,
               "likes": 12,
               "comments": 2,
-              "public_interaction_rate_pct": 28.0,
+              "public_interaction_rate_pct": 28,
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 50.0,
-                  "value_end": 50.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 50,
+                  "value_end": 50,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T23:21:59Z",
@@ -4573,10 +4573,10 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 50.0,
-                  "value_end": 50.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 50,
+                  "value_end": 50,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T23:21:59Z",
@@ -4584,10 +4584,10 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 50.0,
-                  "value_end": 50.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 50,
+                  "value_end": 50,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T23:21:59Z",
@@ -4609,10 +4609,10 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 48.0,
-                  "value_end": 48.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 48,
+                  "value_end": 48,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T23:21:59Z",
@@ -4620,10 +4620,10 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 48.0,
-                  "value_end": 48.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 48,
+                  "value_end": 48,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T23:21:59Z",
@@ -4631,10 +4631,10 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 48.0,
-                  "value_end": 48.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 48,
+                  "value_end": 48,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T23:21:59Z",
@@ -4915,16 +4915,16 @@
             "coverage": {
               "sampled_days": 7,
               "expected_days": 7,
-              "coverage_pct": 100.0,
+              "coverage_pct": 100,
               "status": "sufficient",
-              "minimum_for_comparison_pct": 65.0,
+              "minimum_for_comparison_pct": 65,
               "last_observed_at": "2026-11-22T02:39:16Z"
             },
             "metrics": {
               "streams_observed": 12,
               "active_days": 8,
               "active_weeks": 2,
-              "streams_per_week": 12.0,
+              "streams_per_week": 12,
               "observed_live_hours": 8.8,
               "observed_hours_per_week": 8.8,
               "average_viewers_sampled": 1.6,
@@ -4976,9 +4976,9 @@
               "previous_coverage": {
                 "sampled_days": 7,
                 "expected_days": 7,
-                "coverage_pct": 100.0,
+                "coverage_pct": 100,
                 "status": "sufficient",
-                "minimum_for_comparison_pct": 65.0,
+                "minimum_for_comparison_pct": 65,
                 "last_observed_at": "2026-11-15T02:26:46Z"
               }
             }
@@ -4994,7 +4994,7 @@
               "expected_days": 30,
               "coverage_pct": 66.7,
               "status": "sufficient",
-              "minimum_for_comparison_pct": 65.0,
+              "minimum_for_comparison_pct": 65,
               "last_observed_at": "2026-11-22T02:39:16Z"
             },
             "metrics": {
@@ -5032,9 +5032,9 @@
               "previous_coverage": {
                 "sampled_days": 0,
                 "expected_days": 30,
-                "coverage_pct": 0.0,
+                "coverage_pct": 0,
                 "status": "partial",
-                "minimum_for_comparison_pct": 65.0,
+                "minimum_for_comparison_pct": 65,
                 "last_observed_at": null
               }
             }
@@ -5050,7 +5050,7 @@
               "expected_days": 90,
               "coverage_pct": 22.2,
               "status": "partial",
-              "minimum_for_comparison_pct": 65.0,
+              "minimum_for_comparison_pct": 65,
               "last_observed_at": "2026-11-22T02:39:16Z"
             },
             "metrics": {
@@ -5088,9 +5088,9 @@
               "previous_coverage": {
                 "sampled_days": 0,
                 "expected_days": 90,
-                "coverage_pct": 0.0,
+                "coverage_pct": 0,
                 "status": "partial",
-                "minimum_for_comparison_pct": 65.0,
+                "minimum_for_comparison_pct": 65,
                 "last_observed_at": null
               }
             }
@@ -5111,10 +5111,10 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 9.0,
-                  "value_end": 9.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 9,
+                  "value_end": 9,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -5122,10 +5122,10 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 9.0,
-                  "value_end": 9.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 9,
+                  "value_end": 9,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -5133,10 +5133,10 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 9.0,
-                  "value_end": 9.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 9,
+                  "value_end": 9,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -5155,10 +5155,10 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 8.0,
-                  "value_end": 8.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 8,
+                  "value_end": 8,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -5166,10 +5166,10 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 8.0,
-                  "value_end": 8.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 8,
+                  "value_end": 8,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -5177,10 +5177,10 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 8.0,
-                  "value_end": 8.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 8,
+                  "value_end": 8,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -5199,10 +5199,10 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 7.0,
-                  "value_end": 7.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 7,
+                  "value_end": 7,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -5210,10 +5210,10 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 7.0,
-                  "value_end": 7.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 7,
+                  "value_end": 7,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -5221,10 +5221,10 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 7.0,
-                  "value_end": 7.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 7,
+                  "value_end": 7,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -5243,10 +5243,10 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 6.0,
-                  "value_end": 6.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 6,
+                  "value_end": 6,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -5254,10 +5254,10 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 6.0,
-                  "value_end": 6.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 6,
+                  "value_end": 6,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -5265,10 +5265,10 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 6.0,
-                  "value_end": 6.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 6,
+                  "value_end": 6,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -5287,10 +5287,10 @@
               "views_gained": {
                 "7d": {
                   "status": "available",
-                  "value_start": 6.0,
-                  "value_end": 6.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 6,
+                  "value_end": 6,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -5298,10 +5298,10 @@
                 },
                 "30d": {
                   "status": "available",
-                  "value_start": 6.0,
-                  "value_end": 6.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 6,
+                  "value_end": 6,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
@@ -5309,10 +5309,10 @@
                 },
                 "90d": {
                   "status": "available",
-                  "value_start": 6.0,
-                  "value_end": 6.0,
-                  "change": 0.0,
-                  "change_pct": 0.0,
+                  "value_start": 6,
+                  "value_end": 6,
+                  "change": 0,
+                  "change_pct": 0,
                   "captures": 3,
                   "basis": "since_first_capture",
                   "start_captured_at": "2026-11-20T17:42:44Z",
