@@ -92,11 +92,17 @@
             ],
             "properties": {
               "start_date": {
-                "type": "string",
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "format": "date"
               },
               "end_date": {
-                "type": "string",
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "format": "date"
               }
             },
@@ -152,7 +158,10 @@
                 "type": "object",
                 "properties": {
                   "streams_count": {
-                    "type": "integer",
+                    "type": [
+                      "integer",
+                      "null"
+                    ],
                     "minimum": 0
                   },
                   "airtime_minutes": {
