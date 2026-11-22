@@ -14,17 +14,17 @@
     "ther0d3r1k"
   ],
   "collection": {
-    "started_at": "2026-11-22T01:47:46Z",
+    "started_at": "2026-11-22T02:39:16Z",
     "expected_channels": 7,
     "resolved_channels": 7,
     "sampled_channels": [
-      "habitos_atomicos",
       "ladymoriarty01",
       "losmoriartys",
       "ther0d3r1k",
       "akumazoldyck",
       "ardipii",
-      "daved0608"
+      "daved0608",
+      "habitos_atomicos"
     ],
     "skipped_channels": [],
     "complete": true,
@@ -42,7 +42,7 @@
     "elgabii090"
   ],
   "channel_registry_note": "Los canales archivados se conservan para consulta histórica y no se incluyen en los indicadores del roster activo.",
-  "updated_at": "2026-11-22T01:47:46Z",
+  "updated_at": "2026-11-22T02:39:16Z",
   "channels": {
     "ladymoriarty01": {
       "login": "ladymoriarty01",
@@ -61,11 +61,11 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "last_status_at": "2026-11-22T01:47:46Z",
-      "last_snapshot_at": "2026-11-22T01:47:46Z",
-      "updated_at": "2026-11-22T01:47:46Z",
+      "last_status_at": "2026-11-22T02:39:16Z",
+      "last_snapshot_at": "2026-11-22T02:39:16Z",
+      "updated_at": "2026-11-22T02:39:16Z",
       "window": {
-        "samples_total": 429,
+        "samples_total": 430,
         "live_samples": 15,
         "streams_observed": 7,
         "average_viewers_sampled": 6.3,
@@ -4058,6 +4058,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-22T02:39:16Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -4074,35 +4083,35 @@
       "followers_note": "Pendiente de configurar OAuth de usuario de solo lectura. No requiere moderador ni acceso a identidades.",
       "followers_history": [],
       "live": true,
-      "current_viewers": 16,
+      "current_viewers": 34,
       "current_game": "Fortnite",
       "current_title": "CHUPISTREAM!! !CHUPI !CHUPI !CHUPI 🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
       "stream_started_at": "2026-11-21T23:54:55Z",
-      "last_status_at": "2026-11-22T01:47:46Z",
-      "last_snapshot_at": "2026-11-22T01:47:46Z",
-      "updated_at": "2026-11-22T01:47:46Z",
+      "last_status_at": "2026-11-22T02:39:16Z",
+      "last_snapshot_at": "2026-11-22T02:39:16Z",
+      "updated_at": "2026-11-22T02:39:16Z",
       "window": {
-        "samples_total": 429,
-        "live_samples": 44,
+        "samples_total": 430,
+        "live_samples": 45,
         "streams_observed": 12,
-        "average_viewers_sampled": 23.2,
+        "average_viewers_sampled": 23.4,
         "peak_viewers_sampled": 51,
-        "observed_live_hours": 26.3,
-        "estimated_hours_watched": 603.58,
+        "observed_live_hours": 27.16,
+        "estimated_hours_watched": 632.76,
         "game_breakdown": [
+          {
+            "name": "Fortnite",
+            "live_samples": 12,
+            "streams_observed": 6,
+            "average_viewers_sampled": 22.5,
+            "peak_viewers_sampled": 46
+          },
           {
             "name": "Apex Legends",
             "live_samples": 12,
             "streams_observed": 6,
             "average_viewers_sampled": 23.0,
             "peak_viewers_sampled": 43
-          },
-          {
-            "name": "Fortnite",
-            "live_samples": 11,
-            "streams_observed": 6,
-            "average_viewers_sampled": 21.5,
-            "peak_viewers_sampled": 46
           },
           {
             "name": "Just Chatting",
@@ -4255,10 +4264,10 @@
           },
           {
             "date": "2026-11-22",
-            "live_samples": 2,
+            "live_samples": 3,
             "streams_observed": 1,
-            "average_viewers_sampled": 18.5,
-            "peak_viewers_sampled": 21
+            "average_viewers_sampled": 23.7,
+            "peak_viewers_sampled": 34
           }
         ],
         "method": "Muestreo propio con cadencia observada cercana a 55 minutos, variable por la programación de GitHub Actions; horas estimadas solo entre muestras consecutivas del mismo directo cuando el intervalo no supera 110 minutos. Categorías y evolución diaria se calculan sobre las muestras observadas."
@@ -8124,6 +8133,15 @@
           "title": "CHUPISTREAM!! !CHUPI !CHUPI !CHUPI 🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
           "stream_id": "319623664885",
           "started_at": "2026-11-21T23:54:55Z"
+        },
+        {
+          "sampled_at": "2026-11-22T02:39:16Z",
+          "is_live": true,
+          "viewer_count": 34,
+          "game_name": "Fortnite",
+          "title": "CHUPISTREAM!! !CHUPI !CHUPI !CHUPI 🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
+          "stream_id": "319623664885",
+          "started_at": "2026-11-21T23:54:55Z"
         }
       ]
     },
@@ -8790,11 +8808,11 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "last_status_at": "2026-11-22T01:47:46Z",
-      "last_snapshot_at": "2026-11-22T01:47:46Z",
-      "updated_at": "2026-11-22T01:47:46Z",
+      "last_status_at": "2026-11-22T02:39:16Z",
+      "last_snapshot_at": "2026-11-22T02:39:16Z",
+      "updated_at": "2026-11-22T02:39:16Z",
       "window": {
-        "samples_total": 429,
+        "samples_total": 430,
         "live_samples": 10,
         "streams_observed": 6,
         "average_viewers_sampled": 9.4,
@@ -12717,6 +12735,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-22T02:39:16Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -12733,28 +12760,28 @@
       "followers_note": "Pendiente de configurar OAuth de usuario de solo lectura. No requiere moderador ni acceso a identidades.",
       "followers_history": [],
       "live": true,
-      "current_viewers": 2,
+      "current_viewers": 23,
       "current_game": "Fortnite",
       "current_title": "chupi con la bandita <3 50 bit shot",
       "stream_started_at": "2026-11-22T00:38:57Z",
-      "last_status_at": "2026-11-22T01:47:46Z",
-      "last_snapshot_at": "2026-11-22T01:47:46Z",
-      "updated_at": "2026-11-22T01:47:46Z",
+      "last_status_at": "2026-11-22T02:39:16Z",
+      "last_snapshot_at": "2026-11-22T02:39:16Z",
+      "updated_at": "2026-11-22T02:39:16Z",
       "window": {
-        "samples_total": 429,
-        "live_samples": 33,
+        "samples_total": 430,
+        "live_samples": 34,
         "streams_observed": 17,
-        "average_viewers_sampled": 6.4,
-        "peak_viewers_sampled": 17,
-        "observed_live_hours": 13.49,
-        "estimated_hours_watched": 79.5,
+        "average_viewers_sampled": 6.9,
+        "peak_viewers_sampled": 23,
+        "observed_live_hours": 14.34,
+        "estimated_hours_watched": 99.25,
         "game_breakdown": [
           {
             "name": "Fortnite",
-            "live_samples": 17,
+            "live_samples": 18,
             "streams_observed": 9,
-            "average_viewers_sampled": 4.9,
-            "peak_viewers_sampled": 17
+            "average_viewers_sampled": 5.9,
+            "peak_viewers_sampled": 23
           },
           {
             "name": "Can 'Em All",
@@ -12921,10 +12948,10 @@
           },
           {
             "date": "2026-11-22",
-            "live_samples": 1,
+            "live_samples": 2,
             "streams_observed": 1,
-            "average_viewers_sampled": 2.0,
-            "peak_viewers_sampled": 2
+            "average_viewers_sampled": 12.5,
+            "peak_viewers_sampled": 23
           }
         ],
         "method": "Muestreo propio con cadencia observada cercana a 55 minutos, variable por la programación de GitHub Actions; horas estimadas solo entre muestras consecutivas del mismo directo cuando el intervalo no supera 110 minutos. Categorías y evolución diaria se calculan sobre las muestras observadas."
@@ -16790,6 +16817,15 @@
           "title": "chupi con la bandita <3 50 bit shot",
           "stream_id": "321230098910",
           "started_at": "2026-11-22T00:38:57Z"
+        },
+        {
+          "sampled_at": "2026-11-22T02:39:16Z",
+          "is_live": true,
+          "viewer_count": 23,
+          "game_name": "Fortnite",
+          "title": "chupi con la bandita <3 50 bit shot",
+          "stream_id": "321230098910",
+          "started_at": "2026-11-22T00:38:57Z"
         }
       ]
     },
@@ -16805,16 +16841,16 @@
       "followers_status": "awaiting_authorization",
       "followers_note": "Pendiente de configurar OAuth de usuario de solo lectura. No requiere moderador ni acceso a identidades.",
       "followers_history": [],
-      "live": true,
-      "current_viewers": 2,
-      "current_game": "Fortnite",
-      "current_title": "Fortniete con amigos, en busca del token",
-      "stream_started_at": "2026-11-22T01:31:22Z",
-      "last_status_at": "2026-11-22T01:47:46Z",
-      "last_snapshot_at": "2026-11-22T01:47:46Z",
-      "updated_at": "2026-11-22T01:47:46Z",
+      "live": false,
+      "current_viewers": null,
+      "current_game": null,
+      "current_title": null,
+      "stream_started_at": null,
+      "last_status_at": "2026-11-22T02:39:16Z",
+      "last_snapshot_at": "2026-11-22T02:39:16Z",
+      "updated_at": "2026-11-22T02:39:16Z",
       "window": {
-        "samples_total": 429,
+        "samples_total": 430,
         "live_samples": 16,
         "streams_observed": 10,
         "average_viewers_sampled": 1.9,
@@ -20779,6 +20815,15 @@
           "title": "Fortniete con amigos, en busca del token",
           "stream_id": "321529847264",
           "started_at": "2026-11-22T01:31:22Z"
+        },
+        {
+          "sampled_at": "2026-11-22T02:39:16Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -21410,18 +21455,18 @@
       "followers_status": "awaiting_authorization",
       "followers_note": "Pendiente de configurar OAuth de usuario de solo lectura. No requiere moderador ni acceso a identidades.",
       "followers_history": [],
-      "live": false,
-      "current_viewers": null,
-      "current_game": null,
-      "current_title": null,
-      "stream_started_at": null,
-      "last_status_at": "2026-11-22T01:47:46Z",
-      "last_snapshot_at": "2026-11-22T01:47:46Z",
-      "updated_at": "2026-11-22T01:47:46Z",
+      "live": true,
+      "current_viewers": 1,
+      "current_game": "Grand Theft Auto V",
+      "current_title": "es mi primer dia",
+      "stream_started_at": "2026-11-22T02:26:28Z",
+      "last_status_at": "2026-11-22T02:39:16Z",
+      "last_snapshot_at": "2026-11-22T02:39:16Z",
+      "updated_at": "2026-11-22T02:39:16Z",
       "window": {
-        "samples_total": 429,
-        "live_samples": 81,
-        "streams_observed": 22,
+        "samples_total": 430,
+        "live_samples": 82,
+        "streams_observed": 23,
         "average_viewers_sampled": 4.4,
         "peak_viewers_sampled": 45,
         "observed_live_hours": 50.15,
@@ -21464,9 +21509,9 @@
           },
           {
             "name": "Grand Theft Auto V",
-            "live_samples": 1,
-            "streams_observed": 1,
-            "average_viewers_sampled": 2.0,
+            "live_samples": 2,
+            "streams_observed": 2,
+            "average_viewers_sampled": 1.5,
             "peak_viewers_sampled": 2
           }
         ],
@@ -21589,6 +21634,13 @@
             "streams_observed": 3,
             "average_viewers_sampled": 1.0,
             "peak_viewers_sampled": 2
+          },
+          {
+            "date": "2026-11-22",
+            "live_samples": 1,
+            "streams_observed": 1,
+            "average_viewers_sampled": 1.0,
+            "peak_viewers_sampled": 1
           }
         ],
         "method": "Muestreo propio con cadencia observada cercana a 55 minutos, variable por la programación de GitHub Actions; horas estimadas solo entre muestras consecutivas del mismo directo cuando el intervalo no supera 110 minutos. Categorías y evolución diaria se calculan sobre las muestras observadas."
@@ -25454,6 +25506,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-22T02:39:16Z",
+          "is_live": true,
+          "viewer_count": 1,
+          "game_name": "Grand Theft Auto V",
+          "title": "es mi primer dia",
+          "stream_id": "319694392564",
+          "started_at": "2026-11-22T02:26:28Z"
         }
       ]
     },
@@ -25474,11 +25535,11 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "last_status_at": "2026-11-22T01:47:46Z",
-      "last_snapshot_at": "2026-11-22T01:47:46Z",
-      "updated_at": "2026-11-22T01:47:46Z",
+      "last_status_at": "2026-11-22T02:39:16Z",
+      "last_snapshot_at": "2026-11-22T02:39:16Z",
+      "updated_at": "2026-11-22T02:39:16Z",
       "window": {
-        "samples_total": 429,
+        "samples_total": 430,
         "live_samples": 21,
         "streams_observed": 10,
         "average_viewers_sampled": 16.0,
@@ -29500,6 +29561,15 @@
         },
         {
           "sampled_at": "2026-11-22T01:47:46Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-22T02:39:16Z",
           "is_live": false,
           "viewer_count": null,
           "game_name": null,
