@@ -339,13 +339,14 @@ test('la Bitácora móvil conserva la presentación de main y publica ambas capt
   async function openLadyBitacora(target, url) {
     await target.goto(url, { waitUntil: 'domcontentloaded', timeout: 45000 });
     await expect(target.locator('#chapter-2')).toHaveCount(1, { timeout: 30000 });
+    await target.waitForFunction(() => typeof window.switchChapter === 'function');
     await target.evaluate(() => switchChapter(2));
     await expect(target.locator('#chapter-2')).toHaveClass(/active/);
     await target.locator('#chapter-transition').evaluate(el => el.classList.remove('play'));
     const card = target.locator('.comic-roster-card[data-creator-id="lady-moriarty"]');
     await expect(card).toBeVisible();
     await card.click();
-    await expect(target).toHaveURL(/#roster\\/lady-moriarty$/);
+    await expect(target).toHaveURL(/#roster[/]lady-moriarty$/);
     const bitacoraTab = target.locator('[data-profile-tab="bitacora"]');
     await expect(bitacoraTab).toBeVisible();
     await bitacoraTab.click();
@@ -355,7 +356,10 @@ test('la Bitácora móvil conserva la presentación de main y publica ambas capt
     await expect(target.locator('#profile-tab-estadisticas')).toBeHidden();
     await expect(panel.locator('.hero-timeline')).toBeVisible();
     await expect(panel.locator('.hero-timeline-item.is-origen')).toHaveCount(1);
-    await expect(panel.locator('.hero-timeline-item').filter({ visible: true })).toHaveCount(await panel.locator('.hero-timeline-item').count());
+    const timelineItems = panel.locator('.hero-timeline-item');
+    for (let index = 0; index < await timelineItems.count(); index++) {
+      await expect(timelineItems.nth(index)).toBeVisible();
+    }
     await target.evaluate(() => window.scrollTo(0, 0));
     await target.screenshot({ path: url === mainBaselineUrl ? 'test-results/main-baseline-bitacora-mobile.png' : 'test-results/pr-candidate-bitacora-mobile.png', fullPage: false });
     return target.evaluate(() => {
