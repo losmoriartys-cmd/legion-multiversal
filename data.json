@@ -14,17 +14,17 @@
     "ther0d3r1k"
   ],
   "collection": {
-    "started_at": "2026-11-22T02:39:16Z",
+    "started_at": "2026-11-22T03:38:26Z",
     "expected_channels": 7,
     "resolved_channels": 7,
     "sampled_channels": [
+      "daved0608",
+      "habitos_atomicos",
       "ladymoriarty01",
       "losmoriartys",
       "ther0d3r1k",
       "akumazoldyck",
-      "ardipii",
-      "daved0608",
-      "habitos_atomicos"
+      "ardipii"
     ],
     "skipped_channels": [],
     "complete": true,
@@ -42,7 +42,7 @@
     "elgabii090"
   ],
   "channel_registry_note": "Los canales archivados se conservan para consulta histórica y no se incluyen en los indicadores del roster activo.",
-  "updated_at": "2026-11-22T02:39:16Z",
+  "updated_at": "2026-11-22T03:38:26Z",
   "channels": {
     "ladymoriarty01": {
       "login": "ladymoriarty01",
@@ -61,11 +61,11 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "last_status_at": "2026-11-22T02:39:16Z",
-      "last_snapshot_at": "2026-11-22T02:39:16Z",
-      "updated_at": "2026-11-22T02:39:16Z",
+      "last_status_at": "2026-11-22T03:38:26Z",
+      "last_snapshot_at": "2026-11-22T03:38:26Z",
+      "updated_at": "2026-11-22T03:38:26Z",
       "window": {
-        "samples_total": 430,
+        "samples_total": 431,
         "live_samples": 15,
         "streams_observed": 7,
         "average_viewers_sampled": 6.3,
@@ -4067,6 +4067,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-22T03:38:26Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -4083,27 +4092,27 @@
       "followers_note": "Pendiente de configurar OAuth de usuario de solo lectura. No requiere moderador ni acceso a identidades.",
       "followers_history": [],
       "live": true,
-      "current_viewers": 34,
+      "current_viewers": 15,
       "current_game": "Fortnite",
       "current_title": "CHUPISTREAM!! !CHUPI !CHUPI !CHUPI 🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
       "stream_started_at": "2026-11-21T23:54:55Z",
-      "last_status_at": "2026-11-22T02:39:16Z",
-      "last_snapshot_at": "2026-11-22T02:39:16Z",
-      "updated_at": "2026-11-22T02:39:16Z",
+      "last_status_at": "2026-11-22T03:38:26Z",
+      "last_snapshot_at": "2026-11-22T03:38:26Z",
+      "updated_at": "2026-11-22T03:38:26Z",
       "window": {
-        "samples_total": 430,
-        "live_samples": 45,
+        "samples_total": 431,
+        "live_samples": 46,
         "streams_observed": 12,
-        "average_viewers_sampled": 23.4,
+        "average_viewers_sampled": 23.3,
         "peak_viewers_sampled": 51,
-        "observed_live_hours": 27.16,
-        "estimated_hours_watched": 632.76,
+        "observed_live_hours": 28.08,
+        "estimated_hours_watched": 646.51,
         "game_breakdown": [
           {
             "name": "Fortnite",
-            "live_samples": 12,
+            "live_samples": 13,
             "streams_observed": 6,
-            "average_viewers_sampled": 22.5,
+            "average_viewers_sampled": 21.9,
             "peak_viewers_sampled": 46
           },
           {
@@ -4264,9 +4273,9 @@
           },
           {
             "date": "2026-11-22",
-            "live_samples": 3,
+            "live_samples": 4,
             "streams_observed": 1,
-            "average_viewers_sampled": 23.7,
+            "average_viewers_sampled": 21.5,
             "peak_viewers_sampled": 34
           }
         ],
@@ -8142,6 +8151,15 @@
           "title": "CHUPISTREAM!! !CHUPI !CHUPI !CHUPI 🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
           "stream_id": "319623664885",
           "started_at": "2026-11-21T23:54:55Z"
+        },
+        {
+          "sampled_at": "2026-11-22T03:38:26Z",
+          "is_live": true,
+          "viewer_count": 15,
+          "game_name": "Fortnite",
+          "title": "CHUPISTREAM!! !CHUPI !CHUPI !CHUPI 🎁⚜️CODIGO DE CREADOR EPIC: THER0D3R1K⚜️🎁",
+          "stream_id": "319623664885",
+          "started_at": "2026-11-21T23:54:55Z"
         }
       ]
     },
@@ -8808,11 +8826,11 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "last_status_at": "2026-11-22T02:39:16Z",
-      "last_snapshot_at": "2026-11-22T02:39:16Z",
-      "updated_at": "2026-11-22T02:39:16Z",
+      "last_status_at": "2026-11-22T03:38:26Z",
+      "last_snapshot_at": "2026-11-22T03:38:26Z",
+      "updated_at": "2026-11-22T03:38:26Z",
       "window": {
-        "samples_total": 430,
+        "samples_total": 431,
         "live_samples": 10,
         "streams_observed": 6,
         "average_viewers_sampled": 9.4,
@@ -12744,6 +12762,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-22T03:38:26Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -12760,25 +12787,25 @@
       "followers_note": "Pendiente de configurar OAuth de usuario de solo lectura. No requiere moderador ni acceso a identidades.",
       "followers_history": [],
       "live": true,
-      "current_viewers": 23,
+      "current_viewers": 5,
       "current_game": "Fortnite",
       "current_title": "chupi con la bandita <3 50 bit shot",
       "stream_started_at": "2026-11-22T00:38:57Z",
-      "last_status_at": "2026-11-22T02:39:16Z",
-      "last_snapshot_at": "2026-11-22T02:39:16Z",
-      "updated_at": "2026-11-22T02:39:16Z",
+      "last_status_at": "2026-11-22T03:38:26Z",
+      "last_snapshot_at": "2026-11-22T03:38:26Z",
+      "updated_at": "2026-11-22T03:38:26Z",
       "window": {
-        "samples_total": 430,
-        "live_samples": 34,
+        "samples_total": 431,
+        "live_samples": 35,
         "streams_observed": 17,
-        "average_viewers_sampled": 6.9,
+        "average_viewers_sampled": 6.8,
         "peak_viewers_sampled": 23,
-        "observed_live_hours": 14.34,
-        "estimated_hours_watched": 99.25,
+        "observed_live_hours": 15.26,
+        "estimated_hours_watched": 103.83,
         "game_breakdown": [
           {
             "name": "Fortnite",
-            "live_samples": 18,
+            "live_samples": 19,
             "streams_observed": 9,
             "average_viewers_sampled": 5.9,
             "peak_viewers_sampled": 23
@@ -12948,9 +12975,9 @@
           },
           {
             "date": "2026-11-22",
-            "live_samples": 2,
+            "live_samples": 3,
             "streams_observed": 1,
-            "average_viewers_sampled": 12.5,
+            "average_viewers_sampled": 10.0,
             "peak_viewers_sampled": 23
           }
         ],
@@ -16826,6 +16853,15 @@
           "title": "chupi con la bandita <3 50 bit shot",
           "stream_id": "321230098910",
           "started_at": "2026-11-22T00:38:57Z"
+        },
+        {
+          "sampled_at": "2026-11-22T03:38:26Z",
+          "is_live": true,
+          "viewer_count": 5,
+          "game_name": "Fortnite",
+          "title": "chupi con la bandita <3 50 bit shot",
+          "stream_id": "321230098910",
+          "started_at": "2026-11-22T00:38:57Z"
         }
       ]
     },
@@ -16846,11 +16882,11 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "last_status_at": "2026-11-22T02:39:16Z",
-      "last_snapshot_at": "2026-11-22T02:39:16Z",
-      "updated_at": "2026-11-22T02:39:16Z",
+      "last_status_at": "2026-11-22T03:38:26Z",
+      "last_snapshot_at": "2026-11-22T03:38:26Z",
+      "updated_at": "2026-11-22T03:38:26Z",
       "window": {
-        "samples_total": 430,
+        "samples_total": 431,
         "live_samples": 16,
         "streams_observed": 10,
         "average_viewers_sampled": 1.9,
@@ -20824,6 +20860,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-22T03:38:26Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -21456,17 +21501,17 @@
       "followers_note": "Pendiente de configurar OAuth de usuario de solo lectura. No requiere moderador ni acceso a identidades.",
       "followers_history": [],
       "live": true,
-      "current_viewers": 1,
-      "current_game": "Grand Theft Auto V",
+      "current_viewers": 2,
+      "current_game": "Call of Duty: Warzone",
       "current_title": "es mi primer dia",
-      "stream_started_at": "2026-11-22T02:26:28Z",
-      "last_status_at": "2026-11-22T02:39:16Z",
-      "last_snapshot_at": "2026-11-22T02:39:16Z",
-      "updated_at": "2026-11-22T02:39:16Z",
+      "stream_started_at": "2026-11-22T03:27:32Z",
+      "last_status_at": "2026-11-22T03:38:26Z",
+      "last_snapshot_at": "2026-11-22T03:38:26Z",
+      "updated_at": "2026-11-22T03:38:26Z",
       "window": {
-        "samples_total": 430,
-        "live_samples": 82,
-        "streams_observed": 23,
+        "samples_total": 431,
+        "live_samples": 83,
+        "streams_observed": 24,
         "average_viewers_sampled": 4.4,
         "peak_viewers_sampled": 45,
         "observed_live_hours": 50.15,
@@ -21481,9 +21526,9 @@
           },
           {
             "name": "Call of Duty: Warzone",
-            "live_samples": 14,
-            "streams_observed": 4,
-            "average_viewers_sampled": 8.1,
+            "live_samples": 15,
+            "streams_observed": 5,
+            "average_viewers_sampled": 7.7,
             "peak_viewers_sampled": 45
           },
           {
@@ -21637,10 +21682,10 @@
           },
           {
             "date": "2026-11-22",
-            "live_samples": 1,
-            "streams_observed": 1,
-            "average_viewers_sampled": 1.0,
-            "peak_viewers_sampled": 1
+            "live_samples": 2,
+            "streams_observed": 2,
+            "average_viewers_sampled": 1.5,
+            "peak_viewers_sampled": 2
           }
         ],
         "method": "Muestreo propio con cadencia observada cercana a 55 minutos, variable por la programación de GitHub Actions; horas estimadas solo entre muestras consecutivas del mismo directo cuando el intervalo no supera 110 minutos. Categorías y evolución diaria se calculan sobre las muestras observadas."
@@ -25515,6 +25560,15 @@
           "title": "es mi primer dia",
           "stream_id": "319694392564",
           "started_at": "2026-11-22T02:26:28Z"
+        },
+        {
+          "sampled_at": "2026-11-22T03:38:26Z",
+          "is_live": true,
+          "viewer_count": 2,
+          "game_name": "Call of Duty: Warzone",
+          "title": "es mi primer dia",
+          "stream_id": "319626964597",
+          "started_at": "2026-11-22T03:27:32Z"
         }
       ]
     },
@@ -25535,11 +25589,11 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "last_status_at": "2026-11-22T02:39:16Z",
-      "last_snapshot_at": "2026-11-22T02:39:16Z",
-      "updated_at": "2026-11-22T02:39:16Z",
+      "last_status_at": "2026-11-22T03:38:26Z",
+      "last_snapshot_at": "2026-11-22T03:38:26Z",
+      "updated_at": "2026-11-22T03:38:26Z",
       "window": {
-        "samples_total": 430,
+        "samples_total": 431,
         "live_samples": 21,
         "streams_observed": 10,
         "average_viewers_sampled": 16.0,
@@ -29570,6 +29624,15 @@
         },
         {
           "sampled_at": "2026-11-22T02:39:16Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-22T03:38:26Z",
           "is_live": false,
           "viewer_count": null,
           "game_name": null,
