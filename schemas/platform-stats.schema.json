@@ -181,7 +181,7 @@
         "url": {
           "type": "string",
           "format": "uri",
-          "pattern": "^https://(www\\.)?youtube\\.com/watch\\\\?v="
+          "pattern": "^https://(www\\.)?youtube\\.com/watch\\?v="
         },
         "view_history": {
           "type": "array",
@@ -304,7 +304,17 @@
           "pattern": "^https://"
         }
       },
-      "additionalProperties": true
+      "additionalProperties": true,
+      "not": {
+        "properties": {
+          "platform": {
+            "const": "youtube"
+          }
+        },
+        "required": [
+          "platform"
+        ]
+      }
     },
     "creator": {
       "type": "object",
