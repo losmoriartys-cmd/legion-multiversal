@@ -51,8 +51,8 @@
       "sesiones": [
         {
           "bit": "BIT-001",
-          "fecha": null,
-          "fuente_fecha": null,
+          "fecha": "2026-08-09",
+          "fuente_fecha": "https://www.twitch.tv/videos/2842031318",
           "participantes": ["moriartys", "lady-moriarty"],
           "pov": [{"canal": "moriartys", "url": "https://www.twitch.tv/videos/2842031318"}],
           "nota": null
@@ -140,8 +140,8 @@
       "sesiones": [
         {
           "bit": "BIT-003",
-          "fecha": null,
-          "fuente_fecha": null,
+          "fecha": "2026-08-30",
+          "fuente_fecha": "https://www.twitch.tv/videos/2860519322",
           "participantes": ["moriartys", "lady-moriarty"],
           "pov": [{"canal": "moriartys", "url": "https://www.twitch.tv/videos/2860519322"}],
           "nota": null
@@ -225,8 +225,8 @@
       "sesiones": [
         {
           "bit": "BIT-002",
-          "fecha": null,
-          "fuente_fecha": null,
+          "fecha": "2026-08-21",
+          "fuente_fecha": "https://www.twitch.tv/videos/2852318399",
           "participantes": ["moriartys", "lady-moriarty"],
           "pov": [{"canal": "moriartys", "url": "https://www.twitch.tv/videos/2852318399"}],
           "nota": null
@@ -250,8 +250,8 @@
       "sesiones": [
         {
           "bit": "BIT-004",
-          "fecha": null,
-          "fuente_fecha": null,
+          "fecha": "2026-05-24",
+          "fuente_fecha": "https://www.twitch.tv/videos/2779537401",
           "participantes": ["moriartys", "lady-moriarty"],
           "pov": [{"canal": "moriartys", "url": "https://www.twitch.tv/videos/2779537401"}],
           "nota": "Nuestro primer stream, en colaboración entre Los Moriartys y Lady Moriarty."
@@ -325,8 +325,8 @@
       "sesiones": [
         {
           "bit": "BIT-007",
-          "fecha": null,
-          "fuente_fecha": null,
+          "fecha": "2026-10-07",
+          "fuente_fecha": "https://www.twitch.tv/videos/2894858738",
           "participantes": ["moriartys", "lady-moriarty"],
           "pov": [{"canal": "moriartys", "url": "https://www.twitch.tv/videos/2894858738"}],
           "nota": null

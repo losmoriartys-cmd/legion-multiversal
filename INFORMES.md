@@ -4020,3 +4020,9 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **Interfaz:** las fechas se muestran como «14 NOV 2026» (`games-registry.js`, versión 20261122-collab-registry-2).
 - **Archivos:** data/games.json, games-registry.js, index.html, tests/test_games_registry.py, tests/test_collaborations_registry_contract.py, tests/browser/collaborations-registry.spec.js.
 - **Validación local:** 227 pruebas Python, validadores estáticos y de registro aprobados; Playwright (colaboraciones, arsenal, QA común, Quiénes somos) 20 de 20 aprobadas.
+
+### 2026-11-22 · Complemento: fechas de los highlights (autorizado por Demian)
+
+- Demian autorizó usar la fecha de los VOD destacados. Se cargaron, en hora de Argentina: BIT-004 LEGO Batman 24/05/2026; BIT-001 Escape the Backrooms 09/08/2026; BIT-002 TMNT 21/08/2026; BIT-003 Minecraft 30/08/2026; BIT-007 Night Club Simulation 07/10/2026.
+- **Alcance:** son fechas de creación del highlight informadas por Twitch (fuente: el enlace del VOD), no necesariamente la fecha exacta del directo original; el directo pudo ser el mismo día o anterior. Cuando se confirmen contra el panel de videos del canal Los Moriartys, se reemplazan.
+- Los 10 registros BIT tienen ahora fecha y fuente.

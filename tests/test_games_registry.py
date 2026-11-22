@@ -53,19 +53,18 @@ class GamesRegistryTests(unittest.TestCase):
         self.assertEqual(game["expediente_comercial"], "EXP-001")
         self.assertEqual(game["sesiones"], [])
 
-    def test_unverified_game_counts_and_dates_remain_null(self):
+    def test_unverified_game_counts_remain_null_and_dates_have_source(self):
         unknown_games = [game for game in GAMES["juegos"] if game["jugadores"] is None]
         self.assertTrue(unknown_games)
         self.assertTrue(all(game["fuente_jugadores"] is None for game in unknown_games))
         sessions = [session for game in GAMES["juegos"] for session in game["sesiones"]]
         # Una fecha solo se carga con fuente verificable; sin fuente permanece en null.
         self.assertTrue(all((session["fecha"] is None) == (session["fuente_fecha"] is None) for session in sessions))
-        # BIT-001/002/003/004/007 solo tienen VOD tipo highlight: Twitch informa la fecha de creación del highlight, no la del directo.
         by_bit = {session["bit"]: session for session in sessions}
-        for bit in ("BIT-001", "BIT-002", "BIT-003", "BIT-004", "BIT-007"):
-            self.assertIsNone(by_bit[bit]["fecha"])
-        for bit in ("BIT-005", "BIT-006", "BIT-008", "BIT-009", "BIT-010"):
-            self.assertTrue(by_bit[bit]["fuente_fecha"].startswith("https://www.twitch.tv/videos/"))
+        # BIT-001/002/003/004/007: VOD tipo highlight; con autorización de Demian se usa la fecha de creación del highlight.
+        for bit, session in by_bit.items():
+            self_msg = bit + ": toda fecha necesita el VOD de Twitch como fuente"
+            self.assertTrue(session["fuente_fecha"].startswith("https://www.twitch.tv/videos/"), self_msg)
 
     def test_fortnite_pov_belongs_to_rod_channel(self):
         game = next(game for game in GAMES["juegos"] if game["id"] == "fortnite")
