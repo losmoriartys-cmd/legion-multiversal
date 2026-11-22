@@ -1275,3 +1275,5 @@
  #chapter-2 .comic-roster-card { animation:none!important; transition:none!important; transform:none!important; }
  #chapter-2 .comic-roster-card:hover .comic-roster-photo img { transform:none!important; }
 }
+
+#chapter-2 .roster-v3-metric-gain { grid-column:1/-1; min-width:0; margin-top:2px; padding-top:4px; border-top:1px dashed rgba(17,17,17,.25); color:#14507a; font:800 .62rem/1.35 'Roboto Condensed',sans-serif; overflow-wrap:anywhere; }

@@ -150,6 +150,17 @@
     badge.appendChild(meter);
   }
 
+  function followerGain(channel, account) {
+    if (account?.platform !== 'twitch' || !channel || typeof sullyGnomeData === 'undefined' || !sullyGnomeData) return null;
+    const login = text(channel.login || account.login || account.handle).toLowerCase();
+    const row = (sullyGnomeData.channels || []).find(item => text(item.login).toLowerCase() === login);
+    const count = row?.summary?.followers_gain_reported;
+    const start = row?.period?.start_date;
+    const end = row?.period?.end_date;
+    if (!Number.isFinite(count) || count <= 0 || !start || !end) return null;
+    return { count, range: dateLabel(start) + '–' + dateLabel(end) };
+  }
+
   function metricCard(label, value, detail, extra) {
     const card = document.createElement('span');
     card.className = 'roster-v3-metric' + (extra ? ' ' + extra : '');
@@ -205,6 +216,15 @@
       metricCard('Media de viewers', metrics.viewers.value, metrics.viewers.detail, metrics.viewers.available ? 'has-data' : 'is-empty'),
       metricCard('Días activos detectados', metrics.days.count === null ? 'No informado' : metrics.days.count + ' / 17', metrics.days.count === null ? 'Sin ventana diaria verificable' : '17 días hasta la última captura · ' + dateLabel(metrics.days.anchor), metrics.days.count === null ? 'is-empty' : 'has-data')
     );
+    // Seguidores nuevos en el período: dato reportado por SullyGnome, con período y fuente a la vista.
+    const gain = followerGain(channel, account);
+    const followersCard = newSlots.querySelector('.roster-v3-metric');
+    if (gain && followersCard) {
+      const line = document.createElement('small');
+      line.className = 'roster-v3-metric-gain';
+      line.textContent = '+' + gain.count.toLocaleString('es-AR') + ' nuevos · SullyGnome ' + gain.range;
+      followersCard.appendChild(line);
+    }
     if (oldSlots) oldSlots.insertAdjacentElement('afterend', newSlots);
     else card.querySelector('.comic-roster-card-data')?.appendChild(newSlots);
 
