@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "source": "Twitch Helix Get Clips",
-  "captured_at": "2026-11-21T19:11:45Z",
+  "captured_at": "2026-11-22T01:47:47Z",
   "window_days": 30,
   "selection": {
     "max_results_requested_per_channel": 100,
@@ -24,10 +24,10 @@
       "broadcaster_id": "400527534",
       "url": "https://twitch.tv/losmoriartys",
       "status": "ok",
-      "captured_at": "2026-11-21T19:11:45Z",
+      "captured_at": "2026-11-22T01:47:47Z",
       "period": {
-        "from": "2026-10-22T19:11:45Z",
-        "to": "2026-11-21T19:11:45Z",
+        "from": "2026-10-23T01:47:47Z",
+        "to": "2026-11-22T01:47:47Z",
         "days": 30
       },
       "clips": [
@@ -56,6 +56,11 @@
             {
               "date": "2026-11-21",
               "captured_at": "2026-11-21T19:11:45Z",
+              "views": 28
+            },
+            {
+              "date": "2026-11-22",
+              "captured_at": "2026-11-22T01:47:47Z",
               "views": 28
             }
           ]
@@ -86,6 +91,11 @@
               "date": "2026-11-21",
               "captured_at": "2026-11-21T19:11:45Z",
               "views": 15
+            },
+            {
+              "date": "2026-11-22",
+              "captured_at": "2026-11-22T01:47:47Z",
+              "views": 15
             }
           ]
         },
@@ -114,6 +124,11 @@
             {
               "date": "2026-11-21",
               "captured_at": "2026-11-21T19:11:45Z",
+              "views": 13
+            },
+            {
+              "date": "2026-11-22",
+              "captured_at": "2026-11-22T01:47:47Z",
               "views": 13
             }
           ]
@@ -144,6 +159,11 @@
               "date": "2026-11-21",
               "captured_at": "2026-11-21T19:11:45Z",
               "views": 11
+            },
+            {
+              "date": "2026-11-22",
+              "captured_at": "2026-11-22T01:47:47Z",
+              "views": 11
             }
           ]
         },
@@ -172,6 +192,11 @@
             {
               "date": "2026-11-21",
               "captured_at": "2026-11-21T19:11:45Z",
+              "views": 10
+            },
+            {
+              "date": "2026-11-22",
+              "captured_at": "2026-11-22T01:47:47Z",
               "views": 10
             }
           ]
@@ -202,6 +227,11 @@
               "date": "2026-11-21",
               "captured_at": "2026-11-21T19:11:45Z",
               "views": 8
+            },
+            {
+              "date": "2026-11-22",
+              "captured_at": "2026-11-22T01:47:47Z",
+              "views": 8
             }
           ]
         },
@@ -230,6 +260,11 @@
             {
               "date": "2026-11-21",
               "captured_at": "2026-11-21T19:11:45Z",
+              "views": 7
+            },
+            {
+              "date": "2026-11-22",
+              "captured_at": "2026-11-22T01:47:47Z",
               "views": 7
             }
           ]
@@ -260,6 +295,11 @@
               "date": "2026-11-21",
               "captured_at": "2026-11-21T19:11:45Z",
               "views": 6
+            },
+            {
+              "date": "2026-11-22",
+              "captured_at": "2026-11-22T01:47:47Z",
+              "views": 6
             }
           ]
         },
@@ -289,29 +329,34 @@
               "date": "2026-11-21",
               "captured_at": "2026-11-21T19:11:45Z",
               "views": 5
+            },
+            {
+              "date": "2026-11-22",
+              "captured_at": "2026-11-22T01:47:47Z",
+              "views": 5
             }
           ]
         },
         {
-          "id": "SpikyFamousHyenaAliens-mkjXXRqnlykZ8F7q",
-          "url": "https://www.twitch.tv/losmoriartys/clip/SpikyFamousHyenaAliens-mkjXXRqnlykZ8F7q",
-          "embed_url": "https://clips.twitch.tv/embed?clip=SpikyFamousHyenaAliens-mkjXXRqnlykZ8F7q",
-          "title": "La tecnologia de pago en los juegoos",
+          "id": "LightLittleCardDatBoi-QUyf3LJ9rK19cKDG",
+          "url": "https://www.twitch.tv/losmoriartys/clip/LightLittleCardDatBoi-QUyf3LJ9rK19cKDG",
+          "embed_url": "https://clips.twitch.tv/embed?clip=LightLittleCardDatBoi-QUyf3LJ9rK19cKDG",
+          "title": "1er Clip HP",
           "creator_name": "ArDipii",
           "broadcaster_name": "LosMoriartys",
-          "created_at": "2026-11-02T23:55:29Z",
+          "created_at": "2026-11-16T23:49:00Z",
           "view_count": 4,
-          "game_id": "965057358",
+          "game_id": "509658",
           "language": "es",
-          "duration": 37.4,
-          "thumbnail_url": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/5e548734-e2d2-4aab-bb72-6d4d65897d34/landscape/thumb/thumb-0000000000-480x272.jpg",
-          "video_id": null,
-          "vod_offset": null,
+          "duration": 56.6,
+          "thumbnail_url": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/3a49c228-db8e-4a60-a482-9c8a015340e3/landscape/thumb/thumb-0000000000-480x272.jpg",
+          "video_id": "2930904840",
+          "vod_offset": 3194,
           "is_featured": false,
           "view_history": [
             {
-              "date": "2026-11-21",
-              "captured_at": "2026-11-21T19:11:45Z",
+              "date": "2026-11-22",
+              "captured_at": "2026-11-22T01:47:47Z",
               "views": 4
             }
           ]
@@ -326,10 +371,10 @@
       "broadcaster_id": "518856416",
       "url": "https://twitch.tv/TheR0D3R1K",
       "status": "ok",
-      "captured_at": "2026-11-21T19:11:45Z",
+      "captured_at": "2026-11-22T01:47:47Z",
       "period": {
-        "from": "2026-10-22T19:11:45Z",
-        "to": "2026-11-21T19:11:45Z",
+        "from": "2026-10-23T01:47:47Z",
+        "to": "2026-11-22T01:47:47Z",
         "days": 30
       },
       "clips": [
@@ -358,6 +403,11 @@
             {
               "date": "2026-11-21",
               "captured_at": "2026-11-21T19:11:45Z",
+              "views": 23
+            },
+            {
+              "date": "2026-11-22",
+              "captured_at": "2026-11-22T01:47:47Z",
               "views": 23
             }
           ]
@@ -388,6 +438,11 @@
               "date": "2026-11-21",
               "captured_at": "2026-11-21T19:11:45Z",
               "views": 21
+            },
+            {
+              "date": "2026-11-22",
+              "captured_at": "2026-11-22T01:47:47Z",
+              "views": 21
             }
           ]
         },
@@ -416,6 +471,11 @@
             {
               "date": "2026-11-21",
               "captured_at": "2026-11-21T19:11:45Z",
+              "views": 15
+            },
+            {
+              "date": "2026-11-22",
+              "captured_at": "2026-11-22T01:47:47Z",
               "views": 15
             }
           ]
@@ -446,6 +506,11 @@
               "date": "2026-11-21",
               "captured_at": "2026-11-21T19:11:45Z",
               "views": 12
+            },
+            {
+              "date": "2026-11-22",
+              "captured_at": "2026-11-22T01:47:47Z",
+              "views": 12
             }
           ]
         },
@@ -474,6 +539,11 @@
             {
               "date": "2026-11-21",
               "captured_at": "2026-11-21T19:11:45Z",
+              "views": 10
+            },
+            {
+              "date": "2026-11-22",
+              "captured_at": "2026-11-22T01:47:47Z",
               "views": 10
             }
           ]
@@ -504,24 +574,29 @@
               "date": "2026-11-21",
               "captured_at": "2026-11-21T19:11:45Z",
               "views": 10
+            },
+            {
+              "date": "2026-11-22",
+              "captured_at": "2026-11-22T01:47:47Z",
+              "views": 10
             }
           ]
         },
         {
-          "id": "SuperHedonisticWorm4Head-nqaykHJ_zvKEkcc4",
-          "url": "https://www.twitch.tv/ther0d3r1k/clip/SuperHedonisticWorm4Head-nqaykHJ_zvKEkcc4",
-          "embed_url": "https://clips.twitch.tv/embed?clip=SuperHedonisticWorm4Head-nqaykHJ_zvKEkcc4",
-          "title": "ese dia algo cambio en Godzilla, nunca lo habían atacado con daño emocional",
-          "creator_name": "habitos_atomicos",
+          "id": "TentativeArtisticAnacondaPeoplesChamp-VZhspOejM1Ip49c8",
+          "url": "https://www.twitch.tv/ther0d3r1k/clip/TentativeArtisticAnacondaPeoplesChamp-VZhspOejM1Ip49c8",
+          "embed_url": "https://clips.twitch.tv/embed?clip=TentativeArtisticAnacondaPeoplesChamp-VZhspOejM1Ip49c8",
+          "title": "Por todos lados! jasjasjjasjas Por atras fue poco!",
+          "creator_name": "michahn87_",
           "broadcaster_name": "TheR0D3R1K",
-          "created_at": "2026-11-13T23:52:02Z",
+          "created_at": "2026-10-25T00:42:41Z",
           "view_count": 8,
-          "game_id": "511224",
+          "game_id": "509658",
           "language": "es",
-          "duration": 13.5,
-          "thumbnail_url": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/962c960f-ee79-4d1b-a87d-fdeb18f3ba20/landscape/thumb/thumb-0000000000-480x272.jpg",
-          "video_id": "2928037755",
-          "vod_offset": 2834,
+          "duration": 30,
+          "thumbnail_url": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/d7940d97-89a6-46ed-a6a4-a6c5d8c0ea7e/landscape/thumb/thumb-0000000000-480x272.jpg",
+          "video_id": "2909967911",
+          "vod_offset": 2796,
           "is_featured": false,
           "view_history": [
             {
@@ -532,6 +607,11 @@
             {
               "date": "2026-11-21",
               "captured_at": "2026-11-21T19:11:45Z",
+              "views": 8
+            },
+            {
+              "date": "2026-11-22",
+              "captured_at": "2026-11-22T01:47:47Z",
               "views": 8
             }
           ]
@@ -562,24 +642,29 @@
               "date": "2026-11-21",
               "captured_at": "2026-11-21T19:11:45Z",
               "views": 8
+            },
+            {
+              "date": "2026-11-22",
+              "captured_at": "2026-11-22T01:47:47Z",
+              "views": 8
             }
           ]
         },
         {
-          "id": "TentativeArtisticAnacondaPeoplesChamp-VZhspOejM1Ip49c8",
-          "url": "https://www.twitch.tv/ther0d3r1k/clip/TentativeArtisticAnacondaPeoplesChamp-VZhspOejM1Ip49c8",
-          "embed_url": "https://clips.twitch.tv/embed?clip=TentativeArtisticAnacondaPeoplesChamp-VZhspOejM1Ip49c8",
-          "title": "Por todos lados! jasjasjjasjas Por atras fue poco!",
-          "creator_name": "michahn87_",
+          "id": "SuperHedonisticWorm4Head-nqaykHJ_zvKEkcc4",
+          "url": "https://www.twitch.tv/ther0d3r1k/clip/SuperHedonisticWorm4Head-nqaykHJ_zvKEkcc4",
+          "embed_url": "https://clips.twitch.tv/embed?clip=SuperHedonisticWorm4Head-nqaykHJ_zvKEkcc4",
+          "title": "ese dia algo cambio en Godzilla, nunca lo habían atacado con daño emocional",
+          "creator_name": "habitos_atomicos",
           "broadcaster_name": "TheR0D3R1K",
-          "created_at": "2026-10-25T00:42:41Z",
+          "created_at": "2026-11-13T23:52:02Z",
           "view_count": 8,
-          "game_id": "509658",
+          "game_id": "511224",
           "language": "es",
-          "duration": 30,
-          "thumbnail_url": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/d7940d97-89a6-46ed-a6a4-a6c5d8c0ea7e/landscape/thumb/thumb-0000000000-480x272.jpg",
-          "video_id": "2909967911",
-          "vod_offset": 2796,
+          "duration": 13.5,
+          "thumbnail_url": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/962c960f-ee79-4d1b-a87d-fdeb18f3ba20/landscape/thumb/thumb-0000000000-480x272.jpg",
+          "video_id": "2928037755",
+          "vod_offset": 2834,
           "is_featured": false,
           "view_history": [
             {
@@ -590,6 +675,11 @@
             {
               "date": "2026-11-21",
               "captured_at": "2026-11-21T19:11:45Z",
+              "views": 8
+            },
+            {
+              "date": "2026-11-22",
+              "captured_at": "2026-11-22T01:47:47Z",
               "views": 8
             }
           ]
@@ -620,11 +710,16 @@
               "date": "2026-11-21",
               "captured_at": "2026-11-21T19:11:45Z",
               "views": 8
+            },
+            {
+              "date": "2026-11-22",
+              "captured_at": "2026-11-22T01:47:47Z",
+              "views": 8
             }
           ]
         }
       ],
-      "result_count": 32,
+      "result_count": 33,
       "displayed_count": 10
     },
     "lady-moriarty": {
@@ -633,10 +728,10 @@
       "broadcaster_id": "710295249",
       "url": "https://twitch.tv/ladymoriarty01",
       "status": "ok",
-      "captured_at": "2026-11-21T19:11:45Z",
+      "captured_at": "2026-11-22T01:47:47Z",
       "period": {
-        "from": "2026-10-22T19:11:45Z",
-        "to": "2026-11-21T19:11:45Z",
+        "from": "2026-10-23T01:47:47Z",
+        "to": "2026-11-22T01:47:47Z",
         "days": 30
       },
       "clips": [
@@ -665,6 +760,11 @@
             {
               "date": "2026-11-21",
               "captured_at": "2026-11-21T19:11:45Z",
+              "views": 13
+            },
+            {
+              "date": "2026-11-22",
+              "captured_at": "2026-11-22T01:47:47Z",
               "views": 13
             }
           ]
@@ -695,6 +795,11 @@
               "date": "2026-11-21",
               "captured_at": "2026-11-21T19:11:45Z",
               "views": 12
+            },
+            {
+              "date": "2026-11-22",
+              "captured_at": "2026-11-22T01:47:47Z",
+              "views": 12
             }
           ]
         },
@@ -723,6 +828,11 @@
             {
               "date": "2026-11-21",
               "captured_at": "2026-11-21T19:11:45Z",
+              "views": 8
+            },
+            {
+              "date": "2026-11-22",
+              "captured_at": "2026-11-22T01:47:47Z",
               "views": 8
             }
           ]
@@ -753,6 +863,11 @@
               "date": "2026-11-21",
               "captured_at": "2026-11-21T19:11:45Z",
               "views": 6
+            },
+            {
+              "date": "2026-11-22",
+              "captured_at": "2026-11-22T01:47:47Z",
+              "views": 6
             }
           ]
         },
@@ -781,6 +896,11 @@
             {
               "date": "2026-11-21",
               "captured_at": "2026-11-21T19:11:45Z",
+              "views": 6
+            },
+            {
+              "date": "2026-11-22",
+              "captured_at": "2026-11-22T01:47:47Z",
               "views": 6
             }
           ]
@@ -811,6 +931,11 @@
               "date": "2026-11-21",
               "captured_at": "2026-11-21T19:11:45Z",
               "views": 4
+            },
+            {
+              "date": "2026-11-22",
+              "captured_at": "2026-11-22T01:47:47Z",
+              "views": 4
             }
           ]
         },
@@ -839,6 +964,11 @@
             {
               "date": "2026-11-21",
               "captured_at": "2026-11-21T19:11:45Z",
+              "views": 4
+            },
+            {
+              "date": "2026-11-22",
+              "captured_at": "2026-11-22T01:47:47Z",
               "views": 4
             }
           ]
@@ -869,6 +999,11 @@
               "date": "2026-11-21",
               "captured_at": "2026-11-21T19:11:45Z",
               "views": 3
+            },
+            {
+              "date": "2026-11-22",
+              "captured_at": "2026-11-22T01:47:47Z",
+              "views": 3
             }
           ]
         },
@@ -892,6 +1027,11 @@
             {
               "date": "2026-11-21",
               "captured_at": "2026-11-21T19:11:45Z",
+              "views": 2
+            },
+            {
+              "date": "2026-11-22",
+              "captured_at": "2026-11-22T01:47:47Z",
               "views": 2
             }
           ]
@@ -922,6 +1062,11 @@
               "date": "2026-11-21",
               "captured_at": "2026-11-21T19:11:45Z",
               "views": 2
+            },
+            {
+              "date": "2026-11-22",
+              "captured_at": "2026-11-22T01:47:47Z",
+              "views": 2
             }
           ]
         }
@@ -935,10 +1080,10 @@
       "broadcaster_id": "775254958",
       "url": "https://twitch.tv/ardipii",
       "status": "ok",
-      "captured_at": "2026-11-21T19:11:45Z",
+      "captured_at": "2026-11-22T01:47:47Z",
       "period": {
-        "from": "2026-10-22T19:11:45Z",
-        "to": "2026-11-21T19:11:45Z",
+        "from": "2026-10-23T01:47:47Z",
+        "to": "2026-11-22T01:47:47Z",
         "days": 30
       },
       "clips": [
@@ -968,6 +1113,40 @@
               "date": "2026-11-21",
               "captured_at": "2026-11-21T19:11:45Z",
               "views": 5
+            },
+            {
+              "date": "2026-11-22",
+              "captured_at": "2026-11-22T01:47:47Z",
+              "views": 5
+            }
+          ]
+        },
+        {
+          "id": "CloudyTriumphantMouseCoolCat-uqNxf8xFanwAtGXw",
+          "url": "https://www.twitch.tv/ardipii/clip/CloudyTriumphantMouseCoolCat-uqNxf8xFanwAtGXw",
+          "embed_url": "https://clips.twitch.tv/embed?clip=CloudyTriumphantMouseCoolCat-uqNxf8xFanwAtGXw",
+          "title": "Por fin llego el GTA 6",
+          "creator_name": "ArDipii",
+          "broadcaster_name": "ArDipii",
+          "created_at": "2026-11-19T17:23:02Z",
+          "view_count": 4,
+          "game_id": "1867279146",
+          "language": "es",
+          "duration": 60,
+          "thumbnail_url": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/0b712428-ab2e-4585-b3cc-c55322ad605f/landscape/thumb/thumb-0000000000-480x272.jpg",
+          "video_id": null,
+          "vod_offset": null,
+          "is_featured": false,
+          "view_history": [
+            {
+              "date": "2026-11-21",
+              "captured_at": "2026-11-21T19:11:45Z",
+              "views": 4
+            },
+            {
+              "date": "2026-11-22",
+              "captured_at": "2026-11-22T01:47:47Z",
+              "views": 4
             }
           ]
         },
@@ -996,6 +1175,11 @@
             {
               "date": "2026-11-21",
               "captured_at": "2026-11-21T19:11:45Z",
+              "views": 4
+            },
+            {
+              "date": "2026-11-22",
+              "captured_at": "2026-11-22T01:47:47Z",
               "views": 4
             }
           ]
@@ -1026,6 +1210,11 @@
               "date": "2026-11-21",
               "captured_at": "2026-11-21T19:11:45Z",
               "views": 4
+            },
+            {
+              "date": "2026-11-22",
+              "captured_at": "2026-11-22T01:47:47Z",
+              "views": 4
             }
           ]
         },
@@ -1055,29 +1244,10 @@
               "date": "2026-11-21",
               "captured_at": "2026-11-21T19:11:45Z",
               "views": 4
-            }
-          ]
-        },
-        {
-          "id": "CloudyTriumphantMouseCoolCat-uqNxf8xFanwAtGXw",
-          "url": "https://www.twitch.tv/ardipii/clip/CloudyTriumphantMouseCoolCat-uqNxf8xFanwAtGXw",
-          "embed_url": "https://clips.twitch.tv/embed?clip=CloudyTriumphantMouseCoolCat-uqNxf8xFanwAtGXw",
-          "title": "Por fin llego el GTA 6",
-          "creator_name": "ArDipii",
-          "broadcaster_name": "ArDipii",
-          "created_at": "2026-11-19T17:23:02Z",
-          "view_count": 4,
-          "game_id": "1867279146",
-          "language": "es",
-          "duration": 60,
-          "thumbnail_url": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/0b712428-ab2e-4585-b3cc-c55322ad605f/landscape/thumb/thumb-0000000000-480x272.jpg",
-          "video_id": null,
-          "vod_offset": null,
-          "is_featured": false,
-          "view_history": [
+            },
             {
-              "date": "2026-11-21",
-              "captured_at": "2026-11-21T19:11:45Z",
+              "date": "2026-11-22",
+              "captured_at": "2026-11-22T01:47:47Z",
               "views": 4
             }
           ]
@@ -1103,29 +1273,34 @@
               "date": "2026-11-21",
               "captured_at": "2026-11-21T19:11:45Z",
               "views": 3
+            },
+            {
+              "date": "2026-11-22",
+              "captured_at": "2026-11-22T01:47:47Z",
+              "views": 3
             }
           ]
         },
         {
-          "id": "GoldenPiliableWoodpeckerGivePLZ-FVulJHGjJ0_Fx651",
-          "url": "https://www.twitch.tv/ardipii/clip/GoldenPiliableWoodpeckerGivePLZ-FVulJHGjJ0_Fx651",
-          "embed_url": "https://clips.twitch.tv/embed?clip=GoldenPiliableWoodpeckerGivePLZ-FVulJHGjJ0_Fx651",
-          "title": "Te cuesta trabajo o se te olvida subir contenido... programalo",
+          "id": "CogentFairNeanderthalMikeHogu-27NQ1fOWg-a_RzGa",
+          "url": "https://www.twitch.tv/ardipii/clip/CogentFairNeanderthalMikeHogu-27NQ1fOWg-a_RzGa",
+          "embed_url": "https://clips.twitch.tv/embed?clip=CogentFairNeanderthalMikeHogu-27NQ1fOWg-a_RzGa",
+          "title": "Tara907 Carrea el canal",
           "creator_name": "ArDipii",
           "broadcaster_name": "ArDipii",
-          "created_at": "2026-11-02T22:12:31Z",
+          "created_at": "2026-10-30T18:08:05Z",
           "view_count": 3,
           "game_id": "509658",
           "language": "es",
-          "duration": 55,
-          "thumbnail_url": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/a3ebbd39-328c-411f-8117-114cd94d5e42/landscape/thumb/thumb-0000000000-480x272.jpg",
+          "duration": 60,
+          "thumbnail_url": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/ee2987a3-0825-4c41-97ed-e0fa757bfa79/landscape/thumb/thumb-0000000000-480x272.jpg",
           "video_id": null,
           "vod_offset": null,
           "is_featured": false,
           "view_history": [
             {
-              "date": "2026-11-21",
-              "captured_at": "2026-11-21T19:11:45Z",
+              "date": "2026-11-22",
+              "captured_at": "2026-11-22T01:47:47Z",
               "views": 3
             }
           ]
@@ -1151,6 +1326,35 @@
               "date": "2026-11-21",
               "captured_at": "2026-11-21T19:11:45Z",
               "views": 3
+            },
+            {
+              "date": "2026-11-22",
+              "captured_at": "2026-11-22T01:47:47Z",
+              "views": 3
+            }
+          ]
+        },
+        {
+          "id": "AmericanMagnificentElkHotPokket-3DgLwYdfknAqFeQM",
+          "url": "https://www.twitch.tv/ardipii/clip/AmericanMagnificentElkHotPokket-3DgLwYdfknAqFeQM",
+          "embed_url": "https://clips.twitch.tv/embed?clip=AmericanMagnificentElkHotPokket-3DgLwYdfknAqFeQM",
+          "title": "Tutorial instagram contenido",
+          "creator_name": "ArDipii",
+          "broadcaster_name": "ArDipii",
+          "created_at": "2026-11-02T22:15:36Z",
+          "view_count": 3,
+          "game_id": "509658",
+          "language": "es",
+          "duration": 59.2,
+          "thumbnail_url": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/6b904b90-827a-42dd-ab41-7f0fef4cae3f/landscape/thumb/thumb-0000000000-480x272.jpg",
+          "video_id": null,
+          "vod_offset": null,
+          "is_featured": false,
+          "view_history": [
+            {
+              "date": "2026-11-22",
+              "captured_at": "2026-11-22T01:47:47Z",
+              "views": 3
             }
           ]
         },
@@ -1175,35 +1379,16 @@
               "date": "2026-11-21",
               "captured_at": "2026-11-21T19:11:45Z",
               "views": 3
-            }
-          ]
-        },
-        {
-          "id": "SolidTentativeDiscThisIsSparta-3k9c58QhcORnX_l0",
-          "url": "https://www.twitch.tv/ardipii/clip/SolidTentativeDiscThisIsSparta-3k9c58QhcORnX_l0",
-          "embed_url": "https://clips.twitch.tv/embed?clip=SolidTentativeDiscThisIsSparta-3k9c58QhcORnX_l0",
-          "title": "La clave de los reels, sera verdad?",
-          "creator_name": "ArDipii",
-          "broadcaster_name": "ArDipii",
-          "created_at": "2026-10-30T18:24:29Z",
-          "view_count": 3,
-          "game_id": "509658",
-          "language": "es",
-          "duration": 27.2,
-          "thumbnail_url": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/7cb2e043-6b6e-464f-96e8-4a17ade3e53b/landscape/thumb/thumb-0000000000-480x272.jpg",
-          "video_id": null,
-          "vod_offset": null,
-          "is_featured": false,
-          "view_history": [
+            },
             {
-              "date": "2026-11-21",
-              "captured_at": "2026-11-21T19:11:45Z",
+              "date": "2026-11-22",
+              "captured_at": "2026-11-22T01:47:47Z",
               "views": 3
             }
           ]
         }
       ],
-      "result_count": 94,
+      "result_count": 93,
       "displayed_count": 10
     },
     "akuma": {
@@ -1212,10 +1397,10 @@
       "broadcaster_id": "163416844",
       "url": "https://twitch.tv/akumazoldyck",
       "status": "ok",
-      "captured_at": "2026-11-21T19:11:45Z",
+      "captured_at": "2026-11-22T01:47:47Z",
       "period": {
-        "from": "2026-10-22T19:11:45Z",
-        "to": "2026-11-21T19:11:45Z",
+        "from": "2026-10-23T01:47:47Z",
+        "to": "2026-11-22T01:47:47Z",
         "days": 30
       },
       "clips": [
@@ -1227,7 +1412,7 @@
           "creator_name": "akumazoldyck",
           "broadcaster_name": "akumazoldyck",
           "created_at": "2026-10-31T02:03:40Z",
-          "view_count": 13,
+          "view_count": 14,
           "game_id": "782170789",
           "language": "es",
           "duration": 30,
@@ -1245,6 +1430,11 @@
               "date": "2026-11-21",
               "captured_at": "2026-11-21T19:11:45Z",
               "views": 13
+            },
+            {
+              "date": "2026-11-22",
+              "captured_at": "2026-11-22T01:47:47Z",
+              "views": 14
             }
           ]
         },
@@ -1273,6 +1463,11 @@
             {
               "date": "2026-11-21",
               "captured_at": "2026-11-21T19:11:45Z",
+              "views": 7
+            },
+            {
+              "date": "2026-11-22",
+              "captured_at": "2026-11-22T01:47:47Z",
               "views": 7
             }
           ]
@@ -1303,6 +1498,11 @@
               "date": "2026-11-21",
               "captured_at": "2026-11-21T19:11:45Z",
               "views": 5
+            },
+            {
+              "date": "2026-11-22",
+              "captured_at": "2026-11-22T01:47:47Z",
+              "views": 5
             }
           ]
         }
@@ -1316,10 +1516,10 @@
       "broadcaster_id": "240834527",
       "url": "https://twitch.tv/daved0608",
       "status": "empty",
-      "captured_at": "2026-11-21T19:11:45Z",
+      "captured_at": "2026-11-22T01:47:47Z",
       "period": {
-        "from": "2026-10-22T19:11:45Z",
-        "to": "2026-11-21T19:11:45Z",
+        "from": "2026-10-23T01:47:47Z",
+        "to": "2026-11-22T01:47:47Z",
         "days": 30
       },
       "clips": [],
@@ -1332,10 +1532,10 @@
       "broadcaster_id": "1357467619",
       "url": "https://twitch.tv/habitos_atomicos",
       "status": "ok",
-      "captured_at": "2026-11-21T19:11:45Z",
+      "captured_at": "2026-11-22T01:47:47Z",
       "period": {
-        "from": "2026-10-22T19:11:45Z",
-        "to": "2026-11-21T19:11:45Z",
+        "from": "2026-10-23T01:47:47Z",
+        "to": "2026-11-22T01:47:47Z",
         "days": 30
       },
       "clips": [
@@ -1364,6 +1564,11 @@
             {
               "date": "2026-11-21",
               "captured_at": "2026-11-21T19:11:45Z",
+              "views": 9
+            },
+            {
+              "date": "2026-11-22",
+              "captured_at": "2026-11-22T01:47:47Z",
               "views": 9
             }
           ]
@@ -1394,6 +1599,11 @@
               "date": "2026-11-21",
               "captured_at": "2026-11-21T19:11:45Z",
               "views": 8
+            },
+            {
+              "date": "2026-11-22",
+              "captured_at": "2026-11-22T01:47:47Z",
+              "views": 8
             }
           ]
         },
@@ -1422,6 +1632,11 @@
             {
               "date": "2026-11-21",
               "captured_at": "2026-11-21T19:11:45Z",
+              "views": 7
+            },
+            {
+              "date": "2026-11-22",
+              "captured_at": "2026-11-22T01:47:47Z",
               "views": 7
             }
           ]
@@ -1452,6 +1667,11 @@
               "date": "2026-11-21",
               "captured_at": "2026-11-21T19:11:45Z",
               "views": 6
+            },
+            {
+              "date": "2026-11-22",
+              "captured_at": "2026-11-22T01:47:47Z",
+              "views": 6
             }
           ]
         },
@@ -1480,6 +1700,11 @@
             {
               "date": "2026-11-21",
               "captured_at": "2026-11-21T19:11:45Z",
+              "views": 6
+            },
+            {
+              "date": "2026-11-22",
+              "captured_at": "2026-11-22T01:47:47Z",
               "views": 6
             }
           ]
@@ -1510,34 +1735,10 @@
               "date": "2026-11-21",
               "captured_at": "2026-11-21T19:11:45Z",
               "views": 5
-            }
-          ]
-        },
-        {
-          "id": "BashfulGloriousLocustKlappa-k1-a-au9808jGVNq",
-          "url": "https://www.twitch.tv/habitos_atomicos/clip/BashfulGloriousLocustKlappa-k1-a-au9808jGVNq",
-          "embed_url": "https://clips.twitch.tv/embed?clip=BashfulGloriousLocustKlappa-k1-a-au9808jGVNq",
-          "title": "va a quedar afuera argentina pero no, porque se viene messi.!",
-          "creator_name": "habitos_atomicos",
-          "broadcaster_name": "habitos_atomicos",
-          "created_at": "2026-10-25T09:47:43Z",
-          "view_count": 5,
-          "game_id": "509658",
-          "language": "es",
-          "duration": 56.8,
-          "thumbnail_url": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/99b20658-1f1e-4b57-927d-c196dd3bcce8/landscape/thumb/thumb-0000000000-480x272.jpg",
-          "video_id": null,
-          "vod_offset": null,
-          "is_featured": false,
-          "view_history": [
-            {
-              "date": "2026-11-20",
-              "captured_at": "2026-11-20T17:42:44Z",
-              "views": 5
             },
             {
-              "date": "2026-11-21",
-              "captured_at": "2026-11-21T19:11:45Z",
+              "date": "2026-11-22",
+              "captured_at": "2026-11-22T01:47:47Z",
               "views": 5
             }
           ]
@@ -1568,6 +1769,45 @@
               "date": "2026-11-21",
               "captured_at": "2026-11-21T19:11:45Z",
               "views": 5
+            },
+            {
+              "date": "2026-11-22",
+              "captured_at": "2026-11-22T01:47:47Z",
+              "views": 5
+            }
+          ]
+        },
+        {
+          "id": "BashfulGloriousLocustKlappa-k1-a-au9808jGVNq",
+          "url": "https://www.twitch.tv/habitos_atomicos/clip/BashfulGloriousLocustKlappa-k1-a-au9808jGVNq",
+          "embed_url": "https://clips.twitch.tv/embed?clip=BashfulGloriousLocustKlappa-k1-a-au9808jGVNq",
+          "title": "va a quedar afuera argentina pero no, porque se viene messi.!",
+          "creator_name": "habitos_atomicos",
+          "broadcaster_name": "habitos_atomicos",
+          "created_at": "2026-10-25T09:47:43Z",
+          "view_count": 5,
+          "game_id": "509658",
+          "language": "es",
+          "duration": 56.8,
+          "thumbnail_url": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/99b20658-1f1e-4b57-927d-c196dd3bcce8/landscape/thumb/thumb-0000000000-480x272.jpg",
+          "video_id": null,
+          "vod_offset": null,
+          "is_featured": false,
+          "view_history": [
+            {
+              "date": "2026-11-20",
+              "captured_at": "2026-11-20T17:42:44Z",
+              "views": 5
+            },
+            {
+              "date": "2026-11-21",
+              "captured_at": "2026-11-21T19:11:45Z",
+              "views": 5
+            },
+            {
+              "date": "2026-11-22",
+              "captured_at": "2026-11-22T01:47:47Z",
+              "views": 5
             }
           ]
         },
@@ -1592,6 +1832,11 @@
               "date": "2026-11-21",
               "captured_at": "2026-11-21T19:11:45Z",
               "views": 4
+            },
+            {
+              "date": "2026-11-22",
+              "captured_at": "2026-11-22T01:47:47Z",
+              "views": 4
             }
           ]
         },
@@ -1615,6 +1860,11 @@
             {
               "date": "2026-11-21",
               "captured_at": "2026-11-21T19:11:45Z",
+              "views": 4
+            },
+            {
+              "date": "2026-11-22",
+              "captured_at": "2026-11-22T01:47:47Z",
               "views": 4
             }
           ]
