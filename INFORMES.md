@@ -29,7 +29,10 @@
 - **Conservación:** el nuevo archivo tiene el mismo blob SHA que el original (`9b2a6b2ab4b27053d0b2402fb409b353bc01380c`); se verificó que el árbol de la rama contiene solo `data/creator-records.json`, sin duplicado en raíz.
 - **Consumidores actualizados:** cargador compartido, builder/validadores, control de identidad, cinco contratos de tests, workflows, esquema de métricas y documentación.
 - **Guardrail:** el archivo raíz se retiró únicamente en la rama del PR; `main` y producción siguen intactos. No se modificó BarFender ni snapshots automáticos.
-- **Pendiente:** revisar todos los checks y el diff, ejecutar suite Python/Playwright/QA común y verificar los resultados en el HEAD final. No hay merge ni despliegue de producción.
+- **Validación CI del HEAD `50414bedbddc2a29dc55aa521ffa2ad93a0aebeb`:** `python-tests` SUCCESS; `qa-capitulos` SUCCESS (incluye Chromium + QA común); `validar` SUCCESS (JSON, contratos de datos, validadores, Playwright de expedientes/Bitácora/responsive/historial y auditorías de rutas/assets); Cloudflare Pages SUCCESS como preview de rama. Cuatro checks completados, cero fallos.
+- **Artefactos:** `creator-metrics-2462485896b79b70c6ef8c51e258f63c5fe7ccf1` y `roster-visual-review-2462485896b79b70c6ef8c51e258f63c5fe7ccf1` disponibles; auditoría de imágenes también publicada.
+- **Conservación:** el archivo migrado mantiene el blob SHA original `9b2a6b2ab4b27053d0b2402fb409b353bc01380c`; la suite de identidad/conservación y la línea base versionada pasan.
+- **Estado:** PR #96 sigue Draft y sin merge. Cloudflare generó preview de rama, no despliegue de producción. Próximo control: revisión humana final del diff y de la preview; no iniciar BASE-02 ni migraciones siguientes hasta cerrar este corte.
 
 ## P0 · Base de datos, validación y prevención de regresiones
 
