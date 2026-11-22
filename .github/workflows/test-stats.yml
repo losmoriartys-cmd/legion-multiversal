@@ -24,7 +24,7 @@ on:
       - 'creator-metrics.json'
       - 'app.js'
       - 'roster-02-moriartys.html'
-      - '.github/workflows/test-stats.yml'
+      - '.github/workflows/**'
   pull_request:
     branches:
       - main
@@ -55,7 +55,7 @@ on:
       - 'scripts/check_identity_consistency.py'
       - 'data.json'
       - 'creator-metrics.json'
-      - '.github/workflows/test-stats.yml'
+      - '.github/workflows/**'
 
 permissions:
   contents: read

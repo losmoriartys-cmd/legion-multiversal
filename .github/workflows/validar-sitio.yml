@@ -2,6 +2,8 @@ name: Validar código y datos del sitio
 
 on:
   push:
+    branches:
+      - main
     paths:
       - 'app.js'
       - 'games-registry.js'
@@ -21,7 +23,7 @@ on:
       - 'tests/**'
       - 'requirements-data-contracts.txt'
       - 'update_clips.py'
-      - '.github/workflows/validar-sitio.yml'
+      - '.github/workflows/**'
   pull_request:
     paths:
       - 'data/**'
@@ -38,7 +40,7 @@ on:
       - 'schemas/**'
       - 'tests/**'
       - 'update_clips.py'
-      - '.github/workflows/validar-sitio.yml'
+      - '.github/workflows/**'
   workflow_dispatch:
 
 permissions:
