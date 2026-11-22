@@ -1,12 +1,12 @@
 # HOJA DE RUTA VIVA · EVOLUCIÓN Y PROTECCIÓN DE LEGIÓN MULTIVERSAL
-**Actualización:** 21/11/2026 · **Tablero de seguimiento:** esta hoja se mantiene al comienzo de INFORMES.md.
+**Actualización:** 22/11/2026 · **Tablero de seguimiento:** esta hoja se mantiene al comienzo de INFORMES.md.
 
 > **Regla de cierre:** una tarea solo pasa a [x] cuando su implementación está integrada en main, sus pruebas aplicables terminan correctamente y se verifica el resultado publicado cuando corresponda. Un cambio en una rama, un preview o un workflow todavía en curso no cuenta como terminado. Cada cierre debe enlazar el PR, el SHA y la evidencia de validación.
 
 ## Estado actual reutilizable · ya existe y no debe reconstruirse desde cero
 
 - [x] **Registro maestro de juegos:** games.json, schemas/games.schema.json y scripts/validate_games_registry.py; 18 juegos, 10 sesiones BIT y 11 POV. La Bitácora y el Arsenal consumen ese mismo origen.
-- [~] **Identidad del Roster:** migración en curso hacia `data/roster.json`; se conservan `schemas/roster-data.schema.json`, los ocho perfiles y sus validaciones, sin cambios editoriales.
+- [x] **Identidad del Roster y expedientes BASE-01C:** `data/roster.json` conserva los ocho perfiles; `data/creator-records.json` quedó integrado por PR #96 (`63211d1`). La equivalencia editorial se verificó por blob SHA y CI/Playwright posterior al merge. La comprobación HTTP directa del dominio público sigue pendiente por una limitación DNS del entorno.
 - [x] **Infraestructura QA común:** Playwright verifica 12 IDs de capítulos y cinco anchos (1440, 1024, 768, 390 y 360 px), navegación y overflow.
 - [x] **Validación general y QA portable:** existen workflows para contratos Python, JSON, sintaxis, imágenes, accesibilidad estática, enlaces/anclas y publicación de evidencias.
 - [x] **Colector de clips públicos:** update_clips.py consulta Twitch Helix, conserva metadatos y una ventana de historial de vistas. Su extensión para clips por sesión, feeds y relación con VOD sigue pendiente.
@@ -4037,3 +4037,27 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **Prueba visual y de consola en el HEAD anterior:** los checks `validar`, `qa-capitulos` y `python-tests` finalizaron SUCCESS en `54b9867534db93d15fb9f47bc7ba2d798e8705f3`. Artifact `roster-visual-review` #14741428409: la captura `bitacora-lady-mobile.png` (390×844) muestra la pestaña BITÁCORA seleccionada, su panel y la línea de tiempo; no es la pestaña Estadísticas. La prueba registra `pageerror` y `console.error` y exige una lista vacía. Artifact `image-reference-audit` #14741253918.
 - **Pendiente de cierre:** todavía falta comparar una captura equivalente de main con la de la rama sincronizada. La sincronización requiere una ejecución nueva de CI sobre su nuevo HEAD; los resultados del HEAD anterior no se trasladan.
 - **Estado:** PR #96 permanece Draft y sin merge. El preview de la rama no es producción; no hubo cambios en el despliegue público.
+
+
+---
+
+## 2026-11-22 — Cierre BASE-01C e inicio BASE-02 · contrato canónico
+
+- **BASE-01C integrado:** PR #96 `https://github.com/losmoriartys-cmd/legion-multiversal/pull/96`, squash merge `63211d1c60ad32e168d88b8a806dd8742a119ff4`. La migración de `creator-records.json` a `data/creator-records.json` preservó exactamente el blob editorial original (`9b2a6b2ab4b27053d0b2402fb409b353bc01380c`).
+- **QA del PR:** `validar` 51/51 Playwright; comparación de Bitácora móvil con capturas baseline/candidate idénticas byte a byte. El job `validar` posterior al merge terminó success; Python tests, Cloudflare Pages y GitHub Pages build/deploy también reportaron success.
+- **HEAD actual de main al iniciar BASE-02:** `1625cb1075f1302d3934ac88c0676a1dd17ec753`, tras la actualización automática de métricas/clips. La preview de Cloudflare se publica correctamente. No se declara verificación HTTP del dominio público canónico: el entorno de ejecución no pudo resolver su DNS.
+- **BASE-02:** issue #93; rama `feat/base-02-canonical-data-contract`. Implementados esquemas de roster, juegos/expedientes, Twitch Helix, YouTube/Kick, clips, noticias, SullyGnome, TwitchMetrics, programa de creadores y Comunidad; validador integral con referencias cruzadas; pruebas negativas; auditoría externa; y política declarativa de status checks. Ver actualización de cierre técnico del primer ciclo al final de este documento.
+- **Guardrails preservados:** Pato permanece YouTube, fuera de los clips Twitch; los canales archivados continúan en el feed histórico sin convertirse en activos; BIT y EXP conservan namespaces separados; BarFender sigue como EXP-001, sin sesionar BIT por inferencia; una cuenta POV puede no figurar entre los participantes, siempre que exista como canal Twitch del Roster.
+- **Estado:** BASE-02 permanece abierto. Ningún checklist de aceptación se marca terminado hasta que el PR complete CI, revisión de resultados y merge.
+
+
+### 2026-11-22 · BASE-02 · cierre del primer ciclo técnico y auditoría real
+
+- **Base sincronizada:** el PR #97 partió de `1625cb1075f1302d3934ac88c0676a1dd17ec753`. `main` avanzó a `a578714cbac39cef580887c3dbf80a35ce726835` (21 commits: snapshots automáticos de métricas/clips y cambios editoriales en Roster/juegos). Se integró ese main a la rama mediante el merge commit `ac3d541bdd4f6dbe012002979bc5cb7b99d795b6`; comparación posterior: 18 commits propios, 0 detrás. Los blobs de las 9 rutas tocadas en main se verificaron idénticos entre main y la rama del PR.
+- **HEAD actual del PR:** `873d839cbf9a0d475fcad944d019d5376a4527ae`. PR #97 sigue Draft, abierto y sin merge.
+- **Checks en el HEAD actual:** `validar` SUCCESS; `python-tests` SUCCESS; `audit-public-links` SUCCESS; `qa-capitulos` SUCCESS; Cloudflare Pages preview SUCCESS.
+- **Playwright:** 51/51 pruebas aprobadas. La prueba Bitácora móvil compara ahora contra la preview de Cloudflare del SHA exacto de main, resuelta en el workflow mediante `scripts/resolve_main_preview.py`; no depende de una URL de preview estática que quede obsoleta. Capturas baseline/candidate idénticas por SHA-256 `224259ce0934a6c43400066f509d41ab65294d324df1825075cd242ec078111d`. Artefacto: `https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45077094742/artifacts/14776275223`.
+- **Auditoría externa real:** corrida del 22/11/2026 sobre 135 URLs: 123 accesibles, 12 inconclusas y 0 bajas confirmadas. Las 12 inconclusas respondieron HTTP 403 (Beacons, seis perfiles SullyGnome, Epic y tres perfiles TikTok); no se clasificaron como rotas. Política: solo dos respuestas consecutivas 404/410 confirman baja; 403/429/5xx/timeout/DNS/TLS son inconclusos. Informe JSON SHA-256 `76170b9a5f53ac8ed321775522ec0983db96f0d82efabf89aff39043e37b8a78`; artefacto: `https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45077094739/artifacts/14775627191`.
+- **Estabilidad de checks:** el workflow `validar-sitio.yml` usa `push` solo en main y `pull_request` para ramas de trabajo, de forma que el contexto `validar` no se duplica. Los tres contextos definidos para protección son `validar`, `python-tests` y `audit-public-links`. Se sumó un test para detectar cambios accidentales de esos nombres y sus disparadores.
+- **Protección real de main — pendiente administrativo:** la regla de branch protection todavía no puede marcarse como activa. La API de protección clásica responde 403 por permisos de administración ausentes y la consulta de rulesets no muestra reglas. `docs/BRANCH_PROTECTION.md` contiene las opciones exactas para que un administrador cree la regla. No se declara BASE-02 terminado ni se integra el PR hasta verificar que GitHub exija efectivamente los tres checks.
+- **Producción:** los checks Cloudflare de la rama son previews; no se afirma una verificación HTTP directa del dominio público ni un deploy a producción desde este PR.
