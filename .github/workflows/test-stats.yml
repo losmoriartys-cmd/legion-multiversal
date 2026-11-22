@@ -12,7 +12,7 @@ on:
       - 'platform-stats.json'
       - 'clips-data.json'
       - 'data/roster.json'
-      - 'creator-records.json'
+      - 'data/creator-records.json'
       - 'creator-metrics.json'
       - 'app.js'
       - 'roster-02-moriartys.html'
@@ -36,7 +36,7 @@ on:
       - 'scripts/validate_creator_metrics.py'
       - 'scripts/check_creator_metrics_freshness.py'
       - 'platform-stats.json'
-      - 'creator-records.json'
+      - 'data/creator-records.json'
       - 'data/roster.json'
       - 'scripts/check_identity_consistency.py'
       - 'data.json'
@@ -62,7 +62,7 @@ jobs:
         run: python scripts/check_identity_consistency.py --selftest
       - name: Verificar claves y slugs del Roster
         run: |
-          python scripts/check_identity_consistency.py --roster data/roster.json --records creator-records.json --platform platform-stats.json \
+          python scripts/check_identity_consistency.py --roster data/roster.json --records data/creator-records.json --platform platform-stats.json \
             --baseline tests/baselines/identity-before-canonical-migration.json --approved-editorial tests/baselines/approved-editorial-updates.json --strict --skip-platform
       - name: Verificar conservación contra línea base versionada
         run: |
