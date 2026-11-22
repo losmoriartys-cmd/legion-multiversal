@@ -23,3 +23,8 @@ Esta carpeta contiene las fuentes maestras de contenido estructurado. Cada entid
 3. Toda migración debe actualizar consumidores, colectores, validadores, tests y workflows en el mismo cambio.
 4. Retirar la ruta anterior solo cuando las búsquedas y pruebas demuestren que no quedan consumidores activos.
 5. Mantener los esquemas versionados en `schemas/` y validar antes de publicar.
+
+### BASE-01C · corte en preparación
+
+- `data/creator-records.json` contiene los expedientes editoriales por creador, vinculados por ID a `data/roster.json`.
+- Su migración está en una rama de trabajo; no se considera canónica en `main` hasta completar consumidores, validaciones y merge.
