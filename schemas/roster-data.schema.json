@@ -29,7 +29,9 @@
           "identity_scope",
           "role",
           "creator_type",
-          "accounts"
+          "accounts",
+          "schedule",
+          "links"
         ],
         "properties": {
           "id": {
@@ -101,7 +103,8 @@
                 },
                 "url": {
                   "type": "string",
-                  "format": "uri"
+                  "format": "uri",
+                  "pattern": "^https://"
                 },
                 "ownership": {
                   "enum": [
@@ -169,7 +172,34 @@
           },
           "links": {
             "type": "array",
-            "description": "Enlaces complementarios y agregadores de perfiles (por ejemplo, Beacons con platform=link_hub); no sustituye las redes sociales directas."
+            "description": "Enlaces complementarios, agregadores o vías de apoyo; las redes directas se registran en socials/accounts.",
+            "items": {
+              "type": "object",
+              "required": [
+                "platform",
+                "url"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "platform": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "url": {
+                  "type": "string",
+                  "format": "uri",
+                  "pattern": "^https://"
+                },
+                "label": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
           },
           "tagline": {
             "type": "string",
@@ -247,6 +277,7 @@
                 },
                 "url": {
                   "type": "string",
+                  "format": "uri",
                   "pattern": "^https://"
                 },
                 "source": {
@@ -254,6 +285,11 @@
                 }
               }
             }
+          },
+          "schedule": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Horario declarado por el creador. Es una referencia editorial; no representa actividad medida ni compromiso de disponibilidad."
           }
         }
       }

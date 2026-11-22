@@ -1,0 +1,345 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://legion-multiversal.pages.dev/schemas/twitch-activity.schema.json",
+  "title": "Legión Multiversal — Feed automático de actividad Twitch",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "source",
+    "window_days",
+    "history_days",
+    "sampling_interval_minutes",
+    "active_channels",
+    "collection",
+    "channels",
+    "updated_at"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 2
+    },
+    "source": {
+      "const": "Twitch Helix API"
+    },
+    "window_days": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "history_days": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "sampling_interval_minutes": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "active_channels": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "archived_channels": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "collection": {
+      "$ref": "#/$defs/collection"
+    },
+    "channels": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "$ref": "#/$defs/channel"
+      }
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "channel_registry_note": {
+      "type": "string"
+    }
+  },
+  "$defs": {
+    "snapshot": {
+      "type": "object",
+      "required": [
+        "sampled_at",
+        "is_live",
+        "viewer_count",
+        "game_name",
+        "title",
+        "stream_id",
+        "started_at"
+      ],
+      "properties": {
+        "sampled_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "is_live": {
+          "type": "boolean"
+        },
+        "viewer_count": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "game_name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "title": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "stream_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "started_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "is_live": {
+                "const": false
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "viewer_count": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ],
+      "additionalProperties": false
+    },
+    "collection": {
+      "type": "object",
+      "required": [
+        "expected_channels",
+        "resolved_channels",
+        "sampled_channels",
+        "skipped_channels",
+        "complete",
+        "status_complete",
+        "sampling_complete",
+        "coverage_complete"
+      ],
+      "properties": {
+        "started_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "expected_channels": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "resolved_channels": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sampled_channels": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "skipped_channels": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "complete": {
+          "type": "boolean"
+        },
+        "status_complete": {
+          "type": "boolean"
+        },
+        "sampling_complete": {
+          "type": "boolean"
+        },
+        "coverage_complete": {
+          "type": "boolean"
+        },
+        "registry_source": {
+          "type": "string"
+        },
+        "authentication": {
+          "type": "string"
+        },
+        "followers_total_only": {
+          "type": "boolean"
+        },
+        "followers_list_access": {
+          "type": "boolean"
+        },
+        "private_analytics_access": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": true
+    },
+    "window": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "channel": {
+      "type": "object",
+      "required": [
+        "login",
+        "live",
+        "snapshots"
+      ],
+      "properties": {
+        "login": {
+          "type": "string",
+          "minLength": 1
+        },
+        "display_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string"
+        },
+        "profile_image_url": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "uri"
+        },
+        "twitch_url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://(www\\\\.)?twitch\\\\.tv/"
+        },
+        "followers_total": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "followers_captured_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "followers_source": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "followers_status": {
+          "type": "string"
+        },
+        "followers_note": {
+          "type": "string"
+        },
+        "followers_history": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        },
+        "live": {
+          "type": "boolean"
+        },
+        "current_viewers": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "current_game": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "current_title": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "stream_started_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "last_status_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "last_snapshot_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "window": {
+          "$ref": "#/$defs/window"
+        },
+        "snapshots": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/snapshot"
+          }
+        },
+        "roster_status": {
+          "type": "string"
+        },
+        "roster_note": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    }
+  }
+}

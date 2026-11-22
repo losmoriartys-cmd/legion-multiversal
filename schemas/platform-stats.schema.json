@@ -1,0 +1,338 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://legion-multiversal.pages.dev/schemas/platform-stats.schema.json",
+  "title": "Legión Multiversal — Capturas públicas por plataforma externa",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "updated_at",
+    "methodology",
+    "creators",
+    "collection_status"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "methodology": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "creators": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/creator"
+      }
+    },
+    "collection_status": {
+      "type": "object",
+      "required": [
+        "captured_at",
+        "successful_accounts",
+        "failed_accounts",
+        "complete"
+      ],
+      "properties": {
+        "youtube": {
+          "type": "string"
+        },
+        "kick": {
+          "type": "string"
+        },
+        "captured_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "successful_accounts": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "failed_accounts": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "complete": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "$defs": {
+    "nonNegativeNullable": {
+      "type": [
+        "integer",
+        "number",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "historyPoint": {
+      "type": "object",
+      "required": [
+        "captured_at",
+        "metrics"
+      ],
+      "properties": {
+        "captured_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "metrics": {
+          "type": "object",
+          "properties": {
+            "subscribers": {
+              "$ref": "#/$defs/nonNegativeNullable"
+            },
+            "total_views": {
+              "$ref": "#/$defs/nonNegativeNullable"
+            },
+            "videos_total": {
+              "$ref": "#/$defs/nonNegativeNullable"
+            }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    },
+    "videoPoint": {
+      "type": "object",
+      "required": [
+        "date",
+        "captured_at",
+        "views",
+        "likes",
+        "comments"
+      ],
+      "properties": {
+        "date": {
+          "type": "string",
+          "format": "date"
+        },
+        "captured_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "views": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "likes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "comments": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "video": {
+      "type": "object",
+      "required": [
+        "video_id",
+        "title",
+        "published_at",
+        "views",
+        "likes",
+        "comments",
+        "url",
+        "view_history"
+      ],
+      "properties": {
+        "video_id": {
+          "type": "string",
+          "minLength": 6
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "published_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "views": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "likes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "comments": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://(www\\\\.)?youtube\\\\.com/watch\\\\?v="
+        },
+        "view_history": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/videoPoint"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "youtube": {
+      "type": "object",
+      "required": [
+        "platform",
+        "handle",
+        "url",
+        "display_name",
+        "metrics",
+        "recent_videos",
+        "source",
+        "status",
+        "methodology",
+        "captured_at",
+        "history"
+      ],
+      "properties": {
+        "platform": {
+          "const": "youtube"
+        },
+        "handle": {
+          "type": "string",
+          "minLength": 1
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://(www\\\\.)?youtube\\\\.com/"
+        },
+        "display_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "thumbnail_url": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "uri"
+        },
+        "metrics": {
+          "type": "object",
+          "required": [
+            "subscribers",
+            "total_views",
+            "videos_total"
+          ],
+          "properties": {
+            "subscribers": {
+              "$ref": "#/$defs/nonNegativeNullable"
+            },
+            "total_views": {
+              "$ref": "#/$defs/nonNegativeNullable"
+            },
+            "videos_total": {
+              "$ref": "#/$defs/nonNegativeNullable"
+            }
+          },
+          "additionalProperties": false
+        },
+        "recent_videos": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/video"
+          }
+        },
+        "source": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "type": "string",
+          "minLength": 1
+        },
+        "methodology": {
+          "type": "string",
+          "minLength": 1
+        },
+        "captured_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "history": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/historyPoint"
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "otherPlatform": {
+      "type": "object",
+      "required": [
+        "platform",
+        "handle",
+        "url"
+      ],
+      "properties": {
+        "platform": {
+          "type": "string",
+          "minLength": 1
+        },
+        "handle": {
+          "type": "string",
+          "minLength": 1
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://"
+        }
+      },
+      "additionalProperties": true
+    },
+    "creator": {
+      "type": "object",
+      "required": [
+        "display_name",
+        "platforms"
+      ],
+      "properties": {
+        "display_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "platforms": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {
+            "oneOf": [
+              {
+                "$ref": "#/$defs/youtube"
+              },
+              {
+                "$ref": "#/$defs/otherPlatform"
+              }
+            ]
+          }
+        }
+      },
+      "additionalProperties": true
+    }
+  }
+}
