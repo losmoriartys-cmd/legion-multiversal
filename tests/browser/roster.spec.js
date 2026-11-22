@@ -285,14 +285,28 @@ test('Atrás y Adelante restauran el roster y el expediente correcto', async ({ 
   }));
   expect(mobileWidths.document).toBeLessThanOrEqual(mobileWidths.viewport);
   expect(mobileWidths.body).toBeLessThanOrEqual(mobileWidths.viewport);
+  const perfilTab = page.locator('[data-profile-tab="perfil"]');
   const bitacoraTab = page.locator('[data-profile-tab="bitacora"]');
+  const estadisticasTab = page.locator('[data-profile-tab="estadisticas"]');
+  const bitacoraPanel = page.locator('#profile-tab-bitacora');
+  const estadisticasPanel = page.locator('#profile-tab-estadisticas');
+
+  // No confiar en el estado heredado de la navegación de escritorio:
+  // forzar una transición real Perfil -> Bitácora en el viewport móvil.
+  await expect(perfilTab).toBeVisible();
+  await perfilTab.click();
+  await expect(perfilTab).toHaveAttribute('aria-selected', 'true');
+  await expect(dossier.locator('#profile-tab-perfil')).toBeVisible();
   await expect(bitacoraTab).toBeVisible();
   await bitacoraTab.click();
   await expect(bitacoraTab).toHaveAttribute('aria-selected', 'true');
-  const bitacoraPanel = page.locator('#profile-tab-bitacora');
+  await expect(perfilTab).toHaveAttribute('aria-selected', 'false');
+  await expect(estadisticasTab).toHaveAttribute('aria-selected', 'false');
   await expect(bitacoraPanel).toBeVisible();
+  await expect(estadisticasPanel).toBeHidden();
   await expect(bitacoraPanel.locator('.hero-timeline')).toBeVisible();
   await expect(bitacoraPanel.locator('.hero-timeline-item.is-origen')).toHaveCount(1);
+  await expect(bitacoraPanel.locator('[data-bitacora-view="recorrido"]')).toBeVisible();
   await expect(bitacoraPanel).toContainText('BITÁCORA');
   const timelineBounds = await bitacoraPanel.locator('.hero-timeline').boundingBox();
   expect(timelineBounds).not.toBeNull();
@@ -306,7 +320,10 @@ test('Atrás y Adelante restauran el roster y el expediente correcto', async ({ 
     expect(bounds.x).toBeGreaterThanOrEqual(0);
     expect(bounds.x + bounds.width).toBeLessThanOrEqual(390 + 1);
   }
-  await expect(page.locator('#profile-tab-estadisticas')).toBeHidden();
+  await expect(estadisticasPanel).toBeHidden();
+  // El artefacto solo se genera después de comprobar pestaña, panel y contenido.
+  await expect(bitacoraTab).toHaveAttribute('aria-selected', 'true');
+  await expect(bitacoraPanel.locator('.hero-timeline-item')).toHaveCount(await timelineItems.count());
   await page.screenshot({ path: 'test-results/bitacora-lady-mobile.png', fullPage: false });
   expect(browserErrors).toEqual([]);
 });
