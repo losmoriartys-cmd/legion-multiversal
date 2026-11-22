@@ -241,7 +241,7 @@
         "twitch_url": {
           "type": "string",
           "format": "uri",
-          "pattern": "^https://(www\\\\.)?twitch\\\\.tv/"
+          "pattern": "^https://(www\\.)?twitch\\.tv/"
         },
         "followers_total": {
           "type": [

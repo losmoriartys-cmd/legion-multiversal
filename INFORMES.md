@@ -1,12 +1,12 @@
 # HOJA DE RUTA VIVA · EVOLUCIÓN Y PROTECCIÓN DE LEGIÓN MULTIVERSAL
-**Actualización:** 21/11/2026 · **Tablero de seguimiento:** esta hoja se mantiene al comienzo de INFORMES.md.
+**Actualización:** 22/11/2026 · **Tablero de seguimiento:** esta hoja se mantiene al comienzo de INFORMES.md.
 
 > **Regla de cierre:** una tarea solo pasa a [x] cuando su implementación está integrada en main, sus pruebas aplicables terminan correctamente y se verifica el resultado publicado cuando corresponda. Un cambio en una rama, un preview o un workflow todavía en curso no cuenta como terminado. Cada cierre debe enlazar el PR, el SHA y la evidencia de validación.
 
 ## Estado actual reutilizable · ya existe y no debe reconstruirse desde cero
 
 - [x] **Registro maestro de juegos:** games.json, schemas/games.schema.json y scripts/validate_games_registry.py; 18 juegos, 10 sesiones BIT y 11 POV. La Bitácora y el Arsenal consumen ese mismo origen.
-- [~] **Identidad del Roster:** migración en curso hacia `data/roster.json`; se conservan `schemas/roster-data.schema.json`, los ocho perfiles y sus validaciones, sin cambios editoriales.
+- [x] **Identidad del Roster y expedientes BASE-01C:** `data/roster.json` conserva los ocho perfiles; `data/creator-records.json` quedó integrado por PR #96 (`63211d1`). La equivalencia editorial se verificó por blob SHA y CI/Playwright posterior al merge. La comprobación HTTP directa del dominio público sigue pendiente por una limitación DNS del entorno.
 - [x] **Infraestructura QA común:** Playwright verifica 12 IDs de capítulos y cinco anchos (1440, 1024, 768, 390 y 360 px), navegación y overflow.
 - [x] **Validación general y QA portable:** existen workflows para contratos Python, JSON, sintaxis, imágenes, accesibilidad estática, enlaces/anclas y publicación de evidencias.
 - [x] **Colector de clips públicos:** update_clips.py consulta Twitch Helix, conserva metadatos y una ventana de historial de vistas. Su extensión para clips por sesión, feeds y relación con VOD sigue pendiente.
@@ -4037,3 +4037,15 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **Prueba visual y de consola en el HEAD anterior:** los checks `validar`, `qa-capitulos` y `python-tests` finalizaron SUCCESS en `54b9867534db93d15fb9f47bc7ba2d798e8705f3`. Artifact `roster-visual-review` #14741428409: la captura `bitacora-lady-mobile.png` (390×844) muestra la pestaña BITÁCORA seleccionada, su panel y la línea de tiempo; no es la pestaña Estadísticas. La prueba registra `pageerror` y `console.error` y exige una lista vacía. Artifact `image-reference-audit` #14741253918.
 - **Pendiente de cierre:** todavía falta comparar una captura equivalente de main con la de la rama sincronizada. La sincronización requiere una ejecución nueva de CI sobre su nuevo HEAD; los resultados del HEAD anterior no se trasladan.
 - **Estado:** PR #96 permanece Draft y sin merge. El preview de la rama no es producción; no hubo cambios en el despliegue público.
+
+
+---
+
+## 2026-11-22 — Cierre BASE-01C e inicio BASE-02 · contrato canónico
+
+- **BASE-01C integrado:** PR #96 `https://github.com/losmoriartys-cmd/legion-multiversal/pull/96`, squash merge `63211d1c60ad32e168d88b8a806dd8742a119ff4`. La migración de `creator-records.json` a `data/creator-records.json` preservó exactamente el blob editorial original (`9b2a6b2ab4b27053d0b2402fb409b353bc01380c`).
+- **QA del PR:** `validar` 51/51 Playwright; comparación de Bitácora móvil con capturas baseline/candidate idénticas byte a byte. El job `validar` posterior al merge terminó success; Python tests, Cloudflare Pages y GitHub Pages build/deploy también reportaron success.
+- **HEAD actual de main al iniciar BASE-02:** `1625cb1075f1302d3934ac88c0676a1dd17ec753`, tras la actualización automática de métricas/clips. La preview de Cloudflare se publica correctamente. No se declara verificación HTTP del dominio público canónico: el entorno de ejecución no pudo resolver su DNS.
+- **BASE-02:** issue #93; rama inicial `feat/base-02-canonical-data-contract`, creada desde el SHA de main anterior. Se amplió el esquema del roster para exigir horarios declarados y validar enlaces; se agregaron esquemas para expedientes de creadores, feed Twitch, métricas de plataforma, programas de creadores, Comunidad y marcador de plataformas obsoleto. Se incorporó un validador integral que combina JSON Schema con los validadores semánticos existentes. Se están conectando los checks obligatorios, pruebas negativas y auditoría externa de enlaces.
+- **Guardrails preservados:** Pato permanece YouTube, fuera de los clips Twitch; los canales archivados continúan en el feed histórico sin convertirse en activos; BIT y EXP conservan namespaces separados; BarFender sigue como EXP-001, sin sesionar BIT por inferencia; una cuenta POV puede no figurar entre los participantes, siempre que exista como canal Twitch del Roster.
+- **Estado:** BASE-02 permanece abierto. Ningún checklist de aceptación se marca terminado hasta que el PR complete CI, revisión de resultados y merge.
