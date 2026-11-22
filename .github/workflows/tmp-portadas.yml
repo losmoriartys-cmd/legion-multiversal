@@ -1,0 +1,31 @@
+name: tmp portadas
+on:
+  push:
+    branches: [tmp-portadas]
+permissions:
+  contents: read
+jobs:
+  boxart:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Box art
+        env:
+          TWITCH_CLIENT_ID: ${{ secrets.TWITCH_CLIENT_ID }}
+          TWITCH_CLIENT_SECRET: ${{ secrets.TWITCH_CLIENT_SECRET }}
+        run: |
+          python - <<'PY'
+          import json, update_stats as u
+          t = u.get_token()
+          names = ["Escape the Backrooms","Teenage Mutant Ninja Turtles: Shredder's Revenge","LEGO Batman: The Videogame","LEGO Batman","Bloody Cleanup Together","Anime Shop Simulation","Night Club Simulation: Party King","Fortnite","PEAK"]
+          for n in names:
+              r = u.helix_get("games", t, {"name": n})
+              print("BOXART|" + n + "|" + json.dumps([{k: x.get(k) for k in ("id","name","box_art_url")} for x in r]))
+          # fallback: busqueda por texto
+          for q in ["Shredder's Revenge","LEGO Batman","Bloody Cleanup","Anime Shop","Night Club Simulation","PEAK","Backrooms"]:
+              r = u.helix_get("search/categories", t, {"query": q, "first": 5})
+              print("SEARCH|" + q + "|" + json.dumps([{k: x.get(k) for k in ("id","name","box_art_url")} for x in r]))
+          PY
