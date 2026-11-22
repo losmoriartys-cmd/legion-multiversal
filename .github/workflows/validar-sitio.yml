@@ -45,6 +45,7 @@ on:
 
 permissions:
   contents: read
+  checks: read
 
 jobs:
   validar:
@@ -58,6 +59,15 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Resolver preview vigente de main para baseline visual
+        id: main-preview
+        if: github.event_name == 'pull_request'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: |
+          MAIN_SHA="$(git rev-parse origin/main)"
+          python scripts/resolve_main_preview.py --repo "$GITHUB_REPOSITORY" --sha "$MAIN_SHA"
       - name: Comprobar sintaxis JavaScript
         run: |
           node --check app.js
@@ -161,7 +171,7 @@ jobs:
           python scripts/audit_image_references.py --root /tmp/image-audit-0d578a0 --output reports/image-audit/0d578a0.md
           python scripts/audit_image_references.py --root . --output reports/image-audit/main.md
       - name: Compilar colectores Python
-        run: python -m py_compile scripts/audit_image_references.py update_stats.py update_platform_stats.py update_clips.py scripts/validate_roster_data.py scripts/validate_games_registry.py scripts/validate_clips_data.py scripts/render_roster_noscript.py scripts/validate_metric_history.py scripts/build_creator_metrics.py scripts/validate_creator_metrics.py scripts/growth_analytics.py scripts/validate_creator_records.py scripts/validate_data_contracts.py scripts/audit_public_links.py scripts/bootstrap_twitch_followers_oauth.py scripts/audit_and_optimize_images.py scripts/optimize_logo.py scripts/optimize_hero_image.py scripts/add_image_dimensions.py scripts/summarize_lighthouse.py scripts/lh_failures.py
+        run: python -m py_compile scripts/audit_image_references.py update_stats.py update_platform_stats.py update_clips.py scripts/validate_roster_data.py scripts/validate_games_registry.py scripts/validate_clips_data.py scripts/render_roster_noscript.py scripts/validate_metric_history.py scripts/build_creator_metrics.py scripts/validate_creator_metrics.py scripts/growth_analytics.py scripts/validate_creator_records.py scripts/validate_data_contracts.py scripts/audit_public_links.py scripts/resolve_main_preview.py scripts/bootstrap_twitch_followers_oauth.py scripts/audit_and_optimize_images.py scripts/optimize_logo.py scripts/optimize_hero_image.py scripts/add_image_dimensions.py scripts/summarize_lighthouse.py scripts/lh_failures.py
       - name: Ejecutar pruebas unitarias Python del repositorio
         run: python -m unittest discover -s tests -v
       - name: Probar lectura de cuentas por los colectores
@@ -185,6 +195,8 @@ jobs:
       - name: Instalar Chromium para Playwright
         run: npx playwright install --with-deps chromium
       - name: Probar expedientes, Bitácora, cuatro pestañas, responsive e historial
+        env:
+          MAIN_BASELINE_URL: ${{ steps.main-preview.outputs.url || 'http://127.0.0.1:4173/' }}
         run: npm run test:e2e
       - name: Publicar capturas de revisión visual de Playwright
         if: always()

@@ -331,7 +331,7 @@ test('Atrás y Adelante restauran el roster y el expediente correcto', async ({ 
 
 test('la Bitácora móvil conserva la presentación de main y publica ambas capturas comparables', async ({ browser, page }) => {
   test.setTimeout(90000);
-  const mainBaselineUrl = 'https://bd140e8f.legion-multiversal.pages.dev/';
+  const mainBaselineUrl = process.env.MAIN_BASELINE_URL || 'http://127.0.0.1:4173/';
   const viewport = { width: 390, height: 844 };
   const mainContext = await browser.newContext({ viewport, reducedMotion: 'reduce' });
   const mainPage = await mainContext.newPage();
