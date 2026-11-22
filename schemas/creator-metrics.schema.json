@@ -8,12 +8,13 @@
     "generated_at": {"type": "string", "format": "date-time"},
     "source_files": {
       "type": "object",
-      "required": ["identity", "twitch", "platforms", "clips"],
+      "required": ["identity", "twitch", "platforms", "clips", "creator_records"],
       "properties": {
         "identity": {"const": "data/roster.json"},
         "twitch": {"const": "data.json"},
         "platforms": {"const": "platform-stats.json"},
-        "clips": {"const": "clips-data.json"}
+        "clips": {"const": "clips-data.json"},
+        "creator_records": {"const": "data/creator-records.json"}
       }
     },
     "source_snapshot": {

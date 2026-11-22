@@ -71,7 +71,7 @@ La implementación actual de `main` ya cuenta con:
 - `roster-data.json`: fuente editorial del directorio y de los perfiles;
 - `data.json`: estado/actividad observada de canales Twitch;
 - `platform-stats.json`: métricas públicas por creador y plataforma;
-- `creator-records.json`: clips, hitos, colaboraciones y material editorial;
+- `data/creator-records.json`: clips, hitos, colaboraciones y material editorial;
 - `app.js`: renderizado, filtros, expedientes, estadísticas y mecánica de navegación;
 - `index.html` y `styles.css`: estructura y presentación del sitio;
 - integración editorial con la Bitácora y fichas comerciales.
@@ -255,7 +255,7 @@ Objetivo: reducir fricción para un roster de ocho perfiles, sin perder capacida
 
 ### 7.2 Historial de transmisiones y juegos
 
-- [~] `data.json` identifica muestreo Helix; `creator-records.json` conserva registros editoriales; fuentes externas se muestran por separado. Falta homogeneizar metadatos en todas las fuentes.
+- [~] `data.json` identifica muestreo Helix; `data/creator-records.json` conserva registros editoriales; fuentes externas se muestran por separado. Falta homogeneizar metadatos en todas las fuentes.
 - [~] El registro de muestreo contiene fecha, stream_id, categoría y viewers; duración exacta por transmisión no está disponible de forma completa con esta API pública/cadencia.
 - [x] Registrar ventana, timestamps, muestras y cobertura efectiva; validador verifica coherencia de muestras y agregados.
 - [x] Etiquetar datos observados por muestreo y no como historial completo.
@@ -264,7 +264,7 @@ Objetivo: reducir fricción para un roster de ocho perfiles, sin perder capacida
 
 ### 7.3 Clips, VOD y destacados
 
-- [x] Conservar clips manuales/editoriales en `creator-records.json` con enlaces y procedencia.
+- [x] Conservar clips manuales/editoriales en `data/creator-records.json` con enlaces y procedencia.
 - [~] Colector público `update_clips.py` implementado con Twitch Helix App Token; primera captura real queda pendiente de ejecutar desde main tras confirmar secretos de Actions.
 - [~] `clips-data.json` guarda ID, URL, título, creador, fecha, game_id, view_count y metadatos disponibles; la plataforma/fuente queda declarada en el esquema raíz.
 - [x] Clips automáticos se muestran en panel separado de highlights editoriales.
@@ -565,7 +565,7 @@ No fusionar, publicar en producción, cambiar credenciales ni retirar datos/asse
 - **Rama única:** `feat/roster-integral-2026-11-14`; origen `main`. No se modificó ni integró `main`.
 - **Modelo:** `roster-data.json` pasa a schema v2 e incorpora ID/slug estable, display name, alcance de identidad y cuentas por plataforma para los ocho perfiles. MORIARTYS queda como proyecto compartido de Demian y Ari. Se añaden `schemas/roster-data.schema.json` y `scripts/validate_roster_data.py`.
 - **Colectores:** Twitch y plataformas ahora derivan las cuentas del modelo de roster; se elimina la lista estática de canales y el Client ID hardcodeado. La autenticación sigue siendo app token para endpoints públicos; no se habilita acceso a analíticas privadas. El workflow de métricas valida cobertura contra el roster.
-- **Piloto MORIARTYS:** el libro de cuatro páginas consume `data.json` y `creator-records.json`; se retiraron métricas históricas hardcodeadas y porcentajes geográficos no respaldados. Promedios/picos se identifican como muestreo propio y seguidores/demografía como no verificados.
+- **Piloto MORIARTYS:** el libro de cuatro páginas consume `data.json` y `data/creator-records.json`; se retiraron métricas históricas hardcodeadas y porcentajes geográficos no respaldados. Promedios/picos se identifican como muestreo propio y seguidores/demografía como no verificados.
 - **Directorio:** filtros simplificados, contador, búsqueda de handles, chips rápidos, panel avanzado responsive, titular actualizado, skeletons, `noscript`, badge EN VIVO dependiente de frescura y CTAs movidos al cierre.
 - **Estado:** implementación en curso. Aún no se ha ejecutado CI sobre un PR, no se ha cotejado el piloto con una cuenta/consulta externa real y no se realizó revisión visual manual. No marcar como completado hasta pasar esos controles.
 

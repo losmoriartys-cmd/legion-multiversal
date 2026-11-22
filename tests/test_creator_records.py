@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 class CreatorRecordsValidationTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.records = json.loads((ROOT / "creator-records.json").read_text(encoding="utf-8"))
+        cls.records = json.loads((ROOT / "data/creator-records.json").read_text(encoding="utf-8"))
         cls.roster = json.loads((ROOT / "data/roster.json").read_text(encoding="utf-8"))
 
     def test_committed_creator_records_have_valid_channel_scoped_evidence(self):

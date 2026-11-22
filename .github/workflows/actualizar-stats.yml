@@ -12,7 +12,7 @@ on:
       - 'scripts/validate_creator_metrics.py'
       - 'scripts/growth_analytics.py'
       - 'scripts/validate_creator_records.py'
-      - 'creator-records.json'
+      - 'data/creator-records.json'
       - 'data/roster.json'
       - 'scripts/validate_roster_data.py'
       - '.github/workflows/actualizar-stats.yml'

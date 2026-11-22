@@ -4026,3 +4026,14 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - Demian autorizó usar la fecha de los VOD destacados. Se cargaron, en hora de Argentina: BIT-004 LEGO Batman 24/05/2026; BIT-001 Escape the Backrooms 09/08/2026; BIT-002 TMNT 21/08/2026; BIT-003 Minecraft 30/08/2026; BIT-007 Night Club Simulation 07/10/2026.
 - **Alcance:** son fechas de creación del highlight informadas por Twitch (fuente: el enlace del VOD), no necesariamente la fecha exacta del directo original; el directo pudo ser el mismo día o anterior. Cuando se confirmen contra el panel de videos del canal Los Moriartys, se reemplazan.
 - Los 10 registros BIT tienen ahora fecha y fuente.
+
+
+## 2026-11-22 · BASE-01C · sincronización con el main vigente
+
+- **Main usado para sincronizar:** `18b09413f8882b7b42e7d748a8fa6912f86e3054` (actualización automática de métricas del 22/11/2026). La rama de PR #96 partía de `7a9fcd8e5f97f2974e2e2442ed75a2763b9faf7c`; main había avanzado ocho commits desde ese punto.
+- **Rama antes de sincronizar:** `54b9867534db93d15fb9f47bc7ba2d798e8705f3`, con 28 commits propios. Se conserva su historial y se incorpora el main actual como primer padre del commit de sincronización.
+- **Datos automáticos preservados:** se parte del `creator-metrics.json` más reciente de main (`generated_at: 2026-11-22T06:43:13Z)); solo se actualiza `source_files.creator_records` a `data/creator-records.json`. No se restaura ningún snapshot anterior.
+- **Conservación editorial:** `data/creator-records.json` mantiene el blob SHA original `9b2a6b2ab4b27053d0b2402fb409b353bc01380c`. En la rama sincronizada se retira el antiguo `creator-records.json` de raíz para evitar dos fuentes paralelas.
+- **Prueba visual y de consola en el HEAD anterior:** los checks `validar`, `qa-capitulos` y `python-tests` finalizaron SUCCESS en `54b9867534db93d15fb9f47bc7ba2d798e8705f3`. Artifact `roster-visual-review` #14741428409: la captura `bitacora-lady-mobile.png` (390×844) muestra la pestaña BITÁCORA seleccionada, su panel y la línea de tiempo; no es la pestaña Estadísticas. La prueba registra `pageerror` y `console.error` y exige una lista vacía. Artifact `image-reference-audit` #14741253918.
+- **Pendiente de cierre:** todavía falta comparar una captura equivalente de main con la de la rama sincronizada. La sincronización requiere una ejecución nueva de CI sobre su nuevo HEAD; los resultados del HEAD anterior no se trasladan.
+- **Estado:** PR #96 permanece Draft y sin merge. El preview de la rama no es producción; no hubo cambios en el despliegue público.

@@ -252,6 +252,9 @@ test('las cartas se organizan en cuatro columnas de escritorio y dos en móvil',
 });
 
 test('Atrás y Adelante restauran el roster y el expediente correcto', async ({ page }) => {
+  const browserErrors = [];
+  page.on('pageerror', error => browserErrors.push({ kind: 'pageerror', text: error.message }));
+  page.on('console', message => { if (message.type() === 'error') browserErrors.push({ kind: 'console', text: message.text() }); });
   await page.goto('/');
   await page.evaluate(() => switchChapter(2));
   await expect(page.locator('#chapter-2')).toHaveClass(/active/);
@@ -282,11 +285,46 @@ test('Atrás y Adelante restauran el roster y el expediente correcto', async ({ 
   }));
   expect(mobileWidths.document).toBeLessThanOrEqual(mobileWidths.viewport);
   expect(mobileWidths.body).toBeLessThanOrEqual(mobileWidths.viewport);
-  const statsTab = page.locator('[data-profile-tab="estadisticas"]');
-  await statsTab.click();
-  await expect(page.locator('#profile-tab-estadisticas .stats-dashboard')).toBeVisible();
-  const statsBounds = await page.locator('#profile-tab-estadisticas .stats-dashboard').boundingBox();
-  expect(statsBounds).not.toBeNull();
-  expect(statsBounds.x + statsBounds.width).toBeLessThanOrEqual(390 + 1);
+  const perfilTab = page.locator('[data-profile-tab="perfil"]');
+  const bitacoraTab = page.locator('[data-profile-tab="bitacora"]');
+  const estadisticasTab = page.locator('[data-profile-tab="estadisticas"]');
+  const bitacoraPanel = page.locator('#profile-tab-bitacora');
+  const estadisticasPanel = page.locator('#profile-tab-estadisticas');
+  const dossier = page.locator('#hero-profile-page');
+
+  // No confiar en el estado heredado de la navegación de escritorio:
+  // forzar una transición real Perfil -> Bitácora en el viewport móvil.
+  await expect(perfilTab).toBeVisible();
+  await perfilTab.click();
+  await expect(perfilTab).toHaveAttribute('aria-selected', 'true');
+  await expect(dossier.locator('#profile-tab-perfil')).toBeVisible();
+  await expect(bitacoraTab).toBeVisible();
+  await bitacoraTab.click();
+  await expect(bitacoraTab).toHaveAttribute('aria-selected', 'true');
+  await expect(perfilTab).toHaveAttribute('aria-selected', 'false');
+  await expect(estadisticasTab).toHaveAttribute('aria-selected', 'false');
+  await expect(bitacoraPanel).toBeVisible();
+  await expect(estadisticasPanel).toBeHidden();
+  await expect(bitacoraPanel.locator('.hero-timeline')).toBeVisible();
+  await expect(bitacoraPanel.locator('.hero-timeline-item.is-origen')).toHaveCount(1);
+  await expect(bitacoraPanel.locator('[data-bitacora-view="recorrido"]')).toBeVisible();
+  await expect(bitacoraPanel).toContainText('BITÁCORA');
+  const timelineBounds = await bitacoraPanel.locator('.hero-timeline').boundingBox();
+  expect(timelineBounds).not.toBeNull();
+  expect(timelineBounds.x).toBeGreaterThanOrEqual(0);
+  expect(timelineBounds.x + timelineBounds.width).toBeLessThanOrEqual(390 + 1);
+  const timelineItems = bitacoraPanel.locator('.hero-timeline-item');
+  expect(await timelineItems.count()).toBeGreaterThanOrEqual(2);
+  for (let i = 0; i < await timelineItems.count(); i++) {
+    const bounds = await timelineItems.nth(i).boundingBox();
+    expect(bounds).not.toBeNull();
+    expect(bounds.x).toBeGreaterThanOrEqual(0);
+    expect(bounds.x + bounds.width).toBeLessThanOrEqual(390 + 1);
+  }
+  await expect(estadisticasPanel).toBeHidden();
+  // El artefacto solo se genera después de comprobar pestaña, panel y contenido.
+  await expect(bitacoraTab).toHaveAttribute('aria-selected', 'true');
+  await expect(bitacoraPanel.locator('.hero-timeline-item')).toHaveCount(await timelineItems.count());
   await page.screenshot({ path: 'test-results/bitacora-lady-mobile.png', fullPage: false });
+  expect(browserErrors).toEqual([]);
 });

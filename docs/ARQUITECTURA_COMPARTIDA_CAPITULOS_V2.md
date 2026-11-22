@@ -13,7 +13,7 @@
    - Snapshots de actividad y estado Twitch: `data.json`.
    - Métricas por plataforma: `platform-stats.json`.
    - Métricas normalizadas con fuente, período, visibilidad y frescura: `creator-metrics.json`.
-   - Evidencias y registros: `creator-records.json`.
+   - Evidencias y registros: `data/creator-records.json`.
    - Clips: `clips-data.json`.
 4. Twitch y YouTube permanecen como bloques independientes. No sumar espectadores, seguidores, horas, vistas ni muestras entre plataformas. PATO se presenta en su bloque YouTube, sin inferir estado en vivo de Twitch.
 5. Horarios declarados son información editorial, no actividad medida. No reutilizar horarios antiguos o heredados sin confirmación.

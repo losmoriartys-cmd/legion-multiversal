@@ -15,7 +15,7 @@ class RosterComicCardsContractTests(unittest.TestCase):
         cls.css = (ROOT / "roster-selector.css").read_text(encoding="utf-8")
         cls.roster = json.loads((ROOT / "data/roster.json").read_text(encoding="utf-8"))
         cls.roster_schema = json.loads((ROOT / "schemas/roster-data.schema.json").read_text(encoding="utf-8"))
-        cls.creator_records = json.loads((ROOT / "creator-records.json").read_text(encoding="utf-8"))
+        cls.creator_records = json.loads((ROOT / "data/creator-records.json").read_text(encoding="utf-8"))
 
     def test_all_eight_canonical_profiles_remain_the_source(self):
         heroes = self.roster["heroes"]
