@@ -28,22 +28,8 @@ on:
       - 'docs/**'
       - 'INFORMES.md'
   pull_request:
-    paths:
-      - 'data/**'
-      - 'app.js'
-      - 'games-registry.js'
-      - 'chapters-refresh.js'
-      - 'index.html'
-      - 'bitacora-preview.html'
-      - 'styles.css'
-      - '*.css'
-      - '*.json'
-      - 'assets/**'
-      - 'scripts/**'
-      - 'schemas/**'
-      - 'tests/**'
-      - 'update_clips.py'
-      - '.github/workflows/**'
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:

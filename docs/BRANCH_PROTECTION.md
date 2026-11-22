@@ -28,10 +28,11 @@ No exigir `Cloudflare Pages` como sustituto de estos tres checks: es el desplieg
 
 ## Reglas de CI que mantienen estables los contextos
 
-- `validar` se ejecuta por `pull_request` y por `push` únicamente en `main`. No debe crear un segundo check del mismo nombre en ramas de trabajo.
-- `python-tests` se ejecuta por PR hacia `main` y por push a `main`.
-- `audit-public-links` se ejecuta en PR cuando cambian los datos o el auditor, además del disparo manual y semanal.
-- Los tests de política verifican que existan los tres jobs y sus disparadores. No pueden activar la protección de GitHub por sí mismos.
+- `validar` se ejecuta en todo `pull_request` hacia `main` y por `push` únicamente en `main`.
+- `python-tests` se ejecuta en todo `pull_request` hacia `main` y por `push` a `main` cuando cambian datos, scripts, tests o workflows.
+- `audit-public-links` se ejecuta en todo `pull_request` hacia `main`, además del disparo manual y semanal. No usa filtro de rutas para que el contexto requerido siempre exista.
+- No poner filtros de rutas en estos tres eventos `pull_request`: un PR que no coincida con el filtro podría dejar el check requerido pendiente y bloquear la integración.
+- Los tests de política verifican que existan los tres jobs, que apunten a `main` y que no estén condicionados por filtros de rutas en PR. No pueden activar la protección de GitHub por sí mismos.
 
 ## Límite de permisos de esta automatización
 

@@ -5,17 +5,6 @@ on:
   pull_request:
     branches:
       - main
-    paths:
-      - '.github/workflows/audit-public-links.yml'
-      - 'scripts/audit_public_links.py'
-      - 'data/**'
-      - 'clips-data.json'
-      - 'data.json'
-      - 'platform-stats.json'
-      - 'creator-programs.json'
-      - 'news-data.json'
-      - 'sullygnome-data.json'
-      - 'twitchmetrics-data.json'
   schedule:
     - cron: "0 12 * * 1"
 

@@ -31,34 +31,6 @@ on:
   pull_request:
     branches:
       - main
-    paths:
-      - 'update_*.py'
-      - 'scripts/**'
-      - 'tests/**'
-      - 'clips-data.json'
-      - 'update_stats.py'
-      - 'update_clips.py'
-      - 'app.js'
-      - 'roster-02-moriartys.html'
-      - 'tests/**'
-      - 'scripts/validate_clips_data.py'
-      - 'scripts/validate_metric_history.py'
-      - 'scripts/build_creator_metrics.py'
-      - 'scripts/validate_creator_metrics.py'
-      - 'scripts/check_creator_metrics_freshness.py'
-      - 'platform-stats.json'
-      - 'data/creator-records.json'
-      - 'platform-registry.json'
-      - 'community-playbook.json'
-      - 'creator-programs.json'
-      - 'twitchmetrics-data.json'
-      - 'sullygnome-data.json'
-      - 'news-data.json'
-      - 'data/roster.json'
-      - 'scripts/check_identity_consistency.py'
-      - 'data.json'
-      - 'creator-metrics.json'
-      - '.github/workflows/**'
 
 permissions:
   contents: read
