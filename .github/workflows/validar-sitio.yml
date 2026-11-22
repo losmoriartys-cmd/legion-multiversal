@@ -24,6 +24,9 @@ on:
       - 'requirements-data-contracts.txt'
       - 'update_clips.py'
       - '.github/workflows/**'
+      - 'data/README.md'
+      - 'docs/**'
+      - 'INFORMES.md'
   pull_request:
     paths:
       - 'data/**'

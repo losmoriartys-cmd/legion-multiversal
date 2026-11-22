@@ -25,6 +25,9 @@ on:
       - 'app.js'
       - 'roster-02-moriartys.html'
       - '.github/workflows/**'
+      - 'data/README.md'
+      - 'docs/**'
+      - 'INFORMES.md'
   pull_request:
     branches:
       - main
