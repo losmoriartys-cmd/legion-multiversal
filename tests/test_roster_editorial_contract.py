@@ -11,7 +11,7 @@ class RosterEditorialContractTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.roster = json.loads((ROOT / "data/roster.json").read_text(encoding="utf-8"))
-        cls.records = json.loads((ROOT / "creator-records.json").read_text(encoding="utf-8"))
+        cls.records = json.loads((ROOT / "data/creator-records.json").read_text(encoding="utf-8"))
         cls.platforms = json.loads((ROOT / "platform-stats.json").read_text(encoding="utf-8"))
         cls.app = (ROOT / "app.js").read_text(encoding="utf-8")
 
