@@ -34,7 +34,7 @@ class BranchProtectionPolicyTests(unittest.TestCase):
         self.assertIn("  python-tests:\n", self.stats)
         self.assertIn("  audit-public-links:\n", self.audit)
         for name in ("validar", "python-tests", "audit-public-links"):
-            self.assertIn(f"\`{name}\`", self.policy)
+            self.assertIn(f"`{name}`", self.policy)
 
     def test_site_validation_push_only_targets_main(self):
         self.assertTrue(has_main_branch_filter(self.site, "push"))
