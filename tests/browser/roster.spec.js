@@ -328,3 +328,74 @@ test('Atrás y Adelante restauran el roster y el expediente correcto', async ({ 
   await page.screenshot({ path: 'test-results/bitacora-lady-mobile.png', fullPage: false });
   expect(browserErrors).toEqual([]);
 });
+
+test('la Bitácora móvil conserva la presentación de main y publica ambas capturas comparables', async ({ browser, page }) => {
+  test.setTimeout(90000);
+  const mainBaselineUrl = 'https://bd140e8f.legion-multiversal.pages.dev/';
+  const viewport = { width: 390, height: 844 };
+  const mainContext = await browser.newContext({ viewport, reducedMotion: 'reduce' });
+  const mainPage = await mainContext.newPage();
+
+  async function openLadyBitacora(target, url) {
+    await target.goto(url, { waitUntil: 'domcontentloaded', timeout: 45000 });
+    await expect(target.locator('#chapter-2')).toHaveCount(1, { timeout: 30000 });
+    await target.evaluate(() => switchChapter(2));
+    await expect(target.locator('#chapter-2')).toHaveClass(/active/);
+    await target.locator('#chapter-transition').evaluate(el => el.classList.remove('play'));
+    const card = target.locator('.comic-roster-card[data-creator-id="lady-moriarty"]');
+    await expect(card).toBeVisible();
+    await card.click();
+    await expect(target).toHaveURL(/#roster\\/lady-moriarty$/);
+    const bitacoraTab = target.locator('[data-profile-tab="bitacora"]');
+    await expect(bitacoraTab).toBeVisible();
+    await bitacoraTab.click();
+    await expect(bitacoraTab).toHaveAttribute('aria-selected', 'true');
+    const panel = target.locator('#profile-tab-bitacora');
+    await expect(panel).toBeVisible();
+    await expect(target.locator('#profile-tab-estadisticas')).toBeHidden();
+    await expect(panel.locator('.hero-timeline')).toBeVisible();
+    await expect(panel.locator('.hero-timeline-item.is-origen')).toHaveCount(1);
+    await expect(panel.locator('.hero-timeline-item').filter({ visible: true })).toHaveCount(await panel.locator('.hero-timeline-item').count());
+    await target.evaluate(() => window.scrollTo(0, 0));
+    await target.screenshot({ path: url === mainBaselineUrl ? 'test-results/main-baseline-bitacora-mobile.png' : 'test-results/pr-candidate-bitacora-mobile.png', fullPage: false });
+    return target.evaluate(() => {
+      const selectors = [
+        '#hero-profile-page',
+        '.comic-profile-head',
+        '.hero-profile-tabs',
+        '#profile-tab-bitacora',
+        '#profile-tab-bitacora .hero-timeline',
+        '#profile-tab-bitacora .hero-timeline-item'
+      ];
+      return selectors.map(selector => {
+        const element = document.querySelector(selector);
+        if (!element) return { selector, missing: true };
+        const rect = element.getBoundingClientRect();
+        const style = getComputedStyle(element);
+        return {
+          selector,
+          missing: false,
+          width: Math.round(rect.width * 10) / 10,
+          height: Math.round(rect.height * 10) / 10,
+          color: style.color,
+          backgroundColor: style.backgroundColor,
+          borderColor: style.borderColor,
+          fontFamily: style.fontFamily,
+          fontSize: style.fontSize
+        };
+      });
+    });
+  }
+
+  try {
+    await mainPage.emulateMedia({ reducedMotion: 'reduce' });
+    const mainSignature = await openLadyBitacora(mainPage, mainBaselineUrl);
+    await page.setViewportSize(viewport);
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    const candidateSignature = await openLadyBitacora(page, '/');
+    expect(candidateSignature).toEqual(mainSignature);
+  } finally {
+    await mainContext.close();
+  }
+});
+
