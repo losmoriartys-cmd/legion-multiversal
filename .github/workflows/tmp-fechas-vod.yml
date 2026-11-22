@@ -1,0 +1,36 @@
+name: Consulta temporal de fechas de VOD
+on:
+  push:
+    branches: ['tmp-fechas-vod']
+permissions:
+  contents: read
+jobs:
+  fechas:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Consultar fechas de VOD (solo lectura)
+        env:
+          TWITCH_CLIENT_ID: ${{ secrets.TWITCH_CLIENT_ID }}
+          TWITCH_CLIENT_SECRET: ${{ secrets.TWITCH_CLIENT_SECRET }}
+        run: |
+          python - <<'PY'
+          import json
+          from update_stats import get_token, helix_get
+          d = json.load(open('data/games.json', encoding='utf-8'))
+          ids = {}
+          for g in d['juegos']:
+              for s in g.get('sesiones') or []:
+                  for p in s['pov']:
+                      ids[p['url'].rstrip('/').split('/')[-1]] = (s['bit'], g['nombre'], p.get('canal'))
+          token = get_token()
+          rows = helix_get('videos', token, [('id', i) for i in ids])
+          found = set()
+          for v in rows:
+              found.add(v['id'])
+              bit = ids[v['id']]
+              print('RESULT', bit[0], bit[1], bit[2], v['id'], v['user_login'], v['created_at'], v['published_at'], v['duration'], v['type'], sep=' | ')
+          for i, bit in ids.items():
+              if i not in found:
+                  print('MISSING', bit[0], bit[1], bit[2], i, sep=' | ')
+          PY
