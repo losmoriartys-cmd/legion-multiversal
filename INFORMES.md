@@ -17,6 +17,18 @@
 
 ---
 
+
+
+## 2026-11-22 · BASE-01C · Inventario y primer corte de expedientes
+
+- **Base auditada:** `main` en SHA `7a9fcd8e5f97f2974e2e2442ed75a2763b9faf7c`.
+- **Hallazgo:** existen 12 JSON en la raíz. No son una sola clase de datos: conviven registros editoriales, programas/credenciales, playbook comunitario, noticias, archivos deprecados, snapshots automáticos y referencias históricas externas.
+- **Clasificación preliminar:** `creator-records.json` es un registro editorial por creador; `creator-programs.json`, `community-playbook.json` y `news-data.json` son contenido editorial/operativo; `data.json`, `platform-stats.json`, `clips-data.json` y `creator-metrics.json` son datos generados/derivados; `sullygnome-data.json` y `twitchmetrics-data.json` son capturas históricas de fuentes externas; `platform-registry.json` declara estar deprecado y reemplazado por `data/roster.json`.
+- **Corte elegido:** migrar únicamente los expedientes editoriales de creadores a `data/creator-records.json`, sin modificar su contenido ni sus ocho IDs.
+- **Rama:** `feat/base-01c-creator-records-data`. Se creó el nuevo archivo como copia exacta del blob original (`9b2a6b2ab4b27053d0b2402fb409b353bc01380c`); se están actualizando los consumidores, contratos y documentación.
+- **Guardrail:** el archivo raíz original permanece intacto en esta etapa. No se modificó BarFender ni se tocaron snapshots automáticos.
+- **Pendiente:** completar todas las referencias, validar igualdad byte a byte, ejecutar contratos Python, workflows y Playwright, revisar diff y abrir PR. No hay merge ni despliegue de producción.
+
 ## P0 · Base de datos, validación y prevención de regresiones
 
 ### BASE-01 · Una sola fuente de datos organizada en data/
