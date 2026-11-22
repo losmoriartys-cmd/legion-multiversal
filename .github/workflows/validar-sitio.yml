@@ -2,6 +2,8 @@ name: Validar código y datos del sitio
 
 on:
   push:
+    branches:
+      - main
     paths:
       - 'app.js'
       - 'games-registry.js'
@@ -19,8 +21,9 @@ on:
       - 'schemas/**'
       - 'data/**'
       - 'tests/**'
+      - 'requirements-data-contracts.txt'
       - 'update_clips.py'
-      - '.github/workflows/validar-sitio.yml'
+      - '.github/workflows/**'
   pull_request:
     paths:
       - 'data/**'
@@ -37,7 +40,7 @@ on:
       - 'schemas/**'
       - 'tests/**'
       - 'update_clips.py'
-      - '.github/workflows/validar-sitio.yml'
+      - '.github/workflows/**'
   workflow_dispatch:
 
 permissions:
@@ -61,6 +64,8 @@ jobs:
           node --check games-registry.js
           node --check arsenal-registry.js
           node --check chapters-refresh.js
+      - name: Instalar motor de contratos JSON Schema
+        run: python -m pip install --disable-pip-version-check -r requirements-data-contracts.txt
       - name: Validar archivos JSON
         run: |
           for file in ./*.json data/*.json schemas/*.json; do
@@ -156,7 +161,7 @@ jobs:
           python scripts/audit_image_references.py --root /tmp/image-audit-0d578a0 --output reports/image-audit/0d578a0.md
           python scripts/audit_image_references.py --root . --output reports/image-audit/main.md
       - name: Compilar colectores Python
-        run: python -m py_compile scripts/audit_image_references.py update_stats.py update_platform_stats.py update_clips.py scripts/validate_roster_data.py scripts/validate_games_registry.py scripts/validate_clips_data.py scripts/render_roster_noscript.py scripts/validate_metric_history.py scripts/build_creator_metrics.py scripts/validate_creator_metrics.py scripts/growth_analytics.py scripts/validate_creator_records.py scripts/bootstrap_twitch_followers_oauth.py scripts/audit_and_optimize_images.py scripts/optimize_logo.py scripts/optimize_hero_image.py scripts/add_image_dimensions.py scripts/summarize_lighthouse.py scripts/lh_failures.py
+        run: python -m py_compile scripts/audit_image_references.py update_stats.py update_platform_stats.py update_clips.py scripts/validate_roster_data.py scripts/validate_games_registry.py scripts/validate_clips_data.py scripts/render_roster_noscript.py scripts/validate_metric_history.py scripts/build_creator_metrics.py scripts/validate_creator_metrics.py scripts/growth_analytics.py scripts/validate_creator_records.py scripts/validate_data_contracts.py scripts/audit_public_links.py scripts/bootstrap_twitch_followers_oauth.py scripts/audit_and_optimize_images.py scripts/optimize_logo.py scripts/optimize_hero_image.py scripts/add_image_dimensions.py scripts/summarize_lighthouse.py scripts/lh_failures.py
       - name: Ejecutar pruebas unitarias Python del repositorio
         run: python -m unittest discover -s tests -v
       - name: Probar lectura de cuentas por los colectores
@@ -173,6 +178,8 @@ jobs:
         run: python scripts/validate_creator_records.py
       - name: Validar modelo normalizado multiplataforma y Crecimiento
         run: python scripts/validate_creator_metrics.py
+      - name: Validar contratos canónicos e integridad entre archivos
+        run: python scripts/validate_data_contracts.py
       - name: Instalar dependencias de pruebas de navegador
         run: npm install
       - name: Instalar Chromium para Playwright
