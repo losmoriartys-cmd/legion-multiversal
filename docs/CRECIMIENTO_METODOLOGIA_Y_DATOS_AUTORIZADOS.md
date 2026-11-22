@@ -32,7 +32,7 @@ Los expedientes colaborativos se agrupan desde las entradas fechadas y enlazadas
 
 Los resultados de BarFender correspondientes al 11/11/2026 proceden de cifras del panel de Twitch aportadas al expediente. Se presentan por canal, con su fuente y condición de dato informado por el creador. **No se suman espectadores, chatters ni seguidores entre canales**, porque sus audiencias pueden solaparse y los contadores son independientes.
 
-Para incorporar un nuevo resultado, usar `collaboration_results` dentro del canal correspondiente en `creator-records.json`. Cada resultado necesita fecha, caso, participantes, fuente, nivel de verificación y métricas con unidad. Valores `creator_reported` se muestran explícitamente como aportados por el creador.
+Para incorporar un nuevo resultado, usar `collaboration_results` dentro del canal correspondiente en `data/creator-records.json`. Cada resultado necesita fecha, caso, participantes, fuente, nivel de verificación y métricas con unidad. Valores `creator_reported` se muestran explícitamente como aportados por el creador.
 
 ## Audiencia avanzada y datos demográficos
 
