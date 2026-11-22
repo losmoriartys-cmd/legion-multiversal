@@ -19,7 +19,7 @@ Los feeds y snapshots automáticos permanecen en sus rutas actuales mientras los
 - `../creator-programs.json` y `../community-playbook.json`: registros auxiliares del programa de creadores y de la experiencia de Comunidad, validados por sus esquemas propios.
 - `../platform-registry.json`: archivo obsoleto, reemplazado por `roster.json`; se conserva solo como marcador de compatibilidad.
 
-Los snapshots externos de investigación/noticias no forman parte de estas fuentes maestras y conservan su propio ciclo de actualización.
+Los snapshots externos de proveedores y noticias conservan su propio ciclo de actualización y su procedencia separada. `news-data.json`, `sullygnome-data.json` y `twitchmetrics-data.json` también tienen esquemas propios y comprobación de referencias a URLs; sus métricas no se fusionan con los muestreos Twitch Helix ni entre proveedores.
 
 ## Contratos
 

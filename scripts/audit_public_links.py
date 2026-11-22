@@ -72,6 +72,18 @@ def collect_public_urls(documents: dict[str, Any]) -> list[dict[str, str]]:
             for index, video in enumerate(record.get("recent_videos", [])):
                 add(f"platform-stats.json#/creators/{creator_id}/platforms/{platform}/recent_videos/{index}/url ({video.get('video_id')})", video.get("url"))
 
+    news = documents.get("news-data.json", {})
+    for index, item in enumerate(news.get("items", [])):
+        add(f"news-data.json#/items/{index}/source_url", item.get("source_url"))
+
+    sully = documents.get("sullygnome-data.json", {})
+    for index, channel in enumerate(sully.get("channels", [])):
+        add(f"sullygnome-data.json#/channels/{index}/source_url ({channel.get('login')})", channel.get("source_url"))
+
+    twitchmetrics = documents.get("twitchmetrics-data.json", {})
+    for login, channel in (twitchmetrics.get("channels") or {}).items():
+        add(f"twitchmetrics-data.json#/channels/{login}/source_url", channel.get("source_url"))
+
     programs = documents.get("creator-programs.json", {})
     for key, value in (programs.get("official_links") or {}).items():
         add(f"creator-programs.json#/official_links/{key}", value)
@@ -145,6 +157,9 @@ def main() -> int:
             "clips-data.json": read_json("clips-data.json"),
             "platform-stats.json": read_json("platform-stats.json"),
             "creator-programs.json": read_json("creator-programs.json"),
+            "news-data.json": read_json("news-data.json"),
+            "sullygnome-data.json": read_json("sullygnome-data.json"),
+            "twitchmetrics-data.json": read_json("twitchmetrics-data.json"),
         }
     except (OSError, json.JSONDecodeError) as exc:
         print(f"ERROR: no se pudieron leer las fuentes para auditar enlaces: {exc}", file=sys.stderr)

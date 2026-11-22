@@ -31,6 +31,9 @@ SCHEMA_MAP = {
     "creator-programs.json": ["creator-programs.schema.json"],
     "community-playbook.json": ["community-playbook.schema.json"],
     "platform-registry.json": ["platform-registry.schema.json"],
+    "news-data.json": ["news-data.schema.json"],
+    "sullygnome-data.json": ["sullygnome-data.schema.json"],
+    "twitchmetrics-data.json": ["twitchmetrics-data.schema.json"],
     "clips-data.json": ["clips-data.schema.json"],
     "data.json": ["twitch-activity.schema.json"],
     "platform-stats.json": ["platform-stats.schema.json"],
@@ -83,6 +86,8 @@ def semantic_diagnostics(documents: dict[str, Any]) -> list[str]:
     creator_metrics = documents["creator-metrics.json"]
     programs = documents["creator-programs.json"]
     playbook = documents["community-playbook.json"]
+    sullygnome = documents["sullygnome-data.json"]
+    twitchmetrics = documents["twitchmetrics-data.json"]
 
     errors: list[str] = []
     heroes = roster.get("heroes") if isinstance(roster, dict) else None
@@ -141,6 +146,20 @@ def semantic_diagnostics(documents: dict[str, Any]) -> list[str]:
                 )
             if isinstance(identifier, str):
                 seen.add(identifier)
+
+    # Third-party snapshots resolve only to canonical Twitch logins; provider metrics stay isolated.
+    twitch_logins = {
+        str(account.get("login") or account.get("handle") or "").lower()
+        for hero in (heroes or []) if isinstance(hero, dict)
+        for account in hero.get("accounts", []) if isinstance(account, dict) and account.get("platform") == "twitch"
+    }
+    for index, channel in enumerate(sullygnome.get("channels", [])):
+        login = str(channel.get("login") or "").lower()
+        if login not in twitch_logins:
+            errors.append(f"sullygnome-data.json#/channels/{index}/login: la cuenta Twitch {login!r} no existe en el Roster.")
+    for login in (twitchmetrics.get("channels") or {}):
+        if str(login).lower() not in twitch_logins:
+            errors.append(f"twitchmetrics-data.json#/channels/{login}: la cuenta Twitch no existe en el Roster.")
 
     # The commercial expediente and collaboration-result case IDs are different namespaces.
     # Keep BarFender EXP-001 in games.json; do not coerce creator case slugs into EXP IDs or BIT sessions.
