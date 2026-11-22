@@ -54,7 +54,7 @@
 
   function followerMetric(hero, channel, account) {
     if (!account?.platform || !window.LMBrand?.followersSlot) {
-      return { value: 'No informado', detail: 'No hay una fuente verificable con fecha de captura', available: false };
+      return { value: '—', detail: 'Sin fuente pública verificada', available: false };
     }
     let entry = null;
     if (account.platform === 'twitch' && channel) {
@@ -64,6 +64,13 @@
         source: channel.followers_source,
         as_of: channel.followers_captured_at
       };
+      // Si el colector de Twitch no trae el total, usamos la captura fechada de TwitchMetrics.
+      const login = text(channel.login || account.login || account.handle).toLowerCase();
+      const tm = typeof twitchMetricsData !== 'undefined' ? twitchMetricsData : null;
+      const tmCount = tm?.channels?.[login]?.metrics?.followers;
+      if (!Number.isFinite(entry.count) && Number.isFinite(tmCount) && tm.captured_at) {
+        entry = { platform: 'twitch', count: tmCount, source: 'TwitchMetrics', as_of: tm.captured_at };
+      }
     } else if (account.platform === 'youtube') {
       const creator = platformStatsData?.creators?.[hero.id]?.platforms?.youtube;
       if (creator?.status === 'verified') {
@@ -76,15 +83,15 @@
       }
     }
     if (!entry || !text(entry.source) || !text(entry.as_of)) {
-      return { value: 'No informado', detail: 'No hay una fuente verificable con fecha de captura', available: false };
+      return { value: '—', detail: 'Sin fuente pública verificada', available: false };
     }
     const slot = window.LMBrand.followersSlot([entry], account.platform);
     if (!slot || slot.text === 'No informado' || !slot.source || !slot.asOf) {
-      return { value: 'No informado', detail: 'No hay una fuente verificable con fecha de captura', available: false };
+      return { value: '—', detail: 'Sin fuente pública verificada', available: false };
     }
     return {
       value: slot.text,
-      detail: slot.source + ' · ' + dateLabel(slot.asOf) + (slot.stale ? ' · referencia histórica' : ''),
+      detail: slot.source + ' · ' + dateLabel(slot.asOf),
       available: true
     };
   }
@@ -95,12 +102,12 @@
       : null;
     const average = metricNumber(metric?.value);
     if (average === null || !['available', 'stale'].includes(metric?.state) || !window.LMBrand?.viewerBand) {
-      return { value: 'No informado', detail: 'Muestreo propio no disponible o sin captura verificable', available: false, sort: -1 };
+      return { value: '—', detail: 'Sin muestreo disponible', available: false, sort: -1 };
     }
     const band = window.LMBrand.viewerBand(average);
     return {
-      value: band.band || 'No informado',
-      detail: 'Rango de audiencia · muestreo propio · ' + (Number(channel?.window?.samples_total) || 0).toLocaleString('es-AR') + ' muestras' + (metric.state === 'stale' ? ' · HISTÓRICO' : ''),
+      value: band.text !== 'No informado' ? band.text : 'No informado',
+      detail: 'Muestreo propio · ' + (Number(channel?.window?.samples_total) || 0).toLocaleString('es-AR') + ' muestras' + (metric.state === 'stale' ? ' · histórico' : ''),
       available: true,
       sort: average
     };

@@ -29,8 +29,8 @@ test('Roster V3 conserva los ocho expedientes y separa Formación de Colaborador
     await expect(card.locator('.roster-v3-metric')).toHaveCount(3);
     const followerValue = (await card.locator('.roster-v3-metric:first-child .roster-v3-metric-value').textContent()).trim();
     const followerDetail = await card.locator('.roster-v3-metric:first-child .roster-v3-metric-detail').textContent();
-    if (followerValue !== 'No informado') expect(followerDetail).toMatch(/· \d{2}\/\d{2}/);
-    else expect(followerDetail).toContain('fuente verificable');
+    if (followerValue !== '—') expect(followerDetail).toMatch(/· \d{1,2}\/\d{2}/);
+    else expect(followerDetail).toContain('fuente pública');
     const creatorId = await card.getAttribute('data-creator-id');
     if (creatorId !== 'pato-oratoris') await expect(card.locator('.roster-v3-day-strip i')).toHaveCount(17);
     else {
