@@ -172,7 +172,7 @@
           },
           "links": {
             "type": "array",
-            "description": "Enlaces complementarios, agregadores o vías de apoyo; las redes directas se registran en socials/accounts.",
+            "description": "Enlaces complementarios y agregadores de perfiles (por ejemplo, Beacons); las redes sociales directas se registran en socials/accounts.",
             "items": {
               "type": "object",
               "required": [
@@ -203,7 +203,7 @@
           },
           "tagline": {
             "type": "string",
-            "maxLength": 80,
+            "maxLength": 160,
             "description": "Frase editorial breve para la tarjeta principal."
           },
           "powers": {

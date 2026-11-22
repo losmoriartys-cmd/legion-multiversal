@@ -22,7 +22,8 @@ class PublicLinkAuditTests(unittest.TestCase):
         self.assertEqual(result["status"], "confirmed_dead")
 
     def test_single_not_found_is_inconclusive(self):
-        result = audit_public_links.classify_url("https://example.com/maybe", probe=lambda _: 404)
+        responses = iter([404, None])
+        result = audit_public_links.classify_url("https://example.com/maybe", probe=lambda _: next(responses))
         self.assertEqual(result["status"], "inconclusive")
         self.assertEqual(result["attempts"], [404])
 

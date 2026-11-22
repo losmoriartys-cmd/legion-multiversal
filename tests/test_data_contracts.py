@@ -53,7 +53,8 @@ class CanonicalDataContractTests(unittest.TestCase):
 
     def test_session_participant_must_resolve_to_a_roster_id(self):
         games = copy.deepcopy(self.documents["data/games.json"])
-        games["juegos"][0]["sesiones"][0]["participantes"][0] = "creator-not-in-roster"
+        first_session = next(session for game in games["juegos"] for session in game["sesiones"])
+        first_session["participantes"][0] = "creator-not-in-roster"
         errors = validate_games_registry.validate_registry(games, self.documents["data/roster.json"])
         self.assertTrue(any("creator-not-in-roster" in error and "no existe en el Roster" in error for error in errors), errors)
 
