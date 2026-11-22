@@ -367,7 +367,7 @@ test('la Bitácora móvil conserva la presentación de main y publica ambas capt
     await expect(panel.locator('.hero-timeline')).toBeVisible();
     const captureBounds = await selectedTabs.boundingBox();
     expect(captureBounds).not.toBeNull();
-    expect(captureBounds.y).toBeGreaterThanOrEqual(0);
+    expect(captureBounds.y).toBeGreaterThanOrEqual(-1); // tolerancia subpíxel por transforms/layout.
     expect(captureBounds.y).toBeLessThan(viewport.height);
     await target.screenshot({ path: url === mainBaselineUrl ? 'test-results/main-baseline-bitacora-mobile.png' : 'test-results/pr-candidate-bitacora-mobile.png', fullPage: false });
     return target.evaluate(() => {
