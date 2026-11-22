@@ -117,8 +117,7 @@
                 "duration_minutes",
                 "average_viewers",
                 "peak_viewers",
-                "hours_watched",
-                "followers_reported"
+                "hours_watched"
               ],
               "properties": {
                 "date": {
@@ -146,7 +145,7 @@
                   "minimum": 0
                 }
               },
-              "additionalProperties": false
+              "additionalProperties": true
             }
           },
           "summary": {
