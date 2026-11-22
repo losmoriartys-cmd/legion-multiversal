@@ -360,7 +360,15 @@ test('la Bitácora móvil conserva la presentación de main y publica ambas capt
     for (let index = 0; index < await timelineItems.count(); index++) {
       await expect(timelineItems.nth(index)).toBeVisible();
     }
-    await target.evaluate(() => window.scrollTo(0, 0));
+    const selectedTabs = target.locator('.hero-profile-tabs');
+    await selectedTabs.evaluate(el => el.scrollIntoView({ block: 'start', inline: 'nearest' }));
+    await expect(bitacoraTab).toBeVisible();
+    await expect(bitacoraTab).toHaveAttribute('aria-selected', 'true');
+    await expect(panel.locator('.hero-timeline')).toBeVisible();
+    const captureBounds = await selectedTabs.boundingBox();
+    expect(captureBounds).not.toBeNull();
+    expect(captureBounds.y).toBeGreaterThanOrEqual(0);
+    expect(captureBounds.y).toBeLessThan(viewport.height);
     await target.screenshot({ path: url === mainBaselineUrl ? 'test-results/main-baseline-bitacora-mobile.png' : 'test-results/pr-candidate-bitacora-mobile.png', fullPage: false });
     return target.evaluate(() => {
       const selectors = [
