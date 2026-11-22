@@ -25,7 +25,7 @@ class PublicLinkAuditTests(unittest.TestCase):
         responses = iter([404, None])
         result = audit_public_links.classify_url("https://example.com/maybe", probe=lambda _: next(responses))
         self.assertEqual(result["status"], "inconclusive")
-        self.assertEqual(result["attempts"], [404])
+        self.assertEqual(result["attempts"], [404, None])
 
     def test_rate_limit_is_never_classified_as_dead(self):
         result = audit_public_links.classify_url("https://example.com/limited", probe=lambda _: 429)
