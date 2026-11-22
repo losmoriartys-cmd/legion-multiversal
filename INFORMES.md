@@ -25,9 +25,11 @@
 - **Hallazgo:** existen 12 JSON en la raíz. No son una sola clase de datos: conviven registros editoriales, programas/credenciales, playbook comunitario, noticias, archivos deprecados, snapshots automáticos y referencias históricas externas.
 - **Clasificación preliminar:** `creator-records.json` es un registro editorial por creador; `creator-programs.json`, `community-playbook.json` y `news-data.json` son contenido editorial/operativo; `data.json`, `platform-stats.json`, `clips-data.json` y `creator-metrics.json` son datos generados/derivados; `sullygnome-data.json` y `twitchmetrics-data.json` son capturas históricas de fuentes externas; `platform-registry.json` declara estar deprecado y reemplazado por `data/roster.json`.
 - **Corte elegido:** migrar únicamente los expedientes editoriales de creadores a `data/creator-records.json`, sin modificar su contenido ni sus ocho IDs.
-- **Rama:** `feat/base-01c-creator-records-data`. Se creó el nuevo archivo como copia exacta del blob original (`9b2a6b2ab4b27053d0b2402fb409b353bc01380c`); se están actualizando los consumidores, contratos y documentación.
-- **Guardrail:** el archivo raíz original permanece intacto en esta etapa. No se modificó BarFender ni se tocaron snapshots automáticos.
-- **Pendiente:** completar todas las referencias, validar igualdad byte a byte, ejecutar contratos Python, workflows y Playwright, revisar diff y abrir PR. No hay merge ni despliegue de producción.
+- **Rama / PR:** `feat/base-01c-creator-records-data`, [PR #96](https://github.com/losmoriartys-cmd/legion-multiversal/pull/96), abierto como Draft.
+- **Conservación:** el nuevo archivo tiene el mismo blob SHA que el original (`9b2a6b2ab4b27053d0b2402fb409b353bc01380c`); se verificó que el árbol de la rama contiene solo `data/creator-records.json`, sin duplicado en raíz.
+- **Consumidores actualizados:** cargador compartido, builder/validadores, control de identidad, cinco contratos de tests, workflows, esquema de métricas y documentación.
+- **Guardrail:** el archivo raíz se retiró únicamente en la rama del PR; `main` y producción siguen intactos. No se modificó BarFender ni snapshots automáticos.
+- **Pendiente:** revisar todos los checks y el diff, ejecutar suite Python/Playwright/QA común y verificar los resultados en el HEAD final. No hay merge ni despliegue de producción.
 
 ## P0 · Base de datos, validación y prevención de regresiones
 
