@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "critical_files": [
+    "data/roster.json",
+    "data/games.json",
+    "data/creator-records.json",
+    "creator-metrics.json",
+    "data.json",
+    "platform-stats.json",
+    "clips-data.json",
+    "creator-programs.json",
+    "community-playbook.json"
+  ],
+  "protected_roster_ids": [
+    "moriartys",
+    "rod3r1k",
+    "lady-moriarty",
+    "ardipii",
+    "akuma",
+    "dave-nexus",
+    "pato-oratoris",
+    "habitos"
+  ],
+  "authorized_roster_removals": []
+}
