@@ -7,6 +7,8 @@
 Crear una regla de protección o ruleset dirigido a la rama exacta `main` con estas opciones:
 
 - Exigir que los cambios lleguen mediante pull request.
+- Exigir al menos una aprobación de revisión de una persona distinta del autor y descartar aprobaciones obsoletas cuando cambie el diff.
+- Para cambios de `data/integrity-manifest.json`, exigir revisión explícita de un mantenedor autorizado; la autorización de retiro y la eliminación del perfil deben ocurrir en PR separados.
 - Exigir que todos los checks siguientes terminen correctamente:
   - `validar` — workflow **Validar código y datos del sitio**. Incluye JSON Schema, validación semántica, pruebas Python del sitio, Playwright y referencias.
   - `python-tests` — workflow **Validar colector de estadísticas**. Incluye pruebas unitarias, conservación de registros, coherencia de identidad y métricas.
@@ -21,7 +23,7 @@ No exigir `Cloudflare Pages` como sustituto de estos tres checks: es el desplieg
 
 1. Abrir **Settings → Rules → Rulesets** (o **Settings → Branches** si se usa protección clásica).
 2. Crear una regla activa para `main`.
-3. Habilitar **Require a pull request before merging**.
+3. Habilitar **Require a pull request before merging** y exigir al menos una aprobación de una persona distinta del autor; descartar aprobaciones obsoletas al actualizar el diff.
 4. Habilitar **Require status checks to pass** y agregar exactamente `validar`, `python-tests` y `audit-public-links`.
 5. Habilitar **Require branches to be up to date before merging**, bloquear force-push y eliminación, e incluir administradores.
 6. Guardar y volver a consultar la configuración para verificar que los tres contextos quedaron seleccionados.

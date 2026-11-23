@@ -65,16 +65,45 @@ def check(base_ref: str, recovery_report: bool = False) -> list[str]:
     try:
         baseline_manifest = load_baseline_manifest(base_ref)
         manifest = load_manifest()
-        policy_keys = ("critical_files", "protected_roster_ids", "authorized_roster_removals")
+        policy_keys = ("critical_files", "protected_roster_ids")
         for key in policy_keys:
             if manifest.get(key) != baseline_manifest.get(key):
                 errors.append(
                     f"Política de integridad modificada en el mismo PR ({key}); "
-                    "la autorización/inventario debe existir en la línea base revisada."
+                    "el inventario y los IDs protegidos solo cambian mediante una política externa revisada."
                 )
         critical = set(baseline_manifest["critical_files"])
         ids = set(baseline_manifest["protected_roster_ids"])
-        removals = {item["id"]: item for item in baseline_manifest.get("authorized_roster_removals", [])}
+        baseline_authorizations = baseline_manifest.get("authorized_roster_removals", [])
+        current_authorizations = manifest.get("authorized_roster_removals", [])
+        if not isinstance(baseline_authorizations, list) or not isinstance(current_authorizations, list):
+            errors.append("Registro de autorizaciones de retiro inválido: se esperaba una lista.")
+            baseline_authorizations = []
+            current_authorizations = []
+        def index_authorizations(items, label):
+            indexed = {}
+            for item in items:
+                if not isinstance(item, dict) or not isinstance(item.get("id"), str) or not item["id"].strip():
+                    errors.append(f"Autorización inválida en {label}: cada registro requiere un ID.")
+                    continue
+                identifier = item["id"]
+                if identifier in indexed:
+                    errors.append(f"Autorización duplicada para el ID {identifier!r} en {label}.")
+                indexed[identifier] = item
+            return indexed
+        baseline_authorizations_by_id = index_authorizations(baseline_authorizations, "línea base")
+        current_authorizations_by_id = index_authorizations(current_authorizations, "PR")
+        for identifier, authorization in baseline_authorizations_by_id.items():
+            if current_authorizations_by_id.get(identifier) != authorization:
+                errors.append(
+                    f"Autorización histórica modificada o eliminada (ID {identifier!r}); "
+                    "los registros aprobados son inmutables."
+                )
+        new_authorizations = [
+            authorization for identifier, authorization in current_authorizations_by_id.items()
+            if identifier not in baseline_authorizations_by_id
+        ]
+        removals = baseline_authorizations_by_id
     except Exception as exc:
         return [f"No se pudo cargar la política de integridad de la línea base {base_ref}: {exc}"]
     changed = git("diff", "--name-status", f"{base_ref}...HEAD").splitlines()
@@ -99,6 +128,19 @@ def check(base_ref: str, recovery_report: bool = False) -> list[str]:
         removed = old_ids - new_ids
         added = new_ids - old_ids
         missing_protected = ids - new_ids
+        if new_authorizations and (removed or added):
+            errors.append(
+                "La autorización de retiro debe aprobarse en un PR separado, sin cambios al roster; "
+                "no se puede autorizar y ejecutar un retiro en el mismo PR."
+            )
+        for authorization in new_authorizations:
+            identifier = authorization.get("id")
+            if identifier not in ids or identifier not in old_ids:
+                errors.append(f"Autorización de retiro para ID no protegido o inexistente: {identifier!r}.")
+            if not isinstance(authorization.get("reason"), str) or not authorization["reason"].strip():
+                errors.append(f"Autorización de retiro sin motivo válido (ID {identifier!r}).")
+            if not isinstance(authorization.get("reference"), str) or not authorization["reference"].strip():
+                errors.append(f"Autorización de retiro sin referencia válida (ID {identifier!r}).")
         for identifier in sorted(removed):
             authorization = removals.get(identifier)
             if not authorization or not authorization.get("reason") or not authorization.get("reference"):

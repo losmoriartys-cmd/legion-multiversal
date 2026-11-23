@@ -4084,3 +4084,15 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **No incluido todavía:** clips por juego (los clips públicos solo traen un identificador de juego de Twitch y una ventana de 30 días) y estadísticas por juego distintas de las de BarFender; requieren datos nuevos.
 - **Prueba pausada con motivo:** `roster.spec.js › la Bitácora móvil conserva la presentación de main…` compara contra un preview fijado (`bd140e8f`) anterior a los cambios intencionales del Roster (estadísticas en las tarjetas). Desde esos cambios la cabecera del perfil mide distinto, así que la prueba fallaba por una diferencia buscada y no por una regresión. Quedó con `test.skip` y comentario; para reactivarla hay que fijar un preview nuevo de main. Comparar contra la producción en vivo no sirve porque sus datos cambian con cada actualización automática.
 - **Ajustes de prueba por la fusión:** nueve entradas de navegación (antes diez) en `roster.spec.js` y `chapter-common-qa.spec.js`; el catálogo quedó mucho más abajo en la página, por eso `arsenal-registry.spec.js` desactiva el desplazamiento suave para evitar un clic inestable.
+
+
+---
+
+## 2026-11-23 · BASE-02 · correcciones de IN-04 y procedimiento de retiro en dos fases
+
+- **Base de trabajo:** PR #97, rama `feat/base-02-canonical-data-contract`, HEAD de partida `84d2e1c075da388c2eb16d15aadced369f310b91`. Se mantiene el PR abierto y en Draft; no se modifica `main`, no hay merge ni despliegue de producción.
+- **Fixtures adversariales:** se corrigen los separadores de tabulación en los casos de borrado y renombrado para que el parser reciba el formato real de `git diff --name-status` y ejercite ambos caminos.
+- **Comparación visual reactivada:** se elimina el `test.skip` de Bitácora móvil. La prueba exige que CI proporcione la preview del SHA vigente de `main`, comprueba la firma de estilos/geometría y compara los PNG baseline/candidate a 390×844 byte a byte. Si no hay baseline resuelta, falla explícitamente en vez de comparar contra localhost.
+- **Autorización de retiros:** se establece un procedimiento de dos PR. El primero agrega una autorización con motivo y referencia sin tocar el roster; la guardia solo acepta esa adición si no hay cambios de IDs en el roster y preserva todas las autorizaciones existentes. El segundo PR retira el perfil usando exclusivamente la autorización ya presente en `origin/main`. Los IDs protegidos permanecen como registro histórico.
+- **Revisión humana:** se documenta la exigencia de aprobación independiente y la protección de cambios al manifiesto. La aplicación efectiva sigue pendiente de configuración administrativa de GitHub.
+- **Validación pendiente:** estas modificaciones requieren ejecución de CI completa sobre el nuevo SHA; no se declara IN-04 aprobado hasta revisar todos los jobs, la comparación visual y los resultados negativos.

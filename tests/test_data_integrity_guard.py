@@ -91,8 +91,32 @@ class IntegrityGuardBehaviorTests(unittest.TestCase):
         self.manifest["protected_roster_ids"] = [x for x in IDS if x != "akuma"]
         self.manifest_path.write_text(json.dumps(self.manifest), encoding="utf-8")
         errors = self.run_guard()
-        self.assertTrue(any("Política de integridad modificada" in e for e in errors), errors)
+        self.assertTrue(any("autorización de retiro debe aprobarse en un PR separado" in e for e in errors), errors)
         self.assertTrue(any("akuma" in e and "sin autorización" in e for e in errors), errors)
+
+    def test_retirement_authorization_must_be_staged_before_roster_change(self):
+        self.manifest["authorized_roster_removals"] = [
+            {"id": "akuma", "reason": "Retiro solicitado", "reference": "Issue #123"}
+        ]
+        self.manifest_path.write_text(json.dumps(self.manifest), encoding="utf-8")
+        self.assertEqual(self.run_guard(), [])
+
+        # Simulate the authorization-only PR having merged to main.
+        self.baseline_manifest = json.dumps(self.manifest)
+        self.roster["heroes"] = [hero for hero in self.roster["heroes"] if hero["id"] != "akuma"]
+        (self.root / "data/roster.json").write_text(json.dumps(self.roster), encoding="utf-8")
+        self.assertEqual(self.run_guard(), [])
+
+    def test_existing_retirement_authorization_cannot_be_rewritten(self):
+        approved = {"id": "akuma", "reason": "Aprobado", "reference": "Issue #123"}
+        self.manifest["authorized_roster_removals"] = [approved]
+        self.baseline_manifest = json.dumps(self.manifest)
+        self.manifest["authorized_roster_removals"] = [
+            {"id": "akuma", "reason": "Texto cambiado", "reference": "Issue #123"}
+        ]
+        self.manifest_path.write_text(json.dumps(self.manifest), encoding="utf-8")
+        errors = self.run_guard()
+        self.assertTrue(any("Autorización histórica modificada o eliminada" in e for e in errors), errors)
 
     def test_same_pr_cannot_weaken_critical_inventory_or_protected_ids(self):
         self.manifest["critical_files"] = ["data/roster.json"]
@@ -101,7 +125,7 @@ class IntegrityGuardBehaviorTests(unittest.TestCase):
         (self.root / "data/games.json").unlink()
         self.roster["heroes"] = [h for h in self.roster["heroes"] if h["id"] != "akuma"]
         (self.root / "data/roster.json").write_text(json.dumps(self.roster), encoding="utf-8")
-        self.diff = "D\\tdata/games.json"
+        self.diff = "D\tdata/games.json"
         errors = self.run_guard()
         self.assertTrue(any("Política de integridad modificada" in e for e in errors), errors)
         self.assertTrue(any("data/games.json" in e for e in errors), errors)
@@ -180,7 +204,7 @@ class IntegrityGuardBehaviorTests(unittest.TestCase):
 
     def test_critical_file_rename_does_not_evade_inventory_check(self):
         (self.root / "data/games.json").rename(self.root / "data/games-archived.json")
-        self.diff = "R100\\tdata/games.json\\tdata/games-archived.json"
+        self.diff = "R100\tdata/games.json\tdata/games-archived.json"
         errors = self.run_guard()
         self.assertTrue(any("ausente en el árbol actual" in e and "games.json" in e for e in errors), errors)
 
