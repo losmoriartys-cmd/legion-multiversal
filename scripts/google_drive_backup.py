@@ -27,7 +27,7 @@ def sha256(path):
 
 def upload(path, folder, token, backup_id):
     boundary="legion-"+backup_id
-    metadata=json.dumps({"name":path.name,"parents":[folder],"appProperties":{"legionBackup":"true","backupId":backup_id}}).encode()
+    metadata=json.dumps({"name":path.name,"parents":[folder],"appProperties":{"legionBackup":"true","backupId":backup_id,"backupCount":str(os.environ.get("BACKUP_EXPECTED_COUNT","0"))}}).encode()
     body=(b"--"+boundary.encode()+b"\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n"+metadata+
           b"\r\n--"+boundary.encode()+b"\r\nContent-Type: application/octet-stream\r\n\r\n"+path.read_bytes()+
           b"\r\n--"+boundary.encode()+b"--\r\n")
