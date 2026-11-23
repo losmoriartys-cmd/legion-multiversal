@@ -185,6 +185,42 @@ def get_channel_followers_total(broadcaster_id, user_token):
     return total
 
 
+def get_channel_schedule(broadcaster_id, token, now):
+    """Horarios publicados por el propio canal en Twitch (próximos 14 días). Sin horario publicado no se inventa uno."""
+    captured = now.isoformat().replace("+00:00", "Z")
+    try:
+        result = request_json(
+            "https://api.twitch.tv/helix/schedule?broadcaster_id=" + str(broadcaster_id) + "&first=25",
+            {"Client-ID": CLIENT_ID, "Authorization": "Bearer " + token},
+        )
+    except urllib.error.HTTPError as exc:
+        if exc.code == 404:
+            return {"status": "not_published", "captured_at": captured, "segments": []}
+        return {"status": "unavailable", "captured_at": captured, "segments": []}
+    except Exception:
+        return {"status": "unavailable", "captured_at": captured, "segments": []}
+    data = result.get("data") or {}
+    horizon = now + timedelta(days=14)
+    segments = []
+    for segment in data.get("segments") or []:
+        try:
+            start = datetime.fromisoformat(str(segment.get("start_time")).replace("Z", "+00:00"))
+        except (TypeError, ValueError):
+            continue
+        if segment.get("canceled_until") or start < now - timedelta(hours=3) or start > horizon:
+            continue
+        category = segment.get("category") or {}
+        segments.append({
+            "start_time": segment.get("start_time"),
+            "end_time": segment.get("end_time"),
+            "title": (segment.get("title") or "")[:120],
+            "category": category.get("name"),
+            "is_recurring": bool(segment.get("is_recurring")),
+        })
+    status = "vacation" if data.get("vacation") else ("published" if segments else "not_published")
+    return {"status": status, "captured_at": captured, "source": "Twitch Helix · Get Channel Stream Schedule", "segments": segments[:14]}
+
+
 def load_data():
     if not os.path.exists(DATA_FILE):
         return {"schema_version": 2, "window_days": WINDOW_DAYS, "channels": {}}
@@ -347,12 +383,13 @@ def main():
         followers_captured_at = previous.get("followers_captured_at")
         followers_source = previous.get("followers_source")
         followers_history = list(previous.get("followers_history") or [])
-        if followers_user_token:
+        followers_query_token = followers_user_token or token
+        if followers_query_token:
             try:
-                followers_total = get_channel_followers_total(user["id"], followers_user_token)
+                followers_total = get_channel_followers_total(user["id"], followers_query_token)
                 followers_captured_at = now_iso
-                followers_source = "Twitch Helix Get Channel Followers · total público"
-                followers_note = "Total público consultado con OAuth de usuario sin scopes; no se solicitaron permisos de moderación ni se guardó la lista de seguidores."
+                followers_source = "Twitch Helix · total público"
+                followers_note = "Total público consultado en Twitch Helix; no se solicitaron permisos de moderación ni se guardó la lista de seguidores."
                 followers_status = "fresh"
                 today = now_iso[:10]
                 daily_point = {"date": today, "captured_at": now_iso, "followers_total": followers_total}
@@ -385,6 +422,7 @@ def main():
             "followers_status": followers_status,
             "followers_note": followers_note,
             "followers_history": followers_history,
+            "schedule": get_channel_schedule(user["id"], token, now),
             "live": bool(stream),
             "current_viewers": stream.get("viewer_count") if stream else None,
             "current_game": stream.get("game_name") if stream else None,
@@ -412,8 +450,8 @@ def main():
             "skipped_channels": skipped_channels,
             **collection_flags(channels, resolved, sampled_channels, skipped_channels),
             "registry_source": ROSTER_FILE,
-            "authentication": "Twitch app access token for public channel/stream data; optional user access token without scopes for public follower totals only",
-            "followers_total_only": bool(followers_user_token),
+            "authentication": "Twitch app access token for public channel/stream data; public follower totals and published stream schedules read with the same app token (no user data, no follower list)",
+            "followers_total_only": True,
             "followers_list_access": False,
             "private_analytics_access": False
         },
