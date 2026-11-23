@@ -4,7 +4,7 @@
 - **Contacto operativo confirmado:** losmoriartys@gmail.com
 - **PR:** #100 — `feat/privacy-policy-google-drive-backup`
 - **Responsable informado:** Cristian Andres Turrisi, persona física responsable del proyecto independiente Legión Multiversal, con domicilio en la República Argentina. La marca no constituye una persona jurídica separada.
-- **Pendiente legal:** incorporar un domicilio legal o dirección de notificación apropiado antes de publicar la política como aviso legal definitivo. No se debe exponer un domicilio particular innecesariamente.
+- **Domicilio de notificación informado:** Lavalle 1984, Ciudad Autónoma de Buenos Aires, Argentina. Verificar que sea apropiado para notificaciones y que su publicación sea autorizada antes de producción.
 - **Estado de la integración:** Google Drive aún no está implementado ni habilitado en el flujo de backup.
 - **Evidencia técnica revisada:** PR #97 incluye un workflow con variables `BACKUP_S3_*` y AWS CLI para destino S3-compatible. No implementa Google Drive OAuth. La ejecución externa y la restauración siguen pendientes.
 - **SEO:** la política forma parte del conjunto `PUBLIC` del validador, con canonical esperado `https://legion-multiversal.pages.dev/politica-de-privacidad/`; el sitemap incluye esa URL.
