@@ -1,14 +1,14 @@
 # Informe — Política de privacidad de Legion Multiversal Backup
 
 - **Fecha:** 2026-11-23
-- **Responsable de la intervención:** Asistencia técnica
-- **Objetivo:** preparar una página pública e independiente de privacidad para el cliente OAuth de Google Drive.
 - **Contacto público confirmado por el usuario:** losmoriartys@gmail.com
-- **Ruta propuesta:** `/politica-de-privacidad/`
-- **Alcance:** página legal específica para la aplicación de respaldos; no sustituye una política general del sitio ni constituye asesoramiento jurídico.
-- **Criterios editoriales:** identidad visual coherente con Legión Multiversal, diseño responsive, navegación de regreso al sitio, lenguaje claro y separación respecto de la presentación comercial.
-- **Datos descritos:** autorización OAuth de Google, alcance Drive `drive.file`, metadatos y contenido de archivos de respaldo, uso previsto de GitHub Actions Secrets, servicios intervinientes, revocación y conservación.
-- **Archivos previstos:** `politica-de-privacidad/index.html`, `index.html`, `sitemap.xml`.
-- **Validaciones pendientes:** revisión de contenido por el titular, validación automatizada, publicación y comprobación HTTP de la URL pública.
-- **Estado:** propuesta en rama; no integrada en `main` ni publicada en producción.
-- **Advertencia:** antes de activar OAuth, verificar que el flujo implementado coincida exactamente con los permisos, proveedores y prácticas descritos aquí.
+- **PR:** #100 — `feat/privacy-policy-google-drive-backup`
+- **Estado de la integración:** Google Drive aún no está implementado ni habilitado en el flujo de backup.
+- **Evidencia técnica revisada:** PR #97 incluye un workflow de backup con variables `BACKUP_S3_*` y AWS CLI para destino S3-compatible. No implementa Google Drive OAuth. La ejecución externa y la restauración siguen pendientes.
+- **Corrección legal aplicada:** la política ahora identifica la integración de Google Drive como futura; aclara que crear el cliente OAuth no implica acceso ni transferencia de archivos; condiciona almacenamiento de tokens, conservación, restauración y cumplimiento a implementación y pruebas reales.
+- **Permiso previsto:** `drive.file`; requiere seleccionar/compartir expresamente los archivos o carpeta con la app. No se presume que una carpeta preexistente sea visible automáticamente.
+- **Ruta:** `/politica-de-privacidad/`
+- **Cambios de presentación:** enlace discreto en el pie y entrada en sitemap; no se altera el contenido editorial o comercial principal.
+- **Pendientes antes de publicar en producción:** revisar la identidad legal del responsable y el texto aplicable; implementar Google Drive OAuth real; verificar la selección de carpeta y el mínimo alcance; definir retención/eliminación; guardar tokens de forma segura; probar subida, descarga, checksum y restauración aislada; completar CI.
+- **Cloudflare:** el commit inicial obtuvo preview de rama exitoso. No equivale a publicación en producción ni a validación del contenido corregido.
+- **Estado:** PR Draft; no integrado en main ni publicado en producción.
