@@ -4096,3 +4096,19 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **Autorización de retiros:** se establece un procedimiento de dos PR. El primero agrega una autorización con motivo y referencia sin tocar el roster; la guardia solo acepta esa adición si no hay cambios de IDs en el roster y preserva todas las autorizaciones existentes. El segundo PR retira el perfil usando exclusivamente la autorización ya presente en `origin/main`. Los IDs protegidos permanecen como registro histórico.
 - **Revisión humana:** se documenta la exigencia de aprobación independiente y la protección de cambios al manifiesto. La aplicación efectiva sigue pendiente de configuración administrativa de GitHub.
 - **Validación pendiente:** estas modificaciones requieren ejecución de CI completa sobre el nuevo SHA; no se declara IN-04 aprobado hasta revisar todos los jobs, la comparación visual y los resultados negativos.
+
+---
+
+## 2026-11-23 · BASE-02 · verificación técnica del ruleset de protección de main
+
+- **Ruleset encontrado por GitHub REST API:** `PROTECCION-MAIN-LEGION`, ID `27883004`, tipo `branch`, origen `losmoriartys-cmd/legion-multiversal`, enforcement `active`.
+- **Target:** `~DEFAULT_BRANCH`, sin exclusiones. La API de repositorio confirma que la rama predeterminada es `main`; por lo tanto, el ruleset apunta a `main`.
+- **Bypass:** `bypass_actors: []`; sin actores exceptuados.
+- **Reglas verificadas en la respuesta del ruleset:** `deletion` y `non_fast_forward` activas; PR obligatorio con una aprobación, descarte de aprobaciones obsoletas al recibir nuevos commits, aprobación del último push por otra persona, resolución de conversaciones y método de merge permitido `squash`.
+- **Checks requeridos:** `validar`, `python-tests` y `audit-public-links`, vinculados a la integración GitHub Actions (`integration_id: 15368`).
+- **Discrepancia bloqueante:** GitHub devuelve `strict_required_status_checks_policy: false`. Por lo tanto, **no está activada la exigencia de que la rama del PR esté actualizada con la rama base antes de integrar**, aunque se había seleccionado en la interfaz. No marcar este requisito como cumplido.
+- **Permiso de lectura:** el endpoint de reglas del branch no estuvo disponible a través de la integración; el endpoint de protección clásica de `main` devolvió HTTP 403 (`Resource not accessible by integration`). Esto no invalida la lectura directa del ruleset, pero impide certificar desde esta conexión si existen reglas clásicas adicionales.
+- **Evidencia consultada:** [ruleset en GitHub](https://github.com/losmoriartys-cmd/legion-multiversal/rules/27883004) · [respuesta REST del ruleset](https://api.github.com/repos/losmoriartys-cmd/legion-multiversal/rulesets/27883004) · [documentación de GitHub sobre reglas](https://docs.github.com/en/rest/repos/rules?apiVersion=2026-03-10).
+- **Acción pendiente:** editar el ruleset en GitHub y activar `Require branches to be up to date before merging`; volver a consultar el recurso por API y confirmar que `strict_required_status_checks_policy: true`. Después, repetir la comprobación de reglas activas para `main` y conservar la respuesta como evidencia.
+- **Estado BASE-02:** ABIERTO. La protección existe y está activa, pero no satisface todavía todos los requisitos definidos. No fusionar PR #97 ni modificar producción por esta verificación.
+- **Rama documental:** este registro se añade a `feat/base-02-canonical-data-contract`; no modifica `main`. El commit documental cambia el SHA del PR, por lo que los checks del SHA anterior no deben considerarse evidencia CI del nuevo HEAD.
