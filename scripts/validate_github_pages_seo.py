@@ -16,6 +16,7 @@ SITEMAP_URLS = {
     BASE + "marcas/",
     BASE + "recursos/",
     BASE + "metodologia/",
+    BASE + "politica-de-privacidad/",
     BASE + "comic-moriartys.html",
     BASE + "roster-02-moriartys.html",
 }
