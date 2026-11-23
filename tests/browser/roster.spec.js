@@ -334,7 +334,7 @@ test('la Bitácora móvil conserva la presentación de main y publica ambas capt
   // 22/11/2026) y por eso la cabecera del perfil mide distinto. Reactivar fijando un preview nuevo de main.
   test.skip(true, 'Línea base fijada obsoleta: re-fijar un preview de main que incluya el Roster con estadísticas.');
   test.setTimeout(90000);
-  const mainBaselineUrl = 'https://bd140e8f.legion-multiversal.pages.dev/';
+  const mainBaselineUrl = process.env.MAIN_BASELINE_URL || 'http://127.0.0.1:4173/';
   const viewport = { width: 390, height: 844 };
   const mainContext = await browser.newContext({ viewport, reducedMotion: 'reduce' });
   const mainPage = await mainContext.newPage();

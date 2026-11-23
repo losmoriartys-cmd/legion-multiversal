@@ -1,0 +1,155 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://legion-multiversal.pages.dev/schemas/twitchmetrics-data.schema.json",
+  "title": "Legión Multiversal — Snapshot externo de TwitchMetrics",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "source",
+    "captured_at",
+    "methodology",
+    "channels"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "source": {
+      "const": "TwitchMetrics"
+    },
+    "captured_at": {
+      "type": "string",
+      "format": "date"
+    },
+    "methodology": {
+      "type": "string",
+      "minLength": 1
+    },
+    "channels": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "display_name",
+          "source_url",
+          "period_label",
+          "metrics",
+          "recent_streams",
+          "commercial_read"
+        ],
+        "properties": {
+          "display_name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "source_url": {
+            "type": "string",
+            "format": "uri",
+            "pattern": "^https://"
+          },
+          "period_label": {
+            "type": "string",
+            "minLength": 1
+          },
+          "metrics": {
+            "type": "object",
+            "required": [
+              "followers",
+              "follower_change",
+              "viewer_hours",
+              "peak_viewers",
+              "hours_live",
+              "average_viewers"
+            ],
+            "properties": {
+              "followers": {
+                "type": "number",
+                "minimum": 0
+              },
+              "follower_change": {
+                "type": "number"
+              },
+              "viewer_hours": {
+                "type": "number",
+                "minimum": 0
+              },
+              "peak_viewers": {
+                "type": "number",
+                "minimum": 0
+              },
+              "hours_live": {
+                "type": "number",
+                "minimum": 0
+              },
+              "average_viewers": {
+                "type": "number",
+                "minimum": 0
+              }
+            },
+            "additionalProperties": false
+          },
+          "recent_streams": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "date_label",
+                "duration_label",
+                "average_viewers",
+                "peak_viewers",
+                "games"
+              ],
+              "properties": {
+                "date_label": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "duration_label": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "average_viewers": {
+                  "type": "number",
+                  "minimum": 0
+                },
+                "peak_viewers": {
+                  "type": "number",
+                  "minimum": 0
+                },
+                "games": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "name",
+                      "share"
+                    ],
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "share": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    },
+                    "additionalProperties": false
+                  }
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "commercial_read": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}
