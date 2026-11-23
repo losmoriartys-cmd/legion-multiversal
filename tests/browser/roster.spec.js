@@ -194,11 +194,11 @@ test('el capítulo Roster presenta las ocho cartas juntas y cada una abre su Bit
 });
 
 
-test('la navegación editorial ofrece diez capítulos y separa marcas de creadores', async ({ page }) => {
+test('la navegación editorial ofrece nueve capítulos y separa marcas de creadores', async ({ page }) => {
   await page.goto('/');
   const nav = page.locator('.primary-navigation');
-  await expect(nav.locator('[data-chapter]')).toHaveCount(10);
-  const chapterOrder = ['1', '11', '2', '3', '9', '8', '12', '5', '10', '6'];
+  await expect(nav.locator('[data-chapter]')).toHaveCount(9);
+  const chapterOrder = ['1', '11', '2', '3', '9', '8', '12', '10', '6'];
   const positions = [];
   for (const chapter of chapterOrder) {
     const item = nav.locator('[data-chapter="' + chapter + '"]');
@@ -331,7 +331,7 @@ test('Atrás y Adelante restauran el roster y el expediente correcto', async ({ 
 
 test('la Bitácora móvil conserva la presentación de main y publica ambas capturas comparables', async ({ browser, page }) => {
   test.setTimeout(90000);
-  const mainBaselineUrl = 'https://bd140e8f.legion-multiversal.pages.dev/';
+  const mainBaselineUrl = 'https://legion-multiversal.pages.dev/'; // producción (main vigente); antes fijada a un preview viejo que no incluía los cambios del Roster
   const viewport = { width: 390, height: 844 };
   const mainContext = await browser.newContext({ viewport, reducedMotion: 'reduce' });
   const mainPage = await mainContext.newPage();

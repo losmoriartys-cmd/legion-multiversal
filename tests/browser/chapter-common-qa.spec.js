@@ -1,6 +1,6 @@
 const {test,expect}=require('@playwright/test');
 const {openChapter,assertChapterFitsViewport}=require('./helpers/chapter-qa');
-const chapters=[0,1,2,3,11,9,10,8,12,5,6,13];
+const chapters=[0,1,2,3,11,9,10,8,12,6,13];
 const viewports=[{name:'desktop-wide',width:1440,height:1000},{name:'desktop',width:1024,height:900},{name:'tablet',width:768,height:1024},{name:'mobile',width:390,height:844},{name:'mobile-small',width:360,height:800}];
 for(const viewport of viewports){
  test('QA común: navegación y overflow de todos los capítulos en '+viewport.name,async({page})=>{
