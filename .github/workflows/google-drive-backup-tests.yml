@@ -1,0 +1,26 @@
+name: Google Drive backup engine tests
+on:
+  push:
+    branches:
+      - feat/google-drive-backup-engine
+  pull_request:
+    paths:
+      - scripts/google_drive_backup.py
+      - scripts/google_drive_restore.py
+      - scripts/google_drive_oauth_setup.py
+      - tests/test_google_drive_backup_failures.py
+      - .github/workflows/google-drive-backup-tests.yml
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Syntax check
+        run: python -m py_compile scripts/google_drive_backup.py scripts/google_drive_restore.py scripts/google_drive_oauth_setup.py
+      - name: Failure injection tests
+        run: python -m unittest discover -s tests -p 'test_google_drive_backup_failures.py' -v
