@@ -179,6 +179,8 @@ jobs:
         run: python scripts/validate_creator_metrics.py
       - name: Validar contratos canónicos e integridad entre archivos
         run: python scripts/validate_data_contracts.py
+      - name: Proteger inventario crítico, roster y recuperación Git
+        run: python scripts/guard_data_integrity.py --base-ref origin/main --recovery-report
       - name: Instalar dependencias de pruebas de navegador
         run: npm install
       - name: Instalar Chromium para Playwright
