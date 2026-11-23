@@ -46,7 +46,7 @@ class IntegrityGuardBehaviorTests(unittest.TestCase):
 
     def fake_git(self, *args):
         if args[:1] == ("ls-tree",):
-            return "\\n".join(self.bootstrap_paths)
+            return "\n".join(self.bootstrap_paths)
         if args[:2] == ("diff", "--name-status"):
             return self.diff
         if args and args[0] == "show":
