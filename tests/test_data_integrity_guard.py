@@ -99,6 +99,18 @@ class IntegrityGuardBehaviorTests(unittest.TestCase):
         self.assertTrue(any("akuma" in e and "ID protegido ausente" in e for e in errors), errors)
 
     def test_initial_manifest_bootstrap_uses_base_roster_and_fixed_inventory(self):
+        # The first manifest must exactly match the immutable bootstrap policy:
+        # critical paths that exist on main + roster IDs read from main.
+        self.manifest["critical_files"] = list(guard.BOOTSTRAP_CRITICAL_FILES)
+        self.manifest["protected_roster_ids"] = sorted(IDS)
+        self.manifest["authorized_roster_removals"] = []
+        self.manifest_path.write_text(json.dumps(self.manifest), encoding="utf-8")
+        for relative_path in guard.BOOTSTRAP_CRITICAL_FILES:
+            path = self.root / relative_path
+            path.parent.mkdir(parents=True, exist_ok=True)
+            if not path.exists():
+                path.write_text("{}", encoding="utf-8")
+
         self.git_patch.stop()
         def bootstrap_git(*args):
             if args[:2] == ("show", "origin/main:data/integrity-manifest.json"):
@@ -107,6 +119,19 @@ class IntegrityGuardBehaviorTests(unittest.TestCase):
         with patch.object(guard, "git", side_effect=bootstrap_git):
             errors = self.run_guard()
         self.assertEqual(errors, [], errors)
+
+    def test_initial_manifest_cannot_change_bootstrap_inventory(self):
+        self.manifest["critical_files"] = ["data/roster.json"]
+        self.manifest["protected_roster_ids"] = sorted(IDS)
+        self.manifest_path.write_text(json.dumps(self.manifest), encoding="utf-8")
+        self.git_patch.stop()
+        def bootstrap_git(*args):
+            if args[:2] == ("show", "origin/main:data/integrity-manifest.json"):
+                raise RuntimeError("fatal: path 'data/integrity-manifest.json' exists on disk, but not in 'origin/main'")
+            return self.fake_git(*args)
+        with patch.object(guard, "git", side_effect=bootstrap_git):
+            errors = self.run_guard()
+        self.assertTrue(any("Política de integridad modificada" in e for e in errors), errors)
 
     def test_missing_baseline_roster_fails_closed(self):
         self.git_patch.stop()
