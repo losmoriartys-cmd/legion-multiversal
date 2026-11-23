@@ -12,14 +12,14 @@
     "community-playbook.json"
   ],
   "protected_roster_ids": [
-    "moriartys",
-    "rod3r1k",
-    "lady-moriarty",
-    "ardipii",
     "akuma",
+    "ardipii",
     "dave-nexus",
+    "habitos",
+    "lady-moriarty",
+    "moriartys",
     "pato-oratoris",
-    "habitos"
+    "rod3r1k"
   ],
   "authorized_roster_removals": []
 }
