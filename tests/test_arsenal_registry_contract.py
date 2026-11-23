@@ -13,9 +13,9 @@ CSS = (ROOT / "styles.css").read_text(encoding="utf-8")
 class ArsenalRegistryContractTests(unittest.TestCase):
     APP = (ROOT / "app.js").read_text(encoding="utf-8")
     def test_chapter_08_reads_the_shared_master_catalog(self):
-        chapter = HTML.split('id="chapter-5"', 1)[1].split('id="chapter-6"', 1)[0]
+        chapter = HTML.split('id="collab-catalog"', 1)[1].split('id="barfender-expediente"', 1)[0]
         self.assertIn('id="arsenal-registry"', chapter)
-        self.assertIn('src="./arsenal-registry.js?v=20261121-arsenal-registry-1"', HTML)
+        self.assertIn('src="./arsenal-registry.js?v=20261122-arsenal-registry-2"', HTML)
         self.assertIn("fetch('./data/games.json'", SCRIPT)
 
     def test_catalog_summary_matches_the_master_registry(self):
@@ -30,7 +30,7 @@ class ArsenalRegistryContractTests(unittest.TestCase):
         self.assertEqual(game["nombre"], "Escape the Backrooms")
         self.assertEqual(game["tienda"], "https://store.steampowered.com/app/1943950/")
         self.assertNotIn("2141730", SCRIPT)
-        chapter = HTML.split('id="chapter-5"', 1)[1].split('id="chapter-6"', 1)[0]
+        chapter = HTML.split('id="collab-catalog"', 1)[1].split('id="barfender-expediente"', 1)[0]
         self.assertNotIn("Backrooms: Escape Together", chapter)
 
     def test_barfender_is_a_separate_commercial_case_not_a_bit_session(self):
@@ -56,7 +56,7 @@ class ArsenalRegistryContractTests(unittest.TestCase):
         self.assertIn("data-open-bit", SCRIPT)
         self.assertIn("arsenal-game-", SCRIPT)
         self.assertIn("afterEnter:revealBit", SCRIPT)
-        self.assertIn("session?.querySelector('[data-open-arsenal]')||session", SCRIPT)
+        self.assertIn("details.collab-ficha", SCRIPT)
         self.assertIn("scrollToRegistryTarget(target)", SCRIPT)
         self.assertIn("scrollIntoView({block:'center',behavior:'auto'})", SCRIPT)
 
@@ -66,7 +66,7 @@ class ArsenalRegistryContractTests(unittest.TestCase):
         self.assertIn("requestAnimationFrame(() => window.requestAnimationFrame", self.APP)
         self.assertIn("Promise.allSettled(entranceAnimations.map(animation => animation.finished))", self.APP)
         self.assertIn("afterEnter:revealBit", SCRIPT)
-        self.assertIn("afterEnter: revealArsenal", COLLAB_SCRIPT)
+        self.assertIn("revealCatalogCard", COLLAB_SCRIPT)
 
     def test_missing_cover_and_player_data_are_not_invented(self):
         self.assertIn("game.portada", SCRIPT)

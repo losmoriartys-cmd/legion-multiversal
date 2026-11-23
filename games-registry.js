@@ -51,10 +51,14 @@
       (image ? '<img src="' + escapeHtml(image) + '" alt="Avatar del canal ' + escapeHtml(creatorName(id)) + '" loading="lazy" decoding="async">' : '<span class="collab-avatar-fallback" aria-hidden="true">' + fallback + '</span>') +
       '</span>';
   }
-  function gameCover(game, session) {
+  function gamePoster(game, session, dateLabel, categories) {
     const image = safeHttps(game.portada);
-    if (image) return '<div class="collab-game-cover"><img src="' + escapeHtml(image) + '" alt="Portada de ' + escapeHtml(game.nombre) + '" loading="lazy" decoding="async"><span>' + escapeHtml(session.bit) + '</span></div>';
-    return '<div class="collab-game-cover collab-game-cover-fallback"><span>' + escapeHtml(session.bit) + '</span><strong>' + escapeHtml(game.nombre) + '</strong><small>ARTE OFICIAL PENDIENTE</small></div>';
+    const art = image
+      ? '<img src="' + escapeHtml(image) + '" alt="Portada de ' + escapeHtml(game.nombre) + '" loading="lazy" decoding="async">'
+      : '<span class="collab-poster-fallback" aria-hidden="true">ARTE OFICIAL PENDIENTE</span>';
+    return '<div class="collab-poster' + (image ? '' : ' collab-poster-pending') + '">' + art +
+      '<div class="collab-poster-top"><span class="collab-bit-id">' + escapeHtml(session.bit) + '</span><span class="collab-session-date">' + dateLabel + '</span></div>' +
+      '<div class="collab-poster-bottom"><h4>' + escapeHtml(game.nombre) + '</h4><div class="collab-session-categories">' + categories + '</div></div></div>';
   }
   function renderParticipant(id, povChannels) {
     const hasPov = povChannels.has(id);
@@ -81,23 +85,40 @@
     const game = entry.game;
     const session = entry.session;
     const povChannels = new Set((session.pov || []).map(function (pov) { return pov.canal; }).filter(Boolean));
-    const participants = (session.participantes || []).map(function (id) { return renderParticipant(id, povChannels); }).join('');
+    const participantIds = session.participantes || [];
+    const participants = participantIds.map(function (id) { return renderParticipant(id, povChannels); }).join('');
+    const stack = participantIds.slice(0, 6).map(function (id) { return '<li>' + avatarMarkup(id, creators.get(id), povChannels.has(id)) + '</li>'; }).join('');
     const povs = (session.pov || []).map(renderPov).join('');
     const categories = (game.categorias || []).map(function (category) { return '<span class="collab-category-chip">' + escapeHtml(category) + '</span>'; }).join('');
     const players = game.jugadores ? '<span class="collab-game-meta-item">JUGADORES · ' + escapeHtml(game.jugadores.min) + '–' + escapeHtml(game.jugadores.max) + '</span>' : '';
     const store = safeHttps(game.tienda);
     const note = session.nota ? '<p class="collab-session-note">' + escapeHtml(session.nota) + '</p>' : '';
     const dateLabel = session.fecha ? escapeHtml(formatSessionDate(session.fecha)) : 'FECHA SIN VERIFICAR';
-    const arsenalLink = '<a class="collab-arsenal-link" href="#arsenal-game-' + escapeHtml(game.id) + '" data-open-arsenal="' + escapeHtml(game.id) + '">VER FICHA EN ARSENAL →</a>';
+    const catalogLink = '<a class="collab-arsenal-link" href="#arsenal-game-' + escapeHtml(game.id) + '" data-open-arsenal="' + escapeHtml(game.id) + '">VER EN EL CATÁLOGO →</a>';
     const storeLink = store ? '<a class="collab-store-link" href="' + escapeHtml(store) + '" target="_blank" rel="noopener noreferrer">FICHA OFICIAL ↗</a>' : '';
+    const povTotal = (session.pov || []).length;
     return '<article class="collab-session-card" id="' + escapeHtml(session.bit.toLowerCase()) + '" data-collab-session="' + escapeHtml(session.bit) + '" data-game-id="' + escapeHtml(game.id) + '">' +
-      gameCover(game, session) + '<div class="collab-session-content">' +
-      '<div class="collab-session-topline"><span class="collab-bit-id">' + escapeHtml(session.bit) + '</span><span class="collab-session-date">' + dateLabel + '</span></div>' +
-      '<h4>' + escapeHtml(game.nombre) + '</h4><div class="collab-session-categories">' + categories + '</div>' +
+      gamePoster(game, session, dateLabel, categories) +
+      '<div class="collab-card-strip"><ul class="collab-avatar-stack" aria-hidden="true">' + stack + '</ul>' +
+      '<span class="collab-card-count">' + participantIds.length + ' JUGARON · ' + povTotal + (povTotal === 1 ? ' POV' : ' POV') + '</span></div>' +
+      '<details class="collab-ficha"><summary><span>ABRIR FICHA</span><span class="collab-ficha-close">CERRAR FICHA</span></summary>' +
+      '<div class="collab-session-content">' +
       '<div class="collab-game-meta">' + players + '<span class="collab-game-meta-item">' + escapeHtml(game.modalidad || 'Modalidad sin verificar') + '</span></div>' +
       '<section class="collab-session-roster" aria-label="Participantes de ' + escapeHtml(game.nombre) + '"><h5>QUIÉNES JUGARON</h5><ul class="collab-participant-list">' + participants + '</ul></section>' +
-      '<section class="collab-session-povs" aria-label="Puntos de vista registrados de ' + escapeHtml(game.nombre) + '"><h5>POV DISPONIBLES · ' + (session.pov || []).length + '</h5><div class="collab-pov-list">' + povs + '</div></section>' +
-      note + '<div class="collab-session-actions">' + arsenalLink + storeLink + '</div></div></article>';
+      '<section class="collab-session-povs" aria-label="Puntos de vista registrados de ' + escapeHtml(game.nombre) + '"><h5>POV DISPONIBLES · ' + povTotal + '</h5><div class="collab-pov-list">' + povs + '</div></section>' +
+      note + '<div class="collab-session-actions">' + catalogLink + storeLink + '</div></div></details></article>';
+  }
+  function renderTimeline() {
+    const target = document.getElementById('collab-timeline');
+    if (!target) return;
+    const dated = sessions.filter(function (entry) { return entry.session.fecha; }).sort(function (a, b) {
+      return String(a.session.fecha).localeCompare(String(b.session.fecha));
+    });
+    if (!dated.length) { target.hidden = true; return; }
+    target.hidden = false;
+    target.innerHTML = '<h5 class="collab-timeline-title">LA LEGIÓN JUGANDO · EN ORDEN</h5><ol class="collab-timeline-list">' + dated.map(function (entry) {
+      return '<li><a href="#' + escapeHtml(entry.session.bit.toLowerCase()) + '" data-open-session="' + escapeHtml(entry.session.bit) + '"><time datetime="' + escapeHtml(entry.session.fecha) + '">' + escapeHtml(formatSessionDate(entry.session.fecha)) + '</time><strong>' + escapeHtml(entry.game.nombre) + '</strong></a></li>';
+    }).join('') + '</ol>';
   }
   function populateFilters() {
     const categories = Array.from(new Set(sessions.flatMap(function (entry) { return entry.game.categorias || []; }))).sort();
@@ -153,7 +174,9 @@
       (entry.session.participantes || []).forEach(function (id) { uniqueCreators.add(id); });
       povCount += (entry.session.pov || []).length;
     });
-    summary.innerHTML = '<article><strong>' + sessions.length + '</strong><span>SESIONES BIT</span></article>' +
+    const gamesPlayed = new Set(sessions.map(function (entry) { return entry.game.id; })).size;
+    summary.innerHTML = '<article><strong>' + gamesPlayed + '</strong><span>JUEGOS JUGADOS</span></article>' +
+      '<article><strong>' + sessions.length + '</strong><span>SESIONES BIT</span></article>' +
       '<article><strong>' + povCount + '</strong><span>POV REGISTRADOS</span></article>' +
       '<article><strong>' + uniqueCreators.size + '</strong><span>INTEGRANTES PARTICIPANTES</span></article>';
     summary.dataset.gamesDocumented = String(new Set(sessions.map(function (entry) { return entry.game.id; })).size);
@@ -187,6 +210,7 @@
       if (!sessions.length) throw new Error('El registro no contiene sesiones BIT documentadas.');
       populateFilters();
       renderSummary();
+      renderTimeline();
       render();
       section.dataset.collabReady = 'true';
       section.setAttribute('aria-busy', 'false');
@@ -213,19 +237,36 @@
     target.scrollIntoView({ block: 'center', behavior: 'auto' });
     window.requestAnimationFrame(function () { rootScroller.style.scrollBehavior = previousScrollBehavior; });
   }
+  function revealCatalogCard(gameId) {
+    const target = document.getElementById('arsenal-game-' + gameId);
+    if (target) scrollToRegistryTarget(target);
+    else scrollToRegistryTarget(document.getElementById('arsenal-registry'));
+  }
   grid.addEventListener('click', function (event) {
     const link = event.target.closest('[data-open-arsenal]');
     if (!link) return;
     event.preventDefault();
-    const gameId = link.dataset.openArsenal;
-    const revealArsenal = function () {
-      scrollToRegistryTarget(document.getElementById('arsenal-game-' + gameId));
-    };
-    if (typeof window.switchChapter === 'function') {
-      window.switchChapter(5, { scrollBehavior: 'auto', afterEnter: revealArsenal });
-    } else {
-      revealArsenal();
-    }
+    revealCatalogCard(link.dataset.openArsenal);
   });
+  grid.addEventListener('toggle', function (event) {
+    const details = event.target;
+    if (!details || !details.classList || !details.classList.contains('collab-ficha')) return;
+    const card = details.closest('.collab-session-card');
+    if (card) card.classList.toggle('is-open', details.open);
+  }, true);
+  const timeline = document.getElementById('collab-timeline');
+  if (timeline) {
+    timeline.addEventListener('click', function (event) {
+      const link = event.target.closest('[data-open-session]');
+      if (!link) return;
+      event.preventDefault();
+      resetFilters();
+      const card = document.getElementById(link.dataset.openSession.toLowerCase());
+      if (!card) return;
+      const details = card.querySelector('details.collab-ficha');
+      if (details) details.open = true;
+      scrollToRegistryTarget(card);
+    });
+  }
   window.gamesRegistryReady = loadRegistry();
 })();

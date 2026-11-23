@@ -12,7 +12,7 @@ CSS = (ROOT / "styles.css").read_text(encoding="utf-8")
 class CollaborationsRegistryContractTests(unittest.TestCase):
     def test_chapter_07_uses_the_shared_registry_and_roster_sources(self):
         self.assertIn('id="collab-games-registry"', HTML)
-        self.assertIn('src="./games-registry.js?v=20261122-collab-registry-2"', HTML)
+        self.assertIn('src="./games-registry.js?v=20261122-collab-registry-3"', HTML)
         self.assertIn("fetch('./data/games.json'", SCRIPT)
         self.assertIn("./styles.css?v=20261121-arsenal-registry-1", HTML)
         self.assertIn("fetch('./data/roster.json'", SCRIPT)
@@ -26,7 +26,7 @@ class CollaborationsRegistryContractTests(unittest.TestCase):
         self.assertIn("data-collab-session", SCRIPT)
         self.assertIn("data-collab-participant", SCRIPT)
         self.assertIn("data-pov-channel", SCRIPT)
-        self.assertIn("afterEnter: revealArsenal", SCRIPT)
+        self.assertIn("revealCatalogCard", SCRIPT)
         self.assertIn("scrollToRegistryTarget(target)", SCRIPT)
         self.assertIn("scrollIntoView({ block: 'center', behavior: 'auto' })", SCRIPT)
 
@@ -46,7 +46,7 @@ class CollaborationsRegistryContractTests(unittest.TestCase):
 
     def test_barfender_remains_outside_the_bit_timeline_as_exp001(self):
         game = next(game for game in GAMES["juegos"] if game["id"] == "barfender")
-        chapter = HTML.split('id="chapter-12"', 1)[1].split('id="chapter-5"', 1)[0]
+        chapter = HTML.split('id="chapter-12"', 1)[1].split('id="chapter-6"', 1)[0]
         self.assertEqual(game["expediente_comercial"], "EXP-001")
         self.assertEqual(game["sesiones"], [])
         self.assertIn("EXP-001", chapter)
@@ -68,7 +68,7 @@ class CollaborationsRegistryContractTests(unittest.TestCase):
         self.assertIn(".collab-avatar-wrap.no-pov", CSS)
 
     def test_old_separate_preview_is_not_the_chapter_07_entry_point(self):
-        chapter = HTML.split('id="chapter-12"', 1)[1].split('id="chapter-5"', 1)[0]
+        chapter = HTML.split('id="chapter-12"', 1)[1].split('id="chapter-6"', 1)[0]
         self.assertNotIn('href="./bitacora-preview.html"', chapter)
         self.assertIn('href="#collab-games-registry"', chapter)
 

@@ -1,7 +1,7 @@
 const {test,expect}=require('@playwright/test');
 
 test.beforeEach(async({page})=>{
-  await page.goto('/#chapter-5');
+  await page.goto('/#chapter-12');
   await page.evaluate(()=>window.arsenalRegistryReady);
   await expect(page.locator('#arsenal-registry')).toHaveAttribute('data-arsenal-ready','true');
 });
@@ -59,10 +59,11 @@ test('Arsenal y Bitácora se enlazan mediante IDs estables',async({page})=>{
   await page.locator('#arsenal-game-escape-the-backrooms [data-open-bit]').click();
   await expect(page.locator('#chapter-12')).toHaveClass(/active/);
   await expect(page.locator('#bit-001')).toBeVisible();
+  await expect(page.locator('#bit-001 details.collab-ficha')).toHaveJSProperty('open',true);
   const arsenalLink=page.locator('#bit-001 [data-open-arsenal="escape-the-backrooms"]');
   await expect(arsenalLink).toBeInViewport({ratio:1});
   await arsenalLink.click();
-  await expect(page.locator('#chapter-5')).toHaveClass(/active/);
+  await expect(page.locator('#chapter-12')).toHaveClass(/active/);
   await expect(page.locator('#arsenal-game-escape-the-backrooms')).toBeVisible();
 });
 

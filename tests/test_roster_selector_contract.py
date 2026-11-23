@@ -299,8 +299,8 @@ class RosterComicCardsContractTests(unittest.TestCase):
             'CAPÍTULO 01 · ORIGEN', 'CAPÍTULO 02 · QUIÉNES SOMOS',
             'CAPÍTULO 03 · ROSTER', 'CAPÍTULO 04 · ESTADÍSTICAS',
             'CAPÍTULO 05 · COMUNIDAD', 'CAPÍTULO 06 · ALIANZAS',
-            'CAPÍTULO 07 · COLABORACIONES', 'CAPÍTULO 08 · ARSENAL',
-            'CAPÍTULO 09 · EN VIVO', 'CAPÍTULO 10 · RECLUTAMIENTO',
+            'CAPÍTULO 07 · COLABORACIONES',
+            'CAPÍTULO 08 · EN VIVO', 'CAPÍTULO 09 · RECLUTAMIENTO',
         ):
             self.assertIn(label, self.html)
         self.assertNotIn('PILAR COMPLEMENTARIO', self.html)

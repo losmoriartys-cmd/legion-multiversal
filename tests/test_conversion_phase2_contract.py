@@ -35,20 +35,20 @@ class ConversionPhase2Contract(unittest.TestCase):
     def test_barfender_continuity_and_clip_metadata(self):
         self.assertIn("SESIÓN 02 · 11 NOV 2026", self.html)
         self.assertNotIn("DURACIÓN NO REGISTRADA", self.html)
-        collaboration = self.html.split('id="chapter-12"', 1)[1].split('id="chapter-5"', 1)[0]
+        collaboration = self.html.split('id="chapter-12"', 1)[1].split('id="chapter-6"', 1)[0]
         self.assertIn("CASO COLABORATIVO DOCUMENTADO · N.º 001", collaboration)
         self.assertIn("EXP-001", collaboration)
         self.assertIn("91 usuarios activos en chat", self.html)
 
     def test_public_arsenal_does_not_expose_campaign_access_tables(self):
-        arsenal = self.html.split('id="chapter-5"', 1)[1].split('id="chapter-6"', 1)[0]
+        arsenal = self.html.split('id="collab-catalog"', 1)[1].split('id="barfender-expediente"', 1)[0]
         self.assertNotIn('id="chapter-14"', self.html)
         self.assertNotIn("ABRIR ARCHIVO DE CAMPAÑAS Y ACCESOS", self.html)
         self.assertNotIn("arsenal-internal-note", arsenal)
         self.assertNotIn("autenticación real", arsenal)
 
     def test_arsenal_filters_and_recruitment_tabs(self):
-        arsenal = self.html.split('id="chapter-5"', 1)[1].split('id="chapter-6"', 1)[0]
+        arsenal = self.html.split('id="collab-catalog"', 1)[1].split('id="barfender-expediente"', 1)[0]
         arsenal_js = (ROOT / "arsenal-registry.js").read_text(encoding="utf-8")
         self.assertIn("setRecruitmentMode", self.js)
         self.assertIn('id="arsenal-search"', arsenal)
@@ -63,7 +63,7 @@ class ConversionPhase2Contract(unittest.TestCase):
         self.assertIn("updateMissionHeader", self.js)
 
     def test_arsenal_count_matches_the_shared_master_registry(self):
-        arsenal = self.html.split('id="chapter-5"', 1)[1].split('id="chapter-6"', 1)[0]
+        arsenal = self.html.split('id="collab-catalog"', 1)[1].split('id="barfender-expediente"', 1)[0]
         registry = json.loads((ROOT / "data" / "games.json").read_text(encoding="utf-8"))
         games = registry["juegos"]
         sessions = [session for game in games for session in game["sesiones"]]

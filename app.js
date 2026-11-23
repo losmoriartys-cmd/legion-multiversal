@@ -2804,6 +2804,13 @@ function printHeroDossier(){
         document.addEventListener('keydown', () => { void ensureGlobalChapterStyles(); }, { once: true, capture: true });
 
         function switchChapter(chapterNum, options = {}) {
+            // Arsenal se fusionó con Colaboraciones: los enlaces viejos al capítulo 5 llevan al catálogo.
+            if (Number(chapterNum) === 5) {
+                chapterNum = 12;
+                if (typeof options.afterEnter !== 'function') {
+                    options = Object.assign({}, options, { afterEnter: () => document.getElementById('collab-catalog')?.scrollIntoView({ block: 'start', behavior: 'auto' }) });
+                }
+            }
             const panel = document.getElementById('chapter-' + chapterNum);
             if (!panel) return;
             const globalStylesLink = document.getElementById('lm-global-chapter-styles');
@@ -2889,7 +2896,8 @@ function printHeroDossier(){
         function initializeLegionApp() {
             const hash = location.hash || '';
             if (hash.startsWith('#chapter-')) {
-                const num = Number(hash.slice('#chapter-'.length));
+                let num = Number(hash.slice('#chapter-'.length));
+                if (num === 5) num = 12; // Arsenal quedó dentro de Colaboraciones
                 if (Number.isFinite(num) && document.getElementById('chapter-' + num)) switchChapter(num, { skipHistory: true });
             } else if (hash === '#roster' || hash.startsWith('#roster?') || hash.startsWith('#roster/') || hash.startsWith('#expediente-')) {
                 switchChapter(2, { skipHistory: true });

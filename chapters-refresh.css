@@ -72,3 +72,79 @@ a.chapter-cta{display:inline-block;text-decoration:none;color:#080b10;text-align
   .arsenal-checklist{grid-template-columns:1fr}
   .manifesto-invitation .chapter-cta{width:100%;box-sizing:border-box}
 }
+
+/* ---------- Colaboraciones + Arsenal: un solo capítulo de juegos ---------- */
+/* El catálogo (ex capítulo Arsenal) hereda los estilos de panel que antes colgaban de #chapter-5. */
+#chapter-12 .collab-catalog .premium-panel{border:2px solid #b98c42;border-radius:0;background:linear-gradient(145deg,rgba(25,21,43,.97),rgba(8,10,20,.97));box-shadow:0 0 24px rgba(130,70,220,.12)}
+#chapter-12 .collab-catalog .premium-panel h3,#chapter-12 .collab-catalog .premium-panel h4{color:#ffde9a}
+#chapter-12 .collab-catalog .premium-card{border:1px solid rgba(220,174,96,.48);border-radius:8px;background:rgba(255,255,255,.045)}
+#chapter-12 .collab-catalog .premium-card p,#chapter-12 .collab-catalog .premium-panel p,#chapter-12 .collab-catalog .premium-panel li{color:#e6e1f1}
+#chapter-12 .collab-catalog .premium-panel a{color:#ffd77b}
+#chapter-12 .collab-catalog .premium-kicker{color:#c6a5ff}
+#chapter-12 .collab-catalog .arsenal-card h3{color:#ffdf9c}
+.collab-catalog{margin:44px 0;min-width:0}
+.collab-catalog-head{max-width:880px;margin-bottom:18px}
+.collab-catalog-head h3{margin:8px 0 10px;color:#f3d88e;font:clamp(1.9rem,4vw,3rem)/1 'Bangers',cursive;overflow-wrap:anywhere}
+.collab-catalog-head p{color:#c8d6e4;line-height:1.65}
+.collab-catalog .arsenal-selection-heading{margin:22px 0 10px}
+
+/* Resumen de 4 cifras */
+.collaboration-chapter .collab-registry-summary{grid-template-columns:repeat(4,minmax(0,1fr))}
+
+/* Línea de tiempo: cronología de lo jugado */
+.collab-timeline{margin:0 0 20px;min-width:0}
+.collab-timeline[hidden]{display:none}
+.collab-timeline-title{margin:0 0 10px;color:#d7c58d;font-size:.64rem;font-weight:900;letter-spacing:.13em}
+.collab-timeline-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.collab-timeline-list li{min-width:0}
+.collab-timeline-list a{position:relative;display:flex;flex-direction:column;gap:4px;min-height:64px;box-sizing:border-box;padding:10px 10px 10px 14px;color:#edf4fa;text-decoration:none;background:rgba(5,12,22,.78);border:1px solid rgba(113,183,211,.28);border-left:4px solid #e7ca7b}
+.collab-timeline-list a:hover{background:rgba(32,54,78,.95)}
+.collab-timeline-list a:focus-visible{outline:3px solid #ffdf4d;outline-offset:2px}
+.collab-timeline-list time{color:#8de1ef;font-size:.6rem;font-weight:900;letter-spacing:.1em}
+.collab-timeline-list strong{font-size:.76rem;line-height:1.25;overflow-wrap:anywhere}
+
+/* Grilla de pósters */
+.collaboration-chapter .collab-session-grid{grid-template-columns:repeat(3,minmax(0,1fr));align-items:start}
+.collaboration-chapter .collab-session-card{display:flex;flex-direction:column}
+.collaboration-chapter .collab-session-card.is-open{grid-column:1/-1}
+.collab-poster{position:relative;display:block;min-width:0;aspect-ratio:3/4;overflow:hidden;background:#080e18}
+.collab-poster img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover}
+.collab-poster::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(4,8,15,.55) 0,rgba(4,8,15,0) 28%,rgba(4,8,15,0) 48%,rgba(4,8,15,.94) 100%)}
+.collab-poster-pending{display:grid;place-items:center;background:linear-gradient(125deg,#101e31,#080e19 75%)}
+.collab-poster-fallback{position:relative;z-index:1;color:#98b7ca;font-size:.6rem;font-weight:900;letter-spacing:.14em}
+.collab-poster-top{position:absolute;z-index:2;top:10px;left:10px;right:10px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px}
+.collab-poster-top .collab-bit-id{color:#101723;background:#e9cd82;border-color:#e9cd82}
+.collab-poster-top .collab-session-date{padding:5px 8px;color:#f1f6fb;background:rgba(5,10,18,.78);font-size:.62rem}
+.collab-poster-bottom{position:absolute;z-index:2;left:0;right:0;bottom:0;min-width:0;padding:14px}
+.collab-poster-bottom h4{margin:0 0 8px;color:#fff;font:clamp(1.55rem,2.2vw,2rem)/1 'Bangers',cursive;text-shadow:2px 2px 0 #000;overflow-wrap:anywhere}
+.collab-poster-bottom .collab-session-categories{display:flex;flex-wrap:wrap;gap:5px}
+.collab-card-strip{display:flex;align-items:center;justify-content:space-between;gap:10px;min-width:0;padding:10px 12px;border-top:1px solid rgba(113,183,211,.22)}
+.collab-avatar-stack{display:flex;margin:0;padding:0;list-style:none}
+.collab-avatar-stack li{margin-left:-10px}
+.collab-avatar-stack li:first-child{margin-left:0}
+.collab-avatar-stack .collab-avatar-wrap{width:34px;height:34px;flex-basis:34px}
+.collab-card-count{color:#aebfd0;font-size:.58rem;font-weight:900;letter-spacing:.08em;text-align:right}
+.collab-ficha{min-width:0;border-top:1px solid rgba(113,183,211,.22)}
+.collab-ficha>summary{display:flex;align-items:center;justify-content:center;min-height:46px;padding:10px 14px;color:#101723;background:#e8cb7e;font-size:.7rem;font-weight:900;letter-spacing:.12em;cursor:pointer;list-style:none}
+.collab-ficha>summary::-webkit-details-marker{display:none}
+.collab-ficha>summary:focus-visible{outline:3px solid #ffdf4d;outline-offset:-3px}
+.collab-ficha>summary .collab-ficha-close{display:none}
+.collab-ficha[open]>summary .collab-ficha-close{display:inline}
+.collab-ficha[open]>summary span:first-child{display:none}
+/* Ficha abierta: la tarjeta ocupa todo el ancho, con la portada a un costado */
+@media(min-width:851px){
+  .collaboration-chapter .collab-session-card.is-open{display:grid;grid-template-columns:minmax(240px,320px) minmax(0,1fr);grid-template-rows:auto auto}
+  .collaboration-chapter .collab-session-card.is-open .collab-poster{grid-row:1/3}
+  .collaboration-chapter .collab-session-card.is-open .collab-card-strip{grid-column:2}
+  .collaboration-chapter .collab-session-card.is-open .collab-ficha{grid-column:2}
+}
+@media(max-width:1000px){
+  .collaboration-chapter .collab-session-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .collab-timeline-list{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .collaboration-chapter .collab-registry-summary{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:650px){
+  #chapter-12.collaboration-chapter .collab-session-grid{grid-template-columns:minmax(0,1fr)!important}
+  .collab-timeline-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .collab-poster{aspect-ratio:4/3}
+}

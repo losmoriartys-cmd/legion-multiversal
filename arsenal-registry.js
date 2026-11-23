@@ -166,8 +166,9 @@
     const bit=link.dataset.openBit;
     const revealBit=()=>{
       const session=document.getElementById(bit);
-      const target=session?.querySelector('[data-open-arsenal]')||session;
-      scrollToRegistryTarget(target);
+      const ficha=session?.querySelector('details.collab-ficha');
+      if(ficha)ficha.open=true;
+      scrollToRegistryTarget(session);
     };
     if(typeof window.switchChapter==='function')window.switchChapter(12,{scrollBehavior:'auto',afterEnter:revealBit});
     else revealBit();

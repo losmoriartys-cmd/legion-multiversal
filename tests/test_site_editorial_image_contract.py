@@ -96,9 +96,8 @@ class SiteEditorialImageContract(unittest.TestCase):
             "CAPÍTULO 05 · COMUNIDAD": 'data-editorial-number="5"',
             "CAPÍTULO 06 · ALIANZAS": 'data-editorial-number="6"',
             "CAPÍTULO 07 · COLABORACIONES": 'data-editorial-number="7"',
-            "CAPÍTULO 08 · ARSENAL": 'data-editorial-number="8"',
-            "CAPÍTULO 09 · EN VIVO": 'data-editorial-number="9"',
-            "CAPÍTULO 10 · RECLUTAMIENTO": 'data-editorial-number="10"',
+            "CAPÍTULO 08 · EN VIVO": 'data-editorial-number="8"',
+            "CAPÍTULO 09 · RECLUTAMIENTO": 'data-editorial-number="9"',
         }
         for label, number in expected.items():
             self.assertIn(label, self.html)

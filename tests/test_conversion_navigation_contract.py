@@ -16,10 +16,10 @@ class ConversionNavigationContractTests(unittest.TestCase):
         expected = (
             ("ORIGEN", "1"), ("QUIÉNES SOMOS", "11"), ("ROSTER", "2"),
             ("ESTADÍSTICAS", "3"), ("COMUNIDAD", "9"), ("ALIANZAS", "8"),
-            ("COLABORACIONES", "12"), ("ARSENAL", "5"), ("EN VIVO", "10"),
+            ("COLABORACIONES", "12"), ("EN VIVO", "10"),
             ("SUMATE", "6"),
         )
-        self.assertEqual(nav.count('data-chapter='), 10)
+        self.assertEqual(nav.count('data-chapter='), 9)
         positions = []
         for label, chapter in expected:
             self.assertIn(f'data-chapter="{chapter}"', nav)
