@@ -107,6 +107,22 @@ def check(base_ref: str, recovery_report: bool = False) -> list[str]:
     except Exception as exc:
         return [f"No se pudo cargar la política de integridad de la línea base {base_ref}: {exc}"]
     changed = git("diff", "--name-status", f"{base_ref}...HEAD").splitlines()
+    if new_authorizations:
+        changed_entries = [line.split("\\t") for line in changed if line.strip()]
+        authorization_only = (
+            bool(changed_entries)
+            and all(
+                len(fields) >= 2
+                and fields[0] == "M"
+                and fields[-1] == "data/integrity-manifest.json"
+                for fields in changed_entries
+            )
+        )
+        if not authorization_only:
+            errors.append(
+                "La Fase A de autorización solo puede modificar data/integrity-manifest.json; "
+                "se detectaron cambios adicionales en el PR."
+            )
     deleted = set()
     for line in changed:
         fields = line.split("\t")
