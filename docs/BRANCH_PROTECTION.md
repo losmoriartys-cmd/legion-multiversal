@@ -1,41 +1,41 @@
 # Protección de la rama `main`
 
-**Estado:** política documentada; la configuración del repositorio requiere permisos de administración de GitHub y todavía no está verificada desde la integración disponible.
+**Estado verificado:** ruleset `PROTECCION-MAIN-LEGION`, ID `27883004`, activo sobre `~DEFAULT_BRANCH` (la rama predeterminada es `main`). La consulta REST confirmó bypass vacío, PR obligatorio, aprobación independiente, checks requeridos y rama actualizada antes de integrar.
 
-## Regla requerida
+## Configuración actualmente verificada
 
-Crear una regla de protección o ruleset dirigido a la rama exacta `main` con estas opciones:
+- Enforcement: `active`.
+- Target: `~DEFAULT_BRANCH` = `main`; sin exclusiones.
+- Bypass: `[]`.
+- Pull request obligatorio con una aprobación.
+- Aprobaciones obsoletas descartadas al recibir nuevos commits.
+- Aprobación del último push por alguien distinto del autor.
+- Conversaciones de revisión resueltas antes de integrar.
+- Checks requeridos: `validar`, `python-tests`, `audit-public-links`.
+- `strict_required_status_checks_policy: true`: la rama debe estar actualizada con la base.
+- Eliminación y force-push bloqueados.
 
-- Exigir que los cambios lleguen mediante pull request.
-- Exigir al menos una aprobación de revisión de una persona distinta del autor y descartar aprobaciones obsoletas cuando cambie el diff.
-- Para cambios de `data/integrity-manifest.json`, exigir revisión explícita de un mantenedor autorizado; la autorización de retiro y la eliminación del perfil deben ocurrir en PR separados.
-- Exigir que todos los checks siguientes terminen correctamente:
-  - `validar` — workflow **Validar código y datos del sitio**. Incluye JSON Schema, validación semántica, pruebas Python del sitio, Playwright y referencias.
-  - `python-tests` — workflow **Validar colector de estadísticas**. Incluye pruebas unitarias, conservación de registros, coherencia de identidad y métricas.
-  - `audit-public-links` — workflow **Auditoría externa de enlaces públicos**. Comprueba cuentas, enlaces, sesiones, VOD y clips.
-- Exigir que la rama esté actualizada con `main` antes de integrar, para que no se aprueben contratos sobre una base antigua.
-- Bloquear force-push y eliminación de `main`.
-- Incluir administradores en la regla o impedir bypasses, salvo una excepción deliberada y registrada.
+## Revisión de mantenedores (CODEOWNERS)
 
-No exigir `Cloudflare Pages` como sustituto de estos tres checks: es el despliegue de preview y no valida por sí solo la integridad de los datos.
+El archivo raíz `CODEOWNERS` asigna `* @losmoriartys-cmd`. La API de GitHub confirmó que `losmoriartys-cmd` tiene permiso `admin` en este repositorio. Los cambios de manifiesto, Roster, esquemas, colectores, workflows y código quedan asignados al propietario/mantenedor.
 
-## Configuración en GitHub
+**Acción administrativa todavía necesaria:** editar el ruleset y activar **Require review from Code Owners**. Después consultar el ruleset y verificar que la regla `pull_request.parameters.require_code_owner_review` sea `true`. El archivo CODEOWNERS por sí solo no obliga a GitHub a bloquear el merge sin esa opción. La integración disponible permite leer rulesets, pero no administrarlos.
 
-1. Abrir **Settings → Rules → Rulesets** (o **Settings → Branches** si se usa protección clásica).
-2. Crear una regla activa para `main`.
-3. Habilitar **Require a pull request before merging** y exigir al menos una aprobación de una persona distinta del autor; descartar aprobaciones obsoletas al actualizar el diff.
-4. Habilitar **Require status checks to pass** y agregar exactamente `validar`, `python-tests` y `audit-public-links`.
-5. Habilitar **Require branches to be up to date before merging**, bloquear force-push y eliminación, e incluir administradores.
-6. Guardar y volver a consultar la configuración para verificar que los tres contextos quedaron seleccionados.
+## Checks que mantienen estable la protección
 
-## Reglas de CI que mantienen estables los contextos
+- `validar`: validación de código/datos, contratos JSON Schema, integridad y Playwright.
+- `python-tests`: suite del colector y contratos Python.
+- `audit-public-links`: auditoría externa de enlaces públicos.
+- Los tres deben ejecutarse en cada PR hacia `main`; no agregar filtros de rutas a esos eventos.
 
-- `validar` se ejecuta en todo `pull_request` hacia `main` y por `push` únicamente en `main`.
-- `python-tests` se ejecuta en todo `pull_request` hacia `main` y por `push` a `main` cuando cambian datos, scripts, tests o workflows.
-- `audit-public-links` se ejecuta en todo `pull_request` hacia `main`, además del disparo manual y semanal. No usa filtro de rutas para que el contexto requerido siempre exista.
-- No poner filtros de rutas en estos tres eventos `pull_request`: un PR que no coincida con el filtro podría dejar el check requerido pendiente y bloquear la integración.
-- Los tests de política verifican que existan los tres jobs, que apunten a `main` y que no estén condicionados por filtros de rutas en PR. No pueden activar la protección de GitHub por sí mismos.
+## Verificación reproducible
 
-## Límite de permisos de esta automatización
+Ruleset: https://github.com/losmoriartys-cmd/legion-multiversal/rules/27883004
 
-La integración GitHub usada en este trabajo no tiene permiso para leer la protección clásica de ramas (respuesta 403) ni para administrar rulesets. La consulta GET de rulesets no encontró ninguno. Por tanto, no se debe declarar esta regla activa hasta que el administrador la configure en Settings y se pueda verificar el resultado.
+API: https://api.github.com/repos/losmoriartys-cmd/legion-multiversal/rulesets/27883004
+
+Valores ya verificados: `enforcement=active`, `bypass_actors=[]`, `strict_required_status_checks_policy=true`, contextos requeridos `validar`, `python-tests`, `audit-public-links`.
+
+## Límites
+
+La CI comprueba que los workflows y contextos existan, pero no puede activar reglas de GitHub. El permiso de administración no está disponible para esta integración. Tampoco se ha configurado todavía un backup independiente fuera de GitHub.
