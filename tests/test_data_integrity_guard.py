@@ -95,6 +95,7 @@ class IntegrityGuardBehaviorTests(unittest.TestCase):
         self.assertTrue(any("akuma" in e and "sin autorización" in e for e in errors), errors)
 
     def test_retirement_authorization_must_be_staged_before_roster_change(self):
+        self.diff = "M\\tdata/integrity-manifest.json"
         self.manifest["authorized_roster_removals"] = [
             {"id": "akuma", "reason": "Retiro solicitado", "reference": "Issue #123"}
         ]
@@ -106,6 +107,41 @@ class IntegrityGuardBehaviorTests(unittest.TestCase):
         self.roster["heroes"] = [hero for hero in self.roster["heroes"] if hero["id"] != "akuma"]
         (self.root / "data/roster.json").write_text(json.dumps(self.roster), encoding="utf-8")
         self.assertEqual(self.run_guard(), [])
+
+    def test_phase_a_rejects_roster_field_changes_even_without_id_changes(self):
+        self.diff = "M\\tdata/integrity-manifest.json\\nM\\tdata/roster.json"
+        self.manifest["authorized_roster_removals"] = [
+            {"id": "akuma", "reason": "Retiro solicitado", "reference": "Issue #123"}
+        ]
+        self.manifest_path.write_text(json.dumps(self.manifest), encoding="utf-8")
+        self.roster["heroes"][0]["display_name"] = "Nombre alterado"
+        (self.root / "data/roster.json").write_text(json.dumps(self.roster), encoding="utf-8")
+        errors = self.run_guard()
+        self.assertTrue(any("Fase A" in error and "solo puede modificar" in error for error in errors), errors)
+
+    def test_phase_a_rejects_any_additional_file_change(self):
+        self.diff = "M\\tdata/integrity-manifest.json\\nM\\tdata/games.json"
+        self.manifest["authorized_roster_removals"] = [
+            {"id": "akuma", "reason": "Retiro solicitado", "reference": "Issue #123"}
+        ]
+        self.manifest_path.write_text(json.dumps(self.manifest), encoding="utf-8")
+        (self.root / "data/games.json").write_text('{"changed": true}', encoding="utf-8")
+        errors = self.run_guard()
+        self.assertTrue(any("Fase A" in error and "solo puede modificar" in error for error in errors), errors)
+
+    def test_phase_a_rejects_new_files_and_renames(self):
+        for diff in (
+            "M\\tdata/integrity-manifest.json\\nA\\tdata/new.json",
+            "M\\tdata/integrity-manifest.json\\nR100\\tdata/old.json\\tdata/new.json",
+        ):
+            with self.subTest(diff=diff):
+                self.diff = diff
+                self.manifest["authorized_roster_removals"] = [
+                    {"id": "akuma", "reason": "Retiro solicitado", "reference": "Issue #123"}
+                ]
+                self.manifest_path.write_text(json.dumps(self.manifest), encoding="utf-8")
+                errors = self.run_guard()
+                self.assertTrue(any("Fase A" in error and "solo puede modificar" in error for error in errors), errors)
 
     def test_existing_retirement_authorization_cannot_be_rewritten(self):
         approved = {"id": "akuma", "reason": "Aprobado", "reference": "Issue #123"}
