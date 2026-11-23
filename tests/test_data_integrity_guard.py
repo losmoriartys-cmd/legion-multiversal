@@ -154,7 +154,7 @@ class IntegrityGuardBehaviorTests(unittest.TestCase):
         self.assertTrue(any("ausente en el árbol" in e for e in errors), errors)
 
     def test_critical_file_cannot_be_replaced_by_external_symlink(self):
-        external = self.root.parent / "external-games.json"
+        external = self.root / "external-games.json"
         external.write_text("{}", encoding="utf-8")
         (self.root / "data/games.json").unlink()
         (self.root / "data/games.json").symlink_to(external)
@@ -162,7 +162,7 @@ class IntegrityGuardBehaviorTests(unittest.TestCase):
         self.assertTrue(any("Ruta crítica insegura" in e and "games.json" in e for e in errors), errors)
 
     def test_integrity_manifest_cannot_be_loaded_through_symlink(self):
-        external = self.root.parent / "external-manifest.json"
+        external = self.root / "external-manifest.json"
         external.write_text(self.baseline_manifest, encoding="utf-8")
         self.manifest_path.unlink()
         self.manifest_path.symlink_to(external)
