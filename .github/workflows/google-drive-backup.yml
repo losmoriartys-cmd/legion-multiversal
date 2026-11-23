@@ -2,8 +2,7 @@ name: Google Drive backup (daily)
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "17 5 * * *"
+  # Schedule intentionally disabled until OAuth and isolated restore are verified.
 
 permissions:
   contents: read
