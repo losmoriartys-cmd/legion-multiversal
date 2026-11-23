@@ -20,6 +20,7 @@ class IntegrityGuardBehaviorTests(unittest.TestCase):
         self.manifest_path = self.root / "data/integrity-manifest.json"
         self.critical = ["data/roster.json", "data/games.json"]
         self.manifest = {"critical_files": self.critical, "protected_roster_ids": IDS, "authorized_roster_removals": []}
+        self.baseline_manifest = json.dumps(self.manifest)
         self.manifest_path.write_text(json.dumps(self.manifest), encoding="utf-8")
         self.roster = {"heroes": [{"id": x} for x in IDS]}
         (self.root / "data/roster.json").write_text(json.dumps(self.roster), encoding="utf-8")
@@ -40,6 +41,8 @@ class IntegrityGuardBehaviorTests(unittest.TestCase):
         if args[:2] == ("diff", "--name-status"):
             return self.diff
         if args and args[0] == "show":
+            if len(args) >= 2 and args[1].endswith(":data/integrity-manifest.json"):
+                return self.baseline_manifest
             return self.baseline
         if args and args[0] == "rev-parse":
             return "a" * 40
@@ -62,14 +65,43 @@ class IntegrityGuardBehaviorTests(unittest.TestCase):
         self.assertTrue(any("akuma" in e and "sin autorización" in e for e in errors), errors)
         self.assertTrue(any("ID protegido ausente" in e and "akuma" in e for e in errors), errors)
 
-    def test_authorized_roster_retirement_requires_reason_and_reference_and_passes(self):
+    def test_authorized_roster_retirement_in_baseline_requires_reason_and_reference_and_passes(self):
+        authorization = {"id": "akuma", "reason": "Retiro solicitado", "reference": "Issue #123"}
+        self.manifest["authorized_roster_removals"] = [authorization]
+        self.baseline_manifest = json.dumps(self.manifest)
+        self.manifest_path.write_text(json.dumps(self.manifest), encoding="utf-8")
         self.roster["heroes"] = [h for h in self.roster["heroes"] if h["id"] != "akuma"]
         (self.root / "data/roster.json").write_text(json.dumps(self.roster), encoding="utf-8")
-        self.manifest["authorized_roster_removals"] = [{"id":"akuma","reason":"Retiro solicitado","reference":"Issue #123"}]
+        errors = self.run_guard()
+        self.assertEqual(errors, [], errors)
+
+    def test_same_pr_cannot_self_authorize_roster_retirement(self):
+        self.roster["heroes"] = [h for h in self.roster["heroes"] if h["id"] != "akuma"]
+        (self.root / "data/roster.json").write_text(json.dumps(self.roster), encoding="utf-8")
+        self.manifest["authorized_roster_removals"] = [{"id": "akuma", "reason": "Retiro solicitado", "reference": "Issue #123"}]
         self.manifest["protected_roster_ids"] = [x for x in IDS if x != "akuma"]
         self.manifest_path.write_text(json.dumps(self.manifest), encoding="utf-8")
         errors = self.run_guard()
-        self.assertEqual(errors, [], errors)
+        self.assertTrue(any("Política de integridad modificada" in e for e in errors), errors)
+        self.assertTrue(any("akuma" in e and "sin autorización" in e for e in errors), errors)
+
+    def test_same_pr_cannot_weaken_critical_inventory_or_protected_ids(self):
+        self.manifest["critical_files"] = ["data/roster.json"]
+        self.manifest["protected_roster_ids"] = [x for x in IDS if x != "akuma"]
+        self.manifest_path.write_text(json.dumps(self.manifest), encoding="utf-8")
+        (self.root / "data/games.json").unlink()
+        self.diff = "D\\tdata/games.json"
+        errors = self.run_guard()
+        self.assertTrue(any("Política de integridad modificada" in e for e in errors), errors)
+        self.assertTrue(any("data/games.json" in e for e in errors), errors)
+        self.assertTrue(any("akuma" in e and "ID protegido ausente" in e for e in errors), errors)
+
+    def test_missing_baseline_manifest_fails_closed(self):
+        self.git_patch.stop()
+        with patch.object(guard, "git", side_effect=RuntimeError("baseline unavailable")):
+            errors = self.run_guard()
+        self.assertTrue(any("No se pudo cargar la política de integridad" in e for e in errors), errors)
+        self.git_patch.start()
 
     def test_authorization_without_reason_or_reference_does_not_pass(self):
         self.roster["heroes"] = [h for h in self.roster["heroes"] if h["id"] != "akuma"]

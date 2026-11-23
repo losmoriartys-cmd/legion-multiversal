@@ -16,12 +16,26 @@ def git(*args: str) -> str:
 def load_manifest():
     return json.loads(MANIFEST.read_text(encoding="utf-8"))
 
+def load_baseline_manifest(base_ref: str):
+    return json.loads(git("show", f"{base_ref}:data/integrity-manifest.json"))
+
 def check(base_ref: str, recovery_report: bool = False) -> list[str]:
-    manifest = load_manifest()
     errors = []
-    critical = set(manifest["critical_files"])
-    ids = set(manifest["protected_roster_ids"])
-    removals = {item["id"]: item for item in manifest.get("authorized_roster_removals", [])}
+    try:
+        baseline_manifest = load_baseline_manifest(base_ref)
+        manifest = load_manifest()
+        policy_keys = ("critical_files", "protected_roster_ids", "authorized_roster_removals")
+        for key in policy_keys:
+            if manifest.get(key) != baseline_manifest.get(key):
+                errors.append(
+                    f"Política de integridad modificada en el mismo PR ({key}); "
+                    "la autorización/inventario debe existir en la línea base revisada."
+                )
+        critical = set(baseline_manifest["critical_files"])
+        ids = set(baseline_manifest["protected_roster_ids"])
+        removals = {item["id"]: item for item in baseline_manifest.get("authorized_roster_removals", [])}
+    except Exception as exc:
+        return [f"No se pudo cargar la política de integridad de la línea base {base_ref}: {exc}"]
     changed = git("diff", "--name-status", f"{base_ref}...HEAD").splitlines()
     deleted = set()
     for line in changed:
