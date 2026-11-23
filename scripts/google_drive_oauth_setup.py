@@ -26,6 +26,7 @@ class Handler(BaseHTTPRequestHandler):
         print("\nREFRESH TOKEN (copy securely into GitHub Actions secret GOOGLE_OAUTH_REFRESH_TOKEN):")
         print(token.get("refresh_token","MISSING"))
         print("Token data will not be written to disk.")
-        self.server.shutdown()
+        import threading
+        threading.Thread(target=self.server.shutdown,daemon=True).start()
     def log_message(self,*args): pass
 HTTPServer(("127.0.0.1",8765),Handler).serve_forever()
