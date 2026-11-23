@@ -87,10 +87,10 @@ def main():
             if dates and max(dates)<cutoff:
                 expired.extend(items)
         deleted=0
-        for item in expired:
-            request(API+"/files/"+urllib.parse.quote(item["id"],safe=""),"DELETE",{"Authorization":"Bearer "+token})
-            deleted+=1
-        print(json.dumps({"result":"verified","backup_id":backup_id,"files":uploaded,"expired_deleted":deleted},indent=2))
+        # Google Drive has no atomic multi-file delete. To avoid partial rotation,
+        # this implementation never deletes automatically; it reports candidates.
+        print(json.dumps({"result":"verified","backup_id":backup_id,"files":uploaded,
+                         "expired_candidates":len(expired),"automatic_deletion":"disabled_non_atomic_drive_api"},indent=2))
 
 if __name__=="__main__":
     main()
