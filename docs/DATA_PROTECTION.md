@@ -43,3 +43,25 @@ La recuperación desde Git no es un backup independiente. El repositorio todaví
 - GitHub CODEOWNERS no reemplaza la revisión de contenido: el mantenedor debe comprobar motivo, referencia, alcance y consumidores.
 - La protección Git conserva objetos históricos mientras el repositorio siga disponible; no cubre pérdida o indisponibilidad total de la cuenta/proveedor.
 - El backup independiente queda pendiente de configurar contra un destino externo con credenciales y retención verificables.
+
+## Backup independiente · diseño y estado de prueba
+
+Se incorporó `scripts/create_repo_backup.sh`, que genera:
+- `legion-multiversal.bundle`: refs e historial Git completo disponible en el checkout.
+- `legion-multiversal-source.tar.gz`: snapshot de los archivos de trabajo, incluidos los recursos presentes en el checkout.
+- `backup-manifest.txt` y `SHA256SUMS`: identificación del commit, fecha UTC y checksums.
+
+El script verifica el bundle con `git bundle verify`, inspecciona el tar y valida los checksums localmente. El workflow manual `.github/workflows/independent-backup.yml` sube esos artefactos a cualquier destino S3-compatible y vuelve a descargarlos para validar checksums, bundle y snapshot (`BACKUP_EXTERNAL_ROUNDTRIP: PASS`).
+
+### Configuración necesaria en GitHub Actions
+
+Crear estos repository secrets:
+- `BACKUP_S3_ENDPOINT`: endpoint HTTPS del proveedor (por ejemplo, endpoint de Cloudflare R2).
+- `BACKUP_S3_BUCKET`: bucket privado dedicado.
+- `BACKUP_S3_ACCESS_KEY_ID`.
+- `BACKUP_S3_SECRET_ACCESS_KEY`.
+- `BACKUP_S3_REGION` (opcional; valor por defecto `auto`).
+
+Antes de habilitar el schedule, configurar en el proveedor una política de retención y versionado acorde a la política de recuperación, acceso restringido y cifrado en reposo. Recomendación inicial: conservar al menos 30 copias diarias y 12 mensuales, con credenciales de escritura limitadas al bucket de backup y credenciales de lectura disponibles para restauración.
+
+**Estado:** el generador y el workflow están versionados, pero no se ejecutó aún una subida/descarga real: faltan endpoint, bucket y credenciales. No marcar el backup externo como probado ni activar la ejecución programada hasta completar la primera ejecución manual exitosa y ensayar una restauración en un directorio aislado.
