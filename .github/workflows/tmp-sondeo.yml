@@ -1,0 +1,48 @@
+name: tmp sondeo
+on:
+  push:
+    branches: [tmp-sondeo]
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Probar fuentes
+        env:
+          TWITCH_CLIENT_ID: ${{ secrets.TWITCH_CLIENT_ID }}
+          TWITCH_CLIENT_SECRET: ${{ secrets.TWITCH_CLIENT_SECRET }}
+        run: |
+          python - <<'PY'
+          import json, urllib.request, update_stats as u
+          t = u.get_token()
+          logins = ["losmoriartys","ther0d3r1k","ladymoriarty01","ardipii","akumazoldyck","habitos_atomicos","daved0608"]
+          for l in logins:
+              r = u.helix_get("users", t, {"login": l})
+              if not r:
+                  print("USER|"+l+"|none"); continue
+              uid = r[0]["id"]; print("USER|"+l+"|"+uid+"|"+r[0].get("broadcaster_type",""))
+              try:
+                  res = u.request_json("https://api.twitch.tv/helix/channels/followers?broadcaster_id="+uid, {"Client-ID": u.CLIENT_ID, "Authorization": "Bearer "+t})
+                  print("HELIXAPP|"+l+"|"+str(res.get("total")))
+              except Exception as e:
+                  print("HELIXAPP|"+l+"|ERR "+str(e)[:120])
+              try:
+                  res = u.request_json("https://api.twitch.tv/helix/schedule?broadcaster_id="+uid+"&first=10", {"Client-ID": u.CLIENT_ID, "Authorization": "Bearer "+t})
+                  d = res.get("data", {})
+                  segs = d.get("segments") or []
+                  print("SCHEDULE|"+l+"|"+json.dumps({"n":len(segs),"vacation":d.get("vacation"),"start":[s.get("start_time") for s in segs[:4]],"rec":[s.get("is_recurring") for s in segs[:4]]}))
+              except Exception as e:
+                  print("SCHEDULE|"+l+"|ERR "+str(e)[:120])
+          try:
+              req = urllib.request.Request("https://api.ivr.fi/v2/twitch/user?login="+",".join(logins), headers={"User-Agent":"legion-multiversal-probe"})
+              data = json.loads(urllib.request.urlopen(req, timeout=30).read())
+              for d in data:
+                  print("IVR|"+d.get("login","?")+"|"+str(d.get("followers"))+"|"+str(d.get("createdAt")))
+          except Exception as e:
+              print("IVR|ERR "+str(e)[:200])
+          PY
