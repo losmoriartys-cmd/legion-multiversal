@@ -25,9 +25,9 @@ def sha256(path):
         for block in iter(lambda:f.read(1024*1024),b""): h.update(block)
     return h.hexdigest()
 
-def upload(path, folder, token, backup_id):
+def upload(path, folder, token, backup_id, expected_count):
     boundary="legion-"+backup_id
-    metadata=json.dumps({"name":path.name,"parents":[folder],"appProperties":{"legionBackup":"true","backupId":backup_id,"backupCount":str(os.environ.get("BACKUP_EXPECTED_COUNT","0"))}}).encode()
+    metadata=json.dumps({"name":path.name,"parents":[folder],"appProperties":{"legionBackup":"true","backupId":backup_id,"backupCount":str(expected_count)}}).encode()
     body=(b"--"+boundary.encode()+b"\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n"+metadata+
           b"\r\n--"+boundary.encode()+b"\r\nContent-Type: application/octet-stream\r\n\r\n"+path.read_bytes()+
           b"\r\n--"+boundary.encode()+b"--\r\n")
@@ -57,7 +57,7 @@ def main():
         # Phase 1: upload every artifact; no deletion is allowed in this phase.
         uploaded=[]
         for path in files:
-            remote=upload(path,folder,token,backup_id)
+            remote=upload(path,folder,token,backup_id,len(files))
             uploaded.append({"id":remote["id"],"name":remote["name"],"sha256":sha256(path),"backupId":backup_id})
         # Phase 2: download and verify all uploaded artifacts. Any failure aborts retention.
         for item,path in zip(uploaded,files):
