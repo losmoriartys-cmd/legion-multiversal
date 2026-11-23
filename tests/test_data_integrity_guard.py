@@ -90,6 +90,8 @@ class IntegrityGuardBehaviorTests(unittest.TestCase):
         self.manifest["protected_roster_ids"] = [x for x in IDS if x != "akuma"]
         self.manifest_path.write_text(json.dumps(self.manifest), encoding="utf-8")
         (self.root / "data/games.json").unlink()
+        self.roster["heroes"] = [h for h in self.roster["heroes"] if h["id"] != "akuma"]
+        (self.root / "data/roster.json").write_text(json.dumps(self.roster), encoding="utf-8")
         self.diff = "D\\tdata/games.json"
         errors = self.run_guard()
         self.assertTrue(any("Política de integridad modificada" in e for e in errors), errors)
