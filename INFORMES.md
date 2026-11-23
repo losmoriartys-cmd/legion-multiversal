@@ -4127,3 +4127,13 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **Backup independiente:** pendiente de seleccionar y configurar un destino externo a GitHub (por ejemplo, almacenamiento S3-compatible/R2) con credenciales, retención, cifrado y política de restauración. El historial Git y los artefactos Actions no se contabilizan como backup independiente. La prueba de restauración no se declara realizada.
 - **Validación:** los cambios de esta entrada generan un SHA nuevo y deben pasar CI completa; no usar los resultados del SHA anterior como evidencia del nuevo HEAD.
 - **Estado:** PR #97 permanece abierto y Draft. Sin merge, sin cambios en `main` y sin despliegue de producción.
+
+
+### 2026-11-23 · BASE-02 · diseño de backup externo versionado
+
+- Se añadieron `scripts/create_repo_backup.sh` y `.github/workflows/independent-backup.yml`.
+- El generador produce bundle Git, snapshot de archivos, manifiesto y SHA-256; verifica localmente el bundle, el tar y los checksums.
+- El workflow manual está preparado para destino S3-compatible: sube los tres archivos y realiza descarga de retorno para comprobar checksums, bundle y snapshot.
+- **No probado contra almacenamiento externo:** faltan configurar los secretos `BACKUP_S3_ENDPOINT`, `BACKUP_S3_BUCKET`, `BACKUP_S3_ACCESS_KEY_ID` y `BACKUP_S3_SECRET_ACCESS_KEY` (región opcional). El schedule permanece deshabilitado.
+- Antes de declarar el backup operativo se exige una ejecución manual exitosa y restauración real en un directorio aislado. Retención recomendada: 30 diarios + 12 mensuales, configurada en el proveedor.
+- **Pendiente CODEOWNERS:** activar `Require review from Code Owners` en ruleset y verificar `require_code_owner_review: true`. La cuenta `@losmoriartys-cmd` fue verificada con permiso admin.
