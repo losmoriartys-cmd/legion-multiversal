@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="es">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Seleccionar carpeta de backup · Legión Multiversal</title>
+<style>body{font:16px system-ui;max-width:720px;margin:3rem auto;padding:0 1rem;background:#111;color:#eee}input{width:100%;padding:.65rem;margin:.4rem 0 1rem;box-sizing:border-box}button{padding:.7rem 1rem}code{overflow-wrap:anywhere}#status{margin-top:1rem}</style></head>
+<body><h1>Seleccionar carpeta de Google Drive</h1>
+<p>Esta herramienta abre Google Picker para que elijas explícitamente la carpeta de destino. No envía ni guarda el token en esta página.</p>
+<label>API key de Google Picker<input id="key" autocomplete="off"></label>
+<label>OAuth access token temporal (scope drive.file)<input id="token" autocomplete="off"></label>
+<label>Google Cloud Project Number / App ID<input id="app" autocomplete="off"></label>
+<button id="pick">Abrir selector de carpeta</button><p id="status"></p>
+<script>
+let pickedFolder=null;
+document.getElementById('pick').onclick=()=>{
+ const key=document.getElementById('key').value.trim(), token=document.getElementById('token').value.trim(), app=document.getElementById('app').value.trim();
+ if(!key||!token||!app){document.getElementById('status').textContent='Completá los tres campos.';return}
+ const script=document.createElement('script');script.src='https://apis.google.com/js/api.js';
+ script.onload=()=>gapi.load('picker',()=>{const picker=new google.picker.PickerBuilder()
+ .addView(new google.picker.DocsView(google.picker.ViewId.FOLDERS).setSelectFolderEnabled(true).setMimeTypes('application/vnd.google-apps.folder'))
+ .setOAuthToken(token).setDeveloperKey(key).setAppId(app).setCallback(data=>{
+ if(data.action===google.picker.Action.PICKED){pickedFolder=data.docs[0];document.getElementById('status').innerHTML='Carpeta seleccionada. ID (guardalo como secreto GOOGLE_DRIVE_FOLDER_ID): <code>'+pickedFolder.id+'</code>'; }
+ else if(data.action===google.picker.Action.CANCEL){document.getElementById('status').textContent='Selección cancelada.'}
+ }).build();picker.setVisible(true)});
+ document.head.appendChild(script)
+};
+</script></body></html>
