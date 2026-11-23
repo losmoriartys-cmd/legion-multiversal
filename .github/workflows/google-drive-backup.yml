@@ -17,6 +17,10 @@ jobs:
         with:
           fetch-depth: 0
           lfs: true
+      - name: Run backup engine failure-injection tests
+        run: python -m unittest discover -s tests -p 'test_google_drive_backup_failures.py' -v
+      - name: Syntax-check backup and restore scripts
+        run: python -m py_compile scripts/google_drive_backup.py scripts/google_drive_restore.py scripts/google_drive_oauth_setup.py
       - name: Create, upload, download and verify backup
         env:
           GOOGLE_OAUTH_CLIENT_ID: ${{ secrets.GOOGLE_OAUTH_CLIENT_ID }}
