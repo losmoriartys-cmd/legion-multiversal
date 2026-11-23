@@ -8,7 +8,7 @@ SNAPSHOT="$OUT_DIR/legion-multiversal-source.tar.gz"
 
 git bundle create "$BUNDLE" --all
 git bundle verify "$BUNDLE"
-tar --exclude='./.git' -czf "$SNAPSHOT" .
+tar --exclude='./.git' --exclude="./$OUT_DIR" -czf "$SNAPSHOT" .
 tar -tzf "$SNAPSHOT" >/dev/null
 
 {
