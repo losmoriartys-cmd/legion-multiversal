@@ -4112,3 +4112,18 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **Acción pendiente:** editar el ruleset en GitHub y activar `Require branches to be up to date before merging`; volver a consultar el recurso por API y confirmar que `strict_required_status_checks_policy: true`. Después, repetir la comprobación de reglas activas para `main` y conservar la respuesta como evidencia.
 - **Estado BASE-02:** ABIERTO. La protección existe y está activa, pero no satisface todavía todos los requisitos definidos. No fusionar PR #97 ni modificar producción por esta verificación.
 - **Rama documental:** este registro se añade a `feat/base-02-canonical-data-contract`; no modifica `main`. El commit documental cambia el SHA del PR, por lo que los checks del SHA anterior no deben considerarse evidencia CI del nuevo HEAD.
+
+
+---
+
+## 2026-11-23 · BASE-02 · endurecimiento Fase A, CODEOWNERS y deuda técnica
+
+- **Guardia de integridad:** cuando un PR incorpora una autorización nueva de retiro, el diff completo debe contener únicamente una modificación `M` de `data/integrity-manifest.json`. Cualquier otro archivo, cambio de Roster, alta, borrado o renombrado bloquea CI.
+- **Pruebas negativas agregadas:** autorización acompañada de modificación de campos del Roster sin alterar IDs; modificación de otro archivo; alta de archivo; renombrado. La prueba del flujo de dos fases se ajustó para representar el diff real de Git.
+- **Mantenedor:** se creó `CODEOWNERS` raíz con `* @losmoriartys-cmd`. GitHub confirma que esa cuenta tiene permiso `admin`. **Pendiente administrativo:** activar `Require review from Code Owners` en el ruleset y verificar `require_code_owner_review: true` por API. La integración disponible solo permite leer rulesets.
+- **Colector:** `update_stats.py` ahora lee el archivo OAuth cifrado mediante un context manager y cierra el descriptor; elimina el `ResourceWarning` detectado en CI sin cambiar el formato ni el flujo de tokens.
+- **Documentación:** `docs/DATA_PROTECTION.md` describe el aislamiento real de Fase A, pruebas negativas, CODEOWNERS y límites de recuperación. `docs/BRANCH_PROTECTION.md` refleja el ruleset activo, bypass vacío, tres checks, sincronización estricta y la activación CODEOWNERS todavía pendiente.
+- **Protección de main verificada:** ruleset `PROTECCION-MAIN-LEGION` activo, target `~DEFAULT_BRANCH` = `main`, bypass vacío, checks `validar`, `python-tests`, `audit-public-links`, `strict_required_status_checks_policy: true`.
+- **Backup independiente:** pendiente de seleccionar y configurar un destino externo a GitHub (por ejemplo, almacenamiento S3-compatible/R2) con credenciales, retención, cifrado y política de restauración. El historial Git y los artefactos Actions no se contabilizan como backup independiente. La prueba de restauración no se declara realizada.
+- **Validación:** los cambios de esta entrada generan un SHA nuevo y deben pasar CI completa; no usar los resultados del SHA anterior como evidencia del nuevo HEAD.
+- **Estado:** PR #97 permanece abierto y Draft. Sin merge, sin cambios en `main` y sin despliegue de producción.
