@@ -1,6 +1,7 @@
 const {test,expect}=require('@playwright/test');
 
 test.beforeEach(async({page})=>{
+  await page.addInitScript(()=>{document.addEventListener('DOMContentLoaded',()=>{const style=document.createElement('style');style.textContent='html{scroll-behavior:auto!important}';document.head.appendChild(style);});});
   await page.goto('/#chapter-12');
   await page.evaluate(()=>window.arsenalRegistryReady);
   await expect(page.locator('#arsenal-registry')).toHaveAttribute('data-arsenal-ready','true');
