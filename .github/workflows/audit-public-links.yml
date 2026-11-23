@@ -1,0 +1,35 @@
+name: Auditoría externa de enlaces públicos
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+  schedule:
+    - cron: "0 12 * * 1"
+
+permissions:
+  contents: read
+
+jobs:
+  audit-public-links:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Auditar cuentas, enlaces, sesiones, VOD y clips
+        id: audit
+        run: python scripts/audit_public_links.py --output artifacts/public-link-audit.json
+      - name: Publicar informe de enlaces
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: public-link-audit-${{ github.sha }}
+          path: artifacts/public-link-audit.json
+          if-no-files-found: warn
+          retention-days: 30

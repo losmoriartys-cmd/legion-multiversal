@@ -1,0 +1,237 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://legion-multiversal.pages.dev/schemas/sullygnome-data.schema.json",
+  "title": "Legión Multiversal — Snapshot externo de SullyGnome",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "source",
+    "generated_at_utc",
+    "source_methodology",
+    "channels_total",
+    "channels_with_stream_data",
+    "channels",
+    "metric_definitions"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "source": {
+      "const": "SullyGnome"
+    },
+    "generated_at_utc": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "source_methodology": {
+      "type": "string",
+      "minLength": 1
+    },
+    "channels_total": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "channels_with_stream_data": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "channels": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "platform",
+          "login",
+          "display_name",
+          "source",
+          "source_url",
+          "checked_at_utc",
+          "status",
+          "period",
+          "streams",
+          "summary",
+          "notes"
+        ],
+        "properties": {
+          "platform": {
+            "const": "twitch"
+          },
+          "login": {
+            "type": "string",
+            "minLength": 1
+          },
+          "display_name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "source": {
+            "const": "SullyGnome"
+          },
+          "source_url": {
+            "type": "string",
+            "format": "uri",
+            "pattern": "^https://"
+          },
+          "checked_at_utc": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "status": {
+            "type": "string",
+            "minLength": 1
+          },
+          "period": {
+            "type": "object",
+            "required": [
+              "start_date",
+              "end_date"
+            ],
+            "properties": {
+              "start_date": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date"
+              },
+              "end_date": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date"
+              },
+              "label": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "additionalProperties": false
+          },
+          "streams": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "date",
+                "duration_minutes",
+                "average_viewers",
+                "peak_viewers",
+                "hours_watched"
+              ],
+              "properties": {
+                "date": {
+                  "type": "string",
+                  "format": "date"
+                },
+                "duration_minutes": {
+                  "type": "number",
+                  "minimum": 0
+                },
+                "average_viewers": {
+                  "type": "number",
+                  "minimum": 0
+                },
+                "peak_viewers": {
+                  "type": "number",
+                  "minimum": 0
+                },
+                "hours_watched": {
+                  "type": "number",
+                  "minimum": 0
+                },
+                "followers_reported": {
+                  "type": "number",
+                  "minimum": 0
+                }
+              },
+              "additionalProperties": true
+            }
+          },
+          "summary": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "streams_count": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ],
+                    "minimum": 0
+                  },
+                  "airtime_minutes": {
+                    "type": [
+                      "number",
+                      "null"
+                    ],
+                    "minimum": 0
+                  },
+                  "airtime_hours": {
+                    "type": [
+                      "number",
+                      "null"
+                    ],
+                    "minimum": 0
+                  },
+                  "hours_watched": {
+                    "type": [
+                      "number",
+                      "null"
+                    ],
+                    "minimum": 0
+                  },
+                  "average_viewers_duration_weighted": {
+                    "type": [
+                      "number",
+                      "null"
+                    ],
+                    "minimum": 0
+                  },
+                  "peak_viewers": {
+                    "type": [
+                      "number",
+                      "null"
+                    ],
+                    "minimum": 0
+                  },
+                  "followers_gain_reported": {
+                    "type": [
+                      "number",
+                      "null"
+                    ],
+                    "minimum": 0
+                  }
+                },
+                "additionalProperties": true
+              }
+            ]
+          },
+          "notes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "metric_definitions": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "additionalProperties": true
+}
