@@ -40,7 +40,7 @@
       </section>
       <article class="sheet">
         <h2>1. Responsable y alcance</h2>
-        <p>El responsable de esta iniciativa es Legión Multiversal, un proyecto independiente de creación de contenido y comunidad. Para consultas sobre privacidad, el canal de contacto es <a href="mailto:losmoriartys@gmail.com">losmoriartys@gmail.com</a>.</p>
+        <p>Legión Multiversal es la denominación del proyecto y de su marca pública; no identifica por sí sola a una persona jurídica ni determina quién asume legalmente la responsabilidad del tratamiento. La identidad del responsable legal (persona física o entidad), su jurisdicción y, cuando corresponda, su domicilio de contacto deben completarse antes de publicar esta política como aviso legal definitivo. Hasta entonces, el proyecto no presenta esta página como una identificación jurídica completa. El canal de contacto operativo para consultas es <a href="mailto:losmoriartys@gmail.com">losmoriartys@gmail.com</a>.</p>
         <p><strong>Estado actual:</strong> al 23 de noviembre de 2026, la integración de Google Drive para respaldos se encuentra en preparación y no está habilitada. La creación del cliente OAuth en Google Cloud, por sí sola, no implica que la aplicación ya acceda a una cuenta ni que se estén transfiriendo archivos. Esta política describe el uso previsto cuando la integración sea implementada, probada y activada.</p>
         <p>Esta política se limita a la futura aplicación de respaldo. No reemplaza los avisos que puedan corresponder a otras funciones, formularios o servicios del sitio web.</p>
 
@@ -53,7 +53,7 @@
           <li>El contenido de los archivos de respaldo del repositorio que la aplicación genere y transfiera a la ubicación autorizada.</li>
           <li>Tokens OAuth necesarios para renovar la autorización. Su almacenamiento seguro deberá configurarse y verificarse antes de habilitar ejecuciones automatizadas; nunca deberán incorporarse al código fuente.</li>
         </ul>
-        <p>La aplicación no necesita leer correos, contactos, fotografías personales ni otros archivos ajenos al proceso de respaldo.</p>
+        <p>La aplicación no realizará una búsqueda general de archivos personales en Google Drive: el acceso previsto se limita a los archivos y ubicaciones autorizados mediante el flujo de selección que se implemente. Sin embargo, el contenido del respaldo puede incluir cualquier dato que forme parte de los archivos del repositorio incluidos en el paquete generado. Esto puede abarcar código, documentación, registros del proyecto, datos del Roster, nombres de usuario, enlaces a perfiles públicos, métricas y otros datos que estén presentes en esos archivos. El inventario y la exclusión de datos innecesarios deberán verificarse sobre el artefacto real antes de habilitar la transferencia.</p>
 
         <h2>3. Finalidades de uso</h2>
         <ul>
@@ -75,11 +75,11 @@
 
         <h2>5. Protección y conservación</h2>
         <p>Antes de activar el servicio, las credenciales OAuth deberán guardarse en un mecanismo de secretos con acceso restringido, no en archivos del repositorio, código fuente, informes públicos ni registros de ejecución. La utilización de GitHub Actions Secrets es una opción prevista, pero todavía debe implementarse y verificarse.</p>
-        <p>La política de conservación, rotación y eliminación de las copias deberá quedar definida y documentada antes de iniciar los respaldos periódicos. Mientras la integración no esté habilitada, no se crean copias en Google Drive mediante esta aplicación.</p>
+        <p>A la fecha de esta versión no existe una integración activa ni copias almacenadas en Google Drive mediante esta aplicación. Por lo tanto, todavía no hay un plazo de conservación operativo que pueda declararse como vigente. Antes de habilitar los respaldos deberán aprobarse y publicarse el plazo de conservación, la frecuencia de rotación, el procedimiento de eliminación de copias vencidas y la forma de atender solicitudes de borrado. La activación queda bloqueada hasta que esas reglas estén definidas, implementadas y probadas.</p>
         <p>Ningún método de transmisión o almacenamiento puede garantizar seguridad absoluta. Antes de la activación se deberán probar controles razonables de acceso, integridad, restauración y protección de credenciales.</p>
 
         <h2>6. Control de acceso y revocación</h2>
-        <p>Cuando la integración esté activa, la persona usuaria podrá retirar el acceso desde la configuración de seguridad de su cuenta de Google. La revocación impedirá nuevas operaciones que dependan de esa autorización. No eliminará automáticamente copias ya almacenadas; esas copias deberán borrarse directamente desde Google Drive.</p>
+        <p>Cuando la integración esté activa, la persona usuaria podrá retirar el acceso desde la configuración de seguridad de su cuenta de Google. La revocación impedirá nuevas operaciones que dependan de esa autorización. No eliminará automáticamente copias ya almacenadas; el procedimiento de eliminación deberá quedar documentado y permitir borrar las copias de respaldo correspondientes, además de contemplar los límites técnicos de retención y recuperación.</p>
 
         <h2>7. Uso limitado de los datos de Google</h2>
         <p>Una vez implementada, la aplicación deberá utilizar la información recibida de las API de Google únicamente para las funciones de respaldo descritas en esta política y respetar la <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener noreferrer">Política de datos de usuario de los servicios API de Google</a>, incluidos sus requisitos de uso limitado. La conformidad efectiva solo podrá confirmarse después de revisar y probar la implementación real.</p>
