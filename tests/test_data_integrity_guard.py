@@ -153,5 +153,36 @@ class IntegrityGuardBehaviorTests(unittest.TestCase):
         errors = self.run_guard()
         self.assertTrue(any("ausente en el árbol" in e for e in errors), errors)
 
+    def test_critical_file_cannot_be_replaced_by_external_symlink(self):
+        external = self.root.parent / "external-games.json"
+        external.write_text("{}", encoding="utf-8")
+        (self.root / "data/games.json").unlink()
+        (self.root / "data/games.json").symlink_to(external)
+        errors = self.run_guard()
+        self.assertTrue(any("Ruta crítica insegura" in e and "games.json" in e for e in errors), errors)
+
+    def test_integrity_manifest_cannot_be_loaded_through_symlink(self):
+        external = self.root.parent / "external-manifest.json"
+        external.write_text(self.baseline_manifest, encoding="utf-8")
+        self.manifest_path.unlink()
+        self.manifest_path.symlink_to(external)
+        errors = self.run_guard()
+        self.assertTrue(any("manifiesto de integridad inseguro" in e.lower() for e in errors), errors)
+
+    def test_critical_file_rename_does_not_evade_inventory_check(self):
+        (self.root / "data/games.json").rename(self.root / "data/games-archived.json")
+        self.diff = "R100\\tdata/games.json\\tdata/games-archived.json"
+        errors = self.run_guard()
+        self.assertTrue(any("ausente en el árbol actual" in e and "games.json" in e for e in errors), errors)
+
+    def test_pull_request_workflow_must_execute_integrity_guard_unconditionally(self):
+        workflow = (ROOT / ".github/workflows/validar-sitio.yml").read_text(encoding="utf-8")
+        self.assertIn("  pull_request:", workflow)
+        marker = "      - name: Proteger inventario crítico, roster y recuperación Git"
+        self.assertIn(marker, workflow)
+        step = workflow.split(marker, 1)[1].split("      - name:", 1)[0]
+        self.assertIn("run: python scripts/guard_data_integrity.py --base-ref origin/main --recovery-report", step)
+        self.assertNotIn("if:", step)
+
 if __name__ == "__main__":
     unittest.main()

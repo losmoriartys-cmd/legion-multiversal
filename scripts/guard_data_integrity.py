@@ -20,7 +20,23 @@ def git(*args: str) -> str:
         raise RuntimeError(result.stderr.strip() or f"git {' '.join(args)} failed")
     return result.stdout.strip()
 
+def unsafe_repo_path(relative: str) -> tuple[bool, str]:
+    """Reject traversal and symlinks in any component of a protected repo path."""
+    candidate = Path(relative)
+    if candidate.is_absolute() or ".." in candidate.parts:
+        return True, "ruta absoluta o con traversal"
+    current = ROOT
+    for part in candidate.parts:
+        current = current / part
+        if current.is_symlink():
+            return True, f"componente simbólico: {current.relative_to(ROOT)}"
+    return False, ""
+
+
 def load_manifest():
+    unsafe, reason = unsafe_repo_path("data/integrity-manifest.json")
+    if unsafe:
+        raise RuntimeError(f"Manifiesto de integridad inseguro ({reason})")
     return json.loads(MANIFEST.read_text(encoding="utf-8"))
 
 def load_baseline_manifest(base_ref: str):
@@ -68,7 +84,10 @@ def check(base_ref: str, recovery_report: bool = False) -> list[str]:
     for path in sorted(deleted & critical):
         errors.append(f"Archivo crítico eliminado: {path}. Restaurar o documentar una baja autorizada.")
     for path in sorted(critical):
-        if not (ROOT / path).is_file():
+        unsafe, reason = unsafe_repo_path(path)
+        if unsafe:
+            errors.append(f"Ruta crítica insegura: {path} ({reason})")
+        elif not (ROOT / path).is_file():
             errors.append(f"Inventario crítico ausente en el árbol actual: {path}")
     try:
         baseline = json.loads(git("show", f"{base_ref}:data/roster.json"))
