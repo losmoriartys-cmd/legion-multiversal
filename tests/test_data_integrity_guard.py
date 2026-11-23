@@ -98,7 +98,17 @@ class IntegrityGuardBehaviorTests(unittest.TestCase):
         self.assertTrue(any("data/games.json" in e for e in errors), errors)
         self.assertTrue(any("akuma" in e and "ID protegido ausente" in e for e in errors), errors)
 
-    def test_missing_baseline_manifest_fails_closed(self):
+    def test_initial_manifest_bootstrap_uses_base_roster_and_fixed_inventory(self):
+        self.git_patch.stop()
+        def bootstrap_git(*args):
+            if args[:2] == ("show", "origin/main:data/integrity-manifest.json"):
+                raise RuntimeError("fatal: path 'data/integrity-manifest.json' exists on disk, but not in 'origin/main'")
+            return self.fake_git(*args)
+        with patch.object(guard, "git", side_effect=bootstrap_git):
+            errors = self.run_guard()
+        self.assertEqual(errors, [], errors)
+
+    def test_missing_baseline_roster_fails_closed(self):
         self.git_patch.stop()
         with patch.object(guard, "git", side_effect=RuntimeError("baseline unavailable")):
             errors = self.run_guard()
