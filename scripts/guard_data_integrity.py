@@ -6,13 +6,15 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "data/integrity-manifest.json"
-# One-time trust anchor for the PR that introduces the manifest. Once merged,
-# all later PRs must use the manifest committed on the base branch.
-BOOTSTRAP_CRITICAL_FILES = (
-    "data/roster.json", "data/games.json", "data/creator-records.json",
-    "creator-metrics.json", "data.json", "platform-stats.json",
-    "clips-data.json", "creator-programs.json", "community-playbook.json",
-)
+def bootstrap_critical_files(base_ref: str) -> list[str]:
+    """Derive the first inventory from the immutable base tree, never PR constants."""
+    tracked = git("ls-tree", "-r", "--name-only", base_ref).splitlines()
+    return sorted(
+        path for path in tracked
+        if path.endswith(".json")
+        and ("/" not in path or path.startswith("data/") and path.count("/") == 1)
+        and path != "package.json"
+    )
 
 def git(*args: str) -> str:
     result = subprocess.run(["git", *args], cwd=ROOT, text=True, capture_output=True)
@@ -50,7 +52,7 @@ def load_baseline_manifest(base_ref: str):
             raise
         baseline_roster = json.loads(git("show", f"{base_ref}:data/roster.json"))
         return {
-            "critical_files": list(BOOTSTRAP_CRITICAL_FILES),
+            "critical_files": bootstrap_critical_files(base_ref),
             "protected_roster_ids": sorted(
                 profile["id"] for profile in baseline_roster.get("heroes", [])
                 if isinstance(profile, dict) and profile.get("id")

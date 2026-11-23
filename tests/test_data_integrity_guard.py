@@ -27,6 +27,13 @@ class IntegrityGuardBehaviorTests(unittest.TestCase):
         (self.root / "data/games.json").write_text("{}", encoding="utf-8")
         self.baseline = json.dumps(self.roster)
         self.diff = ""
+        self.bootstrap_paths = [
+            "clips-data.json", "community-playbook.json", "creator-metrics.json",
+            "creator-programs.json", "data.json", "data/creator-records.json",
+            "data/games.json", "data/roster.json", "news-data.json",
+            "platform-registry.json", "platform-stats.json", "sullygnome-data.json",
+            "twitchmetrics-data.json",
+        ]
         self.git_patch = patch.object(guard, "git", side_effect=self.fake_git)
         self.git_patch.start()
         self.root_patch = patch.object(guard, "ROOT", self.root)
@@ -38,6 +45,8 @@ class IntegrityGuardBehaviorTests(unittest.TestCase):
         self.tmp.cleanup()
 
     def fake_git(self, *args):
+        if args[:1] == ("ls-tree",):
+            return "\\n".join(self.bootstrap_paths)
         if args[:2] == ("diff", "--name-status"):
             return self.diff
         if args and args[0] == "show":
@@ -101,11 +110,11 @@ class IntegrityGuardBehaviorTests(unittest.TestCase):
     def test_initial_manifest_bootstrap_uses_base_roster_and_fixed_inventory(self):
         # The first manifest must exactly match the immutable bootstrap policy:
         # critical paths that exist on main + roster IDs read from main.
-        self.manifest["critical_files"] = list(guard.BOOTSTRAP_CRITICAL_FILES)
+        self.manifest["critical_files"] = list(self.bootstrap_paths)
         self.manifest["protected_roster_ids"] = sorted(IDS)
         self.manifest["authorized_roster_removals"] = []
         self.manifest_path.write_text(json.dumps(self.manifest), encoding="utf-8")
-        for relative_path in guard.BOOTSTRAP_CRITICAL_FILES:
+        for relative_path in self.bootstrap_paths:
             path = self.root / relative_path
             path.parent.mkdir(parents=True, exist_ok=True)
             if not path.exists():
@@ -183,6 +192,34 @@ class IntegrityGuardBehaviorTests(unittest.TestCase):
         step = workflow.split(marker, 1)[1].split("      - name:", 1)[0]
         self.assertIn("run: python scripts/guard_data_integrity.py --base-ref origin/main --recovery-report", step)
         self.assertNotIn("if:", step)
+
+    def test_bootstrap_inventory_is_derived_from_base_tree_not_pr_constant(self):
+        # A PR-side constant/manifest edit must not redefine the trusted inventory.
+        self.manifest["critical_files"] = ["data/roster.json"]
+        self.manifest["protected_roster_ids"] = sorted(IDS)
+        self.manifest_path.write_text(json.dumps(self.manifest), encoding="utf-8")
+        self.git_patch.stop()
+        def bootstrap_git(*args):
+            if args[:2] == ("show", "origin/main:data/integrity-manifest.json"):
+                raise RuntimeError("fatal: path 'data/integrity-manifest.json' does not exist in 'origin/main'")
+            return self.fake_git(*args)
+        with patch.object(guard, "git", side_effect=bootstrap_git):
+            errors = self.run_guard()
+        self.assertTrue(any("Política de integridad modificada" in e for e in errors), errors)
+
+    def test_unsafe_repo_path_rejects_traversal_and_absolute_paths(self):
+        self.assertTrue(guard.unsafe_repo_path("../outside.json")[0])
+        self.assertTrue(guard.unsafe_repo_path("/tmp/outside.json")[0])
+
+    def test_symlinked_parent_directory_is_rejected(self):
+        outside = self.root / "outside"
+        outside.mkdir()
+        (outside / "roster.json").write_text(self.baseline, encoding="utf-8")
+        (outside / "games.json").write_text("{}", encoding="utf-8")
+        (self.root / "data").rename(self.root / "data-original")
+        (self.root / "data").symlink_to(outside, target_is_directory=True)
+        errors = self.run_guard()
+        self.assertTrue(any("manifiesto de integridad inseguro" in e.lower() for e in errors), errors)
 
 if __name__ == "__main__":
     unittest.main()
