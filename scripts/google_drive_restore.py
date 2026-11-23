@@ -37,7 +37,11 @@ def main():
         repo_dir=target/"repository-from-bundle"
         subprocess.run(["git","clone",str(bundle),str(repo_dir)],check=True)
         snap_dir=target/"source-snapshot";snap_dir.mkdir()
+        listing=subprocess.run(["tar","-tzf",str(snapshot)],check=True,capture_output=True,text=True).stdout.splitlines()
+        for entry in listing:
+            candidate=Path(entry)
+            if candidate.is_absolute() or ".." in candidate.parts:
+                raise SystemExit("Unsafe archive path detected; extraction refused.")
         subprocess.run(["tar","-xzf",str(snapshot),"-C",str(snap_dir)],check=True)
-        subprocess.run(["tar","-tzf",str(snapshot)],check=True,stdout=subprocess.DEVNULL)
         print(json.dumps({"restore":"success","backup_id":args.backup_id,"target":str(target),"bundle_repo":str(repo_dir),"snapshot":str(snap_dir),"isolated":True},indent=2))
 if __name__=="__main__":main()
