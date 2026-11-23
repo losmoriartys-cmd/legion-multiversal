@@ -108,7 +108,7 @@ def check(base_ref: str, recovery_report: bool = False) -> list[str]:
         return [f"No se pudo cargar la política de integridad de la línea base {base_ref}: {exc}"]
     changed = git("diff", "--name-status", f"{base_ref}...HEAD").splitlines()
     if new_authorizations:
-        changed_entries = [line.split("\\t") for line in changed if line.strip()]
+        changed_entries = [line.split("\t") for line in changed if line.strip()]
         authorization_only = (
             bool(changed_entries)
             and all(
