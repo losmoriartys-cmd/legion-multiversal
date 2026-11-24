@@ -4204,3 +4204,12 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **Límite detectado en la auditoría:** el restaurador recalculó y comparó los SHA-256 de los tres artefactos enumerados dentro de `SHA256SUMS`, y comprobó que el manifiesto cubre exactamente esos tres archivos. Sin embargo, `SHA256SUMS` no se auto-hashea; su propio SHA-256 (`481a...`) no se compara todavía contra un valor esperado independiente durante la restauración. Además, el artefacto de evidencia no incluye los cuatro hashes calculados individualmente. Por tanto, no declarar todavía verificación independiente de los cuatro objetos ni cierre de BASE-02.
 - **Siguiente corrección:** endurecer el restaurador para comparar también el SHA-256 de `SHA256SUMS` con el valor esperado registrado en el backup de creación y emitir un informe de hashes por archivo dentro del artefacto. Reejecutar la restauración del mismo Backup ID y revisar el nuevo artefacto. No generar otro backup.
 - **Estado:** restauración aislada, comparación de snapshot, HEAD, historial y `git fsck --full` aprobados. **BASE-02 permanece ABIERTO** hasta que la siguiente ejecución demuestre los cuatro hashes individualmente y se actualice esta auditoría con su evidencia.
+
+
+## BASE-02 — Endurecimiento posterior a la primera restauración (2026-11-24)
+
+- **Hallazgo:** la primera restauración verificó correctamente los tres archivos cubiertos por `SHA256SUMS`, pero el propio archivo `SHA256SUMS` no tenía un ancla externa durante el restore. Se evita declarar verificados los cuatro objetos hasta cerrar ese punto.
+- **Cambio en `scripts/google_drive_restore.py`:** se añadió el SHA-256 esperado de `SHA256SUMS` registrado por el run de backup `45349573134`; la restauración ahora debe comparar ese valor independiente, calcular y reportar los cuatro hashes en el JSON de resultado.
+- **Commits de corrección:** `f6234734b2ca42bf4a7ce2411e04aadcf2bef1d4` (ancla independiente + salida de hashes); `ec62b3a836e2208366106134d0de8a45d7b706c1` (lectura del ID desde la variable `BACKUP_ID` definida por el workflow).
+- **Validación pendiente:** volver a ejecutar manualmente el workflow sobre el mismo Backup ID `20261124T181104Z-45349573134`, con la rama `ops/backup-once-2026-11-24`. El siguiente JSON y artefacto deben incluir los cuatro hashes calculados y coincidentes. No generar otro backup.
+- **Estado:** primera restauración aislada aprobada; hash del manifiesto checksum aún pendiente de revalidación con el cambio nuevo. BASE-02 permanece ABIERTO.
