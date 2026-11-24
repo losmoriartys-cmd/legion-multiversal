@@ -1,14 +1,42 @@
 {
   "schema_version": 1,
-  "description": "Color de identificación de cada integrante. Se aplica como borde, franja, anillo o fondo con texto oscuro en todo el sitio donde aparece su canal. Propuesta inicial: cada persona puede elegir el suyo y se cambia solo acá.",
-  "colors": {
-    "moriartys": "#4fd3e8",
-    "rod3r1k": "#f2b84b",
-    "lady-moriarty": "#d46bc8",
-    "ardipii": "#8e6bff",
-    "akuma": "#ef6b5b",
-    "dave-nexus": "#6fcf8f",
-    "pato-oratoris": "#f4a259",
-    "habitos": "#5aa9ff"
+  "description": "Color de identidad de cada creador. Fuente única compartida con PR #98; claves iguales a los IDs canónicos de data/roster.json.",
+  "contrast_backgrounds": {
+    "night": "#080d18",
+    "panel": "#101a2a"
+  },
+  "creators": {
+    "moriartys": {
+      "color": "#4da3ff",
+      "name": "Azul"
+    },
+    "rod3r1k": {
+      "color": "#f0545a",
+      "name": "Rojo"
+    },
+    "lady-moriarty": {
+      "color": "#ff7ab8",
+      "name": "Rosa"
+    },
+    "ardipii": {
+      "color": "#a3acb8",
+      "name": "Gris"
+    },
+    "akuma": {
+      "color": "#a78bfa",
+      "name": "Violeta"
+    },
+    "dave-nexus": {
+      "color": "#5fd47a",
+      "name": "Verde"
+    },
+    "pato-oratoris": {
+      "color": "#f2d94e",
+      "name": "Amarillo"
+    },
+    "habitos": {
+      "color": "#ff9a3c",
+      "name": "Naranja"
+    }
   }
 }
