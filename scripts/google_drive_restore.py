@@ -1,47 +1,144 @@
 #!/usr/bin/env python3
-"""Restore a Drive backup set into a new isolated directory without the source checkout."""
-import json, os, subprocess, tempfile, urllib.parse, urllib.request
-from pathlib import Path
-API="https://www.googleapis.com/drive/v3"
-def req(url,headers=None):
-    with urllib.request.urlopen(urllib.request.Request(url,headers=headers or {}),timeout=120) as r:return r.read()
+"""Restore a Drive backup into an isolated directory without the source checkout."""
+import argparse, json, os, subprocess, tarfile, tempfile, urllib.parse, urllib.request
+from pathlib import Path, PurePosixPath
+
+API = "https://www.googleapis.com/drive/v3"
+
+def req(url, headers=None):
+    with urllib.request.urlopen(urllib.request.Request(url, headers=headers or {}), timeout=120) as r:
+        return r.read()
+
 def token():
-    data=urllib.parse.urlencode({"client_id":os.environ["GOOGLE_OAUTH_CLIENT_ID"],"client_secret":os.environ["GOOGLE_OAUTH_CLIENT_SECRET"],"refresh_token":os.environ["GOOGLE_OAUTH_REFRESH_TOKEN"],"grant_type":"refresh_token"}).encode()
-    q=urllib.request.Request("https://oauth2.googleapis.com/token",data=data,headers={"Content-Type":"application/x-www-form-urlencoded"})
-    with urllib.request.urlopen(q,timeout=60) as r:return json.loads(r.read())["access_token"]
+    data = urllib.parse.urlencode({
+        "client_id": os.environ["GOOGLE_OAUTH_CLIENT_ID"],
+        "client_secret": os.environ["GOOGLE_OAUTH_CLIENT_SECRET"],
+        "refresh_token": os.environ["GOOGLE_OAUTH_REFRESH_TOKEN"],
+        "grant_type": "refresh_token",
+    }).encode()
+    q = urllib.request.Request("https://oauth2.googleapis.com/token", data=data,
+                               headers={"Content-Type": "application/x-www-form-urlencoded"})
+    try:
+        with urllib.request.urlopen(q, timeout=60) as r:
+            result = json.loads(r.read())
+    except urllib.error.HTTPError as exc:
+        raise RuntimeError(f"OAuth token request failed (HTTP {exc.code})") from None
+    value = result.get("access_token")
+    if not value:
+        raise RuntimeError("OAuth response lacks access_token")
+    return value
+
+def list_backup_files(folder_id, backup_id, access):
+    # Escape query literals before URL encoding to avoid query-language injection.
+    folder = folder_id.replace("\\", "\\\\").replace("'", "\\'")
+    bid = backup_id.replace("\\", "\\\\").replace("'", "\\'")
+    query = f"'{folder}' in parents and trashed=false and appProperties has {{ key='backupId' and value='{bid}' }}"
+    page_token, files = None, []
+    while True:
+        params = {"q": query, "fields": "nextPageToken,files(id,name,appProperties)",
+                  "pageSize": "1000"}
+        if page_token:
+            params["pageToken"] = page_token
+        data = json.loads(req(API + "/files?" + urllib.parse.urlencode(params),
+                              {"Authorization": "Bearer " + access}))
+        batch = data.get("files")
+        if not isinstance(batch, list):
+            raise RuntimeError("Drive restore inventory lacks files array")
+        files.extend(batch)
+        page_token = data.get("nextPageToken")
+        if not page_token:
+            return files
+
+def safe_extract_snapshot(snapshot, destination):
+    with tarfile.open(snapshot, "r:gz") as archive:
+        members = archive.getmembers()
+        seen = set()
+        for member in members:
+            name = PurePosixPath(member.name)
+            if name.is_absolute() or ".." in name.parts:
+                raise RuntimeError("Unsafe archive path detected; extraction refused")
+            normalized = str(name)
+            if normalized in seen:
+                raise RuntimeError("Duplicate archive path detected; extraction refused")
+            seen.add(normalized)
+            if not (member.isdir() or member.isfile()):
+                raise RuntimeError("Archive links or special files are not allowed")
+        archive.extractall(destination, members=members)
+
 def main():
-    import argparse
-    p=argparse.ArgumentParser();p.add_argument("--backup-id",required=True);p.add_argument("--folder-id",default=os.environ.get("GOOGLE_DRIVE_FOLDER_ID"));p.add_argument("--target",required=True);args=p.parse_args()
-    if not args.folder_id:raise SystemExit("Missing --folder-id or GOOGLE_DRIVE_FOLDER_ID")
-    target=Path(args.target).resolve()
-    if target.exists() and any(target.iterdir()):raise SystemExit("Target must be empty.")
-    target.mkdir(parents=True,exist_ok=True);t=token()
-    query="'"+args.folder_id+"' in parents and trashed=false and appProperties has { key='backupId' and value='"+args.backup_id+"' }"
-    url=API+"/files?q="+urllib.parse.quote(query)+"&fields=files(id,name,appProperties)&pageSize=1000"
-    files=json.loads(req(url,{"Authorization":"Bearer "+t})).get("files",[])
-    if not files:raise SystemExit("No files for this backup ID.")
-    expected={int((f.get("appProperties") or {}).get("backupCount","0")) for f in files}
-    if expected!={len(files)}:raise SystemExit("Incomplete backup set; restore refused.")
+    p = argparse.ArgumentParser()
+    p.add_argument("--backup-id", required=True)
+    p.add_argument("--folder-id", default=os.environ.get("GOOGLE_DRIVE_FOLDER_ID"))
+    p.add_argument("--target", required=True)
+    args = p.parse_args()
+    if not args.folder_id:
+        raise SystemExit("Missing --folder-id or GOOGLE_DRIVE_FOLDER_ID")
+    target = Path(args.target).resolve()
+    if target.exists() and (not target.is_dir() or any(target.iterdir())):
+        raise SystemExit("Target must be an empty directory.")
+    target.mkdir(parents=True, exist_ok=True)
+    access = token()
+    files = list_backup_files(args.folder_id, args.backup_id, access)
+    if not files:
+        raise SystemExit("No files for this backup ID.")
+    counts = set()
+    for item in files:
+        try:
+            counts.add(int((item.get("appProperties") or {}).get("backupCount", "0")))
+        except ValueError:
+            raise SystemExit("Invalid backupCount metadata; restore refused.")
+    if len(counts) != 1 or counts != {len(files)}:
+        raise SystemExit("Incomplete or inconsistent backup set; restore refused.")
+    names = [item.get("name") for item in files]
+    if any(not isinstance(name, str) or not name or Path(name).name != name or name in {".", ".."} for name in names):
+        raise SystemExit("Unsafe Drive filename; restore refused.")
+    if len(set(names)) != len(names):
+        raise SystemExit("Duplicate Drive filenames; restore refused.")
     with tempfile.TemporaryDirectory(prefix="legion-restore-") as td:
-        d=Path(td)
-        for f in files:
-            name=Path(f["name"]).name
-            if name in (".",".."):raise SystemExit("Unsafe filename rejected")
-            (d/name).write_bytes(req(API+"/files/"+urllib.parse.quote(f["id"],safe="")+"?alt=media",{"Authorization":"Bearer "+t}))
-        sums=d/"SHA256SUMS"
-        if not sums.exists():raise SystemExit("Checksum manifest missing.")
-        subprocess.run(["sha256sum","-c",str(sums)],cwd=d,check=True)
-        bundle=d/"legion-multiversal.bundle";snapshot=d/"legion-multiversal-source.tar.gz"
-        if not bundle.exists() or not snapshot.exists():raise SystemExit("Required artifacts missing.")
-        subprocess.run(["git","bundle","verify",str(bundle)],check=True)
-        repo_dir=target/"repository-from-bundle"
-        subprocess.run(["git","clone",str(bundle),str(repo_dir)],check=True)
-        snap_dir=target/"source-snapshot";snap_dir.mkdir()
-        listing=subprocess.run(["tar","-tzf",str(snapshot)],check=True,capture_output=True,text=True).stdout.splitlines()
-        for entry in listing:
-            candidate=Path(entry)
-            if candidate.is_absolute() or ".." in candidate.parts:
-                raise SystemExit("Unsafe archive path detected; extraction refused.")
-        subprocess.run(["tar","-xzf",str(snapshot),"-C",str(snap_dir)],check=True)
-        print(json.dumps({"restore":"success","backup_id":args.backup_id,"target":str(target),"bundle_repo":str(repo_dir),"snapshot":str(snap_dir),"isolated":True},indent=2))
-if __name__=="__main__":main()
+        d = Path(td)
+        for item in files:
+            raw = req(API + "/files/" + urllib.parse.quote(item["id"], safe="") + "?alt=media",
+                      {"Authorization": "Bearer " + access})
+            (d / item["name"]).write_bytes(raw)
+        sums = d / "SHA256SUMS"
+        if not sums.is_file():
+            raise SystemExit("Checksum manifest missing.")
+        # Only allow checksum entries for regular files in this downloaded set.
+        manifest_names = []
+        for line in sums.read_text(encoding="utf-8").splitlines():
+            if len(line) < 67 or line[64:66] != "  ":
+                raise SystemExit("Malformed SHA256SUMS entry.")
+            name = line[66:]
+            if Path(name).name != name or name in {".", ".."}:
+                raise SystemExit("Unsafe checksum filename.")
+            manifest_names.append(name)
+        if len(set(manifest_names)) != len(manifest_names) or set(manifest_names) != set(names) - {"SHA256SUMS"}:
+            raise SystemExit("Checksum manifest does not cover exactly the backup artifacts.")
+        subprocess.run(["sha256sum", "-c", str(sums)], cwd=d, check=True)
+        bundle = d / "legion-multiversal.bundle"
+        snapshot = d / "legion-multiversal-source.tar.gz"
+        manifest = d / "backup-manifest.txt"
+        if not bundle.is_file() or not snapshot.is_file() or not manifest.is_file():
+            raise SystemExit("Required artifacts missing.")
+        manifest_text = manifest.read_text(encoding="utf-8")
+        commit_line = next((line for line in manifest_text.splitlines() if line.startswith("commit=")), None)
+        if not commit_line:
+            raise SystemExit("Backup manifest lacks source commit.")
+        expected_commit = commit_line.split("=", 1)[1].strip()
+        subprocess.run(["git", "bundle", "verify", str(bundle)], check=True)
+        repo_dir = target / "repository-from-bundle"
+        subprocess.run(["git", "clone", str(bundle), str(repo_dir)], check=True)
+        actual_commit = subprocess.run(["git", "rev-parse", "HEAD"], cwd=repo_dir,
+                                       check=True, capture_output=True, text=True).stdout.strip()
+        if actual_commit != expected_commit:
+            raise SystemExit("Git Bundle HEAD does not match backup manifest commit.")
+        snap_dir = target / "source-snapshot"
+        snap_dir.mkdir()
+        safe_extract_snapshot(snapshot, snap_dir)
+        print(json.dumps({"restore": "success", "backup_id": args.backup_id,
+                          "target": str(target), "bundle_repo": str(repo_dir),
+                          "snapshot": str(snap_dir), "commit": actual_commit,
+                          "isolated": True}, indent=2))
+
+if __name__ == "__main__":
+    main()
