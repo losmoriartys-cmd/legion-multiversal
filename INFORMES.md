@@ -4176,3 +4176,18 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **Estado BASE-02:** el respaldo externo dejó de estar pendiente en cuanto a la primera transferencia y restauración real. BASE-02 continúa **ABIERTO** hasta completar el backup actualizado descrito arriba y verificar que el ruleset de `main` exija revisión de Code Owners (`require_code_owner_review: true`). Esta evidencia no equivale a cierre global de BASE-02.
 - **Guardrails:** sin merge, sin cambios en `main`, sin despliegue a producción, sin cron y sin eliminación automática.
 
+
+
+---
+
+## 2026-11-24 · BASE-02 · segunda lectura del ruleset y discrepancia de bypass
+
+- **Consulta:** ruleset `PROTECCION-MAIN-LEGION`, ID `27883004`, activo sobre `~DEFAULT_BRANCH` (`main`).
+- **Respuesta REST actual:** `bypass_actors` contiene `RepositoryRole` actor ID `5` con modo `always` e `Integration` actor ID `1143301` con modo `always`; además `current_user_can_bypass=always`.
+- **Protecciones restantes:** `require_code_owner_review=false`; una aprobación general requerida; aprobación del último push requerida; checks estrictos `validar`, `python-tests`, `audit-public-links`.
+- **Discrepancia histórica:** el informe del 23/11 registraba `bypass_actors=[]`. La respuesta actual es distinta. No se identifica ni se presume la identidad de la integración ID `1143301`; requiere verificación en la interfaz de GitHub.
+- **CODEOWNERS:** el archivo raíz todavía no existe en `main` (consulta REST 404); está incluido en la rama de este PR. La opción de revisión obligatoria continúa desactivada.
+- **Actividad de main:** HEAD observado `7c73ef777c8576c99e0419c15f4192a42884e784`, commit de `github-actions[bot]` con actualización automática de métricas. Es evidencia de una publicación automatizada, no identificación concluyente del actor de bypass.
+- **Medida preventiva aplicada en PR #101:** se quitó el uso explícito de `COLLECTOR_PUSH_TOKEN`; el workflow ya no inyecta ese PAT alternativo. El flujo de push directo sigue pendiente de rediseño y verificación.
+- **Estado BASE-02:** ABIERTO. No afirmar bypass vacío, no activar automatizaciones de escritura directa ni cerrar BASE-02 hasta identificar la integración, revisar CODEOWNERS y verificar la regla efectiva. No se modificó `main`, el ruleset ni producción.
+- **Referencia de reglas:** [Ruleset en GitHub](https://github.com/losmoriartys-cmd/legion-multiversal/rules/27883004) · [API rulesets](https://api.github.com/repos/losmoriartys-cmd/legion-multiversal/rulesets/27883004).
