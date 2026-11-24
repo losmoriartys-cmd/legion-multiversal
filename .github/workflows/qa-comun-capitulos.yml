@@ -22,9 +22,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
       - name: Configurar Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: '22'
+          package-manager-cache: false
       # Este repo no mantiene lockfile; npm ci/cache de lock no aplica.
       - name: Instalar dependencias del proyecto
         run: npm install
