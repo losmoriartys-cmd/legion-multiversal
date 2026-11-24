@@ -4060,8 +4060,8 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **Límite explícito:** la rotación y eliminación automática continúan deshabilitadas (`automatic_deletion: disabled_non_atomic_drive_api`). BASE-02 queda cerrado para copia y restauración verificadas; no certifica rotación transaccional ni autoriza eliminación automática.
 
 ### Advertencia de Node.js 20
-- La ejecución de restauración informó que `actions/checkout@v4` y `actions/upload-artifact@v4` eran forzadas a Node.js 24 por la plataforma y que sus runtimes Node.js 20 estaban deprecados.
-- Se abrió el PR #104, rama `chore/actions-node24-2026-11-24`, para actualizar uniformemente los nueve workflows activos identificados: `actions/checkout@v5` y `actions/upload-artifact@v6`, ambos con runtime Node.js 24.
+- La ejecución de restauración informó que `actions/checkout@v4` y `actions/upload-artifact@v4` usaban Node.js 20. La primera CI de la actualización detectó además `actions/setup-python@v5`; la auditoría de los workflows activos identificó también `actions/setup-node@v4`.
+- El PR #104, rama `chore/actions-node24-2026-11-24`, actualiza las cuatro familias a versiones compatibles con Node.js 24: `actions/checkout@v5`, `actions/upload-artifact@v6`, `actions/setup-python@v6` y `actions/setup-node@v5`. En `setup-node@v5` se fija `package-manager-cache: false` para conservar el comportamiento previo y evitar introducir caché automática.
 - Archivos limitados a `.github/workflows/`: `actualizar-stats.yml`, `auditoria-qa-portable.yml`, `google-drive-restore.yml`, `lighthouse-production.yml`, `optimize-hero-image.yml`, `optimize-logo.yml`, `qa-comun-capitulos.yml`, `test-stats.yml` y `validar-sitio.yml`.
 - No se modificaron scripts de respaldo/restauración, datos, sitio, Roster, secretos ni parámetros de rotación. El PR queda pendiente de CI y revisión; no se considera integrado hasta comprobarlo.
 - **Estado de seguridad:** no ejecutar ni habilitar rotación/eliminación automática hasta implementar y probar una operación transaccional segura, incluyendo fallos durante la rotación y conservación de al menos una copia recuperable.
