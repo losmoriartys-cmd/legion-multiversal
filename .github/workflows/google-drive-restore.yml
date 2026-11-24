@@ -18,7 +18,7 @@ jobs:
     timeout-minutes: 30
     steps:
       - name: Checkout restore verifier
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           ref: ops/backup-once-2026-11-24
           fetch-depth: 1
@@ -75,7 +75,7 @@ jobs:
 
       - name: Upload recovery evidence
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: google-drive-restore-evidence-${{ github.run_id }}
           path: restore-evidence/
