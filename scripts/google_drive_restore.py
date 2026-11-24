@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Restore a Drive backup into an isolated directory without the source checkout."""
-import argparse, json, os, subprocess, tarfile, tempfile, urllib.parse, urllib.request
+import argparse, hashlib, json, os, subprocess, tarfile, tempfile, urllib.parse, urllib.request
 from pathlib import Path, PurePosixPath
 
 API = "https://www.googleapis.com/drive/v3"
@@ -53,18 +53,34 @@ def verify_downloaded_artifacts(directory, downloaded_names):
     sums = directory / "SHA256SUMS"
     if not sums.is_file():
         raise RuntimeError("Checksum manifest missing.")
-    manifest_names = []
-    for line in sums.read_text(encoding="utf-8").splitlines():
-        if len(line) < 67 or line[64:66] != "  ":
+
+    manifest_entries = []
+    for line in sums.read_text(encoding="utf-8-sig").splitlines():
+        if len(line) < 67 or line[64:66] not in {"  ", " *"}:
             raise RuntimeError("Malformed SHA256SUMS entry.")
+        digest = line[:64]
+        if any(char not in "0123456789abcdefABCDEF" for char in digest):
+            raise RuntimeError("Malformed SHA256SUMS digest.")
         name = line[66:]
         if Path(name).name != name or name in {".", ".."}:
             raise RuntimeError("Unsafe checksum filename.")
-        manifest_names.append(name)
+        manifest_entries.append((digest.lower(), name))
+
+    manifest_names = [name for _, name in manifest_entries]
     expected = set(downloaded_names) - {"SHA256SUMS"}
     if len(set(manifest_names)) != len(manifest_names) or set(manifest_names) != expected:
         raise RuntimeError("Checksum manifest does not cover exactly the backup artifacts.")
-    subprocess.run(["sha256sum", "-c", str(sums)], cwd=directory, check=True)
+
+    for expected_digest, name in manifest_entries:
+        artifact = directory / name
+        if artifact.is_symlink() or not artifact.is_file():
+            raise RuntimeError(f"Checksum artifact is missing or unsafe: {name}")
+        digest = hashlib.sha256()
+        with artifact.open("rb") as stream:
+            for block in iter(lambda: stream.read(1024 * 1024), b""):
+                digest.update(block)
+        if digest.hexdigest() != expected_digest:
+            raise RuntimeError(f"Checksum mismatch for {name}.")
 
 def safe_extract_snapshot(snapshot, destination):
     with tarfile.open(snapshot, "r:gz") as archive:
@@ -107,7 +123,10 @@ def verify_snapshot_matches_commit(repo_dir, snapshot_dir, commit):
         if candidate.is_symlink() or not candidate.is_file():
             raise RuntimeError(f"Snapshot is missing a regular tracked file: {relative}")
         with candidate.open("rb") as stream:
-            actual = subprocess.run(["git", "hash-object", "--no-filters", "--stdin"],
+            # Apply Git's clean filters (including core.autocrlf) before
+            # comparing a working-tree snapshot with the canonical Git blob.
+            git_path = relative.as_posix()
+            actual = subprocess.run(["git", "hash-object", f"--path={git_path}", "--stdin"],
                                     cwd=repo_dir, input=stream.read(), check=True,
                                     capture_output=True).stdout.decode("ascii").strip()
         if actual != _object_id:
