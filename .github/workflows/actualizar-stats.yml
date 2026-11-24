@@ -36,6 +36,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          # Token con permiso de bypass del ruleset de main; si no existe, usa el del workflow.
+          token: ${{ secrets.COLLECTOR_PUSH_TOKEN || github.token }}
 
       - name: Configurar Python
         uses: actions/setup-python@v5
