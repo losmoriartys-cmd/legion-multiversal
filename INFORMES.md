@@ -4157,3 +4157,22 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **Advertencias no bloqueantes observadas:** avisos deprecación Node.js 20 / APIs Node y dependencias de Actions; no cambiaron las conclusiones exitosas de los jobs. Deben registrarse como deuda de mantenimiento, no ocultarse ni confundirse con fallos de pruebas.
 - **Evidencias de GitHub:** [validar y capturas](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45139824337) · [auditoría de enlaces](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45139824135) · [pruebas Python](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45139824126) · [QA capítulos](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45139824404) · [ruleset](https://github.com/losmoriartys-cmd/legion-multiversal/rules/27883004).
 - **Siguiente paso:** este registro documental genera un SHA nuevo; repetir CI completa y volver a inspeccionar artefactos sobre ese nuevo HEAD. BASE-02 sigue ABIERTO: no fusionar PR #97, no modificar `main` y no desplegar producción hasta cumplir simultáneamente CI verde en el último SHA, Code Owners obligatorio verificado y backup externo restaurado en entorno aislado.
+
+
+---
+
+## 2026-11-24 · BASE-02 · primer backup real en Google Drive y restauración aislada
+
+- **Motor y rama de trabajo:** `feat/google-drive-backup-engine`. El HEAD posterior a las correcciones de portabilidad Windows/CRLF es `fa3fc1a3ba1cc69818d9cdbebe0c6be757a5095c`. No se integró esta rama en `main`.
+- **Backup real ejecutado:** ID `20261124T083437Z-local`, destino `root` (Mi unidad de Google Drive). Se subieron cuatro objetos y se descargaron de retorno para verificar los SHA-256:
+  - `backup-manifest.txt` · Drive ID `1tGy2lYcvFa1Ez8rK0WjkI3CPbxa8sV9y` · SHA-256 `32a77ae075c0fef5dd38216ba7d6f88066209635112af0a9fd9d67146a9a3c6b`.
+  - `legion-multiversal-source.tar.gz` · Drive ID `1llujbOm5tI4jEQqIO_iUsAxJxymlBgPv` · SHA-256 `2a864466b905285d678ba18ea9b0bb0e240722babe362fd879d97468d6087be4`.
+  - `legion-multiversal.bundle` · Drive ID `199BVMOYqwcs2l03X47cN-SxXVnXWQxOQ` · SHA-256 `0d3b594c5d0bcfce0ab2a8c653dce093be4a6a245d79ab2863417dafbcf09663`.
+  - `SHA256SUMS` · Drive ID `1kddLDw7LW0kUTzHwGVQ4QCIM8aEPQAUK` · SHA-256 `83bbb95caccdba9f08c9cfffeadea5e911d167d83ca422c0f75b356311d1f13b`.
+- **Resultado de transferencia/verificación:** `result: verified`; los cuatro objetos descargados coincidieron con sus SHA-256. `expired_candidates: 0`. El borrado automático permanece deshabilitado (`disabled_non_atomic_drive_api`); no se borró ningún backup.
+- **Restauración aislada:** `restore: success`; backup ID `20261124T083437Z-local`; destino `C:\\LegionMultiversal-Restore-Test-20261124-CRLF-FIX`; commit respaldado `0cf0c68fe1073a3645747be1b99b3380d4639648`. Se verificaron 310 archivos del snapshot contra el contenido Git del bundle. `isolated: true`; el repositorio original `C:\\LegionMultiversal` no fue modificado.
+- **CI del motor después de las correcciones:** run [45358519957](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45358519957), sobre el HEAD `fa3fc1a3ba1cc69818d9cdbebe0c6be757a5095c`: 18 pruebas automatizadas y comprobación de sintaxis en verde.
+- **Límite del alcance de esta evidencia:** el backup restaurado representa el commit `0cf0c68fe1073a3645747be1b99b3380d4639648`, no el HEAD posterior `fa3fc1a3ba1cc69818d9cdbebe0c6be757a5095c`. Las correcciones de restauración/compatibilidad incorporadas después de `0cf0c68` sí pasaron CI, pero todavía no están incluidas en una copia externa restaurada. Se requiere un segundo backup actualizado y una restauración aislada antes de declarar archivado el HEAD final del motor.
+- **Estado BASE-02:** el respaldo externo dejó de estar pendiente en cuanto a la primera transferencia y restauración real. BASE-02 continúa **ABIERTO** hasta completar el backup actualizado descrito arriba y verificar que el ruleset de `main` exija revisión de Code Owners (`require_code_owner_review: true`). Esta evidencia no equivale a cierre global de BASE-02.
+- **Guardrails:** sin merge, sin cambios en `main`, sin despliegue a producción, sin cron y sin eliminación automática.
+
