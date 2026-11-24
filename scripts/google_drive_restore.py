@@ -76,7 +76,7 @@ def verify_downloaded_artifacts(directory, downloaded_names):
         raise RuntimeError("Checksum manifest does not cover exactly the backup artifacts.")
 
     sums_digest = hashlib.sha256(sums.read_bytes()).hexdigest()
-    expected_sums_digest = EXPECTED_SHA256SUMS.get(os.environ.get("RESTORE_BACKUP_ID", ""))
+    expected_sums_digest = EXPECTED_SHA256SUMS.get(os.environ.get("BACKUP_ID", ""))
     if not expected_sums_digest or sums_digest != expected_sums_digest:
         raise RuntimeError("SHA256SUMS file does not match the independently recorded backup digest.")
 
