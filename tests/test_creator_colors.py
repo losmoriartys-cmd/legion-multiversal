@@ -35,6 +35,18 @@ class CreatorColorTests(unittest.TestCase):
             ratio = (luminance(color) + 0.05) / (dark + 0.05)
             self.assertGreaterEqual(ratio, 4.5, member)
 
+    def test_consumers_use_the_single_canonical_color_contract(self):
+        app = (ROOT / "app.js").read_text(encoding="utf-8")
+        about = (ROOT / "chapters-refresh.js").read_text(encoding="utf-8")
+        collaborations = (ROOT / "games-registry.js").read_text(encoding="utf-8")
+        html = (ROOT / "index.html").read_text(encoding="utf-8")
+        self.assertIn("colorPayload.creators", app)
+        self.assertIn("results[1].creators", about)
+        self.assertIn("var(--c-' + id", collaborations)
+        self.assertNotIn("CREATOR_COLORS", collaborations)
+        self.assertIn("creator-colors.css", html)
+        self.assertNotIn('"colors":', (ROOT / "data" / "creator-colors.json").read_text(encoding="utf-8"))
+
 
 if __name__ == "__main__":
     unittest.main()
