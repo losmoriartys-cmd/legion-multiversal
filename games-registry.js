@@ -9,7 +9,7 @@
   const searchInput = document.getElementById('collab-search');
   const categorySelect = document.getElementById('collab-category');
   const creatorSelect = document.getElementById('collab-creator');
-  const CREATOR_COLORS = {};
+  function creatorColor(id) { return /^[a-z0-9-]+$/.test(String(id || '')) ? 'var(--c-' + id + ', #91a9bf)' : '#91a9bf'; }
   let games = [];
   let creators = new Map();
   let channelImages = {};
@@ -42,7 +42,7 @@
   function avatarMarkup(id, creator, hasPov) {
     const login = creator ? creatorLogin(creator) : '';
     const image = safeHttps(channelImages[login], 'jtvnw.net');
-    const color = CREATOR_COLORS[id] || '#91a9bf';
+    const color = creatorColor(id);
     const fallback = escapeHtml(String(creatorName(id)).trim().split(/\s+/).slice(0, 2).map(function (part) { return part.charAt(0); }).join('').toUpperCase());
     return '<span class="collab-avatar-wrap ' + (hasPov ? 'has-pov' : 'no-pov') + '" style="--creator-color:' + color + '">' +
       (image ? '<img src="' + escapeHtml(image) + '" alt="Avatar del canal ' + escapeHtml(creatorName(id)) + '" loading="lazy" decoding="async">' : '<span class="collab-avatar-fallback" aria-hidden="true">' + fallback + '</span>') +
@@ -66,7 +66,7 @@
   function renderPov(pov) {
     const id = pov.canal;
     const name = id ? creatorName(id) : 'CANAL POR CONFIRMAR';
-    const color = id ? (CREATOR_COLORS[id] || '#91a9bf') : '#9aa7b5';
+    const color = id ? creatorColor(id) : '#9aa7b5';
     const href = safeHttps(pov.url, 'twitch.tv');
     if (!href) return '';
     return '<a class="collab-pov-link ' + (id ? '' : 'is-unassigned') + '" style="--creator-color:' + color + '" href="' + escapeHtml(href) + '" target="_blank" rel="noopener noreferrer" data-pov-channel="' + escapeHtml(id || 'unassigned') + '" aria-label="Abrir POV de ' + escapeHtml(name) + ' en Twitch"><span class="collab-pov-play" aria-hidden="true">▶</span><span><small>POV · ' + escapeHtml(name) + '</small><strong>ABRIR VOD ↗</strong></span></a>';
@@ -194,16 +194,7 @@
       if (!registry || !Array.isArray(registry.juegos) || !Array.isArray(roster.heroes)) throw new Error('El registro maestro o el Roster no tiene la estructura esperada.');
       games = registry.juegos;
       creators = new Map(roster.heroes.map(function (hero) { return [hero.id || hero.slug, hero]; }));
-      try {
-        const colorFile = await fetch('./data/creator-colors.json', { cache: 'no-store' });
-        if (colorFile.ok) Object.assign(CREATOR_COLORS, (await colorFile.json()).colors || {});
-      } catch (error) { /* sin colores: se usa el color neutro */ }
-      if (results[2] && results[2].ok) {
-        const activity = await results[2].json();
-        Object.keys(activity.channels || {}).forEach(function (login) {
-          const image = activity.channels[login] && activity.channels[login].profile_image_url;
-          if (image) channelImages[login.toLowerCase()] = image;
-        });
+;
       }
       sessions = games.flatMap(function (game) {
         return (game.sesiones || []).map(function (session) { return { game: game, session: session }; });
