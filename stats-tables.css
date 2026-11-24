@@ -56,8 +56,11 @@
 .stats-game-note { margin-top: 10px; color: #aebbd0; font-size: .72rem; }
 
 @media (max-width: 640px) {
-  .stats-game-performance .stats-table-wrap { overflow-x: visible; border: 0; }
-  .stats-game-performance .stats-table { min-width: 0; background: transparent; }
+  .stats-game-performance .stats-table-wrap { overflow-x: auto; border: 0; }
+  .stats-game-performance .stats-table { width: 100%; max-width: 100%; min-width: 0; table-layout: fixed; background: transparent; }
+  .stats-game-performance .stats-table td { min-width: 0; overflow-wrap: anywhere; }
+  .stats-game-creators { min-width: 0; }
+  .stats-game-creator { white-space: normal; }
   .stats-game-performance .stats-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); }
   .stats-game-performance .stats-table tr { display: block; margin-bottom: 12px; border: 1px solid #34445c; background: #080e18; }
   .stats-game-performance .stats-table td { display: flex; justify-content: space-between; gap: 12px; white-space: normal; text-align: right; }
