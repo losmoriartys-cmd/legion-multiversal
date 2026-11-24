@@ -17,7 +17,7 @@ def luminance(hex_color: str) -> float:
 
 class CreatorColorTests(unittest.TestCase):
     def setUp(self):
-        self.colors = json.loads((ROOT / "data" / "creator-colors.json").read_text(encoding="utf-8"))["colors"]
+        self.colors = {key: value["color"] for key, value in json.loads((ROOT / "data" / "creator-colors.json").read_text(encoding="utf-8"))["creators"].items()}
         roster = json.loads((ROOT / "data" / "roster.json").read_text(encoding="utf-8"))
         self.ids = {hero["id"] for hero in roster["heroes"]}
 
