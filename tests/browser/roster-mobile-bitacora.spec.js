@@ -20,7 +20,8 @@ test('Roster móvil conserva la Bitácora sin depender de una captura histórica
   const geometry = await page.evaluate(() => {
     const panel = document.querySelector('#hero-profile-page');
     const header = document.querySelector('body > header');
-    const box = panel.getBoundingClientRect();
+    const profileHead = panel.querySelector('.comic-profile-head');
+    const box = profileHead.getBoundingClientRect();
     const headerBox = header.getBoundingClientRect();
     return {
       left: box.left,
