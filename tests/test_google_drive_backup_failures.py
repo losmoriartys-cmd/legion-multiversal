@@ -165,21 +165,20 @@ class DriveBackupFailureTests(unittest.TestCase):
 
 
     def test_restore_validates_manifest_coverage_and_file_hashes(self):
-        import subprocess
         artifact = self.root / "legion-multiversal.bundle"
         artifact.write_bytes(b"valid bundle placeholder")
         snapshot = self.root / "legion-multiversal-source.tar.gz"
         snapshot.write_bytes(b"valid snapshot placeholder")
         sums = self.root / "SHA256SUMS"
-        manifest = "".join(
-            f"{backup.sha256(path)}  {path.name}\n"
-            for path in (artifact, snapshot)
+        manifest = (
+            f"{backup.sha256(artifact)} *{artifact.name}\n"
+            f"{backup.sha256(snapshot)}  {snapshot.name}\n"
         )
         sums.write_text(manifest, encoding="utf-8")
         names = [artifact.name, snapshot.name, sums.name]
         restore.verify_downloaded_artifacts(self.root, names)
         snapshot.write_bytes(b"tampered snapshot")
-        with self.assertRaises(subprocess.CalledProcessError):
+        with self.assertRaisesRegex(RuntimeError, "Checksum mismatch"):
             restore.verify_downloaded_artifacts(self.root, names)
         sums.write_text(manifest.splitlines()[0] + "\\n", encoding="utf-8")
         with self.assertRaisesRegex(RuntimeError, "does not cover exactly"):
