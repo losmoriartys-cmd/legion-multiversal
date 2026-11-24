@@ -1,0 +1,27 @@
+var(--creator-color)}
+
+/* ---------- Roster: tarjeta ---------- */
+#chapter-2 .comic-roster-card[style*="--creator-color"]{border-color:#080808;box-shadow:7px 7px 0 var(--creator-color),7px 7px 0 2px #000;outline:0}
+#chapter-2 .comic-roster-card[style*="--creator-color"]::before{content:"";display:block;height:8px;background:var(--creator-color);order:-1;flex:none;border-bottom:3px solid #080808}
+#chapter-2 .comic-roster-card[style*="--creator-color"] .comic-roster-card-data{background:linear-gradient(180deg,color-mix(in srgb,var(--creator-color) 18%,#fff8d6),#fff8d6 46%)}
+#chapter-2 .comic-roster-card[style*="--creator-color"] .roster-v3-metric.has-data{border-left:4px solid var(--creator-color)}
+#chapter-2 .comic-roster-card[style*="--creator-color"] .comic-roster-card-footer :is(a,button,span):last-child{background:var(--creator-color);color:#0b0f17;border-color:#080808}
+#chapter-2 .comic-roster-card[style*="--creator-color"] .roster-v3-day-strip i.is-active{background:var(--creator-color)}
+#chapter-2 .roster-v3-next{display:block;margin:0;padding:6px 9px;border:2px solid #080808;background:color-mix(in srgb,var(--creator-color,#ffde00) 55%,#fff);color:#0b0f17;font:900 .64rem/1.3 'Roboto Condensed',sans-serif;letter-spacing:.05em;text-transform:uppercase;overflow-wrap:anywhere}
+
+/* ---------- Roster: perfil abierto ---------- */
+#hero-profile-page[style*="--hero-accent"] .hero-profile-tabs [aria-selected="true"],
+#hero-profile-page[style*="--hero-accent"] .hero-profile-tabs .is-active{background:var(--hero-accent);color:#0b0f17}
+#hero-profile-page[style*="--hero-accent"]{border-top:6px solid var(--hero-accent)}
+
+/* ---------- EN VIVO ---------- */
+.lp-chip[style*="--creator-color"]{border-left:8px solid var(--creator-color)}
+.lp-chip.is-on[style*="--creator-color"]{background:color-mix(in srgb,var(--creator-color) 70%,#fff)}
+.lp-when[style*="--creator-color"]{border-left:4px solid var(--creator-color)}
+.lp-when .lp-next{display:block;margin-top:3px;font-weight:800;color:inherit}
+
+/* ---------- Quiénes somos: personas ---------- */
+.manifesto-people-grid article[style*="--creator-color"]{border-color:color-mix(in srgb,var(--creator-color) 60%,transparent);border-top:4px solid var(--creator-color);background:linear-gradient(145deg,color-mix(in srgb,var(--creator-color) 14%,#1c2035),#0d1422)}
+.manifesto-people-grid article[style*="--creator-color"] h4{color:var(--creator-color)}
+
+.stats-channel-capture{display:block;margin:.35rem 0 .6rem;color:#aebbd0;font-size:.72rem;letter-spacing:.035em}
