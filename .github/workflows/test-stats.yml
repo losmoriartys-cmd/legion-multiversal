@@ -51,9 +51,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Configurar Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: '3.12'
       - name: Ejecutar pruebas del colector
@@ -77,7 +77,7 @@ jobs:
       - name: Validar registro normalizado
         run: python scripts/validate_creator_metrics.py
       - name: Publicar artefacto de métricas generado
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: creator-metrics-${{ github.sha }}
           path: creator-metrics.json

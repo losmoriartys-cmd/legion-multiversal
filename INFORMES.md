@@ -4047,3 +4047,21 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **No incluido todavía:** clips por juego (los clips públicos solo traen un identificador de juego de Twitch y una ventana de 30 días) y estadísticas por juego distintas de las de BarFender; requieren datos nuevos.
 - **Prueba pausada con motivo:** `roster.spec.js › la Bitácora móvil conserva la presentación de main…` compara contra un preview fijado (`bd140e8f`) anterior a los cambios intencionales del Roster (estadísticas en las tarjetas). Desde esos cambios la cabecera del perfil mide distinto, así que la prueba fallaba por una diferencia buscada y no por una regresión. Quedó con `test.skip` y comentario; para reactivarla hay que fijar un preview nuevo de main. Comparar contra la producción en vivo no sirve porque sus datos cambian con cada actualización automática.
 - **Ajustes de prueba por la fusión:** nueve entradas de navegación (antes diez) en `roster.spec.js` y `chapter-common-qa.spec.js`; el catálogo quedó mucho más abajo en la página, por eso `arsenal-registry.spec.js` desactiva el desplazamiento suave para evitar un clic inestable.
+
+
+## 2026-11-24 · BASE-02 cerrado · restauración aislada verificada y actualización de GitHub Actions
+
+### Evidencia de respaldo y recuperación
+- **Backup:** run `45349573134`, ID `20261124T181104Z-45349573134`, commit de origen `3cc92cea19c1b719cd33fee6fe33b1fa3d02bcf3`.
+- **Restauración:** run `45461818668`, intento final exitoso; job `138689763622`; commit del workflow `191ee5e59ba8ac4ef1aa651e77c051120f3233c0`.
+- **Artefacto:** `google-drive-restore-evidence-45461818668`, ID `14953296381`, digest SHA-256 `6f316d3183a0c58e33cc6d46070e70465b70026134ee99916b4542bc9d698c13`. El digest del ZIP descargado se recalculó localmente y coincidió con el publicado por GitHub.
+- **Recuperación:** 310 archivos verificados; HEAD restaurado `3cc92cea19c1b719cd33fee6fe33b1fa3d02bcf3`; 1.880 commits; referencias alineadas; `git fsck --full` terminó correctamente.
+- **SHA-256 verificados:** `SHA256SUMS` = `481a01747a200c51b5b9c3ba761be230bd66c6fc8f6bde4eb12789a2514dd967`; `backup-manifest.txt` = `ec5e5aac994747b2010fbe1f22cc81a608e7dc46a45ed5872bb9d0dab11b2d3e`; `legion-multiversal-source.tar.gz` = `9484967ab29a6d389cb018ea6038b66c94304a2c4c7e9554255000249ae41069`; `legion-multiversal.bundle` = `411064cde41a14115ea146cfac066b4469cb795bd375626da129ec48cc373a62`.
+- **Límite explícito:** la rotación y eliminación automática continúan deshabilitadas (`automatic_deletion: disabled_non_atomic_drive_api`). BASE-02 queda cerrado para copia y restauración verificadas; no certifica rotación transaccional ni autoriza eliminación automática.
+
+### Advertencia de Node.js 20
+- La ejecución de restauración informó que `actions/checkout@v4` y `actions/upload-artifact@v4` usaban Node.js 20. La primera CI de la actualización detectó además `actions/setup-python@v5`; la auditoría de los workflows activos identificó también `actions/setup-node@v4`.
+- El PR #104, rama `chore/actions-node24-2026-11-24`, actualiza las cuatro familias a versiones compatibles con Node.js 24: `actions/checkout@v5`, `actions/upload-artifact@v6`, `actions/setup-python@v6` y `actions/setup-node@v5`. En `setup-node@v5` se fija `package-manager-cache: false` para conservar el comportamiento previo y evitar introducir caché automática.
+- Archivos limitados a `.github/workflows/`: `actualizar-stats.yml`, `auditoria-qa-portable.yml`, `google-drive-restore.yml`, `lighthouse-production.yml`, `optimize-hero-image.yml`, `optimize-logo.yml`, `qa-comun-capitulos.yml`, `test-stats.yml` y `validar-sitio.yml`.
+- No se modificaron scripts de respaldo/restauración, datos, sitio, Roster, secretos ni parámetros de rotación. El PR queda pendiente de CI y revisión; no se considera integrado hasta comprobarlo.
+- **Estado de seguridad:** no ejecutar ni habilitar rotación/eliminación automática hasta implementar y probar una operación transaccional segura, incluyendo fallos durante la rotación y conservación de al menos una copia recuperable.

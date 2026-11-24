@@ -30,11 +30,12 @@ jobs:
     timeout-minutes: 35
     steps:
       - name: Descargar repositorio
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Configurar Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: '22'
+          package-manager-cache: false
       - name: Instalar Chrome
         id: chrome
         uses: browser-actions/setup-chrome@v1
@@ -128,7 +129,7 @@ jobs:
           fi
       - name: Publicar informes Lighthouse
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: lighthouse-cloudflare-production-${{ github.sha }}
           path: reports/lighthouse/

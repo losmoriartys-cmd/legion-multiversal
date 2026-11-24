@@ -48,13 +48,14 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Descargar repositorio
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
       - name: Configurar Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: '22'
+          package-manager-cache: false
       - name: Comprobar sintaxis JavaScript
         run: |
           node --check app.js
@@ -181,7 +182,7 @@ jobs:
         run: npm run test:e2e
       - name: Publicar capturas de revisión visual de Playwright
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: roster-visual-review-${{ github.sha }}
           path: test-results/
@@ -194,7 +195,7 @@ jobs:
         run: python scripts/validate_site.py
       - name: Publicar auditorías de referencias de imágenes
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: image-reference-audit-${{ github.sha }}
           path: reports/image-audit/
