@@ -1,8 +1,7 @@
-name: Google Drive backup (daily)
+name: Google Drive backup (manual; schedule disabled)
 
 on:
   workflow_dispatch:
-  # Schedule intentionally disabled until OAuth and isolated restore are verified.
 
 permissions:
   contents: read
