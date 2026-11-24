@@ -4157,3 +4157,19 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **Advertencias no bloqueantes observadas:** avisos deprecación Node.js 20 / APIs Node y dependencias de Actions; no cambiaron las conclusiones exitosas de los jobs. Deben registrarse como deuda de mantenimiento, no ocultarse ni confundirse con fallos de pruebas.
 - **Evidencias de GitHub:** [validar y capturas](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45139824337) · [auditoría de enlaces](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45139824135) · [pruebas Python](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45139824126) · [QA capítulos](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45139824404) · [ruleset](https://github.com/losmoriartys-cmd/legion-multiversal/rules/27883004).
 - **Siguiente paso:** este registro documental genera un SHA nuevo; repetir CI completa y volver a inspeccionar artefactos sobre ese nuevo HEAD. BASE-02 sigue ABIERTO: no fusionar PR #97, no modificar `main` y no desplegar producción hasta cumplir simultáneamente CI verde en el último SHA, Code Owners obligatorio verificado y backup externo restaurado en entorno aislado.
+
+
+## BASE-02 — Backup real verificado en Google Drive (2026-11-24)
+
+- **Workflow:** [Run 45349573134](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45349573134), rama `ops/backup-once-2026-11-24`, commit `3cc92cea19c1b719cd33fee6fe33b1fa3d02bcf3`; job `backup` SUCCESS, duración 33 s.
+- **Controles confirmados en logs:** checkout completo; pruebas automatizadas de fallos `test_google_drive_backup_failures.py`; compilación sintáctica de backup, restore y OAuth setup; generación del bundle y archivos fuente; comprobación SHA-256 local; upload a Google Drive y respuesta del motor `result: verified`.
+- **Backup ID:** `20261124T181104Z-45349573134`.
+- **Objetos reportados y SHA-256:**
+  - `SHA256SUMS` — `481a01747a200c51b5b9c3ba761be230bd66c6fc8f6bde4eb12789a2514dd967` (Drive ID `1JNIX11L4y7MM6Ooo9FWH0hLaSR0YL25e`).
+  - `backup-manifest.txt` — `ec5e5aac994747b2010fbe1f22cc81a608e7dc46a45ed5872bb9d0dab11b2d3e` (Drive ID `1-JZVeww9rEGio9MKbVpbcjn2jzz0iAQs`).
+  - `legion-multiversal-source.tar.gz` — `9484967ab29a6d389cb018ea6038b66c94304a2c4c7e9554255000249ae41069` (Drive ID `1wM9drZon7iEx8WSCnkDRb3QSU0JX8UmK`).
+  - `legion-multiversal.bundle` — `411064cde41a14115ea146cfac066b4469cb795bd375626da129ec48cc373a62` (Drive ID `1xBQ4IP-6HgQ0p0SiUEo1N2qFKWDoPaqQ`).
+- **Resultado:** backup creado, subido y verificado por el motor; bundle reportado como historial completo. Retención: `expired_candidates: 0`; borrado automático permanece deshabilitado (`automatic_deletion: disabled_non_atomic_drive_api`). No se generaron artefactos descargables de Actions.
+- **Advertencia:** `actions/checkout@v4` avisó que Node.js 20 está deprecado y se ejecuta forzado en Node.js 24; no afectó el éxito del job.
+- **Límite de esta evidencia:** no se ejecutó ni se documentó una restauración aislada desde este backup. El restore script solo pasó la comprobación sintáctica. Tampoco se aporta en este run una comparación de SHA-256 después de restaurar ni prueba de recuperación del repositorio en un directorio limpio. BASE-02 **no se cierra**.
+- **Próximo paso:** implementar/ejecutar una verificación de descarga y restauración aislada de este Backup ID, comparar los hashes y comprobar el historial Git restaurado. No tocar `main`, no desplegar ni fusionar PR mientras siga pendiente esa prueba.
