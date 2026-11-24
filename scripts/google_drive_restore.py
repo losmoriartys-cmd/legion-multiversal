@@ -65,6 +65,34 @@ def safe_extract_snapshot(snapshot, destination):
                 raise RuntimeError("Archive links or special files are not allowed")
         archive.extractall(destination, members=members)
 
+def verify_snapshot_matches_commit(repo_dir, snapshot_dir, commit):
+    listing = subprocess.run(["git", "ls-tree", "-rz", "--full-tree", commit],
+                             cwd=repo_dir, check=True, capture_output=True).stdout
+    checked = 0
+    for record in listing.split(b"\\0"):
+        if not record:
+            continue
+        metadata, raw_path = record.split(b"\\t", 1)
+        mode, object_type, _object_id = metadata.decode("ascii").split()
+        relative = Path(raw_path.decode("utf-8"))
+        candidate = snapshot_dir / relative
+        if mode == "120000":
+            raise RuntimeError("Snapshot contains a symbolic link; safe snapshot comparison refused")
+        if object_type != "blob" or mode not in {"100644", "100755"}:
+            continue
+        if candidate.is_symlink() or not candidate.is_file():
+            raise RuntimeError(f"Snapshot is missing a regular tracked file: {relative}")
+        with candidate.open("rb") as stream:
+            actual = subprocess.run(["git", "hash-object", "--no-filters", "--stdin"],
+                                    cwd=repo_dir, input=stream.read(), check=True,
+                                    capture_output=True, text=True).stdout.strip()
+        if actual != _object_id.decode("ascii"):
+            raise RuntimeError(f"Snapshot content differs from Git Bundle at: {relative}")
+        checked += 1
+    if checked == 0:
+        raise RuntimeError("No tracked regular files were checked in the snapshot")
+    return checked
+
 def main():
     p = argparse.ArgumentParser()
     p.add_argument("--backup-id", required=True)
@@ -135,10 +163,11 @@ def main():
         snap_dir = target / "source-snapshot"
         snap_dir.mkdir()
         safe_extract_snapshot(snapshot, snap_dir)
+        checked_files = verify_snapshot_matches_commit(repo_dir, snap_dir, actual_commit)
         print(json.dumps({"restore": "success", "backup_id": args.backup_id,
                           "target": str(target), "bundle_repo": str(repo_dir),
                           "snapshot": str(snap_dir), "commit": actual_commit,
-                          "isolated": True}, indent=2))
+                          "snapshot_files_verified": checked_files, "isolated": True}, indent=2))
 
 if __name__ == "__main__":
     main()
