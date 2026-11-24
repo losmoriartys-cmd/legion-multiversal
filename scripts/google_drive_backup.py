@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Google Drive backup. Verify every uploaded object before considering retention."""
 from __future__ import annotations
-import hashlib, json, os, subprocess, tempfile, urllib.parse, urllib.request
+import hashlib, json, os, shutil, subprocess, tempfile, urllib.parse, urllib.request
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
@@ -148,13 +148,42 @@ def run_backup(folder, token, backup_id, files, workdir):
             "expired_candidates": len(candidates),
             "automatic_deletion": "disabled_non_atomic_drive_api"}
 
+def create_backup_package(out: Path) -> None:
+    """Create the local backup package using Git Bash on Windows and Bash elsewhere."""
+    if os.name == "nt":
+        git_executable = shutil.which("git")
+        if not git_executable:
+            raise RuntimeError("Git for Windows was not found on PATH")
+        git_root = Path(git_executable).resolve().parent.parent
+        bash = git_root / "bin" / "bash.exe"
+        cygpath = git_root / "usr" / "bin" / "cygpath.exe"
+        if not bash.is_file() or not cygpath.is_file():
+            raise RuntimeError("Git Bash or cygpath.exe is missing from the Git for Windows installation")
+        converted = subprocess.run(
+            [str(cygpath), "-u", str(out)],
+            check=True, capture_output=True, text=True,
+        ).stdout.strip()
+        if not converted.startswith("/"):
+            raise RuntimeError("Could not convert the Windows temporary path for Git Bash")
+        bash_command = str(bash)
+        output_argument = converted
+    else:
+        bash_command = "bash"
+        output_argument = str(out)
+
+    subprocess.run(
+        [bash_command, "scripts/create_repo_backup.sh", output_argument],
+        check=True,
+    )
+
+
 def main():
     folder = os.environ["GOOGLE_DRIVE_FOLDER_ID"]
     token = access_token()
     backup_id = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ") + "-" + os.environ.get("GITHUB_RUN_ID", "local")
     with tempfile.TemporaryDirectory(prefix="legion-drive-backup-") as td:
         out = Path(td) / "backup-output"
-        subprocess.run(["bash", "scripts/create_repo_backup.sh", str(out)], check=True)
+        create_backup_package(out)
         files = sorted(p for p in out.iterdir() if p.is_file())
         result = run_backup(folder, token, backup_id, files, td)
         print(json.dumps(result, indent=2))
