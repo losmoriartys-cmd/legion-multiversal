@@ -173,8 +173,10 @@ class DriveBackupFailureTests(unittest.TestCase):
         sums = self.root / "SHA256SUMS"
         subprocess.run(["sha256sum", artifact.name, snapshot.name], cwd=self.root,
                        check=True, capture_output=True, text=True)
-        manifest = subprocess.run(["sha256sum", artifact.name, snapshot.name], cwd=self.root,
-                                  check=True, capture_output=True, text=True).stdout
+        manifest = "".join(
+            f"{backup.sha256(path)}  {path.name}\n"
+            for path in (artifact, snapshot)
+        )
         sums.write_text(manifest, encoding="utf-8")
         names = [artifact.name, snapshot.name, sums.name]
         restore.verify_downloaded_artifacts(self.root, names)
