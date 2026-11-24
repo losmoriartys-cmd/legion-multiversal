@@ -73,6 +73,8 @@ Cada colaborador debe:
 | `update_stats.py` | Colector Twitch Helix. |
 | `update_platform_stats.py` | Colectores YouTube Data API v3 y Kick Developer Public API. |
 | `data/creator-records.json` | Registros editoriales y trayectoria documentada por creador. |
+| `stats-games.js` | Función pura que agrega el desglose por juego (`window.game_breakdown`) de `data.json`; la usa «Rendimiento por juego». |
+| `stats-tables.css` | Estilos de tablas y comparativas de Estadísticas. Consume `creator-colors.css`; no define colores por creador. |
 | `data/creator-colors.json` | Color de identidad de cada creador (fuente única). Se publica como `creator-colors.css`, generado con `scripts/build_creator_colors.py`; no editar ese CSS a mano. |
 | `sullygnome-data.json` / `twitchmetrics-data.json` | Referencias históricas de analítica externa, separadas de las APIs propias. |
 | `INFORMES.md` | Bitácora vigente de intervenciones, validaciones y pendientes. |
