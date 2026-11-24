@@ -1,0 +1,28 @@
+/* Generado por scripts/build_creator_colors.py desde data/creator-colors.json.
+   No editar a mano: cambiar el color en el JSON y volver a generar. */
+:root {
+  --c-moriartys: #4da3ff;
+  --c-moriartys-soft: rgba(77, 163, 255, .14);
+  --c-rod3r1k: #f0545a;
+  --c-rod3r1k-soft: rgba(240, 84, 90, .14);
+  --c-lady-moriarty: #ff7ab8;
+  --c-lady-moriarty-soft: rgba(255, 122, 184, .14);
+  --c-ardipii: #a3acb8;
+  --c-ardipii-soft: rgba(163, 172, 184, .14);
+  --c-akuma: #a78bfa;
+  --c-akuma-soft: rgba(167, 139, 250, .14);
+  --c-dave-nexus: #5fd47a;
+  --c-dave-nexus-soft: rgba(95, 212, 122, .14);
+  --c-pato-oratoris: #f2d94e;
+  --c-pato-oratoris-soft: rgba(242, 217, 78, .14);
+  --c-habitos: #ff9a3c;
+  --c-habitos-soft: rgba(255, 154, 60, .14);
+}
+[data-creator-id="moriartys"] { --creator-color: var(--c-moriartys); --creator-color-soft: var(--c-moriartys-soft); }
+[data-creator-id="rod3r1k"] { --creator-color: var(--c-rod3r1k); --creator-color-soft: var(--c-rod3r1k-soft); }
+[data-creator-id="lady-moriarty"] { --creator-color: var(--c-lady-moriarty); --creator-color-soft: var(--c-lady-moriarty-soft); }
+[data-creator-id="ardipii"] { --creator-color: var(--c-ardipii); --creator-color-soft: var(--c-ardipii-soft); }
+[data-creator-id="akuma"] { --creator-color: var(--c-akuma); --creator-color-soft: var(--c-akuma-soft); }
+[data-creator-id="dave-nexus"] { --creator-color: var(--c-dave-nexus); --creator-color-soft: var(--c-dave-nexus-soft); }
+[data-creator-id="pato-oratoris"] { --creator-color: var(--c-pato-oratoris); --creator-color-soft: var(--c-pato-oratoris-soft); }
+[data-creator-id="habitos"] { --creator-color: var(--c-habitos); --creator-color-soft: var(--c-habitos-soft); }

@@ -9,10 +9,10 @@
   const searchInput = document.getElementById('collab-search');
   const categorySelect = document.getElementById('collab-category');
   const creatorSelect = document.getElementById('collab-creator');
-  const CREATOR_COLORS = {
-    moriartys: '#62d9e8', 'lady-moriarty': '#d68acb', rod3r1k: '#e7c66f',
-    akuma: '#ed786d', habitos: '#a99bff', 'dave-nexus': '#86c98e', ardipii: '#8fb7e8'
-  };
+  // El color de cada creador vive en data/creator-colors.json y llega como variable CSS (creator-colors.css).
+  function creatorColor(id) {
+    return /^[a-z0-9-]+$/.test(String(id)) ? 'var(--c-' + id + ', #91a9bf)' : '#91a9bf';
+  }
   let games = [];
   let creators = new Map();
   let channelImages = {};
@@ -45,7 +45,7 @@
   function avatarMarkup(id, creator, hasPov) {
     const login = creator ? creatorLogin(creator) : '';
     const image = safeHttps(channelImages[login], 'jtvnw.net');
-    const color = CREATOR_COLORS[id] || '#91a9bf';
+    const color = creatorColor(id);
     const fallback = escapeHtml(String(creatorName(id)).trim().split(/\s+/).slice(0, 2).map(function (part) { return part.charAt(0); }).join('').toUpperCase());
     return '<span class="collab-avatar-wrap ' + (hasPov ? 'has-pov' : 'no-pov') + '" style="--creator-color:' + color + '">' +
       (image ? '<img src="' + escapeHtml(image) + '" alt="Avatar del canal ' + escapeHtml(creatorName(id)) + '" loading="lazy" decoding="async">' : '<span class="collab-avatar-fallback" aria-hidden="true">' + fallback + '</span>') +
@@ -69,7 +69,7 @@
   function renderPov(pov) {
     const id = pov.canal;
     const name = id ? creatorName(id) : 'CANAL POR CONFIRMAR';
-    const color = id ? (CREATOR_COLORS[id] || '#91a9bf') : '#9aa7b5';
+    const color = id ? creatorColor(id) : '#9aa7b5';
     const href = safeHttps(pov.url, 'twitch.tv');
     if (!href) return '';
     return '<a class="collab-pov-link ' + (id ? '' : 'is-unassigned') + '" style="--creator-color:' + color + '" href="' + escapeHtml(href) + '" target="_blank" rel="noopener noreferrer" data-pov-channel="' + escapeHtml(id || 'unassigned') + '" aria-label="Abrir POV de ' + escapeHtml(name) + ' en Twitch"><span class="collab-pov-play" aria-hidden="true">▶</span><span><small>POV · ' + escapeHtml(name) + '</small><strong>ABRIR VOD ↗</strong></span></a>';

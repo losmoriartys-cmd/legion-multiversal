@@ -308,6 +308,21 @@
 
 ---
 
+## 2026-11-23 — Sistema visual · PR 1: color de identidad único por creador
+
+- **Fecha y responsable:** 23/11/2026 · Claude (asistente), a pedido de Demian.
+- **Objetivo:** que cada creador tenga un solo color en todo el sitio. Antes `games-registry.js` y `app.js` definían paletas distintas y en conflicto (por ejemplo Moriartys dorado en una y cian en la otra; ROD3R1K y Akuma casi iguales, ΔE 22).
+- **Colores acordados por Demian:** Akuma violeta, ROD3R1K rojo, Moriartys azul, Lady Moriarty rosa, Ardipii gris, Hábitos naranja, Dave verde, Pato amarillo. Los tonos exactos (hex) son propuesta técnica y se ajustan en un único archivo.
+- **Archivos modificados:** `app.js` (se retira `heroAccentColors`, que no tenía consumidores), `games-registry.js` (usa `var(--c-<id>)`), `index.html` (enlaza `creator-colors.css`), `README.md`, `data/README.md`.
+- **Archivos nuevos:** `data/creator-colors.json`, `creator-colors.css` (generado), `scripts/build_creator_colors.py`, `scripts/validate_creator_colors.py`, `tests/test_creator_colors_contract.py`.
+- **Decisión de diseño:** el color no se agregó a `data/roster.json` porque `tests/test_base_data_layout.py` exige conservar su blob original (BASE-01B). Las claves del nuevo archivo son los mismos IDs canónicos y el validador comprueba que coincidan.
+- **Implementado:** variables `--c-<id>` y `--c-<id>-soft`; `--creator-color` por `data-creator-id`; validación de hex, unicidad, contraste ≥ 4,5:1 sobre `#080d18` y `#101a2a` (mínimo medido 5,7:1) y distancia mínima ΔE ≥ 25 (mínimo medido 31, Akuma/Moriartys).
+- **Validaciones y resultados:** 240 pruebas Python OK (12 nuevas), `validate_site.py` OK, `check_anchors.py` OK (32 anclas), `node --check` OK en `app.js` y `games-registry.js`.
+- **Pendientes / riesgos:** no se ejecutó Playwright ni se revisó el resultado en un navegador (el entorno de trabajo no tiene acceso de red para instalarlo); queda pendiente la verificación visual de Colaboraciones en la preview. Los colores de las voces del modo cómic (`.voice-*` en `styles.css`) siguen siendo locales y se migrarán en un PR posterior. Los acentos de marca actuales (azul y amarillo) coinciden en tono con los colores de Moriartys y Pato: decisión pendiente. Cada integrante debe confirmar su color.
+- **Sincronización 24/11/2026:** rama actualizada desde `main` `937208d9f820454c8f32e05327c9e41a0bc794fa`; los nueve workflows Node.js 24 y los datos automáticos recientes se conservaron. La única ruta con cambios en ambos lados fue `INFORMES.md`, integrada manualmente sin eliminar la evidencia BASE-02 ni el registro del PR #104.
+- **Commit de sincronización:** se completa tras crear el commit basado en `main`.
+- **Despliegue y revisión visual:** pendientes de la nueva preview; no se da por aprobada la paleta hasta revisar los ocho colores en escritorio y móvil.
+
 ## 2026-11-21 — Capítulo 08 · Arsenal conectado al registro maestro
 
 - **Base:** rama de integración posterior al Capítulo 07, commit 6f937bb735b8f199a5ce12301205790e7df6edfe; rama feat/chapter-08-arsenal-registry.
