@@ -93,7 +93,7 @@ def verify_snapshot_matches_commit(repo_dir, snapshot_dir, commit):
             actual = subprocess.run(["git", "hash-object", "--no-filters", "--stdin"],
                                     cwd=repo_dir, input=stream.read(), check=True,
                                     capture_output=True).stdout.decode("ascii").strip()
-        if actual != _object_id.decode("ascii"):
+        if actual != _object_id:
             raise RuntimeError(f"Snapshot content differs from Git Bundle at: {relative}")
         checked += 1
     if checked == 0:
