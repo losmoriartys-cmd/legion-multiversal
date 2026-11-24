@@ -1547,16 +1547,7 @@ function refreshRosterLiveIndicators() {
 }
 
 
-const heroAccentColors = {
-    'moriartys': '#e8b94e',
-    'rod3r1k': '#ef554d',
-    'lady-moriarty': '#c78cff',
-    'ardipii': '#55c7b5',
-    'akuma': '#f07842',
-    'dave-nexus': '#62a8ff',
-    'pato-oratoris': '#e7d58b',
-    'habitos': '#9bd36b'
-};
+
 let selectedRosterCreatorId = null;
 function renderRosterMetricSummary(hero){
  return renderNormalizedMetricSummary(hero);
