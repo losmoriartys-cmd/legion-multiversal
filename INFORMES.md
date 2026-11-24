@@ -324,13 +324,13 @@
 ## 2026-11-23 — Sistema visual · PR 2: tablas con color de identidad y Rendimiento por juego
 
 - **Fecha y responsable:** 23–24/11/2026 · Claude (asistente), a pedido de Demian.
-- **Base y rebase:** PR #99 partía de la rama de #98. Tras integrar #98, se rebasó sobre `main` `146d214f527d8af8c280a155ac1e9a59601a0a4f`; se conservaron sus tres commits propios. HEAD validado: `d45decbb02a86c1887d43330434332b5acbb698f`.
+- **Base y rebase:** PR #99 partía de la rama de #98. Tras integrar #98, se rebasó sobre `main` `146d214f527d8af8c280a155ac1e9a59601a0a4f`; se conservaron sus tres commits propios. HEAD validado: `d59400ff6b4118f40a2405eee02104b1a0838efe`.
 - **Diff final:** nueve archivos propios de #99; no se duplicaron `creator-colors.css`, `data/creator-colors.json`, los scripts ni el contrato de color de #98. `INFORMES.md` conserva los registros BASE-02, Node.js 24 y PR #98.
 - **Implementado:** comparativa Twitch con color de identidad por creador (promedio sólido y pico tenue); tabla técnica por canal con barras y cifras alineadas; nueva tabla «Rendimiento por juego», agregada desde `game_breakdown`, con promedio ponderado por muestras, pico observado, participantes y aviso de pocas transmisiones (<3). Los datos se presentan como muestreo propio, no como analítica oficial ni proyección.
 - **Corrección responsive:** la primera captura detectó que la tabla móvil medía 295,6 px dentro de un contenedor de 271 px. Se ajustó `stats-tables.css` con ancho máximo del 100 %, distribución fija y ajuste de contenido en celdas. La comprobación posterior confirmó que la tabla queda contenida y las filas pasan a tarjetas en móvil.
-- **Evidencia visual:** artifact `14965091526`, con capturas completas de Estadísticas en escritorio (1280×7439) y móvil (390×16865). Se revisaron comparativa Twitch, Rendimiento por juego, tarjetas móviles, evolución de actividad y semana de la Legión.
-- **Validación final:** Playwright: 52 pruebas aprobadas y 1 omitida; ambas pruebas visuales nuevas (escritorio y móvil) aprobaron. Workflows: QA común `45487747004`, colector `45487747014`, QA portable `45487747007`, validación integral `45487735620`; Cloudflare Pages y todos los check-runs terminaron en SUCCESS.
-- **Estado al cierre de esta revisión:** cambios y evidencia validados; integración de PR #99 pendiente. Las cifras por juego siguen sujetas a la cobertura limitada del muestreo disponible.
+- **Evidencia visual:** artifact `14964659472`, con capturas completas de Estadísticas en escritorio (1280×7439) y móvil (390×16865). Se revisaron comparativa Twitch, Rendimiento por juego, tarjetas móviles, evolución de actividad y semana de la Legión.
+- **Validación final:** Playwright: 52 pruebas aprobadas y 1 omitida; ambas pruebas visuales nuevas (escritorio y móvil) aprobaron. Workflows: QA común `45488968839`, colector `45488968829`, QA portable `45488968867`, validación integral `45488960383`; Cloudflare Pages y todos los check-runs terminaron en SUCCESS.
+- **Integración:** PR #99 integrado en `main` el 24/11/2026; merge commit `f80925fe7ce4a7f2ae0231515fee5e0bb14359a8`. Las cifras por juego siguen sujetas a la cobertura limitada del muestreo disponible.
 
 ## 2026-11-21 — Capítulo 08 · Arsenal conectado al registro maestro
 
