@@ -1,0 +1,82 @@
+name: Restore Google Drive backup (isolated verification)
+
+on:
+  workflow_dispatch:
+    inputs:
+      backup_id:
+        description: "Exact Google Drive backup ID to restore"
+        required: true
+        type: string
+        default: "20261124T181104Z-45349573134"
+
+permissions:
+  contents: read
+
+jobs:
+  restore:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Checkout restore verifier
+        uses: actions/checkout@v4
+        with:
+          ref: ops/backup-once-2026-11-24
+          fetch-depth: 1
+
+      - name: Prepare isolated empty destination
+        shell: bash
+        run: |
+          set -euo pipefail
+          TARGET="/tmp/legion-drive-restore-${GITHUB_RUN_ID}"
+          if [ -e "$TARGET" ] && [ -n "$(find "$TARGET" -mindepth 1 -maxdepth 1 -print -quit)" ]; then
+            echo "Restore target exists and is not empty; refusing to continue." >&2
+            exit 1
+          fi
+          mkdir -p "$TARGET"
+          test -z "$(find "$TARGET" -mindepth 1 -maxdepth 1 -print -quit)"
+          echo "RESTORE_TARGET=$TARGET" >> "$GITHUB_ENV"
+
+      - name: Restore exact backup from Google Drive and verify SHA-256
+        env:
+          GOOGLE_OAUTH_CLIENT_ID: ${{ secrets.GOOGLE_OAUTH_CLIENT_ID }}
+          GOOGLE_OAUTH_CLIENT_SECRET: ${{ secrets.GOOGLE_OAUTH_CLIENT_SECRET }}
+          GOOGLE_OAUTH_REFRESH_TOKEN: ${{ secrets.GOOGLE_OAUTH_REFRESH_TOKEN }}
+          GOOGLE_DRIVE_FOLDER_ID: ${{ secrets.GOOGLE_DRIVE_FOLDER_ID }}
+          BACKUP_ID: ${{ inputs.backup_id }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/google_drive_restore.py --backup-id "$BACKUP_ID" --target "$RESTORE_TARGET" | tee restore-result.json
+          python -m json.tool restore-result.json
+
+      - name: Verify recovered Git object database and history
+        shell: bash
+        run: |
+          set -euo pipefail
+          REPO="$RESTORE_TARGET/repository-from-bundle"
+          git -C "$REPO" fsck --full
+          git -C "$REPO" rev-parse HEAD | tee recovered-head.txt
+          git -C "$REPO" rev-list --count --all | tee recovered-commit-count.txt
+          git -C "$REPO" show-ref | tee recovered-refs.txt
+          git -C "$REPO" log -1 --format='latest_commit=%H%nlatest_subject=%s' | tee recovered-latest-commit.txt
+          test -s recovered-head.txt
+          test -s recovered-commit-count.txt
+          test "$(cat recovered-commit-count.txt)" -gt 0
+
+      - name: Package recovery evidence
+        if: always()
+        shell: bash
+        run: |
+          mkdir -p restore-evidence
+          cp restore-result.json recovered-head.txt recovered-commit-count.txt recovered-refs.txt recovered-latest-commit.txt restore-evidence/ 2>/dev/null || true
+          printf 'run_id=%s\nbackup_id=%s\nsource_branch=ops/backup-once-2026-11-24\n' "$GITHUB_RUN_ID" "${{ inputs.backup_id }}" > restore-evidence/run-metadata.txt
+          cp restore-evidence/run-metadata.txt restore-evidence/ 2>/dev/null || true
+
+      - name: Upload recovery evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: google-drive-restore-evidence-${{ github.run_id }}
+          path: restore-evidence/
+          if-no-files-found: warn
+          retention-days: 14
