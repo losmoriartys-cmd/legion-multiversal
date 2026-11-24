@@ -14,17 +14,17 @@
     "ther0d3r1k"
   ],
   "collection": {
-    "started_at": "2026-11-24T20:25:40Z",
+    "started_at": "2026-11-24T21:29:10Z",
     "expected_channels": 7,
     "resolved_channels": 7,
     "sampled_channels": [
+      "akumazoldyck",
+      "ardipii",
       "daved0608",
       "habitos_atomicos",
       "ladymoriarty01",
       "losmoriartys",
-      "ther0d3r1k",
-      "akumazoldyck",
-      "ardipii"
+      "ther0d3r1k"
     ],
     "skipped_channels": [],
     "complete": true,
@@ -42,7 +42,7 @@
     "elgabii090"
   ],
   "channel_registry_note": "Los canales archivados se conservan para consulta histórica y no se incluyen en los indicadores del roster activo.",
-  "updated_at": "2026-11-24T20:25:40Z",
+  "updated_at": "2026-11-24T21:29:10Z",
   "channels": {
     "ladymoriarty01": {
       "login": "ladymoriarty01",
@@ -51,7 +51,7 @@
       "profile_image_url": "https://static-cdn.jtvnw.net/jtv_user_pictures/1729ff07-94b4-4b9f-a03e-a10142f3a658-profile_image-300x300.jpeg",
       "twitch_url": "https://twitch.tv/ladymoriarty01",
       "followers_total": 205,
-      "followers_captured_at": "2026-11-24T20:25:40Z",
+      "followers_captured_at": "2026-11-24T21:29:10Z",
       "followers_source": "Twitch Helix · total público",
       "followers_status": "fresh",
       "followers_note": "Total público consultado en Twitch Helix; no se solicitaron permisos de moderación ni se guardó la lista de seguidores.",
@@ -63,13 +63,13 @@
         },
         {
           "date": "2026-11-24",
-          "captured_at": "2026-11-24T20:25:40Z",
+          "captured_at": "2026-11-24T21:29:10Z",
           "followers_total": 205
         }
       ],
       "schedule": {
         "status": "not_published",
-        "captured_at": "2026-11-24T20:25:40Z",
+        "captured_at": "2026-11-24T21:29:10Z",
         "segments": []
       },
       "live": false,
@@ -77,11 +77,11 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "last_status_at": "2026-11-24T20:25:40Z",
-      "last_snapshot_at": "2026-11-24T20:25:40Z",
-      "updated_at": "2026-11-24T20:25:40Z",
+      "last_status_at": "2026-11-24T21:29:10Z",
+      "last_snapshot_at": "2026-11-24T21:29:10Z",
+      "updated_at": "2026-11-24T21:29:10Z",
       "window": {
-        "samples_total": 466,
+        "samples_total": 467,
         "live_samples": 15,
         "streams_observed": 7,
         "average_viewers_sampled": 6.3,
@@ -4407,6 +4407,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-24T21:29:10Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -4417,7 +4426,7 @@
       "profile_image_url": "https://static-cdn.jtvnw.net/jtv_user_pictures/1db2e1df-454f-4728-9bc8-84258fab8934-profile_image-300x300.png",
       "twitch_url": "https://twitch.tv/ther0d3r1k",
       "followers_total": 5222,
-      "followers_captured_at": "2026-11-24T20:25:40Z",
+      "followers_captured_at": "2026-11-24T21:29:10Z",
       "followers_source": "Twitch Helix · total público",
       "followers_status": "fresh",
       "followers_note": "Total público consultado en Twitch Helix; no se solicitaron permisos de moderación ni se guardó la lista de seguidores.",
@@ -4429,13 +4438,13 @@
         },
         {
           "date": "2026-11-24",
-          "captured_at": "2026-11-24T20:25:40Z",
+          "captured_at": "2026-11-24T21:29:10Z",
           "followers_total": 5222
         }
       ],
       "schedule": {
         "status": "published",
-        "captured_at": "2026-11-24T20:25:40Z",
+        "captured_at": "2026-11-24T21:29:10Z",
         "source": "Twitch Helix · Get Channel Stream Schedule",
         "segments": [
           {
@@ -4473,11 +4482,11 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "last_status_at": "2026-11-24T20:25:40Z",
-      "last_snapshot_at": "2026-11-24T20:25:40Z",
-      "updated_at": "2026-11-24T20:25:40Z",
+      "last_status_at": "2026-11-24T21:29:10Z",
+      "last_snapshot_at": "2026-11-24T21:29:10Z",
+      "updated_at": "2026-11-24T21:29:10Z",
       "window": {
-        "samples_total": 466,
+        "samples_total": 467,
         "live_samples": 47,
         "streams_observed": 12,
         "average_viewers_sampled": 23.6,
@@ -8852,6 +8861,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-24T21:29:10Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -9508,7 +9526,7 @@
       "profile_image_url": "https://static-cdn.jtvnw.net/jtv_user_pictures/7714bc29-07fc-4738-90f3-29cba205df91-profile_image-300x300.png",
       "twitch_url": "https://twitch.tv/ardipii",
       "followers_total": 458,
-      "followers_captured_at": "2026-11-24T20:25:40Z",
+      "followers_captured_at": "2026-11-24T21:29:10Z",
       "followers_source": "Twitch Helix · total público",
       "followers_status": "fresh",
       "followers_note": "Total público consultado en Twitch Helix; no se solicitaron permisos de moderación ni se guardó la lista de seguidores.",
@@ -9520,13 +9538,13 @@
         },
         {
           "date": "2026-11-24",
-          "captured_at": "2026-11-24T20:25:40Z",
+          "captured_at": "2026-11-24T21:29:10Z",
           "followers_total": 458
         }
       ],
       "schedule": {
         "status": "not_published",
-        "captured_at": "2026-11-24T20:25:40Z",
+        "captured_at": "2026-11-24T21:29:10Z",
         "segments": []
       },
       "live": false,
@@ -9534,11 +9552,11 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "last_status_at": "2026-11-24T20:25:40Z",
-      "last_snapshot_at": "2026-11-24T20:25:40Z",
-      "updated_at": "2026-11-24T20:25:40Z",
+      "last_status_at": "2026-11-24T21:29:10Z",
+      "last_snapshot_at": "2026-11-24T21:29:10Z",
+      "updated_at": "2026-11-24T21:29:10Z",
       "window": {
-        "samples_total": 466,
+        "samples_total": 467,
         "live_samples": 11,
         "streams_observed": 7,
         "average_viewers_sampled": 9.1,
@@ -13801,6 +13819,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-24T21:29:10Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -13811,7 +13838,7 @@
       "profile_image_url": "https://static-cdn.jtvnw.net/jtv_user_pictures/960db8a3-a588-4829-8b26-5b4ed95db93a-profile_image-300x300.png",
       "twitch_url": "https://twitch.tv/akumazoldyck",
       "followers_total": 171,
-      "followers_captured_at": "2026-11-24T20:25:40Z",
+      "followers_captured_at": "2026-11-24T21:29:10Z",
       "followers_source": "Twitch Helix · total público",
       "followers_status": "fresh",
       "followers_note": "Total público consultado en Twitch Helix; no se solicitaron permisos de moderación ni se guardó la lista de seguidores.",
@@ -13823,13 +13850,13 @@
         },
         {
           "date": "2026-11-24",
-          "captured_at": "2026-11-24T20:25:40Z",
+          "captured_at": "2026-11-24T21:29:10Z",
           "followers_total": 171
         }
       ],
       "schedule": {
         "status": "published",
-        "captured_at": "2026-11-24T20:25:40Z",
+        "captured_at": "2026-11-24T21:29:10Z",
         "source": "Twitch Helix · Get Channel Stream Schedule",
         "segments": [
           {
@@ -13904,19 +13931,19 @@
           }
         ]
       },
-      "live": false,
-      "current_viewers": null,
-      "current_game": null,
-      "current_title": null,
-      "stream_started_at": null,
-      "last_status_at": "2026-11-24T20:25:40Z",
-      "last_snapshot_at": "2026-11-24T20:25:40Z",
-      "updated_at": "2026-11-24T20:25:40Z",
+      "live": true,
+      "current_viewers": 3,
+      "current_game": "Just Chatting",
+      "current_title": "brazooo",
+      "stream_started_at": "2026-11-24T21:11:26Z",
+      "last_status_at": "2026-11-24T21:29:10Z",
+      "last_snapshot_at": "2026-11-24T21:29:10Z",
+      "updated_at": "2026-11-24T21:29:10Z",
       "window": {
-        "samples_total": 466,
-        "live_samples": 36,
-        "streams_observed": 17,
-        "average_viewers_sampled": 6.8,
+        "samples_total": 467,
+        "live_samples": 37,
+        "streams_observed": 18,
+        "average_viewers_sampled": 6.6,
         "peak_viewers_sampled": 23,
         "observed_live_hours": 16.18,
         "estimated_hours_watched": 107.5,
@@ -13929,18 +13956,18 @@
             "peak_viewers_sampled": 23
           },
           {
+            "name": "Just Chatting",
+            "live_samples": 4,
+            "streams_observed": 3,
+            "average_viewers_sampled": 5.0,
+            "peak_viewers_sampled": 12
+          },
+          {
             "name": "Can 'Em All",
             "live_samples": 3,
             "streams_observed": 2,
             "average_viewers_sampled": 8.7,
             "peak_viewers_sampled": 17
-          },
-          {
-            "name": "Just Chatting",
-            "live_samples": 3,
-            "streams_observed": 2,
-            "average_viewers_sampled": 5.7,
-            "peak_viewers_sampled": 12
           },
           {
             "name": "Terrible Lizards",
@@ -14097,6 +14124,13 @@
             "streams_observed": 1,
             "average_viewers_sampled": 8.5,
             "peak_viewers_sampled": 23
+          },
+          {
+            "date": "2026-11-24",
+            "live_samples": 1,
+            "streams_observed": 1,
+            "average_viewers_sampled": 3.0,
+            "peak_viewers_sampled": 3
           }
         ],
         "method": "Muestreo propio con cadencia observada cercana a 55 minutos, variable por la programación de GitHub Actions; horas estimadas solo entre muestras consecutivas del mismo directo cuando el intervalo no supera 110 minutos. Categorías y evolución diaria se calculan sobre las muestras observadas."
@@ -18295,6 +18329,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-24T21:29:10Z",
+          "is_live": true,
+          "viewer_count": 3,
+          "game_name": "Just Chatting",
+          "title": "brazooo",
+          "stream_id": "322405647833",
+          "started_at": "2026-11-24T21:11:26Z"
         }
       ]
     },
@@ -18305,7 +18348,7 @@
       "profile_image_url": "https://static-cdn.jtvnw.net/jtv_user_pictures/ba3e3310-1575-4518-86e2-e7fee2073dcd-profile_image-300x300.png",
       "twitch_url": "https://twitch.tv/daved0608",
       "followers_total": 49,
-      "followers_captured_at": "2026-11-24T20:25:40Z",
+      "followers_captured_at": "2026-11-24T21:29:10Z",
       "followers_source": "Twitch Helix · total público",
       "followers_status": "fresh",
       "followers_note": "Total público consultado en Twitch Helix; no se solicitaron permisos de moderación ni se guardó la lista de seguidores.",
@@ -18317,13 +18360,13 @@
         },
         {
           "date": "2026-11-24",
-          "captured_at": "2026-11-24T20:25:40Z",
+          "captured_at": "2026-11-24T21:29:10Z",
           "followers_total": 49
         }
       ],
       "schedule": {
         "status": "not_published",
-        "captured_at": "2026-11-24T20:25:40Z",
+        "captured_at": "2026-11-24T21:29:10Z",
         "segments": []
       },
       "live": false,
@@ -18331,11 +18374,11 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "last_status_at": "2026-11-24T20:25:40Z",
-      "last_snapshot_at": "2026-11-24T20:25:40Z",
-      "updated_at": "2026-11-24T20:25:40Z",
+      "last_status_at": "2026-11-24T21:29:10Z",
+      "last_snapshot_at": "2026-11-24T21:29:10Z",
+      "updated_at": "2026-11-24T21:29:10Z",
       "window": {
-        "samples_total": 466,
+        "samples_total": 467,
         "live_samples": 16,
         "streams_observed": 10,
         "average_viewers_sampled": 1.9,
@@ -22633,6 +22676,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-24T21:29:10Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -23259,7 +23311,7 @@
       "profile_image_url": "https://static-cdn.jtvnw.net/jtv_user_pictures/cbc6f35d-8bdf-403a-bbfc-93bd3dec3eb9-profile_image-300x300.jpeg",
       "twitch_url": "https://twitch.tv/habitos_atomicos",
       "followers_total": 183,
-      "followers_captured_at": "2026-11-24T20:25:40Z",
+      "followers_captured_at": "2026-11-24T21:29:10Z",
       "followers_source": "Twitch Helix · total público",
       "followers_status": "fresh",
       "followers_note": "Total público consultado en Twitch Helix; no se solicitaron permisos de moderación ni se guardó la lista de seguidores.",
@@ -23271,13 +23323,13 @@
         },
         {
           "date": "2026-11-24",
-          "captured_at": "2026-11-24T20:25:40Z",
+          "captured_at": "2026-11-24T21:29:10Z",
           "followers_total": 183
         }
       ],
       "schedule": {
         "status": "published",
-        "captured_at": "2026-11-24T20:25:40Z",
+        "captured_at": "2026-11-24T21:29:10Z",
         "source": "Twitch Helix · Get Channel Stream Schedule",
         "segments": [
           {
@@ -23301,11 +23353,11 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "last_status_at": "2026-11-24T20:25:40Z",
-      "last_snapshot_at": "2026-11-24T20:25:40Z",
-      "updated_at": "2026-11-24T20:25:40Z",
+      "last_status_at": "2026-11-24T21:29:10Z",
+      "last_snapshot_at": "2026-11-24T21:29:10Z",
+      "updated_at": "2026-11-24T21:29:10Z",
       "window": {
-        "samples_total": 466,
+        "samples_total": 467,
         "live_samples": 90,
         "streams_observed": 25,
         "average_viewers_sampled": 4.1,
@@ -27687,6 +27739,15 @@
           "title": null,
           "stream_id": null,
           "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-24T21:29:10Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
         }
       ]
     },
@@ -27697,7 +27758,7 @@
       "profile_image_url": "https://static-cdn.jtvnw.net/jtv_user_pictures/ce75dbf8-4471-4884-890e-a4acb80b1838-profile_image-300x300.png",
       "twitch_url": "https://twitch.tv/losmoriartys",
       "followers_total": 1179,
-      "followers_captured_at": "2026-11-24T20:25:40Z",
+      "followers_captured_at": "2026-11-24T21:29:10Z",
       "followers_source": "Twitch Helix · total público",
       "followers_status": "fresh",
       "followers_note": "Total público consultado en Twitch Helix; no se solicitaron permisos de moderación ni se guardó la lista de seguidores.",
@@ -27709,13 +27770,13 @@
         },
         {
           "date": "2026-11-24",
-          "captured_at": "2026-11-24T20:25:40Z",
+          "captured_at": "2026-11-24T21:29:10Z",
           "followers_total": 1179
         }
       ],
       "schedule": {
         "status": "published",
-        "captured_at": "2026-11-24T20:25:40Z",
+        "captured_at": "2026-11-24T21:29:10Z",
         "source": "Twitch Helix · Get Channel Stream Schedule",
         "segments": [
           {
@@ -27767,11 +27828,11 @@
       "current_game": null,
       "current_title": null,
       "stream_started_at": null,
-      "last_status_at": "2026-11-24T20:25:40Z",
-      "last_snapshot_at": "2026-11-24T20:25:40Z",
-      "updated_at": "2026-11-24T20:25:40Z",
+      "last_status_at": "2026-11-24T21:29:10Z",
+      "last_snapshot_at": "2026-11-24T21:29:10Z",
+      "updated_at": "2026-11-24T21:29:10Z",
       "window": {
-        "samples_total": 466,
+        "samples_total": 467,
         "live_samples": 21,
         "streams_observed": 10,
         "average_viewers_sampled": 16.0,
@@ -32126,6 +32187,15 @@
         },
         {
           "sampled_at": "2026-11-24T20:25:40Z",
+          "is_live": false,
+          "viewer_count": null,
+          "game_name": null,
+          "title": null,
+          "stream_id": null,
+          "started_at": null
+        },
+        {
+          "sampled_at": "2026-11-24T21:29:10Z",
           "is_live": false,
           "viewer_count": null,
           "game_name": null,
