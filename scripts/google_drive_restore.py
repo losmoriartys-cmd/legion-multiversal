@@ -99,9 +99,9 @@ def safe_extract_snapshot(snapshot, destination):
         archive.extractall(destination, members=members)
 
 def clone_and_verify_bundle(bundle, repo_dir):
-    subprocess.run(["git", "clone", str(bundle), str(repo_dir)], check=True)
+    subprocess.run(["git", "clone", "--quiet", str(bundle), str(repo_dir)], check=True)
     # bundle verify requires a Git repository; the newly restored clone is the isolated verifier.
-    subprocess.run(["git", "bundle", "verify", str(bundle)], cwd=repo_dir, check=True)
+    subprocess.run(["git", "bundle", "verify", str(bundle)], cwd=repo_dir, check=True, stdout=subprocess.DEVNULL)
     return subprocess.run(["git", "rev-parse", "HEAD"], cwd=repo_dir, check=True,
                           capture_output=True, text=True).stdout.strip()
 
