@@ -70,7 +70,6 @@ jobs:
           mkdir -p restore-evidence
           cp restore-result.json recovered-head.txt recovered-commit-count.txt recovered-refs.txt recovered-latest-commit.txt restore-evidence/ 2>/dev/null || true
           printf 'run_id=%s\nbackup_id=%s\nsource_branch=ops/backup-once-2026-11-24\n' "$GITHUB_RUN_ID" "${{ inputs.backup_id }}" > restore-evidence/run-metadata.txt
-          cp restore-evidence/run-metadata.txt restore-evidence/ 2>/dev/null || true
 
       - name: Upload recovery evidence
         if: always()
