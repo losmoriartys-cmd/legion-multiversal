@@ -361,6 +361,17 @@ test('la Bitácora móvil conserva la presentación de main y publica ambas capt
     for (let index = 0; index < await timelineItems.count(); index++) {
       await expect(timelineItems.nth(index)).toBeVisible();
     }
+    // Cargar las fuentes remotas antes de medir y comparar la presentación.
+    // Con font-display: optional, capturar antes de que terminen puede mezclar
+    // tipografías de fallback y producir alturas/capturas distintas entre previews.
+    await target.evaluate(async () => {
+      await Promise.all([
+        document.fonts.load('400 16px "Roboto Condensed"'),
+        document.fonts.load('700 16px "Roboto Condensed"'),
+        document.fonts.load('400 24px Bangers')
+      ]);
+      await document.fonts.ready;
+    });
     const selectedTabs = target.locator('.hero-profile-tabs');
     await selectedTabs.evaluate(el => el.scrollIntoView({ block: 'start', inline: 'nearest' }));
     await expect(bitacoraTab).toBeVisible();
