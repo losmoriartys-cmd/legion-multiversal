@@ -132,14 +132,16 @@ class DriveBackupFailureTests(unittest.TestCase):
         subprocess.run(["git", "init", "-q", "-b", "main"], cwd=repo_dir, check=True)
         subprocess.run(["git", "config", "user.email", "test@example.invalid"], cwd=repo_dir, check=True)
         subprocess.run(["git", "config", "user.name", "Backup Test"], cwd=repo_dir, check=True)
-        (repo_dir / "tracked.txt").write_text("original content", encoding="utf-8")
+        subprocess.run(["git", "config", "core.autocrlf", "true"], cwd=repo_dir, check=True)
+        (repo_dir / "tracked.txt").write_text("original content\n", encoding="utf-8")
         subprocess.run(["git", "add", "tracked.txt"], cwd=repo_dir, check=True)
         subprocess.run(["git", "commit", "-qm", "fixture"], cwd=repo_dir, check=True)
         commit = subprocess.run(["git", "rev-parse", "HEAD"], cwd=repo_dir, check=True,
                                 capture_output=True, text=True).stdout.strip()
         snapshot = self.root / "snapshot"
         snapshot.mkdir()
-        (snapshot / "tracked.txt").write_text("original content", encoding="utf-8")
+        # Windows-style checkout bytes must normalize to the same committed Git blob.
+        (snapshot / "tracked.txt").write_bytes(b"original content\r\n")
         self.assertEqual(restore.verify_snapshot_matches_commit(repo_dir, snapshot, commit), 1)
         (snapshot / "tracked.txt").write_text("tampered content", encoding="utf-8")
         with self.assertRaisesRegex(RuntimeError, "differs from Git Bundle"):
