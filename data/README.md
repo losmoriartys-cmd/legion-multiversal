@@ -11,6 +11,8 @@ Esta carpeta contiene las fuentes maestras de contenido estructurado. Cada entid
 - **`data/games.json`**: catálogo de juegos, sesiones BIT, participantes, POV y enlaces audiovisuales.
 - **`data/roster.json`**: identidad canónica, ocho perfiles, cuentas por plataforma, enlaces y horarios declarados. La ruta raíz `roster-data.json` queda retirada.
 
+- **`data/creator-colors.json`**: color de identidad por creador, indexado por los IDs de `data/roster.json`. Es la única fuente de color de perfiles: `creator-colors.css` se genera con `python3 scripts/build_creator_colors.py` y expone `--c-<id>` y `--c-<id>-soft`; todo componente que pinte a un creador debe usar esas variables o `data-creator-id`. Se mantiene fuera de `roster.json` para no alterar el blob que protege `tests/test_base_data_layout.py`. Reglas validadas por `scripts/validate_creator_colors.py`: hex válido, un color por creador sin repetirse, contraste mínimo 4,5:1 sobre los fondos oscuros y distancia mínima entre colores.
+
 ## Siguientes cortes de BASE-01
 
 - `data/clips.json`: índice editorial de clips y sus referencias canónicas.
