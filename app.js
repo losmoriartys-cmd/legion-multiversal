@@ -22,7 +22,8 @@ async function loadRosterData() {
         const colorResponse = await fetch('./data/creator-colors.json', { cache: 'no-store' });
         const colorPayload = colorResponse.ok ? await colorResponse.json() : null;
         payload.heroes.forEach(hero => {
-            const color = colorPayload && colorPayload.colors && colorPayload.colors[hero.id || hero.slug];
+            const colorEntry = colorPayload && colorPayload.creators && colorPayload.creators[hero.id || hero.slug];
+            const color = colorEntry && colorEntry.color;
             if (/^#[0-9a-fA-F]{6}$/.test(color || '')) hero.accent_color = color;
         });
     } catch (error) { console.warn('Colores de integrantes no disponibles:', error); }
