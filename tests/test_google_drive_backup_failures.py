@@ -122,5 +122,44 @@ class DriveBackupFailureTests(unittest.TestCase):
         with self.assertRaisesRegex(RuntimeError, "Unsafe archive path"):
             restore.safe_extract_snapshot(archive, self.root / "out")
 
+
+    def test_snapshot_content_must_match_bundle_commit(self):
+        import subprocess
+        repo_dir = self.root / "repo"
+        repo_dir.mkdir()
+        subprocess.run(["git", "init", "-q", "-b", "main"], cwd=repo_dir, check=True)
+        subprocess.run(["git", "config", "user.email", "test@example.invalid"], cwd=repo_dir, check=True)
+        subprocess.run(["git", "config", "user.name", "Backup Test"], cwd=repo_dir, check=True)
+        (repo_dir / "tracked.txt").write_text("original content", encoding="utf-8")
+        subprocess.run(["git", "add", "tracked.txt"], cwd=repo_dir, check=True)
+        subprocess.run(["git", "commit", "-qm", "fixture"], cwd=repo_dir, check=True)
+        commit = subprocess.run(["git", "rev-parse", "HEAD"], cwd=repo_dir, check=True,
+                                capture_output=True, text=True).stdout.strip()
+        snapshot = self.root / "snapshot"
+        snapshot.mkdir()
+        (snapshot / "tracked.txt").write_text("original content", encoding="utf-8")
+        self.assertEqual(restore.verify_snapshot_matches_commit(repo_dir, snapshot, commit), 1)
+        (snapshot / "tracked.txt").write_text("tampered content", encoding="utf-8")
+        with self.assertRaisesRegex(RuntimeError, "differs from Git Bundle"):
+            restore.verify_snapshot_matches_commit(repo_dir, snapshot, commit)
+
+    def test_bundle_clones_and_verifies_inside_isolated_repository(self):
+        import subprocess
+        source = self.root / "source"
+        source.mkdir()
+        subprocess.run(["git", "init", "-q", "-b", "main"], cwd=source, check=True)
+        subprocess.run(["git", "config", "user.email", "test@example.invalid"], cwd=source, check=True)
+        subprocess.run(["git", "config", "user.name", "Backup Test"], cwd=source, check=True)
+        (source / "tracked.txt").write_text("bundle content", encoding="utf-8")
+        subprocess.run(["git", "add", "tracked.txt"], cwd=source, check=True)
+        subprocess.run(["git", "commit", "-qm", "fixture"], cwd=source, check=True)
+        expected = subprocess.run(["git", "rev-parse", "HEAD"], cwd=source, check=True,
+                                  capture_output=True, text=True).stdout.strip()
+        bundle = self.root / "fixture.bundle"
+        subprocess.run(["git", "bundle", "create", str(bundle), "--all"], cwd=source, check=True)
+        restored = self.root / "restored"
+        actual = restore.clone_and_verify_bundle(bundle, restored)
+        self.assertEqual(actual, expected)
+
 if __name__ == "__main__":
     unittest.main()
