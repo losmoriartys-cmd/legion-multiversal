@@ -4157,3 +4157,14 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **Advertencias no bloqueantes observadas:** avisos deprecación Node.js 20 / APIs Node y dependencias de Actions; no cambiaron las conclusiones exitosas de los jobs. Deben registrarse como deuda de mantenimiento, no ocultarse ni confundirse con fallos de pruebas.
 - **Evidencias de GitHub:** [validar y capturas](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45139824337) · [auditoría de enlaces](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45139824135) · [pruebas Python](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45139824126) · [QA capítulos](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45139824404) · [ruleset](https://github.com/losmoriartys-cmd/legion-multiversal/rules/27883004).
 - **Siguiente paso:** este registro documental genera un SHA nuevo; repetir CI completa y volver a inspeccionar artefactos sobre ese nuevo HEAD. BASE-02 sigue ABIERTO: no fusionar PR #97, no modificar `main` y no desplegar producción hasta cumplir simultáneamente CI verde en el último SHA, Code Owners obligatorio verificado y backup externo restaurado en entorno aislado.
+
+
+## 2026-11-24 · BASE-02 · Intento de validación del HEAD actual — BLOQUEADO POR EJECUCIÓN
+
+- **HEAD consultado:** `feat/google-drive-backup-engine` → `fa840290ed3fdd239258adc4decb8435d91dec6d` (commit `docs: documentar destino Drive probado y estado del backup`, 2026-11-24 09:02:57 UTC). Este es el HEAD de la rama al momento de la consulta.
+- **Workflow disponible:** `.github/workflows/google-drive-backup.yml`, disparador exclusivamente `workflow_dispatch`. Su secuencia prevista ejecuta `tests/test_google_drive_backup_failures.py`, compila los scripts Python y luego crea/sube/descarga/verifica el backup con OAuth y secretos de Drive.
+- **Pruebas de fallos:** NO EJECUTADAS en esta sesión. No se pudo iniciar el workflow manual desde las herramientas disponibles ni acceder a un entorno local Windows/Python de la usuaria. No se declara resultado de tests.
+- **Paquete y cuatro artefactos:** NO GENERADOS para este HEAD. No se subió ningún objeto nuevo a Drive.
+- **Descarga de retorno, SHA-256, restauración aislada y comparación Git/manifiesto:** NO EJECUTADAS. No hay backup ID, hashes ni conteo de archivos atribuibles a este HEAD.
+- **Resultado:** BASE-02 permanece ABIERTO. La restauración histórica del commit `0cf0c68fe1073a3645747be1b99b3380d4639648` no valida este HEAD posterior. No se cierra la barrera.
+- **Acción requerida para continuar:** ejecutar el workflow manual `Google Drive backup (manual; schedule disabled)` desde GitHub Actions en la rama/HEAD actual, con los secretos configurados; luego inspeccionar la salida y el directorio aislado de restauración y registrar evidencias reales. No compartir valores de secretos en el chat.
