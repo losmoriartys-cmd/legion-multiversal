@@ -64,7 +64,8 @@ test('cada Bitácora tiene capítulos separados de Recorrido y Crecimiento', asy
       await expect(growthPanel.locator('.hero-growth-content')).toContainText('YOUTUBE');
     } else {
       await expect(growthPanel).toContainText('TWITCH');
-      await expect(growthPanel).toContainText('SEGUIDORES ACTUALES');
+      // La ficha presenta el incremento observado en el período, no el total actual del canal.
+      await expect(growthPanel).toContainText('SEGUIDORES GANADOS');
     }
     if (creatorId === 'rod3r1k' || creatorId === 'akuma') {
       await expect(growthPanel.locator('.hero-growth-collaborations')).toContainText('Expediente 002 · BarFender');

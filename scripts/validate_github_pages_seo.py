@@ -10,12 +10,14 @@ PUBLIC = {
     "index.html": BASE,
     "comic-moriartys.html": BASE + "comic-moriartys.html",
     "roster-02-moriartys.html": BASE + "roster-02-moriartys.html",
+    "politica-de-privacidad/index.html": BASE + "politica-de-privacidad/",
 }
 SITEMAP_URLS = {
     BASE,
     BASE + "marcas/",
     BASE + "recursos/",
     BASE + "metodologia/",
+    BASE + "politica-de-privacidad/",
     BASE + "comic-moriartys.html",
     BASE + "roster-02-moriartys.html",
 }
