@@ -9,10 +9,7 @@
   const searchInput = document.getElementById('collab-search');
   const categorySelect = document.getElementById('collab-category');
   const creatorSelect = document.getElementById('collab-creator');
-  const CREATOR_COLORS = {
-    moriartys: '#62d9e8', 'lady-moriarty': '#d68acb', rod3r1k: '#e7c66f',
-    akuma: '#ed786d', habitos: '#a99bff', 'dave-nexus': '#86c98e', ardipii: '#8fb7e8'
-  };
+  const CREATOR_COLORS = {};
   let games = [];
   let creators = new Map();
   let channelImages = {};
@@ -197,6 +194,10 @@
       if (!registry || !Array.isArray(registry.juegos) || !Array.isArray(roster.heroes)) throw new Error('El registro maestro o el Roster no tiene la estructura esperada.');
       games = registry.juegos;
       creators = new Map(roster.heroes.map(function (hero) { return [hero.id || hero.slug, hero]; }));
+      try {
+        const colorFile = await fetch('./data/creator-colors.json', { cache: 'no-store' });
+        if (colorFile.ok) Object.assign(CREATOR_COLORS, (await colorFile.json()).colors || {});
+      } catch (error) { /* sin colores: se usa el color neutro */ }
       if (results[2] && results[2].ok) {
         const activity = await results[2].json();
         Object.keys(activity.channels || {}).forEach(function (login) {

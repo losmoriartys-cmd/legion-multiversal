@@ -7,6 +7,8 @@ on:
       - 'games-registry.js'
       - 'arsenal-registry.js'
       - 'chapters-refresh.js'
+      - 'creator-schedule.js'
+      - 'creator-colors.css'
       - 'playwright.config.js'
       - 'index.html'
       - 'bitacora-preview.html'
@@ -27,6 +29,8 @@ on:
       - 'app.js'
       - 'games-registry.js'
       - 'chapters-refresh.js'
+      - 'creator-schedule.js'
+      - 'creator-colors.css'
       - 'index.html'
       - 'bitacora-preview.html'
       - 'styles.css'
@@ -61,6 +65,7 @@ jobs:
           node --check games-registry.js
           node --check arsenal-registry.js
           node --check chapters-refresh.js
+          node --check creator-schedule.js
       - name: Validar archivos JSON
         run: |
           for file in ./*.json data/*.json schemas/*.json; do

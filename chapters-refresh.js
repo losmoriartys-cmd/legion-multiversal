@@ -5,13 +5,19 @@
   function renderPeople() {
     var grid = document.getElementById('manifesto-people-grid');
     if (!grid || typeof fetch !== 'function') return;
-    fetch('./data/roster.json', { cache: 'no-store' })
-      .then(function (response) {
-        if (!response.ok) throw new Error('data/roster.json ' + response.status);
-        return response.json();
+    Promise.all([
+      fetch('./data/roster.json', { cache: 'no-store' }),
+      fetch('./data/creator-colors.json', { cache: 'no-store' }).catch(function () { return null; })
+    ])
+      .then(function (responses) {
+        if (!responses[0].ok) throw new Error('data/roster.json ' + responses[0].status);
+        return Promise.all([responses[0].json(), responses[1] && responses[1].ok ? responses[1].json() : null]);
       })
-      .then(function (payload) {
+      .then(function (results) {
+        var payload = results[0];
+        var colors = (results[1] && results[1].colors) || {};
         var heroes = (payload && Array.isArray(payload.heroes)) ? payload.heroes : [];
+        heroes.forEach(function (hero) { if (colors[hero.id || hero.slug]) hero.accent_color = colors[hero.id || hero.slug]; });
         var items = heroes.filter(function (hero) { return hero && (hero.display_name || hero.name) && hero.tagline; });
         if (!items.length) return;
         var fragment = document.createDocumentFragment();
@@ -21,6 +27,7 @@
           var text = document.createElement('p');
           title.textContent = hero.display_name || hero.name;
           text.textContent = hero.tagline;
+          if (/^#[0-9a-fA-F]{6}$/.test(hero.accent_color || '')) card.style.setProperty('--creator-color', hero.accent_color);
           card.appendChild(title);
           card.appendChild(text);
           fragment.appendChild(card);

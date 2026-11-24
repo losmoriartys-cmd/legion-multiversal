@@ -188,12 +188,17 @@
       (items ? '<ul class="lp-queue-list">' + items + '</ul>' : '<p class="lp-note">Este canal todavía no tiene clips públicos.</p>') + '</aside>';
   }
 
+  function colorStyle(hero) {
+    const color = hero && hero.accent_color;
+    return /^#[0-9a-fA-F]{6}$/.test(color || '') ? ' style="--creator-color:' + color + '"' : '';
+  }
+
   function channelChips(model) {
     const all = '<button type="button" class="lp-chip is-all' + (state.who === 'todos' ? ' is-on' : '') + '" data-lp="who" data-id="todos" aria-pressed="' + (state.who === 'todos') + '"><span class="lp-chip-all">TODOS</span><span class="lp-chip-sub">' + model.people.length + ' canales</span></button>';
     const chips = model.people.map((person) => {
       const sub = person.isLive ? 'EN VIVO AHORA' : (person.clips.length ? person.clips.length + (person.clips.length === 1 ? ' momento' : ' momentos') : (person.hasTwitch ? 'Sin clips todavía' : 'En YouTube'));
       const on = state.who === person.id;
-      return '<button type="button" class="lp-chip' + (on ? ' is-on' : '') + (person.isLive ? ' is-live' : '') + '" data-lp="who" data-id="' + esc(person.id) + '" aria-pressed="' + on + '">' +
+      return '<button type="button" class="lp-chip' + (on ? ' is-on' : '') + (person.isLive ? ' is-live' : '') + '" data-lp="who" data-id="' + esc(person.id) + '" aria-pressed="' + on + '"' + colorStyle(person.hero) + '>' +
         '<span class="lp-chip-photo">' + thumb(person.img, person.img, 'lp-chip-img') + (person.isLive ? '<span class="lp-chip-dot lp-pulse"></span>' : '') + '</span>' +
         '<span class="lp-chip-text"><span class="lp-chip-name">' + esc(person.name) + '</span><span class="lp-chip-sub">' + esc(sub) + '</span></span></button>';
     }).join('');
@@ -225,10 +230,15 @@
   }
 
   function schedule(model) {
-    const items = model.people.filter((person) => person.hero.schedule).map((person) =>
-      '<div class="lp-when">' + thumb(person.img, person.img, 'lp-when-img') + '<span><strong>' + esc(person.name) + '</strong><span>' + esc(person.hero.schedule) + '</span></span></div>').join('');
+    const channels = (lastCtx && lastCtx.activity && lastCtx.activity.channels) || {};
+    const items = model.people.filter((person) => person.hero.schedule).map((person) => {
+      const channel = channels[String(person.login || '').toLowerCase()];
+      const next = window.LMSchedule && channel ? window.LMSchedule.next(channel) : null;
+      const nextLine = next ? '<span class="lp-next">PRÓXIMO EN TWITCH · ' + esc(next.label) + '</span>' : '';
+      return '<div class="lp-when"' + colorStyle(person.hero) + '>' + thumb(person.img, person.img, 'lp-when-img') + '<span><strong>' + esc(person.name) + '</strong><span>' + esc(person.hero.schedule) + '</span>' + nextLine + '</span></div>';
+    }).join('');
     if (!items) return '';
-    return '<section class="lp-section" aria-label="Cuándo vuelven"><div class="lp-section-head is-stack"><h2>CUÁNDO VUELVEN</h2><p>Horarios declarados por cada creador. Pueden cambiar.</p></div><div class="lp-whens">' + items + '</div></section>';
+    return '<section class="lp-section" aria-label="Cuándo vuelven"><div class="lp-section-head is-stack"><h2>CUÁNDO VUELVEN</h2><p>Horarios declarados por cada creador y, cuando el canal los publica en Twitch, el próximo directo programado. Pueden cambiar.</p></div><div class="lp-whens">' + items + '</div></section>';
   }
 
   function videoId(url) {
