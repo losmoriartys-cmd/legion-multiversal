@@ -15,9 +15,9 @@
       })
       .then(function (results) {
         var payload = results[0];
-        var colors = (results[1] && results[1].colors) || {};
+        var colorEntries = (results[1] && results[1].creators) || {};
         var heroes = (payload && Array.isArray(payload.heroes)) ? payload.heroes : [];
-        heroes.forEach(function (hero) { if (colors[hero.id || hero.slug]) hero.accent_color = colors[hero.id || hero.slug]; });
+        heroes.forEach(function (hero) { var entry = colorEntries[hero.id || hero.slug]; if (entry && /^#[0-9a-fA-F]{6}$/.test(entry.color || '')) hero.accent_color = entry.color; });
         var items = heroes.filter(function (hero) { return hero && (hero.display_name || hero.name) && hero.tagline; });
         if (!items.length) return;
         var fragment = document.createDocumentFragment();
