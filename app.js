@@ -953,7 +953,7 @@ async function openLiveDrawer(){
  if(title)title.textContent='CENTRAL EN VIVO';
  if(message)message.textContent=!fresh?'La última captura está demorada. No podemos confirmar qué canal transmite ahora.':'No se detectan canales en directo en la última captura. Consultá el directorio completo.';
  const link=document.getElementById('live-open-channel');
- if(link){link.href='#chapter-10';link.textContent='ABRIR DIRECTORIO DE CANALES ↗';link.onclick=()=>{closeLiveDrawer();switchChapter(10);};}
+ if(link){link.href='#en-vivo';link.textContent='ABRIR DIRECTORIO DE CANALES ↗';link.onclick=()=>{closeLiveDrawer();switchChapter(10);};}
 }
 function openMultiverseMap(){switchChapter(13);}
 function updateMissionHeader(){
@@ -2247,10 +2247,9 @@ window.addEventListener('popstate', () => {
     }
     if (hash.startsWith('#expediente-')) { restoreHeroProfileFromHash(); return; }
     if (window.currentHeroProfileIndex !== null && window.currentHeroProfileIndex !== undefined) closeHeroProfile({ fromHistory: true });
-    if (hash.startsWith('#chapter-')) {
-        const num = Number(hash.slice('#chapter-'.length));
-        if (Number.isFinite(num)) switchChapter(num, { skipHistory: true });
-    } else if (!hash || hash === '#') switchChapter(0, { skipHistory: true });
+    const hashChapter = typeof chapterFromHash === 'function' ? chapterFromHash(hash) : null;
+    if (hashChapter !== null) switchChapter(hashChapter, { skipHistory: true });
+    else if (!hash || hash === '#') switchChapter(0, { skipHistory: true });
 });
 document.addEventListener('keydown', function(event) {
     if (event.key !== 'Escape') return;
@@ -2808,6 +2807,21 @@ function printHeroDossier(){
         document.addEventListener('pointerdown', () => { void ensureGlobalChapterStyles(); }, { once: true, passive: true, capture: true });
         document.addEventListener('keydown', () => { void ensureGlobalChapterStyles(); }, { once: true, capture: true });
 
+        // Anclajes por nombre (#roster, #estadisticas…). Los #chapter-N viejos siguen funcionando como alias.
+        const CHAPTER_SLUGS = { 1: 'origen', 11: 'quienes-somos', 2: 'roster', 3: 'estadisticas', 12: 'colaboraciones', 10: 'en-vivo', 9: 'comunidad', 8: 'alianzas', 6: 'reclutamiento', 13: 'mapa' };
+        const SLUG_TO_CHAPTER = Object.fromEntries(Object.entries(CHAPTER_SLUGS).map(([num, slug]) => [slug, Number(num)]));
+        SLUG_TO_CHAPTER.arsenal = 12;
+        function chapterFromHash(hash) {
+            const value = String(hash || '');
+            if (value.startsWith('#chapter-')) {
+                let num = Number(value.slice('#chapter-'.length));
+                if (num === 5) num = 12; // Arsenal quedó dentro de Colaboraciones
+                return Number.isFinite(num) ? num : null;
+            }
+            const slug = value.replace(/^#/, '').split(/[/?]/)[0];
+            return Object.prototype.hasOwnProperty.call(SLUG_TO_CHAPTER, slug) ? SLUG_TO_CHAPTER[slug] : null;
+        }
+        window.chapterFromHash = chapterFromHash;
         function switchChapter(chapterNum, options = {}) {
             // Arsenal se fusionó con Colaboraciones: los enlaces viejos al capítulo 5 llevan al catálogo.
             if (Number(chapterNum) === 5) {
@@ -2837,7 +2851,7 @@ function printHeroDossier(){
                 window.currentHeroProfileIndex = null;
             }
             if (!options.skipHistory) {
-                const targetHash = Number(chapterNum) === 0 ? '#' : (Number(chapterNum) === 2 ? '#roster' : '#chapter-' + chapterNum);
+                const targetHash = Number(chapterNum) === 0 ? '#' : '#' + (CHAPTER_SLUGS[Number(chapterNum)] || 'chapter-' + chapterNum);
                 if (location.hash !== targetHash) {
                     try { history.pushState({ lmChapter: Number(chapterNum) }, '', targetHash); } catch (error) { /* historial restringido */ }
                 }
@@ -2900,12 +2914,11 @@ function printHeroDossier(){
         const rosterContainer = document.getElementById('roster-container');
         function initializeLegionApp() {
             const hash = location.hash || '';
-            if (hash.startsWith('#chapter-')) {
-                let num = Number(hash.slice('#chapter-'.length));
-                if (num === 5) num = 12; // Arsenal quedó dentro de Colaboraciones
-                if (Number.isFinite(num) && document.getElementById('chapter-' + num)) switchChapter(num, { skipHistory: true });
-            } else if (hash === '#roster' || hash.startsWith('#roster?') || hash.startsWith('#roster/') || hash.startsWith('#expediente-')) {
+            const hashChapter = chapterFromHash(hash);
+            if (hash === '#roster' || hash.startsWith('#roster?') || hash.startsWith('#roster/') || hash.startsWith('#expediente-')) {
                 switchChapter(2, { skipHistory: true });
+            } else if (hashChapter !== null && document.getElementById('chapter-' + hashChapter)) {
+                switchChapter(hashChapter, { skipHistory: true });
             }
             const initialChapter = document.querySelector('.chapter-panel.active');
             const initialNumber = initialChapter ? Number(initialChapter.id.replace('chapter-', '')) : 0;
