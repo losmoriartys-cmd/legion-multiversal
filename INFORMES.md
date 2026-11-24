@@ -4213,3 +4213,20 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **Commits de corrección:** `f6234734b2ca42bf4a7ce2411e04aadcf2bef1d4` (ancla independiente + salida de hashes); `ec62b3a836e2208366106134d0de8a45d7b706c1` (lectura del ID desde la variable `BACKUP_ID` definida por el workflow).
 - **Validación pendiente:** volver a ejecutar manualmente el workflow sobre el mismo Backup ID `20261124T181104Z-45349573134`, con la rama `ops/backup-once-2026-11-24`. El siguiente JSON y artefacto deben incluir los cuatro hashes calculados y coincidentes. No generar otro backup.
 - **Estado:** primera restauración aislada aprobada; hash del manifiesto checksum aún pendiente de revalidación con el cambio nuevo. BASE-02 permanece ABIERTO.
+
+
+## BASE-02 — Segunda restauración aislada: verificación integral y cierre técnico (2026-11-24)
+
+- **Ejecución:** GitHub Actions run [45461818668](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45461818668), re-run completado con conclusión `success` en 32 s. Job: `138689763622`. Rama: `ops/backup-once-2026-11-24`. HEAD del workflow: `191ee5e59ba8ac4ef1aa651e77c051120f3233c0`.
+- **Backup restaurado:** `20261124T181104Z-45349573134`, sin crear un segundo backup.
+- **Artefacto de evidencia:** `google-drive-restore-evidence-45461818668`, ID `14953296381`, digest publicado por GitHub y recalculado localmente: `6f316d3183a0c58e33cc6d46070e70465b70026134ee99916b4542bc9d698c13`. Los valores coinciden.
+- **Restauración:** `restore=success`; destino temporal aislado `/tmp/legion-drive-restore-45461818668`; `isolated=true`; snapshot con **310 archivos verificados**.
+- **Integridad de los cuatro objetos:** el JSON `restore-result.json` incluye los cuatro SHA-256 y coinciden exactamente con los valores registrados en el run de backup `45349573134`:
+  - `SHA256SUMS`: `481a01747a200c51b5b9c3ba761be230bd66c6fc8f6bde4eb12789a2514dd967`.
+  - `backup-manifest.txt`: `ec5e5aac994747b2010fbe1f22cc81a608e7dc46a45ed5872bb9d0dab11b2d3e`.
+  - `legion-multiversal-source.tar.gz`: `9484967ab29a6d389cb018ea6038b66c94304a2c4c7e9554255000249ae41069`.
+  - `legion-multiversal.bundle`: `411064cde41a14115ea146cfac066b4469cb795bd375626da129ec48cc373a62`.
+- **Git recuperado:** HEAD y último commit `3cc92cea19c1b719cd33fee6fe33b1fa3d02bcf3`; conteo de historial: **1.880 commits**; las referencias locales y remotas recuperadas apuntan al mismo HEAD. El paso `Verify recovered Git object database and history` terminó `success`; los logs confirman ejecución de `git fsck --full` sin error de proceso. Git informó objetos commit dangling, que no provocaron fallo de integridad ni de la restauración.
+- **Advertencia no bloqueante:** GitHub informó que algunas acciones fijadas a Node.js 20 serán forzadas a Node.js 24. El job terminó correctamente; conviene actualizar esas acciones en una tarea de mantenimiento separada.
+- **Límite operativo que permanece:** el motor de backup mantiene la eliminación automática deshabilitada (`automatic_deletion: disabled_non_atomic_drive_api`). Esta validación demuestra la creación y recuperación íntegra del backup identificado, pero **no certifica rotación automática ni borrado transaccional en Drive**. No habilitar eliminación automática hasta contar con un mecanismo atómico seguro y pruebas específicas.
+- **Conclusión:** queda validado el ciclo de backup y restauración aislada para este conjunto de evidencia, incluidos los cuatro SHA-256, los 310 archivos, el HEAD, las 1.880 entradas de historial y la comprobación de objetos Git. **BASE-02: CERRADO para la validación de backup/restauración.** La rotación/borrado automático y la actualización de acciones Node.js quedan como pendientes separados; no se consideran aprobados por este resultado.
