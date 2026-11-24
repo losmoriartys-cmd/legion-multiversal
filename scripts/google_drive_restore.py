@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Restore a Drive backup into an isolated directory without the source checkout."""
-import argparse, json, os, subprocess, tarfile, tempfile, urllib.parse, urllib.request
+import argparse, hashlib, json, os, subprocess, tarfile, tempfile, urllib.parse, urllib.request
 from pathlib import Path, PurePosixPath
 
 API = "https://www.googleapis.com/drive/v3"
