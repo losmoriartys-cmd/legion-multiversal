@@ -73,6 +73,10 @@ jobs:
             echo "Validando $file"
             python -m json.tool "$file" > /dev/null
           done
+      - name: Validar fuente única de colores de creadores
+        run: |
+          python scripts/build_creator_colors.py --check
+          python scripts/validate_creator_colors.py
       - name: Validar modelo del roster y cobertura Twitch
         run: python scripts/validate_roster_data.py --check-activity --check-platforms
       - name: Validar registro maestro de juegos
