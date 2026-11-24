@@ -163,5 +163,27 @@ class DriveBackupFailureTests(unittest.TestCase):
         actual = restore.clone_and_verify_bundle(bundle, restored)
         self.assertEqual(actual, expected)
 
+
+    def test_restore_validates_manifest_coverage_and_file_hashes(self):
+        import subprocess
+        artifact = self.root / "legion-multiversal.bundle"
+        artifact.write_bytes(b"valid bundle placeholder")
+        snapshot = self.root / "legion-multiversal-source.tar.gz"
+        snapshot.write_bytes(b"valid snapshot placeholder")
+        sums = self.root / "SHA256SUMS"
+        subprocess.run(["sha256sum", artifact.name, snapshot.name], cwd=self.root,
+                       check=True, capture_output=True, text=True)
+        manifest = subprocess.run(["sha256sum", artifact.name, snapshot.name], cwd=self.root,
+                                  check=True, capture_output=True, text=True).stdout
+        sums.write_text(manifest, encoding="utf-8")
+        names = [artifact.name, snapshot.name, sums.name]
+        restore.verify_downloaded_artifacts(self.root, names)
+        snapshot.write_bytes(b"tampered snapshot")
+        with self.assertRaises(subprocess.CalledProcessError):
+            restore.verify_downloaded_artifacts(self.root, names)
+        sums.write_text(manifest.splitlines()[0] + "\\n", encoding="utf-8")
+        with self.assertRaisesRegex(RuntimeError, "does not cover exactly"):
+            restore.verify_downloaded_artifacts(self.root, names)
+
 if __name__ == "__main__":
     unittest.main()
