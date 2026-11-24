@@ -69,3 +69,5 @@
 /* ---------- Quiénes somos: personas ---------- */
 .manifesto-people-grid article[style*="--creator-color"]{border-color:color-mix(in srgb,var(--creator-color) 60%,transparent);border-top:4px solid var(--creator-color);background:linear-gradient(145deg,color-mix(in srgb,var(--creator-color) 14%,#1c2035),#0d1422)}
 .manifesto-people-grid article[style*="--creator-color"] h4{color:var(--creator-color)}
+
+.stats-channel-capture{display:block;margin:.35rem 0 .6rem;color:#aebbd0;font-size:.72rem;letter-spacing:.035em}
