@@ -311,17 +311,26 @@
 ## 2026-11-23 — Sistema visual · PR 1: color de identidad único por creador
 
 - **Fecha y responsable:** 23/11/2026 · Claude (asistente), a pedido de Demian.
-- **Objetivo:** que cada creador tenga un solo color en todo el sitio. Antes `games-registry.js` y `app.js` definían paletas distintas y en conflicto (por ejemplo Moriartys dorado en una y cian en la otra; ROD3R1K y Akuma casi iguales, ΔE 22).
-- **Colores acordados por Demian:** Akuma violeta, ROD3R1K rojo, Moriartys azul, Lady Moriarty rosa, Ardipii gris, Hábitos naranja, Dave verde, Pato amarillo. Los tonos exactos (hex) son propuesta técnica y se ajustan en un único archivo.
-- **Archivos modificados:** `app.js` (se retira `heroAccentColors`, que no tenía consumidores), `games-registry.js` (usa `var(--c-<id>)`), `index.html` (enlaza `creator-colors.css`), `README.md`, `data/README.md`.
-- **Archivos nuevos:** `data/creator-colors.json`, `creator-colors.css` (generado), `scripts/build_creator_colors.py`, `scripts/validate_creator_colors.py`, `tests/test_creator_colors_contract.py`.
-- **Decisión de diseño:** el color no se agregó a `data/roster.json` porque `tests/test_base_data_layout.py` exige conservar su blob original (BASE-01B). Las claves del nuevo archivo son los mismos IDs canónicos y el validador comprueba que coincidan.
-- **Implementado:** variables `--c-<id>` y `--c-<id>-soft`; `--creator-color` por `data-creator-id`; validación de hex, unicidad, contraste ≥ 4,5:1 sobre `#080d18` y `#101a2a` (mínimo medido 5,7:1) y distancia mínima ΔE ≥ 25 (mínimo medido 31, Akuma/Moriartys).
-- **Validaciones y resultados:** 240 pruebas Python OK (12 nuevas), `validate_site.py` OK, `check_anchors.py` OK (32 anclas), `node --check` OK en `app.js` y `games-registry.js`.
-- **Pendientes / riesgos:** no se ejecutó Playwright ni se revisó el resultado en un navegador (el entorno de trabajo no tiene acceso de red para instalarlo); queda pendiente la verificación visual de Colaboraciones en la preview. Los colores de las voces del modo cómic (`.voice-*` en `styles.css`) siguen siendo locales y se migrarán en un PR posterior. Los acentos de marca actuales (azul y amarillo) coinciden en tono con los colores de Moriartys y Pato: decisión pendiente. Cada integrante debe confirmar su color.
-- **Sincronización 24/11/2026:** rama actualizada desde `main` `937208d9f820454c8f32e05327c9e41a0bc794fa`; los nueve workflows Node.js 24 y los datos automáticos recientes se conservaron. La única ruta con cambios en ambos lados fue `INFORMES.md`, integrada manualmente sin eliminar la evidencia BASE-02 ni el registro del PR #104.
-- **Commit de sincronización:** se completa tras crear el commit basado en `main`.
-- **Despliegue y revisión visual:** pendientes de la nueva preview; no se da por aprobada la paleta hasta revisar los ocho colores en escritorio y móvil.
+- **Objetivo:** una fuente única para el color de identidad de cada creador, sin mapas paralelos en `app.js` y `games-registry.js`.
+- **Colores acordados:** Akuma violeta, ROD3R1K rojo, Moriartys azul, Lady Moriarty rosa, Ardipii gris, Hábitos naranja, Dave verde y Pato amarillo. Los ocho IDs canónicos se corresponden uno a uno con `data/roster.json`.
+- **Implementación:** `data/creator-colors.json` como fuente, `creator-colors.css` generado, variables `--c-<id>` y `--creator-color` por `data-creator-id`. `games-registry.js` consume las variables en los avatares y enlaces POV de Colaboraciones; se retiraron los mapas de color paralelos.
+- **Validación:** 12 pruebas nuevas; formato hexadecimal, unicidad, cobertura de IDs, sincronización CSS, contraste WCAG AA sobre `#080d18` y `#101a2a`, y distancia perceptual mínima. El contraste mínimo calculado es 5,09:1 y la menor distancia CIE76 es 31,3.
+- **Rebase e integración:** rama actualizada sobre `main` `8bb0da32210a167bc56303f38c37e45bb7525dde`; HEAD `90410fbe557b58d15389f5fc90c0441ba3e449ca`. PR #98 integrado el 24/11/2026; merge commit `146d214f527d8af8c280a155ac1e9a59601a0a4f`.
+- **CI:** workflows de validación, QA común, QA portable, colector de estadísticas y Cloudflare Pages terminaron en SUCCESS sobre el HEAD revisado.
+- **Evidencia visual:** artifacts `14964105614` y `14963190706`; las cuatro capturas de Roster y Bitácora (escritorio/móvil) coincidieron píxel por píxel entre ambas ejecuciones. Roster muestra seis integrantes en Formación y dos Colaboradores en ambos tamaños. La revisión cubrió los ocho perfiles; no se generó una captura independiente de los avatares POV de Colaboraciones, cuya conexión a las variables sí quedó verificada por contrato y CSS.
+- **Alcance:** PR #98 integrado en `main`. El check de Cloudflare confirmó el preview de la rama; este registro no certifica por sí solo el estado del despliegue de producción.
+
+
+## 2026-11-23 — Sistema visual · PR 2: tablas con color de identidad y Rendimiento por juego
+
+- **Fecha y responsable:** 23–24/11/2026 · Claude (asistente), a pedido de Demian.
+- **Base y rebase:** PR #99 partía de la rama de #98. Tras integrar #98, se rebasó sobre `main` `146d214f527d8af8c280a155ac1e9a59601a0a4f`; se conservaron sus tres commits propios. HEAD validado: `d45decbb02a86c1887d43330434332b5acbb698f`.
+- **Diff final:** nueve archivos propios de #99; no se duplicaron `creator-colors.css`, `data/creator-colors.json`, los scripts ni el contrato de color de #98. `INFORMES.md` conserva los registros BASE-02, Node.js 24 y PR #98.
+- **Implementado:** comparativa Twitch con color de identidad por creador (promedio sólido y pico tenue); tabla técnica por canal con barras y cifras alineadas; nueva tabla «Rendimiento por juego», agregada desde `game_breakdown`, con promedio ponderado por muestras, pico observado, participantes y aviso de pocas transmisiones (<3). Los datos se presentan como muestreo propio, no como analítica oficial ni proyección.
+- **Corrección responsive:** la primera captura detectó que la tabla móvil medía 295,6 px dentro de un contenedor de 271 px. Se ajustó `stats-tables.css` con ancho máximo del 100 %, distribución fija y ajuste de contenido en celdas. La comprobación posterior confirmó que la tabla queda contenida y las filas pasan a tarjetas en móvil.
+- **Evidencia visual:** artifact `14965091526`, con capturas completas de Estadísticas en escritorio (1280×7439) y móvil (390×16865). Se revisaron comparativa Twitch, Rendimiento por juego, tarjetas móviles, evolución de actividad y semana de la Legión.
+- **Validación final:** Playwright: 52 pruebas aprobadas y 1 omitida; ambas pruebas visuales nuevas (escritorio y móvil) aprobaron. Workflows: QA común `45487747004`, colector `45487747014`, QA portable `45487747007`, validación integral `45487735620`; Cloudflare Pages y todos los check-runs terminaron en SUCCESS.
+- **Estado al cierre de esta revisión:** cambios y evidencia validados; integración de PR #99 pendiente. Las cifras por juego siguen sujetas a la cobertura limitada del muestreo disponible.
 
 ## 2026-11-21 — Capítulo 08 · Arsenal conectado al registro maestro
 

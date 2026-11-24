@@ -1,0 +1,68 @@
+/* Tablas y comparativas de Estadísticas: el color de cada creador viene de creator-colors.css
+   (data/creator-colors.json). Aquí no se define ningún color por creador. */
+
+.creator-swatch {
+  display: inline-block;
+  width: .7em;
+  height: .7em;
+  margin-right: .55em;
+  border-radius: 50%;
+  background: var(--creator-color, #91a9bf);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, .1);
+  flex: none;
+}
+
+/* Comparativa Twitch: el color identifica a la persona; sólido = promedio, tenue = pico. */
+.stats-comparison-legend .is-average,
+.stats-comparison-legend .is-peak { background: #c8e5f5; }
+.stats-comparison-legend .is-peak { opacity: .4; }
+.stats-comparison-row > strong { display: flex; align-items: center; }
+.stats-comparison-row[data-creator-id] .stats-comparison-track .is-average { background: var(--creator-color); }
+.stats-comparison-row[data-creator-id] .stats-comparison-track .is-peak { background: var(--creator-color); opacity: .4; }
+
+/* Tabla técnica por canal. */
+.stats-table td.num,
+.stats-table th.num { text-align: right; font-variant-numeric: tabular-nums; }
+.stats-table tr[data-creator-id] td:first-child { box-shadow: inset 3px 0 0 var(--creator-color); }
+.stats-table td.stats-channel-cell { font-weight: 700; }
+.stats-databar {
+  display: inline-block;
+  width: 54px;
+  height: 6px;
+  margin-right: 8px;
+  vertical-align: middle;
+  overflow: hidden;
+  border-radius: 3px;
+  background: rgba(200, 229, 245, .14);
+}
+.stats-databar > i { display: block; height: 100%; background: var(--creator-color, #c8e5f5); }
+.stats-table td.is-empty { color: #8fa1b8; font-style: italic; }
+
+/* Rendimiento por juego. */
+.stats-games-section { margin-top: 28px; }
+.stats-game-performance .stats-table { min-width: 560px; }
+.stats-game-creators { display: flex; flex-wrap: wrap; gap: 4px 12px; }
+.stats-game-creator { display: inline-flex; align-items: center; white-space: nowrap; font-size: .72rem; }
+.stats-game-flag {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 1px 7px;
+  border: 1px solid rgba(200, 229, 245, .35);
+  border-radius: 999px;
+  color: #bdcad9;
+  font-size: .62rem;
+  white-space: nowrap;
+}
+.stats-game-note { margin-top: 10px; color: #aebbd0; font-size: .72rem; }
+
+@media (max-width: 640px) {
+  .stats-game-performance .stats-table-wrap { overflow-x: auto; border: 0; }
+  .stats-game-performance .stats-table { width: 100%; max-width: 100%; min-width: 0; table-layout: fixed; background: transparent; }
+  .stats-game-performance .stats-table td { min-width: 0; overflow-wrap: anywhere; }
+  .stats-game-creators { min-width: 0; }
+  .stats-game-creator { white-space: normal; }
+  .stats-game-performance .stats-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); }
+  .stats-game-performance .stats-table tr { display: block; margin-bottom: 12px; border: 1px solid #34445c; background: #080e18; }
+  .stats-game-performance .stats-table td { display: flex; justify-content: space-between; gap: 12px; white-space: normal; text-align: right; }
+  .stats-game-performance .stats-table td::before { content: attr(data-label); color: #8fa1b8; text-align: left; }
+}
