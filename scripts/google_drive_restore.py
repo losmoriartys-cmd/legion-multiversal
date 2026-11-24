@@ -123,7 +123,10 @@ def verify_snapshot_matches_commit(repo_dir, snapshot_dir, commit):
         if candidate.is_symlink() or not candidate.is_file():
             raise RuntimeError(f"Snapshot is missing a regular tracked file: {relative}")
         with candidate.open("rb") as stream:
-            actual = subprocess.run(["git", "hash-object", "--no-filters", "--stdin"],
+            # Apply Git's clean filters (including core.autocrlf) before
+            # comparing a working-tree snapshot with the canonical Git blob.
+            git_path = relative.as_posix()
+            actual = subprocess.run(["git", "hash-object", f"--path={git_path}", "--stdin"],
                                     cwd=repo_dir, input=stream.read(), check=True,
                                     capture_output=True).stdout.decode("ascii").strip()
         if actual != _object_id:
