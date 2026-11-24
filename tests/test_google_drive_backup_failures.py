@@ -101,15 +101,17 @@ class DriveBackupFailureTests(unittest.TestCase):
                     restore.main()
 
     def test_restore_rejects_symlink_and_hardlink_tar_members(self):
-        import io, tarfile
-        archive = self.root / "links.tar.gz"
-        with tarfile.open(archive, "w:gz") as tf:
-            info = tarfile.TarInfo("link")
-            info.type = tarfile.SYMTYPE
-            info.linkname = "../../outside"
-            tf.addfile(info)
-        with self.assertRaisesRegex(RuntimeError, "links or special"):
-            restore.safe_extract_snapshot(archive, self.root / "out")
+        import tarfile
+        for member_type in (tarfile.SYMTYPE, tarfile.LNKTYPE):
+            with self.subTest(member_type=member_type):
+                archive = self.root / ("link-" + str(member_type) + ".tar.gz")
+                with tarfile.open(archive, "w:gz") as tf:
+                    info = tarfile.TarInfo("link")
+                    info.type = member_type
+                    info.linkname = "../../outside"
+                    tf.addfile(info)
+                with self.assertRaisesRegex(RuntimeError, "links or special"):
+                    restore.safe_extract_snapshot(archive, self.root / ("out-" + str(member_type)))
 
     def test_restore_rejects_path_traversal(self):
         import tarfile
