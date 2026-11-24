@@ -65,6 +65,13 @@ def safe_extract_snapshot(snapshot, destination):
                 raise RuntimeError("Archive links or special files are not allowed")
         archive.extractall(destination, members=members)
 
+def clone_and_verify_bundle(bundle, repo_dir):
+    subprocess.run(["git", "clone", str(bundle), str(repo_dir)], check=True)
+    # bundle verify requires a Git repository; the newly restored clone is the isolated verifier.
+    subprocess.run(["git", "bundle", "verify", str(bundle)], cwd=repo_dir, check=True)
+    return subprocess.run(["git", "rev-parse", "HEAD"], cwd=repo_dir, check=True,
+                          capture_output=True, text=True).stdout.strip()
+
 def verify_snapshot_matches_commit(repo_dir, snapshot_dir, commit):
     listing = subprocess.run(["git", "ls-tree", "-rz", "--full-tree", commit],
                              cwd=repo_dir, check=True, capture_output=True).stdout
@@ -153,11 +160,8 @@ def main():
         if not commit_line:
             raise SystemExit("Backup manifest lacks source commit.")
         expected_commit = commit_line.split("=", 1)[1].strip()
-        subprocess.run(["git", "bundle", "verify", str(bundle)], check=True)
         repo_dir = target / "repository-from-bundle"
-        subprocess.run(["git", "clone", str(bundle), str(repo_dir)], check=True)
-        actual_commit = subprocess.run(["git", "rev-parse", "HEAD"], cwd=repo_dir,
-                                       check=True, capture_output=True, text=True).stdout.strip()
+        actual_commit = clone_and_verify_bundle(bundle, repo_dir)
         if actual_commit != expected_commit:
             raise SystemExit("Git Bundle HEAD does not match backup manifest commit.")
         snap_dir = target / "source-snapshot"
