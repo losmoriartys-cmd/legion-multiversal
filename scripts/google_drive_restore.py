@@ -4,6 +4,10 @@ import argparse, hashlib, json, os, subprocess, tarfile, tempfile, urllib.parse,
 from pathlib import Path, PurePosixPath
 
 API = "https://www.googleapis.com/drive/v3"
+# Independently recorded by backup run 45349573134; SHA256SUMS cannot hash itself.
+EXPECTED_SHA256SUMS = {
+    "20261124T181104Z-45349573134": "481a01747a200c51b5b9c3ba761be230bd66c6fc8f6bde4eb12789a2514dd967",
+}
 
 def req(url, headers=None):
     with urllib.request.urlopen(urllib.request.Request(url, headers=headers or {}), timeout=120) as r:
@@ -71,6 +75,12 @@ def verify_downloaded_artifacts(directory, downloaded_names):
     if len(set(manifest_names)) != len(manifest_names) or set(manifest_names) != expected:
         raise RuntimeError("Checksum manifest does not cover exactly the backup artifacts.")
 
+    sums_digest = hashlib.sha256(sums.read_bytes()).hexdigest()
+    expected_sums_digest = EXPECTED_SHA256SUMS.get(os.environ.get("RESTORE_BACKUP_ID", ""))
+    if not expected_sums_digest or sums_digest != expected_sums_digest:
+        raise RuntimeError("SHA256SUMS file does not match the independently recorded backup digest.")
+
+    verified = {"SHA256SUMS": sums_digest}
     for expected_digest, name in manifest_entries:
         artifact = directory / name
         if artifact.is_symlink() or not artifact.is_file():
@@ -79,8 +89,11 @@ def verify_downloaded_artifacts(directory, downloaded_names):
         with artifact.open("rb") as stream:
             for block in iter(lambda: stream.read(1024 * 1024), b""):
                 digest.update(block)
-        if digest.hexdigest() != expected_digest:
+        actual_digest = digest.hexdigest()
+        if actual_digest != expected_digest:
             raise RuntimeError(f"Checksum mismatch for {name}.")
+        verified[name] = actual_digest
+    return verified
 
 def safe_extract_snapshot(snapshot, destination):
     with tarfile.open(snapshot, "r:gz") as archive:
@@ -171,7 +184,7 @@ def main():
             raw = req(API + "/files/" + urllib.parse.quote(item["id"], safe="") + "?alt=media",
                       {"Authorization": "Bearer " + access})
             (d / item["name"]).write_bytes(raw)
-        verify_downloaded_artifacts(d, names)
+        verified_hashes = verify_downloaded_artifacts(d, names)
         bundle = d / "legion-multiversal.bundle"
         snapshot = d / "legion-multiversal-source.tar.gz"
         manifest = d / "backup-manifest.txt"
@@ -193,7 +206,8 @@ def main():
         print(json.dumps({"restore": "success", "backup_id": args.backup_id,
                           "target": str(target), "bundle_repo": str(repo_dir),
                           "snapshot": str(snap_dir), "commit": actual_commit,
-                          "snapshot_files_verified": checked_files, "isolated": True}, indent=2))
+                          "snapshot_files_verified": checked_files, "isolated": True,
+                          "artifact_sha256": verified_hashes}, indent=2))
 
 if __name__ == "__main__":
     main()
