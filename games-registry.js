@@ -194,8 +194,6 @@
       if (!registry || !Array.isArray(registry.juegos) || !Array.isArray(roster.heroes)) throw new Error('El registro maestro o el Roster no tiene la estructura esperada.');
       games = registry.juegos;
       creators = new Map(roster.heroes.map(function (hero) { return [hero.id || hero.slug, hero]; }));
-;
-      }
       sessions = games.flatMap(function (game) {
         return (game.sesiones || []).map(function (session) { return { game: game, session: session }; });
       }).sort(function (a, b) { return a.session.bit.localeCompare(b.session.bit, 'en', { numeric: true }); });
