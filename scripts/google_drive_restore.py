@@ -49,6 +49,23 @@ def list_backup_files(folder_id, backup_id, access):
         if not page_token:
             return files
 
+def verify_downloaded_artifacts(directory, downloaded_names):
+    sums = directory / "SHA256SUMS"
+    if not sums.is_file():
+        raise RuntimeError("Checksum manifest missing.")
+    manifest_names = []
+    for line in sums.read_text(encoding="utf-8").splitlines():
+        if len(line) < 67 or line[64:66] != "  ":
+            raise RuntimeError("Malformed SHA256SUMS entry.")
+        name = line[66:]
+        if Path(name).name != name or name in {".", ".."}:
+            raise RuntimeError("Unsafe checksum filename.")
+        manifest_names.append(name)
+    expected = set(downloaded_names) - {"SHA256SUMS"}
+    if len(set(manifest_names)) != len(manifest_names) or set(manifest_names) != expected:
+        raise RuntimeError("Checksum manifest does not cover exactly the backup artifacts.")
+    subprocess.run(["sha256sum", "-c", str(sums)], cwd=directory, check=True)
+
 def safe_extract_snapshot(snapshot, destination):
     with tarfile.open(snapshot, "r:gz") as archive:
         members = archive.getmembers()
@@ -135,21 +152,7 @@ def main():
             raw = req(API + "/files/" + urllib.parse.quote(item["id"], safe="") + "?alt=media",
                       {"Authorization": "Bearer " + access})
             (d / item["name"]).write_bytes(raw)
-        sums = d / "SHA256SUMS"
-        if not sums.is_file():
-            raise SystemExit("Checksum manifest missing.")
-        # Only allow checksum entries for regular files in this downloaded set.
-        manifest_names = []
-        for line in sums.read_text(encoding="utf-8").splitlines():
-            if len(line) < 67 or line[64:66] != "  ":
-                raise SystemExit("Malformed SHA256SUMS entry.")
-            name = line[66:]
-            if Path(name).name != name or name in {".", ".."}:
-                raise SystemExit("Unsafe checksum filename.")
-            manifest_names.append(name)
-        if len(set(manifest_names)) != len(manifest_names) or set(manifest_names) != set(names) - {"SHA256SUMS"}:
-            raise SystemExit("Checksum manifest does not cover exactly the backup artifacts.")
-        subprocess.run(["sha256sum", "-c", str(sums)], cwd=d, check=True)
+        verify_downloaded_artifacts(d, names)
         bundle = d / "legion-multiversal.bundle"
         snapshot = d / "legion-multiversal-source.tar.gz"
         manifest = d / "backup-manifest.txt"
