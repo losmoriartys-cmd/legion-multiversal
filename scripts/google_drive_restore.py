@@ -76,10 +76,10 @@ def verify_snapshot_matches_commit(repo_dir, snapshot_dir, commit):
     listing = subprocess.run(["git", "ls-tree", "-rz", "--full-tree", commit],
                              cwd=repo_dir, check=True, capture_output=True).stdout
     checked = 0
-    for record in listing.split(b"\\0"):
+    for record in listing.split(b"\0"):
         if not record:
             continue
-        metadata, raw_path = record.split(b"\\t", 1)
+        metadata, raw_path = record.split(b"\t", 1)
         mode, object_type, _object_id = metadata.decode("ascii").split()
         relative = Path(raw_path.decode("utf-8"))
         candidate = snapshot_dir / relative
