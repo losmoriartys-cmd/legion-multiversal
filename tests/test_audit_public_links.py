@@ -26,11 +26,11 @@ class PublicLinkClassificationTests(unittest.TestCase):
         self.assertEqual(result["http_status"], 200)
         self.assertEqual(result["attempts"], [404, 200])
 
-    def test_single_404_is_inconclusive_not_dead(self):
+    def test_single_404_attempt_is_inconclusive(self):
         probe = Mock(return_value=404)
-        result = classify_url("https://example.test/unstable", probe=probe)
+        result = classify_url("https://example.test/unstable", probe=probe, attempts=1)
         self.assertEqual(result["status"], "inconclusive")
-        self.assertEqual(result["attempts"], [404, 404])
+        self.assertEqual(result["attempts"], [404])
 
     def test_timeout_is_inconclusive(self):
         probe = Mock(return_value=None)
@@ -80,8 +80,7 @@ class ProbeFallbackTests(unittest.TestCase):
         get_response = Mock()
         get_response.status = 206
         get_response.__enter__ = Mock(return_value=get_response)
-        get_response.__exit__ = Mock(return_value=False
-)
+        get_response.__exit__ = Mock(return_value=False)
         with patch("scripts.audit_public_links.urlopen", side_effect=[head_error, get_response]) as mocked:
             status = probe_url("https://example.test")
         self.assertEqual(status, 206)
