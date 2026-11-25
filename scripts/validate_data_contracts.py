@@ -97,6 +97,14 @@ def semantic_diagnostics(documents: dict[str, Any]) -> list[str]:
         for hero in (heroes or [])
         if isinstance(hero, dict) and isinstance(hero.get("id"), str)
     }
+    colors = documents["data/creator-colors.json"]
+    color_ids = set((colors.get("creators") or {}).keys()) if isinstance(colors, dict) else set()
+    if color_ids != current_ids:
+        errors.append(
+            "data/creator-colors.json: las claves de creators deben coincidir exactamente "
+            f"con los IDs del Roster; faltan={sorted(current_ids - color_ids)}, "
+            f"sobran={sorted(color_ids - current_ids)}."
+        )
     if current_ids != EXPECTED_CREATOR_IDS:
         missing = sorted(EXPECTED_CREATOR_IDS - current_ids)
         extra = sorted(current_ids - EXPECTED_CREATOR_IDS)
