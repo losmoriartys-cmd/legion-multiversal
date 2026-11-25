@@ -28,6 +28,7 @@ SCHEMA_MAP = {
     "data/roster.json": ["roster-data.schema.json"],
     "data/games.json": ["games.schema.json"],
     "data/creator-records.json": ["creator-records.schema.json"],
+    "data/creator-colors.json": ["creator-colors.schema.json"],
     "creator-programs.json": ["creator-programs.schema.json"],
     "community-playbook.json": ["community-playbook.schema.json"],
     "platform-registry.json": ["platform-registry.schema.json"],
