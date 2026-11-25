@@ -1,5 +1,5 @@
 # HOJA DE RUTA VIVA · EVOLUCIÓN Y PROTECCIÓN DE LEGIÓN MULTIVERSAL
-**Actualización:** 21/11/2026 · **Tablero de seguimiento:** esta hoja se mantiene al comienzo de INFORMES.md.
+**Actualización:** 25/11/2026 · **Tablero de seguimiento:** esta hoja se mantiene al comienzo de INFORMES.md.
 
 > **Regla de cierre:** una tarea solo pasa a [x] cuando su implementación está integrada en main, sus pruebas aplicables terminan correctamente y se verifica el resultado publicado cuando corresponda. Un cambio en una rama, un preview o un workflow todavía en curso no cuenta como terminado. Cada cierre debe enlazar el PR, el SHA y la evidencia de validación.
 
@@ -4103,3 +4103,17 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **Colector automático:** el cambio de workflow a PR con `GITHUB_TOKEN` queda separado de esta integración de interfaz hasta demostrar que los checks requeridos se disparan y se asocian al SHA del PR automatizado. No se incorpora un bypass ni se modifica el workflow activo de main en esta tanda.
 - **Validación:** pendiente para el nuevo SHA reconciliado. Los resultados verdes anteriores de #101 no se trasladan automáticamente a este árbol actualizado.
 - **Límites:** no se modifica main ni producción; el movimiento de rama conserva el HEAD histórico como padre y queda sujeto a CI/revisión del PR.
+
+
+---
+
+## 2026-11-25 · PR #101 · segunda reconciliación independiente con main vigente
+
+- **Main de referencia:** `805bef800ff1c953d8686319025e576ccf686da4`.
+- **Commit de reconciliación:** `a8e3e547ba859fcd56b650eeeb911f44ff088d7d`, con primer padre `c03d55b4a659e6b42bf96797e620f9eb5727514f` (historial funcional de #101) y segundo padre `805bef800ff1c953d8686319025e576ccf686da4`. Sin reescritura ni force-push.
+- **Alineación:** 37 commits adelante, 0 atrás; merge-base = `805bef800ff1c953d8686319025e576ccf686da4`.
+- **Blobs actuales de main preservados en el árbol:** `creator-metrics.json` `f94c3219dc298b1e93b191ab88f09d306101a0bb`; `data.json` `965dd8deed93a0f828e010712bc50536406b5201`; `platform-stats.json` `002236c1b966dd4d2e66453e6aaf4d1a21fc4101`. Los tres SHA se verificaron contra el árbol de main; sustituyen las referencias antiguas de la sección anterior, que describían la captura previa de `57aebd4`.
+- **Separación:** no se incorporó ningún archivo de contratos, guardia, backup o workflows de BASE-02 procedente de #109. El único contenido de main añadido por esta reconciliación son los tres blobs métricos del commit indicado.
+- **Validación del SHA de reconciliación:** `python-tests` [45562388822](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45562388822), QA portable [45562389022](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45562389022), QA común [45562388912](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45562388912) y `validar` [45562388864](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45562388864) terminaron SUCCESS; también el push [45562378620](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45562378620).
+- **Gate aún pendiente:** no se ejecutó `audit-public-links` en esta rama. El workflow se añadió en #109 y aún no está presente en main ni en la rama de #101, aunque el ruleset activo lo exige como contexto obligatorio. No se copia desde BASE-02; la dependencia queda registrada sin mezclar proyectos.
+- **Estado:** PR #101 continúa Draft. La edición de este informe genera un SHA posterior y dispara una nueva pasada de CI; se deberá volver a verificar el nuevo HEAD y resolver el contexto obligatorio ausente antes de cualquier propuesta de merge. Main y producción permanecen intactos.
