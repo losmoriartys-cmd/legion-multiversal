@@ -59,3 +59,22 @@ El workflow `.github/workflows/independent-backup.yml` ejecuta el roundtrip en G
 La prueba anterior del workflow S3 (run [45558641646](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45558641646)) queda como antecedente de una implementación equivocada: solo verificó el paquete local y falló en un preflight S3 que no pertenecía al contrato acordado. No hubo subida, descarga ni restauración en esa ejecución; no se la cuenta como evidencia de backup externo.
 
 **Guardrails permanentes:** sin schedule, sin rotación y sin borrado automático. El motor solo informa candidatos vencidos; no elimina objetos. BASE-02 solo podrá declarar el roundtrip verificado cuando una ejecución del SHA final del candidato confirme subida, descarga, restauración aislada y coincidencia SHA-256 de los 14 archivos críticos, con artefactos de evidencia conservados.
+
+
+### Evidencia del roundtrip Google Drive · 25/11/2026
+
+- **Workflow:** [run 45560952459](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45560952459), resultado SUCCESS.
+- **Commit de origen y restaurado:** `9470744bfb1f60dfcf68ba268e22e912e08dbee7`.
+- **Backup ID:** `20261125T062927Z-45560952459`.
+- **Destino:** Google Drive, `root` (Mi unidad), usando el flujo OAuth existente.
+- **Cuatro objetos subidos y descargados:** todos coincidieron con SHA-256:
+  - `SHA256SUMS` · Drive ID `1_Ud6L9BLqKkB7FhMlSMwZ72qyheHxznZ` · `c6d0130270fccbdb0a0b2220e5490a5e9c612cbf1fc0aa5919f8ea4b9fa944b7`.
+  - `backup-manifest.txt` · Drive ID `1Nvie-DWOv59mSryOYzr_KWPZSWfw6eV_` · `16bef031efccdb692db7a1f7ddeb2c81c054668a39b12fa040ace3fe99c8504f`.
+  - `legion-multiversal-source.tar.gz` · Drive ID `1uvJ7nJjsDEaaJmNa1J6eSf8PnBDwqfUv` · `81158cc22f9e536192ea7cb04fc7d563183183366f40356930bc551b4cd667de`.
+  - `legion-multiversal.bundle` · Drive ID `1tpmzCMZ5UVgA6cZQCczoIqYkSepP-Td5` · `9d95657e9accc338042e8edc0da32f751ef023bf20e00a922a5950963a273574`.
+- **Restauración aislada:** SUCCESS; `isolated: true`; commit restaurado idéntico al SHA de origen; 318 archivos del snapshot comparados contra Git.
+- **Archivos críticos:** `critical_files_verified: 14`; los 14 SHA-256 coinciden exactamente con los blobs del commit restaurado. Resultado explícito: `RESTORE_CRITICAL_FILES: PASS (14/14 SHA-256 match)`.
+- **Evidencia conservada:** artifact [google-drive-roundtrip-evidence-45560952459](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45560952459/artifacts/14997444276), ID `14997444276`, SHA-256 del ZIP `92f4daf0348ffb95b7ec6458ba73d421db81d51b43618412816ddac5a8407536`.
+- **Retención/eliminación:** `expired_candidates: 0`; eliminación automática deshabilitada. No se borró ningún objeto y no se activó schedule ni rotación.
+
+Esta ejecución valida el roundtrip externo y los 14 archivos para el SHA indicado. No cierra por sí sola BASE-02: siguen siendo independientes la validación integral del candidato final y la revisión del ruleset/Code Owners.
