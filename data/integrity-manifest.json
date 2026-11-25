@@ -6,6 +6,7 @@
     "creator-metrics.json",
     "creator-programs.json",
     "data.json",
+    "data/creator-colors.json",
     "data/creator-records.json",
     "data/games.json",
     "data/roster.json",
