@@ -334,10 +334,12 @@ test('la Bitácora móvil conserva la presentación de main y publica ambas capt
   const mainBaselineUrl = process.env.MAIN_BASELINE_URL;
   expect(mainBaselineUrl, 'La CI debe resolver la preview vigente del SHA de main para comparar Bitácora móvil.').toBeTruthy();
   const viewport = { width: 390, height: 844 };
-  // Un solo contexto comparte la caché de fuentes entre la preview remota y la candidata local.
-  // La primera navegación precarga las fuentes para que font-display: optional no deje
-  // la preview con fallback mientras la candidata termina usando las fuentes descargadas.
+  // La comparación debe medir la estructura del expediente, no depender del estado de
+  // la caché particionada de Google Fonts (font-display: optional cambia el resultado entre
+  // el preview remoto y localhost). Se usa el mismo fallback en ambas páginas para lograr
+  // una comparación determinista sin relajar la igualdad de geometría ni de captura.
   const comparisonContext = await browser.newContext({ viewport, reducedMotion: 'reduce' });
+  await comparisonContext.route(/^https:\/\/fonts\.(?:googleapis|gstatic)\.com\//, route => route.abort());
   const mainPage = await comparisonContext.newPage();
   const candidatePage = await comparisonContext.newPage();
 
@@ -365,22 +367,8 @@ test('la Bitácora móvil conserva la presentación de main y publica ambas capt
     for (let index = 0; index < await timelineItems.count(); index++) {
       await expect(timelineItems.nth(index)).toBeVisible();
     }
-    // Cargar las fuentes remotas antes de medir y comparar la presentación.
-    // Con font-display: optional, capturar antes de que terminen puede mezclar
-    // tipografías de fallback y producir alturas/capturas distintas entre previews.
-    await target.evaluate(async () => {
-      await Promise.all([
-        document.fonts.load('400 16px "Roboto Condensed"'),
-        document.fonts.load('700 16px "Roboto Condensed"'),
-        document.fonts.load('400 24px Bangers')
-      ]);
-      await document.fonts.ready;
-    });
-    const availableFonts = await target.evaluate(() => ({
-      roboto: document.fonts.check('400 16px "Roboto Condensed"'),
-      bangers: document.fonts.check('400 24px Bangers')
-    }));
-    expect(availableFonts).toEqual({ roboto: true, bangers: true });
+    // Esperar el layout estable con el fallback tipográfico idéntico en ambos orígenes.
+    await target.evaluate(() => document.fonts.ready);
     const selectedTabs = target.locator('.hero-profile-tabs');
     await selectedTabs.evaluate(el => el.scrollIntoView({ block: 'start', inline: 'nearest' }));
     await expect(bitacoraTab).toBeVisible();
@@ -430,17 +418,6 @@ test('la Bitácora móvil conserva la presentación de main y publica ambas capt
   }
 
   try {
-    const fontWarmupPage = await comparisonContext.newPage();
-    await fontWarmupPage.goto('/', { waitUntil: 'domcontentloaded', timeout: 45000 });
-    await fontWarmupPage.evaluate(async () => {
-      await Promise.all([
-        document.fonts.load('400 16px "Roboto Condensed"'),
-        document.fonts.load('700 16px "Roboto Condensed"'),
-        document.fonts.load('400 24px Bangers')
-      ]);
-      await document.fonts.ready;
-    });
-    await fontWarmupPage.close();
     await mainPage.emulateMedia({ reducedMotion: 'reduce' });
     const mainCapture = await openLadyBitacora(mainPage, mainBaselineUrl);
     await candidatePage.emulateMedia({ reducedMotion: 'reduce' });
