@@ -24,7 +24,7 @@ def verify_critical_files(repository: Path, snapshot: Path, commit: str) -> list
     for relative in critical:
         pure = PurePosixPath(relative)
         if (not relative or pure.is_absolute() or ".." in pure.parts
-                or "\\\\" in relative or str(pure) != relative):
+                or "\\" in relative or str(pure) != relative):
             raise RuntimeError(f"Unsafe or non-canonical critical path: {relative!r}")
 
         candidate = snapshot.joinpath(*pure.parts)
