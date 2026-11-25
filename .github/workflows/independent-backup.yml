@@ -1,6 +1,14 @@
 name: Backup independiente del repositorio
 
 on:
+  # Primera ejecución reproducible al actualizar el procedimiento en el candidato.
+  # El filtro mantiene el backup manual/único; no activa rotación ni borrado.
+  push:
+    branches:
+      - work/base02-candidate-reconciled
+    paths:
+      - '.github/workflows/independent-backup.yml'
+      - 'scripts/create_repo_backup.sh'
   workflow_dispatch:
   # Activar schedule después de configurar y probar los secretos del destino externo.
   # schedule:
@@ -36,11 +44,16 @@ jobs:
             fi
           done
 
+      - name: Configurar Python para inspección segura de restauración
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
       - name: Instalar AWS CLI
         run: |
           python -m pip install --disable-pip-version-check awscli
 
-      - name: Subir y verificar restauración desde el destino externo
+      - name: Subir, descargar y restaurar en aislamiento
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.BACKUP_S3_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.BACKUP_S3_SECRET_ACCESS_KEY }}
@@ -53,14 +66,79 @@ jobs:
           for file in backup-output/*; do
             aws --endpoint-url "$ENDPOINT" s3 cp "$file" "s3://$BUCKET/$PREFIX/$(basename "$file")"
           done
-          mkdir -p roundtrip
+
+          mkdir -p roundtrip restore/bundle restore/source
           for file in backup-output/*; do
             aws --endpoint-url "$ENDPOINT" s3 cp "s3://$BUCKET/$PREFIX/$(basename "$file")" "roundtrip/$(basename "$file")"
           done
+
+          # Verificación de integridad del material realmente descargado.
           (
             cd roundtrip
             sha256sum -c SHA256SUMS
             git bundle verify legion-multiversal.bundle
             tar -tzf legion-multiversal-source.tar.gz >/dev/null
           )
+
+          # Restauración del historial en un repositorio independiente.
+          git clone --mirror roundtrip/legion-multiversal.bundle restore/bundle/repository.git
+          git --git-dir=restore/bundle/repository.git cat-file -e "${GITHUB_SHA}^{commit}"
+          git --git-dir=restore/bundle/repository.git show "${GITHUB_SHA}:data/integrity-manifest.json" > restore/bundle/integrity-manifest.json
+
+          # Extracción controlada del snapshot; rechaza rutas de salida del destino.
+          python - <<'PY'
+          import tarfile
+          from pathlib import Path, PurePosixPath
+
+          archive_path = Path("roundtrip/legion-multiversal-source.tar.gz")
+          destination = Path("restore/source")
+          with tarfile.open(archive_path, "r:gz") as archive:
+              for member in archive.getmembers():
+                  member_path = PurePosixPath(member.name)
+                  if member_path.is_absolute() or ".." in member_path.parts or "\\" in member.name:
+                      raise SystemExit(f"Ruta insegura en snapshot: {member.name!r}")
+                  if member.issym() or member.islnk():
+                      link_path = PurePosixPath(member.linkname)
+                      if link_path.is_absolute() or ".." in link_path.parts or "\\" in member.linkname:
+                          raise SystemExit(f"Enlace inseguro en snapshot: {member.name!r} -> {member.linkname!r}")
+              archive.extractall(destination, filter="data")
+          print("RESTORE_SOURCE_EXTRACTED: PASS")
+          PY
+
+          # Comprueba los 14 archivos críticos y su identidad exacta contra el commit
+          # que originó el backup, no solo que el tar se pueda listar.
+          python - <<'PY'
+          import json
+          import os
+          import subprocess
+          from pathlib import Path, PurePosixPath
+
+          root = Path("restore/source")
+          target = os.environ["GITHUB_SHA"]
+          manifest_path = root / "data/integrity-manifest.json"
+          if not manifest_path.is_file():
+              raise SystemExit("Falta data/integrity-manifest.json en la restauración.")
+          manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+          critical = manifest.get("critical_files")
+          if not isinstance(critical, list) or len(critical) != 14 or len(set(critical)) != 14:
+              raise SystemExit(f"Inventario restaurado inválido: {critical!r}")
+          git = ["git", "--git-dir=restore/bundle/repository.git"]
+          for relative in critical:
+              if not isinstance(relative, str) or not relative or "\\" in relative:
+                  raise SystemExit(f"Ruta crítica inválida: {relative!r}")
+              pure = PurePosixPath(relative)
+              if pure.is_absolute() or ".." in pure.parts or str(pure) != relative:
+                  raise SystemExit(f"Ruta crítica no canónica: {relative!r}")
+              restored = root / relative
+              if not restored.is_file():
+                  raise SystemExit(f"Falta archivo crítico restaurado: {relative}")
+              expected = subprocess.run(
+                  git + ["show", f"{target}:{relative}"],
+                  check=True, capture_output=True
+              ).stdout
+              if restored.read_bytes() != expected:
+                  raise SystemExit(f"El archivo restaurado difiere del commit de origen: {relative}")
+          print("RESTORE_CRITICAL_FILES: PASS (14/14 blobs coinciden con GITHUB_SHA)")
+          PY
+
           echo "BACKUP_EXTERNAL_ROUNDTRIP: PASS"
