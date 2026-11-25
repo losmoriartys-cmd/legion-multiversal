@@ -65,7 +65,7 @@ def main() -> None:
         "critical_files_verified": len(results),
         "files": results,
     }
-    args.output.write_text(json.dumps(report, indent=2) + "\\n", encoding="utf-8")
+    args.output.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(report, indent=2))
     print("RESTORE_CRITICAL_FILES: PASS (14/14 SHA-256 match)")
 
