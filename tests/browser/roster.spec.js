@@ -329,7 +329,7 @@ test('Atrás y Adelante restauran el roster y el expediente correcto', async ({ 
   expect(browserErrors).toEqual([]);
 });
 
-test('la Bitácora móvil conserva la presentación de main y publica ambas capturas comparables', async ({ browser }) => {
+test('la Bitácora móvil conserva el contenido de main y aplica el acento de identidad de Lady Moriarty', async ({ browser }) => {
   test.setTimeout(90000);
   const mainBaselineUrl = process.env.MAIN_BASELINE_URL;
   expect(mainBaselineUrl, 'La CI debe resolver la preview vigente del SHA de main para comparar Bitácora móvil.').toBeTruthy();
@@ -343,7 +343,7 @@ test('la Bitácora móvil conserva la presentación de main y publica ambas capt
   const mainPage = await comparisonContext.newPage();
   const candidatePage = await comparisonContext.newPage();
 
-  async function openLadyBitacora(target, url) {
+  async function openLadyBitacora(target, url, { isCandidate = false, baselineFrameStyle = null } = {}) {
     await target.goto(url, { waitUntil: 'domcontentloaded', timeout: 45000 });
     await expect(target.locator('#chapter-2')).toHaveCount(1, { timeout: 30000 });
     await target.waitForFunction(() => typeof window.switchChapter === 'function');
@@ -367,6 +367,37 @@ test('la Bitácora móvil conserva la presentación de main y publica ambas capt
     for (let index = 0; index < await timelineItems.count(); index++) {
       await expect(timelineItems.nth(index)).toBeVisible();
     }
+    // #101 aporta un marco de identidad al expediente de Lady Moriarty. Se verifica
+    // primero el acento real y después se normaliza solo el marco exterior a los
+    // valores calculados de main, para comparar el contenido de Bitácora en igualdad.
+    const profile = target.locator('#hero-profile-page');
+    const frameStyle = await profile.evaluate(element => {
+      const style = getComputedStyle(element);
+      const properties = [
+        'border-top-width', 'border-top-style', 'border-top-color',
+        'border-right-width', 'border-right-style', 'border-right-color',
+        'border-bottom-width', 'border-bottom-style', 'border-bottom-color',
+        'border-left-width', 'border-left-style', 'border-left-color'
+      ];
+      return Object.fromEntries(properties.map(property => [property, style.getPropertyValue(property)]));
+    });
+    if (isCandidate) {
+      expect({
+        borderTopWidth: frameStyle['border-top-width'],
+        borderTopColor: frameStyle['border-top-color'],
+        borderLeftColor: frameStyle['border-left-color']
+      }).toEqual({
+        borderTopWidth: '6px',
+        borderTopColor: 'rgb(255, 122, 184)',
+        borderLeftColor: 'rgb(255, 122, 184)'
+      });
+      expect(baselineFrameStyle).not.toBeNull();
+      await profile.evaluate((element, baseline) => {
+        for (const [property, value] of Object.entries(baseline)) {
+          element.style.setProperty(property, value, 'important');
+        }
+      }, baselineFrameStyle);
+    }
     // Esperar el layout estable con el fallback tipográfico idéntico en ambos orígenes.
     await target.evaluate(() => document.fonts.ready);
     const selectedTabs = target.locator('.hero-profile-tabs');
@@ -382,9 +413,10 @@ test('la Bitácora móvil conserva la presentación de main y publica ambas capt
     // Su borde tiene microvariaciones de antialiasing entre previews aunque el DOM y
     // la presentación del expediente coincidan. Se oculta sin alterar el layout.
     await target.addStyleTag({ content: '#mission-progress-trigger { visibility: hidden !important; }' });
-    const screenshot = await target.screenshot({
+    // Capturar el panel de Bitácora, no los márgenes exteriores del expediente:
+    // #101 cambia deliberadamente esos márgenes con el acento del creador.
+    const screenshot = await panel.screenshot({
       path: url === mainBaselineUrl ? 'test-results/main-baseline-bitacora-mobile.png' : 'test-results/pr-candidate-bitacora-mobile.png',
-      fullPage: false,
       animations: 'disabled'
     });
     const signature = await target.evaluate(() => {
@@ -414,16 +446,24 @@ test('la Bitácora móvil conserva la presentación de main y publica ambas capt
         };
       });
     });
-    return { signature, screenshot };
+    return { signature, screenshot, frameStyle };
   }
 
   try {
     await mainPage.emulateMedia({ reducedMotion: 'reduce' });
     const mainCapture = await openLadyBitacora(mainPage, mainBaselineUrl);
     await candidatePage.emulateMedia({ reducedMotion: 'reduce' });
-    const candidateCapture = await openLadyBitacora(candidatePage, '/');
+    const candidateCapture = await openLadyBitacora(candidatePage, '/', {
+      isCandidate: true,
+      baselineFrameStyle: mainCapture.frameStyle
+    });
     expect(candidateCapture.signature).toEqual(mainCapture.signature);
-    expect(candidateCapture.screenshot).toEqual(mainCapture.screenshot);
+    // Buffer.equals compara los bytes PNG exactos en código nativo, sin que Jest
+    // expanda miles de bytes en un diff profundo que agota el timeout de la prueba.
+    expect(
+      candidateCapture.screenshot.equals(mainCapture.screenshot),
+      'La captura PNG móvil de Bitácora debe ser idéntica byte por byte a main.'
+    ).toBe(true);
   } finally {
     await comparisonContext.close();
   }

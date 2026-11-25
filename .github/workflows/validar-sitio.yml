@@ -9,6 +9,8 @@ on:
       - 'games-registry.js'
       - 'arsenal-registry.js'
       - 'chapters-refresh.js'
+      - 'creator-schedule.js'
+      - 'creator-colors.css'
       - 'playwright.config.js'
       - 'index.html'
       - 'bitacora-preview.html'
@@ -64,6 +66,7 @@ jobs:
           node --check games-registry.js
           node --check arsenal-registry.js
           node --check chapters-refresh.js
+          node --check creator-schedule.js
       - name: Instalar motor de contratos JSON Schema
         run: python -m pip install --disable-pip-version-check -r requirements-data-contracts.txt
       - name: Validar archivos JSON
@@ -73,6 +76,10 @@ jobs:
             echo "Validando $file"
             python -m json.tool "$file" > /dev/null
           done
+      - name: Validar fuente única de colores de creadores
+        run: |
+          python scripts/build_creator_colors.py --check
+          python scripts/validate_creator_colors.py
       - name: Validar modelo del roster y cobertura Twitch
         run: python scripts/validate_roster_data.py --check-activity --check-platforms
       - name: Validar registro maestro de juegos

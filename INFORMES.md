@@ -4296,3 +4296,42 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - Bypass `RepositoryRole` actor ID `5` = rol Admin, `always`; también hay `Integration` actor ID `1143301`, `always`, cuya identidad no quedó acreditada. La cuenta autenticada `losmoriartys-cmd` es propietaria/admin y la API informa `current_user_can_bypass=always`.
 - El endpoint de protección clásica `GET /branches/main/protection` devolvió 403 (`Resource not accessible by integration`). No se actualizó el ruleset ni la protección clásica: la conexión permite leer el ruleset, pero no administrar esa configuración.
 - **Estado:** revisión detectó brechas y dependencias; no se declara resuelta. Mantener #109 y #101 en Draft, sin merge y sin cambios en producción.
+
+
+---
+
+## 2026-11-25 — PR #101 · Reconciliación de mejoras de sitio sobre main vigente
+
+- **Base de reconciliación:** `57aebd4462ea998999f6b1b0a84eb2f8971a2a36`. La rama de #101 se conserva como segundo padre del commit de reconciliación; no se reescribe su historial ni se fuerza el ref.
+- **Datos preservados desde main:** `data.json` `d128baa804994afd9ada9ab673d7818268106f08` (captura 2026-11-25 05:10:06 UTC), `platform-stats.json` `04bd622f2d8a7133be80c0f16a42c98f33a5a417`, `clips-data.json` `23e72e9d4b3287eb087c5f6311afb3fed6568fea` (captura 2026-11-25 05:10:09 UTC) y `creator-metrics.json` `e3e0bc3513092799bac05a62d1142678c2e32e6d`. No se reemplazan por capturas anteriores de la rama histórica.
+- **Identidad:** se conserva la fuente canónica `data/creator-colors.json`, el CSS generado y sus validadores que ya están en main; no se agrega una segunda copia de la paleta.
+- **Mejoras portadas:** color por integrante en perfiles/componentes, horarios públicos de Twitch en Roster y EN VIVO, enlaces estables `#alianzas` / `#en-vivo`, corrección de alineación móvil de la Bitácora y visualización del total público de seguidores por canal con fuente, estado y fecha de captura.
+- **Integridad de datos:** la información visible de seguidores se alimenta de `followers_total`, `followers_source`, `followers_status` y `followers_captured_at` presentes en los siete canales activos de Twitch de la captura preservada.
+- **Colector automático:** el cambio de workflow a PR con `GITHUB_TOKEN` queda separado de esta integración de interfaz hasta demostrar que los checks requeridos se disparan y se asocian al SHA del PR automatizado. No se incorpora un bypass ni se modifica el workflow activo de main en esta tanda.
+- **Validación:** pendiente para el nuevo SHA reconciliado. Los resultados verdes anteriores de #101 no se trasladan automáticamente a este árbol actualizado.
+- **Límites:** no se modifica main ni producción; el movimiento de rama conserva el HEAD histórico como padre y queda sujeto a CI/revisión del PR.
+
+
+---
+
+## 2026-11-25 · PR #101 · segunda reconciliación independiente con main vigente
+
+- **Main de referencia:** `805bef800ff1c953d8686319025e576ccf686da4`.
+- **Commit de reconciliación:** `a8e3e547ba859fcd56b650eeeb911f44ff088d7d`, con primer padre `c03d55b4a659e6b42bf96797e620f9eb5727514f` (historial funcional de #101) y segundo padre `805bef800ff1c953d8686319025e576ccf686da4`. Sin reescritura ni force-push.
+- **Alineación:** 37 commits adelante, 0 atrás; merge-base = `805bef800ff1c953d8686319025e576ccf686da4`.
+- **Blobs actuales de main preservados en el árbol:** `creator-metrics.json` `f94c3219dc298b1e93b191ab88f09d306101a0bb`; `data.json` `965dd8deed93a0f828e010712bc50536406b5201`; `platform-stats.json` `002236c1b966dd4d2e66453e6aaf4d1a21fc4101`. Los tres SHA se verificaron contra el árbol de main; sustituyen las referencias antiguas de la sección anterior, que describían la captura previa de `57aebd4`.
+- **Separación:** no se incorporó ningún archivo de contratos, guardia, backup o workflows de BASE-02 procedente de #109. El único contenido de main añadido por esta reconciliación son los tres blobs métricos del commit indicado.
+- **Validación del SHA de reconciliación:** `python-tests` [45562388822](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45562388822), QA portable [45562389022](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45562389022), QA común [45562388912](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45562388912) y `validar` [45562388864](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45562388864) terminaron SUCCESS; también el push [45562378620](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45562378620).
+- **Gate aún pendiente:** no se ejecutó `audit-public-links` en esta rama. El workflow se añadió en #109 y aún no está presente en main ni en la rama de #101, aunque el ruleset activo lo exige como contexto obligatorio. No se copia desde BASE-02; la dependencia queda registrada sin mezclar proyectos.
+- **Estado:** PR #101 continúa Draft. La edición de este informe genera un SHA posterior y dispara una nueva pasada de CI; se deberá volver a verificar el nuevo HEAD y resolver el contexto obligatorio ausente antes de cualquier propuesta de merge. Main y producción permanecen intactos.
+
+
+---
+
+## 2026-11-25 · Integración BASE-02 y reconciliación de Roster sobre main actualizado
+
+- **PR #109 integrado:** squash commit `a03b12fa64fb298f00f3d8d92067268403c978f6`; base previa `be71d55e873ce5267f98f9725f42b0e4f9d93c3b`. Checks obligatorios `validar`, `python-tests`, `audit-public-links` y QA común terminaron SUCCESS sobre el HEAD `13736e383c68918682840e56f1b489bc480e6ef9`. Cloudflare Pages preview y build también SUCCESS.
+- La integración se hizo usando la excepción administrativa puntual del ruleset, con autorización expresa del propietario y registro en el issue #113. No hubo aprobación independiente ni se simuló una.
+- **PR #101:** se preservan los 13 paths propios de la rama sobre el nuevo main. Se combinan explícitamente los cambios no superpuestos de `.github/workflows/validar-sitio.yml` y `app.js`; `INFORMES.md` retiene ambos registros históricos. El resto de los paths de #101 se incorpora sin reemplazar los archivos ni blobs de BASE-02.
+- **Colector automático:** el primer push de BASE-02 reveló que `actualizar-stats.yml` ejecutaba `test_data_contracts` sin instalar `jsonschema` (fallo `ModuleNotFoundError`). Se añade la instalación de `requirements-data-contracts.txt` junto con `cryptography` antes de ejecutar las pruebas; la nueva CI verificará el arreglo.
+- La evidencia independiente de backup/restore de 14/14 archivos y el snapshot de 318 archivos se conserva sin repetir el roundtrip; la guardia del inventario crítico pasó en CI sobre el candidato BASE-02 actualizado. Rotación y borrado automático continúan deshabilitados.
