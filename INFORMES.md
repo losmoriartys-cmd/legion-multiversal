@@ -4208,3 +4208,18 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **Protección de GitHub documentada:** ruleset activo; checks estrictos `validar`, `python-tests`, `audit-public-links`; bypass IDs 5 y 1143301 todavía requieren identificación; `require_code_owner_review=false`. No se modificó el ruleset.
 - **Estado de validación:** candidato preparado; compilación, pruebas unitarias, contratos, suite de navegador y backup/restauración todavía pendientes de ejecución sobre este SHA. El preview de Cloudflare no cuenta como evidencia de esas pruebas.
 - **Integración:** no se fusionó ninguna PR y no se modificó `main`.
+
+
+---
+
+## 2026-11-25 — BASE-02 · backup independiente: preflight externo bloqueado por secretos ausentes
+
+- **SHA del candidato al ejecutar:** `2cc721a73a4168372bcf111a167d2a0adc873242`.
+- **Workflow:** [Backup independiente del repositorio · run 45558641646](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45558641646), evento `push` sobre `work/base02-candidate-reconciled`.
+- **Pasos aprobados:** checkout completo y `scripts/create_repo_backup.sh backup-output`; la creación local del bundle, snapshot y `SHA256SUMS` terminó SUCCESS.
+- **Bloqueo exacto:** `Verificar configuración del destino externo` falló antes de instalar AWS CLI. Los valores de `BACKUP_S3_ENDPOINT`, `BACKUP_S3_BUCKET`, `BACKUP_S3_ACCESS_KEY_ID` y `BACKUP_S3_SECRET_ACCESS_KEY` llegaron vacíos al runner. No se hizo ninguna operación S3.
+- **Alcance de evidencia:** no hubo subida, descarga ni restauración remota. El backup externo y el roundtrip siguen NO VERIFICADOS; no imprimir ni documentar `BACKUP_EXTERNAL_ROUNDTRIP: PASS` para esta ejecución.
+- **Endurecimiento implementado en el workflow:** después de habilitar credenciales, el procedimiento descargará el bundle/snapshot, verificará checksums, clonará el bundle en un repositorio aislado, extraerá el tar en un directorio aparte y comparará los 14 blobs críticos contra el `GITHUB_SHA` de origen. Solo entonces podrá declarar PASS.
+- **Trigger de primera ejecución:** push limitado a la rama candidata y a cambios del workflow/script; no hay schedule, rotación ni borrado automático.
+- **Próximo paso operativo único:** crear/configurar los cuatro repository secrets desde GitHub Settings → Secrets and variables → Actions. No compartir los valores por chat. Repetir la ejecución sobre el SHA final del candidato y conservar el manifiesto, los SHA-256 y los resultados de ambas restauraciones.
+- **Estado BASE-02:** ABIERTO. El CI de código del candidato anterior `43721aa8` completó los cinco checks requeridos y 53 pruebas Playwright; el SHA actual `2cc721a` incorpora el endurecimiento del backup y debe completar su propia batería. Sin backup remoto restaurado no se declara cierre.
