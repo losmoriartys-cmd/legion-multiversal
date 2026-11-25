@@ -67,3 +67,16 @@ El archivo raíz `CODEOWNERS` no existe en `main` (la consulta de contenido devo
 - Bypass vigente: `RepositoryRole` ID `5` e `Integration` ID `1143301`, ambos `always`. La identidad/alcance de la integración no se presume.
 - `require_code_owner_review=false`. El archivo CODEOWNERS no sustituye esa configuración administrativa.
 - No se modificó el ruleset ni `main` como parte de esta reconciliación.
+
+
+## Auditoría de solo lectura · 25/11/2026 · estado posterior a la reconciliación
+
+- **Referencia examinada:** `main` = `805bef800ff1c953d8686319025e576ccf686da4`; ruleset `PROTECCION-MAIN-LEGION` ID `27883004`, enforcement `active`, condición `~DEFAULT_BRANCH`.
+- **Revisión:** una aprobación obligatoria; descarte de aprobaciones obsoletas; aprobación del último push; resolución de hilos obligatoria. `require_code_owner_review=false`.
+- **Checks estrictos:** `validar`, `python-tests`, `audit-public-links`. El job `python-tests` está presente en `.github/workflows/test-stats.yml`. `audit-public-links` se añadió en #109, no en main/#101; por eso #101 no genera ese contexto y queda pendiente para el gate.
+- **CODEOWNERS:** no existe en main (consulta de contenido 404 y búsqueda en la rama predeterminada sin resultados). En #109 existe un archivo raíz con `* @losmoriartys-cmd`; el ruleset no exige Code Owner review y esa asignación no crea una aprobación independiente del autor/propietario.
+- **Bypass:** `RepositoryRole` actor ID `5` corresponde al rol `admin` según la tabla de roles base del proveedor Terraform de GitHub; modo `always`. El actor `Integration` ID `1143301` también tiene `always`, pero su identidad no se pudo verificar y no se presume que sea GitHub Actions. La cuenta autenticada `losmoriartys-cmd` es la propietaria/admin del repositorio; la API reporta `current_user_can_bypass=always`.
+- **Protección clásica:** `GET /branches/main/protection` devolvió 403 (`Resource not accessible by integration`). No se pudo auditar esa capa adicional.
+- **Límite de modificación:** las acciones Git disponibles permiten leer reglasets, no actualizarlos; tampoco se concedió acceso al endpoint de protección clásica. No se efectuó ningún cambio administrativo.
+- **Criterio pendiente:** identificar la integración 1143301; decidir si Admin debe conservar bypass `always` o limitarse a `pull_request`; definir un Code Owner con capacidad real de aprobar independientemente antes de activar `require_code_owner_review`; y asegurar que todos los PR puedan producir cada contexto de check exigido. La documentación de GitHub define `actor_id` y `bypass_mode`; la asignación `RepositoryRole` 5 = admin está documentada en [terraform-provider-github](https://github.com/integrations/terraform-provider-github/blob/main/docs/resources/repository_ruleset.md).
+- **Conclusión:** ruleset activo pero no endurecido al nivel de Code Owners; bypass amplio y una integración sin identificar. La protección de main permanece bajo revisión, no aprobada para cierre.

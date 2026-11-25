@@ -1,5 +1,5 @@
 # HOJA DE RUTA VIVA · EVOLUCIÓN Y PROTECCIÓN DE LEGIÓN MULTIVERSAL
-**Actualización:** 22/11/2026 · **Tablero de seguimiento:** esta hoja se mantiene al comienzo de INFORMES.md.
+**Actualización:** 25/11/2026 · **Tablero de seguimiento:** esta hoja se mantiene al comienzo de INFORMES.md.
 
 > **Regla de cierre:** una tarea solo pasa a [x] cuando su implementación está integrada en main, sus pruebas aplicables terminan correctamente y se verifica el resultado publicado cuando corresponda. Un cambio en una rama, un preview o un workflow todavía en curso no cuenta como terminado. Cada cierre debe enlazar el PR, el SHA y la evidencia de validación.
 
@@ -4268,3 +4268,31 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **Guardrails:** `expired_candidates: 0`; borrado automático, rotación y schedule deshabilitados.
 - **Nota de cierre documental:** la primera repetición sobre `9470744b` quedó registrada; al incorporar el resultado documental se generó un nuevo HEAD, y esta segunda repetición cubrió `b45e5684`. La siguiente ejecución del workflow cubrirá el SHA de esta actualización final de informes.
 - **Estado:** el roundtrip está demostrado en dos HEAD consecutivos, incluido el documental anterior. Esta actualización genera un SHA posterior y dispara una última repetición; BASE-02 sigue ABIERTO hasta que esa ejecución termine y la CI integral del mismo SHA quede en verde, además de la revisión del ruleset/Code Owners. Sin merge, sin cambios en `main` y sin producción.
+
+
+---
+
+## 2026-11-25 · Reconciliación independiente de #109 y #101 contra main · verificación de datos y controles
+
+### BASE-02 · PR #109
+- **Main usado como fuente:** `805bef800ff1c953d8686319025e576ccf686da4` (commit de actualización automática de métricas).
+- **Merge de reconciliación:** `e4f4f8eeddde47d2c60bd3bf6f125178792eb1d6`; primer padre `d51be448f90b17cc69c6fff1fb0347420994d1e2`, segundo padre `805bef800ff1c953d8686319025e576ccf686da4`. El historial previo de BASE-02 se conserva y la rama queda sin commits pendientes detrás de main.
+- **Datos preservados desde el árbol de main:** `creator-metrics.json` blob `f94c3219dc298b1e93b191ab88f09d306101a0bb`; `data.json` blob `965dd8deed93a0f828e010712bc50536406b5201`; `platform-stats.json` blob `002236c1b966dd4d2e66453e6aaf4d1a21fc4101`. Los tres SHA de blob se verificaron en el árbol del nuevo commit y coinciden exactamente con los de main.
+- **Comparación:** 23 commits adelante, 0 atrás; merge-base = `805bef800ff1c953d8686319025e576ccf686da4`.
+- **CI de primera pasada sobre este merge:** QA común [45562381323](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45562381323) SUCCESS; `python-tests` vía [45562381302](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45562381302) SUCCESS; auditoría [45562381285](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45562381285) SUCCESS. `validar` [45562381293](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45562381293) seguía ejecutando Playwright y auditorías finales en la consulta de esta actualización.
+- **Backup anterior:** [45561352157](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45561352157) verificó correctamente el SHA `d51be448...` (cuatro objetos, restauración aislada, 318 archivos y 14/14 SHA-256). Ese SHA es anterior a la reconciliación; no se reutiliza como evidencia de respaldo del nuevo candidato.
+- La actualización de este informe genera un nuevo SHA documental y está dentro de las rutas observadas por el workflow de backup independiente; la ejecución sobre el HEAD resultante debe verificarse de nuevo.
+
+### PR #101 · rama funcional separada
+- **Merge de reconciliación:** `a8e3e547ba859fcd56b650eeeb911f44ff088d7d`; primer padre `c03d55b4a659e6b42bf96797e620f9eb5727514f`, segundo padre `805bef800ff1c953d8686319025e576ccf686da4`. Se conserva el historial funcional de #101; no se incorporan scripts, contratos ni workflows de BASE-02.
+- **Datos preservados:** los mismos tres blobs actuales de main enumerados arriba. Comparación: 37 commits adelante, 0 atrás; merge-base = `805bef800ff1c953d8686319025e576ccf686da4`.
+- **CI de primera pasada:** `python-tests` [45562388822](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45562388822), QA portable [45562389022](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45562389022), QA común [45562388912](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45562388912) y `validar` [45562388864](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45562388864) terminaron SUCCESS. También terminó SUCCESS el workflow push [45562378620](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45562378620).
+- **Check de protección pendiente:** #101 no genera `audit-public-links`. Ese workflow se incorpora en #109 y aún no forma parte de main ni de la rama de #101; copiarlo en #101 mezclaría BASE-02 con los cambios funcionales y no se hizo. El ruleset exige ese contexto, por lo que el PR no puede considerarse listo mientras no se resuelva la dependencia.
+
+### Revisión de protección de main · consulta de solo lectura
+- Ruleset `PROTECCION-MAIN-LEGION`, ID `27883004`, activo sobre `~DEFAULT_BRANCH`; una aprobación, descarte de aprobaciones obsoletas, aprobación del último push y resolución de conversaciones.
+- Checks estrictos requeridos: `validar`, `python-tests`, `audit-public-links`.
+- `require_code_owner_review=false`. El archivo raíz `CODEOWNERS` no existe en main; la versión añadida en #109 asigna todo a `@losmoriartys-cmd`, que es la misma cuenta autora/propietaria, por lo que no demuestra revisión independiente.
+- Bypass `RepositoryRole` actor ID `5` = rol Admin, `always`; también hay `Integration` actor ID `1143301`, `always`, cuya identidad no quedó acreditada. La cuenta autenticada `losmoriartys-cmd` es propietaria/admin y la API informa `current_user_can_bypass=always`.
+- El endpoint de protección clásica `GET /branches/main/protection` devolvió 403 (`Resource not accessible by integration`). No se actualizó el ruleset ni la protección clásica: la conexión permite leer el ruleset, pero no administrar esa configuración.
+- **Estado:** revisión detectó brechas y dependencias; no se declara resuelta. Mantener #109 y #101 en Draft, sin merge y sin cambios en producción.

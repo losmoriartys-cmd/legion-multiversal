@@ -96,3 +96,15 @@ Esta ejecución valida el roundtrip externo y los 14 archivos para el SHA indica
 - `expired_candidates: 0`; borrado automático deshabilitado; sin schedule ni rotación.
 
 Esta repetición cubre el HEAD documental `b45e568...`. Cualquier cambio posterior del contenido versionado exige una nueva copia y restauración para que la evidencia siga correspondiendo al SHA exacto.
+
+
+### Ejecución verificada antes de la reconciliación final de main · 25/11/2026
+
+- **Workflow:** [run 45561352157](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45561352157), SUCCESS.
+- **SHA de origen/restaurado:** `d51be448f90b17cc69c6fff1fb0347420994d1e2`; backup ID `20261125T063243Z-45561352157`.
+- **Destino:** Google Drive `root` (Mi unidad), OAuth existente; cuatro objetos subidos y descargados con SHA-256 coincidente.
+- **Restauración aislada:** SUCCESS; commit exacto; 318 archivos del snapshot verificados.
+- **Inventario crítico:** 14/14 SHA-256 coincidentes; `RESTORE_CRITICAL_FILES: PASS (14/14 SHA-256 match)`.
+- **Evidencia:** [artifact 14998375937](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45561352157/artifacts/14998375937), ZIP SHA-256 `1b48b69d8391dc501b2f2f2d3317dedf70dc150b78b6e82cffd767c1023e0a73`.
+- **Límite:** esta prueba es histórica respecto del candidato actual: cubre `d51be448...`, anterior a la reconciliación con main `805bef800ff1c953d8686319025e576ccf686da4`. No se usa como evidencia del nuevo SHA. La actualización documental actual activa una nueva ejecución por el workflow de backup; su resultado deberá quedar asociado al nuevo HEAD.
+- Rotación, schedule y borrado automático permanecen deshabilitados.
