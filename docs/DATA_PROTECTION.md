@@ -51,7 +51,11 @@ Se incorporó `scripts/create_repo_backup.sh`, que genera:
 - `legion-multiversal-source.tar.gz`: snapshot de los archivos de trabajo, incluidos los recursos presentes en el checkout.
 - `backup-manifest.txt` y `SHA256SUMS`: identificación del commit, fecha UTC y checksums.
 
-El script verifica el bundle con `git bundle verify`, inspecciona el tar y valida los checksums localmente. El workflow manual `.github/workflows/independent-backup.yml` sube esos artefactos a cualquier destino S3-compatible y vuelve a descargarlos para validar checksums, bundle y snapshot (`BACKUP_EXTERNAL_ROUNDTRIP: PASS`).
+El script verifica el bundle con `git bundle verify`, inspecciona el tar y valida los checksums localmente. El workflow `.github/workflows/independent-backup.yml` sube los artefactos a un destino S3-compatible y los vuelve a descargar. Después de verificar SHA-256, clona el bundle en un repositorio independiente, comprueba que contiene el commit de origen, extrae el snapshot en un directorio aislado y compara uno por uno los 14 blobs críticos restaurados contra ese commit. Solo imprime `BACKUP_EXTERNAL_ROUNDTRIP: PASS` si ambas restauraciones aisladas terminan correctamente.
+
+La primera ejecución de este procedimiento en el candidato actual (run [45558641646](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45558641646), SHA `2cc721a73a4168372bcf111a167d2a0adc873242`) verificó la creación local del bundle, el snapshot y sus checksums, pero se detuvo en el preflight del destino porque los cuatro secretos S3 requeridos estaban ausentes. No se subió ni descargó ningún objeto y no hubo restauración externa. Por tanto, el backup remoto continúa **NO VERIFICADO**.
+
+Se añadió un disparador `push` limitado a la rama candidata y a cambios en el propio workflow/script para ejecutar esta primera prueba sin modificar `main`; el schedule permanece deshabilitado.
 
 ### Configuración necesaria en GitHub Actions
 
