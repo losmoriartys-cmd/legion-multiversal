@@ -329,13 +329,17 @@ test('Atrás y Adelante restauran el roster y el expediente correcto', async ({ 
   expect(browserErrors).toEqual([]);
 });
 
-test('la Bitácora móvil conserva la presentación de main y publica ambas capturas comparables', async ({ browser, page }) => {
+test('la Bitácora móvil conserva la presentación de main y publica ambas capturas comparables', async ({ browser }) => {
   test.setTimeout(90000);
   const mainBaselineUrl = process.env.MAIN_BASELINE_URL;
   expect(mainBaselineUrl, 'La CI debe resolver la preview vigente del SHA de main para comparar Bitácora móvil.').toBeTruthy();
   const viewport = { width: 390, height: 844 };
-  const mainContext = await browser.newContext({ viewport, reducedMotion: 'reduce' });
-  const mainPage = await mainContext.newPage();
+  // Un solo contexto comparte la caché de fuentes entre la preview remota y la candidata local.
+  // La primera navegación precarga las fuentes para que font-display: optional no deje
+  // la preview con fallback mientras la candidata termina usando las fuentes descargadas.
+  const comparisonContext = await browser.newContext({ viewport, reducedMotion: 'reduce' });
+  const mainPage = await comparisonContext.newPage();
+  const candidatePage = await comparisonContext.newPage();
 
   async function openLadyBitacora(target, url) {
     await target.goto(url, { waitUntil: 'domcontentloaded', timeout: 45000 });
@@ -372,6 +376,11 @@ test('la Bitácora móvil conserva la presentación de main y publica ambas capt
       ]);
       await document.fonts.ready;
     });
+    const availableFonts = await target.evaluate(() => ({
+      roboto: document.fonts.check('400 16px "Roboto Condensed"'),
+      bangers: document.fonts.check('400 24px Bangers')
+    }));
+    expect(availableFonts).toEqual({ roboto: true, bangers: true });
     const selectedTabs = target.locator('.hero-profile-tabs');
     await selectedTabs.evaluate(el => el.scrollIntoView({ block: 'start', inline: 'nearest' }));
     await expect(bitacoraTab).toBeVisible();
@@ -421,15 +430,25 @@ test('la Bitácora móvil conserva la presentación de main y publica ambas capt
   }
 
   try {
+    const fontWarmupPage = await comparisonContext.newPage();
+    await fontWarmupPage.goto('/', { waitUntil: 'domcontentloaded', timeout: 45000 });
+    await fontWarmupPage.evaluate(async () => {
+      await Promise.all([
+        document.fonts.load('400 16px "Roboto Condensed"'),
+        document.fonts.load('700 16px "Roboto Condensed"'),
+        document.fonts.load('400 24px Bangers')
+      ]);
+      await document.fonts.ready;
+    });
+    await fontWarmupPage.close();
     await mainPage.emulateMedia({ reducedMotion: 'reduce' });
     const mainCapture = await openLadyBitacora(mainPage, mainBaselineUrl);
-    await page.setViewportSize(viewport);
-    await page.emulateMedia({ reducedMotion: 'reduce' });
-    const candidateCapture = await openLadyBitacora(page, '/');
+    await candidatePage.emulateMedia({ reducedMotion: 'reduce' });
+    const candidateCapture = await openLadyBitacora(candidatePage, '/');
     expect(candidateCapture.signature).toEqual(mainCapture.signature);
     expect(candidateCapture.screenshot).toEqual(mainCapture.screenshot);
   } finally {
-    await mainContext.close();
+    await comparisonContext.close();
   }
 });
 
