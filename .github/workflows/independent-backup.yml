@@ -10,6 +10,8 @@ on:
       - 'scripts/google_drive_restore.py'
       - 'scripts/verify_critical_restore.py'
       - 'scripts/create_repo_backup.sh'
+      - 'docs/DATA_PROTECTION.md'
+      - 'INFORMES.md'
   workflow_dispatch:
 
 permissions:
