@@ -6,37 +6,13 @@
     "panel": "#101a2a"
   },
   "creators": {
-    "moriartys": {
-      "color": "#4da3ff",
-      "name": "Azul"
-    },
-    "rod3r1k": {
-      "color": "#f0545a",
-      "name": "Rojo"
-    },
-    "lady-moriarty": {
-      "color": "#ff7ab8",
-      "name": "Rosa"
-    },
-    "ardipii": {
-      "color": "#a3acb8",
-      "name": "Gris"
-    },
-    "akuma": {
-      "color": "#a78bfa",
-      "name": "Violeta"
-    },
-    "dave-nexus": {
-      "color": "#5fd47a",
-      "name": "Verde"
-    },
-    "pato-oratoris": {
-      "color": "#f2d94e",
-      "name": "Amarillo"
-    },
-    "habitos": {
-      "color": "#ff9a3c",
-      "name": "Naranja"
-    }
+    "moriartys": { "color": "#4da3ff", "name": "Azul" },
+    "rod3r1k": { "color": "#f0545a", "name": "Rojo" },
+    "lady-moriarty": { "color": "#ff7ab8", "name": "Rosa" },
+    "ardipii": { "color": "#a3acb8", "name": "Gris" },
+    "akuma": { "color": "#a78bfa", "name": "Violeta" },
+    "dave-nexus": { "color": "#5fd47a", "name": "Verde" },
+    "pato-oratoris": { "color": "#f2d94e", "name": "Amarillo" },
+    "habitos": { "color": "#ff9a3c", "name": "Naranja" }
   }
 }
