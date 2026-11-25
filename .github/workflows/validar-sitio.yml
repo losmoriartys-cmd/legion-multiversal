@@ -2,6 +2,8 @@ name: Validar código y datos del sitio
 
 on:
   push:
+    branches:
+      - main
     paths:
       - 'app.js'
       - 'games-registry.js'
@@ -19,29 +21,20 @@ on:
       - 'schemas/**'
       - 'data/**'
       - 'tests/**'
+      - 'requirements-data-contracts.txt'
       - 'update_clips.py'
-      - '.github/workflows/validar-sitio.yml'
+      - '.github/workflows/**'
+      - 'data/README.md'
+      - 'docs/**'
+      - 'INFORMES.md'
   pull_request:
-    paths:
-      - 'data/**'
-      - 'app.js'
-      - 'games-registry.js'
-      - 'chapters-refresh.js'
-      - 'index.html'
-      - 'bitacora-preview.html'
-      - 'styles.css'
-      - '*.css'
-      - '*.json'
-      - 'assets/**'
-      - 'scripts/**'
-      - 'schemas/**'
-      - 'tests/**'
-      - 'update_clips.py'
-      - '.github/workflows/validar-sitio.yml'
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
   contents: read
+  checks: read
 
 jobs:
   validar:
@@ -56,12 +49,23 @@ jobs:
         with:
           node-version: '22'
           package-manager-cache: false
+      - name: Resolver preview vigente de main para baseline visual
+        id: main-preview
+        if: github.event_name == 'pull_request'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: |
+          MAIN_SHA="$(git rev-parse origin/main)"
+          python scripts/resolve_main_preview.py --repo "$GITHUB_REPOSITORY" --sha "$MAIN_SHA"
       - name: Comprobar sintaxis JavaScript
         run: |
           node --check app.js
           node --check games-registry.js
           node --check arsenal-registry.js
           node --check chapters-refresh.js
+      - name: Instalar motor de contratos JSON Schema
+        run: python -m pip install --disable-pip-version-check -r requirements-data-contracts.txt
       - name: Validar archivos JSON
         run: |
           for file in ./*.json data/*.json schemas/*.json; do
@@ -157,7 +161,7 @@ jobs:
           python scripts/audit_image_references.py --root /tmp/image-audit-0d578a0 --output reports/image-audit/0d578a0.md
           python scripts/audit_image_references.py --root . --output reports/image-audit/main.md
       - name: Compilar colectores Python
-        run: python -m py_compile scripts/audit_image_references.py update_stats.py update_platform_stats.py update_clips.py scripts/validate_roster_data.py scripts/validate_games_registry.py scripts/validate_clips_data.py scripts/render_roster_noscript.py scripts/validate_metric_history.py scripts/build_creator_metrics.py scripts/validate_creator_metrics.py scripts/growth_analytics.py scripts/validate_creator_records.py scripts/bootstrap_twitch_followers_oauth.py scripts/audit_and_optimize_images.py scripts/optimize_logo.py scripts/optimize_hero_image.py scripts/add_image_dimensions.py scripts/summarize_lighthouse.py scripts/lh_failures.py
+        run: python -m py_compile scripts/audit_image_references.py update_stats.py update_platform_stats.py update_clips.py scripts/validate_roster_data.py scripts/validate_games_registry.py scripts/validate_clips_data.py scripts/render_roster_noscript.py scripts/validate_metric_history.py scripts/build_creator_metrics.py scripts/validate_creator_metrics.py scripts/growth_analytics.py scripts/validate_creator_records.py scripts/validate_data_contracts.py scripts/audit_public_links.py scripts/resolve_main_preview.py scripts/bootstrap_twitch_followers_oauth.py scripts/audit_and_optimize_images.py scripts/optimize_logo.py scripts/optimize_hero_image.py scripts/add_image_dimensions.py scripts/summarize_lighthouse.py scripts/lh_failures.py
       - name: Ejecutar pruebas unitarias Python del repositorio
         run: python -m unittest discover -s tests -v
       - name: Probar lectura de cuentas por los colectores
@@ -174,11 +178,17 @@ jobs:
         run: python scripts/validate_creator_records.py
       - name: Validar modelo normalizado multiplataforma y Crecimiento
         run: python scripts/validate_creator_metrics.py
+      - name: Validar contratos canónicos e integridad entre archivos
+        run: python scripts/validate_data_contracts.py
+      - name: Proteger inventario crítico, roster y recuperación Git
+        run: python scripts/guard_data_integrity.py --base-ref origin/main --recovery-report
       - name: Instalar dependencias de pruebas de navegador
         run: npm install
       - name: Instalar Chromium para Playwright
         run: npx playwright install --with-deps chromium
       - name: Probar expedientes, Bitácora, cuatro pestañas, responsive e historial
+        env:
+          MAIN_BASELINE_URL: ${{ steps.main-preview.outputs.url || 'http://127.0.0.1:4173/' }}
         run: npm run test:e2e
       - name: Publicar capturas de revisión visual de Playwright
         if: always()

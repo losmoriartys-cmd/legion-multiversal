@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "critical_files": [
+    "clips-data.json",
+    "community-playbook.json",
+    "creator-metrics.json",
+    "creator-programs.json",
+    "data.json",
+    "data/creator-colors.json",
+    "data/creator-records.json",
+    "data/games.json",
+    "data/roster.json",
+    "news-data.json",
+    "platform-registry.json",
+    "platform-stats.json",
+    "sullygnome-data.json",
+    "twitchmetrics-data.json"
+  ],
+  "protected_roster_ids": [
+    "akuma",
+    "ardipii",
+    "dave-nexus",
+    "habitos",
+    "lady-moriarty",
+    "moriartys",
+    "pato-oratoris",
+    "rod3r1k"
+  ],
+  "authorized_roster_removals": []
+}
