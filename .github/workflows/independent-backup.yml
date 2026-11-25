@@ -66,7 +66,7 @@ jobs:
         run: |
           set -euo pipefail
           python scripts/google_drive_backup.py | tee backup-result.json
-          BACKUP_ID="$(python -c 'import json; print(json.load(open("backup-result.json", encoding="utf-8"))["backup_id"])')"
+          BACKUP_ID="$(python -c 'import json; raw=open("backup-result.json", encoding="utf-8").read(); start=raw.find("{"); data,_=json.JSONDecoder().raw_decode(raw[start:]); print(data["backup_id"])')"
           test -n "$BACKUP_ID"
           echo "backup_id=$BACKUP_ID" >> "$GITHUB_OUTPUT"
           echo "BACKUP_ID=$BACKUP_ID" >> "$GITHUB_ENV"
