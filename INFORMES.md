@@ -4254,3 +4254,17 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **Artefacto de evidencia:** [google-drive-roundtrip-evidence-45560952459](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45560952459/artifacts/14997444276), artifact ID `14997444276`, ZIP SHA-256 `92f4daf0348ffb95b7ec6458ba73d421db81d51b43618412816ddac5a8407536`.
 - **Límite de alcance:** esta prueba valida el SHA `9470744b...`. La actualización documental que registra esta evidencia genera un nuevo SHA; por la regla de BASE-02, debe repetirse el roundtrip sobre ese nuevo HEAD antes de considerarlo el candidato final respaldado.
 - **Estado:** roundtrip real verificado para el SHA indicado; BASE-02 continúa ABIERTO hasta repetir la prueba sobre el SHA documental final, completar la CI integral de ese SHA y revisar el ruleset/Code Owners. Sin merge, sin cambios en `main` y sin producción.
+
+
+---
+
+## 2026-11-25 · BASE-02 · roundtrip repetido sobre el HEAD documental · SHA b45e5684
+
+- **Workflow:** [run 45561155987](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45561155987), SUCCESS.
+- **SHA de origen y restaurado:** `b45e5684155deebdea2a32a7c05f32a557f59cc5`.
+- **Backup ID:** `20261125T063058Z-45561155987`.
+- **Resultado:** cuatro objetos transferidos a Google Drive y descargados con SHA-256 coincidente; restauración aislada exitosa; 318 archivos verificados; los 14 archivos críticos coinciden por SHA-256 (`RESTORE_CRITICAL_FILES: PASS (14/14 SHA-256 match)`).
+- **Evidencia:** [artifact 14998420592](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45561155987/artifacts/14998420592), ZIP SHA-256 `32e3af182de0e53b1e8292f3cadaa08b60696666dbe847f3007c60e7aa132516`. Los cuatro IDs Drive y sus checksums están en `docs/DATA_PROTECTION.md`.
+- **Guardrails:** `expired_candidates: 0`; borrado automático, rotación y schedule deshabilitados.
+- **Nota de cierre documental:** la primera repetición sobre `9470744b` quedó registrada; al incorporar el resultado documental se generó un nuevo HEAD, y esta segunda repetición cubrió `b45e5684`. La siguiente ejecución del workflow cubrirá el SHA de esta actualización final de informes.
+- **Estado:** el roundtrip está demostrado en dos HEAD consecutivos, incluido el documental anterior. Esta actualización genera un SHA posterior y dispara una última repetición; BASE-02 sigue ABIERTO hasta que esa ejecución termine y la CI integral del mismo SHA quede en verde, además de la revisión del ruleset/Code Owners. Sin merge, sin cambios en `main` y sin producción.
