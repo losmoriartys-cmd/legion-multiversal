@@ -402,6 +402,7 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
     <link rel="stylesheet" href="./stats-tables.css?v=20261123-stats-tables-1">
     <link rel="stylesheet" href="./public-audience-paths.css?v=20261118-1">
     <link rel="stylesheet" href="./chapters-refresh.css?v=20261122-chapters-refresh-3">
+    <link rel="stylesheet" href="./creator-colors-extensions.css?v=20261125-pr101-main-1">
 </head>
 <body>
     <div id="chapter-transition" aria-hidden="true" data-title="LEGIÓN MULTIVERSAL"></div>
@@ -756,8 +757,8 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
    <details><summary>¿Tengo que cambiar mi estilo o mi comunidad?</summary><p>Al contrario: cada canal conserva su voz, su horario y a su gente. La idea es sumar, no uniformar.</p></details>
    <details><summary>¿Hay rangos, cargos o jerarquías?</summary><p>No. Somos iguales. Algunos canales tienen un enfoque distinto (programación, hábitos, retro, terror…), pero eso habla de lo que cuentan, no de cuánto «pesan» dentro del grupo.</p></details>
    <details><summary>¿Es un grupo de follow x follow?</summary><p>No. Queremos que la gente nos siga porque le gusta lo que hacemos, no por un intercambio. Lo que construimos juntos es contenido, experiencias y vínculos genuinos.</p></details>
-   <details><summary>Soy una marca, un estudio o desarrollo juegos. ¿Puedo colaborar?</summary><p>Sí. Hay un camino pensado para vos en <a href="#chapter-8" onclick="switchChapter(8);return false;">Alianzas</a>: podés ofrecer acceso a un juego, elegir a un creador o armar una experiencia con el grupo.</p></details>
-   <details><summary>¿Cómo sé quién está transmitiendo ahora?</summary><p>En <a href="#chapter-10" onclick="switchChapter(10);return false;">EN VIVO</a> te mostramos a quienes están en directo en este momento.</p></details>
+   <details><summary>Soy una marca, un estudio o desarrollo juegos. ¿Puedo colaborar?</summary><p>Sí. Hay un camino pensado para vos en <a href="#alianzas" onclick="switchChapter(8);return false;">Alianzas</a>: podés ofrecer acceso a un juego, elegir a un creador o armar una experiencia con el grupo.</p></details>
+   <details><summary>¿Cómo sé quién está transmitiendo ahora?</summary><p>En <a href="#en-vivo" onclick="switchChapter(10);return false;">EN VIVO</a> te mostramos a quienes están en directo en este momento.</p></details>
   </div>
  </section>
  <section class="manifesto-invitation"><div><span>¿TE IDENTIFICÁS CON ESTA FORMA DE HACER LAS COSAS?</span><h3>ENTONCES HAY UNA CONVERSACIÓN QUE PODEMOS EMPEZAR.</h3></div><div class="chapter-actions"><button class="chapter-cta" type="button" onclick="switchChapter(6);setRecruitmentMode('creator')">SOY CREADOR Y QUIERO SUMARME <span>→</span></button><a class="chapter-cta" href="#brand-proposal">SOY MARCA O DESARROLLADOR <span>→</span></a><button class="chapter-cta" type="button" onclick="switchChapter(10)">QUIERO VER UN DIRECTO <span>→</span></button></div></section>
@@ -790,7 +791,7 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
 </section>
 <section id="chapter-10" class="chapter-panel comic-page live-chapter" data-editorial-number="8">
  <div class="chapter-tag">CAPÍTULO 08 · EN VIVO</div>
- <h2 class="comic-title">LA PROGRAMACIÓN DE LA LEGIÓN</h2>
+ <h2 id="en-vivo" class="comic-title">LA PROGRAMACIÓN DE LA LEGIÓN</h2>
  <p class="live-lead">Si alguien está transmitiendo, lo ves acá mismo. Si no, la Legión sigue al aire con los mejores momentos de cada canal.</p>
  <div id="live-directory" class="live-program" aria-live="polite"><p class="stats-note">Consultando el estado de los canales…</p></div>
  
@@ -801,7 +802,7 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
  <header class="alliance-hero">
   <div class="chapter-tag">CAPÍTULO 06 · ALIANZAS</div>
     <button type="button" class="supplementary-return" onclick="switchChapter(0)">← VOLVER AL INICIO</button>
-  <p class="alliance-eyebrow">LEGIÓN MULTIVERSAL · CREDENCIALES Y OPORTUNIDADES</p>
+  <p id="alianzas" class="alliance-eyebrow">LEGIÓN MULTIVERSAL · CREDENCIALES Y OPORTUNIDADES</p>
   <h2 id="alliance-title" class="comic-title">ALIANZAS Y OPORTUNIDADES</h2>
   <p class="alliance-lead">Creadores independientes, credenciales reales y propuestas armadas a medida.</p>
   <p class="alliance-intro">Somos personas con canales distintos que eligieron trabajar juntas. Cuando un estudio, una marca o una plataforma se acerca, armamos la propuesta con quienes mejor encajan con el juego y con lo que se quiere lograr: a veces un solo creador, a veces varios y a veces toda la Legión. Acá encontrás qué credenciales tenemos, qué formatos podemos ofrecer y cómo empezar la conversación.</p>
@@ -1253,13 +1254,14 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
     <script src="./creator-profile-core.js?v=20261116-unified-1"></script>
     <script src="./roster-brand-model.js?v=20261119-brand-model-1"></script>
     <script src="./social-links.js?v=20261119-social-links-1"></script>
-    <script src="./live-program.js?v=20261120-live-program-2"></script>
+    <script src="./creator-schedule.js?v=20261125-pr101-main-1"></script>
+    <script src="./live-program.js?v=20261125-pr101-main-1"></script>
     <script src="./stats-games.js?v=20261123-stats-games-1"></script>
-    <script src="./app.js?v=20261120-stats-dossier-1"></script>
+    <script src="./app.js?v=20261125-pr101-main-1"></script>
     <script src="./games-registry.js?v=20261122-collab-registry-3"></script>
     <script src="./arsenal-registry.js?v=20261122-arsenal-registry-2"></script>
-    <script src="./chapters-refresh.js?v=20261121-chapters-refresh-1" defer></script>
-    <script src="./roster-enhancements.js?v=20261122-roster-v3-3"></script>
+    <script src="./chapters-refresh.js?v=20261125-pr101-main-1" defer></script>
+    <script src="./roster-enhancements.js?v=20261125-pr101-main-1"></script>
     <script src="./contact-forms.js?v=20261119-brand-proposal-1" defer></script>
     <script src="./navigation-fix.js" defer></script>
     <script src="./manifesto-chapter.js?v=20261121-manifesto-v1" defer></script>

@@ -18,6 +18,15 @@ async function loadRosterData() {
         }
         identifiers.add(identifier);
     }
+    try {
+        const colorResponse = await fetch('./data/creator-colors.json', { cache: 'no-store' });
+        const colorPayload = colorResponse.ok ? await colorResponse.json() : null;
+        payload.heroes.forEach(hero => {
+            const colorEntry = colorPayload && colorPayload.creators && colorPayload.creators[hero.id || hero.slug];
+            const color = colorEntry && colorEntry.color;
+            if (/^#[0-9a-fA-F]{6}$/.test(color || '')) hero.accent_color = color;
+        });
+    } catch (error) { console.warn('Colores de integrantes no disponibles:', error); }
     heroesData = payload.heroes;
     creatorNameRegistry = payload.name_registry || {};
     return payload;
@@ -944,7 +953,7 @@ async function openLiveDrawer(){
  if(title)title.textContent='CENTRAL EN VIVO';
  if(message)message.textContent=!fresh?'La última captura está demorada. No podemos confirmar qué canal transmite ahora.':'No se detectan canales en directo en la última captura. Consultá el directorio completo.';
  const link=document.getElementById('live-open-channel');
- if(link){link.href='#chapter-10';link.textContent='ABRIR DIRECTORIO DE CANALES ↗';link.onclick=()=>{closeLiveDrawer();switchChapter(10);};}
+ if(link){link.href='#en-vivo';link.textContent='ABRIR DIRECTORIO DE CANALES ↗';link.onclick=()=>{closeLiveDrawer();switchChapter(10);};}
 }
 function openMultiverseMap(){switchChapter(13);}
 function updateMissionHeader(){
@@ -1055,9 +1064,19 @@ function statsRenderChannelDirectory(channels,isFresh){
   const schedule=statsCreatorSchedule(hero);
   const avatar=image?'<img src="'+escapeStatsHtml(image)+'" alt="Logo de '+escapeStatsHtml(name)+'" loading="lazy" referrerpolicy="no-referrer" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><span class="stats-avatar-fallback" hidden>'+escapeStatsHtml(String(name).slice(0,2).toUpperCase())+'</span>':'<span class="stats-avatar-fallback">'+escapeStatsHtml(String(name).slice(0,2).toUpperCase())+'</span>';
   const status=live?'<span class="stats-status verified">● EN VIVO</span>':channel.live?'<span class="stats-status partial">ÚLTIMA CAPTURA DEMORADA</span>':'<span class="stats-status pending">OFFLINE · EN SEGUIMIENTO</span>';
+  const capturedAt=channel.updated_at||channel.last_status_at||channel.last_snapshot_at;
+  const capturedDate=capturedAt?new Date(capturedAt):null;
+  const capturedLabel=capturedDate&&!Number.isNaN(capturedDate.getTime())?capturedDate.toLocaleString('es-AR'):'fecha no disponible';
+  const captureStatus=isFresh?'CAPTURA RECIENTE':'DATOS CON DEMORA';
+  const followersTotal=channel.followers_total===null||channel.followers_total===undefined?'NO DISPONIBLE':statsNumber(channel.followers_total,0);
+  const followersCapturedAt=channel.followers_captured_at?new Date(channel.followers_captured_at):null;
+  const followersCapturedLabel=followersCapturedAt&&!Number.isNaN(followersCapturedAt.getTime())?followersCapturedAt.toLocaleString('es-AR'):'captura no disponible';
+  const followersStatus=channel.followers_status==='fresh'?'CAPTURA RECIENTE':channel.followers_status==='stale'?'DATOS CON DEMORA':channel.followers_status==='unavailable'?'SIN DATOS':'ESTADO NO VERIFICADO';
+  const followersSource=escapeStatsHtml(channel.followers_source||'Fuente no registrada');
+  const followersHtml='<div class="stats-channel-capture"><strong>SEGUIDORES · '+escapeStatsHtml(followersTotal)+'</strong><span>'+followersSource+' · '+escapeStatsHtml(followersStatus)+' · '+escapeStatsHtml(followersCapturedLabel)+'</span><small>ACTIVIDAD DEL CANAL · '+escapeStatsHtml(captureStatus)+' · '+escapeStatsHtml(capturedLabel)+'</small></div>';
   const gamesHtml=games.length?games.map(game=>'<span class="stats-game-tag">'+escapeStatsHtml(game.name)+' <small>'+Number(game.live_samples||0)+' muestras</small></span>').join(''):'<span class="stats-game-tag is-declared">Sin categorías observadas en la ventana</span>';
   const fmtMetric=(v,d=1)=>v===null||v===undefined?'—':statsNumber(v,d);
-  return '<article class="stats-channel-card stats-dossier-card '+(live?'is-live':'is-offline')+'" data-login="'+escapeStatsHtml(channel.login)+'"><div class="stats-dossier-head"><div class="stats-dossier-avatar">'+avatar+'</div><div class="stats-dossier-identity"><h5>'+escapeStatsHtml(name)+'</h5><a href="https://twitch.tv/'+encodeURIComponent(channel.login)+'" target="_blank" rel="noopener noreferrer">@'+escapeStatsHtml(channel.login)+' ↗</a><small>'+escapeStatsHtml(hero?.characterRole||hero?.tagline||'Canal Twitch del roster')+'</small></div><span class="stats-channel-platform">TWITCH</span></div><div class="stats-dossier-status">'+status+'<span>'+fmtMetric(channel.current_viewers,0)+' espectadores actuales</span></div><dl><div><dt>Promedio observado</dt><dd>'+fmtMetric(avg)+'</dd></div><div><dt>Pico observado</dt><dd>'+fmtMetric(peak,0)+'</dd></div><div><dt>Horas observadas</dt><dd>'+fmtMetric(w.observed_live_hours)+' h</dd></div><div><dt>Muestras</dt><dd>'+fmtMetric(w.samples_total,0)+'</dd></div></dl><div class="stats-average-peak"><span>PROMEDIO / PICO</span><b>'+(ratio===null?'s/d':Math.round(ratio)+'%')+'</b><div class="stats-average-track"><i data-stats-fill="'+(ratio===null?0:ratio)+'" style="width:0%"></i></div></div><div class="stats-dossier-games"><b>JUEGOS · OBSERVADOS</b><div>'+gamesHtml+'</div></div><p class="stats-dossier-schedule">HORARIO DECLARADO · '+escapeStatsHtml(schedule)+'</p></article>';
+  return '<article class="stats-channel-card stats-dossier-card '+(live?'is-live':'is-offline')+'" data-login="'+escapeStatsHtml(channel.login)+'"'+(hero&&/^#[0-9a-fA-F]{6}$/.test(hero.accent_color||'')?' style="--creator-color:'+hero.accent_color+'"':'')+'><div class="stats-dossier-head"><div class="stats-dossier-avatar">'+avatar+'</div><div class="stats-dossier-identity"><h5>'+escapeStatsHtml(name)+'</h5><a href="https://twitch.tv/'+encodeURIComponent(channel.login)+'" target="_blank" rel="noopener noreferrer">@'+escapeStatsHtml(channel.login)+' ↗</a><small>'+escapeStatsHtml(hero?.characterRole||hero?.tagline||'Canal Twitch del roster')+'</small></div><span class="stats-channel-platform">TWITCH</span></div><div class="stats-dossier-status">'+status+'<span>'+fmtMetric(channel.current_viewers,0)+' espectadores actuales</span></div>'+followersHtml+'<dl><div><dt>Promedio observado</dt><dd>'+fmtMetric(avg)+'</dd></div><div><dt>Pico observado</dt><dd>'+fmtMetric(peak,0)+'</dd></div><div><dt>Horas observadas</dt><dd>'+fmtMetric(w.observed_live_hours)+' h</dd></div><div><dt>Muestras</dt><dd>'+fmtMetric(w.samples_total,0)+'</dd></div></dl><div class="stats-average-peak"><span>PROMEDIO / PICO</span><b>'+(ratio===null?'s/d':Math.round(ratio)+'%')+'</b><div class="stats-average-track"><i data-stats-fill="'+(ratio===null?0:ratio)+'" style="width:0%"></i></div></div><div class="stats-dossier-games"><b>JUEGOS · OBSERVADOS</b><div>'+gamesHtml+'</div></div><p class="stats-dossier-schedule">HORARIO DECLARADO · '+escapeStatsHtml(schedule)+'</p></article>';
  }).join('')||'<p class="stats-note">No hay canales que coincidan con este filtro.</p>';
  statsRevealDossierCards(host);
 }
@@ -2116,6 +2135,7 @@ function openHeroProfile(index, triggerElement = document.activeElement, options
     if (!home || !page) return;
     window.lastHeroProfileTrigger = triggerElement instanceof HTMLElement ? triggerElement : window.lastHeroProfileTrigger || null;
     window.currentHeroProfileIndex = index;
+    if (hero.accent_color) { page.style.setProperty('--hero-accent', hero.accent_color); page.style.setProperty('--creator-color', hero.accent_color); }
     const filteredProfiles = getRosterFilteredEntries();
     const profilePosition = filteredProfiles.findIndex(entry => entry.index === index);
     const previousDisabled = profilePosition <= 0;
@@ -2165,10 +2185,18 @@ function openHeroProfile(index, triggerElement = document.activeElement, options
     page.classList.add('is-active');
     page.setAttribute('aria-hidden', 'false');
     setHeroProfileRoute(hero, options.historyMode || 'push');
-    const profileTop=page.getBoundingClientRect().top+window.scrollY;
-    const stickyHeader=document.querySelector('header');
-    const stickyHeaderHeight=stickyHeader?.getBoundingClientRect().height||0;
-    window.scrollTo({top:Math.max(0,profileTop-stickyHeaderHeight-12),behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+    // Alinear la cabecera del expediente con el encabezado fijo del sitio.
+    // El desplazamiento instantáneo evita que la animación deje el perfil debajo del header
+    // mientras el usuario ya está interactuando con las pestañas.
+    const profileHead = page.querySelector('.comic-profile-head');
+    const stickyHeader = document.querySelector('body > header');
+    const headerBottom = stickyHeader?.getBoundingClientRect().bottom || 0;
+    const profileHeadTop = profileHead?.getBoundingClientRect().top ?? page.getBoundingClientRect().top;
+    const rootScroller = document.documentElement;
+    const previousScrollBehavior = rootScroller.style.scrollBehavior;
+    rootScroller.style.scrollBehavior = 'auto';
+    window.scrollTo({ top: Math.max(0, window.scrollY + profileHeadTop - headerBottom - 12), behavior: 'instant' });
+    rootScroller.style.scrollBehavior = previousScrollBehavior;
     requestAnimationFrame(() => page.querySelector('[data-profile-tab]')?.focus({preventScroll:true}));
 }
 function navigateHeroProfile(direction) {
@@ -2248,10 +2276,9 @@ window.addEventListener('popstate', () => {
     }
     if (hash.startsWith('#expediente-')) { restoreHeroProfileFromHash(); return; }
     if (window.currentHeroProfileIndex !== null && window.currentHeroProfileIndex !== undefined) closeHeroProfile({ fromHistory: true });
-    if (hash.startsWith('#chapter-')) {
-        const num = Number(hash.slice('#chapter-'.length));
-        if (Number.isFinite(num)) switchChapter(num, { skipHistory: true });
-    } else if (!hash || hash === '#') switchChapter(0, { skipHistory: true });
+    const hashChapter = typeof chapterFromHash === 'function' ? chapterFromHash(hash) : null;
+    if (hashChapter !== null) switchChapter(hashChapter, { skipHistory: true });
+    else if (!hash || hash === '#') switchChapter(0, { skipHistory: true });
 });
 document.addEventListener('keydown', function(event) {
     if (event.key !== 'Escape') return;
@@ -2809,6 +2836,21 @@ function printHeroDossier(){
         document.addEventListener('pointerdown', () => { void ensureGlobalChapterStyles(); }, { once: true, passive: true, capture: true });
         document.addEventListener('keydown', () => { void ensureGlobalChapterStyles(); }, { once: true, capture: true });
 
+        // Anclajes por nombre (#roster, #estadisticas…). Los #chapter-N viejos siguen funcionando como alias.
+        const CHAPTER_SLUGS = { 1: 'origen', 11: 'quienes-somos', 2: 'roster', 3: 'estadisticas', 12: 'colaboraciones', 10: 'en-vivo', 9: 'comunidad', 8: 'alianzas', 6: 'reclutamiento', 13: 'mapa' };
+        const SLUG_TO_CHAPTER = Object.fromEntries(Object.entries(CHAPTER_SLUGS).map(([num, slug]) => [slug, Number(num)]));
+        SLUG_TO_CHAPTER.arsenal = 12;
+        function chapterFromHash(hash) {
+            const value = String(hash || '');
+            if (value.startsWith('#chapter-')) {
+                let num = Number(value.slice('#chapter-'.length));
+                if (num === 5) num = 12; // Arsenal quedó dentro de Colaboraciones
+                return Number.isFinite(num) ? num : null;
+            }
+            const slug = value.replace(/^#/, '').split(/[/?]/)[0];
+            return Object.prototype.hasOwnProperty.call(SLUG_TO_CHAPTER, slug) ? SLUG_TO_CHAPTER[slug] : null;
+        }
+        window.chapterFromHash = chapterFromHash;
         function switchChapter(chapterNum, options = {}) {
             // Arsenal se fusionó con Colaboraciones: los enlaces viejos al capítulo 5 llevan al catálogo.
             if (Number(chapterNum) === 5) {
@@ -2838,7 +2880,7 @@ function printHeroDossier(){
                 window.currentHeroProfileIndex = null;
             }
             if (!options.skipHistory) {
-                const targetHash = Number(chapterNum) === 0 ? '#' : (Number(chapterNum) === 2 ? '#roster' : '#chapter-' + chapterNum);
+                const targetHash = Number(chapterNum) === 0 ? '#' : '#' + (CHAPTER_SLUGS[Number(chapterNum)] || 'chapter-' + chapterNum);
                 if (location.hash !== targetHash) {
                     try { history.pushState({ lmChapter: Number(chapterNum) }, '', targetHash); } catch (error) { /* historial restringido */ }
                 }
@@ -2901,12 +2943,11 @@ function printHeroDossier(){
         const rosterContainer = document.getElementById('roster-container');
         function initializeLegionApp() {
             const hash = location.hash || '';
-            if (hash.startsWith('#chapter-')) {
-                let num = Number(hash.slice('#chapter-'.length));
-                if (num === 5) num = 12; // Arsenal quedó dentro de Colaboraciones
-                if (Number.isFinite(num) && document.getElementById('chapter-' + num)) switchChapter(num, { skipHistory: true });
-            } else if (hash === '#roster' || hash.startsWith('#roster?') || hash.startsWith('#roster/') || hash.startsWith('#expediente-')) {
+            const hashChapter = chapterFromHash(hash);
+            if (hash === '#roster' || hash.startsWith('#roster?') || hash.startsWith('#roster/') || hash.startsWith('#expediente-')) {
                 switchChapter(2, { skipHistory: true });
+            } else if (hashChapter !== null && document.getElementById('chapter-' + hashChapter)) {
+                switchChapter(hashChapter, { skipHistory: true });
             }
             const initialChapter = document.querySelector('.chapter-panel.active');
             const initialNumber = initialChapter ? Number(initialChapter.id.replace('chapter-', '')) : 0;

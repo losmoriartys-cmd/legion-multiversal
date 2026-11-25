@@ -4089,3 +4089,17 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - Archivos limitados a `.github/workflows/`: `actualizar-stats.yml`, `auditoria-qa-portable.yml`, `google-drive-restore.yml`, `lighthouse-production.yml`, `optimize-hero-image.yml`, `optimize-logo.yml`, `qa-comun-capitulos.yml`, `test-stats.yml` y `validar-sitio.yml`.
 - No se modificaron scripts de respaldo/restauración, datos, sitio, Roster, secretos ni parámetros de rotación. PR #104 quedó integrado en `main` mediante squash el 2026-11-24; commit resultante `e6bafeae2a5304f7d9a16aab6a85a97feeef3316`. La integración se realizó tras la auditoría del diff y la validación satisfactoria de los cuatro workflows asociados al HEAD del PR.
 - **Estado de seguridad:** no ejecutar ni habilitar rotación/eliminación automática hasta implementar y probar una operación transaccional segura, incluyendo fallos durante la rotación y conservación de al menos una copia recuperable.
+
+
+---
+
+## 2026-11-25 — PR #101 · Reconciliación de mejoras de sitio sobre main vigente
+
+- **Base de reconciliación:** `57aebd4462ea998999f6b1b0a84eb2f8971a2a36`. La rama de #101 se conserva como segundo padre del commit de reconciliación; no se reescribe su historial ni se fuerza el ref.
+- **Datos preservados desde main:** `data.json` `d128baa804994afd9ada9ab673d7818268106f08` (captura 2026-11-25 05:10:06 UTC), `platform-stats.json` `04bd622f2d8a7133be80c0f16a42c98f33a5a417`, `clips-data.json` `23e72e9d4b3287eb087c5f6311afb3fed6568fea` (captura 2026-11-25 05:10:09 UTC) y `creator-metrics.json` `e3e0bc3513092799bac05a62d1142678c2e32e6d`. No se reemplazan por capturas anteriores de la rama histórica.
+- **Identidad:** se conserva la fuente canónica `data/creator-colors.json`, el CSS generado y sus validadores que ya están en main; no se agrega una segunda copia de la paleta.
+- **Mejoras portadas:** color por integrante en perfiles/componentes, horarios públicos de Twitch en Roster y EN VIVO, enlaces estables `#alianzas` / `#en-vivo`, corrección de alineación móvil de la Bitácora y visualización del total público de seguidores por canal con fuente, estado y fecha de captura.
+- **Integridad de datos:** la información visible de seguidores se alimenta de `followers_total`, `followers_source`, `followers_status` y `followers_captured_at` presentes en los siete canales activos de Twitch de la captura preservada.
+- **Colector automático:** el cambio de workflow a PR con `GITHUB_TOKEN` queda separado de esta integración de interfaz hasta demostrar que los checks requeridos se disparan y se asocian al SHA del PR automatizado. No se incorpora un bypass ni se modifica el workflow activo de main en esta tanda.
+- **Validación:** pendiente para el nuevo SHA reconciliado. Los resultados verdes anteriores de #101 no se trasladan automáticamente a este árbol actualizado.
+- **Límites:** no se modifica main ni producción; el movimiento de rama conserva el HEAD histórico como padre y queda sujeto a CI/revisión del PR.

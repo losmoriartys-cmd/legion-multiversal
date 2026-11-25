@@ -243,6 +243,15 @@
       daysMetric.appendChild(strip);
     }
 
+    if (/^#[0-9a-fA-F]{6}$/.test(hero.accent_color || '')) card.style.setProperty('--creator-color', hero.accent_color);
+    const nextStream = window.LMSchedule ? window.LMSchedule.next(channel) : null;
+    if (nextStream && !card.querySelector('.roster-v3-next')) {
+      const nextLine = document.createElement('span');
+      nextLine.className = 'roster-v3-next';
+      nextLine.textContent = 'PRÓXIMO DIRECTO · ' + nextStream.label;
+      newSlots.insertAdjacentElement('beforebegin', nextLine);
+    }
+
     const lastLive = card.querySelector('.comic-roster-last-live');
     if (lastLive) {
       lastLive.textContent = activity ? 'ÚLTIMO DIRECTO OBSERVADO: ' + dateLabel(activity.date) : 'ÚLTIMO DIRECTO OBSERVADO: SIN REGISTRO';
