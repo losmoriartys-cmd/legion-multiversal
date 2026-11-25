@@ -343,7 +343,7 @@ test('la Bitácora móvil conserva el contenido de main y aplica el acento de id
   const mainPage = await comparisonContext.newPage();
   const candidatePage = await comparisonContext.newPage();
 
-  async function openLadyBitacora(target, url, isCandidate = false) {
+  async function openLadyBitacora(target, url, { isCandidate = false, baselineFrameStyle = null } = {}) {
     await target.goto(url, { waitUntil: 'domcontentloaded', timeout: 45000 });
     await expect(target.locator('#chapter-2')).toHaveCount(1, { timeout: 30000 });
     await target.waitForFunction(() => typeof window.switchChapter === 'function');
@@ -367,18 +367,36 @@ test('la Bitácora móvil conserva el contenido de main y aplica el acento de id
     for (let index = 0; index < await timelineItems.count(); index++) {
       await expect(timelineItems.nth(index)).toBeVisible();
     }
-    // #101 agrega un borde superior de identidad al expediente. Verificar el valor
-    // funcional exacto antes de neutralizar únicamente ese borde para comparar la
-    // composición de Bitácora con main, que todavía no incluye el acento del Roster.
+    // #101 aporta un marco de identidad al expediente de Lady Moriarty. Se verifica
+    // primero el acento real y después se normaliza solo el marco exterior a los
+    // valores calculados de main, para comparar el contenido de Bitácora en igualdad.
+    const profile = target.locator('#hero-profile-page');
+    const frameStyle = await profile.evaluate(element => {
+      const style = getComputedStyle(element);
+      const properties = [
+        'border-top-width', 'border-top-style', 'border-top-color',
+        'border-right-width', 'border-right-style', 'border-right-color',
+        'border-bottom-width', 'border-bottom-style', 'border-bottom-color',
+        'border-left-width', 'border-left-style', 'border-left-color'
+      ];
+      return Object.fromEntries(properties.map(property => [property, style.getPropertyValue(property)]));
+    });
     if (isCandidate) {
-      const accent = await target.locator('#hero-profile-page').evaluate(element => {
-        const style = getComputedStyle(element);
-        return { borderTopWidth: style.borderTopWidth, borderTopColor: style.borderTopColor };
+      expect({
+        borderTopWidth: frameStyle['border-top-width'],
+        borderTopColor: frameStyle['border-top-color'],
+        borderLeftColor: frameStyle['border-left-color']
+      }).toEqual({
+        borderTopWidth: '6px',
+        borderTopColor: 'rgb(255, 122, 184)',
+        borderLeftColor: 'rgb(255, 122, 184)'
       });
-      expect(accent).toEqual({ borderTopWidth: '6px', borderTopColor: 'rgb(255, 122, 184)' });
-      await target.addStyleTag({
-        content: '#hero-profile-page[style*="--hero-accent"] { border-top-width: 0 !important; border-top-color: transparent !important; }'
-      });
+      expect(baselineFrameStyle).not.toBeNull();
+      await profile.evaluate((element, baseline) => {
+        for (const [property, value] of Object.entries(baseline)) {
+          element.style.setProperty(property, value, 'important');
+        }
+      }, baselineFrameStyle);
     }
     // Esperar el layout estable con el fallback tipográfico idéntico en ambos orígenes.
     await target.evaluate(() => document.fonts.ready);
@@ -427,14 +445,17 @@ test('la Bitácora móvil conserva el contenido de main y aplica el acento de id
         };
       });
     });
-    return { signature, screenshot };
+    return { signature, screenshot, frameStyle };
   }
 
   try {
     await mainPage.emulateMedia({ reducedMotion: 'reduce' });
     const mainCapture = await openLadyBitacora(mainPage, mainBaselineUrl);
     await candidatePage.emulateMedia({ reducedMotion: 'reduce' });
-    const candidateCapture = await openLadyBitacora(candidatePage, '/', true);
+    const candidateCapture = await openLadyBitacora(candidatePage, '/', {
+      isCandidate: true,
+      baselineFrameStyle: mainCapture.frameStyle
+    });
     expect(candidateCapture.signature).toEqual(mainCapture.signature);
     expect(candidateCapture.screenshot).toEqual(mainCapture.screenshot);
   } finally {
