@@ -329,7 +329,7 @@ test('Atrás y Adelante restauran el roster y el expediente correcto', async ({ 
   expect(browserErrors).toEqual([]);
 });
 
-test('la Bitácora móvil conserva la presentación de main y publica ambas capturas comparables', async ({ browser }) => {
+test('la Bitácora móvil conserva el contenido de main y aplica el acento de identidad de Lady Moriarty', async ({ browser }) => {
   test.setTimeout(90000);
   const mainBaselineUrl = process.env.MAIN_BASELINE_URL;
   expect(mainBaselineUrl, 'La CI debe resolver la preview vigente del SHA de main para comparar Bitácora móvil.').toBeTruthy();
@@ -343,7 +343,7 @@ test('la Bitácora móvil conserva la presentación de main y publica ambas capt
   const mainPage = await comparisonContext.newPage();
   const candidatePage = await comparisonContext.newPage();
 
-  async function openLadyBitacora(target, url) {
+  async function openLadyBitacora(target, url, isCandidate = false) {
     await target.goto(url, { waitUntil: 'domcontentloaded', timeout: 45000 });
     await expect(target.locator('#chapter-2')).toHaveCount(1, { timeout: 30000 });
     await target.waitForFunction(() => typeof window.switchChapter === 'function');
@@ -366,6 +366,19 @@ test('la Bitácora móvil conserva la presentación de main y publica ambas capt
     const timelineItems = panel.locator('.hero-timeline-item');
     for (let index = 0; index < await timelineItems.count(); index++) {
       await expect(timelineItems.nth(index)).toBeVisible();
+    }
+    // #101 agrega un borde superior de identidad al expediente. Verificar el valor
+    // funcional exacto antes de neutralizar únicamente ese borde para comparar la
+    // composición de Bitácora con main, que todavía no incluye el acento del Roster.
+    if (isCandidate) {
+      const accent = await target.locator('#hero-profile-page').evaluate(element => {
+        const style = getComputedStyle(element);
+        return { borderTopWidth: style.borderTopWidth, borderTopColor: style.borderTopColor };
+      });
+      expect(accent).toEqual({ borderTopWidth: '6px', borderTopColor: 'rgb(255, 122, 184)' });
+      await target.addStyleTag({
+        content: '#hero-profile-page[style*="--hero-accent"] { border-top-width: 0 !important; border-top-color: transparent !important; }'
+      });
     }
     // Esperar el layout estable con el fallback tipográfico idéntico en ambos orígenes.
     await target.evaluate(() => document.fonts.ready);
@@ -421,7 +434,7 @@ test('la Bitácora móvil conserva la presentación de main y publica ambas capt
     await mainPage.emulateMedia({ reducedMotion: 'reduce' });
     const mainCapture = await openLadyBitacora(mainPage, mainBaselineUrl);
     await candidatePage.emulateMedia({ reducedMotion: 'reduce' });
-    const candidateCapture = await openLadyBitacora(candidatePage, '/');
+    const candidateCapture = await openLadyBitacora(candidatePage, '/', true);
     expect(candidateCapture.signature).toEqual(mainCapture.signature);
     expect(candidateCapture.screenshot).toEqual(mainCapture.screenshot);
   } finally {
