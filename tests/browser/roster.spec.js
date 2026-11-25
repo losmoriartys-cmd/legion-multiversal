@@ -413,9 +413,10 @@ test('la Bitácora móvil conserva el contenido de main y aplica el acento de id
     // Su borde tiene microvariaciones de antialiasing entre previews aunque el DOM y
     // la presentación del expediente coincidan. Se oculta sin alterar el layout.
     await target.addStyleTag({ content: '#mission-progress-trigger { visibility: hidden !important; }' });
-    const screenshot = await target.screenshot({
+    // Capturar el panel de Bitácora, no los márgenes exteriores del expediente:
+    // #101 cambia deliberadamente esos márgenes con el acento del creador.
+    const screenshot = await panel.screenshot({
       path: url === mainBaselineUrl ? 'test-results/main-baseline-bitacora-mobile.png' : 'test-results/pr-candidate-bitacora-mobile.png',
-      fullPage: false,
       animations: 'disabled'
     });
     const signature = await target.evaluate(() => {
