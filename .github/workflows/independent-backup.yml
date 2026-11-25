@@ -1,18 +1,16 @@
 name: Backup independiente del repositorio
 
 on:
-  # Primera ejecución reproducible al actualizar el procedimiento en el candidato.
-  # El filtro mantiene el backup manual/único; no activa rotación ni borrado.
   push:
     branches:
       - work/base02-candidate-reconciled
     paths:
       - '.github/workflows/independent-backup.yml'
+      - 'scripts/google_drive_backup.py'
+      - 'scripts/google_drive_restore.py'
+      - 'scripts/verify_critical_restore.py'
       - 'scripts/create_repo_backup.sh'
   workflow_dispatch:
-  # Activar schedule después de configurar y probar los secretos del destino externo.
-  # schedule:
-  #   - cron: '23 4 * * *'
 
 permissions:
   contents: read
@@ -20,6 +18,7 @@ permissions:
 jobs:
   backup:
     runs-on: ubuntu-24.04
+    timeout-minutes: 45
     steps:
       - name: Checkout completo
         uses: actions/checkout@v5
@@ -27,118 +26,103 @@ jobs:
           fetch-depth: 0
           lfs: true
 
-      - name: Crear y verificar bundle y snapshot
-        run: bash scripts/create_repo_backup.sh backup-output
-
-      - name: Verificar configuración del destino externo
-        env:
-          BACKUP_S3_ENDPOINT: ${{ secrets.BACKUP_S3_ENDPOINT }}
-          BACKUP_S3_BUCKET: ${{ secrets.BACKUP_S3_BUCKET }}
-          BACKUP_S3_ACCESS_KEY_ID: ${{ secrets.BACKUP_S3_ACCESS_KEY_ID }}
-          BACKUP_S3_SECRET_ACCESS_KEY: ${{ secrets.BACKUP_S3_SECRET_ACCESS_KEY }}
-        run: |
-          for name in BACKUP_S3_ENDPOINT BACKUP_S3_BUCKET BACKUP_S3_ACCESS_KEY_ID BACKUP_S3_SECRET_ACCESS_KEY; do
-            if [ -z "${!name}" ]; then
-              echo "::error::Falta el secreto $name. No se puede certificar un backup independiente."
-              exit 1
-            fi
-          done
-
-      - name: Configurar Python para inspección segura de restauración
+      - name: Configurar Python
         uses: actions/setup-python@v6
         with:
           python-version: '3.12'
 
-      - name: Instalar AWS CLI
-        run: |
-          python -m pip install --disable-pip-version-check awscli
+      - name: Ejecutar pruebas del verificador de los 14 archivos
+        run: python -m unittest discover -s tests -p 'test_verify_critical_restore.py' -v
 
-      - name: Subir, descargar y restaurar en aislamiento
+      - name: Verificar credenciales del contrato Google Drive
         env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.BACKUP_S3_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.BACKUP_S3_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: ${{ secrets.BACKUP_S3_REGION || 'auto' }}
-          ENDPOINT: ${{ secrets.BACKUP_S3_ENDPOINT }}
-          BUCKET: ${{ secrets.BACKUP_S3_BUCKET }}
+          GOOGLE_OAUTH_CLIENT_ID: ${{ secrets.GOOGLE_OAUTH_CLIENT_ID }}
+          GOOGLE_OAUTH_CLIENT_SECRET: ${{ secrets.GOOGLE_OAUTH_CLIENT_SECRET }}
+          GOOGLE_OAUTH_REFRESH_TOKEN: ${{ secrets.GOOGLE_OAUTH_REFRESH_TOKEN }}
+          GOOGLE_DRIVE_FOLDER_ID: ${{ secrets.GOOGLE_DRIVE_FOLDER_ID || 'root' }}
         run: |
           set -euo pipefail
-          PREFIX="legion-multiversal/$(date -u +%Y/%m/%d)/${GITHUB_SHA}"
-          for file in backup-output/*; do
-            aws --endpoint-url "$ENDPOINT" s3 cp "$file" "s3://$BUCKET/$PREFIX/$(basename "$file")"
+          for name in GOOGLE_OAUTH_CLIENT_ID GOOGLE_OAUTH_CLIENT_SECRET GOOGLE_OAUTH_REFRESH_TOKEN; do
+            if [ -z "${!name}" ]; then
+              echo "::error::Falta la credencial OAuth existente $name para Google Drive; no se intentará usar otro proveedor."
+              exit 1
+            fi
           done
+          if [ -z "$GOOGLE_DRIVE_FOLDER_ID" ]; then
+            echo "::error::El destino Google Drive no está definido."
+            exit 1
+          fi
+          echo "Destino de backup: Google Drive / $GOOGLE_DRIVE_FOLDER_ID"
 
-          mkdir -p roundtrip restore/bundle restore/source
-          for file in backup-output/*; do
-            aws --endpoint-url "$ENDPOINT" s3 cp "s3://$BUCKET/$PREFIX/$(basename "$file")" "roundtrip/$(basename "$file")"
-          done
+      - name: Ejecutar backup en Google Drive y verificar descarga de retorno
+        id: backup
+        env:
+          GOOGLE_OAUTH_CLIENT_ID: ${{ secrets.GOOGLE_OAUTH_CLIENT_ID }}
+          GOOGLE_OAUTH_CLIENT_SECRET: ${{ secrets.GOOGLE_OAUTH_CLIENT_SECRET }}
+          GOOGLE_OAUTH_REFRESH_TOKEN: ${{ secrets.GOOGLE_OAUTH_REFRESH_TOKEN }}
+          GOOGLE_DRIVE_FOLDER_ID: ${{ secrets.GOOGLE_DRIVE_FOLDER_ID || 'root' }}
+        run: |
+          set -euo pipefail
+          python scripts/google_drive_backup.py | tee backup-result.json
+          BACKUP_ID="$(python -c 'import json; print(json.load(open("backup-result.json", encoding="utf-8"))["backup_id"])')"
+          test -n "$BACKUP_ID"
+          echo "backup_id=$BACKUP_ID" >> "$GITHUB_OUTPUT"
+          echo "BACKUP_ID=$BACKUP_ID" >> "$GITHUB_ENV"
 
-          # Verificación de integridad del material realmente descargado.
-          (
-            cd roundtrip
-            sha256sum -c SHA256SUMS
-            git bundle verify legion-multiversal.bundle
-            tar -tzf legion-multiversal-source.tar.gz >/dev/null
-          )
+      - name: Preparar destino de restauración aislado
+        run: |
+          set -euo pipefail
+          TARGET="/tmp/legion-drive-restore-$GITHUB_RUN_ID"
+          if [ -e "$TARGET" ] && [ -n "$(find "$TARGET" -mindepth 1 -maxdepth 1 -print -quit)" ]; then
+            echo "::error::El destino de restauración existe y no está vacío."
+            exit 1
+          fi
+          mkdir -p "$TARGET"
+          test -z "$(find "$TARGET" -mindepth 1 -maxdepth 1 -print -quit)"
+          echo "RESTORE_TARGET=$TARGET" >> "$GITHUB_ENV"
 
-          # Restauración del historial en un repositorio independiente.
-          git clone --mirror roundtrip/legion-multiversal.bundle restore/bundle/repository.git
-          git --git-dir=restore/bundle/repository.git cat-file -e "${GITHUB_SHA}^{commit}"
-          git --git-dir=restore/bundle/repository.git show "${GITHUB_SHA}:data/integrity-manifest.json" > restore/bundle/integrity-manifest.json
+      - name: Descargar de Google Drive y restaurar bundle y snapshot
+        env:
+          GOOGLE_OAUTH_CLIENT_ID: ${{ secrets.GOOGLE_OAUTH_CLIENT_ID }}
+          GOOGLE_OAUTH_CLIENT_SECRET: ${{ secrets.GOOGLE_OAUTH_CLIENT_SECRET }}
+          GOOGLE_OAUTH_REFRESH_TOKEN: ${{ secrets.GOOGLE_OAUTH_REFRESH_TOKEN }}
+          GOOGLE_DRIVE_FOLDER_ID: ${{ secrets.GOOGLE_DRIVE_FOLDER_ID || 'root' }}
+        run: |
+          set -euo pipefail
+          python scripts/google_drive_restore.py --backup-id "$BACKUP_ID" --target "$RESTORE_TARGET" | tee restore-result.json
+          python -m json.tool restore-result.json
 
-          # Extracción controlada del snapshot; rechaza rutas de salida del destino.
-          python - <<'PY'
-          import tarfile
-          from pathlib import Path, PurePosixPath
+      - name: Verificar SHA-256 de los 14 archivos críticos contra el SHA de origen
+        run: |
+          set -euo pipefail
+          python scripts/verify_critical_restore.py \
+            --repository "$RESTORE_TARGET/repository-from-bundle" \
+            --snapshot "$RESTORE_TARGET/source-snapshot" \
+            --commit "$GITHUB_SHA" \
+            --output critical-files-sha256.json | tee critical-files-verification.log
+          grep -q 'RESTORE_CRITICAL_FILES: PASS (14/14 SHA-256 match)' critical-files-verification.log
 
-          archive_path = Path("roundtrip/legion-multiversal-source.tar.gz")
-          destination = Path("restore/source")
-          with tarfile.open(archive_path, "r:gz") as archive:
-              for member in archive.getmembers():
-                  member_path = PurePosixPath(member.name)
-                  if member_path.is_absolute() or ".." in member_path.parts or "\\" in member.name:
-                      raise SystemExit(f"Ruta insegura en snapshot: {member.name!r}")
-                  if member.issym() or member.islnk():
-                      link_path = PurePosixPath(member.linkname)
-                      if link_path.is_absolute() or ".." in link_path.parts or "\\" in member.linkname:
-                          raise SystemExit(f"Enlace inseguro en snapshot: {member.name!r} -> {member.linkname!r}")
-              archive.extractall(destination, filter="data")
-          print("RESTORE_SOURCE_EXTRACTED: PASS")
-          PY
+      - name: Preparar evidencia del roundtrip
+        if: always()
+        env:
+          BACKUP_ID: ${{ steps.backup.outputs.backup_id }}
+        run: |
+          mkdir -p backup-evidence
+          cp backup-result.json restore-result.json critical-files-sha256.json critical-files-verification.log backup-evidence/ 2>/dev/null || true
+          {
+            printf 'run_id=%s\n' "$GITHUB_RUN_ID"
+            printf 'source_sha=%s\n' "$GITHUB_SHA"
+            printf 'backup_id=%s\n' "$BACKUP_ID"
+            printf 'destination=Google Drive / root (My Drive unless an existing folder ID is configured)\n'
+            printf 'rotation=disabled\n'
+            printf 'automatic_deletion=disabled\n'
+          } > backup-evidence/run-metadata.txt
 
-          # Comprueba los 14 archivos críticos y su identidad exacta contra el commit
-          # que originó el backup, no solo que el tar se pueda listar.
-          python - <<'PY'
-          import json
-          import os
-          import subprocess
-          from pathlib import Path, PurePosixPath
-
-          root = Path("restore/source")
-          target = os.environ["GITHUB_SHA"]
-          manifest_path = root / "data/integrity-manifest.json"
-          if not manifest_path.is_file():
-              raise SystemExit("Falta data/integrity-manifest.json en la restauración.")
-          manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-          critical = manifest.get("critical_files")
-          if not isinstance(critical, list) or len(critical) != 14 or len(set(critical)) != 14:
-              raise SystemExit(f"Inventario restaurado inválido: {critical!r}")
-          git = ["git", "--git-dir=restore/bundle/repository.git"]
-          for relative in critical:
-              if not isinstance(relative, str) or not relative or "\\" in relative:
-                  raise SystemExit(f"Ruta crítica inválida: {relative!r}")
-              pure = PurePosixPath(relative)
-              if pure.is_absolute() or ".." in pure.parts or str(pure) != relative:
-                  raise SystemExit(f"Ruta crítica no canónica: {relative!r}")
-              restored = root / relative
-              if not restored.is_file():
-                  raise SystemExit(f"Falta archivo crítico restaurado: {relative}")
-              expected = subprocess.run(
-                  git + ["show", f"{target}:{relative}"],
-                  check=True, capture_output=True
-              ).stdout
-              if restored.read_bytes() != expected:
-                  raise SystemExit(f"El archivo restaurado difiere del commit de origen: {relative}")
-          print("RESTORE_CRITICAL_FILES: PASS (14/14 blobs coinciden con GITHUB_SHA)")
-          PY
-
-          echo "BACKUP_EXTERNAL_ROUNDTRIP: PASS"
+      - name: Publicar evidencia del roundtrip
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: google-drive-roundtrip-evidence-${{ github.run_id }}
+          path: backup-evidence/
+          if-no-files-found: warn
+          retention-days: 14
