@@ -457,7 +457,12 @@ test('la Bitácora móvil conserva el contenido de main y aplica el acento de id
       baselineFrameStyle: mainCapture.frameStyle
     });
     expect(candidateCapture.signature).toEqual(mainCapture.signature);
-    expect(candidateCapture.screenshot).toEqual(mainCapture.screenshot);
+    // Buffer.equals compara los bytes PNG exactos en código nativo, sin que Jest
+    // expanda miles de bytes en un diff profundo que agota el timeout de la prueba.
+    expect(
+      candidateCapture.screenshot.equals(mainCapture.screenshot),
+      'La captura PNG móvil de Bitácora debe ser idéntica byte por byte a main.'
+    ).toBe(true);
   } finally {
     await comparisonContext.close();
   }
