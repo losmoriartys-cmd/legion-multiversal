@@ -381,6 +381,10 @@ test('la Bitácora móvil conserva la presentación de main y publica ambas capt
     expect(captureBounds).not.toBeNull();
     expect(captureBounds.y).toBeGreaterThanOrEqual(-1); // tolerancia subpíxel por transforms/layout.
     expect(captureBounds.y).toBeLessThan(viewport.height);
+    // El indicador "MISIONES" pertenece al encabezado global, no a la Bitácora.
+    // Su borde tiene microvariaciones de antialiasing entre previews aunque el DOM y
+    // la presentación del expediente coincidan. Se oculta sin alterar el layout.
+    await target.addStyleTag({ content: '#mission-progress-trigger { visibility: hidden !important; }' });
     const screenshot = await target.screenshot({
       path: url === mainBaselineUrl ? 'test-results/main-baseline-bitacora-mobile.png' : 'test-results/pr-candidate-bitacora-mobile.png',
       fullPage: false,
