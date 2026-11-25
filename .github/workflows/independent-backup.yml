@@ -92,7 +92,7 @@ jobs:
         run: |
           set -euo pipefail
           python scripts/google_drive_restore.py --backup-id "$BACKUP_ID" --target "$RESTORE_TARGET" | tee restore-result.json
-          python -m json.tool restore-result.json
+          python -c 'import json; raw=open("restore-result.json", encoding="utf-8").read(); start=raw.find("{"); data,_=json.JSONDecoder().raw_decode(raw[start:]); print(json.dumps(data, indent=2))'
 
       - name: Verificar SHA-256 de los 14 archivos críticos contra el SHA de origen
         run: |
