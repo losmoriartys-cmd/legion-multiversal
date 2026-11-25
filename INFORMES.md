@@ -4208,3 +4208,27 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **Protección de GitHub documentada:** ruleset activo; checks estrictos `validar`, `python-tests`, `audit-public-links`; bypass IDs 5 y 1143301 todavía requieren identificación; `require_code_owner_review=false`. No se modificó el ruleset.
 - **Estado de validación:** candidato preparado; compilación, pruebas unitarias, contratos, suite de navegador y backup/restauración todavía pendientes de ejecución sobre este SHA. El preview de Cloudflare no cuenta como evidencia de esas pruebas.
 - **Integración:** no se fusionó ninguna PR y no se modificó `main`.
+
+
+---
+
+## 2026-11-25 — BASE-02 · validación integral del candidato reconciliado
+
+- **Candidato inmutable:** PR [#109](https://github.com/losmoriartys-cmd/legion-multiversal/pull/109), rama `work/base02-candidate-reconciled`, HEAD `7829acf83e0f50cbe2b59d76ce5677cd1c9ff389`. Se mantiene abierto y Draft; no se fusionó ni se modificó `main`.
+- **Base y reconciliación:** base acordada `0a8287d24b78c4a24e56d18484ff49522158149c`; main incorporado `b114781c21489ea0864ce2fd9cde2bcb42113b9c`. La comparación de commits informó cinco commits por delante y cero por detrás respecto de la base acordada.
+- **Integridad de los 10 archivos recuperados:** se compararon los blobs del candidato con los de la base acordada. Los diez coinciden exactamente: `.github/workflows/google-drive-restore.yml`, `creator-colors.css`, `data/creator-colors.json`, `scripts/build_creator_colors.py`, `scripts/validate_creator_colors.py`, `stats-games.js`, `stats-tables.css`, `tests/browser/stats-tables-visual.spec.js`, `tests/test_creator_colors_contract.py` y `tests/test_stats_games_contract.py`.
+- **Integridad de los tres JSON de métricas:** se compararon los blobs del candidato con los de main `b114781c21489ea0864ce2fd9cde2bcb42113b9c`. Coincidencia exacta: `creator-metrics.json` (`2cfb9539748e77c27480b60019755c9e5e864f37`), `data.json` (`5cba79d8b1d8d2a2bbbeff8e216eb8020c8e12ce`) y `platform-stats.json` (`4ec34e8d62a9cb5d65dc752875bdcd2394dc82dd`).
+- **Contratos y guardia:** el candidato incorpora el manifiesto de 14 archivos y los contratos/pruebas de omisión de #106, además de la guardia reforzada y sus pruebas adversariales de #108. La validación de integridad y protección del inventario terminó correctamente en el workflow principal.
+- **Workflows sobre el mismo SHA candidato:** los cuatro finalizaron `completed / success`:
+  - [Validar código y datos del sitio](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45543409990) — run 2324.
+  - [Auditoría externa de enlaces públicos](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45543409988) — run 54.
+  - [Validar colector de estadísticas](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45543409945) — run 744.
+  - [QA común de capítulos](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45543409907) — run 178.
+- **Detalle del workflow principal:** el job `validar` (ID `138967136682`) terminó SUCCESS. Incluyó sintaxis JavaScript, contratos JSON, cobertura de Roster/Twitch, registro de juegos, accesibilidad del índice sin JS, auditorías de imágenes/enlaces, compilación Python, tests Python, contratos de métricas e integridad, y Playwright de perfiles, Bitácora, pestañas, responsive e historial. La etapa Playwright y la publicación de capturas también terminaron SUCCESS; no queda pendiente el fallo histórico de navegador observado en ejecuciones anteriores.
+- **Acciones Node:** los workflows nuevos/modificados del candidato conservan checkout@v5, setup-python@v6, setup-node@v5 y upload-artifact@v6, según la reconciliación registrada en PR #109.
+- **Backup externo S3:** **NO EJECUTADO / NO VERIFICADO sobre este candidato**. `.github/workflows/independent-backup.yml` está configurado como `workflow_dispatch`; no hay schedule activo. En esta ejecución no se obtuvo un run de ese workflow, transferencia al bucket, descarga de retorno ni restauración aislada. La existencia del workflow o los artefactos de CI no constituyen prueba de backup externo.
+- **Antecedente Google Drive:** el informe del 24/11 registra una transferencia y restauración aislada exitosas para el backup ID `20261124T083437Z-local`, pero ese respaldo representa el commit `0cf0c68fe1073a3645747be1b99b3380d4639648`, no el HEAD candidato actual. Por tanto, no sustituye la prueba de backup/restauración del SHA `7829acf83e0f50cbe2b59d76ce5677cd1c9ff389`.
+- **Guardrails:** schedule, rotación y eliminación automática permanecen deshabilitados. Sin merge, sin modificación de `main` y sin despliegue de producción.
+- **Conclusión:** la batería integral de CI del candidato está aprobada y documentada. BASE-02 permanece **ABIERTO** exclusivamente, dentro de este corte, hasta ejecutar el workflow manual de backup externo sobre el SHA candidato, verificar los checksums de los objetos descargados y completar una restauración en un directorio aislado que compruebe el contenido restaurado.
+- **Separación documental:** este registro se publica en una rama documental basada en el SHA candidato; no mueve ni reemplaza el HEAD inmutable de PR #109. La rama documental requiere su propio PR/revisión y sus propios checks antes de integrarse.
+
