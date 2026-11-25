@@ -78,3 +78,21 @@ La prueba anterior del workflow S3 (run [45558641646](https://github.com/losmori
 - **Retención/eliminación:** `expired_candidates: 0`; eliminación automática deshabilitada. No se borró ningún objeto y no se activó schedule ni rotación.
 
 Esta ejecución valida el roundtrip externo y los 14 archivos para el SHA indicado. No cierra por sí sola BASE-02: siguen siendo independientes la validación integral del candidato final y la revisión del ruleset/Code Owners.
+
+
+### Repetición sobre el HEAD documental vigente · 25/11/2026
+
+- **Workflow:** [run 45561155987](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45561155987), SUCCESS.
+- **SHA de origen/restaurado:** `b45e5684155deebdea2a32a7c05f32a557f59cc5`.
+- **Backup ID:** `20261125T063058Z-45561155987`.
+- **Transferencia Google Drive:** cuatro objetos subidos y descargados con coincidencia SHA-256:
+  - `SHA256SUMS` · Drive ID `1LQimnrawJEBUg2yG-svd7kOcsFtVE5Ck` · `006442eb33c9021715704aeb7336251e6475c83c446a90be3ae4a3553d631a92`.
+  - `backup-manifest.txt` · Drive ID `1WjtsB-SjRB3R_odmGI-ypYanlZ7ZjZV9` · `f4f3a2d5b26e15255c1aa47970efc4af92e031958ad807686a1154ba31e9e953`.
+  - `legion-multiversal-source.tar.gz` · Drive ID `1-8c_NA3NNr3Oqa8cjyPRrdOKjsNICb8v` · `6ef4d8f2bc5a227ef063bc15b0bc377ed6f1e75e36f6b2dff9c4acab03f0ece2`.
+  - `legion-multiversal.bundle` · Drive ID `17wSdsRge6j9oEMvhd84eN7yizY-ESMVa` · `0b1fda9041259d5107c0851f329bc7c3206566af3d3e0bacfb3bc14e743b171c`.
+- **Restauración:** `restore: success`, `isolated: true`, commit exacto, 318 archivos verificados.
+- **14 archivos críticos:** `critical_files_verified: 14`; salida `RESTORE_CRITICAL_FILES: PASS (14/14 SHA-256 match)`. Los hashes de los 14 archivos coinciden con el inventario anterior porque los datos protegidos no cambiaron entre ambas revisiones documentales.
+- **Artefacto:** [google-drive-roundtrip-evidence-45561155987](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45561155987/artifacts/14998420592), ID `14998420592`, ZIP SHA-256 `32e3af182de0e53b1e8292f3cadaa08b60696666dbe847f3007c60e7aa132516`.
+- `expired_candidates: 0`; borrado automático deshabilitado; sin schedule ni rotación.
+
+Esta repetición cubre el HEAD documental `b45e568...`. Cualquier cambio posterior del contenido versionado exige una nueva copia y restauración para que la evidencia siga correspondiendo al SHA exacto.
