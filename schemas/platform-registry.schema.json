@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://legion-multiversal.pages.dev/schemas/platform-registry.schema.json",
+  "title": "Legión Multiversal — Registro de plataformas obsoleto",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "status",
+    "replaced_by",
+    "note"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 0
+    },
+    "status": {
+      "const": "deprecated"
+    },
+    "replaced_by": {
+      "const": "data/roster.json"
+    },
+    "note": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}
