@@ -1,0 +1,171 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://legion-multiversal.pages.dev/schemas/creator-programs.schema.json",
+  "title": "Legión Multiversal — Programas de creadores y acreditaciones",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "program",
+    "display_policy",
+    "official_links",
+    "creators"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "program": {
+      "type": "string",
+      "minLength": 1
+    },
+    "display_policy": {
+      "type": "object",
+      "required": [
+        "status_label",
+        "explanation"
+      ],
+      "properties": {
+        "status_label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "explanation": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "official_links": {
+      "type": "object",
+      "required": [
+        "account",
+        "dashboard",
+        "program"
+      ],
+      "properties": {
+        "account": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://"
+        },
+        "dashboard": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://"
+        },
+        "program": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://"
+        }
+      },
+      "additionalProperties": false
+    },
+    "creators": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "owner",
+          "code",
+          "scope",
+          "record_status",
+          "recorded_at",
+          "account_portal_revalidated",
+          "evidence",
+          "roster_profile_id",
+          "display_status"
+        ],
+        "properties": {
+          "owner": {
+            "type": "string",
+            "minLength": 1
+          },
+          "code": {
+            "type": "string",
+            "minLength": 1
+          },
+          "scope": {
+            "enum": [
+              "shared_project",
+              "individual_creator"
+            ]
+          },
+          "creator_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "record_status": {
+            "type": "string",
+            "minLength": 1
+          },
+          "recorded_at": {
+            "type": "string",
+            "format": "date"
+          },
+          "account_portal_revalidated": {
+            "type": "boolean"
+          },
+          "evidence": {
+            "type": "string",
+            "minLength": 1
+          },
+          "roster_profile_id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+          },
+          "account_details_evidence": {
+            "type": "object",
+            "required": [
+              "source",
+              "creator_id",
+              "creator_code",
+              "match_with_project_record",
+              "reported_at",
+              "method"
+            ],
+            "properties": {
+              "source": {
+                "type": "string",
+                "minLength": 1
+              },
+              "creator_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "creator_code": {
+                "type": "string",
+                "minLength": 1
+              },
+              "match_with_project_record": {
+                "type": "boolean"
+              },
+              "reported_at": {
+                "type": "string",
+                "format": "date"
+              },
+              "method": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "additionalProperties": false
+          },
+          "display_status": {
+            "type": "string",
+            "minLength": 1
+          },
+          "verification_note": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  }
+}
