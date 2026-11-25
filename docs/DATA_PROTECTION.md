@@ -44,28 +44,18 @@ La recuperación desde Git no es un backup independiente. El repositorio todaví
 - La protección Git conserva objetos históricos mientras el repositorio siga disponible; no cubre pérdida o indisponibilidad total de la cuenta/proveedor.
 - El backup independiente queda pendiente de configurar contra un destino externo con credenciales y retención verificables.
 
-## Backup independiente · diseño y estado de prueba
+## Backup independiente · contrato Google Drive y verificación BASE-02
 
-Se incorporó `scripts/create_repo_backup.sh`, que genera:
-- `legion-multiversal.bundle`: refs e historial Git completo disponible en el checkout.
-- `legion-multiversal-source.tar.gz`: snapshot de los archivos de trabajo, incluidos los recursos presentes en el checkout.
-- `backup-manifest.txt` y `SHA256SUMS`: identificación del commit, fecha UTC y checksums.
+El destino acordado y utilizado en la prueba técnica documentada en el PR #100 es **Google Drive, carpeta `root` (Mi unidad)**, con el scope OAuth mínimo `drive.file`. No se adopta S3/R2 ni se incorpora un proveedor nuevo.
 
-El script verifica el bundle con `git bundle verify`, inspecciona el tar y valida los checksums localmente. El workflow `.github/workflows/independent-backup.yml` sube los artefactos a un destino S3-compatible y los vuelve a descargar. Después de verificar SHA-256, clona el bundle en un repositorio independiente, comprueba que contiene el commit de origen, extrae el snapshot en un directorio aislado y compara uno por uno los 14 blobs críticos restaurados contra ese commit. Solo imprime `BACKUP_EXTERNAL_ROUNDTRIP: PASS` si ambas restauraciones aisladas terminan correctamente.
+El candidato reutiliza los motores existentes:
+- `scripts/google_drive_backup.py`: genera el paquete mediante `scripts/create_repo_backup.sh`, sube los cuatro objetos (`backup-manifest.txt`, `legion-multiversal-source.tar.gz`, `legion-multiversal.bundle` y `SHA256SUMS`) y descarga cada objeto para comparar su SHA-256.
+- `scripts/google_drive_restore.py`: localiza el conjunto por Backup ID, comprueba que esté completo, vuelve a descargar los objetos, valida `SHA256SUMS`, restaura el bundle y extrae el snapshot en un destino aislado. También compara el snapshot con los blobs Git rastreados.
+- `scripts/verify_critical_restore.py`: valida que el manifiesto restaurado contenga exactamente 14 rutas críticas únicas y compara el SHA-256 de cada archivo restaurado con el blob del mismo commit dentro del bundle.
+- `tests/test_verify_critical_restore.py`: incluye pruebas positivas y negativas para coincidencia, alteración, omisión e inventario incompleto.
 
-La primera ejecución de este procedimiento en el candidato actual (run [45558641646](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45558641646), SHA `2cc721a73a4168372bcf111a167d2a0adc873242`) verificó la creación local del bundle, el snapshot y sus checksums, pero se detuvo en el preflight del destino porque los cuatro secretos S3 requeridos estaban ausentes. No se subió ni descargó ningún objeto y no hubo restauración externa. Por tanto, el backup remoto continúa **NO VERIFICADO**.
+El workflow `.github/workflows/independent-backup.yml` ejecuta el roundtrip en Google Drive, conserva el disparador manual y el disparador acotado a la rama candidata, y publica un artefacto de evidencia. El destino usa `GOOGLE_DRIVE_FOLDER_ID` si ya está definido; de lo contrario, mantiene el destino acordado `root`. Requiere las credenciales OAuth ya utilizadas por el motor: `GOOGLE_OAUTH_CLIENT_ID`, `GOOGLE_OAUTH_CLIENT_SECRET` y `GOOGLE_OAUTH_REFRESH_TOKEN`. **No se afirma que GitHub Actions tenga esos secretos configurados**: el PR #100 dejó expresamente esa comprobación pendiente. Si no están disponibles, el preflight debe detenerse sin cambiar de proveedor ni solicitar credenciales S3.
 
-Se añadió un disparador `push` limitado a la rama candidata y a cambios en el propio workflow/script para ejecutar esta primera prueba sin modificar `main`; el schedule permanece deshabilitado.
+La prueba anterior del workflow S3 (run [45558641646](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45558641646)) queda como antecedente de una implementación equivocada: solo verificó el paquete local y falló en un preflight S3 que no pertenecía al contrato acordado. No hubo subida, descarga ni restauración en esa ejecución; no se la cuenta como evidencia de backup externo.
 
-### Configuración necesaria en GitHub Actions
-
-Crear estos repository secrets:
-- `BACKUP_S3_ENDPOINT`: endpoint HTTPS del proveedor (por ejemplo, endpoint de Cloudflare R2).
-- `BACKUP_S3_BUCKET`: bucket privado dedicado.
-- `BACKUP_S3_ACCESS_KEY_ID`.
-- `BACKUP_S3_SECRET_ACCESS_KEY`.
-- `BACKUP_S3_REGION` (opcional; valor por defecto `auto`).
-
-Antes de habilitar el schedule, configurar en el proveedor una política de retención y versionado acorde a la política de recuperación, acceso restringido y cifrado en reposo. Recomendación inicial: conservar al menos 30 copias diarias y 12 mensuales, con credenciales de escritura limitadas al bucket de backup y credenciales de lectura disponibles para restauración.
-
-**Estado:** el generador y el workflow están versionados, pero no se ejecutó aún una subida/descarga real: faltan endpoint, bucket y credenciales. No marcar el backup externo como probado ni activar la ejecución programada hasta completar la primera ejecución manual exitosa y ensayar una restauración en un directorio aislado.
+**Guardrails permanentes:** sin schedule, sin rotación y sin borrado automático. El motor solo informa candidatos vencidos; no elimina objetos. BASE-02 solo podrá declarar el roundtrip verificado cuando una ejecución del SHA final del candidato confirme subida, descarga, restauración aislada y coincidencia SHA-256 de los 14 archivos críticos, con artefactos de evidencia conservados.
