@@ -29,7 +29,7 @@ class IntegrityGuardBehaviorTests(unittest.TestCase):
         self.diff = ""
         self.bootstrap_paths = [
             "clips-data.json", "community-playbook.json", "creator-metrics.json",
-            "creator-programs.json", "data.json", "data/creator-records.json",
+            "creator-programs.json", "data.json", "data/creator-colors.json", "data/creator-records.json",
             "data/games.json", "data/roster.json", "news-data.json",
             "platform-registry.json", "platform-stats.json", "sullygnome-data.json",
             "twitchmetrics-data.json",
@@ -188,6 +188,31 @@ class IntegrityGuardBehaviorTests(unittest.TestCase):
         with patch.object(guard, "git", side_effect=bootstrap_git):
             errors = self.run_guard()
         self.assertEqual(errors, [], errors)
+
+    def test_bootstrap_detects_real_omission_of_creator_colors(self):
+        # The immutable base tree reports 14 JSON paths. A 13-path manifest
+        # that omits data/creator-colors.json must fail against that inventory.
+        omitted = "data/creator-colors.json"
+        self.manifest["critical_files"] = [p for p in self.bootstrap_paths if p != omitted]
+        self.manifest["protected_roster_ids"] = sorted(IDS)
+        self.manifest["authorized_roster_removals"] = []
+        self.manifest_path.write_text(json.dumps(self.manifest), encoding="utf-8")
+        for relative_path in self.bootstrap_paths:
+            path = self.root / relative_path
+            path.parent.mkdir(parents=True, exist_ok=True)
+            if not path.exists():
+                path.write_text("{}", encoding="utf-8")
+        self.git_patch.stop()
+        def bootstrap_git(*args):
+            if args[:2] == ("show", "origin/main:data/integrity-manifest.json"):
+                raise RuntimeError("fatal: path 'data/integrity-manifest.json' does not exist in 'origin/main'")
+            return self.fake_git(*args)
+        with patch.object(guard, "git", side_effect=bootstrap_git):
+            errors = self.run_guard()
+        self.assertTrue(
+            any("Política de integridad modificada" in error and "critical_files" in error for error in errors),
+            errors,
+        )
 
     def test_initial_manifest_cannot_change_bootstrap_inventory(self):
         self.manifest["critical_files"] = ["data/roster.json"]
