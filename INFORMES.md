@@ -4237,3 +4237,20 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **Credenciales:** el workflow consume únicamente las variables OAuth ya utilizadas por el motor (`GOOGLE_OAUTH_CLIENT_ID`, `GOOGLE_OAUTH_CLIENT_SECRET`, `GOOGLE_OAUTH_REFRESH_TOKEN`) y usa `GOOGLE_DRIVE_FOLDER_ID` existente o `root` como fallback. La disponibilidad de esos secretos en GitHub Actions sigue sin verificarse; no se afirma lo contrario ni se solicitan credenciales nuevas.
 - **Guardrails:** no schedule, no rotación y no borrado automático. Se conserva la publicación de evidencia de ejecución. La documentación de protección de datos fue actualizada para reflejar el contrato correcto y distinguir la prueba histórica del roundtrip pendiente del SHA actual.
 - **Estado:** corrección implementada en la rama candidata; falta ejecutar y revisar las pruebas del nuevo SHA y el roundtrip real de GitHub Actions. BASE-02 permanece ABIERTO. Sin merge, sin cambios en `main` y sin despliegue de producción.
+
+
+---
+
+## 2026-11-25 · BASE-02 · roundtrip real Google Drive verificado · SHA 9470744b
+
+- **Workflow:** [run 45560952459](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45560952459), SUCCESS.
+- **Contrato:** Google Drive `root` (Mi unidad), OAuth existente; sin S3, sin schedule, sin rotación y sin borrado automático.
+- **Commit de origen/restaurado:** `9470744bfb1f60dfcf68ba268e22e912e08dbee7`.
+- **Backup ID:** `20261125T062927Z-45560952459`.
+- **Transferencia:** cuatro objetos subidos y descargados con coincidencia SHA-256. `expired_candidates: 0`; `automatic_deletion: disabled_non_atomic_drive_api`.
+- **Restauración aislada:** `restore: success`; `isolated: true`; commit exacto; 318 archivos del snapshot comparados contra Git.
+- **Integridad crítica:** `critical_files_verified: 14`; todos los SHA-256 restaurados coinciden con los blobs del mismo commit. Salida: `RESTORE_CRITICAL_FILES: PASS (14/14 SHA-256 match)`.
+- **Objetos Drive y SHA-256:** los cuatro IDs y checksums completos están registrados en `docs/DATA_PROTECTION.md`; no se reproducen aquí para evitar duplicar el inventario.
+- **Artefacto de evidencia:** [google-drive-roundtrip-evidence-45560952459](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45560952459/artifacts/14997444276), artifact ID `14997444276`, ZIP SHA-256 `92f4daf0348ffb95b7ec6458ba73d421db81d51b43618412816ddac5a8407536`.
+- **Límite de alcance:** esta prueba valida el SHA `9470744b...`. La actualización documental que registra esta evidencia genera un nuevo SHA; por la regla de BASE-02, debe repetirse el roundtrip sobre ese nuevo HEAD antes de considerarlo el candidato final respaldado.
+- **Estado:** roundtrip real verificado para el SHA indicado; BASE-02 continúa ABIERTO hasta repetir la prueba sobre el SHA documental final, completar la CI integral de ese SHA y revisar el ruleset/Code Owners. Sin merge, sin cambios en `main` y sin producción.
