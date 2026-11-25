@@ -98,7 +98,8 @@ def semantic_diagnostics(documents: dict[str, Any]) -> list[str]:
         if isinstance(hero, dict) and isinstance(hero.get("id"), str)
     }
     colors = documents["data/creator-colors.json"]
-    color_ids = set((colors.get("creators") or {}).keys()) if isinstance(colors, dict) else set()
+    color_creators = colors.get("creators") if isinstance(colors, dict) else None
+    color_ids = set(color_creators) if isinstance(color_creators, dict) else set()
     if color_ids != current_ids:
         errors.append(
             "data/creator-colors.json: las claves de creators deben coincidir exactamente "
