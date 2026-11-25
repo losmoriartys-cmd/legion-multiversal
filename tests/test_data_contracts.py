@@ -38,6 +38,18 @@ class CanonicalDataContractTests(unittest.TestCase):
         errors = contracts.schema_diagnostics("data/roster.json", roster, "roster-data.schema.json")
         self.assertTrue(any("unknown" in error for error in errors), errors)
 
+    def test_creator_color_keys_match_the_canonical_roster(self):
+        docs = copy.deepcopy(self.documents)
+        docs["data/creator-colors.json"]["creators"].pop("pato-oratoris")
+        errors = contracts.semantic_diagnostics(docs)
+        self.assertTrue(any("creator-colors.json" in error and "pato-oratoris" in error for error in errors), errors)
+
+    def test_malformed_creator_color_collection_fails_without_crashing(self):
+        docs = copy.deepcopy(self.documents)
+        docs["data/creator-colors.json"]["creators"] = []
+        errors = contracts.validate_documents(docs)
+        self.assertTrue(any("creator-colors.json" in error for error in errors), errors)
+
     def test_roster_profile_set_is_protected(self):
         docs = copy.deepcopy(self.documents)
         docs["data/roster.json"]["heroes"].pop()
