@@ -119,7 +119,8 @@ def get_followers_user_token(now=None):
     if os.path.exists(FOLLOWERS_TOKEN_FILE):
         fernet = _followers_fernet()
         try:
-            encrypted = open(FOLLOWERS_TOKEN_FILE, "rb").read()
+            with open(FOLLOWERS_TOKEN_FILE, "rb") as handle:
+                encrypted = handle.read()
             state = json.loads(fernet.decrypt(encrypted).decode("utf-8"))
         except Exception as exc:
             raise RuntimeError("No se pudo descifrar el estado OAuth de seguidores; no se reemplazó.") from exc

@@ -329,15 +329,19 @@ test('Atrás y Adelante restauran el roster y el expediente correcto', async ({ 
   expect(browserErrors).toEqual([]);
 });
 
-test('la Bitácora móvil conserva la presentación de main y publica ambas capturas comparables', async ({ browser, page }) => {
-  // Pausada: el preview fijado es anterior a los cambios intencionales del Roster (estadísticas en las tarjetas,
-  // 22/11/2026) y por eso la cabecera del perfil mide distinto. Reactivar fijando un preview nuevo de main.
-  test.skip(true, 'Línea base fijada obsoleta: re-fijar un preview de main que incluya el Roster con estadísticas.');
+test('la Bitácora móvil conserva la presentación de main y publica ambas capturas comparables', async ({ browser }) => {
   test.setTimeout(90000);
-  const mainBaselineUrl = 'https://bd140e8f.legion-multiversal.pages.dev/';
+  const mainBaselineUrl = process.env.MAIN_BASELINE_URL;
+  expect(mainBaselineUrl, 'La CI debe resolver la preview vigente del SHA de main para comparar Bitácora móvil.').toBeTruthy();
   const viewport = { width: 390, height: 844 };
-  const mainContext = await browser.newContext({ viewport, reducedMotion: 'reduce' });
-  const mainPage = await mainContext.newPage();
+  // La comparación debe medir la estructura del expediente, no depender del estado de
+  // la caché particionada de Google Fonts (font-display: optional cambia el resultado entre
+  // el preview remoto y localhost). Se usa el mismo fallback en ambas páginas para lograr
+  // una comparación determinista sin relajar la igualdad de geometría ni de captura.
+  const comparisonContext = await browser.newContext({ viewport, reducedMotion: 'reduce' });
+  await comparisonContext.route(/^https:\/\/fonts\.(?:googleapis|gstatic)\.com\//, route => route.abort());
+  const mainPage = await comparisonContext.newPage();
+  const candidatePage = await comparisonContext.newPage();
 
   async function openLadyBitacora(target, url) {
     await target.goto(url, { waitUntil: 'domcontentloaded', timeout: 45000 });
@@ -363,6 +367,8 @@ test('la Bitácora móvil conserva la presentación de main y publica ambas capt
     for (let index = 0; index < await timelineItems.count(); index++) {
       await expect(timelineItems.nth(index)).toBeVisible();
     }
+    // Esperar el layout estable con el fallback tipográfico idéntico en ambos orígenes.
+    await target.evaluate(() => document.fonts.ready);
     const selectedTabs = target.locator('.hero-profile-tabs');
     await selectedTabs.evaluate(el => el.scrollIntoView({ block: 'start', inline: 'nearest' }));
     await expect(bitacoraTab).toBeVisible();
@@ -372,8 +378,16 @@ test('la Bitácora móvil conserva la presentación de main y publica ambas capt
     expect(captureBounds).not.toBeNull();
     expect(captureBounds.y).toBeGreaterThanOrEqual(-1); // tolerancia subpíxel por transforms/layout.
     expect(captureBounds.y).toBeLessThan(viewport.height);
-    await target.screenshot({ path: url === mainBaselineUrl ? 'test-results/main-baseline-bitacora-mobile.png' : 'test-results/pr-candidate-bitacora-mobile.png', fullPage: false });
-    return target.evaluate(() => {
+    // El indicador "MISIONES" pertenece al encabezado global, no a la Bitácora.
+    // Su borde tiene microvariaciones de antialiasing entre previews aunque el DOM y
+    // la presentación del expediente coincidan. Se oculta sin alterar el layout.
+    await target.addStyleTag({ content: '#mission-progress-trigger { visibility: hidden !important; }' });
+    const screenshot = await target.screenshot({
+      path: url === mainBaselineUrl ? 'test-results/main-baseline-bitacora-mobile.png' : 'test-results/pr-candidate-bitacora-mobile.png',
+      fullPage: false,
+      animations: 'disabled'
+    });
+    const signature = await target.evaluate(() => {
       const selectors = [
         '#hero-profile-page',
         '.comic-profile-head',
@@ -400,17 +414,18 @@ test('la Bitácora móvil conserva la presentación de main y publica ambas capt
         };
       });
     });
+    return { signature, screenshot };
   }
 
   try {
     await mainPage.emulateMedia({ reducedMotion: 'reduce' });
-    const mainSignature = await openLadyBitacora(mainPage, mainBaselineUrl);
-    await page.setViewportSize(viewport);
-    await page.emulateMedia({ reducedMotion: 'reduce' });
-    const candidateSignature = await openLadyBitacora(page, '/');
-    expect(candidateSignature).toEqual(mainSignature);
+    const mainCapture = await openLadyBitacora(mainPage, mainBaselineUrl);
+    await candidatePage.emulateMedia({ reducedMotion: 'reduce' });
+    const candidateCapture = await openLadyBitacora(candidatePage, '/');
+    expect(candidateCapture.signature).toEqual(mainCapture.signature);
+    expect(candidateCapture.screenshot).toEqual(mainCapture.screenshot);
   } finally {
-    await mainContext.close();
+    await comparisonContext.close();
   }
 });
 
