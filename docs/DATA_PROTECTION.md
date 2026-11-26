@@ -108,3 +108,17 @@ Esta repetición cubre el HEAD documental `b45e568...`. Cualquier cambio posteri
 - **Evidencia:** [artifact 14998375937](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45561352157/artifacts/14998375937), ZIP SHA-256 `1b48b69d8391dc501b2f2f2d3317dedf70dc150b78b6e82cffd767c1023e0a73`.
 - **Límite:** esta prueba es histórica respecto del candidato actual: cubre `d51be448...`, anterior a la reconciliación con main `805bef800ff1c953d8686319025e576ccf686da4`. No se usa como evidencia del nuevo SHA. La actualización documental actual activa una nueva ejecución por el workflow de backup; su resultado deberá quedar asociado al nuevo HEAD.
 - Rotación, schedule y borrado automático permanecen deshabilitados.
+
+
+### Evidencia de roundtrip Google Drive consolidada · 25/11/2026
+
+- **Workflow:** [run 45562871414](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45562871414), resultado SUCCESS.
+- **SHA de origen y restaurado:** `2028f110638998795bc6d64edfe4a62d37123d4e`.
+- **Backup ID:** `20261125T064503Z-45562871414`.
+- **Destino:** Google Drive, flujo OAuth existente. Cuatro objetos fueron subidos y descargados con checksums coincidentes.
+- **Restauración aislada:** SUCCESS; 318 archivos del snapshot comparados contra Git.
+- **Inventario crítico:** `RESTORE_CRITICAL_FILES: PASS (14/14 SHA-256 match)`.
+- **Artefacto:** [14998786756](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45562871414/artifacts/14998786756); ZIP SHA-256 `8e5a77bf9f044546e58acd9fd36d63d37bd54c8bb149b8158b0737b19b5a7ab8`.
+- **Alcance:** esta evidencia corresponde al SHA señalado; no debe atribuirse a los commits de integración #109 o #101.
+- **Antecedente S3:** run [45558641646](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45558641646) falló antes de cualquier transferencia externa porque el preflight no encontró los secretos S3. No hubo operación S3 y no se computa como roundtrip.
+- **Guardrails:** sin schedule, sin rotación y sin borrado automático. La evidencia no habilita ninguna de esas funciones.
