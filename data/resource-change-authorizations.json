@@ -1,4 +1,14 @@
 {
   "schema_version": 1,
-  "authorizations": []
+  "authorizations": [
+    {
+      "id": "base04-controlled-probe-add",
+      "path": "tests/fixtures/base04-approval-probe.svg",
+      "action": "add",
+      "from_sha256": null,
+      "to_sha256": "95337f52cabeb6b40c9bd73ccfc28d12789c2b357e014d9b0df45c6142c9ce9f",
+      "reason": "Recurso geométrico no publicado creado únicamente para demostrar el flujo A/B de BASE-04; no afecta el sitio.",
+      "reference": "Issue #95 / prueba controlada fase A-B"
+    }
+  ]
 }
