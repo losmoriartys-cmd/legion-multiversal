@@ -27,6 +27,15 @@
       "to_sha256": "50bf24f9feab769ffa6fe1d49b150f4fcb2f6e004f5184b0f61f8c5b79ff2143",
       "reason": "Agregar estilos de la ficha de Bitácora: pestañas, paneles, estados vacíos, clips, momentos y métricas con foco visible y adaptación móvil.",
       "reference": "Issue #131 / PR #129 · fase A"
+    },
+    {
+      "id": "bitacora-ficha-games-schema-2026-11-26",
+      "path": "schemas/games.schema.json",
+      "action": "update",
+      "from_sha256": "48ad54a4551887ae4d643d0fbbc2db128b5458ff1325dc0601d6a8895e7b7014",
+      "to_sha256": "5050d572033bec712946fb52dffca5bb70b57beb0ca5b30e50689ab7fc13d6e9",
+      "reason": "Declarar en el JSON Schema los campos opcionales de la ficha de Bitácora (resumen, clips, números, momentos e imagen) con tipos, límites y patrones coherentes con el validador.",
+      "reference": "Issue #131 / PR #129 · fase A"
     }
   ]
 }
