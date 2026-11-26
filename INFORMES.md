@@ -4335,3 +4335,54 @@ No se integra a `main` ni se publica en producción hasta completar esas verific
 - **PR #101:** se preservan los 13 paths propios de la rama sobre el nuevo main. Se combinan explícitamente los cambios no superpuestos de `.github/workflows/validar-sitio.yml` y `app.js`; `INFORMES.md` retiene ambos registros históricos. El resto de los paths de #101 se incorpora sin reemplazar los archivos ni blobs de BASE-02.
 - **Colector automático:** el primer push de BASE-02 reveló que `actualizar-stats.yml` ejecutaba `test_data_contracts` sin instalar `jsonschema` (fallo `ModuleNotFoundError`). Se añade la instalación de `requirements-data-contracts.txt` junto con `cryptography` antes de ejecutar las pruebas; la nueva CI verificará el arreglo.
 - La evidencia independiente de backup/restore de 14/14 archivos y el snapshot de 318 archivos se conserva sin repetir el roundtrip; la guardia del inventario crítico pasó en CI sobre el candidato BASE-02 actualizado. Rotación y borrado automático continúan deshabilitados.
+
+
+---
+
+## 2026-11-26 · Cierre documental BASE-02 y estado consolidado de integraciones
+
+Esta sección prevalece sobre los estados provisionales de las anotaciones históricas anteriores. No se eliminan aquellos registros porque conservan la secuencia de pruebas, fallos y reconciliaciones; sus estados se interpretan como fotografías tomadas antes de la integración final.
+
+### Integraciones confirmadas
+
+- **BASE-02 · PR #109:** integrado mediante squash en `main`, commit `a03b12fa64fb298f00f3d8d92067268403c978f6`. HEAD exacto del candidato validado: `13736e383c68918682840e56f1b489bc480e6ef9`.
+- **Roster · PR #101:** integrado mediante squash en `main`, commit `264ceacc9cdb9d94186f1a56f6fae22d430c164e`. HEAD exacto del candidato validado: `ccefb2c9c073cd4759d1c0e26df29a079a3802d7`.
+- Ambas integraciones utilizaron el bypass administrativo puntual de `PROTECCION-MAIN-LEGION`, con autorización expresa del propietario. No hubo aprobación independiente ni se presentó el bypass como tal. El registro central de ambos casos queda en el issue #113.
+- La integración de #101 conservó las actualizaciones automáticas de métricas de main y corrigió la instalación de `requirements-data-contracts.txt` en el colector para que las pruebas de contratos dispongan de `jsonschema`.
+
+### Validaciones de los candidatos
+
+**PR #109 / BASE-02 — SHA `13736e383c68918682840e56f1b489bc480e6ef9`:**
+- `validar`: SUCCESS, con 53/53 pruebas Playwright.
+- `python-tests`: SUCCESS.
+- `audit-public-links`: SUCCESS.
+- `qa-capitulos`: SUCCESS.
+- Cloudflare Pages preview: SUCCESS.
+- La guardia de integridad, contratos canónicos y recuperación Git quedaron incluidos en la batería.
+
+**PR #101 — SHA `ccefb2c9c073cd4759d1c0e26df29a079a3802d7`:**
+- `validar`: SUCCESS, con 56 pruebas de navegador.
+- `python-tests`, `audit-public-links`, `qa-capitulos` y `qa-portable`: SUCCESS.
+- Cloudflare Pages y validación del colector de estadísticas: SUCCESS.
+- Se verificaron los cambios de Roster, horarios, colores, navegación y Bitácora móvil.
+
+### Backup y restauración: evidencia y límites
+
+- Se conserva como evidencia positiva el roundtrip Google Drive del run [45562871414](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45562871414), sobre el SHA de origen/restaurado `2028f110638998795bc6d64edfe4a62d37123d4e`: cuatro objetos transferidos y descargados, restauración aislada, 318 archivos comparados y 14/14 SHA-256 críticos coincidentes.
+- Backup ID: `20261125T064503Z-45562871414`. Artefacto [14998786756](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45562871414/artifacts/14998786756); ZIP SHA-256: `8e5a77bf9f044546e58acd9fd36d63d37bd54c8bb149b8158b0737b19b5a7ab8`.
+- El run S3 [45558641646](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45558641646) queda únicamente como antecedente fallido de preflight: no hubo subida, descarga ni restauración S3. No se usa como evidencia positiva y no invalida el roundtrip Google Drive posterior.
+- La prueba Google Drive es evidencia del SHA indicado, no una afirmación de que ese roundtrip se ejecutó sobre los commits de integración #109/#101. No se repite sin una modificación que invalide el procedimiento o una instrucción de mantenimiento.
+- Rotación, schedule y borrado automático continúan deshabilitados. No se eliminó ningún objeto.
+
+### Estado de main y CI posterior
+
+- Tras la validación integral de main en `c50e98dfab74d2b8b79d2c585031b05e70329ded`, la rama avanzó mediante tres commits automáticos de métricas/clips: `006950eeb98a11ef3a5afc4b51b2ee29dfd5e21c`, `005f831c781887d8c740f20c3038c3eccf7c3128` y `3596c1236e4f8e9c71f2bbc7d2dbbf4ae1aef46d`. La comparación de `c50e98d` con el HEAD actual de esta rama documental confirma que el avance posterior se limita a `clips-data.json`, `creator-metrics.json`, `data.json` y `platform-stats.json`; no se sustituyeron los contratos ni los cambios funcionales integrados.
+- En `c50e98d` se verificaron SUCCESS en `report-build-status`, `deploy`, `Cloudflare Pages`, `build`, `validar` y `python-tests`. No se extrapola esa evidencia a los commits automáticos posteriores: el SHA nuevo debe quedar cubierto por la CI del PR documental y las comprobaciones posteriores correspondientes.
+- La producción no se modifica con esta anotación; el presente cambio documental se propone mediante PR.
+
+### Cierre administrativo de BASE-02
+
+- BASE-02 queda completado por la integración #109 y la evidencia técnica enumerada arriba. El issue #93 se cierra como completado con referencia a estos datos.
+- #97, #106 y #108 se cierran como etapas absorbidas por #109; no se fusionan por separado.
+- #110 se cierra como documentación absorbida: su referencia al preflight S3 fallido ya está preservada en `INFORMES.md` y `docs/DATA_PROTECTION.md`.
+- Se mantienen abiertos, fuera de este cierre: #94 BASE-03 y #95 BASE-04. #100 privacidad continúa Draft por su revisión legal/operativa; #82 se conserva como planificación editorial para la fase posterior.
