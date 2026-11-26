@@ -134,11 +134,14 @@ class ResourceChangeGateTests(unittest.TestCase):
         errors = self.evaluate([], baseline=approved, current=altered)
         self.assertTrue(any("histórica modificada o eliminada" in item for item in errors), errors)
 
-    def test_empty_ledger_bootstrap_is_allowed_once(self):
-        errors = self.evaluate(
-            [("A", ["data/resource-change-authorizations.json"])],
-            baseline=EMPTY, current=EMPTY
-        )
+    def test_empty_ledger_bootstrap_is_allowed_with_initial_control_files(self):
+        changed = [
+            ("A", ["data/resource-change-authorizations.json"]),
+            ("A", ["data/resource-protection-policy.json"]),
+            ("M", [".github/workflows/validar-sitio.yml"]),
+            ("A", ["scripts/check_resource_change_policy.py"])
+        ]
+        errors = self.evaluate(changed, baseline=EMPTY, current=EMPTY)
         self.assertEqual(errors, [], errors)
 
 
