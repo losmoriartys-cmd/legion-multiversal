@@ -9,6 +9,24 @@
       "to_sha256": "95337f52cabeb6b40c9bd73ccfc28d12789c2b357e014d9b0df45c6142c9ce9f",
       "reason": "Recurso geométrico no publicado creado únicamente para demostrar el flujo A/B de BASE-04; no afecta el sitio.",
       "reference": "Issue #95 / prueba controlada fase A-B"
+    },
+    {
+      "id": "bitacora-ficha-index-html-2026-11-26",
+      "path": "index.html",
+      "action": "update",
+      "from_sha256": "57e1436b0a53dc3d035895c64fad14dd6767c1f25cdec6d7b80efef6611f3649",
+      "to_sha256": "d6cd2190592f1292532b130084d2f237d00c3c3407261ad1809ad1e6c07fe267",
+      "reason": "Actualizar solo las referencias de caché de CSS global y games-registry.js para la ficha accesible de Bitácora; no altera el Hero ni los datos canónicos.",
+      "reference": "Issue #131 / PR #129 · fase A"
+    },
+    {
+      "id": "bitacora-ficha-styles-css-2026-11-26",
+      "path": "styles.css",
+      "action": "update",
+      "from_sha256": "6f0015d0dcab073d38a644ea23c9f9c7aa63d5246fadbd7e1a841986ebab05f2",
+      "to_sha256": "50bf24f9feab769ffa6fe1d49b150f4fcb2f6e004f5184b0f61f8c5b79ff2143",
+      "reason": "Agregar estilos de la ficha de Bitácora: pestañas, paneles, estados vacíos, clips, momentos y métricas con foco visible y adaptación móvil.",
+      "reference": "Issue #131 / PR #129 · fase A"
     }
   ]
 }
