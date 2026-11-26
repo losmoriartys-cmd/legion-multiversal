@@ -4417,3 +4417,41 @@ Esta sección prevalece sobre los estados provisionales de las anotaciones hist�
 - **BASE-03 (#94) se cierra como completado** con esta evidencia.
 - **BASE-04 (#95) permanece abierto** y pasa a ser el siguiente frente, siguiendo su alcance y guardrails propios. No se declara efectiva ninguna protección de archivos hasta probarla con cambios controlados.
 - Los presupuestos Lighthouse móviles/escritorio permanecen como tarea independiente pendiente; no se usan para bloquear el cierre del issue #94 porque no forman parte de sus criterios de aceptación actuales.
+
+
+---
+
+## 2026-11-26 · Cierre técnico BASE-04 · PR #120, #123 y #124
+
+### Integración y protección por transición autorizada
+- **Implementación base:** PR #120 integrado; política documentada en `docs/RESOURCE_PROTECTION.md`, `data/resource-protection-policy.json` y ledger append-only `data/resource-change-authorizations.json`.
+- **Inventario:** SHA-256 de contenido y Git blob SHA, referencias exactas por archivo/línea/contexto, dependencias externas de fuentes y reporte de recursos visuales sin referencia. El inventario es un artefacto asociado al SHA de CI, no una segunda fuente de verdad.
+- **Guardia:** cambios sensibles se contrastan con la política versionada y el ledger; las transiciones add/update/delete requieren hashes exactos. Cambios rutinarios generados siguen su contrato existente. Los controles son fail-closed para transiciones no autorizadas.
+- **Recuperación:** se documentó la restauración Git desde el último main aprobado y se añadió una prueba con repositorio temporal que restaura un asset binario y un JSON del Roster y compara los blobs recuperados.
+- **Prueba real A/B:** PR #123 integró únicamente la autorización `base04-controlled-probe-add`; PR #124 incorporó en un segundo PR únicamente `tests/fixtures/base04-approval-probe.svg`. SHA-256 aprobado y aplicado: `95337f52cabeb6b40c9bd73ccfc28d12789c2b357e014d9b0df45c6142c9ce9f`. La fase A no contenía el recurso; la fase B no modificó el ledger. La guardia aceptó la transición histórica exacta en B.
+- **Diff funcional de B:** un SVG geométrico de fixture (5 líneas); no se modificaron HTML/CSS editorial, fotografías, ilustraciones, tipografías ni datos del Roster.
+- **Integración B:** PR #124, squash merge `33a081016efdc8ade46d6f5a4515fefa72d81d59`. La rama se reconcilió primero con snapshots automáticos de métricas/clips que habían avanzado en main; el diff efectivo de B siguió limitado al SVG.
+
+### Validación y QA
+- **PR #124, HEAD reconciliado `bc5a65cccc17dc34283ddf584beb0273cfb56ba8`:** `validar` SUCCESS, 58/58 Playwright; `python-tests` SUCCESS, 353 pruebas; `audit-public-links` SUCCESS; Cloudflare Pages SUCCESS. Se publicaron capturas de revisión visual, auditorías de imágenes e inventario canónico.
+- **Post-merge:** sobre `33a081016efdc8ade46d6f5a4515fefa72d81d59`, `validar`, colector Python, build/deploy y Cloudflare terminaron SUCCESS.
+- **Main más reciente verificado:** `9a57c499a93f1707bd6742b30da5e02855bf4267`. Avanzó después del merge únicamente por snapshots automáticos en `clips-data.json`, `creator-metrics.json`, `data.json` y `platform-stats.json`; las pruebas y el backup posteriores se ejecutaron sobre ese SHA más reciente.
+
+### Backup externo Google Drive · roundtrip vigente
+- **Run:** [45869644480 · Backup independiente del repositorio](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45869644480) — SUCCESS sobre el SHA exacto `9a57c499a93f1707bd6742b30da5e02855bf4267`.
+- **Backup ID:** `20261126T174011Z-45869644480`.
+- **Roundtrip:** subida a Google Drive, descarga de retorno y restauración en destino aislado.
+- **Integridad:** `snapshot_files_verified: 332`; `RESTORE_CRITICAL_FILES: PASS (14/14 SHA-256 match)`.
+- **Artefacto:** [google-drive-roundtrip-evidence-45869644480](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45869644480/artifacts/15142111804), ID `15142111804`, digest `baf2dfe0ee50b5bf4f5db14f48e4a4c316db1140f276caa051fbfde4ed063601`.
+- **CI del mismo SHA:** `validar`, `python-tests`, build/deploy, Cloudflare Pages y backup: SUCCESS.
+
+### Ruleset · brechas administrativas diferidas
+La auditoría efectiva del ruleset `PROTECCION-MAIN-LEGION` queda en `docs/RESOURCE_PROTECTION.md`:
+- `require_code_owner_review=false`: CODEOWNERS está presente, pero no exige una revisión Code Owner independiente.
+- Integration bypass ID `1143301` permanece en modo `always`; su identificación como Copilot coding agent es probable, pero la instalación activa en este repositorio no quedó probada.
+- La conexión permitió consultar el ruleset, no modificarlo; no se afirma que estas opciones hayan sido endurecidas. La protección efectiva actual se apoya en PR obligatorio, checks estrictos, guardia de integridad, ledger SHA-256 y bypass administrativo puntual registrado bajo el acuerdo de issue #113.
+- La API clásica de branch protection devolvió 403; se documenta como límite de visibilidad, no como ausencia de protección.
+- Estas tareas administrativas quedan diferidas y fuera del cierre técnico acordado de BASE-04; no se debilitó el ruleset global ni se creó una aprobación independiente ficticia.
+
+### Resultado
+Los criterios técnicos de BASE-04 quedan cumplidos: política e inventario versionados, detección de cambios no autorizados probada por la suite, transición deliberada autorizada A/B demostrada de extremo a extremo, recuperación documentada y ejercitada, CI/Playwright aprobados, PR integrados y backup externo actualizado verificado en el SHA vigente de main. Las observaciones administrativas anteriores permanecen registradas como seguimiento separado.
