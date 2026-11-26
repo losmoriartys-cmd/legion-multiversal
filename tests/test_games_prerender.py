@@ -47,8 +47,8 @@ class GamesPrerenderContractTests(unittest.TestCase):
         self.assertEqual(arsenal.count('data-prerendered="true"'), len(self.games["juegos"]))
         self.assertIn('data-collab-ready="prerendered"', self.html)
         self.assertIn('data-arsenal-ready="prerendered"', self.html)
-        self.assertIn('aria-busy="false"', collab)
-        self.assertIn('aria-busy="false"', arsenal)
+        self.assertIn('id="collab-registry-grid" aria-live="polite" aria-busy="false"', self.html)
+        self.assertIn('id="arsenal-grid" aria-live="polite" aria-busy="false"', self.html)
 
     def test_static_summaries_match_current_registry_counts(self):
         collab = self.block(
