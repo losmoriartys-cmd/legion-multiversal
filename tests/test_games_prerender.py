@@ -44,6 +44,7 @@ class GamesPrerenderContractTests(unittest.TestCase):
         )
         sessions = [session for game in self.games["juegos"] for session in game.get("sesiones", [])]
         self.assertEqual(collab.count('data-prerendered="true"'), len(sessions))
+        self.assertEqual(collab.count("FUENTE VERIFICADA"), len(sessions))
         self.assertEqual(arsenal.count('data-prerendered="true"'), len(self.games["juegos"]))
         self.assertIn('data-collab-ready="prerendered"', self.html)
         self.assertIn('data-arsenal-ready="prerendered"', self.html)
