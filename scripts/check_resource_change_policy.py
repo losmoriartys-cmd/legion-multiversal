@@ -92,7 +92,9 @@ def load_json_at(ref: str, path: str, default: dict) -> dict:
 def classify(path: str, policy: dict) -> str:
     if path in policy.get("routine_generated_data", []):
         return "routine_generated_data"
-    if path in policy.get("explicit_paths", []):
+    if path == policy.get("policy_file") or path in policy.get("explicit_paths", []):
+        return "explicit_authorization"
+    if any(fnmatch.fnmatch(path, pattern) for pattern in policy.get("explicit_patterns", [])):
         return "explicit_authorization"
     suffix = PurePosixPath(path).suffix.lower()
     if suffix in set(policy.get("explicit_extensions", [])):
@@ -230,6 +232,10 @@ def evaluate_changes(
                 continue
             try:
                 before = base_hash(path)
+                after = head_hash(path)
+                if path == policy.get("policy_file") and before is None and after is not None:
+                    # One-time bootstrap: the policy defines what future policy edits protect.
+                    continue
                 after = head_hash(path)
             except Exception as exc:
                 errors.append(f"No se pudo calcular la transición de {path}: {exc}")
