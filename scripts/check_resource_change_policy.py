@@ -236,7 +236,6 @@ def evaluate_changes(
                 if path == policy.get("policy_file") and before is None and after is not None:
                     # One-time bootstrap: the policy defines what future policy edits protect.
                     continue
-                after = head_hash(path)
             except Exception as exc:
                 errors.append(f"No se pudo calcular la transición de {path}: {exc}")
                 continue
