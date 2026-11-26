@@ -130,6 +130,12 @@ def render_collab_session(game: dict, session: dict, names: dict[str, str]) -> s
         f'<img src="{esc(cover)}" alt="Portada de {title}" loading="lazy" decoding="async">'
         if cover else '<span class="collab-poster-fallback">ARTE OFICIAL PENDIENTE</span>'
     )
+    date_source = safe_url(session.get("fuente_fecha"), {"twitch.tv"})
+    date_text = date_label(session.get("fecha")) if date_source else "FECHA SIN VERIFICAR"
+    date_markup = (
+        f'<a class="collab-session-date" href="{esc(date_source)}" target="_blank" rel="noopener noreferrer">FECHA · {esc(date_text)} · FUENTE VERIFICADA ↗</a>'
+        if date_source else f'<span class="collab-session-date">{esc(date_text)}</span>'
+    )
     image = str(session.get("imagen") or "")
     session_image = ""
     if image and IMAGE_RE.fullmatch(image) and (ROOT / image).is_file():
@@ -176,7 +182,7 @@ def render_collab_session(game: dict, session: dict, names: dict[str, str]) -> s
         f'<article class="collab-session-card collab-prerendered-card" id="{esc(session["bit"].lower())}" '
         f'data-collab-session="{bit}" data-game-id="{game_id}" data-prerendered="true">'
         f'<div class="collab-poster">{poster_art}<div class="collab-poster-top"><span class="collab-bit-id">{bit}</span>'
-        f'<span class="collab-session-date">{esc(date_label(session.get("fecha")))}</span></div>'
+        f'{date_markup}</div>'
         f'<div class="collab-poster-bottom"><h4>{title}</h4><div class="collab-session-categories">{categories}</div></div></div>'
         f'<div class="collab-card-strip"><span class="collab-card-count">{len(participants)} JUGARON · {len(povs)} POV</span></div>'
         f'<details class="collab-ficha"><summary><span>ABRIR FICHA</span><span class="collab-ficha-close">CERRAR FICHA</span></summary>'
