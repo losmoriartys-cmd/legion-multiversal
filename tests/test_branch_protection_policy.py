@@ -62,5 +62,17 @@ class BranchProtectionPolicyTests(unittest.TestCase):
         self.assertIn("- '.github/workflows/**'", self.stats)
 
 
+    def test_approved_editorial_assets_are_guarded_unconditionally_in_main_validation(self):
+        step = re.search(
+            r"(?ms)^      - name: Proteger assets editoriales aprobados\n(?P<body>.*?)(?=^      - name: |\Z)",
+            self.site,
+        )
+        self.assertIsNotNone(step, "Falta la guardia de assets editoriales en validar.")
+        self.assertIn("python scripts/guard_approved_assets.py --base-ref origin/main", step.group("body"))
+        self.assertNotRegex(step.group("body"), r"(?m)^        if:")
+        self.assertTrue((ROOT / "scripts" / "guard_approved_assets.py").is_file())
+        self.assertTrue((ROOT / "data" / "approved-assets-manifest.json").is_file())
+
+
 if __name__ == "__main__":
     unittest.main()
