@@ -200,7 +200,12 @@ def evaluate_changes(
             errors.append("El ledger de autorizaciones no puede combinarse con cambios de recursos.")
 
     elif auth_file_changed:
-        errors.append("El ledger de autorizaciones es append-only: no se permiten cambios ni borrados de registros existentes.")
+        bootstrap_empty = (
+            not base_auth and not current_auth and len(changed) == 1
+            and changed[0] == ("A", [auth_file])
+        )
+        if not bootstrap_empty:
+            errors.append("El ledger de autorizaciones es append-only: no se permiten cambios ni borrados de registros existentes.")
 
     if new_auth:
         # Phase A only records a proposal. The resource must remain exactly at its baseline state.
