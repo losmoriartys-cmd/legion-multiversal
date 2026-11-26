@@ -188,7 +188,7 @@
             "string",
             "null"
           ],
-          "pattern": "^[A-Za-z0-9_-]+(?:/[A-Za-z0-9_-]+)*\\\\.(?:jpg|jpeg|png|webp)$"
+          "pattern": "^[A-Za-z0-9_-]+(?:/[A-Za-z0-9_-]+)*\\.(?:jpg|jpeg|png|webp)$"
         }
       }
     },
@@ -323,7 +323,7 @@
         "url": {
           "type": "string",
           "format": "uri",
-          "pattern": "^https://(?:www\\\\.)?twitch\\\\.tv/[A-Za-z0-9_]+/clip/[A-Za-z0-9_-]+$|^https://clips\\\\.twitch\\\\.tv/[A-Za-z0-9_-]+$"
+          "pattern": "^https://(?:www\\.)?twitch\\.tv/[A-Za-z0-9_]+/clip/[A-Za-z0-9_-]+$|^https://clips\\.twitch\\.tv/[A-Za-z0-9_-]+$"
         }
       }
     },
@@ -372,7 +372,7 @@
       "properties": {
         "t": {
           "type": "string",
-          "pattern": "^\\\\d{1,2}:[0-5]\\\\d:[0-5]\\\\d$"
+          "pattern": "^\\d{1,2}:[0-5]\\d:[0-5]\\d$"
         },
         "texto": {
           "type": "string",
