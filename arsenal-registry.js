@@ -110,6 +110,7 @@
       '';
   }
   function render(){
+    if(!games.length&&grid.querySelector('[data-prerendered="true"]'))return;
     visibleGames=filtered();
     grid.innerHTML=visibleGames.length?visibleGames.map(renderGame).join(''):
       '<div class="arsenal-registry-empty"><strong>NO HAY JUEGOS CON ESOS FILTROS.</strong><p>Probá otra categoría, cantidad de jugadores o búsqueda.</p></div>';
