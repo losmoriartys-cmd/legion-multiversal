@@ -30,7 +30,9 @@
     if (typeof value !== 'string') return '';
     try {
       const url = new URL(value);
-      if (url.protocol !== 'https:' || (allowedHostSuffix && !url.hostname.endsWith(allowedHostSuffix))) return '';
+      const hostname = url.hostname.toLowerCase();
+      const allowedHost = !allowedHostSuffix || hostname === allowedHostSuffix || hostname.endsWith('.' + allowedHostSuffix);
+      if (url.protocol !== 'https:' || !allowedHost) return '';
       return url.href;
     } catch (error) { return ''; }
   }
