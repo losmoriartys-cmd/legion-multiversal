@@ -8,11 +8,20 @@ from scripts.validate_games_registry import validate_registry
 ROOT = Path(__file__).resolve().parents[1]
 GAMES = json.loads((ROOT / "data" / "games.json").read_text(encoding="utf-8"))
 ROSTER = json.loads((ROOT / "data/roster.json").read_text(encoding="utf-8"))
+SCHEMA = json.loads((ROOT / "schemas/games.schema.json").read_text(encoding="utf-8"))
 
 
 class GamesRegistryTests(unittest.TestCase):
     def test_master_registry_is_valid_against_canonical_roster(self):
         self.assertEqual(validate_registry(GAMES, ROSTER), [])
+
+    def test_schema_declares_ficha_fields_as_optional(self):
+        session_schema = SCHEMA["$defs"]["sesion"]
+        properties = session_schema["properties"]
+        ficha_fields = {"resumen", "clips", "numeros", "momentos", "imagen"}
+        self.assertTrue(ficha_fields.issubset(properties))
+        self.assertTrue(ficha_fields.isdisjoint(session_schema["required"]))
+        self.assertFalse(session_schema["additionalProperties"])
 
     def test_catalog_has_one_entry_per_unique_game(self):
         games = GAMES["juegos"]
