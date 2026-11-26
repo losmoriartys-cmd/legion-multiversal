@@ -136,7 +136,7 @@ def external_resources(sources: dict[str, list[str]]) -> tuple[list[dict], list[
     families = []
     seen_urls = set()
     seen_families = set()
-    url_re = re.compile(r"https://[^\\s\"'<>)]+")
+    url_re = re.compile(r"https://[^\s\"'<>)]+)
 
     for source, lines in sources.items():
         suffix = PurePosixPath(source).suffix.lower()
@@ -144,7 +144,7 @@ def external_resources(sources: dict[str, list[str]]) -> tuple[list[dict], list[
             continue
         for number, line in enumerate(lines, 1):
             declares_font_url = re.search(
-                r"(?:href|src)\\s*=|url\\s*\\(|@import\\s+",
+                r"(?:href|src)\s*=|url\s*\(|@import\s+,
                 line,
                 re.IGNORECASE,
             )
@@ -160,7 +160,7 @@ def external_resources(sources: dict[str, list[str]]) -> tuple[list[dict], list[
                             "line": number,
                             "context": line.strip()[:240]
                         })
-            for match in re.finditer(r"font-family\\s*:\\s*([^;{}]+)", line, re.IGNORECASE):
+            for match in re.finditer(r"font-family\s*:\s*([^;{}]+)", line, re.IGNORECASE):
                 for family in match.group(1).split(","):
                     normalized = family.strip().strip("'\"")
                     if normalized and normalized.lower() not in {"inherit", "initial", "unset", "sans-serif", "serif", "cursive", "monospace"}:
