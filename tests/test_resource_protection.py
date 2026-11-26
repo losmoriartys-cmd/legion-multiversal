@@ -11,8 +11,10 @@ import audit_resource_inventory as inventory
 
 POLICY = {
     "authorization_file": "data/resource-change-authorizations.json",
+    "policy_file": "data/resource-protection-policy.json",
     "routine_generated_data": ["creator-metrics.json", "data.json"],
-    "explicit_paths": ["data/roster.json", "data/creator-records.json"],
+    "explicit_paths": ["data/roster.json", "data/creator-records.json", "CODEOWNERS"],
+    "explicit_patterns": ["schemas/**"],
     "explicit_extensions": [".jpg", ".png", ".webp", ".css", ".html"],
     "review_required_patterns": [".github/workflows/**", "scripts/**", "tests/**"],
 }
@@ -141,9 +143,27 @@ class ResourceChangeGateTests(unittest.TestCase):
 
 
 class ResourceInventoryTests(unittest.TestCase):
-    def test_visual_assets_require_explicit_authorization(self):
-        for path in ("cover.jpg", "assets/heroes/akuma_dark.jpg", "styles.css", "index.html"):
+    def test_visual_assets_and_security_policy_require_explicit_authorization(self):
+        for path in (
+            "cover.jpg", "assets/heroes/akuma_dark.jpg", "styles.css", "index.html",
+            "CODEOWNERS", "schemas/roster-data.schema.json", "data/resource-protection-policy.json"
+        ):
             self.assertEqual(gate.classify(path, POLICY), "explicit_authorization")
+
+    def test_policy_file_can_be_bootstrapped_once_but_not_changed_routinely(self):
+        errors = self.evaluate(
+            [("A", ["data/resource-protection-policy.json"])],
+            before=lambda _path: None,
+            after=lambda _path: "b" * 64
+        )
+        self.assertEqual(errors, [], errors)
+
+        errors = self.evaluate(
+            [("M", ["data/resource-protection-policy.json"])],
+            before=lambda _path: "a" * 64,
+            after=lambda _path: "b" * 64
+        )
+        self.assertTrue(any("Cambio sensible sin autorización previa" in item for item in errors), errors)
 
     def test_routine_data_and_reviewed_code_are_classified_separately(self):
         self.assertEqual(gate.classify("creator-metrics.json", POLICY), "routine_generated_data")
