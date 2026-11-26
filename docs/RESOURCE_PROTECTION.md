@@ -91,3 +91,24 @@ La restauración desde Git no es un backup independiente. El roundtrip Google Dr
 - `require_code_owner_review=false` sigue siendo una brecha administrativa; el archivo raíz CODEOWNERS no sustituye esa opción.
 - La integración de bypass ID `1143301` todavía requiere identificación. No se presume que sea GitHub Actions ni se cambia el ruleset desde esta implementación.
 - El bypass administrativo puntual, cuando se aplique bajo el acuerdo del issue #113, debe registrarse como bypass y nunca como aprobación independiente.
+
+
+## Auditoría administrativa del ruleset · 26/11/2026
+
+Consulta directa de `GET /repos/losmoriartys-cmd/legion-multiversal/rulesets/27883004`:
+
+- **Ruleset:** `PROTECCION-MAIN-LEGION`, activo sobre `~DEFAULT_BRANCH`.
+- **Pull request:** obligatorio; 1 aprobación; descarta aprobaciones obsoletas; exige aprobación del último push y resolución de conversaciones; squash como único merge method.
+- **Checks estrictos:** `validar`, `python-tests` y `audit-public-links`, vinculados a la integración de checks `15368`.
+- **Code Owners:** `require_code_owner_review=false`. El archivo raíz `CODEOWNERS` asigna `* @losmoriartys-cmd`; por eso su comentario histórico que dice que la exigencia debe estar activada no refleja el estado real del ruleset.
+- **Bypass 1:** `RepositoryRole` ID `5`, modo `always`; se conserva como bypass administrativo del propietario bajo el acuerdo permanente de issue #113. No se presenta como aprobación.
+- **Bypass 2:** `Integration` ID `1143301`, modo `always`. Una configuración pública independiente de IDs de GitHub Apps mapea `copilot_coding_agent` a `1143301` y `github_actions` a `15368` ([referencia pública](https://product.10x.co.jp/entry/2026/07/06/101918)). Esto identifica con alta probabilidad al actor como GitHub Copilot coding agent, pero no prueba que esa app esté instalada actualmente en este repositorio. La única instalación visible mediante la conexión enlazada es `177048072`; no debe confundirse con el App ID `1143301`.
+- **Bypass efectivo:** la API devuelve `current_user_can_bypass=always` para el actor enlazado.
+
+### Decisión de gobernanza para el modo de trabajo de un solo mantenedor
+
+`require_code_owner_review=false` se registra como una excepción consciente, no como una protección activa. CODEOWNERS identifica al propietario, pero no genera una segunda persona ni permite que un autor apruebe su propio PR. El control efectivo queda compuesto por PR obligatorio, checks estrictos, guardia de integridad, autorizaciones SHA-256 y bypass administrativo puntual documentado según #113.
+
+**Endurecimiento recomendado:** activar revisión Code Owner para PRs que no sean auto-creados por el propietario, siempre que las reglas de GitHub puedan conservar el flujo de bypass puntual de #113. El actor `1143301` debería pasar de `always` a bypass limitado a PR, o eliminarse si Copilot coding agent no se utiliza. El ruleset no se modificó desde esta implementación: la conexión GitHub disponible permite consultar sus reglas, pero no expone una operación de escritura de rulesets. Por tanto, estas dos modificaciones se dejan identificadas y listas para aplicar desde la administración del repositorio, sin afirmar que ya están activas.
+
+La API clásica de branch protection devolvió 403 en la conexión disponible; esta auditoría acredita el ruleset activo, no una segunda capa clásica de protección.
