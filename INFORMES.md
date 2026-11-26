@@ -5,7 +5,7 @@
 
 ## Estado actual reutilizable · ya existe y no debe reconstruirse desde cero
 
-- [x] **Registro maestro de juegos:** games.json, schemas/games.schema.json y scripts/validate_games_registry.py; 18 juegos, 10 sesiones BIT y 11 POV en main al último corte integrado. La propuesta BarFender BIT-011/3 POV se encuentra en revisión en PR #130; no se contabiliza como integrada hasta su merge.
+- [x] **Registro maestro de juegos:** `data/games.json`, `schemas/games.schema.json` y `scripts/validate_games_registry.py`; 18 juegos en catálogo, 11 juegos con sesión, 11 sesiones BIT, 14 POV, 6 integrantes participantes y 7 juegos por descubrir. BarFender BIT-011 está integrado por PR #130 (SHA `21a8660a251ca34a02f326eccd37fab649ca1fcc`): 4 participantes, 3 POV, 4 clips e imagen `BarFenderLos4.jpg`. EXP-001 queda como archivo histórico, no comercial.
 - [x] **Identidad del Roster y expedientes BASE-01C:** `data/roster.json` conserva los ocho perfiles; `data/creator-records.json` quedó integrado por PR #96 (`63211d1`). La equivalencia editorial se verificó por blob SHA y CI/Playwright posterior al merge. La comprobación HTTP directa del dominio público sigue pendiente por una limitación DNS del entorno.
 - [x] **Infraestructura QA común y regresión visual:** matriz sincronizada con los 11 paneles reales (`0, 1, 2, 3, 6, 8, 9, 10, 11, 12, 13`); navegación, overflow y responsive en cinco viewports (1440, 1024, 768, 390 y 360 px); 22 capturas por ejecución; comparaciones PNG exactas de Roster, Estadísticas y Bitácora con evidencia en CI.
 - [x] **Validación general y QA portable:** existen workflows para contratos Python, JSON, sintaxis, imágenes, accesibilidad estática, enlaces/anclas y publicación de evidencias.
@@ -137,7 +137,7 @@
 - [ ] Revisar terminología profesional para estudios, publishers y agencias internacionales.
 
 ### COM-02 · PDF comercial descargable
-- [ ] Incorporar la ficha de una página definida en EXP-04 al recorrido «Para marcas».
+- [ ] Definir una ficha general de medios de una página desde los datos canónicos del sitio; no reutilizar EXP-001 como presentación comercial independiente.
 - [ ] Incluir credenciales, formatos posibles, caso BarFender, contacto y fecha de actualización.
 - [ ] Generar desde los mismos datos que HTML; probar versión en español e inglés cuando exista la traducción.
 
@@ -201,7 +201,7 @@
 - [ ] En móvil, usar desplazamiento horizontal contenido dentro de la matriz, sin overflow del documento.
 
 ### BIT-02 · Resumen, lectura y narrativa por sesión
-- [ ] Mostrar al comienzo el resumen estable de 10 juegos, 11 POV, 5 creadores y 1 expediente comercial, derivado del registro maestro en build.
+- [ ] Mostrar al comienzo el resumen estable de 11 juegos jugados, 11 sesiones BIT, 14 POV, 6 integrantes y 1 archivo histórico EXP-001, derivado del registro maestro en build.
 - [ ] Añadir una línea editorial por sesión: qué se jugó, quiénes participaron y qué momento vale la pena descubrir.
 - [ ] Completar nota con información aportada o respaldada por la fuente; si no hay contexto verificable, dejarlo vacío o marcarlo pendiente.
 - [ ] Evitar duplicar contadores o crear resúmenes manuales que se desincronicen.
@@ -269,7 +269,7 @@
 ## Orden de ejecución acordado
 
 1. **Primero · prevenir roturas:** BASE-01 a BASE-04, WEB-01 y WEB-02. La migración de datos debe ser gradual, con pruebas antes de retirar rutas existentes.
-2. **Después · credibilidad comercial:** EXP-01 a EXP-04, COM-01 y COM-02. La validación externa EXP-05 depende de autorización expresa del estudio/publisher y no se fabrica.
+2. **Después · credibilidad comercial:** COM-01, COM-02 y COM-03. BarFender EXP-001 queda como archivo histórico subordinado a BIT-011, no como expediente comercial independiente. La validación externa EXP-05 depende de autorización expresa del estudio/publisher y no se fabrica.
 3. **Luego · crecimiento estructurado:** URL-01, URL-02, LIFE-01 y LIFE-04.
 4. **Luego · contenido y medición:** VOD-01 a VOD-03, BIT-01 a BIT-03 y LIFE-02.
 5. **Cuando estén listos los materiales:** LIFE-03 (tráiler real) e IMG-01/IMG-02; PERF-01 se trabaja en paralelo a la evolución visual.
