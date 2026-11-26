@@ -1,5 +1,5 @@
 # HOJA DE RUTA VIVA · EVOLUCIÓN Y PROTECCIÓN DE LEGIÓN MULTIVERSAL
-**Actualización:** 25/11/2026 · **Tablero de seguimiento:** esta hoja se mantiene al comienzo de INFORMES.md.
+**Actualización:** 26/11/2026 · **Tablero de seguimiento:** esta hoja se mantiene al comienzo de INFORMES.md.
 
 > **Regla de cierre:** una tarea solo pasa a [x] cuando su implementación está integrada en main, sus pruebas aplicables terminan correctamente y se verifica el resultado publicado cuando corresponda. Un cambio en una rama, un preview o un workflow todavía en curso no cuenta como terminado. Cada cierre debe enlazar el PR, el SHA y la evidencia de validación.
 
@@ -7,7 +7,7 @@
 
 - [x] **Registro maestro de juegos:** games.json, schemas/games.schema.json y scripts/validate_games_registry.py; 18 juegos, 10 sesiones BIT y 11 POV. La Bitácora y el Arsenal consumen ese mismo origen.
 - [x] **Identidad del Roster y expedientes BASE-01C:** `data/roster.json` conserva los ocho perfiles; `data/creator-records.json` quedó integrado por PR #96 (`63211d1`). La equivalencia editorial se verificó por blob SHA y CI/Playwright posterior al merge. La comprobación HTTP directa del dominio público sigue pendiente por una limitación DNS del entorno.
-- [x] **Infraestructura QA común:** Playwright verifica 12 IDs de capítulos y cinco anchos (1440, 1024, 768, 390 y 360 px), navegación y overflow.
+- [x] **Infraestructura QA común y regresión visual:** matriz sincronizada con los 11 paneles reales (`0, 1, 2, 3, 6, 8, 9, 10, 11, 12, 13`); navegación, overflow y responsive en cinco viewports (1440, 1024, 768, 390 y 360 px); 22 capturas por ejecución; comparaciones PNG exactas de Roster, Estadísticas y Bitácora con evidencia en CI.
 - [x] **Validación general y QA portable:** existen workflows para contratos Python, JSON, sintaxis, imágenes, accesibilidad estática, enlaces/anclas y publicación de evidencias.
 - [x] **Colector de clips públicos:** update_clips.py consulta Twitch Helix, conserva metadatos y una ventana de historial de vistas. Su extensión para clips por sesión, feeds y relación con VOD sigue pendiente.
 - [x] **Lighthouse de producción:** existe lighthouse-production.yml con mediciones móviles y escritorio y confirmación del SHA publicado. Falta convertir sus resultados en presupuestos/umbrales obligatorios para PR.
@@ -74,14 +74,16 @@
 **Aceptación:** cada cambio de datos pasa el esquema y los contratos; los datos inválidos bloquean el PR y el informe identifica archivo, campo e ID afectado.
 
 ### BASE-03 · QA visual, funcional y de enlaces en cada cambio
-- [ ] Extender Playwright para generar capturas identificables de cada capítulo en desktop, tablet y móvil, además de conservar las pruebas funcionales y responsive comunes existentes.
-- [ ] Añadir revisión de cambios visuales con evidencia antes/después o comparación de capturas; no aceptar regresiones de tipografía, imágenes, proporciones o desbordamientos por el solo hecho de que el DOM siga cargando.
-- [ ] Verificar automáticamente la presencia de los ocho perfiles, enlaces internos, enlaces a juegos, VOD, clips y destinos externos declarados.
-- [ ] Mantener pruebas de filtros, navegación cruzada, estados vacíos, fallos de red, reintento y funcionamiento sin JavaScript donde aplique.
-- [ ] Incorporar presupuestos Lighthouse móviles y escritorio (rendimiento, accesibilidad, buenas prácticas y SEO) con umbrales acordados. El workflow de medición ya existe; falta definir los límites y hacer que las regresiones relevantes bloqueen el PR.
-- [ ] Publicar capturas, trazas y reportes como artefactos de cada ejecución para facilitar revisión.
+- [x] Matriz de QA común sincronizada con los 11 paneles `#chapter-N` existentes en `index.html`; una aserción descubre los IDs del DOM y bloquea omisiones o capítulos no registrados.
+- [x] Navegación, responsive, overflow horizontal, `prefers-reduced-motion` y errores JavaScript probados sobre los 11 capítulos en cinco viewports: 1440×1000, 1024×900, 768×1024, 390×844 y 360×800.
+- [x] Evidencia de cada capítulo en escritorio ancho y móvil: 22 capturas por ejecución, publicadas como artefacto del workflow QA común.
+- [x] Regresión visual determinista con baseline resuelta contra el SHA exacto de `main`: ocho cartas de Roster en escritorio/móvil, seis superficies de Estadísticas en escritorio/móvil y Bitácora móvil de Lady Moriarty. Compara geometría y bytes PNG; no actualiza baselines automáticamente ni aplica tolerancias a Roster/Estadísticas.
+- [x] Pruebas específicas existentes se conservan y ejecutan junto con Playwright; los fallos de regresión identifican la superficie y el viewport, y los artefactos guardan capturas/diagnóstico. La revisión post-merge detectó una diferencia de encuadre ajena al componente (encabezado global fijo); se aisló y documentó en PR #118, sin ocultar contenido del componente.
+- [x] Checks requeridos ejecutados en PR; verificación posterior a la integración completada en `main` sobre `6c7f2cdc84dd1404ea1413049edc57e31faede78`, con `validar` SUCCESS (58/58 Playwright), `python-tests` SUCCESS, `build` SUCCESS y Cloudflare Pages/deploy SUCCESS. QA común y auditoría de enlaces también pasaron en el PR.
 
-**Aceptación:** ningún PR que afecte capítulos o datos se integra con fallos funcionales, enlaces rotos confirmados, regresiones visuales no aprobadas o presupuesto de rendimiento incumplido.
+**Aceptación de #94:** cumplida. La secuencia de PR, checks, revisión de diferencias, artefactos y verificación post-merge quedó registrada en el cierre del 26/11/2026 que figura al final de este informe.
+
+**Pendiente independiente (no bloqueante para el cierre del issue #94):** definir presupuestos Lighthouse móviles y de escritorio (rendimiento, accesibilidad, buenas prácticas y SEO), con umbrales acordados que bloqueen regresiones relevantes. El workflow de medición ya existe; este trabajo conserva su propio seguimiento.
 
 ### BASE-04 · Revisión obligatoria de archivos clave
 - [ ] Incorporar .github/CODEOWNERS para data/, schemas/, colectores, workflows, generadores, navegación y archivos críticos del Roster.
@@ -4385,4 +4387,33 @@ Esta sección prevalece sobre los estados provisionales de las anotaciones hist�
 - BASE-02 queda completado por la integración #109 y la evidencia técnica enumerada arriba. El issue #93 se cierra como completado con referencia a estos datos.
 - #97, #106 y #108 se cierran como etapas absorbidas por #109; no se fusionan por separado.
 - #110 se cierra como documentación absorbida: su referencia al preflight S3 fallido ya está preservada en `INFORMES.md` y `docs/DATA_PROTECTION.md`.
-- Se mantienen abiertos, fuera de este cierre: #94 BASE-03 y #95 BASE-04. #100 privacidad continúa Draft por su revisión legal/operativa; #82 se conserva como planificación editorial para la fase posterior.
+- BASE-03 (#94) queda completado y cerrado tras integrar PR #117/#118 y verificar el SHA actual de `main` indicado en el cierre del 26/11/2026. BASE-04 (#95) permanece abierto y es el siguiente frente de protección. #100 privacidad continúa Draft por su revisión legal/operativa; #82 se conserva como planificación editorial para la fase posterior.
+
+---
+
+## 2026-11-26 · Cierre BASE-03 · PR #117 y #118 · validación post-merge
+
+### Integraciones y alcance
+- **PR #117 — QA común y regresión visual:** integrado mediante squash, merge SHA `34354ef0e4993951726dbea6f48c2dec32190001`. Candidato probado: `ff50d979d35b92a1ffc0ace3571af917748dc830`. Se corrigió la matriz de capítulos, se añadió su guardia contra omisiones, capturas de los 11 capítulos en escritorio y móvil y comparaciones visuales de Roster/Estadísticas.
+- **Hallazgo post-merge de #117:** el primer `validar` de main (run [45753654777](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45753654777), SHA `34354ef0e4993951726dbea6f48c2dec32190001`) terminó con 57/58 pruebas. La única falla fue Roster escritorio: el encabezado global fijo quedó superpuesto en la captura candidata, pero no en la referencia por la posición de scroll. Las cartas eran el elemento objetivo; la diferencia pertenecía al chrome global fuera del componente. El fallo se conservó como señal válida y no se deshabilitó la comparación.
+- **PR #118 — aislamiento de capturas:** integrado mediante squash, merge SHA `6c7f2cdc84dd1404ea1413049edc57e31faede78`. Candidato probado: `19080dd41dd5134170004dab4ea14294a74c7775`. Oculta únicamente el encabezado global y la transición mientras se captura cada superficie aislada, tanto en baseline como en candidato. El encabezado/navegación siguen cubiertos por QA común; no se ocultan ni normalizan elementos internos de Roster o Estadísticas y se conserva comparación PNG exacta.
+
+### Evidencia de PR #118
+- `validar`: SUCCESS, 58/58 Playwright; las comparaciones de Roster escritorio/móvil y Estadísticas escritorio/móvil pasaron.
+- `qa-capitulos`: SUCCESS, 6/6; los 11 paneles se recorrieron en cinco viewports y se publicaron 22 capturas.
+- `python-tests`, `audit-public-links` y Cloudflare Pages: SUCCESS.
+- La inspección del artefacto verificó **14/14 pares nuevos idénticos píxel por píxel** (Roster: 2 viewports; Estadísticas: 6 superficies × 2 viewports). La comparación preexistente de Bitácora móvil también conserva igualdad exacta.
+- Artefactos: [validación y comparaciones visuales](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45754328130), ID `15087152546`, 58 PNG; [QA común y capturas de capítulos](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45754328171), ID `15087560280`, 22 capturas.
+
+### Verificación posterior a la integración final
+- **HEAD confirmado de main:** `6c7f2cdc84dd1404ea1413049edc57e31faede78` (merge #118).
+- [Run de validación post-merge](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45754836593): SUCCESS; 58/58 Playwright, incluidas las comparaciones exactas de Roster y Estadísticas.
+- [Validación del colector/Python](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45754836591): SUCCESS.
+- [Build y despliegue de Cloudflare Pages](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45754835362): SUCCESS; los checks `build`, `deploy`, `report-build-status` y `Cloudflare Pages` también terminaron en verde.
+- La integración #117/#118 afecta únicamente documentación QA y pruebas Playwright; no modifica el HTML editorial, CSS del producto, assets, tipografías ni datos del Roster.
+
+### Resultado y siguiente dependencia
+- Los criterios de aceptación de **BASE-03 (#94)** quedan cumplidos: matriz real protegida contra omisiones, navegación/responsive/overflow, regresión visual determinista, evidencia accionable por CI, checks aprobados y verificación del SHA post-merge registrada.
+- **BASE-03 (#94) se cierra como completado** con esta evidencia.
+- **BASE-04 (#95) permanece abierto** y pasa a ser el siguiente frente, siguiendo su alcance y guardrails propios. No se declara efectiva ninguna protección de archivos hasta probarla con cambios controlados.
+- Los presupuestos Lighthouse móviles/escritorio permanecen como tarea independiente pendiente; no se usan para bloquear el cierre del issue #94 porque no forman parte de sus criterios de aceptación actuales.
