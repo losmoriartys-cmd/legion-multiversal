@@ -80,3 +80,35 @@ El archivo raíz `CODEOWNERS` no existe en `main` (la consulta de contenido devo
 - **Límite de modificación:** las acciones Git disponibles permiten leer reglasets, no actualizarlos; tampoco se concedió acceso al endpoint de protección clásica. No se efectuó ningún cambio administrativo.
 - **Criterio pendiente:** identificar la integración 1143301; decidir si Admin debe conservar bypass `always` o limitarse a `pull_request`; definir un Code Owner con capacidad real de aprobar independientemente antes de activar `require_code_owner_review`; y asegurar que todos los PR puedan producir cada contexto de check exigido. La documentación de GitHub define `actor_id` y `bypass_mode`; la asignación `RepositoryRole` 5 = admin está documentada en [terraform-provider-github](https://github.com/integrations/terraform-provider-github/blob/main/docs/resources/repository_ruleset.md).
 - **Conclusión:** ruleset activo pero no endurecido al nivel de Code Owners; bypass amplio y una integración sin identificar. La protección de main permanece bajo revisión, no aprobada para cierre.
+
+
+---
+
+## 2026-11-26 · Auditoría efectiva de reglas y Code Owners para BASE-04
+
+### Estado observado en GitHub
+
+- **Referencia:** main = 8f8a173341cb1a7dada1878f2a8506b1810a2d2a; ruleset PROTECCION-MAIN-LEGION, ID 27883004, enforcement active, target ~DEFAULT_BRANCH.
+- **Reglas activas verificadas:** PR obligatorio, una aprobación, dismiss de aprobaciones obsoletas, aprobación del último push y resolución de hilos; checks estrictos validar, python-tests, audit-public-links.
+- **Code Owner review:** require_code_owner_review=false. El CODEOWNERS actual contiene * @losmoriartys-cmd; es una asignación global, no una barrera efectiva mientras el ruleset no requiera esa revisión.
+- **Bypass:** RepositoryRole actor ID 5, modo always; Integration actor ID 1143301, modo always, identidad todavía no verificada. La cuenta propietaria/admin conserva current_user_can_bypass=always.
+- **Permisos de actores identificables:** losmoriartys-cmd = admin; claude = read; github-actions[bot] = none. La actividad accesible de los últimos commits tampoco identifica un segundo revisor humano con permiso de escritura.
+
+### Resultado y acciones administrativas pendientes
+
+No se activó require_code_owner_review ni se modificaron reglas de bypass. Con un único Code Owner humano con permiso de escritura, exigir Code Owner approval sin incorporar antes otro revisor independiente podría bloquear el flujo normal de PR. La asignación CODEOWNERS no se presenta como una aprobación independiente.
+
+Pendiente de la cuenta admin del repositorio:
+1. identificar y justificar la integración 1143301; retirar o limitar su bypass always si no es imprescindible;
+2. decidir si el rol admin debe conservar bypass permanente o quedar limitado a los casos excepcionales documentados;
+3. incorporar al menos un mantenedor humano adicional con permiso suficiente y asignación explícita en CODEOWNERS;
+4. recién entonces activar require_code_owner_review=true y verificar el ruleset resultante con una lectura posterior.
+
+La integración GitHub disponible en esta sesión permite leer el ruleset, pero no administrarlo; GET /branches/main/protection devolvió 403. No se efectuó ninguna modificación administrativa ni se infiere que la protección clásica esté configurada.
+
+### Relación con la guardia de assets
+
+El nuevo guard scripts/guard_approved_assets.py bloquea cambios accidentales a 42 assets curados mediante huellas y autorizaciones en dos fases; corre como parte de validar. Esta defensa de CI no elimina el bypass del ruleset: un actor con capacidad de administración podría cambiar los checks o la política, por lo que se documenta como defensa complementaria y no como seguridad absoluta.
+
+El workflow independiente de Google Drive conserva evidencia histórica de roundtrip y de 14/14 JSON críticos, pero su activación automática en main, schedule, rotación y borrado no se consideran habilitados por esa evidencia histórica. Ninguna de esas funciones se activó como parte de esta fase.
+
