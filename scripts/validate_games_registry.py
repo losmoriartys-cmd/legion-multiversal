@@ -85,8 +85,14 @@ def validate_ficha_fields(label: str, bit: str, session: dict, twitch_ids: set) 
                     errors.append(f"{where}: numeros.{key} debe ser entero >= 0 o null.")
             if not isinstance(numeros["fuente"], str) or not numeros["fuente"].strip():
                 errors.append(f"{where}: numeros.fuente es obligatoria: sin fuente no hay dato.")
-            if not isinstance(numeros["capturado"], str) or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", numeros["capturado"]):
+            captured = numeros["capturado"]
+            if not isinstance(captured, str) or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", captured):
                 errors.append(f"{where}: numeros.capturado debe ser una fecha AAAA-MM-DD.")
+            else:
+                try:
+                    date.fromisoformat(captured)
+                except ValueError:
+                    errors.append(f"{where}: numeros.capturado no es una fecha de calendario válida.")
     imagen = session.get("imagen")
     if imagen is not None:
         image_pattern = r"[A-Za-z0-9_-]+(?:/[A-Za-z0-9_-]+)*\.(?:jpg|jpeg|png|webp)"

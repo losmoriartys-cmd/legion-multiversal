@@ -9,6 +9,42 @@
       "to_sha256": "95337f52cabeb6b40c9bd73ccfc28d12789c2b357e014d9b0df45c6142c9ce9f",
       "reason": "Recurso geométrico no publicado creado únicamente para demostrar el flujo A/B de BASE-04; no afecta el sitio.",
       "reference": "Issue #95 / prueba controlada fase A-B"
+    },
+    {
+      "id": "bitacora-ficha-index-html-2026-11-26",
+      "path": "index.html",
+      "action": "update",
+      "from_sha256": "57e1436b0a53dc3d035895c64fad14dd6767c1f25cdec6d7b80efef6611f3649",
+      "to_sha256": "d6cd2190592f1292532b130084d2f237d00c3c3407261ad1809ad1e6c07fe267",
+      "reason": "Actualizar solo las referencias de caché de CSS global y games-registry.js para la ficha accesible de Bitácora; no altera el Hero ni los datos canónicos.",
+      "reference": "Issue #131 / PR #129 · fase A"
+    },
+    {
+      "id": "bitacora-ficha-styles-css-2026-11-26",
+      "path": "styles.css",
+      "action": "update",
+      "from_sha256": "6f0015d0dcab073d38a644ea23c9f9c7aa63d5246fadbd7e1a841986ebab05f2",
+      "to_sha256": "50bf24f9feab769ffa6fe1d49b150f4fcb2f6e004f5184b0f61f8c5b79ff2143",
+      "reason": "Agregar estilos de la ficha de Bitácora: pestañas, paneles, estados vacíos, clips, momentos y métricas con foco visible y adaptación móvil.",
+      "reference": "Issue #131 / PR #129 · fase A"
+    },
+    {
+      "id": "bitacora-ficha-games-schema-2026-11-26",
+      "path": "schemas/games.schema.json",
+      "action": "update",
+      "from_sha256": "48ad54a4551887ae4d643d0fbbc2db128b5458ff1325dc0601d6a8895e7b7014",
+      "to_sha256": "5050d572033bec712946fb52dffca5bb70b57beb0ca5b30e50689ab7fc13d6e9",
+      "reason": "Declarar en el JSON Schema los campos opcionales de la ficha de Bitácora (resumen, clips, números, momentos e imagen) con tipos, límites y patrones coherentes con el validador.",
+      "reference": "Issue #131 / PR #129 · fase A"
+    },
+    {
+      "id": "barfender-bit011-games-data-2026-11-26",
+      "path": "data/games.json",
+      "action": "update",
+      "from_sha256": "72f1ef40325f23f6b9344d61c47c1ce67c2a26f91b1bb19c5c6b48f4b1dcda58",
+      "to_sha256": "ba91392d0e07d13a646d9c92f30e778dc9bfb9d58fdb0218af3640f68563a3b9",
+      "reason": "Registrar BIT-011 con sus cuatro participantes, tres VOD, resumen, cuatro clips verificados y la imagen local BarFenderLos4.jpg en el registro maestro de juegos; no inventa VOD para Akuma ni crea BIT-012 sin evidencia.",
+      "reference": "Issue #131 / PR #130 · fase A"
     }
   ]
 }
