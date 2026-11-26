@@ -2185,19 +2185,35 @@ function openHeroProfile(index, triggerElement = document.activeElement, options
     page.classList.add('is-active');
     page.setAttribute('aria-hidden', 'false');
     setHeroProfileRoute(hero, options.historyMode || 'push');
-    // Alinear la cabecera del expediente con el encabezado fijo del sitio.
-    // El desplazamiento instantáneo evita que la animación deje el perfil debajo del header
-    // mientras el usuario ya está interactuando con las pestañas.
-    const profileHead = page.querySelector('.comic-profile-head');
-    const stickyHeader = document.querySelector('body > header');
-    const headerBottom = stickyHeader?.getBoundingClientRect().bottom || 0;
-    const profileHeadTop = profileHead?.getBoundingClientRect().top ?? page.getBoundingClientRect().top;
+    // Alinear la cabecera del expediente con el encabezado sticky del sitio.
+    // Al cerrar un perfil puede quedar un scroll suave en curso; cancelarlo y volver
+    // a medir después del layout evita que una apertura inmediata herede ese movimiento.
     const rootScroller = document.documentElement;
     const previousScrollBehavior = rootScroller.style.scrollBehavior;
     rootScroller.style.scrollBehavior = 'auto';
-    window.scrollTo({ top: Math.max(0, window.scrollY + profileHeadTop - headerBottom - 12), behavior: 'instant' });
-    rootScroller.style.scrollBehavior = previousScrollBehavior;
-    requestAnimationFrame(() => page.querySelector('[data-profile-tab]')?.focus({preventScroll:true}));
+    const alignProfileHead = () => {
+        const currentHeader = document.querySelector('body > header');
+        const currentHead = page.querySelector('.comic-profile-head');
+        if (!currentHeader || !currentHead) return;
+        const headerBottom = currentHeader.getBoundingClientRect().bottom;
+        const headTop = currentHead.getBoundingClientRect().top;
+        const correction = headTop - headerBottom - 12;
+        if (Math.abs(correction) > 0.5) {
+            window.scrollTo({ top: Math.max(0, window.scrollY + correction), behavior: 'instant' });
+        }
+    };
+    // El primer salto interrumpe cualquier desplazamiento pendiente.
+    window.scrollTo({ top: window.scrollY, behavior: 'instant' });
+    alignProfileHead();
+    // Recalcular tras el layout y una vez más antes de devolver el foco al perfil.
+    requestAnimationFrame(() => {
+        alignProfileHead();
+        requestAnimationFrame(() => {
+            alignProfileHead();
+            rootScroller.style.scrollBehavior = previousScrollBehavior;
+            page.querySelector('[data-profile-tab]')?.focus({preventScroll:true});
+        });
+    });
 }
 function navigateHeroProfile(direction) {
     const entries = getRosterFilteredEntries();
