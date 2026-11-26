@@ -142,7 +142,7 @@
       if(hasPrerendered){
         root.dataset.arsenalReady='static';
         status.textContent='No se pudo actualizar el Arsenal; el contenido HTML sigue disponible. Filtros y ruleta quedaron desactivados.';
-        [search,stateFilter,categoryFilter,playersFilter,rouletteButton,resetButton].forEach(control=>{control.disabled=true;});
+        [search,stateFilter,categoryFilter,playersFilter,rouletteButton,resetButton].forEach(control=>{if(control)control.disabled=true;});
         return null;
       }
       status.textContent='No se pudo conectar con el catálogo compartido.';
