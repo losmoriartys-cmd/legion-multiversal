@@ -1,7 +1,7 @@
 const {test,expect}=require('@playwright/test');
 
-test('Bitácora y Arsenal entregan sus fichas iniciales sin JavaScript',async({browser})=>{
-  const context=await browser.newContext({javaScriptEnabled:false});
+test('Bitácora y Arsenal entregan sus fichas iniciales sin JavaScript',async({browser},testInfo)=>{
+  const context=await browser.newContext({javaScriptEnabled:false,baseURL:testInfo.project.use.baseURL});
   const page=await context.newPage();
   await page.goto('/');
   await expect(page.locator('#collab-registry-grid [data-prerendered="true"]')).toHaveCount(11);
