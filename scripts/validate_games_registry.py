@@ -21,6 +21,11 @@ GAME_KEYS = {
     "descripcion", "jugadores", "fuente_jugadores", "tienda", "portada", "expediente_comercial", "sesiones",
 }
 SESSION_KEYS = {"bit", "fecha", "fuente_fecha", "participantes", "pov", "nota"}
+# Campos opcionales de la ficha de bitácora. Ausente o null = dato no verificado (la web lo muestra como pendiente).
+OPTIONAL_SESSION_KEYS = {"resumen", "clips", "numeros", "momentos"}
+CLIP_KEYS = {"titulo", "canal", "url"}
+NUMBERS_KEYS = {"duracion_vod_s", "vistas_vod", "fuente", "capturado"}
+MOMENT_KEYS = {"t", "texto", "canal"}
 POV_KEYS = {"canal", "url"}
 
 
@@ -39,6 +44,66 @@ def is_https_url(value) -> bool:
 def normalized(value: str) -> str:
     import unicodedata
     return re.sub(r"[^a-z0-9]", "", unicodedata.normalize("NFKD", value).encode("ascii", "ignore").decode("ascii").lower())
+
+
+def validate_ficha_fields(label: str, bit: str, session: dict, twitch_ids: set) -> list[str]:
+    """Valida los campos opcionales de la ficha: resumen, clips, numeros y momentos."""
+    errors: list[str] = []
+    where = f"{label} · {bit}"
+    resumen = session.get("resumen")
+    if resumen is not None and (not isinstance(resumen, str) or not resumen.strip() or len(resumen) > 900):
+        errors.append(f"{where}: resumen debe ser texto de hasta 900 caracteres o null.")
+    clips = session.get("clips")
+    if clips is not None:
+        if not isinstance(clips, list):
+            errors.append(f"{where}: clips debe ser una lista o null.")
+        else:
+            seen = set()
+            for clip in clips:
+                if not isinstance(clip, dict) or set(clip) != CLIP_KEYS:
+                    errors.append(f"{where}: cada clip requiere exactamente {sorted(CLIP_KEYS)}.")
+                    continue
+                if not isinstance(clip["titulo"], str) or not clip["titulo"].strip():
+                    errors.append(f"{where}: clip sin título.")
+                if clip["canal"] not in twitch_ids:
+                    errors.append(f"{where}: canal de clip no es un integrante con Twitch: {clip['canal']}.")
+                url = clip["url"]
+                if not is_https_url(url) or not re.fullmatch(r"https://(?:www\.)?twitch\.tv/[A-Za-z0-9_]+/clip/[A-Za-z0-9_-]+|https://clips\.twitch\.tv/[A-Za-z0-9_-]+", url or ""):
+                    errors.append(f"{where}: URL de clip no es un clip de Twitch limpio: {url}.")
+                elif url in seen:
+                    errors.append(f"{where}: clip duplicado.")
+                else:
+                    seen.add(url)
+    numeros = session.get("numeros")
+    if numeros is not None:
+        if not isinstance(numeros, dict) or set(numeros) != NUMBERS_KEYS:
+            errors.append(f"{where}: numeros requiere exactamente {sorted(NUMBERS_KEYS)} o null.")
+        else:
+            for key in ("duracion_vod_s", "vistas_vod"):
+                value = numeros[key]
+                if value is not None and (not isinstance(value, int) or isinstance(value, bool) or value < 0):
+                    errors.append(f"{where}: numeros.{key} debe ser entero >= 0 o null.")
+            if not isinstance(numeros["fuente"], str) or not numeros["fuente"].strip():
+                errors.append(f"{where}: numeros.fuente es obligatoria: sin fuente no hay dato.")
+            if not isinstance(numeros["capturado"], str) or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", numeros["capturado"]):
+                errors.append(f"{where}: numeros.capturado debe ser una fecha AAAA-MM-DD.")
+    momentos = session.get("momentos")
+    if momentos is not None:
+        if not isinstance(momentos, list):
+            errors.append(f"{where}: momentos debe ser una lista o null.")
+        else:
+            pov_channels = {c.get("canal") for c in session.get("pov", []) if isinstance(c, dict)}
+            for moment in momentos:
+                if not isinstance(moment, dict) or set(moment) != MOMENT_KEYS:
+                    errors.append(f"{where}: cada momento requiere exactamente {sorted(MOMENT_KEYS)}.")
+                    continue
+                if not isinstance(moment["t"], str) or not re.fullmatch(r"\d{1,2}:[0-5]\d:[0-5]\d", moment["t"]):
+                    errors.append(f"{where}: momento con tiempo inválido (usar H:MM:SS): {moment['t']}.")
+                if not isinstance(moment["texto"], str) or not moment["texto"].strip():
+                    errors.append(f"{where}: momento sin texto.")
+                if moment["canal"] not in pov_channels:
+                    errors.append(f"{where}: el momento debe referirse a un canal con POV en esta sesión: {moment['canal']}.")
+    return errors
 
 
 def validate_registry(registry: dict, roster: dict) -> list[str]:
@@ -161,7 +226,7 @@ def validate_registry(registry: dict, roster: dict) -> list[str]:
                 errors.append(f"{label}: cada sesión debe ser un objeto.")
                 continue
             missing_session = SESSION_KEYS - set(session)
-            extra_session = set(session) - SESSION_KEYS
+            extra_session = set(session) - SESSION_KEYS - OPTIONAL_SESSION_KEYS
             if missing_session:
                 errors.append(f"{label}: sesión incompleta; faltan {', '.join(sorted(missing_session))}.")
             if extra_session:
@@ -224,6 +289,7 @@ def validate_registry(registry: dict, roster: dict) -> list[str]:
             note = session.get("nota")
             if note is not None and (not isinstance(note, str) or not note.strip()):
                 errors.append(f"{label} · {bit}: nota debe ser texto no vacío o null.")
+            errors.extend(validate_ficha_fields(label, bit, session, twitch_ids))
 
     if len(game_ids) != len(games):
         errors.append("El registro contiene IDs de juegos repetidos o inválidos.")

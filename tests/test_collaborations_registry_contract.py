@@ -12,9 +12,9 @@ CSS = (ROOT / "styles.css").read_text(encoding="utf-8")
 class CollaborationsRegistryContractTests(unittest.TestCase):
     def test_chapter_07_uses_the_shared_registry_and_roster_sources(self):
         self.assertIn('id="collab-games-registry"', HTML)
-        self.assertIn('src="./games-registry.js?v=20261122-collab-registry-3"', HTML)
+        self.assertIn('src="./games-registry.js?v=20261126-ficha-tabs-1"', HTML)
         self.assertIn("fetch('./data/games.json'", SCRIPT)
-        self.assertIn("./styles.css?v=20261121-arsenal-registry-1", HTML)
+        self.assertIn("./styles.css?v=20261126-ficha-tabs-1", HTML)
         self.assertIn("fetch('./data/roster.json'", SCRIPT)
         self.assertIn("fetch('./data.json'", SCRIPT)
 
