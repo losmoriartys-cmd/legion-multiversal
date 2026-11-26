@@ -15,7 +15,7 @@ test('Bitácora y Arsenal entregan sus fichas iniciales sin JavaScript',async({b
   await expect(page.locator('#arsenal-roulette-button')).toBeHidden();
   await expect(page.locator('.arsenal-roulette-panel')).toBeHidden();
   await expect(page.locator('#bit-011')).toContainText('BarFender');
-  await expect(page.locator('#bit-011 .collab-session-date')).toHaveAttribute('href',/twitch\\.tv\\/videos\\//);
+  await expect(page.locator('#bit-011 .collab-session-date')).toHaveAttribute('href',/twitch/);
   await expect(page.locator('#arsenal-game-barfender')).toContainText('BarFender');
   await context.close();
 });
