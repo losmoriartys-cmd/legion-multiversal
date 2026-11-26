@@ -139,6 +139,27 @@ def render_collab_session(game: dict, session: dict, names: dict[str, str]) -> s
             f'<figcaption>UNA SESIÓN · PUNTOS DE VISTA DE LA LEGIÓN</figcaption></figure>'
         )
     summary = session.get("resumen") or session.get("nota") or "Resumen editorial pendiente de completar."
+    numbers = session.get("numeros") or {}
+    number_parts = []
+    if numbers.get("duracion_vod_s") is not None:
+        seconds = int(numbers["duracion_vod_s"])
+        hours, remainder = divmod(seconds, 3600)
+        minutes, seconds = divmod(remainder, 60)
+        number_parts.append("Duración VOD: " + (f"{hours} h " if hours else "") + f"{minutes} min {seconds} s")
+    if numbers.get("vistas_vod") is not None:
+        number_parts.append("Vistas VOD: " + str(numbers["vistas_vod"]))
+    if numbers.get("fuente"):
+        number_parts.append("Fuente: " + str(numbers["fuente"]))
+    if numbers.get("capturado"):
+        number_parts.append("Capturado: " + date_label(numbers["capturado"]))
+    numbers_html = f'<p class="collab-session-note">{" · ".join(esc(item) for item in number_parts)}</p>' if number_parts else ""
+    moments = session.get("momentos") or []
+    moments_html = (
+        '<ul class="collab-prerender-moments">' + "".join(
+            f'<li><strong>{esc(moment.get("t"))}</strong> · {esc(moment.get("texto"))} · {esc(names.get(str(moment.get("canal") or ""), moment.get("canal") or "Canal"))}</li>'
+            for moment in moments
+        ) + '</ul>'
+    ) if moments else ""
     player_range = game.get("jugadores")
     player_label = ""
     if isinstance(player_range, dict):
@@ -161,9 +182,9 @@ def render_collab_session(game: dict, session: dict, names: dict[str, str]) -> s
         f'<details class="collab-ficha"><summary><span>ABRIR FICHA</span><span class="collab-ficha-close">CERRAR FICHA</span></summary>'
         f'<div class="collab-session-content"><div class="collab-game-meta"><span class="collab-game-meta-item">{player_label}</span>'
         f'<span class="collab-game-meta-item">{esc(game.get("modalidad") or "Modalidad sin verificar")}</span></div>'
-        f'{session_image}<p class="collab-session-note">{esc(summary)}</p>'
+        f'{session_image}<p class="collab-session-note">{esc(summary)}</p>{numbers_html}'
         f'<h5>JUGARON</h5><ul class="collab-prerender-participants">{"".join(participant_items)}</ul>'
-        f'<h5>POV DISPONIBLES</h5>{pov_html}<h5>CLIPS DESTACADOS</h5>{clips_html}'
+        f'<h5>POV DISPONIBLES</h5>{pov_html}{moments_html}<h5>CLIPS DESTACADOS</h5>{clips_html}'
         f'<div class="collab-session-actions">{"".join(links)}</div></div></details></article>'
     )
 
