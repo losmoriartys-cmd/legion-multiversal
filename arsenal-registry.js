@@ -74,7 +74,7 @@
     const source=safeHttps(game.fuente_jugadores);
     const sourceLink=source?'<a class="arsenal-player-source" href="'+escapeHtml(source)+'" target="_blank" rel="noopener noreferrer">FUENTE DE JUGADORES ↗</a>':'';
     const povCount=sessions.reduce((sum,session)=>sum+(session.pov||[]).length,0);
-    const evidence=sessions.length?sessions.length+(sessions.length===1?' sesión BIT':' sesiones BIT')+' · '+povCount+' POV disponibles':(game.expediente_comercial?'Registro comercial separado':'Sin sesión documentada');
+    const evidence=sessions.length?sessions.length+(sessions.length===1?' sesión BIT':' sesiones BIT')+' · '+povCount+' POV disponibles':(game.expediente_comercial?'Archivo histórico EXP-001':'Sin sesión documentada');
     return '<article class="premium-card arsenal-card arsenal-registry-card" id="arsenal-game-'+escapeHtml(game.id)+'" data-arsenal-game="'+escapeHtml(game.id)+'" data-game-id="'+escapeHtml(game.id)+'" data-arsenal-state="'+stateOf(game)+'">'+
       renderCover(game)+'<div class="arsenal-registry-card-body">'+
       '<div class="premium-kicker">MISIÓN '+String(index+1).padStart(2,'0')+' · '+escapeHtml(stateLabel(game))+'</div>'+
@@ -110,6 +110,7 @@
       '';
   }
   function render(){
+    if(!games.length&&grid.querySelector('[data-prerendered="true"]'))return;
     visibleGames=filtered();
     grid.innerHTML=visibleGames.length?visibleGames.map(renderGame).join(''):
       '<div class="arsenal-registry-empty"><strong>NO HAY JUEGOS CON ESOS FILTROS.</strong><p>Probá otra categoría, cantidad de jugadores o búsqueda.</p></div>';
@@ -138,6 +139,13 @@
     }catch(error){
       console.error('No se pudo cargar el Arsenal compartido:',error);
       root.dataset.arsenalReady='error';root.setAttribute('aria-busy','false');grid.setAttribute('aria-busy','false');
+      const hasPrerendered=Boolean(grid.querySelector('[data-prerendered="true"]'));
+      if(hasPrerendered){
+        root.dataset.arsenalReady='static';
+        status.textContent='No se pudo actualizar el Arsenal; el contenido HTML sigue disponible. Filtros y ruleta quedaron desactivados.';
+        [search,stateFilter,categoryFilter,playersFilter,rouletteButton,resetButton].forEach(control=>{if(control)control.disabled=true;});
+        return null;
+      }
       status.textContent='No se pudo conectar con el catálogo compartido.';
       grid.innerHTML='<div class="arsenal-registry-empty" role="alert"><strong>EL CATÁLOGO NO ESTÁ DISPONIBLE.</strong><p>Los registros no se pierden; podés volver a intentar la carga.</p><button type="button" id="arsenal-retry">REINTENTAR</button></div>';
       document.getElementById('arsenal-retry')?.addEventListener('click',load);return null;

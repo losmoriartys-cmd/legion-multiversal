@@ -34,7 +34,7 @@ class SiteEditorialImageContract(unittest.TestCase):
 
     def test_all_static_images_declare_verified_intrinsic_dimensions(self):
         images = re.findall(r"<img\b[^>]*>", self.html, flags=re.IGNORECASE)
-        self.assertEqual(len(images), 25)
+        self.assertEqual(len(images), 26)
         for image in images:
             self.assertRegex(image, r'\bwidth="[1-9][0-9]*"')
             self.assertRegex(image, r'\bheight="[1-9][0-9]*"')
@@ -78,7 +78,7 @@ class SiteEditorialImageContract(unittest.TestCase):
         self.assertEqual(chapter.count('href="#collab-games-registry"'), 1)
         self.assertNotIn('href="./bitacora-preview.html"', chapter)
         self.assertIn('id="collab-registry-grid"', chapter)
-        self.assertIn('data-collab-ready="false"', chapter)
+        self.assertIn('data-collab-ready="prerendered"', chapter)
         self.assertNotIn('assets/carnet/', chapter)
         self.assertNotIn('assets/ladymoriarty.jpg', chapter)
         self.assertNotIn('assets/rod3r1k.jpg', chapter)

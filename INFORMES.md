@@ -5,7 +5,7 @@
 
 ## Estado actual reutilizable · ya existe y no debe reconstruirse desde cero
 
-- [x] **Registro maestro de juegos:** games.json, schemas/games.schema.json y scripts/validate_games_registry.py; 18 juegos, 10 sesiones BIT y 11 POV en main al último corte integrado. La propuesta BarFender BIT-011/3 POV se encuentra en revisión en PR #130; no se contabiliza como integrada hasta su merge.
+- [x] **Registro maestro de juegos:** `data/games.json`, `schemas/games.schema.json` y `scripts/validate_games_registry.py`; 18 juegos en catálogo, 11 juegos con sesión, 11 sesiones BIT, 14 POV, 6 integrantes participantes y 7 juegos por descubrir. BarFender BIT-011 está integrado por PR #130 (SHA `21a8660a251ca34a02f326eccd37fab649ca1fcc`): 4 participantes, 3 POV, 4 clips e imagen `BarFenderLos4.jpg`. EXP-001 queda como archivo histórico, no comercial.
 - [x] **Identidad del Roster y expedientes BASE-01C:** `data/roster.json` conserva los ocho perfiles; `data/creator-records.json` quedó integrado por PR #96 (`63211d1`). La equivalencia editorial se verificó por blob SHA y CI/Playwright posterior al merge. La comprobación HTTP directa del dominio público sigue pendiente por una limitación DNS del entorno.
 - [x] **Infraestructura QA común y regresión visual:** matriz sincronizada con los 11 paneles reales (`0, 1, 2, 3, 6, 8, 9, 10, 11, 12, 13`); navegación, overflow y responsive en cinco viewports (1440, 1024, 768, 390 y 360 px); 22 capturas por ejecución; comparaciones PNG exactas de Roster, Estadísticas y Bitácora con evidencia en CI.
 - [x] **Validación general y QA portable:** existen workflows para contratos Python, JSON, sintaxis, imágenes, accesibilidad estática, enlaces/anclas y publicación de evidencias.
@@ -53,16 +53,15 @@
 
 - **HEAD con fallo histórico documentado:** `66d97a35420ebb3bed6c0de878732a7836ac8385`.
 
-### Próximo corte editorial · BarFender como colaboración de la Legión
+### BarFender · integración editorial cerrada en PR #130
+- [x] BIT-011 incorporado al registro maestro como colaboración ordinaria: 4 participantes, 3 POV y 4 clips verificados.
+- [x] Imagen grupal `BarFenderLos4.jpg` reutilizada en la ficha; portada de Steam y foto repetida retiradas del archivo.
+- [x] EXP-001 conservado como enlace de apoyo dentro de un archivo histórico plegado; no existe tarjeta ni filtro comercial independiente.
+- [x] Segunda noche del 11/11 conservada dentro del archivo con métricas del panel oficial y aviso explícito de ausencia de VOD.
+- [ ] BIT-012 permanece bloqueado hasta verificar VOD/enlaces audiovisuales; no se inventan POV ni duraciones.
 
-- [~] Registrar BarFender con el mismo modelo editorial que las demás colaboraciones. **En PR #130:** BIT-011 · 05/11/2026 · cuatro participantes y tres POV enlazados; Akuma figura como participante sin VOD propio registrado.
-- [~] Retirar la clasificación `commercial` del Arsenal. **En PR #130:** desaparece el filtro/estado comercial y BarFender entra en el conteo ordinario; `EXP-001` se conserva como referencia histórica al expediente, no como sesión ni como categoría comercial.
-- [~] Narrar el primer encuentro como **“Primera misión juntos como Legión”**: el grupo recibió las claves para jugar, sin insinuar patrocinio ni pago. El texto de BIT-011 ya usa esa formulación.
-- [ ] Incorporar la segunda etapa como continuación con el juego completo y el mismo equipo. **Bloqueado por evidencia:** no hay VOD registrado de la noche del 11/11/2026; solo constan cifras del panel de Twitch. No crear BIT-012 ni atribuir POV hasta verificar los enlaces.
-- [ ] Asociar los POV de Rod3R1k y Akuma a esa segunda etapa cuando existan VOD concretos; no duplicar sesiones ni contabilizar un POV como una sesión aparte.
-- [ ] Reutilizar `BarFenderLos4.jpg` como imagen de apoyo del registro grupal, sin repetir la misma imagen innecesariamente.
-- **Criterio de publicación:** una sola ficha de juego en Arsenal y entradas de sesión en Bitácora con IDs estables; primera misión y partida completa como hitos relacionados. Mantener pendientes los datos sin evidencia.
-- **Estado de integración:** PR #130 parte de la rama de ficha #129; sus checks y el merge siguen pendientes. Los [x] solo se marcarán después de integrar en `main` y verificar la publicación.
+**Estado:** PR #130 integrado en `main` (`21a8660a251ca34a02f326eccd37fab649ca1fcc`); `validar`, `python-tests`, `audit-public-links`, `qa-capitulos`, `qa-portable` y Cloudflare Pages SUCCESS.
+
 
 ### BASE-02 · Esquemas y validación que bloqueen publicaciones inválidas
 - [ ] Completar esquemas JSON para todos los documentos de data/: roster, juegos, horarios, enlaces, sesiones, VOD y clips, con campos obligatorios, opcionales y reglas de null explícitas.
@@ -85,26 +84,25 @@
 
 **Pendiente independiente (no bloqueante para el cierre del issue #94):** definir presupuestos Lighthouse móviles y de escritorio (rendimiento, accesibilidad, buenas prácticas y SEO), con umbrales acordados que bloqueen regresiones relevantes. El workflow de medición ya existe; este trabajo conserva su propio seguimiento.
 
-### BASE-04 · Revisión obligatoria de archivos clave
-- [ ] Incorporar .github/CODEOWNERS para data/, schemas/, colectores, workflows, generadores, navegación y archivos críticos del Roster.
-- [ ] Configurar la protección de main: cambios por PR, checks requeridos y aprobación de una persona mantenedora distinta del autor cuando la configuración del repositorio lo permita.
-- [ ] Documentar quién puede aprobar modificaciones de datos sensibles para la identidad pública y qué evidencia debe acompañar un cambio.
+### BASE-04 · Revisión obligatoria de archivos clave <badge>
+- [x] Protección del inventario crítico mediante `scripts/check_resource_change_policy.py` y el ledger append-only `data/resource-change-authorizations.json`.
+- [x] Flujo de dos fases probado: autorización SHA-256 previa en PR separado y aplicación en PR posterior.
+- [x] Validación de 14 archivos críticos, detección de omisiones y evidencia de recuperación; issue #95 cerrado con aceptación técnica.
+- [x] Ruleset `PROTECCION-MAIN-LEGION` activo: PR obligatorio, aprobación requerida y bypass administrativo puntual documentado en #113.
 
-**Aceptación:** las rutas protegidas no pueden integrarse con cambios directos sin revisión y checks; se comprueba la configuración efectiva, no solo la presencia del archivo CODEOWNERS.
+**Cierre técnico:** issue #95 cerrado. Los controles de Code Owner y la identidad de integración quedan como seguimiento administrativo separado; no invalidan el cierre técnico ni autorizan cambios fuera del proceso.
 
----
 
-## P0 · Contenido disponible sin depender de JavaScript
+### WEB-01 · Prerender de Bitácora y Arsenal **Estado:** EN IMPLEMENTACIÓN
+**Corte de datos vigente:** 18 juegos en catálogo · 11 juegos con sesión · 11 sesiones BIT · 14 POV · 6 integrantes participantes · 7 juegos por descubrir · 1 archivo histórico EXP-001 (sin clasificación comercial).
 
-### WEB-01 · Prerender de Bitácora y Arsenal
-- [ ] Generar en build el HTML inicial de las 10 sesiones BIT y las 18 fichas del Arsenal a partir de games.json y sus referencias canónicas.
-- [ ] Dejar filtros, búsqueda, matriz, ruleta y navegación como mejoras progresivas de JavaScript, sin usar el script como única vía para ver el contenido.
-- [ ] Mostrar el resumen inicial desde el HTML generado: 10 juegos · 11 POV · 5 creadores · 1 expediente comercial, con criterio de conteo documentado. El canal conjunto Los Moriartys no debe contarse como un creador individual adicional.
-- [ ] Reemplazar los indicadores «—» y «Conectando…» como contenido principal por datos prerenderizados; usar skeletons solo para operaciones que realmente estén cargando.
-- [ ] Mantener mensaje de error comprensible y botón «Reintentar» si la mejora dinámica falla, sin borrar el HTML disponible.
-- [ ] Añadir pruebas para HTML con JavaScript deshabilitado, lectura por bots/vistas previas, errores de carga y conciliación exacta entre HTML generado y fuente maestra.
+- [~] Generar desde `data/games.json` el HTML inicial de las 11 sesiones y las 18 fichas del Arsenal.
+- [~] Mantener los JSON como única fuente de verdad, con generador `--write/--check` y pruebas de sincronización.
+- [~] Conservar el HTML estático ante JavaScript deshabilitado o fallo del fetch; filtros y ruleta quedan como mejora progresiva.
+- [x] Eliminar el rótulo de expediente comercial y representar EXP-001 como archivo histórico vinculado a BIT-011.
 
-**Aceptación:** las sesiones y juegos aparecen en el HTML recibido antes de ejecutar JavaScript; no hay tarjetas vacías ni contadores «—» en el documento inicial.
+**Aceptación:** contenido completo en HTML inicial, conteos exactos, mejora dinámica sin duplicación, fallback conservado ante fallo de red y pruebas Python/Playwright/QA/Cloudflare en verde. Seguimiento en issue #135.
+
 
 ### WEB-02 · Retirar la vista previa de prueba del recorrido público
 - [ ] Quitar del Roster el botón «ABRIR BITÁCORA GENERAL (VISTA PREVIA)» que apunta a bitacora-preview.html.
@@ -115,46 +113,21 @@
 
 ---
 
-## P1 · Expediente BarFender · EXP-001
+## P1 · Archivo histórico BarFender · EXP-001 — supersedido por BIT-011
 
-### EXP-01 · Reorganizar el expediente en cinco pestañas
-- [ ] Dividir el contenido en **Resumen, Equipo, Registros, Clips y Datos y metodología**.
-- [ ] Mantener el contexto del juego y de la experiencia en Resumen; integrantes y canales en Equipo; VOD en Registros; destacados en Clips; fuentes, métricas y límites en Datos y metodología.
-- [ ] Conservar los materiales históricos existentes, sin reemplazar fotografías ni clips aprobados por duplicados.
-- [ ] Aplicar navegación por teclado, estados de pestaña accesibles, foco visible y adaptación móvil.
+**Estado:** PR #130 integró el contenido útil en la ficha de juego y dejó EXP-001 como material de apoyo plegado. No continuar una ficha comercial independiente ni generar un PDF de venta separado.
 
-### EXP-02 · Eliminar repeticiones y corregir numeración interna
-- [ ] Presentar desarrollador y editor una sola vez en una caja de datos del juego.
-- [ ] Mostrar el dato «3 VOD públicos» y sus duraciones en un único lugar; evitar repetir «3 VOD de ~1 h 14» en tres bloques.
-- [ ] Consolidar la mención a Keymailer en un único aviso de transparencia, con enlace al criterio general de Alianzas.
-- [ ] Reducir «Valor para marcas» a dos líneas y un enlace a Alianzas/Para marcas, sin duplicar la propuesta comercial.
-- [ ] Reiniciar la numeración dentro de EXP-001 con apartados A–E o rótulos propios del expediente; no continuar numeración como si fueran capítulos independientes.
-- [ ] Mantener separado el ID EXP-001 de los IDs de sesión BIT-###.
-
-**Aceptación:** cada dato factual o aclaración comercial se explica una vez; la jerarquía visual distingue capítulo, expediente y secciones internas.
-
-### EXP-03 · Colores de identidad en el expediente
-- [ ] Reutilizar las variables de color canónicas de cada creador en Equipo, botones de VOD y bordes/detalles de clips.
-- [ ] Mantener contraste suficiente y un indicador textual; el color nunca debe ser el único medio para distinguir a una persona o un estado.
-- [ ] No inventar una paleta ni cambiar las identidades cromáticas sin validar los perfiles del Roster.
-
-### EXP-04 · Ficha comercial imprimible de una página
-- [ ] Crear una vista de impresión de una página con credenciales, formatos, resumen de BarFender, datos respaldables y contacto.
-- [ ] Generar la ficha desde los mismos datos canónicos del sitio; incluir fecha de actualización y fuentes/metodología pertinentes.
-- [ ] Añadir «Imprimir / Guardar PDF», CSS de impresión y pruebas de paginado para evitar cortes, páginas en blanco o texto ilegible.
-- [ ] No duplicar manualmente métricas o credenciales en un archivo independiente que pueda quedar desactualizado.
-
-**Aceptación:** PDF de una página legible, actualizado desde datos del sitio y con información comercial verificable.
+- [x] Resumen, integrantes, POV y clips centralizados en BIT-011.
+- [x] Repeticiones de fotografías y portada eliminadas del archivo; se reutiliza `BarFenderLos4.jpg` una sola vez.
+- [x] Material histórico EXP-001 accesible desde la ficha, sin filtro ni categoría comercial.
+- [x] Segunda noche del 11/11 conservada como registro auxiliar de panel, claramente marcada sin VOD y fuera del conteo BIT.
+- [ ] BIT-012 solo cuando haya VOD público y enlaces verificables.
 
 ### EXP-05 · Validación externa con autorización expresa
-- [ ] Solicitar a Proto Division y/o Rock Paper Publisher una devolución sobre la experiencia BarFender, indicando que su publicación será pública.
-- [ ] Obtener autorización expresa para citar el comentario, el nombre y el cargo de quien lo emita; conservar la autorización.
+- [ ] Solicitar a Proto Division y/o Rock Paper Publisher una devolución solo si se decide publicar un testimonio; la publicación será pública y requerirá autorización expresa.
 - [ ] Si no hay respuesta o permiso, no publicar testimonio ni insinuar respaldo del estudio/publisher.
 
-**Aceptación:** testimonio publicado solo con fuente, atribución y permiso comprobables; la ausencia de respuesta no bloquea el resto del expediente.
-
----
-
+**Aceptación:** cualquier testimonio se publica solo con fuente, atribución y permiso comprobables; no bloquea el resto del proyecto.
 ## P1 · Credibilidad comercial y difusión internacional
 
 ### COM-01 · Página «Para marcas» en inglés
@@ -164,7 +137,7 @@
 - [ ] Revisar terminología profesional para estudios, publishers y agencias internacionales.
 
 ### COM-02 · PDF comercial descargable
-- [ ] Incorporar la ficha de una página definida en EXP-04 al recorrido «Para marcas».
+- [ ] Definir una ficha general de medios de una página desde los datos canónicos del sitio; no reutilizar EXP-001 como presentación comercial independiente.
 - [ ] Incluir credenciales, formatos posibles, caso BarFender, contacto y fecha de actualización.
 - [ ] Generar desde los mismos datos que HTML; probar versión en español e inglés cuando exista la traducción.
 
@@ -228,7 +201,7 @@
 - [ ] En móvil, usar desplazamiento horizontal contenido dentro de la matriz, sin overflow del documento.
 
 ### BIT-02 · Resumen, lectura y narrativa por sesión
-- [ ] Mostrar al comienzo el resumen estable de 10 juegos, 11 POV, 5 creadores y 1 expediente comercial, derivado del registro maestro en build.
+- [ ] Mostrar al comienzo el resumen estable de 11 juegos jugados, 11 sesiones BIT, 14 POV, 6 integrantes y 1 archivo histórico EXP-001, derivado del registro maestro en build.
 - [ ] Añadir una línea editorial por sesión: qué se jugó, quiénes participaron y qué momento vale la pena descubrir.
 - [ ] Completar nota con información aportada o respaldada por la fuente; si no hay contexto verificable, dejarlo vacío o marcarlo pendiente.
 - [ ] Evitar duplicar contadores o crear resúmenes manuales que se desincronicen.
@@ -296,7 +269,7 @@
 ## Orden de ejecución acordado
 
 1. **Primero · prevenir roturas:** BASE-01 a BASE-04, WEB-01 y WEB-02. La migración de datos debe ser gradual, con pruebas antes de retirar rutas existentes.
-2. **Después · credibilidad comercial:** EXP-01 a EXP-04, COM-01 y COM-02. La validación externa EXP-05 depende de autorización expresa del estudio/publisher y no se fabrica.
+2. **Después · credibilidad comercial:** COM-01, COM-02 y COM-03. BarFender EXP-001 queda como archivo histórico subordinado a BIT-011, no como expediente comercial independiente. La validación externa EXP-05 depende de autorización expresa del estudio/publisher y no se fabrica.
 3. **Luego · crecimiento estructurado:** URL-01, URL-02, LIFE-01 y LIFE-04.
 4. **Luego · contenido y medición:** VOD-01 a VOD-03, BIT-01 a BIT-03 y LIFE-02.
 5. **Cuando estén listos los materiales:** LIFE-03 (tráiler real) e IMG-01/IMG-02; PERF-01 se trabaja en paralelo a la evolución visual.

@@ -256,6 +256,7 @@
     });
   }
   function render() {
+    if (!games.length && grid.querySelector('[data-prerendered="true"]')) return;
     const visible = filteredSessions();
     grid.innerHTML = visible.length ? visible.map(renderSession).join('') :
       '<div class="collab-registry-empty"><strong>NO ENCONTRAMOS SESIONES CON ESOS FILTROS.</strong><p>Probá con otra palabra, categoría o creador.</p><button type="button" id="collab-reset-filters">LIMPIAR FILTROS</button></div>';
@@ -324,6 +325,13 @@
       section.dataset.collabReady = 'error';
       section.setAttribute('aria-busy', 'false');
       grid.setAttribute('aria-busy', 'false');
+      const hasPrerendered = Boolean(grid.querySelector('[data-prerendered="true"]'));
+      if (hasPrerendered) {
+        section.dataset.collabReady = 'static';
+        status.textContent = 'No se pudo actualizar la Bitácora; el contenido HTML sigue disponible. Los filtros quedaron desactivados.';
+        [searchInput, categorySelect, creatorSelect].forEach(function (control) { if (control) control.disabled = true; });
+        return null;
+      }
       status.textContent = 'No se pudo conectar con el registro de colaboraciones.';
       grid.innerHTML = '<div class="collab-registry-empty" role="alert"><strong>EL ARCHIVO NO ESTÁ DISPONIBLE.</strong><p>Los registros se conservan en el catálogo maestro. Podés volver a intentar la carga.</p><button type="button" id="collab-retry-registry">REINTENTAR</button></div>';
       document.getElementById('collab-retry-registry')?.addEventListener('click', loadRegistry);
