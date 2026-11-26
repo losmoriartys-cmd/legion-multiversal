@@ -141,7 +141,10 @@ class ResourceChangeGateTests(unittest.TestCase):
             ("M", [".github/workflows/validar-sitio.yml"]),
             ("A", ["scripts/check_resource_change_policy.py"])
         ]
-        errors = self.evaluate(changed, baseline=EMPTY, current=EMPTY)
+        errors = self.evaluate(
+            changed, baseline=EMPTY, current=EMPTY,
+            before=lambda path: None if path == "data/resource-protection-policy.json" else "a" * 64
+        )
         self.assertEqual(errors, [], errors)
 
 
