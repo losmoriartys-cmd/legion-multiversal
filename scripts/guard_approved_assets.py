@@ -220,9 +220,14 @@ def validate_approvals_against_base(
             if before_blob != "absent":
                 errors.append(f"add no autorizado: before_blob debe ser absent para {path}")
 
-        # Phase A never writes the proposed bytes. It only records their expected blob.
-        if (ROOT / path).exists() or (ROOT / path).is_symlink():
-            errors.append(f"Fase A inválida: {path} debe permanecer ausente del árbol de trabajo")
+        # Phase A never writes the proposed bytes. A replacement keeps the old
+        # file unchanged; an addition keeps the proposed path absent.
+        if operation == "replace":
+            if blob_in_worktree(path) != before_blob:
+                errors.append(f"Fase A inválida: el asset existente debe permanecer intacto: {path}")
+        elif operation == "add":
+            if (ROOT / path).exists() or (ROOT / path).is_symlink():
+                errors.append(f"Fase A inválida: la nueva ruta debe permanecer ausente: {path}")
     return errors
 
 
