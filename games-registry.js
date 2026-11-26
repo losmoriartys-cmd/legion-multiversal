@@ -328,7 +328,7 @@
       if (hasPrerendered) {
         section.dataset.collabReady = 'static';
         status.textContent = 'No se pudo actualizar la Bitácora; el contenido HTML sigue disponible. Los filtros quedaron desactivados.';
-        [searchInput, categorySelect, creatorSelect].forEach(function (control) { control.disabled = true; });
+        [searchInput, categorySelect, creatorSelect].forEach(function (control) { if (control) control.disabled = true; });
         return null;
       }
       status.textContent = 'No se pudo conectar con el registro de colaboraciones.';
