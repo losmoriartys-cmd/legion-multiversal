@@ -136,7 +136,7 @@ def external_resources(sources: dict[str, list[str]]) -> tuple[list[dict], list[
     families = []
     seen_urls = set()
     seen_families = set()
-    url_re = re.compile(r"https://[^\s\"'<>)]+)
+    url_re = re.compile(r"https://\S+")
 
     for source, lines in sources.items():
         suffix = PurePosixPath(source).suffix.lower()
@@ -144,13 +144,13 @@ def external_resources(sources: dict[str, list[str]]) -> tuple[list[dict], list[
             continue
         for number, line in enumerate(lines, 1):
             declares_font_url = re.search(
-                r"(?:href|src)\s*=|url\s*\(|@import\s+,
+                r"(?:href|src)\s*=|url\s*\(|@import\s+",
                 line,
                 re.IGNORECASE,
             )
             if declares_font_url and any(domain in line for domain in FONT_DOMAINS):
-                for url in url_re.findall(line):
-                    url = url.rstrip(";,")
+                for raw_url in url_re.findall(line):
+                    url = raw_url.split('"', 1)[0].split("'", 1)[0].split(">", 1)[0].split(")", 1)[0].rstrip(";,")
                     if any(domain in url for domain in FONT_DOMAINS) and url not in seen_urls:
                         seen_urls.add(url)
                         urls.append({
