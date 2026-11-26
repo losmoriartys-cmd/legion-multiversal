@@ -318,7 +318,7 @@ def main() -> int:
             start_marker, end_marker = MARKERS[key]
             left = source.index(start_marker) + len(start_marker)
             right = source.index(end_marker, left)
-            actual = source[left:right].strip("\\n")
+            actual = source[left:right].strip("\n")
             if actual != generated:
                 limit = min(len(actual), len(generated))
                 offset = next((index for index in range(limit) if actual[index] != generated[index]), limit)
