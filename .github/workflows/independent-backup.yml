@@ -3,6 +3,7 @@ name: Backup independiente del repositorio
 on:
   push:
     branches:
+      - main
       - work/base02-candidate-reconciled
     paths:
       - '.github/workflows/independent-backup.yml'
@@ -10,7 +11,13 @@ on:
       - 'scripts/google_drive_restore.py'
       - 'scripts/verify_critical_restore.py'
       - 'scripts/create_repo_backup.sh'
+      - 'scripts/audit_resource_inventory.py'
+      - 'scripts/check_resource_change_policy.py'
+      - 'tests/test_resource_protection.py'
+      - 'data/resource-protection-policy.json'
+      - 'data/resource-change-authorizations.json'
       - 'docs/DATA_PROTECTION.md'
+      - 'docs/RESOURCE_PROTECTION.md'
       - 'INFORMES.md'
   workflow_dispatch:
 
