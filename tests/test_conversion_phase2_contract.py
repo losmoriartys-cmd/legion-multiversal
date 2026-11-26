@@ -72,8 +72,8 @@ class ConversionPhase2Contract(unittest.TestCase):
         self.assertIn('id="arsenal-grid"', arsenal)
         self.assertIn('data-arsenal-ready="false"', arsenal)
         self.assertEqual(len(games), 18)
-        self.assertEqual(len(sessions), 10)
-        self.assertEqual(len(povs), 11)
+        self.assertEqual(len(sessions), 11)
+        self.assertEqual(len(povs), 14)
         self.assertNotIn("11. BarFender", arsenal)
         self.assertNotIn("El historial de campañas y accesos se retiró", arsenal)
 

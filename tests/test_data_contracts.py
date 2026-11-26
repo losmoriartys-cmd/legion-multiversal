@@ -88,11 +88,11 @@ class CanonicalDataContractTests(unittest.TestCase):
         self.assertNotIn("pato-oratoris", self.documents["clips-data.json"]["creators"])
         self.assertIn("pato-oratoris", self.documents["platform-stats.json"]["creators"])
 
-    def test_barfender_commercial_expediente_stays_outside_bit_sessions(self):
+    def test_barfender_keeps_exp001_and_is_registered_as_a_bit_session(self):
         games = self.documents["data/games.json"]
         barfender = next(game for game in games["juegos"] if game["id"] == "barfender")
         self.assertEqual(barfender["expediente_comercial"], "EXP-001")
-        self.assertEqual(barfender["sesiones"], [])
+        self.assertEqual([session["bit"] for session in barfender["sesiones"]], ["BIT-011"])
         self.assertFalse(any(session["bit"] == "EXP-001" for game in games["juegos"] for session in game["sesiones"]))
 
     def test_generated_twitch_feed_keeps_archived_channels_without_promoting_them(self):

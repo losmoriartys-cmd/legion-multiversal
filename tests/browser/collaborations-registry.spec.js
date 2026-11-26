@@ -8,13 +8,13 @@ test.beforeEach(async({page})=>{
 
 test('Capítulo 07 muestra las diez sesiones desde el registro maestro',async({page})=>{
   const cards=page.locator('#collab-registry-grid [data-collab-session]');
-  await expect(cards).toHaveCount(10);
-  await expect(page.locator('#collab-registry-summary')).toContainText('10');
+  await expect(cards).toHaveCount(11);
   await expect(page.locator('#collab-registry-summary')).toContainText('11');
+  await expect(page.locator('#collab-registry-summary')).toContainText('14');
   await expect(page.locator('#collab-registry-summary')).toContainText('6');
-  await expect(page.locator('#collab-registry-status')).toContainText('10 sesiones visibles');
+  await expect(page.locator('#collab-registry-status')).toContainText('11 sesiones visibles');
   await expect(cards.filter({hasText:'BIT-001'}).first()).toContainText('Escape the Backrooms');
-  await expect(page.locator('#collab-registry-grid a.collab-pov-link')).toHaveCount(11);
+  await expect(page.locator('#collab-registry-grid a.collab-pov-link')).toHaveCount(14);
 });
 
 test('Among Us distingue cuatro participantes de sus dos canales POV',async({page})=>{

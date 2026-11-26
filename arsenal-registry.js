@@ -28,13 +28,11 @@
   }
   function stateOf(game){
     if((game.sesiones||[]).length)return 'documented';
-    if(game.expediente_comercial)return 'commercial';
     return 'discovery';
   }
   function stateLabel(game){
     const state=stateOf(game);
     if(state==='documented')return 'COLABORACIÓN DOCUMENTADA';
-    if(state==='commercial')return 'EXPEDIENTE COMERCIAL · '+game.expediente_comercial;
     return 'POR DESCUBRIR';
   }
   function playersLabel(game){
@@ -64,8 +62,6 @@
       const povs=sessions.reduce((sum,session)=>sum+(session.pov||[]).length,0);
       const bit=sessions[0].bit.toLowerCase();
       links.push('<a class="arsenal-bit-link" href="#'+escapeHtml(bit)+'" data-open-bit="'+escapeHtml(bit)+'">BITÁCORA · '+sessions.length+(sessions.length===1?' SESIÓN':' SESIONES')+' · '+povs+' POV →</a>');
-    }else if(game.expediente_comercial){
-      links.push('<a class="arsenal-bit-link" href="#barfender-expediente" data-open-commercial="barfender">VER '+escapeHtml(game.expediente_comercial)+' →</a>');
     }
     return '<div class="arsenal-registry-links">'+links.join('')+'</div>';
   }
@@ -107,12 +103,11 @@
   function renderSummary(){
     const documented=games.filter(game=>(game.sesiones||[]).length>0).length;
     const discovery=games.filter(game=>stateOf(game)==='discovery').length;
-    const commercial=games.filter(game=>stateOf(game)==='commercial').length;
     const bitCount=games.reduce((sum,game)=>sum+(game.sesiones||[]).length,0);
     summary.innerHTML='<article><strong>'+games.length+'</strong><span>JUEGOS ÚNICOS</span></article>'+
       '<article><strong>'+documented+'</strong><span>CON SESIÓN BIT · '+bitCount+' SESIONES</span></article>'+
       '<article><strong>'+discovery+'</strong><span>POR DESCUBRIR</span></article>'+
-      '<article><strong>'+commercial+'</strong><span>EXPEDIENTES COMERCIALES</span></article>';
+      '';
   }
   function render(){
     visibleGames=filtered();

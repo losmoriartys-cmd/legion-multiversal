@@ -29,12 +29,12 @@ class GamesRegistryTests(unittest.TestCase):
         self.assertEqual(matches[0]["jugadores"], {"min": 1, "max": 4})
         self.assertEqual(matches[0]["sesiones"][0]["bit"], "BIT-001")
 
-    def test_ten_bit_sessions_and_eleven_povs_are_kept(self):
+    def test_eleven_bit_sessions_and_fourteen_povs_are_kept(self):
         sessions = [session for game in GAMES["juegos"] for session in game["sesiones"]]
         povs = [pov for session in sessions for pov in session["pov"]]
-        self.assertEqual(len(sessions), 10)
-        self.assertEqual(len(povs), 11)
-        self.assertEqual({session["bit"] for session in sessions}, {f"BIT-{n:03d}" for n in range(1, 11)})
+        self.assertEqual(len(sessions), 11)
+        self.assertEqual(len(povs), 14)
+        self.assertEqual({session["bit"] for session in sessions}, {f"BIT-{n:03d}" for n in range(1, 12)})
 
     def test_among_us_separates_four_participants_from_two_pov_channels(self):
         game = next(game for game in GAMES["juegos"] if game["id"] == "among-us")
@@ -48,10 +48,13 @@ class GamesRegistryTests(unittest.TestCase):
         self.assertEqual(set(session["participantes"]), {"akuma", "lady-moriarty"})
         self.assertEqual(session["pov"][0]["canal"], "akuma")
 
-    def test_barfender_is_commercial_expedient_not_a_bit_session(self):
+    def test_barfender_is_a_regular_collaboration_with_three_pov(self):
         game = next(game for game in GAMES["juegos"] if game["id"] == "barfender")
         self.assertEqual(game["expediente_comercial"], "EXP-001")
-        self.assertEqual(game["sesiones"], [])
+        session = game["sesiones"][0]
+        self.assertEqual(session["bit"], "BIT-011")
+        self.assertEqual(set(session["participantes"]), {"akuma", "lady-moriarty", "moriartys", "rod3r1k"})
+        self.assertEqual({pov["canal"] for pov in session["pov"]}, {"moriartys", "rod3r1k", "lady-moriarty"})
 
     def test_unverified_game_counts_remain_null_and_dates_have_source(self):
         unknown_games = [game for game in GAMES["juegos"] if game["jugadores"] is None]
