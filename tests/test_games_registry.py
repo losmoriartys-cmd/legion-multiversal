@@ -38,7 +38,7 @@ class GamesRegistryTests(unittest.TestCase):
 
     def test_capture_metrics_reject_impossible_calendar_dates(self):
         bad = copy.deepcopy(GAMES)
-        session = bad["juegos"][0]["sesiones"][0]
+        session = next(session for game in bad["juegos"] for session in game["sesiones"])
         session["numeros"] = {
             "duracion_vod_s": 3600,
             "vistas_vod": 25,
