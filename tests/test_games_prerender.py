@@ -45,6 +45,13 @@ class GamesPrerenderContractTests(unittest.TestCase):
         sessions = [session for game in self.games["juegos"] for session in game.get("sesiones", [])]
         self.assertEqual(collab.count('data-prerendered="true"'), len(sessions))
         self.assertEqual(collab.count("FUENTE VERIFICADA"), len(sessions))
+        self.assertEqual(collab.count('class="collab-pov-link"'), 14)
+        self.assertEqual(collab.count("<li><a href="), 4)
+        barfender = collab[collab.index('data-collab-session="BIT-011"'):]
+        barfender = barfender[:barfender.index("</article>")]
+        self.assertEqual(barfender.count('class="collab-pov-link"'), 3)
+        self.assertEqual(barfender.count("<li><a href="), 4)
+        self.assertEqual(barfender.count("BarFenderLos4.jpg"), 1)
         self.assertEqual(arsenal.count('data-prerendered="true"'), len(self.games["juegos"]))
         self.assertIn('data-collab-ready="prerendered"', self.html)
         self.assertIn('data-arsenal-ready="prerendered"', self.html)
