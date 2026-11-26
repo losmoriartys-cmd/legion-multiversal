@@ -1,0 +1,184 @@
+"""Behavioral tests for the resource inventory and two-phase authorization gate."""
+import sys
+import unittest
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
+
+import check_resource_change_policy as gate
+import audit_resource_inventory as inventory
+
+POLICY = {
+    "authorization_file": "data/resource-change-authorizations.json",
+    "routine_generated_data": ["creator-metrics.json", "data.json"],
+    "explicit_paths": ["data/roster.json", "data/creator-records.json"],
+    "explicit_extensions": [".jpg", ".png", ".webp", ".css", ".html"],
+    "review_required_patterns": [".github/workflows/**", "scripts/**", "tests/**"],
+}
+EMPTY = {"schema_version": 1, "authorizations": []}
+
+
+def authorization(path="cover.jpg", action="update", before="a" * 64, after="b" * 64):
+    return {
+        "id": "approve-cover-revision",
+        "path": path,
+        "action": action,
+        "from_sha256": before,
+        "to_sha256": after,
+        "reason": "Reemplazo editorial aprobado para corregir el encuadre.",
+        "reference": "Issue #95 / revisión visual"
+    }
+
+
+class ResourceChangeGateTests(unittest.TestCase):
+    def evaluate(self, changed, baseline=EMPTY, current=EMPTY, before=None, after=None):
+        before = before or (lambda _path: "a" * 64)
+        after = after or (lambda _path: "b" * 64)
+        return gate.evaluate_changes(POLICY, baseline, current, changed, before, after)
+
+    def test_unapproved_image_change_fails_closed(self):
+        errors = self.evaluate([("M", ["cover.jpg"])])
+        self.assertTrue(any("Cambio sensible sin autorización previa" in item for item in errors), errors)
+
+    def test_phase_a_accepts_only_append_to_authorization_ledger(self):
+        proposed = {"schema_version": 1, "authorizations": [authorization()]}
+        changed = [("M", ["data/resource-change-authorizations.json"])]
+        errors = self.evaluate(
+            changed, current=proposed,
+            before=lambda path: "a" * 64 if path == "cover.jpg" else None
+        )
+        self.assertEqual(errors, [], errors)
+
+    def test_phase_a_rejects_authorization_combined_with_resource_change(self):
+        proposed = {"schema_version": 1, "authorizations": [authorization()]}
+        changed = [
+            ("M", ["data/resource-change-authorizations.json"]),
+            ("M", ["cover.jpg"])
+        ]
+        errors = self.evaluate(
+            changed, current=proposed,
+            before=lambda path: "a" * 64 if path == "cover.jpg" else None
+        )
+        self.assertTrue(any("FASE A bloqueada" in item for item in errors), errors)
+
+    def test_phase_b_accepts_only_the_exact_preapproved_hash_transition(self):
+        approved = {"schema_version": 1, "authorizations": [authorization()]}
+        errors = self.evaluate(
+            [("M", ["cover.jpg"])],
+            baseline=approved,
+            current=approved,
+            before=lambda _path: "a" * 64,
+            after=lambda _path: "b" * 64
+        )
+        self.assertEqual(errors, [], errors)
+
+    def test_phase_b_rejects_a_different_target_hash(self):
+        approved = {"schema_version": 1, "authorizations": [authorization()]}
+        errors = self.evaluate(
+            [("M", ["cover.jpg"])],
+            baseline=approved,
+            current=approved,
+            before=lambda _path: "a" * 64,
+            after=lambda _path: "c" * 64
+        )
+        self.assertTrue(any("Cambio sensible sin autorización previa" in item for item in errors), errors)
+
+    def test_new_asset_requires_an_add_authorization(self):
+        approved = {"schema_version": 1, "authorizations": [
+            authorization("new-cover.webp", "add", None, "b" * 64)
+        ]}
+        errors = self.evaluate(
+            [("A", ["new-cover.webp"])],
+            baseline=approved,
+            current=approved,
+            before=lambda _path: None,
+            after=lambda _path: "b" * 64
+        )
+        self.assertEqual(errors, [], errors)
+
+    def test_deletion_requires_a_preapproved_source_hash(self):
+        approved = {"schema_version": 1, "authorizations": [
+            authorization("old-cover.jpg", "delete", "a" * 64, None)
+        ]}
+        errors = self.evaluate(
+            [("D", ["old-cover.jpg"])],
+            baseline=approved,
+            current=approved,
+            before=lambda _path: "a" * 64,
+            after=lambda _path: None
+        )
+        self.assertEqual(errors, [], errors)
+
+    def test_routine_generated_data_is_allowed_under_existing_contract_checks(self):
+        errors = self.evaluate(
+            [("M", ["creator-metrics.json"])],
+            before=lambda _path: "a" * 64,
+            after=lambda _path: "b" * 64
+        )
+        self.assertEqual(errors, [], errors)
+
+    def test_regular_code_changes_remain_subject_to_review_and_ci_not_extra_authorization(self):
+        errors = self.evaluate(
+            [("M", ["scripts/update_stats.py"])],
+            before=lambda _path: "a" * 64,
+            after=lambda _path: "b" * 64
+        )
+        self.assertEqual(errors, [], errors)
+
+    def test_authorization_history_is_immutable(self):
+        approved = {"schema_version": 1, "authorizations": [authorization()]}
+        altered = {"schema_version": 1, "authorizations": []}
+        errors = self.evaluate([], baseline=approved, current=altered)
+        self.assertTrue(any("histórica modificada o eliminada" in item for item in errors), errors)
+
+    def test_empty_ledger_bootstrap_is_allowed_once(self):
+        errors = self.evaluate(
+            [("A", ["data/resource-change-authorizations.json"])],
+            baseline=EMPTY, current=EMPTY
+        )
+        self.assertEqual(errors, [], errors)
+
+
+class ResourceInventoryTests(unittest.TestCase):
+    def test_visual_assets_require_explicit_authorization(self):
+        for path in ("cover.jpg", "assets/heroes/akuma_dark.jpg", "styles.css", "index.html"):
+            self.assertEqual(gate.classify(path, POLICY), "explicit_authorization")
+
+    def test_routine_data_and_reviewed_code_are_classified_separately(self):
+        self.assertEqual(gate.classify("creator-metrics.json", POLICY), "routine_generated_data")
+        self.assertEqual(gate.classify("scripts/update_stats.py", POLICY), "review_and_checks")
+
+    def test_reference_scanner_links_an_asset_to_real_source_lines(self):
+        sources = {
+            "index.html": [
+                '<img src="./assets/hero-cover.jpg" alt="Cover">',
+                '<img src="./assets/hero-cover-small.jpg" alt="Small">'
+            ]
+        }
+        refs = inventory.references_for("assets/hero-cover.jpg", sources, True)
+        self.assertEqual(len(refs), 1)
+        self.assertEqual(refs[0]["source"], "index.html")
+        self.assertEqual(refs[0]["line"], 1)
+        self.assertEqual(refs[0]["token"], "hero-cover.jpg")
+
+    def test_reference_scanner_does_not_confuse_similar_basenames(self):
+        sources = {"index.html": ['<img src="hero-cover-small.jpg">']}
+        refs = inventory.references_for("hero-cover.jpg", sources, True)
+        self.assertEqual(refs, [])
+
+    def test_external_google_font_urls_and_families_are_reported(self):
+        sources = {
+            "index.html": [
+                '<link rel="preload" href="https://fonts.gstatic.com/s/bangers/v25/font.woff2">',
+                '<link href="https://fonts.googleapis.com/css2?family=Bangers&display=optional">'
+            ],
+            "styles.css": ["h1 { font-family: 'Bangers', sans-serif; }"]
+        }
+        urls, families = inventory.external_resources(sources)
+        self.assertEqual(len(urls), 2)
+        self.assertEqual({item["family"] for item in families}, {"Bangers"})
+
+
+if __name__ == "__main__":
+    unittest.main()
