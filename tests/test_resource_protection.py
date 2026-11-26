@@ -160,7 +160,7 @@ class ResourceInventoryTests(unittest.TestCase):
         self.assertEqual(len(refs), 1)
         self.assertEqual(refs[0]["source"], "index.html")
         self.assertEqual(refs[0]["line"], 1)
-        self.assertEqual(refs[0]["token"], "hero-cover.jpg")
+        self.assertEqual(refs[0]["token"], "assets/hero-cover.jpg")
 
     def test_reference_scanner_does_not_confuse_similar_basenames(self):
         sources = {"index.html": ['<img src="hero-cover-small.jpg">']}
