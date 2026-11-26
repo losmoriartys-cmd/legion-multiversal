@@ -69,8 +69,8 @@
       "path": "index.html",
       "action": "update",
       "from_sha256": "a9b87ce1c6054ebee0608ab5ba6d2a5aaabdbd0157f1b1ea3fccb4619884153a",
-      "to_sha256": "30c826812af135828ecfa47e8cac98f88e564db97ff7060e9b6c3cfb0538371f",
-      "reason": "Generar en HTML inicial las 11 sesiones BIT y las 18 fichas del Arsenal desde los JSON canónicos; publicar resúmenes vigentes, mantener EXP-001 como archivo histórico y conservar contenido estático sin JavaScript o ante fallo de fetch.",
+      "to_sha256": "1945d0ccc0ba7550027cc3d18ed264105511f2c119d5416ab37f74aa7bd73a35",
+      "reason": "Generar en HTML inicial las 11 sesiones BIT y las 18 fichas del Arsenal desde los JSON canónicos, enlazando la fuente VOD que verifica cada fecha; publicar resúmenes vigentes, mantener EXP-001 como archivo histórico y conservar contenido estático sin JavaScript o ante fallo de fetch.",
       "reference": "Issue #135 / WEB-01 · fase A"
     }
   ]
