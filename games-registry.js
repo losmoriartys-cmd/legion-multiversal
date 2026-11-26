@@ -89,6 +89,7 @@
     const details = document.createElement('details');
     details.className = 'barfender-reading';
     details.id = 'barfender-expediente';
+    details.dataset.archived = 'true';
     const summary = document.createElement('summary');
     summary.textContent = 'EXP-001 · ARCHIVO HISTÓRICO · MATERIAL DE APOYO';
     const parent = legacy.parentNode;
