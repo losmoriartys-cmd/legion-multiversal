@@ -42,7 +42,20 @@ def safe_path(value: object) -> bool:
     if not isinstance(value, str) or not value or "\\" in value:
         return False
     path = PurePosixPath(value)
-    return not path.is_absolute() and all(part not in ("", ".", "..") for part in path.parts)
+    return (
+        not path.is_absolute()
+        and path.as_posix() == value
+        and all(part not in ("", ".", "..") for part in path.parts)
+    )
+
+
+def has_symlink_component(path: str) -> bool:
+    current = ROOT
+    for component in PurePosixPath(path).parts:
+        current = current / component
+        if current.is_symlink():
+            return True
+    return False
 
 
 def read_manifest_worktree() -> dict:
@@ -226,7 +239,7 @@ def validate_approvals_against_base(
             if blob_in_worktree(path) != before_blob:
                 errors.append(f"Fase A inválida: el asset existente debe permanecer intacto: {path}")
         elif operation == "add":
-            if (ROOT / path).exists() or (ROOT / path).is_symlink():
+            if (ROOT / path).exists() or has_symlink_component(path):
                 errors.append(f"Fase A inválida: la nueva ruta debe permanecer ausente: {path}")
     return errors
 
@@ -348,7 +361,7 @@ def check(base_ref: str) -> tuple[list[str], str]:
                 errors.append(f"no se permite quitar el hash protegido de {path}")
                 continue
             if before_blob is None:
-                if path not in root_added and not safe_path(path):
+                if not safe_path(path):
                     errors.append(f"ruta nueva inválida: {path}")
                 matches = [
                     item for item in base_approvals
