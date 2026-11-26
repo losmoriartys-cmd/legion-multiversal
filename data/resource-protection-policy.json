@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "title": "Política de protección de recursos de Legión Multiversal",
+  "authorization_file": "data/resource-change-authorizations.json",
+  "routine_generated_data": [
+    "clips-data.json",
+    "creator-metrics.json",
+    "data.json",
+    "platform-stats.json",
+    "sullygnome-data.json",
+    "twitchmetrics-data.json"
+  ],
+  "explicit_paths": [
+    "data/roster.json",
+    "data/creator-records.json",
+    "data/creator-colors.json",
+    "data/games.json",
+    "creator-programs.json",
+    "community-playbook.json",
+    "news-data.json",
+    "data/integrity-manifest.json",
+    "tests/baselines/approved-editorial-updates.json",
+    "tests/baselines/identity-before-canonical-migration.json"
+  ],
+  "explicit_extensions": [
+    ".avif",
+    ".gif",
+    ".jpeg",
+    ".jpg",
+    ".png",
+    ".svg",
+    ".webp",
+    ".css",
+    ".html"
+  ],
+  "review_required_patterns": [
+    ".github/workflows/**",
+    "scripts/**",
+    "tests/**",
+    "schemas/**",
+    "CODEOWNERS",
+    "docs/**",
+    "INFORMES.md",
+    "BIBLIA_*.md"
+  ],
+  "generated_resource_inventory": {
+    "output": "reports/resource-inventory.json",
+    "sha256_all_tracked_files": true,
+    "references": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "JSON",
+      "Markdown",
+      "YAML",
+      "Python",
+      "XML"
+    ],
+    "external_dependency_domains": [
+      "fonts.googleapis.com",
+      "fonts.gstatic.com"
+    ],
+    "unreferenced_assets_are_reported_not_blocked": true
+  },
+  "authorization_contract": {
+    "phase_a": "Un PR puede agregar autorizaciones nuevas modificando únicamente data/resource-change-authorizations.json. No puede cambiar recursos en esta fase.",
+    "phase_b": "Un PR posterior puede aplicar exactamente la transición path/action/from_sha256/to_sha256 ya aprobada en main. No puede editar el registro de autorizaciones.",
+    "actions": [
+      "add",
+      "update",
+      "delete"
+    ],
+    "immutable_history": true,
+    "fields": [
+      "id",
+      "path",
+      "action",
+      "from_sha256",
+      "to_sha256",
+      "reason",
+      "reference"
+    ],
+    "hash_algorithm": "SHA-256",
+    "reference_required": true,
+    "reason_required": true
+  }
+}
