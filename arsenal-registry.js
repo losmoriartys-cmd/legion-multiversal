@@ -74,7 +74,7 @@
     const source=safeHttps(game.fuente_jugadores);
     const sourceLink=source?'<a class="arsenal-player-source" href="'+escapeHtml(source)+'" target="_blank" rel="noopener noreferrer">FUENTE DE JUGADORES ↗</a>':'';
     const povCount=sessions.reduce((sum,session)=>sum+(session.pov||[]).length,0);
-    const evidence=sessions.length?sessions.length+(sessions.length===1?' sesión BIT':' sesiones BIT')+' · '+povCount+' POV disponibles':(game.expediente_comercial?'Registro comercial separado':'Sin sesión documentada');
+    const evidence=sessions.length?sessions.length+(sessions.length===1?' sesión BIT':' sesiones BIT')+' · '+povCount+' POV disponibles':(game.expediente_comercial?'Archivo histórico EXP-001':'Sin sesión documentada');
     return '<article class="premium-card arsenal-card arsenal-registry-card" id="arsenal-game-'+escapeHtml(game.id)+'" data-arsenal-game="'+escapeHtml(game.id)+'" data-game-id="'+escapeHtml(game.id)+'" data-arsenal-state="'+stateOf(game)+'">'+
       renderCover(game)+'<div class="arsenal-registry-card-body">'+
       '<div class="premium-kicker">MISIÓN '+String(index+1).padStart(2,'0')+' · '+escapeHtml(stateLabel(game))+'</div>'+
