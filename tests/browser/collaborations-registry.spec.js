@@ -39,6 +39,7 @@ test('BarFender concentra imagen, clips y archivo EXP-001 dentro de BIT-011',asy
   const archive=page.locator('#barfender-expediente');
   await expect(archive.locator('summary')).toContainText('ARCHIVO HISTÓRICO');
   await expect(archive.locator('.campaign-four-views')).toHaveCount(0);
+  await expect(archive.locator('.barfender-steam-art')).toHaveCount(0);
 });
 
 test('PEAK asigna su POV al canal de Akuma y permite abrir su VOD',async({page})=>{
