@@ -62,13 +62,16 @@ def kind_for(path: str) -> str:
 def change_policy(path: str, policy: dict) -> str:
     if path in policy.get("routine_generated_data", []):
         return "routine_generated_data"
-    if path in policy.get("explicit_paths", []):
+    if path in {
+        policy.get("policy_file"),
+        policy.get("authorization_file"),
+        *policy.get("explicit_paths", []),
+    }:
+        return "explicit_authorization"
+    if any(fnmatch.fnmatch(path, pattern) for pattern in policy.get("explicit_patterns", [])):
         return "explicit_authorization"
     if PurePosixPath(path).suffix.lower() in set(policy.get("explicit_extensions", [])):
         return "explicit_authorization"
-    for pattern in policy.get("review_required_patterns", []):
-        if fnmatch.fnmatch(path, pattern):
-            return "review_and_checks"
     return "review_and_checks"
 
 
