@@ -189,6 +189,10 @@ jobs:
         run: python scripts/validate_data_contracts.py
       - name: Proteger inventario crítico, roster y recuperación Git
         run: python scripts/guard_data_integrity.py --base-ref origin/main --recovery-report
+      - name: Validar autorizaciones de recursos editoriales y recuperación
+        run: python scripts/check_resource_change_policy.py --base-ref origin/main --recovery-report
+      - name: Generar inventario canónico enlazado de recursos
+        run: python scripts/audit_resource_inventory.py --output reports/resource-inventory.json
       - name: Instalar dependencias de pruebas de navegador
         run: npm install
       - name: Instalar Chromium para Playwright
@@ -216,5 +220,13 @@ jobs:
         with:
           name: image-reference-audit-${{ github.sha }}
           path: reports/image-audit/
+          if-no-files-found: warn
+          retention-days: 30
+      - name: Publicar inventario canónico de recursos y referencias
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: resource-inventory-${{ github.sha }}
+          path: reports/resource-inventory.json
           if-no-files-found: warn
           retention-days: 30
