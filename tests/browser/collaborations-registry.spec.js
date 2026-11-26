@@ -37,7 +37,7 @@ test('BarFender concentra imagen, clips y archivo EXP-001 dentro de BIT-011',asy
   await expect(card.locator('.collab-clip-list li')).toHaveCount(4);
   await expect(card.locator('.collab-session-actions a').filter({hasText:'ARCHIVO HISTÓRICO · EXP-001'})).toHaveAttribute('href','#barfender-expediente');
   const archive=page.locator('#barfender-expediente');
-  await expect(archive.locator('summary')).toContainText('ARCHIVO HISTÓRICO');
+  await expect(archive.locator(':scope > summary')).toContainText('ARCHIVO HISTÓRICO');
   await expect(archive.locator('.campaign-four-views')).toHaveCount(0);
   await expect(archive.locator('.barfender-steam-art')).toHaveCount(0);
   await expect(archive).toHaveJSProperty('open',false);
