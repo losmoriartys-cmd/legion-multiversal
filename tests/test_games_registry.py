@@ -36,6 +36,18 @@ class GamesRegistryTests(unittest.TestCase):
         self.assertEqual(len(povs), 11)
         self.assertEqual({session["bit"] for session in sessions}, {f"BIT-{n:03d}" for n in range(1, 11)})
 
+    def test_capture_metrics_reject_impossible_calendar_dates(self):
+        bad = copy.deepcopy(GAMES)
+        session = bad["juegos"][0]["sesiones"][0]
+        session["numeros"] = {
+            "duracion_vod_s": 3600,
+            "vistas_vod": 25,
+            "fuente": "Twitch",
+            "capturado": "2026-02-30",
+        }
+        errors = validate_registry(bad, ROSTER)
+        self.assertTrue(any("numeros.capturado no es una fecha de calendario válida" in error for error in errors))
+
     def test_among_us_separates_four_participants_from_two_pov_channels(self):
         game = next(game for game in GAMES["juegos"] if game["id"] == "among-us")
         session = game["sesiones"][0]
