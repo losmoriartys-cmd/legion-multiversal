@@ -206,7 +206,20 @@
       "tienda": "https://store.steampowered.com/app/4159680/Barfender_COOP_Bar_Simulator/",
       "portada": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4159680/c1225b8fe18d0878c5be25b0081c801e50bb258e/header_alt_assets_8.jpg?t=1793628252",
       "expediente_comercial": "EXP-001",
-      "sesiones": []
+      "sesiones": [
+        {
+          "bit": "BIT-011",
+          "fecha": "2026-11-05",
+          "fuente_fecha": "https://www.twitch.tv/videos/2919716450",
+          "participantes": ["akuma", "lady-moriarty", "moriartys", "rod3r1k"],
+          "pov": [
+            {"canal": "moriartys", "url": "https://www.twitch.tv/videos/2919716450"},
+            {"canal": "rod3r1k", "url": "https://www.twitch.tv/videos/2919719142"},
+            {"canal": "lady-moriarty", "url": "https://www.twitch.tv/videos/2919755971"}
+          ],
+          "nota": "Primera misión juntos como Legión: cuatro creadores, cuatro canales, una misma partida. Akuma participó pero todavía no tiene VOD registrado."
+        }
+      ]
     },
     {
       "id": "tmnt-shredders-revenge",

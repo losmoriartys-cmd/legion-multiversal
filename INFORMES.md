@@ -55,11 +55,11 @@
 
 ### Próximo corte editorial · BarFender como colaboración de la Legión
 
-- [ ] Dejar de presentar BarFender como un caso comercial aislado y registrarlo con el mismo modelo editorial que las demás colaboraciones, tanto en Colaboraciones como en Arsenal.
-- [ ] Retirar la clasificación especial `EXP-001`/`commercial` del Arsenal al convertir sus hitos a sesiones BIT normales; no mantener una ficha comercial paralela.
+- [x] Dejar de presentar BarFender como un caso comercial aislado y registrarlo con el mismo modelo editorial que las demás colaboraciones, tanto en Colaboraciones como en Arsenal. (2026-11-26: registrado como BIT-011 · 05/11/2026 · 3 POV (Los Moriartys, Rod3r1k, Lady Moriarty) y 4 participantes; fuente: VOD del canal.)
+- [~] Retirar la clasificación especial `EXP-001`/`commercial` del Arsenal al convertir sus hitos a sesiones BIT normales; no mantener una ficha comercial paralela. (Hecho en el Arsenal: sin estado ni filtro comercial. Pendiente: mover el contenido del bloque `barfender-expediente` de Colaboraciones a la ficha del juego; `EXP-001` se conserva solo como vínculo al expediente.)
 - [ ] Narrar el primer encuentro como **“Primera misión juntos como Legión”**: el grupo recibió las claves para jugar, sin insinuar patrocinio ni pago.
 - [ ] Incorporar la segunda etapa como la repetición/continuación con el juego completo y el mismo equipo, conectada con la primera misión.
-- [ ] Asociar los POV de Rod3R1k y Akuma a esa segunda etapa, verificando los VOD/enlaces concretos y evitando duplicar sesiones o contabilizar un POV como una sesión aparte.
+- [ ] Asociar los POV de Rod3R1k y Akuma a esa segunda etapa (11/11/2026), verificando los VOD/enlaces concretos y evitando duplicar sesiones o contabilizar un POV como una sesión aparte. **Bloqueado:** no hay VOD registrado de esa noche; solo existen las cifras del panel de Twitch (ya publicadas en «Sesión 02»). Entra como BIT-012 cuando lleguen los enlaces.
 - [ ] Reutilizar `BarFenderLos4.jpg` como imagen de apoyo del registro grupal, sin convertirlo en una ficha comercial separada ni repetir la misma imagen innecesariamente.
 - **Criterio de publicación:** una sola ficha de juego en Arsenal y entradas de sesión en la Bitácora con IDs estables; primera misión y partida completa como hitos relacionados. Mantener los IDs y referencias actuales hasta tener verificados los datos de cada sesión.
 - **Alcance:** trabajo editorial independiente de BASE-01B; se abrirá un corte propio sobre el registro compartido de juegos/colaboraciones después de cerrar esta migración.
