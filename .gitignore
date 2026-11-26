@@ -1,2 +1,7 @@
 # OAuth bootstrap local: contiene un refresh token en texto claro; nunca versionar.
 twitch-followers-bootstrap.json
+
+# Cachés de Python generadas por tests y scripts: no se versionan.
+__pycache__/
+*.pyc
+.pytest_cache/
