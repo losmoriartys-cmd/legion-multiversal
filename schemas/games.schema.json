@@ -4,92 +4,385 @@
   "title": "Legión Multiversal — Registro maestro de juegos",
   "description": "Origen de datos compartido por los capítulos 07 · Colaboraciones y 08 · Arsenal.",
   "type": "object",
-  "required": ["version", "nota", "juegos"],
+  "required": [
+    "version",
+    "nota",
+    "juegos"
+  ],
   "additionalProperties": false,
   "properties": {
-    "version": {"const": 1},
-    "nota": {"type": "string", "minLength": 1},
+    "version": {
+      "const": 1
+    },
+    "nota": {
+      "type": "string",
+      "minLength": 1
+    },
     "juegos": {
       "type": "array",
       "minItems": 1,
-      "items": {"$ref": "#/$defs/juego"}
+      "items": {
+        "$ref": "#/$defs/juego"
+      }
     }
   },
   "$defs": {
-    "urlHttps": {"type": "string", "format": "uri", "pattern": "^https://"},
-    "textoNullable": {"type": ["string", "null"]},
+    "urlHttps": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://"
+    },
+    "textoNullable": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
     "textoArrayNullable": {
       "oneOf": [
-        {"type": "null"},
-        {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true}
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        }
       ]
     },
     "jugadores": {
-      "type": ["object", "null"],
-      "required": ["min", "max"],
+      "type": [
+        "object",
+        "null"
+      ],
+      "required": [
+        "min",
+        "max"
+      ],
       "additionalProperties": false,
       "properties": {
-        "min": {"type": "integer", "minimum": 1},
-        "max": {"type": "integer", "minimum": 1}
+        "min": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max": {
+          "type": "integer",
+          "minimum": 1
+        }
       }
     },
     "pov": {
       "type": "object",
-      "required": ["canal", "url"],
+      "required": [
+        "canal",
+        "url"
+      ],
       "additionalProperties": false,
       "properties": {
-        "canal": {"type": ["string", "null"], "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
-        "url": {"$ref": "#/$defs/urlHttps"}
+        "canal": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "url": {
+          "$ref": "#/$defs/urlHttps"
+        }
       }
     },
     "sesion": {
       "type": "object",
-      "required": ["bit", "fecha", "fuente_fecha", "participantes", "pov", "nota"],
+      "required": [
+        "bit",
+        "fecha",
+        "fuente_fecha",
+        "participantes",
+        "pov",
+        "nota"
+      ],
       "additionalProperties": false,
       "properties": {
-        "bit": {"type": "string", "pattern": "^BIT-[0-9]{3}$"},
-        "fecha": {"type": ["string", "null"], "format": "date"},
-        "fuente_fecha": {"type": ["string", "null"]},
+        "bit": {
+          "type": "string",
+          "pattern": "^BIT-[0-9]{3}$"
+        },
+        "fecha": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        },
+        "fuente_fecha": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
         "participantes": {
           "type": "array",
           "minItems": 1,
           "uniqueItems": true,
-          "items": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"}
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+          }
         },
-        "pov": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/pov"}},
-        "nota": {"type": ["string", "null"]}
+        "pov": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/pov"
+          }
+        },
+        "nota": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "resumen": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1,
+          "maxLength": 900
+        },
+        "clips": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/$defs/clip"
+          },
+          "uniqueItems": true
+        },
+        "numeros": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/numeroSesion"
+            }
+          ]
+        },
+        "momentos": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/$defs/momento"
+          },
+          "uniqueItems": true
+        },
+        "imagen": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[A-Za-z0-9_-]+(?:/[A-Za-z0-9_-]+)*\\\\.(?:jpg|jpeg|png|webp)$"
+        }
       }
     },
     "juego": {
       "type": "object",
       "required": [
-        "id", "nombre", "aliases", "categorias", "plataformas", "ediciones", "modalidad",
-        "descripcion", "jugadores", "fuente_jugadores", "tienda", "portada", "expediente_comercial", "sesiones"
+        "id",
+        "nombre",
+        "aliases",
+        "categorias",
+        "plataformas",
+        "ediciones",
+        "modalidad",
+        "descripcion",
+        "jugadores",
+        "fuente_jugadores",
+        "tienda",
+        "portada",
+        "expediente_comercial",
+        "sesiones"
       ],
       "additionalProperties": false,
       "properties": {
-        "id": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
-        "nombre": {"type": "string", "minLength": 1},
-        "aliases": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "nombre": {
+          "type": "string",
+          "minLength": 1
+        },
+        "aliases": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
         "categorias": {
           "type": "array",
           "minItems": 1,
           "uniqueItems": true,
-          "items": {"enum": [
-            "Fiesta y humor", "Terror cooperativo", "Deducción social", "Supervivencia",
-            "Sandbox y construcción", "Simulación", "Retro y clásicos", "Cooperativo y aventura", "Competitivo"
-          ]}
+          "items": {
+            "enum": [
+              "Fiesta y humor",
+              "Terror cooperativo",
+              "Deducción social",
+              "Supervivencia",
+              "Sandbox y construcción",
+              "Simulación",
+              "Retro y clásicos",
+              "Cooperativo y aventura",
+              "Competitivo"
+            ]
+          }
         },
-        "plataformas": {"$ref": "#/$defs/textoArrayNullable"},
-        "ediciones": {"$ref": "#/$defs/textoArrayNullable"},
-        "modalidad": {"$ref": "#/$defs/textoNullable"},
-        "descripcion": {"$ref": "#/$defs/textoNullable"},
-        "jugadores": {"$ref": "#/$defs/jugadores"},
-        "fuente_jugadores": {"type": ["string", "null"]},
-        "tienda": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/urlHttps"}]},
-        "portada": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/urlHttps"}]},
-        "expediente_comercial": {"type": ["string", "null"], "pattern": "^EXP-[0-9]{3}$"},
-        "sesiones": {"type": "array", "items": {"$ref": "#/$defs/sesion"}}
+        "plataformas": {
+          "$ref": "#/$defs/textoArrayNullable"
+        },
+        "ediciones": {
+          "$ref": "#/$defs/textoArrayNullable"
+        },
+        "modalidad": {
+          "$ref": "#/$defs/textoNullable"
+        },
+        "descripcion": {
+          "$ref": "#/$defs/textoNullable"
+        },
+        "jugadores": {
+          "$ref": "#/$defs/jugadores"
+        },
+        "fuente_jugadores": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "tienda": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/urlHttps"
+            }
+          ]
+        },
+        "portada": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/urlHttps"
+            }
+          ]
+        },
+        "expediente_comercial": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^EXP-[0-9]{3}$"
+        },
+        "sesiones": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/sesion"
+          }
+        }
+      }
+    },
+    "clip": {
+      "type": "object",
+      "required": [
+        "titulo",
+        "canal",
+        "url"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "titulo": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "canal": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://(?:www\\\\.)?twitch\\\\.tv/[A-Za-z0-9_]+/clip/[A-Za-z0-9_-]+$|^https://clips\\\\.twitch\\\\.tv/[A-Za-z0-9_-]+$"
+        }
+      }
+    },
+    "numeroSesion": {
+      "type": "object",
+      "required": [
+        "duracion_vod_s",
+        "vistas_vod",
+        "fuente",
+        "capturado"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "duracion_vod_s": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "vistas_vod": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "fuente": {
+          "type": "string",
+          "minLength": 1
+        },
+        "capturado": {
+          "type": "string",
+          "format": "date"
+        }
+      }
+    },
+    "momento": {
+      "type": "object",
+      "required": [
+        "t",
+        "texto",
+        "canal"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "t": {
+          "type": "string",
+          "pattern": "^\\\\d{1,2}:[0-5]\\\\d:[0-5]\\\\d$"
+        },
+        "texto": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "canal": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        }
       }
     }
   }
