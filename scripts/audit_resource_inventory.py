@@ -87,6 +87,25 @@ def load_sources(paths: list[str]) -> dict[str, list[str]]:
     return result
 
 
+def source_role(source: str) -> str:
+    suffix = PurePosixPath(source).suffix.lower()
+    if source.startswith("tests/"):
+        return "test"
+    if source.startswith(".github/workflows/"):
+        return "workflow"
+    if suffix == ".md":
+        return "documentation"
+    if suffix == ".json":
+        return "structured_data"
+    if suffix in {".html", ".css", ".js"}:
+        return "runtime_source"
+    if suffix in {".yml", ".yaml"}:
+        return "configuration"
+    if suffix == ".py":
+        return "tooling"
+    return "source_reference"
+
+
 def references_for(path: str, sources: dict[str, list[str]], basename_unique: bool) -> list[dict]:
     basename = PurePosixPath(path).name
     basename_re = re.compile(r"(?<![A-Za-z0-9_-])" + re.escape(basename) + r"(?![A-Za-z0-9_-])")
@@ -103,6 +122,7 @@ def references_for(path: str, sources: dict[str, list[str]], basename_unique: bo
                 continue
             references.append({
                 "source": source,
+                "source_role": source_role(source),
                 "line": number,
                 "token": token,
                 "context": line.strip()[:240]
@@ -111,15 +131,24 @@ def references_for(path: str, sources: dict[str, list[str]], basename_unique: bo
 
 
 def external_resources(sources: dict[str, list[str]]) -> tuple[list[dict], list[dict]]:
+    """Collect declared runtime font dependencies, excluding test fixtures and tooling examples."""
     urls = []
     families = []
     seen_urls = set()
     seen_families = set()
-    url_re = re.compile(r"https://[^\s\"'<>)]+")
+    url_re = re.compile(r"https://[^\\s\"'<>)]+")
 
     for source, lines in sources.items():
+        suffix = PurePosixPath(source).suffix.lower()
+        if source.startswith(("tests/", ".github/", "docs/")) or suffix not in {".html", ".css", ".js"}:
+            continue
         for number, line in enumerate(lines, 1):
-            if any(domain in line for domain in FONT_DOMAINS):
+            declares_font_url = re.search(
+                r"(?:href|src)\\s*=|url\\s*\\(|@import\\s+",
+                line,
+                re.IGNORECASE,
+            )
+            if declares_font_url and any(domain in line for domain in FONT_DOMAINS):
                 for url in url_re.findall(line):
                     url = url.rstrip(";,")
                     if any(domain in url for domain in FONT_DOMAINS) and url not in seen_urls:
@@ -131,7 +160,7 @@ def external_resources(sources: dict[str, list[str]]) -> tuple[list[dict], list[
                             "line": number,
                             "context": line.strip()[:240]
                         })
-            for match in re.finditer(r"font-family\s*:\s*([^;{}]+)", line, re.IGNORECASE):
+            for match in re.finditer(r"font-family\\s*:\\s*([^;{}]+)", line, re.IGNORECASE):
                 for family in match.group(1).split(","):
                     normalized = family.strip().strip("'\"")
                     if normalized and normalized.lower() not in {"inherit", "initial", "unset", "sans-serif", "serif", "cursive", "monospace"}:
