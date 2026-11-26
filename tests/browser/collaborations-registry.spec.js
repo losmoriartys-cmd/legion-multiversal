@@ -91,3 +91,19 @@ test('Capítulo 07 no genera overflow horizontal en escritorio, tablet ni móvil
     if(width<=650) expect(metrics.columns,'mobile must use one column at '+width+'px').toBe(1);
   }
 });
+
+test('la ficha organiza resumen, jugaron, POV, clips y números en pestañas accesibles',async({page})=>{
+  const card=page.locator('#collab-registry-grid [data-game-id="among-us"]');
+  await card.locator('details.collab-ficha > summary').click();
+  const tabs=card.locator('[role="tab"]');
+  await expect(tabs).toHaveCount(5);
+  await expect(tabs.first()).toHaveAttribute('aria-selected','true');
+  await expect(card.locator('.collab-empty-state').first()).toContainText('pendiente');
+  await tabs.nth(2).click();
+  await expect(card.locator('.collab-pov-link').first()).toBeVisible();
+  await tabs.nth(2).press('ArrowRight');
+  await expect(tabs.nth(3)).toHaveAttribute('aria-selected','true');
+  await expect(card.locator('[role="tabpanel"]:not([hidden])')).toContainText('clips');
+  await tabs.nth(4).click();
+  await expect(card.locator('[role="tabpanel"]:not([hidden])')).toContainText('Sin números verificados');
+});

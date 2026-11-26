@@ -81,6 +81,83 @@
     return Number(match[3]) + ' ' + MONTHS_ES[Number(match[2]) - 1] + ' ' + match[1];
   }
 
+  function formatDuration(seconds) {
+    const total = Number(seconds);
+    if (!Number.isFinite(total) || total < 0) return null;
+    const h = Math.floor(total / 3600), m = Math.floor((total % 3600) / 60);
+    return h + ' h ' + String(m).padStart(2, '0') + ' min';
+  }
+  function renderClip(clip) {
+    const href = safeHttps(clip.url, 'twitch.tv');
+    if (!href) return '';
+    return '<li><a class="collab-clip-link" style="--creator-color:' + creatorColor(clip.canal) + '" href="' + escapeHtml(href) + '" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">✂</span><span><small>CLIP · ' + escapeHtml(creatorName(clip.canal)) + '</small><strong>' + escapeHtml(clip.titulo) + ' ↗</strong></span></a></li>';
+  }
+  function renderMoment(moment, session) {
+    const pov = (session.pov || []).find(function (item) { return item.canal === moment.canal; });
+    const href = pov ? safeHttps(pov.url, 'twitch.tv') : null;
+    const parts = String(moment.t).split(':').map(Number);
+    const seconds = parts[0] * 3600 + parts[1] * 60 + parts[2];
+    const time = href ? '<a href="' + escapeHtml(href) + '?t=' + seconds + 's" target="_blank" rel="noopener noreferrer" aria-label="Abrir el VOD en ' + escapeHtml(moment.t) + '">' + escapeHtml(moment.t) + '</a>' : escapeHtml(moment.t);
+    return '<li><span class="collab-moment-time">' + time + '</span><span>' + escapeHtml(moment.texto) + ' <small>· POV ' + escapeHtml(creatorName(moment.canal)) + '</small></span></li>';
+  }
+  function emptyState(text) { return '<p class="collab-empty-state">' + text + '</p>'; }
+  function renderFichaTabs(entry, participants, povs, povTotal, note) {
+    const session = entry.session, game = entry.game;
+    const base = 'tab-' + session.bit.toLowerCase();
+    const clips = (session.clips || []).map(renderClip).join('');
+    const clipCount = (session.clips || []).length;
+    const moments = (session.momentos || []).map(function (m) { return renderMoment(m, session); }).join('');
+    const numeros = session.numeros;
+    const duration = numeros ? formatDuration(numeros.duracion_vod_s) : null;
+    const views = numeros && Number.isFinite(numeros.vistas_vod) ? Number(numeros.vistas_vod).toLocaleString('es-AR') : null;
+    const numbersBody = numeros && (duration || views)
+      ? '<dl class="collab-numbers"><div><dt>DURACIÓN DEL VOD</dt><dd>' + (duration || '—') + '</dd></div><div><dt>VISTAS DEL VOD</dt><dd>' + (views || '—') + '</dd></div></dl><p class="collab-numbers-source">Fuente: ' + escapeHtml(numeros.fuente) + ' · capturado el ' + escapeHtml(formatSessionDate(numeros.capturado)) + '</p>'
+      : emptyState('Sin números verificados para esta sesión. Un número solo se publica con fuente y fecha de captura.');
+    const tabs = [
+      ['resumen', 'RESUMEN', '<h5 class="collab-panel-title">LO QUE PASÓ EN ' + escapeHtml(game.nombre.toUpperCase()) + '</h5>' +
+        (session.resumen ? '<p class="collab-summary">' + escapeHtml(session.resumen) + '</p>' : emptyState('Resumen pendiente de redacción.')) +
+        (moments ? '<h5 class="collab-panel-title">MOMENTOS</h5><ol class="collab-moment-list">' + moments + '</ol>' : '') + note],
+      ['jugaron', 'JUGARON · ' + (session.participantes || []).length, '<ul class="collab-participant-list" aria-label="Participantes de ' + escapeHtml(game.nombre) + '">' + participants + '</ul>'],
+      ['povs', 'POV · ' + povTotal, '<div class="collab-pov-list" aria-label="Puntos de vista registrados de ' + escapeHtml(game.nombre) + '">' + povs + '</div>'],
+      ['clips', 'CLIPS' + (clipCount ? ' · ' + clipCount : ''), clips ? '<ul class="collab-clip-list">' + clips + '</ul>' : emptyState('Todavía no hay clips cargados para esta sesión.')],
+      ['numeros', 'NÚMEROS', numbersBody]
+    ];
+    return '<div class="collab-tabs" data-collab-tabs>' +
+      '<div class="collab-tablist" role="tablist" aria-label="Secciones de ' + escapeHtml(game.nombre) + '">' + tabs.map(function (tab, index) {
+        return '<button type="button" role="tab" id="' + base + '-' + tab[0] + '-tab" aria-controls="' + base + '-' + tab[0] + '" aria-selected="' + (index === 0) + '" tabindex="' + (index === 0 ? 0 : -1) + '">' + tab[1] + '</button>';
+      }).join('') + '</div>' + tabs.map(function (tab, index) {
+        return '<div class="collab-tabpanel" role="tabpanel" id="' + base + '-' + tab[0] + '" aria-labelledby="' + base + '-' + tab[0] + '-tab"' + (index === 0 ? '' : ' hidden') + '>' + tab[2] + '</div>';
+      }).join('') + '</div>';
+  }
+  function activateTab(button) {
+    const root = button.closest('[data-collab-tabs]');
+    if (!root) return;
+    root.querySelectorAll('[role="tab"]').forEach(function (tab) {
+      const active = tab === button;
+      tab.setAttribute('aria-selected', String(active));
+      tab.tabIndex = active ? 0 : -1;
+      const panel = document.getElementById(tab.getAttribute('aria-controls'));
+      if (panel) panel.hidden = !active;
+    });
+    button.focus();
+  }
+  document.addEventListener('click', function (event) {
+    const tab = event.target.closest && event.target.closest('.collab-tablist [role="tab"]');
+    if (tab) activateTab(tab);
+  });
+  document.addEventListener('keydown', function (event) {
+    const tab = event.target.closest && event.target.closest('.collab-tablist [role="tab"]');
+    if (!tab || !['ArrowRight', 'ArrowLeft', 'Home', 'End'].includes(event.key)) return;
+    const tabs = Array.from(tab.parentElement.querySelectorAll('[role="tab"]'));
+    let index = tabs.indexOf(tab);
+    if (event.key === 'ArrowRight') index = (index + 1) % tabs.length;
+    else if (event.key === 'ArrowLeft') index = (index - 1 + tabs.length) % tabs.length;
+    else if (event.key === 'Home') index = 0;
+    else index = tabs.length - 1;
+    event.preventDefault();
+    activateTab(tabs[index]);
+  });
+
   function renderSession(entry) {
     const game = entry.game;
     const session = entry.session;
@@ -104,9 +181,8 @@
       '<details class="collab-ficha"><summary><span>ABRIR FICHA</span><span class="collab-ficha-close">CERRAR FICHA</span></summary>' +
       '<div class="collab-session-content">' +
       '<div class="collab-game-meta">' + players + '<span class="collab-game-meta-item">' + escapeHtml(game.modalidad || 'Modalidad sin verificar') + '</span></div>' +
-      '<section class="collab-session-roster" aria-label="Participantes de ' + escapeHtml(game.nombre) + '"><h5>QUIÉNES JUGARON</h5><ul class="collab-participant-list">' + participants + '</ul></section>' +
-      '<section class="collab-session-povs" aria-label="Puntos de vista registrados de ' + escapeHtml(game.nombre) + '"><h5>POV DISPONIBLES · ' + povTotal + '</h5><div class="collab-pov-list">' + povs + '</div></section>' +
-      note + '<div class="collab-session-actions">' + catalogLink + storeLink + '</div></div></details></article>';
+      renderFichaTabs(entry, participants, povs, povTotal, note) +
+      '<div class="collab-session-actions">' + catalogLink + storeLink + '</div></div></details></article>';
   }
   function renderTimeline() {
     const target = document.getElementById('collab-timeline');
