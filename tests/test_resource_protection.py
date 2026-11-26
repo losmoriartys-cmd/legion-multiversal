@@ -224,6 +224,8 @@ class ResourceInventoryTests(unittest.TestCase):
     def test_external_google_font_urls_exclude_test_and_workflow_examples(self):
         sources = {
             "index.html": [
+                '<link rel="preconnect" href="https://fonts.googleapis.com">',
+                '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>',
                 '<link rel="preload" href="https://fonts.gstatic.com/s/bangers/v25/font.woff2">',
                 '<link href="https://fonts.googleapis.com/css2?family=Bangers&display=optional">'
             ],
@@ -243,6 +245,17 @@ class ResourceInventoryTests(unittest.TestCase):
         self.assertEqual(len(urls), 2)
         self.assertEqual({item["source"] for item in urls}, {"index.html"})
         self.assertEqual({item["family"] for item in families}, {"Bangers"})
+
+    def test_google_font_preconnect_hosts_are_not_listed_as_font_downloads(self):
+        sources = {
+            "index.html": [
+                '<link rel="preconnect" href="https://fonts.googleapis.com">',
+                '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
+            ]
+        }
+        urls, families = inventory.external_resources(sources)
+        self.assertEqual(urls, [])
+        self.assertEqual(families, [])
 
     def test_git_restore_rolls_back_an_asset_and_critical_data_fixture(self):
         import subprocess
