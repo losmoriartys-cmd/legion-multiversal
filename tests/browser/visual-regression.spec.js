@@ -52,6 +52,16 @@ async function compareElement(mainPage, candidatePage, testInfo, viewportName, s
     height: Math.round(mainBounds.height * 10) / 10
   });
 
+  // El encabezado global es fijo/sticky y puede quedar superpuesto sobre la
+  // sección en una página pero no en la otra según la posición de scroll.
+  // No pertenece a la superficie comparada: navegación e interacción del header
+  // ya se verifican en QA común. Se oculta en ambas páginas sin cambiar su layout.
+  const captureScope = 'body > header { visibility: hidden !important; } #chapter-transition { visibility: hidden !important; }';
+  await Promise.all([
+    mainPage.addStyleTag({ content: captureScope }),
+    candidatePage.addStyleTag({ content: captureScope })
+  ]);
+
   const prefix = 'visual-' + surface.name + '-' + viewportName;
   const mainPng = await mainElement.screenshot({
     path: testInfo.outputPath(prefix + '-main.png'),
