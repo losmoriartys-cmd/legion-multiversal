@@ -261,6 +261,14 @@ class ResourceInventoryTests(unittest.TestCase):
         self.assertIn("python scripts/audit_resource_inventory.py --output reports/resource-inventory.json", workflow)
         self.assertIn("name: Publicar inventario canónico de recursos y referencias", workflow)
 
+    def test_google_drive_backup_runs_on_main_for_base04_control_changes(self):
+        workflow = (ROOT / ".github/workflows/independent-backup.yml").read_text(encoding="utf-8")
+        self.assertIn("      - main", workflow)
+        self.assertIn("'data/resource-protection-policy.json'", workflow)
+        self.assertIn("'data/resource-change-authorizations.json'", workflow)
+        self.assertIn("'docs/RESOURCE_PROTECTION.md'", workflow)
+        self.assertIn("workflow_dispatch:", workflow)
+
 
 if __name__ == "__main__":
     unittest.main()
