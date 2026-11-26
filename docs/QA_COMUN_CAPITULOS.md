@@ -31,6 +31,8 @@ Las superficies comparadas son:
 
 Para cada superficie se comprueba la geometría y se comparan los bytes de las capturas PNG. Las capturas de `main` y del candidato se adjuntan como evidencia. Las esperas exigen contenido real (cartas, filas y métricas) antes de capturar; no se acepta comparar estados de carga.
 
+Las capturas de secciones ocultan únicamente el encabezado global fijo y la transición entre capítulos mientras se captura el elemento aislado. Esos elementos quedan fuera del componente comparado; navegación y controles del encabezado se verifican aparte en la suite QA común. Esto evita que una diferencia de posición de scroll haga aparecer el encabezado superpuesto en una sola captura, sin ocultar contenido interno de Roster o Estadísticas.
+
 La comparación de Bitácora conserva su normalización específica del marco exterior de identidad, documentada en la prueba existente. Las comparaciones nuevas de Roster y Estadísticas no enmascaran ni normalizan componentes: cualquier diferencia de geometría o de píxeles falla y debe revisarse.
 
 ## Baselines y revisión
