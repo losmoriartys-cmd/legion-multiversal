@@ -122,3 +122,53 @@ Esta repetición cubre el HEAD documental `b45e568...`. Cualquier cambio posteri
 - **Alcance:** esta evidencia corresponde al SHA señalado; no debe atribuirse a los commits de integración #109 o #101.
 - **Antecedente S3:** run [45558641646](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45558641646) falló antes de cualquier transferencia externa porque el preflight no encontró los secretos S3. No hubo operación S3 y no se computa como roundtrip.
 - **Guardrails:** sin schedule, sin rotación y sin borrado automático. La evidencia no habilita ninguna de esas funciones.
+
+
+---
+
+## BASE-04 · Huellas de assets editoriales aprobados · 26/11/2026
+
+### Inventario curado
+
+El archivo data/approved-assets-manifest.json registra **42 assets editoriales activos** mediante su Git blob object ID (git-blob-sha1):
+
+- 8 retratos de assets/carnet/ y 8 ilustraciones de assets/heroes/; los dos directorios quedan enumerados íntegramente.
+- 8 ilustraciones de personaje utilizadas por los expedientes del Roster.
+- 8 imágenes editoriales activas referenciadas por index.html, incluida la imagen del caso comercial BarFender.
+- 3 variantes del logo oficial y 5 variantes responsive del Hero.
+- favicon.svg y og-legion-multiversal.jpg.
+
+La selección parte de image-reference-audit y de las referencias de index.html/data/roster.json. No congela previews históricas sin uso comprobado, capturas huérfanas, duplicados de documentación ni recursos externos dinámicos. El manifiesto guarda huellas, no copias de los binarios: los assets originales siguen siendo la única fuente de contenido.
+
+### Ejecución y protocolo de autorización
+
+scripts/guard_approved_assets.py se ejecuta de manera incondicional en el workflow validar, a continuación del guard de datos críticos. El control falla ante una huella distinta, un asset protegido ausente, un symlink, un intento de retirar rutas del inventario o una modificación del historial de autorizaciones.
+
+Toda modificación deliberada de un asset protegido requiere dos PR separados:
+
+1. **Fase A — autorización de metadatos:** modifica únicamente data/approved-assets-manifest.json y agrega operation, ruta, huella anterior, huella propuesta, razón y referencia. Los bytes del asset permanecen intactos. El check rechaza el cambio de contenido en esta misma fase.
+2. **Fase B — aplicación:** un segundo PR modifica el asset y la huella del manifiesto; el nuevo blob debe coincidir exactamente con la autorización ya integrada en main. Las aprobaciones históricas son append-only.
+
+Las incorporaciones nuevas pueden autorizarse con operation: add, también en dos fases. La eliminación/retirada y el renombrado no están habilitados por la guardia actual: fallan cerrados y requieren una ampliación de política deliberada y probada. Tampoco se permite retirar rutas del inventario existente.
+
+### Pruebas controladas
+
+tests/test_approved_asset_guard.py crea repositorios Git temporales y demuestra:
+- bootstrap del baseline contra los blobs del main real de la fixture;
+- omisión de imágenes dentro de los directorios de Roster;
+- sustitución simultánea a la creación del baseline;
+- reemplazo sin autorización, borrado y reducción del inventario;
+- rechazo de autoautorización en el mismo PR;
+- autorización Fase A y aplicación Fase B;
+- rechazo de bytes diferentes a la huella autorizada;
+- autorización de una nueva imagen de Roster en dos fases;
+- inmutabilidad del historial de autorizaciones.
+
+La suite Python se ejecuta con python -m unittest discover -s tests -v en python-tests; el guard se ejecuta también desde validar sobre origin/main.
+
+### Límites conocidos
+
+Las huellas son Git blob SHA-1: identificadores de contenido nativos de Git adecuados para detectar sustituciones accidentales o cambios no registrados; **no son firmas digitales ni garantizan resistencia a un actor administrador que pueda cambiar a la vez el código, el manifiesto y las reglas del repositorio**. El inventario protege la selección curada de 42 activos, no todos los archivos de imagen del repositorio. Las nuevas incorporaciones en los directorios de Roster deben entrar mediante el flujo de autorización.
+
+La guardia complementa, no reemplaza, la revisión de diff, la protección de ramas de GitHub, el respaldo independiente ni la verificación de restauración.
+
