@@ -27,6 +27,6 @@ test('si falla games.json, se conserva el HTML prerenderizado',async({page})=>{
   await expect(page.locator('#arsenal-grid [data-prerendered="true"]')).toHaveCount(18);
   await expect(page.locator('#collab-registry-status')).toContainText('el contenido HTML sigue disponible');
   await expect(page.locator('#arsenal-registry-status')).toContainText('el contenido HTML sigue disponible');
-  await expect(page.locator('#collab-registry-controls input')).toBeDisabled();
-  await expect(page.locator('#arsenal-registry-controls input')).toBeDisabled();
+  await expect(page.locator('.collab-registry-controls input')).toBeDisabled();
+  await expect(page.locator('.arsenal-registry-controls input')).toBeDisabled();
 });
