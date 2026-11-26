@@ -203,8 +203,8 @@ def evaluate_changes(
 
     elif auth_file_changed:
         bootstrap_empty = (
-            not base_auth and not current_auth and len(changed) == 1
-            and changed[0] == ("A", [auth_file])
+            not base_auth and not current_auth
+            and any(status == "A" and paths == [auth_file] for status, paths in changed)
         )
         if not bootstrap_empty:
             errors.append("El ledger de autorizaciones es append-only: no se permiten cambios ni borrados de registros existentes.")
