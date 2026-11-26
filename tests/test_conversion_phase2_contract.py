@@ -74,7 +74,7 @@ class ConversionPhase2Contract(unittest.TestCase):
         povs = [pov for session in sessions for pov in session["pov"]]
         self.assertIn("18 JUEGOS", arsenal)
         self.assertIn('id="arsenal-grid"', arsenal)
-        self.assertIn('data-arsenal-ready="false"', arsenal)
+        self.assertIn('data-arsenal-ready="prerendered"', arsenal)
         self.assertEqual(len(games), 18)
         self.assertEqual(len(sessions), 11)
         self.assertEqual(len(povs), 14)
