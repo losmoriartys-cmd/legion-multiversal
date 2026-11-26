@@ -180,6 +180,28 @@ class ResourceInventoryTests(unittest.TestCase):
         self.assertEqual(gate.classify("creator-metrics.json", POLICY), "routine_generated_data")
         self.assertEqual(gate.classify("scripts/update_stats.py", POLICY), "review_and_checks")
 
+    def test_inventory_classification_matches_gate_for_policy_ledger_and_schemas(self):
+        policy = {
+            "policy_file": "data/resource-protection-policy.json",
+            "authorization_file": "data/resource-change-authorizations.json",
+            "explicit_paths": ["CODEOWNERS"],
+            "explicit_patterns": ["schemas/**"],
+            "explicit_extensions": [".svg", ".css"],
+            "routine_generated_data": ["creator-metrics.json"],
+            "review_required_patterns": ["scripts/**", "schemas/**"]
+        }
+        for path in (
+            "data/resource-protection-policy.json",
+            "data/resource-change-authorizations.json",
+            "schemas/roster.schema.json",
+            "CODEOWNERS",
+            "cover.svg",
+            "styles.css"
+        ):
+            self.assertEqual(inventory.change_policy(path, policy), "explicit_authorization")
+        self.assertEqual(inventory.change_policy("creator-metrics.json", policy), "routine_generated_data")
+        self.assertEqual(inventory.change_policy("scripts/update_stats.py", policy), "review_and_checks")
+
     def test_reference_scanner_links_an_asset_to_real_source_lines(self):
         sources = {
             "index.html": [
