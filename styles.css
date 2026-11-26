@@ -6339,3 +6339,24 @@ main .chapter-panel :where(.chapter-cta, .executive-button, .comic-submit-btn,
 @media(max-width:650px){.arsenal-chapter .arsenal-registry-summary{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.arsenal-chapter .arsenal-registry-controls,.arsenal-chapter .arsenal-grid{grid-template-columns:minmax(0,1fr)}.arsenal-chapter .arsenal-search-field{grid-column:auto}.arsenal-chapter .arsenal-roulette-panel{grid-template-columns:minmax(0,1fr)}.arsenal-chapter .arsenal-roulette-panel>button{width:100%}.arsenal-chapter .arsenal-roulette-result button{margin:9px 0 0}.arsenal-chapter .arsenal-registry-toolbar{align-items:flex-start;flex-direction:column}}
 @media(max-width:420px){.arsenal-chapter .arsenal-registry-controls,.arsenal-chapter .arsenal-grid{grid-template-columns:minmax(0,1fr)}.arsenal-chapter .arsenal-registry-cover-fallback{padding:15px}.arsenal-chapter .arsenal-registry-card-body{padding:14px}}
 @media(prefers-reduced-motion:reduce){.arsenal-chapter .arsenal-registry-card{scroll-behavior:auto}}
+
+/* Ficha de bitácora con pestañas */
+.collaboration-chapter .collab-tablist{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;padding-bottom:10px;border-bottom:1px solid rgba(127,174,199,.18)}
+.collaboration-chapter .collab-tablist [role="tab"]{min-height:44px;padding:8px 12px;color:#b8c8d8;background:transparent;border:1px solid rgba(127,174,199,.28);font:900 .66rem/1 'Barlow Condensed','Inter',sans-serif;letter-spacing:.1em;cursor:pointer}
+.collaboration-chapter .collab-tablist [role="tab"][aria-selected="true"]{color:#101820;background:#e5c578;border-color:#e5c578}
+.collaboration-chapter .collab-tablist [role="tab"]:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.collaboration-chapter .collab-tabpanel{padding-top:14px}
+.collaboration-chapter .collab-panel-title{margin:0 0 8px;color:#d7c58d;font-size:.64rem;font-weight:900;letter-spacing:.11em}
+.collaboration-chapter .collab-summary{margin:0 0 12px;color:#dbe6f0;font-size:.82rem;line-height:1.6}
+.collaboration-chapter .collab-empty-state{margin:0;padding:12px;color:#a9bacb;border:1px dashed rgba(127,174,199,.35);font-size:.76rem;line-height:1.5}
+.collaboration-chapter .collab-clip-list,.collaboration-chapter .collab-moment-list{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+.collaboration-chapter .collab-clip-link{display:flex;gap:10px;align-items:center;min-height:44px;padding:10px 12px;color:#fff;text-decoration:none;border:1px solid rgba(127,174,199,.28);border-left:4px solid var(--creator-color,#e5c578)}
+.collaboration-chapter .collab-clip-link small{display:block;color:#a9bacb;font-size:.62rem;letter-spacing:.08em}
+.collaboration-chapter .collab-moment-list li{display:grid;grid-template-columns:auto 1fr;gap:10px;color:#dbe6f0;font-size:.78rem;line-height:1.5}
+.collaboration-chapter .collab-moment-time a,.collaboration-chapter .collab-moment-time{color:#e5c578;font-family:'Space Mono',ui-monospace,monospace;font-size:.72rem}
+.collaboration-chapter .collab-numbers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:0}
+.collaboration-chapter .collab-numbers div{padding:12px;border:1px solid rgba(127,174,199,.28)}
+.collaboration-chapter .collab-numbers dt{color:#a9bacb;font-size:.62rem;letter-spacing:.1em}
+.collaboration-chapter .collab-numbers dd{margin:4px 0 0;color:#fff;font-size:1.3rem;font-weight:900}
+.collaboration-chapter .collab-numbers-source{margin:8px 0 0;color:#a9bacb;font-size:.68rem}
+@media(max-width:650px){.collaboration-chapter .collab-numbers{grid-template-columns:minmax(0,1fr)}}
