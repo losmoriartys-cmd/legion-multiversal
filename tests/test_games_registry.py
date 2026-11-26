@@ -55,6 +55,9 @@ class GamesRegistryTests(unittest.TestCase):
         self.assertEqual(session["bit"], "BIT-011")
         self.assertEqual(set(session["participantes"]), {"akuma", "lady-moriarty", "moriartys", "rod3r1k"})
         self.assertEqual({pov["canal"] for pov in session["pov"]}, {"moriartys", "rod3r1k", "lady-moriarty"})
+        self.assertEqual(session["imagen"], "BarFenderLos4.jpg")
+        self.assertEqual(len(session["clips"]), 4)
+        self.assertIn("tres VOD públicos", session["resumen"])
 
     def test_unverified_game_counts_remain_null_and_dates_have_source(self):
         unknown_games = [game for game in GAMES["juegos"] if game["jugadores"] is None]
@@ -78,6 +81,13 @@ class GamesRegistryTests(unittest.TestCase):
         self.assertEqual(game["ediciones"], ["Java", "Bedrock"])
         self.assertIsNone(game["plataformas"])
         self.assertEqual(game["modalidad"], "Mundo compartido")
+
+    def test_session_image_rejects_unsafe_or_missing_paths(self):
+        bad = copy.deepcopy(GAMES)
+        session = next(session for game in bad["juegos"] for session in game["sesiones"])
+        session["imagen"] = "../secrets.jpg"
+        errors = validate_registry(bad, ROSTER)
+        self.assertTrue(any("imagen debe ser una ruta local existente y segura" in error for error in errors))
 
     def test_unknown_participant_is_rejected(self):
         bad = copy.deepcopy(GAMES)
