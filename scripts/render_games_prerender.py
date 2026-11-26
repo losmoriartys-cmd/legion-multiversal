@@ -236,6 +236,9 @@ def render_arsenal_game(game: dict, index: int) -> str:
     store = safe_url(game.get("tienda"))
     if store:
         links.append(f'<a class="arsenal-store-link" href="{esc(store)}" target="_blank" rel="noopener noreferrer">FICHA OFICIAL ↗</a>')
+    source = safe_url(game.get("fuente_jugadores"))
+    if source:
+        links.append(f'<a class="arsenal-player-source" href="{esc(source)}" target="_blank" rel="noopener noreferrer">FUENTE DE JUGADORES ↗</a>')
     if sessions:
         links.append(
             f'<a class="arsenal-bit-link" href="#{esc(str(sessions[0].get("bit") or "").lower())}">'
