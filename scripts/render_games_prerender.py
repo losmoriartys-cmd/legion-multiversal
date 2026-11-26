@@ -141,7 +141,7 @@ def render_collab_session(game: dict, session: dict, names: dict[str, str]) -> s
     if image and IMAGE_RE.fullmatch(image) and (ROOT / image).is_file():
         session_image = (
             f'<figure class="campaign-editorial-art collab-session-art"><img src="{esc(image)}" '
-            f'alt="Imagen de la sesión de {title}" loading="lazy" decoding="async">'
+            f'alt="Imagen de la sesión de {title}" loading="lazy" decoding="async" width="2048" height="1152">'
             f'<figcaption>UNA SESIÓN · PUNTOS DE VISTA DE LA LEGIÓN</figcaption></figure>'
         )
     summary = session.get("resumen") or session.get("nota") or "Resumen editorial pendiente de completar."
@@ -175,7 +175,7 @@ def render_collab_session(game: dict, session: dict, names: dict[str, str]) -> s
     if store:
         links.append(f'<a class="collab-store-link" href="{esc(store)}" target="_blank" rel="noopener noreferrer">FICHA OFICIAL ↗</a>')
     if game.get("expediente_comercial"):
-        links.append('<a class="collab-store-link" href="#barfender-expediente">ARCHIVO HISTÓRICO · EXP-001 ↗</a>')
+        links.append('<a class="collab-store-link" href="#barfender-expediente">ARCHIVO HISTÓRICO · EXP-001 →</a>')
     pov_html = "<ul>" + "".join(pov_items) + "</ul>" if pov_items else "<p>POV públicos pendientes de registrar.</p>"
     clips_html = "<ul>" + "".join(clip_items) + "</ul>" if clip_items else "<p>Clips destacados pendientes de registrar.</p>"
     return (
