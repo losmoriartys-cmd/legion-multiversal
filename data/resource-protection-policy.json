@@ -20,7 +20,8 @@
     "news-data.json",
     "data/integrity-manifest.json",
     "tests/baselines/approved-editorial-updates.json",
-    "tests/baselines/identity-before-canonical-migration.json"
+    "tests/baselines/identity-before-canonical-migration.json",
+    "CODEOWNERS"
   ],
   "explicit_extensions": [
     ".avif",
@@ -83,5 +84,9 @@
     "hash_algorithm": "SHA-256",
     "reference_required": true,
     "reason_required": true
-  }
+  },
+  "policy_file": "data/resource-protection-policy.json",
+  "explicit_patterns": [
+    "schemas/**"
+  ]
 }
