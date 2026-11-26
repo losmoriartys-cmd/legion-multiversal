@@ -6,7 +6,7 @@ test.beforeEach(async({page})=>{
   await expect(page.locator('#collab-games-registry')).toHaveAttribute('data-collab-ready','true');
 });
 
-test('Capítulo 07 muestra las diez sesiones desde el registro maestro',async({page})=>{
+test('Capítulo 07 muestra las once sesiones desde el registro maestro',async({page})=>{
   const cards=page.locator('#collab-registry-grid [data-collab-session]');
   await expect(cards).toHaveCount(11);
   await expect(page.locator('#collab-registry-summary')).toContainText('11');
@@ -27,6 +27,18 @@ test('Among Us distingue cuatro participantes de sus dos canales POV',async({pag
   const povChannels=await card.locator('.collab-pov-link').evaluateAll(nodes=>nodes.map(node=>node.dataset.povChannel));
   expect(povChannels.sort()).toEqual(['moriartys','rod3r1k'].sort());
   expect(participants).not.toContain('moriartys');
+});
+
+test('BarFender concentra imagen, clips y archivo EXP-001 dentro de BIT-011',async({page})=>{
+  const card=page.locator('#collab-registry-grid [data-collab-session="BIT-011"]');
+  await expect(card).toHaveCount(1);
+  await card.locator('details.collab-ficha > summary').click();
+  await expect(card.locator('.collab-session-art img')).toHaveAttribute('src','BarFenderLos4.jpg');
+  await expect(card.locator('.collab-clip-list li')).toHaveCount(4);
+  await expect(card.locator('.collab-session-actions a').filter({hasText:'ARCHIVO HISTÓRICO · EXP-001'})).toHaveAttribute('href','#barfender-expediente');
+  const archive=page.locator('#barfender-expediente');
+  await expect(archive.locator('summary')).toContainText('ARCHIVO HISTÓRICO');
+  await expect(archive.locator('.campaign-four-views')).toHaveCount(0);
 });
 
 test('PEAK asigna su POV al canal de Akuma y permite abrir su VOD',async({page})=>{
@@ -54,7 +66,7 @@ test('filtros por texto, categoría y creador reducen los expedientes',async({pa
   await page.locator('#collab-search').fill('');
   await page.locator('#collab-category').selectOption('all');
   await page.locator('#collab-creator').selectOption('all');
-  await expect(cards).toHaveCount(10);
+  await expect(cards).toHaveCount(11);
 });
 
 test('cada sesión permite volver al Arsenal por el ID canónico del juego',async({page})=>{
