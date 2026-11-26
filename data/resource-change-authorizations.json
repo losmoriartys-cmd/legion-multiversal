@@ -63,6 +63,15 @@
       "to_sha256": "5aae8da54b85efe2a569389d08bdb9aee6809ca7a15457485f84f1299d11d5e2",
       "reason": "Ajustar la grilla de resumen del Arsenal a tres métricas, coherente con la eliminación del indicador commercial.",
       "reference": "Issue #133 / PR #130 · fase A"
+    },
+    {
+      "id": "prerender-bitacora-arsenal-index-html-2026-11-26",
+      "path": "index.html",
+      "action": "update",
+      "from_sha256": "a9b87ce1c6054ebee0608ab5ba6d2a5aaabdbd0157f1b1ea3fccb4619884153a",
+      "to_sha256": "30c826812af135828ecfa47e8cac98f88e564db97ff7060e9b6c3cfb0538371f",
+      "reason": "Generar en HTML inicial las 11 sesiones BIT y las 18 fichas del Arsenal desde los JSON canónicos; publicar resúmenes vigentes, mantener EXP-001 como archivo histórico y conservar contenido estático sin JavaScript o ante fallo de fetch.",
+      "reference": "Issue #135 / WEB-01 · fase A"
     }
   ]
 }
