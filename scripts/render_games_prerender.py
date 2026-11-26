@@ -314,8 +314,23 @@ def main() -> int:
         print(f"ERROR: {exc}", file=sys.stderr)
         return 2
     if args.check:
+        for key, generated in generated_blocks(games, roster).items():
+            start_marker, end_marker = MARKERS[key]
+            left = source.index(start_marker) + len(start_marker)
+            right = source.index(end_marker, left)
+            actual = source[left:right].strip("\\n")
+            if actual != generated:
+                limit = min(len(actual), len(generated))
+                offset = next((index for index in range(limit) if actual[index] != generated[index]), limit)
+                print(
+                    f"ERROR: bloque {key} desincronizado en offset {offset}; "
+                    f"HTML={actual[max(0, offset - 60):offset + 100]!r}; "
+                    f"JSON={generated[max(0, offset - 60):offset + 100]!r}",
+                    file=sys.stderr,
+                )
+                return 1
         if source != expected:
-            print("ERROR: el HTML prerenderizado está desincronizado. Ejecutá: python scripts/render_games_prerender.py --write", file=sys.stderr)
+            print("ERROR: el HTML prerenderizado está desincronizado fuera de los bloques generados.", file=sys.stderr)
             return 1
         entries = sessions_for(games)
         print(
