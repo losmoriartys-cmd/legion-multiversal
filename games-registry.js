@@ -92,12 +92,16 @@
     const summary = document.createElement('summary');
     summary.textContent = 'EXP-001 · ARCHIVO HISTÓRICO · MATERIAL DE APOYO';
     const parent = legacy.parentNode;
+    const continuity = legacy.nextElementSibling && legacy.nextElementSibling.classList.contains('collab-log-section')
+      ? legacy.nextElementSibling
+      : null;
     const duplicateImages = legacy.querySelectorAll('.campaign-four-views, .barfender-steam-art');
     duplicateImages.forEach(function (image) { image.remove(); });
     legacy.removeAttribute('id');
     parent.insertBefore(details, legacy);
     details.appendChild(summary);
     details.appendChild(legacy);
+    if (continuity) details.appendChild(continuity);
     legacy.dataset.archived = 'true';
   }
   archiveLegacyDossier();
