@@ -267,6 +267,8 @@ class ResourceInventoryTests(unittest.TestCase):
         self.assertIn("'data/resource-protection-policy.json'", workflow)
         self.assertIn("'data/resource-change-authorizations.json'", workflow)
         self.assertIn("'docs/RESOURCE_PROTECTION.md'", workflow)
+        for pattern in ("'**/*.json'", "'**/*.html'", "'**/*.css'", "'**/*.jpg'", "'**/*.png'", "'**/*.svg'", "'**/*.webp'", "'**/*.woff2'"):
+            self.assertIn(pattern, workflow)
         self.assertIn("workflow_dispatch:", workflow)
 
 
