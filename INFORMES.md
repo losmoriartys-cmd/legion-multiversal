@@ -4409,7 +4409,7 @@ Esta sección prevalece sobre los estados provisionales de las anotaciones hist�
 - **HEAD confirmado de main:** `6c7f2cdc84dd1404ea1413049edc57e31faede78` (merge #118).
 - [Run de validación post-merge](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45754836593): SUCCESS; 58/58 Playwright, incluidas las comparaciones exactas de Roster y Estadísticas.
 - [Validación del colector/Python](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45754836591): SUCCESS.
-- [Build y despliegue de Cloudflare Pages](https://github.com/losmoriartys-cmd/legion-multiversal/actions/runs/45754835362): SUCCESS; los checks `build`, `deploy`, `report-build-status` y `Cloudflare Pages` también terminaron en verde.
+- [Check de despliegue de Cloudflare Pages](https://github.com/losmoriartys-cmd/legion-multiversal/runs/139692479026): SUCCESS sobre el mismo SHA `6c7f2cdc84dd1404ea1413049edc57e31faede78`; preview y branch preview confirmados. El workflow `45754835362` corresponde a GitHub Pages y no se usa como evidencia de Cloudflare.
 - La integración #117/#118 afecta únicamente documentación QA y pruebas Playwright; no modifica el HTML editorial, CSS del producto, assets, tipografías ni datos del Roster.
 
 ### Resultado y siguiente dependencia
