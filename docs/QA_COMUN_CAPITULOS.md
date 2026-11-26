@@ -2,7 +2,8 @@
 ## Objetivo
 Aplicar un contrato responsive y de navegación reutilizable a todos los capítulos, sin sustituir pruebas específicas ni debilitar aserciones.
 ## Cobertura
-- IDs de capítulo cubiertos: 0, 1, 2, 3, 11, 9, 10, 8, 12, 5, 6, 13.
+- IDs de capítulo cubiertos en `main` (11 paneles reales): 0, 1, 2, 3, 6, 8, 9, 10, 11, 12 y 13.
+- La lista debe coincidir exactamente con los paneles `#chapter-N` existentes en `index.html`; la prueba de QA común comprueba esta correspondencia para evitar omisiones o IDs obsoletos.
 - Viewports: 1440, 1024, 768, 390 y 360 px.
 - Navegación mediante la función canónica `switchChapter`.
 - Overflow horizontal del panel y del documento, con diagnóstico de descendientes visibles.
