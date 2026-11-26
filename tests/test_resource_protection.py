@@ -143,6 +143,11 @@ class ResourceChangeGateTests(unittest.TestCase):
 
 
 class ResourceInventoryTests(unittest.TestCase):
+    def evaluate(self, changed, baseline=EMPTY, current=EMPTY, before=None, after=None):
+        before = before or (lambda _path: "a" * 64)
+        after = after or (lambda _path: "b" * 64)
+        return gate.evaluate_changes(POLICY, baseline, current, changed, before, after)
+
     def test_visual_assets_and_security_policy_require_explicit_authorization(self):
         for path in (
             "cover.jpg", "assets/heroes/akuma_dark.jpg", "styles.css", "index.html",
