@@ -6,11 +6,13 @@ import argparse
 import fnmatch
 import hashlib
 import json
+import os
 import re
 import subprocess
 import sys
 from collections import Counter
 from pathlib import Path, PurePosixPath
+from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 POLICY_PATH = ROOT / "data/resource-protection-policy.json"
@@ -154,7 +156,9 @@ def external_resources(sources: dict[str, list[str]]) -> tuple[list[dict], list[
             if declares_font_url and any(domain in line for domain in FONT_DOMAINS):
                 for raw_url in url_re.findall(line):
                     url = raw_url.split('"', 1)[0].split("'", 1)[0].split(">", 1)[0].split(")", 1)[0].rstrip(";,")
-                    if any(domain in url for domain in FONT_DOMAINS) and url not in seen_urls:
+                    parsed = urlsplit(url)
+                    # Host-only preconnects are recorded separately; they are not font file/CSS dependencies.
+                    if parsed.hostname in FONT_DOMAINS and (parsed.path not in {"", "/"} or parsed.query) and url not in seen_urls:
                         seen_urls.add(url)
                         urls.append({
                             "provider": "Google Fonts",
@@ -217,6 +221,10 @@ def build_inventory(policy: dict) -> dict:
     return {
         "schema_version": 1,
         "source_commit": git("rev-parse", "HEAD").strip(),
+        "github_sha": os.environ.get("GITHUB_SHA"),
+        "github_ref": os.environ.get("GITHUB_REF"),
+        "github_event": os.environ.get("GITHUB_EVENT_NAME"),
+        "workflow_run_id": os.environ.get("GITHUB_RUN_ID"),
         "policy_file": "data/resource-protection-policy.json",
         "tracked_file_count": len(resources),
         "summary": {
