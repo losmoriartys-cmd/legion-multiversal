@@ -256,6 +256,7 @@
     });
   }
   function render() {
+    if (!games.length && grid.querySelector('[data-prerendered="true"]')) return;
     const visible = filteredSessions();
     grid.innerHTML = visible.length ? visible.map(renderSession).join('') :
       '<div class="collab-registry-empty"><strong>NO ENCONTRAMOS SESIONES CON ESOS FILTROS.</strong><p>Probá con otra palabra, categoría o creador.</p><button type="button" id="collab-reset-filters">LIMPIAR FILTROS</button></div>';
