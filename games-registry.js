@@ -90,8 +90,8 @@
     const summary = document.createElement('summary');
     summary.textContent = 'EXP-001 · ARCHIVO HISTÓRICO · MATERIAL DE APOYO';
     const parent = legacy.parentNode;
-    const duplicateGroupImage = legacy.querySelector('.campaign-four-views');
-    if (duplicateGroupImage) duplicateGroupImage.remove();
+    const duplicateImages = legacy.querySelectorAll('.campaign-four-views, .barfender-steam-art');
+    duplicateImages.forEach(function (image) { image.remove(); });
     legacy.removeAttribute('id');
     parent.insertBefore(details, legacy);
     details.appendChild(summary);
