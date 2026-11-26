@@ -179,6 +179,45 @@ class ResourceInventoryTests(unittest.TestCase):
         self.assertEqual(len(urls), 2)
         self.assertEqual({item["family"] for item in families}, {"Bangers"})
 
+    def test_git_restore_rolls_back_an_asset_and_critical_data_fixture(self):
+        import subprocess
+        import tempfile
+
+        def git(root, *args):
+            return subprocess.run(
+                ["git", "-C", str(root), *args],
+                check=True, capture_output=True, text=True
+            ).stdout.strip()
+
+        with tempfile.TemporaryDirectory() as folder:
+            repo = Path(folder)
+            (repo / "data").mkdir()
+            original_asset = b"approved-image-bytes"
+            original_roster = b'{"heroes":[{"id":"akuma"}]}'
+            (repo / "cover.jpg").write_bytes(original_asset)
+            (repo / "data/roster.json").write_bytes(original_roster)
+            git(repo, "init")
+            git(repo, "config", "user.email", "base04-test@example.invalid")
+            git(repo, "config", "user.name", "BASE-04 Test")
+            git(repo, "add", "cover.jpg", "data/roster.json")
+            git(repo, "commit", "-m", "approved baseline")
+            baseline = git(repo, "rev-parse", "HEAD")
+
+            (repo / "cover.jpg").write_bytes(b"unapproved-or-damaged-image")
+            (repo / "data/roster.json").write_bytes(b'{"heroes":[]}')
+            git(repo, "restore", "--source", baseline, "--", "cover.jpg", "data/roster.json")
+
+            self.assertEqual((repo / "cover.jpg").read_bytes(), original_asset)
+            self.assertEqual((repo / "data/roster.json").read_bytes(), original_roster)
+            self.assertEqual(git(repo, "rev-parse", f"{baseline}:cover.jpg"), git(repo, "rev-parse", "HEAD:cover.jpg"))
+            self.assertEqual(git(repo, "rev-parse", f"{baseline}:data/roster.json"), git(repo, "rev-parse", "HEAD:data/roster.json"))
+
+    def test_resource_policy_workflow_is_part_of_required_site_validation(self):
+        workflow = (ROOT / ".github/workflows/validar-sitio.yml").read_text(encoding="utf-8")
+        self.assertIn("python scripts/check_resource_change_policy.py --base-ref origin/main --recovery-report", workflow)
+        self.assertIn("python scripts/audit_resource_inventory.py --output reports/resource-inventory.json", workflow)
+        self.assertIn("name: Publicar inventario canónico de recursos y referencias", workflow)
+
 
 if __name__ == "__main__":
     unittest.main()
