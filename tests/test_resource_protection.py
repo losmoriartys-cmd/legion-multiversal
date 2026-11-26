@@ -192,22 +192,34 @@ class ResourceInventoryTests(unittest.TestCase):
         self.assertEqual(refs[0]["source"], "index.html")
         self.assertEqual(refs[0]["line"], 1)
         self.assertEqual(refs[0]["token"], "assets/hero-cover.jpg")
+        self.assertEqual(refs[0]["source_role"], "runtime_source")
 
     def test_reference_scanner_does_not_confuse_similar_basenames(self):
         sources = {"index.html": ['<img src="hero-cover-small.jpg">']}
         refs = inventory.references_for("hero-cover.jpg", sources, True)
         self.assertEqual(refs, [])
 
-    def test_external_google_font_urls_and_families_are_reported(self):
+    def test_external_google_font_urls_exclude_test_and_workflow_examples(self):
         sources = {
             "index.html": [
                 '<link rel="preload" href="https://fonts.gstatic.com/s/bangers/v25/font.woff2">',
                 '<link href="https://fonts.googleapis.com/css2?family=Bangers&display=optional">'
             ],
-            "styles.css": ["h1 { font-family: 'Bangers', sans-serif; }"]
+            "styles.css": ["h1 { font-family: 'Bangers', sans-serif; }"],
+            "tests/test_resource_protection.py": [
+                'fixture = "https://fonts.googleapis.com/css2?family=FakeTestFont"',
+                'fixture = "https://fonts.gstatic.com/s/fake-test-font.woff2"'
+            ],
+            ".github/workflows/validar-sitio.yml": [
+                'sample = "https://fonts.googleapis.com/css2?family=WorkflowFixture"'
+            ],
+            "docs/RESOURCE_PROTECTION.md": [
+                'Example URL: https://fonts.googleapis.com/css2?family=DocumentationExample'
+            ]
         }
         urls, families = inventory.external_resources(sources)
         self.assertEqual(len(urls), 2)
+        self.assertEqual({item["source"] for item in urls}, {"index.html"})
         self.assertEqual({item["family"] for item in families}, {"Bangers"})
 
     def test_git_restore_rolls_back_an_asset_and_critical_data_fixture(self):
