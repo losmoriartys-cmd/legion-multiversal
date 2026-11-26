@@ -125,7 +125,8 @@ def render_collab_session(game: dict, session: dict, names: dict[str, str]) -> s
         f'<span class="collab-category-chip">{esc(category)}</span>'
         for category in (game.get("categorias") or [])
     )
-    cover = safe_url(game.get("portada"))
+    # External cover art is hydrated by the interactive registry; the static fallback stays self-contained.
+    cover = ""
     poster_art = (
         f'<img src="{esc(cover)}" alt="Portada de {title}" loading="lazy" decoding="async">'
         if cover else '<span class="collab-poster-fallback">ARTE OFICIAL PENDIENTE</span>'
@@ -210,7 +211,8 @@ def render_arsenal_game(game: dict, index: int) -> str:
     state = "documented" if sessions else "discovery"
     label = "COLABORACIÓN DOCUMENTADA" if sessions else "POR DESCUBRIR"
     title = esc(game.get("nombre") or "Juego sin título")
-    cover = safe_url(game.get("portada"))
+    # External cover art is hydrated by the interactive registry; the static fallback stays self-contained.
+    cover = ""
     cover_html = (
         f'<div class="arsenal-registry-cover"><img src="{esc(cover)}" alt="Arte de {title}" loading="lazy" decoding="async"><span>{label}</span></div>'
         if cover else
