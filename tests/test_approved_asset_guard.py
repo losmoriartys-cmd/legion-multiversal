@@ -129,7 +129,7 @@ class ApprovedAssetGuardTests(unittest.TestCase):
             "algorithm": "git-blob-sha1",
             "protected_roots": list(guard.REQUIRED_ROOTS),
             "protected_assets": {
-                "assets/carnet/profile.jpg": self.repo.blob("assets/carnet/profile.jpg"),
+                "assets/carnet/profile.jpg": self.repo.hash_bytes(b"unreviewed replacement"),
                 "assets/carnet/second.jpg": self.repo.blob("assets/carnet/second.jpg", "main"),
                 "assets/heroes/card.webp": self.repo.blob("assets/heroes/card.webp", "main"),
                 "editorial.jpg": self.repo.blob("editorial.jpg", "main"),
