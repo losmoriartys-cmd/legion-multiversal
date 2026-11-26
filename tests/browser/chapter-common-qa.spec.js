@@ -21,6 +21,10 @@ test('QA común: índice y recorrido de capítulos',async({page})=>{
  await page.setViewportSize({width:390,height:844});
  await page.emulateMedia({reducedMotion:'reduce'});
  await page.goto('/');
+ const actualChapterIds = await page.locator('[id^="chapter-"]').evaluateAll(nodes =>
+  nodes.map(node => /^chapter-(\\d+)$/.exec(node.id)).filter(Boolean).map(match => Number(match[1])).sort((a,b)=>a-b)
+ );
+ expect(actualChapterIds, 'La matriz QA debe cubrir todos los paneles chapter-N existentes en index.html').toEqual([...chapters].sort((a,b)=>a-b));
  await expect(page.locator('body > header').first()).toBeVisible();
  expect(await page.locator('[onclick*="switchChapter"]').count()).toBeGreaterThan(0);
  for(const chapterId of chapters){
