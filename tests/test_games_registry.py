@@ -57,6 +57,20 @@ class GamesRegistryTests(unittest.TestCase):
         errors = validate_registry(bad, ROSTER)
         self.assertTrue(any("numeros.capturado no es una fecha de calendario válida" in error for error in errors))
 
+    def test_clip_channel_with_wrong_json_type_is_rejected_without_crashing(self):
+        bad = copy.deepcopy(GAMES)
+        session = next(session for game in bad["juegos"] for session in game["sesiones"])
+        session["clips"] = [{"titulo": "Clip de prueba", "canal": [], "url": "https://clips.twitch.tv/ValidSlug"}]
+        errors = validate_registry(bad, ROSTER)
+        self.assertTrue(any("canal de clip no es un integrante con Twitch" in error for error in errors))
+
+    def test_moment_channel_with_wrong_json_type_is_rejected_without_crashing(self):
+        bad = copy.deepcopy(GAMES)
+        session = next(session for game in bad["juegos"] for session in game["sesiones"])
+        session["momentos"] = [{"t": "0:01:00", "texto": "Momento de prueba", "canal": []}]
+        errors = validate_registry(bad, ROSTER)
+        self.assertTrue(any("el momento debe referirse a un canal con POV" in error for error in errors))
+
     def test_among_us_separates_four_participants_from_two_pov_channels(self):
         game = next(game for game in GAMES["juegos"] if game["id"] == "among-us")
         session = game["sesiones"][0]

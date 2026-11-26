@@ -65,7 +65,7 @@ def validate_ficha_fields(label: str, bit: str, session: dict, twitch_ids: set) 
                     continue
                 if not isinstance(clip["titulo"], str) or not clip["titulo"].strip():
                     errors.append(f"{where}: clip sin título.")
-                if clip["canal"] not in twitch_ids:
+                if not isinstance(clip["canal"], str) or clip["canal"] not in twitch_ids:
                     errors.append(f"{where}: canal de clip no es un integrante con Twitch: {clip['canal']}.")
                 url = clip["url"]
                 if not is_https_url(url) or not re.fullmatch(r"https://(?:www\.)?twitch\.tv/[A-Za-z0-9_]+/clip/[A-Za-z0-9_-]+|https://clips\.twitch\.tv/[A-Za-z0-9_-]+", url or ""):
@@ -112,7 +112,7 @@ def validate_ficha_fields(label: str, bit: str, session: dict, twitch_ids: set) 
                     errors.append(f"{where}: momento con tiempo inválido (usar H:MM:SS): {moment['t']}.")
                 if not isinstance(moment["texto"], str) or not moment["texto"].strip():
                     errors.append(f"{where}: momento sin texto.")
-                if moment["canal"] not in pov_channels:
+                if not isinstance(moment["canal"], str) or moment["canal"] not in pov_channels:
                     errors.append(f"{where}: el momento debe referirse a un canal con POV en esta sesión: {moment['canal']}.")
     return errors
 
