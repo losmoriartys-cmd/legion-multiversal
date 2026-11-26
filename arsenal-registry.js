@@ -138,6 +138,13 @@
     }catch(error){
       console.error('No se pudo cargar el Arsenal compartido:',error);
       root.dataset.arsenalReady='error';root.setAttribute('aria-busy','false');grid.setAttribute('aria-busy','false');
+      const hasPrerendered=Boolean(grid.querySelector('[data-prerendered="true"]'));
+      if(hasPrerendered){
+        root.dataset.arsenalReady='static';
+        status.textContent='No se pudo actualizar el Arsenal; el contenido HTML sigue disponible. Filtros y ruleta quedaron desactivados.';
+        [search,stateFilter,categoryFilter,playersFilter,rouletteButton,resetButton].forEach(control=>{control.disabled=true;});
+        return null;
+      }
       status.textContent='No se pudo conectar con el catálogo compartido.';
       grid.innerHTML='<div class="arsenal-registry-empty" role="alert"><strong>EL CATÁLOGO NO ESTÁ DISPONIBLE.</strong><p>Los registros no se pierden; podés volver a intentar la carga.</p><button type="button" id="arsenal-retry">REINTENTAR</button></div>';
       document.getElementById('arsenal-retry')?.addEventListener('click',load);return null;
