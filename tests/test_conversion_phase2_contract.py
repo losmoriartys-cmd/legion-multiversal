@@ -36,6 +36,8 @@ class ConversionPhase2Contract(unittest.TestCase):
         self.assertIn("SEGUNDA NOCHE · 11 NOV 2026", self.html)
         self.assertIn("SIN VOD PÚBLICO", self.html)
         self.assertIn("no genera BIT-012", self.html)
+        self.assertIn("APRENDIZAJES DE LA COLABORACIÓN", self.html)
+        self.assertNotIn("VALOR PARA MARCAS Y PUBLISHERS", self.html)
         self.assertNotIn("DURACIÓN NO REGISTRADA", self.html)
         collaboration = self.html.split('id="chapter-12"', 1)[1].split('id="chapter-6"', 1)[0]
         self.assertIn("CASO COLABORATIVO DOCUMENTADO · N.º 001", collaboration)
