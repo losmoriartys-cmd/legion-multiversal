@@ -32,9 +32,9 @@ class CollaborationsRegistryContractTests(unittest.TestCase):
 
     def test_all_documented_sessions_come_from_one_master_catalog(self):
         sessions = [session for game in GAMES["juegos"] for session in game["sesiones"]]
-        self.assertEqual(len(sessions), 10)
-        self.assertEqual(sum(len(session["pov"]) for session in sessions), 11)
-        self.assertEqual(len({session["bit"] for session in sessions}), 10)
+        self.assertEqual(len(sessions), 11)
+        self.assertEqual(sum(len(session["pov"]) for session in sessions), 14)
+        self.assertEqual(len({session["bit"] for session in sessions}), 11)
         self.assertIn("games.json", SCRIPT)
 
     def test_among_us_keeps_participants_separate_from_pov_channels(self):
@@ -44,11 +44,11 @@ class CollaborationsRegistryContractTests(unittest.TestCase):
         self.assertNotIn("moriartys", session["participantes"])
         self.assertEqual([pov["canal"] for pov in session["pov"]], ["moriartys", "rod3r1k"])
 
-    def test_barfender_remains_outside_the_bit_timeline_as_exp001(self):
+    def test_barfender_is_in_the_bit_timeline_and_keeps_its_exp001_link(self):
         game = next(game for game in GAMES["juegos"] if game["id"] == "barfender")
         chapter = HTML.split('id="chapter-12"', 1)[1].split('id="chapter-6"', 1)[0]
         self.assertEqual(game["expediente_comercial"], "EXP-001")
-        self.assertEqual(game["sesiones"], [])
+        self.assertEqual([session["bit"] for session in game["sesiones"]], ["BIT-011"])
         self.assertIn("EXP-001", chapter)
         self.assertIn('id="barfender-expediente"', chapter)
         self.assertIn("collab-registry", chapter)

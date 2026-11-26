@@ -11,16 +11,12 @@ test('Arsenal carga 18 juegos únicos y separa sus estados',async({page})=>{
   const cards=page.locator('#arsenal-grid [data-arsenal-game]');
   await expect(cards).toHaveCount(18);
   await expect(page.locator('#arsenal-registry-status')).toContainText('18 juegos visibles');
-  await expect(page.locator('#arsenal-registry-summary')).toContainText('10');
+  await expect(page.locator('#arsenal-registry-summary')).toContainText('11');
   await expect(page.locator('#arsenal-registry-summary')).toContainText('7');
-  await expect(page.locator('#arsenal-registry-summary')).toContainText('1');
   await page.locator('#arsenal-status-filter').selectOption('documented');
-  await expect(cards).toHaveCount(10);
+  await expect(cards).toHaveCount(11);
   await page.locator('#arsenal-status-filter').selectOption('discovery');
   await expect(cards).toHaveCount(7);
-  await page.locator('#arsenal-status-filter').selectOption('commercial');
-  await expect(cards).toHaveCount(1);
-  await expect(cards.first()).toHaveAttribute('data-game-id','barfender');
 });
 
 test('Escape the Backrooms aparece una sola vez con su título y tienda oficial',async({page})=>{

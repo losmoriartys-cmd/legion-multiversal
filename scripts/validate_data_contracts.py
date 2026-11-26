@@ -172,12 +172,13 @@ def semantic_diagnostics(documents: dict[str, Any]) -> list[str]:
             errors.append(f"twitchmetrics-data.json#/channels/{login}: la cuenta Twitch no existe en el Roster.")
 
     # The commercial expediente and collaboration-result case IDs are different namespaces.
-    # Keep BarFender EXP-001 in games.json; do not coerce creator case slugs into EXP IDs or BIT sessions.
+    # BarFender conserva EXP-001 como vínculo a su expediente y además es una sesión BIT normal (BIT-011);
+    # no se fuerzan los slugs de casos de creadores a IDs EXP.
     barfender = next((item for item in games.get("juegos", []) if item.get("id") == "barfender"), None)
-    if barfender and (barfender.get("expediente_comercial") != "EXP-001" or barfender.get("sesiones") != []):
+    if barfender and (barfender.get("expediente_comercial") != "EXP-001" or not barfender.get("sesiones")):
         errors.append(
-            "data/games.json#/juegos/barfender: conservar EXP-001 como expediente comercial; "
-            "no convertirlo en una sesión BIT sin evidencia y decisión editorial."
+            "data/games.json#/juegos/barfender: conservar EXP-001 como vínculo al expediente "
+            "y mantener su sesión BIT registrada."
         )
 
     return errors

@@ -33,7 +33,11 @@ class ConversionPhase2Contract(unittest.TestCase):
         self.assertIn("selectAllianceModelTab", self.js)
 
     def test_barfender_continuity_and_clip_metadata(self):
-        self.assertIn("SESIÓN 02 · 11 NOV 2026", self.html)
+        self.assertIn("SEGUNDA NOCHE · 11 NOV 2026", self.html)
+        self.assertIn("SIN VOD PÚBLICO", self.html)
+        self.assertIn("no genera BIT-012", self.html)
+        self.assertIn("APRENDIZAJES DE LA COLABORACIÓN", self.html)
+        self.assertNotIn("VALOR PARA MARCAS Y PUBLISHERS", self.html)
         self.assertNotIn("DURACIÓN NO REGISTRADA", self.html)
         collaboration = self.html.split('id="chapter-12"', 1)[1].split('id="chapter-6"', 1)[0]
         self.assertIn("CASO COLABORATIVO DOCUMENTADO · N.º 001", collaboration)
@@ -72,8 +76,8 @@ class ConversionPhase2Contract(unittest.TestCase):
         self.assertIn('id="arsenal-grid"', arsenal)
         self.assertIn('data-arsenal-ready="false"', arsenal)
         self.assertEqual(len(games), 18)
-        self.assertEqual(len(sessions), 10)
-        self.assertEqual(len(povs), 11)
+        self.assertEqual(len(sessions), 11)
+        self.assertEqual(len(povs), 14)
         self.assertNotIn("11. BarFender", arsenal)
         self.assertNotIn("El historial de campañas y accesos se retiró", arsenal)
 
@@ -97,9 +101,6 @@ class ConversionPhase2Contract(unittest.TestCase):
             self.assertIn(title, clips)
 
 
-if __name__ == "__main__":
-    unittest.main()
-
     def test_barfender_summary_card_has_four_metrics_and_collapsed_reading(self):
         case = self.html.split('<div class="campaign-case-index">', 1)[1].split('<section class="campaign-vods">', 1)[0]
         self.assertEqual(case.count("<article><strong>"), 4)
@@ -116,3 +117,6 @@ if __name__ == "__main__":
         self.assertIn('id="stats-updated" class="stats-note" hidden', self.html)
         self.assertIn('class="loading-skeleton-grid"', self.html)
         self.assertIn("updatedNode.hidden=false", self.js)
+
+if __name__ == "__main__":
+    unittest.main()

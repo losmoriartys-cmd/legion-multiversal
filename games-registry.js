@@ -30,7 +30,9 @@
     if (typeof value !== 'string') return '';
     try {
       const url = new URL(value);
-      if (url.protocol !== 'https:' || (allowedHostSuffix && !url.hostname.endsWith(allowedHostSuffix))) return '';
+      const hostname = url.hostname.toLowerCase();
+      const allowedHost = !allowedHostSuffix || hostname === allowedHostSuffix || hostname.endsWith('.' + allowedHostSuffix);
+      if (url.protocol !== 'https:' || !allowedHost) return '';
       return url.href;
     } catch (error) { return ''; }
   }
@@ -81,6 +83,30 @@
     return Number(match[3]) + ' ' + MONTHS_ES[Number(match[2]) - 1] + ' ' + match[1];
   }
 
+  function archiveLegacyDossier() {
+    const legacy = document.getElementById('barfender-expediente');
+    if (!legacy || legacy.dataset.archived === 'true') return;
+    const details = document.createElement('details');
+    details.className = 'barfender-reading';
+    details.id = 'barfender-expediente';
+    details.dataset.archived = 'true';
+    const summary = document.createElement('summary');
+    summary.textContent = 'EXP-001 · ARCHIVO HISTÓRICO · MATERIAL DE APOYO';
+    const parent = legacy.parentNode;
+    const continuity = legacy.nextElementSibling && legacy.nextElementSibling.classList.contains('collab-log-section')
+      ? legacy.nextElementSibling
+      : null;
+    const duplicateImages = legacy.querySelectorAll('.campaign-four-views, .barfender-steam-art');
+    duplicateImages.forEach(function (image) { image.remove(); });
+    legacy.removeAttribute('id');
+    parent.insertBefore(details, legacy);
+    details.appendChild(summary);
+    details.appendChild(legacy);
+    if (continuity) details.appendChild(continuity);
+    legacy.dataset.archived = 'true';
+  }
+  archiveLegacyDossier();
+
   function formatDuration(seconds) {
     const total = Number(seconds);
     if (!Number.isFinite(total) || total < 0) return null;
@@ -107,6 +133,7 @@
     const clips = (session.clips || []).map(renderClip).join('');
     const clipCount = (session.clips || []).length;
     const moments = (session.momentos || []).map(function (m) { return renderMoment(m, session); }).join('');
+    const sessionArt = session.imagen ? '<figure class="campaign-editorial-art collab-session-art"><img src="' + escapeHtml(session.imagen) + '" alt="Imagen de la sesión de ' + escapeHtml(game.nombre) + '" loading="lazy" decoding="async" width="2048" height="1152"><figcaption>UNA SESIÓN · PUNTOS DE VISTA DE LA LEGIÓN</figcaption></figure>' : '';
     const numeros = session.numeros;
     const duration = numeros ? formatDuration(numeros.duracion_vod_s) : null;
     const views = numeros && Number.isFinite(numeros.vistas_vod) ? Number(numeros.vistas_vod).toLocaleString('es-AR') : null;
@@ -114,7 +141,7 @@
       ? '<dl class="collab-numbers"><div><dt>DURACIÓN DEL VOD</dt><dd>' + (duration || '—') + '</dd></div><div><dt>VISTAS DEL VOD</dt><dd>' + (views || '—') + '</dd></div></dl><p class="collab-numbers-source">Fuente: ' + escapeHtml(numeros.fuente) + ' · capturado el ' + escapeHtml(formatSessionDate(numeros.capturado)) + '</p>'
       : emptyState('Sin números verificados para esta sesión. Un número solo se publica con fuente y fecha de captura.');
     const tabs = [
-      ['resumen', 'RESUMEN', '<h5 class="collab-panel-title">LO QUE PASÓ EN ' + escapeHtml(game.nombre.toUpperCase()) + '</h5>' +
+      ['resumen', 'RESUMEN', sessionArt + '<h5 class="collab-panel-title">LO QUE PASÓ EN ' + escapeHtml(game.nombre.toUpperCase()) + '</h5>' +
         (session.resumen ? '<p class="collab-summary">' + escapeHtml(session.resumen) + '</p>' : emptyState('Resumen pendiente de redacción.')) +
         (moments ? '<h5 class="collab-panel-title">MOMENTOS</h5><ol class="collab-moment-list">' + moments + '</ol>' : '') + note],
       ['jugaron', 'JUGARON · ' + (session.participantes || []).length, '<ul class="collab-participant-list" aria-label="Participantes de ' + escapeHtml(game.nombre) + '">' + participants + '</ul>'],
@@ -173,6 +200,7 @@
     const dateLabel = session.fecha ? escapeHtml(formatSessionDate(session.fecha)) : 'FECHA SIN VERIFICAR';
     const catalogLink = '<a class="collab-arsenal-link" href="#arsenal-game-' + escapeHtml(game.id) + '" data-open-arsenal="' + escapeHtml(game.id) + '">VER EN EL CATÁLOGO →</a>';
     const storeLink = store ? '<a class="collab-store-link" href="' + escapeHtml(store) + '" target="_blank" rel="noopener noreferrer">FICHA OFICIAL ↗</a>' : '';
+    const archiveLink = game.expediente_comercial ? '<a class="collab-store-link" href="#barfender-expediente">ARCHIVO HISTÓRICO · ' + escapeHtml(game.expediente_comercial) + ' ↗</a>' : '';
     const povTotal = (session.pov || []).length;
     return '<article class="collab-session-card" id="' + escapeHtml(session.bit.toLowerCase()) + '" data-collab-session="' + escapeHtml(session.bit) + '" data-game-id="' + escapeHtml(game.id) + '">' +
       gamePoster(game, session, dateLabel, categories) +
@@ -182,7 +210,7 @@
       '<div class="collab-session-content">' +
       '<div class="collab-game-meta">' + players + '<span class="collab-game-meta-item">' + escapeHtml(game.modalidad || 'Modalidad sin verificar') + '</span></div>' +
       renderFichaTabs(entry, participants, povs, povTotal, note) +
-      '<div class="collab-session-actions">' + catalogLink + storeLink + '</div></div></details></article>';
+      '<div class="collab-session-actions">' + catalogLink + storeLink + archiveLink + '</div></div></details></article>';
   }
   function renderTimeline() {
     const target = document.getElementById('collab-timeline');

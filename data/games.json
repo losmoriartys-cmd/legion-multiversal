@@ -6,12 +6,19 @@
       "id": "mimic-party",
       "nombre": "Mimic Party",
       "aliases": [],
-      "categorias": ["Fiesta y humor"],
-      "plataformas": ["PC"],
+      "categorias": [
+        "Fiesta y humor"
+      ],
+      "plataformas": [
+        "PC"
+      ],
       "ediciones": null,
       "modalidad": "Online",
       "descripcion": "Escuchá un sonido y reproducilo con tu voz: todos imitan al mismo tiempo.",
-      "jugadores": {"min": 1, "max": 5},
+      "jugadores": {
+        "min": 1,
+        "max": 5
+      },
       "fuente_jugadores": "https://store.steampowered.com/app/5053820/",
       "tienda": "https://store.steampowered.com/app/5053820/",
       "portada": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/5053820/cb42d784567e89c1c409e49856ece32c9cf8ab36/header.jpg",
@@ -22,8 +29,12 @@
       "id": "meccha-chameleon",
       "nombre": "MECCHA CHAMELEON",
       "aliases": [],
-      "categorias": ["Fiesta y humor"],
-      "plataformas": ["PC"],
+      "categorias": [
+        "Fiesta y humor"
+      ],
+      "plataformas": [
+        "PC"
+      ],
       "ediciones": null,
       "modalidad": null,
       "descripcion": "Pintate para copiar el escenario y pasá desapercibido.",
@@ -37,13 +48,22 @@
     {
       "id": "escape-the-backrooms",
       "nombre": "Escape the Backrooms",
-      "aliases": ["Backrooms"],
-      "categorias": ["Terror cooperativo"],
-      "plataformas": ["PC"],
+      "aliases": [
+        "Backrooms"
+      ],
+      "categorias": [
+        "Terror cooperativo"
+      ],
+      "plataformas": [
+        "PC"
+      ],
       "ediciones": null,
       "modalidad": "Cooperativo online",
       "descripcion": "Explorá más de 30 niveles de los Backrooms, evitá entidades y buscá la salida junto al equipo.",
-      "jugadores": {"min": 1, "max": 4},
+      "jugadores": {
+        "min": 1,
+        "max": 4
+      },
       "fuente_jugadores": "https://store.steampowered.com/app/1943950/",
       "tienda": "https://store.steampowered.com/app/1943950/",
       "portada": "https://static-cdn.jtvnw.net/ttv-boxart/2066107586_IGDB-285x380.jpg",
@@ -53,8 +73,16 @@
           "bit": "BIT-001",
           "fecha": "2026-08-09",
           "fuente_fecha": "https://www.twitch.tv/videos/2842031318",
-          "participantes": ["moriartys", "lady-moriarty"],
-          "pov": [{"canal": "moriartys", "url": "https://www.twitch.tv/videos/2842031318"}],
+          "participantes": [
+            "moriartys",
+            "lady-moriarty"
+          ],
+          "pov": [
+            {
+              "canal": "moriartys",
+              "url": "https://www.twitch.tv/videos/2842031318"
+            }
+          ],
           "nota": null
         }
       ]
@@ -63,12 +91,19 @@
       "id": "repo",
       "nombre": "R.E.P.O.",
       "aliases": [],
-      "categorias": ["Terror cooperativo"],
-      "plataformas": ["PC"],
+      "categorias": [
+        "Terror cooperativo"
+      ],
+      "plataformas": [
+        "PC"
+      ],
       "ediciones": null,
       "modalidad": "Online",
       "descripcion": "Recuperen objetos valiosos entre criaturas; la física obliga a coordinar.",
-      "jugadores": {"min": 1, "max": 6},
+      "jugadores": {
+        "min": 1,
+        "max": 6
+      },
       "fuente_jugadores": "https://store.steampowered.com/app/3241660/",
       "tienda": "https://store.steampowered.com/app/3241660/",
       "portada": "https://cdn.akamai.steamstatic.com/steam/apps/3241660/header.jpg",
@@ -79,12 +114,19 @@
       "id": "content-warning",
       "nombre": "Content Warning",
       "aliases": [],
-      "categorias": ["Terror cooperativo"],
-      "plataformas": ["PC"],
+      "categorias": [
+        "Terror cooperativo"
+      ],
+      "plataformas": [
+        "PC"
+      ],
       "ediciones": null,
       "modalidad": "Online",
       "descripcion": "Filmen criaturas y situaciones aterradoras para conseguir visualizaciones.",
-      "jugadores": {"min": 1, "max": 4},
+      "jugadores": {
+        "min": 1,
+        "max": 4
+      },
       "fuente_jugadores": "https://store.steampowered.com/app/2881650/",
       "tienda": "https://store.steampowered.com/app/2881650/",
       "portada": "https://cdn.akamai.steamstatic.com/steam/apps/2881650/header.jpg",
@@ -95,8 +137,12 @@
       "id": "dale-dawson",
       "nombre": "Dale & Dawson Stationery Supplies",
       "aliases": [],
-      "categorias": ["Deducción social"],
-      "plataformas": ["PC"],
+      "categorias": [
+        "Deducción social"
+      ],
+      "plataformas": [
+        "PC"
+      ],
       "ediciones": null,
       "modalidad": "Multijugador online",
       "descripcion": "El gerente debe descubrir quién trabaja y quién finge.",
@@ -111,8 +157,12 @@
       "id": "lethal-company",
       "nombre": "Lethal Company",
       "aliases": [],
-      "categorias": ["Terror cooperativo"],
-      "plataformas": ["PC"],
+      "categorias": [
+        "Terror cooperativo"
+      ],
+      "plataformas": [
+        "PC"
+      ],
       "ediciones": null,
       "modalidad": "Cooperativo online",
       "descripcion": "Una cuadrilla explora lunas abandonadas para cumplir la cuota de la Compañía.",
@@ -127,9 +177,15 @@
       "id": "minecraft",
       "nombre": "Minecraft",
       "aliases": [],
-      "categorias": ["Supervivencia", "Sandbox y construcción"],
+      "categorias": [
+        "Supervivencia",
+        "Sandbox y construcción"
+      ],
       "plataformas": null,
-      "ediciones": ["Java", "Bedrock"],
+      "ediciones": [
+        "Java",
+        "Bedrock"
+      ],
       "modalidad": "Mundo compartido",
       "descripcion": "Un mundo compartido para construir, explorar y sobrevivir.",
       "jugadores": null,
@@ -142,8 +198,16 @@
           "bit": "BIT-003",
           "fecha": "2026-08-30",
           "fuente_fecha": "https://www.twitch.tv/videos/2860519322",
-          "participantes": ["moriartys", "lady-moriarty"],
-          "pov": [{"canal": "moriartys", "url": "https://www.twitch.tv/videos/2860519322"}],
+          "participantes": [
+            "moriartys",
+            "lady-moriarty"
+          ],
+          "pov": [
+            {
+              "canal": "moriartys",
+              "url": "https://www.twitch.tv/videos/2860519322"
+            }
+          ],
           "nota": null
         }
       ]
@@ -152,12 +216,18 @@
       "id": "among-us",
       "nombre": "Among Us",
       "aliases": [],
-      "categorias": ["Deducción social", "Fiesta y humor"],
+      "categorias": [
+        "Deducción social",
+        "Fiesta y humor"
+      ],
       "plataformas": null,
       "ediciones": null,
       "modalidad": "Local u online",
       "descripcion": "Completen tareas e intenten descubrir a los impostores.",
-      "jugadores": {"min": 4, "max": 15},
+      "jugadores": {
+        "min": 4,
+        "max": 15
+      },
       "fuente_jugadores": "https://store.steampowered.com/app/945360/",
       "tienda": "https://store.steampowered.com/app/945360/",
       "portada": "https://cdn.akamai.steamstatic.com/steam/apps/945360/header.jpg",
@@ -167,10 +237,21 @@
           "bit": "BIT-008",
           "fecha": "2026-11-14",
           "fuente_fecha": "https://www.twitch.tv/videos/2929150834",
-          "participantes": ["akuma", "habitos", "lady-moriarty", "rod3r1k"],
+          "participantes": [
+            "akuma",
+            "habitos",
+            "lady-moriarty",
+            "rod3r1k"
+          ],
           "pov": [
-            {"canal": "moriartys", "url": "https://www.twitch.tv/videos/2929150834"},
-            {"canal": "rod3r1k", "url": "https://www.twitch.tv/videos/2929196191"}
+            {
+              "canal": "moriartys",
+              "url": "https://www.twitch.tv/videos/2929150834"
+            },
+            {
+              "canal": "rod3r1k",
+              "url": "https://www.twitch.tv/videos/2929196191"
+            }
           ],
           "nota": "Una misma sesión vista desde dos canales. Los Moriartys es un canal POV, no un participante individual adicional."
         }
@@ -180,8 +261,13 @@
       "id": "the-forest",
       "nombre": "The Forest",
       "aliases": [],
-      "categorias": ["Supervivencia", "Terror cooperativo"],
-      "plataformas": ["PC"],
+      "categorias": [
+        "Supervivencia",
+        "Terror cooperativo"
+      ],
+      "plataformas": [
+        "PC"
+      ],
       "ediciones": null,
       "modalidad": "Cooperativo",
       "descripcion": "Tras un accidente aéreo, exploren un bosque hostil y sobrevivan.",
@@ -196,23 +282,86 @@
       "id": "barfender",
       "nombre": "BarFender",
       "aliases": [],
-      "categorias": ["Fiesta y humor", "Simulación"],
-      "plataformas": ["PC"],
+      "categorias": [
+        "Fiesta y humor",
+        "Simulación"
+      ],
+      "plataformas": [
+        "PC"
+      ],
       "ediciones": null,
       "modalidad": "Cooperativo",
       "descripcion": "Simulador caótico de bar: servir copas, limpiar desastres y detener peleas.",
-      "jugadores": {"min": 1, "max": 4},
+      "jugadores": {
+        "min": 1,
+        "max": 4
+      },
       "fuente_jugadores": "https://store.steampowered.com/app/4159680/",
       "tienda": "https://store.steampowered.com/app/4159680/Barfender_COOP_Bar_Simulator/",
       "portada": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4159680/c1225b8fe18d0878c5be25b0081c801e50bb258e/header_alt_assets_8.jpg?t=1793628252",
       "expediente_comercial": "EXP-001",
-      "sesiones": []
+      "sesiones": [
+        {
+          "bit": "BIT-011",
+          "fecha": "2026-11-05",
+          "fuente_fecha": "https://www.twitch.tv/videos/2919716450",
+          "participantes": [
+            "akuma",
+            "lady-moriarty",
+            "moriartys",
+            "rod3r1k"
+          ],
+          "pov": [
+            {
+              "canal": "moriartys",
+              "url": "https://www.twitch.tv/videos/2919716450"
+            },
+            {
+              "canal": "rod3r1k",
+              "url": "https://www.twitch.tv/videos/2919719142"
+            },
+            {
+              "canal": "lady-moriarty",
+              "url": "https://www.twitch.tv/videos/2919755971"
+            }
+          ],
+          "nota": "Primera misión juntos como Legión: cuatro creadores, cuatro canales, una misma partida. Akuma participó pero todavía no tiene VOD registrado.",
+          "resumen": "El 5 de noviembre de 2026, Demian, Lady Moriarty, ROD3R1K y Akuma compartieron una partida cooperativa de BarFender desde sus comunidades. Se conservan tres VOD públicos; Akuma participó, pero no tiene un VOD propio registrado. Las duraciones individuales aproximadas se mantienen en el archivo histórico y no se presentan como duración total de la sesión.",
+          "imagen": "BarFenderLos4.jpg",
+          "clips": [
+            {
+              "titulo": "Un susto que termina en vómito",
+              "canal": "moriartys",
+              "url": "https://www.twitch.tv/losmoriartys/clip/ImportantExuberantSoybeanCopyThis-_YjtRbUlzhf1SFEY"
+            },
+            {
+              "titulo": "Se boxean en nuestro bar",
+              "canal": "moriartys",
+              "url": "https://www.twitch.tv/losmoriartys/clip/AssiduousMildSkirretWoofer-IWeZeQsl3J_cFI_x"
+            },
+            {
+              "titulo": "Buscan empleado para el bar",
+              "canal": "rod3r1k",
+              "url": "https://www.twitch.tv/ther0d3r1k/clip/SuccessfulEsteemedJellyfishKappaWealth-BmNdj5Xculcpr4tI"
+            },
+            {
+              "titulo": "Le pega a Harry Potter",
+              "canal": "lady-moriarty",
+              "url": "https://www.twitch.tv/ladymoriarty01/clip/ThankfulCogentCodMikeHogu-DUWGz_j_OIBmWYbQ"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "tmnt-shredders-revenge",
       "nombre": "TMNT: Shredder's Revenge",
-      "aliases": ["Teenage Mutant Ninja Turtles: Shredder's Revenge"],
-      "categorias": ["Retro y clásicos"],
+      "aliases": [
+        "Teenage Mutant Ninja Turtles: Shredder's Revenge"
+      ],
+      "categorias": [
+        "Retro y clásicos"
+      ],
       "plataformas": null,
       "ediciones": null,
       "modalidad": null,
@@ -227,8 +376,16 @@
           "bit": "BIT-002",
           "fecha": "2026-08-21",
           "fuente_fecha": "https://www.twitch.tv/videos/2852318399",
-          "participantes": ["moriartys", "lady-moriarty"],
-          "pov": [{"canal": "moriartys", "url": "https://www.twitch.tv/videos/2852318399"}],
+          "participantes": [
+            "moriartys",
+            "lady-moriarty"
+          ],
+          "pov": [
+            {
+              "canal": "moriartys",
+              "url": "https://www.twitch.tv/videos/2852318399"
+            }
+          ],
           "nota": null
         }
       ]
@@ -237,7 +394,9 @@
       "id": "lego-batman",
       "nombre": "LEGO Batman: Legacy of the Dark Knight",
       "aliases": [],
-      "categorias": ["Cooperativo y aventura"],
+      "categorias": [
+        "Cooperativo y aventura"
+      ],
       "plataformas": null,
       "ediciones": null,
       "modalidad": null,
@@ -252,8 +411,16 @@
           "bit": "BIT-004",
           "fecha": "2026-05-24",
           "fuente_fecha": "https://www.twitch.tv/videos/2779537401",
-          "participantes": ["moriartys", "lady-moriarty"],
-          "pov": [{"canal": "moriartys", "url": "https://www.twitch.tv/videos/2779537401"}],
+          "participantes": [
+            "moriartys",
+            "lady-moriarty"
+          ],
+          "pov": [
+            {
+              "canal": "moriartys",
+              "url": "https://www.twitch.tv/videos/2779537401"
+            }
+          ],
           "nota": "Nuestro primer stream, en colaboración entre Los Moriartys y Lady Moriarty."
         }
       ]
@@ -262,7 +429,9 @@
       "id": "bloody-cleanup-together",
       "nombre": "Bloody Cleanup Together",
       "aliases": [],
-      "categorias": ["Simulación"],
+      "categorias": [
+        "Simulación"
+      ],
       "plataformas": null,
       "ediciones": null,
       "modalidad": null,
@@ -277,8 +446,16 @@
           "bit": "BIT-005",
           "fecha": "2026-11-16",
           "fuente_fecha": "https://www.twitch.tv/videos/2930904840",
-          "participantes": ["moriartys", "lady-moriarty"],
-          "pov": [{"canal": "moriartys", "url": "https://www.twitch.tv/videos/2930904840"}],
+          "participantes": [
+            "moriartys",
+            "lady-moriarty"
+          ],
+          "pov": [
+            {
+              "canal": "moriartys",
+              "url": "https://www.twitch.tv/videos/2930904840"
+            }
+          ],
           "nota": null
         }
       ]
@@ -287,7 +464,9 @@
       "id": "anime-shop-simulation",
       "nombre": "Anime Shop Simulator",
       "aliases": [],
-      "categorias": ["Simulación"],
+      "categorias": [
+        "Simulación"
+      ],
       "plataformas": null,
       "ediciones": null,
       "modalidad": null,
@@ -302,8 +481,16 @@
           "bit": "BIT-006",
           "fecha": "2026-11-20",
           "fuente_fecha": "https://www.twitch.tv/videos/2935528439",
-          "participantes": ["moriartys", "lady-moriarty"],
-          "pov": [{"canal": "moriartys", "url": "https://www.twitch.tv/videos/2935528439"}],
+          "participantes": [
+            "moriartys",
+            "lady-moriarty"
+          ],
+          "pov": [
+            {
+              "canal": "moriartys",
+              "url": "https://www.twitch.tv/videos/2935528439"
+            }
+          ],
           "nota": null
         }
       ]
@@ -312,7 +499,9 @@
       "id": "night-club-simulation-party-king",
       "nombre": "Night Club Simulation: Party King",
       "aliases": [],
-      "categorias": ["Simulación"],
+      "categorias": [
+        "Simulación"
+      ],
       "plataformas": null,
       "ediciones": null,
       "modalidad": null,
@@ -327,8 +516,16 @@
           "bit": "BIT-007",
           "fecha": "2026-10-07",
           "fuente_fecha": "https://www.twitch.tv/videos/2894858738",
-          "participantes": ["moriartys", "lady-moriarty"],
-          "pov": [{"canal": "moriartys", "url": "https://www.twitch.tv/videos/2894858738"}],
+          "participantes": [
+            "moriartys",
+            "lady-moriarty"
+          ],
+          "pov": [
+            {
+              "canal": "moriartys",
+              "url": "https://www.twitch.tv/videos/2894858738"
+            }
+          ],
           "nota": null
         }
       ]
@@ -337,7 +534,9 @@
       "id": "fortnite",
       "nombre": "Fortnite",
       "aliases": [],
-      "categorias": ["Competitivo"],
+      "categorias": [
+        "Competitivo"
+      ],
       "plataformas": null,
       "ediciones": null,
       "modalidad": "Battle royale y modos cooperativos",
@@ -352,8 +551,18 @@
           "bit": "BIT-009",
           "fecha": "2026-11-17",
           "fuente_fecha": "https://www.twitch.tv/videos/2931798215",
-          "participantes": ["rod3r1k", "akuma", "dave-nexus", "moriartys"],
-          "pov": [{"canal": "rod3r1k", "url": "https://www.twitch.tv/videos/2931798215"}],
+          "participantes": [
+            "rod3r1k",
+            "akuma",
+            "dave-nexus",
+            "moriartys"
+          ],
+          "pov": [
+            {
+              "canal": "rod3r1k",
+              "url": "https://www.twitch.tv/videos/2931798215"
+            }
+          ],
           "nota": null
         }
       ]
@@ -362,7 +571,10 @@
       "id": "peak",
       "nombre": "PEAK",
       "aliases": [],
-      "categorias": ["Supervivencia", "Cooperativo y aventura"],
+      "categorias": [
+        "Supervivencia",
+        "Cooperativo y aventura"
+      ],
       "plataformas": null,
       "ediciones": null,
       "modalidad": "Cooperativo",
@@ -377,8 +589,16 @@
           "bit": "BIT-010",
           "fecha": "2026-11-19",
           "fuente_fecha": "https://www.twitch.tv/videos/2934341574",
-          "participantes": ["akuma", "lady-moriarty"],
-          "pov": [{"canal": "akuma", "url": "https://www.twitch.tv/videos/2934341574"}],
+          "participantes": [
+            "akuma",
+            "lady-moriarty"
+          ],
+          "pov": [
+            {
+              "canal": "akuma",
+              "url": "https://www.twitch.tv/videos/2934341574"
+            }
+          ],
           "nota": "Colaboración cooperativa vista desde el canal de Akuma."
         }
       ]

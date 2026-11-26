@@ -21,8 +21,8 @@ class ArsenalRegistryContractTests(unittest.TestCase):
     def test_catalog_summary_matches_the_master_registry(self):
         sessions = [session for game in GAMES["juegos"] for session in game["sesiones"]]
         self.assertEqual(len(GAMES["juegos"]), 18)
-        self.assertEqual(len(sessions), 10)
-        self.assertEqual(sum(len(session["pov"]) for session in sessions), 11)
+        self.assertEqual(len(sessions), 11)
+        self.assertEqual(sum(len(session["pov"]) for session in sessions), 14)
         self.assertIn("renderSummary", SCRIPT)
 
     def test_escape_the_backrooms_replaces_the_old_duplicate_title_and_store(self):
@@ -33,15 +33,14 @@ class ArsenalRegistryContractTests(unittest.TestCase):
         chapter = HTML.split('id="collab-catalog"', 1)[1].split('id="barfender-expediente"', 1)[0]
         self.assertNotIn("Backrooms: Escape Together", chapter)
 
-    def test_barfender_is_a_separate_commercial_case_not_a_bit_session(self):
+    def test_barfender_is_a_regular_bit_session_linked_to_its_dossier(self):
         game = next(item for item in GAMES["juegos"] if item["id"] == "barfender")
         self.assertEqual(game["expediente_comercial"], "EXP-001")
-        self.assertEqual(game["sesiones"], [])
-        self.assertIn("commercial", SCRIPT)
+        self.assertEqual([session["bit"] for session in game["sesiones"]], ["BIT-011"])
         self.assertIn("barfender-expediente", SCRIPT)
 
     def test_status_filters_and_player_filter_are_data_driven(self):
-        for marker in ("documented", "discovery", "commercial", "arsenal-players-filter", "arsenal-category-filter"):
+        for marker in ("documented", "discovery", "arsenal-players-filter", "arsenal-category-filter"):
             self.assertIn(marker, HTML + SCRIPT)
         self.assertIn("game.jugadores.max<minPlayers", SCRIPT.replace(" ", ""))
         self.assertIn("stateOf(game)", SCRIPT)

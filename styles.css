@@ -6284,7 +6284,7 @@ main .chapter-panel :where(.chapter-cta, .executive-button, .comic-submit-btn,
 }
 /* CAPÍTULO 08 · ARSENAL DESDE EL REGISTRO MAESTRO */
 .arsenal-chapter .arsenal-intro{min-width:0}
-.arsenal-chapter .arsenal-registry-summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:22px}
+.arsenal-chapter .arsenal-registry-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:22px}
 .arsenal-chapter .arsenal-registry-summary article{display:flex;min-width:0;min-height:86px;flex-direction:column;justify-content:center;align-items:center;padding:12px;background:rgba(5,12,22,.72);border:1px solid rgba(103,193,220,.24);text-align:center}
 .arsenal-chapter .arsenal-registry-summary strong{color:#75dff0;font:clamp(1.8rem,3vw,2.5rem)/1 'Bangers',cursive}
 .arsenal-chapter .arsenal-registry-summary span{margin-top:6px;color:#bac9d7;font-size:.62rem;font-weight:900;letter-spacing:.08em;line-height:1.35}

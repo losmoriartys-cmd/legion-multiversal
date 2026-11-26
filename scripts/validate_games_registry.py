@@ -22,7 +22,7 @@ GAME_KEYS = {
 }
 SESSION_KEYS = {"bit", "fecha", "fuente_fecha", "participantes", "pov", "nota"}
 # Campos opcionales de la ficha de bitácora. Ausente o null = dato no verificado (la web lo muestra como pendiente).
-OPTIONAL_SESSION_KEYS = {"resumen", "clips", "numeros", "momentos"}
+OPTIONAL_SESSION_KEYS = {"resumen", "clips", "numeros", "momentos", "imagen"}
 CLIP_KEYS = {"titulo", "canal", "url"}
 NUMBERS_KEYS = {"duracion_vod_s", "vistas_vod", "fuente", "capturado"}
 MOMENT_KEYS = {"t", "texto", "canal"}
@@ -93,6 +93,11 @@ def validate_ficha_fields(label: str, bit: str, session: dict, twitch_ids: set) 
                     date.fromisoformat(captured)
                 except ValueError:
                     errors.append(f"{where}: numeros.capturado no es una fecha de calendario válida.")
+    imagen = session.get("imagen")
+    if imagen is not None:
+        image_pattern = r"[A-Za-z0-9_-]+(?:/[A-Za-z0-9_-]+)*\.(?:jpg|jpeg|png|webp)"
+        if not isinstance(imagen, str) or not re.fullmatch(image_pattern, imagen) or not (ROOT / imagen).is_file():
+            errors.append(f"{where}: imagen debe ser una ruta local existente y segura (JPG, PNG o WebP) o null.")
     momentos = session.get("momentos")
     if momentos is not None:
         if not isinstance(momentos, list):

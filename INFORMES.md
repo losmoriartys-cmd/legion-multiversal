@@ -5,7 +5,7 @@
 
 ## Estado actual reutilizable · ya existe y no debe reconstruirse desde cero
 
-- [x] **Registro maestro de juegos:** games.json, schemas/games.schema.json y scripts/validate_games_registry.py; 18 juegos, 10 sesiones BIT y 11 POV. La Bitácora y el Arsenal consumen ese mismo origen.
+- [x] **Registro maestro de juegos:** games.json, schemas/games.schema.json y scripts/validate_games_registry.py; 18 juegos, 10 sesiones BIT y 11 POV en main al último corte integrado. La propuesta BarFender BIT-011/3 POV se encuentra en revisión en PR #130; no se contabiliza como integrada hasta su merge.
 - [x] **Identidad del Roster y expedientes BASE-01C:** `data/roster.json` conserva los ocho perfiles; `data/creator-records.json` quedó integrado por PR #96 (`63211d1`). La equivalencia editorial se verificó por blob SHA y CI/Playwright posterior al merge. La comprobación HTTP directa del dominio público sigue pendiente por una limitación DNS del entorno.
 - [x] **Infraestructura QA común y regresión visual:** matriz sincronizada con los 11 paneles reales (`0, 1, 2, 3, 6, 8, 9, 10, 11, 12, 13`); navegación, overflow y responsive en cinco viewports (1440, 1024, 768, 390 y 360 px); 22 capturas por ejecución; comparaciones PNG exactas de Roster, Estadísticas y Bitácora con evidencia en CI.
 - [x] **Validación general y QA portable:** existen workflows para contratos Python, JSON, sintaxis, imágenes, accesibilidad estática, enlaces/anclas y publicación de evidencias.
@@ -55,14 +55,14 @@
 
 ### Próximo corte editorial · BarFender como colaboración de la Legión
 
-- [ ] Dejar de presentar BarFender como un caso comercial aislado y registrarlo con el mismo modelo editorial que las demás colaboraciones, tanto en Colaboraciones como en Arsenal.
-- [ ] Retirar la clasificación especial `EXP-001`/`commercial` del Arsenal al convertir sus hitos a sesiones BIT normales; no mantener una ficha comercial paralela.
-- [ ] Narrar el primer encuentro como **“Primera misión juntos como Legión”**: el grupo recibió las claves para jugar, sin insinuar patrocinio ni pago.
-- [ ] Incorporar la segunda etapa como la repetición/continuación con el juego completo y el mismo equipo, conectada con la primera misión.
-- [ ] Asociar los POV de Rod3R1k y Akuma a esa segunda etapa, verificando los VOD/enlaces concretos y evitando duplicar sesiones o contabilizar un POV como una sesión aparte.
-- [ ] Reutilizar `BarFenderLos4.jpg` como imagen de apoyo del registro grupal, sin convertirlo en una ficha comercial separada ni repetir la misma imagen innecesariamente.
-- **Criterio de publicación:** una sola ficha de juego en Arsenal y entradas de sesión en la Bitácora con IDs estables; primera misión y partida completa como hitos relacionados. Mantener los IDs y referencias actuales hasta tener verificados los datos de cada sesión.
-- **Alcance:** trabajo editorial independiente de BASE-01B; se abrirá un corte propio sobre el registro compartido de juegos/colaboraciones después de cerrar esta migración.
+- [~] Registrar BarFender con el mismo modelo editorial que las demás colaboraciones. **En PR #130:** BIT-011 · 05/11/2026 · cuatro participantes y tres POV enlazados; Akuma figura como participante sin VOD propio registrado.
+- [~] Retirar la clasificación `commercial` del Arsenal. **En PR #130:** desaparece el filtro/estado comercial y BarFender entra en el conteo ordinario; `EXP-001` se conserva como referencia histórica al expediente, no como sesión ni como categoría comercial.
+- [~] Narrar el primer encuentro como **“Primera misión juntos como Legión”**: el grupo recibió las claves para jugar, sin insinuar patrocinio ni pago. El texto de BIT-011 ya usa esa formulación.
+- [ ] Incorporar la segunda etapa como continuación con el juego completo y el mismo equipo. **Bloqueado por evidencia:** no hay VOD registrado de la noche del 11/11/2026; solo constan cifras del panel de Twitch. No crear BIT-012 ni atribuir POV hasta verificar los enlaces.
+- [ ] Asociar los POV de Rod3R1k y Akuma a esa segunda etapa cuando existan VOD concretos; no duplicar sesiones ni contabilizar un POV como una sesión aparte.
+- [ ] Reutilizar `BarFenderLos4.jpg` como imagen de apoyo del registro grupal, sin repetir la misma imagen innecesariamente.
+- **Criterio de publicación:** una sola ficha de juego en Arsenal y entradas de sesión en Bitácora con IDs estables; primera misión y partida completa como hitos relacionados. Mantener pendientes los datos sin evidencia.
+- **Estado de integración:** PR #130 parte de la rama de ficha #129; sus checks y el merge siguen pendientes. Los [x] solo se marcarán después de integrar en `main` y verificar la publicación.
 
 ### BASE-02 · Esquemas y validación que bloqueen publicaciones inválidas
 - [ ] Completar esquemas JSON para todos los documentos de data/: roster, juegos, horarios, enlaces, sesiones, VOD y clips, con campos obligatorios, opcionales y reglas de null explícitas.
