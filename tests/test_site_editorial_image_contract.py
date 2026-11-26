@@ -78,7 +78,7 @@ class SiteEditorialImageContract(unittest.TestCase):
         self.assertEqual(chapter.count('href="#collab-games-registry"'), 1)
         self.assertNotIn('href="./bitacora-preview.html"', chapter)
         self.assertIn('id="collab-registry-grid"', chapter)
-        self.assertIn('data-collab-ready="false"', chapter)
+        self.assertIn('data-collab-ready="prerendered"', chapter)
         self.assertNotIn('assets/carnet/', chapter)
         self.assertNotIn('assets/ladymoriarty.jpg', chapter)
         self.assertNotIn('assets/rod3r1k.jpg', chapter)
