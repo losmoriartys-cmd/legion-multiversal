@@ -307,7 +307,15 @@ def main() -> int:
     parser.add_argument("--recovery-report", action="store_true")
     args = parser.parse_args()
     try:
+        policy_relative = POLICY_PATH.relative_to(ROOT).as_posix()
+        auth_relative = AUTH_PATH.relative_to(ROOT).as_posix()
+        for relative in (policy_relative, auth_relative):
+            valid, reason = safe_path(relative)
+            if not valid:
+                raise RuntimeError(f"Ruta de control insegura {relative}: {reason}")
         policy = json.loads(POLICY_PATH.read_text(encoding="utf-8"))
+        if not isinstance(policy, dict) or policy.get("authorization_file") != auth_relative:
+            raise RuntimeError("La política debe ser un objeto y apuntar al ledger canónico.")
         baseline = load_json_at(args.base_ref, policy["authorization_file"], {"schema_version": 1, "authorizations": []})
         current = json.loads(AUTH_PATH.read_text(encoding="utf-8"))
         changed = parse_diff(args.base_ref)
