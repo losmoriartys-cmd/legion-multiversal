@@ -167,7 +167,7 @@
 
     let english = false;
     const translations = new Map([
-      ["Ficha institucional · Datos de fuentes públicas","Institutional media kit · Public-source data"],
+      ["Ficha institucional · Datos de fuentes públicas","Institutional media kit · Public-source data"],["Inicio","Home"],["Expedientes","Dossiers"],["Canales Twitch","Twitch channels"],["Canales YouTube","YouTube channels"],["Sesiones BIT","Logbook sessions"],["Juegos catalogados","Catalogued games"],
       ["Diferentes mundos.","Different worlds."],["Una misma Legión.","One Legion."],
       ["Una comunidad de creadores con perfiles, canales y comunidades propias. Diseñamos experiencias individuales, cooperativas y multiplataforma con alcance, participantes y entregables acordados antes de cada acción.","An independent creator collective with distinct profiles, channels and communities. We design individual, co-op and cross-platform experiences with scope, participants and deliverables agreed before each activation."],
       ["GUARDAR / IMPRIMIR PDF","SAVE / PRINT PDF"],["CONTACTO COMERCIAL","COMMERCIAL CONTACT"],
@@ -223,6 +223,8 @@
         const replacement = english ? translations.get(trimmed) : reverse.get(trimmed);
         if (replacement) node.nodeValue = node.nodeValue.replace(trimmed, replacement);
       });
+      const countCopy = document.querySelector(".media-kit .subpage-card [data-media-count-copy]");
+      if (countCopy) countCopy.textContent = english ? countCopy.dataset.mediaEn : countCopy.dataset.mediaEs;
       const heading = document.querySelector(".media-kit .subpage-hero h1");
       if (heading) heading.innerHTML = english ? "Different worlds.<br>One Legion." : "Diferentes mundos.<br>Una misma Legión.";
       const toggle = document.querySelector(".media-kit .language-toggle");
