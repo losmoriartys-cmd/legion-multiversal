@@ -90,8 +90,9 @@ test('portada: actos, indicadores y ocho retratos oficiales funcionan en escrito
     const identityBounds = await navigation.locator('.nav-act[data-act="identity"]').boundingBox();
     expect(navigationBounds).not.toBeNull();
     expect(identityBounds).not.toBeNull();
-    expect(identityBounds.left).toBeGreaterThanOrEqual(navigationBounds.left - 1);
-    expect(identityBounds.right).toBeLessThanOrEqual(navigationBounds.right + 1);
+    // Playwright boundingBox() returns x/width (not DOMRect left/right).
+    expect(identityBounds.x).toBeGreaterThanOrEqual(navigationBounds.x - 1);
+    expect(identityBounds.x + identityBounds.width).toBeLessThanOrEqual(navigationBounds.x + navigationBounds.width + 1);
     expect(await navigation.evaluate(node => node.scrollLeft)).toBe(0);
     await expect(navigation.locator('.nav-act[data-act="identity"] .nav-act-items > .nav-btn')).toHaveCount(3);
     await expect(navigation.locator('.nav-act[data-act="action"] .nav-act-items > .nav-btn')).toHaveCount(3);
