@@ -41,7 +41,7 @@ async function createComparisonPages(browser, viewport) {
   // solicitada por el candidato se obtiene del servidor baseline de origin/main.
   // Así ambas páginas renderizan con la misma fotografía de datos sin modificar
   // los archivos del candidato ni los recursos protegidos del repositorio.
-  await candidatePage.route('**/*.json', async route => {
+  await candidatePage.route(/\\.json(?:\\?.*)?$/, async route => {
     const requestedUrl = new URL(route.request().url());
     const baselineUrl = new URL(requestedUrl.pathname + requestedUrl.search, mainBaselineUrl);
     const response = await context.request.get(baselineUrl.toString(), { timeout: 45000 });
