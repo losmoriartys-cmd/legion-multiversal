@@ -96,33 +96,63 @@ async function compareElement(mainPage, candidatePage, testInfo, viewportName, s
     candidatePage.addStyleTag({ content: captureScope })
   ]);
 
-  // La altura de la navegación puede ser distinta entre main y el candidato.
-  // Se posiciona la superficie en y=64 con scroll instantáneo, sin heredar el
-  // scroll-behavior:smooth del sitio ni capturar una animación a medio recorrido.
-  await Promise.all([mainElement, candidateElement].map(element => element.evaluate(node => {
-    const top = node.getBoundingClientRect().top;
-    window.scrollTo({
-      left: window.scrollX,
-      top: Math.max(0, window.scrollY + top - 64),
-      behavior: 'instant'
-    });
-  })));
+  // Algunas superficies (en especial la tabla técnica, al final del capítulo)
+  // no pueden llegar a y=64 porque el documento ya alcanzó su límite inferior.
+  // Calculamos el intervalo de posiciones visibles que ambas páginas pueden
+  // alcanzar y elegimos una misma coordenada dentro de ese intervalo. Así no
+  // confundimos el límite de scroll del documento con una diferencia de interfaz.
+  const captureRanges = await Promise.all([mainElement, candidateElement].map(element =>
+    element.evaluate(node => {
+      const scroller = document.scrollingElement || document.documentElement;
+      const rect = node.getBoundingClientRect();
+      const documentTop = rect.top + scroller.scrollTop;
+      const maxScrollTop = Math.max(0, scroller.scrollHeight - scroller.clientHeight);
+      return {
+        documentTop,
+        minViewportTop: documentTop - maxScrollTop,
+        maxViewportTop: documentTop
+      };
+    })
+  ));
+  const minSharedTop = Math.max(...captureRanges.map(range => range.minViewportTop));
+  const maxSharedTop = Math.min(...captureRanges.map(range => range.maxViewportTop));
+  expect(
+    minSharedTop,
+    'Baseline y candidato no tienen una posición vertical de captura común: ' + JSON.stringify(captureRanges)
+  ).toBeLessThanOrEqual(maxSharedTop + 0.25);
+  const captureTop = Math.max(minSharedTop, Math.min(64, maxSharedTop));
+
+  await Promise.all([mainElement, candidateElement].map((element, index) =>
+    element.evaluate((node, target) => {
+      const scroller = document.scrollingElement || document.documentElement;
+      const maxScrollTop = Math.max(0, scroller.scrollHeight - scroller.clientHeight);
+      scroller.scrollTop = Math.max(0, Math.min(maxScrollTop, target.documentTop - target.captureTop));
+      scroller.scrollLeft = 0;
+    }, {
+      documentTop: captureRanges[index].documentTop,
+      captureTop
+    })
+  ));
   await Promise.all([mainPage, candidatePage].map(page => page.evaluate(() =>
     new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))
   )));
 
   const captureOrigins = await Promise.all([mainElement, candidateElement].map(element =>
     element.evaluate(node => {
+      const scroller = document.scrollingElement || document.documentElement;
       const rect = node.getBoundingClientRect();
-      return { top: rect.top, left: rect.left };
+      return { top: rect.top, left: rect.left, scrollTop: scroller.scrollTop };
     })
   ));
   for (const [index, origin] of captureOrigins.entries()) {
-    expect(Math.abs(origin.top - 64), 'La captura no quedó alineada en y=64 (' + (index ? 'candidato' : 'baseline') + '): ' + origin.top).toBeLessThanOrEqual(0.5);
+    expect(
+      Math.abs(origin.top - captureTop),
+      'La captura no respetó la coordenada común (' + (index ? 'candidato' : 'baseline') + '): ' + JSON.stringify({ origin, captureTop })
+    ).toBeLessThanOrEqual(0.5);
   }
   expect(
     Math.abs(captureOrigins[0].top - captureOrigins[1].top),
-    'Las superficies no comparten el mismo origen vertical de captura: ' + JSON.stringify(captureOrigins)
+    'Las superficies no comparten el mismo origen vertical de captura: ' + JSON.stringify({ captureOrigins, captureTop })
   ).toBeLessThanOrEqual(0.25);
   expect(
     Math.abs(captureOrigins[0].left - captureOrigins[1].left),
