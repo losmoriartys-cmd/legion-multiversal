@@ -171,25 +171,34 @@ async function compareElement(mainPage, candidatePage, testInfo, viewportName, s
     : [];
 
   let captureTop = null;
-  let sharedScrollTop = null;
 
   if (isStatsComparison) {
-    // Igualamos scrollTop dentro del intervalo que mantiene la tarjeta completa
-    // visible en ambas páginas. La altura de contenido anterior difiere, por lo
-    // que el origen del viewport puede variar, pero el raster se genera con la
-    // misma fase de scroll y el recorte del elemento conserva su tamaño exacto.
-    const minSharedScrollTop = Math.max(...captureRanges.map(range => range.minVisibleScrollTop));
-    const maxSharedScrollTop = Math.min(...captureRanges.map(range => range.maxVisibleScrollTop));
+    // La comparativa debe capturarse en la misma coordenada del viewport, no con
+    // el mismo scrollTop: la altura editorial anterior difiere 61 px entre ambas
+    // páginas. Los dos paneles caben completos en el viewport, por lo que podemos
+    // alinear su origen sin recortar contenido ni alterar las dimensiones raster.
+    const minSharedCaptureTop = Math.max(...captureRanges.map(range =>
+      range.documentTop - range.maxVisibleScrollTop
+    ));
+    const maxSharedCaptureTop = Math.min(...captureRanges.map(range =>
+      range.documentTop - range.minVisibleScrollTop
+    ));
     expect(
-      minSharedScrollTop,
-      'Baseline y candidato no comparten un scrollTop que mantenga toda la superficie visible: ' + JSON.stringify(captureRanges)
-    ).toBeLessThanOrEqual(maxSharedScrollTop);
-    sharedScrollTop = Math.round((minSharedScrollTop + maxSharedScrollTop) / 2);
-    await Promise.all([mainPage, candidatePage].map(page => page.evaluate(targetScrollTop => {
-      const scroller = document.scrollingElement || document.documentElement;
-      scroller.scrollTop = targetScrollTop;
-      scroller.scrollLeft = 0;
-    }, sharedScrollTop)));
+      minSharedCaptureTop,
+      'Baseline y candidato no comparten una coordenada de viewport que mantenga toda la superficie visible: ' + JSON.stringify(captureRanges)
+    ).toBeLessThanOrEqual(maxSharedCaptureTop);
+    captureTop = Math.max(minSharedCaptureTop, Math.min(64, maxSharedCaptureTop));
+    await Promise.all([mainElement, candidateElement].map((element, index) =>
+      element.evaluate((node, target) => {
+        const scroller = document.scrollingElement || document.documentElement;
+        const maxScrollTop = Math.max(0, scroller.scrollHeight - scroller.clientHeight);
+        scroller.scrollTop = Math.max(0, Math.min(maxScrollTop, target.documentTop - target.captureTop));
+        scroller.scrollLeft = 0;
+      }, {
+        documentTop: captureRanges[index].documentTop,
+        captureTop
+      })
+    ));
   } else {
     const minSharedTop = Math.max(...captureRanges.map(range => range.minViewportTop));
     const maxSharedTop = Math.min(...captureRanges.map(range => range.maxViewportTop));
@@ -230,13 +239,9 @@ async function compareElement(mainPage, candidatePage, testInfo, viewportName, s
   if (isStatsComparison) {
     for (const [index, origin] of captureOrigins.entries()) {
       expect(
-        Math.abs(origin.scrollTop - sharedScrollTop),
-        'La captura no comparte scrollTop (' + (index ? 'candidato' : 'baseline') + '): ' + JSON.stringify({ origin, sharedScrollTop })
+        Math.abs(origin.top - captureTop),
+        'La captura no alineó la superficie de Estadísticas en el viewport (' + (index ? 'candidato' : 'baseline') + '): ' + JSON.stringify({ origin, captureTop })
       ).toBeLessThanOrEqual(0.25);
-      expect(
-        origin.top,
-        'La superficie de Estadísticas quedó fuera del viewport (' + (index ? 'candidato' : 'baseline') + '): ' + JSON.stringify(origin)
-      ).toBeGreaterThanOrEqual(0);
       expect(
         origin.bottom,
         'La superficie de Estadísticas quedó cortada por el viewport (' + (index ? 'candidato' : 'baseline') + '): ' + JSON.stringify(origin)
