@@ -35,6 +35,19 @@ async function createComparisonPages(browser, viewport) {
   const mainPage = await context.newPage();
   const candidatePage = await context.newPage();
   await mainPage.goto(mainBaselineUrl, { waitUntil: 'domcontentloaded', timeout: 45000 });
+
+  // La comparación debe aislar cambios de interfaz, no diferencias entre dos
+  // capturas de métricas generadas en momentos distintos. Toda respuesta JSON
+  // solicitada por el candidato se obtiene del servidor baseline de origin/main.
+  // Así ambas páginas renderizan con la misma fotografía de datos sin modificar
+  // los archivos del candidato ni los recursos protegidos del repositorio.
+  await candidatePage.route('**/*.json', async route => {
+    const requestedUrl = new URL(route.request().url());
+    const baselineUrl = new URL(requestedUrl.pathname + requestedUrl.search, mainBaselineUrl);
+    const response = await context.request.get(baselineUrl.toString(), { timeout: 45000 });
+    expect(response.ok(), 'No se pudo obtener el JSON baseline compartido: ' + baselineUrl.pathname).toBe(true);
+    await route.fulfill({ response });
+  });
   await candidatePage.goto('/', { waitUntil: 'domcontentloaded', timeout: 45000 });
 
   return { context, mainPage, candidatePage };
