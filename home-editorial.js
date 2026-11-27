@@ -17,6 +17,15 @@
   style.id = "home-editorial-responsive-styles";
   style.textContent = [
     "#chapter-0 .executive-hero-actions{min-width:0}",
+    "header .primary-navigation{width:100%;min-width:0;justify-content:stretch;gap:clamp(3px,.5vw,7px)}",
+    "header .primary-navigation .nav-act{display:flex;flex:1 1 0;min-width:0;flex-direction:column;gap:4px;padding:0 clamp(4px,.55vw,8px);border-left:1px solid rgba(255,255,255,.18)}",
+    "header .primary-navigation .nav-act:first-child{padding-left:0;border-left:0}",
+    "header .primary-navigation .nav-act-label{display:block;color:#a9bacd;font:700 .6rem Special Elite,monospace;letter-spacing:.13em;white-space:nowrap}",
+    "header .primary-navigation .nav-act.is-active-act .nav-act-label{color:#e5c578}",
+    "header .primary-navigation .nav-act-items{display:flex;flex-wrap:wrap;align-items:center;gap:clamp(3px,.4vw,6px);min-width:0}",
+    "header .primary-navigation .nav-act .nav-btn{min-width:0;max-width:100%;padding:7px clamp(4px,.55vw,8px);font-size:clamp(.66rem,.78vw,.82rem);white-space:nowrap}",
+    "@media(max-width:1100px) and (min-width:901px){header .primary-navigation{gap:2px}header .primary-navigation .nav-act{padding:0 4px}header .primary-navigation .nav-act-items{gap:3px}header .primary-navigation .nav-act .nav-btn{padding:6px 5px;font-size:.64rem}}",
+    "@media(max-width:900px){header .primary-navigation{width:100%;justify-content:flex-start}header .primary-navigation .nav-act{flex:0 0 auto;padding:0 7px}header .primary-navigation .nav-act-items{flex-wrap:nowrap}header .primary-navigation .nav-act .nav-btn{padding:7px 9px;font-size:.72rem}}",
     "#chapter-0 .lm-editorial-acts{display:grid;gap:clamp(22px,3.5vw,40px);margin:clamp(24px,4vw,46px) 0}",
     "#chapter-0 .lm-indicator-strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;padding:clamp(12px,2vw,18px);border:1px solid rgba(107,206,232,.3);border-left:4px solid #63d9e8;background:linear-gradient(120deg,#0c1e2ef2,#101424f2)}",
     "#chapter-0 .lm-indicator{min-width:0;padding:8px 10px;border-right:1px solid rgba(153,190,220,.18)}",
@@ -69,7 +78,7 @@
     "#chapter-0 .lm-act-annex a{color:#cbbfff;font-weight:800;text-underline-offset:4px}",
     "#chapter-0 .lm-nav-brand-primary{border-color:#e5c477!important;background:linear-gradient(135deg,#f5dfaa,#d5ae61)!important;color:#1c2130!important;box-shadow:3px 3px 0 #000,0 0 14px #dcb66930!important}",
     "@media(max-width:900px){#chapter-0 .lm-indicator-strip{grid-template-columns:repeat(2,minmax(0,1fr))}#chapter-0 .lm-indicator:nth-of-type(2){border:0}#chapter-0 .lm-act-links,#chapter-0 .lm-log-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}",
-    "@media(max-width:640px){#chapter-0 .executive-hero{min-height:0!important;padding:18px 14px 20px!important}#chapter-0 .executive-hero-copy{width:100%;max-width:none;min-width:0}#chapter-0 .executive-hero h2{max-width:16ch;font-size:clamp(2rem,9.4vw,2.8rem)!important;line-height:1.02!important}#chapter-0 .executive-lead{max-width:100%;font-size:.94rem!important;line-height:1.45!important}#chapter-0 .executive-hero-actions{display:flex!important;width:100%;flex-direction:column!important;align-items:stretch!important;gap:9px!important}#chapter-0 .executive-hero-actions .executive-button{display:flex;width:100%!important;min-width:0!important;min-height:48px;justify-content:center;padding:10px 13px!important;white-space:normal!important;text-align:center;line-height:1.2;font-size:.96rem!important}#chapter-0 .executive-hero-actions .executive-button span{flex:0 0 auto}#chapter-0 .lm-indicator-strip{gap:6px;padding:9px}#chapter-0 .lm-indicator{padding:6px}#chapter-0 .lm-indicator strong{font-size:1.9rem}#chapter-0 .lm-indicator span{font-size:.64rem}#chapter-0 .lm-act-banner{min-height:148px;padding:20px 16px}#chapter-0 .lm-act-banner p{font-size:.86rem}#chapter-0 .lm-act-links,#chapter-0 .lm-log-grid{grid-template-columns:1fr;gap:8px;padding:12px}#chapter-0 .lm-act-link{min-height:76px}#chapter-0 .lm-roster-rail{grid-auto-columns:116px}#chapter-0 .lm-recruitment-scene{grid-template-columns:1fr}#chapter-0 .lm-recruitment-art{width:min(100%,280px);justify-self:center}#chapter-0 .lm-act-annex{align-items:flex-start;flex-direction:column}}",
+    "@media(max-width:640px){#chapter-0 .executive-hero{min-height:0!important;padding:14px 14px 16px!important}#chapter-0 .executive-hero-copy{width:100%;max-width:none;min-width:0;min-height:0!important;justify-content:flex-start!important;gap:0!important}#chapter-0 .executive-hero h2{max-width:16ch;font-size:clamp(2rem,9.4vw,2.8rem)!important;line-height:1.02!important}#chapter-0 .executive-lead{max-width:100%;font-size:.94rem!important;line-height:1.45!important}#chapter-0 .executive-hero-actions{display:flex!important;width:100%;flex-direction:column!important;align-items:stretch!important;gap:9px!important}#chapter-0 .executive-hero-actions .executive-button{display:flex;width:100%!important;min-width:0!important;min-height:48px;justify-content:center;padding:10px 13px!important;white-space:normal!important;text-align:center;line-height:1.2;font-size:.96rem!important}#chapter-0 .executive-hero-actions .executive-button span{flex:0 0 auto}#chapter-0 .lm-indicator-strip{gap:6px;padding:9px}#chapter-0 .lm-indicator{padding:6px}#chapter-0 .lm-indicator strong{font-size:1.9rem}#chapter-0 .lm-indicator span{font-size:.64rem}#chapter-0 .lm-act-banner{min-height:148px;padding:20px 16px}#chapter-0 .lm-act-banner p{font-size:.86rem}#chapter-0 .lm-act-links,#chapter-0 .lm-log-grid{grid-template-columns:1fr;gap:8px;padding:12px}#chapter-0 .lm-act-link{min-height:76px}#chapter-0 .lm-roster-rail{grid-auto-columns:116px}#chapter-0 .lm-recruitment-scene{grid-template-columns:1fr}#chapter-0 .lm-recruitment-art{width:min(100%,280px);justify-self:center}#chapter-0 .lm-act-annex{align-items:flex-start;flex-direction:column}}",
     "@media(prefers-reduced-motion:reduce){#chapter-0 .lm-act-link{transition:none!important}#chapter-0 .lm-act-link:hover{transform:none}}",
     "@media print{#chapter-0 .lm-act-link{break-inside:avoid}}"
   ].join("");
@@ -126,6 +135,43 @@
     const section = $(selector, home);
     if (section) section.hidden = true;
   });
+
+  const primaryNavigation = $("header .primary-navigation");
+  if (primaryNavigation && !primaryNavigation.querySelector(".nav-act")) {
+    const chapterButton = (number) => primaryNavigation.querySelector('[data-chapter="' + number + '"]');
+    const brandButton = primaryNavigation.querySelector('a[href="./marcas/"], a[href="marcas/"]');
+    const acts = [
+      { key:"identity", label:"I · IDENTIDAD", aria:"Acto I: Identidad", controls:[chapterButton("1"),chapterButton("11"),chapterButton("2")] },
+      { key:"action", label:"II · EN ACCIÓN", aria:"Acto II: En acción", controls:[chapterButton("3"),chapterButton("12"),chapterButton("10")] },
+      { key:"future", label:"III · FUTURO Y COMUNIDAD", aria:"Acto III: Futuro y comunidad", controls:[chapterButton("9"),chapterButton("8"),brandButton,chapterButton("6")] }
+    ];
+    acts.forEach((act) => {
+      const group = document.createElement("div");
+      group.className = "nav-act nav-act-" + act.key;
+      group.dataset.act = act.key;
+      group.setAttribute("role","group");
+      group.setAttribute("aria-label",act.aria);
+      const label = document.createElement("span");
+      label.className = "nav-act-label";
+      label.textContent = act.label;
+      const items = document.createElement("div");
+      items.className = "nav-act-items";
+      act.controls.filter(Boolean).forEach((control) => items.appendChild(control));
+      group.append(label,items);
+      primaryNavigation.appendChild(group);
+    });
+    const syncActiveAct = () => {
+      primaryNavigation.querySelectorAll(".nav-act").forEach((group) => {
+        group.classList.toggle("is-active-act",Boolean(group.querySelector(".nav-btn.active")));
+      });
+    };
+    primaryNavigation.querySelectorAll(".nav-btn").forEach((button) => {
+      const observer = new MutationObserver(syncActiveAct);
+      observer.observe(button,{attributes:true,attributeFilter:["class"]});
+    });
+    primaryNavigation.addEventListener("click",syncActiveAct);
+    syncActiveAct();
+  }
 
   const brandLink = $('header .primary-navigation a[href="./marcas/"], header .primary-navigation a[href="marcas/"]');
   if (brandLink) brandLink.classList.add("lm-nav-brand-primary");
