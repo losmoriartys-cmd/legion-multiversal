@@ -93,6 +93,19 @@ async function compareElement(mainPage, candidatePage, testInfo, viewportName, s
     candidatePage.addStyleTag({ content: captureScope })
   ]);
 
+  // La navegación puede cambiar la altura del encabezado entre main y el
+  // candidato. Alinear cada superficie al mismo origen vertical entero evita
+  // que el scroll automático de screenshot introduzca antialiasing distinto
+  // en bordes redondeados aunque el contenido y su geometría sean iguales.
+  await Promise.all([mainElement, candidateElement].map(element => element.evaluate(node => {
+    node.scrollIntoView({ block: 'start', inline: 'nearest' });
+    const top = node.getBoundingClientRect().top;
+    window.scrollTo(0, Math.max(0, window.scrollY + top - 64));
+  })));
+  await Promise.all([mainPage, candidatePage].map(page => page.evaluate(() =>
+    new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))
+  )));
+
   const prefix = 'visual-' + surface.name + '-' + viewportName;
   const mainPath = testInfo.outputPath(prefix + '-main.png');
   const candidatePath = testInfo.outputPath(prefix + '-candidate.png');
