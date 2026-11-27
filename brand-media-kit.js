@@ -281,7 +281,7 @@
         const stat = firstCard.querySelector(".media-stat");
         const copy = firstCard.querySelector("p");
         if (stat) stat.textContent = String(heroes.length);
-        if (copy) copy.textContent = heroes.length + " expedientes públicos. Los Moriartys representa el proyecto compartido de Demian y Ari; se cuenta como un perfil y un canal.";
+        if (copy) { copy.dataset.mediaCountCopy = "true"; copy.dataset.mediaEs = heroes.length + " expedientes públicos. Los Moriartys representa el proyecto compartido de Demian y Ari; se cuenta como un perfil y un canal."; copy.dataset.mediaEn = heroes.length + " public dossiers. Los Moriartys represents the shared project of Demian and Ari; it is counted as one profile and one channel."; copy.textContent = copy.dataset.mediaEs; }
       }
       if (english) applyLanguage();
     }).catch(() => {
