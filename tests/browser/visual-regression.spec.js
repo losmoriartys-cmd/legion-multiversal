@@ -147,9 +147,13 @@ async function compareElement(mainPage, candidatePage, testInfo, viewportName, s
       const maxScrollTop = Math.max(0, scroller.scrollHeight - scroller.clientHeight);
       return {
         documentTop,
+        elementHeight: rect.height,
+        viewportHeight: window.innerHeight,
         scrollTop: scroller.scrollTop,
         minViewportTop: documentTop - maxScrollTop,
-        maxViewportTop: documentTop
+        maxViewportTop: documentTop,
+        minVisibleScrollTop: Math.max(0, documentTop + rect.height - window.innerHeight),
+        maxVisibleScrollTop: Math.min(maxScrollTop, documentTop)
       };
     })
   ));
@@ -166,25 +170,47 @@ async function compareElement(mainPage, candidatePage, testInfo, viewportName, s
       ))
     : [];
 
-  const minSharedTop = Math.max(...captureRanges.map(range => range.minViewportTop));
-  const maxSharedTop = Math.min(...captureRanges.map(range => range.maxViewportTop));
-  expect(
-    minSharedTop,
-    'Baseline y candidato no tienen una posición vertical de captura común: ' + JSON.stringify(captureRanges)
-  ).toBeLessThanOrEqual(maxSharedTop + 0.25);
-  const captureTop = Math.max(minSharedTop, Math.min(64, maxSharedTop));
+  let captureTop = null;
+  let sharedScrollTop = null;
 
-  await Promise.all([mainElement, candidateElement].map((element, index) =>
-    element.evaluate((node, target) => {
+  if (isStatsComparison) {
+    // Igualamos scrollTop dentro del intervalo que mantiene la tarjeta completa
+    // visible en ambas páginas. La altura de contenido anterior difiere, por lo
+    // que el origen del viewport puede variar, pero el raster se genera con la
+    // misma fase de scroll y el recorte del elemento conserva su tamaño exacto.
+    const minSharedScrollTop = Math.max(...captureRanges.map(range => range.minVisibleScrollTop));
+    const maxSharedScrollTop = Math.min(...captureRanges.map(range => range.maxVisibleScrollTop));
+    expect(
+      minSharedScrollTop,
+      'Baseline y candidato no comparten un scrollTop que mantenga toda la superficie visible: ' + JSON.stringify(captureRanges)
+    ).toBeLessThanOrEqual(maxSharedScrollTop);
+    sharedScrollTop = Math.round((minSharedScrollTop + maxSharedScrollTop) / 2);
+    await Promise.all([mainPage, candidatePage].map(page => page.evaluate(targetScrollTop => {
       const scroller = document.scrollingElement || document.documentElement;
-      const maxScrollTop = Math.max(0, scroller.scrollHeight - scroller.clientHeight);
-      scroller.scrollTop = Math.max(0, Math.min(maxScrollTop, target.documentTop - target.captureTop));
+      scroller.scrollTop = targetScrollTop;
       scroller.scrollLeft = 0;
-    }, {
-      documentTop: captureRanges[index].documentTop,
-      captureTop
-    })
-  ));
+    }, sharedScrollTop)));
+  } else {
+    const minSharedTop = Math.max(...captureRanges.map(range => range.minViewportTop));
+    const maxSharedTop = Math.min(...captureRanges.map(range => range.maxViewportTop));
+    expect(
+      minSharedTop,
+      'Baseline y candidato no tienen una posición vertical de captura común: ' + JSON.stringify(captureRanges)
+    ).toBeLessThanOrEqual(maxSharedTop + 0.25);
+    captureTop = Math.max(minSharedTop, Math.min(64, maxSharedTop));
+
+    await Promise.all([mainElement, candidateElement].map((element, index) =>
+      element.evaluate((node, target) => {
+        const scroller = document.scrollingElement || document.documentElement;
+        const maxScrollTop = Math.max(0, scroller.scrollHeight - scroller.clientHeight);
+        scroller.scrollTop = Math.max(0, Math.min(maxScrollTop, target.documentTop - target.captureTop));
+        scroller.scrollLeft = 0;
+      }, {
+        documentTop: captureRanges[index].documentTop,
+        captureTop
+      })
+    ));
+  }
 
   await Promise.all([mainPage, candidatePage].map(page => page.evaluate(() =>
     new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))
@@ -201,16 +227,33 @@ async function compareElement(mainPage, candidatePage, testInfo, viewportName, s
     })
   ));
 
-  for (const [index, origin] of captureOrigins.entries()) {
+  if (isStatsComparison) {
+    for (const [index, origin] of captureOrigins.entries()) {
+      expect(
+        Math.abs(origin.scrollTop - sharedScrollTop),
+        'La captura no comparte scrollTop (' + (index ? 'candidato' : 'baseline') + '): ' + JSON.stringify({ origin, sharedScrollTop })
+      ).toBeLessThanOrEqual(0.25);
+      expect(
+        origin.top,
+        'La superficie de Estadísticas quedó fuera del viewport (' + (index ? 'candidato' : 'baseline') + '): ' + JSON.stringify(origin)
+      ).toBeGreaterThanOrEqual(0);
+      expect(
+        origin.bottom,
+        'La superficie de Estadísticas quedó cortada por el viewport (' + (index ? 'candidato' : 'baseline') + '): ' + JSON.stringify(origin)
+      ).toBeLessThanOrEqual(origin.viewportHeight);
+    }
+  } else {
+    for (const [index, origin] of captureOrigins.entries()) {
+      expect(
+        Math.abs(origin.top - captureTop),
+        'La captura no respetó la coordenada común (' + (index ? 'candidato' : 'baseline') + '): ' + JSON.stringify({ origin, captureTop })
+      ).toBeLessThanOrEqual(0.5);
+    }
     expect(
-      Math.abs(origin.top - captureTop),
-      'La captura no respetó la coordenada común (' + (index ? 'candidato' : 'baseline') + '): ' + JSON.stringify({ origin, captureTop })
-    ).toBeLessThanOrEqual(0.5);
+      Math.abs(captureOrigins[0].top - captureOrigins[1].top),
+      'Las superficies no comparten el mismo origen vertical de captura: ' + JSON.stringify({ captureOrigins, captureTop })
+    ).toBeLessThanOrEqual(0.25);
   }
-  expect(
-    Math.abs(captureOrigins[0].top - captureOrigins[1].top),
-    'Las superficies no comparten el mismo origen vertical de captura: ' + JSON.stringify({ captureOrigins, captureTop })
-  ).toBeLessThanOrEqual(0.25);
   expect(
     Math.abs(captureOrigins[0].left - captureOrigins[1].left),
     'Las superficies no comparten el mismo origen horizontal de captura: ' + JSON.stringify(captureOrigins)
