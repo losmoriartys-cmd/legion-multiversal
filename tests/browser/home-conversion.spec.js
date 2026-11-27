@@ -86,6 +86,13 @@ test('portada: actos, indicadores y ocho retratos oficiales funcionan en escrito
     await expect(navigation.locator('.nav-act[data-act="action"] [data-chapter]').first()).toHaveAttribute('data-chapter', '3');
     await expect(navigation.locator('.nav-act[data-act="future"] [data-chapter]').first()).toHaveAttribute('data-chapter', '9');
     await expect(navigation.locator('.nav-act[data-act="future"] a[href="./marcas/"]')).toBeVisible();
+    const navigationBounds = await navigation.boundingBox();
+    const identityBounds = await navigation.locator('.nav-act[data-act="identity"]').boundingBox();
+    expect(navigationBounds).not.toBeNull();
+    expect(identityBounds).not.toBeNull();
+    expect(identityBounds.left).toBeGreaterThanOrEqual(navigationBounds.left - 1);
+    expect(identityBounds.right).toBeLessThanOrEqual(navigationBounds.right + 1);
+    expect(await navigation.evaluate(node => node.scrollLeft)).toBe(0);
     await expect(navigation.locator('.nav-act[data-act="identity"] .nav-act-items > .nav-btn')).toHaveCount(3);
     await expect(navigation.locator('.nav-act[data-act="action"] .nav-act-items > .nav-btn')).toHaveCount(3);
     await expect(navigation.locator('.nav-act[data-act="future"] .nav-act-items > .nav-btn')).toHaveCount(4);
