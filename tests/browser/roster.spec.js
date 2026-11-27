@@ -13,7 +13,7 @@ function comparePngFiles(mainPath, candidatePath) {
     'diff = ImageChops.difference(main, candidate)',
     'max_delta = max(high for _, high in diff.getextrema())',
     'print(json.dumps({"sameDimensions": True, "maxChannelDelta": max_delta}))'
-  ].join('\\n');
+  ].join(String.fromCharCode(10));
   const result = execFileSync('python', ['-c', script, mainPath, candidatePath], { encoding: 'utf8' });
   return JSON.parse(result.trim());
 }
