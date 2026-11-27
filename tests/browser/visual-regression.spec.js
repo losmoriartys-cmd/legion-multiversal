@@ -87,24 +87,47 @@ async function compareElement(mainPage, candidatePage, testInfo, viewportName, s
   // sección en una página pero no en la otra según la posición de scroll.
   // No pertenece a la superficie comparada: navegación e interacción del header
   // ya se verifican en QA común. Se oculta en ambas páginas sin cambiar su layout.
-  const captureScope = 'body > header { visibility: hidden !important; } #chapter-transition { visibility: hidden !important; } *, *::before, *::after { animation: none !important; transition: none !important; caret-color: transparent !important; }';
+  // La textura fija de body::before y el header sticky son capas globales, no parte
+  // de la superficie bajo prueba. También se desactiva el scroll suave global: el
+  // CSS de la página define scroll-behavior:smooth y no sirve para capturas síncronas.
+  const captureScope = 'html { scroll-behavior: auto !important; } body > header { visibility: hidden !important; } body::before { visibility: hidden !important; } #chapter-transition { visibility: hidden !important; } *, *::before, *::after { animation: none !important; transition: none !important; caret-color: transparent !important; }';
   await Promise.all([
     mainPage.addStyleTag({ content: captureScope }),
     candidatePage.addStyleTag({ content: captureScope })
   ]);
 
-  // La navegación puede cambiar la altura del encabezado entre main y el
-  // candidato. Alinear cada superficie al mismo origen vertical entero evita
-  // que el scroll automático de screenshot introduzca antialiasing distinto
-  // en bordes redondeados aunque el contenido y su geometría sean iguales.
+  // La altura de la navegación puede ser distinta entre main y el candidato.
+  // Se posiciona la superficie en y=64 con scroll instantáneo, sin heredar el
+  // scroll-behavior:smooth del sitio ni capturar una animación a medio recorrido.
   await Promise.all([mainElement, candidateElement].map(element => element.evaluate(node => {
-    node.scrollIntoView({ block: 'start', inline: 'nearest' });
     const top = node.getBoundingClientRect().top;
-    window.scrollTo(0, Math.max(0, window.scrollY + top - 64));
+    window.scrollTo({
+      left: window.scrollX,
+      top: Math.max(0, window.scrollY + top - 64),
+      behavior: 'instant'
+    });
   })));
   await Promise.all([mainPage, candidatePage].map(page => page.evaluate(() =>
     new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))
   )));
+
+  const captureOrigins = await Promise.all([mainElement, candidateElement].map(element =>
+    element.evaluate(node => {
+      const rect = node.getBoundingClientRect();
+      return { top: rect.top, left: rect.left };
+    })
+  ));
+  for (const [index, origin] of captureOrigins.entries()) {
+    expect(Math.abs(origin.top - 64), 'La captura no quedó alineada en y=64 (' + (index ? 'candidato' : 'baseline') + '): ' + origin.top).toBeLessThanOrEqual(0.5);
+  }
+  expect(
+    Math.abs(captureOrigins[0].top - captureOrigins[1].top),
+    'Las superficies no comparten el mismo origen vertical de captura: ' + JSON.stringify(captureOrigins)
+  ).toBeLessThanOrEqual(0.25);
+  expect(
+    Math.abs(captureOrigins[0].left - captureOrigins[1].left),
+    'Las superficies no comparten el mismo origen horizontal de captura: ' + JSON.stringify(captureOrigins)
+  ).toBeLessThanOrEqual(0.25);
 
   const prefix = 'visual-' + surface.name + '-' + viewportName;
   const mainPath = testInfo.outputPath(prefix + '-main.png');
