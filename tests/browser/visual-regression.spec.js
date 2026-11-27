@@ -204,10 +204,38 @@ async function compareElement(mainPage, candidatePage, testInfo, viewportName, s
           };
         };
         const rows = Array.from(node.querySelectorAll('.stats-comparison-row'));
+        const scroller = document.scrollingElement || document.documentElement;
+        const ancestors = [];
+        let ancestor = node;
+        while (ancestor && ancestors.length < 8) {
+          const style = getComputedStyle(ancestor);
+          ancestors.push({
+            tag: ancestor.tagName,
+            id: ancestor.id || '',
+            className: String(ancestor.className || ''),
+            rect: rect(ancestor),
+            position: style.position,
+            transform: style.transform,
+            filter: style.filter,
+            opacity: style.opacity,
+            backgroundColor: style.backgroundColor,
+            backgroundImage: style.backgroundImage,
+            borderRadius: style.borderRadius,
+            border: style.border,
+            boxShadow: style.boxShadow,
+            overflow: style.overflow,
+            isolation: style.isolation,
+            contain: style.contain,
+            willChange: style.willChange
+          });
+          ancestor = ancestor.parentElement;
+        }
         return {
           dpr: window.devicePixelRatio,
           viewport: { width: innerWidth, height: innerHeight },
+          scroll: { x: scroller.scrollLeft, y: scroller.scrollTop, documentTop: node.getBoundingClientRect().top + scroller.scrollTop },
           surface: rect(node),
+          ancestors,
           rows: rows.map(row => {
             const tracks = Array.from(row.querySelectorAll('.stats-comparison-track'));
             return {
