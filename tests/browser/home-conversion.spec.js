@@ -136,7 +136,7 @@ test('ficha para marcas: indicadores canónicos, impresión PDF y traducción in
   await expect(page.locator('.media-data-strip')).toBeVisible();
   await expect(page.locator('.media-data-cell')).toHaveCount(5);
   await expect(page.locator('.media-stat').first()).toHaveText('8');
-  await expect(page.getByRole('button', { name: /GUARDAR \\/ IMPRIMIR PDF/i })).toBeVisible();
+  await expect(page.getByRole('button', { name: /GUARDAR \/ IMPRIMIR PDF/i })).toBeVisible();
   await expect(page.locator('.language-toggle')).toHaveText('ENGLISH');
   await page.locator('.language-toggle').click();
   await expect(page.locator('html')).toHaveAttribute('lang', 'en');
@@ -146,6 +146,6 @@ test('ficha para marcas: indicadores canónicos, impresión PDF y traducción in
   await expect(page.locator('html')).toHaveAttribute('lang', 'es');
   await expect(page.locator('.subpage-hero h1')).toContainText('Diferentes mundos.');
   await expect(page.locator('.brand-nav-cta')).toBeVisible();
-  await expect(page.locator('.channel-kit-dossier-link a').first()).toHaveAttribute('href', /#roster\\//);
+  await expect(page.locator('.channel-kit-dossier-link a').first()).toHaveAttribute('href', /#roster\//);
 });
 
