@@ -10,6 +10,8 @@ on:
       - 'arsenal-registry.js'
       - 'chapters-refresh.js'
       - 'creator-schedule.js'
+      - 'brand-media-kit.js'
+      - 'home-editorial.js'
       - 'creator-colors.css'
       - 'playwright.config.js'
       - 'index.html'
@@ -73,6 +75,8 @@ jobs:
           node --check arsenal-registry.js
           node --check chapters-refresh.js
           node --check creator-schedule.js
+          node --check brand-media-kit.js
+          node --check home-editorial.js
       - name: Instalar motor de contratos JSON Schema
         run: python -m pip install --disable-pip-version-check -r requirements-data-contracts.txt
       - name: Validar archivos JSON
