@@ -90,6 +90,15 @@
       "to_sha256": null,
       "reason": "Eliminar la página duplicada de vista previa; sus recorridos y fichas ya se encuentran integrados en el sitio principal y las pruebas se trasladan a index.html#chapter-12.",
       "reference": "Issue #139 / WEB-02 · fase A"
+    },
+    {
+      "id": "retire-bitacora-preview-index-link-sha-correction-2026-11-27",
+      "path": "index.html",
+      "action": "update",
+      "from_sha256": "8fdcb269623de7eac939adc49115c91c8e7b150838200702cd948703c2cd9954",
+      "to_sha256": "8603393a65abb69d63545000d525926ea3f14193586d9aa576d8a4a9c8dfb149",
+      "reason": "Corrección append-only del to_sha256 de WEB-02. La transición exacta elimina únicamente el enlace roster-bitacora-link a bitacora-preview.html; el candidato reconstruido desde el index.html actual de main se verifica como SHA-256 8603393a65abb69d63545000d525926ea3f14193586d9aa576d8a4a9c8dfb149. No se autoriza ningún otro cambio en index.html.",
+      "reference": "Issue #139 / WEB-02 · corrección de hash de fase A tras PR #140"
     }
   ]
 }
