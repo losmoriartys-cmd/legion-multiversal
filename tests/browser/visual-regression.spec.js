@@ -2,21 +2,6 @@ const { test, expect } = require('@playwright/test');
 const { execFileSync } = require('node:child_process');
 const { writeFileSync } = require('node:fs');
 
-function cropPngFile(sourcePath, outputPath, box) {
-  const script = [
-    'from PIL import Image',
-    'import json, sys',
-    'image = Image.open(sys.argv[1])',
-    'x, y, width, height = map(int, sys.argv[3:7])',
-    'if x < 0 or y < 0 or x + width > image.width or y + height > image.height:',
-    '    raise SystemExit("El recorte diagnóstico queda fuera del viewport: " + json.dumps({"image": image.size, "box": [x, y, x + width, y + height]}))',
-    'image.crop((x, y, x + width, y + height)).save(sys.argv[2])',
-    'print(json.dumps({"sourceSize": image.size, "crop": [x, y, width, height]}))'
-  ].join(String.fromCharCode(10));
-  const result = execFileSync('python', ['-c', script, sourcePath, outputPath, String(box.x), String(box.y), String(box.width), String(box.height)], { encoding: 'utf8' });
-  return JSON.parse(result.trim());
-}
-
 function comparePngFiles(mainPath, candidatePath) {
   const script = [
     'from PIL import Image, ImageChops',
@@ -185,11 +170,10 @@ async function compareElement(mainPage, candidatePage, testInfo, viewportName, s
         chapter.parentElement.insertBefore(spacer, chapter);
       }, spacerHeight);
     }
-    console.log('STATS_DOCUMENT_ORIGIN_NORMALIZATION: ' + JSON.stringify({
-      before: documentTops,
-      offset: documentOffset,
-      spacerHeight: Math.abs(documentOffset)
-    }));
+    console.log(
+      'STATS_DOCUMENT_ORIGIN_NORMALIZATION: offset=' +
+      documentOffset + 'px; spacer=' + Math.abs(documentOffset) + 'px'
+    );
   }
 
   // Algunas superficies (en especial la tabla técnica, al final del capítulo)
@@ -215,6 +199,14 @@ async function compareElement(mainPage, candidatePage, testInfo, viewportName, s
       };
     })
   ));
+
+  if (isStatsComparison) {
+    const documentPositions = captureRanges.map(range => range.documentTop);
+    expect(
+      Math.abs(documentPositions[0] - documentPositions[1]),
+      'La comparativa de Estadísticas no comparte el mismo origen documental tras normalizarlo: ' + JSON.stringify(documentPositions)
+    ).toBeLessThanOrEqual(0.25);
+  }
   // Alinear viewport y coordenada de documento hace comparables los contextos
   // de raster sin modificar datos, estilos del sitio ni dimensiones de la tarjeta.
   const backdropOverrides = isStatsComparison
@@ -318,156 +310,6 @@ async function compareElement(mainPage, candidatePage, testInfo, viewportName, s
     Math.abs(captureOrigins[0].left - captureOrigins[1].left),
     'Las superficies no comparten el mismo origen horizontal de captura: ' + JSON.stringify(captureOrigins)
   ).toBeLessThanOrEqual(0.25);
-
-  if (surface.name === 'stats-comparativa-twitch') {
-    const geometry = await Promise.all([mainElement, candidateElement].map(async (element, index) => {
-      const state = await element.evaluate(node => {
-        const rect = target => {
-          if (!target) return null;
-          const bounds = target.getBoundingClientRect();
-          return {
-            x: bounds.x, y: bounds.y, width: bounds.width, height: bounds.height,
-            right: bounds.right, bottom: bounds.bottom
-          };
-        };
-        const rows = Array.from(node.querySelectorAll('.stats-comparison-row'));
-        const scroller = document.scrollingElement || document.documentElement;
-        const paintProperties = [
-          'display', 'position', 'z-index', 'visibility', 'opacity',
-          'background-color', 'background-image', 'background-clip', 'background-origin',
-          'color', 'border', 'border-radius', 'outline', 'box-shadow',
-          'overflow', 'filter', 'backdrop-filter', 'mix-blend-mode', 'isolation',
-          'transform', 'transform-origin', 'transform-style', 'perspective',
-          'translate', 'rotate', 'scale', 'backface-visibility', 'clip-path',
-          'mask', 'mask-image', 'will-change', 'contain', 'content-visibility',
-          'zoom', 'image-rendering', 'appearance'
-        ];
-        const describePaint = target => {
-          if (!target) return null;
-          const style = getComputedStyle(target);
-          const properties = Object.fromEntries(paintProperties.map(name =>
-            [name, style.getPropertyValue(name)]
-          ));
-          properties.creatorColor = style.getPropertyValue('--creator-color');
-          return { rect: rect(target), properties };
-        };
-        const ancestors = [];
-        let ancestor = node;
-        while (ancestor && ancestors.length < 10) {
-          const style = getComputedStyle(ancestor);
-          ancestors.push({
-            tag: ancestor.tagName,
-            id: ancestor.id || '',
-            className: String(ancestor.className || ''),
-            paint: describePaint(ancestor)
-          });
-          ancestor = ancestor.parentElement;
-        }
-        const stylesheetOrder = Array.from(document.styleSheets).map(sheet => ({
-          href: sheet.href || '',
-          disabled: sheet.disabled,
-          media: sheet.media?.mediaText || ''
-        }));
-        return {
-          dpr: window.devicePixelRatio,
-          visualViewport: window.visualViewport ? {
-            scale: window.visualViewport.scale,
-            offsetTop: window.visualViewport.offsetTop,
-            offsetLeft: window.visualViewport.offsetLeft,
-            width: window.visualViewport.width,
-            height: window.visualViewport.height
-          } : null,
-          viewport: { width: innerWidth, height: innerHeight },
-          scroll: { x: scroller.scrollLeft, y: scroller.scrollTop, documentTop: node.getBoundingClientRect().top + scroller.scrollTop },
-          surface: describePaint(node),
-          ancestors,
-          stylesheetOrder,
-          rows: rows.map(row => {
-            const tracks = Array.from(row.querySelectorAll('.stats-comparison-track'));
-            return {
-              label: row.querySelector('strong')?.textContent?.trim() || '',
-              row: rect(row),
-              gridColumns: getComputedStyle(row).gridTemplateColumns,
-              tracks: tracks.map(track => {
-                const fill = track.querySelector('i');
-                const trackStyle = getComputedStyle(track);
-                const fillStyle = fill ? getComputedStyle(fill) : null;
-                return {
-                  track: describePaint(track),
-                  fill: describePaint(fill),
-                  trackBefore: {
-                    content: getComputedStyle(track, '::before').content,
-                    opacity: getComputedStyle(track, '::before').opacity,
-                    background: getComputedStyle(track, '::before').backgroundColor,
-                    transform: getComputedStyle(track, '::before').transform
-                  },
-                  trackAfter: {
-                    content: getComputedStyle(track, '::after').content,
-                    opacity: getComputedStyle(track, '::after').opacity,
-                    background: getComputedStyle(track, '::after').backgroundColor,
-                    transform: getComputedStyle(track, '::after').transform
-                  },
-                  fillBefore: fill ? {
-                    content: getComputedStyle(fill, '::before').content,
-                    opacity: getComputedStyle(fill, '::before').opacity,
-                    background: getComputedStyle(fill, '::before').backgroundColor,
-                    transform: getComputedStyle(fill, '::before').transform
-                  } : null,
-                  fillAfter: fill ? {
-                    content: getComputedStyle(fill, '::after').content,
-                    opacity: getComputedStyle(fill, '::after').opacity,
-                    background: getComputedStyle(fill, '::after').backgroundColor,
-                    transform: getComputedStyle(fill, '::after').transform
-                  } : null,
-                  inlineWidth: fill?.getAttribute('style') || '',
-                  computedWidth: fillStyle?.width || null,
-                  background: fillStyle?.backgroundColor || null,
-                  radius: fillStyle?.borderRadius || null,
-                  opacity: fillStyle?.opacity || null,
-                  transform: fillStyle?.transform || null,
-                  trackRadius: trackStyle.borderRadius,
-                  trackOpacity: trackStyle.opacity
-                };
-              })
-            };
-          })
-        };
-      });
-      return { side: index === 0 ? 'main' : 'candidate', ...state };
-    }));
-    console.log('STATS_COMPARISON_GEOMETRY_' + viewportName + ': ' + JSON.stringify(geometry));
-
-    if (viewportName === 'mobile') {
-      const viewportPaths = [
-        testInfo.outputPath('diagnostic-full-viewport-main.png'),
-        testInfo.outputPath('diagnostic-full-viewport-candidate.png')
-      ];
-      const cropPaths = [
-        testInfo.outputPath('diagnostic-viewport-crop-main.png'),
-        testInfo.outputPath('diagnostic-viewport-crop-candidate.png')
-      ];
-      const cropBox = {
-        x: Math.floor(mainBounds.x),
-        y: Math.floor(captureTop),
-        width: Math.ceil(mainBounds.x + mainBounds.width) - Math.floor(mainBounds.x),
-        height: Math.ceil(captureTop + mainBounds.height) - Math.floor(captureTop)
-      };
-      const [mainViewportSize, candidateViewportSize] = await Promise.all([
-        mainPage.screenshot({ path: viewportPaths[0], fullPage: false, animations: 'disabled', caret: 'hide' }),
-        candidatePage.screenshot({ path: viewportPaths[1], fullPage: false, animations: 'disabled', caret: 'hide' })
-      ]);
-      const mainCrop = cropPngFile(viewportPaths[0], cropPaths[0], cropBox);
-      const candidateCrop = cropPngFile(viewportPaths[1], cropPaths[1], cropBox);
-      console.log('STATS_VIEWPORT_CROP_DIAGNOSTIC: ' + JSON.stringify({
-        cropBox,
-        mainViewportBytes: mainViewportSize.length,
-        candidateViewportBytes: candidateViewportSize.length,
-        mainCrop,
-        candidateCrop,
-        rasterDiff: comparePngFiles(cropPaths[0], cropPaths[1])
-      }));
-    }
-  }
 
   const prefix = 'visual-' + surface.name + '-' + viewportName;
   const mainPath = testInfo.outputPath(prefix + '-main.png');
