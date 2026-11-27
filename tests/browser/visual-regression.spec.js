@@ -134,11 +134,11 @@ async function compareElement(mainPage, candidatePage, testInfo, viewportName, s
     candidatePage.addStyleTag({ content: captureScope })
   ]);
 
-  // Estadísticas es una superficie interior del capítulo 3. En la rama nueva,
-  // el capítulo anterior cambia 61 px la coordenada absoluta del capítulo 3,
-  // aunque el panel y sus estilos internos sean iguales. Chromium rasteriza
-  // ciertos bordes redondeados en el contexto de la capa/documento; normalizamos
-  // temporalmente el origen documental sin cambiar los píxeles visibles del panel.
+  // Estadísticas es una superficie interior del capítulo 3. La reorganización
+  // editorial cambia la altura del contenido anterior y, por tanto, su posición
+  // absoluta en el documento, aunque el panel y sus estilos internos sean iguales.
+  // Chromium rasteriza algunos bordes redondeados según la fase del documento;
+  // normalizamos ese origen solo durante la captura y sin cambiar píxeles visibles.
   const isStatsComparison = surface.name === 'stats-comparativa-twitch';
   if (isStatsComparison) {
     const documentTops = await Promise.all([mainElement, candidateElement].map(element =>
@@ -220,10 +220,9 @@ async function compareElement(mainPage, candidatePage, testInfo, viewportName, s
   let captureTop = null;
 
   if (isStatsComparison) {
-    // La comparativa debe capturarse en la misma coordenada del viewport, no con
-    // el mismo scrollTop: la altura editorial anterior difiere 61 px entre ambas
-    // páginas. Los dos paneles caben completos en el viewport, por lo que podemos
-    // alinear su origen sin recortar contenido ni alterar las dimensiones raster.
+    // La comparativa usa el mismo origen documental y la misma coordenada del
+    // viewport. Ambos paneles deben quedar completos y con idénticas dimensiones
+    // raster, aunque el contenido editorial anterior tenga alturas diferentes.
     const minSharedCaptureTop = Math.max(...captureRanges.map(range =>
       range.documentTop - range.maxVisibleScrollTop
     ));
