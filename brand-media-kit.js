@@ -162,7 +162,7 @@
     const printButton = actions && actions.querySelector("button");
     if (printButton) {
       printButton.textContent = "GUARDAR / IMPRIMIR PDF";
-      printButton.setAttribute("aria-label", "Abrir impresión para guardar la ficha institucional en PDF");
+      printButton.setAttribute("aria-label", "GUARDAR / IMPRIMIR PDF");
     }
 
     let english = false;
