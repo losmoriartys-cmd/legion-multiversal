@@ -74,7 +74,7 @@ async function compareElement(mainPage, candidatePage, testInfo, viewportName, s
   // sección en una página pero no en la otra según la posición de scroll.
   // No pertenece a la superficie comparada: navegación e interacción del header
   // ya se verifican en QA común. Se oculta en ambas páginas sin cambiar su layout.
-  const captureScope = 'body > header { visibility: hidden !important; } #chapter-transition { visibility: hidden !important; }';
+  const captureScope = 'body > header { visibility: hidden !important; } #chapter-transition { visibility: hidden !important; } *, *::before, *::after { animation: none !important; transition: none !important; caret-color: transparent !important; }';
   await Promise.all([
     mainPage.addStyleTag({ content: captureScope }),
     candidatePage.addStyleTag({ content: captureScope })
