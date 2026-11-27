@@ -167,13 +167,20 @@
         group.classList.toggle("is-active-act",isActive);
         if (isActive) activeAct = group;
       });
-      primaryNavigation.scrollLeft = activeAct && window.innerWidth <= 900 ? activeAct.offsetLeft : 0;
+      let targetLeft = 0;
+      if (activeAct && window.innerWidth <= 900) {
+        const navBounds = primaryNavigation.getBoundingClientRect();
+        const actBounds = activeAct.getBoundingClientRect();
+        targetLeft = Math.max(0, primaryNavigation.scrollLeft + actBounds.left - navBounds.left);
+      }
+      primaryNavigation.scrollLeft = targetLeft;
     };
     primaryNavigation.querySelectorAll(".nav-btn").forEach((button) => {
       const observer = new MutationObserver(syncActiveAct);
       observer.observe(button,{attributes:true,attributeFilter:["class"]});
     });
     primaryNavigation.addEventListener("click",syncActiveAct);
+    window.addEventListener("resize",syncActiveAct,{passive:true});
     syncActiveAct();
   }
 
