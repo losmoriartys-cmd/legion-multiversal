@@ -258,28 +258,6 @@ async function compareElement(mainPage, candidatePage, testInfo, viewportName, s
   ).toBeLessThanOrEqual(2);
 }
 
-
-  const mainPath = testInfo.outputPath(prefix + '-main.png');
-  const candidatePath = testInfo.outputPath(prefix + '-candidate.png');
-  await mainElement.screenshot({
-    path: mainPath,
-    animations: 'disabled',
-    caret: 'hide'
-  });
-  await candidateElement.screenshot({
-    path: candidatePath,
-    animations: 'disabled',
-    caret: 'hide'
-  });
-
-  const rasterDiff = comparePngFiles(mainPath, candidatePath);
-  expect(rasterDiff.sameDimensions, 'Cambió el tamaño raster de ' + surface.name + ' en ' + viewportName).toBe(true);
-  expect(
-    rasterDiff.maxChannelDelta,
-    'Regresión visual en ' + surface.name + ' (' + viewportName + '): ' + JSON.stringify(rasterDiff) + ' · tolerancia de rasterización 2/255.'
-  ).toBeLessThanOrEqual(2);
-}
-
 test('Roster: comparación visual exacta de las ocho cartas en escritorio y móvil', async ({ browser }, testInfo) => {
   test.setTimeout(180000);
 
