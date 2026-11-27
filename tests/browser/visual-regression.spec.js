@@ -12,7 +12,15 @@ function comparePngFiles(mainPath, candidatePath) {
     '    raise SystemExit(0)',
     'diff = ImageChops.difference(main, candidate)',
     'max_delta = max(high for _, high in diff.getextrema())',
-    'print(json.dumps({"sameDimensions": True, "maxChannelDelta": max_delta}))'
+    'import numpy as np',
+    'arr = np.asarray(diff)',
+    'mask = np.max(arr, axis=2) > 0',
+    'ys, xs = np.where(mask)',
+    'bbox = [int(xs.min()), int(ys.min()), int(xs.max()), int(ys.max())] if len(xs) else None',
+    'points = []',
+    'for y, x in zip(ys[:40], xs[:40]):',
+    '    points.append({"x": int(x), "y": int(y), "main": list(main.getpixel((int(x), int(y)))), "candidate": list(candidate.getpixel((int(x), int(y))))})',
+    'print(json.dumps({"sameDimensions": True, "maxChannelDelta": max_delta, "changedPixelCount": int(mask.sum()), "bbox": bbox, "sampleDiffs": points}))'
   ].join(String.fromCharCode(10));
   const result = execFileSync('python', ['-c', script, mainPath, candidatePath], { encoding: 'utf8' });
   return JSON.parse(result.trim());
@@ -158,6 +166,67 @@ async function compareElement(mainPage, candidatePage, testInfo, viewportName, s
     Math.abs(captureOrigins[0].left - captureOrigins[1].left),
     'Las superficies no comparten el mismo origen horizontal de captura: ' + JSON.stringify(captureOrigins)
   ).toBeLessThanOrEqual(0.25);
+
+  if (surface.name === 'roster-ocho-cartas') {
+    const renderStates = await Promise.all([mainPage, candidatePage].map(async (page, pageIndex) => {
+      return page.evaluate(() => {
+        const root = document.querySelector('#roster-home');
+        const cards = Array.from(root?.querySelectorAll('.comic-roster-card') || []);
+        const describe = node => {
+          if (!node) return null;
+          const style = getComputedStyle(node);
+          const rect = node.getBoundingClientRect();
+          return {
+            tag: node.tagName, className: String(node.className || ''),
+            rect: { x: rect.x, y: rect.y, width: rect.width, height: rect.height },
+            display: style.display, visibility: style.visibility, opacity: style.opacity,
+            filter: style.filter, transform: style.transform, clipPath: style.clipPath,
+            backgroundColor: style.backgroundColor, backgroundImage: style.backgroundImage,
+            objectFit: style.objectFit, objectPosition: style.objectPosition,
+            animationName: style.animationName, animationDuration: style.animationDuration,
+            animationDelay: style.animationDelay, animationPlayState: style.animationPlayState
+          };
+        };
+        return {
+          readyState: document.readyState,
+          root: describe(root),
+          cards: cards.map(card => {
+            const photo = card.querySelector('.comic-roster-photo');
+            const img = photo?.querySelector('img');
+            let decodedPixel = null;
+            if (img?.complete && img.naturalWidth) {
+              try {
+                const canvas = document.createElement('canvas');
+                canvas.width = canvas.height = 1;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, 1, 1);
+                decodedPixel = Array.from(ctx.getImageData(0, 0, 1, 1).data);
+              } catch (error) { decodedPixel = String(error); }
+            }
+            return {
+              id: card.dataset.creatorId, cardClasses: card.className,
+              group: card.dataset.rosterGroup || null,
+              image: img ? { src: img.getAttribute('src'), currentSrc: img.currentSrc,
+                complete: img.complete, naturalWidth: img.naturalWidth,
+                naturalHeight: img.naturalHeight, decodedPixel } : null,
+              card: describe(card), photo: describe(photo), imageStyle: describe(img),
+              photoBefore: photo ? getComputedStyle(photo, '::before').backgroundImage : null,
+              photoAfter: photo ? getComputedStyle(photo, '::after').backgroundImage : null,
+              animations: card.getAnimations({ subtree: true }).map(animation => ({
+                playState: animation.playState, currentTime: animation.currentTime,
+                targetClass: String(animation.effect?.target?.className || ''),
+                timing: animation.effect?.getComputedTiming()
+              }))
+            };
+          })
+        };
+      });
+    }));
+    await testInfo.attach('roster-render-state-' + viewportName, {
+      body: Buffer.from(JSON.stringify(renderStates, null, 2)),
+      contentType: 'application/json'
+    });
+  }
 
   const prefix = 'visual-' + surface.name + '-' + viewportName;
   const mainPath = testInfo.outputPath(prefix + '-main.png');
