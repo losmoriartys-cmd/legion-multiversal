@@ -86,6 +86,18 @@ test('portada: actos, indicadores y ocho retratos oficiales funcionan en escrito
     await expect(page.locator('#lm-roster-rail .lm-roster-card')).toHaveCount(8);
     await expect(page.locator('#lm-session-log .lm-log-card')).toHaveCount(3);
 
+    const portraitRail = page.locator('#lm-roster-rail');
+    await portraitRail.scrollIntoViewIfNeeded();
+    await portraitRail.locator('img').evaluateAll(images => images.forEach(image => { image.loading = 'eager'; }));
+    await page.waitForFunction(() => {
+      const images = Array.from(document.querySelectorAll('#lm-roster-rail img'));
+      return images.length === 8 && images.every(image => image.complete && image.naturalWidth > 0);
+    }, null, { timeout: 20000 });
+    const portraitDimensions = await portraitRail.locator('img').evaluateAll(images =>
+      images.map(image => ({ width: image.naturalWidth, height: image.naturalHeight }))
+    );
+    expect(portraitDimensions.every(image => image.width > 0 && image.height > 0)).toBe(true);
+
     const counts = await page.evaluate(async () => {
       const [roster, games] = await Promise.all([
         fetch('./data/roster.json').then(response => response.json()),
