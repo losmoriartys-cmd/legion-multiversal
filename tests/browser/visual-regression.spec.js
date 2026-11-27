@@ -142,30 +142,53 @@ async function compareElement(mainPage, candidatePage, testInfo, viewportName, s
       const maxScrollTop = Math.max(0, scroller.scrollHeight - scroller.clientHeight);
       return {
         documentTop,
+        scrollTop: scroller.scrollTop,
         minViewportTop: documentTop - maxScrollTop,
         maxViewportTop: documentTop
       };
     })
   ));
-  const minSharedTop = Math.max(...captureRanges.map(range => range.minViewportTop));
-  const maxSharedTop = Math.min(...captureRanges.map(range => range.maxViewportTop));
-  expect(
-    minSharedTop,
-    'Baseline y candidato no tienen una posición vertical de captura común: ' + JSON.stringify(captureRanges)
-  ).toBeLessThanOrEqual(maxSharedTop + 0.25);
-  const captureTop = Math.max(minSharedTop, Math.min(64, maxSharedTop));
+  const isStatsComparison = surface.name === 'stats-comparativa-twitch';
+  let captureTop = null;
+  let sharedScrollTop = null;
 
-  await Promise.all([mainElement, candidateElement].map((element, index) =>
-    element.evaluate((node, target) => {
-      const scroller = document.scrollingElement || document.documentElement;
-      const maxScrollTop = Math.max(0, scroller.scrollHeight - scroller.clientHeight);
-      scroller.scrollTop = Math.max(0, Math.min(maxScrollTop, target.documentTop - target.captureTop));
-      scroller.scrollLeft = 0;
-    }, {
-      documentTop: captureRanges[index].documentTop,
-      captureTop
-    })
-  ));
+  if (isStatsComparison) {
+    // Las dos páginas tienen una cantidad distinta de contenido antes de esta
+    // superficie. Mantener el mismo scrollTop preserva la misma fase de pintura
+    // del documento y evita que el fondo global entre en la composición con
+    // desplazamientos distintos. La superficie se captura completa aunque su y
+    // de viewport no sea idéntico.
+    sharedScrollTop = Math.min(...captureRanges.map(range => range.scrollTop));
+    await Promise.all([mainElement, candidateElement].map(element =>
+      element.evaluate((node, targetScrollTop) => {
+        const scroller = document.scrollingElement || document.documentElement;
+        scroller.scrollTop = targetScrollTop;
+        scroller.scrollLeft = 0;
+      }, sharedScrollTop)
+    ));
+  } else {
+    // Para las demás superficies se conserva una coordenada de viewport común.
+    const minSharedTop = Math.max(...captureRanges.map(range => range.minViewportTop));
+    const maxSharedTop = Math.min(...captureRanges.map(range => range.maxViewportTop));
+    expect(
+      minSharedTop,
+      'Baseline y candidato no tienen una posición vertical de captura común: ' + JSON.stringify(captureRanges)
+    ).toBeLessThanOrEqual(maxSharedTop + 0.25);
+    captureTop = Math.max(minSharedTop, Math.min(64, maxSharedTop));
+
+    await Promise.all([mainElement, candidateElement].map((element, index) =>
+      element.evaluate((node, target) => {
+        const scroller = document.scrollingElement || document.documentElement;
+        const maxScrollTop = Math.max(0, scroller.scrollHeight - scroller.clientHeight);
+        scroller.scrollTop = Math.max(0, Math.min(maxScrollTop, target.documentTop - target.captureTop));
+        scroller.scrollLeft = 0;
+      }, {
+        documentTop: captureRanges[index].documentTop,
+        captureTop
+      })
+    ));
+  }
+
   await Promise.all([mainPage, candidatePage].map(page => page.evaluate(() =>
     new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))
   )));
@@ -174,19 +197,40 @@ async function compareElement(mainPage, candidatePage, testInfo, viewportName, s
     element.evaluate(node => {
       const scroller = document.scrollingElement || document.documentElement;
       const rect = node.getBoundingClientRect();
-      return { top: rect.top, left: rect.left, scrollTop: scroller.scrollTop };
+      return {
+        top: rect.top, bottom: rect.bottom, left: rect.left,
+        scrollTop: scroller.scrollTop, viewportHeight: window.innerHeight
+      };
     })
   ));
-  for (const [index, origin] of captureOrigins.entries()) {
+
+  if (isStatsComparison) {
+    for (const [index, origin] of captureOrigins.entries()) {
+      expect(
+        Math.abs(origin.scrollTop - sharedScrollTop),
+        'La captura no comparte el scrollTop (' + (index ? 'candidato' : 'baseline') + '): ' + JSON.stringify({ origin, sharedScrollTop })
+      ).toBeLessThanOrEqual(0.25);
+      expect(
+        origin.top,
+        'La superficie de Estadísticas quedó fuera del viewport (' + (index ? 'candidato' : 'baseline') + '): ' + JSON.stringify(origin)
+      ).toBeGreaterThanOrEqual(0);
+      expect(
+        origin.bottom,
+        'La superficie de Estadísticas quedó cortada por el viewport (' + (index ? 'candidato' : 'baseline') + '): ' + JSON.stringify(origin)
+      ).toBeLessThanOrEqual(origin.viewportHeight);
+    }
+  } else {
+    for (const [index, origin] of captureOrigins.entries()) {
+      expect(
+        Math.abs(origin.top - captureTop),
+        'La captura no respetó la coordenada común (' + (index ? 'candidato' : 'baseline') + '): ' + JSON.stringify({ origin, captureTop })
+      ).toBeLessThanOrEqual(0.5);
+    }
     expect(
-      Math.abs(origin.top - captureTop),
-      'La captura no respetó la coordenada común (' + (index ? 'candidato' : 'baseline') + '): ' + JSON.stringify({ origin, captureTop })
-    ).toBeLessThanOrEqual(0.5);
+      Math.abs(captureOrigins[0].top - captureOrigins[1].top),
+      'Las superficies no comparten el mismo origen vertical de captura: ' + JSON.stringify({ captureOrigins, captureTop })
+    ).toBeLessThanOrEqual(0.25);
   }
-  expect(
-    Math.abs(captureOrigins[0].top - captureOrigins[1].top),
-    'Las superficies no comparten el mismo origen vertical de captura: ' + JSON.stringify({ captureOrigins, captureTop })
-  ).toBeLessThanOrEqual(0.25);
   expect(
     Math.abs(captureOrigins[0].left - captureOrigins[1].left),
     'Las superficies no comparten el mismo origen horizontal de captura: ' + JSON.stringify(captureOrigins)
@@ -269,21 +313,36 @@ async function compareElement(mainPage, candidatePage, testInfo, viewportName, s
   const prefix = 'visual-' + surface.name + '-' + viewportName;
   const mainPath = testInfo.outputPath(prefix + '-main.png');
   const candidatePath = testInfo.outputPath(prefix + '-candidate.png');
-  const [mainStableFrames, candidateStableFrames] = await Promise.all([
-    captureStableScreenshot(mainElement, mainPath, surface.name + ' baseline'),
-    captureStableScreenshot(candidateElement, candidatePath, surface.name + ' candidato')
-  ]);
-  console.log(
-    'STABLE_CAPTURE_' + surface.name + '_' + viewportName +
-    ': baseline=' + mainStableFrames + ', candidate=' + candidateStableFrames
-  );
 
-  const rasterDiff = comparePngFiles(mainPath, candidatePath);
-  expect(rasterDiff.sameDimensions, 'Cambió el tamaño raster de ' + surface.name + ' en ' + viewportName).toBe(true);
-  expect(
-    rasterDiff.maxChannelDelta,
-    'Regresión visual en ' + surface.name + ' (' + viewportName + '): ' + JSON.stringify(rasterDiff) + ' · tolerancia de rasterización 2/255.'
-  ).toBeLessThanOrEqual(2);
+  // El panel de comparación tiene fondo opaco propio. Se fija únicamente el
+  // fondo global que queda detrás de su borde fraccional para que la última
+  // fila raster no dependa de cuánto contenido precede al panel. No se ocultan,
+  // recortan ni enmascaran píxeles de la superficie comparada.
+  const backdropOverrides = isStatsComparison
+    ? await Promise.all([mainPage, candidatePage].map(page =>
+        page.addStyleTag({ content: 'body { background-image: none !important; background-color: #090f19 !important; }' })
+      ))
+    : [];
+
+  try {
+    const [mainStableFrames, candidateStableFrames] = await Promise.all([
+      captureStableScreenshot(mainElement, mainPath, surface.name + ' baseline'),
+      captureStableScreenshot(candidateElement, candidatePath, surface.name + ' candidato')
+    ]);
+    console.log(
+      'STABLE_CAPTURE_' + surface.name + '_' + viewportName +
+      ': baseline=' + mainStableFrames + ', candidate=' + candidateStableFrames
+    );
+
+    const rasterDiff = comparePngFiles(mainPath, candidatePath);
+    expect(rasterDiff.sameDimensions, 'Cambió el tamaño raster de ' + surface.name + ' en ' + viewportName).toBe(true);
+    expect(
+      rasterDiff.maxChannelDelta,
+      'Regresión visual en ' + surface.name + ' (' + viewportName + '): ' + JSON.stringify(rasterDiff) + ' · tolerancia de rasterización 2/255.'
+    ).toBeLessThanOrEqual(2);
+  } finally {
+    await Promise.all(backdropOverrides.map(handle => handle.evaluate(style => style.remove())));
+  }
 }
 
 test('Roster: comparación visual exacta de las ocho cartas en escritorio y móvil', async ({ browser }, testInfo) => {
