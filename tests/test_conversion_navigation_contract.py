@@ -15,8 +15,8 @@ class ConversionNavigationContractTests(unittest.TestCase):
         nav = self.html.split('<nav class="primary-navigation"', 1)[1].split("</nav>", 1)[0]
         expected = (
             ("ORIGEN", "1"), ("QUIÉNES SOMOS", "11"), ("ROSTER", "2"),
-            ("ESTADÍSTICAS", "3"), ("COMUNIDAD", "9"), ("ALIANZAS", "8"),
-            ("COLABORACIONES", "12"), ("EN VIVO", "10"),
+            ("ESTADÍSTICAS", "3"), ("COLABORACIONES", "12"), ("EN VIVO", "10"),
+            ("COMUNIDAD", "9"), ("ALIANZAS", "8"),
             ("SUMATE", "6"),
         )
         self.assertEqual(nav.count('data-chapter='), 9)
@@ -26,6 +26,9 @@ class ConversionNavigationContractTests(unittest.TestCase):
             self.assertIn(label, nav)
             positions.append(nav.index(f'data-chapter="{chapter}"'))
         self.assertEqual(positions, sorted(positions))
+        for act in ("I · LA LEGIÓN", "II · LA EVIDENCIA", "III · TRABAJEMOS JUNTOS"):
+            self.assertIn(act, nav)
+        self.assertEqual(nav.count('class="nav-act"'), 3)
         self.assertIn('href="./marcas/"', nav)
         self.assertIn("PARA MARCAS", nav)
         self.assertIn("setRecruitmentMode('creator')", nav)

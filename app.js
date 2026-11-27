@@ -2926,6 +2926,7 @@ function printHeroDossier(){
                 if (isCurrent) button.setAttribute('aria-current', 'page');
                 else button.removeAttribute('aria-current');
             });
+            document.querySelectorAll('.nav-act').forEach(group => group.classList.toggle('is-active-act', Boolean(group.querySelector('.nav-btn.active'))));
             panel.classList.add('active');
             recordLegionProgress('chapter', String(chapterNum));
             renderChapterPager(chapterNum);

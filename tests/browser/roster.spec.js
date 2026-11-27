@@ -198,7 +198,7 @@ test('la navegación editorial ofrece nueve capítulos y separa marcas de creado
   await page.goto('/');
   const nav = page.locator('.primary-navigation');
   await expect(nav.locator('[data-chapter]')).toHaveCount(9);
-  const chapterOrder = ['1', '11', '2', '3', '9', '8', '12', '10', '6'];
+  const chapterOrder = ['1', '11', '2', '3', '12', '10', '9', '8', '6'];
   const positions = [];
   for (const chapter of chapterOrder) {
     const item = nav.locator('[data-chapter="' + chapter + '"]');

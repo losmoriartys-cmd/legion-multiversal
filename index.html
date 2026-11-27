@@ -236,6 +236,16 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
 .executive-case-summary .executive-case-summary-note { max-width:32ch; margin-top:12px; color:#9fb2c8; font-size:.7rem; line-height:1.4; letter-spacing:.06em; }
 @media(max-width:900px) { .executive-case-summary { min-height:190px; } }
 
+/* Navegación en tres actos: La Legión · La evidencia · Trabajemos juntos */
+header .primary-navigation .nav-act { display: flex; flex-direction: column; gap: 3px; padding: 0 clamp(4px, .7vw, 10px); border-left: 1px solid rgba(255, 255, 255, .2); min-width: 0; }
+header .primary-navigation .nav-act:first-child { border-left: 0; padding-left: 0; }
+header .primary-navigation .nav-act:last-child { padding-right: 0; }
+header .primary-navigation .nav-act-label { color: #a9bacd; font: 700 .6rem 'Special Elite', monospace; letter-spacing: .14em; white-space: nowrap; }
+header .primary-navigation .nav-act.is-active-act .nav-act-label { color: #e5c578; }
+header .primary-navigation .nav-act-items { display: flex; flex-wrap: nowrap; align-items: center; gap: clamp(4px, .8vw, 10px); }
+@media (max-width: 900px) {
+  header .primary-navigation .nav-act { flex: 0 0 auto; }
+}
 </style>
     <link rel="stylesheet" href="./editorial-subpages.css?v=20261116-1" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="./editorial-subpages.css?v=20261116-1"></noscript>
     <style id="conversion-phase2-inline">
@@ -420,16 +430,31 @@ header .primary-navigation .nav-btn[href] { display:inline-flex; align-items:cen
             <button id="sound-toggle" class="sound-toggle" type="button" aria-pressed="false" onclick="toggleArcadeSound()" title="Activar o silenciar la identidad sonora">♫ SONIDO: OFF</button>
         </div>
         <nav class="primary-navigation" aria-label="Recorrido principal de la Legión">
-            <button class="nav-btn" data-chapter="1" onclick="switchChapter(1)">ORIGEN</button>
-            <button class="nav-btn" data-chapter="11" onclick="switchChapter(11)">QUIÉNES SOMOS</button>
-            <button class="nav-btn nav-btn-roster" data-chapter="2" onclick="switchChapter(2)">ROSTER</button>
-            <button class="nav-btn" data-chapter="3" onclick="switchChapter(3)">ESTADÍSTICAS</button>
-            <button class="nav-btn" data-chapter="9" onclick="switchChapter(9)">COMUNIDAD</button>
-            <button class="nav-btn" data-chapter="8" onclick="switchChapter(8)">ALIANZAS</button>
-            <button class="nav-btn" data-chapter="12" onclick="switchChapter(12)">COLABORACIONES</button>
-            <button class="nav-btn nav-btn-live" data-chapter="10" onclick="switchChapter(10)">EN VIVO <span aria-hidden="true">●</span></button>
-            <a class="nav-btn" href="./marcas/">PARA MARCAS <span aria-hidden="true">→</span></a>
-            <button class="nav-btn" data-chapter="6" onclick="switchChapter(6);setRecruitmentMode('creator')">SUMATE</button>
+            <div class="nav-act" data-act="legion" role="group" aria-label="Acto I: La Legión">
+                <span class="nav-act-label" aria-hidden="true">I · LA LEGIÓN</span>
+                <div class="nav-act-items">
+                    <button class="nav-btn" data-chapter="1" onclick="switchChapter(1)">ORIGEN</button>
+                    <button class="nav-btn" data-chapter="11" onclick="switchChapter(11)">QUIÉNES SOMOS</button>
+                    <button class="nav-btn nav-btn-roster" data-chapter="2" onclick="switchChapter(2)">ROSTER</button>
+                </div>
+            </div>
+            <div class="nav-act" data-act="evidencia" role="group" aria-label="Acto II: La evidencia">
+                <span class="nav-act-label" aria-hidden="true">II · LA EVIDENCIA</span>
+                <div class="nav-act-items">
+                    <button class="nav-btn" data-chapter="3" onclick="switchChapter(3)">ESTADÍSTICAS</button>
+                    <button class="nav-btn" data-chapter="12" onclick="switchChapter(12)">COLABORACIONES</button>
+                    <button class="nav-btn nav-btn-live" data-chapter="10" onclick="switchChapter(10)">EN VIVO <span aria-hidden="true">●</span></button>
+                </div>
+            </div>
+            <div class="nav-act" data-act="juntos" role="group" aria-label="Acto III: Trabajemos juntos">
+                <span class="nav-act-label" aria-hidden="true">III · TRABAJEMOS JUNTOS</span>
+                <div class="nav-act-items">
+                    <button class="nav-btn" data-chapter="9" onclick="switchChapter(9)">COMUNIDAD</button>
+                    <button class="nav-btn" data-chapter="8" onclick="switchChapter(8)">ALIANZAS</button>
+                    <a class="nav-btn" href="./marcas/">PARA MARCAS <span aria-hidden="true">→</span></a>
+                    <button class="nav-btn" data-chapter="6" onclick="switchChapter(6);setRecruitmentMode('creator')">SUMATE</button>
+                </div>
+            </div>
         </nav>
 <button id="mission-progress-trigger" class="mission-progress-trigger" type="button" onclick="openMultiverseMap()" aria-label="Abrir Mapa Multiversal y consultar misiones" hidden>MISIONES <strong id="mission-progress-count">0/8</strong></button>
     </header>
