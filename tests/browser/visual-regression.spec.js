@@ -2,6 +2,21 @@ const { test, expect } = require('@playwright/test');
 const { execFileSync } = require('node:child_process');
 const { writeFileSync } = require('node:fs');
 
+function cropPngFile(sourcePath, outputPath, box) {
+  const script = [
+    'from PIL import Image',
+    'import json, sys',
+    'image = Image.open(sys.argv[1])',
+    'x, y, width, height = map(int, sys.argv[3:7])',
+    'if x < 0 or y < 0 or x + width > image.width or y + height > image.height:',
+    '    raise SystemExit("El recorte diagnóstico queda fuera del viewport: " + json.dumps({"image": image.size, "box": [x, y, x + width, y + height]}))',
+    'image.crop((x, y, x + width, y + height)).save(sys.argv[2])',
+    'print(json.dumps({"sourceSize": image.size, "crop": [x, y, width, height]}))'
+  ].join(String.fromCharCode(10));
+  const result = execFileSync('python', ['-c', script, sourcePath, outputPath, String(box.x), String(box.y), String(box.width), String(box.height)], { encoding: 'utf8' });
+  return JSON.parse(result.trim());
+}
+
 function comparePngFiles(mainPath, candidatePath) {
   const script = [
     'from PIL import Image, ImageChops',
@@ -383,23 +398,33 @@ async function compareElement(mainPage, candidatePage, testInfo, viewportName, s
     console.log('STATS_COMPARISON_GEOMETRY_' + viewportName + ': ' + JSON.stringify(geometry));
 
     if (viewportName === 'mobile') {
-      const viewportClipPaths = [
-        testInfo.outputPath('diagnostic-viewport-clip-main.png'),
-        testInfo.outputPath('diagnostic-viewport-clip-candidate.png')
+      const viewportPaths = [
+        testInfo.outputPath('diagnostic-full-viewport-main.png'),
+        testInfo.outputPath('diagnostic-full-viewport-candidate.png')
       ];
-      const clip = {
-        x: Math.round(mainBounds.x),
-        y: Math.floor(mainBounds.y),
-        width: Math.round(mainBounds.width),
-        height: Math.ceil(mainBounds.height + (mainBounds.y - Math.floor(mainBounds.y)))
+      const cropPaths = [
+        testInfo.outputPath('diagnostic-viewport-crop-main.png'),
+        testInfo.outputPath('diagnostic-viewport-crop-candidate.png')
+      ];
+      const cropBox = {
+        x: Math.floor(mainBounds.x),
+        y: Math.floor(captureTop),
+        width: Math.ceil(mainBounds.x + mainBounds.width) - Math.floor(mainBounds.x),
+        height: Math.ceil(captureTop + mainBounds.height) - Math.floor(captureTop)
       };
-      await Promise.all([
-        mainPage.screenshot({ path: viewportClipPaths[0], clip, animations: 'disabled', caret: 'hide' }),
-        candidatePage.screenshot({ path: viewportClipPaths[1], clip, animations: 'disabled', caret: 'hide' })
+      const [mainViewportSize, candidateViewportSize] = await Promise.all([
+        mainPage.screenshot({ path: viewportPaths[0], fullPage: false, animations: 'disabled', caret: 'hide' }),
+        candidatePage.screenshot({ path: viewportPaths[1], fullPage: false, animations: 'disabled', caret: 'hide' })
       ]);
-      console.log('STATS_VIEWPORT_CLIP_DIAGNOSTIC: ' + JSON.stringify({
-        clip,
-        rasterDiff: comparePngFiles(viewportClipPaths[0], viewportClipPaths[1])
+      const mainCrop = cropPngFile(viewportPaths[0], cropPaths[0], cropBox);
+      const candidateCrop = cropPngFile(viewportPaths[1], cropPaths[1], cropBox);
+      console.log('STATS_VIEWPORT_CROP_DIAGNOSTIC: ' + JSON.stringify({
+        cropBox,
+        mainViewportBytes: mainViewportSize.length,
+        candidateViewportBytes: candidateViewportSize.length,
+        mainCrop,
+        candidateCrop,
+        rasterDiff: comparePngFiles(cropPaths[0], cropPaths[1])
       }));
     }
   }
