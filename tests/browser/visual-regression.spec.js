@@ -277,37 +277,56 @@ async function compareElement(mainPage, candidatePage, testInfo, viewportName, s
         };
         const rows = Array.from(node.querySelectorAll('.stats-comparison-row'));
         const scroller = document.scrollingElement || document.documentElement;
+        const paintProperties = [
+          'display', 'position', 'z-index', 'visibility', 'opacity',
+          'background-color', 'background-image', 'background-clip', 'background-origin',
+          'color', 'border', 'border-radius', 'outline', 'box-shadow',
+          'overflow', 'filter', 'backdrop-filter', 'mix-blend-mode', 'isolation',
+          'transform', 'transform-origin', 'transform-style', 'perspective',
+          'translate', 'rotate', 'scale', 'backface-visibility', 'clip-path',
+          'mask', 'mask-image', 'will-change', 'contain', 'content-visibility',
+          'zoom', 'image-rendering', 'appearance'
+        ];
+        const describePaint = target => {
+          if (!target) return null;
+          const style = getComputedStyle(target);
+          const properties = Object.fromEntries(paintProperties.map(name =>
+            [name, style.getPropertyValue(name)]
+          ));
+          properties.creatorColor = style.getPropertyValue('--creator-color');
+          return { rect: rect(target), properties };
+        };
         const ancestors = [];
         let ancestor = node;
-        while (ancestor && ancestors.length < 8) {
+        while (ancestor && ancestors.length < 10) {
           const style = getComputedStyle(ancestor);
           ancestors.push({
             tag: ancestor.tagName,
             id: ancestor.id || '',
             className: String(ancestor.className || ''),
-            rect: rect(ancestor),
-            position: style.position,
-            transform: style.transform,
-            filter: style.filter,
-            opacity: style.opacity,
-            backgroundColor: style.backgroundColor,
-            backgroundImage: style.backgroundImage,
-            borderRadius: style.borderRadius,
-            border: style.border,
-            boxShadow: style.boxShadow,
-            overflow: style.overflow,
-            isolation: style.isolation,
-            contain: style.contain,
-            willChange: style.willChange
+            paint: describePaint(ancestor)
           });
           ancestor = ancestor.parentElement;
         }
+        const stylesheetOrder = Array.from(document.styleSheets).map(sheet => ({
+          href: sheet.href || '',
+          disabled: sheet.disabled,
+          media: sheet.media?.mediaText || ''
+        }));
         return {
           dpr: window.devicePixelRatio,
+          visualViewport: window.visualViewport ? {
+            scale: window.visualViewport.scale,
+            offsetTop: window.visualViewport.offsetTop,
+            offsetLeft: window.visualViewport.offsetLeft,
+            width: window.visualViewport.width,
+            height: window.visualViewport.height
+          } : null,
           viewport: { width: innerWidth, height: innerHeight },
           scroll: { x: scroller.scrollLeft, y: scroller.scrollTop, documentTop: node.getBoundingClientRect().top + scroller.scrollTop },
-          surface: rect(node),
+          surface: describePaint(node),
           ancestors,
+          stylesheetOrder,
           rows: rows.map(row => {
             const tracks = Array.from(row.querySelectorAll('.stats-comparison-track'));
             return {
@@ -319,14 +338,40 @@ async function compareElement(mainPage, candidatePage, testInfo, viewportName, s
                 const trackStyle = getComputedStyle(track);
                 const fillStyle = fill ? getComputedStyle(fill) : null;
                 return {
-                  track: rect(track),
-                  fill: rect(fill),
+                  track: describePaint(track),
+                  fill: describePaint(fill),
+                  trackBefore: {
+                    content: getComputedStyle(track, '::before').content,
+                    opacity: getComputedStyle(track, '::before').opacity,
+                    background: getComputedStyle(track, '::before').backgroundColor,
+                    transform: getComputedStyle(track, '::before').transform
+                  },
+                  trackAfter: {
+                    content: getComputedStyle(track, '::after').content,
+                    opacity: getComputedStyle(track, '::after').opacity,
+                    background: getComputedStyle(track, '::after').backgroundColor,
+                    transform: getComputedStyle(track, '::after').transform
+                  },
+                  fillBefore: fill ? {
+                    content: getComputedStyle(fill, '::before').content,
+                    opacity: getComputedStyle(fill, '::before').opacity,
+                    background: getComputedStyle(fill, '::before').backgroundColor,
+                    transform: getComputedStyle(fill, '::before').transform
+                  } : null,
+                  fillAfter: fill ? {
+                    content: getComputedStyle(fill, '::after').content,
+                    opacity: getComputedStyle(fill, '::after').opacity,
+                    background: getComputedStyle(fill, '::after').backgroundColor,
+                    transform: getComputedStyle(fill, '::after').transform
+                  } : null,
                   inlineWidth: fill?.getAttribute('style') || '',
                   computedWidth: fillStyle?.width || null,
                   background: fillStyle?.backgroundColor || null,
                   radius: fillStyle?.borderRadius || null,
+                  opacity: fillStyle?.opacity || null,
                   transform: fillStyle?.transform || null,
-                  trackRadius: trackStyle.borderRadius
+                  trackRadius: trackStyle.borderRadius,
+                  trackOpacity: trackStyle.opacity
                 };
               })
             };
@@ -336,6 +381,27 @@ async function compareElement(mainPage, candidatePage, testInfo, viewportName, s
       return { side: index === 0 ? 'main' : 'candidate', ...state };
     }));
     console.log('STATS_COMPARISON_GEOMETRY_' + viewportName + ': ' + JSON.stringify(geometry));
+
+    if (viewportName === 'mobile') {
+      const viewportClipPaths = [
+        testInfo.outputPath('diagnostic-viewport-clip-main.png'),
+        testInfo.outputPath('diagnostic-viewport-clip-candidate.png')
+      ];
+      const clip = {
+        x: Math.round(mainBounds.x),
+        y: Math.floor(mainBounds.y),
+        width: Math.round(mainBounds.width),
+        height: Math.ceil(mainBounds.height + (mainBounds.y - Math.floor(mainBounds.y)))
+      };
+      await Promise.all([
+        mainPage.screenshot({ path: viewportClipPaths[0], clip, animations: 'disabled', caret: 'hide' }),
+        candidatePage.screenshot({ path: viewportClipPaths[1], clip, animations: 'disabled', caret: 'hide' })
+      ]);
+      console.log('STATS_VIEWPORT_CLIP_DIAGNOSTIC: ' + JSON.stringify({
+        clip,
+        rasterDiff: comparePngFiles(viewportClipPaths[0], viewportClipPaths[1])
+      }));
+    }
   }
 
   const prefix = 'visual-' + surface.name + '-' + viewportName;
