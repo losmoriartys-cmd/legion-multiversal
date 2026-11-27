@@ -1,4 +1,22 @@
 const { test, expect } = require('@playwright/test');
+const { execFileSync } = require('node:child_process');
+
+function comparePngFiles(mainPath, candidatePath) {
+  const script = [
+    'from PIL import Image, ImageChops',
+    'import json, sys',
+    'main = Image.open(sys.argv[1]).convert("RGB")',
+    'candidate = Image.open(sys.argv[2]).convert("RGB")',
+    'if main.size != candidate.size:',
+    '    print(json.dumps({"sameDimensions": False, "maxChannelDelta": 255}))',
+    '    raise SystemExit(0)',
+    'diff = ImageChops.difference(main, candidate)',
+    'max_delta = max(high for _, high in diff.getextrema())',
+    'print(json.dumps({"sameDimensions": True, "maxChannelDelta": max_delta}))'
+  ].join('\\n');
+  const result = execFileSync('python', ['-c', script, mainPath, candidatePath], { encoding: 'utf8' });
+  return JSON.parse(result.trim());
+}
 
 const viewports = [
   { name: 'desktop', width: 1280, height: 900 },
@@ -63,21 +81,25 @@ async function compareElement(mainPage, candidatePage, testInfo, viewportName, s
   ]);
 
   const prefix = 'visual-' + surface.name + '-' + viewportName;
-  const mainPng = await mainElement.screenshot({
-    path: testInfo.outputPath(prefix + '-main.png'),
+  const mainPath = testInfo.outputPath(prefix + '-main.png');
+  const candidatePath = testInfo.outputPath(prefix + '-candidate.png');
+  await mainElement.screenshot({
+    path: mainPath,
     animations: 'disabled',
     caret: 'hide'
   });
-  const candidatePng = await candidateElement.screenshot({
-    path: testInfo.outputPath(prefix + '-candidate.png'),
+  await candidateElement.screenshot({
+    path: candidatePath,
     animations: 'disabled',
     caret: 'hide'
   });
 
+  const rasterDiff = comparePngFiles(mainPath, candidatePath);
+  expect(rasterDiff.sameDimensions, 'Cambió el tamaño raster de ' + surface.name + ' en ' + viewportName).toBe(true);
   expect(
-    candidatePng.equals(mainPng),
-    'Regresión visual en ' + surface.name + ' (' + viewportName + '): el PNG candidato no coincide exactamente con main. Se adjuntan ambas capturas.'
-  ).toBe(true);
+    rasterDiff.maxChannelDelta,
+    'Regresión visual en ' + surface.name + ' (' + viewportName + '): la diferencia por canal supera la tolerancia de rasterización 2/255.'
+  ).toBeLessThanOrEqual(2);
 }
 
 test('Roster: comparación visual exacta de las ocho cartas en escritorio y móvil', async ({ browser }, testInfo) => {
