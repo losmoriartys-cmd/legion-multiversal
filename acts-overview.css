@@ -1,0 +1,73 @@
+/* Recorrido en tres actos de la portada (maqueta «Estructura en 3 actos»).
+ * Los colores de cada perfil salen de creator-colors.css (data-creator-id); aquí no se define ninguno.
+ * El color de capítulos y estados es neutro: los capítulos se reconocen por símbolo y texto. */
+.acts-overview { --act-ink: #0a111f; --act-card: #0f1a2f; --act-line: #2c4166; --act-gold: #ffd60a; --act-cream: #fff3cf; --act-cobalt: #1f4fd8; --act-muted: #b7c4dd; }
+.acts-overview .act { margin-top: 34px; }
+.acts-overview .act:first-of-type { margin-top: 22px; }
+
+.acts-overview .act-banner { position: relative; display: flex; flex-wrap: wrap; align-items: stretch; min-height: 200px; overflow: hidden; background: var(--act-card); border: 4px solid #000; box-shadow: 8px 8px 0 #000; }
+.acts-overview .act-banner::before { content: ""; position: absolute; inset: 0; background: radial-gradient(rgba(255, 255, 255, .08) 1.4px, transparent 1.7px) 0 0 / 10px 10px; pointer-events: none; }
+.acts-overview .act-banner-text { position: relative; z-index: 1; flex: 1 1 360px; display: flex; flex-direction: column; justify-content: center; gap: 8px; padding: 26px clamp(18px, 3vw, 36px); background: linear-gradient(100deg, var(--act-ink) 74%, transparent); }
+.acts-overview .act-kicker { color: var(--act-gold); font: 700 .78rem 'Special Elite', monospace; letter-spacing: .16em; }
+.acts-overview .act-banner h4 { margin: 0; color: var(--act-cream); font: 400 clamp(2.4rem, 5.4vw, 4.2rem)/1 'Bangers', Impact, sans-serif; letter-spacing: .03em; text-shadow: 3px 3px 0 #000; }
+.acts-overview .act-banner p { margin: 0; max-width: 430px; color: var(--act-muted); font-size: 1.05rem; line-height: 1.45; }
+
+.acts-overview .act-banner-art { position: relative; flex: 1 1 340px; min-height: 160px; display: flex; align-items: center; justify-content: center; gap: 0; padding: 0 clamp(14px, 3vw, 32px); margin: 0; }
+.acts-overview .act-banner-art-legion { display: block; align-self: center; padding: 18px clamp(14px, 2.4vw, 28px); }
+.acts-overview .act-banner-art-legion img { display: block; width: 100%; height: auto; border: 3px solid #000; }
+.acts-overview .act-strip { display: grid; grid-template-columns: repeat(8, 1fr); height: 7px; border: 3px solid #000; border-top: 0; }
+.acts-overview .act-strip i { display: block; background: var(--creator-color, var(--act-gold)); }
+
+/* Acto II · cuadrícula neutra de datos (no sugiere crecimiento ni cifras) */
+.acts-overview .act-motif-evidence { display: grid; grid-template-columns: repeat(3, 54px); grid-auto-rows: 54px; gap: 8px; align-content: center; justify-content: center; }
+.acts-overview .act-motif-evidence span { border: 3px solid #000; background: var(--act-gold); }
+.acts-overview .act-motif-evidence span:nth-child(even) { background: var(--act-cream); }
+.acts-overview .act-motif-evidence span:nth-child(3n) { background: transparent; border-color: var(--act-line); }
+.acts-overview .act-motif-evidence span:nth-child(5) { background: var(--act-cobalt); }
+
+/* Acto III · tres hexágonos encadenados */
+.acts-overview .act-motif-together .hx { width: 96px; height: 110px; margin-left: -18px; clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); }
+.acts-overview .act-motif-together .hx1 { margin-left: 0; background: var(--act-gold); }
+.acts-overview .act-motif-together .hx2 { background: var(--act-cream); }
+.acts-overview .act-motif-together .hx3 { background: var(--act-cobalt); }
+
+.acts-overview .act-grid { display: grid; gap: 18px; margin-top: 22px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.acts-overview .act-card { position: relative; display: flex; flex-direction: column; gap: 10px; min-height: 150px; padding: 20px; background: var(--act-card); border: 3px solid #000; box-shadow: 5px 5px 0 #000; transition: transform .12s ease, box-shadow .12s ease; }
+.acts-overview .act-card:hover { transform: translate(-2px, -2px); box-shadow: 7px 7px 0 #000; }
+.acts-overview .act-card:focus-within { outline: 3px solid #fff; outline-offset: 3px; }
+.acts-overview .act-card-head { display: flex; align-items: center; gap: 12px; min-height: 24px; }
+.acts-overview .act-card h4 { margin: 0; font: 700 1.7rem/1 'Roboto Condensed', Arial, sans-serif; text-transform: uppercase; letter-spacing: .03em; }
+.acts-overview .act-card h4 a { color: var(--act-cream); text-decoration: none; }
+.acts-overview .act-card h4 a::after { content: ""; position: absolute; inset: 0; }
+.acts-overview .act-card h4 a:focus-visible { outline: none; }
+.acts-overview .act-card p { margin: 0; color: var(--act-muted); font-size: .98rem; line-height: 1.45; }
+.acts-overview .act-chips { position: relative; z-index: 1; display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 8px; }
+.acts-overview .act-chips a { display: inline-flex; align-items: center; min-height: 40px; padding: 4px 12px; color: #e8eefc; background: #16233b; border: 2px solid var(--act-line); font: 700 .86rem 'Roboto Condensed', Arial, sans-serif; letter-spacing: .06em; text-transform: uppercase; text-decoration: none; }
+.acts-overview .act-chips a:hover { border-color: var(--act-gold); color: #fff; }
+.acts-overview .act-chips a:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
+
+.acts-overview .act-live { margin-left: auto; display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; color: var(--act-ink); background: #fff; font: 700 .8rem 'Roboto Condensed', Arial, sans-serif; letter-spacing: .08em; text-transform: uppercase; }
+.acts-overview .act-live[hidden] { display: none; }
+
+/* Símbolos de capítulo: forma + texto, nunca color */
+.acts-overview .act-sym { flex: none; width: 22px; height: 22px; background: var(--act-cream); }
+.acts-overview .act-sym-circle { border-radius: 50%; }
+.acts-overview .act-sym-ring { box-sizing: border-box; border: 4px solid var(--act-cream); border-radius: 50%; background: none; }
+.acts-overview .act-sym-diamond { clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%); }
+.acts-overview .act-sym-plus { clip-path: polygon(35% 0, 65% 0, 65% 35%, 100% 35%, 100% 65%, 65% 65%, 65% 100%, 35% 100%, 35% 65%, 0 65%, 0 35%, 35% 35%); }
+.acts-overview .act-sym-play { clip-path: polygon(15% 0, 100% 50%, 15% 100%); }
+.acts-overview .act-sym-hex { clip-path: polygon(25% 5%, 75% 5%, 100% 50%, 75% 95%, 25% 95%, 0 50%); }
+.acts-overview .act-sym-arrow { clip-path: polygon(0 35%, 55% 35%, 55% 10%, 100% 50%, 55% 90%, 55% 65%, 0 65%); }
+
+@media (max-width: 700px) {
+  .acts-overview .act-banner { box-shadow: 5px 5px 0 #000; }
+  .acts-overview .act-banner-text { background: var(--act-ink); }
+  .acts-overview .act-banner-art { flex-basis: 100%; }
+  .acts-overview .act-motif-evidence { grid-template-columns: repeat(3, 44px); grid-auto-rows: 44px; padding: 18px 0; }
+  .acts-overview .act-motif-together { padding: 18px 0; }
+  .acts-overview .act-motif-together .hx { width: 80px; height: 92px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .acts-overview .act-card { transition: none; }
+  .acts-overview .act-card:hover { transform: none; }
+}
