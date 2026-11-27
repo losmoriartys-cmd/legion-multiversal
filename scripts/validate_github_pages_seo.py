@@ -19,7 +19,7 @@ SITEMAP_URLS = {
     BASE + "comic-moriartys.html",
     BASE + "roster-02-moriartys.html",
 }
-PREVIEWS = ("bitacora-preview.html", "instituto-preview.html")
+PREVIEWS = ("instituto-preview.html",)
 errors = []
 
 for page, expected in PUBLIC.items():

@@ -6,7 +6,7 @@ from pathlib import Path
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-PAGES = ("index.html", "bitacora-preview.html", "roster-02-moriartys.html")
+PAGES = ("index.html", "roster-02-moriartys.html")
 ERRORS, WARNINGS = [], []
 
 class AuditParser(HTMLParser):

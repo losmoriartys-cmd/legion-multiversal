@@ -67,9 +67,9 @@ class CollaborationsRegistryContractTests(unittest.TestCase):
         self.assertIn(".collab-game-cover-fallback", CSS)
         self.assertIn(".collab-avatar-wrap.no-pov", CSS)
 
-    def test_old_separate_preview_is_not_the_chapter_07_entry_point(self):
+    def test_chapter_07_uses_the_integrated_bitacora_registry(self):
         chapter = HTML.split('id="chapter-12"', 1)[1].split('id="chapter-6"', 1)[0]
-        self.assertNotIn('href="./bitacora-preview.html"', chapter)
+        self.assertIn('id="collab-games-registry"', chapter)
         self.assertIn('href="#collab-games-registry"', chapter)
 
 
