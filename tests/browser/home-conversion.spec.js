@@ -80,6 +80,12 @@ test('portada: actos, indicadores y ocho retratos oficiales funcionan en escrito
     await page.setViewportSize(viewport);
     await page.goto('/');
     await expect(page.locator('#home-editorial-acts')).toBeVisible();
+    const navigation = page.locator('.primary-navigation');
+    await expect(navigation.locator('.nav-act')).toHaveCount(3);
+    await expect(navigation.locator('.nav-act[data-act="identity"] [data-chapter]')).toHaveAttribute('data-chapter', '1');
+    await expect(navigation.locator('.nav-act[data-act="action"] [data-chapter]')).toHaveAttribute('data-chapter', '3');
+    await expect(navigation.locator('.nav-act[data-act="future"] [data-chapter]')).toHaveAttribute('data-chapter', '9');
+    await expect(navigation.locator('.nav-act[data-act="future"] a[href="./marcas/"]')).toBeVisible();
     await expect(page.locator('.lm-act-one')).toBeVisible();
     await expect(page.locator('.lm-act-two')).toBeVisible();
     await expect(page.locator('.lm-act-three')).toBeVisible();
@@ -97,6 +103,8 @@ test('portada: actos, indicadores y ocho retratos oficiales funcionan en escrito
       images.map(image => ({ width: image.naturalWidth, height: image.naturalHeight }))
     );
     expect(portraitDimensions.every(image => image.width > 0 && image.height > 0)).toBe(true);
+    // La carga de retratos desplazó la página; restaurar el origen antes de medir la portada.
+    await page.evaluate(() => window.scrollTo(0, 0));
 
     const counts = await page.evaluate(async () => {
       const [roster, games] = await Promise.all([
@@ -128,8 +136,18 @@ test('portada: actos, indicadores y ocho retratos oficiales funcionan en escrito
       expect(bounds.right).toBeLessThanOrEqual(viewport.width);
       expect(bounds.scrollWidth).toBeLessThanOrEqual(bounds.clientWidth + 1);
     }
-    for (let index = 0; index < actionBounds.length - 1; index += 1) {
-      expect(actionBounds[index].bottom).toBeLessThanOrEqual(actionBounds[index + 1].top + 1);
+    for (let first = 0; first < actionBounds.length; first += 1) {
+      for (let second = first + 1; second < actionBounds.length; second += 1) {
+        const overlapsHorizontally = Math.min(actionBounds[first].right, actionBounds[second].right) >
+          Math.max(actionBounds[first].left, actionBounds[second].left) + 1;
+        const overlapsVertically = Math.min(actionBounds[first].bottom, actionBounds[second].bottom) >
+          Math.max(actionBounds[first].top, actionBounds[second].top) + 1;
+        expect(overlapsHorizontally && overlapsVertically).toBe(false);
+      }
+    }
+    if (viewport.width <= 640) {
+      const tops = actionBounds.map(bounds => bounds.top);
+      expect(tops).toEqual([...tops].sort((a, b) => a - b));
     }
 
     const documentWidth = await page.evaluate(() => document.documentElement.scrollWidth);
