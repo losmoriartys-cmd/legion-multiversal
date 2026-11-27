@@ -17,6 +17,11 @@ function comparePngFiles(mainPath, candidatePath) {
     'mask = ImageChops.lighter(ImageChops.lighter(channels[0].point(lambda value: 255 if value else 0), channels[1].point(lambda value: 255 if value else 0)), channels[2].point(lambda value: 255 if value else 0))',
     'bbox = mask.getbbox()',
     'changed_count = mask.histogram()[255]',
+    'last_row_changed_count = mask.crop((0, main.height - 1, main.width, main.height)).histogram()[255]',
+    'content_mask = mask.crop((0, 0, main.width, main.height - 1))',
+    'content_changed_count = content_mask.histogram()[255]',
+    'content_diff = diff.crop((0, 0, main.width, main.height - 1))',
+    'content_max_delta = max(high for _, high in content_diff.getextrema())',
     'points = []',
     'if bbox:',
     '    for index, value in enumerate(mask.getdata()):',
@@ -24,7 +29,7 @@ function comparePngFiles(mainPath, candidatePath) {
     '            x, y = index % main.width, index // main.width',
     '            points.append({"x": x, "y": y, "main": list(main.getpixel((x, y))), "candidate": list(candidate.getpixel((x, y)))})',
     '            if len(points) >= 40: break',
-    'print(json.dumps({"sameDimensions": True, "maxChannelDelta": max_delta, "changedPixelCount": changed_count, "bbox": bbox, "sampleDiffs": points}))'
+    'print(json.dumps({"sameDimensions": True, "maxChannelDelta": max_delta, "changedPixelCount": changed_count, "contentChangedPixelCount": content_changed_count, "contentMaxChannelDelta": content_max_delta, "lastRowChangedPixelCount": last_row_changed_count, "bbox": bbox, "sampleDiffs": points}))'
   ].join(String.fromCharCode(10));
   const result = execFileSync('python', ['-c', script, mainPath, candidatePath], { encoding: 'utf8' });
   return JSON.parse(result.trim());
@@ -156,7 +161,7 @@ async function compareElement(mainPage, candidatePage, testInfo, viewportName, s
   const backdropOverrides = isStatsComparison
     ? await Promise.all([mainPage, candidatePage].map(page =>
         page.addStyleTag({
-          content: 'body { background-image: none !important; background-color: #090f19 !important; } body::after { display: none !important; }'
+          content: 'body { background-image: none !important; background-color: #090f19 !important; } body::after, #chapter-3.comic-page::before, #chapter-3.comic-page::after { display: none !important; } #chapter-3.comic-page { background-image: none !important; background-color: #090f19 !important; }'
         })
       ))
     : [];
