@@ -18,6 +18,16 @@ for(const viewport of viewports){
    await assertChapterFitsViewport(panel);
    // Evidencia visual representativa para cada capítulo: escritorio ancho y móvil.
    // Los otros tres tamaños siguen ejecutando todas las aserciones responsive.
+   if((viewport.name==='desktop-wide'||viewport.name==='mobile')&&chapterId===0){
+    const portraitRail=page.locator('#lm-roster-rail');
+    await portraitRail.scrollIntoViewIfNeeded();
+    await portraitRail.locator('img').evaluateAll(images=>images.forEach(image=>{image.loading='eager';}));
+    await page.waitForFunction(()=>{
+     const images=Array.from(document.querySelectorAll('#lm-roster-rail img'));
+     return images.length===8&&images.every(image=>image.complete&&image.naturalWidth>0);
+    },null,{timeout:20000});
+    await page.evaluate(()=>window.scrollTo(0,0));
+   }
    if(viewport.name==='desktop-wide'||viewport.name==='mobile'){
     await panel.screenshot({
      path:testInfo.outputPath('chapter-'+chapterId+'-'+viewport.name+'.png'),
