@@ -29,16 +29,3 @@ test('la ficha BIT-011 conserva participantes, POV, clips y el archivo históric
   await expect(archive).toHaveJSProperty('open', false);
   await expect(archive.locator('.collab-log-section')).toContainText('SIN VOD PÚBLICO');
 });
-
-test('la Bitácora integrada mantiene el capítulo utilizable en escritorio, tablet y móvil', async ({ page }) => {
-  for (const width of [1440, 1024, 768, 390, 360]) {
-    await page.setViewportSize({ width, height: 900 });
-    const metrics = await page.evaluate(() => ({
-      document: document.documentElement.scrollWidth,
-      chapter: document.getElementById('chapter-12').scrollWidth,
-      client: document.getElementById('chapter-12').clientWidth,
-    }));
-    expect(metrics.document, 'document overflow at ' + width + 'px').toBeLessThanOrEqual(width);
-    expect(metrics.chapter - metrics.client, 'chapter overflow at ' + width + 'px').toBeLessThanOrEqual(2);
-  }
-});

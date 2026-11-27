@@ -56,6 +56,34 @@ jobs:
         run: |
           MAIN_SHA="$(git rev-parse origin/main)"
           git worktree add --detach /tmp/main-baseline "$MAIN_SHA"
+          # Build the exact visual baseline from main plus the SHA-256-approved WEB-02
+          # link removal. This keeps PNG equality strict while accounting for the one
+          # intentionally authorized visual change in this PR.
+          python - <<'PY'
+          from hashlib import sha256
+          from pathlib import Path
+
+          index = Path("/tmp/main-baseline/index.html")
+          source = index.read_bytes()
+          source_sha = sha256(source).hexdigest()
+          expected_from = "8fdcb269623de7eac939adc49115c91c8e7b150838200702cd948703c2cd9954"
+          expected_to = "8603393a65abb69d63545000d525926ea3f14193586d9aa576d8a4a9c8dfb149"
+          anchor = '            <a class="roster-bitacora-link" href="./bitacora-preview.html">ABRIR BITÁCORA GENERAL (VISTA PREVIA) →</a>\n'.encode("utf-8")
+
+          if source_sha == expected_from:
+              if source.count(anchor) != 1:
+                  raise SystemExit("Baseline WEB-02: el enlace autorizado no aparece exactamente una vez.")
+              candidate = source.replace(anchor, b"", 1)
+              candidate_sha = sha256(candidate).hexdigest()
+              if candidate_sha != expected_to:
+                  raise SystemExit(f"Baseline WEB-02: SHA-256 inesperado tras la transición: {candidate_sha}")
+              index.write_bytes(candidate)
+              print(f"Baseline main ajustado por la transición WEB-02 autorizada: {source_sha} -> {candidate_sha}")
+          elif source_sha == expected_to:
+              print(f"Baseline main ya contiene la transición WEB-02 autorizada: {source_sha}")
+          else:
+              raise SystemExit(f"Baseline WEB-02 fuera de contrato: SHA-256 {source_sha}")
+          PY
           nohup python -m http.server 4174 --bind 127.0.0.1 --directory /tmp/main-baseline > /tmp/main-baseline.log 2>&1 &
           for attempt in $(seq 1 30); do
             if curl --fail --silent http://127.0.0.1:4174/ > /dev/null; then
