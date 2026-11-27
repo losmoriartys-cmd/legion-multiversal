@@ -1,5 +1,6 @@
 const { test, expect } = require('@playwright/test');
 const { execFileSync } = require('node:child_process');
+const { writeFileSync } = require('node:fs');
 
 function comparePngFiles(mainPath, candidatePath) {
   const script = [
@@ -27,6 +28,27 @@ function comparePngFiles(mainPath, candidatePath) {
   ].join(String.fromCharCode(10));
   const result = execFileSync('python', ['-c', script, mainPath, candidatePath], { encoding: 'utf8' });
   return JSON.parse(result.trim());
+}
+
+async function captureStableScreenshot(locator, outputPath, surfaceName) {
+  let previous = null;
+  for (let attempt = 1; attempt <= 6; attempt += 1) {
+    await locator.evaluate(() => new Promise(resolve =>
+      requestAnimationFrame(() => requestAnimationFrame(resolve))
+    ));
+    const current = await locator.screenshot({
+      animations: 'disabled',
+      caret: 'hide'
+    });
+    if (previous && Buffer.from(previous).equals(Buffer.from(current))) {
+      writeFileSync(outputPath, current);
+      return attempt;
+    }
+    previous = current;
+  }
+  throw new Error(
+    'La captura de ' + surfaceName + ' no alcanzó dos frames raster idénticos en seis intentos.'
+  );
 }
 
 const viewports = [
@@ -170,66 +192,73 @@ async function compareElement(mainPage, candidatePage, testInfo, viewportName, s
     'Las superficies no comparten el mismo origen horizontal de captura: ' + JSON.stringify(captureOrigins)
   ).toBeLessThanOrEqual(0.25);
 
-  if (surface.name === 'roster-ocho-cartas') {
-    const renderStates = await Promise.all([mainPage, candidatePage].map(async (page, pageIndex) => {
-      const state = await page.evaluate(() => {
-        const root = document.querySelector('#roster-home');
-        const cards = Array.from(root?.querySelectorAll('.comic-roster-card') || []);
-        const describe = node => {
-          if (!node) return null;
-          const style = getComputedStyle(node);
-          const rect = node.getBoundingClientRect();
+  if (surface.name === 'stats-comparativa-twitch') {
+    const geometry = await Promise.all([mainElement, candidateElement].map(async (element, index) => {
+      const state = await element.evaluate(node => {
+        const rect = target => {
+          if (!target) return null;
+          const bounds = target.getBoundingClientRect();
           return {
-            tag: node.tagName, className: String(node.className || ''),
-            rect: { x: rect.x, y: rect.y, width: rect.width, height: rect.height },
-            display: style.display, visibility: style.visibility, opacity: style.opacity,
-            filter: style.filter, transform: style.transform, clipPath: style.clipPath,
-            backgroundColor: style.backgroundColor, backgroundImage: style.backgroundImage,
-            objectFit: style.objectFit, objectPosition: style.objectPosition,
-            animationName: style.animationName, animationDuration: style.animationDuration,
-            animationDelay: style.animationDelay, animationPlayState: style.animationPlayState
+            x: bounds.x, y: bounds.y, width: bounds.width, height: bounds.height,
+            right: bounds.right, bottom: bounds.bottom
           };
         };
+        const rows = Array.from(node.querySelectorAll('.stats-comparison-row'));
         return {
-          readyState: document.readyState,
-          root: describe(root),
-          cards: cards.map(card => {
-            const photo = card.querySelector('.comic-roster-photo');
-            const img = photo?.querySelector('img');
-            let decodedPixel = null;
-            if (img?.complete && img.naturalWidth) {
-              try {
-                const canvas = document.createElement('canvas');
-                canvas.width = canvas.height = 1;
-                const ctx = canvas.getContext('2d');
-                ctx.drawImage(img, 0, 0, 1, 1);
-                decodedPixel = Array.from(ctx.getImageData(0, 0, 1, 1).data);
-              } catch (error) { decodedPixel = String(error); }
-            }
+          dpr: window.devicePixelRatio,
+          viewport: { width: innerWidth, height: innerHeight },
+          surface: rect(node),
+          rows: rows.map(row => {
+            const tracks = Array.from(row.querySelectorAll('.stats-comparison-track'));
             return {
-              id: card.dataset.creatorId, cardClasses: card.className,
-              group: card.dataset.rosterGroup || null,
-              image: img ? { src: img.getAttribute('src'), currentSrc: img.currentSrc,
-                complete: img.complete, naturalWidth: img.naturalWidth,
-                naturalHeight: img.naturalHeight, decodedPixel } : null,
-              card: describe(card), photo: describe(photo), imageStyle: describe(img),
-              photoBefore: photo ? getComputedStyle(photo, '::before').backgroundImage : null,
-              photoAfter: photo ? getComputedStyle(photo, '::after').backgroundImage : null,
-              animations: card.getAnimations({ subtree: true }).map(animation => ({
-                playState: animation.playState, currentTime: animation.currentTime,
-                targetClass: String(animation.effect?.target?.className || ''),
-                timing: animation.effect?.getComputedTiming()
-              }))
+              label: row.querySelector('strong')?.textContent?.trim() || '',
+              row: rect(row),
+              gridColumns: getComputedStyle(row).gridTemplateColumns,
+              tracks: tracks.map(track => {
+                const fill = track.querySelector('i');
+                const trackStyle = getComputedStyle(track);
+                const fillStyle = fill ? getComputedStyle(fill) : null;
+                return {
+                  track: rect(track),
+                  fill: rect(fill),
+                  inlineWidth: fill?.getAttribute('style') || '',
+                  computedWidth: fillStyle?.width || null,
+                  background: fillStyle?.backgroundColor || null,
+                  radius: fillStyle?.borderRadius || null,
+                  transform: fillStyle?.transform || null,
+                  trackRadius: trackStyle.borderRadius
+                };
+              })
             };
           })
         };
       });
-      return { side: pageIndex === 0 ? 'main' : 'candidate', ...state };
+      return { side: index === 0 ? 'main' : 'candidate', ...state };
     }));
-    console.log('ROSTER_RENDER_STATE_' + viewportName + ': ' + JSON.stringify(renderStates));
+    console.log('STATS_COMPARISON_GEOMETRY_' + viewportName + ': ' + JSON.stringify(geometry));
   }
 
   const prefix = 'visual-' + surface.name + '-' + viewportName;
+  const mainPath = testInfo.outputPath(prefix + '-main.png');
+  const candidatePath = testInfo.outputPath(prefix + '-candidate.png');
+  const [mainStableFrames, candidateStableFrames] = await Promise.all([
+    captureStableScreenshot(mainElement, mainPath, surface.name + ' baseline'),
+    captureStableScreenshot(candidateElement, candidatePath, surface.name + ' candidato')
+  ]);
+  console.log(
+    'STABLE_CAPTURE_' + surface.name + '_' + viewportName +
+    ': baseline=' + mainStableFrames + ', candidate=' + candidateStableFrames
+  );
+
+  const rasterDiff = comparePngFiles(mainPath, candidatePath);
+  expect(rasterDiff.sameDimensions, 'Cambió el tamaño raster de ' + surface.name + ' en ' + viewportName).toBe(true);
+  expect(
+    rasterDiff.maxChannelDelta,
+    'Regresión visual en ' + surface.name + ' (' + viewportName + '): ' + JSON.stringify(rasterDiff) + ' · tolerancia de rasterización 2/255.'
+  ).toBeLessThanOrEqual(2);
+}
+
+
   const mainPath = testInfo.outputPath(prefix + '-main.png');
   const candidatePath = testInfo.outputPath(prefix + '-candidate.png');
   await mainElement.screenshot({
