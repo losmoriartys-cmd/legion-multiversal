@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-26T23:40:20Z",
+  "updated_at": "2026-11-27T00:43:17Z",
   "methodology": "Las métricas se conservan por creador y plataforma. No sumar ni comparar directamente unidades de plataformas distintas.",
   "creators": {
     "pato-oratoris": {
@@ -75,6 +75,13 @@
                   "views": 48,
                   "likes": 6,
                   "comments": 1
+                },
+                {
+                  "date": "2026-11-27",
+                  "captured_at": "2026-11-27T00:43:17Z",
+                  "views": 48,
+                  "likes": 6,
+                  "comments": 1
                 }
               ]
             },
@@ -132,6 +139,13 @@
                 {
                   "date": "2026-11-26",
                   "captured_at": "2026-11-26T23:40:20Z",
+                  "views": 75,
+                  "likes": 11,
+                  "comments": 2
+                },
+                {
+                  "date": "2026-11-27",
+                  "captured_at": "2026-11-27T00:43:17Z",
                   "views": 75,
                   "likes": 11,
                   "comments": 2
@@ -195,6 +209,13 @@
                   "views": 58,
                   "likes": 10,
                   "comments": 1
+                },
+                {
+                  "date": "2026-11-27",
+                  "captured_at": "2026-11-27T00:43:17Z",
+                  "views": 58,
+                  "likes": 10,
+                  "comments": 1
                 }
               ]
             },
@@ -252,6 +273,13 @@
                 {
                   "date": "2026-11-26",
                   "captured_at": "2026-11-26T23:40:20Z",
+                  "views": 50,
+                  "likes": 12,
+                  "comments": 2
+                },
+                {
+                  "date": "2026-11-27",
+                  "captured_at": "2026-11-27T00:43:17Z",
                   "views": 50,
                   "likes": 12,
                   "comments": 2
@@ -315,6 +343,13 @@
                   "views": 43,
                   "likes": 9,
                   "comments": 1
+                },
+                {
+                  "date": "2026-11-27",
+                  "captured_at": "2026-11-27T00:43:17Z",
+                  "views": 43,
+                  "likes": 9,
+                  "comments": 1
                 }
               ]
             },
@@ -375,6 +410,13 @@
                   "views": 157,
                   "likes": 20,
                   "comments": 6
+                },
+                {
+                  "date": "2026-11-27",
+                  "captured_at": "2026-11-27T00:43:17Z",
+                  "views": 157,
+                  "likes": 20,
+                  "comments": 6
                 }
               ]
             }
@@ -382,10 +424,10 @@
           "source": "YouTube Data API v3",
           "status": "verified",
           "methodology": "Datos públicos acumulados del canal y hasta 10 videos recientes. El contador de suscriptores puede estar redondeado por YouTube.",
-          "captured_at": "2026-11-26T23:40:20Z",
+          "captured_at": "2026-11-27T00:43:17Z",
           "history": [
             {
-              "captured_at": "2026-11-26T23:40:20Z",
+              "captured_at": "2026-11-27T00:43:17Z",
               "metrics": {
                 "subscribers": 56,
                 "total_views": 431,
@@ -400,7 +442,7 @@
   "collection_status": {
     "youtube": "enabled",
     "kick": "awaiting_secrets",
-    "captured_at": "2026-11-26T23:40:20Z",
+    "captured_at": "2026-11-27T00:43:17Z",
     "successful_accounts": 1,
     "failed_accounts": 0,
     "complete": true
