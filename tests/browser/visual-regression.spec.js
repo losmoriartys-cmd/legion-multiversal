@@ -12,15 +12,18 @@ function comparePngFiles(mainPath, candidatePath) {
     '    raise SystemExit(0)',
     'diff = ImageChops.difference(main, candidate)',
     'max_delta = max(high for _, high in diff.getextrema())',
-    'import numpy as np',
-    'arr = np.asarray(diff)',
-    'mask = np.max(arr, axis=2) > 0',
-    'ys, xs = np.where(mask)',
-    'bbox = [int(xs.min()), int(ys.min()), int(xs.max()), int(ys.max())] if len(xs) else None',
+    'channels = diff.split()',
+    'mask = ImageChops.lighter(ImageChops.lighter(channels[0].point(lambda value: 255 if value else 0), channels[1].point(lambda value: 255 if value else 0)), channels[2].point(lambda value: 255 if value else 0))',
+    'bbox = mask.getbbox()',
+    'changed_count = mask.histogram()[255]',
     'points = []',
-    'for y, x in zip(ys[:40], xs[:40]):',
-    '    points.append({"x": int(x), "y": int(y), "main": list(main.getpixel((int(x), int(y)))), "candidate": list(candidate.getpixel((int(x), int(y))))})',
-    'print(json.dumps({"sameDimensions": True, "maxChannelDelta": max_delta, "changedPixelCount": int(mask.sum()), "bbox": bbox, "sampleDiffs": points}))'
+    'if bbox:',
+    '    for index, value in enumerate(mask.getdata()):',
+    '        if value:',
+    '            x, y = index % main.width, index // main.width',
+    '            points.append({"x": x, "y": y, "main": list(main.getpixel((x, y))), "candidate": list(candidate.getpixel((x, y)))})',
+    '            if len(points) >= 40: break',
+    'print(json.dumps({"sameDimensions": True, "maxChannelDelta": max_delta, "changedPixelCount": changed_count, "bbox": bbox, "sampleDiffs": points}))'
   ].join(String.fromCharCode(10));
   const result = execFileSync('python', ['-c', script, mainPath, candidatePath], { encoding: 'utf8' });
   return JSON.parse(result.trim());
@@ -169,7 +172,7 @@ async function compareElement(mainPage, candidatePage, testInfo, viewportName, s
 
   if (surface.name === 'roster-ocho-cartas') {
     const renderStates = await Promise.all([mainPage, candidatePage].map(async (page, pageIndex) => {
-      return page.evaluate(() => {
+      const state = await page.evaluate(() => {
         const root = document.querySelector('#roster-home');
         const cards = Array.from(root?.querySelectorAll('.comic-roster-card') || []);
         const describe = node => {
@@ -221,11 +224,9 @@ async function compareElement(mainPage, candidatePage, testInfo, viewportName, s
           })
         };
       });
+      return { side: pageIndex === 0 ? 'main' : 'candidate', ...state };
     }));
-    await testInfo.attach('roster-render-state-' + viewportName, {
-      body: Buffer.from(JSON.stringify(renderStates, null, 2)),
-      contentType: 'application/json'
-    });
+    console.log('ROSTER_RENDER_STATE_' + viewportName + ': ' + JSON.stringify(renderStates));
   }
 
   const prefix = 'visual-' + surface.name + '-' + viewportName;
@@ -246,7 +247,7 @@ async function compareElement(mainPage, candidatePage, testInfo, viewportName, s
   expect(rasterDiff.sameDimensions, 'Cambió el tamaño raster de ' + surface.name + ' en ' + viewportName).toBe(true);
   expect(
     rasterDiff.maxChannelDelta,
-    'Regresión visual en ' + surface.name + ' (' + viewportName + '): la diferencia por canal supera la tolerancia de rasterización 2/255.'
+    'Regresión visual en ' + surface.name + ' (' + viewportName + '): ' + JSON.stringify(rasterDiff) + ' · tolerancia de rasterización 2/255.'
   ).toBeLessThanOrEqual(2);
 }
 
