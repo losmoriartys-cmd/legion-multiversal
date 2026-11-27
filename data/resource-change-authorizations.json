@@ -72,6 +72,24 @@
       "to_sha256": "8fdcb269623de7eac939adc49115c91c8e7b150838200702cd948703c2cd9954",
       "reason": "Generar en HTML inicial las 11 sesiones BIT y las 18 fichas del Arsenal desde los JSON canónicos, enlazando la fuente VOD que verifica cada fecha; publicar resúmenes vigentes, mantener EXP-001 como archivo histórico, conservar contenido estático sin JavaScript o ante fallo de fetch y declarar dimensiones de la imagen local.",
       "reference": "Issue #135 / WEB-01 · fase A"
+    },
+    {
+      "id": "retire-bitacora-preview-index-link-2026-11-26",
+      "path": "index.html",
+      "action": "update",
+      "from_sha256": "8fdcb269623de7eac939adc49115c91c8e7b150838200702cd948703c2cd9954",
+      "to_sha256": "53401d613828120c47f9969e46b55088be60fce90b1b81b51b98a2404ea8ff39",
+      "reason": "Retirar el único enlace público a la página independiente de vista previa; la Bitácora oficial queda integrada en index.html#chapter-12 y el Roster conserva sus accesos individuales.",
+      "reference": "Issue #139 / WEB-02 · fase A"
+    },
+    {
+      "id": "delete-bitacora-preview-page-2026-11-26",
+      "path": "bitacora-preview.html",
+      "action": "delete",
+      "from_sha256": "a57d3ec32cde2f3666072f036788c252a1f8dbbf6226818fc2a1d5fbfbde9a48",
+      "to_sha256": null,
+      "reason": "Eliminar la página duplicada de vista previa; sus recorridos y fichas ya se encuentran integrados en el sitio principal y las pruebas se trasladan a index.html#chapter-12.",
+      "reference": "Issue #139 / WEB-02 · fase A"
     }
   ]
 }
