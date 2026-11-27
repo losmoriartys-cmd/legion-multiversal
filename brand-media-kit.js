@@ -202,7 +202,6 @@
       ["Categoría principal (10 días)","Top category (10 days)"],["muestras en directo","live samples"],
       ["Sin categoría verificable","No verified category"],["Actividad de chat · BarFender","Chat activity · BarFender"],
       ["Usuarios activos en chat / espectadores únicos · VOD completo","Active chat users / unique viewers · full VOD"],
-      ["ABRIR EXPEDIENTE INDIVIDUAL / IMPRIMIR PDF ↗","OPEN INDIVIDUAL DOSSIER / PRINT PDF ↗"],
       ["País e idioma de la audiencia: sin datos propios verificables.","Audience country and language: no independently verified data."],
       ["La categoría principal se ordena por muestras en directo dentro de la ventana disponible. La actividad de chat solo se publica cuando existe un registro de evento/VOD con su alcance identificado; no se extrapola a otros canales.","Top category is ranked by live samples within the available window. Chat activity is shown only when an event/VOD record with a defined scope exists; it is not extrapolated to other channels."],
       ["Los datos se presentan por canal y plataforma, sin sumar audiencias. En Twitch, promedio y pico son observaciones por muestreo; no equivalen a analítica oficial ni a espectadores únicos. “Sin datos” significa que la fuente pública no entrega esa métrica.","Data is presented per channel and platform, without adding audiences together. Twitch averages and peaks are sampled observations; they are not official analytics or unique viewers. “No data” means the public source does not provide that metric."],
