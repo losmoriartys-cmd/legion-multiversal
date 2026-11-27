@@ -7,11 +7,11 @@ const viewports = [
 
 async function createComparisonPages(browser, viewport) {
   const mainBaselineUrl = process.env.MAIN_BASELINE_URL;
-  expect(mainBaselineUrl, 'La CI debe resolver la preview vigente de main para las comparaciones visuales.').toBeTruthy();
+  expect(mainBaselineUrl, 'La CI debe servir el baseline exacto de origin/main para las comparaciones visuales.').toBeTruthy();
 
   const context = await browser.newContext({ viewport, reducedMotion: 'reduce' });
   // Ambas páginas usan el mismo fallback tipográfico para evitar diferencias por caché
-  // de Google Fonts entre el preview remoto de main y el candidato local de CI.
+  // de Google Fonts entre el worktree exacto de main y el candidato local de CI.
   await context.route(/^https:\/\/fonts\.(?:googleapis|gstatic)\.com\//, route => route.abort());
 
   const mainPage = await context.newPage();

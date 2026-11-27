@@ -51,15 +51,22 @@ jobs:
         with:
           node-version: '22'
           package-manager-cache: false
-      - name: Resolver preview vigente de main para baseline visual
+      - name: Preparar baseline visual exacto desde main
         id: main-preview
         if: github.event_name == 'pull_request'
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
         run: |
           MAIN_SHA="$(git rev-parse origin/main)"
-          python scripts/resolve_main_preview.py --repo "$GITHUB_REPOSITORY" --sha "$MAIN_SHA"
+          git worktree add --detach /tmp/main-baseline "$MAIN_SHA"
+          nohup python -m http.server 4174 --bind 127.0.0.1 --directory /tmp/main-baseline > /tmp/main-baseline.log 2>&1 &
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent http://127.0.0.1:4174/ > /dev/null; then
+              break
+            fi
+            sleep 1
+          done
+          curl --fail --silent http://127.0.0.1:4174/ > /dev/null
+          echo "url=http://127.0.0.1:4174/" >> "$GITHUB_OUTPUT"
+          echo "Baseline visual exacto de main: $MAIN_SHA"
       - name: Comprobar sintaxis JavaScript
         run: |
           node --check app.js
