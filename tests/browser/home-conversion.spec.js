@@ -82,7 +82,7 @@ test('portada: actos, indicadores y ocho retratos oficiales funcionan en escrito
     await expect(page.locator('#home-editorial-acts')).toBeVisible();
     const navigation = page.locator('.primary-navigation');
     await expect(navigation.locator('.nav-act')).toHaveCount(3);
-    await expect(navigation.locator('.nav-act[data-act="identity"] [data-chapter]')).toHaveAttribute('data-chapter', '1');
+    await expect(navigation.locator('.nav-act[data-act="identity"] [data-chapter]').first()).toHaveAttribute('data-chapter', '1');
     await expect(navigation.locator('.nav-act[data-act="action"] [data-chapter]')).toHaveAttribute('data-chapter', '3');
     await expect(navigation.locator('.nav-act[data-act="future"] [data-chapter]')).toHaveAttribute('data-chapter', '9');
     await expect(navigation.locator('.nav-act[data-act="future"] a[href="./marcas/"]')).toBeVisible();
