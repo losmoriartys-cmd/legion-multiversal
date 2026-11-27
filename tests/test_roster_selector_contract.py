@@ -412,7 +412,9 @@ if __name__ == "__main__":
         self.assertIn('>AUDIENCIA Y ESTADÍSTICAS</button>', self.html)
         self.assertIn('>TRAYECTORIA Y COLABORACIONES</button>', self.html)
 
-    def test_bitacora_is_linked_from_roster_and_collaborations(self):
-        self.assertEqual(self.html.count('href="./bitacora-preview.html"'), 2)
-        self.assertIn("ABRIR BITÁCORA GENERAL (VISTA PREVIA)", self.html)
-        self.assertIn("EXPLORAR BITÁCORA GENERAL (VISTA PREVIA)", self.html)
+    def test_roster_uses_the_integrated_collaboration_registry_as_bitacora(self):
+        self.assertNotIn("roster-bitacora-link", self.html)
+        self.assertNotIn("BITÁCORA GENERAL (VISTA PREVIA)", self.html)
+        chapter = self.html.split('id="chapter-12"', 1)[1].split('id="chapter-6"', 1)[0]
+        self.assertIn('id="collab-games-registry"', chapter)
+        self.assertIn('href="#collab-games-registry"', chapter)

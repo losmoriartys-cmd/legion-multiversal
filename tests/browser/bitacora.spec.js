@@ -1,108 +1,44 @@
 const { test, expect } = require('@playwright/test');
 
-test('el índice de Bitácora enlaza con los capítulos reales del sitio', async ({ page }) => {
-  await page.goto('/bitacora-preview.html');
-  await expect(page.locator('.archive-nav a').nth(1)).toHaveText('CAPÍTULO 07 · COLABORACIONES');
-  await page.locator('#next').click();
-
-  const entries = await page.locator('.index-list a').evaluateAll(links =>
-    links.map(link => ({ label: link.textContent.trim(), href: link.getAttribute('href') }))
-  );
-  expect(entries).toHaveLength(11);
-  expect(entries.some(entry => entry.href.includes('chapter-14'))).toBe(false);
-  expect(entries.map(entry => entry.href)).toEqual([
-    './index.html#chapter-0',
-    './index.html#chapter-1',
-    './index.html#chapter-11',
-    './index.html#chapter-2',
-    './index.html#chapter-3',
-    './index.html#chapter-9',
-    './index.html#chapter-8',
-    './index.html#chapter-12',
-    './index.html#chapter-10',
-    './index.html#chapter-6',
-    './index.html#chapter-13'
-  ]);
-
-  const targetChecks = await page.evaluate(async hrefs => {
-    const source = await fetch('./index.html').then(response => response.text());
-    const documentCopy = new DOMParser().parseFromString(source, 'text/html');
-    return hrefs.map(href => {
-      const hash = new URL(href, location.href).hash;
-      return { href, exists: Boolean(documentCopy.querySelector(hash)) };
-    });
-  }, entries.map(entry => entry.href));
-  expect(targetChecks.every(target => target.exists)).toBe(true);
+test.beforeEach(async ({ page }) => {
+  await page.goto('/#chapter-12');
+  await page.evaluate(() => window.gamesRegistryReady);
+  await expect(page.locator('#collab-games-registry')).toHaveAttribute('data-collab-ready', 'true');
 });
 
-test('el directorio de Bitácora usa los ocho nombres y slugs canónicos del Roster', async ({ page }) => {
-  const errors = [];
-  page.on('pageerror', error => errors.push(error.message));
-  await page.goto('/bitacora-preview.html');
-  const grid = page.locator('#directory-grid');
-  await expect(grid).toHaveAttribute('data-loaded', 'true');
-  await expect(grid.locator('.directory-card')).toHaveCount(8);
-
-  const cards = await grid.locator('.directory-card').evaluateAll(nodes =>
-    nodes.map(node => ({
-      name: node.querySelector('strong')?.textContent.trim(),
-      href: node.getAttribute('href')
-    }))
-  );
-  expect(cards).toEqual([
-    { name: 'LOS MORIARTYS', href: './index.html#expediente-moriartys' },
-    { name: 'ROD3R1K', href: './index.html#expediente-rod3r1k' },
-    { name: 'LADY MORIARTY', href: './index.html#expediente-lady-moriarty' },
-    { name: 'ARDIPII', href: './index.html#expediente-ardipii' },
-    { name: 'AKUMA', href: './index.html#expediente-akuma' },
-    { name: 'DAVE — NEXUS', href: './index.html#expediente-dave-nexus' },
-    { name: 'PATO — ORATORIS', href: './index.html#expediente-pato-oratoris' },
-    { name: 'HABITOS', href: './index.html#expediente-habitos' }
-  ]);
-  expect(errors).toEqual([]);
+test('la Bitácora integrada publica once sesiones y catorce POV desde el registro maestro', async ({ page }) => {
+  await expect(page.locator('#chapter-12')).toHaveClass(/active/);
+  const sessions = page.locator('#collab-registry-grid [data-collab-session]');
+  await expect(sessions).toHaveCount(11);
+  await expect(page.locator('#collab-registry-status')).toContainText('11 sesiones visibles');
+  await expect(page.locator('#collab-registry-grid a.collab-pov-link')).toHaveCount(14);
+  await expect(sessions.filter({ hasText: 'BIT-001' }).first()).toContainText('Escape the Backrooms');
 });
 
+test('la ficha BIT-011 conserva participantes, POV, clips y el archivo histórico EXP-001', async ({ page }) => {
+  const card = page.locator('#collab-registry-grid [data-collab-session="BIT-011"]');
+  await expect(card).toHaveCount(1);
+  await card.locator('details.collab-ficha > summary').click();
+  await expect(card.locator('[data-collab-participant]')).toHaveCount(4);
+  await expect(card.locator('.collab-pov-link')).toHaveCount(3);
+  await expect(card.locator('.collab-clip-list li')).toHaveCount(4);
+  await expect(card.locator('.collab-session-art img')).toHaveAttribute('src', 'BarFenderLos4.jpg');
+  await expect(card.locator('.collab-session-actions a').filter({ hasText: 'ARCHIVO HISTÓRICO · EXP-001' })).toHaveAttribute('href', '#barfender-expediente');
+  const archive = page.locator('#barfender-expediente');
+  await expect(archive.locator(':scope > summary')).toContainText('ARCHIVO HISTÓRICO');
+  await expect(archive).toHaveJSProperty('open', false);
+  await expect(archive.locator('.collab-log-section')).toContainText('SIN VOD PÚBLICO');
+});
 
-test('el libro recorre los quince folios y mantiene las dos páginas visibles en móvil', async ({ browser }) => {
-  const desktop = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
-  const errors = [];
-  desktop.on('pageerror', error => errors.push(error.message));
-  desktop.on('console', message => { if (message.type() === 'error') errors.push(message.text()); });
-  await desktop.goto('/bitacora-preview.html');
-  await desktop.locator('#next').click();
-
-  const expectedTags = [
-    'ARCHIVO GENERAL · ÍNDICE',
-    'CAPÍTULO 00 · INICIO',
-    'CAPÍTULO 01 · ORIGEN',
-    'CAPÍTULO 02 · VALORES',
-    'CAPÍTULO 03 · ROSTER',
-    'CAPÍTULO 04 · ESTADÍSTICAS',
-    'CAPÍTULO 05 · COMUNIDAD',
-    'CAPÍTULO 06 · ALIANZAS',
-    'CAPÍTULO 07 · COLABORACIONES',
-    'EXPEDIENTE 001 · BARFENDER',
-    'CAPÍTULO 08 · EN VIVO',
-    'CAPÍTULO 09 · RECLUTAMIENTO',
-    'EXTRA · MAPA MULTIVERSAL'
-  ];
-  const seen = [];
-  for (let index = 0; index < expectedTags.length; index += 1) {
-    await expect(desktop.locator('.leaf').first()).toContainText(expectedTags[index]);
-    seen.push(await desktop.locator('.leaf').first().locator('.eyebrow').innerText());
-    if (index < expectedTags.length - 1) await desktop.locator('#next').click();
+test('la Bitácora integrada mantiene el capítulo utilizable en escritorio, tablet y móvil', async ({ page }) => {
+  for (const width of [1440, 1024, 768, 390, 360]) {
+    await page.setViewportSize({ width, height: 900 });
+    const metrics = await page.evaluate(() => ({
+      document: document.documentElement.scrollWidth,
+      chapter: document.getElementById('chapter-12').scrollWidth,
+      client: document.getElementById('chapter-12').clientWidth,
+    }));
+    expect(metrics.document, 'document overflow at ' + width + 'px').toBeLessThanOrEqual(width);
+    expect(metrics.chapter - metrics.client, 'chapter overflow at ' + width + 'px').toBeLessThanOrEqual(2);
   }
-  expect(seen).toEqual(expectedTags);
-  await expect(desktop.locator('#page-number')).toContainText('/ 13');
-  await expect(desktop.locator('#next')).toBeDisabled();
-  expect(errors).toEqual([]);
-
-  const mobile = await browser.newPage({ viewport: { width: 390, height: 844 } });
-  await mobile.goto('/bitacora-preview.html');
-  await mobile.locator('#next').click();
-  await expect(mobile.locator('.leaf')).toHaveCount(2);
-  await expect(mobile.locator('.leaf').nth(1)).toBeVisible();
-  await expect(mobile.locator('.index-list')).toHaveCSS('column-count', '1');
-  await desktop.close();
-  await mobile.close();
 });

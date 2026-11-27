@@ -13,7 +13,6 @@ on:
       - 'creator-colors.css'
       - 'playwright.config.js'
       - 'index.html'
-      - 'bitacora-preview.html'
       - 'styles.css'
       - '*.css'
       - '*.json'

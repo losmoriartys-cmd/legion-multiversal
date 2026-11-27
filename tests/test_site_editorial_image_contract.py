@@ -23,13 +23,12 @@ class SiteEditorialImageContract(unittest.TestCase):
         self.assertIn("aspect-ratio: auto;", self.css)
         self.assertIn("object-fit: contain;", self.css)
 
-    def test_bitacora_and_comic_previews_use_clean_moriartys_cover_asset(self):
+    def test_comic_preview_uses_clean_moriartys_cover_asset(self):
         expected = "assets/heroes/moriartys_dark.jpg"
-        for relative in ("bitacora-preview.html", "comic-moriartys.html"):
-            content = (ROOT / relative).read_text(encoding="utf-8")
-            self.assertIn(expected, content)
-            self.assertNotIn("image_20261103_160331-y-ahora", content)
-            self.assertNotIn("%20(1).jpg", content)
+        content = (ROOT / "comic-moriartys.html").read_text(encoding="utf-8")
+        self.assertIn(expected, content)
+        self.assertNotIn("image_20261103_160331-y-ahora", content)
+        self.assertNotIn("%20(1).jpg", content)
         self.assertTrue((ROOT / expected).is_file())
 
     def test_all_static_images_declare_verified_intrinsic_dimensions(self):
@@ -76,7 +75,7 @@ class SiteEditorialImageContract(unittest.TestCase):
         end = self.html.index('\n</section>', start)
         chapter = self.html[start:end]
         self.assertEqual(chapter.count('href="#collab-games-registry"'), 1)
-        self.assertNotIn('href="./bitacora-preview.html"', chapter)
+        self.assertIn('id="collab-games-registry"', chapter)
         self.assertIn('id="collab-registry-grid"', chapter)
         self.assertIn('data-collab-ready="prerendered"', chapter)
         self.assertNotIn('assets/carnet/', chapter)

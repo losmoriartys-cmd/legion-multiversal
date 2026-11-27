@@ -93,24 +93,29 @@
 **Cierre técnico:** issue #95 cerrado. Los controles de Code Owner y la identidad de integración quedan como seguimiento administrativo separado; no invalidan el cierre técnico ni autorizan cambios fuera del proceso.
 
 
-### WEB-01 · Prerender de Bitácora y Arsenal **Estado:** EN IMPLEMENTACIÓN
+### WEB-01 · Prerender de Bitácora y Arsenal **Estado:** COMPLETADO
 **Corte de datos vigente:** 18 juegos en catálogo · 11 juegos con sesión · 11 sesiones BIT · 14 POV · 6 integrantes participantes · 7 juegos por descubrir · 1 archivo histórico EXP-001 (sin clasificación comercial).
 
-- [~] Generar desde `data/games.json` el HTML inicial de las 11 sesiones y las 18 fichas del Arsenal.
-- [~] Mantener los JSON como única fuente de verdad, con generador `--write/--check` y pruebas de sincronización.
-- [~] Conservar el HTML estático ante JavaScript deshabilitado o fallo del fetch; filtros y ruleta quedan como mejora progresiva.
+- [x] Generar desde `data/games.json` el HTML inicial de las 11 sesiones y las 18 fichas del Arsenal.
+- [x] Mantener los JSON como única fuente de verdad, con generador `--write/--check` y pruebas de sincronización.
+- [x] Conservar el HTML estático ante JavaScript deshabilitado o fallo del fetch; filtros y ruleta quedan como mejora progresiva.
 - [x] Eliminar el rótulo de expediente comercial y representar EXP-001 como archivo histórico vinculado a BIT-011.
 
-**Aceptación:** contenido completo en HTML inicial, conteos exactos, mejora dinámica sin duplicación, fallback conservado ante fallo de red y pruebas Python/Playwright/QA/Cloudflare en verde. Seguimiento en issue #135.
+**Cierre:** implementación de WEB-01 integrada por PR #138; la autorización de recursos quedó en PR #137. Validación posterior de contratos, Playwright, rutas, inventario y Cloudflare superada. No reabrir #135 ni #138.
 
+### WEB-02 · Retirar la Bitácora de vista previa y consolidar el acceso oficial **Estado:** COMPLETADO
+- [x] Retirar del Roster el enlace de vista previa; el recorrido oficial queda en `index.html#chapter-12`.
+- [x] Eliminar la página de vista previa del despliegue.
+- [x] Actualizar SEO, accesibilidad, workflow y scripts para no tratar la vista previa como página operativa.
+- [x] Reemplazar los tests del libro independiente por pruebas de la Bitácora integrada: 11 sesiones, 14 POV, BIT-011, clips, fuentes y archivo histórico EXP-001.
+- [x] Mantener `BITACORA.md` y `docs/PR46-PORTABLE-QA.md` únicamente como registros históricos.
+- [x] Conservar los ocho expedientes del Roster, sus pestañas y navegación interna.
 
-### WEB-02 · Retirar la vista previa de prueba del recorrido público
-- [ ] Quitar del Roster el botón «ABRIR BITÁCORA GENERAL (VISTA PREVIA)» que apunta a bitacora-preview.html.
-- [ ] Decidir si bitacora-preview.html se elimina del despliegue o se convierte en una página oficial terminada. Si deja de ser pública, retirar referencias, indexación y enlaces internos.
-- [ ] Buscar enlaces residuales a la página desde navegación, scripts, documentación y sitemap.
+**Autorizaciones SHA-256:** fase A integrada mediante PR #140; el destino SHA-256 de `index.html` se corrigió de forma append-only en PR #142. La fase B aplica exclusivamente la eliminación del enlace autorizada y la baja autorizada de la página; no modifica el ledger.
 
-**Aceptación:** el recorrido público no presenta una herramienta de prueba como funcionalidad oficial y no quedan enlaces huérfanos.
+**Implementación y evidencia:** PR #143. El candidato de `index.html` conserva el hash exacto autorizado tras la corrección de fase A; la baja autorizada de la página parte del hash aprobado. La validación incluye Python, Playwright, QA de capítulos, auditoría de enlaces, SEO, accesibilidad, inventario y Cloudflare Pages. La Bitácora oficial permanece en `index.html#chapter-12`.
 
+**Aceptación:** no quedan referencias operativas a la vista previa; las únicas menciones restantes son históricas en los documentos preservados.
 ---
 
 ## P1 · Archivo histórico BarFender · EXP-001 — supersedido por BIT-011

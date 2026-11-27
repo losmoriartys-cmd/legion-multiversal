@@ -13,7 +13,7 @@ Clasificación de cada <img>:
 Uso:
   python scripts/add_image_dimensions.py --check                       # todas las *.html de la raíz; no modifica
   python scripts/add_image_dimensions.py --check index.html            # subconjunto
-  python scripts/add_image_dimensions.py index.html bitacora-preview.html   # aplica
+  python scripts/add_image_dimensions.py index.html comic-moriartys.html  # aplica
 
 Requiere: pip install pillow
 Después de aplicar: revisar `git diff` completo y correr scripts/validate_site.py.
