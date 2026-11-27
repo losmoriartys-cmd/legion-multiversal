@@ -86,6 +86,27 @@ test('portada: actos, indicadores y ocho retratos oficiales funcionan en escrito
     await expect(navigation.locator('.nav-act[data-act="action"] [data-chapter]')).toHaveAttribute('data-chapter', '3');
     await expect(navigation.locator('.nav-act[data-act="future"] [data-chapter]')).toHaveAttribute('data-chapter', '9');
     await expect(navigation.locator('.nav-act[data-act="future"] a[href="./marcas/"]')).toBeVisible();
+    await expect(navigation.locator('.nav-act[data-act="identity"] .nav-act-items > .nav-btn')).toHaveCount(3);
+    await expect(navigation.locator('.nav-act[data-act="action"] .nav-act-items > .nav-btn')).toHaveCount(3);
+    await expect(navigation.locator('.nav-act[data-act="future"] .nav-act-items > .nav-btn')).toHaveCount(4);
+    if (viewport.width <= 900) {
+      const scrollState = await navigation.evaluate(node => ({
+        clientWidth: node.clientWidth,
+        scrollWidth: node.scrollWidth
+      }));
+      expect(scrollState.scrollWidth).toBeGreaterThan(scrollState.clientWidth);
+    } else {
+      const groupBounds = await navigation.locator('.nav-act').evaluateAll(nodes =>
+        nodes.map(node => {
+          const rect = node.getBoundingClientRect();
+          return { left: rect.left, right: rect.right };
+        })
+      );
+      for (const bounds of groupBounds) {
+        expect(bounds.left).toBeGreaterThanOrEqual(0);
+        expect(bounds.right).toBeLessThanOrEqual(viewport.width);
+      }
+    }
     await expect(page.locator('.lm-act-one')).toBeVisible();
     await expect(page.locator('.lm-act-two')).toBeVisible();
     await expect(page.locator('.lm-act-three')).toBeVisible();
