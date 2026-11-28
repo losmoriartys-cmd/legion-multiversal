@@ -42,7 +42,7 @@
     "#chapter-0 .lm-act-banner p{max-width:66ch;color:#d4dfeb;font-size:.94rem;line-height:1.5}",
     "#chapter-0 .lm-act-one .lm-act-banner:before{background:radial-gradient(circle at 84% 50%,transparent 0 56px,#60d9e8bb 57px 59px,transparent 60px),radial-gradient(circle at 84% 50%,transparent 0 88px,#a99bff70 89px 91px,transparent 92px),radial-gradient(#74cde74d .8px,transparent .9px);background-size:auto,auto,16px 16px}",
     "#chapter-0 .lm-act-two .lm-act-banner{min-height:174px}",
-    "#chapter-0 .lm-act-two .lm-act-banner:before{background:repeating-linear-gradient(0deg,transparent 0 24px,#ebc47826 25px 27px),linear-gradient(110deg,#251e20,#443622 52%,#161d2c);clip-path:polygon(0 0,100% 0,100% 72%,86% 72%,86% 80%,68% 80%,68% 88%,46% 88%,46% 100%,0 100%)}",
+    "#chapter-0 .lm-act-two .lm-act-banner:before{background:repeating-linear-gradient(0deg,transparent 0 24px,#ebc47826 25px 27px),linear-gradient(110deg,#251e20,#443622 52%,#161d2c)}",
     "#chapter-0 .lm-act-two .lm-act-kicker{color:#f3d8a6}#chapter-0 .lm-act-two .lm-act-banner h3{color:#f6e8ca}#chapter-0 .lm-act-two .lm-act-banner svg{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.76}#chapter-0 .lm-act-two .lm-act-banner>*:not(svg){position:relative;z-index:1}",
     "#chapter-0 .lm-act-three .lm-act-banner:before{background:radial-gradient(circle at 80% 50%,#644b9c47,transparent 40%),linear-gradient(135deg,#121a31,#151323 60%,#0c1820)}",
     "#chapter-0 .lm-act-three .lm-act-kicker{color:#d1c2ff}",
@@ -50,6 +50,7 @@
     "#chapter-0 .lm-act-link{display:flex;min-width:0;min-height:100px;flex-direction:column;justify-content:space-between;gap:10px;padding:13px;border:1px solid #7fbada40;border-top:3px solid var(--act-color,#63d9e8);background:#131f31b8;color:#f2f6fa;text-align:left;text-decoration:none;transition:transform .18s ease,border-color .18s ease}",
     "#chapter-0 .lm-act-link:hover{transform:translateY(-2px);border-color:#65d5e9}",
     "#chapter-0 .lm-act-link:focus-visible,#chapter-0 .lm-roster-card:focus-visible,#chapter-0 .lm-log-action:focus-visible{outline:3px solid #fff;outline-offset:3px}",
+    "#chapter-0 .lm-act-live{display:inline-block;margin-left:6px;padding:1px 7px;background:#fff;color:#0a111f;font:700 .6rem Roboto Condensed,Arial,sans-serif;letter-spacing:.08em;vertical-align:middle}#chapter-0 .lm-act-live[hidden]{display:none}",
     "#chapter-0 .lm-act-link span{color:#83cddc;font:.66rem Special Elite,cursive;letter-spacing:.1em}",
     "#chapter-0 .lm-act-link strong{color:#f3f5f9;font:1.2rem Bangers,cursive;letter-spacing:.03em}",
     "#chapter-0 .lm-act-link small{color:#a8b8ca;font-size:.76rem;line-height:1.4}",
@@ -84,7 +85,7 @@
   ].join("");
   document.head.appendChild(style);
 
-  const actTwoSvg = '<svg aria-hidden="true" viewBox="0 0 900 190" preserveAspectRatio="none"><path d="M0 164H210V142H390V116H570V82H750V44H900" fill="none" stroke="#e6c27e" stroke-width="2" opacity=".65"/><path d="M0 178H210V156H390V130H570V96H750V58H900" fill="none" stroke="#f5e4c3" stroke-width="1" opacity=".42"/></svg>';
+  const actTwoSvg = '<svg aria-hidden="true" viewBox="0 0 230 146" preserveAspectRatio="xMaxYMid meet"><g fill="none" stroke="#e6c27e" stroke-width="2" opacity=".55"><rect x="12" y="10" width="56" height="56"/><rect x="82" y="10" width="56" height="56"/><rect x="152" y="10" width="56" height="56"/><rect x="12" y="80" width="56" height="56"/><rect x="82" y="80" width="56" height="56" fill="#e6c27e" fill-opacity=".35"/><rect x="152" y="80" width="56" height="56"/></g></svg>';
   const actThreeSvg = '<svg class="lm-recruitment-art" aria-hidden="true" viewBox="0 0 360 190"><g fill="none" stroke="#a99bff" stroke-width="2" opacity=".48"><path d="M48 18 72 4h28l24 14v28l-24 14H72L48 46zM128 18l24-14h28l24 14v28l-24 14h-28l-24-14zM208 18l24-14h28l24 14v28l-24 14h-28l-24-14zM288 18l24-14h28v56h-28l-24-14z"/></g><g fill="#6e67a4" stroke="#d0c7ff" stroke-width="2" opacity=".82"><circle cx="78" cy="91" r="16"/><path d="M45 154q2-35 33-35t34 35v11H45z"/><circle cx="158" cy="91" r="16"/><path d="M125 154q2-35 33-35t34 35v11h-67z"/><circle cx="238" cy="91" r="16"/><path d="M205 154q2-35 33-35t34 35v11h-67z"/><circle cx="318" cy="91" r="16"/><path d="M285 154q2-35 33-35t34 35v11h-67z"/></g></svg>';
 
   const markup = [
@@ -99,29 +100,29 @@
     '<span class="lm-act-kicker">ACTO I · IDENTIDAD</span><h3 id="lm-act-one-title">QUIÉNES SOMOS</h3>',
     '<p>Una historia compartida, ocho identidades y una misma decisión: conservar lo que nos hace distintos mientras construimos algo en común.</p></div>',
     '<div class="lm-act-links">',
-    '<a class="lm-act-link" href="#chapter-1" data-open-chapter="1"><span>01 · EL COMIENZO</span><strong>ORIGEN</strong><small>De las primeras partidas a la idea de una Legión.</small></a>',
-    '<a class="lm-act-link" href="#chapter-11" data-open-chapter="11"><span>02 · LO QUE NOS UNE</span><strong>VALORES</strong><small>La forma de jugar, crear y convivir que elegimos sostener.</small></a>',
-    '<a class="lm-act-link" href="#chapter-2" data-open-chapter="2"><span>03 · LAS IDENTIDADES</span><strong>ROSTER</strong><small>Conocé a cada integrante y abrí su expediente individual.</small></a></div>',
+    '<a class="lm-act-link" href="#origen" data-open-chapter="1"><span>01 · EL COMIENZO</span><strong>ORIGEN</strong><small>De las primeras partidas a la idea de una Legión.</small></a>',
+    '<a class="lm-act-link" href="#quienes-somos" data-open-chapter="11"><span>02 · LO QUE NOS UNE</span><strong>VALORES</strong><small>La forma de jugar, crear y convivir que elegimos sostener.</small></a>',
+    '<a class="lm-act-link" href="#roster" data-open-chapter="2"><span>03 · LAS IDENTIDADES</span><strong>ROSTER</strong><small>Conocé a cada integrante y abrí su expediente individual.</small></a></div>',
     '<div class="lm-portrait-area"><div class="lm-subheading"><h4>LOS OCHO EXPEDIENTES</h4><p>Retratos oficiales · color de identidad · acceso directo al perfil</p></div>',
     '<div class="lm-roster-rail" id="lm-roster-rail" aria-label="Retratos de los ocho perfiles">Cargando identidades desde el registro oficial…</div></div></section>',
     '<section class="lm-act lm-act-two" aria-labelledby="lm-act-two-title"><div class="lm-act-banner">',
     '<span class="lm-act-kicker">ACTO II · EN ACCIÓN</span><h3 id="lm-act-two-title">LO QUE HACEMOS</h3>',
-    '<p>La actividad toma forma en directos, partidas compartidas, registros audiovisuales y datos con fecha y fuente. La escalera es un recurso editorial, no una clasificación ni una métrica.</p>',
+    '<p>La actividad toma forma en directos, partidas compartidas, registros audiovisuales y datos con fecha y fuente. El motivo gráfico es una cuadrícula neutra: no representa crecimiento ni ranking.</p>',
     actTwoSvg + '</div><div class="lm-act-links">',
-    '<a class="lm-act-link" href="#chapter-3" data-open-chapter="3"><span>04 · DATOS Y CONTEXTO</span><strong>ESTADÍSTICAS</strong><small>Indicadores por canal, plataforma, fuente y período.</small></a>',
-    '<a class="lm-act-link" href="#chapter-10" data-open-chapter="10"><span>05 · ENCUENTRO EN DIRECTO</span><strong>EN VIVO</strong><small>Consultá el estado de transmisión capturado por el colector.</small></a>',
-    '<a class="lm-act-link" href="#chapter-12" data-open-chapter="12"><span>06 · ARCHIVO COMPARTIDO</span><strong>COLABORACIONES Y BITÁCORA</strong><small>Juegos, sesiones, POV y experiencias documentadas.</small></a></div>',
+    '<a class="lm-act-link" href="#estadisticas" data-open-chapter="3"><span>04 · DATOS Y CONTEXTO</span><strong>ESTADÍSTICAS</strong><small>Indicadores por canal, plataforma, fuente y período.</small></a>',
+    '<a class="lm-act-link" href="#en-vivo" data-open-chapter="10"><span>05 · ENCUENTRO EN DIRECTO</span><strong>EN VIVO <b class="lm-act-live" data-act-live hidden role="status"></b></strong><small>Consultá el estado de transmisión capturado por el colector.</small></a>',
+    '<a class="lm-act-link" href="#colaboraciones" data-open-chapter="12"><span>06 · ARCHIVO COMPARTIDO</span><strong>COLABORACIONES Y BITÁCORA</strong><small>Juegos, sesiones, POV y experiencias documentadas.</small></a></div>',
     '<div class="lm-log-area"><div class="lm-subheading"><h4>ÚLTIMAS ENTRADAS DE BITÁCORA</h4><p>Sesiones registradas · enlaces originales por canal</p></div>',
     '<div class="lm-log-grid" id="lm-session-log">Consultando el registro maestro de sesiones…</div></div></section>',
     '<section class="lm-act lm-act-three" aria-labelledby="lm-act-three-title"><div class="lm-act-banner">',
     '<span class="lm-act-kicker">ACTO III · FUTURO Y COMUNIDAD</span><h3 id="lm-act-three-title">LO QUE PODEMOS CONSTRUIR</h3>',
     '<p>La Legión crece cuando aparecen nuevas ideas, vínculos y personas. Las siluetas representan posibilidades abiertas; no indican cupos ni vacantes predeterminadas.</p></div>',
     '<div class="lm-act-links">',
-    '<a class="lm-act-link" href="#chapter-9" data-open-chapter="9"><span>07 · PARTICIPAR</span><strong>COMUNIDAD</strong><small>Actividades, encuentros y propuestas para quienes nos acompañan.</small></a>',
-    '<a class="lm-act-link" href="#chapter-8" data-open-chapter="8"><span>08 · CONECTAR</span><strong>ALIANZAS</strong><small>Credenciales, vínculos confirmados y oportunidades por conversar.</small></a>',
-    '<a class="lm-act-link" href="#chapter-6" data-open-chapter="6"><span>09 · SUMAR UNA VOZ</span><strong>RECLUTAMIENTO</strong><small>Conocé el proceso y presentá una propuesta de incorporación.</small></a></div>',
+    '<a class="lm-act-link" href="#comunidad" data-open-chapter="9"><span>07 · PARTICIPAR</span><strong>COMUNIDAD</strong><small>Actividades, encuentros y propuestas para quienes nos acompañan.</small></a>',
+    '<a class="lm-act-link" href="#alianzas" data-open-chapter="8"><span>08 · CONECTAR</span><strong>ALIANZAS</strong><small>Credenciales, vínculos confirmados y oportunidades por conversar.</small></a>',
+    '<a class="lm-act-link" href="#reclutamiento" data-open-chapter="6"><span>09 · SUMAR UNA VOZ</span><strong>RECLUTAMIENTO</strong><small>Conocé el proceso y presentá una propuesta de incorporación.</small></a></div>',
     '<div class="lm-recruitment-scene"><p class="lm-recruitment-note">No buscamos personajes intercambiables ni completar una cantidad fija. Cada incorporación se conversa desde la identidad, la afinidad y el aporte que puede hacer a la comunidad.</p>',
-    actThreeSvg + '</div><div class="lm-act-annex"><span>ARCHIVO COMPLEMENTARIO · MAPA DE CONEXIONES</span><a href="#chapter-13" data-open-chapter="13">EXPLORAR EL MAPA MULTIVERSAL →</a></div></section>',
+    actThreeSvg + '</div><div class="lm-act-annex"><span>ARCHIVO COMPLEMENTARIO · MAPA DE CONEXIONES</span><a href="#mapa" data-open-chapter="13">EXPLORAR EL MAPA MULTIVERSAL →</a></div></section>',
     '</section>'
   ].join("");
 
@@ -265,7 +266,7 @@
       const participantText = participants.length ? participants.join(" · ") : "Participantes no consignados";
       const action = firstPov
         ? '<a class="lm-log-action" href="' + esc(firstPov.url) + '" target="_blank" rel="noopener noreferrer">ABRIR POV ↗</a>'
-        : '<a class="lm-log-action" href="#chapter-12" data-open-chapter="12">VER EXPEDIENTE</a>';
+        : '<a class="lm-log-action" href="#colaboraciones" data-open-chapter="12">VER EXPEDIENTE</a>';
       return '<article class="lm-log-card"><span class="lm-log-code">' + esc(session.bit) + ' · ' +
         esc(dateLabel(session.fecha)) + '</span><h4>' + esc(game.nombre) + '</h4><p>' +
         esc(participantText) + '</p><footer><span>' + povs.length + ' POV registrado(s)</span>' +

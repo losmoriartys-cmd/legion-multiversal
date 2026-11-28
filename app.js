@@ -1266,6 +1266,12 @@ async function loadInstituteStats(){
   if(homeFollowLink)homeFollowLink.hidden=isFresh&&liveCount>0;
   const liveNav=document.querySelector('.nav-btn-live[data-chapter="10"]');
   if(liveNav){const showLive=isFresh&&liveCount>0;liveNav.classList.toggle('is-live',showLive);liveNav.innerHTML='EN VIVO <span aria-hidden="true">'+(showLive?'● '+liveCount:'●')+'</span>';liveNav.setAttribute('aria-label',showLive?liveCount+' canal(es) detectado(s) en directo en la última captura':'Consultar estado de transmisiones; '+(isFresh?'sin canales en directo en la última captura':'última captura demorada'));}
+  document.querySelectorAll('[data-act-live]').forEach(badge=>{
+   const showLive=isFresh&&liveCount>0;
+   const nextSlot=!showLive&&window.LMSchedule?channels.map(c=>window.LMSchedule.next(c)).filter(Boolean).sort((x,y)=>x.date-y.date)[0]:null;
+   const text=showLive?'● EN VIVO · '+liveCount:(nextSlot&&nextSlot.date?'PRÓXIMO · '+window.LMSchedule.format(nextSlot.date):'');
+   badge.textContent=text;badge.hidden=!text;
+  });
   instituteStatsSnapshot={channels,isFresh};
   statsRenderChannelDirectory(channels,isFresh);
   statsRenderEvolution(channels);
