@@ -431,3 +431,96 @@ test('Estadísticas: comparación visual exacta de indicadores y tablas en escri
     }
   }
 });
+
+
+test('Portada: comparación visual exacta en frío y después de cargar CSS global', async ({ browser }, testInfo) => {
+  test.setTimeout(180000);
+
+  for (const viewport of viewports) {
+    const { context, mainPage, candidatePage } = await createComparisonPages(browser, viewport);
+    const errors = [];
+    mainPage.on('pageerror', error => errors.push('main: ' + error.message));
+    candidatePage.on('pageerror', error => errors.push('candidato: ' + error.message));
+
+    try {
+      const pages = [mainPage, candidatePage];
+      for (const page of pages) {
+        const hero = page.locator('#chapter-0 .executive-hero');
+        await expect(hero).toBeVisible();
+        await expect(hero.locator('.executive-hero-art img')).toHaveCount(1);
+        await hero.locator('.executive-hero-art img').evaluate(image => image.decode());
+        await page.evaluate(() => document.fonts.ready);
+
+        // Estado frío: CSS global aún no solicitado; el primer render depende
+        // del bloque crítico y de los estilos que se cargan desde el head.
+        const initialState = await page.locator('#lm-global-chapter-styles').evaluate(link => ({
+          loaded: link.dataset.loaded === 'true',
+          hasHref: Boolean(link.getAttribute('href'))
+        }));
+        expect(initialState, 'La Portada debe conservar la carga diferida de styles.css').toEqual({
+          loaded: false,
+          hasHref: false
+        });
+      }
+
+      async function compareCover(stateName) {
+        const heroLocators = pages.map(page => page.locator('#chapter-0 .executive-hero'));
+        const bounds = await Promise.all(heroLocators.map(locator => locator.boundingBox()));
+        for (const [index, rect] of bounds.entries()) {
+          expect(rect, 'Falta geometría del Hero (' + (index ? 'candidato' : 'baseline') + ')').not.toBeNull();
+          expect(rect.y, 'El Hero debe estar en pantalla sin hacer scroll para la captura fría').toBeGreaterThanOrEqual(0);
+          expect(rect.y + rect.height, 'El Hero debe caber en el viewport de captura').toBeLessThanOrEqual(viewport.height);
+        }
+        expect(
+          {
+            width: Math.round(bounds[1].width * 10) / 10,
+            height: Math.round(bounds[1].height * 10) / 10
+          },
+          'Cambió la geometría de la Portada en ' + stateName + ' / ' + viewport.name
+        ).toEqual({
+          width: Math.round(bounds[0].width * 10) / 10,
+          height: Math.round(bounds[0].height * 10) / 10
+        });
+
+        const prefix = 'visual-portada-' + stateName + '-' + viewport.name;
+        const mainPath = testInfo.outputPath(prefix + '-main.png');
+        const candidatePath = testInfo.outputPath(prefix + '-candidate.png');
+        await Promise.all([
+          captureStableScreenshot(heroLocators[0], mainPath, prefix + ' baseline'),
+          captureStableScreenshot(heroLocators[1], candidatePath, prefix + ' candidato')
+        ]);
+        const diff = comparePngFiles(mainPath, candidatePath);
+        expect(diff.sameDimensions, 'Cambió el tamaño raster de Portada en ' + stateName + ' / ' + viewport.name).toBe(true);
+        expect(
+          diff.maxChannelDelta,
+          'Regresión visual en Portada (' + stateName + ' / ' + viewport.name + '): ' + JSON.stringify(diff) + ' · tolerancia 2/255.'
+        ).toBeLessThanOrEqual(2);
+      }
+
+      await compareCover('frio');
+
+      // Estado posterior: navegar a otro capítulo fuerza la carga de styles.css;
+      // luego se regresa a Portada para comparar el mismo estado en ambas páginas.
+      for (const page of pages) {
+        const stylesheetResponse = page.waitForResponse(response =>
+          response.url().includes('/styles.css?v=20261126-ficha-tabs-1') && response.ok()
+        );
+        await page.evaluate(() => window.switchChapter(1));
+        await stylesheetResponse;
+        await page.waitForFunction(() =>
+          document.getElementById('lm-global-chapter-styles')?.dataset.loaded === 'true'
+        );
+        await expect(page.locator('#chapter-1')).toHaveClass(/active/);
+        await page.evaluate(() => window.switchChapter(0));
+        await expect(page.locator('#chapter-0')).toHaveClass(/active/);
+        await page.evaluate(() => document.fonts.ready);
+        await page.locator('#chapter-0 .executive-hero-art img').evaluate(image => image.decode());
+      }
+
+      await compareCover('css-global-cargado');
+      expect(errors, 'Errores JavaScript durante la comparación visual de Portada').toEqual([]);
+    } finally {
+      await context.close();
+    }
+  }
+});
