@@ -132,3 +132,7 @@ Se amplió `tests/browser/visual-regression.spec.js` con una comparativa del Her
 
 ## Personajes oficiales para la escena de ALIANZAS
 Se verificó `data/roster.json`: hay ocho personajes actuales con referencias de retrato, imagen/fullbody y character card. El brief fija que la escena parta de esas ocho identidades y sus diseños existentes, con posturas naturales de reunión; los perfiles futuros serán dossiers esquemáticos/siluetas sin identidad y claramente separados del Roster actual. No se va a inventar un noveno personaje ni atribuir credenciales o roles no registrados.
+
+
+## Matriz de QA de Portada
+Se relacionó el nuevo test de comparación visual con las pruebas ya existentes: `home-conversion.spec.js` (primer viewport y carga diferida), `chapter-common-qa.spec.js` (capítulos y responsive en cinco viewports) y `visual-regression.spec.js` (comparación contra main para Roster/Stats, ahora también Portada en frío y con CSS global). La nueva cobertura está pendiente de PASS del workflow completo.
