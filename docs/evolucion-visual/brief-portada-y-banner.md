@@ -37,3 +37,32 @@
 3. Crear PR fase A para autorización explícita de esos archivos/hash.
 4. Aplicar solo la transición aprobada en fase B.
 5. Ejecutar validaciones de código/datos, QA de capítulos, capturas Playwright desktop/móvil y revisar diffs visuales antes de declarar el piloto aprobado.
+
+
+## Concepto específico — capítulo ALIANZAS
+
+**Idea rectora: la mesa de la próxima dimensión.** Los integrantes actuales del Roster aparecen reunidos alrededor de una mesa de trabajo, revisando material físico y digital: papeles, bitácoras, mapas de conexiones, hojas de personaje y expedientes de perfiles que podrían incorporarse en el futuro.
+
+### Qué debe contar la escena
+- El equipo actual conversa, compara ideas y toma decisiones; no posa como una formación de combate ni replica el banner de Colaboraciones.
+- Los documentos evocan planificación y construcción de vínculos: bitácoras, propuestas, fichas de habilidades/roles, notas y mapas de afinidades.
+- Las posibles incorporaciones se representan como **perfiles en exploración**: fichas sin nombre, siluetas, retratos enmarcados sin identificar o expedientes parcialmente abiertos. No deben aparecer como roster confirmado ni inventar personas, nombres, canales, estadísticas o acuerdos.
+- La escena sugiere apertura a nuevas alianzas y crecimiento, no una convocatoria ya aceptada ni un contrato cerrado.
+- Los personajes existentes deben conservar rasgos y códigos visuales reconocibles del Roster; no intercambiar identidades ni inventar que un integrante cumple un rol que no está documentado.
+
+### Composición y tratamiento
+- Plano editorial cinematográfico de tres cuartos o ligeramente elevado, con la mesa como eje narrativo y los personajes formando una composición legible alrededor.
+- Profundidad por capas: personajes en primer plano, documentos/bitácoras en plano medio y un fondo de sala de estrategia o archivo multiversal.
+- Cian para interfaces, conexiones y anotaciones; violeta para el ambiente multiversal; dorado para acuerdos, hitos o expedientes destacados. No bañar toda la escena en neón.
+- Mantener zonas de aire para que el título **ALIANZAS** y el subtítulo del capítulo puedan entrar en el banner sin tapar rostros ni documentos importantes.
+- Los documentos deben funcionar como atrezzo narrativo. No incluir microtexto falso que parezca información real legible.
+
+### Diferencia editorial con COLABORACIONES
+- **ALIANZAS = construir vínculos:** planificación, exploración, conversaciones, oportunidades y perfiles potenciales.
+- **COLABORACIONES = hacer cosas juntos:** proyectos, sesiones, contenidos y casos que efectivamente sucedieron y tienen evidencia.
+- Nunca presentar una oportunidad, conversación o perfil en exploración como acuerdo confirmado, patrocinio, partnership o incorporación oficial.
+
+### Uso en la web
+La escena será un concepto visual propio del capítulo ALIANZAS. No se reutiliza como banner de todos los capítulos ni reemplaza por sí sola los datos, los CTA o los registros reales. En móvil se prioriza el grupo alrededor de la mesa y se recortan los paneles ambientales, no las caras ni las fichas centrales.
+
+**Estado:** concepto aceptado como dirección creativa por el usuario el 28/11/2026; pendiente de diseño visual, revisión de personajes/activos y autorización de los archivos gráficos que se creen o modifiquen.
