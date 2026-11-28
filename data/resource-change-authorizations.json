@@ -114,7 +114,7 @@
       "path": "home-visual-refresh.css",
       "action": "add",
       "from_sha256": null,
-      "to_sha256": "fe9d0ff0847af60ff8935b97ee017c26e6cfedd1a1d49997cf42801510994c87",
+      "to_sha256": "5645e737d5018cc8903e6f9f24f12e95cbb262129486918ff7da84ca3d1661f9",
       "reason": "Autorizar una hoja CSS aislada para mejorar la jerarquía visual de la portada ejecutiva y su navegación en tres actos, manteniendo los assets, capítulos, datos canónicos y comportamiento existente.",
       "reference": "PR #148 · autorización expresa del titular · fase A · 2026-11-28"
     },
@@ -123,7 +123,7 @@
       "path": "index.html",
       "action": "update",
       "from_sha256": "0846e64cece89e673d05fe8693183ff45c9020cffd57d64358fedaab3054a60e",
-      "to_sha256": "be5c2636a22739c2ad929820c6a4d2354f88744320094881d15883a50c925e10",
+      "to_sha256": "a0b1273612ccfc81670cea450cc5a28ad71fc3bb2e6e4d1ce609d67ef742e3dc",
       "reason": "Actualizar únicamente la versión de caché del cargador home-editorial.js para que el navegador solicite la integración visual validada; no modifica estructura, assets ni datos del sitio.",
       "reference": "PR #148 · autorización expresa del titular · fase A · 2026-11-28"
     }
