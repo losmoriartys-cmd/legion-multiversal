@@ -113,3 +113,8 @@ La primera inserción de tokens semánticos en `index.html` y `styles.css` fue d
 ## Contexto funcional verificado — ALIANZAS Y OPORTUNIDADES
 
 Se revisó la sección actual `#chapter-8` en `main`. No es una página vacía: contiene recorridos para probar un juego, contactar a una persona del Roster o proponer una experiencia grupal; credenciales colectivas e individuales; plataformas; contexto LATAM; formatos; modelos de activación; experiencias/casos; transparencia y contacto. La nueva escena de la mesa funcionará como introducción narrativa y orientación, no como reemplazo de esa estructura ni de las credenciales comprobadas. Se agregó esta preservación al brief.
+
+
+## 28/11/2026 — Mapa de cascada de Portada
+
+Se verificó que la familia visual de la Portada se reparte entre `styles.css`, los bloques `critical-home-styles`, `conversion-overhaul-inline` y `conversion-phase2-inline` en `index.html`, y refinamientos de `public-audience-paths.css`. Hay solapamientos en layout del hero, tratamiento de imagen, copy/títulos, CTAs y header. Se documentó el mapa y los riesgos en `docs/evolucion-visual/mapa-cascada-portada.md`. Todavía no se borró ni consolidó ninguna regla: el siguiente paso requiere capturas/computed styles en desktop y móvil para determinar la cascada efectiva y el alcance mínimo del piloto.
