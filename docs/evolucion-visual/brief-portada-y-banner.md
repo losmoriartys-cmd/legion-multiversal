@@ -72,3 +72,20 @@ La escena será un concepto visual propio del capítulo ALIANZAS. No se reutiliz
 La estructura actual de este expediente ya ofrece tres recorridos (probar un juego, contactar a una persona del Roster o proponer una experiencia grupal), credenciales colectivas e individuales, plataformas, contexto LATAM, formatos, modelos de activación, casos/experiencias, transparencia y contacto. La escena de la mesa debe presentar esa lógica y ayudar a orientarse; no sustituye estas secciones ni las simplifica hasta perderlas.
 
 En particular, el arte no debe hacer pasar el expediente creativo por un listado real de miembros: las credenciales que ya están publicadas siguen identificadas por su titular y alcance. Las hojas de perfiles potenciales pertenecen al lenguaje narrativo de exploración de futuras alianzas, no al registro oficial del Roster ni a una promesa de incorporación.
+
+
+### Integrantes actuales que deben conservar su identidad visual
+La fuente canónica `data/roster.json` registra ocho personajes actuales. Para la ilustración de la mesa se parte de sus diseños y referencias existentes, sin intercambiar rasgos ni inventar versiones nuevas:
+
+| Identificador | Nombre visible | Rol de personaje registrado |
+|---|---|---|
+| `moriartys` | LOS MORIARTYS | ESTRATEGA CIBERNÉTICO |
+| `rod3r1k` | ROD3R1K | INGENIERO SÓNICO |
+| `lady-moriarty` | LADY MORIARTY | BRUJA CAÓTICA |
+| `ardipii` | ARDIPII | GUARDIÁN ESPECTRAL |
+| `akuma` | AKUMA | TANQUE DEMONÍACO |
+| `dave-nexus` | DAVE — NEXUS | GUARDIÁN TECNOLÓGICO |
+| `pato-oratoris` | PATO — ORATORIS | COMUNICADOR DEL CONOCIMIENTO |
+| `habitos` | HABITOS | FILÓSOFO ATÓMICO |
+
+La composición debe permitir reconocer a los ocho sin que parezcan posar para una foto de equipo: la mesa y el material de trabajo organizan la escena. Se pueden variar las posturas (sentados, inclinados revisando una hoja o señalando un mapa), pero no alterar los diseños/personajes. Las posibles incorporaciones futuras se expresan con dossiers esquemáticos o siluetas sin identidad, separados visualmente de los ocho registros actuales.
