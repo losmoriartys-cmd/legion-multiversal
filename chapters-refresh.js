@@ -5,14 +5,17 @@
   function renderPeople() {
     var grid = document.getElementById('manifesto-people-grid');
     if (!grid || typeof fetch !== 'function') return;
+    var shared = window.LegionCreatorProfiles && window.LegionCreatorProfiles.sharedJson;
+    var getJson = shared || function (path) {
+      return fetch(path, { cache: 'no-store' }).then(function (response) {
+        if (!response.ok) throw new Error(path + ' ' + response.status);
+        return response.json();
+      });
+    };
     Promise.all([
-      fetch('./data/roster.json', { cache: 'no-store' }),
-      fetch('./data/creator-colors.json', { cache: 'no-store' }).catch(function () { return null; })
+      getJson('./data/roster.json'),
+      getJson('./data/creator-colors.json').catch(function () { return null; })
     ])
-      .then(function (responses) {
-        if (!responses[0].ok) throw new Error('data/roster.json ' + responses[0].status);
-        return Promise.all([responses[0].json(), responses[1] && responses[1].ok ? responses[1].json() : null]);
-      })
       .then(function (results) {
         var payload = results[0];
         var colorEntries = (results[1] && results[1].creators) || {};

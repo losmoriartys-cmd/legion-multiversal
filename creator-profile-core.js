@@ -17,15 +17,31 @@
 
   async function readJson(path) {
     if (!cache.has(path)) {
-      cache.set(path, fetch(path, { cache: 'no-store' }).then(response => {
-        if (!response.ok) throw new Error('No se pudo cargar ' + path + ' (' + response.status + ').');
-        return response.json();
-      }).catch(error => {
+      cache.set(path, sharedJson(path).catch(error => {
         cache.delete(path);
         throw error;
       }));
     }
     return cache.get(path);
+  }
+
+  // Descarga única por ruta: cada consumidor recibe su propia copia ya parseada.
+  const textCache = new Map();
+  function sharedJson(path) {
+    if (!textCache.has(path)) {
+      textCache.set(path, fetch(path, { cache: 'no-store' }).then(response => {
+        if (!response.ok) {
+          const error = new Error('No se pudo cargar ' + path + ' (' + response.status + ').');
+          error.status = response.status;
+          throw error;
+        }
+        return response.text();
+      }).catch(error => {
+        textCache.delete(path);
+        throw error;
+      }));
+    }
+    return textCache.get(path).then(text => JSON.parse(text));
   }
 
   function lastPathSegment(value) {
@@ -131,6 +147,7 @@
     version: 1,
     files: FILES,
     load,
+    sharedJson,
     resolveCreator,
     findMetric,
     areComparable: comparable
