@@ -123,3 +123,8 @@ Se verificó que la familia visual de la Portada se reparte entre `styles.css`, 
 ## Hallazgo de rendimiento/cascada — carga diferida de styles.css
 
 La hoja global `styles.css` no entra en el primer render: `app.js` la solicita en el primer `scroll`, `pointerdown` o `keydown` mediante `ensureGlobalChapterStyles()`. Por eso `critical-home-styles` gobierna la primera pantalla y luego se incorpora la hoja global. El mapa de cascada ahora incluye la necesidad de comparar ambos estados y medir cualquier salto visual, sin quitar la carga diferida por intuición.
+
+
+## Control de regresión de Portada agregado
+
+Se amplió `tests/browser/visual-regression.spec.js` con una comparativa del Hero de Portada contra el baseline exacto de `main`, para escritorio y móvil, en dos estados: carga inicial (sin `styles.css`) y después de cargar la hoja global al entrar a otro capítulo y volver. Se comprueba geometría, tamaño raster y delta máximo de canal (tolerancia existente de 2/255), además de errores JavaScript. Es infraestructura de prueba; no cambia HTML, CSS, datos ni assets del sitio.
