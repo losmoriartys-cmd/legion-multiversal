@@ -21,11 +21,28 @@ async function panelState(page) {
     const r = el.getBoundingClientRect();
     const s = getComputedStyle(el);
     const descendants = {};
-    for (const selector of ['.executive-hero h2', '.executive-lead', '.executive-proofline', '.executive-hero-actions']) {
+    for (const selector of ['.executive-kicker', '.executive-emblem', '.executive-hero h2', '.executive-lead', '.executive-proofline', '.executive-hero-actions']) {
       const node = el.querySelector(selector);
       descendants[selector] = node ? rect(node) : null;
     }
+    const children = Array.from(el.children).map((node, index) => {
+      const cr = node.getBoundingClientRect();
+      const cs = getComputedStyle(node);
+      return {
+        index, tag: node.tagName, className: node.className,
+        text: (node.innerText || '').slice(0, 90),
+        rect: { x: cr.x, y: cr.y, width: cr.width, height: cr.height },
+        style: {
+          display: cs.display, position: cs.position, margin: cs.margin,
+          padding: cs.padding, font: cs.font, lineHeight: cs.lineHeight,
+          letterSpacing: cs.letterSpacing, gap: cs.gap,
+          width: cs.width, maxWidth: cs.maxWidth, minHeight: cs.minHeight,
+          textWrap: cs.textWrap, flex: cs.flex
+        }
+      };
+    });
     return {
+      children,
       rect: { x: r.x, y: r.y, width: r.width, height: r.height, top: r.top, right: r.right, bottom: r.bottom, left: r.left },
       style: {
         padding: s.padding, border: s.border,
