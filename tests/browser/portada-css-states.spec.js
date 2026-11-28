@@ -33,7 +33,7 @@ for (const viewport of viewports) {
     await page.goto('/', { waitUntil: 'domcontentloaded' });
     const panel = page.locator('.executive-hero-copy');
     await expect(panel).toBeVisible();
-    await page.evaluate(() => document.getAnimations().forEach(animation => animation.finish()));
+    await page.addStyleTag({ content: '*{animation:none!important;transition:none!important;caret-color:transparent!important}' });
 
     const cold = await panelState(page);
     await panel.screenshot({ path: `test-results/portada-${viewport.name}-css-critico.png` });
@@ -52,7 +52,6 @@ for (const viewport of viewports) {
       });
     });
     await page.evaluate(() => document.fonts.ready);
-    await page.evaluate(() => document.getAnimations().forEach(animation => animation.finish()));
 
     const warm = await panelState(page);
     await panel.screenshot({ path: `test-results/portada-${viewport.name}-css-diferido.png` });
