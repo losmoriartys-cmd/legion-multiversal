@@ -37,12 +37,34 @@ Evolucionar la presentación visual de Legión Multiversal hacia una identidad c
 4. **Responsive + accesibilidad**: tamaños táctiles, contraste, foco, navegación, reduced-motion, densidad y overflow.
 5. **Validación**: checks actuales, visual-regression, capturas de viewport, diffs revisados, tests pertinentes y reporte de riesgos.
 
-## Primera tanda de revisión
-- Mapa de hojas y orden de carga.
-- Identificación de reglas duplicadas, sobrescrituras y estilos globales con impacto cruzado.
-- Propuesta de tokens antes de cambiar estilos de capítulos.
-- Priorización por impacto visual y riesgo técnico.
-- Mantener un registro de cambios, evidencia y pendientes en este documento.
+## Primera tanda de revisión — hallazgos confirmados
+
+### Orden de carga observado en index.html
+1. styles.css (global + estilos críticos inline de portada)
+2. chapter-8.css
+3. roster-fixes.css
+4. roster-selector.css
+5. social-links.css
+6. live-program.css
+7. editorial-subpages.css
+8. creator-colors.css (tokens de creadores generados)
+9. stats-tables.css
+10. public-audience-paths.css
+11. chapters-refresh.css
+12. creator-colors-extensions.css
+
+La carga utiliza varios enlaces diferidos con media=print/onload y noscript; deben preservarse al auditar o reorganizar estilos.
+
+### Riesgos a investigar
+- Los estilos de portada y globales aparecen también en el CSS crítico del index, por lo que puede haber divergencia entre la regla fuente y el fallback.
+- Varias capas de refinamiento se cargan al final y comparten selectores con estilos previos; antes de consolidar, hay que identificar cuáles son overrides intencionales y cuáles quedaron obsoletos.
+- El roster utiliza tokens de color generados por creador y extensiones que afectan cards, datos, métricas y botones. No normalizar esos colores sin conservar el sistema de identidad individual.
+- Las subpáginas tienen variables y shell propios; evaluar consistencia de marca sin borrar diferencias de contexto.
+- La hoja de estadísticas y la de rutas públicas son capas funcionales: cambios deben probarse con sus tests específicos.
+- El cambio de sistema de diseño no debe aumentar la especificidad ni generar una nueva capa global de overrides.
+
+### Próxima acción
+Completar el mapa de selectores/duplicaciones de carga, revisar capturas y pruebas existentes, y definir una propuesta pequeña de tokens semánticos. Implementar primero una capa de sistema visual acotada y probarla en la portada; ampliar solo después de confirmar ausencia de regresiones.
 
 ## Criterios de aceptación
 - No se rompe el flujo de capítulos ni navegación.
