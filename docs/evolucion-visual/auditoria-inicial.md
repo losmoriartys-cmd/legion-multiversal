@@ -128,3 +128,7 @@ La hoja global `styles.css` no entra en el primer render: `app.js` la solicita e
 ## Control de regresión de Portada agregado
 
 Se amplió `tests/browser/visual-regression.spec.js` con una comparativa del Hero de Portada contra el baseline exacto de `main`, para escritorio y móvil, en dos estados: carga inicial (sin `styles.css`) y después de cargar la hoja global al entrar a otro capítulo y volver. Se comprueba geometría, tamaño raster y delta máximo de canal (tolerancia existente de 2/255), además de errores JavaScript. Es infraestructura de prueba; no cambia HTML, CSS, datos ni assets del sitio.
+
+
+## Personajes oficiales para la escena de ALIANZAS
+Se verificó `data/roster.json`: hay ocho personajes actuales con referencias de retrato, imagen/fullbody y character card. El brief fija que la escena parta de esas ocho identidades y sus diseños existentes, con posturas naturales de reunión; los perfiles futuros serán dossiers esquemáticos/siluetas sin identidad y claramente separados del Roster actual. No se va a inventar un noveno personaje ni atribuir credenciales o roles no registrados.
