@@ -86,3 +86,9 @@ Completar el mapa de selectores/duplicaciones de carga, revisar capturas y prueb
 - `creator-colors.css` permanece intacto y generado desde su JSON.
 - Próximo piloto: migración controlada de la Portada ejecutiva (hero, panel, CTA y jerarquía), con revisión de duplicaciones entre CSS crítico, `styles.css` y hojas de conversión antes de tocar selectores.
 - Verificación pendiente: sintaxis, pruebas automatizadas y capturas reales en escritorio/móvil. No declarar aprobado hasta ejecutarlas.
+
+
+## Ajuste de proceso — autorización de archivos sensibles
+
+La primera inserción de tokens semánticos en `index.html` y `styles.css` fue detectada correctamente por la política de cambios sensibles del repositorio. Se restauraron ambos archivos al estado de `main`; no se conservarán cambios de implementación en esos archivos hasta que el procedimiento de autorización correspondiente esté aprobado. La propuesta de tokens queda como diseño/documentación, no como código activo. La rama debe pasar nuevamente las validaciones con estos archivos intactos.
+
