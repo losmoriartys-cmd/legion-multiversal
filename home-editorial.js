@@ -88,7 +88,7 @@
     const visualStylesheet = document.createElement("link");
     visualStylesheet.id = "home-visual-refresh-styles";
     visualStylesheet.rel = "stylesheet";
-    visualStylesheet.href = "./home-visual-refresh.css?v=20261127-visual-pass-1";
+    visualStylesheet.href = "./home-visual-refresh.css?v=20261127-visual-pass-2";
     visualStylesheet.addEventListener("load", () => {
       visualStylesheet.dataset.loaded = "true";
     }, { once: true });
