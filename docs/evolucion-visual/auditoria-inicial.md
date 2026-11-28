@@ -76,3 +76,13 @@ Completar el mapa de selectores/duplicaciones de carga, revisar capturas y prueb
 ## Registro
 - 2026-11-28: rama de trabajo creada desde main; inspección inicial de index, estilos globales y hojas auxiliares. No se modificó main ni producción.
 - Próximo paso: completar mapa de carga CSS y auditoría capítulo/viewport antes de implementar los primeros tokens/refinamientos.
+
+
+## 28/11/2026 — Primera intervención: tokens semánticos
+
+- Se incorporó una base semántica de color, superficies, bordes, tipografía de lectura y sombras en `:root` de `styles.css` y en el CSS crítico de `index.html`.
+- Tokens nuevos: tinta/void, tres niveles de superficie, líneas suaves/firmes, cyan/violet/magenta/gold, texto primario/secundario/atenuado y sombras de profundidad/comic.
+- **No se alteró el aspecto por sí solo:** los tokens aún no están conectados a componentes. Esta intervención es una base para migrar reglas existentes sin sumar otra hoja correctiva ni producir cambios visuales inesperados.
+- `creator-colors.css` permanece intacto y generado desde su JSON.
+- Próximo piloto: migración controlada de la Portada ejecutiva (hero, panel, CTA y jerarquía), con revisión de duplicaciones entre CSS crítico, `styles.css` y hojas de conversión antes de tocar selectores.
+- Verificación pendiente: sintaxis, pruebas automatizadas y capturas reales en escritorio/móvil. No declarar aprobado hasta ejecutarlas.
