@@ -144,6 +144,15 @@
       "to_sha256": "c1326dea7d319301c4aa4989a2e86e802e7fb5853514eb76cb61f6b624bc99b7",
       "reason": "Sincronizar en el CSS crítico de Portada únicamente el panel .executive-hero-copy (width:100%, max-width:none, padding, borde, fondo y sombra) con el estado diferido, incorporar el padding móvil 16px 13px hasta 640px y añadir line-height:1.68 a .executive-proofline. La transición corrige las diferencias geométricas de carga crítica/diferida observadas en Playwright; no autoriza cambios de contenido, márgenes, tipografías, enlaces, métricas, CTAs ni otros recursos.",
       "reference": "Comparación Playwright CSS crítico/diferido · PR #153 cerrado sin merge · PR #154 autorizó solo proofline; validación combinada tras PR #155 y PR #147 · 2026-11-28"
+    },
+    {
+      "id": "portada-critical-panel-proofline-kicker-index-html-2026-11-28",
+      "path": "index.html",
+      "action": "update",
+      "from_sha256": "0846e64cece89e673d05fe8693183ff45c9020cffd57d64358fedaab3054a60e",
+      "to_sha256": "b18ed8b2e8c85197e180c57d31ec8efe1a4c60929074a4f422b1c2792922eb13",
+      "reason": "Autorizar una transición completa y exacta del CSS crítico de Portada para igualarlo con el estado de styles.css diferido: (1) sincronizar .executive-hero-copy con width:100%, max-width:none, padding, borde, fondo y sombra; (2) incorporar padding móvil 16px 13px hasta 640px; (3) añadir line-height:1.68 a .executive-proofline; y (4) sincronizar .executive-kicker con line-height:1.68. El cuarto ajuste corrige la diferencia restante identificada por Playwright: la regla main .chapter-panel :where(p, li) lleva el kicker de 1.5 a 1.68 al cargar styles.css. No autoriza cambios de contenido, márgenes, otras fuentes o tipografías, anchuras adicionales, enlaces, métricas, CTAs, recursos ni archivos distintos de index.html.",
+      "reference": "Fase A complementaria tras PR #156 integrada y PR #157 bloqueada por Playwright (2.078125 px escritorio / 4.15625 px móvil); diagnóstico instrumentado del kicker · 2026-11-28"
     }
   ]
 }
