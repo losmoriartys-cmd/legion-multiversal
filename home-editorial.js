@@ -84,6 +84,20 @@
   ].join("");
   document.head.appendChild(style);
 
+  if (!document.getElementById("home-visual-refresh-styles")) {
+    const visualStylesheet = document.createElement("link");
+    visualStylesheet.id = "home-visual-refresh-styles";
+    visualStylesheet.rel = "stylesheet";
+    visualStylesheet.href = "./home-visual-refresh.css?v=20261127-visual-pass-1";
+    visualStylesheet.addEventListener("load", () => {
+      visualStylesheet.dataset.loaded = "true";
+    }, { once: true });
+    visualStylesheet.addEventListener("error", () => {
+      visualStylesheet.dataset.failed = "true";
+    }, { once: true });
+    document.head.appendChild(visualStylesheet);
+  }
+
   const actTwoSvg = '<svg aria-hidden="true" viewBox="0 0 900 190" preserveAspectRatio="none"><path d="M0 164H210V142H390V116H570V82H750V44H900" fill="none" stroke="#e6c27e" stroke-width="2" opacity=".65"/><path d="M0 178H210V156H390V130H570V96H750V58H900" fill="none" stroke="#f5e4c3" stroke-width="1" opacity=".42"/></svg>';
   const actThreeSvg = '<svg class="lm-recruitment-art" aria-hidden="true" viewBox="0 0 360 190"><g fill="none" stroke="#a99bff" stroke-width="2" opacity=".48"><path d="M48 18 72 4h28l24 14v28l-24 14H72L48 46zM128 18l24-14h28l24 14v28l-24 14h-28l-24-14zM208 18l24-14h28l24 14v28l-24 14h-28l-24-14zM288 18l24-14h28v56h-28l-24-14z"/></g><g fill="#6e67a4" stroke="#d0c7ff" stroke-width="2" opacity=".82"><circle cx="78" cy="91" r="16"/><path d="M45 154q2-35 33-35t34 35v11H45z"/><circle cx="158" cy="91" r="16"/><path d="M125 154q2-35 33-35t34 35v11h-67z"/><circle cx="238" cy="91" r="16"/><path d="M205 154q2-35 33-35t34 35v11h-67z"/><circle cx="318" cy="91" r="16"/><path d="M285 154q2-35 33-35t34 35v11h-67z"/></g></svg>';
 
