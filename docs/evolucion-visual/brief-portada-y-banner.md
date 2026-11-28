@@ -66,3 +66,9 @@
 La escena será un concepto visual propio del capítulo ALIANZAS. No se reutiliza como banner de todos los capítulos ni reemplaza por sí sola los datos, los CTA o los registros reales. En móvil se prioriza el grupo alrededor de la mesa y se recortan los paneles ambientales, no las caras ni las fichas centrales.
 
 **Estado:** concepto aceptado como dirección creativa por el usuario el 28/11/2026; pendiente de diseño visual, revisión de personajes/activos y autorización de los archivos gráficos que se creen o modifiquen.
+
+
+### Relación con el contenido real ya existente
+La estructura actual de este expediente ya ofrece tres recorridos (probar un juego, contactar a una persona del Roster o proponer una experiencia grupal), credenciales colectivas e individuales, plataformas, contexto LATAM, formatos, modelos de activación, casos/experiencias, transparencia y contacto. La escena de la mesa debe presentar esa lógica y ayudar a orientarse; no sustituye estas secciones ni las simplifica hasta perderlas.
+
+En particular, el arte no debe hacer pasar el expediente creativo por un listado real de miembros: las credenciales que ya están publicadas siguen identificadas por su titular y alcance. Las hojas de perfiles potenciales pertenecen al lenguaje narrativo de exploración de futuras alianzas, no al registro oficial del Roster ni a una promesa de incorporación.
