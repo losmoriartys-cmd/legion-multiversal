@@ -189,6 +189,39 @@ test('portada: actos, indicadores y ocho retratos oficiales funcionan en escrito
   await expect(page.locator('#chapter-2')).toHaveClass(/active/);
 });
 
+test('portada: la capa visual editorial carga y conserva la navegación en escritorio y móvil', async ({ page }) => {
+  for (const viewport of [
+    { width: 1440, height: 900 },
+    { width: 390, height: 844 }
+  ]) {
+    await page.setViewportSize(viewport);
+    await page.goto('/');
+    await page.waitForFunction(() => {
+      const link = document.getElementById('home-visual-refresh-styles');
+      return Boolean(link && link.dataset.loaded === 'true' && link.sheet);
+    }, null, { timeout: 10000 });
+
+    const visualState = await page.evaluate(() => {
+      const title = document.querySelector('#chapter-0 .executive-hero h2');
+      const art = document.querySelector('#chapter-0 .executive-hero-art');
+      const navigation = document.querySelector('header .primary-navigation');
+      return {
+        titleFont: getComputedStyle(title).fontFamily,
+        artworkOpacity: Number(getComputedStyle(art).opacity),
+        navigationDisplay: getComputedStyle(navigation).display,
+        actCount: navigation.querySelectorAll('.nav-act').length,
+        documentWidth: document.documentElement.scrollWidth
+      };
+    });
+
+    expect(visualState.titleFont).toContain('Arial Black');
+    expect(visualState.artworkOpacity).toBeGreaterThanOrEqual(0.3);
+    expect(visualState.actCount).toBe(3);
+    expect(visualState.documentWidth).toBeLessThanOrEqual(viewport.width);
+    expect(visualState.navigationDisplay).toBe(viewport.width <= 900 ? 'flex' : 'grid');
+  }
+});
+
 test('ficha para marcas: indicadores canónicos, impresión PDF y traducción inglesa', async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.goto('/marcas/');
