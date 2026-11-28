@@ -4,9 +4,15 @@ let creatorNameRegistry = {};
 let epicCreatorPrograms = null;
 
 async function loadRosterData() {
-    const response = await fetch('./data/roster.json', { cache: 'no-store' });
-    if (!response.ok) throw new Error('No se pudo cargar data/roster.json (' + response.status + ').');
-    const payload = await response.json();
+    const sharedJson = window.LegionCreatorProfiles && window.LegionCreatorProfiles.sharedJson;
+    let payload;
+    if (sharedJson) {
+        payload = await sharedJson('./data/roster.json');
+    } else {
+        const response = await fetch('./data/roster.json', { cache: 'no-store' });
+        if (!response.ok) throw new Error('No se pudo cargar data/roster.json (' + response.status + ').');
+        payload = await response.json();
+    }
     if (!payload || !Array.isArray(payload.heroes) || payload.heroes.length === 0) {
         throw new Error('data/roster.json no contiene integrantes válidos.');
     }
@@ -19,8 +25,9 @@ async function loadRosterData() {
         identifiers.add(identifier);
     }
     try {
-        const colorResponse = await fetch('./data/creator-colors.json', { cache: 'no-store' });
-        const colorPayload = colorResponse.ok ? await colorResponse.json() : null;
+        const colorPayload = sharedJson
+            ? await sharedJson('./data/creator-colors.json').catch(() => null)
+            : await fetch('./data/creator-colors.json', { cache: 'no-store' }).then(r => r.ok ? r.json() : null);
         payload.heroes.forEach(hero => {
             const colorEntry = colorPayload && colorPayload.creators && colorPayload.creators[hero.id || hero.slug];
             const color = colorEntry && colorEntry.color;
@@ -1297,8 +1304,10 @@ async function loadPartnerMetrics(){
  const body=document.getElementById('partner-metrics-body'); if(!body)return;
  const fmt=(v,d=2)=>v===null||v===undefined?'Pendiente':(typeof v==='number'?v.toLocaleString('es-AR',{maximumFractionDigits:d}):v);
  try{
-  const res=await fetch('data.json',{cache:'no-store'}); if(!res.ok)throw new Error('No se pudo leer data.json');
-  const data=await res.json(); const activeLogins=Array.isArray(data.active_channels)?data.active_channels:Object.keys(data.channels||{}); const channels=activeLogins.map(login=>data.channels?.[login]).filter(Boolean);
+  const sharedActivity=window.LegionCreatorProfiles&&window.LegionCreatorProfiles.sharedJson;
+  let data;
+  if(sharedActivity){data=await sharedActivity('./data.json').catch(()=>{throw new Error('No se pudo leer data.json');});}
+  else{const res=await fetch('data.json',{cache:'no-store'}); if(!res.ok)throw new Error('No se pudo leer data.json'); data=await res.json();} const activeLogins=Array.isArray(data.active_channels)?data.active_channels:Object.keys(data.channels||{}); const channels=activeLogins.map(login=>data.channels?.[login]).filter(Boolean);
   body.innerHTML=channels.map(c=>'<tr><td>'+escapeStatsHtml(c.display_name)+'</td><td>'+(c.live?'EN DIRECTO':'OFFLINE')+'</td><td>'+fmt(c.current_viewers,0)+'</td><td>'+fmt(c.current_game)+'</td><td>'+fmt(c.window?.average_viewers_sampled)+'</td><td>'+fmt(c.window?.peak_viewers_sampled,0)+'</td><td>'+fmt(c.window?.samples_total,0)+'</td></tr>').join('');
  }catch(e){body.innerHTML='<tr><td colspan="7">Métricas temporalmente no disponibles.</td></tr>';}
 }
