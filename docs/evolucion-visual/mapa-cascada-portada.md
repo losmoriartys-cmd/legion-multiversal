@@ -42,3 +42,10 @@ Como HTML/CSS están dentro de las extensiones protegidas, la intervención debe
 - No borrar CSS crítico para reducir líneas sin medir LCP/fallback.
 - No cambiar la cuadrícula de CTAs ni el orden de contenido como subproducto visual.
 - No rediseñar ahora Roster, Stats o chapter 8 mientras el piloto es Portada.
+
+
+## Hallazgo adicional — carga diferida del CSS global
+
+En `app.js`, `ensureGlobalChapterStyles()` asigna `data-href` a `href` del enlace `#lm-global-chapter-styles`. La carga de `styles.css` se dispara por el primer `scroll`, `pointerdown` o `keydown`, no como parte del primer render. El CSS crítico inline es, por lo tanto, la presentación inicial real; después de la primera interacción, la hoja global entra en cascada y puede cambiar el aspecto.
+
+**Implicancia:** la intervención de Portada debe comparar dos estados distintos: carga en frío sin interacción y estado posterior a cargar la hoja global. No alcanza con revisar una captura estática luego de que todo CSS haya cargado. Hay que comprobar que no haya salto de composición, cambio de altura, recorte del artwork ni reacomodo inesperado de los CTAs. Mantener esta carga diferida salvo que mediciones de rendimiento demuestren que conviene cambiarla.
