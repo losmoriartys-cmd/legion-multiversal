@@ -108,6 +108,15 @@
       "to_sha256": "0846e64cece89e673d05fe8693183ff45c9020cffd57d64358fedaab3054a60e",
       "reason": "Añadir únicamente el cargador diferido home-editorial.js para incorporar el recorrido editorial de tres actos, la franja calculada de indicadores y los banners responsivos sin alterar los capítulos ni los datos canónicos.",
       "reference": "Revisión editorial de Portada · autorización expresa del titular · 2026-11-27"
+    },
+    {
+      "id": "home-visual-refresh-css-2026-11-28",
+      "path": "home-visual-refresh.css",
+      "action": "add",
+      "from_sha256": null,
+      "to_sha256": "4f6186553b096095022619fd5a7f5c8fbbc1c17f37e3f20473f529fbc4044b67",
+      "reason": "Autorizar una hoja CSS aislada para mejorar la jerarquía visual de la portada ejecutiva y su navegación en tres actos, manteniendo los assets, capítulos, datos canónicos y comportamiento existente.",
+      "reference": "PR #148 · autorización expresa del titular · fase A · 2026-11-28"
     }
   ]
 }
