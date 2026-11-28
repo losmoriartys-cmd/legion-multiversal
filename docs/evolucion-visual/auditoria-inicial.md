@@ -108,3 +108,8 @@ La primera inserción de tokens semánticos en `index.html` y `styles.css` fue d
 - Se separó expresamente la narrativa de **ALIANZAS** (construcción/exploración de vínculos) de **COLABORACIONES** (proyectos y experiencias que ya ocurrieron y tienen evidencia).
 - Se estableció que los perfiles futuros deben leerse como exploratorios/no confirmados; no inventar nombres, canales, estadísticas ni acuerdos. También se definieron composición, paleta funcional, espacio para título y recorte móvil seguro.
 - El usuario aceptó esta dirección creativa. Sigue siendo concepto documentado, no arte final ni asset listo para publicación.
+
+
+## Contexto funcional verificado — ALIANZAS Y OPORTUNIDADES
+
+Se revisó la sección actual `#chapter-8` en `main`. No es una página vacía: contiene recorridos para probar un juego, contactar a una persona del Roster o proponer una experiencia grupal; credenciales colectivas e individuales; plataformas; contexto LATAM; formatos; modelos de activación; experiencias/casos; transparencia y contacto. La nueva escena de la mesa funcionará como introducción narrativa y orientación, no como reemplazo de esa estructura ni de las credenciales comprobadas. Se agregó esta preservación al brief.
