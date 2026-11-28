@@ -85,7 +85,7 @@
   ].join("");
   document.head.appendChild(style);
 
-  const actTwoSvg = '<svg aria-hidden="true" viewBox="0 0 900 190" preserveAspectRatio="xMaxYMid slice"><g fill="none" stroke="#e6c27e" stroke-width="2" opacity=".55"><rect x="640" y="40" width="56" height="56"/><rect x="710" y="40" width="56" height="56"/><rect x="780" y="40" width="56" height="56"/><rect x="640" y="110" width="56" height="56"/><rect x="710" y="110" width="56" height="56" fill="#e6c27e" fill-opacity=".35"/><rect x="780" y="110" width="56" height="56"/></g></svg>';
+  const actTwoSvg = '<svg aria-hidden="true" viewBox="0 0 230 146" preserveAspectRatio="xMaxYMid meet"><g fill="none" stroke="#e6c27e" stroke-width="2" opacity=".55"><rect x="12" y="10" width="56" height="56"/><rect x="82" y="10" width="56" height="56"/><rect x="152" y="10" width="56" height="56"/><rect x="12" y="80" width="56" height="56"/><rect x="82" y="80" width="56" height="56" fill="#e6c27e" fill-opacity=".35"/><rect x="152" y="80" width="56" height="56"/></g></svg>';
   const actThreeSvg = '<svg class="lm-recruitment-art" aria-hidden="true" viewBox="0 0 360 190"><g fill="none" stroke="#a99bff" stroke-width="2" opacity=".48"><path d="M48 18 72 4h28l24 14v28l-24 14H72L48 46zM128 18l24-14h28l24 14v28l-24 14h-28l-24-14zM208 18l24-14h28l24 14v28l-24 14h-28l-24-14zM288 18l24-14h28v56h-28l-24-14z"/></g><g fill="#6e67a4" stroke="#d0c7ff" stroke-width="2" opacity=".82"><circle cx="78" cy="91" r="16"/><path d="M45 154q2-35 33-35t34 35v11H45z"/><circle cx="158" cy="91" r="16"/><path d="M125 154q2-35 33-35t34 35v11h-67z"/><circle cx="238" cy="91" r="16"/><path d="M205 154q2-35 33-35t34 35v11h-67z"/><circle cx="318" cy="91" r="16"/><path d="M285 154q2-35 33-35t34 35v11h-67z"/></g></svg>';
 
   const markup = [
