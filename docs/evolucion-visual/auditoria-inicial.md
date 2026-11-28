@@ -118,3 +118,8 @@ Se revisó la sección actual `#chapter-8` en `main`. No es una página vacía: 
 ## 28/11/2026 — Mapa de cascada de Portada
 
 Se verificó que la familia visual de la Portada se reparte entre `styles.css`, los bloques `critical-home-styles`, `conversion-overhaul-inline` y `conversion-phase2-inline` en `index.html`, y refinamientos de `public-audience-paths.css`. Hay solapamientos en layout del hero, tratamiento de imagen, copy/títulos, CTAs y header. Se documentó el mapa y los riesgos en `docs/evolucion-visual/mapa-cascada-portada.md`. Todavía no se borró ni consolidó ninguna regla: el siguiente paso requiere capturas/computed styles en desktop y móvil para determinar la cascada efectiva y el alcance mínimo del piloto.
+
+
+## Hallazgo de rendimiento/cascada — carga diferida de styles.css
+
+La hoja global `styles.css` no entra en el primer render: `app.js` la solicita en el primer `scroll`, `pointerdown` o `keydown` mediante `ensureGlobalChapterStyles()`. Por eso `critical-home-styles` gobierna la primera pantalla y luego se incorpora la hoja global. El mapa de cascada ahora incluye la necesidad de comparar ambos estados y medir cualquier salto visual, sin quitar la carga diferida por intuición.
