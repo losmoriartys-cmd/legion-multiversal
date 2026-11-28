@@ -1,0 +1,48 @@
+name: Comparación aislada CSS Portada
+
+on:
+  push:
+    branches:
+      - qa/portada-css-state-phase-b-2026-11-28
+    paths:
+      - '.github/workflows/portada-css-state-comparison.yml'
+      - 'tests/browser/portada-css-states.spec.js'
+      - 'index.html'
+      - 'styles.css'
+      - 'package.json'
+      - 'playwright.config.js'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: portada-css-state-comparison
+  cancel-in-progress: false
+
+jobs:
+  compare-css-states:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Checkout rama técnica
+        uses: actions/checkout@v5
+      - name: Configurar Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+          package-manager-cache: false
+      - name: Instalar dependencias Playwright
+        run: npm install --no-audit --no-fund
+      - name: Instalar Chromium y dependencias del sistema
+        run: npx playwright install --with-deps chromium
+      - name: Ejecutar comparación carga fría y CSS diferido
+        run: npx playwright test tests/browser/portada-css-states.spec.js
+      - name: Publicar las cuatro capturas comparativas
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: portada-css-state-comparison
+          path: test-results/portada-*-css-*.png
+          if-no-files-found: warn
+          retention-days: 7
