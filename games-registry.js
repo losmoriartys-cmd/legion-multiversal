@@ -290,20 +290,25 @@
     section.setAttribute('aria-busy', 'true');
     status.textContent = 'Conectando con el registro maestro de juegos…';
     try {
+      const shared = window.LegionCreatorProfiles && window.LegionCreatorProfiles.sharedJson;
+      const getJson = shared || function (path) {
+        return fetch(path, { cache: 'no-store' }).then(function (response) {
+          if (!response.ok) throw new Error('No se pudo cargar ' + path + ' (' + response.status + ').');
+          return response.json();
+        });
+      };
       const results = await Promise.all([
-        fetch('./data/games.json', { cache: 'no-store' }),
-        fetch('./data/roster.json', { cache: 'no-store' }),
-        fetch('./data.json', { cache: 'no-store' }).catch(function () { return null; })
+        getJson('./data/games.json'),
+        getJson('./data/roster.json'),
+        getJson('./data.json').catch(function () { return null; })
       ]);
-      if (!results[0].ok) throw new Error('No se pudo cargar games.json (' + results[0].status + ').');
-      if (!results[1].ok) throw new Error('No se pudo cargar data/roster.json (' + results[1].status + ').');
-      const registry = await results[0].json();
-      const roster = await results[1].json();
+      const registry = results[0];
+      const roster = results[1];
       if (!registry || !Array.isArray(registry.juegos) || !Array.isArray(roster.heroes)) throw new Error('El registro maestro o el Roster no tiene la estructura esperada.');
       games = registry.juegos;
       creators = new Map(roster.heroes.map(function (hero) { return [hero.id || hero.slug, hero]; }));
-      if (results[2] && results[2].ok) {
-        const activity = await results[2].json();
+      if (results[2]) {
+        const activity = results[2];
         Object.keys(activity.channels || {}).forEach(function (login) {
           const image = activity.channels[login] && activity.channels[login].profile_image_url;
           if (image) channelImages[login.toLowerCase()] = image;

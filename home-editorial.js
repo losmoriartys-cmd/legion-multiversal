@@ -198,10 +198,14 @@
     }
   });
 
-  const loadJson = (path) => fetch(path, { cache:"no-store" }).then((response) => {
-    if (!response.ok) throw new Error("No se pudo cargar " + path);
-    return response.json();
-  });
+  const loadJson = (path) => {
+    const shared = window.LegionCreatorProfiles && window.LegionCreatorProfiles.sharedJson;
+    if (shared) return shared(path);
+    return fetch(path, { cache:"no-store" }).then((response) => {
+      if (!response.ok) throw new Error("No se pudo cargar " + path);
+      return response.json();
+    });
+  };
 
   Promise.all([
     loadJson("./data/roster.json"),

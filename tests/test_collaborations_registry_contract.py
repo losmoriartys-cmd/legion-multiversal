@@ -13,10 +13,13 @@ class CollaborationsRegistryContractTests(unittest.TestCase):
     def test_chapter_07_uses_the_shared_registry_and_roster_sources(self):
         self.assertIn('id="collab-games-registry"', HTML)
         self.assertIn('src="./games-registry.js?v=20261126-ficha-tabs-1"', HTML)
-        self.assertIn("fetch('./data/games.json'", SCRIPT)
+        self.assertIn("getJson('./data/games.json')", SCRIPT)
         self.assertIn("./styles.css?v=20261126-ficha-tabs-1", HTML)
-        self.assertIn("fetch('./data/roster.json'", SCRIPT)
-        self.assertIn("fetch('./data.json'", SCRIPT)
+        self.assertIn("getJson('./data/roster.json')", SCRIPT)
+        self.assertIn("getJson('./data.json')", SCRIPT)
+        # Descarga compartida: una sola petición por archivo, con respaldo a fetch directo.
+        self.assertIn("LegionCreatorProfiles.sharedJson", SCRIPT)
+        self.assertIn("fetch(path, { cache: 'no-store' })", SCRIPT)
 
     def test_registry_controls_and_live_results_are_accessible(self):
         for marker in ('id="collab-search"', 'id="collab-category"', 'id="collab-creator"',

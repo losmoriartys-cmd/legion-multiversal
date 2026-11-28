@@ -130,9 +130,14 @@
   async function load(){
     root.setAttribute('aria-busy','true');
     try{
-      const response=await fetch('./data/games.json',{cache:'no-store'});
-      if(!response.ok)throw new Error('No se pudo cargar games.json ('+response.status+').');
-      const payload=await response.json();
+      const shared=window.LegionCreatorProfiles&&window.LegionCreatorProfiles.sharedJson;
+      let payload;
+      if(shared){payload=await shared('./data/games.json');}
+      else{
+        const response=await fetch('./data/games.json',{cache:'no-store'});
+        if(!response.ok)throw new Error('No se pudo cargar games.json ('+response.status+').');
+        payload=await response.json();
+      }
       if(!payload||!Array.isArray(payload.juegos)||!payload.juegos.length)throw new Error('games.json no contiene juegos.');
       games=payload.juegos;populateCategories();renderSummary();render();
       root.dataset.arsenalReady='true';root.setAttribute('aria-busy','false');return games.length;
