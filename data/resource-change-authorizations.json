@@ -135,6 +135,15 @@
       "to_sha256": "9b34296e53f6c630757a3ba0cb35cdb3d48d5e8fa765da25e6f651b904b541d9",
       "reason": "Sincronizar únicamente line-height:1.68 de .executive-proofline en el CSS crítico de Portada con el ritmo tipográfico aplicado por styles.css al cargar el CSS diferido. El objetivo es eliminar el crecimiento medido del panel entre carga crítica y diferida; no autoriza cambios de contenido, márgenes, anchuras, fuentes, enlaces, métricas, CTAs ni otros recursos.",
       "reference": "Diagnóstico Playwright CSS crítico/diferido · PR #153 cerrado sin merge · Fase A 2026-11-28"
+    },
+    {
+      "id": "portada-critical-panel-proofline-leading-index-html-2026-11-28",
+      "path": "index.html",
+      "action": "update",
+      "from_sha256": "0846e64cece89e673d05fe8693183ff45c9020cffd57d64358fedaab3054a60e",
+      "to_sha256": "c1326dea7d319301c4aa4989a2e86e802e7fb5853514eb76cb61f6b624bc99b7",
+      "reason": "Sincronizar en el CSS crítico de Portada únicamente el panel .executive-hero-copy (width:100%, max-width:none, padding, borde, fondo y sombra) con el estado diferido, incorporar el padding móvil 16px 13px hasta 640px y añadir line-height:1.68 a .executive-proofline. La transición corrige las diferencias geométricas de carga crítica/diferida observadas en Playwright; no autoriza cambios de contenido, márgenes, tipografías, enlaces, métricas, CTAs ni otros recursos.",
+      "reference": "Comparación Playwright CSS crítico/diferido · PR #153 cerrado sin merge · PR #154 autorizó solo proofline; validación combinada tras PR #155 y PR #147 · 2026-11-28"
     }
   ]
 }
