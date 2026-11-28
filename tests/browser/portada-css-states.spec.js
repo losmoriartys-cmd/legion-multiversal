@@ -7,19 +7,37 @@ const viewports = [
 
 async function panelState(page) {
   return page.locator('.executive-hero-copy').evaluate(el => {
+    const rect = node => {
+      const r = node.getBoundingClientRect();
+      const s = getComputedStyle(node);
+      return {
+        x: r.x, y: r.y, width: r.width, height: r.height,
+        margin: s.margin, padding: s.padding,
+        font: s.font, lineHeight: s.lineHeight,
+        maxWidth: s.maxWidth, widthStyle: s.width,
+        textWrap: s.textWrap, overflowWrap: s.overflowWrap
+      };
+    };
     const r = el.getBoundingClientRect();
     const s = getComputedStyle(el);
+    const descendants = {};
+    for (const selector of ['.executive-hero h2', '.executive-lead', '.executive-proofline', '.executive-hero-actions']) {
+      const node = el.querySelector(selector);
+      descendants[selector] = node ? rect(node) : null;
+    }
     return {
       rect: { x: r.x, y: r.y, width: r.width, height: r.height, top: r.top, right: r.right, bottom: r.bottom, left: r.left },
       style: {
-        padding: s.padding,
-        border: s.border,
-        backgroundImage: s.backgroundImage,
-        backgroundColor: s.backgroundColor,
-        boxShadow: s.boxShadow,
-        borderRadius: s.borderRadius,
-        display: s.display,
-        position: s.position
+        padding: s.padding, border: s.border,
+        backgroundImage: s.backgroundImage, backgroundColor: s.backgroundColor,
+        boxShadow: s.boxShadow, borderRadius: s.borderRadius,
+        display: s.display, position: s.position
+      },
+      descendants,
+      fonts: {
+        heading: getComputedStyle(el.querySelector('h2')).fontFamily,
+        body: getComputedStyle(el.querySelector('.executive-lead')).fontFamily,
+        headingLoaded: document.fonts.check(getComputedStyle(el.querySelector('h2')).font)
       },
       overflow: el.scrollWidth > el.clientWidth
     };
@@ -54,6 +72,7 @@ for (const viewport of viewports) {
     await page.evaluate(() => document.fonts.ready);
 
     const warm = await panelState(page);
+    console.log(`PORTADA_CSS_DIAGNOSTIC ${viewport.name} ${JSON.stringify({ cold, warm })}`);
     await panel.screenshot({ path: `test-results/portada-${viewport.name}-css-diferido.png` });
 
     expect(cold.overflow, 'El panel no debe desbordar horizontalmente en carga fría').toBe(false);
