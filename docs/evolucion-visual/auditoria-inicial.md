@@ -92,3 +92,11 @@ Completar el mapa de selectores/duplicaciones de carga, revisar capturas y prueb
 
 La primera inserción de tokens semánticos en `index.html` y `styles.css` fue detectada correctamente por la política de cambios sensibles del repositorio. Se restauraron ambos archivos al estado de `main`; no se conservarán cambios de implementación en esos archivos hasta que el procedimiento de autorización correspondiente esté aprobado. La propuesta de tokens queda como diseño/documentación, no como código activo. La rama debe pasar nuevamente las validaciones con estos archivos intactos.
 
+
+
+## 28/11/2026 — Revisión de autorizaciones y brief de portada
+
+- La última ejecución sobre la rama limpia (`fa8eb4a`) pasó **Validar código y datos del sitio**, **Validar colector de estadísticas** y **Auditoría externa de enlaces públicos**. La autorización fallida previa queda resuelta al restaurar `index.html` y `styles.css` a `main`.
+- QA común de capítulos no se disparó en el último commit porque solo cambió documentación; su última ejecución disponible, sobre el SHA anterior que sí contenía cambios de código, había concluido correctamente.
+- Se agregó `brief-portada-y-banner.md`: define la dirección de arte, el piloto de Portada, la referencia del banner del usuario, las reglas responsive/motion y las restricciones de autorización.
+- **No hay cambios de implementación visual activos.** HTML, CSS y assets siguen sujetos a autorización por transición/hash. El siguiente paso será mapear selectores y preparar el cambio acotado y su autorización fase A, no eludir la protección.
