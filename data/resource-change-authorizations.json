@@ -117,6 +117,15 @@
       "to_sha256": "26a70aa63960c813913e6c4f9773e114a52f58904be13a188636bdf77ea60720",
       "reason": "Sincronizar en el CSS crítico de la Portada el panel, borde, fondo, sombra y padding responsive que hoy se aplican al cargar styles.css. Elimina el salto de composición al primer scroll o clic sin cambiar la carga diferida, contenido, enlaces, métricas ni destinos de conversión.",
       "reference": "Evolución visual de Portada · PR fase A 2026-11-28"
+    },
+    {
+      "id": "executive-hero-critical-css-sync-index-html-2026-11-28-revised",
+      "path": "index.html",
+      "action": "update",
+      "from_sha256": "0846e64cece89e673d05fe8693183ff45c9020cffd57d64358fedaab3054a60e",
+      "to_sha256": "2d35b1d6f582bf939990eb0e979ca22abefbb2132c697f949f0428aca46a77cb",
+      "reason": "Sincronizar en el CSS crítico de Portada el panel, borde, fondo, sombra y padding responsive de .executive-hero-copy con styles.css. Evita el salto de composición en la carga fría sin alterar la carga diferida, navegación, CTAs, contenido, enlaces, métricas ni recursos.",
+      "reference": "Fase A revisada · PR #151 conserva la autorización histórica no reconstruible; candidato exacto verificado en rama visual/phase-b-portada-panel-candidate-2026-11-28 · 2026-11-28"
     }
   ]
 }
