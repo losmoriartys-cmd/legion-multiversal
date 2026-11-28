@@ -100,3 +100,11 @@ La primera inserción de tokens semánticos en `index.html` y `styles.css` fue d
 - QA común de capítulos no se disparó en el último commit porque solo cambió documentación; su última ejecución disponible, sobre el SHA anterior que sí contenía cambios de código, había concluido correctamente.
 - Se agregó `brief-portada-y-banner.md`: define la dirección de arte, el piloto de Portada, la referencia del banner del usuario, las reglas responsive/motion y las restricciones de autorización.
 - **No hay cambios de implementación visual activos.** HTML, CSS y assets siguen sujetos a autorización por transición/hash. El siguiente paso será mapear selectores y preparar el cambio acotado y su autorización fase A, no eludir la protección.
+
+
+## 28/11/2026 — Dirección creativa aprobada para ALIANZAS
+
+- Se incorporó al brief el concepto **la mesa de la próxima dimensión**: integrantes actuales del Roster reunidos revisando bitácoras, documentos y fichas de perfiles que podrían sumarse a futuro.
+- Se separó expresamente la narrativa de **ALIANZAS** (construcción/exploración de vínculos) de **COLABORACIONES** (proyectos y experiencias que ya ocurrieron y tienen evidencia).
+- Se estableció que los perfiles futuros deben leerse como exploratorios/no confirmados; no inventar nombres, canales, estadísticas ni acuerdos. También se definieron composición, paleta funcional, espacio para título y recorte móvil seguro.
+- El usuario aceptó esta dirección creativa. Sigue siendo concepto documentado, no arte final ni asset listo para publicación.
