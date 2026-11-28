@@ -49,3 +49,12 @@ Como HTML/CSS están dentro de las extensiones protegidas, la intervención debe
 En `app.js`, `ensureGlobalChapterStyles()` asigna `data-href` a `href` del enlace `#lm-global-chapter-styles`. La carga de `styles.css` se dispara por el primer `scroll`, `pointerdown` o `keydown`, no como parte del primer render. El CSS crítico inline es, por lo tanto, la presentación inicial real; después de la primera interacción, la hoja global entra en cascada y puede cambiar el aspecto.
 
 **Implicancia:** la intervención de Portada debe comparar dos estados distintos: carga en frío sin interacción y estado posterior a cargar la hoja global. No alcanza con revisar una captura estática luego de que todo CSS haya cargado. Hay que comprobar que no haya salto de composición, cambio de altura, recorte del artwork ni reacomodo inesperado de los CTAs. Mantener esta carga diferida salvo que mediciones de rendimiento demuestren que conviene cambiarla.
+
+
+## Cobertura de pruebas visuales
+
+- `tests/browser/home-conversion.spec.js` valida que el título y las rutas de la Portada entren en el primer viewport en desktop (1440×900) y móvil (375×812), y comprueba que `styles.css` no se solicita al abrir la Portada y sí al navegar a otro capítulo. También prueba varios tamaños de navegación.
+- `tests/browser/chapter-common-qa.spec.js` revisa los capítulos en cinco viewports y guarda capturas representativas de escritorio ancho y móvil; verifica navegación, overflow y errores de página.
+- `tests/browser/visual-regression.spec.js` ya comparaba visualmente Roster y Estadísticas contra el baseline de `main`; se amplió con el Hero de Portada, desktop/móvil, en frío y después de cargar la hoja global, con tolerancia máxima de 2/255.
+
+La ampliación de Portada está ejecutándose en el PR #150. La prueba se considera incorporada al sistema cuando el workflow completo termine en verde; su ejecución inicial no debe darse por aprobada antes de ese resultado.
