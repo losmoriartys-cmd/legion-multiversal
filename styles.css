@@ -7,7 +7,6 @@
             --border-color: #000000;
             --text-color: #f0f4f8;
             --card-bg: #1a202c;
-            --lm-ink:#070b12;--lm-surface-1:#101a29;--lm-surface-2:#15243a;--lm-surface-3:#1b2d44;--lm-line-strong:rgba(153,190,220,.34);--lm-line-soft:rgba(153,190,220,.16);--lm-cyan-bright:#8beaff;--lm-cyan-base:#62d9e8;--lm-violet-base:#a99bff;--lm-magenta-base:#d18acb;--lm-gold:#f2d37b;--lm-text-primary:#f4f7fb;--lm-text-secondary:#c6d2e0;--lm-text-muted:#9eafc4;--lm-shadow-depth:0 16px 42px rgba(0,0,0,.32);--lm-shadow-comic:5px 5px 0 #03070d;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
