@@ -126,6 +126,15 @@
       "to_sha256": "2d35b1d6f582bf939990eb0e979ca22abefbb2132c697f949f0428aca46a77cb",
       "reason": "Sincronizar en el CSS crítico de Portada el panel, borde, fondo, sombra y padding responsive de .executive-hero-copy con styles.css. Evita el salto de composición en la carga fría sin alterar la carga diferida, navegación, CTAs, contenido, enlaces, métricas ni recursos.",
       "reference": "Fase A revisada · PR #151 conserva la autorización histórica no reconstruible; candidato exacto verificado en rama visual/phase-b-portada-panel-candidate-2026-11-28 · 2026-11-28"
+    },
+    {
+      "id": "portada-proofline-critical-leading-index-html-2026-11-28",
+      "path": "index.html",
+      "action": "update",
+      "from_sha256": "0846e64cece89e673d05fe8693183ff45c9020cffd57d64358fedaab3054a60e",
+      "to_sha256": "9b34296e53f6c630757a3ba0cb35cdb3d48d5e8fa765da25e6f651b904b541d9",
+      "reason": "Sincronizar únicamente line-height:1.68 de .executive-proofline en el CSS crítico de Portada con el ritmo tipográfico aplicado por styles.css al cargar el CSS diferido. El objetivo es eliminar el crecimiento medido del panel entre carga crítica y diferida; no autoriza cambios de contenido, márgenes, anchuras, fuentes, enlaces, métricas, CTAs ni otros recursos.",
+      "reference": "Diagnóstico Playwright CSS crítico/diferido · PR #153 cerrado sin merge · Fase A 2026-11-28"
     }
   ]
 }
